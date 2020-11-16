@@ -326,58 +326,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/databases/{databaseName}/export": {
-      "post": {
-        "tags": [
-          "ManagedDatabases"
-        ],
-        "description": "Exports a managed user database.",
-        "operationId": "ManagedDatabases_Export",
-        "parameters": [
-          {
-            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
-          },
-          {
-            "$ref": "#/parameters/ManagedInstanceNameParameter"
-          },
-          {
-            "$ref": "#/parameters/DatabaseNameParameter"
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "description": "The managed database export request parameters.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ExportManagedInstanceBaseDefinition"
-            }
-          },
-          {
-            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successfully exported the database."
-          },
-          "default": {
-            "description": "*** Error Responses: ***\n\n * 400 InvalidOperationType - Provide a valid operation type.\n\n * 400 FeatureDisabledOnSelectedEdition - User attempted to use a feature which is disabled on current database edition.\n\n * 404 ResourceNotFound - Invalid request specifying a non-existent resource.\n\n * 404 ImportExportOperationIdNotFound - The operation Id for import or export cannot be found.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 409 ImportExportOperationInProgress - There is an import or export operation in progress on the database."
-          },
-          "202": {
-            "description": "Exporting the database is in progress."
-          }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "Export a managed database.": {
-            "$ref": "./examples/ExportManagedDatabase.json"
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/inaccessibleManagedDatabases": {
       "get": {
         "tags": [
@@ -640,45 +588,6 @@
         "lastBackupName": {
           "description": "The last backup name to apply",
           "type": "string"
-        }
-      }
-    },
-    "ExportManagedInstanceBaseDefinition": {
-      "required": [
-        "storageContainerSasToken",
-        "storageContainerUri"
-      ],
-      "type": "object",
-      "properties": {
-        "storageContainerSasToken": {
-          "description": "Tha storage container SAS token.",
-          "type": "string",
-          "x-ms-mutability": [
-            "create"
-          ]
-        },
-        "storageContainerUri": {
-          "description": "The URL of storage container.",
-          "type": "string",
-          "x-ms-mutability": [
-            "create"
-          ]
-        },
-        "readOnlyMode": {
-          "description": "The export read only mode to use.",
-          "enum": [
-            "None",
-            "ReadOnly",
-            "DenyAllConnections"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "ReadOnlyMode",
-            "modelAsString": true
-          },
-          "x-ms-mutability": [
-            "create"
-          ]
         }
       }
     }

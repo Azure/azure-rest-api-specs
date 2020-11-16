@@ -21,7 +21,7 @@
         "tags": [
           "RestorableDroppedDatabaseBackupShortTermRetentionPolicies"
         ],
-        "description": "Gets a restorable dropped SQL database's short term retention policy.",
+        "description": "Gets a dropped database's short term retention policy.",
         "operationId": "RestorableDroppedDatabaseBackupShortTermRetentionPolicies_Get",
         "parameters": [
           {
@@ -61,7 +61,7 @@
           "200": {
             "description": "Successfully retrieved the policies.",
             "schema": {
-              "$ref": "#/definitions/RestorableDroppedBackupShortTermRetentionPolicy"
+              "$ref": "#/definitions/BackupShortTermRetentionPolicy"
             }
           },
           "default": {
@@ -69,8 +69,8 @@
           }
         },
         "x-ms-examples": {
-          "Get the short term retention policy for the restorable dropped SQL database.": {
-            "$ref": "./examples/GetRestorableDroppedShortTermRetentionPolicy.json"
+          "Get the short term retention policy for the database.": {
+            "$ref": "./examples/GetShortTermRetentionPolicyRestorableDropped.json"
           }
         }
       },
@@ -78,7 +78,7 @@
         "tags": [
           "RestorableDroppedDatabaseBackupShortTermRetentionPolicies"
         ],
-        "description": "Sets a restorable dropped SQL database's short term retention policy.",
+        "description": "Sets a database's short term retention policy.",
         "operationId": "RestorableDroppedDatabaseBackupShortTermRetentionPolicies_CreateOrUpdate",
         "parameters": [
           {
@@ -113,7 +113,7 @@
             "description": "The short term retention policy info.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/RestorableDroppedBackupShortTermRetentionPolicy"
+              "$ref": "#/definitions/BackupShortTermRetentionPolicy"
             }
           },
           {
@@ -127,11 +127,11 @@
           "200": {
             "description": "Successfully updated the policy.",
             "schema": {
-              "$ref": "#/definitions/RestorableDroppedBackupShortTermRetentionPolicy"
+              "$ref": "#/definitions/BackupShortTermRetentionPolicy"
             }
           },
           "default": {
-            "description": "*** Error Responses: ***\n\n * 400 InvalidRestorableDroppedDatabaseDeletionDate - The restorable dropped database deletion date given is invalid\n\n * 400 InvalidRestorableDroppedDatabaseId - Invalid restorable dropped database identifier\n\n * 400 InvalidBackupRetentionPeriod - The retention days of {0} is not a valid configuration. Valid backup retention in days must be between {1} and {2}\n\n * 400 InvalidDiffBackupIntervalHours - The differential backup interval hours of {0} is not a valid configuration. Valid differential backup interval must be {1} hours.\n\n * 400 FeatureDisabledOnSelectedEdition - User attempted to use a feature which is disabled on current database edition.\n\n * 400 InvalidParameterValue - An invalid value was given to a parameter.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 404 ResourceNotFound - The requested resource was not found.\n\n * 404 SourceDatabaseNotFound - The source database does not exist.\n\n * 404 CannotFindObject - Cannot find the object because it does not exist or you do not have permissions\n\n * 409 ConflictingDatabaseOperation - There is already some operation on the database and the current operation should wait till it is done.\n\n * 409 ConflictingSystemOperationInProgress - A system maintenance operation is in progress on the database and further operations need to wait until it is completed.\n\n * 429 SubscriptionTooManyCreateUpdateRequests - Requests beyond max requests that can be processed by available resources.\n\n * 429 SubscriptionTooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 503 TooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 504 RequestTimeout - Service request exceeded the allowed timeout."
+            "description": "*** Error Responses: ***\n\n * 400 InvalidRestorableDroppedDatabaseDeletionDate - The restorable dropped database deletion date given is invalid\n\n * 400 InvalidRestorableDroppedDatabaseId - Invalid restorable dropped database identifier\n\n * 400 InvalidBackupRetentionPeriod - The retention days of {0} is not a valid configuration. Valid backup retention in days must be between {1} and {2}\n\n * 400 FeatureDisabledOnSelectedEdition - User attempted to use a feature which is disabled on current database edition.\n\n * 400 InvalidParameterValue - An invalid value was given to a parameter.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 404 ResourceNotFound - The requested resource was not found.\n\n * 404 SourceDatabaseNotFound - The source database does not exist.\n\n * 404 CannotFindObject - Cannot find the object because it does not exist or you do not have permissions\n\n * 409 ConflictingDatabaseOperation - There is already some operation on the database and the current operation should wait till it is done.\n\n * 409 ConflictingSystemOperationInProgress - A system maintenance operation is in progress on the database and further operations need to wait until it is completed.\n\n * 429 SubscriptionTooManyCreateUpdateRequests - Requests beyond max requests that can be processed by available resources.\n\n * 429 SubscriptionTooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 503 TooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 504 RequestTimeout - Service request exceeded the allowed timeout."
           },
           "202": {
             "description": "Accepted"
@@ -139,8 +139,8 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
-          "Update the short term retention policy for the restorable dropped SQL database.": {
-            "$ref": "./examples/UpdateRestorableDroppedShortTermRetentionPolicy.json"
+          "Update the short term retention policy for the restorable dropped database.": {
+            "$ref": "./examples/UpdateShortTermRetentionPolicyRestorableDropped.json"
           }
         }
       },
@@ -148,7 +148,7 @@
         "tags": [
           "RestorableDroppedDatabaseBackupShortTermRetentionPolicies"
         ],
-        "description": "Sets a restorable dropped SQL database's short term retention policy.",
+        "description": "Sets a database's short term retention policy.",
         "operationId": "RestorableDroppedDatabaseBackupShortTermRetentionPolicies_Update",
         "parameters": [
           {
@@ -183,7 +183,7 @@
             "description": "The short term retention policy info.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/RestorableDroppedBackupShortTermRetentionPolicy"
+              "$ref": "#/definitions/BackupShortTermRetentionPolicy"
             }
           },
           {
@@ -197,11 +197,11 @@
           "200": {
             "description": "Successfully updated the policy.",
             "schema": {
-              "$ref": "#/definitions/RestorableDroppedBackupShortTermRetentionPolicy"
+              "$ref": "#/definitions/BackupShortTermRetentionPolicy"
             }
           },
           "default": {
-            "description": "*** Error Responses: ***\n\n * 400 InvalidRestorableDroppedDatabaseDeletionDate - The restorable dropped database deletion date given is invalid\n\n * 400 InvalidRestorableDroppedDatabaseId - Invalid restorable dropped database identifier\n\n * 400 InvalidBackupRetentionPeriod - The retention days of {0} is not a valid configuration. Valid backup retention in days must be between {1} and {2}\n\n * 400 InvalidDiffBackupIntervalHours - The differential backup interval hours of {0} is not a valid configuration. Valid differential backup interval must be {1} hours.\n\n * 400 FeatureDisabledOnSelectedEdition - User attempted to use a feature which is disabled on current database edition.\n\n * 400 InvalidParameterValue - An invalid value was given to a parameter.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 404 ResourceNotFound - The requested resource was not found.\n\n * 404 SourceDatabaseNotFound - The source database does not exist.\n\n * 404 CannotFindObject - Cannot find the object because it does not exist or you do not have permissions\n\n * 409 ConflictingDatabaseOperation - There is already some operation on the database and the current operation should wait till it is done.\n\n * 409 ConflictingSystemOperationInProgress - A system maintenance operation is in progress on the database and further operations need to wait until it is completed.\n\n * 429 SubscriptionTooManyCreateUpdateRequests - Requests beyond max requests that can be processed by available resources.\n\n * 429 SubscriptionTooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 503 TooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 504 RequestTimeout - Service request exceeded the allowed timeout."
+            "description": "*** Error Responses: ***\n\n * 400 InvalidRestorableDroppedDatabaseDeletionDate - The restorable dropped database deletion date given is invalid\n\n * 400 InvalidRestorableDroppedDatabaseId - Invalid restorable dropped database identifier\n\n * 400 InvalidBackupRetentionPeriod - The retention days of {0} is not a valid configuration. Valid backup retention in days must be between {1} and {2}\n\n * 400 FeatureDisabledOnSelectedEdition - User attempted to use a feature which is disabled on current database edition.\n\n * 400 InvalidParameterValue - An invalid value was given to a parameter.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 404 ResourceNotFound - The requested resource was not found.\n\n * 404 SourceDatabaseNotFound - The source database does not exist.\n\n * 404 CannotFindObject - Cannot find the object because it does not exist or you do not have permissions\n\n * 409 ConflictingDatabaseOperation - There is already some operation on the database and the current operation should wait till it is done.\n\n * 409 ConflictingSystemOperationInProgress - A system maintenance operation is in progress on the database and further operations need to wait until it is completed.\n\n * 429 SubscriptionTooManyCreateUpdateRequests - Requests beyond max requests that can be processed by available resources.\n\n * 429 SubscriptionTooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 503 TooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 504 RequestTimeout - Service request exceeded the allowed timeout."
           },
           "202": {
             "description": "Accepted"
@@ -209,8 +209,8 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
-          "Update the short term retention policy for the restorable dropped SQL database.": {
-            "$ref": "./examples/UpdateRestorableDroppedShortTermRetentionPolicy.json"
+          "Update the short term retention policy for the restorable dropped database.": {
+            "$ref": "./examples/UpdateShortTermRetentionPolicyRestorableDropped.json"
           }
         }
       }
@@ -220,7 +220,7 @@
         "tags": [
           "RestorableDroppedDatabaseBackupShortTermRetentionPolicies"
         ],
-        "description": "Gets a restorable dropped SQL database's short term retention policy.",
+        "description": "Gets a dropped database's short term retention policy.",
         "operationId": "RestorableDroppedDatabaseBackupShortTermRetentionPolicies_ListByRestorableDroppedDatabase",
         "parameters": [
           {
@@ -246,7 +246,7 @@
           "200": {
             "description": "Successfully retrieved the policies.",
             "schema": {
-              "$ref": "#/definitions/RestorableDroppedBackupShortTermRetentionPolicyListResult"
+              "$ref": "#/definitions/BackupShortTermRetentionPolicyListResult"
             }
           },
           "default": {
@@ -257,16 +257,16 @@
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "Get the short term retention policy for the restorable dropped SQL database.": {
-            "$ref": "./examples/ListRestorableDroppedShortTermRetentionPoliciesByDatabase.json"
+          "Get the short term retention policy for the database.": {
+            "$ref": "./examples/GetShortTermRetentionPolicyRestorableDropped.json"
           }
         }
       }
     }
   },
   "definitions": {
-    "RestorableDroppedBackupShortTermRetentionPolicyProperties": {
-      "description": "Properties of a short term retention policy on restorable dropped SQL database.",
+    "BackupShortTermRetentionPolicyProperties": {
+      "description": "Properties of a short term retention policy",
       "type": "object",
       "properties": {
         "retentionDays": {
@@ -276,8 +276,8 @@
         }
       }
     },
-    "RestorableDroppedBackupShortTermRetentionPolicy": {
-      "description": "A short term retention policy on restorable dropped SQL databases.",
+    "BackupShortTermRetentionPolicy": {
+      "description": "A short term retention policy.",
       "type": "object",
       "allOf": [
         {
@@ -286,13 +286,13 @@
       ],
       "properties": {
         "properties": {
-          "$ref": "#/definitions/RestorableDroppedBackupShortTermRetentionPolicyProperties",
+          "$ref": "#/definitions/BackupShortTermRetentionPolicyProperties",
           "description": "Resource properties.",
           "x-ms-client-flatten": true
         }
       }
     },
-    "RestorableDroppedBackupShortTermRetentionPolicyListResult": {
+    "BackupShortTermRetentionPolicyListResult": {
       "description": "A list of short term retention policies.",
       "type": "object",
       "properties": {
@@ -300,7 +300,7 @@
           "description": "Array of results.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/RestorableDroppedBackupShortTermRetentionPolicy"
+            "$ref": "#/definitions/BackupShortTermRetentionPolicy"
           },
           "readOnly": true
         },
