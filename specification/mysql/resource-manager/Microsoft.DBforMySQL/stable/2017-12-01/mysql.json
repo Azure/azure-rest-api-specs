@@ -1391,6 +1391,12 @@
             "schema": {
               "$ref": "#/definitions/PerformanceTierListResult"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
         "x-ms-pageable": {
@@ -2514,10 +2520,12 @@
         },
         "maxBackupRetentionDays": {
           "type": "integer",
+          "format": "int32",
           "description": "Maximum Backup retention in days for the performance tier edition"
         },
         "minBackupRetentionDays": {
           "type": "integer",
+          "format": "int32",
           "description": "Minimum Backup retention in days for the performance tier edition"
         },
         "maxStorageMB": {
