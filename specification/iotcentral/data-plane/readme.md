@@ -8,38 +8,38 @@ To build the SDK for Azure IoT Central, simply [Install AutoRest](https://aka.ms
 To see additional help and options, run:
 > `autorest --help`
 ---
-## Configuration
-These are the global settings for the IoT Central API.
-``` yaml
-openapi-type: data-plane
-tag: package-2019-10-28-preview
-```
 
 ## Suppression
 
 ``` yaml
 directive:
-  - suppress: ValidFormats
-    from: iotcentral.json
-    where: $.definitions.EmailUser.allOf[1].properties.email.format
-    reason: email format is allowed
-  - suppress: LongRunningOperationsWithLongRunningExtension
-    from: iotcentral.json
-    where: $.paths["/devices/{device_id}/components/{component_name}/properties"].put
-    reason: Long running due to device response time, but the API can't implement a standard pattern around
-  - suppress: LongRunningOperationsWithLongRunningExtension
-    from: iotcentral.json
-    where: $.paths["/devices/{device_id}/modules/{module_name}/components/{component_name}/properties"].put
-    reason: Long running due to device response time, but the API can't implement a standard pattern around
-  - suppress: LongRunningOperationsWithLongRunningExtension
-    from: iotcentral.json
-    where: $.paths["/devices/{device_id}/modules/{module_name}/properties"].put
-    reason: Long running due to device response time, but the API can't implement a standard pattern around
-  - suppress: LongRunningOperationsWithLongRunningExtension
-    from: iotcentral.json
-    where: $.paths["/devices/{device_id}/properties"].put
-    reason: Long running due to device response time, but the API can't implement a standard pattern around
-    
+    - suppress: ValidFormats
+      from: iotcentral.json
+      where: $.definitions.EmailUser.allOf[1].properties.email.format
+      reason: email format is allowed
+    - suppress: LongRunningOperationsWithLongRunningExtension
+      from: iotcentral.json
+      where: $.paths["/devices/{device_id}/components/{component_name}/properties"].put
+      reason: Long running due to device response time, but the API can't implement a standard pattern around
+    - suppress: LongRunningOperationsWithLongRunningExtension
+      from: iotcentral.json
+      where: $.paths["/devices/{device_id}/modules/{module_name}/components/{component_name}/properties"].put
+      reason: Long running due to device response time, but the API can't implement a standard pattern around
+    - suppress: LongRunningOperationsWithLongRunningExtension
+      from: iotcentral.json
+      where: $.paths["/devices/{device_id}/modules/{module_name}/properties"].put
+      reason: Long running due to device response time, but the API can't implement a standard pattern around
+    - suppress: LongRunningOperationsWithLongRunningExtension
+      from: iotcentral.json
+      where: $.paths["/devices/{device_id}/properties"].put
+      reason: Long running due to device response time, but the API can't implement a standard pattern around
+```
+
+## Configuration
+These are the global settings for the IoT Central API.
+``` yaml
+openapi-type: data-plane
+tag: package-2019-10-28-preview
 ```
 
 ### Tag: package-2019-10-28-preview
