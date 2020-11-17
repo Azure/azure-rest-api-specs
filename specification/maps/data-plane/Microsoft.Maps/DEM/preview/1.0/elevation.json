@@ -44,7 +44,8 @@
       "description": "Bad request: one or more parameters were incorrectly specified or are mutually exclusive.",
       "schema": {
         "$ref": "#/definitions/ODataErrorResponse"
-      }
+      },
+      "x-ms-error-response": true
     },
     "401": {
       "description": "Access denied due to invalid subscription key or invalid Azure Active Directory bearer token.  Make sure to provide a valid key for an active Azure subscription and Maps resource.  Otherwise, verify the [WWW-Authenticate](https://tools.ietf.org/html/rfc6750#section-3.1) header for error code and description of the provided AAD bearer token.",
@@ -56,25 +57,29 @@
           "type": "string",
           "description": "Bearer realm=\"https://atlas.microsoft.com/\", error=\"invalid_token\", error_description=\"The access token expired\""
         }
-      }
+      },
+      "x-ms-error-response": true
     },
     "403": {
       "description": "Permission, capacity, or authentication issues.",
       "schema": {
         "$ref": "#/definitions/ODataErrorResponse"
-      }
+      },
+      "x-ms-error-response": true
     },
     "404": {
       "description": "Not Found: the requested resource could not be found, but it may be available again in the future.",
       "schema": {
         "$ref": "#/definitions/ODataErrorResponse"
-      }
+      },
+      "x-ms-error-response": true
     },
     "500": {
       "description": "An error occurred while processing the request. Please try again later.",
       "schema": {
         "$ref": "#/definitions/ODataErrorResponse"
-      }
+      },
+      "x-ms-error-response": true
     }
   },
   "parameters": {
@@ -129,6 +134,7 @@
     "/elevation/point/{format}": {
       "get": {
         "x-publish": true,
+        "summary": "Get elevation data on one or more points.",
         "description": "**Applies to**: S1 pricing tier.\nThe Get Data for Points API provides elevation data for one or more points.  A point is defined in lat/long coordinate format. Due to the URL character  length limit of 2048, it's not possible to pass more than 100 coordinates  as a pipeline delimited string in a URL GET request. If you intend to pass  more than 100 coordinates as a pipeline delimited string, use the [POST Data\n For Points](https://docs.microsoft.com/en-us/rest/api/maps/elevation/postdataforpoints).",
         "operationId": "Elevation_GetDataForPoints",
         "x-ms-examples": {
@@ -154,7 +160,11 @@
             "in": "query",
             "description": "The string representation of a list of points. A point is defined in lat/lon WGS84 coordinate reference system format.  If multiple points are requested, each of the points in a list should be separated by the pipe ('|') character.  The maximum number of points that can be requested in a single request is 2,000. The resolution of the elevation  data will be the highest for a single point and will decrease if multiple points are spread further apart. ",
             "required": true,
-            "type": "string"
+            "type": "array",
+            "collectionFormat": "pipes",
+            "items": {
+              "type": "string"
+            }
           }
         ],
         "produces": [
@@ -186,7 +196,8 @@
       },
       "post": {
         "x-publish": true,
-        "description": "**Applies to**: S1 pricing tier.\nThe Post Data for Points API provides elevation data for multiple points.  A point is defined in lat/lon coordinate format. Use the POST endpoint only  if you intend to pass multiple points in the request. If you intend to pass  a single coordinate into the API, use the [GET Data For Points API](https://docs.microsoft.com/en-us/rest/api/maps/elevation/getdataforlatlongcoordinates)",
+        "summary": "Query elevation data for multiple points.",
+        "description": "**Applies to**: S1 pricing tier.\nThe Post Data for Points API provides elevation data for multiple points.  A point is defined in lat/lon coordinate format. Use the POST endpoint only  if you intend to pass multiple points in the request. If you intend to pass  a single coordinate into the API, use the [GET Data For Points API](https://docs.microsoft.com/en-us/rest/api/maps/elevation/getdataforpoints).",
         "operationId": "Elevation_PostDataForPoints",
         "x-ms-examples": {
           "PostDataForPoints": {
@@ -247,6 +258,7 @@
     "/elevation/line/{format}": {
       "get": {
         "x-publish": true,
+        "summary": "Get elevation data along a polyline.",
         "description": "**Applies to**: S1 pricing tier.\n\nThe Get Data for Polyline API provides elevation data along a polyline. A polyline is defined by  passing in between 2 and N endpoint coordinates separated by a pipe ('|') character. In addition  to passing in endpoints, customers can specify number of sample points that will be used to divide  polyline into equally spaced segments. Elevation data at both start and end points and equally spaced  points along the polyline will be returned. A line between two endpoints is a straight Cartesian line, the  shortest line between those two points in the coordinate reference system. Note that the point is  chosen based on Euclidean distance and may markedly differ from the geodesic path along the curved  surface of the reference ellipsoid.",
         "operationId": "Elevation_GetDataForPolyline",
         "x-ms-examples": {
@@ -272,7 +284,11 @@
             "in": "query",
             "description": "The string representation of a polyline path. A polyline is defined by endpoint coordinates,  with each endpoint separated by a pipe ('|') character. The polyline should be defined in the  following format: [longitude_point1, latitude_point1 | longitude_point2, latitude_point2, ...,  longitude_pointN, latitude_pointN]. The longitude and latitude values refer to the World Geodetic  System (WGS84) coordinate reference system. The resolution of the data used to compute the  elevation will depend on the distance between the endpoints.",
             "required": true,
-            "type": "string"
+            "type": "array",
+            "collectionFormat": "pipes",
+            "items": {
+              "type": "string"
+            }
           },
           {
             "name": "samples",
@@ -314,6 +330,7 @@
       },
       "post": {
         "x-publish": true,
+        "summary": "Query elevation data along a polyline.",
         "description": "**Applies to**: S1 pricing tier.\nThe Post Data for Polyline API provides elevation data along a polyline. A polyline is defined by  passing in between 2 and N endpoint coordinates separated by a pipe ('|') character. In addition  to passing in endpoints, customers can specify number of sample points that will be used to divide  polyline into equally spaced segments. Elevation data at both start and end points and equally spaced  points along the polyline will be returned. A line between two endpoints is a straight Cartesian line, the  shortest line between those two points in the coordinate reference system. Note that the point is  chosen based on Euclidean distance and may markedly differ from the geodesic path along the curved  surface of the reference ellipsoid.",
         "operationId": "Elevation_PostDataForPolyline",
         "x-ms-examples": {
@@ -385,6 +402,7 @@
     "/elevation/lattice/{format}": {
       "get": {
         "x-publish": true,
+        "summary": "Get elevation data at equally-spaced locations within a bounding box.",
         "description": "**Applies to**: S1 pricing tier.\n\nThe Get Data for Bounding Box API provides elevation data at equally-spaced locations within a bounding box.  A bounding box is defined by the coordinates for two corners (southwest, northeast) and then subsequently  divided into rows and columns. Elevations are returned for the vertices of the grid created by the rows and  columns. Up to 2000 elevations can be returned in a single request. The returned elevation values are ordered,  starting at the southwest corner, and then proceeding west to east along the row. At the end of the row,  it moves north to the next row, and repeats the process until it reaches the far northeast corner.",
         "operationId": "Elevation_GetDataForBoundingBox",
         "x-ms-examples": {
@@ -410,7 +428,11 @@
             "in": "query",
             "description": "The string that represents the rectangular area of a bounding box. The value of the bounds parameter  must be an array of length 4, with WGS84 longitude and latitude of the southwest corner followed by  WGS84 longitude and latitude of the northeast corner. The string is presented in the following  format: [SouthwestCorner_Longitude, SouthwestCorner_Latitude, NortheastCorner_Longitude,  NortheastCorner_Latitude].",
             "required": true,
-            "type": "string"
+            "type": "array",
+            "collectionFormat": "csv",
+            "items": {
+              "type": "string"
+            }
           },
           {
             "name": "rows",
