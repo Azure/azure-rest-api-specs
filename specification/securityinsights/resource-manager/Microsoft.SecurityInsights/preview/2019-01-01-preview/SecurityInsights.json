@@ -2223,7 +2223,7 @@
                   "$ref":"#/parameters/EntityId"
                },
                {
-                  "$ref":"#/parameters/InsightActivityKind"
+                  "$ref":"#/parameters/EntitiesQueriesKind"
                }
             ],
             "responses":{
@@ -10650,12 +10650,6 @@
       "EntityGetInsightsParameters":{
          "description":"The parameters required to execute insights operation on the given entity.",
          "properties":{
-            "queryKind":{
-               "description":"The kind of the insights",
-               "enum":[
-                  "Insight"
-               ]
-            },
             "startTime":{
                "description":"The start timeline date, so the results returned are after this date.",
                "format":"date-time",
@@ -10670,7 +10664,7 @@
                "description":"Indicates if query time range should be extended with default time range of the query. Default value is false",
                "type":"boolean"
             },
-            "insightQueryId":{
+            "insightQueryIds":{
                "description":"List of Insights Query Id. If empty, default value is all insights of this entity",
                "type":"array",
                "items":{
@@ -11032,7 +11026,7 @@
          },
          "x-ms-parameter-location":"method"
       },
-      "InsightActivityKind":{
+      "EntitiesQueriesKind":{
          "description":"kind",
          "in":"query",
          "maxLength":90,
