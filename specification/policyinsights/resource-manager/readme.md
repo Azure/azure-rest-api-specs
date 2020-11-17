@@ -74,12 +74,6 @@ directive:
       - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.PolicyInsights/checkPolicyRestrictions"].post.operationId
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.PolicyInsights/checkPolicyRestrictions"].post.operationId
 
-  - suppress: ListInOperationName
-    reason: The result is an object that contains two arrays, it is not a top level list nor what would be considered a list operation.
-    where:
-      - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.PolicyInsights/checkPolicyRestrictions"].post.operationId
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.PolicyInsights/checkPolicyRestrictions"].post.operationId
-
 ```
 
 ### Tag: package-2020-07
