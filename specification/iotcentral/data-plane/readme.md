@@ -14,9 +14,25 @@ To see additional help and options, run:
 ``` yaml
 directive:
     - suppress: ValidFormats
-      from: iotcentral.json
-      where: $.definitions.EmailUser.allOf[1].properties.email.format
-      reason: email format is allowed
+        from: iotcentral.json
+        where: $.definitions.EmailUser.allOf[1].properties.email.format
+        reason: email format is allowed
+    - suppress: LongRunningOperationsWithLongRunningExtension
+        from: iotcentral.json
+        where: $.paths[/devices/{device_id}/components/{component_name}/properties].put
+        reason: Long running due to device response time, but the API can't implement a standard pattern around
+    - suppress: LongRunningOperationsWithLongRunningExtension
+        from: iotcentral.json
+        where: $.paths[/devices/{device_id}/modules/{module_name}/components/{component_name}/properties].put
+        reason: Long running due to device response time, but the API can't implement a standard pattern around
+    - suppress: LongRunningOperationsWithLongRunningExtension
+        from: iotcentral.json
+        where: $.paths[/devices/{device_id}/modules/{module_name}/properties].put
+        reason: Long running due to device response time, but the API can't implement a standard pattern around
+    - suppress: LongRunningOperationsWithLongRunningExtension
+        from: iotcentral.json
+        where: $.paths[/devices/{device_id}/properties].put
+        reason: Long running due to device response time, but the API can't implement a standard pattern around
 ```
 
 ## Configuration
