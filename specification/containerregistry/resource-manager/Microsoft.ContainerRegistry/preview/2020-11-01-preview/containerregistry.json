@@ -2648,12 +2648,6 @@
           "type": "string",
           "readOnly": true
         },
-        "lastVersionUpdateTime": {
-          "format": "date-time",
-          "description": "The last time that the ACR runtime version was updated on the connected registry.",
-          "type": "string",
-          "readOnly": true
-        },
         "connectionState": {
           "description": "The current connection state of the connected registry.",
           "enum": [
@@ -2716,8 +2710,8 @@
         "status": {
           "description": "The activation status of the connected registry.",
           "enum": [
-            "Activated",
-            "Unactivated"
+            "Active",
+            "Inactive"
           ],
           "type": "string",
           "readOnly": true,
@@ -2831,7 +2825,8 @@
     "SyncProperties": {
       "description": "The sync properties of the connected registry with its parent.",
       "required": [
-        "tokenId"
+        "tokenId",
+        "messageTtl"
       ],
       "type": "object",
       "properties": {
@@ -2843,14 +2838,14 @@
           "description": "The cron expression indicating the schedule that the connected registry will sync with its parent.",
           "type": "string"
         },
+        "syncWindow": {
+          "format": "duration",
+          "description": "The time window during which sync is enabled for each schedule occurrence. Specify the duration using the format P[n]Y[n]M[n]DT[n]H[n]M[n]S as per ISO8601.",
+          "type": "string"
+        },
         "messageTtl": {
           "format": "duration",
           "description": "The period of time for which a message is available to sync before it is expired. Specify the duration using the format P[n]Y[n]M[n]DT[n]H[n]M[n]S as per ISO8601.",
-          "type": "string"
-        },
-        "syncWindow": {
-          "format": "duration",
-          "description": "The maximum time allowed to perform the sync. Specify the duration using the format P[n]Y[n]M[n]DT[n]H[n]M[n]S as per ISO8601.",
           "type": "string"
         },
         "lastSyncTime": {
@@ -2953,14 +2948,14 @@
           "description": "The cron expression indicating the schedule that the connected registry will sync with its parent.",
           "type": "string"
         },
+        "syncWindow": {
+          "format": "duration",
+          "description": "The time window during which sync is enabled for each schedule occurrence. Specify the duration using the format P[n]Y[n]M[n]DT[n]H[n]M[n]S as per ISO8601.",
+          "type": "string"
+        },
         "messageTtl": {
           "format": "duration",
           "description": "The period of time for which a message is available to sync before it is expired. Specify the duration using the format P[n]Y[n]M[n]DT[n]H[n]M[n]S as per ISO8601.",
-          "type": "string"
-        },
-        "syncWindow": {
-          "format": "duration",
-          "description": "The maximum time allowed to perform the sync. Specify the duration using the format P[n]Y[n]M[n]DT[n]H[n]M[n]S as per ISO8601.",
           "type": "string"
         }
       }
