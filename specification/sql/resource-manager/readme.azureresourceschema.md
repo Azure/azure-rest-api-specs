@@ -6,6 +6,7 @@ These settings apply only when `--azureresourceschema` is specified on the comma
 
 ``` yaml $(azureresourceschema) && $(multiapi)
 batch:
+  - tag: schema-sql-2020-08-01-preview
   - tag: schema-sql-2020-02-02-preview
   - tag: schema-sql-2019-06-01-preview
   - tag: schema-sql-2018-06-01-preview
@@ -19,6 +20,18 @@ batch:
 
 Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
 
+### Tag: schema-sql-2020-08-01-preview and azureresourceschema
+
+``` yaml $(tag) == 'schema-sql-2020-08-01-preview' && $(azureresourceschema)
+output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
+  - ./Microsoft.Sql/preview/2020-08-01-preview/databases.json
+  - ./Microsoft.Sql/preview/2020-08-01-preview/elasticPools.json
+
+```
+
 ### Tag: schema-sql-2020-02-02-preview and azureresourceschema
 
 ``` yaml $(tag) == 'schema-sql-2020-02-02-preview' && $(azureresourceschema)
@@ -26,12 +39,12 @@ output-folder: $(azureresourceschema-folder)/schemas
 
 # all the input files in this apiVersion
 input-file:
-  - Microsoft.Sql/preview/2020-02-02-preview/shortTermRetentionPolicies.json
   - Microsoft.Sql/preview/2020-02-02-preview/managedDatabases.json
   - Microsoft.Sql/preview/2020-02-02-preview/ServerAzureADOnlyAuthentications.json
   - Microsoft.Sql/preview/2020-02-02-preview/managedInstances.json
   - Microsoft.Sql/preview/2020-02-02-preview/importexport.json
   - Microsoft.Sql/preview/2020-02-02-preview/ManagedInstanceAzureADOnlyAuthentications.json
+  - Microsoft.Sql/preview/2020-02-02-preview/ServerTrustGroups.json
   - ./Microsoft.Sql/preview/2020-02-02-preview/DatabaseSecurityAlertPolicies.json
   - ./Microsoft.Sql/preview/2020-02-02-preview/ManagedServerSecurityAlertPolicies.json
   - ./Microsoft.Sql/preview/2020-02-02-preview/ServerSecurityAlertPolicies.json
@@ -40,6 +53,7 @@ input-file:
   - ./Microsoft.Sql/preview/2020-02-02-preview/managedInstances.json
   - ./Microsoft.Sql/preview/2020-02-02-preview/ServerAzureADOnlyAuthentications.json
   - ./Microsoft.Sql/preview/2020-02-02-preview/ManagedInstanceAzureADOnlyAuthentications.json
+  - ./Microsoft.Sql/preview/2020-02-02-preview/ServerTrustGroups.json
 
 ```
 
@@ -50,6 +64,7 @@ output-folder: $(azureresourceschema-folder)/schemas
 
 # all the input files in this apiVersion
 input-file:
+  - Microsoft.Sql/preview/2019-06-01-preview/databases.json
   - Microsoft.Sql/preview/2019-06-01-preview/servers.json
   - Microsoft.Sql/preview/2019-06-01-preview/WorkloadGroups.json
   - Microsoft.Sql/preview/2019-06-01-preview/WorkloadClassifiers.json
@@ -84,13 +99,13 @@ input-file:
   - Microsoft.Sql/preview/2018-06-01-preview/managedDatabaseSensitivityLabels.json
   - Microsoft.Sql/preview/2018-06-01-preview/instancePools.json
   - Microsoft.Sql/preview/2018-06-01-preview/usages.json
-  - Microsoft.Sql/preview/2018-06-01-preview/FailoverDatabases.json
   - Microsoft.Sql/preview/2018-06-01-preview/FailoverElasticPools.json
   - Microsoft.Sql/preview/2018-06-01-preview/PrivateEndpointConnections.json
   - Microsoft.Sql/preview/2018-06-01-preview/PrivateLinkResources.json
   - Microsoft.Sql/preview/2018-06-01-preview/capabilities.json
   - Microsoft.Sql/preview/2018-06-01-preview/LongTermRetentionManagedInstanceBackups.json
   - Microsoft.Sql/preview/2018-06-01-preview/ManagedInstanceLongTermRetentionPolicies.json
+  - Microsoft.Sql/preview/2018-06-01-preview/FailoverDatabases.json
   - ./Microsoft.Sql/preview/2018-06-01-preview/DatabaseSecurityAlertPolicies.json
   - ./Microsoft.Sql/preview/2018-06-01-preview/managedDatabaseSensitivityLabels.json
   - ./Microsoft.Sql/preview/2018-06-01-preview/ManagedInstanceVulnerabilityAssessments.json
@@ -118,7 +133,6 @@ output-folder: $(azureresourceschema-folder)/schemas
 input-file:
   - Microsoft.Sql/preview/2017-10-01-preview/cancelOperations.json
   - Microsoft.Sql/preview/2017-10-01-preview/cancelPoolOperations.json
-  - Microsoft.Sql/preview/2017-10-01-preview/databases.json
   - Microsoft.Sql/preview/2017-10-01-preview/elasticPools.json
   - Microsoft.Sql/preview/2017-10-01-preview/databaseVulnerabilityAssessmentScans.json
   - Microsoft.Sql/preview/2017-10-01-preview/managedDatabaseVulnerabilityAssesmentRuleBaselines.json
