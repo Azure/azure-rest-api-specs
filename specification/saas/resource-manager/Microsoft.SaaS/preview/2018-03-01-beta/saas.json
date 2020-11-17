@@ -34,7 +34,7 @@
     }
   },
   "paths": {
-    "/providers/microsoft.saas/operations": {
+    "/providers/Microsoft.Saas/operations": {
       "get": {
         "tags": [
           "SaaSResources"
@@ -55,6 +55,12 @@
             "schema": {
               "$ref": "#/definitions/SaasAppOperationsResponseWithContinuation"
             }
+          },
+          "default": {
+            "description": "A response indicating an error.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-examples": {
@@ -64,7 +70,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/microsoft.saas/checkmoderneligibility": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Saas/checkmoderneligibility": {
       "get": {
         "tags": [
           "SaaSResources"
@@ -86,11 +92,11 @@
               "$ref": "#/definitions/SaasRpModernEligibility"
             }
           },
-          "404": {
-            "description": "not found"
-          },
-          "502": {
-            "description": "Internal Server Error"
+          "default": {
+            "description": "A response indicating an error.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-examples": {
@@ -100,7 +106,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SaaS/applications": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Saas/applications": {
       "get": {
         "tags": [
           "SaaSResources"
@@ -128,8 +134,11 @@
               "$ref": "#/definitions/SaasAppResponseWithContinuation"
             }
           },
-          "502": {
-            "description": "Internal Server Error"
+          "default": {
+            "description": "A response indicating an error.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-examples": {
@@ -170,8 +179,11 @@
           "202": {
             "description": "Accepted and the operation will complete asynchronously."
           },
-          "502": {
-            "description": "Internal Server Error"
+          "default": {
+            "description": "A response indicating an error.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-examples": {
@@ -205,11 +217,11 @@
               "$ref": "#/definitions/SaasResource"
             }
           },
-          "404": {
-            "description": "not found"
-          },
-          "502": {
-            "description": "Internal Server Error"
+          "default": {
+            "description": "A response indicating an error.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-examples": {
@@ -219,7 +231,7 @@
         }
       }
     },
-    "/providers/microsoft.saas/saasresources": {
+    "/providers/Microsoft.Saas/saasresources": {
       "put": {
         "tags": [
           "SaaSResources"
@@ -244,14 +256,11 @@
           "202": {
             "description": "Accepted and the operation will complete asynchronously."
           },
-          "403": {
-            "description": "Forbidden"
-          },
-          "400": {
-            "description": "BadRequest"
-          },
-          "502": {
-            "description": "Internal Server Error"
+          "default": {
+            "description": "A response indicating an error.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-examples": {
@@ -282,11 +291,11 @@
               "$ref": "#/definitions/SaasResourceResponseWithContinuation"
             }
           },
-          "404": {
-            "description": "not found"
-          },
-          "502": {
-            "description": "Internal Server Error"
+          "default": {
+            "description": "A response indicating an error.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-examples": {
@@ -296,7 +305,7 @@
         }
       }
     },
-    "/providers/Microsoft.SaaS/saasresources/{resourceId}/listAccessToken": {
+    "/providers/Microsoft.Saas/saasresources/{resourceId}/listAccessToken": {
       "post": {
         "tags": [
           "SaaSResources"
@@ -318,8 +327,11 @@
               "$ref": "#/definitions/AccessTokenResult"
             }
           },
-          "502": {
-            "description": "Internal Server Error"
+          "default": {
+            "description": "A response indicating an error.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-examples": {
@@ -452,7 +464,11 @@
             "Subscribed",
             "Unsubscribed",
             "Suspended"
-          ]
+          ],
+          "x-ms-enum": {
+            "name": "status",
+            "modelAsString": true
+          }
         },
         "term": {
           "type": "object",
@@ -509,8 +525,13 @@
           "type": "string",
           "description": "The Payment channel for the SaasSubscription.",
           "enum": [
-            "SubscriptionDelegated"
-          ]
+            "SubscriptionDelegated",
+            "CustomerDelegated"
+          ],
+          "x-ms-enum": {
+            "name": "paymentChannelType",
+            "modelAsString": true
+          }
         },
         "paymentChannelMetadata": {
           "type": "object",
@@ -645,7 +666,11 @@
             "Unsubscribed",
             "Suspended",
             "Deactivated"
-          ]
+          ],
+          "x-ms-enum": {
+            "name": "status",
+            "modelAsString": true
+          }
         },
         "saasAppPlan": {
           "description": "the resource plan details.",
@@ -725,7 +750,7 @@
       "description": "SaasRp Modern Eligibility",
       "type": "object",
       "properties": {
-        "Id": {
+        "id": {
           "description": "the azure subscription id",
           "type": "string"
         },
@@ -750,6 +775,27 @@
         "Feedback": {
           "type": "string",
           "description": "Feedback"
+        }
+      }
+    },
+    "ErrorResponse": {
+      "description": "Error response indicates Microsoft.Marketplace service is not able to process the incoming request. The reason is provided in the error message.",
+      "type": "object",
+      "properties": {
+        "error": {
+          "description": "The details of the error.",
+          "properties": {
+            "code": {
+              "description": "Error code.",
+              "type": "string",
+              "readOnly": true
+            },
+            "message": {
+              "description": "Error message indicating why the operation failed.",
+              "type": "string",
+              "readOnly": true
+            }
+          }
         }
       }
     }
