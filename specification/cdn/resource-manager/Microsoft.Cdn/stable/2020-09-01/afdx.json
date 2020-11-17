@@ -34,7 +34,7 @@
     }
   },
   "paths": {
-"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}/usages": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}/usages": {
       "post": {
         "tags": [
           "AFDProfiles"
@@ -138,12 +138,12 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}/customdomains": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}/customDomains": {
       "get": {
         "tags": [
           "AFDCustomDomains"
         ],
-        "description": "Lists existing AFDX domains.",
+        "description": "Lists existing AzureFrontDoor domains.",
         "operationId": "AFDCustomDomains_ListByProfile",
         "x-ms-examples": {
           "AFDCustomDomains_ListByProfile": {
@@ -187,12 +187,12 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}/customdomains/{customDomainName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}/customDomains/{customDomainName}": {
       "get": {
         "tags": [
           "AFDCustomDomains"
         ],
-        "description": "Gets an existing AFDX domain with the specified domain name under the specified subscription, resource group and profile.",
+        "description": "Gets an existing AzureFrontDoor domain with the specified domain name under the specified subscription, resource group and profile.",
         "operationId": "AFDCustomDomains_Get",
         "x-ms-examples": {
           "AFDCustomDomains_Get": {
@@ -377,7 +377,7 @@
         "tags": [
           "AFDCustomDomains"
         ],
-        "description": "Deletes an existing AFDX domain with the specified domain name under the specified subscription, resource group and profile.",
+        "description": "Deletes an existing AzureFrontDoor domain with the specified domain name under the specified subscription, resource group and profile.",
         "operationId": "AFDCustomDomains_Delete",
         "x-ms-examples": {
           "AFDCustomDomains_Delete": {
@@ -426,7 +426,7 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}/customdomains/{customDomainName}/refreshValidationToken": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}/customDomains/{customDomainName}/refreshValidationToken": {
       "post": {
         "tags": [
           "AFDCustomDomains"
@@ -469,7 +469,7 @@
             "schema": {
               "type": "string"
             }
-          },        
+          },
           "default": {
             "description": "CDN error response describing why the operation failed.",
             "schema": {
@@ -485,7 +485,7 @@
         "tags": [
           "AFDEndpoints"
         ],
-        "description": "Lists existing AFDX endpoints.",
+        "description": "Lists existing AzureFrontDoor endpoints.",
         "operationId": "AFDEndpoints_ListByProfile",
         "x-ms-examples": {
           "AFDEndpoints_ListByProfile": {
@@ -534,7 +534,7 @@
         "tags": [
           "AFDEndpoints"
         ],
-        "description": "Gets an existing AFDX endpoint with the specified endpoint name under the specified subscription, resource group and profile.",
+        "description": "Gets an existing AzureFrontDoor endpoint with the specified endpoint name under the specified subscription, resource group and profile.",
         "operationId": "AFDEndpoints_Get",
         "x-ms-examples": {
           "AFDEndpoints_Get": {
@@ -585,7 +585,7 @@
         "tags": [
           "AFDEndpoints"
         ],
-        "description": "Creates a new AFDX endpoint with the specified endpoint name under the specified subscription, resource group and profile.",
+        "description": "Creates a new AzureFrontDoor endpoint with the specified endpoint name under the specified subscription, resource group and profile.",
         "operationId": "AFDEndpoints_Create",
         "x-ms-examples": {
           "AFDEndpoints_Create": {
@@ -652,7 +652,7 @@
         "tags": [
           "AFDEndpoints"
         ],
-        "description": "Updates an existing AFDX endpoint with the specified endpoint name under the specified subscription, resource group and profile. Only tags can be updated after creating an endpoint. To update origins, use the Update Origin operation. To update origin groups, use the Update Origin group operation. To update domains, use the Update Custom Domain operation.",
+        "description": "Updates an existing AzureFrontDoor endpoint with the specified endpoint name under the specified subscription, resource group and profile. Only tags can be updated after creating an endpoint. To update origins, use the Update Origin operation. To update origin groups, use the Update Origin group operation. To update domains, use the Update Custom Domain operation.",
         "operationId": "AFDEndpoints_Update",
         "x-ms-examples": {
           "AFDEndpoints_Update": {
@@ -719,7 +719,7 @@
         "tags": [
           "AFDEndpoints"
         ],
-        "description": "Deletes an existing AFDX endpoint with the specified endpoint name under the specified subscription, resource group and profile.",
+        "description": "Deletes an existing AzureFrontDoor endpoint with the specified endpoint name under the specified subscription, resource group and profile.",
         "operationId": "AFDEndpoints_Delete",
         "x-ms-examples": {
           "AFDEndpoints_Delete": {
@@ -773,7 +773,7 @@
         "tags": [
           "AFDEndpoints"
         ],
-        "description": "Removes a content from AFDX.",
+        "description": "Removes a content from AzureFrontDoor.",
         "operationId": "AFDEndpoints_PurgeContent",
         "x-ms-examples": {
           "AFDEndpoints_PurgeContent": {
@@ -1677,7 +1677,7 @@
         "tags": [
           "Routes"
         ],
-        "description": "Gets an existing route with the specified route name under the specified subscription, resource group, profile, and AFDX endpoint.",
+        "description": "Gets an existing route with the specified route name under the specified subscription, resource group, profile, and AzureFrontDoor endpoint.",
         "operationId": "Routes_Get",
         "x-ms-examples": {
           "Routes_Get": {
@@ -1735,7 +1735,7 @@
         "tags": [
           "Routes"
         ],
-        "description": "Creates a new route with the specified route name under the specified subscription, resource group, profile, and AFDX endpoint.",
+        "description": "Creates a new route with the specified route name under the specified subscription, resource group, profile, and AzureFrontDoor endpoint.",
         "operationId": "Routes_Create",
         "x-ms-examples": {
           "Routes_Create": {
@@ -1809,7 +1809,7 @@
         "tags": [
           "Routes"
         ],
-        "description": "Updates an existing route with the specified route name under the specified subscription, resource group, profile, and AFDX endpoint.",
+        "description": "Updates an existing route with the specified route name under the specified subscription, resource group, profile, and AzureFrontDoor endpoint.",
         "operationId": "Routes_Update",
         "x-ms-examples": {
           "Routes_Update": {
@@ -1883,7 +1883,7 @@
         "tags": [
           "Routes"
         ],
-        "description": "Deletes an existing route with the specified route name under the specified subscription, resource group, profile, and AFDX endpoint.",
+        "description": "Deletes an existing route with the specified route name under the specified subscription, resource group, profile, and AzureFrontDoor endpoint.",
         "operationId": "Routes_Delete",
         "x-ms-examples": {
           "Routes_Delete": {
@@ -1944,7 +1944,7 @@
         "tags": [
           "RuleSets"
         ],
-        "description": "Lists existing AFDX rule sets within a profile.",
+        "description": "Lists existing AzureFrontDoor rule sets within a profile.",
         "operationId": "RuleSets_ListByProfile",
         "x-ms-examples": {
           "RuleSets_ListByProfile": {
@@ -1993,7 +1993,7 @@
         "tags": [
           "RuleSets"
         ],
-        "description": "Gets an existing AFDX rule set with the specified rule set name under the specified subscription, resource group and profile.",
+        "description": "Gets an existing AzureFrontDoor rule set with the specified rule set name under the specified subscription, resource group and profile.",
         "operationId": "RuleSets_Get",
         "x-ms-examples": {
           "RuleSets_Get": {
@@ -2178,7 +2178,7 @@
         "tags": [
           "RuleSets"
         ],
-        "description": "Deletes an existing AFDX rule set with the specified rule set name under the specified subscription, resource group and profile.",
+        "description": "Deletes an existing AzureFrontDoor rule set with the specified rule set name under the specified subscription, resource group and profile.",
         "operationId": "RuleSets_Delete",
         "x-ms-examples": {
           "RuleSets_Delete": {
@@ -2213,7 +2213,7 @@
         "responses": {
           "200": {
             "description": "Delete successful."
-          },        
+          },
           "204": {
             "description": "No Content. The request has been accepted but the rule set was not found."
           },
@@ -2899,7 +2899,7 @@
         "tags": [
           "Secrets"
         ],
-        "description": "Lists existing AFDX secrets.",
+        "description": "Lists existing AzureFrontDoor secrets.",
         "operationId": "Secrets_ListByProfile",
         "x-ms-examples": {
           "Secrets_ListByProfile": {
@@ -3963,7 +3963,7 @@
           "items": {
             "$ref": "#/definitions/AFDDomain"
           },
-          "description": "List of AFDX domains within a profile."
+          "description": "List of AzureFrontDoor domains within a profile."
         },
         "nextLink": {
           "type": "string",
@@ -4043,7 +4043,7 @@
       "description": "The JSON object that contains the properties of the domain to create.",
       "properties": {
         "tlsSettings": {
-          "description": "The configuration specifying how to enable HTTPS for the domain - using AFDX managed certificate or user's own certificate. If not specified, enabling ssl uses AFDX managed certificate by default.",
+          "description": "The configuration specifying how to enable HTTPS for the domain - using AzureFrontDoor managed certificate or user's own certificate. If not specified, enabling ssl uses AzureFrontDoor managed certificate by default.",
           "type": "object",
           "$ref": "#/definitions/AFDDomainHttpsParameters"
         },
@@ -4072,7 +4072,7 @@
     "AFDDomainHttpsParameters": {
       "description": "The JSON object that contains the properties to secure a domain.",
       "required": [
-        "certificateType"      
+        "certificateType"
       ],
       "properties": {
         "certificateType": {
@@ -4107,7 +4107,7 @@
       }
     },
     "SecurityPolicy": {
-      "description": "SecurityPolicy association for AFDX profile",
+      "description": "SecurityPolicy association for AzureFrontDoor profile",
       "type": "object",
       "allOf": [
         {
@@ -4218,7 +4218,7 @@
       }
     },
     "AFDEndpoint": {
-      "description": "CDN endpoint is the entity within a CDN profile containing configuration information such as origin, protocol, content caching and delivery behavior. The AFDX endpoint uses the URL format <endpointname>.azureedge.net.",
+      "description": "CDN endpoint is the entity within a CDN profile containing configuration information such as origin, protocol, content caching and delivery behavior. The AzureFrontDoor endpoint uses the URL format <endpointname>.azureedge.net.",
       "type": "object",
       "allOf": [
         {
@@ -4259,7 +4259,7 @@
           "items": {
             "$ref": "#/definitions/AFDEndpoint"
           },
-          "description": "List of AFDX endpoints within a profile"
+          "description": "List of AzureFrontDoor endpoints within a profile"
         },
         "nextLink": {
           "type": "string",
@@ -4321,7 +4321,7 @@
           }
         },
         "isCompressionEnabled": {
-          "description": "Indicates whether content compression is enabled on AFDX. Default value is false. If compression is enabled, content will be served as compressed if user requests for a compressed version. Content won't be compressed on AFDX when requested content is smaller than 1 byte or larger than 1 MB.",
+          "description": "Indicates whether content compression is enabled on AzureFrontDoor. Default value is false. If compression is enabled, content will be served as compressed if user requests for a compressed version. Content won't be compressed on AzureFrontDoor when requested content is smaller than 1 byte or larger than 1 MB.",
           "type": "boolean"
         }
       }
@@ -4347,7 +4347,7 @@
           "items": {
             "$ref": "#/definitions/Secret"
           },
-          "description": "List of AFDX secrets within a profile."
+          "description": "List of AzureFrontDoor secrets within a profile."
         },
         "nextLink": {
           "type": "string",
@@ -4500,7 +4500,7 @@
           "items": {
             "$ref": "#/definitions/RuleSet"
           },
-          "description": "List of AFDX rule sets within a profile."
+          "description": "List of AzureFrontDoor rule sets within a profile."
         },
         "nextLink": {
           "type": "string",
@@ -4551,8 +4551,7 @@
     },
     "RuleSetUpdatePropertiesParameters": {
       "description": "The JSON object that contains the properties of the domain to create.",
-      "properties": {
-      }
+      "properties": {}
     },
     "AFDOrigin": {
       "description": "CDN origin is the source of the content being delivered via CDN. When the edge nodes represented by an endpoint do not have the requested content cached, they attempt to fetch it from one or more of the configured origins.",
@@ -4840,7 +4839,7 @@
           "items": {
             "$ref": "#/definitions/Route"
           },
-          "description": "List of AFDX routes within a profile."
+          "description": "List of AzureFrontDoor routes within a profile."
         },
         "nextLink": {
           "type": "string",
@@ -4903,7 +4902,7 @@
           "$ref": "./cdn.json#/definitions/ResourceReference"
         },
         "originPath": {
-          "description": "A directory path on the origin that AFDX can use to retrieve content from, e.g. contoso.cloudapp.net/originpath.",
+          "description": "A directory path on the origin that AzureFrontDoor can use to retrieve content from, e.g. contoso.cloudapp.net/originpath.",
           "type": "string"
         },
         "ruleSets": {
@@ -4936,11 +4935,11 @@
           }
         },
         "queryStringCachingBehavior": {
-          "description": "Defines how AFDX caches requests that include query strings. You can ignore any query strings when caching, bypass caching to prevent requests that contain query strings from being cached, or cache every request with a unique URL.",
+          "description": "Defines how AzureFrontDoor caches requests that include query strings. You can ignore any query strings when caching, bypass caching to prevent requests that contain query strings from being cached, or cache every request with a unique URL.",
           "$ref": "./cdn.json#/definitions/QueryStringCachingBehavior"
         },
         "optimizationType": {
-          "description": "Specifies what scenario the customer wants this AFDX endpoint to optimize for, e.g. Download, Media services. With this information, AFDX can apply scenario driven optimization.",
+          "description": "Specifies what scenario the customer wants this AzureFrontDoor endpoint to optimize for, e.g. Download, Media services. With this information, AzureFrontDoor can apply scenario driven optimization.",
           "$ref": "./cdn.json#/definitions/OptimizationType"
         },
         "forwardingProtocol": {
@@ -5003,7 +5002,7 @@
           "items": {
             "$ref": "#/definitions/Rule"
           },
-          "description": "List of AFDX rules within a rule set."
+          "description": "List of AzureFrontDoor rules within a rule set."
         },
         "nextLink": {
           "type": "string",
@@ -5030,7 +5029,7 @@
       "description": "The JSON object that contains the properties of the Rules to create.",
       "type": "object",
       "required": [
-        "order",        
+        "order",
         "actions"
       ],
       "allOf": [
@@ -5059,7 +5058,7 @@
           "description": "The order in which the rules are applied for the endpoint. Possible values {0,1,2,3,………}. A rule with a lesser order will be applied before a rule with a greater order. Rule with order 0 is a special rule. It does not require any condition and actions listed in it will always be applied.",
           "type": "integer",
           "format": "int32"
-        },       
+        },
         "conditions": {
           "description": "A list of conditions that must be matched for the actions to be executed",
           "type": "array",
