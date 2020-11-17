@@ -482,16 +482,19 @@
         }
       ]
     },
-    "/{fileSystem}?restype=container&comp=list&flat": {
+    "/{containerName}?restype=container&comp=list&hierarchy": {
       "get": {
         "tags": [
           "containers"
         ],
-        "operationId": "FileSystem_ListBlobFlatSegment",
+        "operationId": "FileSystem_ListBlobHierarchySegment",
         "description": "[Update] The List Blobs operation returns a list of the blobs under the specified container",
         "parameters": [
           {
             "$ref": "#/parameters/Prefix"
+          },
+          {
+            "$ref": "#/parameters/Delimiter"
           },
           {
             "$ref": "#/parameters/Marker"
@@ -545,7 +548,7 @@
               }
             },
             "schema": {
-              "$ref": "#/definitions/ListBlobsFlatSegmentResponse"
+              "$ref": "#/definitions/ListBlobsHierarchySegmentResponse"
             }
           },
           "default": {
@@ -2928,6 +2931,14 @@
       },
       "x-ms-parameter-location": "method",
       "description": "Include this parameter to specify one or more datasets to include in the response."
+    },
+    "Delimiter": {
+      "name": "delimiter",
+      "description": "When the request includes this parameter, the operation returns a BlobPrefix element in the response body that acts as a placeholder for all blobs whose names begin with the same substring up to the appearance of the delimiter character. The delimiter may be a single character or a string.",
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "in": "query",
+      "required": true
     }
   },
   "definitions": {
@@ -3024,7 +3035,7 @@
         }
       }
     },
-    "ListBlobsFlatSegmentResponse": {
+    "ListBlobsHierarchySegmentResponse": {
       "xml": {
         "name": "EnumerationResults"
       },
@@ -3057,28 +3068,48 @@
         "MaxResults": {
           "type": "integer"
         },
+        "Delimiter": {
+          "type": "string"
+        },
         "Segment": {
-          "$ref": "#/definitions/BlobFlatListSegment"
+          "$ref": "#/definitions/BlobHierarchyListSegment"
         },
         "NextMarker": {
           "type": "string"
         }
       }
     },
-    "BlobFlatListSegment": {
+    "BlobHierarchyListSegment": {
       "xml": {
         "name": "Blobs"
       },
+      "type": "object",
       "required": [
         "BlobItems"
       ],
-      "type": "object",
       "properties": {
+        "BlobPrefixes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/BlobPrefix"
+          }
+        },
         "BlobItems": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/BlobItemInternal"
           }
+        }
+      }
+    },
+    "BlobPrefix": {
+      "type": "object",
+      "required": [
+        "Name"
+      ],
+      "properties": {
+        "Name": {
+          "type": "string"
         }
       }
     },
