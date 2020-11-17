@@ -8489,7 +8489,7 @@
         },
         "classificationReason": {
           "$ref": "#/definitions/IncidentClassificationReason",
-          "description": "The classification reason the incident was closed with",
+          "description": "The classification reason the incident was closed with"
         },
         "createdTimeUtc": {
           "description": "The time the incident was created",
@@ -11436,6 +11436,24 @@
       "description": "Alert rule template ID",
       "in": "path",
       "name": "alertRuleTemplateId",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "AutomationRule": {
+      "description": "The automation rule",
+      "in": "body",
+      "name": "automationRule",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/AutomationRule"
+      },
+      "x-ms-parameter-location": "method"
+    },    
+    "AutomationRuleId": {
+      "description": "Automation rule ID",
+      "in": "path",
+      "name": "automationRuleId",
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"
