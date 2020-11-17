@@ -332,13 +332,16 @@
         ],
         "responses": {
           "200": {
-            "description": "Cache deleted."
+            "description": "Cache deleted.",
+            "schema": {}
           },
           "202": {
-            "description": "Started the Cache's transition to Deleted state. Poll the Cache to monitor."
+            "description": "Started the Cache's transition to Deleted state. Poll the Cache to monitor.",
+            "schema": {}
           },
           "204": {
-            "description": "Cache deleted."
+            "description": "Cache deleted.",
+            "schema": {}
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -584,13 +587,16 @@
         ],
         "responses": {
           "200": {
-            "description": "All cached data has been flushed to the Storage Target(s)."
+            "description": "All cached data has been flushed to the Storage Target(s).",
+            "schema": {}
           },
           "202": {
-            "description": "Cache has started flushing to its Storage Target(s). Poll the Cache's state field to monitor."
+            "description": "Cache has started flushing to its Storage Target(s). Poll the Cache's state field to monitor.",
+            "schema": {}
           },
           "204": {
-            "description": "Cache flush already in progress or has completed."
+            "description": "Cache flush already in progress or has completed.",
+            "schema": {}
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -645,13 +651,16 @@
         ],
         "responses": {
           "200": {
-            "description": "Restarted VMs associated with the cache."
+            "description": "Cache is Active.",
+            "schema": {}
           },
           "202": {
-            "description": "Cache has started the transition to Active. Poll the Cache's state field to monitor."
+            "description": "Cache has started the transition to Active. Poll the Cache's state field to monitor.",
+            "schema": {}
           },
           "204": {
-            "description": "Restarted VMs associated with the cache."
+            "description": "Restarted VMs associated with the cache.",
+            "schema": {}
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -706,13 +715,16 @@
         ],
         "responses": {
           "200": {
-            "description": "Stopped VMs associated with the cache."
+            "description": "Cache is stopped.",
+            "schema": {}
           },
           "202": {
-            "description": "Cache has started the transition to Stopped. Poll the Cache's state field to monitor."
+            "description": "Cache has started the transition to Stopped. Poll the Cache's state field to monitor.",
+            "schema": {}
           },
           "204": {
-            "description": "Stopped VMs associated with the cache."
+            "description": "Stopped VMs associated with the cache.",
+            "schema": {}
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -832,13 +844,16 @@
         ],
         "responses": {
           "200": {
-            "description": "Storage target deleted."
+            "description": "Storage target deleted.",
+            "schema": {}
           },
           "202": {
-            "description": "Started the Storage Target's deletion. Poll the Cache's Storage Targets to monitor."
+            "description": "Started the Storage Target's deletion. Poll the Cache's Storage Targets to monitor.",
+            "schema": {}
           },
           "204": {
-            "description": "Storage Target deleted."
+            "description": "Storage Target deleted.",
+            "schema": {}
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -1033,14 +1048,17 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Cache firmware is up to date."
+          "201": {
+            "description": "Cache firmware is up to date.",
+            "schema": {}
           },
           "202": {
-            "description": "Cache has started the upgrade. Poll the Cache's state field to monitor."
+            "description": "Cache has started the upgrade. Poll the Cache's state field to monitor.",
+            "schema": {}
           },
           "204": {
-            "description": "Cache firmware is up to date."
+            "description": "Cache firmware is up to date.",
+            "schema": {}
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -1265,8 +1283,7 @@
           "properties": {
             "cacheSizeGB": {
               "description": "The size of this Cache, in GB.",
-              "type": "integer",
-              "format": "int32"
+              "type": "integer"
             },
             "health": {
               "description": "Health of the Cache.",
@@ -1371,7 +1388,6 @@
         "mtu": {
           "description": "The IPv4 maximum transmission unit configured for the subnet.",
           "type": "integer",
-          "format": "int32",
           "minimum": 576,
           "maximum": 1500,
           "default": 1500
@@ -1810,6 +1826,7 @@
     "StorageTargetProperties": {
       "type": "object",
       "description": "Properties of the Storage Target.",
+      "discriminator": "targetType",
       "required": [
         "targetType"
       ],
@@ -1864,6 +1881,16 @@
         }
       }
     },
+    "Nfs3TargetProperties": {
+      "description": "An NFSv3 mount point for use as a Storage Target.",
+      "type": "object",
+      "x-ms-discriminator-value": "nfs3",
+      "allOf": [
+        {
+          "$ref": "#/definitions/StorageTargetProperties"
+        }
+      ]
+    },
     "Nfs3Target": {
       "description": "Properties pertaining to the Nfs3Target",
       "properties": {
@@ -1878,6 +1905,16 @@
         }
       }
     },
+    "ClfsTargetProperties": {
+      "description": "Storage container for use as a CLFS Storage Target.",
+      "type": "object",
+      "x-ms-discriminator-value": "clfs",
+      "allOf": [
+        {
+          "$ref": "#/definitions/StorageTargetProperties"
+        }
+      ]
+    },
     "ClfsTarget": {
       "description": "Properties pertaining to the ClfsTarget",
       "properties": {
@@ -1886,6 +1923,16 @@
           "$ref": "#/definitions/URLString"
         }
       }
+    },
+    "UnknownTargetProperties": {
+      "description": "Storage container for use as an Unknown Storage Target.",
+      "type": "object",
+      "x-ms-discriminator-value": "unknown",
+      "allOf": [
+        {
+          "$ref": "#/definitions/StorageTargetProperties"
+        }
+      ]
     },
     "UnknownTarget": {
       "description": "Properties pertaining to the UnknownTarget",
