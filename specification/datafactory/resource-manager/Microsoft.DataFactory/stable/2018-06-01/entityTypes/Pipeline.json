@@ -6929,6 +6929,18 @@
               "type": "object"
             }
           }
+        },
+        "traceLevel": {
+          "description": "Trace level setting used for data flow monitoring output. Supported values are: 'coarse', 'fine', and 'none'. Type: string (or Expression with resultType string)",
+          "type": "object"
+        },
+        "continueOnError": {
+          "description": "Continue on error setting used for data flow execution. Enables processing to continue if a sink fails. Type: boolean (or Expression with resultType boolean)",
+          "type": "object"
+        },
+        "runConcurrently": {
+          "description": "Concurrent run setting used for data flow execution. Allows sinks with the same save order to be processed concurrently. Type: boolean (or Expression with resultType boolean)",
+          "type": "object"
         }
       },
       "required": [
