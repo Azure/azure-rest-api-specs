@@ -66,6 +66,9 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -178,6 +181,9 @@
         "responses": {
           "200": {
             "description": "OK. The request has succeeded."
+          },
+          "204": {
+            "description": "OK. The request has succeeded, no content returned."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -1689,6 +1695,11 @@
           "items": {
             "$ref": "#/definitions/Setting"
           }
+        },
+        "nextLink": {
+          "description": "The link (url) to the next page of results.",
+          "type": "string",
+          "readOnly": true
         }
       }
     },
