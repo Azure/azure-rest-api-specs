@@ -176,9 +176,6 @@
           "204": {
             "description": "Request successful. Resource does not exist."
           },
-          "202": {
-            "description": "Accepted and the operation will complete asynchronously."
-          },
           "default": {
             "description": "A response indicating an error.",
             "schema": {
@@ -267,10 +264,6 @@
           "Create Subscription Level SaaS resource": {
             "$ref": "./examples/saasV2/SaasPut.json"
           }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
         }
       },
       "get": {
@@ -466,7 +459,7 @@
             "Suspended"
           ],
           "x-ms-enum": {
-            "name": "status",
+            "name": "SaasResourceStatus",
             "modelAsString": true
           }
         },
@@ -562,11 +555,11 @@
       "description": "the ISV access token result response.",
       "type": "object",
       "properties": {
-        "PublisherOfferBaseUri": {
+        "publisherOfferBaseUri": {
           "description": "The Publisher Offer Base Uri",
           "type": "string"
         },
-        "Token": {
+        "token": {
           "description": "The generated token",
           "type": "string"
         }
@@ -668,7 +661,7 @@
             "Deactivated"
           ],
           "x-ms-enum": {
-            "name": "status",
+            "name": "SaasAppStatus",
             "modelAsString": true
           }
         },
@@ -764,17 +757,17 @@
       "description": "delete Options",
       "type": "object",
       "properties": {
-        "UnsubscribeOnly": {
+        "unsubscribeOnly": {
           "type": "boolean",
           "description": "whether it is unsubscribeOnly"
         },
-        "ReasonCode": {
+        "reasonCode": {
           "type": "number",
           "description": "The reasonCode"
         },
-        "Feedback": {
+        "feedback": {
           "type": "string",
-          "description": "Feedback"
+          "description": "the feedback"
         }
       }
     },
@@ -806,7 +799,8 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "The Saas resource ID. This is a GUID-formatted string (e.g. 00000000-0000-0000-0000-000000000000)"
+      "description": "The Saas resource ID. This is a GUID-formatted string (e.g. 00000000-0000-0000-0000-000000000000)",
+      "x-ms-parameter-location": "method"
     },
     "ApiVersionParameter": {
       "name": "api-version",
@@ -820,7 +814,8 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "the operation Id parameter."
+      "description": "the operation Id parameter.",
+      "x-ms-parameter-location": "method"
     },
     "SubscriptionIdParameter": {
       "name": "subscriptionId",
