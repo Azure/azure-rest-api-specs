@@ -34,7 +34,7 @@
     }
   },
   "paths": {
-    "/providers/Microsoft.Saas/operations": {
+    "/providers/Microsoft.SaaS/operations": {
       "get": {
         "tags": [
           "SaaSResources"
@@ -70,7 +70,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Saas/checkmoderneligibility": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.SaaS/checkmoderneligibility": {
       "get": {
         "tags": [
           "SaaSResources"
@@ -106,7 +106,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Saas/applications": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SaaS/applications": {
       "get": {
         "tags": [
           "SaaSResources"
@@ -228,7 +228,7 @@
         }
       }
     },
-    "/providers/Microsoft.Saas/saasresources": {
+    "/providers/Microsoft.SaaS/saasresources": {
       "put": {
         "tags": [
           "SaaSResources"
@@ -298,7 +298,7 @@
         }
       }
     },
-    "/providers/Microsoft.Saas/saasresources/{resourceId}/listAccessToken": {
+    "/providers/Microsoft.SaaS/saasresources/{resourceId}/listAccessToken": {
       "post": {
         "tags": [
           "SaaSResources"
@@ -362,7 +362,7 @@
       "type": "object",
       "properties": {
         "name": {
-          "description": "Operation name: {provider}/{resource}/{operation}",
+          "description": "Operation name",
           "type": "string"
         },
         "display": {
@@ -700,7 +700,7 @@
       }
     },
     "SaasAppOperation": {
-      "description": "",
+      "description": "saas app operations",
       "type": "object",
       "properties": {
         "name": {
@@ -714,6 +714,10 @@
         "origin": {
           "description": "the operation origin",
           "type": "string"
+        },
+        "isDataAction": {
+          "description": "whether the operation is a data action or not.",
+          "type": "boolean"
         }
       }
     },
@@ -722,19 +726,19 @@
       "type": "object",
       "properties": {
         "provider": {
-          "description": "",
+          "description": "Name of the provider for display purposes",
           "type": "string"
         },
         "resource": {
-          "description": "",
+          "description": "Name of the resource type for display purposes",
           "type": "string"
         },
         "operation": {
-          "description": "Type of the operation: get, read, delete, etc.",
+          "description": "Name of the operation for display purposes",
           "type": "string"
         },
         "description": {
-          "description": "Type of the operation: get, read, delete, etc.",
+          "description": "Description of the operation for display purposes",
           "type": "string"
         }
       }
