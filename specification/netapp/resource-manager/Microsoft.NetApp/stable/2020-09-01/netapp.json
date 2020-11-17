@@ -3,7 +3,7 @@
   "info": {
     "title": "Microsoft NetApp",
     "description": "Microsoft NetApp Azure Resource Provider specification",
-    "version": "2020-07-01",
+    "version": "2020-09-01",
     "x-ms-code-generation-settings": {
       "name": "AzureNetAppFilesManagementClient"
     }
@@ -2983,6 +2983,19 @@
         "ldapSigning": {
           "type": "boolean",
           "description": "Specifies whether or not the LDAP traffic needs to be signed."
+        },
+        "securityOperators": {
+          "type": "array",
+          "description": "Domain Users in the Active directory to be given SeSecurityPrivilege privilege (Needed for SMB Continuously available shares for SQL). A list of unique usernames without domain specifier",
+          "items": {
+            "type": "string",
+            "maxLength": 255,
+            "minLength": 1,
+            "example": [
+              "user1",
+              "user2"
+            ]
+          }
         }
       }
     },
@@ -3468,6 +3481,18 @@
             "name": "SecurityStyle",
             "modelAsString": true
           }
+        },
+        "smbEncryption": {
+          "type": "boolean",
+          "description": "Enables encryption for in-flight smb3 data. Only applicable for SMB/DualProtocol volume. To be used with swagger version 2020-08-01 or later",
+          "example": false,
+          "default": false
+        },
+        "smbContinuouslyAvailable": {
+          "type": "boolean",
+          "description": "Enables continuously available share property for smb volume. Only applicable for SMB volume",
+          "example": false,
+          "default": false
         },
         "throughputMibps": {
           "title": "Maximum throughput in Mibps that can be achieved by this volume",
@@ -4790,7 +4815,7 @@
       "in": "query",
       "type": "string",
       "required": true,
-      "default": "2020-07-01"
+      "default": "2020-09-01"
     }
   }
 }
