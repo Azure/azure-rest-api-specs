@@ -914,7 +914,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "type": "object"
+              "$ref": "#/definitions/HcxEnterpriseSite"
             }
           },
           {
@@ -1110,7 +1110,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "type": "object"
+              "$ref": "#/definitions/ExpressRouteAuthorization"
             }
           },
           {
@@ -1515,7 +1515,8 @@
         "properties": {
           "description": "The properties of an ExpressRoute Circuit Authorization resource",
           "$ref": "#/definitions/ExpressRouteAuthorizationProperties",
-          "x-ms-client-flatten": true
+          "x-ms-client-flatten": true,
+          "readOnly": true
         }
       }
     },
@@ -1720,6 +1721,7 @@
             "Enabled",
             "Disabled"
           ],
+          "default": "Disabled",
           "x-ms-enum": {
             "name": "InternetEnum",
             "modelAsString": true
@@ -2022,7 +2024,8 @@
         "properties": {
           "description": "The properties of an HCX Enterprise Site resource",
           "$ref": "#/definitions/HcxEnterpriseSiteProperties",
-          "x-ms-client-flatten": true
+          "x-ms-client-flatten": true,
+          "readOnly": true
         }
       }
     },
