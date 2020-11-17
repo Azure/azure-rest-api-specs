@@ -44,6 +44,7 @@ Please also specify `--go-sdk-folder=<path to the root directory of your azure-s
 ``` yaml $(tag) == 'package-netapp-2020-07-01' && $(go)
 output-folder: $(go-sdk-folder)/services/$(namespace)/mgmt/2020-07-01/$(namespace)  
 ```
+
 ### Tag: package-netapp-2020-06-01 and go
 
 These settings apply only when `--tag=package-netapp-2020-06-01 --go` is specified on the command line.
