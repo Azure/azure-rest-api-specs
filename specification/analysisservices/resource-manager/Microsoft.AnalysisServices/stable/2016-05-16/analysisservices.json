@@ -572,8 +572,8 @@
           },
           "default": {
             "description": "Error response describing why the operation failed.",
-            "error": {
-              "$ref": "#/definitions/ErrorResponse"
+            "schema": {
+              "$ref": "#/definitions/OperationsErrorResponse"
             }
           }
         },
@@ -946,6 +946,14 @@
           "description": "The SKU in SKU details for existing resources."
         }
       }
+    },
+    "OperationsErrorResponse": {
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/ErrorResponse"
+        }
+      },
+      "description": "An error response from Operations."
     },
     "ErrorResponse": {
       "description": "Describes the format of Error response.",
