@@ -370,10 +370,10 @@ output-folder: $(azureresourceschema-folder)/schemas
 
 # all the input files in this apiVersion
 input-file:
-  - Microsoft.Authorization/preview/2020-09-01/policyAssignments.json
-  - Microsoft.Authorization/preview/2020-09-01/policyDefinitions.json
-  - Microsoft.Authorization/preview/2020-09-01/policySetDefinitions.json
-  - Microsoft.Authorization/preview/2020-09-01/dataPolicyManifests.json
+  - Microsoft.Authorization/stable/2020-09-01/policyAssignments.json
+  - Microsoft.Authorization/stable/2020-09-01/policyDefinitions.json
+  - Microsoft.Authorization/stable/2020-09-01/policySetDefinitions.json
+  - Microsoft.Authorization/stable/2020-09-01/dataPolicyManifests.json
 
 ```
 
