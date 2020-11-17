@@ -133,7 +133,6 @@
   "paths": {
     "/elevation/point/{format}": {
       "get": {
-        "x-publish": true,
         "summary": "Get elevation data on one or more points.",
         "description": "**Applies to**: S1 pricing tier.\nThe Get Data for Points API provides elevation data for one or more points.  A point is defined in lat/long coordinate format. Due to the URL character  length limit of 2048, it's not possible to pass more than 100 coordinates  as a pipeline delimited string in a URL GET request. If you intend to pass  more than 100 coordinates as a pipeline delimited string, use the [POST Data\n For Points](https://docs.microsoft.com/en-us/rest/api/maps/elevation/postdataforpoints).",
         "operationId": "Elevation_GetDataForPoints",
@@ -195,7 +194,6 @@
         }
       },
       "post": {
-        "x-publish": true,
         "summary": "Query elevation data for multiple points.",
         "description": "**Applies to**: S1 pricing tier.\nThe Post Data for Points API provides elevation data for multiple points.  A point is defined in lat/lon coordinate format. Use the POST endpoint only  if you intend to pass multiple points in the request. If you intend to pass  a single coordinate into the API, use the [GET Data For Points API](https://docs.microsoft.com/en-us/rest/api/maps/elevation/getdataforpoints).",
         "operationId": "Elevation_PostDataForPoints",
@@ -257,7 +255,6 @@
     },
     "/elevation/line/{format}": {
       "get": {
-        "x-publish": true,
         "summary": "Get elevation data along a polyline.",
         "description": "**Applies to**: S1 pricing tier.\n\nThe Get Data for Polyline API provides elevation data along a polyline. A polyline is defined by  passing in between 2 and N endpoint coordinates separated by a pipe ('|') character. In addition  to passing in endpoints, customers can specify number of sample points that will be used to divide  polyline into equally spaced segments. Elevation data at both start and end points and equally spaced  points along the polyline will be returned. A line between two endpoints is a straight Cartesian line, the  shortest line between those two points in the coordinate reference system. Note that the point is  chosen based on Euclidean distance and may markedly differ from the geodesic path along the curved  surface of the reference ellipsoid.",
         "operationId": "Elevation_GetDataForPolyline",
@@ -329,7 +326,6 @@
         }
       },
       "post": {
-        "x-publish": true,
         "summary": "Query elevation data along a polyline.",
         "description": "**Applies to**: S1 pricing tier.\nThe Post Data for Polyline API provides elevation data along a polyline. A polyline is defined by  passing in between 2 and N endpoint coordinates separated by a pipe ('|') character. In addition  to passing in endpoints, customers can specify number of sample points that will be used to divide  polyline into equally spaced segments. Elevation data at both start and end points and equally spaced  points along the polyline will be returned. A line between two endpoints is a straight Cartesian line, the  shortest line between those two points in the coordinate reference system. Note that the point is  chosen based on Euclidean distance and may markedly differ from the geodesic path along the curved  surface of the reference ellipsoid.",
         "operationId": "Elevation_PostDataForPolyline",
@@ -401,7 +397,6 @@
     },
     "/elevation/lattice/{format}": {
       "get": {
-        "x-publish": true,
         "summary": "Get elevation data at equally-spaced locations within a bounding box.",
         "description": "**Applies to**: S1 pricing tier.\n\nThe Get Data for Bounding Box API provides elevation data at equally-spaced locations within a bounding box.  A bounding box is defined by the coordinates for two corners (southwest, northeast) and then subsequently  divided into rows and columns. Elevations are returned for the vertices of the grid created by the rows and  columns. Up to 2000 elevations can be returned in a single request. The returned elevation values are ordered,  starting at the southwest corner, and then proceeding west to east along the row. At the end of the row,  it moves north to the next row, and repeats the process until it reaches the far northeast corner.",
         "operationId": "Elevation_GetDataForBoundingBox",
