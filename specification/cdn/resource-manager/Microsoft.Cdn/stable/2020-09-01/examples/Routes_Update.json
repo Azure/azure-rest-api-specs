@@ -13,7 +13,7 @@
             "id": "/subscriptions/subid/resourceGroups/RG/providers/Microsoft.Cdn/profiles/profile1/customDomains/domain1"
           }
         ],
-        "originGroups": {
+        "originGroup": {
           "id": "/subscriptions/subid/resourceGroups/RG/providers/Microsoft.Cdn/profiles/profile1/originGroups/originGroup1"
         },
         "originPath": null,
@@ -39,8 +39,8 @@
         "queryStringCachingBehavior": "IgnoreQueryString",
         "optimizationType": "DynamicSiteAcceleration",
         "forwardingProtocol": "MatchRequest",
-        "linkToDefaultDomain": true,
-        "HTTPSRedirect": "Enabled",
+        "linkToDefaultDomain": "Enabled",
+        "httpsRedirect": "Enabled",
         "enabledState": "Enabled"
       }
     }
@@ -95,10 +95,9 @@
         ]
       }
     },
-    "201": {
+    "202": {
       "body": {
-        "value": [
-          {
+        
             "name": "route1",
             "id": "/subscriptions/subid/resourcegroups/RG/providers/Microsoft.Cdn/profiles/profile1/afdendpoints/endpoint1/routes/route1",
             "type": "Microsoft.Cdn/profiles/afdendpoints/routes",
@@ -141,8 +140,6 @@
               "deploymentStatus": "NotStarted"
             }
           }
-        ]
-      }
     }
   }
 }
