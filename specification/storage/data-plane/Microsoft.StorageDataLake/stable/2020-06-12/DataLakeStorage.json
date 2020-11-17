@@ -482,7 +482,7 @@
         }
       ]
     },
-    "/{containerName}?restype=container&comp=list&hierarchy": {
+    "/{filesystem}?restype=container&comp=list&hierarchy": {
       "get": {
         "tags": [
           "containers"
@@ -3204,18 +3204,6 @@
           "x-ms-client-name": "blobSequenceNumber",
           "type": "integer",
           "format": "int64"
-        },
-        "BlobType": {
-          "type": "string",
-          "enum": [
-            "BlockBlob",
-            "PageBlob",
-            "AppendBlob"
-          ],
-          "x-ms-enum": {
-            "name": "BlobType",
-            "modelAsString": false
-          }
         },
         "CopyId": {
           "type": "string"
