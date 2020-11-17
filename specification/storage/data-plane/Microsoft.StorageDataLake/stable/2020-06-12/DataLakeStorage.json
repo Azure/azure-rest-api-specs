@@ -2918,7 +2918,7 @@
       "description": "Include this parameter to specify one or more datasets to include in the response."
     },
     "ListBlobsShowOnly": {
-      "name": "include",
+      "name": "showonly",
       "in": "query",
       "required": false,
       "type": "string",
@@ -3144,12 +3144,8 @@
         "Properties": {
           "$ref": "#/definitions/BlobPropertiesInternal"
         },
-        "RemainingRetentionDays": {
-          "type": "integer"
-        },
-        "DeleteTime": {
-          "type": "string",
-          "format": "date-time-rfc1123"
+        "DeletionId": {
+          "type": "string"
         }
       }
     },
@@ -3268,8 +3264,9 @@
           "type": "string",
           "format": "date-time-rfc1123"
         },
-        "DeletionId": {
-          "type": "string"
+        "DeleteTime": {
+          "type": "string",
+          "format": "date-time-rfc1123"
         }
       }
     },
