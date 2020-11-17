@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "PolicyClient",
-    "version": "2020-03-01",
+    "version": "2020-09-01",
     "description": "To manage and control access to your resources, you can define customized policies and assign them at a scope."
   },
   "host": "management.azure.com",
@@ -95,6 +95,9 @@
         "x-ms-examples": {
           "Create or update a policy assignment": {
             "$ref": "./examples/createPolicyAssignment.json"
+          },
+          "Create or update a policy assignment with multiple non-compliance messages": {
+            "$ref": "./examples/createPolicyAssignmentNonComplianceMessages.json"
           },
           "Create or update a policy assignment with a managed identity": {
             "$ref": "./examples/createPolicyAssignmentWithIdentity.json"
@@ -636,9 +639,31 @@
               }
             ]
           }
+        },
+        "nonComplianceMessages": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NonComplianceMessage"
+          },
+          "description": "The messages that describe why a resource is non-compliant with the policy."
         }
       },
       "description": "The policy assignment properties."
+    },
+    "NonComplianceMessage": {
+      "properties": {
+        "message": {
+          "type": "string",
+          "description": "A message that describes why a resource is non-compliant with the policy. This is shown in 'deny' error messages and on resource's non-compliant compliance results."
+        },
+        "policyDefinitionReferenceId": {
+          "type": "string",
+          "description": "The policy definition reference ID within a policy set definition the message is intended for. This is only applicable if the policy assignment assigns a policy set definition. If this is not provided the message applies to all policies assigned by this policy assignment."
+        }
+      },
+      "required": [
+        "message"
+      ]
     },
     "ParameterValues": {
       "type": "object",
