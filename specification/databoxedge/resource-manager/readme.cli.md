@@ -12,6 +12,10 @@ cli:
         group: StorageAccountCredentials
         op: CreateOrUpdate.*
       hidden: true
+    - where:
+        group: StorageAccounts
+        op: CreateOrUpdate.*
+      hidden: true
   test-scenario:
     - name: DataBoxEdgeDevicePut
     - name: UserPut
