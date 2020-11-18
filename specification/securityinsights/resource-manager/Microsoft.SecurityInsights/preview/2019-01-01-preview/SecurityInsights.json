@@ -6879,9 +6879,23 @@
           "$ref": "#/definitions/EntityTimelineItem"
         },
         {
-          "$ref": "#/definitions/EntityQueryItem"
+          "$ref": "#/definitions/ActivityTimelineItemInner"
         }
       ],
+      "description": "Represents Activity timeline item."
+    },
+    "ActivityTimelineItemForQuery": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/EntityQueryItem"
+        },
+        {
+          "$ref": "#/definitions/ActivityTimelineItemInner"
+        }
+      ],
+      "description": "Represents Activity timeline item (used from queries)."
+    },
+    "ActivityTimelineItemInner": {
       "description": "Represents Activity timeline item.",
       "properties": {
         "queryId": {
