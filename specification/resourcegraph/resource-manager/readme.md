@@ -49,6 +49,7 @@ These settings apply only when `--tag=package-preview-2020-04` is specified on t
 input-file:
   - Microsoft.ResourceGraph/preview/2020-04-01-preview/resourcegraph.json
   - Microsoft.ResourceGraph/preview/2020-04-01-preview/resourcechanges.json
+  - Microsoft.ResourceGraph/preview/2020-04-01-preview/resourceshistory.json
 ```
 
 ### Tag: package-2019-04
