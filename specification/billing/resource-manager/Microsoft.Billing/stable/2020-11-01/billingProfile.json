@@ -276,6 +276,14 @@
           "items": {
             "$ref": "#/definitions/SpendingLimitDetails"
           }
+        },
+        "targetClouds": {
+          "description": "Identifies the cloud environments that are associated with a billing profile. This is a system managed optional field and gets updated as the billing profile gets associated with accounts in various clouds.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/TargetCloud"
+          }
         }
       }
     },
@@ -493,6 +501,19 @@
           "$ref": "#/definitions/TargetCloud",
           "readOnly": true
         }
+      }
+    },
+    "TargetCloud": {
+      "type": "string",
+      "description": "Possible cloud environments.",
+      "enum": [
+        "USGov",
+        "USNat",
+        "USSec"
+      ],
+      "x-ms-enum": {
+        "name": "targetCloud",
+        "modelAsString": true
       }
     },
     "ErrorResponse": {

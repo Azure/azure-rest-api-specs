@@ -439,19 +439,26 @@
           "description": "Billing address.",
           "$ref": "#/definitions/AddressDetails"
         },
+        "invoiceEmailOptIn": {
+          "description": "Flag controlling whether the invoices for the billing profile are sent through email.",
+          "type": "boolean"
+        },
         "indirectRelationshipInfo": {
           "description": "Identifies the billing profile that is linked to another billing profile in indirect purchase motion.",
           "readOnly": true,
           "$ref": "#/definitions/IndirectRelationshipInfo"
         },
-        "invoiceEmailOptIn": {
-          "description": "Flag controlling whether the invoices for the billing profile are sent through email.",
-          "type": "boolean"
-        },
         "invoiceDay": {
           "description": "The day of the month when the invoice for the billing profile is generated.",
           "type": "integer",
           "readOnly": true
+        },
+        "invoiceRecipients": {
+          "description": "The list of email addresses to receive invoices by email for the billing profile.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         },
         "currency": {
           "description": "The currency in which the charges for the billing profile are billed.",
@@ -525,6 +532,14 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/spendingLimitDetails"
+          }
+        },
+        "targetClouds": {
+          "description": "Identifies the cloud environments that are associated with a billing profile. This is a system managed optional field and gets updated as the billing profile gets associated with accounts in various clouds.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/TargetCloud"
           }
         }
       }      
@@ -862,6 +877,19 @@
             "modelAsString": true
           }
         }
+      }
+    },
+    "TargetCloud": {
+      "type": "string",
+      "description": "Possible cloud environments.",
+      "enum": [
+        "USGov",
+        "USNat",
+        "USSec"
+      ],
+      "x-ms-enum": {
+        "name": "targetCloud",
+        "modelAsString": true
       }
     },
     "ErrorResponse": {
