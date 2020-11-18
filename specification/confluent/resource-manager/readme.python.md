@@ -16,7 +16,6 @@ python:
   clear-output-folder: true
 ```
 ``` yaml $(python) && $(track2)
-python-mode: create
 azure-arm: true
 license-header: MICROSOFT_MIT_NO_VERSION
 payload-flattening-threshold: 2
@@ -25,17 +24,24 @@ package-name: azure-mgmt-confluent
 package-version: 1.0.0b1
 clear-output-folder: true
 ```
-``` yaml $(python) && $(python-mode) == 'update'
+``` yaml $(python) && $(python-mode) == 'update' && !$(track2)
 python:
   no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-confluent/azure/mgmt/confluent
-no-namespace-folders: true
-output-folder: $(python-sdks-folder)/azure-mgmt-confluent/azure/mgmt/confluent
+  output-folder: $(python-sdks-folder)/confluent/azure-mgmt-confluent/azure/mgmt/confluent
 ```
-``` yaml $(python) && $(python-mode) == 'create'
+
+``` yaml $(python) && $(python-mode) == 'create' && !$(track2)
 python:
   basic-setup-py: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-confluent
+  output-folder: $(python-sdks-folder)/confluent/azure-mgmt-confluent
+```
+
+``` yaml $(python) && $(python-mode) == 'update' && $(track2)
+no-namespace-folders: true
+output-folder: $(python-sdks-folder)/confluent/azure-mgmt-confluent/azure/mgmt/confluent
+```
+
+``` yaml $(python) && $(python-mode) == 'create' && $(track2)
 basic-setup-py: true
-output-folder: $(python-sdks-folder)/azure-mgmt-confluent
+output-folder: $(python-sdks-folder)/confluent/azure-mgmt-confluent
 ```

@@ -9,5 +9,25 @@ az:
   package-name: azure-mgmt-confluent
 az-output-folder: $(azure-cli-extension-folder)/src/confluent
 python-sdk-output-folder: "$(az-output-folder)/azext_confluent/vendored_sdks/confluent"
+
+directive:
+  - where:
+      group: marketplace-agreement
+    set:
+      group: terms
+cli:
+  cli-directive:
+    - where:
+        group: MarketplaceAgreements
+        op: Create
+      hidden: true
+    - where:
+        group: OrganizationOperations
+      hidden: true
+    - where:
+        group: Organization
+        op: Create
+        param: provisioningState
+      hidden: true
 ```
 
