@@ -64,6 +64,16 @@ These settings apply only when `--tag=package-2019-03` is specified on the comma
 input-file:
 - Microsoft.DataBoxEdge/stable/2019-03-01/databoxedge.json
 ```
+
+### Tag: profile-hybrid-2020-09-01
+
+These settings apply only when `--tag=profile-hybrid-2020-09-01` is specified on the command line.
+
+``` yaml $(tag) == 'profile-hybrid-2020-09-01'
+input-file:
+- Microsoft.DataBoxEdge/stable/2019-08-01/databoxedge.json
+```
+
 ---
 # Code Generation
 
