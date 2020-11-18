@@ -8,7 +8,7 @@ python:
   azure-arm: true
   license-header: MICROSOFT_MIT_NO_VERSION
   payload-flattening-threshold: 2
-  namespace: Microsoft.SaaS
+  namespace: microsoft.saas
   package-name: saas
   package-version: 2018-03-01-beta
   clear-output-folder: true
