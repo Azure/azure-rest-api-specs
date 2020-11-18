@@ -3776,7 +3776,8 @@
             "ModifyResponseHeader",
             "UrlRedirect",
             "UrlRewrite",
-            "UrlSigning"
+            "UrlSigning",
+            "OriginGroupOverride"
           ],
           "x-ms-enum": {
             "name": "DeliveryRuleAction",
@@ -3934,6 +3935,44 @@
         "paramName": {
           "description": "Parameter name",
           "type": "string"
+        }
+      }
+    },
+    "OriginGroupOverrideAction": {
+      "description": "Defines the origin group override action for the delivery rule.",
+      "x-ms-discriminator-value": "OriginGroupOverride",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DeliveryRuleAction"
+        }
+      ],
+      "required": [
+        "parameters"
+      ],
+      "properties": {
+        "parameters": {
+          "description": "Defines the parameters for the action.",
+          "$ref": "#/definitions/OriginGroupOverrideActionParameters"
+        }
+      }
+    },
+    "OriginGroupOverrideActionParameters": {
+      "description": "Defines the parameters for the origin group override action.",
+      "required": [
+        "originGroup",
+        "@odata.type"
+      ],
+      "properties": {
+        "@odata.type": {
+          "type": "string",
+          "enum": [
+            "#Microsoft.Azure.Cdn.Models.DeliveryRuleOriginGroupOverrideActionParameters"
+          ]
+        },
+        "originGroup": {
+          "description": "defines the OriginGroup that would override the DefaultOriginGroup.",
+          "type": "object",
+          "$ref": "#/definitions/ResourceReference"
         }
       }
     },
