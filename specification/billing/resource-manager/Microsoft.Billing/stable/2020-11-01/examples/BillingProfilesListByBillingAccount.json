@@ -1,13 +1,12 @@
 {
   "parameters": {
-    "api-version": "2020-05-01",
+    "api-version": "2020-11-01",
     "billingAccountName": "{billingAccountName}"
   },
   "responses": {
     "200": {
       "body": {
-        "value": [
-          {
+        "value": [{
             "id": "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/11000000-0000-0000-0000-000000000000",
             "name": "11000000-0000-0000-0000-000000000000",
             "type": "Microsoft.Billing/billingAccounts/billingProfiles",
@@ -28,8 +27,7 @@
                 "phoneNumber": "000-000-0000"
               },
               "currency": "USD",
-              "enabledAzurePlans": [
-                {
+              "enabledAzurePlans": [{
                   "skuId": "0001",
                   "skuDescription": "Microsoft Azure Plan"
                 },
@@ -44,8 +42,16 @@
               "hasReadAccess": true,
               "systemId": "1XXX-11XX-XX1-XXXX-XXX",
               "status": "Warned",
-              "statusReasonCode": "PastDue",
-              "spendingLimit": "On"
+              "statusReasonCode": "Active",
+              "spendingLimit": "On",
+              "spendingLimitDetails": [{
+                "amount": "200",
+                "currency": "USD",
+                "endDate": "2018-01-01T17:32:28Z",
+                "startDate": "2018-01-01T17:32:28Z",
+                "type": "FreeAccount",
+                "spendingLimitStatus": "Active"
+              }]
             }
           },
           {
@@ -69,8 +75,7 @@
                 "phoneNumber": "000-000-0000"
               },
               "currency": "USD",
-              "enabledAzurePlans": [
-                {
+              "enabledAzurePlans": [{
                   "skuId": "0001",
                   "skuDescription": "Microsoft Azure Plan"
                 },

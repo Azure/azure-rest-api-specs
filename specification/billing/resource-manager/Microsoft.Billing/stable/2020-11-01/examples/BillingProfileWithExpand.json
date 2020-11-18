@@ -1,6 +1,6 @@
 {
   "parameters": {
-    "api-version": "2020-05-01",
+    "api-version": "2020-11-01",
     "billingAccountName": "{billingAccountName}",
     "billingProfileName": "{billingProfileName}",
     "$expand": "invoiceSections"
@@ -28,8 +28,7 @@
             "phoneNumber": "000-000-0000"
           },
           "currency": "USD",
-          "enabledAzurePlans": [
-            {
+          "enabledAzurePlans": [{
               "skuId": "0001",
               "skuDescription": "Microsoft Azure Plan"
             },
@@ -44,25 +43,31 @@
           "hasReadAccess": true,
           "systemId": "1XXX-11XX-XX1-XXXX-XXX",
           "status": "Warned",
-          "statusReasonCode": "PastDue",
+          "statusReasonCode": "Disabled",
           "spendingLimit": "On",
+          "spendingLimitDetails": [{
+            "amount": "200",
+            "currency": "USD",
+            "endDate": "2018-01-01T17:32:28Z",
+            "startDate": "2018-01-01T17:32:28Z",
+            "type": "FreeAccount",
+            "spendingLimitStatus": "LimitReached"
+          }],
           "invoiceSections": {
             "hasMoreResults": false,
-            "value": [
-              {
-                "id": "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/invoiceSections/invoiceSectionId1",
-                "name": "invoiceSectionId1",
-                "type": "Microsoft.Billing/billingAccounts/billingProfiles/invoiceSections",
-                "properties": {
-                  "displayName": "invoiceSectionName1",
-                  "tags": {
-                    "pcCode": "A123456",
-                    "costCategory": "Support"
-                  },
-                  "systemId": "9XXX-11XX-XX1-XXXX-XXX"
-                }
+            "value": [{
+              "id": "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/invoiceSections/invoiceSectionId1",
+              "name": "invoiceSectionId1",
+              "type": "Microsoft.Billing/billingAccounts/billingProfiles/invoiceSections",
+              "properties": {
+                "displayName": "invoiceSectionName1",
+                "tags": {
+                  "pcCode": "A123456",
+                  "costCategory": "Support"
+                },
+                "systemId": "9XXX-11XX-XX1-XXXX-XXX"
               }
-            ]
+            }]
           }
         }
       }
