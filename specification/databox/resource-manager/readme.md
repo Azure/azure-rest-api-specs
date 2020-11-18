@@ -108,6 +108,15 @@ csharp:
   clear-output-folder: true
 ```
 
+### Shipping address required properties as of 2020-04-01
+``` yaml
+directive:
+- from: swagger-document
+  where: $.definitions.ShippingAddress
+  transform: >
+    $.required = [ "streetAddress1", "country", "postalCode" ];
+```
+
 ## Python
 
 See configuration in [readme.python.md](./readme.python.md)
