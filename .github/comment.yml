@@ -2,14 +2,6 @@
 - rule:
     type: checkbox
     keywords:
-      - "Removing API(s)"
-      - "Updating API in stable version"
-    onCheckedLabels:
-      - breakingChange
-
-- rule:
-    type: checkbox
-    keywords:
       - "WaitForARMFeedback"
     booleanFilterExpression: "!(ARMSignedOff||ARMChangesRequested||Approved-OkToMerge||WaitForARMRevisit)"
     onCheckedLabels:
@@ -25,9 +17,9 @@
 - rule:
     type: label
     label: BreakingChangeReviewRequired
-    onLabeledComments: "Hi @${PRAuthor}, one or multiple breaking change(s) is detected in your PR. Pls follow [breaking change policy](https://aka.ms/AzBreakingChangesPolicy) to request breaking change review and approval before proceeding swagger PR review. "
+    onLabeledComments: "Hi @${PRAuthor}, one or multiple breaking change(s) is detected in your PR. Please check out the breaking change(s), and provide business justification in the PR comment and @ PR assignee why you must have these change(s), and how external customer impact can be mitigated. Please ensure to follow [breaking change policy](https://aka.ms/AzBreakingChangesPolicy) to request breaking change review and approval before proceeding swagger PR review. </br>**Action**: To initiate an evaluation of the breaking change, create a new intake using the [template for breaking changes](https://msazure.visualstudio.com/One/_workitems/create/Scenario?templateId=d1c215ec-5d6a-4cb3-a193-95ddd0a1ba96&ownerId=85bb92fb-21fe-41ca-9309-47f2c5f57515). Addition details on the process and office hours are on the [Breaking change Wiki](https://dev.azure.com/msazure/AzureWiki/_wiki/wikis/AzureWiki.wiki/37684/Breaking-Changes).</br> If you think it is false positive breaking change, please provide the reasons in the PR comment, report to Swagger Tooling Team via https://aka.ma/swaggerfeedback."
 
 - rule:
     type: label
-    label: ApprovedOkToMerge
+    label: Approved-OkToMerge
     onLabeledComments: "Hi @${PRAuthor},Your PR is approved. Congratulations. </br> <li> If your PR is in public repo (azure-rest-api-specs),  PR assignee will merge all updates in the PR shortly afterwards; or pause the PR merge, you need to put on a label <b>DoNotMerge</b> to PR as soon as possible. </li><li>If your PR is in private repo (azure-rest-api-specs-pr),  there won’t be PR merge.  Please refer to this [wiki](https://dev.azure.com/azure-sdk/internal/_wiki/wikis/internal.wiki/205/RP-Scenarios-to-Contribute-to-Swagger?anchor=**public-repository-vs.-private-repository**) for further guidance on how to proceed. </li>"

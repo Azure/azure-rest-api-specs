@@ -2140,6 +2140,57 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/entities/{entityId}/getTimeline": {
+      "post": {
+        "x-ms-examples": {
+          "Entity timeline": {
+            "$ref": "./examples/entities/timeline/PostTimelineEntity.json"
+          }
+        },
+        "tags": [
+          "Entities"
+        ],
+        "description": "Timeline for an entity.",
+        "operationId": "EntitiesGetTimeline_list",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/OperationalInsightsResourceProvider"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/EntityId"
+          },
+          {
+            "$ref": "#/parameters/EntityTimelineRequestBody"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/EntityTimelineResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/entities/{entityId}/relations": {
       "get": {
         "x-ms-examples": {
@@ -3150,14 +3201,14 @@
       },
       "put": {
         "x-ms-examples": {
-          "Creates an incident comment.": {
+          "Creates or updates an incident comment.": {
             "$ref": "./examples/incidents/comments/CreateIncidentComment.json"
           }
         },
         "tags": [
           "IncidentComments"
         ],
-        "description": "Creates the incident comment.",
+        "description": "Creates or updates the incident comment.",
         "operationId": "IncidentComments_CreateComment",
         "parameters": [
           {
@@ -3186,11 +3237,66 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/IncidentComment"
+            }
+          },
           "201": {
             "description": "Created",
             "schema": {
               "$ref": "#/definitions/IncidentComment"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "delete": {
+        "x-ms-examples": {
+          "Delete the incident comment.": {
+            "$ref": "./examples/incidents/comments/DeleteIncidentComment.json"
+          }
+        },
+        "tags": [
+          "IncidentComments"
+        ],
+        "description": "Delete the incident comment.",
+        "operationId": "IncidentComments_DeleteComment",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/OperationalInsightsResourceProvider"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/IncidentId"
+          },
+          {
+            "$ref": "#/parameters/IncidentCommentId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "No Content"
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -3481,7 +3587,7 @@
         "tags": [
           "Watchlists"
         ],
-        "description": "Gets all watchlists.",
+        "description": "Gets all watchlists, without watchlist items.",
         "operationId": "Watchlists_List",
         "parameters": [
           {
@@ -3519,51 +3625,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/watchlists": {
-      "get": {
-        "x-ms-examples": {
-          "Get all watchlists.": {
-            "$ref": "./examples/watchlists/GetWatchlists.json"
-          }
-        },
-        "tags": [
-          "Watchlists"
-        ],
-        "description": "Gets all watchlists in a subscription.",
-        "operationId": "Watchlists_ListBySubscription",
-        "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersion"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionId"
-          },
-          {
-            "$ref": "#/parameters/OperationalInsightsResourceProvider"
-          },
-          {
-            "$ref": "#/parameters/WorkspaceName"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/WatchlistList"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/watchlists/{watchlistAlias}": {
       "get": {
         "x-ms-examples": {
@@ -3574,7 +3635,7 @@
         "tags": [
           "Watchlists"
         ],
-        "description": "Gets a watchlist.",
+        "description": "Gets a watchlist, without its watchlist items.",
         "operationId": "Watchlists_Get",
         "parameters": [
           {
@@ -3666,7 +3727,7 @@
         "tags": [
           "Watchlists"
         ],
-        "description": "Creates a watchlist",
+        "description": "Creates a watchlist and its watchlist items (bulk creation, e.g. through text/csv content type). To create a Watchlist and its Items, we should call this endpoint twice : the first call will create am empty Watchlist, and the second one will create its Items.",
         "operationId": "Watchlists_Create",
         "parameters": [
           {
@@ -3723,8 +3784,8 @@
         "tags": [
           "ThreatIntelligence"
         ],
-        "description": "Create a threat intelligence.",
-        "operationId": "CreateThreatIntelligence",
+        "description": "Create a new threat intelligence indicator.",
+        "operationId": "ThreatIntelligenceIndicator_CreateIndicator",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersion"
@@ -3742,24 +3803,24 @@
             "$ref": "#/parameters/WorkspaceName"
           },
           {
-            "$ref": "#/parameters/ThreatIntelligenceIndicatorObjectToUpsert"
+            "$ref": "#/parameters/ThreatIntelligenceProperties"
           }
         ],
         "responses": {
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/ThreatIntelligenceResource"
+              "$ref": "#/definitions/ThreatIntelligenceInformation"
             }
           },
           "201": {
             "description": "Created",
             "schema": {
-              "$ref": "#/definitions/ThreatIntelligenceResource"
+              "$ref": "#/definitions/ThreatIntelligenceInformation"
             }
           },
           "default": {
-            "description": "Error response describing why the operation failed.",
+            "description": "Error response describing why the operation failed to create indicators.",
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
@@ -3770,14 +3831,14 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/threatIntelligence/main/indicators": {
       "get": {
         "x-ms-examples": {
-          "Get all threat intelligence.": {
+          "Get all threat intelligence indicators": {
             "$ref": "./examples/threatintelligence/GetThreatIntelligence.json"
           }
         },
         "tags": [
           "ThreatIntelligence"
         ],
-        "description": "Gets all threat intelligence.",
+        "description": "Get all threat intelligence indicators.",
         "operationId": "ThreatIntelligenceIndicators_List",
         "parameters": [
           {
@@ -3812,11 +3873,11 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/ThreatIntelligenceResourceList"
+              "$ref": "#/definitions/ThreatIntelligenceInformationList"
             }
           },
           "default": {
-            "description": "Error response describing why the operation failed.",
+            "description": "Error response describing why the operation failed to get indicators.",
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
@@ -3830,14 +3891,14 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/threatIntelligence/main/indicators/{name}": {
       "get": {
         "x-ms-examples": {
-          "Get a threat intelligence indicator by name.": {
+          "View a threat intelligence indicator by name": {
             "$ref": "./examples/threatintelligence/GetThreatIntelligenceById.json"
           }
         },
         "tags": [
           "ThreatIntelligence"
         ],
-        "description": "Gets a threat intelligence indicator.",
+        "description": "View a threat intelligence indicator by name.",
         "operationId": "ThreatIntelligenceIndicator_Get",
         "parameters": [
           {
@@ -3856,18 +3917,18 @@
             "$ref": "#/parameters/WorkspaceName"
           },
           {
-            "$ref": "#/parameters/ThreatIntelligenceIdentifier"
+            "$ref": "#/parameters/ThreatIntelligenceName"
           }
         ],
         "responses": {
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/ThreatIntelligenceResource"
+              "$ref": "#/definitions/ThreatIntelligenceInformation"
             }
           },
           "default": {
-            "description": "Error response describing why the operation failed.",
+            "description": "Error response describing why the operation failed to view an indicator.",
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
@@ -3876,15 +3937,15 @@
       },
       "put": {
         "x-ms-examples": {
-          "Upsert the Threat Intelligence": {
-            "$ref": "./examples/threatintelligence/UpsertThreatIntelligence.json"
+          "Update a threat Intelligence indicator": {
+            "$ref": "./examples/threatintelligence/UpdateThreatIntelligence.json"
           }
         },
         "tags": [
           "ThreatIntelligence"
         ],
-        "description": "Upsert a threat intelligence.",
-        "operationId": "ThreatIntelligenceIndicatorUpsert_Create",
+        "description": "Update a threat Intelligence indicator.",
+        "operationId": "ThreatIntelligenceIndicator_Create",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersion"
@@ -3902,27 +3963,27 @@
             "$ref": "#/parameters/WorkspaceName"
           },
           {
-            "$ref": "#/parameters/ThreatIntelligenceIdentifier"
+            "$ref": "#/parameters/ThreatIntelligenceName"
           },
           {
-            "$ref": "#/parameters/ThreatIntelligenceIndicatorObjectToUpsert"
+            "$ref": "#/parameters/ThreatIntelligenceProperties"
           }
         ],
         "responses": {
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/ThreatIntelligenceResource"
+              "$ref": "#/definitions/ThreatIntelligenceInformation"
             }
           },
           "201": {
             "description": "Created",
             "schema": {
-              "$ref": "#/definitions/ThreatIntelligenceResource"
+              "$ref": "#/definitions/ThreatIntelligenceInformation"
             }
           },
           "default": {
-            "description": "Error response describing why the operation failed.",
+            "description": "Error response describing why the operation failed to update an indicator.",
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
@@ -3931,14 +3992,14 @@
       },
       "delete": {
         "x-ms-examples": {
-          "Delete the Threat Intelligence": {
+          "Delete a threat intelligence indicator": {
             "$ref": "./examples/threatintelligence/DeleteThreatIntelligence.json"
           }
         },
         "tags": [
           "ThreatIntelligence"
         ],
-        "description": "Delete a threat intelligence.",
+        "description": "Delete a threat intelligence indicator.",
         "operationId": "ThreatIntelligenceIndicator_Delete",
         "parameters": [
           {
@@ -3957,7 +4018,7 @@
             "$ref": "#/parameters/WorkspaceName"
           },
           {
-            "$ref": "#/parameters/ThreatIntelligenceIdentifier"
+            "$ref": "#/parameters/ThreatIntelligenceName"
           }
         ],
         "responses": {
@@ -3968,7 +4029,7 @@
             "description": "No Content"
           },
           "default": {
-            "description": "Error response describing why the operation failed.",
+            "description": "Error response describing why the operation failed to delete an indicator.",
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
@@ -3979,15 +4040,15 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/threatIntelligence/main/queryIndicators": {
       "post": {
         "x-ms-examples": {
-          "Get all threat intelligence.": {
+          "Query threat intelligence indicators as per filtering criteria": {
             "$ref": "./examples/threatintelligence/QueryThreatIntelligence.json"
           }
         },
         "tags": [
           "ThreatIntelligence"
         ],
-        "description": "Query all threat intelligence.",
-        "operationId": "ThreatIntelligenceIndicatorsList_Query",
+        "description": "Query threat intelligence indicators as per filtering criteria.",
+        "operationId": "ThreatIntelligenceIndicator_QueryIndicators",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersion"
@@ -4005,14 +4066,14 @@
             "$ref": "#/parameters/WorkspaceName"
           },
           {
-            "$ref": "#/parameters/ThreatIntelligenceArmStixQuery"
+            "$ref": "#/parameters/ThreatIntelligenceFilteringCriteria"
           }
         ],
         "responses": {
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/ThreatIntelligenceResourceList"
+              "$ref": "#/definitions/ThreatIntelligenceInformationList"
             }
           },
           "default": {
@@ -4037,8 +4098,8 @@
         "tags": [
           "ThreatIntelligence"
         ],
-        "description": "Get the threat intelligence metrics.",
-        "operationId": "ThreatIntelligenceIndicatorMetrics_Get",
+        "description": "Get threat intelligence indicators metrics (Indicators counts by Type, Threat Type, Source).",
+        "operationId": "ThreatIntelligenceIndicatorMetrics_List",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersion"
@@ -4054,20 +4115,17 @@
           },
           {
             "$ref": "#/parameters/WorkspaceName"
-          },
-          {
-            "$ref": "#/parameters/ThreatIntelligenceIndicatorEntityKind"
           }
         ],
         "responses": {
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/ThreatIntelligenceMetricResourceList"
+              "$ref": "#/definitions/ThreatIntelligenceMetricsList"
             }
           },
           "default": {
-            "description": "Error response describing why the operation failed.",
+            "description": "Error response describing why the operation failed to get metrics.",
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
@@ -4078,14 +4136,14 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/threatIntelligence/main/indicators/{name}/appendTags": {
       "post": {
         "x-ms-examples": {
-          "Append tags to a Threat Intelligence": {
+          "Append tags to a threat intelligence indicator": {
             "$ref": "./examples/threatintelligence/AppendTagsThreatIntelligence.json"
           }
         },
         "tags": [
           "ThreatIntelligence"
         ],
-        "description": "Append tags to a threat intelligence.",
+        "description": "Append tags to a threat intelligence indicator.",
         "operationId": "ThreatIntelligenceIndicator_AppendTags",
         "parameters": [
           {
@@ -4104,10 +4162,10 @@
             "$ref": "#/parameters/WorkspaceName"
           },
           {
-            "$ref": "#/parameters/ThreatIntelligenceIdentifier"
+            "$ref": "#/parameters/ThreatIntelligenceName"
           },
           {
-            "$ref": "#/parameters/ThreatIntelligenceAppendTagsRequestBody"
+            "$ref": "#/parameters/ThreatIntelligenceAppendTags"
           }
         ],
         "responses": {
@@ -4115,7 +4173,7 @@
             "description": "OK"
           },
           "default": {
-            "description": "Error response describing why the operation failed.",
+            "description": "Error response describing why the operation failed to append tags.",
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
@@ -4133,7 +4191,7 @@
         "tags": [
           "ThreatIntelligence"
         ],
-        "description": "Replace tags to a threat intelligence.",
+        "description": "Replace tags added to a threat intelligence indicator.",
         "operationId": "ThreatIntelligenceIndicator_ReplaceTags",
         "parameters": [
           {
@@ -4152,21 +4210,21 @@
             "$ref": "#/parameters/WorkspaceName"
           },
           {
-            "$ref": "#/parameters/ThreatIntelligenceIdentifier"
+            "$ref": "#/parameters/ThreatIntelligenceName"
           },
           {
-            "$ref": "#/parameters/ThreatIntelligenceReplaceTagsModel"
+            "$ref": "#/parameters/ThreatIntelligenceReplaceTags"
           }
         ],
         "responses": {
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/ThreatIntelligenceResource"
+              "$ref": "#/definitions/ThreatIntelligenceInformation"
             }
           },
           "default": {
-            "description": "Error response describing why the operation failed.",
+            "description": "Error response describing why the operation failed to replace tags.",
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
@@ -6029,6 +6087,37 @@
         }
       }
     },
+    "EntityTimelineParameters": {
+      "description": "The parameters required to execute s timeline operation on the given entity.",
+      "properties": {
+        "kinds": {
+          "description": "Array of timeline Item kinds.",
+          "items": {
+            "$ref": "#/definitions/EntityTimelineKind"
+          },
+          "type": "array"
+        },
+        "startTime": {
+          "description": "The start timeline date, so the results returned are after this date.",
+          "format": "date-time",
+          "type": "string"
+        },
+        "endTime": {
+          "description": "The end timeline date, so the results returned are before this date.",
+          "format": "date-time",
+          "type": "string"
+        },
+        "numberOfBucket": {
+          "description": "The number of bucket for timeline queries aggregation.",
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "required": [
+        "startTime",
+        "endTime"
+      ]
+    },
     "EntityExpandResponse": {
       "description": "The entity expansion result operation response.",
       "properties": {
@@ -6048,6 +6137,22 @@
             }
           },
           "type": "object"
+        }
+      }
+    },
+    "EntityTimelineResponse": {
+      "description": "The entity timeline result operation response.",
+      "properties": {
+        "metaData": {
+          "$ref": "#/definitions/TimelineResultsMetadata",
+          "description": "The metadata from the timeline operation results."
+        },
+        "value": {
+          "description": "The timeline result values.",
+          "items": {
+            "$ref": "#/definitions/EntityTimelineItem"
+          },
+          "type": "array"
         }
       }
     },
@@ -6294,6 +6399,33 @@
       },
       "type": "object"
     },
+    "EntityTimelineKind": {
+      "description": "The entity query kind",
+      "enum": [
+        "Activity",
+        "Bookmark",
+        "SecurityAlert"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "EntityTimelineKind",
+        "values": [
+          {
+            "description": "activity",
+            "value": "Activity"
+          },
+          {
+            "description": "bookmarks",
+            "value": "Bookmark"
+          },
+          {
+            "description": "security alerts",
+            "value": "SecurityAlert"
+          }
+        ]
+      }
+    },
     "EntityQueryList": {
       "description": "List of all the entity queries.",
       "properties": {
@@ -6394,6 +6526,90 @@
         }
       },
       "type": "object"
+    },
+    "TimelineResultsMetadata": {
+      "description": "Expansion result metadata.",
+      "properties": {
+        "totalCount": {
+          "description": "the total items found for the timeline request",
+          "type": "integer",
+          "format": "int32"
+        },
+        "aggregations": {
+          "description": "timeline aggregation per kind",
+          "items": {
+            "$ref": "#/definitions/TimelineAggregation"
+          },
+          "type": "array"
+        },
+        "errors": {
+          "description": "information about the failure queries",
+          "items": {
+            "$ref": "#/definitions/TimelineError"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "totalCount",
+        "aggregations"
+      ],
+      "type": "object"
+    },
+    "TimelineError": {
+      "description": "Timeline Query Errors.",
+      "properties": {
+        "kind": {
+          "description": "the query kind",
+          "$ref": "#/definitions/EntityTimelineKind"
+        },
+        "queryId": {
+          "description": "the query id",
+          "type": "string"
+        },
+        "errorMessage": {
+          "description": "the error message",
+          "type": "string"
+        }
+      },
+      "required": [
+        "kind",
+        "errorMessage"
+      ],
+      "type": "object"
+    },
+    "TimelineAggregation": {
+      "description": "timeline aggregation information per kind",
+      "properties": {
+        "count": {
+          "description": "the total items found for a kind",
+          "type": "integer",
+          "format": "int32"
+        },
+        "kind": {
+          "description": "the query kind",
+          "$ref": "#/definitions/EntityTimelineKind"
+        }
+      },
+      "required": [
+        "kind",
+        "count"
+      ],
+      "type": "object"
+    },
+    "EntityTimelineItem": {
+      "description": "Entity timeline Item.",
+      "discriminator": "kind",
+      "type": "object",
+      "properties": {
+        "kind": {
+          "$ref": "#/definitions/EntityTimelineKind",
+          "description": "The entity query kind type."
+        }
+      },
+      "required": [
+        "kind"
+      ]
     },
     "FileEntity": {
       "allOf": [
@@ -6517,6 +6733,176 @@
         }
       },
       "type": "object"
+    },
+    "ActivityTimelineItem": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/EntityTimelineItem"
+        }
+      ],
+      "description": "Represents Activity timeline item.",
+      "properties": {
+        "queryId": {
+          "type": "string",
+          "description": "The activity query id."
+        },
+        "bucketStartTimeUTC": {
+          "format": "date-time",
+          "type": "string",
+          "description": "The grouping bucket start time."
+        },
+        "bucketEndTimeUTC": {
+          "format": "date-time",
+          "type": "string",
+          "description": "The grouping bucket end time."
+        },
+        "firstActivityTimeUTC": {
+          "format": "date-time",
+          "type": "string",
+          "description": "The time of the first activity in the grouping bucket."
+        },
+        "lastActivityTimeUTC": {
+          "format": "date-time",
+          "type": "string",
+          "description": "The time of the last activity in the grouping bucket."
+        },
+        "content": {
+          "type": "string",
+          "description": "The activity timeline content."
+        },
+        "title": {
+          "type": "string",
+          "description": "The activity timeline title."
+        }
+      },
+      "required": [
+        "queryId",
+        "bucketStartTimeUTC",
+        "bucketEndTimeUTC",
+        "firstActivityTimeUTC",
+        "lastActivityTimeUTC",
+        "content",
+        "title"
+      ],
+      "type": "object",
+      "x-ms-discriminator-value": "Activity"
+    },
+    "SecurityAlertTimelineItem": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/EntityTimelineItem"
+        }
+      ],
+      "description": "Represents security alert timeline item.",
+      "properties": {
+        "azureResourceId": {
+          "type": "string",
+          "description": "The alert azure resource id."
+        },
+        "productName": {
+          "type": "string",
+          "description": "The alert product name."
+        },
+        "displayName": {
+          "type": "string",
+          "description": "The alert name."
+        },
+        "severity": {
+          "$ref": "#/definitions/AlertSeverity",
+          "description": "The alert severity."
+        },
+        "endTimeUtc": {
+          "format": "date-time",
+          "type": "string",
+          "description": "The alert end time."
+        },
+        "startTimeUtc": {
+          "format": "date-time",
+          "type": "string",
+          "description": "The alert start time."
+        },
+        "timeGenerated": {
+          "format": "date-time",
+          "type": "string",
+          "description": "The alert generated time."
+        },
+        "alertType": {
+          "type": "string",
+          "description": "The name of the alert type."
+        }
+      },
+      "required": [
+        "azureResourceId",
+        "productName",
+        "displayName",
+        "severity",
+        "endTimeUtc",
+        "startTimeUtc",
+        "timeGenerated",
+        "alertType"
+      ],
+      "type": "object",
+      "x-ms-discriminator-value": "SecurityAlert"
+    },
+    "BookmarkTimelineItem": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/EntityTimelineItem"
+        }
+      ],
+      "description": "Represents bookmark timeline item.",
+      "properties": {
+        "azureResourceId": {
+          "type": "string",
+          "description": "The bookmark azure resource id."
+        },
+        "displayName": {
+          "type": "string",
+          "description": "The bookmark display name."
+        },
+        "notes": {
+          "type": "string",
+          "description": "The notes of the bookmark"
+        },
+        "endTimeUtc": {
+          "format": "date-time",
+          "type": "string",
+          "description": "The bookmark end time."
+        },
+        "startTimeUtc": {
+          "format": "date-time",
+          "type": "string",
+          "description": "TThe bookmark start time."
+        },
+        "eventTime": {
+          "format": "date-time",
+          "type": "string",
+          "description": "The bookmark event time."
+        },
+        "createdBy": {
+          "$ref": "#/definitions/UserInfo",
+          "description": "Describes a user that created the bookmark",
+          "type": "object"
+        },
+        "labels": {
+          "description": "List of labels relevant to this bookmark",
+          "items": {
+            "$ref": "#/definitions/Label"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "azureResourceId",
+        "displayName",
+        "notes",
+        "endTimeUtc",
+        "startTimeUtc",
+        "createdBy",
+        "labels"
+      ],
+      "type": "object",
+      "x-ms-discriminator-value": "Bookmark"
     },
     "FusionAlertRule": {
       "allOf": [
@@ -6939,7 +7325,7 @@
     "IncidentComment": {
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "#/definitions/ResourceWithEtag"
         }
       ],
       "description": "Represents an incident comment",
@@ -6977,6 +7363,12 @@
       "properties": {
         "createdTimeUtc": {
           "description": "The time the comment was created",
+          "format": "date-time",
+          "readOnly": true,
+          "type": "string"
+        },
+        "lastModifiedTimeUtc": {
+          "description": "The time the comment was updated",
           "format": "date-time",
           "readOnly": true,
           "type": "string"
@@ -7598,7 +7990,9 @@
             "Azure Security Center",
             "Azure Advanced Threat Protection",
             "Azure Active Directory Identity Protection",
-            "Azure Security Center for IoT"
+            "Azure Security Center for IoT",
+            "Office 365 Advanced Threat Protection",
+            "Microsoft Defender Advanced Threat Protection"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -9041,11 +9435,11 @@
           "$ref": "#/definitions/DataConnector"
         }
       ],
-      "description": "Represents threat intelligence data connector.",
+      "description": "Data connector to pull threat intelligence data from TIP products.",
       "properties": {
         "properties": {
           "$ref": "#/definitions/TIDataConnectorProperties",
-          "description": "TI (Threat Intelligence) data connector properties.",
+          "description": "Threat Intelligence Platforms data connector properties.",
           "x-ms-client-flatten": true
         }
       },
@@ -9053,7 +9447,7 @@
       "x-ms-discriminator-value": "ThreatIntelligence"
     },
     "TIDataConnectorDataTypes": {
-      "description": "The available data types for TI (Threat Intelligence) data connector.",
+      "description": "The available data types for Threat Intelligence Platforms data connector.",
       "properties": {
         "indicators": {
           "allOf": [
@@ -9061,7 +9455,7 @@
               "$ref": "#/definitions/DataConnectorDataTypeCommon"
             }
           ],
-          "description": "Data type for indicators connection.",
+          "description": "Data type for Threat Intelligence Platforms data connector.",
           "type": "object"
         }
       },
@@ -9073,7 +9467,7 @@
           "$ref": "#/definitions/DataConnectorTenantId"
         }
       ],
-      "description": "TI (Threat Intelligence) data connector properties.",
+      "description": "Threat Intelligence Platforms data connector properties.",
       "properties": {
         "dataTypes": {
           "$ref": "#/definitions/TIDataConnectorDataTypes",
@@ -9088,11 +9482,11 @@
           "$ref": "#/definitions/DataConnectorsCheckRequirements"
         }
       ],
-      "description": "Represents threat intelligence requirements check request.",
+      "description": "Threat Intelligence Platforms data connector check requirements",
       "properties": {
         "properties": {
           "$ref": "#/definitions/TICheckRequirementsProperties",
-          "description": "TI (Threat Intelligence) requirements check properties.",
+          "description": "Threat Intelligence Platforms data connector check required properties",
           "x-ms-client-flatten": true
         }
       },
@@ -9105,7 +9499,7 @@
           "$ref": "#/definitions/DataConnectorTenantId"
         }
       ],
-      "description": "TI (Threat Intelligence) requirements check properties.",
+      "description": "Threat Intelligence Platforms data connector required properties.",
       "properties": {},
       "type": "object"
     },
@@ -9115,11 +9509,11 @@
           "$ref": "#/definitions/DataConnector"
         }
       ],
-      "description": "Represents threat intelligence taxii data connector.",
+      "description": "Data connector to pull Threat intelligence data from TAXII 2.0/2.1 server",
       "properties": {
         "properties": {
           "$ref": "#/definitions/TiTaxiiDataConnectorProperties",
-          "description": "Threat intelligence taxii client data connector properties.",
+          "description": "Threat intelligence TAXII data connector properties.",
           "x-ms-client-flatten": true
         }
       },
@@ -9127,7 +9521,7 @@
       "x-ms-discriminator-value": "ThreatIntelligenceTaxii"
     },
     "TiTaxiiDataConnectorDataTypes": {
-      "description": "The available data types for Threat Intelligence taxii client data connector.",
+      "description": "The available data types for Threat Intelligence TAXII data connector.",
       "properties": {
         "taxiiClient": {
           "allOf": [
@@ -9135,7 +9529,7 @@
               "$ref": "#/definitions/DataConnectorDataTypeCommon"
             }
           ],
-          "description": "Data type for taxii client.",
+          "description": "Data type for TAXII connector.",
           "type": "object"
         }
       },
@@ -9147,35 +9541,35 @@
           "$ref": "#/definitions/DataConnectorTenantId"
         }
       ],
-      "description": "Threat Intelligence taxii client data connector properties.",
+      "description": "Threat Intelligence TAXII data connector properties.",
       "properties": {
         "workspaceId": {
           "description": "The workspace id.",
           "type": "string"
         },
         "friendlyName": {
-          "description": "The friendly name for taxii client connector.",
+          "description": "The friendly name for the TAXII server.",
           "type": "string"
         },
         "taxiiServer": {
-          "description": "The API root server for taxii client.",
+          "description": "The API root for the TAXII server.",
           "type": "string"
         },
         "collectionId": {
-          "description": "The taxii collection id.",
+          "description": "The collection id of the TAXII server.",
           "type": "string"
         },
         "userName": {
-          "description": "The taxii server user name.",
+          "description": "The userName for the TAXII server.",
           "type": "string"
         },
         "password": {
-          "description": "The taxii server password.",
+          "description": "The password for the TAXII server.",
           "type": "string"
         },
         "dataTypes": {
           "$ref": "#/definitions/TiTaxiiDataConnectorDataTypes",
-          "description": "The available data types for the connector."
+          "description": "The available data types for Threat Intelligence TAXII data connector."
         }
       },
       "type": "object"
@@ -9186,11 +9580,11 @@
           "$ref": "#/definitions/DataConnectorsCheckRequirements"
         }
       ],
-      "description": "Represents threat intelligence requirements check request.",
+      "description": "Threat Intelligence TAXII data connector check requirements",
       "properties": {
         "properties": {
           "$ref": "#/definitions/TiTaxiiCheckRequirementsProperties",
-          "description": "Ti Taxii (Threat Intelligence Taxii) requirements check properties.",
+          "description": "Threat Intelligence TAXII check required properties.",
           "x-ms-client-flatten": true
         }
       },
@@ -9203,7 +9597,7 @@
           "$ref": "#/definitions/DataConnectorTenantId"
         }
       ],
-      "description": "Threat Intelligence taxii client data connector properties.",
+      "description": "Threat Intelligence TAXII data connector required properties.",
       "type": "object"
     },
     "ThreatIntelligence": {
@@ -9570,22 +9964,16 @@
     "WatchlistProperties": {
       "description": "Describes watchlist properties",
       "properties": {
-        "createdTimeUtc": {
-          "description": "The time the watchlist was created",
-          "format": "date-time",
+        "watchlistId": {
+          "description": "The id (a Guid) of the watchlist",
           "type": "string"
-        },
-        "createdBy": {
-          "$ref": "#/definitions/UserInfo",
-          "description": "Describes a user that created the watchlist",
-          "type": "object"
         },
         "displayName": {
           "description": "The display name of the watchlist",
           "type": "string"
         },
-        "watchlistType": {
-          "description": "The type of the watchlist",
+        "provider": {
+          "description": "The provider of the watchlist",
           "type": "string"
         },
         "source": {
@@ -9600,82 +9988,16 @@
             "name": "source"
           }
         },
-        "provider": {
-          "description": "The provider of the watchlist",
+        "created": {
+          "description": "The time the watchlist was created",
+          "format": "date-time",
           "type": "string"
         },
-        "description": {
-          "description": "A description of the watchlist",
-          "type": "string"
-        },
-        "tenantId": {
-          "description": "The tenantId where the watchlist belongs to.",
-          "type": "string"
-        },
-        "workspaceId": {
-          "description": "The workspaceId where the watchlist belongs to.",
-          "type": "string"
-        },
-        "labels": {
-          "description": "List of labels relevant to this watchlist",
-          "items": {
-            "$ref": "#/definitions/Label"
-          },
-          "type": "array"
-        },
-        "notes": {
-          "description": "The notes of the watchlist",
-          "type": "string"
-        },
-        "lastUpdatedTimeUtc": {
+        "updated": {
           "description": "The last time the watchlist was updated",
           "format": "date-time",
           "type": "string"
         },
-        "updatedBy": {
-          "$ref": "#/definitions/UserInfo",
-          "description": "Describes a user that updated the watchlist",
-          "type": "object"
-        },
-        "defaultDuration": {
-          "description": "The default duration of a watchlist (in ISO 8601 duration format)",
-          "format": "duration",
-          "type": "string"
-        },
-        "watchlistItems": {
-          "description": "List of watchlist items.",
-          "items": {
-            "$ref": "#/definitions/WatchlistItem"
-          },
-          "type": "array"
-        }
-      },
-      "required": [
-        "displayName",
-        "source",
-        "provider"
-      ],
-      "type": "object"
-    },
-    "WatchlistItem": {
-      "allOf": [
-        {
-          "$ref": "#/definitions/Resource"
-        }
-      ],
-      "description": "Represents a Watchlist Item in Azure Security Insights.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/WatchlistItemProperties",
-          "description": "Watchlist item properties",
-          "x-ms-client-flatten": true
-        }
-      },
-      "type": "object"
-    },
-    "WatchlistItemProperties": {
-      "description": "Describes watchlist item properties",
-      "properties": {
         "createdBy": {
           "$ref": "#/definitions/UserInfo",
           "description": "Describes a user that created the watchlist",
@@ -9686,64 +10008,71 @@
           "description": "Describes a user that updated the watchlist",
           "type": "object"
         },
-        "watchlistItemName": {
-          "description": "Name of the watchlist item",
+        "description": {
+          "description": "A description of the watchlist",
           "type": "string"
         },
-        "watchlistItemPair": {
-          "description": "A key-value pair for a watchlist item",
-          "type": "object"
+        "watchlistType": {
+          "description": "The type of the watchlist",
+          "type": "string"
         },
-        "entityMapping": {
-          "description": "A key-value pair for a watchlist item entity mapping",
-          "type": "object"
+        "watchlistAlias": {
+          "description": "The alias of the watchlist",
+          "type": "string"
+        },
+        "isDeleted": {
+          "description": "A flag that indicates if the watchlist is deleted or not",
+          "type": "boolean"
+        },
+        "labels": {
+          "description": "List of labels relevant to this watchlist",
+          "items": {
+            "$ref": "#/definitions/Label"
+          },
+          "type": "array"
+        },
+        "defaultDuration": {
+          "description": "The default duration of a watchlist (in ISO 8601 duration format)",
+          "format": "duration",
+          "type": "string"
         },
         "tenantId": {
-          "description": "The tenantId to which this watchlist item belongs to",
+          "description": "The tenantId where the watchlist belongs to",
           "type": "string"
         },
-        "createdTimeUtc": {
-          "description": "The time the watchlist item was created",
-          "format": "date-time",
+        "numberOfLinesToSkip": {
+          "description": "The number of lines in a csv/tsv content to skip before the header",
+          "type": "integer",
+          "format": "int32"
+        },
+        "rawContent": {
+          "description": "The raw content that represents to watchlist items to create. In case of csv/tsv content type, it's the content of the file that will parsed by the endpoint",
           "type": "string"
         },
-        "lastUpdatedTimeUtc": {
-          "description": "The last time the watchlist item was updated",
-          "format": "date-time",
-          "type": "string"
-        },
-        "timeToLiveUtc": {
-          "description": "The time to live for the watchlist item",
-          "format": "date-time",
-          "type": "string"
-        },
-        "watchlistItemType": {
-          "description": "The type of the watchlist item",
-          "type": "string"
-        },
-        "watchlistId": {
-          "description": "The watchlist id of the parent of this watchlist item",
+        "contentType": {
+          "description": "The content type of the raw content. Example : text/csv or text/tsv ",
           "type": "string"
         }
       },
       "required": [
-        "watchlistId",
-        "watchlistItemPair"
+        "displayName",
+        "source",
+        "provider"
       ],
       "type": "object"
     },
-    "ThreatIntelligenceResourceList": {
-      "description": "List of all the threat intelligence entities.",
+    "ThreatIntelligenceInformationList": {
+      "description": "List of all the threat intelligence information objects.",
       "properties": {
         "nextLink": {
-          "description": "URL to fetch the next set of entities.",
+          "description": "URL to fetch the next set of information objects.",
           "readOnly": true,
           "type": "string"
         },
         "value": {
-          "description": "Array of threat intelligence entities.",
+          "description": "Array of threat intelligence information objects.",
           "items": {
-            "$ref": "#/definitions/ThreatIntelligenceResource"
+            "$ref": "#/definitions/ThreatIntelligenceInformation"
           },
           "type": "array"
         }
@@ -9752,7 +10081,7 @@
         "value"
       ]
     },
-    "ThreatIntelligenceResource": {
+    "ThreatIntelligenceInformation": {
       "allOf": [
         {
           "$ref": "#/definitions/ResourceWithEtag"
@@ -9761,7 +10090,7 @@
           "$ref": "#/definitions/ThreatIntelligenceResourceKind"
         }
       ],
-      "description": "Threat intelligence resource.",
+      "description": "Threat intelligence information object.",
       "discriminator": "kind",
       "type": "object",
       "required": [
@@ -9771,7 +10100,7 @@
     "ThreatIntelligenceIndicatorModel": {
       "allOf": [
         {
-          "$ref": "#/definitions/ThreatIntelligenceResource"
+          "$ref": "#/definitions/ThreatIntelligenceInformation"
         }
       ],
       "description": "Threat intelligence indicator entity.",
@@ -9785,13 +10114,13 @@
       "type": "object",
       "x-ms-discriminator-value": "indicator"
     },
-    "ThreatIntelligenceIndicatorWithoutReadOnlyFields": {
+    "ThreatIntelligenceIndicatorModelForRequestBody": {
       "allOf": [
         {
           "$ref": "#/definitions/ThreatIntelligenceResourceKind"
         }
       ],
-      "description": "Threat intelligence indicator entity.",
+      "description": "Threat intelligence indicator entity used in request body.",
       "properties": {
         "etag": {
           "description": "Etag of the azure resource",
@@ -9998,8 +10327,8 @@
       },
       "type": "object"
     },
-    "ThreatIntelligenceArmStixQuery": {
-      "description": "Describes threat intelligence ARM STIX query",
+    "ThreatIntelligenceFilteringCriteria": {
+      "description": "Filtering criteria for querying threat intelligence indicators.",
       "properties": {
         "pageSize": {
           "description": "Page size",
@@ -10007,37 +10336,37 @@
           "format": "int32"
         },
         "minConfidence": {
-          "description": "Minimum confidence",
+          "description": "Minimum confidence.",
           "type": "integer",
           "format": "int32"
         },
         "maxConfidence": {
-          "description": "Maximum confidence",
+          "description": "Maximum confidence.",
           "type": "integer",
           "format": "int32"
         },
         "minValidUntil": {
-          "description": "Minimum Valid until",
+          "description": "Start time for ValidUntil filter.",
           "type": "string"
         },
         "maxValidUntil": {
-          "description": "Maximum Valid until",
+          "description": "End time for ValidUntil filter.",
           "type": "string"
         },
         "includeDisabled": {
-          "description": "To include disabled indicators",
+          "description": "Parameter to include/exclude disabled indicators.",
           "type": "boolean"
         },
         "sortBy": {
-          "description": "List of Sort rules",
+          "description": "Columns to sort by and sorting order",
           "items": {
             "description": "Sort By",
-            "$ref": "#/definitions/ThreatIntelligenceArmStixSortBy"
+            "$ref": "#/definitions/ThreatIntelligenceSortingCriteria"
           },
           "type": "array"
         },
         "sources": {
-          "description": "Sources of a threat intelligence entity",
+          "description": "Sources of threat intelligence indicators",
           "items": {
             "description": "Source",
             "type": "string"
@@ -10053,52 +10382,52 @@
           "type": "array"
         },
         "threatTypes": {
-          "description": "Threat types",
+          "description": "Threat types of threat intelligence indicators",
           "items": {
-            "description": "Threat type",
+            "description": "Threat type of a threat intelligence indicator",
             "type": "string"
           },
           "type": "array"
         },
         "ids": {
-          "description": "Ids of threat intelligence entities",
+          "description": "Ids of threat intelligence indicators",
           "items": {
-            "description": "Id of a threat intelligence entity",
+            "description": "Id of a threat intelligence indicator",
             "type": "string"
           },
           "type": "array"
         },
         "keywords": {
-          "description": "Keywords of threat intelligence entities",
+          "description": "Keywords for searching threat intelligence indicators",
           "items": {
-            "description": "keyword of a threat intelligence entity",
+            "description": "keyword for searching threat intelligence indicators",
             "type": "string"
           },
           "type": "array"
         },
         "skipToken": {
-          "description": "Skip Token",
+          "description": "Skip token.",
           "type": "string"
         }
       },
       "type": "object"
     },
-    "ThreatIntelligenceArmStixSortBy": {
-      "description": "Describes an threat intelligence ARM STIX Sort By",
+    "ThreatIntelligenceSortingCriteria": {
+      "description": "List of available columns for sorting",
       "properties": {
         "itemKey": {
-          "description": "Item key",
+          "description": "Column name",
           "type": "string"
         },
         "sortOrder": {
-          "$ref": "#/definitions/ThreatIntelligenceArmStixSortOrder",
-          "description": "Sort order."
+          "$ref": "#/definitions/ThreatIntelligenceSortingOrder",
+          "description": "Sorting order (ascending/descending/unsorted)."
         }
       },
       "type": "object"
     },
-    "ThreatIntelligenceArmStixSortOrder": {
-      "description": "Describes an threat intelligence ARM STIX Sort Order",
+    "ThreatIntelligenceSortingOrder": {
+      "description": "Sorting order (ascending/descending/unsorted).",
       "enum": [
         "unsorted",
         "ascending",
@@ -10107,7 +10436,7 @@
       "type": "string",
       "x-ms-enum": {
         "modelAsString": true,
-        "name": "ThreatIntelligenceArmStixSortBy",
+        "name": "ThreatIntelligenceSortingCriteria",
         "values": [
           {
             "value": "unsorted"
@@ -10121,11 +10450,11 @@
         ]
       }
     },
-    "ThreatIntelligenceAppendTagsRequestBody": {
-      "description": "Describes threat intelligence indicator append tags request body",
+    "ThreatIntelligenceAppendTags": {
+      "description": "Array of tags to be appended to the threat intelligence indicator.",
       "properties": {
         "threatIntelligenceTags": {
-          "description": "List of threat intelligence tags",
+          "description": "List of tags to be appended.",
           "items": {
             "description": "parameter",
             "type": "string"
@@ -10135,13 +10464,13 @@
       },
       "type": "object"
     },
-    "ThreatIntelligenceMetricResourceList": {
-      "description": "List of all the threat intelligence metric resource.",
+    "ThreatIntelligenceMetricsList": {
+      "description": "List of all the threat intelligence metric fields (type/threat type/source).",
       "properties": {
         "value": {
-          "description": "Array of threat intelligence metrics resource.",
+          "description": "Array of threat intelligence metric fields (type/threat type/source).",
           "items": {
-            "$ref": "#/definitions/ThreatIntelligenceMetricResource"
+            "$ref": "#/definitions/ThreatIntelligenceMetrics"
           },
           "type": "array"
         }
@@ -10150,11 +10479,11 @@
         "value"
       ]
     },
-    "ThreatIntelligenceMetricResource": {
-      "description": "Threat intelligence metric resource.",
+    "ThreatIntelligenceMetrics": {
+      "description": "Threat intelligence metrics.",
       "properties": {
         "properties": {
-          "description": "Threat intelligence metric.",
+          "description": "Threat intelligence metrics.",
           "$ref": "#/definitions/ThreatIntelligenceMetric"
         }
       }
@@ -10163,7 +10492,7 @@
       "description": "Describes threat intelligence metric",
       "properties": {
         "lastUpdatedTimeUtc": {
-          "description": "Time Metric",
+          "description": "Last updated indicator metric",
           "type": "string"
         },
         "threatTypeMetrics": {
@@ -10392,6 +10721,16 @@
       },
       "x-ms-parameter-location": "method"
     },
+    "EntityTimelineRequestBody": {
+      "description": "The parameters required to execute an timeline operation on the given entity.",
+      "in": "body",
+      "name": "parameters",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/EntityTimelineParameters"
+      },
+      "x-ms-parameter-location": "method"
+    },
     "EntityId": {
       "description": "entity ID",
       "in": "path",
@@ -10568,59 +10907,51 @@
       },
       "x-ms-parameter-location": "method"
     },
-    "ThreatIntelligenceIdentifier": {
-      "description": "Threat Intelligence Identifier",
+    "ThreatIntelligenceName": {
+      "description": "Threat intelligence indicator name field.",
       "in": "path",
       "name": "name",
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"
     },
-    "ThreatIntelligenceIndicatorObjectToUpsert": {
-      "description": "The threat intelligence entity properties for upsert",
+    "ThreatIntelligenceProperties": {
+      "description": "Properties of threat intelligence indicators to create and update.",
       "in": "body",
-      "name": "ThreatIntelligenceIndicatorObjectToUpsert",
+      "name": "ThreatIntelligenceProperties",
       "required": true,
       "schema": {
-        "$ref": "#/definitions/ThreatIntelligenceIndicatorWithoutReadOnlyFields"
+        "$ref": "#/definitions/ThreatIntelligenceIndicatorModelForRequestBody"
       },
       "x-ms-parameter-location": "method"
     },
-    "ThreatIntelligenceReplaceTagsModel": {
-      "description": "The threat intelligence entity properties for updating tags",
+    "ThreatIntelligenceReplaceTags": {
+      "description": "Tags in the threat intelligence indicator to be replaced.",
       "in": "body",
-      "name": "ThreatIntelligenceReplaceTagsModel",
+      "name": "ThreatIntelligenceReplaceTags",
       "required": true,
       "schema": {
-        "$ref": "#/definitions/ThreatIntelligenceIndicatorWithoutReadOnlyFields"
+        "$ref": "#/definitions/ThreatIntelligenceIndicatorModelForRequestBody"
       },
       "x-ms-parameter-location": "method"
     },
-    "ThreatIntelligenceArmStixQuery": {
-      "description": "The threat intelligence ARM STIX query",
+    "ThreatIntelligenceFilteringCriteria": {
+      "description": "Filtering criteria for querying threat intelligence indicators.",
       "in": "body",
-      "name": "ThreatIntelligenceArmStixQuery",
+      "name": "ThreatIntelligenceFilteringCriteria",
       "required": true,
       "schema": {
-        "$ref": "#/definitions/ThreatIntelligenceArmStixQuery"
+        "$ref": "#/definitions/ThreatIntelligenceFilteringCriteria"
       },
       "x-ms-parameter-location": "method"
     },
-    "ThreatIntelligenceIndicatorEntityKind": {
-      "description": "The threat intelligence entity kind",
-      "in": "query",
-      "name": "ctiEntityKind",
-      "required": false,
-      "type": "string",
-      "x-ms-parameter-location": "method"
-    },
-    "ThreatIntelligenceAppendTagsRequestBody": {
+    "ThreatIntelligenceAppendTags": {
       "description": "The threat intelligence append tags request body",
       "in": "body",
-      "name": "ThreatIntelligenceAppendTagsRequestBody",
+      "name": "ThreatIntelligenceAppendTags",
       "required": true,
       "schema": {
-        "$ref": "#/definitions/ThreatIntelligenceAppendTagsRequestBody"
+        "$ref": "#/definitions/ThreatIntelligenceAppendTags"
       },
       "x-ms-parameter-location": "method"
     }
