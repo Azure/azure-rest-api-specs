@@ -67,7 +67,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ClusterErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -106,7 +106,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ClusterErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -176,7 +176,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ClusterErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -221,7 +221,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ClusterErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -266,7 +266,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ClusterErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -319,7 +319,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ClusterErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -381,19 +381,30 @@
         "keyVaultProperties": {
           "$ref": "#/definitions/keyVaultProperties",
           "description": "The associated key properties."
+        },
+        "lastModifiedDate": {
+          "type": "string",
+          "description": "The last time the cluster was updated.",
+          "readOnly": true
+        },
+        "createdDate": {
+          "type": "string",
+          "description": "The cluster creation time",
+          "readOnly": true
+        },
+        "associatedWorkspaces": {
+          "description": "The list of Log Analytics workspaces associated with the cluster",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/AssociatedWorkspaces"
+          }
+        },
+        "capacityReservationProperties": {
+          "$ref": "#/definitions/CapacityReservationProperties",
+          "description": "Additional properties for capacity reservation"
         }
       },
       "description": "Cluster properties."
-    },
-    "ClusterErrorResponse": {
-      "description": "Error response indicates that the service is not able to process the incoming request. The reason is provided in the error message.",
-      "type": "object",
-      "properties": {
-        "error": {
-          "description": "The details of the error.",
-          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse"
-        }
-      }
     },
     "ClusterPatchProperties": {
       "properties": {
@@ -571,6 +582,54 @@
           "readOnly": true,
           "description": "The client id of user assigned identity.",
           "type": "string"
+        }
+      }
+    },
+    "AssociatedWorkspaces": {
+      "type": "object",
+      "description": "The list of Log Analytics workspaces associated with the cluster.",
+      "properties": {
+        "workspaceId": {
+          "readOnly": true,
+          "description": "The id of the assigned workspace.",
+          "type": "string"
+        },
+        "workspaceName": {
+          "readOnly": true,
+          "description": "The name id the assigned workspace.",
+          "type": "string"
+        },
+        "resourceId": {
+          "readOnly": true,
+          "description": "The ResourceId id the assigned workspace.",
+          "type": "string"
+        },
+        "associateDate": {
+          "readOnly": true,
+          "description": "The time of workspace association.",
+          "type": "string"
+        }
+      }
+    },
+    "CapacityReservationProperties": {
+      "description": "The Capacity Reservation properties.",
+      "properties": {
+        "LastSkuUpdate": {
+          "readOnly": true,
+          "description": "The last time Sku was updated.",
+          "type": "string"
+        },
+        "MinCapacity": {
+          "readOnly": true,
+          "description": "Minimum CapacityReservation value in GB.",
+          "type": "integer",
+          "format": "int64"
+        },
+        "MaxCapacity": {
+          "readOnly": true,
+          "description": "Maximum CapacityReservation value in GB.",
+          "type": "integer",
+          "format": "int64"
         }
       }
     }
