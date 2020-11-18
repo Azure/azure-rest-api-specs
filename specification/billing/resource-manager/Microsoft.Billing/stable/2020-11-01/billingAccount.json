@@ -420,9 +420,29 @@
           "description": "The purchase order name that will appear on the invoices generated for the billing profile.",
           "type": "string"
         },
+        "billingRelationshipType": {
+          "description": "Identifies which services and purchases are paid by a billing profile.",
+          "type": "string",
+          "enum": [
+            "Direct",
+            "IndirectCustomer",
+            "IndirectPartner",
+            "CSPPartner"
+          ],
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "BillingRelationshipType",
+            "modelAsString": true
+          }
+        },
         "billTo": {
           "description": "Billing address.",
           "$ref": "#/definitions/AddressDetails"
+        },
+        "indirectRelationshipInfo": {
+          "description": "Identifies the billing profile that is linked to another billing profile in indirect purchase motion.",
+          "readOnly": true,
+          "$ref": "#/definitions/IndirectRelationshipInfo"
         },
         "invoiceEmailOptIn": {
           "description": "Flag controlling whether the invoices for the billing profile are sent through email.",
@@ -507,7 +527,7 @@
             "$ref": "#/definitions/spendingLimitDetails"
           }
         }
-      }
+      }      
     },
     "InvoiceSectionsOnExpand": {
       "description": "The invoice sections associated to the billing profile. By default this is not populated, unless it's specified in $expand.",
@@ -565,6 +585,19 @@
           "description": "The name of the invoice section.",
           "type": "string"
         },
+        "state": {
+          "description": "Identifies the state of an invoice section.",
+          "type": "string",
+          "enum": [
+            "Active",
+            "Restricted"
+          ],
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "InvoiceSectionState",
+            "modelAsString": true
+          }
+        },
         "tags": {
           "type": "object",
           "description": "Dictionary of metadata associated with the invoice section.",
@@ -577,6 +610,28 @@
           "description": "The system generated unique identifier for an invoice section.",
           "type": "string",
           "readOnly": true
+        },
+        "targetCloud": {
+          "description": "Identifies the cloud environments that are associated with an invoice section. This is a system managed optional field and gets updated as the invoice section gets associated with accounts in various clouds.",
+          "$ref": "#/definitions/TargetCloud",
+          "readOnly": true
+        }
+      }
+    },
+    "IndirectRelationshipInfo": {
+      "description": "The billing profile details of the partner of the customer for an indirect motion.",
+      "properties": {
+        "billingAccountName": {
+          "description": "The billing account name of the partner or the customer for an indirect motion.",
+          "type": "string"
+        },
+        "billingProfileName": {
+          "description": "The billing profile name of the partner or the customer for an indirect motion.",
+          "type": "string"
+        },
+        "displayName": {
+          "description": "The display name of the partner or customer for an indirect motion.",
+          "type": "string"
         }
       }
     },
