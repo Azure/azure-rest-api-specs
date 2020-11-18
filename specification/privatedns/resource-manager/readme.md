@@ -38,6 +38,34 @@ input-file:
   - Microsoft.Network/stable/2018-09-01/privatedns.json
 ```
 
+``` yaml
+openapi-type: arm
+tag: package-2020-01
+```
+
+### Tag: package-2020-01
+
+These settings apply only when `--tag=package-2020-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-01'
+input-file:
+  - Microsoft.Network/stable/2020-01-01/privatedns.json
+```
+
+``` yaml
+openapi-type: arm
+tag: package-2020-06
+```
+
+### Tag: package-2020-06
+
+These settings apply only when `--tag=package-2020-06` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-06'
+input-file:
+  - Microsoft.Network/stable/2020-06-01/privatedns.json
+```
+
 # Code Generation
 
 ## Swagger to SDK
@@ -98,6 +126,16 @@ batch:
   - tag: package-2018-09
 ```
 
+``` yaml $(java) && $(multiapi)
+batch:
+  - tag: package-2020-01
+```
+
+``` yaml $(java) && $(multiapi)
+batch:
+  - tag: package-2020-06
+```
+
 ### Tag: package-2018-09 and java
 
 These settings apply only when `--tag=package-2018-09 --java` is specified on the command line.
@@ -107,6 +145,34 @@ Please also specify `--azure-libraries-for-java-folder=<path to the root directo
 java:
   namespace: com.microsoft.azure.management.privatedns.v2018_09_01
   output-folder: $(azure-libraries-for-java-folder)/sdk/privatedns/mgmt-v2018_09_01
+regenerate-manager: true
+generate-interface: true
+fconfig: '{"moduleName": "privatedns"}'
+```
+
+### Tag: package-2020-01 and java
+
+These settings apply only when `--tag=package-2020-01 --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2020-01' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.privatedns.v2020_01_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/privatedns/mgmt-v2020_01_01
+regenerate-manager: true
+generate-interface: true
+fconfig: '{"moduleName": "privatedns"}'
+```
+
+### Tag: package-2020-06 and java
+
+These settings apply only when `--tag=package-2020-06 --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2020-06' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.privatedns.v2020_06_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/privatedns/mgmt-v2020_06_01
 regenerate-manager: true
 generate-interface: true
 fconfig: '{"moduleName": "privatedns"}'
