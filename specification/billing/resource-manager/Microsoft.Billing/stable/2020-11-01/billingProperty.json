@@ -121,6 +121,10 @@
           "description": "First name.",
           "type": "string"
         },
+        "middleName": {
+          "description": "Middle name.",
+          "type": "string"
+        },
         "lastName": {
           "description": "Last name.",
           "type": "string"
@@ -298,7 +302,7 @@
             "modelAsString": true
           }
         },
-        "billingProfileStatusDetails": {
+        "billingProfileStatusReasonCode": {
           "description": "The status reason code when the specified billing profile is in Disabled status. This property is for agreement type Microsoft Customer Agreement and Microsoft Partner Agreement.",
           "enum": [
             "PastDue",
@@ -308,7 +312,7 @@
           "type": "string",
           "readOnly": true,
           "x-ms-enum": {
-            "name": "BillingProfileStatusDetails",
+            "name": "billingProfileStatusReasonCode",
             "modelAsString": true
           }
         },
@@ -378,11 +382,11 @@
             "$ref": "#/definitions/subscriptionBillingStatusReasonDetails"
           }
         },
-        "subscriptionBillingTaxDetails": {
+        "subscriptionTaxDetails": {
           "description": "The tax details of the subscription. This property is available for agreement type Microsoft Online Services Program and country India.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/subscriptionBillingTaxDetails"
+            "$ref": "#/definitions/subscriptionTaxDetails"
           }
         },
         "subscriptionBillingType": {
@@ -449,10 +453,10 @@
         }
       }
     },
-    "subscriptionBillingTaxDetails": {
+    "subscriptionTaxDetails": {
       "description": "The Goods Services Tax details of the subscription. This property is available for agreement type Microsoft Online Services Program and country India.",
       "properties": {
-        "Id": {
+        "id": {
           "description": "Represents Goods Services TaxId.",
           "type": "string",
           "readOnly": true
