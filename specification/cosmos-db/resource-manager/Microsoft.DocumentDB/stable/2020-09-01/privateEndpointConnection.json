@@ -64,6 +64,12 @@
             "schema": {
               "$ref": "#/definitions/PrivateEndpointConnectionListResult"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../stable/2020-09-01/cosmos-db.json#/definitions/ErrorResponseUpdatedFormat"
+            }
           }
         },
         "x-ms-examples": {
@@ -102,6 +108,12 @@
             "description": "Successfully retrieved a specified private endpoint connection.",
             "schema": {
               "$ref": "#/definitions/PrivateEndpointConnection"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../stable/2020-09-01/cosmos-db.json#/definitions/ErrorResponseUpdatedFormat"
             }
           }
         },
@@ -155,7 +167,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "../../stable/2020-09-01/cosmos-db.json#/definitions/ErrorResponseUpdatedFormat"
             }
           }
         },
@@ -190,6 +202,9 @@
           }
         ],
         "responses": {
+          "200":{
+            "description": "Accepted. The private endpoint connection delete will complete asynchronously."
+          },
           "202": {
             "description": "Accepted. The private endpoint connection delete will complete asynchronously."
           },
@@ -199,7 +214,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "../../stable/2020-09-01/cosmos-db.json#/definitions/ErrorResponseUpdatedFormat"
             }
           }
         },
