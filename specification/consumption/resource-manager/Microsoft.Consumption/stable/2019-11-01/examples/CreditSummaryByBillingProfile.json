@@ -1,0 +1,40 @@
+{
+  "parameters": {
+    "api-version": "2019-10-01",
+    "billingAccountId": "1234:5678",
+    "billingProfileId": "2468"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/providers/Microsoft.Billing/billingAccounts/1234:5678/billingProfiles/2468/providers/Microsoft.Consumption/credits/balanceSummary1",
+        "name": "balanceSummary1",
+        "type": "Microsoft.Consumption/credits/balanceSummary",
+        "properties": {
+          "balanceSummary": {
+            "estimatedBalance": {
+              "currency": "USD",
+              "value": 600.00
+            },
+            "currentBalance": {
+              "currency": "USD",
+              "value": 100.00
+            }
+          },
+          "pendingCreditAdjustments": {
+            "currency": "USD",
+            "value": 500.00
+          },
+          "expiredCredit": {
+            "currency": "USD",
+            "value": 0.00
+          },
+          "pendingEligibleCharges": {
+            "currency": "USD",
+            "value": 0.00
+          }
+        }
+      }
+    }
+  }
+}
