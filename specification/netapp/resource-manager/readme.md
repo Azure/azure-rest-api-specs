@@ -28,7 +28,16 @@ These are the global settings for the Azure NetApp Files API.
 title: NetAppManagementClient
 description: Microsoft NetApp Azure Resource Provider specification
 openapi-type: arm
-tag: package-netapp-2020-06-01
+tag: package-netapp-2020-07-01
+```
+
+### Tag: package-netapp-2020-07-01
+
+These settings apply only when `--tag=package-netapp-2020-07-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-netapp-2020-07-01'
+input-file:
+- Microsoft.NetApp/stable/2020-07-01/netapp.json
 ```
 
 ### Tag: package-netapp-2020-06-01
@@ -38,6 +47,24 @@ These settings apply only when `--tag=package-netapp-2020-06-01` is specified on
 ``` yaml $(tag) == 'package-netapp-2020-06-01'
 input-file:
 - Microsoft.NetApp/stable/2020-06-01/netapp.json
+```
+
+### Tag: package-netapp-2020-05-01
+
+These settings apply only when `--tag=package-netapp-2020-05-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-netapp-2020-05-01'
+input-file:
+- Microsoft.NetApp/stable/2020-05-01/netapp.json
+```
+
+### Tag: package-netapp-2020-03-01
+
+These settings apply only when `--tag=package-netapp-2020-03-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-netapp-2020-03-01'
+input-file:
+- Microsoft.NetApp/stable/2020-03-01/netapp.json
 ```
 
 ### Tag: package-netapp-2020-02-01

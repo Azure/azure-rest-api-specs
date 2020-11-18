@@ -28,6 +28,7 @@ These are the global settings for the azurestackhci.
 title: AzureStackHCIClient
 description: Azure Stack HCI management service
 openapi-type: arm
+openapi-subtype: rpaas
 tag: package-2020-10
 ```
 
@@ -84,6 +85,10 @@ swagger-to-sdk:
 ## Go
 
 See configuration in [readme.go.md](./readme.go.md)
+
+## Java
+
+See configuration in [readme.java.md](./readme.java.md)
 
 ## Python
 

@@ -25,6 +25,7 @@ These are the global settings for the Datadog API.
 ``` yaml
 title: Microsoft Datadog Client
 openapi-type: arm
+openapi-subtype: rpaas
 tag: package-2020-02-preview
 ```
 
@@ -48,6 +49,7 @@ This is not used by Autorest itself.
 swagger-to-sdk:
   - repo: azure-sdk-for-net
   - repo: azure-sdk-for-python
+  - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js
