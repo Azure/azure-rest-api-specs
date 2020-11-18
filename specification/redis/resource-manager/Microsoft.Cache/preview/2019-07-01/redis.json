@@ -1491,9 +1491,6 @@
               "$ref": "#/definitions/OperationResult"
             }
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": null
         }
       }
     }
@@ -1514,13 +1511,18 @@
           "type": "string"
         },
         "status": {
+          "type": "string",
           "description": "status of the Operation result.",
           "enum": [
             "Succeeded",
             "Failed",
             "Canceled",
             "InProgress"
-          ]
+          ],
+          "x-ms-enum": {
+            "name": "SkuFamily",
+            "modelAsString": true
+          }
         },
         "startTime": {
           "description": "The deployment start time.",
@@ -2194,8 +2196,7 @@
           "type": "string",
           "readOnly": true,
           "x-ms-mutability": [
-            "read",
-            "create"
+            "read"
           ],
           "description": "The geo-location where the resource lives"
         }
