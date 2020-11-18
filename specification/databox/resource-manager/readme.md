@@ -106,10 +106,7 @@ csharp:
   payload-flattening-threshold: 2
   output-folder: $(csharp-sdks-folder)/databox/Microsoft.Azure.Management.DataBox/src/Generated
   clear-output-folder: true
-```
-
-### Shipping address required properties as of 2020-04-01
-``` yaml
+  
 directive:
 - from: swagger-document
   where: $.definitions.ShippingAddress
