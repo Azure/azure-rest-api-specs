@@ -298,6 +298,27 @@
           }
         }
       }
+    },
+    "Resource": {
+      "description": "The Resource model definition.",
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource Id."
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource name."
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource type."
+        }
+      },
+      "x-ms-azure-resource": true
     }
   },
   "parameters": {
@@ -332,28 +353,7 @@
       "type": "string",
       "x-ms-parameter-location": "method"
     }
-  },
-  "Resource": {
-    "description": "The Resource model definition.",
-    "properties": {
-      "id": {
-        "readOnly": true,
-        "type": "string",
-        "description": "Resource Id."
-      },
-      "name": {
-        "readOnly": true,
-        "type": "string",
-        "description": "Resource name."
-      },
-      "type": {
-        "readOnly": true,
-        "type": "string",
-        "description": "Resource type."
-      }
-    },
-    "x-ms-azure-resource": true
-  },
+  },  
   "security": [
     {
       "azure_auth": [
