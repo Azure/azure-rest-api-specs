@@ -1,0 +1,36 @@
+{
+    "parameters": {
+      "api-version": "2020-11-01",
+      "billingAccountName": "{billingAccountName}"
+    },
+    "responses": {
+      "200": {
+        "body": {
+          "value": [{
+              "id": "/providers/Microsoft.Billing/BillingAccounts/{billingAccountName}/billingSubscriptions/90000000-0000-0000-0000-000000000000",
+              "name": "90000000-0000-0000-0000-000000000000",
+              "type": "Microsoft.Billing/billingAccounts/billingSubscriptions",
+              "properties": {
+                "displayName": "My subscription",
+                "subscriptionId": "90000000-0000-0000-0000-000000000000",
+                "subscriptionBillingStatus": "Active"                
+              }
+            },
+            {
+              "id": "/providers/Microsoft.Billing/BillingAccounts/{billingAccountName}/billingSubscriptions/80000000-0000-0000-0000-000000000001",
+              "name": "80000000-0000-0000-0000-000000000000",
+              "type": "Microsoft.Billing/billingAccounts/billingSubscriptions",
+              "properties": {
+                "displayName": "Test subscription",
+                "subscriptionId": "80000000-0000-0000-0000-000000000000",
+                "subscriptionBillingStatus": "Abandoned",
+                "suspensionReasons": [
+                    "SuspiciousActivity"
+                ]                
+              }
+            }
+          ]
+        }
+      }
+    }
+}  
