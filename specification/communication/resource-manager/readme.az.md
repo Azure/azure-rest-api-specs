@@ -16,7 +16,16 @@ python-sdk-output-folder: "$(az-output-folder)/azext_communication/vendored_sdks
 # Az.Communication
 
 ``` yaml
-extension-mode: preview
+
+directive:
+  - where:
+      group: communication service
+    set:
+      group: communication
+  - where:
+      group: communication status
+    set:
+      group: communication
 
 cli:
     cli-directive:
@@ -39,4 +48,15 @@ cli:
             group: OperationStatuses
           set:
             name: status
+        - where:
+            group: OperationStatuses
+            op: Get
+          set:
+            name: show_status
+
+# -------- -------- --------
+        - where:
+            group: CommunicationService|OperationStatuses
+          set:
+            extensionMode: "preview"
 ```
