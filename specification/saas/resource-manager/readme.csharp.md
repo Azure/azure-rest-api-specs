@@ -10,6 +10,6 @@ csharp:
   payload-flattening-threshold: 1
   clear-output-folder: true
   client-side-validation: false
-  namespace: Microsoft.SaaS
+  namespace: microsoft.saas
   output-folder: $(csharp-sdks-folder)/saas/management/Microsoft.SaaS/GeneratedProtocol
 ```

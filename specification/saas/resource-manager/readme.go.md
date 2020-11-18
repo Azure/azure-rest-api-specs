@@ -14,6 +14,6 @@ These settings apply only when `--tag=package-2018-03-01-beta --go` is specified
 Please also specify `--go-sdks-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
 ```yaml $(tag) == 'package-2018-03-01-beta' && $(go)
-namespace: Microsoft.SaaS
+namespace: microsoft.saas
 output-folder: $(go-sdks-folder)/saas/Generated
 ```
