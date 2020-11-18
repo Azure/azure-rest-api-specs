@@ -67,11 +67,6 @@
           "default": {
             "description": "*** Error Responses: ***\n\n * 400 InvalidRestorableDroppedDatabaseDeletionDate - The restorable dropped database deletion date given is invalid\n\n * 400 InvalidRestorableDroppedDatabaseId - Invalid restorable dropped database identifier\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 404 ResourceNotFound - The requested resource was not found."
           }
-        },
-        "x-ms-examples": {
-          "Get the short term retention policy for the database.": {
-            "$ref": "./examples/GetShortTermRetentionPolicyRestorableDropped.json"
-          }
         }
       },
       "put": {
@@ -137,12 +132,7 @@
             "description": "Accepted"
           }
         },
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "Update the short term retention policy for the restorable dropped database.": {
-            "$ref": "./examples/UpdateShortTermRetentionPolicyRestorableDropped.json"
-          }
-        }
+        "x-ms-long-running-operation": true
       },
       "patch": {
         "tags": [
@@ -207,12 +197,7 @@
             "description": "Accepted"
           }
         },
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "Update the short term retention policy for the restorable dropped database.": {
-            "$ref": "./examples/UpdateShortTermRetentionPolicyRestorableDropped.json"
-          }
-        }
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/restorableDroppedDatabases/{restorableDroppedDatabaseId}/backupShortTermRetentionPolicies": {
@@ -255,11 +240,6 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
-        },
-        "x-ms-examples": {
-          "Get the short term retention policy for the database.": {
-            "$ref": "./examples/GetShortTermRetentionPolicyRestorableDropped.json"
-          }
         }
       }
     }
