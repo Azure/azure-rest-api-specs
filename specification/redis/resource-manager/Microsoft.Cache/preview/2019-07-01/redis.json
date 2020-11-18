@@ -208,6 +208,12 @@
             "schema": {
               "$ref": "#/definitions/RedisResource"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
           }
         }
       },
@@ -346,6 +352,12 @@
             "description": "The redis cache was successfully found.",
             "schema": {
               "$ref": "#/definitions/RedisResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -684,6 +696,12 @@
           },
           "204": {
             "description": "Export operation succeeded."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
           }
         }
       }
@@ -798,6 +816,12 @@
             "description": "Resource was successfully created",
             "schema": {
               "$ref": "#/definitions/RedisFirewallRule"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -943,6 +967,12 @@
             "description": "Successfully got the current patch schedules",
             "schema": {
               "$ref": "#/definitions/RedisPatchScheduleListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -1248,6 +1278,12 @@
         "responses": {
           "200": {
             "description": "Linked server was successfully deleted."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
           }
         }
       },
@@ -2153,6 +2189,15 @@
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/ScheduleEntries",
           "description": "List of patch schedules for a Redis cache."
+        },
+        "location": {
+          "type": "string",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ],
+          "description": "The geo-location where the resource lives"
         }
       },
       "required": [
