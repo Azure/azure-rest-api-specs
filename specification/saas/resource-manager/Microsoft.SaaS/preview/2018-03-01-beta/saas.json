@@ -39,7 +39,7 @@
         "tags": [
           "SaaSResources"
         ],
-        "operationId": "SaasApp_Get",
+        "operationId": "operations_List",
         "description": "Gets all SaaS app operations.",
         "produces": [
           "application/json"
@@ -64,9 +64,12 @@
           }
         },
         "x-ms-examples": {
-          "Get Subscription Level SaaS resource": {
+          "Get saas operations": {
             "$ref": "./examples/saasV1/SaaSGetOperations.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -75,7 +78,7 @@
         "tags": [
           "SaaSResources"
         ],
-        "operationId": "SaaS_checkmoderneligibility",
+        "operationId": "SaaSAppModerneligibility_Get",
         "description": "Check if the Azure Subscription has been converted to modern.",
         "parameters": [
           {
@@ -100,7 +103,7 @@
           }
         },
         "x-ms-examples": {
-          "Get Subscription Level SaaS resource": {
+          "Get modern eligibility": {
             "$ref": "./examples/saasV1/SaaSGetModerneligibility.json"
           }
         }
@@ -111,7 +114,7 @@
         "tags": [
           "SaaSResources"
         ],
-        "operationId": "SaaS_GetApplications",
+        "operationId": "Applications_List",
         "description": "Gets all SaaS resources by subscription id and resource group name.",
         "produces": [
           "application/json"
@@ -142,9 +145,12 @@
           }
         },
         "x-ms-examples": {
-          "Get Subscription Level SaaS resource": {
+          "Get saas application": {
             "$ref": "./examples/saasV1/SaaSGetApplications.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -187,7 +193,7 @@
           }
         },
         "x-ms-examples": {
-          "Delete Subscription Level SaaS resource": {
+          "Delete SaaS resource": {
             "$ref": "./examples/saasV2/SaasDelete.json"
           }
         },
@@ -200,7 +206,7 @@
         "tags": [
           "SaaSResources"
         ],
-        "operationId": "SaaS_GetResource",
+        "operationId": "Saa_GetResource",
         "description": "Gets information about the specified SaaS.",
         "parameters": [
           {
@@ -225,7 +231,7 @@
           }
         },
         "x-ms-examples": {
-          "Get Subscription Level SaaS resource": {
+          "Get SaaS resource": {
             "$ref": "./examples/saasV2/SaasGet.json"
           }
         }
@@ -254,7 +260,18 @@
         ],
         "responses": {
           "202": {
-            "description": "Accepted and the operation will complete asynchronously."
+            "description": "Accepted and the operation will complete asynchronously.",
+            "headers": {
+              "Location": {
+                "description": "The URL to check the status of the asynchronous operation.",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "The amount of delay to use while the status of the operation is checked. The value is expressed in seconds.",
+                "format": "int32",
+                "type": "integer"
+              }
+            }
           },
           "default": {
             "description": "A response indicating an error.",
@@ -264,16 +281,20 @@
           }
         },
         "x-ms-examples": {
-          "Create Subscription Level SaaS resource": {
+          "Create SaaS resource": {
             "$ref": "./examples/saasV2/SaasPut.json"
           }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
         }
       },
       "get": {
         "tags": [
           "SaaSResources"
         ],
-        "operationId": "SaasResource-GetAllResources",
+        "operationId": "SaasResources_List",
         "description": "Get All Resources",
         "parameters": [
           {
@@ -295,9 +316,12 @@
           }
         },
         "x-ms-examples": {
-          "Get Subscription Level SaaS resource": {
+          "Get get all SaaS resources": {
             "$ref": "./examples/saasV2/SaaSGetAllResources.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -306,7 +330,7 @@
         "tags": [
           "SaaSResources"
         ],
-        "operationId": "SaasResource-GetAccessToken",
+        "operationId": "SaasResource-listAccessToken",
         "description": "Gets the ISV access token for a SaaS resource.",
         "parameters": [
           {
@@ -331,7 +355,7 @@
           }
         },
         "x-ms-examples": {
-          "Get Subscription Level SaaS resource": {
+          "generated SaaS resource token": {
             "$ref": "./examples/saasV2/ListAccessTokenPost.json"
           }
         }
@@ -450,6 +474,7 @@
     },
     "SaasProperties": {
       "type": "object",
+      "description":"saas resource properties",
       "properties": {
         "status": {
           "type": "string",
@@ -500,6 +525,7 @@
     },
     "SaasCreationProperties": {
       "type": "object",
+      "description": "properties for creatinon saas",
       "properties": {
         "offerId": {
           "type": "string",
