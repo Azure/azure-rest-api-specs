@@ -7,9 +7,9 @@ Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azur
 csharp:
   azure-arm: true
   license-header: MICROSOFT_MIT_NO_VERSION
-  payload-flattening-threshold: 1
+  payload-flattening-threshold: 2
   clear-output-folder: true
   client-side-validation: false
-  namespace: Microsoft.StoragePool
-  output-folder: $(csharp-sdks-folder)/storagepool/management/Microsoft.StoragePool/GeneratedProtocol
+  namespace: Microsoft.Azure.Management.StoragePool
+  output-folder: $(csharp-sdks-folder)/storagepool/Microsoft.Azure.Management.StoragePool/src/Generated
 ```
