@@ -10,6 +10,7 @@ python:
   package-name: azure-mgmt-containerregistry
   clear-output-folder: true
   no-namespace-folders: true
+  python-sdks-folder: "python-mgmt-sdk"
 ```
 
 ### Python multi-api
