@@ -373,7 +373,6 @@ input-file:
   - Microsoft.Authorization/stable/2020-09-01/policyAssignments.json
   - Microsoft.Authorization/stable/2020-09-01/policyDefinitions.json
   - Microsoft.Authorization/stable/2020-09-01/policySetDefinitions.json
-  - Microsoft.Authorization/stable/2020-09-01/dataPolicyManifests.json
 
 ```
 

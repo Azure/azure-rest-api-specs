@@ -235,7 +235,7 @@ python:
   output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/managedapplications
 ```
 
-### Tag: package-policy-2019-09 and python
+### Tag: package-policy-2020-09 and python
 
 These settings apply only when `--tag=package-policy-2020-09 --python` is specified on the command line.
 Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
