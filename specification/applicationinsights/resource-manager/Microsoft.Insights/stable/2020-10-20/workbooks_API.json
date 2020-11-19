@@ -473,40 +473,47 @@
         }
       }
     },
-    "ErrorFieldContract": {
-      "properties": {
-        "code": {
-          "type": "string",
-          "description": "Property level error code."
-        },
-        "message": {
-          "type": "string",
-          "description": "Human-readable representation of property-level error."
-        },
-        "target": {
-          "type": "string",
-          "description": "Property name."
-        }
-      },
-      "description": "Error Field contract."
-    },
     "WorkbookError": {
-      "description": "Error message body that will indicate why the operation failed.",
+      "description": "Error response.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/ErrorDefinition",
+          "description": "The error details."
+        }
+      }
+    },
+    "ErrorDefinition": {
+      "description": "Error definition.",
       "properties": {
         "code": {
+          "description": "Service specific error code which serves as the substatus for the HTTP error code.",
           "type": "string",
-          "description": "Service-defined error code. This code serves as a sub-status for the HTTP error code specified in the response."
+          "readOnly": true
         },
         "message": {
+          "description": "Description of the error.",
           "type": "string",
-          "description": "Human-readable representation of the error."
+          "readOnly": true
         },
-        "details": {
+        "innererror": {
+          "description": "Internal error details.",
+          "items": {
+            "$ref": "#/definitions/InnerErrorTrace"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "InnerErrorTrace": {
+      "description": "Error details",
+      "properties": {
+        "trace": {
+          "description": "detailed error trace",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ErrorFieldContract"
+            "type": "string"
           },
-          "description": "The list of invalid fields send in request, in case of validation error."
+          "readOnly": true
         }
       }
     },
