@@ -675,7 +675,6 @@ input-file:
  - ./Microsoft.Sql/preview/2020-08-01-preview/PrivateLinkResources.json
  - ./Microsoft.Sql/preview/2020-08-01-preview/RecoverableManagedDatabases.json
  - ./Microsoft.Sql/preview/2020-08-01-preview/ReplicationLinks.json
- - ./Microsoft.Sql/preview/2020-08-01-preview/RestorableDroppedDatabaseBackupShortTermRetentionPolicies.json
  - ./Microsoft.Sql/preview/2020-08-01-preview/RestorableDroppedDatabases.json
  - ./Microsoft.Sql/preview/2020-08-01-preview/RestorableDroppedManagedDatabases.json
  - ./Microsoft.Sql/preview/2020-08-01-preview/RestorePoints.json
@@ -699,7 +698,6 @@ input-file:
  - ./Microsoft.Sql/preview/2020-08-01-preview/TdeCertificates.json
  - ./Microsoft.Sql/preview/2020-08-01-preview/TimeZones.json
  - ./Microsoft.Sql/preview/2020-08-01-preview/TransparentDataEncryption.json
- - ./Microsoft.Sql/preview/2020-08-01-preview/Usages.json
  - ./Microsoft.Sql/preview/2020-08-01-preview/VirtualClusters.json
  - ./Microsoft.Sql/preview/2020-08-01-preview/VirtualNetworkRules.json
  - ./Microsoft.Sql/preview/2020-08-01-preview/WorkloadClassifiers.json
