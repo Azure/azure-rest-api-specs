@@ -682,24 +682,22 @@
           "type": "string",
           "readOnly": true
         },
-        "display": {
-          "description": "The object that represents the operation.",
-          "properties": {
-            "provider": {
-              "description": "Service provider: Microsoft.Consumption.",
-              "type": "string",
-              "readOnly": true
-            },
-            "resource": {
-              "description": "Resource on which the operation is performed: UsageDetail, etc.",
-              "type": "string",
-              "readOnly": true
-            },
-            "operation": {
-              "description": "Operation type: Read, write, delete, etc.",
-              "type": "string",
-              "readOnly": true
-            }
+        "description": "The object that represents the operation.",
+        "properties": {
+          "provider": {
+            "description": "Service provider: Microsoft.Consumption.",
+            "type": "string",
+            "readOnly": true
+          },
+          "resource": {
+            "description": "Resource on which the operation is performed: UsageDetail, etc.",
+            "type": "string",
+            "readOnly": true
+          },
+          "operation": {
+            "description": "Operation type: Read, write, delete, etc.",
+            "type": "string",
+            "readOnly": true
           }
         }
       }
@@ -707,6 +705,22 @@
     "OperationListResult": {
       "description": "Result of listing consumption operations. It contains a list of operations and a URL link to get the next set of results.",
       "properties": {
+        "name": {
+          "description": "Name of the operation",
+          "type": "string"
+        },
+        "isDataAction": {
+          "description": "Indicates whether the operation is a data action",
+          "type": "boolean"
+        },
+        "display": {
+          "$ref": "#/definitions/Operation",
+          "description": "Display of the operation"
+        },
+        "origin": {
+          "description": "Origin of the operation",
+          "type": "string"
+        },
         "value": {
           "description": "List of analysis services operations supported by the Microsoft.AnalysisServices resource provider.",
           "type": "array",
