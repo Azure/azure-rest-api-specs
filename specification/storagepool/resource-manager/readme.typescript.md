@@ -6,8 +6,8 @@ Please also specify `--typescript-sdks-folder=<path to root folder of your azure
 ```yaml $(typescript)
 typescript:
   azure-arm: true
-  package-name: "storagepool"
-  output-folder: "$(typescript-sdks-folder)/packages/storagepool"
+  package-name: "@azure/arm-storagepool"
+  output-folder: "$(typescript-sdks-folder)/sdk/storagepool/arm-storagepool"
   payload-flattening-threshold: 1
   generate-metadata: true
 ```
