@@ -52,6 +52,7 @@ input-file:
 - Microsoft.ServiceBus/preview/2018-01-01-preview/subscriptions.json
 - Microsoft.ServiceBus/preview/2018-01-01-preview/topics.json
 - Microsoft.ServiceBus/preview/2018-01-01-preview/Rules.json
+- Microsoft.ServiceBus/preview/2018-01-01-preview/operations.json
 ```
 
 ### Tag: package-2017-04
