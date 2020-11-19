@@ -797,7 +797,7 @@
           "type": "array",
           "description": "List of reservations that are being returned in this exchange.",
           "items": {
-            "$ref": "#/definitions/ReturnRequest"
+            "$ref": "#/definitions/ReservationToReturn"
           }
         }
       }
@@ -812,41 +812,9 @@
         }
       }
     },
-    "ReturnRequest": {
-      "type": "object",
-      "description": "Return request",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "Fully qualified identifier of the ReservationOrder being returned"
-        },
-        "properties": {
-          "$ref": "#/definitions/ReturnRequestProperties"
-        }
-      }
-    },
-    "ReturnRequestProperties": {
-      "type": "object",
-      "description": "Return request properties",
-      "properties": {
-        "scope": {
-          "$ref": "#/definitions/ReturnRequestScope"
-        },
-        "reservationToReturn": {
-          "$ref": "#/definitions/ReservationToReturn"
-        }
-      }
-    },
-    "ReturnRequestScope": {
-      "type": "string",
-      "description": "Indicates whether it is a reservation return or entire order return",
-      "enum": [
-        "Reservation"
-      ]
-    },
     "ReservationToReturn": {
       "type": "object",
-      "description": "To be present only if ReturnRequestScope = Reservation and null otherwise",
+      "description": "Reservation to return",
       "properties": {
         "reservationId": {
           "type": "string",
@@ -1096,7 +1064,7 @@
           "type": "array",
           "description": "Details of the reservations being returned",
           "items": {
-            "$ref": "#/definitions/ReservationToExchange"
+            "$ref": "#/definitions/ReservationToReturnForExchange"
           }
         },
         "policyResult": {
@@ -1150,6 +1118,30 @@
         }
       }
     },
+    "ReservationToReturnForExchange": {
+      "type": "object",
+      "description": "Reservation refund details",
+      "properties": {
+        "reservationId": {
+          "type": "string",
+          "description": "Fully qualified id of the Reservation being returned."
+        },
+        "quantity": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Quantity to be returned"
+        },
+        "billingRefundAmount": {
+          "$ref": "#/definitions/Price"
+        },
+        "billingInformation": {
+          "$ref": "#/definitions/BillingInformation"
+        },
+        "status": {
+          "$ref": "#/definitions/OperationStatus"
+        }
+      }
+    },
     "BillingInformation": {
       "type": "object",
       "description": "billing information",
@@ -1184,6 +1176,9 @@
         },
         "billingCurrencyTotal": {
           "$ref": "#/definitions/Price"
+        },
+        "status": {
+          "$ref": "#/definitions/OperationStatus"
         }
       }
     },
@@ -2102,6 +2097,20 @@
           "type": "number",
           "format": "double"
         }
+      }
+    },
+    "OperationStatus": {
+      "type": "string",
+      "description": "Status of the individual operation.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Cancelled",
+        "Pending"
+      ],
+      "x-ms-enum": {
+        "name": "OperationStatus",
+        "modelAsString": true
       }
     }
   },
