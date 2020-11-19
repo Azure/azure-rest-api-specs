@@ -77,7 +77,7 @@ tag: package-2019-10
 ```
 
 ``` yaml $(package-offazure)
-tag: package-2020-01
+tag: package-2020-07
 ```
 
 ### Tag: package-2018-02
