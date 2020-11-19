@@ -1,8 +1,8 @@
 {
   "parameters": {
     "subscriptionId": "ab7a8701-f7ef-471a-a2f4-d0ebbf494f77",
-    "hostedResourceProvider": "Microsoft.Contoso",
-    "api-version": "2019-02-01-preview"
+    "providerNamespace": "Microsoft.Contoso",
+    "api-version": "2020-06-01-preview"
   },
   "responses": {
     "200": {
@@ -16,12 +16,12 @@
             "properties": {
               "provisioningState": "Succeeded",
               "specification": {
-                "TestRegions": {
+                "canary": {
                   "regions": ["eastus2euap","centraluseuap"]
                 }
               },
               "status": {
-                "completedRegions" : ["eastus2euap","centraluseuap"]               
+                "completedRegions" : ["eastus2euap","centraluseuap"]
               }
             }
           },
@@ -32,12 +32,12 @@
             "properties": {
               "provisioningState": "Failed",
               "specification": {
-                "TestRegions": {
+                "canary": {
                   "regions": ["brazilus"]
                 }
               },
               "status": {
-                "failedOrSkippedRegions" : 
+                "failedOrSkippedRegions" :
                 {
                   "brazilus" : {
                     "code": "RolloutTimedout",

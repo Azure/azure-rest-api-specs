@@ -1,7 +1,7 @@
 {
   "parameters": {
     "subscriptionId": "ab7a8701-f7ef-471a-a2f4-d0ebbf494f77",
-    "hostedResourceProvider": "Microsoft.Contoso",
+    "providerNamespace": "Microsoft.Contoso",
     "rolloutName": "2020week10",
     "api-version": "2019-02-01-preview",
     "defaultRolloutSpecification": {
@@ -28,26 +28,26 @@
         "properties": {
           "provisioningState": "RolloutInProgress",
           "specification": {
-            "TestRegions": {
+            "canary": {
               "regions": ["brazilus","eastus2euap","centraluseuap"]
             },
-            "LowTraffic": {
+            "lowtraffic": {
               "regions": ["southeastasia"],
               "waitDuration": "PT24H"
             },
-            "MediumTraffic": {
+            "mediumTraffic": {
               "regions": ["uksouth","indiawest"],
               "waitDuration": "PT24H"
             },
-            "HighTraffic": {
+            "highTraffic": {
               "regions": ["australiasoutheast","otherhightraficregions"],
               "waitDuration": "PT24H"
             },
-            "RestOfTheWorldGroupOne": {
+            "restOfTheWorldGroupOne": {
               "regions": ["koreacentral","francecentral","australiacentral","westus","allotherregions"],
               "waitDuration": "PT4H"
             },
-            "RestOfTheWorldGroupTwo": {
+            "restOfTheWorldGroupTwo": {
               "regions": ["germanynorth","norwayeast","allotherregions"],
               "waitDuration": "PT4H"
             }
@@ -69,26 +69,26 @@
         "properties": {
           "provisioningState": "RolloutInProgress",
           "specification": {
-            "TestRegions": {
+            "canary": {
               "regions": ["brazilus","eastus2euap","centraluseuap"]
             },
-            "LowTraffic": {
+            "lowtraffic": {
               "regions": ["southeastasia"],
               "waitDuration": "PT24H"
             },
-            "MediumTraffic": {
+            "mediumTraffic": {
               "regions": ["uksouth","indiawest"],
               "waitDuration": "PT24H"
             },
-            "HighTraffic": {
+            "highTraffic": {
               "regions": ["australiasoutheast","otherhightraficregions"],
               "waitDuration": "PT24H"
             },
-            "RestOfTheWorldGroupOne": {
+            "restOfTheWorldGroupOne": {
               "regions": ["koreacentral","francecentral","australiacentral","westus","allotherregions"],
               "waitDuration": "PT4H"
             },
-            "RestOfTheWorldGroupTwo": {
+            "restOfTheWorldGroupTwo": {
               "regions": ["germanynorth","norwayeast","allotherregions"],
               "waitDuration": "PT4H"
             }
