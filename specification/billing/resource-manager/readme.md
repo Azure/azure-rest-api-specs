@@ -36,9 +36,7 @@ These settings apply only when `--tag=package-2020-12-preview` is specified on t
 ``` yaml $(tag) == 'package-preview-2020-12'
 input-file:
 - Microsoft.Billing/preview/2020-12-15-privatepreview/subscription.json
-- Microsoft.Billing/preview/2020-12-15-privatepreview/department.json
 - Microsoft.Billing/preview/2020-12-15-privatepreview/payNow.json
-- Microsoft.Billing/preview/2020-12-15-privatepreview/departmentAccount.json
 - Microsoft.Billing/preview/2020-12-15-privatepreview/enrollmentAccount.json
 ```
 
