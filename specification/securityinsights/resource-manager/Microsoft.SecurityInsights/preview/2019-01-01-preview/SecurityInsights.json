@@ -2221,6 +2221,9 @@
           },
           {
             "$ref": "#/parameters/EntityId"
+          },
+          {
+            "$ref": "#/parameters/EntitiesQueriesKindParameter"
           }
         ],
         "responses": {
@@ -6873,30 +6876,66 @@
       },
       "type": "object"
     },
-    "ActivityTimelineItem": {
-      "allOf": [
-        {
-          "$ref": "#/definitions/EntityTimelineItem"
-        },
-        {
-          "$ref": "#/definitions/ActivityTimelineItemInner"
-        }
-      ],
-      "description": "Represents Activity timeline item."
-    },
     "ActivityTimelineItemForQuery": {
       "allOf": [
         {
           "$ref": "#/definitions/EntityQueryItem"
-        },
-        {
-          "$ref": "#/definitions/ActivityTimelineItemInner"
         }
       ],
-      "description": "Represents Activity timeline item (used from queries)."
+      "description": "Represents Activity timeline item (used from queries).",
+      "properties": {
+        "queryId": {
+          "type": "string",
+          "description": "The activity query id."
+        },
+        "bucketStartTimeUTC": {
+          "format": "date-time",
+          "type": "string",
+          "description": "The grouping bucket start time."
+        },
+        "bucketEndTimeUTC": {
+          "format": "date-time",
+          "type": "string",
+          "description": "The grouping bucket end time."
+        },
+        "firstActivityTimeUTC": {
+          "format": "date-time",
+          "type": "string",
+          "description": "The time of the first activity in the grouping bucket."
+        },
+        "lastActivityTimeUTC": {
+          "format": "date-time",
+          "type": "string",
+          "description": "The time of the last activity in the grouping bucket."
+        },
+        "content": {
+          "type": "string",
+          "description": "The activity timeline content."
+        },
+        "title": {
+          "type": "string",
+          "description": "The activity timeline title."
+        }
+      },
+      "required": [
+        "queryId",
+        "bucketStartTimeUTC",
+        "bucketEndTimeUTC",
+        "firstActivityTimeUTC",
+        "lastActivityTimeUTC",
+        "content",
+        "title"
+      ],
+      "type": "object",
+      "x-ms-discriminator-value": "Activity"
     },
-    "ActivityTimelineItemInner": {
+    "ActivityTimelineItem": {
       "description": "Represents Activity timeline item.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/EntityTimelineItem"
+        }
+      ],
       "properties": {
         "queryId": {
           "type": "string",
@@ -11068,6 +11107,17 @@
         "$ref": "#/definitions/EntityTimelineParameters"
       },
       "x-ms-parameter-location": "method"
+    },
+    "EntitiesQueriesKindParameter": {
+      "description": "The Kind parameter for queries",
+      "in": "query",
+      "name": "kind",
+      "required": true,
+      "type": "string",
+      "enum": [
+        "Insight",
+        "Activity"
+      ]
     },
     "GetInsightsEntityQueriesRequestBody": {
       "description": "The parameters required to execute insights on the given entity.",
