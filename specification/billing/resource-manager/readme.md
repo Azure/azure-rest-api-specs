@@ -26,6 +26,24 @@ These are the global settings for the Billing API.
 
 ``` yaml
 openapi-type: arm
+tag: package-2020-11-01
+```
+
+### Tag: package-2020-11-01
+
+These settings apply only when `--tag=package-2020-11-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-11-01'
+input-file:
+- Microsoft.Billing/stable/2020-11-01/billingAccount.json
+- Microsoft.Billing/stable/2020-11-01/billingProfile.json
+- Microsoft.Billing/stable/2020-11-01/billingProperty.json
+- Microsoft.Billing/stable/2020-11-01/billingRoleAssignment.json
+- Microsoft.Billing/stable/2020-11-01/billingSubscription.json
+```
+
+``` yaml
+openapi-type: arm
 tag: package-2020-05
 ```
 
