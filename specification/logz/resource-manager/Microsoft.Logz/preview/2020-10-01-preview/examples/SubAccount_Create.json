@@ -4,20 +4,13 @@
     "subscriptionId": "00000000-0000-0000-0000-000000000000",
     "resourceGroupName": "myResourceGroup",
     "monitorName": "myMonitor",
+    "subAccountName": "SubAccount1",
     "requestBody": {
+      "name": "myMonitor",
+      "type": "Microsoft.Logz/monitors",
       "properties": {
-        "userInfo": {
-          "firstName": "Alice",
-          "lastName": "Bob",
-          "emailAddress": "alice@microsoft.com",
-          "phoneNumber": "123456"
-        },
-        "planData": {
-          "usageType": "Committed",
-          "billingCycle": "Monthly",
-          "planDetails": "logzapitestplan",
-          "effectiveDate": "2019-08-30T15:14:33+02:00"
-        }
+        "provisioningState": "Accepted",
+        "monitoringStatus": "Enabled"
       },
       "tags": {
         "Environment": "Dev"
@@ -28,7 +21,7 @@
   "responses": {
     "200": {
       "body": {
-        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/monitors/myMonitor",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/monitors/myMonitor/accounts/SubAccount1",
         "name": "myMonitor",
         "type": "Microsoft.Logz/monitors",
         "properties": {
@@ -42,7 +35,7 @@
     },
     "201": {
       "body": {
-        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/monitors/myMonitor",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/monitors/myMonitor/accounts/SubAccount1",
         "name": "myMonitor",
         "type": "Microsoft.Logz/monitors",
         "properties": {
