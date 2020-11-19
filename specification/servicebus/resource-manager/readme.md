@@ -38,7 +38,6 @@ input-file:
 - Microsoft.ServiceBus/preview/2018-01-01-preview/IPFilterRules-preview.json
 - Microsoft.ServiceBus/preview/2018-01-01-preview/namespace-preview.json
 - Microsoft.ServiceBus/preview/2018-01-01-preview/VirtualNetworkRules-preview.json
-- Microsoft.ServiceBus/preview/2018-01-01-preview/operationlist-preview.json
 - Microsoft.ServiceBus/preview/2018-01-01-preview/DisasterRecoveryConfig.json
 - Microsoft.ServiceBus/preview/2018-01-01-preview/AuthorizationRules.json
 - Microsoft.ServiceBus/preview/2018-01-01-preview/CheckNameAvailability.json
