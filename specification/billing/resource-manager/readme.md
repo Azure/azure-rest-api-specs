@@ -38,6 +38,8 @@ input-file:
 - Microsoft.Billing/preview/2020-12-15-privatepreview/subscription.json
 - Microsoft.Billing/preview/2020-12-15-privatepreview/payNow.json
 - Microsoft.Billing/preview/2020-12-15-privatepreview/enrollmentAccount.json
+- Microsoft.Billing/stable/2020-05-01/billing.json
+- Microsoft.Billing/preview/2018-03-01-preview/billingV2.json
 ```
 
 ### Tag: package-2020-05
