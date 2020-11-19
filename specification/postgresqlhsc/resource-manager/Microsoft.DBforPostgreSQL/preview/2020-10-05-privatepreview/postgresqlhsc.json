@@ -1384,22 +1384,9 @@
         }
       ],
       "properties": {
-        "administratorLoginPassword": {
-          "type": "string",
-          "format": "password",
-          "description": "The password of the administrator login."
-        },
-        "backupRetentionMinutes": {
-          "type": "integer",
-          "description": "Backup retention minutes for the server group."
-        },
-        "version": {
-          "$ref": "#/definitions/ServerVersion",
-          "description": "The version of a server."
-        },
-        "serverRoleGroups": {
-          "$ref": "#/definitions/ServerRoleGroupList",
-          "description": "The list of server role groups."
+        "properties": {
+          "$ref": "#/definitions/ServerGroupPropertiesForUpdate",
+          "description": "Properties of the server group update."
         }
       }
     },
@@ -1419,9 +1406,6 @@
     },
     "ServerGroupPropertiesForCreate": {
       "discriminator": "createMode",
-      "required": [
-        "createMode"
-      ],
       "properties": {
         "createMode": {
           "type": "string",
