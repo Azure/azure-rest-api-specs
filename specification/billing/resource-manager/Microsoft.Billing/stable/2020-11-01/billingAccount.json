@@ -538,7 +538,7 @@
           "description": "The details of billing profile spending limit.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/spendingLimitDetails"
+            "$ref": "#/definitions/SpendingLimitDetails"
           }
         },
         "targetClouds": {
@@ -839,7 +839,7 @@
         }
       }
     },
-    "spendingLimitDetails": {
+    "SpendingLimitDetails": {
       "description": "The details of spending limit policy set on a billing profile.",
       "properties": {
         "amount": {
@@ -932,6 +932,34 @@
           "description": "The target of the particular error.",
           "type": "string",
           "readOnly": true
+        },
+        "details": {
+          "description": "The sub details of the error.",
+          "readOnly": true,
+          "$ref": "#/definitions/ErrorSubDetails"
+        }
+      }
+    },
+    "ErrorSubDetails": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "description": "Error code.",
+            "type": "string",
+            "readOnly": true
+          },
+          "message": {
+            "description": "Error message indicating why the operation failed.",
+            "type": "string",
+            "readOnly": true
+          },
+          "target": {
+            "description": "The target of the particular error.",
+            "type": "string",
+            "readOnly": true
+          }
         }
       }
     },
@@ -972,6 +1000,24 @@
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"
+    }
+  },
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
     }
   }
 }
