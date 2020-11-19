@@ -394,9 +394,14 @@
         },
         "associatedWorkspaces": {
           "description": "The list of Log Analytics workspaces associated with the cluster",
-          "type": "object",
-          "additionalProperties": {
-            "$ref": "#/definitions/AssociatedWorkspaces"
+          "properties": {
+            "value": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/AssociatedWorkspace"
+              },
+              "description": "The list of Log Analytics workspaces associated with the cluster"
+            }
           }
         },
         "capacityReservationProperties": {
@@ -585,8 +590,8 @@
         }
       }
     },
-    "AssociatedWorkspaces": {
-      "type": "array",
+    "AssociatedWorkspace": {
+      "type": "object",
       "description": "The list of Log Analytics workspaces associated with the cluster.",
       "properties": {
         "workspaceId": {
