@@ -41,5 +41,48 @@
       }
     }
   },
-  "responses": {}
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "serverRoleGroupConfigurations": [
+            {
+              "role": "Coordinator",
+              "configurations": [
+                {
+                  "name": "array_nulls",
+                  "value": "on"
+                },
+                {
+                  "name": "backslash_quote",
+                  "value": "safe_encoding"
+                },
+                {
+                  "name": "bytea_output",
+                  "value": "hex"
+                }
+              ]
+            },
+            {
+              "role": "Worker",
+              "configurations": [
+                {
+                  "name": "check_function_bodies",
+                  "value": "on"
+                },
+                {
+                  "name": "client_encoding",
+                  "value": "sql_ascii"
+                }
+              ]
+            }
+          ]
+        },
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestResourceGroup/providers/Microsoft.DBforPostgreSQL/serverGroupsv2/hsctestsg/configurations",
+        "name": "hsctestsg-config",
+        "type": "Microsoft.DBforPostgreSQL/serverGroupsv2/configurations"
+      }
+    },
+    "202": {}
+  }
 }

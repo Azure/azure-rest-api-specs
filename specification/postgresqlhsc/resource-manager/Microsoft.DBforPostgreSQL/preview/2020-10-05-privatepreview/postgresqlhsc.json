@@ -92,9 +92,6 @@
           "202": {
             "description": "Accepted"
           },
-          "204": {
-            "description": "NoContent"
-          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
@@ -175,9 +172,6 @@
           },
           "202": {
             "description": "Accepted"
-          },
-          "204": {
-            "description": "NoContent"
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -523,9 +517,6 @@
           "202": {
             "description": "Accepted"
           },
-          "204": {
-            "description": "NoContent"
-          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
@@ -632,6 +623,12 @@
           },
           "202": {
             "description": "Accepted"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         }
       },
@@ -671,8 +668,11 @@
           "202": {
             "description": "Accepted"
           },
-          "204": {
-            "description": "NoContent"
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         }
       },
@@ -710,6 +710,12 @@
             "schema": {
               "$ref": "#/definitions/FirewallRule"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         }
       }
@@ -746,6 +752,12 @@
             "schema": {
               "$ref": "#/definitions/FirewallRuleListResult"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
         "x-ms-pageable": {
@@ -759,6 +771,7 @@
           "Roles"
         ],
         "operationId": "Roles_Create",
+        "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "RoleCreate": {
             "$ref": "./examples/RoleCreate.json"
@@ -800,15 +813,21 @@
           },
           "202": {
             "description": "Accepted"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
-        },
-        "x-ms-long-running-operation": true
+        }
       },
       "delete": {
         "tags": [
           "Roles"
         ],
         "operationId": "Roles_Delete",
+        "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "RoleDelete": {
             "$ref": "./examples/RoleDelete.json"
@@ -839,11 +858,13 @@
           "202": {
             "description": "Accepted"
           },
-          "204": {
-            "description": "NoContent"
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
-        },
-        "x-ms-long-running-operation": true
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/serverGroupsv2/{serverGroupName}/roles": {
@@ -877,6 +898,12 @@
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/RoleListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -1400,7 +1427,7 @@
           "type": "string",
           "description": "The mode to create a new server group.",
           "enum": [
-            "Create",
+            "Default",
             "Update",
             "PointInTimeRestore"
           ],
