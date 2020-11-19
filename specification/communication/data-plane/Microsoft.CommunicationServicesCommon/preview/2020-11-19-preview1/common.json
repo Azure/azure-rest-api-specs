@@ -47,7 +47,7 @@
       "description": "The Communication Services error.",
       "x-nullable": true
     },
-    "CommunicationIdentifierType": {
+    "CommunicationIdentifierKind": {
       "type": "string",
       "enum": [
         "Unknown",
@@ -59,17 +59,17 @@
         "name": "CommunicationIdentifierType",
         "modelAsString": true
       },
-      "description": "Type of an communication identifier."
+      "description": "The kind of an communication identifier."
     },
     "CommunicationIdentifier": {
       "required": [
-        "type"
+        "kind"
       ],
       "properties": {
-        "type": {
-          "$ref": "#/definitions/CommunicationIdentifierType",
+        "kind": {
+          "$ref": "#/definitions/CommunicationIdentifierKind",
           "readOnly": true,
-          "description": "Type of the communication identifier."
+          "description": "Kind of the communication identifier."
         },
         "communicationUserId": {
           "type": "string",
