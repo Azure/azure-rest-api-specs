@@ -1,0 +1,311 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2020-10-30-preview",
+    "title": "PowerPlatform"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.PowerPlatform/enterprisePolicies/{enterprisePolicyName}/subnets/{subnetName}": {
+      "get": {
+        "tags": [
+          "Subnets"
+        ],
+        "summary": "Gets Subnets associated with EnterprisePolicy authorized for outbound calls from PowerPlatform.",
+        "description": "Description of Subnets that are authorized for outbound calls from PowerPlatform.",
+        "operationId": "Subnets_Get",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/EnterprisePolicyNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SubnetNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Subnet"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Gets subnet.": {
+            "$ref": "./examples/subnetGet.json"
+          }
+        },
+        "x-ms-long-running-operation": false,
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ]
+      },
+      "put": {
+        "tags": [
+          "PowerPlatform"
+        ],
+        "summary": "Create or Update Subnet that PowerPlatform resources can access.",
+        "description": "Description of the Subnet that PowerPlatform resources can access.",
+        "operationId": "Subnets_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/EnterprisePolicyNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SubnetNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Subnet"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Creates or Updates subnet.": {
+            "$ref": "./examples/subnetUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation": false,
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.PowerPlatform/enterprisePolicies/{enterprisePolicyName}/subnets": {
+      "get": {
+        "tags": [
+          "Subnets"
+        ],
+        "operationId": "Subnets_ListByEnterprisePolicy",
+        "description": "Retrieve a list of subnets within a given enterprisePolicy",
+        "x-ms-examples": {
+          "List EnterprisePolicies by resource group": {
+            "$ref": "./examples/listSubnetsByEnterprisePolicy.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/EnterprisePolicyNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. List of subnets.",
+            "schema": {
+              "$ref": "#/definitions/SubnetListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        },
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ]
+      }
+    },
+    "/providers/Microsoft.PowerPlatform/operations": {
+      "get": {
+        "tags": [
+          "Operations"
+        ],
+        "description": "Lists all of the available PowerPlatform REST API operations.",
+        "x-ms-examples": {
+          "Lists all of the available PowerPlatform REST API operations": {
+            "$ref": "./examples/listOperations.json"
+          }
+        },
+        "operationId": "Operations_List",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/OperationList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        },
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "SubnetListResult": {
+      "description": "A list of subnets",
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "Array of subnets",
+          "items": {
+            "$ref": "#/definitions/Subnet"
+          }
+        }
+      }
+    },
+    "Subnet": {
+      "description": "A subnet",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SubnetProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../common/v1/definitions.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "SubnetProperties": {
+      "description": "Properties of a subnet.",
+      "type": "object",
+      "properties": {
+        "subnet": {
+          "$ref": "#/definitions/SubnetEndpointProperty",
+          "description": "Endpoint of the subnet."
+        },
+        "status": {
+          "$ref": "#/definitions/SubnetState",
+          "description": "Connection State of the subnet."
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "description": "Metadata for the subnet."
+        }
+      }
+    },
+    "SubnetEndpointProperty": {
+      "type": "object",
+      "description": "Endpoint of the subnet.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Resource id of the subnet."
+        }
+      }
+    },
+    "SubnetState": {
+      "type": "string",
+      "readOnly": true,
+      "description": "The state of onboarding, which only appears in the response.",
+      "x-ms-enum": {
+        "name": "status",
+        "modelAsString": true
+      },
+      "enum": [
+        "Enabled",
+        "Disabled",
+        "NotConfigured"
+      ]
+    }
+  },
+  "parameters": {
+    "SubnetNameParameter": {
+      "name": "subnetName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "description": "The name of the subnet."
+    }
+  }
+}

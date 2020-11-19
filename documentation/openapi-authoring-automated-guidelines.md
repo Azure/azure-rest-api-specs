@@ -20,7 +20,7 @@ We request OpenAPI(Swagger) spec authoring be assigned to engineers who have an
 * [Rule Descriptions](#rule-descriptions)
 
 ## Error vs Warning
-- Rules with severity "Error" have to be addressed for the OpenAPI(swagger) spec to be approved by the reviewers. If there is a strong reason for why the rule cannot be addressed in an OpenAPI(swagger) spec it will be a permanent exception, then [suppression process](https://github.com/Azure/adx-documentation-pr/wiki/Swagger-Validation-Errors-Suppression) must be followed.
+- Rules with severity "Error" have to be addressed for the OpenAPI(swagger) spec to be approved by the reviewers. If there is a strong reason for why the rule cannot be addressed in an OpenAPI(swagger) spec it will be a permanent exception, then [suppression process](https://dev.azure.com/azure-sdk/internal/_wiki/wikis/internal.wiki/85/Swagger-Suppression-Process) must be followed.
 
 - Rules with severity "Warning" are either strong recommendations made by Azure developer experience team for better SDK/Documentation experience or they point out something to evaluate, for example, the warning for booleans asks the user to evaluate whether the property should be a boolean or not. 
 
@@ -140,6 +140,7 @@ We request OpenAPI(Swagger) spec authoring be assigned to engineers who have an
 | [R2007](#r2007) | [LongRunningOperationsWithLongRunningExtension](#r2007) | ARM OpenAPI(swagger) specs |
 | [R2029](#r2029) | [PageableOperation](#r2029) | ARM and Data plane OpenAPI(swagger) specs |
 | [R4006](#r4006) | [DeprecatedXmsCodeGenerationSetting](#r4006) | ARM and Data plane OpenAPI(swagger) specs |
+| [R4024](#r4024) | [PreviewVersionOverOneYear](#r4024) | ARM OpenAPI(swagger) specs |
 
 
 ### RPaaS Violations
@@ -1432,7 +1433,7 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 **Applies to** : ARM OpenAPI(swagger) specs
 
-**Output Message**: Top level properties should be one of name, type, id, location, properties, tags, plan, sku, etag, managedBy, identity, systemData. Model definition '{0}' has extra properties ['{1}'].
+**Output Message**: Top level properties should be one of name, type, id, location, properties, tags, plan, sku, etag, managedBy, identity, systemData, extendedlocation. Model definition '{0}' has extra properties ['{1}'].
 
 **Description**: Per [ARM guidelines](https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/resource-api-reference.md), top level properties of a resource should be only ones from the allowed set.
 
@@ -1690,7 +1691,7 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 **Output Message**: Properties of a PATCH request body must not be {0}. PATCH operation: '{1}' Model Definition: '{2}' Property: '{3}'
 
 **Description**: A request parameter of the Patch Operation must not have a required/default value.
-But it's allowed when all required properties are marked as discriminator, because the discriminator must be required.
+But it's allowed when the only required properties is marked as discriminator, because the discriminator must be required.
 
 **CreatedAt** : N/A
 
@@ -1994,7 +1995,7 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 ### <a name="r3021" ></a>R3021 PathResourceTypeNameCamelCase
 
-**Category** : ARM Warning
+**Category** : ARM Error
 
 **Applies to** : ARM and Data Plane OpenAPI(swagger) specs
 
@@ -2348,35 +2349,55 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 **LastModifiedAt**: April 2, 2020
 
 **How to fix the violation**: Following the ARM specification to modify the schema in the swagger file.
+It's recommended to refer to the 'ErrorResponse' in [v2/types.json](https://github.com/Azure/azure-rest-api-specs/blob/master/specification/common-types/resource-management/v2/types.json#L273) which is provided for fixing the error.
 
 The following would be invalid:
 
 ```json
- "response":{
-   "default": {
-     "schema":{
-         "error":"error msg",
-         "code": 404,
-         "message":"some details"
+"definitions": {
+  "ErrorResponse": {
+     "properties": {
+       "code": {
+         "readOnly": true,
+         "type": "string",
+         "description": "The error code."
+       },
+       "message": {
+         "readOnly": true,
+         "type": "string",
+         "description": "The error message."
+       }
+       ...
      }
   }
- }
-
+}
 ```
 
 the correct schema:
 
 ```json
- "response":{
-   "default": {
-     "error":
-     {
-        "code": 404,
-        "message":"some details"
-         ...
+"definitions": {
+  "ErrorResponse": {
+     "properties": {
+        "error": {
+          "type": "object",
+          "description": "The error object.",
+          "properties": {
+            "code": {
+              "readOnly": true,
+              "type": "string",
+              "description": "The error code."
+            },
+            "message": {
+              "readOnly": true,
+              "type": "string",
+              "description": "The error message."
+            }
+            ...
+        }
      }
   }
- }
+}
 
 ```
 
@@ -2757,7 +2778,7 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 **Output Message** : The response schema of operations API "{0}" does not match the ARM specification. Please standardize the schema.
 
-**Description** : The operations API should have a response body schema consistent with the [contract spec](https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/proxy-api-reference.md#exposing-available-operations). The required properties such as `isDataAction`,`display.description` or `display.resource`,must be included.
+**Description** : The operations API should have a response body schema consistent with the [contract spec](https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/proxy-api-reference.md#exposing-available-operations). The required properties such as `isDataAction`,`display.description` and `display.resource`,must be included.
 
 **CreatedAt**: July 13, 2020
 
@@ -2949,3 +2970,23 @@ The following would be valid:
 ...
 ```
 Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [ARM](#arm-violations): [Errors](#arm-errors) or [Warnings](#arm-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
+
+### <a name="r4024" ></a>R4024 PreviewVersionOverOneYear
+
+**Category** : SDK Warning
+
+**Applies to** : ARM OpenAPI(swagger) specs
+
+**Output Message** : The API version:{api-version} having been in a preview state over one year , please move to GA or retire.
+
+**Description** : Per [Retirement-of-Previews](https://dev.azure.com/msazure/AzureWiki/_wiki/wikis/AzureWiki.wiki/37683/Retirement-of-Previews), service, feature, API, and SKU in preview for over one year need to move to GA or retire.
+
+**CreatedAt**: Sep 8, 2020
+
+**LastModifiedAt**: Sep 8, 2020
+
+**How to fix the violation**: 
+   Consider retiring or moving to GA. 
+   
+Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [ARM](#arm-violations): [Errors](#arm-errors) or [Warnings](#arm-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
+

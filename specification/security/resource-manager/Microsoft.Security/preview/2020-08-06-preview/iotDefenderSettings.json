@@ -122,6 +122,9 @@
           },
           {
             "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/IotDefenderSettingsModel"
           }
         ],
         "responses": {
@@ -251,7 +254,25 @@
     "IotDefenderSettingsProperties": {
       "type": "object",
       "description": "IoT Defender settings properties",
-      "properties": {}
+      "properties": {
+        "deviceQuota": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 1000,
+          "description": "Size of the device quota (as a opposed to a Pay as You Go billing model). Value is required to be in multiples of 1000."
+        },
+        "sentinelWorkspaceResourceIds": {
+          "type": "array",
+          "description": "Sentinel Workspace Resource Ids",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "deviceQuota",
+        "sentinelWorkspaceResourceIds"
+      ]
     },
     "DownloadLink": {
       "type": "string",
@@ -445,5 +466,16 @@
       }
     }
   },
-  "parameters": {}
+  "parameters": {
+    "IotDefenderSettingsModel": {
+      "name": "iotDefenderSettingsModel",
+      "in": "body",
+      "required": true,
+      "description": "The IoT defender settings model",
+      "schema": {
+        "$ref": "#/definitions/IotDefenderSettingsModel"
+      },
+      "x-ms-parameter-location": "method"
+    }
+  }
 }
