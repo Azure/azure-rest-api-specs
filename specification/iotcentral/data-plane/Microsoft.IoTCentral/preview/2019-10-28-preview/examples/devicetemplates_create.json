@@ -1,6 +1,6 @@
 {
   "title": "Create a device template",
-  "description": "Creates and publishes a device template. In the body, specify the full device template object.",
+  "description": "Creates and publishes a device template. In the body, specify the full device template object. Default views will be automatically generated.",
   "parameters": {
     "centralDnsSuffixInPath": "azureiotcentral.com",
     "subdomain": "appsubdomain",
@@ -39,7 +39,7 @@
                   "displayName": "Temperature",
                   "name": "Temperature",
                   "schema": "double",
-                  "unit": "Units/Temperature/celsius"
+                  "unit": "celsius"
                 },
                 {
                   "@id": "urn:storeAnalyticsCheckoutPnp:Interface:Humidity:1",
@@ -50,7 +50,7 @@
                   "displayName": "Humidity",
                   "name": "Humidity",
                   "schema": "double",
-                  "unit": "Units/Humidity/percent"
+                  "unit": "percent"
                 },
                 {
                   "@id": "urn:storeAnalyticsCheckoutPnp:Interface:Occupancy:1",
@@ -69,56 +69,6 @@
         "contents": [],
         "@context": [
           "http://azureiot.com/v1/contexts/IoTModel.json"
-        ]
-      },
-      "solutionModel": {
-        "@id": "urn:1dsfbt7i:modelDefinition:zadjfmgvh",
-        "@type": [
-          "SolutionModel"
-        ],
-        "cloudProperties": [
-          {
-            "@id": "urn:1dsfbt7i:modelDefinition:AssetId",
-            "@type": [
-              "CloudProperty"
-            ],
-            "displayName": "Asset Id",
-            "name": "AssetId",
-            "schema": "string",
-            "valueDetail": {
-              "@id": "urn:1dsfbt7i:modelDefinition:AssetId:valueDetail",
-              "@type": [
-                "ValueDetail/StringValueDetail"
-              ]
-            }
-          }
-        ],
-        "initialValues": [],
-        "overrides": [
-          {
-            "@id": "urn:1dsfbt7i:modelDefinition:1qehkys5",
-            "@type": [
-              "Override"
-            ],
-            "capability": {
-              "@type": [
-                "CapabilityReference"
-              ],
-              "component": "urn:storeAnalyticsCheckoutPnp:capabilityModel:fyy5xn_y:1",
-              "reference": "urn:storeAnalyticsCheckoutPnp:Interface:Occupancy:1"
-            },
-            "valueDetail": {
-              "@type": [
-                "ValueDetail/NumberValueDetail"
-              ],
-              "maxValue": {
-                "@value": "50"
-              },
-              "minValue": {
-                "@value": "0"
-              }
-            }
-          }
         ]
       }
     }
@@ -160,7 +110,7 @@
                     "displayName": "Temperature",
                     "name": "Temperature",
                     "schema": "double",
-                    "unit": "Units/Temperature/celsius"
+                    "unit": "celsius"
                   },
                   {
                     "@id": "urn:storeAnalyticsCheckoutPnp:Interface:Humidity:1",
@@ -171,7 +121,7 @@
                     "displayName": "Humidity",
                     "name": "Humidity",
                     "schema": "double",
-                    "unit": "Units/Humidity/percent"
+                    "unit": "percent"
                   },
                   {
                     "@id": "urn:storeAnalyticsCheckoutPnp:Interface:Occupancy:1",
@@ -190,58 +140,6 @@
           "contents": [],
           "@context": [
             "http://azureiot.com/v1/contexts/IoTModel.json"
-          ]
-        },
-        "solutionModel": {
-          "@id": "urn:1dsfbt7i:modelDefinition:zadjfmgvh",
-          "@type": [
-            "SolutionModel"
-          ],
-          "cloudProperties": [
-            {
-              "@id": "urn:1dsfbt7i:modelDefinition:AssetId",
-              "@type": [
-                "CloudProperty"
-              ],
-              "displayName": "Asset Id",
-              "name": "AssetId",
-              "schema": "string",
-              "valueDetail": {
-                "@id": "urn:1dsfbt7i:modelDefinition:AssetId:valueDetail",
-                "@type": [
-                  "ValueDetail/StringValueDetail"
-                ]
-              }
-            }
-          ],
-          "initialValues": [],
-          "overrides": [
-            {
-              "@id": "urn:1dsfbt7i:modelDefinition:1qehkys5",
-              "@type": [
-                "Override"
-              ],
-              "capability": {
-                "@id": "urn:1dsfbt7i:modelDefinition:1qehkys5:6wq2v5i7j",
-                "@type": [
-                  "CapabilityReference"
-                ],
-                "component": "urn:storeAnalyticsCheckoutPnp:capabilityModel:fyy5xn_y:1",
-                "reference": "urn:storeAnalyticsCheckoutPnp:Interface:Occupancy:1"
-              },
-              "valueDetail": {
-                "@id": "urn:1dsfbt7i:modelDefinition:1qehkys5:_covclwk_",
-                "@type": [
-                  "ValueDetail/NumberValueDetail"
-                ],
-                "maxValue": {
-                  "@value": "50"
-                },
-                "minValue": {
-                  "@value": "0"
-                }
-              }
-            }
           ]
         }
       }

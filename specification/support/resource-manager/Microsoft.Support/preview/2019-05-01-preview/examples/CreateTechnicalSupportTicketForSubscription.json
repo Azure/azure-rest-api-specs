@@ -1,6 +1,6 @@
 {
   "parameters": {
-    "subscriptionId": "76cb77fa-8b17-4eab-9493-b65dace99813",
+    "subscriptionId": "subid",
     "supportTicketName": "testticket",
     "api-version": "2019-05-01-preview",
     "createSupportTicketParameters": {
@@ -8,7 +8,7 @@
         "serviceId": "/providers/Microsoft.Support/services/cddd3eb5-1830-b494-44fd-782f691479dc",
         "title": "my title",
         "description": "my description",
-        "problemClassificationId": "/providers/Microsoft.Support/services/cddd3eb5-1830-b494-44fd-782f691479dc/problemClassifications/ef8b3865-0c5a-247b-dcaa-d70fd7611a3c",
+        "problemClassificationId": "/providers/Microsoft.Support/services/virtual_machine_running_linux_service_guid/problemClassifications/problemClassification_guid",
         "severity": "moderate",
         "contactDetails": {
           "firstName": "abc",
@@ -20,30 +20,30 @@
           "country": "usa"
         },
         "technicalTicketDetails": {
-          "resourceId": "/subscriptions/76cb77fa-8b17-4eab-9493-b65dace99813/resourceGroups/test/providers/Microsoft.Compute/virtualMachines/testserver"
+          "resourceId": "/subscriptions/subid/resourceGroups/test/providers/Microsoft.Compute/virtualMachines/testserver"
         }
       }
     }
   },
   "responses": {
     "202": {
-        "headers": {
-            "location": "https://management.azure.com/subscriptions/76cb77fa-8b17-4eab-9493-b65dace99813/providers/Microsoft.Support/operationResults/1ec71b3f-5d74-4239-be45-897f23f4f52e?api-version=2019-05-01-preview",
-            "azure-asyncoperation": "https://management.azure.com/subscriptions/76cb77fa-8b17-4eab-9493-b65dace99813/providers/Microsoft.Support/operationsStatus/1ec71b3f-5d74-4239-be45-897f23f4f52e?api-version=2019-05-01-preview"
-        }
+      "headers": {
+        "location": "https://management.azure.com/subscriptions/subid/providers/Microsoft.Support/operationResults/operationid?api-version=2019-05-01-preview",
+        "azure-asyncoperation": "https://management.azure.com/subscriptions/subid/providers/Microsoft.Support/operationsStatus/operationid?api-version=2019-05-01-preview"
+      }
     },
     "200": {
       "body": {
-        "id": "/subscriptions/76cb77fa-8b17-4eab-9493-b65dace99813/providers/Microsoft.Support/supportTickets/testticket",
+        "id": "/subscriptions/subid/providers/Microsoft.Support/supportTickets/testticket",
         "name": "testticket",
         "type": "Microsoft.Support/supportTickets",
         "properties": {
           "supportTicketId": "119120321001170",
           "description": "my description",
-          "problemClassificationId": "/providers/Microsoft.Support/services/cddd3eb5-1830-b494-44fd-782f691479dc/problemClassifications/ef8b3865-0c5a-247b-dcaa-d70fd7611a3c",
+          "problemClassificationId": "/providers/Microsoft.Support/services/virtual_machine_running_linux_service_guid/problemClassifications/problemClassification_guid",
           "problemClassificationDisplayName": "Connectivity / Cannot connect to virtual machine by using RDP or SSH",
           "severity": "moderate",
-		  "productionOutage": false,
+          "productionOutage": false,
           "require24X7Response": false,
           "contactDetails": {
             "firstName": "abc",
@@ -55,7 +55,7 @@
             "preferredSupportLanguage": "en-US"
           },
           "technicalTicketDetails": {
-            "resourceId": "/subscriptions/76cb77fa-8b17-4eab-9493-b65dace99813/resourceGroups/test/providers/Microsoft.Compute/virtualMachines/testserver"
+            "resourceId": "/subscriptions/subid/resourceGroups/test/providers/Microsoft.Compute/virtualMachines/testserver"
           },
           "serviceLevelAgreement": {
             "startTime": "2018-03-20T21:36:18Z",
@@ -64,7 +64,7 @@
           },
           "supportPlanType": "Premier",
           "title": "my title",
-          "serviceId": "/providers/Microsoft.Support/services/cddd3eb5-1830-b494-44fd-782f691479dc",
+          "serviceId": "/providers/Microsoft.Support/services/virtual_machine_running_linux_service_guid",
           "serviceDisplayName": "Virtual Machine running Linux",
           "status": "Open",
           "createdDate": "2018-03-20T21:36:18Z",

@@ -231,7 +231,7 @@
           "QueryKeys"
         ],
         "x-ms-pageable": {
-          "nextLinkName": null
+          "nextLinkName": "nextLink"
         },
         "operationId": "QueryKeys_ListBySearchService",
         "x-ms-examples": {
@@ -574,7 +574,7 @@
           "Services"
         ],
         "x-ms-pageable": {
-          "nextLinkName": null
+          "nextLinkName": "nextLink"
         },
         "operationId": "Services_ListByResourceGroup",
         "x-ms-examples": {
@@ -605,6 +605,57 @@
             "description": "The operation succeeded. The response contains the list of all Search service definitions for the given resource group.",
             "schema": {
               "$ref": "#/definitions/SearchServiceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error occurred during the operation.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Search/searchServices/{searchServiceName}/privateLinkResources": {
+      "get": {
+        "tags": [
+          "PrivateLinkResources"
+        ],
+        "x-ms-pageable": {
+          "nextLinkName": null
+        },
+        "operationId": "PrivateLinkResources_ListSupported",
+        "x-ms-examples": {
+          "ListSupportedPrivateLinkResources": {
+            "$ref": "./examples/ListSupportedPrivateLinkResources.json"
+          }
+        },
+        "description": "Gets a list of all supported private link resource types for the given service.",
+        "externalDocs": {
+          "url": "https://aka.ms/search-manage"
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ClientRequestIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SearchServiceNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation succeeded. The response contains the list of all supported private link resource types for the given service.",
+            "schema": {
+              "$ref": "#/definitions/PrivateLinkResourcesResult"
             }
           },
           "default": {
@@ -777,13 +828,64 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Search/searchServices/{searchServiceName}/privateEndpointConnections": {
+      "get": {
+        "tags": [
+          "PrivateEndpointConnections"
+        ],
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "operationId": "PrivateEndpointConnections_ListByService",
+        "x-ms-examples": {
+          "ListPrivateEndpointConnectionsByService": {
+            "$ref": "./examples/ListPrivateEndpointConnectionsByService.json"
+          }
+        },
+        "description": "Gets a list of all private endpoint connections in the given service.",
+        "externalDocs": {
+          "url": "https://aka.ms/search-manage"
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ClientRequestIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SearchServiceNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation succeeded. The response contains the list of all private endpoint connections for the given service.",
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnectionListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error occurred during the operation.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Search/searchServices": {
       "get": {
         "tags": [
           "Services"
         ],
         "x-ms-pageable": {
-          "nextLinkName": null
+          "nextLinkName": "nextLink"
         },
         "operationId": "Services_ListBySubscription",
         "x-ms-examples": {
@@ -1105,6 +1207,85 @@
         }
       },
       "description": "Describes the properties of an existing Private Endpoint connection to the Azure Cognitive Search service."
+    },
+    "PrivateEndpointConnectionListResult": {
+      "properties": {
+        "value": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PrivateEndpointConnection"
+          },
+          "description": "The list of Private Endpoint connections."
+        }
+      },
+      "description": "Response containing a list of Private Endpoint connections.",
+      "x-ms-external": true
+    },
+    "PrivateLinkResourcesResult": {
+      "properties": {
+        "value": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PrivateLinkResource"
+          },
+          "description": "The list of supported Private Link Resources."
+        }
+      },
+      "description": "Response containing a list of supported Private Link Resources.",
+      "x-ms-external": true
+    },
+    "PrivateLinkResource": {
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The ID of the private link resource."
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The name of the private link resource."
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The resource type."
+        },
+        "properties": {
+          "$ref": "#/definitions/PrivateLinkResourceProperties",
+          "readOnly": true,
+          "description": "Describes the properties of a supported private link resource for the Azure Cognitive Search service."
+        }
+      },
+      "description": "Describes a supported private link resource for the Azure Cognitive Search service."
+    },
+    "PrivateLinkResourceProperties": {
+      "properties": {
+        "groupId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The group ID of the private link resource."
+        },
+        "requiredMembers": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The list of required members of the private link resource."
+        },
+        "requiredZoneNames": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The list of required DNS zone names of the private link resource."
+        }
+      },
+      "description": "Describes the properties of a supported private link resource for the Azure Cognitive Search service."
     },
     "SearchService": {
       "properties": {

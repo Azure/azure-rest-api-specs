@@ -5,7 +5,7 @@
     "title": "SubscriptionsManagementClient",
     "description": "The Admin Subscriptions Management Client."
   },
-  "host": "adminmanagement.local.azurestack.external",
+  "host": "management.azure.com",
   "schemes": [
     "https"
   ],
@@ -238,7 +238,7 @@
         "x-ms-pageable": {
           "nextLinkName": null
         },
-        "x-ms-odata": "#/definitions/Subscription"
+        "x-ms-odata": "#/definitions/SubscriptionDefinition"
       }
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Subscriptions.Admin/checkNameAvailability": {
@@ -274,7 +274,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Subscriptions.Admin/subscriptions/{subscription}": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Subscriptions.Admin/subscriptions/{targetSubscriptionId}": {
       "get": {
         "x-ms-examples": {
           "Get a specified subscription.": {
@@ -291,7 +291,7 @@
             "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionParameter"
+            "$ref": "#/parameters/TargetSubscriptionIdParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -301,7 +301,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/Subscription"
+              "$ref": "#/definitions/SubscriptionDefinition"
             }
           }
         }
@@ -322,10 +322,10 @@
             "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionParameter"
+            "$ref": "#/parameters/TargetSubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/NewSubscriptionParameter"
+            "$ref": "#/parameters/SubscriptionDefinitionParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -335,13 +335,13 @@
           "201": {
             "description": "Created",
             "schema": {
-              "$ref": "#/definitions/Subscription"
+              "$ref": "#/definitions/SubscriptionDefinition"
             }
           },
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/Subscription"
+              "$ref": "#/definitions/SubscriptionDefinition"
             }
           }
         }
@@ -362,7 +362,7 @@
             "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionParameter"
+            "$ref": "#/parameters/TargetSubscriptionIdParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -767,8 +767,8 @@
         }
       }
     },
-    "Subscription": {
-      "description": "List of supported operations.",
+    "SubscriptionDefinition": {
+      "description": "Subscription object properties.",
       "type": "object",
       "properties": {
         "delegatedProviderSubscriptionId": {
@@ -820,7 +820,7 @@
           "type": "array",
           "description": "Subscription definition.",
           "items": {
-            "$ref": "#/definitions/Subscription"
+            "$ref": "#/definitions/SubscriptionDefinition"
           }
         },
         "nextLink": {
@@ -1215,20 +1215,20 @@
       "required": true,
       "x-ms-parameter-location": "method"
     },
-    "SubscriptionParameter": {
-      "description": "Subscription parameter.",
-      "name": "subscription",
+    "TargetSubscriptionIdParameter": {
+      "description": "The target subscription ID.",
+      "name": "targetSubscriptionId",
       "in": "path",
       "type": "string",
       "required": true,
       "x-ms-parameter-location": "method"
     },
-    "NewSubscriptionParameter": {
+    "SubscriptionDefinitionParameter": {
       "description": "Subscription parameter.",
-      "name": "newSubscription",
+      "name": "subscriptionDefinition",
       "in": "body",
       "schema": {
-        "$ref": "#/definitions/Subscription"
+        "$ref": "#/definitions/SubscriptionDefinition"
       },
       "required": true,
       "x-ms-parameter-location": "method"

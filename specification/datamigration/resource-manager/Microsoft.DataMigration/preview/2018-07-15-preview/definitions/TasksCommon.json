@@ -142,6 +142,60 @@
         "modelAsString": true
       }
     },
+    "ScenarioSource": {
+      "type": "string",
+      "description": "An enumeration of source type",
+      "enum": [
+        "Access",
+        "DB2",
+        "MySQL",
+        "Oracle",
+        "SQL",
+        "Sybase",
+        "PostgreSQL",
+        "MongoDB",
+        "SQLRDS",
+        "MySQLRDS",
+        "PostgreSQLRDS"
+      ],
+      "x-ms-enum": {
+        "name": "ScenarioSource",
+        "modelAsString": true
+      }
+    },
+    "ScenarioTarget": {
+      "type": "string",
+      "description": "An enumeration of target type",
+      "enum": [
+        "SQLServer",
+        "SQLDB",
+        "SQLDW",
+        "SQLMI",
+        "AzureDBForMySql",
+        "AzureDBForPostgresSQL",
+        "MongoDB"
+      ],
+      "x-ms-enum": {
+        "name": "ScenarioTarget",
+        "modelAsString": true
+      }
+    },
+    "ReplicateMigrationState": {
+      "type": "string",
+      "description": "Wrapper for replicate reported migration states.",
+      "enum": [
+        "UNDEFINED",
+        "VALIDATING",
+        "PENDING",
+        "COMPLETE",
+        "ACTION_REQUIRED",
+        "FAILED"
+      ],
+      "x-ms-enum": {
+        "name": "ReplicateMigrationState",
+        "modelAsString": true
+      }
+    },
     "DatabaseObjectName": {
       "type": "object",
       "description": "A representation of the name of an object in a database",
@@ -1040,7 +1094,14 @@
         "COMPLETE",
         "CANCELLING",
         "CANCELLED",
-        "FAILED"
+        "FAILED",
+        "VALIDATING",
+        "VALIDATION_COMPLETE",
+        "VALIDATION_FAILED",
+        "RESTORE_IN_PROGRESS",
+        "RESTORE_COMPLETED",
+        "BACKUP_IN_PROGRESS",
+        "BACKUP_COMPLETED"
       ],
       "x-ms-enum": {
         "name": "SyncDatabaseMigrationReportingState",

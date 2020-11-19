@@ -6,26 +6,25 @@ These settings apply only when `--cli` is specified on the command line.
 cli:
   namespace: azure.mgmt.alertsmanagement
   test-scenario:
-    - name: PutActionRule
-    - name: Create or update a Smart Detector alert rule
-    - name: Get a Smart Detector alert rule
-    - name: GetActionRuleById
-    - name: List alert rules
-    - name: GetActionRulesResourceGroupWide
-    - name: Resolve
-    - name: Get
-    - name: Resolve
-    - name: List Smart Detector alert rules
-    - name: GetById
-    - name: Summary
-    - name: List
-    - name: GetActionRulesSubscriptionWide
-    - name: ListAlerts
-    - name: MonService
-    - name: Patch alert rules
-    - name: PatchActionRule
-    - name: changestate
-    - name: Resolve
-    - name: Delete a Smart Detector alert rule
-    - name: DeleteActionRule
+    - name: /ActionRules/put/PutActionRule
+    - name: /SmartDetectorAlertRules/put/Create or update a Smart Detector alert rule
+    - name: /SmartDetectorAlertRules/get/Get a Smart Detector alert rule
+    - name: /ActionRules/get/GetActionRuleById
+    - name: /SmartDetectorAlertRules/get/List alert rules
+    - name: /ActionRules/get/GetActionRulesResourceGroupWide
+    - name: /SmartGroups/get/Resolve
+    - name: /SmartGroups/get/Get
+    - name: /SmartDetectorAlertRules/get/List Smart Detector alert rules
+    - name: /Alerts/get/GetById
+    - name: /Alerts/get/Summary
+    - name: /SmartGroups/get/List
+    - name: /ActionRules/get/GetActionRulesSubscriptionWide
+    - name: /Alerts/get/ListAlerts
+    - name: /Alerts/get/MonService
+    - name: /SmartDetectorAlertRules/patch/Patch alert rules
+    - name: /ActionRules/patch/PatchActionRule
+    - name: /SmartGroups/post/changestate
+    - name: /Alerts/post/Resolve
+    - name: /SmartDetectorAlertRules/delete/Delete a Smart Detector alert rule
+    - name: /ActionRules/delete/DeleteActionRule
 ```

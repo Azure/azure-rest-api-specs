@@ -1,0 +1,25 @@
+{
+  "title": "Set device attestation - TPM",
+  "description": "Creates or updates the TPM attestation for a device.",
+  "parameters": {
+    "centralDnsSuffixInPath": "azureiotcentral.com",
+    "subdomain": "appsubdomain",
+    "device_id": "CheckoutThermostat",
+    "body": {
+      "type": "TpmAttestation",
+      "tpm": {
+        "endorsementKey": "<endorsement key>"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "type": "TpmAttestation",
+        "tpm": {
+          "endorsementKey": "<endorsement key>"
+        }
+      }
+    }
+  }
+}

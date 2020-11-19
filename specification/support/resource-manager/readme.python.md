@@ -18,10 +18,10 @@ python:
 ``` yaml $(python) && $(python-mode) == 'update'
 python:
   no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-support/azure/mgmt/support
+  output-folder: $(python-sdks-folder)/support/azure-mgmt-support/azure/mgmt/support
 ```
 ``` yaml $(python) && $(python-mode) == 'create'
 python:
   basic-setup-py: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-support
+  output-folder: $(python-sdks-folder)/support/azure-mgmt-support
 ```

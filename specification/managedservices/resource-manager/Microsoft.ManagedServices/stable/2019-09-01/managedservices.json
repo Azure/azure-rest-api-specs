@@ -444,7 +444,7 @@
           "200": {
             "description": "OK - Returns the details of the marketplace registration definition.",
             "schema": {
-              "$ref": "#/definitions/RegistrationDefinition"
+              "$ref": "#/definitions/MarketplaceRegistrationDefinition"
             }
           },
           "default": {
@@ -765,13 +765,75 @@
       },
       "description": "List of registration assignments."
     },
+    "MarketplaceRegistrationDefinition": {
+      "properties": {
+        "properties": {
+          "description": "Properties of a marketplace registration definition.",
+          "$ref": "#/definitions/MarketplaceRegistrationDefinitionProperties"
+        },
+        "plan": {
+          "description": "Plan details for the managed services.",
+          "$ref": "#/definitions/Plan"
+        },
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Fully qualified path of the marketplace registration definition."
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Type of the resource."
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Name of the marketplace registration definition."
+        }
+      },
+      "x-ms-azure-resource": true,
+      "type": "object"
+    },
+    "MarketplaceRegistrationDefinitionProperties": {
+      "properties": {
+        "managedByTenantId": {
+          "type": "string",
+          "description": "Id of the managedBy tenant."
+        },
+        "authorizations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Authorization"
+          },
+          "description": "Authorization tuple containing principal id of the user/security group or service principal and id of the build-in role."
+        },
+        "offerDisplayName": {
+          "type": "string",
+          "description": "The marketplace offer display name."
+        },
+        "publisherDisplayName": {
+          "type": "string",
+          "description": "The marketplace publisher display name."
+        },
+        "planDisplayName": {
+          "type": "string",
+          "description": "The marketplace plan display name."
+        }
+      },
+      "required": [
+        "managedByTenantId",
+        "authorizations"
+      ],
+      "type": "object",
+      "description": "Properties of a marketplace registration definition."
+    },
     "MarketplaceRegistrationDefinitionList": {
       "properties": {
         "value": {
           "type": "array",
           "readOnly": true,
           "items": {
-            "$ref": "#/definitions/RegistrationDefinition"
+            "$ref": "#/definitions/MarketplaceRegistrationDefinition"
           },
           "description": "List of marketplace registration definitions."
         },

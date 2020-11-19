@@ -4,6 +4,17 @@
     "title": "DataFactoryManagementClient",
     "version": "2018-06-01"
   },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
   "paths": {},
   "definitions": {
     "Trigger": {
@@ -417,7 +428,8 @@
       "type": "string",
       "enum": [
         "Minute",
-        "Hour"
+        "Hour",
+        "Month"
       ],
       "x-ms-enum": {
         "name": "TumblingWindowFrequency",
@@ -504,7 +516,7 @@
         "offset": {
           "description": "Timespan applied to the start time of a tumbling window when evaluating dependency.",
           "type": "string",
-          "pattern": "((\\d+)\\.)?(\\d\\d):(60|([0-5][0-9])):(60|([0-5][0-9]))",
+          "pattern": "-?((\\d+)\\.)?(\\d\\d):(60|([0-5][0-9])):(60|([0-5][0-9]))",
           "minLength": 8,
           "maxLength": 15
         },
@@ -529,7 +541,7 @@
         "offset": {
           "description": "Timespan applied to the start time of a tumbling window when evaluating dependency.",
           "type": "string",
-          "pattern": "((\\d+)\\.)?(\\d\\d):(60|([0-5][0-9])):(60|([0-5][0-9]))",
+          "pattern": "-((\\d+)\\.)?(\\d\\d):(60|([0-5][0-9])):(60|([0-5][0-9]))",
           "minLength": 8,
           "maxLength": 15
         },
@@ -572,7 +584,7 @@
               "format": "date-time",
               "description": "The end time for the time period for which restatement is initiated. Only UTC time is currently supported."
             },
-            "maxConcurrency": {
+            "rerunConcurrency": {
               "description": "The max number of parallel time windows (ready for execution) for which a rerun is triggered.",
               "type": "integer",
               "minimum": 1,
@@ -580,9 +592,10 @@
             }
           },
           "required": [
+            "parentTrigger",
             "requestedStartTime",
             "requestedEndTime",
-            "maxConcurrency"
+            "rerunConcurrency"
           ]
         }
       },

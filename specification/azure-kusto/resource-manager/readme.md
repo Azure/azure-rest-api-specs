@@ -28,12 +28,43 @@ These are the global settings for the Kusto API.
 title: KustoManagementClient
 description: 'The Azure Kusto management API provides a RESTful set of web services that interact with Azure Kusto services to manage your clusters and databases. The API enables you to create, update, and delete clusters and databases.'
 openapi-type: arm
-tag: package-2019-09-07
-directive:
-  - suppress: R2016
-    from: kusto.json
-    where: $.definitions.DataConnection.required
-    reason: Implements kind which is required also in patch
+tag: package-2020-09-18
+```
+
+
+### Tag: package-2020-09-18
+
+These settings apply only when `--tag=package-2020-09-18` is specified on the command line.
+
+```yaml $(tag) == 'package-2020-09-18'
+input-file:
+  - Microsoft.Kusto/stable/2020-09-18/kusto.json
+```
+### Tag: package-2020-06-14
+
+These settings apply only when `--tag=package-2020-06-14` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-06-14'
+input-file:
+  - Microsoft.Kusto/stable/2020-06-14/kusto.json
+```
+
+### Tag: package-2020-02-15
+
+These settings apply only when `--tag=package-2020-02-15` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-02-15'
+input-file:
+  - Microsoft.Kusto/stable/2020-02-15/kusto.json
+```
+
+### Tag: package-2019-11-09
+
+These settings apply only when `--tag=package-2019-11-09` is specified on the command line.
+
+``` yaml $(tag) == 'package-2019-11-09'
+input-file:
+  - Microsoft.Kusto/stable/2019-11-09/kusto.json
 ```
 
 ### Tag: package-2019-09-07
@@ -147,8 +178,13 @@ This is not used by Autorest itself.
 swagger-to-sdk:
   - repo: azure-sdk-for-net
   - repo: azure-sdk-for-python
+  - repo: azure-sdk-for-js
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-java
+  - repo: azure-cli-extensions
+  - repo: azure-resource-manager-schemas
+    after_scripts:
+      - node sdkauto_afterscript.js azure-kusto/resource-manager
 ```
 
 ## C#
@@ -167,112 +203,24 @@ csharp:
 
 ## Java
 
-These settings apply only when `--java` is specified on the command line.
-Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-libraries-for-java clone>`.
+See configuration in [readme.java.md](./readme.java.md)
 
-``` yaml $(java)
-azure-arm: true
-fluent: true
-namespace: com.microsoft.azure.management.kusto
-license-header: MICROSOFT_MIT_NO_CODEGEN
-payload-flattening-threshold: 1
-output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-kusto
-```
+## AzureResourceSchema
 
-### Java multi-api
-
-``` yaml $(java) && $(multiapi)
-batch:
-  - tag: package-2018-09-07-preview
-  - tag: package-2019-01-21
-  - tag: package-2019-05-15
-  - tag: package-2019-09-07
-```
-
-### Tag: package-2018-09-07-preview and java
-
-These settings apply only when `--tag=package-2018-09-07-preview --java` is specified on the command line.
-Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
-
-``` yaml $(tag) == 'package-2018-09-07-preview' && $(java) && $(multiapi)
-java:
-  namespace: com.microsoft.azure.management.kusto.v2018_09_07_preview
-  output-folder: $(azure-libraries-for-java-folder)/sdk/kusto/mgmt-v2018_09_07_preview
-regenerate-manager: true
-generate-interface: true
-```
-
-### Tag: package-2019-01-21 and java
-
-These settings apply only when `--tag=package-2019-01-21 --java` is specified on the command line.
-Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
-
-``` yaml $(tag) == 'package-2019-01-21' && $(java) && $(multiapi)
-java:
-  namespace: com.microsoft.azure.management.kusto.v2019_01_21
-  output-folder: $(azure-libraries-for-java-folder)/sdk/kusto/mgmt-v2019_01_21
-regenerate-manager: true
-generate-interface: true
-```
-
-### Tag: package-2019-05-15 and java
-
-These settings apply only when `--tag=package-2019-05-15 --java` is specified on the command line.
-Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
-
-``` yaml $(tag) == 'package-2019-05-15' && $(java) && $(multiapi)
-java:
-  namespace: com.microsoft.azure.management.kusto.v2019_05_15
-  output-folder: $(azure-libraries-for-java-folder)/sdk/kusto/mgmt-v2019_05_15
-regenerate-manager: true
-generate-interface: true
-```
-
-### Tag: package-2019-09-07 and java
-
-These settings apply only when `--tag=package-2019-09-07 --java` is specified on the command line.
-Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
-
-``` yaml $(tag) == 'package-2019-09-07' && $(java) && $(multiapi)
-java:
-  namespace: com.microsoft.azure.management.kusto.v2019_09_07
-  output-folder: $(azure-libraries-for-java-folder)/sdk/kusto/mgmt-v2019_09_07
-regenerate-manager: true
-generate-interface: true
-```
-
-## Multi-API/Profile support for AutoRest v3 generators
-
-AutoRest V3 generators require the use of `--tag=all-api-versions` to select api files.
-
-This block is updated by an automatic script. Edits may be lost!
-
-``` yaml $(tag) == 'all-api-versions' /* autogenerated */
-# include the azure profile definitions from the standard location
-require: $(this-folder)/../../../profiles/readme.md
-
-# all the input files across all versions
-input-file:
-  - $(this-folder)/Microsoft.Kusto/stable/2019-09-07/kusto.json
-  - $(this-folder)/Microsoft.Kusto/stable/2019-05-15/kusto.json
-  - $(this-folder)/Microsoft.Kusto/stable/2019-01-21/kusto.json
-  - $(this-folder)/Microsoft.Kusto/preview/2018-09-07-preview/kusto.json
-  - $(this-folder)/Microsoft.Kusto/preview/2017-09-07-privatepreview/kusto.json
-
-```
-
-If there are files that should not be in the `all-api-versions` set,
-uncomment the  `exclude-file` section below and add the file paths.
-
-``` yaml $(tag) == 'all-api-versions'
-#exclude-file: 
-#  - $(this-folder)/Microsoft.Example/stable/2010-01-01/somefile.json
-```
+See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
 
 ## Suppression
 
 ``` yaml
 directive:
+  - suppress: R2016
+    from: kusto.json
+    where: $.definitions.DataConnection.required
+    reason: Discriminator kind is required also in patch
+  - suppress: R2016
+    from: kusto.json
+    where: $.definitions.Database.required
+    reason: Discriminator kind is required also in patch
   - suppress: ListInOperationName
     from: kusto.json
     where: '$.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Kusto/clusters/{clusterName}/databases/{databaseName}/addPrincipals"].post.operationId'
