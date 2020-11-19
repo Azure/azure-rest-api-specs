@@ -1,0 +1,93 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Communication",
+    "description": "Communication Services API common types.",
+    "version": "2020-11-19-preview1"
+  },
+  "paths": {},
+  "definitions": {
+    "CommunicationError": {
+      "properties": {
+        "error": {
+          "readOnly": true,
+          "$ref": "#/definitions/Error"
+        }
+      },
+      "description": "The Communication Services error exception."
+    },
+    "Error": {
+      "properties": {
+        "code": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The error code."
+        },
+        "message": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The error message."
+        },
+        "target": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The error target."
+        },
+        "details": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The error details."
+        },
+        "innererror": {
+          "x-ms-client-name": "innerError",
+          "readOnly": true,
+          "$ref": "#/definitions/Error"
+        }
+      },
+      "description": "The Communication Services error.",
+      "x-nullable": true
+    },
+    "CommunicationIdentifierType": {
+      "type": "string",
+      "enum": [
+        "Unknown",
+        "CommunicationUser",
+        "PhoneNumber",
+        "CallingApplication"
+      ],
+      "x-ms-enum": {
+        "name": "CommunicationIdentifierType",
+        "modelAsString": true
+      },
+      "description": "Type of an communication identifier."
+    },
+    "CommunicationIdentifier": {
+      "required": [
+        "type"
+      ],
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/CommunicationIdentifierType",
+          "readOnly": true,
+          "description": "Type of the communication identifier."
+        },
+        "communicationUserId": {
+          "type": "string",
+          "description": "Id of the CommunicationUser as returned from the Communication Service."
+        },
+        "phoneNumber": {
+          "type": "string",
+          "description": "The phone number in E.164 format."
+        },
+        "callingApplicationId": {
+          "type": "string",
+          "description": "Id of the CallingApplication."
+        },
+        "id": {
+          "type": "string",
+          "description": "Id of the UnknownIdentifier."
+        }
+      }
+    }
+  }
+}
