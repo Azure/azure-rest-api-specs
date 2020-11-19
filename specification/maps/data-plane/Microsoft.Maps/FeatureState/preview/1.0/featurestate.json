@@ -677,10 +677,31 @@
       "type": "object",
       "properties": {
         "styles": {
-          "description": "An array of stateset styles.",
+          "description": "An array of stateset styles. The style rule could be a numeric or string or a boolean type style rule.  Refer to NumberRuleObject, StringRuleObject and BooleanRuleObject definition.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/StyleObject"
+          }
+        },
+		"stylesWithNumericRule": {
+          "description": "Not supported. This type definition could be used in the above styles property. This is given for reference only.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NumberRuleObject"
+          }
+        },
+		"stylesWithBooleanRule": {
+          "description": "Not supported. This type definition could be used in the above styles property. This is given for reference only.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/BooleanRuleObject"
+          }
+        },
+		"stylesWithStringRule": {
+          "description": "Not supported. This type definition could be used in the above styles property. This is given for reference only.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/StringRuleObject"
           }
         }
       }
@@ -761,7 +782,7 @@
       }
     },
     "StyleRuleBase": {
-      "description": "contains common properties for numeric style rules and boolean style rules.",
+      "description": "contains common properties for numeric, string and boolean style rules.",
       "discriminator": "type",
       "required": [
         "keyName",
@@ -777,7 +798,8 @@
           "type": "string",
           "enum": [
             "number",
-            "boolean"
+            "boolean",
+			"string"
           ]
         }
       }
