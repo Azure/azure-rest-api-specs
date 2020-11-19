@@ -126,6 +126,64 @@
           "items": {
             "$ref": "#/definitions/SubscriptionSuspensionReason"
           }
+        },
+        "lastMonthCharges": {
+          "description": "The last month charges.",
+          "readOnly": true,
+          "$ref": "#/definitions/Amount"
+        },
+        "monthToDateCharges": {
+          "description": "The current month to date charges.",
+          "readOnly": true,
+          "$ref": "#/definitions/Amount"
+        },
+        "billingProfileId": {
+          "description": "The ID of the billing profile to which the subscription is billed.",
+          "type": "string",
+          "readOnly": true
+        },
+        "billingProfileDisplayName": {
+          "description": "The name of the billing profile to which the subscription is billed.",
+          "type": "string",
+          "readOnly": true
+        },
+        "costCenter": {
+          "description": "The cost center applied to the subscription.",
+          "type": "string"
+        },
+        "customerId": {
+          "description": "The ID of the customer for whom the subscription was created. The field is applicable only for Microsoft Partner Agreement billing account.",
+          "type": "string",
+          "readOnly": true
+        },
+        "customerDisplayName": {
+          "description": "The name of the customer for whom the subscription was created. The field is applicable only for Microsoft Partner Agreement billing account.",
+          "type": "string",
+          "readOnly": true
+        },
+        "invoiceSectionId": {
+          "description": "The ID of the invoice section to which the subscription is billed.",
+          "type": "string",
+          "readOnly": true
+        },
+        "invoiceSectionDisplayName": {
+          "description": "The name of the invoice section to which the subscription is billed.",
+          "type": "string",
+          "readOnly": true
+        },
+        "reseller": {
+          "description": "Reseller for this subscription.",
+          "readOnly": true,
+          "$ref": "#/definitions/Reseller"
+        },
+        "skuId": {
+          "description": "The sku ID of the Azure plan for the subscription.",
+          "type": "string"
+        },
+        "skuDescription": {
+          "description": "The sku description of the Azure plan for the subscription.",
+          "type": "string",
+          "readOnly": true
         }
       }
     },
