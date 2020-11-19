@@ -1,8 +1,8 @@
 {
   "parameters": {
     "subscriptionId": "ab7a8701-f7ef-471a-a2f4-d0ebbf494f77",
-    "hostedResourceProvider": "Microsoft.Contoso",
-    "api-version": "2019-02-01-preview"
+    "providerNamespace": "Microsoft.Contoso",
+    "api-version": "2020-06-01-preview"
   },
   "responses": {
     "200": {
@@ -16,32 +16,32 @@
             "properties": {
               "provisioningState": "Succeeded",
               "specification": {
-                "TestRegions": {
+                "canary": {
                   "regions": ["brazilus","eastus2euap","centraluseuap"]
                 },
-                "LowTraffic": {
+                "lowtraffic": {
                   "regions": ["southeastasia"],
                   "waitDuration": "PT24H"
                 },
-                "MediumTraffic": {
+                "mediumTraffic": {
                   "regions": ["uksouth","indiawest"],
                   "waitDuration": "PT24H"
                 },
-                "HighTraffic": {
+                "highTraffic": {
                   "regions": ["australiasoutheast","otherhightraficregions"],
                   "waitDuration": "PT24H"
                 },
-                "RestOfTheWorldGroupOne": {
+                "restOfTheWorldGroupOne": {
                   "regions": ["koreacentral","francecentral","australiacentral","westus","allotherregions"],
                   "waitDuration": "PT4H"
                 },
-                "RestOfTheWorldGroupTwo": {
+                "restOfTheWorldGroupTwo": {
                   "regions": ["germanynorth","norwayeast","allotherregions"],
                   "waitDuration": "PT4H"
                 }
               },
               "status": {
-                "completedRegions" : ["brazilus","eastus2euap","centraluseuap","allcompletedregions" ]              
+                "completedRegions" : ["brazilus","eastus2euap","centraluseuap","allcompletedregions" ]
               }
             }
           },
@@ -52,33 +52,33 @@
             "properties": {
               "provisioningState": "Cancelled",
               "specification": {
-                "TestRegions": {
+                "canary": {
                   "regions": ["brazilus","eastus2euap","centraluseuap"]
                 },
-                "LowTraffic": {
+                "lowtraffic": {
                   "regions": ["southeastasia"],
                   "waitDuration": "PT24H"
                 },
-                "MediumTraffic": {
+                "mediumTraffic": {
                   "regions": ["uksouth","indiawest"],
                   "waitDuration": "PT24H"
                 },
-                "HighTraffic": {
+                "highTraffic": {
                   "regions": ["australiasoutheast","otherhightraficregions"],
                   "waitDuration": "PT24H"
                 },
-                "RestOfTheWorldGroupOne": {
+                "restOfTheWorldGroupOne": {
                   "regions": ["koreacentral","francecentral","australiacentral","westus","allotherregions"],
                   "waitDuration": "PT4H"
                 },
-                "RestOfTheWorldGroupTwo": {
+                "restOfTheWorldGroupTwo": {
                   "regions": ["germanynorth","norwayeast","allotherregions"],
                   "waitDuration": "PT4H"
                 }
               },
               "status": {
                 "completedRegions" : ["brazilus","eastus2euap","centraluseuap","allcompletedregions"],
-                "failedOrSkippedRegions" : 
+                "failedOrSkippedRegions" :
                 {
                   "westus2" : {
                     "code": "RolloutStoppedByUser",
