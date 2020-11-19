@@ -20,7 +20,7 @@ We request OpenAPI(Swagger) spec authoring be assigned to engineers who have an
 * [Rule Descriptions](#rule-descriptions)
 
 ## Error vs Warning
-- Rules with severity "Error" have to be addressed for the OpenAPI(swagger) spec to be approved by the reviewers. If there is a strong reason for why the rule cannot be addressed in an OpenAPI(swagger) spec it will be a permanent exception, then [suppression process](https://github.com/Azure/adx-documentation-pr/wiki/Swagger-Validation-Errors-Suppression) must be followed.
+- Rules with severity "Error" have to be addressed for the OpenAPI(swagger) spec to be approved by the reviewers. If there is a strong reason for why the rule cannot be addressed in an OpenAPI(swagger) spec it will be a permanent exception, then [suppression process](https://dev.azure.com/azure-sdk/internal/_wiki/wikis/internal.wiki/85/Swagger-Suppression-Process) must be followed.
 
 - Rules with severity "Warning" are either strong recommendations made by Azure developer experience team for better SDK/Documentation experience or they point out something to evaluate, for example, the warning for booleans asks the user to evaluate whether the property should be a boolean or not. 
 
@@ -2349,35 +2349,55 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 **LastModifiedAt**: April 2, 2020
 
 **How to fix the violation**: Following the ARM specification to modify the schema in the swagger file.
+It's recommended to refer to the 'ErrorResponse' in [v2/types.json](https://github.com/Azure/azure-rest-api-specs/blob/master/specification/common-types/resource-management/v2/types.json#L273) which is provided for fixing the error.
 
 The following would be invalid:
 
 ```json
- "response":{
-   "default": {
-     "schema":{
-         "error":"error msg",
-         "code": 404,
-         "message":"some details"
+"definitions": {
+  "ErrorResponse": {
+     "properties": {
+       "code": {
+         "readOnly": true,
+         "type": "string",
+         "description": "The error code."
+       },
+       "message": {
+         "readOnly": true,
+         "type": "string",
+         "description": "The error message."
+       }
+       ...
      }
   }
- }
-
+}
 ```
 
 the correct schema:
 
 ```json
- "response":{
-   "default": {
-     "error":
-     {
-        "code": 404,
-        "message":"some details"
-         ...
+"definitions": {
+  "ErrorResponse": {
+     "properties": {
+        "error": {
+          "type": "object",
+          "description": "The error object.",
+          "properties": {
+            "code": {
+              "readOnly": true,
+              "type": "string",
+              "description": "The error code."
+            },
+            "message": {
+              "readOnly": true,
+              "type": "string",
+              "description": "The error message."
+            }
+            ...
+        }
      }
   }
- }
+}
 
 ```
 
@@ -2758,7 +2778,7 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 **Output Message** : The response schema of operations API "{0}" does not match the ARM specification. Please standardize the schema.
 
-**Description** : The operations API should have a response body schema consistent with the [contract spec](https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/proxy-api-reference.md#exposing-available-operations). The required properties such as `isDataAction`,`display.description` or `display.resource`,must be included.
+**Description** : The operations API should have a response body schema consistent with the [contract spec](https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/proxy-api-reference.md#exposing-available-operations). The required properties such as `isDataAction`,`display.description` and `display.resource`,must be included.
 
 **CreatedAt**: July 13, 2020
 
