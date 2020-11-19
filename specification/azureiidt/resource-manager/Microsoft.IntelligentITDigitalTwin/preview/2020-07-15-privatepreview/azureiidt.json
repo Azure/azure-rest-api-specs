@@ -469,7 +469,15 @@
         },
         "isManaged": {
           "description": "Customer concent to allow services maintain enterprise credentials.",
-          "type": "boolean"
+          "enum": [
+            "True",
+            "False"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "isManaged",
+            "modelAsString": true
+          }
         }
       },
       "description": "Describes the properties of a IT Digital Twin."
