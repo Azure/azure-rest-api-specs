@@ -29,6 +29,9 @@
             "$ref": "./examples/RoleDefinitions_ListRoleDefinitions.json"
           }
         },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
         "consumes": [],
         "produces": [
           "application/json",
@@ -80,6 +83,9 @@
         ],
         "parameters": [
           {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
             "$ref": "#/parameters/RoleDefinitionIdParameter"
           }
         ],
@@ -110,6 +116,9 @@
           "List rbac scopes": {
             "$ref": "./examples/RoleDefinitions_ListScopes.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         },
         "consumes": [],
         "produces": [
