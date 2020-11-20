@@ -3038,14 +3038,23 @@
           "Create a vm with Host Encryption using encryptionAtHost property.": {
             "$ref": "./examples/CreateAVmWithEncryptionAtHost.json"
           },
-          "Create a vm with a patch setting patchMode of AutomaticByOS.": {
-            "$ref": "./examples/CreateAVmWithPatchSettingModeOfAutomaticByOS.json"
+          "Create a windows vm with a patch setting patchMode of AutomaticByOS.": {
+            "$ref": "./examples/CreateAWindowsVmWithPatchSettingModeOfAutomaticByOS.json"
           },
-          "Create a vm with a patch setting patchMode of AutomaticByPlatform.": {
-            "$ref": "./examples/CreateAVmWithPatchSettingModeOfAutomaticByPlatform.json"
+          "Create a windows vm with a patch setting patchMode of AutomaticByPlatform.": {
+            "$ref": "./examples/CreateAWindowsVmWithPatchSettingModeOfAutomaticByPlatform.json"
           },
-          "Create a vm with a patch setting patchMode of Manual.": {
-            "$ref": "./examples/CreateAVmWithPatchSettingModeOfManual.json"
+          "Create a windows vm with a patch setting patchMode of Manual.": {
+            "$ref": "./examples/CreateAWindowsVmWithPatchSettingModeOfManual.json"
+          },
+          "Create a windows vm with a patch setting patchMode of AutomaticByPlatform and enableHotpatching set to true.": {
+            "$ref": "./examples/CreateAWindowsVmWithPatchSettingModeOfAutomaticByPlatformAndEnableHotPatchingTrue.json"
+          },
+          "Create a linux vm with a patch setting patchMode of AutomaticByPlatform.": {
+            "$ref": "./examples/CreateALinuxVmWithPatchSettingModeOfAutomaticByPlatform.json"
+          },
+          "Create a linux vm with a patch setting patchMode of ImageDefault.": {
+            "$ref": "./examples/CreateALinuxVmWithPatchSettingModeOfImageDefault.json"
           },
           "Create a vm with an extensions time budget.": {
             "$ref": "./examples/CreateAVmWithExtensionsTimeBudget.json"
@@ -7739,7 +7748,7 @@
           "readOnly": true,
           "description": "The version number of the patch. This property applies only to Linux patches."
         },
-        "kbid": {
+        "kbId": {
           "type": "string",
           "readOnly": true,
           "description": "The KBID of the patch. Only applies to Windows patches."
@@ -7757,12 +7766,13 @@
           "readOnly": true,
           "description": "Describes the reboot requirements of the patch.",
           "enum": [
+            "Unknown",
             "NeverReboots",
             "AlwaysRequiresReboot",
             "CanRequestReboot"
           ],
           "x-ms-enum": {
-            "name": "SoftwareUpdateRebootBehavior",
+            "name": "VMGuestPatchRebootBehavior",
             "modelAsString": true
           }
         },
@@ -7786,13 +7796,9 @@
         "assessmentState": {
           "type": "string",
           "readOnly": true,
-          "description": "Describes the outcome of an install operation for a given patch.",
+          "description": "Describes the assessed installation state of a given patch.",
           "enum": [
-            "Installed",
-            "Failed",
-            "Excluded",
-            "NotSelected",
-            "Pending",
+            "Unknown",
             "Available"
           ],
           "x-ms-enum": {
@@ -7808,8 +7814,9 @@
         "status": {
           "type": "string",
           "readOnly": true,
-          "description": "The overall success or failure status of the operation. It remains \"InProgress\" until the operation completes. At that point it will become \"Failed\", \"Succeeded\", or \"CompletedWithWarnings.\"",
+          "description": "The overall success or failure status of the operation. It remains \"InProgress\" until the operation completes. At that point it will become \"Failed\", \"Succeeded\", \"CompletedWithWarnings\", \"Unknown.\"",
           "enum": [
+            "Unknown",
             "InProgress",
             "Failed",
             "Succeeded",
@@ -7848,7 +7855,7 @@
           "format": "date-time",
           "description": "The UTC timestamp when the operation began."
         },
-        "patches": {
+        "availablePatches": {
           "type": "array",
           "readOnly": true,
           "items": {
@@ -8805,7 +8812,7 @@
           "description": "Specifies additional base-64 encoded XML formatted information that can be included in the Unattend.xml file, which is used by Windows Setup."
         },
         "patchSettings": {
-          "$ref": "#/definitions/PatchSettings",
+          "$ref": "#/definitions/WindowsPatchSettings",
           "description": "Specifies settings related to in-guest patching (KBs)."
         },
         "winRM": {
@@ -8853,6 +8860,10 @@
         "provisionVMAgent": {
           "type": "boolean",
           "description": "Indicates whether virtual machine agent should be provisioned on the virtual machine. <br><br> When this property is not specified in the request body, default behavior is to set it to true.  This will ensure that VM Agent is installed on the VM so that extensions can be added to the VM later."
+        },
+        "patchSettings": {
+          "$ref": "#/definitions/LinuxPatchSettings",
+          "description": "Specifies settings related to VM Guest Patching on Linux."
         }
       },
       "description": "Specifies the Linux operating system settings on the virtual machine. <br><br>For a list of supported Linux distributions, see [Linux on Azure-Endorsed Distributions](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-linux-endorsed-distros?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json) <br><br> For running non-endorsed distributions, see [Information for Non-Endorsed Distributions](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-linux-create-upload-generic?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json)."
@@ -12013,7 +12024,7 @@
         "action"
       ]
     },
-    "PatchSettings": {
+    "WindowsPatchSettings": {
       "properties": {
         "patchMode": {
           "type": "string",
@@ -12024,11 +12035,33 @@
             "AutomaticByPlatform"
           ],
           "x-ms-enum": {
-            "name": "InGuestPatchMode",
+            "name": "WindowsVMGuestPatchMode",
+            "modelAsString": true
+          }
+        },
+        "enableHotpatching": {
+          "type": "boolean",
+          "description": "Enables customers to patch their Azure VMs without requiring a reboot. For enableHotpatching, the 'provisionVMAgent' must be set to true and 'patchMode' must be set to 'AutomaticByPlatform'."
+        }
+      },
+      "description": "Specifies settings related to in-guest patching (KBs)."
+    },
+    "LinuxPatchSettings": {
+      "properties": {
+        "patchMode": {
+          "type": "string",
+          "description": "Specifies the mode of in-guest patching to IaaS virtual machine.<br /><br /> Possible values are:<br /><br /> **ImageDefault** - This will be whatever the image is configured by default with. <br /><br /> **AutomaticByPlatform** - the virtual machine will automatically updated by the platform. The property provisionVMAgent must be true ",
+          "enum": [
+            "ImageDefault",
+            "AutomaticByPlatform"
+          ],
+          "x-ms-enum": {
+            "name": "LinuxVMGuestPatchMode",
             "modelAsString": true
           }
         }
-      }
+      },
+      "description": "Specifies settings related to VM Guest Patching on Linux."
     },
     "VirtualMachinePatchStatus": {
       "properties": {
@@ -12039,6 +12072,18 @@
         "lastPatchInstallationSummary": {
           "$ref": "#/definitions/LastPatchInstallationSummary",
           "description": "The installation summary of the latest installation operation for the virtual machine."
+        },
+        "hotpatchStatus": {
+          "$ref": "#/definitions/HotpatchStatus",
+          "description": "The Hot Patch Status for the virual machine."
+        },
+        "configurationStatuses": {
+          "description": "The enablement status of the specified patchMode",
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/InstanceViewStatus"
+          }
         }
       },
       "description": "The status of virtual machine patch operations."
@@ -12048,8 +12093,9 @@
         "status": {
           "type": "string",
           "readOnly": true,
-          "description": "The overall success or failure status of the operation. It remains \"InProgress\" until the operation completes. At that point it will become \"Failed\", \"Succeeded\", or \"CompletedWithWarnings.\"",
+          "description": "The overall success or failure status of the operation. It remains \"InProgress\" until the operation completes. At that point it will become \"Unknown\", \"Failed\", \"Succeeded\", or \"CompletedWithWarnings.\"",
           "enum": [
+            "Unknown",
             "InProgress",
             "Failed",
             "Succeeded",
@@ -12107,8 +12153,9 @@
         "status": {
           "type": "string",
           "readOnly": true,
-          "description": "The overall success or failure status of the operation. It remains \"InProgress\" until the operation completes. At that point it will become \"Failed\", \"Succeeded\", or \"CompletedWithWarnings.\"",
+          "description": "The overall success or failure status of the operation. It remains \"InProgress\" until the operation completes. At that point it will become \"Unknown\", \"Failed\", \"Succeeded\", or \"CompletedWithWarnings.\"",
           "enum": [
+            "Unknown",
             "InProgress",
             "Failed",
             "Succeeded",
@@ -12128,22 +12175,6 @@
           "type": "boolean",
           "readOnly": true,
           "description": "Describes whether the operation ran out of time before it completed all its intended actions"
-        },
-        "rebootStatus": {
-          "type": "string",
-          "readOnly": true,
-          "description": "The reboot status of the machine after the patch operation. It will be in \"NotNeeded\" status if reboot is not needed after the patch operation. \"Required\" will be the status once the patch is applied and machine is required to reboot. \"Started\" will be the reboot status when the machine has started to reboot. \"Failed\" will be the status if the machine is failed to reboot. \"Completed\" will be the status once the machine is rebooted successfully",
-          "enum": [
-            "NotNeeded",
-            "Required",
-            "Started",
-            "Failed",
-            "Completed"
-          ],
-          "x-ms-enum": {
-            "name": "RebootStatus",
-            "modelAsString": true
-          }
         },
         "notSelectedPatchCount": {
           "type": "integer",
@@ -12187,10 +12218,37 @@
           "format": "date-time",
           "description": "The UTC timestamp when the operation began."
         },
-        "startedBy": {
+        "error": {
+          "$ref": "#/definitions/ApiError",
+          "readOnly": true,
+          "description": "The errors that were encountered during execution of the operation. The details array contains the list of them."
+        }
+      },
+      "description": "The Hot Patch Status for the virual machine."
+    },
+    "HotpatchStatus": {
+      "properties": {
+        "hotpatchEnablementStatus": {
           "type": "string",
           "readOnly": true,
-          "description": "The person or system account that started the operation"
+          "description": "Represents what state of hotpatching opt in the VM is in. .<br /><br /> Possible values are:<br /><br /> **Unknown** - Safe default until initialized. <br /><br /> **PendingEvaluation** - Value reported when there's no data from the extension to work with. <br /><br /> **NotRequested** - Extension reports that there was no instruction to enable hotpatching. <br /><br /> **ActionRequired** - Extension reports that customer action is required to complete opt in. <br /><br /> **Enabled** - Extension reports that hotpatching enablement has completed.",
+          "enum": [
+            "Unknown",
+            "PendingEvaluation",
+            "NotRequested",
+            "ActionRequired",
+            "Enabled"
+          ],
+          "x-ms-enum": {
+            "name": "HotpatchEnablementStatus",
+            "modelAsString": true
+          }
+        },
+        "lastRefreshedTime": {
+          "type": "string",
+          "readOnly": true,
+          "format": "date-time",
+          "description": "The UTC timestamp when the status was last refreshed."
         },
         "error": {
           "$ref": "#/definitions/ApiError",
