@@ -1265,9 +1265,9 @@
           "type": "string",
           "description": "The administrator's login name of servers in server group. Can only be specified when the server is being created (and is required for creation)."
         },
-        "backupRetentionMinutes": {
+        "backupRetentionDays": {
           "type": "integer",
-          "description": "The backup retention minutes for server group."
+          "description": "The backup retention days for server group."
         },
         "version": {
           "$ref": "#/definitions/ServerVersion",
@@ -1500,9 +1500,9 @@
           "format": "password",
           "description": "The password of the administrator login."
         },
-        "backupRetentionMinutes": {
+        "backupRetentionDays": {
           "type": "integer",
-          "description": "Backup retention minutes for the server group."
+          "description": "Backup retention days for the server group."
         },
         "isMx": {
           "type": "boolean",
@@ -1544,7 +1544,7 @@
       "required": [
         "administratorLogin",
         "administratorLoginPassword",
-        "backupRetentionMinutes",
+        "backupRetentionDays",
         "version",
         "serverRoleGroups"
       ]
@@ -1563,9 +1563,9 @@
           "format": "password",
           "description": "The password of the administrator login."
         },
-        "backupRetentionMinutes": {
+        "backupRetentionDays": {
           "type": "integer",
-          "description": "Backup retention minutes for the server group."
+          "description": "Backup retention days for the server group."
         },
         "version": {
           "$ref": "#/definitions/ServerVersion",
