@@ -20,7 +20,6 @@ python:
 python-mode: create
 azure-arm: true
 license-header: MICROSOFT_MIT_NO_VERSION
-payload-flattening-threshold: 2
 namespace: azure.mgmt.billing
 package-name: azure-mgmt-billing
 package-version: 6.0.0b1
