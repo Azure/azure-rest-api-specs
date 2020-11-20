@@ -71,7 +71,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ServerGroupForPut"
+              "$ref": "#/definitions/ServerGroup"
             },
             "description": "The required parameters for creating or updating a server group."
           }
@@ -283,6 +283,9 @@
               "$ref": "#/definitions/CloudError"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
         }
       }
     },
@@ -373,6 +376,9 @@
               "$ref": "#/definitions/CloudError"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -802,17 +808,23 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/RoleForCreate"
+              "$ref": "#/definitions/Role"
             },
             "description": "The required parameters for creating or updating a role."
           }
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Role"
+            }
           },
           "201": {
-            "description": "Created"
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/Role"
+            }
           },
           "202": {
             "description": "Accepted"
@@ -1113,6 +1125,9 @@
               "$ref": "#/definitions/OperationListResult"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
         }
       }
     }
@@ -1144,6 +1159,58 @@
       ],
       "x-ms-enum": {
         "name": "ServerCitusVersion",
+        "modelAsString": true
+      }
+    },
+    "VnetInjArgs": {
+      "type": "object",
+      "description": "The vnet injection arguments for server group.",
+      "properties": {
+        "delegatedVnetID": {
+          "type": "string",
+          "description": "delegated vNet ID"
+        },
+        "delegatedSubnetName": {
+          "type": "string",
+          "description": "delegated subnet name"
+        },
+        "delegatedVnetName": {
+          "type": "string",
+          "description": "delegated vNet name"
+        }
+      }
+    },
+    "ServerState": {
+      "type": "string",
+      "description": "A state of a server group/server that is visible to user.",
+      "enum": [
+        "Ready",
+        "Dropping",
+        "Disabled",
+        "Starting",
+        "Stopping",
+        "Stopped",
+        "Updating"
+      ],
+      "x-ms-enum": {
+        "name": "ServerState",
+        "modelAsString": true
+      }
+    },
+    "ServerHaState": {
+      "type": "string",
+      "description": "A state of a server role group/server that is visible to user for HA feature.",
+      "enum": [
+        "NotEnabled",
+        "CreatingStandby",
+        "ReplicatingData",
+        "FailingOver",
+        "Healthy",
+        "RemovingStandby",
+        "NotSync"
+      ],
+      "x-ms-enum": {
+        "name": "ServerHaState",
         "modelAsString": true
       }
     },
@@ -1230,21 +1297,8 @@
           "description": "The number of servers in the server role group."
         },
         "haState": {
-          "type": "string",
-          "description": "A state of a server role group that is visible to user for HA feature.",
-          "enum": [
-            "NotEnabled",
-            "CreatingStandby",
-            "ReplicatingData",
-            "FailingOver",
-            "Healthy",
-            "RemovingStandby",
-            "NotSync"
-          ],
-          "x-ms-enum": {
-            "name": "ServerRoleGroupHAState",
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/ServerHaState",
+          "description": "A state of a server role group that is visible to user for HA feature."
         },
         "serverNames": {
           "type": "array",
@@ -1255,98 +1309,6 @@
           "readOnly": true,
           "minItems": 1,
           "uniqueItems": true
-        }
-      }
-    },
-    "ServerGroupProperties": {
-      "description": "The properties of a server group.",
-      "properties": {
-        "administratorLogin": {
-          "type": "string",
-          "description": "The administrator's login name of servers in server group. Can only be specified when the server is being created (and is required for creation)."
-        },
-        "backupRetentionDays": {
-          "type": "integer",
-          "description": "The backup retention days for server group."
-        },
-        "version": {
-          "$ref": "#/definitions/ServerVersion",
-          "description": "The version of servers."
-        },
-        "citusVersion": {
-          "$ref": "#/definitions/CitusVersion",
-          "description": "The citus version of servers."
-        },
-        "isMx": {
-          "type": "boolean",
-          "description": "If zfs is enabled or not for the server group."
-        },
-        "isZfs": {
-          "type": "boolean",
-          "description": "If zfs is enabled or not for the server group."
-        },
-        "state": {
-          "type": "string",
-          "description": "A state of a server group that is visible to user.",
-          "enum": [
-            "Ready",
-            "Dropping",
-            "Starting",
-            "Stopping",
-            "Stopped",
-            "Updating"
-          ],
-          "x-ms-enum": {
-            "name": "ServerGroupState",
-            "modelAsString": true
-          }
-        },
-        "resourceProviderType": {
-          "type": "string",
-          "description": "The resource provider type of server group.",
-          "enum": [
-            "Meru",
-            "Marlin"
-          ],
-          "x-ms-enum": {
-            "name": "ResourceProviderType",
-            "modelAsString": true
-          }
-        },
-        "vnetInjArgs": {
-          "properties": {
-            "delegatedVnetID": {
-              "type": "string",
-              "description": "delegated vNet ID"
-            },
-            "delegatedSubnetName": {
-              "type": "string",
-              "description": "delegated subnet name"
-            },
-            "delegatedVnetName": {
-              "type": "string",
-              "description": "delegated vNet name"
-            }
-          }
-        },
-        "serverRoleGroups": {
-          "$ref": "#/definitions/ServerRoleGroupList",
-          "description": "The list of server role groups."
-        }
-      }
-    },
-    "ServerGroup": {
-      "description": "Represents a server group.",
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/TrackedResource"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/ServerGroupProperties",
-          "description": "The properties of a server group.",
-          "x-ms-client-flatten": true
         }
       }
     },
@@ -1363,37 +1325,12 @@
           "description": "The role of server in the server group."
         },
         "state": {
-          "type": "string",
-          "description": "A state of a server that is visible to user.",
-          "enum": [
-            "Ready",
-            "Dropping",
-            "Disabled",
-            "Starting",
-            "Stopping",
-            "Stopped",
-            "Updating"
-          ],
-          "x-ms-enum": {
-            "name": "ServerState",
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/ServerState",
+          "description": "A state of a server that is visible to user."
         },
         "haState": {
-          "type": "string",
-          "description": "A state of a server that is visible to user for HA feature.",
-          "enum": [
-            "NotEnabled",
-            "CreatingStandby",
-            "ReplicatingData",
-            "FailingOver",
-            "Healthy",
-            "RemovingStandby"
-          ],
-          "x-ms-enum": {
-            "name": "ServerHAState",
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/ServerHaState",
+          "description": "A state of a server group that is visible to user for HA feature."
         },
         "administratorLogin": {
           "type": "string",
@@ -1433,20 +1370,27 @@
       }
     },
     "ServerGroupForPatch": {
-      "description": "Parameters allowed to update for a server group.",
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/TrackedResource"
-        }
-      ],
+      "description": "Represents a server group for update.",
       "properties": {
+        "location": {
+          "type": "string",
+          "description": "The location the resource resides in."
+        },
         "properties": {
           "$ref": "#/definitions/ServerGroupPropertiesForUpdate",
-          "description": "Properties of the server group update."
+          "x-ms-client-flatten": true,
+          "description": "Properties of the server group."
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Application-specific metadata in the form of key-value pairs."
         }
       }
     },
-    "ServerGroupForPut": {
+    "ServerGroup": {
       "description": "Represents a server group for create.",
       "allOf": [
         {
@@ -1455,17 +1399,63 @@
       ],
       "properties": {
         "properties": {
-          "$ref": "#/definitions/ServerGroupPropertiesForPut",
+          "$ref": "#/definitions/ServerGroupProperties",
+          "x-ms-client-flatten": true,
           "description": "Properties of the server group create."
         }
       }
     },
-    "ServerGroupPropertiesForPut": {
+    "ServerGroupProperties": {
       "discriminator": "createMode",
-      "required": [
-        "createMode"
-      ],
       "properties": {
+        "administratorLogin": {
+          "type": "string",
+          "description": "The administrator's login name of servers in server group. Can only be specified when the server is being created (and is required for creation)."
+        },
+        "backupRetentionDays": {
+          "type": "integer",
+          "description": "The backup retention days for server group."
+        },
+        "version": {
+          "$ref": "#/definitions/ServerVersion",
+          "description": "The version of servers."
+        },
+        "citusVersion": {
+          "$ref": "#/definitions/CitusVersion",
+          "description": "The citus version of servers."
+        },
+        "isMx": {
+          "type": "boolean",
+          "description": "If zfs is enabled or not for the server group."
+        },
+        "isZfs": {
+          "type": "boolean",
+          "description": "If zfs is enabled or not for the server group."
+        },
+        "state": {
+          "$ref": "#/definitions/ServerState",
+          "description": "A state of a server group that is visible to user."
+        },
+        "resourceProviderType": {
+          "type": "string",
+          "description": "The resource provider type of server group.",
+          "enum": [
+            "Meru",
+            "Marlin"
+          ],
+          "x-ms-enum": {
+            "name": "ResourceProviderType",
+            "modelAsString": true
+          }
+        },
+        "vnetInjArgs": {
+          "$ref": "#/definitions/VnetInjArgs",
+          "description": "The vnet injection arguments for server group."
+        },
+        "serverRoleGroups": {
+          "$ref": "#/definitions/ServerRoleGroupList",
+          "description": "The list of server role groups."
+        },
         "createMode": {
           "type": "string",
           "description": "The mode to create a new server group.",
@@ -1483,11 +1473,11 @@
       "description": "The properties used to create a new server group."
     },
     "ServerGroupPropertiesForDefault": {
-      "x-ms-discriminator-value": "Create",
+      "x-ms-discriminator-value": "Default",
       "description": "The properties used to create a new server group.",
       "allOf": [
         {
-          "$ref": "#/definitions/ServerGroupPropertiesForPut"
+          "$ref": "#/definitions/ServerGroupProperties"
         }
       ],
       "properties": {
@@ -1497,7 +1487,12 @@
         },
         "administratorLoginPassword": {
           "type": "string",
+          "x-ms-secret": true,
           "format": "password",
+          "x-ms-mutability": [
+            "create",
+            "update"
+          ],
           "description": "The password of the administrator login."
         },
         "backupRetentionDays": {
@@ -1521,20 +1516,8 @@
           "description": "The citus version of a server."
         },
         "vnetInjArgs": {
-          "properties": {
-            "delegatedVnetID": {
-              "type": "string",
-              "description": "delegated vNet ID"
-            },
-            "delegatedSubnetName": {
-              "type": "string",
-              "description": "delegated subnet name"
-            },
-            "delegatedVnetName": {
-              "type": "string",
-              "description": "delegated vNet name"
-            }
-          }
+          "$ref": "#/definitions/VnetInjArgs",
+          "description": "The vnet injection arguments for server group."
         },
         "serverRoleGroups": {
           "$ref": "#/definitions/ServerRoleGroupList",
@@ -1554,13 +1537,18 @@
       "description": "The properties used to update a server group.",
       "allOf": [
         {
-          "$ref": "#/definitions/ServerGroupPropertiesForPut"
+          "$ref": "#/definitions/ServerGroupProperties"
         }
       ],
       "properties": {
         "administratorLoginPassword": {
           "type": "string",
           "format": "password",
+          "x-ms-secret": true,
+          "x-ms-mutability": [
+            "create",
+            "update"
+          ],
           "description": "The password of the administrator login."
         },
         "backupRetentionDays": {
@@ -1586,7 +1574,7 @@
       "description": "The properties used to create a new server group by restoring from a backup.",
       "allOf": [
         {
-          "$ref": "#/definitions/ServerGroupPropertiesForPut"
+          "$ref": "#/definitions/ServerGroupProperties"
         }
       ],
       "properties": {
@@ -1817,11 +1805,16 @@
         }
       }
     },
-    "RolePropertiesForCreate": {
+    "RoleProperties": {
       "properties": {
         "password": {
           "type": "string",
+          "x-ms-secret": true,
           "format": "password",
+          "x-ms-mutability": [
+            "create",
+            "update"
+          ],
           "description": "The password of the server group role."
         }
       },
@@ -1830,27 +1823,12 @@
       ],
       "description": "The properties of a server group role."
     },
-    "RoleForCreate": {
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/RolePropertiesForCreate",
-          "x-ms-client-flatten": true,
-          "description": "The properties of a role for create."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ProxyResource"
-        }
-      ],
-      "description": "Represents a server group role for create."
-    },
     "Role": {
       "properties": {
         "properties": {
-          "properties": {},
+          "$ref": "#/definitions/RoleProperties",
           "x-ms-client-flatten": true,
-          "description": "The properties of a role for create."
+          "description": "The properties of a role."
         }
       },
       "allOf": [
@@ -1985,7 +1963,8 @@
       "description": "An error response from the Batch service.",
       "properties": {
         "error": {
-          "$ref": "#/definitions/CloudErrorBody"
+          "$ref": "#/definitions/CloudErrorBody",
+          "description": "The error."
         }
       }
     },
