@@ -2230,10 +2230,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/QueriesResponse"
-              }
+              "$ref": "#/definitions/GetQueriesResponse"
             }
           },
           "default": {
@@ -6286,7 +6283,7 @@
         }
       }
     },
-    "QueriesResponse": {
+    "GetQueriesResponse": {
       "description": "Retrieve queries for entityresult operation response.",
       "properties": {
         "value": {
@@ -11117,7 +11114,8 @@
       "enum": [
         "Insight",
         "Activity"
-      ]
+      ],
+      "x-ms-parameter-location": "method"
     },
     "GetInsightsEntityQueriesRequestBody": {
       "description": "The parameters required to execute insights on the given entity.",
