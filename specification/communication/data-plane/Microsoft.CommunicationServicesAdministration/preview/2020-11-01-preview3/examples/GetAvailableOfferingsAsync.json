@@ -1,0 +1,35 @@
+{
+  "parameters": {
+    "api-version": "2020-07-20-preview1",
+    "countryCode": "US",
+    "endpoint": "https://resourcename.communications.azure.net/",
+    "numberType": "tollFree",
+    "assignmentType": "person"
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "offerings": [
+          {
+            "numberType": "tollFree",
+            "assignmentType": "person",
+            "availableCapabilities": {
+              "sms": [
+                "outbound",
+                "inbound+outbound"
+              ],
+              "calling": [
+                "inbound"
+              ]
+            },
+            "monthlyRate": {
+              "value": 0,
+              "currency": "USD"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

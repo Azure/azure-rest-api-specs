@@ -75,6 +75,15 @@ input-file:
   - Microsoft.CommunicationServicesCommon/preview/2020-11-19-preview1/common.json
 ```
 
+### Tag: package-2020-11-01-preview3
+
+These settings apply only when `--tag=package-2020-11-01-preview3` is specified on the command line.
+
+```yaml $(tag) == 'package-2020-07-20-preview2'
+input-file:
+  - Microsoft.CommunicationServicesAdministration/preview/2020-11-01-preview3/phonenumbers.json
+```
+
 ---
 
 # Code Generation
