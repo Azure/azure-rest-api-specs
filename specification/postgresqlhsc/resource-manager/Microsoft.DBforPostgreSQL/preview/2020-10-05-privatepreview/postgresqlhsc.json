@@ -71,7 +71,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ServerGroupForCreate"
+              "$ref": "#/definitions/ServerGroupForPut"
             },
             "description": "The required parameters for creating or updating a server group."
           }
@@ -80,13 +80,13 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/ServerGroupForCreate"
+              "$ref": "#/definitions/ServerGroupForPut"
             }
           },
           "201": {
             "description": "Created",
             "schema": {
-              "$ref": "#/definitions/ServerGroupForCreate"
+              "$ref": "#/definitions/ServerGroupForPut"
             }
           },
           "202": {
@@ -220,7 +220,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ServerGroupForUpdate"
+              "$ref": "#/definitions/ServerGroupForPatch"
             },
             "description": "The parameters for updating a server group."
           }
@@ -1188,17 +1188,9 @@
           "minimum": 0,
           "maximum": 1
         },
-        "publicNetworkAccess": {
-          "type": "string",
-          "description": "public network access is enabled or not",
-          "enum": [
-            "Enabled",
-            "Disabled"
-          ],
-          "x-ms-enum": {
-            "name": "ServerPublicNetworkAccessState",
-            "modelAsString": true
-          },
+        "isPublicIpRequested": {
+          "type": "boolean",
+          "description": "If public IP is requested or not for a server.",
           "readOnly": true
         }
       }
@@ -1209,7 +1201,7 @@
       "items": {
         "$ref": "#/definitions/ServerRoleGroup"
       },
-      "minItems": 2,
+      "minItems": 1,
       "maxItems": 2,
       "uniqueItems": true
     },
@@ -1264,6 +1256,14 @@
         "citusVersion": {
           "$ref": "#/definitions/CitusVersion",
           "description": "The citus version of servers."
+        },
+        "isMx": {
+          "type": "boolean",
+          "description": "If zfs is enabled or not for the server group."
+        },
+        "isZfs": {
+          "type": "boolean",
+          "description": "If zfs is enabled or not for the server group."
         },
         "vnetInjArgs": {
           "properties": {
@@ -1376,7 +1376,7 @@
         }
       }
     },
-    "ServerGroupForUpdate": {
+    "ServerGroupForPatch": {
       "description": "Parameters allowed to update for a server group.",
       "allOf": [
         {
@@ -1390,7 +1390,7 @@
         }
       }
     },
-    "ServerGroupForCreate": {
+    "ServerGroupForPut": {
       "description": "Represents a server group for create.",
       "allOf": [
         {
@@ -1399,13 +1399,16 @@
       ],
       "properties": {
         "properties": {
-          "$ref": "#/definitions/ServerGroupPropertiesForCreate",
+          "$ref": "#/definitions/ServerGroupPropertiesForPut",
           "description": "Properties of the server group create."
         }
       }
     },
-    "ServerGroupPropertiesForCreate": {
+    "ServerGroupPropertiesForPut": {
       "discriminator": "createMode",
+      "required": [
+        "createMode"
+      ],
       "properties": {
         "createMode": {
           "type": "string",
@@ -1423,12 +1426,12 @@
       },
       "description": "The properties used to create a new server group."
     },
-    "ServerGroupPropertiesForDefaultCreate": {
+    "ServerGroupPropertiesForDefault": {
       "x-ms-discriminator-value": "Create",
       "description": "The properties used to create a new server group.",
       "allOf": [
         {
-          "$ref": "#/definitions/ServerGroupPropertiesForCreate"
+          "$ref": "#/definitions/ServerGroupPropertiesForPut"
         }
       ],
       "properties": {
@@ -1445,29 +1448,13 @@
           "type": "integer",
           "description": "Backup retention minutes for the server group."
         },
-        "mx": {
-          "type": "string",
-          "description": "Data type of the configuration.",
-          "enum": [
-            "Enabled",
-            "Disabled"
-          ],
-          "x-ms-enum": {
-            "name": "mxEnabledDataType",
-            "modelAsString": true
-          }
+        "isMx": {
+          "type": "boolean",
+          "description": "If zfs is enabled or not for the server group."
         },
-        "zfs": {
-          "type": "string",
-          "description": "Data type of the configuration.",
-          "enum": [
-            "Enabled",
-            "Disabled"
-          ],
-          "x-ms-enum": {
-            "name": "zfsEnabledDataType",
-            "modelAsString": true
-          }
+        "isZfs": {
+          "type": "boolean",
+          "description": "If zfs is enabled or not for the server group."
         },
         "version": {
           "$ref": "#/definitions/ServerVersion",
@@ -1506,70 +1493,12 @@
         "serverRoleGroups"
       ]
     },
-    "ServerGroupPropertiesForRestore": {
-      "x-ms-discriminator-value": "PointInTimeRestore",
-      "description": "The properties used to create a new server group by restoring from a backup.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/ServerGroupPropertiesForCreate"
-        }
-      ],
-      "properties": {
-        "sourceSubscriptionId": {
-          "type": "string",
-          "description": "The source subscription id to restore from."
-        },
-        "sourceResourceGroupName": {
-          "type": "string",
-          "description": "The source resource group name to restore from."
-        },
-        "sourceServerGroupName": {
-          "type": "string",
-          "description": "The source server group name to restore from."
-        },
-        "pointInTimeUTC": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Restore point creation time (ISO8601 format), specifying the time to restore from."
-        },
-        "mx": {
-          "type": "string",
-          "description": "Data type of the configuration.",
-          "enum": [
-            "Enabled",
-            "Disabled"
-          ],
-          "x-ms-enum": {
-            "name": "mxEnabledDataType",
-            "modelAsString": true
-          }
-        },
-        "zfs": {
-          "type": "string",
-          "description": "Data type of the configuration.",
-          "enum": [
-            "Enabled",
-            "Disabled"
-          ],
-          "x-ms-enum": {
-            "name": "zfsEnabledDataType",
-            "modelAsString": true
-          }
-        }
-      },
-      "required": [
-        "sourceSubscriptionId",
-        "sourceResourceGroupName",
-        "sourceServerGroupName",
-        "pointInTimeUTC"
-      ]
-    },
     "ServerGroupPropertiesForUpdate": {
       "x-ms-discriminator-value": "Update",
       "description": "The properties used to update a server group.",
       "allOf": [
         {
-          "$ref": "#/definitions/ServerGroupPropertiesForCreate"
+          "$ref": "#/definitions/ServerGroupPropertiesForPut"
         }
       ],
       "properties": {
@@ -1595,6 +1524,48 @@
           "description": "The list of server role groups."
         }
       }
+    },
+    "ServerGroupPropertiesForRestore": {
+      "x-ms-discriminator-value": "PointInTimeRestore",
+      "description": "The properties used to create a new server group by restoring from a backup.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ServerGroupPropertiesForPut"
+        }
+      ],
+      "properties": {
+        "sourceSubscriptionId": {
+          "type": "string",
+          "description": "The source subscription id to restore from."
+        },
+        "sourceResourceGroupName": {
+          "type": "string",
+          "description": "The source resource group name to restore from."
+        },
+        "sourceServerGroupName": {
+          "type": "string",
+          "description": "The source server group name to restore from."
+        },
+        "pointInTimeUTC": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Restore point creation time (ISO8601 format), specifying the time to restore from."
+        },
+        "isMx": {
+          "type": "boolean",
+          "description": "If zfs is enabled or not for the server group."
+        },
+        "isZfs": {
+          "type": "boolean",
+          "description": "If zfs is enabled or not for the server group."
+        }
+      },
+      "required": [
+        "sourceSubscriptionId",
+        "sourceResourceGroupName",
+        "sourceServerGroupName",
+        "pointInTimeUTC"
+      ]
     },
     "ServerGroupConfiguration": {
       "description": "Represents the configuration list of server role groups in a server group.",
