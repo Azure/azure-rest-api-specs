@@ -2161,76 +2161,6 @@
           "final-state-via": "location"
         }
       },
-      "patch": {
-        "tags": [
-          "RuleSets"
-        ],
-        "description": "Updates an existing rule set within a profile.",
-        "operationId": "RuleSets_Update",
-        "x-ms-examples": {
-          "RuleSets_Update": {
-            "$ref": "./examples/RuleSets_Update.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/resourceGroupNameParameter"
-          },
-          {
-            "name": "profileName",
-            "in": "path",
-            "description": "Name of the CDN profile which is unique within the resource group.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "ruleSetName",
-            "in": "path",
-            "description": "Name of the rule set under the profile which is unique globally",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "ruleSetUpdateProperties",
-            "in": "body",
-            "description": "RuleSet properties",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/RuleSetUpdateParameters"
-            }
-          },
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/RuleSet"
-            }
-          },
-          "202": {
-            "description": "Accepted",
-            "schema": {
-              "$ref": "#/definitions/RuleSet"
-            }
-          },
-          "default": {
-            "description": "CDN error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/AfdErrorResponse"
-            }
-          }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        }
-      },
       "delete": {
         "tags": [
           "RuleSets"
@@ -4615,30 +4545,9 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/RuleSetUpdatePropertiesParameters"
-        },
-        {
           "$ref": "#/definitions/AFDStateProperties"
         }
       ]
-    },
-    "RuleSetUpdateParameters": {
-      "description": "The rule set JSON object required for rule set creation or update.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/RuleSetUpdatePropertiesParameters"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "x-ms-client-flatten": true
-        }
-      }
-    },
-    "RuleSetUpdatePropertiesParameters": {
-      "description": "The JSON object that contains the properties of the domain to create.",
-      "properties": {}
     },
     "AFDOrigin": {
       "description": "CDN origin is the source of the content being delivered via CDN. When the edge nodes represented by an endpoint do not have the requested content cached, they attempt to fetch it from one or more of the configured origins.",
