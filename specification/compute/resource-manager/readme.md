@@ -34,7 +34,7 @@ These are the global settings for the Compute API.
 title: ComputeManagementClient
 description: Compute Client
 openapi-type: arm
-tag: package-2020-06-30
+tag: package-2020-10-01-preview
 
 directive:
   - where:
@@ -209,6 +209,56 @@ directive:
       - ACS service is deprecated so a PATCH endpoint won't be implemented
 
 ```
+### Tag: package-2020-10-01-preview
+
+These settings apply only when `--tag=package-2020-10-01-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-10-01-preview'
+input-file:
+- Microsoft.Compute/stable/2020-06-01/compute.json
+- Microsoft.Compute/stable/2020-06-01/runCommands.json
+- Microsoft.Compute/stable/2019-04-01/skus.json
+- Microsoft.Compute/stable/2020-06-30/disk.json
+- Microsoft.Compute/preview/2020-09-30/gallery.json
+- Microsoft.Compute/preview/2020-09-30/sharedGallery.json
+- Microsoft.ContainerService/stable/2017-01-31/containerService.json
+- Microsoft.Compute/preview/2020-10-01-preview/cloudService.json
+```
+
+### Tag: package-2020-10-01-preview-only
+
+These settings apply only when `--tag=package-2020-10-01-preview-only` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-10-01-preview-only'
+input-file:
+- Microsoft.Compute/preview/2020-10-01-preview/cloudService.json
+```
+
+### Tag: package-2020-09-30
+
+These settings apply only when `--tag=package-2020-09-30` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-09-30'
+input-file:
+- Microsoft.Compute/stable/2020-06-01/compute.json
+- Microsoft.Compute/stable/2020-06-01/runCommands.json
+- Microsoft.Compute/stable/2019-04-01/skus.json
+- Microsoft.Compute/stable/2020-06-30/disk.json
+- Microsoft.Compute/preview/2020-09-30/gallery.json
+- Microsoft.Compute/preview/2020-09-30/sharedGallery.json
+- Microsoft.ContainerService/stable/2017-01-31/containerService.json
+```
+
+### Tag: package-2020-09-30-only
+
+These settings apply only when `--tag=package-2020-09-30-only` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-09-30-only'
+input-file:
+- Microsoft.Compute/preview/2020-09-30/gallery.json
+- Microsoft.Compute/preview/2020-09-30/sharedGallery.json
+```
+
 ### Tag: package-2020-06-30
 
 These settings apply only when `--tag=package-2020-06-30` is specified on the command line.
@@ -230,31 +280,6 @@ These settings apply only when `--tag=package-2020-06-30-only` is specified on t
 ``` yaml $(tag) == 'package-2020-06-30-only'
 input-file:
 - Microsoft.Compute/stable/2020-06-30/disk.json
-```
-
-### Tag: package-2020-09-30
-
-These settings apply only when `--tag=package-2020-09-30` is specified on the command line.
-
-``` yaml $(tag) == 'package-2020-09-30'
-input-file:
-- Microsoft.Compute/stable/2020-06-01/compute.json
-- Microsoft.Compute/stable/2020-06-01/runCommands.json
-- Microsoft.Compute/stable/2019-04-01/skus.json
-- Microsoft.Compute/stable/2020-05-01/disk.json
-- Microsoft.Compute/preview/2020-09-30/gallery.json
-- Microsoft.Compute/preview/2020-09-30/sharedGallery.json
-- Microsoft.ContainerService/stable/2017-01-31/containerService.json
-```
-
-### Tag: package-2020-09-30-only
-
-These settings apply only when `--tag=package-2020-09-30-only` is specified on the command line.
-
-``` yaml $(tag) == 'package-2020-09-30-only'
-input-file:
-- Microsoft.Compute/preview/2020-09-30/gallery.json
-- Microsoft.Compute/preview/2020-09-30/sharedGallery.json
 ```
 
 ### Tag: package-2020-06-01
@@ -770,158 +795,19 @@ See configuration in [readme.go.md](./readme.go.md)
 
 ## Java
 
-These settings apply only when `--java` is specified on the command line.
-Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-libraries-for-java clone>`.
+See configuration in [readme.java.md](./readme.java.md)
 
-``` yaml $(java)
-azure-arm: true
-fluent: true
-namespace: com.microsoft.azure.management.compute
-license-header: MICROSOFT_MIT_NO_CODEGEN
-payload-flattening-threshold: 1
-output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-compute
-```
+### Tag: profile-hybrid-2020-09-01
 
-### Java multi-api
-
-```yaml $(java) && $(multiapi)
-batch:
-  - tag: package-disks-2018-04
-  - tag: package-compute-only-2017-12
-  - tag: package-skus-2017-09
-  - tag: package-compute-2017-03
-```
-
-### Tag: package-disks-2018-04 and java
-
-These settings apply only when `--tag=package-disks-2018-04 --java` is specified on the command line.
-Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
-
-``` yaml $(tag) == 'package-disks-2018-04' && $(java) && $(multiapi)
-java:
-  namespace: com.microsoft.azure.management.compute.v2018_04_01
-  output-folder: $(azure-libraries-for-java-folder)/sdk/compute/mgmt-v2018_04_01
-regenerate-manager: true
-generate-interface: true
-```
-
-### Tag: package-compute-only-2017-12 and java
-
-These settings apply only when `--tag=package-compute-only-2017-12 --java` is specified on the command line.
-Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
-
-``` yaml $(tag) == 'package-compute-only-2017-12' && $(java) && $(multiapi)
-java:
-  namespace: com.microsoft.azure.management.compute.v2017_12_01
-  output-folder: $(azure-libraries-for-java-folder)/sdk/compute/mgmt-v2017_12_01
-regenerate-manager: true
-generate-interface: true
-```
-
-### Tag: package-skus-2017-09 and java
-
-These settings apply only when `--tag=package-skus-2017-09 --java` is specified on the command line.
-Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
-
-``` yaml $(tag) == 'package-skus-2017-09' && $(java) && $(multiapi)
-java:
-  namespace: com.microsoft.azure.management.compute.v2017_09_01
-  output-folder: $(azure-libraries-for-java-folder)/sdk/compute/mgmt-v2017_09_01
-regenerate-manager: true
-generate-interface: true
-```
-
-### Tag: package-compute-2017-03 and java
-
-These settings apply only when `--tag=package-compute-2017-03 --java` is specified on the command line.
-Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
-
-``` yaml $(tag) == 'package-compute-2017-03' && $(java) && $(multiapi)
-java:
-  namespace: com.microsoft.azure.management.compute.v2017_03_30
-  output-folder: $(azure-libraries-for-java-folder)/sdk/compute/mgmt-v2017_03_30
-regenerate-manager: true
-generate-interface: true
-```
-
-### Tag: profile-hybrid-2019-03-01
-
-These settings apply only when `--tag=profile-hybrid-2019-03-01` is specified on the command line.
+These settings apply only when `--tag=profile-hybrid-2020-09-01` is specified on the command line.
 Creating this tag to pick proper resources from the hybrid profile.
 
-``` yaml $(tag) == 'profile-hybrid-2019-03-01'
+``` yaml $(tag) == 'profile-hybrid-2020-09-01'
 input-file:
-- Microsoft.Compute/stable/2017-12-01/compute.json
-- Microsoft.Compute/stable/2017-03-30/disk.json
+- Microsoft.Compute/stable/2020-06-01/compute.json
+- Microsoft.Compute/stable/2019-07-01/disk.json
 ```
 
 ## AzureResourceSchema
 
 See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
-
-## Multi-API/Profile support for AutoRest v3 generators 
-
-AutoRest V3 generators require the use of `--tag=all-api-versions` to select api files.
-
-This block is updated by an automatic script. Edits may be lost!
-
-``` yaml $(tag) == 'all-api-versions' /* autogenerated */
-# include the azure profile definitions from the standard location
-require: $(this-folder)/../../../profiles/readme.md
-
-# all the input files across all versions
-input-file:
-  - $(this-folder)/Microsoft.Compute/preview/2020-09-30/sharedGallery.json
-  - $(this-folder)/Microsoft.Compute/preview/2020-09-30/gallery.json
-  - $(this-folder)/Microsoft.Compute/stable/2020-06-01/compute.json
-  - $(this-folder)/Microsoft.Compute/stable/2020-06-01/runCommands.json
-  - $(this-folder)/Microsoft.Compute/stable/2019-04-01/skus.json
-  - $(this-folder)/Microsoft.Compute/stable/2020-06-30/disk.json
-  - $(this-folder)/Microsoft.Compute/stable/2019-12-01/gallery.json
-  - $(this-folder)/Microsoft.ContainerService/stable/2017-01-31/containerService.json
-  - $(this-folder)/Microsoft.Compute/stable/2020-05-01/disk.json
-  - $(this-folder)/Microsoft.Compute/stable/2019-12-01/compute.json
-  - $(this-folder)/Microsoft.Compute/stable/2019-12-01/runCommands.json
-  - $(this-folder)/Microsoft.Compute/stable/2019-11-01/disk.json
-  - $(this-folder)/Microsoft.Compute/stable/2019-07-01/compute.json
-  - $(this-folder)/Microsoft.Compute/stable/2019-07-01/runCommands.json
-  - $(this-folder)/Microsoft.Compute/stable/2019-07-01/gallery.json
-  - $(this-folder)/Microsoft.Compute/stable/2019-07-01/disk.json
-  - $(this-folder)/Microsoft.Compute/stable/2019-03-01/compute.json
-  - $(this-folder)/Microsoft.Compute/stable/2019-03-01/runCommands.json
-  - $(this-folder)/Microsoft.Compute/stable/2019-03-01/disk.json
-  - $(this-folder)/Microsoft.Compute/stable/2019-03-01/gallery.json
-  - $(this-folder)/Microsoft.Compute/stable/2018-10-01/compute.json
-  - $(this-folder)/Microsoft.Compute/stable/2018-10-01/runCommands.json
-  - $(this-folder)/Microsoft.Compute/stable/2017-09-01/skus.json
-  - $(this-folder)/Microsoft.Compute/stable/2018-09-30/disk.json
-  - $(this-folder)/Microsoft.Compute/stable/2018-06-01/gallery.json
-  - $(this-folder)/Microsoft.Compute/stable/2018-06-01/disk.json
-  - $(this-folder)/Microsoft.Compute/stable/2018-06-01/compute.json
-  - $(this-folder)/Microsoft.Compute/stable/2018-06-01/runCommands.json
-  - $(this-folder)/Microsoft.Compute/stable/2018-04-01/compute.json
-  - $(this-folder)/Microsoft.Compute/stable/2018-04-01/runCommands.json
-  - $(this-folder)/Microsoft.Compute/stable/2018-04-01/disk.json
-  - $(this-folder)/Microsoft.Compute/stable/2017-12-01/compute.json
-  - $(this-folder)/Microsoft.Compute/stable/2017-12-01/runCommands.json
-  - $(this-folder)/Microsoft.Compute/stable/2017-03-30/disk.json
-  - $(this-folder)/Microsoft.Compute/stable/2017-03-30/compute.json
-  - $(this-folder)/Microsoft.Compute/stable/2017-03-30/runCommands.json
-  - $(this-folder)/Microsoft.ContainerService/stable/2016-09-30/containerService.json
-  - $(this-folder)/Microsoft.Compute/preview/2016-04-30-preview/compute.json
-  - $(this-folder)/Microsoft.Compute/preview/2016-04-30-preview/disk.json
-  - $(this-folder)/Microsoft.Compute/stable/2016-03-30/compute.json
-  - $(this-folder)/Microsoft.ContainerService/stable/2016-03-30/containerService.json
-  - $(this-folder)/Microsoft.ContainerService/preview/2015-11-01-preview/containerService.json
-  - $(this-folder)/Microsoft.Compute/stable/2015-06-15/compute.json
-
-```
-
-If there are files that should not be in the `all-api-versions` set, 
-uncomment the  `exclude-file` section below and add the file paths.
-
-``` yaml $(tag) == 'all-api-versions'
-#exclude-file: 
-#  - $(this-folder)/Microsoft.Example/stable/2010-01-01/somefile.json
-```
-
