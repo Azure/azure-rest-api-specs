@@ -1229,6 +1229,23 @@
           "format": "int32",
           "description": "The number of servers in the server role group."
         },
+        "haState": {
+          "type": "string",
+          "description": "A state of a server role group that is visible to user for HA feature.",
+          "enum": [
+            "NotEnabled",
+            "CreatingStandby",
+            "ReplicatingData",
+            "FailingOver",
+            "Healthy",
+            "RemovingStandby",
+            "NotSync"
+          ],
+          "x-ms-enum": {
+            "name": "ServerRoleGroupHAState",
+            "modelAsString": true
+          }
+        },
         "serverNames": {
           "type": "array",
           "description": "The list of server names in the server role group.",
@@ -1267,6 +1284,22 @@
         "isZfs": {
           "type": "boolean",
           "description": "If zfs is enabled or not for the server group."
+        },
+        "state": {
+          "type": "string",
+          "description": "A state of a server group that is visible to user.",
+          "enum": [
+            "Ready",
+            "Dropping",
+            "Starting",
+            "Stopping",
+            "Stopped",
+            "Updating"
+          ],
+          "x-ms-enum": {
+            "name": "ServerGroupState",
+            "modelAsString": true
+          }
         },
         "vnetInjArgs": {
           "properties": {
@@ -1324,7 +1357,10 @@
             "Ready",
             "Dropping",
             "Disabled",
-            "Inaccessible"
+            "Starting",
+            "Stopping",
+            "Stopped",
+            "Updating"
           ],
           "x-ms-enum": {
             "name": "ServerState",
@@ -1335,7 +1371,12 @@
           "type": "string",
           "description": "A state of a server that is visible to user for HA feature.",
           "enum": [
-            "Ready"
+            "NotEnabled",
+            "CreatingStandby",
+            "ReplicatingData",
+            "FailingOver",
+            "Healthy",
+            "RemovingStandby"
           ],
           "x-ms-enum": {
             "name": "ServerHAState",
