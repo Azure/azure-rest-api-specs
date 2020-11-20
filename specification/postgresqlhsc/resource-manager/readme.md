@@ -49,13 +49,32 @@ This is not used by Autorest itself.
 
 ```yaml $(swagger-to-sdk)
 swagger-to-sdk:
+  - repo: azure-sdk-for-net
   - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js
+  - repo: azure-sdk-for-node
   - repo: azure-sdk-for-ruby
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_postgresqlhsc']
+  - repo: azure-resource-manager-schemas
+    after_scripts:
+      - node sdkauto_afterscript.js postgresqlhsc/resource-manager
+```
+
+### C#
+
+These settings apply only when `--csharp` is specified on the command line.
+Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azure-sdk-for-net clone>`.
+
+``` yaml $(csharp)
+csharp:
+  azure-arm: true
+  license-header: MICROSOFT_MIT_NO_VERSION
+  namespace: Microsoft.Azure.Management.PostgreSQL
+  output-folder: $(csharp-sdks-folder)/postgresqlhsc/Microsoft.Azure.Management.PostgreSQL/src/postgresqlhsc/Generated
+  clear-output-folder: true
 ```
 
 ## Go
@@ -65,6 +84,10 @@ See configuration in [readme.go.md](./readme.go.md)
 ## Python
 
 See configuration in [readme.python.md](./readme.python.md)
+
+## Java
+
+See configuration in [readme.java.md](./readme.java.md)
 
 ## Ruby
 
@@ -77,3 +100,7 @@ See configuration in [readme.typescript.md](./readme.typescript.md)
 ## CSharp
 
 See configuration in [readme.csharp.md](./readme.csharp.md)
+
+## AzureResourceSchema
+
+See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
