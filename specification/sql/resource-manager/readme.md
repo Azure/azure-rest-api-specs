@@ -119,9 +119,10 @@ input-file:
 - Microsoft.Sql/preview/2020-02-02-preview/managedDatabases.json
 - Microsoft.Sql/preview/2020-02-02-preview/ServerAzureADOnlyAuthentications.json
 - Microsoft.Sql/preview/2020-02-02-preview/managedInstances.json
-- Microsoft.Sql/preview/2020-02-02-preview/importexport.json
 - Microsoft.Sql/preview/2020-02-02-preview/ManagedInstanceAzureADOnlyAuthentications.json
 - Microsoft.Sql/preview/2020-02-02-preview/ServerTrustGroups.json
+- Microsoft.Sql/preview/2020-08-01-preview/Databases.json
+- Microsoft.Sql/preview/2020-08-01-preview/ElasticPools.json
 
 
 # Needed when there is more than one input file
@@ -611,8 +612,6 @@ input-file:
  - ./Microsoft.Sql/preview/2020-08-01-preview/DatabaseVulnerabilityAssesmentRuleBaselines.json
  - ./Microsoft.Sql/preview/2020-08-01-preview/DatabaseVulnerabilityAssessments.json
  - ./Microsoft.Sql/preview/2020-08-01-preview/DatabaseVulnerabilityAssessmentScans.json
- - ./Microsoft.Sql/preview/2020-08-01-preview/DatabaseVulnerabilityAssessmentScansExecute.json
- - ./Microsoft.Sql/preview/2020-08-01-preview/DatabaseVulnerabilityAssessmentScansExport.json
  - ./Microsoft.Sql/preview/2020-08-01-preview/DataWarehouseUserActivities.json
  - ./Microsoft.Sql/preview/2020-08-01-preview/DeletedServers.json
  - ./Microsoft.Sql/preview/2020-08-01-preview/DevOpsAudit.json
@@ -622,7 +621,6 @@ input-file:
  - ./Microsoft.Sql/preview/2020-08-01-preview/FailoverGroups.json
  - ./Microsoft.Sql/preview/2020-08-01-preview/FirewallRules.json
  - ./Microsoft.Sql/preview/2020-08-01-preview/HybridLinks.json
- - ./Microsoft.Sql/preview/2020-08-01-preview/ImportExport.json
  - ./Microsoft.Sql/preview/2020-08-01-preview/InstanceFailoverGroups.json
  - ./Microsoft.Sql/preview/2020-08-01-preview/InstancePools.json
  - ./Microsoft.Sql/preview/2020-08-01-preview/JobAgents.json
@@ -651,11 +649,9 @@ input-file:
  - ./Microsoft.Sql/preview/2020-08-01-preview/ManagedDatabaseSensitivityLabels.json
  - ./Microsoft.Sql/preview/2020-08-01-preview/ManagedDatabaseTables.json
  - ./Microsoft.Sql/preview/2020-08-01-preview/ManagedDatabaseTransparentDataEncryption.json
- - ./Microsoft.Sql/preview/2020-08-01-preview/ManagedDatabaseVulnerabilityAssesmentRuleBaselines.json
+ - ./Microsoft.Sql/preview/2020-08-01-preview/ManagedDatabaseVulnerabilityAssessmentRuleBaselines.json
  - ./Microsoft.Sql/preview/2020-08-01-preview/ManagedDatabaseVulnerabilityAssessments.json
  - ./Microsoft.Sql/preview/2020-08-01-preview/ManagedDatabaseVulnerabilityAssessmentScans.json
- - ./Microsoft.Sql/preview/2020-08-01-preview/ManagedDatabaseVulnerabilityAssessmentScansExecute.json
- - ./Microsoft.Sql/preview/2020-08-01-preview/ManagedDatabaseVulnerabilityAssessmentScansExport.json
  - ./Microsoft.Sql/preview/2020-08-01-preview/ManagedInstanceAdministrators.json
  - ./Microsoft.Sql/preview/2020-08-01-preview/ManagedInstanceAzureADOnlyAuthentications.json
  - ./Microsoft.Sql/preview/2020-08-01-preview/ManagedInstanceEncryptionProtectors.json
