@@ -77,10 +77,10 @@ directive:
     reason: 'This api was existing there from 2015, it will break existing client if we change the name'
   - suppress: R2066
     reason: There are a bug in this rule. "ExportConfigurations_Create" is a valid operation id.
-  - suppress: OBJECT_ADDITIONAL_PROPERTIES
-    where: $.definitions.Workbook
-    from: workbooks_API.json
-    reason: 'This property is already a part of our API, so we cannot remove it'
+  # - suppress: OBJECT_ADDITIONAL_PROPERTIES
+  #   where: $.definitions.Workbook
+  #   from: workbooks_API.json
+  #   reason: 'This property is already a part of our API, so we cannot remove it'
   - suppress: READONLY_PROPERTY_NOT_ALLOWED_IN_REQUEST
     where: $.definitions.Resource.properties.name
     from: types.json
