@@ -15,6 +15,46 @@
     "application/json"
   ],
   "paths": {
+    "/providers/Microsoft.Web/generateGithubAccessTokenForAppserviceCLI": {
+      "post": {
+        "summary": "Exchange code for GitHub access token for AppService CLI",
+        "description": "Description for Exchange code for GitHub access token for AppService CLI",
+        "operationId": "GenerateGithubAccessTokenForAppserviceCLIAsync",
+        "parameters": [
+          {
+            "name": "request",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AppserviceGithubTokenRequest"
+            },
+            "x-ms-client-flatten": true
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AppserviceGithubToken"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Generate Github Access Token For AppService CLI": {
+            "$ref": "./examples/GenerateGithubAccessTokenForAppserviceCLIAsync.json"
+          }
+        }
+      }
+    },
     "/providers/Microsoft.Web/publishingUsers/web": {
       "get": {
         "summary": "Gets publishing user",
@@ -624,6 +664,52 @@
     }
   },
   "definitions": {
+    "AppserviceGithubToken": {
+      "description": "Github access token for Appservice CLI github integration.",
+      "type": "object",
+      "properties": {
+        "accessToken": {
+          "description": "Github access token for Appservice CLI github integration",
+          "type": "string"
+        },
+        "scope": {
+          "description": "Scope of the github access token",
+          "type": "string",
+          "x-ms-secret": true
+        },
+        "tokenType": {
+          "description": "token type",
+          "type": "string"
+        },
+        "gotToken": {
+          "description": "True if valid github token received, False otherwise",
+          "type": "boolean"
+        },
+        "errorMessage": {
+          "description": "Error message if unable to get token",
+          "type": "string"
+        }
+      }
+    },
+    "AppserviceGithubTokenRequest": {
+      "description": "Appservice Github token request content.",
+      "required": [
+        "code",
+        "state"
+      ],
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "Code string to exchange for Github Access token",
+          "type": "string",
+          "x-ms-secret": true
+        },
+        "state": {
+          "description": "State string used for verification.",
+          "type": "string"
+        }
+      }
+    },
     "BillingMeter": {
       "description": "App Service billing entity that contains information about meter which the Azure billing system utilizes to charge users for services.",
       "type": "object",
