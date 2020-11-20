@@ -442,6 +442,42 @@
         "configuration": {
           "description": "configuration for the digital twin project.",
           "type": "string"
+        },
+        "enterprise": {
+          "title": "Enterprise",
+          "description": "Enterprise environment for testing",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/Enterprise"
+        },
+        "currentStatus": {
+          "description": "Overall status",
+          "enum": [
+            "Created",
+            "Started",
+            "Succeeded",
+            "Failed"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "currentStatus",
+            "modelAsString": true
+          }
+        },
+        "domainName": {
+          "description": "Domain name of the enterprise environment.",
+          "type": "string"
+        },
+        "isManaged": {
+          "description": "Customer concent to allow services maintain enterprise credentials.",
+          "enum": [
+            "True",
+            "False"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "isManaged",
+            "modelAsString": true
+          }
         }
       },
       "description": "Describes the properties of a IT Digital Twin."
@@ -539,6 +575,59 @@
           "description": "URL to get the next set of operation list results if there are any."
         }
       }
+    },
+    "Computer": {
+      "properties": {
+        "id": {
+          "description": "Resource ID of the computer",
+          "type": "string",
+          "x-nullable": true
+        },
+        "name": {
+          "description": "Name of the computer",
+          "type": "string",
+          "x-nullable": true
+        },
+        "role": {
+          "description": "Role of a machine, including VM on Azure and local test machine on-prem",
+          "enum": [
+            "SCCM",
+            "AD",
+            "CS",
+            "DNS",
+            "TestMachine"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "role",
+            "modelAsString": true
+          }
+        }
+      },
+      "description": "Meta data for the test result."
+    },
+    "Enterprise": {
+      "properties": {
+        "computerList": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Computer"
+          },
+          "description": "List of computers on Azure and test machines on-prem"
+        },
+        "adminUserName": {
+          "description": "Admin user name for accessing the enterprise",
+          "type": "string",
+          "x-nullable": true
+        },
+        "adminPassword": {
+          "x-ms-secret": true,
+          "description": "Admin password for accessing the enterprise",
+          "type": "string",
+          "x-nullable": true
+        }
+      },
+      "description": "Enterprise is a testing environment which has several virtual machines on the cloud and several testing machines on-prem."
     }
   },
   "parameters": {
