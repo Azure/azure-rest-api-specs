@@ -1847,7 +1847,7 @@
       "properties": {
         "sourceVault": {
           "$ref": "#/definitions/SourceVault",
-          "description": "Resource id of the KeyVault containing the key or secret. This property is optional."
+          "description": "Resource id of the KeyVault containing the key or secret. This property is optional and cannot be used if the KeyVault subscription is not the same as the Disk Encryption Set subscription."
         },
         "keyUrl": {
           "type": "string",
@@ -2328,7 +2328,7 @@
             "name": "DiskEncryptionSetIdentityType",
             "modelAsString": true
           },
-          "description": "The type of Managed Identity used by the DiskEncryptionSet. Only SystemAssigned is supported for new creations. Identity type None is supported on existing Disk Encryption Set for AAD Tenant migration."
+          "description": "The type of Managed Identity used by the DiskEncryptionSet. Only SystemAssigned is supported for new creations. Disk Encryption Sets can be updated with Identity type None during migration of subscription to a new Azure Active Directory tenant; it will cause the encrypted resources to lose access to the keys."
         },
         "principalId": {
           "readOnly": true,
