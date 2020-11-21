@@ -287,30 +287,27 @@
         },
         "id": {
           "type": "string",
-          "readOnly": true,
-          "description": "Azure resource Id"
+          "description": "Azure resource Id",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         },
         "name": {
           "type": "string",
-          "readOnly": true,
-          "description": "Azure resource name. This is GUID value. The display name should be assigned within properties field."
+          "description": "Azure resource name",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         },
         "type": {
           "type": "string",
-          "readOnly": true,
-          "description": "Azure resource type"
-        },
-        "kind": {
-          "type": "string",
-          "description": "The kind of workbook. Choices are user and shared.",
-          "enum": [
-            "user",
-            "shared"
-          ],
-          "x-ms-enum": {
-            "name": "kind",
-            "modelAsString": true
-          }
+          "description": "Azure resource type",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         },
         "location": {
           "type": "string",
@@ -321,7 +318,6 @@
           ]
         },
         "tags": {
-          "type": "object",
           "additionalProperties": {
             "type": "string"
           },
@@ -354,6 +350,18 @@
         }
       ],
       "properties": {
+        "kind": {
+          "type": "string",
+          "description": "The kind of workbook. Choices are user and shared.",
+          "enum": [
+            "user",
+            "shared"
+          ],
+          "x-ms-enum": {
+            "name": "kind",
+            "modelAsString": true
+          }
+        },
         "properties": {
           "x-ms-client-flatten": true,
           "description": "Metadata describing a workbook for an Azure resource.",
@@ -378,6 +386,10 @@
           "x-nullable": true,
           "description": "Configuration of this particular workbook. Configuration data is a string containing valid JSON"
         },
+        "version": {
+          "type": "string",
+          "description": "Workbook version"
+        },
         "timeModified": {
           "type": "string",
           "description": "Date and time in UTC of the last modification that was made to this workbook definition.",
@@ -386,10 +398,6 @@
         "category": {
           "type": "string",
           "description": "Workbook category, as defined by the user at creation time."
-        },
-        "version": {
-          "type": "string",
-          "description": "Workbook version"
         },
         "tags": {
           "type": "array",
