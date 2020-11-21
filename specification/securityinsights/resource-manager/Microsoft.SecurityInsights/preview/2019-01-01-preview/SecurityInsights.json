@@ -2194,7 +2194,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/entities/{entityId}/queries": {
       "get": {
         "x-ms-examples": {
-          "Entity timeline": {
+          "Get Entity Query": {
             "$ref": "./examples/entities/GetQueries.json"
           }
         },
@@ -6873,56 +6873,111 @@
       },
       "type": "object"
     },
-    "ActivityTimelineItemForQuery": {
+    "InsightQueryItem": {
       "allOf": [
         {
           "$ref": "#/definitions/EntityQueryItem"
         }
       ],
-      "description": "Represents Activity timeline item (used from queries).",
+      "description": "Represents Insight Query.",
       "properties": {
-        "queryId": {
+        "displayName": {
           "type": "string",
-          "description": "The activity query id."
+          "description": "The insight display name."
         },
-        "bucketStartTimeUTC": {
-          "format": "date-time",
+        "description": {
           "type": "string",
-          "description": "The grouping bucket start time."
+          "description": "The insight description."
         },
-        "bucketEndTimeUTC": {
-          "format": "date-time",
+        "baseQuery": {
           "type": "string",
-          "description": "The grouping bucket end time."
+          "description": "The base query of the insight."
         },
-        "firstActivityTimeUTC": {
-          "format": "date-time",
-          "type": "string",
-          "description": "The time of the first activity in the grouping bucket."
+        "tableQuery": {
+          "type": "object",
+          "description": "The insight table query."
         },
-        "lastActivityTimeUTC": {
-          "format": "date-time",
-          "type": "string",
-          "description": "The time of the last activity in the grouping bucket."
+        "chartQuery": {
+          "type": "object",
+          "description": "The insight chart query."
         },
+        "additionalQuery": {
+          "type": "object",
+          "description": "The activity query definitions.",
+          "properties": {
+            "query": {
+              "type": "string",
+              "description": "The insight query."
+            },
+            "text": {
+              "type": "string",
+              "description": "The insight text."
+            }
+          }
+        },
+        "defaultTimeRange": {
+          "type": "object",
+          "description": "The insight chart query.",
+          "properties": {
+            "beforeRange": {
+              "type": "string",
+              "description": "The padding for the start time of the query."
+            },
+            "afterRange": {
+              "type": "string",
+              "description": "The padding for the end time of the query."
+            }
+          }
+        },
+        "referenceTimeRange": {
+          "type": "object",
+          "description": "The insight chart query.",
+          "properties": {
+            "beforeRange": {
+              "type": "string",
+              "description": "Additonal query time for looking back."
+            }
+          }
+        }
+      },
+      "type": "object",
+      "x-ms-discriminator-value": "Insight"
+    },
+    "ActivityQueryItem": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/EntityQueryItem"
+        }
+      ],
+      "description": "Represents Activity Query.",
+      "properties": {
         "content": {
           "type": "string",
-          "description": "The activity timeline content."
+          "description": "The activity content."
         },
         "title": {
           "type": "string",
-          "description": "The activity timeline title."
+          "description": "The activity title."
+        },
+        "description": {
+          "type": "string",
+          "description": "The activity description."
+        },
+        "enabledByDefault": {
+          "type": "boolean",
+          "description": "Is activity should be enabled by default."
+        },
+        "queryDefinitions": {
+          "type": "object",
+          "description": "The activity query definitions.",
+          "properties": {
+            "query": {
+              "type": "string",
+              "description": "The activity query."
+            }
+          }
         }
       },
-      "required": [
-        "queryId",
-        "bucketStartTimeUTC",
-        "bucketEndTimeUTC",
-        "firstActivityTimeUTC",
-        "lastActivityTimeUTC",
-        "content",
-        "title"
-      ],
       "type": "object",
       "x-ms-discriminator-value": "Activity"
     },
@@ -10752,6 +10807,8 @@
           "type": "array",
           "items": {
             "description": "Insight Query Id (GUID)",
+            "format": "uuid",
+            "readOnly": true,
             "type": "string"
           }
         }
@@ -10831,6 +10888,42 @@
         "kind": {
           "$ref": "#/definitions/EntitiesQueriesKind",
           "description": "The entity query kind type."
+        },
+        "id": {
+          "description": "Query Template ID",
+          "type": "string",
+          "format": "uuid",
+          "readOnly": true
+        },
+        "dataTypes": {
+          "description": "Data types for template",
+          "type": "array",
+          "items": {
+            "properties": {
+              "dataType": {
+                "description": "Data type name",
+                "type": "string"
+              }
+            }
+          }
+        },
+        "inputEntityType": {
+          "description": "The type of the entity",
+          "$ref": "#/definitions/EntityInnerType"
+        },
+        "requiredInputFieldsSets": {
+          "description": "Data types for template",
+          "type": "array",
+          "items": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "entitiesFilter": {
+          "description": "The query applied only to entities matching to all filters",
+          "type": "object"
         }
       },
       "required": [
@@ -11109,10 +11202,24 @@
       "name": "kind",
       "required": true,
       "type": "string",
-      "enum": [
-        "Insight",
-        "Activity"
-      ],
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "EntityTimelineKind",
+        "values": [
+          {
+            "description": "activity",
+            "value": "Activity"
+          },
+          {
+            "description": "bookmark",
+            "value": "Bookmark"
+          },
+          {
+            "description": "security alerts",
+            "value": "SecurityAlert"
+          }
+        ]
+      },
       "x-ms-parameter-location": "method"
     },
     "GetInsightsEntityQueriesRequestBody": {
