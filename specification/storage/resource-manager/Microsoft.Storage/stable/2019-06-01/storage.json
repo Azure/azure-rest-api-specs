@@ -302,6 +302,91 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Storage/deletedAccounts": {
+      "get": {
+        "tags": [
+          "DeletedAccounts"
+        ],
+        "operationId": "DeletedAccounts_List",
+        "description": "Lists deleted accounts under the subscription.",
+        "x-ms-examples": {
+          "DeletedAccountList": {
+            "$ref": "./examples/DeletedAccountList.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK -- List of deleted accounts was retrieved and returned successfully.",
+            "schema": {
+              "$ref": "#/definitions/DeletedAccountListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Storage/locations/{location}/deletedAccounts/{deletedAccountName}": {
+      "get": {
+        "tags": [
+          "DeletedAccounts"
+        ],
+        "operationId": "DeletedAccounts_Get",
+        "description": "Get properties of specified deleted account resource.",
+        "x-ms-examples": {
+          "DeletedAccountGet": {
+            "$ref": "./examples/DeletedAccountGet.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/DeletedAccountName"
+          },
+          {
+            "name": "location",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The location of the deleted storage account."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK -- properties retrieved and returned successfully for the deleted account.",
+            "schema": {
+              "$ref": "#/definitions/DeletedAccount"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Storage/storageAccounts": {
       "get": {
         "tags": [
@@ -2425,6 +2510,35 @@
       },
       "description": "Blob restore status."
     },
+    "DeletedAccountProperties": {
+      "properties": {
+        "storageAccountResourceId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Full resource id of the original storage account."
+        },
+        "location": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Location of the deleted account."
+        },
+        "restoreReference": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Can be used to attempt recovering this deleted account via PutStorageAccount API."
+        },
+        "creationTime": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Creation time of the deleted account."
+        },
+        "deletionTime": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Deletion time of the deleted account."
+        }
+      }
+    },
     "StorageAccountProperties": {
       "properties": {
         "provisioningState": {
@@ -2606,6 +2720,21 @@
       },
       "description": "Properties of the storage account."
     },
+    "DeletedAccount": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/DeletedAccountProperties",
+          "description": "Properties of the deleted account."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "description": "Deleted storage account"
+    },
     "StorageAccount": {
       "properties": {
         "sku": {
@@ -2691,6 +2820,24 @@
         }
       },
       "description": "The response from the List Storage Accounts operation."
+    },
+    "DeletedAccountListResult": {
+      "properties": {
+        "value": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DeletedAccount"
+          },
+          "description": "Gets the list of deleted accounts and their properties."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Request URL that can be used to query next page of deleted accounts. Returned when total number of requested deleted accounts exceed maximum page size.",
+          "readOnly": true
+        }
+      },
+      "description": "The response from the List Deleted Accounts operation."
     },
     "StorageAccountListKeysResult": {
       "properties": {
@@ -3621,6 +3768,16 @@
       "required": true,
       "type": "string",
       "description": "The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.",
+      "maxLength": 24,
+      "minLength": 3,
+      "x-ms-parameter-location": "method"
+    },
+    "DeletedAccountName": {
+      "name": "deletedAccountName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Name of the deleted storage account.",
       "maxLength": 24,
       "minLength": 3,
       "x-ms-parameter-location": "method"
