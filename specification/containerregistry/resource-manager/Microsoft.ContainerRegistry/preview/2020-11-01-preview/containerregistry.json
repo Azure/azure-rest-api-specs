@@ -5678,68 +5678,59 @@
     },
     "ErrorResponse": {
       "description": "An error response from the Azure Container Registry service.",
-      "type": "object",
       "properties": {
         "error": {
           "$ref": "#/definitions/ErrorResponseBody",
-          "description": "The Azure Container Registry API error body.",
-          "type": "object"
+          "description": "Azure container registry build API error body."
         }
-      },
-      "readOnly": true
+      }
     },
     "ErrorResponseBody": {
-      "description": "The Azure Container Registry API error body.",
+      "description": "An error response from the Azure Container Registry service.",
       "required": [
         "code",
         "message"
       ],
-      "type": "object",
       "properties": {
         "code": {
-          "description": "The error code.",
+          "description": "error code.",
           "type": "string"
         },
         "message": {
-          "description": "The error message.",
+          "description": "error message.",
           "type": "string"
         },
         "target": {
-          "description": "The target of the particular error.",
+          "description": "target of the particular error.",
           "type": "string"
         },
         "details": {
-          "description": "An array of additional nested error response info objects, as described by this contract.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/InnerErrorDescription"
-          }
+          "$ref": "#/definitions/InnerErrorDescription",
+          "description": "an array of additional nested error response info objects, as described by this contract.",
+          "type": "array"
         }
-      },
-      "readOnly": true
+      }
     },
     "InnerErrorDescription": {
-      "description": "The inner error from the Azure Container Registry service.",
+      "description": "inner error.",
       "required": [
         "code",
         "message"
       ],
-      "type": "object",
       "properties": {
         "code": {
-          "description": "The error code.",
+          "description": "error code.",
           "type": "string"
         },
         "message": {
-          "description": "The error message.",
+          "description": "error message.",
           "type": "string"
         },
         "target": {
-          "description": "The target of the particular error.",
+          "description": "target of the particular error.",
           "type": "string"
         }
-      },
-      "readOnly": true
+      }
     }
   },
   "parameters": {
