@@ -1,0 +1,29 @@
+{
+  "parameters": {
+    "subscriptionId": "ab7a8701-f7ef-471a-a2f4-d0ebbf494f77",
+    "providerNamespace": "Microsoft.Contoso",
+    "rolloutName": "canaryTesting99",
+    "api-version": "2020-09-01-preview"
+  },
+  "responses": {
+    "200": {
+      "description": "Successfully retrieved the rollout details.",
+      "body": {
+        "id": "/subscriptions/ab7a8701-f7ef-471a-a2f4-d0ebbf494f77providers/Microsoft.ProviderHub/providerRegistrations/Microsoft.Contoso/customRollouts/canaryTesting99",
+        "name": "Microsoft.Contoso/canaryTesting99",
+        "type": "Microsoft.ProviderHub/providerRegistrations/customRollouts",
+        "properties": {
+          "provisioningState": "Completed",
+          "specification": {
+            "canary": {
+              "regions": ["eastus2euap","centraluseuap"]
+            }
+          },
+          "status": {
+            "completedRegions": ["eastus2euap","centraluseuap"]
+          }
+        }
+      }
+    }
+  }
+}

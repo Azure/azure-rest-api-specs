@@ -3,7 +3,7 @@
     "info": {
         "title": "Providerhub",
         "description": "Microsoft Provider Hub",
-        "version": "2020-09-01-preview",
+        "version": "2020-10-01-preview",
         "x-ms-code-generation-settings": {
             "name": "providerhubClient"
         }
@@ -2062,6 +2062,19 @@
                             "$ref": "#/definitions/TrafficRegions"
                         }
                     ]
+                },
+                "providerRegistration": {
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/ProviderRegistration"
+                        }
+                    ]
+                },
+                "resourceTypeRegistrations": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/ResourceTypeRegistration"
+                    }
                 }
             }
         },
@@ -2158,7 +2171,7 @@
                 "status": {
                     "allOf": [
                         {
-                            "$ref": "#/definitions/RolloutStatusBase"
+                            "$ref": "#/definitions/CustomRolloutStatus"
                         }
                     ]
                 }
@@ -2291,7 +2304,7 @@
                 "canary": {
                     "allOf": [
                         {
-                            "$ref": "#/definitions/TrafficRegions"
+                            "$ref": "#/definitions/CanaryTrafficRegionRolloutConfiguration"
                         }
                     ]
                 },
@@ -2329,6 +2342,19 @@
                             "$ref": "#/definitions/TrafficRegionRolloutConfiguration"
                         }
                     ]
+                },
+                "providerRegistration": {
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/ProviderRegistration"
+                        }
+                    ]
+                },
+                "resourceTypeRegistrations": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/ResourceTypeRegistration"
+                    }
                 }
             }
         },
@@ -2360,6 +2386,19 @@
                 "nextTrafficRegionScheduledTime": {
                     "format": "date-time",
                     "type": "string"
+                },
+                "subscriptionReregistrationResult": {
+                    "enum": [
+                        "NotApplicable",
+                        "ConditionalUpdate",
+                        "ForcedUpdate",
+                        "Failed"
+                    ],
+                    "type": "string",
+                    "x-ms-enum": {
+                        "name": "SubscriptionReregistrationResult",
+                        "modelAsString": true
+                    }
                 }
             }
         },
@@ -2746,6 +2785,40 @@
                     }
                 },
                 "allowedActions": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                }
+            }
+        },
+        "CustomRolloutStatus": {
+            "type": "object",
+            "properties": {
+                "completedRegions": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "failedOrSkippedRegions": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "$ref": "#/definitions/ExtendedErrorInfo"
+                    }
+                }
+            }
+        },
+        "CanaryTrafficRegionRolloutConfiguration": {
+            "type": "object",
+            "properties": {
+                "skipRegions": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "regions": {
                     "type": "array",
                     "items": {
                         "type": "string"
