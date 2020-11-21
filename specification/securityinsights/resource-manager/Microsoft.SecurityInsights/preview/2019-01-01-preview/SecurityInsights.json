@@ -6881,6 +6881,22 @@
       ],
       "description": "Represents Insight Query.",
       "properties": {
+        "properties": {
+          "description": "Properties bag for InsightQueryItem",
+          "$ref": "#/definitions/InsightQueryItemProperties"
+        }
+      },
+      "type": "object",
+      "x-ms-discriminator-value": "Insight"
+    },
+    "InsightQueryItemProperties": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/EntityQueryItemProperties"
+        }
+      ],
+      "description": "Represents Insight Query.",
+      "properties": {
         "displayName": {
           "type": "string",
           "description": "The insight display name."
@@ -6935,7 +6951,7 @@
           "properties": {
             "beforeRange": {
               "type": "string",
-              "description": "Additonal query time for looking back."
+              "description": "Additional query time for looking back."
             }
           }
         }
@@ -6950,6 +6966,22 @@
         }
       ],
       "description": "Represents Activity Query.",
+      "properties": {
+        "properties": {
+          "description": "Properties bag for InsightQueryItem",
+          "$ref": "#/definitions/ActivityQueryItemProperties"
+        }
+      },
+      "type": "object",
+      "x-ms-discriminator-value": "Activity"
+    },
+    "ActivityQueryItemProperties": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/EntityQueryItemProperties"
+        }
+      ],
+      "description": "Represents Activity properties Query.",
       "properties": {
         "content": {
           "type": "string",
@@ -6978,8 +7010,7 @@
           }
         }
       },
-      "type": "object",
-      "x-ms-discriminator-value": "Activity"
+      "type": "object"
     },
     "ActivityTimelineItem": {
       "description": "Represents Activity timeline item.",
@@ -10894,7 +10925,16 @@
           "type": "string",
           "format": "uuid",
           "readOnly": true
-        },
+        }
+      },
+      "required": [
+        "kind"
+      ]
+    },
+    "EntityQueryItemProperties": {
+      "description": "An properties abstract Query item for entity",
+      "type": "object",
+      "properties": {
         "dataTypes": {
           "description": "Data types for template",
           "type": "array",
@@ -10925,10 +10965,7 @@
           "description": "The query applied only to entities matching to all filters",
           "type": "object"
         }
-      },
-      "required": [
-        "kind"
-      ]
+      }
     },
     "EntityInsightItem": {
       "description": "Entity insight Item.",
