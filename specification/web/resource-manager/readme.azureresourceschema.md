@@ -6,215 +6,264 @@ These settings apply only when `--azureresourceschema` is specified on the comma
 
 ``` yaml $(azureresourceschema) && $(multiapi)
 batch:
-  - tag: package-2020-06
-  - tag: package-2019-08
-  - tag: package-2018-12
-  - tag: package-2018-11
-  - tag: package-2018-11-only
-  - tag: package-2018-02
-  - tag: package-2018-02-only
-  - tag: package-2016-09
-  - tag: package-2016-09-only
-  - tag: package-2016-08-only
-  - tag: package-2016-03-only
-  - tag: package-2015-08-only
-  - tag: package-2015-04-only
-  - tag: package-2015-08-preview
-  - tag: package-2015-08-certificate-registration
-  - tag: package-2015-04-domain-registration
-  - tag: package-2016-09-01-web
-  - tag: package-2016-08-01-web
-  - tag: package-2016-03-01-web
-  - tag: package-2018-03-01-hybrid
-  - tag: profile-hybrid-2019-03-01
+  - tag: schema-web-2020-06-01
+  - tag: schema-web-2019-08-01
+  - tag: schema-web-2018-11-01
+  - tag: schema-web-2018-02-01
+  - tag: schema-web-2016-09-01
+  - tag: schema-web-2016-08-01
+  - tag: schema-web-2016-03-01
+  - tag: schema-web-2015-08-01-preview
+  - tag: schema-web-2015-08-01
+  - tag: schema-domainregistration-2020-06-01
+  - tag: schema-domainregistration-2019-08-01
+  - tag: schema-domainregistration-2018-02-01
+  - tag: schema-domainregistration-2015-04-01
+  - tag: schema-certificateregistration-2020-06-01
+  - tag: schema-certificateregistration-2019-08-01
+  - tag: schema-certificateregistration-2018-02-01
+  - tag: schema-certificateregistration-2015-08-01
+
 ```
 
-### Tag: package-2020-06 and azureresourceschema
-
-These settings apply only when `--tag=package-2020-06 --azureresourceschema` is specified on the command line.
 Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
 
-``` yaml $(tag) == 'package-2020-06' && $(azureresourceschema)
+### Tag: schema-web-2020-06-01 and azureresourceschema
+
+``` yaml $(tag) == 'schema-web-2020-06-01' && $(azureresourceschema)
 output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
+  - Microsoft.Web/stable/2020-06-01/Certificates.json
+  - Microsoft.Web/stable/2020-06-01/CommonDefinitions.json
+  - Microsoft.Web/stable/2020-06-01/DeletedWebApps.json
+  - Microsoft.Web/stable/2020-06-01/Diagnostics.json
+  - Microsoft.Web/stable/2020-06-01/Provider.json
+  - Microsoft.Web/stable/2020-06-01/Recommendations.json
+  - Microsoft.Web/stable/2020-06-01/ResourceProvider.json
+  - Microsoft.Web/stable/2020-06-01/WebApps.json
+  - Microsoft.Web/stable/2020-06-01/StaticSites.json
+  - Microsoft.Web/stable/2020-06-01/AppServiceEnvironments.json
+  - Microsoft.Web/stable/2020-06-01/AppServicePlans.json
+  - Microsoft.Web/stable/2020-06-01/ResourceHealthMetadata.json
+
 ```
 
-### Tag: package-2019-08 and azureresourceschema
+### Tag: schema-web-2019-08-01 and azureresourceschema
 
-These settings apply only when `--tag=package-2019-08 --azureresourceschema` is specified on the command line.
-Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
-
-``` yaml $(tag) == 'package-2019-08' && $(azureresourceschema)
+``` yaml $(tag) == 'schema-web-2019-08-01' && $(azureresourceschema)
 output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
+  - Microsoft.Web/stable/2019-08-01/Certificates.json
+  - Microsoft.Web/stable/2019-08-01/CommonDefinitions.json
+  - Microsoft.Web/stable/2019-08-01/DeletedWebApps.json
+  - Microsoft.Web/stable/2019-08-01/Diagnostics.json
+  - Microsoft.Web/stable/2019-08-01/Provider.json
+  - Microsoft.Web/stable/2019-08-01/Recommendations.json
+  - Microsoft.Web/stable/2019-08-01/ResourceProvider.json
+  - Microsoft.Web/stable/2019-08-01/WebApps.json
+  - Microsoft.Web/stable/2019-08-01/StaticSites.json
+  - Microsoft.Web/stable/2019-08-01/AppServiceEnvironments.json
+  - Microsoft.Web/stable/2019-08-01/AppServicePlans.json
+  - Microsoft.Web/stable/2019-08-01/ResourceHealthMetadata.json
+
 ```
 
-### Tag: package-2018-12 and azureresourceschema
+### Tag: schema-web-2018-11-01 and azureresourceschema
 
-These settings apply only when `--tag=package-2018-12 --azureresourceschema` is specified on the command line.
-Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
-
-``` yaml $(tag) == 'package-2018-12' && $(azureresourceschema)
+``` yaml $(tag) == 'schema-web-2018-11-01' && $(azureresourceschema)
 output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
+  - Microsoft.Web/stable/2018-11-01/Certificates.json
+  - Microsoft.Web/stable/2018-11-01/WebApps.json
+
 ```
 
-### Tag: package-2018-11 and azureresourceschema
+### Tag: schema-web-2018-02-01 and azureresourceschema
 
-These settings apply only when `--tag=package-2018-11 --azureresourceschema` is specified on the command line.
-Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
-
-``` yaml $(tag) == 'package-2018-11' && $(azureresourceschema)
+``` yaml $(tag) == 'schema-web-2018-02-01' && $(azureresourceschema)
 output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
+  - Microsoft.Web/stable/2018-02-01/CommonDefinitions.json
+  - Microsoft.Web/stable/2018-02-01/DeletedWebApps.json
+  - Microsoft.Web/stable/2018-02-01/Diagnostics.json
+  - Microsoft.Web/stable/2018-02-01/Provider.json
+  - Microsoft.Web/stable/2018-02-01/Recommendations.json
+  - Microsoft.Web/stable/2018-02-01/ResourceProvider.json
+  - Microsoft.Web/stable/2018-02-01/AppServiceEnvironments.json
+  - Microsoft.Web/stable/2018-02-01/AppServicePlans.json
+  - Microsoft.Web/stable/2018-02-01/ResourceHealthMetadata.json
+  - Microsoft.Web/stable/2018-02-01/WebApps.json
+  - Microsoft.Web/stable/2018-02-01/Certificates.json
+
 ```
 
-### Tag: package-2018-11-only and azureresourceschema
+### Tag: schema-web-2016-09-01 and azureresourceschema
 
-These settings apply only when `--tag=package-2018-11-only --azureresourceschema` is specified on the command line.
-Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
-
-``` yaml $(tag) == 'package-2018-11-only' && $(azureresourceschema)
+``` yaml $(tag) == 'schema-web-2016-09-01' && $(azureresourceschema)
 output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
+  - Microsoft.Web/stable/2016-09-01/AppServiceEnvironments.json
+  - Microsoft.Web/stable/2016-09-01/AppServicePlans.json
+
 ```
 
-### Tag: package-2018-02 and azureresourceschema
+### Tag: schema-web-2016-08-01 and azureresourceschema
 
-These settings apply only when `--tag=package-2018-02 --azureresourceschema` is specified on the command line.
-Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
-
-``` yaml $(tag) == 'package-2018-02' && $(azureresourceschema)
+``` yaml $(tag) == 'schema-web-2016-08-01' && $(azureresourceschema)
 output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
+  - Microsoft.Web/stable/2016-08-01/WebApps.json
+
 ```
 
-### Tag: package-2018-02-only and azureresourceschema
+### Tag: schema-web-2016-03-01 and azureresourceschema
 
-These settings apply only when `--tag=package-2018-02-only --azureresourceschema` is specified on the command line.
-Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
-
-``` yaml $(tag) == 'package-2018-02-only' && $(azureresourceschema)
+``` yaml $(tag) == 'schema-web-2016-03-01' && $(azureresourceschema)
 output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
+  - Microsoft.Web/stable/2016-03-01/Certificates.json
+  - Microsoft.Web/stable/2016-03-01/CommonDefinitions.json
+  - Microsoft.Web/stable/2016-03-01/DeletedWebApps.json
+  - Microsoft.Web/stable/2016-03-01/Diagnostics.json
+  - Microsoft.Web/stable/2016-03-01/Provider.json
+  - Microsoft.Web/stable/2016-03-01/Recommendations.json
+  - Microsoft.Web/stable/2016-03-01/ResourceHealthMetadata.json
+  - Microsoft.Web/stable/2016-03-01/ResourceProvider.json
+
 ```
 
-### Tag: package-2016-09 and azureresourceschema
+### Tag: schema-web-2015-08-01-preview and azureresourceschema
 
-These settings apply only when `--tag=package-2016-09 --azureresourceschema` is specified on the command line.
-Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
-
-``` yaml $(tag) == 'package-2016-09' && $(azureresourceschema)
+``` yaml $(tag) == 'schema-web-2015-08-01-preview' && $(azureresourceschema)
 output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
+  - Microsoft.Web/preview/2015-08-01-preview/logicAppsManagementClient.json
+
 ```
 
-### Tag: package-2016-09-only and azureresourceschema
+### Tag: schema-web-2015-08-01 and azureresourceschema
 
-These settings apply only when `--tag=package-2016-09-only --azureresourceschema` is specified on the command line.
-Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
-
-``` yaml $(tag) == 'package-2016-09-only' && $(azureresourceschema)
+``` yaml $(tag) == 'schema-web-2015-08-01' && $(azureresourceschema)
 output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
+  - Microsoft.Web/stable/2015-08-01/service.json
+
 ```
 
-### Tag: package-2016-08-only and azureresourceschema
+### Tag: schema-domainregistration-2020-06-01 and azureresourceschema
 
-These settings apply only when `--tag=package-2016-08-only --azureresourceschema` is specified on the command line.
-Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
-
-``` yaml $(tag) == 'package-2016-08-only' && $(azureresourceschema)
+``` yaml $(tag) == 'schema-domainregistration-2020-06-01' && $(azureresourceschema)
 output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
+  - Microsoft.DomainRegistration/stable/2020-06-01/Domains.json
+  - Microsoft.DomainRegistration/stable/2020-06-01/TopLevelDomains.json
+  - Microsoft.DomainRegistration/stable/2020-06-01/DomainRegistrationProvider.json
+
 ```
 
-### Tag: package-2016-03-only and azureresourceschema
+### Tag: schema-domainregistration-2019-08-01 and azureresourceschema
 
-These settings apply only when `--tag=package-2016-03-only --azureresourceschema` is specified on the command line.
-Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
-
-``` yaml $(tag) == 'package-2016-03-only' && $(azureresourceschema)
+``` yaml $(tag) == 'schema-domainregistration-2019-08-01' && $(azureresourceschema)
 output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
+  - Microsoft.DomainRegistration/stable/2019-08-01/Domains.json
+  - Microsoft.DomainRegistration/stable/2019-08-01/TopLevelDomains.json
+  - Microsoft.DomainRegistration/stable/2019-08-01/DomainRegistrationProvider.json
+
 ```
 
-### Tag: package-2015-08-only and azureresourceschema
+### Tag: schema-domainregistration-2018-02-01 and azureresourceschema
 
-These settings apply only when `--tag=package-2015-08-only --azureresourceschema` is specified on the command line.
-Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
-
-``` yaml $(tag) == 'package-2015-08-only' && $(azureresourceschema)
+``` yaml $(tag) == 'schema-domainregistration-2018-02-01' && $(azureresourceschema)
 output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
+  - Microsoft.DomainRegistration/stable/2018-02-01/Domains.json
+  - Microsoft.DomainRegistration/stable/2018-02-01/TopLevelDomains.json
+  - Microsoft.DomainRegistration/stable/2018-02-01/DomainRegistrationProvider.json
+
 ```
 
-### Tag: package-2015-04-only and azureresourceschema
+### Tag: schema-domainregistration-2015-04-01 and azureresourceschema
 
-These settings apply only when `--tag=package-2015-04-only --azureresourceschema` is specified on the command line.
-Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
-
-``` yaml $(tag) == 'package-2015-04-only' && $(azureresourceschema)
+``` yaml $(tag) == 'schema-domainregistration-2015-04-01' && $(azureresourceschema)
 output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
+  - Microsoft.DomainRegistration/stable/2015-04-01/Domains.json
+  - Microsoft.DomainRegistration/stable/2015-04-01/TopLevelDomains.json
+  - Microsoft.DomainRegistration/stable/2015-04-01/DomainRegistrationProvider.json
+
 ```
 
-### Tag: package-2015-08-preview and azureresourceschema
+### Tag: schema-certificateregistration-2020-06-01 and azureresourceschema
 
-These settings apply only when `--tag=package-2015-08-preview --azureresourceschema` is specified on the command line.
-Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
-
-``` yaml $(tag) == 'package-2015-08-preview' && $(azureresourceschema)
+``` yaml $(tag) == 'schema-certificateregistration-2020-06-01' && $(azureresourceschema)
 output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
+  - Microsoft.CertificateRegistration/stable/2020-06-01/AppServiceCertificateOrders.json
+  - Microsoft.CertificateRegistration/stable/2020-06-01/CertificateRegistrationProvider.json
+
 ```
 
-### Tag: package-2015-08-certificate-registration and azureresourceschema
+### Tag: schema-certificateregistration-2019-08-01 and azureresourceschema
 
-These settings apply only when `--tag=package-2015-08-certificate-registration --azureresourceschema` is specified on the command line.
-Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
-
-``` yaml $(tag) == 'package-2015-08-certificate-registration' && $(azureresourceschema)
+``` yaml $(tag) == 'schema-certificateregistration-2019-08-01' && $(azureresourceschema)
 output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
+  - Microsoft.CertificateRegistration/stable/2019-08-01/AppServiceCertificateOrders.json
+  - Microsoft.CertificateRegistration/stable/2019-08-01/CertificateRegistrationProvider.json
+
 ```
 
-### Tag: package-2015-04-domain-registration and azureresourceschema
+### Tag: schema-certificateregistration-2018-02-01 and azureresourceschema
 
-These settings apply only when `--tag=package-2015-04-domain-registration --azureresourceschema` is specified on the command line.
-Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
-
-``` yaml $(tag) == 'package-2015-04-domain-registration' && $(azureresourceschema)
+``` yaml $(tag) == 'schema-certificateregistration-2018-02-01' && $(azureresourceschema)
 output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
+  - Microsoft.CertificateRegistration/stable/2018-02-01/AppServiceCertificateOrders.json
+  - Microsoft.CertificateRegistration/stable/2018-02-01/CertificateRegistrationProvider.json
+
 ```
 
-### Tag: package-2016-09-01-web and azureresourceschema
+### Tag: schema-certificateregistration-2015-08-01 and azureresourceschema
 
-These settings apply only when `--tag=package-2016-09-01-web --azureresourceschema` is specified on the command line.
-Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
-
-``` yaml $(tag) == 'package-2016-09-01-web' && $(azureresourceschema)
+``` yaml $(tag) == 'schema-certificateregistration-2015-08-01' && $(azureresourceschema)
 output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
+  - Microsoft.CertificateRegistration/stable/2015-08-01/AppServiceCertificateOrders.json
+  - Microsoft.CertificateRegistration/stable/2015-08-01/CertificateRegistrationProvider.json
+
 ```
-
-### Tag: package-2016-08-01-web and azureresourceschema
-
-These settings apply only when `--tag=package-2016-08-01-web --azureresourceschema` is specified on the command line.
-Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
-
-``` yaml $(tag) == 'package-2016-08-01-web' && $(azureresourceschema)
-output-folder: $(azureresourceschema-folder)/schemas
-```
-
-### Tag: package-2016-03-01-web and azureresourceschema
-
-These settings apply only when `--tag=package-2016-03-01-web --azureresourceschema` is specified on the command line.
-Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
-
-``` yaml $(tag) == 'package-2016-03-01-web' && $(azureresourceschema)
-output-folder: $(azureresourceschema-folder)/schemas
-```
-
-### Tag: package-2018-03-01-hybrid and azureresourceschema
-
-These settings apply only when `--tag=package-2018-03-01-hybrid --azureresourceschema` is specified on the command line.
-Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
-
-``` yaml $(tag) == 'package-2018-03-01-hybrid' && $(azureresourceschema)
-output-folder: $(azureresourceschema-folder)/schemas
-```
-
-### Tag: profile-hybrid-2019-03-01 and azureresourceschema
-
-These settings apply only when `--tag=profile-hybrid-2019-03-01 --azureresourceschema` is specified on the command line.
-Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
-
-``` yaml $(tag) == 'profile-hybrid-2019-03-01' && $(azureresourceschema)
-output-folder: $(azureresourceschema-folder)/schemas
-```
-

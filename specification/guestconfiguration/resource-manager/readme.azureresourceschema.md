@@ -6,45 +6,55 @@ These settings apply only when `--azureresourceschema` is specified on the comma
 
 ``` yaml $(azureresourceschema) && $(multiapi)
 batch:
-  - tag: package-2020-06-25
-  - tag: package-2018-11-20
-  - tag: package-2018-06-30-preview
-  - tag: package-2018-01-20-preview
+  - tag: schema-guestconfiguration-2020-06-25
+  - tag: schema-guestconfiguration-2018-11-20
+  - tag: schema-guestconfiguration-2018-06-30-preview
+  - tag: schema-guestconfiguration-2018-01-20-preview
+
 ```
 
-### Tag: package-2020-06-25 and azureresourceschema
-
-These settings apply only when `--tag=package-2020-06-25 --azureresourceschema` is specified on the command line.
 Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
 
-``` yaml $(tag) == 'package-2020-06-25' && $(azureresourceschema)
+### Tag: schema-guestconfiguration-2020-06-25 and azureresourceschema
+
+``` yaml $(tag) == 'schema-guestconfiguration-2020-06-25' && $(azureresourceschema)
 output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
+  - Microsoft.GuestConfiguration/stable/2020-06-25/guestconfiguration.json
+
 ```
 
-### Tag: package-2018-11-20 and azureresourceschema
+### Tag: schema-guestconfiguration-2018-11-20 and azureresourceschema
 
-These settings apply only when `--tag=package-2018-11-20 --azureresourceschema` is specified on the command line.
-Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
-
-``` yaml $(tag) == 'package-2018-11-20' && $(azureresourceschema)
+``` yaml $(tag) == 'schema-guestconfiguration-2018-11-20' && $(azureresourceschema)
 output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
+  - Microsoft.GuestConfiguration/stable/2018-11-20/guestconfiguration.json
+
 ```
 
-### Tag: package-2018-06-30-preview and azureresourceschema
+### Tag: schema-guestconfiguration-2018-06-30-preview and azureresourceschema
 
-These settings apply only when `--tag=package-2018-06-30-preview --azureresourceschema` is specified on the command line.
-Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
-
-``` yaml $(tag) == 'package-2018-06-30-preview' && $(azureresourceschema)
+``` yaml $(tag) == 'schema-guestconfiguration-2018-06-30-preview' && $(azureresourceschema)
 output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
+  - Microsoft.GuestConfiguration/preview/2018-06-30-preview/guestconfiguration.json
+
 ```
 
-### Tag: package-2018-01-20-preview and azureresourceschema
+### Tag: schema-guestconfiguration-2018-01-20-preview and azureresourceschema
 
-These settings apply only when `--tag=package-2018-01-20-preview --azureresourceschema` is specified on the command line.
-Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
-
-``` yaml $(tag) == 'package-2018-01-20-preview' && $(azureresourceschema)
+``` yaml $(tag) == 'schema-guestconfiguration-2018-01-20-preview' && $(azureresourceschema)
 output-folder: $(azureresourceschema-folder)/schemas
-```
 
+# all the input files in this apiVersion
+input-file:
+  - Microsoft.GuestConfiguration/preview/2018-01-20-preview/guestconfiguration.json
+
+```

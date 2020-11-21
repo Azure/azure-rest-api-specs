@@ -6,75 +6,104 @@ These settings apply only when `--azureresourceschema` is specified on the comma
 
 ``` yaml $(azureresourceschema) && $(multiapi)
 batch:
-  - tag: package-2020-01
-  - tag: package-2019-10-preview
-  - tag: package-2019-03-preview
-  - tag: package-2018-11-preview
-  - tag: package-2018-03-preview
-  - tag: package-2017-11-preview
-  - tag: package-2016-06-01
+  - tag: schema-subscription-2020-09-01
+  - tag: schema-subscription-2020-01-01
+  - tag: schema-subscription-2019-10-01-preview
+  - tag: schema-subscription-2019-03-01-preview
+  - tag: schema-subscription-2018-11-01-preview
+  - tag: schema-subscription-2018-03-01-preview
+  - tag: schema-subscription-2017-11-01-preview
+  - tag: schema-subscription-2016-06-01
+
 ```
 
-### Tag: package-2020-01 and azureresourceschema
-
-These settings apply only when `--tag=package-2020-01 --azureresourceschema` is specified on the command line.
 Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
 
-``` yaml $(tag) == 'package-2020-01' && $(azureresourceschema)
+### Tag: schema-subscription-2020-09-01 and azureresourceschema
+
+``` yaml $(tag) == 'schema-subscription-2020-09-01' && $(azureresourceschema)
 output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
+  - Microsoft.Subscription/stable/2020-09-01/subscriptions.json
+
 ```
 
-### Tag: package-2019-10-preview and azureresourceschema
+### Tag: schema-subscription-2020-01-01 and azureresourceschema
 
-These settings apply only when `--tag=package-2019-10-preview --azureresourceschema` is specified on the command line.
-Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
-
-``` yaml $(tag) == 'package-2019-10-preview' && $(azureresourceschema)
+``` yaml $(tag) == 'schema-subscription-2020-01-01' && $(azureresourceschema)
 output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
+  - Microsoft.Subscription/stable/2020-01-01/subscriptions.json
+
 ```
 
-### Tag: package-2019-03-preview and azureresourceschema
+### Tag: schema-subscription-2019-10-01-preview and azureresourceschema
 
-These settings apply only when `--tag=package-2019-03-preview --azureresourceschema` is specified on the command line.
-Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
-
-``` yaml $(tag) == 'package-2019-03-preview' && $(azureresourceschema)
+``` yaml $(tag) == 'schema-subscription-2019-10-01-preview' && $(azureresourceschema)
 output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
+  - Microsoft.Subscription/preview/2019-10-01-preview/subscriptions.json
+
 ```
 
-### Tag: package-2018-11-preview and azureresourceschema
+### Tag: schema-subscription-2019-03-01-preview and azureresourceschema
 
-These settings apply only when `--tag=package-2018-11-preview --azureresourceschema` is specified on the command line.
-Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
-
-``` yaml $(tag) == 'package-2018-11-preview' && $(azureresourceschema)
+``` yaml $(tag) == 'schema-subscription-2019-03-01-preview' && $(azureresourceschema)
 output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
+  - Microsoft.Subscription/preview/2019-03-01-preview/subscriptions.json
+
 ```
 
-### Tag: package-2018-03-preview and azureresourceschema
+### Tag: schema-subscription-2018-11-01-preview and azureresourceschema
 
-These settings apply only when `--tag=package-2018-03-preview --azureresourceschema` is specified on the command line.
-Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
-
-``` yaml $(tag) == 'package-2018-03-preview' && $(azureresourceschema)
+``` yaml $(tag) == 'schema-subscription-2018-11-01-preview' && $(azureresourceschema)
 output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
+  - Microsoft.Subscription/preview/2018-11-01-preview/subscriptions.json
+
 ```
 
-### Tag: package-2017-11-preview and azureresourceschema
+### Tag: schema-subscription-2018-03-01-preview and azureresourceschema
 
-These settings apply only when `--tag=package-2017-11-preview --azureresourceschema` is specified on the command line.
-Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
-
-``` yaml $(tag) == 'package-2017-11-preview' && $(azureresourceschema)
+``` yaml $(tag) == 'schema-subscription-2018-03-01-preview' && $(azureresourceschema)
 output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
+  - Microsoft.Subscription/preview/2018-03-01-preview/subscriptions.json
+  - Microsoft.Subscription/preview/2018-03-01-preview/operations.json
+
 ```
 
-### Tag: package-2016-06-01 and azureresourceschema
+### Tag: schema-subscription-2017-11-01-preview and azureresourceschema
 
-These settings apply only when `--tag=package-2016-06-01 --azureresourceschema` is specified on the command line.
-Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
-
-``` yaml $(tag) == 'package-2016-06-01' && $(azureresourceschema)
+``` yaml $(tag) == 'schema-subscription-2017-11-01-preview' && $(azureresourceschema)
 output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
+  - Microsoft.Subscription/preview/2017-11-01-preview/subscriptionDefinitions.json
+
 ```
 
+### Tag: schema-subscription-2016-06-01 and azureresourceschema
+
+``` yaml $(tag) == 'schema-subscription-2016-06-01' && $(azureresourceschema)
+output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
+  - Microsoft.Subscription/stable/2016-06-01/subscriptions.json
+
+```
