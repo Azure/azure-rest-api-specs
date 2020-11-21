@@ -2925,6 +2925,28 @@
         "appInsightsInstrumentationKey": {
           "description": "Target application insight instrumentation key",
           "type": "string"
+        },
+        "appInsightsSamplingRate": {
+          "description": "Indicates the sampling rate of application insight agent, should be in range [0.0, 100.0]",
+          "format": "double",
+          "maximum": 100.0,
+          "minimum": 0.0,
+          "type": "number"
+        },
+        "appInsightsAgentVersions": {
+          "$ref": "#/definitions/applicationInsightsAgentVersions",
+          "description": "Indicates the versions of application insight agent"
+        }
+      }
+    },
+    "applicationInsightsAgentVersions": {
+      "description": "Application Insights agent versions properties payload",
+      "type": "object",
+      "properties": {
+        "java": {
+          "description": "Indicates the version of application insight java agent",
+          "type": "string",
+          "readOnly": true
         }
       }
     },
