@@ -6911,7 +6911,71 @@
         },
         "tableQuery": {
           "type": "object",
-          "description": "The insight table query."
+          "description": "The insight table query.",
+          "properties": {
+            "columnsDefinitions": {
+              "type": "array",
+              "description": "List of insight column definitions.",
+              "items": {
+                "properties": {
+                  "header": {
+                    "type": "string",
+                    "description": "Insight column header."
+                  },
+                  "outputType": {
+                    "type": "string",
+                    "description": "Insights Column type.",
+                    "enum": [
+                      "Number",
+                      "String",
+                      "Date",
+                      "Entity"
+                    ]
+                  },
+                  "supportDeepLink": {
+                    "type": "boolean",
+                    "description": "Is query supports deep-link."
+                  }
+                }
+              }
+            },
+            "queriesDefinitions": {
+              "type": "array",
+              "description": "List of insight queries definitions.",
+              "items": {
+                "properties": {
+                  "filter": {
+                    "type": "string",
+                    "description": "Insight column header."
+                  },
+                  "summarize": {
+                    "type": "string",
+                    "description": "Insight column header."
+                  },
+                  "project": {
+                    "type": "string",
+                    "description": "Insight column header."
+                  },
+                  "linkColumnsDefinitions": {
+                    "type": "array",
+                    "description": "Insight column header.",
+                    "items": {
+                      "properties": {
+                        "projectedName": {
+                          "type": "string",
+                          "description": "Insight Link Definition Projected Name."
+                        },
+                        "Query": {
+                          "type": "string",
+                          "description": "Insight Link Definition Query."
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
         },
         "chartQuery": {
           "type": "object",
