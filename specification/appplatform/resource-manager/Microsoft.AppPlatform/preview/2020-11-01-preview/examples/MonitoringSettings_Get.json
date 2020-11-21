@@ -1,6 +1,6 @@
 {
   "parameters": {
-    "api-version": "2020-07-01",
+    "api-version": "2020-11-01-preview",
     "subscriptionId": "00000000-0000-0000-0000-000000000000",
     "resourceGroupName": "myResourceGroup",
     "serviceName": "myservice"
@@ -10,8 +10,11 @@
       "body": {
         "properties": {
           "provisioningState": "Succeeded",
-          "traceEnabled": true,
-          "appInsightsInstrumentationKey": "00000000-0000-0000-0000-000000000000"
+          "applicationInsightsInstrumentationKey": "00000000-0000-0000-0000-000000000000",
+          "applicationInsightsSamplingRate": 10.0,
+          "applicationInsightsAgentVersions": {
+            "java": "3.0.0"
+          }
         },
         "type": "Microsoft.AppPlatform/Spring/monitoringSettings",
         "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.AppPlatform/Spring/myservice/monitoringSettings/default",

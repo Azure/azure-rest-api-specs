@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2020-07-01",
+    "version": "2020-11-01-preview",
     "title": "AppPlatformManagementClient",
     "description": "REST API for Azure Spring Cloud"
   },
@@ -2918,13 +2918,31 @@
           "$ref": "#/definitions/Error",
           "description": "Error when apply Monitoring Setting changes."
         },
-        "traceEnabled": {
-          "description": "Indicates whether enable the trace functionality",
-          "type": "boolean"
-        },
-        "appInsightsInstrumentationKey": {
+        "applicationInsightsInstrumentationKey": {
           "description": "Target application insight instrumentation key",
           "type": "string"
+        },
+        "applicationInsightsSamplingRate": {
+          "description": "Indicates the sampling rate of application insight agent, should be in range [0.0, 100.0]",
+          "format": "double",
+          "maximum": 100.0,
+          "minimum": 0.0,
+          "type": "number"
+        },
+        "applicationInsightsAgentVersions": {
+          "$ref": "#/definitions/applicationInsightsAgentVersions",
+          "description": "Indicates the versions of application insight agent"
+        }
+      }
+    },
+    "applicationInsightsAgentVersions": {
+      "description": "Application Insights agent versions properties payload",
+      "type": "object",
+      "properties": {
+        "java": {
+          "description": "Indicates the version of application insight java agent",
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -4373,7 +4391,7 @@
       "required": true,
       "type": "string",
       "enum": [
-        "2020-07-01"
+        "2020-11-01-preview"
       ]
     },
     "SubscriptionIdParameter": {
