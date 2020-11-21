@@ -38,6 +38,7 @@ These settings apply only when `--tag=package-2020-06-preview` is specified on t
 input-file:
 - Microsoft.DocumentDB/preview/2020-06-01-preview/cosmos-db.json
 - Microsoft.DocumentDB/preview/2020-06-01-preview/notebook.json
+- Microsoft.DocumentDB/preview/2020-06-01-preview/rbac.json
 - Microsoft.DocumentDB/preview/2019-08-01-preview/privateLinkResources.json
 - Microsoft.DocumentDB/preview/2019-08-01-preview/privateEndpointConnection.json
 ```
@@ -220,6 +221,9 @@ directive:
   - suppress: PathResourceProviderNamePascalCase
     from: privateLinkResources.json
     reason: The name of the provider is Microsoft.DocumentDB
+  - suppress: PathResourceProviderNamePascalCase
+    from: rbac.json
+    reason: The name of the provider is Microsoft.DocumentDB
 ```
 
 ---
@@ -287,6 +291,7 @@ require: $(this-folder)/../../../profiles/readme.md
 input-file:
   - $(this-folder)/Microsoft.DocumentDB/preview/2020-06-01-preview/cosmos-db.json
   - $(this-folder)/Microsoft.DocumentDB/preview/2020-06-01-preview/notebook.json
+  - $(this-folder)/Microsoft.DocumentDB/preview/2020-06-01-preview/rbac.json
   - $(this-folder)/Microsoft.DocumentDB/preview/2019-08-01-preview/privateLinkResources.json
   - $(this-folder)/Microsoft.DocumentDB/preview/2019-08-01-preview/privateEndpointConnection.json
   - $(this-folder)/Microsoft.DocumentDB/stable/2020-04-01/cosmos-db.json
@@ -312,4 +317,3 @@ uncomment the  `exclude-file` section below and add the file paths.
 #exclude-file: 
 #  - $(this-folder)/Microsoft.Example/stable/2010-01-01/somefile.json
 ```
-
