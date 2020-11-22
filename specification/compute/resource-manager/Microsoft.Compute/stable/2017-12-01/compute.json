@@ -254,7 +254,7 @@
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "The expand expression to apply to the operation."
+            "description": "The expand expression to apply to the operation. Allowed values are 'instanceView'."
           }
         ],
         "responses": {
@@ -872,11 +872,11 @@
             "description": "A valid image SKU."
           },
           {
-            "name": "$filter",
+            "name": "$expand",
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "The filter to apply on the operation."
+            "description": "The expand expression to apply on the operation."
           },
           {
             "name": "$top",
@@ -908,8 +908,7 @@
               }
             }
           }
-        },
-        "x-ms-odata": "#/definitions/VirtualMachineImageResource"
+        }
       }
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/publishers/{publisherName}/artifacttypes/vmimage/offers": {
@@ -3969,21 +3968,21 @@
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "The filter to apply to the operation."
+            "description": "The filter to apply to the operation. Allowed values are 'startswith(instanceView/statuses/code, 'PowerState') eq true', 'properties/latestModelApplied eq true', 'properties/latestModelApplied eq false'."
           },
           {
             "name": "$select",
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "The list parameters."
+            "description": "The list parameters. Allowed values are 'instanceView', 'instanceView/statuses'."
           },
           {
             "name": "$expand",
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "The expand expression to apply to the operation."
+            "description": "The expand expression to apply to the operation. Allowed values are 'instanceView'."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -5254,7 +5253,7 @@
           "$ref": "#/definitions/SubResource"
         }
       ],
-      "description": "Specifies information about the image to use. You can specify information about platform images, marketplace images, or virtual machine images. This element is required when you want to use a platform image, marketplace image, or virtual machine image, but is not used in other creation operations."
+      "description": "Specifies information about the image to use. You can specify information about platform images, marketplace images, or virtual machine images. This element is required when you want to use a platform image, marketplace image, or virtual machine image, but is not used in other creation operations. NOTE: Image reference publisher and offer can only be set when you create the scale set."
     },
     "KeyVaultSecretReference": {
       "properties": {
@@ -5344,7 +5343,7 @@
     },
     "StorageAccountType": {
       "type": "string",
-      "description": "Specifies the storage account type for the managed disk. Possible values are: Standard_LRS or Premium_LRS.",
+      "description": "Specifies the storage account type for the managed disk. Possible values are: Standard_LRS or Premium_LRS. NOTE: Managed OS disk storage account type can only be set when you create the scale set.",
       "enum": [
         "Standard_LRS",
         "Premium_LRS"
@@ -6130,7 +6129,7 @@
           "description": "Specifies the number of virtual machines in the scale set."
         }
       },
-      "description": "Describes a virtual machine scale set sku."
+      "description": "Describes a virtual machine scale set sku. NOTE: If the new VM SKU is not supported on the hardware the scale set is currently on, you need to deallocate the VMs in the scale set before you modify the SKU name."
     },
     "AutoOSUpgradePolicy": {
       "properties": {
@@ -6770,7 +6769,7 @@
           "description": "The load balancer inbound nat pools."
         }
       },
-      "description": "Describes a virtual machine scale set network profile's IP configuration properties."
+      "description": "Describes a virtual machine scale set network profile's IP configuration properties. NOTE: The subnet of a scale set may be modified as long as the original subnet and the new subnet are in the same virtual network."
     },
     "VirtualMachineScaleSetIPConfiguration": {
       "properties": {
@@ -7251,7 +7250,7 @@
         },
         "singlePlacementGroup": {
           "type": "boolean",
-          "description": "When true this limits the scale set to a single placement group, of max size 100 virtual machines."
+          "description": "When true this limits the scale set to a single placement group, of max size 100 virtual machines. NOTE: If singlePlacementGroup is true, it may be modified to false. However, if singlePlacementGroup is false, it may not be modified to true."
         }
       },
       "description": "Describes the properties of a Virtual Machine Scale Set."
@@ -7279,7 +7278,7 @@
           "items": {
             "type": "string"
           },
-          "description": "The virtual machine scale set zones."
+          "description": "The virtual machine scale set zones. NOTE: Availability zones can only be set when you create the scale set."
         }
       },
       "allOf": [

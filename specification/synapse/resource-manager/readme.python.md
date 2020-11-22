@@ -12,7 +12,7 @@ python:
   payload-flattening-threshold: 2
   namespace: azure.mgmt.synapse
   package-name: azure-mgmt-synapse
-  package-version: 0.9.0.dev1
+  package-version: 0.1.0
   clear-output-folder: true
 ```
 ``` yaml $(python) && $(python-mode) == 'update'

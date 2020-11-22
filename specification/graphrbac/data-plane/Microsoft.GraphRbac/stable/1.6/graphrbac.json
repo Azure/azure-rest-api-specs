@@ -1697,6 +1697,13 @@
             "description": "The filter to apply to the operation."
           },
           {
+            "name": "$expand",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "The expand value for the operation result."
+          },
+          {
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
@@ -2713,7 +2720,8 @@
           "type": "string",
           "format": "date-time",
           "description": "The time at which the directory object was deleted.",
-          "readOnly": true
+          "readOnly": true,
+          "x-nullable": true
         }
       },
       "required": [

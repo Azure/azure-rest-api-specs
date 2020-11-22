@@ -101,6 +101,58 @@
             "$ref": "./examples/Common/BackupResourceVaultConfigs_Patch.json"
           }
         }
+      },
+      "put": {
+        "tags": [
+          "BackupResourceVaultConfigs"
+        ],
+        "description": "Updates vault security config.",
+        "operationId": "BackupResourceVaultConfigs_Put",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/VaultName"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "resource config request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/BackupResourceVaultConfigResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/BackupResourceVaultConfigResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update Vault Security Config": {
+            "$ref": "./examples/Common/BackupResourceVaultConfigs_Put.json"
+          }
+        }
       }
     },
     "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupFabrics/{fabricName}/protectionContainers/{containerName}/protectedItems/{protectedItemName}": {
@@ -1250,20 +1302,6 @@
             "modelAsString": true
           }
         },
-        "healthStatus": {
-          "description": "backups running status for this backup item.",
-          "enum": [
-            "Passed",
-            "ActionRequired",
-            "ActionSuggested",
-            "Invalid"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "HealthStatus",
-            "modelAsString": true
-          }
-        },
         "lastBackupStatus": {
           "description": "Last backup operation status. Possible values: Healthy, Unhealthy.",
           "type": "string"
@@ -1272,6 +1310,13 @@
           "format": "date-time",
           "description": "Timestamp of the last backup operation on this backup item.",
           "type": "string"
+        },
+        "kpisHealths": {
+          "description": "Health details of different KPIs",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/KPIResourceHealthDetails"
+          }
         },
         "extendedInfo": {
           "$ref": "#/definitions/AzureFileshareProtectedItemExtendedInfo",
@@ -1566,8 +1611,8 @@
         }
       }
     },
-    "AzureIaaSVMHealthDetails": {
-      "description": "Azure IaaS VM workload-specific Health Details.",
+    "ResourceHealthDetails": {
+      "description": "Health Details for backup items.",
       "type": "object",
       "properties": {
         "code": {
@@ -1595,6 +1640,15 @@
           "readOnly": true
         }
       }
+    },
+    "AzureIaaSVMHealthDetails": {
+      "description": "Azure IaaS VM workload-specific Health Details.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResourceHealthDetails"
+        }
+      ]
     },
     "AzureIaaSVMJob": {
       "description": "Azure IaaS VM workload-specific job object.",
@@ -1764,7 +1818,7 @@
           }
         },
         "healthStatus": {
-          "description": "Health status of protected item",
+          "description": "Health status of protected item.",
           "enum": [
             "Passed",
             "ActionRequired",
@@ -1782,6 +1836,13 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/AzureIaaSVMHealthDetails"
+          }
+        },
+        "kpisHealths": {
+          "description": "Health details of different KPIs",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/KPIResourceHealthDetails"
           }
         },
         "lastBackupStatus": {
@@ -2133,6 +2194,13 @@
         "extendedInfo": {
           "$ref": "#/definitions/AzureVmWorkloadProtectedItemExtendedInfo",
           "description": "Additional information for this backup item."
+        },
+        "kpisHealths": {
+          "description": "Health details of different KPIs",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/KPIResourceHealthDetails"
+          }
         }
       },
       "x-ms-discriminator-value": "AzureVmWorkloadProtectedItem"
@@ -3988,6 +4056,35 @@
         }
       },
       "discriminator": "objectType"
+    },
+    "KPIResourceHealthDetails": {
+      "description": "KPI Resource Health Details",
+      "type": "object",
+      "properties": {
+        "resourceHealthStatus": {
+          "description": "Resource Health Status",
+          "enum": [
+            "Healthy",
+            "TransientDegraded",
+            "PersistentDegraded",
+            "TransientUnhealthy",
+            "PersistentUnhealthy",
+            "Invalid"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ResourceHealthStatus",
+            "modelAsString": true
+          }
+        },
+        "resourceHealthDetails": {
+          "description": "Resource Health Status",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ResourceHealthDetails"
+          }
+        }
+      }
     },
     "OperationResultInfoBaseResource": {
       "description": "Base class for operation result info.",

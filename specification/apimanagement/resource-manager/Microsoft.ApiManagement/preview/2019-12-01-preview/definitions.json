@@ -2878,54 +2878,6 @@
       },
       "description": "Paged OpenIdProviders list representation."
     },
-    "OpenidConnectProviderCreateContract": {
-      "properties": {
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/OpenidConnectProviderCreateContractProperties",
-          "description": "OpenId Connect Provider contract properties."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "./apimanagement.json#/definitions/Resource"
-        }
-      ],
-      "description": "OpenId Connect Provider details."
-    },
-    "OpenidConnectProviderCreateContractProperties": {
-      "properties": {
-        "displayName": {
-          "type": "string",
-          "description": "User-friendly OpenID Connect Provider name.",
-          "maxLength": 50
-        },
-        "description": {
-          "type": "string",
-          "description": "User-friendly description of OpenID Connect Provider."
-        },
-        "metadataEndpoint": {
-          "type": "string",
-          "description": "Metadata endpoint URI."
-        },
-        "clientId": {
-          "type": "string",
-          "description": "Client ID of developer console which is the client application."
-        },
-        "clientSecret": {
-          "x-ms-secret": true,
-          "type": "string",
-          "description": "Client Secret of developer console which is the client application."
-        }
-      },
-      "required": [
-        "displayName",
-        "metadataEndpoint",
-        "clientId",
-        "clientSecret"
-      ],
-      "description": "OpenID Connect Providers Contract."
-    },
     "OpenidConnectProviderContract": {
       "properties": {
         "properties": {
@@ -3593,13 +3545,13 @@
           "type": "boolean"
         },
         "approvalRequired": {
-          "description": "whether subscription approval is required. If false, new subscriptions will be approved automatically enabling developers to call the product’s APIs immediately after subscribing. If true, administrators must manually approve the subscription before the developer can any of the product’s APIs. Can be present only if subscriptionRequired property is present and has a value of false.",
+          "description": "whether subscription approval is required. If false, new subscriptions will be approved automatically enabling developers to call the product’s APIs immediately after subscribing. If true, administrators must manually approve the subscription before the developer can any of the product’s APIs. Can be present only if subscriptionRequired property is present and has a value of true.",
           "type": "boolean"
         },
         "subscriptionsLimit": {
           "type": "integer",
           "format": "int32",
-          "description": "Whether the number of subscriptions a user can have to this product at the same time. Set to null or omit to allow unlimited per user subscriptions. Can be present only if subscriptionRequired property is present and has a value of false."
+          "description": "Whether the number of subscriptions a user can have to this product at the same time. Set to null or omit to allow unlimited per user subscriptions. Can be present only if subscriptionRequired property is present and has a value of true."
         },
         "state": {
           "type": "string",
@@ -5090,6 +5042,23 @@
           "type": "string",
           "description": "User Password. If no value is provided, a default password is generated."
         },
+        "appType": {
+          "type": "string",
+          "description": "Determines the type of application which send the create user request. Default is old publisher portal.",
+          "enum": [
+            "developerPortal"
+          ],
+          "x-ms-enum": {
+            "name": "AppType",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "developerPortal",
+                "description": "User create request was sent by new developer portal."
+              }
+            ]
+          }
+        },
         "confirmation": {
           "type": "string",
           "description": "Determines the type of confirmation e-mail that will be sent to the newly created user.",
@@ -5365,6 +5334,227 @@
         }
       },
       "description": "Subscription keys."
+    },
+    "GatewayCollection": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/GatewayContract"
+          },
+          "description": "Page values.",
+          "readOnly": true
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Next page link if any.",
+          "readOnly": true
+        }
+      },
+      "description": "Paged Gateway list representation."
+    },
+    "GatewayContract": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/GatewayContractProperties",
+          "description": "Gateway details."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./apimanagement.json#/definitions/Resource"
+        }
+      ],
+      "description": "Gateway details."
+    },
+    "GatewayContractProperties": {
+      "properties": {
+        "locationData": {
+          "$ref": "#/definitions/ResourceLocationDataContract",
+          "description": "Gateway location."
+        },
+        "description": {
+          "type": "string",
+          "description": "Gateway description",
+          "maxLength": 1000
+        }
+      },
+      "description": "Properties of the Gateway contract."
+    },
+    "ResourceLocationDataContract": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "A canonical name for the geographic or physical location.",
+          "maxLength": 256
+        },
+        "city": {
+          "type": "string",
+          "description": "The city or locality where the resource is located.",
+          "maxLength": 256
+        },
+        "district": {
+          "type": "string",
+          "description": "The district, state, or province where the resource is located.",
+          "maxLength": 256
+        },
+        "countryOrRegion": {
+          "type": "string",
+          "description": "The country or region where the resource is located.",
+          "maxLength": 256
+        }
+      },
+      "required": [
+        "name"
+      ],
+      "description": "Resource location data properties."
+    },
+    "GatewayKeysContract": {
+      "properties": {
+        "primary": {
+          "type": "string",
+          "description": "Primary gateway key."
+        },
+        "secondary": {
+          "type": "string",
+          "description": "Secondary gateway key."
+        }
+      },
+      "description": "Gateway authentication keys."
+    },
+    "GatewayTokenRequestContract": {
+      "properties": {
+        "keyType": {
+          "type": "string",
+          "description": "The Key to be used to generate gateway token.",
+          "enum": [
+            "primary",
+            "secondary"
+          ],
+          "default": "primary",
+          "x-ms-enum": {
+            "name": "KeyType",
+            "modelAsString": false
+          }
+        },
+        "expiry": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The Expiry time of the Token. Maximum token expiry time is set to 30 days. The date conforms to the following format: `yyyy-MM-ddTHH:mm:ssZ` as specified by the ISO 8601 standard.\n"
+        }
+      },
+      "required": [
+        "keyType",
+        "expiry"
+      ],
+      "description": "Gateway token request contract properties."
+    },
+    "GatewayTokenContract": {
+      "properties": {
+        "value": {
+          "type": "string",
+          "description": "Shared Access Authentication token value for the Gateway."
+        }
+      },
+      "description": "Gateway access token."
+    },
+    "GatewayKeyRegenerationRequestContract": {
+      "properties": {
+        "keyType": {
+          "type": "string",
+          "description": "The Key being regenerated.",
+          "enum": [
+            "primary",
+            "secondary"
+          ],
+          "x-ms-enum": {
+            "name": "KeyType",
+            "modelAsString": false
+          }
+        }
+      },
+      "required": [
+        "keyType"
+      ],
+      "description": "Gateway key regeneration request contract properties."
+    },
+    "GatewayHostnameConfigurationCollection": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/GatewayHostnameConfigurationContract"
+          },
+          "description": "Page values.",
+          "readOnly": true
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Next page link if any.",
+          "readOnly": true
+        }
+      },
+      "description": "Paged Gateway hostname configuration list representation."
+    },
+    "GatewayHostnameConfigurationContract": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/GatewayHostnameConfigurationContractProperties",
+          "description": "Gateway hostname configuration details."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./apimanagement.json#/definitions/Resource"
+        }
+      ],
+      "description": "Gateway hostname configuration details."
+    },
+    "GatewayHostnameConfigurationContractProperties": {
+      "properties": {
+        "hostname": {
+          "type": "string",
+          "description": "Hostname value. Supports valid domain name, partial or full wildcard"
+        },
+        "certificateId": {
+          "type": "string",
+          "description": "Identifier of Certificate entity that will be used for TLS connection establishment"
+        },
+        "negotiateClientCertificate": {
+          "type": "boolean",
+          "description": "Determines whether gateway requests client certificate"
+        }
+      },
+      "description": "Gateway hostname configuration details."
+    },
+    "AssociationContract": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "properties": {
+            "provisioningState": {
+              "type": "string",
+              "description": "Provisioning state.",
+              "enum": [
+                "created"
+              ],
+              "x-ms-enum": {
+                "name": "ProvisioningState",
+                "modelAsString": false
+              }
+            }
+          },
+          "description": "Association entity contract properties."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./apimanagement.json#/definitions/Resource"
+        }
+      ],
+      "description": "Association entity details."
     }
   },
   "parameters": {}

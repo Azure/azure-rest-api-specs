@@ -396,7 +396,7 @@
           {
             "name": "$filter",
             "in": "query",
-            "description": "The filter to apply to the recommendations.",
+            "description": "The filter to apply to the recommendations.<br>Filter can be applied to properties ['ResourceId', 'ResourceGroup', 'RecommendationTypeGuid', '[Category](#category)'] with operators ['eq', 'and', 'or'].<br>Example:<br>- $filter=Category eq 'Cost' and ResourceGroup eq 'MyResourceGroup'",
             "required": false,
             "type": "string"
           },
@@ -1053,6 +1053,10 @@
           "additionalProperties": {
             "type": "string"
           }
+        },
+        "resourceMetadata": {
+          "$ref": "#/definitions/ResourceMetadata",
+          "description": "Metadata of resource that was assessed"
         }
       }
     },
@@ -1087,6 +1091,20 @@
         },
         "solution": {
           "description": "The remediation action suggested by the recommendation.",
+          "type": "string"
+        }
+      }
+    },
+    "ResourceMetadata": {
+      "description": "Recommendation resource metadata",
+      "type": "object",
+      "properties": {
+        "resourceId": {
+          "description": "Azure resource Id of the assessed resource",
+          "type": "string"
+        },
+        "source": {
+          "description": "Source from which recommendation is generated",
           "type": "string"
         }
       }

@@ -266,7 +266,7 @@
             "name": "parameters",
             "in": "body",
             "schema": {
-              "$ref": "#/definitions/Application"
+              "$ref": "#/definitions/ApplicationPatchable"
             },
             "description": "Parameters supplied to update an existing managed application."
           },
@@ -1097,24 +1097,43 @@
     }
   },
   "x-ms-paths": {
-    "/{applicationDefinitionId}?disambiguation_dummy": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Solutions/applicationDefinitions/{applicationDefinitionName}?disambiguation_dummy": {
       "get": {
         "tags": [
           "ApplicationDefinitions"
         ],
         "operationId": "ApplicationDefinitions_GetById",
         "description": "Gets the managed application definition.",
+        "x-ms-examples": {
+          "Get managed application definition": {
+            "$ref": "./examples/getApplicationDefinition.json"
+          }
+        },
         "parameters": [
           {
-            "name": "applicationDefinitionId",
+            "name": "resourceGroupName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The fully qualified ID of the managed application definition, including the managed application name and the managed application definition resource type. Use the format, /subscriptions/{guid}/resourceGroups/{resource-group-name}/Microsoft.Solutions/applicationDefinitions/{applicationDefinition-name}",
-            "x-ms-skip-url-encoding": true
+            "description": "The name of the resource group. The name is case insensitive.",
+            "pattern": "^[-\\w\\._\\(\\)]+$",
+            "minLength": 1,
+            "maxLength": 90
+          },
+          {
+            "name": "applicationDefinitionName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the managed application definition.",
+            "minLength": 3,
+            "maxLength": 64
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -1138,17 +1157,36 @@
         ],
         "operationId": "ApplicationDefinitions_DeleteById",
         "description": "Deletes the managed application definition.",
+        "x-ms-examples": {
+          "Get managed application definition": {
+            "$ref": "./examples/deleteApplicationDefinition.json"
+          }
+        },
         "parameters": [
           {
-            "name": "applicationDefinitionId",
+            "name": "resourceGroupName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The fully qualified ID of the managed application definition, including the managed application name and the managed application definition resource type. Use the format, /subscriptions/{guid}/resourceGroups/{resource-group-name}/Microsoft.Solutions/applicationDefinitions/{applicationDefinition-name}",
-            "x-ms-skip-url-encoding": true
+            "description": "The name of the resource group. The name is case insensitive.",
+            "pattern": "^[-\\w\\._\\(\\)]+$",
+            "minLength": 1,
+            "maxLength": 90
+          },
+          {
+            "name": "applicationDefinitionName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the managed application definition.",
+            "minLength": 3,
+            "maxLength": 64
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -1176,14 +1214,36 @@
         ],
         "operationId": "ApplicationDefinitions_CreateOrUpdateById",
         "description": "Creates a new managed application definition.",
+        "x-ms-examples": {
+          "Create or update managed application definition": {
+            "$ref": "./examples/createOrUpdateApplicationDefinition.json"
+          }
+        },
         "parameters": [
           {
-            "name": "applicationDefinitionId",
+            "name": "resourceGroupName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The fully qualified ID of the managed application definition, including the managed application name and the managed application definition resource type. Use the format, /subscriptions/{guid}/resourceGroups/{resource-group-name}/Microsoft.Solutions/applicationDefinitions/{applicationDefinition-name}",
-            "x-ms-skip-url-encoding": true
+            "description": "The name of the resource group. The name is case insensitive.",
+            "pattern": "^[-\\w\\._\\(\\)]+$",
+            "minLength": 1,
+            "maxLength": 90
+          },
+          {
+            "name": "applicationDefinitionName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the managed application definition.",
+            "minLength": 3,
+            "maxLength": 64
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
             "name": "parameters",
@@ -1193,9 +1253,6 @@
               "$ref": "#/definitions/ApplicationDefinition"
             },
             "description": "Parameters supplied to the create or update a managed application definition."
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -1259,7 +1316,7 @@
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/ApplicationPropertiesPatchable",
+          "$ref": "#/definitions/ApplicationProperties",
           "description": "The managed application properties."
         },
         "plan": {
@@ -1606,15 +1663,40 @@
           "type": "string",
           "description": "The identity type.",
           "enum": [
-            "SystemAssigned"
+            "SystemAssigned",
+            "UserAssigned",
+            "SystemAssigned, UserAssigned",
+            "None"
           ],
           "x-ms-enum": {
             "name": "ResourceIdentityType",
             "modelAsString": false
           }
+        },
+        "userAssignedIdentities": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/userAssignedResourceIdentity"
+          },
+          "description": "The list of user identities associated with the resource. The user identity dictionary key references will be resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'."
         }
       },
       "description": "Identity for the resource."
+    },
+    "userAssignedResourceIdentity": {
+      "properties": {
+        "principalId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The principal id of user assigned identity."
+        },
+        "tenantId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The tenant id of user assigned identity."
+        }
+      },
+      "description": "Represents the user assigned identity that is contained within the UserAssignedIdentities dictionary on ResourceIdentity"
     },
     "Resource": {
       "properties": {

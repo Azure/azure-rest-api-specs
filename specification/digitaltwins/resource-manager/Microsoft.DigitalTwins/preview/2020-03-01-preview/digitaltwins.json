@@ -512,171 +512,6 @@
         }
       }
     },
-    "/{scope}/providers/Microsoft.DigitalTwins/integrationResources/{integrationResourceName}": {
-      "get": {
-        "tags": [
-          "IoTHub Integration"
-        ],
-        "description": "Gets properties of an IoTHub Integration.",
-        "operationId": "IoTHub_Get",
-        "x-ms-examples": {
-          "Get IoTHub by DigitalTwinsInstance": {
-            "$ref": "./examples/DigitalTwinsIoTHubGet_example.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/scope"
-          },
-          {
-            "$ref": "#/parameters/integrationResourceName"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "This is a synchronous operation. The body contains metadata about IoTHub and DigitalTwinsInstance Integration.",
-            "schema": {
-              "$ref": "#/definitions/IntegrationResource"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        }
-      },
-      "put": {
-        "tags": [
-          "IoTHub Integration"
-        ],
-        "description": "Creates or Updates an IoTHub Integration with DigitalTwinsInstances.",
-        "operationId": "IoTHub_CreateOrUpdate",
-        "x-ms-examples": {
-          "Connect IoTHub with DigitalTwinsInstance": {
-            "$ref": "./examples/DigitalTwinsIoTHubPut_example.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/scope"
-          },
-          {
-            "$ref": "#/parameters/integrationResourceName"
-          },
-          {
-            "name": "iotHubDescription",
-            "in": "body",
-            "description": "The IoTHub metadata.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/IntegrationResource"
-            }
-          }
-        ],
-        "responses": {
-          "201": {
-            "description": "This is an asynchronous operation. The body contains metadata about IoTHub and DigitalTwinsInstance Integration.",
-            "schema": {
-              "$ref": "#/definitions/IntegrationResource"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "IoTHub Integration"
-        ],
-        "description": "Deletes a DigitalTwinsInstance link with IoTHub.",
-        "operationId": "IoTHub_Delete",
-        "x-ms-examples": {
-          "Connect IoTHub with DigitalTwinsInstance": {
-            "$ref": "./examples/DigitalTwinsIoTHubDelete_example.json"
-          }
-        },
-        "x-ms-long-running-operation": true,
-        "parameters": [
-          {
-            "$ref": "#/parameters/scope"
-          },
-          {
-            "$ref": "#/parameters/integrationResourceName"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK. DigitalTwinsInstance IoTHub link has been Deleted."
-          },
-          "202": {
-            "description": "Accepted. Response includes a Location header which points to the DigitalTwins and IoTHub Integration resource.",
-            "schema": {
-              "$ref": "#/definitions/IntegrationResource"
-            }
-          },
-          "204": {
-            "description": "NoContent. DigitalTwinsInstance IoTHub link does not exist."
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DigitalTwins/digitalTwinsInstances/{resourceName}/integrationResources": {
-      "get": {
-        "tags": [
-          "IoTHub Integration"
-        ],
-        "description": "Get DigitalTwinsInstance IoTHubs.",
-        "operationId": "DigitalTwinsIoTHubs_List",
-        "x-ms-examples": {
-          "Get a DigitalTwinsInstance IoTHubs": {
-            "$ref": "./examples/DigitalTwinsIoTHubsGet_example.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/api-version"
-          },
-          {
-            "$ref": "#/parameters/subscriptionId"
-          },
-          {
-            "$ref": "#/parameters/resourceGroupName"
-          },
-          {
-            "$ref": "#/parameters/resourceName"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The body contains all the non-security properties of the DigitalTwinsInstance. Security-related properties are set to null.",
-            "schema": {
-              "$ref": "#/definitions/DigitalTwinsIntegrationResourceListResult"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        }
-      }
-    },
     "/providers/Microsoft.DigitalTwins/operations": {
       "get": {
         "tags": [
@@ -836,9 +671,6 @@
         {
           "$ref": "#/definitions/DigitalTwinsResource"
         }
-      ],
-      "required": [
-        "sku"
       ]
     },
     "DigitalTwinsPatchDescription": {
@@ -889,7 +721,7 @@
           "description": "The resource tags."
         },
         "sku": {
-          "description": "The resource sku.",
+          "description": "This property is reserved for future use, and will be ignored/omitted",
           "$ref": "#/definitions/DigitalTwinsSkuInfo"
         }
       },
@@ -1083,90 +915,6 @@
         }
       }
     },
-    "IntegrationResourceUpdateProperties": {
-      "description": "Updatable properties related to the IoTHub DigitalTwinsInstance Integration Resource.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/IntegrationResourceState"
-        }
-      ]
-    },
-    "IntegrationResourceProperties": {
-      "description": "Properties related to the IoTHub DigitalTwinsInstance Integration Resource.",
-      "type": "object",
-      "properties": {
-        "resourceId": {
-          "description": "Fully qualified resource identifier of the DigitalTwins Azure resource.",
-          "type": "string"
-        },
-        "createdTime": {
-          "description": "Time when the IoTHub was added to DigitalTwinsInstance.",
-          "type": "string",
-          "format": "date-time",
-          "readOnly": true
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/IntegrationResourceState"
-        }
-      ]
-    },
-    "IntegrationResource": {
-      "description": "IoTHub integration resource.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/ExternalResource"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "description": "IoTHub integration resource properties.",
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/IntegrationResourceProperties"
-        }
-      }
-    },
-    "IntegrationResourceUpdateInfo": {
-      "description": "IoTHub integration resource.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/ExternalResource"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "x-ms-client-flatten": true,
-          "description": "IoTHub integration resource properties to be updated.",
-          "$ref": "#/definitions/IntegrationResourceUpdateProperties"
-        }
-      }
-    },
-    "IntegrationResourceState": {
-      "description": "Properties related to the IoTHub DigitalTwinsInstance Integration Resource.",
-      "type": "object",
-      "properties": {
-        "provisioningState": {
-          "description": "DigitalTwinsInstance - IoTHub link state.",
-          "enum": [
-            "Provisioning",
-            "Deleting",
-            "Succeeded",
-            "Failed",
-            "Canceled"
-          ],
-          "type": "string",
-          "readOnly": true,
-          "x-ms-enum": {
-            "name": "IntegrationResourceState",
-            "modelAsString": true
-          }
-        }
-      }
-    },
     "DigitalTwinsEndpointResource": {
       "description": "DigitalTwinsInstance endpoint resource.",
       "x-ms-azure-resource": true,
@@ -1177,7 +925,6 @@
       ],
       "properties": {
         "properties": {
-          "x-ms-client-flatten": true,
           "description": "DigitalTwinsInstance endpoint resource properties.",
           "$ref": "#/definitions/DigitalTwinsEndpointResourceProperties"
         }
@@ -1332,23 +1079,6 @@
           }
         }
       }
-    },
-    "DigitalTwinsIntegrationResourceListResult": {
-      "description": "A list of DigitalTwinsInstance IoTHubs with a next link.",
-      "type": "object",
-      "properties": {
-        "nextLink": {
-          "description": "The link used to get the next page of DigitalTwinsInstance IoTHubs.",
-          "type": "string"
-        },
-        "value": {
-          "description": "A list of DigitalTwinsInstance IoTHubs.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/IntegrationResource"
-          }
-        }
-      }
     }
   },
   "parameters": {
@@ -1357,8 +1087,7 @@
       "in": "path",
       "description": "The subscription identifier.",
       "required": true,
-      "type": "string",
-      "format": "uuid"
+      "type": "string"
     },
     "api-version": {
       "name": "api-version",
@@ -1399,44 +1128,6 @@
       "required": true,
       "type": "string",
       "minLength": 3
-    },
-    "integrationResourceName": {
-      "name": "integrationResourceName",
-      "in": "path",
-      "description": "Name of IoTHub and DigitalTwinsInstance integration instance.",
-      "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "method",
-      "minLength": 1,
-      "maxLength": 64
-    },
-    "integrationResourceInfo": {
-      "name": "integrationResourceInfo",
-      "in": "body",
-      "description": "The DigitalTwinsInstance and security metadata.",
-      "x-ms-parameter-location": "method",
-      "required": true,
-      "schema": {
-        "$ref": "#/definitions/IntegrationResource"
-      }
-    },
-    "integrationResourceUpdateInfo": {
-      "name": "integrationResourceUpdateInfo",
-      "in": "body",
-      "description": "The Integration Resource and security metadata.",
-      "x-ms-parameter-location": "method",
-      "required": true,
-      "schema": {
-        "$ref": "#/definitions/IntegrationResourceUpdateInfo"
-      }
-    },
-    "scope": {
-      "name": "scope",
-      "in": "path",
-      "description": "The scope of the Digital Twins Integration. The scope has to be an IoTHub resource. For example, /{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Devices/IoTHubs/{resourceName}.",
-      "x-ms-parameter-location": "method",
-      "required": true,
-      "type": "string"
     },
     "endpointName": {
       "name": "endpointName",

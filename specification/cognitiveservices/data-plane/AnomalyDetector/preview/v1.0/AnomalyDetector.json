@@ -31,7 +31,7 @@
       "post": {
         "summary": "Detect anomalies for the entire series in batch.",
         "description": "This operation generates a model using an entire series, each point is detected with the same model. With this method, points before and after a certain point are used to determine whether it is an anomaly. The entire detection can give user an overall status of the time series.",
-        "operationId": "EntireDetect",
+        "operationId": "DetectEntireSeries",
         "parameters": [
           {
             "name": "body",
@@ -39,12 +39,16 @@
             "description": "Time series points and period if needed. Advanced model parameters can also be set in the request.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Request"
+              "$ref": "#/definitions/DetectRequest"
             }
           }
         ],
-        "consumes": ["application/json"],
-        "produces": ["application/json"],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
         "responses": {
           "200": {
             "description": "Successful operation.",
@@ -55,7 +59,7 @@
           "default": {
             "description": "Error response.",
             "schema": {
-              "$ref": "#/definitions/APIError"
+              "$ref": "#/definitions/AnomalyDetectorError"
             }
           }
         },
@@ -70,7 +74,7 @@
       "post": {
         "summary": "Detect anomaly status of the latest point in time series.",
         "description": "This operation generates a model using points before the latest one. With this method, only historical points are used to determine whether the target point is an anomaly. The latest point detecting operation matches the scenario of real-time monitoring of business metrics.",
-        "operationId": "LastDetect",
+        "operationId": "DetectLastPoint",
         "parameters": [
           {
             "name": "body",
@@ -78,12 +82,16 @@
             "description": "Time series points and period if needed. Advanced model parameters can also be set in the request.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Request"
+              "$ref": "#/definitions/DetectRequest"
             }
           }
         ],
-        "consumes": ["application/json"],
-        "produces": ["application/json"],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
         "responses": {
           "200": {
             "description": "Successful operation.",
@@ -94,7 +102,7 @@
           "default": {
             "description": "Error response.",
             "schema": {
-              "$ref": "#/definitions/APIError"
+              "$ref": "#/definitions/AnomalyDetectorError"
             }
           }
         },
@@ -105,11 +113,11 @@
         }
       }
     },
-    "/timeseries/changePoint/detect": {
+    "/timeseries/changepoint/detect": {
       "post": {
         "summary": "Detect change point for the entire series",
         "description": "Evaluate change point score of every series point",
-        "operationId": "ChangePointDetect",
+        "operationId": "DetectChangePoint",
         "parameters": [
           {
             "name": "body",
@@ -121,8 +129,12 @@
             }
           }
         ],
-        "consumes": ["application/json"],
-        "produces": ["application/json"],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
         "responses": {
           "200": {
             "description": "Successful operation.",
@@ -133,7 +145,7 @@
           "default": {
             "description": "Error response.",
             "schema": {
-              "$ref": "#/definitions/APIError"
+              "$ref": "#/definitions/AnomalyDetectorError"
             }
           }
         },
@@ -146,7 +158,7 @@
     }
   },
   "definitions": {
-    "APIError": {
+    "AnomalyDetectorError": {
       "type": "object",
       "description": "Error information returned by the API.",
       "properties": {
@@ -174,15 +186,48 @@
         }
       }
     },
-    "Granularity": {
+    "TimeGranularity": {
       "type": "string",
-      "description": "Can only be one of yearly, monthly, weekly, daily, hourly or minutely. Granularity is used for verify whether input series is valid.",
+      "description": "Can only be one of yearly, monthly, weekly, daily, hourly, minutely or secondly. Granularity is used for verify whether input series is valid.",
       "x-nullable": false,
       "x-ms-enum": {
-        "name": "Granularity",
-        "modelAsString": false
+        "name": "TimeGranularity",
+        "modelAsString": false,
+        "values": [
+          {
+            "value": "yearly"
+          },
+          {
+            "value": "monthly"
+          },
+          {
+            "value": "weekly"
+          },
+          {
+            "value": "daily"
+          },
+          {
+            "value": "hourly"
+          },
+          {
+            "name": "perMinute",
+            "value": "minutely"
+          },
+          {
+            "name": "perSecond",
+            "value": "secondly"
+          }
+        ]
       },
-      "enum": ["yearly", "monthly", "weekly", "daily", "hourly", "minutely"]
+      "enum": [
+        "yearly",
+        "monthly",
+        "weekly",
+        "daily",
+        "hourly",
+        "minutely",
+        "secondly"
+      ]
     },
     "CustomInterval": {
       "type": "integer",
@@ -190,19 +235,22 @@
       "x-nullable": false,
       "description": "Custom Interval is used to set non-standard time interval, for example, if the series is 5 minutes, request can be set as {\"granularity\":\"minutely\", \"customInterval\":5}."
     },
-    "Request": {
+    "DetectRequest": {
       "type": "object",
-      "required": ["granularity", "series"],
+      "required": [
+        "granularity",
+        "series"
+      ],
       "properties": {
         "series": {
           "type": "array",
           "description": "Time series data points. Points should be sorted by timestamp in ascending order to match the anomaly detection result. If the data is not sorted correctly or there is duplicated timestamp, the API will not work. In such case, an error message will be returned.",
           "items": {
-            "$ref": "#/definitions/Point"
+            "$ref": "#/definitions/TimeSeriesPoint"
           }
         },
         "granularity": {
-          "$ref": "#/definitions/Granularity"
+          "$ref": "#/definitions/TimeGranularity"
         },
         "customInterval": {
           "description": "Custom Interval is used to set non-standard time interval, for example, if the series is 5 minutes, request can be set as {\"granularity\":\"minutely\", \"customInterval\":5}.",
@@ -225,9 +273,12 @@
         }
       }
     },
-    "Point": {
+    "TimeSeriesPoint": {
       "type": "object",
-      "required": ["timestamp", "value"],
+      "required": [
+        "timestamp",
+        "value"
+      ],
       "properties": {
         "timestamp": {
           "type": "string",
@@ -365,18 +416,21 @@
     },
     "ChangePointDetectRequest": {
       "type": "object",
-      "required": ["granularity", "series"],
+      "required": [
+        "granularity",
+        "series"
+      ],
       "properties": {
         "series": {
           "type": "array",
           "description": "Time series data points. Points should be sorted by timestamp in ascending order to match the change point detection result.",
           "items": {
-            "$ref": "#/definitions/Point"
+            "$ref": "#/definitions/TimeSeriesPoint"
           }
         },
         "granularity": {
-          "$ref": "#/definitions/Granularity",
-          "description": "Can only be one of yearly, monthly, weekly, daily, hourly or minutely. Granularity is used for verify whether input series is valid."
+          "$ref": "#/definitions/TimeGranularity",
+          "description": "Can only be one of yearly, monthly, weekly, daily, hourly, minutely or secondly. Granularity is used for verify whether input series is valid."
         },
         "customInterval": {
           "description": "Custom Interval is used to set non-standard time interval, for example, if the series is 5 minutes, request can be set as {\"granularity\":\"minutely\", \"customInterval\":5}.",
@@ -401,7 +455,11 @@
     },
     "ChangePointDetectResponse": {
       "type": "object",
-      "required": ["isChangePoint", "confidenceScores", "period"],
+      "required": [
+        "isChangePoint",
+        "confidenceScores",
+        "period"
+      ],
       "properties": {
         "period": {
           "type": "integer",

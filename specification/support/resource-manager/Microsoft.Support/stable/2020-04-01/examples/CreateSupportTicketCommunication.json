@@ -1,0 +1,38 @@
+{
+  "parameters": {
+    "subscriptionId": "subid",
+    "supportTicketName": "testticket",
+    "communicationName": "testcommunication",
+    "api-version": "2020-04-01",
+    "createCommunicationParameters": {
+      "properties": {
+        "subject": "This is a test message from a customer!",
+        "body": "This is a test message from a customer!",
+        "sender": "user@contoso.com"
+      }
+    }
+  },
+  "responses": {
+    "202": {
+      "headers": {
+        "location": "https://management.azure.com/subscriptions/subid/providers/Microsoft.Support/operationResults/operationid?api-version=2020-04-01",
+        "azure-asyncoperation": "https://management.azure.com/subscriptions/subid/providers/Microsoft.Support/operationsStatus/operationid?api-version=2020-04-01"
+      }
+    },
+    "200": {
+      "body": {
+        "id": "/subscriptions/subid/providers/Microsoft.Support/supportTickets/testticket/communications/testcommunication",
+        "name": "testcommunication",
+        "type": "Microsoft.Support/communications",
+        "properties": {
+          "subject": "This is a test message from a customer!",
+          "body": "This is a test message from a customer!",
+          "communicationType": "web",
+          "communicationDirection": "outbound",
+          "createdDate": "2020-03-10T20:18:19Z",
+          "sender": "user@contoso.com"
+        }
+      }
+    }
+  }
+}
