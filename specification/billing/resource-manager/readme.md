@@ -36,7 +36,6 @@ These settings apply only when `--tag=package-2020-12-preview` is specified on t
 input-file:
 - Microsoft.Billing/preview/2020-12-15-privatepreview/subscription.json
 - Microsoft.Billing/preview/2020-12-15-privatepreview/enrollmentAccount.json
-- Microsoft.Billing/preview/2020-12-15-privatepreview/payNow.json
 ```
 
 ### Tag: package-2020-05
