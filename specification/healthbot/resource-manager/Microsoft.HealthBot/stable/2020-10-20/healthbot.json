@@ -196,7 +196,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/HealthBotUpdate"
+              "$ref": "#/definitions/HealthBotUpdateParameters"
             },
             "description": "The parameters to provide for the required bot."
           },
@@ -370,6 +370,50 @@
     }
   },
   "definitions": {
+    "Sku": {
+      "description": "The resource model definition representing SKU",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the HealthBot SKU",
+          "enum": [
+            "F0",
+            "S1"
+          ],
+          "x-ms-enum": {
+            "name": "SkuName",
+            "modelAsString": true
+          }
+        },
+        "tier": {
+          "type": "string",
+          "enum": [
+            "Standard"
+          ],
+          "x-ms-enum": {
+            "name": "SkuTier",
+            "modelAsString": false
+          },
+          "description": "This field is required to be implemented by the Resource Provider if the service has more than one tier, but is not required on a PUT."
+        },
+        "size": {
+          "type": "string",
+          "description": "The SKU size. When the name field is the combination of tier and some other value, this would be the standalone code. "
+        },
+        "family": {
+          "type": "string",
+          "description": "If the service has different generations of hardware, for the same SKU, then that can be captured here."
+        },
+        "capacity": {
+          "type": "integer",
+          "format": "int32",
+          "description": "If the SKU supports scale out/in then the capacity integer should be included. If scale out/in is not possible for the resource this may be omitted."
+        }
+      },
+      "required": [
+        "name"
+      ]
+    },
     "CheckNameAvailabilityRequestBody": {
       "description": "The request body for a request to to check availability of a bot name.",
       "type": "object",
@@ -407,30 +451,30 @@
       }
     },
     "Resource": {
-      "description": "The resource model definition for a ARM tracked top level resource",
-      "x-ms-azure-resource": true,
       "properties": {
         "id": {
-          "description": "Fully qualified resource Id for the resource.",
+          "readOnly": true,
           "type": "string",
-          "readOnly": true
+          "description": "Fully qualified resource Id for the resource."
         },
         "name": {
-          "description": "The name of the resource",
+          "readOnly": true,
           "type": "string",
-          "readOnly": true
+          "description": "The name of the resource"
         },
         "type": {
-          "description": "The type of the resource.",
+          "readOnly": true,
           "type": "string",
-          "readOnly": true
+          "description": "The type of the resource."
         },
         "systemData": {
           "$ref": "#/definitions/SystemData",
           "readOnly": true,
           "description": "Metadata pertaining to creation and last modification of the resource"
         }
-      }
+      },
+      "description": "The resource model definition for a ARM tracked top level resource",
+      "x-ms-azure-resource": true
     },
     "TrackedResource": {
       "description": "The resource model definition for a ARM tracked top level resource",
@@ -467,13 +511,17 @@
     },
     "HealthBot": {
       "type": "object",
-      "description": "HealthBot resource definition",
+      "description": "Bot resource definition",
       "allOf": [
         {
           "$ref": "#/definitions/TrackedResource"
         }
       ],
       "properties": {
+        "sku": {
+          "$ref": "#/definitions/Sku",
+          "description": "SKU of the HealthBot."
+        },
         "properties": {
           "$ref": "#/definitions/HealthBotProperties",
           "description": "The set of properties specific to healthcare bot resource."
@@ -482,44 +530,39 @@
     },
     "HealthBotProperties": {
       "title": "HealthBotProperties",
-      "description": "The properties provided for bot creation. The Health Bot Service is a cloud platform that empowers developers in Healthcare organizations to build and deploy their compliant, AI-powered virtual health assistants and health bots, that help them improve processes and reduce costs.",
+      "description": "The properties of a HealthBot. The Health Bot Service is a cloud platform that empowers developers in Healthcare organizations to build and deploy their compliant, AI-powered virtual health assistants and health bots, that help them improve processes and reduce costs.",
       "properties": {
-        "planId": {
-          "type": "string",
-          "description": "The identifier of the plan (tier) the bot has.",
-          "enum": [
-            "free",
-            "standard"
-          ]
-        },
         "provisioningState": {
           "type": "string",
-          "description": "Gets the provisioning state of the Healthcare bot resource.",
+          "description": "The provisioning state of the Healthcare bot resource.",
+          "readOnly": true
+        },
+        "botManagementPortalLink": {
+          "type": "string",
+          "description": "The link.",
           "readOnly": true
         }
       }
     },
-    "HealthBotUpdateProperties": {
-      "title": "HealthBotUpdateProperties",
-      "description": "The properties provided for bot update.",
-      "properties": {
-        "planId": {
-          "type": "string",
-          "description": "The identifier of the plan (tier) the bot has.",
-          "enum": [
-            "free",
-            "standard"
-          ]
-        }
-      }
-    },
-    "HealthBotUpdate": {
-      "description": "An update to a HealthBot.",
+    "HealthBotUpdateParameters": {
       "type": "object",
+      "description": "Parameters for updating a HealthBot.",
       "properties": {
-        "properties": {
-          "$ref": "#/definitions/HealthBotUpdateProperties",
-          "description": "The set of properties specific for updating a healthcare bot resource."
+        "tags": {
+          "type": "object",
+          "description": "Tags for a HealthBot.",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-ms-mutability": [
+            "read",
+            "create",
+            "update"
+          ]
+        },
+        "sku": {
+          "$ref": "#/definitions/Sku",
+          "description": "SKU of the HealthBot."
         }
       }
     },
@@ -560,10 +603,10 @@
       "description": "The type of identity that creates/modifies resources",
       "type": "string",
       "enum": [
-        "user",
-        "application",
-        "managedIdentity",
-        "key"
+        "User",
+        "Application",
+        "ManagedIdentity",
+        "Key"
       ],
       "x-ms-enum": {
         "name": "IdentityType",
