@@ -170,9 +170,15 @@
     },
     "CheckPrincipalAccessResponse": {
       "description": "Check access response details",
-      "type": "array",
-      "items": {
-        "$ref": "#/definitions/CheckAccessDecision"
+      "type": "object",
+      "properties": {
+        "AccessDecisions": {
+          "description": "Check access response details",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CheckAccessDecision"
+          }
+        }
       }
     },
     "SubjectInfo": {
