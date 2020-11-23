@@ -52,7 +52,28 @@ input-file:
   - Microsoft.Automation/stable/2018-01-15/dscCompilationJob.json
   - Microsoft.Automation/stable/2018-01-15/dscNodeConfiguration.json
   - Microsoft.Automation/stable/2018-01-15/dscNodeCounts.json
-
+  - Microsoft.Automation/stable/2018-01-15/softwareUpdateConfigurationRun.json
+  - Microsoft.Automation/stable/2018-01-15/softwareUpdateConfigurationMachineRun.json
+  - Microsoft.Automation/stable/2018-01-15/sourceControl.json
+  - Microsoft.Automation/stable/2018-01-15/sourceControlSyncJob.json
+  - Microsoft.Automation/stable/2018-01-15/sourceControlSyncJobStreams.json
+  - Microsoft.Automation/stable/2018-01-15/job.json
+  - Microsoft.Automation/stable/2018-01-15/account.json
+  - Microsoft.Automation/stable/2018-01-15/certificate.json
+  - Microsoft.Automation/stable/2018-01-15/connection.json
+  - Microsoft.Automation/stable/2018-01-15/connectionType.json
+  - Microsoft.Automation/stable/2018-01-15/credential.json
+  - Microsoft.Automation/stable/2018-01-15/dscConfiguration.json
+  - Microsoft.Automation/stable/2018-01-15/softwareUpdateConfiguration.json
+  - Microsoft.Automation/stable/2018-01-15/hybridRunbookWorkerGroup.json
+  - Microsoft.Automation/stable/2018-01-15/jobSchedule.json
+  - Microsoft.Automation/stable/2018-01-15/linkedWorkspace.json
+  - Microsoft.Automation/stable/2018-01-15/module.json
+  - Microsoft.Automation/stable/2018-01-15/runbook.json
+  - Microsoft.Automation/stable/2018-01-15/schedule.json
+  - Microsoft.Automation/stable/2018-01-15/variable.json
+  - Microsoft.Automation/stable/2018-01-15/webhook.json
+  - Microsoft.Automation/stable/2018-01-15/watcher.json
 ```
 
 ### Tag: schema-automation-2017-05-15-preview and azureresourceschema
