@@ -10,6 +10,8 @@ no-namespace-folders: true
 python-base-folder: monitor/azure-mgmt-monitor/azure/mgmt/monitor
 modelerfour:
   lenient-model-deduplication: true
+batch:
+  - AMCS: true
 ```
 
 These settings apply when `--track2` and `--AMCS` is specified on the command line.
