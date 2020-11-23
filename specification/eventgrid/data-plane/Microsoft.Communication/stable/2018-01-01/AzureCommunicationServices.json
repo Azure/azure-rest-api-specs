@@ -1,0 +1,352 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2018-01-01",
+    "title": "Schema of Azure Communication Services events published to Azure Event Grid",
+    "description": "Describes the schema of the Azure Communication Services events published to Azure Event Grid. This corresponds to the Data property of an EventGridEvent."
+  },
+  "paths": {},
+  "definitions": {
+    "ACSChatMessageReceivedEventData": {
+      "description": "Schema of the Data property of an EventGridEvent for an Microsoft.Communication.ChatMessageReceived event.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ACSChatMessageEventBaseProperties"
+        }
+      ],
+      "properties": {
+        "messageBody": {
+          "description": "The body of the chat message",
+          "type": "string"
+        }
+      }
+    },
+    "ACSChatMessageEditedEventData": {
+      "description": "Schema of the Data property of an EventGridEvent for an Microsoft.Communication.ChatMessageEdited event.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ACSChatMessageEventBaseProperties"
+        }
+      ],
+      "properties": {
+        "messageBody": {
+          "description": "The body of the chat message",
+          "type": "string"
+        },
+        "editTime": {
+          "description": "The time at which the message was edited",
+          "format": "date-time",
+          "type": "string"
+        }
+      }
+    },
+    "ACSChatMessageDeletedEventData": {
+      "description": "Schema of the Data property of an EventGridEvent for an Microsoft.Communication.ChatMessageDeleted event.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ACSChatMessageEventBaseProperties"
+        }
+      ],
+      "properties": {
+        "deleteTime": {
+          "description": "The time at which the message was deleted",
+          "format": "date-time",
+          "type": "string"
+        }
+      }
+    },
+    "ACSChatThreadCreatedWithUserEventData": {
+      "description": "Schema of the Data property of an EventGridEvent for an Microsoft.Communication.ChatThreadCreatedWithUser event.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ACSChatThreadEventBaseProperties"
+        }
+      ],
+      "properties": {
+        "createdBy": {
+          "description": "The MRI of the creator of the thread",
+          "type": "string"
+        },
+        "properties": {
+          "description": "The thread properties",
+          "type": "object",
+          "additionalProperties": {
+            "type": "object"
+          }
+        },
+        "members": {
+          "description": "The list of properties of users who are part of the thread",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ACSChatThreadMemberProperties"
+          }
+        }
+      }
+    },
+    "ACSChatThreadWithUserDeletedEventData": {
+      "description": "Schema of the Data property of an EventGridEvent for an Microsoft.Communication.ChatThreadWithUserDeleted event.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ACSChatThreadEventBaseProperties"
+        }
+      ],
+      "properties": {
+        "deletedBy": {
+          "description": "The MRI of the user who deleted the thread",
+          "type": "string"
+        },
+        "deleteTime": {
+          "description": "The deletion time of the thread",
+          "format": "date-time",
+          "type": "string"
+        }
+      }
+    },
+    "ACSChatThreadPropertiesUpdatedPerUserEventData": {
+      "description": "Schema of the Data property of an EventGridEvent for an Microsoft.Communication.ChatThreadPropertiesUpdatedPerUser event.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ACSChatThreadEventBaseProperties"
+        }
+      ],
+      "properties": {
+        "editedBy": {
+          "description": "The MRI of the user who updated the thread properties",
+          "type": "string"
+        },
+        "editTime": {
+          "description": "The time at which the properties of the thread were updated",
+          "format": "date-time",
+          "type": "string"
+        },
+        "properties": {
+          "description": "The updated thread properties",
+          "type": "object",
+          "additionalProperties": {
+            "type": "object"
+          }
+        }
+      }
+    },
+    "ACSChatMemberAddedToThreadWithUserEventData": {
+      "description": "Schema of the Data property of an EventGridEvent for an Microsoft.Communication.ChatMemberAddedToThreadWithUser event.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ACSChatThreadEventBaseProperties"
+        }
+      ],
+      "properties": {
+        "time": {
+          "description": "The time at which the user was added to the thread",
+          "format": "date-time",
+          "type": "string"
+        },
+        "addedBy": {
+          "description": "The MRI of the user who added the user",
+          "type": "string"
+        },
+        "memberAdded": {
+          "description": "The details of the user who was added",
+          "$ref": "#/definitions/ACSChatThreadMemberProperties"
+        }
+      }
+    },
+    "ACSChatMemberRemovedFromThreadWithUserEventData": {
+      "description": "Schema of the Data property of an EventGridEvent for an Microsoft.Communication.ChatMemberRemovedFromThreadWithUser event.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ACSChatThreadEventBaseProperties"
+        }
+      ],
+      "properties": {
+        "time": {
+          "description": "The time at which the user was removed to the thread",
+          "format": "date-time",
+          "type": "string"
+        },
+        "removedBy": {
+          "description": "The MRI of the user who removed the user",
+          "type": "string"
+        },
+        "memberRemoved": {
+          "description": "The details of the user who was removed",
+          "$ref": "#/definitions/ACSChatThreadMemberProperties"
+        }
+      }
+    },
+    "AcsSmsDeliveryReportReceivedEventData": {
+      "description": "Schema of the Data property of an EventGridEvent for an Microsoft.Communication.SMSDeliveryReportReceived event.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AcsSmsEventBaseProperties"
+        }
+      ],
+      "properties": {
+        "deliveryStatus": {
+          "description": "Status of Delivery",
+          "type": "string"
+        },
+        "deliveryStatusDetails": {
+          "description": "Details about Delivery Status",
+          "type": "string"
+        },
+        "deliveryAttempts": {
+          "description": "List of details of delivery attempts made",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AcsSmsDeliveryAttemptProperties"
+          }
+        },
+        "receivedTimestamp": {
+          "description": "The time at which the SMS delivery report was received",
+          "format": "date-time",
+          "type": "string"
+        }
+      }
+    },
+    "AcsSmsReceivedEventData": {
+      "description": "Schema of the Data property of an EventGridEvent for an Microsoft.Communication.SMSReceived event.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AcsSmsEventBaseProperties"
+        }
+      ],
+      "properties": {
+        "message": {
+          "description": "The SMS content",
+          "type": "string"
+        },
+        "receivedTimestamp": {
+          "description": "The time at which the SMS was received",
+          "format": "date-time",
+          "type": "string"
+        }
+      }
+    },
+    "ACSChatThreadEventBaseProperties": {
+      "description": "Schema of common properties of all chat thread events",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ACSChatEventBaseProperties"
+        }
+      ],
+      "properties": {
+        "createTime": {
+          "description": "The original creation time of the thread",
+          "format": "date-time",
+          "type": "string"
+        },
+        "version": {
+          "description": "The version of the thread",
+          "type": "integer",
+          "format": "int64"
+        }
+      }
+    },
+    "ACSChatMessageEventBaseProperties": {
+      "description": "Schema of common properties of all chat message events",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ACSChatEventBaseProperties"
+        }
+      ],
+      "properties": {
+        "messageId": {
+          "description": "The chat message id",
+          "type": "string"
+        },
+        "senderId": {
+          "description": "The MRI of the sender",
+          "type": "string"
+        },
+        "senderDisplayName": {
+          "description": "The display name of the sender",
+          "type": "string"
+        },
+        "composeTime": {
+          "description": "The original compose time of the message",
+          "format": "date-time",
+          "type": "string"
+        },
+        "type": {
+          "description": "The type of the message",
+          "type": "string"
+        },
+        "version": {
+          "description": "The version of the message",
+          "type": "integer",
+          "format": "int64"
+        }
+      }
+    },
+    "ACSChatEventBaseProperties": {
+      "description": "Schema of common properties of all chat events",
+      "type": "object",
+      "properties": {
+        "recipientId": {
+          "description": "The MRI of the target user",
+          "type": "string"
+        },
+        "transactionId": {
+          "description": "The transaction id will be used as co-relation vector",
+          "type": "string"
+        },
+        "threadId": {
+          "description": "The chat thread id",
+          "type": "string"
+        }
+      }
+    },
+    "ACSChatThreadMemberProperties": {
+      "description": "Schema of the chat thread member",
+      "type": "object",
+      "properties": {
+        "displayName": {
+          "description": "The name of the user",
+          "type": "string"
+        },
+        "memberId": {
+          "description": "The MRI of the user",
+          "type": "string"
+        }
+      }
+    },
+    "AcsSmsEventBaseProperties": {
+      "description": "Schema of common properties of all SMS events",
+      "type": "object",
+      "properties": {
+        "messageId": {
+          "description": "The identity of the SMS message",
+          "type": "string"
+        },
+        "from": {
+          "description": "The identity of SMS message sender",
+          "type": "string"
+        },
+        "to": {
+          "description": "The identity of SMS message receiver",
+          "type": "string"
+        }
+      }
+    },
+    "AcsSmsDeliveryAttemptProperties": {
+      "description": "Schema for details of a delivery attempt",
+      "type": "object",
+      "properties": {
+        "timestamp": {
+          "description": "TimeStamp when delivery was attempted",
+          "format": "date-time",
+          "type": "string"
+        },
+        "segmentsSucceeded": {
+          "description": "Number of segments that were successfully delivered",
+          "type": "integer"
+        },
+        "segmentsFailed": {
+          "description": "Number of segments whose delivery failed",
+          "type": "integer"
+        }
+      }
+    }
+  }
+}
