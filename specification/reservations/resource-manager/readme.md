@@ -26,7 +26,7 @@ These are the global settings for the Reservations API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2020-10-preview
+tag: package-2020-11-preview
 ```
 
 ### Tag: package-2020-11-preview
