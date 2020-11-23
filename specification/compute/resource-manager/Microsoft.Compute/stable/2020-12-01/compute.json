@@ -3052,6 +3052,9 @@
           },
           "Create a vm with Application Profile.": {
             "$ref": "./examples/CreateAVmWithApplicationProfile.json"
+          },
+          "Create a VM with Uefi Settings of secureBoot and vTPM.": {
+            "$ref": "./examples/CreateAVmWithUefiSettings.json"
           }
         }
       },
@@ -4152,6 +4155,9 @@
           },
           "Create a scale set with Application Profile": {
             "$ref": "./examples/CreateAScaleSetWithApplicationProfile.json"
+          },
+          "Create a scale set with Uefi Settings of secureBoot and vTPM.": {
+            "$ref": "./examples/CreateAScaleSetWithUefiSettings.json"
           }
         }
       },
@@ -9028,11 +9034,39 @@
       },
       "description": "Contains the list of gallery applications that should be made available to the VM/VMSS"
     },
+    "UefiSettings": {
+      "properties": {
+        "secureBootEnabled": {
+          "type": "boolean",
+          "description": "Specifies whether secure boot should be enabled on the virtual machine. <br><br>Minimum api-version: 2020-12-01"
+        },
+        "vTpmEnabled": {
+          "type": "boolean",
+          "description": "Specifies whether vTPM should be enabled on the virtual machine. <br><br>Minimum api-version: 2020-12-01"
+        }
+      },
+      "description": "Specifies the security settings like secure boot and vTPM used while creating the virtual machine. <br><br>Minimum api-version: 2020-12-01"
+    },
     "SecurityProfile": {
       "properties": {
+        "uefiSettings": {
+          "$ref": "#/definitions/UefiSettings",
+          "description": "Specifies the security settings like secure boot and vTPM used while creating the virtual machine. <br><br>Minimum api-version: 2020-12-01"
+        },
         "encryptionAtHost": {
           "type": "boolean",
           "description": "This property can be used by user in the request to enable or disable the Host Encryption for the virtual machine or virtual machine scale set. This will enable the encryption for all the disks including Resource/Temp disk at host itself. <br><br> Default: The Encryption at host will be disabled unless this property is set to true for the resource."
+        },
+        "securityType": {
+          "type": "string",
+          "description": "Specifies the SecurityType of the virtual machine. It is set as SecureBoot to enable UefiSettings. <br><br> Default: UefiSettings will not be enabled unless this property is set as SecureBoot.",
+          "enum": [
+            "SecureBoot"
+          ],
+          "x-ms-enum": {
+            "name": "SecurityTypes",
+            "modelAsString": false
+          }
         }
       },
       "description": "Specifies the Security profile settings for the virtual machine or virtual machine scale set."
@@ -9911,6 +9945,14 @@
         "pauseTimeBetweenBatches": {
           "type": "string",
           "description": "The wait time between completing the update for all virtual machines in one batch and starting the next batch. The time duration should be specified in ISO 8601 format. The default value is 0 seconds (PT0S)."
+        },
+        "enableCrossZoneUpgrade": {
+          "type": "boolean",
+          "description": "Allow VMSS to ignore AZ boundaries when constructing upgrade batches. Take into consideration the Update Domain and maxBatchInstancePercent to determine the batch size."
+        },
+        "prioritizeUnhealthyInstances": {
+          "type": "boolean",
+          "description": "Upgrade all unhealthy instances in a scale set before any healthy instances."
         }
       },
       "description": "The configuration parameters used while performing a rolling upgrade."
