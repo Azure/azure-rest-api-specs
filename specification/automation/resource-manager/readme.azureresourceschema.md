@@ -38,6 +38,31 @@ output-folder: $(azureresourceschema-folder)/schemas
 input-file:
   - Microsoft.Automation/stable/2018-06-30/runbook.json
   - Microsoft.Automation/stable/2018-06-30/python2package.json
+  - Microsoft.Automation/stable/2018-06-30/dscNode.json
+  - Microsoft.Automation/stable/2018-06-30/dscCompilationJob.json
+  - Microsoft.Automation/stable/2018-06-30/dscNodeConfiguration.json
+  - Microsoft.Automation/stable/2018-06-30/dscNodeCounts.json
+  - Microsoft.Automation/stable/2018-06-30/softwareUpdateConfigurationRun.json
+  - Microsoft.Automation/stable/2018-06-30/softwareUpdateConfigurationMachineRun.json
+  - Microsoft.Automation/stable/2018-06-30/sourceControl.json
+  - Microsoft.Automation/stable/2018-06-30/sourceControlSyncJob.json
+  - Microsoft.Automation/stable/2018-06-30/sourceControlSyncJobStreams.json
+  - Microsoft.Automation/stable/2018-06-30/job.json
+  - Microsoft.Automation/stable/2018-06-30/account.json
+  - Microsoft.Automation/stable/2018-06-30/certificate.json
+  - Microsoft.Automation/stable/2018-06-30/connection.json
+  - Microsoft.Automation/stable/2018-06-30/connectionType.json
+  - Microsoft.Automation/stable/2018-06-30/credential.json
+  - Microsoft.Automation/stable/2018-06-30/dscConfiguration.json
+  - Microsoft.Automation/stable/2018-06-30/softwareUpdateConfiguration.json
+  - Microsoft.Automation/stable/2018-06-30/hybridRunbookWorkerGroup.json
+  - Microsoft.Automation/stable/2018-06-30/jobSchedule.json
+  - Microsoft.Automation/stable/2018-06-30/linkedWorkspace.json
+  - Microsoft.Automation/stable/2018-06-30/module.json
+  - Microsoft.Automation/stable/2018-06-30/schedule.json
+  - Microsoft.Automation/stable/2018-06-30/variable.json
+  - Microsoft.Automation/stable/2018-06-30/webhook.json
+  - Microsoft.Automation/stable/2018-06-30/watcher.json
 
 ```
 
