@@ -10,7 +10,7 @@ python:
   payload-flattening-threshold: 2
   namespace: Microsoft.ProviderHub
   package-name: providerhub
-  package-version: 2019-02-01-preview
+  package-version: 2020-11-20
   clear-output-folder: true
 ```
 
