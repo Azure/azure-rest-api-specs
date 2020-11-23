@@ -167,7 +167,7 @@
           }
         },
         "operationId": "Workspaces_Delete",
-        "description": "Deletes a workspace instance.",
+        "description": "Deletes a workspace resource. To recover the workspace, create it again with the same name, in the same subscription, resource group and location. The name is kept for 14 days and cannot be used for another workspace. To remove the workspace completely and release the name, use the force flag.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
@@ -180,6 +180,13 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "force",
+            "in": "query",
+            "required": false,
+            "type": "boolean",
+            "description": "Deletes the workspace without the recovery option. A workspace that was deleted with this flag cannot be recovered."
           }
         ],
         "responses": {
@@ -272,6 +279,75 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.OperationalInsights/deletedWorkspaces": {
+      "get": {
+        "tags": [
+          "DeletedWorkspaces"
+        ],
+        "x-ms-examples": {
+          "WorkspacesSubscriptionList": {
+            "$ref": "./examples/WorkspacesSubscriptionList.json"
+          }
+        },
+        "operationId": "DeletedWorkspaces_List",
+        "description": "Gets recently deleted workspaces in a subscription, available for recovery.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK response definition.",
+            "schema": {
+              "$ref": "#/definitions/WorkspaceListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/deletedWorkspaces": {
+      "get": {
+        "tags": [
+          "DeletedWorkspaces"
+        ],
+        "x-ms-examples": {
+          "WorkspacesGet": {
+            "$ref": "./examples/WorkspacesListByResourceGroup.json"
+          }
+        },
+        "operationId": "DeletedWorkspaces_ListByResourceGroup",
+        "description": "Gets recently deleted workspaces in a resource group, available for recovery.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK response definition.",
+            "schema": {
+              "$ref": "#/definitions/WorkspaceListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
     }
   },
   "definitions": {
@@ -293,12 +369,86 @@
             "name": "WorkspaceSkuNameEnum",
             "modelAsString": true
           }
+        },
+        "capacityReservationLevel": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The capacity reservation level for this workspace, when CapacityReservation sku is selected."
+        },
+        "maxCapacityReservationLevel": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The maximum capacity reservation level available for this workspace, when CapacityReservation sku is selected.",
+          "readOnly": true
+        },
+        "lastSkuUpdate": {
+          "type": "string",
+          "description": "The last time when the sku was updated.",
+          "readOnly": true
         }
       },
       "required": [
         "name"
       ],
       "description": "The SKU (tier) of a workspace."
+    },
+    "WorkspaceCapping": {
+      "description": "The daily volume cap for ingestion.",
+      "properties": {
+        "dailyQuotaGb": {
+          "type": "number",
+          "format": "double",
+          "description": "The workspace daily quota for ingestion. -1 means unlimited."
+        },
+        "quotaNextResetTime": {
+          "type": "string",
+          "description": "The time when the quota will be rest.",
+          "readOnly": true
+        },
+        "dataIngestionStatus": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The status of data ingestion for this workspace.",
+          "enum": [
+            "RespectQuota",
+            "ForceOn",
+            "ForceOff",
+            "OverQuota",
+            "SubscriptionSuspended",
+            "ApproachingQuota"
+          ],
+          "x-ms-enum": {
+            "name": "DataIngestionStatus",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "RespectQuota",
+                "description": "Ingestion enabled following daily cap quota reset, or subscription enablement."
+              },
+              {
+                "value": "ForceOn",
+                "description": "Ingestion started following service setting change."
+              },
+              {
+                "value": "ForceOff",
+                "description": "Ingestion stopped following service setting change."
+              },
+              {
+                "value": "OverQuota",
+                "description": "Reached daily cap quota, ingestion stopped."
+              },
+              {
+                "value": "SubscriptionSuspended",
+                "description": "Ingestion stopped following suspended subscription."
+              },
+              {
+                "value": "ApproachingQuota",
+                "description": "80% of daily cap quota reached."
+              }
+            ]
+          }
+        }
+      }
     },
     "WorkspaceProperties": {
       "properties": {
@@ -334,6 +484,10 @@
           "minimum": -1,
           "maximum": 730,
           "description": "The workspace data retention in days. -1 means Unlimited retention for the Unlimited Sku. 730 days is the maximum allowed for all other Skus. "
+        },
+        "workspaceCapping": {
+          "$ref": "#/definitions/WorkspaceCapping",
+          "description": "The daily volume cap for ingestion."
         },
         "publicNetworkAccessForIngestion": {
           "description": "The network access type for accessing Log Analytics ingestion.",
@@ -384,8 +538,7 @@
           "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/TrackedResource"
         }
       ],
-      "description": "The top level Workspace resource container.",
-      "x-ms-azure-resource": true
+      "description": "The top level Workspace resource container."
     },
     "WorkspacePatch": {
       "properties": {
@@ -412,8 +565,7 @@
           "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/AzureEntityResource"
         }
       ],
-      "description": "The top level Workspace resource container.",
-      "x-ms-azure-resource": true
+      "description": "The top level Workspace resource container."
     },
     "WorkspaceListResult": {
       "properties": {

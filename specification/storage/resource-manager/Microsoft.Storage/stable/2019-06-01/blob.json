@@ -149,6 +149,9 @@
         "x-ms-examples": {
           "ListContainers": {
             "$ref": "./examples/BlobContainersList.json"
+          },
+          "ListDeletedContainers": {
+            "$ref": "./examples/DeletedBlobContainersList.json"
           }
         },
         "description": "Lists all containers and does not support a prefix like data plane. Also SRP today does not return continuation token.",
@@ -176,6 +179,20 @@
             "in": "query",
             "type": "string",
             "description": "Optional. When specified, only container names starting with the filter will be listed."
+          },
+          {
+            "name": "$include",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "deleted"
+            ],
+            "x-ms-enum": {
+              "name": "ListContainersInclude",
+              "modelAsString": true
+            },
+            "description": "Optional, used to include the properties for soft deleted blob containers."
           }
         ],
         "responses": {
@@ -590,7 +607,7 @@
             "$ref": "./examples/BlobContainersDeleteImmutabilityPolicy.json"
           }
         },
-        "description": "Aborts an unlocked immutability policy. The response of delete has immutabilityPeriodSinceCreationInDays set to 0. ETag in If-Match is required for this operation. Deleting a locked immutability policy is not allowed, only way is to delete the container after deleting all blobs inside the container.",
+        "description": "Aborts an unlocked immutability policy. The response of delete has immutabilityPeriodSinceCreationInDays set to 0. ETag in If-Match is required for this operation. Deleting a locked immutability policy is not allowed, the only way is to delete the container after deleting all expired blobs inside the policy locked container.",
         "parameters": [
           {
             "$ref": "./storage.json#/parameters/ResourceGroupName"
@@ -800,6 +817,27 @@
   "definitions": {
     "ContainerProperties": {
       "properties": {
+        "version": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The version of the deleted blob container."
+        },
+        "deleted": {
+          "type": "boolean",
+          "readOnly": true,
+          "description": "Indicates whether the blob container was deleted."
+        },
+        "deletedTime": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true,
+          "description": "Blob container deletion time."
+        },
+        "remainingRetentionDays": {
+          "type": "integer",
+          "readOnly": true,
+          "description": "Remaining retention days for soft deleted blob container."
+        },
         "defaultEncryptionScope": {
           "type": "string",
           "description": "Default the container to use specified encryption scope for all writes."
@@ -1222,7 +1260,13 @@
           "type": "string",
           "format": "date-time",
           "readOnly": true,
-          "description": "Returns the date and time the restore policy was last enabled."
+          "description": "Deprecated in favor of minRestoreTime property."
+        },
+        "minRestoreTime": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true,
+          "description": "Returns the minimum date and time that the restore can be started."
         }
       },
       "required": [

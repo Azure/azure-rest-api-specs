@@ -1,10 +1,15 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "v1",
-    "title": "Microsoft.Azure.FDS.WebRole"
+    "version": "2020-01-01",
+    "title": "Azure Migrate V2",
+    "description": "Discover your workloads for Azure.",
+    "contact": {
+      "name": "Microsoft",
+      "email": "azuremigrate@microsoft.com"
+    }
   },
-  "host": "localhost",
+  "host": "management.azure.com",
   "schemes": [
     "https"
   ],
@@ -2584,6 +2589,41 @@
         },
         "deprecated": false
       }
+    },
+    "/providers/Microsoft.OffAzure/operations": {
+      "get": {
+        "summary": "Get list of operations supported in the API.",
+        "operationId": "Operations_List",
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "api-version",
+            "in": "query",
+            "description": "The API version to use for this operation.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/OperationResultList"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Operations_List": {
+            "$ref": "./examples/Operations_List.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -4903,6 +4943,72 @@
       "properties": {
         "ipAddress": {
           "type": "string"
+        }
+      }
+    },
+    "OperationDisplay": {
+      "type": "object",
+      "description": "Displayable properties of the operation.",
+      "readOnly": true,
+      "properties": {
+        "provider": {
+          "type": "string",
+          "description": "Provider of the operation.",
+          "readOnly": true
+        },
+        "resource": {
+          "type": "string",
+          "description": "Resource operated on by the operation.",
+          "readOnly": true
+        },
+        "operation": {
+          "type": "string",
+          "description": "Operation Type.",
+          "readOnly": true
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of the operation.",
+          "readOnly": true
+        }
+      }
+    },
+    "Operation": {
+      "type": "object",
+      "description": "A REST API operation supported by the provider.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the operation.",
+          "readOnly": true
+        },
+        "display": {
+          "description": "Displayable properties of the operation.",
+          "$ref": "#/definitions/OperationDisplay"
+        },
+        "origin": {
+          "type": "string",
+          "description": "Origin of the operation.",
+          "readOnly": true
+        }
+      }
+    },
+    "OperationResultList": {
+      "type": "object",
+      "description": "List of API operations.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of operations.",
+          "items": {
+            "$ref": "#/definitions/Operation"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "Value of next link.",
+          "type": "string",
+          "readOnly": true
         }
       }
     }

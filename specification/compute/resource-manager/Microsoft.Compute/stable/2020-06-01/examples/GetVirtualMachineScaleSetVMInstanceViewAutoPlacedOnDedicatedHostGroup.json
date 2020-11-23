@@ -1,0 +1,65 @@
+{
+  "parameters": {
+    "subscriptionId": "{subscription-id}",
+    "resourceGroupName": "myResourceGroup",
+    "vmScaleSetName": "myVirtualMachineScaleSet",
+    "instanceId": "0",
+    "api-version": "2020-06-01"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "platformUpdateDomain": 0,
+        "platformFaultDomain": 0,
+        "rdpThumbPrint": null,
+        "vmAgent": {
+          "vmAgentVersion": "Unknown",
+          "statuses": [
+            {
+              "code": "ProvisioningState/Unavailable",
+              "level": "Warning",
+              "displayStatus": "Not Ready",
+              "message": "VM status blob is found but not yet populated.",
+              "time": "2020-06-01T05:00:32+00:00"
+            }
+          ],
+          "extensionHandlers": null
+        },
+        "disks": [
+          {
+            "name": "myOSDisk",
+            "encryptionSettings": null,
+            "statuses": [
+              {
+                "code": "ProvisioningState/succeeded",
+                "level": "Info",
+                "displayStatus": "Provisioning succeeded",
+                "message": null,
+                "time": "2020-06-01T04:58:58.0882815+00:00"
+              }
+            ]
+          }
+        ],
+        "extensions": null,
+        "assignedHost": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/hostGroups/myHostGroup/hosts/myHost",
+        "bootDiagnostics": null,
+        "statuses": [
+          {
+            "code": "ProvisioningState/succeeded",
+            "level": "Info",
+            "displayStatus": "Provisioning succeeded",
+            "message": null,
+            "time": "2020-06-05T04:59:58.1852966+00:00"
+          },
+          {
+            "code": "PowerState/running",
+            "level": "Info",
+            "displayStatus": "VM running",
+            "message": null,
+            "time": null
+          }
+        ]
+      }
+    }
+  }
+}

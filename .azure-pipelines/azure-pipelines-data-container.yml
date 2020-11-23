@@ -1,0 +1,42 @@
+schedules:
+- cron: "0 0 * * *"
+  displayName: Daily build
+  branches:
+    include:
+    - master
+  always: true
+
+pool:
+  vmImage: 'Ubuntu-16.04'
+
+variables:
+  IMAGE_TAG_PREFIX: $[format('1.0.{0:HHm}', pipeline.startTime)]
+
+steps:
+- task: Docker@2
+  displayName: Login to production ACR
+  inputs:
+    command: login
+    containerRegistry: $(CONTAINER_REGISTRY_SERVICE_CONNECTION)
+
+- task: Docker@2
+  displayName: Login to dogfood ACR
+  inputs:
+    command: login
+    containerRegistry: $(DOGFOOD_CONTAINER_REGISTRY_SERVICE_CONNECTION)
+
+- task: CopyFiles@2
+  inputs:
+    SourceFolder: $(Build.SourcesDirectory)
+    contents: .git/**
+    targetFolder: $(Build.SourcesDirectory)/scripts/datacontainer
+
+- task: Docker@2
+  displayName: Build and Push
+  inputs:
+    command: buildAndPush
+    Dockerfile: scripts/datacontainer/Dockerfile
+    repository: $(CONTAINER_REGISTRY_REPOSITORY_NAME)
+    tags: |
+      latest
+      $(IMAGE_TAG_PREFIX)$(Build.BuildNumber)

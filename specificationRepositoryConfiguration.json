@@ -3,7 +3,6 @@
   "pipelineName": "automation - sdk",
   "sdkRepositoryMappings": {
     "azure-sdk-for-go": {
-      "mainBranch": "latest",
       "integrationRepository": "AzureSDKAutomation/azure-sdk-for-go",
       "mainRepository": "Azure/azure-sdk-for-go"
     },
@@ -21,6 +20,11 @@
     },
     "azure-sdk-for-python": {
       "integrationRepository": "AzureSDKAutomation/azure-sdk-for-python",
+      "mainRepository": "Azure/azure-sdk-for-python",
+      "mainBranch": "release/v3"
+    },
+    "azure-sdk-for-python-track2": {
+      "integrationRepository": "AzureSDKAutomation/azure-sdk-for-python",
       "mainRepository": "Azure/azure-sdk-for-python"
     },
     "azure-cli-extensions": {
@@ -33,8 +37,55 @@
       "mainRepository": "Azure/azure-sdk-for-ruby"
     },
     "azure-sdk-for-trenton": {
-      "integrationRepository": "test-repo-billy/azure-sdk-for-trenton",
-      "mainRepository": "Azure/azure-sdk-for-trenton"
+      "integrationRepository": "Azure/azure-sdk-for-trenton",
+      "mainRepository": "Azure/azure-sdk-for-trenton",
+      "secondaryRepository": "Azure/azure-sdk-for-trenton",
+      "secondaryBranch": "secondary"
+    },
+    "azure-resource-manager-schemas": {
+      "integrationRepository": "AzureSDKAutomation/azure-resource-manager-schemas",
+      "mainRepository": "Azure/azure-resource-manager-schemas"
+    }
+  },
+  "overrides": {
+    "Azure/azure-rest-api-specs-pr": {
+      "sdkRepositoryMappings": {
+        "azure-sdk-for-go": {
+          "integrationRepository": "azure-sdk/azure-sdk-for-go-pr",
+          "mainRepository": "Azure/azure-sdk-for-go-pr"
+        },
+        "azure-sdk-for-java": {
+          "integrationRepository": "azure-sdk/azure-sdk-for-java-pr",
+          "mainRepository": "Azure/azure-sdk-for-java-pr"
+        },
+        "azure-sdk-for-js": {
+          "integrationRepository": "azure-sdk/azure-sdk-for-js-pr",
+          "mainRepository": "Azure/azure-sdk-for-js-pr"
+        },
+        "azure-sdk-for-net": {
+          "integrationRepository": "azure-sdk/azure-sdk-for-net-pr",
+          "mainRepository": "Azure/azure-sdk-for-net-pr"
+        },
+        "azure-sdk-for-python": {
+          "integrationRepository": "azure-sdk/azure-sdk-for-python-pr",
+          "mainRepository": "Azure/azure-sdk-for-python-pr",
+          "mainBranch": "release/v3"
+        },
+        "azure-sdk-for-python-track2": {
+          "integrationRepository": "azure-sdk/azure-sdk-for-python-pr",
+          "mainRepository": "Azure/azure-sdk-for-python-pr"
+        },
+        "azure-cli-extensions": {
+          "integrationRepository": "azure-sdk/azure-cli-extensions-pr",
+          "mainRepository": "Azure/azure-cli-extensions-pr"
+        },
+        "azure-sdk-for-trenton": {
+          "integrationRepository": "Azure/azure-sdk-for-trenton",
+          "mainRepository": "Azure/azure-sdk-for-trenton",
+          "secondaryRepository": "Azure/azure-sdk-for-trenton",
+          "secondaryBranch": "secondary"
+        }
+      }
     }
   }
 }

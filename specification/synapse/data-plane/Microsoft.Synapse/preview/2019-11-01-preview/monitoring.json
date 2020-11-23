@@ -2,21 +2,14 @@
   "swagger": "2.0",
   "info": {
     "version": "2019-11-01-preview",
-    "title": "SynapseClient"
+    "title": "MonitoringClient"
   },
   "x-ms-parameterized-host": {
-    "hostTemplate": "{workspaceName}.{SynapseDnsSuffix}",
+    "hostTemplate": "{endpoint}",
+    "useSchemePrefix": false,
     "parameters": [
       {
-        "name": "workspaceName",
-        "description": "The name of the workspace to execute operations on.",
-        "required": true,
-        "type": "string",
-        "in": "path",
-        "x-ms-skip-url-encoding": true
-      },
-      {
-        "$ref": "#/parameters/SynapseDnsSuffixInPath"
+        "$ref": "#/parameters/Endpoint"
       }
     ]
   },
@@ -30,70 +23,6 @@
     "application/json"
   ],
   "paths": {
-    "/monitoring/workloadTypes/spark/pools/{poolName}/livyIds/{livyId}/applications/{appId}/attemptIds/{attemptId}/historyServerData": {
-      "get": {
-        "tags": [
-          "Monitoring"
-        ],
-        "operationId": "Monitoring_GetHistoryServerData",
-        "description": "Get History Server Data for a given workspace, pool, livyid, appid and attemptId",
-        "x-ms-examples": {
-          "Get history server data": {
-            "$ref": "./examples/Monitoring_GetHistoryServerData.json"
-          }
-        },
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "name": "poolName",
-            "description": "The spark pool name.",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "livyId",
-            "description": "The livy id.",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "appId",
-            "description": "The application id.",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "attemptId",
-            "description": "The attempt id.",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "$ref": "#/definitions/HistoryServerDataResponse"
-            }
-          },
-          "401": {
-            "description": "Unauthorized"
-          }
-        }
-      }
-    },
     "/monitoring/workloadTypes/spark/Applications": {
       "get": {
         "tags": [
@@ -106,15 +35,19 @@
             "$ref": "./examples/Monitoring_GetSparkJobList.json"
           }
         },
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
         "parameters": [
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "name": "x-ms-client-request-id",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "description": "Can provide a guid, which is helpful for debugging and to provide better customer support"
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "type": "string"
           }
         ],
         "responses": {
@@ -123,223 +56,61 @@
             "schema": {
               "$ref": "#/definitions/SparkJobListViewResponse"
             }
-          },
-          "401": {
-            "description": "Unauthorized"
           }
         }
       }
     },
-    "/monitoring/workloadTypes/spark/pools/{poolName}/livyIds/{livyId}": {
+    "/monitoring/workloadTypes/sql/querystring": {
       "get": {
         "tags": [
           "Monitoring"
         ],
-        "operationId": "Monitoring_GetApplicationDetails",
-        "description": "Get one spark application details given the workspace name, pool name and livyid.",
+        "operationId": "Monitoring_GetSqlJobQueryString",
+        "description": "Get SQL OD/DW Query for the workspace.",
         "x-ms-examples": {
-          "Get list of spark application": {
-            "$ref": "./examples/Monitoring_GetApplicationDetails.json"
+          "Get SOL job query string": {
+            "$ref": "./examples/Monitoring_GetSqlJobQueryString.json"
           }
         },
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
         "parameters": [
           {
-            "name": "poolName",
-            "description": "The spark pool name.",
-            "in": "path",
+            "name": "x-ms-client-request-id",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "description": "Can provide a guid, which is helpful for debugging and to provide better customer support"
+          },
+          {
+            "name": "api-version",
+            "in": "query",
             "required": true,
             "type": "string"
           },
           {
-            "name": "livyId",
-            "description": "The livy id.",
-            "in": "path",
-            "required": true,
+            "name": "filter",
+            "in": "query",
+            "required": false,
             "type": "string"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "name": "$orderby",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "skip",
+            "in": "query",
+            "required": false,
+            "type": "string"
           }
         ],
         "responses": {
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/SparkJobListViewResponse"
+              "$ref": "#/definitions/SqlQueryStringDataModel"
             }
-          },
-          "401": {
-            "description": "Unauthorized"
-          }
-        }
-      }
-    },
-    "/monitoring/workloadTypes/spark/historyServerProperties": {
-      "get": {
-        "tags": [
-          "Monitoring"
-        ],
-        "operationId": "Monitoring_GetHistoryServerProperties",
-        "description": "Get History server properties.",
-        "x-ms-examples": {
-          "Get history server properties": {
-            "$ref": "./examples/Monitoring_GetHistoryServerProperties.json"
-          }
-        },
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "$ref": "#/definitions/HistoryServerPropertiesResponse"
-            }
-          },
-          "401": {
-            "description": "Unauthorized"
-          }
-        }
-      }
-    },
-    "/monitoring/workloadTypes/spark/pools/{poolName}/livyIds/{livyId}/applications/{appId}/attemptIds/{attemptId}/historyServerDiagnostic": {
-      "get": {
-        "tags": [
-          "Monitoring"
-        ],
-        "operationId": "Monitoring_GetHistoryServerDiagnostic",
-        "description": "Get History Server Diagnostic Data for a given workspace, pool, livyid, appid and attemptId",
-        "x-ms-examples": {
-          "Get history server diagnostic data": {
-            "$ref": "./examples/Monitoring_GetHistoryServerDiagnostic.json"
-          }
-        },
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "name": "poolName",
-            "description": "The spark pool name.",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "livyId",
-            "description": "The livy id.",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "appId",
-            "description": "The application id.",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "attemptId",
-            "description": "The attempt id.",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "$ref": "#/definitions/HistoryServerDiagnosticResponse"
-            }
-          },
-          "401": {
-            "description": "Unauthorized"
-          }
-        }
-      }
-    },
-    "/monitoring/workloadTypes/spark/pools/{poolName}/livyIds/{livyId}/applications/{appId}/attemptIds/{attemptId}/historyServerGraph": {
-      "get": {
-        "tags": [
-          "Monitoring"
-        ],
-        "operationId": "Monitoring_GetHistoryServerGraph",
-        "description": "Get History Server Graph Data for a given workspace, pool, livyid, appid and attemptId",
-        "x-ms-examples": {
-          "Get history server graph data": {
-            "$ref": "./examples/Monitoring_GetHistoryServerGraph.json"
-          }
-        },
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "name": "poolName",
-            "description": "The spark pool name.",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "livyId",
-            "description": "The livy id.",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "appId",
-            "description": "The application id.",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "attemptId",
-            "description": "The attempt id.",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "$ref": "#/definitions/HistoryServerGraphResponse"
-            }
-          },
-          "401": {
-            "description": "Unauthorized"
           }
         }
       }
@@ -391,10 +162,12 @@
           }
         },
         "sparkJobDefinition": {
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "pipeline": {
           "uniqueItems": false,
+          "x-nullable": true,
           "type": "array",
           "items": {
             "$ref": "#/definitions/SparkJob"
@@ -422,273 +195,31 @@
         }
       }
     },
-    "HistoryServerPropertiesResponse": {
+    "SqlQueryStringDataModel": {
       "type": "object",
       "properties": {
-        "webProxyEndpoint": {
+        "query": {
           "type": "string"
-        }
-      }
-    },
-    "HistoryServerDataResponse": {
-      "type": "object",
-      "properties": {
-        "data": {
-          "$ref": "#/definitions/Data"
-        }
-      }
-    },
-    "Data": {
-      "type": "object",
-      "properties": {
-        "handlerPath": {
-          "type": "string"
-        },
-        "inputs": {
-          "uniqueItems": false,
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "outputs": {
-          "uniqueItems": false,
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "tables": {
-          "$ref": "#/definitions/Tables"
-        },
-        "config": {
-          "$ref": "#/definitions/Config"
-        }
-      }
-    },
-    "Tables": {
-      "type": "object",
-      "properties": {
-        "operation": {
-          "type": "string"
-        },
-        "options": {
-          "uniqueItems": false,
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Option"
-          }
-        }
-      }
-    },
-    "Config": {
-      "type": "object",
-      "properties": {
-        "isHiveEnabled": {
-          "type": "boolean"
-        }
-      }
-    },
-    "Option": {
-      "type": "object",
-      "properties": {
-        "additionalProp1": {
-          "type": "string"
-        },
-        "additionalProp2": {
-          "type": "string"
-        },
-        "additionalProp3": {
-          "type": "string"
-        }
-      }
-    },
-    "HistoryServerDiagnosticResponse": {
-      "type": "object",
-      "properties": {
-        "data": {
-          "$ref": "#/definitions/HistoryServerDiagnosticResponseData"
-        }
-      }
-    },
-    "HistoryServerDiagnosticResponseData": {
-      "type": "object",
-      "properties": {
-        "stages": {
-          "$ref": "#/definitions/Stages"
-        },
-        "executors": {
-          "$ref": "#/definitions/Executors"
-        }
-      }
-    },
-    "Stages": {
-      "type": "object",
-      "properties": {
-        "dataAvg": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "timeAvg": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "id": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "attemptId": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "name": {
-          "type": "string"
-        },
-        "dataSkewTask": {
-          "uniqueItems": false,
-          "type": "array",
-          "items": {
-            "format": "int32",
-            "type": "integer"
-          }
-        },
-        "timeSkewTask": {
-          "uniqueItems": false,
-          "type": "array",
-          "items": {
-            "format": "int32",
-            "type": "integer"
-          }
-        },
-        "tasks": {
-          "uniqueItems": false,
-          "type": "array",
-          "items": {
-            "format": "int32",
-            "type": "integer"
-          }
-        }
-      }
-    },
-    "Executors": {
-      "type": "object",
-      "properties": {
-        "isDynamicAllocationOn": {
-          "type": "boolean"
-        },
-        "executorInstances": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "startTime": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "endTime": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "events": {
-          "uniqueItems": false,
-          "type": "array",
-          "items": {
-            "format": "int32",
-            "type": "integer"
-          }
-        },
-        "executorCores": {
-          "type": "string"
-        },
-        "executorMemory": {
-          "type": "string"
-        }
-      }
-    },
-    "HistoryServerGraphResponse": {
-      "type": "object",
-      "properties": {
-        "data": {
-          "$ref": "#/definitions/HistoryServerGraphResponseData"
-        }
-      }
-    },
-    "HistoryServerGraphResponseData": {
-      "type": "object",
-      "properties": {
-        "isAppFinished": {
-          "type": "boolean"
-        },
-        "jobs": {
-          "$ref": "#/definitions/Jobs"
-        },
-        "stages": {
-          "$ref": "#/definitions/Stages"
-        }
-      }
-    },
-    "Jobs": {
-      "type": "object",
-      "properties": {
-        "time": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "startTime": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "id": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "edges": {
-          "uniqueItems": false,
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Edge"
-          }
-        },
-        "nodes": {
-          "uniqueItems": false,
-          "type": "array",
-          "items": {
-            "format": "int32",
-            "type": "integer"
-          }
-        }
-      }
-    },
-    "Edge": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "childId": {
-          "format": "int32",
-          "type": "integer"
         }
       }
     }
   },
   "parameters": {
+    "Endpoint": {
+      "name": "endpoint",
+      "description": "The workspace development endpoint, for example https://myworkspace.dev.azuresynapse.net.",
+      "required": true,
+      "type": "string",
+      "in": "path",
+      "x-ms-skip-url-encoding": true,
+      "x-ms-parameter-location": "client"
+    },
     "ApiVersionParameter": {
       "name": "api-version",
       "in": "query",
       "required": true,
       "type": "string",
       "description": "The Synapse client API Version."
-    },
-    "SynapseDnsSuffixInPath": {
-      "name": "SynapseDnsSuffix",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "default": "dev.azuresynapse.net",
-      "x-ms-skip-url-encoding": true,
-      "description": "Gets the DNS suffix used as the base for all Synapse service requests.",
-      "x-ms-parameter-location": "client"
     }
   }
 }

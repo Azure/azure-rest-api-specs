@@ -509,6 +509,12 @@
           "type": "string",
           "description": "ResourceId of the log analytics workspace which the data will be ingested to."
         },
+        "LaMigrationDate": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The date which the component got migrated to LA, in ISO 8601 format.",
+          "format": "date-time"
+        },
         "PrivateLinkScopedResources": {
           "readOnly": true,
           "type": "array",
@@ -524,6 +530,20 @@
         "publicNetworkAccessForQuery": {
           "description": "The network access type for accessing Application Insights query.",
           "$ref": "#/definitions/PublicNetworkAccessType"
+        },
+        "IngestionMode": {
+          "type": "string",
+          "description": "Indicates the flow of the ingestion.",
+          "default": "LogAnalytics",
+          "enum": [
+            "ApplicationInsights",
+            "ApplicationInsightsWithDiagnosticSettings",
+            "LogAnalytics"
+          ],
+          "x-ms-enum": {
+            "name": "IngestionMode",
+            "modelAsString": true
+          }
         }
       },
       "required": [
