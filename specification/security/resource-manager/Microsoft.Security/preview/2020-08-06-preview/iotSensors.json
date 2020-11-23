@@ -259,12 +259,13 @@
           },
           {
             "in": "body",
-            "name": "applianceId",
-            "description": "The appliance id of the sensor.",
+            "name": "body",
             "required": true,
+            "description": "The reset password input.",
             "schema": {
-              "type": "string"
-            }
+              "$ref": "#/definitions/ResetPasswordInput"
+            },
+            "x-ms-parameter-location": "method"
           }
         ],
         "responses": {
@@ -320,6 +321,16 @@
       "type": "object",
       "description": "IoT sensor properties",
       "properties": {}
+    },
+    "ResetPasswordInput": {
+      "type": "object",
+      "description": "Reset password input.",
+      "properties": {
+        "applianceId": {
+          "description": "The appliance id of the sensor.",
+          "type": "string"
+        }
+      }
     }
   },
   "parameters": {
