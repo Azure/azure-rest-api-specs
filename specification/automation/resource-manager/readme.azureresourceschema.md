@@ -69,6 +69,24 @@ input-file:
   - Microsoft.Automation/preview/2017-05-15-preview/sourceControlSyncJob.json
   - Microsoft.Automation/preview/2017-05-15-preview/sourceControlSyncJobStreams.json
   - Microsoft.Automation/preview/2017-05-15-preview/job.json
+  - Microsoft.Automation/preview/2017-05-15-preview/account.json
+  - Microsoft.Automation/preview/2017-05-15-preview/certificate.json
+  - Microsoft.Automation/preview/2017-05-15-preview/connection.json
+  - Microsoft.Automation/preview/2017-05-15-preview/connectionType.json
+  - Microsoft.Automation/preview/2017-05-15-preview/credential.json
+  - Microsoft.Automation/preview/2017-05-15-preview/dscCompilationJob.json
+  - Microsoft.Automation/preview/2017-05-15-preview/dscConfiguration.json
+  - Microsoft.Automation/preview/2017-05-15-preview/dscNode.json
+  - Microsoft.Automation/preview/2017-05-15-preview/dscNodeConfiguration.json
+  - Microsoft.Automation/preview/2017-05-15-preview/hybridRunbookWorkerGroup.json
+  - Microsoft.Automation/preview/2017-05-15-preview/jobSchedule.json
+  - Microsoft.Automation/preview/2017-05-15-preview/linkedWorkspace.json
+  - Microsoft.Automation/preview/2017-05-15-preview/module.json
+  - Microsoft.Automation/preview/2017-05-15-preview/runbook.json
+  - Microsoft.Automation/preview/2017-05-15-preview/schedule.json
+  - Microsoft.Automation/preview/2017-05-15-preview/variable.json
+  - Microsoft.Automation/preview/2017-05-15-preview/webhook.json
+  - Microsoft.Automation/preview/2017-05-15-preview/watcher.json
 
 ```
 
