@@ -2,10 +2,19 @@
 
 These settings apply only when `--go` is specified on the command line.
 
-```yaml $(go)
+``` yaml $(go)
 go:
   license-header: MICROSOFT_APACHE_NO_VERSION
+  namespace: cpim
   clear-output-folder: true
+```
+
+### Go multi-api
+
+``` yaml $(go) && $(multiapi)
+batch:
+  - tag: package-2019-01-01-preview 
+  - tag: package-2020-05-01-preview 
 ```
 
 ### Tag: package-2019-01-01-preview and go
