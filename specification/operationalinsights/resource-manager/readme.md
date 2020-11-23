@@ -28,7 +28,7 @@ These are the global settings for the OperationalInsights API.
 title: OperationalInsightsManagementClient
 description: Operational Insights Client
 openapi-type: arm
-tag: package-2020-03-preview
+tag: package-2020-08
 ```
 
 
@@ -80,6 +80,7 @@ These settings apply only when `--tag=package-2020-03-preview` is specified on t
 input-file:
 - Microsoft.OperationalInsights/preview/2020-03-01-preview/DataExports.json
 - Microsoft.OperationalInsights/preview/2020-03-01-preview/DataSources.json
+- Microsoft.OperationalInsights/preview/2020-03-01-preview/DataCollectorLogs.json
 - Microsoft.OperationalInsights/preview/2020-03-01-preview/IntelligencePacks.json
 - Microsoft.OperationalInsights/preview/2020-03-01-preview/LinkedServices.json
 - Microsoft.OperationalInsights/preview/2020-03-01-preview/LinkedStorageAccounts.json
@@ -100,6 +101,45 @@ input-file:
 - Microsoft.OperationalInsights/preview/2020-03-01-preview/Tables.json
 ```
 
+### Tag: package-2020-10
+
+These settings apply only when `--tag=package-2020-10` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-10'
+input-file:
+- Microsoft.OperationalInsights/stable/2020-10-01/Clusters.json
+- Microsoft.OperationalInsights/stable/2020-10-01/Operations.json
+- Microsoft.OperationalInsights/stable/2020-10-01/Workspaces.json
+```
+
+### Tag: package-2020-08
+
+These settings apply only when `--tag=package-2020-08` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-08'
+input-file:
+- Microsoft.OperationalInsights/stable/2020-08-01/DataExports.json
+- Microsoft.OperationalInsights/stable/2020-08-01/DataSources.json
+- Microsoft.OperationalInsights/stable/2020-08-01/IntelligencePacks.json
+- Microsoft.OperationalInsights/stable/2020-08-01/LinkedServices.json
+- Microsoft.OperationalInsights/stable/2020-08-01/LinkedStorageAccounts.json
+- Microsoft.OperationalInsights/stable/2020-08-01/ManagementGroups.json
+- Microsoft.OperationalInsights/stable/2020-08-01/Operations.json
+- Microsoft.OperationalInsights/stable/2020-08-01/OperationStatuses.json
+- Microsoft.OperationalInsights/stable/2020-08-01/SharedKeys.json
+- Microsoft.OperationalInsights/stable/2020-08-01/Usages.json
+- Microsoft.OperationalInsights/stable/2020-08-01/Workspaces.json
+- Microsoft.OperationalInsights/stable/2020-08-01/Clusters.json
+- Microsoft.OperationalInsights/stable/2020-08-01/StorageInsightConfigs.json
+- Microsoft.OperationalInsights/stable/2020-08-01/SavedSearches.json
+- Microsoft.OperationalInsights/stable/2020-08-01/AvailableServiceTiers.json
+- Microsoft.OperationalInsights/stable/2020-08-01/Gateways.json
+- Microsoft.OperationalInsights/stable/2020-08-01/Schema.json
+- Microsoft.OperationalInsights/stable/2020-08-01/SharedKeys.json
+- Microsoft.OperationalInsights/stable/2020-08-01/WorkspacePurge.json
+- Microsoft.OperationalInsights/stable/2020-08-01/Tables.json
+```
+
 ---
 # Code Generation
 
@@ -118,8 +158,9 @@ swagger-to-sdk:
   - repo: azure-sdk-for-node
   - repo: azure-sdk-for-ruby
   - repo: azure-sdk-for-java
+  - repo: azure-resource-manager-schemas
     after_scripts:
-      - bundle install && rake arm:regen_all_profiles['azure_mgmt_operational_insights']
+      - node sdkauto_afterscript.js operationalinsights/resource-manager
 ```
 
 
@@ -192,8 +233,9 @@ directive:
     reason: properties etag defined as eTag in model
 ```
 
-## Multi-API/Profile support for AutoRest v3 generators 
+## AzureResourceSchema
 
+<<<<<<< HEAD
 AutoRest V3 generators require the use of `--tag=all-api-versions` to select api files.
 
 This block is updated by an automatic script. Edits may be lost!
@@ -242,4 +284,7 @@ uncomment the  `exclude-file` section below and add the file paths.
 #exclude-file: 
 #  - $(this-folder)/Microsoft.Example/stable/2010-01-01/somefile.json
 ```
+=======
+See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
+>>>>>>> a4e2481b68419504368711274d6994667ea8f5be
 

@@ -34,7 +34,7 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMariaDB/servers/{serverName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBForMariaDB/servers/{serverName}": {
       "put": {
         "tags": [
           "Servers"
@@ -93,6 +93,12 @@
           },
           "202": {
             "description": "Accepted"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
         "x-ms-long-running-operation": true
@@ -140,6 +146,12 @@
           },
           "202": {
             "description": "Accepted"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
         "x-ms-long-running-operation": true
@@ -178,6 +190,12 @@
           },
           "204": {
             "description": "NoContent"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
         "x-ms-long-running-operation": true
@@ -213,11 +231,17 @@
             "schema": {
               "$ref": "#/definitions/Server"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMariaDB/servers": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBForMariaDB/servers": {
       "get": {
         "tags": [
           "Servers"
@@ -246,6 +270,12 @@
             "schema": {
               "$ref": "#/definitions/ServerListResult"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
         "x-ms-pageable": {
@@ -253,7 +283,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.DBforMariaDB/servers": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DBForMariaDB/servers": {
       "get": {
         "tags": [
           "Servers"
@@ -279,6 +309,12 @@
             "schema": {
               "$ref": "#/definitions/ServerListResult"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
         "x-ms-pageable": {
@@ -286,7 +322,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMariaDB/servers/{serverName}/restart": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBForMariaDB/servers/{serverName}/restart": {
       "post": {
         "tags": [
           "ServerRestart"
@@ -329,7 +365,7 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMariaDB/servers/{serverName}/replicas": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBForMariaDB/servers/{serverName}/replicas": {
       "get": {
         "tags": [
           "Replicas"
@@ -361,6 +397,12 @@
             "schema": {
               "$ref": "#/definitions/ServerListResult"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
         "x-ms-pageable": {
@@ -368,7 +410,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMariaDB/servers/{serverName}/firewallRules/{firewallRuleName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBForMariaDB/servers/{serverName}/firewallRules/{firewallRuleName}": {
       "put": {
         "tags": [
           "FirewallRules"
@@ -421,6 +463,12 @@
           },
           "202": {
             "description": "Accepted"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
         "x-ms-long-running-operation": true
@@ -462,6 +510,12 @@
           },
           "204": {
             "description": "NoContent"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
         "x-ms-long-running-operation": true
@@ -500,11 +554,17 @@
             "schema": {
               "$ref": "#/definitions/FirewallRule"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMariaDB/servers/{serverName}/firewallRules": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBForMariaDB/servers/{serverName}/firewallRules": {
       "get": {
         "tags": [
           "FirewallRules"
@@ -536,6 +596,12 @@
             "schema": {
               "$ref": "#/definitions/FirewallRuleListResult"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
         "x-ms-pageable": {
@@ -543,7 +609,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMariaDB/servers/{serverName}/virtualNetworkRules/{virtualNetworkRuleName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBForMariaDB/servers/{serverName}/virtualNetworkRules/{virtualNetworkRuleName}": {
       "get": {
         "tags": [
           "VirtualNetworkRules"
@@ -688,7 +754,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMariaDB/servers/{serverName}/virtualNetworkRules": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBForMariaDB/servers/{serverName}/virtualNetworkRules": {
       "get": {
         "tags": [
           "VirtualNetworkRules"
@@ -730,7 +796,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMariaDB/servers/{serverName}/databases/{databaseName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBForMariaDB/servers/{serverName}/databases/{databaseName}": {
       "put": {
         "tags": [
           "Databases"
@@ -783,6 +849,12 @@
           },
           "202": {
             "description": "Accepted"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
         "x-ms-long-running-operation": true
@@ -824,6 +896,12 @@
           },
           "204": {
             "description": "NoContent"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
         "x-ms-long-running-operation": true
@@ -862,11 +940,17 @@
             "schema": {
               "$ref": "#/definitions/Database"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMariaDB/servers/{serverName}/databases": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBForMariaDB/servers/{serverName}/databases": {
       "get": {
         "tags": [
           "Databases"
@@ -898,6 +982,12 @@
             "schema": {
               "$ref": "#/definitions/DatabaseListResult"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
         "x-ms-pageable": {
@@ -905,7 +995,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMariaDB/servers/{serverName}/configurations/{configurationName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBForMariaDB/servers/{serverName}/configurations/{configurationName}": {
       "put": {
         "tags": [
           "Configurations"
@@ -952,6 +1042,12 @@
           },
           "202": {
             "description": "Accepted"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
         "x-ms-long-running-operation": true
@@ -990,11 +1086,17 @@
             "schema": {
               "$ref": "#/definitions/Configuration"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMariaDB/servers/{serverName}/configurations": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBForMariaDB/servers/{serverName}/configurations": {
       "get": {
         "tags": [
           "Configurations"
@@ -1026,6 +1128,12 @@
             "schema": {
               "$ref": "#/definitions/ConfigurationListResult"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
         "x-ms-pageable": {
@@ -1033,7 +1141,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMariaDB/servers/{serverName}/logFiles": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBForMariaDB/servers/{serverName}/logFiles": {
       "get": {
         "tags": [
           "LogFiles"
@@ -1065,6 +1173,12 @@
             "schema": {
               "$ref": "#/definitions/LogFileListResult"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
         "x-ms-pageable": {
@@ -1072,7 +1186,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.DBforMariaDB/locations/{locationName}/performanceTiers": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DBForMariaDB/locations/{locationName}/performanceTiers": {
       "get": {
         "tags": [
           "LocationBasedPerformanceTier"
@@ -1101,6 +1215,12 @@
             "schema": {
               "$ref": "#/definitions/PerformanceTierListResult"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
         "x-ms-pageable": {
@@ -1108,7 +1228,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.DBforMariaDB/checkNameAvailability": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DBForMariaDB/checkNameAvailability": {
       "post": {
         "tags": [
           "CheckNameAvailability"
@@ -1143,11 +1263,17 @@
             "schema": {
               "$ref": "#/definitions/NameAvailability"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         }
       }
     },
-    "/providers/Microsoft.DBforMariaDB/operations": {
+    "/providers/Microsoft.DBForMariaDB/operations": {
       "get": {
         "tags": [
           "Operations"
@@ -1169,6 +1295,12 @@
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
             }
           }
         }
@@ -1307,34 +1439,6 @@
         }
       }
     },
-    "TrackedResource": {
-      "description": "Resource properties including location and tags for track resources.",
-      "properties": {
-        "location": {
-          "type": "string",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ],
-          "description": "The location the resource resides in."
-        },
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "Application-specific metadata in the form of key-value pairs."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ProxyResource"
-        }
-      ],
-      "required": [
-        "location"
-      ]
-    },
     "ServerProperties": {
       "properties": {
         "administratorLogin": {
@@ -1408,6 +1512,7 @@
       "properties": {
         "backupRetentionDays": {
           "type": "integer",
+          "format": "int32",
           "description": "Backup retention days for the server."
         },
         "geoRedundantBackup": {
@@ -1599,6 +1704,9 @@
           "description": "The family of hardware."
         }
       },
+      "required": [
+        "name"
+      ],
       "description": "Billing information related properties of a server."
     },
     "Server": {
@@ -1615,7 +1723,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/TrackedResource"
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/TrackedResource"
         }
       ],
       "description": "Represents a server."
@@ -2075,6 +2183,7 @@
         },
         "vCore": {
           "type": "integer",
+          "format": "int32",
           "description": "vCore associated with the service level objective"
         },
         "hardwareGeneration": {
@@ -2083,10 +2192,12 @@
         },
         "maxBackupRetentionDays": {
           "type": "integer",
+          "format": "int32",
           "description": "Maximum Backup retention in days for the performance tier edition"
         },
         "minBackupRetentionDays": {
           "type": "integer",
+          "format": "int32",
           "description": "Minimum Backup retention in days for the performance tier edition"
         },
         "maxStorageMB": {
