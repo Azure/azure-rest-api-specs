@@ -99,3 +99,32 @@ input-file:
   - Microsoft.Automation/stable/2015-10-31/watcher.json
 
 ```
+
+### Tag: schema-automation-2015-01-01-preview and azureresourceschema
+
+``` yaml $(tag) == 'schema-automation-2015-01-01-preview' && $(azureresourceschema)
+output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
+  - Microsoft.Automation/stable/2015-01-01-preview/account.json
+  - Microsoft.Automation/stable/2015-01-01-preview/certificate.json
+  - Microsoft.Automation/stable/2015-01-01-preview/connection.json
+  - Microsoft.Automation/stable/2015-01-01-preview/connectionType.json
+  - Microsoft.Automation/stable/2015-01-01-preview/credential.json
+  - Microsoft.Automation/stable/2015-01-01-preview/dscCompilationJob.json
+  - Microsoft.Automation/stable/2015-01-01-preview/dscConfiguration.json
+  - Microsoft.Automation/stable/2015-01-01-preview/dscNode.json
+  - Microsoft.Automation/stable/2015-01-01-preview/dscNodeConfiguration.json
+  - Microsoft.Automation/stable/2015-01-01-preview/hybridRunbookWorkerGroup.json
+  - Microsoft.Automation/stable/2015-01-01-preview/job.json
+  - Microsoft.Automation/stable/2015-01-01-preview/jobSchedule.json
+  - Microsoft.Automation/stable/2015-01-01-preview/linkedWorkspace.json
+  - Microsoft.Automation/stable/2015-01-01-preview/module.json
+  - Microsoft.Automation/stable/2015-01-01-preview/runbook.json
+  - Microsoft.Automation/stable/2015-01-01-preview/schedule.json
+  - Microsoft.Automation/stable/2015-01-01-preview/variable.json
+  - Microsoft.Automation/stable/2015-01-01-preview/webhook.json
+  - Microsoft.Automation/stable/2015-01-01-preview/watcher.json
+
+```
