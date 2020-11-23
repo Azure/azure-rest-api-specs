@@ -22,6 +22,18 @@ license-header: MICROSOFT_MIT_NO_VERSION
 package-name: azure-mgmt-eventhub
 no-namespace-folders: true
 python-base-folder: monitor/azure-mgmt-monitor/azure/mgmt/monitor
+batch:
+  - AMCS: true
+```
+
+These settings apply when `--track2` and `--AMCS` is specified on the command line.
+
+``` yaml $(track2) && $(AMCS)
+package-version: 0.1.0
+namespace: azure.mgmt.amcs
+package-name: azure-mgmt-amcs
+basic-setup-py: true
+output-folder: $(python-sdks-folder)/amcs/azure-mgmt-amcs
 ```
 
 ### Python multi-api
