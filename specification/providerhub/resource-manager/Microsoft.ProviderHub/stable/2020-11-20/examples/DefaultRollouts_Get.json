@@ -16,27 +16,50 @@
           "provisioningState": "Cancelled",
           "specification": {
             "canary": {
-              "regions": ["eastus2euap","centraluseuap"],
-              "skipRegions": ["brazilus"]
+              "regions": [
+                "eastus2euap",
+                "centraluseuap"
+              ],
+              "skipRegions": [
+                "brazilus"
+              ]
             },
             "lowTraffic": {
-              "regions": ["southeastasia"],
+              "regions": [
+                "southeastasia"
+              ],
               "waitDuration": "PT24H"
             },
             "mediumTraffic": {
-              "regions": ["uksouth","indiawest"],
+              "regions": [
+                "uksouth",
+                "indiawest"
+              ],
               "waitDuration": "PT24H"
             },
             "highTraffic": {
-              "regions": ["australiasoutheast","otherhightraficregions"],
+              "regions": [
+                "australiasoutheast",
+                "otherhightraficregions"
+              ],
               "waitDuration": "PT24H"
             },
             "restOfTheWorldGroupOne": {
-              "regions": ["koreacentral","francecentral","australiacentral","westus","allotherregions"],
+              "regions": [
+                "koreacentral",
+                "francecentral",
+                "australiacentral",
+                "westus",
+                "allotherregions"
+              ],
               "waitDuration": "PT4H"
             },
             "restOfTheWorldGroupTwo": {
-              "regions": ["germanynorth","norwayeast","allotherregions"],
+              "regions": [
+                "germanynorth",
+                "norwayeast",
+                "allotherregions"
+              ],
               "waitDuration": "PT4H"
             },
             "providerRegistration": {
@@ -45,40 +68,40 @@
               "type": "Microsoft.ProviderHub/providerRegistrations",
               "properties": {
                 "providerHubMetadata": {
-                    "providerAuthentication": {
-                        "allowedAudiences": [
-                            "https://management.core.windows.net/"
-                        ]
-                    }
+                  "providerAuthentication": {
+                    "allowedAudiences": [
+                      "https://management.core.windows.net/"
+                    ]
+                  }
                 },
                 "provisioningState": "Succeeded",
                 "providerAuthorizations": [
                   {
-                      "applicationId": "1a3b5c7d-8e9f-10g1-1h12-i13j14k1",
-                      "roleDefinitionId": "123456bf-gkur-2098-b890-98da392a00b2"
+                    "applicationId": "1a3b5c7d-8e9f-10g1-1h12-i13j14k1",
+                    "roleDefinitionId": "123456bf-gkur-2098-b890-98da392a00b2"
                   }
                 ],
                 "namespace": "microsoft.contoso",
                 "providerVersion": "2.0",
                 "providerType": "Internal, Hidden",
                 "management": {
-                    "manifestOwners": [
-                        "SPARTA-PlatformServiceAdministrator"
-                    ],
-                    "incidentRoutingService": "",
-                    "incidentRoutingTeam": "",
-                    "incidentContactEmail": "helpme@contoso.com",
-                    "resourceAccessPolicy": "NotSpecified"
+                  "manifestOwners": [
+                    "SPARTA-PlatformServiceAdministrator"
+                  ],
+                  "incidentRoutingService": "",
+                  "incidentRoutingTeam": "",
+                  "incidentContactEmail": "helpme@contoso.com",
+                  "resourceAccessPolicy": "NotSpecified"
                 },
                 "capabilities": [
-                    {
-                        "quotaId": "CSP_2015-05-01",
-                        "effect": "Allow"
-                    },
-                    {
-                        "quotaId": "CSP_MG_2017-12-01",
-                        "effect": "Allow"
-                    }
+                  {
+                    "quotaId": "CSP_2015-05-01",
+                    "effect": "Allow"
+                  },
+                  {
+                    "quotaId": "CSP_MG_2017-12-01",
+                    "effect": "Allow"
+                  }
                 ],
                 "metadata": null
               }
@@ -133,10 +156,14 @@
             ]
           },
           "status": {
-            "completedRegions" : ["brazilus","eastus2euap","centraluseuap","allcompletedregions"],
-            "failedOrSkippedRegions" :
-            {
-              "westus2" : {
+            "completedRegions": [
+              "brazilus",
+              "eastus2euap",
+              "centraluseuap",
+              "allcompletedregions"
+            ],
+            "failedOrSkippedRegions": {
+              "westus2": {
                 "code": "RolloutStoppedByUser",
                 "message": "Rollout was explicitly stopped by the user."
               }
