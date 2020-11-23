@@ -11,6 +11,7 @@ batch:
   - tag: schema-automation-2018-01-15
   - tag: schema-automation-2017-05-15-preview
   - tag: schema-automation-2015-10-31
+  - tag: schema-automation-2015-01-01-preview
 
 ```
 
