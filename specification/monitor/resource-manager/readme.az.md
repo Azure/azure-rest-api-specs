@@ -34,6 +34,15 @@ directive:
   - where:
       group: monitor data-collection data-collection-rule-association
     set:
-      group: "monitor data-collection rule association"
+      group: monitor data-collection rule-association
+  - where:
+      group: monitor data-collection rule-association
+    set:
+      group: monitor data-collection rule association
+
+cli:
+    cli-directive:
+      - where:
+        
  
 ```
