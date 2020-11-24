@@ -2005,16 +2005,21 @@
       "properties": {
         "name": {
           "type": "string",
-          "description": "The name of the operation being performed on this particular object.",
-          "readOnly": true
+          "readOnly": true,
+          "description": "The name of the operation being performed on this particular object."
         },
         "display": {
           "$ref": "#/definitions/OperationDisplay",
-          "description": "The localized display information for this particular operation or action.",
-          "readOnly": true
+          "readOnly": true,
+          "description": "The localized display information for this particular operation or action."
+        },
+        "isDataAction": {
+          "description": "Indicates whether the operation is a data action",
+          "type": "boolean"
         },
         "origin": {
           "type": "string",
+          "readOnly": true,
           "description": "The intended executor of the operation.",
           "enum": [
             "NotSpecified",
@@ -2024,29 +2029,34 @@
           "x-ms-enum": {
             "name": "OperationOrigin",
             "modelAsString": true
-          },
-          "readOnly": true
+          }
         },
         "properties": {
           "type": "object",
-          "description": "Additional descriptions for the operation.",
           "additionalProperties": {
             "type": "object"
           },
           "readOnly": true,
-          "x-ms-client-flatten": false
+          "x-ms-client-flatten": false,
+          "description": "Additional descriptions for the operation."
         }
       }
     },
     "OperationListResult": {
       "description": "A list of resource provider operations.",
+      "type": "object",
       "properties": {
         "value": {
+          "description": "Collection of available operation details",
+          "uniqueItems": false,
           "type": "array",
-          "description": "The list of resource provider operations.",
           "items": {
             "$ref": "#/definitions/Operation"
           }
+        },
+        "nextLink": {
+          "description": "URL client should use to fetch the next page (per server side paging).\r\nIt's null for now, added for future use.",
+          "type": "string"
         }
       }
     },
