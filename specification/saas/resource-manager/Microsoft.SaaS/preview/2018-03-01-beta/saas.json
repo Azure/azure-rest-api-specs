@@ -53,13 +53,13 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/SaasAppOperationsResponseWithContinuation"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/OperationListResult"
             }
           },
           "default": {
             "description": "A response indicating an error.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -73,7 +73,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.SaaS/checkmoderneligibility": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.SaaS/checkModernEligibility": {
       "get": {
         "tags": [
           "SaaSResources"
@@ -98,7 +98,7 @@
           "default": {
             "description": "A response indicating an error.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -140,7 +140,7 @@
           "default": {
             "description": "A response indicating an error.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -188,7 +188,7 @@
           "default": {
             "description": "A response indicating an error.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -226,7 +226,7 @@
           "default": {
             "description": "A response indicating an error.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -276,7 +276,7 @@
           "default": {
             "description": "A response indicating an error.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -307,7 +307,7 @@
           "default": {
             "description": "A response indicating an error.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -346,7 +346,7 @@
           "default": {
             "description": "A response indicating an error.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -608,23 +608,6 @@
         }
       }
     },
-    "SaasAppOperationsResponseWithContinuation": {
-      "description": "saas app operation response with continuation.",
-      "type": "object",
-      "properties": {
-        "nextLink": {
-          "description": "the next link to query to get the remaining results.",
-          "type": "string"
-        },
-        "value": {
-          "description": "the value of response.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/SaasAppOperation"
-          }
-        }
-      }
-    },
     "SaasResourceResponseWithContinuation": {
       "description": "saas resources response with continuation.",
       "type": "object",
@@ -725,50 +708,6 @@
         }
       }
     },
-    "SaasAppOperation": {
-      "description": "saas app operations",
-      "type": "object",
-      "properties": {
-        "name": {
-          "description": "the operation name",
-          "type": "string"
-        },
-        "display": {
-          "description": "the operation display",
-          "$ref": "#/definitions/SaasAppOperationDisplay"
-        },
-        "origin": {
-          "description": "the operation origin",
-          "type": "string"
-        },
-        "isDataAction": {
-          "description": "whether the operation is a data action or not.",
-          "type": "boolean"
-        }
-      }
-    },
-    "SaasAppOperationDisplay": {
-      "description": "Saas app operation display",
-      "type": "object",
-      "properties": {
-        "provider": {
-          "description": "Name of the provider for display purposes",
-          "type": "string"
-        },
-        "resource": {
-          "description": "Name of the resource type for display purposes",
-          "type": "string"
-        },
-        "operation": {
-          "description": "Name of the operation for display purposes",
-          "type": "string"
-        },
-        "description": {
-          "description": "Description of the operation for display purposes",
-          "type": "string"
-        }
-      }
-    },
     "SaasRpModernEligibility": {
       "description": "SaasRp Modern Eligibility",
       "type": "object",
@@ -798,27 +737,6 @@
         "feedback": {
           "type": "string",
           "description": "the feedback"
-        }
-      }
-    },
-    "ErrorResponse": {
-      "description": "Error response indicates Microsoft.Marketplace service is not able to process the incoming request. The reason is provided in the error message.",
-      "type": "object",
-      "properties": {
-        "error": {
-          "description": "The details of the error.",
-          "properties": {
-            "code": {
-              "description": "Error code.",
-              "type": "string",
-              "readOnly": true
-            },
-            "message": {
-              "description": "Error message indicating why the operation failed.",
-              "type": "string",
-              "readOnly": true
-            }
-          }
         }
       }
     }
