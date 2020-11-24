@@ -361,6 +361,12 @@
             "type": "string"
           },
           "description": "Resource tags"
+        },
+        "etag": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource etag"
         }
       },
       "x-ms-azure-resource": true,
@@ -568,7 +574,7 @@
     "SourceIdParameter": {
       "name": "sourceId",
       "in": "query",
-      "required": true,
+      "required": false,
       "type": "string",
       "description": "Azure Resource Id that will fetch all linked workbooks.",
       "x-ms-parameter-location": "method"
