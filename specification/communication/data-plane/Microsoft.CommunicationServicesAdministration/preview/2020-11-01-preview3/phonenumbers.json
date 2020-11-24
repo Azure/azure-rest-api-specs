@@ -122,6 +122,7 @@
           "List available offerings"
         ],
         "summary": "List available offerings for the given country",
+        "operationId": "PhoneNumberAdministration_GetOfferings",
         "parameters": [
           {
             "$ref": "#/parameters/CountryCode"
@@ -200,7 +201,7 @@
           {
             "in": "body",
             "name": "search",
-            "description": "",
+            "description": "The search request.",
             "x-ms-client-flatten": true,
             "required": true,
             "schema": {
@@ -239,6 +240,7 @@
           "Find and purchase available phone numbers"
         ],
         "summary": "Get a search result by its id.",
+        "operationId": "PhoneNumberAdministration_GetSearchResult",
         "parameters": [
           {
             "$ref": "#/parameters/SearchId"
@@ -251,7 +253,7 @@
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/SearchResponse"
+              "$ref": "#/definitions/SearchResult"
             }
           },
           "default": {
@@ -263,7 +265,7 @@
         },
         "x-ms-examples": {
           "Get PhoneNumber Search Details": {
-            "$ref": "./examples/GetSearch.json"
+            "$ref": "./examples/GetSearchResult.json"
           }
         }
       }
@@ -274,7 +276,7 @@
           "Find and purchase available phone numbers"
         ],
         "summary": "Purchase phone numbers.",
-        "operationId": "PhoneNumberAdministration_SearchAvailablePhoneNumbersGet",
+        "operationId": "PhoneNumberAdministration_PurchasePhoneNumbers",
         "parameters": [
           {
             "in": "body",
@@ -321,6 +323,7 @@
           "Long running operations"
         ],
         "summary": "Get an operation by its id.",
+        "operationId": "PhoneNumberAdministration_GetOperation",
         "parameters": [
           {
             "$ref": "#/parameters/OperationId"
@@ -354,6 +357,7 @@
           "Long running operations"
         ],
         "summary": "Cancels the operation if cancellation is supported for the operation type.",
+        "operationId": "PhoneNumberAdministration_CancelOperation",
         "parameters": [
           {
             "$ref": "#/parameters/OperationId"
@@ -500,7 +504,7 @@
         "tags": [
           "Manage acquired phone numbers"
         ],
-        "operationId": "PhoneNumberAdministration_DeletePhoneNumber",
+        "operationId": "PhoneNumberAdministration_ReleasePhoneNumber",
         "summary": "Releases an acquired phone number.",
         "responses": {
           "202": {
@@ -530,7 +534,7 @@
   },
   "definitions": {
     "CapabilityValue": {
-      "description": "",
+      "description": "The possible values for a phone number capability.",
       "type": "string",
       "enum": [
         "inbound",
@@ -544,7 +548,7 @@
       }
     },
     "Capabilities": {
-      "description": "",
+      "description": "The capabilities of a phone number.",
       "type": "object",
       "properties": {
         "sms": {
@@ -558,7 +562,7 @@
       }
     },
     "AvailableCapabilities": {
-      "description": "",
+      "description": "The capabilities of a phone number that are available.",
       "type": "object",
       "properties": {
         "sms": {
@@ -578,7 +582,7 @@
       }
     },
     "PhoneNumberType": {
-      "description": "",
+      "description": "The type of a phone number.",
       "type": "string",
       "enum": [
         "tollFree",
@@ -590,7 +594,7 @@
       }
     },
     "AcquiredPhoneNumber": {
-      "description": "",
+      "description": "The acquired phone number and its metadata and configuration.",
       "type": "object",
       "properties": {
         "id": {
@@ -601,8 +605,8 @@
           "description": "The phoneNumber in E.164 format.",
           "type": "string"
         },
-        "country": {
-          "description": "The country the phone number belongs to.",
+        "countryCode": {
+          "description": "The ISO 3166-2 country code of the country that the phone number belongs to.",
           "type": "string"
         },
         "numberType": {
@@ -610,26 +614,15 @@
           "$ref": "#/definitions/PhoneNumberType"
         },
         "assignmentType": {
-          "description": "",
+          "description": "The assignment type of the phone number, people or application.",
           "$ref": "#/definitions/AssignmentType"
         },
         "purchaseDate": {
           "type": "string",
           "format": "date-time"
         },
-        "status": {
-          "description": "",
-          "enum": [
-            "activated"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "PhoneNumberStatus",
-            "modelAsString": true
-          }
-        },
         "capabilities": {
-          "description": "",
+          "description": "The phone number's capabilities.",
           "$ref": "#/definitions/Capabilities"
         },
         "callbackUrl": {
@@ -641,13 +634,13 @@
           "type": "string"
         },
         "monthlyRate": {
-          "description": "",
+          "description": "The monthly cost of the phone number.",
           "$ref": "#/definitions/MonthlyRate"
         }
       }
     },
     "AcquiredPhoneNumberUpdate": {
-      "description": "",
+      "description": "The properties of a phone number that can be changed.",
       "type": "object",
       "properties": {
         "callbackUrl": {
@@ -665,7 +658,7 @@
       }
     },
     "AcquiredPhoneNumbers": {
-      "description": "A list of acquired phone numbers.",
+      "description": "The list of acquired phone numbers.",
       "type": "object",
       "required": [
         "phoneNumbers"
@@ -685,7 +678,7 @@
       }
     },
     "AssignmentType": {
-      "description": "",
+      "description": "The type that the phone number can be assigned to.",
       "type": "string",
       "enum": [
         "person",
@@ -719,7 +712,7 @@
       }
     },
     "SearchRequest": {
-      "description": "",
+      "description": "The desired properties of a phone number for search.",
       "required": [
         "numberType",
         "assignmentType",
@@ -728,89 +721,89 @@
       "type": "object",
       "properties": {
         "numberType": {
-          "description": "",
+          "description": "The phone number type.",
           "$ref": "#/definitions/PhoneNumberType"
         },
         "assignmentType": {
-          "description": "",
+          "description": "The phone number's assignment type.",
           "$ref": "#/definitions/AssignmentType"
         },
         "capabilities": {
-          "description": "",
+          "description": "The phone number's capabilities.",
           "$ref": "#/definitions/Capabilities"
         },
         "areaCode": {
-          "description": "The area code of the search.",
+          "description": "The desired area code.",
           "type": "string"
         },
         "quantity": {
           "format": "int32",
-          "description": "The quantity of phone numbers in the search.",
+          "description": "The desired quantity of phone numbers.",
           "type": "integer",
           "default": 1
         }
       }
     },
-    "SearchResponse": {
-      "description": "",
+    "SearchResult": {
+      "description": "The result of a phone number search operation.",
       "type": "object",
       "properties": {
         "id": {
-          "description": "",
+          "description": "The search id.",
           "type": "string"
         },
         "phoneNumbers": {
-          "description": "",
+          "description": "The phone numbers that are available. Can be fewer than the desired search quantity.",
           "type": "array",
           "items": {
             "type": "string"
           }
         },
         "numberType": {
-          "description": "",
+          "description": "The phoner number type.",
           "$ref": "#/definitions/PhoneNumberType"
         },
         "assignmentType": {
-          "description": "",
+          "description": "The phone number's assignment type.",
           "$ref": "#/definitions/AssignmentType"
         },
         "capabilities": {
-          "description": "",
+          "description": "The phone number's capabilities.",
           "$ref": "#/definitions/Capabilities"
         },
         "monthlyRate": {
-          "description": "",
+          "description": "The monthly cost for an individual phone number.",
           "$ref": "#/definitions/MonthlyRate"
         },
         "searchExpiresBy": {
           "format": "date-time",
-          "description": "The date that search expires and the numbers become available.",
+          "description": "The date that this search result expires and phone numbers are no longer on hold. A search result expires in less than 15min.",
           "type": "string"
         }
       }
     },
     "CountryOffering": {
-      "description": "",
+      "description": "The offerings for a given country. An offering is a bundle of phone number characteristics and available capabilities.",
       "type": "object",
       "properties": {
         "numberType": {
-          "description": "",
+          "description": "The phoner number type.",
           "$ref": "#/definitions/PhoneNumberType"
         },
         "assignmentType": {
-          "description": "",
+          "description": "The phone number's assignment type.",
           "$ref": "#/definitions/AssignmentType"
         },
-        "country": {
-          "description": "",
+        "countryCode": {
+          "description": "The ISO 3166-2 country code.",
           "type": "string"
         },
         "availableCapabilities": {
-          "description": "",
+          "description": "The capabilities that are available in this offering.",
           "$ref": "#/definitions/AvailableCapabilities"
         },
         "monthlyRate": {
-          "description": "",
+          "description": "The montly cost for an individual phone number in this offering.",
           "$ref": "#/definitions/MonthlyRate"
         }
       }
@@ -849,7 +842,7 @@
           "type": "string"
         },
         "countryCode": {
-          "description": "Represents the abbreviated name of the country.",
+          "description": "The ISO 3166-2 country code.",
           "type": "string"
         }
       }
@@ -913,12 +906,12 @@
           }
         },
         "createdDateTime": {
-          "description": "",
+          "description": "The date that the operation was created.",
           "type": "string",
           "format": "date-time"
         },
         "lastActionDateTime": {
-          "description": "",
+          "description": "The most recent date that the operation was changed.",
           "type": "string",
           "format": "date-time"
         },
@@ -1051,7 +1044,7 @@
     "CountryCode": {
       "in": "path",
       "name": "countryCode",
-      "description": "The ISO 3166-2 country code",
+      "description": "The ISO 3166-2 country code.",
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"
