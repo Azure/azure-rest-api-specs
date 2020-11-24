@@ -26,18 +26,24 @@ no-namespace-folders: true
 package-version: 0.1.0
 ```
 
-``` yaml $(python-mode) == 'update'
+``` yaml $(python-mode) == 'update' && !$(track2)
 python:
   no-namespace-folders: true
   output-folder: $(python-sdks-folder)/baremetalinfrastructure/azure-mgmt-baremetalinfrastructure/azure/mgmt/baremetalinfrastructure
+```
+
+``` yaml $(python-mode) == 'create' && !$(track2)
+python:
+  basic-setup-py: true
+  output-folder: $(python-sdks-folder)/baremetalinfrastructure/azure-mgmt-baremetalinfrastructure
+```
+
+``` yaml $(python-mode) == 'update' && $(track2)
 no-namespace-folders: true
 output-folder: $(python-sdks-folder)/baremetalinfrastructure/azure-mgmt-baremetalinfrastructure/azure/mgmt/baremetalinfrastructure
 ```
 
-``` yaml $(python-mode) == 'create'
-python:
-  basic-setup-py: true
-  output-folder: $(python-sdks-folder)/baremetalinfrastructure/azure-mgmt-baremetalinfrastructure
+``` yaml $(python-mode) == 'create' && $(track2)
 basic-setup-py: true
 output-folder: $(python-sdks-folder)/baremetalinfrastructure/azure-mgmt-baremetalinfrastructure
 ```

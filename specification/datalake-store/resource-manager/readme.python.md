@@ -24,17 +24,21 @@ package-name: azure-mgmt-datalake-store
 package-version: 1.0.0b1
 clear-output-folder: true
 ```
-``` yaml $(python) && $(python-mode) == 'update'
+``` yaml $(python) && $(python-mode) == 'update' && !$(track2)
 python:
   no-namespace-folders: true
   output-folder: $(python-sdks-folder)/datalake/azure-mgmt-datalake-store/azure/mgmt/datalake/store
-no-namespace-folders: true
-output-folder: $(python-sdks-folder)/datalake/azure-mgmt-datalake-store/azure/mgmt/datalake/store
 ```
-``` yaml $(python) && $(python-mode) == 'create'
+``` yaml $(python) && $(python-mode) == 'create' && !$(track2)
 python:
   basic-setup-py: true
   output-folder: $(python-sdks-folder)/datalake/azure-mgmt-datalake-store
+```
+``` yaml $(python) && $(python-mode) == 'update' && $(track2)
+no-namespace-folders: true
+output-folder: $(python-sdks-folder)/datalake/azure-mgmt-datalake-store/azure/mgmt/datalake/store
+```
+``` yaml $(python) && $(python-mode) == 'create' && $(track2)
 basic-setup-py: true
 output-folder: $(python-sdks-folder)/datalake/azure-mgmt-datalake-store
 ```

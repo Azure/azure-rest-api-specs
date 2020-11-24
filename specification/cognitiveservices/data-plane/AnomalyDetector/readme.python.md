@@ -16,7 +16,7 @@ package-name: azure-ai-anomalydetector
 package-version: 0.2.0
 clear-output-folder: true
 ```
-``` yaml $(python-mode) == 'update'
+``` yaml $(python-mode) == 'update' 
 no-namespace-folders: true
 output-folder: $(python-sdks-folder)/anomalydetector/azure-ai-anomalydetector/azure/ai/anomalydetector
 ```

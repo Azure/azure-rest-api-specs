@@ -23,13 +23,24 @@ no-namespace-folders: true
 package-version: 0.1.0-preview
 ```
 
-```yaml $(python) && $(python-mode) == 'update'
+```yaml $(python) && $(python-mode) == 'update' && !$(track2)
+python:
+  no-namespace-folders: true
+  output-folder: $(python-sdks-folder)/resourcemover/azure-mgmt-resourcemover/azure/mgmt/resourcemover
+```
+
+``` yaml $(python) && $(python-mode) == 'create' && !$(track2)
+python:
+  basic-setup-py: true 
+  output-folder: $(python-sdks-folder)/resourcemover/azure-mgmt-resourcemover
+```
+
+```yaml $(python) && $(python-mode) == 'update' && $(track2)
 no-namespace-folders: true
 output-folder: $(python-sdks-folder)/resourcemover/azure-mgmt-resourcemover/azure/mgmt/resourcemover
 ```
 
-``` yaml $(python) && $(python-mode) == 'create'
-python:
-  basic-setup-py: true 
-  output-folder: $(python-sdks-folder)/resourcemover/azure-mgmt-resourcemover
+``` yaml $(python) && $(python-mode) == 'create' && $(track2):
+basic-setup-py: true 
+output-folder: $(python-sdks-folder)/resourcemover/azure-mgmt-resourcemover
 ```
