@@ -34,6 +34,87 @@
     }
   },
   "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DBForPostgreSql/serverGroupsv2": {
+      "get": {
+        "tags": [
+          "ServerGroups"
+        ],
+        "operationId": "ServerGroups_List",
+        "x-ms-examples": {
+          "List all the server groups": {
+            "$ref": "./examples/ServerGroupList.json"
+          }
+        },
+        "description": "List all the server groups in a given subscription.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ServerGroupList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBForPostgreSql/serverGroupsv2": {
+      "get": {
+        "tags": [
+          "ServerGroups"
+        ],
+        "operationId": "ServerGroups_ListByResourceGroup",
+        "x-ms-examples": {
+          "List the server groups by resource group": {
+            "$ref": "./examples/ServerGroupListByResourceGroup.json"
+          }
+        },
+        "description": "List all the server groups in a given resource group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ServerGroupList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBForPostgreSql/serverGroupsv2/{serverGroupName}": {
       "put": {
         "description": "Creates a new server group with servers.",
@@ -1419,6 +1500,23 @@
           "description": "Properties of the server group create."
         }
       }
+    },
+    "ServerGroupList": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ServerGroup"
+          },
+          "description": "The list of server groups"
+        },
+        "nextLink": {
+          "description": "The link used to get the next page of operations.",
+          "type": "string"
+        }
+      },
+      "description": "A list of server groups."
     },
     "ServerGroupProperties": {
       "discriminator": "createMode",
