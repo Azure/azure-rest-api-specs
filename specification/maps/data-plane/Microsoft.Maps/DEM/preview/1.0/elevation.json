@@ -134,7 +134,7 @@
     "/elevation/point/{format}": {
       "get": {
         "summary": "Get elevation data on one or more points.",
-        "description": "**Applies to**: S1 pricing tier.\nThe Get Data for Points API provides elevation data for one or more points.  A point is defined in lat/long coordinate format. Due to the URL character  length limit of 2048, it's not possible to pass more than 100 coordinates  as a pipeline delimited string in a URL GET request. If you intend to pass  more than 100 coordinates as a pipeline delimited string, use the [POST Data\n For Points](https://docs.microsoft.com/en-us/rest/api/maps/elevation/postdataforpoints).",
+        "description": "**Applies to**: S1 pricing tier.\nThe Get Data for Points API provides elevation data for one or more points.  A point is defined in lat,long coordinate format. Due to the URL character  length limit of 2048, it's not possible to pass more than 100 coordinates  as a pipeline delimited string in a URL GET request. If you intend to pass  more than 100 coordinates as a pipeline delimited string, use the [POST Data\n For Points](https://docs.microsoft.com/en-us/rest/api/maps/elevation/postdataforpoints).",
         "operationId": "Elevation_GetDataForPoints",
         "x-ms-examples": {
           "GetDataForPoints": {
@@ -162,7 +162,11 @@
             "type": "array",
             "collectionFormat": "pipes",
             "items": {
-              "type": "string"
+              "type": "array",
+              "collectionFormat": "csv",
+              "items": {
+                "type": "string"
+              }
             }
           }
         ],
@@ -284,7 +288,11 @@
             "type": "array",
             "collectionFormat": "pipes",
             "items": {
-              "type": "string"
+              "type": "array",
+              "collectionFormat": "csv",
+              "items": {
+                "type": "string"
+              }
             }
           },
           {
@@ -421,7 +429,7 @@
           {
             "name": "bounds",
             "in": "query",
-            "description": "The string that represents the rectangular area of a bounding box. The value of the bounds parameter  must be an array of length 4, with WGS84 longitude and latitude of the southwest corner followed by  WGS84 longitude and latitude of the northeast corner. The string is presented in the following  format: [SouthwestCorner_Longitude, SouthwestCorner_Latitude, NortheastCorner_Longitude,  NortheastCorner_Latitude].",
+            "description": "The string that represents the rectangular area of a bounding box. The bounds parameter is defined by the 4 bounding box coordinates, with WGS84 longitude and latitude of the southwest corner followed by  WGS84 longitude and latitude of the northeast corner. The string is presented in the following  format: [SouthwestCorner_Longitude, SouthwestCorner_Latitude, NortheastCorner_Longitude,  NortheastCorner_Latitude].",
             "required": true,
             "type": "array",
             "collectionFormat": "csv",
