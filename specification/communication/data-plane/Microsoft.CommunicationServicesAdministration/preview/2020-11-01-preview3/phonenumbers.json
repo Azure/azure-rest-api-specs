@@ -1,8 +1,8 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "Phone Number Administration Service",
-    "description": "LROs: Search, Purchase, Release, Change Capabilities",
+    "title": "PhoneNumberAdministrationClient",
+    "description": "The phone number administration client uses the Communication Services to acquire and manage phone numbers.",
     "contact": {
       "email": "acsdevexdisc@microsoft.com"
     },
@@ -45,13 +45,13 @@
         }
       }
     },
-    "/availablePhoneNumbers/countries/{countryCode}/areaCodes/tollfree": {
+    "/availablePhoneNumbers/countries/{countryCode}/areaCodes/tollFree": {
       "get": {
         "tags": [
           "List available area codes"
         ],
         "operationId": "PhoneNumberAdministration_GetTollFreeAreaCodes",
-        "summary": "Lists available tollfree area codes for a country.",
+        "summary": "Lists available toll-free area codes for a country.",
         "parameters": [
           {
             "$ref": "#/parameters/CountryCode"
@@ -223,7 +223,8 @@
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
-          }
+          },
+          "x-ms-long-running-operation": true
         },
         "x-ms-examples": {
           "Search for phone numbers": {
@@ -304,7 +305,8 @@
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
-          }
+          },
+          "x-ms-long-running-operation": true
         },
         "x-ms-examples": {
           "Purchase a phone numbers search": {
@@ -465,7 +467,8 @@
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
-          }
+          },
+          "x-ms-long-running-operation": true
         }
       },
       "delete": {
@@ -489,7 +492,8 @@
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
-          }
+          },
+          "x-ms-long-running-operation": true
         }
       }
     }
@@ -991,35 +995,40 @@
       "name": "searchId",
       "description": "The search Id.",
       "required": true,
-      "type": "string"
+      "type": "string",
+      "x-ms-parameter-location": "method"
     },
     "PhoneNumberId": {
       "in": "path",
       "name": "phoneNumber",
       "description": "The phone number id, this is the phone number in E.164 format without the leading +.",
       "required": true,
-      "type": "string"
+      "type": "string",
+      "x-ms-parameter-location": "method"
     },
     "OperationId": {
       "in": "path",
       "name": "operationId",
       "description": "The operation Id.",
       "required": true,
-      "type": "string"
+      "type": "string",
+      "x-ms-parameter-location": "method"
     },
     "CountryCode": {
       "in": "path",
       "name": "countryCode",
       "description": "The ISO 3166-2 country code",
       "required": true,
-      "type": "string"
+      "type": "string",
+      "x-ms-parameter-location": "method"
     },
     "Locale": {
       "in": "query",
       "name": "locale",
       "description": "Language locale for localizing location names.",
       "type": "string",
-      "default": "en-US"
+      "default": "en-US",
+      "x-ms-parameter-location": "method"
     },
     "Endpoint": {
       "in": "path",
@@ -1033,13 +1042,13 @@
   },
   "securityDefinitions": {
     "azure_auth": {
-      "type": "oauth2",
-      "flow": "implicit",
-      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
-      "scopes": {
-        "person_impersonation": "impersonate your person account"
-      },
-      "description": "Azure Active Directory OAuth2 Flow"
+        "type": "oauth2",
+        "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+        "flow": "implicit",
+        "description": "Azure Active Directory OAuth2 Flow",
+        "scopes": {
+            "user_impersonation": "impersonate your user account"
+        }
     }
   },
   "x-ms-parameterized-host": {
