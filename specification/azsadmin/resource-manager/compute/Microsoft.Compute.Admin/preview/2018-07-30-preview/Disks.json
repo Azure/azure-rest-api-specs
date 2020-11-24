@@ -96,6 +96,9 @@
             "$ref": "Disks.json#/parameters/DiskIdParameter"
           },
           {
+            "$ref": "Disks.json#/parameters/DiskSizeDetailParameter"
+          },
+          {
             "$ref": "Disks.json#/parameters/ApiVersionParameter"
           }
         ],
@@ -157,6 +160,22 @@
         "diskSku": {
           "description": "the disk sku.",
           "$ref": "Disks.json#/definitions/AccountType",
+          "readOnly": true
+        },
+        "creationSourceUri": {
+          "description": "The disk creation source uri.",
+          "type": "string",
+          "readOnly": true
+        },
+        "creationOption": {
+          "description": "The disk creation option.",
+          "$ref": "Disks.json#/definitions/DiskCreationOption",
+          "readOnly": true
+        },
+        "exclusiveAllocatedSize": {
+          "description": "The exclusive allocated size for the disk.",
+          "type": "integer",
+          "format": "int64",
           "readOnly": true
         }
       }
@@ -245,6 +264,25 @@
         "name": "AccountType",
         "modelAsString": true
       }
+    },
+    "DiskCreationOption": {
+      "description": "Disk creation option.",
+      "type": "string",
+      "enum": [
+        "Empty",
+        "FromImage",
+        "Import",
+        "Copy",
+        "Restore",
+        "FromPreprovisioned",
+        "Undelete",
+        "Upload",
+        "RecoverFromBlob"
+      ],
+      "x-ms-enum": {
+        "name": "DiskCreationOption",
+        "modelAsString": true
+      }
     }
   },
   "parameters": {
@@ -321,6 +359,15 @@
       "in": "path",
       "required": true,
       "x-ms-parameter-location": "method"
+    },
+    "DiskSizeDetailParameter": {
+      "description": "Switch for whether summary or detailed disk size information is returned.",
+      "name": "showSizeDetail",
+      "in": "query",
+      "required": false,
+      "type": "boolean",
+      "x-ms-parameter-location": "method",
+      "default": false
     }
   },
   "securityDefinitions": {
