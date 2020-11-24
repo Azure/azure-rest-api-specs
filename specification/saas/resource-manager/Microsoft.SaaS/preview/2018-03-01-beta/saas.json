@@ -53,7 +53,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/OperationListResult"
+              "$ref": "#/definitions/SaasAppOperationsResponseWithContinuation"
             }
           },
           "default": {
@@ -368,46 +368,64 @@
         }
       }
     },
-    "OperationListResult": {
-      "description": "Operation List Result Response",
+    "SaasAppOperationsResponseWithContinuation": {
+      "description": "saas app operation response with continuation.",
+      "type": "object",
       "properties": {
+        "nextLink": {
+          "description": "the next link to query to get the remaining results.",
+          "type": "string"
+        },
         "value": {
-          "description": "List of SaaS operations supported by the SaaS resource provider.",
+          "description": "the value of response.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/Operation"
+            "$ref": "#/definitions/SaasAppOperation"
           }
         }
       }
     },
-    "Operation": {
-      "description": "SaaS REST API operation definition.",
+    "SaasAppOperation": {
+      "description": "saas app operations",
       "type": "object",
       "properties": {
         "name": {
-          "description": "Operation name",
+          "description": "the operation name",
           "type": "string"
         },
         "display": {
-          "description": "Display metadata associated with the operation.",
-          "properties": {
-            "provider": {
-              "description": "Service provider: Microsoft SaaS.",
-              "type": "string"
-            },
-            "resource": {
-              "description": "Resource on which the operation is performed.",
-              "type": "string"
-            },
-            "operation": {
-              "description": "Type of the operation: get, read, delete, etc.",
-              "type": "string"
-            },
-            "description": {
-              "description": "Description of the operation.",
-              "type": "string"
-            }
-          }
+          "description": "the operation display",
+          "$ref": "#/definitions/SaasAppOperationDisplay"
+        },
+        "origin": {
+          "description": "the operation origin",
+          "type": "string"
+        },
+        "isDataAction": {
+          "description": "whether the operation is a data action or not.",
+          "type": "boolean"
+        }
+      }
+    },
+    "SaasAppOperationDisplay": {
+      "description": "Saas app operation display",
+      "type": "object",
+      "properties": {
+        "provider": {
+          "description": "Name of the provider for display purposes",
+          "type": "string"
+        },
+        "resource": {
+          "description": "Name of the resource type for display purposes",
+          "type": "string"
+        },
+        "operation": {
+          "description": "Name of the operation for display purposes",
+          "type": "string"
+        },
+        "description": {
+          "description": "Description of the operation for display purposes",
+          "type": "string"
         }
       }
     },
@@ -512,7 +530,8 @@
         },
         "created": {
           "type": "string",
-          "description": "The created date of this resource."
+          "description": "The created date of this resource.",
+          "readOnly": true
         },
         "lastModified": {
           "type": "string",
