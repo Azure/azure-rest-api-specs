@@ -1,0 +1,37 @@
+{
+  "parameters": {
+    "api-version": "2020-07-20-preview1",
+    "endpoint": "https://resourcename.communications.azure.net/",
+    "phoneNumber": "+18005551234",
+    "update": {
+      "capabilities": {
+        "sms": "inbound",
+        "calling": "inbound+outbound"
+      },
+      "callbackUrl": "https://contoso.com/webhooks/call",
+      "applicationId": "4843c4b1-4f54-4f9c-9b9e-46d13dcfc365"
+    }
+  },
+  "responses": {
+    "202": {
+      "headers": {
+        "operation-location": "https://resourcename.communications.azure.net/phoneNumbers/operations/9c3d1c98-d3ef-4316-b3b3-659e0d4d6c99"
+      },
+      "body": {
+        "id": "+18005551234",
+        "phoneNumber": "+18005551234",
+        "numberType": "tollFree",
+        "assignmentType": "application",
+        "capabilities": {
+          "sms": "inbound",
+          "calling": "inbound"
+        },
+        "callbackUrl": "https://contoso.com/webhooks/call",
+        "monthlyRate": {
+          "value": 0,
+          "currency": "USD"
+        }
+      }
+    }
+  }
+}

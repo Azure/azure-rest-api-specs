@@ -223,9 +223,9 @@
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
-          },
-          "x-ms-long-running-operation": true
+          }
         },
+        "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "Search for phone numbers": {
             "$ref": "./examples/PostSearch.json"
@@ -305,9 +305,9 @@
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
-          },
-          "x-ms-long-running-operation": true
+          }
         },
+        "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "Purchase a phone numbers search": {
             "$ref": "./examples/PostPurchase.json"
@@ -342,6 +342,11 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "Get long-runnning operation": {
+            "$ref": "./examples/GetOperation.json"
+          }
         }
       },
       "delete": {
@@ -366,6 +371,11 @@
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Cancel long-runnning operation": {
+            "$ref": "./examples/DeleteOperation.json"
           }
         }
       }
@@ -394,6 +404,11 @@
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get acquired phone numbers": {
+            "$ref": "./examples/GetPhoneNumbers.json"
           }
         }
       }
@@ -425,6 +440,11 @@
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get acquired phone number": {
+            "$ref": "./examples/GetPhoneNumber.json"
           }
         }
       },
@@ -467,8 +487,13 @@
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
-          },
-          "x-ms-long-running-operation": true
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Update acquired phone number": {
+            "$ref": "./examples/PatchPhoneNumber.json"
+          }
         }
       },
       "delete": {
@@ -492,8 +517,13 @@
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
-          },
-          "x-ms-long-running-operation": true
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Release acquired phone number": {
+            "$ref": "./examples/DeletePhoneNumber.json"
+          }
         }
       }
     }
@@ -637,6 +667,9 @@
     "AcquiredPhoneNumbers": {
       "description": "A list of acquired phone numbers.",
       "type": "object",
+      "required": [
+        "phoneNumbers"
+      ],
       "properties": {
         "phoneNumbers": {
           "description": "Represents a list of acquired phone numbers.",
@@ -713,7 +746,8 @@
         "quantity": {
           "format": "int32",
           "description": "The quantity of phone numbers in the search.",
-          "type": "integer"
+          "type": "integer",
+          "default": 1
         }
       }
     },
@@ -1042,13 +1076,13 @@
   },
   "securityDefinitions": {
     "azure_auth": {
-        "type": "oauth2",
-        "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
-        "flow": "implicit",
-        "description": "Azure Active Directory OAuth2 Flow",
-        "scopes": {
-            "user_impersonation": "impersonate your user account"
-        }
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
     }
   },
   "x-ms-parameterized-host": {
