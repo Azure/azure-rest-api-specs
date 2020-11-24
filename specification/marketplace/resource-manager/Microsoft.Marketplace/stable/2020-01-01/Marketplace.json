@@ -744,26 +744,8 @@
         "iconFileUris": {
           "description": "Icon File Uris",
           "type": "object",
-          "properties": {
-            "iconKind": {
-              "description": "Icon size",
-              "type": "string",
-              "enum": [
-                "Small",
-                "Medium",
-                "Large",
-                "Wide",
-                "Hero"
-              ],
-              "x-ms-enum": {
-                "name": "IconKind",
-                "modelAsString": true
-              }
-            },
-            "uri": {
-              "description": "Icon uri",
-              "type": "string"
-            }
+          "additionalProperties": {
+            "type": "string"
           }
         },
         "plans": {
