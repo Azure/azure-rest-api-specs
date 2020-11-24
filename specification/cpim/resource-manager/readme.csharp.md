@@ -16,7 +16,7 @@ csharp:
 ```
 
 ``` yaml $(csharp) && !$(multiapi) && !$(csharp-profile)
-namespace: Microsoft.Azure.Management.Compute
+namespace: Microsoft.AzureActiveDirectory
 output-folder: $(csharp-sdks-folder)/cpim/management/Microsoft.AzureActiveDirectory/GeneratedProtocol
 ```
 
