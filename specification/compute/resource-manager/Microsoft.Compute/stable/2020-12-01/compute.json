@@ -3038,22 +3038,22 @@
           "Create a vm with Host Encryption using encryptionAtHost property.": {
             "$ref": "./examples/CreateAVmWithEncryptionAtHost.json"
           },
-          "Create a windows vm with a patch setting patchMode of AutomaticByOS.": {
+          "Create a Windows vm with a patch setting patchMode of AutomaticByOS.": {
             "$ref": "./examples/CreateAWindowsVmWithPatchSettingModeOfAutomaticByOS.json"
           },
-          "Create a windows vm with a patch setting patchMode of AutomaticByPlatform.": {
+          "Create a Windows vm with a patch setting patchMode of AutomaticByPlatform.": {
             "$ref": "./examples/CreateAWindowsVmWithPatchSettingModeOfAutomaticByPlatform.json"
           },
-          "Create a windows vm with a patch setting patchMode of Manual.": {
+          "Create a Windows vm with a patch setting patchMode of Manual.": {
             "$ref": "./examples/CreateAWindowsVmWithPatchSettingModeOfManual.json"
           },
-          "Create a windows vm with a patch setting patchMode of AutomaticByPlatform and enableHotpatching set to true.": {
+          "Create a Windows vm with a patch setting patchMode of AutomaticByPlatform and enableHotpatching set to true.": {
             "$ref": "./examples/CreateAWindowsVmWithPatchSettingModeOfAutomaticByPlatformAndEnableHotPatchingTrue.json"
           },
-          "Create a linux vm with a patch setting patchMode of AutomaticByPlatform.": {
+          "Create a Linux vm with a patch setting patchMode of AutomaticByPlatform.": {
             "$ref": "./examples/CreateALinuxVmWithPatchSettingModeOfAutomaticByPlatform.json"
           },
-          "Create a linux vm with a patch setting patchMode of ImageDefault.": {
+          "Create a Linux vm with a patch setting patchMode of ImageDefault.": {
             "$ref": "./examples/CreateALinuxVmWithPatchSettingModeOfImageDefault.json"
           },
           "Create a vm with an extensions time budget.": {
@@ -7802,7 +7802,7 @@
         "assessmentState": {
           "type": "string",
           "readOnly": true,
-          "description": "Describes the assessed installation state of a given patch.",
+          "description": "Describes the availability of a given patch.",
           "enum": [
             "Unknown",
             "Available"
@@ -7820,7 +7820,7 @@
         "status": {
           "type": "string",
           "readOnly": true,
-          "description": "The overall success or failure status of the operation. It remains \"InProgress\" until the operation completes. At that point it will become \"Failed\", \"Succeeded\", \"CompletedWithWarnings\", \"Unknown.\"",
+          "description": "The overall success or failure status of the operation. It remains \"InProgress\" until the operation completes. At that point it will become \"Failed\", \"Succeeded\", \"CompletedWithWarnings\" or \"Unknown.\"",
           "enum": [
             "Unknown",
             "InProgress",
@@ -8847,7 +8847,7 @@
         },
         "patchSettings": {
           "$ref": "#/definitions/WindowsPatchSettings",
-          "description": "Specifies settings related to in-guest patching (KBs)."
+          "description": "Specifies settings related to VM Guest Patching (KBs)."
         },
         "winRM": {
           "$ref": "#/definitions/WinRMConfiguration",
@@ -12070,7 +12070,7 @@
       "properties": {
         "patchMode": {
           "type": "string",
-          "description": "Specifies the mode of in-guest patching to IaaS virtual machine.<br /><br /> Possible values are:<br /><br /> **Manual** - You  control the application of patches to a virtual machine. You do this by applying patches manually inside the VM. In this mode, automatic updates are disabled; the property WindowsConfiguration.enableAutomaticUpdates must be false<br /><br /> **AutomaticByOS** - The virtual machine will automatically be updated by the OS. The property WindowsConfiguration.enableAutomaticUpdates must be true. <br /><br /> ** AutomaticByPlatform** - the virtual machine will automatically updated by the platform. The properties provisionVMAgent and WindowsConfiguration.enableAutomaticUpdates must be true ",
+          "description": "Specifies the mode of VM Guest Patching to IaaS virtual machine.<br /><br /> Possible values are:<br /><br /> **Manual** - You  control the application of patches to a virtual machine. You do this by applying patches manually inside the VM. In this mode, automatic updates are disabled; the property WindowsConfiguration.enableAutomaticUpdates must be false<br /><br /> **AutomaticByOS** - The virtual machine will automatically be updated by the OS. The property WindowsConfiguration.enableAutomaticUpdates must be true. <br /><br /> ** AutomaticByPlatform** - the virtual machine will automatically updated by the platform. The properties provisionVMAgent and WindowsConfiguration.enableAutomaticUpdates must be true ",
           "enum": [
             "Manual",
             "AutomaticByOS",
@@ -12086,13 +12086,13 @@
           "description": "Enables customers to patch their Azure VMs without requiring a reboot. For enableHotpatching, the 'provisionVMAgent' must be set to true and 'patchMode' must be set to 'AutomaticByPlatform'."
         }
       },
-      "description": "Specifies settings related to in-guest patching (KBs)."
+      "description": "Specifies settings related to VM Guest Patching (KBs)."
     },
     "LinuxPatchSettings": {
       "properties": {
         "patchMode": {
           "type": "string",
-          "description": "Specifies the mode of in-guest patching to IaaS virtual machine.<br /><br /> Possible values are:<br /><br /> **ImageDefault** - This will be whatever the image is configured by default with. <br /><br /> **AutomaticByPlatform** - the virtual machine will automatically updated by the platform. The property provisionVMAgent must be true ",
+          "description": "Specifies the mode of VM Guest Patching to IaaS virtual machine.<br /><br /> Possible values are:<br /><br /> **ImageDefault** - The virtual machines's default patching configuration is used. <br /><br /> **AutomaticByPlatform** - The virtual machine will be automatically updated by the platform. The property provisionVMAgent must be true",
           "enum": [
             "ImageDefault",
             "AutomaticByPlatform"
@@ -12117,7 +12117,7 @@
         },
         "hotpatchStatus": {
           "$ref": "#/definitions/HotpatchStatus",
-          "description": "The Hot Patch Status for the virtual machine."
+          "description": "The Hotpatch Status for the virtual machine."
         },
         "configurationStatuses": {
           "description": "The enablement status of the specified patchMode",
@@ -12266,7 +12266,7 @@
           "description": "The errors that were encountered during execution of the operation. The details array contains the list of them."
         }
       },
-      "description": "The Hot Patch Status for the virtual machine."
+      "description": "The Hotpatch Status for the virtual machine."
     },
     "HotpatchStatus": {
       "properties": {
