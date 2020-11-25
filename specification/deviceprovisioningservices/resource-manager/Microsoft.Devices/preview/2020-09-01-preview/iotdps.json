@@ -1921,23 +1921,23 @@
       ]
     },
     "EncryptionPropertiesDescription": {
-      "description": "The encryption properties for the IoT DPS instance.",
+      "description": "The customer-managed encryption key (CMK) properties for the IoT DPS instance.",
       "type": "object",
       "properties": {
         "keySource": {
-          "description": "The source of the key.",
+          "description": "The source of the encryption key. Typically, Microsoft.KeyVault",
           "type": "string"
         },
         "keyVaultProperties": {
-          "description": "The properties of the KeyVault key.",
+          "description": "The properties of the encryption key configured in KeyVault.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/KeyVaultKeyProperties"
           }
         },
         "identity": {
-          "description": "The identity used to access the KeyVault key.",
-          "$ref": "#/definitions/KEKIdentity"
+          "description": "The identity used to access the encryption key in KeyVault.",
+          "$ref": "#/definitions/EncryptionKeyIdentity"
         }
       }
     },
@@ -1951,8 +1951,8 @@
         }
       }
     },
-    "KEKIdentity": {
-      "description": "The properties of the KeyVault identity.",
+    "EncryptionKeyIdentity": {
+      "description": "The properties of the identity used to access the key encryption key in KeyVault.",
       "type": "object",
       "properties": {
         "userAssignedIdentity": {
