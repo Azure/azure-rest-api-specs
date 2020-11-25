@@ -50,45 +50,18 @@ cli:
         alias:
           - name
           - n
-    #   - where:
-    #       group: DataCollectionRules
-    #       op: Create
-    #     hide: True
-    #   - where:
-    #       group: DataCollectionRules
-    #       op: Update
-    #     hide: True
-
+      - where:
+          group: DataCollectionRuleAssociations
+          op: Create
+        hidden: True
       - where:
           group: DataCollectionRules
-          param: windowsEventLogs
-        set:
-         alias: windows_event_log
+          op: Create
+        hidden: True
       - where:
           group: DataCollectionRules
-          param: performanceCounters
-        set:
-         alias: performance_counter
-      - where:
-          group: DataCollectionRules
-          param: syslog
-        set:
-         alias: syslog
-      - where:
-          group: DataCollectionRules
-          param: extension
-        set:
-         alias: extension
-      - where:
-          group: DataCollectionRules
-          param: destinations
-        set:
-          alias: destination
-      - where:
-          group: DataCollectionRules
-          param: streams
-        set:
-          alias: stream
+          op: Update
+        hidden: True
 
 # -------- data-collection rule association --------
       - where:
@@ -106,11 +79,11 @@ cli:
         alias:
           - name
           - n
-      - where:
-          group: DataCollectionRuleAssociations
-          op: Create
-          param: dataCollectionRuleId
-        name: rule_id
+    #   - where:
+    #       group: DataCollectionRuleAssociations
+    #       op: Create
+    #       param: dataCollectionRuleId
+    #     name: rule_id
 
 
 ```
