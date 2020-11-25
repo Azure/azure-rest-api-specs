@@ -42,7 +42,75 @@ directive:
 
 cli:
     cli-directive:
+# -------- data-collection rule --------
       - where:
-        
- 
+          group: DataCollectionRules
+          param: dataCollectionRuleName
+        name: name
+        alias:
+          - name
+          - n
+    #   - where:
+    #       group: DataCollectionRules
+    #       op: Create
+    #     hide: True
+    #   - where:
+    #       group: DataCollectionRules
+    #       op: Update
+    #     hide: True
+
+      - where:
+          group: DataCollectionRules
+          param: windowsEventLogs
+        set:
+         alias: windows_event_log
+      - where:
+          group: DataCollectionRules
+          param: performanceCounters
+        set:
+         alias: performance_counter
+      - where:
+          group: DataCollectionRules
+          param: syslog
+        set:
+         alias: syslog
+      - where:
+          group: DataCollectionRules
+          param: extension
+        set:
+         alias: extension
+      - where:
+          group: DataCollectionRules
+          param: destinations
+        set:
+          alias: destination
+      - where:
+          group: DataCollectionRules
+          param: streams
+        set:
+          alias: stream
+
+# -------- data-collection rule association --------
+      - where:
+          group: DataCollectionRuleAssociations
+          param: resourceUri
+        name: resource
+      - where:
+          group: DataCollectionRuleAssociations
+          param: dataCollectionRuleName
+        name: rule_name
+      - where:
+          group: DataCollectionRuleAssociations
+          param: associationName
+        name: name
+        alias:
+          - name
+          - n
+      - where:
+          group: DataCollectionRuleAssociations
+          op: Create
+          param: dataCollectionRuleId
+        name: rule_id
+
+
 ```
