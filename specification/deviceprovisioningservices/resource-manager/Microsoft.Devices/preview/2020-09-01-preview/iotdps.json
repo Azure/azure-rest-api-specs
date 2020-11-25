@@ -1934,6 +1934,10 @@
           "items": {
             "$ref": "#/definitions/KeyVaultKeyProperties"
           }
+        },
+        "identity": {
+          "description": "The identity used to access the KeyVault key.",
+          "$ref": "#/definitions/KEKIdentity"
         }
       }
     },
@@ -1944,6 +1948,16 @@
         "keyIdentifier": {
           "type": "string",
           "description": "The identifier of the key."
+        }
+      }
+    },
+    "KEKIdentity": {
+      "description": "The properties of the KeyVault identity.",
+      "type": "object",
+      "properties": {
+        "userAssignedIdentity": {
+          "type": "string",
+          "description": "The user assigned identity."
         }
       }
     },
