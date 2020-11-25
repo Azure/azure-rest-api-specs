@@ -1,0 +1,1436 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2019-11-01",
+    "title": "ConsumptionManagementClient",
+    "description": "Consumption management client provides access to consumption resources for Azure Enterprise Subscriptions."
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/{scope}/providers/Microsoft.Consumption/usageDetails": {
+      "get": {
+        "tags": [
+          "UsageDetails"
+        ],
+        "operationId": "UsageDetails_List",
+        "description": "Lists the usage details for the defined scope. Usage details are available via this API only for May 1, 2014 or later.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
+        },
+        "x-ms-examples": {
+          "UsageDetailsList-Legacy": {
+            "$ref": "./examples/UsageDetailsList.json"
+          },
+          "UsageDetailsListFilterByTag-Legacy": {
+            "$ref": "./examples/UsageDetailsListFilterByTag.json"
+          },
+          "UsageDetailsListForBillingPeriod-Legacy": {
+            "$ref": "./examples/UsageDetailsListForBillingPeriod.json"
+          },
+          "UsageDetailsExpand-Legacy": {
+            "$ref": "./examples/UsageDetailsExpand.json"
+          },
+          "UsageDetailsListByMetricActualCost-Legacy": {
+            "$ref": "./examples/UsageDetailsListByMetricActualCost.json"
+          },
+          "UsageDetailsListByMetricAmortizedCost-Legacy": {
+            "$ref": "./examples/UsageDetailsListByMetricAmortizedCost.json"
+          },
+          "UsageDetailsListByMetricUsage-Legacy": {
+            "$ref": "./examples/UsageDetailsListByMetricUsage.json"
+          },
+          "BillingAccountUsageDetailsList-Legacy": {
+            "$ref": "./examples/UsageDetailsListByBillingAccount.json"
+          },
+          "BillingAccountUsageDetailsListForBillingPeriod-Legacy": {
+            "$ref": "./examples/UsageDetailsListForBillingPeriodByBillingAccount.json"
+          },
+          "DepartmentUsageDetailsList-Legacy": {
+            "$ref": "./examples/UsageDetailsListByDepartment.json"
+          },
+          "DepartmentUsageDetailsListForBillingPeriod-Legacy": {
+            "$ref": "./examples/UsageDetailsListForBillingPeriodByDepartment.json"
+          },
+          "EnrollmentAccountUsageDetailsList-Legacy": {
+            "$ref": "./examples/UsageDetailsListByEnrollmentAccount.json"
+          },
+          "EnrollmentAccountUsageDetailsListForBillingPeriod-Legacy": {
+            "$ref": "./examples/UsageDetailsListForBillingPeriodByEnrollmentAccount.json"
+          },
+          "ManagementGroupUsageDetailsList-Legacy": {
+            "$ref": "./examples/UsageDetailsListByManagementGroup.json"
+          },
+          "ManagementGroupUsageDetailsListForBillingPeriod-Legacy": {
+            "$ref": "./examples/UsageDetailsListForBillingPeriodByManagementGroup.json"
+          },
+          "BillingAccountUsageDetailsList-Modern": {
+            "$ref": "./examples/UsageDetailsListByMCABillingAccount.json"
+          },
+          "BillingProfileUsageDetailsList-Modern": {
+            "$ref": "./examples/UsageDetailsListByMCABillingProfile.json"
+          },
+          "InvoiceSectionUsageDetailsList-Modern": {
+            "$ref": "./examples/UsageDetailsListByMCAInvoiceSection.json"
+          },
+          "CustomerUsageDetailsList-Modern": {
+            "$ref": "./examples/UsageDetailsListByMCACustomer.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/scopeUsageDetailsParameter"
+          },
+          {
+            "name": "$expand",
+            "description": "May be used to expand the properties/additionalInfo or properties/meterDetails within a list of usage details. By default, these fields are not included when listing usage details.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$filter",
+            "description": "May be used to filter usageDetails by properties/resourceGroup, properties/resourceName, properties/resourceId, properties/chargeType, properties/reservationId, properties/publisherType or tags. The filter supports 'eq', 'lt', 'gt', 'le', 'ge', and 'and'. It does not currently support 'ne', 'or', or 'not'. Tag filter is a key value pair string where key and value is separated by a colon (:). PublisherType Filter accepts two values azure and marketplace and it is currently supported for Web Direct Offer Type",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$skiptoken",
+            "description": "Skiptoken is only used if a previous operation returned a partial result. If a previous response contains a nextLink element, the value of the nextLink element will include a skiptoken parameter that specifies a starting point to use for subsequent calls.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$top",
+            "description": "May be used to limit the number of results to the most recent N usageDetails.",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 1000
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/metricParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/UsageDetailsListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.Consumption/operations": {
+      "get": {
+        "tags": [
+          "Operations"
+        ],
+        "operationId": "Operations_List",
+        "description": "Lists all of the available consumption REST API operations.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "MeterDetails": {
+      "description": "The properties of the meter detail.",
+      "properties": {
+        "meterName": {
+          "description": "The name of the meter, within the given meter category",
+          "type": "string",
+          "readOnly": true
+        },
+        "meterCategory": {
+          "description": "The category of the meter, for example, 'Cloud services', 'Networking', etc..",
+          "type": "string",
+          "readOnly": true
+        },
+        "meterSubCategory": {
+          "description": "The subcategory of the meter, for example, 'A6 Cloud services', 'ExpressRoute (IXP)', etc..",
+          "type": "string",
+          "readOnly": true
+        },
+        "unit": {
+          "description": "The unit in which the meter consumption is charged, for example, 'Hours', 'GB', etc.",
+          "type": "string",
+          "readOnly": true
+        },
+        "meterLocation": {
+          "description": "The location in which the Azure service is available.",
+          "type": "string",
+          "readOnly": true
+        },
+        "totalIncludedQuantity": {
+          "description": "The total included quantity associated with the offer.",
+          "type": "number",
+          "format": "decimal",
+          "readOnly": true
+        },
+        "pretaxStandardRate": {
+          "description": "The pretax listing price.",
+          "type": "number",
+          "format": "decimal",
+          "readOnly": true
+        },
+        "serviceName": {
+          "description": "The name of the service.",
+          "type": "string",
+          "readOnly": true
+        },
+        "serviceTier": {
+          "description": "The service tier.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "UsageDetail": {
+      "type": "object",
+      "discriminator": "kind",
+      "description": "An usage detail resource.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "kind": {
+          "type": "string",
+          "description": "Specifies the kind of usage details.",
+          "enum": [
+            "legacy",
+            "modern"
+          ],
+          "x-ms-enum": {
+            "name": "UsageDetailsKind",
+            "modelAsString": true
+          }
+        }
+      },
+      "required": [
+        "kind"
+      ]
+    },
+    "UsageDetailsListResult": {
+      "description": "Result of listing usage details. It contains a list of available usage details in reverse chronological order by billing period.",
+      "properties": {
+        "value": {
+          "description": "The list of usage details.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/UsageDetail"
+          }
+        },
+        "nextLink": {
+          "description": "The link (url) to the next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "LegacyUsageDetail": {
+      "description": "Legacy usage detail.",
+      "type": "object",
+      "x-ms-discriminator-value": "legacy",
+      "properties": {
+        "properties": {
+          "description": "Properties for legacy usage details",
+          "$ref": "#/definitions/LegacyUsageDetailProperties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/UsageDetail"
+        }
+      ],
+      "required": [
+        "properties"
+      ]
+    },
+    "LegacyUsageDetailProperties": {
+      "description": "The properties of the legacy usage detail.",
+      "properties": {
+        "billingAccountId": {
+          "description": "Billing Account identifier.",
+          "type": "string",
+          "readOnly": true
+        },
+        "billingAccountName": {
+          "description": "Billing Account Name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "billingPeriodStartDate": {
+          "description": "The billing period start date.",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "billingPeriodEndDate": {
+          "description": "The billing period end date.",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "billingProfileId": {
+          "description": "Billing Profile identifier.",
+          "type": "string",
+          "readOnly": true
+        },
+        "billingProfileName": {
+          "description": "Billing Profile Name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "accountOwnerId": {
+          "description": "Account Owner Id.",
+          "type": "string",
+          "readOnly": true
+        },
+        "accountName": {
+          "description": "Account Name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "subscriptionId": {
+          "description": "Subscription guid.",
+          "type": "string",
+          "readOnly": true
+        },
+        "subscriptionName": {
+          "description": "Subscription name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "date": {
+          "description": "Date for the usage record.",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "product": {
+          "description": "Product name for the consumed service or purchase. Not available for Marketplace.",
+          "type": "string",
+          "readOnly": true
+        },
+        "partNumber": {
+          "description": "Part Number of the service used. Can be used to join with the price sheet. Not available for marketplace.",
+          "type": "string",
+          "readOnly": true
+        },
+        "meterId": {
+          "description": "The meter id (GUID). Not available for marketplace. For reserved instance this represents the primary meter for which the reservation was purchased. For the actual VM Size for which the reservation is purchased see productOrderName.",
+          "type": "string",
+          "format": "uuid",
+          "readOnly": true
+        },
+        "meterDetails": {
+          "description": "The details about the meter. By default this is not populated, unless it's specified in $expand.",
+          "$ref": "#/definitions/MeterDetailsResponse",
+          "readOnly": true
+        },
+        "quantity": {
+          "description": "The usage quantity.",
+          "type": "number",
+          "format": "decimal",
+          "readOnly": true
+        },
+        "effectivePrice": {
+          "description": "Effective Price that's charged for the usage.",
+          "type": "number",
+          "format": "decimal",
+          "readOnly": true
+        },
+        "cost": {
+          "description": "The amount of cost before tax.",
+          "type": "number",
+          "format": "decimal",
+          "readOnly": true
+        },
+        "unitPrice": {
+          "description": "Unit Price is the price applicable to you. (your EA or other contract price).",
+          "type": "number",
+          "format": "decimal",
+          "readOnly": true
+        },
+        "billingCurrency": {
+          "description": "Billing Currency.",
+          "type": "string",
+          "readOnly": true
+        },
+        "resourceLocation": {
+          "description": "Resource Location.",
+          "type": "string",
+          "readOnly": true
+        },
+        "consumedService": {
+          "description": "Consumed service name. Name of the azure resource provider that emits the usage or was purchased. This value is not provided for marketplace usage.",
+          "type": "string",
+          "readOnly": true
+        },
+        "resourceId": {
+          "description": "Azure resource manager resource identifier.",
+          "type": "string",
+          "readOnly": true
+        },
+        "resourceName": {
+          "description": "Resource Name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "serviceInfo1": {
+          "description": "Service Info 1.",
+          "type": "string",
+          "readOnly": true
+        },
+        "serviceInfo2": {
+          "description": "Service Info 2.",
+          "type": "string",
+          "readOnly": true
+        },
+        "additionalInfo": {
+          "description": "Additional details of this usage item. By default this is not populated, unless it's specified in $expand. Use this field to get usage line item specific details such as the actual VM Size (ServiceType) or the ratio in which the reservation discount is applied.",
+          "type": "string",
+          "readOnly": true
+        },
+        "invoiceSection": {
+          "description": "Invoice Section Name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "costCenter": {
+          "description": "The cost center of this department if it is a department and a cost center is provided.",
+          "type": "string",
+          "readOnly": true
+        },
+        "resourceGroup": {
+          "description": "Resource Group Name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "reservationId": {
+          "description": "ARM resource id of the reservation. Only applies to records relevant to reservations.",
+          "type": "string",
+          "readOnly": true
+        },
+        "reservationName": {
+          "description": "User provided display name of the reservation. Last known name for a particular day is populated in the daily data. Only applies to records relevant to reservations.",
+          "type": "string",
+          "readOnly": true
+        },
+        "productOrderId": {
+          "description": "Product Order Id. For reservations this is the Reservation Order ID.",
+          "type": "string",
+          "readOnly": true
+        },
+        "productOrderName": {
+          "description": "Product Order Name. For reservations this is the SKU that was purchased.",
+          "type": "string",
+          "readOnly": true
+        },
+        "offerId": {
+          "description": "Offer Id. Ex: MS-AZR-0017P, MS-AZR-0148P.",
+          "type": "string",
+          "readOnly": true
+        },
+        "isAzureCreditEligible": {
+          "description": "Is Azure Credit Eligible.",
+          "type": "boolean",
+          "readOnly": true
+        },
+        "term": {
+          "description": "Term (in months). 1 month for monthly recurring purchase. 12 months for a 1 year reservation. 36 months for a 3 year reservation.",
+          "type": "string",
+          "readOnly": true
+        },
+        "publisherName": {
+          "description": "Publisher Name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "publisherType": {
+          "description": "Publisher Type.",
+          "type": "string",
+          "readOnly": true
+        },
+        "planName": {
+          "description": "Plan Name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "chargeType": {
+          "description": "Indicates a charge represents credits, usage, a Marketplace purchase, a reservation fee, or a refund.",
+          "type": "string",
+          "readOnly": true
+        },
+        "payGPrice": {
+          "description": "Retail price for the resource",
+          "type": "number",
+          "format": "decimal",
+          "readOnly": true
+        },
+        "pricingModel": {
+          "description": "Identifier that indicates how the meter is priced. (Values: On Demand, Reservation, Spot)",
+          "type": "string",
+          "readOnly": true
+        },
+        "frequency": {
+          "description": "Indicates how frequently this charge will occur. OneTime for purchases which only happen once, Monthly for fees which recur every month, and UsageBased for charges based on how much a service is used.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ModernUsageDetail": {
+      "description": "Modern usage detail.",
+      "type": "object",
+      "x-ms-discriminator-value": "modern",
+      "properties": {
+        "properties": {
+          "description": "Properties for modern usage details",
+          "$ref": "#/definitions/ModernUsageDetailProperties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/UsageDetail"
+        }
+      ],
+      "required": [
+        "properties"
+      ]
+    },
+    "ModernUsageDetailProperties": {
+      "description": "The properties of the usage detail.",
+      "properties": {
+        "billingAccountId": {
+          "description": "Billing Account identifier.",
+          "type": "string",
+          "readOnly": true
+        },
+        "billingAccountName": {
+          "description": "Name of the Billing Account.",
+          "type": "string",
+          "readOnly": true
+        },
+        "billingPeriodStartDate": {
+          "description": "Billing Period Start Date as in the invoice.",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "billingPeriodEndDate": {
+          "description": "Billing Period End Date as in the invoice.",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "billingProfileId": {
+          "description": "Identifier for the billing profile that groups costs across invoices in the a singular billing currency across across the customers who have onboarded the Microsoft customer agreement and the customers in CSP who have made entitlement purchases like SaaS, Marketplace, RI, etc.",
+          "type": "string",
+          "readOnly": true
+        },
+        "billingProfileName": {
+          "description": "Name of the billing profile that groups costs across invoices in the a singular billing currency across across the customers who have onboarded the Microsoft customer agreement and the customers in CSP who have made entitlement purchases like SaaS, Marketplace, RI, etc.",
+          "type": "string",
+          "readOnly": true
+        },
+        "subscriptionGuid": {
+          "description": "Unique Microsoft generated identifier for the Azure Subscription.",
+          "type": "string",
+          "readOnly": true
+        },
+        "subscriptionName": {
+          "description": "Name of the Azure Subscription.",
+          "type": "string",
+          "readOnly": true
+        },
+        "date": {
+          "description": "Date for the usage record.",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "product": {
+          "description": "Name of the product that has accrued charges by consumption or purchase as listed in the invoice. Not available for Marketplace.",
+          "type": "string",
+          "readOnly": true
+        },
+        "meterId": {
+          "description": "The meter id (GUID). Not available for marketplace. For reserved instance this represents the primary meter for which the reservation was purchased. For the actual VM Size for which the reservation is purchased see productOrderName.",
+          "type": "string",
+          "format": "uuid",
+          "readOnly": true
+        },
+        "meterName": {
+          "description": "Identifies the name of the meter against which consumption is measured.",
+          "type": "string",
+          "readOnly": true
+        },
+        "meterRegion": {
+          "description": "Identifies the location of the datacenter for certain services that are priced based on datacenter location.",
+          "type": "string",
+          "readOnly": true
+        },
+        "meterCategory": {
+          "description": "Identifies the top-level service for the usage.",
+          "type": "string",
+          "readOnly": true
+        },
+        "meterSubCategory": {
+          "description": "Defines the type or sub-category of Azure service that can affect the rate.",
+          "type": "string",
+          "readOnly": true
+        },
+        "serviceFamily": {
+          "description": "List the service family for the product purchased or charged (Example: Storage ; Compute).",
+          "type": "string",
+          "readOnly": true
+        },
+        "quantity": {
+          "description": "Measure the quantity purchased or consumed.The amount of the meter used during the billing period.",
+          "type": "number",
+          "format": "decimal",
+          "readOnly": true
+        },
+        "unitOfMeasure": {
+          "description": "Identifies the Unit that the service is charged in. For example, GB, hours, 10,000 s.",
+          "type": "string",
+          "readOnly": true
+        },
+        "instanceName": {
+          "description": "Instance Name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "costInUSD": {
+          "description": "Estimated extendedCost or blended cost before tax in USD.",
+          "type": "number",
+          "format": "decimal",
+          "readOnly": true
+        },
+        "unitPrice": {
+          "description": "Unit Price is the price applicable to you. (your EA or other contract price).",
+          "type": "number",
+          "format": "decimal",
+          "readOnly": true
+        },
+        "billingCurrencyCode": {
+          "description": "The currency defining the billed cost.",
+          "type": "string",
+          "readOnly": true
+        },
+        "resourceLocation": {
+          "description": "Name of the resource location.",
+          "type": "string",
+          "readOnly": true
+        },
+        "consumedService": {
+          "description": "Consumed service name. Name of the azure resource provider that emits the usage or was purchased. This value is not provided for marketplace usage.",
+          "type": "string",
+          "readOnly": true
+        },
+        "serviceInfo1": {
+          "description": "Service Info 1.",
+          "type": "string",
+          "readOnly": true
+        },
+        "serviceInfo2": {
+          "description": "Service Info 2.",
+          "type": "string",
+          "readOnly": true
+        },
+        "additionalInfo": {
+          "description": "Additional details of this usage item. Use this field to get usage line item specific details such as the actual VM Size (ServiceType) or the ratio in which the reservation discount is applied.",
+          "type": "string",
+          "readOnly": true
+        },
+        "invoiceSectionId": {
+          "description": "Identifier of the project that is being charged in the invoice. Not applicable for Microsoft Customer Agreements onboarded by partners.",
+          "type": "string",
+          "readOnly": true
+        },
+        "invoiceSectionName": {
+          "description": "Name of the project that is being charged in the invoice. Not applicable for Microsoft Customer Agreements onboarded by partners.",
+          "type": "string",
+          "readOnly": true
+        },
+        "costCenter": {
+          "description": "The cost center of this department if it is a department and a cost center is provided.",
+          "type": "string",
+          "readOnly": true
+        },
+        "resourceGroup": {
+          "description": "Name of the Azure resource group used for cohesive lifecycle management of resources.",
+          "type": "string",
+          "readOnly": true
+        },
+        "reservationId": {
+          "description": "ARM resource id of the reservation. Only applies to records relevant to reservations.",
+          "type": "string",
+          "readOnly": true
+        },
+        "reservationName": {
+          "description": "User provided display name of the reservation. Last known name for a particular day is populated in the daily data. Only applies to records relevant to reservations.",
+          "type": "string",
+          "readOnly": true
+        },
+        "productOrderId": {
+          "description": "The identifier for the asset or Azure plan name that the subscription belongs to. For example: Azure Plan. For reservations this is the Reservation Order ID.",
+          "type": "string",
+          "readOnly": true
+        },
+        "productOrderName": {
+          "description": "Product Order Name. For reservations this is the SKU that was purchased.",
+          "type": "string",
+          "readOnly": true
+        },
+        "isAzureCreditEligible": {
+          "description": "Determines if the cost is eligible to be paid for using Azure credits.",
+          "type": "boolean",
+          "readOnly": true
+        },
+        "term": {
+          "description": "Term (in months). Displays the term for the validity of the offer. For example. In case of reserved instances it displays 12 months for yearly term of reserved instance. For one time purchases or recurring purchases, the terms displays 1 month; This is not applicable for Azure consumption.",
+          "type": "string",
+          "readOnly": true
+        },
+        "publisherName": {
+          "description": "Name of the publisher of the service including Microsoft or Third Party publishers.",
+          "type": "string",
+          "readOnly": true
+        },
+        "publisherType": {
+          "description": "Type of publisher that identifies if the publisher is first party, third party reseller or third party agency.",
+          "type": "string",
+          "readOnly": true
+        },
+        "chargeType": {
+          "description": "Indicates a charge represents credits, usage, a Marketplace purchase, a reservation fee, or a refund.",
+          "type": "string",
+          "readOnly": true
+        },
+        "frequency": {
+          "description": "Indicates how frequently this charge will occur. OneTime for purchases which only happen once, Monthly for fees which recur every month, and UsageBased for charges based on how much a service is used.",
+          "type": "string",
+          "readOnly": true
+        },
+        "costInBillingCurrency": {
+          "description": "ExtendedCost or blended cost before tax in billed currency.",
+          "type": "number",
+          "format": "decimal",
+          "readOnly": true
+        },
+        "costInPricingCurrency": {
+          "description": "ExtendedCost or blended cost before tax in pricing currency to correlate with prices.",
+          "type": "number",
+          "format": "decimal",
+          "readOnly": true
+        },
+        "exchangeRate": {
+          "description": "Exchange rate used in conversion from pricing currency to billing currency.",
+          "type": "string",
+          "readOnly": true
+        },
+        "exchangeRateDate": {
+          "description": "Date on which exchange rate used in conversion from pricing currency to billing currency.",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "invoiceId": {
+          "description": "Invoice ID as on the invoice where the specific transaction appears.",
+          "type": "string",
+          "readOnly": true
+        },
+        "previousInvoiceId": {
+          "description": "Reference to an original invoice there is a refund (negative cost). This is populated only when there is a refund.",
+          "type": "string",
+          "readOnly": true
+        },
+        "pricingCurrencyCode": {
+          "description": "Pricing Billing Currency.",
+          "type": "string",
+          "readOnly": true
+        },
+        "productIdentifier": {
+          "description": "Identifer for the product that has accrued charges by consumption or purchase . This is the concatenated key of productId and SKuId in partner center.",
+          "type": "string",
+          "readOnly": true
+        },
+        "resourceLocationNormalized": {
+          "description": "Resource Location Normalized.",
+          "type": "string",
+          "readOnly": true
+        },
+        "servicePeriodStartDate": {
+          "description": "Start date for the rating period when the service usage was rated for charges. The prices for Azure services are determined for the rating period.",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "servicePeriodEndDate": {
+          "description": "End date for the period when the service usage was rated for charges. The prices for Azure services are determined based on the rating period.",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "customerTenantId": {
+          "description": "Identifier of the customer's AAD tenant.",
+          "type": "string",
+          "readOnly": true
+        },
+        "customerName": {
+          "description": "Name of the customer's AAD tenant.",
+          "type": "string",
+          "readOnly": true
+        },
+        "partnerTenantId": {
+          "description": "Identifier for the partner's AAD tenant.",
+          "type": "string",
+          "readOnly": true
+        },
+        "partnerName": {
+          "description": "Name of the partner' AAD tenant.",
+          "type": "string",
+          "readOnly": true
+        },
+        "resellerMpnId": {
+          "description": "MPNId for the reseller associated with the subscription.",
+          "type": "string",
+          "readOnly": true
+        },
+        "resellerName": {
+          "description": "Reseller Name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "publisherId": {
+          "description": "Publisher Id.",
+          "type": "string",
+          "readOnly": true
+        },
+        "marketPrice": {
+          "description": "Market Price that's charged for the usage.",
+          "type": "number",
+          "format": "decimal",
+          "readOnly": true
+        },
+        "exchangeRatePricingToBilling": {
+          "description": "Exchange Rate from pricing currency to billing currency.",
+          "type": "number",
+          "format": "decimal",
+          "readOnly": true
+        },
+        "paygCostInBillingCurrency": {
+          "description": "The amount of PayG cost before tax in billing currency.",
+          "type": "number",
+          "format": "decimal",
+          "readOnly": true
+        },
+        "paygCostInUSD": {
+          "description": "The amount of PayG cost before tax in US Dollar currency.",
+          "type": "number",
+          "format": "decimal",
+          "readOnly": true
+        },
+        "payGPrice": {
+          "description": "Retail price for the resource",
+          "type": "number",
+          "format": "decimal",
+          "readOnly": true
+        },
+        "pricingModel": {
+          "description": "Identifier that indicates how the meter is priced. (Values: On Demand, Reservation, Spot)",
+          "type": "string",
+          "readOnly": true
+        },
+        "partnerEarnedCreditRate": {
+          "description": "Rate of discount applied if there is a partner earned credit (PEC) based on partner admin link access.",
+          "type": "number",
+          "format": "decimal",
+          "readOnly": true
+        },
+        "partnerEarnedCreditApplied": {
+          "description": "Flag to indicate if partner earned credit has been applied or not.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "MeterDetailsResponse": {
+      "description": "The properties of the meter detail.",
+      "properties": {
+        "meterName": {
+          "description": "The name of the meter, within the given meter category",
+          "type": "string",
+          "readOnly": true
+        },
+        "meterCategory": {
+          "description": "The category of the meter, for example, 'Cloud services', 'Networking', etc..",
+          "type": "string",
+          "readOnly": true
+        },
+        "meterSubCategory": {
+          "description": "The subcategory of the meter, for example, 'A6 Cloud services', 'ExpressRoute (IXP)', etc..",
+          "type": "string",
+          "readOnly": true
+        },
+        "unitOfMeasure": {
+          "description": "The unit in which the meter consumption is charged, for example, 'Hours', 'GB', etc.",
+          "type": "string",
+          "readOnly": true
+        },
+        "serviceFamily": {
+          "description": "The service family.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "Resource": {
+      "description": "The Resource model definition.",
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource Id."
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource name."
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource type."
+        },
+        "tags": {
+          "readOnly": true,
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags."
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "ErrorDetails": {
+      "description": "The details of the error.",
+      "properties": {
+        "code": {
+          "description": "Error code.",
+          "type": "string",
+          "readOnly": true
+        },
+        "message": {
+          "description": "Error message indicating why the operation failed.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ErrorResponse": {
+      "description": "Error response indicates that the service is not able to process the incoming request. The reason is provided in the error message. \n\nSome Error responses: \n\n * 429 TooManyRequests - Request is throttled. Retry after waiting for the time specified in the \"x-ms-ratelimit-microsoft.consumption-retry-after\" header. \n\n * 503 ServiceUnavailable - Service is temporarily unavailable. Retry after waiting for the time specified in the \"Retry-After\" header.",
+      "type": "object",
+      "properties": {
+        "error": {
+          "description": "The details of the error.",
+          "$ref": "#/definitions/ErrorDetails"
+        }
+      }
+    },
+    "Operation": {
+      "description": "A Consumption REST API operation.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Operation name: {provider}/{resource}/{operation}.",
+          "type": "string",
+          "readOnly": true
+        },
+        "display": {
+          "description": "The object that represents the operation.",
+          "properties": {
+            "provider": {
+              "description": "Service provider: Microsoft.Consumption.",
+              "type": "string",
+              "readOnly": true
+            },
+            "resource": {
+              "description": "Resource on which the operation is performed: UsageDetail, etc.",
+              "type": "string",
+              "readOnly": true
+            },
+            "operation": {
+              "description": "Operation type: Read, write, delete, etc.",
+              "type": "string",
+              "readOnly": true
+            }
+          }
+        }
+      }
+    },
+    "OperationListResult": {
+      "description": "Result of listing consumption operations. It contains a list of operations and a URL link to get the next set of results.",
+      "properties": {
+        "value": {
+          "description": "List of consumption operations supported by the Microsoft.Consumption resource provider.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/Operation"
+          }
+        },
+        "nextLink": {
+          "description": "URL to get the next set of operation list results if there are any.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    }
+  },
+  "parameters": {
+    "scopeChargesParameter": {
+      "name": "scope",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The scope associated with charges operations. This includes '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/departments/{departmentId}' for Department scope, and '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/enrollmentAccounts/{enrollmentAccountId}' for EnrollmentAccount scope. For department and enrollment accounts, you can also add billing period to the scope using '/providers/Microsoft.Billing/billingPeriods/{billingPeriodName}'. For e.g. to specify billing period at department scope use '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/departments/{departmentId}/providers/Microsoft.Billing/billingPeriods/{billingPeriodName}'. Also, Modern Commerce Account scopes are '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}' for billingAccount scope, '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}' for billingProfile scope, 'providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}/invoiceSections/{invoiceSectionId}' for invoiceSection scope, and 'providers/Microsoft.Billing/billingAccounts/{billingAccountId}/customers/{customerId}' specific for partners.",
+      "x-ms-parameter-location": "method",
+      "x-ms-skip-url-encoding": true
+    },
+    "scopeUsageDetailsParameter": {
+      "name": "scope",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The scope associated with usage details operations. This includes '/subscriptions/{subscriptionId}/' for subscription scope, '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}' for Billing Account scope, '/providers/Microsoft.Billing/departments/{departmentId}' for Department scope, '/providers/Microsoft.Billing/enrollmentAccounts/{enrollmentAccountId}' for EnrollmentAccount scope and '/providers/Microsoft.Management/managementGroups/{managementGroupId}' for Management Group scope. For subscription, billing account, department, enrollment account and management group, you can also add billing period to the scope using '/providers/Microsoft.Billing/billingPeriods/{billingPeriodName}'. For e.g. to specify billing period at department scope use '/providers/Microsoft.Billing/departments/{departmentId}/providers/Microsoft.Billing/billingPeriods/{billingPeriodName}'. Also, Modern Commerce Account scopes are '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}' for billingAccount scope, '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}' for billingProfile scope, 'providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}/invoiceSections/{invoiceSectionId}' for invoiceSection scope, and 'providers/Microsoft.Billing/billingAccounts/{billingAccountId}/customers/{customerId}' specific for partners.",
+      "x-ms-parameter-location": "method",
+      "x-ms-skip-url-encoding": true
+    },
+    "scopeMarketplaceParameter": {
+      "name": "scope",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The scope associated with marketplace operations. This includes '/subscriptions/{subscriptionId}/' for subscription scope, '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}' for Billing Account scope, '/providers/Microsoft.Billing/departments/{departmentId}' for Department scope, '/providers/Microsoft.Billing/enrollmentAccounts/{enrollmentAccountId}' for EnrollmentAccount scope and '/providers/Microsoft.Management/managementGroups/{managementGroupId}' for Management Group scope. For subscription, billing account, department, enrollment account and ManagementGroup, you can also add billing period to the scope using '/providers/Microsoft.Billing/billingPeriods/{billingPeriodName}'. For e.g. to specify billing period at department scope use '/providers/Microsoft.Billing/departments/{departmentId}/providers/Microsoft.Billing/billingPeriods/{billingPeriodName}'",
+      "x-ms-parameter-location": "method",
+      "x-ms-skip-url-encoding": true
+    },
+    "scopeBudgetParameter": {
+      "name": "scope",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The scope associated with budget operations. This includes '/subscriptions/{subscriptionId}/' for subscription scope, '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}' for resourceGroup scope, '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}' for Billing Account scope, '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/departments/{departmentId}' for Department scope, '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/enrollmentAccounts/{enrollmentAccountId}' for EnrollmentAccount scope, '/providers/Microsoft.Management/managementGroups/{managementGroupId}' for Management Group scope, '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}' for billingProfile scope, 'providers/Microsoft.Billing/billingAccounts/{billingAccountId}/invoiceSections/{invoiceSectionId}' for invoiceSection scope.",
+      "x-ms-parameter-location": "method",
+      "x-ms-skip-url-encoding": true
+    },
+    "scopeTagsParameter": {
+      "name": "scope",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The scope associated with tags operations. This includes '/subscriptions/{subscriptionId}/' for subscription scope, '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}' for resourceGroup scope, '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}' for Billing Account scope, '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/departments/{departmentId}' for Department scope, '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/enrollmentAccounts/{enrollmentAccountId}' for EnrollmentAccount scope and '/providers/Microsoft.Management/managementGroups/{managementGroupId}' for Management Group scope..",
+      "x-ms-parameter-location": "method",
+      "x-ms-skip-url-encoding": true
+    },
+    "scopeReservationsSummariesParameter": {
+      "name": "scope",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The scope associated with reservations summaries operations. This includes '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}' for BillingAccount scope (legacy), and '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}' for BillingProfile scope (modern). ",
+      "x-ms-parameter-location": "method",
+      "x-ms-skip-url-encoding": true
+    },
+    "scopeReservationDetailsParameter": {
+      "name": "scope",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The scope associated with reservations details operations. This includes '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}' for BillingAccount scope (legacy), and '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}' for BillingProfile scope (modern). ",
+      "x-ms-parameter-location": "method",
+      "x-ms-skip-url-encoding": true
+    },
+    "scopeReservationRecommendationsParameter": {
+      "name": "scope",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The scope associated with reservation recommendations operations. This includes '/subscriptions/{subscriptionId}/' for subscription scope, '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}' for resource group scope, '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}' for BillingAccount scope, and '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}' for billingProfile scope",
+      "x-ms-parameter-location": "method",
+      "x-ms-skip-url-encoding": true
+    },
+    "scopeReservationRecommendationDetailsParameter": {
+      "name": "billingScope",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The scope associated with reservation recommendation details operations. This includes '/subscriptions/{subscriptionId}/' for subscription scope, '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}' for resource group scope, /providers/Microsoft.Billing/billingAccounts/{billingAccountId}' for BillingAccount scope, and '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}' for billingProfile scope",
+      "x-ms-parameter-location": "method",
+      "x-ms-skip-url-encoding": true
+    },
+    "scopeReservationTransactionsParameter": {
+      "name": "scope",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The scope associated with reservation transactions operations. This includes '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}' for BillingAccount/Enrollment scope, and '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}' for billingProfile scope",
+      "x-ms-parameter-location": "method",
+      "x-ms-skip-url-encoding": true
+    },
+    "apiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "Version of the API to be used with the client request. The current version is 2019-11-01."
+    },
+    "billingAccountIdParameter": {
+      "name": "billingAccountId",
+      "in": "path",
+      "description": "BillingAccount ID",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "departmentIdParameter": {
+      "name": "departmentId",
+      "in": "path",
+      "description": "Department ID",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "enrollmentAccountIdParameter": {
+      "name": "enrollmentAccountId",
+      "in": "path",
+      "description": "EnrollmentAccount ID",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "subscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "description": "Azure Subscription ID.",
+      "required": true,
+      "type": "string"
+    },
+    "resourceGroupNameParameter": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "description": "Azure Resource Group Name.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "budgetNameParameter": {
+      "name": "budgetName",
+      "in": "path",
+      "description": "Budget Name.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "billingPeriodNameParameter": {
+      "name": "billingPeriodName",
+      "in": "path",
+      "description": "Billing Period Name.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "reservationOrderIdParameter": {
+      "name": "reservationOrderId",
+      "in": "path",
+      "description": "Order Id of the reservation",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "reservationIdParameter": {
+      "name": "reservationId",
+      "in": "path",
+      "description": "Id of the reservation",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "grainParameter": {
+      "name": "grain",
+      "description": "Can be daily or monthly",
+      "x-ms-parameter-location": "method",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "enum": [
+        "daily",
+        "monthly"
+      ],
+      "x-ms-enum": {
+        "name": "datagrain",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "daily",
+            "description": "Daily grain of data",
+            "name": "DailyGrain"
+          },
+          {
+            "value": "monthly",
+            "description": "Monthly grain of data",
+            "name": "MonthlyGrain"
+          }
+        ]
+      }
+    },
+    "managementGroupIdParameter": {
+      "name": "managementGroupId",
+      "in": "path",
+      "description": "Azure Management Group ID.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "billingProfileIdParameter": {
+      "name": "billingProfileId",
+      "in": "path",
+      "description": "Azure Billing Profile ID.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "invoiceSectionIdParameter": {
+      "name": "invoiceSectionId",
+      "in": "path",
+      "description": "Azure Invoice Section ID.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "startDateParameter": {
+      "name": "startDate",
+      "in": "query",
+      "description": "Start date",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "endDateParameter": {
+      "name": "endDate",
+      "in": "query",
+      "description": "End date",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "metricParameter": {
+      "name": "metric",
+      "in": "query",
+      "description": "Allows to select different type of cost/usage records.",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "enum": [
+        "actualcost",
+        "amortizedcost",
+        "usage"
+      ],
+      "x-ms-enum": {
+        "name": "metrictype",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "actualcost",
+            "description": "Actual cost data.",
+            "name": "ActualCostMetricType"
+          },
+          {
+            "value": "amortizedcost",
+            "description": "Amortized cost data.",
+            "name": "AmortizedCostMetricType"
+          },
+          {
+            "value": "usage",
+            "description": "Usage data.",
+            "name": "UsageMetricType"
+          }
+        ]
+      }
+    },
+    "filterParameter": {
+      "name": "$filter",
+      "in": "query",
+      "description": "May be used to filter reservationRecommendations by: properties/scope with allowed values ['Single', 'Shared'] and default value 'Single'; properties/resourceType with allowed values ['VirtualMachines', 'SQLDatabases', 'PostgreSQL', 'ManagedDisk', 'MySQL', 'RedHat', 'MariaDB', 'RedisCache', 'CosmosDB', 'SqlDataWarehouse', 'SUSELinux', 'AppService', 'BlockBlob', 'AzureDataExplorer', 'VMwareCloudSimple'] and default value 'VirtualMachines'; and properties/lookBackPeriod with allowed values ['Last7Days', 'Last30Days', 'Last60Days'] and default value 'Last7Days'.",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "termParameter": {
+      "description": "Specify length of reservation recommendation term.",
+      "type": "string",
+      "in": "query",
+      "required": true,
+      "name": "term",
+      "x-ms-parameter-location": "method",
+      "enum": [
+        "P1Y",
+        "P3Y"
+      ],
+      "x-ms-enum": {
+        "name": "term",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "P1Y",
+            "description": "1 year reservation term",
+            "name": "P1Y"
+          },
+          {
+            "value": "P3Y",
+            "description": "3 year reservation term",
+            "name": "P3Y"
+          }
+        ]
+      }
+    },
+    "regionParameter": {
+      "name": "region",
+      "in": "query",
+      "description": "Used to select the region the recommendation should be generated for.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "lookBackPeriodParameter": {
+      "name": "lookBackPeriod",
+      "in": "query",
+      "description": "Filter the time period on which reservation recommendation results are based.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "enum": [
+        "Last7Days",
+        "Last30Days",
+        "Last60Days"
+      ],
+      "x-ms-enum": {
+        "name": "lookBackPeriod",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Last7Days",
+            "description": "Use 7 days of data for recommendations",
+            "name": "Last07Days"
+          },
+          {
+            "value": "Last30Days",
+            "description": "Use 30 days of data for recommendations",
+            "name": "Last30Days"
+          },
+          {
+            "value": "Last60Days",
+            "description": "Use 60 days of data for recommendations",
+            "name": "Last60Days"
+          }
+        ]
+      }
+    },
+    "productParameter": {
+      "name": "product",
+      "in": "query",
+      "description": "Filter the products for which reservation recommendation results are generated. Examples: Standard_DS1_v2 (for VM), Premium_SSD_Managed_Disks_P30 (for Managed Disks)",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "scopeParameter": {
+      "description": "Scope of the reservation.",
+      "type": "string",
+      "name": "scope",
+      "in": "query",
+      "required": true,
+      "x-ms-parameter-location": "method",
+      "enum": [
+        "Single",
+        "Shared"
+      ],
+      "x-ms-enum": {
+        "name": "scope",
+        "modelAsString": true
+      }
+    }
+  }
+}
