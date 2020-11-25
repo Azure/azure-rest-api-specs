@@ -37,6 +37,7 @@ These settings apply only when `--tag=package-2019-11` is specified on the comma
 ```yaml $(tag) == 'package-2019-11'
 input-file:
   - Microsoft.Consumption/stable/2019-11-01/consumption.json
+  - Microsoft.Consumption/stable/2019-11-01/consumption.usagedetails.json
 ```
 ### Tag: package-2019-10
 
@@ -45,6 +46,7 @@ These settings apply only when `--tag=package-2019-10` is specified on the comma
 ``` yaml $(tag) == 'package-2019-10'
 input-file:
   - Microsoft.Consumption/stable/2019-10-01/consumption.json
+  - Microsoft.Consumption/stable/2019-10-01/consumption.usagedetails.json
 ```
 
 ### Tag: package-2019-06

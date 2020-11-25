@@ -27,6 +27,18 @@ batch:
 
 Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
 
+### Tag: schema-consumption-2019-11-01 and azureresourceschema
+
+``` yaml $(tag) == 'schema-consumption-2019-11-01' && $(azureresourceschema)
+output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
+  - Microsoft.Consumption/stable/2019-11-01/consumption.json
+  - Microsoft.Consumption/stable/2019-11-01/consumption.usagedetails.json
+
+```
+
 ### Tag: schema-consumption-2019-10-01 and azureresourceschema
 
 ``` yaml $(tag) == 'schema-consumption-2019-10-01' && $(azureresourceschema)
@@ -35,6 +47,7 @@ output-folder: $(azureresourceschema-folder)/schemas
 # all the input files in this apiVersion
 input-file:
   - Microsoft.Consumption/stable/2019-10-01/consumption.json
+  - Microsoft.Consumption/stable/2019-10-01/consumption.usagedetails.json
 
 ```
 
