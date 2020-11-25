@@ -1,0 +1,372 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "PhoneNumberAdministrationClient",
+    "description": "The phone number administration client uses the Communication Services to acquire and manage phone numbers.",
+    "contact": {
+      "email": "acsdevexdisc@microsoft.com"
+    },
+    "version": "2020-07-20-preview1"
+  },
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/availablePhoneNumbers/countries": {
+      "get": {
+        "tags": [
+          "List available countries"
+        ],
+        "operationId": "PhoneNumberAdministration_ListCountries",
+        "summary": "Lists all countries with available phone numbers.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Locale"
+          },
+          {
+            "$ref": "phonenumbers.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/CountriesResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List acquired phone numbers": {
+            "$ref": "./examples/GetCountries.json"
+          }
+        }
+      }
+    },
+    "/availablePhoneNumbers/countries/{countryCode}/areaCodes/tollFree": {
+      "get": {
+        "tags": [
+          "List available area codes"
+        ],
+        "operationId": "PhoneNumberAdministration_ListTollFreeAreaCodes",
+        "summary": "Lists available toll-free area codes for a country.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/CountryCode"
+          },
+          {
+            "$ref": "phonenumbers.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/TollFreeAreaCodes"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Toll Free area codes": {
+            "$ref": "./examples/GetAreaCodesTollFree.json"
+          }
+        }
+      }
+    },
+    "/availablePhoneNumbers/countries/{countryCode}/areaCodes/geographic": {
+      "get": {
+        "tags": [
+          "List available area codes"
+        ],
+        "operationId": "PhoneNumberAdministration_ListGeographicAreaCodes",
+        "summary": "Lists available geographic area codes for a country.",
+        "description": "Pass a component-url-encoded location to narrow down to a region.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/CountryCode"
+          },
+          {
+            "$ref": "#/parameters/Locale"
+          },
+          {
+            "in": "query",
+            "name": "locationPath",
+            "description": "A URL-encoded location path starting with the region/state/province and optionally narrowed down to municipality. Examples: Ontario, Washington%20State%2FRedmond",
+            "type": "string",
+            "required": false
+          },
+          {
+            "$ref": "phonenumbers.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/GeographicAreaCodes"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Geographic area codes": {
+            "$ref": "./examples/GetAreaCodesGeographic.json"
+          }
+        }
+      }
+    },
+    "/availablePhoneNumbers/countries/{countryCode}/offerings": {
+      "get": {
+        "tags": [
+          "List available offerings"
+        ],
+        "summary": "List available offerings for the given country",
+        "operationId": "PhoneNumberAdministration_ListOfferings",
+        "parameters": [
+          {
+            "$ref": "#/parameters/CountryCode"
+          },
+          {
+            "in": "query",
+            "name": "numberType",
+            "description": "Filter by numberType",
+            "type": "string",
+            "enum": [
+              "tollFree",
+              "geographic"
+            ],
+            "x-ms-enum": {
+              "name": "PhoneNumberType",
+              "modelAsString": true
+            },
+            "required": false
+          },
+          {
+            "in": "query",
+            "name": "assignmentType",
+            "description": "Filter by assignmentType",
+            "type": "string",
+            "enum": [
+              "person",
+              "application"
+            ],
+            "x-ms-enum": {
+              "name": "AssignmentType",
+              "modelAsString": true
+            },
+            "required": false
+          },
+          {
+            "$ref": "phonenumbers.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/OfferingsResponse"
+            }
+          },
+          "default": {
+            "description": "Failure",
+            "schema": {
+              "$ref": "phonenumbers.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get available offerings": {
+            "$ref": "./examples/GetOfferings.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "AvailableCapabilities": {
+      "description": "The capabilities of a phone number that are available.",
+      "type": "object",
+      "properties": {
+        "sms": {
+          "description": "Available Sms capabilities.",
+          "type": "array",
+          "items": {
+            "$ref": "phonenumbers.json#/definitions/CapabilityValue"
+          }
+        },
+        "calling": {
+          "description": "Available Calling capabilities.",
+          "type": "array",
+          "items": {
+            "$ref": "phonenumbers.json#/definitions/CapabilityValue"
+          }
+        }
+      }
+    },
+    "CountryOffering": {
+      "description": "The offerings for a given country. An offering is a bundle of phone number characteristics and available capabilities.",
+      "type": "object",
+      "properties": {
+        "numberType": {
+          "description": "The phoner number type.",
+          "$ref": "phonenumbers.json#/definitions/PhoneNumberType"
+        },
+        "assignmentType": {
+          "description": "The phone number's assignment type.",
+          "$ref": "phonenumbers.json#/definitions/AssignmentType"
+        },
+        "countryCode": {
+          "description": "The ISO 3166-2 country code.",
+          "type": "string"
+        },
+        "availableCapabilities": {
+          "description": "The capabilities that are available in this offering.",
+          "$ref": "#/definitions/AvailableCapabilities"
+        },
+        "monthlyRate": {
+          "description": "The montly cost for an individual phone number in this offering.",
+          "$ref": "phonenumbers.json#/definitions/MonthlyRate"
+        }
+      }
+    },
+    "OfferingsResponse": {
+      "description": "List of available offerings.",
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/CountryOffering"
+      }
+    },
+    "PhoneNumberCountry": {
+      "description": "Represents a country.",
+      "required": [
+        "countryCode",
+        "localizedName"
+      ],
+      "type": "object",
+      "properties": {
+        "localizedName": {
+          "description": "Represents the name of the country.",
+          "type": "string"
+        },
+        "locale": {
+          "description": "Locale used for localization",
+          "type": "string"
+        },
+        "countryCode": {
+          "description": "The ISO 3166-2 country code.",
+          "type": "string"
+        }
+      }
+    },
+    "CountriesResponse": {
+      "description": "Represents a wrapper around a list of countries.",
+      "type": "object",
+      "properties": {
+        "countries": {
+          "description": "Represents the underlying list of countries.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PhoneNumberCountry"
+          }
+        },
+        "nextLink": {
+          "description": "Represents the URL link to the next page",
+          "type": "string"
+        }
+      }
+    },
+    "TollFreeAreaCodes": {
+      "description": "Represents a list of Toll-Free area codes.",
+      "type": "object",
+      "properties": {
+        "areaCodes": {
+          "description": "Represents the list of primary area codes.",
+          "type": "array",
+          "items": {
+            "description": "Stores a single area code.",
+            "type": "string"
+          }
+        },
+        "nextLink": {
+          "description": "Represents the URL link to the next page",
+          "type": "string"
+        }
+      }
+    },
+    "GeographicAreaCodes": {
+      "description": "Represents a list of geographic area codes.",
+      "type": "object",
+      "properties": {
+        "cityAreaCodes": {
+          "description": "Represents the list of area codes.",
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/CityAreaCodes"
+          }
+        },
+        "nextLink": {
+          "description": "Represents the URL link to the next page",
+          "type": "string"
+        }
+      }
+    },
+    "CityAreaCodes": {
+      "description": "Represents a list of area codes for a city.",
+      "type": "object",
+      "properties": {
+        "localizedCityName": {
+          "description": "Name of the city.",
+          "type": "string"
+        },
+        "areaCodes": {
+          "description": "Available area codes for the city",
+          "type": "array",
+          "items": {
+            "description": "An area code.",
+            "type": "string"
+          }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "CountryCode": {
+      "in": "path",
+      "name": "countryCode",
+      "description": "The ISO 3166-2 country code.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "Locale": {
+      "in": "query",
+      "name": "locale",
+      "description": "Language locale for localizing location names.",
+      "type": "string",
+      "default": "en-US",
+      "x-ms-parameter-location": "method"
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{endpoint}",
+    "useSchemePrefix": false,
+    "parameters": [
+      {
+        "$ref": "phonenumbers.json#/parameters/Endpoint"
+      }
+    ]
+  }
+}

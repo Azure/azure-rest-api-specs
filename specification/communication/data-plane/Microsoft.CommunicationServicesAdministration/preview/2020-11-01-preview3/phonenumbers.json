@@ -15,173 +15,6 @@
     "application/json"
   ],
   "paths": {
-    "/availablePhoneNumbers/countries": {
-      "get": {
-        "tags": [
-          "List available countries"
-        ],
-        "operationId": "PhoneNumberAdministration_GetCountries",
-        "summary": "Lists all countries with available phone numbers.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Locale"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "$ref": "#/definitions/CountriesResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "List acquired phone numbers": {
-            "$ref": "./examples/GetCountries.json"
-          }
-        }
-      }
-    },
-    "/availablePhoneNumbers/countries/{countryCode}/areaCodes/tollFree": {
-      "get": {
-        "tags": [
-          "List available area codes"
-        ],
-        "operationId": "PhoneNumberAdministration_GetTollFreeAreaCodes",
-        "summary": "Lists available toll-free area codes for a country.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/CountryCode"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "$ref": "#/definitions/TollFreeAreaCodes"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Get Toll Free area codes": {
-            "$ref": "./examples/GetAreaCodesTollFree.json"
-          }
-        }
-      }
-    },
-    "/availablePhoneNumbers/countries/{countryCode}/areaCodes/geographic": {
-      "get": {
-        "tags": [
-          "List available area codes"
-        ],
-        "operationId": "PhoneNumberAdministration_GetGeographicAreaCodes",
-        "summary": "Lists available geographic area codes for a country.",
-        "description": "Pass a component-url-encoded location to narrow down to a region.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/CountryCode"
-          },
-          {
-            "$ref": "#/parameters/Locale"
-          },
-          {
-            "in": "query",
-            "name": "locationPath",
-            "description": "A URL-encoded location path starting with the region/state/province and optionally narrowed down to municipality. Examples: Ontario, Washington%20State%2FRedmond",
-            "type": "string",
-            "required": false
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "$ref": "#/definitions/GeographicAreaCodes"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Get Geographic area codes": {
-            "$ref": "./examples/GetAreaCodesGeographic.json"
-          }
-        }
-      }
-    },
-    "/availablePhoneNumbers/countries/{countryCode}/offerings": {
-      "get": {
-        "tags": [
-          "List available offerings"
-        ],
-        "summary": "List available offerings for the given country",
-        "operationId": "PhoneNumberAdministration_GetOfferings",
-        "parameters": [
-          {
-            "$ref": "#/parameters/CountryCode"
-          },
-          {
-            "in": "query",
-            "name": "numberType",
-            "description": "Filter by numberType",
-            "type": "string",
-            "enum": [
-              "tollFree",
-              "geographic"
-            ],
-            "x-ms-enum": {
-              "name": "PhoneNumberType",
-              "modelAsString": true
-            },
-            "required": false
-          },
-          {
-            "in": "query",
-            "name": "assignmentType",
-            "description": "Filter by assignmentType",
-            "type": "string",
-            "enum": [
-              "person",
-              "application"
-            ],
-            "x-ms-enum": {
-              "name": "AssignmentType",
-              "modelAsString": true
-            },
-            "required": false
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "$ref": "#/definitions/OfferingsResponse"
-            }
-          },
-          "default": {
-            "description": "Failure",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Get available offerings": {
-            "$ref": "./examples/GetOfferings.json"
-          }
-        }
-      }
-    },
     "/availablePhoneNumbers/countries/{countryCode}/~search": {
       "parameters": [
         {
@@ -389,7 +222,7 @@
         "tags": [
           "Manage acquired phone numbers"
         ],
-        "operationId": "PhoneNumberAdministration_GetPhoneNumbers",
+        "operationId": "PhoneNumberAdministration_ListPhoneNumbers",
         "summary": "Lists acquired phone numbers.",
         "parameters": [
           {
@@ -593,6 +426,130 @@
         "modelAsString": true
       }
     },
+    "AssignmentType": {
+      "description": "The type that the phone number can be assigned to.",
+      "type": "string",
+      "enum": [
+        "person",
+        "application"
+      ],
+      "x-ms-enum": {
+        "name": "AssignmentType",
+        "modelAsString": true
+      }
+    },
+    "MonthlyRate": {
+      "description": "Represents a wrapper of rate information",
+      "type": "object",
+      "properties": {
+        "value": {
+          "format": "double",
+          "description": "The monthly rate of a phone plan group",
+          "type": "number"
+        },
+        "currency": {
+          "description": "The currency of a phone plan group",
+          "enum": [
+            "USD"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "Currency",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "OperationStatus": {
+      "type": "string",
+      "description": "Status code of the operation.",
+      "enum": [
+        "notStarted",
+        "running",
+        "succeeded",
+        "failed"
+      ],
+      "x-ms-enum": {
+        "name": "OperationStatusCodes",
+        "modelAsString": false
+      },
+      "x-nullable": false
+    },
+    "Operation": {
+      "type": "object",
+      "description": "Long running operation.",
+      "properties": {
+        "status": {
+          "description": "Status of operation.",
+          "$ref": "#/definitions/OperationStatus"
+        },
+        "id": {
+          "description": "Id of the operation.",
+          "type": "string"
+        },
+        "kind": {
+          "type": "string",
+          "description": "Kind of the operation.",
+          "enum": [
+            "search",
+            "purchase",
+            "releasePhoneNumber",
+            "updatePhoneNumber"
+          ],
+          "x-ms-enum": {
+            "name": "OperationKind",
+            "modelAsString": true
+          }
+        },
+        "createdDateTime": {
+          "description": "The date that the operation was created.",
+          "type": "string",
+          "format": "date-time"
+        },
+        "lastActionDateTime": {
+          "description": "The most recent date that the operation was changed.",
+          "type": "string",
+          "format": "date-time"
+        },
+        "resourceLocation": {
+          "description": "Url for retrieving the result of the operation if any",
+          "type": "string"
+        },
+        "error": {
+          "$ref": "#/definitions/ErrorBody"
+        }
+      },
+      "required": [
+        "status",
+        "kind",
+        "id",
+        "createdDateTime",
+        "lastActionDateTime"
+      ]
+    },
+    "ErrorBody": {
+      "description": "Represents a service error response body.",
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "The error code in the error response.",
+          "type": "string"
+        },
+        "message": {
+          "description": "The error message in the error response.",
+          "type": "string"
+        }
+      }
+    },
+    "ErrorResponse": {
+      "description": "Represents a service error response.",
+      "type": "object",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/ErrorBody"
+        }
+      }
+    },
     "AcquiredPhoneNumber": {
       "description": "The acquired phone number and its metadata and configuration.",
       "type": "object",
@@ -677,40 +634,6 @@
         }
       }
     },
-    "AssignmentType": {
-      "description": "The type that the phone number can be assigned to.",
-      "type": "string",
-      "enum": [
-        "person",
-        "application"
-      ],
-      "x-ms-enum": {
-        "name": "AssignmentType",
-        "modelAsString": true
-      }
-    },
-    "MonthlyRate": {
-      "description": "Represents a wrapper of rate information",
-      "type": "object",
-      "properties": {
-        "value": {
-          "format": "double",
-          "description": "The monthly rate of a phone plan group",
-          "type": "number"
-        },
-        "currency": {
-          "description": "The currency of a phone plan group",
-          "enum": [
-            "USD"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "Currency",
-            "modelAsString": true
-          }
-        }
-      }
-    },
     "SearchRequest": {
       "description": "The desired properties of a phone number for search.",
       "required": [
@@ -782,39 +705,6 @@
         }
       }
     },
-    "CountryOffering": {
-      "description": "The offerings for a given country. An offering is a bundle of phone number characteristics and available capabilities.",
-      "type": "object",
-      "properties": {
-        "numberType": {
-          "description": "The phoner number type.",
-          "$ref": "#/definitions/PhoneNumberType"
-        },
-        "assignmentType": {
-          "description": "The phone number's assignment type.",
-          "$ref": "#/definitions/AssignmentType"
-        },
-        "countryCode": {
-          "description": "The ISO 3166-2 country code.",
-          "type": "string"
-        },
-        "availableCapabilities": {
-          "description": "The capabilities that are available in this offering.",
-          "$ref": "#/definitions/AvailableCapabilities"
-        },
-        "monthlyRate": {
-          "description": "The montly cost for an individual phone number in this offering.",
-          "$ref": "#/definitions/MonthlyRate"
-        }
-      }
-    },
-    "OfferingsResponse": {
-      "description": "List of available offerings.",
-      "type": "array",
-      "items": {
-        "$ref": "#/definitions/CountryOffering"
-      }
-    },
     "PurchaseRequest": {
       "description": "Request to purchase phone numbers",
       "type": "object",
@@ -822,189 +712,6 @@
         "searchId": {
           "description": "The id of the search result to purchase.",
           "type": "string"
-        }
-      }
-    },
-    "PhoneNumberCountry": {
-      "description": "Represents a country.",
-      "required": [
-        "countryCode",
-        "localizedName"
-      ],
-      "type": "object",
-      "properties": {
-        "localizedName": {
-          "description": "Represents the name of the country.",
-          "type": "string"
-        },
-        "locale": {
-          "description": "Locale used for localization",
-          "type": "string"
-        },
-        "countryCode": {
-          "description": "The ISO 3166-2 country code.",
-          "type": "string"
-        }
-      }
-    },
-    "CountriesResponse": {
-      "description": "Represents a wrapper around a list of countries.",
-      "type": "object",
-      "properties": {
-        "countries": {
-          "description": "Represents the underlying list of countries.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/PhoneNumberCountry"
-          }
-        },
-        "nextLink": {
-          "description": "Represents the URL link to the next page",
-          "type": "string"
-        }
-      }
-    },
-    "OperationStatus": {
-      "type": "string",
-      "description": "Status code of the operation.",
-      "enum": [
-        "notStarted",
-        "running",
-        "succeeded",
-        "failed"
-      ],
-      "x-ms-enum": {
-        "name": "OperationStatusCodes",
-        "modelAsString": false
-      },
-      "x-nullable": false
-    },
-    "Operation": {
-      "type": "object",
-      "description": "Long running operation.",
-      "properties": {
-        "status": {
-          "description": "Status of operation.",
-          "$ref": "#/definitions/OperationStatus"
-        },
-        "id": {
-          "description": "Id of the operation.",
-          "type": "string"
-        },
-        "kind": {
-          "type": "string",
-          "description": "Kind of the operation.",
-          "enum": [
-            "search",
-            "purchase",
-            "releasePhoneNumber",
-            "updatePhoneNumber"
-          ],
-          "x-ms-enum": {
-            "name": "OperationKind",
-            "modelAsString": true
-          }
-        },
-        "createdDateTime": {
-          "description": "The date that the operation was created.",
-          "type": "string",
-          "format": "date-time"
-        },
-        "lastActionDateTime": {
-          "description": "The most recent date that the operation was changed.",
-          "type": "string",
-          "format": "date-time"
-        },
-        "resourceLocation": {
-          "description": "Url for retrieving the result of the operation if any",
-          "type": "string"
-        },
-        "error": {
-          "$ref": "#/definitions/ErrorBody"
-        }
-      },
-      "required": [
-        "status",
-        "kind",
-        "id",
-        "createdDateTime",
-        "lastActionDateTime"
-      ]
-    },
-    "TollFreeAreaCodes": {
-      "description": "Represents a list of Toll-Free area codes.",
-      "type": "object",
-      "properties": {
-        "areaCodes": {
-          "description": "Represents the list of primary area codes.",
-          "type": "array",
-          "items": {
-            "description": "Stores a single area code.",
-            "type": "string"
-          }
-        },
-        "nextLink": {
-          "description": "Represents the URL link to the next page",
-          "type": "string"
-        }
-      }
-    },
-    "GeographicAreaCodes": {
-      "description": "Represents a list of geographic area codes.",
-      "type": "object",
-      "properties": {
-        "cityAreaCodes": {
-          "description": "Represents the list of area codes.",
-          "type": "array",
-          "items": {
-            "type": "object",
-            "$ref": "#/definitions/CityAreaCodes"
-          }
-        },
-        "nextLink": {
-          "description": "Represents the URL link to the next page",
-          "type": "string"
-        }
-      }
-    },
-    "CityAreaCodes": {
-      "description": "Represents a list of area codes for a city.",
-      "type": "object",
-      "properties": {
-        "localizedCityName": {
-          "description": "Name of the city.",
-          "type": "string"
-        },
-        "areaCodes": {
-          "description": "Available area codes for the city",
-          "type": "array",
-          "items": {
-            "description": "An area code.",
-            "type": "string"
-          }
-        }
-      }
-    },
-    "ErrorBody": {
-      "description": "Represents a service error response body.",
-      "type": "object",
-      "properties": {
-        "code": {
-          "description": "The error code in the error response.",
-          "type": "string"
-        },
-        "message": {
-          "description": "The error message in the error response.",
-          "type": "string"
-        }
-      }
-    },
-    "ErrorResponse": {
-      "description": "Represents a service error response.",
-      "type": "object",
-      "properties": {
-        "error": {
-          "$ref": "#/definitions/ErrorBody"
         }
       }
     }
@@ -1016,22 +723,6 @@
       "description": "Version of API to invoke",
       "required": true,
       "type": "string"
-    },
-    "SearchId": {
-      "in": "path",
-      "name": "searchId",
-      "description": "The search Id.",
-      "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "method"
-    },
-    "PhoneNumberId": {
-      "in": "path",
-      "name": "phoneNumber",
-      "description": "The phone number id, this is the phone number in E.164 format without the leading +.",
-      "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "method"
     },
     "OperationId": {
       "in": "path",
@@ -1049,14 +740,6 @@
       "type": "string",
       "x-ms-parameter-location": "method"
     },
-    "Locale": {
-      "in": "query",
-      "name": "locale",
-      "description": "Language locale for localizing location names.",
-      "type": "string",
-      "default": "en-US",
-      "x-ms-parameter-location": "method"
-    },
     "Endpoint": {
       "in": "path",
       "name": "endpoint",
@@ -1065,6 +748,22 @@
       "type": "string",
       "x-ms-skip-url-encoding": true,
       "x-ms-parameter-location": "client"
+    },
+    "SearchId": {
+      "in": "path",
+      "name": "searchId",
+      "description": "The search Id.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "PhoneNumberId": {
+      "in": "path",
+      "name": "phoneNumber",
+      "description": "The phone number id, this is the phone number in E.164 format without the leading +.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
     }
   },
   "securityDefinitions": {
