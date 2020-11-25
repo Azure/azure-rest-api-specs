@@ -99,6 +99,7 @@ These settings apply only when `--tag=package-2020-10` is specified on the comma
 input-file:
 - Microsoft.OperationalInsights/stable/2020-10-01/Clusters.json
 - Microsoft.OperationalInsights/stable/2020-10-01/Operations.json
+- Microsoft.OperationalInsights/stable/2020-10-01/Workspaces.json
 ```
 
 ### Tag: package-2020-08
@@ -147,8 +148,6 @@ swagger-to-sdk:
   - repo: azure-sdk-for-node
   - repo: azure-sdk-for-ruby
   - repo: azure-sdk-for-java
-    after_scripts:
-      - bundle install && rake arm:regen_all_profiles['azure_mgmt_operational_insights']
   - repo: azure-resource-manager-schemas
     after_scripts:
       - node sdkauto_afterscript.js operationalinsights/resource-manager

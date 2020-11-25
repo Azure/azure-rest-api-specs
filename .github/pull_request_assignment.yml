@@ -7,6 +7,13 @@
       - lmazuel
 
 - rule:
+    # synapse data-plane PR
+    paths:
+      - "specification/synapse/data-plane/**"
+    reviewers:
+      - jonathandturner
+
+- rule:
     # data-plane PR
     paths:
       - "specification/**/data-plane/**"
@@ -129,33 +136,23 @@
 
 - rule:
     paths:
-      - "**/package.json"
-      - ".github/**"
-      - "**/azure-pipelines.yml"
-      - ".azure-pipelines/**"
-      - ".azure-pipelines-preproduction/**"
-    reviewers:
-      - akning-ms
-      - PhoenixHe-msft
-      
-- rule:	
-    paths:	
       - "documentation/**"	
-    reviewers:	
-      - josefree	
-      - akning-ms	
+    reviewers:
+      - josefree
+      - akning-ms
 
-- rule:	
-    paths:	
+- rule:
+    paths:
       - "**/package.json"	
       - ".github/**"	
       - "**/azure-pipelines.yml"	
       - ".azure-pipelines/**"	
       - ".azure-pipelines-preproduction/**"	
-    reviewers:	
-      - akning-ms	
-      - PhoenixHe-msft	
+    reviewers:
+      - akning-ms
+      - PhoenixHe-msft
       - raych1
+      - zhenglaizhang
 
 - rule:
     # manager-plane PR
@@ -178,3 +175,4 @@
       - qianwens
       - ruowan
       - jianyexi
+      - zhenglaizhang
