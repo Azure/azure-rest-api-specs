@@ -1382,9 +1382,6 @@
 					}
 				],
 				"responses": {
-					"200": {
-						"description": "OK"
-					},
 					"202": {
 						"description": "Accepted"
 					},
@@ -1819,9 +1816,6 @@
 					}
 				],
 				"responses": {
-					"200": {
-						"description": "OK"
-					},
 					"202": {
 						"description": "Accepted"
 					},
@@ -2817,9 +2811,6 @@
 					}
 				],
 				"responses": {
-					"200": {
-						"description": "OK"
-					},
 					"202": {
 						"description": "Accepted"
 					},
@@ -4453,9 +4444,6 @@
 					}
 				],
 				"responses": {
-					"200": {
-						"description": "OK"
-					},
 					"202": {
 						"description": "Accepted"
 					},
@@ -6593,29 +6581,32 @@
 			},
 			"x-ms-discriminator-value": "Dynamic"
 		},
-		"DeliveryAttributeMapping": {
-			"description": "Delevery attribute mapping details.",
-			"type": "object",
-			"properties": {
-				"name": {
-					"description": "Name of the delivery attribute or header.",
-					"type": "string"
-				},
-				"type": {
-					"description": "Type of the delivery attribute or header name.",
-					"enum": [
-						"Static",
-						"Dynamic"
-					],
-					"type": "string",
-					"x-ms-enum": {
-						"name": "DeliveryAttributeMappingType",
-						"modelAsString": true
-					}
-				}
-			},
-			"discriminator": "type"
-		},
+    "DeliveryAttributeMapping": {
+      "description": "Delevery attribute mapping details.",
+      "required": [
+        "type"
+      ],
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Name of the delivery attribute or header.",
+          "type": "string"
+        },
+        "type": {
+          "description": "Type of the delivery attribute or header name.",
+          "enum": [
+            "Static",
+            "Dynamic"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "DeliveryAttributeMappingType",
+            "modelAsString": true
+          }
+        }
+      },
+      "discriminator": "type"
+    },
 		"StorageBlobDeadLetterDestination": {
 			"description": "Information about the storage blob based dead letter destination.",
 			"type": "object",
