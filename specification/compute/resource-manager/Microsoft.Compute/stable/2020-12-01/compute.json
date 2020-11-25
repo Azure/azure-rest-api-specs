@@ -8859,7 +8859,7 @@
         },
         "patchSettings": {
           "$ref": "#/definitions/WindowsPatchSettings",
-          "description": "Specifies settings related to VM Guest Patching (KBs)."
+          "description": "Specifies settings related to VM Guest Patching on Windows."
         },
         "winRM": {
           "$ref": "#/definitions/WinRMConfiguration",
@@ -12098,7 +12098,7 @@
           "description": "Enables customers to patch their Azure VMs without requiring a reboot. For enableHotpatching, the 'provisionVMAgent' must be set to true and 'patchMode' must be set to 'AutomaticByPlatform'."
         }
       },
-      "description": "Specifies settings related to VM Guest Patching (KBs)."
+      "description": "Specifies settings related to VM Guest Patching on Windows."
     },
     "LinuxPatchSettings": {
       "properties": {
@@ -12129,7 +12129,7 @@
         },
         "hotpatchStatus": {
           "$ref": "#/definitions/HotpatchStatus",
-          "description": "The Hotpatch Status for the virtual machine."
+          "description": "The Hotpatch status for the virtual machine."
         },
         "configurationStatuses": {
           "description": "The enablement status of the specified patchMode",
@@ -12278,14 +12278,14 @@
           "description": "The errors that were encountered during execution of the operation. The details array contains the list of them."
         }
       },
-      "description": "The Hotpatch Status for the virtual machine."
+      "description": "Describes the properties of the last installed patch summary."
     },
     "HotpatchStatus": {
       "properties": {
         "hotpatchEnablementStatus": {
           "type": "string",
           "readOnly": true,
-          "description": "Represents what state of hotpatching opt in the VM is in. .<br /><br /> Possible values are:<br /><br /> **Unknown** - Safe default until initialized. <br /><br /> **PendingEvaluation** - Value reported when there's no data from the extension to work with. <br /><br /> **NotRequested** - Extension reports that there was no instruction to enable hotpatching. <br /><br /> **ActionRequired** - Extension reports that customer action is required to complete opt in. <br /><br /> **Enabled** - Extension reports that hotpatching enablement has completed.",
+          "description": "Represents the enablement status of hotpatching on the VM. .<br /><br /> Possible values are:<br /><br /> **Unknown** - Unknown status. <br /><br /> **PendingEvaluation** - Enablement status evaluation is pending on the VM.<br /><br /> **Disabled** - Hotpatching is disabled. <br /><br /> **ActionRequired** - Customer action is required to complete enablement. Further details will be in the error object.<br /><br /> **Enabled** - Hotpatching is enabled.",
           "enum": [
             "Unknown",
             "PendingEvaluation",
@@ -12310,7 +12310,7 @@
           "description": "The errors that were encountered during execution of the operation. The details array contains the list of them."
         }
       },
-      "description": "Describes the properties of the last installed patch summary."
+      "description": "The Hotpatch Status for the virtual machine."
     }
   },
   "parameters": {
