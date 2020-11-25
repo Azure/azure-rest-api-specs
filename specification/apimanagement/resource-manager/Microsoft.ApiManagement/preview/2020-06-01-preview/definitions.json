@@ -5912,11 +5912,6 @@
           "description": "Collection of portal revisions.",
           "readOnly": true
         },
-        "count": {
-          "type": "integer",
-          "format": "int64",
-          "description": "Total record count number across all pages."
-        },
         "nextLink": {
           "type": "string",
           "description": "Next page link, if any.",
@@ -5942,12 +5937,6 @@
     },
     "PortalRevisionContractProperties": {
       "properties": {
-        "id": {
-          "type": "string",
-          "description": "Portal revision identifier.",
-          "minLength": 1,
-          "maxLength": 256
-        },
         "description": {
           "type": "string",
           "description": "Portal revision description.",
@@ -5956,7 +5945,8 @@
         "statusDetails": {
           "type": "string",
           "description": "Portal revision publishing status details.",
-          "maxLength": 2000
+          "maxLength": 2000,
+          "readOnly": true
         },
         "status": {
           "type": "string",
@@ -5988,7 +5978,8 @@
                 "description": "Portal revision publishing failed"
               }
             ]
-          }
+          },
+          "readOnly": true
         },
         "isCurrent": {
           "type": "boolean",
