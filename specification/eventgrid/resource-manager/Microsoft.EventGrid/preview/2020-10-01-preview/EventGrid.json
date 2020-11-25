@@ -24,7 +24,7 @@
 				"summary": "Get a domain.",
 				"description": "Get properties of a domain.",
 				"operationId": "Domains_Get",
-                		"consumes": [],
+        "consumes": [],
 				"produces": [
 					"application/json"
 				],
@@ -136,7 +136,7 @@
 				"summary": "Delete a domain.",
 				"description": "Delete existing domain.",
 				"operationId": "Domains_Delete",
-                		"consumes": [],
+        "consumes": [],
 				"produces": [
 					"application/json"
 				],
@@ -1058,20 +1058,29 @@
 						"description": "*** Error Responses: ***\n\n * 400 Bad Request.\n\n * 500 Internal Server Error."
 					}
 				},
-				"x-ms-examples": {
-					"EventSubscriptions_CreateOrUpdateForSubscription": {
-						"$ref": "./examples/EventSubscriptions_CreateOrUpdateForSubscription.json"
-					},
-					"EventSubscriptions_CreateOrUpdateForResourceGroup": {
-						"$ref": "./examples/EventSubscriptions_CreateOrUpdateForResourceGroup.json"
-					},
-					"EventSubscriptions_CreateOrUpdateForResource": {
-						"$ref": "./examples/EventSubscriptions_CreateOrUpdateForResource.json"
-					},
-					"EventSubscriptions_CreateOrUpdateForCustomTopic": {
-						"$ref": "./examples/EventSubscriptions_CreateOrUpdateForCustomTopic.json"
-					}
-				},
+        "x-ms-examples": {
+          "EventSubscriptions_CreateOrUpdateForSubscription": {
+            "$ref": "./examples/EventSubscriptions_CreateOrUpdateForSubscription.json"
+          },
+          "EventSubscriptions_CreateOrUpdateForResourceGroup": {
+            "$ref": "./examples/EventSubscriptions_CreateOrUpdateForResourceGroup.json"
+          },
+          "EventSubscriptions_CreateOrUpdateForResource": {
+            "$ref": "./examples/EventSubscriptions_CreateOrUpdateForResource.json"
+          },
+          "EventSubscriptions_CreateOrUpdateForCustomTopic_WebhookDestination": {
+            "$ref": "./examples/EventSubscriptions_CreateOrUpdateForCustomTopic_WebhookDestination.json"
+          },
+          "EventSubscriptions_CreateOrUpdateForCustomTopic_EventHubDestination": {
+            "$ref": "./examples/EventSubscriptions_CreateOrUpdateForCustomTopic_EventHubDestination.json"
+          },
+          "EventSubscriptions_CreateOrUpdateForCustomTopic_HybridConnectionDestination": {
+            "$ref": "./examples/EventSubscriptions_CreateOrUpdateForCustomTopic_HybridConnectionDestination.json"
+          },
+          "EventSubscriptions_CreateOrUpdateForCustomTopic_StorageQueueDestination": {
+            "$ref": "./examples/EventSubscriptions_CreateOrUpdateForCustomTopic_StorageQueueDestination.json"
+          }
+        },
 				"x-ms-long-running-operation": true
 			},
 			"delete": {
@@ -1081,8 +1090,7 @@
 				"summary": "Delete an event subscription.",
 				"description": "Delete an existing event subscription.",
 				"operationId": "EventSubscriptions_Delete",
-				"consumes": [
-				],
+				"consumes": [],
 				"produces": [
 					"application/json"
 				],
@@ -1214,8 +1222,7 @@
 				"summary": "Get an event subscription of a system topic.",
 				"description": "Get an event subscription.",
 				"operationId": "SystemTopicEventSubscriptions_Get",
-				"consumes": [
-				],
+				"consumes": [],
 				"produces": [
 					"application/json"
 				],
@@ -1341,8 +1348,7 @@
 				"summary": "Delete an event subscription of a system topic.",
 				"description": "Delete an event subscription of a system topic.",
 				"operationId": "SystemTopicEventSubscriptions_Delete",
-				"consumes": [
-				],
+				"consumes": [],
 				"produces": [
 					"application/json"
 				],
@@ -1474,8 +1480,7 @@
 				"summary": "Get full URL of an event subscription of a system topic",
 				"description": "Get the full endpoint URL for an event subscription of a system topic.",
 				"operationId": "SystemTopicEventSubscriptions_GetFullUrl",
-				"consumes": [
-				],
+				"consumes": [],
 				"produces": [
 					"application/json"
 				],
@@ -1534,8 +1539,7 @@
 				"summary": "Get full URL of an event subscription.",
 				"description": "Get the full endpoint URL for an event subscription.",
 				"operationId": "EventSubscriptions_GetFullUrl",
-				"consumes": [
-				],
+				"consumes": [],
 				"produces": [
 					"application/json"
 				],
@@ -1594,8 +1598,7 @@
 				"summary": "List event subscriptions of a system topic.",
 				"description": "List event subscriptions that belong to a specific system topic.",
 				"operationId": "SystemTopicEventSubscriptions_ListBySystemTopic",
-				"consumes": [
-				],
+				"consumes": [],
 				"produces": [
 					"application/json"
 				],
@@ -1656,8 +1659,7 @@
 				"summary": "Get an event subscription of a partner topic.",
 				"description": "Get an event subscription of a partner topic.",
 				"operationId": "PartnerTopicEventSubscriptions_Get",
-				"consumes": [
-				],
+				"consumes": [],
 				"produces": [
 					"application/json"
 				],
@@ -1783,8 +1785,7 @@
 				"summary": "Delete an event subscription of a partner topic.",
 				"description": "Delete an event subscription of a partner topic.",
 				"operationId": "PartnerTopicEventSubscriptions_Delete",
-				"consumes": [
-				],
+        "consumes": [],
 				"produces": [
 					"application/json"
 				],
@@ -1916,8 +1917,7 @@
 				"summary": "Get full URL of an event subscription of a partner topic.",
 				"description": "Get the full endpoint URL for an event subscription of a partner topic.",
 				"operationId": "PartnerTopicEventSubscriptions_GetFullUrl",
-				"consumes": [
-				],
+				"consumes": [],
 				"produces": [
 					"application/json"
 				],
@@ -1976,8 +1976,7 @@
 				"summary": "List event subscriptions of a partner topic.",
 				"description": "List event subscriptions that belong to a specific partner topic.",
 				"operationId": "PartnerTopicEventSubscriptions_ListByPartnerTopic",
-				"consumes": [
-				],
+				"consumes": [],
 				"produces": [
 					"application/json"
 				],
@@ -2038,8 +2037,7 @@
 				"summary": "Get an aggregated list of all global event subscriptions under an Azure subscription.",
 				"description": "List all aggregated global event subscriptions under a specific Azure subscription.",
 				"operationId": "EventSubscriptions_ListGlobalBySubscription",
-				"consumes": [
-				],
+				"consumes": [],
 				"produces": [
 					"application/json"
 				],
@@ -2086,8 +2084,7 @@
 				"summary": "List all global event subscriptions for a topic type.",
 				"description": "List all global event subscriptions under an Azure subscription for a topic type.",
 				"operationId": "EventSubscriptions_ListGlobalBySubscriptionForTopicType",
-				"consumes": [
-				],
+				"consumes": [],
 				"produces": [
 					"application/json"
 				],
@@ -2141,8 +2138,7 @@
 				"summary": "List all global event subscriptions under an Azure subscription and resource group.",
 				"description": "List all global event subscriptions under a specific Azure subscription and resource group.",
 				"operationId": "EventSubscriptions_ListGlobalByResourceGroup",
-				"consumes": [
-				],
+				"consumes": [],
 				"produces": [
 					"application/json"
 				],
@@ -2196,8 +2192,7 @@
 				"summary": "List all global event subscriptions under a resource group for a topic type.",
 				"description": "List all global event subscriptions under a resource group for a specific topic type.",
 				"operationId": "EventSubscriptions_ListGlobalByResourceGroupForTopicType",
-				"consumes": [
-				],
+				"consumes": [],
 				"produces": [
 					"application/json"
 				],
@@ -2258,8 +2253,7 @@
 				"summary": "List all regional event subscriptions under an Azure subscription.",
 				"description": "List all event subscriptions from the given location under a specific Azure subscription.",
 				"operationId": "EventSubscriptions_ListRegionalBySubscription",
-				"consumes": [
-				],
+				"consumes": [],
 				"produces": [
 					"application/json"
 				],
@@ -2313,8 +2307,7 @@
 				"summary": "List all regional event subscriptions under an Azure subscription and resource group.",
 				"description": "List all event subscriptions from the given location under a specific Azure subscription and resource group.",
 				"operationId": "EventSubscriptions_ListRegionalByResourceGroup",
-				"consumes": [
-				],
+				"consumes": [],
 				"produces": [
 					"application/json"
 				],
@@ -2375,8 +2368,7 @@
 				"summary": "List all regional event subscriptions under an Azure subscription for a topic type.",
 				"description": "List all event subscriptions from the given location under a specific Azure subscription and topic type.",
 				"operationId": "EventSubscriptions_ListRegionalBySubscriptionForTopicType",
-				"consumes": [
-				],
+				"consumes": [],
 				"produces": [
 					"application/json"
 				],
@@ -2437,8 +2429,7 @@
 				"summary": "List all regional event subscriptions under an Azure subscription and resource group for a topic type.",
 				"description": "List all event subscriptions from the given location under a specific Azure subscription and resource group and topic type.",
 				"operationId": "EventSubscriptions_ListRegionalByResourceGroupForTopicType",
-				"consumes": [
-				],
+				"consumes": [],
 				"produces": [
 					"application/json"
 				],
@@ -2506,8 +2497,7 @@
 				"summary": "List all event subscriptions for a specific topic.",
 				"description": "List all event subscriptions that have been created for a specific topic.",
 				"operationId": "EventSubscriptions_ListByResource",
-				"consumes": [
-				],
+				"consumes": [],
 				"produces": [
 					"application/json"
 				],
@@ -2582,8 +2572,7 @@
 				"summary": "List all event subscriptions for a specific domain topic.",
 				"description": "List all event subscriptions that have been created for a specific domain topic.",
 				"operationId": "EventSubscriptions_ListByDomainTopic",
-				"consumes": [
-				],
+        "consumes": [],
 				"produces": [
 					"application/json"
 				],
@@ -2651,8 +2640,7 @@
 				"summary": "List available operations.",
 				"description": "List the available operations supported by the Microsoft.EventGrid resource provider.",
 				"operationId": "Operations_List",
-				"consumes": [
-				],
+				"consumes": [],
 				"produces": [
 					"application/json"
 				],
@@ -2690,8 +2678,7 @@
 				"summary": "Get a partner namespace.",
 				"description": "Get properties of a partner namespace.",
 				"operationId": "PartnerNamespaces_Get",
-				"consumes": [
-				],
+				"consumes": [],
 				"produces": [
 					"application/json"
 				],
@@ -2803,8 +2790,7 @@
 				"summary": "Delete a partner namespace.",
 				"description": "Delete existing partner namespace.",
 				"operationId": "PartnerNamespaces_Delete",
-				"consumes": [
-				],
+				"consumes": [],
 				"produces": [
 					"application/json"
 				],
@@ -2925,8 +2911,7 @@
 				"summary": "List partner namespaces under an Azure subscription.",
 				"description": "List all the partner namespaces under an Azure subscription.",
 				"operationId": "PartnerNamespaces_ListBySubscription",
-				"consumes": [
-				],
+				"consumes": [],
 				"produces": [
 					"application/json"
 				],
@@ -2973,8 +2958,7 @@
 				"summary": "List partner namespaces under a resource group.",
 				"description": "List all the partner namespaces under a resource group.",
 				"operationId": "PartnerNamespaces_ListByResourceGroup",
-				"consumes": [
-				],
+				"consumes": [],
 				"produces": [
 					"application/json"
 				],
@@ -3028,8 +3012,7 @@
 				"summary": "List keys for a partner namespace.",
 				"description": "List the two keys used to publish to a partner namespace.",
 				"operationId": "PartnerNamespaces_ListSharedAccessKeys",
-				"consumes": [
-				],
+				"consumes": [],
 				"produces": [
 					"application/json"
 				],
@@ -3144,8 +3127,7 @@
 				"summary": "Get a partner registration.",
 				"description": "Gets a partner registration with the specified parameters.",
 				"operationId": "PartnerRegistrations_Get",
-				"consumes": [
-				],
+				"consumes": [],
 				"produces": [
 					"application/json"
 				],
@@ -3262,8 +3244,7 @@
 				"summary": "Delete a partner registration.",
 				"description": "Deletes a partner registration with the specified parameters.",
 				"operationId": "PartnerRegistrations_Delete",
-				"consumes": [
-				],
+        "consumes": [],
 				"produces": [
 					"application/json"
 				],
@@ -3382,8 +3363,7 @@
 				"summary": "List partner registrations under an Azure subscription.",
 				"description": "List all the partner registrations under an Azure subscription.",
 				"operationId": "PartnerRegistrations_ListBySubscription",
-				"consumes": [
-				],
+				"consumes": [],
 				"produces": [
 					"application/json"
 				],
@@ -3430,8 +3410,7 @@
 				"summary": "List partner registrations under a resource group.",
 				"description": "List all the partner registrations under a resource group.",
 				"operationId": "PartnerRegistrations_ListByResourceGroup",
-				"consumes": [
-				],
+				"consumes": [],
 				"produces": [
 					"application/json"
 				],
