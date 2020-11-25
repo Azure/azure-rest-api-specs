@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "AttestationManagementClient",
-    "description": "Various APIs for managing resources in attestation service. This primarily encompasses per-instance instance management.",
+    "description": "Various APIs for managing resources in attestation service. This primarily encompasses per-provider management.",
     "version": "2020-10-01"
   },
   "host": "management.azure.com",
@@ -80,11 +80,7 @@
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "providerName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Name of the attestation service instance"
+            "$ref": "#/parameters/ProviderName"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -92,7 +88,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The status of the specified attestation service instance",
+            "description": "The status of the specified attestation provider",
             "schema": {
               "$ref": "#/definitions/AttestationProvider"
             }
@@ -110,7 +106,7 @@
           "AttestationProviders"
         ],
         "operationId": "AttestationProviders_Create",
-        "description": "Creates a new Attestation Provider instance.",
+        "description": "Creates a new Attestation Provider.",
         "x-ms-examples": {
           "AttestationProviders_Create": {
             "$ref": "./examples/Create_AttestationProvider.json"
@@ -128,7 +124,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "Name of the attestation service instance."
+            "description": "Name of the attestation provider."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -188,7 +184,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "Name of the attestation service instance."
+            "description": "Name of the attestation provider."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -422,15 +418,15 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Attestation/attestationProviders/{instanceName}/privateEndpointConnections/{privateEndpointConnectionName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Attestation/attestationProviders/{providerName}/privateEndpointConnections/{privateEndpointConnectionName}": {
       "get": {
         "tags": [
           "PrivateEndpointConnections"
         ],
         "operationId": "PrivateEndpointConnections_Get",
-        "description": "Gets the specified private endpoint connection associated with the attestation instance.",
+        "description": "Gets the specified private endpoint connection associated with the attestation provider.",
         "x-ms-examples": {
-          "AttestationInstanceGetPrivateEndpointConnection": {
+          "AttestationProviderGetPrivateEndpointConnection": {
             "$ref": "./examples/getPrivateEndpointConnection.json"
           }
         },
@@ -442,7 +438,7 @@
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/InstanceName"
+            "$ref": "#/parameters/ProviderName"
           },
           {
             "$ref": "#/parameters/PrivateEndpointConnectionName"
@@ -474,9 +470,9 @@
           "PrivateEndpointConnections"
         ],
         "operationId": "PrivateEndpointConnections_Put",
-        "description": "Updates the specified private endpoint connection associated with the attestation instance.",
+        "description": "Updates the specified private endpoint connection associated with the attestation provider.",
         "x-ms-examples": {
-          "AttestationInstancePutPrivateEndpointConnection": {
+          "AttestationProviderPutPrivateEndpointConnection": {
             "$ref": "./examples/putPrivateEndpointConnection.json"
           }
         },
@@ -488,7 +484,7 @@
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/InstanceName"
+            "$ref": "#/parameters/ProviderName"
           },
           {
             "$ref": "#/parameters/PrivateEndpointConnectionName"
@@ -518,6 +514,7 @@
             "headers": {
               "Retry-After": {
                 "description": "(specified only if operation does not finish synchronously) The recommended number of seconds to wait before calling the URI specified in Azure-AsyncOperation.",
+                "format": "int32",
                 "type": "integer"
               },
               "Azure-AsyncOperation": {
@@ -542,9 +539,9 @@
           "PrivateEndpointConnections"
         ],
         "operationId": "PrivateEndpointConnections_Delete",
-        "description": "Deletes the specified private endpoint connection associated with the attestation instance.",
+        "description": "Deletes the specified private endpoint connection associated with the attestation provider.",
         "x-ms-examples": {
-          "AttestationInstanceDeletePrivateEndpointConnection": {
+          "AttestationProviderDeletePrivateEndpointConnection": {
             "$ref": "./examples/deletePrivateEndpointConnection.json"
           }
         },
@@ -556,7 +553,7 @@
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/InstanceName"
+            "$ref": "#/parameters/ProviderName"
           },
           {
             "$ref": "#/parameters/PrivateEndpointConnectionName"
@@ -580,6 +577,7 @@
             "headers": {
               "Retry-After": {
                 "description": "The recommended number of seconds to wait before calling the URI specified in the location header.",
+                "format": "int32",
                 "type": "integer"
               },
               "Location": {
@@ -601,13 +599,13 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Attestation/attestationProviders/{instanceName}/privateLinkResources": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Attestation/attestationProviders/{providerName}/privateLinkResources": {
       "get": {
         "tags": [
           "PrivateLinkResources"
         ],
         "operationId": "PrivateLinkResources_ListByProvider",
-        "description": "Gets the private link resources supported for the attestation instance.",
+        "description": "Gets the private link resources supported for the provider.",
         "x-ms-examples": {
           "AttestationProviderListPrivateLinkResources": {
             "$ref": "./examples/listPrivateLinkResources.json"
@@ -621,7 +619,7 @@
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/InstanceName"
+            "$ref": "#/parameters/ProviderName"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -731,7 +729,7 @@
       "properties": {
         "trustModel": {
           "type": "string",
-          "description": "Trust model for the attestation service instance."
+          "description": "Trust model for the attestation provider."
         },
         "status": {
           "type": "string",
@@ -801,7 +799,7 @@
       }
     },
     "AttestationServicePatchParams": {
-      "description": "Parameters for patching an attestation service instance",
+      "description": "Parameters for patching an attestation provider",
       "x-ms-azure-resource": true,
       "properties": {
         "tags": {
@@ -809,12 +807,12 @@
           "additionalProperties": {
             "type": "string"
           },
-          "description": "The tags that will be assigned to the attestation service instance."
+          "description": "The tags that will be assigned to the attestation provider."
         }
       }
     },
     "AttestationServiceCreationParams": {
-      "description": "Parameters for creating an attestation service instance",
+      "description": "Parameters for creating an attestation provider",
       "required": [
         "location",
         "properties"
@@ -823,23 +821,23 @@
       "properties": {
         "location": {
           "type": "string",
-          "description": "The supported Azure location where the attestation service instance should be created."
+          "description": "The supported Azure location where the attestation provider should be created."
         },
         "tags": {
           "type": "object",
           "additionalProperties": {
             "type": "string"
           },
-          "description": "The tags that will be assigned to the attestation service instance."
+          "description": "The tags that will be assigned to the attestation provider."
         },
         "properties": {
           "$ref": "#/definitions/AttestationServiceCreationSpecificParams",
-          "description": "Properties of the attestation service instance"
+          "description": "Properties of the attestation provider"
         }
       }
     },
     "AttestationServiceCreationSpecificParams": {
-      "description": "Client supplied parameters used to create a new attestation service instance.",
+      "description": "Client supplied parameters used to create a new attestation provider.",
       "properties": {
         "policySigningCertificates": {
           "description": "JSON Web Key Set defining a set of X.509 Certificates that will represent the parent certificate for the signing certificate used for policy operations",
@@ -1018,6 +1016,32 @@
         }
       },
       "description": "Properties of a private link resource."
+    },
+    "Resource": {
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Fully qualified identifier of the attestation provider."
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Name of the attestation provider."
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource type of the attestation provider."
+        },
+        "location": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Azure location of the attestation provider."
+        }
+      },
+      "description": "Attestation resource",
+      "x-ms-azure-resource": true
     }
   },
   "parameters": {
@@ -1036,13 +1060,13 @@
       "description": "Name of the private endpoint connection associated with the attestation providers.",
       "x-ms-parameter-location": "method"
     },
-    "InstanceName": {
-      "name": "instanceName",
+    "ProviderName": {
+      "name": "providerName",
       "in": "path",
       "required": true,
       "type": "string",
       "pattern": "^[a-zA-Z0-9-]{3,24}$",
-      "description": "The name of the attestation instance.",
+      "description": "The name of the attestation provider.",
       "x-ms-parameter-location": "method"
     }
   }
