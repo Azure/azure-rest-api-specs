@@ -128,48 +128,6 @@
           "application/json"
         ]
       }
-    },
-    "/providers/Microsoft.PowerPlatform/operations": {
-      "get": {
-        "tags": [
-          "Operations"
-        ],
-        "description": "Lists all of the available PowerPlatform REST API operations.",
-        "x-ms-examples": {
-          "Lists all of the available PowerPlatform REST API operations": {
-            "$ref": "./examples/listOperations.json"
-          }
-        },
-        "operationId": "Operations_List",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "../../common/v1/definitions.json#/definitions/OperationList"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": null
-        },
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ]
-      }
     }
   },
   "definitions": {
