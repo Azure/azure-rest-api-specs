@@ -58,6 +58,12 @@ swagger-to-sdk:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_saas']
 ```
 
+``` yaml
+directive:
+  - suppress: DeleteMustNotHaveRequestBody
+    reason: saas in a tenant level and its an exsisting API
+``` 
+
 ## Go
 
 See configuration in [readme.go.md](./readme.go.md)
