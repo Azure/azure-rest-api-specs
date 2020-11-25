@@ -115,7 +115,7 @@
             "in": "body",
             "name": "purchase",
             "description": "The purchase.",
-            "required": false,
+            "required": true,
             "x-ms-client-flatten": true,
             "schema": {
               "$ref": "#/definitions/PurchaseRequest"
@@ -375,6 +375,7 @@
         "inbound+outbound",
         "none"
       ],
+      "default": "none",
       "x-ms-enum": {
         "name": "CapabilityValue",
         "modelAsString": true
@@ -383,6 +384,10 @@
     "Capabilities": {
       "description": "The capabilities of a phone number.",
       "type": "object",
+      "required": [
+        "sms",
+        "calling"
+      ],
       "properties": {
         "sms": {
           "description": "Available Sms capabilities.",
@@ -394,23 +399,17 @@
         }
       }
     },
-    "AvailableCapabilities": {
-      "description": "The capabilities of a phone number that are available.",
+    "SearchCapabilities": {
+      "description": "The capabilities of a phone number.",
       "type": "object",
       "properties": {
         "sms": {
           "description": "Available Sms capabilities.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/CapabilityValue"
-          }
+          "$ref": "#/definitions/CapabilityValue"
         },
         "calling": {
           "description": "Available Calling capabilities.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/CapabilityValue"
-          }
+          "$ref": "#/definitions/CapabilityValue"
         }
       }
     },
@@ -439,24 +438,21 @@
       }
     },
     "MonthlyRate": {
-      "description": "Represents a wrapper of rate information",
+      "description": "The monthly incurred cost for a single phone number.",
       "type": "object",
+      "required": [
+        "value",
+        "currency"
+      ],
       "properties": {
         "value": {
           "format": "double",
-          "description": "The monthly rate of a phone plan group",
+          "description": "The cost amount.",
           "type": "number"
         },
         "currency": {
-          "description": "The currency of a phone plan group",
-          "enum": [
-            "USD"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "Currency",
-            "modelAsString": true
-          }
+          "description": "The currency of the cost amount.",
+          "type": "string"
         }
       }
     },
@@ -478,6 +474,13 @@
     "Operation": {
       "type": "object",
       "description": "Long running operation.",
+      "required": [
+        "status",
+        "kind",
+        "id",
+        "createdDateTime",
+        "lastActionDateTime"
+      ],
       "properties": {
         "status": {
           "description": "Status of operation.",
@@ -516,20 +519,17 @@
           "type": "string"
         },
         "error": {
-          "$ref": "#/definitions/ErrorBody"
+          "$ref": "#/definitions/Error"
         }
-      },
-      "required": [
-        "status",
-        "kind",
-        "id",
-        "createdDateTime",
-        "lastActionDateTime"
-      ]
+      }
     },
-    "ErrorBody": {
+    "Error": {
       "description": "Represents a service error response body.",
       "type": "object",
+      "required": [
+        "code",
+        "message"
+      ],
       "properties": {
         "code": {
           "description": "The error code in the error response.",
@@ -538,24 +538,44 @@
         "message": {
           "description": "The error message in the error response.",
           "type": "string"
+        },
+        "innererror": {
+          "x-ms-client-name": "innerError",
+          "readOnly": true,
+          "$ref": "#/definitions/Error"
         }
       }
     },
     "ErrorResponse": {
       "description": "Represents a service error response.",
       "type": "object",
+      "required": [
+        "error"
+      ],
       "properties": {
         "error": {
-          "$ref": "#/definitions/ErrorBody"
+          "$ref": "#/definitions/Error"
         }
       }
     },
     "AcquiredPhoneNumber": {
       "description": "The acquired phone number and its metadata and configuration.",
       "type": "object",
+      "required": [
+        "id",
+        "phoneNumber",
+        "countryCode",
+        "numberType",
+        "assignmentType",
+        "purchaseDate",
+        "capabilities",
+        "callbackUrl",
+        "applicationId",
+        "monthlyRate"
+      ],
       "properties": {
         "id": {
-          "description": "The id, which is the phone number in E.164 format without the leading +.",
+          "description": "The id, this is the same as the phone number in E.164 format.",
           "type": "string"
         },
         "phoneNumber": {
@@ -654,7 +674,7 @@
         },
         "capabilities": {
           "description": "The phone number's capabilities.",
-          "$ref": "#/definitions/Capabilities"
+          "$ref": "#/definitions/SearchCapabilities"
         },
         "areaCode": {
           "description": "The desired area code.",
@@ -770,7 +790,7 @@
     "PhoneNumberId": {
       "in": "path",
       "name": "phoneNumber",
-      "description": "The phone number id, this is the phone number in E.164 format without the leading +.",
+      "description": "The phone number id in E.164 format. The leading plus can be either + or encoded as %2B.",
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"
