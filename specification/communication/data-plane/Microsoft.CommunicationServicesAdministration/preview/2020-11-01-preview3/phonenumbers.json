@@ -621,7 +621,7 @@
         "phoneNumbers"
       ],
       "properties": {
-        "phoneNumbers": {
+        "value": {
           "description": "Represents a list of acquired phone numbers.",
           "type": "array",
           "items": {
@@ -670,6 +670,15 @@
     "SearchResult": {
       "description": "The result of a phone number search operation.",
       "type": "object",
+      "required": [
+        "id",
+        "phoneNumbers",
+        "numberType",
+        "assignmentType",
+        "capabilities",
+        "monthlyRate",
+        "searchExpiresBy"
+      ],
       "properties": {
         "id": {
           "description": "The search id.",
