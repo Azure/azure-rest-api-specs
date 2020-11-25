@@ -201,6 +201,41 @@
             "$ref": "./examples/UpdatePrivateStoreOffer.json"
           }
         }
+      },
+      "post": {
+        "tags": [
+          "PrivateStores"
+        ],
+        "operationId": "PrivateStoreOffer_Post",
+        "description": "Delete Private store offer. This is a workaround.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "payload",
+            "schema": {
+              "$ref": "#/definitions/PrivateStoreOperation"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Operation succeeded"
+          },
+          "default": {
+            "description": "Microsoft.Marketplace error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PostPrivateStoreOffer": {
+            "$ref": "./examples/PostPrivateStoreOffer.json"
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Marketplace/privateStores/{privateStoreId}/offers/{offerId}": {
@@ -312,6 +347,12 @@
             "description": "OK. The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/PrivateStoreList"
+            }
+          },
+          "default": {
+            "description": "Microsoft.Marketplace error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -536,6 +577,18 @@
         }
       }
     },
+    "PrivateStoreOperation": {
+      "description": "Set the Operation for the POST method. Ping or Delete",
+      "type": "string",
+      "enum": [
+        "DeletePrivateStoreOffer",
+        "Ping"
+      ],
+      "x-ms-enum": {
+        "name": "Operation",
+        "modelAsString": true
+      }
+    },
     "PrivateStore": {
       "description": "The PrivateStore data structure.",
       "type": "object",
@@ -575,6 +628,37 @@
         "eTag": {
           "description": "Identifier for purposes of race condition",
           "type": "string"
+        },
+        "privateStoreName": {
+          "description": "Private Store Name",
+          "type": "string"
+        },
+        "tenantTag": {
+          "description": "Tenant Tag",
+          "type": "string"
+        },
+        "tenantIds": {
+          "description": "Tenant ids",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "customerTag": {
+          "description": "Customer tag",
+          "type": "string"
+        },
+        "hasCommercialAssociation": {
+          "description": "Indicating whether private store has association with Commercial's Billing Account (through billing account's customer tag retrieved from GSM for a subscription",
+          "type": "boolean"
+        },
+        "hasMultiTenantAssociation": {
+          "description": "Indicating whether private store has association with multiple tenants (through tenant's tag retrieved from AAD",
+          "type": "boolean"
+        },
+        "isGov": {
+          "description": "Is government",
+          "type": "boolean"
         }
       }
     },
@@ -636,14 +720,14 @@
           "description": "Private store unique id",
           "type": "string"
         },
-        "createdBy": {
+        "createdAt": {
           "readOnly": true,
-          "description": "Private store offer creator name",
+          "description": "Private store offer creation date",
           "type": "string"
         },
-        "createdDate": {
+        "modifiedAt": {
           "readOnly": true,
-          "description": "Private store offer created date",
+          "description": "Private store offer modification date",
           "type": "string"
         },
         "specificPlanIdsLimitation": {
@@ -651,6 +735,24 @@
           "type": "array",
           "items": {
             "type": "string"
+          }
+        },
+        "updateSuppressedDueIdempotence": {
+          "description": "Indicating whether the offer was not updated to db (true = not updated). If the allow list is identical to the existed one in db, the offer would not be updated.",
+          "type": "boolean"
+        },
+        "iconFileUris": {
+          "description": "Icon File Uris",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "plans": {
+          "description": "Offer plans",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Plan"
           }
         }
       }
@@ -670,6 +772,30 @@
         },
         "planDisplayName": {
           "description": "Friendly name for the plan for display in the marketplace",
+          "type": "string",
+          "readOnly": true
+        },
+        "accessibility": {
+          "description": "Plan accessibility",
+          "type": "string",
+          "enum": [
+            "Unknown",
+            "Public",
+            "PrivateTenantOnLevel",
+            "PrivateSubscriptionOnLevel"
+          ],
+          "x-ms-enum": {
+            "name": "accessibility",
+            "modelAsString": true
+          }
+        },
+        "altStackReference": {
+          "description": "Alternative stack type",
+          "type": "string",
+          "readOnly": true
+        },
+        "stackType": {
+          "description": "Stack type (classic or arm)",
           "type": "string",
           "readOnly": true
         }
