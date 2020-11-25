@@ -2668,6 +2668,240 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/vpnGateways/{gatewayName}/natRules/{natRuleName}": {
+      "get": {
+        "operationId": "NatRules_Get",
+        "x-ms-examples": {
+          "NatRuleGet": {
+            "$ref": "./examples/NatRuleGet.json"
+          }
+        },
+        "description": "Retrieves the details of a nat ruleGet.",
+        "parameters": [
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The resource group name of the VpnGateway."
+          },
+          {
+            "name": "gatewayName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the gateway."
+          },
+          {
+            "name": "natRuleName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the nat rule."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. Returns the details of the nat rule.",
+            "schema": {
+              "$ref": "#/definitions/VpnGatewayNatRule"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "NatRules_CreateOrUpdate",
+        "x-ms-examples": {
+          "NatRulePut": {
+            "$ref": "./examples/NatRulePut.json"
+          }
+        },
+        "description": "Creates a nat rule to a scalable vpn gateway if it doesn't exist else updates the existing nat rules.",
+        "parameters": [
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The resource group name of the VpnGateway."
+          },
+          {
+            "name": "gatewayName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the gateway."
+          },
+          {
+            "name": "natRuleName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the nat rule."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "NatRuleParameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/VpnGatewayNatRule"
+            },
+            "description": "Parameters supplied to create or Update a Nat Rule."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. Returns the details of the nat rule created or updated.",
+            "schema": {
+              "$ref": "#/definitions/VpnGatewayNatRule"
+            }
+          },
+          "201": {
+            "description": "Request successful. Returns the details of the nat rule created or updated.",
+            "schema": {
+              "$ref": "#/definitions/VpnGatewayNatRule"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      },
+      "delete": {
+        "operationId": "NatRules_Delete",
+        "x-ms-examples": {
+          "NatRuleDelete": {
+            "$ref": "./examples/NatRuleDelete.json"
+          }
+        },
+        "description": "Deletes a nat rule.",
+        "parameters": [
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The resource group name of the VpnGateway."
+          },
+          {
+            "name": "gatewayName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the gateway."
+          },
+          {
+            "name": "natRuleName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the nat rule."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. Nat Rule deleted."
+          },
+          "202": {
+            "description": "Request received successfully. Nat Rule deletion is in progress; follow the Location header to poll for final outcome."
+          },
+          "204": {
+            "description": "No nat rules exist by the name provided."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/vpnGateways/{gatewayName}/natRules": {
+      "get": {
+        "operationId": "NatRules_ListByVpnGateway",
+        "x-ms-examples": {
+          "NatRuleList": {
+            "$ref": "./examples/NatRuleList.json"
+          }
+        },
+        "description": "Retrieves all nat rules for a particular virtual wan vpn gateway.",
+        "parameters": [
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The resource group name of the VpnGateway."
+          },
+          {
+            "name": "gatewayName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the gateway."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. Returns all Nat rules for a virtual wan vpn gateway.",
+            "schema": {
+              "$ref": "#/definitions/ListVpnGatewayNatRulesResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/p2svpnGateways/{gatewayName}": {
       "get": {
         "operationId": "P2sVpnGateways_Get",
@@ -5741,6 +5975,13 @@
         "isRoutingPreferenceInternet": {
           "type": "boolean",
           "description": "Enable Routing Preference property for the Public IP Interface of the VpnGateway."
+        },
+        "natRules": {
+          "type": "array",
+          "description": "List of all the nat Rules associated with the gateway.",
+          "items": {
+            "$ref": "#/definitions/VpnGatewayNatRule"
+          }
         }
       },
       "description": "Parameters for VpnGateway."
@@ -5794,6 +6035,124 @@
             "$ref": "#/definitions/VpnGateway"
           },
           "description": "List of VpnGateways."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "URL to get the next set of operation list results if there are any."
+        }
+      }
+    },
+    "VpnNatRuleMapping": {
+      "properties": {
+        "addressSpace": {
+          "type": "string",
+          "description": "Address space for Vpn NatRule mapping."
+        }
+      },
+      "description": "Vpn NatRule mapping."
+    },
+    "VpnGatewayNatRuleProperties": {
+      "properties": {
+        "provisioningState": {
+          "readOnly": true,
+          "$ref": "./network.json#/definitions/ProvisioningState",
+          "description": "The provisioning state of the NAT Rule resource."
+        },	  
+        "type": {
+          "type": "string",
+          "description": "The type of NAT rule for VPN NAT.",
+          "enum": [
+            "Static",
+            "Dynamic"
+          ],
+          "x-ms-enum": {
+            "name": "VpnNatRuleType",
+            "modelAsString": true
+          }
+        },
+        "mode": {
+          "type": "string",
+          "description": "The Source NAT direction of a VPN NAT.",
+          "enum": [
+            "EgressSnat",
+            "IngressSnat"
+          ],
+          "x-ms-enum": {
+            "name": "VpnNatRuleMode",
+            "modelAsString": true
+          }
+        },
+        "internalMappings": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VpnNatRuleMapping"
+          },
+          "description": "The private IP address internal mapping for NAT."
+        },
+        "externalMappings": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VpnNatRuleMapping"
+          },
+          "description": "The private IP address external mapping for NAT."
+        },
+        "ipConfigurationId": {
+          "type": "string",
+          "description": "The IP Configuration ID this NAT rule applies to."
+        },
+        "egressVpnSiteLinkConnections": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "./network.json#/definitions/SubResource"
+          },
+          "description": "List of egress VpnSiteLinkConnections"
+        },
+        "ingressVpnSiteLinkConnections": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "./network.json#/definitions/SubResource"
+          },
+          "description": "List of ingress VpnSiteLinkConnections."
+        }
+      },
+      "description": "Parameters for VpnGatewayNatRule."
+    },
+    "VpnGatewayNatRule": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/VpnGatewayNatRuleProperties",
+          "description": "Properties of the VpnGateway NAT rule."
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the resource that is unique within a resource group. This name can be used to access the resource."
+        },		
+        "etag": {
+          "type": "string",
+          "readOnly": true,
+          "description": "A unique read-only string that changes whenever the resource is updated."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./network.json#/definitions/Resource"
+        }
+      ],
+      "description": "VpnGatewayNatRule Resource."
+    },
+	
+    "ListVpnGatewayNatRulesResult": {
+      "description": "Result of the request to list all nat rules to a virtual wan vpn gateway. It contains a list of Nat rules and a URL nextLink to get the next set of results.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VpnGatewayNatRule"
+          },
+          "description": "List of Nat Rules."
         },
         "nextLink": {
           "type": "string",
@@ -6062,6 +6421,22 @@
           "readOnly": true,
           "$ref": "./network.json#/definitions/ProvisioningState",
           "description": "The provisioning state of the VPN site link connection resource."
+        },
+        "ingressNatRules": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "./network.json#/definitions/SubResource"
+          },
+          "description": "List of ingress NatRules"
+        },
+        "egressNatRules": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "./network.json#/definitions/SubResource"
+          },
+          "description": "List of egress NatRules."
         }
       },
       "description": "Parameters for VpnConnection."
