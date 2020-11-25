@@ -120,7 +120,8 @@
         "microsoft.base.hybrid.road",
         "microsoft.imagery",
         "microsoft.weather.radar.main",
-        "microsoft.weather.infrared.main"
+        "microsoft.weather.infrared.main",
+        "microsoft.dem"
       ],
       "x-ms-enum": {
         "name": "TilesetID",
@@ -169,6 +170,10 @@
           {
             "value": "microsoft.weather.infrared.main",
             "description": "Weather infrared tiles. Latest Infrared Satellite images shows clouds by their temperature.  Please see [coverage information](https://aka.ms/AzureMapsWeatherCoverage) for Azure Maps Weather service. To learn more about the returned Satellite data, please see [Weather concepts](https://aka.ms/AzureMapsWeatherConcepts).<br>\n\nSupports zoom levels 0 through 15. Format: raster (png)."
+          },
+          {
+            "value": "microsoft.dem",
+            "description": "Digital elevation model tiles. The imagery tile in tiff format including the elevation data of the surface of earth.\nSupports zoom level 13 only. Format: raster (tiff)."
           }
         ]
       },
@@ -236,7 +241,6 @@
   "paths": {
     "/map/tile": {
       "get": {
-        "x-publish": true,
         "description": "**Applies to**: S0 and S1 pricing tiers.\n\nThe Get Map Tiles API allows users to request map tiles in vector or raster formats typically to be integrated  into a map control or SDK. Some example tiles that can be requested are Azure Maps road tiles, real-time  Weather Radar tiles or the map tiles created using [Azure Maps Creator](https://aka.ms/amcreator). By default,  Azure Maps uses vector tiles for its web map control (Web SDK) and Android SDK.",
         "operationId": "RenderV2_GetMapTilePreview",
         "x-ms-examples": {
@@ -294,7 +298,7 @@
                 },
                 {
                   "value": "512",
-                  "description": "Return a 512 by 512 pixel tile.  Available for all tilesetIds except for \n* microsoft.weather.radar.main\n* microsoft.weather.infrared.main\n* microsoft.base.hybrid"
+                  "description": "Return a 512 by 512 pixel tile.  Available for all tilesetIds except for \n* microsoft.weather.radar.main\n* microsoft.weather.infrared.main\n* microsoft.base.hybrid\n* microsoft.dem"
                 }
               ]
             }
