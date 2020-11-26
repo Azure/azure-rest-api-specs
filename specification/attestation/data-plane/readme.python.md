@@ -16,14 +16,6 @@ python:
   clear-output-folder: true
 ```
 
-### Python multi-api
-
-Generate all API versions currently shipped for this package
-
-```yaml $(python) && $(multiapi)
-batch:
-  - tag: package-2020-10-01
-```
 
 ``` yaml $(python) && $(python-mode) == 'update'
 python:
