@@ -23,7 +23,6 @@ These are the global settings for the Instance Metadata Service API.
 openapi-type: data-plane
 azure-arm: true
 tag: package-2019-02-01
-output-folder: ./Generated
 ```
 
 ### Tag: package-2018-10-01
