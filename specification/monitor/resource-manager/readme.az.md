@@ -46,7 +46,6 @@ cli:
       - where:
           group: DataCollectionRules
           param: dataCollectionRuleName
-        name: name
         alias:
           - name
           - n
@@ -67,23 +66,17 @@ cli:
       - where:
           group: DataCollectionRuleAssociations
           param: resourceUri
-        name: resource
+        alias:
+          - resource
       - where:
           group: DataCollectionRuleAssociations
           param: dataCollectionRuleName
-        name: rule_name
+        alias:
+          - rule_name
       - where:
           group: DataCollectionRuleAssociations
           param: associationName
-        name: name
         alias:
           - name
           - n
-    #   - where:
-    #       group: DataCollectionRuleAssociations
-    #       op: Create
-    #       param: dataCollectionRuleId
-    #     name: rule_id
-
-
 ```
