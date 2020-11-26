@@ -9,11 +9,18 @@ go:
   clear-output-folder: true
 ```
 
-### Tag: package-2020-05-31-preview and go
+### Go multi-api
 
-These settings apply only when `--tag=package-2020-05-31-preview --go` is specified on the command line.
+``` yaml $(go) && $(multiapi)
+batch:
+  - tag: package-2020-10-31
+```
+
+### Tag: package-2020-10-31 and go
+
+These settings apply only when `--tag=package-2020-10-31 --go` is specified on the command line.
 Please also specify `--go-sdks-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
-```yaml $(tag) == 'package-2020-05-31-preview' && $(go)
-output-folder: $(go-sdk-folder)/services/preview/$(namespace)/2020-05-31/$(namespace)
+```yaml $(tag) == 'package-2020-10-31' && $(go)
+output-folder: $(go-sdk-folder)/services/$(namespace)/2020-10-31/$(namespace)
 ```
