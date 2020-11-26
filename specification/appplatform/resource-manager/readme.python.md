@@ -21,8 +21,20 @@ Generate all API versions currently shipped for this package
 
 ```yaml $(python) && $(multiapi)
 batch:
+  - tag: package-preview-2020-11
   - tag: package-2020-07
   - tag: package-2019-05-01-preview
+```
+
+### Tag: package-preview-2020-11 and python
+
+These settings apply only when `--tag=package-preview-2020-11 --python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
+
+``` yaml $(tag) == 'package-preview-2020-11' && $(python)
+python:
+  namespace: azure.mgmt.appplatform.v2020_11_01_preview
+  output-folder: $(python-sdks-folder)/appplatform/azure-mgmt-appplatform/azure/mgmt/appplatform/v2020_11_01_preview
 ```
 
 ### Tag: package-2020-07 and python
@@ -46,4 +58,3 @@ python:
   namespace: azure.mgmt.appplatform.v2019_05_01_preview
   output-folder: $(python-sdks-folder)/appplatform/azure-mgmt-appplatform/azure/mgmt/appplatform/v2019_05_01_preview
 ```
-

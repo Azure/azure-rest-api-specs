@@ -3018,12 +3018,34 @@
           "description": "Error when apply Monitoring Setting changes."
         },
         "traceEnabled": {
-          "description": "Indicates whether enable the trace functionality",
+          "description": "Indicates whether enable the trace functionality, which will be deprecated since api version 2020-11-01-preview. Please leverage appInsightsInstrumentationKey to indicate if monitoringSettings enabled or not",
           "type": "boolean"
         },
         "appInsightsInstrumentationKey": {
-          "description": "Target application insight instrumentation key",
+          "description": "Target application insight instrumentation key, null or whitespace include empty will disable monitoringSettings",
           "type": "string"
+        },
+        "appInsightsSamplingRate": {
+          "description": "Indicates the sampling rate of application insight agent, should be in range [0.0, 100.0]",
+          "format": "double",
+          "maximum": 100.0,
+          "minimum": 0.0,
+          "type": "number"
+        },
+        "appInsightsAgentVersions": {
+          "$ref": "#/definitions/applicationInsightsAgentVersions",
+          "description": "Indicates the versions of application insight agent"
+        }
+      }
+    },
+    "applicationInsightsAgentVersions": {
+      "description": "Application Insights agent versions properties payload",
+      "type": "object",
+      "properties": {
+        "java": {
+          "description": "Indicates the version of application insight java agent",
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -3064,6 +3086,60 @@
               },
               "description": "A list of public IP addresses."
             }
+          }
+        },
+        "requiredTraffics": {
+          "description": "Required inbound or outbound traffics for Azure Spring Cloud instance.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/RequiredTraffic"
+          }
+        }
+      }
+    },
+    "RequiredTraffic": {
+      "description": "Required inbound or outbound traffic for Azure Spring Cloud instance.",
+      "type": "object",
+      "properties": {
+        "protocol": {
+          "description": "The protocol of required traffic",
+          "type": "string",
+          "readOnly": true
+        },
+        "port": {
+          "description": "The port of required traffic",
+          "type": "integer",
+          "format": "int32",
+          "readOnly": true
+        },
+        "ips": {
+          "description": "The ip list of required traffic",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "type": "string"
+          }
+        },
+        "fqdns": {
+          "description": "The FQDN list of required traffic",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "type": "string"
+          }
+        },
+        "direction": {
+          "description": "The direction of required traffic",
+          "type": "string",
+          "readOnly": true,
+          "enum": [
+            "Inbound",
+            "Outbound"
+          ],
+          "x-ms-enum": {
+            "name": "trafficDirection",
+            "modelAsString": true
           }
         }
       }
@@ -4468,12 +4544,10 @@
     "ApiVersionParameter": {
       "name": "api-version",
       "in": "query",
-      "description": "Client Api Version.",
+      "description": "The API version to use for this operation.",
       "required": true,
       "type": "string",
-      "enum": [
-        "2020-11-01-preview"
-      ]
+      "minLength": 1
     },
     "SubscriptionIdParameter": {
       "name": "subscriptionId",
