@@ -22,7 +22,7 @@
         "tags": [
           "CheckPrincipalAccess"
         ],
-        "operationId": "CheckPrincipalAccess",
+        "operationId": "RoleAssignments_CheckPrincipalAccess",
         "description": "Check if the given principalId has access to perform list of actions at a given scope.",
         "x-ms-examples": {
           "Check access": {
@@ -141,7 +141,7 @@
           "description": "List of actions.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/Action"
+            "$ref": "#/definitions/RequiredAction"
           }
         },
         "scope": {
@@ -150,7 +150,7 @@
         }
       }
     },
-    "Action": {
+    "RequiredAction": {
       "description": "Action Info",
       "type": "object",
       "required": [
