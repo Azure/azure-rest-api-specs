@@ -18,7 +18,7 @@
     "application/json"
   ],
   "paths": {
-    "/Subscriptions/{subscriptionId}/providers/Microsoft.RecoveryServices/locations/{azureRegion}/backupAadProperties/default": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.RecoveryServices/locations/{azureRegion}/backupAadProperties/default": {
       "get": {
         "tags": [
           "AadProperties"
@@ -45,6 +45,12 @@
             "schema": {
               "$ref": "#/definitions/AADPropertiesResource"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/NewErrorResponse"
+            }
           }
         },
         "x-ms-examples": {
@@ -54,7 +60,7 @@
         }
       }
     },
-    "/Subscriptions/{subscriptionId}/providers/Microsoft.RecoveryServices/locations/{azureRegion}/backupCrossRegionRestore": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.RecoveryServices/locations/{azureRegion}/backupCrossRegionRestore": {
       "post": {
         "tags": [
           "CrossRegionRestore"
@@ -80,13 +86,22 @@
             "description": "resource cross region restore request",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/CrossRegionRestoreRequestResource"
+              "$ref": "#/definitions/CrossRegionRestoreRequest"
             }
           }
         ],
         "responses": {
+          "200": {
+            "description": "OK"
+          },
           "202": {
             "description": "Accepted"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/NewErrorResponse"
+            }
           }
         },
         "x-ms-long-running-operation": true,
@@ -100,7 +115,7 @@
         }
       }
     },
-    "/Subscriptions/{subscriptionId}/providers/Microsoft.RecoveryServices/locations/{azureRegion}/backupCrrJob": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.RecoveryServices/locations/{azureRegion}/backupCrrJob": {
       "post": {
         "tags": [
           "CrrJobDetails"
@@ -119,6 +134,15 @@
           },
           {
             "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "CRR Job request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CrrJobRequest"
+            }
           }
         ],
         "responses": {
@@ -126,6 +150,12 @@
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/JobResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/NewErrorResponse"
             }
           }
         },
@@ -136,7 +166,7 @@
         }
       }
     },
-    "/Subscriptions/{subscriptionId}/providers/Microsoft.RecoveryServices/locations/{azureRegion}/backupCrrJobs": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.RecoveryServices/locations/{azureRegion}/backupCrrJobs": {
       "post": {
         "tags": [
           "BackupCrrJobs"
@@ -155,6 +185,29 @@
           },
           {
             "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "Backup CRR Job request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CrrJobRequest"
+            }
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "OData filter options.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$skipToken",
+            "in": "query",
+            "description": "skipToken Filter.",
+            "required": false,
+            "type": "string"
           }
         ],
         "responses": {
@@ -163,8 +216,15 @@
             "schema": {
               "$ref": "#/definitions/JobResourceList"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/NewErrorResponse"
+            }
           }
         },
+        "x-ms-odata": "#/definitions/JobQueryObject",
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         },
@@ -175,7 +235,7 @@
         }
       }
     },
-    "/Subscriptions/{subscriptionId}/providers/Microsoft.RecoveryServices/locations/{azureRegion}/backupCrrOperationResults/{operationId}": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.RecoveryServices/locations/{azureRegion}/backupCrrOperationResults/{operationId}": {
       "get": {
         "tags": [
           "CrrOperationResults"
@@ -207,6 +267,12 @@
           },
           "202": {
             "description": "Accepted"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/NewErrorResponse"
+            }
           }
         },
         "x-ms-long-running-operation": true,
@@ -220,7 +286,7 @@
         }
       }
     },
-    "/Subscriptions/{subscriptionId}/providers/Microsoft.RecoveryServices/locations/{azureRegion}/backupCrrOperationsStatus/{operationId}": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.RecoveryServices/locations/{azureRegion}/backupCrrOperationsStatus/{operationId}": {
       "get": {
         "tags": [
           "CrrOperationStatus"
@@ -252,6 +318,12 @@
             "schema": {
               "$ref": "#/definitions/OperationStatus"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/NewErrorResponse"
+            }
           }
         },
         "x-ms-examples": {
@@ -261,10 +333,10 @@
         }
       }
     },
-    "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupFabrics/{fabricName}/protectionContainers/{containerName}/protectedItems/{protectedItemName}/recoveryPoints/{recoveryPointId}/accessToken": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupFabrics/{fabricName}/protectionContainers/{containerName}/protectedItems/{protectedItemName}/recoveryPoints/{recoveryPointId}/accessToken": {
       "post": {
         "tags": [
-          "RecoveryPoints"
+          "RecoveryPoints_GetAccessToken"
         ],
         "summary": "Returns the Access token for communication between BMS and Protection service",
         "operationId": "RecoveryPoints_GetAccessToken",
@@ -311,6 +383,15 @@
             "description": "Recovery Point Id",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "Get Access Token request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AADPropertiesResource"
+            }
           }
         ],
         "responses": {
@@ -318,6 +399,15 @@
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/CrrAccessTokenResource"
+            }
+          },
+          "400": {
+            "description": "BadRequest"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/NewErrorResponse"
             }
           }
         },
@@ -328,7 +418,150 @@
         }
       }
     },
-    "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupFabrics/{fabricName}/protectionContainers/{containerName}/protectedItems/{protectedItemName}/recoveryPoints/": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupstorageconfig/vaultstorageconfig": {
+      "get": {
+        "tags": [
+          "BackupResourceStorageConfigs"
+        ],
+        "description": "Fetches resource storage config.",
+        "operationId": "BackupResourceStorageConfigs_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/VaultName"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/BackupResourceConfigResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/NewErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Vault Storage Configuration": {
+            "$ref": "./examples/Common/BackupStorageConfig_Get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "BackupResourceStorageConfigs"
+        ],
+        "description": "Updates vault storage model type.",
+        "operationId": "BackupResourceStorageConfigs_Update",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/VaultName"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "Vault storage config request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/BackupResourceConfigResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/BackupResourceConfigResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/NewErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update Vault Storage Configuration": {
+            "$ref": "./examples/Common/BackupStorageConfig_Put.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "BackupResourceStorageConfigs"
+        ],
+        "description": "Updates vault storage model type.",
+        "operationId": "BackupResourceStorageConfigs_patch",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/VaultName"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "Vault storage config request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/BackupResourceConfigResource"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "NoContent"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/NewErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update Vault Storage Configuration": {
+            "$ref": "./examples/Common/BackupStorageConfig_Patch.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupFabrics/{fabricName}/protectionContainers/{containerName}/protectedItems/{protectedItemName}/recoveryPoints/": {
       "get": {
         "tags": [
           "RecoveryPoints_Crr"
@@ -386,6 +619,12 @@
             "schema": {
               "$ref": "#/definitions/RecoveryPointResourceList"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/NewErrorResponse"
+            }
           }
         },
         "x-ms-odata": "#/definitions/BMSRPQueryObject",
@@ -399,7 +638,7 @@
         }
       }
     },
-    "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupProtectedItems/": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupProtectedItems/": {
       "get": {
         "tags": [
           "BackupProtectedItems_Crr"
@@ -443,6 +682,12 @@
             "schema": {
               "$ref": "#/definitions/ProtectedItemResourceList"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/NewErrorResponse"
+            }
           }
         },
         "x-ms-odata": "#/definitions/ProtectedItemQueryObject",
@@ -458,6 +703,48 @@
     }
   },
   "definitions": {
+    "NewErrorResponse": {
+      "properties": {
+        "error": {
+          "type": "object",
+          "description": "The error object.",
+          "properties": {
+            "code": {
+              "readOnly": true,
+              "type": "string",
+              "description": "The error code."
+            },
+            "message": {
+              "readOnly": true,
+              "type": "string",
+              "description": "The error message."
+            },
+            "target": {
+              "readOnly": true,
+              "type": "string",
+              "description": "The error target."
+            },
+            "details": {
+              "readOnly": true,
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/NewErrorResponse"
+              },
+              "description": "The error details."
+            },
+            "additionalInfo": {
+              "readOnly": true,
+              "type": "array",
+              "items": {
+                "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorAdditionalInfo"
+              },
+              "description": "The error additional info."
+            }
+          }
+        }
+      },
+      "description": "The resource management error response."
+    },
     "AADProperties": {
       "type": "object",
       "properties": {
@@ -546,6 +833,13 @@
           "format": "date-time",
           "description": "Timestamp of the last backup operation on this backup item.",
           "type": "string"
+        },
+        "kpisHealths": {
+          "description": "Health details of different KPIs",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/KPIResourceHealthDetails"
+          }
         },
         "extendedInfo": {
           "$ref": "#/definitions/AzureFileshareProtectedItemExtendedInfo",
@@ -742,32 +1036,11 @@
     "AzureIaaSVMHealthDetails": {
       "description": "Azure IaaS VM workload-specific Health Details.",
       "type": "object",
-      "properties": {
-        "code": {
-          "format": "int32",
-          "description": "Health Code",
-          "type": "integer",
-          "readOnly": true
-        },
-        "title": {
-          "description": "Health Title",
-          "type": "string",
-          "readOnly": true
-        },
-        "message": {
-          "description": "Health Message",
-          "type": "string",
-          "readOnly": true
-        },
-        "recommendations": {
-          "description": "Health Recommended Actions",
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "readOnly": true
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResourceHealthDetails"
         }
-      }
+      ]
     },
     "AzureIaaSVMJob": {
       "description": "Azure IaaS VM workload-specific job object.",
@@ -857,6 +1130,65 @@
         }
       }
     },
+    "KPIResourceHealthDetails": {
+      "description": "KPI Resource Health Details",
+      "type": "object",
+      "properties": {
+        "resourceHealthStatus": {
+          "description": "Resource Health Status",
+          "enum": [
+            "Healthy",
+            "TransientDegraded",
+            "PersistentDegraded",
+            "TransientUnhealthy",
+            "PersistentUnhealthy",
+            "Invalid"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ResourceHealthStatus",
+            "modelAsString": true
+          }
+        },
+        "resourceHealthDetails": {
+          "description": "Resource Health Status",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ResourceHealthDetails"
+          }
+        }
+      }
+    },
+    "ResourceHealthDetails": {
+      "description": "Health Details for backup items.",
+      "type": "object",
+      "properties": {
+        "code": {
+          "format": "int32",
+          "description": "Health Code",
+          "type": "integer",
+          "readOnly": true
+        },
+        "title": {
+          "description": "Health Title",
+          "type": "string",
+          "readOnly": true
+        },
+        "message": {
+          "description": "Health Message",
+          "type": "string",
+          "readOnly": true
+        },
+        "recommendations": {
+          "description": "Health Recommended Actions",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        }
+      }
+    },
     "AzureIaaSVMJobTaskDetails": {
       "description": "Azure IaaS VM workload-specific job task details.",
       "type": "object",
@@ -937,7 +1269,7 @@
           }
         },
         "healthStatus": {
-          "description": "Health status of protected item",
+          "description": "Health status of protected item.",
           "enum": [
             "Passed",
             "ActionRequired",
@@ -955,6 +1287,13 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/AzureIaaSVMHealthDetails"
+          }
+        },
+        "kpisHealths": {
+          "description": "Health details of different KPIs",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/KPIResourceHealthDetails"
           }
         },
         "lastBackupStatus": {
@@ -1258,6 +1597,13 @@
         "extendedInfo": {
           "$ref": "#/definitions/AzureVmWorkloadProtectedItemExtendedInfo",
           "description": "Additional information for this backup item."
+        },
+        "kpisHealths": {
+          "description": "Health details of different KPIs",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/KPIResourceHealthDetails"
+          }
         }
       },
       "x-ms-discriminator-value": "AzureVmWorkloadProtectedItem"
@@ -1485,7 +1831,8 @@
             "Invalid",
             "Full",
             "Log",
-            "Differential"
+            "Differential",
+            "Incremental"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -1738,7 +2085,8 @@
             "Log",
             "Differential",
             "FullAndDifferential",
-            "All"
+            "All",
+            "Incremental"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -1749,6 +2097,101 @@
         "extendedInfo": {
           "description": "In Get Recovery Point, it tells whether extended information about recovery point is asked.",
           "type": "boolean"
+        }
+      }
+    },
+    "BackupResourceConfig": {
+      "description": "The resource storage details.",
+      "type": "object",
+      "properties": {
+        "storageModelType": {
+          "description": "Storage type",
+          "enum": [
+            "Invalid",
+            "GeoRedundant",
+            "LocallyRedundant",
+            "ZoneRedundant",
+            "ReadAccessGeoZoneRedundant"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "StorageType",
+            "modelAsString": true
+          }
+        },
+        "storageType": {
+          "description": "Storage type.",
+          "enum": [
+            "Invalid",
+            "GeoRedundant",
+            "LocallyRedundant",
+            "ZoneRedundant",
+            "ReadAccessGeoZoneRedundant"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "StorageType",
+            "modelAsString": true
+          }
+        },
+        "storageTypeState": {
+          "description": "Locked or Unlocked. Once a machine is registered against a resource, the storageTypeState is always Locked.",
+          "enum": [
+            "Invalid",
+            "Locked",
+            "Unlocked"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "StorageTypeState",
+            "modelAsString": true
+          }
+        },
+        "crossRegionRestoreFlag": {
+          "description": "Opt in details of Cross Region Restore feature.",
+          "type": "boolean"
+        }
+      }
+    },
+    "CrrJobRequest": {
+      "description": "Request object for fetching CRR jobs.",
+      "type": "object",
+      "properties": {
+        "resourceId": {
+          "description": "Entire ARM resource id of the resource",
+          "type": "string"
+        },
+        "jobName": {
+          "description": "Job Name of the job to be fetched",
+          "type": "string"
+        }
+      }
+    },
+    "CrrJobRequestResource": {
+      "description": "Request object for fetching CRR jobs.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/CrrJobRequest",
+          "description": "CrrJobRequestResource properties"
+        }
+      }
+    },
+    "BackupResourceConfigResource": {
+      "description": "The resource storage details.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/BackupResourceConfig",
+          "description": "BackupResourceConfigResource properties"
         }
       }
     },
@@ -1805,9 +2248,15 @@
       }
     },
     "CrrAccessToken": {
-      "description": "Container level access token for CRR",
       "type": "object",
+      "required": [
+        "objectType"
+      ],
       "properties": {
+        "objectType": {
+          "description": "Type of the specific object - used for deserializing",
+          "type": "string"
+        },
         "accessTokenString": {
           "description": "Access token used for authentication",
           "type": "string"
@@ -1827,6 +2276,11 @@
         "resourceId": {
           "description": "Resource Id of the source vault",
           "type": "string"
+        },
+        "protectionContainerId": {
+          "format": "int64",
+          "description": "Protected item container id",
+          "type": "integer"
         },
         "recoveryPointId": {
           "description": "Recovery Point Id",
@@ -1883,11 +2337,34 @@
         "tokenExtendedInformation": {
           "description": "Extended Information about the token like FileSpec etc.",
           "type": "string"
+        },
+        "rpTierInformation": {
+          "description": "Recovery point Tier Information",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "rpOriginalSAOption": {
+          "description": "Recovery point information: Original SA option",
+          "type": "boolean"
+        },
+        "rpIsManagedVirtualMachine": {
+          "description": "Recovery point information: Managed virtual machine",
+          "type": "boolean"
+        },
+        "rpVMSizeDescription": {
+          "description": "Recovery point information: VM size description",
+          "type": "string"
+        },
+        "bMSActiveRegion": {
+          "description": "Active region name of BMS Stamp",
+          "type": "string"
         }
-      }
+      },
+      "discriminator": "objectType"
     },
     "CrrAccessTokenResource": {
-      "description": "Container level access token for CRR",
       "allOf": [
         {
           "$ref": "#/definitions/Resource"
@@ -2468,6 +2945,14 @@
             "format": "int32",
             "type": "integer"
           }
+        },
+        "restoreWithManagedDisks": {
+          "description": "Flag to denote of an Unmanaged disk VM should be restored with Managed disks.",
+          "type": "boolean"
+        },
+        "diskEncryptionSetId": {
+          "description": "DiskEncryptionSet's ID - needed if the VM needs to be encrypted at rest during restore with customer managed key.",
+          "type": "string"
         }
       },
       "x-ms-discriminator-value": "IaasVMRestoreRequest"
@@ -2543,6 +3028,83 @@
         }
       },
       "discriminator": "jobType"
+    },
+    "JobQueryObject": {
+      "description": "Filters to list the jobs.",
+      "type": "object",
+      "properties": {
+        "status": {
+          "description": "Status of the job.",
+          "enum": [
+            "Invalid",
+            "InProgress",
+            "Completed",
+            "Failed",
+            "CompletedWithWarnings",
+            "Cancelled",
+            "Cancelling"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "JobStatus",
+            "modelAsString": true
+          }
+        },
+        "backupManagementType": {
+          "description": "Type of backup management for the job.",
+          "enum": [
+            "Invalid",
+            "AzureIaasVM",
+            "MAB",
+            "DPM",
+            "AzureBackupServer",
+            "AzureSql",
+            "AzureStorage",
+            "AzureWorkload",
+            "DefaultBackup"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "BackupManagementType",
+            "modelAsString": true
+          }
+        },
+        "operation": {
+          "description": "Type of operation.",
+          "enum": [
+            "Invalid",
+            "Register",
+            "UnRegister",
+            "ConfigureBackup",
+            "Backup",
+            "Restore",
+            "DisableBackup",
+            "DeleteBackupData",
+            "CrossRegionRestore",
+            "Undelete",
+            "UpdateCustomerManagedKey"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "JobOperationType",
+            "modelAsString": true
+          }
+        },
+        "jobId": {
+          "description": "JobID represents the job uniquely.",
+          "type": "string"
+        },
+        "startTime": {
+          "format": "date-time",
+          "description": "Job has started at this time. Value is in UTC.",
+          "type": "string"
+        },
+        "endTime": {
+          "format": "date-time",
+          "description": "Job has ended at this time. Value is in UTC.",
+          "type": "string"
+        }
+      }
     },
     "JobResource": {
       "description": "Defines workload agnostic properties for a job.",
@@ -3532,14 +4094,52 @@
           "description": "Database name InstanceName/DataBaseName for SQL or System/DbName for SAP Hana",
           "type": "string"
         },
-        "targetDirectoryMapping": {
-          "description": "This will contain the target folder mapping for the Full/Diff/Log/Incremental pits.",
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
+        "targetDirectoryForFileRestore": {
+          "description": "Target directory location for restore as files.",
+          "type": "string"
         }
       }
+    },
+    "WorkloadCrrAccessToken": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CrrAccessToken"
+        }
+      ],
+      "properties": {
+        "protectableObjectUniqueName": {
+          "type": "string"
+        },
+        "protectableObjectFriendlyName": {
+          "type": "string"
+        },
+        "protectableObjectWorkloadType": {
+          "type": "string"
+        },
+        "protectableObjectProtectionState": {
+          "type": "string"
+        },
+        "protectableObjectContainerHostOsName": {
+          "type": "string"
+        },
+        "protectableObjectParentLogicalContainerName": {
+          "type": "string"
+        },
+        "containerId": {
+          "description": "Container Id",
+          "type": "string"
+        },
+        "policyName": {
+          "description": "Policy Name",
+          "type": "string"
+        },
+        "policyId": {
+          "description": "Policy Id",
+          "type": "string"
+        }
+      },
+      "x-ms-discriminator-value": "WorkloadCrrAccessToken"
     }
   },
   "parameters": {
@@ -3574,9 +4174,9 @@
       "x-ms-parameter-location": "method"
     },
     "VaultName": {
-      "name": "vaultName",
-      "in": "path",
       "description": "The name of the recovery services vault.",
+      "in": "path",
+      "name": "vaultName",
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"
