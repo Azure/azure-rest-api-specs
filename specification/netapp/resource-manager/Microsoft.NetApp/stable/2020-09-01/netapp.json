@@ -1805,7 +1805,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/snapshotPolicies/{snapshotPolicyName}/listVolumes": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/snapshotPolicies/{snapshotPolicyName}/volumes": {
       "get": {
         "tags": [
           "Snapshot Policy List Volumes"
@@ -1834,7 +1834,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/snapshotPolicyVolumeList"
+              "$ref": "#/definitions/volumeList"
             }
           },
           "default": {
@@ -3497,7 +3497,7 @@
         "throughputMibps": {
           "title": "Maximum throughput in Mibps that can be achieved by this volume",
           "type": "number",
-          "example": "128.22",
+          "example": 128.22,
           "maximum": 4500,
           "minimum": 1,
           "multipleOf": 0.001
