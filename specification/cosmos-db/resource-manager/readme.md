@@ -39,6 +39,8 @@ These settings apply only when `--tag=package-2020-09` is specified on the comma
 input-file:
   - Microsoft.DocumentDB/stable/2020-09-01/cosmos-db.json
   - Microsoft.DocumentDB/stable/2020-09-01/notebook.json
+  - Microsoft.DocumentDB/preview/2019-08-01-preview/privateLinkResources.json
+  - Microsoft.DocumentDB/preview/2019-08-01-preview/privateEndpointConnection.json
 ```
 ### Tag: package-2020-06-preview
 
