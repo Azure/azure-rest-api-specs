@@ -2589,6 +2589,51 @@
         "url": "https://docs.microsoft.com/rest/api/searchservice/Custom-analyzers-in-Azure-Search"
       }
     },
+    "NormalizerName": {
+      "type": "string",
+      "enum": [
+        "asciifolding",
+        "elision",
+        "lowercase",
+        "standard",
+        "uppercase"
+      ],
+      "x-ms-enum": {
+        "name": "NormalizerName",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "asciifolding",
+            "name": "AsciiFolding",
+            "description": "Converts alphabetic, numeric, and symbolic Unicode characters which are not in the first 127 ASCII characters (the \"Basic Latin\" Unicode block) into their ASCII equivalents, if such equivalents exist. See http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/miscellaneous/ASCIIFoldingFilter.html"
+          },
+          {
+            "value": "elision",
+            "name": "Elision",
+            "description": "Removes elisions. For example, \"l'avion\" (the plane) will be converted to \"avion\" (plane). See http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/util/ElisionFilter.html"
+          },
+          {
+            "value": "lowercase",
+            "name": "Lowercase",
+            "description": "Normalizes token text to lower case. See http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/core/LowerCaseFilter.htm"
+          },
+          {
+            "value": "standard",
+            "name": "Standard",
+            "description": "Standard normalizer, which consists of lowercase and asciifolding. See http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/reverse/ReverseStringFilter.html"
+          },
+          {
+            "value": "uppercase",
+            "name": "Uppercase",
+            "description": "Normalizes token text to upper case. See http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/core/UpperCaseFilter.html"
+          }
+        ]
+      },
+      "description": "Defines the names of all normalizers supported by Azure Cognitive Search.",
+      "externalDocs": {
+        "url": "TODO t-roblee: link URL"
+      }
+    },
     "CharFilterName": {
       "type": "string",
       "enum": [
@@ -2872,6 +2917,44 @@
       "externalDocs": {
         "url": "http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/core/StopAnalyzer.html"
       }
+    },
+    "CustomNormalizer": {
+      "discriminator": "@odata.type",
+      "x-ms-discriminator-value": "#Microsoft.Azure.Search.CustomNormalizer",
+      "properties": {
+        "@odata.type": {
+          "type": "string",
+          "description": "Identifies the concrete type of the normalizer."
+        },
+        "name": {
+          "type": "string",
+          "externalDocs": {
+            "url": "TODO: t-roblee Update with website link"
+          },
+          "description": "The name of the normalizer. It must only contain letters, digits, spaces, dashes or underscores, can only start and end with alphanumeric characters, and is limited to 128 characters. It cannot end in '.microsoft' nor '.lucene', nor be named 'standard', 'lowercase', 'uppercase', or 'elision'."
+        },
+        "tokenFilters": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TokenFilterName",
+            "x-nullable": false
+          },
+          "description": "A list of token filters used to filter out or modify the input token. For example, you can specify a lowercase filter that converts all characters to lowercase. The filters are run in the order in which they are listed."
+        },
+        "charFilters": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CharFilterName",
+            "x-nullable": false
+          },
+          "description": "A list of character filters used to prepare input text before it is processed. For instance, they can replace certain characters or symbols. The filters are run in the order in which they are listed."
+        }
+      },
+      "required": [
+        "@odata.type",
+        "name"
+      ],
+      "description": "Allows you to configure normalization for filterable, sortable, and facetable fields, which by default operate with strict matching. This is a user-defined configuration consisting of at least one or more filters, which modify the token that is stored."
     },
     "LexicalTokenizer": {
       "discriminator": "@odata.type",
@@ -6522,6 +6605,14 @@
           "description": "The name of the analyzer used at indexing time for the field. This option can be used only with searchable fields. It must be set together with searchAnalyzer and it cannot be set together with the analyzer option.  This property cannot be set to the name of a language analyzer; use the analyzer property instead if you need a language analyzer. Once the analyzer is chosen, it cannot be changed for the field. Must be null for complex fields.",
           "x-nullable": true
         },
+        "normalizer": {
+          "externalDocs": {
+            "url": "TODO t-roblee link URL"
+          },
+          "$ref": "#/definitions/CustomNormalizer",
+          "description": "TODO t-roblee: update description. The name of the analyzer to use for the field. This option can be used only with searchable fields and it can't be set together with either searchAnalyzer or indexAnalyzer. Once the analyzer is chosen, it cannot be changed for the field. Must be null for complex fields.",
+          "x-nullable": true
+        },
         "synonymMaps": {
           "externalDocs": {
             "url": "https://docs.microsoft.com/rest/api/searchservice/Synonym-Map-operations"
@@ -7004,6 +7095,16 @@
           "description": "The character filters for the index.",
           "externalDocs": {
             "url": "https://docs.microsoft.com/rest/api/searchservice/Custom-analyzers-in-Azure-Search"
+          }
+        },
+        "normalizers": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CustomNormalizer"
+          },
+          "description": "The normalizers for the index.",
+          "externalDocs": {
+            "url": "TODO t-roblee: link URL"
           }
         },
         "encryptionKey": {
