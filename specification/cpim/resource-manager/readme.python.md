@@ -2,7 +2,6 @@
 
 These settings apply only when `--python` is specified on the command line.
 
-
 ```yaml $(python) 
 python:
   azure-arm: true
