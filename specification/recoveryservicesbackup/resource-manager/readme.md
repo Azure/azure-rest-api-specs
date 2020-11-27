@@ -51,12 +51,9 @@ These settings apply only when `--tag=package-2020-10` is specified on the comma
 
 ``` yaml $(tag) == 'package-2020-10'
 input-file:
-- Microsoft.RecoveryServices/stable/2020-10-01/cmk.json
-- Microsoft.RecoveryServices/stable/2020-07-01/bms.json
-- Microsoft.RecoveryServices/stable/2020-02-02/bms.json
-- Microsoft.RecoveryServices/stable/2019-06-15/bms.json
+- Microsoft.RecoveryServices/stable/2020-10-01/bms.json
+- Microsoft.RecoveryServices/stable/2018-12-20/bms.json
 - Microsoft.RecoveryServices/stable/2017-07-01/bms.json
-- Microsoft.RecoveryServices/stable/2016-12-01/bms.json
 - Microsoft.RecoveryServices/stable/2016-08-10/operations.json
 ```
 
