@@ -559,7 +559,6 @@
       "discriminator": "type",
       "properties": {
         "type": {
-          "readOnly": true,
           "type": "string",
           "description": "Type of entity"
         }
@@ -647,6 +646,7 @@
         },
         "count": {
           "type": "integer",
+          "format": "int64",
           "description": "The number of related alerts grouped into the incident."
         },
         "severity": {
@@ -683,6 +683,7 @@
       "properties": {
         "appId": {
           "type": "integer",
+          "format": "int64",
           "description": "The technical identifier of the application."
         },
         "name": {
@@ -709,17 +710,17 @@
           "type": "string",
           "description": "The name of the DNS record associated with the alert."
         },
-        "ipAdresses": {
+        "ipAddresses": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/IPEntity"
           },
           "description": "Entities of type ‘ip’ for the resolved IP address."
         },
-        "DnsServerIp": {
+        "dnsServerIp": {
           "$ref": "#/definitions/IPEntity"
         },
-        "HostIpAddress": {
+        "hostIpAddress": {
           "$ref": "#/definitions/IPEntity"
         }
       }
@@ -1023,6 +1024,7 @@
         },
         "sourcePort": {
           "type": "integer",
+          "format": "int64",
           "description": "The source port number"
         },
         "destinationAddress": {
@@ -1030,6 +1032,7 @@
         },
         "destinationPort": {
           "type": "integer",
+          "format": "int64",
           "description": "The destination port number"
         },
         "protocol": {
