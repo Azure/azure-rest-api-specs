@@ -41,6 +41,7 @@ batch:
   - tag: package-policy-2016-12
   - tag: package-policy-2016-04
   - tag: package-policy-2015-10
+  - tag: package-resources-2020-10
   - tag: package-resources-2020-06
   - tag: package-resources-2019-10
   - tag: package-resources-2019-08
@@ -60,7 +61,6 @@ batch:
   - tag: package-deploymentscripts-2020-10
   - tag: package-deploymentscripts-2019-10-preview  
   - tag: package-templatespecs-2019-06-preview 
-  - tag: package-templatespecs-2020-10-preview 
 ```
 
 ```yaml $(multiapi) && $(track2)
@@ -84,6 +84,7 @@ batch:
   - tag: package-policy-2016-04
   - tag: package-policy-2015-10
   - multiapiscript-policy: true
+  - tag: package-resources-2020-10
   - tag: package-resources-2020-06
   - tag: package-resources-2019-10
   - tag: package-resources-2019-08
@@ -106,7 +107,6 @@ batch:
   - tag: package-deploymentscripts-2019-10-preview  
   - multiapiscript-deploymentscripts: true
   - tag: package-templatespecs-2019-06-preview 
-  - tag: package-templatespecs-2020-10-preview 
   - multiapiscript-templatespecs: true
 ```
 
@@ -348,6 +348,18 @@ output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/re
 python:
   namespace: azure.mgmt.resource.policy.v2015_10_01_preview
   output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/policy/v2015_10_01_preview
+```
+### Tag: package-resources-2020-10 and python
+
+These settings apply only when `--tag=package-resources-2020-10 --python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
+
+``` yaml $(tag) == 'package-resources-2020-10'
+namespace: azure.mgmt.resource.resources.v2020_10_01
+output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/resources/v2020_10_01
+python:
+  namespace: azure.mgmt.resource.resources.v2020_10_01
+  output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/resources/v2020_10_01
 ```
 
 ### Tag: package-resources-2020-06 and python
@@ -595,17 +607,4 @@ output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/re
 python:
   namespace: azure.mgmt.resource.templatespecs.v2019_06_01_preview
   output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/templatespecs/v2019_06_01_preview
-```
-
-### Tag: package-templatespecs-2020-10-preview and python
-
-These settings apply only when `--tag=package-templatespecs-2020-10-preview` is specified on the command line.
-Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
-
-``` yaml $(tag) == 'package-templatespecs-2020-10-preview'
-namespace: azure.mgmt.resource.templatespecs.v2020_10_01_preview
-output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/templatespecs/v2020_10_01_preview
-python:
-  namespace: azure.mgmt.resource.templatespecs.v2020_10_01_preview
-  output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/templatespecs/v2020_10_01_preview
 ```

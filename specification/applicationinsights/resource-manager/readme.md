@@ -28,7 +28,7 @@ These are the global settings for the ApplicationInsights API.
 title: ApplicationInsightsManagementClient
 description: Composite Swagger for Application Insights Management Client
 openapi-type: arm
-tag: package-preview-2020-06
+tag: package-preview-2020-10
 ```
 
 ## Suppression
@@ -103,6 +103,135 @@ directive:
   - suppress: DeleteOperationResponses
     from: myworkbooks_API.json
     reason: 'delete API returns empty response and is already part of the previous api, cannot change it'
+  - suppress: DeleteOperationResponses
+    from: analyticsItems_API.json
+    reason: 'consistent with existing delete response | owned by another team'
+  - suppress: DeleteOperationResponses
+    from: componentAnnotations_API.json
+    reason: 'consistent with existing delete response | owned by another team'
+  - suppress: DeleteOperationResponses
+    from: componentApiKeys_API.json
+    reason: 'consistent with existing delete response | owned by another team'
+  - suppress: DeleteOperationResponses
+    from: componentContinuousExport_API.json
+    reason: 'consistent with existing delete response | owned by another team'
+  - suppress: DeleteOperationResponses
+    from: componentWorkItemConfigs_API.json
+    reason: 'consistent with existing delete response | owned by another team'
+  - suppress: DeleteOperationResponses
+    from: favorites_API.json
+    reason: 'consistent with existing delete response | owned by another team'
+  - suppress: DeleteOperationResponses
+    from: workbooks_API.json
+    reason: 'consistent with existing delete response'
+  - suppress: DefaultErrorResponseSchema
+    from: componentAnnotations_API.json
+    reason: 'consistent with existing default error response | owned by another team'
+  - suppress: DefaultErrorResponseSchema
+    from: componentWorkItemConfigs_API.json
+    reason: 'consistent with existing default error response | owned by another team'
+  - suppress: DefaultErrorResponseSchema
+    from: workbooks_API.json
+    reason: 'consistent with existing default error response'
+  - suppress: DefaultErrorResponseSchema
+    from: workbookOperations_API.json
+    reason: 'consistent with existing default error response'
+  - suppress: RequiredDefaultResponse
+    from: analyticsItems_API.json
+    reason: 'consistent with existing default response | owned by another team'
+  - suppress: RequiredDefaultResponse
+    from: componentAnnotations_API.json
+    reason: 'consistent with existing default response | owned by another team'
+  - suppress: RequiredDefaultResponse
+    from: componentApiKeys_API.json
+    reason: 'consistent with existing default response | owned by another team'
+  - suppress: RequiredDefaultResponse
+    from: componentContinuousExport_API.json
+    reason: 'consistent with existing default response | owned by another team'
+  - suppress: RequiredDefaultResponse
+    from: componentFeaturesAndPricing_API.json
+    reason: 'consistent with existing default response | owned by another team'
+  - suppress: RequiredDefaultResponse
+    from: componentProactiveDetection_API.json
+    reason: 'consistent with existing default response | owned by another team'
+  - suppress: RequiredDefaultResponse
+    from: components_API.json
+    reason: 'consistent with existing default response | owned by another team'
+  - suppress: RequiredDefaultResponse
+    from: componentWorkItemConfigs_API.json
+    reason: 'consistent with existing default response | owned by another team'
+  - suppress: RequiredDefaultResponse
+    from: favorites_API.json
+    reason: 'consistent with existing default response | owned by another team'
+  - suppress: RequiredDefaultResponse
+    from: webTestLocations_API.json
+    reason: 'consistent with existing default response | owned by another team'
+  - suppress: RequiredDefaultResponse
+    from: webTestLocations_API.json
+    reason: 'consistent with existing default response | owned by another team'
+  - suppress: RequiredDefaultResponse
+    from: webTests_API.json
+    reason: 'consistent with existing default response | owned by another team'
+  - suppress: PathResourceTypeNameCamelCase
+    from: componentAnnotations_API.json
+    reason: 'consistent with existing path | owned by another team'
+  - suppress: PathResourceTypeNameCamelCase
+    from: componentApiKeys_API.json
+    reason: 'consistent with existing path | owned by another team'
+  - suppress: PathResourceTypeNameCamelCase
+    from: componentProactiveDetection_API.json
+    reason: 'consistent with existing path | owned by another team'
+  - suppress: PathResourceTypeNameCamelCase
+    from: componentWorkItemConfigs_API.json
+    reason: 'consistent with existing path | owned by another team'
+  - suppress: PathResourceProviderNamePascalCase
+    from: analyticsItems_API.json
+    reason: 'consistent with existing path | owned by another team'
+  - suppress: GetCollectionResponseSchema
+    from: componentProactiveDetection_API.json
+    reason: 'consistent with existing response schema | owned by another team'
+  - suppress: IntegerTypeMustHaveFormat
+    from: componentFeaturesAndPricing_API.json
+    reason: 'consistent with existing format | owned by another team'
+  - suppress: IntegerTypeMustHaveFormat
+    from: components_API.json
+    reason: 'consistent with existing format | owned by another team'
+  - suppress: TopLevelResourcesListBySubscription
+    from: workbooks_API.json
+    reason: 'get workbook list by subscription is not supported'
+  - suppress: OperationsAPIImplementation
+    reason: 'Previously implemented operation apis are using an incorrect RP case format which I cannot change.'
+```
+
+### Tag: package-2020-10-20
+
+These settings apply only when `--tag=package-2020-10-20` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-10-20'
+input-file:
+  - Microsoft.Insights/stable/2015-05-01/analyticsItems_API.json
+  - Microsoft.Insights/stable/2015-05-01/componentAnnotations_API.json
+  - Microsoft.Insights/stable/2015-05-01/componentApiKeys_API.json
+  - Microsoft.Insights/stable/2015-05-01/componentContinuousExport_API.json
+  - Microsoft.Insights/stable/2015-05-01/componentFeaturesAndPricing_API.json
+  - Microsoft.Insights/stable/2015-05-01/componentProactiveDetection_API.json
+  - Microsoft.Insights/stable/2015-05-01/components_API.json
+  - Microsoft.Insights/stable/2015-05-01/componentWorkItemConfigs_API.json
+  - Microsoft.Insights/stable/2015-05-01/favorites_API.json
+  - Microsoft.Insights/stable/2015-05-01/webTestLocations_API.json
+  - Microsoft.Insights/stable/2015-05-01/webTests_API.json
+  - Microsoft.Insights/stable/2020-10-20/myworkbooks_API.json
+  - Microsoft.Insights/stable/2020-10-20/workbooks_API.json
+  - Microsoft.Insights/stable/2020-10-20/workbookOperations_API.json
+```
+
+### Tag: package-preview-2020-10
+
+These settings apply only when `--tag=package-preview-2020-10` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2020-10'
+input-file:
+  - Microsoft.Insights/preview/2020-10-05-preview/webTests_API.json
 ```
 
 ### Tag: package-preview-2020-06-only
@@ -351,4 +480,3 @@ input-file:
 ## AzureResourceSchema
 
 See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
-
