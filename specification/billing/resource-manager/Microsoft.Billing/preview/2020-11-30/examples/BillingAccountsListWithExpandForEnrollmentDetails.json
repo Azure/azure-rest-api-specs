@@ -1,0 +1,107 @@
+{
+  "parameters": {
+    "api-version": "2020-05-01",
+    "$expand": "enrollmentDetails,departments,enrollmentAccounts"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/providers/Microsoft.Billing/billingAccounts/7645820",
+            "name": "7645820",
+            "type": "Microsoft.Billing/billingAccounts",
+            "properties": {
+              "agreementType": "EnterpriseAgreement",
+              "soldTo": {
+                "addressLine1": "Test Address",
+                "addressLine2": "Test Address",
+                "addressLine3": "Test Address",
+                "city": "City",
+                "postalCode": "00000",
+                "region": "WA",
+                "country": "US"
+              },
+              "enrollmentDetails": {
+                "startDate": "2018-05-01T17:32:28Z",
+                "endDate": "2019-05-31T17:32:28Z",
+                "currency": "USD",
+                "channel": "EaDirect",
+                "language": "en",
+                "countryCode": "US",
+                "status": "Active",
+                "billingCycle": "Monthly",
+                "policies": {
+                  "accountOwnerViewCharges": true,
+                  "departmentAdminViewCharges": true,
+                  "marketplacesEnabled": true,
+                  "reservedInstancesEnabled": true
+                }
+              },
+              "departments": [
+                {
+                  "id": "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/departments/departmentId1",
+                  "name": "departmentId1",
+                  "type": "Microsoft.Billing/departments",
+                  "properties": {
+                    "departmentName": "departmentName1",
+                    "costCenter": "C1",
+                    "status": "Active"
+                  }
+                },
+                {
+                  "id": "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/departments/departmentId2",
+                  "name": "departmentId2",
+                  "type": "Microsoft.Billing/departments",
+                  "properties": {
+                    "departmentName": "departmentName2",
+                    "costCenter": "C4",
+                    "status": "Active"
+                  }
+                }
+              ],
+              "enrollmentAccounts": [
+                {
+                  "id": "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/enrollmentAccounts/accountId0",
+                  "name": "accountId0",
+                  "type": "Microsoft.Billing/enrollmentAccounts",
+                  "properties": {
+                    "accountName": "AccountName0",
+                    "costCenter": "C0",
+                    "status": "Active",
+                    "startDate": "2018-05-01T17:32:28Z",
+                    "endDate": "2019-05-31T17:32:28Z"
+                  }
+                },
+                {
+                  "id": "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/enrollmentAccounts/accountId1",
+                  "name": "accountId1",
+                  "type": "Microsoft.Billing/enrollmentAccounts",
+                  "properties": {
+                    "accountName": "AccountName1",
+                    "costCenter": "C4",
+                    "status": "Active",
+                    "startDate": "2018-05-01T17:32:28Z",
+                    "endDate": "2019-05-31T17:32:28Z"
+                  }
+                },
+                {
+                  "id": "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/enrollmentAccounts/accountId2",
+                  "name": "accountId2",
+                  "type": "Microsoft.Billing/enrollmentAccounts",
+                  "properties": {
+                    "accountName": "AccountName2",
+                    "costCenter": "C4",
+                    "status": "Active",
+                    "startDate": "2018-05-01T17:32:28Z",
+                    "endDate": "2019-05-31T17:32:28Z"
+                  }
+                }
+              ]
+            }
+          }
+        ]
+      }
+    }
+  }
+}
