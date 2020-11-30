@@ -6,18 +6,39 @@ Use `--python-mode=update` if you already have a setup.py and just want to updat
 
 ``` yaml $(python)
 python-mode: create
-python:
-  azure-arm: true
-  license-header: MICROSOFT_MIT_NO_VERSION
-  payload-flattening-threshold: 2
-  namespace: azure.mgmt.attestation
-  package-name: azure-mgmt-attestation
-  package-version: 0.1.0
-  clear-output-folder: true
+azure-arm: true
+license-header: MICROSOFT_MIT_NO_VERSION
+payload-flattening-threshold: 2
+namespace: azure.mgmt.attestation
+no-namespace-folders: true
+credential-scopes: https://management.azure.com
+package-name: azure-mgmt-attestation
+package-version: 0.1.0
+clear-output-folder: true
 ```
+``` yaml
+batch:
+  - tag: package-2018-09-01
+  - tag: package-2020-10-01
+  - multiapiscript: true
+```
+
+### Tag: release_2018-09-01-preview
+``` yaml
+namespace: azure.mgmt.attestation
+output-folder: $(python-sdks-folder)/attestation/azure-mgmt-attestation/azure/mgmt/attestation
+
+```
+
+### Tag: release_2020-10-01
+``` yaml
+namespace: azure.mgmt.attestation
+output-folder: $(python-sdks-folder)/attestation/azure-mgmt-attestation/
+
+```
+
 ``` yaml $(python) && $(python-mode) == 'update'
 python:
-  no-namespace-folders: true
   output-folder: $(python-sdks-folder)/attestation/azure-mgmt-attestation/azure/mgmt/attestation
 ```
 ``` yaml $(python) && $(python-mode) == 'create'
