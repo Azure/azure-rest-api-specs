@@ -8,18 +8,19 @@
   "paths": {},
   "definitions": {
     "CommunicationError": {
+      "description": "The Communication Services error exception.",
       "required": [
         "error"
       ],
       "properties": {
         "error": {
-          "readOnly": true,
+          "description": "The Communication Services error.",
           "$ref": "#/definitions/Error"
         }
-      },
-      "description": "The Communication Services error exception."
+      }
     },
     "Error": {
+      "description": "The Communication Services error.",
       "required": [
         "code",
         "message"
@@ -27,12 +28,10 @@
       "properties": {
         "code": {
           "type": "string",
-          "readOnly": true,
           "description": "The error code."
         },
         "message": {
           "type": "string",
-          "readOnly": true,
           "description": "The error message."
         },
         "target": {
@@ -48,34 +47,35 @@
         "innererror": {
           "x-ms-client-name": "innerError",
           "readOnly": true,
-          "$ref": "#/definitions/Error"
+          "$ref": "#/definitions/Error",
+          "description": "The inner error if any."
         }
       },
-      "description": "The Communication Services error.",
       "x-nullable": true
     },
     "CommunicationIdentifierKind": {
+      "description": "The kind of an communication identifier.",
       "type": "string",
       "enum": [
-        "Unknown",
-        "CommunicationUser",
-        "PhoneNumber",
-        "CallingApplication"
+        "unknown",
+        "communicationUser",
+        "phoneNumber",
+        "callingApplication"
       ],
       "x-ms-enum": {
         "name": "CommunicationIdentifierType",
         "modelAsString": true
-      },
-      "description": "The kind of an communication identifier."
+      }
     },
     "CommunicationIdentifier": {
+      "description": "Identifies a participant in Azure Communication services. A partipant is, for example, a phone number or an Azure communication user.",
       "required": [
-        "kind"
+        "kind",
+        "id"
       ],
       "properties": {
         "kind": {
           "$ref": "#/definitions/CommunicationIdentifierKind",
-          "readOnly": true,
           "description": "Kind of the communication identifier."
         },
         "communicationUserId": {
@@ -95,9 +95,19 @@
         },
         "id": {
           "type": "string",
-          "readOnly": true,
-          "description": "Id of the UnknownIdentifier."
+          "description": "Fully serialized Id of the identifier."
         }
+      }
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
       }
     }
   }
