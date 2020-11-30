@@ -1,8 +1,8 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "PhoneNumberAdministrationClient",
-    "description": "The phone number administration client uses the Communication Services to acquire and manage phone numbers.",
+    "title": "PhoneNumbersClient",
+    "description": "The phone numbers client uses the Communication Services to acquire and manage phone numbers.",
     "contact": {
       "email": "acsdevexdisc@microsoft.com"
     },
@@ -29,7 +29,7 @@
           "Find and purchase available phone numbers"
         ],
         "summary": "Search for available phone numbers to purchase.",
-        "operationId": "PhoneNumberAdministration_SearchAvailablePhoneNumbers",
+        "operationId": "PhoneNumbers_SearchAvailablePhoneNumbers",
         "parameters": [
           {
             "in": "body",
@@ -73,7 +73,7 @@
           "Find and purchase available phone numbers"
         ],
         "summary": "Get a search result by its id.",
-        "operationId": "PhoneNumberAdministration_GetSearchResult",
+        "operationId": "PhoneNumbers_GetSearchResult",
         "parameters": [
           {
             "$ref": "#/parameters/SearchId"
@@ -109,7 +109,7 @@
           "Find and purchase available phone numbers"
         ],
         "summary": "Purchase phone numbers.",
-        "operationId": "PhoneNumberAdministration_PurchasePhoneNumbers",
+        "operationId": "PhoneNumbers_PurchasePhoneNumbers",
         "parameters": [
           {
             "in": "body",
@@ -156,7 +156,7 @@
           "Long running operations"
         ],
         "summary": "Get an operation by its id.",
-        "operationId": "PhoneNumberAdministration_GetOperation",
+        "operationId": "PhoneNumbers_GetOperation",
         "parameters": [
           {
             "$ref": "#/parameters/OperationId"
@@ -190,7 +190,7 @@
           "Long running operations"
         ],
         "summary": "Cancels the operation if cancellation is supported for the operation type.",
-        "operationId": "PhoneNumberAdministration_CancelOperation",
+        "operationId": "PhoneNumbers_CancelOperation",
         "parameters": [
           {
             "$ref": "#/parameters/OperationId"
@@ -222,7 +222,7 @@
         "tags": [
           "Manage acquired phone numbers"
         ],
-        "operationId": "PhoneNumberAdministration_ListPhoneNumbers",
+        "operationId": "PhoneNumbers_ListPhoneNumbers",
         "summary": "Lists acquired phone numbers.",
         "parameters": [
           {
@@ -266,7 +266,7 @@
         "tags": [
           "Manage acquired phone numbers"
         ],
-        "operationId": "PhoneNumberAdministration_GetPhoneNumber",
+        "operationId": "PhoneNumbers_GetPhoneNumber",
         "summary": "Gets information about an acquired phone number.",
         "responses": {
           "200": {
@@ -292,7 +292,7 @@
         "tags": [
           "Manage acquired phone numbers"
         ],
-        "operationId": "PhoneNumberAdministration_UpdatePhoneNumber",
+        "operationId": "PhoneNumbers_UpdatePhoneNumber",
         "summary": "Update an acquired phone number.",
         "consumes": [
           "application/merge-patch+json"
@@ -340,7 +340,7 @@
         "tags": [
           "Manage acquired phone numbers"
         ],
-        "operationId": "PhoneNumberAdministration_ReleasePhoneNumber",
+        "operationId": "PhoneNumbers_ReleasePhoneNumber",
         "summary": "Releases an acquired phone number.",
         "responses": {
           "202": {
