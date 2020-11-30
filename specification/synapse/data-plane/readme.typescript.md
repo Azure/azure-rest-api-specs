@@ -20,4 +20,12 @@ batch:
       package-name: "@azure/synapse-spark"
       output-folder: $(typescript-sdks-folder)/sdk/synapse/synapse-spark
       clear-output-folder: true
+    - package-vnet: true
+      package-name: "@azure/synapse-managed-endpoints"
+      output-folder: $(typescript-sdks-folder)/sdk/synapse/synapse-managed-endpoints
+      clear-output-folder: true
+    - package-monitoring: true
+      package-name: "@azure/synapse-monitoring"
+      output-folder: $(typescript-sdks-folder)/sdk/synapse/synapse-monitoring
+      clear-output-folder: true
 ```
