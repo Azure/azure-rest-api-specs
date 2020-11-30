@@ -47,7 +47,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Microsoft.WindowsAzure.Governance.ResourcesCache.QueryApiService.Contracts.External.ResourceHistory.ResourcesHistoryRequest"
+              "$ref": "#/definitions/ResourcesHistoryRequest"
             }
           },
           {
@@ -77,7 +77,7 @@
     }
   },
   "definitions": {
-    "Microsoft.WindowsAzure.Governance.ResourcesCache.QueryApiService.Contracts.External.ResourceHistory.ResourcesHistoryRequest": {
+    "ResourcesHistoryRequest": {
       "type": "object",
       "properties": {
         "subscriptions": {
@@ -91,18 +91,18 @@
           "type": "string"
         },
         "options": {
-          "$ref": "#/definitions/Microsoft.WindowsAzure.Governance.ResourcesCache.QueryApiService.Contracts.External.ResourceHistory.ResourcesHistoryRequestOptions"
+          "$ref": "#/definitions/ResourcesHistoryRequestOptions"
         },
         "managementGroupId": {
           "type": "string"
         }
       }
     },
-    "Microsoft.WindowsAzure.Governance.ResourcesCache.QueryApiService.Contracts.External.ResourceHistory.ResourcesHistoryRequestOptions": {
+    "ResourcesHistoryRequestOptions": {
       "type": "object",
       "properties": {
         "interval": {
-          "$ref": "#/definitions/Microsoft.WindowsAzure.Governance.ResourcesCache.QueryApiService.Contracts.External.ResourceHistory.DateTimeInterval"
+          "$ref": "#/definitions/DateTimeInterval"
         },
         "$top": {
           "format": "int32",
@@ -124,7 +124,7 @@
         }
       }
     },
-    "Microsoft.WindowsAzure.Governance.ResourcesCache.QueryApiService.Contracts.External.ResourceHistory.DateTimeInterval": {
+    "DateTimeInterval": {
       "type": "object",
       "properties": {
         "start": {

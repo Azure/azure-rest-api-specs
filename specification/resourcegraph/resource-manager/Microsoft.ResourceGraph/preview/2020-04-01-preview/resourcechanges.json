@@ -184,6 +184,10 @@
       "description": "Data on a specific change, represented by a pair of before and after resource snapshots.",
       "type": "object",
       "properties": {
+		"resourceId": {
+          "description": "The ID of the resource",
+          "type": "string"
+		},
         "changeId": {
           "description": "The change ID. Valid and unique within the specified resource only.",
           "type": "string"
@@ -259,7 +263,7 @@
             "modelAsString": false
           }
         },
-        "propertyChangeType": {
+        "changeType": {
           "description": "The property change Type",
           "type": "string",
           "enum": [
@@ -268,7 +272,7 @@
             "Remove"
           ],
           "x-ms-enum": {
-            "name": "PropertyChangeType",
+            "name": "ChangeType",
             "modelAsString": false
           }
         }
@@ -276,13 +280,17 @@
       "required": [
         "propertyName",
         "changeCategory",
-        "propertyChangeType"
+        "changeType"
       ]
     },
     "ResourceSnapshotData": {
       "description": "Data on a specific resource snapshot.",
       "type": "object",
       "properties": {
+	    "snapshotId": {
+          "description": "The ID of the snapshot.",
+          "type": "string"
+		},
         "timestamp": {
           "description": "The time when the snapshot was created.\nThe snapshot timestamp provides an approximation as to when a modification to a resource was detected.  There can be a difference between the actual modification time and the detection time.  This is due to differences in how operations that modify a resource are processed, versus how operation that record resource snapshots are processed.",
           "type": "string",
