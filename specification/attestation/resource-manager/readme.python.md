@@ -5,16 +5,16 @@ Please also specify `--python-sdks-folder=<path to the root directory of your az
 Use `--python-mode=update` if you already have a setup.py and just want to update the code itself.
 
 ``` yaml $(python)
-python-mode: create
+python-mode: update
 azure-arm: true
 license-header: MICROSOFT_MIT_NO_VERSION
 payload-flattening-threshold: 2
 namespace: azure.mgmt.attestation
 no-namespace-folders: true
+add-credential: true
 credential-scopes: https://management.azure.com
 package-name: azure-mgmt-attestation
 package-version: 0.1.0
-clear-output-folder: true
 ```
 ``` yaml
 batch:
@@ -23,26 +23,27 @@ batch:
   - multiapiscript: true
 ```
 
-### Tag: release_2018-09-01-preview
-``` yaml
-namespace: azure.mgmt.attestation
+``` yaml $(multiapiscript)
 output-folder: $(python-sdks-folder)/attestation/azure-mgmt-attestation/azure/mgmt/attestation
-
+clear-output-folder: false
+perform-load: false
 ```
 
-### Tag: release_2020-10-01
-``` yaml
-namespace: azure.mgmt.attestation
-output-folder: $(python-sdks-folder)/attestation/azure-mgmt-attestation/
-
+### Tag: package-2018-09-01
+``` yaml $(tag) == 'package-2020-10-01'
+clear-output-folder: true
+output-folder: $(python-sdks-folder)/attestation/azure-mgmt-attestation/azure/mgmt/attestation/v2020_10_01
+namespace: azure.mgmt.attestation.v2020_10_01
 ```
 
-``` yaml $(python) && $(python-mode) == 'update'
-python:
-  output-folder: $(python-sdks-folder)/attestation/azure-mgmt-attestation/azure/mgmt/attestation
+### Tag: package-2018-10-01
+``` yaml $(tag) == 'package-2018-09-01'
+clear-output-folder: true
+namespace: azure.mgmt.attestation.v2018_09_01_preview
+output-folder: $(python-sdks-folder)/attestation/azure-mgmt-attestation/azure/mgmt/attestation/v2018_09_01_preview
 ```
+
 ``` yaml $(python) && $(python-mode) == 'create'
 python:
   basic-setup-py: true
-  output-folder: $(python-sdks-folder)/attestation/azure-mgmt-attestation
 ```

@@ -681,7 +681,7 @@
           "200": {
             "description": "Successfully retrieved private link resources.",
             "schema": {
-              "$ref": "#/definitions/PrivateLinkResourceListResult"
+              "$ref": "#/definitions/PrivateEndpointConnectionsListResult"
             }
           },
           "default": {
@@ -904,7 +904,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/Resource"
         }
       ],
       "description": "Private endpoint connection resource.",
@@ -1049,7 +1049,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/Resource"
         }
       ],
       "description": "A private link resource"
@@ -1078,32 +1078,6 @@
         }
       },
       "description": "Properties of a private link resource."
-    },
-    "Resource": {
-      "properties": {
-        "id": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Fully qualified identifier of the attestation provider."
-        },
-        "name": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Name of the attestation provider."
-        },
-        "type": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Resource type of the attestation provider."
-        },
-        "location": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Azure location of the attestation provider."
-        }
-      },
-      "description": "Attestation resource",
-      "x-ms-azure-resource": true
     }
   },
   "parameters": {
