@@ -4,10 +4,10 @@
 
 This is the AutoRest configuration file for Billing.
 
-
-
 ---
+
 ## Getting Started
+
 To build the SDK for Billing, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
@@ -15,39 +15,29 @@ To build the SDK for Billing, simply [Install AutoRest](https://aka.ms/autorest/
 To see additional help and options, run:
 
 > `autorest --help`
+
 ---
 
 ## Configuration
 
-
-
 ### Basic Information
+
 These are the global settings for the Billing API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2020-05
+tag: package-preview-2020-11
 ```
 
-### Tag: package-2021-10
 
-These settings apply only when `--tag=package-2021-10` is specified on the command line.
+### Tag: package-preview-2020-11
 
-``` yaml $(tag) == 'package-2021-10'
-title: BillingManagementClient
-description: Billing Client
+These settings apply only when `--tag=package-preview-2020-11` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2020-11'
 input-file:
-- Microsoft.Billing/stable/2021-10-01/billingSubscription.json
-- Microsoft.Billing/stable/2021-10-01/payment.json
-directive:
-  - suppress: R4009
-    from: Microsoft.Billing/stable/2021-10-01/billingSubscription.json
-    reason: systemData is not in this API version
-  - suppress: R4009
-    from: Microsoft.Billing/stable/2021-10-01/payment.json
-    reason: systemData is not in this API version
+  - Microsoft.Billing/preview/2020-11-30/billing.json
 ```
-
 ### Tag: package-2020-05
 
 These settings apply only when `--tag=package-2020-05` is specified on the command line.
@@ -127,8 +117,8 @@ input-file:
 ```
 
 ---
-# Code Generation
 
+# Code Generation
 
 ## Swagger to SDK
 
@@ -150,7 +140,6 @@ swagger-to-sdk:
   - repo: azure-resource-manager-schemas
   - repo: azure-powershell
 ```
-
 
 ## C#
 
@@ -292,6 +281,5 @@ regenerate-manager: true
 generate-interface: true
 ```
 
-
-
+## AzureResourceSchema
 
