@@ -3043,7 +3043,7 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 **Output Message** :  Do not have duplicate name of client parameter name, make sure every client parameter name unique.
 
-**Description** : This may cause a problem when different swagger files come together. If two APIs with different client name have the same client parameter subscriptionId, but with different reference name in swaggers, the generated model will also have two clients with two client parameters subscriptionId and subscriptionId1 (the latter one has been renamed to avoid collision). We should ensure that the client parameters are all unique.
+**Description** : This may cause a problem when different swagger files come together. If two APIs with different client name have the same client parameter subscriptionId, but with different reference name in swaggers, the generated model will also have two clients with two client parameters subscriptionId and subscriptionId1 (the latter one has been renamed to avoid collision). We should ensure that the client parameters are all unique in the same API version.
 
 **Why this rule is important**: Make sure no conflict in SDK generation.
 
@@ -3090,7 +3090,7 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 **Output Message** :  Do not have duplicate name of x-ms-example, make sure every x-ms-example name unique. Duplicate x-ms-example: {ExampleName}
 
-**Description** : x-ms-example name should be unique.
+**Description** : x-ms-example name should be unique in the same API version.
 
 **Why this rule is important**: Duplicate example name will bring trouble for test codegen. For example: hard to config used example.
 
