@@ -264,7 +264,7 @@
           {
             "in": "query",
             "name": "startTime",
-            "description": "The earliest point in time to get messages up to. The timestamp should be in ISO8601 format: `yyyy-MM-ddTHH:mm:ssZ`.",
+            "description": "The earliest point in time to get messages up to. The timestamp should be in RFC3339 format: `yyyy-MM-ddTHH:mm:ssZ`.",
             "type": "string",
             "format": "date-time"
           },
@@ -924,7 +924,7 @@
           {
             "in": "query",
             "name": "startTime",
-            "description": "The earliest point in time to get chat threads up to. The timestamp should be in ISO8601 format: `yyyy-MM-ddTHH:mm:ssZ`.",
+            "description": "The earliest point in time to get chat threads up to. The timestamp should be in RFC3339 format: `yyyy-MM-ddTHH:mm:ssZ`.",
             "type": "string",
             "format": "date-time"
           },
@@ -1196,7 +1196,7 @@
         },
         "readOn": {
           "format": "date-time",
-          "description": "The time at which the message was read. The timestamp is in ISO8601 format: `yyyy-MM-ddTHH:mm:ssZ`.",
+          "description": "The time at which the message was read. The timestamp is in RFC3339 format: `yyyy-MM-ddTHH:mm:ssZ`.",
           "type": "string",
           "readOnly": true,
           "example": "2020-10-30T10:50:50Z"
@@ -1204,6 +1204,7 @@
       }
     },
     "ChatMessageReadReceiptsCollection": {
+      "description": "A paged collection of chat message read receipts.",
       "type": "object",
       "properties": {
         "value": {
@@ -1222,6 +1223,7 @@
       }
     },
     "Error": {
+      "description": "Error encountered while performing an operation.",
       "type": "object",
       "properties": {
         "code": {
@@ -1310,6 +1312,7 @@
       }
     },
     "ChatMessage": {
+      "description": "Chat message.",
       "type": "object",
       "properties": {
         "id": {
@@ -1343,7 +1346,7 @@
         },
         "createdOn": {
           "format": "date-time",
-          "description": "The timestamp when the chat message arrived at the server. The timestamp is in ISO8601 format: `yyyy-MM-ddTHH:mm:ssZ`.",
+          "description": "The timestamp when the chat message arrived at the server. The timestamp is in RFC3339 format: `yyyy-MM-ddTHH:mm:ssZ`.",
           "type": "string",
           "readOnly": true,
           "example": "2020-10-30T10:50:50Z"
@@ -1356,13 +1359,13 @@
         },
         "deletedOn": {
           "format": "date-time",
-          "description": "The timestamp (if applicable) when the message was deleted. The timestamp is in ISO8601 format: `yyyy-MM-ddTHH:mm:ssZ`.",
+          "description": "The timestamp (if applicable) when the message was deleted. The timestamp is in RFC3339 format: `yyyy-MM-ddTHH:mm:ssZ`.",
           "type": "string",
           "example": "2020-10-30T10:50:50Z"
         },
         "editedOn": {
           "format": "date-time",
-          "description": "The last timestamp (if applicable) when the message was edited. The timestamp is in ISO8601 format: `yyyy-MM-ddTHH:mm:ssZ`.",
+          "description": "The last timestamp (if applicable) when the message was edited. The timestamp is in RFC3339 format: `yyyy-MM-ddTHH:mm:ssZ`.",
           "type": "string",
           "example": "2020-10-30T10:50:50Z"
         }
@@ -1388,6 +1391,7 @@
       }
     },
     "UpdateChatMessageRequest": {
+      "description": "Request payload for updating a chat message.",
       "type": "object",
       "properties": {
         "content": {
@@ -1419,7 +1423,7 @@
         },
         "shareHistoryTime": {
           "format": "date-time",
-          "description": "Time from which the chat history is shared with the participant. The timestamp is in ISO8601 format: `yyyy-MM-ddTHH:mm:ssZ`.",
+          "description": "Time from which the chat history is shared with the participant. The timestamp is in RFC3339 format: `yyyy-MM-ddTHH:mm:ssZ`.",
           "type": "string",
           "example": "2020-10-30T10:50:50Z"
         }
@@ -1460,6 +1464,7 @@
       }
     },
     "AddChatParticipantsErrors": {
+      "description": "Errors encountered during the addition of the chat participant to the chat thread.",
       "type": "object",
       "properties": {
         "invalidParticipants": {
@@ -1473,6 +1478,7 @@
       }
     },
     "AddChatParticipantsResult": {
+      "description": "Result of the add chat participants operation.",
       "type": "object",
       "properties": {
         "errors": {
@@ -1503,6 +1509,7 @@
       }
     },
     "ChatThread": {
+      "description": "Chat thread.",
       "type": "object",
       "properties": {
         "id": {
@@ -1518,7 +1525,7 @@
         },
         "createdOn": {
           "format": "date-time",
-          "description": "The timestamp when the chat thread was created. The timestamp is in ISO8601 format: `yyyy-MM-ddTHH:mm:ssZ`.",
+          "description": "The timestamp when the chat thread was created. The timestamp is in RFC3339 format: `yyyy-MM-ddTHH:mm:ssZ`.",
           "type": "string",
           "readOnly": true,
           "example": "2020-10-30T10:50:50Z"
@@ -1531,13 +1538,14 @@
         },
         "deletedOn": {
           "format": "date-time",
-          "description": "The timestamp when the chat thread was deleted. The timestamp is in ISO8601 format: `yyyy-MM-ddTHH:mm:ssZ`.",
+          "description": "The timestamp when the chat thread was deleted. The timestamp is in RFC3339 format: `yyyy-MM-ddTHH:mm:ssZ`.",
           "type": "string",
           "example": "2020-10-30T10:50:50Z"
         }
       }
     },
     "CreateChatThreadErrors": {
+      "description": "Errors encountered during the creation of the chat thread.",
       "type": "object",
       "properties": {
         "invalidParticipants": {
@@ -1551,6 +1559,7 @@
       }
     },
     "CreateChatThreadResult": {
+      "description": "Result of the create chat thread operation.",
       "type": "object",
       "properties": {
         "chatThread": {
@@ -1562,6 +1571,7 @@
       }
     },
     "ChatThreadInfo": {
+      "description": "Summary information of a chat thread.",
       "type": "object",
       "properties": {
         "id": {
@@ -1577,13 +1587,13 @@
         },
         "deletedOn": {
           "format": "date-time",
-          "description": "The timestamp when the chat thread was deleted. The timestamp is in ISO8601 format: `yyyy-MM-ddTHH:mm:ssZ`.",
+          "description": "The timestamp when the chat thread was deleted. The timestamp is in RFC3339 format: `yyyy-MM-ddTHH:mm:ssZ`.",
           "type": "string",
           "example": "2020-10-30T10:50:50Z"
         },
         "lastMessageReceivedOn": {
           "format": "date-time",
-          "description": "The timestamp when the last message arrived at the server. The timestamp is in ISO8601 format: `yyyy-MM-ddTHH:mm:ssZ`.",
+          "description": "The timestamp when the last message arrived at the server. The timestamp is in RFC3339 format: `yyyy-MM-ddTHH:mm:ssZ`.",
           "type": "string",
           "readOnly": true,
           "example": "2020-10-30T10:50:50Z"
@@ -1610,6 +1620,7 @@
       }
     },
     "UpdateChatThreadRequest": {
+      "description": "Request payload for updating a chat thread.",
       "type": "object",
       "properties": {
         "topic": {
@@ -1649,7 +1660,7 @@
   },
   "security": [
     {
-      "Authorization": [ ]
+      "Authorization": []
     }
   ],
   "x-ms-parameterized-host": {
