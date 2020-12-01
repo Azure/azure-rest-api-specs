@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2020-04-01-preview",
+    "version": "2020-10-15-preview",
     "title": "EventGridManagementClient",
     "description": "Azure EventGrid Management Client"
   },
@@ -2623,6 +2623,174 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/{scope}/providers/Microsoft.EventGrid/eventSubscriptions/{eventSubscriptionName}/getDeliveryAttributes": {
+      "post": {
+        "tags": [
+          "EventSubscriptions"
+        ],
+        "summary": "Get delivery attributes for an event subscription.",
+        "description": "Get all delivery attributes for an event subscription.",
+        "operationId": "EventSubscriptions_GetDeliveryAttributes",
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "scope",
+            "in": "path",
+            "description": "The scope of the event subscription. The scope can be a subscription, or a resource group, or a top level resource belonging to a resource provider namespace, or an EventGrid topic. For example, use '/subscriptions/{subscriptionId}/' for a subscription, '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}' for a resource group, and '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}' for a resource, and '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/topics/{topicName}' for an EventGrid topic.",
+            "required": true,
+            "type": "string",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "eventSubscriptionName",
+            "in": "path",
+            "description": "Name of the event subscription.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DeliveryAttributeListResult"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 Bad Request.\n\n * 500 Internal Server Error."
+          }
+        },
+        "x-ms-examples": {
+          "EventSubscriptions_GetDeliveryAttributes": {
+            "$ref": "./examples/EventSubscriptions_GetDeliveryAttributes.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/systemTopics/{systemTopicName}/eventSubscriptions/{eventSubscriptionName}/getDeliveryAttributes": {
+      "post": {
+        "tags": [
+          "EventSubscriptions"
+        ],
+        "summary": "Get delivery attributes for an event subscription.",
+        "description": "Get all delivery attributes for an event subscription.",
+        "operationId": "SystemTopicEventSubscriptions_GetDeliveryAttributes",
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The name of the resource group within the user's subscription.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "systemTopicName",
+            "in": "path",
+            "description": "Name of the system topic.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "eventSubscriptionName",
+            "in": "path",
+            "description": "Name of the event subscription to be created. Event subscription names must be between 3 and 100 characters in length and use alphanumeric letters only.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DeliveryAttributeListResult"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 Bad Request.\n\n * 500 Internal Server Error."
+          }
+        },
+        "x-ms-examples": {
+          "SystemTopicEventSubscriptions_GetDeliveryAttributes": {
+            "$ref": "./examples/SystemTopicEventSubscriptions_GetDeliveryAttributes.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/partnerTopics/{partnerTopicName}/eventSubscriptions/{eventSubscriptionName}/getDeliveryAttributes": {
+      "post": {
+        "tags": [
+          "EventSubscriptions"
+        ],
+        "summary": "Get delivery attributes for an event subscription of a partner topic.",
+        "description": "Get all delivery attributes for an event subscription of a partner topic.",
+        "operationId": "PartnerTopicEventSubscriptions_GetDeliveryAttributes",
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The name of the resource group within the user's subscription.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "partnerTopicName",
+            "in": "path",
+            "description": "Name of the partner topic.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "eventSubscriptionName",
+            "in": "path",
+            "description": "Name of the event subscription to be created. Event subscription names must be between 3 and 100 characters in length and use alphanumeric letters only.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DeliveryAttributeListResult"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 Bad Request.\n\n * 500 Internal Server Error."
+          }
+        },
+        "x-ms-examples": {
+          "PartnerTopicEventSubscriptions_GetDeliveryAttributes": {
+            "$ref": "./examples/PartnerTopicEventSubscriptions_GetDeliveryAttributes.json"
+          }
         }
       }
     },
@@ -5442,21 +5610,6 @@
         }
       }
     },
-    "PrivateEndpointConnection": {
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/Resource"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/PrivateEndpointConnectionProperties",
-          "description": "Properties of the PrivateEndpointConnection.",
-          "x-ms-client-flatten": true
-        }
-      }
-    },
     "InboundIpRule": {
       "type": "object",
       "properties": {
@@ -5501,12 +5654,12 @@
           "readOnly": true
         },
         "name": {
-          "description": "Name of the resource",
+          "description": "Name of the resource.",
           "type": "string",
           "readOnly": true
         },
         "type": {
-          "description": "Type of the resource",
+          "description": "Type of the resource.",
           "type": "string",
           "readOnly": true
         }
@@ -5679,6 +5832,21 @@
         }
       },
       "discriminator": "inputSchemaMappingType"
+    },
+    "PrivateEndpointConnection": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PrivateEndpointConnectionProperties",
+          "description": "Properties of the PrivateEndpointConnection.",
+          "x-ms-client-flatten": true
+        }
+      }
     },
     "TrackedResource": {
       "description": "Definition of a Tracked Resource.",
@@ -6478,6 +6646,13 @@
         "azureActiveDirectoryApplicationIdOrUri": {
           "description": "The Azure Active Directory Application ID or URI to get the access token that will be included as the bearer token in delivery requests.",
           "type": "string"
+        },
+        "deliveryAttributeMappings": {
+          "description": "Delivery attribute details.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DeliveryAttributeMapping"
+          }
         }
       }
     },
@@ -6494,6 +6669,90 @@
           "type": "string"
         }
       }
+    },
+    "StaticDeliveryAttributeMappingProperties": {
+      "description": "Properties of static delivery attribute mapping.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Value of the delivery attribute.",
+          "type": "string"
+        },
+        "isSecret": {
+          "description": "Boolean flag to tell if the attribute contains sensitive information .",
+          "type": "boolean"
+        }
+      }
+    },
+    "StaticDeliveryAttributeMapping": {
+      "description": "Static delivery attribute mapping details.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DeliveryAttributeMapping"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/StaticDeliveryAttributeMappingProperties",
+          "description": "Properties of static delivery attribute mapping.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "x-ms-discriminator-value": "Static"
+    },
+    "DynamicDeliveryAttributeMappingProperties": {
+      "description": "Properties of dynamic delivery attribute mapping.",
+      "type": "object",
+      "properties": {
+        "sourceField": {
+          "description": "JSON path in the event which contains attribute value.",
+          "type": "string"
+        }
+      }
+    },
+    "DynamicDeliveryAttributeMapping": {
+      "description": "Dynamic delivery attribute mapping details.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DeliveryAttributeMapping"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/DynamicDeliveryAttributeMappingProperties",
+          "description": "Properties of dynamic delivery attribute mapping.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "x-ms-discriminator-value": "Dynamic"
+    },
+    "DeliveryAttributeMapping": {
+      "description": "Delivery attribute mapping details.",
+      "required": [
+        "type"
+      ],
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Name of the delivery attribute or header.",
+          "type": "string"
+        },
+        "type": {
+          "description": "Type of the delivery attribute or header name.",
+          "enum": [
+            "Static",
+            "Dynamic"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "DeliveryAttributeMappingType",
+            "modelAsString": true
+          }
+        }
+      },
+      "discriminator": "type"
     },
     "StorageBlobDeadLetterDestination": {
       "description": "Information about the storage blob based dead letter destination.",
@@ -6557,6 +6816,13 @@
         "resourceId": {
           "description": "The Azure Resource Id that represents the endpoint of an Event Hub destination of an event subscription.",
           "type": "string"
+        },
+        "deliveryAttributeMappings": {
+          "description": "Delivery attribute details.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DeliveryAttributeMapping"
+          }
         }
       }
     },
@@ -6615,6 +6881,13 @@
         "resourceId": {
           "description": "The Azure Resource ID of an hybrid connection that is the destination of an event subscription.",
           "type": "string"
+        },
+        "deliveryAttributeMappings": {
+          "description": "Delivery attribute details.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DeliveryAttributeMapping"
+          }
         }
       }
     },
@@ -6642,6 +6915,13 @@
         "resourceId": {
           "description": "The Azure Resource Id that represents the endpoint of the Service Bus destination of an event subscription.",
           "type": "string"
+        },
+        "deliveryAttributeMappings": {
+          "description": "Delivery attribute details.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DeliveryAttributeMapping"
+          }
         }
       }
     },
@@ -6669,6 +6949,13 @@
         "resourceId": {
           "description": "The Azure Resource Id that represents the endpoint of the Service Bus Topic destination of an event subscription.",
           "type": "string"
+        },
+        "deliveryAttributeMappings": {
+          "description": "Delivery attribute details.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DeliveryAttributeMapping"
+          }
         }
       }
     },
@@ -6706,6 +6993,13 @@
           "format": "int32",
           "description": "Preferred batch size in Kilobytes.",
           "type": "integer"
+        },
+        "deliveryAttributeMappings": {
+          "description": "Delivery attribute details.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DeliveryAttributeMapping"
+          }
         }
       }
     },
@@ -6848,6 +7142,19 @@
         "nextLink": {
           "description": "A link for the next page of event subscriptions",
           "type": "string"
+        }
+      }
+    },
+    "DeliveryAttributeListResult": {
+      "description": "Result of the Get delivery attributes operation.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "A collection of DeliveryAttributeMapping",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DeliveryAttributeMapping"
+          }
         }
       }
     },
@@ -7300,6 +7607,10 @@
           "$ref": "#/definitions/PartnerTopicProperties",
           "description": "Properties of the partner topic.",
           "x-ms-client-flatten": true
+        },
+        "identity": {
+          "$ref": "#/definitions/IdentityInfo",
+          "description": "Identity information for the resource."
         }
       }
     },
@@ -7432,11 +7743,11 @@
           "type": "string"
         },
         "name": {
-          "description": "Name of the resource",
+          "description": "Name of the resource.",
           "type": "string"
         },
         "type": {
-          "description": "Type of the resource",
+          "description": "Type of the resource.",
           "type": "string"
         }
       }
@@ -7530,6 +7841,10 @@
           "$ref": "#/definitions/SystemTopicProperties",
           "description": "Properties of the system topic.",
           "x-ms-client-flatten": true
+        },
+        "identity": {
+          "$ref": "#/definitions/IdentityInfo",
+          "description": "Identity information for the resource."
         }
       }
     },
@@ -7543,6 +7858,10 @@
           "additionalProperties": {
             "type": "string"
           }
+        },
+        "identity": {
+          "$ref": "#/definitions/IdentityInfo",
+          "description": "Resource identity information."
         }
       }
     },
@@ -7639,6 +7958,20 @@
         }
       }
     },
+    "ExtendedLocation": {
+      "description": "Definition of an Extended Location",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Fully qualified name of the extended location.",
+          "type": "string"
+        },
+        "type": {
+          "description": "Type of the extended location.",
+          "type": "string"
+        }
+      }
+    },
     "Topic": {
       "description": "EventGrid Topic",
       "type": "object",
@@ -7660,6 +7993,22 @@
         "identity": {
           "$ref": "#/definitions/IdentityInfo",
           "description": "Identity information for the resource."
+        },
+        "kind": {
+          "description": "Kind of the resource.",
+          "enum": [
+            "Azure",
+            "AzureArc"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ResourceKind",
+            "modelAsString": true
+          }
+        },
+        "extendedLocation": {
+          "$ref": "#/definitions/ExtendedLocation",
+          "description": "Extended location of the resource."
         }
       }
     },
@@ -7855,6 +8204,18 @@
         "sourceResourceFormat": {
           "description": "Source resource format.",
           "type": "string"
+        },
+        "supportedScopesForSource": {
+          "description": "Supported source scopes.",
+          "type": "array",
+          "items": {
+            "enum": [
+              "Resource",
+              "ResourceGroup",
+              "AzureSubscription"
+            ],
+            "type": "string"
+          }
         }
       }
     },
