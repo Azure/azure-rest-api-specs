@@ -12,7 +12,7 @@ payload-flattening-threshold: 2
 namespace: azure.mgmt.attestation
 no-namespace-folders: true
 add-credential: true
-credential-scopes: https://management.azure.com
+credential-scopes: https://management.azure.com/.default
 package-name: azure-mgmt-attestation
 package-version: 0.1.0
 ```
