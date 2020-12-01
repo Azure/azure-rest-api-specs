@@ -76,48 +76,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.DocumentDB/locations/{location}/restorableDatabaseAccounts/{instanceId}/restorableSqlDatabases/{restorableSqlDatabaseId}": {
-      "get": {
-        "operationId": "RestorableSqlDatabases_Get",
-        "x-ms-examples": {
-          "CosmosDBRestorableSqlDatabaseGet": {
-            "$ref": "./examples/CosmosDBRestorableSqlDatabaseGet.json"
-          }
-        },
-        "description": "Get the properties of a restorable SQL database.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../preview/2020-06-01-preview/cosmos-db.json#/parameters/locationParameter"
-          },
-          {
-            "$ref": "../../preview/2020-06-01-preview/cosmos-db.json#/parameters/instanceIdParameter"
-          },
-          {
-            "$ref": "#/parameters/restorableSqlDatabaseIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The restorable SQL databases properties were retrieved successfully.",
-            "schema": {
-              "$ref": "#/definitions/RestorableSqlDatabaseGetResult"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../preview/2020-06-01-preview/cosmos-db.json#/definitions/DefaultErrorResponse"
-            }
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.DocumentDB/locations/{location}/restorableDatabaseAccounts/{instanceId}/restorableSqlContainers": {
       "get": {
         "operationId": "RestorableSqlContainers_List",
@@ -149,51 +107,6 @@
             "description": "The operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/RestorableSqlContainersListResult"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../preview/2020-06-01-preview/cosmos-db.json#/definitions/DefaultErrorResponse"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": null
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.DocumentDB/locations/{location}/restorableDatabaseAccounts/{instanceId}/restorableSqlContainers/{restorableSqlContainerId}": {
-      "get": {
-        "operationId": "RestorableSqlContainers_Get",
-        "x-ms-examples": {
-          "CosmosDBRestorableSqlContainerGet": {
-            "$ref": "./examples/CosmosDBRestorableSqlContainerGet.json"
-          }
-        },
-        "description": "Get the properties of a restorable SQL container.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../preview/2020-06-01-preview/cosmos-db.json#/parameters/locationParameter"
-          },
-          {
-            "$ref": "../../preview/2020-06-01-preview/cosmos-db.json#/parameters/instanceIdParameter"
-          },
-          {
-            "$ref": "#/parameters/restorableSqlContainerIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/RestorableSqlContainerGetResult"
             }
           },
           "default": {
@@ -298,48 +211,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.DocumentDB/locations/{location}/restorableDatabaseAccounts/{instanceId}/restorableMongodbDatabases/{restorableMongodbDatabaseId}": {
-      "get": {
-        "operationId": "RestorableMongodbDatabases_Get",
-        "x-ms-examples": {
-          "CosmosDBRestorableMongodbDatabaseGet": {
-            "$ref": "./examples/CosmosDBRestorableMongodbDatabaseGet.json"
-          }
-        },
-        "description": "Get the properties of a restorable MongoDB database.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../preview/2020-06-01-preview/cosmos-db.json#/parameters/locationParameter"
-          },
-          {
-            "$ref": "../../preview/2020-06-01-preview/cosmos-db.json#/parameters/instanceIdParameter"
-          },
-          {
-            "$ref": "#/parameters/restorableMongodbDatabaseIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The restorable MongoDB databases properties were retrieved successfully.",
-            "schema": {
-              "$ref": "#/definitions/RestorableMongodbDatabaseGetResult"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../preview/2020-06-01-preview/cosmos-db.json#/definitions/DefaultErrorResponse"
-            }
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.DocumentDB/locations/{location}/restorableDatabaseAccounts/{instanceId}/restorableMongodbCollections": {
       "get": {
         "operationId": "RestorableMongodbCollections_List",
@@ -371,51 +242,6 @@
             "description": "The operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/RestorableMongodbCollectionsListResult"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../preview/2020-06-01-preview/cosmos-db.json#/definitions/DefaultErrorResponse"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": null
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.DocumentDB/locations/{location}/restorableDatabaseAccounts/{instanceId}/restorableMongodbCollections/{restorableMongodbCollectionId}": {
-      "get": {
-        "operationId": "RestorableMongodbCollections_Get",
-        "x-ms-examples": {
-          "CosmosDBRestorableMongodbCollectionGet": {
-            "$ref": "./examples/CosmosDBRestorableMongodbCollectionGet.json"
-          }
-        },
-        "description": "Get the properties of a restorable MongoDB Collection.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../preview/2020-06-01-preview/cosmos-db.json#/parameters/locationParameter"
-          },
-          {
-            "$ref": "../../preview/2020-06-01-preview/cosmos-db.json#/parameters/instanceIdParameter"
-          },
-          {
-            "$ref": "#/parameters/restorableMongodbCollectionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/RestorableMongodbCollectionGetResult"
             }
           },
           "default": {
@@ -831,38 +657,6 @@
     }
   },
   "parameters": {
-    "restorableSqlDatabaseIdParameter": {
-      "name": "restorableSqlDatabaseId",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "method",
-      "description": "The GUID of the restorable SQL database."
-    },
-    "restorableMongodbDatabaseIdParameter": {
-      "name": "restorableMongodbDatabaseId",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "method",
-      "description": "The GUID of the restorable MongoDB database."
-    },
-    "restorableSqlContainerIdParameter": {
-      "name": "restorableSqlContainerId",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "method",
-      "description": "The GUID of the restorable SQL container."
-    },
-    "restorableMongodbCollectionIdParameter": {
-      "name": "restorableMongodbCollectionId",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "method",
-      "description": "The GUID of the restorable MongoDB collection."
-    },
     "restorableSqlDatabaseRidParameter": {
       "name": "restorableSqlDatabaseRid",
       "in": "query",
