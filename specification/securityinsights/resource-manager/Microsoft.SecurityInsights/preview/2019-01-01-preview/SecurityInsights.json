@@ -2736,7 +2736,7 @@
       "get": {
         "x-ms-examples": {
           "Get an entity query.": {
-            "$ref": "./examples/entityQueries/GetEntityQueryById.json"
+            "$ref": "./examples/entityQueries/GetExpansionEntityQueryById.json"
           }
         },
         "tags": [
@@ -6383,21 +6383,63 @@
         "value"
       ]
     },
+    "EntityQueryKind": {
+      "description": "Describes an Entity query resource with kind.",
+      "properties": {
+        "kind": {
+          "description": "The kind of the entity query",
+          "enum": [
+            "Expansion"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "EntityQueryKind",
+            "values": [
+              {
+                "value": "Expansion"
+              }
+            ]
+          }
+        }
+      },
+      "required": [
+        "kind"
+      ],
+      "type": "object"
+    },
     "EntityQuery": {
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "#/definitions/ResourceWithEtag"
+        },
+        {
+          "$ref": "#/definitions/EntityQueryKind"
         }
       ],
       "description": "Specific entity query.",
+      "discriminator": "kind",
+      "type": "object",
+      "required": [
+        "kind"
+      ]
+    },
+    "ExpansionEntityQuery": {
+      "description": "Represents Expansion entity query.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/EntityQuery"
+        }
+      ],
       "properties": {
         "properties": {
-          "$ref": "#/definitions/EntityQueryProperties",
-          "description": "Entity query properties",
+          "$ref": "#/definitions/ExpansionEntityQueriesProperties",
+          "description": "Expansion entity query properties",
           "x-ms-client-flatten": true
         }
       },
-      "type": "object"
+      "type": "object",
+      "x-ms-discriminator-value": "Expansion"
     },
     "EntityTimelineKind": {
       "description": "The entity query kind",
@@ -6446,8 +6488,8 @@
         "value"
       ]
     },
-    "EntityQueryProperties": {
-      "description": "Describes entity query properties",
+    "ExpansionEntityQueriesProperties": {
+      "description": "Describes expansion entity query properties",
       "properties": {
         "dataSources": {
           "description": "List of the data sources that are required to run the query",
