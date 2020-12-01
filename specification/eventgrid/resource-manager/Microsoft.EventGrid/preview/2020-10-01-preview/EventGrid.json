@@ -2626,6 +2626,174 @@
         }
       }
     },
+    "/{scope}/providers/Microsoft.EventGrid/eventSubscriptions/{eventSubscriptionName}/getDeliveryAttributes": {
+      "post": {
+        "tags": [
+          "EventSubscriptions"
+        ],
+        "summary": "Get delivery attributes for an event subscription.",
+        "description": "Get all delivery attributes for an event subscription.",
+        "operationId": "EventSubscriptions_GetDeliveryAttributes",
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "scope",
+            "in": "path",
+            "description": "The scope of the event subscription. The scope can be a subscription, or a resource group, or a top level resource belonging to a resource provider namespace, or an EventGrid topic. For example, use '/subscriptions/{subscriptionId}/' for a subscription, '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}' for a resource group, and '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}' for a resource, and '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/topics/{topicName}' for an EventGrid topic.",
+            "required": true,
+            "type": "string",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "eventSubscriptionName",
+            "in": "path",
+            "description": "Name of the event subscription.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DeliveryAttributeListResult"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 Bad Request.\n\n * 500 Internal Server Error."
+          }
+        },
+        "x-ms-examples": {
+          "EventSubscriptions_GetDeliveryAttributes": {
+            "$ref": "./examples/EventSubscriptions_GetDeliveryAttributes.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/systemTopics/{systemTopicName}/eventSubscriptions/{eventSubscriptionName}/getDeliveryAttributes": {
+      "post": {
+        "tags": [
+          "EventSubscriptions"
+        ],
+        "summary": "Get delivery attributes for an event subscription.",
+        "description": "Get all delivery attributes for an event subscription.",
+        "operationId": "SystemTopicEventSubscriptions_GetDeliveryAttributes",
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The name of the resource group within the user's subscription.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "systemTopicName",
+            "in": "path",
+            "description": "Name of the system topic.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "eventSubscriptionName",
+            "in": "path",
+            "description": "Name of the event subscription to be created. Event subscription names must be between 3 and 100 characters in length and use alphanumeric letters only.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DeliveryAttributeListResult"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 Bad Request.\n\n * 500 Internal Server Error."
+          }
+        },
+        "x-ms-examples": {
+          "SystemTopicEventSubscriptions_GetDeliveryAttributes": {
+            "$ref": "./examples/SystemTopicEventSubscriptions_GetDeliveryAttributes.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/partnerTopics/{partnerTopicName}/eventSubscriptions/{eventSubscriptionName}/getDeliveryAttributes": {
+      "post": {
+        "tags": [
+          "EventSubscriptions"
+        ],
+        "summary": "Get delivery attributes for an event subscription of a partner topic.",
+        "description": "Get all delivery attributes for an event subscription of a partner topic.",
+        "operationId": "PartnerTopicEventSubscriptions_GetDeliveryAttributes",
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The name of the resource group within the user's subscription.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "partnerTopicName",
+            "in": "path",
+            "description": "Name of the partner topic.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "eventSubscriptionName",
+            "in": "path",
+            "description": "Name of the event subscription to be created. Event subscription names must be between 3 and 100 characters in length and use alphanumeric letters only.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DeliveryAttributeListResult"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 Bad Request.\n\n * 500 Internal Server Error."
+          }
+        },
+        "x-ms-examples": {
+          "PartnerTopicEventSubscriptions_GetDeliveryAttributes": {
+            "$ref": "./examples/PartnerTopicEventSubscriptions_GetDeliveryAttributes.json"
+          }
+        }
+      }
+    },
     "/providers/Microsoft.EventGrid/operations": {
       "get": {
         "tags": [
@@ -6992,6 +7160,19 @@
         "nextLink": {
           "description": "A link for the next page of event subscriptions",
           "type": "string"
+        }
+      }
+    },
+    "DeliveryAttributeListResult": {
+      "description": "Result of the Get delivery attributes operation.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "A collection of DeliveryAttributeMapping",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DeliveryAttributeMapping"
+          }
         }
       }
     },
