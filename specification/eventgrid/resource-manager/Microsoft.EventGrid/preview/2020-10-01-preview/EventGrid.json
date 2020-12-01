@@ -5610,35 +5610,6 @@
         }
       }
     },
-    "PrivateEndpointConnection": {
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/Resource"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/PrivateEndpointConnectionProperties",
-          "description": "Properties of the PrivateEndpointConnection.",
-          "x-ms-client-flatten": true
-        }
-      }
-    },
-    "ExtendedLocation": {
-      "description": "Definition of an Extended Location",
-      "type": "object",
-      "properties": {
-        "name": {
-          "description": "Fully qualified name of the extended location.",
-          "type": "string"
-        },
-        "type": {
-          "description": "Type of the extended location.",
-          "type": "string"
-        }
-      }
-    },
     "InboundIpRule": {
       "type": "object",
       "properties": {
@@ -5862,6 +5833,21 @@
       },
       "discriminator": "inputSchemaMappingType"
     },
+    "PrivateEndpointConnection": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PrivateEndpointConnectionProperties",
+          "description": "Properties of the PrivateEndpointConnection.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
     "TrackedResource": {
       "description": "Definition of a Tracked Resource.",
       "required": [
@@ -5881,10 +5867,6 @@
             "read",
             "create"
           ]
-        },
-        "extendedLocation": {
-          "$ref": "#/definitions/ExtendedLocation",
-          "description": "Extended location of the resource."
         },
         "tags": {
           "description": "Tags of the resource.",
@@ -7976,6 +7958,20 @@
         }
       }
     },
+    "ExtendedLocation": {
+      "description": "Definition of an Extended Location",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Fully qualified name of the extended location.",
+          "type": "string"
+        },
+        "type": {
+          "description": "Type of the extended location.",
+          "type": "string"
+        }
+      }
+    },
     "Topic": {
       "description": "EventGrid Topic",
       "type": "object",
@@ -8009,6 +8005,10 @@
             "name": "ResourceKind",
             "modelAsString": true
           }
+        },
+        "extendedLocation": {
+          "$ref": "#/definitions/ExtendedLocation",
+          "description": "Extended location of the resource."
         }
       }
     },
