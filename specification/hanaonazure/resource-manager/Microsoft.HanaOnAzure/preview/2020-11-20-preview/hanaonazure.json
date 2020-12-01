@@ -616,22 +616,24 @@
       "description": "The response from the List SAP monitors operation."
     },
     "SapMonitorIdentityParameter":{
-      "type": {
-        "type": "string",
-        "description": "The type of identity used for the SapMonitor. Only User assigned Identity is supported now. The type 'None' will remove any identities from the virtual machine.",
-        "enum": [
-          "UserAssigned",
-          "None"
-        ],
-        "readOnly": true,
-        "x-ms-enum": {
-          "name": "ResourceIdentityType",
-          "modelAsString": true
+      "properties":{
+        "type": {
+          "type": "string",
+          "description": "The type of identity used for the SapMonitor. Only User assigned Identity is supported now. The type 'None' will remove any identities from the virtual machine.",
+          "enum": [
+            "UserAssigned",
+            "None"
+          ],
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "ResourceIdentityType",
+            "modelAsString": true
+          }
+        },
+        "userAssignedIdentities": {
+          "type": "object",
+          "description": "Key-value pair of user assigned id and {}"
         }
-      },
-      "userAssignedIdentities": {
-        "type": "object",
-        "description": "Key-value pair of user assigned id and {}"
       }
     },
     "SapMonitor": {
@@ -654,38 +656,41 @@
       "description": "SAP monitor info on Azure (ARM properties and SAP monitor properties)"
     },
     "SapMonitorIdentityProperties": {
-      "type": {
-        "type": "string",
-        "description": "The type of identity used for the SapMonitor. Only User assigned Identity is supported now. The type 'None' will remove any identities from the virtual machine.",
-        "enum": [
-          "UserAssigned",
-          "None"
-        ],
-        "x-ms-enum": {
-          "name": "ResourceIdentityType",
-          "modelAsString": false
-        }
-      },
-      "userAssignedIdentities": {
-        "type": "object",
-        "additionalProperties": {
-          "type": "object",
-          "x-ms-client-name": "userAssignedIdentitiesValue",
-          "properties": {
-            "principalId": {
-              "readOnly": true,
-              "type": "string",
-              "description": "The principal id of user assigned identity."
-            },
-            "clientId": {
-              "readOnly": true,
-              "type": "string",
-              "description": "The client id of user assigned identity."
-            }
+      "properties":{
+        "type": {
+          "type": "string",
+          "description": "The type of identity used for the SapMonitor. Only User assigned Identity is supported now. The type 'None' will remove any identities from the virtual machine.",
+          "enum": [
+            "UserAssigned",
+            "None"
+          ],
+          "x-ms-enum": {
+            "name": "ResourceIdentityType",
+            "modelAsString": false
           }
         },
-        "description": "The user identity associated with the SapMonitor. The user identity references will be ARM resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/identities/{identityName}'.",
-        "metadata": {
+        "userAssignedIdentities": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "object",
+            "x-ms-client-name": "userAssignedIdentitiesValue",
+            "properties": {
+              "principalId": {
+                "readOnly": true,
+                "type": "string",
+                "description": "The principal id of user assigned identity."
+              },
+              "clientId": {
+                "readOnly": true,
+                "type": "string",
+                "description": "The client id of user assigned identity."
+              }
+            }
+          }
+        }
+      },
+      "description": "The user identity associated with the SapMonitor. The user identity references will be ARM resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/identities/{identityName}'.",
+      "metadata": {
           "description": "Client id and principal id of the resource."
         }
       },
