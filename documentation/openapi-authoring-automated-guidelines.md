@@ -109,6 +109,8 @@ We request OpenAPI(Swagger) spec authoring be assigned to engineers who have an
 | [R4008](#r4008) | [AvoidEmptyResponseSchema](#r4008) | ARM OpenAPI(swagger) specs |
 | [R4012](#r4012) | [XmsPageableMustHaveCorrespondingResponse](#r4012) | ARM OpenAPI(swagger) specs |
 | [R4013](#r4013) | [IntegerTypeMustHaveFormat](#r4013) | ARM OpenAPI(swagger) specs |
+| [R4028](#r4028) | [ValidResponseCodeRequired](#r4028) | ARM OpenAPI(swagger) specs |
+| [R4029](#r4029) | [UniqueClientParameterName](#r4029) | ARM OpenAPI(swagger) specs |
 
 #### SDK Warnings
 
@@ -141,6 +143,7 @@ We request OpenAPI(Swagger) spec authoring be assigned to engineers who have an
 | [R2029](#r2029) | [PageableOperation](#r2029) | ARM and Data plane OpenAPI(swagger) specs |
 | [R4006](#r4006) | [DeprecatedXmsCodeGenerationSetting](#r4006) | ARM and Data plane OpenAPI(swagger) specs |
 | [R4024](#r4024) | [PreviewVersionOverOneYear](#r4024) | ARM OpenAPI(swagger) specs |
+| [R4030](#r4030) | [UniqueXmsExample](#r4030) | ARM OpenAPI(swagger) specs |
 
 
 ### RPaaS Violations
@@ -3079,6 +3082,126 @@ The following would be valid:
     "x-ms-long-running-operation-options": {
       "final-state-via": "location"
   }
+...
+```
+Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [ARM](#arm-violations): [Errors](#arm-errors) or [Warnings](#arm-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
+
+### <a name="r4028" ></a>R4028 ValidResponseCodeRequired
+
+**Category** : SDK Error
+
+**Applies to** : ARM OpenAPI(swagger) specs
+
+**Output Message** :  There is no declared valid status code.
+
+**Description** : Every operation response must contain a valid code like "200","201","202" or "204" which indicates the operation is succeed and it's not allowed that a response schema just contains a "default" code. 
+
+**Why this rule is important**: If a Swagger just contains "default" status code, this actually means "everything is an error". All track2 SDK will systematically raise an exception at runtime, if there is no declared valid status code.
+
+**CreatedAt**: November 23, 2020
+
+**LastModifiedAt**: November 23, 2020
+
+**How to fix the violation**: Add a valid response code .
+The following would be valid:
+
+```json
+...
+  "responses": {
+      "200": {
+        "description": "Succeeded",
+        "schema": {
+          "$ref": "#/definitions/MySimpleResource"
+        }
+      },
+      "default": {
+        "description": "Error response describing why the operation failed.",
+        "schema": {
+          "$ref": "#/definitions/ErrorResponse"
+        }
+      }
+    }
+  }
+...
+```
+Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [ARM](#arm-violations): [Errors](#arm-errors) or [Warnings](#arm-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
+
+### <a name="r4029" ></a>R4029 UniqueClientParameterName
+
+**Category** : SDK Error
+
+**Applies to** : ARM OpenAPI(swagger) specs
+
+**Output Message** :  Do not have duplicate name of client parameter name, make sure every client parameter name unique.
+
+**Description** : This may cause a problem when different swagger files come together. If two APIs with different client name have the same client parameter subscriptionId, but with different reference name in swaggers, the generated model will also have two clients with two client parameters subscriptionId and subscriptionId1 (the latter one has been renamed to avoid collision). We should ensure that the client parameters are all unique in the same API version.
+
+**Why this rule is important**: Make sure no conflict in SDK generation.
+
+**CreatedAt**: November 30, 2020
+
+**LastModifiedAt**: November 30, 2020
+
+**How to fix the violation**: Remove duplicate client parameter, ref to the same one.
+The following would be valid:
+
+```json
+...
+ "/api": {
+      "get": {
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            // ref to the same subcriptionId
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+        ],
+     },
+     "patch": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+     ]
+  }
+...
+```
+Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [ARM](#arm-violations): [Errors](#arm-errors) or [Warnings](#arm-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
+
+### <a name="r4030" ></a>R4030 UniqueXmsExample
+
+**Category** : SDK Warning
+
+**Applies to** : ARM OpenAPI(swagger) specs
+
+**Output Message** :  Do not have duplicate name of x-ms-example, make sure every x-ms-example name unique. Duplicate x-ms-example: {ExampleName}
+
+**Description** : x-ms-example name should be unique in the same API version.
+
+**Why this rule is important**: Duplicate example name will bring trouble for test codegen. For example: hard to config used example.
+
+**CreatedAt**: November 30, 2020
+
+**LastModifiedAt**: November 30, 2020
+
+**How to fix the violation**: Rename duplicate x-ms-example name
+The following would be valid:
+
+```json
+...
+"x-ms-examples": {
+          "Create resource": {
+            "$ref": "./examples/createResource"
+          },
+          "Update resource":{
+            "$ref": "./examples/updateResource"
+          }
+          
+        }
 ...
 ```
 Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [ARM](#arm-violations): [Errors](#arm-errors) or [Warnings](#arm-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
