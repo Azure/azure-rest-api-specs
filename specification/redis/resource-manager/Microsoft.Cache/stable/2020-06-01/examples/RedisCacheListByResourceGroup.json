@@ -26,7 +26,23 @@
               "redisConfiguration": {},
               "hostName": "cache1.redis.cache.windows.net",
               "port": 6379,
-              "sslPort": 6380
+              "sslPort": 6380,
+              "publicNetworkAccess": "Disabled",
+              "privateEndpointConnections": [
+                {
+                  "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Cache/Redis/cache1/privateEndpointConnections/cachePec",
+                  "properties": {
+                    "privateEndpoint": {
+                      "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/privateEndpoints/cachePe"
+                    },
+                    "privateLinkServiceConnectionState": {
+                      "status": "Approved",
+                      "description": "Please approve my connection",
+                      "actionRequired": "None"
+                    }
+                  }
+                }
+              ]
             }
           }
         ]
