@@ -110,16 +110,6 @@ namespace: policy
 output-folder: $(go-sdk-folder)/services/resources/mgmt/2020-09-01/policy
 ```
 
-### Tag: package-policy-2020-03 and go
-
-These settings apply only when `--tag=package-policy-2020-03 --go` is specified on the command line.
-Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
-
-``` yaml $(tag) == 'package-policy-2020-03' && $(go)
-namespace: policy
-output-folder: $(go-sdk-folder)/services/preview/resources/mgmt/2020-03-01-preview/policy
-```
-
 ### Tag: package-policy-2019-09 and go
 
 These settings apply only when `--tag=package-policy-2019-09 --go` is specified on the command line.
@@ -128,6 +118,16 @@ Please also specify `--go-sdk-folder=<path to the root directory of your azure-s
 ``` yaml $(tag) == 'package-policy-2019-09' && $(go)
 namespace: policy
 output-folder: $(go-sdk-folder)/services/resources/mgmt/2019-09-01/policy
+```
+
+### Tag: package-policy-2020-03 and go
+
+These settings apply only when `--tag=package-policy-2020-03 --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag) == 'package-policy-2020-03' && $(go)
+namespace: policy
+output-folder: $(go-sdk-folder)/services/preview/resources/mgmt/2020-03-01-preview/policy
 ```
 
 ### Tag: package-policy-2019-06 and go
