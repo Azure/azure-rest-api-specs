@@ -684,22 +684,6 @@
       },
       "description": "The value of a parameter."
     },
-    "PolicySku": {
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "The name of the policy sku. Possible values are A0 and A1."
-        },
-        "tier": {
-          "type": "string",
-          "description": "The policy sku tier. Possible values are Free and Standard."
-        }
-      },
-      "required": [
-        "name"
-      ],
-      "description": "The policy sku. This property is optional, obsolete, and will be ignored."
-    },
     "PolicyAssignment": {
       "properties": {
         "properties": {
@@ -721,14 +705,6 @@
           "type": "string",
           "description": "The name of the policy assignment.",
           "readOnly": true
-        },
-        "sku": {
-          "$ref": "#/definitions/PolicySku",
-          "description": "The policy sku. This property is optional, obsolete, and will be ignored.",
-          "default": {
-            "name": "A0",
-            "tier": "Free"
-          }
         },
         "location": {
           "type": "string",
