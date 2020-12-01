@@ -40,7 +40,9 @@
           "UsageDetails"
         ],
         "operationId": "UsageDetails_List",
-        "description": "Lists the usage details for the defined scope. Usage details are available via this API only for May 1, 2014 or later.",
+        "description": "The Usage Details API provides an easy way to get raw, unaggregated cost data that corresponds to your Azure bill. The API is useful when your organization needs a programmatic cost data retrieval solution. The data in Usage Details is provided on a per meter basis, per day. Consider using the API if you're looking to analyze smaller cost data sets. However, please note that the API is paginated and synchronous. It is not performant if you have large cost datasets that you wish to analyze. To retrieve large cost datasets on a recurring basis, we encourage you to utilize our [Exports API](https://docs.microsoft.com/en-us/rest/api/cost-management/exports).  
+Please also be aware that there are two types of API responses available via this API. The responses available are in either the Legacy or Modern format. The format of the usage details record will be dependent on the type of customer you are. If you are an EA or Legacy Pay-As-You-Go customer, you will receive records in the Legacy format. If you are a Modern Customer Agreement customer you will receive records in the Modern format. To learn more about the different formats and how to use the API please visit our documentation page [here]( https://docs.microsoft.com/en-us/azure/cost-management-billing/costs/manage-automation#automate-retrieval-with-usage-details-api).  
+",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
         },
