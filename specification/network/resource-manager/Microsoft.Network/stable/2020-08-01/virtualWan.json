@@ -6134,11 +6134,16 @@
           "type": "string",
           "readOnly": true,
           "description": "A unique read-only string that changes whenever the resource is updated."
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource type."
         }
       },
       "allOf": [
         {
-          "$ref": "./network.json#/definitions/Resource"
+          "$ref": "./network.json#/definitions/SubResource"
         }
       ],
       "description": "VpnGatewayNatRule Resource."
@@ -6423,7 +6428,6 @@
         },
         "ingressNatRules": {
           "type": "array",
-          "readOnly": true,
           "items": {
             "$ref": "./network.json#/definitions/SubResource"
           },
@@ -6431,7 +6435,6 @@
         },
         "egressNatRules": {
           "type": "array",
-          "readOnly": true,
           "items": {
             "$ref": "./network.json#/definitions/SubResource"
           },

@@ -29,7 +29,12 @@
                     },
                     "connectionBandwidth": 200,
                     "vpnConnectionProtocolType": "IKEv2",
-                    "sharedKey": "key"
+                    "sharedKey": "key",
+                    "egressNatRules": [
+                      {
+                        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/vpnGateways/gateway1/natRules/nat03"
+                      }
+                    ]
                   }
                 }
               ]
@@ -54,7 +59,26 @@
             }
           ]
         },
-        "natRules": [],
+        "natRules": [
+          {
+            "name": "nat03",
+            "properties": {
+              "type": "Static",
+              "mode": "EgressSnat",
+              "internalMappings": [
+                {
+                  "addressSpace": "0.0.0.0/26"
+                }
+              ],
+              "externalMappings": [
+                {
+                  "addressSpace": "192.168.0.0/26"
+                }
+              ],
+              "ipConfigurationId": ""
+            }
+          }
+        ],
         "isRoutingPreferenceInternet": false
       }
     }
@@ -106,7 +130,12 @@
                       "enableRateLimiting": false,
                       "useLocalAzureIpAddress": false,
                       "usePolicyBasedTrafficSelectors": false,
-                      "routingWeight": 0
+                      "routingWeight": 0,
+                      "egressNatRules": [
+                        {
+                          "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/vpnGateways/gateway1/natRules/nat03"
+                        }
+                      ]
                     }
                   }
                 ],
@@ -169,7 +198,32 @@
               }
             ]
           },
-          "natRules": [],
+          "natRules": [
+            {
+              "name": "nat03",
+              "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/vpnGateways/gateway1/natRules/nat03",
+              "etag": "w/\\00000000-0000-0000-0000-000000000000\\",
+              "properties": {
+                "type": "Static",
+                "mode": "EgressSnat",
+                "internalMappings": [
+                  {
+                    "addressSpace": "0.0.0.0/26"
+                  }
+                ],
+                "externalMappings": [
+                  {
+                    "addressSpace": "192.168.0.0/26"
+                  }
+                ],
+                "egressVpnSiteLinkConnections": [
+                  {
+                    "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/vpnGateways/gateway1/vpnConnections/vpnConnection1/vpnLinkConnections/Connection-Link1"
+                  }
+                ]
+              }
+            }
+          ],
           "isRoutingPreferenceInternet": false
         }
       }
@@ -220,7 +274,12 @@
                       "enableRateLimiting": false,
                       "useLocalAzureIpAddress": false,
                       "usePolicyBasedTrafficSelectors": false,
-                      "routingWeight": 0
+                      "routingWeight": 0,
+                      "egressNatRules": [
+                        {
+                          "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/vpnGateways/gateway1/natRules/nat03"
+                        }
+                      ]
                     }
                   }
                 ],
@@ -283,7 +342,32 @@
               }
             ]
           },
-          "natRules": [],
+          "natRules": [
+            {
+              "name": "nat03",
+              "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/vpnGateways/gateway1/natRules/nat03",
+              "etag": "w/\\00000000-0000-0000-0000-000000000000\\",
+              "properties": {
+                "type": "Static",
+                "mode": "EgressSnat",
+                "internalMappings": [
+                  {
+                    "addressSpace": "0.0.0.0/26"
+                  }
+                ],
+                "externalMappings": [
+                  {
+                    "addressSpace": "192.168.0.0/26"
+                  }
+                ],
+                "egressVpnSiteLinkConnections": [
+                  {
+                    "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/vpnGateways/gateway1/vpnConnections/vpnConnection1/vpnLinkConnections/Connection-Link1"
+                  }
+                ]
+              }
+            }
+          ],
           "isRoutingPreferenceInternet": false
         }
       }
