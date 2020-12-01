@@ -91,6 +91,15 @@ input-file:
   - Microsoft.Solutions/preview/2020-08-21-preview/managedapplications.json
 ```
 
+### Tag: package-resources-2020-08
+
+These settings apply only when `--tag=package-resources-2020-08` is specified on the command line.
+
+``` yaml $(tag) == 'package-resources-2020-08'
+input-file:
+  - Microsoft.Resources/stable/2020-08-01/resources.json
+```
+
 ### Tag: package-subscriptions-2020-01
 
 These settings apply only when `--tag=package-subscriptions-2020-01` is specified on the command line.
