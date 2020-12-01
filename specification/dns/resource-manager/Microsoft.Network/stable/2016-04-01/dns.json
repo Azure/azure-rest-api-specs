@@ -892,6 +892,11 @@
           "format": "int64",
           "description": "The TTL (time-to-live) of the records in the record set."
         },
+        "fqdn": {
+          "type": "string",
+          "description": "Fully qualified domain name of the record set.",
+          "readOnly": true
+        },
         "ARecords": {
           "type": "array",
           "items": {
@@ -1017,6 +1022,12 @@
           "type": "integer",
           "format": "int64",
           "description": "The maximum number of record sets that can be created in this DNS zone.  This is a read-only property and any attempt to set this value will be ignored."
+        },
+        "maxNumberOfRecordsPerRecordSet": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The maximum number of records per record set that can be created in this DNS zone.  This is a read-only property and any attempt to set this value will be ignored.",
+          "readOnly": true
         },
         "numberOfRecordSets": {
           "type": "integer",
@@ -1160,33 +1171,40 @@
     },
     "CloudError": {
       "type": "object",
+      "x-ms-external": true,
       "properties": {
         "error": {
-          "$ref": "#/definitions/CloudErrorBody"
+          "$ref": "#/definitions/CloudErrorBody",
+          "description": "Cloud error body."
         }
       },
-      "x-ms-external": true
+      "description": "An error response from the service."
     },
     "CloudErrorBody": {
       "type": "object",
+      "x-ms-external": true,
       "properties": {
         "code": {
-          "type": "string"
+          "type": "string",
+          "description": "An identifier for the error. Codes are invariant and are intended to be consumed programmatically."
         },
         "message": {
-          "type": "string"
+          "type": "string",
+          "description": "A message describing the error, intended to be suitable for display in a user interface."
         },
         "target": {
-          "type": "string"
+          "type": "string",
+          "description": "The target of the particular error. For example, the name of the property in error."
         },
         "details": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/CloudErrorBody"
-          }
+          },
+          "description": "A list of additional details about the error."
         }
       },
-      "x-ms-external": true
+      "description": "An error response from the service."
     }
   },
   "parameters": {}

@@ -20,7 +20,7 @@ We request OpenAPI(Swagger) spec authoring be assigned to engineers who have an
 * [Rule Descriptions](#rule-descriptions)
 
 ## Error vs Warning
-- Rules with severity "Error" have to be addressed for the OpenAPI(swagger) spec to be approved by the reviewers. If there is a strong reason for why the rule cannot be addressed in an OpenAPI(swagger) spec it will be a permanent exception, then [suppression process](https://github.com/Azure/adx-documentation-pr/wiki/Swagger-Validation-Errors-Suppression) must be followed.
+- Rules with severity "Error" have to be addressed for the OpenAPI(swagger) spec to be approved by the reviewers. If there is a strong reason for why the rule cannot be addressed in an OpenAPI(swagger) spec it will be a permanent exception, then [suppression process](https://dev.azure.com/azure-sdk/internal/_wiki/wikis/internal.wiki/85/Swagger-Suppression-Process) must be followed.
 
 - Rules with severity "Warning" are either strong recommendations made by Azure developer experience team for better SDK/Documentation experience or they point out something to evaluate, for example, the warning for booleans asks the user to evaluate whether the property should be a boolean or not. 
 
@@ -150,6 +150,8 @@ We request OpenAPI(Swagger) spec authoring be assigned to engineers who have an
 | Id | Rule Name | Applies to |
 | --- | --- | --- |
 | [R4023](#r4023) | [RPaasPutLongRunningOperation201Only](#r4023) | ARM OpenAPI(swagger) specs |
+| [R4025](#r4025) | [RPaasDeleteLongRunningOperation202Only](#r4025) | ARM OpenAPI(swagger) specs |
+| [R4026](#r4026) | [RPaasPostLongRunningOperation202Only](#r4026) | ARM OpenAPI(swagger) specs |
 
 ### Documentation
 
@@ -2349,35 +2351,55 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 **LastModifiedAt**: April 2, 2020
 
 **How to fix the violation**: Following the ARM specification to modify the schema in the swagger file.
+It's recommended to refer to the 'ErrorResponse' in [v2/types.json](https://github.com/Azure/azure-rest-api-specs/blob/master/specification/common-types/resource-management/v2/types.json#L273) which is provided for fixing the error.
 
 The following would be invalid:
 
 ```json
- "response":{
-   "default": {
-     "schema":{
-         "error":"error msg",
-         "code": 404,
-         "message":"some details"
+"definitions": {
+  "ErrorResponse": {
+     "properties": {
+       "code": {
+         "readOnly": true,
+         "type": "string",
+         "description": "The error code."
+       },
+       "message": {
+         "readOnly": true,
+         "type": "string",
+         "description": "The error message."
+       }
+       ...
      }
   }
- }
-
+}
 ```
 
 the correct schema:
 
 ```json
- "response":{
-   "default": {
-     "error":
-     {
-        "code": 404,
-        "message":"some details"
-         ...
+"definitions": {
+  "ErrorResponse": {
+     "properties": {
+        "error": {
+          "type": "object",
+          "description": "The error object.",
+          "properties": {
+            "code": {
+              "readOnly": true,
+              "type": "string",
+              "description": "The error code."
+            },
+            "message": {
+              "readOnly": true,
+              "type": "string",
+              "description": "The error message."
+            }
+            ...
+        }
      }
   }
- }
+}
 
 ```
 
@@ -2758,7 +2780,7 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 **Output Message** : The response schema of operations API "{0}" does not match the ARM specification. Please standardize the schema.
 
-**Description** : The operations API should have a response body schema consistent with the [contract spec](https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/proxy-api-reference.md#exposing-available-operations). The required properties such as `isDataAction`,`display.description` or `display.resource`,must be included.
+**Description** : The operations API should have a response body schema consistent with the [contract spec](https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/proxy-api-reference.md#exposing-available-operations). The required properties such as `isDataAction`,`display.description` and `display.resource`,must be included.
 
 **CreatedAt**: July 13, 2020
 
@@ -2909,13 +2931,13 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 **Output Message** : [RPaaS] Only 201 is the supported response code for PUT async response
 
-**Description** : An async PUT operation response include status code 201 with Azure-async-operation header. Must also support status code 200, for simple updates that can be completed synchronously (ex: tags). Operation must also add "x-ms-long-running-operation and x-ms-long-running-operation-options" to describe how the long running operation is tracked.
+**Description** : An async PUT operation response include status code 201 with 'Azure-async-operation' header. Must also support status code 200, for simple updates that can be completed synchronously (ex: tags). Operation must also add "x-ms-long-running-operation and x-ms-long-running-operation-options" to mark that it is a long running operation (in case of 201) and how it is tracked (Azure-async-operation header).
 
 **CreatedAt**: August 10, 2020
 
 **LastModifiedAt**: August 10, 2020
 
-**Why this rule is important**: RPaaS only supports 201 for async operations. This is enforced at runtime via swagger validation.
+**Why this rule is important**: RPaaS only supports 201 for async PUT operations. This is enforced at runtime via swagger validation.
 
 **How to fix the violation**: Add the following for async PUT operations.
 
@@ -2970,3 +2992,93 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
    
 Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [ARM](#arm-violations): [Errors](#arm-errors) or [Warnings](#arm-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
 
+### <a name="r4025"></a>R4025 RPaasDeleteLongRunningOperation202Only
+
+**Category** : RPaaS Error
+
+**Applies to** : ARM OpenAPI(swagger) specs
+
+**Output Message** : [RPaaS] DELETE async supports
+
+**Description** : An async DELETE operation response include status code 202 with 'Location' header. Must support status code 200 if operation can be completed synchronously. Must support 204 (resource doesn't exists). Operation must also add "x-ms-long-running-operation and x-ms-long-running-operation-options" to mark that it is a long running operation (in case of 202) and how it is tracked (Location header).
+
+**CreatedAt**: November 12, 2020
+
+**LastModifiedAt**: November 12, 2020
+
+**Why this rule is important**: RPaaS only supports 202 for async DELETE operations. This is enforced at runtime via swagger validation.
+
+**How to fix the violation**: Add the following for async DELETE operations.
+
+The following would be valid:
+
+```json
+...
+  "responses": {
+      "202": {
+        "description": "Delete operation accepted",
+      },
+      "200": {
+        "description": "Delete operation succeeded"
+      },
+      "204": {
+        "description": "Resource doesn't exist. Delete operation completed."
+      },
+      "default": {
+        "description": "Error response describing why the operation failed.",
+        "schema": {
+          "$ref": "#/definitions/ErrorResponse"
+        }
+      }
+    },
+    "x-ms-long-running-operation": true,
+    "x-ms-long-running-operation-options": {
+      "final-state-via": "location"
+  }
+...
+```
+Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [ARM](#arm-violations): [Errors](#arm-errors) or [Warnings](#arm-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
+
+### <a name="r4026"></a>R4026 RPaasPostLongRunningOperation202Only
+
+**Category** : RPaaS Error
+
+**Applies to** : ARM OpenAPI(swagger) specs
+
+**Output Message** : [RPaaS] POST async supports
+
+**Description** : An async POST operation response include status code 202 with 'Location' header. Must support status code 200 if operation can be completed synchronously. Operation must also add "x-ms-long-running-operation and x-ms-long-running-operation-options" to mark that it is a long running operation (in case of 202) and how it is tracked (Location header).
+
+**CreatedAt**: November 12, 2020
+
+**LastModifiedAt**: November 12, 2020
+
+**Why this rule is important**: RPaaS only supports 202 for async POST operations. This is enforced at runtime via swagger validation.
+
+**How to fix the violation**: Add the following for async POST operations.
+
+The following would be valid:
+
+```json
+...
+  "responses": {
+      "202": {
+        "description": "Operation accepted",
+      },
+      "200": {
+        "description": "Operation completed"
+      },
+      "default": {
+        "description": "Error response describing why the operation failed.",
+        "schema": {
+          "$ref": "#/definitions/ErrorResponse"
+        }
+      }
+    },
+    "x-ms-long-running-operation": true,
+    "x-ms-long-running-operation-options": {
+      "final-state-via": "location"
+  }
+...
+```
+Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [ARM](#arm-violations): [Errors](#arm-errors) or [Warnings](#arm-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
