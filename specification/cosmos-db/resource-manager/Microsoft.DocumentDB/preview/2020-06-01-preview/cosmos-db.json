@@ -8285,7 +8285,7 @@
         "apiType": {
           "type": "string",
           "readOnly": true,
-          "description": "Enum to indicate the API type of the restorable database account.",
+          "description": "The API type of the restorable database account.",
           "$ref": "#/definitions/ApiType"
         },
         "restorableLocations": {
@@ -8308,7 +8308,6 @@
         "Cassandra",
         "Table",
         "Sql",
-        "Etcd",
         "GremlinV2"
       ],
       "x-ms-enum": {
@@ -8388,7 +8387,8 @@
             "operationType": {
               "type": "string",
               "readOnly": true,
-              "description": "The operation type of this database event."
+              "description": "The operation type of this database event.",
+              "$ref": "#/definitions/OperationType"
             },
             "eventTimestamp": {
               "type": "string",
@@ -8480,7 +8480,8 @@
             "operationType": {
               "type": "string",
               "readOnly": true,
-              "description": "The operation type of this container event."
+              "description": "The operation type of this container event.",
+              "$ref": "#/definitions/OperationType"
             },
             "eventTimestamp": {
               "type": "string",
@@ -8575,7 +8576,8 @@
             "operationType": {
               "type": "string",
               "readOnly": true,
-              "description": "The operation type of this database event."
+              "description": "The operation type of this database event.",
+              "$ref": "#/definitions/OperationType"
             },
             "eventTimestamp": {
               "type": "string",
@@ -8640,7 +8642,8 @@
             "operationType": {
               "type": "string",
               "readOnly": true,
-              "description": "The operation type of this collection event."
+              "description": "The operation type of this collection event.",
+              "$ref": "#/definitions/OperationType"
             },
             "eventTimestamp": {
               "type": "string",
@@ -8673,6 +8676,21 @@
         }
       },
       "description": "The List operation response, that contains the restorable MongoDB resources."
+    }
+  },
+  "OperationType": {
+    "description": "Enum to indicate the operation type of the event.",
+    "type": "string",
+    "readOnly": true,
+    "enum": [
+      "Create",
+      "Replace",
+      "Delete",
+      "SystemOperation"
+    ],
+    "x-ms-enum": {
+      "name": "OperationType",
+      "modelAsString": true
     }
   },
   "parameters": {
