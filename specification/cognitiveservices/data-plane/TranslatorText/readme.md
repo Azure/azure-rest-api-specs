@@ -91,39 +91,8 @@ python:
 
 ## Go
 
-These settings apply only when `--go` is specified on the command line.
+See configuration in [readme.go.md](./readme.go.md)
 
-``` yaml $(go)
-go:
-  license-header: MICROSOFT_APACHE_NO_VERSION
-  namespace: translatortext
-  clear-output-folder: true
-```
-
-### Go multi-api
-
-``` yaml $(go) && $(multiapi)
-batch:
-  - tag: release_3_0
-  - tag: release_1_0_preview.1
-```
-### Tag: release_1_0_preview.1 and go
-
-These settings apply only when `--tag=release_1_0_preview.1 --go` is specified on the command line.
-Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
-
-``` yaml $(tag) == 'release_1_0_preview.1' && $(go)
-output-folder: $(go-sdk-folder)/services/cognitiveservices/v1.0_preview.1/$(namespace)
-```
-
-### Tag: release_3_0 and go
-
-These settings apply only when `--tag=release_3_0 --go` is specified on the command line.
-Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
-
-``` yaml $(tag) == 'release_3_0' && $(go)
-output-folder: $(go-sdk-folder)/services/cognitiveservices/v3.0/$(namespace)
-```
 ## Java
 
 These settings apply only when `--java` is specified on the command line.
@@ -180,8 +149,8 @@ require: $(this-folder)/../../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
-  - $(this-folder)/stable/v3.0/TranslatorText.json
   - $(this-folder)/preview/v1.0-preview.1/TranslatorBatch.json
+  - $(this-folder)/stable/v3.0/TranslatorText.json
 
 ```
 

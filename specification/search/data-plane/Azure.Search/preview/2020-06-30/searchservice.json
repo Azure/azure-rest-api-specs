@@ -5518,12 +5518,14 @@
         "k1": {
           "type": "number",
           "format": "double",
-          "description": "This property controls the scaling function between the term frequency of each matching terms and the final relevance score of a document-query pair. By default, a value of 1.2 is used. A value of 0.0 means the score does not scale with an increase in term frequency."
+          "description": "This property controls the scaling function between the term frequency of each matching terms and the final relevance score of a document-query pair. By default, a value of 1.2 is used. A value of 0.0 means the score does not scale with an increase in term frequency.",
+          "x-nullable": true
         },
         "b": {
           "type": "number",
           "format": "double",
-          "description": "This property controls how the length of a document affects the relevance score. By default, a value of 0.75 is used. A value of 0.0 means no length normalization is applied, while a value of 1.0 means the score is fully normalized by the length of the document."
+          "description": "This property controls how the length of a document affects the relevance score. By default, a value of 0.75 is used. A value of 0.0 means no length normalization is applied, while a value of 1.0 means the score is fully normalized by the length of the document.",
+          "x-nullable": true
         }
       },
       "description": "Ranking function based on the Okapi BM25 similarity algorithm. BM25 is a TF-IDF-like algorithm that includes length normalization (controlled by the 'b' parameter) as well as term frequency saturation (controlled by the 'k1' parameter)."
@@ -5709,6 +5711,14 @@
           "x-ms-client-name": "ETag",
           "type": "string",
           "description": "The ETag of the data source."
+        },
+        "encryptionKey": {
+          "$ref": "#/definitions/SearchResourceEncryptionKey",
+          "description": "A description of an encryption key that you create in Azure Key Vault. This key is used to provide an additional level of encryption-at-rest for your datasource definition when you want full assurance that no one, not even Microsoft, can decrypt your data source definition in Azure Cognitive Search. Once you have encrypted your data source definition, it will always remain encrypted. Azure Cognitive Search will ignore attempts to set this property to null. You can change this property as needed if you want to rotate your encryption key; Your datasource definition will be unaffected. Encryption with customer-managed keys is not available for free search services, and is only available for paid services created on or after January 1, 2019.",
+          "externalDocs": {
+            "url": "https://aka.ms/azure-search-encryption-with-cmk"
+          },
+          "x-nullable": true
         }
       },
       "required": [
@@ -5777,14 +5787,253 @@
           "description": "The maximum number of items in a single batch that can fail indexing for the batch to still be considered successful. -1 means no limit. Default is 0."
         },
         "configuration": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "object"
-          },
-          "description": "A dictionary of indexer-specific configuration properties. Each name is the name of a specific property. Each value must be of a primitive type."
+          "$ref": "#/definitions/IndexingParametersConfiguration"
         }
       },
-      "description": "Represents parameters for indexer execution."
+      "description": "Represents parameters for indexer execution.",
+      "externalDocs": {
+        "url": "https://docs.microsoft.com/rest/api/searchservice/create-indexer#parameters"
+      }
+    },
+    "IndexingParametersConfiguration": {
+      "type": "object",
+      "properties": {
+        "parsingMode": {
+          "$ref": "#/definitions/ParsingMode"
+        },
+        "excludedFileNameExtensions": {
+          "type": "string",
+          "default": "",
+          "description": "Comma-delimited list of filename extensions to ignore when processing from Azure blob storage.  For example, you could exclude \".png, .mp4\" to skip over those files during indexing."
+        },
+        "indexedFileNameExtensions": {
+          "type": "string",
+          "default": "",
+          "description": "Comma-delimited list of filename extensions to select when processing from Azure blob storage.  For example, you could focus indexing on specific application files \".docx, .pptx, .msg\" to specifically include those file types."
+        },
+        "failOnUnsupportedContentType": {
+          "type": "boolean",
+          "default": false,
+          "description": "For Azure blobs, set to false if you want to continue indexing when an unsupported content type is encountered, and you don't know all the content types (file extensions) in advance."
+        },
+        "failOnUnprocessableDocument": {
+          "type": "boolean",
+          "default": false,
+          "description": "For Azure blobs, set to false if you want to continue indexing if a document fails indexing."
+        },
+        "indexStorageMetadataOnlyForOversizedDocuments": {
+          "type": "boolean",
+          "default": false,
+          "description": "For Azure blobs, set this property to true to still index storage metadata for blob content that is too large to process. Oversized blobs are treated as errors by default. For limits on blob size, see https://docs.microsoft.com/azure/search/search-limits-quotas-capacity."
+        },
+        "delimitedTextHeaders": {
+          "type": "string",
+          "description": "For CSV blobs, specifies a comma-delimited list of column headers, useful for mapping source fields to destination fields in an index."
+        },
+        "delimitedTextDelimiter": {
+          "type": "string",
+          "description": "For CSV blobs, specifies the end-of-line single-character delimiter for CSV files where each line starts a new document (for example, \"|\")."
+        },
+        "firstLineContainsHeaders": {
+          "type": "boolean",
+          "default": true,
+          "description": "For CSV blobs, indicates that the first (non-blank) line of each blob contains headers."
+        },
+        "documentRoot": {
+          "type": "string",
+          "description": "For JSON arrays, given a structured or semi-structured document, you can specify a path to the array using this property."
+        },
+        "dataToExtract": {
+          "$ref": "#/definitions/DataToExtract"
+        },
+        "imageAction": {
+          "$ref": "#/definitions/ImageAction"
+        },
+        "allowSkillsetToReadFileData": {
+          "type": "boolean",
+          "default": false,
+          "description": "If true, will create a path //document//file_data that is an object representing the original file data downloaded from your blob data source.  This allows you to pass the original file data to a custom skill for processing within the enrichment pipeline, or to the Document Extraction skill."
+        },
+        "pdfTextRotationAlgorithm": {
+          "$ref": "#/definitions/PdfTextRotationAlgorithm"
+        },
+        "executionEnvironment": {
+          "$ref": "#/definitions/ExecutionEnvironment"
+        },
+        "queryTimeout": {
+          "type": "string",
+          "default": "00:05:00",
+          "description": "Increases the timeout beyond the 5-minute default for Azure SQL database data sources, specified in the format \"hh:mm:ss\"."
+        }
+      },
+      "additionalProperties": {
+        "type": "object"
+      },
+      "description": "A dictionary of indexer-specific configuration properties. Each name is the name of a specific property. Each value must be of a primitive type.",
+      "externalDocs": {
+        "url": "https://docs.microsoft.com/rest/api/searchservice/create-indexer#parameters"
+      }
+    },
+    "ParsingMode": {
+      "type": "string",
+      "enum": [
+        "default",
+        "text",
+        "delimitedText",
+        "json",
+        "jsonArray",
+        "jsonLines"
+      ],
+      "x-ms-enum": {
+        "name": "BlobIndexerParsingMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "default",
+            "name": "Default",
+            "description": "Set to default for normal file processing."
+          },
+          {
+            "value": "text",
+            "name": "Text",
+            "description": "Set to text to improve indexing performance on plain text files in blob storage."
+          },
+          {
+            "value": "delimitedText",
+            "name": "DelimitedText",
+            "description": "Set to delimitedText when blobs are plain CSV files."
+          },
+          {
+            "value": "json",
+            "name": "Json",
+            "description": "Set to json to extract structured content from JSON files."
+          },
+          {
+            "value": "jsonArray",
+            "name": "JsonArray",
+            "description": "Set to jsonArray to extract individual elements of a JSON array as separate documents in Azure Cognitive Search."
+          },
+          {
+            "value": "jsonLines",
+            "name": "JsonLines",
+            "description": "Set to jsonLines to extract individual JSON entities, separated by a new line, as separate documents in Azure Cognitive Search."
+          }
+        ]
+      },
+      "default": "default",
+      "description": "Represents the parsing mode for indexing from an Azure blob data source."
+    },
+    "DataToExtract": {
+      "type": "string",
+      "enum": [
+        "storageMetadata",
+        "allMetadata",
+        "contentAndMetadata"
+      ],
+      "x-ms-enum": {
+        "name": "BlobIndexerDataToExtract",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "storageMetadata",
+            "name": "StorageMetadata",
+            "description": "Indexes just the standard blob properties and user-specified metadata."
+          },
+          {
+            "value": "allMetadata",
+            "name": "AllMetadata",
+            "description": "Extracts metadata provided by the Azure blob storage subsystem and the content-type specific metadata (for example, metadata unique to just .png files are indexed)."
+          },
+          {
+            "value": "contentAndMetadata",
+            "name": "ContentAndMetadata",
+            "description": "Extracts all metadata and textual content from each blob."
+          }
+        ]
+      },
+      "default": "contentAndMetadata",
+      "description": "Specifies the data to extract from Azure blob storage and tells the indexer which data to extract from image content when \"imageAction\" is set to a value other than \"none\".  This applies to embedded image content in a .PDF or other application, or image files such as .jpg and .png, in Azure blobs."
+    },
+    "ImageAction": {
+      "type": "string",
+      "enum": [
+        "none",
+        "generateNormalizedImages",
+        "generateNormalizedImagePerPage"
+      ],
+      "x-ms-enum": {
+        "name": "BlobIndexerImageAction",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "none",
+            "name": "None",
+            "description": "Ignores embedded images or image files in the data set.  This is the default."
+          },
+          {
+            "value": "generateNormalizedImages",
+            "name": "GenerateNormalizedImages",
+            "description": "Extracts text from images (for example, the word \"STOP\" from a traffic stop sign), and embeds it into the content field.  This action requires that \"dataToExtract\" is set to \"contentAndMetadata\".  A normalized image refers to additional processing resulting in uniform image output, sized and rotated to promote consistent rendering when you include images in visual search results. This information is generated for each image when you use this option."
+          },
+          {
+            "value": "generateNormalizedImagePerPage",
+            "name": "GenerateNormalizedImagePerPage",
+            "description": "Extracts text from images (for example, the word \"STOP\" from a traffic stop sign), and embeds it into the content field, but treats PDF files differently in that each page will be rendered as an image and normalized accordingly, instead of extracting embedded images.  Non-PDF file types will be treated the same as if \"generateNormalizedImages\" was set."
+          }
+        ]
+      },
+      "default": "none",
+      "description": "Determines how to process embedded images and image files in Azure blob storage.  Setting the \"imageAction\" configuration to any value other than \"none\" requires that a skillset also be attached to that indexer."
+    },
+    "PdfTextRotationAlgorithm": {
+      "type": "string",
+      "enum": [
+        "none",
+        "detectAngles"
+      ],
+      "x-ms-enum": {
+        "name": "BlobIndexerPDFTextRotationAlgorithm",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "none",
+            "name": "None",
+            "description": "Leverages normal text extraction.  This is the default."
+          },
+          {
+            "value": "detectAngles",
+            "name": "DetectAngles",
+            "description": "May produce better and more readable text extraction from PDF files that have rotated text within them.  Note that there may be a small performance speed impact when this parameter is used.  This parameter only applies to PDF files, and only to PDFs with embedded text.  If the rotated text appears within an embedded image in the PDF, this parameter does not apply."
+          }
+        ]
+      },
+      "default": "none",
+      "description": "Determines algorithm for text extraction from PDF files in Azure blob storage."
+    },
+    "ExecutionEnvironment": {
+      "type": "string",
+      "enum": [
+        "standard",
+        "private"
+      ],
+      "x-ms-enum": {
+        "name": "IndexerExecutionEnvironment",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "standard",
+            "name": "standard",
+            "description": "Indicates that Azure Cognitive Search can determine where the indexer should execute. This is the default environment when nothing is specified and is the recommended value."
+          },
+          {
+            "value": "private",
+            "name": "private",
+            "description": "Indicates that the indexer should run with the environment provisioned specifically for the search service. This should only be specified as the execution environment if the indexer needs to access resources securely over shared private link resources."
+          }
+        ]
+      },
+      "default": "standard",
+      "description": "Specifies the environment in which the indexer should execute."
     },
     "FieldMappingFunction": {
       "properties": {
@@ -5898,6 +6147,14 @@
           "x-ms-client-name": "ETag",
           "type": "string",
           "description": "The ETag of the indexer."
+        },
+        "encryptionKey": {
+          "$ref": "#/definitions/SearchResourceEncryptionKey",
+          "description": "A description of an encryption key that you create in Azure Key Vault. This key is used to provide an additional level of encryption-at-rest for your indexer definition (as well as indexer execution status) when you want full assurance that no one, not even Microsoft, can decrypt them in Azure Cognitive Search. Once you have encrypted your indexer definition, it will always remain encrypted. Azure Cognitive Search will ignore attempts to set this property to null. You can change this property as needed if you want to rotate your encryption key; Your indexer definition (and indexer execution status) will be unaffected. Encryption with customer-managed keys is not available for free search services, and is only available for paid services created on or after January 1, 2019.",
+          "externalDocs": {
+            "url": "https://aka.ms/azure-search-encryption-with-cmk"
+          },
+          "x-nullable": true
         }
       },
       "required": [
@@ -6246,21 +6503,24 @@
             "url": "https://docs.microsoft.com/rest/api/searchservice/Language-support"
           },
           "$ref": "#/definitions/LexicalAnalyzerName",
-          "description": "The name of the analyzer to use for the field. This option can be used only with searchable fields and it can't be set together with either searchAnalyzer or indexAnalyzer. Once the analyzer is chosen, it cannot be changed for the field. Must be null for complex fields."
+          "description": "The name of the analyzer to use for the field. This option can be used only with searchable fields and it can't be set together with either searchAnalyzer or indexAnalyzer. Once the analyzer is chosen, it cannot be changed for the field. Must be null for complex fields.",
+          "x-nullable": true
         },
         "searchAnalyzer": {
           "externalDocs": {
             "url": "https://docs.microsoft.com/rest/api/searchservice/Language-support"
           },
           "$ref": "#/definitions/LexicalAnalyzerName",
-          "description": "The name of the analyzer used at search time for the field. This option can be used only with searchable fields. It must be set together with indexAnalyzer and it cannot be set together with the analyzer option. This property cannot be set to the name of a language analyzer; use the analyzer property instead if you need a language analyzer. This analyzer can be updated on an existing field. Must be null for complex fields."
+          "description": "The name of the analyzer used at search time for the field. This option can be used only with searchable fields. It must be set together with indexAnalyzer and it cannot be set together with the analyzer option. This property cannot be set to the name of a language analyzer; use the analyzer property instead if you need a language analyzer. This analyzer can be updated on an existing field. Must be null for complex fields.",
+          "x-nullable": true
         },
         "indexAnalyzer": {
           "externalDocs": {
             "url": "https://docs.microsoft.com/rest/api/searchservice/Language-support"
           },
           "$ref": "#/definitions/LexicalAnalyzerName",
-          "description": "The name of the analyzer used at indexing time for the field. This option can be used only with searchable fields. It must be set together with searchAnalyzer and it cannot be set together with the analyzer option.  This property cannot be set to the name of a language analyzer; use the analyzer property instead if you need a language analyzer. Once the analyzer is chosen, it cannot be changed for the field. Must be null for complex fields."
+          "description": "The name of the analyzer used at indexing time for the field. This option can be used only with searchable fields. It must be set together with searchAnalyzer and it cannot be set together with the analyzer option.  This property cannot be set to the name of a language analyzer; use the analyzer property instead if you need a language analyzer. Once the analyzer is chosen, it cannot be changed for the field. Must be null for complex fields.",
+          "x-nullable": true
         },
         "synonymMaps": {
           "externalDocs": {
@@ -6540,7 +6800,8 @@
         "text": {
           "x-ms-client-name": "TextWeights",
           "$ref": "#/definitions/TextWeights",
-          "description": "Parameters that boost scoring based on text matches in certain index fields."
+          "description": "Parameters that boost scoring based on text matches in certain index fields.",
+          "x-nullable": true
         },
         "functions": {
           "type": "array",
@@ -6695,7 +6956,8 @@
         },
         "corsOptions": {
           "$ref": "#/definitions/CorsOptions",
-          "description": "Options to control Cross-Origin Resource Sharing (CORS) for the index."
+          "description": "Options to control Cross-Origin Resource Sharing (CORS) for the index.",
+          "x-nullable": true
         },
         "suggesters": {
           "type": "array",
@@ -6749,7 +7011,8 @@
           "description": "A description of an encryption key that you create in Azure Key Vault. This key is used to provide an additional level of encryption-at-rest for your data when you want full assurance that no one, not even Microsoft, can decrypt your data in Azure Cognitive Search. Once you have encrypted your data, it will always remain encrypted. Azure Cognitive Search will ignore attempts to set this property to null. You can change this property as needed if you want to rotate your encryption key; Your data will be unaffected. Encryption with customer-managed keys is not available for free search services, and is only available for paid services created on or after January 1, 2019.",
           "externalDocs": {
             "url": "https://aka.ms/azure-search-encryption-with-cmk"
-          }
+          },
+          "x-nullable": true
         },
         "similarity": {
           "$ref": "#/definitions/Similarity",
@@ -6836,6 +7099,14 @@
           "x-ms-client-name": "ETag",
           "type": "string",
           "description": "The ETag of the skillset."
+        },
+        "encryptionKey": {
+          "$ref": "#/definitions/SearchResourceEncryptionKey",
+          "description": "A description of an encryption key that you create in Azure Key Vault. This key is used to provide an additional level of encryption-at-rest for your skillset definition when you want full assurance that no one, not even Microsoft, can decrypt your skillset definition in Azure Cognitive Search. Once you have encrypted your skillset definition, it will always remain encrypted. Azure Cognitive Search will ignore attempts to set this property to null. You can change this property as needed if you want to rotate your encryption key; Your skillset definition will be unaffected. Encryption with customer-managed keys is not available for free search services, and is only available for paid services created on or after January 1, 2019.",
+          "externalDocs": {
+            "url": "https://aka.ms/azure-search-encryption-with-cmk"
+          },
+          "x-nullable": true
         }
       },
       "required": [
@@ -8371,7 +8642,8 @@
           "description": "A description of an encryption key that you create in Azure Key Vault. This key is used to provide an additional level of encryption-at-rest for your data when you want full assurance that no one, not even Microsoft, can decrypt your data in Azure Cognitive Search. Once you have encrypted your data, it will always remain encrypted. Azure Cognitive Search will ignore attempts to set this property to null. You can change this property as needed if you want to rotate your encryption key; Your data will be unaffected. Encryption with customer-managed keys is not available for free search services, and is only available for paid services created on or after January 1, 2019.",
           "externalDocs": {
             "url": "https://aka.ms/azure-search-encryption-with-cmk"
-          }
+          },
+          "x-nullable": true
         },
         "@odata.etag": {
           "x-ms-client-name": "ETag",
