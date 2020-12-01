@@ -356,6 +356,446 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SaaS/resources/{resourceName}": {
+      "get": {
+        "tags": [
+          "SubscriptionLevelSaaSResources"
+        ],
+        "operationId": "SubscriptionLevel_SaaS_Get",
+        "description": "Gets information about the specified Subscription Level SaaS.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+					{
+						"$ref": "#/parameters/SubscriptionIdParameter"
+					},
+					{
+						"$ref": "#/parameters/ResourceGroupNameParameter"
+					},
+					{
+						"$ref": "#/parameters/ResourceNameParameter"
+					},
+					{
+						"$ref": "#/parameters/ApiVersionParameter"
+					}
+				],
+        "responses": {
+          "200": {
+            "description": "Request successful. The request returns the resulting SaaS resource.",
+            "schema": {
+              "$ref": "#/definitions/SaasResource"
+            }
+          },
+          "default": {
+            "description": "A response indicating an error.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get saas application": {
+            "$ref": "./examples/subscriptionLevel/SaasGet.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "SubscriptionLevelSaaSResources"
+        ],
+        "operationId": "SubscriptionLevel_SaaS_CreateOrUpdate",
+        "description": "Creates or updates a SaaS resource.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+					{
+						"$ref": "#/parameters/SubscriptionIdParameter"
+					},
+					{
+						"$ref": "#/parameters/ResourceGroupNameParameter"
+					},
+					{
+						"$ref": "#/parameters/ResourceNameParameter"
+					},
+					{
+						"$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SaasResourceCreation"
+            },
+            "description": "Parameters supplied to the create or update subscription level saas operation."
+          }
+				],
+        "responses": {
+          "202": {
+            "description": "Accepted and the operation will complete asynchronously.",
+            "headers": {
+              "Location": {
+                "description": "The URL to check the status of the asynchronous operation.",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "The amount of delay to use while the status of the operation is checked. The value is expressed in seconds.",
+                "format": "int32",
+                "type": "integer"
+              }
+            }
+          },
+          "204": {
+            "description": "Operation completed successfully."
+          },
+          "default": {
+            "description": "A response indicating an error.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create SaaS resource": {
+            "$ref": "./examples/subscriptionLevel/SaasPut.json"
+          }
+        }
+      },
+      "patch": {
+				"tags": [
+					"SubscriptionLevelSaaSResources"
+				],
+				"operationId": "SubscriptionLevel_SaaS_Update",
+				"description": "Updates a SaaS Subscription Level resource.",
+				"parameters": [
+					{
+						"$ref": "#/parameters/SubscriptionIdParameter"
+					},
+					{
+						"$ref": "#/parameters/ResourceGroupNameParameter"
+					},
+					{
+						"$ref": "#/parameters/ResourceNameParameter"
+					},
+					{
+						"$ref": "#/parameters/ApiVersionParameter"
+					},
+					{
+						"name": "parameters",
+						"in": "body",
+						"required": true,
+						"schema": {
+							"$ref": "#/definitions/SaasResourceCreation"
+						},
+						"description": "Parameters supplied to the update saas operation."
+					}
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted and the operation will complete asynchronously.",
+            "headers": {
+              "Location": {
+                "description": "The URL to check the status of the asynchronous operation.",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "The amount of delay to use while the status of the operation is checked. The value is expressed in seconds.",
+                "format": "int32",
+                "type": "integer"
+              }
+            }
+          },
+          "204": {
+            "description": "Operation completed successfully."
+          },
+          "default": {
+            "description": "A response indicating an error.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create SaaS resource": {
+            "$ref": "./examples/subscriptionLevel/SaasPatch.json"
+          }
+        },
+				"x-ms-long-running-operation": true,
+				"x-ms-long-running-operation-options": {
+					"final-state-via": "location"
+				}
+      },
+      "delete": {
+				"tags": [
+					"SubscriptionLevelSaaSResources"
+				],
+				"operationId": "SubscriptionLevel_SaaS_Delete",
+				"description": "Deletes the specified SaaS.",
+				"parameters": [
+					{
+						"$ref": "#/parameters/SubscriptionIdParameter"
+					},
+					{
+						"$ref": "#/parameters/ResourceGroupNameParameter"
+					},
+					{
+						"$ref": "#/parameters/ResourceNameParameter"
+					},
+					{
+						"$ref": "#/parameters/ApiVersionParameter"
+					}
+				],
+				"responses": {
+          "202": {
+            "description": "Accepted and the operation will complete asynchronously.",
+            "headers": {
+              "Location": {
+                "description": "The URL to check the status of the asynchronous operation.",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "The amount of delay to use while the status of the operation is checked. The value is expressed in seconds.",
+                "format": "int32",
+                "type": "integer"
+              }
+            }
+          },
+          "204": {
+            "description": "Operation completed successfully."
+          },
+          "default": {
+            "description": "A response indicating an error.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+				"x-ms-examples": {
+					"Delete Subscription Level SaaS resource": {
+						"$ref": "./examples/subscriptionLevel/SaasDelete.json"
+					}
+				}
+			}
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SaaS/resources/{resourceName}/unsubscribe": {
+      "patch": {
+        "tags": [
+          "SubscriptionLevelSaaSResources"
+        ],
+        "operationId": "SubscriptionLevel_SaaS_Unsubscribe",
+        "description": "Unsubscribe from a specified Subscription Level SaaS.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+					{
+						"$ref": "#/parameters/SubscriptionIdParameter"
+					},
+					{
+						"$ref": "#/parameters/ResourceGroupNameParameter"
+					},
+					{
+						"$ref": "#/parameters/ResourceNameParameter"
+					},
+					{
+						"$ref": "#/parameters/ApiVersionParameter"
+					},
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/deleteOptions"
+            },
+            "description": "Parameters supplied to unsubscribe saas operation."
+          }
+				],
+				"responses": {
+          "202": {
+            "description": "Accepted and the operation will complete asynchronously.",
+            "headers": {
+              "Location": {
+                "description": "The URL to check the status of the asynchronous operation.",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "The amount of delay to use while the status of the operation is checked. The value is expressed in seconds.",
+                "format": "int32",
+                "type": "integer"
+              }
+            }
+          },
+          "204": {
+            "description": "Operation completed successfully."
+          },
+          "default": {
+            "description": "A response indicating an error.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+				"x-ms-examples": {
+					"Delete Subscription Level SaaS resource": {
+						"$ref": "./examples/subscriptionLevel/SaasUnsubscribe.json"
+					}
+				}
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SaaS/resources/{resourceName}/listAccessToken": {
+      "post": {
+        "tags": [
+          "SubscriptionLevelSaaSResources"
+        ],
+        "operationId": "SubscriptionLevel_SaaS_listAccessToken",
+        "description": "Gets the ISV access token for a specified Subscription Level SaaS.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+					{
+						"$ref": "#/parameters/SubscriptionIdParameter"
+					},
+					{
+						"$ref": "#/parameters/ResourceGroupNameParameter"
+					},
+					{
+						"$ref": "#/parameters/ResourceNameParameter"
+					},
+					{
+						"$ref": "#/parameters/ApiVersionParameter"
+					}
+				],
+				"responses": {
+          "200": {
+            "description": "Request successful. The request returns the generated access token.",
+            "schema": {
+              "$ref": "#/definitions/AccessTokenResult"
+            }
+          },
+          "default": {
+            "description": "A response indicating an error.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+				"x-ms-examples": {
+					"Delete Subscription Level SaaS resource": {
+            "$ref": "./examples/subscriptionLevel/ListAccessTokenPost.json"
+					}
+				}
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/validateMoveResources": {
+      "post": {
+        "tags": [
+          "SubscriptionLevelSaaSResources"
+        ],
+        "operationId": "SubscriptionLevel_SaaS_ValidateMove",
+        "description": "Validate whether a specified Subscription Level SaaS can be moved.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+					{
+						"$ref": "#/parameters/SubscriptionIdParameter"
+					},
+					{
+						"$ref": "#/parameters/ResourceGroupNameParameter"
+					},
+					{
+						"$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "moveResourceParameter",
+            "in": "body",
+            "description": "Object that represents the resources to move.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/moveResource"
+            }
+          }
+				],
+				"responses": {
+          "200": {
+            "description": "Validation was successful and resources can be moved"
+          },
+          "default": {
+            "description": "A response indicating an error.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+				"x-ms-examples": {
+					"Validate move of a subscription Level SaaS resource": {
+            "$ref": "./examples/subscriptionLevel/ValidateResourceMove.json"
+					}
+				}
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/moveResources": {
+      "post": {
+        "tags": [
+          "SubscriptionLevelSaaSResources"
+        ],
+        "operationId": "SubscriptionLevel_SaaS_Move",
+        "description": "Move a specified Subscription Level SaaS.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+					{
+						"$ref": "#/parameters/SubscriptionIdParameter"
+					},
+					{
+						"$ref": "#/parameters/ResourceGroupNameParameter"
+					},
+					{
+						"$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "moveResourceParameter",
+            "in": "body",
+            "description": "Object that represents the resources to move.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/moveResource"
+            }
+          }
+				],
+				"responses": {
+          "202": {
+            "description": "Accepted and the operation will complete asynchronously.",
+            "headers": {
+              "Location": {
+                "description": "The URL to check the status of the asynchronous operation.",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "The amount of delay to use while the status of the operation is checked. The value is expressed in seconds.",
+                "format": "int32",
+                "type": "integer"
+              }
+            }
+          },
+          "default": {
+            "description": "A response indicating an error.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+				"x-ms-examples": {
+					"Move of a subscription Level SaaS resource": {
+            "$ref": "./examples/subscriptionLevel/ResourceMove.json"
+					}
+				}
+      }
     }
   },
   "definitions": {
@@ -483,6 +923,10 @@
           "type": "string",
           "description": "Resource type."
         },
+        "tags": {
+          "description": "the resource tags.",
+          "$ref": "#/definitions/Tags"
+        },
         "properties": {
           "$ref": "#/definitions/SaasCreationProperties",
           "description": "Properties of the SaaS resource that are relevant for creation."
@@ -595,6 +1039,14 @@
         "publisherTestEnvironment": {
           "type": "string",
           "description": "The environment in the publisher side for this resource."
+        },
+        "SaasSubscriptionId": {
+          "type": "string",
+          "description": "The saas subscription id used for tenant to subscription level migration request."
+        },
+        "SaasSessionId": {
+          "type": "string",
+          "description": "The saas session id used for dev service migration request."
         }
       }
     },
@@ -762,6 +1214,21 @@
           "description": "the feedback"
         }
       }
+    },
+    "moveResource": {
+      "description": "Resource Move Options",
+      "type": "object",
+      "properties": {
+        "targetResourceGroup": {
+          "type": "string"
+        },
+        "resources": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
     }
   },
   "parameters": {
@@ -802,6 +1269,14 @@
       "type": "string",
       "description": "The name of the resource group.",
       "x-ms-parameter-location": "method"
-    }
+    },
+    "ResourceNameParameter": {
+			"name": "resourceName",
+			"in": "path",
+			"required": true,
+			"type": "string",
+			"description": "The name of the resource.",
+			"x-ms-parameter-location": "method"
+		}
   }
 }
