@@ -115,7 +115,6 @@ input-file:
 - Microsoft.Sql/preview/2019-06-01-preview/ServerAzureADAdministrators.json
 - Microsoft.Sql/preview/2019-06-01-preview/syncGroups.json
 - Microsoft.Sql/preview/2019-06-01-preview/syncMembers.json
-- Microsoft.Sql/preview/2019-06-01-preview/FailoverManagedInstance.json
 - Microsoft.Sql/preview/2020-02-02-preview/ManagedDatabases.json
 - Microsoft.Sql/preview/2020-02-02-preview/ServerAzureADOnlyAuthentications.json
 - Microsoft.Sql/preview/2020-02-02-preview/ManagedInstances.json
@@ -233,7 +232,6 @@ input-file:
 - Microsoft.Sql/preview/2019-06-01-preview/ServerAzureADAdministrators.json
 - Microsoft.Sql/preview/2019-06-01-preview/syncGroups.json
 - Microsoft.Sql/preview/2019-06-01-preview/syncMembers.json
-- Microsoft.Sql/preview/2019-06-01-preview/FailoverManagedInstance.json
 - Microsoft.Sql/preview/2020-02-02-preview/ManagedDatabases.json
 - Microsoft.Sql/preview/2020-02-02-preview/ServerAzureADOnlyAuthentications.json
 - Microsoft.Sql/preview/2020-02-02-preview/ManagedInstances.json
@@ -339,7 +337,6 @@ input-file:
 - Microsoft.Sql/preview/2019-06-01-preview/ServerAzureADAdministrators.json
 - Microsoft.Sql/preview/2019-06-01-preview/syncGroups.json
 - Microsoft.Sql/preview/2019-06-01-preview/syncMembers.json
-- Microsoft.Sql/preview/2019-06-01-preview/FailoverManagedInstance.json
 - Microsoft.Sql/preview/2020-02-02-preview/ManagedDatabases.json
 - Microsoft.Sql/preview/2020-02-02-preview/ServerAzureADOnlyAuthentications.json
 - Microsoft.Sql/preview/2020-02-02-preview/ManagedInstances.json
@@ -433,7 +430,6 @@ input-file:
 - Microsoft.Sql/preview/2019-06-01-preview/ServerAzureADAdministrators.json
 - Microsoft.Sql/preview/2019-06-01-preview/syncGroups.json
 - Microsoft.Sql/preview/2019-06-01-preview/syncMembers.json
-- Microsoft.Sql/preview/2019-06-01-preview/FailoverManagedInstance.json
 - Microsoft.Sql/preview/2020-02-02-preview/ManagedDatabases.json
 - Microsoft.Sql/preview/2020-02-02-preview/ServerAzureADOnlyAuthentications.json
 - Microsoft.Sql/preview/2020-02-02-preview/ManagedInstances.json
