@@ -462,97 +462,11 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceFabric/clusters/{clusterName}/upgradableVersion/maximum": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceFabric/clusters/{clusterName}/listUpgradableVersions": {
       "post": {
-        "operationId": "UpgradableVersionMaximum_Post",
-        "summary": "Action to gets the highest upgrade within one step of the current cluster version.",
-        "description": "Action to gets the highest upgrade within one step of the current cluster version.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/subscriptionId"
-          },
-          {
-            "$ref": "#/parameters/resourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/clusterNameParameter"
-          },
-          {
-            "$ref": "#/parameters/api-version"
-          }
-        ],
-        "x-ms-examples": {
-          "Get highest upgrade": {
-            "$ref": "./examples/UpgradableVersionMaximum_example.json"
-          }
-        },
-        "tags": [
-          "UpgradableClusterVersion"
-        ],
-        "responses": {
-          "200": {
-            "description": "The operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/UpgradableVersionResult"
-            }
-          },
-          "default": {
-            "description": "The detailed error response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorModel"
-            }
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceFabric/clusters/{clusterName}/upgradableVersion/minimum": {
-      "post": {
-        "operationId": "UpgradableVersionMinimum_Post",
-        "summary": "Action to get the lowest downgrade within one step of the current cluster version.",
-        "description": "Action to get the lowest downgrade within one step of the current cluster version.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/subscriptionId"
-          },
-          {
-            "$ref": "#/parameters/resourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/clusterNameParameter"
-          },
-          {
-            "$ref": "#/parameters/api-version"
-          }
-        ],
-        "x-ms-examples": {
-          "Get lowest downgrade": {
-            "$ref": "./examples/UpgradableVersionMinimum_example.json"
-          }
-        },
-        "tags": [
-          "UpgradableClusterVersion"
-        ],
-        "responses": {
-          "200": {
-            "description": "The operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/UpgradableVersionResult"
-            }
-          },
-          "default": {
-            "description": "The detailed error response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorModel"
-            }
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceFabric/clusters/{clusterName}/upgradableVersion/path": {
-      "post": {
-        "operationId": "UpgradableVersionPath_Post",
-        "summary": "Gets the path of intermediate versions to upgrade or downgrade from the current cluster version to the target cluster version.",
-        "description": "Gets the path of intermediate versions to upgrade or downgrade from the current cluster version to the target cluster version.",
+        "operationId": "ListUpgradableVersions_Post",
+        "summary": "Operation to get the minimum and maximum upgradable version from the current cluster version, or the required path to get to the an specific target version.",
+        "description": "If a target is not provided, it will get the minimum and maximum versions available from the current cluster version. If a target is given, it will provide the required path to get from the current cluster version to the target version.",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -567,23 +481,25 @@
             "$ref": "#/parameters/api-version"
           },
           {
-            "name": "pathDescription",
+            "name": "versionsDescription",
             "in": "body",
             "description": "The upgrade path description with target version.",
-            "required": true,
             "schema": {
-              "$ref": "#/definitions/UpgradableVersionPathDescription"
+              "$ref": "#/definitions/UpgradableVersionsDescription"
             },
             "x-ms-parameter-location": "method"
           }
         ],
         "x-ms-examples": {
           "Get upgrade path": {
-            "$ref": "./examples/UpgradableVersionPath_example.json"
+            "$ref": "./examples/ListUpgradableVersionsPath_example.json"
+          },
+          "Get minimum and maximum code versions": {
+            "$ref": "./examples/ListUpgradableVersionsMinMax_example.json"
           }
         },
         "tags": [
-          "UpgradableClusterVersion"
+          "ListUpgradableVersions"
         ],
         "responses": {
           "200": {
@@ -1577,14 +1493,6 @@
         "TrustedPublisher"
       ]
     },
-    "UpgradableVersionPathDescription": {
-      "properties": {
-        "targetVersion": {
-          "type": "string",
-          "description": "The target code version."
-        }
-      }
-    },
     "UpgradableVersionPathResult": {
       "properties": {
         "supportedPath": {
@@ -1595,16 +1503,18 @@
           }
         }
       },
-      "description": "The list results of intermediate cluster code versions for an upgrade or downgrade."
+      "description": "The list of intermediate cluster code versions for an upgrade or downgrade. Or minimum and maximum upgradable version if no target was given"
     },
-    "UpgradableVersionResult": {
+    "UpgradableVersionsDescription": {
+      "required": [
+        "targetVersion"
+      ],
       "properties": {
-        "upgradeVersion": {
+        "targetVersion": {
           "type": "string",
-          "description": "The cluster code version."
+          "description": "The target code version."
         }
-      },
-      "description": "The result of a possible cluster code version upgrade or downgrade."
+      }
     },
     "UpgradeMode": {
       "type": "string",
@@ -1674,14 +1584,6 @@
       "name": "clusterName",
       "in": "path",
       "description": "The name of the cluster resource.",
-      "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "method"
-    },
-    "clusterCreationVersion": {
-      "name": "clusterCreationVersion",
-      "in": "path",
-      "description": "The cluster code version upon creation.",
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"
