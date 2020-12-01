@@ -496,6 +496,10 @@
           "$ref": "#/definitions/NotificationSettings",
           "description": "Notification Settings"
         },
+        "migrationProperties": {
+          "$ref": "#/definitions/MigrationProperties",
+          "description": "Migration Properties"
+        },
         "provisioningState": {
           "readOnly": true,
           "type": "string",
@@ -740,7 +744,7 @@
     "ForestTrust": {
       "description": "Forest Trust Setting",
       "properties": {
-        "trustedDomainFqdn": {
+        "trustedDomainFQDN": {
           "type": "string",
           "description": "Trusted Domain FQDN"
         },
@@ -752,7 +756,7 @@
           "type": "string",
           "description": "Friendly Name"
         },
-        "remoteDnsIps": {
+        "remoteDNSIPs": {
           "type": "string",
           "description": "Remote Dns ips"
         },
@@ -760,6 +764,36 @@
           "type": "string",
           "description": "Trust Password",
           "x-ms-secret": true
+        }
+      }
+    },
+    "MigrationProperties": {
+      "description": "Migration Properties",
+      "properties": {
+        "oldSubnetId": {
+          "type": "string",
+          "description": "Old Subnet Id"
+        },
+        "oldVnetSiteId": {
+          "type": "string",
+          "description": "Old Vnet Site Id"
+        },
+        "migrationProgress": {
+          "$ref": "#/definitions/MigrationProgress",
+          "description": "Migration Progress"
+        }
+      }
+    },
+    "MigrationProgress": {
+      "description": "Migration Progress",
+      "properties": {
+        "completionPercentage": {
+          "type": "double",
+          "description": "Completion Percentage"
+        },
+        "progressMessage": {
+          "type": "string",
+          "description": "Progress Message"
         }
       }
     },
