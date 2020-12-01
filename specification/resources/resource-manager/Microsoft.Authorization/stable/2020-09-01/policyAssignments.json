@@ -597,7 +597,8 @@
         },
         "scope": {
           "type": "string",
-          "description": "The scope for the policy assignment."
+          "description": "The scope for the policy assignment.",
+          "readOnly": true
         },
         "notScopes": {
           "type": "array",
@@ -638,7 +639,8 @@
                 "description": "The policy effect is not enforced during resource creation or update."
               }
             ]
-          }
+          },
+          "default": "Default"
         },
         "nonComplianceMessages": {
           "type": "array",
@@ -722,7 +724,8 @@
         },
         "sku": {
           "$ref": "#/definitions/PolicySku",
-          "description": "The policy sku. This property is optional, obsolete, and will be ignored."
+          "description": "The policy sku. This property is optional, obsolete, and will be ignored.",
+          "default": { "name": "A0", "tier": "Free" }
         },
         "location": {
           "type": "string",
