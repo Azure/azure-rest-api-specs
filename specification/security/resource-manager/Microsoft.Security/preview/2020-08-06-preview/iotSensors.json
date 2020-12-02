@@ -97,7 +97,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/IotSensor"
+              "$ref": "#/definitions/IotSensorsModel"
             }
           },
           "default": {
@@ -128,19 +128,22 @@
           },
           {
             "$ref": "#/parameters/IotSensorName"
+          },
+          {
+            "$ref": "#/parameters/IotSensorsModel"
           }
         ],
         "responses": {
           "200": {
             "description": "Updated IoT sensor",
             "schema": {
-              "$ref": "#/definitions/IotSensor"
+              "$ref": "#/definitions/IotSensorsModel"
             }
           },
           "201": {
             "description": "Created IoT sensor",
             "schema": {
-              "$ref": "#/definitions/IotSensor"
+              "$ref": "#/definitions/IotSensorsModel"
             }
           },
           "default": {
@@ -231,6 +234,59 @@
           }
         }
       }
+    },
+    "/{scope}/providers/Microsoft.Security/iotSensors/{iotSensorName}/downloadResetPassword": {
+      "post": {
+        "x-ms-examples": {
+          "Download file for reset password of the sensor": {
+            "$ref": "./examples/IotSensors/DownloadResetPassword.json"
+          }
+        },
+        "tags": [
+          "IoT Sensors"
+        ],
+        "operationId": "IotSensors_DownloadResetPassword",
+        "description": "Download file for reset password of the sensor",
+        "produces": [
+          "application/zip"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/IotSensorScope"
+          },
+          {
+            "$ref": "#/parameters/IotSensorName"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "description": "The reset password input.",
+            "schema": {
+              "$ref": "#/definitions/ResetPasswordInput"
+            },
+            "x-ms-parameter-location": "method"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Downloaded reset password file",
+            "schema": {
+              "type": "object",
+              "format": "file"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -243,14 +299,14 @@
           "readOnly": true,
           "type": "array",
           "items": {
-            "$ref": "#/definitions/IotSensor"
+            "$ref": "#/definitions/IotSensorsModel"
           }
         }
       }
     },
-    "IotSensor": {
+    "IotSensorsModel": {
       "type": "object",
-      "description": "IoT sensor",
+      "description": "IoT sensor model",
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
@@ -267,7 +323,22 @@
     "IotSensorProperties": {
       "type": "object",
       "description": "IoT sensor properties",
-      "properties": {}
+      "properties": {
+        "zone": {
+          "type": "string",
+          "description": "Display name of the IoT zone"
+        }
+      }
+    },
+    "ResetPasswordInput": {
+      "type": "object",
+      "description": "Reset password input.",
+      "properties": {
+        "applianceId": {
+          "description": "The appliance id of the sensor.",
+          "type": "string"
+        }
+      }
     }
   },
   "parameters": {
@@ -286,6 +357,16 @@
       "required": true,
       "type": "string",
       "description": "Name of the IoT sensor",
+      "x-ms-parameter-location": "method"
+    },
+    "IotSensorsModel": {
+      "name": "iotSensorsModel",
+      "in": "body",
+      "required": true,
+      "description": "The IoT sensor model",
+      "schema": {
+        "$ref": "#/definitions/IotSensorsModel"
+      },
       "x-ms-parameter-location": "method"
     }
   }
