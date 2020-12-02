@@ -6912,48 +6912,6 @@
       },
       "type": "object"
     },
-    "ShayEntityQueryProperties": {
-      "description": "Describes entity query properties",
-      "properties": {
-        "dataSources": {
-          "description": "List of the data sources that are required to run the query",
-          "items": {
-            "description": "data source",
-            "type": "string"
-          },
-          "type": "array"
-        },
-        "displayName": {
-          "description": "The query display name",
-          "type": "string"
-        },
-        "inputEntityType": {
-          "$ref": "#/definitions/EntityInnerType",
-          "description": "The type of the query's source entity"
-        },
-        "inputFields": {
-          "description": "List of the fields of the source entity that are required to run the query",
-          "items": {
-            "description": "input field",
-            "type": "string"
-          },
-          "type": "array"
-        },
-        "outputEntityTypes": {
-          "description": "List of the desired output types to be constructed from the result",
-          "items": {
-            "$ref": "#/definitions/EntityInnerType",
-            "description": "output entity type"
-          },
-          "type": "array"
-        },
-        "queryTemplate": {
-          "description": "The template query string to be parsed and formatted",
-          "type": "string"
-        }
-      },
-      "type": "object"
-    },
     "InsightQueryItem": {
       "allOf": [
         {
@@ -6973,7 +6931,7 @@
     "InsightQueryItemProperties": {
       "allOf": [
         {
-          "$ref": "#/definitions/ShayEntityQueryItemProperties"
+          "$ref": "#/definitions/EntityQueryItemProperties"
         }
       ],
       "description": "Represents Insight Query.",
@@ -7123,7 +7081,7 @@
     "ActivityQueryItemProperties": {
       "allOf": [
         {
-          "$ref": "#/definitions/ShayEntityQueryItemProperties"
+          "$ref": "#/definitions/EntityQueryItemProperties"
         }
       ],
       "description": "Represents Activity properties Query.",
@@ -11083,7 +11041,7 @@
         "kind"
       ]
     },
-    "ShayEntityQueryItemProperties": {
+    "EntityQueryItemProperties": {
       "description": "An properties abstract Query item for entity",
       "type": "object",
       "properties": {
@@ -11397,7 +11355,7 @@
       ],
       "x-ms-enum": {
         "modelAsString": true,
-        "name": "ShayEntityQueryKind",
+        "name": "EntityItemQueryKind",
         "values": [
           {
             "description": "activity",
