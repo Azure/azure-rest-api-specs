@@ -469,7 +469,15 @@
         },
         "isManaged": {
           "description": "Customer concent to allow services maintain enterprise credentials.",
-          "type": "boolean"
+          "enum": [
+            "True",
+            "False"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "isManaged",
+            "modelAsString": true
+          }
         }
       },
       "description": "Describes the properties of a IT Digital Twin."
@@ -581,7 +589,7 @@
           "x-nullable": true
         },
         "role": {
-          "description": "Role of a machine, including VMs on Azure and local test machine on-prem",
+          "description": "Role of a machine, including VM on Azure and local test machine on-prem",
           "enum": [
             "SCCM",
             "AD",
@@ -595,7 +603,6 @@
             "modelAsString": true
           }
         }
-
       },
       "description": "Meta data for the test result."
     },
@@ -606,7 +613,7 @@
           "items": {
             "$ref": "#/definitions/Computer"
           },
-          "description": "List of computers on Azure and local test machines on-prem"
+          "description": "List of computers on Azure and test machines on-prem"
         },
         "adminUserName": {
           "description": "Admin user name for accessing the enterprise",
@@ -620,7 +627,7 @@
           "x-nullable": true
         }
       },
-      "description": "Meta data for the test result."
+      "description": "Enterprise is a testing environment which has several virtual machines on the cloud and several testing machines on-prem."
     }
   },
   "parameters": {
