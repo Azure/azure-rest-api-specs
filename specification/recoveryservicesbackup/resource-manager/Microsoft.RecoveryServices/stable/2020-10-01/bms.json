@@ -18,7 +18,7 @@
     "application/json"
   ],
   "paths": {
-    "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupconfig/vaultconfig": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupconfig/vaultconfig": {
       "get": {
         "tags": [
           "BackupResourceVaultConfigs"
@@ -47,6 +47,12 @@
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/BackupResourceVaultConfigResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/NewErrorResponse"
             }
           }
         },
@@ -93,6 +99,12 @@
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/BackupResourceVaultConfigResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/NewErrorResponse"
             }
           }
         },
@@ -144,7 +156,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/NewErrorResponse"
             }
           }
         },
