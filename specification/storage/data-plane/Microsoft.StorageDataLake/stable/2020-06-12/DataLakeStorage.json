@@ -1807,6 +1807,9 @@
             "$ref": "#/parameters/RetainUncommittedData"
           },
           {
+            "$ref": "#/parameters/ReleaseLease"
+          },
+          {
             "$ref": "#/parameters/Close"
           },
           {
@@ -2689,6 +2692,14 @@
       "type": "string",
       "x-ms-parameter-location": "method",
       "description": "The time to set the blob to expiry"
+    },
+    "ReleaseLease": {
+      "name": "releaseLease",
+      "in": "query",
+      "description": "Optional. Default false. If true, will release the lease on the file using the lease id info from x-ms-lease-id header.",
+      "required": false,
+      "type": "boolean",
+      "x-ms-parameter-location": "method"
     }
   },
   "definitions": {
