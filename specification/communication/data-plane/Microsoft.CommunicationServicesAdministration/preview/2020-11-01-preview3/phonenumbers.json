@@ -416,7 +416,7 @@
         }
       }
     },
-    "PhoneNumberType": {
+    "PhoneNumberKind": {
       "description": "The type of a phone number.",
       "type": "string",
       "enum": [
@@ -424,7 +424,7 @@
         "geographic"
       ],
       "x-ms-enum": {
-        "name": "PhoneNumberType",
+        "name": "PhoneNumberKind",
         "modelAsString": true
       }
     },
@@ -440,22 +440,34 @@
         "modelAsString": true
       }
     },
-    "MonthlyRate": {
+    "PhoneNumberCost": {
       "description": "The monthly incurred cost for a single phone number.",
       "type": "object",
       "required": [
-        "value",
-        "currency"
+        "amount",
+        "currencyCode",
+        "billingFrequency"
       ],
       "properties": {
-        "value": {
+        "amount": {
           "format": "double",
           "description": "The cost amount.",
           "type": "number"
         },
-        "currency": {
-          "description": "The currency of the cost amount.",
+        "currencyCode": {
+          "description": "The ISO 4217 currency code for the cost amount.",
           "type": "string"
+        },
+        "billingFrequency": {
+          "type": "string",
+          "description": "The frequency with which the cost gets billed.",
+          "enum": [
+            "monthly"
+          ],
+          "x-ms-enum": {
+            "name": "BillingFrequency",
+            "modelAsString": false
+          }
         }
       }
     },
@@ -568,13 +580,13 @@
         "id",
         "phoneNumber",
         "countryCode",
-        "numberType",
+        "kind",
         "assignmentType",
         "purchaseDate",
         "capabilities",
         "callbackUrl",
         "applicationId",
-        "monthlyRate"
+        "cost"
       ],
       "properties": {
         "id": {
@@ -589,9 +601,9 @@
           "description": "The ISO 3166-2 country code of the country that the phone number belongs to.",
           "type": "string"
         },
-        "numberType": {
-          "description": "The type of the phone number.",
-          "$ref": "#/definitions/PhoneNumberType"
+        "kind": {
+          "description": "The kind of the phone number.",
+          "$ref": "#/definitions/PhoneNumberKind"
         },
         "assignmentType": {
           "description": "The assignment type of the phone number, people or application.",
@@ -614,9 +626,9 @@
           "description": "The application id the number has been assigned to.",
           "type": "string"
         },
-        "monthlyRate": {
+        "cost": {
           "description": "The monthly cost of the phone number.",
-          "$ref": "#/definitions/MonthlyRate"
+          "$ref": "#/definitions/PhoneNumberCost"
         }
       }
     },
@@ -669,7 +681,7 @@
       "properties": {
         "numberType": {
           "description": "The phone number type.",
-          "$ref": "#/definitions/PhoneNumberType"
+          "$ref": "#/definitions/PhoneNumberKind"
         },
         "assignmentType": {
           "description": "The phone number's assignment type.",
@@ -700,7 +712,7 @@
         "numberType",
         "assignmentType",
         "capabilities",
-        "monthlyRate",
+        "cost",
         "searchExpiresBy"
       ],
       "properties": {
@@ -717,7 +729,7 @@
         },
         "numberType": {
           "description": "The phoner number type.",
-          "$ref": "#/definitions/PhoneNumberType"
+          "$ref": "#/definitions/PhoneNumberKind"
         },
         "assignmentType": {
           "description": "The phone number's assignment type.",
@@ -727,9 +739,9 @@
           "description": "The phone number's capabilities.",
           "$ref": "#/definitions/Capabilities"
         },
-        "monthlyRate": {
+        "cost": {
           "description": "The monthly cost for an individual phone number.",
-          "$ref": "#/definitions/MonthlyRate"
+          "$ref": "#/definitions/PhoneNumberCost"
         },
         "searchExpiresBy": {
           "format": "date-time",
