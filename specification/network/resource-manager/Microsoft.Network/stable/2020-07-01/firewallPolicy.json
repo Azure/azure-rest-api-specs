@@ -1155,8 +1155,11 @@
       "x-ms-discriminator-value": "FirewallPolicySNAT",
       "properties": {
         "privateRanges": {
-          "type": "string",
-          "description": "List of private IP addresses/IP address ranges to not be SNAT."
+          "type": "array",
+          "description": "List of private IP addresses/IP address ranges to not be SNAT.",
+          "items": {
+            "type": "string"
+          }
         }
       }
     },
