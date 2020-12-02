@@ -53,7 +53,12 @@
                           "enableRateLimiting": false,
                           "useLocalAzureIpAddress": false,
                           "usePolicyBasedTrafficSelectors": false,
-                          "routingWeight": 0
+                          "routingWeight": 0,
+                          "ingressNatRules": [
+                            {
+                              "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/vpnGateways/gateway1/natRules/nat03"
+                            }
+                          ]
                         }
                       },
                       {
@@ -76,7 +81,12 @@
                           "enableRateLimiting": false,
                           "useLocalAzureIpAddress": false,
                           "usePolicyBasedTrafficSelectors": false,
-                          "routingWeight": 0
+                          "routingWeight": 0,
+                          "egressNatRules": [
+                            {
+                              "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/vpnGateways/gateway1/natRules/nat04"
+                            }
+                          ]
                         }
                       }
                     ],
@@ -139,6 +149,56 @@
                   }
                 ]
               },
+              "natRules": [
+                {
+                  "name": "nat03",
+                  "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/vpnGateways/gateway1/natRules/nat03",
+                  "properties": {
+                    "type": "Dynamic",
+                    "mode": "IgressSnat",
+                    "internalMappings": [
+                      {
+                        "addressSpace": "0.0.0.0/26"
+                      }
+                    ],
+                    "externalMappings": [
+                      {
+                        "addressSpace": "192.168.0.0/26"
+                      }
+                    ],
+                    "ingressVpnSiteLinkConnections": [
+                      {
+                        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/vpnGateways/gateway1/vpnConnections/vpnConnection1/vpnLinkConnections/Connection-Link1"
+                      }
+                    ]
+                  },
+                  "type": "Microsoft.Network/vpnGateways/natRules"
+                },
+                {
+                  "name": "nat04",
+                  "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/vpnGateways/gateway1/natRules/nat04",
+                  "properties": {
+                    "type": "Static",
+                    "mode": "EgressSnat",
+                    "internalMappings": [
+                      {
+                        "addressSpace": "0.0.0.0/26"
+                      }
+                    ],
+                    "externalMappings": [
+                      {
+                        "addressSpace": "192.168.0.0/26"
+                      }
+                    ],
+                    "egressVpnSiteLinkConnections": [
+                      {
+                        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/vpnGateways/gateway1/vpnConnections/vpnConnection1/vpnLinkConnections/Connection-Link2"
+                      }
+                    ]
+                  },
+                  "type": "Microsoft.Network/vpnGateways/natRules"
+                }
+              ],
               "isRoutingPreferenceInternet": false
             }
           },
@@ -231,6 +291,7 @@
                   }
                 ]
               },
+              "natRules": [],
               "isRoutingPreferenceInternet": false
             }
           }
