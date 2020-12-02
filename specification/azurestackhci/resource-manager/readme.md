@@ -28,6 +28,7 @@ These are the global settings for the azurestackhci.
 title: AzureStackHCIClient
 description: Azure Stack HCI management service
 openapi-type: arm
+openapi-subtype: rpaas
 tag: package-2020-10
 ```
 
