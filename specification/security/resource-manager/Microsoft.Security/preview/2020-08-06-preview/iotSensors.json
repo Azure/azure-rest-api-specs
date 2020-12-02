@@ -235,18 +235,18 @@
         }
       }
     },
-    "/{scope}/providers/Microsoft.Security/iotSensors/{iotSensorName}/downloadResetPassword": {
+    "/{scope}/providers/Microsoft.Security/iotSensors/{iotSensorName}/triggerTiUpdate": {
       "post": {
         "x-ms-examples": {
-          "Download file for reset password of the sensor": {
-            "$ref": "./examples/IotSensors/DownloadResetPassword.json"
+          "Trigger threat threat intelligence package update": {
+            "$ref": "./examples/IotSensors/triggerTiUpdate.json"
           }
         },
         "tags": [
           "IoT Sensors"
         ],
-        "operationId": "IotSensors_DownloadResetPassword",
-        "description": "Download file for reset password of the sensor",
+        "operationId": "IotSensors_TriggerTiUpdate",
+        "description": "Trigger threat intelligence package update",
         "produces": [
           "application/zip"
         ],
@@ -259,25 +259,11 @@
           },
           {
             "$ref": "#/parameters/IotSensorName"
-          },
-          {
-            "in": "body",
-            "name": "body",
-            "required": true,
-            "description": "The reset password input.",
-            "schema": {
-              "$ref": "#/definitions/ResetPasswordInput"
-            },
-            "x-ms-parameter-location": "method"
           }
         ],
         "responses": {
           "200": {
-            "description": "Downloaded reset password file",
-            "schema": {
-              "type": "object",
-              "format": "file"
-            }
+            "description": "Triggered threat intelligence package update"
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -327,16 +313,6 @@
         "zone": {
           "type": "string",
           "description": "Display name of the IoT zone"
-        }
-      }
-    },
-    "ResetPasswordInput": {
-      "type": "object",
-      "description": "Reset password input.",
-      "properties": {
-        "applianceId": {
-          "description": "The appliance id of the sensor.",
-          "type": "string"
         }
       }
     }
