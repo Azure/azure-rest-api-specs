@@ -18,6 +18,155 @@
     "application/json"
   ],
   "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupconfig/vaultconfig": {
+      "get": {
+        "tags": [
+          "BackupResourceVaultConfigs"
+        ],
+        "description": "Fetches resource vault config.",
+        "operationId": "BackupResourceVaultConfigs_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/VaultName"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/BackupResourceVaultConfigResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/NewErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Vault Security Config": {
+            "$ref": "./examples/Common/BackupResourceVaultConfigs_Get.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "BackupResourceVaultConfigs"
+        ],
+        "description": "Updates vault security config.",
+        "operationId": "BackupResourceVaultConfigs_Update",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/VaultName"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "resource config request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/BackupResourceVaultConfigResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/BackupResourceVaultConfigResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/NewErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update Vault Security Config": {
+            "$ref": "./examples/Common/BackupResourceVaultConfigs_Patch.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "BackupResourceVaultConfigs"
+        ],
+        "description": "Updates vault security config.",
+        "operationId": "BackupResourceVaultConfigs_Put",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/VaultName"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "resource config request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/BackupResourceVaultConfigResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/BackupResourceVaultConfigResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/NewErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update Vault Security Config": {
+            "$ref": "./examples/Common/BackupResourceVaultConfigs_Put.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupEncryptionConfigs/backupResourceEncryptionConfig": {
       "get": {
         "tags": [
@@ -7039,6 +7188,95 @@
         "retentionDuration": {
           "$ref": "#/definitions/RetentionDuration",
           "description": "Retention duration of retention Policy."
+        }
+      }
+    },
+    "BackupResourceVaultConfigResource": {
+      "description": "Backup resource vault config details.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/BackupResourceVaultConfig",
+          "description": "BackupResourceVaultConfigResource properties"
+        }
+      }
+    },
+    "BackupResourceVaultConfig": {
+      "description": "Backup resource vault config details.",
+      "type": "object",
+      "properties": {
+        "storageModelType": {
+          "description": "Storage type.",
+          "enum": [
+            "Invalid",
+            "GeoRedundant",
+            "LocallyRedundant",
+            "ZoneRedundant",
+            "ReadAccessGeoZoneRedundant"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "StorageType",
+            "modelAsString": true
+          }
+        },
+        "storageType": {
+          "description": "Storage type.",
+          "enum": [
+            "Invalid",
+            "GeoRedundant",
+            "LocallyRedundant",
+            "ZoneRedundant",
+            "ReadAccessGeoZoneRedundant"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "StorageType",
+            "modelAsString": true
+          }
+        },
+        "storageTypeState": {
+          "description": "Locked or Unlocked. Once a machine is registered against a resource, the storageTypeState is always Locked.",
+          "enum": [
+            "Invalid",
+            "Locked",
+            "Unlocked"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "StorageTypeState",
+            "modelAsString": true
+          }
+        },
+        "enhancedSecurityState": {
+          "description": "Enabled or Disabled.",
+          "enum": [
+            "Invalid",
+            "Enabled",
+            "Disabled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "EnhancedSecurityState",
+            "modelAsString": true
+          }
+        },
+        "softDeleteFeatureState": {
+          "description": "Soft Delete feature state",
+          "enum": [
+            "Invalid",
+            "Enabled",
+            "Disabled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "SoftDeleteFeatureState",
+            "modelAsString": true
+          }
         }
       }
     },
