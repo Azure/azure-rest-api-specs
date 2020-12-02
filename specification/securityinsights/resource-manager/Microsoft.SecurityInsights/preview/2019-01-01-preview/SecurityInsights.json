@@ -4713,6 +4713,12 @@
           "description": "the number of alert rules that were created by this template",
           "type": "integer"
         },
+        "lastUpdatedDateUTC": {
+          "description": "The last time that this alert rule template has been updated.",
+          "format": "date-time",
+          "readOnly": true,
+          "type": "string"
+        },
         "createdDateUTC": {
           "description": "The time that this alert rule template has been added.",
           "format": "date-time",
@@ -8072,6 +8078,7 @@
           "required": [
             "displayName",
             "description",
+            "lastUpdatedDateUTC",
             "createdDateUTC",
             "status",
             "alertRulesCreatedByTemplateCount",
