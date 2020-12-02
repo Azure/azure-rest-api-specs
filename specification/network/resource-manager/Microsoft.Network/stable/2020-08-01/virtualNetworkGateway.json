@@ -1856,10 +1856,7 @@
         ],
         "responses": {
           "202": {
-            "description": "Accepted and the operation will complete asynchronously.",
-            "headers": {
-            "azure-async-operation": "/subscriptions/{subscriptionId}/providers/Microsoft.Network/locations/{region}/operations/{operationId}?api-version={api-version}"
-            }
+            "description": "Accepted and the operation GetIkeSas will complete asynchronously.",
           },
           "200": {
             "description": "Request successful. The operation getikesas completed on virtual network gateway connection.",
@@ -1881,7 +1878,7 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "azure-async-operation"
         }
       }
     },
