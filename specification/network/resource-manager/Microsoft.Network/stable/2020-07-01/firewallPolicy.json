@@ -638,9 +638,9 @@
           "description": "ThreatIntel Whitelist for Firewall Policy.",
           "$ref": "#/definitions/FirewallPolicyThreatIntelWhitelist"
         },
-        "privateRange":{
-          "description": "The private IP ranges to which traffic won't be SNAT'ed",
-          "$ref": "#/definitions/FirewallPolicyPrivateRange"
+        "SNAT": {
+          "description": "The private IP ranges to which traffic will not be SNAT",
+          "$ref": "#/definitions/FirewallPolicySNAT"
         },
         "dnsSettings": {
           "description": "DNS Proxy Settings definition.",
@@ -1150,12 +1150,17 @@
         }
       }
     },
-    "FirewallPolicyPrivateRange": {
-      "description": "The private IP ranges to which traffic won't be SNAT'ed",
-      "x-ms-discriminator-value": "FirewallPolicyPrivateRange",
-      "type": "array",
-      "items": {
-          "type": "string"
+    "FirewallPolicySNAT": {
+      "description": "The private IP ranges to which traffic will not be SNAT",
+      "x-ms-discriminator-value": "FirewallPolicySNAT",
+      "properties": {
+        "privateRanges": {
+          "type": "array",
+          "description": "List of private IP addresses/IP address ranges to not be SNAT.",
+          "items": {
+            "type": "string"
+          }
+        }
       }
     },
     "DnsSettings": {
