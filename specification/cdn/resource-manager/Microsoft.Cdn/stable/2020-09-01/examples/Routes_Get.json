@@ -1,0 +1,57 @@
+{
+  "parameters": {
+    "api-version": "2020-09-01",
+    "subscriptionId": "subid",
+    "resourceGroupName": "RG",
+    "profileName": "profile1",
+    "endpointName": "endpoint1",
+    "routeName": "route1"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "route1",
+        "id": "/subscriptions/subid/resourcegroups/RG/providers/Microsoft.Cdn/profiles/profile1/afdendpoints/endpoint1/routes/route1",
+        "type": "Microsoft.Cdn/profiles/afdendpoints/routes",
+        "properties": {
+          "customDomains": [
+            {
+              "id": "/subscriptions/subid/resourceGroups/RG/providers/Microsoft.Cdn/profiles/profile1/customDomains/domain1"
+            }
+          ],
+          "originGroup": {
+            "id": "/subscriptions/subid/resourceGroups/RG/providers/Microsoft.Cdn/profiles/profile1/originGroups/originGroup1"
+          },
+          "originPath": null,
+          "ruleSets": [
+            {
+              "id": "/subscriptions/subid/resourceGroups/RG/providers/Microsoft.Cdn/profiles/profile1/ruleSets/ruleSet1"
+            }
+          ],
+          "supportedProtocols": [
+            "Https",
+            "Http"
+          ],
+          "patternsToMatch": [
+            "/*"
+          ],
+          "compressionSettings": {
+            "contentTypesToCompress": [
+              "text/html",
+              "application/octet-stream"
+            ],
+            "isCompressionEnabled": true
+          },
+          "queryStringCachingBehavior": "IgnoreQueryString",
+          "optimizationType": "DynamicSiteAcceleration",
+          "forwardingProtocol": "MatchRequest",
+          "linkToDefaultDomain": "Enabled",
+          "httpsRedirect": "Enabled",
+          "enabledState": "Enabled",
+          "provisioningState": "Succeeded",
+          "deploymentStatus": "Succeeded"
+        }
+      }
+    }
+  }
+}

@@ -20,15 +20,17 @@ batch:
 ``` yaml $(package-spark)
 no-namespace-folders: true
 namespace: azure.synapse.spark
-output-folder: $(python-sdks-folder)/synapse/azure-synapse/azure/synapse/spark
+output-folder: $(python-sdks-folder)/synapse/azure-synapse-spark/azure/synapse/spark
 ```
 ``` yaml $(package-artifacts)
 no-namespace-folders: true
 namespace: azure.synapse.artifacts
-output-folder: $(python-sdks-folder)/synapse/azure-synapse/azure/synapse/artifacts
+modelerfour:
+  lenient-model-deduplication: true
+output-folder: $(python-sdks-folder)/synapse/azure-synapse-artifacts/azure/synapse/artifacts
 ```
 ``` yaml $(package-access-control)
 no-namespace-folders: true
 namespace: azure.synapse.accesscontrol
-output-folder: $(python-sdks-folder)/synapse/azure-synapse/azure/synapse/accesscontrol
+output-folder: $(python-sdks-folder)/synapse/azure-synapse-accesscontrol/azure/synapse/accesscontrol
 ```

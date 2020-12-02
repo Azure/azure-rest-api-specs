@@ -497,65 +497,6 @@
     }
   },
   "definitions": {
-    "Resource": {
-      "description": "The core properties of ARM resources",
-      "properties": {
-        "id": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Fully qualified resource Id for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/trafficManagerProfiles/{resourceName}"
-        },
-        "name": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The name of the resource"
-        },
-        "type": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The type of the resource. Ex- Microsoft.Network/trafficManagerProfiles."
-        }
-      },
-      "x-ms-azure-resource": true
-    },
-    "TrackedResource": {
-      "description": "The resource model definition for a ARM tracked top level resource",
-      "properties": {
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "x-ms-mutability": [
-            "read",
-            "create",
-            "update"
-          ],
-          "description": "Resource tags."
-        },
-        "location": {
-          "type": "string",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ],
-          "description": "The Azure Region where the resource lives"
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/Resource"
-        }
-      ]
-    },
-    "ProxyResource": {
-      "description": "The resource model definition for a ARM proxy resource. It will have everything other than required location and tags",
-      "allOf": [
-        {
-          "$ref": "#/definitions/Resource"
-        }
-      ]
-    },
     "OperationList": {
       "type": "object",
       "properties": {
@@ -668,7 +609,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/TrackedResource"
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/TrackedResource"
         }
       ],
       "description": "SAP monitor info on Azure (ARM properties and SAP monitor properties)"
@@ -752,7 +693,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/ProxyResource"
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ProxyResource"
         }
       ],
       "description": "A provider instance associated with a SAP monitor."
