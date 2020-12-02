@@ -617,6 +617,10 @@ directive:
     where: $.definitions.AlertRulePatchProperties.properties.enabled
     from: activityLogAlerts_API.json
     reason: 'This property indicates whether the alert rule is enabled or not  - it has only ''''true'''' or ''''false'''' options, so it fits boolean type.'
+  - suppress: DefaultErrorResponseSchema
+    where: $.definitions
+    from: activityLogAlerts_API.json
+    reason: 'Updating the error response to the new format would be a breaking change.'
 ```
 
 ### Tag: profile-hybrid-2019-03-01
