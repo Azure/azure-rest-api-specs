@@ -324,9 +324,107 @@
       "type": "object",
       "description": "IoT sensor properties",
       "properties": {
+        "connectivityTime": {
+          "description": "Last connectivity time of the IoT sensor",
+          "readOnly": true,
+          "type": "string",
+          "example": "2020-11-17T12:31:25Z"
+        },
+        "creationTime": {
+          "description": "Creation time of the IoT sensor",
+          "readOnly": true,
+          "type": "string",
+          "example": "2020-11-17T12:31:25Z"
+        },
+        "dynamicLearning": {
+          "description": "Dynamic mode status of the IoT sensor",
+          "example": true,
+          "readOnly": true,
+          "type": "boolean"
+        },
+        "learningMode": {
+          "description": "Learning mode status of the IoT sensor",
+          "example": true,
+          "readOnly": true,
+          "type": "boolean"
+        },
+        "sensorStatus": {
+          "readOnly": true,
+          "type": "string",
+          "example": "Ok",
+          "description": "Status of the IoT sensor",
+          "enum": [
+            "Ok",
+            "Disconnected",
+            "Unavailable"
+          ],
+          "x-ms-enum": {
+            "name": "sensorStatus",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Ok"
+              },
+              {
+                "value": "Disconnected"
+              },
+              {
+                "value": "Unavailable"
+              }
+            ]
+          }
+        },
+        "sensorVersion": {
+          "description": "Version of the IoT sensor",
+          "readOnly": true,
+          "type": "string",
+          "example": "2020.11.01.1643"
+        },
+        "tiAutomaticUpdates": {
+          "description": "TI Automatic mode status of the IoT sensor",
+          "example": true,
+          "type": "boolean"
+        },
+        "tiStatus": {
+          "readOnly": true,
+          "type": "string",
+          "example": "Ok",
+          "description": "TI Status of the IoT sensor",
+          "enum": [
+            "Ok",
+            "Failed",
+            "InProgress",
+            "UpdateAvailable"
+          ],
+          "x-ms-enum": {
+            "name": "tiStatus",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Ok"
+              },
+              {
+                "value": "Failed"
+              },
+              {
+                "value": "InProgress"
+              },
+              {
+                "value": "UpdateAvailable"
+              }
+            ]
+          }
+        },
+        "tiVersion": {
+          "description": "TI Version of the IoT sensor",
+          "readOnly": true,
+          "type": "string",
+          "example": "2020-11-17T12:31:25Z"
+        },
         "zone": {
           "type": "string",
-          "description": "Display name of the IoT zone"
+          "description": "Zone of the IoT sensor",
+          "example": "A12"
         }
       }
     },
