@@ -211,8 +211,8 @@
         "tags": [
           "VirtualApplianceSites"
         ],
-        "operationId": "NvaVirtualApplianceSites_List",
-        "description": "Lists all Network Virtual Appliance Sites in a Network Virtual Appliance resource.",
+        "operationId": "NvaVirtualApplianceSites_ListByResourceGroup",
+        "description": "Lists all Network Virtual Appliance Sites in a resource group.",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -243,7 +243,46 @@
           }
         },
         "x-ms-examples": {
-          "List all Network Virtual Appliance sites for a given Network Virtual Appliance": {
+          "List all Network Virtual Appliance sites under a resource group": {
+            "$ref": "./examples/NetworkVirtualApplianceSiteList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Network/networkVirtualAppliances": {
+      "get": {
+        "tags": [
+          "NetworkVirtualAppliances"
+        ],
+        "operationId": "NvaVirtualApplianceSites_List",
+        "description": "Gets all Virtual Appliance sites in a subscription.",
+        "parameters": [
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The operation returns a list of Network Appliance site resources.",
+            "schema": {
+              "$ref": "#/definitions/NvaVirtualApplianceSiteListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List all Virtual Appliances sites for a given subscription": {
             "$ref": "./examples/NetworkVirtualApplianceSiteList.json"
           }
         },
