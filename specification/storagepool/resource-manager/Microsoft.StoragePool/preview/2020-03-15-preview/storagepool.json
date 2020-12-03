@@ -220,7 +220,7 @@
           "DiskPools"
         ],
         "operationId": "DiskPools_Update",
-        "description": "Update a Storage Pool.",
+        "description": "Update a Disk Pool.",
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -232,7 +232,7 @@
             "$ref": "#/parameters/DiskPoolName"
           },
           {
-            "$ref": "#/parameters/DiskPool"
+            "$ref": "#/parameters/DiskPoolUpdate"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -443,6 +443,59 @@
           }
         }
       },
+      "patch": {
+        "tags": [
+          "IscsiTargets"
+        ],
+        "description": "Update an iSCSI target.",
+        "operationId": "IscsiTargets_Update",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DiskPoolName"
+          },
+          {
+            "$ref": "#/parameters/IscsiTargetName"
+          },
+          {
+            "$ref": "#/parameters/IscsiTargetUpdate"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK -- returned when the iscsiTarget was already created from a previous request with the same properties specified in the request body.",
+            "schema": {
+              "$ref": "#/definitions/IscsiTarget"
+            }
+          },
+          "202": {
+            "description": "Accepted -- Create or update request accepted; operation will complete asynchronously.",
+            "schema": {
+              "$ref": "#/definitions/IscsiTarget"
+            }
+          },
+          "default": {
+            "description": "Error from the RP",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Create or Update an iSCSI Target": {
+            "$ref": "./examples/IscsiTargets_Patch.json"
+          }
+        }
+      },
       "delete": {
         "tags": [
           "IscsiTargets"
@@ -592,6 +645,16 @@
       },
       "x-ms-parameter-location": "method"
     },
+    "DiskPoolUpdate": {
+      "name": "diskPoolUpdatePayload",
+      "required": true,
+      "in": "body",
+      "description": "Request payload for Disk Pool operations.",
+      "schema": {
+        "$ref": "#/definitions/DiskPoolUpdate"
+      },
+      "x-ms-parameter-location": "method"
+    },
     "IscsiTarget": {
       "name": "iscsiTargetPayload",
       "required": true,
@@ -599,6 +662,16 @@
       "description": "Request payload for iSCSI target operations.",
       "schema": {
         "$ref": "#/definitions/IscsiTarget"
+      },
+      "x-ms-parameter-location": "method"
+    },
+    "IscsiTargetUpdate": {
+      "name": "iscsiTargetUpdatePayload",
+      "required": true,
+      "in": "body",
+      "description": "Request payload for iSCSI target operations.",
+      "schema": {
+        "$ref": "#/definitions/IscsiTargetUpdate"
       },
       "x-ms-parameter-location": "method"
     },
@@ -727,11 +800,42 @@
     "DiskPool": {
       "type": "object",
       "description": "Request payload for Create or Update Disk Pool requests.",
+      "required": [
+        "properties"
+      ],
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
           "description": "RP defined properties for Disk Pool operations.",
           "$ref": "#/definitions/DiskPoolProperties"
+        },
+        "sku": {
+          "description": "Sku description.",
+          "$ref": "#/definitions/Sku"
+        },
+        "systemData": {
+          "description": "Resource metadata required by ARM RPC",
+          "readOnly": true,
+          "$ref": "#/definitions/SystemMetadata"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "DiskPoolUpdate": {
+      "type": "object",
+      "description": "Request payload for Create or Update Disk Pool requests.",
+      "required": [
+        "properties"
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "RP defined properties for Disk Pool operations.",
+          "$ref": "#/definitions/DiskPoolUpdateProperties"
         },
         "sku": {
           "description": "Sku description.",
@@ -760,6 +864,57 @@
         "availabilityZones",
         "subnetId"
       ],
+      "properties": {
+        "provisioningState": {
+          "description": "State of the operation on the resource",
+          "type": "string",
+          "$ref": "#/definitions/ProvisioningState",
+          "readOnly": true
+        },
+        "availabilityZones": {
+          "type": "array",
+          "description": "Logical zone for DiskPool resource.",
+          "items": {
+            "$ref": "#/definitions/AvailabilityZone"
+          }
+        },
+        "status": {
+          "type": "string",
+          "readOnly": true,
+          "enum": [
+            "Invalid",
+            "Unknown",
+            "Healthy",
+            "Unhealthy"
+          ],
+          "x-ms-enum": {
+            "name": "OperationalStatus",
+            "modelAsString": true
+          },
+          "description": "Operational status of the Disk pool"
+        },
+        "disks": {
+          "type": "array",
+          "description": "List of Azure managed disks to attach to a DiskPool",
+          "items": {
+            "$ref": "#/definitions/Disk"
+          },
+          "minLength": 1,
+          "maxLength": 15
+        },
+        "subnetId": {
+          "type": "string",
+          "description": "Azure resource id of the subnet for the DiskPool",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        }
+      }
+    },
+    "DiskPoolUpdateProperties": {
+      "type": "object",
+      "description": "Properties section of the Disk Pool request payload.",
       "properties": {
         "provisioningState": {
           "description": "State of the operation on the resource",
@@ -847,11 +1002,33 @@
     "IscsiTarget": {
       "type": "object",
       "description": "Payload for iSCSI Target Create or Update requests.",
+      "required": [
+        "properties"
+      ],
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
           "description": "RP defined properties for iSCSI Target operations.",
           "$ref": "#/definitions/IscsiTargetProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "IscsiTargetUpdate": {
+      "type": "object",
+      "description": "Payload for iSCSI Target Create or Update requests.",
+      "required": [
+        "properties"
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "RP defined properties for iSCSI Target operations.",
+          "$ref": "#/definitions/IscsiTargetUpdateProperties"
         }
       },
       "allOf": [
@@ -866,6 +1043,49 @@
       "required": [
         "tpgs",
         "targetIqn"
+      ],
+      "properties": {
+        "provisioningState": {
+          "description": "State of the operation on the resource",
+          "type": "string",
+          "$ref": "#/definitions/ProvisioningState",
+          "readOnly": true
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "Invalid",
+            "Unknown",
+            "Healthy",
+            "Unhealthy"
+          ],
+          "x-ms-enum": {
+            "name": "OperationalStatus",
+            "modelAsString": true
+          },
+          "readOnly": true,
+          "description": "Operational status of the Disk pool"
+        },
+        "tpgs": {
+          "type": "array",
+          "description": "list of iSCSI target portal groups",
+          "items": {
+            "$ref": "#/definitions/TargetPortalGroup"
+          },
+          "maxLength": 1,
+          "minLength": 1
+        },
+        "targetIqn": {
+          "type": "string",
+          "description": "iSCSI target iqn (iSCSI Qualified Name); example: iqn.2005-03.org.iscsi:server"
+        }
+      }
+    },
+    "IscsiTargetUpdateProperties": {
+      "type": "object",
+      "description": "Properties of iSCSI Target request payload.",
+      "required": [
+        "tpgs"
       ],
       "properties": {
         "provisioningState": {
