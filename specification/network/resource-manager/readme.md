@@ -78,6 +78,7 @@ input-file:
   - Microsoft.Network/stable/2020-08-01/serviceEndpointPolicy.json
   - Microsoft.Network/stable/2020-08-01/serviceTags.json
   - Microsoft.Network/stable/2020-08-01/usage.json
+  - Microsoft.Network/stable/2020-08-01/virtualApplianceSite.json
   - Microsoft.Network/stable/2020-08-01/virtualNetwork.json
   - Microsoft.Network/stable/2020-08-01/virtualNetworkGateway.json
   - Microsoft.Network/stable/2020-08-01/virtualNetworkTap.json
@@ -1636,6 +1637,9 @@ directive:
     reason: name, id and type properties are inherited from the upper level
   - suppress: RequiredPropertiesMissingInResourceModel
     from: serviceEndpointPolicy.json
+    reason: name, id and type properties are inherited from the upper level
+  - suppress: RequiredPropertiesMissingInResourceModel
+    from: virtualApplianceSite.json
     reason: name, id and type properties are inherited from the upper level
   - suppress: RequiredPropertiesMissingInResourceModel
     from: virtualNetworkTap.json
