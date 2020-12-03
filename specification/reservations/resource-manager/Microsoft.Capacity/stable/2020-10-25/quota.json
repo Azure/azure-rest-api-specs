@@ -71,7 +71,7 @@
             },
             "headers": {
               "ETag": {
-                "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
+                "description": "Current entity state version. It should be treated as opaque and used to make conditional HTTP requests.",
                 "type": "string"
               }
             }
@@ -124,7 +124,7 @@
           {
             "name": "createQuotaRequest",
             "in": "body",
-            "description": "Quota requests payload",
+            "description": "Quota requests payload.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/CurrentQuotaLimitBase"
@@ -156,7 +156,7 @@
         "tags": [
           "QuotaInformation"
         ],
-        "description": "Update the quota (service limits) of this resource to the requested value.\n\r  • To get the quota information for specific resource, send a GET request.\n\r  • To increase the quota, update the limit field from the GET response to a new value.\n\r  • To update the quota value, submit the JSON response to the quota request API to update the quota.\r\n  • The Update quota request may be constructed as follows. The PATCH operation can be used to update the quota.",
+        "description": "Update the quota (service limits) of this resource to the requested value.\n\r  • To get the quota information for specific resource, send a GET request.\n\r  • To increase the quota, update the limit field from the GET response to a new value.\n\r  • To update the quota value, submit the JSON response to the quota request API to update the quota.\r\n  • To update the quota. use the PATCH operation.",
         "operationId": "Quota_Update",
         "x-ms-examples": {
           "Quotas_Request_PatchForCompute": {
@@ -186,7 +186,7 @@
           {
             "name": "createQuotaRequest",
             "in": "body",
-            "description": "Payload for the quota request",
+            "description": "Payload for the quota request.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/CurrentQuotaLimitBase"
@@ -422,7 +422,7 @@
           "readOnly": true
         },
         "unit": {
-          "description": " The limit units, such as Count and Bytes. Use the unit field provided in the response of the GET quota operation.",
+          "description": " The limit units, such as **count** and **bytes**. Use the unit field provided in the response of the GET quota operation.",
           "type": "string",
           "readOnly": false
         },
@@ -525,7 +525,7 @@
           "readOnly": true
         },
         "unit": {
-          "description": " The limit units, such as Count and Bytes. Use the unit field provided in the response of the GET quota operation.",
+          "description": " The limit units, such as **count** and **bytes**. Use the unit field provided in the response of the GET quota operation.",
           "type": "string"
         },
         "provisioningState": {
@@ -618,7 +618,7 @@
           "readOnly": true
         },
         "properties": {
-          "description": "Quota request status",
+          "description": "Quota request status.",
           "$ref": "#/definitions/QuotaRequestStatusDetails",
           "x-ms-client-flatten": true
         }
@@ -642,21 +642,21 @@
     },
     "QuotaRequestDetails": {
       "type": "object",
-      "description": "Quota request details",
+      "description": "Quota request details.",
       "x-ms-azure-resource": true,
       "properties": {
         "id": {
-          "description": "Quota request ID",
+          "description": "Quota request ID.",
           "type": "string",
           "readOnly": true
         },
         "name": {
-          "description": "Quota request name",
+          "description": "Quota request name.",
           "type": "string",
           "readOnly": true
         },
         "properties": {
-          "description": "Quota request details",
+          "description": "Quota request details.",
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/QuotaRequestProperties"
         },
@@ -772,7 +772,7 @@
       "properties": {
         "error": {
           "$ref": "#/definitions/ServiceError",
-          "description": "The api error details."
+          "description": "The API error details."
         }
       },
       "description": "The API error."
@@ -787,9 +787,9 @@
         },
         "message": {
           "type": "string",
-          "description": "The error message."
+          "description": "The error message text."
         },
-        "details": {
+        "details": { 
           "type": "array",
           "items": {
             "$ref": "#/definitions/ServiceErrorDetail"
@@ -879,7 +879,7 @@
       "in": "query",
       "type": "string",
       "required": false,
-      "description": "Skiptoken is only used if a previous operation returned a partial result. If a previous response contains a nextLink element, the value of the nextLink element will include a skiptoken parameter that specifies a starting point to use for subsequent calls.",
+      "description": "Skiptoken is only used if a previous operation returned a partial result. If a previous response contains a nextLink element, the value of the nextLink element includes a skiptoken parameter that specifies a starting point to use for subsequent calls.",
       "x-ms-parameter-location": "method"
     }
   }
