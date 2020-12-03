@@ -59,7 +59,7 @@ Please also specify `--go-sdk-folder=<path to the root directory of your azure-s
 
 ```yaml $(tag)=='profile-hybrid-2020-09-01' && $(go)
 namespace: compute
-output-folder: $(go-sdk-folder)/profiles/$(namespace)/mgmt/$(namespace)
+output-folder: $(go-sdk-folder)/profiles/2020-09-01/compute/mgmt/compute
 ```
 
 ### Tag: package-2020-06-30 and go
