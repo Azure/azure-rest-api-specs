@@ -639,9 +639,103 @@
           }
         }
       }
+    },
+    "/providers/Microsoft.AnalysisServices/operations": {
+      "get": {
+        "tags": [
+          "Operations"
+        ],
+        "operationId": "Operations_List",
+        "description": "Lists all of the available consumption REST API operations.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/OperationsErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
     }
   },
   "definitions": {
+    "OperationDisplay": {
+      "description": "The object that represents the operation.",
+      "type": "object",
+      "properties": {
+        "provider": {
+          "description": "Service provider: Microsoft.Consumption.",
+          "type": "string",
+          "readOnly": true
+        },
+        "resource": {
+          "description": "Resource on which the operation is performed: UsageDetail, etc.",
+          "type": "string",
+          "readOnly": true
+        },
+        "operation": {
+          "description": "Operation type: Read, write, delete, etc.",
+          "type": "string",
+          "readOnly": true
+        },
+        "description": {
+          "description": "Description for the operation",
+          "type": "string"
+        }
+      }
+    },
+    "OperationDetail": {
+      "description": "A Consumption REST API operation.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Operation name: {provider}/{resource}/{operation}.",
+          "type": "string",
+          "readOnly": true
+        },
+        "isDataAction": {
+          "description": "Indicates whether the operation is a data action",
+          "type": "boolean"
+        },
+        "display": {
+          "$ref": "#/definitions/OperationDisplay",
+          "description": "Display of the operation"
+        }
+      }
+    },
+    "OperationListResult": {
+      "description": "Result of listing consumption operations. It contains a list of operations and a URL link to get the next set of results.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "List of analysis services operations supported by the Microsoft.AnalysisServices resource provider.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/OperationDetail"
+          }
+        },
+        "nextLink": {
+          "description": "URL to get the next set of operation list results if there are any.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
     "Resource": {
       "description": "Represents an instance of an Analysis Services resource.",
       "type": "object",
@@ -1021,7 +1115,18 @@
         }
       }
     },
+    "OperationsErrorResponse": {
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/ErrorResponse",
+          "title": "OperationsErrorResponse",
+          "description": "Error message from Operations."
+        }
+      },
+      "description": "An error response from Operations."
+    },
     "ErrorResponse": {
+      "title": "ErrorResponse",
       "description": "Describes the format of Error response.",
       "type": "object",
       "properties": {
