@@ -884,6 +884,160 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/managedClusters/{resourceName}/maintenanceConfigurations/{configName}": {
+      "get": {
+        "tags": [
+          "MaintenanceConfigurations"
+        ],
+        "operationId": "MaintenanceConfigurations_Get",
+        "summary": "Gets the maintenance configuration.",
+        "description": "Gets the details of maintenance configurations by managed cluster and resource group.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceNameParameter"
+          },
+          {
+            "name": "configName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the maintenance configuration."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DefaultMaintenanceConfiguration"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Agent Pool": {
+            "$ref": "./examples/MaintenanceConfigurationsGet.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "MaintenanceConfigurations"
+        ],
+        "operationId": "MaintenanceConfigurations_CreateOrUpdate",
+        "summary": "Creates or updates a maintenance configurations.",
+        "description": "Creates or updates a maintenance configuration in the specified managed cluster.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceNameParameter"
+          },
+          {
+            "name": "configName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the maintenance configuration."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DefaultMaintenanceConfiguration"
+            },
+            "description": "Parameters supplied to the Create or Update a default maintenance configuration."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DefaultMaintenanceConfiguration"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": false,
+        "x-ms-examples": {
+          "Create/Update Agent Pool": {
+            "$ref": "./examples/MaintenanceConfigurationsCreate_Update.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "MaintenanceConfiguration"
+        ],
+        "operationId": "MaintenanceConfiguration_Delete",
+        "summary": "Deletes a maintenance configuration.",
+        "description": "Deletes the maintenance configuration in the specified managed cluster.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceNameParameter"
+          },
+          {
+            "name": "configName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the maintenance configuration."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": false,
+        "x-ms-examples": {
+          "Delete Agent Pool": {
+            "$ref": "./examples/MaintenanceConfigurationDelete.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/managedClusters/{resourceName}/resetServicePrincipalProfile": {
       "post": {
         "tags": [
@@ -2247,19 +2401,98 @@
       },
       "description": "Profile of network configuration."
     },
-    "CustomerControlPlaneUpgradeSchedule": {
-      "scheduledWeekdays": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/WeekDay"
-          },
-          "description": "Weekdays on which customer control plane can be upgraded."
+    "DefaultMaintenanceConfiguration": {
+      "timeInWeek": {
+        "type": "array",
+        "items": { 
+          "$ref": "#/definitions/TimeInWeek"
+        },
+        "description": "Weekday time slots on which control plane can be upgraded."
       },
-      "location": {
-        "type": "string",
-        "description": "a location name corresponding to a file in the IANA Time Zone database, such as \"America/New_York\". It's UTC time if the location is empty."
+      "notAllowedTime": {
+        "type": "array",
+        "items": { 
+          "$ref": "#/definitions/TimeSpan"
+        },
+        "description": "Time slots on which upgrade is not allowed."
       },
       "description": "Customer upgrade schedule for control plane."
+    },
+    "TimeInWeek": {
+      "day": {
+        "$ref": "#/definitions/WeekDay",
+        "description": "A day in a week."
+      },
+      "hourSlots": {
+        "type": "array",
+        "items": {
+          "$ref": "#/definitions/HourInDay"
+        },
+        "description": "hour slots in a day."
+      }
+    },
+    "WeekDay": {
+      "type": "string",
+      "enum": [
+        "Sunday",
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday"
+      ],
+      "x-ms-enum": {
+        "name": "WeekDay",
+        "modelAsString": true
+      },
+      "description": "The weekday enum."
+    },
+    "HourInDay": {
+      "type": "string",
+      "enum": [
+        "0",
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6",
+        "7",
+        "8",
+        "9",
+        "10",
+        "11",
+        "12",
+        "13",
+        "14",
+        "15",
+        "16",
+        "17",
+        "18",
+        "19",
+        "20",
+        "21",
+        "22",
+        "23"
+      ],
+      "x-ms-enum": {
+        "name": "HourInDay",
+        "modelAsString": true
+      },
+      "description": "The hour in day enum."
+    },
+    "TimeSpan": {
+      "start": {
+        "type": "string",
+        "format": "date-time",
+        "description": "The start of a time span"
+      },
+      "end": {
+        "type": "string",
+        "format": "date-time",
+        "description": "The end of a time span"
+      }
     },
     "ManagedClusterLoadBalancerProfile": {
       "properties": {
@@ -2523,10 +2756,6 @@
         "autoUpgradeProfile": {
           "$ref": "#/definitions/ManagedClusterAutoUpgradeProfile",
           "description": "Profile of auto upgrade configuration."
-        },
-        "customerControlPlaneUpgradeSchedule": {
-          "$ref": "#/definitions/CustomerControlPlaneUpgradeSchedule",
-          "description": "Schedule for customer control plane upgrading."
         },
         "autoScalerProfile": {
           "type": "object",
@@ -3135,23 +3364,6 @@
         }
       },
       "description": "The list of available agent pool versions."
-    },
-    "WeekDay": {
-      "type": "string",
-      "enum": [
-        "Sunday",
-        "Monday",
-        "Tuesday",
-        "Wednesday",
-        "Thursday",
-        "Friday",
-        "Saturday"
-      ],
-      "x-ms-enum": {
-        "name": "WeekDay",
-        "modelAsString": true
-      },
-      "description": "The weekday enum."
     },
     "OSType": {
       "type": "string",
