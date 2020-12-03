@@ -7,7 +7,7 @@ python:
   azure-arm: true
   license-header: MICROSOFT_MIT_NO_VERSION
   payload-flattening-threshold: 2
-  package-name: azure-ad-b2c
+  package-name: azure-mgmt-azureadb2c
   clear-output-folder: true
   no-namespace-folders: true
   python-base-folder: azureadb2c/azure-mgmt-azureadb2c/azure/mgmt/azureadb2c
@@ -19,11 +19,9 @@ These settings apply only when `--track2` is specified on the command line.
 ```yaml $(track2)
 azure-arm: true
 license-header: MICROSOFT_MIT_NO_VERSION
-package-name: azure-ad-b2c
-clear-output-folder: true
+package-name: azure-mgmt-azureadb2c
 no-namespace-folders: true
 python-base-folder: azureadb2c/azure-mgmt-azureadb2c/azure/mgmt/azureadb2c
-python-base-namespace: azure.mgmt.azureadb2c
 ```
 
 ### Python multi-api
@@ -54,7 +52,7 @@ perform-load: false
 
 These settings apply only when `--tag=package-2020-05-01-preview --python` is specified on the command line. Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
 
-```yaml $(tag) =='package-2020-05-01'
+```yaml $(tag) =='package-2020-05-01-preview'
 namespace: $(python-base-namespace).v2020_05_01_preview
 output-folder: $(python-sdks-folder)/$(python-base-folder)/v2020_05_01_preview
 python:
@@ -66,7 +64,7 @@ python:
 
 These settings apply only when `--tag=package-2019-01-01-preview --python` is specified on the command line. Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
 
-```yaml $(tag) =='package-2019-01-01'
+```yaml $(tag) =='package-2019-01-01-preview'
 namespace: $(python-base-namespace).v2019_01_01_preview
 output-folder: $(python-sdks-folder)/$(python-base-folder)/v2019_01_01_preview
 python:
