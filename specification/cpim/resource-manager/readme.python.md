@@ -14,6 +14,8 @@ python:
   python-base-namespace: azure.mgmt.azureadb2c
 ```
 
+These settings apply only when `--track2` is specified on the command line.
+
 ```yaml $(track2)
 azure-arm: true
 license-header: MICROSOFT_MIT_NO_VERSION
