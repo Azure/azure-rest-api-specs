@@ -496,6 +496,10 @@
           "$ref": "#/definitions/NotificationSettings",
           "description": "Notification Settings"
         },
+        "migrationProperties": {
+          "$ref": "#/definitions/MigrationProperties",
+          "description": "Migration Properties"
+        },
         "provisioningState": {
           "readOnly": true,
           "type": "string",
@@ -760,6 +764,37 @@
           "type": "string",
           "description": "Trust Password",
           "x-ms-secret": true
+        }
+      }
+    },
+    "MigrationProperties": {
+      "description": "Migration Properties",
+      "properties": {
+        "oldSubnetId": {
+          "type": "string",
+          "description": "Old Subnet Id"
+        },
+        "oldVnetSiteId": {
+          "type": "string",
+          "description": "Old Vnet Site Id"
+        },
+        "migrationProgress": {
+          "$ref": "#/definitions/MigrationProgress",
+          "description": "Migration Progress"
+        }
+      }
+    },
+    "MigrationProgress": {
+      "description": "Migration Progress",
+      "properties": {
+        "completionPercentage": {
+          "type": "number",
+          "format": "double",
+          "description": "Completion Percentage"
+        },
+        "progressMessage": {
+          "type": "string",
+          "description": "Progress Message"
         }
       }
     },
