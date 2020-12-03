@@ -39,7 +39,7 @@
         "tags": [
           "VirtualApplianceSites"
         ],
-        "operationId": "NvaVirtualApplianceSites_Delete",
+        "operationId": "NetworkVirtualApplianceSites_Delete",
         "description": "Deletes the specified site for Virtual Appliances.",
         "parameters": [
           {
@@ -94,7 +94,7 @@
         "tags": [
           "VirtualApplianceSites"
         ],
-        "operationId": "NvaVirtualApplianceSites_Get",
+        "operationId": "NetworkVirtualApplianceSites_Get",
         "description": "Gets the specified Virtual Appliance Site.",
         "parameters": [
           {
@@ -122,7 +122,7 @@
           "200": {
             "description": "Request successful. The operation returns a Network Virtual Appliance Site resource.",
             "schema": {
-              "$ref": "#/definitions/NvaVirtualApplianceSite"
+              "$ref": "#/definitions/NetworkVirtualApplianceSite"
             }
           },
           "default": {
@@ -142,7 +142,7 @@
         "tags": [
           "VirtualApplianceSites"
         ],
-        "operationId": "NvaVirtualApplianceSites_CreateOrUpdate",
+        "operationId": "NetworkVirtualApplianceSites_CreateOrUpdate",
         "description": "Creates or updates the specified Network Virtual Appliance Site.",
         "parameters": [
           {
@@ -164,7 +164,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/NvaVirtualApplianceSite"
+              "$ref": "#/definitions/NetworkVirtualApplianceSite"
             },
             "description": "Parameters supplied to the create or update Network Virtual Appliance Site operation."
           },
@@ -179,13 +179,13 @@
           "200": {
             "description": "Request successful. The operation returns the resulting Network Virtual Appliance Site resource.",
             "schema": {
-              "$ref": "#/definitions/NvaVirtualApplianceSite"
+              "$ref": "#/definitions/NetworkVirtualApplianceSite"
             }
           },
           "201": {
             "description": "Request received successfully. The operation returns the resulting Network Virtual Appliance Site resource.",
             "schema": {
-              "$ref": "#/definitions/NvaVirtualApplianceSite"
+              "$ref": "#/definitions/NetworkVirtualApplianceSite"
             }
           },
           "default": {
@@ -211,7 +211,7 @@
         "tags": [
           "VirtualApplianceSites"
         ],
-        "operationId": "NvaVirtualApplianceSites_ListByResourceGroup",
+        "operationId": "NetworkVirtualApplianceSites_ListByResourceGroup",
         "description": "Lists all Network Virtual Appliance Sites in a resource group.",
         "parameters": [
           {
@@ -232,7 +232,7 @@
           "200": {
             "description": "Success. The operation returns a list of Network Virtual Appliance site resources.",
             "schema": {
-              "$ref": "#/definitions/NvaVirtualApplianceSiteListResult"
+              "$ref": "#/definitions/NetworkVirtualApplianceSiteListResult"
             }
           },
           "default": {
@@ -244,7 +244,7 @@
         },
         "x-ms-examples": {
           "List all Network Virtual Appliance sites under a resource group": {
-            "$ref": "./examples/NetworkVirtualApplianceSiteList.json"
+            "$ref": "./examples/NetworkVirtualApplianceSiteListByResourceGroup.json"
           }
         },
         "x-ms-pageable": {
@@ -252,12 +252,12 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Network/networkVirtualAppliances": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Network/virtualApplianceSites": {
       "get": {
         "tags": [
           "NetworkVirtualAppliances"
         ],
-        "operationId": "NvaVirtualApplianceSites_List",
+        "operationId": "NetworkVirtualApplianceSites_List",
         "description": "Gets all Virtual Appliance sites in a subscription.",
         "parameters": [
           {
@@ -271,7 +271,7 @@
           "200": {
             "description": "Success. The operation returns a list of Network Appliance site resources.",
             "schema": {
-              "$ref": "#/definitions/NvaVirtualApplianceSiteListResult"
+              "$ref": "#/definitions/NetworkVirtualApplianceSiteListResult"
             }
           },
           "default": {
@@ -283,7 +283,7 @@
         },
         "x-ms-examples": {
           "List all Virtual Appliances sites for a given subscription": {
-            "$ref": "./examples/NetworkVirtualApplianceSiteList.json"
+            "$ref": "./examples/NetworkVirtualApplianceSiteListBySubscription.json"
           }
         },
         "x-ms-pageable": {
@@ -293,7 +293,7 @@
     }
   },
   "definitions": {
-    "NvaVirtualApplianceSite": {
+    "NetworkVirtualApplianceSite": {
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
@@ -324,6 +324,14 @@
     },
     "VirtualApplianceSiteProperties": {
       "properties": {
+        "networkVirtualApplianceList": {
+          "type": "array",
+          "readOnly": false,
+          "description": "List of Network Virtual Appliances under a specific virtual appliance site.",
+          "items": {
+            "$ref": "./network.json#/definitions/SubResource"
+          }
+        },
         "addressPrefix": {
           "type": "string",
           "readOnly": false,
@@ -342,7 +350,7 @@
       },
       "description": "Properties of the rule group."
     },
-    "Office365PolicyProperties": {
+    "SiteOffice365PolicyProperties": {
       "properties": {
         "breakOutCategories": {
           "readOnly": false,
@@ -372,12 +380,12 @@
       },
       "description": "Network Virtual Appliance Sku Properties."
     },
-    "NvaVirtualApplianceSiteListResult": {
+    "NetworkVirtualApplianceSiteListResult": {
       "properties": {
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/NvaVirtualApplianceSite"
+            "$ref": "#/definitions/NetworkVirtualApplianceSite"
           },
           "description": "List of Network Virtual Appliance sites."
         },
