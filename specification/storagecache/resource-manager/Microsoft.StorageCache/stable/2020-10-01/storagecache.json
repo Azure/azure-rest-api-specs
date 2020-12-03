@@ -1430,16 +1430,16 @@
       "properties": {
         "activeDirectory": {
           "$ref": "#/definitions/CacheActiveDirectorySettings",
-          "description": "Specifies the settings for joining the HPC Cache to an Active Directory domain."
+          "description": "Specifies settings for joining the HPC Cache to an Active Directory domain."
         },
         "usernameDownload": {
           "$ref": "#/definitions/CacheUsernameDownloadSettings",
-          "description": "Specifies the settings for Extended Groups. Extended Groups allows users to be members of more than 16 groups."
+          "description": "Specifies settings for Extended Groups. Extended Groups allows users to be members of more than 16 groups."
         }
       }
     },
     "CacheActiveDirectorySettings": {
-      "description": "Active Directory settings used to join a Cache to a domain.",
+      "description": "Active Directory settings used to join a cache to a domain.",
       "properties": {
         "primaryDnsIpAddress": {
           "description": "Primary DNS IP address used to resolve the Active Directory domain controller's fully qualified domain name.",
@@ -1453,17 +1453,17 @@
           "description": "The fully qualified domain name of the Active Directory domain controller.",
           "type": "string"
         },
-        "domainNetBios": {
+        "domainNetBiosName": {
           "description": "The Active Directory domain's NetBIOS name.",
           "type": "string"
         },
-        "smbServerName": {
-          "description": "The name (NetBIOS) used for the HPC Cache to join the Active Directory domain. Length must not be greater than 15 and chars must be from the [-0-9a-zA-Z] char class.",
+        "cacheNetBiosName": {
+          "description": "The NetBIOS name to assign to the HPC Cache when it joins the Active Directory domain as a server. Length must 1-15 characters from the class [-0-9a-zA-Z].",
           "pattern": "^[-0-9a-zA-Z]{1,15}$",
           "type": "string"
         },
         "domainJoined": {
-          "description": "This field indicates if the HPC Cache is joined to the Active Directory domain.",
+          "description": "True if the HPC Cache is joined to the Active Directory domain.",
           "type": "string",
           "readOnly": true,
           "enum": [
@@ -1477,10 +1477,10 @@
           }
         },
         "credentials": {
-          "description": "Active Directory admin or user credentials used to join the HPC Cache to a domain.",
+          "description": "Active Directory admin credentials used to join the HPC Cache to a domain.",
           "properties": {
             "username": {
-              "description": "User name of the Active Directory domain administrator. This value is stored encrypted and not returned on response.",
+              "description": "Username of the Active Directory domain administrator. This value is stored encrypted and not returned on response.",
               "type": "string"
             },
             "password": {
@@ -1498,21 +1498,21 @@
       "type": "object",
       "required": [
         "primaryDnsIpAddress",
-        "domainNetBios",
+        "domainNetBiosName",
         "domainName",
-        "smbServerName"
+        "cacheNetBiosName"
       ]
     },
     "CacheUsernameDownloadSettings": {
-      "description": "Settings for username and group download for Extended Groups.",
+      "description": "Settings for Extended Groups username and group download.",
       "type": "object",
       "properties": {
         "extendedGroupsEnabled": {
           "type": "boolean",
-          "description": "This indicates if Extended Groups is enabled."
+          "description": "Whether or not Extended Groups is enabled."
         },
         "usernameSource": {
-          "description": "This setting determines how the system gets username and group names for clients.",
+          "description": "This setting determines how the cache gets username and group names for clients.",
           "enum": [
             "AD",
             "LDAP",
@@ -1528,11 +1528,11 @@
         },
         "groupFileURI": {
           "type": "string",
-          "description": "The URI of the file containing the group information (in /etc/group file format). This field must be populated when 'usernameSource' is set to 'File'."
+          "description": "The URI of the file containing group information (in /etc/group file format). This field must be populated when 'usernameSource' is set to 'File'."
         },
         "userFileURI": {
           "type": "string",
-          "description": "The URI of the file containing the user information (in /etc/passwd file format). This field must be populated when 'usernameSource' is set to 'File'."
+          "description": "The URI of the file containing user information (in /etc/passwd file format). This field must be populated when 'usernameSource' is set to 'File'."
         },
         "ldapServer": {
           "type": "string",
@@ -1544,22 +1544,22 @@
         },
         "encryptLdapConnection": {
           "type": "boolean",
-          "description": "This indicates if the LDAP connection should be encrypted."
+          "description": "Whether or not the LDAP connection should be encrypted."
         },
         "requireValidCertificate": {
           "type": "boolean",
-          "description": "Determines if the certificates should be validated by a certificate authority. When true, caCertificateURI must be provided."
+          "description": "Determines if the certificates must be validated by a certificate authority. When true, caCertificateURI must be provided."
         },
         "autoDownloadCertificate": {
           "type": "boolean",
-          "description": "Determines if the certificate should be automatically downloaded. This applies to 'caCertificateURI' when 'requireValidCertificate' is true, or a self signed certificate otherwise."
+          "description": "Determines if the certificate should be automatically downloaded. This applies to 'caCertificateURI' only if 'requireValidCertificate' is true."
         },
         "caCertificateURI": {
           "type": "string",
           "description": "The URI of the CA certificate to validate the LDAP secure connection. This field must be populated when 'requireValidCertificate' is set to true."
         },
         "usernameDownloaded": {
-          "description": "Indicates if the HPC Cache has performed the username download successfully.",
+          "description": "Indicates whether or not the HPC Cache has performed the username download successfully.",
           "type": "string",
           "readOnly": true,
           "enum": [
@@ -1577,7 +1577,7 @@
           "properties": {
             "bindDn": {
               "type": "string",
-              "description": "The Bind distinguished name identity to be used in the secure LDAP connection. This value is stored encrypted and not returned on response."
+              "description": "The Bind Distinguished Name identity to be used in the secure LDAP connection. This value is stored encrypted and not returned on response."
             },
             "bindPassword": {
               "type": "string",
@@ -1605,10 +1605,10 @@
       }
     },
     "NfsAccessRule": {
-      "description": "Rule to place restrictions on portions of the NFS namespace being presented to clients.",
+      "description": "Rule to place restrictions on portions of the cache namespace being presented to clients.",
       "properties": {
         "scope": {
-          "description": "Scope applied to this rule.",
+          "description": "Scope for this rule. The scope and filter determine which clients match the rule.",
           "type": "string",
           "enum": [
             "default",
@@ -1621,7 +1621,7 @@
           }
         },
         "filter": {
-          "description": "Filter applied to this rule. The filter's format depends on its scope.  'default' scope is reserved for system use. 'network' is in CIDR format (e.g., 10.99.1.0/24) and 'host' is an IP address or fully qualified domain name.",
+          "description": "Filter applied to the scope for this rule. The filter's format depends on its scope. 'default' scope matches all clients and has no filter value. 'network' scope takes a filter in CIDR format (for example, 10.99.1.0/24). 'host' takes an IP address or fully qualified domain name as filter. If a client does not match any filter rule and there is no default rule, access is denied.",
           "type": "string"
         },
         "access": {
@@ -1642,7 +1642,7 @@
           "type": "boolean"
         },
         "submountAccess": {
-          "description": "Allow mounts below the junction.",
+          "description": "For the default policy, allow access to subdirectories under the root export. If this is set to no, clients can only mount the path '/'. If set to yes, clients can mount a deeper path, like '/a/b'.",
           "type": "boolean"
         },
         "rootSquash": {
