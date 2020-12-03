@@ -38,7 +38,7 @@
           "SparkBatch"
         ],
         "description": "List all spark batch jobs which are running under a particular spark pool.",
-        "operationId": "SparkBatch_GetSparkBatchJobs",
+        "operationId": "SparkBatch_ListSparkBatchJobs",
         "x-ms-examples": {
           "List all spark batch jobs": {
             "$ref": "./examples/SparkFrontend_SparkBatch_List.json"
@@ -115,7 +115,7 @@
             "description": "Livy compatible batch job request payload.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/sparkBatchJobOptions"
+              "$ref": "#/definitions/SparkBatchJobOptions"
             }
           }
         ],
@@ -213,7 +213,7 @@
           "SparkSession"
         ],
         "description": "List all spark sessions which are running under a particular spark pool.",
-        "operationId": "SparkSession_GetSparkSessions",
+        "operationId": "SparkSession_ListSparkSessions",
         "x-ms-examples": {
           "List all spark session jobs": {
             "$ref": "./examples/SparkFrontend_SparkSession_List.json"
@@ -597,29 +597,17 @@
     "SparkBatchJobCollection": {
       "type": "object",
       "properties": {
-        "from": {
-          "format": "int32",
-          "type": "integer",
-          "description": "The start index of fetched sessions."
-        },
-        "total": {
-          "format": "int32",
-          "type": "integer",
-          "description": "Number of sessions fetched."
-        },
         "sessions": {
+          "x-ms-client-name": "jobs",
           "uniqueItems": false,
           "type": "array",
           "description": "Batch list",
           "items": {
             "$ref": "#/definitions/SparkBatchJob"
-          }
+          },
+          "readonly": true
         }
       },
-      "required": [
-        "from",
-        "total"
-      ],
       "description": "Response for batch list operation."
     },
     "SparkBatchJob": {
@@ -979,7 +967,7 @@
         }
       }
     },
-    "sparkBatchJobOptions": {
+    "SparkBatchJobOptions": {
       "type": "object",
       "properties": {
         "tags": {
@@ -1072,26 +1060,15 @@
     "SparkSessionCollection": {
       "type": "object",
       "properties": {
-        "from": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "total": {
-          "format": "int32",
-          "type": "integer"
-        },
         "sessions": {
           "uniqueItems": false,
           "type": "array",
           "items": {
             "$ref": "#/definitions/SparkSession"
-          }
+          },
+          "readonly": true
         }
-      },
-      "required": [
-        "from",
-        "total"
-      ]
+      }
     },
     "SparkSession": {
       "type": "object",
@@ -1344,22 +1321,15 @@
     "SparkStatementCollection": {
       "type": "object",
       "properties": {
-        "total_statements": {
-          "x-ms-client-name": "total",
-          "format": "int32",
-          "type": "integer"
-        },
         "statements": {
           "uniqueItems": false,
           "type": "array",
           "items": {
             "$ref": "#/definitions/SparkStatement"
-          }
+          },
+          "readonly": true
         }
-      },
-      "required": [
-        "total_statements"
-      ]
+      }
     },
     "SparkStatement": {
       "type": "object",
@@ -1430,7 +1400,25 @@
           ],
           "x-ms-enum": {
             "name": "SparkStatementLanguageType",
-            "modelAsString": true
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Spark",
+                "value": "spark"
+              },
+              {
+                "name": "PySpark",
+                "value": "pyspark"
+              },
+              {
+                "name": "DotnetSpark",
+                "value": "dotnetspark"
+              },
+              {
+                "name": "Sql",
+                "value": "sql"
+              }
+            ]
           },
           "type": "string"
         }
@@ -1440,7 +1428,8 @@
       "type": "object",
       "properties": {
         "msg": {
-          "type": "string"
+          "type": "string",
+          "x-ms-client-name": "message"
         }
       }
     }
