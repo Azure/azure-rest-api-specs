@@ -8,7 +8,7 @@ batch:
 
 ``` yaml $(az) && $(AMCS)
 az:
-    extensions: data-collection
+    extensions: monitor-control-service
     parent-extension: monitor
     namespace: azure.mgmt.amcs
     package-name: azure-mgmt-amcs
@@ -27,12 +27,22 @@ This directory contains the CLI common model for the Azure Monitor Control Servi
 extension-mode: preview
 
 directive:
+
   - where:
-      group: monitor data-collection data-collection-rule
+      group: monitor monitor-control-service data-collection-rule
+    set:
+      group: monitor data-collection-rule
+  - where:
+      group: monitor data-collection-rule
     set:
       group: monitor data-collection rule
+
   - where:
-      group: monitor data-collection data-collection-rule-association
+      group: monitor monitor-control-service data-collection-rule-association
+    set:
+      group: monitor data-collection-rule-association
+  - where:
+      group: monitor data-collection-rule-association
     set:
       group: monitor data-collection rule-association
   - where:
