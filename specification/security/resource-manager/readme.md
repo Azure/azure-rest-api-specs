@@ -387,7 +387,7 @@ input-file:
 - Microsoft.Security/stable/2020-01-01/securitySolutionsReferenceData.json
 - Microsoft.Security/stable/2020-01-01/externalSecuritySolutions.json
 - Microsoft.Security/stable/2020-01-01/jitNetworkAccessPolicies.json
-- Microsoft.Security/stable/2020-01-01/serverVulnerabilityAssessments.json	
+- Microsoft.Security/stable/2020-01-01/serverVulnerabilityAssessments.json
 - Microsoft.Security/stable/2020-01-01/topologies.json
 - Microsoft.Security/stable/2020-01-01/secureScore.json
 
