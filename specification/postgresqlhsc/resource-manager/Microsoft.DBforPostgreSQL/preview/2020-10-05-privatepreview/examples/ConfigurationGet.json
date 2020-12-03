@@ -10,35 +10,23 @@
     "200": {
       "body": {
         "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestResourceGroup/providers/Microsoft.DBforPostgreSQL/serverGroupsv2/hsctestsg/configurations/array_nulls",
-        "name": "hsctestsgconfigs",
+        "name": "array_nulls",
         "type": "Microsoft.DBforPostgreSQL/serverGroupsv2/configurations",
         "properties": {
-          "serverRoleGroupConfigurations": [
+          "description": "Enable input of NULL elements in arrays.",
+          "defaultValue": "on",
+          "dataType": "Boolean",
+          "allowedValues": "on,off",
+          "serverRoleGroupConfigurationValues": [
             {
               "role": "Coordinator",
-              "configurations": [
-                {
-                  "value": "on",
-                  "description": "Enable input of NULL elements in arrays.",
-                  "defaultValue": "on",
-                  "dataType": "Boolean",
-                  "allowedValues": "on,off",
-                  "source": "system-default"
-                }
-              ]
+              "value": "on",
+              "source": "system-default"
             },
             {
               "role": "Worker",
-              "configurations": [
-                {
-                  "value": "on",
-                  "description": "Enable input of NULL elements in arrays.",
-                  "defaultValue": "on",
-                  "dataType": "Boolean",
-                  "allowedValues": "on,off",
-                  "source": "system-default"
-                }
-              ]
+              "value": "off",
+              "source": "user-override"
             }
           ]
         }

@@ -451,7 +451,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/ConfigurationList"
+              "$ref": "#/definitions/ServerConfigurationListResult"
             }
           },
           "default": {
@@ -467,59 +467,6 @@
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBForPostgreSql/serverGroupsv2/{serverGroupName}/configurations": {
-      "put": {
-        "description": "Updates configurations of a server group",
-        "tags": [
-          "Configurations"
-        ],
-        "operationId": "Configurations_BatchUpdate",
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "Update configurations of the server group": {
-            "$ref": "./examples/ConfigurationBatchUpdate.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ServerGroupNameParameter"
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ServerGroupConfiguration"
-            },
-            "description": "The required parameters for updating a server group configurations."
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/ServerGroupConfiguration"
-            }
-          },
-          "202": {
-            "description": "Accepted"
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        }
-      },
       "get": {
         "description": "List all the configurations of a server group.",
         "tags": [
@@ -549,7 +496,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/ServerGroupConfiguration"
+              "$ref": "#/definitions/ServerGroupConfigurationListResult"
             }
           },
           "default": {
@@ -558,12 +505,15 @@
               "$ref": "#/definitions/CloudError"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBForPostgreSql/serverGroupsv2/{serverGroupName}/configurations/{configurationName}": {
       "put": {
-        "description": "Updates single configuration of servers in a server group",
+        "description": "Updates configuration of server role groups in a server group",
         "tags": [
           "Configurations"
         ],
@@ -1755,52 +1705,88 @@
     "ServerGroupConfigurationProperties": {
       "description": "The properties of server group configuration.",
       "properties": {
-        "serverRoleGroupConfigurations": {
-          "type": "array",
-          "description": "The list of server role group configurations.",
-          "items": {
-            "$ref": "#/definitions/ServerRoleGroupConfiguration"
-          },
-          "uniqueItems": true
-        }
-      }
-    },
-    "ServerRoleGroupConfiguration": {
-      "description": "Represents server role group configurations.",
-      "properties": {
-        "role": {
-          "$ref": "#/definitions/ServerRole",
-          "description": "The role of servers in the server role group."
+        "description": {
+          "type": "string",
+          "description": "Description of the configuration.",
+          "readOnly": true
         },
-        "configurations": {
+        "defaultValue": {
+          "type": "string",
+          "description": "Default value of the configuration.",
+          "readOnly": true
+        },
+        "dataType": {
+          "type": "string",
+          "description": "Data type of the configuration.",
+          "enum": [
+            "Boolean",
+            "Numeric",
+            "Integer",
+            "Enumeration"
+          ],
+          "x-ms-enum": {
+            "name": "ConfigurationDataType",
+            "modelAsString": true
+          },
+          "readOnly": true
+        },
+        "allowedValues": {
+          "type": "string",
+          "description": "Allowed values of the configuration.",
+          "readOnly": true
+        },
+        "serverRoleGroupConfigurationValues": {
           "type": "array",
-          "description": "The list of configurations.",
+          "description": "The list of server role group configuration values.",
           "items": {
-            "$ref": "#/definitions/ConfigurationPropertiesWithName"
+            "$ref": "#/definitions/ServerRoleGroupConfigurationValue"
           },
           "uniqueItems": true
         }
       },
       "required": [
-        "role",
-        "configurations"
+        "serverRoleGroupConfigurationValues"
       ]
     },
-    "ConfigurationPropertiesWithName": {
-      "description": "The properties of a configuration with name.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/ConfigurationProperties"
-        }
-      ],
+    "ServerRoleGroupConfigurationValue": {
+      "description": "Represents server role group configuration value.",
       "properties": {
-        "name": {
+        "role": {
+          "$ref": "#/definitions/ServerRole",
+          "description": "The role of servers in the server role group."
+        },
+        "value": {
           "type": "string",
-          "description": "Name of the configuration."
+          "description": "Value of the configuration."
+        },
+        "source": {
+          "type": "string",
+          "description": "Source of the configuration."
+        }
+      },
+      "required": [
+        "role",
+        "value"
+      ]
+    },
+    "ServerGroupConfigurationListResult": {
+      "description": "A list of server group configurations.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The list of server group configurations.",
+          "items": {
+            "$ref": "#/definitions/ServerGroupConfiguration"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Link to retrieve next page of results.",
+          "readOnly": true
         }
       }
     },
-    "ConfigurationProperties": {
+    "ServerConfigurationProperties": {
       "description": "The properties of a configuration.",
       "properties": {
         "value": {
@@ -1846,7 +1832,7 @@
         "value"
       ]
     },
-    "Configuration": {
+    "ServerConfiguration": {
       "description": "Represents a configuration.",
       "allOf": [
         {
@@ -1855,20 +1841,20 @@
       ],
       "properties": {
         "properties": {
-          "$ref": "#/definitions/ConfigurationProperties",
+          "$ref": "#/definitions/ServerConfigurationProperties",
           "description": "The properties of a configuration.",
           "x-ms-client-flatten": true
         }
       }
     },
-    "ConfigurationList": {
+    "ServerConfigurationListResult": {
       "description": "A list of server configurations.",
       "properties": {
         "value": {
           "type": "array",
           "description": "The list of server configurations.",
           "items": {
-            "$ref": "#/definitions/Configuration"
+            "$ref": "#/definitions/ServerConfiguration"
           }
         },
         "nextLink": {
