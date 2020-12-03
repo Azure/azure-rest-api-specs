@@ -232,7 +232,7 @@
           "200": {
             "description": "Success. The operation returns a list of Network Virtual Appliance site resources.",
             "schema": {
-              "$ref": "#/definitions/NetworkVirtualApplianceSiteListResult"
+              "$ref": "#/definitions/VirtualApplianceSiteListResult"
             }
           },
           "default": {
@@ -271,7 +271,7 @@
           "200": {
             "description": "Success. The operation returns a list of Network Appliance site resources.",
             "schema": {
-              "$ref": "#/definitions/NetworkVirtualApplianceSiteListResult"
+              "$ref": "#/definitions/VirtualApplianceSiteListResult"
             }
           },
           "default": {
@@ -297,7 +297,7 @@
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/VirtualApplianceSiteProperties",
+          "$ref": "#/definitions/NetworkVirtualApplianceSiteProperties",
           "description": "The properties of the Virtual Appliance Sites."
         },
         "name": {
@@ -322,7 +322,7 @@
       ],
       "description": "Virtual Appliance Site resource."
     },
-    "VirtualApplianceSiteProperties": {
+    "NetworkVirtualApplianceSiteProperties": {
       "properties": {
         "networkVirtualApplianceList": {
           "type": "array",
@@ -340,7 +340,7 @@
         "o365Policy": {
           "readOnly": false,
           "description": "Office 365 Policy.",
-          "$ref": "#/definitions/Office365PolicyProperties"
+          "$ref": "#/definitions/SiteOffice365PolicyProperties"
         },
         "provisioningState": {
           "description": "The provisioning state of the resource.",
@@ -350,17 +350,17 @@
       },
       "description": "Properties of the rule group."
     },
-    "Office365PolicyProperties": {
+    "SiteOffice365PolicyProperties": {
       "properties": {
         "breakOutCategories": {
           "readOnly": false,
           "description": "Office 365 breakout categories.",
-          "$ref": "#/definitions/BreakOutCategoryPolicies"
+          "$ref": "#/definitions/SiteBreakOutCategoryPolicies"
         }
       },
-      "description": "Network Virtual Appliance Sku Properties."
+      "description": "Network Virtual Appliance Site office 365 policy."
     },
-    "BreakOutCategoryPolicies": {
+    "SiteBreakOutCategoryPolicies": {
       "properties": {
         "allow": {
           "type": "boolean",
@@ -380,7 +380,7 @@
       },
       "description": "Network Virtual Appliance Sku Properties."
     },
-    "NetworkVirtualApplianceSiteListResult": {
+    "VirtualApplianceSiteListResult": {
       "properties": {
         "value": {
           "type": "array",
