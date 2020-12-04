@@ -2629,7 +2629,7 @@
           }
         ]
       },
-      "description": "Defines the names of all normalizers supported by Azure Cognitive Search.",
+      "description": "Defines the names of all built-in normalizers supported by Azure Cognitive Search.",
       "externalDocs": {
         "url": "TODO t-roblee: link URL"
       }
@@ -2931,7 +2931,7 @@
           "externalDocs": {
             "url": "TODO: t-roblee Update with website link"
           },
-          "description": "The name of the normalizer. It must only contain letters, digits, spaces, dashes or underscores, can only start and end with alphanumeric characters, and is limited to 128 characters. It cannot end in '.microsoft' nor '.lucene', nor be named 'standard', 'lowercase', 'uppercase', or 'elision'."
+          "description": "The name of the normalizer. It must only contain letters, digits, spaces, dashes or underscores, can only start and end with alphanumeric characters, and is limited to 128 characters. It cannot end in '.microsoft' nor '.lucene', nor be named 'asciifolding', 'standard', 'lowercase', 'uppercase', or 'elision'."
         },
         "tokenFilters": {
           "type": "array",
@@ -6610,7 +6610,7 @@
             "url": "TODO t-roblee link URL"
           },
           "$ref": "#/definitions/CustomNormalizer",
-          "description": "TODO t-roblee: update description. The name of the analyzer to use for the field. This option can be used only with searchable fields and it can't be set together with either searchAnalyzer or indexAnalyzer. Once the analyzer is chosen, it cannot be changed for the field. Must be null for complex fields.",
+          "description": "The name of the normalizer to use for the field. This option can be used only with fields with filterable, sortable, or facetable enabled. Once the normalizer is chosen, it cannot be changed for the field. Must be null for complex fields.",
           "x-nullable": true
         },
         "synonymMaps": {
