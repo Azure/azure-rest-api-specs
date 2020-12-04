@@ -16,6 +16,7 @@ credential-scopes: https://management.azure.com/.default
 package-name: azure-mgmt-attestation
 package-version: 0.1.0
 ```
+
 ``` yaml
 batch:
   - tag: package-2018-09-01
@@ -29,7 +30,7 @@ clear-output-folder: false
 perform-load: false
 ```
 
-### Tag: package-2018-09-01
+### Tag: package-2020-10-01
 ``` yaml $(tag) == 'package-2020-10-01'
 clear-output-folder: true
 output-folder: $(python-sdks-folder)/attestation/azure-mgmt-attestation/azure/mgmt/attestation/v2020_10_01
