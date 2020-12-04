@@ -1242,7 +1242,8 @@
       "x-ms-enum": {
         "name": "ServerState",
         "modelAsString": true
-      }
+      },
+      "readOnly": true
     },
     "ServerHaState": {
       "type": "string",
@@ -1259,7 +1260,8 @@
       "x-ms-enum": {
         "name": "ServerHaState",
         "modelAsString": true
-      }
+      },
+      "readOnly": true
     },
     "ServerRole": {
       "type": "string",
@@ -1460,7 +1462,8 @@
         },
         "nextLink": {
           "description": "The link used to get the next page of operations.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         }
       },
       "description": "A list of server groups."
@@ -1761,7 +1764,8 @@
         },
         "source": {
           "type": "string",
-          "description": "Source of the configuration."
+          "description": "Source of the configuration.",
+          "readOnly": true
         }
       },
       "required": [
@@ -1795,7 +1799,8 @@
         },
         "source": {
           "type": "string",
-          "description": "Source of the configuration."
+          "description": "Source of the configuration.",
+          "readOnly": true
         },
         "description": {
           "type": "string",
@@ -2039,7 +2044,8 @@
         },
         "nextLink": {
           "description": "URL client should use to fetch the next page (per server side paging).\r\nIt's null for now, added for future use.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         }
       }
     },
