@@ -19,9 +19,11 @@ These settings apply only when `--track2` is specified on the command line.
 ``` yaml $(track2)
 azure-arm: true
 license-header: MICROSOFT_MIT_NO_VERSION
-package-name: azure-mgmt-eventhub
+package-name: azure-mgmt-monitor
 no-namespace-folders: true
 python-base-folder: monitor/azure-mgmt-monitor/azure/mgmt/monitor
+modelerfour:
+  lenient-model-deduplication: true
 ```
 
 ### Python multi-api
