@@ -211,7 +211,7 @@ directive:
 ```
 ### Tag: package-2020-10-01-preview
 
-These settings apply only when `--tag=package-2020-10-01-preview` is specified on the command line.
+These settings apply only when `--tag=package-2020-10-01-preview` is specified on the command line. Please do not include preview cloudService.json in the stable tags.
 
 ``` yaml $(tag) == 'package-2020-10-01-preview'
 input-file:
@@ -219,8 +219,7 @@ input-file:
 - Microsoft.Compute/stable/2020-06-01/runCommands.json
 - Microsoft.Compute/stable/2019-04-01/skus.json
 - Microsoft.Compute/stable/2020-06-30/disk.json
-- Microsoft.Compute/preview/2020-09-30/gallery.json
-- Microsoft.Compute/preview/2020-09-30/sharedGallery.json
+- Microsoft.Compute/stable/2019-12-01/gallery.json
 - Microsoft.ContainerService/stable/2017-01-31/containerService.json
 - Microsoft.Compute/preview/2020-10-01-preview/cloudService.json
 ```
