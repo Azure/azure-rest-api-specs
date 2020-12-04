@@ -771,6 +771,18 @@
             "name": "isManaged",
             "modelAsString": true
           }
+        },
+        "canAccess": {
+          "description": "Customer concent to allow services maintain enterprise credentials to access enterprise machines.",
+          "enum": [
+            "True",
+            "False"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "canAccess",
+            "modelAsString": true
+          }
         }
       },
       "description": "Describes the properties of a IT Digital Twin."
@@ -939,16 +951,31 @@
             "AD",
             "CS",
             "DNS",
-            "TestMachine"
+            "TestVM"
           ],
           "type": "string",
           "x-ms-enum": {
-            "name": "role",
+            "name": "assetRole",
+            "modelAsString": true
+          }
+        },
+        "assetStatus": {
+          "description": "Status of an asset",
+          "enum": [
+            "Unknown",
+            "Available",
+            "Unavailable",
+            "Testing"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "assetStatus",
             "modelAsString": true
           }
         }
+
       },
-      "description": "Describes the properties of a IT Digital Twin Asset."
+      "description": "Describes the properties of an digitalTwins/assets."
     },
     "Asset": {
       "properties": {
