@@ -22,6 +22,8 @@ license-header: MICROSOFT_MIT_NO_VERSION
 package-name: azure-mgmt-monitor
 no-namespace-folders: true
 python-base-folder: monitor/azure-mgmt-monitor/azure/mgmt/monitor
+modelerfour:
+  lenient-model-deduplication: true
 ```
 
 ### Python multi-api
