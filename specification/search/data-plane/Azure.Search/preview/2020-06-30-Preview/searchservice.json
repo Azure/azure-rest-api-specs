@@ -2589,7 +2589,7 @@
         "url": "https://docs.microsoft.com/rest/api/searchservice/Custom-analyzers-in-Azure-Search"
       }
     },
-    "NormalizerName": {
+    "LexicalNormalizerName": {
       "type": "string",
       "enum": [
         "asciifolding",
@@ -2599,7 +2599,7 @@
         "uppercase"
       ],
       "x-ms-enum": {
-        "name": "NormalizerName",
+        "name": "LexicalNormalizerName",
         "modelAsString": true,
         "values": [
           {
@@ -2918,9 +2918,8 @@
         "url": "http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/core/StopAnalyzer.html"
       }
     },
-    "CustomNormalizer": {
+    "LexicalNormalizer": {
       "discriminator": "@odata.type",
-      "x-ms-discriminator-value": "#Microsoft.Azure.Search.CustomNormalizer",
       "properties": {
         "@odata.type": {
           "type": "string",
@@ -2929,10 +2928,25 @@
         "name": {
           "type": "string",
           "externalDocs": {
-            "url": "https://aka.ms/azs-custom-normalizers"
+            "url": "https://aka.ms/azs-normalizers"
           },
           "description": "The name of the normalizer. It must only contain letters, digits, spaces, dashes or underscores, can only start and end with alphanumeric characters, and is limited to 128 characters. It cannot end in '.microsoft' nor '.lucene', nor be named 'asciifolding', 'standard', 'lowercase', 'uppercase', or 'elision'."
-        },
+        }
+      },
+      "required": [
+        "@odata.type",
+        "name"
+      ],
+      "description": "Base type for normalizers."
+    },
+    "CustomNormalizer": {
+      "x-ms-discriminator-value": "#Microsoft.Azure.Search.CustomNormalizer",
+      "allOf": [
+        {
+          "$ref": "#/definitions/LexicalNormalizer"
+        }
+      ],
+      "properties": {
         "tokenFilters": {
           "type": "array",
           "items": {
@@ -2950,11 +2964,10 @@
           "description": "A list of character filters used to prepare input text before it is processed. For instance, they can replace certain characters or symbols. The filters are run in the order in which they are listed."
         }
       },
-      "required": [
-        "@odata.type",
-        "name"
-      ],
-      "description": "Allows you to configure normalization for filterable, sortable, and facetable fields, which by default operate with strict matching. This is a user-defined configuration consisting of at least one or more filters, which modify the token that is stored."
+      "description": "Allows you to configure normalization for filterable, sortable, and facetable fields, which by default operate with strict matching. This is a user-defined configuration consisting of at least one or more filters, which modify the token that is stored.",
+      "externalDocs": {
+        "url": "https://aka.ms/azs-custom-normalizers"
+      }
     },
     "LexicalTokenizer": {
       "discriminator": "@odata.type",
@@ -6609,7 +6622,7 @@
           "externalDocs": {
             "url": "https://aka.ms/azs-normalizers"
           },
-          "$ref": "#/definitions/NormalizerName",
+          "$ref": "#/definitions/LexicalNormalizerName",
           "description": "The name of the normalizer to use for the field. This option can be used only with fields with filterable, sortable, or facetable enabled. Once the normalizer is chosen, it cannot be changed for the field. Must be null for complex fields.",
           "x-nullable": true
         },
@@ -7100,7 +7113,7 @@
         "normalizers": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/CustomNormalizer"
+            "$ref": "#/definitions/LexicalNormalizer"
           },
           "description": "The normalizers for the index.",
           "externalDocs": {
