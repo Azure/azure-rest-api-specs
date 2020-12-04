@@ -25,9 +25,7 @@ output-folder: $(azureresourceschema-folder)/schemas
 # all the input files in this apiVersion
 input-file:
   - Microsoft.KeyVault/preview/2020-04-01-preview/managedHsm.json
-  - Microsoft.KeyVault/preview/2020-04-01-preview/keyvault.json
   - Microsoft.KeyVault/preview/2020-04-01-preview/providers.json
-  - Microsoft.KeyVault/preview/2020-04-01-preview/secrets.json
 
 ```
 
@@ -40,6 +38,8 @@ output-folder: $(azureresourceschema-folder)/schemas
 input-file:
   - Microsoft.KeyVault/stable/2019-09-01/keyvault.json
   - Microsoft.KeyVault/stable/2019-09-01/providers.json
+  - Microsoft.KeyVault/stable/2019-09-01/keys.json
+  - Microsoft.KeyVault/stable/2019-09-01/secrets.json
 
 ```
 
@@ -52,6 +52,7 @@ output-folder: $(azureresourceschema-folder)/schemas
 input-file:
   - Microsoft.KeyVault/preview/2018-02-14-preview/keyvault.json
   - Microsoft.KeyVault/preview/2018-02-14-preview/providers.json
+  - Microsoft.KeyVault/preview/2018-02-14-preview/secrets.json
 
 ```
 
@@ -64,6 +65,7 @@ output-folder: $(azureresourceschema-folder)/schemas
 input-file:
   - Microsoft.KeyVault/stable/2018-02-14/keyvault.json
   - Microsoft.KeyVault/stable/2018-02-14/providers.json
+  - Microsoft.KeyVault/stable/2018-02-14/secrets.json
 
 ```
 
@@ -76,6 +78,7 @@ output-folder: $(azureresourceschema-folder)/schemas
 input-file:
   - Microsoft.KeyVault/stable/2016-10-01/keyvault.json
   - Microsoft.KeyVault/stable/2016-10-01/providers.json
+  - Microsoft.KeyVault/stable/2016-10-01/secrets.json
 
 ```
 
