@@ -707,6 +707,10 @@ directive:
   - suppress: TopLevelResourcesListByResourceGroup
     from: policySetDefinitions.json
     reason: Policy set definitions are a proxy resource that is only usable on subscriptions or management groups
+  - suppress: DescriptionAndTitleMissing
+    where: $.definitions.CloudError.properties.error
+    from: policySetDefinitions.json
+    reason: I believe this is a false positive because the error reference contains the description and title
 ```
 
 ---
