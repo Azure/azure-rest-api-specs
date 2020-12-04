@@ -9,7 +9,6 @@
     "galleryImageVersion": {
       "properties": {
         "publishingProfile": {
-          "excludeFromLatest": false,
           "targetRegions": [
             {
               "name": "West US",
@@ -22,10 +21,11 @@
             }
           ]
         },
-        "replicaCount": 1,
-        "excludeFromLatest": false,
-        "publishedDate": "2018-01-01T00:00:00Z",
-        "storageAccountType": "Standard_LRS"
+        "storageProfile": {
+          "source": {
+            "id": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Compute/images/{imageName}"
+          }
+        }
       }
     }
   },
@@ -58,7 +58,6 @@
               }
             ],
             "replicaCount": 1,
-            "excludeFromLatest": false,
             "publishedDate": "2018-01-01T00:00:00Z",
             "storageAccountType": "Standard_LRS"
           },
