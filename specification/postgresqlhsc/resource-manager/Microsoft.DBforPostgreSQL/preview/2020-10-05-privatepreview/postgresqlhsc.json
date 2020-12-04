@@ -512,7 +512,7 @@
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBForPostgreSql/serverGroupsv2/{serverGroupName}/configurations/{configurationName}": {
-      "put": {
+      "patch": {
         "description": "Updates configuration of server role groups in a server group",
         "tags": [
           "Configurations"
@@ -1713,11 +1713,6 @@
           "description": "Description of the configuration.",
           "readOnly": true
         },
-        "defaultValue": {
-          "type": "string",
-          "description": "Default value of the configuration.",
-          "readOnly": true
-        },
         "dataType": {
           "type": "string",
           "description": "Data type of the configuration.",
@@ -1761,6 +1756,11 @@
         "value": {
           "type": "string",
           "description": "Value of the configuration."
+        },
+        "defaultValue": {
+          "type": "string",
+          "description": "Default value of the configuration.",
+          "readOnly": true
         },
         "source": {
           "type": "string",
