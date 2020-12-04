@@ -298,6 +298,25 @@
     }
   },
   "definitions": {
+    "Error": {
+      "properties": {
+        "error": {
+          "description": "Object to be thrown in case of an unsuccessful response",
+          "type": "object",
+          "properties": {
+            "code": {
+              "type": "string",
+              "description": "Brief error code"
+            },
+            "message": {
+              "type": "string",
+              "description": "Longer message explaining the details of the error"
+            }
+          }
+        }
+      },
+      "description": "Object to be thrown in case of an unsuccessful response"
+    },
     "DenyAssignmentFilter": {
       "properties": {
         "denyAssignmentName": {

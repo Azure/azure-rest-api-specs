@@ -135,6 +135,12 @@
             "schema": {
               "$ref": "#/definitions/RoleAssignmentListResult"
             }
+          },
+          "400": {
+            "description": "Bad Request - Indicates the request has missing information and can not be completed",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
           }
         },
         "x-ms-pageable": {
@@ -181,6 +187,12 @@
             "schema": {
               "$ref": "#/definitions/RoleAssignment"
             }
+          },
+          "204": {
+            "description": "Deleted - Indicates correct deletion without returning additional info"
+          },
+          "412": {
+            "description": "Precondition Failed"
           }
         },
         "x-ms-examples": {
@@ -230,6 +242,18 @@
             "schema": {
               "$ref": "#/definitions/RoleAssignment"
             }
+          },
+          "400": {
+            "description": "Bad Request - Indicates the request has missing information and can not be completed",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "409": {
+            "description": "Conflict - indicates that the request could not be completed due to a conflict with the current state of the target resource",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
           }
         },
         "x-ms-examples": {
@@ -270,6 +294,15 @@
             "schema": {
               "$ref": "#/definitions/RoleAssignment"
             }
+          },
+          "400": {
+            "description": "Bad Request - Indicates the request has missing information and can not be completed",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "404": {
+            "description": "Not Found - Indicates the specified role has not been found"
           }
         },
         "x-ms-examples": {
@@ -417,6 +450,12 @@
             "schema": {
               "$ref": "#/definitions/RoleAssignmentListResult"
             }
+          },
+          "400": {
+            "description": "Bad Request - Indicates the request has missing information and can not be completed",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
           }
         },
         "x-ms-pageable": {
@@ -462,6 +501,12 @@
             "description": "OK - Returns an array of role assignments.",
             "schema": {
               "$ref": "#/definitions/RoleAssignmentListResult"
+            }
+          },
+          "400": {
+            "description": "Bad Request - Indicates the request has missing information and can not be completed",
+            "schema": {
+              "$ref": "#/definitions/Error"
             }
           }
         },
@@ -540,6 +585,28 @@
         "conditionVersion": {
           "type": "string",
           "description": "Version of the condition. Currently accepted value is '2.0'"
+        },
+        "createdOn": {
+          "type": "string",
+          "description": "Time it was created",
+          "format": "date-time"
+        },
+        "updatedOn": {
+          "type": "string",
+          "description": "Time it was updated",
+          "format": "date-time"
+        },
+        "createdBy": {
+          "type": "string",
+          "description": "Id of the user who created the assignment"
+        },
+        "updatedBy": {
+          "type": "string",
+          "description": "Id of the user who updated the assignment"
+        },
+        "delegatedManagedIdentityResourceId": {
+          "type": "string",
+          "description": "Id of the delegated managed identity resource"
         }
       },
       "description": "Role assignment properties with scope."
@@ -650,6 +717,25 @@
         "properties"
       ],
       "description": "Role assignment create parameters."
+    },
+    "Error": {
+      "properties": {
+        "error": {
+          "description": "Object to be thrown in case of an unsuccessful response",
+          "type": "object",
+          "properties": {
+            "code": {
+              "type": "string",
+              "description": "Brief error code"
+            },
+            "message": {
+              "type": "string",
+              "description": "Longer message explaining the details of the error"
+            }
+          }
+        }
+      },
+      "description": "Object to be thrown in case of an unsuccessful response"
     }
   },
   "parameters": {
