@@ -82,6 +82,10 @@
               "$ref": "#/definitions/SparkBatchJobCollection"
             }
           }
+        },
+        "x-ms-pageable": {
+          "itemName": "sessions",
+          "nextLinkName": null
         }
       },
       "post": {
@@ -257,6 +261,10 @@
               "$ref": "#/definitions/SparkSessionCollection"
             }
           }
+        },
+        "x-ms-pageable": {
+          "itemName": "sessions",
+          "nextLinkName": null
         }
       },
       "post": {
@@ -423,7 +431,7 @@
           "SparkSession"
         ],
         "description": "Gets a list of statements within a spark session.",
-        "operationId": "SparkSession_GetSparkStatements",
+        "operationId": "SparkSession_ListSparkStatements",
         "x-ms-examples": {
           "Gets a list of statements within a spark session.": {
             "$ref": "./examples/SparkFrontend_SparkSession_ListStatements.json"
@@ -452,6 +460,10 @@
               "$ref": "#/definitions/SparkStatementCollection"
             }
           }
+        },
+        "x-ms-pageable": {
+          "itemName": "statements",
+          "nextLinkName": null
         }
       },
       "post": {
@@ -597,17 +609,27 @@
     "SparkBatchJobCollection": {
       "type": "object",
       "properties": {
+        "from": {	
+          "format": "int32",	
+          "type": "integer"	
+        },	
+        "total": {	
+          "format": "int32",	
+          "type": "integer"	
+        },
         "sessions": {
-          "x-ms-client-name": "jobs",
           "uniqueItems": false,
           "type": "array",
           "description": "Batch list",
           "items": {
             "$ref": "#/definitions/SparkBatchJob"
-          },
-          "readonly": true
+          }
         }
       },
+      "required": [	
+        "from",	
+        "total"	
+      ],
       "description": "Response for batch list operation."
     },
     "SparkBatchJob": {
@@ -1060,15 +1082,28 @@
     "SparkSessionCollection": {
       "type": "object",
       "properties": {
+        "from": {	
+          "format": "int32",	
+          "type": "integer",	
+          "description": "The start index of fetched sessions."	
+        },	
+        "total": {	
+          "format": "int32",	
+          "type": "integer",	
+          "description": "Number of sessions fetched."	
+        },
         "sessions": {
           "uniqueItems": false,
           "type": "array",
           "items": {
             "$ref": "#/definitions/SparkSession"
-          },
-          "readonly": true
+          }
         }
-      }
+      },
+      "required": [	
+        "from",	
+        "total"	
+      ]
     },
     "SparkSession": {
       "type": "object",
@@ -1321,15 +1356,22 @@
     "SparkStatementCollection": {
       "type": "object",
       "properties": {
+        "total_statements": {	
+          "x-ms-client-name": "total",	
+          "format": "int32",	
+          "type": "integer"	
+        },
         "statements": {
           "uniqueItems": false,
           "type": "array",
           "items": {
             "$ref": "#/definitions/SparkStatement"
-          },
-          "readonly": true
+          }
         }
-      }
+      },
+      "required": [	
+        "total_statements"	
+      ]
     },
     "SparkStatement": {
       "type": "object",
