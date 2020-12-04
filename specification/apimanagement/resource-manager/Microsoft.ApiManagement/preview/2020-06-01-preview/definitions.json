@@ -5901,6 +5901,103 @@
           "description": "UTC Timestamp when the service was soft-deleted. The date conforms to the following format: yyyy-MM-ddTHH:mm:ssZ as specified by the ISO 8601 standard."
         }
       }
+    },
+    "PortalRevisionCollection": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PortalRevisionContract"
+          },
+          "description": "Collection of portal revisions.",
+          "readOnly": true
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Next page link, if any.",
+          "readOnly": true
+        }
+      },
+      "description": "Paged list of portal revisions."
+    },
+    "PortalRevisionContract": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/PortalRevisionContractProperties",
+          "description": "Properties of the portal revisions."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./apimanagement.json#/definitions/Resource"
+        }
+      ],
+      "description": "Portal revisions contract details."
+    },
+    "PortalRevisionContractProperties": {
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "Portal revision description.",
+          "maxLength": 2000
+        },
+        "statusDetails": {
+          "type": "string",
+          "description": "Portal revision publishing status details.",
+          "maxLength": 2000,
+          "readOnly": true
+        },
+        "status": {
+          "type": "string",
+          "description": "Portal revision publishing status",
+          "enum": [
+            "pending",
+            "publishing",
+            "completed",
+            "failed"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "portalRevisionStatus",
+            "values": [
+              {
+                "value": "pending",
+                "description": "Portal revision publishing is pending"
+              },
+              {
+                "value": "publishing",
+                "description": "Portal revision is publishing"
+              },
+              {
+                "value": "completed",
+                "description": "Portal revision publishing completed"
+              },
+              {
+                "value": "failed",
+                "description": "Portal revision publishing failed"
+              }
+            ]
+          },
+          "readOnly": true
+        },
+        "isCurrent": {
+          "type": "boolean",
+          "description": "Indicates if the Portal Revision is public."
+        },
+        "createdDateTime": {
+          "type": "string",
+          "readOnly": true,
+          "format": "date-time",
+          "description": "Portal revision creation date and time."
+        },
+        "updatedDateTime": {
+          "type": "string",
+          "readOnly": true,
+          "format": "date-time",
+          "description": "Last updated date and time."
+        }
+      }
     }
   },
   "parameters": {}
