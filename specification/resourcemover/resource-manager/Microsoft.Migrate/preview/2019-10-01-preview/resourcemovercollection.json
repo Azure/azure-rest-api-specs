@@ -610,6 +610,63 @@
             "$ref": "./examples/UnresolvedDependencies_Get.json"
           }
         }
+      },
+      "post": {
+        "tags": [
+          "MoveCollections"
+        ],
+        "operationId": "MoveCollections_UnresolvedDependencies",
+        "description": "Computes the unresolved dependencies.",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/moveCollectionName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/UnresolvedDependenciesRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/OperationStatus"
+            }
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "MoveCollections_UnresolvedDependencies": {
+            "$ref": "./examples/MoveCollections_UnresolvedDependencies.json"
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/moveCollections/{moveCollectionName}/bulkRemove": {
@@ -1391,6 +1448,24 @@
         },
         "moveResourceInputType": {
           "$ref": "#/definitions/MoveResourceInputType"
+        }
+      }
+    },
+    "UnresolvedDependenciesRequest": {
+      "description": "Defines the request body for fetching unresolved dependencies.",
+      "type": "object",
+      "properties": {
+        "dependenciesLevel": {
+          "description": "Gets or sets a value indicating whether to fetch direct or descendant unresolved dependencies",
+          "type": "string",
+          "enum": [
+            "Direct",
+            "Descendant"
+          ],
+          "x-ms-enum": {
+            "name": "DependenciesLevel",
+            "modelAsString": true
+          }
         }
       }
     },
