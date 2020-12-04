@@ -51,7 +51,7 @@
           }
         ],
         "tags": [
-          "Cluster"
+          "ManagedCluster"
         ],
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
@@ -327,6 +327,9 @@
           "204": {
             "description": "The resource was not found."
           },
+          "200": {
+            "description": "The operation completed successfully."
+          },
           "default": {
             "description": "The detailed error response.",
             "schema": {
@@ -374,7 +377,7 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.ServiceFabric/managedclusters/locations/{location}/osType/{osType}/clusterVersions": {
       "get": {
-        "operationId": "ClusterVersions_ListByOS",
+        "operationId": "ManagedClusterVersions_ListByOS",
         "summary": "Gets the list of Service Fabric cluster code versions available for the specified OS type.",
         "description": "Gets all available code versions for Service Fabric cluster resources by OS type.",
         "parameters": [
@@ -393,11 +396,11 @@
         ],
         "x-ms-examples": {
           "List cluster versions by OS": {
-            "$ref": "./examples/ClusterVersionsListByOS_example.json"
+            "$ref": "./examples/ManagedClusterVersionsListByOS_example.json"
           }
         },
         "tags": [
-          "ClusterVersion"
+          "ManagedClusterVersion"
         ],
         "responses": {
           "200": {
@@ -405,9 +408,15 @@
             "schema": {
               "type": "array",
               "items": {
-                "$ref": "#/definitions/ClusterVersionDetails"
+                "$ref": "#/definitions/ManagedClusterVersionDetails"
               },
               "description": "The list of available Service Fabric runtime versions."
+            }
+          },
+          "default": {
+            "description": "The detailed error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
             }
           }
         }
@@ -416,26 +425,21 @@
   },
   "definitions": {
     "AzureActiveDirectory": {
-      "required": [
-        "tenantId",
-        "clusterApplication",
-        "clientApplication"
-      ],
       "properties": {
         "tenantId": {
-          "type": "boolean",
+          "type": "string",
           "description": "Azure active directory tenant id."
         },
         "clusterApplication": {
           "type": "string",
-          "description": "Azure active directory cluster application."
+          "description": "Azure active directory cluster application id."
         },
         "clientApplication": {
           "type": "string",
-          "description": "Azure active directory client application."
+          "description": "Azure active directory client application id."
         }
       },
-      "description": "Azure active directory."
+      "description": "The settings to enable AAD authentication on the cluster."
     },
     "ClientCertificate": {
       "required": [
@@ -456,7 +460,7 @@
         },
         "issuerThumbprint": {
           "type": "string",
-          "description": "Issuer thumbprint for the certificate. Its only use ehn CommonName is used."
+          "description": "Issuer thumbprint for the certificate. Its only use CommonName is used."
         }
       },
       "description": "Client Certificate definition."
@@ -487,7 +491,7 @@
         "Ready"
       ]
     },
-    "ClusterVersionDetails": {
+    "ManagedClusterVersionDetails": {
       "properties": {
         "msiVersion": {
           "type": "string",
@@ -514,12 +518,14 @@
       "properties": {
         "frontendPort": {
           "type": "integer",
+          "format": "int32",
           "description": "The port for the external endpoint. Port numbers for each rule must be unique within the Load Balancer. Acceptable values are between 1 and 65534.",
           "minimum": 1,
           "maximum": 65534
         },
         "backendPort": {
           "type": "integer",
+          "format": "int32",
           "description": "The port used for internal connections on the endpoint. Acceptable values are between 1 and 65535.",
           "minimum": 1,
           "maximum": 65534
@@ -560,9 +566,6 @@
       "type": "object",
       "description": "The manged cluster resource\n",
       "allOf": [
-        {
-          "description": "The managed cluster resource properties"
-        },
         {
           "$ref": "#/definitions/Resource"
         },
@@ -629,11 +632,13 @@
         },
         "clientConnectionPort": {
           "type": "integer",
+          "format": "int32",
           "description": "The port used for client connections to the cluster.",
           "default": 19000
         },
         "httpGatewayConnectionPort": {
           "type": "integer",
+          "format": "int32",
           "description": "The port used for http connections to the cluster.",
           "default": 19080
         },
@@ -649,38 +654,33 @@
         },
         "loadBalancingRules": {
           "type": "array",
-          "$ref": "#/definitions/LoadBalancingRule",
-          "description": "Describes a load balancing rule."
+          "items": {
+            "$ref": "#/definitions/LoadBalancingRule"
+          },
+          "description": "Describes load balancing rules."
         },
         "clients": {
           "type": "array",
-          "$ref": "#/definitions/ClientCertificate",
+          "items": {
+            "$ref": "#/definitions/ClientCertificate"
+          },
           "description": "client certificates for the cluster."
         },
         "azureActiveDirectory": {
-          "type": "array",
           "$ref": "#/definitions/AzureActiveDirectory",
           "description": "Azure active directory."
         },
         "fabricSettings": {
           "type": "array",
-          "$ref": "#/definitions/SettingsSectionDescription",
+          "items": {
+            "$ref": "#/definitions/SettingsSectionDescription"
+          },
           "description": "The list of custom fabric settings to configure the cluster."
         },
         "provisioningState": {
-          "type": "string",
+          "$ref": "#/definitions/ManagedResourceProvisioningState",
           "description": "The provisioning state of the managed cluster resource.",
-          "readOnly": true,
-          "enum": [
-            "Updating",
-            "Succeeded",
-            "Failed",
-            "Canceled"
-          ],
-          "x-ms-enum": {
-            "name": "ProvisioningState",
-            "modelAsString": true
-          }
+          "readOnly": true
         },
         "clusterCodeVersion": {
           "type": "string",
@@ -693,10 +693,6 @@
         "clusterUpgradeDescription": {
           "$ref": "#/definitions/ClusterUpgradePolicy",
           "description": "Describes the policy used when upgrading the cluster."
-        },
-        "reverseProxyEndpointPort": {
-          "type": "integer",
-          "description": "The endpoint used by reverse proxy."
         }
       },
       "description": "Describes the managed cluster resource properties."
@@ -705,30 +701,37 @@
       "properties": {
         "clientConnectionPort": {
           "type": "integer",
+          "format": "int32",
           "description": "The port used for client connections to the cluster."
         },
         "httpGatewayConnectionPort": {
           "type": "integer",
+          "format": "int32",
           "description": "The port used for http connections to the cluster."
         },
         "loadBalancingRules": {
           "type": "array",
-          "$ref": "#/definitions/LoadBalancingRule",
+          "items": {
+            "$ref": "#/definitions/LoadBalancingRule"
+          },
           "description": "Describes a load balancing rule."
         },
         "clients": {
           "type": "array",
-          "$ref": "#/definitions/ClientCertificate",
+          "items": {
+            "$ref": "#/definitions/ClientCertificate"
+          },
           "description": "client certificates for the cluster."
         },
         "azureActiveDirectory": {
-          "type": "array",
           "$ref": "#/definitions/AzureActiveDirectory",
           "description": "Azure active directory."
         },
         "fabricSettings": {
           "type": "array",
-          "$ref": "#/definitions/SettingsSectionDescription",
+          "items": {
+            "$ref": "#/definitions/SettingsSectionDescription"
+          },
           "description": "The list of custom fabric settings to configure the cluster."
         },
         "clusterCodeVersion": {
@@ -742,10 +745,6 @@
         "clusterUpgradeDescription": {
           "$ref": "#/definitions/ClusterUpgradePolicy",
           "description": "Describes the policy used when upgrading the cluster."
-        },
-        "reverseProxyEndpointPort": {
-          "type": "integer",
-          "description": "The endpoint used by reverse proxy."
         }
       },
       "description": "Describes the managed cluster resource properties."
@@ -774,7 +773,7 @@
       "properties": {
         "name": {
           "$ref": "#/definitions/SkuName",
-          "description": "Sku Name. Basic will hav a minimum of 3 seed nodes and Standard a minimum of 5. Basic only allows 1 node type."
+          "description": "Sku Name. Basic will have a minimum of 3 seed nodes and Standard a minimum of 5. Basic only allows 1 node type."
         }
       },
       "description": "Sku definition"
@@ -977,6 +976,22 @@
         }
       },
       "description": "The error details."
+    },
+    "ManagedResourceProvisioningState": {
+      "type": "string",
+      "description": "The provisioning state of the managed resource.",
+      "enum": [
+        "None",
+        "Creating",
+        "Created",
+        "Updating",
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Deleting",
+        "Deleted",
+        "Other"
+      ]
     },
     "OperationListResult": {
       "properties": {

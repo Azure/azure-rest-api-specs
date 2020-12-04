@@ -523,6 +523,9 @@
           "204": {
             "description": "The resource was not found."
           },
+          "200": {
+            "description": "The operation completed successfully."
+          },
           "default": {
             "description": "The detailed error response.",
             "schema": {
@@ -537,10 +540,7 @@
     "NodeType": {
       "allOf": [
         {
-          "description": "The node type definition"
-        },
-        {
-          "$ref": "#/definitions/ProxyResource"
+          "$ref": "#/definitions/ManagedProxyResource"
         }
       ],
       "properties": {
@@ -575,7 +575,7 @@
       "required": [
         "isPrimary",
         "vmInstanceCount",
-        "diskSizeInGB"
+        "dataDiskSizeGB"
       ],
       "properties": {
         "isPrimary": {
@@ -584,12 +584,14 @@
         },
         "vmInstanceCount": {
           "type": "integer",
-          "description": "The number of nodes in the node type. This count should match the capacity property in the corresponding VirtualMachineScaleSet resource.",
+          "format": "int32",
+          "description": "The number of nodes in the node type.",
           "minimum": 1,
           "maximum": 2147483647
         },
-        "diskSizeInGB": {
+        "dataDiskSizeGB": {
           "type": "integer",
+          "format": "int32",
           "description": "Disk size for each vm in the node type in GBs."
         },
         "placementProperties": {
@@ -651,6 +653,11 @@
           "items": {
             "$ref": "#/definitions/VMSSExtension"
           }
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ManagedResourceProvisioningState",
+          "description": "The provisioning state of the managed cluster resource.",
+          "readOnly": true
         }
       },
       "description": "Describes a node type in the cluster, each node type represents sub set of nodes in the cluster."
@@ -676,6 +683,7 @@
       "properties": {
         "vmInstanceCount": {
           "type": "integer",
+          "format": "int32",
           "description": "The number of nodes in the node type. This count should match the capacity property in the corresponding VirtualMachineScaleSet resource.",
           "minimum": 1,
           "maximum": 2147483647
@@ -740,7 +748,7 @@
       },
       "description": "Node type update request"
     },
-    "ProxyResource": {
+    "ManagedProxyResource": {
       "properties": {
         "id": {
           "type": "string",
@@ -771,6 +779,22 @@
       },
       "description": "The resource model definition for proxy-only resource.",
       "x-ms-azure-resource": true
+    },
+    "ManagedResourceProvisioningState": {
+      "type": "string",
+      "description": "The provisioning state of the managed resource.",
+      "enum": [
+        "None",
+        "Creating",
+        "Created",
+        "Updating",
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Deleting",
+        "Deleted",
+        "Other"
+      ]
     },
     "SubResource": {
       "properties": {
@@ -844,6 +868,10 @@
         "typeHandlerVersion"
       ],
       "properties": {
+        "forceUpdateTag": {
+          "type": "string",
+          "description": "If a value is provided and is different from the previous value, the extension handler will be forced to update even if the extension configuration has not changed."
+        },
         "publisher": {
           "type": "string",
           "description": "The name of the extension handler publisher."
@@ -860,10 +888,6 @@
           "type": "boolean",
           "description": "Indicates whether the extension should use a newer minor version if one is available at deployment time. Once deployed, however, the extension will not upgrade minor versions unless redeployed, even with this property set to true."
         },
-        "enableAutomaticUpgrade": {
-          "type": "boolean",
-          "description": "Indicates if the extension will upgrade automatically."
-        },
         "settings": {
           "type": "object",
           "description": "Json formatted public settings for the extension."
@@ -876,6 +900,13 @@
           "readOnly": true,
           "type": "string",
           "description": "The provisioning state, which only appears in the response."
+        },
+        "provisionAfterExtensions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Collection of extension names after which this extension needs to be provisioned."
         }
       },
       "description": "Describes the properties of a Virtual Machine Scale Set Extension."

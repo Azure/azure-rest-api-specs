@@ -26,6 +26,7 @@ These are the global settings for the hybridnetwork.
 
 ```yaml
 openapi-type: arm
+openapi-subtype: rpaas
 tag: package-2020-01-01-preview
 ```
 
@@ -36,11 +37,12 @@ These settings apply only when `--tag=package-2020-01-01-preview` is specified o
 ```yaml $(tag) == 'package-2020-01-01-preview'
 input-file:
   - Microsoft.HybridNetwork/preview/2020-01-01-preview/common.json
-  - Microsoft.HybridNetwork/preview/2020-01-01-preview/virtualNetworkFunction.json
+  - Microsoft.HybridNetwork/preview/2020-01-01-preview/networkFunction.json
   - Microsoft.HybridNetwork/preview/2020-01-01-preview/device.json
-  - Microsoft.HybridNetwork/preview/2020-01-01-preview/operations.json
+  - Microsoft.HybridNetwork/preview/2020-01-01-preview/operation.json
   - Microsoft.HybridNetwork/preview/2020-01-01-preview/vendor.json
-  - Microsoft.HybridNetwork/preview/2020-01-01-preview/virtualNetworkFunctionVendors.json
+  - Microsoft.HybridNetwork/preview/2020-01-01-preview/networkFunctionVendor.json
+  - Microsoft.HybridNetwork/preview/2020-01-01-preview/vendorNetworkFunction.json
 ```
 
 # Code Generation
@@ -59,6 +61,9 @@ swagger-to-sdk:
   - repo: azure-sdk-for-ruby
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_hybridnetwork']
+  - repo: azure-resource-manager-schemas
+    after_scripts:
+      - node sdkauto_afterscript.js hybridnetwork/resource-manager
 ```
 
 ## Go
@@ -80,3 +85,7 @@ See configuration in [readme.typescript.md](./readme.typescript.md)
 ## CSharp
 
 See configuration in [readme.csharp.md](./readme.csharp.md)
+
+## AzureResourceSchema
+
+See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
