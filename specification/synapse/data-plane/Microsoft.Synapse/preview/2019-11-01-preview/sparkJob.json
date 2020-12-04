@@ -609,13 +609,15 @@
     "SparkBatchJobCollection": {
       "type": "object",
       "properties": {
-        "from": {	
-          "format": "int32",	
-          "type": "integer"	
-        },	
-        "total": {	
-          "format": "int32",	
-          "type": "integer"	
+        "from": {
+          "format": "int32",
+          "type": "integer",
+          "description": "The start index of fetched sessions."
+        },
+        "total": {
+          "format": "int32",
+          "type": "integer",
+          "description": "Number of sessions fetched."
         },
         "sessions": {
           "uniqueItems": false,
@@ -626,9 +628,9 @@
           }
         }
       },
-      "required": [	
-        "from",	
-        "total"	
+      "required": [
+        "from",
+        "total"
       ],
       "description": "Response for batch list operation."
     },
@@ -1082,15 +1084,13 @@
     "SparkSessionCollection": {
       "type": "object",
       "properties": {
-        "from": {	
-          "format": "int32",	
-          "type": "integer",	
-          "description": "The start index of fetched sessions."	
+        "from": {
+          "format": "int32",
+          "type": "integer",
         },	
-        "total": {	
-          "format": "int32",	
-          "type": "integer",	
-          "description": "Number of sessions fetched."	
+        "total": {
+          "format": "int32",
+          "type": "integer",
         },
         "sessions": {
           "uniqueItems": false,
@@ -1100,9 +1100,9 @@
           }
         }
       },
-      "required": [	
-        "from",	
-        "total"	
+      "required": [
+        "from",
+        "total"
       ]
     },
     "SparkSession": {
@@ -1369,8 +1369,8 @@
           }
         }
       },
-      "required": [	
-        "total_statements"	
+      "required": [
+        "total_statements"
       ]
     },
     "SparkStatement": {
