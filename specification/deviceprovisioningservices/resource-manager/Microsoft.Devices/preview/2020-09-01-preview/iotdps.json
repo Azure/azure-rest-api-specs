@@ -1926,6 +1926,7 @@
     },
     "ArmIdentity": {
       "type": "object",
+      "description": "The set of ARM identities associated with the IoT DPS resource.",
       "properties": {
         "principalId": {
           "description": "Principal Id",
@@ -1938,11 +1939,12 @@
           "readOnly": true
         },
         "identityType": {
-          "description": "Identity type. Only allowed values are SystemAssigned and UserAssigned. Comma separated if both for ex: SystemAssigned,UserAssigned",
+          "description": "Identity type. Only allowed values are SystemAssigned and UserAssigned. Comma separated if both for ex: SystemAssigned,UserAssigned.",
           "type": "string"
         },
         "userAssignedIdentities": {
           "type": "object",
+          "description": "The set of UserAssigned identities associated with the IoT DPS resource.",
           "additionalProperties": {
             "$ref": "#/definitions/ArmUserIdentity"
           }
@@ -1951,12 +1953,15 @@
     },
     "ArmUserIdentity": {
       "type": "object",
+      "description": "The ARM UserAssigned identity information",
       "properties": {
         "principalId": {
+          "description": "Principal Id",
           "type": "string",
           "readOnly": true
         },
         "clientId": {
+          "description": "Client Id",
           "type": "string",
           "readOnly": true
         }
