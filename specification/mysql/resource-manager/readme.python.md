@@ -30,14 +30,14 @@ Generate all API versions currently shipped for this package
 ```yaml !$(track2)
 batch:
   - tag: package-2020-01-01
-  - tag: package-2020-07-01-privatepreview
+  - tag: package-2020-07-01-preview
 ```
 
 ```yaml $(track2)
 clear-output-folder: true
 batch:
   - tag: package-2020-01-01
-  - tag: package-2020-07-01-privatepreview
+  - tag: package-2020-07-01-preview
 ```
 
 ### Tag: package-2020-01-01 and python
@@ -53,12 +53,12 @@ python:
   output-folder: $(python-sdks-folder)/rdbms/azure-mgmt-rdbms/azure/mgmt/rdbms/mysql
 ```
 
-### Tag: package-2020-07-01-privatepreview and python
+### Tag: package-2020-07-01-preview and python
 
-These settings apply only when `--tag=package-2020-07-01-privatepreview --python` is specified on the command line.
+These settings apply only when `--tag=package-2020-07-01-preview --python` is specified on the command line.
 Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
 
-``` yaml $(tag) == 'package-2020-07-01-privatepreview' && $(python)
+``` yaml $(tag) == 'package-2020-07-01-preview' && $(python)
 namespace: azure.mgmt.rdbms.mysql_flexibleservers
 output-folder: $(python-sdks-folder)/rdbms/azure-mgmt-rdbms/azure/mgmt/rdbms/mysql_flexibleservers
 python:
