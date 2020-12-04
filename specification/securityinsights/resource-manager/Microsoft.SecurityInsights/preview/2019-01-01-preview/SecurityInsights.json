@@ -1712,6 +1712,9 @@
           "Get a TI Taxii data connector.": {
             "$ref": "./examples/dataConnectors/GetThreatIntelligenceTaxiiById.json"
           },
+          "Get a Microfoft ThreatIntelligence data connector.": {
+            "$ref": "./examples/dataConnectors/GetMicrosoftThreatIntelligenceById.json"
+          },
           "Get a MCAS data connector.": {
             "$ref": "./examples/dataConnectors/GetMicrosoftCloudAppSecurityById.json"
           },
@@ -1775,6 +1778,9 @@
         "x-ms-examples": {
           "Creates or updates an Office365 data connector.": {
             "$ref": "./examples/dataConnectors/CreateOfficeDataConnetor.json"
+          },
+          "Creates or updates an Microsoft ThreatIntelligence data connector.": {
+            "$ref": "./examples/dataConnectors/CreateMicrosoftThreatIntelligenceDataConnector.json"
           }
         },
         "tags": [
@@ -5671,7 +5677,8 @@
             "Office365",
             "AmazonWebServicesCloudTrail",
             "AzureAdvancedThreatProtection",
-            "MicrosoftDefenderAdvancedThreatProtection"
+            "MicrosoftDefenderAdvancedThreatProtection",
+            "MicrosoftThreatIntelligence"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -5704,6 +5711,9 @@
               },
               {
                 "value": "MicrosoftDefenderAdvancedThreatProtection"
+              },
+              {
+                "value": "MicrosoftThreatIntelligence"
               }
             ]
           }
@@ -8842,6 +8852,111 @@
         }
       ],
       "description": "Threat Intelligence taxii client data connector properties.",
+      "type": "object"
+    },
+    "MsTiDataConnector": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataConnector"
+        }
+      ],
+      "description": "Represents threat intelligence taxii data connector.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/MsTiDataConnectorProperties",
+          "description": "Microsoft Threat Intelligence data connector properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object",
+      "x-ms-discriminator-value": "MicrosoftThreatIntelligence"
+    },
+    "MsTiDataConnectorDataTypes": {
+      "description": "The available data types for Microsoft Threat Intelligence data connector.",
+      "properties": {
+        "bingPhishing": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/MsTiDataConnectorDataType"
+            }
+          ],
+          "description": "Bing Safety Phishing URL data type connection.",
+          "type": "object"
+        },
+        "msticEndpointThreats": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/MsTiDataConnectorDataType"
+            }
+          ],
+          "description": "Microsoft Emerging Threat Feed data type connection.",
+          "type": "object"
+        }
+      },
+      "type": "object"
+    },
+    "MsTiDataConnectorDataType": {
+      "description": "Common field for data type in Microsoft ThreatIntelligence data connector.",
+      "properties": {
+        "state": {
+          "description": "Describe whether this data type connection is enabled or not.",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "DataTypeState"
+          }
+        },
+        "lookbackPeriod": {
+          "description": "The lookback period for the feed to be imported.",
+          "format": "date-time",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "MsTiDataConnectorProperties": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataConnectorTenantId"
+        }
+      ],
+      "description": "Microsoft Threat Intelligence data connector properties.",
+      "properties": {
+        "dataTypes": {
+          "$ref": "#/definitions/MsTiDataConnectorDataTypes",
+          "description": "The available data types for the connector."
+        }
+      },
+      "type": "object"
+    },
+    "MsTiCheckRequirements": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataConnectorsCheckRequirements"
+        }
+      ],
+      "description": "Represents Microsoft threat intelligence connector requirements check request.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/MsTiCheckRequirementsProperties",
+          "description": "Microsoft Threat Intelligence requirements check properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object",
+      "x-ms-discriminator-value": "MicrosoftThreatIntelligence"
+    },
+    "MsTiCheckRequirementsProperties": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataConnectorTenantId"
+        }
+      ],
+      "description": "Microsoft Threat Intelligence data connector required properties.",
       "type": "object"
     },
     "ThreatIntelligence": {
