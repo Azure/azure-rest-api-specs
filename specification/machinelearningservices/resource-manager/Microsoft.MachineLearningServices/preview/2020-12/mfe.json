@@ -9,6 +9,559 @@
     "https"
   ],
   "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/batchEndpoints/{endpointName}/deployments/{deploymentName}": {
+      "put": {
+        "tags": [
+          "BatchDeployment"
+        ],
+        "summary": "Creates a batch inference deployment.",
+        "operationId": "BatchDeployments_CreateOrUpdate",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/workspaceNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "endpointName",
+            "description": "Inference endpoint name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "deploymentName",
+            "description": "The identifier for the Batch inference deployment.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "api-version",
+            "description": "Version of Azure Machine Learning resource provider API.",
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Batch inference deployment definition object.",
+            "schema": {
+              "$ref": "#/definitions/BatchDeploymentTrackedResource"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/BatchDeploymentTrackedResource"
+            }
+          },
+          "201": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/BatchDeploymentTrackedResource"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CreateOrUpdate Batch Deployment.": {
+            "$ref": "./examples/BatchDeployment/createOrUpdate.json"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "BatchDeployment"
+        ],
+        "summary": "Gets a batch inference deployment by id.",
+        "operationId": "BatchDeployments_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/workspaceNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "endpointName",
+            "description": "Endpoint name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "deploymentName",
+            "description": "The identifier for the Batch deployments.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "api-version",
+            "description": "Version of Azure Machine Learning resource provider API.",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/BatchDeploymentTrackedResource"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Batch Deployment.": {
+            "$ref": "./examples/BatchDeployment/get.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "BatchDeployment"
+        ],
+        "summary": "Delete Batch Inference deployment.",
+        "operationId": "BatchDeployments_Delete",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/workspaceNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "endpointName",
+            "description": "Endpoint name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "deploymentName",
+            "description": "Inference deployment identifier.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "api-version",
+            "description": "API version.",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Success"
+          },
+          "204": {
+            "description": "Success"
+          }
+        },
+        "x-ms-examples": {
+          "Delete Batch Deployment.": {
+            "$ref": "./examples/BatchDeployment/delete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/batchEndpoints/{endpointName}/deployments": {
+      "get": {
+        "tags": [
+          "BatchDeployment"
+        ],
+        "summary": "Lists Batch inference deployments in the workspace.",
+        "operationId": "BatchDeployments_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/workspaceNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "endpointName",
+            "description": "Endpoint name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "api-version",
+            "description": "Version of Azure Machine Learning resource provider API.",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$skipToken",
+            "description": "Continuation token for pagination.",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/BatchDeploymentTrackedResourceArmPaginatedResult"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Batch Deployment.": {
+            "$ref": "./examples/BatchDeployment/list.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/batchEndpoints/{endpointName}": {
+      "put": {
+        "tags": [
+          "BatchEndpoint"
+        ],
+        "summary": "Creates a batch inference endpoint.",
+        "operationId": "BatchEndpoints_CreateOrUpdate",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/workspaceNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "endpointName",
+            "description": "Name for the Batch inference endpoint.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "api-version",
+            "description": "Version of Azure Machine Learning resource provider API.",
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Batch inference endpoint definition object.",
+            "schema": {
+              "$ref": "#/definitions/BatchEndpointTrackedResource"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/BatchEndpointTrackedResource"
+            }
+          },
+          "201": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/BatchEndpointTrackedResource"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CreateOrUpdate Batch Endpoint.": {
+            "$ref": "./examples/BatchEndpoint/createOrUpdate.json"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "BatchEndpoint"
+        ],
+        "summary": "Gets a batch inference endpoint by name.",
+        "operationId": "BatchEndpoints_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/workspaceNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "endpointName",
+            "description": "Name for the Batch Endpoint.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "api-version",
+            "description": "Version of Azure Machine Learning resource provider API.",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/BatchEndpointTrackedResource"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Batch Endpoint.": {
+            "$ref": "./examples/BatchEndpoint/get.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "BatchEndpoint"
+        ],
+        "summary": "Delete Batch Inference Endpoint.",
+        "operationId": "BatchEndpoints_Delete",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/workspaceNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "endpointName",
+            "description": "Inference Endpoint name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "api-version",
+            "description": "API version.",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Success"
+          },
+          "204": {
+            "description": "Success"
+          }
+        },
+        "x-ms-examples": {
+          "Delete Batch Endpoint.": {
+            "$ref": "./examples/BatchEndpoint/delete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/batchEndpoints": {
+      "get": {
+        "tags": [
+          "BatchEndpoint"
+        ],
+        "summary": "Lists Batch inference endpoint in the workspace.",
+        "operationId": "BatchEndpoints_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/workspaceNameParameter"
+          },
+          {
+            "in": "query",
+            "name": "api-version",
+            "description": "Version of Azure Machine Learning resource provider API.",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$skipToken",
+            "description": "Continuation token for pagination.",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/BatchEndpointTrackedResourceArmPaginatedResult"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Batch Endpoint.": {
+            "$ref": "./examples/BatchEndpoint/list.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/batchEndpoints/{endpointName}/listkeys": {
+      "post": {
+        "tags": [
+          "BatchEndpoint"
+        ],
+        "summary": "Lists batch Inference Endpoint keys.",
+        "operationId": "BatchEndpoints_ListKeys",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/workspaceNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "endpointName",
+            "description": "Inference Endpoint name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "api-version",
+            "description": "API version.",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/InferenceEndpointKeysTrackedResource"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ListKeys Batch Endpoint.": {
+            "$ref": "./examples/BatchEndpoint/listKeys.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/codes/{name}": {
       "put": {
         "tags": [
@@ -24,6 +577,15 @@
         ],
         "parameters": [
           {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/workspaceNameParameter"
+          },
+          {
             "in": "path",
             "name": "name",
             "description": "Container name.",
@@ -31,16 +593,10 @@
             "type": "string"
           },
           {
-            "$ref": "machineLearningServices.json#/parameters/APIVersionParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+            "in": "query",
+            "name": "api-version",
+            "description": "API version.",
+            "type": "string"
           },
           {
             "in": "body",
@@ -55,7 +611,7 @@
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "machineLearningServices.json#/definitions/MachineLearningServiceError"
+              "$ref": "#/definitions/ErrorResponse"
             }
           },
           "200": {
@@ -88,6 +644,15 @@
         ],
         "parameters": [
           {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/workspaceNameParameter"
+          },
+          {
             "in": "path",
             "name": "name",
             "description": "Container name.",
@@ -95,23 +660,17 @@
             "type": "string"
           },
           {
-            "$ref": "machineLearningServices.json#/parameters/APIVersionParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+            "in": "query",
+            "name": "api-version",
+            "description": "API version.",
+            "type": "string"
           }
         ],
         "responses": {
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "machineLearningServices.json#/definitions/MachineLearningServiceError"
+              "$ref": "#/definitions/ErrorResponse"
             }
           },
           "200": {
@@ -138,6 +697,15 @@
         ],
         "parameters": [
           {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/workspaceNameParameter"
+          },
+          {
             "in": "path",
             "name": "name",
             "description": "Container name.",
@@ -145,23 +713,17 @@
             "type": "string"
           },
           {
-            "$ref": "machineLearningServices.json#/parameters/APIVersionParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+            "in": "query",
+            "name": "api-version",
+            "description": "API version.",
+            "type": "string"
           }
         ],
         "responses": {
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "machineLearningServices.json#/definitions/MachineLearningServiceError"
+              "$ref": "#/definitions/ErrorResponse"
             }
           },
           "200": {
@@ -190,26 +752,32 @@
         ],
         "parameters": [
           {
-            "$ref": "machineLearningServices.json#/parameters/APIVersionParameter"
+            "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
-            "$ref": "machineLearningServices.json#/parameters/PaginationParameter"
+            "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
+            "$ref": "#/parameters/workspaceNameParameter"
           },
           {
-            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
+            "in": "query",
+            "name": "api-version",
+            "description": "API version.",
+            "type": "string"
           },
           {
-            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+            "in": "query",
+            "name": "$skipToken",
+            "description": "Opaque token to retrieve the next page of results from a previous query.",
+            "type": "string"
           }
         ],
         "responses": {
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "machineLearningServices.json#/definitions/MachineLearningServiceError"
+              "$ref": "#/definitions/ErrorResponse"
             }
           },
           "200": {
@@ -244,6 +812,15 @@
         ],
         "parameters": [
           {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/workspaceNameParameter"
+          },
+          {
             "in": "path",
             "name": "name",
             "description": "Container name.",
@@ -258,16 +835,10 @@
             "type": "string"
           },
           {
-            "$ref": "machineLearningServices.json#/parameters/APIVersionParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+            "in": "query",
+            "name": "api-version",
+            "description": "API version.",
+            "type": "string"
           },
           {
             "in": "body",
@@ -282,7 +853,7 @@
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "machineLearningServices.json#/definitions/MachineLearningServiceError"
+              "$ref": "#/definitions/ErrorResponse"
             }
           },
           "200": {
@@ -315,6 +886,15 @@
         ],
         "parameters": [
           {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/workspaceNameParameter"
+          },
+          {
             "in": "path",
             "name": "name",
             "description": "Container name.",
@@ -329,23 +909,17 @@
             "type": "string"
           },
           {
-            "$ref": "machineLearningServices.json#/parameters/APIVersionParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+            "in": "query",
+            "name": "api-version",
+            "description": "API version.",
+            "type": "string"
           }
         ],
         "responses": {
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "machineLearningServices.json#/definitions/MachineLearningServiceError"
+              "$ref": "#/definitions/ErrorResponse"
             }
           },
           "200": {
@@ -372,6 +946,15 @@
         ],
         "parameters": [
           {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/workspaceNameParameter"
+          },
+          {
             "in": "path",
             "name": "name",
             "description": "Container name.",
@@ -386,23 +969,17 @@
             "type": "string"
           },
           {
-            "$ref": "machineLearningServices.json#/parameters/APIVersionParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+            "in": "query",
+            "name": "api-version",
+            "description": "API version.",
+            "type": "string"
           }
         ],
         "responses": {
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "machineLearningServices.json#/definitions/MachineLearningServiceError"
+              "$ref": "#/definitions/ErrorResponse"
             }
           },
           "200": {
@@ -431,6 +1008,15 @@
         ],
         "parameters": [
           {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/workspaceNameParameter"
+          },
+          {
             "in": "path",
             "name": "name",
             "description": "Container name.",
@@ -438,26 +1024,23 @@
             "type": "string"
           },
           {
-            "$ref": "machineLearningServices.json#/parameters/APIVersionParameter"
+            "in": "query",
+            "name": "api-version",
+            "description": "API version.",
+            "type": "string"
           },
           {
-            "$ref": "machineLearningServices.json#/parameters/PaginationParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+            "in": "query",
+            "name": "$skipToken",
+            "description": "Opaque token to retrieve the next page of results from a previous query.",
+            "type": "string"
           }
         ],
         "responses": {
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "machineLearningServices.json#/definitions/MachineLearningServiceError"
+              "$ref": "#/definitions/ErrorResponse"
             }
           },
           "200": {
@@ -492,6 +1075,15 @@
         ],
         "parameters": [
           {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/workspaceNameParameter"
+          },
+          {
             "in": "path",
             "name": "name",
             "description": "Container name.",
@@ -499,16 +1091,10 @@
             "type": "string"
           },
           {
-            "$ref": "machineLearningServices.json#/parameters/APIVersionParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+            "in": "query",
+            "name": "api-version",
+            "description": "API version.",
+            "type": "string"
           },
           {
             "in": "body",
@@ -523,7 +1109,7 @@
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "machineLearningServices.json#/definitions/MachineLearningServiceError"
+              "$ref": "#/definitions/ErrorResponse"
             }
           },
           "200": {
@@ -556,6 +1142,15 @@
         ],
         "parameters": [
           {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/workspaceNameParameter"
+          },
+          {
             "in": "path",
             "name": "name",
             "description": "Container name.",
@@ -563,23 +1158,17 @@
             "type": "string"
           },
           {
-            "$ref": "machineLearningServices.json#/parameters/APIVersionParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+            "in": "query",
+            "name": "api-version",
+            "description": "API version.",
+            "type": "string"
           }
         ],
         "responses": {
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "machineLearningServices.json#/definitions/MachineLearningServiceError"
+              "$ref": "#/definitions/ErrorResponse"
             }
           },
           "200": {
@@ -606,6 +1195,15 @@
         ],
         "parameters": [
           {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/workspaceNameParameter"
+          },
+          {
             "in": "path",
             "name": "name",
             "description": "Container name.",
@@ -613,23 +1211,17 @@
             "type": "string"
           },
           {
-            "$ref": "machineLearningServices.json#/parameters/APIVersionParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+            "in": "query",
+            "name": "api-version",
+            "description": "API version.",
+            "type": "string"
           }
         ],
         "responses": {
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "machineLearningServices.json#/definitions/MachineLearningServiceError"
+              "$ref": "#/definitions/ErrorResponse"
             }
           },
           "200": {
@@ -658,26 +1250,32 @@
         ],
         "parameters": [
           {
-            "$ref": "machineLearningServices.json#/parameters/APIVersionParameter"
+            "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
-            "$ref": "machineLearningServices.json#/parameters/PaginationParameter"
+            "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
+            "$ref": "#/parameters/workspaceNameParameter"
           },
           {
-            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
+            "in": "query",
+            "name": "api-version",
+            "description": "API version.",
+            "type": "string"
           },
           {
-            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+            "in": "query",
+            "name": "$skipToken",
+            "description": "Opaque token to retrieve the next page of results from a previous query.",
+            "type": "string"
           }
         ],
         "responses": {
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "machineLearningServices.json#/definitions/MachineLearningServiceError"
+              "$ref": "#/definitions/ErrorResponse"
             }
           },
           "200": {
@@ -712,6 +1310,15 @@
         ],
         "parameters": [
           {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/workspaceNameParameter"
+          },
+          {
             "in": "path",
             "name": "name",
             "description": "Container name.",
@@ -726,16 +1333,10 @@
             "type": "string"
           },
           {
-            "$ref": "machineLearningServices.json#/parameters/APIVersionParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+            "in": "query",
+            "name": "api-version",
+            "description": "API version.",
+            "type": "string"
           },
           {
             "in": "body",
@@ -750,7 +1351,7 @@
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "machineLearningServices.json#/definitions/MachineLearningServiceError"
+              "$ref": "#/definitions/ErrorResponse"
             }
           },
           "200": {
@@ -783,6 +1384,15 @@
         ],
         "parameters": [
           {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/workspaceNameParameter"
+          },
+          {
             "in": "path",
             "name": "name",
             "description": "Container name.",
@@ -797,23 +1407,17 @@
             "type": "string"
           },
           {
-            "$ref": "machineLearningServices.json#/parameters/APIVersionParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+            "in": "query",
+            "name": "api-version",
+            "description": "API version.",
+            "type": "string"
           }
         ],
         "responses": {
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "machineLearningServices.json#/definitions/MachineLearningServiceError"
+              "$ref": "#/definitions/ErrorResponse"
             }
           },
           "200": {
@@ -840,6 +1444,15 @@
         ],
         "parameters": [
           {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/workspaceNameParameter"
+          },
+          {
             "in": "path",
             "name": "name",
             "description": "Container name.",
@@ -854,23 +1467,17 @@
             "type": "string"
           },
           {
-            "$ref": "machineLearningServices.json#/parameters/APIVersionParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+            "in": "query",
+            "name": "api-version",
+            "description": "API version.",
+            "type": "string"
           }
         ],
         "responses": {
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "machineLearningServices.json#/definitions/MachineLearningServiceError"
+              "$ref": "#/definitions/ErrorResponse"
             }
           },
           "200": {
@@ -899,6 +1506,15 @@
         ],
         "parameters": [
           {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/workspaceNameParameter"
+          },
+          {
             "in": "path",
             "name": "name",
             "description": "Container name.",
@@ -906,26 +1522,23 @@
             "type": "string"
           },
           {
-            "$ref": "machineLearningServices.json#/parameters/APIVersionParameter"
+            "in": "query",
+            "name": "api-version",
+            "description": "API version.",
+            "type": "string"
           },
           {
-            "$ref": "machineLearningServices.json#/parameters/PaginationParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+            "in": "query",
+            "name": "$skipToken",
+            "description": "Opaque token to retrieve the next page of results from a previous query.",
+            "type": "string"
           }
         ],
         "responses": {
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "machineLearningServices.json#/definitions/MachineLearningServiceError"
+              "$ref": "#/definitions/ErrorResponse"
             }
           },
           "200": {
@@ -960,6 +1573,15 @@
         ],
         "parameters": [
           {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/workspaceNameParameter"
+          },
+          {
             "in": "path",
             "name": "name",
             "description": "Container name.",
@@ -967,16 +1589,10 @@
             "type": "string"
           },
           {
-            "$ref": "machineLearningServices.json#/parameters/APIVersionParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+            "in": "query",
+            "name": "api-version",
+            "description": "API version.",
+            "type": "string"
           },
           {
             "in": "body",
@@ -991,7 +1607,7 @@
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "machineLearningServices.json#/definitions/MachineLearningServiceError"
+              "$ref": "#/definitions/ErrorResponse"
             }
           },
           "200": {
@@ -1024,6 +1640,15 @@
         ],
         "parameters": [
           {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/workspaceNameParameter"
+          },
+          {
             "in": "path",
             "name": "name",
             "description": "Container name.",
@@ -1031,23 +1656,17 @@
             "type": "string"
           },
           {
-            "$ref": "machineLearningServices.json#/parameters/APIVersionParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+            "in": "query",
+            "name": "api-version",
+            "description": "API version.",
+            "type": "string"
           }
         ],
         "responses": {
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "machineLearningServices.json#/definitions/MachineLearningServiceError"
+              "$ref": "#/definitions/ErrorResponse"
             }
           },
           "200": {
@@ -1074,6 +1693,15 @@
         ],
         "parameters": [
           {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/workspaceNameParameter"
+          },
+          {
             "in": "path",
             "name": "name",
             "description": "Container name.",
@@ -1081,23 +1709,17 @@
             "type": "string"
           },
           {
-            "$ref": "machineLearningServices.json#/parameters/APIVersionParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+            "in": "query",
+            "name": "api-version",
+            "description": "API version.",
+            "type": "string"
           }
         ],
         "responses": {
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "machineLearningServices.json#/definitions/MachineLearningServiceError"
+              "$ref": "#/definitions/ErrorResponse"
             }
           },
           "200": {
@@ -1126,26 +1748,32 @@
         ],
         "parameters": [
           {
-            "$ref": "machineLearningServices.json#/parameters/APIVersionParameter"
+            "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
-            "$ref": "machineLearningServices.json#/parameters/PaginationParameter"
+            "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
+            "$ref": "#/parameters/workspaceNameParameter"
           },
           {
-            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
+            "in": "query",
+            "name": "api-version",
+            "description": "API version.",
+            "type": "string"
           },
           {
-            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+            "in": "query",
+            "name": "$skipToken",
+            "description": "Opaque token to retrieve the next page of results from a previous query.",
+            "type": "string"
           }
         ],
         "responses": {
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "machineLearningServices.json#/definitions/MachineLearningServiceError"
+              "$ref": "#/definitions/ErrorResponse"
             }
           },
           "200": {
@@ -1179,6 +1807,15 @@
         ],
         "parameters": [
           {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/workspaceNameParameter"
+          },
+          {
             "in": "path",
             "name": "name",
             "required": true,
@@ -1191,16 +1828,9 @@
             "type": "string"
           },
           {
-            "$ref": "machineLearningServices.json#/parameters/APIVersionParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+            "in": "query",
+            "name": "api-version",
+            "type": "string"
           },
           {
             "in": "body",
@@ -1214,7 +1844,7 @@
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "machineLearningServices.json#/definitions/MachineLearningServiceError"
+              "$ref": "#/definitions/ErrorResponse"
             }
           },
           "200": {
@@ -1247,6 +1877,15 @@
         ],
         "parameters": [
           {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/workspaceNameParameter"
+          },
+          {
             "in": "path",
             "name": "name",
             "description": "Container name.",
@@ -1261,23 +1900,17 @@
             "type": "string"
           },
           {
-            "$ref": "machineLearningServices.json#/parameters/APIVersionParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+            "in": "query",
+            "name": "api-version",
+            "description": "API version.",
+            "type": "string"
           }
         ],
         "responses": {
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "machineLearningServices.json#/definitions/MachineLearningServiceError"
+              "$ref": "#/definitions/ErrorResponse"
             }
           },
           "200": {
@@ -1304,6 +1937,15 @@
         ],
         "parameters": [
           {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/workspaceNameParameter"
+          },
+          {
             "in": "path",
             "name": "name",
             "description": "Container name.",
@@ -1318,23 +1960,17 @@
             "type": "string"
           },
           {
-            "$ref": "machineLearningServices.json#/parameters/APIVersionParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+            "in": "query",
+            "name": "api-version",
+            "description": "API version.",
+            "type": "string"
           }
         ],
         "responses": {
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "machineLearningServices.json#/definitions/MachineLearningServiceError"
+              "$ref": "#/definitions/ErrorResponse"
             }
           },
           "200": {
@@ -1362,13 +1998,24 @@
         ],
         "parameters": [
           {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/workspaceNameParameter"
+          },
+          {
             "in": "path",
             "name": "name",
             "required": true,
             "type": "string"
           },
           {
-            "$ref": "machineLearningServices.json#/parameters/APIVersionParameter"
+            "in": "query",
+            "name": "api-version",
+            "type": "string"
           },
           {
             "in": "query",
@@ -1381,23 +2028,16 @@
             "type": "string"
           },
           {
-            "$ref": "machineLearningServices.json#/parameters/PaginationParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+            "in": "query",
+            "name": "$skipToken",
+            "type": "string"
           }
         ],
         "responses": {
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "machineLearningServices.json#/definitions/MachineLearningServiceError"
+              "$ref": "#/definitions/ErrorResponse"
             }
           },
           "200": {
@@ -1429,10 +2069,25 @@
         ],
         "parameters": [
           {
-            "$ref": "machineLearningServices.json#/parameters/APIVersionParameter"
+            "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
-            "$ref": "machineLearningServices.json#/parameters/PaginationParameter"
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/workspaceNameParameter"
+          },
+          {
+            "in": "query",
+            "name": "api-version",
+            "description": "API version.",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$skipToken",
+            "description": "Opaque token to retrieve the next page of results from a previous query.",
+            "type": "string"
           },
           {
             "in": "query",
@@ -1440,22 +2095,13 @@
             "description": "Maximum number of results to return.",
             "type": "integer",
             "format": "int32"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
           }
         ],
         "responses": {
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "machineLearningServices.json#/definitions/MachineLearningServiceError"
+              "$ref": "#/definitions/ErrorResponse"
             }
           },
           "200": {
@@ -1490,6 +2136,15 @@
         ],
         "parameters": [
           {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/workspaceNameParameter"
+          },
+          {
             "in": "path",
             "name": "name",
             "description": "Container name.",
@@ -1497,16 +2152,10 @@
             "type": "string"
           },
           {
-            "$ref": "machineLearningServices.json#/parameters/APIVersionParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+            "in": "query",
+            "name": "api-version",
+            "description": "API version.",
+            "type": "string"
           },
           {
             "in": "body",
@@ -1521,7 +2170,7 @@
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "machineLearningServices.json#/definitions/MachineLearningServiceError"
+              "$ref": "#/definitions/ErrorResponse"
             }
           },
           "200": {
@@ -1554,6 +2203,15 @@
         ],
         "parameters": [
           {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/workspaceNameParameter"
+          },
+          {
             "in": "path",
             "name": "name",
             "description": "Container name.",
@@ -1561,23 +2219,17 @@
             "type": "string"
           },
           {
-            "$ref": "machineLearningServices.json#/parameters/APIVersionParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+            "in": "query",
+            "name": "api-version",
+            "description": "API version.",
+            "type": "string"
           }
         ],
         "responses": {
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "machineLearningServices.json#/definitions/MachineLearningServiceError"
+              "$ref": "#/definitions/ErrorResponse"
             }
           },
           "200": {
@@ -1604,6 +2256,15 @@
         ],
         "parameters": [
           {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/workspaceNameParameter"
+          },
+          {
             "in": "path",
             "name": "name",
             "description": "Container name.",
@@ -1611,23 +2272,17 @@
             "type": "string"
           },
           {
-            "$ref": "machineLearningServices.json#/parameters/APIVersionParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+            "in": "query",
+            "name": "api-version",
+            "description": "API version.",
+            "type": "string"
           }
         ],
         "responses": {
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "machineLearningServices.json#/definitions/MachineLearningServiceError"
+              "$ref": "#/definitions/ErrorResponse"
             }
           },
           "200": {
@@ -1656,6 +2311,15 @@
         ],
         "parameters": [
           {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/workspaceNameParameter"
+          },
+          {
             "in": "path",
             "name": "name",
             "description": "Model name.",
@@ -1663,10 +2327,16 @@
             "type": "string"
           },
           {
-            "$ref": "machineLearningServices.json#/parameters/APIVersionParameter"
+            "in": "query",
+            "name": "api-version",
+            "description": "API version.",
+            "type": "string"
           },
           {
-            "$ref": "machineLearningServices.json#/parameters/PaginationParameter"
+            "in": "query",
+            "name": "$skipToken",
+            "description": "Opaque token to retrieve the next page of results from a previous query.",
+            "type": "string"
           },
           {
             "in": "query",
@@ -1718,22 +2388,13 @@
             "description": "Only return the most recent version of a model.",
             "type": "boolean",
             "default": false
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
           }
         ],
         "responses": {
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "machineLearningServices.json#/definitions/MachineLearningServiceError"
+              "$ref": "#/definitions/ErrorResponse"
             }
           },
           "200": {
@@ -1768,6 +2429,15 @@
         ],
         "parameters": [
           {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/workspaceNameParameter"
+          },
+          {
             "in": "path",
             "name": "name",
             "description": "Container name.",
@@ -1782,16 +2452,10 @@
             "type": "string"
           },
           {
-            "$ref": "machineLearningServices.json#/parameters/APIVersionParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+            "in": "query",
+            "name": "api-version",
+            "description": "API version.",
+            "type": "string"
           },
           {
             "in": "body",
@@ -1806,7 +2470,7 @@
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "machineLearningServices.json#/definitions/MachineLearningServiceError"
+              "$ref": "#/definitions/ErrorResponse"
             }
           },
           "200": {
@@ -1839,6 +2503,15 @@
         ],
         "parameters": [
           {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/workspaceNameParameter"
+          },
+          {
             "in": "path",
             "name": "name",
             "description": "Container name.",
@@ -1853,23 +2526,17 @@
             "type": "string"
           },
           {
-            "$ref": "machineLearningServices.json#/parameters/APIVersionParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+            "in": "query",
+            "name": "api-version",
+            "description": "API version.",
+            "type": "string"
           }
         ],
         "responses": {
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "machineLearningServices.json#/definitions/MachineLearningServiceError"
+              "$ref": "#/definitions/ErrorResponse"
             }
           },
           "200": {
@@ -1896,6 +2563,15 @@
         ],
         "parameters": [
           {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/workspaceNameParameter"
+          },
+          {
             "in": "path",
             "name": "name",
             "description": "Container name.",
@@ -1910,23 +2586,17 @@
             "type": "string"
           },
           {
-            "$ref": "machineLearningServices.json#/parameters/APIVersionParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+            "in": "query",
+            "name": "api-version",
+            "description": "API version.",
+            "type": "string"
           }
         ],
         "responses": {
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "machineLearningServices.json#/definitions/MachineLearningServiceError"
+              "$ref": "#/definitions/ErrorResponse"
             }
           },
           "200": {
@@ -1942,26 +2612,1141 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/onlineEndpoints/{endpointName}/deployments": {
+      "get": {
+        "tags": [
+          "OnlineDeployment"
+        ],
+        "summary": "List Inference Endpoint Deployments.",
+        "operationId": "OnlineDeployments_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/workspaceNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "endpointName",
+            "description": "Inference endpoint name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "api-version",
+            "description": "API version.",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$skipToken",
+            "description": "Opaque token to retrieve the next page of results from a previous query.",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/OnlineDeploymentPropertiesTrackedResourceArmPaginatedResult"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Online Deployment Properties.": {
+            "$ref": "./examples/OnlineDeploymentProperties/list.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/onlineEndpoints/{endpointName}/deployments/{deploymentName}": {
+      "delete": {
+        "tags": [
+          "OnlineDeployment"
+        ],
+        "summary": "Delete Inference Endpoint Deployment.",
+        "operationId": "OnlineDeployments_Delete",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/workspaceNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "endpointName",
+            "description": "Inference endpoint name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "deploymentName",
+            "description": "Inference Endpoint Deployment name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "api-version",
+            "description": "API version.",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Success"
+          },
+          "204": {
+            "description": "Success"
+          }
+        },
+        "x-ms-examples": {
+          "Delete Online Deployment Properties.": {
+            "$ref": "./examples/OnlineDeploymentProperties/delete.json"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "OnlineDeployment"
+        ],
+        "summary": "Get Inference Deployment Deployment.",
+        "operationId": "OnlineDeployments_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/workspaceNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "endpointName",
+            "description": "Inference endpoint name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "deploymentName",
+            "description": "Inference Endpoint Deployment name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "api-version",
+            "description": "API version.",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/OnlineDeploymentPropertiesTrackedResource"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Online Deployment Properties.": {
+            "$ref": "./examples/OnlineDeploymentProperties/get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "OnlineDeployment"
+        ],
+        "summary": "Create or update Inference Endpoint Deployment.",
+        "operationId": "OnlineDeployments_CreateOrUpdate",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/workspaceNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "endpointName",
+            "description": "Inference endpoint name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "deploymentName",
+            "description": "Inference Endpoint Deployment name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "api-version",
+            "description": "API version.",
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Inference Endpoint entity to apply during operation.",
+            "schema": {
+              "$ref": "#/definitions/OnlineDeploymentPropertiesTrackedResource"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/OnlineDeploymentPropertiesTrackedResource"
+            }
+          },
+          "202": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/OnlineDeploymentPropertiesTrackedResourceLongRunningOperationResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CreateOrUpdate Online Deployment Properties.": {
+            "$ref": "./examples/OnlineDeploymentProperties/createOrUpdate.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/onlineEndpoints/{endpointName}/deployments/{deploymentName}/getLogs": {
+      "post": {
+        "tags": [
+          "OnlineDeployment"
+        ],
+        "summary": "Polls an Endpoint operation.",
+        "operationId": "OnlineDeployments_GetLogs",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/workspaceNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "endpointName",
+            "description": "Inference endpoint name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "deploymentName",
+            "description": "The name and identifier for the endpoint.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "api-version",
+            "description": "Version of Azure Machine Learning resource provider API.",
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "The request containing parameters for retrieving logs.",
+            "schema": {
+              "$ref": "#/definitions/DeploymentLogsRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/DeploymentLogs"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetLogs Online Deployment Properties.": {
+            "$ref": "./examples/OnlineDeploymentProperties/getLogs.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/onlineEndpoints/{endpointName}/deployments/{deploymentName}/operationresults/{operationId}": {
+      "get": {
+        "tags": [
+          "OnlineDeployment"
+        ],
+        "summary": "Polls an Endpoint operation.",
+        "operationId": "OnlineDeployments_Poll",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/workspaceNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "endpointName",
+            "description": "Inference endpoint name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "deploymentName",
+            "description": "The name and identifier for the endpoint.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "operationId",
+            "description": "The operation ID of the async operation to be polled",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "api-version",
+            "description": "Version of Azure Machine Learning resource provider API.",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/OnlineDeploymentPropertiesTrackedResource"
+            }
+          },
+          "202": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/OnlineDeploymentPropertiesTrackedResourceLongRunningOperationResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Poll Online Deployment Properties.": {
+            "$ref": "./examples/OnlineDeploymentProperties/poll.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/onlineEndpoints": {
+      "get": {
+        "tags": [
+          "OnlineEndpoint"
+        ],
+        "summary": "List Online Endpoints.",
+        "operationId": "OnlineEndpoints_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/workspaceNameParameter"
+          },
+          {
+            "in": "query",
+            "name": "api-version",
+            "description": "API version.",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$skipToken",
+            "description": "Opaque token to retrieve the next page of results from a previous query.",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/OnlineEndpointPropertiesTrackedResourceArmPaginatedResult"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Online Endpoint Properties.": {
+            "$ref": "./examples/OnlineEndpointProperties/list.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/onlineEndpoints/{endpointName}": {
+      "delete": {
+        "tags": [
+          "OnlineEndpoint"
+        ],
+        "summary": "Delete Online Endpoint.",
+        "operationId": "OnlineEndpoints_Delete",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/workspaceNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "endpointName",
+            "description": "Online Endpoint name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "api-version",
+            "description": "API version.",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "204": {
+            "description": "Success"
+          },
+          "202": {
+            "description": "Success"
+          }
+        },
+        "x-ms-examples": {
+          "Delete Online Endpoint Properties.": {
+            "$ref": "./examples/OnlineEndpointProperties/delete.json"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "OnlineEndpoint"
+        ],
+        "summary": "Get Online Endpoint.",
+        "operationId": "OnlineEndpoints_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/workspaceNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "endpointName",
+            "description": "Online Endpoint name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "api-version",
+            "description": "API version.",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/OnlineEndpointPropertiesTrackedResource"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Online Endpoint Properties.": {
+            "$ref": "./examples/OnlineEndpointProperties/get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "OnlineEndpoint"
+        ],
+        "summary": "Create or update Online Endpoint.",
+        "operationId": "OnlineEndpoints_CreateOrUpdate",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/workspaceNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "endpointName",
+            "description": "Online Endpoint name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "api-version",
+            "description": "API version.",
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Online Endpoint entity to apply during operation.",
+            "schema": {
+              "$ref": "#/definitions/OnlineEndpointPropertiesTrackedResource"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/OnlineEndpointPropertiesTrackedResource"
+            }
+          },
+          "202": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/OnlineEndpointPropertiesTrackedResourceLongRunningOperationResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CreateOrUpdate Online Endpoint Properties.": {
+            "$ref": "./examples/OnlineEndpointProperties/createOrUpdate.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/onlineEndpoints/{endpointName}/regenerateKeys": {
+      "post": {
+        "tags": [
+          "OnlineEndpoint"
+        ],
+        "summary": "Regenerate AuthKeys for an Endpoint using Key-based authentication.",
+        "operationId": "OnlineEndpoints_RegenerateKeys",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/workspaceNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "endpointName",
+            "description": "Online Endpoint name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "api-version",
+            "description": "API version.",
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "RegenerateKeys request .",
+            "schema": {
+              "$ref": "#/definitions/RegenerateEndpointKeysRequest"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Success"
+          },
+          "202": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/OnlineEndpointPropertiesTrackedResourceLongRunningOperationResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "RegenerateKeys Online Endpoint Properties.": {
+            "$ref": "./examples/OnlineEndpointProperties/regenerateKeys.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/onlineEndpoints/{endpointName}/listKeys": {
+      "post": {
+        "tags": [
+          "OnlineEndpoint"
+        ],
+        "summary": "List AuthKeys for an Endpoint using Key-based authentication.",
+        "operationId": "OnlineEndpoints_ListKeys",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/workspaceNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "endpointName",
+            "description": "Online Endpoint name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "api-version",
+            "description": "API version.",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/AuthKeys"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ListKeys Online Endpoint Properties.": {
+            "$ref": "./examples/OnlineEndpointProperties/listKeys.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/onlineEndpoints/{endpointName}/token": {
+      "post": {
+        "tags": [
+          "OnlineEndpoint"
+        ],
+        "summary": "Retrieve a valid AAD token for an Endpoint using AMLToken-based authentication.",
+        "operationId": "OnlineEndpoints_GetToken",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/workspaceNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "endpointName",
+            "description": "Online Endpoint name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "api-version",
+            "description": "API version.",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/AuthToken"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetToken Online Endpoint Properties.": {
+            "$ref": "./examples/OnlineEndpointProperties/getToken.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/onlineEndpoints/{endpointName}/operationresults/{operationId}": {
+      "get": {
+        "tags": [
+          "OnlineEndpoint"
+        ],
+        "summary": "Polls an Endpoint operation.",
+        "operationId": "OnlineEndpoints_Poll",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/workspaceNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "endpointName",
+            "description": "The name and identifier for the endpoint.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "operationId",
+            "description": "The operation ID of the async operation to be polled",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "api-version",
+            "description": "Version of Azure Machine Learning resource provider API.",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "202": {
+            "description": "Success"
+          }
+        },
+        "x-ms-examples": {
+          "Poll Online Endpoint Properties.": {
+            "$ref": "./examples/OnlineEndpointProperties/poll.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
-    "CodeContainer": {
+    "UserAssignedIdentity": {
       "type": "object",
       "properties": {
-        "properties": {
+        "principalId": {
+          "type": "string"
+        },
+        "clientId": {
+          "type": "string"
+        },
+        "clientSecretUrl": {
+          "type": "string"
+        },
+        "tenantId": {
+          "type": "string"
+        },
+        "resourceId": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "ManagedIdentity": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string"
+        },
+        "systemIdentityUrl": {
+          "type": "string"
+        },
+        "principalId": {
+          "type": "string"
+        },
+        "tenantId": {
+          "type": "string"
+        },
+        "clientId": {
+          "type": "string"
+        },
+        "clientSecretUrl": {
+          "type": "string"
+        },
+        "userAssignedIdentities": {
           "type": "object",
           "additionalProperties": {
+            "$ref": "#/definitions/UserAssignedIdentity"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "DeploymentScaleSettings": {
+      "type": "object",
+      "properties": {
+        "nodeCount": {
+          "format": "int32",
+          "description": "Number of Compute nodes to be used for running the deployment",
+          "type": "integer"
+        }
+      },
+      "additionalProperties": false
+    },
+    "BatchRetrySettings": {
+      "description": "Retry settings for a batch inference operation.",
+      "type": "object",
+      "properties": {
+        "maximumRetries": {
+          "format": "int32",
+          "description": "Maximum retry count for a mini-batch",
+          "type": "integer"
+        },
+        "timeoutInSeconds": {
+          "format": "int32",
+          "description": "Invocation timeout for a mini-batch, in seconds.",
+          "type": "integer"
+        }
+      },
+      "additionalProperties": false
+    },
+    "BatchPartitioningScheme": {
+      "description": "Partitioning scheme for batch inference operation.",
+      "type": "object",
+      "properties": {
+        "partitioningKeys": {
+          "description": "Partition keys list used for Named partitioning.",
+          "type": "array",
+          "items": {
             "type": "string"
           }
         },
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
+        "miniBatchSize": {
+          "format": "int64",
+          "description": "Size of the mini-batch passed to each batch invocation.\r\nFor FileDataset, this is the number of files per mini-batch.\r\nFor TabularDataset, this is the size of the records in bytes, per mini-batch.",
+          "type": "integer"
+        }
+      },
+      "additionalProperties": false
+    },
+    "BatchOutputConfiguration": {
+      "description": "Batch inference output configuration.",
+      "type": "object",
+      "properties": {
+        "outputAction": {
+          "description": "Indicates how the output will be organized.",
+          "enum": [
+            "SummaryOnly",
+            "AppendRow"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "BatchOutputAction",
+            "modelAsString": false
           }
+        },
+        "appendRowFileName": {
+          "description": "Customized output file name for append_row output action.",
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "BatchDeploymentSettings": {
+      "description": "Batch inference specific settings per deployment.",
+      "type": "object",
+      "properties": {
+        "computeId": {
+          "description": "Resource ID of the compute resource",
+          "type": "string"
+        },
+        "errorThreshold": {
+          "format": "int32",
+          "description": "Error threshold, if the error count for the entire input goes above this value,\r\nthe batch inference will be aborted. Range is [-1, int.MaxValue]\r\n-1 value indicates, ignore all failures during batch inference\r\nFor FileDataset count of file failures\r\nFor TabularDataset, this is the count of record failures",
+          "type": "integer"
+        },
+        "retrySettings": {
+          "$ref": "#/definitions/BatchRetrySettings"
+        },
+        "partitioningScheme": {
+          "$ref": "#/definitions/BatchPartitioningScheme"
+        },
+        "loggingLevel": {
+          "description": "Logging level for batch inference operation.",
+          "enum": [
+            "Info",
+            "Warning",
+            "Debug"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "BatchLoggingLevel",
+            "modelAsString": false
+          }
+        },
+        "outputConfiguration": {
+          "$ref": "#/definitions/BatchOutputConfiguration"
+        }
+      },
+      "additionalProperties": false
+    },
+    "AssetReferenceBase": {
+      "required": [
+        "referenceType"
+      ],
+      "type": "object",
+      "properties": {
+        "referenceType": {
+          "description": "Specifies the type of asset reference.",
+          "enum": [
+            "Id",
+            "DataPath",
+            "OutputPath"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ReferenceType",
+            "modelAsString": false
+          }
+        }
+      },
+      "discriminator": "referenceType",
+      "additionalProperties": false
+    },
+    "CodeConfiguration": {
+      "required": [
+        "codeArtifactId",
+        "command"
+      ],
+      "type": "object",
+      "properties": {
+        "codeArtifactId": {
+          "description": "The ID of the code asset.",
+          "pattern": "\\w",
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "command": {
+          "description": "The command to execute on startup of the job. eg. [\"python\", \"train.py\"]",
+          "minLength": 1,
+          "pattern": "\\w",
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "BatchDeployment": {
+      "description": "Batch inference settings per deployment.",
+      "required": [
+        "modelReference"
+      ],
+      "type": "object",
+      "properties": {
+        "scaleSettings": {
+          "$ref": "#/definitions/DeploymentScaleSettings"
+        },
+        "batchSettings": {
+          "$ref": "#/definitions/BatchDeploymentSettings"
         },
         "description": {
+          "description": "Description of the endpoint deployment.",
           "type": "string"
+        },
+        "properties": {
+          "description": "Property dictionary. Properties can be added, but not removed or altered.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "modelReference": {
+          "description": "Model Configuration.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/AssetReferenceBase"
+            }
+          ]
+        },
+        "codeConfiguration": {
+          "$ref": "#/definitions/CodeConfiguration"
+        },
+        "environmentId": {
+          "description": "Environment specification for the endpoint deployment.",
+          "type": "string"
+        },
+        "provisioningState": {
+          "description": "Provisioning state for the endpoint deployment.",
+          "enum": [
+            "Creating",
+            "Deleting",
+            "Scaling",
+            "Updating",
+            "Succeeded",
+            "Failed"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "DeploymentProvisioningState",
+            "modelAsString": false
+          }
         }
       },
       "additionalProperties": false
@@ -2049,14 +3834,13 @@
           "$ref": "#/definitions/TProperties"
         },
         "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
+          "$ref": "#/definitions/SystemData"
         }
       },
       "x-ms-azure-resource": true,
       "additionalProperties": false
     },
-    "CodeContainerResource": {
-      "description": "Azure Resource Manager resource Envelope",
+    "BatchDeploymentTrackedResource": {
       "required": [
         "properties"
       ],
@@ -2068,8 +3852,23 @@
         {
           "type": "object",
           "properties": {
+            "tags": {
+              "type": "object",
+              "additionalProperties": {
+                "type": "string"
+              }
+            },
+            "location": {
+              "type": "string"
+            },
+            "kind": {
+              "type": "string"
+            },
+            "identity": {
+              "$ref": "#/definitions/ManagedIdentity"
+            },
             "properties": {
-              "$ref": "#/definitions/CodeContainer"
+              "$ref": "#/definitions/BatchDeployment"
             }
           }
         }
@@ -2158,6 +3957,280 @@
           "type": "string"
         }
       },
+      "additionalProperties": false
+    },
+    "BatchDeploymentTrackedResourceArmPaginatedResult": {
+      "description": "A paginated list of BatchDeployment entities.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "An array of objects of type BatchDeployment.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/BatchDeploymentTrackedResource"
+          }
+        },
+        "nextLink": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "ComputeConfiguration": {
+      "required": [
+        "computeType"
+      ],
+      "type": "object",
+      "properties": {
+        "computeType": {
+          "enum": [
+            "Managed",
+            "AKS",
+            "ACI"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ComputeType",
+            "modelAsString": false
+          }
+        }
+      },
+      "discriminator": "computeType",
+      "additionalProperties": false
+    },
+    "AuthKeys": {
+      "type": "object",
+      "properties": {
+        "primaryKey": {
+          "description": "The primary key.",
+          "type": "string"
+        },
+        "secondaryKey": {
+          "description": "The secondary key.",
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "BatchEndpoint": {
+      "description": "Batch endpoint configuration",
+      "required": [
+        "authMode"
+      ],
+      "type": "object",
+      "properties": {
+        "description": {
+          "description": "Description of the inference endpoint.",
+          "type": "string"
+        },
+        "properties": {
+          "description": "Property dictionary. Properties can be added, but not removed or altered.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "trafficRules": {
+          "description": "Traffic rules on how the traffic will be routed across deployments.",
+          "type": "object",
+          "additionalProperties": {
+            "format": "int32",
+            "type": "integer"
+          }
+        },
+        "computeConfiguration": {
+          "description": "Reference to compute configuration.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/ComputeConfiguration"
+            }
+          ]
+        },
+        "provisioningState": {
+          "description": "State of provisioning",
+          "enum": [
+            "Creating",
+            "Deleting",
+            "Succeeded",
+            "Failed"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "EndpointProvisioningState",
+            "modelAsString": false
+          },
+          "x-ms-mutability": [
+            "read"
+          ]
+        },
+        "endpoint": {
+          "format": "uri",
+          "description": "Endpoint URI",
+          "type": "string",
+          "readOnly": true
+        },
+        "swaggerEndpoint": {
+          "format": "uri",
+          "description": "Endpoint Swagger URI",
+          "type": "string",
+          "readOnly": true
+        },
+        "authMode": {
+          "description": "Inference endpoint authentication mode type",
+          "enum": [
+            "AMLToken",
+            "Key"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "EndpointAuthModeType",
+            "modelAsString": false
+          }
+        },
+        "keys": {
+          "$ref": "#/definitions/AuthKeys"
+        }
+      },
+      "additionalProperties": false
+    },
+    "BatchEndpointTrackedResource": {
+      "required": [
+        "properties"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource`1"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "tags": {
+              "type": "object",
+              "additionalProperties": {
+                "type": "string"
+              }
+            },
+            "location": {
+              "type": "string"
+            },
+            "kind": {
+              "type": "string"
+            },
+            "identity": {
+              "$ref": "#/definitions/ManagedIdentity"
+            },
+            "properties": {
+              "$ref": "#/definitions/BatchEndpoint"
+            }
+          }
+        }
+      ],
+      "additionalProperties": false
+    },
+    "BatchEndpointTrackedResourceArmPaginatedResult": {
+      "description": "A paginated list of BatchEndpoint entities.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "An array of objects of type BatchEndpoint.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/BatchEndpointTrackedResource"
+          }
+        },
+        "nextLink": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "InferenceEndpointKeys": {
+      "type": "object",
+      "properties": {
+        "endpointKey": {
+          "description": "Endpoint keys",
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "InferenceEndpointKeysTrackedResource": {
+      "required": [
+        "properties"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource`1"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "tags": {
+              "type": "object",
+              "additionalProperties": {
+                "type": "string"
+              }
+            },
+            "location": {
+              "type": "string"
+            },
+            "kind": {
+              "type": "string"
+            },
+            "identity": {
+              "$ref": "#/definitions/ManagedIdentity"
+            },
+            "properties": {
+              "$ref": "#/definitions/InferenceEndpointKeys"
+            }
+          }
+        }
+      ],
+      "additionalProperties": false
+    },
+    "CodeContainer": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "description": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "CodeContainerResource": {
+      "description": "Azure Resource Manager resource Envelope",
+      "required": [
+        "properties"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource`1"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "properties": {
+              "$ref": "#/definitions/CodeContainer"
+            }
+          }
+        }
+      ],
       "additionalProperties": false
     },
     "CodeContainerResourceArmPaginatedResult": {
@@ -2730,6 +4803,474 @@
         }
       },
       "additionalProperties": false
+    },
+    "ScaleSettings": {
+      "type": "object",
+      "properties": {
+        "minimum": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "maximum": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "instanceCount": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "scaleType": {
+          "enum": [
+            "Automatic",
+            "Manual",
+            "None"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ScaleTypeMode",
+            "modelAsString": false
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "EnvironmentOverrides": {
+      "type": "object",
+      "properties": {
+        "environmentVariables": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "DeploymentConfigurationBase": {
+      "required": [
+        "computeType"
+      ],
+      "type": "object",
+      "properties": {
+        "computeType": {
+          "enum": [
+            "Managed",
+            "AKS",
+            "ACI"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ComputeType",
+            "modelAsString": false
+          }
+        },
+        "appInsightsEnabled": {
+          "type": "boolean"
+        }
+      },
+      "discriminator": "computeType",
+      "additionalProperties": false
+    },
+    "OnlineDeploymentProperties": {
+      "required": [
+        "deploymentConfiguration",
+        "modelReference"
+      ],
+      "type": "object",
+      "properties": {
+        "scaleSettings": {
+          "$ref": "#/definitions/ScaleSettings"
+        },
+        "environmentOverrides": {
+          "$ref": "#/definitions/EnvironmentOverrides"
+        },
+        "deploymentConfiguration": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/DeploymentConfigurationBase"
+            }
+          ]
+        },
+        "description": {
+          "description": "Description of the endpoint deployment.",
+          "type": "string"
+        },
+        "properties": {
+          "description": "Property dictionary. Properties can be added, but not removed or altered.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "modelReference": {
+          "description": "Model Configuration.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/AssetReferenceBase"
+            }
+          ]
+        },
+        "codeConfiguration": {
+          "$ref": "#/definitions/CodeConfiguration"
+        },
+        "environmentId": {
+          "description": "Environment specification for the endpoint deployment.",
+          "type": "string"
+        },
+        "provisioningState": {
+          "description": "Provisioning state for the endpoint deployment.",
+          "enum": [
+            "Creating",
+            "Deleting",
+            "Scaling",
+            "Updating",
+            "Succeeded",
+            "Failed"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "DeploymentProvisioningState",
+            "modelAsString": false
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "OnlineDeploymentPropertiesTrackedResource": {
+      "required": [
+        "properties"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource`1"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "tags": {
+              "type": "object",
+              "additionalProperties": {
+                "type": "string"
+              }
+            },
+            "location": {
+              "type": "string"
+            },
+            "kind": {
+              "type": "string"
+            },
+            "identity": {
+              "$ref": "#/definitions/ManagedIdentity"
+            },
+            "properties": {
+              "$ref": "#/definitions/OnlineDeploymentProperties"
+            }
+          }
+        }
+      ],
+      "additionalProperties": false
+    },
+    "OnlineDeploymentPropertiesTrackedResourceArmPaginatedResult": {
+      "description": "A paginated list of OnlineDeploymentProperties entities.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "An array of objects of type OnlineDeploymentProperties.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/OnlineDeploymentPropertiesTrackedResource"
+          }
+        },
+        "nextLink": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "OnlineDeploymentPropertiesTrackedResourceLongRunningOperationResponse": {
+      "type": "object",
+      "properties": {
+        "completionResult": {
+          "$ref": "#/definitions/OnlineDeploymentPropertiesTrackedResource"
+        },
+        "location": {
+          "format": "uri",
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "DeploymentLogsRequest": {
+      "type": "object",
+      "properties": {
+        "containerType": {
+          "description": "The type of container to retrieve logs from.",
+          "enum": [
+            "StorageInitializer",
+            "InferenceServer"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ContainerType",
+            "modelAsString": false
+          }
+        },
+        "tail": {
+          "format": "int32",
+          "description": "The maximum number of lines to tail.",
+          "type": "integer"
+        }
+      },
+      "additionalProperties": false
+    },
+    "DeploymentLogs": {
+      "type": "object",
+      "properties": {
+        "content": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "OnlineEndpointProperties": {
+      "description": "Online endpoint configuration",
+      "required": [
+        "authMode"
+      ],
+      "type": "object",
+      "properties": {
+        "description": {
+          "description": "Description of the inference endpoint.",
+          "type": "string"
+        },
+        "properties": {
+          "description": "Property dictionary. Properties can be added, but not removed or altered.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "trafficRules": {
+          "description": "Traffic rules on how the traffic will be routed across deployments.",
+          "type": "object",
+          "additionalProperties": {
+            "format": "int32",
+            "type": "integer"
+          }
+        },
+        "computeConfiguration": {
+          "description": "Reference to compute configuration.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/ComputeConfiguration"
+            }
+          ]
+        },
+        "provisioningState": {
+          "description": "State of provisioning",
+          "enum": [
+            "Creating",
+            "Deleting",
+            "Succeeded",
+            "Failed"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "EndpointProvisioningState",
+            "modelAsString": false
+          },
+          "x-ms-mutability": [
+            "read"
+          ]
+        },
+        "endpoint": {
+          "format": "uri",
+          "description": "Endpoint URI",
+          "type": "string",
+          "readOnly": true
+        },
+        "swaggerEndpoint": {
+          "format": "uri",
+          "description": "Endpoint Swagger URI",
+          "type": "string",
+          "readOnly": true
+        },
+        "authMode": {
+          "description": "Inference endpoint authentication mode type",
+          "enum": [
+            "AMLToken",
+            "Key"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "EndpointAuthModeType",
+            "modelAsString": false
+          }
+        },
+        "keys": {
+          "$ref": "#/definitions/AuthKeys"
+        }
+      },
+      "additionalProperties": false
+    },
+    "OnlineEndpointPropertiesTrackedResource": {
+      "required": [
+        "properties"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource`1"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "tags": {
+              "type": "object",
+              "additionalProperties": {
+                "type": "string"
+              }
+            },
+            "location": {
+              "type": "string"
+            },
+            "kind": {
+              "type": "string"
+            },
+            "identity": {
+              "$ref": "#/definitions/ManagedIdentity"
+            },
+            "properties": {
+              "$ref": "#/definitions/OnlineEndpointProperties"
+            }
+          }
+        }
+      ],
+      "additionalProperties": false
+    },
+    "OnlineEndpointPropertiesTrackedResourceArmPaginatedResult": {
+      "description": "A paginated list of OnlineEndpointProperties entities.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "An array of objects of type OnlineEndpointProperties.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/OnlineEndpointPropertiesTrackedResource"
+          }
+        },
+        "nextLink": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "OnlineEndpointPropertiesTrackedResourceLongRunningOperationResponse": {
+      "type": "object",
+      "properties": {
+        "completionResult": {
+          "$ref": "#/definitions/OnlineEndpointPropertiesTrackedResource"
+        },
+        "location": {
+          "format": "uri",
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "RegenerateEndpointKeysRequest": {
+      "type": "object",
+      "properties": {
+        "keyType": {
+          "description": "Specification for which type of key to generate. Primary or Secondary.",
+          "enum": [
+            "Primary",
+            "Secondary"
+          ],
+          "type": "string",
+          "example": "Primary",
+          "x-ms-enum": {
+            "name": "KeyType",
+            "modelAsString": false
+          }
+        },
+        "keyValue": {
+          "description": "The value the key is set to.",
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "AuthToken": {
+      "description": "Service Token",
+      "type": "object",
+      "properties": {
+        "accessToken": {
+          "description": "Access token.",
+          "type": "string"
+        },
+        "tokenType": {
+          "description": "Access token type.",
+          "type": "string"
+        },
+        "expiryTimeUtc": {
+          "format": "int64",
+          "description": "Access token expiry time (UTC).",
+          "type": "integer"
+        },
+        "refreshAfterTimeUtc": {
+          "format": "int64",
+          "description": "Refresh access token after time (UTC).",
+          "type": "integer"
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "parameters": {
+    "subscriptionIdParameter": {
+      "in": "path",
+      "name": "subscriptionId",
+      "description": "The Azure Subscription ID.",
+      "required": true,
+      "type": "string",
+      "format": "uuid",
+      "x-ms-parameter-location": "method"
+    },
+    "resourceGroupNameParameter": {
+      "in": "path",
+      "name": "resourceGroupName",
+      "description": "The Name of the resource group in which the workspace is located.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "workspaceNameParameter": {
+      "in": "path",
+      "name": "workspaceName",
+      "description": "The name of the workspace.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "experimentNameParameter": {
+      "in": "path",
+      "name": "experimentName",
+      "description": "Experiment name.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "experimentIdParameter": {
+      "in": "path",
+      "name": "experimentId",
+      "description": "Experiment Id.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
     }
   },
   "securityDefinitions": {
