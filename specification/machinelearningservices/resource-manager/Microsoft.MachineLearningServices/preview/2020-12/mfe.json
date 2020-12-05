@@ -1785,33 +1785,6 @@
       },
       "additionalProperties": false
     },
-    "DebugInfoResponse": {
-      "type": "object",
-      "properties": {
-        "type": {
-          "type": "string"
-        },
-        "message": {
-          "type": "string"
-        },
-        "stackTrace": {
-          "type": "string"
-        },
-        "innerException": {
-          "$ref": "#/definitions/DebugInfoResponse"
-        },
-        "data": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "object"
-          }
-        },
-        "errorResponse": {
-          "$ref": "#/definitions/ErrorResponse"
-        }
-      },
-      "additionalProperties": false
-    },
     "RootError": {
       "type": "object",
       "properties": {
@@ -2205,48 +2178,6 @@
         }
       },
       "discriminator": "type",
-      "additionalProperties": false
-    },
-    "DockerImage": {
-      "description": "Class to represent configuration settings for Docker Build",
-      "allOf": [
-        {
-          "$ref": "#/definitions/DockerSpecification"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "dockerImageUri": {
-              "description": "Image name of a custom base image.\r\n<seealso href=\"https://docs.microsoft.com/en-us/azure/machine-learning/how-to-deploy-custom-docker-image#use-a-custom-base-image\" />",
-              "type": "string"
-            }
-          }
-        }
-      ],
-      "x-ms-discriminator-value": "Image",
-      "additionalProperties": false
-    },
-    "DockerBuild": {
-      "description": "Class to represent configuration settings for Docker Build",
-      "allOf": [
-        {
-          "$ref": "#/definitions/DockerSpecification"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "dockerfile": {
-              "description": "Docker command line instructions to assemble an image.\r\n<seealso href=\"https://repo2docker.readthedocs.io/en/latest/config_files.html#dockerfile-advanced-environments\" />",
-              "type": "string"
-            },
-            "context": {
-              "description": "Path to a snapshot of the Docker Context. This property is only valid if Dockerfile is specified.\r\nThe path is relative to AssetPaths which must contain a single Blob URI value.\r\nMicrosoft.MachineLearning.ManagementFrontEnd.Contracts.Assets.Asset.AssetPath<seealso href=\"https://docs.docker.com/engine/context/working-with-contexts/\" />",
-              "type": "string"
-            }
-          }
-        }
-      ],
-      "x-ms-discriminator-value": "Build",
       "additionalProperties": false
     },
     "EnvironmentSpecificationVersion": {
