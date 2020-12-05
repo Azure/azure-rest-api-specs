@@ -1166,6 +1166,76 @@
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/environments/{name}/versions/{version}": {
+      "put": {
+        "tags": [
+          "EnvironmentSpecification"
+        ],
+        "operationId": "EnvironmentSpecificationVersions_CreateOrUpdate",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "version",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/APIVersionParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/EnvironmentSpecificationVersionResource"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "machineLearningServices.json#/definitions/MachineLearningServiceError"
+            }
+          },
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/EnvironmentSpecificationVersionResource"
+            }
+          },
+          "201": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/EnvironmentSpecificationVersionResource"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CreateOrUpdate Environment Specification Version.": {
+            "$ref": "./examples/EnvironmentSpecificationVersion/createOrUpdate.json"
+          }
+        }
+      },
       "get": {
         "tags": [
           "EnvironmentSpecification"
@@ -1278,6 +1348,130 @@
           "Delete Environment Specification Version.": {
             "$ref": "./examples/EnvironmentSpecificationVersion/delete.json"
           }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/environments/{name}/versions": {
+      "get": {
+        "tags": [
+          "EnvironmentSpecification"
+        ],
+        "operationId": "EnvironmentSpecificationVersions_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/APIVersionParameter"
+          },
+          {
+            "in": "query",
+            "name": "$orderby",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$top",
+            "type": "string"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/PaginationParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "machineLearningServices.json#/definitions/MachineLearningServiceError"
+            }
+          },
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/EnvironmentSpecificationVersionResourceArmPaginatedResult"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Environment Specification Version.": {
+            "$ref": "./examples/EnvironmentSpecificationVersion/list.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/models": {
+      "get": {
+        "tags": [
+          "ModelContainer"
+        ],
+        "summary": "List model containers.",
+        "operationId": "ModelContainers_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "machineLearningServices.json#/parameters/APIVersionParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/PaginationParameter"
+          },
+          {
+            "in": "query",
+            "name": "count",
+            "description": "Maximum number of results to return.",
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "machineLearningServices.json#/definitions/MachineLearningServiceError"
+            }
+          },
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ModelContainerResourceArmPaginatedResult"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Model Container.": {
+            "$ref": "./examples/ModelContainer/list.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -1447,6 +1641,115 @@
           "Delete Model Container.": {
             "$ref": "./examples/ModelContainer/delete.json"
           }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/models/{name}/versions": {
+      "get": {
+        "tags": [
+          "ModelVersion"
+        ],
+        "summary": "List model versions.",
+        "operationId": "ModelVersions_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "name",
+            "description": "Model name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/APIVersionParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/PaginationParameter"
+          },
+          {
+            "in": "query",
+            "name": "version",
+            "description": "Model version.",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "description",
+            "description": "Model description.",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "count",
+            "description": "Maximum number of results to return.",
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "in": "query",
+            "name": "offset",
+            "description": "Number of initial results to skip.",
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "in": "query",
+            "name": "tags",
+            "description": "Comma-separated list of tag names (and optionally values). Example: tag1,tag2=value2",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "properties",
+            "description": "Comma-separated list of property names (and optionally values). Example: prop1,prop2=value2",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "orderBy",
+            "description": "Property by which to order the results.",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "latestVersionOnly",
+            "description": "Only return the most recent version of a model.",
+            "type": "boolean",
+            "default": false
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "machineLearningServices.json#/definitions/MachineLearningServiceError"
+            }
+          },
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ModelVersionResourceArmPaginatedResult"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Model Version.": {
+            "$ref": "./examples/ModelVersion/list.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -2268,6 +2571,23 @@
       ],
       "additionalProperties": false
     },
+    "EnvironmentSpecificationVersionResourceArmPaginatedResult": {
+      "description": "A paginated list of EnvironmentSpecificationVersion entities.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "An array of objects of type EnvironmentSpecificationVersion.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EnvironmentSpecificationVersionResource"
+          }
+        },
+        "nextLink": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
     "ModelVersion": {
       "description": "Details of an ModelDto",
       "type": "object",
@@ -2375,6 +2695,40 @@
           }
         }
       ],
+      "additionalProperties": false
+    },
+    "ModelContainerResourceArmPaginatedResult": {
+      "description": "A paginated list of ModelContainer entities.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "An array of objects of type ModelContainer.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ModelContainerResource"
+          }
+        },
+        "nextLink": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "ModelVersionResourceArmPaginatedResult": {
+      "description": "A paginated list of ModelVersion entities.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "An array of objects of type ModelVersion.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ModelVersionResource"
+          }
+        },
+        "nextLink": {
+          "type": "string"
+        }
+      },
       "additionalProperties": false
     }
   },
