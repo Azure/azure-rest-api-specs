@@ -4083,7 +4083,8 @@
         "resourceId": {
           "type": "string"
         }
-      }
+      },
+      "additionalProperties": false
     },
     "ManagedIdentity": {
       "type": "object",
@@ -4112,7 +4113,8 @@
             "$ref": "#/definitions/UserAssignedIdentity"
           }
         }
-      }
+      },
+      "additionalProperties": false
     },
     "DeploymentScaleSettings": {
       "type": "object",
@@ -4122,7 +4124,8 @@
           "description": "Number of Compute nodes to be used for running the deployment",
           "type": "integer"
         }
-      }
+      },
+      "additionalProperties": false
     },
     "BatchRetrySettings": {
       "description": "Retry settings for a batch inference operation.",
@@ -4138,7 +4141,8 @@
           "description": "Invocation timeout for a mini-batch, in seconds.",
           "type": "integer"
         }
-      }
+      },
+      "additionalProperties": false
     },
     "BatchPartitioningScheme": {
       "description": "Partitioning scheme for batch inference operation.",
@@ -4156,7 +4160,8 @@
           "description": "Size of the mini-batch passed to each batch invocation.\r\nFor FileDataset, this is the number of files per mini-batch.\r\nFor TabularDataset, this is the size of the records in bytes, per mini-batch.",
           "type": "integer"
         }
-      }
+      },
+      "additionalProperties": false
     },
     "BatchOutputConfiguration": {
       "description": "Batch inference output configuration.",
@@ -4178,7 +4183,8 @@
           "description": "Customized output file name for append_row output action.",
           "type": "string"
         }
-      }
+      },
+      "additionalProperties": false
     },
     "BatchDeploymentSettings": {
       "description": "Batch inference specific settings per deployment.",
@@ -4215,7 +4221,8 @@
         "outputConfiguration": {
           "$ref": "#/definitions/BatchOutputConfiguration"
         }
-      }
+      },
+      "additionalProperties": false
     },
     "AssetReferenceBase": {
       "required": [
@@ -4237,17 +4244,18 @@
           }
         }
       },
-      "discriminator": "referenceType"
+      "discriminator": "referenceType",
+      "additionalProperties": false
     },
     "IdAssetReference": {
+      "required": [
+        "id"
+      ],
       "allOf": [
         {
           "$ref": "#/definitions/AssetReferenceBase"
         },
         {
-          "required": [
-            "id"
-          ],
           "type": "object",
           "properties": {
             "id": {
@@ -4256,7 +4264,8 @@
           }
         }
       ],
-      "x-ms-discriminator-value": "Id"
+      "x-ms-discriminator-value": "Id",
+      "additionalProperties": false
     },
     "DataPathAssetReference": {
       "allOf": [
@@ -4275,7 +4284,8 @@
           }
         }
       ],
-      "x-ms-discriminator-value": "DataPath"
+      "x-ms-discriminator-value": "DataPath",
+      "additionalProperties": false
     },
     "OutputPathAssetReference": {
       "allOf": [
@@ -4294,7 +4304,8 @@
           }
         }
       ],
-      "x-ms-discriminator-value": "OutputPath"
+      "x-ms-discriminator-value": "OutputPath",
+      "additionalProperties": false
     },
     "CodeConfiguration": {
       "required": [
@@ -4322,7 +4333,8 @@
             "read"
           ]
         }
-      }
+      },
+      "additionalProperties": false
     },
     "BatchDeployment": {
       "description": "Batch inference settings per deployment.",
@@ -4380,7 +4392,8 @@
             "modelAsString": false
           }
         }
-      }
+      },
+      "additionalProperties": false
     },
     "SystemData": {
       "description": "Azure Resource Manager resource Envelope",
@@ -4432,29 +4445,20 @@
             "modelAsString": false
           }
         }
-      }
+      },
+      "additionalProperties": false
     },
-    "BatchDeploymentTrackedResource": {
+    "TProperties": {
+      "type": "object",
+      "additionalProperties": false
+    },
+    "Resource`1": {
+      "description": "Azure Resource Manager resource Envelope",
       "required": [
         "properties"
       ],
       "type": "object",
       "properties": {
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "location": {
-          "type": "string"
-        },
-        "kind": {
-          "type": "string"
-        },
-        "identity": {
-          "$ref": "#/definitions/ManagedIdentity"
-        },
         "id": {
           "description": "The resource URL of the entity (not URL encoded).",
           "type": "string",
@@ -4471,12 +4475,46 @@
           "readOnly": true
         },
         "properties": {
-          "$ref": "#/definitions/BatchDeployment"
+          "$ref": "#/definitions/TProperties"
         },
         "systemData": {
-          "$ref": "#/definitions/SystemData"
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
         }
-      }
+      },
+      "x-ms-azure-resource": true,
+      "additionalProperties": false
+    },
+    "BatchDeploymentTrackedResource": {
+      "required": [
+        "properties"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource`1"
+        }
+      ],
+      "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "location": {
+          "type": "string"
+        },
+        "kind": {
+          "type": "string"
+        },
+        "identity": {
+          "$ref": "#/definitions/ManagedIdentity"
+        },
+        "properties": {
+          "$ref": "#/definitions/BatchDeployment"
+        }
+      },
+      "additionalProperties": false
     },
     "InnerErrorResponse": {
       "type": "object",
@@ -4487,7 +4525,8 @@
         "innerError": {
           "$ref": "#/definitions/InnerErrorResponse"
         }
-      }
+      },
+      "additionalProperties": false
     },
     "DebugInfoResponse": {
       "type": "object",
@@ -4513,7 +4552,8 @@
         "errorResponse": {
           "$ref": "#/definitions/ErrorResponse"
         }
-      }
+      },
+      "additionalProperties": false
     },
     "RootError": {
       "type": "object",
@@ -4556,7 +4596,8 @@
         "innerError": {
           "$ref": "#/definitions/InnerErrorResponse"
         }
-      }
+      },
+      "additionalProperties": false
     },
     "ErrorResponse": {
       "type": "object",
@@ -4583,7 +4624,8 @@
         "componentName": {
           "type": "string"
         }
-      }
+      },
+      "additionalProperties": false
     },
     "BatchDeploymentTrackedResourceArmPaginatedResult": {
       "type": "object",
@@ -4597,7 +4639,8 @@
         "nextLink": {
           "type": "string"
         }
-      }
+      },
+      "additionalProperties": false
     },
     "SslConfiguration": {
       "type": "object",
@@ -4614,7 +4657,8 @@
         "cName": {
           "type": "string"
         }
-      }
+      },
+      "additionalProperties": false
     },
     "VnetConfiguration": {
       "type": "object",
@@ -4627,7 +4671,8 @@
           "description": "subnetName",
           "type": "string"
         }
-      }
+      },
+      "additionalProperties": false
     },
     "EncryptionProperties": {
       "type": "object",
@@ -4645,7 +4690,8 @@
           "description": "Encryption Key Version",
           "type": "string"
         }
-      }
+      },
+      "additionalProperties": false
     },
     "ComputeConfiguration": {
       "required": [
@@ -4666,7 +4712,8 @@
           }
         }
       },
-      "discriminator": "computeType"
+      "discriminator": "computeType",
+      "additionalProperties": false
     },
     "AciComputeConfiguration": {
       "allOf": [
@@ -4688,17 +4735,18 @@
           }
         }
       ],
-      "x-ms-discriminator-value": "ACI"
+      "x-ms-discriminator-value": "ACI",
+      "additionalProperties": false
     },
     "AksComputeConfiguration": {
+      "required": [
+        "computeName"
+      ],
       "allOf": [
         {
           "$ref": "#/definitions/ComputeConfiguration"
         },
         {
-          "required": [
-            "computeName"
-          ],
           "type": "object",
           "properties": {
             "namespace": {
@@ -4710,7 +4758,8 @@
           }
         }
       ],
-      "x-ms-discriminator-value": "AKS"
+      "x-ms-discriminator-value": "AKS",
+      "additionalProperties": false
     },
     "ManagedComputeConfiguration": {
       "allOf": [
@@ -4721,7 +4770,8 @@
           "type": "object"
         }
       ],
-      "x-ms-discriminator-value": "Managed"
+      "x-ms-discriminator-value": "Managed",
+      "additionalProperties": false
     },
     "AuthKeys": {
       "type": "object",
@@ -4734,7 +4784,8 @@
           "description": "The secondary key.",
           "type": "string"
         }
-      }
+      },
+      "additionalProperties": false
     },
     "BatchEndpoint": {
       "description": "Batch endpoint configuration",
@@ -4815,13 +4866,19 @@
         "keys": {
           "$ref": "#/definitions/AuthKeys"
         }
-      }
+      },
+      "additionalProperties": false
     },
     "BatchEndpointTrackedResource": {
       "required": [
         "properties"
       ],
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource`1"
+        }
+      ],
       "properties": {
         "tags": {
           "type": "object",
@@ -4838,28 +4895,11 @@
         "identity": {
           "$ref": "#/definitions/ManagedIdentity"
         },
-        "id": {
-          "description": "The resource URL of the entity (not URL encoded).",
-          "type": "string",
-          "readOnly": true
-        },
-        "name": {
-          "description": "The name of the resource entity.",
-          "type": "string",
-          "readOnly": true
-        },
-        "type": {
-          "description": "The resource provider and type.",
-          "type": "string",
-          "readOnly": true
-        },
         "properties": {
           "$ref": "#/definitions/BatchEndpoint"
-        },
-        "systemData": {
-          "$ref": "#/definitions/SystemData"
         }
-      }
+      },
+      "additionalProperties": false
     },
     "BatchEndpointTrackedResourceArmPaginatedResult": {
       "type": "object",
@@ -4873,7 +4913,8 @@
         "nextLink": {
           "type": "string"
         }
-      }
+      },
+      "additionalProperties": false
     },
     "InferenceEndpointKeys": {
       "type": "object",
@@ -4882,13 +4923,19 @@
           "description": "Endpoint keys",
           "type": "string"
         }
-      }
+      },
+      "additionalProperties": false
     },
     "InferenceEndpointKeysTrackedResource": {
       "required": [
         "properties"
       ],
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource`1"
+        }
+      ],
       "properties": {
         "tags": {
           "type": "object",
@@ -4905,28 +4952,11 @@
         "identity": {
           "$ref": "#/definitions/ManagedIdentity"
         },
-        "id": {
-          "description": "The resource URL of the entity (not URL encoded).",
-          "type": "string",
-          "readOnly": true
-        },
-        "name": {
-          "description": "The name of the resource entity.",
-          "type": "string",
-          "readOnly": true
-        },
-        "type": {
-          "description": "The resource provider and type.",
-          "type": "string",
-          "readOnly": true
-        },
         "properties": {
           "$ref": "#/definitions/InferenceEndpointKeys"
-        },
-        "systemData": {
-          "$ref": "#/definitions/SystemData"
         }
-      }
+      },
+      "additionalProperties": false
     },
     "CodeContainer": {
       "type": "object",
@@ -4946,7 +4976,8 @@
         "description": {
           "type": "string"
         }
-      }
+      },
+      "additionalProperties": false
     },
     "CodeContainerResource": {
       "description": "Azure Resource Manager resource Envelope",
@@ -4954,29 +4985,17 @@
         "properties"
       ],
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource`1"
+        }
+      ],
       "properties": {
-        "id": {
-          "description": "The resource URL of the entity (not URL encoded).",
-          "type": "string",
-          "readOnly": true
-        },
-        "name": {
-          "description": "The name of the resource entity.",
-          "type": "string",
-          "readOnly": true
-        },
-        "type": {
-          "description": "The resource provider and type.",
-          "type": "string",
-          "readOnly": true
-        },
         "properties": {
           "$ref": "#/definitions/CodeContainer"
-        },
-        "systemData": {
-          "$ref": "#/definitions/SystemData"
         }
-      }
+      },
+      "additionalProperties": false
     },
     "CodeContainerResourceArmPaginatedResult": {
       "type": "object",
@@ -4990,7 +5009,8 @@
         "nextLink": {
           "type": "string"
         }
-      }
+      },
+      "additionalProperties": false
     },
     "AssetPath": {
       "description": "Details of an AssetUri.",
@@ -5008,7 +5028,8 @@
           "description": "Whether the path defines a directory or a single file.",
           "type": "boolean"
         }
-      }
+      },
+      "additionalProperties": false
     },
     "CodeVersion": {
       "description": "Details of an RegisteredCode",
@@ -5049,7 +5070,8 @@
             "type": "string"
           }
         }
-      }
+      },
+      "additionalProperties": false
     },
     "CodeVersionResource": {
       "description": "Azure Resource Manager resource Envelope",
@@ -5057,29 +5079,17 @@
         "properties"
       ],
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource`1"
+        }
+      ],
       "properties": {
-        "id": {
-          "description": "The resource URL of the entity (not URL encoded).",
-          "type": "string",
-          "readOnly": true
-        },
-        "name": {
-          "description": "The name of the resource entity.",
-          "type": "string",
-          "readOnly": true
-        },
-        "type": {
-          "description": "The resource provider and type.",
-          "type": "string",
-          "readOnly": true
-        },
         "properties": {
           "$ref": "#/definitions/CodeVersion"
-        },
-        "systemData": {
-          "$ref": "#/definitions/SystemData"
         }
-      }
+      },
+      "additionalProperties": false
     },
     "CodeVersionResourceArmPaginatedResult": {
       "type": "object",
@@ -5093,7 +5103,8 @@
         "nextLink": {
           "type": "string"
         }
-      }
+      },
+      "additionalProperties": false
     },
     "DataContainer": {
       "type": "object",
@@ -5113,7 +5124,8 @@
         "description": {
           "type": "string"
         }
-      }
+      },
+      "additionalProperties": false
     },
     "DataContainerResource": {
       "description": "Azure Resource Manager resource Envelope",
@@ -5121,29 +5133,17 @@
         "properties"
       ],
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource`1"
+        }
+      ],
       "properties": {
-        "id": {
-          "description": "The resource URL of the entity (not URL encoded).",
-          "type": "string",
-          "readOnly": true
-        },
-        "name": {
-          "description": "The name of the resource entity.",
-          "type": "string",
-          "readOnly": true
-        },
-        "type": {
-          "description": "The resource provider and type.",
-          "type": "string",
-          "readOnly": true
-        },
         "properties": {
           "$ref": "#/definitions/DataContainer"
-        },
-        "systemData": {
-          "$ref": "#/definitions/SystemData"
         }
-      }
+      },
+      "additionalProperties": false
     },
     "DataContainerResourceArmPaginatedResult": {
       "type": "object",
@@ -5157,7 +5157,8 @@
         "nextLink": {
           "type": "string"
         }
-      }
+      },
+      "additionalProperties": false
     },
     "AccountKeySection": {
       "type": "object",
@@ -5171,7 +5172,8 @@
           ],
           "x-ms-secret": true
         }
-      }
+      },
+      "additionalProperties": false
     },
     "CertificateSection": {
       "required": [
@@ -5213,7 +5215,8 @@
           "pattern": "\\w",
           "type": "string"
         }
-      }
+      },
+      "additionalProperties": false
     },
     "SasSection": {
       "type": "object",
@@ -5227,7 +5230,8 @@
           ],
           "x-ms-secret": true
         }
-      }
+      },
+      "additionalProperties": false
     },
     "ServicePrincipalSection": {
       "required": [
@@ -5263,7 +5267,8 @@
           ],
           "x-ms-secret": true
         }
-      }
+      },
+      "additionalProperties": false
     },
     "SqlAdminSection": {
       "required": [
@@ -5285,7 +5290,8 @@
           ],
           "x-ms-secret": true
         }
-      }
+      },
+      "additionalProperties": false
     },
     "DatastoreCredentials": {
       "required": [
@@ -5324,7 +5330,8 @@
         "sqlAdmin": {
           "$ref": "#/definitions/SqlAdminSection"
         }
-      }
+      },
+      "additionalProperties": false
     },
     "AzureDataLakeSection": {
       "required": [
@@ -5341,7 +5348,8 @@
           "pattern": "\\w",
           "type": "string"
         }
-      }
+      },
+      "additionalProperties": false
     },
     "AzureMySqlSection": {
       "required": [
@@ -5393,7 +5401,8 @@
             "read"
           ]
         }
-      }
+      },
+      "additionalProperties": false
     },
     "AzurePostgreSqlSection": {
       "required": [
@@ -5453,7 +5462,8 @@
             "read"
           ]
         }
-      }
+      },
+      "additionalProperties": false
     },
     "AzureSqlDatabaseSection": {
       "required": [
@@ -5505,7 +5515,8 @@
             "read"
           ]
         }
-      }
+      },
+      "additionalProperties": false
     },
     "AzureStorageSection": {
       "required": [
@@ -5567,7 +5578,8 @@
             "read"
           ]
         }
-      }
+      },
+      "additionalProperties": false
     },
     "GlusterFsSection": {
       "required": [
@@ -5594,7 +5606,8 @@
             "read"
           ]
         }
-      }
+      },
+      "additionalProperties": false
     },
     "DatastoreContents": {
       "required": [
@@ -5638,7 +5651,8 @@
         "glusterFs": {
           "$ref": "#/definitions/GlusterFsSection"
         }
-      }
+      },
+      "additionalProperties": false
     },
     "LinkedInfo": {
       "type": "object",
@@ -5662,7 +5676,8 @@
             "modelAsString": false
           }
         }
-      }
+      },
+      "additionalProperties": false
     },
     "DatastoreProperties": {
       "required": [
@@ -5702,7 +5717,8 @@
             "type": "string"
           }
         }
-      }
+      },
+      "additionalProperties": false
     },
     "DatastorePropertiesResource": {
       "description": "Azure Resource Manager resource Envelope",
@@ -5710,29 +5726,17 @@
         "properties"
       ],
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource`1"
+        }
+      ],
       "properties": {
-        "id": {
-          "description": "The resource URL of the entity (not URL encoded).",
-          "type": "string",
-          "readOnly": true
-        },
-        "name": {
-          "description": "The name of the resource entity.",
-          "type": "string",
-          "readOnly": true
-        },
-        "type": {
-          "description": "The resource provider and type.",
-          "type": "string",
-          "readOnly": true
-        },
         "properties": {
           "$ref": "#/definitions/DatastoreProperties"
-        },
-        "systemData": {
-          "$ref": "#/definitions/SystemData"
         }
-      }
+      },
+      "additionalProperties": false
     },
     "DatastorePropertiesResourceArmPaginatedResult": {
       "type": "object",
@@ -5746,7 +5750,8 @@
         "nextLink": {
           "type": "string"
         }
-      }
+      },
+      "additionalProperties": false
     },
     "DataVersion": {
       "description": "Details of an DatasetDto",
@@ -5799,7 +5804,8 @@
             "type": "string"
           }
         }
-      }
+      },
+      "additionalProperties": false
     },
     "DataVersionResource": {
       "description": "Azure Resource Manager resource Envelope",
@@ -5807,29 +5813,17 @@
         "properties"
       ],
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource`1"
+        }
+      ],
       "properties": {
-        "id": {
-          "description": "The resource URL of the entity (not URL encoded).",
-          "type": "string",
-          "readOnly": true
-        },
-        "name": {
-          "description": "The name of the resource entity.",
-          "type": "string",
-          "readOnly": true
-        },
-        "type": {
-          "description": "The resource provider and type.",
-          "type": "string",
-          "readOnly": true
-        },
         "properties": {
           "$ref": "#/definitions/DataVersion"
-        },
-        "systemData": {
-          "$ref": "#/definitions/SystemData"
         }
-      }
+      },
+      "additionalProperties": false
     },
     "DataVersionResourceArmPaginatedResult": {
       "type": "object",
@@ -5843,7 +5837,8 @@
         "nextLink": {
           "type": "string"
         }
-      }
+      },
+      "additionalProperties": false
     },
     "EnvironmentContainer": {
       "type": "object",
@@ -5863,7 +5858,8 @@
         "description": {
           "type": "string"
         }
-      }
+      },
+      "additionalProperties": false
     },
     "EnvironmentContainerResource": {
       "description": "Azure Resource Manager resource Envelope",
@@ -5871,29 +5867,17 @@
         "properties"
       ],
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource`1"
+        }
+      ],
       "properties": {
-        "id": {
-          "description": "The resource URL of the entity (not URL encoded).",
-          "type": "string",
-          "readOnly": true
-        },
-        "name": {
-          "description": "The name of the resource entity.",
-          "type": "string",
-          "readOnly": true
-        },
-        "type": {
-          "description": "The resource provider and type.",
-          "type": "string",
-          "readOnly": true
-        },
         "properties": {
           "$ref": "#/definitions/EnvironmentContainer"
-        },
-        "systemData": {
-          "$ref": "#/definitions/SystemData"
         }
-      }
+      },
+      "additionalProperties": false
     },
     "EnvironmentContainerResourceArmPaginatedResult": {
       "type": "object",
@@ -5907,7 +5891,8 @@
         "nextLink": {
           "type": "string"
         }
-      }
+      },
+      "additionalProperties": false
     },
     "DockerSpecification": {
       "description": "Class to represent configuration settings for Docker",
@@ -5933,7 +5918,8 @@
           ]
         }
       },
-      "discriminator": "type"
+      "discriminator": "type",
+      "additionalProperties": false
     },
     "DockerImage": {
       "description": "Class to represent configuration settings for Docker Build",
@@ -5951,7 +5937,8 @@
           }
         }
       ],
-      "x-ms-discriminator-value": "Image"
+      "x-ms-discriminator-value": "Image",
+      "additionalProperties": false
     },
     "DockerBuild": {
       "description": "Class to represent configuration settings for Docker Build",
@@ -5973,7 +5960,8 @@
           }
         }
       ],
-      "x-ms-discriminator-value": "Build"
+      "x-ms-discriminator-value": "Build",
+      "additionalProperties": false
     },
     "EnvironmentSpecificationVersion": {
       "description": "Data Transfer Object (DTO) for an Execution Environment Specification. Name and\r\nversion should default to the AzureML-Minimal environment version tested with the\r\ncurrent SDK client version as this is a main use-case.\r\n<see href=\"https://repo2docker.readthedocs.io/en/latest/specification.html\" />",
@@ -6039,7 +6027,8 @@
             "type": "string"
           }
         }
-      }
+      },
+      "additionalProperties": false
     },
     "EnvironmentSpecificationVersionResource": {
       "description": "Azure Resource Manager resource Envelope",
@@ -6047,29 +6036,17 @@
         "properties"
       ],
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource`1"
+        }
+      ],
       "properties": {
-        "id": {
-          "description": "The resource URL of the entity (not URL encoded).",
-          "type": "string",
-          "readOnly": true
-        },
-        "name": {
-          "description": "The name of the resource entity.",
-          "type": "string",
-          "readOnly": true
-        },
-        "type": {
-          "description": "The resource provider and type.",
-          "type": "string",
-          "readOnly": true
-        },
         "properties": {
           "$ref": "#/definitions/EnvironmentSpecificationVersion"
-        },
-        "systemData": {
-          "$ref": "#/definitions/SystemData"
         }
-      }
+      },
+      "additionalProperties": false
     },
     "EnvironmentSpecificationVersionResourceArmPaginatedResult": {
       "type": "object",
@@ -6083,7 +6060,8 @@
         "nextLink": {
           "type": "string"
         }
-      }
+      },
+      "additionalProperties": false
     },
     "LabelClass": {
       "description": "Label class definition",
@@ -6109,7 +6087,8 @@
             "update"
           ]
         }
-      }
+      },
+      "additionalProperties": false
     },
     "LabelCategory": {
       "description": "Label category definition",
@@ -6144,7 +6123,8 @@
             "update"
           ]
         }
-      }
+      },
+      "additionalProperties": false
     },
     "LabelingJobInstructions": {
       "description": "Instructions for labeling job",
@@ -6159,7 +6139,8 @@
             "update"
           ]
         }
-      }
+      },
+      "additionalProperties": false
     },
     "LabelingDatasetConfiguration": {
       "description": "Labeling dataset configuration definition",
@@ -6190,7 +6171,8 @@
             "read"
           ]
         }
-      }
+      },
+      "additionalProperties": false
     },
     "ComputeBinding": {
       "description": "Compute binding definition.",
@@ -6217,7 +6199,8 @@
             "read"
           ]
         }
-      }
+      },
+      "additionalProperties": false
     },
     "MLAssistConfiguration": {
       "description": "Labeling MLAssist configuration definition",
@@ -6233,7 +6216,8 @@
           "description": "Indicates whether MLAssist feature is enabled.",
           "type": "boolean"
         }
-      }
+      },
+      "additionalProperties": false
     },
     "LabelingJobMediaProperties": {
       "description": "Properties of a labeling job",
@@ -6259,7 +6243,8 @@
           ]
         }
       },
-      "discriminator": "mediaType"
+      "discriminator": "mediaType",
+      "additionalProperties": false
     },
     "LabelingJobImageProperties": {
       "description": "Properties of a labeling job for image data",
@@ -6286,7 +6271,8 @@
           }
         }
       ],
-      "x-ms-discriminator-value": "Image"
+      "x-ms-discriminator-value": "Image",
+      "additionalProperties": false
     },
     "LabelingJobTextProperties": {
       "description": "Properties of a labeling job for text data",
@@ -6311,7 +6297,8 @@
           }
         }
       ],
-      "x-ms-discriminator-value": "Text"
+      "x-ms-discriminator-value": "Text",
+      "additionalProperties": false
     },
     "ProgressMetrics": {
       "description": "Progress metrics definition",
@@ -6353,7 +6340,8 @@
             "read"
           ]
         }
-      }
+      },
+      "additionalProperties": false
     },
     "StatusMessage": {
       "description": "Active message associated with project",
@@ -6401,7 +6389,8 @@
             "read"
           ]
         }
-      }
+      },
+      "additionalProperties": false
     },
     "JobBase": {
       "description": "Job base definition",
@@ -6472,7 +6461,8 @@
           }
         }
       },
-      "discriminator": "jobType"
+      "discriminator": "jobType",
+      "additionalProperties": false
     },
     "LabelingJob": {
       "description": "Labeling job definition",
@@ -6553,7 +6543,8 @@
           }
         }
       ],
-      "x-ms-discriminator-value": "Labeling"
+      "x-ms-discriminator-value": "Labeling",
+      "additionalProperties": false
     },
     "LabelingJobResource": {
       "description": "Azure Resource Manager resource Envelope",
@@ -6561,29 +6552,17 @@
         "properties"
       ],
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource`1"
+        }
+      ],
       "properties": {
-        "id": {
-          "description": "The resource URL of the entity (not URL encoded).",
-          "type": "string",
-          "readOnly": true
-        },
-        "name": {
-          "description": "The name of the resource entity.",
-          "type": "string",
-          "readOnly": true
-        },
-        "type": {
-          "description": "The resource provider and type.",
-          "type": "string",
-          "readOnly": true
-        },
         "properties": {
           "$ref": "#/definitions/LabelingJob"
-        },
-        "systemData": {
-          "$ref": "#/definitions/SystemData"
         }
-      }
+      },
+      "additionalProperties": false
     },
     "LabelingJobResourceArmPaginatedResult": {
       "type": "object",
@@ -6597,7 +6576,8 @@
         "nextLink": {
           "type": "string"
         }
-      }
+      },
+      "additionalProperties": false
     },
     "ExportSummary": {
       "required": [
@@ -6684,7 +6664,8 @@
           ]
         }
       },
-      "discriminator": "format"
+      "discriminator": "format",
+      "additionalProperties": false
     },
     "CocoExportSummary": {
       "allOf": [
@@ -6705,7 +6686,8 @@
           }
         }
       ],
-      "x-ms-discriminator-value": "Coco"
+      "x-ms-discriminator-value": "Coco",
+      "additionalProperties": false
     },
     "CsvExportSummary": {
       "allOf": [
@@ -6726,7 +6708,8 @@
           }
         }
       ],
-      "x-ms-discriminator-value": "CSV"
+      "x-ms-discriminator-value": "CSV",
+      "additionalProperties": false
     },
     "DatasetExportSummary": {
       "allOf": [
@@ -6743,7 +6726,8 @@
           }
         }
       ],
-      "x-ms-discriminator-value": "Dataset"
+      "x-ms-discriminator-value": "Dataset",
+      "additionalProperties": false
     },
     "ExportSummaryResource": {
       "description": "Azure Resource Manager resource Envelope",
@@ -6751,22 +6735,12 @@
         "properties"
       ],
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource`1"
+        }
+      ],
       "properties": {
-        "id": {
-          "description": "The resource URL of the entity (not URL encoded).",
-          "type": "string",
-          "readOnly": true
-        },
-        "name": {
-          "description": "The name of the resource entity.",
-          "type": "string",
-          "readOnly": true
-        },
-        "type": {
-          "description": "The resource provider and type.",
-          "type": "string",
-          "readOnly": true
-        },
         "properties": {
           "description": "Additional attributes of the entity.",
           "allOf": [
@@ -6774,11 +6748,9 @@
               "$ref": "#/definitions/ExportSummary"
             }
           ]
-        },
-        "systemData": {
-          "$ref": "#/definitions/SystemData"
         }
-      }
+      },
+      "additionalProperties": false
     },
     "ModelVersion": {
       "description": "Details of an ModelDto",
@@ -6823,7 +6795,8 @@
             "type": "string"
           }
         }
-      }
+      },
+      "additionalProperties": false
     },
     "ModelVersionResource": {
       "description": "Azure Resource Manager resource Envelope",
@@ -6831,29 +6804,17 @@
         "properties"
       ],
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource`1"
+        }
+      ],
       "properties": {
-        "id": {
-          "description": "The resource URL of the entity (not URL encoded).",
-          "type": "string",
-          "readOnly": true
-        },
-        "name": {
-          "description": "The name of the resource entity.",
-          "type": "string",
-          "readOnly": true
-        },
-        "type": {
-          "description": "The resource provider and type.",
-          "type": "string",
-          "readOnly": true
-        },
         "properties": {
           "$ref": "#/definitions/ModelVersion"
-        },
-        "systemData": {
-          "$ref": "#/definitions/SystemData"
         }
-      }
+      },
+      "additionalProperties": false
     },
     "ModelContainer": {
       "type": "object",
@@ -6883,7 +6844,8 @@
             "type": "string"
           }
         }
-      }
+      },
+      "additionalProperties": false
     },
     "ModelContainerResource": {
       "description": "Azure Resource Manager resource Envelope",
@@ -6891,29 +6853,17 @@
         "properties"
       ],
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource`1"
+        }
+      ],
       "properties": {
-        "id": {
-          "description": "The resource URL of the entity (not URL encoded).",
-          "type": "string",
-          "readOnly": true
-        },
-        "name": {
-          "description": "The name of the resource entity.",
-          "type": "string",
-          "readOnly": true
-        },
-        "type": {
-          "description": "The resource provider and type.",
-          "type": "string",
-          "readOnly": true
-        },
         "properties": {
           "$ref": "#/definitions/ModelContainer"
-        },
-        "systemData": {
-          "$ref": "#/definitions/SystemData"
         }
-      }
+      },
+      "additionalProperties": false
     },
     "ModelContainerResourceArmPaginatedResult": {
       "type": "object",
@@ -6927,7 +6877,8 @@
         "nextLink": {
           "type": "string"
         }
-      }
+      },
+      "additionalProperties": false
     },
     "ModelVersionResourceArmPaginatedResult": {
       "type": "object",
@@ -6941,7 +6892,8 @@
         "nextLink": {
           "type": "string"
         }
-      }
+      },
+      "additionalProperties": false
     },
     "ScaleSettings": {
       "type": "object",
@@ -6970,7 +6922,8 @@
             "modelAsString": false
           }
         }
-      }
+      },
+      "additionalProperties": false
     },
     "EnvironmentOverrides": {
       "type": "object",
@@ -6981,7 +6934,8 @@
             "type": "string"
           }
         }
-      }
+      },
+      "additionalProperties": false
     },
     "ModelDataCollection": {
       "description": "The Model data collection properties.",
@@ -6995,7 +6949,8 @@
           "description": "Option for enabling/disabling storage.",
           "type": "boolean"
         }
-      }
+      },
+      "additionalProperties": false
     },
     "ContainerResourceRequirements": {
       "type": "object",
@@ -7038,7 +6993,8 @@
           "description": "The number of FPGA PCIE devices exposed to the container. Must be multiple of 2.",
           "type": "integer"
         }
-      }
+      },
+      "additionalProperties": false
     },
     "DeploymentConfigurationBase": {
       "required": [
@@ -7062,7 +7018,8 @@
           "type": "boolean"
         }
       },
-      "discriminator": "computeType"
+      "discriminator": "computeType",
+      "additionalProperties": false
     },
     "AciDeploymentConfiguration": {
       "allOf": [
@@ -7081,7 +7038,8 @@
           }
         }
       ],
-      "x-ms-discriminator-value": "ACI"
+      "x-ms-discriminator-value": "ACI",
+      "additionalProperties": false
     },
     "LivenessProbeRequirements": {
       "type": "object",
@@ -7111,7 +7069,8 @@
           "description": "The delay before the first probe in seconds.",
           "type": "integer"
         }
-      }
+      },
+      "additionalProperties": false
     },
     "AksDeploymentConfiguration": {
       "allOf": [
@@ -7145,7 +7104,8 @@
           }
         }
       ],
-      "x-ms-discriminator-value": "AKS"
+      "x-ms-discriminator-value": "AKS",
+      "additionalProperties": false
     },
     "ManagedDeploymentConfiguration": {
       "allOf": [
@@ -7161,7 +7121,8 @@
           }
         }
       ],
-      "x-ms-discriminator-value": "Managed"
+      "x-ms-discriminator-value": "Managed",
+      "additionalProperties": false
     },
     "OnlineDeploymentProperties": {
       "required": [
@@ -7226,13 +7187,19 @@
             "modelAsString": false
           }
         }
-      }
+      },
+      "additionalProperties": false
     },
     "OnlineDeploymentPropertiesTrackedResource": {
       "required": [
         "properties"
       ],
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource`1"
+        }
+      ],
       "properties": {
         "tags": {
           "type": "object",
@@ -7249,28 +7216,11 @@
         "identity": {
           "$ref": "#/definitions/ManagedIdentity"
         },
-        "id": {
-          "description": "The resource URL of the entity (not URL encoded).",
-          "type": "string",
-          "readOnly": true
-        },
-        "name": {
-          "description": "The name of the resource entity.",
-          "type": "string",
-          "readOnly": true
-        },
-        "type": {
-          "description": "The resource provider and type.",
-          "type": "string",
-          "readOnly": true
-        },
         "properties": {
           "$ref": "#/definitions/OnlineDeploymentProperties"
-        },
-        "systemData": {
-          "$ref": "#/definitions/SystemData"
         }
-      }
+      },
+      "additionalProperties": false
     },
     "OnlineDeploymentPropertiesTrackedResourceArmPaginatedResult": {
       "type": "object",
@@ -7284,7 +7234,8 @@
         "nextLink": {
           "type": "string"
         }
-      }
+      },
+      "additionalProperties": false
     },
     "OnlineDeploymentPropertiesTrackedResourceLongRunningOperationResponse": {
       "type": "object",
@@ -7296,7 +7247,8 @@
           "format": "uri",
           "type": "string"
         }
-      }
+      },
+      "additionalProperties": false
     },
     "DeploymentLogsRequest": {
       "type": "object",
@@ -7318,7 +7270,8 @@
           "description": "The maximum number of lines to tail.",
           "type": "integer"
         }
-      }
+      },
+      "additionalProperties": false
     },
     "DeploymentLogs": {
       "type": "object",
@@ -7326,7 +7279,8 @@
         "content": {
           "type": "string"
         }
-      }
+      },
+      "additionalProperties": false
     },
     "OnlineEndpointProperties": {
       "description": "Online endpoint configuration",
@@ -7407,13 +7361,19 @@
         "keys": {
           "$ref": "#/definitions/AuthKeys"
         }
-      }
+      },
+      "additionalProperties": false
     },
     "OnlineEndpointPropertiesTrackedResource": {
       "required": [
         "properties"
       ],
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource`1"
+        }
+      ],
       "properties": {
         "tags": {
           "type": "object",
@@ -7430,28 +7390,11 @@
         "identity": {
           "$ref": "#/definitions/ManagedIdentity"
         },
-        "id": {
-          "description": "The resource URL of the entity (not URL encoded).",
-          "type": "string",
-          "readOnly": true
-        },
-        "name": {
-          "description": "The name of the resource entity.",
-          "type": "string",
-          "readOnly": true
-        },
-        "type": {
-          "description": "The resource provider and type.",
-          "type": "string",
-          "readOnly": true
-        },
         "properties": {
           "$ref": "#/definitions/OnlineEndpointProperties"
-        },
-        "systemData": {
-          "$ref": "#/definitions/SystemData"
         }
-      }
+      },
+      "additionalProperties": false
     },
     "OnlineEndpointPropertiesTrackedResourceArmPaginatedResult": {
       "type": "object",
@@ -7465,7 +7408,8 @@
         "nextLink": {
           "type": "string"
         }
-      }
+      },
+      "additionalProperties": false
     },
     "OnlineEndpointPropertiesTrackedResourceLongRunningOperationResponse": {
       "type": "object",
@@ -7477,7 +7421,8 @@
           "format": "uri",
           "type": "string"
         }
-      }
+      },
+      "additionalProperties": false
     },
     "RegenerateEndpointKeysRequest": {
       "type": "object",
@@ -7499,7 +7444,8 @@
           "description": "The value the key is set to.",
           "type": "string"
         }
-      }
+      },
+      "additionalProperties": false
     },
     "AuthToken": {
       "description": "Service Token",
@@ -7523,7 +7469,8 @@
           "description": "Refresh access token after time (UTC).",
           "type": "integer"
         }
-      }
+      },
+      "additionalProperties": false
     }
   },
   "securityDefinitions": {
