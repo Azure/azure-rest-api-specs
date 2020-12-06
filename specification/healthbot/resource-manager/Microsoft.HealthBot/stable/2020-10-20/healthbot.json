@@ -211,6 +211,12 @@
               "$ref": "#/definitions/HealthBot"
             }
           },
+          "201": {
+            "description": "If resource is received update request successfully, the service should return 201 (Created). Execution to continue asynchronously.",
+            "schema": {
+              "$ref": "#/definitions/HealthBot"
+            }
+          },
           "default": {
             "description": "Error response describing why the operation failed",
             "schema": {
@@ -244,6 +250,9 @@
         "responses": {
           "200": {
             "description": "If resource is deleted successfully, the service should return 200."
+          },
+          "202": {
+            "description": "Accepted - Delete request accepted; operation will complete asynchronously"
           },
           "204": {
             "description": "No content."
@@ -378,7 +387,8 @@
           "description": "The name of the HealthBot SKU",
           "enum": [
             "F0",
-            "S1"
+            "S1",
+            "C0"
           ],
           "x-ms-enum": {
             "name": "SkuName",
