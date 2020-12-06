@@ -21,8 +21,8 @@ batch:
       output-folder: $(typescript-sdks-folder)/sdk/synapse/synapse-spark
       clear-output-folder: true
     - package-vnet: true
-      package-name: "@azure/synapse-managed-endpoints"
-      output-folder: $(typescript-sdks-folder)/sdk/synapse/synapse-managed-endpoints
+      package-name: "@azure/synapse-managed-private-endpoints"
+      output-folder: $(typescript-sdks-folder)/sdk/synapse/synapse-managed-private-endpoints
       clear-output-folder: true
     - package-monitoring: true
       package-name: "@azure/synapse-monitoring"
