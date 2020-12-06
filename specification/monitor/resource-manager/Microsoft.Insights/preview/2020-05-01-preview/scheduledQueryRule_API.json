@@ -353,7 +353,7 @@
           }
         },
         "enabled": {
-          "type": "boolean",
+          "type": "string",
           "description": "The flag which indicates whether this scheduled query rule is enabled. Value should be true or false"
         },
         "scopes": {
@@ -372,6 +372,11 @@
           "type": "string",
           "format": "duration",
           "description": "The period of time (in ISO 8601 duration format) on which the Alert query will be executed (bin size)."
+        },
+        "OverrideQueryTimeRange": {
+          "type": "string",
+          "format": "duration",
+          "description": "If specified then overrides the query time range (default is WindowSize*NumberOfEvaluationPeriods)"
         },
         "targetResourceTypes": {
           "type": "array",
