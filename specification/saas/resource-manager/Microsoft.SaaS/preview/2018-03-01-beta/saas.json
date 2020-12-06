@@ -411,17 +411,17 @@
           "application/json"
         ],
         "parameters": [
-					{
-						"$ref": "#/parameters/SubscriptionIdParameter"
-					},
-					{
-						"$ref": "#/parameters/ResourceGroupNameParameter"
-					},
-					{
-						"$ref": "#/parameters/ResourceNameParameter"
-					},
-					{
-						"$ref": "#/parameters/ApiVersionParameter"
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "name": "parameters",
@@ -432,7 +432,7 @@
             },
             "description": "Parameters supplied to the create or update subscription level saas operation."
           }
-				],
+        ],
         "responses": {
           "202": {
             "description": "Accepted and the operation will complete asynchronously.",
@@ -465,33 +465,33 @@
         }
       },
       "patch": {
-				"tags": [
-					"SubscriptionLevelSaaSResources"
-				],
-				"operationId": "SaasSubscriptionLevel_Update",
-				"description": "Updates a SaaS Subscription Level resource.",
-				"parameters": [
-					{
-						"$ref": "#/parameters/SubscriptionIdParameter"
-					},
-					{
-						"$ref": "#/parameters/ResourceGroupNameParameter"
-					},
-					{
-						"$ref": "#/parameters/ResourceNameParameter"
-					},
-					{
-						"$ref": "#/parameters/ApiVersionParameter"
-					},
-					{
-						"name": "parameters",
-						"in": "body",
-						"required": true,
-						"schema": {
-							"$ref": "#/definitions/SaasResourceCreation"
-						},
-						"description": "Parameters supplied to the update saas operation."
-					}
+        "tags": [
+          "SubscriptionLevelSaaSResources"
+        ],
+        "operationId": "SaasSubscriptionLevel_Update",
+        "description": "Updates a SaaS Subscription Level resource.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SaasResourceCreation"
+            },
+            "description": "Parameters supplied to the update saas operation."
+          }
         ],
         "responses": {
           "202": {
@@ -525,25 +525,25 @@
         }
       },
       "delete": {
-				"tags": [
-					"SubscriptionLevelSaaSResources"
-				],
-				"operationId": "SaasSubscriptionLevel_Delete",
-				"description": "Deletes the specified SaaS.",
-				"parameters": [
-					{
-						"$ref": "#/parameters/SubscriptionIdParameter"
-					},
-					{
-						"$ref": "#/parameters/ResourceGroupNameParameter"
-					},
-					{
-						"$ref": "#/parameters/ResourceNameParameter"
-					},
-					{
-						"$ref": "#/parameters/ApiVersionParameter"
-					}
-				],
+        "tags": [
+          "SubscriptionLevelSaaSResources"
+        ],
+        "operationId": "SaasSubscriptionLevel_Delete",
+        "description": "Deletes the specified SaaS.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
         "responses": {
           "200": {
             "description": "Operation completed successfully."
@@ -572,12 +572,12 @@
             }
           }
         },
-				"x-ms-examples": {
-					"Delete Subscription Level SaaS resource": {
-						"$ref": "./examples/saasSubscriptionLevel/SaasDelete.json"
-					}
-				}
-			}
+        "x-ms-examples": {
+          "Delete Subscription Level SaaS resource": {
+            "$ref": "./examples/saasSubscriptionLevel/SaasDelete.json"
+          }
+        }
+      }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SaaS/resources/{resourceName}/unsubscribe": {
       "patch": {
@@ -590,18 +590,18 @@
           "application/json"
         ],
         "parameters": [
-					{
-						"$ref": "#/parameters/SubscriptionIdParameter"
-					},
-					{
-						"$ref": "#/parameters/ResourceGroupNameParameter"
-					},
-					{
-						"$ref": "#/parameters/ResourceNameParameter"
-					},
-					{
-						"$ref": "#/parameters/ApiVersionParameter"
-					},
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
           {
             "name": "parameters",
             "in": "body",
@@ -611,8 +611,8 @@
             },
             "description": "Parameters supplied to unsubscribe saas operation."
           }
-				],
-				"responses": {
+        ],
+        "responses": {
           "202": {
             "description": "Accepted and the operation will complete asynchronously.",
             "headers": {
@@ -637,11 +637,11 @@
             }
           }
         },
-				"x-ms-examples": {
-					"Delete Subscription Level SaaS resource": {
-						"$ref": "./examples/saasSubscriptionLevel/SaasUnsubscribe.json"
-					}
-				}
+        "x-ms-examples": {
+          "Delete Subscription Level SaaS resource": {
+            "$ref": "./examples/saasSubscriptionLevel/SaasUnsubscribe.json"
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SaaS/resources/{resourceName}/listAccessToken": {
@@ -655,20 +655,20 @@
           "application/json"
         ],
         "parameters": [
-					{
-						"$ref": "#/parameters/SubscriptionIdParameter"
-					},
-					{
-						"$ref": "#/parameters/ResourceGroupNameParameter"
-					},
-					{
-						"$ref": "#/parameters/ResourceNameParameter"
-					},
-					{
-						"$ref": "#/parameters/ApiVersionParameter"
-					}
-				],
-				"responses": {
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
           "200": {
             "description": "Request successful. The request returns the generated access token.",
             "schema": {
@@ -682,11 +682,11 @@
             }
           }
         },
-				"x-ms-examples": {
-					"Delete Subscription Level SaaS resource": {
+        "x-ms-examples": {
+          "Delete Subscription Level SaaS resource": {
             "$ref": "./examples/saasSubscriptionLevel/ListAccessTokenPost.json"
-					}
-				}
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/validateMoveResources": {
@@ -1217,13 +1217,14 @@
       "properties": {
         "targetResourceGroup": {
           "type": "string",
-          "description":  "The target resource group uri for the move"
+          "description": "The target resource group uri for the move"
         },
         "resources": {
+          "description": "The resource uris to move",
           "type": "array",
           "items": {
             "type": "string",
-            "description": "The source resources uris to move"
+            "description": "A resources uri to move"
           }
         }
       }
@@ -1269,12 +1270,12 @@
       "x-ms-parameter-location": "method"
     },
     "ResourceNameParameter": {
-			"name": "resourceName",
-			"in": "path",
-			"required": true,
-			"type": "string",
-			"description": "The name of the resource.",
-			"x-ms-parameter-location": "method"
-		}
+      "name": "resourceName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the resource.",
+      "x-ms-parameter-location": "method"
+    }
   }
 }
