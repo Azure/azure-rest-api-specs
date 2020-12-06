@@ -26,14 +26,30 @@ These are the global settings for the KeyVault API.
 
 ``` yaml
 openapi-type: data-plane
-tag: package-7.2-preview
+tag: package-preview-7.3-preview
 ```
 
+
+### Tag: package-preview-7.3-preview
+
+These settings apply only when `--tag=package-preview-7.3-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-7.3-preview'
+input-file:
+  - Microsoft.KeyVault/preview/7.3-preview/backuprestore.json
+  - Microsoft.KeyVault/preview/7.3-preview/certificates.json
+  - Microsoft.KeyVault/preview/7.3-preview/common.json
+  - Microsoft.KeyVault/preview/7.3-preview/keys.json
+  - Microsoft.KeyVault/preview/7.3-preview/rbac.json
+  - Microsoft.KeyVault/preview/7.3-preview/secrets.json
+  - Microsoft.KeyVault/preview/7.3-preview/securitydomain.json
+  - Microsoft.KeyVault/preview/7.3-preview/storage.json
+```
 ### Tag: package-7.2-preview
 
 These settings apply only when `--tag=package-7.2-preview` is specified on the command line.
 
-```yaml $(tag) == 'package-7.2-preview'
+``` yaml $(tag) == 'package-7.2-preview'
 input-file:
 - Microsoft.KeyVault/preview/7.2-preview/certificates.json
 - Microsoft.KeyVault/preview/7.2-preview/common.json
@@ -49,7 +65,7 @@ input-file:
 
 These settings apply only when `--tag=package-7.1` is specified on the command line.
 
-```yaml $(tag) == 'package-7.1'
+``` yaml $(tag) == 'package-7.1'
 input-file:
 - Microsoft.KeyVault/stable/7.1/certificates.json
 - Microsoft.KeyVault/stable/7.1/common.json
@@ -62,7 +78,7 @@ input-file:
 
 These settings apply only when `--tag=package-7.1-preview` is specified on the command line.
 
-```yaml $(tag) == 'package-7.1-preview'
+``` yaml $(tag) == 'package-7.1-preview'
 input-file:
 - Microsoft.KeyVault/preview/7.1/certificates.json
 - Microsoft.KeyVault/preview/7.1/common.json
