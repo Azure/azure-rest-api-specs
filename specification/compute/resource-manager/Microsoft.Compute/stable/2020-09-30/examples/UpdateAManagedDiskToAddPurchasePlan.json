@@ -18,40 +18,62 @@
   "responses": {
     "202": {
       "body": {
+        "name": "myDisk",
+        "location": "westus",
+        "sku": {
+          "name": "Standard_LRS",
+          "tier": "Standard"
+        },
         "properties": {
-          "creationData": {
-            "createOption": "Empty"
-          },
-          "diskSizeGB": 200,
-          "provisioningState": "Updating",
+          "osType": "Windows",
+          "hyperVGeneration": "V1",
           "purchasePlan": {
             "name": "myPurchasePlanName",
             "publisher": "myPurchasePlanPublisher",
             "product": "myPurchasePlanProduct",
             "promotionCode": "myPurchasePlanPromotionCode"
-          }
-        },
-        "location": "West US",
-        "name": "myDisk"
+          },
+          "creationData": {
+            "createOption": "FromImage",
+            "imageReference": {
+              "id": "/Subscriptions/{subscription-id}/Providers/Microsoft.Compute/Locations/westus/Publishers/test_test_pmc2pc1/ArtifactTypes/VMImage/Offers/marketplace_vm_test/Skus/test_sku/Versions/1.0.0"
+            }
+          },
+          "diskSizeGB": 127,
+          "provisioningState": "Updating",
+          "isArmResource": true,
+          "faultDomain": 0
+        }
       }
     },
     "200": {
       "body": {
+        "name": "myDisk",
+        "location": "westus",
+        "sku": {
+          "name": "Standard_LRS",
+          "tier": "Standard"
+        },
         "properties": {
-          "creationData": {
-            "createOption": "Empty"
-          },
-          "diskSizeGB": 200,
-          "provisioningState": "Succeeded",
+          "osType": "Windows",
+          "hyperVGeneration": "V1",
           "purchasePlan": {
             "name": "myPurchasePlanName",
             "publisher": "myPurchasePlanPublisher",
             "product": "myPurchasePlanProduct",
             "promotionCode": "myPurchasePlanPromotionCode"
-          }
-        },
-        "location": "West US",
-        "name": "myDisk"
+          },
+          "creationData": {
+            "createOption": "FromImage",
+            "imageReference": {
+              "id": "/Subscriptions/{subscription-id}/Providers/Microsoft.Compute/Locations/westus/Publishers/test_test_pmc2pc1/ArtifactTypes/VMImage/Offers/marketplace_vm_test/Skus/test_sku/Versions/1.0.0"
+            }
+          },
+          "diskSizeGB": 127,
+          "provisioningState": "Succeeded",
+          "isArmResource": true,
+          "faultDomain": 0
+        }
       }
     }
   }
