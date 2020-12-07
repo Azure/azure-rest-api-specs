@@ -1,62 +1,48 @@
 {
   "parameters": {
-    "subscriptionId": "{subscription-id}",
-    "resourceGroupName": "myResourceGroup",
+    "subscriptionId": "850f02f7-e14c-4fb7-905d-7b98bcae9c7f",
+    "resourceGroupName": "meeshahtest",
     "api-version": "2020-09-30",
-    "diskName": "myManagedDisk"
+    "diskName": "ppDisk"
   },
   "responses": {
     "200": {
       "body": {
-        "managedBy": "/subscriptions/123caaa-123v-v211-a49f-f88ccac5bf88/resourceGroups/ResourceGroupName/providers/Microsoft.Compute/virtualMachines/TestVM414689371c88843d65ec",
+        "name": "ppdisk",
+        "id": "/subscriptions/850f02f7-e14c-4fb7-905d-7b98bcae9c7f/resourceGroups/meeshahtest/providers/Microsoft.Compute/disks/ppdisk",
+        "type": "Microsoft.Compute/disks",
+        "location": "westus",
         "sku": {
-          "name": "Standard_LRS"
+          "name": "Standard_LRS",
+          "tier": "Standard"
         },
         "properties": {
           "osType": "Windows",
-          "creationData": {
-            "createOption": "Empty"
-          },
+          "hyperVGeneration": "V1",
           "purchasePlan": {
-            "name": "{VMPurchasePlanName}",
-            "publisher": "{VMPurchasePlanPublisherId}",
-            "product": "{VMPurchasePlanProduct}",
-            "PoromotionCode": "{VMPurchasePlanPromotionCode}"
+            "name": "test_sku",
+            "publisher": "test_test_pmc2pc1",
+            "product": "marketplace_vm_test"
           },
-          "diskSizeGB": 10,
-          "encryptionSettingsCollection": {
-            "enabled": true,
-            "encryptionSettings": [
-              {
-                "diskEncryptionKey": {
-                  "sourceVault": {
-                    "id": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.KeyVault/vaults/myVMVault"
-                  },
-                  "secretUrl": "https://myvmvault.vault-int.azure-int.net/secrets/{secret}"
-                },
-                "keyEncryptionKey": {
-                  "sourceVault": {
-                    "id": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.KeyVault/vaults/myVMVault"
-                  },
-                  "keyUrl": "https://myvmvault.vault-int.azure-int.net/keys/{key}"
-                }
-              }
-            ]
+          "creationData": {
+            "createOption": "FromImage",
+            "imageReference": {
+              "id": "/Subscriptions/850f02f7-e14c-4fb7-905d-7b98bcae9c7f/Providers/Microsoft.Compute/Locations/westus/Publishers/test_test_pmc2pc1/ArtifactTypes/VMImage/Offers/marketplace_vm_test/Skus/test_sku/Versions/1.0.0"
+            }
           },
+          "diskSizeGB": 127,
+          "diskIOPSReadWrite": 500,
+          "diskMBpsReadWrite": 60,
           "encryption": {
             "type": "EncryptionAtRestWithPlatformKey"
           },
-          "timeCreated": "2016-12-28T04:41:35.079872+00:00",
-          "provisioningState": "Succeeded"
-        },
-        "type": "Microsoft.Compute/disks",
-        "location": "westus",
-        "tags": {
-          "department": "Development",
-          "project": "ManagedDisks"
-        },
-        "id": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/disks/myManagedDisk",
-        "name": "myManagedDisk"
+          "timeCreated": "2020-12-07T22:47:34.0427581+00:00",
+          "provisioningState": "Succeeded",
+          "diskState": "Unattached",
+          "diskSizeBytes": 136367308800,
+          "uniqueId": "d633885d-d102-4481-901e-5b2413d1a7be",
+          "networkAccessPolicy": "AllowAll"
+        }
       }
     }
   }
