@@ -265,6 +265,9 @@
             "$ref": "#/parameters/ClusterNamePathParam"
           },
           {
+            "$ref": "#/parameters/ClientProxy"
+          },
+          {
             "in": "body",
             "required": false,
             "name": "ClientAuthenticationDetails",
@@ -558,6 +561,12 @@
           "type": "integer",
           "description": "Number of nodes present in the connected cluster resource"
         },
+        "totalCoreCount": {
+          "readOnly": true,
+          "format": "int32",
+          "type": "integer",
+          "description": "Number of CPU cores present in the connected cluster resource"
+        },
         "agentVersion": {
           "readOnly": true,
           "type": "string",
@@ -566,12 +575,56 @@
         "provisioningState": {
           "$ref": "#/definitions/ConnectedClusterProvisioningState",
           "description": "Provisioning state of the connected cluster resource."
+        },
+        "distribution": {
+          "type": "string",
+          "description": "The Kubernetes distribution running on this connected cluster."
+        },
+        "infrastructure": {
+          "type": "string",
+          "description": "The infrastructure on which the Kubernetes cluster represented by this connected cluster is running on."
+        },
+        "offering": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Connected cluster offering"
+        },
+        "managedIdentityCertificateExpirationTime": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true,
+          "description": "Expiration time of the managed identity certificate"
+        },
+        "lastConnectivityTime": {
+          "type": "string",
+          "readOnly": true,
+          "format": "date-time",
+          "description": "Time representing the last instance when heart beat was received from the cluster"
+        },
+        "connectivityStatus": {
+          "type": "string",
+          "description": "Represents the connectivity status of the connected cluster.",
+          "enum": [
+            "Connecting",
+            "Connected",
+            "Offline",
+            "Expired"
+          ],
+          "x-ms-enum": {
+            "name": "ConnectivityStatus",
+            "modelAsString": true
+          }
         }
       },
       "description": "Properties of the connected cluster."
     },
     "CredentialResults": {
       "properties": {
+        "hybridConnectionConfig": {
+          "$ref": "#/definitions/HybridConnectionConfig",
+          "description": "Contains the REP (rendezvous endpoint) and “Sender” access token.",
+          "readOnly": true
+        },
         "kubeconfigs": {
           "type": "array",
           "readOnly": true,
@@ -698,6 +751,32 @@
         }
       },
       "description": "Properties which can be patched on the connected cluster resource."
+    },
+    "HybridConnectionConfig": {
+      "description": "Contains the REP (rendezvous endpoint) and “Sender” access token.",
+      "properties": {
+        "expirationTime": {
+          "description": "Timestamp when this token will be expired.",
+          "type": "integer",
+          "readOnly": true,
+          "format": "int64"
+        },
+        "hybridConnectionName": {
+          "description": "Name of the connection",
+          "type": "string",
+          "readOnly": true
+        },
+        "relay": {
+          "description": "Name of the relay.",
+          "type": "string",
+          "readOnly": true
+        },
+        "token": {
+          "description": "Sender access token",
+          "type": "string",
+          "readOnly": true
+        }
+      }
     }
   },
   "parameters": {
@@ -707,6 +786,14 @@
       "required": true,
       "type": "string",
       "description": "The name of the Kubernetes cluster on which get is called.",
+      "x-ms-parameter-location": "method"
+    },
+    "ClientProxy": {
+      "name": "ClientProxy",
+      "in": "query",
+      "required": false,
+      "type": "boolean",
+      "description": "Parameter to indicate whether the request is for client side proxy or not",
       "x-ms-parameter-location": "method"
     }
   }
