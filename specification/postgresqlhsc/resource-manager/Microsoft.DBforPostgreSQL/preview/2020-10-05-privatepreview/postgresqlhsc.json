@@ -130,7 +130,7 @@
           "Create a new server group as a point in time restore": {
             "$ref": "./examples/ServerGroupCreatePITR.json"
           },
-          "Update the server group": {
+          "Update the server group with PUT": {
             "$ref": "./examples/ServerGroupUpdatePut.json"
           }
         },
@@ -273,7 +273,7 @@
         "operationId": "ServerGroups_Update",
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
-          "Update the server group": {
+          "Update the server group with PATCH": {
             "$ref": "./examples/ServerGroupUpdatePatch.json"
           },
           "Scale compute": {
@@ -1100,9 +1100,9 @@
       "post": {
         "description": "Check the availability of name for resource",
         "tags": [
-          "CheckNameAvailability"
+          "ServerGroups"
         ],
-        "operationId": "CheckNameAvailability_Execute",
+        "operationId": "ServerGroups_CheckNameAvailability",
         "x-ms-examples": {
           "Check name availability": {
             "$ref": "./examples/CheckNameAvailability.json"
@@ -2082,11 +2082,19 @@
         },
         "type": {
           "type": "string",
-          "description": "Resource type used for verification."
+          "enum": [
+            "Microsoft.DBforPostgreSQL/serverGroupsv2"
+          ],
+          "description": "Resource type used for verification.",
+          "x-ms-enum": {
+            "name": "CheckNameAvailabilityResourceType",
+            "modelAsString": false
+          }  
         }
       },
       "required": [
-        "name"
+        "name",
+        "type"
       ]
     },
     "NameAvailability": {
