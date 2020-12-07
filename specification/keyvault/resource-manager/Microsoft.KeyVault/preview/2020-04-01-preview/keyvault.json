@@ -63,11 +63,11 @@
               "$ref": "#/definitions/Vault"
             }
           },
-          "400": {
-            "$ref": "#/responses/BadRequest"
-          },
-          "409": {
-            "$ref": "#/responses/Conflict"
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "common.json#/definitions/CloudError"
+            }
           }
         },
         "x-ms-examples": {
@@ -136,11 +136,11 @@
               "$ref": "#/definitions/Vault"
             }
           },
-          "400": {
-            "$ref": "#/responses/BadRequest"
-          },
-          "409": {
-            "$ref": "#/responses/Conflict"
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "common.json#/definitions/CloudError"
+            }
           }
         },
         "x-ms-examples": {
@@ -190,8 +190,11 @@
           "204": {
             "description": "No Content."
           },
-          "400": {
-            "$ref": "#/responses/BadRequest"
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "common.json#/definitions/CloudError"
+            }
           }
         },
         "x-ms-examples": {
@@ -241,8 +244,11 @@
               "$ref": "#/definitions/Vault"
             }
           },
-          "404": {
-            "$ref": "#/responses/NotFound"
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "common.json#/definitions/CloudError"
+            }
           }
         },
         "x-ms-examples": {
@@ -326,14 +332,11 @@
               "$ref": "#/definitions/VaultAccessPolicyParameters"
             }
           },
-          "400": {
-            "$ref": "#/responses/BadRequest"
-          },
-          "404": {
-            "$ref": "#/responses/NotFound"
-          },
-          "409": {
-            "$ref": "#/responses/Conflict"
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "common.json#/definitions/CloudError"
+            }
           }
         },
         "x-ms-examples": {
@@ -523,8 +526,11 @@
               "$ref": "#/definitions/DeletedVault"
             }
           },
-          "404": {
-            "$ref": "#/responses/NotFound"
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "common.json#/definitions/CloudError"
+            }
           }
         },
         "x-ms-examples": {
@@ -577,11 +583,11 @@
           "202": {
             "description": "Vault is being purged."
           },
-          "400": {
-            "$ref": "#/responses/BadRequest"
-          },
-          "404": {
-            "$ref": "#/responses/NotFound"
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "common.json#/definitions/CloudError"
+            }
           }
         },
         "x-ms-examples": {
@@ -747,7 +753,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "common.json#/definitions/CloudError"
             }
           }
         }
@@ -815,7 +821,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "common.json#/definitions/CloudError"
             }
           }
         }
@@ -877,7 +883,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "common.json#/definitions/CloudError"
             }
           }
         },
@@ -923,7 +929,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "common.json#/definitions/CloudError"
             }
           }
         }
@@ -931,29 +937,6 @@
     }
   },
   "definitions": {
-    "CloudError": {
-      "description": "An error response from Key Vault resource provider",
-      "properties": {
-        "error": {
-          "$ref": "#/definitions/CloudErrorBody"
-        }
-      },
-      "x-ms-external": true
-    },
-    "CloudErrorBody": {
-      "description": "An error response from Key Vault resource provider",
-      "properties": {
-        "code": {
-          "type": "string",
-          "description": "Error code. This is a mnemonic that can be consumed programmatically."
-        },
-        "message": {
-          "type": "string",
-          "description": "User friendly error message. The message is typically localized and may vary with service version."
-        }
-      },
-      "x-ms-external": true
-    },
     "Sku": {
       "properties": {
         "family": {
@@ -1204,7 +1187,7 @@
             "RegisteringDns"
           ],
           "x-ms-enum": {
-            "name": "ProvisioningState",
+            "name": "VaultProvisioningState",
             "modelAsString": true
           }
         },
@@ -1898,20 +1881,6 @@
       "scopes": {
         "user_impersonation": "impersonate your user account"
       }
-    }
-  },
-  "responses": {
-    "BadRequest": {
-      "description": "Bad request.",
-      "x-ms-error-response": true
-    },
-    "NotFound": {
-      "description": "The specified resource does not exist.",
-      "x-ms-error-response": true
-    },
-    "Conflict": {
-      "description": "A conflict occurred to prevent the operation from completing.",
-      "x-ms-error-response": true
     }
   }
 }
