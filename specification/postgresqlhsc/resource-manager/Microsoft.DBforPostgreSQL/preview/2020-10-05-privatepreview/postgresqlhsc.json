@@ -58,7 +58,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/ServerGroupList"
+              "$ref": "#/definitions/ServerGroupListResult"
             }
           },
           "default": {
@@ -100,7 +100,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/ServerGroupList"
+              "$ref": "#/definitions/ServerGroupListResult"
             }
           },
           "default": {
@@ -358,7 +358,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/ServerGroupServerList"
+              "$ref": "#/definitions/ServerGroupServerListResult"
             }
           },
           "default": {
@@ -1402,7 +1402,7 @@
         }
       }
     },
-    "ServerGroupServerList": {
+    "ServerGroupServerListResult": {
       "description": "A list of servers in a server group.",
       "properties": {
         "value": {
@@ -1450,7 +1450,7 @@
         }
       }
     },
-    "ServerGroupList": {
+    "ServerGroupListResult": {
       "type": "object",
       "properties": {
         "value": {
@@ -1733,20 +1733,20 @@
           "description": "Allowed values of the configuration.",
           "readOnly": true
         },
-        "serverRoleGroupConfigurationValues": {
+        "serverRoleGroupConfigurations": {
           "type": "array",
           "description": "The list of server role group configuration values.",
           "items": {
-            "$ref": "#/definitions/ServerRoleGroupConfigurationValue"
+            "$ref": "#/definitions/ServerRoleGroupConfiguration"
           },
           "uniqueItems": true
         }
       },
       "required": [
-        "serverRoleGroupConfigurationValues"
+        "serverRoleGroupConfigurations"
       ]
     },
-    "ServerRoleGroupConfigurationValue": {
+    "ServerRoleGroupConfiguration": {
       "description": "Represents server role group configuration value.",
       "properties": {
         "role": {
