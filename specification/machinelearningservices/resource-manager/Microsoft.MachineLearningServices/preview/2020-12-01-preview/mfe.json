@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Azure Machine Learning Workspaces",
-    "version": "2020-12"
+    "version": "2020-12-01-preview"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -6473,7 +6473,7 @@
       "type": "object",
       "properties": {
         "distributionType": {
-          "description": "Specifies the type of distibution framework.",
+          "description": "Specifies the type of distribution framework.",
           "enum": [
             "PyTorch",
             "Tensorflow",
@@ -6769,7 +6769,7 @@
             },
             "maxRunDurationSeconds": {
               "format": "int64",
-              "description": "The max run duration in seconds, ater which the job will be cancelled.",
+              "description": "The max run duration in seconds, after which the job will be cancelled.",
               "type": "integer"
             },
             "codeConfiguration": {
@@ -6787,7 +6787,7 @@
               }
             },
             "distributionConfiguration": {
-              "description": "Distributon configuration of the job. This should be one of MpiConfiguration, TensorflowConfiguration, or PyTorchConfiguration.",
+              "description": "Distribution configuration of the job. This should be one of MpiConfiguration, TensorflowConfiguration, or PyTorchConfiguration.",
               "allOf": [
                 {
                   "$ref": "#/definitions/DistributionConfiguration"
