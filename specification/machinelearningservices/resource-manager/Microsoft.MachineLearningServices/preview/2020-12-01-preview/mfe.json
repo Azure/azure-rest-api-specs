@@ -2526,6 +2526,9 @@
         ],
         "summary": "Deletes a Job.",
         "operationId": "Jobs_Delete",
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionIdParameter"
@@ -2551,6 +2554,12 @@
           }
         ],
         "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
           "204": {
             "description": "Success"
           },
@@ -2635,6 +2644,9 @@
         ],
         "summary": "Cancels a Job.",
         "operationId": "Jobs_Cancel",
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionIdParameter"
@@ -2660,6 +2672,12 @@
           }
         ],
         "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
           "200": {
             "description": "Success"
           }
@@ -2681,6 +2699,9 @@
         ],
         "summary": "Polls a Job operation.",
         "operationId": "Jobs_Poll",
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionIdParameter"
@@ -2713,6 +2734,12 @@
           }
         ],
         "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
           "200": {
             "description": "Success"
           },
@@ -3821,16 +3848,16 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "$ref": "#/definitions/OnlineDeploymentPropertiesTrackedResourceArmPaginatedResult"
-            }
-          },
           "default": {
             "description": "Error",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/OnlineDeploymentPropertiesTrackedResourceArmPaginatedResult"
             }
           }
         },
@@ -3946,16 +3973,16 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "$ref": "#/definitions/OnlineDeploymentPropertiesTrackedResource"
-            }
-          },
           "default": {
             "description": "Error",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/OnlineDeploymentPropertiesTrackedResource"
             }
           }
         },
@@ -4096,6 +4123,12 @@
           }
         ],
         "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
           "200": {
             "description": "Success",
             "schema": {
@@ -4159,6 +4192,12 @@
           }
         ],
         "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
           "200": {
             "description": "Success",
             "schema": {
