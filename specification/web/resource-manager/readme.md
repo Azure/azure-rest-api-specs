@@ -34,7 +34,7 @@ These are the global settings for the Web API.
 title: WebSiteManagementClient
 description: WebSite Management Client
 openapi-type: arm
-tag: package-2019-08
+tag: package-2020-09
 ```
 
 ### Suppression
@@ -53,6 +53,48 @@ directive:
     from: WebApps.json
     where: $.definitions.KeyInfo.properties
     reason: Model type is not an Azure resource
+```
+
+### Tag: package-2020-09
+These settings apply only when `--tag=package-2020-09` or `--tag=package-2020-09-only` is specified on the command line.
+NOTE: Currently these tags are the same, but it will need to be split if any files from folders other than 2020-06-01 are included.
+``` yaml $(tag) == 'package-2020-09' || $(tag) == 'package-2020-09-only'
+input-file:
+- Microsoft.CertificateRegistration/stable/2020-09-01/AppServiceCertificateOrders.json
+- Microsoft.CertificateRegistration/stable/2020-09-01/CertificateRegistrationProvider.json
+- Microsoft.DomainRegistration/stable/2020-09-01/Domains.json
+- Microsoft.DomainRegistration/stable/2020-09-01/TopLevelDomains.json
+- Microsoft.DomainRegistration/stable/2020-09-01/DomainRegistrationProvider.json
+- Microsoft.Web/stable/2020-09-01/Certificates.json
+- Microsoft.Web/stable/2020-09-01/CommonDefinitions.json
+- Microsoft.Web/stable/2020-09-01/DeletedWebApps.json
+- Microsoft.Web/stable/2020-09-01/Diagnostics.json
+- Microsoft.Web/stable/2020-09-01/Provider.json
+- Microsoft.Web/stable/2020-09-01/Recommendations.json
+- Microsoft.Web/stable/2020-09-01/ResourceProvider.json
+- Microsoft.Web/stable/2020-09-01/WebApps.json
+- Microsoft.Web/stable/2020-09-01/StaticSites.json
+- Microsoft.Web/stable/2020-09-01/AppServiceEnvironments.json
+- Microsoft.Web/stable/2020-09-01/AppServicePlans.json
+- Microsoft.Web/stable/2020-09-01/ResourceHealthMetadata.json
+directive:
+  # suppress each RPC 3016 error
+- where: $.definitions.FunctionSecrets.properties.trigger_url
+  suppress: R3016
+  reason: This requires a breaking change in functions runtime API.
+  approved-by: "@weidongxu-microsoft"
+- where: $.definitions.Identifier.properties
+  suppress: R3019
+  reason: It's an old API, will resolve in next API version
+  approved-by: "@ravbhatnagar"
+- where: $.definitions.VnetGateway
+  suppress: R4015
+  reason: Does not have list operation
+  approved-by: "@mark.cowlishaw"
+- where: $.definitions.VnetInfo
+  suppress: R4015
+  reason: Does not have list operation
+  approved-by: "@mark.cowlishaw"
 ```
 
 ### Tag: package-2020-06
