@@ -25,7 +25,7 @@ output-folder: $(azureresourceschema-folder)/schemas
 # all the input files in this apiVersion
 input-file:
   - Microsoft.KeyVault/preview/2020-04-01-preview/managedHsm.json
-  - Microsoft.KeyVault/preview/2020-04-01-preview/keyvault.json	
+  - Microsoft.KeyVault/preview/2020-04-01-preview/keyvault.json
   - Microsoft.KeyVault/preview/2020-04-01-preview/providers.json
   - Microsoft.KeyVault/preview/2020-04-01-preview/secrets.json
 
