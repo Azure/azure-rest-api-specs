@@ -24,20 +24,6 @@ To see additional help and options, run:
 
 These are the global settings for the Machine Learning Services API.
 
-``` yaml
-openapi-type: arm
-tag: package-preview-2020-12
-```
-
-
-### Tag: package-preview-2020-12
-
-These settings apply only when `--tag=package-preview-2020-12` is specified on the command line.
-
-```yaml $(tag) == 'package-preview-2020-12'
-input-file:
-  - Microsoft.MachineLearningServices/preview/2020-12/mfe.json
-```
 ### Tag: package-2020-08-01
 
 These settings apply only when `--tag=package-2020-08` is specified on the command line.
@@ -126,6 +112,15 @@ These settings apply only when `--tag=package-2018-11-19` is specified on the co
 ``` yaml $(tag) == 'package-2018-11-19'
 input-file:
 - Microsoft.MachineLearningServices/stable/2018-11-19/machineLearningServices.json
+```
+
+### Tag: package-2020-12-01-preview
+
+These settings apply only when `--tag=package-2020-12-01-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-12-01-preview'
+input-file:
+- Microsoft.MachineLearningServices/preview/2020-12-01-preview/mfe.json
 ```
 
 ### Tag: package-2020-09-01-preview
@@ -240,6 +235,7 @@ batch:
   - tag: package-2019-06-01
   - tag: package-2019-05-01
   - tag: package-2018-11-19
+  - tag: package-2020-12-01-preview
   - tag: package-2020-09-01-preview
   - tag: package-2020-05-01-preview
   - tag: package-2020-04-01-preview
@@ -360,6 +356,19 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 java:
   namespace: com.microsoft.azure.management.machinelearningservices.v2018_11_19
   output-folder: $(azure-libraries-for-java-folder)/sdk/machinelearningservices/mgmt-v2018_11_19
+regenerate-manager: true
+generate-interface: true
+```
+
+### Tag: package-2020-12-01-preview and java
+
+These settings apply only when `--tag=package-2020-12-01-preview --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2020-12-01-preview' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.machinelearningservices.v2020_12_01_preview
+  output-folder: $(azure-libraries-for-java-folder)/sdk/machinelearningservices/mgmt-v2020_12_01_preview
 regenerate-manager: true
 generate-interface: true
 ```
