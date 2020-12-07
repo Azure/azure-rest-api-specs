@@ -1271,7 +1271,7 @@
         }
       }
     },
-    "SummaryItem": {
+    "Summary": {
       "description": "Summary item.",
       "type": "object",
       "properties": {
@@ -1283,6 +1283,23 @@
         "item": {
           "description": "Gets the item.",
           "type": "string"
+        }
+      }
+    },
+    "SummaryCollection": {
+      "description": "Summary Collection.",
+      "type": "object",
+      "properties": {
+        "fieldName": {
+          "description": "Gets or sets the field name on which summary is done.",
+          "type": "string"
+        },
+        "summary": {
+          "description": "Gets or sets the list of summary items.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Summary"
+          }
         }
       }
     },
@@ -1514,12 +1531,9 @@
           "description": "Gets the value of  next link.",
           "type": "string"
         },
-        "summary": {
-          "description": "Gets or the list of summary items.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/SummaryItem"
-          }
+        "summaryCollection": {
+          "description": "Gets or sets the list of summary items and the field on which summary is done.",
+          "$ref": "#/definitions/SummaryCollection"
         }
       }
     },
