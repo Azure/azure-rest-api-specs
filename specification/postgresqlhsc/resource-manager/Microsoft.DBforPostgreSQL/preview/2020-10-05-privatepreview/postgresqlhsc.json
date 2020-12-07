@@ -1275,6 +1275,11 @@
         "modelAsString": true
       }
     },
+    "FullyQualifiedDomainName": {
+      "type": "string",
+      "description": "The fully qualified domain name of a server.",
+      "readOnly": true
+    },
     "ServerProperties": {
       "description": "The properties of a server.",
       "properties": {
@@ -1349,11 +1354,23 @@
           "type": "array",
           "description": "The list of server names in the server role group.",
           "items": {
-            "type": "string"
+            "$ref": "#/definitions/ServerNameItem"
           },
           "readOnly": true,
-          "minItems": 1,
           "uniqueItems": true
+        }
+      }
+    },
+    "ServerNameItem": {
+      "description": "The name object for a server.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of a server."
+        },
+        "fullyQualifiedDomainName": {
+          "$ref": "#/definitions/FullyQualifiedDomainName",
+          "description": "The fully qualified domain name of a server."
         }
       }
     },
@@ -1365,6 +1382,10 @@
         }
       ],
       "properties": {
+        "fullyQualifiedDomainName": {
+          "$ref": "#/definitions/FullyQualifiedDomainName",
+          "description": "The fully qualified domain name of a server."
+        },
         "role": {
           "$ref": "#/definitions/ServerRole",
           "description": "The role of server in the server group."
