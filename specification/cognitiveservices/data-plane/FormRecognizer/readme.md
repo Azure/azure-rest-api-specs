@@ -19,7 +19,7 @@ openapi-type: data-plane
 These settings apply only when `--tag=release_2_1_preview` is specified on the command line.
 ``` yaml $(tag) == 'release_2_1_preview'
 input-file: 
-  - preview/v2.1-preview.1/FormRecognizer.json
+  - preview/v2.1-preview.2/FormRecognizer.json
 ```
 
 ### Release 2.0
