@@ -185,6 +185,12 @@
               "$ref": "#/definitions/Certificate"
             }
           },
+          "202": {
+            "description": "Certificate creation is in progress.",
+            "schema": {
+              "$ref": "#/definitions/Certificate"
+            }
+          },
           "default": {
             "description": "App Service error response.",
             "schema": {
@@ -196,7 +202,8 @@
           "Create Or Update Certificate": {
             "$ref": "./examples/CreateOrUpdateCertificate.json"
           }
-        }
+        },
+        "x-ms-long-running-operation": true
       },
       "delete": {
         "tags": [
@@ -284,6 +291,12 @@
               "$ref": "#/definitions/Certificate"
             }
           },
+          "202": {
+            "description": "Certificate creation is in progress.",
+            "schema": {
+              "$ref": "#/definitions/Certificate"
+            }
+          },
           "default": {
             "description": "App Service error response.",
             "schema": {
@@ -311,9 +324,6 @@
       "properties": {
         "properties": {
           "description": "Certificate resource specific properties",
-          "required": [
-            "password"
-          ],
           "properties": {
             "friendlyName": {
               "description": "Friendly name of the certificate.",
@@ -433,6 +443,10 @@
             },
             "canonicalName": {
               "description": "CNAME of the certificate to be issued via free certificate",
+              "type": "string"
+            },
+            "domainValidationMethod": {
+              "description": "Method of domain validation for free cert",
               "type": "string"
             }
           },
@@ -472,9 +486,6 @@
       "properties": {
         "properties": {
           "description": "CertificatePatchResource resource specific properties",
-          "required": [
-            "password"
-          ],
           "properties": {
             "friendlyName": {
               "description": "Friendly name of the certificate.",
@@ -594,6 +605,10 @@
             },
             "canonicalName": {
               "description": "CNAME of the certificate to be issued via free certificate",
+              "type": "string"
+            },
+            "domainValidationMethod": {
+              "description": "Method of domain validation for free cert",
               "type": "string"
             }
           },
