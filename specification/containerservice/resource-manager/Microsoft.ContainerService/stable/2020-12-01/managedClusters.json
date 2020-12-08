@@ -2408,19 +2408,21 @@
         },
         {
           "properties": {
-            "timeInWeek": {
-              "type": "array",
-              "items": { 
-                "$ref": "#/definitions/TimeInWeek"
+            "properties": {
+              "timeInWeek": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/definitions/TimeInWeek"
+                },
+                "description": "Weekday time slots on which control plane can be upgraded."
               },
-              "description": "Weekday time slots on which control plane can be upgraded."
-            },
-            "notAllowedTime": {
-              "type": "array",
-              "items": { 
-                "$ref": "#/definitions/TimeSpan"
-              },
-              "description": "Time slots on which upgrade is not allowed."
+              "notAllowedTime": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/definitions/TimeSpan"
+                },
+                "description": "Time slots on which upgrade is not allowed."
+              }
             }
           }
         }
