@@ -29,7 +29,7 @@ output-folder: $(azureresourceschema-folder)/schemas
 input-file:
   - Microsoft.Sql/preview/2020-08-01-preview/Databases.json
   - Microsoft.Sql/preview/2020-08-01-preview/ElasticPools.json
-
+  
 ```
 
 ### Tag: schema-sql-2020-02-02-preview and azureresourceschema
