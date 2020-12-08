@@ -884,6 +884,52 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/managedClusters/{resourceName}/maintenanceConfigurations": {
+      "get": {
+        "tags": [
+          "MaintenanceConfigurations"
+        ],
+        "operationId": "MaintenanceConfigurations_List",
+        "summary": "Gets a list of maintenance configurations in the specified managed cluster.",
+        "description": "Gets a list of maintenance configurations in the specified managed cluster. The operation returns properties of each agent pool.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/MaintenanceConfigurationListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List maintenance configurations by Managed Cluster": {
+            "$ref": "./examples/MaintenanceConfigurationsList.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/managedClusters/{resourceName}/maintenanceConfigurations/{configName}": {
       "get": {
         "tags": [
@@ -917,7 +963,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/DefaultMaintenanceConfiguration"
+              "$ref": "#/definitions/MaintenanceConfiguration"
             }
           },
           "default": {
@@ -928,7 +974,7 @@
           }
         },
         "x-ms-examples": {
-          "Get Agent Pool": {
+          "Get Maintenance Configuration": {
             "$ref": "./examples/MaintenanceConfigurationsGet.json"
           }
         }
@@ -965,7 +1011,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/DefaultMaintenanceConfiguration"
+              "$ref": "#/definitions/MaintenanceConfiguration"
             },
             "description": "Parameters supplied to the Create or Update a default maintenance configuration."
           }
@@ -974,7 +1020,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/DefaultMaintenanceConfiguration"
+              "$ref": "#/definitions/MaintenanceConfiguration"
             }
           },
           "default": {
@@ -986,7 +1032,7 @@
         },
         "x-ms-long-running-operation": false,
         "x-ms-examples": {
-          "Create/Update Agent Pool": {
+          "Create/Update Maintenance Configuration": {
             "$ref": "./examples/MaintenanceConfigurationsCreate_Update.json"
           }
         }
@@ -1032,7 +1078,7 @@
         },
         "x-ms-long-running-operation": false,
         "x-ms-examples": {
-          "Delete Agent Pool": {
+          "Delete Maintenance Configuration": {
             "$ref": "./examples/MaintenanceConfigurationsDelete.json"
           }
         }
@@ -2401,7 +2447,24 @@
       },
       "description": "Profile of network configuration."
     },
-    "DefaultMaintenanceConfiguration": {
+    "MaintenanceConfigurationList": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MaintenanceConfiguration"
+          },
+          "description": "The list of maintenance configurations."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URL to get the next set of maintenance configuration results.",
+          "readOnly": true
+        }
+      },
+      "description": "The response from the List maintenance configurations operation."
+    },
+    "MaintenanceConfiguration": {
       "allOf": [
         {
           "$ref": "#/definitions/SubResource"
@@ -2410,15 +2473,15 @@
           "properties": {
             "properties": {
               "description": "Properties of a default maintenance configuration.",
-              "$ref": "#/definitions/DefaultMaintenanceConfigurationProperties",
+              "$ref": "#/definitions/MaintenanceConfigurationProperties",
               "x-ms-client-flatten": true
             }
           }
         }
       ],
-      "description": "Default maintenance configuration."
+      "description": "maintenance configuration."
     },
-    "DefaultMaintenanceConfigurationProperties": {
+    "MaintenanceConfigurationProperties": {
       "properties": {
         "timeInWeek": {
           "type": "array",
