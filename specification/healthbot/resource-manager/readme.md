@@ -53,6 +53,17 @@ input-file:
 
 ---
 
+### Tag3: package-2020-12-08-preview
+
+These settings apply only when `--tag=package-2020-12-08-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2020-12-08-preview'
+input-file:
+  - Microsoft.HealthBot/stable/2020-12-08-preview/healthbot.json
+```
+
+---
+
 # Code Generation
 
 ## Swagger to SDK
