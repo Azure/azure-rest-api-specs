@@ -84,7 +84,7 @@ require: $(this-folder)/../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
-  - $(this-folder)/LiveVideoAnalytics.Edge/preview/1.0/LiveVideoAnalytics.json
+  - $(this-folder)/LiveVideoAnalytics.Edge/preview/2.0.0/LiveVideoAnalytics.json
 
 ```
 
