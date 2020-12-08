@@ -41,7 +41,7 @@ tag: package-policy-2020-09
 ```
 
 ``` yaml $(package-resources)
-tag: package-resources-2020-06
+tag: package-resources-2020-10
 ```
 
 ``` yaml $(package-subscriptions)
@@ -61,7 +61,16 @@ tag: package-deploymentscripts-2020-10
 ```
 
 ``` yaml $(package-templatespecs)
-tag: package-2020-09
+tag: package-templatespecs-2019-06-preview
+```
+
+### Tag: package-resources-2020-10
+
+These settings apply only when `--tag=package-resources-2020-10` is specified on the command line.
+
+``` yaml $(tag) == 'package-resources-2020-10'
+input-file:
+- Microsoft.Resources/stable/2020-10-01/resources.json
 ```
 
 ### Tag: package-policy-2020-09
@@ -71,6 +80,13 @@ These settings apply only when `--tag=package-policy-2020-09` is specified on th
 ``` yaml $(tag) == 'package-policy-2020-09'
 input-file:
 - Microsoft.Authorization/stable/2020-09-01/dataPolicyManifests.json
+- Microsoft.Authorization/stable/2020-09-01/policyAssignments.json
+- Microsoft.Authorization/stable/2020-09-01/policyDefinitions.json
+- Microsoft.Authorization/stable/2020-09-01/policySetDefinitions.json
+
+# Needed when there is more than one input file
+override-info:
+  title: PolicyClient
 ```
 
 ### Tag: package-preview-2020-08
@@ -82,13 +98,13 @@ input-file:
   - Microsoft.Solutions/preview/2020-08-21-preview/managedapplications.json
 ```
 
-### Tag: package-resources-2020-06
+### Tag: package-resources-2020-08
 
-These settings apply only when `--tag=package-resources-2020-06` is specified on the command line.
+These settings apply only when `--tag=package-resources-2020-08` is specified on the command line.
 
-``` yaml $(tag) == 'package-resources-2020-06'
+``` yaml $(tag) == 'package-resources-2020-08'
 input-file:
-- Microsoft.Resources/stable/2020-06-01/resources.json
+  - Microsoft.Resources/stable/2020-08-01/resources.json
 ```
 
 ### Tag: package-subscriptions-2020-01
@@ -304,6 +320,15 @@ These settings apply only when `--tag=package-policy-2015-10` is specified on th
 ``` yaml $(tag) == 'package-policy-2015-10'
 input-file:
 - Microsoft.Authorization/preview/2015-10-01-preview/policy.json
+```
+
+### Tag: package-resources-2020-06
+
+These settings apply only when `--tag=package-resources-2020-06` is specified on the command line.
+
+``` yaml $(tag) == 'package-resources-2020-06'
+input-file:
+- Microsoft.Resources/stable/2020-06-01/resources.json
 ```
 
 ### Tag: package-resources-2019-10
@@ -522,6 +547,10 @@ directive:
     where: $.paths
     reason: policy set definition under an extension resource with Microsoft.Management
   - suppress: UniqueResourcePaths
+    from: resources.json
+    where: $.paths
+    reason: route definitions under an extension resource with Microsoft.Management
+  - suppress: UniqueResourcePaths
     from: policyDefinitions.json
     where: $.paths
     reason: policy definition under an extension resource with Microsoft.Management
@@ -668,6 +697,16 @@ directive:
     where: $.definitions.AliasPathMetadata
     from: resources.json
     reason: This was already checked in - not my code
+  - suppress: XmsExamplesRequired
+    where: $.paths
+    from: resources.json
+    reason: Pre-existing lint error. Not related to this version release.
+  - suppress: TopLevelResourcesListByResourceGroup
+    from: policyDefinitions.json
+    reason: Policy definitions are a proxy resource that is only usable on subscriptions or management groups
+  - suppress: TopLevelResourcesListByResourceGroup
+    from: policySetDefinitions.json
+    reason: Policy set definitions are a proxy resource that is only usable on subscriptions or management groups
 ```
 
 ---
