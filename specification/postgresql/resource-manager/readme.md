@@ -140,7 +140,6 @@ input-file:
 ``` yaml
 directive:
   - suppress: PathResourceProviderNamePascalCase
-    from: ServerSecurityAlertPolicies.json
     reason: The name of the provider is DBforPostgreSQL
 ```
 
