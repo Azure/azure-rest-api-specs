@@ -272,7 +272,7 @@
           "description": "Gets a unique read-only string that changes whenever the resource is updated."
         },
         "sku": {
-          "description": "The pricing tier of web application firewall policy. Defaults to Enabled if not specified.",
+          "description": "The pricing tier of web application firewall policy. Defaults to Classic_AzureFrontDoor if not specified.",
           "$ref": "#/definitions/Sku"
         }
       },
@@ -303,14 +303,6 @@
           "readOnly": true,
           "items": {
             "$ref": "#/definitions/FrontendEndpointLink"
-          }
-        },
-        "securityPolicyLinks": {
-          "description": "Describes CDN Security Policies associated with this Web Application Firewall policy.",
-          "type": "array",
-          "readOnly": true,
-          "items": {
-            "$ref": "#/definitions/SecurityPolicyLink"
           }
         },
         "provisioningState": {
@@ -749,38 +741,6 @@
           "readOnly": true,
           "description": "Version of the managed rule set type."
         },
-        "ruleSetVersionState": {
-          "type": "string",
-          "description": "State of the rule set version.",
-          "enum": [
-            "Recommended",
-            "Supported",
-            "Deprecated"
-          ],
-          "x-ms-enum": {
-            "name": "RuleSetVersionStateType",
-            "modelAsString": true
-          }
-        },
-        "ruleSetDefaultAction": {
-          "$ref": "#/definitions/ManagedRuleSetActionType",
-          "readOnly": true
-        },
-        "ruleSetFeatures": {
-          "type": "array",
-          "readOnly": true,
-          "items": {
-            "type": "string",
-            "description": "State of the rule set version.",
-            "enum": [
-              "AnomalyScoreMode"
-            ],
-            "x-ms-enum": {
-              "name": "RuleSetFeatureType",
-              "modelAsString": true
-            }
-          }
-        },
         "ruleGroups": {
           "type": "array",
           "readOnly": true,
@@ -853,8 +813,7 @@
             "RequestHeaderNames",
             "RequestCookieNames",
             "QueryStringArgNames",
-            "RequestBodyPostArgNames",
-            "RequestBodyJsonArgNames"
+            "RequestBodyPostArgNames"
           ],
           "description": "The variable type to be excluded.",
           "x-ms-enum": {
@@ -963,38 +922,27 @@
         }
       }
     },
-    "SecurityPolicyLink": {
-      "description": "Defines the Resource ID for a CDN Security Policy.",
-      "type": "object",
-      "readOnly": true,
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "Resource ID."
-        }
+    "parameters": {
+      "PolicyNameParameter": {
+        "name": "policyName",
+        "in": "path",
+        "required": true,
+        "type": "string",
+        "maxLength": 128,
+        "x-ms-parameter-location": "method",
+        "description": "The name of the Web Application Firewall Policy."
+      },
+      "ResourceGroupNameParameter": {
+        "name": "resourceGroupName",
+        "in": "path",
+        "required": true,
+        "type": "string",
+        "pattern": "^[a-zA-Z0-9_\\-\\(\\)\\.]*[^\\.]$",
+        "minLength": 1,
+        "maxLength": 80,
+        "x-ms-parameter-location": "method",
+        "description": "Name of the Resource group within the Azure subscription."
       }
-    }
-  },
-  "parameters": {
-    "PolicyNameParameter": {
-      "name": "policyName",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "maxLength": 128,
-      "x-ms-parameter-location": "method",
-      "description": "The name of the Web Application Firewall Policy."
-    },
-    "ResourceGroupNameParameter": {
-      "name": "resourceGroupName",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "pattern": "^[a-zA-Z0-9_\\-\\(\\)\\.]*[^\\.]$",
-      "minLength": 1,
-      "maxLength": 80,
-      "x-ms-parameter-location": "method",
-      "description": "Name of the Resource group within the Azure subscription."
     }
   }
 }
