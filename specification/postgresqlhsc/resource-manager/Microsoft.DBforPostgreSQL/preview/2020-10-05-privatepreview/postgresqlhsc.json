@@ -129,9 +129,6 @@
           },
           "Create a new server group as a point in time restore": {
             "$ref": "./examples/ServerGroupCreatePITR.json"
-          },
-          "Update the server group with PUT": {
-            "$ref": "./examples/ServerGroupUpdatePut.json"
           }
         },
         "parameters": [
@@ -273,8 +270,8 @@
         "operationId": "ServerGroups_Update",
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
-          "Update the server group with PATCH": {
-            "$ref": "./examples/ServerGroupUpdatePatch.json"
+          "Update the server group": {
+            "$ref": "./examples/ServerGroupUpdate.json"
           },
           "Scale compute": {
             "$ref": "./examples/ServerGroupScaleCompute.json"
@@ -304,7 +301,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ServerGroupForPatch"
+              "$ref": "#/definitions/ServerGroupForUpdate"
             },
             "description": "The parameters for updating a server group."
           }
@@ -1439,7 +1436,7 @@
         }
       }
     },
-    "ServerGroupForPatch": {
+    "ServerGroupForUpdate": {
       "description": "Represents a server group for update.",
       "properties": {
         "location": {
@@ -1460,6 +1457,46 @@
         }
       }
     },
+    "ServerGroupPropertiesForUpdate": {
+      "description": "The properties used to update a server group.",
+      "properties": {
+        "administratorLogin": {
+          "type": "string",
+          "description": "The administrator's login name of servers in server group. Can only be specified when the server is being created (and is required for creation)."
+        },
+        "administratorLoginPassword": {
+          "type": "string",
+          "format": "password",
+          "x-ms-secret": true,
+          "x-ms-mutability": [
+            "create",
+            "update"
+          ],
+          "description": "The password of the administrator login."
+        },
+        "backupRetentionDays": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Backup retention days for the server group."
+        },
+        "version": {
+          "$ref": "#/definitions/ServerVersion",
+          "description": "The version of a server."
+        },
+        "citusVersion": {
+          "$ref": "#/definitions/CitusVersion",
+          "description": "The citus version of a server."
+        },
+        "serverRoleGroups": {
+          "$ref": "#/definitions/ServerRoleGroupList",
+          "description": "The list of server role groups."
+        },
+        "vnetInjArgs": {
+          "$ref": "#/definitions/VnetInjArgs",
+          "description": "The vnet injection arguments for server group."
+        }
+      }
+    },
     "ServerGroup": {
       "description": "Represents a server group for create.",
       "allOf": [
@@ -1474,7 +1511,7 @@
         },
         "properties": {
           "$ref": "#/definitions/ServerGroupProperties",
-          "x-ms-client-flatten": true,
+          "x-ms-client-flatten": false,
           "description": "Properties of the server group create."
         }
       }
@@ -1563,7 +1600,6 @@
           "description": "The mode to create a new server group.",
           "enum": [
             "Default",
-            "Update",
             "PointInTimeRestore"
           ],
           "x-ms-enum": {
@@ -1634,44 +1670,6 @@
         "version",
         "serverRoleGroups"
       ]
-    },
-    "ServerGroupPropertiesForUpdate": {
-      "x-ms-discriminator-value": "Update",
-      "description": "The properties used to update a server group.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/ServerGroupProperties"
-        }
-      ],
-      "properties": {
-        "administratorLoginPassword": {
-          "type": "string",
-          "format": "password",
-          "x-ms-secret": true,
-          "x-ms-mutability": [
-            "create",
-            "update"
-          ],
-          "description": "The password of the administrator login."
-        },
-        "backupRetentionDays": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Backup retention days for the server group."
-        },
-        "version": {
-          "$ref": "#/definitions/ServerVersion",
-          "description": "The version of a server."
-        },
-        "citusVersion": {
-          "$ref": "#/definitions/CitusVersion",
-          "description": "The citus version of a server."
-        },
-        "serverRoleGroups": {
-          "$ref": "#/definitions/ServerRoleGroupList",
-          "description": "The list of server role groups."
-        }
-      }
     },
     "ServerGroupPropertiesForRestore": {
       "x-ms-discriminator-value": "PointInTimeRestore",

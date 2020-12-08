@@ -13,7 +13,6 @@ cli:
     - name: Update the server group
     - name: Get the server group
     - name: Delete the server group
-    - name: Update the server group
     - name: Scale compute
     - name: Scale storage
     - name: Add new worker nodes
