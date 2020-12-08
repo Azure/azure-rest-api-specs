@@ -4,6 +4,8 @@
 
 This is the AutoRest configuration file for Live video analytics edge.
 
+These swaggers are used to generate the SDKs for Live Video Analytics. These SDKs are models only (no client) and customer would need to use IoT SDK to send direct method calls to IoT hub. These SDKs are not ARM based and doesn't do any REST calls. all operations are sent as direct methods on IoT hub.
+
 ---
 
 ## Getting Started
