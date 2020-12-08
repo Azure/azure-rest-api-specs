@@ -2428,17 +2428,20 @@
       "description": "Customer upgrade schedule for control plane."
     },
     "TimeInWeek": {
-      "day": {
-        "$ref": "#/definitions/WeekDay",
-        "description": "A day in a week."
-      },
-      "hourSlots": {
-        "type": "array",
-        "items": {
-          "$ref": "#/definitions/HourInDay"
+      "properties": {
+        "day": {
+          "$ref": "#/definitions/WeekDay",
+          "description": "A day in a week."
         },
-        "description": "hour slots in a day."
-      }
+        "hourSlots": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/HourInDay"
+          },
+          "description": "hour slots in a day."
+        }
+      },
+      "description": "Time in a week."
     },
     "WeekDay": {
       "type": "string",
@@ -2492,16 +2495,19 @@
       "description": "The hour in day enum."
     },
     "TimeSpan": {
-      "start": {
-        "type": "string",
-        "format": "date-time",
-        "description": "The start of a time span"
+      "properties": {
+        "start": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The start of a time span"
+        },
+        "end": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The end of a time span"
+        }
       },
-      "end": {
-        "type": "string",
-        "format": "date-time",
-        "description": "The end of a time span"
-      }
+      "description": "The time span with start and end properties."
     },
     "ManagedClusterLoadBalancerProfile": {
       "properties": {
