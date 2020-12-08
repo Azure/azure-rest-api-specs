@@ -3144,6 +3144,13 @@
             "description": "The name of the virtual machine."
           },
           {
+            "name": "forceDeletion",
+            "in": "query",
+            "required": false,
+            "type": "boolean",
+            "description": "Optional parameter to force delete virtual machines.(Feature in Preview)"
+          },
+          {
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
@@ -3161,7 +3168,12 @@
             "description": "No Content"
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Force delete a VM": {
+            "$ref": "./examples/ForceDeleteVirtualMachine.json"
+          }
+        }
       },
       "get": {
         "tags": [
@@ -4240,7 +4252,7 @@
             "in": "query",
             "required": false,
             "type": "boolean",
-            "description": "Optional parameter to force delete a VM scale set."
+            "description": "Optional parameter to force delete a VM scale set. (Feature in Preview)"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -4260,7 +4272,12 @@
             "description": "No Content"
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Force Delete a VM scale set.": {
+            "$ref": "./examples/ForceDeleteVirtualMachineScaleSets.json"
+          }
+        }
       },
       "get": {
         "tags": [
@@ -4390,7 +4407,7 @@
             "in": "query",
             "required": false,
             "type": "boolean",
-            "description": "Optional parameter to force delete virtual machines from the VM scale set."
+            "description": "Optional parameter to force delete virtual machines from the VM scale set. (Feature in Preview)"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -6158,7 +6175,7 @@
             "in": "query",
             "required": false,
             "type": "boolean",
-            "description": "Optional parameter to force delete a virtual machine from a VM scale set."
+            "description": "Optional parameter to force delete a virtual machine from a VM scale set. (Feature in Preview)"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -6178,7 +6195,12 @@
             "description": "No Content"
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Force Delete a virtual machine from a VM scale set.": {
+            "$ref": "./examples/ForceDeleteVirtualMachineScaleSetVM.json"
+          }
+        }
       },
       "get": {
         "tags": [
