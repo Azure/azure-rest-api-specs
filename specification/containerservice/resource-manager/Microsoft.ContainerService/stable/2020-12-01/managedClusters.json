@@ -2409,25 +2409,33 @@
         {
           "properties": {
             "properties": {
-              "timeInWeek": {
-                "type": "array",
-                "items": {
-                  "$ref": "#/definitions/TimeInWeek"
-                },
-                "description": "Weekday time slots on which control plane can be upgraded."
-              },
-              "notAllowedTime": {
-                "type": "array",
-                "items": {
-                  "$ref": "#/definitions/TimeSpan"
-                },
-                "description": "Time slots on which upgrade is not allowed."
-              }
+              "description": "Properties of a default maintenance configuration.",
+              "$ref": "#/definitions/DefaultMaintenanceConfigurationProperties",
+              "x-ms-client-flatten": true
             }
           }
         }
       ],
-      "description": "Customer upgrade schedule for control plane."
+      "description": "Default maintenance configuration."
+    },
+    "DefaultMaintenanceConfigurationProperties": {
+      "properties": {
+        "timeInWeek": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TimeInWeek"
+          },
+          "description": "Weekday time slots on which control plane can be upgraded."
+        },
+        "notAllowedTime": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TimeSpan"
+          },
+          "description": "Time slots on which upgrade is not allowed."
+        }
+      },
+      "description": "Default maintenance configuration properties."
     },
     "TimeInWeek": {
       "properties": {
