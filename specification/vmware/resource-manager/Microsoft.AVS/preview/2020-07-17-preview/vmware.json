@@ -155,6 +155,22 @@
       "type": "string",
       "description": "NSX Gateway identifier. Generally the same as the Gateway's display name",
       "x-ms-parameter-location": "method"
+    },
+    "dnsServiceId": {
+      "name": "dnsServiceId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "NSX DNS Service identifier. Generally the same as the DNS Service's display name",
+      "x-ms-parameter-location": "method"
+    },
+    "dnsZoneId": {
+      "name": "dnsZoneId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "NSX DNS Zone identifier. Generally the same as the DNS Zone's display name",
+      "x-ms-parameter-location": "method"
     }
   },
   "paths": {
@@ -2642,6 +2658,510 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/workloadNetworks/default/dnsServices": {
+      "get": {
+        "operationId": "WorkloadNetworks_ListDnsServices",
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "tags": [
+          "WorkloadNetworks"
+        ],
+        "summary": "List of DNS services in a private cloud workload network.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/privateCloudName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/WorkloadNetworkDnsServicesList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "WorkloadNetworks_ListDnsServices": {
+            "$ref": "./examples/WorkloadNetworks_ListDnsServices.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/workloadNetworks/default/dnsServices/{dnsServiceId}": {
+      "get": {
+        "operationId": "WorkloadNetworks_GetDnsService",
+        "tags": [
+          "WorkloadNetworks"
+        ],
+        "summary": "Get a DNS service by id in a private cloud workload network.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/privateCloudName"
+          },
+          {
+            "$ref": "#/parameters/dnsServiceId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/WorkloadNetworkDnsService"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "WorkloadNetworks_GetDnsService": {
+            "$ref": "./examples/WorkloadNetworks_GetDnsServices.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "WorkloadNetworks_CreateDnsService",
+        "x-ms-long-running-operation": true,
+        "tags": [
+          "WorkloadNetworks"
+        ],
+        "summary": "Create a DNS service by id in a private cloud workload network.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/privateCloudName"
+          },
+          {
+            "$ref": "#/parameters/dnsServiceId"
+          },
+          {
+            "name": "workloadNetworkDnsService",
+            "description": "NSX DNS Service",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/WorkloadNetworkDnsService"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/WorkloadNetworkDnsService"
+            }
+          },
+          "201": {
+            "description": "accepted operation",
+            "schema": {
+              "$ref": "#/definitions/WorkloadNetworkDnsService"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "WorkloadNetworks_CreateDnsService": {
+            "$ref": "./examples/WorkloadNetworks_CreateDnsServices.json"
+          }
+        }
+      },
+      "patch": {
+        "operationId": "WorkloadNetworks_UpdateDnsService",
+        "x-ms-long-running-operation": true,
+        "tags": [
+          "WorkloadNetworks"
+        ],
+        "summary": "Create or update a DNS service by id in a private cloud workload network.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/privateCloudName"
+          },
+          {
+            "$ref": "#/parameters/dnsServiceId"
+          },
+          {
+            "name": "workloadNetworkDnsService",
+            "description": "NSX DNS Service",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/WorkloadNetworkDnsService"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/WorkloadNetworkDnsService"
+            }
+          },
+          "202": {
+            "description": "Accepted. The patch will complete asynchronously"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "WorkloadNetworks_UpdateDnsService": {
+            "$ref": "./examples/WorkloadNetworks_UpdateDnsServices.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "WorkloadNetworks_DeleteDnsService",
+        "x-ms-long-running-operation": true,
+        "tags": [
+          "WorkloadNetworks"
+        ],
+        "summary": "Delete a DNS service by id in a private cloud workload network.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/dnsServiceId"
+          },
+          {
+            "$ref": "#/parameters/privateCloudName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The delete has succeeded"
+          },
+          "202": {
+            "description": "Accepted. The delete will complete asynchronously"
+          },
+          "204": {
+            "description": "No Content. No VM group to delete"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "WorkloadNetworks_DeleteDnsService": {
+            "$ref": "./examples/WorkloadNetworks_DeleteDnsServices.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/workloadNetworks/default/dnsZones": {
+      "get": {
+        "operationId": "WorkloadNetworks_ListDnsZones",
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "tags": [
+          "WorkloadNetworks"
+        ],
+        "summary": "List of DNS zones in a private cloud workload network.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/privateCloudName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/WorkloadNetworkDnsZonesList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "WorkloadNetworks_ListDnsZones": {
+            "$ref": "./examples/WorkloadNetworks_ListDnsZones.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/workloadNetworks/default/dnsZones/{dnsZoneId}": {
+      "get": {
+        "operationId": "WorkloadNetworks_GetDnsZone",
+        "tags": [
+          "WorkloadNetworks"
+        ],
+        "summary": "Get a DNS zone by id in a private cloud workload network.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/privateCloudName"
+          },
+          {
+            "$ref": "#/parameters/dnsZoneId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/WorkloadNetworkDnsZone"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "WorkloadNetworks_GetDnsZone": {
+            "$ref": "./examples/WorkloadNetworks_GetDnsZones.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "WorkloadNetworks_CreateDnsZone",
+        "x-ms-long-running-operation": true,
+        "tags": [
+          "WorkloadNetworks"
+        ],
+        "summary": "Create a DNS zone by id in a private cloud workload network.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/privateCloudName"
+          },
+          {
+            "$ref": "#/parameters/dnsZoneId"
+          },
+          {
+            "name": "workloadNetworkDnsZone",
+            "description": "NSX DNS Zone",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/WorkloadNetworkDnsZone"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/WorkloadNetworkDnsZone"
+            }
+          },
+          "201": {
+            "description": "accepted operation",
+            "schema": {
+              "$ref": "#/definitions/WorkloadNetworkDnsZone"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "WorkloadNetworks_CreateDnsZone": {
+            "$ref": "./examples/WorkloadNetworks_CreateDnsZones.json"
+          }
+        }
+      },
+      "patch": {
+        "operationId": "WorkloadNetworks_UpdateDnsZone",
+        "x-ms-long-running-operation": true,
+        "tags": [
+          "WorkloadNetworks"
+        ],
+        "summary": "Create or update a DNS zone by id in a private cloud workload network.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/privateCloudName"
+          },
+          {
+            "$ref": "#/parameters/dnsZoneId"
+          },
+          {
+            "name": "workloadNetworkDnsZone",
+            "description": "NSX DNS Zone",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/WorkloadNetworkDnsZone"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/WorkloadNetworkDnsZone"
+            }
+          },
+          "202": {
+            "description": "Accepted. The patch will complete asynchronously"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "WorkloadNetworks_UpdateDnsZone": {
+            "$ref": "./examples/WorkloadNetworks_UpdateDnsZones.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "WorkloadNetworks_DeleteDnsZone",
+        "x-ms-long-running-operation": true,
+        "tags": [
+          "WorkloadNetworks"
+        ],
+        "summary": "Delete a DNS zone by id in a private cloud workload network.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/dnsZoneId"
+          },
+          {
+            "$ref": "#/parameters/privateCloudName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The delete has succeeded"
+          },
+          "202": {
+            "description": "Accepted. The delete will complete asynchronously"
+          },
+          "204": {
+            "description": "No Content. No VM group to delete"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "WorkloadNetworks_DeleteDnsZone": {
+            "$ref": "./examples/WorkloadNetworks_DeleteDnsZones.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -4124,6 +4644,198 @@
           "readOnly": true,
           "items": {
             "$ref": "#/definitions/WorkloadNetworkGateway"
+          }
+        },
+        "nextLink": {
+          "description": "URL to get the next page if any",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "WorkloadNetworkDnsServiceProperties": {
+      "description": "NSX DNS Service Properties",
+      "properties": {
+        "displayName": {
+          "description": "Display name of the DNS Service.",
+          "type": "string"
+        },
+        "dnsServiceIp": {
+          "description": "DNS service IP of the DNS Service.",
+          "type": "string"
+        },
+        "defaultDnsZone": {
+          "description": "Default DNS zone of the DNS Service.",
+          "type": "string"
+        },
+        "fqdnZones": {
+          "description": "FQDN zones of the DNS Service.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "logLevel": {
+          "description": "DNS Service log level.",
+          "type": "string",
+          "enum": [
+            "DEBUG",
+            "INFO",
+            "WARNING",
+            "ERROR",
+            "FATAL"
+          ],
+          "x-ms-enum": {
+            "name": "DnsServiceLogLevelEnum",
+            "modelAsString": true
+          }
+        },
+        "status": {
+          "description": "DNS Service status.",
+          "type": "string",
+          "enum": [
+            "SUCCESS",
+            "FAILURE"
+          ],
+          "x-ms-enum": {
+            "name": "DnsServiceStatusEnum",
+            "modelAsString": true
+          },
+          "readOnly": true
+        },
+        "provisioningState": {
+          "description": "The provisioning state",
+          "type": "string",
+          "readOnly": true,
+          "enum": [
+            "Succeeded",
+            "Failed",
+            "Building",
+            "Deleting",
+            "Updating"
+          ],
+          "x-ms-enum": {
+            "name": "WorkloadNetworkDnsServiceProvisioningState",
+            "modelAsString": true
+          }
+        },
+        "revision": {
+          "description": "NSX revision number.",
+          "type": "integer",
+          "format": "int64"
+        }
+      }
+    },
+    "WorkloadNetworkDnsService": {
+      "description": "NSX DNS Service",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "DNS Service properties",
+          "$ref": "#/definitions/WorkloadNetworkDnsServiceProperties",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "WorkloadNetworkDnsServicesList": {
+      "description": "A list of NSX DNS Services",
+      "properties": {
+        "value": {
+          "description": "The items on the page",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/WorkloadNetworkDnsService"
+          }
+        },
+        "nextLink": {
+          "description": "URL to get the next page if any",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "WorkloadNetworkDnsZoneProperties": {
+      "description": "NSX DNS Zone Properties",
+      "properties": {
+        "displayName": {
+          "description": "Display name of the DNS Zone.",
+          "type": "string"
+        },
+        "domain": {
+          "description": "Domain names of the DNS Zone.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "dnsServerIps": {
+          "description": "DNS Server IP array of the DNS Zone.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "sourceIp": {
+          "description": "Source IP of the DNS Zone.",
+          "type": "string"
+        },
+        "dnsServices": {
+          "description": "Number of DNS Services using the DNS zone.",
+          "type": "integer",
+          "format": "int64"
+        },
+        "provisioningState": {
+          "description": "The provisioning state",
+          "type": "string",
+          "readOnly": true,
+          "enum": [
+            "Succeeded",
+            "Failed",
+            "Building",
+            "Deleting",
+            "Updating"
+          ],
+          "x-ms-enum": {
+            "name": "WorkloadNetworkDnsZoneProvisioningState",
+            "modelAsString": true
+          }
+        },
+        "revision": {
+          "description": "NSX revision number.",
+          "type": "integer",
+          "format": "int64"
+        }
+      }
+    },
+    "WorkloadNetworkDnsZone": {
+      "description": "NSX DNS Zone",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "DNS Zone properties",
+          "$ref": "#/definitions/WorkloadNetworkDnsZoneProperties",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "WorkloadNetworkDnsZonesList": {
+      "description": "A list of NSX DNS Zones",
+      "properties": {
+        "value": {
+          "description": "The items on the page",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/WorkloadNetworkDnsZone"
           }
         },
         "nextLink": {
