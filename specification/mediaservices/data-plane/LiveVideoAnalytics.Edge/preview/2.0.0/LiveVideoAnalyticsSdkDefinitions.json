@@ -8,11 +8,25 @@
       "email": "amshelp@microsoft.com"
     }
   },
-  "security": [],
+  "security": [
+    {
+      "sharedAccessSignature": []
+    }
+  ],
   "paths": {},
+  "securityDefinitions": {
+    "sharedAccessSignature": {
+      "type": "apiKey",
+      "name": "Authorization",
+      "in": "header"
+    }
+  },
   "definitions": {
     "MethodRequest": {
       "type": "object",
+      "required": [
+        "methodName"
+      ],
       "properties": {
         "methodName": {
           "type": "string",
