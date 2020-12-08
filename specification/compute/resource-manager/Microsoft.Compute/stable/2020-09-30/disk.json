@@ -1839,6 +1839,10 @@
             "modelAsString": true
           }
         },
+        "purchasePlan": {
+          "$ref": "#/definitions/PurchasePlan",
+          "description": "Purchase plan information for the the image from which the OS disk was created. E.g. - {name: 2019-Datacenter, publisher: MicrosoftWindowsServer, product: WindowsServer}"
+        },
         "creationData": {
           "$ref": "#/definitions/CreationData",
           "description": "Disk source information. CreationData information cannot be changed after the disk has been created."
@@ -1957,6 +1961,10 @@
             "name": "HyperVGeneration",
             "modelAsString": true
           }
+        },
+        "purchasePlan": {
+          "$ref": "#/definitions/PurchasePlan",
+          "description": "Purchase plan information for the image from which the source disk for the snapshot was originally created."
         },
         "creationData": {
           "$ref": "#/definitions/CreationData",
@@ -2476,6 +2484,32 @@
       ],
       "description": "The source image used for creating the disk."
     },
+    "PurchasePlan": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name is the Purchase Plan Id."
+        },
+        "publisher": {
+          "type": "string",
+          "description": "The VM Image Publisher Id."
+        },
+        "product": {
+          "type": "string",
+          "description": "Specifies the product of the image from the marketplace. This is the same value as Offer under the imageReference element."
+        },
+        "promotionCode": {
+          "type": "string",
+          "description": "The Offer Promotion Code."
+        }
+      },
+      "required": [
+        "name",
+        "publisher",
+        "product"
+      ],
+      "description": "Specifies information about the marketplace image used to create the virtual machine."
+    },
     "GrantAccessData": {
       "properties": {
         "access": {
@@ -2961,6 +2995,10 @@
             "name": "HyperVGeneration",
             "modelAsString": true
           }
+        },
+        "purchasePlan": {
+          "$ref": "#/definitions/PurchasePlan",
+          "description": "Purchase plan information for the the image from which the OS disk was created."
         },
         "familyId": {
           "type": "string",
