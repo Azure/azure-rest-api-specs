@@ -2223,7 +2223,7 @@
             "$ref": "#/parameters/EntityId"
           },
           {
-            "$ref": "#/parameters/EntitiesQueriesKindParameter"
+            "$ref": "#/definitions/EntityQueryKind"
           }
         ],
         "responses": {
@@ -4336,28 +4336,6 @@
     }
   },
   "definitions": {
-    "EntitiesQueriesKind": {
-      "description": "The entity query kind",
-      "enum": [
-        "Activity",
-        "Insight"
-      ],
-      "type": "string",
-      "x-ms-enum": {
-        "modelAsString": true,
-        "name": "EntitiesQueriesKind",
-        "values": [
-          {
-            "description": "activity",
-            "value": "Activity"
-          },
-          {
-            "description": "insight",
-            "value": "Insight"
-          }
-        ]
-      }
-    },
     "AADDataConnector": {
       "allOf": [
         {
@@ -6525,7 +6503,8 @@
         "kind": {
           "description": "The kind of the entity query",
           "enum": [
-            "Expansion"
+            "Expansion",
+            "Insights"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -6534,6 +6513,9 @@
             "values": [
               {
                 "value": "Expansion"
+              },
+              {
+                "value": "Insights"
               }
             ]
           }
@@ -7061,59 +7043,6 @@
       },
       "type": "object",
       "x-ms-discriminator-value": "Insight"
-    },
-    "ActivityQueryItem": {
-      "allOf": [
-        {
-          "$ref": "#/definitions/EntityQueryItem"
-        }
-      ],
-      "description": "Represents Activity Query.",
-      "properties": {
-        "properties": {
-          "description": "Properties bag for InsightQueryItem",
-          "$ref": "#/definitions/ActivityQueryItemProperties"
-        }
-      },
-      "type": "object",
-      "x-ms-discriminator-value": "Activity"
-    },
-    "ActivityQueryItemProperties": {
-      "allOf": [
-        {
-          "$ref": "#/definitions/EntityQueryItemProperties"
-        }
-      ],
-      "description": "Represents Activity properties Query.",
-      "properties": {
-        "content": {
-          "type": "string",
-          "description": "The activity content."
-        },
-        "title": {
-          "type": "string",
-          "description": "The activity title."
-        },
-        "description": {
-          "type": "string",
-          "description": "The activity description."
-        },
-        "enabledByDefault": {
-          "type": "boolean",
-          "description": "Is activity should be enabled by default."
-        },
-        "queryDefinitions": {
-          "type": "object",
-          "description": "The activity query definitions.",
-          "properties": {
-            "query": {
-              "type": "string",
-              "description": "The activity query."
-            }
-          }
-        }
-      },
-      "type": "object"
     },
     "ActivityTimelineItem": {
       "allOf": [
@@ -11019,7 +10948,7 @@
       "discriminator": "kind",
       "properties": {
         "kind": {
-          "$ref": "#/definitions/EntitiesQueriesKind",
+          "$ref": "#/definitions/EntityQueryKind",
           "description": "The entity query kind type."
         },
         "id": {
@@ -11340,32 +11269,6 @@
       "required": true,
       "schema": {
         "$ref": "#/definitions/EntityTimelineParameters"
-      },
-      "x-ms-parameter-location": "method"
-    },
-    "EntitiesQueriesKindParameter": {
-      "description": "The Kind parameter for queries",
-      "in": "query",
-      "name": "kind",
-      "required": true,
-      "type": "string",
-      "enum": [
-        "Insight",
-        "Activity"
-      ],
-      "x-ms-enum": {
-        "modelAsString": true,
-        "name": "EntityItemQueryKind",
-        "values": [
-          {
-            "description": "activity",
-            "value": "Activity"
-          },
-          {
-            "description": "insight",
-            "value": "Insight"
-          }
-        ]
       },
       "x-ms-parameter-location": "method"
     },
