@@ -1822,8 +1822,17 @@
           "properties": {​​
             "rdb-backup-enabled": {​​
               "type": "boolean",
-              "description": "Specifies whether the resource has RDB export enabled."
-            }​​
+              "description": "Specifies whether the resource has RDB export enabled. Premium tier only."
+            },
+            "rdb-storage-connection-string": {
+              "type": "string",
+              "description": "Specifies the connection string to the Storage account for Redis data persistence. Premium tier only."
+            },
+            "rdb-backup-frequency": {
+              "type": "integer",
+              "format": "int32",
+              "description": "Specifies the backup frequency for Redis data persistence. Premium tier only."
+            }
           }​​,
           "additionalProperties": {
             "type": "string"
