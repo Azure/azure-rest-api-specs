@@ -2402,20 +2402,29 @@
       "description": "Profile of network configuration."
     },
     "DefaultMaintenanceConfiguration": {
-      "timeInWeek": {
-        "type": "array",
-        "items": { 
-          "$ref": "#/definitions/TimeInWeek"
+      "allOf": [
+        {
+          "$ref": "#/definitions/SubResource"
         },
-        "description": "Weekday time slots on which control plane can be upgraded."
-      },
-      "notAllowedTime": {
-        "type": "array",
-        "items": { 
-          "$ref": "#/definitions/TimeSpan"
-        },
-        "description": "Time slots on which upgrade is not allowed."
-      },
+        {
+          "properties": {
+            "timeInWeek": {
+              "type": "array",
+              "items": { 
+                "$ref": "#/definitions/TimeInWeek"
+              },
+              "description": "Weekday time slots on which control plane can be upgraded."
+            },
+            "notAllowedTime": {
+              "type": "array",
+              "items": { 
+                "$ref": "#/definitions/TimeSpan"
+              },
+              "description": "Time slots on which upgrade is not allowed."
+            }
+          }
+        }
+      ],
       "description": "Customer upgrade schedule for control plane."
     },
     "TimeInWeek": {
