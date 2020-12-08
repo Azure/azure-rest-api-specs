@@ -16,13 +16,13 @@
     "application/json"
   ],
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/devOpsAuditingSettings/{devOpsAuditPolicyName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/devOpsAuditingSettings/{devOpsAuditingSettingsName}": {
       "get": {
         "tags": [
-          "DevOpsAudit"
+          "ServerDevOpsAudit"
         ],
-        "description": "Gets a server's DevOps audit policy.",
-        "operationId": "ServerDevOpsAuditPolicies_Get",
+        "description": "Gets a server's DevOps audit settings.",
+        "operationId": "ServerDevOpsAuditSettings_Get",
         "parameters": [
           {
             "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
@@ -31,9 +31,9 @@
             "$ref": "#/parameters/ServerNameParameter"
           },
           {
-            "name": "devOpsAuditPolicyName",
+            "name": "devOpsAuditingSettingsName",
             "in": "path",
-            "description": "The name of the devops audit policy. This should always be 'default'.",
+            "description": "The name of the devops audit settings. This should always be 'default'.",
             "required": true,
             "type": "string"
           },
@@ -46,9 +46,9 @@
         ],
         "responses": {
           "200": {
-            "description": "Successfully retrieved the server DevOps audit policy.",
+            "description": "Successfully retrieved the server DevOps audit settings.",
             "schema": {
-              "$ref": "#/definitions/ServerDevOpsAuditingPolicy"
+              "$ref": "#/definitions/ServerDevOpsAuditingSettings"
             }
           },
           "default": {
@@ -56,17 +56,17 @@
           }
         },
         "x-ms-examples": {
-          "Get a server's DevOps audit policy": {
+          "Get a server's DevOps audit settings": {
             "$ref": "./examples/ServerDevOpsAuditGet.json"
           }
         }
       },
       "put": {
         "tags": [
-          "DevOpsAudit"
+          "ServerDevOpsAudit"
         ],
-        "description": "Creates or updates a server's DevOps audit policy.",
-        "operationId": "ServerDevOpsAuditPolicies_CreateOrUpdate",
+        "description": "Creates or updates a server's DevOps audit settings.",
+        "operationId": "ServerDevOpsAuditSettings_CreateOrUpdate",
         "parameters": [
           {
             "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
@@ -75,19 +75,19 @@
             "$ref": "#/parameters/ServerNameParameter"
           },
           {
-            "name": "devOpsAuditPolicyName",
+            "name": "devOpsAuditingSettingsName",
             "in": "path",
-            "description": "The name of the devops audit policy. This should always be 'default'.",
+            "description": "The name of the devops audit settings. This should always be 'default'.",
             "required": true,
             "type": "string"
           },
           {
             "name": "parameters",
             "in": "body",
-            "description": "Properties of DevOps audit policy",
+            "description": "Properties of DevOps audit settings",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ServerDevOpsAuditingPolicy"
+              "$ref": "#/definitions/ServerDevOpsAuditingSettings"
             }
           },
           {
@@ -101,22 +101,25 @@
           "200": {
             "description": "Successfully updated the DevOps audit settings.",
             "schema": {
-              "$ref": "#/definitions/ServerDevOpsAuditingPolicy"
+              "$ref": "#/definitions/ServerDevOpsAuditingSettings"
             }
           },
           "default": {
-            "description": "*** Error Responses: ***\n\n * 400 InvalidServerDevOpsAuditPolicyCreateRequest - The create server DevOps audit policy request does not exist or has no properties object.\n\n * 400 DataSecurityInvalidUserSuppliedParameter - An invalid parameter value was provided by the client.\n\n * 400 DevOpsAuditInvalidStorageAccountCredentials - The provided storage account or access key is not valid.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 409 ServerDevOpsAuditPolicyInProgress - Set server DevOps audit is already in progress."
+            "description": "*** Error Responses: ***\n\n * 400 InvalidServerDevOpsAuditSettingsCreateRequest - \n\n * 400 DataSecurityInvalidUserSuppliedParameter - An invalid parameter value was provided by the client.\n\n * 400 DevOpsAuditInvalidStorageAccountCredentials - The provided storage account or access key is not valid.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 409 ServerDevOpsAuditSettingsInProgress - "
           },
           "202": {
             "description": "Updating the audit DevOps settings is in progress."
           }
         },
         "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
         "x-ms-examples": {
-          "Update a server's DevOps audit policy with minimal input": {
+          "Update a server's DevOps audit settings with minimal input": {
             "$ref": "./examples/ServerDevOpsAuditCreateMin.json"
           },
-          "Update a server's DevOps audit policy with all params": {
+          "Update a server's DevOps audit settings with all params": {
             "$ref": "./examples/ServerDevOpsAuditCreateMax.json"
           }
         }
@@ -125,10 +128,10 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/devOpsAuditingSettings": {
       "get": {
         "tags": [
-          "DevOpsAudit"
+          "ServerDevOpsAudit"
         ],
         "description": "Lists DevOps audit settings of a server.",
-        "operationId": "ServerDevOpsAuditPolicies_ListByServer",
+        "operationId": "ServerDevOpsAuditSettings_ListByServer",
         "parameters": [
           {
             "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
@@ -147,7 +150,7 @@
           "200": {
             "description": "Successfully retrieved server DevOps audit settings.",
             "schema": {
-              "$ref": "#/definitions/ServerDevOpsAuditingPolicyListResult"
+              "$ref": "#/definitions/ServerDevOpsAuditSettingsListResult"
             }
           },
           "default": {
@@ -166,8 +169,8 @@
     }
   },
   "definitions": {
-    "ServerDevOpsAuditPolicyProperties": {
-      "description": "Properties of a server DevOps audit policy.",
+    "ServerDevOpsAuditSettingsProperties": {
+      "description": "Properties of a server DevOps audit settings.",
       "required": [
         "state"
       ],
@@ -178,7 +181,7 @@
           "type": "boolean"
         },
         "state": {
-          "description": "Specifies the state of the policy. If state is Enabled, storageEndpoint or isAzureMonitorTargetEnabled are required.",
+          "description": "Specifies the state of the audit. If state is Enabled, storageEndpoint or isAzureMonitorTargetEnabled are required.",
           "enum": [
             "Enabled",
             "Disabled"
@@ -196,6 +199,7 @@
         "storageAccountAccessKey": {
           "description": "Specifies the identifier key of the auditing storage account. \r\nIf state is Enabled and storageEndpoint is specified, not specifying the storageAccountAccessKey will use SQL server system-assigned managed identity to access the storage.\r\nPrerequisites for using managed identity authentication:\r\n1. Assign SQL Server a system-assigned managed identity in Azure Active Directory (AAD).\r\n2. Grant SQL Server identity access to the storage account by adding 'Storage Blob Data Contributor' RBAC role to the server identity.\r\nFor more information, see [Auditing to storage using Managed Identity authentication](https://go.microsoft.com/fwlink/?linkid=2114355)",
           "type": "string",
+          "x-ms-secret": true,
           "x-ms-mutability": [
             "create",
             "update"
@@ -208,8 +212,8 @@
         }
       }
     },
-    "ServerDevOpsAuditingPolicy": {
-      "description": "A server DevOps auditing policy.",
+    "ServerDevOpsAuditingSettings": {
+      "description": "A server DevOps auditing settings.",
       "type": "object",
       "allOf": [
         {
@@ -217,14 +221,19 @@
         }
       ],
       "properties": {
+        "systemData": {
+          "$ref": "../../../common/v1/types.json#/definitions/systemData",
+          "description": "SystemData of ServerDevOpsAuditSettingsResource.",
+          "readOnly": true
+        },
         "properties": {
-          "$ref": "#/definitions/ServerDevOpsAuditPolicyProperties",
+          "$ref": "#/definitions/ServerDevOpsAuditSettingsProperties",
           "description": "Resource properties.",
           "x-ms-client-flatten": true
         }
       }
     },
-    "ServerDevOpsAuditingPolicyListResult": {
+    "ServerDevOpsAuditSettingsListResult": {
       "description": "A list of server DevOps audit settings.",
       "type": "object",
       "properties": {
@@ -232,7 +241,7 @@
           "description": "Array of results.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ServerDevOpsAuditingPolicy"
+            "$ref": "#/definitions/ServerDevOpsAuditingSettings"
           },
           "readOnly": true
         },

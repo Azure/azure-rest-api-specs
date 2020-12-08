@@ -123,6 +123,7 @@ input-file:
 - Microsoft.Sql/preview/2020-02-02-preview/ServerTrustGroups.json
 - Microsoft.Sql/preview/2020-08-01-preview/Databases.json
 - Microsoft.Sql/preview/2020-08-01-preview/ElasticPools.json
+- Microsoft.Sql/preview/2020-08-01-preview/ServerDevOpsAudit.json
 
 
 # Needed when there is more than one input file
@@ -614,7 +615,6 @@ input-file:
  - ./Microsoft.Sql/preview/2020-08-01-preview/DatabaseVulnerabilityAssessmentScans.json
  - ./Microsoft.Sql/preview/2020-08-01-preview/DataWarehouseUserActivities.json
  - ./Microsoft.Sql/preview/2020-08-01-preview/DeletedServers.json
- - ./Microsoft.Sql/preview/2020-08-01-preview/DevOpsAudit.json
  - ./Microsoft.Sql/preview/2020-08-01-preview/ElasticPoolOperations.json
  - ./Microsoft.Sql/preview/2020-08-01-preview/ElasticPools.json
  - ./Microsoft.Sql/preview/2020-08-01-preview/EncryptionProtectors.json
