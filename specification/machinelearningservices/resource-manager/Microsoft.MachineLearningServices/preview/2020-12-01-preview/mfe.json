@@ -5010,17 +5010,27 @@
       },
       "additionalProperties": false
     },
-    "TProperties": {
-      "type": "object",
-      "additionalProperties": false
-    },
-    "Resource`1": {
-      "description": "Azure Resource Manager resource Envelope",
+    "BatchDeploymentTrackedResource": {
       "required": [
         "properties"
       ],
       "type": "object",
       "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "location": {
+          "type": "string"
+        },
+        "kind": {
+          "type": "string"
+        },
+        "identity": {
+          "$ref": "#/definitions/ManagedIdentity"
+        },
         "id": {
           "description": "The resource URL of the entity (not URL encoded).",
           "type": "string",
@@ -5037,48 +5047,12 @@
           "readOnly": true
         },
         "properties": {
-          "$ref": "#/definitions/TProperties"
+          "$ref": "#/definitions/BatchDeployment"
         },
         "systemData": {
           "$ref": "#/definitions/SystemData"
         }
       },
-      "x-ms-azure-resource": true,
-      "additionalProperties": false
-    },
-    "BatchDeploymentTrackedResource": {
-      "required": [
-        "properties"
-      ],
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/Resource`1"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "tags": {
-              "type": "object",
-              "additionalProperties": {
-                "type": "string"
-              }
-            },
-            "location": {
-              "type": "string"
-            },
-            "kind": {
-              "type": "string"
-            },
-            "identity": {
-              "$ref": "#/definitions/ManagedIdentity"
-            },
-            "properties": {
-              "$ref": "#/definitions/BatchDeployment"
-            }
-          }
-        }
-      ],
       "additionalProperties": false
     },
     "InnerErrorResponse": {
@@ -5089,6 +5063,33 @@
         },
         "innerError": {
           "$ref": "#/definitions/InnerErrorResponse"
+        }
+      },
+      "additionalProperties": false
+    },
+    "DebugInfoResponse": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
+        },
+        "stackTrace": {
+          "type": "string"
+        },
+        "innerException": {
+          "$ref": "#/definitions/DebugInfoResponse"
+        },
+        "data": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "object"
+          }
+        },
+        "errorResponse": {
+          "$ref": "#/definitions/ErrorResponse"
         }
       },
       "additionalProperties": false
@@ -5305,34 +5306,44 @@
         "properties"
       ],
       "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/Resource`1"
-        },
-        {
+      "properties": {
+        "tags": {
           "type": "object",
-          "properties": {
-            "tags": {
-              "type": "object",
-              "additionalProperties": {
-                "type": "string"
-              }
-            },
-            "location": {
-              "type": "string"
-            },
-            "kind": {
-              "type": "string"
-            },
-            "identity": {
-              "$ref": "#/definitions/ManagedIdentity"
-            },
-            "properties": {
-              "$ref": "#/definitions/BatchEndpoint"
-            }
+          "additionalProperties": {
+            "type": "string"
           }
+        },
+        "location": {
+          "type": "string"
+        },
+        "kind": {
+          "type": "string"
+        },
+        "identity": {
+          "$ref": "#/definitions/ManagedIdentity"
+        },
+        "id": {
+          "description": "The resource URL of the entity (not URL encoded).",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "The name of the resource entity.",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "The resource provider and type.",
+          "type": "string",
+          "readOnly": true
+        },
+        "properties": {
+          "$ref": "#/definitions/BatchEndpoint"
+        },
+        "systemData": {
+          "$ref": "#/definitions/SystemData"
         }
-      ],
+      },
       "additionalProperties": false
     },
     "BatchEndpointTrackedResourceArmPaginatedResult": {
@@ -5367,34 +5378,44 @@
         "properties"
       ],
       "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/Resource`1"
-        },
-        {
+      "properties": {
+        "tags": {
           "type": "object",
-          "properties": {
-            "tags": {
-              "type": "object",
-              "additionalProperties": {
-                "type": "string"
-              }
-            },
-            "location": {
-              "type": "string"
-            },
-            "kind": {
-              "type": "string"
-            },
-            "identity": {
-              "$ref": "#/definitions/ManagedIdentity"
-            },
-            "properties": {
-              "$ref": "#/definitions/InferenceEndpointKeys"
-            }
+          "additionalProperties": {
+            "type": "string"
           }
+        },
+        "location": {
+          "type": "string"
+        },
+        "kind": {
+          "type": "string"
+        },
+        "identity": {
+          "$ref": "#/definitions/ManagedIdentity"
+        },
+        "id": {
+          "description": "The resource URL of the entity (not URL encoded).",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "The name of the resource entity.",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "The resource provider and type.",
+          "type": "string",
+          "readOnly": true
+        },
+        "properties": {
+          "$ref": "#/definitions/InferenceEndpointKeys"
+        },
+        "systemData": {
+          "$ref": "#/definitions/SystemData"
         }
-      ],
+      },
       "additionalProperties": false
     },
     "CodeContainer": {
@@ -5424,19 +5445,29 @@
         "properties"
       ],
       "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/Resource`1"
+      "properties": {
+        "id": {
+          "description": "The resource URL of the entity (not URL encoded).",
+          "type": "string",
+          "readOnly": true
         },
-        {
-          "type": "object",
-          "properties": {
-            "properties": {
-              "$ref": "#/definitions/CodeContainer"
-            }
-          }
+        "name": {
+          "description": "The name of the resource entity.",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "The resource provider and type.",
+          "type": "string",
+          "readOnly": true
+        },
+        "properties": {
+          "$ref": "#/definitions/CodeContainer"
+        },
+        "systemData": {
+          "$ref": "#/definitions/SystemData"
         }
-      ],
+      },
       "additionalProperties": false
     },
     "CodeContainerResourceArmPaginatedResult": {
@@ -5513,19 +5544,29 @@
         "properties"
       ],
       "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/Resource`1"
+      "properties": {
+        "id": {
+          "description": "The resource URL of the entity (not URL encoded).",
+          "type": "string",
+          "readOnly": true
         },
-        {
-          "type": "object",
-          "properties": {
-            "properties": {
-              "$ref": "#/definitions/CodeVersion"
-            }
-          }
+        "name": {
+          "description": "The name of the resource entity.",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "The resource provider and type.",
+          "type": "string",
+          "readOnly": true
+        },
+        "properties": {
+          "$ref": "#/definitions/CodeVersion"
+        },
+        "systemData": {
+          "$ref": "#/definitions/SystemData"
         }
-      ],
+      },
       "additionalProperties": false
     },
     "CodeVersionResourceArmPaginatedResult": {
@@ -5572,19 +5613,29 @@
         "properties"
       ],
       "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/Resource`1"
+      "properties": {
+        "id": {
+          "description": "The resource URL of the entity (not URL encoded).",
+          "type": "string",
+          "readOnly": true
         },
-        {
-          "type": "object",
-          "properties": {
-            "properties": {
-              "$ref": "#/definitions/DataContainer"
-            }
-          }
+        "name": {
+          "description": "The name of the resource entity.",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "The resource provider and type.",
+          "type": "string",
+          "readOnly": true
+        },
+        "properties": {
+          "$ref": "#/definitions/DataContainer"
+        },
+        "systemData": {
+          "$ref": "#/definitions/SystemData"
         }
-      ],
+      },
       "additionalProperties": false
     },
     "DataContainerResourceArmPaginatedResult": {
@@ -6170,19 +6221,29 @@
         "properties"
       ],
       "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/Resource`1"
+      "properties": {
+        "id": {
+          "description": "The resource URL of the entity (not URL encoded).",
+          "type": "string",
+          "readOnly": true
         },
-        {
-          "type": "object",
-          "properties": {
-            "properties": {
-              "$ref": "#/definitions/DatastoreProperties"
-            }
-          }
+        "name": {
+          "description": "The name of the resource entity.",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "The resource provider and type.",
+          "type": "string",
+          "readOnly": true
+        },
+        "properties": {
+          "$ref": "#/definitions/DatastoreProperties"
+        },
+        "systemData": {
+          "$ref": "#/definitions/SystemData"
         }
-      ],
+      },
       "additionalProperties": false
     },
     "DatastorePropertiesResourceArmPaginatedResult": {
@@ -6252,19 +6313,29 @@
         "properties"
       ],
       "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/Resource`1"
+      "properties": {
+        "id": {
+          "description": "The resource URL of the entity (not URL encoded).",
+          "type": "string",
+          "readOnly": true
         },
-        {
-          "type": "object",
-          "properties": {
-            "properties": {
-              "$ref": "#/definitions/DataVersion"
-            }
-          }
+        "name": {
+          "description": "The name of the resource entity.",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "The resource provider and type.",
+          "type": "string",
+          "readOnly": true
+        },
+        "properties": {
+          "$ref": "#/definitions/DataVersion"
+        },
+        "systemData": {
+          "$ref": "#/definitions/SystemData"
         }
-      ],
+      },
       "additionalProperties": false
     },
     "DataVersionResourceArmPaginatedResult": {
@@ -6311,19 +6382,29 @@
         "properties"
       ],
       "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/Resource`1"
+      "properties": {
+        "id": {
+          "description": "The resource URL of the entity (not URL encoded).",
+          "type": "string",
+          "readOnly": true
         },
-        {
-          "type": "object",
-          "properties": {
-            "properties": {
-              "$ref": "#/definitions/EnvironmentContainer"
-            }
-          }
+        "name": {
+          "description": "The name of the resource entity.",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "The resource provider and type.",
+          "type": "string",
+          "readOnly": true
+        },
+        "properties": {
+          "$ref": "#/definitions/EnvironmentContainer"
+        },
+        "systemData": {
+          "$ref": "#/definitions/SystemData"
         }
-      ],
+      },
       "additionalProperties": false
     },
     "EnvironmentContainerResourceArmPaginatedResult": {
@@ -6358,7 +6439,7 @@
           ],
           "type": "string",
           "x-ms-enum": {
-            "name": "DockerSpecificationType",
+            "name": "Dockertype",
             "modelAsString": false
           },
           "x-ms-mutability": [
@@ -6383,7 +6464,7 @@
           "type": "string",
           "readOnly": true,
           "x-ms-enum": {
-            "name": "EnvironmentSpecificationType",
+            "name": "Environmenttype",
             "modelAsString": false
           }
         },
@@ -6433,19 +6514,29 @@
         "properties"
       ],
       "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/Resource`1"
+      "properties": {
+        "id": {
+          "description": "The resource URL of the entity (not URL encoded).",
+          "type": "string",
+          "readOnly": true
         },
-        {
-          "type": "object",
-          "properties": {
-            "properties": {
-              "$ref": "#/definitions/EnvironmentSpecificationVersion"
-            }
-          }
+        "name": {
+          "description": "The name of the resource entity.",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "The resource provider and type.",
+          "type": "string",
+          "readOnly": true
+        },
+        "properties": {
+          "$ref": "#/definitions/EnvironmentSpecificationVersion"
+        },
+        "systemData": {
+          "$ref": "#/definitions/SystemData"
         }
-      ],
+      },
       "additionalProperties": false
     },
     "EnvironmentSpecificationVersionResourceArmPaginatedResult": {
@@ -7657,24 +7748,34 @@
         "properties"
       ],
       "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/Resource`1"
+      "properties": {
+        "id": {
+          "description": "The resource URL of the entity (not URL encoded).",
+          "type": "string",
+          "readOnly": true
         },
-        {
-          "type": "object",
-          "properties": {
-            "properties": {
-              "description": "Additional attributes of the entity.",
-              "allOf": [
-                {
-                  "$ref": "#/definitions/JobBase"
-                }
-              ]
+        "name": {
+          "description": "The name of the resource entity.",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "The resource provider and type.",
+          "type": "string",
+          "readOnly": true
+        },
+        "properties": {
+          "description": "Additional attributes of the entity.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/JobBase"
             }
-          }
+          ]
+        },
+        "systemData": {
+          "$ref": "#/definitions/SystemData"
         }
-      ],
+      },
       "additionalProperties": false
     },
     "JobBaseResourceArmPaginatedResult": {
@@ -7700,19 +7801,29 @@
         "properties"
       ],
       "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/Resource`1"
+      "properties": {
+        "id": {
+          "description": "The resource URL of the entity (not URL encoded).",
+          "type": "string",
+          "readOnly": true
         },
-        {
-          "type": "object",
-          "properties": {
-            "properties": {
-              "$ref": "#/definitions/LabelingJob"
-            }
-          }
+        "name": {
+          "description": "The name of the resource entity.",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "The resource provider and type.",
+          "type": "string",
+          "readOnly": true
+        },
+        "properties": {
+          "$ref": "#/definitions/LabelingJob"
+        },
+        "systemData": {
+          "$ref": "#/definitions/SystemData"
         }
-      ],
+      },
       "additionalProperties": false
     },
     "LabelingJobResourceArmPaginatedResult": {
@@ -7758,45 +7869,30 @@
           "format": "uuid",
           "description": "The unique identifier of completed Export Labels operation.",
           "type": "string",
-          "readOnly": true,
-          "x-ms-mutability": [
-            "read"
-          ]
+          "readOnly": true
         },
         "labelingJobId": {
           "description": "Name and identifier of the job containing exported labels.",
           "type": "string",
-          "readOnly": true,
-          "x-ms-mutability": [
-            "read"
-          ]
+          "readOnly": true
         },
         "exportedRowCount": {
           "format": "int64",
           "description": "The total number of labeled datapoints exported.",
           "type": "integer",
-          "readOnly": true,
-          "x-ms-mutability": [
-            "read"
-          ]
+          "readOnly": true
         },
         "startTimeUtc": {
           "format": "date-time",
           "description": "The time when the export was requested.",
           "type": "string",
-          "readOnly": true,
-          "x-ms-mutability": [
-            "read"
-          ]
+          "readOnly": true
         },
         "endTimeUtc": {
           "format": "date-time",
           "description": "The time when the export was completed.",
           "type": "string",
-          "readOnly": true,
-          "x-ms-mutability": [
-            "read"
-          ]
+          "readOnly": true
         },
         "state": {
           "description": "The state of the Export Labels operation.",
@@ -7811,10 +7907,7 @@
           "x-ms-enum": {
             "name": "LabelExportState",
             "modelAsString": false
-          },
-          "x-ms-mutability": [
-            "read"
-          ]
+          }
         }
       },
       "discriminator": "format",
@@ -7826,24 +7919,34 @@
         "properties"
       ],
       "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/Resource`1"
+      "properties": {
+        "id": {
+          "description": "The resource URL of the entity (not URL encoded).",
+          "type": "string",
+          "readOnly": true
         },
-        {
-          "type": "object",
-          "properties": {
-            "properties": {
-              "description": "Additional attributes of the entity.",
-              "allOf": [
-                {
-                  "$ref": "#/definitions/ExportSummary"
-                }
-              ]
+        "name": {
+          "description": "The name of the resource entity.",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "The resource provider and type.",
+          "type": "string",
+          "readOnly": true
+        },
+        "properties": {
+          "description": "Additional attributes of the entity.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/ExportSummary"
             }
-          }
+          ]
+        },
+        "systemData": {
+          "$ref": "#/definitions/SystemData"
         }
-      ],
+      },
       "additionalProperties": false
     },
     "ModelVersion": {
@@ -7888,19 +7991,29 @@
         "properties"
       ],
       "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/Resource`1"
+      "properties": {
+        "id": {
+          "description": "The resource URL of the entity (not URL encoded).",
+          "type": "string",
+          "readOnly": true
         },
-        {
-          "type": "object",
-          "properties": {
-            "properties": {
-              "$ref": "#/definitions/ModelVersion"
-            }
-          }
+        "name": {
+          "description": "The name of the resource entity.",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "The resource provider and type.",
+          "type": "string",
+          "readOnly": true
+        },
+        "properties": {
+          "$ref": "#/definitions/ModelVersion"
+        },
+        "systemData": {
+          "$ref": "#/definitions/SystemData"
         }
-      ],
+      },
       "additionalProperties": false
     },
     "ModelContainer": {
@@ -7940,19 +8053,29 @@
         "properties"
       ],
       "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/Resource`1"
+      "properties": {
+        "id": {
+          "description": "The resource URL of the entity (not URL encoded).",
+          "type": "string",
+          "readOnly": true
         },
-        {
-          "type": "object",
-          "properties": {
-            "properties": {
-              "$ref": "#/definitions/ModelContainer"
-            }
-          }
+        "name": {
+          "description": "The name of the resource entity.",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "The resource provider and type.",
+          "type": "string",
+          "readOnly": true
+        },
+        "properties": {
+          "$ref": "#/definitions/ModelContainer"
+        },
+        "systemData": {
+          "$ref": "#/definitions/SystemData"
         }
-      ],
+      },
       "additionalProperties": false
     },
     "ModelContainerResourceArmPaginatedResult": {
@@ -8127,34 +8250,44 @@
         "properties"
       ],
       "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/Resource`1"
-        },
-        {
+      "properties": {
+        "tags": {
           "type": "object",
-          "properties": {
-            "tags": {
-              "type": "object",
-              "additionalProperties": {
-                "type": "string"
-              }
-            },
-            "location": {
-              "type": "string"
-            },
-            "kind": {
-              "type": "string"
-            },
-            "identity": {
-              "$ref": "#/definitions/ManagedIdentity"
-            },
-            "properties": {
-              "$ref": "#/definitions/OnlineDeploymentProperties"
-            }
+          "additionalProperties": {
+            "type": "string"
           }
+        },
+        "location": {
+          "type": "string"
+        },
+        "kind": {
+          "type": "string"
+        },
+        "identity": {
+          "$ref": "#/definitions/ManagedIdentity"
+        },
+        "id": {
+          "description": "The resource URL of the entity (not URL encoded).",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "The name of the resource entity.",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "The resource provider and type.",
+          "type": "string",
+          "readOnly": true
+        },
+        "properties": {
+          "$ref": "#/definitions/OnlineDeploymentProperties"
+        },
+        "systemData": {
+          "$ref": "#/definitions/SystemData"
         }
-      ],
+      },
       "additionalProperties": false
     },
     "OnlineDeploymentPropertiesTrackedResourceArmPaginatedResult": {
@@ -8306,34 +8439,44 @@
         "properties"
       ],
       "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/Resource`1"
-        },
-        {
+      "properties": {
+        "tags": {
           "type": "object",
-          "properties": {
-            "tags": {
-              "type": "object",
-              "additionalProperties": {
-                "type": "string"
-              }
-            },
-            "location": {
-              "type": "string"
-            },
-            "kind": {
-              "type": "string"
-            },
-            "identity": {
-              "$ref": "#/definitions/ManagedIdentity"
-            },
-            "properties": {
-              "$ref": "#/definitions/OnlineEndpointProperties"
-            }
+          "additionalProperties": {
+            "type": "string"
           }
+        },
+        "location": {
+          "type": "string"
+        },
+        "kind": {
+          "type": "string"
+        },
+        "identity": {
+          "$ref": "#/definitions/ManagedIdentity"
+        },
+        "id": {
+          "description": "The resource URL of the entity (not URL encoded).",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "The name of the resource entity.",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "The resource provider and type.",
+          "type": "string",
+          "readOnly": true
+        },
+        "properties": {
+          "$ref": "#/definitions/OnlineEndpointProperties"
+        },
+        "systemData": {
+          "$ref": "#/definitions/SystemData"
         }
-      ],
+      },
       "additionalProperties": false
     },
     "OnlineEndpointPropertiesTrackedResourceArmPaginatedResult": {
