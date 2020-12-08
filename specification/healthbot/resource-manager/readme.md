@@ -59,7 +59,7 @@ These settings apply only when `--tag=package-2020-12-08-preview` is specified o
 
 ```yaml $(tag) == 'package-2020-12-08-preview'
 input-file:
-  - Microsoft.HealthBot/stable/2020-12-08-preview/healthbot.json
+  - Microsoft.HealthBot/preview/2020-12-08-preview/healthbot.json
 ```
 
 ---
