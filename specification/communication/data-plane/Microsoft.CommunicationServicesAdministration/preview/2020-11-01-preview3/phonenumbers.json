@@ -38,7 +38,7 @@
             "x-ms-client-flatten": true,
             "required": true,
             "schema": {
-              "$ref": "#/definitions/SearchRequest"
+              "$ref": "#/definitions/PhoneNumberSearchRequest"
             }
           }
         ],
@@ -76,7 +76,7 @@
         "operationId": "PhoneNumbers_GetSearchResult",
         "parameters": [
           {
-            "$ref": "#/parameters/SearchId"
+            "$ref": "#/parameters/PhoneNumberSearchId"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -86,7 +86,7 @@
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/SearchResult"
+              "$ref": "#/definitions/PhoneNumberSearchResult"
             }
           },
           "default": {
@@ -118,7 +118,7 @@
             "required": true,
             "x-ms-client-flatten": true,
             "schema": {
-              "$ref": "#/definitions/PurchaseRequest"
+              "$ref": "#/definitions/PhoneNumberPurchaseRequest"
             }
           },
           {
@@ -159,7 +159,7 @@
         "operationId": "PhoneNumbers_GetOperation",
         "parameters": [
           {
-            "$ref": "#/parameters/OperationId"
+            "$ref": "#/parameters/PhoneNumberOperationId"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -169,7 +169,7 @@
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/Operation"
+              "$ref": "#/definitions/PhoneNumberOperation"
             }
           },
           "default": {
@@ -193,7 +193,7 @@
         "operationId": "PhoneNumbers_CancelOperation",
         "parameters": [
           {
-            "$ref": "#/parameters/OperationId"
+            "$ref": "#/parameters/PhoneNumberOperationId"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -369,7 +369,7 @@
     }
   },
   "definitions": {
-    "CapabilityValue": {
+    "PhoneNumberCapabilityValue": {
       "description": "The possible values for a phone number capability.",
       "type": "string",
       "enum": [
@@ -380,11 +380,11 @@
       ],
       "default": "none",
       "x-ms-enum": {
-        "name": "CapabilityValue",
+        "name": "PhoneNumberCapabilityValue",
         "modelAsString": true
       }
     },
-    "Capabilities": {
+    "PhoneNumberCapabilities": {
       "description": "The capabilities of a phone number.",
       "type": "object",
       "required": [
@@ -394,25 +394,25 @@
       "properties": {
         "sms": {
           "description": "Available Sms capabilities.",
-          "$ref": "#/definitions/CapabilityValue"
+          "$ref": "#/definitions/PhoneNumberCapabilityValue"
         },
         "calling": {
           "description": "Available Calling capabilities.",
-          "$ref": "#/definitions/CapabilityValue"
+          "$ref": "#/definitions/PhoneNumberCapabilityValue"
         }
       }
     },
-    "CapabilitiesRequest": {
+    "PhoneNumberCapabilitiesRequest": {
       "description": "The capabilities of a phone number.",
       "type": "object",
       "properties": {
         "sms": {
           "description": "Available Sms capabilities.",
-          "$ref": "#/definitions/CapabilityValue"
+          "$ref": "#/definitions/PhoneNumberCapabilityValue"
         },
         "calling": {
           "description": "Available Calling capabilities.",
-          "$ref": "#/definitions/CapabilityValue"
+          "$ref": "#/definitions/PhoneNumberCapabilityValue"
         }
       }
     },
@@ -428,7 +428,7 @@
         "modelAsString": true
       }
     },
-    "AssignmentType": {
+    "PhoneNumberAssignmentType": {
       "description": "The type that the phone number can be assigned to.",
       "type": "string",
       "enum": [
@@ -436,7 +436,7 @@
         "application"
       ],
       "x-ms-enum": {
-        "name": "AssignmentType",
+        "name": "PhoneNumberAssignmentType",
         "modelAsString": true
       }
     },
@@ -471,7 +471,7 @@
         }
       }
     },
-    "OperationStatus": {
+    "PhoneNumberOperationStatus": {
       "type": "string",
       "description": "Status code of the operation.",
       "enum": [
@@ -486,7 +486,7 @@
       },
       "x-nullable": false
     },
-    "Operation": {
+    "PhoneNumberOperation": {
       "type": "object",
       "description": "Long running operation.",
       "required": [
@@ -499,7 +499,7 @@
       "properties": {
         "status": {
           "description": "Status of operation.",
-          "$ref": "#/definitions/OperationStatus"
+          "$ref": "#/definitions/PhoneNumberOperationStatus"
         },
         "id": {
           "description": "Id of the operation.",
@@ -549,7 +549,7 @@
         "assignmentType",
         "purchaseDate",
         "capabilities",
-        "callbackUrl",
+        "callbackUri",
         "applicationId",
         "cost"
       ],
@@ -572,7 +572,7 @@
         },
         "assignmentType": {
           "description": "The assignment type of the phone number, people or application.",
-          "$ref": "#/definitions/AssignmentType"
+          "$ref": "#/definitions/PhoneNumberAssignmentType"
         },
         "purchaseDate": {
           "description": "The purchase date of the phone number.",
@@ -581,10 +581,10 @@
         },
         "capabilities": {
           "description": "The phone number's capabilities.",
-          "$ref": "#/definitions/Capabilities"
+          "$ref": "#/definitions/PhoneNumberCapabilities"
         },
-        "callbackUrl": {
-          "description": "The webhook URL for receiving incoming events.",
+        "callbackUri": {
+          "description": "The webhook for receiving incoming events.",
           "type": "string"
         },
         "applicationId": {
@@ -601,8 +601,8 @@
       "description": "The properties of a phone number that can be changed.",
       "type": "object",
       "properties": {
-        "callbackUrl": {
-          "description": "The webhook URL for receiving incoming events.",
+        "callbackUri": {
+          "description": "The webhook for receiving incoming events.",
           "type": "string"
         },
         "applicationId": {
@@ -611,7 +611,7 @@
         },
         "capabilities": {
           "description": "The new set of enabled capabilities.",
-          "$ref": "#/definitions/CapabilitiesRequest"
+          "$ref": "#/definitions/PhoneNumberCapabilitiesRequest"
         }
       }
     },
@@ -635,7 +635,7 @@
         }
       }
     },
-    "SearchRequest": {
+    "PhoneNumberSearchRequest": {
       "description": "The desired properties of a phone number for search.",
       "required": [
         "numberType",
@@ -650,11 +650,11 @@
         },
         "assignmentType": {
           "description": "The phone number's assignment type.",
-          "$ref": "#/definitions/AssignmentType"
+          "$ref": "#/definitions/PhoneNumberAssignmentType"
         },
         "capabilities": {
           "description": "The phone number's capabilities.",
-          "$ref": "#/definitions/CapabilitiesRequest"
+          "$ref": "#/definitions/PhoneNumberCapabilitiesRequest"
         },
         "areaCode": {
           "description": "The desired area code.",
@@ -668,7 +668,7 @@
         }
       }
     },
-    "SearchResult": {
+    "PhoneNumberSearchResult": {
       "description": "The result of a phone number search operation.",
       "type": "object",
       "required": [
@@ -698,11 +698,11 @@
         },
         "assignmentType": {
           "description": "The phone number's assignment type.",
-          "$ref": "#/definitions/AssignmentType"
+          "$ref": "#/definitions/PhoneNumberAssignmentType"
         },
         "capabilities": {
           "description": "The phone number's capabilities.",
-          "$ref": "#/definitions/Capabilities"
+          "$ref": "#/definitions/PhoneNumberCapabilities"
         },
         "cost": {
           "description": "The monthly cost for an individual phone number.",
@@ -715,7 +715,7 @@
         }
       }
     },
-    "PurchaseRequest": {
+    "PhoneNumberPurchaseRequest": {
       "description": "Request to purchase phone numbers",
       "type": "object",
       "properties": {
@@ -734,7 +734,7 @@
       "required": true,
       "type": "string"
     },
-    "OperationId": {
+    "PhoneNumberOperationId": {
       "in": "path",
       "name": "operationId",
       "description": "The operation Id.",
@@ -750,16 +750,7 @@
       "type": "string",
       "x-ms-parameter-location": "method"
     },
-    "Endpoint": {
-      "in": "path",
-      "name": "endpoint",
-      "description": "The endpoint of the Azure Communication resource.",
-      "required": true,
-      "type": "string",
-      "x-ms-skip-url-encoding": true,
-      "x-ms-parameter-location": "client"
-    },
-    "SearchId": {
+    "PhoneNumberSearchId": {
       "in": "path",
       "name": "searchId",
       "description": "The search Id.",
@@ -774,6 +765,15 @@
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"
+    },
+    "Endpoint": {
+      "in": "path",
+      "name": "endpoint",
+      "description": "The endpoint of the Azure Communication resource.",
+      "required": true,
+      "type": "string",
+      "x-ms-skip-url-encoding": true,
+      "x-ms-parameter-location": "client"
     }
   },
   "securityDefinitions": {
