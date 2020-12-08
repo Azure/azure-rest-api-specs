@@ -2,11 +2,17 @@
   "parameters": {
     "api-version": "2020-07-20-preview1",
     "endpoint": "https://resourcename.communications.azure.net/",
-    "phoneNumber": "+18005551234"
+    "phoneNumber": "+18005551234",
+    "update": {
+      "sms": "inbound",
+      "calling": "inbound+outbound"
+    }
   },
   "responses": {
-    "200": {
-      "headers": {},
+    "202": {
+      "headers": {
+        "operation-location": "https://resourcename.communications.azure.net/phoneNumbers/operations/9c3d1c98-d3ef-4316-b3b3-659e0d4d6c99"
+      },
       "body": {
         "id": "+18005551234",
         "phoneNumber": "+18005551234",

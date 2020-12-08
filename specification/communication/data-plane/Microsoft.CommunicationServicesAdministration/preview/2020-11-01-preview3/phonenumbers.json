@@ -310,16 +310,10 @@
           }
         ],
         "responses": {
-          "202": {
-            "description": "The service has accepted the request and will start processing later. It will return 'Accepted' immediately and include an 'Operation-Location' header. Client side should further query the operation status using the URL specified in this header.",
+          "200": {
+            "description": "The updated phone number.",
             "schema": {
               "$ref": "#/definitions/AcquiredPhoneNumber"
-            },
-            "headers": {
-              "Operation-Location": {
-                "description": "URL to query for status of the operation.",
-                "type": "string"
-              }
             }
           },
           "default": {
@@ -363,6 +357,64 @@
         "x-ms-examples": {
           "Release acquired phone number": {
             "$ref": "./examples/DeletePhoneNumber.json"
+          }
+        }
+      }
+    },
+    "/phoneNumbers/{phoneNumber}/capabilities": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/PhoneNumberId"
+        },
+        {
+          "$ref": "#/parameters/ApiVersionParameter"
+        }
+      ],
+      "patch": {
+        "tags": [
+          "Manage acquired phone numbers"
+        ],
+        "operationId": "PhoneNumbers_UpdatePhoneNumberCapabilities",
+        "summary": "Update capabilities of an acquired phone number.",
+        "consumes": [
+          "application/merge-patch+json"
+        ],
+        "parameters": [
+          {
+            "name": "update",
+            "in": "body",
+            "required": true,
+            "x-ms-client-flatten": true,
+            "schema": {
+              "$ref": "#/definitions/PhoneNumberCapabilitiesRequest"
+            },
+            "description": "Update capabilities of an acquired phone number."
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The service has accepted the request and will start processing later. It will return 'Accepted' immediately and include an 'Operation-Location' header. Client side should further query the operation status using the URL specified in this header.",
+            "schema": {
+              "$ref": "#/definitions/AcquiredPhoneNumber"
+            },
+            "headers": {
+              "Operation-Location": {
+                "description": "URL to query for status of the operation.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Failure",
+            "schema": {
+              "$ref": "../../../Microsoft.CommunicationServicesCommon/preview/2020-11-19-preview1/common.json#/definitions/CommunicationErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Update capabilities of an acquired phone number": {
+            "$ref": "./examples/PatchPhoneNumberCapabilities.json"
           }
         }
       }
@@ -416,7 +468,7 @@
         }
       }
     },
-    "PhoneNumberKind": {
+    "PhoneNumberType": {
       "description": "The type of a phone number.",
       "type": "string",
       "enum": [
@@ -424,7 +476,7 @@
         "geographic"
       ],
       "x-ms-enum": {
-        "name": "PhoneNumberKind",
+        "name": "PhoneNumberType",
         "modelAsString": true
       }
     },
@@ -545,7 +597,7 @@
         "id",
         "phoneNumber",
         "countryCode",
-        "kind",
+        "phoneNumberType",
         "assignmentType",
         "purchaseDate",
         "capabilities",
@@ -566,9 +618,9 @@
           "description": "The ISO 3166-2 country code of the country that the phone number belongs to.",
           "type": "string"
         },
-        "kind": {
-          "description": "The kind of the phone number.",
-          "$ref": "#/definitions/PhoneNumberKind"
+        "phoneNumberType": {
+          "description": "The type of the phone number.",
+          "$ref": "#/definitions/PhoneNumberType"
         },
         "assignmentType": {
           "description": "The assignment type of the phone number, people or application.",
@@ -608,10 +660,6 @@
         "applicationId": {
           "description": "The application id the number has been assigned to.",
           "type": "string"
-        },
-        "capabilities": {
-          "description": "The new set of enabled capabilities.",
-          "$ref": "#/definitions/PhoneNumberCapabilitiesRequest"
         }
       }
     },
@@ -638,15 +686,15 @@
     "PhoneNumberSearchRequest": {
       "description": "The desired properties of a phone number for search.",
       "required": [
-        "numberType",
+        "phoneNumberType",
         "assignmentType",
         "capabilities"
       ],
       "type": "object",
       "properties": {
-        "numberType": {
+        "phoneNumberType": {
           "description": "The phone number type.",
-          "$ref": "#/definitions/PhoneNumberKind"
+          "$ref": "#/definitions/PhoneNumberType"
         },
         "assignmentType": {
           "description": "The phone number's assignment type.",
@@ -674,7 +722,7 @@
       "required": [
         "id",
         "phoneNumbers",
-        "numberType",
+        "phoneNumberType",
         "assignmentType",
         "capabilities",
         "cost",
@@ -692,9 +740,9 @@
             "type": "string"
           }
         },
-        "numberType": {
+        "phoneNumberType": {
           "description": "The phoner number type.",
-          "$ref": "#/definitions/PhoneNumberKind"
+          "$ref": "#/definitions/PhoneNumberType"
         },
         "assignmentType": {
           "description": "The phone number's assignment type.",

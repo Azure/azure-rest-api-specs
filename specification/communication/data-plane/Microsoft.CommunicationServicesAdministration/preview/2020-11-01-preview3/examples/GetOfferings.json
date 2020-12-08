@@ -3,7 +3,7 @@
     "api-version": "2020-07-20-preview1",
     "countryCode": "US",
     "endpoint": "https://resourcename.communications.azure.net/",
-    "numberType": "tollFree",
+    "phoneNumberType": "tollFree",
     "assignmentType": "person"
   },
   "responses": {
@@ -11,7 +11,7 @@
       "headers": {},
       "body": [
         {
-          "numberType": "tollFree",
+          "phoneNumberType": "tollFree",
           "assignmentType": "person",
           "countryCode": "CA",
           "availableCapabilities": {
@@ -23,9 +23,10 @@
               "inbound"
             ]
           },
-          "monthlyRate": {
-            "value": 0,
-            "currency": "USD"
+          "cost": {
+            "billingFrequency": "monthly",
+            "amount": 0,
+            "currencyCode": "USD"
           }
         }
       ]
