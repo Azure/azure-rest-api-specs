@@ -465,7 +465,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Asset"
+              "$ref": "#/definitions/AssetPatch"
             },
             "description": "Parameters supplied to the Update IT Digital Twin Asset operation."
           },
@@ -794,6 +794,10 @@
           "description": "List the properties of IT Digital Twin",
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/ITDigitalTwinProperties"
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "description": "The system data."
         }
       },
       "allOf": [
@@ -987,10 +991,21 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/TrackedResource"
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/TrackedResource"
         }
       ],
       "description": "Asset including virtual machines and the on-prem test devices."
+    },
+    "AssetPatch": {
+      "properties": {
+        "properties": {
+          "title": "Asset properties",
+          "description": "List the properties of IT Digital Twin Asset",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/AssetProperties"
+        }
+      },
+      "description": "Asset defnition for patch operation"
     },
     "Assets": {
       "properties": {
