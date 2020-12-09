@@ -152,7 +152,7 @@
               "application"
             ],
             "x-ms-enum": {
-              "name": "AssignmentType",
+              "name": "PhoneNumberAssignmentType",
               "modelAsString": true
             },
             "required": false
@@ -192,14 +192,14 @@
           "description": "Available Sms capabilities.",
           "type": "array",
           "items": {
-            "$ref": "phonenumbers.json#/definitions/CapabilityValue"
+            "$ref": "phonenumbers.json#/definitions/PhoneNumberCapabilityValue"
           }
         },
         "calling": {
           "description": "Available Calling capabilities.",
           "type": "array",
           "items": {
-            "$ref": "phonenumbers.json#/definitions/CapabilityValue"
+            "$ref": "phonenumbers.json#/definitions/PhoneNumberCapabilityValue"
           }
         }
       }
@@ -214,7 +214,7 @@
         },
         "assignmentType": {
           "description": "The phone number's assignment type.",
-          "$ref": "phonenumbers.json#/definitions/AssignmentType"
+          "$ref": "phonenumbers.json#/definitions/PhoneNumberAssignmentType"
         },
         "countryCode": {
           "description": "The ISO 3166-2 country code.",
@@ -224,9 +224,9 @@
           "description": "The capabilities that are available in this offering.",
           "$ref": "#/definitions/AvailableCapabilities"
         },
-        "monthlyRate": {
+        "cost": {
           "description": "The montly cost for an individual phone number in this offering.",
-          "$ref": "phonenumbers.json#/definitions/MonthlyRate"
+          "$ref": "phonenumbers.json#/definitions/PhoneNumberCost"
         }
       }
     },
