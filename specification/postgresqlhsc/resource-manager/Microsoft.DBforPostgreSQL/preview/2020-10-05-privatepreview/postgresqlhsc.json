@@ -1208,24 +1208,6 @@
         "modelAsString": true
       }
     },
-    "VnetInjArgs": {
-      "type": "object",
-      "description": "The vnet injection arguments for server group.",
-      "properties": {
-        "delegatedVnetID": {
-          "type": "string",
-          "description": "delegated vNet ID"
-        },
-        "delegatedSubnetName": {
-          "type": "string",
-          "description": "delegated subnet name"
-        },
-        "delegatedVnetName": {
-          "type": "string",
-          "description": "delegated vNet name"
-        }
-      }
-    },
     "ServerState": {
       "type": "string",
       "description": "A state of a server group/server that is visible to user.",
@@ -1630,9 +1612,14 @@
           "$ref": "#/definitions/MaintenanceWindow",
           "description": "Maintenance window of a server group."
         },
-        "vnetInjArgs": {
-          "$ref": "#/definitions/VnetInjArgs",
-          "description": "The vnet injection arguments for server group."
+        "delegatedSubnetArguments": {
+          "description": "The delegated subnet arguments for a server group.",
+          "properties": {
+            "subnetArmResourceId": {
+              "type": "string",
+              "description": "delegated subnet arm resource id."
+            }
+          }
         },
         "sourceSubscriptionId": {
           "type": "string",
