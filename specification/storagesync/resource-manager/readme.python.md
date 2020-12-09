@@ -17,25 +17,24 @@ azure-arm: true
 license-header: MICROSOFT_MIT_NO_VERSION
 namespace: azure.mgmt.storagesync
 package-name: azure-mgmt-storagesync
-package-version: 2019-06-01
 clear-output-folder: true
 ```
 
 ``` yaml $(python) && $(python-mode) == 'update' && !$(track2)
 python:
   no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/storagesync/azure-mgmt-storagesync/azure/mgmt/storagesync
+  output-folder: $(python-sdks-folder)/storage/azure-mgmt-storagesync/azure/mgmt/storagesync
 ```
 ``` yaml $(python) && $(python-mode) == 'create' && !$(track2)
 python:
   basic-setup-py: true
-  output-folder: $(python-sdks-folder)/storagesync/azure-mgmt-storagesync
+  output-folder: $(python-sdks-folder)/storage/azure-mgmt-storagesync
 ```
 ``` yaml $(python) && $(python-mode) == 'update' && $(track2)
 no-namespace-folders: true
-output-folder: $(python-sdks-folder)/storagesync/azure-mgmt-storagesync/azure/mgmt/storagesync
+output-folder: $(python-sdks-folder)/storage/azure-mgmt-storagesync/azure/mgmt/storagesync
 ```
 ``` yaml $(python) && $(python-mode) == 'create' && $(track2)
 basic-setup-py: true
-output-folder: $(python-sdks-folder)/storagesync/azure-mgmt-storagesync
+output-folder: $(python-sdks-folder)/storage/azure-mgmt-storagesync
 ```
