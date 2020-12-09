@@ -1305,14 +1305,11 @@
           "format": "int64",
           "description": "The vCores count of a server (max: 64)."
         },
-        "standbyCount": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The standby count of a server.",
-          "minimum": 0,
-          "maximum": 1
+        "enableHa": {
+          "type": "boolean",
+          "description": "If high availability is enabled or not for the server."
         },
-        "isPublicIpRequested": {
+        "enablePublicIp": {
           "type": "boolean",
           "description": "If public IP is requested or not for a server.",
           "readOnly": true
@@ -1586,7 +1583,7 @@
           "$ref": "#/definitions/CitusVersion",
           "description": "The citus version of servers."
         },
-        "isMx": {
+        "enableMx": {
           "type": "boolean",
           "description": "If Citus MX is enabled or not for the server group.",
           "x-ms-mutability": [
@@ -1594,7 +1591,7 @@
             "read"
           ]
         },
-        "isZfs": {
+        "enableZfs": {
           "type": "boolean",
           "description": "If ZFS compression is enabled or not for the server group.",
           "x-ms-mutability": [

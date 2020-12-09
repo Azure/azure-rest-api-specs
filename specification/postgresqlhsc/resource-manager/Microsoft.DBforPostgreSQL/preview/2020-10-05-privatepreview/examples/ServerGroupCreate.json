@@ -7,7 +7,7 @@
     "parameters": {
       "location": "westus",
       "properties": {
-        "administratorLogin": "cloudsa",
+        "administratorLogin": "citus",
         "administratorLoginPassword": "password",
         "backupRetentionDays": 35,
         "vnetInjArgs": {
@@ -15,8 +15,8 @@
           "delegatedVnetID": "6ed504a3-24b8-4ba8-ac1f-7a1780195437",
           "delegatedVnetName": "test-vnet"
         },
-        "isMx": true,
-        "isZfs": false,
+        "enableMx": true,
+        "enableZfs": false,
         "version": "12",
         "citusVersion": "9.5",
         "serverRoleGroups": [
@@ -27,7 +27,7 @@
             "serverEdition": "GeneralPurpose",
             "vCores": 4,
             "storageQuotaInMb": 524288,
-            "standbyCount": 1
+            "enableHa": true
           },
           {
             "name": "",
@@ -36,7 +36,7 @@
             "serverEdition": "MemoryOptimized",
             "vCores": 4,
             "storageQuotaInMb": 524288,
-            "standbyCount": 0
+            "enableHa": false
           }
         ]
       },
