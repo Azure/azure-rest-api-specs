@@ -3,10 +3,7 @@
   "info": {
     "version": "2020-12-07-preview",
     "title": "PartnerCenterClient",
-    "description": "Microsoft Partner Center REST API version 2020-12-07-preview.",
-    "x-ms-code-generation-settings": {
-      "name": "PartnerCenterClient"
-    }
+    "description": "Provides operations for registering with Partner Center RP."
   },
   "host": "management.azure.com",
   "schemes": [
@@ -37,14 +34,13 @@
     }
   },
   "paths": {
-    "/providers/Microsoft.PartnerCenter/operations": {
+    "/providers/Microsoft.Resources/operations": {
       "get": {
         "tags": [
           "Operations"
         ],
         "operationId": "Operations_List",
-        "description": "Retrieves a list of available API operations",
-        "summary": "Retrieves a list of available API operations under this Resource Provider.",
+        "description": "Lists all of the available Microsoft.Resources REST API operations.",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -52,20 +48,14 @@
         ],
         "responses": {
           "200": {
-            "description": "The request was successful; response contains the list of operations under Microsoft.VSOnline resource provider.",
+            "description": "OK. The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/ResourceProviderOperationList"
-            }
-          },
-          "default": {
-            "description": "Error response describing the reason for operation failure.)",
-            "schema": {
-              "$ref": "#/definitions/PartnerCenterErrorResponse"
+              "$ref": "#/definitions/OperationListResult"
             }
           }
         },
         "x-ms-examples": {
-          "PartnerCenterOperationsGet": {
+          "ListOperations": {
             "$ref": "./examples/OperationGroupGet.json"
           }
         },
@@ -76,86 +66,50 @@
     }
   },
   "definitions": {
-    "PartnerCenterErrorResponse": {
-      "description": "Error response indicates that the service is not able to process the incoming request.",
-      "properties": {
-        "error": {
-          "$ref": "#/definitions/ErrorDefinition",
-          "description": "The error details."
-        }
-      }
-    },
-    "ErrorDefinition": {
-      "description": "Error definition.",
-      "properties": {
-        "code": {
-          "description": "Service specific error code which serves as the substatus for the HTTP error code.",
-          "type": "string",
-          "readOnly": true
-        },
-        "message": {
-          "description": "Description of the error.",
-          "type": "string",
-          "readOnly": true
-        },
-        "details": {
-          "description": "Internal error details.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ErrorDefinition"
-          },
-          "readOnly": true
-        }
-      }
-    },
-    "ResourceProviderOperationList": {
-      "description": "List containing this Resource Provider's available operations.",
-      "properties": {
-        "value": {
-          "description": "Resource provider operations list.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ResourceProviderOperationDefinition"
-          }
-        },
-        "nextLink": {
-          "description": "The URI that can be used to request the next page for list of Azure operations.",
-          "type": "string",
-          "readOnly": true
-        }
-      }
-    },
-    "ResourceProviderOperationDefinition": {
-      "description": "Describes the Resource Provider Operation.",
+    "Operation": {
+      "description": "Microsoft.Resources operation",
+      "type": "object",
       "properties": {
         "name": {
-          "description": "Resource provider operation name.",
+          "description": "Operation name: {provider}/{resource}/{operation}",
           "type": "string"
         },
         "display": {
-          "description": "Resource provider display properties.",
-          "$ref": "#/definitions/ResourceProviderOperationDisplay"
+          "description": "The object that represents the operation.",
+          "properties": {
+            "provider": {
+              "description": "Service provider: Microsoft.Resources",
+              "type": "string"
+            },
+            "resource": {
+              "description": "Resource on which the operation is performed: Profile, endpoint, etc.",
+              "type": "string"
+            },
+            "operation": {
+              "description": "Operation type: Read, write, delete, etc.",
+              "type": "string"
+            },
+            "description": {
+              "description": "Description of the operation.",
+              "type": "string"
+            }
+          }
         }
       }
     },
-    "ResourceProviderOperationDisplay": {
-      "description": "Describes the properties of the Operation.",
+    "OperationListResult": {
+      "description": "Result of the request to list Microsoft.Resources operations. It contains a list of operations and a URL link to get the next set of results.",
       "properties": {
-        "provider": {
-          "description": "Name of the resource provider.",
-          "type": "string"
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Operation"
+          },
+          "description": "List of Microsoft.Resources operations."
         },
-        "resource": {
-          "description": "Name of the resource type.",
-          "type": "string"
-        },
-        "operation": {
-          "description": "Name of the resource provider operation.",
-          "type": "string"
-        },
-        "description": {
-          "description": "Description of the resource provider operation.",
-          "type": "string"
+        "nextLink": {
+          "type": "string",
+          "description": "URL to get the next set of operation list results if there are any."
         }
       }
     }
