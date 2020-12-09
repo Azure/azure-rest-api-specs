@@ -328,43 +328,43 @@
         }
       }
     },
-    "SystemData": {	
-      "description": "Top level metadata https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/common-api-contracts.md#system-metadata-for-all-azure-resources",	
-      "type": "object",	
-      "properties": {	
-        "createdBy": {	
-          "description": "A string identifier for the identity that created the resource",	
-          "type": "string",	
-          "readOnly": true	
-        },	
-        "createdByType": {	
-          "description": "The type of identity that created the resource: user, application, managedIdentity, key",	
-          "type": "string",	
-          "readOnly": true	
-        },	
-        "createdAt": {	
-          "format": "date-time",	
-          "description": "The timestamp of resource creation (UTC)",	
-          "type": "string",	
-          "readOnly": true	
-        },	
-        "lastModifiedBy": {	
-          "description": "A string identifier for the identity that last modified the resource",	
-          "type": "string",	
-          "readOnly": true	
-        },	
-        "lastModifiedByType": {	
-          "description": "The type of identity that last modified the resource: user, application, managedIdentity, key",	
-          "type": "string",	
-          "readOnly": true	
-        },	
-        "lastModifiedAt": {	
-          "format": "date-time",	
-          "description": "The timestamp of resource last modification (UTC)",	
-          "type": "string",	
-          "readOnly": true	
-        }	
-      }	
+    "SystemData": {
+      "description": "Top level metadata https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/common-api-contracts.md#system-metadata-for-all-azure-resources",
+      "type": "object",
+      "properties": {
+        "createdBy": {
+          "description": "A string identifier for the identity that created the resource",
+          "type": "string",
+          "readOnly": true
+        },
+        "createdByType": {
+          "description": "The type of identity that created the resource: user, application, managedIdentity, key",
+          "type": "string",
+          "readOnly": true
+        },
+        "createdAt": {
+          "format": "date-time",
+          "description": "The timestamp of resource creation (UTC)",
+          "type": "string",
+          "readOnly": true
+        },
+        "lastModifiedBy": {
+          "description": "A string identifier for the identity that last modified the resource",
+          "type": "string",
+          "readOnly": true
+        },
+        "lastModifiedByType": {
+          "description": "The type of identity that last modified the resource: user, application, managedIdentity, key",
+          "type": "string",
+          "readOnly": true
+        },
+        "lastModifiedAt": {
+          "format": "date-time",
+          "description": "The timestamp of resource last modification (UTC)",
+          "type": "string",
+          "readOnly": true
+        }
+      }
     },
     "ConfigurationProfileResource": {
       "description": "A profile object that contains change analysis configuration, such as notification settings, for this subscription",
@@ -383,20 +383,20 @@
         }
       }
     },
-    "ExtendedProxyResource": {	
-      "description": "An Azure resource.",	
+    "ExtendedProxyResource": {
+      "description": "An Azure resource.",
       "type": "object",
       "allOf": [
         {
           "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
         }
       ],
-      "properties": {	
-        "systemData": {	
-          "$ref": "#/definitions/SystemData"	
-        }	
-      },	
-      "x-ms-azure-resource": true	
+      "properties": {
+        "systemData": {
+          "$ref": "#/definitions/SystemData"
+        }
+      },
+      "x-ms-azure-resource": true
     },
     "ResourceProviderOperationDisplay": {
       "description": "The resource provider operation details.",
