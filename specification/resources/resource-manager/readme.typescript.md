@@ -63,8 +63,8 @@ typescript:
 typescript:
   azure-arm: true
   generate-metadata: true
-  package-name: "@azure/arm-resources-profile-hybrid-2019-03-01"
-  output-folder: "$(typescript-sdks-folder)/sdk/resources/arm-resources-profile-hybrid-2019-03-01"
+  package-name: "@azure/arm-resources-profile-2019-03-01-hybrid"
+  output-folder: "$(typescript-sdks-folder)/sdk/resources/arm-resources-profile-2019-03-01-hybrid"
   clear-output-folder: true
   batch:
     - tag: package-resources-2018-05
@@ -74,8 +74,8 @@ typescript:
 typescript:
   azure-arm: true
   generate-metadata: true
-  package-name: "@azure/arm-policy-profile-hybrid-2019-03-01"
-  output-folder: "$(typescript-sdks-folder)/sdk/policy/arm-policy-profile-hybrid-2019-03-01"
+  package-name: "@azure/arm-policy-profile-2019-03-01-hybrid"
+  output-folder: "$(typescript-sdks-folder)/sdk/policy/arm-policy-profile-2019-03-01-hybrid"
   clear-output-folder: true
   batch:
     - tag: package-policy-2016-12
@@ -85,8 +85,8 @@ typescript:
 typescript:
   azure-arm: true
   generate-metadata: true
-  package-name: "@azure/arm-locks-profile-hybrid-2019-03-01"
-  output-folder: "$(typescript-sdks-folder)/sdk/locks/arm-locks-profile-hybrid-2019-03-01"
+  package-name: "@azure/arm-locks-profile-2019-03-01-hybrid"
+  output-folder: "$(typescript-sdks-folder)/sdk/locks/arm-locks-profile-2019-03-01-hybrid"
   clear-output-folder: true
   batch:
     - tag: package-locks-2016-09
@@ -96,8 +96,8 @@ typescript:
 typescript:
   azure-arm: true
   generate-metadata: true
-  package-name: "@azure/arm-subscriptions-profile-hybrid-2019-03-01"
-  output-folder: "$(typescript-sdks-folder)/sdk/subscription/arm-subscriptions-profile-hybrid-2019-03-01"
+  package-name: "@azure/arm-subscriptions-profile-2019-03-01-hybrid"
+  output-folder: "$(typescript-sdks-folder)/sdk/subscription/arm-subscriptions-profile-2019-03-01-hybrid"
   clear-output-folder: true
   batch:
     - tag: package-subscriptions-2016-06
@@ -107,8 +107,8 @@ typescript:
 typescript:
   azure-arm: true
   generate-metadata: true
-  package-name: "@azure/arm-resources-profile-hybrid-2020-09-01"
-  output-folder: "$(typescript-sdks-folder)/sdk/resources/arm-resources-profile-hybrid-2020-09-01"
+  package-name: "@azure/arm-resources-profile-2020-09-01-hybrid"
+  output-folder: "$(typescript-sdks-folder)/sdk/resources/arm-resources-profile-2020-09-01-hybrid"
   clear-output-folder: true
   batch:
     - tag: package-resources-2019-10
@@ -118,8 +118,8 @@ typescript:
 typescript:
   azure-arm: true
   generate-metadata: true
-  package-name: "@azure/arm-policy-profile-hybrid-2020-09-01"
-  output-folder: "$(typescript-sdks-folder)/sdk/policy/arm-policy-profile-hybrid-2020-09-01"
+  package-name: "@azure/arm-policy-profile-2020-09-01-hybrid"
+  output-folder: "$(typescript-sdks-folder)/sdk/policy/arm-policy-profile-2020-09-01-hybrid"
   clear-output-folder: true
   batch:
     - tag: package-policy-2016-12
@@ -129,8 +129,8 @@ typescript:
 typescript:
   azure-arm: true
   generate-metadata: true
-  package-name: "@azure/arm-locks-profile-hybrid-2020-09-01"
-  output-folder: "$(typescript-sdks-folder)/sdk/locks/arm-locks-profile-hybrid-2020-09-01"
+  package-name: "@azure/arm-locks-profile-2020-09-01-hybrid"
+  output-folder: "$(typescript-sdks-folder)/sdk/locks/arm-locks-profile-2020-09-01-hybrid"
   clear-output-folder: true
   batch:
     - tag: package-locks-2016-09
@@ -140,8 +140,8 @@ typescript:
 typescript:
   azure-arm: true
   generate-metadata: true
-  package-name: "@azure/arm-subscriptions-profile-hybrid-2020-09-01"
-  output-folder: "$(typescript-sdks-folder)/sdk/subscription/arm-subscriptions-profile-hybrid-2020-09-01"
+  package-name: "@azure/arm-subscriptions-profile-2020-09-01-hybrid"
+  output-folder: "$(typescript-sdks-folder)/sdk/subscription/arm-subscriptions-profile-2020-09-01-hybrid"
   clear-output-folder: true
   batch:
     - tag: package-subscriptions-2016-06
