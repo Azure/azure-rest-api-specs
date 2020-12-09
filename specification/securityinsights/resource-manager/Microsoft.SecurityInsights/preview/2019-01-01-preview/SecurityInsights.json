@@ -2223,7 +2223,7 @@
             "$ref": "#/parameters/EntityId"
           },
           {
-            "$ref": "#/definitions/EntityQueryKind"
+            "$ref": "#/parameters/EntityQueryKindParam"
           }
         ],
         "responses": {
@@ -11332,6 +11332,27 @@
       "name": "incidentId",
       "required": true,
       "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "EntityQueryKindParam": {
+      "description": "The Kind parameter for queries",
+      "in": "query",
+      "name": "kind",
+      "required": true,
+      "type": "string",
+      "enum": [
+        "Insight"
+      ],
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "EntityItemQueryKind",
+        "values": [
+          {
+            "description": "insight",
+            "value": "Insight"
+          }
+        ]
+      },
       "x-ms-parameter-location": "method"
     },
     "ODataFilter": {
