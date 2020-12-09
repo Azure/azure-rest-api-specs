@@ -1,4 +1,4 @@
-# partnercenter
+# partnercenteringestion
 
 > see https://aka.ms/autorest
 
@@ -22,7 +22,7 @@ For other options on installation see [Installing AutoRest](https://aka.ms/autor
 
 ### Basic Information
 
-These are the global settings for the partnercenter.
+These are the global settings for the partnercenteringestion.
 
 ```yaml
 openapi-type: arm
@@ -36,6 +36,6 @@ These settings apply only when `--tag=package-2020-12-07-preview` is specified o
 
 ```yaml $(tag) == 'package-2020-12-07-preview'
 input-file:
-  - Microsoft.PartnerCenter/preview/2020-12-07-preview/partnercenter.json
+  - Microsoft.PartnerCenterIngestion/preview/2020-12-07-preview/partnercenteringestion.json
 ```
 ---
