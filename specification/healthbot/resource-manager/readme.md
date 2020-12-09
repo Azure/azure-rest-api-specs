@@ -27,7 +27,7 @@ These are the global settings for the healthbot.
 ```yaml
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2020-10-20-preview
+tag: package-2020-12-08-preview
 ```
 
 
@@ -90,6 +90,7 @@ swagger-to-sdk:
   - repo: azure-sdk-for-ruby
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_healthbot']
+  - repo: azure-cli-extensions
 ```
 
 ## Python

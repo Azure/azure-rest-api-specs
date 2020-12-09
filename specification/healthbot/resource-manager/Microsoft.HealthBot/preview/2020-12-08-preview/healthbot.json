@@ -40,7 +40,7 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.HealthBot/checkNameAvailability": {
       "post": {
         "description": "Check whether a bot name is available.",
-        "operationId": "Bots_GetCheckNameAvailability",
+        "operationId": "Bots_CheckNameAvailability",
         "x-ms-examples": {
           "check Name Availability": {
             "$ref": "./examples/CheckNameAvailability.json"
@@ -81,7 +81,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HealthBot/healthBots/{resourceName}": {
       "put": {
-        "operationId": "create_bot",
+        "operationId": "Bots_Create",
         "x-ms-examples": {
           "BatchAccountDelete": {
             "$ref": "./examples/ResourceCreationPut.json"
@@ -137,7 +137,7 @@
         }
       },
       "get": {
-        "operationId": "get_bot",
+        "operationId": "Bots_Get",
         "x-ms-examples": {
           "BatchAccountDelete": {
             "$ref": "./examples/ResourceInfoGet.json"
@@ -174,7 +174,7 @@
         }
       },
       "patch": {
-        "operationId": "patch_bot",
+        "operationId": "Bots_Update",
         "x-ms-examples": {
           "BatchAccountDelete": {
             "$ref": "./examples/ResourceUpdatePatch.json"
@@ -226,7 +226,7 @@
         }
       },
       "delete": {
-        "operationId": "delete_bot",
+        "operationId": "Bots_Delete",
         "x-ms-examples": {
           "BatchAccountDelete": {
             "$ref": "./examples/ResourceDeletionDelete.json"
@@ -790,7 +790,7 @@
       "description": "The name of the Bot resource group in the user subscription."
     },
     "resourceNameParameter": {
-      "name": "resourceName",
+      "name": "botName",
       "x-ms-parameter-location": "method",
       "in": "path",
       "required": true,
