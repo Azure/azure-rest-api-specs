@@ -69,7 +69,7 @@
                   "inputLocation": {
                     "storageContainerUri": "https://contoso.blob.core.windows.net/arr",
                     "blobPrefix": "architecture/",
-                    "relativeAssetInputPath": "house.fbx"
+                    "relativeInputAssetPath": "house.fbx"
                   },
                   "outputLocation": {
                     "storageContainerUri": "https://contoso.blob.core.windows.net/arr",
@@ -181,7 +181,7 @@
                   "inputLocation": {
                     "storageContainerUri": "https://contoso.blob.core.windows.net/arr",
                     "blobPrefix": "architecture/",
-                    "relativeAssetInputPath": "house.fbx"
+                    "relativeInputAssetPath": "house.fbx"
                   },
                   "outputLocation": {
                     "storageContainerUri": "https://contoso.blob.core.windows.net/arr",
@@ -304,7 +304,7 @@
                       "inputLocation": {
                         "storageContainerUri": "https://contoso.blob.core.windows.net/arr",
                         "blobPrefix": "architecture/",
-                        "relativeAssetInputPath": "house.fbx"
+                        "relativeInputAssetPath": "house.fbx"
                       },
                       "outputLocation": {
                         "storageContainerUri": "https://contoso.blob.core.windows.net/arr",
@@ -324,7 +324,7 @@
                       "inputLocation": {
                         "storageContainerUri": "https://contoso.blob.core.windows.net/arr",
                         "blobPrefix": "architecture2/",
-                        "relativeAssetInputPath": "house2.fbx"
+                        "relativeInputAssetPath": "house2.fbx"
                       },
                       "outputLocation": {
                         "storageContainerUri": "https://contoso.blob.core.windows.net/arr",
@@ -421,6 +421,9 @@
       "put": {
         "operationId": "CreateSession",
         "consumes": [
+          "application/json"
+        ],
+        "produces": [
           "application/json"
         ],
         "parameters": [
@@ -643,6 +646,9 @@
         "consumes": [
           "application/json"
         ],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "description": "the Azure Remote Rendering account ID",
@@ -842,7 +848,7 @@
                     "id": "contoso-session-1",
                     "arrInspectorPort": 50052,
                     "handshakePort": 50051,
-                    "elapsedimeMinutes": 10,
+                    "elapsedTimeMinutes": 10,
                     "hostname": "d4cefb7b-10b9-4631-934d-67445ffa9126.remoterenderingvm.westus2.mixedreality.azure.com",
                     "maxLeaseTimeMinutes": 60,
                     "size": "Standard",
@@ -854,7 +860,7 @@
                     "id": "contoso-session-2",
                     "arrInspectorPort": 50052,
                     "handshakePort": 50051,
-                    "elapsedimeMinutes": 2,
+                    "elapsedTimeMinutes": 2,
                     "hostname": "8fea8b3e-ae49-43da-a3cc-f609c1636f36.remoterenderingvm.westus2.mixedreality.azure.com",
                     "maxLeaseTimeMinutes": 60,
                     "size": "Standard",
@@ -920,7 +926,7 @@
         "output": {
           "type": "object",
           "properties": {
-            "outputAssetUrl": {
+            "outputAssetUri": {
               "type": "string",
               "x-nullable": true,
               "format": "uri",
@@ -937,6 +943,11 @@
         },
         "status": {
           "$ref": "#/definitions/conversion_status"
+        },
+        "creationTime":
+        {
+          "type": "string",
+          "format": "date-time"
         }
       },
       "required": [
@@ -945,7 +956,7 @@
         "status",
         "error"
       ],
-      "type": "object"
+      "type": "object"      
     },
     "conversion_input_settings": {
       "properties": {
@@ -1155,6 +1166,11 @@
           "type": "object",
           "$ref": "#/definitions/error",
           "example": null
+        },
+        "creationTime":
+        {
+          "type": "string",
+          "format": "date-time"
         }
       },
       "type": "object"
