@@ -1023,6 +1023,9 @@
               "$ref": "#/definitions/MaintenanceConfiguration"
             }
           },
+          "204": {
+            "description": "NoContent"
+          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
@@ -2447,6 +2450,44 @@
       },
       "description": "Profile of network configuration."
     },
+    "SystemData": {
+      "description": "Top level metadata https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/common-api-contracts.md#system-metadata-for-all-azure-resources",
+      "type": "object",
+      "properties": {
+        "createdBy": {
+          "description": "A string identifier for the identity that created the resource",
+          "type": "string",
+          "readOnly": true
+        },
+        "createdByType": {
+          "description": "The type of identity that created the resource: user, application, managedIdentity, key",
+          "type": "string",
+          "readOnly": true
+        },
+        "createdAt": {
+          "format": "date-time",
+          "description": "The timestamp of resource creation (UTC)",
+          "type": "string",
+          "readOnly": true
+        },
+        "lastModifiedBy": {
+          "description": "A string identifier for the identity that last modified the resource",
+          "type": "string",
+          "readOnly": true
+        },
+        "lastModifiedByType": {
+          "description": "The type of identity that last modified the resource: user, application, managedIdentity, key",
+          "type": "string",
+          "readOnly": true
+        },
+        "lastModifiedAt": {
+          "format": "date-time",
+          "description": "The timestamp of resource last modification (UTC)",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
     "MaintenanceConfigurationListResult": {
       "properties": {
         "value": {
@@ -2471,6 +2512,10 @@
         },
         {
           "properties": {
+            "systemData": {
+              "$ref": "#/definitions/SystemData",
+              "readOnly": true
+            },
             "properties": {
               "description": "Properties of a default maintenance configuration.",
               "$ref": "#/definitions/MaintenanceConfigurationProperties",
