@@ -1448,7 +1448,7 @@
           "description": "The location the resource resides in."
         },
         "properties": {
-          "$ref": "#/definitions/ServerGroupProperties",
+          "$ref": "#/definitions/ServerGroupPropertiesForUpdate",
           "x-ms-client-flatten": true,
           "description": "Properties of the server group."
         },
@@ -1458,6 +1458,38 @@
             "type": "string"
           },
           "description": "Application-specific metadata in the form of key-value pairs."
+        }
+      }
+    },
+    "ServerGroupPropertiesForUpdate": {
+      "description": "The properties used to update a server group.",
+      "properties": {
+        "administratorLoginPassword": {
+          "type": "string",
+          "x-ms-secret": true,
+          "format": "password",
+          "x-ms-mutability": [
+            "create",
+            "update"
+          ],
+          "description": "The password of the administrator login."
+        },
+        "backupRetentionDays": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The backup retention days for server group."
+        },
+        "version": {
+          "$ref": "#/definitions/ServerVersion",
+          "description": "The version of servers."
+        },
+        "citusVersion": {
+          "$ref": "#/definitions/CitusVersion",
+          "description": "The citus version of servers."
+        },
+        "serverRoleGroups": {
+          "$ref": "#/definitions/ServerRoleGroupList",
+          "description": "The list of server role groups."
         }
       }
     },
