@@ -623,48 +623,34 @@
         }
       }
     },
-    "PrivateEndpointConnection": {
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/PrivateEndpointConnectionProperties",
-          "x-ms-client-flatten": true,
-          "description": "Resource properties."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/Resource"
-        }
-      ],
-      "description": "Private endpoint connection resource.",
-      "x-ms-azure-resource": true
-    },
     "PrivateEndpointConnectionProperties": {
       "properties": {
-        "privateEndpoint": {
-          "$ref": "#/definitions/PrivateEndpoint",
-          "description": "Properties of the private endpoint object."
-        },
-        "privateLinkServiceConnectionState": {
-          "$ref": "#/definitions/PrivateLinkServiceConnectionState",
-          "description": "Approval state of the private link connection."
-        },
         "provisioningState": {
-          "$ref": "#/definitions/PrivateEndpointConnectionProvisioningState",
+          "$ref": "../../../../../common-types/resource-management/v1/privatelinks.json#/definitions/PrivateEndpointConnectionProvisioningState",
           "description": "Provisioning state of the private endpoint connection."
         }
       },
       "description": "Properties of the private endpoint connection resource."
     },
-    "PrivateEndpoint": {
+    "PrivateLinkConnectionItemProperties": {
+      "type": "object",
       "properties": {
-        "id": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Full identifier of the private endpoint resource."
+        "provisioningState": {
+          "$ref": "#/definitions/PrivateEndpointConnectionProvisioningState"
+        },
+        "privateEndpoint": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string",
+              "description": "Identifier for the endpoint"
+            }
+          }
+        },
+        "privateLinkServiceConnectionState": {
+          "$ref": "../../../../../common-types/resource-management/v1/privatelinks.json#/definitions/PrivateLinkServiceConnectionState"
         }
-      },
-      "description": "Private endpoint object properties."
+      }
     },
     "PrivateEndpointConnectionItem": {
       "type": "object",
@@ -687,50 +673,13 @@
       },
       "description": "Private endpoint connection item."
     },
-    "PrivateLinkConnectionItemProperties": {
-      "type": "object",
-      "properties": {
-        "provisioningState": {
-          "$ref": "#/definitions/PrivateEndpointConnectionProvisioningState"
-        },
-        "privateEndpoint": {
-          "type": "object",
-          "properties": {
-            "id": {
-              "type": "string",
-              "description": "Identifier for the endpoint"
-            }
-          }
-        },
-        "privateLinkServiceConnectionState": {
-          "$ref": "#/definitions/PrivateLinkServiceConnectionState"
-        }
-      }
-    },
-    "PrivateLinkServiceConnectionState": {
-      "type": "object",
-      "properties": {
-        "status": {
-          "$ref": "#/definitions/PrivateEndpointServiceConnectionStatus"
-        },
-        "description": {
-          "type": "string",
-          "description": "The reason for approval/rejection of the connection."
-        },
-        "actionsRequired": {
-          "type": "string",
-          "description": "A message indicating if changes on the service provider require any updates on the consumer."
-        }
-      },
-      "description": "A collection of information about the state of the connection between service consumer and provider."
-    },
     "PrivateEndpointConnectionsListResult": {
       "properties": {
         "value": {
           "type": "array",
           "description": "Array of private endpoint connections",
           "items": {
-            "$ref": "#/definitions/PrivateEndpointConnection"
+            "$ref": "../../../../../common-types/resource-management/v1/privatelinks.json#/definitions/PrivateEndpointConnection"
           }
         }
       },
@@ -747,21 +696,6 @@
       ],
       "x-ms-enum": {
         "name": "PrivateEndpointServiceConnectionStatus",
-        "modelAsString": true
-      }
-    },
-    "PrivateEndpointConnectionProvisioningState": {
-      "type": "string",
-      "readOnly": true,
-      "description": "The current provisioning state.",
-      "enum": [
-        "Succeeded",
-        "Creating",
-        "Deleting",
-        "Failed"
-      ],
-      "x-ms-enum": {
-        "name": "PrivateEndpointConnectionProvisioningState",
         "modelAsString": true
       }
     },
