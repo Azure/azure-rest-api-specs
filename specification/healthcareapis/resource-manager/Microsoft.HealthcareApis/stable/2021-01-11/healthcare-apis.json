@@ -773,7 +773,7 @@
         },
         "acrConfiguration": {
           "$ref": "#/definitions/ServiceAcrConfigurationInfo",
-          "description": "The settings of the container registry used for convert data operation of the service instance."
+          "description": "The azure container registry settings used for convert data operation of the service instance."
         },
         "privateEndpointConnections": {
           "description": "The list of private endpoint connections that are set up for this resource.",
@@ -909,12 +909,12 @@
       }
     },
     "ServiceAcrConfigurationInfo": {
-      "description": "Container registry configuration information",
+      "description": "Azure container registry configuration information",
       "type": "object",
       "properties": {
         "loginServers": {
           "type": "array",
-          "description": "The name list of the default login servers.",
+          "description": "The list of the ACR login servers.",
           "readOnly": false
         }
       }
