@@ -1444,7 +1444,7 @@
           "description": "The location the resource resides in."
         },
         "properties": {
-          "$ref": "#/definitions/ServerGroupPropertiesForUpdate",
+          "$ref": "#/definitions/ServerGroupProperties",
           "x-ms-client-flatten": true,
           "description": "Properties of the server group."
         },
@@ -1454,65 +1454,6 @@
             "type": "string"
           },
           "description": "Application-specific metadata in the form of key-value pairs."
-        }
-      }
-    },
-    "ServerGroupPropertiesForUpdate": {
-      "description": "The properties used to update a server group.",
-      "properties": {
-        "administratorLogin": {
-          "type": "string",
-          "description": "The administrator's login name of servers in server group. Can only be specified when the server is being created (and is required for creation)."
-        },
-        "administratorLoginPassword": {
-          "type": "string",
-          "format": "password",
-          "x-ms-secret": true,
-          "x-ms-mutability": [
-            "create",
-            "update"
-          ],
-          "description": "The password of the administrator login."
-        },
-        "backupRetentionDays": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Backup retention days for the server group."
-        },
-        "version": {
-          "$ref": "#/definitions/ServerVersion",
-          "description": "The version of a server."
-        },
-        "citusVersion": {
-          "$ref": "#/definitions/CitusVersion",
-          "description": "The citus version of a server."
-        },
-        "serverRoleGroups": {
-          "$ref": "#/definitions/ServerRoleGroupList",
-          "description": "The list of server role groups."
-        },
-        "vnetInjArgs": {
-          "$ref": "#/definitions/VnetInjArgs",
-          "description": "The vnet injection arguments for server group."
-        }
-      }
-    },
-    "ServerGroup": {
-      "description": "Represents a server group for create.",
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/TrackedResource"
-        }
-      ],
-      "properties": {
-        "systemData": {
-          "description": "The system metadata relating to this resource",
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
-        },
-        "properties": {
-          "$ref": "#/definitions/ServerGroupProperties",
-          "x-ms-client-flatten": false,
-          "description": "Properties of the server group create."
         }
       }
     },
@@ -1534,15 +1475,60 @@
       },
       "description": "A list of server groups."
     },
-    "ServerGroupProperties": {
-      "discriminator": "createMode",
-      "required": [
-        "createMode"
+    "ServerGroup": {
+      "description": "Represents a server group for create.",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/TrackedResource"
+        }
       ],
       "properties": {
+        "systemData": {
+          "description": "The system metadata relating to this resource",
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
+        },
+        "properties": {
+          "$ref": "#/definitions/ServerGroupProperties",
+          "x-ms-client-flatten": true,
+          "description": "Properties of the server group create."
+        }
+      }
+    },
+    "ServerGroupProperties": {
+      "description": "The properties used to create a new server group.",
+      "properties": {
+        "createMode": {
+          "type": "string",
+          "description": "The mode to create a new server group.",
+          "enum": [
+            "Default",
+            "PointInTimeRestore"
+          ],
+          "x-ms-enum": {
+            "name": "CreateMode",
+            "modelAsString": true
+          },
+          "x-ms-mutability": [
+            "create"
+          ]
+        },
         "administratorLogin": {
           "type": "string",
-          "description": "The administrator's login name of servers in server group. Can only be specified when the server is being created (and is required for creation)."
+          "description": "The administrator's login name of servers in server group. Can only be specified when the server is being created (and is required for creation).",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "administratorLoginPassword": {
+          "type": "string",
+          "x-ms-secret": true,
+          "format": "password",
+          "x-ms-mutability": [
+            "create",
+            "update"
+          ],
+          "description": "The password of the administrator login."
         },
         "backupRetentionDays": {
           "type": "integer",
@@ -1559,11 +1545,19 @@
         },
         "isMx": {
           "type": "boolean",
-          "description": "If zfs is enabled or not for the server group."
+          "description": "If zfs is enabled or not for the server group.",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         },
         "isZfs": {
           "type": "boolean",
-          "description": "If zfs is enabled or not for the server group."
+          "description": "If zfs is enabled or not for the server group.",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         },
         "state": {
           "$ref": "#/definitions/ServerState",
@@ -1585,137 +1579,54 @@
           "x-ms-enum": {
             "name": "ResourceProviderType",
             "modelAsString": true
-          }
-        },
-        "vnetInjArgs": {
-          "$ref": "#/definitions/VnetInjArgs",
-          "description": "The vnet injection arguments for server group."
+          },
+          "readOnly": true
         },
         "serverRoleGroups": {
           "$ref": "#/definitions/ServerRoleGroupList",
           "description": "The list of server role groups."
         },
-        "createMode": {
-          "type": "string",
-          "description": "The mode to create a new server group.",
-          "enum": [
-            "Default",
-            "PointInTimeRestore"
-          ],
-          "x-ms-enum": {
-            "name": "CreateMode",
-            "modelAsString": true
-          }
-        }
-      },
-      "description": "The properties used to create a new server group."
-    },
-    "ServerGroupPropertiesForDefault": {
-      "x-ms-discriminator-value": "Default",
-      "description": "The properties used to create a new server group.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/ServerGroupProperties"
-        }
-      ],
-      "properties": {
-        "administratorLogin": {
-          "type": "string",
-          "description": "The administrator's login name of servers in server group. Can only be specified when the server is being created (and is required for creation)."
-        },
-        "administratorLoginPassword": {
-          "type": "string",
-          "x-ms-secret": true,
-          "format": "password",
-          "x-ms-mutability": [
-            "create",
-            "update"
-          ],
-          "description": "The password of the administrator login."
-        },
-        "backupRetentionDays": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Backup retention days for the server group."
-        },
-        "isMx": {
-          "type": "boolean",
-          "description": "If zfs is enabled or not for the server group."
-        },
-        "isZfs": {
-          "type": "boolean",
-          "description": "If zfs is enabled or not for the server group."
-        },
-        "version": {
-          "$ref": "#/definitions/ServerVersion",
-          "description": "The version of a server."
-        },
-        "citusVersion": {
-          "$ref": "#/definitions/CitusVersion",
-          "description": "The citus version of a server."
-        },
         "vnetInjArgs": {
           "$ref": "#/definitions/VnetInjArgs",
           "description": "The vnet injection arguments for server group."
         },
-        "serverRoleGroups": {
-          "$ref": "#/definitions/ServerRoleGroupList",
-          "description": "The list of server role groups."
-        }
-      },
-      "required": [
-        "administratorLogin",
-        "administratorLoginPassword",
-        "backupRetentionDays",
-        "version",
-        "serverRoleGroups"
-      ]
-    },
-    "ServerGroupPropertiesForRestore": {
-      "x-ms-discriminator-value": "PointInTimeRestore",
-      "description": "The properties used to create a new server group by restoring from a backup.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/ServerGroupProperties"
-        }
-      ],
-      "properties": {
         "sourceSubscriptionId": {
           "type": "string",
-          "description": "The source subscription id to restore from."
+          "description": "The source subscription id to restore from. It's required when 'createMode' is 'PointInTimeRestore'",
+          "x-ms-mutability": [
+            "create"
+          ]
         },
         "sourceResourceGroupName": {
           "type": "string",
-          "description": "The source resource group name to restore from."
+          "description": "The source resource group name to restore from. It's required when 'createMode' is 'PointInTimeRestore'",
+          "x-ms-mutability": [
+            "create"
+          ]
         },
         "sourceServerGroupName": {
           "type": "string",
-          "description": "The source server group name to restore from."
+          "description": "The source server group name to restore from. It's required when 'createMode' is 'PointInTimeRestore'",
+          "x-ms-mutability": [
+            "create"
+          ]
         },
         "sourceLocation": {
           "type": "string",
-          "description": "The source server group location to restore from."
+          "description": "The source server group location to restore from. It's required when 'createMode' is 'PointInTimeRestore'",
+          "x-ms-mutability": [
+            "create"
+          ]
         },
         "pointInTimeUTC": {
           "type": "string",
           "format": "date-time",
-          "description": "Restore point creation time (ISO8601 format), specifying the time to restore from."
-        },
-        "isMx": {
-          "type": "boolean",
-          "description": "If zfs is enabled or not for the server group."
-        },
-        "isZfs": {
-          "type": "boolean",
-          "description": "If zfs is enabled or not for the server group."
+          "description": "Restore point creation time (ISO8601 format), specifying the time to restore from. It's required when 'createMode' is 'PointInTimeRestore'",
+          "x-ms-mutability": [
+            "create"
+          ]
         }
-      },
-      "required": [
-        "sourceSubscriptionId",
-        "sourceResourceGroupName",
-        "sourceServerGroupName",
-        "pointInTimeUTC"
-      ]
+      }
     },
     "ServerGroupConfiguration": {
       "description": "Represents the configuration list of server role groups in a server group.",
