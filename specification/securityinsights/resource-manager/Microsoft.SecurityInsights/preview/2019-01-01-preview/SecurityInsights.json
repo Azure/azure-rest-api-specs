@@ -8860,7 +8860,7 @@
           "$ref": "#/definitions/DataConnector"
         }
       ],
-      "description": "Represents threat intelligence taxii data connector.",
+      "description": "Represents Microsoft Threat Intelligence data connector.",
       "properties": {
         "properties": {
           "$ref": "#/definitions/MsTiDataConnectorProperties",
@@ -8874,32 +8874,32 @@
     "MsTiDataConnectorDataTypes": {
       "description": "The available data types for Microsoft Threat Intelligence data connector.",
       "properties": {
-        "bingPhishing": {
+        "bingSafetyPhishingURL": {
           "allOf": [
             {
               "$ref": "#/definitions/MsTiDataConnectorDataType"
             }
           ],
-          "description": "Bing Safety Phishing URL data type connection.",
+          "description": "Bing Safety Phishing URL feed.",
           "type": "object"
         },
-        "msticEndpointThreats": {
+        "microsoftEmergingThreatFeed": {
           "allOf": [
             {
               "$ref": "#/definitions/MsTiDataConnectorDataType"
             }
           ],
-          "description": "Microsoft Emerging Threat Feed data type connection.",
+          "description": "Microsoft Emerging Threat feed",
           "type": "object"
         }
       },
       "type": "object"
     },
     "MsTiDataConnectorDataType": {
-      "description": "Common field for data type in Microsoft ThreatIntelligence data connector.",
+      "description": "Parameters for Microsoft ThreatIntelligence data connector.",
       "properties": {
         "state": {
-          "description": "Describe whether this data type connection is enabled or not.",
+          "description": "Describe whether this feed is enabled or not.",
           "enum": [
             "Enabled",
             "Disabled"
