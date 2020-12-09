@@ -11,7 +11,7 @@
         "tier": "Basic"
       },
       "identity": {
-        "type": "SystemAssigned"
+        "type": "SystemAssigned, UserAssigned"
       },
       "properties": {
         "friendlyName": "HelloName",
@@ -27,7 +27,8 @@
           },
           "keyVaultProperties": {
             "keyVaultArmId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/workspace-1234/providers/Microsoft.KeyVault/vaults/testkv",
-            "keyIdentifier": "https://testkv.vault.azure.net/keys/testkey/aabbccddee112233445566778899aabb"
+            "keyIdentifier": "https://testkv.vault.azure.net/keys/testkey/aabbccddee112233445566778899aabb",
+            "identityClientId": ""
           }
         },
         "hbiWorkspace": false,
@@ -55,7 +56,7 @@
         "identity": {
           "principalId": "00000000-1111-2222-3333-444444444444",
           "tenantId": "00000000-1111-2222-3333-444444444444",
-          "type": "SystemAssigned"
+          "type": "SystemAssigned, UserAssigned"
         },
         "sku": {
           "name": "Basic",
@@ -77,7 +78,8 @@
             },
             "keyVaultProperties": {
               "keyVaultArmId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/workspace-1234/providers/Microsoft.KeyVault/vaults/testkv",
-              "keyIdentifier": "https://testkv.vault.azure.net/keys/testkey/aabbccddee112233445566778899aabb"
+              "keyIdentifier": "https://testkv.vault.azure.net/keys/testkey/aabbccddee112233445566778899aabb",
+              "identityClientId": ""
             }
           },
           "hbiWorkspace": false,
@@ -122,7 +124,8 @@
             },
             "keyVaultProperties": {
               "keyVaultArmId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/workspace-1234/providers/Microsoft.KeyVault/vaults/testkv",
-              "keyIdentifier": "https://testkv.vault.azure.net/keys/testkey/aabbccddee112233445566778899aabb"
+              "keyIdentifier": "https://testkv.vault.azure.net/keys/testkey/aabbccddee112233445566778899aabb",
+              "identityClientId": ""
             }
           },
           "hbiWorkspace": false,
