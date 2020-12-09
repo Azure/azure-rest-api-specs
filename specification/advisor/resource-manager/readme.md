@@ -33,7 +33,7 @@ tag: package-2020-01
 
 These settings apply only when `--tag=package-2020-07-preview` is specified on the command line.
 
-```yaml $(tag) == 'package-2020-07-preview'
+``` yaml $(tag) == 'package-2020-07-preview'
 input-file:
   - Microsoft.Advisor/preview/2020-07-01-preview/advisor.json
 ```
@@ -42,10 +42,11 @@ input-file:
 
 These settings apply only when `--tag=package-2020-01` is specified on the command line.
 
-```yaml $(tag) == 'package-2020-01'
+``` yaml $(tag) == 'package-2020-01'
 input-file:
   - Microsoft.Advisor/stable/2020-01-01/advisor.json
 ```
+
 ### Tag: package-2017-04
 
 These settings apply only when `--tag=package-2017-04` is specified on the command line.
@@ -152,3 +153,12 @@ See configuration in [readme.java.md](./readme.java.md)
 
 See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
 
+## Suppression
+
+``` yaml
+directive:
+  - suppress: RESPONSE_BODY_NOT_IN_EXAMPLE
+    where: ''
+    from: GetSuppressionDetail.json
+    reason: Should be false positive case I'm using ArmErrorResponse which is using ARMErrorResponseBody that in JsonProperty shows as "error" not "body"
+```
