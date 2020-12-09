@@ -562,7 +562,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.MachineLearningServices/locations/{location}/Quotas": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.MachineLearningServices/locations/{location}/quotas": {
       "get": {
         "tags": [
           "Quota"
@@ -1872,6 +1872,47 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/listStorageAccountKeys": {
+      "post": {
+        "tags": [
+          "ProxyOperations"
+        ],
+        "operationId": "StorageAccount_ListKeys",
+        "x-ms-examples": {
+          "List Workspace Keys": {
+            "$ref": "./examples/listStorageAccountKeys.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/APIVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/ListStorageAccountKeysResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/MachineLearningServiceError"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/listNotebookKeys": {
       "post": {
         "tags": [
@@ -3166,6 +3207,9 @@
         "containerRegistryCredentials": {
           "readOnly": true,
           "$ref": "#/definitions/RegistryListCredentialsResult"
+        },
+        "notebookAccessKeys": {
+          "$ref": "#/definitions/NotebookListCredentialsResult"
         }
       }
     },
@@ -6406,17 +6450,6 @@
         "tenantId"
       ]
     },
-    "NotebookListCredentialsResult": {
-      "type": "object",
-      "properties": {
-        "primaryAccessKey": {
-          "type": "string"
-        },
-        "secondaryAccessKey": {
-          "type": "string"
-        }
-      }
-    },
     "NotebookResourceInfo": {
       "type": "object",
       "properties": {
@@ -6453,6 +6486,15 @@
           "type": "string"
         },
         "secondaryAccessKey": {
+          "readOnly": true,
+          "type": "string"
+        }
+      }
+    },
+    "ListStorageAccountKeysResult": {
+      "type": "object",
+      "properties": {
+        "userStorageKey": {
           "readOnly": true,
           "type": "string"
         }
