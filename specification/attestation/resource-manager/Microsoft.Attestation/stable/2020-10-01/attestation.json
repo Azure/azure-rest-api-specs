@@ -620,6 +620,14 @@
         "policySigningCertificates": {
           "description": "JSON Web Key Set defining a set of X.509 Certificates that will represent the parent certificate for the signing certificate used for policy operations",
           "$ref": "../../../../../common-types/rfcs/rfc7517.json#/definitions/JSONWebKeySet"
+        },
+        "privateEndpointConnections": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PrivateEndpointConnectionItem"
+          },
+          "description": "List of private endpoint connections associated with the attestation provider."
         }
       }
     },
