@@ -161,4 +161,8 @@ directive:
     where: ''
     from: GetSuppressionDetail.json
     reason: Should be false positive case I'm using ArmErrorResponse which is using ARMErrorResponseBody that in JsonProperty shows as "error" not "body"
+  - suppress: RESPONSE_BODY_NOT_IN_EXAMPLE
+    where: ''
+    from: CreateSuppression.json
+    reason: Should be false positive case I'm using ArmErrorResponse which is using ARMErrorResponseBody that in JsonProperty shows as "error" not "body"
 ```
