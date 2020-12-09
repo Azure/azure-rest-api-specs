@@ -1179,21 +1179,21 @@
     }
   },
   "definitions": {
-    "ServerVersion": {
+    "PostgreSQLVersion": {
       "type": "string",
-      "description": "The version of a server.",
+      "description": "The PostgreSQL version.",
       "enum": [
         "11",
         "12"
       ],
       "x-ms-enum": {
-        "name": "ServerVersion",
+        "name": "PostgreSQLVersion",
         "modelAsString": true
       }
     },
     "CitusVersion": {
       "type": "string",
-      "description": "The citus version of a server.",
+      "description": "The Citus version.",
       "enum": [
         "8.3",
         "9.0",
@@ -1204,7 +1204,7 @@
         "9.5"
       ],
       "x-ms-enum": {
-        "name": "ServerCitusVersion",
+        "name": "CitusVersion",
         "modelAsString": true
       }
     },
@@ -1399,13 +1399,13 @@
           "type": "string",
           "description": "The administrator's login name of a servers in server group."
         },
-        "version": {
-          "$ref": "#/definitions/ServerVersion",
-          "description": "The version of a server."
+        "postgresqlVersion": {
+          "$ref": "#/definitions/PostgreSQLVersion",
+          "description": "The PostgreSQL version of server."
         },
         "citusVersion": {
           "$ref": "#/definitions/CitusVersion",
-          "description": "The citus version of servers."
+          "description": "The Citus version of server."
         }
       }
     },
@@ -1479,13 +1479,13 @@
           "format": "int32",
           "description": "The backup retention days for server group."
         },
-        "version": {
-          "$ref": "#/definitions/ServerVersion",
-          "description": "The version of servers."
+        "postgresqlVersion": {
+          "$ref": "#/definitions/PostgreSQLVersion",
+          "description": "The PostgreSQL version of server group."
         },
         "citusVersion": {
           "$ref": "#/definitions/CitusVersion",
-          "description": "The citus version of servers."
+          "description": "The Citus version of server group."
         },
         "serverRoleGroups": {
           "$ref": "#/definitions/ServerRoleGroupList",
@@ -1575,13 +1575,13 @@
           "format": "int32",
           "description": "The backup retention days for server group."
         },
-        "version": {
-          "$ref": "#/definitions/ServerVersion",
-          "description": "The version of servers."
+        "postgresqlVersion": {
+          "$ref": "#/definitions/PostgreSQLVersion",
+          "description": "The PostgreSQL version of server group."
         },
         "citusVersion": {
           "$ref": "#/definitions/CitusVersion",
-          "description": "The citus version of servers."
+          "description": "The Citus version of server group."
         },
         "enableMx": {
           "type": "boolean",
