@@ -68,7 +68,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorContract"
+              "$ref": "#/definitions/ErrorResponse"
             }
           },
           "200": {
@@ -120,7 +120,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorContract"
+              "$ref": "#/definitions/ErrorResponse"
             }
           },
           "200": {
@@ -169,7 +169,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorContract"
+              "$ref": "#/definitions/ErrorResponse"
             }
           },
           "200": {
@@ -209,7 +209,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorContract"
+              "$ref": "#/definitions/ErrorResponse"
             }
           },
           "200": {
@@ -248,7 +248,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorContract"
+              "$ref": "#/definitions/ErrorResponse"
             }
           },
           "200": {
@@ -294,7 +294,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorContract"
+              "$ref": "#/definitions/ErrorResponse"
             }
           },
           "200": {
@@ -536,7 +536,6 @@
         "LessThan",
         "Equal"
       ],
-      "default" : "GreaterThanOrEqual",
       "x-ms-enum": {
         "name": "ConditionalOperator",
         "modelAsString": true
@@ -549,7 +548,6 @@
         "Consecutive",
         "Total"
       ],
-      "default" : "Consecutive",
       "x-ms-enum": {
         "name": "metricTriggerType",
         "modelAsString": true
@@ -782,16 +780,6 @@
       "required": [
         "criteria"
       ]
-    },
-    "ErrorContract": {
-      "description": "Describes the format of Error response.",
-      "type": "object",
-      "properties": {
-        "error": {
-          "description": "The error details.",
-          "$ref": "#/definitions/ErrorResponse"
-        }
-      }
     },
     "ErrorResponse": {
       "description": "Describes the format of Error response.",
