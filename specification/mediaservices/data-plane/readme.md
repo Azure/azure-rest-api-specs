@@ -29,6 +29,12 @@ These are the global settings for the Live video analytics API.
 ``` yaml
 openapi-type: data-plane
 tag: package-lva-2-0-0-preview
+
+directive:
+  - where:
+      -  $.definitions.MethodRequest.properties.methodName
+    suppress:
+      - RequiredReadOnlyProperties
 ```
 
 ### Tag: package-lva-1-0-4-preview
