@@ -281,6 +281,9 @@
           },
           "Add new worker nodes": {
             "$ref": "./examples/ServerGroupAddNode.json"
+          },
+          "Update customer maintenance window": {
+            "$ref": "./examples/ServerGroupUpdateMaintenanceWindow.json"
           }
         },
         "parameters": [
@@ -1490,6 +1493,10 @@
         "serverRoleGroups": {
           "$ref": "#/definitions/ServerRoleGroupList",
           "description": "The list of server role groups."
+        },
+        "maintenanceWindow": {
+          "$ref": "#/definitions/MaintenanceWindow",
+          "description": "Maintenance window of a server group."
         }
       }
     },
@@ -1622,6 +1629,10 @@
           "$ref": "#/definitions/ServerRoleGroupList",
           "description": "The list of server role groups."
         },
+        "maintenanceWindow": {
+          "$ref": "#/definitions/MaintenanceWindow",
+          "description": "Maintenance window of a server group."
+        },
         "vnetInjArgs": {
           "$ref": "#/definitions/VnetInjArgs",
           "description": "The vnet injection arguments for server group."
@@ -1661,6 +1672,31 @@
           "x-ms-mutability": [
             "create"
           ]
+        }
+      }
+    },
+    "MaintenanceWindow": {
+      "type": "object",
+      "description": "Maintenance window of a server group.",
+      "properties": {
+        "customWindow": {
+          "type": "string",
+          "description": "indicates whether custom window is enabled or disabled"
+        },
+        "startHour": {
+          "type": "integer",
+          "format": "int32",
+          "description": "start hour for maintenance window"
+        },
+        "startMinute": {
+          "type": "integer",
+          "format": "int32",
+          "description": "start minute for maintenance window"
+        },
+        "dayOfWeek": {
+          "type": "integer",
+          "format": "int32",
+          "description": "day of week for maintenance window"
         }
       }
     },
