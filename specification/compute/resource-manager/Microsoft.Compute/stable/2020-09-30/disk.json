@@ -108,6 +108,9 @@
           },
           "Create an ultra managed disk with logicalSectorSize 512E": {
             "$ref": "./examples/CreateAManagedDiskWithLogicalSectorSize.json"
+          },
+          "Create an empty managed disk in extended location.": {
+            "$ref": "./examples/CreateAnEmptyManagedDiskInExtendedLocation.json"
           }
         },
         "x-ms-long-running-operation": true
@@ -1344,6 +1347,157 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/diskAccesses/{diskAccessName}/privateEndpointConnections/{privateEndpointConnectionName}": {
+      "put": {
+        "tags": [
+          "DiskAccesses"
+        ],
+        "operationId": "DiskAccesses_UpdateAPrivateEndpointConnection",
+        "description": "Approve or reject a private endpoint connection under disk access resource, this can't be used to create a new private endpoint connection.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DiskAccessNameParameter"
+          },
+          {
+            "$ref": "#/parameters/PrivateEndpointConnectionNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "privateEndpointConnection",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnection"
+            },
+            "description": "private endpoint connection object supplied in the body of the Put private endpoint connection operation."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnection"
+            }
+          },
+          "202": {
+            "description": "Accepted",
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnection"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Approve a Private Endpoint Connection under a disk access resource.": {
+            "$ref": "./examples/ApprovePrivateEndpointConnection.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "get": {
+        "tags": [
+          "DiskAccesses"
+        ],
+        "operationId": "DiskAccesses_GetAPrivateEndpointConnection",
+        "description": "Gets information about a private endpoint connection under a disk access resource.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DiskAccessNameParameter"
+          },
+          {
+            "$ref": "#/parameters/PrivateEndpointConnectionNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnection"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get information about a private endpoint connection under a disk access resource.": {
+            "$ref": "./examples/GetInformationAboutAPrivateEndpointConnection.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "DiskAccesses"
+        ],
+        "operationId": "DiskAccesses_DeleteAPrivateEndpointConnection",
+        "description": "Deletes a private endpoint connection under a disk access resource.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DiskAccessNameParameter"
+          },
+          {
+            "$ref": "#/parameters/PrivateEndpointConnectionNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "204": {
+            "description": "If the private endpoint connection is already deleted, this is an expected error code."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete a private endpoint connection under a disk access resource.": {
+            "$ref": "./examples/DeleteAPrivateEndpointConnection.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/restorePointCollections/{restorePointCollectionName}/restorePoints/{vmRestorePointName}/diskRestorePoints/{diskRestorePointName}": {
       "get": {
         "tags": [
@@ -1519,6 +1673,10 @@
           },
           "description": "The Logical zone list for Disk."
         },
+        "extendedLocation": {
+          "$ref": "#/definitions/ExtendedLocation",
+          "description": "The extended location where the disk will be created. Extended location cannot be changed."
+        },
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/DiskProperties"
@@ -1681,6 +1839,10 @@
             "modelAsString": true
           }
         },
+        "purchasePlan": {
+          "$ref": "#/definitions/PurchasePlan",
+          "description": "Purchase plan information for the the image from which the OS disk was created. E.g. - {name: 2019-Datacenter, publisher: MicrosoftWindowsServer, product: WindowsServer}"
+        },
         "creationData": {
           "$ref": "#/definitions/CreationData",
           "description": "Disk source information. CreationData information cannot be changed after the disk has been created."
@@ -1803,6 +1965,10 @@
             "name": "HyperVGeneration",
             "modelAsString": true
           }
+        },
+        "purchasePlan": {
+          "$ref": "#/definitions/PurchasePlan",
+          "description": "Purchase plan information for the image from which the source disk for the snapshot was originally created."
         },
         "creationData": {
           "$ref": "#/definitions/CreationData",
@@ -2342,6 +2508,32 @@
       ],
       "description": "The source image used for creating the disk."
     },
+    "PurchasePlan": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name is the Purchase Plan Id."
+        },
+        "publisher": {
+          "type": "string",
+          "description": "The VM Image Publisher Id."
+        },
+        "product": {
+          "type": "string",
+          "description": "Specifies the product of the image from the marketplace. This is the same value as Offer under the imageReference element."
+        },
+        "promotionCode": {
+          "type": "string",
+          "description": "The Offer Promotion Code."
+        }
+      },
+      "required": [
+        "name",
+        "publisher",
+        "product"
+      ],
+      "description": "Specifies information about the marketplace image used to create the virtual machine."
+    },
     "GrantAccessData": {
       "properties": {
         "access": {
@@ -2387,6 +2579,10 @@
         },
         "sku": {
           "$ref": "#/definitions/SnapshotSku"
+        },
+        "extendedLocation": {
+          "$ref": "#/definitions/ExtendedLocation",
+          "description": "The extended location where the snapshot will be created. Extended location cannot be changed."
         },
         "properties": {
           "x-ms-client-flatten": true,
@@ -2825,6 +3021,10 @@
             "modelAsString": true
           }
         },
+        "purchasePlan": {
+          "$ref": "#/definitions/PurchasePlan",
+          "description": "Purchase plan information for the the image from which the OS disk was created."
+        },
         "familyId": {
           "type": "string",
           "description": "id of the backing snapshot's MIS family",
@@ -2921,6 +3121,30 @@
         }
       },
       "description": "Inner error details."
+    },
+    "ExtendedLocationType": {
+      "type": "string",
+      "description": "The type of extendedLocation.",
+      "enum": [
+        "EdgeZone"
+      ],
+      "x-ms-enum": {
+        "name": "ExtendedLocationTypes",
+        "modelAsString": true
+      }
+    },
+    "ExtendedLocation": {
+      "description": "The complex type of the extended location.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the extended location."
+        },
+        "type": {
+          "$ref": "#/definitions/ExtendedLocationType",
+          "description": "The type of the extended location."
+        }
+      }
     }
   },
   "parameters": {
