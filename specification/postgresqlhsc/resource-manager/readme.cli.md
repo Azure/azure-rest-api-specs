@@ -16,6 +16,7 @@ cli:
     - name: Scale compute
     - name: Scale storage
     - name: Add new worker nodes
+    - name: Update customer maintenance window
     - name: List servers of the server group
     - name: Get the server of server group
     - name: List configurations of the server that in the server group

@@ -14,6 +14,6 @@ These settings apply only when `--tag=package-2020-10-05-privatepreview --ruby` 
 Please also specify `--ruby-sdks-folder=<path to the root directory of your azure-sdk-for-ruby clone>`.
 
 ```yaml $(tag) == 'package-2020-10-05-privatepreview' && $(ruby)
-namespace: Microsoft.DBforPostgreSQL
-output-folder: $(ruby-sdks-folder)/postgresqlhsc
+namespace: "Azure::PostgreSQLHSC::Mgmt::V2020_10_05_privatepreview"
+output-folder: $(ruby-sdks-folder)/management/azure_mgmt_postgresqlhsc/lib
 ```

@@ -9,7 +9,6 @@ csharp:
   license-header: MICROSOFT_MIT_NO_VERSION
   payload-flattening-threshold: 1
   clear-output-folder: true
-  client-side-validation: false
-  namespace: Microsoft.DBforPostgreSQL
-  output-folder: $(csharp-sdks-folder)/postgresqlhsc/management/Microsoft.DBforPostgreSQL/GeneratedProtocol
+  namespace: Microsoft.DBforPostgreSQLHSC
+  output-folder: $(csharp-sdks-folder)/postgresqlhsc/management/Microsoft.DBforPostgreSQLHSC/GeneratedProtocol
 ```
