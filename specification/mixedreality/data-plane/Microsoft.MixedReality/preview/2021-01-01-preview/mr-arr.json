@@ -55,10 +55,6 @@
               "MS-CV": {
                 "description": "Microsoft Correlation Vector. Include this value when reporting errors to the Azure Remote Rendering team.",
                 "type": "string"
-              },
-              "Location": {
-                "description": "The URI to poll for conversion progress",
-                "type": "string"
               }
             },
             "examples": {
@@ -474,10 +470,6 @@
               "MS-CV": {
                 "description": "Microsoft Correlation Vector. Include this value when reporting errors to the Azure Remote Rendering team.",
                 "type": "string"
-              },
-              "Location": {
-                "description": "The URI to poll for session status progress",
-                "type": "string"
               }
             }
           },
@@ -724,7 +716,7 @@
         "summary": "Updates a particular rendering session"
       }
     },
-    "/accounts/{account_id}/sessions/{session_id}:stop": {
+    "/accounts/{account_id}/sessions/{session_id}/:stop": {
       "post": {
         "operationId": "StopSession",
         "parameters": [
@@ -1178,8 +1170,8 @@
     "create_session_body": {
       "properties": {
         "maxLeaseTimeMinutes": {
-          "example": "60",
-          "type": "string"
+          "example": 60,
+          "type": "integer"
         },
         "size": {
           "$ref": "#/definitions/session_size"
@@ -1195,8 +1187,8 @@
       "type": "object",
       "properties": {
         "maxLeaseTimeMinutes": {
-          "example": "72",
-          "type": "string"
+          "example": 72,
+          "type": "integer"
         }
       },
       "required": [
