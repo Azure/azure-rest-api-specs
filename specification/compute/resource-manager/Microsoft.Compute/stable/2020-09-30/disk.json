@@ -2830,16 +2830,6 @@
           "x-ms-client-flatten": true,
           "description": "Resource properties."
         },
-        "id": {
-          "readOnly": true,
-          "type": "string",
-          "description": "private endpoint connection Id"
-        },
-        "name": {
-          "readOnly": true,
-          "type": "string",
-          "description": "private endpoint connection name"
-        },
         "type": {
           "readOnly": true,
           "type": "string",
@@ -2847,7 +2837,11 @@
         }
       },
       "description": "The Private Endpoint Connection resource.",
-      "x-ms-azure-resource": true
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyOnlyResource"
+        }
+      ]
     },
     "DiskAccessProperties": {
       "properties": {
