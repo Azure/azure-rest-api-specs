@@ -82,6 +82,7 @@ These settings apply only when `--tag=package-2020-11-01-preview3` is specified 
 ```yaml $(tag) == 'package-2020-07-20-preview2'
 input-file:
   - Microsoft.CommunicationServicesAdministration/preview/2020-11-01-preview3/phonenumbers.json
+  - Microsoft.CommunicationServicesAdministration/preview/2020-11-01-preview3/phonenumbers-portal.json
 ```
 
 ---
