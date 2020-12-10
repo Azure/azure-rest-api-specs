@@ -255,7 +255,7 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.Network/virtualApplianceSites": {
       "get": {
         "tags": [
-          "NetworkVirtualAppliances"
+          "VirtualApplianceSites"
         ],
         "operationId": "NetworkVirtualApplianceSites_List",
         "description": "Gets all Virtual Appliance sites in a subscription.",
@@ -324,12 +324,12 @@
     },
     "NetworkVirtualApplianceSiteProperties": {
       "properties": {
-        "networkVirtualApplianceList": {
+        "networkVirtualApplianceIds": {
           "type": "array",
           "readOnly": false,
           "description": "List of Network Virtual Appliances under a specific virtual appliance site.",
           "items": {
-            "$ref": "./network.json#/definitions/SubResource"
+            "type": "string"
           }
         },
         "addressPrefix": {
