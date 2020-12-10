@@ -50,7 +50,7 @@ input-file:
 
 These settings apply only when `--tag=package-2017-04` is specified on the command line.
 
-```yaml $(tag) == 'package-2017-04'
+``` yaml $(tag) == 'package-2017-04'
 input-file:
 - Microsoft.Advisor/stable/2017-04-19/advisor.json
 ```
