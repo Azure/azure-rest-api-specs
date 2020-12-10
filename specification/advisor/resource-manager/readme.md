@@ -33,7 +33,7 @@ tag: package-2020-01
 
 These settings apply only when `--tag=package-2020-07-preview` is specified on the command line.
 
-``` yaml $(tag) == 'package-2020-07-preview'
+```yaml $(tag) == 'package-2020-07-preview'
 input-file:
   - Microsoft.Advisor/preview/2020-07-01-preview/advisor.json
 ```
@@ -42,7 +42,7 @@ input-file:
 
 These settings apply only when `--tag=package-2020-01` is specified on the command line.
 
-``` yaml $(tag) == 'package-2020-01'
+```yaml $(tag) == 'package-2020-01'
 input-file:
   - Microsoft.Advisor/stable/2020-01-01/advisor.json
 ```
@@ -59,7 +59,7 @@ input-file:
 
 These settings apply only when `--tag=package-2017-03` is specified on the command line.
 
-```yaml $(tag) == 'package-2017-03'
+``` yaml $(tag) == 'package-2017-03'
 input-file:
 - Microsoft.Advisor/stable/2017-03-31/advisor.json
 ```
