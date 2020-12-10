@@ -42,7 +42,7 @@ input-file:
 - Microsoft.ServiceBus/preview/2018-01-01-preview/AuthorizationRules.json
 - Microsoft.ServiceBus/preview/2018-01-01-preview/CheckNameAvailability.json
 - Microsoft.ServiceBus/preview/2018-01-01-preview/eventhubs.json
-- Microsoft.ServiceBus/preview/2018-01-01-preview/NetworkRuleSet-preview.json
+- Microsoft.ServiceBus/preview/2018-01-01-preview/networksets.json
 - Microsoft.ServiceBus/preview/2018-01-01-preview/migrate.json
 - Microsoft.ServiceBus/preview/2018-01-01-preview/migrationconfigs.json
 - Microsoft.ServiceBus/preview/2018-01-01-preview/PremiumMessagingRegions.json
@@ -52,7 +52,6 @@ input-file:
 - Microsoft.ServiceBus/preview/2018-01-01-preview/topics.json
 - Microsoft.ServiceBus/preview/2018-01-01-preview/Rules.json
 - Microsoft.ServiceBus/preview/2018-01-01-preview/operations.json
-- Microsoft.ServiceBus/preview/2018-01-01-preview/NetworkRuleSet-preview.json
 ```
 
 ### Tag: package-2017-04
