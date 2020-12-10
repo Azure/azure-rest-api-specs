@@ -46,12 +46,11 @@ These settings apply only when `--tag=package-2020-01` is specified on the comma
 input-file:
   - Microsoft.Advisor/stable/2020-01-01/advisor.json
 ```
-
 ### Tag: package-2017-04
 
 These settings apply only when `--tag=package-2017-04` is specified on the command line.
 
-``` yaml $(tag) == 'package-2017-04'
+```yaml $(tag) == 'package-2017-04'
 input-file:
 - Microsoft.Advisor/stable/2017-04-19/advisor.json
 ```
@@ -60,7 +59,7 @@ input-file:
 
 These settings apply only when `--tag=package-2017-03` is specified on the command line.
 
-``` yaml $(tag) == 'package-2017-03'
+```yaml $(tag) == 'package-2017-03'
 input-file:
 - Microsoft.Advisor/stable/2017-03-31/advisor.json
 ```
@@ -152,17 +151,3 @@ See configuration in [readme.java.md](./readme.java.md)
 ## AzureResourceSchema
 
 See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
-
-## Suppression
-
-``` yaml
-directive:
-  - suppress: RESPONSE_BODY_NOT_IN_EXAMPLE
-    where: ''
-    from: GetSuppressionDetail.json
-    reason: Should be false positive case I'm using ArmErrorResponse which is using ARMErrorResponseBody that in JsonProperty shows as "error" not "body"
-  - suppress: RESPONSE_BODY_NOT_IN_EXAMPLE
-    where: ''
-    from: CreateSuppression.json
-    reason: Should be false positive case I'm using ArmErrorResponse which is using ARMErrorResponseBody that in JsonProperty shows as "error" not "body"
-```
