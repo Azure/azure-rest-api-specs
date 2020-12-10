@@ -4693,27 +4693,6 @@
     }
   },
   "definitions": {
-    "UserAssignedIdentity": {
-      "type": "object",
-      "properties": {
-        "principalId": {
-          "type": "string"
-        },
-        "clientId": {
-          "type": "string"
-        },
-        "clientSecretUrl": {
-          "type": "string"
-        },
-        "tenantId": {
-          "type": "string"
-        },
-        "resourceId": {
-          "type": "string"
-        }
-      },
-      "additionalProperties": false
-    },
     "ManagedIdentity": {
       "type": "object",
       "properties": {
@@ -4738,7 +4717,7 @@
         "userAssignedIdentities": {
           "type": "object",
           "additionalProperties": {
-            "$ref": "#/definitions/UserAssignedIdentity"
+            "$ref": "machineLearningServices.json#/definitions/UserAssignedIdentity"
           }
         }
       },
@@ -7797,36 +7776,6 @@
       },
       "additionalProperties": false
     },
-    "ScaleSettings": {
-      "type": "object",
-      "properties": {
-        "minimum": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "maximum": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "instanceCount": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "scaleType": {
-          "enum": [
-            "Automatic",
-            "Manual",
-            "None"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "ScaleTypeMode",
-            "modelAsString": false
-          }
-        }
-      },
-      "additionalProperties": false
-    },
     "EnvironmentOverrides": {
       "type": "object",
       "properties": {
@@ -7872,7 +7821,7 @@
       "type": "object",
       "properties": {
         "scaleSettings": {
-          "$ref": "#/definitions/ScaleSettings"
+          "$ref": "machineLearningServices.json#/definitions/ScaleSettings"
         },
         "environmentOverrides": {
           "$ref": "#/definitions/EnvironmentOverrides"
@@ -8229,33 +8178,6 @@
         }
       },
       "additionalProperties": false
-    }
-  },
-  "parameters": {
-    "subscriptionIdParameter": {
-      "in": "path",
-      "name": "subscriptionId",
-      "description": "The Azure Subscription ID.",
-      "required": true,
-      "type": "string",
-      "format": "uuid",
-      "x-ms-parameter-location": "method"
-    },
-    "resourceGroupNameParameter": {
-      "in": "path",
-      "name": "resourceGroupName",
-      "description": "The Name of the resource group in which the workspace is located.",
-      "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "method"
-    },
-    "workspaceNameParameter": {
-      "in": "path",
-      "name": "workspaceName",
-      "description": "The name of the workspace.",
-      "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "method"
     }
   },
   "securityDefinitions": {
