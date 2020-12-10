@@ -15,7 +15,6 @@ go:
 batch:
   - tag: package-2015-03
   - tag: package-2015-11-preview
-  - tag: package-2019-08-preview
   - tag: package-2020-03-preview
   - tag: package-2020-10
   - tag: package-2020-08
@@ -30,6 +29,7 @@ Please also specify `--go-sdk-folder=<path to the root directory of your azure-s
 output-folder: $(go-sdk-folder)/services/$(namespace)/mgmt/2015-03-20/$(namespace)
 ```
 
+<<<<<<< HEAD
 ### Tag: package-2019-08-preview and go
 
 These settings apply only when `--tag=package-2019-08-preview --go` is specified on the command line.
@@ -48,6 +48,8 @@ Please also specify `--go-sdk-folder=<path to the root directory of your azure-s
 output-folder: $(go-sdk-folder)/services/preview/$(namespace)/mgmt/2019-09-01-preview/$(namespace)
 ```
 
+=======
+>>>>>>> 7dddc4bf1e402b6e6737c132ecf05b74e2b53b08
 ### Tag: package-2015-11-preview and go
 
 These settings apply only when `--tag=package-2015-11-preview --go` is specified on the command line.
