@@ -34,18 +34,27 @@ These are the global settings for the ContainerServices API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2020-11
+tag: package-2020-12
 ```
 
 
+### Tag: package-2020-12
+
+These settings apply only when `--tag=package-2020-12` is specified on the command line.
+
+```yaml $(tag) == 'package-2020-12'
+input-file:
+  - Microsoft.ContainerService/stable/2020-12-01/managedClusters.json
+```
 ### Tag: package-2020-11
 
 These settings apply only when `--tag=package-2020-11` is specified on the command line.
 
-```yaml $(tag) == 'package-2020-11'
+``` yaml $(tag) == 'package-2020-11'
 input-file:
   - Microsoft.ContainerService/stable/2020-11-01/managedClusters.json
 ```
+
 ### Tag: package-2020-09
 
 These settings apply only when `--tag=package-2020-09` is specified on the command line.
