@@ -10022,6 +10022,18 @@
       },
       "description": "Describes a scale-in policy for a virtual machine scale set."
     },
+    "OrchestrationMode": {
+      "type": "string",
+      "description": "Specifies the orchestration mode for the virtual machine scale set.",
+      "enum": [
+        "Uniform",
+        "Flexible"
+      ],
+      "x-ms-enum": {
+        "name": "OrchestrationMode",
+        "modelAsAString": true
+      }
+    },
     "ImageOSDisk": {
       "properties": {
         "osType": {
@@ -11233,6 +11245,10 @@
         "scaleInPolicy": {
           "$ref": "#/definitions/ScaleInPolicy",
           "description": "Specifies the scale-in policy that decides which virtual machines are chosen for removal when a Virtual Machine Scale Set is scaled-in."
+        },
+        "orchestrationMode": {
+          "$ref": "#/definitions/OrchestrationMode",
+          "description": "Specifies the orchestration mode for the virtual machine scale set."
         }
       },
       "description": "Describes the properties of a Virtual Machine Scale Set."
