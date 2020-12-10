@@ -270,12 +270,14 @@
           {
             "in": "query",
             "name": "$skip",
+            "description": "for paging, skipped number",
             "type": "integer",
             "format": "int32"
           },
           {
             "in": "query",
             "name": "$top",
+            "description": "for paging, item number in response",
             "type": "integer",
             "format": "int32"
           },
@@ -349,12 +351,14 @@
           {
             "in": "query",
             "name": "$skip",
+            "description": "for paging, skipped number",
             "type": "integer",
             "format": "int32"
           },
           {
             "in": "query",
             "name": "$top",
+            "description": "for paging, item number in response",
             "type": "integer",
             "format": "int32"
           }
@@ -428,12 +432,14 @@
           {
             "in": "query",
             "name": "$skip",
+            "description": "for paging, skipped number",
             "type": "integer",
             "format": "int32"
           },
           {
             "in": "query",
             "name": "$top",
+            "description": "for paging, item number in response",
             "type": "integer",
             "format": "int32"
           }
@@ -945,12 +951,14 @@
           {
             "in": "query",
             "name": "$skip",
+            "description": "for paging, skipped number",
             "type": "integer",
             "format": "int32"
           },
           {
             "in": "query",
             "name": "$top",
+            "description": "for paging, item number in response",
             "type": "integer",
             "format": "int32"
           },
@@ -1029,12 +1037,14 @@
           {
             "in": "query",
             "name": "$skip",
+            "description": "for paging, skipped number",
             "type": "integer",
             "format": "int32"
           },
           {
             "in": "query",
             "name": "$top",
+            "description": "for paging, item number in response",
             "type": "integer",
             "format": "int32"
           },
@@ -1099,6 +1109,7 @@
           {
             "in": "query",
             "name": "$top",
+            "description": "for paging, item number in response",
             "type": "integer",
             "format": "int32"
           },
@@ -1174,12 +1185,14 @@
           {
             "in": "query",
             "name": "$top",
+            "description": "for paging, item number in response",
             "type": "integer",
             "format": "int32"
           },
           {
             "in": "query",
             "name": "$token",
+            "description": "the token for getting the next page",
             "type": "string"
           }
         ],
@@ -1371,12 +1384,14 @@
           {
             "in": "query",
             "name": "$skip",
+            "description": "for paging, skipped number",
             "type": "integer",
             "format": "int32"
           },
           {
             "in": "query",
             "name": "$top",
+            "description": "for paging, item number in response",
             "type": "integer",
             "format": "int32"
           }
@@ -1678,7 +1693,7 @@
           {
             "in": "path",
             "name": "feedbackId",
-            "description": "",
+            "description": "the unique feedback ID",
             "required": true,
             "type": "string",
             "format": "uuid"
@@ -1848,12 +1863,14 @@
           {
             "in": "query",
             "name": "$skip",
+            "description": "for paging, skipped number",
             "type": "integer",
             "format": "int32"
           },
           {
             "in": "query",
             "name": "$top",
+            "description": "for paging, item number in response",
             "type": "integer",
             "format": "int32"
           },
@@ -2085,12 +2102,14 @@
           {
             "in": "query",
             "name": "$skip",
+            "description": "for paging, skipped number",
             "type": "integer",
             "format": "int32"
           },
           {
             "in": "query",
             "name": "$top",
+            "description": "for paging, item number in response",
             "type": "integer",
             "format": "int32"
           }
@@ -2325,12 +2344,14 @@
           {
             "in": "query",
             "name": "$skip",
+            "description": "for paging, skipped number",
             "type": "integer",
             "format": "int32"
           },
           {
             "in": "query",
             "name": "$top",
+            "description": "for paging, item number in response",
             "type": "integer",
             "format": "int32"
           },
@@ -2563,12 +2584,14 @@
           {
             "in": "query",
             "name": "$skip",
+            "description": "for paging, skipped number",
             "type": "integer",
             "format": "int32"
           },
           {
             "in": "query",
             "name": "$top",
+            "description": "for paging, item number in response",
             "type": "integer",
             "format": "int32"
           },
@@ -2647,12 +2670,14 @@
           {
             "in": "query",
             "name": "$skip",
+            "description": "for paging, skipped number",
             "type": "integer",
             "format": "int32"
           },
           {
             "in": "query",
             "name": "$top",
+            "description": "for paging, item number in response",
             "type": "integer",
             "format": "int32"
           },
@@ -2872,12 +2897,14 @@
           {
             "in": "query",
             "name": "$skip",
+            "description": "for paging, skipped number",
             "type": "integer",
             "format": "int32"
           },
           {
             "in": "query",
             "name": "$top",
+            "description": "for paging, item number in response",
             "type": "integer",
             "format": "int32"
           },
@@ -3197,7 +3224,11 @@
             "OR",
             "XOR"
           ],
-          "type": "string"
+          "type": "string",
+          "x-ms-enum": {
+            "name": "AnomalyAlertingConfigurationLogicType",
+            "modelAsString": true
+          }
         },
         "hookIds": {
           "description": "hook unique ids",
@@ -3236,7 +3267,11 @@
             "OR",
             "XOR"
           ],
-          "type": "string"
+          "type": "string",
+          "x-ms-enum": {
+            "name": "AnomalyAlertingConfigurationLogicType",
+            "modelAsString": true
+          }
         },
         "hookIds": {
           "description": "hook unique ids",
@@ -3362,7 +3397,11 @@
             "Resolved"
           ],
           "type": "string",
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "AnomalyStatus",
+            "modelAsString": true
+          }
         }
       }
     },
@@ -3474,7 +3513,11 @@
             "Resolved"
           ],
           "type": "string",
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "IncidentStatus",
+            "modelAsString": true
+          }
         }
       }
     },
@@ -3676,7 +3719,11 @@
             "AND",
             "OR"
           ],
-          "type": "string"
+          "type": "string",
+          "x-ms-enum": {
+            "name": "AnomalyDetectionConfigurationLogicType",
+            "modelAsString": true
+          }
         },
         "smartDetectionCondition": {
           "$ref": "#/definitions/SmartDetectionCondition"
@@ -3704,7 +3751,11 @@
             "AND",
             "OR"
           ],
-          "type": "string"
+          "type": "string",
+          "x-ms-enum": {
+            "name": "AnomalyDetectionConfigurationLogicType",
+            "modelAsString": true
+          }
         },
         "smartDetectionCondition": {
           "$ref": "#/definitions/SmartDetectionCondition"
@@ -3732,7 +3783,11 @@
             "AND",
             "OR"
           ],
-          "type": "string"
+          "type": "string",
+          "x-ms-enum": {
+            "name": "AnomalyDetectionConfigurationLogicType",
+            "modelAsString": true
+          }
         },
         "smartDetectionCondition": {
           "$ref": "#/definitions/SmartDetectionCondition"
@@ -4366,7 +4421,11 @@
             "Avg",
             "Count"
           ],
-          "type": "string"
+          "type": "string",
+          "x-ms-enum": {
+            "name": "RollUpMethod",
+            "modelAsString": true
+          }
         },
         "rollUpColumns": {
           "description": "roll up columns",
@@ -4446,7 +4505,11 @@
             "Paused"
           ],
           "type": "string",
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "EntityStatus",
+            "modelAsString": true
+          }
         },
         "createdTime": {
           "format": "date-time",
@@ -5040,7 +5103,11 @@
             "PostgreSql",
             "SqlServer"
           ],
-          "type": "string"
+          "type": "string",
+          "x-ms-enum": {
+            "name": "DataSourceType",
+            "modelAsString": true
+          }
         },
         "dataFeedName": {
           "description": "data feed name",
@@ -5086,7 +5153,11 @@
             "NeedRollup",
             "AlreadyRollup"
           ],
-          "type": "string"
+          "type": "string",
+          "x-ms-enum": {
+            "name": "NeedRollupEnum",
+            "modelAsString": true
+          }
         },
         "rollUpMethod": {
           "description": "roll up method",
@@ -5098,7 +5169,11 @@
             "Avg",
             "Count"
           ],
-          "type": "string"
+          "type": "string",
+          "x-ms-enum": {
+            "name": "RollUpMethod",
+            "modelAsString": true
+          }
         },
         "rollUpColumns": {
           "description": "roll up columns",
@@ -5120,7 +5195,11 @@
             "CustomValue",
             "NoFilling"
           ],
-          "type": "string"
+          "type": "string",
+          "x-ms-enum": {
+            "name": "FillMissingPointType",
+            "modelAsString": true
+          }
         },
         "fillMissingPointValue": {
           "format": "double",
@@ -5133,7 +5212,11 @@
             "Private",
             "Public"
           ],
-          "type": "string"
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ViewMode",
+            "modelAsString": true
+          }
         },
         "admins": {
           "description": "data feed administrator",
@@ -5157,7 +5240,11 @@
             "Active",
             "Paused"
           ],
-          "type": "string"
+          "type": "string",
+          "x-ms-enum": {
+            "name": "EntityStatus",
+            "modelAsString": true
+          }
         },
         "actionLinkTemplate": {
           "description": "action link for alert",
@@ -5887,7 +5974,11 @@
             "Webhook",
             "Email"
           ],
-          "type": "string"
+          "type": "string",
+          "x-ms-enum": {
+            "name": "HookType",
+            "modelAsString": true
+          }
         },
         "hookName": {
           "description": "hook unique name",
