@@ -118,6 +118,7 @@ input-file:
 These settings apply only when `--tag=package-2020-12-01-preview` is specified on the command line.
 
 ``` yaml $(tag) == 'package-2020-12-01-preview'
+title: "Azure Machine Learning Workspaces"
 input-file:
 - Microsoft.MachineLearningServices/preview/2020-12-01-preview/machineLearningServices.json
 - Microsoft.MachineLearningServices/preview/2020-12-01-preview/mfe.json
