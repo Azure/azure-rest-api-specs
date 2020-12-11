@@ -47,6 +47,7 @@ input-file:
   - Microsoft.Automation/preview/2020-01-13-preview/watcher.json
   - Microsoft.Automation/stable/2018-06-30/dscNodeConfiguration.json
   - Microsoft.Automation/stable/2018-06-30/job.json
+  - Microsoft.Automation/stable/2018-06-30/operations.json
   - Microsoft.Automation/stable/2018-06-30/runbook.json
   - Microsoft.Automation/stable/2018-06-30/softwareUpdateConfigurationRun.json
   - Microsoft.Automation/stable/2018-06-30/softwareUpdateConfigurationMachineRun.json
@@ -87,7 +88,7 @@ input-file:
   - Microsoft.Automation/stable/2018-06-30/variable.json
   - Microsoft.Automation/stable/2018-06-30/webhook.json
   - Microsoft.Automation/stable/2018-06-30/watcher.json
-
+  - Microsoft.Automation/stable/2018-06-30/operations.json
 ```
 
 ### Tag: schema-automation-2018-01-15 and azureresourceschema

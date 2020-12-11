@@ -279,37 +279,6 @@
         }
       }
     },
-    "/providers/Microsoft.Automation/operations": {
-      "get": {
-        "tags": [
-          "Operations"
-        ],
-        "description": "Lists all of the available Automation REST API operations.",
-        "operationId": "Operations_List",
-        "parameters": [
-          {
-            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/OperationListResult"
-            }
-          },
-          "default": {
-            "description": "Automation error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": null
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Automation/automationAccounts": {
       "get": {
         "tags": [
@@ -639,45 +608,6 @@
         }
       },
       "description": "The response model for the list account operation."
-    },
-    "OperationListResult": {
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Operation"
-          },
-          "description": "List of Automation operations supported by the Automation resource provider."
-        }
-      },
-      "description": "The response model for the list of Automation operations"
-    },
-    "Operation": {
-      "description": "Automation REST API operation",
-      "type": "object",
-      "properties": {
-        "name": {
-          "description": "Operation name: {provider}/{resource}/{operation}",
-          "type": "string"
-        },
-        "display": {
-          "properties": {
-            "provider": {
-              "description": "Service provider: Microsoft.Automation",
-              "type": "string"
-            },
-            "resource": {
-              "description": "Resource on which the operation is performed: Runbooks, Jobs etc.",
-              "type": "string"
-            },
-            "operation": {
-              "description": "Operation type: Read, write, delete, etc.",
-              "type": "string"
-            }
-          },
-          "description": "Provider, Resource and Operation values"
-        }
-      }
     },
     "Statistics": {
       "properties": {
