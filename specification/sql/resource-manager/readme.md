@@ -728,7 +728,6 @@ input-file:
  - ./Microsoft.Sql/preview/2020-02-02-preview/DatabaseVulnerabilityAssessmentScans.json
  - ./Microsoft.Sql/preview/2020-02-02-preview/DataWarehouseUserActivities.json
  - ./Microsoft.Sql/preview/2020-02-02-preview/DeletedServers.json
- - ./Microsoft.Sql/preview/2020-02-02-preview/DevOpsAudit.json
  - ./Microsoft.Sql/preview/2020-02-02-preview/ElasticPoolOperations.json
  - ./Microsoft.Sql/preview/2020-02-02-preview/ElasticPools.json
  - ./Microsoft.Sql/preview/2020-02-02-preview/EncryptionProtectors.json
