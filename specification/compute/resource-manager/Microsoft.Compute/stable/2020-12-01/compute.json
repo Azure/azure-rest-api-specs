@@ -3999,7 +3999,7 @@
         "operationId": "VirtualMachines_InstallPatches",
         "description": "Installs patches on the VM.",
         "x-ms-examples": {
-          "Assess patch state of a virtual machine.": {
+          "Install patch state of a virtual machine.": {
             "$ref": "./examples/VirtualMachineInstallPatches.json"
           }
         },
@@ -4021,7 +4021,7 @@
           {
             "name": "installPatchesInput",
             "in": "body",
-            "required": false,
+            "required": true,
             "schema": {
               "$ref": "#/definitions/VirtualMachineInstallPatchesParameters"
             },
@@ -7973,7 +7973,6 @@
           "type": "string",
           "description": "Defines when it is acceptable to reboot a VM during a software update operation.",
           "enum": [
-            "Unknown",
             "IfRequired",
             "Never",
             "Always"
@@ -8006,7 +8005,6 @@
           "items": {
             "type": "string",
             "enum": [
-              "Unknown",
               "Critical",
               "Security",
               "UpdateRollUp",
@@ -8056,7 +8054,6 @@
           "items": {
             "type": "string",
             "enum": [
-              "Unknown",
               "Critical",
               "Security",
               "Other"
@@ -8116,6 +8113,7 @@
           "readOnly": true,
           "description": "The reboot state of the VM following completion of the operation.",
           "enum": [
+            "Unknown",
             "NotNeeded",
             "Required",
             "Started",
