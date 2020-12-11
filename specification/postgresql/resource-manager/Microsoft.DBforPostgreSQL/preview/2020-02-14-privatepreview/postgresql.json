@@ -39,7 +39,7 @@
         "tags": [
           "Servers"
         ],
-        "operationId": "FlexibleServers_Create",
+        "operationId": "Servers_Create",
         "x-ms-examples": {
           "Create a new server": {
             "$ref": "./examples/ServerCreate.json"
@@ -101,10 +101,13 @@
         "tags": [
           "Servers"
         ],
-        "operationId": "FlexibleServers_Update",
+        "operationId": "Servers_Update",
         "x-ms-examples": {
           "ServerUpdate": {
             "$ref": "./examples/ServerUpdate.json"
+          },
+          "ServerUpdateWithCustomerMaintenanceWindow": {
+            "$ref": "./examples/ServerUpdateWithCustomerMaintenanceWindow.json"
           }
         },
         "description": "Updates an existing server. The request body can contain one to many of the properties present in the normal server definition.",
@@ -154,7 +157,7 @@
         "tags": [
           "Servers"
         ],
-        "operationId": "FlexibleServers_Delete",
+        "operationId": "Servers_Delete",
         "x-ms-examples": {
           "ServerDelete": {
             "$ref": "./examples/ServerDelete.json"
@@ -198,7 +201,7 @@
         "tags": [
           "Servers"
         ],
-        "operationId": "FlexibleServers_Get",
+        "operationId": "Servers_Get",
         "x-ms-examples": {
           "ServerGet": {
             "$ref": "./examples/ServerGet.json"
@@ -243,7 +246,7 @@
         "tags": [
           "Servers"
         ],
-        "operationId": "FlexibleServers_ListByResourceGroup",
+        "operationId": "Servers_ListByResourceGroup",
         "x-ms-examples": {
           "ServerListByResourceGroup": {
             "$ref": "./examples/ServerListByResourceGroup.json"
@@ -285,7 +288,7 @@
         "tags": [
           "Servers"
         ],
-        "operationId": "FlexibleServers_List",
+        "operationId": "Servers_List",
         "x-ms-examples": {
           "ServerList": {
             "$ref": "./examples/ServerList.json"
@@ -324,7 +327,7 @@
         "tags": [
           "ServerRestart"
         ],
-        "operationId": "FlexibleServers_Restart",
+        "operationId": "Servers_Restart",
         "x-ms-examples": {
           "ServerRestart": {
             "$ref": "./examples/ServerRestart.json"
@@ -367,7 +370,7 @@
         "tags": [
           "ServerStart"
         ],
-        "operationId": "FlexibleServers_Start",
+        "operationId": "Servers_Start",
         "x-ms-examples": {
           "ServerStart": {
             "$ref": "./examples/ServerStart.json"
@@ -410,7 +413,7 @@
         "tags": [
           "ServerStop"
         ],
-        "operationId": "FlexibleServers_Stop",
+        "operationId": "Servers_Stop",
         "x-ms-examples": {
           "ServerStop": {
             "$ref": "./examples/ServerStop.json"
@@ -453,7 +456,7 @@
         "tags": [
           "FirewallRules"
         ],
-        "operationId": "FlexibleServersFirewallRules_CreateOrUpdate",
+        "operationId": "FirewallRules_CreateOrUpdate",
         "x-ms-examples": {
           "FirewallRuleCreate": {
             "$ref": "./examples/FirewallRuleCreate.json"
@@ -562,7 +565,7 @@
         "tags": [
           "FirewallRules"
         ],
-        "operationId": "FlexibleServersFirewallRules_Get",
+        "operationId": "FirewallRules_Get",
         "x-ms-examples": {
           "FirewallRuleList": {
             "$ref": "./examples/FirewallRuleGet.json"
@@ -607,7 +610,7 @@
         "tags": [
           "FirewallRules"
         ],
-        "operationId": "FlexibleServersFirewallRules_ListByServer",
+        "operationId": "FirewallRules_ListByServer",
         "x-ms-examples": {
           "FirewallRuleList": {
             "$ref": "./examples/FirewallRuleListByServer.json"
@@ -652,7 +655,7 @@
         "tags": [
           "Configurations"
         ],
-        "operationId": "FlexibleServersConfigurations_ListByServer",
+        "operationId": "Configurations_ListByServer",
         "x-ms-examples": {
           "ConfigurationList": {
             "$ref": "./examples/ConfigurationListByServer.json"
@@ -697,7 +700,7 @@
         "tags": [
           "Configurations"
         ],
-        "operationId": "FlexibleServersConfigurations_Get",
+        "operationId": "Configurations_Get",
         "x-ms-examples": {
           "ConfigurationGet": {
             "$ref": "./examples/ConfigurationGet.json"
@@ -735,20 +738,18 @@
             }
           }
         }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBForPostgreSql/flexibleServers/{serverName}/maintenanceWindows/{maintenanceWindowName}": {
-      "put": {
+      },
+      "patch": {
         "tags": [
-          "CustomerMaintenanceWindow"
+          "Configurations"
         ],
-        "operationId": "FlexibleServersCustomerMaintenanceWindow_CreateOrUpdate",
+        "operationId": "Configurations_Update",
         "x-ms-examples": {
-          "CustomerMaintenanceWindowCreate": {
-            "$ref": "./examples/CustomerMaintenanceWindowCreate.json"
+          "Update a user configuration": {
+            "$ref": "./examples/ConfigurationUpdate.json"
           }
         },
-        "description": "Creates a new customer maintenance window.",
+        "description": "Updates a configuration of a server.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
@@ -763,29 +764,23 @@
             "$ref": "#/parameters/ServerNameParameter"
           },
           {
-            "$ref": "#/parameters/MaintenanceWindowNameParameter"
+            "$ref": "#/parameters/ConfigurationNameParameter"
           },
           {
             "name": "parameters",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/CustomerMaintenanceWindow"
+              "$ref": "#/definitions/Configuration"
             },
-            "description": "The required parameters for creating or updating a customer maintenance window."
+            "description": "The required parameters for updating a server configuration."
           }
         ],
         "responses": {
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/CustomerMaintenanceWindow"
-            }
-          },
-          "201": {
-            "description": "Created",
-            "schema": {
-              "$ref": "#/definitions/CustomerMaintenanceWindow"
+              "$ref": "#/definitions/Configuration"
             }
           },
           "202": {
@@ -799,65 +794,15 @@
           }
         },
         "x-ms-long-running-operation": true
-      },
-      "delete": {
-        "tags": [
-          "CustomerMaintenanceWindow"
-        ],
-        "operationId": "FlexibleServersCustomerMaintenanceWindow_Delete",
-        "x-ms-examples": {
-          "CustomerMaintenanceWindowDelete": {
-            "$ref": "./examples/CustomerMaintenanceWindowDelete.json"
-          }
-        },
-        "description": "Deletes a PostgreSQL server Customer maintenance window.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ServerNameParameter"
-          },
-          {
-            "$ref": "#/parameters/MaintenanceWindowNameParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "202": {
-            "description": "Accepted"
-          },
-          "204": {
-            "description": "NoContent"
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-long-running-operation": true
-      },
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBForPostgreSql/flexibleServers/{serverName}/keys": {
       "get": {
         "tags": [
-          "CustomerMaintenanceWindow"
+          "ServerKeys"
         ],
-        "operationId": "FlexibleServersCustomerMaintenanceWindow_Get",
-        "x-ms-examples": {
-          "CustomerMaintenanceWindowGet": {
-            "$ref": "./examples/CustomerMaintenanceWindowGet.json"
-          }
-        },
-        "description": "Get the Customer maintenance windows of a given PostgreSQL server.",
+        "description": "Gets a list of  Server keys.",
+        "operationId": "ServerKeys_List",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
@@ -870,16 +815,13 @@
           },
           {
             "$ref": "#/parameters/ServerNameParameter"
-          },
-          {
-            "$ref": "#/parameters/MaintenanceWindowNameParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "Successfully retrieved the list of PostgreSQL Server keys.",
             "schema": {
-              "$ref": "#/definitions/CustomerMaintenanceWindow"
+              "$ref": "#/definitions/ServerKeyListResult"
             }
           },
           "default": {
@@ -887,23 +829,92 @@
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List the keys for a PostgreSQL Server.": {
+            "$ref": "./examples/ServerKeyList.json"
           }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBForPostgreSql/flexibleServers/{serverName}/maintenanceWindows": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBForPostgreSql/flexibleServers/{serverName}/keys/{keyName}": {
       "get": {
         "tags": [
-          "CustomerMaintenanceWindow"
+          "ServerKeys"
         ],
-        "operationId": "FlexibleServersCustomerMaintenanceWindow_ListByServer",
-        "x-ms-examples": {
-          "CustomerMaintenanceWindowList": {
-            "$ref": "./examples/CustomerMaintenanceWindowListByServer.json"
+        "description": "Gets a PostgreSQL Server key.",
+        "operationId": "ServerKeys_Get",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "name": "keyName",
+            "in": "path",
+            "description": "The name of the PostgreSQL Server key to be retrieved.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the specified PostgreSQL Server key.",
+            "schema": {
+              "$ref": "#/definitions/ServerKey"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
-        "description": "List all the Customer Maintenance Windows in a given PostgreSQL server.",
+        "x-ms-examples": {
+          "Get the PostgreSQL Server key": {
+            "$ref": "./examples/ServerKeyGet.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "ServerKeys"
+        ],
+        "description": "Creates or updates a PostgreSQL Server key.",
+        "operationId": "ServerKeys_CreateOrUpdate",
         "parameters": [
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "name": "keyName",
+            "in": "path",
+            "description": "The name of the PostgreSQL Server key to be operated on (updated or created).",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The requested PostgreSQL Server key resource state.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ServerKey"
+            }
+          },
           {
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
           },
@@ -912,16 +923,19 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ServerNameParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "Successfully updated the PostgreSQL Server key.",
             "schema": {
-              "$ref": "#/definitions/CustomerMaintenanceWindowListResult"
+              "$ref": "#/definitions/ServerKey"
+            }
+          },
+          "202": {
+            "description": "Operation in progress",
+            "schema": {
+              "$ref": "#/definitions/ServerKey"
             }
           },
           "default": {
@@ -929,6 +943,63 @@
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Creates or updates a PostgreSQL Server key": {
+            "$ref": "./examples/ServerKeyCreateOrUpdate.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "ServerKeys"
+        ],
+        "description": "Deletes the PostgreSQL Server key with the given name.",
+        "operationId": "ServerKeys_Delete",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "name": "keyName",
+            "in": "path",
+            "description": "The name of the PostgreSQL Server key to be deleted.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully deleted the PostgreSQL Server key."
+          },
+          "202": {
+            "description": "Operation in progress"
+          },
+          "204": {
+            "description": "The specified PostgreSQL Server key does not exist."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Delete the PostgreSQL Server key": {
+            "$ref": "./examples/ServerKeyDelete.json"
           }
         }
       }
@@ -938,7 +1009,7 @@
         "tags": [
           "CheckNameAvailability"
         ],
-        "operationId": "FlexibleServersCheckNameAvailability_Execute",
+        "operationId": "CheckNameAvailability_Execute",
         "x-ms-examples": {
           "NameAvailability": {
             "$ref": "./examples/CheckNameAvailability.json"
@@ -967,6 +1038,96 @@
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/NameAvailability"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DBForPostgreSql/locations/{locationName}/capabilities": {
+      "get": {
+        "tags": [
+          "LocationBasedCapabilities"
+        ],
+        "operationId": "LocationBasedCapabilities_Execute",
+        "x-ms-examples": {
+          "CapabilitiesList": {
+            "$ref": "./examples/CapabilitiesByLocation.json"
+          }
+        },
+        "description": "Get capabilities at specified location in a given subscription.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/LocationNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/CapabilitiesListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DBForPostgreSql/locations/{locationName}/checkVirtualNetworkSubnetUsage": {
+      "post": {
+        "tags": [
+          "VirtualNetworkSubnetUsage"
+        ],
+        "operationId": "VirtualNetworkSubnetUsage_Execute",
+        "x-ms-examples": {
+          "VirtualNetworkSubnetUsageList": {
+            "$ref": "./examples/VirtualNetworkSubnetUsage.json"
+          }
+        },
+        "description": "Get virtual network subnet usage for a given vNet resource id.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/LocationNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/VirtualNetworkSubnetUsageParameter"
+            },
+            "description": "The required parameters for creating or updating a server."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/VirtualNetworkSubnetUsageResult"
             }
           },
           "default": {
@@ -1013,11 +1174,269 @@
     }
   },
   "definitions": {
+    "ServerKeyListResult": {
+      "description": "A list of PostgreSQL Server keys.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "A list of PostgreSQL Server keys.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ServerKey"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "Link to retrieve next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ServerKeyProperties": {
+      "description": "Properties for a key execution.",
+      "required": [
+        "serverKeyType"
+      ],
+      "type": "object",
+      "properties": {
+        "serverKeyType": {
+          "description": "The key type like 'AzureKeyVault'.",
+          "enum": [
+            "AzureKeyVault"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ServerKeyType",
+            "modelAsString": true
+          }
+        },
+        "uri": {
+          "description": "The URI of the key.",
+          "type": "string"
+        },
+        "creationDate": {
+          "format": "date-time",
+          "description": "The key creation date.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ServerKey": {
+      "description": "A PostgreSQL Server key.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "kind": {
+          "description": "Kind of encryption protector used to protect the key.",
+          "type": "string",
+          "readOnly": true
+        },
+        "properties": {
+          "$ref": "#/definitions/ServerKeyProperties",
+          "description": "Properties of the ServerKey Resource.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "VirtualNetworkSubnetUsageParameter": {
+      "type": "object",
+      "properties": {
+        "virtualNetworkArmResourceId": {
+          "type": "string",
+          "description": "Virtual network resource id."
+        }
+      },
+      "description": "Virtual network subnet usage parameter"
+    },
+    "VirtualNetworkSubnetUsageResult": {
+      "type": "object",
+      "properties": {
+        "delegatedSubnetsUsage": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DelegatedSubnetUsage"
+          },
+          "readOnly": true
+        }
+      },
+      "description": "Virtual network subnet usage data."
+    },
+    "DelegatedSubnetUsage": {
+      "type": "object",
+      "properties": {
+        "subnetName": {
+          "type": "string",
+          "readOnly": true,
+          "description": "name of the subnet"
+        },
+        "usage": {
+          "type": "integer",
+          "format": "int64",
+          "readOnly": true,
+          "description": "Number of used delegated subnets"
+        }
+      },
+      "description": "Delegated subnet usage data."
+    },
+    "StorageMBCapability": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "storage MB name",
+          "readOnly": true
+        },
+        "supportedIops": {
+          "type": "integer",
+          "format": "int64",
+          "description": "supported IOPS",
+          "readOnly": true
+        },
+        "storageSizeMB": {
+          "type": "integer",
+          "format": "int64",
+          "description": "storage size in MB",
+          "readOnly": true
+        }
+      },
+      "description": "storage size in MB capability"
+    },
+    "VcoreCapability": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "vCore name",
+          "readOnly": true
+        },
+        "vCores": {
+          "type": "integer",
+          "format": "int64",
+          "description": "supported vCores",
+          "readOnly": true
+        },
+        "supportedIops": {
+          "type": "integer",
+          "format": "int64",
+          "description": "supported IOPS",
+          "readOnly": true
+        },
+        "supportedMemoryPerVcoreMB": {
+          "type": "integer",
+          "format": "int64",
+          "description": "supported memory per vCore in MB",
+          "readOnly": true
+        }
+      },
+      "description": "Vcores capability"
+    },
+    "ServerVersionCapability": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "server version",
+          "readOnly": true
+        },
+        "supportedVcores": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VcoreCapability"
+          },
+          "readOnly": true
+        }
+      },
+      "description": "Server version capabilities."
+    },
+    "StorageEditionCapability": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "storage edition name",
+          "readOnly": true
+        },
+        "supportedStorageMB": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/StorageMBCapability"
+          },
+          "readOnly": true
+        }
+      },
+      "description": "storage edition capability"
+    },
+    "ServerEditionCapability": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Server edition name",
+          "readOnly": true
+        },
+        "supportedStorageEditions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/StorageEditionCapability"
+          },
+          "readOnly": true
+        },
+        "supportedServerVersions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ServerVersionCapability"
+          },
+          "readOnly": true
+        }
+      },
+      "description": "Server edition capabilities."
+    },
+    "CapabilityProperties": {
+      "properties": {
+        "zone": {
+          "type": "string",
+          "description": "zone name",
+          "readOnly": true
+        },
+        "supportedFlexibleServerEditions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ServerEditionCapability"
+          },
+          "readOnly": true
+        }
+      },
+      "description": "Location capabilities."
+    },
+    "CapabilitiesListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "A list of supported capabilities.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CapabilityProperties"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "Link to retrieve next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "description": "location capability"
+    },
     "ServerVersion": {
       "type": "string",
       "description": "The version of a server.",
       "enum": [
-        "12"
+        "12",
+        "11"
       ],
       "x-ms-enum": {
         "name": "ServerVersion",
@@ -1106,12 +1525,24 @@
           "x-ms-enum": {
             "name": "ServerPublicNetworkAccessState",
             "modelAsString": true
-          }
+          },
+          "readOnly": true
         },
-        "standbyCount": {
-          "type": "integer",
-          "format": "int32",
-          "description": "stand by count value can be either 0 or 1"
+        "maintenanceWindow": {
+          "$ref": "#/definitions/MaintenanceWindow",
+          "description": "Maintenance window of a server."
+        },
+        "haEnabled": {
+          "type": "string",
+          "description": "stand by count value can be either enabled or disabled",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "HAEnabledEnum",
+            "modelAsString": false
+          }
         },
         "sourceServerName": {
           "type": "string",
@@ -1122,19 +1553,25 @@
           "format": "date-time",
           "description": "Restore point creation time (ISO8601 format), specifying the time to restore from."
         },
-        "vnetInjArgs": {
+        "availabilityZone": {
+          "type": "string",
+          "description": "availability Zone information of the server."
+        },
+        "standbyAvailabilityZone": {
+          "type": "string",
+          "description": "availability Zone information of the server.",
+          "readOnly": true
+        },
+        "byokEnforcement": {
+          "type": "string",
+          "description": "Status showing whether the data encryption is enabled with customer-managed keys.",
+          "readOnly": true
+        },
+        "delegatedSubnetArguments": {
           "properties": {
-            "delegatedVnetID": {
+            "subnetArmResourceId": {
               "type": "string",
-              "description": "delegated vNet ID"
-            },
-            "delegatedSubnetName": {
-              "type": "string",
-              "description": "delegated subnet name"
-            },
-            "delegatedVnetName": {
-              "type": "string",
-              "description": "delegated vNet name"
+              "description": "delegated subnet arm resource id."
             }
           }
         },
@@ -1148,7 +1585,17 @@
           "x-ms-enum": {
             "name": "CreateMode",
             "modelAsString": true
-          }
+          },
+          "x-ms-mutability": [
+            "create"
+          ]
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Application-specific metadata in the form of key-value pairs."
         }
       },
       "description": "The properties of a server."
@@ -1176,6 +1623,31 @@
       ],
       "description": "Represents a server."
     },
+    "MaintenanceWindow": {
+      "type": "object",
+      "description": "Maintenance window of a server.",
+      "properties": {
+        "customWindow": {
+          "type": "string",
+          "description": "indicates whether custom window is enabled or disabled"
+        },
+        "startHour": {
+          "type": "integer",
+          "format": "int32",
+          "description": "start hour for maintenance window"
+        },
+        "startMinute": {
+          "type": "integer",
+          "format": "int32",
+          "description": "start minute for maintenance window"
+        },
+        "dayOfWeek": {
+          "type": "integer",
+          "format": "int32",
+          "description": "day of week for maintenance window"
+        }
+      }
+    },
     "ServerPropertiesForUpdate": {
       "properties": {
         "administratorLoginPassword": {
@@ -1183,27 +1655,25 @@
           "format": "password",
           "description": "The password of the administrator login."
         },
-        "version": {
-          "$ref": "#/definitions/ServerVersion",
-          "description": "PostgreSQL Server version."
-        },
-        "vCores": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Max compute of a server is 64vCores."
-        },
         "storageProfile": {
           "$ref": "#/definitions/StorageProfile",
           "description": "Storage profile of a server."
         },
-        "standbyCount": {
-          "type": "integer",
-          "format": "int32",
-          "description": "stand by count value can be either 0 or 1"
-        },
-        "serverEdition": {
+        "haEnabled": {
           "type": "string",
-          "description": "server edition default to general purpose"
+          "description": "stand by count value can be either enabled or disabled",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "HAEnabledEnum",
+            "modelAsString": false
+          }
+        },
+        "maintenanceWindow": {
+          "$ref": "#/definitions/MaintenanceWindow",
+          "description": "Maintenance window of a server."
         }
       }
     },
@@ -1219,7 +1689,7 @@
         },
         "properties": {
           "$ref": "#/definitions/ServerPropertiesForUpdate",
-          "x-ms-client-flatten": false,
+          "x-ms-client-flatten": true,
           "description": "Properties of the server."
         },
         "tags": {
@@ -1240,7 +1710,7 @@
           "items": {
             "$ref": "#/definitions/Server"
           },
-          "description": "The list of servers"
+          "description": "The list of flexible servers"
         },
         "nextLink": {
           "description": "The link used to get the next page of operations.",
@@ -1282,14 +1752,12 @@
             "name": "SkuTier",
             "modelAsString": true
           }
-        },
-        "capacity": {
-          "type": "integer",
-          "format": "int32",
-          "minimum": 0,
-          "description": "The scale up/out capacity, representing server's compute units."
         }
       },
+      "required": [
+        "name",
+        "tier"
+      ],
       "description": "Sku information related properties of a server."
     },
     "FirewallRuleProperties": {
@@ -1342,66 +1810,6 @@
         "nextLink": {
           "description": "The link used to get the next page of operations.",
           "type": "string"
-        }
-      },
-      "description": "A list of firewall rules."
-    },
-    "CustomerMaintenanceWindowProperties": {
-      "properties": {
-        "dayOfWeek": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The day of week of the customer maintenance window to start"
-        },
-        "durationInMinutes": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The duration of the customer maintenance window to run."
-        },
-        "startHour": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The starting hour of the customer maintenance window."
-        },
-        "startMinute": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The starting minutes of the customer maintenance window."
-        }
-      },
-      "required": [
-        "dayOfWeek",
-        "startHour",
-        "startMinute"
-      ],
-      "description": "The properties of a server firewall rule."
-    },
-    "CustomerMaintenanceWindow": {
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/CustomerMaintenanceWindowProperties",
-          "x-ms-client-flatten": true,
-          "description": "The properties of a customer maintenance window."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ProxyResource"
-        }
-      ],
-      "required": [
-        "properties"
-      ],
-      "description": "Represents a server firewall rule."
-    },
-    "CustomerMaintenanceWindowListResult": {
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/CustomerMaintenanceWindow"
-          },
-          "description": "The list of CustomerMaintenanceWindows in a PostgreSQL server."
         }
       },
       "description": "A list of firewall rules."
@@ -1604,6 +2012,14 @@
     }
   },
   "parameters": {
+    "LocationNameParameter": {
+      "name": "locationName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the location.",
+      "x-ms-parameter-location": "method"
+    },
     "ServerNameParameter": {
       "name": "serverName",
       "in": "path",
