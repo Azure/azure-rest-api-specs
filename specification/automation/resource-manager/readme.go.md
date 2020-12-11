@@ -17,6 +17,7 @@ batch:
   - tag: package-2017-05-preview
   - tag: package-2018-01-preview
   - tag: package-2018-06-preview
+  - tag: package-2020-01-13-preview
 ```
 
 ### Tag: package-2015-10 and go
@@ -53,4 +54,10 @@ Please also specify `--go-sdk-folder=<path to the root directory of your azure-s
 
 ``` yaml $(tag) == 'package-2018-06-preview' && $(go)
 output-folder: $(go-sdk-folder)/services/preview/$(namespace)/mgmt/2018-06-30-preview/$(namespace)
+```
+
+### Tag: package-2020-01-13-preview and go
+
+``` yaml $(tag) == 'package-2020-01-13-preview' && $(go)
+output-folder: $(go-sdk-folder)/services/preview/$(namespace)/mgmt/2020-01-13-preview/$(namespace)
 ```

@@ -162,35 +162,33 @@ These settings apply only when `--tag=package-2020-01-13-preview` is specified o
 
 ``` yaml $(tag) == 'package-2020-01-13-preview'
 input-file:
-- Microsoft.Automation/stable/2015-10-31/account.json
-- Microsoft.Automation/stable/2015-10-31/certificate.json
-- Microsoft.Automation/stable/2015-10-31/connection.json
-- Microsoft.Automation/stable/2015-10-31/connectionType.json
-- Microsoft.Automation/stable/2015-10-31/credential.json
-- Microsoft.Automation/stable/2015-10-31/dscConfiguration.json
-- Microsoft.Automation/stable/2015-10-31/hybridRunbookWorkerGroup.json
-- Microsoft.Automation/stable/2015-10-31/jobSchedule.json
-- Microsoft.Automation/stable/2015-10-31/linkedWorkspace.json
-- Microsoft.Automation/stable/2015-10-31/module.json
-- Microsoft.Automation/stable/2015-10-31/schedule.json
-- Microsoft.Automation/stable/2015-10-31/variable.json
-- Microsoft.Automation/stable/2015-10-31/webhook.json
-- Microsoft.Automation/stable/2015-10-31/watcher.json
-- Microsoft.Automation/preview/2017-05-15-preview/softwareUpdateConfiguration.json
-- Microsoft.Automation/preview/2017-05-15-preview/softwareUpdateConfigurationRun.json
-- Microsoft.Automation/preview/2017-05-15-preview/softwareUpdateConfigurationMachineRun.json
-- Microsoft.Automation/preview/2017-05-15-preview/sourceControl.json
-- Microsoft.Automation/preview/2017-05-15-preview/sourceControlSyncJob.json
-- Microsoft.Automation/preview/2017-05-15-preview/sourceControlSyncJobStreams.json
-- Microsoft.Automation/preview/2017-05-15-preview/job.json
-- Microsoft.Automation/stable/2018-01-15/dscNode.json
-- Microsoft.Automation/stable/2018-01-15/dscCompilationJob.json
-- Microsoft.Automation/stable/2018-01-15/dscNodeConfiguration.json
-- Microsoft.Automation/stable/2018-01-15/dscNodeCounts.json
-- Microsoft.Automation/stable/2018-06-30/runbook.json
-- Microsoft.Automation/stable/2018-06-30/python2package.json
 - Microsoft.Automation/preview/2020-01-13-preview/privateEndpointConnection.json
 - Microsoft.Automation/preview/2020-01-13-preview/privateLinkResources.json
+- Microsoft.Automation/preview/2020-01-13-preview/python2package.json
+- Microsoft.Automation/preview/2020-01-13-preview/dscNode.json
+- Microsoft.Automation/preview/2020-01-13-preview/dscCompilationJob.json
+- Microsoft.Automation/preview/2020-01-13-preview/dscNodeCounts.json
+- Microsoft.Automation/preview/2020-01-13-preview/sourceControl.json
+- Microsoft.Automation/preview/2020-01-13-preview/sourceControlSyncJob.json
+- Microsoft.Automation/preview/2020-01-13-preview/sourceControlSyncJobStreams.json
+- Microsoft.Automation/preview/2020-01-13-preview/account.json
+- Microsoft.Automation/preview/2020-01-13-preview/certificate.json
+- Microsoft.Automation/preview/2020-01-13-preview/connection.json
+- Microsoft.Automation/preview/2020-01-13-preview/connectionType.json
+- Microsoft.Automation/preview/2020-01-13-preview/credential.json
+- Microsoft.Automation/preview/2020-01-13-preview/hybridRunbookWorkerGroup.json
+- Microsoft.Automation/preview/2020-01-13-preview/jobSchedule.json
+- Microsoft.Automation/preview/2020-01-13-preview/linkedWorkspace.json
+- Microsoft.Automation/preview/2020-01-13-preview/module.json
+- Microsoft.Automation/preview/2020-01-13-preview/schedule.json
+- Microsoft.Automation/preview/2020-01-13-preview/variable.json
+- Microsoft.Automation/preview/2020-01-13-preview/watcher.json
+- Microsoft.Automation/stable/2018-06-30/dscNodeConfiguration.json
+- Microsoft.Automation/stable/2018-06-30/job.json
+- Microsoft.Automation/stable/2018-06-30/runbook.json
+- Microsoft.Automation/stable/2018-06-30/softwareUpdateConfigurationRun.json
+- Microsoft.Automation/stable/2018-06-30/softwareUpdateConfigurationMachineRun.json
+- Microsoft.Automation/stable/2018-06-30/webhook.json
 ```
 
 ---

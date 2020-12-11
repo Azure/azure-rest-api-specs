@@ -26,7 +26,31 @@ output-folder: $(azureresourceschema-folder)/schemas
 input-file:
   - Microsoft.Automation/preview/2020-01-13-preview/privateEndpointConnection.json
   - Microsoft.Automation/preview/2020-01-13-preview/privateLinkResources.json
-
+  - Microsoft.Automation/preview/2020-01-13-preview/python2package.json
+  - Microsoft.Automation/preview/2020-01-13-preview/dscNode.json
+  - Microsoft.Automation/preview/2020-01-13-preview/dscCompilationJob.json
+  - Microsoft.Automation/preview/2020-01-13-preview/dscNodeCounts.json
+  - Microsoft.Automation/preview/2020-01-13-preview/sourceControl.json
+  - Microsoft.Automation/preview/2020-01-13-preview/sourceControlSyncJob.json
+  - Microsoft.Automation/preview/2020-01-13-preview/sourceControlSyncJobStreams.json
+  - Microsoft.Automation/preview/2020-01-13-preview/account.json
+  - Microsoft.Automation/preview/2020-01-13-preview/certificate.json
+  - Microsoft.Automation/preview/2020-01-13-preview/connection.json
+  - Microsoft.Automation/preview/2020-01-13-preview/connectionType.json
+  - Microsoft.Automation/preview/2020-01-13-preview/credential.json
+  - Microsoft.Automation/preview/2020-01-13-preview/hybridRunbookWorkerGroup.json
+  - Microsoft.Automation/preview/2020-01-13-preview/jobSchedule.json
+  - Microsoft.Automation/preview/2020-01-13-preview/linkedWorkspace.json
+  - Microsoft.Automation/preview/2020-01-13-preview/module.json
+  - Microsoft.Automation/preview/2020-01-13-preview/schedule.json
+  - Microsoft.Automation/preview/2020-01-13-preview/variable.json
+  - Microsoft.Automation/preview/2020-01-13-preview/watcher.json
+  - Microsoft.Automation/stable/2018-06-30/dscNodeConfiguration.json
+  - Microsoft.Automation/stable/2018-06-30/job.json
+  - Microsoft.Automation/stable/2018-06-30/runbook.json
+  - Microsoft.Automation/stable/2018-06-30/softwareUpdateConfigurationRun.json
+  - Microsoft.Automation/stable/2018-06-30/softwareUpdateConfigurationMachineRun.json
+  - Microsoft.Automation/stable/2018-06-30/webhook.json
 ```
 
 ### Tag: schema-automation-2018-06-30 and azureresourceschema
