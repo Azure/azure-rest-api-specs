@@ -2844,12 +2844,22 @@
           "type": "string",
           "description": "Full resource id of the original storage account."
         },
+        "subscription": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The Subscription id of the deleted account."
+        },
+        "resourceGroupName": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The resource group the resource is located under."
+        },
         "location": {
           "readOnly": true,
           "type": "string",
           "description": "Location of the deleted account."
         },
-        "restoreReference": {
+        "key": {
           "readOnly": true,
           "type": "string",
           "description": "Can be used to attempt recovering this deleted account via PutStorageAccount API."
@@ -3047,21 +3057,6 @@
       },
       "description": "Properties of the storage account."
     },
-    "DeletedAccount": {
-      "properties": {
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/DeletedAccountProperties",
-          "description": "Properties of the deleted account."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ProxyResource"
-        }
-      ],
-      "description": "Deleted storage account"
-    },
     "StorageAccount": {
       "properties": {
         "sku": {
@@ -3158,7 +3153,7 @@
           "readOnly": true,
           "type": "array",
           "items": {
-            "$ref": "#/definitions/DeletedAccount"
+            "$ref": "#/definitions/DeletedAccountProperties"
           },
           "description": "Gets the list of deleted accounts and their properties."
         },
