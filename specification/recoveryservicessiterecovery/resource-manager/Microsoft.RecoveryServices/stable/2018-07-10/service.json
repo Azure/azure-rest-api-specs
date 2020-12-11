@@ -11172,7 +11172,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/PlannedFailoverProviderSpecificFailoverInput"
+          "$ref": "#/definitions/ProviderSpecificFailoverInput"
         }
       ],
       "properties": {
@@ -11204,30 +11204,6 @@
           "description": "Location of the vault.",
           "type": "string"
         },
-        "primaryKekCertificatePfx": {
-          "description": "Primary kek certificate pfx.",
-          "type": "string"
-        },
-        "secondaryKekCertificatePfx": {
-          "description": "Secondary kek certificate pfx.",
-          "type": "string"
-        },
-        "recoveryPointId": {
-          "description": "The recovery point id to be passed to failover to a particular recovery point. In case of latest recovery point, null should be passed.",
-          "type": "string"
-        }
-      },
-      "x-ms-discriminator-value": "HyperVReplicaAzure"
-    },
-    "HyperVReplicaAzurePlannedFailoverProviderInput": {
-      "description": "HyperVReplicaAzure specific planned failover input.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/PlannedFailoverProviderSpecificFailoverInput"
-        }
-      ],
-      "properties": {
         "primaryKekCertificatePfx": {
           "description": "Primary kek certificate pfx.",
           "type": "string"
@@ -13935,7 +13911,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/PlannedFailoverProviderSpecificFailoverInput"
+          "$ref": "#/definitions/ProviderSpecificFailoverInput"
         }
       ],
       "properties": {
@@ -16771,21 +16747,10 @@
           "type": "string"
         },
         "providerSpecificDetails": {
-          "$ref": "#/definitions/PlannedFailoverProviderSpecificFailoverInput",
+          "$ref": "#/definitions/ProviderSpecificFailoverInput",
           "description": "Provider specific settings"
         }
       }
-    },
-    "PlannedFailoverProviderSpecificFailoverInput": {
-      "description": "Provider specific failover input.",
-      "type": "object",
-      "properties": {
-        "instanceType": {
-          "description": "The class type.",
-          "type": "string"
-        }
-      },
-      "discriminator": "instanceType"
     },
     "Policy": {
       "description": "Protection profile details.",
@@ -17919,7 +17884,6 @@
               "TestFailoverCleanup",
               "Failback",
               "FinalizeFailback",
-              "CancelFailover",
               "ChangePit",
               "RepairReplication",
               "SwitchProtection",
