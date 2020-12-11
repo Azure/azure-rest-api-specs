@@ -71,8 +71,15 @@
               },
               "Retry-After": {
                 "description": "The amount of delay to use while the status of the operation is checked. The value is expressed in seconds.",
-                "type": "integer"
+                "type": "integer",
+                "format": "int64"
               }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
