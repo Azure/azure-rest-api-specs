@@ -2996,6 +2996,10 @@
           "type": "string",
           "description": "Resource sku"
         },
+        "eTag": {
+          "type": "string",
+          "description": "eTag of the resource."
+        },
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/ReservationRecommendationDetailsProperties",
@@ -3128,6 +3132,7 @@
         "lookBackPeriod": {
           "description": "Number of days of usage to look back used for computing the recommendation.",
           "type": "integer",
+          "format": "int32",
           "readOnly": true
         },
         "recommendedQuantity": {
@@ -3263,7 +3268,7 @@
         },
         "instanceFlexibilityRatio": {
           "description": "The instance Flexibility Ratio.",
-          "type": "integer",
+          "type": "number",
           "readOnly": true
         },
         "instanceFlexibilityGroup": {
@@ -3377,12 +3382,13 @@
       "properties": {
         "lookBackPeriod": {
           "description": "The number of days of usage to look back for recommendation.",
-          "type": "string",
+          "type": "integer",
+          "format": "int32",
           "readOnly": true
         },
         "instanceFlexibilityRatio": {
           "description": "The instance Flexibility Ratio.",
-          "type": "integer",
+          "type": "number",
           "readOnly": true
         },
         "instanceFlexibilityGroup": {
