@@ -123,7 +123,7 @@ input-file:
 - Microsoft.Sql/preview/2020-02-02-preview/ManagedInstanceAzureADOnlyAuthentications.json
 - Microsoft.Sql/preview/2020-02-02-preview/ServerTrustGroups.json
 - Microsoft.Sql/preview/2020-08-01-preview/ElasticPools.json
-- Microsoft.Sql/preview/2020-11-01-preview/databases.json
+- Microsoft.Sql/preview/2020-11-01-preview/Databases.json
 
 # Needed when there is more than one input file
 override-info:
