@@ -457,7 +457,7 @@
         "namespace": {
           "type": "string",
           "enum": [
-            "VmGuestHealth"
+            "GuestVmHealth"
           ],
           "x-ms-enum": {
             "name": "HealthAlertsNamespace",
@@ -472,7 +472,7 @@
       "description": "The rule criterion that defines the conditions of the alert rule."
     },
     "VmGuestHealthAlertCriterion": {
-      "x-ms-discriminator-value": "VmGuestHealth",
+      "x-ms-discriminator-value": "GuestVmHealth",
       "type": "object",
       "allOf": [
         {
@@ -480,9 +480,19 @@
         }
       ],
       "properties": {
-        "healthMonitorName": {
-          "type": "string",
-          "description": "Name of health monitor on which to define alert"
+        "monitorNames": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Names of health monitor on which to define alert"
+        },
+        "monitorTypes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Names of health monitor type on which to define alert"
         },
         "healthStates": {
           "type": "array",
@@ -493,7 +503,7 @@
         }
       },
       "required": [
-        "healthMonitorName"
+        "healthStates"
       ],
       "description": "Specifies the health alert criteria to alert on."
     },
@@ -502,10 +512,19 @@
       "properties": {
         "healthStateName": {
           "type": "string",
-          "description": "Health state"
+          "description": "Health state name",
+          "enum": [
+            "Warning",
+            "Critical"
+          ],
+          "x-ms-enum": {
+            "name": "HealthStateName",
+            "modelAsString": true
+          }
         },
         "severity": {
-          "type": "string",
+          "type": "integer",
+          "format": "int64",
           "description": "Severity of alert fired"
         }
       },
