@@ -1,26 +1,26 @@
 {
   "parameters": {
     "api-version": "2019-09-01-preview",
-    "subscriptionId": "86dc51d3-92ed-4d7e-947a-775ea79b4919",
+    "subscriptionId": "subid",
     "resourceGroupName": "my-resource-group",
     "queryPackName": "my-querypack",
-    "LogAnalyticsQueryPackPayload": {
-      "location": "South Central US",
+    "QueryPackTags": {
       "tags": {
-        "Tag1": "Value1"
-      },
-      "properties": {}
+        "Tag1": "Value1",
+        "Tag2": "Value2"
+      }
     }
   },
   "responses": {
     "200": {
       "body": {
-        "id": "/subscriptions/86dc51d3-92ed-4d7e-947a-775ea79b4919/resourceGroups/my-resource-group/providers/microsoft.insights/queryPacks/my-querypack",
+        "id": "/subscriptions/subid/resourceGroups/my-resource-group/providers/microsoft.operationalinsights/queryPacks/my-querypack",
         "name": "my-querypack",
-        "type": "microsoft.insights/querypacks",
+        "type": "microsoft.operationalinsights/querypacks",
         "location": "South Central US",
         "tags": {
-          "Tag1": "Value1"
+          "Tag1": "Value1",
+          "Tag2": "Value2"
         },
         "properties": {
           "queryPackId": "aac8fc00-2b68-441e-8f9b-ded8748dc635",
