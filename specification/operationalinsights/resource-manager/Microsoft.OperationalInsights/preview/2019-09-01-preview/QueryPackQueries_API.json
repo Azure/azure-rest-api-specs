@@ -34,7 +34,7 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Insights/queryPacks/{queryPackName}/queries": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/queryPacks/{queryPackName}/queries": {
       "get": {
         "description": "Gets a list of Queries defined within a Log Analytics QueryPack.",
         "operationId": "Queries_List",
@@ -85,7 +85,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Insights/queryPacks/{queryPackName}/queries/search": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/queryPacks/{queryPackName}/queries/search": {
       "post": {
         "description": "Search a list of Queries defined within a Log Analytics QueryPack according to given search properties.",
         "operationId": "Queries_Search",
@@ -145,7 +145,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Insights/queryPacks/{queryPackName}/queries/{id}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/queryPacks/{queryPackName}/queries/{id}": {
       "get": {
         "description": "Gets a specific Log Analytics Query defined within a Log Analytics QueryPack.",
         "operationId": "Queries_Get",
@@ -445,10 +445,12 @@
           "$ref": "#/definitions/AzureResourceProperties"
         }
       ],
-      "description": "A Log Analytics QueryPack-Query definition."
+      "description": "A Log Analytics QueryPack-Query definition.",
+      "x-ms-azure-resource": true
     },
     "LogAnalyticsQueryPackQueryProperties": {
       "description": "Properties that define an Log Analytics QueryPack-Query resource.",
+      "x-ms-azure-resource": true,
       "properties": {
         "id": {
           "type": "string",
@@ -672,6 +674,7 @@
       "in": "query",
       "required": false,
       "type": "integer",
+      "format": "int64",
       "description": "Maximum items returned in page.",
       "x-ms-parameter-location": "method"
     },
