@@ -488,6 +488,245 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataCollaboration/workspaces/{workspaceName}/constrainedResources": {
+      "get": {
+        "tags": [
+          "ConstrainedResource"
+        ],
+        "summary": "List constrained resources in a Workspace.",
+        "description": "List constrained resources in a Workspace",
+        "operationId": "ConstrainedResources_ListByWorkspace",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/workspaceName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "$skipToken",
+            "in": "query",
+            "description": "continuation token",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "Filters the results using OData syntax.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$orderby",
+            "in": "query",
+            "description": "Sorts the results using OData syntax.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ConstrainedResourceList"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Microsoft.DataCollaboration resource provider.",
+            "schema": {
+              "$ref": "#/definitions/DataCollaborationError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "ConstrainedResources_ListByWorkspace": {
+            "$ref": "./examples/ConstrainedResources_ListByWorkspace.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataCollaboration/workspaces/{workspaceName}/constrainedResources/{constrainedResourceName}": {
+      "get": {
+        "tags": [
+          "ConstrainedResource"
+        ],
+        "summary": "Get a constrained resource in a workspace.",
+        "description": "Get a ConstrainedResource in a Workspace",
+        "operationId": "ConstrainedResources_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/workspaceName"
+          },
+          {
+            "name": "constrainedResourceName",
+            "in": "path",
+            "description": "The name of the constrained resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ConstrainedResource"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Microsoft.DataCollaboration resource provider.",
+            "schema": {
+              "$ref": "#/definitions/DataCollaborationError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ConstrainedResources_Get": {
+            "$ref": "./examples/ConstrainedResources_Get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "ConstrainedResource"
+        ],
+        "summary": "Adds a new constrained resource or update an existing constrained resource to an existing workspace.",
+        "description": "Create or update a constrained resource in a Workspace ",
+        "operationId": "ConstrainedResources_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/workspaceName"
+          },
+          {
+            "name": "constrainedResourceName",
+            "in": "path",
+            "description": "The name of the constrained resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "constrainedResource",
+            "in": "body",
+            "description": "The new constrained resource information.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ConstrainedResource"
+            }
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ConstrainedResource"
+            }
+          },
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ConstrainedResource"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Microsoft.DataCollaboration resource provider.",
+            "schema": {
+              "$ref": "#/definitions/DataCollaborationError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "ConstrainedResources_CreateOrUpdate": {
+            "$ref": "./examples/ConstrainedResources_CreateOrUpdate.json"
+          },
+          "ConstrainedResources_SynapseSparkPool_CreateOrUpdate": {
+            "$ref": "./examples/ConstrainedResources_SynapseSparkPool_CreateOrUpdate.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "ConstrainedResource"
+        ],
+        "summary": "Delete a constrained resource in a workspace.",
+        "description": "Delete a ConstrainedResource in a Workspace",
+        "operationId": "ConstrainedResources_Delete",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/workspaceName"
+          },
+          {
+            "name": "constrainedResourceName",
+            "in": "path",
+            "description": "The name of the constrained resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/OperationResponse"
+            }
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "204": {
+            "description": "Success"
+          },
+          "default": {
+            "description": "An error response received from the Microsoft.DataCollaboration resource provider.",
+            "schema": {
+              "$ref": "#/definitions/DataCollaborationError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "ConstrainedResources_Delete": {
+            "$ref": "./examples/ConstrainedResources_Delete.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataCollaboration/workspaces/{workspaceName}/dataAssets": {
       "get": {
         "tags": [
@@ -4717,6 +4956,57 @@
         }
       }
     },
+    "ConstrainedResource": {
+      "description": "A constrained resource data transfer object",
+      "required": [
+        "kind"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyDto"
+        }
+      ],
+      "properties": {
+        "kind": {
+          "description": "Kind of constrained resource.",
+          "enum": [
+            "SynapseSparkPool"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "kind",
+            "modelAsString": true
+          }
+        },
+        "systemData": {
+          "$ref": "#/definitions/SystemData",
+          "description": "SystemData Info of constrained resource"
+        }
+      },
+      "discriminator": "kind"
+    },
+    "ConstrainedResourceList": {
+      "description": "List response for list ConstrainedResources",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "The Url of next result page.",
+          "type": "string"
+        },
+        "value": {
+          "description": "Collection of items of type DataTransferObjects.",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ConstrainedResource"
+          }
+        }
+      }
+    },
     "Constraint": {
       "description": "Constraint for entitlement, restricts the access granted by it.",
       "required": [
@@ -5074,8 +5364,13 @@
       "description": "Properties for dataAssetReference resource reference used to only allow access if the resource is used within the specified Azure dataAssetReference.",
       "type": "object",
       "properties": {
-        "dataAssetReferenceId": {
+        "dataAssetId": {
           "description": "The unique identifier of the referenced data asset",
+          "type": "string",
+          "readOnly": true
+        },
+        "dataAssetReferenceId": {
+          "description": "The unique identifier of the data asset reference",
           "type": "string",
           "readOnly": true
         },
@@ -5165,6 +5460,56 @@
           "type": "string"
         }
       }
+    },
+    "DataMovementPipelineSubstep": {
+      "description": "A substep representing copy data activity",
+      "required": [
+        "kind"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/PipelineSubstep"
+        }
+      ],
+      "properties": {
+        "dataMovementExecutionStage": {
+          "description": "The stage of data movement",
+          "enum": [
+            "Input",
+            "Output"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "dataMovementExecutionStage",
+            "modelAsString": true
+          }
+        },
+        "dataSetName": {
+          "description": "The name of the source dataset",
+          "type": "string",
+          "readOnly": true
+        },
+        "dataSetType": {
+          "description": "The type of the source dataset",
+          "type": "string",
+          "readOnly": true
+        },
+        "numberOfFiles": {
+          "format": "int64",
+          "description": "Number of files written to sink",
+          "type": "integer",
+          "readOnly": true
+        },
+        "totalBytes": {
+          "format": "int64",
+          "description": "Total size (in bytes) read from the source",
+          "type": "integer",
+          "readOnly": true
+        }
+      },
+      "x-ms-discriminator-value": "DataMovement"
     },
     "DataSet": {
       "description": "A set of data from external storage",
@@ -5621,6 +5966,10 @@
           "description": "enable regional mdm account",
           "type": "string"
         },
+        "fillGapWithZero": {
+          "description": "fill gap with zero",
+          "type": "string"
+        },
         "internalMetricName": {
           "description": "internal metric name",
           "type": "string"
@@ -5935,6 +6284,10 @@
           "$ref": "#/definitions/PipelineRunProperties",
           "description": "Properties on the pipeline",
           "x-ms-client-flatten": true
+        },
+        "systemData": {
+          "$ref": "#/definitions/SystemData",
+          "description": "SystemData Info of pipelineRun"
         }
       }
     },
@@ -6007,6 +6360,19 @@
           "description": "Name of the pipeline used to create this run",
           "type": "string",
           "readOnly": true
+        },
+        "pipelineRunMode": {
+          "description": "Indicate the pipeline execution mode. Production or Test.",
+          "enum": [
+            "Production",
+            "Test"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "pipelineRunMode",
+            "modelAsString": true
+          }
         },
         "pipelineRunStatus": {
           "description": "Pipeline run status",
@@ -6164,6 +6530,15 @@
             "modelAsString": true
           }
         },
+        "pipelineSubsteps": {
+          "description": "List of substeps",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PipelineSubstep"
+          },
+          "readOnly": true
+        },
         "startTime": {
           "format": "date-time",
           "description": "Start time of pipeline step run",
@@ -6171,6 +6546,70 @@
           "readOnly": true
         }
       }
+    },
+    "PipelineSubstep": {
+      "description": "Substep of a pipeline step run",
+      "required": [
+        "kind"
+      ],
+      "type": "object",
+      "properties": {
+        "durationMs": {
+          "format": "int32",
+          "description": "Substep run duration",
+          "type": "integer",
+          "readOnly": true
+        },
+        "endTime": {
+          "format": "date-time",
+          "description": "End time of substep",
+          "type": "string",
+          "readOnly": true
+        },
+        "errorMessage": {
+          "description": "Error message if any",
+          "type": "string",
+          "readOnly": true
+        },
+        "executionStatus": {
+          "description": "Execution status e.g. Success, Failed, InProgress",
+          "enum": [
+            "Succeeded",
+            "Failed",
+            "InProgress",
+            "Preparing",
+            "Queued",
+            "Unknown",
+            "Cancelled",
+            "Canceling"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "executionStatus",
+            "modelAsString": true
+          }
+        },
+        "kind": {
+          "description": "Kind of pipeline substep.",
+          "enum": [
+            "DataMovement",
+            "ScriptExecution"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "kind",
+            "modelAsString": true
+          }
+        },
+        "startTime": {
+          "format": "date-time",
+          "description": "Start time of substep",
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "discriminator": "kind"
     },
     "Policy": {
       "description": "Policy for entitlement",
@@ -6526,6 +6965,20 @@
         }
       }
     },
+    "ScriptExecutionPipelineSubstep": {
+      "description": "A substep representing scrip execution",
+      "required": [
+        "kind"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/PipelineSubstep"
+        }
+      ],
+      "properties": {},
+      "x-ms-discriminator-value": "ScriptExecution"
+    },
     "ScriptList": {
       "description": "List response for get Scripts",
       "required": [
@@ -6694,6 +7147,11 @@
           "type": "integer",
           "readOnly": true
         },
+        "scriptId": {
+          "description": "The unique identifier of the referenced script",
+          "type": "string",
+          "readOnly": true
+        },
         "scriptKind": {
           "description": "Kind of the referenced script.",
           "enum": [
@@ -6707,7 +7165,7 @@
           }
         },
         "scriptReferenceId": {
-          "description": "The unique identifier of the referenced scriptReference",
+          "description": "The unique identifier of the scriptReference",
           "type": "string",
           "readOnly": true
         },
@@ -6823,7 +7281,6 @@
     "SynapseSparkPipelineStepProperties": {
       "description": "A Synapse Spark PipelineStep data transfer object.",
       "required": [
-        "clusterSize",
         "scriptId",
         "scriptRevision",
         "scriptSourceBindings",
@@ -6831,11 +7288,6 @@
       ],
       "type": "object",
       "properties": {
-        "clusterSize": {
-          "format": "int32",
-          "description": "Defines the cluster size for running a SynapseSpark pipeline step",
-          "type": "integer"
-        },
         "dependencies": {
           "description": "List of other steps names, in the same pipeline, which this step is depended on\r\nand should run only when they finish.",
           "uniqueItems": false,
@@ -6843,6 +7295,28 @@
           "items": {
             "type": "string"
           }
+        },
+        "executorNodeSize": {
+          "description": "The node size to use per executor.",
+          "enum": [
+            "None",
+            "Small",
+            "Medium",
+            "Large",
+            "XLarge",
+            "XXLarge",
+            "XXXLarge"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "executorNodeSize",
+            "modelAsString": true
+          }
+        },
+        "executorsCount": {
+          "format": "int32",
+          "description": "Number of executors to execute this step.",
+          "type": "integer"
         },
         "scriptId": {
           "description": "The script Id that the pipeline step should execute",
@@ -6868,6 +7342,153 @@
           "items": {
             "$ref": "#/definitions/ScriptDataAssetBinding"
           }
+        },
+        "synapseSparkPoolId": {
+          "description": "The Synapse Spark pool that will execute this step",
+          "type": "string"
+        }
+      }
+    },
+    "SynapseSparkPool": {
+      "description": "Synapse Spark Pool constrained resource",
+      "required": [
+        "properties",
+        "kind"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ConstrainedResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SynapseSparkPoolProperties",
+          "description": "Properties of Synapse Spark pool",
+          "x-ms-client-flatten": true
+        }
+      },
+      "x-ms-discriminator-value": "SynapseSparkPool"
+    },
+    "SynapseSparkPoolAutoPauseProperties": {
+      "description": "Spark pool auto-pausing properties",
+      "type": "object",
+      "properties": {
+        "delayInMinutes": {
+          "format": "int32",
+          "description": "Gets or sets number of minutes of idle time before the Big Data\r\npool is automatically paused.",
+          "type": "integer"
+        },
+        "enabled": {
+          "description": "Gets or sets whether auto-pausing is enabled for the Big Data pool.",
+          "type": "boolean"
+        }
+      }
+    },
+    "SynapseSparkPoolAutoScaleProperties": {
+      "description": "Spark pool auto-scaling properties",
+      "type": "object",
+      "properties": {
+        "enabled": {
+          "description": "Gets or sets whether automatic scaling is enabled for the Big Data\r\npool.",
+          "type": "boolean"
+        },
+        "maxNodeCount": {
+          "format": "int32",
+          "description": "Gets or sets the maximum number of nodes the Big Data pool can\r\nsupport.",
+          "type": "integer"
+        },
+        "minNodeCount": {
+          "format": "int32",
+          "description": "Gets or sets the minimum number of nodes the Big Data pool can\r\nsupport.",
+          "type": "integer"
+        }
+      }
+    },
+    "SynapseSparkPoolProperties": {
+      "description": "A Synapse Spark Pool data transfer object.",
+      "type": "object",
+      "properties": {
+        "autoPause": {
+          "$ref": "#/definitions/SynapseSparkPoolAutoPauseProperties",
+          "description": "Gets or sets auto-pausing properties"
+        },
+        "autoScale": {
+          "$ref": "#/definitions/SynapseSparkPoolAutoScaleProperties",
+          "description": "Gets or sets auto-scaling properties"
+        },
+        "constrainedResourceId": {
+          "description": "Unique id for identifying a constrained resource",
+          "type": "string",
+          "readOnly": true
+        },
+        "family": {
+          "description": "Family of constrained resource.",
+          "enum": [
+            "Compute",
+            "Storage"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "family",
+            "modelAsString": true
+          }
+        },
+        "nodeCount": {
+          "format": "int32",
+          "description": "Gets or sets the number of nodes in the Big Data pool.",
+          "type": "integer"
+        },
+        "nodeSize": {
+          "description": "Gets or sets the level of compute power that each node in the Synapse Spark pool has.",
+          "enum": [
+            "None",
+            "Small",
+            "Medium",
+            "Large",
+            "XLarge",
+            "XXLarge",
+            "XXXLarge"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "nodeSize",
+            "modelAsString": true
+          }
+        },
+        "nodeSizeFamily": {
+          "description": "Gets or sets the kind of nodes that the Big Data pool provides.",
+          "enum": [
+            "None",
+            "MemoryOptimized"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "nodeSizeFamily",
+            "modelAsString": true
+          }
+        },
+        "provisioningState": {
+          "description": "Provisioning state of the constrained resource.",
+          "enum": [
+            "Succeeded",
+            "Creating",
+            "Updating",
+            "Deleting",
+            "Moving",
+            "Failed"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "provisioningState",
+            "modelAsString": true
+          }
+        },
+        "sparkVersion": {
+          "description": "Gets or sets the Apache Spark version.",
+          "type": "string"
         }
       }
     },
