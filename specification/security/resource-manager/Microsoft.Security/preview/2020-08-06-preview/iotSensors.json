@@ -287,6 +287,42 @@
           }
         }
       }
+    },
+    "/{scope}/providers/Microsoft.Security/iotSensors/{iotSensorName}/triggerTiPackageUpdate": {
+      "post": {
+        "x-ms-examples": {
+          "Trigger threat intelligence package update": {
+            "$ref": "./examples/IotSensors/TriggerTiPackageUpdate.json"
+          }
+        },
+        "tags": [
+          "IoT Sensors"
+        ],
+        "operationId": "IotSensors_TriggerTiPackageUpdate",
+        "description": "Trigger threat intelligence package update",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/IotSensorScope"
+          },
+          {
+            "$ref": "#/parameters/IotSensorName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Triggered threat intelligence package update"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
