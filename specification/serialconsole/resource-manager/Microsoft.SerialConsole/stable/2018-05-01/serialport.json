@@ -37,7 +37,7 @@
        "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{parentResourceType}/{parentResource}/providers/Microsoft.SerialConsole/serialPorts": {
            "get": {
                "tags": [
-                   "SerialPort"
+                   "SerialPorts"
                ],
                "operationId": "SerialPorts_List",
                "description": "Lists all of the configured serial ports for a parent resource ",
@@ -85,9 +85,9 @@
        "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{parentResourceType}/{parentResource}/providers/Microsoft.SerialConsole/serialPorts/{serialPort}": {
            "get": {
                "tags": [
-                   "SerialPort"
+                   "SerialPorts"
                ],
-               "operationId": "GetSerialPort",
+               "operationId": "SerialPorts_Get",
                "description": "Gets the configured settings for a serial port",
                "parameters": [
                    {
@@ -138,9 +138,9 @@
            },
            "put": {
                "tags": [
-                   "SerialPort"
+                   "SerialPorts"
                ],
-               "operationId": "CreateSerialPort",
+               "operationId": "SerialPorts_Create",
                "description": "Creates or updates a serial port",
                "parameters": [
                    {
@@ -200,9 +200,9 @@
            },
            "delete": {
                "tags": [
-                   "SerialPort"
+                   "SerialPorts"
                ],
-               "operationId": "DeleteSerialPort",
+               "operationId": "SerialPorts_Delete",
                "description": "Deletes a serial port",
                "parameters": [
                    {
@@ -255,10 +255,10 @@
        "/subscriptions/{subscriptionId}/providers/Microsoft.SerialConsole/serialPorts": {
             "get": {
                 "tags": [
-                    "SerialPort"
+                    "SerialPorts"
                 ],
                 "description": "Handles requests to list all SerialPort resources in a subscription.",
-                "operationId": "SerialPort_ListBySubscription",
+                "operationId": "SerialPorts_ListBySubscriptions",
                 "parameters": [
                     {
                         "$ref": "#/parameters/SubscriptionIdParameter"
@@ -288,9 +288,9 @@
        "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{parentResourceType}/{parentResource}/providers/Microsoft.SerialConsole/serialPorts/{serialPort}/connect": {
            "post": {
                "tags": [
-                   "SerialPort"
+                   "SerialPorts"
                ],
-               "operationId": "SerialPortConnect",
+               "operationId": "SerialPorts_Connect",
                "description": "Connect to serial port of the target resource",
                "parameters": [
                    {
@@ -437,7 +437,8 @@
            "x-ms-external": true,
            "properties": {
                "error": {
-                   "$ref": "#/definitions/CloudErrorBody"
+                   "$ref": "#/definitions/CloudErrorBody",
+                   "description": "Cloud error body."
                }
            }
        },
