@@ -522,6 +522,12 @@
             "in": "query",
             "description": "The number of lines to show from the tail of the container instance log. If not provided, all available logs are shown up to 4mb.",
             "type": "integer"
+          },
+          {
+            "name": "timestamps",
+            "in": "query",
+            "description": "The flag indicating if adding timestamps should be enabled.",
+            "type": "boolean"
           }
         ],
         "responses": {
@@ -578,6 +584,53 @@
             "schema": {
               "$ref": "#/definitions/ContainerExecRequest"
             }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ContainerExecResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroup}/providers/Microsoft.ContainerInstance/containerGroups/{containerGroupName}/containers/{containerName}/attach": {
+      "post": {
+        "operationId": "Container_Attach",
+        "x-ms-examples": {
+          "ContainerAttach": {
+            "$ref": "./examples/ContainerAttach.json"
+          }
+        },
+        "summary": "Attach to a specific container instance.",
+        "description": "Attach to a specific container instance in a specified resource group and container group.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ContainerGroupNameParameter"
+          },
+          {
+            "name": "containerName",
+            "in": "path",
+            "description": "The name of the container instance.",
+            "required": true,
+            "type": "string"
           }
         ],
         "responses": {
@@ -1089,6 +1142,10 @@
             "name": "Scheme",
             "modelAsString": true
           }
+        },
+        "httpHeaders": {
+          "description": "The HTTP headers.",
+          "$ref": "#/definitions/HttpHeaders"
         }
       },
       "required": [
@@ -1703,6 +1760,20 @@
         "password": {
           "type": "string",
           "description": "The password to start the exec command."
+        }
+      }
+    },
+    "HttpHeaders": {
+      "description": "The HTTP headers.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The header name."
+        },
+        "value": {
+          "type": "string",
+          "description": "The header value."
         }
       }
     },
