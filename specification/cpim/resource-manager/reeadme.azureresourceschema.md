@@ -7,6 +7,7 @@ These settings apply only when `--azureresourceschema` is specified on the comma
 ``` yaml $(azureresourceschema) && $(multiapi)
 batch:
   - tag: schema-azureactivedirectory-2020-05-01-preview
+  - tag: schema-azureactivedirectory-2019-01-01-preview
 
 ```
 
@@ -20,5 +21,16 @@ output-folder: $(azureresourceschema-folder)/schemas
 # all the input files in this apiVersion
 input-file:
   - Microsoft.AzureActiveDirectory/preview/2020-05-01-preview/cpim.json
+
+```
+
+### Tag: schema-azureactivedirectory-2019-01-01-preview and azureresourceschema
+
+``` yaml $(tag) == 'schema-azureactivedirectory-2019-01-01-preview' && $(azureresourceschema)
+output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
+  - Microsoft.AzureActiveDirectory/preview/2019-01-01-preview/cpimTenant.json
 
 ```
