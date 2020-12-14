@@ -55,9 +55,9 @@ These settings apply only when `--tag=package-2019-02-28-preview` is specified o
 input-file:
 - Microsoft.MixedReality/preview/2019-02-28-preview/mr-sts.json
 ```
-### Tag: package-2021-03-01-ga
+### Tag: package-2021-03-01-preview
 
-These settings apply only when `--tag=package-2021-03-01-ga` is specified on the command line.
+These settings apply only when `--tag=package-2021-01-01-preview` is specified on the command line.
 
 ``` yaml $(tag) == 'package-2021-01-01-preview'
 input-file:
