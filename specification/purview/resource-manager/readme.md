@@ -81,19 +81,19 @@ python:
   azure-arm: true
   license-header: MICROSOFT_MIT_NO_VERSION
   payload-flattening-threshold: 2
-  namespace: azure.mgmt.Purview
-  package-name: azure-mgmt-Purview
+  namespace: azure.mgmt.purview
+  package-name: azure-mgmt-purview
   clear-output-folder: true
 ```
 ``` yaml $(python) && $(python-mode) == 'update'
 python:
   no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-Purview/azure/mgmt/Purview
+  output-folder: $(python-sdks-folder)/purview/azure-mgmt-purview/azure/mgmt/purview
 ```
 ``` yaml $(python) && $(python-mode) == 'create'
 python:
   basic-setup-py: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-Purview
+  output-folder: $(python-sdks-folder)/purview/azure-mgmt-purview
 ```
 
 
@@ -104,7 +104,7 @@ These settings apply only when `--go` is specified on the command line.
 ``` yaml $(go)
 go:
   license-header: MICROSOFT_APACHE_NO_VERSION
-  namespace: Purview
+  namespace: purview
   clear-output-folder: true
 ```
 ## Suppression
@@ -132,5 +132,5 @@ These settings apply only when `--tag=package-2020-12-01-preview --go` is specif
 Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
 ``` yaml $(tag) == 'package-2020-12-01-preview' && $(go)
-output-folder: $(go-sdk-folder)/services/Purview/mgmt/2020-12-01-preview
+output-folder: $(go-sdk-folder)/services/preview/purview/mgmt/2020-12-01-preview/$(namespace)
 ```
