@@ -7567,6 +7567,19 @@
       ],
       "description": "Describes automatic OS upgrade properties on the image."
     },
+    "VirtualMachineImageFeature": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the feature."
+        },
+        "value": {
+          "type": "string",
+          "description": "The corresponding value for the feature."
+        }
+      },
+      "description": "Specifies additional capabilities supported by the image"
+    },
     "VirtualMachineImageProperties": {
       "properties": {
         "plan": {
@@ -7590,6 +7603,12 @@
         "disallowed": {
           "$ref": "#/definitions/DisallowedConfiguration",
           "description": "Specifies disallowed configuration for the VirtualMachine created from the image"
+        },
+        "features": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VirtualMachineImageFeature"
+          }
         }
       },
       "description": "Describes the properties of a Virtual Machine Image."
