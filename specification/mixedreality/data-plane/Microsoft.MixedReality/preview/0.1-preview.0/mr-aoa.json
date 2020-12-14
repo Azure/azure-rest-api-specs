@@ -1,0 +1,345 @@
+{
+    "swagger": "2.0",
+    "info": {
+      "title": "AOA front end APIs",
+      "description": "Azure Object Anchors front end APIs.",
+      "version": "v0.1-preview.0"
+    },
+    "paths": {
+      "/accounts/{accountId}/jobs/{jobId}": {
+        "put": {
+          "tags": [
+            "OUFE"
+          ],
+          "summary": "Creates a job request.",
+          "operationId": "HandleJobRequest",
+          "consumes": [
+            "application/json"
+          ],
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "in": "path",
+              "name": "accountId",
+              "description": "Identifier for the Azure Object Anchors account.",
+              "required": true,
+              "type": "string",
+              "format": "uuid"
+            },
+            {
+              "in": "path",
+              "name": "jobId",
+              "description": "Identifier for the Azure Object Anchors ingestion job.",
+              "required": true,
+              "type": "string",
+              "format": "uuid"
+            },
+            {
+              "in": "header",
+              "name": "X-MRC-CV",
+              "description": "The client request correlation vector, which should be set to a new value for each request.",
+              "type": "string"
+            },
+            {
+              "in": "query",
+              "name": "api-version",
+              "description": "The API version.",
+              "type": "string"
+            },
+            {
+              "in": "body",
+              "name": "body",
+              "description": "The Azure Object Anchors ingestion request.",
+              "schema": {
+                "$ref": "#/definitions/IngestionRequest"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Success",
+              "schema": {
+                "$ref": "#/definitions/IngestionResponse"
+              },
+              "headers": {
+                "MS-CV": {
+                  "description": "The service response correlation vector, which will be a new value for every response.",
+                  "type": "string",
+                  "format": ""
+                }
+              }
+            },
+            "500": {
+              "description": "Server Error"
+            }
+          }
+        },
+        "get": {
+          "tags": [
+            "OUFE"
+          ],
+          "summary": "Gets the status of a job request.",
+          "operationId": "HandleJobRequest",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "in": "path",
+              "name": "accountId",
+              "description": "Identifier for the Azure Object Anchors account.",
+              "required": true,
+              "type": "string",
+              "format": "uuid"
+            },
+            {
+              "in": "path",
+              "name": "jobId",
+              "description": "Identifier for the Azure Object Anchors ingestion job.",
+              "required": true,
+              "type": "string",
+              "format": "uuid"
+            },
+            {
+              "in": "header",
+              "name": "X-MRC-CV",
+              "description": "The client request correlation vector, which should be set to a new value for each request.",
+              "type": "string"
+            },
+            {
+              "in": "query",
+              "name": "api-version",
+              "description": "The API version.",
+              "type": "string"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Success",
+              "schema": {
+                "$ref": "#/definitions/IngestionResponse"
+              },
+              "headers": {
+                "MS-CV": {
+                  "description": "The service response correlation vector, which will be a new value for every response.",
+                  "type": "string",
+                  "format": ""
+                }
+              }
+            },
+            "400": {
+              "description": "Bad Request",
+              "schema": {
+                "$ref": "#/definitions/ProblemDetails"
+              }
+            },
+            "500": {
+              "description": "Server Error"
+            }
+          }
+        }
+      },
+      "/accounts/{accountId}/UploadEndpoint": {
+        "post": {
+          "tags": [
+            "OUFE"
+          ],
+          "summary": "Gets an upload uri.",
+          "operationId": "RequestUploadUri",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "in": "path",
+              "name": "accountId",
+              "description": "Identifier for the Azure Object Anchors account.",
+              "required": true,
+              "type": "string",
+              "format": "uuid"
+            },
+            {
+              "in": "header",
+              "name": "X-MRC-CV",
+              "description": "The client request correlation vector, which should be set to a new value for each request.",
+              "type": "string"
+            },
+            {
+              "in": "query",
+              "name": "api-version",
+              "description": "The API version.",
+              "type": "string"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Success",
+              "schema": {
+                "format": "uri",
+                "type": "string"
+              },
+              "headers": {
+                "MS-CV": {
+                  "description": "The service response correlation vector, which will be a new value for every response.",
+                  "type": "string",
+                  "format": ""
+                }
+              }
+            },
+            "500": {
+              "description": "Server Error"
+            }
+          }
+        }
+      }
+    },
+    "definitions": {
+      "Vector3": {
+        "type": "object"
+      },
+      "Quaternion": {
+        "type": "object",
+        "properties": {
+          "isIdentity": {
+            "type": "boolean",
+            "readOnly": true
+          }
+        }
+      },
+      "Pose": {
+        "type": "object",
+        "properties": {
+          "rotation": {
+            "$ref": "#/definitions/Quaternion"
+          },
+          "translation": {
+            "$ref": "#/definitions/Vector3"
+          }
+        }
+      },
+      "Vector4": {
+        "type": "object"
+      },
+      "IngestionConfiguration": {
+        "type": "object",
+        "properties": {
+          "dimensions": {
+            "$ref": "#/definitions/Vector3"
+          },
+          "boundingBoxCenter": {
+            "$ref": "#/definitions/Vector3"
+          },
+          "gravity": {
+            "$ref": "#/definitions/Vector3"
+          },
+          "keyFrameIndexes": {
+            "type": "array",
+            "items": {
+              "format": "int32",
+              "type": "integer"
+            }
+          },
+          "gtTrajectory": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/Pose"
+            }
+          },
+          "principalAxis": {
+            "$ref": "#/definitions/Quaternion"
+          },
+          "scale": {
+            "format": "float",
+            "type": "number"
+          },
+          "supportingPlane": {
+            "$ref": "#/definitions/Vector4"
+          },
+          "testTrajectory": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/Pose"
+            }
+          }
+        }
+      },
+      "IngestionRequest": {
+        "type": "object",
+        "properties": {
+          "assetFileType": {
+            "type": "string"
+          },
+          "inputAssetUri": {
+            "format": "uri",
+            "type": "string"
+          },
+          "accountId": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "jobId": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "ingestionConfiguration": {
+            "$ref": "#/definitions/IngestionConfiguration"
+          }
+        }
+      },
+      "JobStatus": {
+        "format": "int32",
+        "enum": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          7
+        ],
+        "type": "integer"
+      },
+      "IngestionResponse": {
+        "type": "object",
+        "properties": {
+          "clientErrorDetails": {
+            "type": "string"
+          },
+          "jobId": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "outputModelUri": {
+            "format": "uri",
+            "type": "string"
+          },
+          "jobStatus": {
+            "$ref": "#/definitions/JobStatus"
+          }
+        }
+      },
+      "ProblemDetails": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "status": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "detail": {
+            "type": "string"
+          },
+          "instance": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": { }
+      }
+    }
+  }

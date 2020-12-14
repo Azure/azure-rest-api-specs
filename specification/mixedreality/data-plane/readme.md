@@ -40,6 +40,14 @@ openapi-type: data-plane
 tag: package-2019-02-28-preview
 ```
 
+These are the global settings for Azure Mixed Reality AOA.
+
+```yaml
+title: AOA front end APIs
+openapi-type: data-plane
+tag: package-0.1-preview.0
+```
+
 ### Tag: package-2019-02-28-preview
 
 These settings apply only when `--tag=package-2019-02-28-preview` is specified on the command line.
@@ -47,4 +55,13 @@ These settings apply only when `--tag=package-2019-02-28-preview` is specified o
 ``` yaml $(tag) == 'package-2019-02-28-preview'
 input-file:
 - Microsoft.MixedReality/preview/2019-02-28-preview/mr-sts.json
+```
+
+### Tag: package-0.1-preview.0
+
+These settings apply only when `--tag=package-0.1-preview.0` is specified on the command line.
+
+``` yaml $(tag) == 'package-0.1-preview.0'
+input-file:
+- Microsoft.MixedReality/preview/0.1-preview.0/mr-aoa.json
 ```
