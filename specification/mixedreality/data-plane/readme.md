@@ -29,12 +29,6 @@ directive:
     where: $.definitions.StsTokenResponseMessage.properties.AccessToken
     reason: The API is already public and changing the casing will involve a breaking change.
 ```
-These are the global settings for Azure Mixed Reality ARR.
-
-```yaml
-title: MixedRealityRemoteRendering
-openapi-type: data-plane
-tag: package-2021-01-01-preview
 ### Basic Information
 
 These are the global settings for Azure Mixed Reality STS.
@@ -43,6 +37,14 @@ These are the global settings for Azure Mixed Reality STS.
 title: MixedRealityStsClient
 openapi-type: data-plane
 tag: package-2019-02-28-preview
+```
+
+These are the global settings for Azure Mixed Reality ARR.
+
+```yaml
+title: MixedRealityRemoteRendering
+openapi-type: data-plane
+tag: package-2021-01-01-preview
 ```
 
 ### Tag: package-2019-02-28-preview
