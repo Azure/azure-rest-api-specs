@@ -12,6 +12,18 @@
         "name": "testworkspace",
         "type": "Microsoft.MachineLearningServices/workspaces",
         "location": "eastus2euap",
+        "identity": {
+          "principalId": "00000000-1111-2222-3333-444444444444",
+          "tenantId": "00000000-1111-2222-3333-444444444444",
+          "type": "SystemAssigned,UserAssigned",
+          "userAssignedIdentities": {
+            "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/workspace-1234/providers/Microsoft.ManagedIdentity/userAssignedIdentities/testuai": {
+              "principalId": "00000000-1111-2222-3333-444444444444",
+              "clientId": "00000000-1111-2222-3333-444444444444",
+              "tenantId": "00000000-1111-2222-3333-444444444444"
+            }
+          }
+        },
         "sku": {
           "name": "Enterprise",
           "tier": "Enterprise"
@@ -27,6 +39,9 @@
           "description": "test description",
           "encryption": {
             "status": "Enabled",
+            "identity": {
+              "userAssignedIdentity": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/workspace-1234/providers/Microsoft.ManagedIdentity/userAssignedIdentities/testuai"
+            },
             "keyVaultProperties": {
               "keyVaultArmId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/workspace-1234/providers/Microsoft.KeyVault/vaults/testkv",
               "keyIdentifier": "https://testkv.vault.azure.net/keys/testkey/aabbccddee112233445566778899aabb",
