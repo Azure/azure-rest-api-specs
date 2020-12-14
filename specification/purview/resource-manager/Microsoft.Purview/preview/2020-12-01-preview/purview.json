@@ -394,7 +394,7 @@
       "post": {
         "tags": ["DefaultAccount"],
         "summary": "Sets the default account for the scope.",
-        "description": "Sets the default account for the scope.",
+        "description": "Set the default account for the scope.",
         "operationId": "DefaultAccounts_Set",
         "parameters": [
           {
@@ -435,7 +435,7 @@
       "post": {
         "tags": ["DefaultAccount"],
         "summary": "Removes the default account from the scope.",
-        "description": "Removes the default account from the scope.",
+        "description": "Remove the default account from the scope.",
         "operationId": "DefaultAccounts_Remove",
         "parameters": [
           {
@@ -1044,6 +1044,7 @@
       }
     },
     "CloudConnectors": {
+      "description": "Properties for configuring third party cloud connections.",
       "type": "object",
       "properties": {
         "awsExternalId": {
@@ -1235,7 +1236,8 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/AccountProperties",
-          "description": "The account properties."
+          "description": "The account properties.",
+          "x-ms-client-flatten": true
         },
         "tags": {
           "description": "Tags on the azure resource.",
@@ -1639,26 +1641,17 @@
     "PrivateLinkResource": {
       "description": "A privately linkable resource.",
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyResource"
+        }
+      ],
       "properties": {
-        "id": {
-          "description": "The private link resource identifier.",
-          "type": "string",
-          "readOnly": true
-        },
-        "name": {
-          "description": "The private link resource name.",
-          "type": "string",
-          "readOnly": true
-        },
         "properties": {
           "$ref": "#/definitions/PrivateLinkResourceProperties",
           "description": "The private link resource properties.",
-          "readOnly": true
-        },
-        "type": {
-          "description": "The private link resource type.",
-          "type": "string",
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-client-flatten": true
         }
       }
     },
@@ -1804,6 +1797,13 @@
       "type": "string",
       "x-ms-parameter-location": "method"
     },
+    "api-version": {
+      "name": "api-version",
+      "in": "query",
+      "description": "The api version to use.",
+      "required": true,
+      "type": "string"
+    },
     "accountName": {
       "name": "accountName",
       "in": "path",
@@ -1811,13 +1811,6 @@
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"
-    },
-    "api-version": {
-      "name": "api-version",
-      "in": "query",
-      "description": "The api version to use.",
-      "required": true,
-      "type": "string"
     }
   },
   "securityDefinitions": {
