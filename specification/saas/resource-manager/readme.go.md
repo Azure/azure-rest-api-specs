@@ -15,5 +15,5 @@ Please also specify `--go-sdks-folder=<path to the root directory of your azure-
 
 ```yaml $(tag) == 'package-2018-03-01-beta' && $(go)
 namespace: saas
-output-folder: $(go-sdks-folder)/services/preview/$(namespace)/mgmt/2018-03-01-beta/$(namespace)
+output-folder: $(go--folder)/services/preview/$(namespace)/mgmt/2018-03-01-beta/$(namespcae)
 ```
