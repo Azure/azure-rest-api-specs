@@ -5880,7 +5880,8 @@
             "OfficeATP",
             "AmazonWebServicesCloudTrail",
             "AzureAdvancedThreatProtection",
-            "MicrosoftDefenderAdvancedThreatProtection"
+            "MicrosoftDefenderAdvancedThreatProtection",
+            "Dynamics365"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -5916,6 +5917,9 @@
               },
               {
                 "value": "MicrosoftDefenderAdvancedThreatProtection"
+              },
+              {
+                "value": "Dynamics365"
               }
             ]
           }
@@ -6028,6 +6032,53 @@
           },
           "readOnly": true,
           "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "Dynamics365DataConnector": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataConnector"
+        }
+      ],
+      "description": "Represents Dynamics365 data connector.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/Dynamics365DataConnectorProperties",
+          "description": "Dynamics365 data connector properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object",
+      "x-ms-discriminator-value": "Dynamics365"
+    },
+    "Dynamics365DataConnectorDataTypes": {
+      "description": "The available data types for Dynamics365 data connector.",
+      "properties": {
+        "dynamics365CDSActivities": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/DataConnectorDataTypeCommon"
+            }
+          ],
+          "description": "CDS data type connection.",
+          "type": "object"
+        }
+      },
+      "type": "object"
+    },
+    "Dynamics365DataConnectorProperties": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataConnectorTenantId"
+        }
+      ],
+      "description": "Dynamics365 data connector properties.",
+      "properties": {
+        "dataTypes": {
+          "$ref": "#/definitions/Dynamics365DataConnectorDataTypes",
+          "description": "The available data types for the connector."
         }
       },
       "type": "object"
