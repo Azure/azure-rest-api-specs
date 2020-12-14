@@ -11,7 +11,10 @@
         "tier": "Basic"
       },
       "identity": {
-        "type": "SystemAssigned,UserAssigned"
+        "type": "SystemAssigned,UserAssigned",
+        "UserAssignedIdentities": {
+          "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/workspace-1234/providers/Microsoft.ManagedIdentity/userAssignedIdentities/testuai": {}
+        }
       },
       "properties": {
         "friendlyName": "HelloName",
@@ -56,7 +59,14 @@
         "identity": {
           "principalId": "00000000-1111-2222-3333-444444444444",
           "tenantId": "00000000-1111-2222-3333-444444444444",
-          "type": "SystemAssigned,UserAssigned"
+          "type": "SystemAssigned,UserAssigned",
+          "userAssignedIdentities": {
+            "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/workspace-1234/providers/Microsoft.ManagedIdentity/userAssignedIdentities/testuai": {
+              "principalId": "00000000-1111-2222-3333-444444444444",
+              "clientId": "00000000-1111-2222-3333-444444444444",
+              "tenantId": "00000000-1111-2222-3333-444444444444"
+            }
+          }
         },
         "sku": {
           "name": "Basic",
@@ -107,7 +117,14 @@
         "identity": {
           "principalId": "00000000-1111-2222-3333-444444444444",
           "tenantId": "00000000-1111-2222-3333-444444444444",
-          "type": "SystemAssigned,UserAssigned"
+          "type": "SystemAssigned,UserAssigned",
+          "userAssignedIdentities": {
+            "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/workspace-1234/providers/Microsoft.ManagedIdentity/userAssignedIdentities/testuai": {
+              "principalId": "00000000-1111-2222-3333-444444444444",
+              "clientId": "00000000-1111-2222-3333-444444444444",
+              "tenantId": "00000000-1111-2222-3333-444444444444"
+            }
+          }
         },
         "sku": {
           "name": "Basic",
