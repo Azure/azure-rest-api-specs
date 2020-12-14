@@ -1587,6 +1587,12 @@
               "$ref": "#/definitions/DeploymentResource"
             }
           },
+          "202": {
+            "description": "Accepted. The response describes the create or update Deployment request is accepted.",
+            "schema": {
+              "$ref": "#/definitions/DeploymentResource"
+            }
+          },
           "200": {
             "description": "Success. The response describes the updated Deployment.",
             "schema": {
@@ -2740,7 +2746,8 @@
             "Succeeded",
             "Failed",
             "Creating",
-            "Updating"
+            "Updating",
+            "Deleting"
           ],
           "type": "string",
           "readOnly": true,
@@ -3156,6 +3163,10 @@
           "$ref": "#/definitions/DeploymentResourceProperties",
           "description": "Properties of the Deployment resource",
           "x-ms-client-flatten": false
+        },
+        "sku": {
+          "$ref": "#/definitions/Sku",
+          "description": "Sku of the Deployment resource"
         }
       }
     },
@@ -3182,7 +3193,8 @@
             "Creating",
             "Updating",
             "Succeeded",
-            "Failed"
+            "Failed",
+            "Deleting"
           ],
           "type": "string",
           "readOnly": true,
@@ -3579,6 +3591,10 @@
         "displayName": {
           "description": "Localized friendly display name of the dimension",
           "type": "string"
+        },
+        "toBeExportedForShoebox": {
+          "description": "Whether this dimension should be included for the Shoebox export scenario",
+          "type": "boolean"
         }
       }
     },

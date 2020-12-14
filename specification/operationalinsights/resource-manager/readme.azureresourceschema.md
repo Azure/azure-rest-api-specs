@@ -10,6 +10,7 @@ batch:
   - tag: schema-operationalinsights-2020-10-01
   - tag: schema-operationalinsights-2020-03-01-preview
   - tag: schema-operationalinsights-2019-08-01-preview
+  - tag: schema-operationalinsights-2019-09-01-preview
   - tag: schema-operationalinsights-2015-11-01-preview
   - tag: schema-operationalinsights-2015-03-20
 
@@ -99,6 +100,18 @@ input-file:
   - Microsoft.OperationalInsights/preview/2019-08-01-preview/Clusters.json
   - Microsoft.OperationalInsights/preview/2019-08-01-preview/LinkedServices.json
   - Microsoft.OperationalInsights/preview/2019-08-01-preview/OperationalInsights.json
+
+```
+
+### Tag: schema-operationalinsights-2019-09-01-preview and azureresourceschema
+
+``` yaml $(tag) == 'schema-operationalinsights-2019-09-01-preview' && $(azureresourceschema)
+output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
+  - Microsoft.OperationalInsights/preview/2019-09-01-preview/QueryPacks_API.json
+  - Microsoft.OperationalInsights/preview/2019-09-01-preview/QueryPackQueries_API.json
 
 ```
 
