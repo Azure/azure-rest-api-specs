@@ -143,4 +143,7 @@ directive:
     where: '$.definitions.EventHub.allOf["1"].properties.connectionStringSecondaryKey'
     from: digitaltwins.json
     reason: Secrets are obfuscated on read.
+  - suppress: R4009
+    from: digitaltwins.json
+    reason: Warning raised to error while PR was being reviewed. Will implement in next version.
 ```
