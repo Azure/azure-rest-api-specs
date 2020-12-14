@@ -70,7 +70,7 @@
       },
       "put": {
         "description": "Creates or updates a workspace resource.",
-        "operationId": "Workspaces_CreateAndUpdate",
+        "operationId": "Workspaces_CreateOrUpdate",
         "x-ms-examples": {
           "QuantumWorkspacesGet": {
             "$ref": "./examples/quantumWorkspacesPut.json"
@@ -200,10 +200,7 @@
             }
           },
           "204": {
-            "description": "No content.",
-            "schema": {
-              "$ref": "#/definitions/QuantumWorkspace"
-            }
+            "description": "No content."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -329,6 +326,35 @@
           "nextLinkName": "nextLink"
         }
       }
+    },
+    "/providers/Microsoft.Quantum/operations": {
+      "get": {
+        "description": "Returns list of operations.",
+        "operationId": "Operations_List",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Operation details.",
+            "schema": {
+              "$ref": "#/definitions/operationsList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "deprecated": false,
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
     }
   },
   "definitions": {
@@ -402,35 +428,31 @@
       "properties": {
         "id": {
           "type": "string",
-          "description": "Gets or sets the id for the resource.",
+          "description": "The unique id for this workspace.",
           "readOnly": true
         },
         "name": {
           "type": "string",
-          "description": "Gets or sets the name of the resource definition.",
+          "description": "The name of this workspace.",
           "readOnly": true
         },
         "type": {
           "type": "string",
-          "description": "Gets or sets the type of the resource definition.",
+          "description": "The type of this workspace.",
           "readOnly": true
         },
         "location": {
           "type": "string",
-          "description": "Gets or sets the resource location."
+          "description": "The location (region) of this workspace."
         },
         "properties": {
           "x-ms-client-flatten": true,
           "description": "Gets or sets the properties. Define quantum space's specific properties.",
-          "allOf": [
-            {
-              "$ref": "#/definitions/WorkspaceResourceProperties"
-            }
-          ]
+          "$ref": "#/definitions/WorkspaceResourceProperties"
         },
         "tags": {
           "type": "object",
-          "description": "Gets or sets the tags."
+          "description": "The tags associated with this workspace."
         },
         "identity": {
           "type": "object",
@@ -458,7 +480,7 @@
       "properties": {
         "providers": {
           "type": "array",
-          "description": "Providers selected for a Workspace",
+          "description": "List of Providers selected for this Workspace",
           "items": {
             "$ref": "#/definitions/Provider"
           }
@@ -474,7 +496,7 @@
             "name": "UsableStatus",
             "modelAsString": true
           },
-          "description": "Whether the current workspace is usable."
+          "description": "Whether the current workspace is ready to accept Jobs."
         },
         "provisioningState": {
           "type": "string",
@@ -493,6 +515,10 @@
           },
           "description": "Provisioning status field"
         },
+        "resourceUsageId": {
+          "type": "string",
+          "description": "Unique id to track resource usage."
+        },
         "storageAccount": {
           "type": "string",
           "description": "ARM Resource Id of the storage account associated with this workspace."
@@ -501,11 +527,11 @@
     },
     "ProviderDescription": {
       "type": "object",
-      "description": "Information about a Provider.",
+      "description": "Information about a Provider. A Provider is an entity that offers Targets to run Azure Quantum Jobs.",
       "properties": {
         "id": {
           "type": "string",
-          "description": "Unique Provider's id."
+          "description": "Unique provider's id."
         },
         "name": {
           "type": "string",
@@ -513,12 +539,8 @@
         },
         "properties": {
           "type": "object",
-          "description": "A list of Provider-specific properties.",
-          "allOf": [
-            {
-              "$ref": "#/definitions/ProviderProperties"
-            }
-          ]
+          "description": "A list of provider-specific properties.",
+          "$ref": "#/definitions/ProviderProperties"
         }
       }
     },
@@ -528,7 +550,7 @@
       "properties": {
         "description": {
           "type": "string",
-          "description": "Description about this Provider."
+          "description": "A description about this provider."
         },
         "providerType": {
           "type": "string",
@@ -562,56 +584,70 @@
           "properties": {
             "publisherId": {
               "type": "string",
-              "description": "Provider's publisher id"
+              "description": "Provider's publisher id."
             },
             "offerId": {
               "type": "string",
-              "description": "Provider's offer id"
+              "description": "Provider's offer id."
             }
           }
         },
         "targets": {
           "type": "array",
-          "description": "The list of targets available from this provider",
+          "description": "The list of targets available from this provider.",
           "items": {
             "$ref": "#/definitions/TargetDescription"
           }
         },
         "skus": {
           "type": "array",
-          "description": "The list of skus selected for this provider",
+          "description": "The list of skus available from this provider.",
           "items": {
             "$ref": "#/definitions/SkuDescription"
+          }
+        },
+        "quotaDimensions": {
+          "type": "array",
+          "description": "The list of quota dimensions from the provider.",
+          "items": {
+            "$ref": "#/definitions/QuotaDimension"
+          }
+        },
+        "pricingDimensions": {
+          "type": "array",
+          "description": "The list of pricing dimensions from the provider.",
+          "items": {
+            "$ref": "#/definitions/PricingDimension"
           }
         }
       }
     },
     "TargetDescription": {
       "type": "object",
-      "description": "Descript provider's target information to end customer.",
+      "description": "Information about a Target. A target is the component that can process a specific type of Job.",
       "properties": {
         "id": {
           "type": "string",
-          "description": "Unique target id"
+          "description": "Unique target id."
         },
         "name": {
           "type": "string",
-          "description": "Display name of target"
+          "description": "Display name of this target."
         },
         "description": {
           "type": "string",
-          "description": "Description about this sku"
+          "description": "A description about this target."
         },
         "acceptedDataFormats": {
           "type": "array",
-          "description": "List of data formats",
+          "description": "List of data formats accepted by this target.",
           "items": {
             "type": "string"
           }
         },
         "acceptedContentEncodings": {
           "type": "array",
-          "description": "List of content encodings",
+          "description": "List of content encodings accepted by this target.",
           "items": {
             "type": "string"
           }
@@ -620,48 +656,128 @@
     },
     "SkuDescription": {
       "type": "object",
-      "description": "Descript provider's information to end customer.",
+      "description": "Information about a specific sku.",
       "properties": {
         "id": {
           "type": "string",
-          "description": "unique sku id"
+          "description": "Unique sku id."
         },
         "name": {
           "type": "string",
-          "description": "display name of sku"
+          "description": "Display name of this sku."
         },
         "description": {
           "type": "string",
-          "description": "Description about this sku"
+          "description": "Description about this sku."
         },
         "targets": {
           "type": "array",
-          "description": "list of targets for the sku",
+          "description": "The list of targets available for this sku.",
           "items": {
             "type": "string"
           }
+        },
+        "quotaDimensions": {
+          "type": "array",
+          "description": "The list of quota dimensions for this sku.",
+          "items": {
+            "$ref": "#/definitions/QuotaDimension"
+          }
+        },
+        "pricingDetails": {
+          "type": "array",
+          "description": "The list of pricing details for the sku.",
+          "items": {
+            "$ref": "#/definitions/PricingDetail"
+          }
+        }
+      }
+    },
+    "QuotaDimension": {
+      "type": "object",
+      "description": "Information about a specific quota dimension.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique id of this dimension."
+        },
+        "scope": {
+          "type": "string",
+          "description": "The scope of this quota dimension."
+        },
+        "period": {
+          "type": "string",
+          "description": "The reset period of this quota dimension."
+        },
+        "quota": {
+          "type": "number",
+          "description": "The max limit of this dimension."
+        },
+        "name": {
+          "type": "string",
+          "description": "The display name of this quota dimension."
+        },
+        "description": {
+          "type": "string",
+          "description": "A description about this quota dimension."
+        },
+        "unit": {
+          "type": "string",
+          "description": "The standard unit of measurement used for this quota dimension."
+        },
+        "unitPlural": {
+          "type": "string",
+          "description": "The standard unit of measurement used for this quota dimension in plural form."
+        }
+      }
+    },
+    "PricingDetail": {
+      "type": "object",
+      "description": "Detailed pricing information for an sku.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique id for this pricing information."
+        },
+        "value": {
+          "type": "string",
+          "description": "The unit cost of this sku."
+        }
+      }
+    },
+    "PricingDimension": {
+      "type": "object",
+      "description": "Information about pricing dimension.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique id of this pricing dimension."
+        },
+        "name": {
+          "type": "string",
+          "description": "The display name of this pricing dimension."
         }
       }
     },
     "Provider": {
       "type": "object",
-      "description": "Json representation of provider, used for json serialization and deserialization and save the meta information of provider.",
+      "description": "Information about a Provider. A Provider is an entity that offers Targets to run Azure Quantum Jobs.",
       "properties": {
         "providerId": {
           "type": "string",
-          "description": "partner id field"
+          "description": "Unique id of this provider."
         },
         "providerSku": {
           "type": "string",
-          "description": "sku field"
+          "description": "The sku associated with pricing information for this provider."
         },
         "instanceUri": {
           "type": "string",
-          "description": "serviceUri field"
+          "description": "A Uri identifying the specific instance of this provider."
         },
         "applicationName": {
           "type": "string",
-          "description": "application name field"
+          "description": "The provider's marketplace application display name."
         },
         "provisioningState": {
           "type": "string",
@@ -684,6 +800,54 @@
           "description": "Id to track resource usage for the provider."
         }
       }
+    },
+    "operation": {
+      "description": "Operation provided by provider",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the operation"
+        },
+        "display": {
+          "type": "object",
+          "description": "Properties of the operation",
+          "properties": {
+            "provider": {
+              "type": "string",
+              "description": "Provider name"
+            },
+            "resource": {
+              "type": "string",
+              "description": "Resource name"
+            },
+            "operation": {
+              "type": "string",
+              "description": "Operation name"
+            },
+            "description": {
+              "type": "string",
+              "description": "Description of the operation"
+            }
+          }
+        }
+      }
+    },
+    "operationsList": {
+      "description": "Lists the operations available.",
+      "properties": {
+        "nextLink": {
+          "description": "Url to follow for getting next page of operations.",
+          "type": "string"
+        },
+        "value": {
+          "description": "Array of operations",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/operation"
+          }
+        }
+      },
+      "required": [ "value" ]
     }
   },
   "parameters": {
