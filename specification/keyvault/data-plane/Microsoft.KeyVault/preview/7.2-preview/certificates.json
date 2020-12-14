@@ -1400,30 +1400,36 @@
       },
       "description": "A certificate bundle consists of a certificate (X509) plus its attributes."
     },
+    "DeletedCertificateBundleProperties": {
+        "properties": {
+          "recoveryId": {
+            "type": "string",
+            "description": "The url of the recovery object, used to identify and recover the deleted certificate."
+          },
+          "scheduledPurgeDate": {
+            "type": "integer",
+            "format": "unixtime",
+            "readOnly": true,
+            "description": "The time when the certificate is scheduled to be purged, in UTC"
+          },
+          "deletedDate": {
+            "type": "integer",
+            "format": "unixtime",
+            "readOnly": true,
+            "description": "The time when the certificate was deleted, in UTC"
+          }
+        },
+        "description": "A Deleted Certificate consisting of its previous id, attributes and its tags, as well as information on when it will be purged."
+      },
     "DeletedCertificateBundle": {
       "allOf": [
         {
           "$ref": "#/definitions/CertificateBundle"
+        },
+        {
+          "$ref": "#/definitions/DeletedCertificateBundleProperties"
         }
       ],
-      "properties": {
-        "recoveryId": {
-          "type": "string",
-          "description": "The url of the recovery object, used to identify and recover the deleted certificate."
-        },
-        "scheduledPurgeDate": {
-          "type": "integer",
-          "format": "unixtime",
-          "readOnly": true,
-          "description": "The time when the certificate is scheduled to be purged, in UTC"
-        },
-        "deletedDate": {
-          "type": "integer",
-          "format": "unixtime",
-          "readOnly": true,
-          "description": "The time when the certificate was deleted, in UTC"
-        }
-      },
       "description": "A Deleted Certificate consisting of its previous id, attributes and its tags, as well as information on when it will be purged."
     },
     "DeletedCertificateItem": {
