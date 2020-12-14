@@ -6,21 +6,13 @@
     "description": "Creates a Microsoft.Purview management client."
   },
   "host": "management.azure.com",
-  "schemes": [
-    "https"
-  ],
-  "consumes": [
-    "application/json"
-  ],
-  "produces": [
-    "application/json"
-  ],
+  "schemes": ["https"],
+  "consumes": ["application/json"],
+  "produces": ["application/json"],
   "paths": {
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Purview/accounts": {
       "get": {
-        "tags": [
-          "Account"
-        ],
+        "tags": ["Account"],
         "summary": "Gets the accounts resources by resource group.",
         "description": "List accounts in ResourceGroup",
         "operationId": "Accounts_ListByResourceGroup",
@@ -68,9 +60,7 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Purview/accounts": {
       "get": {
-        "tags": [
-          "Account"
-        ],
+        "tags": ["Account"],
         "summary": "Gets the accounts resources by subscription.",
         "description": "List accounts in Subscription",
         "operationId": "Accounts_ListBySubscription",
@@ -115,9 +105,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Purview/accounts/{accountName}": {
       "get": {
-        "tags": [
-          "Account"
-        ],
+        "tags": ["Account"],
         "summary": "Gets the account resource.",
         "description": "Get an account",
         "operationId": "Accounts_Get",
@@ -156,9 +144,7 @@
         }
       },
       "put": {
-        "tags": [
-          "Account"
-        ],
+        "tags": ["Account"],
         "summary": "Create or update an account resource",
         "description": "Creates or updates an account",
         "operationId": "Accounts_CreateOrUpdate",
@@ -213,9 +199,7 @@
         }
       },
       "delete": {
-        "tags": [
-          "Account"
-        ],
+        "tags": ["Account"],
         "summary": "Deletes the account resource.",
         "description": "Deletes an account resource",
         "operationId": "Accounts_Delete",
@@ -258,9 +242,7 @@
         }
       },
       "patch": {
-        "tags": [
-          "Account"
-        ],
+        "tags": ["Account"],
         "summary": "Patches the account resource.",
         "description": "Updates an account",
         "operationId": "Accounts_Update",
@@ -310,9 +292,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Purview/accounts/{accountName}/listkeys": {
       "post": {
-        "tags": [
-          "Account"
-        ],
+        "tags": ["Account"],
         "summary": "Lists the keys asynchronous.",
         "description": "List the authorization keys associated with this account.",
         "operationId": "Accounts_ListKeys",
@@ -353,9 +333,7 @@
     },
     "/providers/Microsoft.Purview/getDefaultAccount": {
       "get": {
-        "tags": [
-          "DefaultAccount"
-        ],
+        "tags": ["DefaultAccount"],
         "summary": "Gets the default account information set for the scope.",
         "description": "Get the default account for the scope.",
         "operationId": "DefaultAccounts_Get",
@@ -374,10 +352,7 @@
             "description": "The scope for the default account.",
             "required": true,
             "type": "string",
-            "enum": [
-              "Tenant",
-              "Subscription"
-            ],
+            "enum": ["Tenant", "Subscription"],
             "x-ms-enum": {
               "name": "ScopeType",
               "modelAsString": true
@@ -417,9 +392,7 @@
     },
     "/providers/Microsoft.Purview/setDefaultAccount": {
       "post": {
-        "tags": [
-          "DefaultAccount"
-        ],
+        "tags": ["DefaultAccount"],
         "summary": "Sets the default account for the scope.",
         "description": "Sets the default account for the scope.",
         "operationId": "DefaultAccounts_Set",
@@ -460,9 +433,7 @@
     },
     "/providers/Microsoft.Purview/removeDefaultAccount": {
       "post": {
-        "tags": [
-          "DefaultAccount"
-        ],
+        "tags": ["DefaultAccount"],
         "summary": "Removes the default account from the scope.",
         "description": "Removes the default account from the scope.",
         "operationId": "DefaultAccounts_Remove",
@@ -481,10 +452,7 @@
             "description": "The scope for the default account.",
             "required": true,
             "type": "string",
-            "enum": [
-              "Tenant",
-              "Subscription"
-            ],
+            "enum": ["Tenant", "Subscription"],
             "x-ms-enum": {
               "name": "ScopeType",
               "modelAsString": true
@@ -524,9 +492,7 @@
     },
     "/providers/Microsoft.Purview/operations": {
       "get": {
-        "tags": [
-          "Operation"
-        ],
+        "tags": ["Operation"],
         "summary": "Lists the available operations",
         "description": "List of available operations",
         "operationId": "Operations_List",
@@ -561,9 +527,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Purview/accounts/{accountName}/privateEndpointConnections": {
       "get": {
-        "tags": [
-          "PrivateEndpointConnection"
-        ],
+        "tags": ["PrivateEndpointConnection"],
         "summary": "Gets private endpoint connections.",
         "description": "Get private endpoint connections for account",
         "operationId": "PrivateEndpointConnections_ListByAccount",
@@ -614,9 +578,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Purview/accounts/{accountName}/privateEndpointConnections/{privateEndpointConnectionName}": {
       "get": {
-        "tags": [
-          "PrivateEndpointConnection"
-        ],
+        "tags": ["PrivateEndpointConnection"],
         "summary": "Gets private endpoint connection information.",
         "description": "Get a private endpoint connection",
         "operationId": "PrivateEndpointConnections_Get",
@@ -662,9 +624,7 @@
         }
       },
       "put": {
-        "tags": [
-          "PrivateEndpointConnection"
-        ],
+        "tags": ["PrivateEndpointConnection"],
         "summary": "Approves/Rejects private endpoint connection request.",
         "description": "Create or update a private endpoint connection",
         "operationId": "PrivateEndpointConnections_CreateOrUpdate",
@@ -725,9 +685,7 @@
         }
       },
       "delete": {
-        "tags": [
-          "PrivateEndpointConnection"
-        ],
+        "tags": ["PrivateEndpointConnection"],
         "summary": "Deletes private endpoint connection.",
         "description": "Delete a private endpoint connection",
         "operationId": "PrivateEndpointConnections_Delete",
@@ -779,9 +737,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Purview/accounts/{accountName}/privateLinkResources": {
       "get": {
-        "tags": [
-          "PrivateLinkResource"
-        ],
+        "tags": ["PrivateLinkResource"],
         "summary": "Gets a list of privately linkable resources for an account.",
         "description": "Gets a list of privately linkable resources for an account",
         "operationId": "PrivateLinkResources_ListByAccount",
@@ -825,9 +781,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Purview/accounts/{accountName}/privateLinkResources/{groupId}": {
       "get": {
-        "tags": [
-          "PrivateLinkResource"
-        ],
+        "tags": ["PrivateLinkResource"],
         "summary": "Gets a privately linkable resources for an account with given group identifier.",
         "description": "Gets a privately linkable resources for an account with given group identifier",
         "operationId": "PrivateLinkResources_GetByGroupId",
@@ -875,9 +829,7 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Purview/checkNameAvailability": {
       "post": {
-        "tags": [
-          "Provider"
-        ],
+        "tags": ["Provider"],
         "summary": "Checks the account name availability.",
         "description": "Checks if account name is available.",
         "operationId": "Accounts_CheckNameAvailability",
@@ -923,9 +875,7 @@
   "definitions": {
     "AccountList": {
       "description": "Paged list of account resources",
-      "required": [
-        "value"
-      ],
+      "required": ["value"],
       "type": "object",
       "properties": {
         "count": {
@@ -978,9 +928,7 @@
         },
         "name": {
           "description": "Gets or sets the sku name.",
-          "enum": [
-            "Standard"
-          ],
+          "enum": ["Standard"],
           "type": "string",
           "x-ms-enum": {
             "name": "name",
@@ -1086,9 +1034,7 @@
         },
         "type": {
           "description": "Identity Type",
-          "enum": [
-            "SystemAssigned"
-          ],
+          "enum": ["SystemAssigned"],
           "type": "string",
           "x-ms-enum": {
             "name": "type",
@@ -1171,10 +1117,7 @@
       "properties": {
         "defaultAction": {
           "description": "Gets or sets the default behavior of network ACLs.",
-          "enum": [
-            "Allow",
-            "Deny"
-          ],
+          "enum": ["Allow", "Deny"],
           "type": "string",
           "x-ms-enum": {
             "name": "defaultAction",
@@ -1339,10 +1282,7 @@
         },
         "scopeType": {
           "description": "The scope where the default account is set.",
-          "enum": [
-            "Tenant",
-            "Subscription"
-          ],
+          "enum": ["Tenant", "Subscription"],
           "type": "string",
           "x-ms-enum": {
             "name": "scopeType",
@@ -1357,9 +1297,7 @@
     },
     "DeletedAccountList": {
       "description": "Paged list of soft deleted account resources",
-      "required": [
-        "value"
-      ],
+      "required": ["value"],
       "type": "object",
       "properties": {
         "count": {
@@ -1445,9 +1383,7 @@
     },
     "OperationList": {
       "description": "Paged list of operation resources",
-      "required": [
-        "value"
-      ],
+      "required": ["value"],
       "type": "object",
       "properties": {
         "count": {
@@ -1654,9 +1590,7 @@
     },
     "PrivateEndpointConnectionList": {
       "description": "Paged list of private endpoint connections",
-      "required": [
-        "value"
-      ],
+      "required": ["value"],
       "type": "object",
       "properties": {
         "count": {
@@ -1680,9 +1614,7 @@
     },
     "PrivateLinkResourceList": {
       "description": "Paged list of private link resources",
-      "required": [
-        "value"
-      ],
+      "required": ["value"],
       "type": "object",
       "properties": {
         "count": {
@@ -1787,10 +1719,7 @@
         },
         "reason": {
           "description": "The reason the name is not available.",
-          "enum": [
-            "Invalid",
-            "AlreadyExists"
-          ],
+          "enum": ["Invalid", "AlreadyExists"],
           "type": "string",
           "x-ms-enum": {
             "name": "reason",
@@ -1904,9 +1833,7 @@
   },
   "security": [
     {
-      "azure_auth": [
-        "user_impersonation"
-      ]
+      "azure_auth": ["user_impersonation"]
     }
   ],
   "tags": []
