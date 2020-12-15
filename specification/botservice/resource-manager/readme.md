@@ -37,7 +37,15 @@ These settings apply only when `--tag=package-2020-06-02` is specified on the co
 ```yaml $(tag) == 'package-2020-06-02'
 input-file:
   - Microsoft.BotService/stable/2020-06-02/botservice.json
+directive:
+  - suppress: SECRET_PROPERTY
+    from: botservice.json
+    where:
+      - $.definitions.FacebookChannelProperties.properties.verifyToken
+    reason: We do need to return verifyToken in FacebookChannelProperties.
 ```
+
+
 ### Tag: package-2018-07-12
 
 These settings apply only when `--tag=package-2018-07-12` is specified on the command line.
@@ -58,11 +66,6 @@ directive:
   - suppress: R2066
     from: botservice.json
     reason: The path as-is is quite descriptive.
-  - suppress: SECRET_PROPERTY
-    from: botservice.json
-    where:
-      - $.definitions.FacebookChannelProperties.properties.verifyToken
-    reason: We do need to return verifyToken in FacebookChannelProperties.
 ```
 
 ### Tag: package-2017-12-01
