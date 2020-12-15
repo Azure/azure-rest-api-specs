@@ -26,6 +26,41 @@
     }
   },
   "responses": {
+    "202": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.StoragePool/diskPools/myDiskPool",
+        "name": "myDiskPool",
+        "type": "Microsoft.StoragePool/diskPools",
+        "location": "westus2",
+        "tags": {
+          "env": "int"
+        },
+        "systemData": {
+          "createdAt": "2020-06-24T06:53:57+00:00",
+          "createdBy": "alias",
+          "createdByType": "User",
+          "lastModifiedAt": "2020-06-24T06:53:57+00:00",
+          "lastModifiedBy": "alias",
+          "lastModifiedByType": "User"
+        },
+        "properties": {
+          "provisioningState": "Pending",
+          "subnetId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/myvnet/subnets/mysubnet",
+          "status": "Unknown",
+          "disks": [
+            {
+              "id": "/subscriptions/11111111-1111-1111-1111-111111111111/resourceGroups/myResourceGroup/providers/Microsoft.Compute/disks/vm-name_DataDisk_0"
+            },
+            {
+              "id": "/subscriptions/11111111-1111-1111-1111-111111111111/resourceGroups/myResourceGroup/providers/Microsoft.Compute/disks/vm-name_DataDisk_1"
+            }
+          ],
+          "availabilityZones": [
+            "1"
+          ]
+        }
+      }
+    },
     "200": {
       "body": {
         "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.StoragePool/diskPools/myDiskPool",
@@ -44,12 +79,9 @@
           "lastModifiedByType": "User"
         },
         "properties": {
-          "availabilityZones": [
-            "1"
-          ],
+          "provisioningState": "Pending",
           "subnetId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/myvnet/subnets/mysubnet",
-          "provisioningState": "Succeeded",
-          "status": "Healthy",
+          "status": "Unknown",
           "disks": [
             {
               "id": "/subscriptions/11111111-1111-1111-1111-111111111111/resourceGroups/myResourceGroup/providers/Microsoft.Compute/disks/vm-name_DataDisk_0"
@@ -57,6 +89,9 @@
             {
               "id": "/subscriptions/11111111-1111-1111-1111-111111111111/resourceGroups/myResourceGroup/providers/Microsoft.Compute/disks/vm-name_DataDisk_1"
             }
+          ],
+          "availabilityZones": [
+            "1"
           ]
         }
       }
