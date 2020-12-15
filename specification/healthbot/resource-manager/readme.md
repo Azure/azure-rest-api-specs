@@ -108,3 +108,7 @@ See configuration in [readme.typescript.md](./readme.typescript.md)
 ## CSharp
 
 See configuration in [readme.csharp.md](./readme.csharp.md)
+
+## GO
+
+See configuration in [readme.go.md](./readme.go.md)
