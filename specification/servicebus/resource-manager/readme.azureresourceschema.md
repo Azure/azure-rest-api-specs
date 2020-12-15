@@ -21,11 +21,23 @@ output-folder: $(azureresourceschema-folder)/schemas
 
 # all the input files in this apiVersion
 input-file:
-  - Microsoft.ServiceBus/preview/2018-01-01-preview/IPFilterRules-preview.json
-  - Microsoft.ServiceBus/preview/2018-01-01-preview/namespace-preview.json
-  - Microsoft.ServiceBus/preview/2018-01-01-preview/NetworkRuleSet-preview.json
-  - Microsoft.ServiceBus/preview/2018-01-01-preview/VirtualNetworkRules-preview.json
-  - Microsoft.ServiceBus/preview/2018-01-01-preview/operationlist-preview.json
+- Microsoft.ServiceBus/preview/2018-01-01-preview/IPFilterRules-preview.json
+- Microsoft.ServiceBus/preview/2018-01-01-preview/namespace-preview.json
+- Microsoft.ServiceBus/preview/2018-01-01-preview/VirtualNetworkRules-preview.json
+- Microsoft.ServiceBus/preview/2018-01-01-preview/DisasterRecoveryConfig.json
+- Microsoft.ServiceBus/preview/2018-01-01-preview/AuthorizationRules.json
+- Microsoft.ServiceBus/preview/2018-01-01-preview/CheckNameAvailability.json
+- Microsoft.ServiceBus/preview/2018-01-01-preview/eventhubs.json
+- Microsoft.ServiceBus/preview/2018-01-01-preview/networksets.json
+- Microsoft.ServiceBus/preview/2018-01-01-preview/migrate.json
+- Microsoft.ServiceBus/preview/2018-01-01-preview/migrationconfigs.json
+- Microsoft.ServiceBus/preview/2018-01-01-preview/PremiumMessagingRegions.json
+- Microsoft.ServiceBus/preview/2018-01-01-preview/Queue.json
+- Microsoft.ServiceBus/preview/2018-01-01-preview/sku.json
+- Microsoft.ServiceBus/preview/2018-01-01-preview/subscriptions.json
+- Microsoft.ServiceBus/preview/2018-01-01-preview/topics.json
+- Microsoft.ServiceBus/preview/2018-01-01-preview/Rules.json
+- Microsoft.ServiceBus/preview/2018-01-01-preview/operations.json
 
 ```
 
