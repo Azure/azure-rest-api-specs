@@ -49,32 +49,24 @@
           }
         ],
         "responses": {
-          "201": {
-            "description": "Request accepted. A new conversion was created.",
+          "200": {
+            "description": "Ok. A new conversion was created. A status code of 200 indicates that there was already a conversion with the same settings present. This is expected when a conversion creation is retried.",
             "headers": {
               "MS-CV": {
                 "description": "Microsoft Correlation Vector. Include this value when reporting errors to the Azure Remote Rendering team.",
                 "type": "string"
               }
             },
-            "examples": {
-              "application/json": {
-                "id": "contoso-conversion-1",
-                "creationTime": "2020-11-11T11:11:11.111Z",
-                "settings": {
-                  "inputLocation": {
-                    "storageContainerUri": "https://contoso.blob.core.windows.net/arr",
-                    "blobPrefix": "architecture/",
-                    "relativeInputAssetPath": "house.fbx"
-                  },
-                  "outputLocation": {
-                    "storageContainerUri": "https://contoso.blob.core.windows.net/arr",
-                    "blobPrefix": "architecture-output/"
-                  }
-                },
-                "status": "Created",
-                "output": null,
-                "error": null
+            "schema": {
+              "$ref": "#/definitions/conversion"
+            }
+          },
+          "201": {
+            "description": "Created. A new conversion was created.",
+            "headers": {
+              "MS-CV": {
+                "description": "Microsoft Correlation Vector. Include this value when reporting errors to the Azure Remote Rendering team.",
+                "type": "string"
               }
             },
             "schema": {
@@ -451,6 +443,22 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "Ok. The session was created successfully. A status code of 200 indicates that there was already a session with the same settings present. This is expected when session creation is retried.",
+            "schema": {
+              "$ref": "#/definitions/session_properties"
+            },
+            "examples": {
+              "application/json": {
+                "id": "contoso-conversion-1",
+                "creationTime": "2020-11-11T11:11:11.111Z",
+                "maxLeaseTimeMinutes": 60,
+                "size": "Standard",
+                "status": "Starting",
+                "error": null
+              }
+            }
+          },
           "201": {
             "description": "Created. The session was created successfully.",
             "schema": {
@@ -947,6 +955,26 @@
         "status",
         "error"
       ],
+      "example":{
+        "application/json": {
+          "id": "contoso-conversion-1",
+          "creationTime": "2020-11-11T11:11:11.111Z",
+          "settings": {
+            "inputLocation": {
+              "storageContainerUri": "https://contoso.blob.core.windows.net/arr",
+              "blobPrefix": "architecture/",
+              "relativeInputAssetPath": "house.fbx"
+            },
+            "outputLocation": {
+              "storageContainerUri": "https://contoso.blob.core.windows.net/arr",
+              "blobPrefix": "architecture-output/"
+            }
+          },
+          "status": "Created",
+          "output": null,
+          "error": null
+        }
+      },
       "type": "object"
     },
     "conversion_input_settings": {
