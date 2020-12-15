@@ -58,6 +58,11 @@ directive:
   - suppress: R2066
     from: botservice.json
     reason: The path as-is is quite descriptive.
+  - suppress: SECRET_PROPERTY
+    from: botservice.json
+    where:
+      - $.definitions.FacebookChannelProperties.properties.verifyToken
+    reason: We do need to return verifyToken in FacebookChannelProperties.
 ```
 
 ### Tag: package-2017-12-01
