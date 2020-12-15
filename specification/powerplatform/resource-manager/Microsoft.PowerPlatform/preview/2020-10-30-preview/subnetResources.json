@@ -243,11 +243,6 @@
       "description": "A subnet",
       "type": "object",
       "properties": {
-        "vnetid": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The virtual network ID. This is typically a GUID. Expect a null GUID by default."
-        },
         "properties": {
           "$ref": "#/definitions/SubnetProperties",
           "description": "Resource properties.",
@@ -267,6 +262,11 @@
         "subnet": {
           "$ref": "#/definitions/SubnetEndpointProperty",
           "description": "Endpoint of the subnet."
+        },
+        "vnetid": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The virtual network ID. This is typically a GUID. Expect a null GUID by default."
         },
         "status": {
           "$ref": "#/definitions/SubnetState",
