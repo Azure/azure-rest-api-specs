@@ -2247,6 +2247,23 @@
       },
       "description": "Profile of network configuration."
     },
+    "MaintenanceConfigurationListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MaintenanceConfiguration"
+          },
+          "description": "The list of maintenance configurations."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URL to get the next set of maintenance configuration results.",
+          "readOnly": true
+        }
+      },
+      "description": "The response from the List maintenance configurations operation."
+    },
     "SystemData": {
       "description": "Metadata pertaining to creation and last modification of the resource.",
       "type": "object",
