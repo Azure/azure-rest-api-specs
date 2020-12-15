@@ -442,6 +442,13 @@
           "$ref": "#/definitions/LibraryRequirements",
           "description": "Library version requirements"
         },
+        "customLibraries": {
+          "description": "List of custom libraries/packages associated with the spark pool.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/LibraryInfo"
+          }
+        },
         "sparkConfigProperties": {
           "$ref": "#/definitions/LibraryRequirements",
           "description": "Spark configuration file to specify additional properties"
@@ -529,6 +536,44 @@
         "enabled": {
           "type": "boolean",
           "description": "Indicates whether Dynamic Executor Allocation is enabled or not."
+        }
+      }
+    },
+    "LibraryInfo": {
+      "type": "object",
+      "description": "Library/package information of a Big Data pool powered by Apache Spark",
+      "title": "Information about a library/package created at the workspace level.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the library."
+        },
+        "path": {
+          "type": "string",
+          "description": "Storage blob path of library."
+        },
+        "containerName": {
+          "type": "string",
+          "description": "Storage blob container name."
+        },
+        "uploadedTimestamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The last update time of the library."
+        },
+        "type": {
+          "type": "string",
+          "description": "Type of the library."
+        },
+        "provisioningStatus": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Provisioning status of the library/package."
+        },
+        "creatorId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Creator Id of the library/package."
         }
       }
     },
