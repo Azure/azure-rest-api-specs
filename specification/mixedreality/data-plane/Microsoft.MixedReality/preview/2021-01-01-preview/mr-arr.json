@@ -282,7 +282,8 @@
       "get": {
         "operationId": "GetConversions",
         "x-ms-pageable": {
-          "nextLinkName": "@nextlink"
+          "itemName": "conversions",
+          "nextLinkName": "@nextLink"
         },
         "produces": [
           "application/json"
@@ -895,7 +896,8 @@
           "application/json"
         ],
         "x-ms-pageable": {
-          "nextLinkName": "@nextlink"
+          "itemName": "sessions",
+          "nextLinkName": "@nextLink"
         },
         "parameters": [
           {
@@ -1298,19 +1300,20 @@
       "type": "string"
     },
     "sessions_list": {
+      "description": "The result of a list sessions request.",
+      "type": "object",
       "properties": {
         "sessions": {
+          "type": "array",
           "items": {
             "$ref": "#/definitions/session_properties"
-          },
-          "type": "array"
+          }
         },
         "@nextLink": {
           "description": "If more rendering sessions are available this link with the same authentication header can be used to retrieve further values",
           "type": "string"
         }
-      },
-      "type": "object"
+      }
     }
   },
   "securityDefinitions": {
