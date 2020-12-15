@@ -2247,64 +2247,6 @@
       },
       "description": "Profile of network configuration."
     },
-    "MaintenanceConfigurationListResult": {
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/MaintenanceConfiguration"
-          },
-          "description": "The list of maintenance configurations."
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "The URL to get the next set of maintenance configuration results.",
-          "readOnly": true
-        }
-      },
-      "description": "The response from the List maintenance configurations operation."
-    },
-    "MaintenanceConfiguration": {
-      "allOf": [
-        {
-          "$ref": "#/definitions/SubResource"
-        },
-        {
-          "properties": {
-            "systemData": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
-              "readOnly": true,
-              "description": "The system meta data relating to this resource."
-            },
-            "properties": {
-              "description": "Properties of a default maintenance configuration.",
-              "$ref": "#/definitions/MaintenanceConfigurationProperties",
-              "x-ms-client-flatten": true
-            }
-          }
-        }
-      ],
-      "description": "maintenance configuration."
-    },
-    "MaintenanceConfigurationProperties": {
-      "properties": {
-        "timeInWeek": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/TimeInWeek"
-          },
-          "description": "Weekday time slots allowed to upgrade."
-        },
-        "notAllowedTime": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/TimeSpan"
-          },
-          "description": "Time slots on which upgrade is not allowed."
-        }
-      },
-      "description": "Default maintenance configuration properties."
-    },
     "TimeInWeek": {
       "properties": {
         "day": {
