@@ -910,38 +910,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "properties": {
-                "value": {
-                  "type": "array",
-                  "items": {
-                    "allOf": [
-                      {
-                        "$ref": "#/definitions/SubResource"
-                      },
-                      {
-                        "properties": {
-                          "systemData": {
-                            "$ref": "#/definitions/SystemData"
-                          },
-                          "properties": {
-                            "description": "Properties of a default maintenance configuration.",
-                            "$ref": "#/definitions/MaintenanceConfigurationProperties",
-                            "x-ms-client-flatten": true
-                          }
-                        }
-                      }
-                    ],
-                    "description": "maintenance configuration."
-                  },
-                  "description": "The list of maintenance configurations."
-                },
-                "nextLink": {
-                  "type": "string",
-                  "description": "The URL to get the next set of maintenance configuration results.",
-                  "readOnly": true
-                }
-              },
-              "description": "The response from the List maintenance configurations operation."
+              "$ref": "#/definitions/MaintenanceConfigurationListResult"
             }
           },
           "default": {
@@ -994,24 +963,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "allOf": [
-                {
-                  "$ref": "#/definitions/SubResource"
-                },
-                {
-                  "properties": {
-                    "systemData": {
-                      "$ref": "#/definitions/SystemData"
-                    },
-                    "properties": {
-                      "description": "Properties of a default maintenance configuration.",
-                      "$ref": "#/definitions/MaintenanceConfigurationProperties",
-                      "x-ms-client-flatten": true
-                    }
-                  }
-                }
-              ],
-              "description": "maintenance configuration."
+              "$ref": "#/definitions/MaintenanceConfiguration"
             }
           },
           "default": {
@@ -1059,24 +1011,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "allOf": [
-                {
-                  "$ref": "#/definitions/SubResource"
-                },
-                {
-                  "properties": {
-                    "systemData": {
-                      "$ref": "#/definitions/SystemData"
-                    },
-                    "properties": {
-                      "description": "Properties of a default maintenance configuration.",
-                      "$ref": "#/definitions/MaintenanceConfigurationProperties",
-                      "x-ms-client-flatten": true
-                    }
-                  }
-                }
-              ],
-              "description": "maintenance configuration."
+              "$ref": "#/definitions/MaintenanceConfiguration"
             },
             "description": "Parameters supplied to the Create or Update a default maintenance configuration."
           }
@@ -1085,24 +1020,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "allOf": [
-                {
-                  "$ref": "#/definitions/SubResource"
-                },
-                {
-                  "properties": {
-                    "systemData": {
-                      "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
-                    },
-                    "properties": {
-                      "description": "Properties of a default maintenance configuration.",
-                      "$ref": "#/definitions/MaintenanceConfigurationProperties",
-                      "x-ms-client-flatten": true
-                    }
-                  }
-                }
-              ],
-              "description": "maintenance configuration."
+              "$ref": "#/definitions/MaintenanceConfiguration"
             }
           },
           "default": {
@@ -2537,24 +2455,7 @@
         "value": {
           "type": "array",
           "items": {
-            "allOf": [
-              {
-                "$ref": "#/definitions/SubResource"
-              },
-              {
-                "properties": {
-                  "systemData": {
-                    "$ref": "#/definitions/SystemData"
-                  },
-                  "properties": {
-                    "description": "Properties of a default maintenance configuration.",
-                    "$ref": "#/definitions/MaintenanceConfigurationProperties",
-                    "x-ms-client-flatten": true
-                  }
-                }
-              }
-            ],
-            "description": "maintenance configuration."
+            "$ref": "#/definitions/MaintenanceConfiguration"
           },
           "description": "The list of maintenance configurations."
         },
@@ -2574,7 +2475,7 @@
         {
           "properties": {
             "systemData": {
-              "$ref": "#/definitions/SystemData"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
             },
             "properties": {
               "description": "Properties of a default maintenance configuration.",
@@ -2659,59 +2560,6 @@
         }
       },
       "description": "The time span with start and end properties."
-    },
-    "SystemData": {
-      "description": "Metadata pertaining to creation and last modification of the resource.",
-      "type": "object",
-      "readOnly": true,
-      "properties": {
-        "createdBy": {
-          "type": "string",
-          "description": "The identity that created the resource."
-        },
-        "createdByType": {
-          "type": "string",
-          "description": "The type of identity that created the resource.",
-          "enum": [
-            "User",
-            "Application",
-            "ManagedIdentity",
-            "Key"
-          ],
-          "x-ms-enum": {
-            "name": "createdByType",
-            "modelAsString": true
-          }
-        },
-        "createdAt": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The timestamp of resource creation (UTC)."
-        },
-        "lastModifiedBy": {
-          "type": "string",
-          "description": "The identity that last modified the resource."
-        },
-        "lastModifiedByType": {
-          "type": "string",
-          "description": "The type of identity that last modified the resource.",
-          "enum": [
-            "User",
-            "Application",
-            "ManagedIdentity",
-            "Key"
-          ],
-          "x-ms-enum": {
-            "name": "createdByType",
-            "modelAsString": true
-          }
-        },
-        "lastModifiedAt": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The type of identity that last modified the resource."
-        }
-      }
     },
     "ManagedClusterLoadBalancerProfile": {
       "properties": {
