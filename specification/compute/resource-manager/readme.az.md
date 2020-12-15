@@ -19,4 +19,9 @@ cli:
             group: "SshPublicKeys"
             op: "*"
           hidden: false
+directive: 
+  - where: 
+      command: vm ssh-public-key
+    set:
+      command: sshkey
 ```
