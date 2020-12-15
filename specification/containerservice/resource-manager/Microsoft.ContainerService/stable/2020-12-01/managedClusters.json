@@ -2247,6 +2247,163 @@
       },
       "description": "Profile of network configuration."
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/managedClusters/{resourceName}/maintenanceConfigurations/{configName}": {
+      "get": {
+        "tags": [
+          "MaintenanceConfigurations"
+        ],
+        "operationId": "MaintenanceConfigurations_Get",
+        "summary": "Gets the maintenance configuration.",
+        "description": "Gets the details of maintenance configurations by managed cluster and resource group.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceNameParameter"
+          },
+          {
+            "name": "configName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the maintenance configuration."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/MaintenanceConfiguration"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Maintenance Configuration": {
+            "$ref": "./examples/MaintenanceConfigurationsGet.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "MaintenanceConfigurations"
+        ],
+        "operationId": "MaintenanceConfigurations_CreateOrUpdate",
+        "summary": "Creates or updates a maintenance configurations.",
+        "description": "Creates or updates a maintenance configuration in the specified managed cluster.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceNameParameter"
+          },
+          {
+            "name": "configName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the maintenance configuration."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MaintenanceConfiguration"
+            },
+            "description": "Parameters supplied to the Create or Update a default maintenance configuration."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/MaintenanceConfiguration"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": false,
+        "x-ms-examples": {
+          "Create/Update Maintenance Configuration": {
+            "$ref": "./examples/MaintenanceConfigurationsCreate_Update.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "MaintenanceConfigurations"
+        ],
+        "operationId": "MaintenanceConfigurations_Delete",
+        "summary": "Deletes a maintenance configuration.",
+        "description": "Deletes the maintenance configuration in the specified managed cluster.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceNameParameter"
+          },
+          {
+            "name": "configName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the maintenance configuration."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "NoContent"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": false,
+        "x-ms-examples": {
+          "Delete Maintenance Configuration": {
+            "$ref": "./examples/MaintenanceConfigurationsDelete.json"
+          }
+        }
+      }
+    },
     "MaintenanceConfigurationListResult": {
       "properties": {
         "value": {
