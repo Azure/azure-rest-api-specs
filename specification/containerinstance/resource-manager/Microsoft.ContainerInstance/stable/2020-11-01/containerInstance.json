@@ -526,7 +526,7 @@
           {
             "name": "timestamps",
             "in": "query",
-            "description": "The flag indicating if adding timestamps should be enabled.",
+            "description": "If true, adds a timestamp at the beginning of every line of log output. If not provided, defaults to false.",
             "type": "boolean"
           }
         ],
@@ -610,8 +610,8 @@
             "$ref": "./examples/ContainerAttach.json"
           }
         },
-        "summary": "Attach to a specific container instance.",
-        "description": "Attach to a specific container instance in a specified resource group and container group.",
+        "summary": "Attach to the output of a specific container instance.",
+        "description": "Attach to the output stream of a specific container instance in a specified resource group and container group.",
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -637,7 +637,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/ContainerExecResponse"
+              "$ref": "#/definitions/ContainerAttachResponse"
             }
           },
           "default": {
@@ -1760,6 +1760,20 @@
         "password": {
           "type": "string",
           "description": "The password to start the exec command."
+        }
+      }
+    },
+    "ContainerAttachResponse": {
+      "description": "The information for the output stream from container attach.",
+      "type": "object",
+      "properties": {
+        "webSocketUri": {
+          "type": "string",
+          "description": "The uri for the output stream from the attach."
+        },
+        "password": {
+          "type": "string",
+          "description": "The password to the ouput stream from the attach."
         }
       }
     },
