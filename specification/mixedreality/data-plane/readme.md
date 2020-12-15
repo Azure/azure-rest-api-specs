@@ -31,10 +31,10 @@ directive:
 ```
 ### Basic Information
 
-These are the global settings for Azure Mixed Reality.
+These are the global settings for Azure Mixed Reality Client.
 
 ```yaml
-title: MixedReality
+title: MixedRealityRemoteRendering
 openapi-type: data-plane
 tag: package-2021-01-01-preview
 ```
@@ -46,7 +46,6 @@ These settings apply only when `--tag=package-2021-01-01-preview` is specified o
 ``` yaml $(tag) == 'package-2021-01-01-preview'
 input-file:
 - Microsoft.MixedReality/preview/2021-01-01-preview/mr-arr.json
-- Microsoft.MixedReality/preview/2019-02-28-preview/mr-sts.json
 ```
 
 ### Tag: package-2019-02-28-preview
