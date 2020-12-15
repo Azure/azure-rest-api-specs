@@ -2247,6 +2247,25 @@
       },
       "description": "Profile of network configuration."
     },
+    "MaintenanceConfigurationProperties": {
+      "properties": {
+        "timeInWeek": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TimeInWeek"
+          },
+          "description": "Weekday time slots allowed to upgrade."
+        },
+        "notAllowedTime": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TimeSpan"
+          },
+          "description": "Time slots on which upgrade is not allowed."
+        }
+      },
+      "description": "Default maintenance configuration properties."
+    },
     "TimeInWeek": {
       "properties": {
         "day": {
