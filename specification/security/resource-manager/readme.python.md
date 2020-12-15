@@ -25,6 +25,32 @@ package-name: azure-mgmt-security
 package-version: 1.0.0b1
 clear-output-folder: true
 
+
+```
+
+``` yaml $(python) && $(python-mode) == 'update' && !$(track2)
+python:
+  no-namespace-folders: true
+  output-folder: $(python-sdks-folder)/security/azure-mgmt-security/azure/mgmt/security
+```
+
+``` yaml $(python) && $(python-mode) == 'update' && $(track2)
+no-namespace-folders: true
+output-folder: $(python-sdks-folder)/security/azure-mgmt-security/azure/mgmt/security
+```
+
+``` yaml $(python) && $(python-mode) == 'create' && !$(track2)
+python:
+  basic-setup-py: true
+  output-folder: $(python-sdks-folder)/security/azure-mgmt-security
+```
+
+``` yaml $(python) && $(python-mode) == 'create' && $(track2)
+basic-setup-py: true
+output-folder: $(python-sdks-folder)/security/azure-mgmt-security
+```
+
+```yaml $(python) && $(track2)
 directive:
   - from: jitNetworkAccessPolicies.json
     where: $.definitions.JitNetworkAccessPortRule.properties
@@ -134,26 +160,4 @@ directive:
           }
         }
       }
-```
-
-``` yaml $(python) && $(python-mode) == 'update' && !$(track2)
-python:
-  no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/security/azure-mgmt-security/azure/mgmt/security
-```
-
-``` yaml $(python) && $(python-mode) == 'update' && $(track2)
-no-namespace-folders: true
-output-folder: $(python-sdks-folder)/security/azure-mgmt-security/azure/mgmt/security
-```
-
-``` yaml $(python) && $(python-mode) == 'create' && !$(track2)
-python:
-  basic-setup-py: true
-  output-folder: $(python-sdks-folder)/security/azure-mgmt-security
-```
-
-``` yaml $(python) && $(python-mode) == 'create' && $(track2)
-basic-setup-py: true
-output-folder: $(python-sdks-folder)/security/azure-mgmt-security
 ```
