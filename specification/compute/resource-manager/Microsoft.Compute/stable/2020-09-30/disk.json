@@ -1557,51 +1557,6 @@
           }
         }
       }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/restorePointCollections/{restorePointCollectionName}/restorePoints/{vmRestorePointName}/diskRestorePoints": {
-      "get": {
-        "tags": [
-          "IncrementalRestorePoints"
-        ],
-        "operationId": "DiskRestorePoint_ListByRestorePoint",
-        "description": "Lists diskRestorePoints under a vmRestorePoint.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/RestorePointCollectionNameParameter"
-          },
-          {
-            "$ref": "#/parameters/VmRestorePointNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/DiskRestorePointList"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Get an incremental disk restorePoint resource.": {
-            "$ref": "./examples/ListDiskRestorePointInVmRestorePoint.json"
-          }
-        }
-      }
     }
   },
   "definitions": {
