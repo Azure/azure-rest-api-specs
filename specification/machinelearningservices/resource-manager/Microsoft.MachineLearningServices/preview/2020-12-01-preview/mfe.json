@@ -6521,12 +6521,7 @@
               }
             },
             "distributionConfiguration": {
-              "description": "Distribution configuration of the job. This should be one of MpiConfiguration, TensorflowConfiguration, or PyTorchConfiguration.",
-              "allOf": [
-                {
-                  "$ref": "#/definitions/DistributionConfiguration"
-                }
-              ]
+              "$ref": "#/definitions/DistributionConfiguration"
             }
           }
         }
@@ -6611,12 +6606,7 @@
           "type": "integer"
         },
         "earlyTerminationPolicyConfiguration": {
-          "description": "Early termination policies enable canceling poor-performing runs before they complete",
-          "allOf": [
-            {
-              "$ref": "#/definitions/EarlyTerminationPolicyConfiguration"
-            }
-          ]
+          "$ref": "#/definitions/EarlyTerminationPolicyConfiguration"
         }
       },
       "additionalProperties": false
