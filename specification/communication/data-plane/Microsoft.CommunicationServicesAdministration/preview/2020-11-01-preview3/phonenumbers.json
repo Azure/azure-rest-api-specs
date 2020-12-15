@@ -447,12 +447,12 @@
         "sms": {
           "description": "Available Sms capabilities.",
           "$ref": "#/definitions/PhoneNumberCapabilityValue",
-          "x-ms-nullable": false
+          "x-nullable": false
         },
         "calling": {
           "description": "Available Calling capabilities.",
           "$ref": "#/definitions/PhoneNumberCapabilityValue",
-          "x-ms-nullable": false
+          "x-nullable": false
         }
       }
     },
@@ -463,12 +463,12 @@
         "sms": {
           "description": "Available Sms capabilities.",
           "$ref": "#/definitions/PhoneNumberCapabilityValue",
-          "x-ms-nullable": false
+          "x-nullable": false
         },
         "calling": {
           "description": "Available Calling capabilities.",
           "$ref": "#/definitions/PhoneNumberCapabilityValue",
-          "x-ms-nullable": false
+          "x-nullable": false
         }
       }
     },
@@ -509,12 +509,12 @@
           "format": "double",
           "description": "The cost amount.",
           "type": "number",
-          "x-ms-nullable": false
+          "x-nullable": false
         },
         "currencyCode": {
           "description": "The ISO 4217 currency code for the cost amount.",
           "type": "string",
-          "x-ms-nullable": false
+          "x-nullable": false
         },
         "billingFrequency": {
           "type": "string",
@@ -526,7 +526,7 @@
             "name": "BillingFrequency",
             "modelAsString": false
           },
-          "x-ms-nullable": false
+          "x-nullable": false
         }
       }
     },
@@ -559,12 +559,12 @@
         "status": {
           "description": "Status of operation.",
           "$ref": "#/definitions/PhoneNumberOperationStatus",
-          "x-ms-nullable": false
+          "x-nullable": false
         },
         "id": {
           "description": "Id of the operation.",
           "type": "string",
-          "x-ms-nullable": false
+          "x-nullable": false
         },
         "kind": {
           "type": "string",
@@ -579,13 +579,13 @@
             "name": "OperationKind",
             "modelAsString": true
           },
-          "x-ms-nullable": false
+          "x-nullable": false
         },
         "createdDateTime": {
           "description": "The date that the operation was created.",
           "type": "string",
           "format": "date-time",
-          "x-ms-nullable": false
+          "x-nullable": false
         },
         "lastActionDateTime": {
           "description": "The most recent date that the operation was changed.",
@@ -620,53 +620,53 @@
         "id": {
           "description": "The id, this is the same as the phone number in E.164 format.",
           "type": "string",
-          "x-ms-nullable": false
+          "x-nullable": false
         },
         "phoneNumber": {
           "description": "The phoneNumber in E.164 format.",
           "type": "string",
-          "x-ms-nullable": false
+          "x-nullable": false
         },
         "countryCode": {
           "description": "The ISO 3166-2 country code of the country that the phone number belongs to.",
           "type": "string",
-          "x-ms-nullable": false
+          "x-nullable": false
         },
         "phoneNumberType": {
           "description": "The type of the phone number.",
           "$ref": "#/definitions/PhoneNumberType",
-          "x-ms-nullable": false
+          "x-nullable": false
         },
         "assignmentType": {
           "description": "The assignment type of the phone number, people or application.",
           "$ref": "#/definitions/PhoneNumberAssignmentType",
-          "x-ms-nullable": false
+          "x-nullable": false
         },
         "purchaseDate": {
           "description": "The purchase date of the phone number.",
           "type": "string",
           "format": "date-time",
-          "x-ms-nullable": false
+          "x-nullable": false
         },
         "capabilities": {
           "description": "The phone number's capabilities.",
           "$ref": "#/definitions/PhoneNumberCapabilities",
-          "x-ms-nullable": false
+          "x-nullable": false
         },
         "callbackUri": {
           "description": "The webhook for receiving incoming events.",
           "type": "string",
-          "x-ms-nullable": false
+          "x-nullable": false
         },
         "applicationId": {
           "description": "The application id the number has been assigned to.",
           "type": "string",
-          "x-ms-nullable": false
+          "x-nullable": false
         },
         "cost": {
           "description": "The monthly cost of the phone number.",
           "$ref": "#/definitions/PhoneNumberCost",
-          "x-ms-nullable": false
+          "x-nullable": false
         }
       }
     },
@@ -699,7 +699,7 @@
           "items": {
             "$ref": "#/definitions/AcquiredPhoneNumber"
           },
-          "x-ms-nullable": false
+          "x-nullable": false
         },
         "nextLink": {
           "description": "Represents the URL link to the next page",
@@ -719,29 +719,29 @@
         "phoneNumberType": {
           "description": "The phone number type.",
           "$ref": "#/definitions/PhoneNumberType",
-          "x-ms-nullable": false
+          "x-nullable": false
         },
         "assignmentType": {
           "description": "The phone number's assignment type.",
           "$ref": "#/definitions/PhoneNumberAssignmentType",
-          "x-ms-nullable": false
+          "x-nullable": false
         },
         "capabilities": {
           "description": "The phone number's capabilities.",
           "$ref": "#/definitions/PhoneNumberCapabilitiesRequest",
-          "x-ms-nullable": false
+          "x-nullable": false
         },
         "areaCode": {
           "description": "The desired area code.",
           "type": "string",
-          "x-ms-nullable": false
+          "x-nullable": false
         },
         "quantity": {
           "format": "int32",
           "description": "The desired quantity of phone numbers.",
           "type": "integer",
           "default": 1,
-          "x-ms-nullable": false
+          "x-nullable": false
         }
       }
     },
@@ -761,7 +761,7 @@
         "id": {
           "description": "The search id.",
           "type": "string",
-          "x-ms-nullable": false
+          "x-nullable": false
         },
         "phoneNumbers": {
           "description": "The phone numbers that are available. Can be fewer than the desired search quantity.",
@@ -769,33 +769,33 @@
           "items": {
             "type": "string"
           },
-          "x-ms-nullable": false
+          "x-nullable": false
         },
         "phoneNumberType": {
           "description": "The phoner number type.",
           "$ref": "#/definitions/PhoneNumberType",
-          "x-ms-nullable": false
+          "x-nullable": false
         },
         "assignmentType": {
           "description": "The phone number's assignment type.",
           "$ref": "#/definitions/PhoneNumberAssignmentType",
-          "x-ms-nullable": false
+          "x-nullable": false
         },
         "capabilities": {
           "description": "The phone number's capabilities.",
           "$ref": "#/definitions/PhoneNumberCapabilities",
-          "x-ms-nullable": false
+          "x-nullable": false
         },
         "cost": {
           "description": "The monthly cost for an individual phone number.",
           "$ref": "#/definitions/PhoneNumberCost",
-          "x-ms-nullable": false
+          "x-nullable": false
         },
         "searchExpiresBy": {
           "format": "date-time",
           "description": "The date that this search result expires and phone numbers are no longer on hold. A search result expires in less than 15min.",
           "type": "string",
-          "x-ms-nullable": false
+          "x-nullable": false
         }
       }
     },
@@ -806,7 +806,7 @@
         "searchId": {
           "description": "The id of the search result to purchase.",
           "type": "string",
-          "x-ms-nullable": false
+          "x-nullable": false
         }
       }
     }
@@ -816,9 +816,8 @@
       "in": "query",
       "name": "api-version",
       "description": "Version of API to invoke",
-      "required": true,
-      "type": "string",
-      "x-ms-nullable": false
+    "required": true,
+      "type": "string"
     },
     "PhoneNumberOperationId": {
       "in": "path",

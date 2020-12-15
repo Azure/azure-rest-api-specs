@@ -38,6 +38,9 @@
             }
           }
         },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
         "x-ms-examples": {
           "List acquired phone numbers": {
             "$ref": "./examples/GetCountries.json"
@@ -67,6 +70,9 @@
               "$ref": "#/definitions/TollFreeAreaCodes"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
           "Get Toll Free area codes": {
@@ -108,6 +114,9 @@
               "$ref": "#/definitions/GeographicAreaCodes"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
           "Get Geographic area codes": {
@@ -193,14 +202,16 @@
           "type": "array",
           "items": {
             "$ref": "phonenumbers.json#/definitions/PhoneNumberCapabilityValue"
-          }
+          },
+          "x-nullable": false
         },
         "calling": {
           "description": "Available Calling capabilities.",
           "type": "array",
           "items": {
             "$ref": "phonenumbers.json#/definitions/PhoneNumberCapabilityValue"
-          }
+          },
+          "x-nullable": false
         }
       }
     },
@@ -210,23 +221,28 @@
       "properties": {
         "phoneNumberType": {
           "description": "The phoner number type.",
-          "$ref": "phonenumbers.json#/definitions/PhoneNumberType"
+          "$ref": "phonenumbers.json#/definitions/PhoneNumberType",
+          "x-nullable": false
         },
         "assignmentType": {
           "description": "The phone number's assignment type.",
-          "$ref": "phonenumbers.json#/definitions/PhoneNumberAssignmentType"
+          "$ref": "phonenumbers.json#/definitions/PhoneNumberAssignmentType",
+          "x-nullable": false
         },
         "countryCode": {
           "description": "The ISO 3166-2 country code.",
-          "type": "string"
+          "type": "string",
+          "x-nullable": false
         },
         "availableCapabilities": {
           "description": "The capabilities that are available in this offering.",
-          "$ref": "#/definitions/AvailableCapabilities"
+          "$ref": "#/definitions/AvailableCapabilities",
+          "x-nullable": false
         },
         "cost": {
           "description": "The montly cost for an individual phone number in this offering.",
-          "$ref": "phonenumbers.json#/definitions/PhoneNumberCost"
+          "$ref": "phonenumbers.json#/definitions/PhoneNumberCost",
+          "x-nullable": false
         }
       }
     },
@@ -241,21 +257,25 @@
       "description": "Represents a country.",
       "required": [
         "countryCode",
-        "localizedName"
+        "localizedName",
+        "locale"
       ],
       "type": "object",
       "properties": {
         "localizedName": {
           "description": "Represents the name of the country.",
-          "type": "string"
+          "type": "string",
+          "x-nullable": false
         },
         "locale": {
           "description": "Locale used for localization",
-          "type": "string"
+          "type": "string",
+          "x-nullable": false
         },
         "countryCode": {
           "description": "The ISO 3166-2 country code.",
-          "type": "string"
+          "type": "string",
+          "x-nullable": false
         }
       }
     },
@@ -263,12 +283,13 @@
       "description": "Represents a wrapper around a list of countries.",
       "type": "object",
       "properties": {
-        "countries": {
+        "value": {
           "description": "Represents the underlying list of countries.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/PhoneNumberCountry"
-          }
+          },
+          "x-nullable": false
         },
         "nextLink": {
           "description": "Represents the URL link to the next page",
@@ -280,7 +301,7 @@
       "description": "Represents a list of Toll-Free area codes.",
       "type": "object",
       "properties": {
-        "areaCodes": {
+        "value": {
           "description": "Represents the list of primary area codes.",
           "type": "array",
           "items": {
@@ -298,13 +319,14 @@
       "description": "Represents a list of geographic area codes.",
       "type": "object",
       "properties": {
-        "cityAreaCodes": {
+        "value": {
           "description": "Represents the list of area codes.",
           "type": "array",
           "items": {
             "type": "object",
             "$ref": "#/definitions/CityAreaCodes"
-          }
+          },
+          "x-nullable": false
         },
         "nextLink": {
           "description": "Represents the URL link to the next page",
@@ -318,7 +340,8 @@
       "properties": {
         "localizedCityName": {
           "description": "Name of the city.",
-          "type": "string"
+          "type": "string",
+          "x-nullable": false
         },
         "areaCodes": {
           "description": "Available area codes for the city",
@@ -326,7 +349,8 @@
           "items": {
             "description": "An area code.",
             "type": "string"
-          }
+          },
+          "x-nullable": false
         }
       }
     }
