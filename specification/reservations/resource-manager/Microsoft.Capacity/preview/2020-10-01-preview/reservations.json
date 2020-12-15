@@ -643,7 +643,7 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "azure-async-operation"
         },
         "parameters": [
           {
@@ -666,9 +666,13 @@
           "202": {
             "description": "The request is accepted and is being processed.",
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "URL for checking the ongoing status of the operation."
+              },
               "Location": {
                 "type": "string",
-                "description": "URL to query for the status of the operation."
+                "description": "URL for determining when an operation has completed. Only use this value only when Azure-AsyncOperation isn't returned."
               },
               "Retry-After": {
                 "type": "integer",
@@ -698,7 +702,7 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "azure-async-operation"
         },
         "parameters": [
           {
@@ -721,9 +725,13 @@
           "202": {
             "description": "The request is accepted and is being processed.",
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "URL for checking the ongoing status of the operation."
+              },
               "Location": {
                 "type": "string",
-                "description": "URL to query for the status of the operation."
+                "description": "URL for determining when an operation has completed. Only use this value only when Azure-AsyncOperation isn't returned."
               },
               "Retry-After": {
                 "type": "integer",
