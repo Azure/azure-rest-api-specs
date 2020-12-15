@@ -446,11 +446,13 @@
       "properties": {
         "sms": {
           "description": "Available Sms capabilities.",
-          "$ref": "#/definitions/PhoneNumberCapabilityValue"
+          "$ref": "#/definitions/PhoneNumberCapabilityValue",
+          "x-ms-nullable": false
         },
         "calling": {
           "description": "Available Calling capabilities.",
-          "$ref": "#/definitions/PhoneNumberCapabilityValue"
+          "$ref": "#/definitions/PhoneNumberCapabilityValue",
+          "x-ms-nullable": false
         }
       }
     },
@@ -460,11 +462,13 @@
       "properties": {
         "sms": {
           "description": "Available Sms capabilities.",
-          "$ref": "#/definitions/PhoneNumberCapabilityValue"
+          "$ref": "#/definitions/PhoneNumberCapabilityValue",
+          "x-ms-nullable": false
         },
         "calling": {
           "description": "Available Calling capabilities.",
-          "$ref": "#/definitions/PhoneNumberCapabilityValue"
+          "$ref": "#/definitions/PhoneNumberCapabilityValue",
+          "x-ms-nullable": false
         }
       }
     },
@@ -504,11 +508,13 @@
         "amount": {
           "format": "double",
           "description": "The cost amount.",
-          "type": "number"
+          "type": "number",
+          "x-ms-nullable": false
         },
         "currencyCode": {
           "description": "The ISO 4217 currency code for the cost amount.",
-          "type": "string"
+          "type": "string",
+          "x-ms-nullable": false
         },
         "billingFrequency": {
           "type": "string",
@@ -519,7 +525,8 @@
           "x-ms-enum": {
             "name": "BillingFrequency",
             "modelAsString": false
-          }
+          },
+          "x-ms-nullable": false
         }
       }
     },
@@ -533,7 +540,7 @@
         "failed"
       ],
       "x-ms-enum": {
-        "name": "OperationStatusCodes",
+        "name": "PhoneNumberOperationStatusCodes",
         "modelAsString": false
       },
       "x-nullable": false
@@ -551,11 +558,13 @@
       "properties": {
         "status": {
           "description": "Status of operation.",
-          "$ref": "#/definitions/PhoneNumberOperationStatus"
+          "$ref": "#/definitions/PhoneNumberOperationStatus",
+          "x-ms-nullable": false
         },
         "id": {
           "description": "Id of the operation.",
-          "type": "string"
+          "type": "string",
+          "x-ms-nullable": false
         },
         "kind": {
           "type": "string",
@@ -564,17 +573,19 @@
             "search",
             "purchase",
             "releasePhoneNumber",
-            "updatePhoneNumber"
+            "updatePhoneNumberCapabilities"
           ],
           "x-ms-enum": {
             "name": "OperationKind",
             "modelAsString": true
-          }
+          },
+          "x-ms-nullable": false
         },
         "createdDateTime": {
           "description": "The date that the operation was created.",
           "type": "string",
-          "format": "date-time"
+          "format": "date-time",
+          "x-ms-nullable": false
         },
         "lastActionDateTime": {
           "description": "The most recent date that the operation was changed.",
@@ -608,44 +619,54 @@
       "properties": {
         "id": {
           "description": "The id, this is the same as the phone number in E.164 format.",
-          "type": "string"
+          "type": "string",
+          "x-ms-nullable": false
         },
         "phoneNumber": {
           "description": "The phoneNumber in E.164 format.",
-          "type": "string"
+          "type": "string",
+          "x-ms-nullable": false
         },
         "countryCode": {
           "description": "The ISO 3166-2 country code of the country that the phone number belongs to.",
-          "type": "string"
+          "type": "string",
+          "x-ms-nullable": false
         },
         "phoneNumberType": {
           "description": "The type of the phone number.",
-          "$ref": "#/definitions/PhoneNumberType"
+          "$ref": "#/definitions/PhoneNumberType",
+          "x-ms-nullable": false
         },
         "assignmentType": {
           "description": "The assignment type of the phone number, people or application.",
-          "$ref": "#/definitions/PhoneNumberAssignmentType"
+          "$ref": "#/definitions/PhoneNumberAssignmentType",
+          "x-ms-nullable": false
         },
         "purchaseDate": {
           "description": "The purchase date of the phone number.",
           "type": "string",
-          "format": "date-time"
+          "format": "date-time",
+          "x-ms-nullable": false
         },
         "capabilities": {
           "description": "The phone number's capabilities.",
-          "$ref": "#/definitions/PhoneNumberCapabilities"
+          "$ref": "#/definitions/PhoneNumberCapabilities",
+          "x-ms-nullable": false
         },
         "callbackUri": {
           "description": "The webhook for receiving incoming events.",
-          "type": "string"
+          "type": "string",
+          "x-ms-nullable": false
         },
         "applicationId": {
           "description": "The application id the number has been assigned to.",
-          "type": "string"
+          "type": "string",
+          "x-ms-nullable": false
         },
         "cost": {
           "description": "The monthly cost of the phone number.",
-          "$ref": "#/definitions/PhoneNumberCost"
+          "$ref": "#/definitions/PhoneNumberCost",
+          "x-ms-nullable": false
         }
       }
     },
@@ -655,11 +676,13 @@
       "properties": {
         "callbackUri": {
           "description": "The webhook for receiving incoming events.",
-          "type": "string"
+          "type": "string",
+          "x-nullable": false
         },
         "applicationId": {
           "description": "The application id the number has been assigned to.",
-          "type": "string"
+          "type": "string",
+          "x-nullable": false
         }
       }
     },
@@ -675,7 +698,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/AcquiredPhoneNumber"
-          }
+          },
+          "x-ms-nullable": false
         },
         "nextLink": {
           "description": "Represents the URL link to the next page",
@@ -694,25 +718,30 @@
       "properties": {
         "phoneNumberType": {
           "description": "The phone number type.",
-          "$ref": "#/definitions/PhoneNumberType"
+          "$ref": "#/definitions/PhoneNumberType",
+          "x-ms-nullable": false
         },
         "assignmentType": {
           "description": "The phone number's assignment type.",
-          "$ref": "#/definitions/PhoneNumberAssignmentType"
+          "$ref": "#/definitions/PhoneNumberAssignmentType",
+          "x-ms-nullable": false
         },
         "capabilities": {
           "description": "The phone number's capabilities.",
-          "$ref": "#/definitions/PhoneNumberCapabilitiesRequest"
+          "$ref": "#/definitions/PhoneNumberCapabilitiesRequest",
+          "x-ms-nullable": false
         },
         "areaCode": {
           "description": "The desired area code.",
-          "type": "string"
+          "type": "string",
+          "x-ms-nullable": false
         },
         "quantity": {
           "format": "int32",
           "description": "The desired quantity of phone numbers.",
           "type": "integer",
-          "default": 1
+          "default": 1,
+          "x-ms-nullable": false
         }
       }
     },
@@ -731,35 +760,42 @@
       "properties": {
         "id": {
           "description": "The search id.",
-          "type": "string"
+          "type": "string",
+          "x-ms-nullable": false
         },
         "phoneNumbers": {
           "description": "The phone numbers that are available. Can be fewer than the desired search quantity.",
           "type": "array",
           "items": {
             "type": "string"
-          }
+          },
+          "x-ms-nullable": false
         },
         "phoneNumberType": {
           "description": "The phoner number type.",
-          "$ref": "#/definitions/PhoneNumberType"
+          "$ref": "#/definitions/PhoneNumberType",
+          "x-ms-nullable": false
         },
         "assignmentType": {
           "description": "The phone number's assignment type.",
-          "$ref": "#/definitions/PhoneNumberAssignmentType"
+          "$ref": "#/definitions/PhoneNumberAssignmentType",
+          "x-ms-nullable": false
         },
         "capabilities": {
           "description": "The phone number's capabilities.",
-          "$ref": "#/definitions/PhoneNumberCapabilities"
+          "$ref": "#/definitions/PhoneNumberCapabilities",
+          "x-ms-nullable": false
         },
         "cost": {
           "description": "The monthly cost for an individual phone number.",
-          "$ref": "#/definitions/PhoneNumberCost"
+          "$ref": "#/definitions/PhoneNumberCost",
+          "x-ms-nullable": false
         },
         "searchExpiresBy": {
           "format": "date-time",
           "description": "The date that this search result expires and phone numbers are no longer on hold. A search result expires in less than 15min.",
-          "type": "string"
+          "type": "string",
+          "x-ms-nullable": false
         }
       }
     },
@@ -769,7 +805,8 @@
       "properties": {
         "searchId": {
           "description": "The id of the search result to purchase.",
-          "type": "string"
+          "type": "string",
+          "x-ms-nullable": false
         }
       }
     }
@@ -780,7 +817,8 @@
       "name": "api-version",
       "description": "Version of API to invoke",
       "required": true,
-      "type": "string"
+      "type": "string",
+      "x-ms-nullable": false
     },
     "PhoneNumberOperationId": {
       "in": "path",
