@@ -2247,6 +2247,23 @@
       },
       "description": "Profile of network configuration."
     },
+    "MaintenanceConfiguration": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/SubResource"
+        },
+        {
+          "properties": {
+            "properties": {
+              "description": "Properties of a default maintenance configuration.",
+              "$ref": "#/definitions/MaintenanceConfigurationProperties",
+              "x-ms-client-flatten": true
+            }
+          }
+        }
+      ],
+      "description": "maintenance configuration."
+    },
     "MaintenanceConfigurationProperties": {
       "properties": {
         "timeInWeek": {
