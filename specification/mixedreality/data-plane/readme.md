@@ -47,6 +47,7 @@ These settings apply only when `--tag=package-2021-01-01-preview` is specified o
 input-file:
 - Microsoft.MixedReality/preview/2021-01-01-preview/mr-arr.json
 - Microsoft.MixedReality/preview/2019-02-28-preview/mr-sts.json
+```
 
 ### Tag: package-2019-02-28-preview
 
