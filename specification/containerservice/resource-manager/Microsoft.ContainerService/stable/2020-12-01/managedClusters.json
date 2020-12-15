@@ -910,7 +910,38 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/MaintenanceConfigurationListResult"
+              "properties": {
+                "value": {
+                  "type": "array",
+                  "items": {
+                    "allOf": [
+                      {
+                        "$ref": "#/definitions/SubResource"
+                      },
+                      {
+                        "properties": {
+                          "systemData": {
+                            "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
+                          },
+                          "properties": {
+                            "description": "Properties of a default maintenance configuration.",
+                            "$ref": "#/definitions/MaintenanceConfigurationProperties",
+                            "x-ms-client-flatten": true
+                          }
+                        }
+                      }
+                    ],
+                    "description": "maintenance configuration."
+                  },
+                  "description": "The list of maintenance configurations."
+                },
+                "nextLink": {
+                  "type": "string",
+                  "description": "The URL to get the next set of maintenance configuration results.",
+                  "readOnly": true
+                }
+              },
+              "description": "The response from the List maintenance configurations operation."
             }
           },
           "default": {
@@ -963,7 +994,24 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/MaintenanceConfiguration"
+              "allOf": [
+                {
+                  "$ref": "#/definitions/SubResource"
+                },
+                {
+                  "properties": {
+                    "systemData": {
+                      "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
+                    },
+                    "properties": {
+                      "description": "Properties of a default maintenance configuration.",
+                      "$ref": "#/definitions/MaintenanceConfigurationProperties",
+                      "x-ms-client-flatten": true
+                    }
+                  }
+                }
+              ],
+              "description": "maintenance configuration."
             }
           },
           "default": {
@@ -1011,7 +1059,24 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/MaintenanceConfiguration"
+              "allOf": [
+                {
+                  "$ref": "#/definitions/SubResource"
+                },
+                {
+                  "properties": {
+                    "systemData": {
+                      "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
+                    },
+                    "properties": {
+                      "description": "Properties of a default maintenance configuration.",
+                      "$ref": "#/definitions/MaintenanceConfigurationProperties",
+                      "x-ms-client-flatten": true
+                    }
+                  }
+                }
+              ],
+              "description": "maintenance configuration."
             },
             "description": "Parameters supplied to the Create or Update a default maintenance configuration."
           }
@@ -1020,7 +1085,24 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/MaintenanceConfiguration"
+              "allOf": [
+                {
+                  "$ref": "#/definitions/SubResource"
+                },
+                {
+                  "properties": {
+                    "systemData": {
+                      "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
+                    },
+                    "properties": {
+                      "description": "Properties of a default maintenance configuration.",
+                      "$ref": "#/definitions/MaintenanceConfigurationProperties",
+                      "x-ms-client-flatten": true
+                    }
+                  }
+                }
+              ],
+              "description": "maintenance configuration."
             }
           },
           "default": {
@@ -2455,7 +2537,24 @@
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/MaintenanceConfiguration"
+            "allOf": [
+              {
+                "$ref": "#/definitions/SubResource"
+              },
+              {
+                "properties": {
+                  "systemData": {
+                    "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
+                  },
+                  "properties": {
+                    "description": "Properties of a default maintenance configuration.",
+                    "$ref": "#/definitions/MaintenanceConfigurationProperties",
+                    "x-ms-client-flatten": true
+                  }
+                }
+              }
+            ],
+            "description": "maintenance configuration."
           },
           "description": "The list of maintenance configurations."
         },
@@ -2474,6 +2573,9 @@
         },
         {
           "properties": {
+            "systemData": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
+            },
             "properties": {
               "description": "Properties of a default maintenance configuration.",
               "$ref": "#/definitions/MaintenanceConfigurationProperties",
@@ -2486,9 +2588,6 @@
     },
     "MaintenanceConfigurationProperties": {
       "properties": {
-        "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
-        },
         "timeInWeek": {
           "type": "array",
           "items": {
