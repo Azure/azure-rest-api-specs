@@ -891,7 +891,7 @@
         ],
         "operationId": "MaintenanceConfigurations_List",
         "summary": "Gets a list of maintenance configurations in the specified managed cluster.",
-        "description": "Gets a list of maintenance configurations in the specified managed cluster. The operation returns properties of each agent pool.",
+        "description": "Gets a list of maintenance configurations in the specified managed cluster. The operation returns properties of each maintenance configuration.",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -2475,7 +2475,9 @@
         {
           "properties": {
             "systemData": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+              "readOnly": true,
+              "description": "The system meta data relating to this resource."
             },
             "properties": {
               "description": "Properties of a default maintenance configuration.",
