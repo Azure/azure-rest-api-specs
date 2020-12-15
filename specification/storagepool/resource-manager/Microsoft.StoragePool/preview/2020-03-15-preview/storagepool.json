@@ -170,7 +170,7 @@
           "DiskPools"
         ],
         "operationId": "DiskPools_CreateOrUpdate",
-        "description": "Create a new Disk Pool.",
+        "description": "Create or Update Disk Pool",
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -220,7 +220,7 @@
           "DiskPools"
         ],
         "operationId": "DiskPools_Update",
-        "description": "Update a Disk Pool.",
+        "description": "Update a Disk Pool",
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -240,7 +240,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Updated DiskPool attributes",
+            "description": "OK -- returned when the diskPool was already created from a previous request with the same properties specified in the request body.",
+            "schema": {
+              "$ref": "#/definitions/DiskPool"
+            }
+          },
+          "202": {
+            "description": "Accepted -- Create or update request accepted; operation will complete asynchronously.",
             "schema": {
               "$ref": "#/definitions/DiskPool"
             }
@@ -257,14 +263,14 @@
             "$ref": "./examples/DiskPools_Patch.json"
           }
         },
-        "x-ms-long-running-operation": false
+        "x-ms-long-running-operation": true
       },
       "delete": {
         "tags": [
           "DiskPools"
         ],
         "operationId": "DiskPools_Delete",
-        "description": "Delete a Disk Pool.",
+        "description": "Delete a Disk Pool",
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -308,7 +314,7 @@
           "DiskPools"
         ],
         "operationId": "DiskPools_Get",
-        "description": "Get a Disk Pool.",
+        "description": "Get a Disk Pool",
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -394,7 +400,7 @@
         "tags": [
           "IscsiTargets"
         ],
-        "description": "Create or Update an iSCSI target.",
+        "description": "Create or Update an iSCSI target",
         "operationId": "IscsiTargets_CreateOrUpdate",
         "parameters": [
           {
@@ -447,7 +453,7 @@
         "tags": [
           "IscsiTargets"
         ],
-        "description": "Update an iSCSI target.",
+        "description": "Update an iSCSI target",
         "operationId": "IscsiTargets_Update",
         "parameters": [
           {
@@ -809,10 +815,6 @@
           "description": "RP defined properties for Disk Pool operations.",
           "$ref": "#/definitions/DiskPoolProperties"
         },
-        "sku": {
-          "description": "Sku description.",
-          "$ref": "#/definitions/Sku"
-        },
         "systemData": {
           "description": "Resource metadata required by ARM RPC",
           "readOnly": true,
@@ -837,10 +839,6 @@
           "description": "RP defined properties for Disk Pool operations.",
           "$ref": "#/definitions/DiskPoolUpdateProperties"
         },
-        "sku": {
-          "description": "Sku description.",
-          "$ref": "#/definitions/Sku"
-        },
         "systemData": {
           "description": "Resource metadata required by ARM RPC",
           "readOnly": true,
@@ -849,7 +847,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/TrackedResource"
+          "$ref": "#/definitions/TrackedResourceUpdate"
         }
       ]
     },
@@ -909,6 +907,13 @@
             "create",
             "read"
           ]
+        },
+        "additionalCapabilities": {
+          "type": "array",
+          "description": "List of additional capabilities to enable or disable for a Disk Pool",
+          "items": {
+            "$ref": "#/definitions/AdditionalCapability"
+          }
         }
       }
     },
@@ -921,13 +926,6 @@
           "type": "string",
           "$ref": "#/definitions/ProvisioningState",
           "readOnly": true
-        },
-        "availabilityZones": {
-          "type": "array",
-          "description": "Logical zone for DiskPool resource.",
-          "items": {
-            "$ref": "#/definitions/AvailabilityZone"
-          }
         },
         "status": {
           "type": "string",
@@ -942,24 +940,23 @@
             "name": "OperationalStatus",
             "modelAsString": true
           },
-          "description": "Operational status of the Disk pool"
+          "description": "Operational status of the Disk Pool"
         },
         "disks": {
           "type": "array",
-          "description": "List of Azure managed disks to attach to a DiskPool",
+          "description": "List of Azure managed disks to attach to a Disk Pool",
           "items": {
             "$ref": "#/definitions/Disk"
           },
           "minLength": 1,
           "maxLength": 15
         },
-        "subnetId": {
-          "type": "string",
-          "description": "Azure resource id of the subnet for the DiskPool",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ]
+        "additionalCapabilities": {
+          "type": "array",
+          "description": "List of additional capabilities to enable or disable for a Disk Pool",
+          "items": {
+            "$ref": "#/definitions/AdditionalCapability"
+          }
         }
       }
     },
@@ -977,6 +974,10 @@
         }
       }
     },
+    "AdditionalCapability": {
+      "type": "string",
+      "description": "Enables or disables a capability on the Disk Pool"
+    },
     "IscsiTargetList": {
       "type": "object",
       "required": [
@@ -987,7 +988,7 @@
       "properties": {
         "value": {
           "type": "array",
-          "description": "An array of iSCSI targets within a Disk Pool.",
+          "description": "An array of iSCSI targets within a Disk Pool",
           "items": {
             "$ref": "#/definitions/IscsiTarget"
           }
@@ -1117,10 +1118,6 @@
           },
           "maxLength": 1,
           "minLength": 1
-        },
-        "targetIqn": {
-          "type": "string",
-          "description": "iSCSI target iqn (iSCSI Qualified Name); example: iqn.2005-03.org.iscsi:server"
         }
       }
     },
@@ -1216,7 +1213,7 @@
     },
     "Attributes": {
       "type": "object",
-      "description": "Attributes of an iSCSI target",
+      "description": "Attributes of a target portal group",
       "required": [
         "authentication",
         "prodModeWriteProtect"
@@ -1243,7 +1240,7 @@
         "username",
         "password"
       ],
-      "description": "CHAP credentials for an iSCSI target",
+      "description": "CHAP credentials for an iSCSI target for a specific initiator",
       "properties": {
         "username": {
           "type": "string",
@@ -1265,14 +1262,14 @@
         "name",
         "managedDiskAzureResourceId"
       ],
-      "description": "Lun to expose the ManagedDisk.",
+      "description": "Lun to expose the ManagedDisk",
       "additionalProperties": false,
       "properties": {
         "name": {
           "type": "string",
           "minimum": 7,
           "maximum": 12,
-          "description": "Lun name."
+          "description": "User defined name for iSCSI Lun; ex: \"lun0\""
         },
         "managedDiskAzureResourceId": {
           "type": "string",
@@ -1340,45 +1337,6 @@
         }
       }
     },
-    "Sku": {
-      "description": "The resource model definition representing SKU",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "The name of the SKU. Ex - P3. It is typically a letter+number code"
-        },
-        "tier": {
-          "type": "string",
-          "enum": [
-            "Free",
-            "Basic",
-            "Standard",
-            "Premium"
-          ],
-          "x-ms-enum": {
-            "name": "SkuTier",
-            "modelAsString": false
-          },
-          "description": "This field is required to be implemented by the Resource Provider if the service has more than one tier, but is not required on a PUT."
-        },
-        "size": {
-          "type": "string",
-          "description": "The SKU size. When the name field is the combination of tier and some other value, this would be the standalone code. "
-        },
-        "family": {
-          "type": "string",
-          "description": "If the service has different generations of hardware, for the same SKU, then that can be captured here."
-        },
-        "capacity": {
-          "type": "integer",
-          "format": "int32",
-          "description": "If the SKU supports scale out/in then the capacity integer should be included. If scale out/in is not possible for the resource this may be omitted."
-        }
-      },
-      "required": [
-        "name"
-      ]
-    },
     "TrackedResource": {
       "description": "The resource model definition for a ARM tracked top level resource",
       "properties": {
@@ -1406,6 +1364,36 @@
       "required": [
         "location"
       ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ]
+    },
+    "TrackedResourceUpdate": {
+      "description": "The resource model definition for a ARM tracked top level resource",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-ms-mutability": [
+            "read",
+            "create",
+            "update"
+          ],
+          "description": "Resource tags."
+        },
+        "location": {
+          "type": "string",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ],
+          "description": "The geo-location where the resource lives"
+        }
+      },
       "allOf": [
         {
           "$ref": "#/definitions/Resource"
