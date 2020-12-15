@@ -22,9 +22,10 @@ For other options on installation see [Installing AutoRest](https://aka.ms/autor
 
 ### Basic Information
 
-These are the global settings for the communicationservices.
+These are the global settings for Azure Communication Services.
 
 ```yaml
+title: Azure Communication Services
 openapi-type: data-plane
 tag: package-2020-07-20-preview1
 ```
@@ -37,8 +38,6 @@ These settings apply only when `--tag=package-2020-07-20-preview1` is specified 
 input-file:
   - Microsoft.CommunicationServicesAdministration/preview/2020-07-20-preview1/communicationservicesadministration.json
   - Microsoft.CommunicationServicesSms/preview/2020-07-20-preview1/communicationservicessms.json
-title:
-  Azure Communication Services
 ```
 
 ```yaml
@@ -53,8 +52,6 @@ These settings apply only when `--tag=package-2020-09-21-preview2` is specified 
 ```yaml $(tag) == 'package-2020-09-21-preview2'
 input-file:
   - Microsoft.CommunicationServicesChat/preview/2020-09-21-preview2/communicationserviceschat.json
-title:
-  Azure Communication Services
 ```
 
 ### Tag: package-2020-07-20-preview2
