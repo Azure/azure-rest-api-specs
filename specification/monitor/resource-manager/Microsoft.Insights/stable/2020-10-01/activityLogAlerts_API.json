@@ -37,7 +37,7 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Insights/activityLogAlerts/{alertRuleName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Insights/activityLogAlerts/{activityLogAlertName}": {
       "put": {
         "description": "Create a new Activity Log Alert rule or update an existing one.",
         "operationId": "ActivityLogAlerts_CreateOrUpdate",
@@ -60,7 +60,7 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/AlertRuleNameParameter"
+            "$ref": "#/parameters/ActivityLogAlertNameParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
@@ -71,7 +71,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/AlertRuleResource"
+              "$ref": "#/definitions/ActivityLogAlertResource"
             }
           }
         ],
@@ -79,13 +79,13 @@
           "200": {
             "description": "An existing Activity Log Alert rule was successfully updated.",
             "schema": {
-              "$ref": "#/definitions/AlertRuleResource"
+              "$ref": "#/definitions/ActivityLogAlertResource"
             }
           },
           "201": {
             "description": "A new Activity Log Alert rule was successfully created.",
             "schema": {
-              "$ref": "#/definitions/AlertRuleResource"
+              "$ref": "#/definitions/ActivityLogAlertResource"
             }
           },
           "default": {
@@ -112,7 +112,7 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/AlertRuleNameParameter"
+            "$ref": "#/parameters/ActivityLogAlertNameParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
@@ -122,7 +122,7 @@
           "200": {
             "description": "The request succeeded.",
             "schema": {
-              "$ref": "#/definitions/AlertRuleResource"
+              "$ref": "#/definitions/ActivityLogAlertResource"
             }
           },
           "default": {
@@ -149,7 +149,7 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/AlertRuleNameParameter"
+            "$ref": "#/parameters/ActivityLogAlertNameParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
@@ -186,7 +186,7 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/AlertRuleNameParameter"
+            "$ref": "#/parameters/ActivityLogAlertNameParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
@@ -205,7 +205,7 @@
           "200": {
             "description": "An existing Activity Log Alert rule was successfully updated.",
             "schema": {
-              "$ref": "#/definitions/AlertRuleResource"
+              "$ref": "#/definitions/ActivityLogAlertResource"
             }
           },
           "default": {
@@ -332,7 +332,7 @@
         }
       }
     },
-    "AlertRuleResource": {
+    "ActivityLogAlertResource": {
       "description": "An Activity Log Alert rule resource.",
       "allOf": [
         {
@@ -354,7 +354,7 @@
           "description": "The list of Activity Log Alert rules.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/AlertRuleResource"
+            "$ref": "#/definitions/ActivityLogAlertResource"
           }
         },
         "nextLink": {
@@ -528,8 +528,8 @@
     }
   },
   "parameters": {
-    "AlertRuleNameParameter": {
-      "name": "alertRuleName",
+    "ActivityLogAlertNameParameter": {
+      "name": "activityLogAlertName",
       "in": "path",
       "required": true,
       "type": "string",
