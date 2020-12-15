@@ -39,7 +39,7 @@ input-file:
   - Microsoft.BotService/stable/2020-06-02/botservice.json
 directive:
   - suppress: SECRET_PROPERTY
-    from: botservice.json
+    from: ListChannelsByBotService.json
     reason: We do need to return verifyToken in FacebookChannelProperties.
 ```
 
