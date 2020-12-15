@@ -2,7 +2,6 @@
   "swagger": "2.0",
   "info": {
     "title": "Azure Machine Learning Workspaces",
-    "description": "These APIs allow end users to operate on MFE Workspace resources.",
     "version": "2020-12-01-preview"
   },
   "host": "management.azure.com",
@@ -25,15 +24,6 @@
         ],
         "parameters": [
           {
-            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
-          },
-          {
             "in": "path",
             "name": "endpointName",
             "description": "Inference endpoint name",
@@ -48,10 +38,16 @@
             "type": "string"
           },
           {
-            "in": "query",
-            "name": "api-version",
-            "description": "Version of Azure Machine Learning resource provider API.",
-            "type": "string"
+            "$ref": "machineLearningServices.json#/parameters/APIVersionParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
           },
           {
             "in": "body",
@@ -66,7 +62,7 @@
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "machineLearningServices.json#/definitions/ErrorResponse"
+              "$ref": "machineLearningServices.json#/definitions/MachineLearningServiceError"
             }
           },
           "200": {
@@ -99,15 +95,6 @@
         ],
         "parameters": [
           {
-            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
-          },
-          {
             "in": "path",
             "name": "endpointName",
             "description": "Endpoint name",
@@ -122,17 +109,23 @@
             "type": "string"
           },
           {
-            "in": "query",
-            "name": "api-version",
-            "description": "Version of Azure Machine Learning resource provider API.",
-            "type": "string"
+            "$ref": "machineLearningServices.json#/parameters/APIVersionParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
           }
         ],
         "responses": {
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "machineLearningServices.json#/definitions/ErrorResponse"
+              "$ref": "machineLearningServices.json#/definitions/MachineLearningServiceError"
             }
           },
           "200": {
@@ -159,15 +152,6 @@
         ],
         "parameters": [
           {
-            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
-          },
-          {
             "in": "path",
             "name": "endpointName",
             "description": "Endpoint name",
@@ -182,17 +166,23 @@
             "type": "string"
           },
           {
-            "in": "query",
-            "name": "api-version",
-            "description": "API version.",
-            "type": "string"
+            "$ref": "machineLearningServices.json#/parameters/APIVersionParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
           }
         ],
         "responses": {
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "machineLearningServices.json#/definitions/ErrorResponse"
+              "$ref": "machineLearningServices.json#/definitions/MachineLearningServiceError"
             }
           },
           "200": {
@@ -221,15 +211,6 @@
         ],
         "parameters": [
           {
-            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
-          },
-          {
             "in": "path",
             "name": "endpointName",
             "description": "Endpoint name",
@@ -237,23 +218,26 @@
             "type": "string"
           },
           {
-            "in": "query",
-            "name": "api-version",
-            "description": "Version of Azure Machine Learning resource provider API.",
-            "type": "string"
+            "$ref": "machineLearningServices.json#/parameters/APIVersionParameter"
           },
           {
-            "in": "query",
-            "name": "$skipToken",
-            "description": "Continuation token for pagination.",
-            "type": "string"
+            "$ref": "machineLearningServices.json#/parameters/PaginationParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
           }
         ],
         "responses": {
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "machineLearningServices.json#/definitions/ErrorResponse"
+              "$ref": "machineLearningServices.json#/definitions/MachineLearningServiceError"
             }
           },
           "200": {
@@ -288,15 +272,6 @@
         ],
         "parameters": [
           {
-            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
-          },
-          {
             "in": "path",
             "name": "endpointName",
             "description": "Name for the Batch inference endpoint.",
@@ -304,10 +279,16 @@
             "type": "string"
           },
           {
-            "in": "query",
-            "name": "api-version",
-            "description": "Version of Azure Machine Learning resource provider API.",
-            "type": "string"
+            "$ref": "machineLearningServices.json#/parameters/APIVersionParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
           },
           {
             "in": "body",
@@ -322,7 +303,7 @@
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "machineLearningServices.json#/definitions/ErrorResponse"
+              "$ref": "machineLearningServices.json#/definitions/MachineLearningServiceError"
             }
           },
           "200": {
@@ -355,15 +336,6 @@
         ],
         "parameters": [
           {
-            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
-          },
-          {
             "in": "path",
             "name": "endpointName",
             "description": "Name for the Batch Endpoint.",
@@ -371,17 +343,23 @@
             "type": "string"
           },
           {
-            "in": "query",
-            "name": "api-version",
-            "description": "Version of Azure Machine Learning resource provider API.",
-            "type": "string"
+            "$ref": "machineLearningServices.json#/parameters/APIVersionParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
           }
         ],
         "responses": {
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "machineLearningServices.json#/definitions/ErrorResponse"
+              "$ref": "machineLearningServices.json#/definitions/MachineLearningServiceError"
             }
           },
           "200": {
@@ -408,15 +386,6 @@
         ],
         "parameters": [
           {
-            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
-          },
-          {
             "in": "path",
             "name": "endpointName",
             "description": "Inference Endpoint name.",
@@ -424,17 +393,23 @@
             "type": "string"
           },
           {
-            "in": "query",
-            "name": "api-version",
-            "description": "API version.",
-            "type": "string"
+            "$ref": "machineLearningServices.json#/parameters/APIVersionParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
           }
         ],
         "responses": {
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "machineLearningServices.json#/definitions/ErrorResponse"
+              "$ref": "machineLearningServices.json#/definitions/MachineLearningServiceError"
             }
           },
           "200": {
@@ -463,6 +438,12 @@
         ],
         "parameters": [
           {
+            "$ref": "machineLearningServices.json#/parameters/APIVersionParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/PaginationParameter"
+          },
+          {
             "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
           },
           {
@@ -470,25 +451,13 @@
           },
           {
             "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
-          },
-          {
-            "in": "query",
-            "name": "api-version",
-            "description": "Version of Azure Machine Learning resource provider API.",
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "name": "$skipToken",
-            "description": "Continuation token for pagination.",
-            "type": "string"
           }
         ],
         "responses": {
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "machineLearningServices.json#/definitions/ErrorResponse"
+              "$ref": "machineLearningServices.json#/definitions/MachineLearningServiceError"
             }
           },
           "200": {
@@ -520,15 +489,6 @@
         ],
         "parameters": [
           {
-            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
-          },
-          {
             "in": "path",
             "name": "endpointName",
             "description": "Inference Endpoint name.",
@@ -536,17 +496,23 @@
             "type": "string"
           },
           {
-            "in": "query",
-            "name": "api-version",
-            "description": "API version.",
-            "type": "string"
+            "$ref": "machineLearningServices.json#/parameters/APIVersionParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
           }
         ],
         "responses": {
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "machineLearningServices.json#/definitions/ErrorResponse"
+              "$ref": "machineLearningServices.json#/definitions/MachineLearningServiceError"
             }
           },
           "200": {
@@ -578,15 +544,6 @@
         ],
         "parameters": [
           {
-            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
-          },
-          {
             "in": "path",
             "name": "name",
             "description": "Container name.",
@@ -594,10 +551,16 @@
             "type": "string"
           },
           {
-            "in": "query",
-            "name": "api-version",
-            "description": "API version.",
-            "type": "string"
+            "$ref": "machineLearningServices.json#/parameters/APIVersionParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
           },
           {
             "in": "body",
@@ -612,7 +575,7 @@
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "machineLearningServices.json#/definitions/ErrorResponse"
+              "$ref": "machineLearningServices.json#/definitions/MachineLearningServiceError"
             }
           },
           "200": {
@@ -645,15 +608,6 @@
         ],
         "parameters": [
           {
-            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
-          },
-          {
             "in": "path",
             "name": "name",
             "description": "Container name.",
@@ -661,17 +615,23 @@
             "type": "string"
           },
           {
-            "in": "query",
-            "name": "api-version",
-            "description": "API version.",
-            "type": "string"
+            "$ref": "machineLearningServices.json#/parameters/APIVersionParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
           }
         ],
         "responses": {
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "machineLearningServices.json#/definitions/ErrorResponse"
+              "$ref": "machineLearningServices.json#/definitions/MachineLearningServiceError"
             }
           },
           "200": {
@@ -698,15 +658,6 @@
         ],
         "parameters": [
           {
-            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
-          },
-          {
             "in": "path",
             "name": "name",
             "description": "Container name.",
@@ -714,17 +665,23 @@
             "type": "string"
           },
           {
-            "in": "query",
-            "name": "api-version",
-            "description": "API version.",
-            "type": "string"
+            "$ref": "machineLearningServices.json#/parameters/APIVersionParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
           }
         ],
         "responses": {
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "machineLearningServices.json#/definitions/ErrorResponse"
+              "$ref": "machineLearningServices.json#/definitions/MachineLearningServiceError"
             }
           },
           "200": {
@@ -753,6 +710,12 @@
         ],
         "parameters": [
           {
+            "$ref": "machineLearningServices.json#/parameters/APIVersionParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/PaginationParameter"
+          },
+          {
             "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
           },
           {
@@ -760,25 +723,13 @@
           },
           {
             "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
-          },
-          {
-            "in": "query",
-            "name": "api-version",
-            "description": "API version.",
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "name": "$skipToken",
-            "description": "Opaque token to retrieve the next page of results from a previous query.",
-            "type": "string"
           }
         ],
         "responses": {
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "machineLearningServices.json#/definitions/ErrorResponse"
+              "$ref": "machineLearningServices.json#/definitions/MachineLearningServiceError"
             }
           },
           "200": {
@@ -813,15 +764,6 @@
         ],
         "parameters": [
           {
-            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
-          },
-          {
             "in": "path",
             "name": "name",
             "description": "Container name.",
@@ -836,10 +778,16 @@
             "type": "string"
           },
           {
-            "in": "query",
-            "name": "api-version",
-            "description": "API version.",
-            "type": "string"
+            "$ref": "machineLearningServices.json#/parameters/APIVersionParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
           },
           {
             "in": "body",
@@ -854,7 +802,7 @@
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "machineLearningServices.json#/definitions/ErrorResponse"
+              "$ref": "machineLearningServices.json#/definitions/MachineLearningServiceError"
             }
           },
           "200": {
@@ -887,15 +835,6 @@
         ],
         "parameters": [
           {
-            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
-          },
-          {
             "in": "path",
             "name": "name",
             "description": "Container name.",
@@ -910,17 +849,23 @@
             "type": "string"
           },
           {
-            "in": "query",
-            "name": "api-version",
-            "description": "API version.",
-            "type": "string"
+            "$ref": "machineLearningServices.json#/parameters/APIVersionParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
           }
         ],
         "responses": {
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "machineLearningServices.json#/definitions/ErrorResponse"
+              "$ref": "machineLearningServices.json#/definitions/MachineLearningServiceError"
             }
           },
           "200": {
@@ -947,15 +892,6 @@
         ],
         "parameters": [
           {
-            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
-          },
-          {
             "in": "path",
             "name": "name",
             "description": "Container name.",
@@ -970,17 +906,23 @@
             "type": "string"
           },
           {
-            "in": "query",
-            "name": "api-version",
-            "description": "API version.",
-            "type": "string"
+            "$ref": "machineLearningServices.json#/parameters/APIVersionParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
           }
         ],
         "responses": {
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "machineLearningServices.json#/definitions/ErrorResponse"
+              "$ref": "machineLearningServices.json#/definitions/MachineLearningServiceError"
             }
           },
           "200": {
@@ -1009,15 +951,6 @@
         ],
         "parameters": [
           {
-            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
-          },
-          {
             "in": "path",
             "name": "name",
             "description": "Container name.",
@@ -1025,23 +958,26 @@
             "type": "string"
           },
           {
-            "in": "query",
-            "name": "api-version",
-            "description": "API version.",
-            "type": "string"
+            "$ref": "machineLearningServices.json#/parameters/APIVersionParameter"
           },
           {
-            "in": "query",
-            "name": "$skipToken",
-            "description": "Opaque token to retrieve the next page of results from a previous query.",
-            "type": "string"
+            "$ref": "machineLearningServices.json#/parameters/PaginationParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
           }
         ],
         "responses": {
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "machineLearningServices.json#/definitions/ErrorResponse"
+              "$ref": "machineLearningServices.json#/definitions/MachineLearningServiceError"
             }
           },
           "200": {
@@ -1076,15 +1012,6 @@
         ],
         "parameters": [
           {
-            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
-          },
-          {
             "in": "path",
             "name": "name",
             "description": "Container name.",
@@ -1092,10 +1019,16 @@
             "type": "string"
           },
           {
-            "in": "query",
-            "name": "api-version",
-            "description": "API version.",
-            "type": "string"
+            "$ref": "machineLearningServices.json#/parameters/APIVersionParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
           },
           {
             "in": "body",
@@ -1110,7 +1043,7 @@
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "machineLearningServices.json#/definitions/ErrorResponse"
+              "$ref": "machineLearningServices.json#/definitions/MachineLearningServiceError"
             }
           },
           "200": {
@@ -1143,15 +1076,6 @@
         ],
         "parameters": [
           {
-            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
-          },
-          {
             "in": "path",
             "name": "name",
             "description": "Container name.",
@@ -1159,17 +1083,23 @@
             "type": "string"
           },
           {
-            "in": "query",
-            "name": "api-version",
-            "description": "API version.",
-            "type": "string"
+            "$ref": "machineLearningServices.json#/parameters/APIVersionParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
           }
         ],
         "responses": {
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "machineLearningServices.json#/definitions/ErrorResponse"
+              "$ref": "machineLearningServices.json#/definitions/MachineLearningServiceError"
             }
           },
           "200": {
@@ -1196,15 +1126,6 @@
         ],
         "parameters": [
           {
-            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
-          },
-          {
             "in": "path",
             "name": "name",
             "description": "Container name.",
@@ -1212,17 +1133,23 @@
             "type": "string"
           },
           {
-            "in": "query",
-            "name": "api-version",
-            "description": "API version.",
-            "type": "string"
+            "$ref": "machineLearningServices.json#/parameters/APIVersionParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
           }
         ],
         "responses": {
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "machineLearningServices.json#/definitions/ErrorResponse"
+              "$ref": "machineLearningServices.json#/definitions/MachineLearningServiceError"
             }
           },
           "200": {
@@ -1251,6 +1178,12 @@
         ],
         "parameters": [
           {
+            "$ref": "machineLearningServices.json#/parameters/APIVersionParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/PaginationParameter"
+          },
+          {
             "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
           },
           {
@@ -1258,25 +1191,13 @@
           },
           {
             "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
-          },
-          {
-            "in": "query",
-            "name": "api-version",
-            "description": "API version.",
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "name": "$skipToken",
-            "description": "Opaque token to retrieve the next page of results from a previous query.",
-            "type": "string"
           }
         ],
         "responses": {
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "machineLearningServices.json#/definitions/ErrorResponse"
+              "$ref": "machineLearningServices.json#/definitions/MachineLearningServiceError"
             }
           },
           "200": {
@@ -1308,25 +1229,10 @@
         ],
         "parameters": [
           {
-            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
+            "$ref": "machineLearningServices.json#/parameters/APIVersionParameter"
           },
           {
-            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
-          },
-          {
-            "in": "query",
-            "name": "api-version",
-            "description": "API version.",
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "name": "$skipToken",
-            "description": "Opaque token to retrieve the next page of results from a previous query.",
-            "type": "string"
+            "$ref": "machineLearningServices.json#/parameters/PaginationParameter"
           },
           {
             "in": "query",
@@ -1369,13 +1275,22 @@
             "description": "Order by property in ascending order.",
             "type": "boolean",
             "default": false
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
           }
         ],
         "responses": {
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "machineLearningServices.json#/definitions/ErrorResponse"
+              "$ref": "machineLearningServices.json#/definitions/MachineLearningServiceError"
             }
           },
           "200": {
@@ -1407,15 +1322,6 @@
         ],
         "parameters": [
           {
-            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
-          },
-          {
             "in": "path",
             "name": "name",
             "description": "Datastore name.",
@@ -1423,17 +1329,23 @@
             "type": "string"
           },
           {
-            "in": "query",
-            "name": "api-version",
-            "description": "API version.",
-            "type": "string"
+            "$ref": "machineLearningServices.json#/parameters/APIVersionParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
           }
         ],
         "responses": {
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "machineLearningServices.json#/definitions/ErrorResponse"
+              "$ref": "machineLearningServices.json#/definitions/MachineLearningServiceError"
             }
           },
           "200": {
@@ -1460,15 +1372,6 @@
         ],
         "parameters": [
           {
-            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
-          },
-          {
             "in": "path",
             "name": "name",
             "description": "Datastore name.",
@@ -1476,17 +1379,23 @@
             "type": "string"
           },
           {
-            "in": "query",
-            "name": "api-version",
-            "description": "API version.",
-            "type": "string"
+            "$ref": "machineLearningServices.json#/parameters/APIVersionParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
           }
         ],
         "responses": {
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "machineLearningServices.json#/definitions/ErrorResponse"
+              "$ref": "machineLearningServices.json#/definitions/MachineLearningServiceError"
             }
           },
           "200": {
@@ -1516,15 +1425,6 @@
         ],
         "parameters": [
           {
-            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
-          },
-          {
             "in": "path",
             "name": "name",
             "description": "Datastore name.",
@@ -1532,10 +1432,16 @@
             "type": "string"
           },
           {
-            "in": "query",
-            "name": "api-version",
-            "description": "API version.",
-            "type": "string"
+            "$ref": "machineLearningServices.json#/parameters/APIVersionParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
           },
           {
             "in": "body",
@@ -1551,7 +1457,7 @@
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "machineLearningServices.json#/definitions/ErrorResponse"
+              "$ref": "machineLearningServices.json#/definitions/MachineLearningServiceError"
             }
           },
           "200": {
@@ -1586,15 +1492,6 @@
         ],
         "parameters": [
           {
-            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
-          },
-          {
             "in": "path",
             "name": "name",
             "description": "Datastore name.",
@@ -1602,17 +1499,23 @@
             "type": "string"
           },
           {
-            "in": "query",
-            "name": "api-version",
-            "description": "API version.",
-            "type": "string"
+            "$ref": "machineLearningServices.json#/parameters/APIVersionParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
           }
         ],
         "responses": {
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "machineLearningServices.json#/definitions/ErrorResponse"
+              "$ref": "machineLearningServices.json#/definitions/MachineLearningServiceError"
             }
           },
           "200": {
@@ -1644,15 +1547,6 @@
         ],
         "parameters": [
           {
-            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
-          },
-          {
             "in": "path",
             "name": "name",
             "description": "Container name.",
@@ -1667,10 +1561,16 @@
             "type": "string"
           },
           {
-            "in": "query",
-            "name": "api-version",
-            "description": "API version.",
-            "type": "string"
+            "$ref": "machineLearningServices.json#/parameters/APIVersionParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
           },
           {
             "in": "body",
@@ -1685,7 +1585,7 @@
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "machineLearningServices.json#/definitions/ErrorResponse"
+              "$ref": "machineLearningServices.json#/definitions/MachineLearningServiceError"
             }
           },
           "200": {
@@ -1718,15 +1618,6 @@
         ],
         "parameters": [
           {
-            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
-          },
-          {
             "in": "path",
             "name": "name",
             "description": "Container name.",
@@ -1741,17 +1632,23 @@
             "type": "string"
           },
           {
-            "in": "query",
-            "name": "api-version",
-            "description": "API version.",
-            "type": "string"
+            "$ref": "machineLearningServices.json#/parameters/APIVersionParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
           }
         ],
         "responses": {
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "machineLearningServices.json#/definitions/ErrorResponse"
+              "$ref": "machineLearningServices.json#/definitions/MachineLearningServiceError"
             }
           },
           "200": {
@@ -1778,15 +1675,6 @@
         ],
         "parameters": [
           {
-            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
-          },
-          {
             "in": "path",
             "name": "name",
             "description": "Container name.",
@@ -1801,17 +1689,23 @@
             "type": "string"
           },
           {
-            "in": "query",
-            "name": "api-version",
-            "description": "API version.",
-            "type": "string"
+            "$ref": "machineLearningServices.json#/parameters/APIVersionParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
           }
         ],
         "responses": {
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "machineLearningServices.json#/definitions/ErrorResponse"
+              "$ref": "machineLearningServices.json#/definitions/MachineLearningServiceError"
             }
           },
           "200": {
@@ -1840,15 +1734,6 @@
         ],
         "parameters": [
           {
-            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
-          },
-          {
             "in": "path",
             "name": "name",
             "description": "Container name.",
@@ -1856,23 +1741,26 @@
             "type": "string"
           },
           {
-            "in": "query",
-            "name": "api-version",
-            "description": "API version.",
-            "type": "string"
+            "$ref": "machineLearningServices.json#/parameters/APIVersionParameter"
           },
           {
-            "in": "query",
-            "name": "$skipToken",
-            "description": "Opaque token to retrieve the next page of results from a previous query.",
-            "type": "string"
+            "$ref": "machineLearningServices.json#/parameters/PaginationParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
           }
         ],
         "responses": {
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "machineLearningServices.json#/definitions/ErrorResponse"
+              "$ref": "machineLearningServices.json#/definitions/MachineLearningServiceError"
             }
           },
           "200": {
@@ -1907,15 +1795,6 @@
         ],
         "parameters": [
           {
-            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
-          },
-          {
             "in": "path",
             "name": "name",
             "description": "Container name.",
@@ -1923,10 +1802,16 @@
             "type": "string"
           },
           {
-            "in": "query",
-            "name": "api-version",
-            "description": "API version.",
-            "type": "string"
+            "$ref": "machineLearningServices.json#/parameters/APIVersionParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
           },
           {
             "in": "body",
@@ -1941,7 +1826,7 @@
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "machineLearningServices.json#/definitions/ErrorResponse"
+              "$ref": "machineLearningServices.json#/definitions/MachineLearningServiceError"
             }
           },
           "200": {
@@ -1974,15 +1859,6 @@
         ],
         "parameters": [
           {
-            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
-          },
-          {
             "in": "path",
             "name": "name",
             "description": "Container name.",
@@ -1990,17 +1866,23 @@
             "type": "string"
           },
           {
-            "in": "query",
-            "name": "api-version",
-            "description": "API version.",
-            "type": "string"
+            "$ref": "machineLearningServices.json#/parameters/APIVersionParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
           }
         ],
         "responses": {
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "machineLearningServices.json#/definitions/ErrorResponse"
+              "$ref": "machineLearningServices.json#/definitions/MachineLearningServiceError"
             }
           },
           "200": {
@@ -2027,15 +1909,6 @@
         ],
         "parameters": [
           {
-            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
-          },
-          {
             "in": "path",
             "name": "name",
             "description": "Container name.",
@@ -2043,17 +1916,23 @@
             "type": "string"
           },
           {
-            "in": "query",
-            "name": "api-version",
-            "description": "API version.",
-            "type": "string"
+            "$ref": "machineLearningServices.json#/parameters/APIVersionParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
           }
         ],
         "responses": {
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "machineLearningServices.json#/definitions/ErrorResponse"
+              "$ref": "machineLearningServices.json#/definitions/MachineLearningServiceError"
             }
           },
           "200": {
@@ -2082,6 +1961,12 @@
         ],
         "parameters": [
           {
+            "$ref": "machineLearningServices.json#/parameters/APIVersionParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/PaginationParameter"
+          },
+          {
             "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
           },
           {
@@ -2089,25 +1974,13 @@
           },
           {
             "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
-          },
-          {
-            "in": "query",
-            "name": "api-version",
-            "description": "API version.",
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "name": "$skipToken",
-            "description": "Opaque token to retrieve the next page of results from a previous query.",
-            "type": "string"
           }
         ],
         "responses": {
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "machineLearningServices.json#/definitions/ErrorResponse"
+              "$ref": "machineLearningServices.json#/definitions/MachineLearningServiceError"
             }
           },
           "200": {
@@ -2141,15 +2014,6 @@
         ],
         "parameters": [
           {
-            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
-          },
-          {
             "in": "path",
             "name": "name",
             "required": true,
@@ -2162,9 +2026,16 @@
             "type": "string"
           },
           {
-            "in": "query",
-            "name": "api-version",
-            "type": "string"
+            "$ref": "machineLearningServices.json#/parameters/APIVersionParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
           },
           {
             "in": "body",
@@ -2178,7 +2049,7 @@
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "machineLearningServices.json#/definitions/ErrorResponse"
+              "$ref": "machineLearningServices.json#/definitions/MachineLearningServiceError"
             }
           },
           "200": {
@@ -2211,15 +2082,6 @@
         ],
         "parameters": [
           {
-            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
-          },
-          {
             "in": "path",
             "name": "name",
             "description": "Container name.",
@@ -2234,17 +2096,23 @@
             "type": "string"
           },
           {
-            "in": "query",
-            "name": "api-version",
-            "description": "API version.",
-            "type": "string"
+            "$ref": "machineLearningServices.json#/parameters/APIVersionParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
           }
         ],
         "responses": {
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "machineLearningServices.json#/definitions/ErrorResponse"
+              "$ref": "machineLearningServices.json#/definitions/MachineLearningServiceError"
             }
           },
           "200": {
@@ -2271,15 +2139,6 @@
         ],
         "parameters": [
           {
-            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
-          },
-          {
             "in": "path",
             "name": "name",
             "description": "Container name.",
@@ -2294,17 +2153,23 @@
             "type": "string"
           },
           {
-            "in": "query",
-            "name": "api-version",
-            "description": "API version.",
-            "type": "string"
+            "$ref": "machineLearningServices.json#/parameters/APIVersionParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
           }
         ],
         "responses": {
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "machineLearningServices.json#/definitions/ErrorResponse"
+              "$ref": "machineLearningServices.json#/definitions/MachineLearningServiceError"
             }
           },
           "200": {
@@ -2332,24 +2197,13 @@
         ],
         "parameters": [
           {
-            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
-          },
-          {
             "in": "path",
             "name": "name",
             "required": true,
             "type": "string"
           },
           {
-            "in": "query",
-            "name": "api-version",
-            "type": "string"
+            "$ref": "machineLearningServices.json#/parameters/APIVersionParameter"
           },
           {
             "in": "query",
@@ -2362,16 +2216,23 @@
             "type": "string"
           },
           {
-            "in": "query",
-            "name": "$skipToken",
-            "type": "string"
+            "$ref": "machineLearningServices.json#/parameters/PaginationParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
           }
         ],
         "responses": {
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "machineLearningServices.json#/definitions/ErrorResponse"
+              "$ref": "machineLearningServices.json#/definitions/MachineLearningServiceError"
             }
           },
           "200": {
@@ -2406,15 +2267,6 @@
         ],
         "parameters": [
           {
-            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
-          },
-          {
             "in": "path",
             "name": "id",
             "description": "The name and identifier for the Job.",
@@ -2422,10 +2274,16 @@
             "type": "string"
           },
           {
-            "in": "query",
-            "name": "api-version",
-            "description": "Version of Azure Machine Learning resource provider API.",
-            "type": "string"
+            "$ref": "machineLearningServices.json#/parameters/APIVersionParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
           },
           {
             "in": "body",
@@ -2440,7 +2298,7 @@
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "machineLearningServices.json#/definitions/ErrorResponse"
+              "$ref": "machineLearningServices.json#/definitions/MachineLearningServiceError"
             }
           },
           "200": {
@@ -2476,15 +2334,6 @@
         ],
         "parameters": [
           {
-            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
-          },
-          {
             "in": "path",
             "name": "id",
             "description": "The name and identifier for the Job.",
@@ -2492,17 +2341,23 @@
             "type": "string"
           },
           {
-            "in": "query",
-            "name": "api-version",
-            "description": "Version of Azure Machine Learning resource provider API.",
-            "type": "string"
+            "$ref": "machineLearningServices.json#/parameters/APIVersionParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
           }
         ],
         "responses": {
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "machineLearningServices.json#/definitions/ErrorResponse"
+              "$ref": "machineLearningServices.json#/definitions/MachineLearningServiceError"
             }
           },
           "200": {
@@ -2532,15 +2387,6 @@
         ],
         "parameters": [
           {
-            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
-          },
-          {
             "in": "path",
             "name": "id",
             "description": "The name and identifier for the Job.",
@@ -2548,17 +2394,23 @@
             "type": "string"
           },
           {
-            "in": "query",
-            "name": "api-version",
-            "description": "Version of Azure Machine Learning resource provider API.",
-            "type": "string"
+            "$ref": "machineLearningServices.json#/parameters/APIVersionParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
           }
         ],
         "responses": {
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "machineLearningServices.json#/definitions/ErrorResponse"
+              "$ref": "machineLearningServices.json#/definitions/MachineLearningServiceError"
             }
           },
           "204": {
@@ -2590,6 +2442,12 @@
         ],
         "parameters": [
           {
+            "$ref": "machineLearningServices.json#/parameters/APIVersionParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/PaginationParameter"
+          },
+          {
             "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
           },
           {
@@ -2597,25 +2455,13 @@
           },
           {
             "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
-          },
-          {
-            "in": "query",
-            "name": "api-version",
-            "description": "Version of Azure Machine Learning resource provider API.",
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "name": "$skipToken",
-            "description": "Continuation token for pagination.",
-            "type": "string"
           }
         ],
         "responses": {
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "machineLearningServices.json#/definitions/ErrorResponse"
+              "$ref": "machineLearningServices.json#/definitions/MachineLearningServiceError"
             }
           },
           "200": {
@@ -2650,15 +2496,6 @@
         ],
         "parameters": [
           {
-            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
-          },
-          {
             "in": "path",
             "name": "id",
             "description": "The name and identifier for the Job.",
@@ -2666,17 +2503,23 @@
             "type": "string"
           },
           {
-            "in": "query",
-            "name": "api-version",
-            "description": "Version of Azure Machine Learning resource provider API.",
-            "type": "string"
+            "$ref": "machineLearningServices.json#/parameters/APIVersionParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
           }
         ],
         "responses": {
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "machineLearningServices.json#/definitions/ErrorResponse"
+              "$ref": "machineLearningServices.json#/definitions/MachineLearningServiceError"
             }
           },
           "200": {
@@ -2705,15 +2548,6 @@
         ],
         "parameters": [
           {
-            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
-          },
-          {
             "in": "path",
             "name": "id",
             "description": "The name and identifier for the Job.",
@@ -2728,17 +2562,23 @@
             "type": "string"
           },
           {
-            "in": "query",
-            "name": "api-version",
-            "description": "Version of Azure Machine Learning resource provider API.",
-            "type": "string"
+            "$ref": "machineLearningServices.json#/parameters/APIVersionParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
           }
         ],
         "responses": {
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "machineLearningServices.json#/definitions/ErrorResponse"
+              "$ref": "machineLearningServices.json#/definitions/MachineLearningServiceError"
             }
           },
           "200": {
@@ -2773,15 +2613,6 @@
         ],
         "parameters": [
           {
-            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
-          },
-          {
             "in": "path",
             "name": "id",
             "description": "The name and identifier for the LabelingJob.",
@@ -2789,10 +2620,16 @@
             "type": "string"
           },
           {
-            "in": "query",
-            "name": "api-version",
-            "description": "Version of Azure Machine Learning resource provider API.",
-            "type": "string"
+            "$ref": "machineLearningServices.json#/parameters/APIVersionParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
           },
           {
             "in": "body",
@@ -2807,7 +2644,7 @@
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "machineLearningServices.json#/definitions/ErrorResponse"
+              "$ref": "machineLearningServices.json#/definitions/MachineLearningServiceError"
             }
           },
           "201": {
@@ -2840,15 +2677,6 @@
         ],
         "parameters": [
           {
-            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
-          },
-          {
             "in": "path",
             "name": "id",
             "description": "The name and identifier for the LabelingJob.",
@@ -2856,10 +2684,7 @@
             "type": "string"
           },
           {
-            "in": "query",
-            "name": "api-version",
-            "description": "Version of Azure Machine Learning resource provider API.",
-            "type": "string"
+            "$ref": "machineLearningServices.json#/parameters/APIVersionParameter"
           },
           {
             "in": "query",
@@ -2872,13 +2697,22 @@
             "name": "includeLabelCategories",
             "description": "Boolean value to indicate Whether to include LabelCategories in response.",
             "type": "boolean"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
           }
         ],
         "responses": {
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "machineLearningServices.json#/definitions/ErrorResponse"
+              "$ref": "machineLearningServices.json#/definitions/MachineLearningServiceError"
             }
           },
           "200": {
@@ -2905,15 +2739,6 @@
         ],
         "parameters": [
           {
-            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
-          },
-          {
             "in": "path",
             "name": "id",
             "description": "The name and identifier for the LabelingJob.",
@@ -2921,17 +2746,23 @@
             "type": "string"
           },
           {
-            "in": "query",
-            "name": "api-version",
-            "description": "Version of Azure Machine Learning resource provider API.",
-            "type": "string"
+            "$ref": "machineLearningServices.json#/parameters/APIVersionParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
           }
         ],
         "responses": {
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "machineLearningServices.json#/definitions/ErrorResponse"
+              "$ref": "machineLearningServices.json#/definitions/MachineLearningServiceError"
             }
           },
           "200": {
@@ -2960,25 +2791,10 @@
         ],
         "parameters": [
           {
-            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
+            "$ref": "machineLearningServices.json#/parameters/APIVersionParameter"
           },
           {
-            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
-          },
-          {
-            "in": "query",
-            "name": "api-version",
-            "description": "Version of Azure Machine Learning resource provider API.",
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "name": "$skipToken",
-            "description": "Continuation token for pagination.",
-            "type": "string"
+            "$ref": "machineLearningServices.json#/parameters/PaginationParameter"
           },
           {
             "in": "query",
@@ -2986,13 +2802,22 @@
             "description": "Number of labeling jobs to return.",
             "type": "integer",
             "format": "int32"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
           }
         ],
         "responses": {
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "machineLearningServices.json#/definitions/ErrorResponse"
+              "$ref": "machineLearningServices.json#/definitions/MachineLearningServiceError"
             }
           },
           "200": {
@@ -3024,15 +2849,6 @@
         ],
         "parameters": [
           {
-            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
-          },
-          {
             "in": "path",
             "name": "id",
             "description": "The name and identifier for the LabelingJob.",
@@ -3040,17 +2856,23 @@
             "type": "string"
           },
           {
-            "in": "query",
-            "name": "api-version",
-            "description": "Version of Azure Machine Learning resource provider API.",
-            "type": "string"
+            "$ref": "machineLearningServices.json#/parameters/APIVersionParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
           }
         ],
         "responses": {
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "machineLearningServices.json#/definitions/ErrorResponse"
+              "$ref": "machineLearningServices.json#/definitions/MachineLearningServiceError"
             }
           },
           "200": {
@@ -3076,15 +2898,6 @@
         ],
         "parameters": [
           {
-            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
-          },
-          {
             "in": "path",
             "name": "id",
             "description": "The name and identifier for the LabelingJob.",
@@ -3092,17 +2905,23 @@
             "type": "string"
           },
           {
-            "in": "query",
-            "name": "api-version",
-            "description": "Version of Azure Machine Learning resource provider API.",
-            "type": "string"
+            "$ref": "machineLearningServices.json#/parameters/APIVersionParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
           }
         ],
         "responses": {
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "machineLearningServices.json#/definitions/ErrorResponse"
+              "$ref": "machineLearningServices.json#/definitions/MachineLearningServiceError"
             }
           },
           "202": {
@@ -3131,15 +2950,6 @@
         ],
         "parameters": [
           {
-            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
-          },
-          {
             "in": "path",
             "name": "id",
             "description": "The name and identifier for the LabelingJob.",
@@ -3147,10 +2957,16 @@
             "type": "string"
           },
           {
-            "in": "query",
-            "name": "api-version",
-            "description": "Version of Azure Machine Learning resource provider API.",
-            "type": "string"
+            "$ref": "machineLearningServices.json#/parameters/APIVersionParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
           },
           {
             "in": "body",
@@ -3175,7 +2991,7 @@
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "machineLearningServices.json#/definitions/ErrorResponse"
+              "$ref": "machineLearningServices.json#/definitions/MachineLearningServiceError"
             }
           },
           "202": {
@@ -3201,15 +3017,6 @@
         ],
         "parameters": [
           {
-            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
-          },
-          {
             "in": "path",
             "name": "id",
             "description": "The name and identifier for the LabelingJob.",
@@ -3217,10 +3024,7 @@
             "type": "string"
           },
           {
-            "in": "query",
-            "name": "api-version",
-            "description": "Version of Azure Machine Learning resource provider API.",
-            "type": "string"
+            "$ref": "machineLearningServices.json#/parameters/APIVersionParameter"
           },
           {
             "in": "path",
@@ -3229,13 +3033,22 @@
             "required": true,
             "type": "string",
             "format": "uuid"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
           }
         ],
         "responses": {
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "machineLearningServices.json#/definitions/ErrorResponse"
+              "$ref": "machineLearningServices.json#/definitions/MachineLearningServiceError"
             }
           },
           "200": {
@@ -3264,25 +3077,10 @@
         ],
         "parameters": [
           {
-            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
+            "$ref": "machineLearningServices.json#/parameters/APIVersionParameter"
           },
           {
-            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
-          },
-          {
-            "in": "query",
-            "name": "api-version",
-            "description": "API version.",
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "name": "$skipToken",
-            "description": "Opaque token to retrieve the next page of results from a previous query.",
-            "type": "string"
+            "$ref": "machineLearningServices.json#/parameters/PaginationParameter"
           },
           {
             "in": "query",
@@ -3290,13 +3088,22 @@
             "description": "Maximum number of results to return.",
             "type": "integer",
             "format": "int32"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
           }
         ],
         "responses": {
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "machineLearningServices.json#/definitions/ErrorResponse"
+              "$ref": "machineLearningServices.json#/definitions/MachineLearningServiceError"
             }
           },
           "200": {
@@ -3331,15 +3138,6 @@
         ],
         "parameters": [
           {
-            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
-          },
-          {
             "in": "path",
             "name": "name",
             "description": "Container name.",
@@ -3347,10 +3145,16 @@
             "type": "string"
           },
           {
-            "in": "query",
-            "name": "api-version",
-            "description": "API version.",
-            "type": "string"
+            "$ref": "machineLearningServices.json#/parameters/APIVersionParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
           },
           {
             "in": "body",
@@ -3365,7 +3169,7 @@
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "machineLearningServices.json#/definitions/ErrorResponse"
+              "$ref": "machineLearningServices.json#/definitions/MachineLearningServiceError"
             }
           },
           "200": {
@@ -3398,15 +3202,6 @@
         ],
         "parameters": [
           {
-            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
-          },
-          {
             "in": "path",
             "name": "name",
             "description": "Container name.",
@@ -3414,17 +3209,23 @@
             "type": "string"
           },
           {
-            "in": "query",
-            "name": "api-version",
-            "description": "API version.",
-            "type": "string"
+            "$ref": "machineLearningServices.json#/parameters/APIVersionParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
           }
         ],
         "responses": {
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "machineLearningServices.json#/definitions/ErrorResponse"
+              "$ref": "machineLearningServices.json#/definitions/MachineLearningServiceError"
             }
           },
           "200": {
@@ -3451,15 +3252,6 @@
         ],
         "parameters": [
           {
-            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
-          },
-          {
             "in": "path",
             "name": "name",
             "description": "Container name.",
@@ -3467,17 +3259,23 @@
             "type": "string"
           },
           {
-            "in": "query",
-            "name": "api-version",
-            "description": "API version.",
-            "type": "string"
+            "$ref": "machineLearningServices.json#/parameters/APIVersionParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
           }
         ],
         "responses": {
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "machineLearningServices.json#/definitions/ErrorResponse"
+              "$ref": "machineLearningServices.json#/definitions/MachineLearningServiceError"
             }
           },
           "200": {
@@ -3506,15 +3304,6 @@
         ],
         "parameters": [
           {
-            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
-          },
-          {
             "in": "path",
             "name": "name",
             "description": "Model name.",
@@ -3522,16 +3311,10 @@
             "type": "string"
           },
           {
-            "in": "query",
-            "name": "api-version",
-            "description": "API version.",
-            "type": "string"
+            "$ref": "machineLearningServices.json#/parameters/APIVersionParameter"
           },
           {
-            "in": "query",
-            "name": "$skipToken",
-            "description": "Opaque token to retrieve the next page of results from a previous query.",
-            "type": "string"
+            "$ref": "machineLearningServices.json#/parameters/PaginationParameter"
           },
           {
             "in": "query",
@@ -3583,13 +3366,22 @@
             "description": "Only return the most recent version of a model.",
             "type": "boolean",
             "default": false
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
           }
         ],
         "responses": {
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "machineLearningServices.json#/definitions/ErrorResponse"
+              "$ref": "machineLearningServices.json#/definitions/MachineLearningServiceError"
             }
           },
           "200": {
@@ -3624,15 +3416,6 @@
         ],
         "parameters": [
           {
-            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
-          },
-          {
             "in": "path",
             "name": "name",
             "description": "Container name.",
@@ -3647,10 +3430,16 @@
             "type": "string"
           },
           {
-            "in": "query",
-            "name": "api-version",
-            "description": "API version.",
-            "type": "string"
+            "$ref": "machineLearningServices.json#/parameters/APIVersionParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
           },
           {
             "in": "body",
@@ -3665,7 +3454,7 @@
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "machineLearningServices.json#/definitions/ErrorResponse"
+              "$ref": "machineLearningServices.json#/definitions/MachineLearningServiceError"
             }
           },
           "200": {
@@ -3698,15 +3487,6 @@
         ],
         "parameters": [
           {
-            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
-          },
-          {
             "in": "path",
             "name": "name",
             "description": "Container name.",
@@ -3721,17 +3501,23 @@
             "type": "string"
           },
           {
-            "in": "query",
-            "name": "api-version",
-            "description": "API version.",
-            "type": "string"
+            "$ref": "machineLearningServices.json#/parameters/APIVersionParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
           }
         ],
         "responses": {
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "machineLearningServices.json#/definitions/ErrorResponse"
+              "$ref": "machineLearningServices.json#/definitions/MachineLearningServiceError"
             }
           },
           "200": {
@@ -3758,15 +3544,6 @@
         ],
         "parameters": [
           {
-            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
-          },
-          {
             "in": "path",
             "name": "name",
             "description": "Container name.",
@@ -3781,17 +3558,23 @@
             "type": "string"
           },
           {
-            "in": "query",
-            "name": "api-version",
-            "description": "API version.",
-            "type": "string"
+            "$ref": "machineLearningServices.json#/parameters/APIVersionParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
           }
         ],
         "responses": {
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "machineLearningServices.json#/definitions/ErrorResponse"
+              "$ref": "machineLearningServices.json#/definitions/MachineLearningServiceError"
             }
           },
           "200": {
@@ -3820,15 +3603,6 @@
         ],
         "parameters": [
           {
-            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
-          },
-          {
             "in": "path",
             "name": "endpointName",
             "description": "Inference endpoint name.",
@@ -3836,23 +3610,26 @@
             "type": "string"
           },
           {
-            "in": "query",
-            "name": "api-version",
-            "description": "API version.",
-            "type": "string"
+            "$ref": "machineLearningServices.json#/parameters/APIVersionParameter"
           },
           {
-            "in": "query",
-            "name": "$skipToken",
-            "description": "Opaque token to retrieve the next page of results from a previous query.",
-            "type": "string"
+            "$ref": "machineLearningServices.json#/parameters/PaginationParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
           }
         ],
         "responses": {
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "machineLearningServices.json#/definitions/ErrorResponse"
+              "$ref": "machineLearningServices.json#/definitions/MachineLearningServiceError"
             }
           },
           "200": {
@@ -3884,15 +3661,6 @@
         ],
         "parameters": [
           {
-            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
-          },
-          {
             "in": "path",
             "name": "endpointName",
             "description": "Inference endpoint name.",
@@ -3907,20 +3675,26 @@
             "type": "string"
           },
           {
-            "in": "query",
-            "name": "api-version",
-            "description": "API version.",
-            "type": "string"
+            "$ref": "machineLearningServices.json#/parameters/APIVersionParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
           }
         ],
         "responses": {
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "machineLearningServices.json#/definitions/ErrorResponse"
+              "$ref": "machineLearningServices.json#/definitions/MachineLearningServiceError"
             }
           },
-          "200": {
+          "202": {
             "description": "Success"
           },
           "204": {
@@ -3944,15 +3718,6 @@
         ],
         "parameters": [
           {
-            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
-          },
-          {
             "in": "path",
             "name": "endpointName",
             "description": "Inference endpoint name.",
@@ -3967,17 +3732,23 @@
             "type": "string"
           },
           {
-            "in": "query",
-            "name": "api-version",
-            "description": "API version.",
-            "type": "string"
+            "$ref": "machineLearningServices.json#/parameters/APIVersionParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
           }
         ],
         "responses": {
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "machineLearningServices.json#/definitions/ErrorResponse"
+              "$ref": "machineLearningServices.json#/definitions/MachineLearningServiceError"
             }
           },
           "200": {
@@ -4007,15 +3778,6 @@
         ],
         "parameters": [
           {
-            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
-          },
-          {
             "in": "path",
             "name": "endpointName",
             "description": "Inference endpoint name.",
@@ -4030,10 +3792,16 @@
             "type": "string"
           },
           {
-            "in": "query",
-            "name": "api-version",
-            "description": "API version.",
-            "type": "string"
+            "$ref": "machineLearningServices.json#/parameters/APIVersionParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
           },
           {
             "in": "body",
@@ -4048,7 +3816,7 @@
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "machineLearningServices.json#/definitions/ErrorResponse"
+              "$ref": "machineLearningServices.json#/definitions/MachineLearningServiceError"
             }
           },
           "200": {
@@ -4086,15 +3854,6 @@
         ],
         "parameters": [
           {
-            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
-          },
-          {
             "in": "path",
             "name": "endpointName",
             "description": "Inference endpoint name.",
@@ -4109,10 +3868,16 @@
             "type": "string"
           },
           {
-            "in": "query",
-            "name": "api-version",
-            "description": "Version of Azure Machine Learning resource provider API.",
-            "type": "string"
+            "$ref": "machineLearningServices.json#/parameters/APIVersionParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
           },
           {
             "in": "body",
@@ -4127,7 +3892,7 @@
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "machineLearningServices.json#/definitions/ErrorResponse"
+              "$ref": "machineLearningServices.json#/definitions/MachineLearningServiceError"
             }
           },
           "200": {
@@ -4156,15 +3921,6 @@
         ],
         "parameters": [
           {
-            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
-          },
-          {
             "in": "path",
             "name": "endpointName",
             "description": "Inference endpoint name.",
@@ -4186,17 +3942,23 @@
             "type": "string"
           },
           {
-            "in": "query",
-            "name": "api-version",
-            "description": "Version of Azure Machine Learning resource provider API.",
-            "type": "string"
+            "$ref": "machineLearningServices.json#/parameters/APIVersionParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
           }
         ],
         "responses": {
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "machineLearningServices.json#/definitions/ErrorResponse"
+              "$ref": "machineLearningServices.json#/definitions/MachineLearningServiceError"
             }
           },
           "200": {
@@ -4231,6 +3993,73 @@
         ],
         "parameters": [
           {
+            "$ref": "machineLearningServices.json#/parameters/APIVersionParameter"
+          },
+          {
+            "in": "query",
+            "name": "name",
+            "description": "Name of the endpoint.",
+            "type": "string",
+            "default": ""
+          },
+          {
+            "in": "query",
+            "name": "count",
+            "description": "Number of endpoints to be retrieved in a page of results.",
+            "type": "integer",
+            "format": "int32",
+            "default": 0
+          },
+          {
+            "in": "query",
+            "name": "computeType",
+            "description": "ComputeType to be filtered by.",
+            "type": "string",
+            "default": "Managed",
+            "enum": [
+              "Managed",
+              "AKS"
+            ],
+            "x-ms-enum": {
+              "name": "ComputeType",
+              "modelAsString": false
+            }
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/PaginationParameter"
+          },
+          {
+            "in": "query",
+            "name": "tags",
+            "description": "A set of tags with which to filter the returned models. It is a comma separated string of tags key or tags key=value. Example: tagKey1,tagKey2,tagKey3=value3 .",
+            "type": "string",
+            "default": ""
+          },
+          {
+            "in": "query",
+            "name": "properties",
+            "description": "A set of properties with which to filter the returned models. It is a comma separated string of properties key and/or properties key=value Example: propKey1,propKey2,propKey3=value3 .",
+            "type": "string",
+            "default": ""
+          },
+          {
+            "in": "query",
+            "name": "orderBy",
+            "description": "The option to order the response.",
+            "type": "string",
+            "default": "CreatedAtDesc",
+            "enum": [
+              "CreatedAtDesc",
+              "CreatedAtAsc",
+              "UpdatedAtDesc",
+              "UpdatedAtAsc"
+            ],
+            "x-ms-enum": {
+              "name": "OrderString",
+              "modelAsString": false
+            }
+          },
+          {
             "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
           },
           {
@@ -4238,25 +4067,13 @@
           },
           {
             "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
-          },
-          {
-            "in": "query",
-            "name": "api-version",
-            "description": "API version.",
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "name": "$skipToken",
-            "description": "Opaque token to retrieve the next page of results from a previous query.",
-            "type": "string"
           }
         ],
         "responses": {
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "machineLearningServices.json#/definitions/ErrorResponse"
+              "$ref": "machineLearningServices.json#/definitions/MachineLearningServiceError"
             }
           },
           "200": {
@@ -4288,15 +4105,6 @@
         ],
         "parameters": [
           {
-            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
-          },
-          {
             "in": "path",
             "name": "endpointName",
             "description": "Online Endpoint name.",
@@ -4304,17 +4112,23 @@
             "type": "string"
           },
           {
-            "in": "query",
-            "name": "api-version",
-            "description": "API version.",
-            "type": "string"
+            "$ref": "machineLearningServices.json#/parameters/APIVersionParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
           }
         ],
         "responses": {
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "machineLearningServices.json#/definitions/ErrorResponse"
+              "$ref": "machineLearningServices.json#/definitions/MachineLearningServiceError"
             }
           },
           "204": {
@@ -4341,15 +4155,6 @@
         ],
         "parameters": [
           {
-            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
-          },
-          {
             "in": "path",
             "name": "endpointName",
             "description": "Online Endpoint name.",
@@ -4357,17 +4162,23 @@
             "type": "string"
           },
           {
-            "in": "query",
-            "name": "api-version",
-            "description": "API version.",
-            "type": "string"
+            "$ref": "machineLearningServices.json#/parameters/APIVersionParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
           }
         ],
         "responses": {
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "machineLearningServices.json#/definitions/ErrorResponse"
+              "$ref": "machineLearningServices.json#/definitions/MachineLearningServiceError"
             }
           },
           "200": {
@@ -4397,15 +4208,6 @@
         ],
         "parameters": [
           {
-            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
-          },
-          {
             "in": "path",
             "name": "endpointName",
             "description": "Online Endpoint name.",
@@ -4413,10 +4215,16 @@
             "type": "string"
           },
           {
-            "in": "query",
-            "name": "api-version",
-            "description": "API version.",
-            "type": "string"
+            "$ref": "machineLearningServices.json#/parameters/APIVersionParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
           },
           {
             "in": "body",
@@ -4431,7 +4239,7 @@
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "machineLearningServices.json#/definitions/ErrorResponse"
+              "$ref": "machineLearningServices.json#/definitions/MachineLearningServiceError"
             }
           },
           "200": {
@@ -4469,15 +4277,6 @@
         ],
         "parameters": [
           {
-            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
-          },
-          {
             "in": "path",
             "name": "endpointName",
             "description": "Online Endpoint name.",
@@ -4485,10 +4284,16 @@
             "type": "string"
           },
           {
-            "in": "query",
-            "name": "api-version",
-            "description": "API version.",
-            "type": "string"
+            "$ref": "machineLearningServices.json#/parameters/APIVersionParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
           },
           {
             "in": "body",
@@ -4503,7 +4308,7 @@
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "machineLearningServices.json#/definitions/ErrorResponse"
+              "$ref": "machineLearningServices.json#/definitions/MachineLearningServiceError"
             }
           },
           "200": {
@@ -4535,15 +4340,6 @@
         ],
         "parameters": [
           {
-            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
-          },
-          {
             "in": "path",
             "name": "endpointName",
             "description": "Online Endpoint name.",
@@ -4551,17 +4347,23 @@
             "type": "string"
           },
           {
-            "in": "query",
-            "name": "api-version",
-            "description": "API version.",
-            "type": "string"
+            "$ref": "machineLearningServices.json#/parameters/APIVersionParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
           }
         ],
         "responses": {
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "machineLearningServices.json#/definitions/ErrorResponse"
+              "$ref": "machineLearningServices.json#/definitions/MachineLearningServiceError"
             }
           },
           "200": {
@@ -4590,15 +4392,6 @@
         ],
         "parameters": [
           {
-            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
-          },
-          {
             "in": "path",
             "name": "endpointName",
             "description": "Online Endpoint name.",
@@ -4606,17 +4399,23 @@
             "type": "string"
           },
           {
-            "in": "query",
-            "name": "api-version",
-            "description": "API version.",
-            "type": "string"
+            "$ref": "machineLearningServices.json#/parameters/APIVersionParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
           }
         ],
         "responses": {
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "machineLearningServices.json#/definitions/ErrorResponse"
+              "$ref": "machineLearningServices.json#/definitions/MachineLearningServiceError"
             }
           },
           "200": {
@@ -4640,16 +4439,10 @@
         ],
         "summary": "Polls an Endpoint operation.",
         "operationId": "OnlineEndpoints_Poll",
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
-          {
-            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
-          },
           {
             "in": "path",
             "name": "endpointName",
@@ -4665,17 +4458,23 @@
             "type": "string"
           },
           {
-            "in": "query",
-            "name": "api-version",
-            "description": "Version of Azure Machine Learning resource provider API.",
-            "type": "string"
+            "$ref": "machineLearningServices.json#/parameters/APIVersionParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
           }
         ],
         "responses": {
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "machineLearningServices.json#/definitions/ErrorResponse"
+              "$ref": "machineLearningServices.json#/definitions/MachineLearningServiceError"
             }
           },
           "200": {
@@ -4716,7 +4515,6 @@
           "type": "string"
         },
         "userAssignedIdentities": {
-          "type": "object",
           "additionalProperties": {
             "$ref": "machineLearningServices.json#/definitions/UserAssignedIdentity"
           }
@@ -4730,7 +4528,11 @@
         "nodeCount": {
           "format": "int32",
           "description": "Number of Compute nodes to be used for running the deployment",
-          "type": "integer"
+          "type": "integer",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         }
       },
       "additionalProperties": false
@@ -4761,12 +4563,20 @@
           "type": "array",
           "items": {
             "type": "string"
-          }
+          },
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         },
         "miniBatchSize": {
           "format": "int64",
           "description": "Size of the mini-batch passed to each batch invocation.\r\nFor FileDataset, this is the number of files per mini-batch.\r\nFor TabularDataset, this is the size of the records in bytes, per mini-batch.",
-          "type": "integer"
+          "type": "integer",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         }
       },
       "additionalProperties": false
@@ -4857,14 +4667,12 @@
     },
     "CodeConfiguration": {
       "required": [
-        "codeArtifactId",
         "command"
       ],
       "type": "object",
       "properties": {
         "codeArtifactId": {
           "description": "The ID of the code asset.",
-          "pattern": "\\w",
           "type": "string",
           "x-ms-mutability": [
             "create",
@@ -4938,59 +4746,6 @@
       },
       "additionalProperties": false
     },
-    "SystemData": {
-      "description": "Azure Resource Manager resource Envelope",
-      "type": "object",
-      "properties": {
-        "createdAt": {
-          "format": "date-time",
-          "description": "the timestamp of resource creation (UTC)",
-          "type": "string"
-        },
-        "createdBy": {
-          "description": "a string identifier for the identity that created the resource",
-          "type": "string"
-        },
-        "createdByType": {
-          "description": "the type of identity that created the resource: user, application, managedIdentity, key",
-          "enum": [
-            "User",
-            "Application",
-            "ManagedIdentity",
-            "Key"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "UserType",
-            "modelAsString": false
-          }
-        },
-        "lastModifiedAt": {
-          "format": "date-time",
-          "description": "the timestamp of resource last modification (UTC)",
-          "type": "string"
-        },
-        "lastModifiedBy": {
-          "description": "a string identifier for the identity that last modified the resource",
-          "type": "string"
-        },
-        "lastModifiedByType": {
-          "description": "the type of identity that last modified the resource: user, application, managedIdentity, key",
-          "enum": [
-            "User",
-            "Application",
-            "ManagedIdentity",
-            "Key"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "UserType",
-            "modelAsString": false
-          }
-        }
-      },
-      "additionalProperties": false
-    },
     "BatchDeploymentTrackedResource": {
       "required": [
         "properties"
@@ -5031,35 +4786,64 @@
           "$ref": "#/definitions/BatchDeployment"
         },
         "systemData": {
-          "$ref": "#/definitions/SystemData"
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
         }
       },
       "x-ms-azure-resource": true,
       "additionalProperties": false
     },
-    "DebugInfoResponse": {
+    "InnerErrorResponse": {
       "type": "object",
       "properties": {
-        "type": {
+        "code": {
           "type": "string"
+        },
+        "innerError": {
+          "$ref": "#/definitions/InnerErrorResponse"
+        }
+      },
+      "additionalProperties": false
+    },
+    "RootError": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string"
+        },
+        "severity": {
+          "format": "int32",
+          "type": "integer"
         },
         "message": {
           "type": "string"
         },
-        "stackTrace": {
+        "messageFormat": {
           "type": "string"
         },
-        "innerException": {
-          "$ref": "#/definitions/DebugInfoResponse"
-        },
-        "data": {
+        "messageParameters": {
           "type": "object",
           "additionalProperties": {
-            "type": "object"
+            "type": "string"
           }
         },
-        "errorResponse": {
-          "$ref": "machineLearningServices.json#/definitions/ErrorResponse"
+        "referenceCode": {
+          "type": "string"
+        },
+        "detailsUri": {
+          "format": "uri",
+          "type": "string"
+        },
+        "target": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RootError"
+          }
+        },
+        "innerError": {
+          "$ref": "#/definitions/InnerErrorResponse"
         }
       },
       "additionalProperties": false
@@ -5090,8 +4874,7 @@
         "computeType": {
           "enum": [
             "Managed",
-            "AKS",
-            "ACI"
+            "AKS"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -5234,7 +5017,7 @@
           "$ref": "#/definitions/BatchEndpoint"
         },
         "systemData": {
-          "$ref": "#/definitions/SystemData"
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
         }
       },
       "x-ms-azure-resource": true,
@@ -5307,7 +5090,7 @@
           "$ref": "#/definitions/InferenceEndpointKeys"
         },
         "systemData": {
-          "$ref": "#/definitions/SystemData"
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
         }
       },
       "x-ms-azure-resource": true,
@@ -5360,7 +5143,7 @@
           "$ref": "#/definitions/CodeContainer"
         },
         "systemData": {
-          "$ref": "#/definitions/SystemData"
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
         }
       },
       "x-ms-azure-resource": true,
@@ -5460,7 +5243,7 @@
           "$ref": "#/definitions/CodeVersion"
         },
         "systemData": {
-          "$ref": "#/definitions/SystemData"
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
         }
       },
       "x-ms-azure-resource": true,
@@ -5530,7 +5313,7 @@
           "$ref": "#/definitions/DataContainer"
         },
         "systemData": {
-          "$ref": "#/definitions/SystemData"
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
         }
       },
       "x-ms-azure-resource": true,
@@ -6139,7 +5922,7 @@
           "$ref": "#/definitions/DatastoreProperties"
         },
         "systemData": {
-          "$ref": "#/definitions/SystemData"
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
         }
       },
       "x-ms-azure-resource": true,
@@ -6232,7 +6015,7 @@
           "$ref": "#/definitions/DataVersion"
         },
         "systemData": {
-          "$ref": "#/definitions/SystemData"
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
         }
       },
       "x-ms-azure-resource": true,
@@ -6302,7 +6085,7 @@
           "$ref": "#/definitions/EnvironmentContainer"
         },
         "systemData": {
-          "$ref": "#/definitions/SystemData"
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
         }
       },
       "x-ms-azure-resource": true,
@@ -6430,7 +6213,7 @@
           "$ref": "#/definitions/EnvironmentSpecificationVersion"
         },
         "systemData": {
-          "$ref": "#/definitions/SystemData"
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
         }
       },
       "x-ms-azure-resource": true,
@@ -6503,7 +6286,7 @@
           "description": "Specifies the type of distribution framework.",
           "enum": [
             "PyTorch",
-            "Tensorflow",
+            "TensorFlow",
             "Mpi"
           ],
           "type": "string",
@@ -6518,82 +6301,6 @@
         }
       },
       "discriminator": "distributionType",
-      "additionalProperties": false
-    },
-    "Tensorflow": {
-      "allOf": [
-        {
-          "$ref": "#/definitions/DistributionConfiguration"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "workerCount": {
-              "format": "int32",
-              "description": "Number of workers. Overwrites the node count in compute binding.",
-              "type": "integer"
-            },
-            "parameterServerCount": {
-              "format": "int32",
-              "type": "integer"
-            }
-          }
-        }
-      ],
-      "x-ms-discriminator-value": "Tensorflow",
-      "additionalProperties": false
-    },
-    "Mpi": {
-      "allOf": [
-        {
-          "$ref": "#/definitions/DistributionConfiguration"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "processCountPerNode": {
-              "format": "int32",
-              "type": "integer"
-            },
-            "nodeCount": {
-              "format": "int32",
-              "description": "Number of nodes. Overwrites the node count in compute binding.",
-              "type": "integer"
-            }
-          }
-        }
-      ],
-      "x-ms-discriminator-value": "Mpi",
-      "additionalProperties": false
-    },
-    "PyTorch": {
-      "allOf": [
-        {
-          "$ref": "#/definitions/DistributionConfiguration"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "communicationBackend": {
-              "enum": [
-                "Nccl",
-                "Gloo"
-              ],
-              "type": "string",
-              "x-ms-enum": {
-                "name": "CommunicationBackend",
-                "modelAsString": false
-              }
-            },
-            "nodeCount": {
-              "format": "int32",
-              "description": "Number of nodes. Overwrites the node count in compute binding.",
-              "type": "integer"
-            }
-          }
-        }
-      ],
-      "x-ms-discriminator-value": "PyTorch",
       "additionalProperties": false
     },
     "ComputeBinding": {
@@ -6830,18 +6537,15 @@
     },
     "ParameterSamplingConfiguration": {
       "description": "class for all hyperparameter sampling algorithms",
+      "required": [
+        "parameterSpace",
+        "samplingType"
+      ],
       "type": "object",
       "properties": {
         "parameterSpace": {
           "description": "A dictionary containing each parameter and its distribution. The dictionary key is the name of the parameter",
           "type": "object"
-        },
-        "properties": {
-          "description": "A dictionary with additional properties for the algorithm.",
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
         },
         "samplingType": {
           "description": "Type of the hyperparameter sampling algorithms",
@@ -6891,64 +6595,6 @@
       "discriminator": "policyType",
       "additionalProperties": false
     },
-    "BanditPolicyConfiguration": {
-      "description": "Defines an early termination policy based on slack criteria, and a frequency and delay interval for evaluation",
-      "allOf": [
-        {
-          "$ref": "#/definitions/EarlyTerminationPolicyConfiguration"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "slackFactor": {
-              "format": "float",
-              "type": "number"
-            },
-            "slackAmount": {
-              "format": "float",
-              "type": "number"
-            }
-          }
-        }
-      ],
-      "x-ms-discriminator-value": "Bandit",
-      "additionalProperties": false
-    },
-    "MedianStoppingPolicyConfiguration": {
-      "description": "Defines an early termination policy based on running averages of the primary metric of all runs",
-      "allOf": [
-        {
-          "$ref": "#/definitions/EarlyTerminationPolicyConfiguration"
-        },
-        {
-          "type": "object"
-        }
-      ],
-      "x-ms-discriminator-value": "MedianStopping",
-      "additionalProperties": false
-    },
-    "TruncationSelectionPolicyConfiguration": {
-      "description": "Defines an early termination policy that cancels a given percentage of runs at each evaluation interval.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/EarlyTerminationPolicyConfiguration"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "truncationPercentage": {
-              "format": "int32",
-              "type": "integer"
-            },
-            "excludeFinishedJobs": {
-              "type": "boolean"
-            }
-          }
-        }
-      ],
-      "x-ms-discriminator-value": "TruncationSelection",
-      "additionalProperties": false
-    },
     "TerminationConfiguration": {
       "type": "object",
       "properties": {
@@ -6976,9 +6622,14 @@
       "additionalProperties": false
     },
     "EvaluationConfiguration": {
+      "required": [
+        "primaryMetricGoal",
+        "primaryMetricName"
+      ],
       "type": "object",
       "properties": {
         "primaryMetricName": {
+          "pattern": "\\w",
           "type": "string"
         },
         "primaryMetricGoal": {
@@ -7022,7 +6673,9 @@
     },
     "SweepJob": {
       "required": [
-        "computeBinding"
+        "computeBinding",
+        "evaluationConfiguration",
+        "parameterSamplingConfiguration"
       ],
       "allOf": [
         {
@@ -7438,7 +7091,7 @@
           "$ref": "#/definitions/JobBase"
         },
         "systemData": {
-          "$ref": "#/definitions/SystemData"
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
         }
       },
       "x-ms-azure-resource": true,
@@ -7487,7 +7140,7 @@
           "$ref": "#/definitions/LabelingJob"
         },
         "systemData": {
-          "$ref": "#/definitions/SystemData"
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
         }
       },
       "x-ms-azure-resource": true,
@@ -7536,30 +7189,45 @@
           "format": "uuid",
           "description": "The unique identifier of completed Export Labels operation.",
           "type": "string",
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
         },
         "labelingJobId": {
           "description": "Name and identifier of the job containing exported labels.",
           "type": "string",
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
         },
         "exportedRowCount": {
           "format": "int64",
           "description": "The total number of labeled datapoints exported.",
           "type": "integer",
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
         },
         "startTimeUtc": {
           "format": "date-time",
           "description": "The time when the export was requested.",
           "type": "string",
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
         },
         "endTimeUtc": {
           "format": "date-time",
           "description": "The time when the export was completed.",
           "type": "string",
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
         },
         "state": {
           "description": "The state of the Export Labels operation.",
@@ -7574,7 +7242,10 @@
           "x-ms-enum": {
             "name": "LabelExportState",
             "modelAsString": false
-          }
+          },
+          "x-ms-mutability": [
+            "read"
+          ]
         }
       },
       "discriminator": "format",
@@ -7606,7 +7277,7 @@
           "$ref": "#/definitions/ExportSummary"
         },
         "systemData": {
-          "$ref": "#/definitions/SystemData"
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
         }
       },
       "x-ms-azure-resource": true,
@@ -7674,7 +7345,7 @@
           "$ref": "#/definitions/ModelVersion"
         },
         "systemData": {
-          "$ref": "#/definitions/SystemData"
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
         }
       },
       "x-ms-azure-resource": true,
@@ -7737,7 +7408,7 @@
           "$ref": "#/definitions/ModelContainer"
         },
         "systemData": {
-          "$ref": "#/definitions/SystemData"
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
         }
       },
       "x-ms-azure-resource": true,
@@ -7789,6 +7460,81 @@
       },
       "additionalProperties": false
     },
+    "ContainerResourceRequirements": {
+      "type": "object",
+      "properties": {
+        "cpu": {
+          "format": "double",
+          "description": "The minimum amount of CPU cores to be used by the container. More info:\r\nhttps://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/",
+          "type": "number",
+          "example": 4
+        },
+        "cpuLimit": {
+          "format": "double",
+          "description": "The maximum amount of CPU cores allowed to be used by the container. More info:\r\nhttps://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/",
+          "type": "number",
+          "example": 4
+        },
+        "memoryInGB": {
+          "format": "double",
+          "description": "The minimum amount of memory (in GB) to be used by the container. More info:\r\nhttps://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/",
+          "type": "number",
+          "example": 64
+        },
+        "memoryInGBLimit": {
+          "format": "double",
+          "description": "The maximum amount of memory (in GB) allowed to be used by the container. More info:\r\nhttps://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/",
+          "type": "number",
+          "example": 64
+        },
+        "gpuEnabled": {
+          "description": "If gpu should be enabled",
+          "type": "boolean"
+        },
+        "gpu": {
+          "format": "int32",
+          "description": "The number of GPU cores in the container.",
+          "type": "integer"
+        },
+        "fpga": {
+          "format": "int32",
+          "description": "The number of FPGA PCIE devices exposed to the container. Must be multiple of 2.",
+          "type": "integer"
+        }
+      },
+      "additionalProperties": false
+    },
+    "LivenessProbeRequirements": {
+      "type": "object",
+      "properties": {
+        "failureThreshold": {
+          "format": "int32",
+          "description": "The number of failures to allow before returning an unhealthy status.",
+          "type": "integer"
+        },
+        "successThreshold": {
+          "format": "int32",
+          "description": "The number of successful probes before returning a healthy status.",
+          "type": "integer"
+        },
+        "timeoutSeconds": {
+          "format": "int32",
+          "description": "The probe timeout in seconds.",
+          "type": "integer"
+        },
+        "periodSeconds": {
+          "format": "int32",
+          "description": "The length of time between probes in seconds.",
+          "type": "integer"
+        },
+        "initialDelaySeconds": {
+          "format": "int32",
+          "description": "The delay before the first probe in seconds.",
+          "type": "integer"
+        }
+      },
+      "additionalProperties": false
+    },
     "DeploymentConfigurationBase": {
       "required": [
         "computeType"
@@ -7798,8 +7544,7 @@
         "computeType": {
           "enum": [
             "Managed",
-            "AKS",
-            "ACI"
+            "AKS"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -7809,6 +7554,24 @@
         },
         "appInsightsEnabled": {
           "type": "boolean"
+        },
+        "maxConcurrentRequestsPerInstance": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "maxQueueWaitMs": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "scoringTimeoutMs": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "containerResourceRequirements": {
+          "$ref": "#/definitions/ContainerResourceRequirements"
+        },
+        "livenessProbeRequirements": {
+          "$ref": "#/definitions/LivenessProbeRequirements"
         }
       },
       "discriminator": "computeType",
@@ -7911,7 +7674,7 @@
           "$ref": "#/definitions/OnlineDeploymentProperties"
         },
         "systemData": {
-          "$ref": "#/definitions/SystemData"
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
         }
       },
       "x-ms-azure-resource": true,
@@ -8096,7 +7859,7 @@
           "$ref": "#/definitions/OnlineEndpointProperties"
         },
         "systemData": {
-          "$ref": "#/definitions/SystemData"
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
         }
       },
       "x-ms-azure-resource": true,
