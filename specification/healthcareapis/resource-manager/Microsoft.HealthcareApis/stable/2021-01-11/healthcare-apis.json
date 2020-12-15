@@ -771,6 +771,10 @@
           "$ref": "#/definitions/ServiceExportConfigurationInfo",
           "description": "The settings for the export operation of the service instance."
         },
+        "acrConfiguration": {
+          "$ref": "#/definitions/ServiceAcrConfigurationInfo",
+          "description": "The azure container registry settings used for convert data operation of the service instance."
+        },
         "privateEndpointConnections": {
           "description": "The list of private endpoint connections that are set up for this resource.",
           "type": "array",
@@ -904,6 +908,20 @@
         }
       }
     },
+    "ServiceAcrConfigurationInfo": {
+      "description": "Azure container registry configuration information",
+      "type": "object",
+      "properties": {
+        "loginServers": {
+          "type": "array",
+          "description": "The list of the ACR login servers.",
+          "readOnly": false,
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
     "ServiceCorsConfigurationOriginEntry": {
       "description": "An origin for CORS.",
       "type": "string",
@@ -921,6 +939,9 @@
       "description": "The description of the service.",
       "type": "object",
       "properties": {
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/systemData"
+        },
         "properties": {
           "x-ms-client-flatten": false,
           "description": "The common properties of a service.",
