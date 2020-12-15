@@ -838,18 +838,8 @@
           "x-ms-client-flatten": true,
           "description": "RP defined properties for Disk Pool operations.",
           "$ref": "#/definitions/DiskPoolUpdateProperties"
-        },
-        "systemData": {
-          "description": "Resource metadata required by ARM RPC",
-          "readOnly": true,
-          "$ref": "#/definitions/SystemMetadata"
         }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/TrackedResourceUpdate"
-        }
-      ]
+      }
     },
     "AvailabilityZone": {
       "type": "string",
@@ -921,27 +911,6 @@
       "type": "object",
       "description": "Properties section of the Disk Pool request payload.",
       "properties": {
-        "provisioningState": {
-          "description": "State of the operation on the resource",
-          "type": "string",
-          "$ref": "#/definitions/ProvisioningState",
-          "readOnly": true
-        },
-        "status": {
-          "type": "string",
-          "readOnly": true,
-          "enum": [
-            "Invalid",
-            "Unknown",
-            "Healthy",
-            "Unhealthy"
-          ],
-          "x-ms-enum": {
-            "name": "OperationalStatus",
-            "modelAsString": true
-          },
-          "description": "Operational status of the Disk Pool"
-        },
         "disks": {
           "type": "array",
           "description": "List of Azure managed disks to attach to a Disk Pool",
@@ -962,7 +931,7 @@
     },
     "Disk": {
       "type": "object",
-      "description": "Managed disk to attach to the DiskPool. Required.",
+      "description": "Managed disk to attach to the DiskPool",
       "required": [
         "id"
       ],
@@ -1031,12 +1000,7 @@
           "description": "RP defined properties for iSCSI Target operations.",
           "$ref": "#/definitions/IscsiTargetUpdateProperties"
         }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/ProxyResource"
-        }
-      ]
+      }
     },
     "IscsiTargetProperties": {
       "type": "object",
@@ -1364,36 +1328,6 @@
       "required": [
         "location"
       ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/Resource"
-        }
-      ]
-    },
-    "TrackedResourceUpdate": {
-      "description": "The resource model definition for a ARM tracked top level resource",
-      "properties": {
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "x-ms-mutability": [
-            "read",
-            "create",
-            "update"
-          ],
-          "description": "Resource tags."
-        },
-        "location": {
-          "type": "string",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ],
-          "description": "The geo-location where the resource lives"
-        }
-      },
       "allOf": [
         {
           "$ref": "#/definitions/Resource"
