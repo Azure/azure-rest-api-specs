@@ -3,7 +3,7 @@
   "info": {
     "description": "Compute operation results.",
     "title": "FabricAdminClient",
-    "version": "2016-05-01"
+    "version": "2020-10-01"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -30,19 +30,19 @@
         "operationId": "ComputeOperationResults_Get",
         "parameters": [
           {
-            "$ref": "Fabric.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../2016-05-01/Fabric.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "Fabric.json#/parameters/ResourceGroupParameter"
+            "$ref": "../2016-05-01/Fabric.json#/parameters/ResourceGroupParameter"
           },
           {
-            "$ref": "Fabric.json#/parameters/LocationParameter"
+            "$ref": "../2016-05-01/Fabric.json#/parameters/LocationParameter"
           },
           {
             "$ref": "#/parameters/OperationParameter"
           },
           {
-            "$ref": "Fabric.json#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -72,19 +72,19 @@
         "operationId": "ComputeOperationResults_List",
         "parameters": [
           {
-            "$ref": "Fabric.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../2016-05-01/Fabric.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "Fabric.json#/parameters/ResourceGroupParameter"
+            "$ref": "../2016-05-01/Fabric.json#/parameters/ResourceGroupParameter"
           },
           {
-            "$ref": "Fabric.json#/parameters/LocationParameter"
+            "$ref": "../2016-05-01/Fabric.json#/parameters/LocationParameter"
           },
           {
-            "$ref": "Fabric.json#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "Fabric.json#/parameters/FilterParameter"
+            "$ref": "../2016-05-01/Fabric.json#/parameters/FilterParameter"
           }
         ],
         "responses": {
@@ -115,7 +115,7 @@
       },
       "allOf": [
         {
-          "$ref": "Fabric.json#/definitions/Resource"
+          "$ref": "../2016-05-01/Fabric.json#/definitions/Resource"
         }
       ]
     },
@@ -155,6 +155,14 @@
     }
   },
   "parameters": {
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "description": "Client API Version.",
+      "required": true,
+      "type": "string",
+      "default": "2020-10-01"
+    },
     "OperationParameter": {
       "name": "operation",
       "description": "Operation identifier.",
