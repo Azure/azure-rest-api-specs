@@ -2,7 +2,7 @@
 
 > see https://aka.ms/autorest
 
-This is the AutoRest configuration file for cloudenvironment.
+This is the AutoRest configuration file for confidentialledger.
 
 ## Getting Started
 
@@ -22,7 +22,7 @@ For other options on installation see [Installing AutoRest](https://aka.ms/autor
 
 ### Basic Information
 
-These are the global settings for the cloudenvironment.
+These are the global settings for the confidentialledger.
 
 ```yaml
 openapi-type: arm

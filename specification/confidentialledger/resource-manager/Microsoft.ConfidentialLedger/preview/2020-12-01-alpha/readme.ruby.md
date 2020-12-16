@@ -3,7 +3,7 @@
 These settings apply only when `--ruby` is specified on the command line.
 
 ```yaml
-package-name: azure_mgmt_cloudenvironment
+package-name: azure_mgmt_confidentialledger
 package-version: 2020-12-01-alpha
 azure-arm: true
 ```
