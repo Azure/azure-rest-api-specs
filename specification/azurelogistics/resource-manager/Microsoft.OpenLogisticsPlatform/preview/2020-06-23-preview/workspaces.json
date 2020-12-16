@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "OSCPControlPlaneServiceAPI",
-    "description": "REST APIs for OSCP Control Plane Service",
+    "description": "REST APIs for Azure Open Supply Chain Platform's Control Plane Service",
     "version": "2020-06-23-preview"
   },
   "host": "management.azure.com",
@@ -24,13 +24,13 @@
   ],
   "securityDefinitions": {
     "azure_auth": {
-        "type": "oauth2",
-        "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
-        "flow": "implicit",
-        "description": "Azure Active Directory OAuth2 Flow",
-        "scopes": {
-            "user_impersonation": "impersonate your user account"
-        }
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
     }
   },
   "paths": {
@@ -253,7 +253,7 @@
             "x-nullable": false,
             "description": "Returned when the operation is successful.",
             "schema": {
-                "$ref": "#/definitions/WorkspaceList"
+              "$ref": "#/definitions/WorkspaceList"
             }
           },
           "default": {
@@ -290,7 +290,7 @@
             "x-nullable": false,
             "description": "Returned when the operation is successful.",
             "schema": {
-                "$ref": "#/definitions/WorkspaceList"
+              "$ref": "#/definitions/WorkspaceList"
             }
           },
           "default": {
@@ -471,6 +471,11 @@
               "description": "The workspace URL which is of the format '{workspaceId-guid-without-dash}-workspaces.supplychain.azure.com'",
               "type": "string",
               "readOnly": true
+            },
+            "shareId": {
+              "type": "string",
+              "description": "the Share Id for projected workspace.",
+              "readOnly": false
             },
             "provisioningState": {
               "description": "The provisioning state of the resource.",
@@ -705,7 +710,7 @@
       }
     }
   },
-  "parameters":{
+  "parameters": {
     "SubscriptionIdParameter": {
       "name": "subscriptionId",
       "in": "path",
