@@ -2524,22 +2524,20 @@
       "allOf": [
         {
           "$ref": "#/definitions/SubResource"
-        },
-        {
-          "properties": {
-            "systemData": {
-              "$ref": "#/definitions/SystemData",
-              "readOnly": true,
-              "description": "The system meta data relating to this resource."
-            },
-            "properties": {
-              "description": "Properties of a default maintenance configuration.",
-              "$ref": "#/definitions/MaintenanceConfigurationProperties",
-              "x-ms-client-flatten": true
-            }
-          }
         }
       ],
+      "properties": {
+        "systemData": {
+          "$ref": "#/definitions/SystemData",
+          "readOnly": true,
+          "description": "The system meta data relating to this resource."
+        },
+        "properties": {
+          "description": "Properties of a default maintenance configuration.",
+          "$ref": "#/definitions/MaintenanceConfigurationProperties",
+          "x-ms-client-flatten": true
+        }
+      },
       "description": "maintenance configuration."
     },
     "MaintenanceConfigurationProperties": {
