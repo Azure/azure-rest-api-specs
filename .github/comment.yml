@@ -25,6 +25,14 @@
     onLabeledComments: "Hi @${PRAuthor}, one or multiple breaking change(s) is detected in your PR. Please check out the breaking change(s), and provide business justification in the PR comment and @ PR assignee why you must have these change(s), and how external customer impact can be mitigated. Please ensure to follow [breaking change policy](https://aka.ms/AzBreakingChangesPolicy) to request breaking change review and approval before proceeding swagger PR review. </br>**Action**: To initiate an evaluation of the breaking change, create a new intake using the [template for breaking changes](https://aka.ms/Breakingchangetemplate). Addition details on the process and office hours are on the [Breaking change Wiki](https://dev.azure.com/msazure/AzureWiki/_wiki/wikis/AzureWiki.wiki/37684/Breaking-Changes).</br> If you want to know the production traffic statistic, please see [ARM Traffic statistic](${openapiHub}/api/pr/query-traffic?pr=${owner}/${repo}/${PRNumber}&days=5). </br> If you think it is false positive breaking change, please provide the reasons in the PR comment, report to Swagger Tooling Team via https://aka.ms/swaggerfeedback. </br> **Note**: To avoid breaking change, you can refer to [Shift Left Solution](https://aka.ms/shiftleft) for detecting breaking change in early phase at your service code repository."
 
 - rule:
+    type: PROpen
+    variables:
+      openapiHub: https://openapihub.test.azure-devex-tools.com/
+    keywords:
+      - "I have reviewed the [documentation](https://aka.ms/ameonboard) for the workflow."
+    onOpenedComments: "Hi, @${PRAuthor} Thanks for your PR. I am workflow bot for review process. Here are some small tips. </br> <li> Please ensure to do self-check against checklists in first PR comment.</li> <li> PR assignee is the person auto-assigned and responsible for your current PR reviewing and merging. </li> <li> For cross api-version diff. See [OpenAPI Hub Diff](${openapiHub}diff?pr=${owner}/${repo}/${PRNumber})</li>  <li> If there is CI failure(s), to fix CI error(s) is mandatory for PR merging; or you need to provide justification in PR comment for explanation. [How to fix?](https://github.com/Azure/azure-rest-api-specs/blob/master/documentation/ci-fix.md)</li></br> Any feedback about review process or workflow bot, pls contact swagger and tools team. vsswagger@microsoft.com"
+
+- rule:
     type: label
     label: ApprovedOkToMerge
     repoAllowList:
