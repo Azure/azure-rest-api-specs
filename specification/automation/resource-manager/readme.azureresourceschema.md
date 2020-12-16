@@ -49,6 +49,7 @@ input-file:
   - Microsoft.Automation/stable/2018-06-30/job.json
   - Microsoft.Automation/stable/2018-06-30/operations.json
   - Microsoft.Automation/stable/2018-06-30/runbook.json
+  - Microsoft.Automation/stable/2018-06-30/softwareUpdateConfiguration.json
   - Microsoft.Automation/stable/2018-06-30/softwareUpdateConfigurationRun.json
   - Microsoft.Automation/stable/2018-06-30/softwareUpdateConfigurationMachineRun.json
   - Microsoft.Automation/stable/2018-06-30/webhook.json
@@ -197,24 +198,24 @@ output-folder: $(azureresourceschema-folder)/schemas
 
 # all the input files in this apiVersion
 input-file:
-  - Microsoft.Automation/stable/2015-01-01-preview/account.json
-  - Microsoft.Automation/stable/2015-01-01-preview/certificate.json
-  - Microsoft.Automation/stable/2015-01-01-preview/connection.json
-  - Microsoft.Automation/stable/2015-01-01-preview/connectionType.json
-  - Microsoft.Automation/stable/2015-01-01-preview/credential.json
-  - Microsoft.Automation/stable/2015-01-01-preview/dscCompilationJob.json
-  - Microsoft.Automation/stable/2015-01-01-preview/dscConfiguration.json
-  - Microsoft.Automation/stable/2015-01-01-preview/dscNode.json
-  - Microsoft.Automation/stable/2015-01-01-preview/dscNodeConfiguration.json
-  - Microsoft.Automation/stable/2015-01-01-preview/hybridRunbookWorkerGroup.json
-  - Microsoft.Automation/stable/2015-01-01-preview/job.json
-  - Microsoft.Automation/stable/2015-01-01-preview/jobSchedule.json
-  - Microsoft.Automation/stable/2015-01-01-preview/linkedWorkspace.json
-  - Microsoft.Automation/stable/2015-01-01-preview/module.json
-  - Microsoft.Automation/stable/2015-01-01-preview/runbook.json
-  - Microsoft.Automation/stable/2015-01-01-preview/schedule.json
-  - Microsoft.Automation/stable/2015-01-01-preview/variable.json
-  - Microsoft.Automation/stable/2015-01-01-preview/webhook.json
-  - Microsoft.Automation/stable/2015-01-01-preview/watcher.json
+  - Microsoft.Automation/preview/2015-01-01-preview/account.json
+  - Microsoft.Automation/preview/2015-01-01-preview/certificate.json
+  - Microsoft.Automation/preview/2015-01-01-preview/connection.json
+  - Microsoft.Automation/preview/2015-01-01-preview/connectionType.json
+  - Microsoft.Automation/preview/2015-01-01-preview/credential.json
+  - Microsoft.Automation/preview/2015-01-01-preview/dscCompilationJob.json
+  - Microsoft.Automation/preview/2015-01-01-preview/dscConfiguration.json
+  - Microsoft.Automation/preview/2015-01-01-preview/dscNode.json
+  - Microsoft.Automation/preview/2015-01-01-preview/dscNodeConfiguration.json
+  - Microsoft.Automation/preview/2015-01-01-preview/hybridRunbookWorkerGroup.json
+  - Microsoft.Automation/preview/2015-01-01-preview/job.json
+  - Microsoft.Automation/preview/2015-01-01-preview/jobSchedule.json
+  - Microsoft.Automation/preview/2015-01-01-preview/linkedWorkspace.json
+  - Microsoft.Automation/preview/2015-01-01-preview/module.json
+  - Microsoft.Automation/preview/2015-01-01-preview/runbook.json
+  - Microsoft.Automation/preview/2015-01-01-preview/schedule.json
+  - Microsoft.Automation/preview/2015-01-01-preview/variable.json
+  - Microsoft.Automation/preview/2015-01-01-preview/webhook.json
+  - Microsoft.Automation/preview/2015-01-01-preview/watcher.json
 
 ```
