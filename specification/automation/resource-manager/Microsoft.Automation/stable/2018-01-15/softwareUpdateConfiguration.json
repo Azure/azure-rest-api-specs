@@ -678,33 +678,81 @@
         }
       }
     },
-    "softwareUpdateConfigurationCollectionItem": {
-      "description": "Software update configuration collection item properties.",
-      "type": "object",
+    "targetAzureQueries": {
       "properties": {
-        "name": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Name of the software update configuration."
+        "scope": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         },
-        "id": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Resource Id of the software update configuration"
+        "locations": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         },
-        "properties": {
-          "x-ms-client-flatten": true,
-          "description": "Software update configuration properties.",
-          "$ref": "#/definitions/softwareUpdateConfigurationCollectionItemProperties"
+        "tagSettings": {
+          "properties": {
+            "filterOperator": {
+              "type": "string"
+            },
+            "tags": {
+              "properties": {
+                "tag1": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "tag2": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
         }
-      },
-      "required": [
-        "properties"
-      ]
+      }
     },
     "collectionItemUpdateConfiguration": {
       "description": "object returned when requesting a collection of software update configuration",
       "properties": {
+        "operatingSystem": {
+          "type": "string"
+        },
+        "windows": {
+          "properties": {
+            "includedUpdateClassifications": {
+              "type": "string"
+            },
+            "excludedKbNumbers": {
+              "type": "string"
+            }
+          }
+        },
+        "linux": {
+          "properties": {
+            "includedPackageClassifications": {
+              "type": "string"
+            },
+            "rebootSetting": {
+              "type": "string"
+            }
+          }
+        },
+        "targets": {
+          "properties": {
+            "azureQueries": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/targetAzureQueries"
+              }
+            }
+          }
+        },
         "azureVirtualMachines": {
           "type": "array",
           "description": "List of azure resource Ids for azure virtual machines targeted by the software update configuration.",
@@ -717,51 +765,41 @@
           "type": "string",
           "format": "duration",
           "description": "Maximum time allowed for the software update configuration run. Duration needs to be specified using the format PT[n]H[n]M[n]S as per ISO8601"
+        },
+        "nonAzureComputerNames": {
+          "type": "array",
+          "description": "List of azure resource Ids for azure virtual machines targeted by the software update configuration.",
+          "items": {
+            "type": "string",
+            "description": "Azure Resource Manager Id for a virtual machine."
+          }
         }
       }
     },
-    "softwareUpdateConfigurationCollectionItemProperties": {
-      "description": "Software update configuration collection item properties.",
+    "taskPropertiesUpdateConfiguration": {
       "properties": {
-        "updateConfiguration": {
-          "description": "Update specific properties of the software update configuration.",
-          "$ref": "#/definitions/collectionItemUpdateConfiguration"
+        "source": {
+          "type": "string"
         },
-        "frequency": {
-          "description": "execution frequency of the schedule associated with the software update configuration",
-          "type": "string",
-          "$ref": "../../stable/2015-10-31/schedule.json#/definitions/scheduleFrequency"
+        "parameters": {
+          "properties": {
+            "COMPUTERNAME": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "taskUpdateConfiguration": {
+      "description": "Pre and Post Tasks defined",
+      "properties": {
+        "preTask": {
+          "description": "Pre Tasks defined",
+          "$ref": "#/definitions/taskPropertiesUpdateConfiguration"
         },
-        "startTime": {
-          "type": "string",
-          "format": "date-time",
-          "x-nullable": false,
-          "description": "the start time of the update."
-        },
-        "creationTime": {
-          "type": "string",
-          "description": "Creation time of the software update configuration, which only appears in the response.",
-          "format": "date-time",
-          "x-nullable": false,
-          "readOnly": true
-        },
-        "lastModifiedTime": {
-          "type": "string",
-          "description": "Last time software update configuration was modified, which only appears in the response.",
-          "format": "date-time",
-          "x-nullable": false,
-          "readOnly": true
-        },
-        "provisioningState": {
-          "type": "string",
-          "description": "Provisioning state for the software update configuration, which only appears in the response.",
-          "readOnly": true
-        },
-        "nextRun": {
-          "type": "string",
-          "format": "date-time",
-          "x-nullable": true,
-          "description": "ext run time of the update."
+        "postTask": {
+          "description": "Post Tasks defined",
+          "$ref": "#/definitions/taskPropertiesUpdateConfiguration"
         }
       }
     },
