@@ -114,14 +114,19 @@ input-file:
 - Microsoft.DBforMySQL/preview/2020-07-01-privatepreview/mysql.json
 ```
 
+### Tag: package-2020-07-01-preview
+
+These settings apply only when `--tag=package-2020-07-01-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-07-01-preview'
+input-file:
+- Microsoft.DBforMySQL/preview/2020-07-01-preview/mysql.json
+```
+
 ## Suppression
 ``` yaml
 directive:
   - suppress: PathResourceProviderNamePascalCase
-    from: ServerSecurityAlertPolicies.json
-    reason: The name of the provider is Microsoft.DBforMySQL
-  - suppress: PathResourceProviderNamePascalCase
-    from: Servers.json
     reason: The name of the provider is Microsoft.DBforMySQL
   - suppress: OperationsApiResponseSchema
     from: mysql.json

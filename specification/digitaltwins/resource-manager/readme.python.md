@@ -12,6 +12,7 @@ package-version: 1.0.0
 clear-output-folder: true
 no-namespace-folders: true
 ```
+
 ### Python multi-api
 
 Generate all API versions currently shipped for this package

@@ -14,7 +14,7 @@ To build the SDK for ServiceBus, simply [Install AutoRest](https://aka.ms/autore
 
 To see additional help and options, run:
 
-> `autorest --help`
+> `autorest --help` 
 ---
 
 ## Configuration
@@ -37,21 +37,21 @@ These settings apply only when `--tag=package-2018-01-preview` is specified on t
 input-file:
 - Microsoft.ServiceBus/preview/2018-01-01-preview/IPFilterRules-preview.json
 - Microsoft.ServiceBus/preview/2018-01-01-preview/namespace-preview.json
-- Microsoft.ServiceBus/preview/2018-01-01-preview/NetworkRuleSet-preview.json
 - Microsoft.ServiceBus/preview/2018-01-01-preview/VirtualNetworkRules-preview.json
-- Microsoft.ServiceBus/preview/2018-01-01-preview/operationlist-preview.json
-- Microsoft.ServiceBus/stable/2017-04-01/AuthorizationRules.json
-- Microsoft.ServiceBus/stable/2017-04-01/CheckNameAvailability.json
-- Microsoft.ServiceBus/stable/2017-04-01/DisasterRecoveryConfig.json
-- Microsoft.ServiceBus/stable/2017-04-01/eventhubs.json
-- Microsoft.ServiceBus/stable/2017-04-01/migrate.json
-- Microsoft.ServiceBus/stable/2017-04-01/migrationconfigs.json
-- Microsoft.ServiceBus/stable/2017-04-01/PremiumMessagingRegions.json
-- Microsoft.ServiceBus/stable/2017-04-01/Queue.json
-- Microsoft.ServiceBus/stable/2017-04-01/sku.json
-- Microsoft.ServiceBus/stable/2017-04-01/subscriptions.json
-- Microsoft.ServiceBus/stable/2017-04-01/topics.json
-- Microsoft.ServiceBus/stable/2017-04-01/Rules.json
+- Microsoft.ServiceBus/preview/2018-01-01-preview/DisasterRecoveryConfig.json
+- Microsoft.ServiceBus/preview/2018-01-01-preview/AuthorizationRules.json
+- Microsoft.ServiceBus/preview/2018-01-01-preview/CheckNameAvailability.json
+- Microsoft.ServiceBus/preview/2018-01-01-preview/eventhubs.json
+- Microsoft.ServiceBus/preview/2018-01-01-preview/networksets.json
+- Microsoft.ServiceBus/preview/2018-01-01-preview/migrate.json
+- Microsoft.ServiceBus/preview/2018-01-01-preview/migrationconfigs.json
+- Microsoft.ServiceBus/preview/2018-01-01-preview/PremiumMessagingRegions.json
+- Microsoft.ServiceBus/preview/2018-01-01-preview/Queue.json
+- Microsoft.ServiceBus/preview/2018-01-01-preview/sku.json
+- Microsoft.ServiceBus/preview/2018-01-01-preview/subscriptions.json
+- Microsoft.ServiceBus/preview/2018-01-01-preview/topics.json
+- Microsoft.ServiceBus/preview/2018-01-01-preview/Rules.json
+- Microsoft.ServiceBus/preview/2018-01-01-preview/operations.json
 ```
 
 ### Tag: package-2017-04
@@ -138,7 +138,7 @@ These settings apply only when `--python` is specified on the command line.
 Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
 Use `--python-mode=update` if you already have a setup.py and just want to update the code itself.
 
-``` yaml $(python)
+``` yaml $(python) && !$(track2)
 python-mode: create
 python:
   azure-arm: true
@@ -149,12 +149,26 @@ python:
   package-version: 0.5.0
   clear-output-folder: true
 ```
+``` yaml $(python) && $(track2)
+python-mode: create
+azure-arm: true
+license-header: MICROSOFT_MIT_NO_VERSION
+namespace: azure.mgmt.servicebus
+package-name: azure-mgmt-servicebus
+package-version: 0.5.0
+clear-output-folder: true
+```
+
 ``` yaml $(python) && $(python-mode) == 'update'
+no-namespace-folders: true
+output-folder: $(python-sdks-folder)/servicebus/azure-mgmt-servicebus/azure/mgmt/servicebus
 python:
   no-namespace-folders: true
   output-folder: $(python-sdks-folder)/servicebus/azure-mgmt-servicebus/azure/mgmt/servicebus
 ```
 ``` yaml $(python) && $(python-mode) == 'create'
+basic-setup-py: true
+output-folder: $(python-sdks-folder)/servicebus/azure-mgmt-servicebus
 python:
   basic-setup-py: true
   output-folder: $(python-sdks-folder)/servicebus/azure-mgmt-servicebus

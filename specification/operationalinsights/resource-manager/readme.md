@@ -62,6 +62,16 @@ input-file:
 - Microsoft.OperationalInsights/preview/2019-08-01-preview/OperationalInsights.json
 ```
 
+### Tag: package-2019-09-preview
+
+These settings apply only when `--tag=package-2019-09-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2019-09-preview'
+input-file:
+- Microsoft.OperationalInsights/preview/2019-09-01-preview/QueryPacks_API.json
+- Microsoft.OperationalInsights/preview/2019-09-01-preview/QueryPackQueries_API.json
+```
+
 ### Tag: package-2020-03-preview
 
 These settings apply only when `--tag=package-2020-03-preview` is specified on the command line.
@@ -89,6 +99,18 @@ input-file:
 - Microsoft.OperationalInsights/preview/2020-03-01-preview/SharedKeys.json
 - Microsoft.OperationalInsights/preview/2020-03-01-preview/WorkspacePurge.json
 - Microsoft.OperationalInsights/preview/2020-03-01-preview/Tables.json
+```
+
+### Tag: package-2020-10
+
+These settings apply only when `--tag=package-2020-10` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-10'
+input-file:
+- Microsoft.OperationalInsights/stable/2020-10-01/Clusters.json
+- Microsoft.OperationalInsights/stable/2020-10-01/Operations.json
+- Microsoft.OperationalInsights/stable/2020-10-01/Tables.json
+- Microsoft.OperationalInsights/stable/2020-10-01/Workspaces.json
 ```
 
 ### Tag: package-2020-08
@@ -137,8 +159,6 @@ swagger-to-sdk:
   - repo: azure-sdk-for-node
   - repo: azure-sdk-for-ruby
   - repo: azure-sdk-for-java
-    after_scripts:
-      - bundle install && rake arm:regen_all_profiles['azure_mgmt_operational_insights']
   - repo: azure-resource-manager-schemas
     after_scripts:
       - node sdkauto_afterscript.js operationalinsights/resource-manager
