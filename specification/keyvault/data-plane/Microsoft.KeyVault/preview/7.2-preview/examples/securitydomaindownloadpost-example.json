@@ -1,7 +1,7 @@
 {
   "parameters": {
     "vaultBaseUrl": "https://myvault.vault.azure.net/",
-    "Certificates": {
+    "CertificateInfoObject": {
       "certificates": [
         {
           "value": {
@@ -60,14 +60,48 @@
             "e": "AQAB"
           }
         }
-      ]
+      ],
+      "required": 2
     },
     "api-version": "7.2-preview"
   },
   "responses": {
     "200": {
       "body": {
-        "value": "{\"EncData\":{\"data\":[{\"compact_jwe\":\"ey$Jhb%232GciOiJkaXIiLCJlbmMiOiJBMjU2Q0JDLUhTNTEyIiwia2lkIjoiZW5jbGF2ZS$J9..5eVwZFlsZQeYXQ11HPC_JJg.4d32grvkQBMxyGmncd82VHOggiFbtuaKX2wXvjU-vKukMAtS7oLl9QsSZZJ5s94xAz7Atye93e6gA_2tbHW0QEzLOXiuV-vZ342zP46dxV56bEEjENIOgzBWAfxUkuUdnYE2UDahGSJSbhNxo8URa44CaSAX682q_otmwqh0jgxk5ZcbHRdwpbSFZnfQ6SgHBqrvQUUpKlWJMJQNuWeEjmWaPkCOUnwkJ1ZLOnVj1AB8rlfj0qnEtBotc4V5066vztRDaTLEOV99lp08WRcRPAY2QVBSfhZdzslQ2baRukk6WOTI5KxIl0cf7o0db_zgoT6vluewXgzTSe6NTcrparwVJ-r6kxw12gkYJtrr3ytvOT_lgip5-7H3PLAgDDRDjHd_PEdNyPqsg56QjtVXBUwutQrfh46s_ATm0dFrhAF6Icf9H2rLDGCiFmKUn-CrtM3vErNzu9BMC8ekuSOe0t0XTnsKOjdiabE95MoRIqQYWQGfi02Rp2XO_lSEUnQJTNomd1IATKPiqqktE5YUu0OzDrVCdSGBGg5IDedmGSp0QIf8m7kSc8xYUsU1PTdJoSzgiOAue0ur_P1i2xr_BSSI6I4BJekw9e58qqBbWN-kc3swgLddsCfXqyW9RnNBvjQmnwdffv1O_4zF0wGVnohs6PYu-9RqIzLxgfHvnlBQbsauWlqpNfw5h_JpnoKW287vPc2iXRONHlGdd-4Mp3323JFbISM6NgGg8y6nUAdKASjyXuqR7bTnr3pNTpjF4523buuzKG3Q4nzr-jnWGPIpxeyBV6unEK0Aw3-QQpY7CG_s3-76P484gJm4vPum03I_V3tmnNt}]}}"
+        "data": {
+          "EncData": {
+            "data": [
+              {
+                "compact_jwe": "<encrypted data1>",
+                "tag": "hsm_backup"
+              },
+              {
+                "compact_jwe": "<encrypted data2>",
+                "tag": "base_enclave_backup"
+              },
+              {
+                "compact_jwe": "<encrypted data3>",
+                "tag": "partition_enclave_backup"
+              }
+            ],
+            "kdf": "sp108_kdf"
+          },
+          "SharedKeys": {
+            "key_algorithm": "shamir_share",
+            "required": 2,
+            "enc_shares": [
+              {
+                "enc_key": "compact JWE wrapped share1",
+                "x5t_256": "bWFuZ2VkaHNtDQo"
+              },
+              {
+                "enc_key": "compact JWE wrapped share2",
+                "x5t_256": "bWFuZ2VkaHNta2V5dmF1bHQNCg"
+              }
+            ]
+          },
+          "version": 2
+        }
       }
     }
   }
