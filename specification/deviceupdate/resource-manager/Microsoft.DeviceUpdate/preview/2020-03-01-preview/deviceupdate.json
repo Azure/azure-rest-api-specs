@@ -144,7 +144,7 @@
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "Get list of Accounts": {
+          "Gets list of Accounts": {
             "$ref": "./examples/Accounts/Accounts_List.json"
           }
         }
@@ -233,7 +233,7 @@
           }
         },
         "x-ms-examples": {
-          "Creates or updates an account": {
+          "Creates or updates Account": {
             "$ref": "./examples/Accounts/Accounts_Create.json"
           }
         }
@@ -320,7 +320,7 @@
           }
         },
         "x-ms-examples": {
-          "Creates or updates an account": {
+          "Updates Account": {
             "$ref": "./examples/Accounts/Accounts_Update.json"
           }
         }
@@ -457,7 +457,7 @@
           }
         },
         "x-ms-examples": {
-          "Get list of Accounts": {
+          "Creates or updates Instance": {
             "$ref": "./examples/Instances/Instances_Create.json"
           }
         }
@@ -501,7 +501,7 @@
           }
         },
         "x-ms-examples": {
-          "Delete an instance": {
+          "Deletes instance": {
             "$ref": "./examples/Instances/Instances_Delete.json"
           }
         }
@@ -550,7 +550,7 @@
           }
         },
         "x-ms-examples": {
-          "Get list of Accounts": {
+          "Updates Instance": {
             "$ref": "./examples/Instances/Instances_Update.json"
           }
         }
@@ -587,53 +587,12 @@
     }
   },
   "definitions": {
-    "Resource": {
-      "description": "ADU resource.",
-      "properties": {
-        "id": {
-          "description": "Resource Id.",
-          "type": "string",
-          "readOnly": true
-        },
-        "name": {
-          "description": "Resource name.",
-          "type": "string",
-          "readOnly": true
-        },
-        "type": {
-          "description": "Resource type.",
-          "type": "string",
-          "readOnly": true
-        },
-        "location": {
-          "description": "Resource location.",
-          "type": "string",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "tags": {
-          "description": "Resource tags.",
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "x-ms-mutability": [
-            "read",
-            "create",
-            "update"
-          ]
-        }
-      },
-      "x-ms-azure-resource": true
-    },
     "Account": {
       "description": "Device Update account details.",
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/TrackedResource"
         }
       ],
       "properties": {
@@ -690,7 +649,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/TrackedResource"
         }
       ],
       "properties": {

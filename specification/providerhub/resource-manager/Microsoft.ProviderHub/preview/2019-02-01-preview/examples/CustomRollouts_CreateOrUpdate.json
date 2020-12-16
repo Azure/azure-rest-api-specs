@@ -1,13 +1,13 @@
 {
   "parameters": {
     "subscriptionId": "ab7a8701-f7ef-471a-a2f4-d0ebbf494f77",
-    "hostedResourceProvider": "Microsoft.Contoso",
+    "providerNamespace": "Microsoft.Contoso",
     "rolloutName": "brazilUsShoeBoxTesting",
     "api-version": "2019-02-01-preview",
     "customRolloutSpecification": {
       "properties": {
         "specification": {
-          "TestRegions": {
+          "Canary": {
             "regions": ["brazilus"]
           }
         }
@@ -24,7 +24,7 @@
         "properties": {
           "provisioningState": "Succeeded",
           "specification": {
-            "TestRegions": {
+            "canary": {
               "regions": ["brazilus","eastus2euap","centraluseuap"]
             }
           },

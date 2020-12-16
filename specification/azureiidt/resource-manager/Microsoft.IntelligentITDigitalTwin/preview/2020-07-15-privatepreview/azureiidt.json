@@ -366,6 +366,299 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IntelligentITDigitalTwin/digitalTwins/{iidtName}/assets/{assetName}": {
+      "put": {
+        "tags": [
+          "ITDigitalTwinAssets"
+        ],
+        "operationId": "ITDigitalTwinAssets_CreateOrUpdate",
+        "description": "The operation to create or update a IT Digital Twin Asset.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "iidtName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the it digital twin."
+          },
+          {
+            "name": "assetName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the it digital twin asset."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Asset"
+            },
+            "description": "Parameters supplied to the Create it digital twin asset operation."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Asset"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create an IT Digital Twin Asset": {
+            "$ref": "./examples/CreateAITDigitalTwinAsset.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "ITDigitalTwinAssets"
+        ],
+        "operationId": "ITDigitalTwinAsset_Update",
+        "description": "The operation to update a it digital twin asset.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "iidtName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the it digital twin."
+          },
+          {
+            "name": "assetName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the it digital twin asset."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AssetPatch"
+            },
+            "description": "Parameters supplied to the Update IT Digital Twin Asset operation."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Asset"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update asset of an it digital twin": {
+            "$ref": "./examples/UpdateAITDigitalTwinAsset.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "ITDigitalTwinAssets"
+        ],
+        "operationId": "ITDigitalTwinAssets_Delete",
+        "description": "The operation to delete it digital twin asset .",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "iidtName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the it digital twin."
+          },
+          {
+            "name": "assetName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the it digital twin asset."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete an IT Digital Twin Asset.": {
+            "$ref": "./examples/DeleteAITDigitalTwinAsset.json"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "ITDigitalTwinAssets"
+        ],
+        "operationId": "ITDigitalTwinAssets_Get",
+        "description": "Retrieves information about the it digital twin asset",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "iidtName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the it digital twin."
+          },
+          {
+            "name": "assetName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the it digital twin asset."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Asset"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get an IT Digital Twin asset.": {
+            "$ref": "./examples/GetAITDigitalTwinAsset.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IntelligentITDigitalTwin/digitalTwins/{iidtName}/assets": {
+      "get": {
+        "tags": [
+          "ITDigitalTwinAssets"
+        ],
+        "operationId": "ITDigitalTwinAssets_List",
+        "description": "The operation to get all assets of a it digital twin.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "iidtName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the it digital twin."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Assets"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List all Assets": {
+            "$ref": "./examples/ListAllAssets.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -442,6 +735,54 @@
         "configuration": {
           "description": "configuration for the digital twin project.",
           "type": "string"
+        },
+        "enterprise": {
+          "title": "Enterprise",
+          "description": "Enterprise environment for testing",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/Enterprise"
+        },
+        "currentStatus": {
+          "description": "Overall status",
+          "enum": [
+            "Created",
+            "Started",
+            "Succeeded",
+            "Failed"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "currentStatus",
+            "modelAsString": true
+          }
+        },
+        "domainName": {
+          "description": "Domain name of the enterprise environment.",
+          "type": "string"
+        },
+        "isManaged": {
+          "description": "Customer concent to allow services maintain enterprise credentials.",
+          "enum": [
+            "True",
+            "False"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "isManaged",
+            "modelAsString": true
+          }
+        },
+        "canAccess": {
+          "description": "Customer concent to allow services maintain enterprise credentials to access enterprise machines.",
+          "enum": [
+            "True",
+            "False"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "canAccess",
+            "modelAsString": true
+          }
         }
       },
       "description": "Describes the properties of a IT Digital Twin."
@@ -537,6 +878,198 @@
         "nextLink": {
           "type": "string",
           "description": "URL to get the next set of operation list results if there are any."
+        }
+      }
+    },
+    "Computer": {
+      "properties": {
+        "id": {
+          "description": "Resource ID of the computer",
+          "type": "string",
+          "x-nullable": true
+        },
+        "name": {
+          "description": "Name of the computer",
+          "type": "string",
+          "x-nullable": true
+        },
+        "role": {
+          "description": "Role of a machine, including VM on Azure and local test machine on-prem",
+          "enum": [
+            "SCCM",
+            "AD",
+            "CS",
+            "DNS",
+            "TestMachine"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "role",
+            "modelAsString": true
+          }
+        }
+      },
+      "description": "Meta data for the test result."
+    },
+    "Enterprise": {
+      "properties": {
+        "computerList": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Computer"
+          },
+          "description": "List of computers on Azure and test machines on-prem"
+        },
+        "adminUserName": {
+          "description": "Admin user name for accessing the enterprise",
+          "type": "string",
+          "x-nullable": true
+        },
+        "adminPassword": {
+          "x-ms-secret": true,
+          "description": "Admin password for accessing the enterprise",
+          "type": "string",
+          "x-nullable": true
+        }
+      },
+      "description": "Enterprise is a testing environment which has several virtual machines on the cloud and several testing machines on-prem."
+    },
+    "AssetProperties": {
+      "properties": {
+        "assetId": {
+          "type": "string",
+          "description": "ResourceId for the virtual machines."
+        },
+        "assetRole": {
+          "description": "Role of an asset, including VMs on Azure and local test machine on-prem",
+          "enum": [
+            "SCCM",
+            "AD",
+            "CS",
+            "DNS",
+            "TestVM"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "assetRole",
+            "modelAsString": true
+          }
+        },
+        "assetStatus": {
+          "description": "Status of an asset",
+          "enum": [
+            "Unknown",
+            "Available",
+            "Unavailable",
+            "Testing"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "assetStatus",
+            "modelAsString": true
+          }
+        }
+      },
+      "description": "Describes the properties of an digitalTwins/assets."
+    },
+    "Asset": {
+      "properties": {
+        "properties": {
+          "title": "Asset properties",
+          "description": "List the properties of IT Digital Twin Asset",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/AssetProperties"
+        },
+        "systemData": {
+          "$ref": "#/definitions/systemData",
+          "description": "The system data."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "description": "Asset including virtual machines and the on-prem test devices."
+    },
+    "AssetPatch": {
+      "properties": {
+        "properties": {
+          "title": "Asset properties",
+          "description": "Properties of the child resource asset",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/AssetProperties"
+        }
+      },
+      "description": "Asset definition for patch operation"
+    },
+    "Assets": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/Asset"
+          },
+          "description": "The list of asset"
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The uri to fetch the next page of asset."
+        }
+      },
+      "description": "A list of asset."
+    },
+    "systemData": {
+      "description": "Metadata pertaining to creation and last modification of the resource.",
+      "type": "object",
+      "readOnly": true,
+      "properties": {
+        "createdBy": {
+          "type": "string",
+          "description": "The identity that created the resource."
+        },
+        "createdByType": {
+          "type": "string",
+          "description": "The type of identity that created the resource.",
+          "enum": [
+            "User",
+            "Application",
+            "ManagedIdentity",
+            "Key"
+          ],
+          "x-ms-enum": {
+            "name": "createdByType",
+            "modelAsString": true
+          }
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp of resource creation (UTC)."
+        },
+        "lastModifiedBy": {
+          "type": "string",
+          "description": "The identity that last modified the resource."
+        },
+        "lastModifiedByType": {
+          "type": "string",
+          "description": "The type of identity that last modified the resource.",
+          "enum": [
+            "User",
+            "Application",
+            "ManagedIdentity",
+            "Key"
+          ],
+          "x-ms-enum": {
+            "name": "createdByType",
+            "modelAsString": true
+          }
+        },
+        "lastModifiedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The type of identity that last modified the resource."
         }
       }
     }
