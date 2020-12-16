@@ -24,6 +24,11 @@ To see additional help and options, run:
 
 These are the global settings for the Machine Learning Services API.
 
+``` yaml
+openapi-type: arm
+tag: package-2020-08-01
+```
+
 ### Tag: package-2020-08-01
 
 These settings apply only when `--tag=package-2020-08` is specified on the command line.
