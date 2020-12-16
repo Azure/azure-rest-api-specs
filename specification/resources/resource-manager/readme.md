@@ -80,6 +80,13 @@ These settings apply only when `--tag=package-policy-2020-09` is specified on th
 ``` yaml $(tag) == 'package-policy-2020-09'
 input-file:
 - Microsoft.Authorization/stable/2020-09-01/dataPolicyManifests.json
+- Microsoft.Authorization/stable/2020-09-01/policyAssignments.json
+- Microsoft.Authorization/stable/2020-09-01/policyDefinitions.json
+- Microsoft.Authorization/stable/2020-09-01/policySetDefinitions.json
+
+# Needed when there is more than one input file
+override-info:
+  title: PolicyClient
 ```
 
 ### Tag: package-preview-2020-08
@@ -89,6 +96,15 @@ These settings apply only when `--tag=package-preview-2020-08` is specified on t
 ``` yaml $(tag) == 'package-preview-2020-08'
 input-file:
   - Microsoft.Solutions/preview/2020-08-21-preview/managedapplications.json
+```
+
+### Tag: package-resources-2020-08
+
+These settings apply only when `--tag=package-resources-2020-08` is specified on the command line.
+
+``` yaml $(tag) == 'package-resources-2020-08'
+input-file:
+  - Microsoft.Resources/stable/2020-08-01/resources.json
 ```
 
 ### Tag: package-subscriptions-2020-01
@@ -685,6 +701,12 @@ directive:
     where: $.paths
     from: resources.json
     reason: Pre-existing lint error. Not related to this version release.
+  - suppress: TopLevelResourcesListByResourceGroup
+    from: policyDefinitions.json
+    reason: Policy definitions are a proxy resource that is only usable on subscriptions or management groups
+  - suppress: TopLevelResourcesListByResourceGroup
+    from: policySetDefinitions.json
+    reason: Policy set definitions are a proxy resource that is only usable on subscriptions or management groups
 ```
 
 ---

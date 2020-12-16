@@ -26,7 +26,7 @@ These are the global settings for the Authorization API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2020-04-01-preview-only
+tag: package-2020-04-preview
 ```
 
 ## Suppression
@@ -35,6 +35,8 @@ tag: package-2020-04-01-preview-only
 directive:
   - suppress: OperationsAPIImplementation
     reason: we do have a operations api as "/providers/Microsoft.Authorization/operations"
+  - suppress: TopLevelResourcesListByResourceGroup
+    reason: proxy resources don't require list by resource group(Suppresion confirmed by API council)
   - suppress: OperationIdNounConflictingModelNames
     where: '$.paths["/providers/Microsoft.Authorization/providerOperations/{resourceProviderNamespace}"].get.operationId'
     from: authorization-ProviderOperationsCalls.json
@@ -71,10 +73,24 @@ directive:
 
 ### Tag: package-2020-04-01-preview-only
 
-These settings apply only when `--tag=package-2020-04-preview` is specified on the command line.
+These settings apply only when `--tag=package-2020-04-01-preview-only` is specified on the command line.
 
 ``` yaml $(tag) == 'package-2020-04-01-preview-only'
 input-file:
+- Microsoft.Authorization/preview/2020-04-01-preview/authorization-RoleAssignmentsCalls.json
+```
+
+### Tag: package-2020-04-preview
+
+These settings apply only when `--tag=package-2020-04-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-04-preview'
+input-file:
+- Microsoft.Authorization/preview/2015-06-01/authorization-ClassicAdminCalls.json
+- Microsoft.Authorization/stable/2015-07-01/authorization-ElevateAccessCalls.json
+- Microsoft.Authorization/preview/2018-01-01-preview/authorization-ProviderOperationsCalls.json
+- Microsoft.Authorization/preview/2018-01-01-preview/authorization-RoleDefinitionsCalls.json
+- Microsoft.Authorization/preview/2018-07-01-preview/authorization-DenyAssignmentGetCalls.json
 - Microsoft.Authorization/preview/2020-04-01-preview/authorization-RoleAssignmentsCalls.json
 ```
 
@@ -176,6 +192,15 @@ input-file:
 - Microsoft.Authorization/preview/2018-01-01-preview/authorization-RoleAssignmentsCalls.json
 - Microsoft.Authorization/preview/2018-01-01-preview/authorization-RoleDefinitionsCalls.json
 - Microsoft.Authorization/preview/2018-07-01-preview/authorization-DenyAssignmentGetCalls.json
+```
+
+### Tag: package-2018-05-01-preview
+
+These settings apply only when `--tag=package-2018-05-01-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2018-05-01-preview'
+input-file:
+- Microsoft.Authorization/preview/2018-05-01-preview/authorization-AccessReviewCalls.json
 ```
 
 ### Tag: package-2018-09-01-preview
