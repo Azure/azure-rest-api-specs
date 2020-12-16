@@ -7450,37 +7450,6 @@
       },
       "additionalProperties": false
     },
-    "LivenessProbeRequirements": {
-      "type": "object",
-      "properties": {
-        "failureThreshold": {
-          "format": "int32",
-          "description": "The number of failures to allow before returning an unhealthy status.",
-          "type": "integer"
-        },
-        "successThreshold": {
-          "format": "int32",
-          "description": "The number of successful probes before returning a healthy status.",
-          "type": "integer"
-        },
-        "timeoutSeconds": {
-          "format": "int32",
-          "description": "The probe timeout in seconds.",
-          "type": "integer"
-        },
-        "periodSeconds": {
-          "format": "int32",
-          "description": "The length of time between probes in seconds.",
-          "type": "integer"
-        },
-        "initialDelaySeconds": {
-          "format": "int32",
-          "description": "The delay before the first probe in seconds.",
-          "type": "integer"
-        }
-      },
-      "additionalProperties": false
-    },
     "DeploymentConfigurationBase": {
       "required": [
         "computeType"
@@ -7517,7 +7486,7 @@
           "$ref": "machineLearningServices.json#/definitions/ContainerResourceRequirements"
         },
         "livenessProbeRequirements": {
-          "$ref": "#/definitions/LivenessProbeRequirements"
+          "$ref": "machineLearningServices.json#/definitions/LivenessProbeRequirements"
         }
       },
       "discriminator": "computeType",
