@@ -497,7 +497,7 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
-          "Create or Update an iSCSI Target": {
+          "Update an iSCSI Target": {
             "$ref": "./examples/IscsiTargets_Patch.json"
           }
         }
@@ -838,6 +838,18 @@
           "x-ms-client-flatten": true,
           "description": "RP defined properties for Disk Pool operations.",
           "$ref": "#/definitions/DiskPoolUpdateProperties"
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-ms-mutability": [
+            "read",
+            "create",
+            "update"
+          ],
+          "description": "Resource tags."
         }
       }
     },
