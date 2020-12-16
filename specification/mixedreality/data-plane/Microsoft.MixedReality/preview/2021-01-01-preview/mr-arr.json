@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "description": "Describing the [Azure Remote Rendering](https://docs.microsoft.com/azure/remote-rendering/) REST API for rendering sessions and asset conversions. \n\nAll requests to these APIs must be authenticated using the Secure Token Service as described in the [Azure Remote rendering documentation chapter about authentication](https://docs.microsoft.com/en-us/azure/remote-rendering/how-tos/tokens).\n",
+    "description": "Describing the [Azure Remote Rendering](https://docs.microsoft.com/azure/remote-rendering/) REST API for rendering sessions and asset conversions. \n\nAll requests to these APIs must be authenticated using the Secure Token Service as described in the [Azure Remote rendering documentation chapter about authentication](https://docs.microsoft.com/azure/remote-rendering/how-tos/tokens).\n",
     "title": "MixedRealityRemoteRendering",
     "version": "2021-01-01-preview"
   },
@@ -356,22 +356,7 @@
               }
             },
             "schema": {
-              "properties": {
-                "conversions": {
-                  "items": {
-                    "$ref": "#/definitions/conversion"
-                  },
-                  "type": "array"
-                },
-                "@nextLink": {
-                  "description": "If more conversions are available this link with the same authentication header can be used to retrieve further values",
-                  "type": "string"
-                }
-              },
-              "required": [
-                "conversions"
-              ],
-              "type": "object"
+              "$ref": "#/definitions/conversion_list"
             }
           },
           "401": {
@@ -1060,6 +1045,24 @@
           "error": null
         }
       },
+      "type": "object"
+    },
+    "conversion_list": {
+      "properties": {
+        "conversions": {
+          "items": {
+            "$ref": "#/definitions/conversion"
+          },
+          "type": "array"
+        },
+        "@nextLink": {
+          "description": "If more conversions are available this link with the same authentication header can be used to retrieve further values",
+          "type": "string"
+        }
+      },
+      "required": [
+        "conversions"
+      ],
       "type": "object"
     },
     "conversion_input_settings": {
