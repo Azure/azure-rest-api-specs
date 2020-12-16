@@ -20,8 +20,20 @@ Generate all API versions currently shipped for this package
 
 ```yaml $(python) && $(multiapi)
 batch:
+  - tag: package-2020-12
   - tag: package-2020-10
   - tag: package-2020-03-01-preview
+```
+
+### Tag: package-2020-12 and python
+
+These settings apply only when `--tag=package-2020-12 --python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
+
+``` yaml $(tag) == 'package-2020-12' && $(python)
+python:
+  namespace: azure.mgmt.digitaltwins.v2020_12_01
+  output-folder: $(python-sdks-folder)/digitaltwins/azure-mgmt-digitaltwins/azure/mgmt/digitaltwins/v2020_12_01
 ```
 
 ### Tag: package-2020-10 and python
