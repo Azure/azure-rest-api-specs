@@ -4656,6 +4656,10 @@
             "modelAsString": true
           }
         },
+        "identity": {
+          "$ref": "#/definitions/IdentityForCmk",
+          "description": "The identity that will be used to access the key vault for encryption at rest."
+        },
         "keyVaultProperties": {
           "$ref": "#/definitions/KeyVaultProperties",
           "description": "Customer Key vault properties."
@@ -4687,6 +4691,19 @@
         "keyVaultArmId"
       ],
       "type": "object"
+    },
+    "IdentityForCmk": {
+      "description": "Identity that will be used to access key vault for encryption at rest",
+      "type": "object",
+      "properties": {
+        "userAssignedIdentity": {
+          "description": "The ArmId of the user assigned identity that will be used to access the customer managed key vault",
+          "type": "string"
+        }
+      },
+      "required": [
+        "userAssignedIdentity"
+      ]
     },
     "LinkedServiceResponse": {
       "description": "Linked service.",
