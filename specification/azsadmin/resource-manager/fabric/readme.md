@@ -189,7 +189,7 @@ input-file:
   - $(this-folder)/Microsoft.Fabric.Admin/preview/2019-05-01/NasCluster.json
   - $(this-folder)/Microsoft.Fabric.Admin/preview/2020-10-01/ScaleUnit.json
   - $(this-folder)/Microsoft.Fabric.Admin/preview/2020-10-01/ScaleUnitNode.json
-  - $(this-folder)/Microsoft.Fabric.Admin/preview/2020-10-01/ComputeOperationResults.json"
+  - $(this-folder)/Microsoft.Fabric.Admin/preview/2020-10-01/ComputeOperationResults.json
 
 ```
 
