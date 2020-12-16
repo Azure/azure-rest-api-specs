@@ -26,18 +26,9 @@ These are the global settings for the Azure Red Hat OpenShift API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2021-01-31-preview
+tag: package-2020-04-30
 ```
 
-
-### Tag: package-2021-01-31-preview
-
-These settings apply only when `--tag=package-2021-01-31-preview` is specified on the command line.
-
-```yaml $(tag) == 'package-2021-01-31-preview'
-input-file:
-  - Microsoft.RedHatOpenShift/preview/2021-01-31-preview/redhatopenshift.json
-```
 ### Tag: package-2020-04-30
 
 These settings apply only when `--tag=package-2020-04-30` is specified on the command line.
@@ -47,13 +38,13 @@ input-file:
   - Microsoft.RedHatOpenShift/stable/2020-04-30/redhatopenshift.json
 ```
 
-### Tag: package-2021-09-01-preview
+### Tag: package-2021-01-31-preview
 
-These settings apply only when `--tag=package-2021-09-01-preview` is specified on the command line.
+These settings apply only when `--tag=package-2021-01-31-preview` is specified on the command line.
 
-``` yaml $(tag) == 'package-2021-09-01-preview'
+``` yaml $(tag) == 'package-2021-01-31-preview'
 input-file:
-  - Microsoft.RedHatOpenShift/preview/2021-09-01-preview/redhatopenshift.json
+  - Microsoft.RedHatOpenShift/preview/2021-01-31-preview/redhatopenshift.json
 ```
 
 ---
@@ -82,7 +73,3 @@ See configuration in [readme.go.md](./readme.go.md)
 ## Python
 
 See configuration in [readme.python.md](./readme.python.md)
-
-
-
-
