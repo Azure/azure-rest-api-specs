@@ -573,6 +573,209 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/managedClusters/{resourceName}/maintenanceConfigurations": {
+      "get": {
+        "tags": [
+          "MaintenanceConfigurations"
+        ],
+        "operationId": "MaintenanceConfigurations_ListByManagedCluster",
+        "summary": "Gets a list of maintenance configurations in the specified managed cluster.",
+        "description": "Gets a list of maintenance configurations in the specified managed cluster. The operation returns properties of each maintenance configuration.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/MaintenanceConfigurationListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List maintenance configurations by Managed Cluster": {
+            "$ref": "./examples/MaintenanceConfigurationsList.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/managedClusters/{resourceName}/maintenanceConfigurations/{configName}": {
+      "get": {
+        "tags": [
+          "MaintenanceConfigurations"
+        ],
+        "operationId": "MaintenanceConfigurations_Get",
+        "summary": "Gets the maintenance configuration.",
+        "description": "Gets the details of maintenance configurations by managed cluster and resource group.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceNameParameter"
+          },
+          {
+            "name": "configName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the maintenance configuration."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/MaintenanceConfiguration"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Maintenance Configuration": {
+            "$ref": "./examples/MaintenanceConfigurationsGet.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "MaintenanceConfigurations"
+        ],
+        "operationId": "MaintenanceConfigurations_CreateOrUpdate",
+        "summary": "Creates or updates a maintenance configurations.",
+        "description": "Creates or updates a maintenance configuration in the specified managed cluster.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceNameParameter"
+          },
+          {
+            "name": "configName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the maintenance configuration."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MaintenanceConfiguration"
+            },
+            "description": "Parameters supplied to the Create or Update a default maintenance configuration."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/MaintenanceConfiguration"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": false,
+        "x-ms-examples": {
+          "Create/Update Maintenance Configuration": {
+            "$ref": "./examples/MaintenanceConfigurationsCreate_Update.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "MaintenanceConfigurations"
+        ],
+        "operationId": "MaintenanceConfigurations_Delete",
+        "summary": "Deletes a maintenance configuration.",
+        "description": "Deletes the maintenance configuration in the specified managed cluster.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceNameParameter"
+          },
+          {
+            "name": "configName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the maintenance configuration."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "NoContent"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": false,
+        "x-ms-examples": {
+          "Delete Maintenance Configuration": {
+            "$ref": "./examples/MaintenanceConfigurationsDelete.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/managedClusters/{resourceName}/agentPools": {
       "get": {
         "tags": [
@@ -2246,6 +2449,170 @@
         }
       },
       "description": "Profile of network configuration."
+    },
+    "MaintenanceConfigurationListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MaintenanceConfiguration"
+          },
+          "description": "The list of maintenance configurations."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URL to get the next set of maintenance configuration results.",
+          "readOnly": true
+        }
+      },
+      "description": "The response from the List maintenance configurations operation."
+    },
+    "SystemData": {
+      "description": "Metadata pertaining to creation and last modification of the resource.",
+      "type": "object",
+      "readOnly": true,
+      "properties": {
+        "createdBy": {
+          "type": "string",
+          "description": "The identity that created the resource."
+        },
+        "createdByType": {
+          "type": "string",
+          "description": "The type of identity that created the resource.",
+          "enum": [
+            "User",
+            "Application",
+            "ManagedIdentity",
+            "Key"
+          ],
+          "x-ms-enum": {
+            "name": "createdByType",
+            "modelAsString": true
+          }
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp of resource creation (UTC)."
+        },
+        "lastModifiedBy": {
+          "type": "string",
+          "description": "The identity that last modified the resource."
+        },
+        "lastModifiedByType": {
+          "type": "string",
+          "description": "The type of identity that last modified the resource.",
+          "enum": [
+            "User",
+            "Application",
+            "ManagedIdentity",
+            "Key"
+          ],
+          "x-ms-enum": {
+            "name": "createdByType",
+            "modelAsString": true
+          }
+        },
+        "lastModifiedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The type of identity that last modified the resource."
+        }
+      }
+    },
+    "MaintenanceConfiguration": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/SubResource"
+        }
+      ],
+      "properties": {
+        "systemData": {
+          "$ref": "#/definitions/SystemData",
+          "readOnly": true,
+          "description": "The system meta data relating to this resource."
+        },
+        "properties": {
+          "description": "Properties of a default maintenance configuration.",
+          "$ref": "#/definitions/MaintenanceConfigurationProperties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "description": "maintenance configuration."
+    },
+    "MaintenanceConfigurationProperties": {
+      "properties": {
+        "timeInWeek": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TimeInWeek"
+          },
+          "description": "Weekday time slots allowed to upgrade."
+        },
+        "notAllowedTime": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TimeSpan"
+          },
+          "description": "Time slots on which upgrade is not allowed."
+        }
+      },
+      "description": "Default maintenance configuration properties."
+    },
+    "TimeInWeek": {
+      "properties": {
+        "day": {
+          "$ref": "#/definitions/WeekDay",
+          "description": "A day in a week."
+        },
+        "hourSlots": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/HourInDay"
+          },
+          "description": "hour slots in a day."
+        }
+      },
+      "description": "Time in a week."
+    },
+    "WeekDay": {
+      "type": "string",
+      "enum": [
+        "Sunday",
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday"
+      ],
+      "x-ms-enum": {
+        "name": "WeekDay",
+        "modelAsString": true
+      },
+      "description": "The weekday enum."
+    },
+    "HourInDay": {
+      "type": "integer",
+      "format": "int32",
+      "maximum": 23,
+      "minimum": 0,
+      "description": "Hour in a day."
+    },
+    "TimeSpan": {
+      "properties": {
+        "start": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The start of a time span"
+        },
+        "end": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The end of a time span"
+        }
+      },
+      "description": "The time span with start and end properties."
     },
     "ManagedClusterLoadBalancerProfile": {
       "properties": {
