@@ -28,6 +28,34 @@ openapi-type: arm
 tag: package-2020-01-13-preview
 ```
 
+### Tag: package-2015-01-preview
+
+These settings apply only when `--tag=package-2015-01-preview` is specified on the command line.
+
+``` yaml $(tag) == '2015-01-preview'
+input-file:
+- Microsoft.Automation/preview/2015-01-01-preview/account.json
+- Microsoft.Automation/preview/2015-01-01-preview/certificate.json
+- Microsoft.Automation/preview/2015-01-01-preview/connection.json
+- Microsoft.Automation/preview/2015-01-01-preview/connectionType.json
+- Microsoft.Automation/preview/2015-01-01-preview/credential.json
+- Microsoft.Automation/preview/2015-01-01-preview/dscCompilationJob.json
+- Microsoft.Automation/preview/2015-01-01-preview/dscConfiguration.json
+- Microsoft.Automation/preview/2015-01-01-preview/dscNode.json
+- Microsoft.Automation/preview/2015-01-01-preview/dscNodeConfiguration.json
+- Microsoft.Automation/preview/2015-01-01-preview/hybridRunbookWorkerGroup.json
+- Microsoft.Automation/preview/2015-01-01-preview/job.json
+- Microsoft.Automation/preview/2015-01-01-preview/jobSchedule.json
+- Microsoft.Automation/preview/2015-01-01-preview/linkedWorkspace.json
+- Microsoft.Automation/preview/2015-01-01-preview/module.json
+- Microsoft.Automation/preview/2015-01-01-preview/runbook.json
+- Microsoft.Automation/preview/2015-01-01-preview/schedule.json
+- Microsoft.Automation/preview/2015-01-01-preview/variable.json
+- Microsoft.Automation/preview/2015-01-01-preview/watcher.json
+- Microsoft.Automation/preview/2015-01-01-preview/webhook.json
+```
+
+
 ### Tag: package-2015-10
 
 These settings apply only when `--tag=package-2015-10` is specified on the command line.
@@ -51,6 +79,7 @@ input-file:
 - Microsoft.Automation/stable/2015-10-31/runbook.json
 - Microsoft.Automation/stable/2015-10-31/schedule.json
 - Microsoft.Automation/stable/2015-10-31/variable.json
+- Microsoft.Automation/stable/2015-10-31/watcher.json
 - Microsoft.Automation/stable/2015-10-31/webhook.json
 ```
 
@@ -61,23 +90,24 @@ These settings apply only when `--tag=package-2017-05-preview` is specified on t
 
 ``` yaml $(tag) == 'package-2017-05-preview'
 input-file:
-- Microsoft.Automation/stable/2015-10-31/account.json
-- Microsoft.Automation/stable/2015-10-31/certificate.json
-- Microsoft.Automation/stable/2015-10-31/connection.json
-- Microsoft.Automation/stable/2015-10-31/connectionType.json
-- Microsoft.Automation/stable/2015-10-31/credential.json
-- Microsoft.Automation/stable/2015-10-31/dscCompilationJob.json
-- Microsoft.Automation/stable/2015-10-31/dscConfiguration.json
-- Microsoft.Automation/stable/2015-10-31/dscNode.json
-- Microsoft.Automation/stable/2015-10-31/dscNodeConfiguration.json
-- Microsoft.Automation/stable/2015-10-31/hybridRunbookWorkerGroup.json
-- Microsoft.Automation/stable/2015-10-31/jobSchedule.json
-- Microsoft.Automation/stable/2015-10-31/linkedWorkspace.json
-- Microsoft.Automation/stable/2015-10-31/module.json
-- Microsoft.Automation/stable/2015-10-31/runbook.json
-- Microsoft.Automation/stable/2015-10-31/schedule.json
-- Microsoft.Automation/stable/2015-10-31/variable.json
-- Microsoft.Automation/stable/2015-10-31/webhook.json
+- Microsoft.Automation/preview/2017-05-15-preview/account.json
+- Microsoft.Automation/preview/2017-05-15-preview/certificate.json
+- Microsoft.Automation/preview/2017-05-15-preview/connection.json
+- Microsoft.Automation/preview/2017-05-15-preview/connectionType.json
+- Microsoft.Automation/preview/2017-05-15-preview/credential.json
+- Microsoft.Automation/preview/2017-05-15-preview/dscCompilationJob.json
+- Microsoft.Automation/preview/2017-05-15-preview/dscConfiguration.json
+- Microsoft.Automation/preview/2017-05-15-preview/dscNode.json
+- Microsoft.Automation/preview/2017-05-15-preview/dscNodeConfiguration.json
+- Microsoft.Automation/preview/2017-05-15-preview/hybridRunbookWorkerGroup.json
+- Microsoft.Automation/preview/2017-05-15-preview/jobSchedule.json
+- Microsoft.Automation/preview/2017-05-15-preview/linkedWorkspace.json
+- Microsoft.Automation/preview/2017-05-15-preview/module.json
+- Microsoft.Automation/preview/2017-05-15-preview/runbook.json
+- Microsoft.Automation/preview/2017-05-15-preview/schedule.json
+- Microsoft.Automation/preview/2017-05-15-preview/variable.json
+- Microsoft.Automation/preview/2017-05-15-preview/watcher.json
+- Microsoft.Automation/preview/2017-05-15-preview/webhook.json
 - Microsoft.Automation/preview/2017-05-15-preview/softwareUpdateConfiguration.json
 - Microsoft.Automation/preview/2017-05-15-preview/softwareUpdateConfigurationRun.json
 - Microsoft.Automation/preview/2017-05-15-preview/softwareUpdateConfigurationMachineRun.json
@@ -167,6 +197,7 @@ input-file:
 - Microsoft.Automation/preview/2020-01-13-preview/privateLinkResources.json
 - Microsoft.Automation/preview/2020-01-13-preview/python2package.json
 - Microsoft.Automation/preview/2020-01-13-preview/dscNode.json
+- Microsoft.Automation/preview/2020-01-13-preview/dscNodeConfiguration.json
 - Microsoft.Automation/preview/2020-01-13-preview/dscCompilationJob.json
 - Microsoft.Automation/preview/2020-01-13-preview/dscNodeCounts.json
 - Microsoft.Automation/preview/2020-01-13-preview/sourceControl.json
@@ -184,7 +215,7 @@ input-file:
 - Microsoft.Automation/preview/2020-01-13-preview/schedule.json
 - Microsoft.Automation/preview/2020-01-13-preview/variable.json
 - Microsoft.Automation/preview/2020-01-13-preview/watcher.json
-- Microsoft.Automation/stable/2018-06-30/dscNodeConfiguration.json
+- Microsoft.Automation/stable/2018-06-30/dscConfiguration.json
 - Microsoft.Automation/stable/2018-06-30/job.json
 - Microsoft.Automation/stable/2018-06-30/operations.json
 - Microsoft.Automation/stable/2018-06-30/runbook.json
