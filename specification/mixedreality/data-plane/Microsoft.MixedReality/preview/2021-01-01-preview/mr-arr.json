@@ -20,6 +20,11 @@
         "produces": [
           "application/json"
         ],
+        "x-ms-examples": {
+          "Create a conversion": {
+            "$ref": "./examples/CreateConversion.json"
+          }
+        },
         "parameters": [
           {
             "name": "account_id",
@@ -36,7 +41,7 @@
             "name": "conversion_id",
             "required": true,
             "type": "string",
-            "x-example": "contoso-conversion-1"
+            "x-example": "contoso-conversion-fbc3646c-0b97-4553-81ca-6fae2bfb754e"
           },
           {
             "description": "Request body configuring the settings for an asset conversion.",
@@ -94,6 +99,15 @@
               },
               "WWW-Authenticate": {
                 "description": "Describes the error encountered while trying to authenticate the resource.",
+                "type": "string"
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "headers": {
+              "MS-CV": {
+                "description": "Microsoft Correlation Vector. Include this value when reporting errors to the Azure Remote Rendering team.",
                 "type": "string"
               }
             }
@@ -165,9 +179,14 @@
             "name": "conversion_id",
             "required": true,
             "type": "string",
-            "x-example": "contoso-conversion-1"
+            "x-example": "contoso-conversion-fbc3646c-0b97-4553-81ca-6fae2bfb754e"
           }
         ],
+        "x-ms-examples": {
+          "Get a single conversion by ID": {
+            "$ref": "./examples/GetConversion.json"
+          }
+        },
         "responses": {
           "200": {
             "description": "OK",
@@ -207,15 +226,6 @@
               "$ref": "#/definitions/conversion"
             }
           },
-          "400": {
-            "description": "BadRequest",
-            "headers": {
-              "MS-CV": {
-                "description": "Microsoft Correlation Vector. Include this value when reporting errors to the Azure Remote Rendering team.",
-                "type": "string"
-              }
-            }
-          },
           "401": {
             "description": "Unauthorized",
             "headers": {
@@ -231,6 +241,15 @@
           },
           "403": {
             "description": "Forbidden",
+            "headers": {
+              "MS-CV": {
+                "description": "Microsoft Correlation Vector. Include this value when reporting errors to the Azure Remote Rendering team.",
+                "type": "string"
+              }
+            }
+          },
+          "404": {
+            "description": "Not found. No conversion with the provided conversion id exists",
             "headers": {
               "MS-CV": {
                 "description": "Microsoft Correlation Vector. Include this value when reporting errors to the Azure Remote Rendering team.",
@@ -280,7 +299,7 @@
     },
     "/accounts/{account_id}/conversions": {
       "get": {
-        "operationId": "GetConversions",
+        "operationId": "ListConversions",
         "x-ms-pageable": {
           "itemName": "conversions",
           "nextLinkName": "@nextLink"
@@ -299,12 +318,17 @@
             "x-example": "30ea64bd-100f-4bf0-adc9-29fa45d4880c"
           }
         ],
+        "x-ms-examples": {
+          "List conversions": {
+            "$ref": "./examples/ListConversions.json"
+          }
+        },
         "responses": {
           "200": {
             "description": "OK",
             "examples": {
               "application/json": {
-                "@nextlink": "https://remoterendering.westus2.mixedreality.azure.com/accounts/30ea64bd-100f-4bf0-adc9-29fa45d4880c/conversions?skiptoken=someskiptokenvalue",
+                "@nextLink": "https://remoterendering.westus2.mixedreality.azure.com/accounts/30ea64bd-100f-4bf0-adc9-29fa45d4880c/conversions?skiptoken=someskiptokenvalue",
                 "conversions": [
                   {
                     "id": "contoso-conversion-1",
@@ -1112,10 +1136,7 @@
       "description": "Request to start a conversion",
       "properties": {
         "settings": {
-          "$ref": "#/definitions/conversion_settings",
-          "example": {
-            "sas": null
-          }
+          "$ref": "#/definitions/conversion_settings"
         }
       },
       "required": [
@@ -1225,12 +1246,8 @@
           "type": "integer"
         },
         "size": {
-          "enum": [
-            "Standard",
-            "Premium"
-          ],
-          "example": "Standard",
-          "type": "string"
+          "$ref": "#/definitions/session_size",
+          "example": "Standard"
         },
         "status": {
           "$ref": "#/definitions/session_status",
