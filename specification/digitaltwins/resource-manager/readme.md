@@ -67,7 +67,7 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-python
+  - repo: azure-sdk-for-python-track2
     after_scripts:
       - python ./scripts/multiapi_init_gen.py azure-mgmt-digitaltwins
   - repo: azure-sdk-for-java
