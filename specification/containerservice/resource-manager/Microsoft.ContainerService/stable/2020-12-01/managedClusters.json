@@ -476,6 +476,9 @@
           },
           "Create/Update Managed Cluster with EnableAHUB": {
             "$ref": "./examples/ManagedClustersCreate_UpdateWithAHUB.json"
+          },
+          "Create Managed Cluster with EncryptionAtHost enabled": {
+            "$ref": "./examples/ManagedClustersCreate_EnableEncryptionAtHost.json"
           }
         }
       },
@@ -947,6 +950,9 @@
           },
           "Create Agent Pool with KubeletConfig and LinuxOSConfig": {
             "$ref": "./examples/AgentPoolsCreate_CustomNodeConfig.json"
+          },
+          "Create Agent Pool with EncryptionAtHost enabled": {
+            "$ref": "./examples/AgentPoolsCreate_EnableEncryptionAtHost.json"
           }
         }
       },
@@ -2218,6 +2224,10 @@
         "linuxOSConfig": {
           "$ref": "#/definitions/LinuxOSConfig",
           "description": "LinuxOSConfig specifies the OS configuration of linux agent nodes."
+        },
+        "enableEncryptionAtHost": {
+          "type": "boolean",
+          "description": "Whether to enable EncryptionAtHost"
         }
       },
       "description": "Properties for the container service agent pool profile."
