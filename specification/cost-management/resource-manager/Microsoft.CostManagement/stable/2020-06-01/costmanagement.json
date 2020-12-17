@@ -1134,7 +1134,7 @@
         "tags": [
           "UsageDetails"
         ],
-        "operationId": "GenerateDetailedCostReport",
+        "operationId": "GenerateDetailedCostReport_CreateOperation",
         "description": "Generates the detailed cost report for provided date range, billing period(Only enterprise customers) or Invoice Id asynchronously at a certain scope.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
@@ -1172,12 +1172,18 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/UsageDetailsReportDefinition"
+              "$ref": "#/definitions/GenerateDetailedCostReportDefinition"
             },
             "description": "Parameters supplied to the Create detailed cost report operation."
           }
         ],
         "responses": {
+          "200": {
+            "description": "Request processing completed.",
+            "schema": {
+              "$ref": "#/definitions/GenerateDetailedCostReportOperationResult"
+            }
+          },
           "202": {
             "description": "Accepted. Request will be processed. Use the Location header to check the status.",
             "headers": {
@@ -1199,7 +1205,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/GenerateDetailedCostReportErrorResponse"
             }
           }
         }
@@ -1208,15 +1214,16 @@
     "/{scope}/providers/Microsoft.CostManagement/operationResults/{operationId}": {
       "get": {
         "tags": [
-          "UsageDetailsOperationResults"
+          "GenerateDetailedCostReportOperationResults"
         ],
-        "operationId": "UsageDetailsOperationResults",
-        "description": "List the result of the specified operation. This link is provided in the GenerateDetailedCostReport response.",
+        "operationId": "GenerateDetailedCostReportOperationResults_Get",
+        "description": "Get the result of the specified operation. This link is provided in the GenerateDetailedCostReport creation request response header.",
         "x-ms-examples": {
-          "Get details of a server": {
-            "$ref": "./examples/UsageDetailsOperationResults.json"
+          "Get details of the operation": {
+            "$ref": "./examples/GenerateDetailedCostReportOperationResults.json"
           }
         },
+        "x-ms-long-running-operation": true,
         "parameters": [
           {
             "name": "operationId",
@@ -1236,7 +1243,7 @@
           "200": {
             "description": "OK. The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/UsageDetailsOperationResult"
+              "$ref": "#/definitions/GenerateDetailedCostReportOperationResult"
             }
           },
           "202": {
@@ -1254,15 +1261,16 @@
     "/{scope}/providers/Microsoft.CostManagement/operationStatus/{operationId}": {
       "get": {
         "tags": [
-          "UsageDetailsOperationStatus"
+          "GenerateDetailedCostReportOperationStatus"
         ],
-        "operationId": "UsageDetailsOperationStatus",
-        "description": "List the staus of the specified operation. This link is provided in the GenerateDetailedCostReport response.",
+        "operationId": "GenerateDetailedCostReportOperationStatus_Get",
+        "description": "Get the status of the specified operation. This link is provided in the GenerateDetailedCostReport creation request response header.",
         "x-ms-examples": {
-          "Get details of a server": {
-            "$ref": "./examples/UsageDetailsOperationStatus.json"
+          "Get details of the operation": {
+            "$ref": "./examples/GenerateDetailedCostReportOperationStatus.json"
           }
         },
+        "x-ms-long-running-operation": true,
         "parameters": [
           {
             "name": "operationId",
@@ -1282,7 +1290,7 @@
           "200": {
             "description": "OK. The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/UsageDetailsOperationResult"
+              "$ref": "#/definitions/GenerateDetailedCostReportOperationStatus"
             }
           },
           "default": {
@@ -1745,6 +1753,16 @@
     },
     "ErrorResponse": {
       "description": "Error response indicates that the service is not able to process the incoming request. The reason is provided in the error message. \n\nSome Error responses: \n\n * 429 TooManyRequests - Request is throttled. Retry after waiting for the time specified in the \"x-ms-ratelimit-microsoft.consumption-retry-after\" header. \n\n * 503 ServiceUnavailable - Service is temporarily unavailable. Retry after waiting for the time specified in the \"Retry-After\" header.",
+      "type": "object",
+      "properties": {
+        "error": {
+          "description": "The details of the error.",
+          "$ref": "#/definitions/ErrorDetails"
+        }
+      }
+    },
+    "GenerateDetailedCostReportErrorResponse": {
+      "description": "Error response indicates that the service is not able to process the incoming request. The reason is provided in the error message. \n\nSome Error responses: \n\n * 413 Request Entity Too Large - Request is throttled. The amount of data required to fulfill the request exceeds the maximum size permitted of 2Gb. Please utilize our Exports feature instead. \n\n * 429 TooManyRequests - Request is throttled. Retry after waiting for the time specified in the \"x-ms-ratelimit-microsoft.consumption-retry-after\" header. \n\n * 503 ServiceUnavailable - Service is temporarily unavailable. Retry after waiting for the time specified in the \"Retry-After\" header.",
       "type": "object",
       "properties": {
         "error": {
@@ -2405,7 +2423,7 @@
         "timeframe"
       ]
     },
-    "UsageDetailsReportDefinition": {
+    "GenerateDetailedCostReportDefinition": {
       "description": "The definition of a cost detailed report.",
       "properties": {
         "metric": {
@@ -2422,7 +2440,7 @@
         },
         "timePeriod": {
           "description": "Has time period for pulling data for the cost detailed report. Can only have one of either timePeriod or invoiceId or billingPeriod parameters. If none provided current month cost is provided.",
-          "$ref": "#/definitions/UsageDetailTimePeriod"
+          "$ref": "#/definitions/GenerateDetailedCostReportTimePeriod"
         },
         "billingPeriod": {
           "description": "Billing Period in YearMonth(e.g. 202008) format. Only for legacy enterprise customers can use this. Can only have one of either timePeriod or invoiceId or billingPeriod parameters. If none provided current month cost is provided.",
@@ -2438,7 +2456,7 @@
         }
       }
     },
-    "UsageDetailTimePeriod": {
+    "GenerateDetailedCostReportTimePeriod": {
       "description": "The start and end date for pulling data for the cost detailed report.",
       "properties": {
         "start": {
@@ -2455,7 +2473,7 @@
         "end"
       ]
     },
-    "UsageDetailsOperationStatus": {
+    "GenerateDetailedCostReportOperationStatus": {
       "description": "The status of the long running operation for cost detailed report.",
       "properties": {
         "id": {
@@ -2486,7 +2504,7 @@
         }
       }
     },
-    "UsageDetailsOperationResult": {
+    "GenerateDetailedCostReportOperationResult": {
       "description": "The result of the long running operation for cost detailed report.",
       "properties": {
         "id": {
