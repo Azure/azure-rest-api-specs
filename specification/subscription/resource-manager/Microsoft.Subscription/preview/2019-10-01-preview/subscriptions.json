@@ -533,18 +533,21 @@
         ]
       }
     },
-    "tenant/{tenantId}/Providers/Microsoft.Subscriptions/Policies/default": {
+    "Providers/Microsoft.Subscriptions/Policies/default": {
       "put": {
         "description": "Create or Update Subscription tenant policy for user's tenant.",
         "operationId": "SubscriptionPolicy_AddUpdatePolicyForTenant",
         "x-ms-examples": {
-          "changeTenantPolicy": {
-            "$ref": "./examples/changeTenantPolicy.json"
+          "TenantPolicy": {
+            "$ref": "./examples/TenantPolicy.json"
           }
         },
         "responses": {
           "200": {
-            "description": "Subscription tenant policy has been successfully created/updated."
+            "description": "Subscription tenant policy has been successfully created/updated.",
+            "schema": {
+              "$ref": "#/definitions/TenantPolicyArmResponse"
+            }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -555,14 +558,11 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/tenantIdParameter"
-          },
-          {
             "name": "body",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ChangeTenantPolicyRequest"
+              "$ref": "#/definitions/TenantPolicy"
             }
           },
           {
@@ -582,7 +582,7 @@
           "200": {
             "description": "Subscription tenant policy details for user's tenant.",
             "schema": {
-              "$ref": "#/definitions/TenantPolicyInfo"
+              "$ref": "#/definitions/TenantPolicyArmResponse"
             }
           },
           "default": {
@@ -593,37 +593,6 @@
           }
         },
         "parameters": [
-          {
-            "$ref": "#/parameters/tenantIdParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          }
-        ]
-      },
-      "delete": {
-        "description": "Delete subscription tenant policy for user's tenant.",
-        "operationId": "SubscriptionPolicy_DeletePolicyForTenant",
-        "x-ms-examples": {
-          "deleteTenantPolicy": {
-            "$ref": "./examples/deleteTenantPolicy.json"
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Deleted the subscription tenant policy."
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/tenantIdParameter"
-          },
           {
             "$ref": "#/parameters/apiVersionParameter"
           }
@@ -717,22 +686,22 @@
       "type": "object",
       "properties": {
         "name": {
-          "description": "Operation name:  {provider}/{resource}/{operation}",
+          "description": "Operation name: {provider}/{resource}/{operation}",
           "type": "string"
         },
         "display": {
           "description": "The object that represents the operation.",
           "properties": {
             "provider": {
-              "description": "Service provider:  Microsoft.Subscription",
+              "description": "Service provider: Microsoft.Subscription",
               "type": "string"
             },
             "resource": {
-              "description": "Resource on which the operation is performed:  Profile, endpoint, etc.",
+              "description": "Resource on which the operation is performed: Profile, endpoint, etc.",
               "type": "string"
             },
             "operation": {
-              "description": "Operation type:  Read, write, delete, etc.",
+              "description": "Operation type: Read, write, delete, etc.",
               "type": "string"
             }
           }
@@ -966,56 +935,15 @@
         }
       }
     },
-    "ChangeTenantPolicyRequest": {
-      "description": "Request body to add or update subscription tenant policy.",
+    "TenantPolicy": {
+      "description": "Tenant policy.",
       "properties": {
-        "BlockedChannels": {
-          "description": "Subscription Channel types to block for the user's tenant.",
-          "type": "array",
-          "items": {
-            "description": "Subscription channel type.",
-            "type": "string",
-            "enum": [
-              "None",
-              "Internal",
-              "FieldLed",
-              "CustomerLed",
-              "PartnerLed"
-            ],
-            "x-ms-enum": {
-              "name": "ChannelType",
-              "modelAsString": true
-            }
-          }
-        },
-        "BlockedOffers": {
-          "description": "Offer types to block for the user's tenant.",
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "AllowedOffers": {
-          "description": "Offer types to allow for the user's tenant.",
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "BlockTransferOut": {
-          "description": "Blocks the transfer of billing ownership of subscriptions from user's tenant.",
+        "blockSubscriptionsLeavingTenant": {
+          "description": "Blocks the leaving of subscriptions from user's tenant.",
           "type": "boolean"
         },
-        "BlockTransferIn": {
-          "description": "Blocks the transfer of billing ownership of subscriptions into user's tenant.",
-          "type": "boolean"
-        },
-        "BlockTenantChangeOut": {
-          "description": "Blocks the transfer of service ownership of subscriptions from user's tenant.",
-          "type": "boolean"
-        },
-        "BlockTenantChangeIn": {
-          "description": "Blocks the transfer of service ownership of subscriptions into user's tenant.",
+        "blockSubscriptionsIntoTenant": {
+          "description": "Blocks the entering of subscriptions into user's tenant.",
           "type": "boolean"
         },
         "ExemptedPrincipals": {
@@ -1029,101 +957,30 @@
         }
       }
     },
-    "TenantPolicyInfo": {
-      "description": "Subscription tenant policy information.",
+    "TenantPolicyArmResponse": {
+      "description": "Tenant policy Information.",
       "properties": {
-        "PolicyId": {
-          "description": "PolicyId of the subscription tenant policy.",
+        "id": {
+          "description": "Policy Id.",
           "readOnly": true,
           "type": "string"
         },
-        "TenantPolicies": {
-          "description": "Policies that apply at tenant level.",
-          "readOnly": true,
-          "$ref": "#/definitions/TenantPolicies"
-        },
-        "ExemptedPrincipals": {
-          "description": "List of user objectIds that are exempted from the set subscription tenant policies for the user's tenant.",
-          "readOnly": true,
-          "type": "array",
-          "items": {
-            "format": "uuid",
-            "type": "string",
-            "example": "00000000-0000-0000-0000-000000000000"
-          }
-        },
-        "ETag": {
-          "description": "Etag of the resource.",
+        "name": {
+          "description": "Policy name.",
           "readOnly": true,
           "type": "string"
+        },
+        "type": {
+          "description": "Resource type, Microsoft.Subscriptions/Policies/default.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "properties": {
+          "$ref": "#/definitions/TenantPolicy",
+          "description": "Tenant policy properties."
         }
-      }
-    },
-    "TenantPolicies": {
-      "description": "Policies set at the tenant level.",
-      "properties": {
-        "TenantId": {
-          "format": "uuid",
-          "type": "string",
-          "example": "00000000-0000-0000-0000-000000000000"
-        },
-        "BlockedChannels": {
-          "description": "Subscription Channel types blocked for the user's tenant.",
-          "readOnly": true,
-          "type": "array",
-          "items": {
-            "description": "Subscription channel type.",
-            "type": "string",
-            "enum": [
-              "None",
-              "Internal",
-              "FieldLed",
-              "CustomerLed",
-              "PartnerLed"
-            ],
-            "x-ms-enum": {
-              "name": "ChannelType",
-              "modelAsString": true
-            }
-          }
-        },
-        "BlockedOffers": {
-          "description": "Offer types to block for the user's tenant.",
-          "readOnly": true,
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "AllowedOffers": {
-          "description": "Offer types to allow for the user's tenant.",
-          "readOnly": true,
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "BlockTransferOut": {
-          "description": "Blocks the transfer of billing ownership of subscriptions from user's tenant.",
-          "readOnly": true,
-          "type": "boolean"
-        },
-        "BlockTransferIn": {
-          "description": "Blocks the transfer of billing ownership of subscriptions into user's tenant.",
-          "readOnly": true,
-          "type": "boolean"
-        },
-        "BlockTenantChangeOut": {
-          "description": "Blocks the transfer of service ownership of subscriptions from user's tenant.",
-          "readOnly": true,
-          "type": "boolean"
-        },
-        "BlockTenantChangeIn": {
-          "description": "Blocks the transfer of service ownership of subscriptions into user's tenant.",
-          "readOnly": true,
-          "type": "boolean"
-        }
-      }
+      },
+      "x-ms-azure-resource": true
     }
   },
   "parameters": {
@@ -1159,14 +1016,6 @@
       "required": true,
       "type": "string",
       "description": "Alias Name"
-    },
-    "tenantIdParameter": {
-      "name": "tenantId",
-      "x-ms-parameter-location": "method",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "Tenant Id."
     }
   },
   "security": [
@@ -1179,7 +1028,7 @@
   "securityDefinitions": {
     "azure_auth": {
       "type": "oauth2",
-      "authorizationUrl": "https: //login.microsoftonline.com/common/oauth2/authorize",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
       "flow": "implicit",
       "description": "Azure Active Directory OAuth2 Flow",
       "scopes": {
