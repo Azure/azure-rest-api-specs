@@ -14,6 +14,6 @@ These settings apply only when `--tag=package-2020-12-01-alpha --go` is specifie
 Please also specify `--go-sdks-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
 ```yaml $(tag) == 'package-2020-12-01-alpha' && $(go)
-namespace: microsoft_confidentialledger
+namespace: confidentialledger
 output-folder: $(go-sdks-folder)/confidentialledger/generated
 ```
