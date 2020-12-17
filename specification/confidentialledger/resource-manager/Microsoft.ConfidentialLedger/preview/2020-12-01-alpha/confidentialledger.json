@@ -369,6 +369,7 @@
     },
     "ErrorDefinition": {
       "description": "Error definition.",
+      "type": "object",
       "properties": {
         "code": {
           "description": "Service specific error code which serves as the substatus for the HTTP error code.",
@@ -395,15 +396,35 @@
         }
       }
     },
+    "Location": {
+      "description": "Location of the ARM Resource",
+      "type": "object",
+      "properties": {
+        "location": {
+          "description": "The Azure location where the Confidential Ledger is running.",
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        }
+      }
+    },
     "Tags": {
       "description": "Tags for Confidential Ledger Resource",
+      "type": "object",
       "properties": {
         "tags": {
           "type": "object",
           "description": "Additional tags for Confidential Ledger",
           "additionalProperties": {
             "type": "string"
-          }
+          },
+          "x-ms-mutability": [
+            "read",
+            "create",
+            "update"
+          ]
         }
       }
     },
@@ -462,6 +483,8 @@
     },
     "Resource": {
       "description": "An Azure resource.",
+      "x-ms-azure-resource": true,
+      "type": "object",
       "properties": {
         "name": {
           "description": "Name of the Resource.",
@@ -478,21 +501,12 @@
           "type": "string",
           "readOnly": true
         },
-        "location": {
-          "description": "Region where the Azure resource is located.",
-          "type": "string",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
         "systemData": {
           "description": "Metadata pertaining to creation and last modification of the resource",
           "$ref": "#/definitions/SystemData",
           "readOnly": true
         }
-      },
-      "x-ms-azure-resource": true
+      }
     },
     "ResourceProviderOperationList": {
       "description": "List containing this Resource Provider's available operations.",
@@ -515,6 +529,7 @@
     },
     "ResourceProviderOperationDefinition": {
       "description": "Describes the Resource Provider Operation.",
+      "type": "object",
       "properties": {
         "name": {
           "description": "Resource provider operation name.",
@@ -532,6 +547,7 @@
     },
     "ResourceProviderOperationDisplay": {
       "description": "Describes the properties of the Operation.",
+      "type": "object",
       "properties": {
         "provider": {
           "description": "Name of the resource provider.",
@@ -622,20 +638,12 @@
         },
         "ledgerType": {
           "description": "Type of Confidential Ledger",
-          "allOf": [
-            {
-              "$ref": "#/definitions/ConfidentialLedgerType"
-            }
-          ]
+          "$ref": "#/definitions/ConfidentialLedgerType"
         },
         "provisioningState": {
           "description": "Provisioning state of Ledger Resource",
           "readOnly": true,
-          "allOf": [
-            {
-              "$ref": "#/definitions/ProvisioningState"
-            }
-          ]
+          "$ref": "#/definitions/ProvisioningState"
         },
         "certUsers": {
           "description": "Array of all the cert based users who can access Confidential Ledger",
@@ -652,6 +660,9 @@
       "allOf": [
         {
           "$ref": "#/definitions/Resource"
+        },
+        {
+          "$ref": "#/definitions/Location"
         },
         {
           "$ref": "#/definitions/Tags"
