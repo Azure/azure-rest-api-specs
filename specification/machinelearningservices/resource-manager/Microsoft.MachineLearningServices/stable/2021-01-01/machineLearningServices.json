@@ -2547,6 +2547,15 @@
           },
           "description": "The list of shared private link resources in this workspace."
         },
+        "notebookInfo": {
+          "readOnly": true,
+          "$ref": "#/definitions/NotebookResourceInfo",
+          "description": "The notebook info of Azure ML workspace."
+        },
+        "serviceManagedResourcesSettings": {
+          "$ref": "#/definitions/ServiceManagedResourcesSettings",
+          "description": "The service managed resource settings."
+        },
         "primaryUserAssignedIdentity": {
           "description": "The user assigned identity resource id that represents the workspace identity.",
           "type": "string"
@@ -2567,6 +2576,10 @@
           "$ref": "#/definitions/Sku",
           "description": "The sku of the workspace."
         },
+        "identity": {
+          "$ref": "#/definitions/Identity",
+          "description": "The identity of the resource."
+        },
         "properties": {
           "$ref": "#/definitions/WorkspacePropertiesUpdateParameters",
           "description": "The properties that the machine learning workspace will be updated with.",
@@ -2583,6 +2596,18 @@
         },
         "friendlyName": {
           "description": "The friendly name for this workspace.",
+          "type": "string"
+        },
+        "imageBuildCompute": {
+          "description": "The compute name for image build",
+          "type": "string"
+        },
+        "serviceManagedResourcesSettings": {
+          "$ref": "#/definitions/ServiceManagedResourcesSettings",
+          "description": "The service managed resource settings."
+        },
+        "primaryUserAssignedIdentity": {
+          "description": "The user assigned identity resource id that represents the workspace identity.",
           "type": "string"
         }
       }
@@ -6478,6 +6503,24 @@
         "objectId",
         "tenantId"
       ]
+    },
+    "ServiceManagedResourcesSettings": {
+      "type": "object",
+      "properties": {
+        "cosmosDb": {
+          "$ref": "#/definitions/CosmosDbSettings",
+          "description": "The settings for the service managed cosmosdb account."
+        }
+      }      
+    },
+    "CosmosDbSettings": {
+      "type": "object",
+      "properties": {
+        "collectionsThroughput": {
+          "type": "integer",
+          "description": "The throughput of the collections in cosmosdb database"
+        }
+      }
     },
     "NotebookResourceInfo": {
       "type": "object",
