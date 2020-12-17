@@ -38,6 +38,8 @@ These settings apply only when `--tag=package-2020-06-02` is specified on the co
 input-file:
   - Microsoft.BotService/stable/2020-06-02/botservice.json
 ```
+
+
 ### Tag: package-2018-07-12
 
 These settings apply only when `--tag=package-2018-07-12` is specified on the command line.
@@ -101,6 +103,19 @@ swagger-to-sdk:
       - node sdkauto_afterscript.js botservice/resource-manager
   - repo: azure-sdk-for-js
 ```
+
+
+## Suppression
+```
+directive:
+  - suppress: SECRET_PROPERTY
+    from:
+      - Microsoft.BotService/stable/2020-06-02/botservice.json
+    where:
+      - $.definitions.FacebookChannelProperties.properties.verifyToken
+    reason: We do need to return verifyToken in FacebookChannelProperties.
+```
+
 
 ## C#
 

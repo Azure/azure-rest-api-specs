@@ -57,6 +57,17 @@ title:
   Azure Communication Services
 ```
 
+### Tag: package-2020-11-01-preview3
+
+These settings apply only when `--tag=package-2020-11-01-preview3` is specified on the command line.
+
+```yaml $(tag) == 'package-2020-11-01-preview3'
+input-file:
+  - Microsoft.CommunicationServicesChat/preview/2020-11-01-preview3/communicationserviceschat.json
+title:
+  Azure Communication Services
+```
+
 ### Tag: package-2020-07-20-preview2
 
 These settings apply only when `--tag=package-2020-07-20-preview2` is specified on the command line.
