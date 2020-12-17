@@ -11,11 +11,17 @@
   "schemes": [
     "https"
   ],
-  "consumes": [ "application/json" ],
-  "produces": [ "application/json" ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
   "security": [
     {
-      "azure_auth": [ "user_impersonation" ]
+      "azure_auth": [
+        "user_impersonation"
+      ]
     }
   ],
   "securityDefinitions": {
@@ -119,7 +125,10 @@
             }
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
       },
       "patch": {
         "operationId": "Workspaces_Update",
@@ -200,7 +209,7 @@
             }
           },
           "204": {
-            "description": "No content."
+            "description": "No content - The job was successfully cancelled."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -808,6 +817,10 @@
           "type": "string",
           "description": "Name of the operation"
         },
+        "isDataAction": {
+          "description": "Indicates whether the operation is a data action",
+          "type": "boolean"
+        },
         "display": {
           "type": "object",
           "description": "Properties of the operation",
@@ -834,6 +847,7 @@
     },
     "operationsList": {
       "description": "Lists the operations available.",
+      "type": "object",
       "properties": {
         "nextLink": {
           "description": "Url to follow for getting next page of operations.",
@@ -841,13 +855,16 @@
         },
         "value": {
           "description": "Array of operations",
+          "uniqueItems": false,
           "type": "array",
           "items": {
             "$ref": "#/definitions/operation"
           }
         }
       },
-      "required": [ "value" ]
+      "required": [
+        "value"
+      ]
     }
   },
   "parameters": {
