@@ -12285,6 +12285,38 @@
         "targetProximityPlacementGroupId": {
           "description": "The proximity placement group ARM Id.",
           "type": "string"
+        },
+        "targetVmTags": {
+          "description": "The target VM tags.",
+          "maxLength": 50,
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "seedManagedDiskTags": {
+          "description": "The tags for the seed managed disks.",
+          "maxLength": 49,
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "targetManagedDiskTags": {
+          "description": "The tags for the target managed disks.",
+          "maxLength": 49,
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "targetNicTags": {
+          "description": "The tags for the target NICs.",
+          "maxLength": 50,
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       },
       "x-ms-discriminator-value": "InMageAzureV2"
@@ -12794,6 +12826,34 @@
           "items": {
             "$ref": "#/definitions/InMageAzureV2ManagedDiskDetails"
           }
+        },
+        "targetVmTags": {
+          "description": "The target VM tags.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "seedManagedDiskTags": {
+          "description": "The tags for the seed managed disks.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "targetManagedDiskTags": {
+          "description": "The tags for the target managed disks.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "targetNicTags": {
+          "description": "The tags for the target NICs.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       },
       "x-ms-discriminator-value": "InMageAzureV2"
@@ -12909,6 +12969,30 @@
         "targetAvailabilityZone": {
           "description": "The target availability zone.",
           "type": "string"
+        },
+        "targetVmTags": {
+          "description": "The target VM tags.",
+          "maxLength": 50,
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "targetManagedDiskTags": {
+          "description": "The tags for the target managed disks.",
+          "maxLength": 49,
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "targetNicTags": {
+          "description": "The tags for the target NICs.",
+          "maxLength": 50,
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       },
       "x-ms-discriminator-value": "InMageAzureV2"
