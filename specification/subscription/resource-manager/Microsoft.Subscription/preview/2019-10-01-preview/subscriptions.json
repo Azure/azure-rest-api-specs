@@ -5,10 +5,16 @@
     "title": "SubscriptionClient",
     "description": "Subscription client provides an interface to create and manage Azure subscriptions programmatically."
   },
-  "schemes": ["https"],
+  "schemes": [
+    "https"
+  ],
   "host": "management.azure.com",
-  "consumes": ["application/json"],
-  "produces": ["application/json"],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
   "paths": {
     "/providers/Microsoft.Billing/enrollmentAccounts/{enrollmentAccountName}/providers/Microsoft.Subscription/createSubscription": {
       "post": {
@@ -710,7 +716,9 @@
           "type": "string"
         }
       },
-      "required": ["objectId"]
+      "required": [
+        "objectId"
+      ]
     },
     "SubscriptionCreationResult": {
       "description": "The created subscription object.",
@@ -746,7 +754,10 @@
             "name": "offerType",
             "modelAsString": true
           },
-          "enum": ["MS-AZR-0017P", "MS-AZR-0148P"]
+          "enum": [
+            "MS-AZR-0017P",
+            "MS-AZR-0148P"
+          ]
         },
         "additionalParameters": {
           "description": "Additional, untyped parameters to support custom subscription creation scenarios.",
@@ -759,7 +770,10 @@
     },
     "ModernSubscriptionCreationParameters": {
       "description": "The parameters required to create a new subscription.",
-      "required": ["displayName", "skuId"],
+      "required": [
+        "displayName",
+        "skuId"
+      ],
       "properties": {
         "displayName": {
           "description": "The friendly name of the subscription.",
@@ -792,7 +806,10 @@
     },
     "ModernCspSubscriptionCreationParameters": {
       "description": "The parameters required to create a new CSP subscription.",
-      "required": ["displayName", "skuId"],
+      "required": [
+        "displayName",
+        "skuId"
+      ],
       "properties": {
         "displayName": {
           "description": "The friendly name of the subscription.",
@@ -820,7 +837,11 @@
     },
     "PutAliasRequestProperties": {
       "description": "Put subscription properties.",
-      "required": ["displayName", "workload", "billingScope"],
+      "required": [
+        "displayName",
+        "workload",
+        "billingScope"
+      ],
       "properties": {
         "displayName": {
           "description": "The friendly name of the subscription.",
@@ -833,7 +854,10 @@
             "name": "workload",
             "modelAsString": true
           },
-          "enum": ["Production", "DevTest"]
+          "enum": [
+            "Production",
+            "DevTest"
+          ]
         },
         "billingScope": {
           "description": "Determines whether subscription is fieldLed, partnerLed or LegacyEA",
@@ -881,7 +905,11 @@
         "provisioningState": {
           "type": "string",
           "description": "The provisioning state of the resource.",
-          "enum": ["Accepted", "Succeeded", "Failed"],
+          "enum": [
+            "Accepted",
+            "Succeeded",
+            "Failed"
+          ],
           "x-ms-enum": {
             "name": "ProvisioningState",
             "modelAsString": true
@@ -992,7 +1020,9 @@
   },
   "security": [
     {
-      "azure_auth": ["user_impersonation"]
+      "azure_auth": [
+        "user_impersonation"
+      ]
     }
   ],
   "securityDefinitions": {
