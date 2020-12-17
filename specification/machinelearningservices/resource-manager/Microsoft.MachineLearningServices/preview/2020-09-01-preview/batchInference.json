@@ -492,7 +492,7 @@
         "summary": "Lists Batch inference job deployments in the workspace.",
         "operationId": "BatchJobsDeployments_List",
         "x-ms-examples": {
-          "Get BatchDeployments": {
+          "Get BatchJobDeployments": {
             "$ref": "./examples/getBatchJobDeployments.json"
           }
         },
@@ -507,6 +507,284 @@
           },
           {
             "$ref": "#/parameters/EndpointDeploymentIdParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/APIVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/EndpointNameParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "machineLearningServices.json#/definitions/MachineLearningServiceError"
+            }
+          },
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/BatchJobResourcePaginatedResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/mferp/managementfrontend/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/batchEndpoints/{endpointName}/jobs/{jobId}": {
+      "patch": {
+        "tags": [
+          "BatchJobEndpoint"
+        ],
+        "summary": "Updates a batch job inference endpoint.",
+        "operationId": "BatchJobsEndpoint_Update",
+        "x-ms-examples": {
+          "Update BatchJobEndpoint": {
+            "$ref": "./examples/updateBatchJobEndpoint.json"
+          }
+        },
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/BatchJobIdParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/APIVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/EndpointNameParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Batch inference job definition object.",
+            "schema": {
+              "$ref": "#/definitions/BatchJobResource"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "machineLearningServices.json#/definitions/MachineLearningServiceError"
+            }
+          },
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/BatchJobResource"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "BatchJobEndpoint"
+        ],
+        "summary": "Gets a batch inference job endpoint by id.",
+        "operationId": "BatchJobsEndpoints_Get",
+        "x-ms-examples": {
+          "Get BatchJobEndpoint": {
+            "$ref": "./examples/getBatchJobEndpoint.json"
+          }
+        },
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/BatchJobIdParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/APIVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/EndpointNameParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "machineLearningServices.json#/definitions/MachineLearningServiceError"
+            }
+          },
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/BatchJobResource"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "BatchJobEndpoint"
+        ],
+        "summary": "Delete Batch Inference job endpoint.",
+        "operationId": "BatchJobsEndpoints_Delete",
+        "x-ms-examples": {
+          "Delete BatchJobEndpoint": {
+            "$ref": "./examples/deleteBatchJobEndpoint.json"
+          }
+        },
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/BatchJobIdParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/APIVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/EndpointNameParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "machineLearningServices.json#/definitions/MachineLearningServiceError"
+            }
+          },
+          "200": {
+            "description": "Success"
+          },
+          "204": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/mferp/managementfrontend/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/batchEndpoints/{endpointName}/jobs": {
+      "post": {
+        "tags": [
+          "BatchJobEndpoint"
+        ],
+        "summary": "Creates a batch job inference endpoint.",
+        "operationId": "BatchJobsEndpoint_Create",
+        "x-ms-examples": {
+          "Create BatchJobEndpoint": {
+            "$ref": "./examples/createBatchJobEndpoint.json"
+          }
+        },
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/APIVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/EndpointNameParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Batch inference job endpoint definition object.",
+            "schema": {
+              "$ref": "#/definitions/BatchJobResource"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "machineLearningServices.json#/definitions/MachineLearningServiceError"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/BatchJobResource"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "BatchJobEndpoint"
+        ],
+        "summary": "Lists Batch inference job endpoints in the workspace.",
+        "operationId": "BatchJobsEndpoints_List",
+        "x-ms-examples": {
+          "Get BatchJobEndpoints": {
+            "$ref": "./examples/getBatchJobEndpoints.json"
+          }
+        },
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
