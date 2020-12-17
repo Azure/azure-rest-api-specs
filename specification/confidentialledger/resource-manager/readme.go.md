@@ -5,6 +5,7 @@ These settings apply only when `--go` is specified on the command line.
 ```yaml $(go)
 go:
   license-header: MICROSOFT_APACHE_NO_VERSION
+  namespace: confidentialledger
   clear-output-folder: true
 ```
 
@@ -14,6 +15,5 @@ These settings apply only when `--tag=package-2020-12-01-alpha --go` is specifie
 Please also specify `--go-sdks-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
 ```yaml $(tag) == 'package-2020-12-01-alpha' && $(go)
-namespace: confidentialledger
-output-folder: $(go-sdks-folder)/confidentialledger/generated
+output-folder: $(go-sdks-folder)/confidentialledger/Generated
 ```
