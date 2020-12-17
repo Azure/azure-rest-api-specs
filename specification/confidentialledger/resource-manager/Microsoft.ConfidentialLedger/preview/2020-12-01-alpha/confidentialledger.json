@@ -3,10 +3,7 @@
   "info": {
     "version": "2020-12-01-alpha",
     "title": "ConfidentialLedger",
-    "description": "Microsoft Azure Confidential Compute Ledger Control Plane REST API version 2020-12-01-alpha.",
-    "x-ms-code-generation-settings": {
-      "name": "ConfidentialLedger"
-    }
+    "description": "Microsoft Azure Confidential Compute Ledger Control Plane REST API version 2020-12-01-alpha."
   },
   "host": "management.azure.com",
   "schemes": [
@@ -65,7 +62,7 @@
           }
         },
         "x-ms-examples": {
-          "ConfidentialLedgerGet": {
+          "OperationsGet": {
             "$ref": "./examples/Operations_Get.json"
           }
         },
@@ -364,6 +361,7 @@
           "type": "string"
         },
         "error": {
+          "description": "More details about the error",
           "$ref": "#/definitions/ErrorDefinition"
         }
       },
@@ -412,6 +410,11 @@
     "Resource": {
       "description": "An Azure resource.",
       "properties": {
+        "name": {
+          "description": "Name of the Resource.",
+          "type": "string",
+          "readOnly": true
+        },
         "id": {
           "description": "Fully qualified resource Id for the resource.",
           "type": "string",
@@ -429,19 +432,26 @@
             "read",
             "create"
           ]
+        },
+        "systemData": {
+          "readOnly": true,
+          "description": "The system metadata relating to this resource",
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/systemData"
         }
       },
       "x-ms-azure-resource": true
     },
     "ResourceProviderOperationList": {
       "description": "List containing this Resource Provider's available operations.",
+      "type": "object",
       "properties": {
         "value": {
           "description": "Resource provider operations list.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/ResourceProviderOperationDefinition"
-          }
+          },
+          "readOnly": true
         },
         "nextLink": {
           "description": "The URI that can be used to request the next page for list of Azure operations.",
@@ -457,7 +467,12 @@
           "description": "Resource provider operation name.",
           "type": "string"
         },
+        "isDataAction": {
+          "description": "Indicates whether the operation is data action or not.",
+          "type": "boolean"
+        },
         "display": {
+          "description": "Details about the operations",
           "$ref": "#/definitions/ResourceProviderOperationDisplay"
         }
       }
@@ -553,6 +568,7 @@
           "description": "Name of the Blob Storage Account for saving ledger files"
         },
         "ledgerType": {
+          "description": "Type of Confidential Ledger",
           "allOf": [
             {
               "$ref": "#/definitions/ConfidentialLedgerType"
@@ -560,6 +576,7 @@
           ]
         },
         "provisioningState": {
+          "description": "Provisioning state of Ledger Resource",
           "readOnly": true,
           "allOf": [
             {
@@ -589,6 +606,8 @@
       ],
       "properties": {
         "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Properties of Confidential Ledger Resource.",
           "$ref": "#/definitions/LedgerProperties"
         }
       }
