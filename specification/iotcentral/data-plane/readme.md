@@ -14,9 +14,9 @@ To see additional help and options, run:
 ``` yaml
 directive:
     - suppress: ValidFormats
-        from: iotcentral.json
-        where: $.definitions.EmailUser.allOf[1].properties.email.format
-        reason: email format is allowed
+      from: iotcentral.json
+      where: $.definitions.EmailUser.allOf[1].properties.email.format
+      reason: email format is allowed
 ```
 
 ## Configuration
