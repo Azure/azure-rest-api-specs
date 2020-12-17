@@ -1155,18 +1155,23 @@
   },
   "definitions": {
     "BatchDeploymentResource": {
-      "description": "Azure Resource Manager resource Envelope",
       "required": [
         "properties"
       ],
-      "allOf": [
-        {
-          "$ref": "machineLearningServices.json#/definitions/Resource"
-        }
-      ],
       "type": "object",
-      "x-ms-azure-resource": true,
       "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "location": {
+          "type": "string"
+        },
+        "kind": {
+          "type": "string"
+        },
         "id": {
           "description": "The resource URL of the entity (not URL encoded).",
           "type": "string",
@@ -1185,18 +1190,12 @@
         "properties": {
           "$ref": "#/definitions/BatchDeployment"
         },
-        "location": {
-          "description": "Specifies the location of the resource.",
-          "type": "string"
-        },
-        "tags": {
-          "description": "Contains resource tags defined as key/value pairs.",
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
         }
-      }
+      },
+      "x-ms-azure-resource": true,
+      "additionalProperties": false
     },
     "BatchDeploymentResourcePaginatedResult": {
       "type": "object",
@@ -1216,18 +1215,23 @@
       }
     },
     "BatchEndpointResource": {
-      "description": "Azure Resource Manager resource Envelope",
       "required": [
         "properties"
       ],
-      "allOf": [
-        {
-          "$ref": "machineLearningServices.json#/definitions/Resource"
-        }
-      ],
       "type": "object",
-      "x-ms-azure-resource": true,
       "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "location": {
+          "type": "string"
+        },
+        "kind": {
+          "type": "string"
+        },
         "id": {
           "description": "The resource URL of the entity (not URL encoded).",
           "type": "string",
@@ -1246,18 +1250,12 @@
         "properties": {
           "$ref": "#/definitions/BatchEndpoint"
         },
-        "location": {
-          "description": "Specifies the location of the resource.",
-          "type": "string"
-        },
-        "tags": {
-          "description": "Contains resource tags defined as key/value pairs.",
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
         }
-      }
+      },
+      "x-ms-azure-resource": true,
+      "additionalProperties": false
     },
     "BatchEndpointResourcePaginatedResult": {
       "type": "object",
@@ -1669,12 +1667,14 @@
       }
     },
     "BatchJobResource": {
-      "description": "Azure Resource Manager resource Envelope",
       "type": "object",
       "x-ms-azure-resource": true,
       "properties": {
         "properties": {
           "$ref": "#/definitions/BatchJob"
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
         }
       },
       "allOf": [
