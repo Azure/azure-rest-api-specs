@@ -517,7 +517,7 @@
           "200": {
             "description": "The request was successful; the request was well-formed and received properly.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v1/privatelinks.json#/definitions/PrivateEndpointConnection"
+              "$ref": "#/definitions/PrivateEndpointConnection"
             }
           },
           "default": {
@@ -569,7 +569,7 @@
           "200": {
             "description": "The request was successful; the request was well-formed and received properly.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v1/privatelinks.json#/definitions/PrivateEndpointConnection"
+              "$ref": "#/definitions/PrivateEndpointConnection"
             }
           },
           "default": {
@@ -708,7 +708,7 @@
           "200": {
             "description": "The request was successful; the request was well-formed and received properly.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v1/privatelinks.json#/definitions/PrivateLinkResource"
+              "$ref": "#/definitions/PrivateLinkResource"
             }
           },
           "default": {
@@ -1275,6 +1275,34 @@
           "description": "Additional properties of the operation result."
         }
       }
+    },
+    "PrivateEndpointConnection": {
+      "properties": {
+        "systemData": {
+          "description": "System metadata for this resource.",
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/systemData"
+        }
+      },
+      "allOf": [
+        {
+        "$ref": "../../../../../common-types/resource-management/v1/privatelinks.json#/definitions/PrivateEndpointConnection"
+        }
+      ],
+      "description": "The Private Endpoint Connection resource."
+    },
+    "PrivateLinkResource": {
+      "properties": {
+        "systemData": {
+          "description": "System metadata for this resource.",
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/systemData"
+        }
+      },
+      "allOf": [
+        {
+        "$ref": "../../../../../common-types/resource-management/v1/privatelinks.json#/definitions/PrivateLinkResource"
+        }
+      ],
+      "description": "The Private Endpoint Connection resource."
     }
   },
   "parameters": {
