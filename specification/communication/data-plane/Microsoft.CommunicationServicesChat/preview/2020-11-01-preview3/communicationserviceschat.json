@@ -122,7 +122,7 @@
           }
         ],
         "responses": {
-          "201": {
+          "200": {
             "description": "Request successful."
           },
           "401": {
@@ -680,7 +680,78 @@
           "nextLinkName": "nextLink",
           "itemName": "value"
         }
-      },
+      }
+    },
+    "/chat/threads/{chatThreadId}/participants/{chatParticipantId}": {
+      "delete": {
+        "tags": [
+          "Participants"
+        ],
+        "summary": "Remove a participant from a thread.",
+        "operationId": "ChatThread_RemoveChatParticipant",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "chatThreadId",
+            "description": "Thread id to remove the participant from.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "chatParticipantId",
+            "description": "Id of the thread participant to remove from the thread.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Request successful."
+          },
+          "401": {
+            "description": "Unauthorized.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            },
+            "x-ms-error-response": true
+          },
+          "403": {
+            "description": "Forbidden.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            },
+            "x-ms-error-response": true
+          },
+          "429": {
+            "description": "Too many requests.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            },
+            "x-ms-error-response": true
+          },
+          "503": {
+            "description": "Service unavailable.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            },
+            "x-ms-error-response": true
+          }
+        },
+        "x-ms-examples": {
+          "Remove participant": {
+            "$ref": "./examples/Participants_RemoveChatParticipant.json"
+          }
+        }
+      }
+    },
+    "/chat/threads/{chatThreadId}/participants/:add": {
       "post": {
         "tags": [
           "Participants"
@@ -753,75 +824,6 @@
         "x-ms-examples": {
           "Add participants": {
             "$ref": "./examples/Participants_AddChatParticipants.json"
-          }
-        }
-      }
-    },
-    "/chat/threads/{chatThreadId}/participants/{chatParticipantId}": {
-      "delete": {
-        "tags": [
-          "Participants"
-        ],
-        "summary": "Remove a participant from a thread.",
-        "operationId": "ChatThread_RemoveChatParticipant",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "chatThreadId",
-            "description": "Thread id to remove the participant from.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "path",
-            "name": "chatParticipantId",
-            "description": "Id of the thread participant to remove from the thread.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "Request successful."
-          },
-          "401": {
-            "description": "Unauthorized.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "403": {
-            "description": "Forbidden.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "429": {
-            "description": "Too many requests.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          },
-          "503": {
-            "description": "Service unavailable.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "x-ms-error-response": true
-          }
-        },
-        "x-ms-examples": {
-          "Remove participant": {
-            "$ref": "./examples/Participants_RemoveChatParticipant.json"
           }
         }
       }
@@ -1660,7 +1662,7 @@
   },
   "security": [
     {
-      "Authorization": []
+      "Authorization": [ ]
     }
   ],
   "x-ms-parameterized-host": {
