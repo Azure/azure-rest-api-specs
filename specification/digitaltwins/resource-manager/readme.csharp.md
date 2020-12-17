@@ -10,6 +10,6 @@ csharp:
   payload-flattening-threshold: 1
   clear-output-folder: true
   client-side-validation: false
-  namespace: Microsoft.DigitalTwins
-  output-folder: $(csharp-sdks-folder)/digitaltwins/management/Microsoft.DigitalTwins/GeneratedProtocol
+  namespace: Microsoft.Azure.Management.DigitalTwins
+  output-folder: $(csharp-sdks-folder)/digitaltwins/Microsoft.Azure.Management.DigitalTwins/
 ```
