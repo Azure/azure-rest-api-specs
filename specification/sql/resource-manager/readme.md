@@ -24,7 +24,7 @@ These are the global settings for the Sql API.
 title: SqlManagementClient
 description: 'The Azure SQL Database management API provides a RESTful set of web services that interact with Azure SQL Database services to manage your databases. The API enables you to create, retrieve, update, and delete databases.'
 openapi-type: arm
-tag: package-composite-v4
+tag: package-composite-v5
 ```
 
 ## Composite packages
@@ -115,13 +115,13 @@ input-file:
 - Microsoft.Sql/preview/2019-06-01-preview/ServerAzureADAdministrators.json
 - Microsoft.Sql/preview/2019-06-01-preview/syncGroups.json
 - Microsoft.Sql/preview/2019-06-01-preview/syncMembers.json
-- Microsoft.Sql/preview/2019-06-01-preview/FailoverManagedInstance.json
 - Microsoft.Sql/preview/2020-02-02-preview/ManagedDatabases.json
 - Microsoft.Sql/preview/2020-02-02-preview/ServerAzureADOnlyAuthentications.json
-- Microsoft.Sql/preview/2020-02-02-preview/managedInstances.json
+- Microsoft.Sql/preview/2020-02-02-preview/ManagedInstances.json
 - Microsoft.Sql/preview/2020-02-02-preview/ManagedInstanceAzureADOnlyAuthentications.json
 - Microsoft.Sql/preview/2020-02-02-preview/ServerTrustGroups.json
 - Microsoft.Sql/preview/2020-08-01-preview/ElasticPools.json
+- Microsoft.Sql/preview/2020-08-01-preview/ServerDevOpsAudit.json
 - Microsoft.Sql/preview/2020-11-01-preview/Databases.json
 
 # Needed when there is more than one input file
