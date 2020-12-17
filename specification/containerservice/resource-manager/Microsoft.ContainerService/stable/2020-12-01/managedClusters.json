@@ -2107,6 +2107,10 @@
           "$ref": "#/definitions/OSDiskType",
           "description": "OS disk type to be used for machines in a given agent pool. Allowed values are 'Ephemeral' and 'Managed'. Defaults to 'Managed'. May not be changed after creation."
         },
+        "kubeletDiskType": {
+          "$ref": "#/definitions/KubeletDiskType",
+          "description": "KubeletDiskType determines the placement of emptyDir volumes, container runtime data root, and Kubelet ephemeral storage. Currently allows one value, OS, resulting in Kubelet using the OS disk for data."
+        },
         "vnetSubnetID": {
           "$ref": "#/definitions/ContainerServiceVnetSubnetID",
           "description": "VNet SubnetID specifies the VNet's subnet identifier for nodes and maybe pods"
@@ -3809,6 +3813,17 @@
         "modelAsString": true
       },
       "description": "OSDiskType represents the type of an OS disk on an agent pool."
+    },
+    "KubeletDiskType": {
+      "type": "string",
+      "enum": [
+        "OS"
+      ],
+      "x-ms-enum": {
+        "name": "KubeletDiskType",
+        "modelAsString": true
+      },
+      "description": "KubeletDiskType determines the placement of emptyDir volumes, container runtime data root, and Kubelet ephemeral storage. Currently allows one value, OS, resulting in Kubelet using the OS disk for data."
     },
     "KubeletConfig": {
       "description": "Kubelet configurations of agent nodes.",
