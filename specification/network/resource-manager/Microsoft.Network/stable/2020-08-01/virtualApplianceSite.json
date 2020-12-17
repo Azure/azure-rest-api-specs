@@ -324,13 +324,10 @@
     },
     "NetworkVirtualApplianceSiteProperties": {
       "properties": {
-        "networkVirtualApplianceIds": {
-          "type": "array",
+        "virtualWan": {
           "readOnly": false,
-          "description": "List of Network Virtual Appliances under a specific virtual appliance site.",
-          "items": {
-            "type": "string"
-          }
+          "description": "Virtual Wan resource this site is part of.",
+          "$ref": "#/definitions/VirtualWanProperties"
         },
         "addressPrefix": {
           "type": "string",
@@ -340,7 +337,7 @@
         "o365Policy": {
           "readOnly": false,
           "description": "Office 365 Policy.",
-          "$ref": "#/definitions/SiteOffice365PolicyProperties"
+          "$ref": "#/definitions/O365PolicyProperties"
         },
         "provisioningState": {
           "description": "The provisioning state of the resource.",
@@ -350,17 +347,27 @@
       },
       "description": "Properties of the rule group."
     },
-    "SiteOffice365PolicyProperties": {
+    "VirtualWanProperties": {
       "properties": {
-        "breakOutCategories": {
+        "id": {
           "readOnly": false,
-          "description": "Office 365 breakout categories.",
-          "$ref": "#/definitions/SiteBreakOutCategoryPolicies"
+          "$ref": "./network.json#/definitions/SubResource",
+          "description": "The id of the virtual wan."
         }
       },
       "description": "Network Virtual Appliance Site office 365 policy."
     },
-    "SiteBreakOutCategoryPolicies": {
+    "O365PolicyProperties": {
+      "properties": {
+        "breakOutCategories": {
+          "readOnly": false,
+          "description": "Office 365 breakout categories.",
+          "$ref": "#/definitions/BreakOutCategoryProperties"
+        }
+      },
+      "description": "Network Virtual Appliance Site office 365 policy."
+    },
+    "BreakOutCategoryProperties": {
       "properties": {
         "allow": {
           "type": "boolean",
