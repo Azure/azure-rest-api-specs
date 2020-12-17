@@ -409,11 +409,6 @@
     },
     "Resource": {
       "description": "An Azure resource.",
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
-        }
-      ],
       "properties": {
         "name": {
           "description": "Name of the Resource.",
@@ -437,6 +432,11 @@
             "read",
             "create"
           ]
+        },
+        "systemData": {
+          "description": "Metadata pertaining to creation and last modification of the resource",
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "readOnly": true
         }
       },
       "x-ms-azure-resource": true
