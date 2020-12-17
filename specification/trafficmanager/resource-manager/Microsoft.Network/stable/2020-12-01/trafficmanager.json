@@ -483,6 +483,12 @@
         "x-ms-examples": {
           "Profile-GET-WithEndpoints": {
             "$ref": "./examples/Profile-GET-WithEndpoints.json"
+          },
+          "Profile-GET-WithTrafficViewDisabled": {
+            "$ref": "./examples/Profile-GET-WithTrafficViewDisabled.json"
+          },
+          "Profile-GET-WithTrafficViewEnabled": {
+            "$ref": "./examples/Profile-GET-WithTrafficViewEnabled.json"
           }
         }
       },
@@ -552,6 +558,12 @@
           },
           "Profile-PUT-WithCustomHeaders": {
             "$ref": "./examples/Profile-PUT-WithCustomHeaders.json"
+          },
+          "Profile-PUT-MultiValue": {
+            "$ref": "./examples/Profile-PUT-MultiValue.json"
+          },
+          "Profile-PUT-WithAliasing": {
+            "$ref": "./examples/Profile-PUT-WithAliasing.json"
           }
         }
       },
@@ -1471,6 +1483,9 @@
         "type": {
           "type": "string",
           "description": "The type of the resource. Ex- Microsoft.Network/trafficManagerProfiles."
+        },
+        "systemData": {
+          "$ref": "v2/types.json#/definitions/systemData"
         }
       },
       "x-ms-azure-resource": true
