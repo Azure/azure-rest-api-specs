@@ -482,6 +482,11 @@
             }
           }
         ],
+        "x-ms-examples": {
+          "Create a rendering session": {
+            "$ref": "./examples/CreateSession.json"
+          }
+        },
         "responses": {
           "200": {
             "description": "Ok. The session was created successfully. A status code of 200 indicates that there was already a session with the same settings present. This is expected when session creation is retried.",
@@ -490,7 +495,7 @@
             },
             "examples": {
               "application/json": {
-                "id": "contoso-conversion-1",
+                "id": "contoso-session-c2b8ac1d-9494-4852-a59c-8c28813adc28",
                 "creationTime": "2020-11-11T11:11:11.111Z",
                 "maxLeaseTimeMinutes": 60,
                 "size": "Standard",
@@ -506,7 +511,7 @@
             },
             "examples": {
               "application/json": {
-                "id": "contoso-conversion-1",
+                "id": "contoso-session-c2b8ac1d-9494-4852-a59c-8c28813adc28",
                 "creationTime": "2020-11-11T11:11:11.111Z",
                 "maxLeaseTimeMinutes": 60,
                 "size": "Standard",
@@ -528,6 +533,9 @@
                 "description": "Microsoft Correlation Vector. Include this value when reporting errors to the Azure Remote Rendering team.",
                 "type": "string"
               }
+            },
+            "schema": {
+              "$ref": "#/definitions/error_response"
             }
           },
           "401": {
@@ -543,8 +551,20 @@
               }
             }
           },
+          "403": {
+            "description": "Forbidden",
+            "headers": {
+              "MS-CV": {
+                "description": "Microsoft Correlation Vector. Include this value when reporting errors to the Azure Remote Rendering team.",
+                "type": "string"
+              }
+            }
+          },
           "409": {
-            "description": "Conflict. A rendering session with the ID already exists for the remote rendering account."
+            "description": "Conflict. A rendering session with the ID already exists for the remote rendering account.",
+            "schema": {
+              "$ref": "#/definitions/error_response"
+            }
           },
           "429": {
             "description": "In case the rate limit has been exceeded.",
@@ -586,7 +606,7 @@
         "summary": "Creates a new rendering session"
       },
       "get": {
-        "operationId": "GetSessionProperties",
+        "operationId": "GetSession",
         "produces": [
           "application/json"
         ],
@@ -606,9 +626,14 @@
             "name": "session_id",
             "required": true,
             "type": "string",
-            "x-example": "contoso-session-1"
+            "x-example": "contoso-session-c2b8ac1d-9494-4852-a59c-8c28813adc28"
           }
         ],
+        "x-ms-examples": {
+          "Get a previously created session by ID": {
+            "$ref": "./examples/GetSession.json"
+          }
+        },
         "responses": {
           "200": {
             "description": "OK - returns a session properties object",
@@ -617,7 +642,7 @@
             },
             "examples": {
               "application/json": {
-                "id": "contoso-conversion-1",
+                "id": "contoso-session-c2b8ac1d-9494-4852-a59c-8c28813adc28",
                 "creationTime": "2020-11-11T11:11:11.111Z",
                 "arrInspectorPort": 50052,
                 "handshakePort": 50051,
@@ -725,7 +750,7 @@
             "name": "session_id",
             "required": true,
             "type": "string",
-            "x-example": "contoso-session-1"
+            "x-example": "contoso-session-c2b8ac1d-9494-4852-a59c-8c28813adc28"
           },
           {
             "description": "Settings of the session to be updated",
@@ -737,6 +762,11 @@
             }
           }
         ],
+        "x-ms-examples": {
+          "Update a session": {
+            "$ref": "./examples/UpdateSession.json"
+          }
+        },
         "responses": {
           "200": {
             "description": "OK",
@@ -745,7 +775,7 @@
             },
             "examples": {
               "application/json": {
-                "id": "contoso-conversion-1",
+                "id": "contoso-session-c2b8ac1d-9494-4852-a59c-8c28813adc28",
                 "creationTime": "2020-11-11T11:11:11.111Z",
                 "arrInspectorPort": 50052,
                 "handshakePort": 50051,
@@ -756,15 +786,6 @@
                 "status": "Ready",
                 "error": null,
                 "teraflops": 10.6
-              }
-            }
-          },
-          "400": {
-            "description": "BadRequest",
-            "headers": {
-              "MS-CV": {
-                "description": "Microsoft Correlation Vector. Include this value when reporting errors to the Azure Remote Rendering team.",
-                "type": "string"
               }
             }
           },
@@ -781,6 +802,37 @@
               }
             }
           },
+          "403": {
+            "description": "Forbidden",
+            "headers": {
+              "MS-CV": {
+                "description": "Microsoft Correlation Vector. Include this value when reporting errors to the Azure Remote Rendering team.",
+                "type": "string"
+              }
+            }
+          },
+          "404": {
+            "description": "The specified resource was not found.",
+            "headers": {
+              "MS-CV": {
+                "description": "Microsoft Correlation Vector. Include this value when reporting errors to the Azure Remote Rendering team.",
+                "type": "string"
+              }
+            }
+          },
+          "429": {
+            "description": "In case the rate limit has been exceeded.",
+            "headers": {
+              "MS-CV": {
+                "description": "Microsoft Correlation Vector. Include this value when reporting errors to the Azure Remote Rendering team.",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "The minimum number of seconds to wait before not getting this response anymore.",
+                "type": "integer"
+              }
+            }
+          },
           "422": {
             "description": "Unprocessable Entity. The maxLeaseTimeMinutes value was invalid. It has to be bigger than the current value of elapsedTimeMinutes.",
             "headers": {
@@ -788,6 +840,29 @@
                 "description": "Microsoft Correlation Vector. Include this value when reporting errors to the Azure Remote Rendering team.",
                 "type": "string"
               }
+            },
+            "schema": {
+              "$ref": "#/definitions/error_response"
+            }
+          },
+          "500": {
+            "description": "InternalError",
+            "headers": {
+              "MS-CV": {
+                "description": "Microsoft Correlation Vector. Include this value when reporting errors to the Azure Remote Rendering team.",
+                "type": "string"
+              }
+            },
+            "examples": {
+              "application/json": {
+                "error": {
+                  "code": "InternalServerError",
+                  "message": "An internal server error occurred."
+                }
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/error_response"
             }
           }
         },
@@ -800,6 +875,9 @@
     "/accounts/{account_id}/sessions/{session_id}/:stop": {
       "post": {
         "operationId": "StopSession",
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "description": "the Azure Remote Rendering account id",
@@ -816,21 +894,17 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "x-example": "contoso-session-1"
+            "x-example": "contoso-session-c2b8ac1d-9494-4852-a59c-8c28813adc28"
           }
         ],
+        "x-ms-examples": {
+          "Stop a session": {
+            "$ref": "./examples/StopSession.json"
+          }
+        },
         "responses": {
           "204": {
             "description": "NoContent - stop request was successful. The rendering session is stopped.",
-            "headers": {
-              "MS-CV": {
-                "description": "Microsoft Correlation Vector. Include this value when reporting errors to the Azure Remote Rendering team.",
-                "type": "string"
-              }
-            }
-          },
-          "400": {
-            "description": "BadRequest",
             "headers": {
               "MS-CV": {
                 "description": "Microsoft Correlation Vector. Include this value when reporting errors to the Azure Remote Rendering team.",
@@ -889,6 +963,9 @@
                 "description": "Microsoft Correlation Vector. Include this value when reporting errors to the Azure Remote Rendering team.",
                 "type": "string"
               }
+            },
+            "schema": {
+              "$ref": "#/definitions/error_response"
             }
           }
         },
@@ -900,7 +977,7 @@
     },
     "/accounts/{account_id}/sessions": {
       "get": {
-        "operationId": "GetSessions",
+        "operationId": "ListSessions",
         "produces": [
           "application/json"
         ],
@@ -919,6 +996,11 @@
             "x-example": "30ea64bd-100f-4bf0-adc9-29fa45d4880c"
           }
         ],
+        "x-ms-examples": {
+          "List sessions": {
+            "$ref": "./examples/ListSessions.json"
+          }
+        },
         "responses": {
           "200": {
             "description": "OK - returns the list of sessions which are in a Starting or Ready state",
@@ -956,15 +1038,6 @@
               }
             }
           },
-          "400": {
-            "description": "BadRequest",
-            "headers": {
-              "MS-CV": {
-                "description": "Microsoft Correlation Vector. Include this value when reporting errors to the Azure Remote Rendering team.",
-                "type": "string"
-              }
-            }
-          },
           "401": {
             "description": "Unauthorized",
             "headers": {
@@ -974,6 +1047,15 @@
               },
               "WWW-Authenticate": {
                 "description": "Describes the error encountered while trying to authenticate the resource.",
+                "type": "string"
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "headers": {
+              "MS-CV": {
+                "description": "Microsoft Correlation Vector. Include this value when reporting errors to the Azure Remote Rendering team.",
                 "type": "string"
               }
             }
@@ -998,6 +1080,9 @@
                 "description": "Microsoft Correlation Vector. Include this value when reporting errors to the Azure Remote Rendering team.",
                 "type": "string"
               }
+            },
+            "schema": {
+              "$ref": "#/definitions/error_response"
             }
           }
         },
@@ -1162,13 +1247,11 @@
     },
     "conversion_status": {
       "enum": [
-        "UnknownError",
-        "NotFound",
-        "Created",
+        "NotStarted",
         "Running",
-        "Aborted",
-        "Failure",
-        "Success"
+        "Cancelled",
+        "Failed",
+        "Succeeded"
       ],
       "type": "string",
       "x-ms-enum": {
@@ -1217,7 +1300,7 @@
     "session_properties": {
       "properties": {
         "id": {
-          "example": "contoso-session-1",
+          "example": "contoso-session-c2b8ac1d-9494-4852-a59c-8c28813adc28",
           "type": "string"
         },
         "arrInspectorPort": {
