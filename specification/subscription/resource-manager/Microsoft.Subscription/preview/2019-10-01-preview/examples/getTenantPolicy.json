@@ -1,31 +1,21 @@
 {
   "parameters":{
-    "tenantId":"291bba3f-e0a5-47bc-a099-3bdcb2a50a0",
     "api-version":"2019-10-01-preview"
   },
   "responses":{
     "200":{
       "body":{
-        "PolicyId":"291bba3f-e0a5-47bc-a099-3bdcb2a50a05",
-        "TenantPolicies":{
-          "TenantId":"291bba3f-e0a5-47bc-a099-3bdcb2a50a05",
-          "BlockedChannels":[
-            "FieldLed"
-          ],
-          "BlockedOffers":[
-            "MS-AZR-0003P"
-          ],
-          "AllowedOffers":null,
-          "BlockTransferOut":true,
-          "BlockTransferIn":null,
-          "BlockTenantChangeOut":true,
-          "BlockTenantChangeIn":null
-        },
-        "ExemptedPrincipals":[
-          "e879cf0f-2b4d-5431-109a-f72fc9868693",
-          "9792da87-c97b-410d-a97d-27021ba09ce6"
-        ],
-        "ETag":"686897696a7c876b7e"
+        "id":"291bba3f-e0a5-47bc-a099-3bdcb2a50a05",
+        "name":"Default",
+        "type": "Microsoft.Subscriptions/Policies/default.",
+        "properties":{
+          "blockSubscriptionsLeavingTenant":true,
+          "blockSubscriptionsIntoTenant":true,
+          "exemptedPrincipals":[
+            "e879cf0f-2b4d-5431-109a-f72fc9868693",
+            "9792da87-c97b-410d-a97d-27021ba09ce6"
+          ]
+        }
       }
     }
   }
