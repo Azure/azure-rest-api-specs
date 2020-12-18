@@ -36,7 +36,7 @@ These settings apply only when `--tag=package-2020-12-01-alpha` is specified on 
 
 ```yaml $(tag) == 'package-2020-12-01-alpha'
 input-file:
-  - Microsoft.ConfidentialLedger\preview\2020-12-01-alpha\confidentialledger.json
+  - Microsoft.ConfidentialLedger/preview/2020-12-01-alpha/confidentialledger.json
 ```
 
 ---
