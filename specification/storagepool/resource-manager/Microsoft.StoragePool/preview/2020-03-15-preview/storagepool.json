@@ -1065,32 +1065,11 @@
         "tpgs"
       ],
       "properties": {
-        "provisioningState": {
-          "description": "State of the operation on the resource",
-          "type": "string",
-          "$ref": "#/definitions/ProvisioningState",
-          "readOnly": true
-        },
-        "status": {
-          "type": "string",
-          "enum": [
-            "Invalid",
-            "Unknown",
-            "Healthy",
-            "Unhealthy"
-          ],
-          "x-ms-enum": {
-            "name": "OperationalStatus",
-            "modelAsString": true
-          },
-          "readOnly": true,
-          "description": "Operational status of the Disk pool"
-        },
         "tpgs": {
           "type": "array",
           "description": "list of iSCSI target portal groups",
           "items": {
-            "$ref": "#/definitions/TargetPortalGroup"
+            "$ref": "#/definitions/TargetPortalGroupUpdate"
           },
           "maxLength": 1,
           "minLength": 1
@@ -1154,6 +1133,32 @@
             "read"
           ],
           "readOnly": true
+        }
+      }
+    },
+    "TargetPortalGroupUpdate": {
+      "type": "object",
+      "description": "iSCSI target portal group",
+      "required": [
+        "luns",
+        "acls"
+      ],
+      "properties": {
+        "luns": {
+          "type": "array",
+          "description": "Lun list to be exposed through the iSCSI target. Required",
+          "items": {
+            "$ref": "#/definitions/IscsiLun"
+          },
+          "minLength": 1,
+          "maxLength": 8
+        },
+        "acls": {
+          "type": "array",
+          "description": "Access Control List (ACL) for an iSCSI target lun",
+          "items": {
+            "$ref": "#/definitions/Acl"
+          }
         }
       }
     },
