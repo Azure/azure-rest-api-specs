@@ -26,7 +26,7 @@ These are the global settings for the DomainServices API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2017-06
+tag: package-2020-01
 ```
 
 ### Tag: package-2020-01
