@@ -904,6 +904,10 @@
           "$ref": "#/definitions/WorkspaceCustomParameterType",
           "description": "The type of variable that this is"
         },
+        "entities": {
+          "$ref": "#/definitions/ManagedServicesEncryptionEntities",
+          "description": "The value which sould be used for this field"
+        },
         "value": {
           "$ref": "#/definitions/Encryption",
           "description": "The value which should be used for this field."
@@ -942,6 +946,51 @@
         }
       },
       "description": "The object that contains details of encryption used on the workspace."
+    },
+    "ManagedServicesEncryptionEntities": {
+      "properties": {
+        "keySource": {
+          "type": "string",
+          "description": "The encryption keySource (provider). Possible values (case-insensitive):  Default, Microsoft.Keyvault",
+          "enum": [
+            "Default",
+            "Microsoft.Keyvault"
+          ],
+          "x-ms-enum": {
+            "name": "KeySource",
+            "modelAsString": true
+          },
+          "default": "Default"
+        },
+        "keyVaultProperties": {
+          "description": "Details of the keyvault from which to fetch the encryption keys",
+          "type": "object",
+          "properties": {
+            "keyVaultUri": {
+              "type": "string",
+              "description": "The Uri of KeyVault.",
+              "x-ms-client-name": "KeyVaultUri"
+            },
+            "keyName": {
+              "type": "string",
+              "description": "The name of KeyVault key.",
+              "x-ms-client-name": "KeyName"
+            },
+            "keyVersion": {
+              "type": "string",
+              "description": "The version of KeyVault key.",
+              "x-ms-client-name": "KeyVersion"
+            }
+          },
+          "required": [
+            "keyVaultUri",
+            "keyName"
+          ]
+        }
+      },
+      "required": [
+        "keySource"
+      ]
     },
     "WorkspaceProviderAuthorization": {
       "properties": {
