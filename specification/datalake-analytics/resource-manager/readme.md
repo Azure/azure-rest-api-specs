@@ -47,6 +47,14 @@ These settings apply only when `--tag=package-2015-10-preview` is specified on t
 input-file:
 - Microsoft.DataLakeAnalytics/preview/2015-10-01-preview/account.json
 ```
+### Tag: package-2019-11-preview
+
+These settings apply only when `--tag=package-2019-11-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2019-11-preview'
+input-file:
+- Microsoft.DataLakeAnalytics/preview/2019-11-01-preview/account.json
+```
 
 ## Suppression
 ``` yaml
