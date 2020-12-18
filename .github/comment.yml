@@ -35,3 +35,18 @@
     type: label
     label: NewApiVersionRequired
     onLabeledComments: "<b>NewApiVersionRequired reason:</b></br> </br><b>A service’s API is a contract with customers and is represented by using the api-version query parameter. Changes such as adding an optional property to a request/response or introducing a new operation is a change to the service’s contract and therefore requires a new api-version value. This is critically important for documentation, client libraries, and customer support. </b> </br></br> EXAMPLE: if a customer calls a service in the public cloud using <b>api-version=2020-07-27</b>, the new property or operation may exist but if they call the service in a government cloud, air-gapped cloud, or Azure Stack Hub cloud using the same api-version, the property or operation may not exist. Because there is no clear relationship between the service api-version and the new property/operation, customers can’t trust the documentation and Azure customer have difficulty helping customers diagnose issues. In addition, each client library version documents the service version it supports. When an optional property or new operation is added to a service and its Swagger, new client libraries must be produced to expose this functionality to customers. Without updating the api-version, it is unclear to customers which version of a client library supports these new features.  "
+
+- rule:
+    type: label
+    label: CI-FixRequiredOnFailure
+    onLabeledComments: "Hi @${PRAuthor}, Your PR has some issues. Please fix the CI sequentially by following the order of `Avocado, semantic validation, model validation, breaking change, lintDiff`.  <table><tr><th>Task</th><th>How to fix</th><th>Priority</th><th>Support</th></tr><tr><td>Avocado</td><td>[Fix-Avocado](https://github.com/Azure/avocado)</td><td>High</td><td>ruowan@microsoft.com</td></tr><tr><td>LintDiff</td><td>[Fix-LintDiff](https://github.com/Azure/azure-rest-api-specs/blob/master/documentation/ci-fix.md#linter-validation)</td><td>high</td><td>Jianye.Xi@microsoft.com, ruoxuan@microsoft.com</td></tr><tr><td>Semantic validation</td><td>[Fix-SenmanticValidation-Error](https://github.com/Azure/azure-rest-api-specs/blob/master/documentation/ci-fix.md#semantic-validation)</td><td>High</td><td>raychen@microsoft.com, Jianye.xi@microsoft.com</td></tr><tr><td>Model validation</td><td>[Fix-ModelValidation-Error](https://github.com/Azure/azure-rest-api-specs/blob/master/documentation/ci-fix.md#model-validation)</td><td>High</td><td>raychen@microsoft.com,Jianye.xi@microsoft.com</td></tr></table> If you need further help, please feedback via [swagger feedback](https://aka.ms/swaggerfeedback)." 
+
+- rule:
+    type: PROpen
+    variables:
+      openapiHub: https://openapihub.test.azure-devex-tools.com/
+    keywords:
+      - "I have reviewed the [documentation](https://aka.ms/ameonboard) for the workflow."
+    onOpenedComments: "Hi, @${PRAuthor} Thanks for your PR. I am workflow bot for review process. Here are some small tips. </br> <li> Please ensure to do self-check against checklists in first PR comment.</li> <li> PR assignee is the person auto-assigned and responsible for your current PR reviewing and merging. </li> <li> For cross api-version diff. See [OpenAPI Hub Diff](${openapiHub}diff?pr=${owner}/${repo}/${PRNumber})</li>  <li> If there is CI failure(s), to fix CI error(s) is mandatory for PR merging; or you need to provide justification in PR comment for explanation. [How to fix?](https://github.com/Azure/azure-rest-api-specs/blob/master/documentation/ci-fix.md)</li></br> Any feedback about review process or workflow bot, pls contact swagger and tools team. vsswagger@microsoft.com"
+
+
