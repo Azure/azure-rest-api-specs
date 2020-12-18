@@ -1,0 +1,58 @@
+{
+  "parameters": {
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
+    "resourceGroupName": "TestGroup",
+    "serverGroupName": "hsctestsg",
+    "api-version": "2020-10-05-privatepreview",
+    "parameters": {
+      "location": "westus",
+      "properties": {
+        "createMode": "PointInTimeRestore",
+        "pointInTimeUTC": "2017-12-14T00:00:37.467Z",
+        "sourceLocation": "eastus",
+        "sourceSubscriptionId": "dddddddd-dddd-dddd-dddd-dddddddddddd",
+        "sourceResourceGroupName": "SourceGroup",
+        "sourceServerGroupName": "pgtests-source-server-group",
+        "enableMx": true,
+        "enableZfs": false
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestResourceGroup/providers/Microsoft.DBforPostgreSQL/serverGroupsv2/hsctestsg",
+        "name": "hsctestsg",
+        "type": "Microsoft.DBforPostgreSQL/serverGroupsv2",
+        "systemData": {
+          "createdBy": "user1",
+          "createdByType": "User",
+          "createdAt": "2020-01-01T17:18:19.1234567Z",
+          "lastModifiedBy": "user2",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2020-01-02T17:18:19.1234567Z"
+        },
+        "properties": {},
+        "location": "westus2"
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestResourceGroup/providers/Microsoft.DBforPostgreSQL/serverGroupsv2/hsctestsg",
+        "name": "hsctestsg",
+        "type": "Microsoft.DBforPostgreSQL/serverGroupsv2",
+        "systemData": {
+          "createdBy": "user1",
+          "createdByType": "User",
+          "createdAt": "2020-01-01T17:18:19.1234567Z",
+          "lastModifiedBy": "user2",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2020-01-02T17:18:19.1234567Z"
+        },
+        "properties": {},
+        "location": "westus2"
+      }
+    },
+    "202": {}
+  }
+}
