@@ -101,15 +101,15 @@
               "kernel.msg*",
               "net.core.somaxconn"
             ],
-            "failSwapOn": false
+            "failSwapOn": false,
+            "maxPodPids": "100"
           },
           "linuxOSConfig": {
             "sysctls": {
               "netCoreWmemDefault": 65536,
               "netIpv4TcpTwReuse": true,
               "netIpv4IpLocalPortRange": "20000 60000",
-              "kernelThreadsMax": 99999,
-              "maxPodPids": "100"
+              "kernelThreadsMax": 99999
             },
             "transparentHugePageEnabled": "always",
             "transparentHugePageDefrag": "madvise",
