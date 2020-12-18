@@ -76,8 +76,6 @@ See configuration in [readme.az.md](./readme.az.md)
 
 ## Az Configuration
 Az dedicated configurations are configured in readme.az.md.
-the typical package-name is usually like `@azure/arm-xxx`  where the xxx is related with the service name.   
-and the typical output-folder in the azure-sdk-for-js is like `$(typescript-sdks-folder)/sdk/xxx/arm-xxx` where the xxx is related with the service name.  
 A typical readme.az.md is like this: 
 ~~~
 // file: readme.az.md
@@ -98,6 +96,13 @@ python-sdk-output-folder: "$(az-output-folder)/azext_communication/vendored_sdks
 ```
 
 ~~~
+where 1) the `extensions` means the name of the azure cli command modules,  
+      2) the `namespace` means the python SDK namespace,  
+      3) the `package-name` is the python SDK package name,  
+      4) the `azure-cli-extension-folder` is the parameter that will be passed by user in their commmand line which should points to their local `azure-cli-extensions` repo.  
+         Please Note: this parameter `azure-cli-extension-folder` is only for Azure CLI extensions and if user are targeting generate the Azure CLI main repo modules, the parameter should be `azure-cli-folder` that points to their local `azure-cli` repo.  
+      5) the `az-output-folder` is the specific output folder of this command modules. we should follow the basic code structure either in Azure CLI extensions or in Azure CLI main modules. If it is Azure CLI extensions that we are targeting, then the folder path should be like `$(azure-cli-extension-folder)/src/{serviceFolderName}`. If it's the Azure CLI main modules that we are targeting, then the folder path should be like `$(azure-cli-folder)/src/azure-cli/azure/cli/command_modules/{serviceFolderName}`.  
+      6) the `python-sdk-output-folder` is the vendored sdk path. Please Note that, even if we don't really generate the sdk, but we still need the folder path.  It's worth notable that in the parts before and after vendored sdks are also configurable for specific user scenarios.  
 
 ## Multi-api
 Currently the Azure CLI code generator doesn't support multi-api which means each operation contained in one package should only contains one api-version's. 
