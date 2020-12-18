@@ -39,8 +39,8 @@ output-folder: $(python-sdks-folder)/synapse/azure-synapse-accesscontrol/azure/s
 
 ``` yaml $(package-vnet)
 no-namespace-folders: true
-namespace: azure.synapse.vnet
-output-folder: $(python-sdks-folder)/synapse/azure-synapse-vnet/azure/synapse/vnet
+namespace: azure.synapse.managedprivateendpoints
+output-folder: $(python-sdks-folder)/synapse/azure-synapse-managedprivateendpoints/azure/synapse/managedprivateendpoints
 ```
 
 ``` yaml $(package-monitoring)
