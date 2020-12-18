@@ -146,11 +146,14 @@
         ],
         "operationId": "Library_Append",
         "x-ms-examples": {
-          "Library_Create": {
+          "Append Library": {
             "$ref": "./examples/Library_Append.json"
           }
         },
         "description": "Append Library",
+        "consumes": [
+          "application/octet-stream"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -159,12 +162,13 @@
             "$ref": "#/parameters/LibraryNameParameter"
           },
           {
-            "name": "libraryPayload",
-            "description": "Library content body schema.",
+            "name": "content",
             "in": "body",
+            "description": "Library file chunk.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/LibraryPayload"
+              "format": "binary",
+              "type": "string"
             }
           }
         ],
@@ -305,16 +309,6 @@
     }
   },
   "definitions": {
-    "LibraryPayload": {
-      "description": "Library content",
-      "type": "object",
-      "properties": {
-        "content": {
-          "type": "string",
-          "description": "Stream of library content"
-        }
-      }
-    },
     "OperationResult": {
       "description": "Operation status for the operation",
       "type": "object",
