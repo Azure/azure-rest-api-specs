@@ -78,13 +78,13 @@ input-file:
 ```
 
 
-### Tag: 2020-01-15-preview3
+### Tag: 2021-03-07
 
-These settings apply only when `--tag=package-2020-01-15-preview3` is specified on the command line.
+These settings apply only when `--tag=package-2021-03-07` is specified on the command line.
 
-```yaml $(tag) == '2020-01-15-preview3'
+```yaml $(tag) == '2021-03-07'
 input-file:
-  - Microsoft.CommunicationServicesIdentity/preview/2020-01-15-preview3/CommunicationIdentity.json
+  - Microsoft.CommunicationServicesIdentity/stable/2021-03-07/CommunicationIdentity.json
 ```
 
 

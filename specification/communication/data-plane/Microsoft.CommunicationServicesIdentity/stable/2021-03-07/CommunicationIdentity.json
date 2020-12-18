@@ -3,7 +3,7 @@
   "info": {
     "title": "CommunicationIdentityClient",
     "description": "Azure Communication Identity Service",
-    "version": "2020-01-15-preview3"
+    "version": "2021-03-07"
   },
   "paths": {
     "/identities": {
@@ -12,7 +12,7 @@
           "Identity"
         ],
         "summary": "Create a new identity.",
-        "operationId": "CommunicationIdentity_Create",
+        "operationId": "CommunicationIdentity_CreateIdentity",
         "produces": [
           "application/json"
         ],
@@ -33,7 +33,7 @@
           }
         },
         "x-ms-examples": {
-          "Create Identity": {
+          "Create an Identity": {
             "$ref": "./examples/CreateIdentity.json"
           }
         }
@@ -44,8 +44,8 @@
         "tags": [
           "Identity"
         ],
-        "summary": "Delete the identity, revoke all tokens of the identity and delete all associated data.",
-        "operationId": "CommunicationIdentity_Delete",
+        "summary": "Delete the identity, revoke all tokens for the identity and delete all associated data.",
+        "operationId": "CommunicationIdentity_DeleteIdentity",
         "parameters": [
           {
             "in": "path",
@@ -67,20 +67,19 @@
           }
         },
         "x-ms-examples": {
-          "Delete Identity": {
+          "Delete an Identity": {
             "$ref": "./examples/DeleteIdentity.json"
           }
         }
-      },
-      "patch": {
+      }
+    },
+    "/identities/{id}/~revokeAccessTokens": {
+      "post": {
         "tags": [
           "Identity"
         ],
-        "summary": "Update an Identity.",
-        "operationId": "CommunicationIdentity_Update",
-        "consumes": [
-          "application/merge-patch+json"
-        ],
+        "summary": "Revoke access tokens for the specific identity.",
+        "operationId": "CommunicationIdentity_RevokeAccessTokens",
         "parameters": [
           {
             "in": "path",
@@ -94,15 +93,6 @@
             "name": "api-version",
             "required": true,
             "type": "string"
-          },
-          {
-            "in": "body",
-            "name": "body",
-            "description": "The properties of the identity to be updated.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/CommunicationIdentityUpdateRequest"
-            }
           }
         ],
         "responses": {
@@ -111,19 +101,19 @@
           }
         },
         "x-ms-examples": {
-          "Update Identity": {
+          "Revoke access tokens": {
             "$ref": "./examples/UpdateIdentity.json"
           }
         }
       }
     },
-    "/identities/{id}/~issue-token": {
+    "/identities/{id}/~issueAccessToken": {
       "post": {
         "tags": [
           "Token"
         ],
         "summary": "Issue a new token for an identity.",
-        "operationId": "CommunicationIdentity_IssueToken",
+        "operationId": "CommunicationIdentity_IssueAccessToken",
         "consumes": [
           "application/json"
         ],
@@ -150,7 +140,7 @@
             "description": "Requesting scopes for the new token.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/CommunicationTokenRequest"
+              "$ref": "#/definitions/CommunicationIdentityTokenRequest"
             }
           }
         ],
@@ -163,8 +153,8 @@
           }
         },
         "x-ms-examples": {
-          "Issue Token": {
-            "$ref": "./examples/IssueToken.json"
+          "Issue Access Token": {
+            "$ref": "./examples/IssueAccessToken.json"
           }
         }
       }
@@ -184,17 +174,7 @@
         }
       }
     },
-    "CommunicationIdentityUpdateRequest": {
-      "type": "object",
-      "properties": {
-        "tokensValidFrom": {
-          "format": "date-time",
-          "description": "All tokens that are issued prior to this time will be revoked.",
-          "type": "string"
-        }
-      }
-    },
-    "CommunicationTokenRequest": {
+    "CommunicationIdentityTokenRequest": {
       "required": [
         "scopes"
       ],
