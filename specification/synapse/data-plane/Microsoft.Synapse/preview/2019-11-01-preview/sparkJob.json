@@ -816,7 +816,8 @@
         },
         "cancellationRequestedAt": {
           "format": "date-time",
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "currentState": {
           "enum": [
@@ -1375,7 +1376,8 @@
           "type": "string"
         },
         "output": {
-          "$ref": "#/definitions/SparkStatementOutput"
+          "$ref": "#/definitions/SparkStatementOutput",
+          "x-nullable": true
         }
       },
       "required": [
@@ -1397,15 +1399,18 @@
         },
         "ename": {
           "x-ms-client-name": "errorName",
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "evalue": {
           "x-ms-client-name": "errorValue",
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "traceback": {
           "uniqueItems": false,
           "type": "array",
+          "x-nullable": true,
           "items": {
             "type": "string"
           }
