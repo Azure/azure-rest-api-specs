@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2018-07-01",
+    "version": "2021-01-01",
     "title": "Microsoft.ResourceHealth",
     "description": "The Resource Health Client."
   },
@@ -409,6 +409,78 @@
         "x-ms-examples": {
           "GetEmergingIssues": {
             "$ref": "./examples/EmergingIssues_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.ResourceHealth/potentialOutages/{potentialOutageName}": {
+      "get": {
+        "tags": [
+          "PotentialOutages"
+        ],
+        "operationId": "PotentialOutages_Get",
+        "description": "Gets Azure services' potential outages.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/PotentialOutageNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The body contains properties of azure potential outages, which includes a list of status banner and status active events.",
+            "schema": {
+              "$ref": "#/definitions/potentialOutagesGetResult"
+            }
+          },
+          "default": {
+            "description": "DefaultErrorResponse",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetPotentialOutages": {
+            "$ref": "./examples/PotentialOutages_Get.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.ResourceHealth/potentialOutages": {
+      "get": {
+        "tags": [
+          "PotentialOutages"
+        ],
+        "operationId": "PotentialOutages_List",
+        "description": "Lists Azure services' potential outages.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The body contains a list of azure potential outages.",
+            "schema": {
+              "$ref": "#/definitions/potentialOutageListResult"
+            }
+          },
+          "default": {
+            "description": "DefaultErrorResponse",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetPotentialOutages": {
+            "$ref": "./examples/PotentialOutages_List.json"
           }
         },
         "x-ms-pageable": {
