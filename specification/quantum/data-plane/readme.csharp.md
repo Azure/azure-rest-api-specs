@@ -11,5 +11,5 @@ csharp:
   clear-output-folder: true
   client-side-validation: true
   namespace: Microsoft.Azure.Quantum.Client
-  output-folder: $(csharp-sdks-folder)/quantum/management/Microsoft.Quantum/GeneratedProtocol
+  output-folder: $(csharp-sdks-folder)/batch/Microsoft.Azure.Quantum.Client/src/GeneratedProtocol
 ```
