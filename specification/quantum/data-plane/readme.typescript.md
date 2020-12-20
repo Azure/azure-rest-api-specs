@@ -7,7 +7,7 @@ Please also specify `--typescript-sdks-folder=<path to root folder of your azure
 typescript:
   azure-arm: true
   license-header: MICROSOFT_MIT_NO_VERSION
-  package-name: "azure/quantum"
+  package-name: "@azure/quantum"
   output-folder: "$(typescript-sdks-folder)/sdk/quantum/quantum"
   payload-flattening-threshold: 1
   generate-metadata: true
