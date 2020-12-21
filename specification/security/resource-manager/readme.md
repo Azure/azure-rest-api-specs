@@ -70,7 +70,7 @@ These are the global settings for the Security API.
 title: SecurityCenter
 description: API spec for Microsoft.Security (Azure Security Center) resource provider
 openapi-type: arm
-tag: package-composite-v3
+tag: package-composite-v4
 ```
 
 ## Composite packages
@@ -223,6 +223,61 @@ input-file:
 override-info:
   title: SecurityCenter
 ```
+
+### Tag: package-composite-v4
+
+These settings apply only when `--tag=package-composite-v4` is specified on the command line.
+
+``` yaml $(tag) == 'package-composite-v4'
+input-file:
+- Microsoft.Security/stable/2018-06-01/pricings.json
+- Microsoft.Security/stable/2019-01-01/settings.json
+- Microsoft.Security/stable/2019-01-01/advancedThreatProtectionSettings.json
+- Microsoft.Security/stable/2019-08-01/deviceSecurityGroups.json
+- Microsoft.Security/stable/2019-08-01/iotSecuritySolutions.json
+- Microsoft.Security/stable/2019-08-01/iotSecuritySolutionAnalytics.json
+- Microsoft.Security/preview/2015-06-01-preview/operations.json
+- Microsoft.Security/preview/2017-08-01-preview/autoProvisioningSettings.json
+- Microsoft.Security/preview/2017-08-01-preview/informationProtectionPolicies.json
+- Microsoft.Security/preview/2017-08-01-preview/securityContacts.json
+- Microsoft.Security/preview/2017-08-01-preview/workspaceSettings.json
+- Microsoft.Security/preview/2019-01-01-preview/regulatoryCompliance.json
+- Microsoft.Security/preview/2019-01-01-preview/subAssessments.json
+- Microsoft.Security/preview/2019-01-01-preview/automations.json
+- Microsoft.Security/preview/2019-01-01-preview/alertsSuppressionRules.json
+- Microsoft.Security/stable/2020-01-01/serverVulnerabilityAssessments.json
+- Microsoft.Security/stable/2020-01-01/assessmentMetadata.json
+- Microsoft.Security/stable/2020-01-01/assessments.json
+- Microsoft.Security/stable/2020-01-01/applicationWhitelistings.json
+- Microsoft.Security/stable/2020-01-01/adaptiveNetworkHardenings.json
+- Microsoft.Security/stable/2020-01-01/allowedConnections.json
+- Microsoft.Security/stable/2020-01-01/topologies.json
+- Microsoft.Security/stable/2020-01-01/alerts.json
+- Microsoft.Security/stable/2020-01-01/jitNetworkAccessPolicies.json
+- Microsoft.Security/stable/2020-01-01/discoveredSecuritySolutions.json
+- Microsoft.Security/stable/2020-01-01/securitySolutionsReferenceData.json
+- Microsoft.Security/stable/2020-01-01/externalSecuritySolutions.json
+- Microsoft.Security/preview/2021-01-01-preview/secureScore.json
+- Microsoft.Security/stable/2020-01-01/SecuritySolutions.json
+- Microsoft.Security/preview/2020-01-01-preview/connectors.json
+- Microsoft.Security/preview/2020-07-01-preview/sqlVulnerabilityAssessmentsScanOperations.json
+- Microsoft.Security/preview/2020-07-01-preview/sqlVulnerabilityAssessmentsScanResultsOperations.json
+- Microsoft.Security/preview/2020-07-01-preview/sqlVulnerabilityAssessmentsBaselineRuleOperations.json
+- Microsoft.Security/preview/2020-08-06-preview/iotDefenderSettings.json
+- Microsoft.Security/preview/2020-08-06-preview/iotSensors.json
+- Microsoft.Security/preview/2020-08-06-preview/devices.json
+- Microsoft.Security/preview/2020-08-06-preview/onPremiseIotSensors.json
+- Microsoft.Security/preview/2020-08-06-preview/iotSites.json
+- Microsoft.Security/preview/2020-08-06-preview/iotAlerts.json
+- Microsoft.Security/preview/2020-08-06-preview/iotAlertTypes.json
+- Microsoft.Security/preview/2020-08-06-preview/iotRecommendations.json
+- Microsoft.Security/preview/2020-08-06-preview/iotRecommendationTypes.json
+
+# Needed when there is more than one input file
+override-info:
+  title: SecurityCenter
+```
+
 
 ### Tag: package-2015-06-preview-only
 
@@ -426,6 +481,22 @@ input-file:
 - Microsoft.Security/preview/2020-08-06-preview/iotAlertTypes.json
 - Microsoft.Security/preview/2020-08-06-preview/iotRecommendations.json
 - Microsoft.Security/preview/2020-08-06-preview/iotRecommendationTypes.json
+
+# Needed when there is more than one input file
+override-info:
+  title: SecurityCenter
+```
+
+---
+
+
+### Tag: package-2021-01-preview-only
+
+These settings apply only when `--tag=package-2021-01-preview-only` is specified on the command line. This tag is used for Ruby SDK.
+
+``` yaml $(tag) == 'package-2021-01-preview-only'
+input-file:
+- Microsoft.Security/preview/2021-01-01-preview/secureScore.json
 
 # Needed when there is more than one input file
 override-info:
