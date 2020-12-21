@@ -12,6 +12,7 @@ python:
   namespace: azure.mgmt.quantum
   package-name: azure-mgmt-quantum
   clear-output-folder: true
+  package-version: 0.14.2012
 ```
 
 ``` yaml $(python) && $(python-mode) == 'update'
