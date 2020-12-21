@@ -1807,6 +1807,10 @@
         "addressPrefix": {
           "description": "Gets or sets address prefix for the subnet.",
           "type": "string"
+        },
+        "provisioningState": {
+          "description": "Gets or sets the provisioning state of the resource.",
+          "type": "string"
         }
       }
     },
@@ -1959,6 +1963,13 @@
           "items": {
             "$ref": "#/definitions/LoadBalancerBackendAddressPoolReference"
           }
+        },
+        "loadBalancerNatRules": {
+          "description": "Gets or sets the references of the load balancer NAT rules.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/LoadBalancerNatRuleReference"
+          }
         }
       }
     },
@@ -2018,6 +2029,10 @@
         }
       ],
       "properties": {
+        "provisioningState": {
+          "description": "Gets or sets the provisioning state of the resource.",
+          "type": "string"
+        },
         "securityRules": {
           "description": "Gets or sets Security rules of network security group.",
           "type": "array",
@@ -2174,7 +2189,7 @@
           "description": "Gets or sets the domain name label.",
           "type": "string"
         },
-        "fQDN": {
+        "fqdn": {
           "description": "Gets or sets the fully qualified domain name.",
           "type": "string"
         },
