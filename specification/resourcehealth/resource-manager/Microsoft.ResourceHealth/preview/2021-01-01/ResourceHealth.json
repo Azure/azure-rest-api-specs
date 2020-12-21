@@ -415,6 +415,78 @@
           "nextLinkName": "nextLink"
         }
       }
+    },
+    "/providers/Microsoft.ResourceHealth/potentialOutages/{potentialOutageName}": {
+      "get": {
+        "tags": [
+          "PotentialOutages"
+        ],
+        "operationId": "PotentialOutages_Get",
+        "description": "Gets Azure services' potential outages.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/PotentialOutageNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The body contains properties of azure potential outages, which includes a list of status banner and status active events.",
+            "schema": {
+              "$ref": "#/definitions/potentialOutagesGetResult"
+            }
+          },
+          "default": {
+            "description": "DefaultErrorResponse",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetPotentialOutages": {
+            "$ref": "./examples/PotentialOutages_Get.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.ResourceHealth/potentialOutages": {
+      "get": {
+        "tags": [
+          "PotentialOutages"
+        ],
+        "operationId": "PotentialOutages_List",
+        "description": "Lists Azure services' potential outages.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The body contains a list of azure potential outages.",
+            "schema": {
+              "$ref": "#/definitions/potentialOutageListResult"
+            }
+          },
+          "default": {
+            "description": "DefaultErrorResponse",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetPotentialOutages": {
+            "$ref": "./examples/PotentialOutages_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
     }
   },
   "definitions": {
