@@ -3865,6 +3865,22 @@
         "failSwapOn": {
           "type": "boolean",
           "description": "If set to true it will make the Kubelet fail to start if swap is enabled on the node."
+        },
+        "containerLogMaxSizeMB": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The maximum size (e.g. 10Mi) of container log file before it is rotated."
+        },
+        "containerLogMaxFiles": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The maximum number of container log files that can be present for a container. The number must be ≥ 2.",
+          "minimum": 2
+        },
+        "podMaxPids": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The maximum number of processes per pod."
         }
       }
     },
@@ -3905,10 +3921,20 @@
           "format": "int32",
           "description": "Sysctl setting net.core.netdev_max_backlog."
         },
+        "netCoreRmemDefault": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Sysctl setting net.core.rmem_default."
+        },
         "netCoreRmemMax": {
           "type": "integer",
           "format": "int32",
           "description": "Sysctl setting net.core.rmem_max."
+        },
+        "netCoreWmemDefault": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Sysctl setting net.core.wmem_default."
         },
         "netCoreWmemMax": {
           "type": "integer",
@@ -3949,16 +3975,6 @@
           "type": "integer",
           "format": "int32",
           "description": "Sysctl setting net.ipv4.tcp_keepalive_intvl."
-        },
-        "netIpv4TcpRmem": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Sysctl setting net.ipv4.tcp_rmem."
-        },
-        "netIpv4TcpWmem": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Sysctl setting net.ipv4.tcp_wmem."
         },
         "netIpv4TcpTwReuse": {
           "type": "boolean",
