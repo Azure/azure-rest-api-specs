@@ -60,6 +60,14 @@ directive:
     from: onPremiseIotSensors.json
     where: $.definitions.OnPremiseIotSensor
     reason: The resource is managed in a subscription level (instead of inside a resource group)
+  - suppress: TopLevelResourcesListByResourceGroup
+    from: iotAlertTypes.json
+    where: $.definitions.IotAlertType
+    reason: The resource is managed in a subscription level (instead of inside a resource group)
+  - suppress: TopLevelResourcesListByResourceGroup
+    from: iotRecommendationTypes.json
+    where: $.definitions.IotRecommendationType
+    reason: The resource is managed in a subscription level (instead of inside a resource group)
 ```
 
 ### Basic Information
@@ -263,6 +271,10 @@ input-file:
 - Microsoft.Security/preview/2020-07-01-preview/sqlVulnerabilityAssessmentsScanOperations.json
 - Microsoft.Security/preview/2020-07-01-preview/sqlVulnerabilityAssessmentsScanResultsOperations.json
 - Microsoft.Security/preview/2020-07-01-preview/sqlVulnerabilityAssessmentsBaselineRuleOperations.json
+- Microsoft.Security/stable/2019-08-01/iotAlertTypes.json
+- Microsoft.Security/stable/2019-08-01/iotAlerts.json
+- Microsoft.Security/stable/2019-08-01/iotRecommendationTypes.json
+- Microsoft.Security/stable/2019-08-01/iotRecommendations.json
 - Microsoft.Security/preview/2020-08-06-preview/iotDefenderSettings.json
 - Microsoft.Security/preview/2020-08-06-preview/iotSensors.json
 - Microsoft.Security/preview/2020-08-06-preview/devices.json
