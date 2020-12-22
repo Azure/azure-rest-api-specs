@@ -6,12 +6,20 @@
     "version": "2021-01-01-privatepreview"
   },
   "host": "management.azure.com",
-  "schemes": [ "https" ],
-  "consumes": [ "application/json" ],
-  "produces": [ "application/json" ],
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
   "security": [
     {
-      "azure_auth": [ "user_impersonation" ]
+      "azure_auth": [
+        "user_impersonation"
+      ]
     }
   ],
   "securityDefinitions": {
@@ -101,7 +109,7 @@
       "put": {
         "description": "Create or update linker resource.",
         "operationId": "Linker_CreateAndUpdate",
-        "x-ms-long-running-operation":true,
+        "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
         },
@@ -188,13 +196,13 @@
           }
         }
       },
-      "patch": {	
-        "tags": [	
-          "Links"	
-        ],	
-        "operationId": "Linker_Update",	
-        "description": "Operation to update an existing link.",	
-        "x-ms-long-running-operation":true,
+      "patch": {
+        "tags": [
+          "Links"
+        ],
+        "operationId": "Linker_Update",
+        "description": "Operation to update an existing link.",
+        "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
         },
@@ -203,7 +211,7 @@
             "$ref": "./examples/PatchLink.json"
           }
         },
-        "parameters": [	
+        "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
           },
@@ -222,26 +230,26 @@
               "$ref": "#/definitions/LinkerPatch"
             }
           }
-        ],	
-        "responses": {	
-          "200": {	
-            "description": "Success. The response describes a link.",	
-            "schema": {	
-              "$ref": "#/definitions/LinkerResource"	
-            }	
-          },	
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The response describes a link.",
+            "schema": {
+              "$ref": "#/definitions/LinkerResource"
+            }
+          },
           "201": {
             "description": "Long running operation.",
             "schema": {
               "$ref": "#/definitions/LinkerResource"
             }
-          },	
-          "default": {	
-            "description": "Error response describing why the operation failed.",	
-            "schema": {	
-              "$ref": "#/definitions/ErrorResponse"	
-            }	
-          }	
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
         }
       }
     },
@@ -252,7 +260,7 @@
         ],
         "operationId": "Linker_ValidateHealth",
         "description": "Validate a link.",
-        "x-ms-long-running-operation":true,
+        "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
         },
@@ -383,10 +391,10 @@
     "AuthInfoBase": {
       "description": "The authentication info",
       "discriminator": "authType",
-      "properties":{
-        "authType":{
+      "properties": {
+        "authType": {
           "description": "The authentication type.",
-          "$ref":  "#/definitions/AuthType"
+          "$ref": "#/definitions/AuthType"
         }
       },
       "required": [
@@ -482,7 +490,9 @@
           "$ref": "#/definitions/Resource"
         }
       ],
-      "required": [ "properties" ],
+      "required": [
+        "properties"
+      ],
       "properties": {
         "properties": {
           "description": "The properties of the linker.",
@@ -538,28 +548,28 @@
         }
       }
     },
-    "SourceConfiguration" :{
+    "SourceConfiguration": {
       "description": "A configuration item for source resource",
-        "type": "object",
-        "properties": {
-          "type": {
-            "description": "The type of setting. One of appSettings, connectionStrings, serviceBindings",
-            "type": "string",
-            "enum": [
-              "appSettings",
-              "connectionStrings",
-              "serviceBindings"
-            ],
-            "x-ms-enum": {
-              "name": "type",
-              "modelAsString": true
-            }
-          },
-          "linkConfig": {
-            "description": "The configuration of the linker for appSettings or connectionStrings or serviceBindings",
-            "type": "object"
+      "type": "object",
+      "properties": {
+        "type": {
+          "description": "The type of setting. One of appSettings, connectionStrings, serviceBindings",
+          "type": "string",
+          "enum": [
+            "appSettings",
+            "connectionStrings",
+            "serviceBindings"
+          ],
+          "x-ms-enum": {
+            "name": "type",
+            "modelAsString": true
           }
+        },
+        "linkConfig": {
+          "description": "The configuration of the linker for appSettings or connectionStrings or serviceBindings",
+          "type": "object"
         }
+      }
     },
     "SourceConfigurationResult": {
       "description": "Configurations for source resource, include appSettings, connectionString and serviceBindings",
