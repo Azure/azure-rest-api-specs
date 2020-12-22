@@ -37,11 +37,11 @@ tag: package-locks-2016-09
 ```
 
 ``` yaml $(package-policy)
-tag: package-policy-2020-03
+tag: package-policy-2020-09
 ```
 
 ``` yaml $(package-resources)
-tag: package-resources-2020-06
+tag: package-resources-2020-10
 ```
 
 ``` yaml $(package-subscriptions)
@@ -61,25 +61,50 @@ tag: package-deploymentscripts-2020-10
 ```
 
 ``` yaml $(package-templatespecs)
-tag: package-preview-2020-08
+tag: package-templatespecs-2019-06-preview
 ```
 
+### Tag: package-resources-2020-10
+
+These settings apply only when `--tag=package-resources-2020-10` is specified on the command line.
+
+``` yaml $(tag) == 'package-resources-2020-10'
+input-file:
+- Microsoft.Resources/stable/2020-10-01/resources.json
+```
+
+### Tag: package-policy-2020-09
+
+These settings apply only when `--tag=package-policy-2020-09` is specified on the command line.
+
+``` yaml $(tag) == 'package-policy-2020-09'
+input-file:
+- Microsoft.Authorization/stable/2020-09-01/dataPolicyManifests.json
+- Microsoft.Authorization/stable/2020-09-01/policyAssignments.json
+- Microsoft.Authorization/stable/2020-09-01/policyDefinitions.json
+- Microsoft.Authorization/stable/2020-09-01/policySetDefinitions.json
+
+# Needed when there is more than one input file
+override-info:
+  title: PolicyClient
+```
 
 ### Tag: package-preview-2020-08
 
 These settings apply only when `--tag=package-preview-2020-08` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2020-08'
+``` yaml $(tag) == 'package-preview-2020-08'
 input-file:
   - Microsoft.Solutions/preview/2020-08-21-preview/managedapplications.json
 ```
-### Tag: package-resources-2020-06
 
-These settings apply only when `--tag=package-resources-2020-06` is specified on the command line.
+### Tag: package-resources-2020-08
 
-``` yaml $(tag) == 'package-resources-2020-06'
+These settings apply only when `--tag=package-resources-2020-08` is specified on the command line.
+
+``` yaml $(tag) == 'package-resources-2020-08'
 input-file:
-- Microsoft.Resources/stable/2020-06-01/resources.json
+  - Microsoft.Resources/stable/2020-08-01/resources.json
 ```
 
 ### Tag: package-subscriptions-2020-01
@@ -265,15 +290,6 @@ input-file:
 - Microsoft.Resources/preview/2019-06-01-preview/templateSpecs.json
 ```
 
-### Tag: package-templatespecs-2020-10-preview
-
-These settings apply only when `--tag=package-templatespecs-2020-10-preview` is specified on the command line.
-
-``` yaml $(tag) == 'package-templatespecs-2020-10-preview'
-input-file:
-- Microsoft.Resources/preview/2020-10-01-preview/templateSpecs.json
-```
-
 ### Tag: package-policy-2016-12
 
 These settings apply only when `--tag=package-policy-2016-12` is specified on the command line.
@@ -304,6 +320,15 @@ These settings apply only when `--tag=package-policy-2015-10` is specified on th
 ``` yaml $(tag) == 'package-policy-2015-10'
 input-file:
 - Microsoft.Authorization/preview/2015-10-01-preview/policy.json
+```
+
+### Tag: package-resources-2020-06
+
+These settings apply only when `--tag=package-resources-2020-06` is specified on the command line.
+
+``` yaml $(tag) == 'package-resources-2020-06'
+input-file:
+- Microsoft.Resources/stable/2020-06-01/resources.json
 ```
 
 ### Tag: package-resources-2019-10
@@ -522,6 +547,10 @@ directive:
     where: $.paths
     reason: policy set definition under an extension resource with Microsoft.Management
   - suppress: UniqueResourcePaths
+    from: resources.json
+    where: $.paths
+    reason: route definitions under an extension resource with Microsoft.Management
+  - suppress: UniqueResourcePaths
     from: policyDefinitions.json
     where: $.paths
     reason: policy definition under an extension resource with Microsoft.Management
@@ -564,7 +593,7 @@ directive:
   - suppress: BodyTopLevelProperties
     from: resources.json
     where: $.definitions.GenericResourceExpanded.properties
-    reason: createdTime,changedTime & provisioningState are top-level properties
+    reason: 'createdTime,changedTime & provisioningState are top-level properties'
   - suppress: BodyTopLevelProperties
     from: resources.json
     where: $.definitions.TagDetails.properties
@@ -583,7 +612,7 @@ directive:
     reason: TagDetails will be deprecated soon
   - suppress: XmsResourceInPutResponse
     from: resources.json
-    where: $.paths["/subscriptions/{subscriptionId}/tagNames/{tagName}"].put
+    where: '$.paths["/subscriptions/{subscriptionId}/tagNames/{tagName}"].put'
     reason: TagDetails is not an Azure resource
   - suppress: BodyTopLevelProperties
     from: managedapplications.json
@@ -602,19 +631,19 @@ directive:
     where: $.definitions.GenericResource.properties
     reason: managedBy is a top level property
   - from: deploymentScripts.json
-    suppress: TrackedResourceGetOperation 
+    suppress: TrackedResourceGetOperation
     where: $.definitions.AzureCliScript
     reason: Tooling issue.
   - from: deploymentScripts.json
-    suppress: TrackedResourcePatchOperation 
+    suppress: TrackedResourcePatchOperation
     where: $.definitions.AzureCliScript
     reason: Tooling issue.
   - from: deploymentScripts.json
-    suppress: TrackedResourceGetOperation 
+    suppress: TrackedResourceGetOperation
     where: $.definitions.AzurePowerShellScript
     reason: Tooling issue
   - from: deploymentScripts.json
-    suppress: TrackedResourcePatchOperation 
+    suppress: TrackedResourcePatchOperation
     where: $.definitions.AzurePowerShellScript
     reason: Tooling issue
   - from: deploymentScripts.json
@@ -622,23 +651,23 @@ directive:
     where: $.paths
     reason: OperationsAPI will come from Resources
   - from: deploymentScripts.json
-    suppress: R3006 #BodyTopLevelProperties
-    where: 
-    - $.definitions.DeploymentScript.properties
-    - $.definitions.AzureCliScript.properties
-    - $.definitions.AzurePowerShellScript.properties
+    suppress: R3006
+    where:
+      - $.definitions.DeploymentScript.properties
+      - $.definitions.AzureCliScript.properties
+      - $.definitions.AzurePowerShellScript.properties
     reason: Currently systemData is not allowed
   - suppress: OperationsAPIImplementation
     from: templateSpecs.json
     where: $.paths
     reason: OperationsAPI will come from Resources
-  - suppress: R3006 #BodyTopLevelProperties
+  - suppress: R3006
     from: templateSpecs.json
-    where: 
-    - $.definitions.TemplateSpec.properties
-    - $.definitions.TemplateSpecVersion.properties
-    - $.definitions.TemplateSpecUpdateModel.properties
-    - $.definitions.TemplateSpecVersionUpdateModel.properties
+    where:
+      - $.definitions.TemplateSpec.properties
+      - $.definitions.TemplateSpecVersion.properties
+      - $.definitions.TemplateSpecUpdateModel.properties
+      - $.definitions.TemplateSpecVersionUpdateModel.properties
     reason: Currently systemData is not allowed
   - suppress: TrackedResourceListByImmediateParent
     from: templateSpecs.json
@@ -648,6 +677,36 @@ directive:
     from: templateSpecs.json
     where: $.definitions.TemplateSpecVersion
     reason: Tooling issue
+  - suppress: OperationsAPIImplementation
+    where: $.paths
+    from: dataPolicyManifests.json
+    reason: operation APIs for Microsoft.Authorization are to be defined in RBAC swagger
+  - suppress: EnumInsteadOfBoolean
+    where: $.definitions.DataManifestCustomResourceFunctionDefinition.properties.allowCustomProperties
+    from: dataPolicyManifests.json
+    reason: 'This property can only have two values. '
+  - suppress: EnumInsteadOfBoolean
+    where: $.definitions.DataPolicyManifestProperties.properties.isBuiltInOnly
+    from: dataPolicyManifests.json
+    reason: 'This property can only have two values. '
+  - suppress: PageableOperation
+    where: '$.paths["/providers/Microsoft.Authorization/dataPolicyManifests"].get'
+    from: dataPolicyManifests.json
+    reason: Pagination not supported. The size of the result list is pretty limited
+  - suppress: DescriptionAndTitleMissing
+    where: $.definitions.AliasPathMetadata
+    from: resources.json
+    reason: This was already checked in - not my code
+  - suppress: XmsExamplesRequired
+    where: $.paths
+    from: resources.json
+    reason: Pre-existing lint error. Not related to this version release.
+  - suppress: TopLevelResourcesListByResourceGroup
+    from: policyDefinitions.json
+    reason: Policy definitions are a proxy resource that is only usable on subscriptions or management groups
+  - suppress: TopLevelResourcesListByResourceGroup
+    from: policySetDefinitions.json
+    reason: Policy set definitions are a proxy resource that is only usable on subscriptions or management groups
 ```
 
 ---
@@ -727,4 +786,3 @@ override-info:
 ## AzureResourceSchema
 
 See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
-
