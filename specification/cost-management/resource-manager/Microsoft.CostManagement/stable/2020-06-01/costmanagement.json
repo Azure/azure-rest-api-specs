@@ -1129,7 +1129,7 @@
         }
       }
     },
-    "/{scope}/providers/Microsoft.CostManagement/GenerateDetailedCostReport": {
+    "/{scope}/providers/Microsoft.CostManagement/generateDetailedCostReport": {
       "post": {
         "tags": [
           "UsageDetails"
@@ -2548,9 +2548,13 @@
           "description": "The status of the long running operation.",
           "type": "string",
           "enum": [
-            "Running",
+            "InProgress",
             "Completed",
-            "Failed"
+            "Failed",
+            "Queued",
+            "NoDataFound",
+            "ReadyToDownload",
+            "TimedOut"
           ],
           "x-ms-enum": {
             "name": "OperationStatusType",
