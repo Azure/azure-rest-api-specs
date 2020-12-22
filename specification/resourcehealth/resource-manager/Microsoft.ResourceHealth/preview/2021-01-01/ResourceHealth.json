@@ -1240,17 +1240,10 @@
       "description": "The Get PotentialOutages operation response.",
       "type": "object",
       "properties": {
-        "properties": {
-          "$ref": "#/definitions/potentialoutage",
-          "description": "The potential outage entity properties.",
-          "x-ms-client-flatten": true
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/Resource"
-        }
-      ]
+        "$ref": "#/definitions/potentialoutage",
+        "description": "The potential outage entity properties.",
+        "x-ms-client-flatten": true
+      }
     },
     "potentialoutage": {
       "type": "object",
@@ -1467,7 +1460,7 @@
             },
             "datacenter": {
               "type": "string",
-              "resolveTime": "Datacenter name of the incident."
+              "description": "Datacenter name of the incident."
             },
             "role": {
               "type": "string",
@@ -1475,11 +1468,11 @@
             },
             "instance": {
               "type": "string",
-              "resolveTime": "Instance or cluster name of the incident."
+              "description": "Instance or cluster name of the incident."
             },
             "slice": {
               "type": "string",
-              "resolveTime": "service-specific id of the slice."
+              "description": "service-specific id of the slice."
             }
           }
         },
@@ -1532,7 +1525,7 @@
             },
             "mitigateTime": {
               "type": "string",
-              "resolveTime": "Time when the incident was mitigated."
+              "description": "Time when the incident was mitigated."
             }
           }
         },
@@ -1544,9 +1537,9 @@
               "type": "string",
               "description": "Contact who resolved the incident."
             },
-            "acknowledgeTime": {
+            "resolveTime": {
               "type": "string",
-              "resolveTime": "Time when the incident was resolved."
+              "description": "Time when the incident was resolved."
             }
           }
         }
@@ -1554,7 +1547,7 @@
     },
     "incidentBridge": {
       "description": "Incident bridge information.",
-      "type": "object",
+      "type":"object",
       "properties": {
         "id": {
           "type": "string",
@@ -1562,7 +1555,7 @@
         },
         "incidentId": {
           "type": "string",
-          "resolveTime": "Incident id."
+          "description": "Incident id."
         },
         "bridgeURI": {
           "type": "string",
@@ -1570,7 +1563,7 @@
         },
         "bridgeConfId": {
           "type": "string",
-          "resolveTime": "Bridge conference id."
+          "description": "Bridge conference id."
         },
         "expirationTime": {
           "type": "string",
@@ -1578,7 +1571,7 @@
         },
         "phoneNumber": {
           "type": "string",
-          "resolveTime": "Phone number of this bridge."
+          "description": "Phone number of this bridge."
         },
         "bridgeType": {
           "type": "string",
@@ -1586,7 +1579,7 @@
         },
         "bridgeCreationMode": {
           "type": "string",
-          "resolveTime": "Bridge creation mode. ['Auto', 'Manual']."
+          "description": "Bridge creation mode. ['Auto', 'Manual']."
         }
       }
     },
