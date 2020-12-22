@@ -1252,6 +1252,344 @@
         }
       ]
     },
+    "potentialoutage": {
+      "type": "object",
+      "description": "Potential outages detected by Brain.",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "description": "Id for the potential outage."
+        },
+        "title": {
+          "type": "string",
+          "description": "Title for the potential outage."
+        },
+        "summary": {
+          "type": "string",
+          "description": "Summary for the potential outage."
+        },
+        "confidence": {
+          "type": "number",
+          "description": "Confidence score for the potential outage."
+        },
+        "displayConfidence": {
+          "type": "string",
+          "description": "Display confidence score for the potential outage."
+        },
+        "plane": {
+          "type": "string",
+          "description": "Type of the potential outage: control plane or data plane."
+        },
+        "location": {
+          "type": "string",
+          "description": "Location of the potential outage."
+        },
+        "correlatedIncidentCount": {
+          "type": "string",
+          "description": "Number of correlated incidents in the potential outage."
+        },
+        "firstReportTime": {
+          "type": "string",
+          "description": "Time and date the potential outage started to become a potential outage."
+        },
+        "lastReportTime": {
+          "type": "string",
+          "description": "Time and date the potential outage was created."
+        },
+        "rawIds": {
+          "type": "array",
+          "items": {
+            "type": "integer"
+          },
+          "description": "Ids of child raw potential outages."
+        },
+        "duplicateIds": {
+          "type": "array",
+          "items": {
+            "type": "integer"
+          },
+          "description": "Duplicate consolidated outage id."
+        },
+        "outageDeclared": {
+          "type": "boolean",
+          "description": "A value indicating whether there is outage declared for this potential outage."
+        },
+        "expired": {
+          "type": "boolean",
+          "description": "A value indicating whether the potential outage is expired."
+        },
+        "incidents": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/icmIncidents"
+          },
+          "description": "A list of outage incidents."
+        },
+        "isSynthetic": {
+          "type": "boolean",
+          "description": "a value indicating whether the entity is real.No value means non-synthetic."
+        }
+      }
+    },
+    "icmIncidents": {
+      "type": "object",
+      "description": "ICM incidents that are related to a potential outage detected by Brain.",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "description": "Id for the incident."
+        },
+        "severity": {
+          "type": "integer",
+          "description": "Incident severity."
+        },
+        "state": {
+          "type": "string",
+          "description": "Incident state."
+        },
+        "createdDate": {
+          "type": "string",
+          "description": "Incident created date."
+        },
+        "sourceCreateTime": {
+          "type": "string",
+          "description": "The date on which source created incident."
+        },
+        "lastModifiedDate": {
+          "type": "string",
+          "description": "Incident last modified date."
+        },
+        "title": {
+          "type": "string",
+          "description": "Title for the incident."
+        },
+        "summary": {
+          "type": "string",
+          "description": "Summary for the incident."
+        },
+        "description": {
+          "type": "string",
+          "description": "Description for the incident."
+        },
+        "cloudInstanceId": {
+          "type": "integer",
+          "description": "CloudInstanceId or TenantSiloId for the incident 's tenant."
+        },
+        "responsibleServiceId": {
+          "type": "integer",
+          "description": "Service responsible for the incident."
+        },
+        "responsibleTeamId": {
+          "type": "integer",
+          "description": "Team responsible for the incident."
+        },
+        "owningServiceId": {
+          "type": "integer",
+          "description": "Owning service identifier for the incident."
+        },
+        "serviceCategoryId": {
+          "type": "integer",
+          "description": "Id of the service category of the service that owns this incident."
+        },
+        "owningTeamId": {
+          "type": "integer",
+          "description": "Owning team identifier for the incident."
+        },
+        "originatingServiceId": {
+          "type": "integer",
+          "description": "Originating service identifier for the incident."
+        },
+        "isCustomerImpacting": {
+          "type": "boolean",
+          "description": "A value indicating whether this instance is customer impacting."
+        },
+        "isNoise": {
+          "type": "boolean",
+          "description": "A value indicating whether this instance is noise."
+        },
+        "isSecurityRisk": {
+          "type": "boolean",
+          "description": "A value indicating whether this instance is security risk."
+        },
+        "keywords": {
+          "type": "string",
+          "description": "Keywords for the incident."
+        },
+        "type": {
+          "type": "string",
+          "description": "Incident type."
+        },
+        "parentId": {
+          "type": "integer",
+          "description": "Parent incident id."
+        },
+        "impactedServices": {
+          "type": "array",
+          "items": {
+            "type": "integer"
+          },
+          "description": "A collection of impacted services."
+        },
+        "impactedTeams": {
+          "type": "array",
+          "items": {
+            "type": "integer"
+          },
+          "description": "A collection of impacted teams."
+        },
+        "incidentManagerContactId": {
+          "type": "integer",
+          "description": "Incident Manager' s contact id for this incident."
+        },
+        "communicationsManagerContactId": {
+          "type": "integer",
+          "description": "Communication Manager 's contact id for this incident."
+        },
+        "siteReliabilityContactId": {
+          "type": "integer",
+          "description": "Site Reliability Manager' s contact id for this incident."
+        },
+        "diagnosticsLink": {
+          "type": "string",
+          "description": "Diagnostics link for this incident."
+        },
+        "isOutage": {
+          "type": "boolean",
+          "description": "A value indicating whether incident is an outage or not."
+        },
+        "occuringLocation": {
+          "type": "object",
+          "description": "Location of the entity that raised the incident.",
+          "properties":{
+            "environment": {
+              "type": "string",
+              "description": "Environment of the incident."
+            },
+            "datacenter": {
+              "type": "string",
+              "resolveTime": "Datacenter name of the incident."
+            },
+            "role": {
+              "type": "string",
+              "description": "Role name of the incident."
+            },
+            "instance": {
+              "type": "string",
+              "resolveTime": "Instance or cluster name of the incident."
+            },
+            "slice": {
+              "type": "string",
+              "resolveTime": "service-specific id of the slice."
+            }
+          }
+        },
+        "bridges": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/incidentBridge"
+          },
+          "description": "A list of incident bridges."
+        },
+        "owningTenantName": {
+          "type": "string",
+          "description": "Owning service for this incident."
+        },
+        "owningTeamName": {
+          "type": "string",
+          "description": "Owning team for this incident."
+        },
+        "contactAlias": {
+          "type": "string",
+          "description": "Contact alias for the incident."
+        },
+        "createdBy": {
+          "type": "string",
+          "description": "Someone who created the incident."
+        },
+        "impactStartTime": {
+          "type": "string",
+          "description": "Impact start time for the incident."
+        },
+        "acknowledgeBy": {
+          "type": "integer",
+          "description": "Acknowledgement id for the incident."
+        },
+        "incidentManagerAlias": {
+          "type": "string",
+          "description": "Incident manager alias for the incident."
+        },
+        "acknowledgeTime": {
+          "type": "string",
+          "description": "Acknowledge time for the incident."
+        },
+        "mitigateData": {
+          "type": "object",
+          "description": "Mitigate data for the incident.",
+          "properties":{
+            "mitigatedBy": {
+              "type": "string",
+              "description": "Contact who mitigated the incident."
+            },
+            "mitigateTime": {
+              "type": "string",
+              "resolveTime": "Time when the incident was mitigated."
+            }
+          }
+        },
+        "resolveData": {
+          "type": "object",
+          "description": "Resolve data for the incident.",
+          "properties":{
+            "resolvedBy": {
+              "type": "string",
+              "description": "Contact who resolved the incident."
+            },
+            "acknowledgeTime": {
+              "type": "string",
+              "resolveTime": "Time when the incident was resolved."
+            }
+          }
+        }
+      }
+    },
+    "incidentBridge": {
+      "description": "Incident bridge information.",
+      "type": "object",
+      "properties":{
+        "id": {
+          "type": "string",
+          "description": "Bridge id."
+        },
+        "incidentId": {
+          "type": "string",
+          "resolveTime": "Incident id."
+        },
+        "bridgeURI": {
+          "type": "string",
+          "description": "Bridge uri."
+        },
+        "bridgeConfId": {
+          "type": "string",
+          "resolveTime": "Bridge conference id."
+        },
+        "expirationTime": {
+          "type": "string",
+          "description": "Expiration time of this bridge."
+        },
+        "phoneNumber": {
+          "type": "string",
+          "resolveTime": "Phone number of this bridge."
+        },
+        "bridgeType": {
+          "type": "string",
+          "description": "Bridge type."
+        },
+        "bridgeCreationMode": {
+          "type": "string",
+          "resolveTime": "Bridge creation mode. ['Auto', 'Manual']."
+        }
+      }
+    },
     "potentialOutageListResult": {
       "description": "The list of potential outages.",
       "type": "object",
