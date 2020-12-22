@@ -2148,12 +2148,15 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "#/definitions/Resource",
+          "type": "object",
+          "properties": {
+            "location": "string",
+            "eTag": "string"
+          }
         }
       ],
       "properties": {
-        "location": "string",
-        "eTag": "string",
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/QueryProperties",
