@@ -102,6 +102,8 @@ package-name: azure-mgmt-commerce
 package-version: 6.0.0b1
 clear-output-folder: true
 no-namespace-folders: true
+modelerfour:
+  lenient-model-deduplication: true
 ```
 
 ``` yaml $(python) && $(python-mode) == 'update'
