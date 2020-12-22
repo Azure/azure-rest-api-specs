@@ -232,6 +232,15 @@
             "description": "Retrieved managed HSM Pool",
             "schema": {
               "$ref": "#/definitions/ManagedHsm"
+            },
+            "204": {
+              "description": "Request successful. Resource does not exist."
+            },
+            "202": {
+              "description": "Accepted and the operation will complete asynchronously.",
+              "schema": {
+                "$ref": "#/definitions/ManagedHsm"
+              }
             }
           },
           "default": {
