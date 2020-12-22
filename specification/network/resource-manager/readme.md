@@ -86,6 +86,8 @@ input-file:
   - Microsoft.Network/stable/2020-07-01/vmssNetworkInterface.json
   - Microsoft.Network/stable/2020-07-01/vmssPublicIpAddress.json
   - Microsoft.Network/stable/2020-07-01/webapplicationfirewall.json
+  - Microsoft.Network/stable/2020-07-01/cloudServiceNetworkInterface.json
+  - Microsoft.Network/stable/2020-07-01/cloudServicePublicIpAddress.json
 ```
 ### Tag: package-2020-06
 
