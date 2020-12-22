@@ -1236,6 +1236,39 @@
         }
       }
     },
+    "potentialOutagesGetResult": {
+      "description": "The Get PotentialOutages operation response.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/potentialoutage",
+          "description": "The potential outage entity properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/Resource"
+        }
+      ]
+    },
+    "potentialOutageListResult": {
+      "description": "The list of potential outages.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The list of potential outages.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/potentialOutagesGetResult"
+          }
+        },
+        "nextLink": {
+          "description": "The link used to get the next page of potential outages.",
+          "type": "string"
+        }
+      }
+    },
     "operationListResult": {
       "properties": {
         "value": {
