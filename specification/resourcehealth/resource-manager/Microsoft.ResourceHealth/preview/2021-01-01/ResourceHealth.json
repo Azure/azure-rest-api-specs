@@ -1460,7 +1460,7 @@
         "occuringLocation": {
           "type": "object",
           "description": "Location of the entity that raised the incident.",
-          "properties":{
+          "properties": {
             "environment": {
               "type": "string",
               "description": "Environment of the incident."
@@ -1525,7 +1525,7 @@
         "mitigateData": {
           "type": "object",
           "description": "Mitigate data for the incident.",
-          "properties":{
+          "properties": {
             "mitigatedBy": {
               "type": "string",
               "description": "Contact who mitigated the incident."
@@ -1539,7 +1539,7 @@
         "resolveData": {
           "type": "object",
           "description": "Resolve data for the incident.",
-          "properties":{
+          "properties": {
             "resolvedBy": {
               "type": "string",
               "description": "Contact who resolved the incident."
@@ -1555,7 +1555,7 @@
     "incidentBridge": {
       "description": "Incident bridge information.",
       "type": "object",
-      "properties":{
+      "properties": {
         "id": {
           "type": "string",
           "description": "Bridge id."
@@ -1779,6 +1779,17 @@
       "name": "issueName",
       "in": "path",
       "description": "The name of the emerging issue.",
+      "required": true,
+      "type": "string",
+      "enum": [
+        "default"
+      ],
+      "x-ms-parameter-location": "method"
+    },
+    "PotentialOutageNameParameter": {
+      "name": "potentialOutageName",
+      "in": "path",
+      "description": "The name of the potential outage.",
       "required": true,
       "type": "string",
       "enum": [
