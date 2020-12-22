@@ -419,7 +419,7 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataLakeAnalytics/accounts/{accountName}/dataLakeStoreAccounts": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataLakeAnalytics/accounts/{accountName}/DataLakeStoreAccounts": {
       "get": {
         "tags": [
           "DataLakeStoreAccounts"
@@ -511,7 +511,7 @@
         "x-ms-odata": "#/definitions/DataLakeStoreAccountInformation"
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataLakeAnalytics/accounts/{accountName}/dataLakeStoreAccounts/{dataLakeStoreAccountName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataLakeAnalytics/accounts/{accountName}/DataLakeStoreAccounts/{dataLakeStoreAccountName}": {
       "put": {
         "tags": [
           "DataLakeStoreAccounts"
@@ -656,7 +656,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataLakeAnalytics/accounts/{accountName}/storageAccounts": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataLakeAnalytics/accounts/{accountName}/StorageAccounts": {
       "get": {
         "tags": [
           "StorageAccounts"
@@ -748,7 +748,7 @@
         "x-ms-odata": "#/definitions/StorageAccountInformation"
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataLakeAnalytics/accounts/{accountName}/storageAccounts/{storageAccountName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataLakeAnalytics/accounts/{accountName}/StorageAccounts/{storageAccountName}": {
       "put": {
         "tags": [
           "StorageAccounts"
@@ -999,7 +999,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataLakeAnalytics/accounts/{accountName}/storageAccounts/{storageAccountName}/containers/{containerName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataLakeAnalytics/accounts/{accountName}/storageAccounts/{storageAccountName}/Containers/{containerName}": {
       "get": {
         "tags": [
           "StorageAccounts"
@@ -1850,7 +1850,6 @@
           "description": "The default Data Lake Store account associated with this account."
         },
         "dataLakeStoreAccounts": {
-          "readOnly": true,
           "type": "array",
           "items": {
             "$ref": "#/definitions/DataLakeStoreAccountInformation"
@@ -1966,8 +1965,6 @@
         "maxJobCount": {
           "type": "integer",
           "format": "int32",
-          "minimum": 1,
-          "default": 3,
           "description": "The maximum supported jobs running under the account at the same time."
         },
         "systemMaxJobCount": {
@@ -1979,8 +1976,6 @@
         "maxDegreeOfParallelism": {
           "type": "integer",
           "format": "int32",
-          "minimum": 1,
-          "default": 30,
           "description": "The maximum supported degree of parallelism for this account."
         },
         "systemMaxDegreeOfParallelism": {
@@ -2048,9 +2043,7 @@
             "Suspending",
             "Resuming",
             "Deleting",
-            "Deleted",
-            "Undeleting",
-            "Canceled"
+            "Deleted"
           ],
           "x-ms-enum": {
             "name": "DataLakeAnalyticsAccountStatus",
@@ -2062,8 +2055,8 @@
           "readOnly": true,
           "type": "string",
           "enum": [
-            "Active",
-            "Suspended"
+            "active",
+            "suspended"
           ],
           "x-ms-enum": {
             "name": "DataLakeAnalyticsAccountState",
