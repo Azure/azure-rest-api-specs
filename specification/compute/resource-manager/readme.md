@@ -219,8 +219,7 @@ input-file:
 - Microsoft.Compute/stable/2020-06-01/runCommands.json
 - Microsoft.Compute/stable/2019-04-01/skus.json
 - Microsoft.Compute/stable/2020-06-30/disk.json
-- Microsoft.Compute/preview/2020-09-30/gallery.json
-- Microsoft.Compute/preview/2020-09-30/sharedGallery.json
+- Microsoft.Compute/stable/2019-12-01/gallery.json
 - Microsoft.ContainerService/stable/2017-01-31/containerService.json
 - Microsoft.Compute/preview/2020-10-01-preview/cloudService.json
 ```
@@ -244,19 +243,8 @@ input-file:
 - Microsoft.Compute/stable/2020-06-01/runCommands.json
 - Microsoft.Compute/stable/2019-04-01/skus.json
 - Microsoft.Compute/stable/2020-06-30/disk.json
-- Microsoft.Compute/preview/2020-09-30/gallery.json
-- Microsoft.Compute/preview/2020-09-30/sharedGallery.json
+- Microsoft.Compute/stable/2019-12-01/gallery.json
 - Microsoft.ContainerService/stable/2017-01-31/containerService.json
-```
-
-### Tag: package-2020-09-30-only
-
-These settings apply only when `--tag=package-2020-09-30-only` is specified on the command line.
-
-``` yaml $(tag) == 'package-2020-09-30-only'
-input-file:
-- Microsoft.Compute/preview/2020-09-30/gallery.json
-- Microsoft.Compute/preview/2020-09-30/sharedGallery.json
 ```
 
 ### Tag: package-2020-06-30
