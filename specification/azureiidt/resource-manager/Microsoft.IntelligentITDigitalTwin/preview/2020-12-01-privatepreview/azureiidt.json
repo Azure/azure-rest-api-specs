@@ -133,7 +133,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/ITDigitalTwinPatch"
+              "$ref": "#/definitions/ITDigitalTwin"
             }
           },
           "default": {
@@ -660,7 +660,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IntelligentITDigitalTwin/digitalTwins/{iidtName}/tests/{testName}": {
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IntelligentITDigitalTwin/digitalTwins/{iidtName}/tests/{testName}": {
       "put": {
         "tags": [
           "ITDigitalTwinTests"
@@ -839,7 +839,7 @@
           }
         },
         "x-ms-examples": {
-          "Delete an IT Digital Twin Asset.": {
+          "Delete an IT Digital Twin Test.": {
             "$ref": "./examples/DeleteAITDigitalTwinTest.json"
           }
         }
@@ -952,8 +952,8 @@
           }
         }
       }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IntelligentITDigitalTwin/digitalTwins/{iidtName}/testPlans/{testPlanName}": {
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IntelligentITDigitalTwin/digitalTwins/{iidtName}/testPlans/{testPlanName}": {
       "put": {
         "tags": [
           "ITDigitalTwinTestPlans"
@@ -1132,7 +1132,7 @@
           }
         },
         "x-ms-examples": {
-          "Delete an IT Digital Twin Asset.": {
+          "Delete an IT Digital Twin TestPlan.": {
             "$ref": "./examples/DeleteAITDigitalTwinTestPlan.json"
           }
         }
@@ -1245,8 +1245,8 @@
           }
         }
       }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IntelligentITDigitalTwin/digitalTwins/{iidtName}/executionPlans/{executionPlanName}": {
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IntelligentITDigitalTwin/digitalTwins/{iidtName}/executionPlans/{executionPlanName}": {
       "put": {
         "tags": [
           "ITDigitalTwinExecutionPlans"
@@ -1425,7 +1425,7 @@
           }
         },
         "x-ms-examples": {
-          "Delete an IT Digital Twin Asset.": {
+          "Delete an IT Digital Twin ExecutionPlan.": {
             "$ref": "./examples/DeleteAITDigitalTwinExecutionPlan.json"
           }
         }
@@ -1538,8 +1538,8 @@
           }
         }
       }
-    }
-  },
+        }
+      },
   "definitions": {
     "ITDigitalTwinProperties": {
       "properties": {
@@ -1641,6 +1641,10 @@
           "description": "List the properties of IT Digital Twin",
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/ITDigitalTwinProperties"
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "description": "The system data."
         }
       },
       "allOf": [
@@ -1846,7 +1850,7 @@
       },
       "description": "A list of asset."
     },
-    "TestProperties": {
+        "TestProperties": {
       "properties": {
         "author": {
           "type": "string",
@@ -1922,8 +1926,8 @@
         }
       },
       "description": "A list of tests."
-    },
-    "TestPlanProperties": {
+        },
+        "TestPlanProperties": {
       "properties": {
         "pathList": {
           "type": "array",
@@ -1989,8 +1993,8 @@
         }
       },
       "description": "A list of testPlans."
-    },
-    "ExecutionPlanProperties": {
+        },
+        "ExecutionPlanProperties": {
       "properties": {
         "plan": {
           "type": "string",
@@ -2074,8 +2078,8 @@
         }
       },
       "description": "A list of executionPlans."
-    }
-  },
+        }
+      },
   "parameters": {
     "SubscriptionIdParameter": {
       "name": "subscriptionId",
