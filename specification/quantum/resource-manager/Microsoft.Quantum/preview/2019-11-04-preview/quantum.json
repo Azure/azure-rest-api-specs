@@ -78,7 +78,7 @@
         "description": "Creates or updates a workspace resource.",
         "operationId": "Workspaces_CreateOrUpdate",
         "x-ms-examples": {
-          "QuantumWorkspacesGet": {
+          "QuantumWorkspacesPut": {
             "$ref": "./examples/quantumWorkspacesPut.json"
           }
         },
@@ -133,7 +133,7 @@
       "patch": {
         "operationId": "Workspaces_Update",
         "x-ms-examples": {
-          "QuantumWorkspacesGet": {
+          "QuantumWorkspacesUpdate": {
             "$ref": "./examples/quantumWorkspacesPatch.json"
           }
         },
@@ -180,7 +180,7 @@
         "description": "Deletes a Workspace resource.",
         "operationId": "Workspaces_Delete",
         "x-ms-examples": {
-          "QuantumWorkspacesGet": {
+          "QuantumWorkspacesDelete": {
             "$ref": "./examples/quantumWorkspacesDelete.json"
           }
         },
@@ -225,8 +225,8 @@
       "get": {
         "operationId": "Workspaces_ListBySubscription",
         "x-ms-examples": {
-          "QuantumWorkspacesGet": {
-            "$ref": "./examples/quantumWorkspacesList.json"
+          "QuantumWorkspacesListBySubscription": {
+            "$ref": "./examples/quantumWorkspacesListSubscription.json"
           }
         },
         "description": "Gets the list of Workspaces within a Subscription.",
@@ -261,8 +261,8 @@
       "get": {
         "operationId": "Workspaces_ListByResourceGroup",
         "x-ms-examples": {
-          "QuantumWorkspacesGet": {
-            "$ref": "./examples/quantumWorkspacesList.json"
+          "QuantumWorkspacesListByResourceGroup": {
+            "$ref": "./examples/quantumWorkspacesListResourceGroup.json"
           }
         },
         "description": "Gets the list of Workspaces within a resource group.",
@@ -301,7 +301,7 @@
         "description": "Returns the list of all providers available for the given location.",
         "operationId": "Offerings_List",
         "x-ms-examples": {
-          "QuantumWorkspacesGet": {
+          "ProviderList": {
             "$ref": "./examples/providerList.json"
           }
         },
@@ -410,7 +410,7 @@
         },
         "nextLink": {
           "type": "string",
-          "description": "Link to the next set of results. Not empty if Value contains incomplete list of Namespaces."
+          "description": "Link to the next set of results. Not empty if Value contains incomplete list of Workspaces."
         }
       },
       "description": "The response of a list Workspaces operation."
@@ -426,7 +426,7 @@
         },
         "nextLink": {
           "type": "string",
-          "description": "Link to the next set of results. Not empty if Value contains incomplete list of Namespaces."
+          "description": "Link to the next set of results. Not empty if Value contains incomplete list of Providers."
         }
       },
       "description": "The response of a list Providers operation."
@@ -505,7 +505,8 @@
             "name": "UsableStatus",
             "modelAsString": true
           },
-          "description": "Whether the current workspace is ready to accept Jobs."
+          "description": "Whether the current workspace is ready to accept Jobs.",
+          "readOnly": true
         },
         "provisioningState": {
           "type": "string",
@@ -522,11 +523,13 @@
             "name": "ProvisioningStatus",
             "modelAsString": true
           },
-          "description": "Provisioning status field"
+          "description": "Provisioning status field",
+          "readOnly": true
         },
         "resourceUsageId": {
           "type": "string",
-          "description": "Unique id to track resource usage."
+          "description": "Unique id to track resource usage.",
+          "readOnly": true
         },
         "storageAccount": {
           "type": "string",
