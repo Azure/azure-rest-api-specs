@@ -212,7 +212,7 @@
         "x-ms-odata": "#/definitions/DataLakeAnalyticsAccountBasic"
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataLakeAnalytics/accounts/{accountName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataLakeAnalytics/accounts/{name}": {
       "put": {
         "tags": [
           "Accounts"
@@ -227,7 +227,7 @@
             "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/AccountNameParameter"
+            "$ref": "#/parameters/NameParameter"
           },
           {
             "name": "parameters",
@@ -283,7 +283,7 @@
             "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/AccountNameParameter"
+            "$ref": "#/parameters/NameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -323,7 +323,7 @@
             "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/AccountNameParameter"
+            "$ref": "#/parameters/NameParameter"
           },
           {
             "name": "parameters",
@@ -385,7 +385,7 @@
             "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/AccountNameParameter"
+            "$ref": "#/parameters/NameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -419,7 +419,7 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataLakeAnalytics/accounts/{accountName}/DataLakeStoreAccounts": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataLakeAnalytics/accounts/{accountName}/DataLakeStoreAccounts/": {
       "get": {
         "tags": [
           "DataLakeStoreAccounts"
@@ -516,7 +516,7 @@
         "tags": [
           "DataLakeStoreAccounts"
         ],
-        "operationId": "DataLakeStoreAccounts_Add",
+        "operationId": "Account_AddDataLakeStoreAccount",
         "description": "Updates the specified Data Lake Analytics account to include the additional Data Lake Store account.",
         "parameters": [
           {
@@ -568,7 +568,7 @@
         "tags": [
           "DataLakeStoreAccounts"
         ],
-        "operationId": "DataLakeStoreAccounts_Get",
+        "operationId": "Account_GetDataLakeStoreAccount",
         "description": "Gets the specified Data Lake Store account details in the specified Data Lake Analytics account.",
         "parameters": [
           {
@@ -615,7 +615,7 @@
         "tags": [
           "DataLakeStoreAccounts"
         ],
-        "operationId": "DataLakeStoreAccounts_Delete",
+        "operationId": "Account_DeleteDataLakeStoreAccount",
         "description": "Updates the Data Lake Analytics account specified to remove the specified Data Lake Store account.",
         "parameters": [
           {
@@ -656,7 +656,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataLakeAnalytics/accounts/{accountName}/StorageAccounts": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataLakeAnalytics/accounts/{accountName}/StorageAccounts/": {
       "get": {
         "tags": [
           "StorageAccounts"
@@ -753,7 +753,7 @@
         "tags": [
           "StorageAccounts"
         ],
-        "operationId": "StorageAccounts_Add",
+        "operationId": "Account_AddStorageAccount",
         "description": "Updates the specified Data Lake Analytics account to add an Azure Storage account.",
         "parameters": [
           {
@@ -806,7 +806,7 @@
         "tags": [
           "StorageAccounts"
         ],
-        "operationId": "StorageAccounts_Get",
+        "operationId": "Account_GetStorageAccount",
         "description": "Gets the specified Azure Storage account linked to the given Data Lake Analytics account.",
         "parameters": [
           {
@@ -853,7 +853,7 @@
         "tags": [
           "StorageAccounts"
         ],
-        "operationId": "StorageAccounts_Update",
+        "operationId": "Account_UpdateStorageAccount",
         "description": "Updates the Data Lake Analytics account to replace Azure Storage blob account details, such as the access key and/or suffix.",
         "parameters": [
           {
@@ -906,7 +906,7 @@
         "tags": [
           "StorageAccounts"
         ],
-        "operationId": "StorageAccounts_Delete",
+        "operationId": "Account_DeleteStorageAccount",
         "description": "Updates the specified Data Lake Analytics account to remove an Azure Storage account.",
         "parameters": [
           {
@@ -947,7 +947,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataLakeAnalytics/accounts/{accountName}/storageAccounts/{storageAccountName}/containers": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataLakeAnalytics/accounts/{accountName}/storageAccounts/{storageAccountName}/Containers": {
       "get": {
         "tags": [
           "StorageAccounts"
@@ -1055,7 +1055,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataLakeAnalytics/accounts/{accountName}/storageAccounts/{storageAccountName}/containers/{containerName}/listSasTokens": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataLakeAnalytics/accounts/{accountName}/storageAccounts/{storageAccountName}/Containers/{containerName}/listSasTokens": {
       "post": {
         "tags": [
           "StorageAccounts"
@@ -3426,6 +3426,14 @@
       "type": "string",
       "x-ms-parameter-location": "method",
       "description": "The name of the Azure resource group."
+    },
+    "NameParameter": {
+      "name": "name",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "description": "The name of the Data Lake Analytics account."
     },
     "AccountNameParameter": {
       "name": "accountName",
