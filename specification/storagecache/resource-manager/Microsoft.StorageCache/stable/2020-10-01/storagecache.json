@@ -586,7 +586,13 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "Cache has started generating debug info."
+          },
           "202": {
+            "description": "Cache has started generating debug info."
+          },
+          "204": {
             "description": "Cache has started generating debug info."
           },
           "default": {
@@ -1657,7 +1663,11 @@
             "$ref": "#/definitions/NfsAccessRule"
           }
         }
-      }
+      },
+      "required": [
+        "name",
+        "accessRules"
+      ]
     },
     "NfsAccessRule": {
       "description": "Rule to place restrictions on portions of the cache namespace being presented to clients.",
@@ -1714,7 +1724,11 @@
           "type": "string",
           "default": "-2"
         }
-      }
+      },
+      "required": [
+        "scope",
+        "access"
+      ]
     },
     "KeyVaultKeyReference": {
       "description": "Describes a reference to Key Vault Key.",
