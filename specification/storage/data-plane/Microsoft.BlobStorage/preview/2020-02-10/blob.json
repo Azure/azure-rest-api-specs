@@ -3144,6 +3144,11 @@
                 "type": "string",
                 "description": "A DateTime value returned by the service that uniquely identifies the blob. The value of this header indicates the blob version, and may be used in subsequent requests to access this version of the blob."
               },
+              "x-ms-is-current-version": {
+                "x-ms-client-name": "IsCurrentVersion",
+                "type": "boolean",
+                "description": "The value of this header indicates whether version of this blob is a current version, see also x-ms-version-id header."
+              },
               "Accept-Ranges": {
                 "type": "string",
                 "description": "Indicates that the service supports requests for partial blob content."
@@ -3393,6 +3398,11 @@
                 "x-ms-client-name": "VersionId",
                 "type": "string",
                 "description": "A DateTime value returned by the service that uniquely identifies the blob. The value of this header indicates the blob version, and may be used in subsequent requests to access this version of the blob."
+              },
+              "x-ms-is-current-version": {
+                "x-ms-client-name": "IsCurrentVersion",
+                "type": "boolean",
+                "description": "The value of this header indicates whether version of this blob is a current version, see also x-ms-version-id header."
               },
               "Accept-Ranges": {
                 "type": "string",
