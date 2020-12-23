@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "BatchManagement",
-    "version": "2020-09-01",
+    "version": "2021-01-01",
     "x-ms-code-generation-settings": {
       "name": "BatchManagementClient"
     }
@@ -54,6 +54,9 @@
           },
           "BatchAccountCreate_SystemAssignedIdentity": {
             "$ref": "./examples/BatchAccountCreate_SystemAssignedIdentity.json"
+          },
+          "BatchAccountCreate_UserAssignedIdentity": {
+            "$ref": "./examples/BatchAccountCreate_UserAssignedIdentity.json"
           }
         },
         "description": "Creates a new Batch account with the specified parameters. Existing accounts cannot be updated with this API and should instead be updated with the Update Batch Account API.",
@@ -115,7 +118,10 @@
             }
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
       },
       "patch": {
         "tags": [
@@ -219,7 +225,10 @@
             }
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
       },
       "get": {
         "tags": [
@@ -1259,8 +1268,7 @@
               "$ref": "#/definitions/CloudError"
             }
           }
-        },
-        "x-ms-long-running-operation": true
+        }
       },
       "patch": {
         "tags": [
@@ -1359,9 +1367,6 @@
           "200": {
             "description": "The operation was successful."
           },
-          "204": {
-            "description": "The operation was successful."
-          },
           "202": {
             "description": "The operation will be completed asynchronously.",
             "headers": {
@@ -1376,6 +1381,9 @@
               }
             }
           },
+          "204": {
+            "description": "The operation was successful."
+          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
@@ -1383,7 +1391,10 @@
             }
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
       },
       "get": {
         "tags": [
@@ -1736,22 +1747,11 @@
               "$ref": "#/definitions/PrivateEndpointConnection"
             }
           },
+          "202": {
+            "description": "The operation was accepted and will be performed in the background."
+          },
           "204": {
             "description": "The operation was successful."
-          },
-          "202": {
-            "description": "The operation will be completed asynchronously.",
-            "headers": {
-              "Location": {
-                "description": "The URL of the resource used to check the status of the asynchronous operation.",
-                "type": "string"
-              },
-              "Retry-After": {
-                "description": "Suggested delay to check the status of the asynchronous operation. The value is an integer that represents the seconds.",
-                "type": "integer",
-                "format": "int32"
-              }
-            }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -1760,7 +1760,10 @@
             }
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Batch/batchAccounts/{accountName}/pools": {
@@ -1847,8 +1850,8 @@
           "CreatePool - Minimal VirtualMachineConfiguration": {
             "$ref": "./examples/PoolCreate_MinimalVirtualMachineConfiguration.json"
           },
-          "CreatePool - Full Example": {
-            "$ref": "./examples/PoolCreate_FullExample.json"
+          "CreatePool - Full CloudServiceConfiguration": {
+            "$ref": "./examples/PoolCreate_CloudServiceConfiguration.json"
           },
           "CreatePool - Custom Image": {
             "$ref": "./examples/PoolCreate_SharedImageGallery.json"
@@ -1861,6 +1864,12 @@
           },
           "CreatePool - No public IP": {
             "$ref": "./examples/PoolCreate_NoPublicIPAddresses.json"
+          },
+          "CreatePool - UserAssignedIdentities": {
+            "$ref": "./examples/PoolCreate_UserAssignedIdentities.json"
+          },
+          "CreatePool - VirtualMachineConfiguration Extensions": {
+            "$ref": "./examples/PoolCreate_VirtualMachineConfiguration_Extensions.json"
           }
         },
         "parameters": [
@@ -1922,8 +1931,7 @@
               "$ref": "#/definitions/CloudError"
             }
           }
-        },
-        "x-ms-long-running-operation": true
+        }
       },
       "patch": {
         "tags": [
@@ -2031,9 +2039,6 @@
           "200": {
             "description": "The operation was successful."
           },
-          "204": {
-            "description": "The operation was successful."
-          },
           "202": {
             "description": "The operation will be completed asynchronously.",
             "headers": {
@@ -2048,6 +2053,9 @@
               }
             }
           },
+          "204": {
+            "description": "The operation was successful."
+          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
@@ -2055,7 +2063,10 @@
             }
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
       },
       "get": {
         "tags": [
@@ -2066,6 +2077,9 @@
         "x-ms-examples": {
           "GetPool": {
             "$ref": "./examples/PoolGet.json"
+          },
+          "GetPool - VirtualMachineConfiguration Extensions": {
+            "$ref": "./examples/PoolGet_VirtualMachineConfiguration_Extensions.json"
           }
         },
         "parameters": [
@@ -2364,6 +2378,7 @@
           "description": "The type of identity used for the Batch account.",
           "enum": [
             "SystemAssigned",
+            "UserAssigned",
             "None"
           ],
           "x-ms-enum": {
@@ -2375,11 +2390,34 @@
                 "description": "Batch account has a system assigned identity with it."
               },
               {
+                "value": "UserAssigned",
+                "description": "Batch account has user assigned identities with it."
+              },
+              {
                 "value": "None",
                 "description": "Batch account has no identity associated with it. Setting `None` in update account will remove existing identities."
               }
             ]
           }
+        },
+        "userAssignedIdentities": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "object",
+            "properties": {
+              "principalId": {
+                "readOnly": true,
+                "type": "string",
+                "description": "The principal id of user assigned identity."
+              },
+              "clientId": {
+                "readOnly": true,
+                "type": "string",
+                "description": "The client id of user assigned identity."
+              }
+            }
+          },
+          "description": "The list of user identities associated with the Batch account. The user identity dictionary key references will be ARM resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'."
         }
       },
       "description": "The identity of the Batch account, if configured. This is only used when the user specifies 'Microsoft.KeyVault' as their Batch account encryption configuration.",
@@ -2489,7 +2527,7 @@
           "x-nullable": true,
           "type": "integer",
           "format": "int32",
-          "title": "The low-priority core quota for the Batch account.",
+          "title": "The low priority core quota for the Batch account.",
           "description": "For accounts with PoolAllocationMode set to UserSubscription, quota is managed on the subscription so this value is not returned."
         },
         "dedicatedCoreQuotaPerVMFamily": {
@@ -2505,7 +2543,7 @@
           "readOnly": true,
           "x-nullable": false,
           "type": "boolean",
-          "title": "A value indicating whether the core quota for the Batch Account is enforced per Virtual Machine family or not.",
+          "title": "A value indicating whether core quotas per Virtual Machine family are enforced for this account",
           "description": "Batch is transitioning its core quota system for dedicated cores to be enforced per Virtual Machine family. During this transitional phase, the dedicated core quota per Virtual Machine family may not yet be enforced. If this flag is false, dedicated core quota is enforced via the old dedicatedCoreQuota property on the account and does not consider Virtual Machine family. If this flag is true, dedicated core quota is enforced via the dedicatedCoreQuotaPerVMFamily property on the account, and the old dedicatedCoreQuota does not apply."
         },
         "poolQuota": {
@@ -3321,6 +3359,11 @@
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/PoolProperties",
           "description": "The properties associated with the pool."
+        },
+        "identity": {
+          "title": "The type of identity used for the Batch Pool.",
+          "description": "The type of identity used for the Batch Pool.",
+          "$ref": "#/definitions/BatchPoolIdentity"
         }
       },
       "allOf": [
@@ -3543,6 +3586,55 @@
       },
       "description": "Pool properties."
     },
+    "BatchPoolIdentity": {
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The type of identity used for the Batch Pool.",
+          "enum": [
+            "UserAssigned",
+            "None"
+          ],
+          "x-ms-enum": {
+            "name": "PoolIdentityType",
+            "modelAsString": false,
+            "values": [
+              {
+                "value": "UserAssigned",
+                "description": "Batch pool has user assigned identities with it."
+              },
+              {
+                "value": "None",
+                "description": "Batch pool has no identity associated with it. Setting `None` in update pool will remove existing identities."
+              }
+            ]
+          }
+        },
+        "userAssignedIdentities": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "object",
+            "properties": {
+              "principalId": {
+                "readOnly": true,
+                "type": "string",
+                "description": "The principal id of user assigned identity."
+              },
+              "clientId": {
+                "readOnly": true,
+                "type": "string",
+                "description": "The client id of user assigned identity."
+              }
+            }
+          },
+          "description": "The list of user identities associated with the Batch pool. The user identity dictionary key references will be ARM resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'."
+        }
+      },
+      "description": "The identity of the Batch pool, if configured. If the pool identity is updated during update an existing pool, only the new vms which are created after the pool shrinks to 0 will have the updated identities",
+      "required": [
+        "type"
+      ]
+    },
     "DeploymentConfiguration": {
       "properties": {
         "cloudServiceConfiguration": {
@@ -3613,7 +3705,7 @@
         "targetLowPriorityNodes": {
           "type": "integer",
           "format": "int32",
-          "title": "The desired number of low-priority compute nodes in the pool.",
+          "title": "The desired number of low priority compute nodes in the pool.",
           "description": "At least one of targetDedicatedNodes, targetLowPriorityNodes must be set."
         },
         "nodeDeallocationOption": {
@@ -3852,6 +3944,19 @@
           "$ref": "#/definitions/DiskEncryptionConfiguration",
           "title": "The disk encryption configuration for the pool.",
           "description": "If specified, encryption is performed on each node in the pool during node provisioning."
+        },
+        "nodePlacementConfiguration": {
+          "$ref": "#/definitions/NodePlacementConfiguration",
+          "title": "The node placement configuration for the pool.",
+          "description": "This configuration will specify rules on how nodes in the pool will be physically allocated."
+        },
+        "extensions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VMExtension"
+          },
+          "title": "The virtual machine extension for the pool.",
+          "description": "If specified, the extensions mentioned in this configuration will be installed on each node."
         }
       },
       "required": [
@@ -3959,6 +4064,88 @@
         "type"
       ],
       "title": "The configuration for container-enabled pools."
+    },
+    "NodePlacementPolicyType": {
+      "type": "string",
+      "title": "The placement policy for allocating nodes in the pool.",
+      "description": "The default value is regional.",
+      "enum": [
+        "Regional",
+        "Zonal"
+      ],
+      "x-ms-enum": {
+        "name": "NodePlacementPolicyType",
+        "modelAsString": false,
+        "values": [
+          {
+            "value": "Regional",
+            "description": "All nodes in the pool will be allocated in the same region."
+          },
+          {
+            "value": "Zonal",
+            "description": "Nodes in the pool will be spread across different zones with best effort balancing.",
+            "name": "Zonal"
+          }
+        ]
+      }
+    },
+    "NodePlacementConfiguration": {
+      "title": "Node placement configuration for batch pools.",
+      "description": "Allocation configuration used by Batch Service to provision the nodes.",
+      "properties": {
+        "policy": {
+          "$ref": "#/definitions/NodePlacementPolicyType",
+          "title": "Node placement Policy type on Batch Pools.",
+          "description": "Allocation policy used by Batch Service to provision the nodes. If not specified, Batch will use the regional policy."
+        }
+      }
+    },
+    "VMExtension": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "title": "The name of the virtual machine extension."
+        },
+        "publisher": {
+          "type": "string",
+          "title": "The name of the extension handler publisher."
+        },
+        "type": {
+          "type": "string",
+          "title": "The type of the extensions."
+        },
+        "typeHandlerVersion": {
+          "type": "string",
+          "title": "The version of script handler."
+        },
+        "autoUpgradeMinorVersion": {
+          "type": "boolean",
+          "description": "Indicates whether the extension should use a newer minor version if one is available at deployment time. Once deployed, however, the extension will not upgrade minor versions unless redeployed, even with this property set to true."
+        },
+        "settings": {
+          "type": "object",
+          "title": "JSON formatted public settings for the extension."
+        },
+        "protectedSettings": {
+          "x-ms-secret": true,
+          "type": "object",
+          "description": "The extension can contain either protectedSettings or protectedSettingsFromKeyVault or no protected settings at all. "
+        },
+        "provisionAfterExtensions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "title": "The collection of extension names.",
+          "description": "Collection of extension names after which this extension needs to be provisioned."
+        }
+      },
+      "required": [
+        "name",
+        "publisher",
+        "type"
+      ],
+      "title": "The configuration for virtual machine extensions."
     },
     "WindowsConfiguration": {
       "properties": {
@@ -4519,7 +4706,7 @@
         "targetLowPriorityNodes": {
           "type": "integer",
           "format": "int32",
-          "title": "The desired number of low-priority compute nodes in the pool."
+          "title": "The desired number of low priority compute nodes in the pool."
         },
         "resizeTimeout": {
           "type": "string",

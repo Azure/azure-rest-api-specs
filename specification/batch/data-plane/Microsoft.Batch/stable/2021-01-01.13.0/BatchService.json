@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "BatchService",
-    "version": "2020-09-01.12.0",
+    "version": "2021-01-01.13.0",
     "description": "A client for issuing REST requests to the Azure Batch service.",
     "x-ms-code-generation-settings": {
       "name": "BatchServiceClient"
@@ -5979,6 +5979,9 @@
           "Add a VirtualMachineConfiguration pool with containers": {
             "$ref": "./examples/PoolAdd_VirtualMachineConfigurationWithContainers.json"
           },
+          "Add a VirtualMachineConfiguration pool with extensions": {
+            "$ref": "./examples/PoolAdd_VirtualMachineConfigurationWithExtensions.json"
+          },
           "Add a pool with mount drive specified": {
             "$ref": "./examples/PoolAdd_MountConfiguration.json"
           }
@@ -6523,6 +6526,9 @@
         "x-ms-examples": {
           "Pool get": {
             "$ref": "./examples/PoolGet_Basic.json"
+          },
+          "Pool get with virtual machine extensions": {
+            "$ref": "./examples/PoolGet_VirtualMachineConfigurationWithExtensions.json"
           }
         },
         "description": "Gets information about the specified Pool.",
@@ -10638,6 +10644,281 @@
           }
         }
       }
+    },
+    "/pools/{poolId}/nodes/{nodeId}/extensions/{extensionName}": {
+      "get": {
+        "tags": [
+          "ComputeNodes"
+        ],
+        "operationId": "ComputeNodeExtension_Get",
+        "x-ms-examples": {
+          "Node Extension get": {
+            "$ref": "./examples/ComputeNodeExtensionGet.json"
+          }
+        },
+        "summary": "Gets information about the specified Compute Node Extension.",
+        "x-ms-request-id": "request-id",
+        "parameters": [
+          {
+            "name": "poolId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The ID of the Pool that contains the Compute Node."
+          },
+          {
+            "name": "nodeId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The ID of the Compute Node that contains the extensions."
+          },
+          {
+            "name": "extensionName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the of the Compute Node Extension that you want to get information about."
+          },
+          {
+            "name": "$select",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "An OData $select clause.",
+            "x-ms-parameter-grouping": {
+              "postfix": "Options"
+            }
+          },
+          {
+            "name": "timeout",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "default": 30,
+            "description": "The maximum time that the server can spend processing the request, in seconds. The default is 30 seconds.",
+            "x-ms-parameter-grouping": {
+              "postfix": "Options"
+            }
+          },
+          {
+            "name": "client-request-id",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "format": "uuid",
+            "description": "The caller-generated request identity, in the form of a GUID with no decoration such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.",
+            "x-ms-parameter-grouping": {
+              "postfix": "Options"
+            },
+            "x-ms-client-request-id": true
+          },
+          {
+            "name": "return-client-request-id",
+            "default": false,
+            "in": "header",
+            "required": false,
+            "type": "boolean",
+            "description": "Whether the server should return the client-request-id in the response.",
+            "x-ms-parameter-grouping": {
+              "postfix": "Options"
+            }
+          },
+          {
+            "name": "ocp-date",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "format": "date-time-rfc1123",
+            "description": "The time the request was issued. Client libraries typically set this to the current system clock time; set it explicitly if you are calling the REST API directly.",
+            "x-ms-parameter-grouping": {
+              "postfix": "Options"
+            }
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "headers": {
+              "client-request-id": {
+                "description": "The client-request-id provided by the client during the request. This will be returned only if the return-client-request-id parameter was set to true.",
+                "type": "string",
+                "format": "uuid"
+              },
+              "request-id": {
+                "description": "A unique identifier for the request that was made to the Batch service. If a request is consistently failing and you have verified that the request is properly formulated, you may use this value to report the error to Microsoft. In your report, include the value of this request ID, the approximate time that the request was made, the Batch Account against which the request was made, and the region that Account resides in.",
+                "type": "string",
+                "format": "uuid"
+              },
+              "ETag": {
+                "description": "The ETag HTTP response header. This is an opaque string. You can use it to detect whether the resource has changed between requests. In particular, you can pass the ETag to one of the If-Modified-Since, If-Unmodified-Since, If-Match or If-None-Match headers.",
+                "type": "string"
+              },
+              "Last-Modified": {
+                "description": "The time at which the resource was last modified.",
+                "type": "string",
+                "format": "date-time-rfc1123"
+              }
+            },
+            "description": "A response containing the Compute Node Extension.",
+            "schema": {
+              "$ref": "#/definitions/NodeVMExtension"
+            }
+          },
+          "default": {
+            "description": "The error from the Batch service.",
+            "schema": {
+              "$ref": "#/definitions/BatchError"
+            }
+          }
+        }
+      }
+    },
+    "/pools/{poolId}/nodes/{nodeId}/extensions": {
+      "get": {
+        "tags": [
+          "ComputeNodes"
+        ],
+        "x-ms-pageable": {
+          "nextLinkName": "odata.nextLink"
+        },
+        "operationId": "ComputeNodeExtension_List",
+        "x-ms-examples": {
+          "Node list": {
+            "$ref": "./examples/ComputeNodeExtensionList.json"
+          }
+        },
+        "summary": "Lists the Compute Nodes Extensions in the specified Pool.",
+        "x-ms-request-id": "request-id",
+        "parameters": [
+          {
+            "name": "poolId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The ID of the Pool that contains Compute Node."
+          },
+          {
+            "name": "nodeId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The ID of the Compute Node that you want to list extensions."
+          },
+          {
+            "name": "$select",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "An OData $select clause.",
+            "x-ms-parameter-grouping": {
+              "postfix": "Options"
+            }
+          },
+          {
+            "name": "maxresults",
+            "x-ms-client-name": "maxResults",
+            "default": 1000,
+            "minimum": 1,
+            "maximum": 1000,
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "description": "The maximum number of items to return in the response. A maximum of 1000 Compute Nodes can be returned.",
+            "x-ms-parameter-grouping": {
+              "postfix": "Options"
+            }
+          },
+          {
+            "name": "timeout",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "default": 30,
+            "description": "The maximum time that the server can spend processing the request, in seconds. The default is 30 seconds.",
+            "x-ms-parameter-grouping": {
+              "postfix": "Options"
+            }
+          },
+          {
+            "name": "client-request-id",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "format": "uuid",
+            "description": "The caller-generated request identity, in the form of a GUID with no decoration such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.",
+            "x-ms-parameter-grouping": {
+              "postfix": "Options"
+            },
+            "x-ms-client-request-id": true
+          },
+          {
+            "name": "return-client-request-id",
+            "default": false,
+            "in": "header",
+            "required": false,
+            "type": "boolean",
+            "description": "Whether the server should return the client-request-id in the response.",
+            "x-ms-parameter-grouping": {
+              "postfix": "Options"
+            }
+          },
+          {
+            "name": "ocp-date",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "format": "date-time-rfc1123",
+            "description": "The time the request was issued. Client libraries typically set this to the current system clock time; set it explicitly if you are calling the REST API directly.",
+            "x-ms-parameter-grouping": {
+              "postfix": "Options"
+            }
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "headers": {
+              "client-request-id": {
+                "description": "The client-request-id provided by the client during the request. This will be returned only if the return-client-request-id parameter was set to true.",
+                "type": "string",
+                "format": "uuid"
+              },
+              "request-id": {
+                "description": "A unique identifier for the request that was made to the Batch service. If a request is consistently failing and you have verified that the request is properly formulated, you may use this value to report the error to Microsoft. In your report, include the value of this request ID, the approximate time that the request was made, the Batch Account against which the request was made, and the region that Account resides in.",
+                "type": "string",
+                "format": "uuid"
+              },
+              "ETag": {
+                "description": "The ETag HTTP response header. This is an opaque string. You can use it to detect whether the resource has changed between requests. In particular, you can pass the ETag to one of the If-Modified-Since, If-Unmodified-Since, If-Match or If-None-Match headers.",
+                "type": "string"
+              },
+              "Last-Modified": {
+                "description": "The time at which the resource was last modified.",
+                "type": "string",
+                "format": "date-time-rfc1123"
+              }
+            },
+            "description": "A response containing the list of extensions on Compute Nodes.",
+            "schema": {
+              "$ref": "#/definitions/NodeVMExtensionList"
+            }
+          },
+          "default": {
+            "description": "The error from the Batch service.",
+            "schema": {
+              "$ref": "#/definitions/BatchError"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -11837,7 +12118,7 @@
         },
         "allowLowPriorityNode": {
           "type": "boolean",
-          "title": "Whether the Job Manager Task may run on a low-priority Compute Node.",
+          "title": "Whether the Job Manager Task may run on a low priority Compute Node.",
           "description": "The default value is true."
         }
       },
@@ -12189,13 +12470,13 @@
         "targetLowPriorityNodes": {
           "type": "integer",
           "format": "int32",
-          "title": "The desired number of low-priority Compute Nodes in the Pool.",
+          "title": "The desired number of low priority Compute Nodes in the Pool.",
           "description": "This property must not be specified if enableAutoScale is set to true. If enableAutoScale is set to false, then you must set either targetDedicatedNodes, targetLowPriorityNodes, or both."
         },
         "enableAutoScale": {
           "type": "boolean",
           "title": "Whether the Pool size should automatically adjust over time.",
-          "description": "If false, at least one of targetDedicateNodes and targetLowPriorityNodes must be specified. If true, the autoScaleFormula element is required. The Pool automatically resizes according to the formula. The default value is false."
+          "description": "If false, at least one of targetDedicatedNodes and targetLowPriorityNodes must be specified. If true, the autoScaleFormula element is required. The Pool automatically resizes according to the formula. The default value is false."
         },
         "autoScaleFormula": {
           "type": "string",
@@ -13529,6 +13810,19 @@
           "$ref": "#/definitions/DiskEncryptionConfiguration",
           "title": "The disk encryption configuration for the pool.",
           "description": "If specified, encryption is performed on each node in the pool during node provisioning."
+        },
+        "nodePlacementConfiguration": {
+          "$ref": "#/definitions/NodePlacementConfiguration",
+          "title": "The node placement configuration for the pool.",
+          "description": "This configuration will specify rules on how nodes in the pool will be physically allocated."
+        },
+        "extensions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VMExtension"
+          },
+          "title": "The virtual machine extension for the pool.",
+          "description": "If specified, the extensions mentioned in this configuration will be installed on each node."
         }
       },
       "required": [
@@ -13619,7 +13913,7 @@
               "values": [
                 {
                   "value": "osdisk",
-                  "description": "The temporary disk on the compute node is encrypted. On Linux this encryption applies to other partitions (such as those on mounted data disks) when encryption occurs at boot time.",
+                  "description": "The OS Disk on the compute node is encrypted.",
                   "name": "OsDisk"
                 },
                 {
@@ -13635,6 +13929,195 @@
         }
       },
       "description": "The disk encryption configuration applied on compute nodes in the pool. Disk encryption configuration is not supported on Linux pool created with Shared Image Gallery Image."
+    },
+    "NodePlacementPolicyType": {
+      "type": "string",
+      "title": "The placement policy for allocating nodes in the pool.",
+      "description": "The default value is regional.",
+      "enum": [
+        "regional",
+        "zonal"
+      ],
+      "x-ms-enum": {
+        "name": "NodePlacementPolicyType",
+        "modelAsString": false,
+        "values": [
+          {
+            "value": "regional",
+            "description": "All nodes in the pool will be allocated in the same region."
+          },
+          {
+            "value": "zonal",
+            "description": "Nodes in the pool will be spread across different availability zones with best effort balancing."
+          }
+        ]
+      }
+    },
+    "NodePlacementConfiguration": {
+      "properties": {
+        "policy": {
+          "$ref": "#/definitions/NodePlacementPolicyType",
+          "title": "Node placement Policy type on Batch Pools.",
+          "description": "Allocation policy used by Batch Service to provision the nodes. If not specified, Batch will use the regional policy."
+        }
+      }
+    },
+    "VMExtension": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "title": "The name of the virtual machine extension."
+        },
+        "publisher": {
+          "type": "string",
+          "title": "The name of the extension handler publisher."
+        },
+        "type": {
+          "type": "string",
+          "title": "The type of the extensions."
+        },
+        "typeHandlerVersion": {
+          "type": "string",
+          "title": "The version of script handler."
+        },
+        "autoUpgradeMinorVersion": {
+          "type": "boolean",
+          "description": "Indicates whether the extension should use a newer minor version if one is available at deployment time. Once deployed, however, the extension will not upgrade minor versions unless redeployed, even with this property set to true."
+        },
+        "settings": {
+          "type": "object",
+          "title": "JSON formatted public settings for the extension."
+        },
+        "protectedSettings": {
+          "type": "object",
+          "description": "The extension can contain either protectedSettings or protectedSettingsFromKeyVault or no protected settings at all. "
+        },
+        "provisionAfterExtensions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "title": "The collection of extension names.",
+          "description": "Collection of extension names after which this extension needs to be provisioned."
+        }
+      },
+      "required": [
+        "name",
+        "publisher",
+        "type"
+      ],
+      "title": "The configuration for virtual machine extensions."
+    },
+    "InstanceViewStatus": {
+      "properties": {
+        "code": {
+          "readOnly": true,
+          "type": "string",
+          "title": "The status code."
+        },
+        "displayStatus": {
+          "readOnly": true,
+          "type": "string",
+          "title": "The localized label for the status."
+        },
+        "level": {
+          "readOnly": true,
+          "type": "string",
+          "title": "Level code.",
+          "enum": [
+            "error",
+            "info",
+            "warning"
+          ],
+          "x-ms-enum": {
+            "name": "StatusLevelTypes",
+            "modelAsString": false,
+            "values": [
+              {
+                "value": "error"
+              },
+              {
+                "value": "info"
+              },
+              {
+                "value": "warning"
+              }
+            ]
+          }
+        },
+        "message": {
+          "readOnly": true,
+          "type": "string",
+          "title": "The detailed status message."
+        },
+        "time": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The time of the status."
+        }
+      },
+      "title": "The instance view status."
+    },
+    "VMExtensionInstanceView": {
+      "properties": {
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "title": "The name of the vm extension instance view."
+        },
+        "statuses": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/InstanceViewStatus"
+          },
+          "description": "The resource status information."
+        },
+        "subStatuses": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/InstanceViewStatus"
+          },
+          "description": "The resource status information."
+        }
+      },
+      "title": "The vm extension instance view."
+    },
+    "NodeVMExtension": {
+      "properties": {
+        "provisioningState": {
+          "readOnly": true,
+          "type": "string",
+          "title": "The provisioning state of the virtual machine extension."
+        },
+        "vmExtension": {
+          "$ref": "#/definitions/VMExtension",
+          "title": "The name of the extension handler publisher."
+        },
+        "instanceView": {
+          "$ref": "#/definitions/VMExtensionInstanceView",
+          "readOnly": true,
+          "title": "The virtual machine extension instance view."
+        }
+      },
+      "title": "The configuration for virtual machine extension instance view."
+    },
+    "NodeVMExtensionList": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NodeVMExtension"
+          },
+          "title": "The list of Compute Node extensions."
+        },
+        "odata.nextLink": {
+          "type": "string",
+          "title": "The URL to get the next set of results."
+        }
+      },
+      "title": "The result of listing the Compute Node extensions in a Node."
     },
     "IPAddressProvisioningType": {
       "type": "string",
@@ -13858,8 +14341,8 @@
         "currentLowPriorityNodes": {
           "type": "integer",
           "format": "int32",
-          "title": "The number of low-priority Compute Nodes currently in the Pool.",
-          "description": "Low-priority Compute Nodes which have been preempted are included in this count."
+          "title": "The number of low priority Compute Nodes currently in the Pool.",
+          "description": "Low priority Compute Nodes which have been preempted are included in this count."
         },
         "targetDedicatedNodes": {
           "type": "integer",
@@ -13869,12 +14352,12 @@
         "targetLowPriorityNodes": {
           "type": "integer",
           "format": "int32",
-          "title": "The desired number of low-priority Compute Nodes in the Pool."
+          "title": "The desired number of low priority Compute Nodes in the Pool."
         },
         "enableAutoScale": {
           "type": "boolean",
           "title": "Whether the Pool size should automatically adjust over time.",
-          "description": "If false, at least one of targetDedicateNodes and targetLowPriorityNodes must be specified. If true, the autoScaleFormula property is required and the Pool automatically resizes according to the formula. The default value is false."
+          "description": "If false, at least one of targetDedicatedNodes and targetLowPriorityNodes must be specified. If true, the autoScaleFormula property is required and the Pool automatically resizes according to the formula. The default value is false."
         },
         "autoScaleFormula": {
           "type": "string",
@@ -13966,6 +14449,11 @@
           },
           "title": "A list of file systems to mount on each node in the pool.",
           "description": "This supports Azure Files, NFS, CIFS/SMB, and Blobfuse."
+        },
+        "identity": {
+          "title": "The identity type of the pool.",
+          "description": "Whether or not the pool uses a Managed Pool Identity.",
+          "$ref": "#/definitions/BatchPoolIdentity"
         }
       },
       "title": "A Pool in the Azure Batch service."
@@ -14012,13 +14500,13 @@
         "targetLowPriorityNodes": {
           "type": "integer",
           "format": "int32",
-          "title": "The desired number of low-priority Compute Nodes in the Pool.",
+          "title": "The desired number of low priority Compute Nodes in the Pool.",
           "description": "This property must not be specified if enableAutoScale is set to true. If enableAutoScale is set to false, then you must set either targetDedicatedNodes, targetLowPriorityNodes, or both."
         },
         "enableAutoScale": {
           "type": "boolean",
           "title": "Whether the Pool size should automatically adjust over time.",
-          "description": "If false, at least one of targetDedicateNodes and targetLowPriorityNodes must be specified. If true, the autoScaleFormula property is required and the Pool automatically resizes according to the formula. The default value is false."
+          "description": "If false, at least one of targetDedicatedNodes and targetLowPriorityNodes must be specified. If true, the autoScaleFormula property is required and the Pool automatically resizes according to the formula. The default value is false."
         },
         "autoScaleFormula": {
           "type": "string",
@@ -15620,7 +16108,7 @@
         "targetLowPriorityNodes": {
           "type": "integer",
           "format": "int32",
-          "title": "The desired number of low-priority Compute Nodes in the Pool."
+          "title": "The desired number of low priority Compute Nodes in the Pool."
         },
         "resizeTimeout": {
           "type": "string",
@@ -16695,6 +17183,65 @@
         "relativeMountPath"
       ],
       "title": "Information used to connect to an Azure Fileshare."
+    },
+    "BatchPoolIdentity": {
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The type of identity used for the Batch Pool.",
+          "enum": [
+            "userAssigned",
+            "none"
+          ],
+          "x-ms-enum": {
+            "name": "PoolIdentityType",
+            "modelAsString": false,
+            "values": [
+              {
+                "value": "userAssigned",
+                "description": "Batch pool has user assigned identities with it."
+              },
+              {
+                "value": "none",
+                "description": "Batch pool has no identity associated with it. Setting `None` in update pool will remove existing identities."
+              }
+            ]
+          }
+        },
+        "userAssignedIdentities": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/UserAssignedIdentity"
+          },
+          "description": "The list of user identities associated with the Batch pool. The user identity dictionary key references will be ARM resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'."
+        }
+      },
+      "description": "The identity of the Batch pool, if configured.",
+      "required": [
+        "type"
+      ]
+    },
+    "UserAssignedIdentity": {
+      "properties": {
+        "resourceId": {
+          "type": "string",
+          "description": "The ARM resource id of the user assigned identity"
+        },
+        "clientId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The client id of the user assigned identity."
+        },
+        "principalId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The principal id of the user assigned identity."
+        }
+      },
+      "description": "The user assigned Identity",
+      "required": [
+        "resourceId"
+      ]
     }
   },
   "parameters": {

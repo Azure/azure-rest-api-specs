@@ -4,7 +4,7 @@
     "resourceGroupName": "default-azurebatch-japaneast",
     "accountName": "sampleacct",
     "poolName": "testpool",
-    "api-version": "2020-09-01",
+    "api-version": "2021-01-01",
     "parameters": {
       "properties": {
         "vmSize": "STANDARD_D4",
@@ -40,6 +40,9 @@
                 "OsDisk",
                 "TemporaryDisk"
               ]
+            },
+            "nodePlacementConfiguration": {
+              "policy": "Zonal"
             }
           }
         },
@@ -139,6 +142,9 @@
                   "OsDisk",
                   "TemporaryDisk"
                 ]
+              },
+              "nodePlacementConfiguration": {
+                "policy": "Zonal"
               }
             }
           },

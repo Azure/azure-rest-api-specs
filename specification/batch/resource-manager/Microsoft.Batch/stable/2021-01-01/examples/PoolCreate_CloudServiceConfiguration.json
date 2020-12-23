@@ -4,7 +4,7 @@
     "resourceGroupName": "default-azurebatch-japaneast",
     "accountName": "sampleacct",
     "poolName": "testpool",
-    "api-version": "2020-09-01",
+    "api-version": "2021-01-01",
     "parameters": {
       "properties": {
         "displayName": "my-pool-name",
@@ -27,35 +27,6 @@
             "ipAddressIds": [
               "/subscriptions/subid1/resourceGroups/rg13/providers/Microsoft.Network/publicIPAddresses/ip135",
               "/subscriptions/subid2/resourceGroups/rg24/providers/Microsoft.Network/publicIPAddresses/ip268"
-            ]
-          },
-          "endpointConfiguration": {
-            "inboundNatPools": [
-              {
-                "name": "testnat",
-                "protocol": "TCP",
-                "backendPort": 12001,
-                "frontendPortRangeStart": 15000,
-                "frontendPortRangeEnd": 15100,
-                "networkSecurityGroupRules": [
-                  {
-                    "access": "Allow",
-                    "sourceAddressPrefix": "192.100.12.45",
-                    "priority": 150,
-                    "sourcePortRanges": [
-                      "*"
-                    ]
-                  },
-                  {
-                    "access": "Deny",
-                    "sourceAddressPrefix": "*",
-                    "priority": 3500,
-                    "sourcePortRanges": [
-                      "*"
-                    ]
-                  }
-                ]
-              }
             ]
           }
         },
@@ -104,7 +75,7 @@
         "userAccounts": [
           {
             "name": "username1",
-            "password": "examplepassword",
+            "password": "<ExamplePassword>",
             "elevationLevel": "Admin",
             "linuxUserConfiguration": {
               "sshPrivateKey": "sshprivatekeyvalue",
@@ -180,35 +151,6 @@
               "ipAddressIds": [
                 "/subscriptions/subid1/resourceGroups/rg13/providers/Microsoft.Network/publicIPAddresses/ip135",
                 "/subscriptions/subid2/resourceGroups/rg24/providers/Microsoft.Network/publicIPAddresses/ip268"
-              ]
-            },
-            "endpointConfiguration": {
-              "inboundNatPools": [
-                {
-                  "name": "testnat",
-                  "protocol": "TCP",
-                  "backendPort": 12001,
-                  "frontendPortRangeStart": 15000,
-                  "frontendPortRangeEnd": 15100,
-                  "networkSecurityGroupRules": [
-                    {
-                      "access": "Allow",
-                      "sourceAddressPrefix": "192.100.12.45",
-                      "priority": 150,
-                      "sourcePortRanges": [
-                        "*"
-                      ]
-                    },
-                    {
-                      "access": "Deny",
-                      "sourceAddressPrefix": "*",
-                      "priority": 3500,
-                      "sourcePortRanges": [
-                        "*"
-                      ]
-                    }
-                  ]
-                }
               ]
             }
           },
