@@ -1240,9 +1240,11 @@
       "description": "The Get PotentialOutages operation response.",
       "type": "object",
       "properties": {
-        "$ref": "#/definitions/potentialoutage",
-        "description": "The potential outage entity properties.",
-        "x-ms-client-flatten": true
+        "properties": {
+          "$ref": "#/definitions/potentialoutage",
+          "description": "The potential outage entity properties.",
+          "x-ms-client-flatten": true
+        }
       }
     },
     "potentialoutage": {
@@ -1547,7 +1549,7 @@
     },
     "incidentBridge": {
       "description": "Incident bridge information.",
-      "type":"object",
+      "type": "object",
       "properties": {
         "id": {
           "type": "string",
