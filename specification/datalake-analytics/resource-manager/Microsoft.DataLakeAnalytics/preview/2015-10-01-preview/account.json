@@ -212,6 +212,103 @@
         "x-ms-odata": "#/definitions/DataLakeAnalyticsAccountBasic"
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataLakeAnalytics/accounts/{accountName}": {
+      "get": {
+        "tags": [
+          "Account"
+        ],
+        "operationId": "Account_Get",
+        "description": "Gets details of the specified Data Lake Analytics account.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the Data Lake Analytics account to retrieve."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the details of the specified account.",
+            "schema": {
+              "$ref": "#/definitions/DataLakeAnalyticsAccount"
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            },
+            "description": ""
+          }
+        },
+        "x-ms-examples": {
+          "Gets details of the specified Data Lake Analytics account.": {
+            "$ref": "./examples/Accounts_Get.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Accounts"
+        ],
+        "operationId": "Account_Delete",
+        "description": "Begins the delete process for the Data Lake Analytics account object specified by the account name.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the Data Lake Analytics account to retrieve."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully deleted the specified account."
+          },
+          "202": {
+            "description": "Successfully initiated the deletion of the specified account."
+          },
+          "204": {
+            "description": "The specified account was not found."
+          },
+          "404": {
+            "description": ""
+          },
+          "default": {
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            },
+            "description": ""
+          }
+        },
+        "x-ms-examples": {
+          "Begins the delete process for the Data Lake Analytics account object specified by the account name.": {
+            "$ref": "./examples/Accounts_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataLakeAnalytics/accounts/{name}": {
       "put": {
         "tags": [
@@ -227,7 +324,11 @@
             "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/NameParameter"
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the Data Lake Analytics account to retrieve."
           },
           {
             "name": "parameters",
@@ -269,46 +370,6 @@
         },
         "x-ms-long-running-operation": true
       },
-      "get": {
-        "tags": [
-          "Account"
-        ],
-        "operationId": "Account_Get",
-        "description": "Gets details of the specified Data Lake Analytics account.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/NameParameter"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successfully retrieved the details of the specified account.",
-            "schema": {
-              "$ref": "#/definitions/DataLakeAnalyticsAccount"
-            }
-          },
-          "default": {
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
-            },
-            "description": ""
-          }
-        },
-        "x-ms-examples": {
-          "Gets details of the specified Data Lake Analytics account.": {
-            "$ref": "./examples/Accounts_Get.json"
-          }
-        }
-      },
       "patch": {
         "tags": [
           "Accounts"
@@ -323,7 +384,11 @@
             "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/NameParameter"
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the Data Lake Analytics account to update."
           },
           {
             "name": "parameters",
@@ -370,53 +435,6 @@
           }
         },
         "x-ms-long-running-operation": true
-      },
-      "delete": {
-        "tags": [
-          "Accounts"
-        ],
-        "operationId": "Account_Delete",
-        "description": "Begins the delete process for the Data Lake Analytics account object specified by the account name.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/NameParameter"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successfully deleted the specified account."
-          },
-          "202": {
-            "description": "Successfully initiated the deletion of the specified account."
-          },
-          "204": {
-            "description": "The specified account was not found."
-          },
-          "404": {
-            "description": ""
-          },
-          "default": {
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
-            },
-            "description": ""
-          }
-        },
-        "x-ms-examples": {
-          "Begins the delete process for the Data Lake Analytics account object specified by the account name.": {
-            "$ref": "./examples/Accounts_Delete.json"
-          }
-        },
-        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataLakeAnalytics/accounts/{accountName}/DataLakeStoreAccounts/": {
@@ -424,7 +442,7 @@
         "tags": [
           "DataLakeStoreAccounts"
         ],
-        "operationId": "DataLakeStoreAccounts_ListByAccount",
+        "operationId": "Account_ListDataLakeStoreAccounts",
         "description": "Gets the first page of Data Lake Store accounts linked to the specified Data Lake Analytics account. The response includes a link to the next page, if any.",
         "parameters": [
           {
@@ -661,7 +679,7 @@
         "tags": [
           "StorageAccounts"
         ],
-        "operationId": "StorageAccounts_ListByAccount",
+        "operationId": "Account_ListStorageAccounts",
         "description": "Gets the first page of Azure Storage accounts, if any, linked to the specified Data Lake Analytics account. The response includes a link to the next page, if any.",
         "parameters": [
           {
