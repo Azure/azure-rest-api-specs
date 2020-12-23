@@ -361,7 +361,7 @@
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "List all it digital twins in a subscription.": {
+          "List all it digital twin operations.": {
             "$ref": "./examples/ListOperations.json"
           }
         }
@@ -660,7 +660,7 @@
         }
       }
     },
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IntelligentITDigitalTwin/digitalTwins/{iidtName}/tests/{testName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IntelligentITDigitalTwin/digitalTwins/{iidtName}/tests/{testName}": {
       "put": {
         "tags": [
           "ITDigitalTwinTests"
@@ -952,8 +952,8 @@
           }
         }
       }
-        },
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IntelligentITDigitalTwin/digitalTwins/{iidtName}/testPlans/{testPlanName}": {
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IntelligentITDigitalTwin/digitalTwins/{iidtName}/testPlans/{testPlanName}": {
       "put": {
         "tags": [
           "ITDigitalTwinTestPlans"
@@ -1245,8 +1245,8 @@
           }
         }
       }
-        },
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IntelligentITDigitalTwin/digitalTwins/{iidtName}/executionPlans/{executionPlanName}": {
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IntelligentITDigitalTwin/digitalTwins/{iidtName}/executionPlans/{executionPlanName}": {
       "put": {
         "tags": [
           "ITDigitalTwinExecutionPlans"
@@ -1538,8 +1538,8 @@
           }
         }
       }
-        }
-      },
+    }
+  },
   "definitions": {
     "ITDigitalTwinProperties": {
       "properties": {
@@ -1850,7 +1850,7 @@
       },
       "description": "A list of asset."
     },
-        "TestProperties": {
+    "TestProperties": {
       "properties": {
         "author": {
           "type": "string",
@@ -1865,7 +1865,7 @@
           "description": "types for the test.",
           "enum": [
             "Default",
-            "Customized"
+            "Custom"
           ],
           "x-ms-enum": {
             "name": "testType",
@@ -1926,8 +1926,8 @@
         }
       },
       "description": "A list of tests."
-        },
-        "TestPlanProperties": {
+    },
+    "TestPlanProperties": {
       "properties": {
         "pathList": {
           "type": "array",
@@ -1993,8 +1993,8 @@
         }
       },
       "description": "A list of testPlans."
-        },
-        "ExecutionPlanProperties": {
+    },
+    "ExecutionPlanProperties": {
       "properties": {
         "plan": {
           "type": "string",
@@ -2011,9 +2011,10 @@
           "type": "string",
           "description": "The status on the execution plan",
           "enum": [
-            "Started",
-            "Succeeded",
-            "Failed"
+            "Queued",
+            "In-Progress",
+            "Completed",
+            "Unknown"
           ],
           "x-ms-enum": {
             "name": "executionStatus",
@@ -2026,7 +2027,16 @@
         },
         "result": {
           "type": "string",
-          "description": "Result for the test execution."
+          "description": "Result for the test execution.",
+          "enum": [
+            "Passed",
+            "Failed",
+            "Pending"
+          ],
+          "x-ms-enum": {
+            "name": "result",
+            "modelAsString": true
+          }
         }
       },
       "description": "Describes the properties of an digitalTwins/executionPlans."
@@ -2078,8 +2088,8 @@
         }
       },
       "description": "A list of executionPlans."
-        }
-      },
+    }
+  },
   "parameters": {
     "SubscriptionIdParameter": {
       "name": "subscriptionId",
