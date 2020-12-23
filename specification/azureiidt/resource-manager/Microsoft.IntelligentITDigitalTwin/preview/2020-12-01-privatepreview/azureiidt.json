@@ -118,7 +118,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ITDigitalTwin"
+              "$ref": "#/definitions/ITDigitalTwinPatch"
             },
             "description": "Parameters supplied to the Update IT Digital Twin operation."
           },
@@ -133,7 +133,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/ITDigitalTwin"
+              "$ref": "#/definitions/ITDigitalTwinPatch"
             }
           },
           "default": {
@@ -660,7 +660,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IntelligentITDigitalTwin/digitalTwins/{iidtName}/tests/{testName}": {
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IntelligentITDigitalTwin/digitalTwins/{iidtName}/tests/{testName}": {
       "put": {
         "tags": [
           "ITDigitalTwinTests"
@@ -694,7 +694,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Asset"
+              "$ref": "#/definitions/Test"
             },
             "description": "Parameters supplied to the Create it digital twin tests operation."
           },
@@ -883,7 +883,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/Asset"
+              "$ref": "#/definitions/Test"
             }
           },
           "default": {
@@ -952,8 +952,8 @@
           }
         }
       }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IntelligentITDigitalTwin/digitalTwins/{iidtName}/testPlans/{testPlanName}": {
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IntelligentITDigitalTwin/digitalTwins/{iidtName}/testPlans/{testPlanName}": {
       "put": {
         "tags": [
           "ITDigitalTwinTestPlans"
@@ -987,7 +987,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Asset"
+              "$ref": "#/definitions/TestPlan"
             },
             "description": "Parameters supplied to the Create it digital twin testPlans operation."
           },
@@ -1176,7 +1176,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/Asset"
+              "$ref": "#/definitions/TestPlan"
             }
           },
           "default": {
@@ -1245,8 +1245,8 @@
           }
         }
       }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IntelligentITDigitalTwin/digitalTwins/{iidtName}/executionPlans/{executionPlanName}": {
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IntelligentITDigitalTwin/digitalTwins/{iidtName}/executionPlans/{executionPlanName}": {
       "put": {
         "tags": [
           "ITDigitalTwinExecutionPlans"
@@ -1280,7 +1280,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Asset"
+              "$ref": "#/definitions/ExecutionPlan"
             },
             "description": "Parameters supplied to the Create it digital twin executionPlans operation."
           },
@@ -1469,7 +1469,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/Asset"
+              "$ref": "#/definitions/ExecutionPlan"
             }
           },
           "default": {
@@ -1538,8 +1538,8 @@
           }
         }
       }
-    }
-  },
+        }
+      },
   "definitions": {
     "ITDigitalTwinProperties": {
       "properties": {
@@ -1748,6 +1748,17 @@
         }
       },
       "description": "Enterprise is a testing environment which has several virtual machines on the cloud and several testing machines on-prem."
+    },
+    "ITDigitalTwinPatch": {
+      "properties": {
+        "properties": {
+          "title": "IT Digital Twins properties",
+          "description": "Properties of the digitalTwins",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ITDigitalTwinProperties"
+        }
+      },
+      "description": "IT Digital Twins definition for patch operation"
     },
     "AssetProperties": {
       "properties": {

@@ -27,3 +27,12 @@ Please also specify `--go-sdks-folder=<path to the root directory of your azure-
 namespace: azureiidt
 output-folder: $(go-sdk-folder)/services/preview/$(namespace)/mgmt/2020-07-15-privatepreview/$(namespace)
 ```
+### Tag: package-2020-12-01 and go
+
+These settings apply only when `--tag=package-2020-12-01-privatepreview --go` is specified on the command line.
+Please also specify `--go-sdks-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+```yaml $(tag) == 'package-2020-12-01-privatepreview' && $(go)
+namespace: azureiidt
+output-folder: $(go-sdk-folder)/services/preview/$(namespace)/mgmt/2020-12-01-privatepreview/$(namespace)
+```
