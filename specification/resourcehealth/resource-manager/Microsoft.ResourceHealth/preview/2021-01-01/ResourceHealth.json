@@ -441,7 +441,7 @@
           "default": {
             "description": "DefaultErrorResponse",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/PotentialOutageErrorResponse"
             }
           }
         },
@@ -474,7 +474,7 @@
           "default": {
             "description": "DefaultErrorResponse",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/PotentialOutageErrorResponse"
             }
           }
         },
@@ -1239,13 +1239,7 @@
     "potentialOutagesGetResult": {
       "description": "The Get PotentialOutages operation response.",
       "type": "object",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/potentialoutage",
-          "description": "The potential outage entity properties.",
-          "x-ms-client-flatten": true
-        }
-      }
+      "$ref": "#/definitions/potentialoutage"
     },
     "potentialoutage": {
       "type": "object",
@@ -1253,7 +1247,8 @@
       "properties": {
         "id": {
           "type": "integer",
-          "description": "Id for the potential outage."
+          "description": "Id for the potential outage.",
+          "format": "int64"
         },
         "title": {
           "type": "string",
@@ -1294,14 +1289,16 @@
         "rawIds": {
           "type": "array",
           "items": {
-            "type": "integer"
+            "type": "integer",
+            "format": "int64"
           },
           "description": "Ids of child raw potential outages."
         },
         "duplicateIds": {
           "type": "array",
           "items": {
-            "type": "integer"
+            "type": "integer",
+            "format": "int64"
           },
           "description": "Duplicate consolidated outage id."
         },
@@ -1332,11 +1329,13 @@
       "properties": {
         "id": {
           "type": "integer",
-          "description": "Id for the incident."
+          "description": "Id for the incident.",
+          "format": "int64"
         },
         "severity": {
           "type": "integer",
-          "description": "Incident severity."
+          "description": "Incident severity.",
+          "format": "int32"
         },
         "state": {
           "type": "string",
@@ -1368,31 +1367,38 @@
         },
         "cloudInstanceId": {
           "type": "integer",
-          "description": "CloudInstanceId or TenantSiloId for the incident 's tenant."
+          "description": "CloudInstanceId or TenantSiloId for the incident 's tenant.",
+          "format": "int64"
         },
         "responsibleServiceId": {
           "type": "integer",
-          "description": "Service responsible for the incident."
+          "description": "Service responsible for the incident.",
+          "format": "int64"
         },
         "responsibleTeamId": {
           "type": "integer",
-          "description": "Team responsible for the incident."
+          "description": "Team responsible for the incident.",
+          "format": "int64"
         },
         "owningServiceId": {
           "type": "integer",
-          "description": "Owning service identifier for the incident."
+          "description": "Owning service identifier for the incident.",
+          "format": "int64"
         },
         "serviceCategoryId": {
           "type": "integer",
-          "description": "Id of the service category of the service that owns this incident."
+          "description": "Id of the service category of the service that owns this incident.",
+          "format": "int64"
         },
         "owningTeamId": {
           "type": "integer",
-          "description": "Owning team identifier for the incident."
+          "description": "Owning team identifier for the incident.",
+          "format": "int64"
         },
         "originatingServiceId": {
           "type": "integer",
-          "description": "Originating service identifier for the incident."
+          "description": "Originating service identifier for the incident.",
+          "format": "int64"
         },
         "isCustomerImpacting": {
           "type": "boolean",
@@ -1416,33 +1422,39 @@
         },
         "parentId": {
           "type": "integer",
-          "description": "Parent incident id."
+          "description": "Parent incident id.",
+          "format": "int64"
         },
         "impactedServices": {
           "type": "array",
           "items": {
-            "type": "integer"
+            "type": "integer",
+            "format": "int64"
           },
           "description": "A collection of impacted services."
         },
         "impactedTeams": {
           "type": "array",
           "items": {
-            "type": "integer"
+            "type": "integer",
+            "format": "int64"
           },
           "description": "A collection of impacted teams."
         },
         "incidentManagerContactId": {
           "type": "integer",
-          "description": "Incident Manager' s contact id for this incident."
+          "description": "Incident Manager' s contact id for this incident.",
+          "format": "int64"
         },
         "communicationsManagerContactId": {
           "type": "integer",
-          "description": "Communication Manager 's contact id for this incident."
+          "description": "Communication Manager 's contact id for this incident.",
+          "format": "int64"
         },
         "siteReliabilityContactId": {
           "type": "integer",
-          "description": "Site Reliability Manager' s contact id for this incident."
+          "description": "Site Reliability Manager' s contact id for this incident.",
+          "format": "int64"
         },
         "diagnosticsLink": {
           "type": "string",
@@ -1507,7 +1519,8 @@
         },
         "acknowledgeBy": {
           "type": "integer",
-          "description": "Acknowledgement id for the incident."
+          "description": "Acknowledgement id for the incident.",
+          "format": "int64"
         },
         "incidentManagerAlias": {
           "type": "string",
@@ -1666,6 +1679,33 @@
           "description": "The error details.",
           "type": "string",
           "readOnly": true
+        }
+      }
+    },
+    "PotentialOutageErrorResponse": {
+      "description": "Error details.",
+      "type": "object",
+      "properties": {
+        "error": {
+          "type": "object",
+          "description": "The error object.",
+          "properties": {
+            "code": {
+              "description": "The error code.",
+              "type": "string",
+              "readOnly": true
+            },
+            "message": {
+              "description": "The error message.",
+              "type": "string",
+              "readOnly": true
+            },
+            "details": {
+              "description": "The error details.",
+              "type": "string",
+              "readOnly": true
+            }
+          }
         }
       }
     },
