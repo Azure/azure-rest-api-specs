@@ -15,5 +15,5 @@ Please also specify `--go-sdks-folder=<path to the root directory of your azure-
 
 ```yaml $(tag) == 'package-2021-01-01-privatepreview' && $(go)
 namespace: servicelinker
-output-folder: $(go-sdks-folder)/services/$(namespace)/mgmt/2021-01-01-privatepreview/$(namespace)
+output-folder: $(go-sdks-folder)/services/preview/$(namespace)/mgmt/2021-01-01-privatepreview/$(namespace)
 ```
