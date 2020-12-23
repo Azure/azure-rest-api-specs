@@ -35,7 +35,7 @@
           "200": {
             "description": "The operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/jobDetailsList"
+              "$ref": "#/definitions/JobDetailsList"
             }
           }
         },
@@ -76,7 +76,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/jobDetails"
+              "$ref": "#/definitions/JobDetails"
             }
           },
           "default": {
@@ -109,7 +109,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/jobDetails"
+              "$ref": "#/definitions/JobDetails"
             }
           }
         ],
@@ -122,13 +122,13 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/jobDetails"
+              "$ref": "#/definitions/JobDetails"
             }
           },
           "201": {
             "description": "Created",
             "schema": {
-              "$ref": "#/definitions/jobDetails"
+              "$ref": "#/definitions/JobDetails"
             }
           },
           "default": {
@@ -198,7 +198,7 @@
           "200": {
             "description": "The operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/providerStatusList"
+              "$ref": "#/definitions/ProviderStatusList"
             }
           },
           "default": {
@@ -233,7 +233,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/blobDetails"
+              "$ref": "#/definitions/BlobDetails"
             }
           }
         ],
@@ -246,7 +246,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/sasUriResponse"
+              "$ref": "#/definitions/SasUriResponse"
             }
           },
           "default": {
@@ -260,14 +260,14 @@
     }
   },
   "definitions": {
-    "jobDetailsList": {
+    "JobDetailsList": {
       "description": "List of job details.",
       "properties": {
         "value": {
           "readOnly": true,
           "type": "array",
           "items": {
-            "$ref": "#/definitions/jobDetails"
+            "$ref": "#/definitions/JobDetails"
           }
         },
         "count": {
@@ -282,7 +282,7 @@
         }
       }
     },
-    "jobDetails": {
+    "JobDetails": {
       "description": "Job details.",
       "type": "object",
       "properties": {
@@ -374,7 +374,7 @@
           "description": "The time when a job was successfully cancelled."
         },
         "errorData": {
-          "$ref": "#/definitions/errorData",
+          "$ref": "#/definitions/ErrorData",
           "readOnly": true,
           "description": "The error data for the job. This is expected only when Status 'Failed'."
         }
@@ -386,7 +386,7 @@
         "target"
       ]
     },
-    "blobDetails": {
+    "BlobDetails": {
       "description": "Blob details.",
       "type": "object",
       "properties": {
@@ -403,7 +403,7 @@
         "containerName"
       ]
     },
-    "sasUriResponse": {
+    "SasUriResponse": {
       "description": "Get SAS URL operation response.",
       "type": "object",
       "properties": {
@@ -413,14 +413,14 @@
         }
       }
     },
-    "providerStatusList": {
+    "ProviderStatusList": {
       "description": "Providers status.",
       "properties": {
         "value": {
           "readOnly": true,
           "type": "array",
           "items": {
-            "$ref": "#/definitions/providerStatus"
+            "$ref": "#/definitions/ProviderStatus"
           }
         },
         "nextLink": {
@@ -430,7 +430,7 @@
         }
       }
     },
-    "providerStatus": {
+    "ProviderStatus": {
       "description": "Providers status.",
       "properties": {
         "id": {
@@ -456,12 +456,12 @@
           "readOnly": true,
           "type": "array",
           "items": {
-            "$ref": "#/definitions/targetStatus"
+            "$ref": "#/definitions/TargetStatus"
           }
         }
       }
     },
-    "targetStatus": {
+    "TargetStatus": {
       "description": "Target status.",
       "properties": {
         "id": {
@@ -501,11 +501,11 @@
       "description": "Error information returned by the API",
       "properties": {
         "error": {
-          "$ref": "#/definitions/errorData"
+          "$ref": "#/definitions/ErrorData"
         }
       }
     },
-    "errorData": {
+    "ErrorData": {
       "properties": {
         "code": {
           "type": "string",
