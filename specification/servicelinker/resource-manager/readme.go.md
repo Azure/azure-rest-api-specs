@@ -14,6 +14,6 @@ These settings apply only when `--tag=package-2021-01-01-privatepreview --go` is
 Please also specify `--go-sdks-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
 ```yaml $(tag) == 'package-2021-01-01-privatepreview' && $(go)
-namespace: microsoft.servicelinker
+namespace: servicelinker
 output-folder: $(go-sdks-folder)/servicelinker/Generated
 ```
