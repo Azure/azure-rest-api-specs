@@ -774,6 +774,10 @@
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/AnalysisServicesServerProperties",
           "description": "Properties of the provision operation request."
+        },
+        "sku": {
+          "$ref": "#/definitions/ResourceSku",
+          "description": "The SKU of the Analysis Services resource."
         }
       },
       "allOf": [
@@ -902,6 +906,14 @@
             "modelAsString": true
           },
           "description": "The name of the Azure pricing tier to which the SKU applies."
+        },
+        "capacity": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 1,
+          "maximum": 8,
+          "default": 1,
+          "description": "The number of instances in the read only query pool."
         }
       },
       "required": [
@@ -1064,6 +1076,10 @@
         "sku": {
           "$ref": "#/definitions/ResourceSku",
           "description": "The SKU in SKU details for existing resources."
+        },
+        "resourceType": {
+          "type": "string",
+          "description": "The resource type."
         }
       }
     },

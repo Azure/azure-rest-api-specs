@@ -1014,6 +1014,10 @@
           "type": "string",
           "readOnly": true,
           "description": "The full name of the Analysis Services resource."
+        },
+        "sku": {
+          "$ref": "#/definitions/ResourceSku",
+          "description": "The SKU of the Analysis Services resource."
         }
       },
       "allOf": [
@@ -1102,22 +1106,7 @@
           },
           "default": 1,
           "description": "The managed mode of the server (0 = not managed, 1 = managed)."
-        },
-        "serverMonitorMode": {
-          "type": "integer",
-          "format": "int32",
-          "enum": [
-            0,
-            1
-          ],
-          "x-ms-enum": {
-            "modelAsString": false,
-            "name": "ServerMonitorMode"
-          },
-          "default": 1,
-          "description": "The server monitor mode for AS server"
         }
-      }
     },
     "ServerAdministrators": {
       "description": "An array of administrator user identities.",
@@ -1330,6 +1319,10 @@
         "sku": {
           "$ref": "#/definitions/ResourceSku",
           "description": "The SKU in SKU details for existing resources."
+        },
+        "resourceType": {
+          "type": "string",
+          "description": "The resource type."
         }
       }
     },
