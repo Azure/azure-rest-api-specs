@@ -1275,8 +1275,9 @@
           "description": "Location of the potential outage."
         },
         "correlatedIncidentCount": {
-          "type": "string",
-          "description": "Number of correlated incidents in the potential outage."
+          "type": "integer",
+          "description": "Number of correlated incidents in the potential outage.",
+          "format": "int64"
         },
         "firstReportTime": {
           "type": "string",
@@ -1484,6 +1485,10 @@
               "type": "string",
               "description": "Instance or cluster name of the incident."
             },
+            "component": {
+              "type": "string",
+              "description": "Component name of the incident."
+            },
             "slice": {
               "type": "string",
               "description": "service-specific id of the slice."
@@ -1565,12 +1570,14 @@
       "type": "object",
       "properties": {
         "id": {
-          "type": "string",
-          "description": "Bridge id."
+          "type": "integer",
+          "description": "Bridge id.",
+          "format": "int64"
         },
         "incidentId": {
-          "type": "string",
-          "description": "Incident id."
+          "type": "integer",
+          "description": "Incident id.",
+          "format": "int64"
         },
         "bridgeURI": {
           "type": "string",
