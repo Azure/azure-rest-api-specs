@@ -5,7 +5,7 @@
     "description": "Azure Quantum REST API client",
     "version": "2019-11-04-preview"
   },
-  "host": "app-jobscheduler-prod.azurewebsites.net",
+  "host": "quantum.azure.com",
   "schemes": [
     "https"
   ],
@@ -352,21 +352,25 @@
         "creationTime": {
           "type": "string",
           "readOnly": true,
+          "format": "date-time",
           "description": "The creation time of the job."
         },
         "beginExecutionTime": {
           "type": "string",
           "readOnly": true,
+          "format": "date-time",
           "description": "The time when the job began execution."
         },
         "endExecutionTime": {
           "type": "string",
           "readOnly": true,
+          "format": "date-time",
           "description": "The time when the job finished execution."
         },
         "cancellationTime": {
           "type": "string",
           "readOnly": true,
+          "format": "date-time",
           "description": "The time when a job was successfully cancelled."
         },
         "errorData": {
