@@ -689,7 +689,7 @@ input-file:
  - ./Microsoft.Sql/preview/2020-08-01-preview/SyncMembers.json
  - ./Microsoft.Sql/preview/2020-08-01-preview/TdeCertificates.json
  - ./Microsoft.Sql/preview/2020-08-01-preview/TimeZones.json
- - ./Microsoft.Sql/preview/2020-08-01-preview/TransparentDataEncryption.json
+ - ./Microsoft.Sql/preview/2020-08-01-preview/TransparentDataEncryptions.json
  - ./Microsoft.Sql/preview/2020-08-01-preview/VirtualClusters.json
  - ./Microsoft.Sql/preview/2020-08-01-preview/VirtualNetworkRules.json
  - ./Microsoft.Sql/preview/2020-08-01-preview/WorkloadClassifiers.json
@@ -807,7 +807,7 @@ input-file:
  - ./Microsoft.Sql/preview/2020-02-02-preview/SyncMembers.json
  - ./Microsoft.Sql/preview/2020-02-02-preview/TdeCertificates.json
  - ./Microsoft.Sql/preview/2020-02-02-preview/TimeZones.json
- - ./Microsoft.Sql/preview/2020-02-02-preview/TransparentDataEncryption.json
+ - ./Microsoft.Sql/preview/2020-02-02-preview/TransparentDataEncryptions.json
  - ./Microsoft.Sql/preview/2020-02-02-preview/VirtualClusters.json
  - ./Microsoft.Sql/preview/2020-02-02-preview/VirtualNetworkRules.json
  - ./Microsoft.Sql/preview/2020-02-02-preview/WorkloadClassifiers.json
