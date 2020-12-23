@@ -165,7 +165,7 @@
           "description": "The display name"
         },
         "isDefault": {
-          "type": "string",
+          "type": "boolean",
           "description": "Whether or not the version is the default version."
         },
         "componentVersions": {
@@ -373,11 +373,13 @@
         },
         "currentValue": {
           "description": "The current usage.",
-          "type": "integer"
+          "type": "integer",
+          "format": "int32"
         },
         "limit": {
           "description": "The maximum allowed usage.",
-          "type": "integer"
+          "type": "integer",
+          "format": "int64"
         },
         "name": {
           "description": "The details about the localizable name of the used resource.",

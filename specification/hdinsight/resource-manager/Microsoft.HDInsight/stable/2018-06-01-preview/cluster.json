@@ -858,6 +858,7 @@
         },
         "diskSizeGB": {
           "type": "integer",
+          "format": "int32",
           "description": "ReadOnly. The DiskSize in GB. Do not set this value.",
           "readOnly": true
         }
@@ -956,6 +957,10 @@
             "$ref": "./scriptActions.json#/definitions/ScriptAction"
           },
           "description": "The list of script actions on the role."
+        },
+        "encryptDataDisks": {
+          "type": "boolean",
+          "description": "Indicates whether encrypt the data disks."
         }
       },
       "description": "Describes a role on the cluster."
@@ -1001,6 +1006,14 @@
         "msiResourceId": {
           "type": "string",
           "description": "The managed identity (MSI) that is allowed to access the storage account, only to be specified for Azure Data Lake Storage Gen 2."
+        },
+        "saskey": {
+          "type": "string",
+          "description": "The shared access signature."
+        },
+        "fileshare": {
+          "type": "string",
+          "description": "The file share name."
         }
       },
       "description": "The storage Account."
@@ -1221,6 +1234,10 @@
           "type": "string",
           "description": "The version of the cluster."
         },
+        "clusterHdpVersion": {
+          "type": "string",
+          "description": "The hdp version of the cluster."
+        },
         "osType": {
           "type": "string",
           "description": "The type of operating system.",
@@ -1313,6 +1330,10 @@
         "encryptionInTransitProperties": {
           "$ref": "#/definitions/EncryptionInTransitProperties",
           "description": "The encryption-in-transit properties."
+        },
+        "storageProfile": {
+          "$ref": "#/definitions/StorageProfile",
+          "description": "The storage profile."
         },
         "minSupportedTlsVersion": {
           "type": "string",
@@ -1547,6 +1568,10 @@
                 "readOnly": true,
                 "type": "string",
                 "description": "The client id of user assigned identity."
+              },
+              "tenantId": {
+                "type": "string",
+                "description": "The tenant id of user assigned identity."
               }
             }
           },
