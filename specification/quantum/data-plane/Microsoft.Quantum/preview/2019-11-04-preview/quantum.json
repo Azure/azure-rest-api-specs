@@ -88,7 +88,7 @@
         }
       },
       "put": {
-        "operationId": "Jobs_Put",
+        "operationId": "Jobs_Create",
         "description": "Create a job.",
         "parameters": [
           {
@@ -104,7 +104,7 @@
             "$ref": "#/parameters/jobIdParameter"
           },
           {
-            "name": "jobDefinition",
+            "name": "job",
             "description": "The complete metadata of the job to submit.",
             "in": "body",
             "required": true,
@@ -140,7 +140,7 @@
         }
       },
       "delete": {
-        "operationId": "Jobs_Delete",
+        "operationId": "Jobs_Cancel",
         "description": "Cancel a job.",
         "parameters": [
           {
