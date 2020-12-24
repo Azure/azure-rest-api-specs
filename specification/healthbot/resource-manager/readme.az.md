@@ -10,3 +10,12 @@ az:
 az-output-folder: $(azure-cli-extension-folder)/src/healthbot
 python-sdk-output-folder: "$(az-output-folder)/azext_healthbot/vendored_sdks/healthbot"
 ```
+
+``` yaml 
+directive:
+    - where:
+          group: healthbot bot
+      set:
+          group: healthbot
+
+```
