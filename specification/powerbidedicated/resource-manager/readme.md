@@ -26,9 +26,18 @@ These are the global settings for the PowerBIDedicated API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2017-10-01
+tag: package-2020-12-28
 ```
 
+
+### Tag: package-2020-12-28
+
+These settings apply only when `--tag=package-2020-12-28` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-12-28'
+input-file:
+- Microsoft.PowerBIdedicated/stable/2020-12-28/powerbidedicated.json
+```
 
 ### Tag: package-2017-10-01
 
@@ -97,6 +106,7 @@ output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-powerbidedicated
 ``` yaml $(java) && $(multiapi)
 batch:
   - tag: package-2017-10-01
+  - tag: package-2020-12-28
 ```
 
 ### Tag: package-2017-10-01 and java
@@ -108,6 +118,19 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 java:
   namespace: com.microsoft.azure.management.powerbidedicated.v2017_10_01
   output-folder: $(azure-libraries-for-java-folder)/sdk/powerbidedicated/mgmt-v2017_10_01
+regenerate-manager: true
+generate-interface: true
+```
+
+### Tag: package-2020-12-28 and java
+
+These settings apply only when `--tag=package-2020-12-28 --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2020-12-28' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.powerbidedicated.v2020_12_28
+  output-folder: $(azure-libraries-for-java-folder)/sdk/powerbidedicated/mgmt-v2020_12_28
 regenerate-manager: true
 generate-interface: true
 ```

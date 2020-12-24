@@ -7,7 +7,7 @@ These settings apply only when `--azureresourceschema` is specified on the comma
 ``` yaml $(azureresourceschema) && $(multiapi)
 batch:
   - tag: schema-powerbidedicated-2017-10-01
-
+  - tag: schema-powerbidedicated-2020-12-28
 ```
 
 Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
@@ -20,5 +20,16 @@ output-folder: $(azureresourceschema-folder)/schemas
 # all the input files in this apiVersion
 input-file:
   - Microsoft.PowerBIdedicated/stable/2017-10-01/powerbidedicated.json
+
+```
+
+### Tag: schema-powerbidedicated-2020-12-28 and azureresourceschema
+
+``` yaml $(tag) == 'schema-powerbidedicated-2020-12-28' && $(azureresourceschema)
+output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
+  - Microsoft.PowerBIdedicated/stable/2020-12-28/powerbidedicated.json
 
 ```
