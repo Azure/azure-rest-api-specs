@@ -1270,8 +1270,8 @@
     "ChatMessagePriority": {
       "description": "The chat message priority.",
       "enum": [
-        "Normal",
-        "High"
+        "normal",
+        "high"
       ],
       "type": "string",
       "x-ms-enum": {
@@ -1313,6 +1313,74 @@
         }
       }
     },
+    "ChatMessageType": {
+      "description": "The chat message type.",
+      "enum": [
+        "text",
+        "html",
+        "topicUpdated",
+        "participantAdded",
+        "participantRemoved"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "ChatMessageType",
+        "modelAsString": true
+      }
+    },
+    "ChatParticipant": {
+      "description": "A participant of the chat thread.",
+      "required": [
+        "id"
+      ],
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "The id of the chat participant.",
+          "type": "string",
+          "example": "8:acs:8540c0de-899f-5cce-acb5-3ec493af3800_0e59221d-0c1d-46ae-9544-c963ce56c10b"
+        },
+        "displayName": {
+          "description": "Display name for the chat participant.",
+          "type": "string",
+          "example": "Bob"
+        },
+        "shareHistoryTime": {
+          "format": "date-time",
+          "description": "Time from which the chat history is shared with the participant. The timestamp is in RFC3339 format: `yyyy-MM-ddTHH:mm:ssZ`.",
+          "type": "string",
+          "example": "2020-10-30T10:50:50Z"
+        }
+      }
+    },
+    "ChatMessageContent": {
+      "description": "Content of a chat message.",
+      "type": "object",
+      "properties": {
+        "message": {
+          "description": "Chat message content for type \"text\" or \"html\" messages.",
+          "type": "string",
+          "example": "Come one guys, lets go for lunch together."
+        },
+        "topic": {
+          "description": "Chat message content for type \"topicUpdated\" messages.",
+          "type": "string",
+          "example": "Lunch Chat thread"
+        },
+        "participants": {
+          "description": "Chat message content for type \"participantAdded\" or \"participantRemoved\" messages.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ChatParticipant"
+          }
+        },
+        "initiator": {
+          "description": "Chat message content for type \"participantAdded\" or \"participantRemoved\" messages.",
+          "type": "string",
+          "example": "8:acs:8540c0de-899f-5cce-acb5-3ec493af3800_0e59221d-0c1d-46ae-9544-c963ce56c10b"
+        }
+      }
+    },
     "ChatMessage": {
       "description": "Chat message.",
       "type": "object",
@@ -1324,9 +1392,7 @@
           "example": "123456789"
         },
         "type": {
-          "description": "Type of the chat message.\r\n            \r\nPossible values:\r\n    - Text\r\n    - ThreadActivity/TopicUpdate\r\n    - ThreadActivity/AddMember\r\n    - ThreadActivity/DeleteMember",
-          "type": "string",
-          "example": "Text"
+          "$ref": "#/definitions/ChatMessageType"
         },
         "priority": {
           "$ref": "#/definitions/ChatMessagePriority"
@@ -1337,9 +1403,7 @@
           "readOnly": true
         },
         "content": {
-          "description": "Content of the chat message.",
-          "type": "string",
-          "example": "Come one guys, lets go for lunch together."
+          "$ref": "#/definitions/ChatMessageContent"
         },
         "senderDisplayName": {
           "description": "The display name of the chat message sender. This property is used to populate sender name for push notifications.",
@@ -1403,31 +1467,6 @@
         },
         "priority": {
           "$ref": "#/definitions/ChatMessagePriority"
-        }
-      }
-    },
-    "ChatParticipant": {
-      "description": "A participant of the chat thread.",
-      "required": [
-        "id"
-      ],
-      "type": "object",
-      "properties": {
-        "id": {
-          "description": "The id of the chat participant.",
-          "type": "string",
-          "example": "8:acs:8540c0de-899f-5cce-acb5-3ec493af3800_0e59221d-0c1d-46ae-9544-c963ce56c10b"
-        },
-        "displayName": {
-          "description": "Display name for the chat participant.",
-          "type": "string",
-          "example": "Bob"
-        },
-        "shareHistoryTime": {
-          "format": "date-time",
-          "description": "Time from which the chat history is shared with the participant. The timestamp is in RFC3339 format: `yyyy-MM-ddTHH:mm:ssZ`.",
-          "type": "string",
-          "example": "2020-10-30T10:50:50Z"
         }
       }
     },
