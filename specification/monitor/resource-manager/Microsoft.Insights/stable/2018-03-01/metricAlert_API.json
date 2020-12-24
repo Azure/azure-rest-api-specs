@@ -62,7 +62,7 @@
           "default": {
             "description": "BadRequest",
             "schema": {
-              "$ref": "../../stable/2016-03-01/alertRules_API.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -104,7 +104,7 @@
           "default": {
             "description": "BadRequest",
             "schema": {
-              "$ref": "../../stable/2016-03-01/alertRules_API.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -149,7 +149,7 @@
           "default": {
             "description": "BadRequest",
             "schema": {
-              "$ref": "../../stable/2016-03-01/alertRules_API.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -216,7 +216,7 @@
           "default": {
             "description": "BadRequest",
             "schema": {
-              "$ref": "../../stable/2016-03-01/alertRules_API.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -283,7 +283,7 @@
           "default": {
             "description": "BadRequest",
             "schema": {
-              "$ref": "../../stable/2016-03-01/alertRules_API.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -319,6 +319,11 @@
           },
           "204": {
             "description": "No content: the request was successful, but the response is empty"
+          },
+          "default": {
+            "description": "BadRequest",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
           }
         },
         "x-ms-examples": {
@@ -359,7 +364,7 @@
           "default": {
             "description": "BadRequest",
             "schema": {
-              "$ref": "../../stable/2016-03-01/alertRules_API.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -404,7 +409,7 @@
           "default": {
             "description": "BadRequest",
             "schema": {
-              "$ref": "../../stable/2016-03-01/alertRules_API.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -475,7 +480,6 @@
     "MetricAlertProperties": {
       "required": [
         "enabled",
-        "description",
         "severity",
         "evaluationFrequency",
         "windowSize",
@@ -488,6 +492,7 @@
         },
         "severity": {
           "type": "integer",
+          "format": "int32",
           "description": "Alert severity {0, 1, 2, 3, 4}"
         },
         "enabled": {
@@ -539,6 +544,10 @@
           "type": "string",
           "format": "date-time",
           "description": "Last time the rule was updated in ISO8601 format."
+        },
+        "isMigrated": {
+          "type": "boolean",
+          "description": "the flag that indicates whether the alert has been migrated."
         }
       },
       "description": "An alert rule."
@@ -832,6 +841,7 @@
           "description": "Namespace of the metric."
         },
         "timeAggregation": {
+          "type": "string",
           "enum": [
             "Average",
             "Count",
@@ -934,6 +944,52 @@
         }
       },
       "description": "The minimum number of violations required within the selected lookback time window required to raise an alert."
+    },
+    "ErrorDetail": {
+      "description": "The error detail.",
+      "properties": {
+        "code": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The error code."
+        },
+        "message": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The error message."
+        },
+        "target": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The error target."
+        },
+        "details": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ErrorDetail"
+          },
+          "description": "The error details."
+        },
+        "additionalInfo": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ErrorAdditionalInfo"
+          },
+          "description": "The error additional info."
+        }
+      }
+    },
+    "ErrorResponse": {
+      "title": "Error response",
+      "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+      "properties": {
+        "error": {
+          "description": "The error object.",
+          "$ref": "#/definitions/ErrorDetail"
+        }
+      }
     }
   },
   "parameters": {
