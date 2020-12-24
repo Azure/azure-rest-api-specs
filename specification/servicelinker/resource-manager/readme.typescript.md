@@ -6,8 +6,9 @@ Please also specify `--typescript-sdks-folder=<path to root folder of your azure
 ```yaml $(typescript)
 typescript:
   azure-arm: true
-  package-name: "servicelinker"
-  output-folder: "$(typescript-sdks-folder)/packages/servicelinker"
+  package-name: "@azure/arm-servicelinker"
+  output-folder: "$(typescript-sdks-folder)/sdk/servicelinker/arm-servicelinker"
   payload-flattening-threshold: 1
+  clear-output-folder: true
   generate-metadata: true
 ```
