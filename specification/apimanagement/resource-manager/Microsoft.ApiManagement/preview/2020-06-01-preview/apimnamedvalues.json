@@ -475,10 +475,13 @@
         }
       ],
       "responses": {
+        "202": {
+          "description": "Request to create or update named value was accepted."
+        },
         "200": {
-          "description": "A Collection of the named value entities for the specified API Management service instance.",
+          "description": "Named value was successfully updated.",
           "schema": {
-            "$ref": "./definitions.json#/definitions/NamedValueCollection"
+            "$ref": "./definitions.json#/definitions/NamedValueContract"
           },
           "headers": {
             "ETag": {
@@ -493,6 +496,10 @@
             "$ref": "./apimanagement.json#/definitions/ErrorResponse"
           }
         }
+      },
+      "x-ms-long-running-operation": true,
+      "x-ms-long-running-operation-options": {
+        "final-state-via": "location"
       }
     }
   },
