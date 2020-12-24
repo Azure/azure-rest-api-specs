@@ -616,7 +616,6 @@ input-file:
  - ./Microsoft.Sql/preview/2020-08-01-preview/EncryptionProtectors.json
  - ./Microsoft.Sql/preview/2020-08-01-preview/FailoverGroups.json
  - ./Microsoft.Sql/preview/2020-08-01-preview/FirewallRules.json
- - ./Microsoft.Sql/preview/2020-08-01-preview/HybridLinks.json
  - ./Microsoft.Sql/preview/2020-08-01-preview/InstanceFailoverGroups.json
  - ./Microsoft.Sql/preview/2020-08-01-preview/InstancePools.json
  - ./Microsoft.Sql/preview/2020-08-01-preview/JobAgents.json
@@ -734,7 +733,6 @@ input-file:
  - ./Microsoft.Sql/preview/2020-02-02-preview/EncryptionProtectors.json
  - ./Microsoft.Sql/preview/2020-02-02-preview/FailoverGroups.json
  - ./Microsoft.Sql/preview/2020-02-02-preview/FirewallRules.json
- - ./Microsoft.Sql/preview/2020-02-02-preview/HybridLinks.json
  - ./Microsoft.Sql/preview/2020-02-02-preview/InstanceFailoverGroups.json
  - ./Microsoft.Sql/preview/2020-02-02-preview/InstancePools.json
  - ./Microsoft.Sql/preview/2020-02-02-preview/JobAgents.json
