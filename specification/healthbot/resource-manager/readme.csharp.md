@@ -10,6 +10,6 @@ csharp:
   payload-flattening-threshold: 1
   clear-output-folder: true
   client-side-validation: false
-  namespace: Microsoft.HealthBot
-  output-folder: $(csharp-sdks-folder)/healthbot/management/Microsoft.HealthBot/GeneratedProtocol
+  namespace: Microsoft.Azure.Management.Healthbot
+  output-folder: $(csharp-sdks-folder)/healthbot/management/Microsoft.Azure.Management.Healthbot/src/Generated
 ```

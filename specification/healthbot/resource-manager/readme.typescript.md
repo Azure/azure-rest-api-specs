@@ -6,8 +6,8 @@ Please also specify `--typescript-sdks-folder=<path to root folder of your azure
 ```yaml $(typescript)
 typescript:
   azure-arm: true
-  package-name: "healthbot"
-  output-folder: "$(typescript-sdks-folder)/packages/healthbot"
+  package-name: "@azure/arm-healthbot"
+  output-folder: "$(typescript-sdks-folder)/sdk/healthbot/arm-healthbot"
   payload-flattening-threshold: 1
   generate-metadata: true
 ```
