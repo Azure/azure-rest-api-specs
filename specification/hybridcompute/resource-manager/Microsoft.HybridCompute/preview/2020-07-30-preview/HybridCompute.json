@@ -687,12 +687,8 @@
         },
         "display": {
           "x-ms-client-flatten": true,
-          "allOf": [
-            {
-              "$ref": "#/definitions/OperationValueDisplay"
-            }
-          ],
-          "description": "Display properties"
+          "description": "Display properties",
+          "$ref": "#/definitions/OperationValueDisplay"
         }
       },
       "description": "Describes the properties of a Compute Operation value."
@@ -739,12 +735,8 @@
           "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/locationData"
         },
         "osProfile": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/OSProfile"
-            }
-          ],
-          "description": "Specifies the operating system settings for the hybrid machine."
+          "description": "Specifies the operating system settings for the hybrid machine.",
+          "$ref": "#/definitions/OSProfile"
         },
         "provisioningState": {
           "readOnly": true,
@@ -863,19 +855,11 @@
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "allOf": [
-            {
-              "$ref": "#/definitions/MachineProperties"
-            }
-          ],
-          "description": "Hybrid Compute Machine properties"
+          "description": "Hybrid Compute Machine properties",
+          "$ref": "#/definitions/MachineProperties"
         },
         "identity": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/Identity"
-            }
-          ]
+          "$ref": "#/definitions/Identity"
         }
       },
       "allOf": [
@@ -889,21 +873,13 @@
       "properties": {
         "identity": {
           "x-ms-client-flatten": true,
-          "allOf": [
-            {
-              "$ref": "#/definitions/Identity"
-            }
-          ],
-          "description": "Hybrid Compute Machine Managed Identity"
+          "description": "Hybrid Compute Machine Managed Identity",
+          "$ref": "#/definitions/Identity"
         },
         "properties": {
           "x-ms-client-flatten": true,
-          "allOf": [
-            {
-              "$ref": "#/definitions/MachineUpdateProperties"
-            }
-          ],
-          "description": "Hybrid Compute Machine properties"
+          "description": "Hybrid Compute Machine properties",
+          "$ref": "#/definitions/MachineUpdateProperties"
         }
       },
       "allOf": [
@@ -1011,12 +987,8 @@
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "allOf": [
-            {
-              "$ref": "#/definitions/MachineExtensionProperties"
-            }
-          ],
-          "description": "Describes Machine Extension Properties."
+          "description": "Describes Machine Extension Properties.",
+          "$ref": "#/definitions/MachineExtensionProperties"
         }
       },
       "allOf": [
@@ -1030,12 +1002,8 @@
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "allOf": [
-            {
-              "$ref": "#/definitions/MachineExtensionUpdateProperties"
-            }
-          ],
-          "description": "Describes Machine Extension Update Properties."
+          "description": "Describes Machine Extension Update Properties.",
+          "$ref": "#/definitions/MachineExtensionUpdateProperties"
         }
       },
       "allOf": [
@@ -1081,12 +1049,8 @@
           "description": "The provisioning state, which only appears in the response."
         },
         "instanceView": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/MachineExtensionInstanceView"
-            }
-          ],
-          "description": "The machine extension instance view."
+          "description": "The machine extension instance view.",
+          "$ref": "#/definitions/MachineExtensionInstanceView"
         }
       },
       "description": "Describes the properties of a Machine Extension."
