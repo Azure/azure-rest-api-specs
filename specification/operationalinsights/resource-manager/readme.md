@@ -24,8 +24,14 @@ To see additional help and options, run:
 ### Basic Information
 These are the global settings for the OperationalInsights API.
 
-``` yaml
+```yaml !$(python) || !$(track2)
 title: OperationalInsightsManagementClient
+```
+```yaml $(python) && $(track2)
+title: LogAnalyticsManagementClient
+```
+
+``` yaml
 description: Operational Insights Client
 openapi-type: arm
 tag: package-2020-08
@@ -207,14 +213,6 @@ python:
 ```
 
 ``` yaml $(python) && $(track2)
-directive:
-    - from: swagger-document
-      where: $.info
-      transform: >
-          $.title = 'LogAnalyticsManagementClient';
-          $.description = 'The Log Analytics Client.';
-          return $;
-         
 python-mode: create
 azure-arm: true
 license-header: MICROSOFT_MIT_NO_VERSION
