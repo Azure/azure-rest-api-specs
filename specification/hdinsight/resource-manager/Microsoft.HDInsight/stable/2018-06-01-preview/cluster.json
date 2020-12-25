@@ -1006,14 +1006,6 @@
         "msiResourceId": {
           "type": "string",
           "description": "The managed identity (MSI) that is allowed to access the storage account, only to be specified for Azure Data Lake Storage Gen 2."
-        },
-        "saskey": {
-          "type": "string",
-          "description": "The shared access signature."
-        },
-        "fileshare": {
-          "type": "string",
-          "description": "The file share name."
         }
       },
       "description": "The storage Account."
@@ -1029,6 +1021,19 @@
         }
       },
       "description": "The storage profile."
+    },
+    "ExcludedServicesConfig": {
+      "properties": {
+        "excludedServicesConfigId": {
+          "type": "string",
+          "description": "The config id of excluded services."
+        },
+        "excludedServicesList": {
+          "type": "string",
+          "description": "The list of excluded services."
+        }
+      },
+      "description": "The configuration that services will be excluded when creating cluster."
     },
     "NetworkProperties": {
       "description": "The network properties.",
@@ -1338,6 +1343,10 @@
         "minSupportedTlsVersion": {
           "type": "string",
           "description": "The minimal supported tls version."
+        },
+        "excludedServicesConfig": {
+          "$ref": "#/definitions/ExcludedServicesConfig",
+          "description": "The excluded services config."
         },
         "networkProperties": {
           "$ref": "#/definitions/NetworkProperties",
