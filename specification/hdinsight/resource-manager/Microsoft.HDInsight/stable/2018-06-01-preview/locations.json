@@ -411,6 +411,13 @@
             "type": "string"
           }
         },
+        "vmSizesWithEncryptionAtHost": {
+          "description": "The vm sizes which enable encryption at host.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
         "vmSizeFilters": {
           "description": "The virtual machine filtering mode. Effectively this can enabling or disabling the virtual machine sizes in a particular set.",
           "type": "array",
@@ -436,7 +443,9 @@
           "type": "string",
           "enum": [
             "Exclude",
-            "Include"
+            "Include",
+            "Recommend",
+            "Default"
           ],
           "x-ms-enum": {
             "name": "FilterMode",
