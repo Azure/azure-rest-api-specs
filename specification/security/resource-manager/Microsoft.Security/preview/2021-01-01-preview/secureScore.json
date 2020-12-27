@@ -252,48 +252,6 @@
           "nextLinkName": "nextLink"
         }
       }
-    },
-    "/{scope}/providers/Microsoft.Security/secureScoreControlDefinitions": {
-      "get": {
-        "x-ms-examples": {
-          "List security controls definition (Subscription)": {
-            "$ref": "./examples/secureScoreControlDefinitions/ListSecureScoreControlDefinitions_subscription_example.json"
-          },
-          "List security controls definition (Management Group)": {
-            "$ref": "./examples/secureScoreControlDefinitions/ListSecureScoreControlDefinitions_managementGroup_example.json"
-          }
-        },
-        "tags": [
-          "Secure Score Control Definitions"
-        ],
-        "description": "For a specified subscription, list the available security controls, their assessments, and the max score",
-        "operationId": "SecureScoreControlDefinitions_ListBySubscription",
-        "parameters": [
-          {
-            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
-          },
-          {
-            "$ref": "../../../common/v1/types.json#/parameters/Scope"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/secureScoreControlDefinitionList"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
     }
   },
   "definitions": {
@@ -501,8 +459,10 @@
           "minimum": 0,
           "exclusiveMinimum": false
         },
-        "definition": {
-          "$ref": "#/definitions/SecureScoreControlDefinitionItem"
+        "definitionId": {
+          "description": "Azure Resource Id of the security control definition.",
+          "readOnly": true,
+          "type": "string"
         }
       }
     },
