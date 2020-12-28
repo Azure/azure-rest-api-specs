@@ -695,292 +695,319 @@
           "description": "Key-value pairs of additional resource provisioning properties."
         },
         "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
-          "description": "Metadata pertaining to creation and last modification of the resource."
-        }
-      },
-      "required": [
-        "location",
-        "sku"
-      ],
-      "x-ms-azure-resource": true
-    },
-    "DedicatedCapacity": {
-      "description": "Represents an instance of a Dedicated Capacity resource.",
-      "type": "object",
-      "properties": {
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/DedicatedCapacityProperties",
-          "description": "Properties of the provision operation request."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/Resource"
-        }
-      ]
-    },
-    "DedicatedCapacities": {
-      "description": "An array of Dedicated capacities resources.",
-      "type": "object",
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/DedicatedCapacity"
-          },
-          "description": "An array of Dedicated capacities resources."
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
-    "DedicatedCapacityUpdateParameters": {
-      "description": "Provision request specification",
-      "type": "object",
-      "properties": {
-        "sku": {
-          "$ref": "#/definitions/ResourceSku",
-          "description": "The SKU of the Dedicated capacity resource."
-        },
-        "tags": {
           "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "Key-value pairs of additional provisioning properties."
-        },
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/DedicatedCapacityMutableProperties",
-          "description": "Properties of the provision operation request."
-        }
-      }
-    },
-    "DedicatedCapacityProperties": {
-      "description": "Properties of Dedicated Capacity resource.",
-      "type": "object",
-      "properties": {
-        "state": {
-          "type": "string",
-          "enum": [
-            "Deleting",
-            "Succeeded",
-            "Failed",
-            "Paused",
-            "Suspended",
-            "Provisioning",
-            "Updating",
-            "Suspending",
-            "Pausing",
-            "Resuming",
-            "Preparing",
-            "Scaling"
-          ],
-          "x-ms-enum": {
-            "name": "State",
-            "modelAsString": true
-          },
-          "readOnly": true,
-          "description": "The current state of PowerBI Dedicated resource. The state is to indicate more states outside of resource provisioning."
-        },
-        "provisioningState": {
-          "type": "string",
-          "enum": [
-            "Deleting",
-            "Succeeded",
-            "Failed",
-            "Paused",
-            "Suspended",
-            "Provisioning",
-            "Updating",
-            "Suspending",
-            "Pausing",
-            "Resuming",
-            "Preparing",
-            "Scaling"
-          ],
-          "x-ms-enum": {
-            "name": "ProvisioningState",
-            "modelAsString": true
-          },
-          "readOnly": true,
-          "description": "The current deployment state of PowerBI Dedicated resource. The provisioningState is to indicate states for resource provisioning."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/DedicatedCapacityMutableProperties"
-        }
-      ]
-    },
-    "ResourceSku": {
-      "description": "Represents the SKU name and Azure pricing tier for PowerBI Dedicated resource.",
-      "type": "object",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "Name of the SKU level."
-        },
-        "tier": {
-          "type": "string",
-          "enum": [
-            "PBIE_Azure"
-          ],
-          "x-ms-enum": {
-            "name": "SkuTier",
-            "modelAsString": true
-          },
-          "description": "The name of the Azure pricing tier to which the SKU applies."
-        }
-      },
-      "required": [
-        "name"
-      ]
-    },
-    "DedicatedCapacityMutableProperties": {
-      "description": "An object that represents a set of mutable Dedicated capacity resource properties.",
-      "type": "object",
-      "properties": {
-        "administration": {
-          "$ref": "#/definitions/DedicatedCapacityAdministrators",
-          "description": "A collection of Dedicated capacity administrators"
-        }
-      }
-    },
-    "DedicatedCapacityAdministrators": {
-      "description": "An array of administrator user identities",
-      "type": "object",
-      "properties": {
-        "members": {
-          "type": "array",
-          "items": {
-            "type": "string",
-            "description": "The UPN of the user. For example: johnsmith@contoso.com."
-          },
-          "description": "An array of administrator user identities."
-        }
-      }
-    },
-    "SkuEnumerationForNewResourceResult": {
-      "description": "An object that represents enumerating SKUs for new resources",
-      "type": "object",
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ResourceSku"
-          },
-          "description": "The collection of available SKUs for new resources"
-        }
-      }
-    },
-    "SkuEnumerationForExistingResourceResult": {
-      "description": "An object that represents enumerating SKUs for existing resources",
-      "type": "object",
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/SkuDetailsForExistingResource"
-          },
-          "description": "The collection of available SKUs for existing resources"
-        }
-      }
-    },
-    "SkuDetailsForExistingResource": {
-      "description": "An object that represents SKU details for existing resources",
-      "type": "object",
-      "properties": {
-        "sku": {
-          "$ref": "#/definitions/ResourceSku",
-          "description": "The SKU in SKU details for existing resources."
-        }
-      }
-    },
-    "ErrorResponse": {
-      "type": "object",
-      "description": "Describes the format of Error response.",
-      "properties": {
-        "error": {
-          "description": "The error object",
           "properties": {
-            "code": {
+            "createdBy": {
               "type": "string",
-              "description": "Error code"
+              "description": "An identifier for the identity that created the resource"
             },
-            "message": {
+            "createdByType": {
+              "$ref": "#/definitions/IdentityType",
+              "description": "The type of identity that created the resource"
+            },
+            "createdAt": {
               "type": "string",
-              "description": "Error message indicating why the operation failed."
+              "format": "date-time",
+              "description": "The timestamp of resource creation (UTC)"
+            },
+            "lastModifiedBy": {
+              "type": "string",
+              "description": "An identifier for the identity that last modified the resource"
+            },
+            "lastModifiedByType": {
+              "$ref": "#/definitions/IdentityType",
+              "description": "The type of identity that last modified the resource"
+            },
+            "lastModifiedAt": {
+              "type": "string",
+              "format": "date-time",
+              "description": "The timestamp of resource last modification (UTC)"
+            },
+            "description": "Metadata pertaining to creation and last modification of the resource."
+          }
+        },
+        "required": [
+          "location",
+          "sku"
+        ],
+        "x-ms-azure-resource": true
+      },
+      "DedicatedCapacity": {
+        "description": "Represents an instance of a Dedicated Capacity resource.",
+        "type": "object",
+        "properties": {
+          "properties": {
+            "x-ms-client-flatten": true,
+            "$ref": "#/definitions/DedicatedCapacityProperties",
+            "description": "Properties of the provision operation request."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/definitions/Resource"
+          }
+        ]
+      },
+      "DedicatedCapacities": {
+        "description": "An array of Dedicated capacities resources.",
+        "type": "object",
+        "properties": {
+          "value": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/DedicatedCapacity"
+            },
+            "description": "An array of Dedicated capacities resources."
+          }
+        },
+        "required": [
+          "value"
+        ]
+      },
+      "DedicatedCapacityUpdateParameters": {
+        "description": "Provision request specification",
+        "type": "object",
+        "properties": {
+          "sku": {
+            "$ref": "#/definitions/ResourceSku",
+            "description": "The SKU of the Dedicated capacity resource."
+          },
+          "tags": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            },
+            "description": "Key-value pairs of additional provisioning properties."
+          },
+          "properties": {
+            "x-ms-client-flatten": true,
+            "$ref": "#/definitions/DedicatedCapacityMutableProperties",
+            "description": "Properties of the provision operation request."
+          }
+        }
+      },
+      "DedicatedCapacityProperties": {
+        "description": "Properties of Dedicated Capacity resource.",
+        "type": "object",
+        "properties": {
+          "state": {
+            "type": "string",
+            "enum": [
+              "Deleting",
+              "Succeeded",
+              "Failed",
+              "Paused",
+              "Suspended",
+              "Provisioning",
+              "Updating",
+              "Suspending",
+              "Pausing",
+              "Resuming",
+              "Preparing",
+              "Scaling"
+            ],
+            "x-ms-enum": {
+              "name": "State",
+              "modelAsString": true
+            },
+            "readOnly": true,
+            "description": "The current state of PowerBI Dedicated resource. The state is to indicate more states outside of resource provisioning."
+          },
+          "provisioningState": {
+            "type": "string",
+            "enum": [
+              "Deleting",
+              "Succeeded",
+              "Failed",
+              "Paused",
+              "Suspended",
+              "Provisioning",
+              "Updating",
+              "Suspending",
+              "Pausing",
+              "Resuming",
+              "Preparing",
+              "Scaling"
+            ],
+            "x-ms-enum": {
+              "name": "ProvisioningState",
+              "modelAsString": true
+            },
+            "readOnly": true,
+            "description": "The current deployment state of PowerBI Dedicated resource. The provisioningState is to indicate states for resource provisioning."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/definitions/DedicatedCapacityMutableProperties"
+          }
+        ]
+      },
+      "ResourceSku": {
+        "description": "Represents the SKU name and Azure pricing tier for PowerBI Dedicated resource.",
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Name of the SKU level."
+          },
+          "tier": {
+            "type": "string",
+            "enum": [
+              "PBIE_Azure"
+            ],
+            "x-ms-enum": {
+              "name": "SkuTier",
+              "modelAsString": true
+            },
+            "description": "The name of the Azure pricing tier to which the SKU applies."
+          }
+        },
+        "required": [
+          "name"
+        ]
+      },
+      "DedicatedCapacityMutableProperties": {
+        "description": "An object that represents a set of mutable Dedicated capacity resource properties.",
+        "type": "object",
+        "properties": {
+          "administration": {
+            "$ref": "#/definitions/DedicatedCapacityAdministrators",
+            "description": "A collection of Dedicated capacity administrators"
+          }
+        }
+      },
+      "DedicatedCapacityAdministrators": {
+        "description": "An array of administrator user identities",
+        "type": "object",
+        "properties": {
+          "members": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "description": "The UPN of the user. For example: johnsmith@contoso.com."
+            },
+            "description": "An array of administrator user identities."
+          }
+        }
+      },
+      "SkuEnumerationForNewResourceResult": {
+        "description": "An object that represents enumerating SKUs for new resources",
+        "type": "object",
+        "properties": {
+          "value": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/ResourceSku"
+            },
+            "description": "The collection of available SKUs for new resources"
+          }
+        }
+      },
+      "SkuEnumerationForExistingResourceResult": {
+        "description": "An object that represents enumerating SKUs for existing resources",
+        "type": "object",
+        "properties": {
+          "value": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/SkuDetailsForExistingResource"
+            },
+            "description": "The collection of available SKUs for existing resources"
+          }
+        }
+      },
+      "SkuDetailsForExistingResource": {
+        "description": "An object that represents SKU details for existing resources",
+        "type": "object",
+        "properties": {
+          "sku": {
+            "$ref": "#/definitions/ResourceSku",
+            "description": "The SKU in SKU details for existing resources."
+          }
+        }
+      },
+      "ErrorResponse": {
+        "type": "object",
+        "description": "Describes the format of Error response.",
+        "properties": {
+          "error": {
+            "description": "The error object",
+            "properties": {
+              "code": {
+                "type": "string",
+                "description": "Error code"
+              },
+              "message": {
+                "type": "string",
+                "description": "Error message indicating why the operation failed."
+              }
             }
+          }
+        }
+      },
+      "CheckCapacityNameAvailabilityParameters": {
+        "description": "Details of capacity name request body.",
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9]*$",
+            "minLength": 3,
+            "maxLength": 63,
+            "description": "Name for checking availability."
+          },
+          "type": {
+            "type": "string",
+            "default": "Microsoft.PowerBIDedicated/capacities",
+            "description": "The resource type of PowerBI dedicated."
+          }
+        }
+      },
+      "CheckCapacityNameAvailabilityResult": {
+        "description": "The checking result of capacity name availability.",
+        "type": "object",
+        "properties": {
+          "nameAvailable": {
+            "type": "boolean",
+            "description": "Indicator of availability of the capacity name."
+          },
+          "reason": {
+            "type": "string",
+            "description": "The reason of unavailability."
+          },
+          "message": {
+            "type": "string",
+            "description": "The detailed message of the request unavailability."
           }
         }
       }
     },
-    "CheckCapacityNameAvailabilityParameters": {
-      "description": "Details of capacity name request body.",
-      "type": "object",
-      "properties": {
-        "name": {
-          "type": "string",
-          "pattern": "^[a-z][a-z0-9]*$",
-          "minLength": 3,
-          "maxLength": 63,
-          "description": "Name for checking availability."
-        },
-        "type": {
-          "type": "string",
-          "default": "Microsoft.PowerBIDedicated/capacities",
-          "description": "The resource type of PowerBI dedicated."
-        }
+    "parameters": {
+      "SubscriptionIdParameter": {
+        "name": "subscriptionId",
+        "in": "path",
+        "required": true,
+        "type": "string",
+        "description": "A unique identifier for a Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
+      },
+      "ApiVersionParameter": {
+        "name": "api-version",
+        "in": "query",
+        "required": true,
+        "type": "string",
+        "description": "The client API version."
+      },
+      "ResourceGroupNameParameter": {
+        "name": "resourceGroupName",
+        "in": "path",
+        "required": true,
+        "type": "string",
+        "pattern": "^[-\\w\\._\\(\\)]+$",
+        "minLength": 1,
+        "maxLength": 90,
+        "x-ms-parameter-location": "method",
+        "description": "The name of the Azure Resource group of which a given PowerBIDedicated capacity is part. This name must be at least 1 character in length, and no more than 90."
       }
-    },
-    "CheckCapacityNameAvailabilityResult": {
-      "description": "The checking result of capacity name availability.",
-      "type": "object",
-      "properties": {
-        "nameAvailable": {
-          "type": "boolean",
-          "description": "Indicator of availability of the capacity name."
-        },
-        "reason": {
-          "type": "string",
-          "description": "The reason of unavailability."
-        },
-        "message": {
-          "type": "string",
-          "description": "The detailed message of the request unavailability."
-        }
-      }
-    }
-  },
-  "parameters": {
-    "SubscriptionIdParameter": {
-      "name": "subscriptionId",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "A unique identifier for a Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
-    },
-    "ApiVersionParameter": {
-      "name": "api-version",
-      "in": "query",
-      "required": true,
-      "type": "string",
-      "description": "The client API version."
-    },
-    "ResourceGroupNameParameter": {
-      "name": "resourceGroupName",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "pattern": "^[-\\w\\._\\(\\)]+$",
-      "minLength": 1,
-      "maxLength": 90,
-      "x-ms-parameter-location": "method",
-      "description": "The name of the Azure Resource group of which a given PowerBIDedicated capacity is part. This name must be at least 1 character in length, and no more than 90."
     }
   }
-}
