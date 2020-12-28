@@ -1,0 +1,599 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "Scale unit operation endpoints and objects.",
+    "title": "FabricAdminClient",
+    "version": "2020-10-01"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fabric.Admin/fabricLocations/{location}/scaleUnits/{scaleUnit}/scaleOut": {
+      "post": {
+        "x-ms-examples": {
+          "Scales out a scale unit.": {
+            "$ref": "./examples/ScaleUnit/ScaleOut.json"
+          }
+        },
+        "tags": [
+          "ScaleUnits"
+        ],
+        "description": "Scales out a scale unit.",
+        "operationId": "ScaleUnits_ScaleOut",
+        "parameters": [
+          {
+            "$ref": "../2016-05-01/Fabric.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../2016-05-01/Fabric.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "../2016-05-01/Fabric.json#/parameters/LocationParameter"
+          },
+          {
+            "$ref": "#/parameters/ScaleUnitParameter"
+          },
+          {
+            "$ref": "#/parameters/ScaleOutScaleUnitParametersInBody"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "202": {
+            "description": "ACCEPTED"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fabric.Admin/fabricLocations/{location}/scaleUnits/{scaleUnit}/setGpuPartitionSize": {
+      "post": {
+        "x-ms-examples": {
+          "Set GPU partition size.": {
+            "$ref": "./examples/ScaleUnit/SetGpuPartitionSize.json"
+          }
+        },
+        "tags": [
+          "ScaleUnits"
+        ],
+        "description": "Set GPU partition size.",
+        "operationId": "ScaleUnits_SetGPUPartitionSize",
+        "parameters": [
+          {
+            "$ref": "../2016-05-01/Fabric.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../2016-05-01/Fabric.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "../2016-05-01/Fabric.json#/parameters/LocationParameter"
+          },
+          {
+            "$ref": "#/parameters/ScaleUnitParameter"
+          },
+          {
+            "$ref": "#/parameters/GpuPartitionSizeParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "202": {
+            "description": "ACCEPTED"
+          },
+          "default": {
+            "description": "Default Response.",
+            "schema": {
+              "$ref": "#/definitions/ExtendedErrorInfo"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fabric.Admin/fabricLocations/{location}/scaleUnits/{scaleUnit}/createFromJson": {
+      "post": {
+        "x-ms-examples": {
+          "Add a new scale unit.": {
+            "$ref": "./examples/ScaleUnit/CreateFromJson.json"
+          }
+        },
+        "tags": [
+          "ScaleUnits"
+        ],
+        "description": "Add a new scale unit.",
+        "operationId": "ScaleUnits_CreateFromJson",
+        "parameters": [
+          {
+            "$ref": "../2016-05-01/Fabric.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../2016-05-01/Fabric.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "../2016-05-01/Fabric.json#/parameters/LocationParameter"
+          },
+          {
+            "$ref": "#/parameters/ScaleUnitParameter"
+          },
+          {
+            "$ref": "#/parameters/CreateFromJsonScaleUnitParametersInBody"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "202": {
+            "description": "ACCEPTED"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fabric.Admin/fabricLocations/{location}/scaleUnits/{scaleUnit}": {
+      "get": {
+        "x-ms-examples": {
+          "Returns the requested scale unit": {
+            "$ref": "./examples/ScaleUnit/Get.json"
+          }
+        },
+        "tags": [
+          "ScaleUnits"
+        ],
+        "description": "Returns the requested scale unit.",
+        "operationId": "ScaleUnits_Get",
+        "parameters": [
+          {
+            "$ref": "../2016-05-01/Fabric.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../2016-05-01/Fabric.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "../2016-05-01/Fabric.json#/parameters/LocationParameter"
+          },
+          {
+            "$ref": "#/parameters/ScaleUnitParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ScaleUnit"
+            }
+          },
+          "404": {
+            "description": "NOT FOUND"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fabric.Admin/fabricLocations/{location}/scaleUnits": {
+      "get": {
+        "x-ms-examples": {
+          "Returns a list of all scale units at a location.": {
+            "$ref": "./examples/ScaleUnit/List.json"
+          }
+        },
+        "tags": [
+          "ScaleUnits"
+        ],
+        "description": "Returns a list of all scale units at a location.",
+        "operationId": "ScaleUnits_List",
+        "parameters": [
+          {
+            "$ref": "../2016-05-01/Fabric.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../2016-05-01/Fabric.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "../2016-05-01/Fabric.json#/parameters/LocationParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../2016-05-01/Fabric.json#/parameters/FilterParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ScaleUnitList"
+            }
+          },
+          "404": {
+            "description": "NOT FOUND"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-odata": "#/definitions/ScaleUnit"
+      }
+    }
+  },
+  "definitions": {
+    "ScaleUnitCapacity": {
+      "description": "The capacity information for a physical machine.",
+      "type": "object",
+      "properties": {
+        "memoryGB": {
+          "description": "The memory for the physical machine.",
+          "type": "number",
+          "format": "float"
+        },
+        "cores": {
+          "description": "The number of CPU cores for the physical machine.",
+          "type": "integer",
+          "format": "int64"
+        }
+      }
+    },
+    "ScaleUnit": {
+      "description": "Represents a cluster. Generally, the cluster will be a collection of hosts backed by failover cluster manager.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "description": "Properties of a scale unit.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ScaleUnitModel"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../2016-05-01/Fabric.json#/definitions/Resource"
+        }
+      ]
+    },
+    "ScaleUnitModel": {
+      "description": "Properties of a scale unit.",
+      "type": "object",
+      "properties": {
+        "scaleUnitType": {
+          "description": "Type of cluster.",
+          "enum": [
+            "Unknown",
+            "ComputeOnly",
+            "StorageOnly",
+            "HyperConverged"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "ScaleUnitType"
+          }
+        },
+        "logicalFaultDomain": {
+          "description": "Fault domain name of the cluster.",
+          "type": "integer",
+          "format": "int32"
+        },
+        "nodes": {
+          "description": "List of nodes in the server.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "state": {
+          "description": "Current state of the cluster.",
+          "enum": [
+            "Unknown",
+            "Creating",
+            "Running",
+            "Upgrading",
+            "Deleting"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "ScaleUnitState"
+          }
+        },
+        "model": {
+          "description": "Model of the servers in the cluster.",
+          "type": "string"
+        },
+        "totalCapacity": {
+          "description": "Capacity information for the cluster.",
+          "$ref": "#/definitions/ScaleUnitCapacity"
+        },
+        "isMultiNode": {
+          "description": "Denotes if more than one node in cluster.",
+          "type": "boolean"
+        },
+        "isGpuAvailable": {
+          "description": "Denotes if GPU resource is available in the cluster.",
+          "type": "boolean"
+        },
+        "gpuPartitionSize": {
+          "description": "GPU partition size.",
+          "type": "integer",
+          "format": "int32"
+        },
+        "gpuType": {
+          "description": "Type of GPU.",
+          "enum": [
+            "GPUP",
+            "DDA",
+            "None"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "GpuType"
+          }
+        }
+      }
+    },
+    "ScaleUnitList": {
+      "description": "A pageable list of scale units.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "List of scale units.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ScaleUnit"
+          }
+        },
+        "nextLink": {
+          "description": "URI to the next page.",
+          "type": "string"
+        }
+      }
+    },
+    "SetGpuPartitionSizeParameter": {
+      "description": "Input data for setting GPU partitions.",
+      "type": "object",
+      "properties": {
+        "gpuPartitionSize": {
+          "x-ms-client-name": "GpuPartitionSize",
+          "description": "Number of GPU partitions",
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "ScaleOutScaleUnitParameters": {
+      "description": "Input data that allows for adding a scale unit node.",
+      "type": "object",
+      "properties": {
+        "bmcIpv4Address": {
+          "x-ms-client-name": "BMCIPv4Address",
+          "description": "BMC address of the physical machine.",
+          "type": "string"
+        },
+        "computerName": {
+          "description": "Computer name of the physical machine.",
+          "type": "string"
+        }
+      }
+    },
+    "ScaleOutScaleUnitParametersList": {
+      "description": "A list of input data that allows for adding a set of scale unit nodes.",
+      "type": "object",
+      "properties": {
+        "nodeList": {
+          "description": "List of nodes in the scale unit.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ScaleOutScaleUnitParameters"
+          }
+        },
+        "awaitStorageConvergence": {
+          "description": "Flag indicates if the operation should wait for storage to converge before returning.",
+          "type": "boolean"
+        }
+      }
+    },
+    "NetworkDefinitionParameter": {
+      "description": "A definition of the network received from a new cluster operation.",
+      "type": "object",
+      "properties": {
+        "subnet": {
+          "description": "The subnet IP mask in the example format 10.0.0.0/25.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "vlanId": {
+          "description": "The Vlan ID of the subnet.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "DeploymentJsonPhysicalNodeParameters": {
+      "description": "Description of a bare metal node used for scale unit scale out operations.",
+      "type": "object",
+      "properties": {
+        "bmcIpAddress": {
+          "x-ms-client-name": "BMCIPAddress",
+          "description": "BMC address of the physical machine.",
+          "type": "string"
+        },
+        "name": {
+          "description": "Computer name of the physical machine.",
+          "type": "string"
+        }
+      }
+    },
+    "CreateFromJsonScaleUnitParametersList": {
+      "description": "A list of input data that allows for creating the new scale unit.",
+      "type": "object",
+      "properties": {
+        "clusterName": {
+          "description": "Cluster name for the new scale unit.",
+          "type": "string"
+        },
+        "physicalNodes": {
+          "description": "List of nodes in the scale unit.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DeploymentJsonPhysicalNodeParameters"
+          }
+        },
+        "torSwitchBgpAsn": {
+          "description": "The ASN for the cluster's rack TOR.",
+          "type": "string"
+        },
+        "softwareBgpAsn": {
+          "description": "The software ASN for the cluster's rack.",
+          "type": "string"
+        },
+        "torSwitchBgpPeerIp": {
+          "description": "The list of IP addresses used for TOR communication.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "infrastructureNetwork": {
+          "description": "The information associated with the infrastructure network that will be subdivided into subnets.",
+          "$ref": "#/definitions/NetworkDefinitionParameter"
+        },
+        "storageNetwork": {
+          "description": "The information associated with the storage network that will be subdivided into subnets.",
+          "$ref": "#/definitions/NetworkDefinitionParameter"
+        },
+        "netQosPriority": {
+          "description": "The network QOS priority setting.",
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "ExtendedErrorInfo": {
+      "type": "object",
+      "description": "Error response.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/ErrorDefinition",
+          "description": "The error details."
+        }
+      }
+    },
+    "ErrorDefinition": {
+      "type": "object",
+      "description": "Error definition.",
+      "properties": {
+        "code": {
+          "description": "Service specific error code which serves as the substatus for the HTTP error code.",
+          "type": "string",
+          "readOnly": true
+        },
+        "message": {
+          "description": "Description of the error.",
+          "type": "string",
+          "readOnly": true
+        },
+        "details": {
+          "description": "Internal error details.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ErrorDefinition"
+          },
+          "readOnly": true
+        }
+      }
+    }
+  },
+  "parameters": {
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "description": "Client API Version.",
+      "required": true,
+      "type": "string",
+      "default": "2020-10-01"
+    },
+    "ScaleUnitParameter": {
+      "name": "scaleUnit",
+      "description": "Name of the scale units.",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "GpuPartitionSizeParameter": {
+      "name": "gpuPartitionSizeParameters",
+      "description": "Number of GPU partitions.",
+      "in": "body",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/SetGpuPartitionSizeParameter"
+      },
+      "x-ms-parameter-location": "method"
+    },
+    "ScaleOutScaleUnitParametersInBody": {
+      "name": "scaleUnitNodeParameters",
+      "description": "A list of input data that allows for adding a set of scale unit nodes.",
+      "in": "body",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/ScaleOutScaleUnitParametersList"
+      },
+      "x-ms-parameter-location": "method"
+    },
+    "CreateFromJsonScaleUnitParametersInBody": {
+      "name": "creationData",
+      "description": "A list of input data that allows for creating the new scale unit.",
+      "in": "body",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/CreateFromJsonScaleUnitParametersList"
+      },
+      "x-ms-parameter-location": "method"
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Authorization uses an Azure Active Directory OAuth2 flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ]
+}
