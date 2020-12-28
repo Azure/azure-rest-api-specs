@@ -1861,7 +1861,7 @@
           "200": {
             "description": "Request successful. The operation getikesas completed on virtual network gateway connection.",
             "schema": {
-              "$ref": "#/definitions/IkeSaParameters"
+              "type": "string"
             }
           },
           "default": {
@@ -1872,13 +1872,13 @@
           }
         },
         "x-ms-examples": {
-          "List IKE Security Associations for virtual network gateway connection": {
+          "GetVirtualNetworkGatewayConnectionIkeSa": {
             "$ref": "./examples/VirtualNetworkGatewayConnectionGetIkeSas.json"
           }
         },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
+          "final-state-via": "location"
         }
       }
     },
@@ -3268,142 +3268,6 @@
         "pfsGroup"
       ],
       "description": "An IPSec parameters for a virtual network gateway P2S connection."
-    },
-    "IkeSaParameters": {
-      "properties": {
-        "mainModeSa": {
-          "properties": {
-            "localEndpoint": {
-              "type": "string",
-              "description": "The local endpoint."
-            },
-            "remoteEndpoint": {
-              "type": "string",
-              "description": "The remote endpoint."
-            },
-            "initiatorCookie": {
-              "type": "integer",
-              "format": "int64",
-              "description": "The initiator cookie."
-            },
-            "responderCookie": {
-              "type": "integer",
-              "format": "int64",
-              "description": "The responder cookie."
-            },
-            "localUdpEncapsulationPort": {
-              "type": "integer",
-              "format": "int32",
-              "description": "The local UDP encapsulation port."
-            },
-            "remoteUdpEncapsulationPort": {
-              "type": "integer",
-              "format": "int32",
-              "description": "The remote UDP encapsulation port."
-            },
-            "encryption": {
-              "type": "string",
-              "description": "The IKE encryption algorithm (IKE phase 1)."
-            },
-            "integrity": {
-              "type": "string",
-              "description": "The IKE integrity algorithm (IKE phase 1)."
-            },
-            "dhGroup": {
-              "type": "string",
-              "description": "The DH Group."
-            },
-            "lifeTimeSeconds": {
-              "type": "integer",
-              "format": "int32",
-              "description": "The MM SA Lifetime in seconds."
-            },
-            "isSaInitiator": {
-              "type": "boolean",
-              "description": "Flag to check if SA Initiator or not."
-            },
-            "elapsedTimeInseconds": {
-              "type": "integer",
-              "format": "int32",
-              "description": "The time elapsed in seconds."
-            },
-            "quickModeSa": {
-              "properties": {
-                "localEndpoint": {
-                  "type": "string",
-                  "description": "The local endpoint."
-                },
-                "remoteEndpoint": {
-                  "type": "string",
-                  "description": "The remote endpoint."
-                },
-                "encryption": {
-                  "type": "string",
-                  "description": "The IPSec encryption algorithm (IKE phase 2)."
-                },
-                "integrity": {
-                  "type": "string",
-                  "description": "The IPSec integrity algorithm (IKE phase 2)."
-                },
-                "pfsGroupId": {
-                  "type": "string",
-                  "description": "The PFS Group."
-                },
-                "inboundSPI": {
-                  "type": "integer",
-                  "format": "int32",
-                  "description": "The Inbound SPI SA."
-                },
-                "outboundSPI": {
-                  "type": "integer",
-                  "format": "int32",
-                  "description": "The Outbound SPI SA."
-                },
-                "localTrafficSelectors": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  },
-                  "description": "The local traffic selectors."
-                },
-                "remoteTrafficSelectors": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  },
-                  "description": "The remote traffic selectors."
-                },
-                "lifetimeKilobytes": {
-                  "type": "integer",
-                  "format": "int64",
-                  "minimum": 1024,
-                  "maximum": 102400000,
-                  "description": "The QM SA Lifetime KBytes."
-                },
-                "lifeTimeSeconds": {
-                  "type": "integer",
-                  "format": "int64",
-                  "minimum": 300,
-                  "maximum": 27000,
-                  "description": "The QM SA Lifetime Seconds."
-                },
-                "isSaInitiator": {
-                  "type": "boolean",
-                  "description": "Flag to check if SA Initiator or not."
-                },
-                "elapsedTimeInseconds": {
-                  "type": "integer",
-                  "format": "int32",
-                  "description": "The time elapsed in seconds."
-                }
-              },
-              "description": "A list of quick mode security associations."
-            }
-          },
-          "description": "A list of main mode security associations."
-        }
-      },
-      "description": "IKE security association parameters for virtual network gateway connection. Response for GetIkeSas API service call."
     },
     "LocalNetworkGatewayPropertiesFormat": {
       "properties": {
