@@ -110,6 +110,37 @@
       },
       "description": "Tenant access information contract of the API Management service."
     },
+    "AccessInformationCreateParameters": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/AccessInformationCreateParameterProperties",
+          "description": "Tenant access information update parameter properties."
+        }
+      },
+      "description": "Tenant access information update parameters."
+    },
+    "AccessInformationCreateParameterProperties": {
+      "properties": {
+        "principalId": {
+          "type": "string",
+          "description": "Principal (User) Identifier."
+        },
+        "primaryKey": {
+          "type": "string",
+          "description": "Primary access key. This property will not be filled on 'GET' operations! Use '/listSecrets' POST request to get the value."
+        },
+        "secondaryKey": {
+          "type": "string",
+          "description": "Secondary access key. This property will not be filled on 'GET' operations! Use '/listSecrets' POST request to get the value."
+        },
+        "enabled": {
+          "type": "boolean",
+          "description": "Determines whether direct access is enabled."
+        }
+      },
+      "description": "Tenant access information update parameters of the API Management service"
+    },
     "AccessInformationUpdateParameters": {
       "properties": {
         "properties": {
