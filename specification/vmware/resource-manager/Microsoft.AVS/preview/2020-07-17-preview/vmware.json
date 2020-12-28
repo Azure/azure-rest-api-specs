@@ -255,7 +255,7 @@
           }
         },
         "x-ms-examples": {
-          "CheckQuotaAvailability": {
+          "Locations_CheckTrialAvailability": {
             "$ref": "./examples/Locations_CheckTrialAvailability.json"
           }
         }
@@ -298,7 +298,7 @@
           }
         },
         "x-ms-examples": {
-          "CheckQuotaAvailability": {
+          "Locations_CheckQuotaAvailability": {
             "$ref": "./examples/Locations_CheckQuotaAvailability.json"
           }
         }
@@ -379,7 +379,7 @@
           }
         },
         "x-ms-examples": {
-          "PrivateClouds_List": {
+          "PrivateClouds_ListInSubscription": {
             "$ref": "./examples/PrivateClouds_ListInSubscription.json"
           }
         }
@@ -3443,6 +3443,10 @@
           "description": "Resource type.",
           "readOnly": true,
           "type": "string"
+        },
+        "systemData": {
+          "description": "The system metadata relating to this resource",
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
         }
       },
       "x-ms-azure-resource": true
@@ -3492,10 +3496,6 @@
         "error": {
           "description": "An error returned by the API",
           "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse"
-        },
-        "systemData": {
-          "description": "required by CI process",
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
         }
       },
       "description": "API error response"
@@ -4212,10 +4212,6 @@
         }
       ],
       "properties": {
-        "systemData": {
-          "description": "required by CI process",
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
-        },
         "addonType": {
           "description": "The type of private cloud addon",
           "type": "string",
