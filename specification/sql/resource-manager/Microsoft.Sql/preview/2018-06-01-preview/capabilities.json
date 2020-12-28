@@ -50,10 +50,10 @@
             }
           },
           {
-            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -330,19 +330,6 @@
           },
           "readOnly": true
         },
-        "supportedStorageCapabilities": {
-          "description": "The list of supported storage capabilities for this edition",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/StorageCapability"
-          },
-          "readOnly": true
-        },
-        "zoneRedundant": {
-          "description": "Whether or not zone redundancy is supported for the edition.",
-          "type": "boolean",
-          "readOnly": true
-        },
         "status": {
           "description": "The status of the capability.",
           "enum": [
@@ -469,14 +456,6 @@
         "computeModel": {
           "description": "The compute model",
           "type": "string",
-          "readOnly": true
-        },
-        "supportedMaintenanceConfigurations": {
-          "description": "List of supported maintenance configurations",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/MaintenanceConfigurationCapability"
-          },
           "readOnly": true
         },
         "status": {
@@ -626,14 +605,6 @@
         "zoneRedundant": {
           "description": "Whether or not zone redundancy is supported for the performance level.",
           "type": "boolean",
-          "readOnly": true
-        },
-        "supportedMaintenanceConfigurations": {
-          "description": "List of supported maintenance configurations",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/MaintenanceConfigurationCapability"
-          },
           "readOnly": true
         },
         "status": {
@@ -960,41 +931,6 @@
         }
       }
     },
-    "MaintenanceConfigurationCapability": {
-      "description": "The maintenance configuration capability",
-      "type": "object",
-      "properties": {
-        "name": {
-          "description": "Maintenance configuration name",
-          "type": "string",
-          "readOnly": true
-        },
-        "zoneRedundant": {
-          "description": "Whether or not zone redundancy is supported for the maintenance configuration.",
-          "type": "boolean",
-          "readOnly": true
-        },
-        "status": {
-          "description": "The status of the capability.",
-          "enum": [
-            "Visible",
-            "Available",
-            "Default",
-            "Disabled"
-          ],
-          "type": "string",
-          "readOnly": true,
-          "x-ms-enum": {
-            "name": "CapabilityStatus",
-            "modelAsString": false
-          }
-        },
-        "reason": {
-          "description": "The reason for the capability not being available.",
-          "type": "string"
-        }
-      }
-    },
     "ElasticPoolPerDatabaseMaxPerformanceLevelCapability": {
       "description": "The max per-database performance level capability.",
       "type": "object",
@@ -1083,14 +1019,6 @@
         "standaloneSupported": {
           "description": "True if this service objective is supported for standalone managed instances.",
           "type": "boolean",
-          "readOnly": true
-        },
-        "supportedMaintenanceConfigurations": {
-          "description": "List of supported maintenance configurations",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ManagedInstanceMaintenanceConfigurationCapability"
-          },
           "readOnly": true
         },
         "status": {
@@ -1226,39 +1154,93 @@
           "type": "string"
         }
       }
-    },
-    "ManagedInstanceMaintenanceConfigurationCapability": {
-      "description": "The maintenance configuration capability",
-      "type": "object",
-      "properties": {
-        "name": {
-          "description": "Maintenance configuration name",
-          "type": "string",
-          "readOnly": true
-        },
-        "status": {
-          "description": "The status of the capability.",
-          "enum": [
-            "Visible",
-            "Available",
-            "Default",
-            "Disabled"
-          ],
-          "type": "string",
-          "readOnly": true,
-          "x-ms-enum": {
-            "name": "CapabilityStatus",
-            "modelAsString": false
-          }
-        },
-        "reason": {
-          "description": "The reason for the capability not being available.",
-          "type": "string"
-        }
-      }
     }
   },
-  "parameters": {},
+  "parameters": {
+    "SubscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "description": "The subscription ID that identifies an Azure subscription.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "client"
+    },
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "description": "The API version to use for the request.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "client"
+    },
+    "ResourceGroupParameter": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "description": "The name of the resource group that contains the resource. You can obtain this value from the Azure Resource Manager API or the portal.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "ServerNameParameter": {
+      "name": "serverName",
+      "in": "path",
+      "description": "The name of the server.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "ManagedInstanceNameParameter": {
+      "name": "managedInstanceName",
+      "in": "path",
+      "description": "The name of the managed instance.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "DatabaseNameParameter": {
+      "name": "databaseName",
+      "in": "path",
+      "description": "The name of the database.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "BlobAuditingPolicyNameParameter": {
+      "name": "blobAuditingPolicyName",
+      "in": "path",
+      "description": "The name of the blob auditing policy.",
+      "required": true,
+      "type": "string",
+      "enum": [
+        "default"
+      ],
+      "x-ms-parameter-location": "method"
+    },
+    "SqlVirtualMachineInstanceNameParameter": {
+      "name": "sqlVirtualMachineInstanceName",
+      "in": "path",
+      "description": "The name of the SqlVirtualMachineInstance.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "SqlVirtualMachineContainerNameParameter": {
+      "name": "sqlVirtualMachineContainerName",
+      "in": "path",
+      "description": "The name of the SqlVirtualMachineContainer.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "VirtualClusterNameParameter": {
+      "name": "virtualClusterName",
+      "in": "path",
+      "description": "The name of the virtual cluster.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    }
+  },
   "securityDefinitions": {
     "azure_auth": {
       "type": "oauth2",
