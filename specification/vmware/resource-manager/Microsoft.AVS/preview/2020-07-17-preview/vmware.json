@@ -4194,13 +4194,14 @@
       "description": "The properties of an addon that may be updated",
       "properties": {
         "properties": {
+          "description":"reference specific properties definition for addon type being used",
           "$ref": "#/definitions/AddonProperties",
           "x-ms-client-flatten": true
         }
       }
     },
     "AddonProperties": {
-      "description": "The properties of an SRM addon that may be updated",
+      "description": "The properties of an addon that may be updated",
       "allOf": [
         {
           "$ref": "#/definitions/AddonSrmProperties"
@@ -4213,7 +4214,11 @@
           "enum": [
             "SRM",
             "VR"
-          ]
+          ],
+          "x-ms-enum": {
+            "name": "AddonType",
+            "modelAsString": true
+          }
         },
         "provisioningState": {
           "description": "The state of the addon provisioning",
