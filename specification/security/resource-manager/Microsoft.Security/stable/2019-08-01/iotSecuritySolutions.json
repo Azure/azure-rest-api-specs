@@ -478,6 +478,13 @@
               }
             ]
           }
+        },
+        "additionalWorkspaces": {
+          "type": "array",
+          "description": "List of additional workspaces",
+          "items": {
+            "$ref": "#/definitions/AdditionalWorkspacesProperties"
+          }
         }
       },
       "required": [
@@ -649,6 +656,44 @@
           "$ref": "#/definitions/TagsResource"
         }
       ]
+    },
+    "AdditionalWorkspacesProperties": {
+      "type": "object",
+      "description": "Properties of the additional workspaces.",
+      "properties": {
+        "workspace": {
+          "type": "string",
+          "description": "Workspace resource id"
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "Sentinel"
+          ],
+          "default": "Sentinel",
+          "description": "Workspace type.",
+          "x-ms-enum": {
+            "name": "AdditionalWorkspaceType",
+            "modelAsString": true
+          }
+        },
+        "dataTypes": {
+          "type": "array",
+          "description": "List of data types sent to workspace",
+          "items": {
+            "type": "string",
+            "enum": [
+              "Alerts",
+              "RawEvents"
+            ],
+            "description": "Data types sent to workspace.",
+            "x-ms-enum": {
+              "name": "AdditionalWorkspaceDataType",
+              "modelAsString": true
+            }
+          }
+        }
+      }
     }
   },
   "parameters": {
