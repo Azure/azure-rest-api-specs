@@ -252,6 +252,45 @@
           "nextLinkName": "nextLink"
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Security/secureScoreControlDefinitions": {
+      "get": {
+        "x-ms-examples": {
+          "List security controls definition by subscription": {
+            "$ref": "./examples/secureScoreControlDefinitions/ListSecureScoreControlDefinitions_subscription_example.json"
+          }
+        },
+        "tags": [
+          "Secure Score Control Definitions"
+        ],
+        "description": "For a specified subscription, list the available security controls, their assessments, and the max score",
+        "operationId": "SecureScoreControlDefinitions_ListBySubscription",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/secureScoreControlDefinitionList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
     }
   },
   "definitions": {
