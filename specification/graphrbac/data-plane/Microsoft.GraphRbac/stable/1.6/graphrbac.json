@@ -1559,6 +1559,92 @@
         }
       }
     },
+    "/{tenantID}/servicePrincipals/{objectId}/$links/owners": {
+      "post": {
+        "tags": [
+          "ServicePrincipalOwners"
+        ],
+        "operationId": "ServicePrincipals_AddOwner",
+        "description": "Add an owner to a service principal.",
+        "parameters": [
+          {
+            "name": "objectId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The object ID of the service principal to which to add the owner."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AddOwnerParameters"
+            },
+            "description": "The URL of the owner object, such as https://graph.windows.net/0b1f9851-1bf0-433f-aec3-cb9272f093dc/directoryObjects/f260bbc4-c254-447b-94cf-293b5ec434dd."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/tenantIDInPath"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content. Indicates success. No response body is returned."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/GraphError"
+            }
+          }
+        }
+      }
+    },
+    "/{tenantID}/servicePrincipals/{objectId}/$links/owners/{ownerObjectId}": {
+      "delete": {
+        "tags": [
+          "ServicePrincipalOwners"
+        ],
+        "operationId": "ServicePrincipals_RemoveOwner",
+        "description": "Remove a member from owners.",
+        "parameters": [
+          {
+            "name": "objectId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The object ID of the service principal from which to remove the owner."
+          },
+          {
+            "name": "ownerObjectId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Owner object id"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/tenantIDInPath"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content. Indicates success. No response body is returned."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/GraphError"
+            }
+          }
+        }
+      }
+    },
     "/{tenantID}/servicePrincipals/{objectId}/keyCredentials": {
       "get": {
         "tags": [
