@@ -460,7 +460,7 @@
             }
           },
           "202": {
-            "description": "Accepted"               
+            "description": "Accepted"
           }
         },
         "deprecated": false,
@@ -471,13 +471,13 @@
           "Update Resource With User Assigned Identity": {
             "$ref": "./examples/PATCHVault_WithUserAssignedIdentity.json"
           },
-          "Update Resource With CustomerManagedKeys" : {
+          "Update Resource With CustomerManagedKeys": {
             "$ref": "./examples/PATCHVault_WithCMK.json"
           },
-          "Update Resource With CustomerManagedKeys2" : {
+          "Update Resource With CustomerManagedKeys2": {
             "$ref": "./examples/PatchVault_WithCMK2.json"
           },
-          "Update Resource With CustomerManagedKeys3" : {
+          "Update Resource With CustomerManagedKeys3": {
             "$ref": "./examples/PATCHVault_WithCMK3.json"
           }
         },
@@ -637,7 +637,7 @@
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionId"
-          },          
+          },
           {
             "$ref": "#/parameters/ResourceGroupName"
           },
@@ -663,7 +663,7 @@
           }
         },
         "x-ms-examples": {
-          "Get Operation Status" : {
+          "Get Operation Status": {
             "$ref": "./examples/GetOperationStatus.json"
           }
         }
@@ -711,7 +711,7 @@
           }
         },
         "x-ms-examples": {
-          "Get Operation Result" : {
+          "Get Operation Result": {
             "$ref": "./examples/GetOperationResult.json"
           }
         }
@@ -1155,15 +1155,15 @@
             "modelAsString": true
           }
         },
-        "encryption" : {
+        "encryption": {
           "description": "Customer Managed Key details of the resource.",
-          "type" : "object",
+          "type": "object",
           "properties": {
-            "keyVaultProperties": {        
-                "$ref": "#/definitions/CmkKeyVaultProperties"
+            "keyVaultProperties": {
+              "$ref": "#/definitions/CmkKeyVaultProperties"
             },
             "kekIdentity": {
-                "$ref": "#/definitions/CmkKekIdentity"
+              "$ref": "#/definitions/CmkKekIdentity"
             },
             "infrastructureEncryption": {
               "description": "Enabling/Disabling the Double Encryption state",
@@ -1413,7 +1413,7 @@
         "type": {
           "type": "string",
           "description": "The type of managed identity used.",
-          "enum":[
+          "enum": [
             "SystemAssigned",
             "UserAssigned"
           ],
@@ -1431,12 +1431,12 @@
     "OperationResource": {
       "type": "object",
       "description": "Operation Resource",
-      "properties": {    
-        "endTime":{
-          "description":"End time of the operation",
-          "format":"date-time",
-          "type":"string"
-        },    
+      "properties": {
+        "endTime": {
+          "description": "End time of the operation",
+          "format": "date-time",
+          "type": "string"
+        },
         "error": {
           "$ref": "#/definitions/Error",
           "description": "Required if status == failed or status == canceled. This is the OData v4 error format, used by the RPC and will go into the v2.2 Azure REST API guidelines."
@@ -1448,32 +1448,32 @@
         "name": {
           "description": "It must match the last segment of the \"id\" field, and will typically be a GUID / system generated value",
           "type": "string"
-        },        
+        },
         "status": {
           "description": "The status of the operation. (InProgress/Success/Failed/Cancelled)",
           "type": "string"
         },
-        "startTime":{
-          "description":"Start time of the operation",
-          "format":"date-time",
-          "type":"string"
+        "startTime": {
+          "description": "Start time of the operation",
+          "format": "date-time",
+          "type": "string"
         }
-      }      
+      }
     },
     "Error": {
       "type": "object",
       "description": "The resource management error response.",
-      "properties": {        
+      "properties": {
         "code": {
           "description": "The error code.",
           "readOnly": true,
           "type": "string"
-        },        
+        },
         "message": {
           "description": "The error message.",
           "readOnly": true,
           "type": "string"
-        }        
+        }
       }
     }
   },
