@@ -1510,6 +1510,48 @@
         "x-ms-long-running-operation": true
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/diskAccesses/{diskAccessName}/privateEndpointConnections": {
+      "get" :{
+        "tags": [
+          "DiskAccesses"
+        ],
+        "operationId": "DiskAccesses_ListPrivateEndpointConnections",
+        "description": "List information about private endpoint connections under a disk access resource",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DiskAccessNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnectionListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get information about a private endpoint connection under a disk access resource.": {
+            "$ref": "./examples/ListPrivateEndpointConnectionsInADiskAccess.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/restorePointCollections/{restorePointCollectionName}/restorePoints/{vmRestorePointName}/diskRestorePoints/{diskRestorePointName}": {
       "get": {
         "tags": [
@@ -1554,6 +1596,51 @@
         "x-ms-examples": {
           "Get an incremental disk restorePoint resource.": {
             "$ref": "./examples/GetDiskRestorePointResources.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/restorePointCollections/{restorePointCollectionName}/restorePoints/{vmRestorePointName}/diskRestorePoints": {
+      "get": {
+        "tags": [
+          "IncrementalRestorePoints"
+        ],
+        "operationId": "DiskRestorePoint_ListByRestorePoint",
+        "description": "Lists diskRestorePoints under a vmRestorePoint.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/RestorePointCollectionNameParameter"
+          },
+          {
+            "$ref": "#/parameters/VmRestorePointNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DiskRestorePointList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get an incremental disk restorePoint resource.": {
+            "$ref": "./examples/ListDiskRestorePointsInVmRestorePoint.json"
           }
         }
       }
@@ -3017,6 +3104,18 @@
           "description": "Array of private link resources",
           "items": {
             "$ref": "#/definitions/PrivateLinkResource"
+          }
+        }
+      },
+      "description": "A list of private link resources"
+    },
+    "PrivateEndpointConnectionListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "Array of private endpoint connections",
+          "items": {
+            "$ref": "#/definitions/PrivateEndpointConnection"
           }
         }
       },
