@@ -1400,6 +1400,19 @@
           },
           "description": "The name servers for this DNS zone. This is a read-only property and any attempt to set this value will be ignored.",
           "readOnly": true
+        },
+        "zoneType": {
+          "type": "string",
+          "enum": [
+            "Public",
+            "Private"
+          ],
+          "x-ms-enum": {
+            "name": "ZoneType",
+            "modelAsString": false
+          },
+          "default": "Public",
+          "description": "The type of this DNS zone (Public or Private)."
         }
       },
       "description": "Represents the properties of the zone."
