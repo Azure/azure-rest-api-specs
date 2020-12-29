@@ -1480,10 +1480,6 @@
         "type": {
           "type": "string",
           "description": "The type of the resource. Ex- Microsoft.Network/trafficManagerProfiles."
-        },
-        "systemData": {
-          "description": "The system metadata pertaining to this resource.",
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
         }
       },
       "x-ms-azure-resource": true
@@ -1510,6 +1506,11 @@
             "create"
           ],
           "description": "The Azure Region where the resource lives"
+        },
+        "systemData": {
+          "readOnly": true,
+          "description": "The system metadata pertaining to this resource",
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
         }
       },
       "allOf": [
@@ -1519,7 +1520,7 @@
       ]
     },
     "ProxyResource": {
-      "description": "The resource model definition for a ARM proxy resource. It will have everything other than required location and tags",
+      "description": "The resource model definition for a ARM proxy resource. It will have everything other than required location, tags and systemData",
       "allOf": [
         {
           "$ref": "#/definitions/Resource"
