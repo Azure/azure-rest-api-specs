@@ -26,18 +26,27 @@ These are the global settings for the Cost Management API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2020-06
+tag: package-preview-2020-12
 azure-validator: false
 ```
 
 ---
 
 
+### Tag: package-preview-2020-12
+
+These settings apply only when `--tag=package-preview-2020-12` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2020-12'
+input-file:
+  - Microsoft.CostManagement/preview/2020-12-01-preview/costmanagement.exports.json
+  - Microsoft.CostManagement/preview/2020-12-01-preview/costmanagement.json
+```
 ### Tag: package-preview-2020-03
 
 These settings apply only when `--tag=package-preview-2020-03` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2020-03'
+``` yaml $(tag) == 'package-preview-2020-03'
 input-file:
   - Microsoft.CostManagement/stable/2020-06-01/costmanagement.json
   - Microsoft.CostManagement/preview/2020-03-01-preview/costallocation.json
@@ -47,12 +56,11 @@ input-file:
 
 These settings apply only when `--tag=package-2020-06` is specified on the command line.
 
-```yaml $(tag) == 'package-2020-06'
+``` yaml $(tag) == 'package-2020-06'
 input-file:
   - Microsoft.CostManagement/stable/2020-06-01/costmanagement.json
   - Microsoft.CostManagement/stable/2020-06-01/costmanagement.exports.json
 ```
-
 
 ### Tag: package-2019-11
 
@@ -343,4 +351,3 @@ generate-interface: true
 ## AzureResourceSchema
 
 See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
-
