@@ -1538,6 +1538,120 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IntelligentITDigitalTwin/digitalTwins/{iidtName}/executionPlans/{executionPlanName}/run": {
+      "post": {
+        "tags": [
+          "ITDigitalTwinExecutionPlans"
+        ],
+        "operationId": "ITDigitalTwinExecutionPlans_Run",
+        "description": "The operation is a post action: run executionPlans of a it digital twin.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "iidtName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the it digital twin."
+          },
+          {
+            "name": "executionPlanName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the child resource name executionPlans."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/RunExecutionPlanResponseBody"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Post action run ExecutionPlans": {
+            "$ref": "./examples/PostITDigitalTwinExecutionPlansRun.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IntelligentITDigitalTwin/digitalTwins/{iidtName}/executionPlans/{executionPlanName}/fetchLog": {
+      "post": {
+        "tags": [
+          "ITDigitalTwinExecutionPlans"
+        ],
+        "operationId": "ITDigitalTwinExecutionPlans_FetchLog",
+        "description": "The operation is a post action: fetchLog executionPlans of a it digital twin.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "iidtName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the it digital twin."
+          },
+          {
+            "name": "executionPlanName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the child resource name executionPlans."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/FetchLogResponseBody"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Post action fetchLog ExecutionPlans": {
+            "$ref": "./examples/PostITDigitalTwinExecutionPlansFetchLog.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -1929,13 +2043,6 @@
     },
     "TestPlanProperties": {
       "properties": {
-        "pathList": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "description": "List of paths for the test"
-        },
         "testList": {
           "type": "array",
           "items": {
@@ -2021,10 +2128,6 @@
             "modelAsString": true
           }
         },
-        "log": {
-          "type": "string",
-          "description": "Log for the test execution."
-        },
         "result": {
           "type": "string",
           "description": "Result for the test execution.",
@@ -2071,6 +2174,34 @@
         }
       },
       "description": "ExecutionPlan definition for patch operation"
+    },
+    "RunExecutionPlanResponseBody": {
+      "properties": {
+        "runExecutionResponseStatus": {
+          "type": "string",
+          "description": "The status on the execution plan",
+          "enum": [
+            "Queued",
+            "In-Progress",
+            "Completed",
+            "Unknown"
+          ],
+          "x-ms-enum": {
+            "name": "runExecutionResponseStatus",
+            "modelAsString": true
+          }
+        }
+      },
+      "description": "The response definition for run"
+    },
+    "FetchLogResponseBody": {
+      "properties": {
+        "log": {
+          "type": "string",
+          "description": "The log for running test."
+        }
+      },
+      "description": "The response definition for fetchLog"
     },
     "ExecutionPlans": {
       "properties": {
