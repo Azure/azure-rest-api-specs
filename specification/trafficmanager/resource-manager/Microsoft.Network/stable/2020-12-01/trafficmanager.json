@@ -71,7 +71,7 @@
           "200": {
             "description": "The updated Traffic Manager endpoint.",
             "schema": {
-              "$ref": "#/definitions/Endpoint"
+              "$ref": "#/definitions/EndpointResult"
             }
           },
           "default": {
@@ -133,7 +133,7 @@
           "200": {
             "description": "The Traffic Manager endpoint.",
             "schema": {
-              "$ref": "#/definitions/Endpoint"
+              "$ref": "#/definitions/EndpointResult"
             }
           },
           "default": {
@@ -210,13 +210,13 @@
           "200": {
             "description": "The created or updated Endpoint.",
             "schema": {
-              "$ref": "#/definitions/Endpoint"
+              "$ref": "#/definitions/EndpointResult"
             }
           },
           "201": {
             "description": "The created or updated Endpoint.",
             "schema": {
-              "$ref": "#/definitions/Endpoint"
+              "$ref": "#/definitions/EndpointResult"
             }
           },
           "default": {
@@ -470,7 +470,7 @@
           "200": {
             "description": "The Traffic Manager profile.",
             "schema": {
-              "$ref": "#/definitions/Profile"
+              "$ref": "#/definitions/ProfileResult"
             }
           },
           "default": {
@@ -533,13 +533,13 @@
           "200": {
             "description": "The created or updated Traffic Manager profile.",
             "schema": {
-              "$ref": "#/definitions/Profile"
+              "$ref": "#/definitions/ProfileResult"
             }
           },
           "201": {
             "description": "The created or updated Traffic Manager profile.",
             "schema": {
-              "$ref": "#/definitions/Profile"
+              "$ref": "#/definitions/ProfileResult"
             }
           },
           "default": {
@@ -659,7 +659,7 @@
           "200": {
             "description": "The updated Traffic Manager profile.",
             "schema": {
-              "$ref": "#/definitions/Profile"
+              "$ref": "#/definitions/ProfileResult"
             }
           },
           "default": {
@@ -920,6 +920,11 @@
           "description": "The result of the operation or request."
         }
       },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResultData"
+        }
+      ],
       "description": "The result of the request or operation."
     },
     "EndpointProperties": {
@@ -1039,7 +1044,8 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/ProxyResource"
+          "$ref": "#/definitions/ProxyResource",
+          "$ref": "#/definitions/ResultData"
         }
       ],
       "description": "Class representing a Traffic Manager HeatMap."
@@ -1054,7 +1060,8 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/ProxyResource"
+          "$ref": "#/definitions/ProxyResource",
+          "$ref": "#/definitions/ResultData"
         }
       ],
       "description": "Class representing Traffic Manager User Metrics."
@@ -1163,6 +1170,22 @@
         }
       ],
       "description": "Class representing a Traffic Manager endpoint."
+    },
+    "EndpointResult": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/EndpointProperties",
+          "description": "The properties of the Traffic Manager endpoint."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyResource",
+          "$ref": "#/definitions/ResultData"
+        }
+      ],
+      "description": "Class representing a Traffic Manager endpoint in a response."
     },
     "CheckTrafficManagerRelativeDnsNameAvailabilityParameters": {
       "properties": {
@@ -1376,12 +1399,28 @@
       ],
       "description": "Class representing a Traffic Manager profile."
     },
+    "ProfileResult": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ProfileProperties",
+          "description": "The properties of the Traffic Manager profile."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/TrackedResource",
+          "$ref": "#/definitions/ResultData"
+        }
+      ],
+      "description": "Class representing a Traffic Manager profile in a response."
+    },
     "ProfileListResult": {
       "properties": {
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/Profile"
+            "$ref": "#/definitions/ProfileResult"
           },
           "description": "Gets the list of Traffic manager profiles."
         }
@@ -1411,6 +1450,11 @@
           "description": "Descriptive message that explains why the name is not available, when applicable."
         }
       },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResultData"
+        }
+      ],
       "description": "Class representing a Traffic Manager Name Availability response."
     },
     "Region": {
@@ -1452,7 +1496,8 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/ProxyResource"
+          "$ref": "#/definitions/ProxyResource",
+          "$ref": "#/definitions/ResultData"
         }
       ],
       "description": "Class representing the Geographic hierarchy used with the Geographic traffic routing method."
@@ -1506,11 +1551,6 @@
             "create"
           ],
           "description": "The Azure Region where the resource lives"
-        },
-        "systemData": {
-          "readOnly": true,
-          "description": "The system metadata pertaining to this resource",
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
         }
       },
       "allOf": [
@@ -1527,6 +1567,16 @@
         }
       ]
     },
+    "ResultData": {
+      "description": "Data to be returned in a response",
+      "properties": {
+        "systemData": {
+          "readOnly": true,
+          "description": "The system metadata pertaining to a resource",
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
+        }
+      },
+    },
     "CloudError": {
       "type": "object",
       "properties": {
@@ -1535,6 +1585,11 @@
           "description": "The content of the error."
         }
       },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResultData"
+        }
+      ],
       "description": "An error returned by the Azure Resource Manager",
       "x-ms-external": true
     },
