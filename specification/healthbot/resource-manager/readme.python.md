@@ -14,8 +14,13 @@ python:
   clear-output-folder: true
 ```
 
-```yaml $(python)
+``` yaml $(python) && $(python-mode) == 'update'
 python:
-  no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/healthbot/azure-mgmt-healthbot/azure/mgmt/healthbot
+    no-namespace-folders: true
+    output-folder: $(python-sdks-folder)/{svcName}/azure-mgmt-{svcName}/azure/mgmt/{svcName}
+```
+``` yaml $(python) && $(python-mode) == 'create'
+python:
+    basic-setup-py: true
+    output-folder: $(python-sdks-folder)/{svcName}/azure-mgmt-{svcName}
 ```
