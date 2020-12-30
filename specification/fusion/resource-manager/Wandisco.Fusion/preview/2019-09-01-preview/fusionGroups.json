@@ -1809,6 +1809,52 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Wandisco.Fusion/migrators/{migratorName}/generateUpgrade": {
+      "post": {
+        "tags": [
+          "migrator"
+        ],
+        "description": "Generate the updated version of a Migrator.",
+        "operationId": "Migrators_GenerateUpgrade",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/MigratorNameParameter"
+          }
+        ],
+        "x-ms-examples": {
+          "Generated updated Migrator": {
+            "$ref": "./examples/LiveDataMigrator/MigratorGenerateUpgrade.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Generate upgraded migrator request completed."
+          },
+          "202": {
+            "description": "Generate upgraded migrator request accepted."
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Wandisco.Fusion/migrators/{migratorName}/updateDownloadLocation": {
       "post": {
         "tags": [
@@ -3828,6 +3874,16 @@
           "type": "string",
           "readOnly": true
         },
+        "version": {
+          "description": "The version of this migrator service",
+          "type": "string",
+          "readOnly": true
+        },
+        "latestAvailableVersion": {
+          "description": "The latest available version of the migrator service",
+          "type": "string",
+          "readOnly": true
+        },
         "kerberos": {
           "title": "KerberosConfiguration",
           "description": "The configuration properties for authenticating to the source filesystem",
@@ -3842,6 +3898,26 @@
         "migratorStatus": {
           "description": "Status of the Migrator server",
           "$ref": "#/definitions/MigratorDetails"
+        },
+        "installParameters": {
+          "description": "Installation configuration for the Migrator server",
+          "properties": {
+            "user": {
+              "description": "The system user to run the process as",
+              "type": "string",
+              "default": "hdfs"
+            },
+            "installDir": {
+              "description": "The directory under which to install",
+              "type": "string",
+              "default": "/opt/wandisco"
+            },
+            "logDir": {
+              "description": "The directory where logs will be written",
+              "type": "string",
+              "default": "/var/log"
+            }
+          }
         }
       }
     },
@@ -4607,7 +4683,6 @@
         "Succeeded",
         "Failed",
         "Deleting",
-        "Deleted",
         "NotSpecified"
       ],
       "x-ms-enum": {

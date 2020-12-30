@@ -410,6 +410,51 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Elastic/monitors/{monitorName}/listDeploymentInfo": {
+      "post": {
+        "tags": [
+          "DeploymentInfo"
+        ],
+        "summary": "Fetch information regarding Elastic cloud deployment corresponding to the Elastic monitor resource.",
+        "operationId": "DeploymentInfo_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MonitorNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/DeploymentInfoResponse"
+            }
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DeploymentInfo_List": {
+            "$ref": "./examples/DeploymentInfo_List.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Elastic/monitors/{monitorName}/tagRules": {
       "get": {
         "tags": [
@@ -780,6 +825,11 @@
           "type": "string",
           "readOnly": true
         },
+        "deploymentId": {
+          "description": "Elastic deployment Id",
+          "type": "string",
+          "readOnly": true
+        },
         "azureSubscriptionId": {
           "description": "Associated Azure subscription Id for the elastic deployment.",
           "type": "string",
@@ -873,7 +923,7 @@
         },
         "emailAddress": {
           "description": "Email of the user used by Elastic for contacting them if needed",
-          "pattern": "^[A-Za-z0-9._%+-]+@(?:[A-Za-z0-9-]+\\.)+[A-Za-z]{2,}$",
+          "pattern": "^([^<>()\\[\\]\\.,;:\\s@\"]+(\\.[^<>()\\[\\]\\.,;:\\s@\"]+)*)@(([a-zA-Z-_0-9]+\\.)+[a-zA-Z]{2,})$",
           "type": "string"
         },
         "companyInfo": {
@@ -1175,6 +1225,44 @@
         "nextLink": {
           "description": "Link to the next set of results, if any.",
           "type": "string"
+        }
+      }
+    },
+    "ElasticDeploymentStatus": {
+      "description": "Flag specifying if the Elastic deployment status is healthy or not.",
+      "enum": [
+        "Healthy",
+        "Unhealthy"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "ElasticDeploymentStatus"
+      }
+    },
+    "DeploymentInfoResponse": {
+      "description": "The properties of deployment in Elastic cloud corresponding to the Elastic monitor resource.",
+      "type": "object",
+      "properties": {
+        "status": {
+          "description": "The Elastic deployment status.",
+          "$ref": "#/definitions/ElasticDeploymentStatus",
+          "readOnly": true
+        },
+        "version": {
+          "description": "Version of the elasticsearch in Elastic cloud deployment.",
+          "type": "string",
+          "readOnly": true
+        },
+        "memoryCapacity": {
+          "description": "RAM capacity of the elasticsearch in Elastic cloud deployment.",
+          "type": "string",
+          "readOnly": true
+        },
+        "diskCapacity": {
+          "description": "Disk capacity of the elasticsearch in Elastic cloud deployment.",
+          "type": "string",
+          "readOnly": true
         }
       }
     }

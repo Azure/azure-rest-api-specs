@@ -36,7 +36,7 @@
   "paths": {
     "/subscriptions/{subscriptionId}/providers/Microsoft.DeviceUpdate/accounts": {
       "get": {
-        "description": "Returns list of accounts.",
+        "description": "Returns list of Accounts.",
         "operationId": "Accounts_ListBySubscription",
         "parameters": [
           {
@@ -48,7 +48,7 @@
         ],
         "responses": {
           "200": {
-            "description": "List of accounts.",
+            "description": "List of Accounts.",
             "schema": {
               "$ref": "#/definitions/AccountList"
             }
@@ -65,7 +65,7 @@
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "Gets a list of accounts": {
+          "Get list of Accounts": {
             "$ref": "./examples/Accounts/Accounts_List.json"
           }
         }
@@ -88,7 +88,7 @@
         ],
         "responses": {
           "200": {
-            "description": "List of instances.",
+            "description": "List of Instances.",
             "schema": {
               "$ref": "#/definitions/InstanceList"
             }
@@ -104,7 +104,7 @@
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "Gets a list of instances by account": {
+          "Get list of Instances by Account": {
             "$ref": "./examples/Instances/Instances_ListByAccount.json"
           }
         }
@@ -112,7 +112,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DeviceUpdate/accounts": {
       "get": {
-        "description": "Returns list of accounts.",
+        "description": "Returns list of Accounts.",
         "operationId": "Accounts_ListByResourceGroup",
         "parameters": [
           {
@@ -127,7 +127,7 @@
         ],
         "responses": {
           "200": {
-            "description": "List of accounts.",
+            "description": "List of Accounts.",
             "schema": {
               "$ref": "#/definitions/AccountList"
             }
@@ -144,7 +144,7 @@
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "Gets a list of accounts": {
+          "Gets list of Accounts": {
             "$ref": "./examples/Accounts/Accounts_List.json"
           }
         }
@@ -183,13 +183,13 @@
           }
         },
         "x-ms-examples": {
-          "Gets account details": {
+          "Gets Account details": {
             "$ref": "./examples/Accounts/Accounts_Get.json"
           }
         }
       },
       "put": {
-        "description": "Creates or updates account.",
+        "description": "Creates or updates Account.",
         "operationId": "Accounts_Create",
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
@@ -233,7 +233,7 @@
           }
         },
         "x-ms-examples": {
-          "Creates or updates an account": {
+          "Creates or updates Account": {
             "$ref": "./examples/Accounts/Accounts_Create.json"
           }
         }
@@ -264,7 +264,7 @@
             "description": "Async operation to delete Account was created."
           },
           "204": {
-            "description": "Account has already been deleted."
+            "description": "Account has been already deleted."
           },
           "default": {
             "description": "Error response describing the reason for operation failure.",
@@ -320,7 +320,7 @@
           }
         },
         "x-ms-examples": {
-          "Creates or updates an account": {
+          "Updates Account": {
             "$ref": "./examples/Accounts/Accounts_Update.json"
           }
         }
@@ -346,7 +346,7 @@
         ],
         "responses": {
           "200": {
-            "description": "List of instances.",
+            "description": "List of Instances.",
             "schema": {
               "$ref": "#/definitions/InstanceList"
             }
@@ -362,7 +362,7 @@
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "Gets a list of instances by account": {
+          "Gets list of Instances by Account": {
             "$ref": "./examples/Instances/Instances_ListByAccount.json"
           }
         }
@@ -404,7 +404,7 @@
           }
         },
         "x-ms-examples": {
-          "Gets a list of accounts": {
+          "Gets list of Accounts": {
             "$ref": "./examples/Instances/Instances_Get.json"
           }
         }
@@ -457,7 +457,7 @@
           }
         },
         "x-ms-examples": {
-          "Gets a list of accounts": {
+          "Creates or updates Instance": {
             "$ref": "./examples/Instances/Instances_Create.json"
           }
         }
@@ -491,7 +491,7 @@
             "description": "Async operation to delete Instance was created."
           },
           "204": {
-            "description": "Instance has already been deleted."
+            "description": "Instance has been already deleted."
           },
           "default": {
             "description": "Error response describing the reason for operation failure.",
@@ -501,7 +501,7 @@
           }
         },
         "x-ms-examples": {
-          "Delete an instance": {
+          "Deletes instance": {
             "$ref": "./examples/Instances/Instances_Delete.json"
           }
         }
@@ -550,7 +550,7 @@
           }
         },
         "x-ms-examples": {
-          "Gets a list of accounts": {
+          "Updates Instance": {
             "$ref": "./examples/Instances/Instances_Update.json"
           }
         }
@@ -587,53 +587,12 @@
     }
   },
   "definitions": {
-    "Resource": {
-      "description": "ADU resource.",
-      "properties": {
-        "id": {
-          "description": "Resource Id.",
-          "type": "string",
-          "readOnly": true
-        },
-        "name": {
-          "description": "Resource name.",
-          "type": "string",
-          "readOnly": true
-        },
-        "type": {
-          "description": "Resource type.",
-          "type": "string",
-          "readOnly": true
-        },
-        "location": {
-          "description": "Resource location.",
-          "type": "string",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "tags": {
-          "description": "Resource tags.",
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "x-ms-mutability": [
-            "read",
-            "create",
-            "update"
-          ]
-        }
-      },
-      "x-ms-azure-resource": true
-    },
     "Account": {
       "description": "Device Update account details.",
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/TrackedResource"
         }
       ],
       "properties": {
@@ -651,8 +610,7 @@
                 "Failed",
                 "Canceled",
                 "Accepted",
-                "Creating",
-                "Deleting"
+                "Creating"
               ],
               "readOnly": true,
               "x-ms-enum": {
@@ -670,15 +628,15 @@
       }
     },
     "AccountList": {
-      "description": "List of accounts.",
+      "description": "List of Accounts.",
       "type": "object",
       "properties": {
         "nextLink": {
-          "description": "The link used to get the next page of accounts list.",
+          "description": "The link used to get the next page of Accounts list.",
           "type": "string"
         },
         "value": {
-          "description": "List of accounts.",
+          "description": "List of Accounts.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/Account"
@@ -691,7 +649,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/TrackedResource"
         }
       ],
       "properties": {
@@ -709,8 +667,7 @@
                 "Failed",
                 "Canceled",
                 "Accepted",
-                "Creating",
-                "Deleting"
+                "Creating"
               ],
               "readOnly": true,
               "x-ms-enum": {
@@ -719,7 +676,7 @@
               }
             },
             "accountName": {
-              "description": "Parent Device Update Account name to which Instance belongs to.",
+              "description": "Parent Device Update Account name which Instance belongs to.",
               "type": "string",
               "readOnly": true
             },
@@ -738,15 +695,15 @@
       ]
     },
     "InstanceList": {
-      "description": "List of instances.",
+      "description": "List of Instances.",
       "type": "object",
       "properties": {
         "nextLink": {
-          "description": "The link used to get the next page of instances list.",
+          "description": "The link used to get the next page of Instances list.",
           "type": "string"
         },
         "value": {
-          "description": "List of instances.",
+          "description": "List of Instances.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/Instance"
@@ -760,11 +717,15 @@
       "properties": {
         "name": {
           "description": "IoTHub name",
-          "type": "string"
+          "type": "string",
+          "minLength": 3,
+          "maxLength": 50
         },
         "resourceId": {
           "description": "IoTHub resource ID",
-          "type": "string"
+          "type": "string",
+          "minLength": 108,
+          "maxLength": 244
         },
         "ioTHubConnectionString": {
           "description": "IoTHub connection string.",

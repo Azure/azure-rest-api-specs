@@ -1799,10 +1799,6 @@
       "properties": {
         "credentials": {
           "type": "object",
-          "required": [
-            "username",
-            "password"
-          ],
           "description": "Credentials to connect to VMMServer.",
           "properties": {
             "username": {
@@ -1965,8 +1961,7 @@
     "CloudProperties": {
       "description": "Defines the resource properties.",
       "required": [
-        "uuid",
-        "vmmServerId"
+        "uuid"
       ],
       "type": "object",
       "properties": {
@@ -1987,6 +1982,14 @@
         "cloudCapacity": {
           "$ref": "#/definitions/CloudCapacity",
           "description": "Capacity of the cloud.",
+          "readOnly": true
+        },
+        "storageQoSPolicies": {
+          "description": "List of QoS policies available for the cloud.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/StorageQoSPolicy"
+          },
           "readOnly": true
         },
         "provisioningState": {
@@ -2071,8 +2074,7 @@
     "VirtualNetworkProperties": {
       "description": "Defines the resource properties.",
       "required": [
-        "uuid",
-        "vmmServerId"
+        "uuid"
       ],
       "type": "object",
       "properties": {
@@ -2171,9 +2173,6 @@
     },
     "VirtualMachineProperties": {
       "description": "Defines the resource properties.",
-      "required": [
-        "cloudId"
-      ],
       "properties": {
         "vmmServerId": {
           "type": "string",
@@ -2307,6 +2306,10 @@
           "type": "integer",
           "format": "int32",
           "description": "Gets or sets the min dynamic memory for the vm."
+        },
+        "isHighlyAvailable": {
+          "description": "Gets highly available property.",
+          "type": "string"
         }
       }
     },
@@ -2393,6 +2396,10 @@
         "macAddressType": {
           "description": "Gets or sets the mac address type.",
           "$ref": "#/definitions/AllocationMethod"
+        },
+        "nicId": {
+          "description": "Gets or sets the nic id.",
+          "type": "string"
         }
       }
     },
@@ -2418,6 +2425,19 @@
       },
       "readOnly": true
     },
+    "StorageQoSPolicyDetails": {
+      "description": "The StorageQoSPolicyDetails definition.",
+      "properties": {
+        "name": {
+          "description": "The name of the policy.",
+          "type": "string"
+        },
+        "id": {
+          "description": "The ID of the QoS policy.",
+          "type": "string"
+        }
+      }
+    },
     "VirtualDisk": {
       "description": "Virtual disk model",
       "type": "object",
@@ -2428,8 +2448,7 @@
         },
         "diskId": {
           "description": "Gets or sets the disk id.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "diskSizeGB": {
           "format": "int32",
@@ -2439,8 +2458,7 @@
         "maxDiskSizeGB": {
           "format": "int32",
           "description": "Gets or sets the max disk size.",
-          "type": "integer",
-          "readOnly": true
+          "type": "integer"
         },
         "diskName": {
           "description": "Gets or sets the name of the virtual disk in vmmServer.",
@@ -2459,18 +2477,28 @@
         },
         "busType": {
           "description": "Gets or sets the disk bus type.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "vhdType": {
           "description": "Gets or sets the disk vhd type.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "volumeType": {
           "description": "Gets or sets the disk volume type.",
+          "type": "string"
+        },
+        "vhdFormatType": {
+          "description": "Gets the disk vhd format type.",
           "type": "string",
           "readOnly": true
+        },
+        "templateDiskId": {
+          "description": "Gets or sets the disk id in the template.",
+          "type": "string"
+        },
+        "storageQoSPolicy": {
+          "description": "The QoS policy for the disk.",
+          "$ref": "#/definitions/StorageQoSPolicyDetails"
         },
         "createDiffDisk": {
           "type": "string",
@@ -2482,8 +2510,7 @@
           "x-ms-enum": {
             "modelAsString": true,
             "name": "CreateDiffDisk"
-          },
-          "readOnly": true
+          }
         }
       }
     },
@@ -2586,8 +2613,7 @@
     "VirtualMachineTemplateProperties": {
       "description": "Defines the resource properties.",
       "required": [
-        "uuid",
-        "vmmServerId"
+        "uuid"
       ],
       "type": "object",
       "properties": {
@@ -2645,6 +2671,11 @@
           "type": "integer",
           "format": "int32",
           "description": "Gets or sets the min dynamic memory for the vm.",
+          "readOnly": true
+        },
+        "isHighlyAvailable": {
+          "description": "Gets highly available property.",
+          "type": "string",
           "readOnly": true
         },
         "generation": {
@@ -2813,6 +2844,38 @@
             "$ref": "#/definitions/ErrorDefinition"
           },
           "readOnly": true
+        }
+      }
+    },
+    "StorageQoSPolicy": {
+      "description": "The StorageQoSPolicy definition.",
+      "properties": {
+        "name": {
+          "description": "The name of the policy.",
+          "type": "string"
+        },
+        "id": {
+          "description": "The ID of the QoS policy.",
+          "type": "string"
+        },
+        "iopsMaximum": {
+          "description": "The maximum IO operations per second.",
+          "type": "integer",
+          "format": "int64"
+        },
+        "iopsMinimum": {
+          "description": "The minimum IO operations per second.",
+          "type": "integer",
+          "format": "int64"
+        },
+        "bandwidthLimit": {
+          "description": "The Bandwidth Limit for internet traffic.",
+          "type": "integer",
+          "format": "int64"
+        },
+        "policyId": {
+          "description": "The underlying policy.",
+          "type": "string"
         }
       }
     },

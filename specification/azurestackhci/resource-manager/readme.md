@@ -26,7 +26,24 @@ These are the global settings for the azurestackhci.
 
 ```yaml
 openapi-type: arm
-tag: package-2020-03-01-preview
+openapi-subtype: rpaas
+tag: package-2020-11-01-preview
+```
+
+### Tag: package-2020-11-01-preview
+
+These settings apply only when `--tag=package-2020-11-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2020-11-01-preview'
+input-file:
+  - Microsoft.AzureStackHCI/preview/2020-11-01-preview/galleryImages.json
+  - Microsoft.AzureStackHCI/preview/2020-11-01-preview/networkInterfaces.json
+  - Microsoft.AzureStackHCI/preview/2020-11-01-preview/operations.json
+  - Microsoft.AzureStackHCI/preview/2020-11-01-preview/virtualHardDisks.json
+  - Microsoft.AzureStackHCI/preview/2020-11-01-preview/virtualMachines.json
+  - Microsoft.AzureStackHCI/preview/2020-11-01-preview/virtualNetworks.json
+  - Microsoft.AzureStackHCI/preview/2020-11-01-preview/storageContainers.json
+  - Microsoft.AzureStackHCI/preview/2020-11-01-preview/azurestackhci.json
 ```
 
 ### Tag: package-2020-03-01-preview
@@ -36,6 +53,31 @@ These settings apply only when `--tag=package-2020-03-01-preview` is specified o
 ```yaml $(tag) == 'package-2020-03-01-preview'
 input-file:
   - Microsoft.AzureStackHCI/preview/2020-03-01-preview/azurestackhci.json
+```
+
+## Suppression
+
+``` yaml
+directive:
+  - suppress: R3020
+    from: galleryImages.json
+    reason: Microsoft.AzureStackHCI is the correct name for our RP.
+  - suppress: R3020
+    from: virtualMachines.json
+    reason: Microsoft.AzureStackHCI is the correct name for our RP. 
+  - suppress: R3020
+    from: virtualNetworks.json
+    reason: Microsoft.AzureStackHCI is the correct name for our RP.
+  - suppress: R3020
+    from: virtualHardDisks.json
+    reason: Microsoft.AzureStackHCI is the correct name for our RP.
+  - suppress: R3020
+    from: networkInterfaces.json
+    reason: Microsoft.AzureStackHCI is the correct name for our RP.
+  - suppress: R3020
+    from: storagecontainers.json
+    reason: Microsoft.AzureStackHCI is the correct name for our RP.
+
 ```
 
 ---

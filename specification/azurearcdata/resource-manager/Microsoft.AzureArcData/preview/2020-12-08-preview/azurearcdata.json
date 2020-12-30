@@ -1660,7 +1660,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/PostgresInstanceProperties",
-          "x-ms-client-flatten": true,
+          "x-ms-client-flatten": false,
           "description": "null"
         }
       }
@@ -1708,10 +1708,6 @@
           "type": "string",
           "description": "null"
         },
-        "instanceEndpoint": {
-          "type": "string",
-          "description": "The on premise instance endpoint"
-        },
         "admin": {
           "type": "string",
           "description": "The instance admin user"
@@ -1723,10 +1719,6 @@
         "endTime": {
           "type": "string",
           "description": "The instance end time"
-        },
-        "vCore": {
-          "type": "string",
-          "description": "The instance vCore"
         },
         "k8sRaw": {
           "type": "object",
@@ -1755,7 +1747,7 @@
         "properties": {
           "$ref": "#/definitions/SqlManagedInstanceProperties",
           "description": "null",
-          "x-ms-client-flatten": true
+          "x-ms-client-flatten": false
         }
       }
     },
@@ -1805,16 +1797,11 @@
         },
         "containerResourceId": {
           "type": "string",
-          "description": "ARM Resource id of the container resource (Azure Arc for Servers)"
+          "description": "ARM Resource id of the container resource (Azure Arc for Servers)."
         },
         "createTime": {
           "type": "string",
           "description": "The time when the resource was created.",
-          "readOnly": true
-        },
-        "updateTime": {
-          "type": "string",
-          "description": "The time when the resource was last updated.",
           "readOnly": true
         },
         "vCore": {
@@ -1825,16 +1812,41 @@
           "type": "string",
           "description": "The cloud connectivity status."
         },
+        "patchLevel": {
+          "type": "string",
+          "description": "SQL Server update level."
+        },
+        "collation": {
+          "type": "string",
+          "description": "SQL Server collation."
+        },
+        "currentVersion": {
+          "type": "string",
+          "description": "SQL Server current version."
+        },
+        "instanceName": {
+          "type": "string",
+          "description": "SQL Server instance name."
+        },
+        "tcpDynamicPorts": {
+          "type": "string",
+          "description": "Dynamic TCP ports used by SQL Server."
+        },
+        "tcpStaticPorts": {
+          "type": "string",
+          "description": "Static TCP ports used by SQL Server."
+        },
+        "productId": {
+          "type": "string",
+          "description": "SQL Server product ID."
+        },
         "provisioningState": {
           "type": "string",
           "readOnly": true
         }
       },
       "required": [
-        "version",
-        "edition",
         "containerResourceId",
-        "vCore",
         "status"
       ]
     },
@@ -1850,7 +1862,7 @@
         "properties": {
           "$ref": "#/definitions/SqlServerInstanceProperties",
           "description": "null",
-          "x-ms-client-flatten": true
+          "x-ms-client-flatten": false
         }
       }
     },
