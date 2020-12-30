@@ -38,7 +38,11 @@
             "backupIntervalInMinutes": 240,
             "backupRetentionIntervalInHours": 720
           }
-        }
+        },
+        "allowTrustedServiceNetworkBypass": true,
+        "trustedServiceResourceIds": [
+          "/subscriptions/subId/resourcegroups/rgName/providers/Microsoft.Synapse/workspaces/workspaceName"
+        ]
       }
     }
   },
@@ -137,8 +141,10 @@
               "backupRetentionIntervalInHours": 720
             }
           },
-          "allowTrustedServiceNetworkBypass": false,
-          "trustedServiceResourceIds": []
+          "allowTrustedServiceNetworkBypass": true,
+          "trustedServiceResourceIds": [
+            "/subscriptions/subId/resourcegroups/rgName/providers/Microsoft.Synapse/workspaces/workspaceName"
+          ]
         }
       }
     }
