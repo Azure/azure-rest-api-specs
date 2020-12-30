@@ -7,6 +7,7 @@ Use `--python-mode=update` if you already have a setup.py and just want to updat
 ``` yaml
 title: EventGridPublisherClient
 description: EventGrid Python Publisher Client
+generated-metadata: false
 license-header: MICROSOFT_MIT_NO_VERSION
 namespace: azure.eventgrid
 package-name: azure-eventgrid
