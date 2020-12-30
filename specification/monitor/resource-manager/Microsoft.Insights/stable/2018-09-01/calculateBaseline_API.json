@@ -162,23 +162,16 @@
               "type": "string",
               "description": "is series eligible for dynamic threshold analysis"
             },
-            "statusExtended": {
-              "type": "string",
-              "description": "Namespace of the metric."
-            },
-            "extendedSeriesStatistics": {
-              "type": "integer",
-              "enum": [
-                1,
-                2,
-                4,
-                8,
-                16
-              ],
-              "x-ms-enum": {
-                "name": "extendedSeriesStatistics"
+            "status": {
+              "type": "array",
+              "items": {
+                "type": "string"
               },
-              "description": "The extended status."
+              "description": "The list of extended status for calculating the baseline."
+            },
+            "seasonalityPeriod": {
+              "type": "integer",
+              "description": "The seasonality period for calculating the baseline."
             }
           },
           "description": "The statistics"
