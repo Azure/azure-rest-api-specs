@@ -25,7 +25,7 @@ These are the global settings for the AzureSignalR API.
 ``` yaml
 # common
 openapi-type: data-plane
-tag: 1.0
+tag: package-2020-10-01
 ```
 
 ### Suppression
@@ -40,11 +40,11 @@ directive:
 
 ### Tag: 1.0
 
-These settings apply only when `--tag=1.0` is specified on the command line.
+These settings apply only when `--tag=package-2020-10-01` is specified on the command line.
 
-``` yaml $(tag) == '1.0'
+``` yaml $(tag) == 'package-2020-10-01'
 input-file:
-- AzureSignalR/v1/azuresignalr.json
+- AzureSignalR/preview/2020-10-01/azuresignalr.json
 ```
 
 ---
@@ -87,7 +87,7 @@ require: $(this-folder)/../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
-  - AzureSignalR/v1/azuresignalr.json
+  - AzureSignalR/preview/2021-01-01/azuresignalr.json
 
 ```
 
