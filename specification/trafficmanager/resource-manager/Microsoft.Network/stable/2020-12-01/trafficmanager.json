@@ -922,7 +922,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/ResultData"
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
         }
       ],
       "description": "The result of the request or operation."
@@ -1044,8 +1044,8 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/ProxyResource",
-          "$ref": "#/definitions/ResultData"
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource",
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
         }
       ],
       "description": "Class representing a Traffic Manager HeatMap."
@@ -1060,8 +1060,8 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/ProxyResource",
-          "$ref": "#/definitions/ResultData"
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource",
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
         }
       ],
       "description": "Class representing Traffic Manager User Metrics."
@@ -1166,7 +1166,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/ProxyResource"
+          "$ref": "#/definitions/ProxyResourceRW"
         }
       ],
       "description": "Class representing a Traffic Manager endpoint."
@@ -1181,8 +1181,8 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/ProxyResource",
-          "$ref": "#/definitions/ResultData"
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource",
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
         }
       ],
       "description": "Class representing a Traffic Manager endpoint in a response."
@@ -1394,7 +1394,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/TrackedResource"
+          "$ref": "#/definitions/TrackedResourceRW"
         }
       ],
       "description": "Class representing a Traffic Manager profile."
@@ -1409,8 +1409,8 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/TrackedResource",
-          "$ref": "#/definitions/ResultData"
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/TrackedResource",
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
         }
       ],
       "description": "Class representing a Traffic Manager profile in a response."
@@ -1452,7 +1452,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/ResultData"
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
         }
       ],
       "description": "Class representing a Traffic Manager Name Availability response."
@@ -1496,8 +1496,8 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/ProxyResource",
-          "$ref": "#/definitions/ResultData"
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource",
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
         }
       ],
       "description": "Class representing the Geographic hierarchy used with the Geographic traffic routing method."
@@ -1511,7 +1511,7 @@
       },
       "description": "Class representing a Traffic Manager Real User Metrics key response."
     },
-    "Resource": {
+    "ResourceRW": {
       "description": "The core properties of ARM resources",
       "properties": {
         "id": {
@@ -1529,7 +1529,7 @@
       },
       "x-ms-azure-resource": true
     },
-    "TrackedResource": {
+    "TrackedResourceRW": {
       "description": "The resource model definition for a ARM tracked top level resource",
       "properties": {
         "tags": {
@@ -1555,27 +1555,17 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "#/definitions/ResourceRW"
         }
       ]
     },
-    "ProxyResource": {
+    "ProxyResourceRW": {
       "description": "The resource model definition for a ARM proxy resource. It will have everything other than required location, tags and systemData",
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "#/definitions/ResourceRW"
         }
       ]
-    },
-    "ResultData": {
-      "description": "Data to be returned in a response",
-      "properties": {
-        "systemData": {
-          "readOnly": true,
-          "description": "The system metadata pertaining to a resource",
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
-        }
-      },
     },
     "CloudError": {
       "type": "object",
@@ -1587,7 +1577,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/ResultData"
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
         }
       ],
       "description": "An error returned by the Azure Resource Manager",
