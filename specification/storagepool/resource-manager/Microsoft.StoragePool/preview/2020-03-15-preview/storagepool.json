@@ -993,13 +993,6 @@
           },
           "minLength": 0,
           "maxLength": 8
-        },
-        "additionalCapabilities": {
-          "type": "array",
-          "description": "List of additional capabilities for a Disk Pool.",
-          "items": {
-            "$ref": "#/definitions/AdditionalCapability"
-          }
         }
       }
     },
@@ -1324,7 +1317,7 @@
           }
         },
         "credentials": {
-          "description": "Challenge Handshake Authentication Protocol (CHAP) credentials for the ACL.",
+          "description": "Challenge Handshake Authentication Protocol (CHAP) credentials to set for the ACL. Credentials can not be updated for an ACL.",
           "x-ms-client-flatten": true,
           "x-ms-secret": true,
           "x-ms-mutability": [
