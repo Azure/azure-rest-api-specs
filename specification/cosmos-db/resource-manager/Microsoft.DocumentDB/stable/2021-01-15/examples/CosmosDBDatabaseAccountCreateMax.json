@@ -59,6 +59,10 @@
           {
             "allowedOrigins": "https://test"
           }
+        ],
+        "allowTrustedServiceNetworkBypass": true,
+        "trustedServiceResourceIds": [
+          "/subscriptions/subId/resourcegroups/rgName/providers/Microsoft.Synapse/workspaces/workspaceName"
         ]
       }
     }
@@ -166,8 +170,10 @@
               "allowedOrigins": "https://test"
             }
           ],
-          "allowTrustedServiceNetworkBypass": false,
-          "trustedServiceResourceIds": []
+          "allowTrustedServiceNetworkBypass": true,
+          "trustedServiceResourceIds": [
+            "/subscriptions/subId/resourcegroups/rgName/providers/Microsoft.Synapse/workspaces/workspaceName"
+          ]
         }
       }
     }
