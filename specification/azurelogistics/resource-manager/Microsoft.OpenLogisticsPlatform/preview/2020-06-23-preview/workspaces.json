@@ -39,6 +39,7 @@
         "tags": [
           "Workspace"
         ],
+        "description": "Gets a workspace.",
         "operationId": "Workspace_Get",
         "x-ms-examples": {
           "Workspace Get": {
@@ -61,7 +62,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK.",
             "schema": {
               "$ref": "#/definitions/Workspace"
             }
@@ -78,6 +79,7 @@
         "tags": [
           "Workspace"
         ],
+        "description": "Creates or updates a workspace",
         "operationId": "Workspace_Put",
         "x-ms-examples": {
           "Workspace Put": {
@@ -108,16 +110,9 @@
           }
         ],
         "responses": {
-          "200": {
-            "x-nullable": false,
-            "description": "Returned when the operation is successful.",
-            "schema": {
-              "$ref": "#/definitions/Workspace"
-            }
-          },
           "201": {
             "x-nullable": false,
-            "description": "Returned when the operation is created.",
+            "description": "Created.",
             "schema": {
               "$ref": "#/definitions/Workspace"
             }
@@ -139,6 +134,7 @@
         "tags": [
           "Workspace"
         ],
+        "description": "Deletes a workspace for given workspace name.",
         "operationId": "Workspace_Delete",
         "x-ms-examples": {
           "Workspace Delete": {
@@ -161,13 +157,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Returned when the operation is successful."
+            "description": "OK."
           },
           "202": {
-            "description": "Returned when the operation is accepted."
+            "description": "Accepted."
           },
           "204": {
-            "description": "Returned when the operation returns no content."
+            "description": "No content."
           },
           "default": {
             "x-nullable": false,
@@ -186,7 +182,7 @@
         "tags": [
           "Workspace"
         ],
-        "description": "Update workspace details.",
+        "description": "Patches workspace properties.",
         "operationId": "Workspace_Update",
         "x-ms-examples": {
           "Workspace Update": {
@@ -218,9 +214,16 @@
         ],
         "responses": {
           "200": {
-            "description": "Returned when the operation is successful.",
+            "description": "OK.",
             "schema": {
               "$ref": "#/definitions/Workspace"
+            }
+          },
+          "default": {
+            "x-nullable": false,
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         }
@@ -231,6 +234,7 @@
         "tags": [
           "Workspace"
         ],
+        "description": "Lists a collection of workspaces under the given resource group.",
         "operationId": "Workspace_List",
         "x-ms-examples": {
           "Workspace List": {
@@ -251,7 +255,7 @@
         "responses": {
           "200": {
             "x-nullable": false,
-            "description": "Returned when the operation is successful.",
+            "description": "OK.",
             "schema": {
               "$ref": "#/definitions/WorkspaceList"
             }
@@ -271,6 +275,7 @@
         "tags": [
           "Workspace"
         ],
+        "description": "Lists a collection of workspaces under the given Azure Subscription ID.",
         "operationId": "Workspace_ListAll",
         "x-ms-examples": {
           "Workspace ListAll": {
@@ -288,7 +293,7 @@
         "responses": {
           "200": {
             "x-nullable": false,
-            "description": "Returned when the operation is successful.",
+            "description": "OK.",
             "schema": {
               "$ref": "#/definitions/WorkspaceList"
             }
@@ -314,7 +319,7 @@
             "$ref": "./examples/Namespaces_CheckNameAvailability.json"
           }
         },
-        "description": "Check the give Namespace name availability.",
+        "description": "Checks namespace availability.",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -329,12 +334,12 @@
             "schema": {
               "$ref": "#/definitions/NameAvailabilityRequest"
             },
-            "description": "Parameters to check availability of the given Namespace name"
+            "description": "Parameters to check availability of a Namespace."
           }
         ],
         "responses": {
           "200": {
-            "description": "Check availability returned successfully.",
+            "description": "OK.",
             "schema": {
               "$ref": "#/definitions/CheckNameAvailabilityResult"
             }
@@ -366,14 +371,14 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The region name which the operation will lookup into."
+            "description": "Region name the operation will lookup."
           },
           {
             "name": "operationStatusId",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The target operation status Id."
+            "description": "Operation status identifier."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -384,13 +389,13 @@
         ],
         "responses": {
           "200": {
-            "description": "OK. The operation completed.",
+            "description": "OK.",
             "schema": {
               "$ref": "#/definitions/OperationStatus"
             }
           },
           "202": {
-            "description": "Accepted. The operation is ongoing.",
+            "description": "Accepted.",
             "schema": {
               "$ref": "#/definitions/OperationStatus"
             }
@@ -413,7 +418,7 @@
       ]
     },
     "Resource": {
-      "description": "An Azure resource.",
+      "description": "Azure Open Supply Chain Platform top level resource.",
       "properties": {
         "id": {
           "description": "Azure resource Id.",
@@ -458,13 +463,14 @@
           "$ref": "#/definitions/Resource"
         }
       ],
+      "description": "Workspace resource type.",
       "properties": {
         "properties": {
           "type": "object",
           "properties": {
             "workspaceId": {
               "type": "string",
-              "description": "The workspace's Id",
+              "description": "Workspace identifier.",
               "readOnly": true
             },
             "workspaceUrl": {
@@ -474,11 +480,11 @@
             },
             "shareId": {
               "type": "string",
-              "description": "the Share Id for projected workspace.",
+              "description": "The Share Id for projected workspace.",
               "readOnly": false
             },
             "provisioningState": {
-              "description": "The provisioning state of the resource.",
+              "description": "Provisioning state of the workspace.",
               "readOnly": true,
               "$ref": "#/definitions/ProvisioningState"
             }
@@ -541,6 +547,7 @@
     },
     "ErrorObject": {
       "type": "object",
+      "description": "Defines the structure of an Azure Open Supply Chain Platform error.",
       "properties": {
         "code": {
           "type": "string",
@@ -548,12 +555,13 @@
         },
         "message": {
           "type": "string",
-          "description": "Human-readable representation of the error."
+          "description": "Error message."
         }
       }
     },
     "ErrorResponse": {
       "type": "object",
+      "description": "Defines the structure of an Azure Open Supply Chain Platform error response.",
       "properties": {
         "error": {
           "$ref": "#/definitions/ErrorObject",
@@ -562,16 +570,16 @@
       }
     },
     "CheckNameAvailabilityParameter": {
+      "description": "Parameters supplied to check Namespace availability.",
+      "required": [
+        "name"
+      ],
       "properties": {
         "name": {
           "type": "string",
           "description": "Name to check the namespace name availability"
         }
-      },
-      "required": [
-        "name"
-      ],
-      "description": "Parameter supplied to check Namespace name availability operation "
+      }
     },
     "UnavailableReason": {
       "type": "string",
@@ -587,18 +595,18 @@
         "name": "UnavailableReason",
         "modelAsString": false
       },
-      "description": "Specifies the reason for the unavailability of the service."
+      "description": "Reason for unavailability of the service."
     },
     "CheckNameAvailabilityResult": {
       "properties": {
         "message": {
           "type": "string",
           "readOnly": true,
-          "description": "The detailed info regarding the reason associated with the Namespace."
+          "description": "Message explaining the Reason value in more detail."
         },
         "nameAvailable": {
           "type": "boolean",
-          "description": "Value indicating Namespace is availability, true if the Namespace is available; otherwise, false."
+          "description": "Indicates namespace availability; true - if available; false - if not available."
         },
         "reason": {
           "$ref": "#/definitions/UnavailableReason",
@@ -613,7 +621,7 @@
       "properties": {
         "id": {
           "type": "string",
-          "description": "The Id."
+          "description": "Operation Status identifier."
         },
         "fullyQualifiedResourceId": {
           "type": "string",
@@ -667,11 +675,6 @@
           "type": "string",
           "readOnly": true
         },
-        "target": {
-          "description": "The error target.",
-          "type": "string",
-          "readOnly": true
-        },
         "message": {
           "description": "The error message.",
           "type": "string",
@@ -686,7 +689,7 @@
           "readOnly": true
         },
         "additionalInfo": {
-          "description": "The additional error information.",
+          "description": "Additional error information.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/TypedErrorInfo"
@@ -696,10 +699,10 @@
       }
     },
     "TypedErrorInfo": {
-      "description": "The error type and its information.",
+      "description": "Error type details.",
       "properties": {
         "type": {
-          "description": "The type of error info.",
+           "description": "Type of error.",
           "type": "string",
           "readOnly": true
         },
@@ -716,7 +719,7 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "A unique identifier for a Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
+      "description": "An unique identifier for a Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
     },
     "ResourceGroupParameter": {
       "name": "resourceGroupName",
