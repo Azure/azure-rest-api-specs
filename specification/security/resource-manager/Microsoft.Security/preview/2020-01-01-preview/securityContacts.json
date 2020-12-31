@@ -115,13 +115,16 @@
         "x-ms-examples": {
           "Create security contact data": {
             "$ref": "./examples/SecurityContacts/CreateSecurityContact_example.json"
+          },
+          "Update security contact data": {
+            "$ref": "./examples/SecurityContacts/UpdateSecurityContact_example.json"
           }
         },
         "tags": [
           "Security Contacts"
         ],
         "description": "Create security contact configurations for the subscription",
-        "operationId": "SecurityContacts_Create",
+        "operationId": "SecurityContacts_CreateOrUpdate",
         "parameters": [
           {
             "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
@@ -134,8 +137,14 @@
           }
         ],
         "responses": {
-          "201": {
+          "200": {
             "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SecurityContact"
+            }
+          },
+          "201": {
+            "description": "Created",
             "schema": {
               "$ref": "#/definitions/SecurityContact"
             }
@@ -157,7 +166,7 @@
         "tags": [
           "Security Contacts"
         ],
-        "description": "Security contact configurations for the subscription",
+        "description": "Delete security contact configurations for the subscription",
         "operationId": "SecurityContacts_Delete",
         "parameters": [
           {
