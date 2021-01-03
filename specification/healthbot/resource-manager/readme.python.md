@@ -3,7 +3,17 @@
 These settings apply only when `--python` is specified on the command line.
 Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
 
-```yaml $(python)
+```yaml $(python) && !$(track2)
+python:
+  azure-arm: true
+  license-header: MICROSOFT_MIT_NO_VERSION
+  payload-flattening-threshold: 2
+  namespace: azure.mgmt.healthbot
+  package-name: azure-mgmt-healthbot
+  package-version: 2020-10-20-preview
+  clear-output-folder: true
+```
+```yaml $(python) && $(track2)
 python:
   azure-arm: true
   license-header: MICROSOFT_MIT_NO_VERSION
@@ -23,13 +33,6 @@ python:
 python:
     basic-setup-py: true
     output-folder: $(python-sdks-folder)/healthbot/azure-mgmt-healthbot
-```
-``` yaml $(python) && $(track2)
-azure-arm: true
-license-header: MICROSOFT_MIT_NO_VERSION
-package-name: azure-mgmt-healthbot
-no-namespace-folders: true
-package-version: 2020-10-20-preview
 ```
 
 ``` yaml $(python-mode) == 'update' && $(track2)
