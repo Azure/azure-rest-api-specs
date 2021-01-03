@@ -22,6 +22,7 @@ namespace: azure.mgmt.healthbot
 package-name: azure-mgmt-healthbot
 package-version: 2020-12-08
 clear-output-folder: true
+```
 
 ``` yaml $(python) && $(python-mode) == 'update'
 python:
