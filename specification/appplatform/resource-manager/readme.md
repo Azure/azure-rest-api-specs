@@ -26,7 +26,7 @@ These are the global settings for the AppPlatform API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2020-07
+tag: package-preview-2020-11
 ```
 
 ### Suppression
@@ -50,14 +50,23 @@ directive:
 ```
 
 
+### Tag: package-preview-2020-11
+
+These settings apply only when `--tag=package-preview-2020-11` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2020-11'
+input-file:
+  - Microsoft.AppPlatform/preview/2020-11-01-preview/appplatform.json
+```
 ### Tag: package-2020-07
 
 These settings apply only when `--tag=package-2020-07` is specified on the command line.
 
-```yaml $(tag) == 'package-2020-07'
+``` yaml $(tag) == 'package-2020-07'
 input-file:
   - Microsoft.AppPlatform/stable/2020-07-01/appplatform.json
 ```
+
 ### Tag: package-2019-05-01-preview
 
 These settings apply only when `--tag=package-2019-05-01-preview` is specified on the command line.
@@ -120,4 +129,3 @@ csharp:
 ## AzureResourceSchema
 
 See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
-

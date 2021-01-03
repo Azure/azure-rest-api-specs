@@ -1033,6 +1033,64 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBForMySQL/servers/{serverName}/updateConfigurations": {
+      "post": {
+        "tags": [
+          "ConfigurationsUpdate"
+        ],
+        "operationId": "ServerParameters_ListUpdateConfigurations",
+        "x-ms-examples": {
+          "ConfigurationList": {
+            "$ref": "./examples/ConfigurationsUpdateByServer.json"
+          }
+        },
+        "description": "Update a list of configurations in a given server.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "name": "value",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ConfigurationListResult"
+            },
+            "description": "The parameters for updating a list of server configuration."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ConfigurationListResult"
+            }
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBForMySQL/servers/{serverName}/logFiles": {
       "get": {
         "tags": [
@@ -1245,6 +1303,93 @@
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/ServerAdministratorResourceListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBForMySQL/servers/{serverName}/recoverableServers": {
+      "get": {
+        "tags": [
+          "RecoverableServers"
+        ],
+        "operationId": "RecoverableServers_Get",
+        "x-ms-examples": {
+          "ReplicasListByServer": {
+            "$ref": "./examples/RecoverableServersGet.json"
+          }
+        },
+        "description": "Gets a recoverable MySQL Server.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/RecoverableServerResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBForMySQL/servers/{serverName}/performanceTiers": {
+      "get": {
+        "tags": [
+          "ServerBasedPerformanceTier"
+        ],
+        "operationId": "ServerBasedPerformanceTier_List",
+        "x-ms-examples": {
+          "PerformanceTiersList": {
+            "$ref": "./examples/PerformanceTiersListByServer.json"
+          }
+        },
+        "description": "List all the performance tiers for a MySQL server.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PerformanceTierListResult"
             }
           },
           "default": {
@@ -1714,7 +1859,8 @@
         "administratorLoginPassword": {
           "type": "string",
           "format": "password",
-          "description": "The password of the administrator login."
+          "description": "The password of the administrator login.",
+          "x-ms-secret": true
         }
       },
       "required": [
@@ -2372,6 +2518,36 @@
           "type": "string",
           "description": "ID of the performance tier."
         },
+        "maxBackupRetentionDays": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Maximum Backup retention in days for the performance tier edition"
+        },
+        "minBackupRetentionDays": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Minimum Backup retention in days for the performance tier edition"
+        },
+        "maxStorageMB": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Max storage allowed for a server."
+        },
+        "minLargeStorageMB": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Max storage allowed for a server."
+        },
+        "maxLargeStorageMB": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Max storage allowed for a server."
+        },
+        "minStorageMB": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Max storage allowed for a server."
+        },
         "serviceLevelObjectives": {
           "type": "array",
           "items": {
@@ -2497,6 +2673,59 @@
         }
       },
       "description": "The response to a list Active Directory Administrators request."
+    },
+    "RecoverableServerProperties": {
+      "description": "The recoverable server's properties.",
+      "type": "object",
+      "properties": {
+        "lastAvailableBackupDateTime": {
+          "type": "string",
+          "description": "The last available backup date time.",
+          "readOnly": true
+        },
+        "serviceLevelObjective": {
+          "type": "string",
+          "description": "The service level objective",
+          "readOnly": true
+        },
+        "edition": {
+          "type": "string",
+          "description": "Edition of the performance tier.",
+          "readOnly": true
+        },
+        "vCore": {
+          "type": "integer",
+          "format": "int32",
+          "description": "vCore associated with the service level objective",
+          "readOnly": true
+        },
+        "hardwareGeneration": {
+          "type": "string",
+          "description": "Hardware generation associated with the service level objective",
+          "readOnly": true
+        },
+        "version": {
+          "type": "string",
+          "description": "The MySQL version",
+          "readOnly": true
+        }
+      }
+    },
+    "RecoverableServerResource": {
+      "description": "A recoverable server resource.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/RecoverableServerProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        }
+      }
     }
   },
   "parameters": {

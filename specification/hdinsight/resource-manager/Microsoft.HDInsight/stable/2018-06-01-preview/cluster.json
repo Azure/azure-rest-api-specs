@@ -74,6 +74,9 @@
           },
           "Create cluster with network properties": {
             "$ref": "./examples/CreateHDInsightClusterWithCustomNetworkProperties.json"
+          },
+          "Create cluster with compute isolation properties": {
+            "$ref": "./examples/CreateHDInsightClusterWithComputeIsolationProperties.json"
           }
         },
         "parameters": [
@@ -1043,6 +1046,19 @@
         }
       }
     },
+    "ComputeIsolationProperties": {
+      "description": "The compute isolation properties.",
+      "properties": {
+        "enableComputeIsolation": {
+          "type": "boolean",
+          "description": "The flag indicates whether enable compute isolation or not."
+        },
+        "hostSku": {
+          "type": "string",
+          "description": "The host sku."
+        }
+      }
+    },
     "ClusterCreateProperties": {
       "description": "The cluster create parameters.",
       "properties": {
@@ -1109,6 +1125,10 @@
         "networkProperties": {
           "$ref": "#/definitions/NetworkProperties",
           "description": "The network properties."
+        },
+        "computeIsolationProperties": {
+          "$ref": "#/definitions/ComputeIsolationProperties",
+          "description": "The compute isolation properties."
         }
       }
     },
@@ -1301,6 +1321,10 @@
         "networkProperties": {
           "$ref": "#/definitions/NetworkProperties",
           "description": "The network properties."
+        },
+        "computeIsolationProperties": {
+          "$ref": "#/definitions/ComputeIsolationProperties",
+          "description": "The compute isolation properties."
         }
       },
       "required": [

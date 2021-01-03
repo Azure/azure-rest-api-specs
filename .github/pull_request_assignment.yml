@@ -20,7 +20,6 @@
     reviewers:
       - anuchandy
       - jhendrixMSFT
-      - lmazuel
       - tjprescott
       
 
@@ -38,10 +37,24 @@
       - kairu-ms
 
 - rule:
-    paths: "specification/@(resources|powerplatform)/**"
+    paths: "specification/@(resources|powerplatform|appplatform)/**"
     reviewers:
       - raych1
+
+- rule:
+    paths: "specification/sql/**"
+    reviewers:
+      - akning-ms
       
+- rule:
+    paths: "specification/signalr/**"
+    reviewers:
+      - leni-msft
+      
+- rule:
+    paths: "specification/eventhub/**"
+    reviewers:
+      - ruowan
 - rule:
     paths: "specification/compute/**"
     reviewers:
@@ -57,7 +70,7 @@
 
 - rule:
     paths:
-      - "specification/@(azureactivedirectory|appplatform)/**"
+      - "specification/azureactivedirectory/**"
     reviewers:
       - njuCZ
 
@@ -85,7 +98,6 @@
     paths:
       - "specification/storage/**"
     reviewers:
-      - qianwens
       - Juliehzl
 
 
@@ -126,6 +138,18 @@
       - "specification/web/**"
     reviewers:
       - weidongxu-microsoft
+      
+- rule:
+    paths:
+      - "specification/testbase/**"
+    reviewers:
+      - PhoenixHe-msft
+      
+- rule:
+    paths:
+      - "specification/servicelinker/**"
+    reviewers:
+      - PhoenixHe-msft
 
 - rule:
     paths:
@@ -176,3 +200,4 @@
       - ruowan
       - jianyexi
       - zhenglaizhang
+      - chunyu3
