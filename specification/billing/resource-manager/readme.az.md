@@ -85,7 +85,7 @@ cli:
         alias:
           - name
           - n
-      # the three get API connot auto group for not
+      # the three get API cannot auto group for now
       - where:
           group: BillingRoleAssignments
           op: GetByInvoiceSection
