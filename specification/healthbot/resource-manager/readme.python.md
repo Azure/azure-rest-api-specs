@@ -14,15 +14,13 @@ python:
   clear-output-folder: true
 ```
 ```yaml $(python) && $(track2)
-python:
-  azure-arm: true
-  license-header: MICROSOFT_MIT_NO_VERSION
-  payload-flattening-threshold: 2
-  namespace: azure.mgmt.healthbot
-  package-name: azure-mgmt-healthbot
-  package-version: 2020-12-08
-  clear-output-folder: true
-```
+azure-arm: true
+license-header: MICROSOFT_MIT_NO_VERSION
+payload-flattening-threshold: 2
+namespace: azure.mgmt.healthbot
+package-name: azure-mgmt-healthbot
+package-version: 2020-12-08
+clear-output-folder: true
 
 ``` yaml $(python) && $(python-mode) == 'update'
 python:
