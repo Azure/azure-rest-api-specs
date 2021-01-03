@@ -58,7 +58,7 @@ input-file:
 directive:
   - suppress: R4009
     from: botservice.json
-    reason: We do not yet support systemdata.
+    reason: We do not yet support systemData.
 ```
 
 
