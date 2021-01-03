@@ -10,7 +10,7 @@ python:
   payload-flattening-threshold: 2
   namespace: azure.mgmt.healthbot
   package-name: azure-mgmt-healthbot
-  package-version: 2020-10-20-preview
+  package-version: 2020-12-08
   clear-output-folder: true
 ```
 ```yaml $(python) && $(track2)
@@ -20,7 +20,7 @@ python:
   payload-flattening-threshold: 2
   namespace: azure.mgmt.healthbot
   package-name: azure-mgmt-healthbot
-  package-version: 2020-10-20-preview
+  package-version: 2020-12-08
   clear-output-folder: true
 ```
 
