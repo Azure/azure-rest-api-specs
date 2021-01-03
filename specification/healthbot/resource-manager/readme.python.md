@@ -24,3 +24,18 @@ python:
     basic-setup-py: true
     output-folder: $(python-sdks-folder)/healthbot/azure-mgmt-healthbot
 ```
+``` yaml $(python) && $(track2)
+azure-arm: true
+license-header: MICROSOFT_MIT_NO_VERSION
+package-name: azure-mgmt-healthbot
+no-namespace-folders: true
+package-version: 2020-10-20-preview
+```
+
+``` yaml $(python-mode) == 'update' && $(track2)
+output-folder: $(python-sdks-folder)/healthbot/azure-mgmt-healthbot/azure/mgmt/healthbot
+```
+``` yaml $(python-mode) == 'create' && $(track2)
+basic-setup-py: true
+output-folder: $(python-sdks-folder)/healthbot/azure-mgmt-healthbot
+```
