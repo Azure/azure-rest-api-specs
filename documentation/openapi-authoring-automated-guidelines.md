@@ -3179,7 +3179,7 @@ The following would be valid:
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            // ref to the same subcriptionId
+            // ref to the same subscriptionId
             "$ref": "#/parameters/subscriptionIdParameter"
           },
         ],
