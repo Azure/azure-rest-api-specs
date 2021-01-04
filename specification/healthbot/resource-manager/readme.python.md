@@ -27,7 +27,7 @@ clear-output-folder: true
 ``` yaml $(python) && $(python-mode) == 'update' && !$(track2)
 python:
     no-namespace-folders: true
-    output-folder: $(python-sdks-folder)/{svcName}/azure-mgmt-healthbot/azure/mgmt/healthbot
+    output-folder: $(python-sdks-folder)/healthbot/azure-mgmt-healthbot/azure/mgmt/healthbot
 ```
 ``` yaml $(python) && $(python-mode) == 'create' && !$(track2)
 python:
