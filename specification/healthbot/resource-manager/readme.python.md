@@ -24,7 +24,7 @@ package-version: 2020-12-08
 clear-output-folder: true
 ```
 
-``` yaml $(python) && $(python-mode) == 'update'
+``` yaml $(python) && $(python-mode) == 'update' && !$(track2)
 python:
     no-namespace-folders: true
     output-folder: $(python-sdks-folder)/{svcName}/azure-mgmt-healthbot/azure/mgmt/healthbot
