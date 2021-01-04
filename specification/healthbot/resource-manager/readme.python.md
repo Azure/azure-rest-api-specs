@@ -29,7 +29,7 @@ python:
     no-namespace-folders: true
     output-folder: $(python-sdks-folder)/{svcName}/azure-mgmt-healthbot/azure/mgmt/healthbot
 ```
-``` yaml $(python) && $(python-mode) == 'create'
+``` yaml $(python) && $(python-mode) == 'create' && !$(track2)
 python:
     basic-setup-py: true
     output-folder: $(python-sdks-folder)/healthbot/azure-mgmt-healthbot
