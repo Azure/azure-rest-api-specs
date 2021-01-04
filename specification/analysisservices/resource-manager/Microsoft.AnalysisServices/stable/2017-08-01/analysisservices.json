@@ -76,6 +76,12 @@
             "schema": {
               "$ref": "#/definitions/AnalysisServicesServer"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         }
       },
@@ -132,6 +138,12 @@
             "schema": {
               "$ref": "#/definitions/AnalysisServicesServer"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-long-running-operation": true
@@ -177,6 +189,12 @@
           },
           "202": {
             "description": "Accepted."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-long-running-operation": true
@@ -234,6 +252,12 @@
             "schema": {
               "$ref": "#/definitions/AnalysisServicesServer"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-long-running-operation": true
@@ -278,6 +302,12 @@
           },
           "202": {
             "description": "Accepted."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-long-running-operation": true
@@ -322,6 +352,12 @@
           },
           "202": {
             "description": "Accepted"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-long-running-operation": true
@@ -356,6 +392,12 @@
             "schema": {
               "$ref": "#/definitions/AnalysisServicesServers"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-pageable": {
@@ -389,6 +431,12 @@
             "schema": {
               "$ref": "#/definitions/AnalysisServicesServers"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-pageable": {
@@ -418,6 +466,12 @@
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/SkuEnumerationForNewResourceResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         }
@@ -461,6 +515,12 @@
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/SkuEnumerationForExistingResourceResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         }
@@ -551,6 +611,12 @@
         "responses": {
           "200": {
             "description": "OK."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         }
       }
@@ -597,6 +663,12 @@
             "schema": {
               "$ref": "#/definitions/CheckServerNameAvailabilityResult"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         }
       }
@@ -641,6 +713,12 @@
           },
           "202": {
             "description": "Accepted. The operation is ongoing."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         }
       }
@@ -690,6 +768,12 @@
             "description": "Accepted. The operation is ongoing.",
             "schema": {
               "$ref": "#/definitions/OperationStatus"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         }
@@ -756,6 +840,11 @@
               "readOnly": true
             }
           }
+        },
+        "origin": {
+          "description": "The origin",
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -930,6 +1019,10 @@
           "type": "string",
           "readOnly": true,
           "description": "The full name of the Analysis Services resource."
+        },
+        "sku": {
+          "$ref": "#/definitions/ResourceSku",
+          "description": "The SKU of the Analysis Services resource."
         }
       },
       "allOf": [
@@ -961,6 +1054,7 @@
         },
         "capacity": {
           "type": "integer",
+          "format": "int32",
           "minimum": 1,
           "maximum": 8,
           "default": 1,
@@ -1003,6 +1097,20 @@
             "name": "ConnectionMode"
           },
           "default": "All"
+        },
+        "managedMode": {
+          "type": "integer",
+          "format": "int32",
+          "enum": [
+            0,
+            1
+          ],
+          "x-ms-enum": {
+            "modelAsString": false,
+            "name": "ManagedMode"
+          },
+          "default": 1,
+          "description": "The managed mode of the server (0 = not managed, 1 = managed)."
         }
       }
     },
@@ -1217,6 +1325,10 @@
         "sku": {
           "$ref": "#/definitions/ResourceSku",
           "description": "The SKU in SKU details for existing resources."
+        },
+        "resourceType": {
+          "type": "string",
+          "description": "The resource type."
         }
       }
     },
@@ -1224,13 +1336,19 @@
       "description": "Describes the format of Error response.",
       "type": "object",
       "properties": {
-        "code": {
-          "description": "Error code",
-          "type": "string"
-        },
-        "message": {
-          "description": "Error message indicating why the operation failed.",
-          "type": "string"
+        "error": {
+          "type": "object",
+          "description": "The error object",
+          "properties": {
+            "code": {
+              "description": "Error code",
+              "type": "string"
+            },
+            "message": {
+              "description": "Error message indicating why the operation failed.",
+              "type": "string"
+            }
+          }
         }
       }
     }
