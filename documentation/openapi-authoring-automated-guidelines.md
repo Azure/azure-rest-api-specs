@@ -3222,7 +3222,7 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 **Output Message** : [RPaaS] The resource {0} is defined without 'provisioningState' in properties bag, consider adding the provisioningState for it.
 
-**Description** : Verifies if a Azure resource has a corresponding 'provisioningState' property. If not define the 'provisioningState' explicitly , the client will drop the state when the service return it. 
+**Description** : Verifies if a Azure resource has a corresponding 'provisioningState' property. If the 'provisioningState' is not defining explicitly , the client will drop the state when the service does return it. 
 
 **CreatedAt**: December 18, 2020
 
