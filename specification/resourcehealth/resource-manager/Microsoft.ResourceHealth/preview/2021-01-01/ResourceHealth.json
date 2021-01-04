@@ -1429,16 +1429,26 @@
         "impactedServices": {
           "type": "array",
           "items": {
-            "type": "integer",
-            "format": "int64"
+            "type": "object",
+            "properties": {
+              "serviceId": {
+                "type": "integer",
+                "format": "int64"
+              }
+            }
           },
           "description": "A collection of impacted services."
         },
         "impactedTeams": {
           "type": "array",
           "items": {
-            "type": "integer",
-            "format": "int64"
+            "type": "object",
+            "properties": {
+              "teamId": {
+                "type": "integer",
+                "format": "int64"
+              }
+            }
           },
           "description": "A collection of impacted teams."
         },
