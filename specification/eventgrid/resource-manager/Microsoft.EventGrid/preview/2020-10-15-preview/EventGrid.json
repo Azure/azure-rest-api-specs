@@ -5234,6 +5234,9 @@
               "$ref": "#/definitions/TopicSharedAccessKeys"
             }
           },
+          "202": {
+            "description": "Topic regenerate key request accepted."
+          },
           "default": {
             "description": "*** Error Responses: ***\n\n * 400 Bad Request.\n\n * 500 Internal Server Error."
           }
@@ -5242,7 +5245,8 @@
           "Topics_RegenerateKey": {
             "$ref": "./examples/Topics_RegenerateKey.json"
           }
-        }
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{providerNamespace}/{resourceTypeName}/{resourceName}/providers/Microsoft.EventGrid/eventTypes": {
