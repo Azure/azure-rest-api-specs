@@ -1235,6 +1235,11 @@
             "$ref": "#/definitions/MoveResourceDependencyOverride"
           }
         },
+        "isResolveRequired": {
+          "description": "Gets a value indicating whether the resolve action is required over the move collection.",
+          "type": "boolean",
+          "readOnly": true
+        },
         "errors": {
           "description": "Defines the move resource errors.",
           "allOf": [
@@ -1321,6 +1326,15 @@
         },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState"
+        },
+        "errors": {
+          "description": "Defines the move collection errors.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/MoveResourceError"
+            }
+          ],
+          "readOnly": true
         }
       }
     },
@@ -1343,6 +1357,11 @@
           "readOnly": true,
           "type": "string",
           "description": "The type of the resource."
+        },
+        "etag": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The etag of the resource."
         },
         "tags": {
           "type": "object",
@@ -1534,6 +1553,12 @@
         "summaryCollection": {
           "description": "Gets or sets the list of summary items and the field on which summary is done.",
           "$ref": "#/definitions/SummaryCollection"
+        },
+        "totalCount": {
+          "description": "Gets the total count.",
+          "type": "integer",
+          "readOnly": true,
+          "format": "int64"
         }
       }
     },

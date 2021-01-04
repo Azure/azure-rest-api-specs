@@ -35,6 +35,8 @@ tag: package-2020-04-preview
 directive:
   - suppress: OperationsAPIImplementation
     reason: we do have a operations api as "/providers/Microsoft.Authorization/operations"
+  - suppress: TopLevelResourcesListByResourceGroup
+    reason: proxy resources don't require list by resource group(Suppresion confirmed by API council)
   - suppress: OperationIdNounConflictingModelNames
     where: '$.paths["/providers/Microsoft.Authorization/providerOperations/{resourceProviderNamespace}"].get.operationId'
     from: authorization-ProviderOperationsCalls.json
@@ -190,6 +192,15 @@ input-file:
 - Microsoft.Authorization/preview/2018-01-01-preview/authorization-RoleAssignmentsCalls.json
 - Microsoft.Authorization/preview/2018-01-01-preview/authorization-RoleDefinitionsCalls.json
 - Microsoft.Authorization/preview/2018-07-01-preview/authorization-DenyAssignmentGetCalls.json
+```
+
+### Tag: package-2018-05-01-preview
+
+These settings apply only when `--tag=package-2018-05-01-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2018-05-01-preview'
+input-file:
+- Microsoft.Authorization/preview/2018-05-01-preview/authorization-AccessReviewCalls.json
 ```
 
 ### Tag: package-2018-09-01-preview

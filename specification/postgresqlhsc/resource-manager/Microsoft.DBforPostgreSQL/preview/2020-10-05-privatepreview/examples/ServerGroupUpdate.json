@@ -1,0 +1,58 @@
+{
+  "parameters": {
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
+    "resourceGroupName": "TestGroup",
+    "serverGroupName": "hsctestsg",
+    "api-version": "2020-10-05-privatepreview",
+    "parameters": {
+      "properties": {
+        "postgresqlVersion": "12",
+        "administratorLoginPassword": "secret",
+        "backupRetentionDays": 30,
+        "serverRoleGroups": [
+          {
+            "name": "",
+            "role": "Coordinator",
+            "serverCount": 1,
+            "serverEdition": "GeneralPurpose",
+            "vCores": 8,
+            "storageQuotaInMb": 1048576,
+            "enableHa": false
+          },
+          {
+            "name": "",
+            "role": "Worker",
+            "serverCount": 4,
+            "serverEdition": "MemoryOptimized",
+            "vCores": 4,
+            "storageQuotaInMb": 524288,
+            "enableHa": true
+          }
+        ]
+      },
+      "tags": {
+        "ElasticServer": "2"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestResourceGroup/providers/Microsoft.DBforPostgreSQL/serverGroupsv2/hsctestsg",
+        "name": "hsctestsg",
+        "type": "Microsoft.DBforPostgreSQL/serverGroupsv2",
+        "systemData": {
+          "createdBy": "user1",
+          "createdByType": "User",
+          "createdAt": "2020-01-01T17:18:19.1234567Z",
+          "lastModifiedBy": "user2",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2020-01-02T17:18:19.1234567Z"
+        },
+        "properties": {},
+        "location": "westus2"
+      }
+    },
+    "202": {}
+  }
+}
