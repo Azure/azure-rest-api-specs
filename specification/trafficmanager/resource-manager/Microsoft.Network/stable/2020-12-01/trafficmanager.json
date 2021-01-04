@@ -1702,10 +1702,17 @@
     "CloudError": {
       "type": "object",
       "properties": {
-        "error": {
-          "$ref": "#/definitions/CloudErrorBody",
-          "description": "The content of the error."
-        }
+        "allOf": [
+          {
+            "error": {
+            "$ref": "#/definitions/CloudErrorBody",
+            "description": "The content of the error."
+            }
+          },
+          {
+            "$ref": "#/definitions/SystemData"
+          }
+        ],
       },
       "allOf": [
         {
