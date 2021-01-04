@@ -272,6 +272,7 @@ batch:
 
       - ../specification/trafficmanager/resource-manager/Microsoft.Network/2015-11-01/trafficmanager.json
       - ../specification/trafficmanager/resource-manager/Microsoft.Network/2017-03-01/trafficmanager.json
+      - ../specification/trafficmanager/resource-manager/Microsoft.Network/2020-12-01/trafficmanager.json
       - ../specification/web/resource-manager/Microsoft.CertificateRegistration/2015-08-01/AppServiceCertificateOrders.json
       - ../specification/web/resource-manager/Microsoft.DomainRegistration/2015-04-01/Domains.json
       - ../specification/web/resource-manager/Microsoft.DomainRegistration/2015-04-01/TopLevelDomains.json
