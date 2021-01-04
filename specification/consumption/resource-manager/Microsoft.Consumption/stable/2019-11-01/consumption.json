@@ -54,7 +54,7 @@
             "$ref": "#/parameters/scopeTagsParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/apiVersionParameter"
           }
         ],
         "responses": {
@@ -87,7 +87,7 @@
         },
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/apiVersionParameter"
           }
         ],
         "responses": {
@@ -242,6 +242,14 @@
       "description": "The scope associated with tags operations. This includes '/subscriptions/{subscriptionId}/' for subscription scope, '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}' for resourceGroup scope, '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}' for Billing Account scope, '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/departments/{departmentId}' for Department scope, '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/enrollmentAccounts/{enrollmentAccountId}' for EnrollmentAccount scope and '/providers/Microsoft.Management/managementGroups/{managementGroupId}' for Management Group scope..",
       "x-ms-parameter-location": "method",
       "x-ms-skip-url-encoding": true
+    },
+    "apiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "The API version to use for this operation.",
+      "minLength": 1
     }
   }
 }
