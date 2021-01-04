@@ -38,9 +38,7 @@ These settings apply only when `--tag=package-preview-2020-12` is specified on t
 
 ```yaml $(tag) == 'package-preview-2020-12'
 input-file:
-  - Microsoft.CostManagement/preview/2020-12-01-preview/costmanagement.exports.json
   - Microsoft.CostManagement/preview/2020-12-01-preview/costmanagement.generatedetailedcostreport.json
-  - Microsoft.CostManagement/preview/2020-12-01-preview/costmanagement.json
 ```
 
 ### Tag: package-preview-2020-03
