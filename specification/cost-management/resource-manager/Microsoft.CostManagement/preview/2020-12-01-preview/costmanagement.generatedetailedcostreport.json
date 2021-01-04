@@ -99,6 +99,10 @@
                 "description": "The URL to check the status of the asynchronous operation.",
                 "type": "string"
               },
+              "Azure-AsyncOperation": {
+                "description": "The URL to check the status of the asynchronous operation.",
+                "type": "string"
+              },
               "Retry-After": {
                 "description": "The amount of delay to use while the status of the operation is checked. The value is expressed in seconds.",
                 "format": "int32",
@@ -330,7 +334,7 @@
           "type": "string"
         },
         "validTill": {
-          "description": "The time at which report URL becomes invalid.",
+          "description": "The time at which report URL becomes invalid/expires in UTC e.g. 2020-12-08T05:55:59.4394737Z.",
           "type": "string",
           "format": "date-time"
         }
