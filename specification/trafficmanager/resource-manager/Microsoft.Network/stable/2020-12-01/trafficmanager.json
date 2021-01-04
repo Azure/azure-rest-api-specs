@@ -1693,18 +1693,16 @@
     "CloudError": {
       "type": "object",
       "properties": {
-        "allOf": [
-          {
-            "error": {
-            "$ref": "#/definitions/CloudErrorBody",
-            "description": "The content of the error."
-            }
-          },
-          {
-            "$ref": "#/definitions/SystemData"
-          }
-        ],
+        "error": {
+        "$ref": "#/definitions/CloudErrorBody",
+        "description": "The content of the error."
+        }
       },
+      "allOf": [
+        {
+          "$ref": "#/definitions/SystemData"
+        }
+      ],
       "description": "An error returned by the Azure Resource Manager",
       "x-ms-external": true
     },
