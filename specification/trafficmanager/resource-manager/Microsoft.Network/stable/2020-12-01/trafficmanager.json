@@ -1409,8 +1409,14 @@
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/ProfileProperties",
-          "$ref": "#/definitions/SystemData",
+          "allOf": [
+            {
+              "$ref": "#/definitions/ProfileProperties"
+            },
+            {
+              "$ref": "#/definitions/SystemData"
+            }
+          ],
           "description": "The properties of the Traffic Manager profile."
         }
       },
