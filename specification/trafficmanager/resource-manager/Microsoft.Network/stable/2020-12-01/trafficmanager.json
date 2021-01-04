@@ -920,11 +920,6 @@
           "description": "The result of the operation or request."
         }
       },
-      "allOf": [
-        {
-          "$ref": "#/definitions/SystemData"
-        }
-      ],
       "description": "The result of the request or operation."
     },
     "EndpointProperties": {
@@ -1409,20 +1404,16 @@
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "allOf": [
-            {
-              "$ref": "#/definitions/ProfileProperties"
-            },
-            {
-              "$ref": "#/definitions/SystemData"
-            }
-          ],
+          "$ref": "#/definitions/ProfileProperties"
           "description": "The properties of the Traffic Manager profile."
         }
       },
       "allOf": [
         {
           "$ref": "#/definitions/TrackedResource"
+        },
+        {
+          "$ref": "#/definitions/SystemData"
         }
       ],
       "description": "Class representing a Traffic Manager profile in a response."
