@@ -189,16 +189,16 @@
         }
       }
     },
-    "Scope": {
+    "CommunicationIdentityTokenScope": {
+      "description": "List of scopes for a identity token.",
       "enum": [
         "Pstn",
         "Chat",
-        "Voip",
-        "JoinRoom"
+        "Voip"
       ],
       "type": "string",
       "x-ms-enum": {
-        "name": "Scope",
+        "name": "CommunicationIdentityTokenScope",
         "modelAsString": true
       }
     },
@@ -212,7 +212,7 @@
           "description": "List of scopes attached to the token.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/Scope"
+            "$ref": "#/definitions/CommunicationIdentityTokenScope"
           }
         }
       }
@@ -247,8 +247,9 @@
       "flow": "implicit",
       "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
       "scopes": {
-        "user_impersonation": "impersonate your user account"
-      }
+        "user_impersonation": "impersonate your identity account"
+      },
+      "description": "Azure Active Directory OAuth2 Flow"
     }
   },
   "x-ms-parameterized-host": {
