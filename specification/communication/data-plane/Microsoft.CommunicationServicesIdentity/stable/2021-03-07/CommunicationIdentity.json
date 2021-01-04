@@ -33,7 +33,7 @@
           }
         },
         "x-ms-examples": {
-          "Create an Identity": {
+          "Create an identity": {
             "$ref": "./examples/CreateIdentity.json"
           }
         }
@@ -67,7 +67,7 @@
           }
         },
         "x-ms-examples": {
-          "Delete an Identity": {
+          "Delete an identity": {
             "$ref": "./examples/DeleteIdentity.json"
           }
         }
@@ -102,7 +102,7 @@
         },
         "x-ms-examples": {
           "Revoke access tokens": {
-            "$ref": "./examples/UpdateIdentity.json"
+            "$ref": "./examples/RevokeAccessTokens.json"
           }
         }
       }
@@ -140,7 +140,7 @@
             "description": "Requesting scopes for the new token.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/CommunicationIdentityTokenRequest"
+              "$ref": "#/definitions/CommunicationIdentityAccessTokenRequest"
             }
           }
         ],
@@ -153,7 +153,7 @@
           }
         },
         "x-ms-examples": {
-          "Issue Access Token": {
+          "Issue an access token": {
             "$ref": "./examples/IssueAccessToken.json"
           }
         }
@@ -161,6 +161,18 @@
     }
   },
   "definitions": {
+    "CommunicationIdentityKind": {
+      "enum": [
+        "PhoneNumber",
+        "CallingApplication",
+        "CommunicationUser"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "CommunicationIdentityKind",
+        "modelAsString": true
+      }
+    },
     "CommunicationIdentity": {
       "description": "A communication identity.",
       "required": [
@@ -171,10 +183,26 @@
         "id": {
           "description": "Identifier of the identity.",
           "type": "string"
+        },
+        "kind": {
+          "$ref": "#/definitions/CommunicationIdentityKind"
         }
       }
     },
-    "CommunicationIdentityTokenRequest": {
+    "Scope": {
+      "enum": [
+        "Pstn",
+        "Chat",
+        "Voip",
+        "JoinRoom"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "Scope",
+        "modelAsString": true
+      }
+    },
+    "CommunicationIdentityAccessTokenRequest": {
       "required": [
         "scopes"
       ],
@@ -184,7 +212,7 @@
           "description": "List of scopes attached to the token.",
           "type": "array",
           "items": {
-            "type": "string"
+            "$ref": "#/definitions/Scope"
           }
         }
       }
