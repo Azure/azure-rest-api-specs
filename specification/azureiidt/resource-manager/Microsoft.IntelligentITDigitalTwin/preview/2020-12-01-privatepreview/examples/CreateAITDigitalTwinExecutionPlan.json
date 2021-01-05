@@ -1,0 +1,40 @@
+{
+  "parameters": {
+    "subscriptionId": "{subscription-id}",
+    "resourceGroupName": "myResourceGroup",
+    "iidtName": "myIIDT",
+    "executionPlanName": "myExecutionPlan",
+    "parameters": {
+      "location": "westeurope",
+      "properties": {
+        "plan": "/subscriptions/subid/ResourceGroup/rg1/providers/Microsoft.IntelligentITDigitalTwin/digitalTwins/myIDT/testPlans/planA",
+        "deviceNames": [
+          "subscriptions/sub1/resourcegroups/rg1/providers/Microsoft.Compute/virtualMachines/myAsset1",
+          "subscriptions/sub1/resourcegroups/rg1/providers/Microsoft.Compute/virtualMachines/myAsset2"
+        ],
+        "executionStatus": "Unknown",
+        "result": "Passed"
+      }
+    },
+    "api-version": "2020-12-01-privatepreview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "subscriptions/{subscription-id}/resourcegroups/myResourceGroup/providers/Microsoft.IntelligentITDigitalTwin/digitalTwins/myIIDT/executionPlans/myExecutionPlan",
+        "name": "myExecutionPlan",
+        "type": "Microsoft.IntelligentITDigitalTwin/digitalTwins/executionPlans",
+        "location": "westeurope",
+        "properties": {
+          "plan": "/subscriptions/subid/ResourceGroup/rg1/providers/Microsoft.IntelligentITDigitalTwin/digitalTwins/myIDT/testPlans/planA",
+          "deviceNames": [
+            "subscriptions/sub1/resourcegroups/rg1/providers/Microsoft.Compute/virtualMachines/myAsset1",
+            "subscriptions/sub1/resourcegroups/rg1/providers/Microsoft.Compute/virtualMachines/myAsset2"
+          ],
+          "executionStatus": "Unknown",
+          "result": "Passed"
+        }
+      }
+    }
+  }
+}

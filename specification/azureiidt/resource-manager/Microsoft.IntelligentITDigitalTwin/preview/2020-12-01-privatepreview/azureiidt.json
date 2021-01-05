@@ -1,0 +1,2240 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "IIDTManagementClient",
+    "description": "Intelligent IT Digital Twin (IIDT) uses our proprietary discovery tool for corporate on-prem infrastructure and provisions its light-weight twin in Azure.",
+    "version": "2020-12-01-privatepreview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IntelligentITDigitalTwin/digitalTwins/{iidtName}": {
+      "put": {
+        "tags": [
+          "ITDigitalTwins"
+        ],
+        "operationId": "ITDigitalTwins_CreateOrUpdate",
+        "description": "The operation to create or update a IT Digital Twins.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "iidtName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the it digital twin."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ITDigitalTwin"
+            },
+            "description": "Parameters supplied to the Create it digital twin operation."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ITDigitalTwin"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create an IT Digital Twin.": {
+            "$ref": "./examples/CreateAITDigitalTwin.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "ITDigitalTwins"
+        ],
+        "operationId": "ITDigitalTwins_Update",
+        "description": "The operation to update a it digital twins.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "iidtName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the it digital twin."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ITDigitalTwinPatch"
+            },
+            "description": "Parameters supplied to the Update IT Digital Twin operation."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ITDigitalTwin"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update an IT Digital Twin": {
+            "$ref": "./examples/UpdateAITDigitalTwin.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "ITDigitalTwins"
+        ],
+        "operationId": "ITDigitalTwins_Delete",
+        "description": "The operation to delete a it digital twin.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "iidtName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the it digital twin."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete an IT Digital Twin.": {
+            "$ref": "./examples/DeleteAITDigitalTwin.json"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "ITDigitalTwins"
+        ],
+        "operationId": "ITDigitalTwins_Get",
+        "description": "Retrieves information about the model view or the instance view of a it digital twin.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "iidtName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the it digital twin."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ITDigitalTwin"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get an IT Digital Twin.": {
+            "$ref": "./examples/GetAITDigitalTwin.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IntelligentITDigitalTwin/digitalTwins": {
+      "get": {
+        "tags": [
+          "ITDigitalTwins"
+        ],
+        "operationId": "ITDigitalTwins_List",
+        "description": "Lists all of the IT Digital Twins in the specified resource group.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ITDigitalTwinListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List all it digital twins in a resource group.": {
+            "$ref": "./examples/ListByResourceGroupITDigitalTwins.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.IntelligentITDigitalTwin/digitalTwins": {
+      "get": {
+        "tags": [
+          "ITDigitalTwins"
+        ],
+        "operationId": "ITDigitalTwins_ListAll",
+        "description": "Lists all of the IT Digital Twins in the specified subscription id.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ITDigitalTwinListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List all it digital twins in a subscription.": {
+            "$ref": "./examples/ListSubscriptionITDigitalTwins.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.IntelligentITDigitalTwin/operations": {
+      "get": {
+        "tags": [
+          "Operations"
+        ],
+        "description": "Lists all of the available RP operations.",
+        "operationId": "Operations_ListAll",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "Resource Provider error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List all it digital twin operations.": {
+            "$ref": "./examples/ListOperations.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IntelligentITDigitalTwin/digitalTwins/{iidtName}/assets/{assetName}": {
+      "put": {
+        "tags": [
+          "ITDigitalTwinAssets"
+        ],
+        "operationId": "ITDigitalTwinAssets_CreateOrUpdate",
+        "description": "The operation to create or update a IT Digital Twin Asset.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "iidtName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the it digital twin."
+          },
+          {
+            "name": "assetName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the it digital twin asset."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Asset"
+            },
+            "description": "Parameters supplied to the Create it digital twin asset operation."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Asset"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create an IT Digital Twin Asset": {
+            "$ref": "./examples/CreateAITDigitalTwinAsset.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "ITDigitalTwinAssets"
+        ],
+        "operationId": "ITDigitalTwinAsset_Update",
+        "description": "The operation to update a it digital twin asset.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "iidtName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the it digital twin."
+          },
+          {
+            "name": "assetName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the it digital twin asset."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AssetPatch"
+            },
+            "description": "Parameters supplied to the Update IT Digital Twin Asset operation."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Asset"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update asset of an it digital twin": {
+            "$ref": "./examples/UpdateAITDigitalTwinAsset.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "ITDigitalTwinAssets"
+        ],
+        "operationId": "ITDigitalTwinAssets_Delete",
+        "description": "The operation to delete it digital twin asset .",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "iidtName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the it digital twin."
+          },
+          {
+            "name": "assetName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the it digital twin asset."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete an IT Digital Twin Asset.": {
+            "$ref": "./examples/DeleteAITDigitalTwinAsset.json"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "ITDigitalTwinAssets"
+        ],
+        "operationId": "ITDigitalTwinAssets_Get",
+        "description": "Retrieves information about the it digital twin asset",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "iidtName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the it digital twin."
+          },
+          {
+            "name": "assetName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the it digital twin asset."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Asset"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get an IT Digital Twin asset.": {
+            "$ref": "./examples/GetAITDigitalTwinAsset.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IntelligentITDigitalTwin/digitalTwins/{iidtName}/assets": {
+      "get": {
+        "tags": [
+          "ITDigitalTwinAssets"
+        ],
+        "operationId": "ITDigitalTwinAssets_List",
+        "description": "The operation to get all assets of a it digital twin.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "iidtName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the it digital twin."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Assets"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List all Assets": {
+            "$ref": "./examples/ListAllAssets.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IntelligentITDigitalTwin/digitalTwins/{iidtName}/tests/{testName}": {
+      "put": {
+        "tags": [
+          "ITDigitalTwinTests"
+        ],
+        "operationId": "ITDigitalTwinTests_CreateOrUpdate",
+        "description": "The operation to create or update a IT Digital Twin Test.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "iidtName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the it digital twin."
+          },
+          {
+            "name": "testName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the it digital twin asset."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Test"
+            },
+            "description": "Parameters supplied to the Create it digital twin tests operation."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Test"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create an IT Digital Twin Test": {
+            "$ref": "./examples/CreateAITDigitalTwinTest.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "ITDigitalTwinTests"
+        ],
+        "operationId": "ITDigitalTwinTests_Update",
+        "description": "The operation to update a it digital twin tests.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "iidtName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the it digital twin."
+          },
+          {
+            "name": "testName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the it digital twin tests."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TestPatch"
+            },
+            "description": "Parameters supplied to the Update IT Digital Twin Test operation."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Test"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update tests of an it digital twin": {
+            "$ref": "./examples/UpdateAITDigitalTwinTest.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "ITDigitalTwinTests"
+        ],
+        "operationId": "ITDigitalTwinTests_Delete",
+        "description": "The operation to delete it digital twin tests .",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "iidtName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the it digital twin."
+          },
+          {
+            "name": "testName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the it digital twin tests."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete an IT Digital Twin Test.": {
+            "$ref": "./examples/DeleteAITDigitalTwinTest.json"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "ITDigitalTwinTests"
+        ],
+        "operationId": "ITDigitalTwinTests_Get",
+        "description": "Retrieves information about the it digital twin tests.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "iidtName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the it digital twin."
+          },
+          {
+            "name": "testName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the it digital twin tests."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Test"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get an IT Digital Twin tests.": {
+            "$ref": "./examples/GetAITDigitalTwinTest.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IntelligentITDigitalTwin/digitalTwins/{iidtName}/tests": {
+      "get": {
+        "tags": [
+          "ITDigitalTwinTests"
+        ],
+        "operationId": "ITDigitalTwinTests_List",
+        "description": "The operation to get all tests of a it digital twin.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "iidtName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the it digital twin."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Tests"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List all Tests": {
+            "$ref": "./examples/ListAllITDigitalTwinTests.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IntelligentITDigitalTwin/digitalTwins/{iidtName}/testPlans/{testPlanName}": {
+      "put": {
+        "tags": [
+          "ITDigitalTwinTestPlans"
+        ],
+        "operationId": "ITDigitalTwinTestPlans_CreateOrUpdate",
+        "description": "The operation to create or update a IT Digital Twin TestPlan.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "iidtName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the it digital twin."
+          },
+          {
+            "name": "testPlanName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the it digital twin asset."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TestPlan"
+            },
+            "description": "Parameters supplied to the Create it digital twin testPlans operation."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/TestPlan"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create an IT Digital Twin TestPlan": {
+            "$ref": "./examples/CreateAITDigitalTwinTestPlan.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "ITDigitalTwinTestPlans"
+        ],
+        "operationId": "ITDigitalTwinTestPlans_Update",
+        "description": "The operation to update a it digital twin testPlans.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "iidtName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the it digital twin."
+          },
+          {
+            "name": "testPlanName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the it digital twin testPlans."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TestPlanPatch"
+            },
+            "description": "Parameters supplied to the Update IT Digital Twin TestPlan operation."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/TestPlan"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update testPlans of an it digital twin": {
+            "$ref": "./examples/UpdateAITDigitalTwinTestPlan.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "ITDigitalTwinTestPlans"
+        ],
+        "operationId": "ITDigitalTwinTestPlans_Delete",
+        "description": "The operation to delete it digital twin testPlans .",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "iidtName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the it digital twin."
+          },
+          {
+            "name": "testPlanName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the it digital twin testPlans."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete an IT Digital Twin TestPlan.": {
+            "$ref": "./examples/DeleteAITDigitalTwinTestPlan.json"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "ITDigitalTwinTestPlans"
+        ],
+        "operationId": "ITDigitalTwinTestPlans_Get",
+        "description": "Retrieves information about the it digital twin testPlans.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "iidtName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the it digital twin."
+          },
+          {
+            "name": "testPlanName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the it digital twin testPlans."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/TestPlan"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get an IT Digital Twin testPlans.": {
+            "$ref": "./examples/GetAITDigitalTwinTestPlan.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IntelligentITDigitalTwin/digitalTwins/{iidtName}/testPlans": {
+      "get": {
+        "tags": [
+          "ITDigitalTwinTestPlans"
+        ],
+        "operationId": "ITDigitalTwinTestPlans_List",
+        "description": "The operation to get all testPlans of a it digital twin.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "iidtName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the it digital twin."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/TestPlans"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List all TestPlans": {
+            "$ref": "./examples/ListAllITDigitalTwinTestPlans.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IntelligentITDigitalTwin/digitalTwins/{iidtName}/executionPlans/{executionPlanName}": {
+      "put": {
+        "tags": [
+          "ITDigitalTwinExecutionPlans"
+        ],
+        "operationId": "ITDigitalTwinExecutionPlans_CreateOrUpdate",
+        "description": "The operation to create or update a IT Digital Twin ExecutionPlan.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "iidtName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the it digital twin."
+          },
+          {
+            "name": "executionPlanName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the it digital twin asset."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ExecutionPlan"
+            },
+            "description": "Parameters supplied to the Create it digital twin executionPlans operation."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ExecutionPlan"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create an IT Digital Twin ExecutionPlan": {
+            "$ref": "./examples/CreateAITDigitalTwinExecutionPlan.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "ITDigitalTwinExecutionPlans"
+        ],
+        "operationId": "ITDigitalTwinExecutionPlans_Update",
+        "description": "The operation to update a it digital twin executionPlans.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "iidtName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the it digital twin."
+          },
+          {
+            "name": "executionPlanName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the it digital twin executionPlans."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ExecutionPlanPatch"
+            },
+            "description": "Parameters supplied to the Update IT Digital Twin ExecutionPlan operation."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ExecutionPlan"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update executionPlans of an it digital twin": {
+            "$ref": "./examples/UpdateAITDigitalTwinExecutionPlan.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "ITDigitalTwinExecutionPlans"
+        ],
+        "operationId": "ITDigitalTwinExecutionPlans_Delete",
+        "description": "The operation to delete it digital twin executionPlans .",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "iidtName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the it digital twin."
+          },
+          {
+            "name": "executionPlanName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the it digital twin executionPlans."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete an IT Digital Twin ExecutionPlan.": {
+            "$ref": "./examples/DeleteAITDigitalTwinExecutionPlan.json"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "ITDigitalTwinExecutionPlans"
+        ],
+        "operationId": "ITDigitalTwinExecutionPlans_Get",
+        "description": "Retrieves information about the it digital twin executionPlans.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "iidtName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the it digital twin."
+          },
+          {
+            "name": "executionPlanName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the it digital twin executionPlans."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ExecutionPlan"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get an IT Digital Twin executionPlans.": {
+            "$ref": "./examples/GetAITDigitalTwinExecutionPlan.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IntelligentITDigitalTwin/digitalTwins/{iidtName}/executionPlans": {
+      "get": {
+        "tags": [
+          "ITDigitalTwinExecutionPlans"
+        ],
+        "operationId": "ITDigitalTwinExecutionPlans_List",
+        "description": "The operation to get all executionPlans of a it digital twin.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "iidtName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the it digital twin."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ExecutionPlans"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List all ExecutionPlans": {
+            "$ref": "./examples/ListAllITDigitalTwinExecutionPlans.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IntelligentITDigitalTwin/digitalTwins/{iidtName}/executionPlans/{executionPlanName}/run": {
+      "post": {
+        "tags": [
+          "ITDigitalTwinExecutionPlans"
+        ],
+        "operationId": "ITDigitalTwinExecutionPlans_Run",
+        "description": "The operation is a post action: run executionPlans of a it digital twin.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "iidtName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the it digital twin."
+          },
+          {
+            "name": "executionPlanName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the child resource name executionPlans."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/RunExecutionPlanResponseBody"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Post action run ExecutionPlans": {
+            "$ref": "./examples/PostITDigitalTwinExecutionPlansRun.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IntelligentITDigitalTwin/digitalTwins/{iidtName}/executionPlans/{executionPlanName}/fetchLog": {
+      "post": {
+        "tags": [
+          "ITDigitalTwinExecutionPlans"
+        ],
+        "operationId": "ITDigitalTwinExecutionPlans_FetchLog",
+        "description": "The operation is a post action: fetchLog executionPlans of a it digital twin.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "iidtName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the it digital twin."
+          },
+          {
+            "name": "executionPlanName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the child resource name executionPlans."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/FetchLogResponseBody"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Post action fetchLog ExecutionPlans": {
+            "$ref": "./examples/PostITDigitalTwinExecutionPlansFetchLog.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ITDigitalTwinProperties": {
+      "properties": {
+        "iidtName": {
+          "type": "string",
+          "description": "Unique identifier of this IIDT"
+        },
+        "createdTime": {
+          "description": "Time when this IIDT instance was created.",
+          "readOnly": true,
+          "type": "string",
+          "format": "date-time"
+        },
+        "lastUpdatedTime": {
+          "description": "Time when this IIDT instance was last updated.",
+          "readOnly": true,
+          "type": "string",
+          "format": "date-time"
+        },
+        "provisioningState": {
+          "description": "The provisioning state.",
+          "enum": [
+            "Succeeded",
+            "Created",
+            "Configured",
+            "Deployed",
+            "Failed"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "provisioningState",
+            "modelAsString": true
+          }
+        },
+        "adlsId": {
+          "description": "Link to the ADLS account.",
+          "type": "string"
+        },
+        "configuration": {
+          "description": "configuration for the digital twin project.",
+          "type": "string"
+        },
+        "enterprise": {
+          "title": "Enterprise",
+          "description": "Enterprise environment for testing",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/Enterprise"
+        },
+        "currentStatus": {
+          "description": "Overall status",
+          "enum": [
+            "Created",
+            "Started",
+            "Succeeded",
+            "Failed"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "currentStatus",
+            "modelAsString": true
+          }
+        },
+        "domainName": {
+          "description": "Domain name of the enterprise environment.",
+          "type": "string"
+        },
+        "isManaged": {
+          "description": "Customer concent to allow services maintain enterprise credentials.",
+          "enum": [
+            "True",
+            "False"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "isManaged",
+            "modelAsString": true
+          }
+        },
+        "canAccess": {
+          "description": "Customer concent to allow services maintain enterprise credentials to access enterprise machines.",
+          "enum": [
+            "True",
+            "False"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "canAccess",
+            "modelAsString": true
+          }
+        }
+      },
+      "description": "Describes the properties of a IT Digital Twin."
+    },
+    "ITDigitalTwin": {
+      "properties": {
+        "properties": {
+          "title": "Digital Twin Properties",
+          "description": "List the properties of IT Digital Twin",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ITDigitalTwinProperties"
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "description": "The system data."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "description": "Describes a IT Digital Twin."
+    },
+    "ITDigitalTwinListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/ITDigitalTwin"
+          },
+          "description": "The list of it digital twins."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The uri to fetch the next page of it digital twin."
+        }
+      },
+      "description": "The List IT DIgital Twins."
+    },
+    "Operation": {
+      "description": "REST API operation",
+      "properties": {
+        "name": {
+          "description": "Operation name: {provider}/{resource}/{operation}",
+          "type": "string"
+        },
+        "display": {
+          "description": "The object that represents the operation.",
+          "type": "string"
+        }
+      }
+    },
+    "OperationListResult": {
+      "description": "Result of the request to list Resource Provider operations. It contains a list of operations and a URL link to get the next set of results.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Operation"
+          },
+          "description": "List of Resource Provider operations supported by the Resource Provider resource provider."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "URL to get the next set of operation list results if there are any."
+        }
+      }
+    },
+    "Computer": {
+      "properties": {
+        "id": {
+          "description": "Resource ID of the computer",
+          "type": "string",
+          "x-nullable": true
+        },
+        "name": {
+          "description": "Name of the computer",
+          "type": "string",
+          "x-nullable": true
+        },
+        "role": {
+          "description": "Role of a machine, including VM on Azure and local test machine on-prem",
+          "enum": [
+            "SCCM",
+            "AD",
+            "CS",
+            "DNS",
+            "TestMachine"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "role",
+            "modelAsString": true
+          }
+        }
+      },
+      "description": "Meta data for the test result."
+    },
+    "Enterprise": {
+      "properties": {
+        "computerList": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Computer"
+          },
+          "description": "List of computers on Azure and test machines on-prem"
+        },
+        "adminUserName": {
+          "description": "Admin user name for accessing the enterprise",
+          "type": "string",
+          "x-nullable": true
+        },
+        "adminPassword": {
+          "x-ms-secret": true,
+          "description": "Admin password for accessing the enterprise",
+          "type": "string",
+          "x-nullable": true
+        }
+      },
+      "description": "Enterprise is a testing environment which has several virtual machines on the cloud and several testing machines on-prem."
+    },
+    "ITDigitalTwinPatch": {
+      "properties": {
+        "properties": {
+          "title": "IT Digital Twins properties",
+          "description": "Properties of the digitalTwins",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ITDigitalTwinProperties"
+        }
+      },
+      "description": "IT Digital Twins definition for patch operation"
+    },
+    "AssetProperties": {
+      "properties": {
+        "assetId": {
+          "type": "string",
+          "description": "ResourceId for the virtual machines."
+        },
+        "assetRole": {
+          "description": "Role of an asset, including VMs on Azure and local test machine on-prem",
+          "enum": [
+            "SCCM",
+            "AD",
+            "CS",
+            "DNS",
+            "TestVM"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "assetRole",
+            "modelAsString": true
+          }
+        },
+        "assetStatus": {
+          "description": "Status of an asset",
+          "enum": [
+            "Unknown",
+            "Available",
+            "Unavailable",
+            "Testing"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "assetStatus",
+            "modelAsString": true
+          }
+        }
+      },
+      "description": "Describes the properties of an digitalTwins/assets."
+    },
+    "Asset": {
+      "properties": {
+        "properties": {
+          "title": "Asset properties",
+          "description": "List the properties of IT Digital Twin Asset",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/AssetProperties"
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "description": "The system data."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "description": "Asset including virtual machines and the on-prem test devices."
+    },
+    "AssetPatch": {
+      "properties": {
+        "properties": {
+          "title": "Asset properties",
+          "description": "Properties of the child resource asset",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/AssetProperties"
+        }
+      },
+      "description": "Asset definition for patch operation"
+    },
+    "Assets": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/Asset"
+          },
+          "description": "The list of asset"
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The uri to fetch the next page of asset."
+        }
+      },
+      "description": "A list of asset."
+    },
+    "TestProperties": {
+      "properties": {
+        "author": {
+          "type": "string",
+          "description": "The author of the test."
+        },
+        "path": {
+          "type": "string",
+          "description": "Path to the test."
+        },
+        "testType": {
+          "type": "string",
+          "description": "types for the test.",
+          "enum": [
+            "Default",
+            "Custom"
+          ],
+          "x-ms-enum": {
+            "name": "testType",
+            "modelAsString": true
+          }
+        },
+        "versionNumber": {
+          "type": "string",
+          "description": "The versions for the test"
+        }
+      },
+      "description": "Describes the properties of an digitalTwins/tests."
+    },
+    "Test": {
+      "properties": {
+        "properties": {
+          "title": "Test properties",
+          "description": "List the properties of IT Digital Twin tests",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/TestProperties"
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "description": "The system data."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "description": "Test definition of child resource tests."
+    },
+    "TestPatch": {
+      "properties": {
+        "properties": {
+          "title": "Test properties",
+          "description": "Properties of the child resource tests",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/TestProperties"
+        }
+      },
+      "description": "Test definition for patch operation"
+    },
+    "Tests": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/Test"
+          },
+          "description": "The list of tests"
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The uri to fetch the next page of tests."
+        }
+      },
+      "description": "A list of tests."
+    },
+    "TestPlanProperties": {
+      "properties": {
+        "testList": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "List of test ids"
+        }
+      },
+      "description": "Describes the properties of an digitalTwins/testPlans."
+    },
+    "TestPlan": {
+      "properties": {
+        "properties": {
+          "title": "TestPlan properties",
+          "description": "List the properties of IT Digital Twin testPlans",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/TestPlanProperties"
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "description": "The system data."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "description": "TestPlan definition of child resource testPlans."
+    },
+    "TestPlanPatch": {
+      "properties": {
+        "properties": {
+          "title": "TestPlan properties",
+          "description": "Properties of the child resource testPlans",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/TestPlanProperties"
+        }
+      },
+      "description": "TestPlan definition for patch operation"
+    },
+    "TestPlans": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/TestPlan"
+          },
+          "description": "The list of testPlans"
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The uri to fetch the next page of testPlans."
+        }
+      },
+      "description": "A list of testPlans."
+    },
+    "ExecutionPlanProperties": {
+      "properties": {
+        "plan": {
+          "type": "string",
+          "description": "Test plan id."
+        },
+        "deviceNames": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "List of devices on the execution plan"
+        },
+        "executionStatus": {
+          "type": "string",
+          "description": "The status on the execution plan",
+          "enum": [
+            "Queued",
+            "In-Progress",
+            "Completed",
+            "Unknown"
+          ],
+          "x-ms-enum": {
+            "name": "executionStatus",
+            "modelAsString": true
+          }
+        },
+        "result": {
+          "type": "string",
+          "description": "Result for the test execution.",
+          "enum": [
+            "Passed",
+            "Failed",
+            "Pending"
+          ],
+          "x-ms-enum": {
+            "name": "result",
+            "modelAsString": true
+          }
+        }
+      },
+      "description": "Describes the properties of an digitalTwins/executionPlans."
+    },
+    "ExecutionPlan": {
+      "properties": {
+        "properties": {
+          "title": "ExecutionPlan properties",
+          "description": "List the properties of IT Digital Twin executionPlans",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ExecutionPlanProperties"
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "description": "The system data."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "description": "ExecutionPlan definition of child resource executionPlans."
+    },
+    "ExecutionPlanPatch": {
+      "properties": {
+        "properties": {
+          "title": "ExecutionPlan properties",
+          "description": "Properties of the child resource executionPlans",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ExecutionPlanProperties"
+        }
+      },
+      "description": "ExecutionPlan definition for patch operation"
+    },
+    "RunExecutionPlanResponseBody": {
+      "properties": {
+        "runExecutionResponseStatus": {
+          "type": "string",
+          "description": "The status on the execution plan",
+          "enum": [
+            "Queued",
+            "In-Progress",
+            "Completed",
+            "Unknown"
+          ],
+          "x-ms-enum": {
+            "name": "runExecutionResponseStatus",
+            "modelAsString": true
+          }
+        }
+      },
+      "description": "The response definition for run"
+    },
+    "FetchLogResponseBody": {
+      "properties": {
+        "log": {
+          "type": "string",
+          "description": "The log for running test."
+        }
+      },
+      "description": "The response definition for fetchLog"
+    },
+    "ExecutionPlans": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/ExecutionPlan"
+          },
+          "description": "The list of executionPlans"
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The uri to fetch the next page of executionPlans."
+        }
+      },
+      "description": "A list of executionPlans."
+    }
+  },
+  "parameters": {
+    "SubscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
+    },
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "Client Api Version."
+    }
+  }
+}

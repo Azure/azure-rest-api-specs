@@ -1,0 +1,33 @@
+{
+  "parameters": {
+    "subscriptionId": "{subscription-id}",
+    "resourceGroupName": "myResourceGroup",
+    "iidtName": "myIIDT",
+    "testPlanName": "myTestPlan",
+    "parameters": {
+      "properties": {
+        "testList": [
+          "/subscriptions/subid/ResourceGroup/rg1/providers/Microsoft.IntelligentITDigitalTwin/digitalTwins/myIDT/tests/myAPolicyTest",
+          "/subscriptions/subid/ResourceGroup/rg1/providers/Microsoft.IntelligentITDigitalTwin/digitalTwins/myIDT/tests/myBPolicyTest"
+        ]
+      }
+    },
+    "api-version": "2020-12-01-privatepreview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "subscriptions/{subscription-id}/resourcegroups/myResourceGroup/providers/Microsoft.IntelligentITDigitalTwin/digitalTwins/myIIDT/testPlans/myTestPlan",
+        "name": "myTestPlan",
+        "type": "Microsoft.IntelligentITDigitalTwin/digitalTwins/testPlans",
+        "location": "westeurope",
+        "properties": {
+          "testList": [
+            "/subscriptions/subid/ResourceGroup/rg1/providers/Microsoft.IntelligentITDigitalTwin/digitalTwins/myIDT/tests/myAPolicyTest",
+            "/subscriptions/subid/ResourceGroup/rg1/providers/Microsoft.IntelligentITDigitalTwin/digitalTwins/myIDT/tests/myBPolicyTest"
+          ]
+        }
+      }
+    }
+  }
+}
