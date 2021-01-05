@@ -235,7 +235,6 @@ input-file:
 ```
 
 ### Tag: package-2020-09-30
-
 These settings apply only when `--tag=package-2020-09-30` is specified on the command line.
 
 ``` yaml $(tag) == 'package-2020-09-30'

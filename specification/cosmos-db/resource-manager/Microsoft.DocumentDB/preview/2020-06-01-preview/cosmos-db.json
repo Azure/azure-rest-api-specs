@@ -7695,7 +7695,7 @@
         },
         "databasesToRestore": {
           "type": "array",
-          "description": "List of specific databases to restore.",
+          "description": "List of specific databases available for restore.",
           "items": {
             "$ref": "#/definitions/DatabaseRestoreResource"
           }
@@ -7708,11 +7708,11 @@
       "properties": {
         "databaseName": {
           "type": "string",
-          "description": "The name of the database to restore."
+          "description": "The name of the database available for restore."
         },
         "collectionNames": {
           "type": "array",
-          "description": "The names of the collections to restore.",
+          "description": "The names of the collections available for restore.",
           "items": {
             "$ref": "#/definitions/CollectionName"
           }
@@ -7837,6 +7837,65 @@
           "type": "string",
           "format": "date-time",
           "description": "The time at which the restorable database account has been deleted (ISO-8601 format)."
+        },
+        "apiType": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The API type of the restorable database account.",
+          "$ref": "#/definitions/ApiType"
+        },
+        "restorableLocations": {
+          "type": "array",
+          "readOnly": true,
+          "description": "List of regions where the of the database account can be restored from.",
+          "items": {
+            "$ref": "#/definitions/RestorableLocationResource"
+          }
+        }
+      }
+    },
+    "ApiType": {
+      "description": "Enum to indicate the API type of the restorable database account.",
+      "type": "string",
+      "readOnly": true,
+      "enum": [
+        "MongoDB",
+        "Gremlin",
+        "Cassandra",
+        "Table",
+        "Sql",
+        "GremlinV2"
+      ],
+      "x-ms-enum": {
+        "name": "ApiType",
+        "modelAsString": true
+      }
+    },
+    "RestorableLocationResource": {
+      "type": "object",
+      "description": "Properties of the regional restorable account.",
+      "properties": {
+        "locationName": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The location of the regional restorable account."
+        },
+        "regionalDatabaseAccountInstanceId": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The instance id of the regional restorable account."
+        },
+        "creationTime": {
+          "type": "string",
+          "readOnly": true,
+          "format": "date-time",
+          "description": "The creation time of the regional restorable database account (ISO-8601 format)."
+        },
+        "deletionTime": {
+          "type": "string",
+          "readOnly": true,
+          "format": "date-time",
+          "description": "The time at which the regional restorable database account has been deleted (ISO-8601 format)."
         }
       }
     }
