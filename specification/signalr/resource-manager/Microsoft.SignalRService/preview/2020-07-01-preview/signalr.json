@@ -1317,6 +1317,9 @@
       "properties": {
         "allowedOrigins": {
           "description": "Gets or sets the list of origins that should be allowed to make cross-origin calls (for example: http://example.com:12345). Use \"*\" to allow all. If omitted, allow all by default.",
+          "default": [
+            "*"
+          ],
           "type": "array",
           "items": {
             "type": "string"
@@ -1343,7 +1346,8 @@
       "properties": {
         "defaultAction": {
           "$ref": "#/definitions/ACLAction",
-          "description": "Default action when no other rule matches"
+          "description": "Default action when no other rule matches",
+          "default": "Deny"
         },
         "publicNetwork": {
           "$ref": "#/definitions/NetworkACL",
