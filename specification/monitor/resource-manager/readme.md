@@ -621,7 +621,7 @@ directive:
   - suppress: DefaultErrorResponseSchemaCalculateBaseline_API
     from: calculateBaseline_API.json
     reason: 'Updating the error response to the new format would be a breaking change.'
-  - suppress: DefaultErrorResponseSchemaBaseline_API
+  - suppress: R4007
     from: baseline_API.json
     reason: 'Updating the error response to the new format would be a breaking change.'
 ```
