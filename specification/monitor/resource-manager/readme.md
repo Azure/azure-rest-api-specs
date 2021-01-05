@@ -22,6 +22,11 @@ To see additional help and options, run:
 
 ### Basic Information
 
+There are the global settings for the Azure Monitor Control Service (AMCS) extension.
+``` yaml $(AMCS)
+tag: package-2019-11-01-preview-only
+```
+
 These are the global settings for the MonitorClient API.
 
 ``` yaml
@@ -613,6 +618,9 @@ directive:
     from: dataCollectionRuleAssociations_API.json
     where: $.paths
     reason: 'Operations API is defined in a separate swagger spec for Microsoft.Insights namespace (https://github.com/Azure/azure-rest-api-specs/blob/master/specification/monitor/resource-manager/Microsoft.Insights/stable/2015-04-01/operations_API.json)'
+  - suppress: R4007
+    from: metricBaselines_API.json
+    reason: 'Updating the error response to the new format would be a breaking change.'
 ```
 
 ### Tag: profile-hybrid-2019-03-01
