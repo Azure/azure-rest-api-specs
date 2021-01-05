@@ -13,6 +13,9 @@
         ],
         "summary": "Create a new identity.",
         "operationId": "CommunicationIdentity_CreateIdentity",
+        "consumes": [
+          "application/json"
+        ],
         "produces": [
           "application/json"
         ],
@@ -22,18 +25,25 @@
             "name": "api-version",
             "required": true,
             "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/CommunicationIdentityCreateRequest"
+            }
           }
         ],
         "responses": {
           "200": {
             "description": "OK - Returns the created identity.",
             "schema": {
-              "$ref": "#/definitions/CommunicationIdentity"
+              "$ref": "#/definitions/CommunicationIdentityAccessTokenResult"
             }
           }
         },
         "x-ms-examples": {
-          "Create an identity": {
+          "Create an Identity": {
             "$ref": "./examples/CreateIdentity.json"
           }
         }
@@ -73,7 +83,7 @@
         }
       }
     },
-    "/identities/{id}/~revokeAccessTokens": {
+    "/identities/{id}/:revokeAccessTokens": {
       "post": {
         "tags": [
           "Identity"
@@ -107,7 +117,7 @@
         }
       }
     },
-    "/identities/{id}/~issueAccessToken": {
+    "/identities/{id}/:issueAccessToken": {
       "post": {
         "tags": [
           "Token"
@@ -148,7 +158,7 @@
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/CommunicationIdentityToken"
+              "$ref": "#/definitions/CommunicationIdentityAccessToken"
             }
           }
         },
@@ -161,11 +171,33 @@
     }
   },
   "definitions": {
+    "CommunicationIdentityTokenScope": {
+      "description": "List of scopes for an access token.",
+      "enum": [
+        "Chat",
+        "Voip"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "CommunicationIdentityTokenScope",
+        "modelAsString": true
+      }
+    },
+    "CommunicationIdentityCreateRequest": {
+      "type": "object",
+      "properties": {
+        "createTokenWithScopes": {
+          "description": "Also create access token for the created identity.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CommunicationIdentityTokenScope"
+          }
+        }
+      }
+    },
     "CommunicationIdentityKind": {
       "enum": [
-        "PhoneNumber",
-        "CallingApplication",
-        "CommunicationUser"
+        "CommunicationIdentity"
       ],
       "type": "string",
       "x-ms-enum": {
@@ -176,7 +208,8 @@
     "CommunicationIdentity": {
       "description": "A communication identity.",
       "required": [
-        "id"
+        "id",
+        "kind"
       ],
       "type": "object",
       "properties": {
@@ -189,17 +222,38 @@
         }
       }
     },
-    "CommunicationIdentityTokenScope": {
-      "description": "List of scopes for a identity token.",
-      "enum": [
-        "Pstn",
-        "Chat",
-        "Voip"
+    "CommunicationIdentityAccessToken": {
+      "required": [
+        "expiresOn",
+        "token"
       ],
-      "type": "string",
-      "x-ms-enum": {
-        "name": "CommunicationIdentityTokenScope",
-        "modelAsString": true
+      "type": "object",
+      "properties": {
+        "token": {
+          "description": "The access token issued for the identity.",
+          "type": "string"
+        },
+        "expiresOn": {
+          "format": "date-time",
+          "description": "The expiry time of the token.",
+          "type": "string"
+        }
+      }
+    },
+    "CommunicationIdentityAccessTokenResult": {
+      "description": "A communication identity.",
+      "required": [
+        "accessToken",
+        "identity"
+      ],
+      "type": "object",
+      "properties": {
+        "identity": {
+          "$ref": "#/definitions/CommunicationIdentity"
+        },
+        "accessToken": {
+          "$ref": "#/definitions/CommunicationIdentityAccessToken"
+        }
       }
     },
     "CommunicationIdentityAccessTokenRequest": {
@@ -214,29 +268,6 @@
           "items": {
             "$ref": "#/definitions/CommunicationIdentityTokenScope"
           }
-        }
-      }
-    },
-    "CommunicationIdentityToken": {
-      "required": [
-        "expiresOn",
-        "id",
-        "token"
-      ],
-      "type": "object",
-      "properties": {
-        "id": {
-          "description": "Identifier of the identity owning the token.",
-          "type": "string"
-        },
-        "token": {
-          "description": "The token issued for the identity.",
-          "type": "string"
-        },
-        "expiresOn": {
-          "format": "date-time",
-          "description": "The expiry time of the token.",
-          "type": "string"
         }
       }
     }
