@@ -949,37 +949,47 @@
     },
     "ManagedServicesEncryptionEntities": {
       "properties": {
-        "keySource": {
-          "type": "string",
-          "description": "The encryption keySource (provider). Possible values (case-insensitive):  Default, Microsoft.Keyvault",
-          "enum": [
-            "Default",
-            "Microsoft.Keyvault"
-          ],
-          "x-ms-enum": {
-            "name": "KeySource",
-            "modelAsString": true
-          },
-          "default": "Default"
-        },
-        "keyVaultProperties": {
-          "description": "Details of the keyvault from which to fetch the encryption keys",
+        "managedServices": {
+          "description": "Encryption details for managed services",
           "type": "object",
           "properties": {
-            "keyVaultUri": {
+            "keySource": {
               "type": "string",
-              "description": "The Uri of KeyVault.",
-              "x-ms-client-name": "KeyVaultUri"
+              "description": "The encryption keySource (provider). Possible values (case-insensitive):  Default, Microsoft.Keyvault",
+              "enum": [
+                "Default",
+                "Microsoft.Keyvault"
+              ],
+              "x-ms-enum": {
+                "name": "KeySource",
+                "modelAsString": true
+              },
+              "default": "Default"
             },
-            "keyName": {
-              "type": "string",
-              "description": "The name of KeyVault key.",
-              "x-ms-client-name": "KeyName"
-            },
-            "keyVersion": {
-              "type": "string",
-              "description": "The version of KeyVault key.",
-              "x-ms-client-name": "KeyVersion"
+            "keyVaultProperties": {
+              "description": "Details of the keyvault from which to fetch the encryption keys",
+              "type": "object",
+              "properties": {
+                "keyVaultUri": {
+                  "type": "string",
+                  "description": "The Uri of KeyVault.",
+                  "x-ms-client-name": "KeyVaultUri"
+                },
+                "keyName": {
+                  "type": "string",
+                  "description": "The name of KeyVault key.",
+                  "x-ms-client-name": "KeyName"
+                },
+                "keyVersion": {
+                  "type": "string",
+                  "description": "The version of KeyVault key.",
+                  "x-ms-client-name": "KeyVersion"
+                }
+              },
+              "required": [
+                "keyVaultUri",
+                "keyName"
+              ]
             }
           },
           "required": [
