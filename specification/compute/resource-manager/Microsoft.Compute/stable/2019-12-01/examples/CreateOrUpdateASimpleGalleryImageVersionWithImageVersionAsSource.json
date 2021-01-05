@@ -53,28 +53,9 @@
           ]
         },
         "storageProfile": {
-          "osDiskImage": {
-            "source": {
-              "id": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Compute/snapshots/{osSnapshotName}"
-            },
-            "hostCaching": "ReadOnly"
-          },
-          "dataDiskImages": [
-            {
-              "source": {
-                "id": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Compute/disks/{dataDiskName0}"
-              },
-              "lun": 0,
-              "hostCaching": "None"
-            },
-            {
-              "source": {
-                "id": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Compute/snapshots/{seconddiskSnapshotName}"
-              },
-              "lun": 1,
-              "hostCaching": "None"
-            }
-          ]
+          "source": {
+            "id": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Compute/galleries/{galleryName}/images/{imageDefinitionName}/versions/{versionName}"
+          }
         }
       }
     }
@@ -130,26 +111,15 @@
             "storageAccountType": "Standard_LRS"
           },
           "storageProfile": {
+            "source": {
+              "id": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Compute/galleries/{galleryName}/images/{imageDefinitionName}/versions/{versionName}"
+            },
             "osDiskImage": {
-              "source": {
-                "id": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Compute/snapshots/{osSnapshotName}"
-              },
               "sizeInGB": 10,
               "hostCaching": "ReadOnly"
             },
             "dataDiskImages": [
               {
-                "source": {
-                  "id": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Compute/disks/{dataDiskName0}"
-                },
-                "lun": 0,
-                "sizeInGB": 10,
-                "hostCaching": "None"
-              },
-              {
-                "source": {
-                  "id": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Compute/snapshots/{seconddiskSnapshotName}"
-                },
                 "lun": 1,
                 "sizeInGB": 10,
                 "hostCaching": "None"
@@ -212,26 +182,15 @@
             "storageAccountType": "Standard_LRS"
           },
           "storageProfile": {
+            "source": {
+              "id": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Compute/galleries/{galleryName}/images/{imageDefinitionName}/versions/{versionName}"
+            },
             "osDiskImage": {
-              "source": {
-                "id": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Compute/snapshots/{osSnapshotName}"
-              },
               "sizeInGB": 10,
               "hostCaching": "ReadOnly"
             },
             "dataDiskImages": [
               {
-                "source": {
-                  "id": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Compute/disks/{dataDiskName0}"
-                },
-                "lun": 0,
-                "sizeInGB": 10,
-                "hostCaching": "None"
-              },
-              {
-                "source": {
-                  "id": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Compute/snapshots/{seconddiskSnapshotName}"
-                },
                 "lun": 1,
                 "sizeInGB": 10,
                 "hostCaching": "None"
@@ -294,26 +253,15 @@
             "storageAccountType": "Standard_LRS"
           },
           "storageProfile": {
+            "source": {
+              "id": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Compute/galleries/{galleryName}/images/{imageDefinitionName}/versions/{versionName}"
+            },
             "osDiskImage": {
-              "source": {
-                "id": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Compute/snapshots/{osSnapshotName}"
-              },
               "sizeInGB": 10,
               "hostCaching": "ReadOnly"
             },
             "dataDiskImages": [
               {
-                "source": {
-                  "id": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Compute/disks/{dataDiskName0}"
-                },
-                "lun": 0,
-                "sizeInGB": 10,
-                "hostCaching": "None"
-              },
-              {
-                "source": {
-                  "id": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Compute/snapshots/{seconddiskSnapshotName}"
-                },
                 "lun": 1,
                 "sizeInGB": 10,
                 "hostCaching": "None"
