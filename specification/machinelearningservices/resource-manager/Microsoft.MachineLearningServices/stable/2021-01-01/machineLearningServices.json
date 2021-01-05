@@ -3427,7 +3427,17 @@
                 },
                 "clusterPurpose": {
                   "Description": "Intended usage of the cluster",
-                  "$ref": "#/definitions/ClusterPurpose"
+                  "type": "string",
+                  "default": "FastProd",
+                  "enum": [
+                    "FastProd",
+                    "DenseProd",
+                    "DevTest"
+                  ],
+                  "x-ms-enum": {
+                    "name": "ClusterPurpose",
+                    "modelAsString": true
+                  }             
                 },
                 "sslConfiguration": {
                   "description": "SSL configuration",
