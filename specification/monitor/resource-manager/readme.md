@@ -618,7 +618,7 @@ directive:
     from: dataCollectionRuleAssociations_API.json
     where: $.paths
     reason: 'Operations API is defined in a separate swagger spec for Microsoft.Insights namespace (https://github.com/Azure/azure-rest-api-specs/blob/master/specification/monitor/resource-manager/Microsoft.Insights/stable/2015-04-01/operations_API.json)'
-  - suppress: DefaultErrorResponseSchemaMetricBaselines_API
+  - suppress: R4007
     from: metricBaselines_API.json
     reason: 'Updating the error response to the new format would be a breaking change.'
 ```
