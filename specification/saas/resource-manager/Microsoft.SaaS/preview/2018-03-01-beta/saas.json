@@ -235,6 +235,70 @@
             "$ref": "./examples/saasV2/SaasGet.json"
           }
         }
+      },
+      "patch": {
+        "tags": [
+          "SaaSResources"
+        ],
+        "operationId": "SaaS_UpdateResource",
+        "description": "Updates a SaaS resource.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SaasResourceIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SaasResourceCreation"
+            },
+            "description": "Parameters supplied to the update saas operation."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource change has completed.",
+            "schema": {
+              "$ref": "#/definitions/SaasResource"
+            }
+          },
+          "202": {
+            "description": "Accepted and the operation will complete asynchronously.",
+            "headers": {
+              "Location": {
+                "description": "The URL to check the status of the asynchronous operation.",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "The amount of delay to use while the status of the operation is checked. The value is expressed in seconds.",
+                "format": "int32",
+                "type": "integer"
+              }
+            }
+          },
+          "204": {
+            "description": "Operation completed successfully."
+          },
+          "default": {
+            "description": "A response indicating an error.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update SaaS resource": {
+            "$ref": "./examples/saasV2/SaasPatch.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
       }
     },
     "/providers/Microsoft.SaaS/saasresources": {
@@ -292,8 +356,8 @@
           }
         },
         "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options" : {
-          "final-state-via" : "location"
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
         }
       },
       "get": {
@@ -480,8 +544,8 @@
           }
         },
         "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options" : {
-          "final-state-via" : "location"
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
         }
       },
       "patch": {
@@ -545,13 +609,13 @@
           }
         },
         "x-ms-examples": {
-          "Update SaaS resource": {
+          "Update subscription level SaaS resource": {
             "$ref": "./examples/saasSubscriptionLevel/SaasPatch.json"
           }
         },
         "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options" : {
-          "final-state-via" : "location"
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
         }
       },
       "delete": {
@@ -608,8 +672,8 @@
           }
         },
         "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options" : {
-          "final-state-via" : "location"
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
         }
       }
     },
@@ -680,8 +744,8 @@
           }
         },
         "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options" : {
-          "final-state-via" : "location"
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
         }
       }
     },
@@ -839,8 +903,8 @@
           }
         },
         "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options" : {
-          "final-state-via" : "location"
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
         }
       }
     }
@@ -919,6 +983,7 @@
     "SaasResource": {
       "description": "SaaS REST API resource definition.",
       "type": "object",
+      "x-ms-azure-resource": true,
       "properties": {
         "properties": {
           "description": "saas properties",
@@ -934,7 +999,8 @@
         },
         "name": {
           "type": "string",
-          "description": "The name of the resource"
+          "description": "The name of the resource",
+          "readOnly": true
         },
         "id": {
           "description": "The resource uri",
