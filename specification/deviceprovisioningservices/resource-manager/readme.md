@@ -29,15 +29,15 @@ openapi-type: arm
 tag: package-2021-02
 ```
 
-
 ### Tag: package-2021-02
 
 These settings apply only when `--tag=package-2021-02` is specified on the command line.
 
-```yaml $(tag) == 'package-2021-02'
+``` yaml $(tag) == 'package-2021-02'
 input-file:
   - Microsoft.Devices/stable/2021-02-01/iotdps.json
 ```
+
 ### Tag: package-preview-2020-09
 
 These settings apply only when `--tag=package-preview-2020-09` is specified on the command line.
@@ -226,3 +226,13 @@ generate-interface: true
 ## AzureResourceSchema
 
 See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
+
+## Suppression
+
+``` yaml
+directive:
+  - suppress: PageableOperation
+    where: '$.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Devices/provisioningServices/{provisioningServiceName}/certificateAuthorities"].get'
+    from: iotdps.json
+    reason: New API should be consistent with existing API which has the same warning.
+```
