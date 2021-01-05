@@ -35,7 +35,7 @@ These settings apply only when `--tag=package-2020-05-preview` is specified on t
 
 ``` yaml $(tag) == 'package-2020-05-preview'
 input-file:
-- Microsoft.DataBoxEdge/preview/2020-05-01-preview/databoxedge.json
+- Microsoft.DataBoxEdge/preview/2020-09-01/databoxedge.json
 ```
 
 ### Tag: package-2019-08
