@@ -413,7 +413,7 @@
           "200": {
             "description": "Metadata for the specified certificate.",
             "schema": {
-              "$ref": "#/definitions/CertificateResponse"
+              "$ref": "#/definitions/CertificateAuthorityResponse"
             }
           },
           "default": {
@@ -486,7 +486,7 @@
           "200": {
             "description": "If certificate already exist and update was successful, the operation returns HTTP status code of 201 (OK).",
             "schema": {
-              "$ref": "#/definitions/CertificateResponse"
+              "$ref": "#/definitions/CertificateAuthorityResponse"
             }
           },
           "default": {
@@ -983,7 +983,7 @@
           "200": {
             "description": "List of certificate descriptions in a JSON-serialized array.",
             "schema": {
-              "$ref": "#/definitions/CertificateListDescription"
+              "$ref": "#/definitions/CertificateAuthorityListDescription"
             }
           },
           "default": {
@@ -1991,6 +1991,19 @@
         }
       }
     },
+    "CertificateAuthorityListDescription": {
+      "description": "The JSON-serialized array of Certificate objects.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The array of Certificate objects.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CertificateAuthorityResponse"
+          }
+        }
+      }
+    },
     "CertificateBodyDescription": {
       "description": "The JSON-serialized X509 Certificate.",
       "type": "object",
@@ -2028,6 +2041,42 @@
           "readOnly": true,
           "type": "string",
           "description": "The resource type."
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "CertificateAuthorityResponse": {
+      "description": "The X509 Certificate.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "description": "properties of a certificate",
+          "$ref": "#/definitions/CertificateProperties"
+        },
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The resource identifier."
+        },
+        "name": {
+          "description": "The name of the certificate.",
+          "type": "string",
+          "readOnly": true
+        },
+        "etag": {
+          "description": "The entity tag.",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The resource type."
+        },
+        "systemData": {
+          "readOnly": true,
+          "required": false,
+          "$ref": "#/definitions/SystemData"
         }
       },
       "x-ms-azure-resource": true
@@ -2812,6 +2861,13 @@
           "description": "base-64 representation of X509 certificate .cer file or just .pem file content.",
           "type": "string"
         }
+      }
+    },
+    "SystemData": {
+      "description": "Metadata.",
+      "type": "object",
+      "readOnly": true,
+      "properties": {
       }
     }
   },
