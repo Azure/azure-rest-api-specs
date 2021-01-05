@@ -485,6 +485,11 @@
                   "modelAsString": false
                 },
                 "description": "Identifies the account kind"
+              },
+              "x-ms-is-hns-enabled": {
+                "x-ms-client-name": "IsHierarchicalNamespaceEnabled",
+                "type": "boolean",
+                "description": "Version 2019-07-07 and newer. Indicates if the account has a hierarchical namespace enabled."
               }
             }
           },
@@ -3225,6 +3230,11 @@
                 "type": "string",
                 "description": "A DateTime value returned by the service that uniquely identifies the blob. The value of this header indicates the blob version, and may be used in subsequent requests to access this version of the blob."
               },
+              "x-ms-is-current-version": {
+                "x-ms-client-name": "IsCurrentVersion",
+                "type": "boolean",
+                "description": "The value of this header indicates whether version of this blob is a current version, see also x-ms-version-id header."
+              },
               "Accept-Ranges": {
                 "type": "string",
                 "description": "Indicates that the service supports requests for partial blob content."
@@ -3469,6 +3479,16 @@
                 "x-ms-client-name": "Version",
                 "type": "string",
                 "description": "Indicates the version of the Blob service used to execute the request. This header is returned for requests made against version 2009-09-19 and above."
+              },
+              "x-ms-version-id": {
+                "x-ms-client-name": "VersionId",
+                "type": "string",
+                "description": "A DateTime value returned by the service that uniquely identifies the blob. The value of this header indicates the blob version, and may be used in subsequent requests to access this version of the blob."
+              },
+              "x-ms-is-current-version": {
+                "x-ms-client-name": "IsCurrentVersion",
+                "type": "boolean",
+                "description": "The value of this header indicates whether version of this blob is a current version, see also x-ms-version-id header."
               },
               "Accept-Ranges": {
                 "type": "string",
@@ -4989,6 +5009,9 @@
             "$ref": "#/parameters/ClientRequestId"
           },
           {
+            "$ref": "#/parameters/SourceContentMD5"
+          },
+          {
             "$ref": "#/parameters/BlobTagsHeader"
           },
           {
@@ -6260,7 +6283,7 @@
             "$ref": "#/parameters/SourceIfNoneMatch"
           },
           {
-            "$ref": "#/parameters/SourceIfTags"	
+            "$ref": "#/parameters/SourceIfTags"
           },
           {
             "$ref": "#/parameters/IfModifiedSince"
@@ -10911,7 +10934,7 @@
           "$ref": "#/definitions/QuerySerialization",
           "xml": {
             "name": "InputSerialization"
-          }      
+          }
         },
         "OutputSerialization": {
           "$ref": "#/definitions/QuerySerialization",
