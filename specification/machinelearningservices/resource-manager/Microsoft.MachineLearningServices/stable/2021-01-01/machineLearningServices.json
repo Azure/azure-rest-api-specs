@@ -6614,6 +6614,52 @@
           "type": "string"
         }
       }
+    },
+    "SetupScripts": {
+      "type": "object",
+      "description": "Details of customized scripts to execute for setting up the cluster.",
+      "properties": {
+        "scripts": {
+          "description": "Customized setup scripts",
+          "$ref": "#/definitions/ScriptsToExecute"
+        }
+      }
+    },
+    "ScriptsToExecute": {
+      "type": "object",
+      "description": "Customized setup scripts",
+      "properties": {
+        "startupScript": {
+          "description": "Script that's run every time the machine starts.",
+          "$ref": "#/definitions/ScriptReference"
+        },
+        "creationScript": {
+          "description": "Script that's run only once during provision of the compute.",
+          "$ref": "#/definitions/ScriptReference"
+        }
+      }
+    },
+    "ScriptReference": {
+      "type": "object",
+      "description" : "Script reference",
+      "properties": {
+        "scriptSource": {
+          "description": "The storage source of the script: inline, workspace.",
+          "type": "string"
+        },
+        "scriptData": {
+          "description": "The location of scripts in the mounted volume.",
+          "type": "string"
+        },
+        "scriptArguments": {
+          "description": "Optional command line arguments passed to the script to run.",
+          "type": "string"
+        },
+        "timeout": {
+          "description": "Optional time period passed to timeout command.",
+          "type": "string"
+        }
+      }
     }
   }
 }
