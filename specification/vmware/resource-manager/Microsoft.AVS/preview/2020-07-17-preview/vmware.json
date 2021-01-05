@@ -92,6 +92,14 @@
       "description": "Name of the HCX Enterprise Site in the private cloud",
       "x-ms-parameter-location": "method"
     },
+    "addonName": {
+      "name": "addonName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Name of the addon for the private cloud",
+      "x-ms-parameter-location": "method"
+    },
     "authorizationName": {
       "name": "authorizationName",
       "in": "path",
@@ -247,7 +255,7 @@
           }
         },
         "x-ms-examples": {
-          "CheckQuotaAvailability": {
+          "Locations_CheckTrialAvailability": {
             "$ref": "./examples/Locations_CheckTrialAvailability.json"
           }
         }
@@ -290,7 +298,7 @@
           }
         },
         "x-ms-examples": {
-          "CheckQuotaAvailability": {
+          "Locations_CheckQuotaAvailability": {
             "$ref": "./examples/Locations_CheckQuotaAvailability.json"
           }
         }
@@ -371,7 +379,7 @@
           }
         },
         "x-ms-examples": {
-          "PrivateClouds_List": {
+          "PrivateClouds_ListInSubscription": {
             "$ref": "./examples/PrivateClouds_ListInSubscription.json"
           }
         }
@@ -3162,6 +3170,206 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/addons": {
+      "get": {
+        "operationId": "Addons_List",
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "tags": [
+          "Addons"
+        ],
+        "summary": "List addons in a private cloud",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/privateCloudName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/AddonList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Addons_List": {
+            "$ref": "./examples/Addons_List.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/addons/{addonName}": {
+      "get": {
+        "operationId": "Addons_Get",
+        "tags": [
+          "Addons"
+        ],
+        "summary": "Get an addon by name in a private cloud",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/privateCloudName"
+          },
+          {
+            "$ref": "#/parameters/addonName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/Addon"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Addons_Get": {
+            "$ref": "./examples/Addons_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "Addons_CreateOrUpdate",
+        "x-ms-long-running-operation": true,
+        "tags": [
+          "Addons"
+        ],
+        "summary": "Create or update a addon in a private cloud",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "privateCloudName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the private cloud."
+          },
+          {
+            "$ref": "#/parameters/addonName"
+          },
+          {
+            "name": "addon",
+            "description": "A addon in the private cloud",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Addon"
+            }
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/Addon"
+            }
+          },
+          "201": {
+            "description": "accepted operation",
+            "schema": {
+              "$ref": "#/definitions/Addon"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Addons_CreateOrUpdate": {
+            "$ref": "./examples/Addons_CreateOrUpdate.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "Addons_Delete",
+        "x-ms-long-running-operation": true,
+        "tags": [
+          "Addons"
+        ],
+        "summary": "Delete a addon in a private cloud",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/privateCloudName"
+          },
+          {
+            "$ref": "#/parameters/addonName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The delete has succeeded"
+          },
+          "202": {
+            "description": "Accepted. The delete will complete asynchronously"
+          },
+          "204": {
+            "description": "No Content. No addon to delete"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Addons_Delete": {
+            "$ref": "./examples/Addons_Delete.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -3948,6 +4156,106 @@
           "readOnly": true,
           "items": {
             "$ref": "#/definitions/Cluster"
+          }
+        },
+        "nextLink": {
+          "description": "URL to get the next page if any",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "Addon": {
+      "description": "An addon resource",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "The properties of an addon resource",
+          "$ref": "#/definitions/AddonProperties",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "AddonUpdate": {
+      "description": "An update of an addon resource",
+      "properties": {
+        "properties": {
+          "description": "The properties of an addon resource that may be updated",
+          "$ref": "#/definitions/AddonUpdateProperties",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "AddonUpdateProperties": {
+      "description": "The properties of an addon that may be updated",
+      "properties": {
+        "properties": {
+          "description": "reference specific properties definition for addon type being used",
+          "$ref": "#/definitions/AddonProperties",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "AddonProperties": {
+      "description": "The properties of an addon that may be updated",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AddonSrmProperties"
+        }
+      ],
+      "properties": {
+        "addonType": {
+          "description": "The type of private cloud addon",
+          "type": "string",
+          "enum": [
+            "SRM",
+            "VR"
+          ],
+          "x-ms-enum": {
+            "name": "AddonType",
+            "modelAsString": true
+          }
+        },
+        "provisioningState": {
+          "description": "The state of the addon provisioning",
+          "type": "string",
+          "readOnly": true,
+          "enum": [
+            "Succeeded",
+            "Failed",
+            "Cancelled",
+            "Deleting",
+            "Updating"
+          ],
+          "x-ms-enum": {
+            "name": "AddonProvisioningState",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "AddonSrmProperties": {
+      "description": "The properties of an SRM addon that may be updated",
+      "properties": {
+        "licenseKey": {
+          "description": "The SRM license",
+          "type": "string"
+        }
+      }
+    },
+    "AddonList": {
+      "description": "A paged list of addons",
+      "properties": {
+        "value": {
+          "description": "The items on a page",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/Addon"
           }
         },
         "nextLink": {
