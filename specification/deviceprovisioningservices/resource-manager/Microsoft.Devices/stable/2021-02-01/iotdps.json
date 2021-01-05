@@ -419,7 +419,7 @@
           "default": {
             "description": "Default error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         }
@@ -492,7 +492,7 @@
           "default": {
             "description": "Default error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -633,7 +633,7 @@
           "default": {
             "description": "Default error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         }
@@ -989,7 +989,7 @@
           "default": {
             "description": "Default error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         }
@@ -2117,7 +2117,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/DpsResource"
+          "$ref": "#/definitions/Resource"
         }
       ],
       "required": [
@@ -2502,7 +2502,7 @@
         "rights"
       ]
     },
-    "DpsResource": {
+    "Resource": {
       "description": "The common properties of an Azure resource.",
       "properties": {
         "id": {
@@ -2610,6 +2610,16 @@
           "description": "The error details.",
           "type": "string",
           "readOnly": true
+        }
+      }
+    },
+    "ErrorResponse": {
+      "title": "Error response",
+      "description": "Error response.",
+      "properties": {
+        "error": {
+          "description": "The error object.",
+          "$ref": "#/definitions/ErrorDetail"
         }
       }
     },
