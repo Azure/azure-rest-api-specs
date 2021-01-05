@@ -47,6 +47,12 @@
             "schema": {
               "$ref": "#/definitions/ARMErrorResponseBody"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ArmErrorResponse"
+            }
           }
         },
         "x-ms-examples": {
@@ -73,6 +79,12 @@
             "description": "OK. Successfully retrieved metadata entities",
             "schema": {
               "$ref": "#/definitions/MetadataEntityListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ArmErrorResponse"
             }
           }
         },
@@ -330,6 +342,12 @@
                 "type": "string"
               }
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ArmErrorResponse"
+            }
           }
         },
         "deprecated": false,
@@ -369,6 +387,12 @@
           },
           "204": {
             "description": "NoContent. Recommendation generation has been completed."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ArmErrorResponse"
+            }
           }
         },
         "deprecated": false,
@@ -405,7 +429,8 @@
             "in": "query",
             "description": "The number of recommendations per page if a paged version of this API is being used.",
             "required": false,
-            "type": "integer"
+            "type": "integer",
+            "format": "int32"
           },
           {
             "name": "$skipToken",
@@ -420,6 +445,12 @@
             "description": "OK. Successfully obtained cached recommendations.",
             "schema": {
               "$ref": "#/definitions/ResourceRecommendationBaseListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ArmErrorResponse"
             }
           }
         },
@@ -492,6 +523,12 @@
             "schema": {
               "$ref": "#/definitions/ResourceRecommendationBase"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ArmErrorResponse"
+            }
           }
         },
         "deprecated": false,
@@ -544,6 +581,12 @@
           },
           "404": {
             "description": "Suppression name is not specified or Suppression Id not found.",
+            "schema": {
+              "$ref": "#/definitions/ArmErrorResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "#/definitions/ArmErrorResponse"
             }
@@ -609,6 +652,12 @@
             "schema": {
               "$ref": "#/definitions/ArmErrorResponse"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ArmErrorResponse"
+            }
           }
         },
         "deprecated": false,
@@ -653,6 +702,12 @@
         "responses": {
           "204": {
             "description": "NoContent. The recommendation has been activated."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ArmErrorResponse"
+            }
           }
         },
         "deprecated": false,
@@ -698,6 +753,12 @@
             "description": "OK. Successfully got all suppressions in a subscription.",
             "schema": {
               "$ref": "#/definitions/SuppressionContractListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ArmErrorResponse"
             }
           }
         },
