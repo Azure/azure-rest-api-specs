@@ -1,0 +1,61 @@
+{
+  "parameters": {
+    "applicationName": "app",
+    "clusterName": "cluster1",
+    "resourceGroupName": "rg1",
+    "api-version": "2018-06-01-preview",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.HDInsight/clusters/cluster1/applications/app",
+        "name": "app",
+        "type": "Microsoft.HDInsight/clusters/applications",
+        "etag": "2C128F8E-BB26-4637-99E4-18EBC39FD51F",
+        "tags": {
+          "key1": "val1"
+        },
+        "properties": {
+          "computeProfile": {
+            "roles": [
+              {
+                "name": "edgenode",
+                "targetInstanceCount": 1,
+                "hardwareProfile": {
+                  "vmSize": "Standard_D3"
+                }
+              }
+            ]
+          },
+          "installScriptActions": [
+            {
+              "name": "app-Install",
+              "uri": "https://app.com/azure/app_install.sh",
+              "roles": [
+                "edgenode"
+              ]
+            }
+          ],
+          "uninstallScriptActions": [],
+          "httpsEndpoints": [
+            {
+              "accessModes": [
+                "WebPage"
+              ],
+              "location": "location",
+              "destinationPort": 18630,
+              "publicPort": 443
+            }
+          ],
+          "sshEndpoints": [],
+          "provisioningState": "InProgress",
+          "applicationState": "AzureVMConfiguration",
+          "createdDate": "2017-03-28T02:01:25.107",
+          "applicationType": "CustomApplication",
+          "marketplaceIdentifier": "id"
+        }
+      }
+    }
+  }
+}

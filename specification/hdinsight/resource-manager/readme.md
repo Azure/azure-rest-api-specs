@@ -84,18 +84,18 @@ directive:
 
 ### Tag: package-2018-06-preview
 
-These settings apply only when `--tag=package-2018-06-preview` is specified on the command line.
+These settings apply only when `--tag=package-2021-06-01` is specified on the command line.
 
 ``` yaml $(tag) == 'package-2018-06-preview'
 input-file:
-- Microsoft.HDInsight/stable/2018-06-01-preview/cluster.json
-- Microsoft.HDInsight/stable/2018-06-01-preview/applications.json
-- Microsoft.HDInsight/stable/2018-06-01-preview/locations.json
-- Microsoft.HDInsight/stable/2018-06-01-preview/configurations.json
-- Microsoft.HDInsight/stable/2018-06-01-preview/extensions.json
-- Microsoft.HDInsight/stable/2018-06-01-preview/scriptActions.json
-- Microsoft.HDInsight/stable/2018-06-01-preview/operations.json
-- Microsoft.HDInsight/stable/2018-06-01-preview/virtualMachines.json
+- Microsoft.HDInsight/stable/2021-06-01/cluster.json
+- Microsoft.HDInsight/stable/2021-06-01/applications.json
+- Microsoft.HDInsight/stable/2021-06-01/locations.json
+- Microsoft.HDInsight/stable/2021-06-01/configurations.json
+- Microsoft.HDInsight/stable/2021-06-01/extensions.json
+- Microsoft.HDInsight/stable/2021-06-01/scriptActions.json
+- Microsoft.HDInsight/stable/2021-06-01/operations.json
+- Microsoft.HDInsight/stable/2021-06-01/virtualMachines.json
 ```
 
 
