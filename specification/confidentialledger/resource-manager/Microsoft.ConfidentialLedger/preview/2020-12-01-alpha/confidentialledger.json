@@ -57,7 +57,7 @@
           "default": {
             "description": "Error response describing the reason for operation failure. 404 - NotFound (Confidential Ledger does not exist.)",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -103,7 +103,7 @@
           "default": {
             "description": "Error response describing the reason for operation failure. 404 - NotFound (Confidential Ledger does not exist.)",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -120,6 +120,7 @@
         "summary": "Deletes a Confidential Ledger resource.",
         "description": "Deletes an existing Confidential Ledger.",
         "operationId": "Ledger_Delete",
+        "x-ms-long-running-operation": true,
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -138,13 +139,16 @@
           "200": {
             "description": "The request was successful; the Confidential Ledger is deleted."
           },
+          "202": {
+            "description": "The Confidential Ledger resource will be deleted asynchronously"
+          },
           "204": {
             "description": "The request was successful; Confidential Ledger does not exist."
           },
           "default": {
             "description": "Error response describing the reason for operation failure. 409 - Conflict(Confidential Ledger is in a non-terminal state due to an ongoing operation.)",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -161,6 +165,7 @@
         "summary": "Creates a  Confidential Ledger.",
         "description": "Creates a  Confidential Ledger with the specified ledger parameters.",
         "operationId": "Ledger_Create",
+        "x-ms-long-running-operation": true,
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -191,10 +196,13 @@
               "$ref": "#/definitions/ConfidentialLedger"
             }
           },
+          "202": {
+            "description": "The Confidential Ledger resource will be created asynchronously"
+          },
           "default": {
             "description": "Error response describing the reason for operation failure. 404 - NotFound (Confidential Ledger could not be created/updated)",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -211,6 +219,7 @@
         "summary": "Update Confidential Ledger properties",
         "description": "Updates properties of Confidential Ledger",
         "operationId": "Ledger_Update",
+        "x-ms-long-running-operation": true,
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -241,10 +250,13 @@
               "$ref": "#/definitions/ConfidentialLedger"
             }
           },
+          "202": {
+            "description": "The Confidential Ledger resource will be updated asynchronously"
+          },
           "default": {
             "description": "Error response describing the reason for operation failure. 404 - NotFound (Confidential Ledger could not be created/updated)",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -290,7 +302,7 @@
           "default": {
             "description": "Error response describing the reason for operation failure. 404 - NotFound (Confidential Ledger does not exist.)",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -336,7 +348,7 @@
           "default": {
             "description": "Error response describing the reason for operation failure. 404 - NotFound (Confidential Ledger does not exist.)",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -352,50 +364,6 @@
     }
   },
   "definitions": {
-    "ErrorResponse": {
-      "description": "Error Response from the APIs",
-      "type": "object",
-      "properties": {
-        "status": {
-          "description": "Status of the Error",
-          "type": "string"
-        },
-        "error": {
-          "description": "More details about the error",
-          "$ref": "#/definitions/ErrorDefinition"
-        }
-      },
-      "additionalProperties": false
-    },
-    "ErrorDefinition": {
-      "description": "Error definition.",
-      "type": "object",
-      "properties": {
-        "code": {
-          "description": "Service specific error code which serves as the substatus for the HTTP error code.",
-          "type": "string",
-          "readOnly": true
-        },
-        "message": {
-          "description": "Description of the error.",
-          "type": "string",
-          "readOnly": true
-        },
-        "details": {
-          "description": "Internal error details.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ErrorDefinition"
-          },
-          "readOnly": true
-        },
-        "target": {
-          "description": "Target code where the error happened.",
-          "type": "string",
-          "readOnly": true
-        }
-      }
-    },
     "Location": {
       "description": "Location of the ARM Resource",
       "type": "object",
@@ -428,59 +396,6 @@
         }
       }
     },
-    "SystemData": {
-      "description": "Metadata pertaining to creation and last modification of the resource.",
-      "type": "object",
-      "readOnly": true,
-      "properties": {
-        "createdBy": {
-          "type": "string",
-          "description": "The identity that created the resource."
-        },
-        "createdByType": {
-          "type": "string",
-          "description": "The type of identity that created the resource.",
-          "enum": [
-            "User",
-            "Application",
-            "ManagedIdentity",
-            "Key"
-          ],
-          "x-ms-enum": {
-            "name": "createdByType",
-            "modelAsString": true
-          }
-        },
-        "createdAt": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The timestamp of resource creation (UTC)."
-        },
-        "lastModifiedBy": {
-          "type": "string",
-          "description": "The identity that last modified the resource."
-        },
-        "lastModifiedByType": {
-          "type": "string",
-          "description": "The type of identity that last modified the resource.",
-          "enum": [
-            "User",
-            "Application",
-            "ManagedIdentity",
-            "Key"
-          ],
-          "x-ms-enum": {
-            "name": "createdByType",
-            "modelAsString": true
-          }
-        },
-        "lastModifiedAt": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The type of identity that last modified the resource."
-        }
-      }
-    },
     "Resource": {
       "description": "An Azure resource.",
       "x-ms-azure-resource": true,
@@ -503,7 +418,7 @@
         },
         "systemData": {
           "description": "Metadata pertaining to creation and last modification of the resource",
-          "$ref": "#/definitions/SystemData",
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
           "readOnly": true
         }
       }
