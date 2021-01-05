@@ -136,10 +136,10 @@
               "$ref": "#/definitions/RoleAssignmentListResult"
             }
           },
-          "400": {
-            "description": "Bad Request - Indicates the request has missing information and can not be completed",
+          "default": {
+            "description": "error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/Error"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -191,8 +191,11 @@
           "204": {
             "description": "Deleted - Indicates correct deletion without returning additional info"
           },
-          "412": {
-            "description": "Precondition Failed"
+          "default": {
+            "description": "error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-examples": {
@@ -243,16 +246,10 @@
               "$ref": "#/definitions/RoleAssignment"
             }
           },
-          "400": {
-            "description": "Bad Request - Indicates the request has missing information and can not be completed",
+          "default": {
+            "description": "error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/Error"
-            }
-          },
-          "409": {
-            "description": "Conflict - indicates that the request could not be completed due to a conflict with the current state of the target resource",
-            "schema": {
-              "$ref": "#/definitions/Error"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -295,14 +292,11 @@
               "$ref": "#/definitions/RoleAssignment"
             }
           },
-          "400": {
-            "description": "Bad Request - Indicates the request has missing information and can not be completed",
+          "default": {
+            "description": "error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/Error"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
-          },
-          "404": {
-            "description": "Not Found - Indicates the specified role has not been found"
           }
         },
         "x-ms-examples": {
@@ -451,10 +445,10 @@
               "$ref": "#/definitions/RoleAssignmentListResult"
             }
           },
-          "400": {
-            "description": "Bad Request - Indicates the request has missing information and can not be completed",
+          "default": {
+            "description": "error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/Error"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -503,10 +497,10 @@
               "$ref": "#/definitions/RoleAssignmentListResult"
             }
           },
-          "400": {
-            "description": "Bad Request - Indicates the request has missing information and can not be completed",
+          "default": {
+            "description": "error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/Error"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -717,25 +711,6 @@
         "properties"
       ],
       "description": "Role assignment create parameters."
-    },
-    "Error": {
-      "properties": {
-        "error": {
-          "description": "Object to be thrown in case of an unsuccessful response",
-          "type": "object",
-          "properties": {
-            "code": {
-              "type": "string",
-              "description": "Brief error code"
-            },
-            "message": {
-              "type": "string",
-              "description": "Longer message explaining the details of the error"
-            }
-          }
-        }
-      },
-      "description": "Object to be thrown in case of an unsuccessful response"
     }
   },
   "parameters": {
