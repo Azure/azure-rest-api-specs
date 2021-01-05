@@ -259,6 +259,12 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "SaaS creation completed successful.",
+            "schema": {
+              "$ref": "#/definitions/SaasResource"
+            }
+          },
           "202": {
             "description": "Accepted and the operation will complete asynchronously.",
             "headers": {
@@ -284,6 +290,10 @@
           "Create SaaS resource": {
             "$ref": "./examples/saasV2/SaasPut.json"
           }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options" : {
+          "final-state-via" : "location"
         }
       },
       "get": {
@@ -312,7 +322,7 @@
           }
         },
         "x-ms-examples": {
-          "Get get all SaaS resources": {
+          "Get all SaaS resources": {
             "$ref": "./examples/saasV2/SaaSGetAllResources.json"
           }
         },
@@ -396,7 +406,7 @@
           }
         },
         "x-ms-examples": {
-          "Get saas application": {
+          "Get subscription level saas resource": {
             "$ref": "./examples/saasSubscriptionLevel/SaasGet.json"
           }
         }
@@ -434,6 +444,12 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "Resource creation has completed.",
+            "schema": {
+              "$ref": "#/definitions/SaasResource"
+            }
+          },
           "202": {
             "description": "Accepted and the operation will complete asynchronously.",
             "headers": {
@@ -459,9 +475,13 @@
           }
         },
         "x-ms-examples": {
-          "Create SaaS resource": {
+          "Create subscription level SaaS resource": {
             "$ref": "./examples/saasSubscriptionLevel/SaasPut.json"
           }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options" : {
+          "final-state-via" : "location"
         }
       },
       "patch": {
@@ -494,6 +514,12 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "Resource change has completed.",
+            "schema": {
+              "$ref": "#/definitions/SaasResource"
+            }
+          },
           "202": {
             "description": "Accepted and the operation will complete asynchronously.",
             "headers": {
@@ -519,9 +545,13 @@
           }
         },
         "x-ms-examples": {
-          "Create SaaS resource": {
+          "Update SaaS resource": {
             "$ref": "./examples/saasSubscriptionLevel/SaasPatch.json"
           }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options" : {
+          "final-state-via" : "location"
         }
       },
       "delete": {
@@ -546,7 +576,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Operation completed successfully."
+            "description": "Delete Operation completed successfully."
           },
           "202": {
             "description": "Accepted and the operation will complete asynchronously.",
@@ -563,7 +593,7 @@
             }
           },
           "204": {
-            "description": "Operation completed successfully."
+            "description": "Delete operation completed successfully."
           },
           "default": {
             "description": "A response indicating an error.",
@@ -576,11 +606,15 @@
           "Delete Subscription Level SaaS resource": {
             "$ref": "./examples/saasSubscriptionLevel/SaasDelete.json"
           }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options" : {
+          "final-state-via" : "location"
         }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SaaS/resources/{resourceName}/unsubscribe": {
-      "patch": {
+      "post": {
         "tags": [
           "SubscriptionLevelSaaSResources"
         ],
@@ -613,6 +647,9 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "Unsubscribe operation completed successfully."
+          },
           "202": {
             "description": "Accepted and the operation will complete asynchronously.",
             "headers": {
@@ -628,7 +665,7 @@
             }
           },
           "204": {
-            "description": "Operation completed successfully."
+            "description": "Unsubscribe operation completed successfully."
           },
           "default": {
             "description": "A response indicating an error.",
@@ -638,9 +675,13 @@
           }
         },
         "x-ms-examples": {
-          "Delete Subscription Level SaaS resource": {
+          "Unsubscribe Subscription Level SaaS resource": {
             "$ref": "./examples/saasSubscriptionLevel/SaasUnsubscribe.json"
           }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options" : {
+          "final-state-via" : "location"
         }
       }
     },
@@ -683,7 +724,7 @@
           }
         },
         "x-ms-examples": {
-          "Delete Subscription Level SaaS resource": {
+          "List subscription level SaaS resource access token": {
             "$ref": "./examples/saasSubscriptionLevel/ListAccessTokenPost.json"
           }
         }
@@ -768,6 +809,9 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "Move operation completed successfully."
+          },
           "202": {
             "description": "Accepted and the operation will complete asynchronously.",
             "headers": {
@@ -793,6 +837,10 @@
           "Move of a subscription Level SaaS resource": {
             "$ref": "./examples/saasSubscriptionLevel/ResourceMove.json"
           }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options" : {
+          "final-state-via" : "location"
         }
       }
     }
