@@ -50,7 +50,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/OperationList"
+              "$ref": "#/definitions/AvailableOperations"
             }
           },
           "default": {
@@ -545,60 +545,76 @@
         }
       }
     },
-    "OperationList": {
-      "description": "List of available operations.",
+    "AvailableOperations": {
+      "description": "Available operations of the service",
       "type": "object",
       "properties": {
         "value": {
-          "description": "List of operations.",
+          "description": "Collection of available operation details",
+          "uniqueItems": false,
           "type": "array",
           "items": {
-            "$ref": "#/definitions/Operation"
+            "$ref": "#/definitions/OperationDetail"
           }
         },
         "nextLink": {
-          "description": "Link to the next set of results.",
-          "type": "string",
-          "readOnly": true
+          "description": "URL client should use to fetch the next page (per server side paging).\r\nIt's null for now, added for future use.",
+          "type": "string"
         }
       }
     },
-    "Operation": {
-      "description": "Operation details.",
+    "OperationDetail": {
+      "description": "Operation detail payload",
       "type": "object",
       "properties": {
         "name": {
-          "description": "Name of the operation.",
-          "type": "string",
-          "readOnly": true
+          "description": "Name of the operation",
+          "type": "string"
+        },
+        "isDataAction": {
+          "description": "Indicates whether the operation is a data action",
+          "type": "boolean"
         },
         "display": {
           "$ref": "#/definitions/OperationDisplay",
-          "description": "Operation properties."
+          "description": "Display of the operation"
+        },
+        "origin": {
+          "description": "Origin of the operation",
+          "type": "string"
+        },
+        "properties": {
+          "$ref": "#/definitions/OperationProperties",
+          "description": "Properties of the operation"
         }
       }
     },
     "OperationDisplay": {
-      "description": "Operation properties.",
+      "description": "Operation display payload",
       "type": "object",
       "properties": {
         "provider": {
-          "description": "Resource provider name.",
+          "description": "Resource provider of the operation",
           "type": "string"
         },
         "resource": {
-          "description": "Resource type name.",
+          "description": "Resource of the operation",
           "type": "string"
         },
         "operation": {
-          "description": "Operation name.",
+          "description": "Localized friendly name for the operation",
           "type": "string"
         },
         "description": {
-          "description": "Operation description.",
+          "description": "Localized friendly description for the operation",
           "type": "string"
         }
       }
+    },
+    "OperationProperties": {
+      "description": "Operation properties.",
+      "type": "object",
+      "properties": {}
     }
   },
   "parameters": {

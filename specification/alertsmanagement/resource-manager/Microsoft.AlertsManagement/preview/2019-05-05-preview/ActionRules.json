@@ -850,15 +850,15 @@
           "$ref": "#/definitions/ActionRuleProperties"
         },
         {
-          "type": "object"
+          "type": "object",
+          "properties": {
+            "suppressionConfig": {
+              "description": "suppression configuration for the action rule",
+              "$ref": "#/definitions/SuppressionConfig"
+            }
+          }
         }
-      ],
-      "properties": {
-        "suppressionConfig": {
-          "description": "suppression configuration for the action rule",
-          "$ref": "#/definitions/SuppressionConfig"
-        }
-      }
+      ]
     },
     "ActionGroup": {
       "title": "Action Group based Action Rule",
@@ -871,15 +871,15 @@
           "$ref": "#/definitions/ActionRuleProperties"
         },
         {
-          "type": "object"
+          "type": "object",
+          "properties": {
+            "actionGroupId": {
+              "type": "string",
+              "description": "Action group to trigger if action rule matches"
+            }
+          }
         }
-      ],
-      "properties": {
-        "actionGroupId": {
-          "type": "string",
-          "description": "Action group to trigger if action rule matches"
-        }
-      }
+      ]
     },
     "Diagnostics": {
       "title": "Diagnostics based Action Rule",

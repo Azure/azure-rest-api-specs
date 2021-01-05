@@ -137,7 +137,6 @@
         ],
         "description": "Update metadata of DigitalTwinsInstance.",
         "operationId": "DigitalTwins_Update",
-        "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "Patch a DigitalTwinsInstance resource": {
             "$ref": "./examples/DigitalTwinsPatch_example.json"
@@ -895,6 +894,7 @@
     "ExternalResource": {
       "description": "Definition of a resource.",
       "type": "object",
+      "x-ms-azure-resource": true,
       "properties": {
         "id": {
           "readOnly": true,
@@ -916,7 +916,6 @@
     },
     "DigitalTwinsEndpointResource": {
       "description": "DigitalTwinsInstance endpoint resource.",
-      "x-ms-azure-resource": true,
       "allOf": [
         {
           "$ref": "#/definitions/ExternalResource"
@@ -927,7 +926,10 @@
           "description": "DigitalTwinsInstance endpoint resource properties.",
           "$ref": "#/definitions/DigitalTwinsEndpointResourceProperties"
         }
-      }
+      },
+      "required": [
+        "properties"
+      ]
     },
     "DigitalTwinsEndpointResourceProperties": {
       "description": "Properties related to Digital Twins Endpoint",

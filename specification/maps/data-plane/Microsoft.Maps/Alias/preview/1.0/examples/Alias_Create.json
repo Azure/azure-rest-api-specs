@@ -1,0 +1,59 @@
+{
+  "parameters": {
+    "api-version": "1.0",
+    "subscription-key": "[subscription-key]"
+  },
+  "responses": {
+    "201": {
+      "headers": {},
+      "body": {
+        "aliasId": "25084fb7-307a-4720-8f91-7952a0b91012"
+      }
+    },
+    "400": {
+      "headers": {},
+      "body": {
+        "error": {
+          "code": "400 BadRequest",
+          "message": "Bad request - Error message."
+        }
+      }
+    },
+    "401": {
+      "headers": {},
+      "body": {
+        "error": {
+          "code": "401 Unauthorized",
+          "message": "Access denied due to invalid subscription key. Make sure to provide a valid key for an active subscription."
+        }
+      }
+    },
+    "403": {
+      "headers": {},
+      "body": {
+        "error": {
+          "code": "403 Forbidden",
+          "message": "Permission, capacity, or authentication issues."
+        }
+      }
+    },
+    "404": {
+      "headers": {},
+      "body": {
+        "error": {
+          "code": "404 NotFound",
+          "message": "Not Found - The requested resource could not be found, but it may be available again in the future."
+        }
+      }
+    },
+    "500": {
+      "headers": {},
+      "body": {
+        "error": {
+          "code": "500 InternalServerError",
+          "message": "Unknown error - An error occurred while processing the request. Please try again later."
+        }
+      }
+    }
+  }
+}
