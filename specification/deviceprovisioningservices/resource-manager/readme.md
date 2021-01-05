@@ -47,6 +47,15 @@ input-file:
   - Microsoft.Devices/preview/2020-09-01-preview/iotdps.json
 ```
 
+### Tag: package-2021-02
+
+These settings apply only when `--tag=package-2021-02` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-02'
+input-file:
+  - Microsoft.Devices/stable/2021-02-01/iotdps.json
+```
+
 ### Tag: package-2020-03
 
 These settings apply only when `--tag=package-2020-03` is specified on the command line.

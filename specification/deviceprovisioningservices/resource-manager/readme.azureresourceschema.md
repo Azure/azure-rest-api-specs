@@ -6,6 +6,7 @@ These settings apply only when `--azureresourceschema` is specified on the comma
 
 ``` yaml $(azureresourceschema) && $(multiapi)
 batch:
+  - tag: schema-devices-2021-02-01
   - tag: schema-devices-2020-09-01-preview
   - tag: schema-devices-2020-03-01
   - tag: schema-devices-2020-01-01
@@ -25,6 +26,17 @@ output-folder: $(azureresourceschema-folder)/schemas
 # all the input files in this apiVersion
 input-file:
   - Microsoft.Devices/preview/2020-09-01-preview/iotdps.json
+
+```
+
+### Tag: schema-devices-2021-02-01 and azureresourceschema
+
+``` yaml $(tag) == 'schema-devices-2021-02-01' && $(azureresourceschema)
+output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
+  - Microsoft.Devices/stable/2021-02-01/iotdps.json
 
 ```
 
