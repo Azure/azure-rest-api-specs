@@ -95,6 +95,15 @@
             "$ref": "#/parameters/GetRolloutNameParameter"
           },
           {
+            "name": "properties",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CustomRolloutSpecification"
+            },
+            "description": "The custom rollout properties supplied to the CreateOrUpdate operation."
+          },
+          {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           }
         ],
@@ -452,6 +461,15 @@
             "$ref": "#/parameters/ProviderNamespaceParameter"
           },
           {
+            "name": "checkinManifestParams",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CheckinManifestParams"
+            },
+            "description": "The required body parameters supplied to the checkin manifest operation."
+          },
+          {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           }
         ],
@@ -704,6 +722,15 @@
             "$ref": "#/parameters/ProviderNamespaceParameter"
           },
           {
+            "name": "properties",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/OperationsContent"
+            },
+            "description": "The operations content properties supplied to the CreateOrUpdate operation."
+          },
+          {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           }
         ],
@@ -867,6 +894,15 @@
           },
           {
             "$ref": "#/parameters/ProviderNamespaceParameter"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ProviderRegistration"
+            },
+            "description": "The provider registration properties supplied to the CreateOrUpdate operation."
           },
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
@@ -1131,6 +1167,15 @@
           },
           {
             "$ref": "#/parameters/GetResourceTypeParameter"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ResourceTypeRegistration"
+            },
+            "description": "The Kusto cluster parameters supplied to the CreateOrUpdate operation."
           },
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
@@ -2161,6 +2206,23 @@
         }
       }
     },
+    "CheckinManifestParams": {
+      "type": "object",
+      "properties": {
+        "environment": {
+          "type": "string",
+          "description": "The environment supplied to the checkin manifest operation."
+        },
+        "baselineArmManifestLocation": {
+          "type": "string",
+          "description": "The baseline ARM manifest location supplied to the checkin manifest operation."
+        }
+      },
+      "required": [
+        "baselineArmManifestLocation",
+        "environment"
+      ]
+    },
     "RolloutStatusBase": {
       "type": "object",
       "properties": {
@@ -2180,6 +2242,9 @@
     },
     "CustomRolloutProperties": {
       "type": "object",
+      "required": [
+        "specification"
+      ],
       "properties": {
         "provisioningState": {
           "enum": [
@@ -2222,6 +2287,9 @@
     "CustomRollout": {
       "description": "Rollout details.",
       "type": "object",
+      "required": [
+        "properties"
+      ],
       "allOf": [
         {
           "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
