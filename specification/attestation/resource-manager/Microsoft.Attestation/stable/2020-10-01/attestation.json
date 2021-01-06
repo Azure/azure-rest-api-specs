@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "AttestationManagementClient",
-    "description": "Various APIs for managing resources in attestation service. This primarily encompasses per-tenant instance management.",
+    "description": "Various APIs for managing resources in attestation service. This primarily encompasses per-provider management.",
     "version": "2020-10-01"
   },
   "host": "management.azure.com",
@@ -84,7 +84,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "Name of the attestation service instance"
+            "description": "Name of the attestation provider."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -92,7 +92,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The status of the specified attestation service instance",
+            "description": "The status of the specified attestation provider",
             "schema": {
               "$ref": "#/definitions/AttestationProvider"
             }
@@ -110,7 +110,7 @@
           "AttestationProviders"
         ],
         "operationId": "AttestationProviders_Create",
-        "description": "Creates a new Attestation Provider instance.",
+        "description": "Creates a new Attestation Provider.",
         "x-ms-examples": {
           "AttestationProviders_Create": {
             "$ref": "./examples/Create_AttestationProvider.json"
@@ -128,7 +128,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "Name of the attestation service instance."
+            "description": "Name of the attestation provider."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -188,7 +188,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "Name of the attestation service instance."
+            "description": "Name of the attestation provider."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -507,7 +507,7 @@
       "properties": {
         "trustModel": {
           "type": "string",
-          "description": "Trust model for the attestation service instance."
+          "description": "Trust model for the attestation provider."
         },
         "status": {
           "type": "string",
@@ -525,6 +525,14 @@
         "attestUri": {
           "type": "string",
           "description": "Gets the uri of attestation service"
+        },
+        "privateEndpointConnections": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "../../../../../common-types/resource-management/v1/privatelinks.json#/definitions/PrivateEndpointConnection"
+          },
+          "description": "List of private endpoint connections associated with the attestation provider."
         }
       }
     },
@@ -569,7 +577,7 @@
       }
     },
     "AttestationServicePatchParams": {
-      "description": "Parameters for patching an attestation service instance",
+      "description": "Parameters for patching an attestation provider",
       "x-ms-azure-resource": true,
       "properties": {
         "tags": {
@@ -577,12 +585,12 @@
           "additionalProperties": {
             "type": "string"
           },
-          "description": "The tags that will be assigned to the attestation service instance."
+          "description": "The tags that will be assigned to the attestation provider."
         }
       }
     },
     "AttestationServiceCreationParams": {
-      "description": "Parameters for creating an attestation service instance",
+      "description": "Parameters for creating an attestation provider",
       "required": [
         "location",
         "properties"
@@ -591,29 +599,46 @@
       "properties": {
         "location": {
           "type": "string",
-          "description": "The supported Azure location where the attestation service instance should be created."
+          "description": "The supported Azure location where the attestation provider should be created."
         },
         "tags": {
           "type": "object",
           "additionalProperties": {
             "type": "string"
           },
-          "description": "The tags that will be assigned to the attestation service instance."
+          "description": "The tags that will be assigned to the attestation provider."
         },
         "properties": {
           "$ref": "#/definitions/AttestationServiceCreationSpecificParams",
-          "description": "Properties of the attestation service instance"
+          "description": "Properties of the attestation provider"
         }
       }
     },
     "AttestationServiceCreationSpecificParams": {
-      "description": "Client supplied parameters used to create a new attestation service instance.",
+      "description": "Client supplied parameters used to create a new attestation provider.",
       "properties": {
         "policySigningCertificates": {
           "description": "JSON Web Key Set defining a set of X.509 Certificates that will represent the parent certificate for the signing certificate used for policy operations",
           "$ref": "../../../../../common-types/rfcs/rfc7517.json#/definitions/JSONWebKeySet"
+        },
+        "privateEndpointConnections": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "../../../../../common-types/resource-management/v1/privatelinks.json#/definitions/PrivateLinkServiceConnectionState"
+          },
+          "description": "List of private endpoint connections associated with the attestation provider."
         }
       }
+    },
+    "PrivateEndpointConnectionProperties": {
+      "properties": {
+        "provisioningState": {
+          "$ref": "../../../../../common-types/resource-management/v1/privatelinks.json#/definitions/PrivateEndpointConnectionProvisioningState",
+          "description": "Provisioning state of the private endpoint connection."
+        }
+      },
+      "description": "Properties of the private endpoint connection resource."
     }
   },
   "parameters": {
@@ -623,6 +648,23 @@
       "required": true,
       "type": "string",
       "description": "Client API version. Current version is 2020-10-01"
+    },
+    "PrivateEndpointConnectionName": {
+      "name": "privateEndpointConnectionName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Name of the private endpoint connection associated with the attestation providers.",
+      "x-ms-parameter-location": "method"
+    },
+    "ProviderName": {
+      "name": "providerName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9-]{3,24}$",
+      "description": "The name of the attestation provider.",
+      "x-ms-parameter-location": "method"
     }
   }
 }
