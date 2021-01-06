@@ -53,6 +53,9 @@ directive:
     from: Microsoft.AVS/preview/2020-07-17-preview/vmware.json
     where: $.definitions.Operation.properties.properties
     reason: x-ms-client-flatten not needed for Operation
+  - suppress: R4009
+    from: Microsoft.AVS/preview/2020-07-17-preview/vmware.json
+    reason: systemData will be in the next API version
 ```
 
 ### Tag: package-2020-03-20
