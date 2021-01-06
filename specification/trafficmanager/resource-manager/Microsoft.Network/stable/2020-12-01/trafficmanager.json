@@ -1032,14 +1032,19 @@
     "HeatMapModel": {
       "properties": {
         "properties": {
-          "$ref": "#/definitions/HeatMapProperties",
+          "x-ms-client-flatten": true,
+          "allOf": [
+            {
+              "$ref": "#/definitions/ProxyResource"
+            },
+            {
+              "$ref": "#/definitions/HeatMapProperties"
+            }
+          ],
           "description": "The properties of the Traffic Manager HeatMap."
         }
       },
       "allOf": [
-        {
-          "$ref": "#/definitions/ProxyResource"
-        },
         {
           "$ref": "#/definitions/systemData"
         }
