@@ -1239,7 +1239,8 @@
     "potentialOutagesGetResult": {
       "description": "The Get PotentialOutages operation response.",
       "type": "object",
-      "$ref": "#/definitions/potentialoutage"
+      "$ref": "#/definitions/potentialoutage",
+      "readOnly": true
     },
     "potentialoutage": {
       "type": "object",
@@ -1281,11 +1282,13 @@
         },
         "firstReportTime": {
           "type": "string",
-          "description": "Time and date the potential outage started to become a potential outage."
+          "description": "Time and date the potential outage started to become a potential outage.",
+          "format":"date-time"
         },
         "lastReportTime": {
           "type": "string",
-          "description": "Time and date the potential outage was created."
+          "description": "Time and date the potential outage was created.",
+          "format":"date-time"
         },
         "rawIds": {
           "type": "array",
@@ -1340,19 +1343,23 @@
         },
         "state": {
           "type": "string",
-          "description": "Incident state."
+          "description": "Incident state.",
+          "enum":["Invalid", "Active", "Resolved", "New", "Mitigating", "Correlating", "Mitigated", "Holding", "Suppressed"]
         },
         "createdDate": {
           "type": "string",
-          "description": "Incident created date."
+          "description": "Incident created date.",
+          "format":"date-time"
         },
         "sourceCreateTime": {
           "type": "string",
-          "description": "The date on which source created incident."
+          "description": "The date on which source created incident.",
+          "format":"date-time"
         },
         "lastModifiedDate": {
           "type": "string",
-          "description": "Incident last modified date."
+          "description": "Incident last modified date.",
+          "format":"date-time"
         },
         "title": {
           "type": "string",
@@ -1530,7 +1537,8 @@
         },
         "impactStartTime": {
           "type": "string",
-          "description": "Impact start time for the incident."
+          "description": "Impact start time for the incident.",
+          "format":"date-time"
         },
         "acknowledgeBy": {
           "type": "integer",
@@ -1543,7 +1551,8 @@
         },
         "acknowledgeTime": {
           "type": "string",
-          "description": "Acknowledge time for the incident."
+          "description": "Acknowledge time for the incident.",
+          "format":"date-time"
         },
         "mitigateData": {
           "type": "object",
@@ -1555,7 +1564,8 @@
             },
             "mitigateTime": {
               "type": "string",
-              "description": "Time when the incident was mitigated."
+              "description": "Time when the incident was mitigated.",
+              "format":"date-time"
             }
           }
         },
@@ -1569,7 +1579,8 @@
             },
             "resolveTime": {
               "type": "string",
-              "description": "Time when the incident was resolved."
+              "description": "Time when the incident was resolved.",
+              "format":"date-time"
             }
           }
         }
@@ -1599,7 +1610,8 @@
         },
         "expirationTime": {
           "type": "string",
-          "description": "Expiration time of this bridge."
+          "description": "Expiration time of this bridge.",
+          "format":"date-time"
         },
         "phoneNumber": {
           "type": "string",
@@ -1611,7 +1623,8 @@
         },
         "bridgeCreationMode": {
           "type": "string",
-          "description": "Bridge creation mode. ['Auto', 'Manual']."
+          "description": "Bridge creation mode.",
+          "enum": ["Auto", "Manual"]
         }
       }
     },
@@ -1624,11 +1637,13 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/potentialOutagesGetResult"
-          }
+          },
+          "readOnly": true
         },
         "nextLink": {
           "description": "The link used to get the next page of potential outages.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         }
       }
     },
