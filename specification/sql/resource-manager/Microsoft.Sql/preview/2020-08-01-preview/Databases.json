@@ -347,6 +347,106 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/pause": {
+      "post": {
+        "tags": [
+          "Databases"
+        ],
+        "description": "Pauses a database.",
+        "operationId": "Databases_Pause",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "name": "databaseName",
+            "in": "path",
+            "description": "The name of the database to be paused.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully paused the database.",
+            "schema": {
+              "$ref": "#/definitions/Database"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 CannotDeactivateWhenDeactivatingInProgress - Deactivation workflow failed because there is a deactivate workflow already running.\n\n * 400 FeatureDisabledOnSelectedEdition - User attempted to use a feature which is disabled on current database edition.\n\n * 404 SourceDatabaseNotFound - The source database does not exist.\n\n * 500 ActivateOrDeactivateWorkflowThrottling - Activation or deactivation workflow failed because there are too many concurrent workflows"
+          },
+          "202": {
+            "description": "Pausing the database is in progress."
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Pauses a database.": {
+            "$ref": "./examples/PauseDatabase.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/resume": {
+      "post": {
+        "tags": [
+          "Databases"
+        ],
+        "description": "Resumes a database.",
+        "operationId": "Databases_Resume",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "name": "databaseName",
+            "in": "path",
+            "description": "The name of the database to be resumed.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully resumed the database.",
+            "schema": {
+              "$ref": "#/definitions/Database"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 FeatureDisabledOnSelectedEdition - User attempted to use a feature which is disabled on current database edition.\n\n * 404 ServerNotInSubscription - Specified server does not exist on the specified subscription.\n\n * 404 SourceDatabaseNotFound - The source database does not exist.\n\n * 500 ActivateOrDeactivateWorkflowThrottling - Activation or deactivation workflow failed because there are too many concurrent workflows"
+          },
+          "202": {
+            "description": "Resuming the database is in progress."
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Resumes a database.": {
+            "$ref": "./examples/ResumeDatabase.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/failover": {
       "post": {
         "tags": [
@@ -447,106 +547,6 @@
         "x-ms-examples": {
           "Gets a list of inaccessible databases in a logical server": {
             "$ref": "./examples/ListVCoreInaccessibleDatabasesByServer.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/pause": {
-      "post": {
-        "tags": [
-          "Databases"
-        ],
-        "description": "Pauses a database.",
-        "operationId": "Databases_Pause",
-        "parameters": [
-          {
-            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
-          },
-          {
-            "$ref": "#/parameters/ServerNameParameter"
-          },
-          {
-            "name": "databaseName",
-            "in": "path",
-            "description": "The name of the database to be paused.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successfully paused the database.",
-            "schema": {
-              "$ref": "#/definitions/Database"
-            }
-          },
-          "default": {
-            "description": "*** Error Responses: ***\n\n * 400 CannotDeactivateWhenDeactivatingInProgress - Deactivation workflow failed because there is a deactivate workflow already running.\n\n * 400 FeatureDisabledOnSelectedEdition - User attempted to use a feature which is disabled on current database edition.\n\n * 404 SourceDatabaseNotFound - The source database does not exist.\n\n * 500 ActivateOrDeactivateWorkflowThrottling - Activation or deactivation workflow failed because there are too many concurrent workflows"
-          },
-          "202": {
-            "description": "Pausing the database is in progress."
-          }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "Pauses a database.": {
-            "$ref": "./examples/PauseDatabase.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/resume": {
-      "post": {
-        "tags": [
-          "Databases"
-        ],
-        "description": "Resumes a database.",
-        "operationId": "Databases_Resume",
-        "parameters": [
-          {
-            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
-          },
-          {
-            "$ref": "#/parameters/ServerNameParameter"
-          },
-          {
-            "name": "databaseName",
-            "in": "path",
-            "description": "The name of the database to be resumed.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successfully resumed the database.",
-            "schema": {
-              "$ref": "#/definitions/Database"
-            }
-          },
-          "default": {
-            "description": "*** Error Responses: ***\n\n * 400 FeatureDisabledOnSelectedEdition - User attempted to use a feature which is disabled on current database edition.\n\n * 404 ServerNotInSubscription - Specified server does not exist on the specified subscription.\n\n * 404 SourceDatabaseNotFound - The source database does not exist.\n\n * 500 ActivateOrDeactivateWorkflowThrottling - Activation or deactivation workflow failed because there are too many concurrent workflows"
-          },
-          "202": {
-            "description": "Resuming the database is in progress."
-          }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "Resumes a database.": {
-            "$ref": "./examples/ResumeDatabase.json"
           }
         }
       }
