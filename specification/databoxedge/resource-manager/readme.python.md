@@ -23,10 +23,22 @@ Generate all API versions currently shipped for this package
 
 ```yaml $(python) && $(multiapi)
 batch:
+  - tag: package-2020-09-01
   - tag: package-2020-05-preview
   - tag: package-2019-08
   - tag: package-2019-07
   - tag: package-2019-03
+```
+
+### Tag: package-2020-09-01 and python
+
+These settings apply only when `--tag=package-2020-09-01 --python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
+
+``` yaml $(tag) == 'package-2020-05-preview' && $(python)
+python:
+  namespace: azure.mgmt.databoxedge.v2020_09_01
+  output-folder: $(python-sdks-folder)/databoxedge/azure-mgmt-databoxedge/azure/mgmt/databoxedge/v2020_09_01
 ```
 
 ### Tag: package-2020-05-preview and python
