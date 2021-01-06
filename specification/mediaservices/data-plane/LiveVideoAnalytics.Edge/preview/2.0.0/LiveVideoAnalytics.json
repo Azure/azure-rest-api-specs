@@ -88,7 +88,7 @@
                 "description": "The media graph instance is transitioning into the inactive state."
               }
             ],
-            "modelAsString": false
+            "modelAsString": true
           }
         }
       },
@@ -265,7 +265,7 @@
                 "description": "A boolean value that is either true or false."
               }
             ],
-            "modelAsString": false
+            "modelAsString": true
           }
         },
         "description": {
@@ -569,6 +569,9 @@
     },
     "MediaGraphNodeInput": {
       "type": "object",
+      "required": [
+        "nodeName"
+      ],
       "properties": {
         "nodeName": {
           "type": "string",
@@ -601,7 +604,7 @@
                 "description": "The stream's MIME type or subtype."
               }
             ],
-            "modelAsString": false
+            "modelAsString": true
           }
         },
         "operator": {
@@ -623,7 +626,7 @@
                 "description": "A media type is not the same type or a subtype."
               }
             ],
-            "modelAsString": false
+            "modelAsString": true
           }
         },
         "value": {
