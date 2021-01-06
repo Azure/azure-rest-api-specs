@@ -413,13 +413,13 @@
           "200": {
             "description": "Metadata for the specified certificate.",
             "schema": {
-              "$ref": "#/definitions/CertificateAuthorityResponse"
+              "$ref": "#/definitions/CertificateResponse"
             }
           },
           "default": {
             "description": "Default error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorDetails"
             }
           }
         }
@@ -486,13 +486,13 @@
           "200": {
             "description": "If certificate already exist and update was successful, the operation returns HTTP status code of 201 (OK).",
             "schema": {
-              "$ref": "#/definitions/CertificateAuthorityResponse"
+              "$ref": "#/definitions/CertificateResponse"
             }
           },
           "default": {
             "description": "Default error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorDetails"
             }
           }
         },
@@ -633,7 +633,7 @@
           "default": {
             "description": "Default error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorDetails"
             }
           }
         }
@@ -983,13 +983,13 @@
           "200": {
             "description": "List of certificate descriptions in a JSON-serialized array.",
             "schema": {
-              "$ref": "#/definitions/CertificateAuthorityListDescription"
+              "$ref": "#/definitions/CertificateListDescription"
             }
           },
           "default": {
             "description": "Default error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorDetails"
             }
           }
         }
@@ -1991,19 +1991,6 @@
         }
       }
     },
-    "CertificateAuthorityListDescription": {
-      "description": "The JSON-serialized array of Certificate objects.",
-      "type": "object",
-      "properties": {
-        "value": {
-          "description": "The array of Certificate objects.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/CertificateAuthorityResponse"
-          }
-        }
-      }
-    },
     "CertificateBodyDescription": {
       "description": "The JSON-serialized X509 Certificate.",
       "type": "object",
@@ -2041,40 +2028,6 @@
           "readOnly": true,
           "type": "string",
           "description": "The resource type."
-        }
-      },
-      "x-ms-azure-resource": true
-    },
-    "CertificateAuthorityResponse": {
-      "description": "The X509 Certificate.",
-      "type": "object",
-      "properties": {
-        "properties": {
-          "description": "properties of a certificate",
-          "$ref": "#/definitions/CertificateProperties"
-        },
-        "id": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The resource identifier."
-        },
-        "name": {
-          "description": "The name of the certificate.",
-          "type": "string",
-          "readOnly": true
-        },
-        "etag": {
-          "description": "The entity tag.",
-          "type": "string",
-          "readOnly": true
-        },
-        "type": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The resource type."
-        },
-        "systemData": {
-          "$ref": "#/definitions/SystemData"
         }
       },
       "x-ms-azure-resource": true
@@ -2660,16 +2613,6 @@
         }
       }
     },
-    "ErrorResponse": {
-      "title": "Error response",
-      "description": "Error response.",
-      "properties": {
-        "error": {
-          "description": "The error object.",
-          "$ref": "#/definitions/ErrorDetails"
-        }
-      }
-    },
     "SharedAccessSignatureAuthorizationRuleListResult": {
       "type": "object",
       "description": "List of shared access keys.",
@@ -2860,12 +2803,6 @@
           "type": "string"
         }
       }
-    },
-    "SystemData": {
-      "description": "Metadata.",
-      "type": "object",
-      "readOnly": true,
-      "properties": {}
     }
   },
   "parameters": {
