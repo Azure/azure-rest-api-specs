@@ -2135,14 +2135,26 @@
         }
       }
     },
-    "EncryptionIdentityProperties":{
+    "EncryptionIdentity":{
        "description": "Identity to be used for server-side encryption on the storage account",
        "properties": {
          "userAssignedIdentity":{
            "type": "string",
            "description": "ResourceID of the UserAssignedIdentity to be associated with server-side encryption on the storage account.",
            "x-ms-client-name": "UserAssignedIdentity"
-         }
+         },
+         "type": {
+          "type": "string",
+          "description": "The Encryption Identity type.",
+          "enum": [
+            "ManagedServiceIdentity",
+			      "StorageService"
+          ],
+          "x-ms-enum": {
+            "name": "EncryptionIdentityType",
+            "modelAsString": false
+          }
+        }
        }
     },
     "Encryption": {
@@ -2175,7 +2187,7 @@
           "description": "Properties provided by key vault."
         },
         "identity": {
-          "$ref": "#/definitions/EncryptionIdentityProperties",
+          "$ref": "#/definitions/EncryptionIdentity",
           "x-ms-client-name": "EncryptionIdentity",
           "description": "Encryption Identity properties when storage account is associated with a UserAssignedIdentity."
         }
