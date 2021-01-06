@@ -15,10 +15,14 @@
         "isNfsV3Enabled": true,
         "supportsHttpsTrafficOnly": false,
         "networkAcls": {
-            "bypass": "[parameters('networkAclsBypass')]",
-            "defaultAction": "[parameters('networkAclsDefaultAction')]",
+            "bypass": "AzureServices",
+            "defaultAction": "Allow",
             "ipRules": [],
-            "virtualNetworkRules": "[parameters('networkAclsVirtualNetworkRules')]"
+            "virtualNetworkRules": [
+              {
+                "id":"/subscriptions/{subscription-id}/resourceGroups/res9101/providers/Microsoft.Network/virtualNetworks/net123/subnets/subnet12"
+              }
+            ]
         }
       }
     }
@@ -35,10 +39,14 @@
           "isNfsV3Enabled": true,
           "supportsHttpsTrafficOnly": false,
           "networkAcls": {
-            "bypass": "[parameters('networkAclsBypass')]",
-            "defaultAction": "[parameters('networkAclsDefaultAction')]",
+            "bypass": "AzureServices",
+            "defaultAction": "Allow",
             "ipRules": [],
-            "virtualNetworkRules": "[parameters('networkAclsVirtualNetworkRules')]"
+            "virtualNetworkRules": [
+              {
+                "id":"/subscriptions/{subscription-id}/resourceGroups/res9101/providers/Microsoft.Network/virtualNetworks/net123/subnets/subnet12"
+              }
+            ]
           }
         },
         "sku": {
