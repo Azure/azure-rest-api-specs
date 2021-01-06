@@ -234,6 +234,12 @@
               "$ref": "#/definitions/ManagedHsm"
             }
           },
+          "202": {
+            "description": "Accepted and the operation will complete asynchronously."
+          },
+          "204": {
+            "description": "Request successful. Resource does not exist."
+          },
           "default": {
             "description": "The error response describing why the operation failed.",
             "schema": {
@@ -394,6 +400,7 @@
         },
         "hsmUri": {
           "type": "string",
+          "readOnly": true,
           "description": "The URI of the managed hsm pool for performing operations on keys."
         },
         "enableSoftDelete": {
@@ -409,6 +416,7 @@
         },
         "enablePurgeProtection": {
           "type": "boolean",
+          "default": true,
           "description": "Property specifying whether protection against purge is enabled for this managed HSM pool. Setting this property to true activates protection against purge for this managed HSM pool and its content - only the Managed HSM service may initiate a hard, irrecoverable deletion. The setting is effective only if soft delete is also enabled. Enabling this functionality is irreversible."
         },
         "createMode": {
