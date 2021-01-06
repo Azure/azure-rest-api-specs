@@ -1039,7 +1039,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/ProxyResourceRW"
+          "$ref": "#/definitions/ProxyResourceRO"
         },
         {
           "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/systemData"
@@ -1057,7 +1057,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/ProxyResourceRW"
+          "$ref": "#/definitions/ProxyResourceRO"
         },
         {
           "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/systemData"
@@ -1180,7 +1180,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/ProxyResourceRW"
+          "$ref": "#/definitions/ProxyResourceRO"
         },
         {
           "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/systemData"
@@ -1410,7 +1410,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/TrackedResourceRW"
+          "$ref": "#/definitions/TrackedResourceRO"
         },
         {
           "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/systemData"
@@ -1499,7 +1499,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/ProxyResourceRW"
+          "$ref": "#/definitions/ProxyResourceRO"
         },
         {
           "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/systemData"
@@ -1569,6 +1569,65 @@
       "allOf": [
         {
           "$ref": "#/definitions/ResourceRW"
+        }
+      ]
+    },
+    "ResourceRO": {
+      "description": "The core properties of ARM resources",
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Fully qualified resource Id for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/trafficManagerProfiles/{resourceName}"
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The name of the resource"
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The type of the resource. Ex- Microsoft.Network/trafficManagerProfiles."
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "TrackedResourceRO": {
+      "description": "The resource model definition for a ARM tracked top level resource",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-ms-mutability": [
+            "read",
+            "create",
+            "update"
+          ],
+          "description": "Resource tags."
+        },
+        "location": {
+          "type": "string",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ],
+          "description": "The Azure Region where the resource lives"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResourceRO"
+        }
+      ]
+    },
+    "ProxyResourceRO": {
+      "description": "The resource model definition for a ARM proxy resource. It will have everything other than required location, tags and systemData",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResourceRO"
         }
       ]
     },
