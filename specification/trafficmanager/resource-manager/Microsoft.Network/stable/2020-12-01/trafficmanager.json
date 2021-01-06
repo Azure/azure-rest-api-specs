@@ -1165,7 +1165,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/ProxyResourceRW"
+          "$ref": "#/definitions/ProxyResource"
         }
       ],
       "description": "Class representing a Traffic Manager endpoint."
@@ -1395,7 +1395,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/TrackedResourceRW"
+          "$ref": "#/definitions/TrackedResource"
         }
       ],
       "description": "Class representing a Traffic Manager profile."
@@ -1516,7 +1516,7 @@
       },
       "description": "Class representing a Traffic Manager Real User Metrics key response."
     },
-    "ResourceRW": {
+    "Resource": {
       "description": "The core properties of ARM resources",
       "properties": {
         "id": {
@@ -1534,7 +1534,7 @@
       },
       "x-ms-azure-resource": true
     },
-    "TrackedResourceRW": {
+    "TrackedResource": {
       "description": "The resource model definition for a ARM tracked top level resource",
       "properties": {
         "tags": {
@@ -1560,15 +1560,15 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/ResourceRW"
+          "$ref": "#/definitions/Resource"
         }
       ]
     },
-    "ProxyResourceRW": {
+    "ProxyResource": {
       "description": "The resource model definition for a ARM proxy resource. It will have everything other than required location, tags and systemData",
       "allOf": [
         {
-          "$ref": "#/definitions/ResourceRW"
+          "$ref": "#/definitions/Resource"
         }
       ]
     },
