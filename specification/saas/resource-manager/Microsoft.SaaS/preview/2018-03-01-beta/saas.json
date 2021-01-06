@@ -431,6 +431,93 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.SaaS/resources": {
+      "get": {
+        "tags": [
+          "SubscriptionLevelSaaSResources"
+        ],
+        "operationId": "SaasSubscriptionLevel_GetAllInAzureSubscription",
+        "description": "Gets information about all the Subscription Level SaaS in a certain Azure subscription.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. The request returns the resulting SaaS resources.",
+            "schema": {
+              "$ref": "#/definitions/SaasResourceResponseWithContinuation"
+            }
+          },
+          "default": {
+            "description": "A response indicating an error.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Get subscription level saas resources in Azure subscription": {
+            "$ref": "./examples/saasSubscriptionLevel/SaasGetAllInAzureSubscription.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SaaS/resources": {
+      "get": {
+        "tags": [
+          "SubscriptionLevelSaaSResources"
+        ],
+        "operationId": "SaasSubscriptionLevel_GetAllInResourceGroup",
+        "description": "Gets information about all the Subscription Level SaaS in a certain resource group.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. The request returns the resulting SaaS resources.",
+            "schema": {
+              "$ref": "#/definitions/SaasResourceResponseWithContinuation"
+            }
+          },
+          "default": {
+            "description": "A response indicating an error.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Get subscription level saas resources in resource group": {
+            "$ref": "./examples/saasSubscriptionLevel/SaasGetAllInResourceGroup.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SaaS/resources/{resourceName}": {
       "get": {
         "tags": [
