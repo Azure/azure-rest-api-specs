@@ -36,7 +36,7 @@
     }
   },
   "paths": {
-    "/{resourceUri}/providers/microsoft.insights/baseline/{metricName}": {
+    "/{resourceUri}/providers/Microsoft.Insights/baseline/{metricName}": {
       "get": {
         "tags": [
           "Baseline"
@@ -103,7 +103,7 @@
         }
       }
     },
-    "/{resourceUri}/providers/microsoft.insights/baseline": {
+    "/{resourceUri}/providers/Microsoft.Insights/baseline": {
       "get": {
         "tags": [
           "Baseline"
@@ -312,6 +312,15 @@
             "description": "A single high threshold value."
           },
           "description": "The high thresholds of the baseline."
+        },
+        "timestamps": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "date-time",
+            "description": "the timestamp for the baseline value in ISO 8601 format."
+          },
+          "description": "the array of timestamps of the baselines."
         }
       },
       "required": [

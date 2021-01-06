@@ -36,7 +36,7 @@
     }
   },
   "paths": {
-    "/{resourceUri}/providers/microsoft.insights/calculatebaseline": {
+    "/{resourceUri}/providers/Microsoft.Insights/calculatebaseline": {
       "post": {
         "tags": [
           "Baseline"
@@ -154,6 +154,28 @@
             "$ref": "#/definitions/Baseline"
           },
           "description": "The baseline values for each sensitivity."
+        },
+        "statistics": {
+          "type": "object",
+          "properties": {
+            "isEligible": {
+              "type": "string",
+              "description": "is series eligible for dynamic threshold analysis"
+            },
+            "status": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "The list of extended status for calculating the baseline."
+            },
+            "seasonalityPeriod": {
+              "type": "integer",
+              "format": "int32",
+              "description": "The seasonality period for calculating the baseline."
+            }
+          },
+          "description": "The statistics"
         }
       },
       "required": [
@@ -195,6 +217,15 @@
             "description": "A single high threshold value."
           },
           "description": "The high thresholds of the baseline."
+        },
+        "timestamps": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "date-time",
+            "description": "the timestamp for the baseline value in ISO 8601 format."
+          },
+          "description": "the array of timestamps of the baselines."
         }
       },
       "required": [
