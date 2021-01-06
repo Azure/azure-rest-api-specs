@@ -1050,20 +1050,14 @@
     "UserMetricsModel": {
       "properties": {
         "properties": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/ProxyResource"
-            },
-            {
-              "$ref": "#/definitions/UserMetricsProperties"
-            }
-          ],
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/UserMetricsProperties",
           "description": "The properties of the Traffic Manager User Metrics."
         }
       },
       "allOf": [
         {
-          "$ref": "#/definitions/systemData"
+          "$ref": "#/definitions/ProxyResourceRO"
         }
       ],
       "description": "Class representing Traffic Manager User Metrics."
