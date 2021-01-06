@@ -378,6 +378,10 @@
           "type": "string",
           "description": "the name of the metric that defines what the rule monitors."
         },
+        "metricNamespace": {
+          "type": "string",
+          "description": "the namespace of the metric that defines what the rule monitors."
+        },
         "metricResourceUri": {
           "type": "string",
           "description": "the resource identifier of the resource the rule monitors."
@@ -442,6 +446,13 @@
           "type": "number",
           "format": "double",
           "description": "the threshold of the metric that triggers the scale action."
+        },
+        "dimensions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ScaleRuleMetricDimension"
+          },
+          "description": "List of dimension conditions. For example: [{\"DimensionName\":\"AppName\",\"Operator\":\"Equals\",\"Values\":[\"App1\"]},{\"DimensionName\":\"Deployment\",\"Operator\":\"Equals\",\"Values\":[\"default\"]}]."
         }
       },
       "description": "The trigger that results in a scaling action."
@@ -803,6 +814,39 @@
           "type": "string"
         }
       }
+    },
+    "ScaleRuleMetricDimension": {
+      "required": [
+        "DimensionName",
+        "Operator",
+        "Values"
+      ],
+      "properties": {
+        "DimensionName": {
+          "type": "string",
+          "description": "Name of the dimension."
+        },
+        "Operator": {
+          "type": "string",
+          "description": "the dimension operator. Only 'Equals' and 'NotEquals' are supported. 'Equals' being equal to any of the values. 'NotEquals' being not equal to all of the values",
+          "enum": [
+            "Equals",
+            "NotEquals"
+          ],
+          "x-ms-enum": {
+            "name": "ScaleRuleMetricDimensionOperationType",
+            "modelAsString": true
+          }
+        },
+        "Values": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "list of dimension values. For example: [\"App1\",\"App2\"]."
+        }
+      },
+      "description": "Specifies an auto scale rule metric dimension."
     }
   },
   "parameters": {

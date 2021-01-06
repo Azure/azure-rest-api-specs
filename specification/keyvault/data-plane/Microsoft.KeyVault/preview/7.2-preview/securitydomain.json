@@ -1,0 +1,477 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "KeyVaultClient",
+    "description": "The key vault client performs cryptographic key operations and vault operations against the Key Vault service.",
+    "version": "7.2-preview"
+  },
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{vaultBaseUrl}",
+    "useSchemePrefix": false,
+    "positionInOperation": "first",
+    "parameters": [
+      {
+        "name": "vaultBaseUrl",
+        "description": "The vault name, for example https://myvault.vault.azure.net.",
+        "required": true,
+        "type": "string",
+        "in": "path",
+        "x-ms-skip-url-encoding": true
+      }
+    ]
+  },
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/securitydomain/download": {
+      "post": {
+        "tags": [
+          "HSMSecurityDomain"
+        ],
+        "operationId": "HSMSecurityDomain_Download",
+        "description": "Retrieves Security domain from HSM enclave",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "CertificateInfoObject",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CertificateInfoObject"
+            },
+            "description": "Security domain download operation requires customer to provide N certificates (minimum 3 and maximum 10) containing public key in JWK format."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "This is the specification of the security domain as downloaded from the new pool",
+            "schema": {
+              "$ref": "#/definitions/SecurityDomainObject"
+            }
+          },
+          "default": {
+            "description": "Key Vault error response describing why the operation failed.",
+            "schema": {
+              "$ref": "common.json#/definitions/KeyVaultError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Retrieve Security domain": {
+            "$ref": "./examples/securitydomaindownloadpost-example.json"
+          }
+        }
+      }
+    },
+    "/securitydomain/transferkey": {
+      "get": {
+        "tags": [
+          "HSMSecurityDomain"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "operationId": "HSMSecurityDomain_TransferKey",
+        "description": "Retrieve security domain transfer key",
+        "responses": {
+          "200": {
+            "description": "Security domain transfer key operation",
+            "schema": {
+              "$ref": "#/definitions/TransferKey"
+            }
+          },
+          "default": {
+            "description": "Key Vault error response describing why the operation failed.",
+            "schema": {
+              "$ref": "common.json#/definitions/KeyVaultError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Retrieve security domain transfer key": {
+            "$ref": "./examples/securitydomaintransferkey-example.json"
+          }
+        }
+      }
+    },
+    "/securitydomain/upload": {
+      "post": {
+        "tags": [
+          "HSMSecurityDomain"
+        ],
+        "operationId": "HSMSecurityDomain_Upload",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "description": "Request Security domain upload operation",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "security_domain",
+            "description": "security domain",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SecurityDomainUploadObject"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Security domain upload operation started",
+            "headers": {
+              "Retry-After": {
+                "description": "The recommended number of seconds to wait before calling the URI specified in Azure-AsyncOperation.",
+                "type": "integer"
+              },
+              "Azure-AsyncOperation": {
+                "description": "The URI to poll for completion status.",
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/SecurityDomainOperationStatus"
+            }
+          },
+          "default": {
+            "description": "Key Vault error response describing why the operation failed.",
+            "schema": {
+              "$ref": "common.json#/definitions/KeyVaultError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Security domain upload operation": {
+            "$ref": "./examples/securitydomainuploadoperation-example.json"
+          }
+        }
+      }
+    },
+    "/securitydomain/upload/pending": {
+      "get": {
+        "tags": [
+          "HSMSecurityDomain"
+        ],
+        "operationId": "HSMSecurityDomain_UploadPending",
+        "description": "Get Security domain upload operation status",
+        "responses": {
+          "200": {
+            "description": "Security domain upload operation status",
+            "schema": {
+              "$ref": "#/definitions/SecurityDomainOperationStatus"
+            }
+          },
+          "default": {
+            "description": "Key Vault error response describing why the operation failed.",
+            "schema": {
+              "$ref": "common.json#/definitions/KeyVaultError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Find security domain upload operation status": {
+            "$ref": "./examples/securitydomainoperationstatus-example.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "CertificateInfoObject": {
+      "properties": {
+        "certificates": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SecurityDomainCertificateItem"
+          },
+          "minItems": 3,
+          "maxItems": 10,
+          "uniqueItems": true,
+          "description": "Certificates needed from customer"
+        },
+        "required": {
+          "description": "Customer to specify the number of certificates (minimum 2 and maximum 10) to restore security domain",
+          "type": "integer",
+          "default": 2,
+          "minimum": 2,
+          "maximum": 10
+        }
+      },
+      "required": [
+        "certificates"
+      ]
+    },
+    "SecurityDomainCertificateItem": {
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/SecurityDomainJsonWebKey",
+          "description": "Customer generated certificate containing public key in JWK format"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "TransferKey": {
+      "properties": {
+        "key_format": {
+          "type": "string",
+          "default": "jwk",
+          "description": "Specifies the format of the transfer key"
+        },
+        "transfer_key": {
+          "$ref": "#/definitions/SecurityDomainJsonWebKey",
+          "description": "Specifies the transfer key in JWK format"
+        }
+      },
+      "required": [
+        "transfer_key"
+      ]
+    },
+    "SecurityDomainObject": {
+      "properties": {
+        "data": {
+          "type": "object",
+          "properties": {
+            "EncData": {
+              "$ref": "#/definitions/EncDataSet",
+              "description": "Array of encrypted data set"
+            },
+            "SharedKeys": {
+              "properties": {
+                "key_algorithm": {
+                  "type": "string",
+                  "default": "shamir_share",
+                  "description": "The Algorithm used for shared keys"
+                },
+                "required": {
+                  "type": "integer",
+                  "minimum": 2,
+                  "maximum": 10,
+                  "description": "The number of keys (minimum 2 and maximum 10) required for security domain. "
+                },
+                "enc_shares": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/Key",
+                    "minItems": 3,
+                    "maxItems": 10
+                  },
+                  "uniqueItems": true,
+                  "description": "Compact JWE wrapped shares array"
+                }
+              },
+              "required": [
+                "key_algorithm",
+                "required",
+                "enc_shares"
+              ],
+              "description": "Array of shared keys"
+            },
+            "version": {
+              "type": "integer"
+            }
+          },
+          "required": [
+            "EncData",
+            "SharedKeys",
+            "version"
+          ]
+        }
+      },
+      "description": "Security domain",
+      "required": [
+        "data"
+      ]
+    },
+    "EncDataSet": {
+      "properties": {
+        "data": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EncDataSetItem",
+            "minItems": 2
+          },
+          "description": "Array of encrypted security domain",
+          "uniqueItems": true
+        },
+        "kdf": {
+          "type": "string",
+          "default": "sp108_kdf",
+          "description": "The key derivation function used"
+        }
+      },
+      "required": [
+        "data",
+        "kdf"
+      ]
+    },
+    "EncDataSetItem": {
+      "properties": {
+        "compact_jwe": {
+          "type": "string",
+          "description": "Encrypted data"
+        },
+        "tag": {
+          "type": "string",
+          "description": "hsm backup tag"
+        }
+      },
+      "required": [
+        "compact_jwe",
+        "tag"
+      ]
+    },
+    "Key": {
+      "properties": {
+        "enc_key": {
+          "type": "string",
+          "description": "Compact JWE wrapped share"
+        },
+        "x5t_256": {
+          "type": "string",
+          "description": "SHA 256 hash of certificate"
+        }
+      },
+      "required": [
+        "enc_key",
+        "x5t_256"
+      ]
+    },
+    "SecurityDomainOperationStatus": {
+      "properties": {
+        "status": {
+          "description": "operation status",
+          "enum": [
+            "Success",
+            "InProgress",
+            "Failed"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false,
+            "name": "OperationStatus"
+          },
+          "type": "string"
+        },
+        "status_details": {
+          "type": "string"
+        }
+      }
+    },
+    "SecurityDomainJsonWebKey": {
+      "properties": {
+        "kid": {
+          "type": "string",
+          "description": "Key identifier."
+        },
+        "kty": {
+          "type": "string",
+          "description": "JsonWebKey Key Type (kty), as defined in https://tools.ietf.org/html/draft-ietf-jose-json-web-algorithms-40. For security domain this value must be RSA"
+        },
+        "key_ops": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "description": "Supported key operations."
+          }
+        },
+        "n": {
+          "type": "string",
+          "description": "RSA modulus."
+        },
+        "e": {
+          "type": "string",
+          "description": "RSA public exponent."
+        },
+        "x5c": {
+          "description": "X509 certificate chain parameter",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "use": {
+          "description": "Public Key Use Parameter. This is optional and if present must be enc.",
+          "type": "string"
+        },
+        "x5t": {
+          "description": "X509 certificate SHA1 thumbprint. This is optional.",
+          "type": "string"
+        },
+        "x5t#S256": {
+          "description": "X509 certificate SHA256 thumbprint.",
+          "type": "string"
+        },
+        "alg": {
+          "description": "Algorithm intended for use with the key.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "kty",
+        "key_ops",
+        "alg",
+        "kid",
+        "x5c",
+        "x5t#S256",
+        "n",
+        "e"
+      ]
+    },
+    "SecurityDomainUploadObject": {
+      "properties": {
+        "value": {
+          "type": "object",
+          "properties": {
+            "EncData": {
+              "$ref": "#/definitions/EncDataSet",
+              "description": "Array of encrypted data set"
+            },
+            "WrappedKey": {
+              "properties": {
+                "enc_key": {
+                  "type": "string",
+                  "description": "Encryption key used to encrypt the EncData"
+                },
+                "x5t_256": {
+                  "type": "string",
+                  "description": "Thumbprint used to determine which certificate was used to encrypt the enc_key field"
+                }
+              },
+              "required": [
+                "enc_key",
+                "x5t_256"
+              ],
+              "description": "Key object containing the encryption key used to encrypt EncData object"
+            }
+          },
+          "required": [
+            "EncData",
+            "WrappedKey"
+          ]
+        }
+      },
+      "description": "Security domain object uploaded to a new pool",
+      "required": [
+        "value"
+      ]
+    }
+  },
+  "parameters": {
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "Client API version."
+    }
+  }
+}

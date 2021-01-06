@@ -34,7 +34,7 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroup/{resourceGroupName}/providers/microsoft.insights/workbooks": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.insights/workbooks": {
       "get": {
         "description": "Get all Workbooks defined within a specified resource group and category.",
         "operationId": "Workbooks_ListByResourceGroup",
@@ -85,7 +85,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroup/{resourceGroupName}/providers/microsoft.insights/workbooks/{resourceName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.insights/workbooks/{resourceName}": {
       "get": {
         "description": "Get a single workbook by its resourceName.",
         "operationId": "Workbooks_Get",
@@ -350,8 +350,7 @@
       "required": [
         "displayName",
         "category",
-        "serializedData",
-        "userId"
+        "serializedData"
       ],
       "properties": {
         "displayName": {
@@ -384,7 +383,12 @@
         },
         "userId": {
           "type": "string",
-          "description": "Unique user id of the specific user that owns this workbook."
+          "description": "Unique user id of the specific user that owns this workbook.",
+          "readOnly": true
+        },
+        "sourceId": {
+          "type": "string",
+          "description": "ResourceId for a source resource."
         }
       }
     },

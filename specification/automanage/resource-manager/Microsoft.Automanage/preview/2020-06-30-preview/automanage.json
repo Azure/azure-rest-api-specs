@@ -1,0 +1,1371 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2020-06-30-preview",
+    "title": "Automanage"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automanage/accounts/{accountName}": {
+      "put": {
+        "tags": [
+          "Accounts"
+        ],
+        "operationId": "Accounts_CreateOrUpdate",
+        "description": "Creates an Automanage Account",
+        "x-ms-examples": {
+          "Create or update Automanage account": {
+            "$ref": "./examples/createOrUpdateAccount.json"
+          }
+        },
+        "parameters": [
+          {
+            "name": "accountName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Name of the Automanage account."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Account"
+            },
+            "description": "Parameters supplied to create or update Automanage account."
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created. The Automanage account was created successfully.",
+            "schema": {
+              "$ref": "#/definitions/Account"
+            }
+          },
+          "200": {
+            "description": "OK. The Automanage account was updated successfully.",
+            "schema": {
+              "$ref": "#/definitions/Account"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": false,
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ]
+      },
+      "get": {
+        "tags": [
+          "Accounts"
+        ],
+        "operationId": "Accounts_Get",
+        "description": "Get information about a Automanage account",
+        "x-ms-examples": {
+          "Get an Automanage account": {
+            "$ref": "./examples/getAccount.json"
+          }
+        },
+        "parameters": [
+          {
+            "name": "accountName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The Automanage account name."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The Automanage account was returned successfully.",
+            "schema": {
+              "$ref": "#/definitions/Account"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ]
+      },
+      "delete": {
+        "tags": [
+          "Accounts"
+        ],
+        "operationId": "Accounts_Delete",
+        "description": "Delete a Automanage account",
+        "x-ms-examples": {
+          "Delete an Automanage account": {
+            "$ref": "./examples/deleteAccount.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Name of the Automanage account"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "OK"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": false,
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ]
+      },
+      "patch": {
+        "tags": [
+          "Accounts"
+        ],
+        "operationId": "Accounts_Update",
+        "description": "Updates an Automanage Account",
+        "x-ms-examples": {
+          "Update Automanage account": {
+            "$ref": "./examples/updateAccount.json"
+          }
+        },
+        "parameters": [
+          {
+            "name": "accountName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Name of the Automanage account."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AccountUpdate"
+            },
+            "description": "Parameters supplied to update Automanage account."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The Automanage account was updated successfully.",
+            "schema": {
+              "$ref": "#/definitions/Account"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": false,
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automanage/accounts": {
+      "get": {
+        "tags": [
+          "Accounts"
+        ],
+        "operationId": "Accounts_ListByResourceGroup",
+        "description": "Retrieve a list of Automanage accounts within a given resource group",
+        "x-ms-examples": {
+          "List Automanage accounts by resource group": {
+            "$ref": "./examples/listAccountsByResourceGroup.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. List of Automanage accounts.",
+            "schema": {
+              "$ref": "#/definitions/AccountList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        },
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Automanage/accounts": {
+      "get": {
+        "tags": [
+          "Accounts"
+        ],
+        "operationId": "Accounts_ListBySubscription",
+        "description": "Retrieve a list of Automanage accounts within a subscription",
+        "x-ms-examples": {
+          "List Automanage accounts by subscription": {
+            "$ref": "./examples/listAccountsBySubscription.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. List of Automanage accounts.",
+            "schema": {
+              "$ref": "#/definitions/AccountList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        },
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/providers/Microsoft.Automanage/configurationProfileAssignments/{configurationProfileAssignmentName}": {
+      "put": {
+        "tags": [
+          "ConfigurationProfileAssignments"
+        ],
+        "operationId": "ConfigurationProfileAssignments_CreateOrUpdate",
+        "description": "Creates an association between a VM and Automanage configuration profile",
+        "x-ms-examples": {
+          "Create or update configuration profile assignment": {
+            "$ref": "./examples/createOrUpdateConfigurationProfileAssignment.json"
+          }
+        },
+        "parameters": [
+          {
+            "name": "configurationProfileAssignmentName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Name of the configuration profile assignment. Only default is supported."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ConfigurationProfileAssignment"
+            },
+            "description": "Parameters supplied to the create or update configuration profile assignment."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/VmNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created. The Automanage configuration profile assignment for the VM was created successfully.",
+            "schema": {
+              "$ref": "#/definitions/ConfigurationProfileAssignment"
+            }
+          },
+          "200": {
+            "description": "OK. The configuration profile assignment for the VM was updated successfully.",
+            "schema": {
+              "$ref": "#/definitions/ConfigurationProfileAssignment"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ]
+      },
+      "get": {
+        "tags": [
+          "ConfigurationProfileAssignments"
+        ],
+        "operationId": "ConfigurationProfileAssignments_Get",
+        "description": "Get information about a configuration profile assignment",
+        "x-ms-examples": {
+          "Get a configuration profile assignment": {
+            "$ref": "./examples/getConfigurationProfileAssignment.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "configurationProfileAssignmentName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The configuration profile assignment name."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/VmNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The configuration profile assignment was returned successfully.",
+            "schema": {
+              "$ref": "#/definitions/ConfigurationProfileAssignment"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ]
+      },
+      "delete": {
+        "tags": [
+          "ConfigurationProfileAssignments"
+        ],
+        "operationId": "ConfigurationProfileAssignments_Delete",
+        "description": "Delete a configuration profile assignment",
+        "x-ms-examples": {
+          "Delete an configuration profile assignment": {
+            "$ref": "./examples/deleteConfigurationProfileAssignment.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "configurationProfileAssignmentName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Name of the configuration profile assignment"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/VmNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "OK"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": false,
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automanage/configurationProfileAssignments": {
+      "get": {
+        "tags": [
+          "ConfigurationProfileAssignments"
+        ],
+        "operationId": "ConfigurationProfileAssignments_List",
+        "description": "Get list of configuration profile assignments",
+        "x-ms-examples": {
+          "Get a configuration profile assignment": {
+            "$ref": "./examples/listConfigurationProfileAssignments.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The list of configuration profile assignments were returned successfully.",
+            "schema": {
+              "$ref": "#/definitions/ConfigurationProfileAssignmentList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        },
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Automanage/configurationProfileAssignments": {
+      "get": {
+        "tags": [
+          "ConfigurationProfileAssignments"
+        ],
+        "operationId": "ConfigurationProfileAssignments_ListBySubscription",
+        "description": "Get list of configuration profile assignments under a given subscription",
+        "x-ms-examples": {
+          "List configuration profile assignments": {
+            "$ref": "./examples/listConfigurationProfileAssignmentsBySubscription.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The list of configuration profile assignments were returned successfully.",
+            "schema": {
+              "$ref": "#/definitions/ConfigurationProfileAssignmentList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        },
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automanage/configurationProfilePreferences/{configurationProfilePreferenceName}": {
+      "put": {
+        "tags": [
+          "ConfigurationProfilePreferences"
+        ],
+        "operationId": "ConfigurationProfilePreferences_CreateOrUpdate",
+        "description": "Creates a configuration profile preference",
+        "x-ms-examples": {
+          "Create or update configuration profile preference": {
+            "$ref": "./examples/createOrUpdateConfigurationProfilePreference.json"
+          }
+        },
+        "parameters": [
+          {
+            "name": "configurationProfilePreferenceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Name of the configuration profile preference."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ConfigurationProfilePreference"
+            },
+            "description": "Parameters supplied to create or update configuration profile preference."
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created. The configuration profile preference was created successfully.",
+            "schema": {
+              "$ref": "#/definitions/ConfigurationProfilePreference"
+            }
+          },
+          "200": {
+            "description": "OK. The configuration profile preference was updated successfully.",
+            "schema": {
+              "$ref": "#/definitions/ConfigurationProfilePreference"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": false,
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ]
+      },
+      "get": {
+        "tags": [
+          "ConfigurationProfilePreferences"
+        ],
+        "operationId": "ConfigurationProfilePreferences_Get",
+        "description": "Get information about a configuration profile preference",
+        "x-ms-examples": {
+          "Get a configuration profile": {
+            "$ref": "./examples/getConfigurationProfilePreference.json"
+          }
+        },
+        "parameters": [
+          {
+            "name": "configurationProfilePreferenceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The configuration profile preference name."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The configuration profile preference was returned successfully.",
+            "schema": {
+              "$ref": "#/definitions/ConfigurationProfilePreference"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ]
+      },
+      "delete": {
+        "tags": [
+          "ConfigurationProfilePreferences"
+        ],
+        "operationId": "ConfigurationProfilePreferences_Delete",
+        "description": "Delete a configuration profile preference",
+        "x-ms-examples": {
+          "Delete a configuration profile preference": {
+            "$ref": "./examples/deleteConfigurationProfilePreference.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "configurationProfilePreferenceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Name of the configuration profile preference"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "OK"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": false,
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ]
+      },
+      "patch": {
+        "tags": [
+          "ConfigurationProfilePreferences"
+        ],
+        "operationId": "ConfigurationProfilePreferences_Update",
+        "description": "Updates a configuration profile preference",
+        "x-ms-examples": {
+          "Create or update configuration profile preference": {
+            "$ref": "./examples/updateConfigurationProfilePreference.json"
+          }
+        },
+        "parameters": [
+          {
+            "name": "configurationProfilePreferenceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Name of the configuration profile preference."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ConfigurationProfilePreferenceUpdate"
+            },
+            "description": "Parameters supplied to create or update configuration profile preference."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The configuration profile preference was updated successfully.",
+            "schema": {
+              "$ref": "#/definitions/ConfigurationProfilePreference"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": false,
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automanage/configurationProfilePreferences": {
+      "get": {
+        "tags": [
+          "ConfigurationProfilePreferences"
+        ],
+        "operationId": "ConfigurationProfilePreferences_ListByResourceGroup",
+        "description": "Retrieve a list of configuration profile preferences within a given resource group",
+        "x-ms-examples": {
+          "List configuration profile preferences by resource group": {
+            "$ref": "./examples/listConfigurationProfilePreferencesByResourceGroup.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. List of configuration profile preferences.",
+            "schema": {
+              "$ref": "#/definitions/ConfigurationProfilePreferenceList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        },
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Automanage/configurationProfilePreferences": {
+      "get": {
+        "tags": [
+          "ConfigurationProfilePreferences"
+        ],
+        "operationId": "ConfigurationProfilePreferences_ListBySubscription",
+        "description": "Retrieve a list of configuration profile preferences within a subscription",
+        "x-ms-examples": {
+          "List configuration profile preferences by subscription": {
+            "$ref": "./examples/listConfigurationProfilePreferencesBySubscription.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. List of configuration profile preferences.",
+            "schema": {
+              "$ref": "#/definitions/ConfigurationProfilePreferenceList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        },
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ]
+      }
+    },
+    "/providers/Microsoft.Automanage/operations": {
+      "get": {
+        "tags": [
+          "Operations"
+        ],
+        "description": "Lists all of the available Automanage REST API operations.",
+        "x-ms-examples": {
+          "Lists all of the available Automanage REST API operations": {
+            "$ref": "./examples/listOperations.json"
+          }
+        },
+        "operationId": "Operations_List",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/OperationList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        },
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "Account": {
+      "properties": {
+        "identity": {
+          "$ref": "#/definitions/AccountIdentity",
+          "description": "The identity of the Automanage account."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "description": "Definition of the Automanage account."
+    },
+    "AccountUpdate": {
+      "properties": {
+        "identity": {
+          "$ref": "#/definitions/AccountIdentity",
+          "description": "The identity of the Automanage account."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/UpdateResource"
+        }
+      ],
+      "description": "Definition of the Automanage account."
+    },
+    "AccountIdentity": {
+      "properties": {
+        "principalId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The principal id of Automanage account identity."
+        },
+        "tenantId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The tenant id associated with the Automanage account."
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of identity used for the Automanage account. Currently, the only supported type is 'SystemAssigned', which implicitly creates an identity.",
+          "enum": [
+            "SystemAssigned",
+            "None"
+          ],
+          "x-ms-enum": {
+            "name": "ResourceIdentityType",
+            "modelAsString": false
+          }
+        }
+      },
+      "description": "Identity for the Automanage account."
+    },
+    "AccountList": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Account"
+          },
+          "description": "Result of the list Account operation."
+        }
+      },
+      "description": "The response of the list Account operation."
+    },
+    "ConfigurationProfileAssignmentList": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ConfigurationProfileAssignment"
+          },
+          "description": "Result of the list configuration profile assignment operation."
+        }
+      },
+      "description": "The response of the list configuration profile assignment operation."
+    },
+    "ConfigurationProfileAssignment": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": false,
+          "$ref": "#/definitions/ConfigurationProfileAssignmentProperties",
+          "description": "Properties of the configuration profile assignment."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "description": "Configuration profile assignment is an association between a VM and automanage profile configuration."
+    },
+    "ConfigurationProfileAssignmentProperties": {
+      "properties": {
+        "configurationProfile": {
+          "type": "string",
+          "description": "A value indicating configuration profile.",
+          "x-ms-enum": {
+            "name": "configurationProfile",
+            "modelAsString": true
+          },
+          "enum": [
+            "Azure virtual machine best practices – Dev/Test",
+            "Azure virtual machine best practices – Production"
+          ]
+        },
+        "targetId": {
+          "type": "string",
+          "description": "The target VM resource URI"
+        },
+        "accountId": {
+          "type": "string",
+          "description": "The Automanage account ARM Resource URI"
+        },
+        "configurationProfilePreferenceId": {
+          "type": "string",
+          "x-nullable": true,
+          "description": "The configuration profile custom preferences ARM resource URI"
+        },
+        "provisioningState": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The state of onboarding, which only appears in the response.",
+          "x-ms-enum": {
+            "name": "provisioningState",
+            "modelAsString": true
+          },
+          "enum": [
+            "Succeeded",
+            "Failed",
+            "Created"
+          ]
+        },
+        "compliance": {
+          "$ref": "#/definitions/ConfigurationProfileAssignmentCompliance",
+          "description": "The configuration setting for the configuration profile."
+        }
+      },
+      "description": "Automanage configuration profile assignment properties."
+    },
+    "ConfigurationProfileAssignmentCompliance": {
+      "properties": {
+        "updateStatus": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The state of compliance, which only appears in the response.",
+          "x-nullable": true,
+          "x-ms-enum": {
+            "name": "updateStatus",
+            "modelAsString": true
+          },
+          "enum": [
+            "Succeeded",
+            "Failed",
+            "Created"
+          ]
+        }
+      },
+      "description": "The compliance status for the configuration profile assignment."
+    },
+    "ConfigurationProfilePreference": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": false,
+          "$ref": "#/definitions/ConfigurationProfilePreferenceProperties",
+          "description": "Properties of the configuration profile preference."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "description": "Definition of the configuration profile preference."
+    },
+    "ConfigurationProfilePreferenceUpdate": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": false,
+          "$ref": "#/definitions/ConfigurationProfilePreferenceProperties",
+          "description": "Properties of the configuration profile preference."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/UpdateResource"
+        }
+      ],
+      "description": "Definition of the configuration profile preference."
+    },
+    "ConfigurationProfilePreferenceProperties": {
+      "properties": {
+        "vmBackup": {
+          "$ref": "#/definitions/ConfigurationProfilePreferenceVmBackup",
+          "description": "The custom preferences for Azure VM Backup."
+        },
+        "antiMalware": {
+          "$ref": "#/definitions/ConfigurationProfilePreferenceAntiMalware",
+          "description": "The custom preferences for Azure Antimalware."
+        }
+      },
+      "description": "Automanage configuration profile preference properties."
+    },
+    "ConfigurationProfilePreferenceVmBackup": {
+      "properties": {
+        "timeZone": {
+          "type": "string",
+          "description": "TimeZone optional input as string. For example: Pacific Standard Time",
+          "x-nullable": true
+        },
+        "instantRpRetentionRangeInDays": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Instant RP retention policy range in days"
+        },
+        "retentionPolicy": {
+          "type": "string",
+          "description": "Retention policy with the details on backup copy retention ranges.",
+          "x-nullable": true
+        },
+        "schedulePolicy": {
+          "type": "string",
+          "description": "Backup schedule specified as part of backup policy.",
+          "x-nullable": true
+        }
+      },
+      "description": "Automanage configuration profile VM Backup preferences."
+    },
+    "ConfigurationProfilePreferenceAntiMalware": {
+      "properties": {
+        "enableRealTimeProtection": {
+          "type": "string",
+          "description": "Enables or disables Real Time Protection",
+          "x-ms-enum": {
+            "name": "enableRealTimeProtection",
+            "modelAsString": true
+          },
+          "enum": [
+            "True",
+            "False"
+          ],
+          "x-nullable": true
+        },
+        "exclusions": {
+          "type": "object",
+          "description": "Extensions, Paths and Processes that must be excluded from scan",
+          "x-nullable": true
+        },
+        "runScheduledScan": {
+          "type": "string",
+          "description": "Enables or disables a periodic scan for antimalware",
+          "x-ms-enum": {
+            "name": "runScheduledScan",
+            "modelAsString": true
+          },
+          "enum": [
+            "True",
+            "False"
+          ],
+          "x-nullable": true
+        },
+        "scanType": {
+          "type": "string",
+          "description": "Type of scheduled scan",
+          "x-ms-enum": {
+            "name": "scanType",
+            "modelAsString": true
+          },
+          "enum": [
+            "Quick",
+            "Full"
+          ],
+          "x-nullable": true
+        },
+        "scanDay": {
+          "type": "string",
+          "description": "Schedule scan settings day",
+          "x-nullable": true
+        },
+        "scanTimeInMinutes": {
+          "type": "string",
+          "description": "Schedule scan settings time",
+          "x-nullable": true
+        }
+      },
+      "description": "Automanage configuration profile Antimalware preferences."
+    },
+    "ConfigurationProfilePreferenceList": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ConfigurationProfilePreference"
+          },
+          "description": "Result of the list ConfigurationProfilePreference operation."
+        }
+      },
+      "description": "The response of the list ConfigurationProfilePreference operation."
+    },
+    "Operation": {
+      "description": "Automanage REST API operation",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Operation name: For ex. providers/Microsoft.Automanage/configurationProfileAssignments/write or read",
+          "type": "string"
+        },
+        "isDataAction": {
+          "description": "Indicates whether the operation is a data action",
+          "type": "string"
+        },
+        "display": {
+          "properties": {
+            "provider": {
+              "description": "Service provider: Microsoft.Automanage",
+              "type": "string"
+            },
+            "resource": {
+              "description": "Resource on which the operation is performed:  For ex. ",
+              "type": "string"
+            },
+            "operation": {
+              "description": "Operation type: Read, write, delete, etc.",
+              "type": "string"
+            },
+            "description": {
+              "description": "Description about operation.",
+              "type": "string"
+            }
+          },
+          "description": "Provider, Resource, Operation and description values."
+        },
+        "properties": {
+          "properties": {
+            "statusCode": {
+              "description": "Service provider: Microsoft.Automanage",
+              "type": "string"
+            }
+          },
+          "x-ms-client-flatten": true,
+          "description": "Provider, Resource, Operation and description values."
+        }
+      }
+    },
+    "OperationList": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Operation"
+          },
+          "description": "List of Automanage operations supported by the Automanage resource provider."
+        }
+      },
+      "description": "The response model for the list of Automanage operations"
+    },
+    "UpdateResource": {
+      "description": "Represents an update resource",
+      "type": "object",
+      "properties": {
+        "tags": {
+          "description": "The tags of the resource.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "VmNameParameter": {
+      "name": "vmName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the virtual machine.",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

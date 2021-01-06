@@ -90,6 +90,7 @@
           {
             "name": "administratorName",
             "in": "path",
+            "description": "The name of server active directory administrator.",
             "required": true,
             "type": "string",
             "enum": [
@@ -103,7 +104,7 @@
           {
             "name": "parameters",
             "in": "body",
-            "description": "The required parameters for creating or updating an Active Directory Administrator.",
+            "description": "The requested Azure Active Directory administrator Resource state.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/ServerAzureADAdministrator"
@@ -118,7 +119,7 @@
             }
           },
           "default": {
-            "description": "*** Error Responses: ***\n\n * 400 InvalidServerAzureADOnlyAuthenticationParameter - User tried to set AzureADOnlyAuthentication parameter to false which is not allowed, please use disableAzureADOnlyAuthentication API instead.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 404 OperationIdNotFound - The operation with Id does not exist.\n\n * 409 OperationCancelled - The operation has been cancelled by user.\n\n * 409 OperationInterrupted - The operation on the resource could not be completed because it was interrupted by another operation on the same resource.\n\n * 500 OperationTimedOut - The operation timed out and automatically rolled back. Please retry the operation."
+            "description": "*** Error Responses: ***\n\n * 400 InvalidServerAzureADOnlyAuthenticationParameter - User tried to set AzureADOnlyAuthentication parameter to false which is not allowed, please use azureADOnlyAuthentications API instead.\n\n * 400 InvalidServerAzureADAdminDeleteOperation - User tried to delete server Azure Active Azure admin when AzureADOnlyAuthentication is set, please use azureADOnlyAuthentications API first.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 404 OperationIdNotFound - The operation with Id does not exist.\n\n * 409 OperationCancelled - The operation has been cancelled by user.\n\n * 409 OperationInterrupted - The operation on the resource could not be completed because it was interrupted by another operation on the same resource.\n\n * 500 OperationTimedOut - The operation timed out and automatically rolled back. Please retry the operation."
           },
           "202": {
             "description": "Accepted"
@@ -176,7 +177,7 @@
             "description": "Successfully deleted the Azure Active Directory administrator."
           },
           "default": {
-            "description": "*** Error Responses: ***\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 404 OperationIdNotFound - The operation with Id does not exist.\n\n * 409 OperationCancelled - The operation has been cancelled by user.\n\n * 409 OperationInterrupted - The operation on the resource could not be completed because it was interrupted by another operation on the same resource.\n\n * 500 OperationTimedOut - The operation timed out and automatically rolled back. Please retry the operation."
+            "description": "*** Error Responses: ***\n\n * 400 InvalidServerAzureADOnlyAuthenticationParameter - User tried to set AzureADOnlyAuthentication parameter to false which is not allowed, please use azureADOnlyAuthentications API instead.\n\n * 400 InvalidServerAzureADAdminDeleteOperation - User tried to delete server Azure Active Azure admin when AzureADOnlyAuthentication is set, please use azureADOnlyAuthentications API first.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 404 OperationIdNotFound - The operation with Id does not exist.\n\n * 409 OperationCancelled - The operation has been cancelled by user.\n\n * 409 OperationInterrupted - The operation on the resource could not be completed because it was interrupted by another operation on the same resource.\n\n * 500 OperationTimedOut - The operation timed out and automatically rolled back. Please retry the operation."
           },
           "202": {
             "description": "Accepted"
@@ -234,49 +235,6 @@
           }
         }
       }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/disableAzureADOnlyAuthentication": {
-      "post": {
-        "tags": [
-          "ServerAzureADAdministrators"
-        ],
-        "description": "Disables Azure Active Directory only authentication on logical Server.",
-        "operationId": "ServerAzureADAdministrators_DisableAzureADOnlyAuthentication",
-        "parameters": [
-          {
-            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
-          },
-          {
-            "$ref": "#/parameters/ServerNameParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successfully disabled Azure Active Directory only authentication on logical server.",
-            "schema": {
-              "$ref": "#/definitions/ServerAzureADAdministrator"
-            }
-          },
-          "default": {
-            "description": "*** Error Responses: ***\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 404 OperationIdNotFound - The operation with Id does not exist.\n\n * 409 OperationCancelled - The operation has been cancelled by user.\n\n * 409 OperationInterrupted - The operation on the resource could not be completed because it was interrupted by another operation on the same resource.\n\n * 500 OperationTimedOut - The operation timed out and automatically rolled back. Please retry the operation."
-          },
-          "202": {
-            "description": "Accepted"
-          }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "Disables Azure Active Directory only authentication on logical server.": {
-            "$ref": "./examples/DisableAzureADOnlyAuthUpdate.json"
-          }
-        }
-      }
     }
   },
   "definitions": {
@@ -316,7 +274,8 @@
         },
         "azureADOnlyAuthentication": {
           "description": "Azure Active Directory only Authentication enabled.",
-          "type": "boolean"
+          "type": "boolean",
+          "readOnly": true
         }
       }
     },
@@ -444,6 +403,30 @@
       "name": "virtualClusterName",
       "in": "path",
       "description": "The name of the virtual cluster.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "WorkspaceNameParameter": {
+      "name": "workspaceName",
+      "in": "path",
+      "description": "The name of the workspace.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "SqlPoolNameParameter": {
+      "name": "sqlPoolName",
+      "in": "path",
+      "description": "The name of the sql pool.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "SqlDatabaseNameParameter": {
+      "name": "sqlDatabaseName",
+      "in": "path",
+      "description": "The name of the sql database.",
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"

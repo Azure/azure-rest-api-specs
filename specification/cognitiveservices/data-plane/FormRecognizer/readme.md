@@ -13,21 +13,31 @@ add-credentials: true
 openapi-type: data-plane
 ```
 
-``` yaml
-
-tag: release_1_0
-add-credentials: true
-openapi-type: data-plane
-```
 # Releases
+
+### Release 2.1-preview
+These settings apply only when `--tag=release_2_1_preview` is specified on the command line.
+``` yaml $(tag) == 'release_2_1_preview'
+input-file: 
+  - preview/v2.1-preview.1/FormRecognizer.json
+```
 
 ### Release 2.0
 These settings apply only when `--tag=release_2_0` is specified on the command line.
 
 ``` yaml $(tag) == 'release_2_0'
 input-file: 
+  - stable/v2.0/FormRecognizer.json
+```
+
+### Release 2.0-preview
+These settings apply only when `--tag=release_2_0_preview` is specified on the command line.
+
+``` yaml $(tag) == 'release_2_0_preview'
+input-file: 
   - preview/v2.0/FormRecognizer.json
 ```
+
 
 ### Release 1.0
 These settings apply only when `--tag=release_1_0` is specified on the command line.
@@ -64,7 +74,7 @@ csharp:
   license-header: MICROSOFT_MIT_NO_VERSION
   azure-arm: false
   namespace: Microsoft.Azure.CognitiveServices.FormRecognizer
-  output-folder: $(csharp-sdks-folder)/CognitiveServices/Vision.FormRecognizer/src/Generated
+  output-folder: $(csharp-sdks-folder)/CognitiveServices/FormRecognizer/src/Generated
   title: "FormRecognizerClient"
   clear-output-folder: true
 ```
@@ -101,6 +111,8 @@ require: $(this-folder)/../../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
+  - $(this-folder)/preview/v2.1-preview.1/FormRecognizer.json
+  - $(this-folder)/stable/v2.0/FormRecognizer.json
   - $(this-folder)/preview/v2.0/FormRecognizer.json
   - $(this-folder)/preview/v1.0/FormRecognizer.json
   - $(this-folder)/preview/v1.0/FormRecognizerReceipt.json
@@ -115,4 +127,3 @@ uncomment the  `exclude-file` section below and add the file paths.
 #exclude-file: 
 #  - $(this-folder)/Microsoft.Example/stable/2010-01-01/somefile.json
 ```
-

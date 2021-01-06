@@ -1,38 +1,66 @@
 ---
 - rule:
+    # eventgrid data-plane PR
+    paths:
+      - "specification/eventgrid/data-plane/**"
+    reviewers:
+      - lmazuel
+
+- rule:
+    # synapse data-plane PR
+    paths:
+      - "specification/synapse/data-plane/**"
+    reviewers:
+      - jonathandturner
+
+- rule:
     # data-plane PR
     paths:
       - "specification/**/data-plane/**"
     reviewers:
       - anuchandy
       - jhendrixMSFT
-      - lmazuel
       - tjprescott
+      
 
 - rule:
     paths:
       - "specification/network/**"
     reviewers:
+      - kairu-ms
       - lirenhe
-      - MyronFanQiu
 
 - rule:
     paths:
       - "specification/@(applicationinsights|operationalinsights)/**"
     reviewers:
-      - MyronFanQiu
+      - kairu-ms
 
+- rule:
+    paths: "specification/@(resources|powerplatform|appplatform)/**"
+    reviewers:
+      - raych1
+
+- rule:
+    paths: "specification/sql/**"
+    reviewers:
+      - akning-ms
+      
+- rule:
+    paths: "specification/signalr/**"
+    reviewers:
+      - leni-msft
+      
+- rule:
+    paths: "specification/eventhub/**"
+    reviewers:
+      - ruowan
 - rule:
     paths: "specification/compute/**"
     reviewers:
       - ArcturusZhang
       - fengzhou-msft
       - yungezz
-
-- rule:
-    paths: "specification/resources/**"
-    reviewers:
-      - raych1
 
 - rule:
     paths:
@@ -42,7 +70,7 @@
 
 - rule:
     paths:
-      - "specification/@(azureactivedirectory|appplatform)/**"
+      - "specification/azureactivedirectory/**"
     reviewers:
       - njuCZ
 
@@ -64,20 +92,19 @@
       - "specification/monitor/**"
     reviewers:
       - weidongxu-microsoft
-      - MyronFanQiu
+      - kairu-ms
 
 - rule:
     paths:
       - "specification/storage/**"
     reviewers:
-      - qianwens
       - Juliehzl
 
-- rule:
-    paths: "specification/mediaservices/**"
-    reviewers:
-      - allenjzhang
 
+- rule:	
+    paths: "specification/mediaservices/**"	
+    reviewers:	
+      - allenjzhang
 - rule:
     paths:
       - "specification/@(keyvault|notificationhubs)/**"
@@ -89,13 +116,14 @@
     paths:
       - "specification/@(containerservice|containerinstance)/**"
     reviewers:
-      - NullMDR
+      - PhoenixHe-msft
       - fengzhou-msft
       - yungezz
 
 - rule:
     paths:
       - "specification/mixedreality/**"
+      - "specification/hdinsight/**"
     reviewers:
       - leni-msft
 
@@ -103,13 +131,25 @@
     paths:
       - "specification/portal/**"
     reviewers:
-      - NullMDR
+      - PhoenixHe-msft
 
 - rule:
     paths:
       - "specification/web/**"
     reviewers:
       - weidongxu-microsoft
+      
+- rule:
+    paths:
+      - "specification/testbase/**"
+    reviewers:
+      - PhoenixHe-msft
+      
+- rule:
+    paths:
+      - "specification/servicelinker/**"
+    reviewers:
+      - PhoenixHe-msft
 
 - rule:
     paths:
@@ -120,15 +160,23 @@
 
 - rule:
     paths:
-      - "**/package.json"
-      - ".github/**"
-      - "**/azure-pipelines.yml"
-      - ".azure-pipelines/**"
-      - ".azure-pipelines-preproduction/**"
+      - "documentation/**"	
+    reviewers:
+      - josefree
+      - akning-ms
+
+- rule:
+    paths:
+      - "**/package.json"	
+      - ".github/**"	
+      - "**/azure-pipelines.yml"	
+      - ".azure-pipelines/**"	
+      - ".azure-pipelines-preproduction/**"	
     reviewers:
       - akning-ms
-      - NullMDR
+      - PhoenixHe-msft
       - raych1
+      - zhenglaizhang
 
 - rule:
     # manager-plane PR
@@ -136,19 +184,20 @@
       - "**"
     reviewers:
       - yungezz
-      - zikalino
       - erich-wang
-      - NullMDR
-      - raych1
+      - PhoenixHe-msft
       - lirenhe
       - weidongxu-microsoft
       - ArcturusZhang
       - xccc-msft
+      - raych1
       - ChenTanyi
       - fengzhou-msft
       - njuCZ
       - akning-ms
-      - markcowl
       - leni-msft
       - qianwens
       - ruowan
+      - jianyexi
+      - zhenglaizhang
+      - chunyu3

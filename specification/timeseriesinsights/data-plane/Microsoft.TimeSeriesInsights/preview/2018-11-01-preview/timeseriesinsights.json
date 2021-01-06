@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "TimeSeriesInsightsClient",
-    "description": "Time Series Insights environment data plane client for PAYG (Preview L1 SKU) environments.",
+    "description": "Time Series Insights environment data plane client for Gen2 (Preview L1 SKU) environments.",
     "version": "2018-11-01-preview"
   },
   "x-ms-parameterized-host": {
@@ -188,7 +188,7 @@
           "ModelSettings"
         ],
         "operationId": "ModelSettings_Get",
-        "description": "Returns the model settings which includes model display name, Time Series ID properties and default type ID. Every pay-as-you-go environment has a model that is automatically created.",
+        "description": "Returns the model settings which includes model display name, Time Series ID properties and default type ID. Every Gen2 environment has a model that is automatically created.",
         "x-ms-examples": {
           "ModelSettingsGet": {
             "$ref": "./examples/ModelSettingsGet.json"
@@ -539,7 +539,7 @@
             "$ref": "./examples/InstancesBatchGetByIds.json"
           },
           "InstancesBatchGetByNames": {
-            "$ref": "./examples/InstancesBatchGetByIds.json"
+            "$ref": "./examples/InstancesBatchGetByNames.json"
           },
           "InstancesBatchUpdate": {
             "$ref": "./examples/InstancesBatchUpdate.json"
@@ -1512,8 +1512,7 @@
         },
         "typeId": {
           "description": "This represents the type that this instance belongs to. Never null.",
-          "type": "string",
-          "format": "uuid"
+          "type": "string"
         },
         "name": {
           "description": "Optional name of the instance which is unique in an environment. Names acts as a mutable alias or display name of the time series instance. Mutable, may be null.",
@@ -1527,12 +1526,11 @@
           "description": "Set of time series hierarchy IDs that the instance belong to. May be null.",
           "type": "array",
           "items": {
-            "type": "string",
-            "format": "uuid"
+            "type": "string"
           }
         },
         "instanceFields": {
-          "description": "Set of key-value pairs that contain user-defined instance properties. May be null.",
+          "description": "Set of key-value pairs that contain user-defined instance properties. It may be null. Supported property value types are: bool, string, long, double and it cannot be nested or null.",
           "type": "object",
           "additionalProperties": {}
         }
@@ -1558,14 +1556,14 @@
           }
         },
         "update": {
-          "description": "Time series instances to be updated onlRequest to perform a single operation on a batch of instances. y. If instance does not exist, an error is returned.",
+          "description": "Time series instance to be updated. If instance does not exist, an error is returned.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/TimeSeriesInstance"
           }
         },
         "delete": {
-          "description": "Time series IDs or names of time series instances to delete.",
+          "description": "Time series instances to be deleted. Time series ID or name may be specified.",
           "$ref": "#/definitions/InstancesRequestBatchGetOrDelete"
         }
       }
@@ -1670,9 +1668,8 @@
       "type": "object",
       "properties": {
         "id": {
-          "description": "Unique type identifier that is immutable. Can be null on create or update requests, and then server generates the ID. Not null on get and delete operations.",
-          "type": "string",
-          "format": "uuid"
+          "description": "Case-sensitive unique type identifier that is immutable. Can be null on create or update requests, and then server generates the ID. Not null on get and delete operations.",
+          "type": "string"
         },
         "name": {
           "description": "User-given unique name for the type. Mutable, not null.",
@@ -1723,8 +1720,7 @@
           "description": "List of IDs of time series types to return or delete.",
           "type": "array",
           "items": {
-            "type": "string",
-            "format": "uuid"
+            "type": "string"
           }
         },
         "names": {
@@ -1808,9 +1804,8 @@
       "type": "object",
       "properties": {
         "id": {
-          "description": "Unique hierarchy identifier that is a immutable GUID. Can be null while creating hierarchy objects and then server generates the id, not null on get and delete operations.",
-          "type": "string",
-          "format": "uuid"
+          "description": "Case-sensitive unique hierarchy identifier. Can be null while creating hierarchy objects and then server generates the id, not null on get and delete operations.",
+          "type": "string"
         },
         "name": {
           "description": "User-given unique name for the type. It is mutable and not null.",
@@ -1864,8 +1859,7 @@
           "description": "List of hierarchy IDs.",
           "type": "array",
           "items": {
-            "type": "string",
-            "format": "uuid"
+            "type": "string"
           }
         },
         "names": {
@@ -1951,8 +1945,7 @@
         "defaultTypeId": {
           "description": "Default type ID of the model that new time series instances will automatically belong to.",
           "readOnly": true,
-          "type": "string",
-          "format": "uuid"
+          "type": "string"
         }
       }
     },
@@ -1997,8 +1990,7 @@
         },
         "defaultTypeId": {
           "description": "Default type id of the model that new instances will automatically belong to.",
-          "type": "string",
-          "format": "uuid"
+          "type": "string"
         }
       }
     },
@@ -2217,16 +2209,14 @@
         "typeId": {
           "description": "Represents the type that time series instance which matched the search request belongs to. Never null.",
           "readOnly": true,
-          "type": "string",
-          "format": "uuid"
+          "type": "string"
         },
         "hierarchyIds": {
           "description": "List of time series hierarchy IDs that time series instance which matched the search request belongs to. Cannot be used to lookup hierarchies. May be null.",
           "readOnly": true,
           "type": "array",
           "items": {
-            "type": "string",
-            "format": "uuid"
+            "type": "string"
           }
         },
         "highlights": {
@@ -2262,8 +2252,7 @@
               "readOnly": true,
               "type": "array",
               "items": {
-                "type": "string",
-                "format": "uuid"
+                "type": "string"
               }
             },
             "hierarchyNames": {

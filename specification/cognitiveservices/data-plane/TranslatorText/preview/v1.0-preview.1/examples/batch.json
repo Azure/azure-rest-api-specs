@@ -1,0 +1,120 @@
+{
+  "parameters": {
+    "api-version": "v1.0-preview.1",
+    "subscriptionId": "EA19050C-51FC-4B55-84E5-9EA7283601DA",
+    "resourceGroupName": "TestResourceGroup",
+    "endpoint": "{endpoint}",
+    "Ocp-Apim-Subscription-Key": "{API key}",
+    "batchRequest": {
+      "inputs": [
+        {
+          "source": {
+            "sourceUrl": "https://myblob.blob.core.windows.net/sourceContainer",
+            "filter": {
+              "prefix": "pre",
+              "suffix": ".txt"
+            },
+            "language": "en",
+            "storageSource": "AzureBlob"
+          },
+          "targets": [
+            {
+              "targetUrl": "https://myblob.blob.core.windows.net/destinationContainer1",
+              "category": "general",
+              "language": "fr",
+              "glossaries": [
+                {
+                  "glossaryUrl": "https://myblob.blob.core.windows.net/myglossary/en_fr_glossary.xlf"
+                }
+              ],
+              "storageSource": "AzureBlob"
+            },
+            {
+              "targetUrl": "https://myblob.blob.core.windows.net/destinationContainer2",
+              "category": "general",
+              "language": "es",
+              "storageSource": "AzureBlob"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "responses": {
+    "401": {
+      "headers": {},
+      "body": {
+        "error": {
+          "code": "Unauthorized",
+          "message": "User is not authorized",
+          "innerError": {
+            "code": 401000,
+            "error": "Unauthorized",
+            "message": "Operation is not authorized"
+          }
+        }
+      }
+    },
+    "429": {
+      "headers": {},
+      "body": {
+        "error": {
+          "code": "RequestRateTooHigh",
+          "message": "User's request rate is too high",
+          "innerError": {
+            "code": 429000,
+            "error": "RateTooHigh",
+            "message": "Request rate is too high"
+          }
+        }
+      }
+    },
+    "500": {
+      "headers": {},
+      "body": {
+        "error": {
+          "code": "InternalServerError",
+          "message": "Internal Server Error",
+          "innerError": {
+            "code": 500000,
+            "error": "Internal Server Error",
+            "message": "Unexpected internal server error has occurred"
+          }
+        }
+      }
+    },
+    "503": {
+      "headers": {},
+      "body": {
+        "error": {
+          "code": "ServiceUnavailable",
+          "message": "Service is temporary unavailable",
+          "innerError": {
+            "code": 503000,
+            "error": "ServiceTemporaryUnavailable",
+            "message": "Service is currently unavailable.  Please try again later"
+          }
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "Operation-Location": "https://westus.cognitiveservices.azure.com/translator/text/batch/v1.0.preview.1/operation/0FA2822F-4C2A-4317-9C20-658C801E0E55"
+      }
+    },
+    "400": {
+      "headers": {},
+      "body": {
+        "error": {
+          "code": "InvalidRequest",
+          "message": "Some argument is incorrect",
+          "innerError": {
+            "code": 400120,
+            "error": "SASTokenInvalid",
+            "message": "SAS token for storage is invalid"
+          }
+        }
+      }
+    }
+  }
+}

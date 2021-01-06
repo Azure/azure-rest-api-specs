@@ -136,20 +136,23 @@
         "name": {
           "description": "The host name",
           "type": "string"
+        },
+        "fqdn": {
+          "description": "The Fully Qualified Domain Name of host",
+          "type": "string"
+        },
+        "effectiveDiskEncryptionKeyUrl": {
+          "description": "The effective disk encryption key URL used by the host",
+          "type": "string"
         }
       },
       "readOnly": true
     },
     "HostInfoListResult": {
       "description": "Result of the request to list cluster hosts",
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/HostInfo"
-          },
-          "description": "The list of cluster hosts."
-        }
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/HostInfo"
       },
       "readOnly": true
     },

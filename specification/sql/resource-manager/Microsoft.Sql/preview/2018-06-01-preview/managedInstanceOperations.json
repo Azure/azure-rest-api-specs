@@ -210,6 +210,57 @@
           "description": "Whether the operation can be cancelled.",
           "type": "boolean",
           "readOnly": true
+        },
+        "operationParameters": {
+          "$ref": "#/definitions/ManagedInstanceOperationParametersPair",
+          "description": "The operation parameters.",
+          "readOnly": true
+        },
+        "operationSteps": {
+          "$ref": "#/definitions/ManagedInstanceOperationSteps",
+          "description": "The operation steps.",
+          "readOnly": true
+        }
+      }
+    },
+    "ManagedInstanceOperationParametersPair": {
+      "description": "The parameters of a managed instance operation.",
+      "type": "object",
+      "properties": {
+        "currentParameters": {
+          "$ref": "#/definitions/UpsertManagedServerOperationParameters",
+          "description": "The current parameters.",
+          "readOnly": true
+        },
+        "requestedParameters": {
+          "$ref": "#/definitions/UpsertManagedServerOperationParameters",
+          "description": "The requested parameters.",
+          "readOnly": true
+        }
+      }
+    },
+    "ManagedInstanceOperationSteps": {
+      "description": "The steps of a managed instance operation.",
+      "type": "object",
+      "properties": {
+        "totalSteps": {
+          "description": "The total number of operation steps.",
+          "type": "string",
+          "readOnly": true
+        },
+        "currentStep": {
+          "format": "int32",
+          "description": "The number of current operation steps.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "stepsList": {
+          "description": "The operation steps list.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/UpsertManagedServerOperationStep"
+          },
+          "readOnly": true
         }
       }
     },
@@ -234,6 +285,48 @@
         }
       },
       "x-ms-azure-resource": true
+    },
+    "UpsertManagedServerOperationParameters": {
+      "type": "object",
+      "properties": {
+        "family": {
+          "type": "string"
+        },
+        "tier": {
+          "type": "string"
+        },
+        "vCores": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "storageSizeInGB": {
+          "format": "int32",
+          "type": "integer"
+        }
+      }
+    },
+    "UpsertManagedServerOperationStep": {
+      "type": "object",
+      "properties": {
+        "order": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "name": {
+          "type": "string"
+        },
+        "status": {
+          "enum": [
+            "NotStarted",
+            "InProgress",
+            "SlowedDown",
+            "Completed",
+            "Failed",
+            "Canceled"
+          ],
+          "type": "string"
+        }
+      }
     },
     "ProxyResource": {
       "description": "ARM proxy resource.",

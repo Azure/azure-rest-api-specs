@@ -590,6 +590,7 @@
             "name": "api-version",
             "in": "query",
             "required": true,
+            "x-ms-api-version": false,
             "type": "string",
             "enum": [
               "2015-11-01"
@@ -923,6 +924,7 @@
           "enum": [
             "A"
           ],
+          "x-ms-client-default": "A",
           "x-ms-enum": {
             "name": "SkuFamily",
             "modelAsString": true
@@ -982,6 +984,7 @@
           "items": {
             "type": "string",
             "enum": [
+              "all",
               "encrypt",
               "decrypt",
               "wrapKey",
@@ -1011,6 +1014,7 @@
           "items": {
             "type": "string",
             "enum": [
+              "all",
               "get",
               "list",
               "set",
@@ -1032,6 +1036,7 @@
           "items": {
             "type": "string",
             "enum": [
+              "all",
               "get",
               "list",
               "delete",
@@ -1061,6 +1066,7 @@
           "items": {
             "type": "string",
             "enum": [
+              "all",
               "get",
               "list",
               "delete",
@@ -1106,7 +1112,7 @@
         },
         "vaultUri": {
           "type": "string",
-          "description": "The URI of the vault for performing operations on keys and secrets."
+          "description": "The URI of the vault for performing operations on keys and secrets. This property is readonly"
         },
         "enabledForDeployment": {
           "type": "boolean",
