@@ -621,6 +621,9 @@ directive:
   - suppress: R4007
     from: baseline_API.json
     reason: 'Updating the error response to the new format would be a breaking change.'
+  - suppress: R4007
+    from: metricBaselines_API.json
+    reason: 'Updating the error response to the new format would be a breaking change.'
 ```
 
 ### Tag: profile-hybrid-2019-03-01

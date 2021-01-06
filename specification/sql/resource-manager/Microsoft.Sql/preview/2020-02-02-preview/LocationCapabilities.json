@@ -969,6 +969,11 @@
           "type": "string",
           "readOnly": true
         },
+        "zoneRedundant": {
+          "description": "Whether or not zone redundancy is supported for the maintenance configuration.",
+          "type": "boolean",
+          "readOnly": true
+        },
         "status": {
           "description": "The status of the capability.",
           "enum": [
@@ -1084,7 +1089,7 @@
           "description": "List of supported maintenance configurations",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/MaintenanceConfigurationCapability"
+            "$ref": "#/definitions/ManagedInstanceMaintenanceConfigurationCapability"
           },
           "readOnly": true
         },
@@ -1200,6 +1205,36 @@
             "name": "PerformanceLevelUnit",
             "modelAsString": true
           }
+        },
+        "status": {
+          "description": "The status of the capability.",
+          "enum": [
+            "Visible",
+            "Available",
+            "Default",
+            "Disabled"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "CapabilityStatus",
+            "modelAsString": false
+          }
+        },
+        "reason": {
+          "description": "The reason for the capability not being available.",
+          "type": "string"
+        }
+      }
+    },
+    "ManagedInstanceMaintenanceConfigurationCapability": {
+      "description": "The maintenance configuration capability",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Maintenance configuration name",
+          "type": "string",
+          "readOnly": true
         },
         "status": {
           "description": "The status of the capability.",
