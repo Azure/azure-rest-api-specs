@@ -291,9 +291,6 @@
           "204": {
             "description": "The specified account was not found."
           },
-          "404": {
-            "description": ""
-          },
           "default": {
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
@@ -312,7 +309,7 @@
         "tags": [
           "Accounts"
         ],
-        "operationId": "Accounts_Create",
+        "operationId": "Account_Create",
         "description": "Creates the specified Data Lake Analytics account. This supplies the user with computation services for Data Lake Analytics workloads.",
         "parameters": [
           {
@@ -372,7 +369,7 @@
         "tags": [
           "Accounts"
         ],
-        "operationId": "Accounts_Update",
+        "operationId": "Account_Update",
         "description": "Updates the Data Lake Analytics account object specified by the accountName with the contents of the account object.",
         "parameters": [
           {
@@ -949,6 +946,9 @@
           "200": {
             "description": "Successfully deleted the specified Azure Storage account information from the Azure Data Lake Analytics account."
           },
+          "204": {
+            "description": "No Content"
+          },
           "default": {
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
@@ -968,7 +968,7 @@
         "tags": [
           "StorageAccounts"
         ],
-        "operationId": "StorageAccounts_ListStorageContainers",
+        "operationId": "Account_ListStorageContainers",
         "description": "Lists the Azure Storage containers, if any, associated with the specified Data Lake Analytics and Azure Storage account combination. The response includes a link to the next page of results, if any.",
         "parameters": [
           {
@@ -1020,7 +1020,7 @@
         "tags": [
           "StorageAccounts"
         ],
-        "operationId": "StorageAccounts_GetStorageContainer",
+        "operationId": "Account_GetStorageContainer",
         "description": "Gets the specified Azure Storage container associated with the given Data Lake Analytics and Azure Storage accounts.",
         "parameters": [
           {
@@ -1076,7 +1076,7 @@
         "tags": [
           "StorageAccounts"
         ],
-        "operationId": "StorageAccounts_ListSasTokens",
+        "operationId": "Account_ListSasTokens",
         "description": "Gets the SAS token associated with the specified Data Lake Analytics and Azure Storage account and container combination.",
         "parameters": [
           {
