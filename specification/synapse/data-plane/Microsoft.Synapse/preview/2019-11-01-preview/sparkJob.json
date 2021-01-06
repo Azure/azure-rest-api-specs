@@ -115,7 +115,7 @@
             "description": "Livy compatible batch job request payload.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/sparkBatchJobOptions"
+              "$ref": "#/definitions/SparkBatchJobOptions"
             }
           }
         ],
@@ -980,7 +980,7 @@
         }
       }
     },
-    "sparkBatchJobOptions": {
+    "SparkBatchJobOptions": {
       "type": "object",
       "properties": {
         "tags": {
@@ -1435,7 +1435,25 @@
           ],
           "x-ms-enum": {
             "name": "SparkStatementLanguageType",
-            "modelAsString": true
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Spark",
+                "value": "spark"
+              },
+              {
+                "name": "PySpark",
+                "value": "pyspark"
+              },
+              {
+                "name": "DotnetSpark",
+                "value": "dotnetspark"
+              },
+              {
+                "name": "Sql",
+                "value": "sql"
+              }
+            ]
           },
           "type": "string"
         }
@@ -1445,7 +1463,9 @@
       "type": "object",
       "properties": {
         "msg": {
-          "type": "string"
+          "type": "string",
+          "x-ms-client-name": "message",
+          "description": "The msg property from the Livy API. The value is always \"canceled\"."
         }
       }
     }
