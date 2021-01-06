@@ -1175,9 +1175,6 @@
       "allOf": [
         {
           "$ref": "#/definitions/ProxyResourceRO"
-        },
-        {
-          "$ref": "#/definitions/systemData"
         }
       ],
       "description": "Class representing a Traffic Manager endpoint in a response."
@@ -1405,9 +1402,6 @@
       "allOf": [
         {
           "$ref": "#/definitions/TrackedResourceRO"
-        },
-        {
-          "$ref": "#/definitions/systemData"
         }
       ],
       "description": "Class representing a Traffic Manager profile in a response."
@@ -1447,11 +1441,6 @@
           "description": "Descriptive message that explains why the name is not available, when applicable."
         }
       },
-      "allOf": [
-        {
-          "$ref": "#/definitions/systemData"
-        }
-      ],
       "description": "Class representing a Traffic Manager Name Availability response."
     },
     "Region": {
@@ -1494,9 +1483,6 @@
       "allOf": [
         {
           "$ref": "#/definitions/ProxyResourceRO"
-        },
-        {
-          "$ref": "#/definitions/systemData"
         }
       ],
       "description": "Class representing the Geographic hierarchy used with the Geographic traffic routing method."
@@ -1524,6 +1510,11 @@
         "type": {
           "type": "string",
           "description": "The type of the resource. Ex- Microsoft.Network/trafficManagerProfiles."
+        },
+        "systemData": {
+          "$ref": "#/definitions/SystemData",
+          "readOnly": true,
+          "description": "Metadata pertaining to creation and last modification of the resource"
         }
       },
       "x-ms-azure-resource": true
@@ -1636,6 +1627,11 @@
           "readOnly": true,
           "type": "string",
           "description": "The type of the resource. Ex- Microsoft.Network/trafficManagerProfiles."
+        },
+        "systemData": {
+          "$ref": "#/definitions/SystemData",
+          "readOnly": true,
+          "description": "Metadata pertaining to creation and last modification of the resource"
         }
       },
       "x-ms-azure-resource": true
@@ -1686,11 +1682,6 @@
         "description": "The content of the error."
         }
       },
-      "allOf": [
-        {
-          "$ref": "#/definitions/systemData"
-        }
-      ],
       "description": "An error returned by the Azure Resource Manager",
       "x-ms-external": true
     },
