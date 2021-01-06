@@ -1042,7 +1042,7 @@
           "$ref": "#/definitions/ProxyResourceRO"
         },
         {
-          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/systemData"
+          "$ref": "#/definitions/systemData"
         }
       ],
       "description": "Class representing a Traffic Manager HeatMap."
@@ -1060,7 +1060,7 @@
           "$ref": "#/definitions/ProxyResourceRO"
         },
         {
-          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/systemData"
+          "$ref": "#/definitions/systemData"
         }
       ],
       "description": "Class representing Traffic Manager User Metrics."
@@ -1183,7 +1183,7 @@
           "$ref": "#/definitions/ProxyResourceRO"
         },
         {
-          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/systemData"
+          "$ref": "#/definitions/systemData"
         }
       ],
       "description": "Class representing a Traffic Manager endpoint in a response."
@@ -1413,7 +1413,7 @@
           "$ref": "#/definitions/TrackedResourceRO"
         },
         {
-          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/systemData"
+          "$ref": "#/definitions/systemData"
         }
       ],
       "description": "Class representing a Traffic Manager profile in a response."
@@ -1455,7 +1455,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/systemData"
+          "$ref": "#/definitions/systemData"
         }
       ],
       "description": "Class representing a Traffic Manager Name Availability response."
@@ -1502,7 +1502,7 @@
           "$ref": "#/definitions/ProxyResourceRO"
         },
         {
-          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/systemData"
+          "$ref": "#/definitions/systemData"
         }
       ],
       "description": "Class representing the Geographic hierarchy used with the Geographic traffic routing method."
@@ -1571,6 +1571,59 @@
           "$ref": "#/definitions/Resource"
         }
       ]
+    },
+    "systemData": {
+      "description": "Metadata pertaining to creation and last modification of the resource.",
+      "type": "object",
+      "readOnly": true,
+      "properties": {
+        "createdBy": {
+          "type": "string",
+          "description": "The identity that created the resource."
+        },
+        "createdByType": {
+          "type": "string",
+          "description": "The type of identity that created the resource.",
+          "enum": [
+            "User",
+            "Application",
+            "ManagedIdentity",
+            "Key"
+          ],
+          "x-ms-enum": {
+            "name": "createdByType",
+            "modelAsString": true
+          }
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp of resource creation (UTC)."
+        },
+        "lastModifiedBy": {
+          "type": "string",
+          "description": "The identity that last modified the resource."
+        },
+        "lastModifiedByType": {
+          "type": "string",
+          "description": "The type of identity that last modified the resource.",
+          "enum": [
+            "User",
+            "Application",
+            "ManagedIdentity",
+            "Key"
+          ],
+          "x-ms-enum": {
+            "name": "createdByType",
+            "modelAsString": true
+          }
+        },
+        "lastModifiedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The type of identity that last modified the resource."
+        }
+      }
     },
     "ResourceRO": {
       "description": "The core properties of ARM resources",
@@ -1641,7 +1694,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/systemData"
+          "$ref": "#/definitions/systemData"
         }
       ],
       "description": "An error returned by the Azure Resource Manager",
