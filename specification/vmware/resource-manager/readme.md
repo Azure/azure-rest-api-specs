@@ -53,6 +53,9 @@ directive:
     from: Microsoft.AVS/preview/2020-07-17-preview/vmware.json
     where: $.definitions.Operation.properties.properties
     reason: x-ms-client-flatten not needed for Operation
+  - suppress: R4009
+    from: Microsoft.AVS/preview/2020-07-17-preview/vmware.json
+    reason: systemData will be in the next API version
 ```
 
 ### Tag: package-2020-03-20
@@ -86,25 +89,6 @@ directive:
     reason: x-ms-client-flatten not needed for Operation
 ```
 
-### Tag: package-2019-08-09-preview
-
-These settings apply only when `--tag=package-2019-08-09-preview` is specified on the command line.
-
-``` yaml $(tag) == 'package-2019-08-09-preview'
-input-file:
-- Microsoft.AVS/preview/2019-08-09-preview/vmware.json
-directive:
-  - suppress: R3020
-    from: Microsoft.AVS/preview/2019-08-09-preview/vmware.json
-    reason: Microsoft.AVS was chosen over Microsoft.AzureVMwareSolution
-  - suppress: R3010
-    from: Microsoft.AVS/preview/2019-08-09-preview/vmware.json
-    reason: list by immediate parent operations are defined
-  - suppress: R2001
-    from: Microsoft.AVS/preview/2019-08-09-preview/vmware.json
-    reason: x-ms-client-flatten will be used in next API version
-```
-
 ---
 # Code Generation
 
@@ -132,7 +116,6 @@ directive:
     from:
       - Microsoft.AVS/preview/2020-07-17-preview/vmware.json
       - Microsoft.AVS/stable/2020-03-20/vmware.json
-      - Microsoft.AVS/preview/2019-08-09-preview/vmware.json
     where:
       - $.definitions.AdminCredentials.properties.nsxtPassword
       - $.definitions.AdminCredentials.properties.vcenterPassword
