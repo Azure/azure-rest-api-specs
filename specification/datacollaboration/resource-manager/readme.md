@@ -44,6 +44,8 @@ input-file:
 directive:
   - suppress: UniqueXmsEnumName
     reason: Following DataShare patterns. Will be resived later.
+  - suppress: EnumInsteadOfBoolean
+    reason: Reflecting Synapse BigDataPool DTO which has booleans
 ```
 
 ---
