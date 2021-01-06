@@ -1283,12 +1283,12 @@
         "firstReportTime": {
           "type": "string",
           "description": "Time and date the potential outage started to become a potential outage.",
-          "format":"date-time"
+          "format": "date-time"
         },
         "lastReportTime": {
           "type": "string",
           "description": "Time and date the potential outage was created.",
-          "format":"date-time"
+          "format": "date-time"
         },
         "rawIds": {
           "type": "array",
@@ -1344,22 +1344,32 @@
         "state": {
           "type": "string",
           "description": "Incident state.",
-          "enum":["Invalid", "Active", "Resolved", "New", "Mitigating", "Correlating", "Mitigated", "Holding", "Suppressed"]
+          "enum": [
+            "INVALID",
+            "ACTIVE",
+            "RESOLVED",
+            "NEW",
+            "MITIGATING",
+            "CORRELATING",
+            "MITIGATED",
+            "HOLDING",
+            "SUPPRESSED"
+          ]
         },
         "createdDate": {
           "type": "string",
           "description": "Incident created date.",
-          "format":"date-time"
+          "format": "date-time"
         },
         "sourceCreateTime": {
           "type": "string",
           "description": "The date on which source created incident.",
-          "format":"date-time"
+          "format": "date-time"
         },
         "lastModifiedDate": {
           "type": "string",
           "description": "Incident last modified date.",
-          "format":"date-time"
+          "format": "date-time"
         },
         "title": {
           "type": "string",
@@ -1538,7 +1548,7 @@
         "impactStartTime": {
           "type": "string",
           "description": "Impact start time for the incident.",
-          "format":"date-time"
+          "format": "date-time"
         },
         "acknowledgeBy": {
           "type": "integer",
@@ -1552,7 +1562,7 @@
         "acknowledgeTime": {
           "type": "string",
           "description": "Acknowledge time for the incident.",
-          "format":"date-time"
+          "format": "date-time"
         },
         "mitigateData": {
           "type": "object",
@@ -1565,7 +1575,7 @@
             "mitigateTime": {
               "type": "string",
               "description": "Time when the incident was mitigated.",
-              "format":"date-time"
+              "format": "date-time"
             }
           }
         },
@@ -1580,7 +1590,7 @@
             "resolveTime": {
               "type": "string",
               "description": "Time when the incident was resolved.",
-              "format":"date-time"
+              "format": "date-time"
             }
           }
         }
@@ -1611,7 +1621,7 @@
         "expirationTime": {
           "type": "string",
           "description": "Expiration time of this bridge.",
-          "format":"date-time"
+          "format": "date-time"
         },
         "phoneNumber": {
           "type": "string",
@@ -1624,7 +1634,10 @@
         "bridgeCreationMode": {
           "type": "string",
           "description": "Bridge creation mode.",
-          "enum": ["Auto", "Manual"]
+          "enum": [
+            "Auto",
+            "Manual"
+          ]
         }
       }
     },
