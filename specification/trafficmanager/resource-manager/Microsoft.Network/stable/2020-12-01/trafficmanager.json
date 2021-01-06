@@ -1033,18 +1033,14 @@
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "allOf": [
-            {
-              "$ref": "#/definitions/ProxyResource"
-            },
-            {
-              "$ref": "#/definitions/HeatMapProperties"
-            }
-          ],
+          "$ref": "#/definitions/HeatMapProperties",
           "description": "The properties of the Traffic Manager HeatMap."
         }
       },
       "allOf": [
+        {
+          "$ref": "#/definitions/ProxyResourceRO"
+        },
         {
           "$ref": "#/definitions/systemData"
         }
@@ -1055,14 +1051,18 @@
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/UserMetricsProperties",
+          "allOf": [
+            {
+              "$ref": "#/definitions/ProxyResourceRO"
+            },
+            {
+              "$ref": "#/definitions/UserMetricsProperties"
+            }
+          ],
           "description": "The properties of the Traffic Manager User Metrics."
         }
       },
       "allOf": [
-        {
-          "$ref": "#/definitions/ProxyResourceRO"
-        },
         {
           "$ref": "#/definitions/systemData"
         }
