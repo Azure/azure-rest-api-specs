@@ -990,6 +990,31 @@
                 "keyVaultUri",
                 "keyName"
               ]
+            },
+            "identity": {
+              "description": "Identity used to access the secret from the keyvault for encryption.",
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "description": "The type of identity to be used.",
+                  "enum": [
+                    "None",
+                    "UserAssigned"
+                  ],
+                  "x-ms-enum": {
+                    "name": "Type",
+                    "modelAsString": true
+                  }
+                },
+                "identity": {
+                  "type": "string",
+                  "description": "The resource id of the identity to be used."
+                }
+              },
+              "required": [
+                "type"
+              ]
             }
           },
           "required": [
