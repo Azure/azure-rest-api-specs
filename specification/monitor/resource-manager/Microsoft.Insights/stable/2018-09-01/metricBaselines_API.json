@@ -122,13 +122,30 @@
     },
     "MetricBaselinesResponse": {
       "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/SingleMetricBaseline"
+          "timespan": {
+            "type": "string",
+            "description": "The timespan for which the data was retrieved. Its value consists of two datetimes concatenated, separated by '/'.  This may be adjusted in the future and returned back from what was originally requested."
           },
-          "description": "The list of metric baselines."
-        }
+          "interval": {
+            "type": "string",
+            "format": "duration",
+            "description": "The interval (window size) for which the metric data was returned in.  This may be adjusted in the future and returned back from what was originally requested.  This is not present if a metadata request was made."
+          },
+          "namespace": {
+            "type": "string",
+            "description": "The namespace of the metrics been queried."
+          },
+          "value": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/SingleMetricBaseline"
+            },
+            "description": "The baseline for each time series that was queried."
+          },
+          "required": [
+            "timespan",
+            "interval"
+          ]
       },
       "description": "A list of metric baselines."
     },
@@ -142,54 +159,25 @@
           "type": "string",
           "description": "The resource type of the metric baseline resource."
         },
-        "name": {
+        "metricName": {
           "type": "string",
           "description": "The name of the metric for which the baselines were retrieved."
         },
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/MetricBaselinesProperties",
-          "description": "The metric baseline properties of the metric."
-        }
+        "baselines": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/TimeSeriesBaseline"
+            },
+            "description": "The baseline for each time series that was queried."
+          }
       },
       "required": [
         "id",
         "type",
         "name",
-        "properties"
-      ],
-      "description": "The baseline results of a single metric."
-    },
-    "MetricBaselinesProperties": {
-      "type": "object",
-      "properties": {
-        "timespan": {
-          "type": "string",
-          "description": "The timespan for which the data was retrieved. Its value consists of two datetimes concatenated, separated by '/'.  This may be adjusted in the future and returned back from what was originally requested."
-        },
-        "interval": {
-          "type": "string",
-          "format": "duration",
-          "description": "The interval (window size) for which the metric data was returned in.  This may be adjusted in the future and returned back from what was originally requested.  This is not present if a metadata request was made."
-        },
-        "namespace": {
-          "type": "string",
-          "description": "The namespace of the metrics been queried."
-        },
-        "baselines": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/TimeSeriesBaseline"
-          },
-          "description": "The baseline for each time series that was queried."
-        }
-      },
-      "required": [
-        "timespan",
-        "interval",
         "baselines"
       ],
-      "description": "The response to a metric baselines query."
+      "description": "The baseline results of a single metric."
     },
     "TimeSeriesBaseline": {
       "properties": {
@@ -220,7 +208,7 @@
           },
           "description": "The baseline values for each sensitivity."
         },
-        "metadata": {
+        "metadataValues": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/BaselineMetadata"
