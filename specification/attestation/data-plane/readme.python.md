@@ -14,12 +14,11 @@ python:
   package-name: azure-attestation
   package-version: 0.1.0
   clear-output-folder: true
-
 ```
-
 ``` yaml $(python) && $(python-mode) == 'update'
 python:
   no-namespace-folders: true
+  output-folder: $(python-sdks-folder)/attestation/azure-attestation
 ```
 
 ``` yaml $(python) && $(python-mode) == 'create'
