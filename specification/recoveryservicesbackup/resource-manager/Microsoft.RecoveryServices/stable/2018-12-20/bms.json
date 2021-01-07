@@ -18,7 +18,7 @@
     "application/json"
   ],
   "paths": {
-    "/subscriptions/{subscriptionId}/providers/Microsoft.RecoveryServices/locations/{azureRegion}/backupAadProperties/default": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.RecoveryServices/locations/{azureRegion}/backupAadProperties": {
       "get": {
         "tags": [
           "AadProperties"
@@ -414,6 +414,66 @@
         "x-ms-examples": {
           "Get Access Token for Crr": {
             "$ref": "./examples/AzureIaasVm/GetAccessToken_Get.json"
+          }
+        }
+      }
+    },
+    "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupUsageSummaries": {
+      "get": {
+        "tags": [
+          "BackupUsageSummaries"
+        ],
+        "description": "Fetches the backup management usage summaries of the vault.",
+        "operationId": "BackupUsageSummaries_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/VaultName"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "OData filter options.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$skipToken",
+            "in": "query",
+            "description": "skipToken Filter.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/BackupManagementUsageList"
+            }
+          }
+        },
+        "x-ms-odata": "#/definitions/BMSBackupSummariesQueryObject",
+        "x-ms-pageable": {
+          "nextLinkName": null
+        },
+        "x-ms-examples": {
+          "Get Protected Items Usages Summary": {
+            "$ref": "./examples/Common/BackupProtectedItem_UsageSummary_Get.json"
+          },
+          "Get Protected Containers Usages Summary": {
+            "$ref": "./examples/Common/BackupProtectionContainers_UsageSummary_Get.json"
           }
         }
       }
@@ -3134,6 +3194,78 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/JobResource"
+          }
+        }
+      }
+    },
+    "NameInfo": {
+      "description": "The name of usage.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Value of usage.",
+          "type": "string"
+        },
+        "localizedValue": {
+          "description": "Localized value of usage.",
+          "type": "string"
+        }
+      }
+    },
+    "BackupManagementUsage": {
+      "description": "Backup management usages of a vault.",
+      "type": "object",
+      "properties": {
+        "unit": {
+          "description": "Unit of the usage.",
+          "enum": [
+            "Count",
+            "Bytes",
+            "Seconds",
+            "Percent",
+            "CountPerSecond",
+            "BytesPerSecond"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "UsagesUnit",
+            "modelAsString": true
+          }
+        },
+        "quotaPeriod": {
+          "description": "Quota period of usage.",
+          "type": "string"
+        },
+        "nextResetTime": {
+          "format": "date-time",
+          "description": "Next reset time of usage.",
+          "type": "string"
+        },
+        "currentValue": {
+          "format": "int64",
+          "description": "Current value of usage.",
+          "type": "integer"
+        },
+        "limit": {
+          "format": "int64",
+          "description": "Limit of usage.",
+          "type": "integer"
+        },
+        "name": {
+          "$ref": "#/definitions/NameInfo",
+          "description": "Name of usage."
+        }
+      }
+    },
+    "BackupManagementUsageList": {
+      "description": "Backup management usage for vault.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The list of backup management usages for the given vault.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/BackupManagementUsage"
           }
         }
       }
