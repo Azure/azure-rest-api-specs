@@ -62,7 +62,7 @@ Please also specify `--python-sdks-folder=<path to the root directory of your az
 
 ``` yaml $(tag) == 'package-2020-09-01' && $(python) & !$(track2)
 python:
-  namespace: azure.mgmt.databoxedge.v2020_09_01_preview
+  namespace: azure.mgmt.databoxedge.v2020_09_01
   output-folder: $(python-sdks-folder)/databoxedge/azure-mgmt-databoxedge/azure/mgmt/databoxedge/v2020_09_01
 ```
 ``` yaml $(tag) == 'package-2020-09-01' && $(python) && $(track2)

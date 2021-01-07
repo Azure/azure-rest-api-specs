@@ -22,7 +22,7 @@
         "tags": [
           "CheckPrincipalAccess"
         ],
-        "operationId": "CheckPrincipalAccess",
+        "operationId": "RoleAssignments_CheckPrincipalAccess",
         "description": "Check if the given principalId has access to perform list of actions at a given scope.",
         "x-ms-examples": {
           "Check access": {
@@ -141,7 +141,7 @@
           "description": "List of actions.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/Action"
+            "$ref": "#/definitions/RequiredAction"
           }
         },
         "scope": {
@@ -150,7 +150,7 @@
         }
       }
     },
-    "Action": {
+    "RequiredAction": {
       "description": "Action Info",
       "type": "object",
       "required": [
@@ -170,9 +170,15 @@
     },
     "CheckPrincipalAccessResponse": {
       "description": "Check access response details",
-      "type": "array",
-      "items": {
-        "$ref": "#/definitions/CheckAccessDecision"
+      "type": "object",
+      "properties": {
+        "AccessDecisions": {
+          "description": "To check if the current user, group, or service principal has permission to read artifacts in the specified workspace.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CheckAccessDecision"
+          }
+        }
       }
     },
     "SubjectInfo": {
