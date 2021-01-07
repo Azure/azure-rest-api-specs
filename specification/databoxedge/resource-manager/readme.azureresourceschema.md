@@ -24,7 +24,7 @@ output-folder: $(azureresourceschema-folder)/schemas
 
 # all the input files in this apiVersion
 input-file:
-  - Microsoft.DataBoxEdge/preview/2020-09-01/databoxedge.json
+  - Microsoft.DataBoxEdge/stable/2020-09-01/databoxedge.json
 
 ```
 
