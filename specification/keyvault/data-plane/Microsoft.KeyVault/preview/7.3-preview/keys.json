@@ -1126,7 +1126,7 @@
         ],
         "operationId": "UpdateKeyPolicy",
         "summary": "Updates the policy for a key.",
-        "description": "Set specified members in the key policy. Leave others as null. This operation requires the keys/update permission.",
+        "description": "Set specified members in the key policy. Leave others as undefined. This operation requires the keys/update permission.",
         "parameters": [
           {
             "name": "key-name",
@@ -2139,7 +2139,17 @@
           ],
           "x-ms-enum": {
             "name": "ActionType",
-            "modelAsString": false
+            "modelAsString": false,
+            "values": [
+              {
+                "value": "Rotate",
+                "description": "Rotate the key based on the key policy."
+              },
+              {
+                "value": "Notify",
+                "description": "Trigger event grid events."
+              },
+            ]
           }
         }
       },
@@ -2149,23 +2159,31 @@
       "properties": {
         "rotationEnabled": {
           "type": "boolean",
+          "required": false,
+          "default": false,
           "description": "Determines whether key auto rotation is enabled."
         },
         "rotationTime": {
           "type": "string",
           "format": "string",
-          "description": "Time to attempt rotate."
+          "required": false,
+          "default": null,
+          "description": "Time to attempt rotate. Format examples: 90 days: 90D, 3 months: 3M, 48 hours: 48H, 1 year and 10 days: 1Y10D"
         },
         "created": {
           "type": "integer",
           "format": "unixtime",
           "readOnly": true,
+          "required": false,
+          "default": null,
           "description": "The key policy created time in UTC."
         },
         "updated": {
           "type": "integer",
           "format": "unixtime",
           "readOnly": true,
+          "required": false,
+          "default": null,
           "description": "The key policy's last updated time in UTC."
         }
       },
