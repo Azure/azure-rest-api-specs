@@ -1510,11 +1510,6 @@
         "type": {
           "type": "string",
           "description": "The type of the resource. Ex- Microsoft.Network/trafficManagerProfiles."
-        },
-        "systemData": {
-          "$ref": "#/definitions/SystemData",
-          "readOnly": true,
-          "description": "Metadata pertaining to creation and last modification of the resource"
         }
       },
       "x-ms-azure-resource": true
@@ -1556,6 +1551,43 @@
           "$ref": "#/definitions/Resource"
         }
       ]
+    },
+    "CloudError": {
+      "type": "object",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/CloudErrorBody",
+          "description": "The content of the error."
+        }
+      },
+      "description": "An error returned by the Azure Resource Manager",
+      "x-ms-external": true
+    },
+    "CloudErrorBody": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Error code"
+        },
+        "message": {
+          "type": "string",
+          "description": "Error message"
+        },
+        "target": {
+          "type": "string",
+          "description": "Error target"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CloudErrorBody"
+          },
+          "description": "Error details"
+        }
+      },
+      "description": "The content of an error returned by the Azure Resource Manager",
+      "x-ms-external": true
     },
     "systemData": {
       "description": "Metadata pertaining to creation and last modification of the resource.",
@@ -1673,48 +1705,6 @@
           "$ref": "#/definitions/ResourceRO"
         }
       ]
-    },
-    "CloudError": {
-      "type": "object",
-      "properties": {
-        "error": {
-          "$ref": "#/definitions/CloudErrorBody",
-          "description": "The content of the error."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/SystemData"
-        }
-      ],
-      "description": "An error returned by the Azure Resource Manager",
-      "x-ms-external": true
-    },
-    "CloudErrorBody": {
-      "type": "object",
-      "properties": {
-        "code": {
-          "type": "string",
-          "description": "Error code"
-        },
-        "message": {
-          "type": "string",
-          "description": "Error message"
-        },
-        "target": {
-          "type": "string",
-          "description": "Error target"
-        },
-        "details": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/CloudErrorBody"
-          },
-          "description": "Error details"
-        }
-      },
-      "description": "The content of an error returned by the Azure Resource Manager",
-      "x-ms-external": true
     }
   },
   "parameters": {
