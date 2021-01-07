@@ -4012,16 +4012,17 @@
           },
           {
             "in": "query",
-            "name": "computeType",
-            "description": "ComputeType to be filtered by.",
+            "name": "endpointComputeType",
+            "description": "EndpointComputeType to be filtered by.",
             "type": "string",
             "default": "Managed",
             "enum": [
               "Managed",
-              "AKS"
+              "AKS",
+              "AzureMLCompute"
             ],
             "x-ms-enum": {
-              "name": "ComputeType",
+              "name": "EndpointComputeType",
               "modelAsString": false
             }
           },
@@ -4692,106 +4693,6 @@
       },
       "additionalProperties": false
     },
-    "BatchDeployment": {
-      "description": "Batch inference settings per deployment.",
-      "required": [
-        "modelReference"
-      ],
-      "type": "object",
-      "properties": {
-        "scaleSettings": {
-          "$ref": "#/definitions/DeploymentScaleSettings"
-        },
-        "batchSettings": {
-          "$ref": "#/definitions/BatchDeploymentSettings"
-        },
-        "description": {
-          "description": "Description of the endpoint deployment.",
-          "type": "string"
-        },
-        "properties": {
-          "description": "Property dictionary. Properties can be added, but not removed or altered.",
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "modelReference": {
-          "$ref": "#/definitions/AssetReferenceBase"
-        },
-        "codeConfiguration": {
-          "$ref": "#/definitions/CodeConfiguration"
-        },
-        "environmentId": {
-          "description": "Environment specification for the endpoint deployment.",
-          "type": "string"
-        },
-        "provisioningState": {
-          "description": "Provisioning state for the endpoint deployment.",
-          "enum": [
-            "Creating",
-            "Deleting",
-            "Scaling",
-            "Updating",
-            "Succeeded",
-            "Failed"
-          ],
-          "type": "string",
-          "readOnly": true,
-          "x-ms-enum": {
-            "name": "DeploymentProvisioningState",
-            "modelAsString": false
-          }
-        }
-      },
-      "additionalProperties": false
-    },
-    "BatchDeploymentTrackedResource": {
-      "required": [
-        "properties"
-      ],
-      "type": "object",
-      "properties": {
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "location": {
-          "type": "string"
-        },
-        "kind": {
-          "type": "string"
-        },
-        "identity": {
-          "$ref": "#/definitions/ManagedIdentity"
-        },
-        "id": {
-          "description": "The resource URL of the entity (not URL encoded).",
-          "type": "string",
-          "readOnly": true
-        },
-        "name": {
-          "description": "The name of the resource entity.",
-          "type": "string",
-          "readOnly": true
-        },
-        "type": {
-          "description": "The resource provider and type.",
-          "type": "string",
-          "readOnly": true
-        },
-        "properties": {
-          "$ref": "#/definitions/BatchDeployment"
-        },
-        "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
-        }
-      },
-      "x-ms-azure-resource": true,
-      "additionalProperties": false
-    },
     "InnerErrorResponse": {
       "type": "object",
       "properties": {
@@ -4848,6 +4749,109 @@
       },
       "additionalProperties": false
     },
+    "BatchDeployment": {
+      "description": "Batch inference settings per deployment.",
+      "required": [
+        "modelReference"
+      ],
+      "type": "object",
+      "properties": {
+        "scaleSettings": {
+          "$ref": "#/definitions/DeploymentScaleSettings"
+        },
+        "batchSettings": {
+          "$ref": "#/definitions/BatchDeploymentSettings"
+        },
+        "description": {
+          "description": "Description of the endpoint deployment.",
+          "type": "string"
+        },
+        "properties": {
+          "description": "Property dictionary. Properties can be added, but not removed or altered.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "modelReference": {
+          "$ref": "#/definitions/AssetReferenceBase"
+        },
+        "codeConfiguration": {
+          "$ref": "#/definitions/CodeConfiguration"
+        },
+        "environmentId": {
+          "description": "Environment specification for the endpoint deployment.",
+          "type": "string"
+        },
+        "provisioningState": {
+          "description": "Provisioning state for the endpoint deployment.",
+          "enum": [
+            "Creating",
+            "Deleting",
+            "Scaling",
+            "Updating",
+            "Succeeded",
+            "Failed"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "DeploymentProvisioningState",
+            "modelAsString": false
+          }
+        },
+        "error": {
+          "$ref": "#/definitions/RootError"
+        }
+      },
+      "additionalProperties": false
+    },
+    "BatchDeploymentTrackedResource": {
+      "required": [
+        "properties"
+      ],
+      "type": "object",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "location": {
+          "type": "string"
+        },
+        "kind": {
+          "type": "string"
+        },
+        "identity": {
+          "$ref": "#/definitions/ManagedIdentity"
+        },
+        "id": {
+          "description": "The resource URL of the entity (not URL encoded).",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "The name of the resource entity.",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "The resource provider and type.",
+          "type": "string",
+          "readOnly": true
+        },
+        "properties": {
+          "$ref": "#/definitions/BatchDeployment"
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
+        }
+      },
+      "x-ms-azure-resource": true,
+      "additionalProperties": false
+    },
     "BatchDeploymentTrackedResourceArmPaginatedResult": {
       "description": "A paginated list of BatchDeployment entities.",
       "type": "object",
@@ -4867,23 +4871,24 @@
     },
     "ComputeConfiguration": {
       "required": [
-        "computeType"
+        "endpointComputeType"
       ],
       "type": "object",
       "properties": {
-        "computeType": {
+        "endpointComputeType": {
           "enum": [
             "Managed",
-            "AKS"
+            "AKS",
+            "AzureMLCompute"
           ],
           "type": "string",
           "x-ms-enum": {
-            "name": "ComputeType",
+            "name": "EndpointComputeType",
             "modelAsString": false
           }
         }
       },
-      "discriminator": "computeType",
+      "discriminator": "endpointComputeType",
       "additionalProperties": false
     },
     "AuthKeys": {
@@ -4902,11 +4907,20 @@
     },
     "BatchEndpoint": {
       "description": "Batch endpoint configuration",
-      "required": [
-        "authMode"
-      ],
       "type": "object",
       "properties": {
+        "authMode": {
+          "enum": [
+            "AMLToken",
+            "Key",
+            "AADToken"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "EndpointAuthModeType",
+            "modelAsString": false
+          }
+        },
         "description": {
           "description": "Description of the inference endpoint.",
           "type": "string"
@@ -4959,20 +4973,11 @@
           "type": "string",
           "readOnly": true
         },
-        "authMode": {
-          "description": "Inference endpoint authentication mode type",
-          "enum": [
-            "AMLToken",
-            "Key"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "EndpointAuthModeType",
-            "modelAsString": false
-          }
-        },
         "keys": {
           "$ref": "#/definitions/AuthKeys"
+        },
+        "error": {
+          "$ref": "#/definitions/RootError"
         }
       },
       "additionalProperties": false
@@ -5118,7 +5123,7 @@
       "additionalProperties": false
     },
     "CodeContainerResource": {
-      "description": "Azure Resource Manager resource Envelope",
+      "description": "Azure Resource Manager resource envelope.",
       "required": [
         "properties"
       ],
@@ -5218,7 +5223,7 @@
       "additionalProperties": false
     },
     "CodeVersionResource": {
-      "description": "Azure Resource Manager resource Envelope",
+      "description": "Azure Resource Manager resource envelope.",
       "required": [
         "properties"
       ],
@@ -5288,7 +5293,7 @@
       "additionalProperties": false
     },
     "DataContainerResource": {
-      "description": "Azure Resource Manager resource Envelope",
+      "description": "Azure Resource Manager resource envelope.",
       "required": [
         "properties"
       ],
@@ -5897,7 +5902,7 @@
       "additionalProperties": false
     },
     "DatastorePropertiesResource": {
-      "description": "Azure Resource Manager resource Envelope",
+      "description": "Azure Resource Manager resource envelope.",
       "required": [
         "properties"
       ],
@@ -5990,7 +5995,7 @@
       "additionalProperties": false
     },
     "DataVersionResource": {
-      "description": "Azure Resource Manager resource Envelope",
+      "description": "Azure Resource Manager resource envelope.",
       "required": [
         "properties"
       ],
@@ -6060,7 +6065,7 @@
       "additionalProperties": false
     },
     "EnvironmentContainerResource": {
-      "description": "Azure Resource Manager resource Envelope",
+      "description": "Azure Resource Manager resource envelope.",
       "required": [
         "properties"
       ],
@@ -6188,7 +6193,7 @@
       "additionalProperties": false
     },
     "EnvironmentSpecificationVersionResource": {
-      "description": "Azure Resource Manager resource Envelope",
+      "description": "Azure Resource Manager resource envelope.",
       "required": [
         "properties"
       ],
@@ -7056,7 +7061,7 @@
       "additionalProperties": false
     },
     "JobBaseResource": {
-      "description": "Azure Resource Manager resource Envelope",
+      "description": "Azure Resource Manager resource envelope.",
       "required": [
         "properties"
       ],
@@ -7105,7 +7110,7 @@
       "additionalProperties": false
     },
     "LabelingJobResource": {
-      "description": "Azure Resource Manager resource Envelope",
+      "description": "Azure Resource Manager resource envelope.",
       "required": [
         "properties"
       ],
@@ -7242,7 +7247,7 @@
       "additionalProperties": false
     },
     "ExportSummaryResource": {
-      "description": "Azure Resource Manager resource Envelope",
+      "description": "Azure Resource Manager resource envelope.",
       "required": [
         "properties"
       ],
@@ -7310,7 +7315,7 @@
       "additionalProperties": false
     },
     "ModelVersionResource": {
-      "description": "Azure Resource Manager resource Envelope",
+      "description": "Azure Resource Manager resource envelope.",
       "required": [
         "properties"
       ],
@@ -7373,7 +7378,7 @@
       "additionalProperties": false
     },
     "ModelContainerResource": {
-      "description": "Azure Resource Manager resource Envelope",
+      "description": "Azure Resource Manager resource envelope.",
       "required": [
         "properties"
       ],
@@ -7452,18 +7457,19 @@
     },
     "DeploymentConfigurationBase": {
       "required": [
-        "computeType"
+        "endpointComputeType"
       ],
       "type": "object",
       "properties": {
-        "computeType": {
+        "endpointComputeType": {
           "enum": [
             "Managed",
-            "AKS"
+            "AKS",
+            "AzureMLCompute"
           ],
           "type": "string",
           "x-ms-enum": {
-            "name": "ComputeType",
+            "name": "EndpointComputeType",
             "modelAsString": false
           }
         },
@@ -7489,7 +7495,7 @@
           "$ref": "machineLearningServices.json#/definitions/LivenessProbeRequirements"
         }
       },
-      "discriminator": "computeType",
+      "discriminator": "endpointComputeType",
       "additionalProperties": false
     },
     "OnlineDeploymentProperties": {
@@ -7545,6 +7551,9 @@
             "name": "DeploymentProvisioningState",
             "modelAsString": false
           }
+        },
+        "error": {
+          "$ref": "#/definitions/RootError"
         }
       },
       "additionalProperties": false
@@ -7720,7 +7729,8 @@
           "description": "Inference endpoint authentication mode type",
           "enum": [
             "AMLToken",
-            "Key"
+            "Key",
+            "AADToken"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -7730,6 +7740,9 @@
         },
         "keys": {
           "$ref": "#/definitions/AuthKeys"
+        },
+        "error": {
+          "$ref": "#/definitions/RootError"
         }
       },
       "additionalProperties": false
