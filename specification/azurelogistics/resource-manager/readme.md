@@ -38,6 +38,9 @@ These settings apply only when `--tag=package-2020-06-23-preview` is specified o
 input-file:
   - Microsoft.OpenLogisticsPlatform/preview/2020-06-23-preview/workspaces.json
   - Microsoft.OpenLogisticsPlatform/preview/2020-06-23-preview/operations.json
+  - Microsoft.OpenLogisticsPlatform/preview/2020-06-23-preview/shares.json
+  - Microsoft.OpenLogisticsPlatform/preview/2020-06-23-preview/shareSubscriptions.json
+  - Microsoft.OpenLogisticsPlatform/preview/2020-06-23-preview/shareInvites.json
 ```
 
 ---

@@ -1,0 +1,525 @@
+{
+  "x-generator": "NSwag v13.2.5.0 (NJsonSchema v10.1.7.0 (Newtonsoft.Json v12.0.0.0))",
+  "swagger": "2.0",
+  "info": {
+    "title": "OSCPControlPlaneServiceAPI",
+    "description": "REST APIs for OSCP Control Plane Service",
+    "version": "2020-06-23-preview"
+  },
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OpenLogisticsPlatform/workspaces/{workspaceName}/shares/{shareName}": {
+      "get": {
+        "tags": [
+          "Share"
+        ],
+        "operationId": "Share_Get",
+        "x-ms-examples": {
+          "Share Get": {
+            "$ref": "./examples/Share_Get.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ShareNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+ 
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/Share"
+            }
+          },
+          "default": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/ShareErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Share"
+        ],
+        "operationId": "Share_Put",
+        "x-ms-examples": {
+          "Share Put": {
+            "$ref": "./examples/Share_Put.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ShareNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "share",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Share"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "x-nullable": false,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/Share"
+            }
+          },
+          "default": {
+            "x-nullable": false,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/ShareErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": false
+      },
+      "patch": {
+        "tags": [
+          "Share"
+        ],
+        "description": "Update share details.",
+        "operationId": "Share_Update",
+        "x-ms-examples": {
+          "Share Update": {
+            "$ref": "./examples/Share_Update.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ShareNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "share",
+            "description": "Update share details.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Share"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful.",
+            "schema": {
+              "$ref": "#/definitions/Share"
+            }
+          },
+          "default": {
+            "x-nullable": false,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/ShareErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Share"
+        ],
+        "operationId": "Share_Delete",
+        "x-ms-examples": {
+          "Share_Delete": {
+            "$ref": "./examples/Share_Delete.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ShareNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          },
+          "204": {
+            "description": ""
+          },
+          "default": {
+            "x-nullable": false,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/ShareErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OpenLogisticsPlatform/workspaces/{workspaceName}/shares/": {
+      "get": {
+        "tags": [
+          "Share"
+        ],
+        "operationId": "Share_List",
+        "x-ms-examples": {
+          "Share_List": {
+            "$ref": "./examples/Share_List.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "x-nullable": false,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/ShareList"
+            }
+          },
+          "204": {
+            "description": ""
+          },
+          "default": {
+            "x-nullable": false,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/ShareErrorResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ShareState": {
+      "type": "string",
+      "readOnly": true,
+      "description": "The state of the share",
+      "enum": [
+        "Active",
+        "RetryToCreateOrDelete"
+      ]
+    },
+    "AttributeMatchingScheme": {
+      "type": "string",
+      "description": "The attribute matching scheme of the share",
+      "enum": [
+        "ANYOFANY",
+        "ALLOFANY"
+      ]
+    },
+    "ShareResource": {
+      "description": "An Azure resource.",
+      "properties": {
+        "id": {
+          "description": "Azure resource Id.",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "Azure resource name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "Azure resource type.",
+          "type": "string",
+          "readOnly": true
+        },
+        "location": {
+          "description": "Location of the resource.",
+          "type": "string",
+          "readOnly": false,
+		   "x-ms-mutability": ["create", "read"]
+
+        },
+        "etag": {
+          "description": "The etag",
+          "type": "string",
+          "readOnly": false
+        },
+        "tags": {
+          "description": "resource tags.",
+          "type": "object",
+          "readOnly": false,
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+		"systemData": {
+          "$ref": "#/definitions/SystemData",
+          "readOnly": true
+        }
+
+      },
+      "x-ms-azure-resource": true
+    },
+    "Share": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ShareResource"
+        }
+      ],
+      "properties": {
+	    
+        "properties": {
+          "type": "object",
+          "properties": {
+            "targetTenantId": {
+              "type": "string",
+              "readOnly": false,
+			  "x-ms-mutability": [
+                 "read",
+                 "create"
+              ]
+            },
+            "description": {
+              "type": "string",
+              "readOnly": false
+            },
+            "shareState": {
+              "$ref": "#/definitions/ShareState"
+            },
+            "shareId": {
+              "type": "string",
+              "readOnly": true
+            },
+            "accessAssignments": {
+              "type": "array",
+              "description": "Gets or sets the accessAssignments",
+              "items": {
+                "$ref": "#/definitions/AccessAssignment"
+              }
+            }
+          }
+        }
+      }
+    },
+	 "SystemData": {
+      "description": "Read only system data",
+      "type": "object",
+      "properties": {
+
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp of resource creation (UTC)"
+        }
+      }
+    },
+    "AccessAssignment": {
+      "type": "object",
+      "properties": {
+        "actionIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "attributeConditions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AttributeCondition"
+          }
+        }
+      }
+    },
+    "AttributeCondition": {
+      "type": "object",
+      "required": [
+        "attributeMatchingScheme"
+      ],
+      "properties": {
+        "attributeName": {
+          "type": "string"
+        },
+        "values": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "attributeMatchingScheme": {
+          "$ref": "#/definitions/AttributeMatchingScheme"
+        }
+      }
+    },
+    "ShareList": {
+      "description": "The list of workspace resources.",
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "The link used to get the next page of workspace resources list.",
+          "type": "string"
+        },
+        "value": {
+          "description": "The list of workspaces.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Share"
+          }
+        }
+      }
+    },
+    "ShareErrorObject": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Service-defined error code. This code serves as a sub-status for the HTTP error code specified in the response."
+        },
+        "message": {
+          "type": "string",
+          "description": "Error message."
+        }
+      }
+    },
+    "ShareErrorResponse": {
+      "type": "object",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/ShareErrorObject"
+        }
+      }
+    },
+    "UnavailableReason": {
+      "type": "string",
+      "enum": [
+        "None",
+        "InvalidName",
+        "SubscriptionIsDisabled",
+        "NameInUse",
+        "NameInLockdown",
+        "TooManyNamespaceInCurrentSubscription"
+      ],
+      "x-ms-enum": {
+        "name": "UnavailableReason",
+        "modelAsString": false
+      },
+      "description": "Reason for unavailability of the service."
+    }
+  },
+  "parameters": {
+    "SubscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "An unique identifier for a Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
+    },
+    "ResourceGroupParameter": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "description": "The name of the resource group that contains the resource. You can obtain this value from the Azure Resource Manager API or the portal.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "WorkspaceNameParameter": {
+      "type": "string",
+      "name": "workspaceName",
+      "description": "The name of resource. This is the name of your Azure Supply Chain Service's workspace.",
+      "in": "path",
+      "required": true,
+      "x-ms-parameter-location": "method"
+    },
+    "ShareNameParameter": {
+      "type": "string",
+      "name": "shareName",
+      "description": "The name of resource. This is the name of your Azure Supply Chain Service's workspace.",
+      "in": "path",
+      "required": true,
+      "x-ms-parameter-location": "method"
+    },
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "Client Api Version."
+    }
+  }
+}
