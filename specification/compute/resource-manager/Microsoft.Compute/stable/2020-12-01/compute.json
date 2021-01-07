@@ -9342,8 +9342,8 @@
           "description": "Specifies additional base-64 encoded XML formatted information that can be included in the Unattend.xml file, which is used by Windows Setup."
         },
         "patchSettings": {
-          "$ref": "#/definitions/WindowsPatchSettings",
-          "description": "Specifies settings related to VM Guest Patching on Windows."
+          "$ref": "#/definitions/PatchSettings",
+          "description": "[Preview Feature] Specifies settings related to VM Guest Patching on Windows."
         },
         "winRM": {
           "$ref": "#/definitions/WinRMConfiguration",
@@ -9393,7 +9393,7 @@
         },
         "patchSettings": {
           "$ref": "#/definitions/LinuxPatchSettings",
-          "description": "Specifies settings related to VM Guest Patching on Linux."
+          "description": "[Preview Feature] Specifies settings related to VM Guest Patching on Linux."
         }
       },
       "description": "Specifies the Linux operating system settings on the virtual machine. <br><br>For a list of supported Linux distributions, see [Linux on Azure-Endorsed Distributions](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-linux-endorsed-distros?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json) <br><br> For running non-endorsed distributions, see [Information for Non-Endorsed Distributions](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-linux-create-upload-generic?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json)."
@@ -9840,7 +9840,7 @@
         },
         "patchStatus": {
           "$ref": "#/definitions/VirtualMachinePatchStatus",
-          "description": "The status of virtual machine patch operations."
+          "description": "[Preview Feature] The status of virtual machine patch operations."
         }
       },
       "description": "The instance view of a virtual machine."
@@ -12588,7 +12588,7 @@
         "action"
       ]
     },
-    "WindowsPatchSettings": {
+    "PatchSettings": {
       "properties": {
         "patchMode": {
           "type": "string",
