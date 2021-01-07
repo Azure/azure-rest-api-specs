@@ -9,15 +9,12 @@
         "PatchKey": "PatchKeyUpdated"
       },
       "identity": {
-        "type": "UserAssigned",
-        "userAssignedIdentities": {
-          "/subscriptions/85bf5e8c-3084-4f42-add2-746ebb7e97b2/resourcegroups/defaultrg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/examplemsi": {}
-        }
+        "type": "SystemAssigned"
       },
       "properties": {
         "encryption": {
-          "keyVaultProperties": {
-            "keyUri": "https://cmk2xkv.vault.azure.net/keys/Key1/0767b348bb1a4c07baa6c4ec0055d2b3"
+          "kekIdentity": {
+            "useSystemAssignedIdentity": true
           }
         }
       }
@@ -48,8 +45,7 @@
               "keyUri": "https://cmk2xkv.vault.azure.net/keys/Key1/0767b348bb1a4c07baa6c4ec0055d2b3"
             },
             "kekIdentity": {
-              "type": "UserAssigned",
-              "userAssignedIdentity": "/subscriptions/85bf5e8c-3084-4f42-add2-746ebb7e97b2/resourcegroups/defaultrg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/examplemsi"
+              "useSystemAssignedIdentity": true
             },
             "infrastructureEncryption": "Enabled"
           }

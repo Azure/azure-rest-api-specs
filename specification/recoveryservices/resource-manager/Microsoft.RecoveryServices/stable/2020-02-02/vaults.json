@@ -48,6 +48,12 @@
             "schema": {
               "$ref": "#/definitions/PrivateLinkResources"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
         "deprecated": false,
@@ -97,6 +103,12 @@
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/PrivateLinkResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -154,6 +166,12 @@
             "schema": {
               "$ref": "#/definitions/CheckNameAvailabilityResult"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
         "x-ms-examples": {
@@ -190,6 +208,12 @@
             "schema": {
               "$ref": "#/definitions/VaultList"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
         "deprecated": false,
@@ -224,6 +248,12 @@
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/ClientDiscoveryResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -265,6 +295,12 @@
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/VaultList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -309,6 +345,12 @@
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/Vault"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -366,14 +408,27 @@
             "schema": {
               "$ref": "#/definitions/Vault"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
         "deprecated": false,
         "x-ms-examples": {
-          "Create of Update Recovery Services vault": {
+          "Create or Update Recovery Services vault": {
             "$ref": "./examples/PUTVault.json"
+          },
+          "Create or Update Vault with User Assigned Identity": {
+            "$ref": "./examples/PUTVault_WithUserAssignedIdentity.json"
+          },
+          "Create or Update Vault with CustomerManagedKeys": {
+            "$ref": "./examples/PUTVault_WithCMK.json"
           }
-        }
+        },
+        "x-ms-long-running-operation": true
       },
       "delete": {
         "tags": [
@@ -401,6 +456,12 @@
         "responses": {
           "200": {
             "description": "OK"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
         "deprecated": false,
@@ -452,10 +513,13 @@
               "$ref": "#/definitions/Vault"
             }
           },
-          "201": {
-            "description": "Created",
+          "202": {
+            "description": "Accepted"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/Vault"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -463,8 +527,21 @@
         "x-ms-examples": {
           "Update Resource": {
             "$ref": "./examples/PATCHVault.json"
+          },
+          "Update Resource With User Assigned Identity": {
+            "$ref": "./examples/PATCHVault_WithUserAssignedIdentity.json"
+          },
+          "Update Resource With CustomerManagedKeys": {
+            "$ref": "./examples/PATCHVault_WithCMK.json"
+          },
+          "Update Resource With CustomerManagedKeys2": {
+            "$ref": "./examples/PatchVault_WithCMK2.json"
+          },
+          "Update Resource With CustomerManagedKeys3": {
+            "$ref": "./examples/PATCHVault_WithCMK3.json"
           }
-        }
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/extendedInformation/vaultExtendedInfo": {
@@ -496,6 +573,12 @@
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/VaultExtendedInfoResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -547,6 +630,12 @@
             "schema": {
               "$ref": "#/definitions/VaultExtendedInfoResource"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
         "deprecated": false,
@@ -597,12 +686,123 @@
             "schema": {
               "$ref": "#/definitions/VaultExtendedInfoResource"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
         "deprecated": false,
         "x-ms-examples": {
           "PATCH ExtendedInfo of Resource": {
             "$ref": "./examples/UpdateVaultExtendedInfo.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/operationStatus/{operationId}": {
+      "get": {
+        "tags": [
+          "Vaults"
+        ],
+        "description": "Gets the operation status for a resource.",
+        "operationId": "GetOperationStatus",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/VaultName"
+          },
+          {
+            "name": "operationId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/OperationResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Operation Status": {
+            "$ref": "./examples/GetOperationStatus.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/operationResults/{operationId}": {
+      "get": {
+        "tags": [
+          "Vaults"
+        ],
+        "description": "Gets the operation result for a resource.",
+        "operationId": "GetOperationResult",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/VaultName"
+          },
+          {
+            "name": "operationId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Vault"
+            }
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Operation Result": {
+            "$ref": "./examples/GetOperationResult.json"
           }
         }
       }
@@ -1044,6 +1244,30 @@
             "name": "VaultPrivateEndpointState",
             "modelAsString": true
           }
+        },
+        "encryption": {
+          "description": "Customer Managed Key details of the resource.",
+          "type": "object",
+          "properties": {
+            "keyVaultProperties": {
+              "$ref": "#/definitions/CmkKeyVaultProperties"
+            },
+            "kekIdentity": {
+              "$ref": "#/definitions/CmkKekIdentity"
+            },
+            "infrastructureEncryption": {
+              "description": "Enabling/Disabling the Double Encryption state",
+              "type": "string",
+              "enum": [
+                "Enabled",
+                "Disabled"
+              ],
+              "x-ms-enum": {
+                "name": "InfrastructureEncryptionState",
+                "modelAsString": true
+              }
+            }
+          }
         }
       }
     },
@@ -1066,15 +1290,40 @@
         },
         "type": {
           "type": "string",
-          "description": "The identity type.",
+          "description": "The type of managed identity used. The type 'SystemAssigned, UserAssigned' includes both an implicitly created identity and a set of user-assigned identities. The type 'None' will remove any identities.",
           "enum": [
             "SystemAssigned",
-            "None"
+            "None",
+            "UserAssigned",
+            "SystemAssigned, UserAssigned"
           ],
           "x-ms-enum": {
             "name": "ResourceIdentityType",
             "modelAsString": true
           }
+        },
+        "userAssignedIdentities": {
+          "description": "The list of user-assigned identities associated with the resource. The user-assigned identity dictionary keys will be ARM resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'.",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/UserIdentity"
+          }
+        }
+      }
+    },
+    "UserIdentity": {
+      "type": "object",
+      "description": "A resource identity that is managed by the user of the service.",
+      "properties": {
+        "principalId": {
+          "description": "The principal ID of the user-assigned identity.",
+          "type": "string",
+          "readOnly": true
+        },
+        "clientId": {
+          "description": "The client ID of the user-assigned identity.",
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -1234,6 +1483,123 @@
           "items": {
             "type": "string"
           }
+        }
+      }
+    },
+    "CmkKeyVaultProperties": {
+      "type": "object",
+      "description": "The properties of the Key Vault which hosts CMK",
+      "properties": {
+        "keyUri": {
+          "description": "The key uri of the Customer Managed Key",
+          "type": "string"
+        }
+      }
+    },
+    "CmkKekIdentity": {
+      "type": "object",
+      "description": "The details of the identity used for CMK",
+      "properties": {
+        "useSystemAssignedIdentity": {
+          "type": "boolean",
+          "description": "Indicate that system assigned identity should be used. Mutually exclusive with 'userAssignedIdentity' field"
+        },
+        "userAssignedIdentity": {
+          "type": "string",
+          "description": "The user assigned identity to be used to grant permissions in case the type of identity used is UserAssigned"
+        }
+      }
+    },
+    "OperationResource": {
+      "type": "object",
+      "description": "Operation Resource",
+      "properties": {
+        "endTime": {
+          "description": "End time of the operation",
+          "format": "date-time",
+          "type": "string"
+        },
+        "error": {
+          "$ref": "#/definitions/Error",
+          "description": "Required if status == failed or status == canceled. This is the OData v4 error format, used by the RPC and will go into the v2.2 Azure REST API guidelines."
+        },
+        "id": {
+          "description": "It should match what is used to GET the operation result",
+          "type": "string"
+        },
+        "name": {
+          "description": "It must match the last segment of the \"id\" field, and will typically be a GUID / system generated value",
+          "type": "string"
+        },
+        "status": {
+          "description": "The status of the operation. (InProgress/Success/Failed/Cancelled)",
+          "type": "string"
+        },
+        "startTime": {
+          "description": "Start time of the operation",
+          "format": "date-time",
+          "type": "string"
+        }
+      }
+    },
+    "CloudError": {
+      "description": "An error response from Azure Backup.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/Error"
+        }
+      },
+      "title": "CloudError",
+      "x-ms-external": true
+    },
+    "Error": {
+      "description": "The resource management error response.",
+      "properties": {
+        "additionalInfo": {
+          "description": "The error additional info.",
+          "items": {
+            "$ref": "#/definitions/ErrorAdditionalInfo"
+          },
+          "readOnly": true,
+          "type": "array"
+        },
+        "code": {
+          "description": "The error code.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "details": {
+          "description": "The error details.",
+          "items": {
+            "$ref": "#/definitions/Error"
+          },
+          "readOnly": true,
+          "type": "array"
+        },
+        "message": {
+          "description": "The error message.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "target": {
+          "description": "The error target.",
+          "readOnly": true,
+          "type": "string"
+        }
+      }
+    },
+    "ErrorAdditionalInfo": {
+      "description": "The resource management error additional info.",
+      "properties": {
+        "info": {
+          "description": "The additional info.",
+          "readOnly": true,
+          "type": "object"
+        },
+        "type": {
+          "description": "The additional info type.",
+          "readOnly": true,
+          "type": "string"
         }
       }
     }
