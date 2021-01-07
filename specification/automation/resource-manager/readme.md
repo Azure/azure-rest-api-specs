@@ -117,11 +117,11 @@ input-file:
 - Microsoft.Automation/preview/2017-05-15-preview/job.json
 ```
 
-### Tag: package-2018-01-preview
+### Tag: package-2018-01
 
-These settings apply only when `--tag=package-2018-01-preview` is specified on the command line.
+These settings apply only when `--tag=package-2018-01` is specified on the command line.
 
-``` yaml $(tag) == 'package-2018-01-preview'
+``` yaml $(tag) == 'package-2018-01'
 input-file:
 - Microsoft.Automation/stable/2018-01-15/dscNode.json
 - Microsoft.Automation/stable/2018-01-15/dscCompilationJob.json
@@ -151,11 +151,11 @@ input-file:
 - Microsoft.Automation/stable/2018-01-15/watcher.json
 ```
 
-### Tag: package-2018-06-preview
+### Tag: package-2018-06
 
-These settings apply only when `--tag=package-2018-06-preview` is specified on the command line.
+These settings apply only when `--tag=package-2018-06` is specified on the command line.
 
-``` yaml $(tag) == 'package-2018-06-preview'
+``` yaml $(tag) == 'package-2018-06'
 input-file:
 - Microsoft.Automation/stable/2018-06-30/runbook.json
 - Microsoft.Automation/stable/2018-06-30/python2package.json
