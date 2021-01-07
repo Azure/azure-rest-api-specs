@@ -3800,9 +3800,8 @@
           }
         },
         "systemData": {
-          "readOnly": true,
-          "description": "Addon type",
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
+          "$ref": "#/definitions/SystemData",
+          "readOnly": true
         }
       },
       "discriminator": "kind"
@@ -3874,9 +3873,8 @@
       ],
       "properties": {
         "systemData": {
-          "readOnly": true,
-          "description": "Alert generated in the resource",
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
+          "$ref": "#/definitions/SystemData",
+          "readOnly": true
         },
         "properties": {
           "$ref": "#/definitions/AlertProperties",
@@ -4203,9 +4201,8 @@
       ],
       "properties": {
         "systemData": {
-          "readOnly": true,
-          "description": "Bandwidth object related to ASE resource",
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
+          "$ref": "#/definitions/SystemData",
+          "readOnly": true
         },
         "properties": {
           "$ref": "#/definitions/BandwidthScheduleProperties",
@@ -4503,9 +4500,8 @@
       ],
       "properties": {
         "systemData": {
-          "readOnly": true,
-          "description": "Container in DataBoxEdge Resource",
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
+          "$ref": "#/definitions/SystemData",
+          "readOnly": true
         },
         "properties": {
           "$ref": "#/definitions/ContainerProperties",
@@ -4637,9 +4633,8 @@
           }
         },
         "systemData": {
-          "readOnly": true,
-          "description": "DataBoxEdge Resource",
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
+          "$ref": "#/definitions/SystemData",
+          "readOnly": true
         },
         "properties": {
           "$ref": "#/definitions/DataBoxEdgeDeviceProperties",
@@ -7266,9 +7261,8 @@
           }
         },
         "systemData": {
-          "readOnly": true,
-          "description": "Role configured on ASE resource",
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
+          "$ref": "#/definitions/SystemData",
+          "readOnly": true
         }
       },
       "discriminator": "kind"
@@ -7365,9 +7359,8 @@
       ],
       "properties": {
         "systemData": {
-          "readOnly": true,
-          "description": "Share on ASE device",
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
+          "$ref": "#/definitions/SystemData",
+          "readOnly": true
         },
         "properties": {
           "$ref": "#/definitions/ShareProperties",
@@ -7725,9 +7718,8 @@
       ],
       "properties": {
         "systemData": {
-          "readOnly": true,
-          "description": "StorageAccount object on ASE device",
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
+          "$ref": "#/definitions/SystemData",
+          "readOnly": true
         },
         "properties": {
           "$ref": "#/definitions/StorageAccountProperties",
@@ -7749,9 +7741,8 @@
       ],
       "properties": {
         "systemData": {
-          "readOnly": true,
-          "description": "StorageAccountCredential object",
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
+          "$ref": "#/definitions/SystemData",
+          "readOnly": true
         },
         "properties": {
           "$ref": "#/definitions/StorageAccountCredentialProperties",
@@ -7994,9 +7985,8 @@
       ],
       "properties": {
         "systemData": {
-          "readOnly": true,
-          "description": "Trigger in DataBoxEdge Resource",
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
+          "$ref": "#/definitions/SystemData",
+          "readOnly": true
         },
         "kind": {
           "description": "Trigger Kind.",
@@ -8324,9 +8314,8 @@
       ],
       "properties": {
         "systemData": {
-          "readOnly": true,
-          "description": "User in DataBoxEdge Resource",
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
+          "$ref": "#/definitions/SystemData",
+          "readOnly": true
         },
         "properties": {
           "$ref": "#/definitions/UserProperties",
@@ -8411,6 +8400,38 @@
             "name": "UserType",
             "modelAsString": true
           }
+        }
+      }
+    },
+    "SystemData": {
+      "description": "Read only system data",
+      "type": "object",
+      "properties": {
+        "createdBy": {
+          "type": "string",
+          "description": "An identifier for the identity that created the resource"
+        },
+        "createdByType": {
+          "$ref": "#/definitions/IdentityType",
+          "description": "The type of identity that created the resource"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp of resource creation (UTC)"
+        },
+        "lastModifiedBy": {
+          "type": "string",
+          "description": "An identifier for the identity that last modified the resource"
+        },
+        "lastModifiedByType": {
+          "$ref": "#/definitions/IdentityType",
+          "description": "The type of identity that last modified the resource"
+        },
+        "lastModifiedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp of resource last modification (UTC)"
         }
       }
     }
