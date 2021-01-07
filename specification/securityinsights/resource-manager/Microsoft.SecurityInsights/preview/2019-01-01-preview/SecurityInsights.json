@@ -3838,7 +3838,7 @@
         "tags": [
           "Watchlists"
         ],
-        "description": "Creates a watchlist and its watchlist items (bulk creation, e.g. through text/csv content type). To create a Watchlist and its Items, we should call this endpoint twice : the first call will create am empty Watchlist, and the second one will create its Items.",
+        "description": "Creates a watchlist and its watchlist items (bulk creation, e.g. through text/csv content type). To create a Watchlist and its Items, we should call this endpoint twice : the first call will create an empty Watchlist, and the second one will create its Items.",
         "operationId": "Watchlists_Create",
         "parameters": [
           {
@@ -3874,6 +3874,115 @@
             "description": "Created",
             "schema": {
               "$ref": "#/definitions/Watchlist"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/watchlists/{watchlistAlias}/watchlistItems/{watchlistItemId}": {
+      "delete": {
+        "x-ms-examples": {
+          "Delete a watchlist Item.": {
+            "$ref": "./examples/watchlists/DeleteWatchlistItem.json"
+          }
+        },
+        "tags": [
+          "WatchlistItems"
+        ],
+        "description": "Delete a watchlist item.",
+        "operationId": "WatchlistItem_Delete",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/OperationalInsightsResourceProvider"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/WatchlistAlias"
+          },
+          {
+            "$ref": "#/parameters/WatchlistItemId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "put": {
+        "x-ms-examples": {
+          "Creates or updates a watchlist item.": {
+            "$ref": "./examples/watchlists/CreateWatchlistItem.json"
+          }
+        },
+        "tags": [
+          "WatchlistItems"
+        ],
+        "description": "Creates or updates a watchlist item.",
+        "operationId": "WatchlistItem_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/OperationalInsightsResourceProvider"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/WatchlistAlias"
+          },
+          {
+            "$ref": "#/parameters/WatchlistItemId"
+          },
+          {
+            "$ref": "#/parameters/WatchlistItem"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/WatchlistItem"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/WatchlistItem"
             }
           },
           "default": {
@@ -10468,6 +10577,75 @@
       ],
       "type": "object"
     },
+    "WatchlistItem": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResourceWithEtag"
+        }
+      ],
+      "description": "Represents a Watchlist item in Azure Security Insights.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/WatchlistItemProperties",
+          "description": "Watchlist Item properties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object"
+    },
+    "WatchlistItemProperties": {
+      "description": "Describes watchlist item properties",
+      "properties": {
+        "watchlistItemType": {
+          "description": "The type of the watchlist item",
+          "type": "string"
+        },
+        "watchlistItemId": {
+          "description": "The id (a Guid) of the watchlist item",
+          "type": "string"
+        },
+        "tenantId": {
+          "description": "The tenantId to which the watchlist item belongs to",
+          "type": "string"
+        },
+        "isDeleted": {
+          "description": "A flag that indicates if the watchlist item is deleted or not",
+          "type": "boolean"
+        },
+        "created": {
+          "description": "The time the watchlist item was created",
+          "format": "date-time",
+          "type": "string"
+        },
+        "updated": {
+          "description": "The last time the watchlist item was updated",
+          "format": "date-time",
+          "type": "string"
+        },
+        "createdBy": {
+          "$ref": "#/definitions/UserInfo",
+          "description": "Describes a user that created the watchlist item",
+          "type": "object"
+        },
+        "updatedBy": {
+          "$ref": "#/definitions/UserInfo",
+          "description": "Describes a user that updated the watchlist item",
+          "type": "object"
+        },
+        "itemsKeyValue": {
+          "description": "key-value pairs for a watchlist item",
+          "type": "object"
+        },
+        "entityMapping": {
+          "description": "key-value pairs for a watchlist item entity mapping",
+          "type": "object"
+        }
+      },
+      "required": [
+        "itemsKeyValue"
+      ],
+      "type": "object"
+    },
     "ThreatIntelligenceInformationList": {
       "description": "List of all the threat intelligence information objects.",
       "properties": {
@@ -11574,6 +11752,24 @@
       "schema": {
         "$ref": "#/definitions/Watchlist"
       },
+      "x-ms-parameter-location": "method"
+    },
+    "WatchlistItem": {
+      "description": "The watchlist item",
+      "in": "body",
+      "name": "watchlistItem",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/WatchlistItem"
+      },
+      "x-ms-parameter-location": "method"
+    },
+    "WatchlistItemId": {
+      "description": "Watchlist Item Id (GUID)",
+      "in": "path",
+      "name": "watchlistItemId",
+      "required": true,
+      "type": "string",
       "x-ms-parameter-location": "method"
     },
     "ThreatIntelligenceName": {
