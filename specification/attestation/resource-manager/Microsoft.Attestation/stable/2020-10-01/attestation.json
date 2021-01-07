@@ -630,6 +630,15 @@
           "description": "List of private endpoint connections associated with the attestation provider."
         }
       }
+    },
+    "PrivateEndpointConnectionProperties": {
+      "properties": {
+        "provisioningState": {
+          "$ref": "../../../../../common-types/resource-management/v1/privatelinks.json#/definitions/PrivateEndpointConnectionProvisioningState",
+          "description": "Provisioning state of the private endpoint connection."
+        }
+      },
+      "description": "Properties of the private endpoint connection resource."
     }
   },
   "parameters": {
@@ -639,6 +648,14 @@
       "required": true,
       "type": "string",
       "description": "Client API version. Current version is 2020-10-01"
+    },
+    "PrivateEndpointConnectionName": {
+      "name": "privateEndpointConnectionName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Name of the private endpoint connection associated with the attestation providers.",
+      "x-ms-parameter-location": "method"
     },
     "ProviderName": {
       "name": "providerName",
