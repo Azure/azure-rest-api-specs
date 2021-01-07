@@ -1682,6 +1682,11 @@
         "description": "The content of the error."
         }
       },
+      "allOf": [
+        {
+          "$ref": "#/definitions/SystemData"
+        }
+      ],
       "description": "An error returned by the Azure Resource Manager",
       "x-ms-external": true
     },
@@ -1704,11 +1709,6 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/CloudErrorBody"
-          },
-          "systemData": {
-            "$ref": "#/definitions/SystemData",
-            "readOnly": true,
-            "description": "Metadata pertaining to creation and last modification of the resource"
           },
           "description": "Error details"
         }
