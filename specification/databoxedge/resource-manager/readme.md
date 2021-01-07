@@ -33,7 +33,7 @@ tag: package-2019-08
 
 These settings apply only when `--tag=package-2020-09-01` is specified on the command line.
 
-``` yaml $(tag) == 'package-2019-09-01'
+``` yaml $(tag) == 'package-2020-09-01'
 input-file:
 - Microsoft.DataBoxEdge/stable/2020-09-01/databoxedge.json
 ```
