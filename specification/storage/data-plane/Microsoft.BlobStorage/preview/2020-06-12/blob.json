@@ -1368,6 +1368,92 @@
         }
       ]
     },
+    "/{containerName}?restype=container&comp=batch": {
+      "post": {
+        "tags": [
+          "container"
+        ],
+        "operationId": "Container_SubmitBatch",
+        "description": "The Batch operation allows multiple API calls to be embedded into a single HTTP request.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Body"
+          },
+          {
+            "$ref": "#/parameters/ContentLength"
+          },
+          {
+            "$ref": "#/parameters/MultipartContentType"
+          },
+          {
+            "$ref": "#/parameters/Timeout"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ClientRequestId"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Success.",
+            "headers": {
+              "Content-Type": {
+                "type": "string",
+                "description": "The media type of the body of the response. For batch requests, this is multipart/mixed; boundary=batchresponse_GUID"
+              },
+              "x-ms-request-id": {
+                "x-ms-client-name": "RequestId",
+                "type": "string",
+                "description": "This header uniquely identifies the request that was made and can be used for troubleshooting the request."
+              },
+              "x-ms-version": {
+                "x-ms-client-name": "Version",
+                "type": "string",
+                "description": "Indicates the version of the Blob service used to execute the request. This header is returned for requests made against version 2009-09-19 and above."
+              }
+            },
+            "schema": {
+              "type": "object",
+              "format": "file"
+            }
+          },
+          "default": {
+            "description": "Failure",
+            "headers": {
+              "x-ms-error-code": {
+                "x-ms-client-name": "ErrorCode",
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/StorageError"
+            }
+          }
+        }
+      },
+      "parameters": [
+        {
+          "name": "restype",
+          "in": "query",
+          "required": true,
+          "type": "string",
+          "enum": [
+            "container"
+          ]
+        },
+        {
+          "name": "comp",
+          "in": "query",
+          "required": true,
+          "type": "string",
+          "enum": [
+            "batch"
+          ]
+        }
+      ]
+    },
     "/{containerName}?comp=lease&restype=container&acquire": {
       "put": {
         "tags": [
