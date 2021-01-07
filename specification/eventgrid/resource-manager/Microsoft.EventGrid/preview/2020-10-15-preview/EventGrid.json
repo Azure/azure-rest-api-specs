@@ -6374,6 +6374,125 @@
       },
       "x-ms-discriminator-value": "StringContains"
     },
+    "NumberInRangeAdvancedFilter": {
+      "description": "NumberInRange Advanced Filter.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AdvancedFilter"
+        }
+      ],
+      "properties": {
+        "values": {
+          "description": "The set of filter values.",
+          "type": "array",
+          "items": {
+            "format": "double",
+            "type": "number"
+          }
+        }
+      },
+      "x-ms-discriminator-value": "NumberInRange"
+    },
+    "NumberNotInRangeAdvancedFilter": {
+      "description": "NumberNotInRange Advanced Filter.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AdvancedFilter"
+        }
+      ],
+      "properties": {
+        "values": {
+          "description": "The set of filter values.",
+          "type": "array",
+          "items": {
+            "format": "double",
+            "type": "number"
+          }
+        }
+      },
+      "x-ms-discriminator-value": "NumberNotInRange"
+    },
+    "StringNotBeginsWithAdvancedFilter": {
+      "description": "StringNotBeginsWith Advanced Filter.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AdvancedFilter"
+        }
+      ],
+      "properties": {
+        "values": {
+          "description": "The set of filter values.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "x-ms-discriminator-value": "StringNotBeginsWith"
+    },
+    "StringNotEndsWithAdvancedFilter": {
+      "description": "StringNotEndsWith Advanced Filter.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AdvancedFilter"
+        }
+      ],
+      "properties": {
+        "values": {
+          "description": "The set of filter values.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "x-ms-discriminator-value": "StringNotEndsWith"
+    },
+    "StringNotContainsAdvancedFilter": {
+      "description": "StringNotContains Advanced Filter.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AdvancedFilter"
+        }
+      ],
+      "properties": {
+        "values": {
+          "description": "The set of filter values.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "x-ms-discriminator-value": "StringNotContains"
+    },
+    "IsNullAdvancedFilter": {
+      "description": "BoolEquals Advanced Filter.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AdvancedFilter"
+        }
+      ],
+      "properties": {},
+      "x-ms-discriminator-value": "IsNull"
+    },
+    "IsNotNullAdvancedFilter": {
+      "description": "IsNotNull Advanced Filter.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AdvancedFilter"
+        }
+      ],
+      "properties": {},
+      "x-ms-discriminator-value": "IsNotNull"
+    },
     "AdvancedFilter": {
       "description": "This is the base type that represents an advanced filter. To configure an advanced filter, do not directly instantiate an object of this class. Instead, instantiate an object of a derived class such as BoolEqualsAdvancedFilter, NumberInAdvancedFilter, StringEqualsAdvancedFilter etc. depending on the type of the key based on which you want to filter.",
       "required": [
@@ -6395,7 +6514,14 @@
             "StringNotIn",
             "StringBeginsWith",
             "StringEndsWith",
-            "StringContains"
+            "StringContains",
+            "NumberInRange",
+            "NumberNotInRange",
+            "StringNotBeginsWith",
+            "StringNotEndsWith",
+            "StringNotContains",
+            "IsNull",
+            "IsNotNull"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -6858,6 +6984,11 @@
         "queueName": {
           "description": "The name of the Storage queue under a storage account that is the destination of an event subscription.",
           "type": "string"
+        },
+        "queueMessageTimeToLiveInSeconds": {
+          "format": "int64",
+          "description": "Storage queue message time to live in seconds.",
+          "type": "integer"
         }
       }
     },
