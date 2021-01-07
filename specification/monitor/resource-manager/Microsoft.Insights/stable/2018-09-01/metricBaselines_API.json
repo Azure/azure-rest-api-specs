@@ -5,7 +5,7 @@
     "x-ms-code-generation-settings": {
       "name": "MonitorManagementClient"
     },
-    "version": "2019-03-01"
+    "version": "2018-09-01"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -142,12 +142,12 @@
             "$ref": "#/definitions/SingleMetricBaseline"
           },
           "description": "The baseline for each time series that was queried."
-        },
-        "required": [
-          "timespan",
-          "interval"
-        ]
+        }
       },
+      "required": [
+        "timespan",
+        "interval"
+      ],
       "description": "A list of metric baselines."
     },
     "SingleMetricBaseline": {
@@ -175,7 +175,7 @@
       "required": [
         "id",
         "type",
-        "name",
+        "metricName",
         "baselines"
       ],
       "description": "The baseline results of a single metric."
