@@ -2804,7 +2804,7 @@
             "in": "query",
             "required": false,
             "type": "boolean",
-            "description": "Optional parameter to force delete virtual machines."
+            "description": "Optional parameter to force delete virtual machines.(Feature in Preview)"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -2824,7 +2824,12 @@
             "description": "No Content"
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Force delete a VM": {
+            "$ref": "./examples/ForceDeleteVirtualMachine.json"
+          }
+        }
       },
       "get": {
         "tags": [
@@ -3755,6 +3760,9 @@
           },
           "Create a scale set with Host Encryption using encryptionAtHost property.": {
             "$ref": "./examples/CreateAScaleSetWithEncryptionAtHost.json"
+          },
+          "Create a scale set with Fpga Network Interfaces.": {
+            "$ref": "./examples/CreateAScaleSetFromWithFpgaNetworkInterface.json"
           }
         }
       },
@@ -6763,7 +6771,7 @@
         },
         "supportAutomaticPlacement": {
           "type": "boolean",
-          "description": "Specifies whether virtual machines or virtual machine scale sets can be placed automatically on the dedicated host group. Automatic placement means resources are allocated on dedicated hosts, that are chosen by Azure, under the dedicated host group. The value is defaulted to 'true' when not provided. <br><br>Minimum api-version: 2020-06-01."
+          "description": "Specifies whether virtual machines or virtual machine scale sets can be placed automatically on the dedicated host group. Automatic placement means resources are allocated on dedicated hosts, that are chosen by Azure, under the dedicated host group. The value is defaulted to 'false' when not provided. <br><br>Minimum api-version: 2020-06-01."
         }
       },
       "required": [
@@ -7837,7 +7845,7 @@
       "properties": {
         "vmSize": {
           "type": "string",
-          "description": "Specifies the size of the virtual machine. For more information about virtual machine sizes, see [Sizes for virtual machines](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-sizes?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json). <br><br> The available VM sizes depend on region and availability set. For a list of available sizes use these APIs:  <br><br> [List all available virtual machine sizes in an availability set](https://docs.microsoft.com/rest/api/compute/availabilitysets/listavailablesizes) <br><br> [List all available virtual machine sizes in a region](https://docs.microsoft.com/rest/api/compute/virtualmachinesizes/list) <br><br> [List all available virtual machine sizes for resizing](https://docs.microsoft.com/rest/api/compute/virtualmachines/listavailablesizes)",
+          "description": "Specifies the size of the virtual machine. For more information about virtual machine sizes, see [Sizes for virtual machines](https://docs.microsoft.com/en-us/azure/virtual-machines/sizes). <br><br> The available VM sizes depend on region and availability set. For a list of available sizes use these APIs:  <br><br> [List all available virtual machine sizes in an availability set](https://docs.microsoft.com/rest/api/compute/availabilitysets/listavailablesizes) <br><br> [List all available virtual machine sizes in a region]( https://docs.microsoft.com/en-us/rest/api/compute/resourceskus/list) <br><br> [List all available virtual machine sizes for resizing](https://docs.microsoft.com/rest/api/compute/virtualmachines/listavailablesizes). <br><br> This list of sizes is no longer updated and the **VirtualMachineSizeTypes** string constants will be removed from the subsequent REST API specification. Use [List all available virtual machine sizes in a region]( https://docs.microsoft.com/en-us/rest/api/compute/resourceskus/list) to get the latest sizes.",
           "enum": [
             "Basic_A0",
             "Basic_A1",
@@ -9921,6 +9929,10 @@
           "type": "boolean",
           "description": "Specifies whether the network interface is accelerated networking-enabled."
         },
+        "enableFpga": {
+          "type": "boolean",
+          "description": "Specifies whether the network interface is FPGA networking-enabled."
+        },
         "networkSecurityGroup": {
           "$ref": "#/definitions/SubResource",
           "description": "The network security group."
@@ -9955,6 +9967,10 @@
         "enableAcceleratedNetworking": {
           "type": "boolean",
           "description": "Specifies whether the network interface is accelerated networking-enabled."
+        },
+        "enableFpga": {
+          "type": "boolean",
+          "description": "Specifies whether the network interface is FPGA networking-enabled."
         },
         "networkSecurityGroup": {
           "$ref": "#/definitions/SubResource",
@@ -11547,6 +11563,14 @@
         "groupByResourceName": {
           "type": "boolean",
           "description": "Group query result by Resource Name."
+        },
+        "groupByClientApplicationId": {
+          "type": "boolean",
+          "description": "Group query result by Client Application ID."
+        },
+        "groupByUserAgent": {
+          "type": "boolean",
+          "description": "Group query result by User Agent."
         }
       },
       "required": [

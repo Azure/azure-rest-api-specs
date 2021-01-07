@@ -20,7 +20,6 @@
     reviewers:
       - anuchandy
       - jhendrixMSFT
-      - lmazuel
       - tjprescott
       
 
@@ -38,15 +37,28 @@
       - kairu-ms
 
 - rule:
-    paths: "specification/@(resources|powerplatform)/**"
+    paths: "specification/@(resources|powerplatform|appplatform)/**"
     reviewers:
       - raych1
+
+- rule:
+    paths: "specification/sql/**"
+    reviewers:
+      - akning-ms
       
+- rule:
+    paths: "specification/signalr/**"
+    reviewers:
+      - leni-msft
+      
+- rule:
+    paths: "specification/eventhub/**"
+    reviewers:
+      - ruowan
 - rule:
     paths: "specification/compute/**"
     reviewers:
       - ArcturusZhang
-      - fengzhou-msft
       - yungezz
 
 - rule:
@@ -57,7 +69,7 @@
 
 - rule:
     paths:
-      - "specification/@(azureactivedirectory|appplatform)/**"
+      - "specification/azureactivedirectory/**"
     reviewers:
       - njuCZ
 
@@ -85,7 +97,6 @@
     paths:
       - "specification/storage/**"
     reviewers:
-      - qianwens
       - Juliehzl
 
 
@@ -95,7 +106,6 @@
       - allenjzhang
 - rule:
     paths:
-      - "specification/@(keyvault|notificationhubs)/**"
       - "specification/@(databricks|containerregistry)/**"
     reviewers:
       - fengzhou-msft
@@ -105,7 +115,6 @@
       - "specification/@(containerservice|containerinstance)/**"
     reviewers:
       - PhoenixHe-msft
-      - fengzhou-msft
       - yungezz
 
 - rule:
@@ -126,6 +135,18 @@
       - "specification/web/**"
     reviewers:
       - weidongxu-microsoft
+      
+- rule:
+    paths:
+      - "specification/testbase/**"
+    reviewers:
+      - PhoenixHe-msft
+      
+- rule:
+    paths:
+      - "specification/servicelinker/**"
+    reviewers:
+      - PhoenixHe-msft
 
 - rule:
     paths:
@@ -136,33 +157,23 @@
 
 - rule:
     paths:
-      - "**/package.json"
-      - ".github/**"
-      - "**/azure-pipelines.yml"
-      - ".azure-pipelines/**"
-      - ".azure-pipelines-preproduction/**"
-    reviewers:
-      - akning-ms
-      - PhoenixHe-msft
-      
-- rule:	
-    paths:	
       - "documentation/**"	
-    reviewers:	
-      - josefree	
-      - akning-ms	
+    reviewers:
+      - josefree
+      - akning-ms
 
-- rule:	
-    paths:	
+- rule:
+    paths:
       - "**/package.json"	
       - ".github/**"	
       - "**/azure-pipelines.yml"	
       - ".azure-pipelines/**"	
       - ".azure-pipelines-preproduction/**"	
-    reviewers:	
-      - akning-ms	
-      - PhoenixHe-msft	
+    reviewers:
+      - akning-ms
+      - PhoenixHe-msft
       - raych1
+      - zhenglaizhang
 
 - rule:
     # manager-plane PR
@@ -185,3 +196,5 @@
       - qianwens
       - ruowan
       - jianyexi
+      - zhenglaizhang
+      - chunyu3

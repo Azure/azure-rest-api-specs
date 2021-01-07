@@ -462,6 +462,9 @@
               "$ref": "#/definitions/TagsResult"
             }
           },
+          "204": {
+            "description": "An empty response is sent when there is no information available within the selected scope."
+          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
@@ -3128,6 +3131,7 @@
         "lookBackPeriod": {
           "description": "Number of days of usage to look back used for computing the recommendation.",
           "type": "integer",
+          "format": "int32",
           "readOnly": true
         },
         "recommendedQuantity": {
@@ -3263,7 +3267,7 @@
         },
         "instanceFlexibilityRatio": {
           "description": "The instance Flexibility Ratio.",
-          "type": "integer",
+          "type": "number",
           "readOnly": true
         },
         "instanceFlexibilityGroup": {
@@ -3382,7 +3386,7 @@
         },
         "instanceFlexibilityRatio": {
           "description": "The instance Flexibility Ratio.",
-          "type": "integer",
+          "type": "number",
           "readOnly": true
         },
         "instanceFlexibilityGroup": {
@@ -3787,6 +3791,16 @@
           "items": {
             "$ref": "#/definitions/Tag"
           }
+        },
+        "nextLink": {
+          "description": "The link (url) to the next page of results.",
+          "type": "string",
+          "readOnly": true
+        },
+        "previousLink": {
+          "description": "The link (url) to the previous page of results.",
+          "type": "string",
+          "readOnly": true
         }
       }
     },
