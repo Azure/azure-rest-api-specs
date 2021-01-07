@@ -6115,13 +6115,13 @@
             "$ref": "#/definitions/CorsPolicy"
           }
         },
-        "allowTrustedServiceNetworkBypass": {
-          "description": "Flag to indicate whether to enable trusted service network bypass for synapse link.",
-          "type": "boolean"
+        "networkAclBypass": {
+          "description": "Indicates what services are allowed to bypass firewall checks.",
+          "$ref": "#/definitions/NetworkAclBypass"
         },
-        "trustedServiceResourceIds": {
+        "networkAclBypassResourceIds": {
           "type": "array",
-          "description": "An array that contains the trusted service resource Ids for the Cosmos DB account.",
+          "description": "An array that contains the Resource Ids for Network Acl Bypass for the Cosmos DB account.",
           "items": {
             "type": "string"
           }
@@ -6222,13 +6222,13 @@
             "$ref": "#/definitions/CorsPolicy"
           }
         },
-        "allowTrustedServiceNetworkBypass": {
-          "description": "Flag to indicate whether to enable trusted service network bypass for synapse link.",
-          "type": "boolean"
+        "networkAclBypass": {
+          "description": "Indicates what services are allowed to bypass firewall checks.",
+          "$ref": "#/definitions/NetworkAclBypass"
         },
-        "trustedServiceResourceIds": {
+        "networkAclBypassResourceIds": {
           "type": "array",
-          "description": "An array that contains the trusted service resource Ids for the Cosmos DB account.",
+          "description": "An array that contains the Resource Ids for Network Acl Bypass for the Cosmos DB account.",
           "items": {
             "type": "string"
           }
@@ -6361,13 +6361,13 @@
             "$ref": "#/definitions/CorsPolicy"
           }
         },
-        "allowTrustedServiceNetworkBypass": {
-          "description": "Flag to indicate whether to enable trusted service network bypass for synapse link.",
-          "type": "boolean"
+        "networkAclBypass": {
+          "description": "Indicates what services are allowed to bypass firewall checks.",
+          "$ref": "#/definitions/NetworkAclBypass"
         },
-        "trustedServiceResourceIds": {
+        "networkAclBypassResourceIds": {
           "type": "array",
-          "description": "An array that contains the trusted service resource Ids for the Cosmos DB account.",
+          "description": "An array that contains the Resource Ids for Network Acl Bypass for the Cosmos DB account.",
           "items": {
             "type": "string"
           }
@@ -7762,6 +7762,18 @@
           "type": "boolean",
           "description": "Create firewall rule before the virtual network has vnet service endpoint enabled."
         }
+      }
+    },
+    "NetworkAclBypass": {
+      "description": "Indicates what services are allowed to bypass firewall checks.",
+      "type": "string",
+      "enum": [
+        "None",
+        "AzureServices"
+      ],
+      "x-ms-enum": {
+        "name": "NetworkAclBypass",
+        "modelAsString": true
       }
     },
     "PrivateEndpointConnection": {
