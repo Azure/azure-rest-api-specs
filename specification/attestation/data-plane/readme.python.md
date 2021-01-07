@@ -18,9 +18,8 @@ python:
 ``` yaml $(python) && $(python-mode) == 'update'
 python:
   no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/attestation/azure-attestation
+  output-folder: $(python-sdks-folder)/attestation/azure-attestation/azure/attestation
 ```
-
 ``` yaml $(python) && $(python-mode) == 'create'
 python:
   basic-setup-py: true
