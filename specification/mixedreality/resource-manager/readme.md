@@ -5,7 +5,9 @@
 This is the AutoRest configuration file for Mixed-Reality Azure Resource Management.
 
 ---
+
 ## Getting Started
+
 To build the SDK for Azure Resource Management, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
@@ -13,19 +15,34 @@ To build the SDK for Azure Resource Management, simply [Install AutoRest](https:
 To see additional help and options, run:
 
 > `autorest --help`
+
 ---
 
 ---
+
 ## Configuration
 
 ### Basic Information
+
 These are the global settings for the Mixed Reality Azure Resource Management Client.
 
 ``` yaml
 title: MixedRealityClient
 description: Mixed Reality Client
 openapi-type: arm
-tag: package-2020-05
+tag: package-2021-01
+```
+
+
+### Tag: package-2021-01
+
+These settings apply only when `--tag=package-2021-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2021-01'
+input-file:
+  - Microsoft.MixedReality/stable/2021-01-01/common.json
+  - Microsoft.MixedReality/stable/2021-01-01/proxy.json
+  - Microsoft.MixedReality/stable/2021-01-01/remote-rendering.json
 ```
 ### Tag: package-2020-05
 
@@ -79,6 +96,7 @@ input-file:
 ```
 
 ---
+
 # Code Generation
 
 ## Swagger to SDK
@@ -130,6 +148,7 @@ python:
   package-version: 0.0.1
   clear-output-folder: true
 ```
+
 ``` yaml $(python) && $(track2)
 python-mode: update
 azure-arm: true
@@ -141,20 +160,24 @@ clear-output-folder: true
 modelerfour:
   lenient-model-deduplication: true
 ```
+
 ``` yaml $(python) && $(python-mode) == 'update' && !$(track2)
 python:
   no-namespace-folders: true
   output-folder: $(python-sdks-folder)/mixedreality/azure-mgmt-mixedreality/azure/mgmt/mixedreality
 ```
+
 ``` yaml $(python) && $(python-mode) == 'create' && !$(track2)
 python:
   basic-setup-py: true
   output-folder: $(python-sdks-folder)/mixedreality/azure-mgmt-mixedreality
 ```
+
 ``` yaml $(python) && $(python-mode) == 'update' && $(track2)
 no-namespace-folders: true
 output-folder: $(python-sdks-folder)/mixedreality/azure-mgmt-mixedreality/azure/mgmt/mixedreality
 ```
+
 ``` yaml $(python) && $(python-mode) == 'create' && $(track2)
 basic-setup-py: true
 output-folder: $(python-sdks-folder)/mixedreality/azure-mgmt-mixedreality
@@ -171,4 +194,3 @@ See configuration in [readme.java.md](./readme.java.md)
 ## AzureResourceSchema
 
 See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
-
