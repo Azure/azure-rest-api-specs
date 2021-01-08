@@ -5,7 +5,9 @@
     "version": "2019-10-10-preview",
     "description": "REST API for Azure Spool Service, (internal APIs)"
   },
-  "schemes": [ "https" ],
+  "schemes": [
+    "https"
+  ],
   "securityDefinitions": {
     "azure_auth": {
       "type": "oauth2",
@@ -18,7 +20,7 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SpoolService/spools/{spoolName}/eventgridfilters/{eventGridFilterName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SpoolService/spools/{spoolName}/eventGridFilters/{eventGridFilterName}": {
       "parameters": [
         {
           "$ref": "spool.json#/parameters/ApiVersionParameter"
@@ -37,10 +39,12 @@
         }
       ],
       "patch": {
-        "description": "Update an existing eventgridfilters resource's properties.",
+        "description": "Update an existing eventGridFilters resource's properties.",
         "operationId": "EventGridFilter_Update",
         "summary": "Update",
-        "tags": [ "EventGridFilter" ],
+        "tags": [
+          "EventGridFilter"
+        ],
         "parameters": [
           {
             "name": "parameters",
@@ -66,7 +70,9 @@
             }
           }
         },
-        "produces": [ "application/json" ],
+        "produces": [
+          "application/json"
+        ],
         "x-ms-examples": {
           "Update resource": {
             "$ref": "./examples/eventGridFilterUpdate.json"
@@ -74,10 +80,12 @@
         }
       },
       "get": {
-        "description": "Get an existing eventgridfilters resource and its properties",
+        "description": "Get an existing eventGridFilters resource and its properties",
         "operationId": "EventGridFilter_Get",
         "summary": "Get",
-        "tags": [ "EventGridFilter" ],
+        "tags": [
+          "EventGridFilter"
+        ],
         "responses": {
           "200": {
             "description": "Success. The response describe the corresponding Spool service.",
@@ -92,7 +100,9 @@
             }
           }
         },
-        "produces": [ "application/json" ],
+        "produces": [
+          "application/json"
+        ],
         "x-ms-examples": {
           "Get resource": {
             "$ref": "./examples/eventGridFilterGet.json"
@@ -103,7 +113,9 @@
         "description": "Create or update a eventgrid filter on an existing resource.",
         "operationId": "EventGridFilter_CreateOrUpdate",
         "summary": "Create Or Update",
-        "tags": [ "EventGridFilter" ],
+        "tags": [
+          "EventGridFilter"
+        ],
         "parameters": [
           {
             "name": "parameters",
@@ -115,7 +127,9 @@
             }
           }
         ],
-        "consumes": [ "application/json" ],
+        "consumes": [
+          "application/json"
+        ],
         "responses": {
           "200": {
             "description": "An existing resource was updated.",
@@ -130,10 +144,11 @@
             }
           }
         },
-        "produces": [ "application/json" ],
-        "x-ms-long-running-operation": true,
+        "produces": [
+          "application/json"
+        ],
         "x-ms-examples": {
-          "Create or udate resource": {
+          "Create or update resource": {
             "$ref": "./examples/eventGridFilterCreateOrUpdate.json"
           }
         }
@@ -142,13 +157,12 @@
         "description": "Operation to delete a eventgrid filter.",
         "operationId": "EventGridFilter_Delete",
         "summary": "Delete",
-        "tags": [ "EventGridFilter" ],
+        "tags": [
+          "EventGridFilter"
+        ],
         "responses": {
           "200": {
             "description": "The resource has been deleted successfully."
-          },
-          "202": {
-            "description": "The delete operation is being performed in the background."
           },
           "204": {
             "description": "The resource did not exist."
@@ -160,7 +174,6 @@
             }
           }
         },
-        "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "Delete resource": {
             "$ref": "./examples/eventGridFilterDelete.json"
@@ -168,7 +181,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SpoolService/spools/{spoolName}/eventgridfilters": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SpoolService/spools/{spoolName}/eventGridFilters": {
       "parameters": [
         {
           "$ref": "spool.json#/parameters/ApiVersionParameter"
@@ -184,10 +197,12 @@
         }
       ],
       "get": {
-        "description": "Handles requests to list all eventgridfilters on a spool resource.",
+        "description": "Handles requests to list all eventGridFilters on a spool resource.",
         "operationId": "EventGridFilters_ListBySpoolResource",
         "summary": "List All EventGrid Filters on a Spool Resource",
-        "tags": [ "EventGridFilter" ],
+        "tags": [
+          "EventGridFilter"
+        ],
         "responses": {
           "200": {
             "description": "Success. The response describes the list of EventGrid filters on a Spool resource.",
@@ -205,7 +220,9 @@
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         },
-        "produces": [ "application/json" ],
+        "produces": [
+          "application/json"
+        ],
         "x-ms-examples": {
           "List by resource group": {
             "$ref": "./examples/eventGridFilterListByParent.json"
@@ -277,23 +294,23 @@
           "properties": {
             "clientPrincipalId": {
               "description": "The client principal ID",
-              "type":"string"
+              "type": "string"
             },
             "clientObjectId": {
               "description": "The client object ID",
-              "type":"string"
+              "type": "string"
             },
             "clientTenantId": {
               "description": "The client tenant ID",
-              "type":"string"
+              "type": "string"
             },
             "clientApplicationId": {
               "description": "The client application ID",
-              "type":"string"
+              "type": "string"
             },
             "clientAuthorizationSource": {
               "description": "The client authorization source",
-              "type":"string"
+              "type": "string"
             }
           }
         }

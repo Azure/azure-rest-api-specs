@@ -27,6 +27,7 @@ These are the global settings for the Azure Spool API.
 ```yaml
 title: SpoolManagementClient
 openapi-type: arm
+openapi-subtype: rpaas
 tag: package-2019-10-10-preview
 ```
 
