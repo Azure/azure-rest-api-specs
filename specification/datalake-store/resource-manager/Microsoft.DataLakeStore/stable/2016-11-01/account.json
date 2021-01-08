@@ -2618,12 +2618,29 @@
         "resources": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/SubResource"
+            "$ref": "#/definitions/DeleteVirtualNetworkOrSubnetsResource"
           },
           "description": "Resources to delete"
         }
       },
       "description": "The parameters used to delete virtual network."
+    },
+    "DeleteVirtualNetworkOrSubnetsResource": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The resource identifier."
+        },
+        "name": {
+          "type": "string",
+          "description": "The resource name."
+        },
+        "type": {
+          "type": "string",
+          "description": "The resource type."
+        }
+      },
+      "description": "Delete VirtualNetwork Or Subnets Resource"
     },
     "CreateOrUpdateVirtualNetworkRuleParameters": {
       "required": [
