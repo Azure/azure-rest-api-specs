@@ -13,11 +13,10 @@ To see additional help and options, run:
 
 ``` yaml
 directive:
-    - where: 
-        - $.definitions.EmailUser.allOf[1].properties.email.format
-    suppress: 
-        - ValidFormats
-    reason: email format is allowed
+  - where:
+      - $.definitions.EmailUser.allOf[1].properties.email.format
+    suppress:
+      - ValidFormats
 ```
 
 ## Configuration
