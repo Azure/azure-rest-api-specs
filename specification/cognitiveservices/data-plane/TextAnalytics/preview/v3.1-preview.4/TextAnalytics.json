@@ -1317,19 +1317,19 @@
           "type": "array",
           "description": "The array of sentence targets for the sentence.",
           "items": {
-            "$ref": "#/definitions/SentenceAspect"
+            "$ref": "#/definitions/SentenceTarget"
           }
         },
         "assessments": {
           "type": "array",
           "description": "The array of sentence assessments for the sentence.",
           "items": {
-            "$ref": "#/definitions/SentenceOpinion"
+            "$ref": "#/definitions/SentenceAssessment"
           }
         }
       }
     },
-    "SentenceAspect": {
+    "SentenceTarget": {
       "type": "object",
       "required": [
         "confidenceScores",
@@ -1355,7 +1355,7 @@
         },
         "confidenceScores": {
           "description": "Target level sentiment confidence scores for the target in the sentence.",
-          "$ref": "#/definitions/AspectConfidenceScoreLabel"
+          "$ref": "#/definitions/TargetConfidenceScoreLabel"
         },
         "offset": {
           "type": "integer",
@@ -1375,12 +1375,12 @@
           "type": "array",
           "description": "The array of either assessment or target objects which is related to the target.",
           "items": {
-            "$ref": "#/definitions/AspectRelation"
+            "$ref": "#/definitions/TargetRelation"
           }
         }
       }
     },
-    "SentenceOpinion": {
+    "SentenceAssessment": {
       "type": "object",
       "required": [
         "confidenceScores",
@@ -1406,7 +1406,7 @@
         },
         "confidenceScores": {
           "description": "Assessment sentiment confidence scores in the sentence.",
-          "$ref": "#/definitions/AspectConfidenceScoreLabel"
+          "$ref": "#/definitions/TargetConfidenceScoreLabel"
         },
         "offset": {
           "type": "integer",
@@ -1428,7 +1428,7 @@
         }
       }
     },
-    "AspectRelation": {
+    "TargetRelation": {
       "type": "object",
       "required": [
         "ref",
@@ -1442,7 +1442,7 @@
             "target"
           ],
           "x-ms-enum": {
-            "name": "AspectRelationType",
+            "name": "TargetRelationType",
             "modelAsString": false
           },
           "description": "The type related to the target."
@@ -1453,7 +1453,7 @@
         }
       }
     },
-    "AspectConfidenceScoreLabel": {
+    "TargetConfidenceScoreLabel": {
       "type": "object",
       "required": [
         "negative",
