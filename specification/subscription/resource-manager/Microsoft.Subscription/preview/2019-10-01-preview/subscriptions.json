@@ -598,6 +598,36 @@
           }
         ]
       }
+    },
+    "/providers/Microsoft.Subscription/policies": {
+      "get": {
+        "description": "Get the subscription tenant policy for the user's tenant.",
+        "operationId": "SubscriptionPolicy_GetPolicyListForTenant",
+        "x-ms-examples": {
+          "getTenantPolicy": {
+            "$ref": "./examples/getTenantPolicyList.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Subscription tenant policy details for user's tenant.",
+            "schema": {
+              "$ref": "#/definitions/TenantPolicyListArmResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseBody"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ]
+      }
     }
   },
   "definitions": {
@@ -981,7 +1011,25 @@
         }
       },
       "x-ms-azure-resource": true
-    }
+    },
+    "TenantPolicyListArmResponse": {
+      "description": "Tenant policy information list.",
+      "properties": {
+        "value": {
+          "description": "The list of tenant policies.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/TenantPolicyArmResponse"
+          }
+        },
+        "nextLink": {
+          "description": "The link (url) to the next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    }    
   },
   "parameters": {
     "apiVersionParameter": {
