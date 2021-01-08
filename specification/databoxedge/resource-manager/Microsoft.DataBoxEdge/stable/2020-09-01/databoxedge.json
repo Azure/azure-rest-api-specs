@@ -3801,7 +3801,7 @@
         },
         "systemData": {
           "description": "Addon type",
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
+          "$ref": "#/definitions/SystemData"
         }
       },
       "discriminator": "kind"
@@ -3874,7 +3874,7 @@
       "properties": {
         "systemData": {
           "description": "Alert generated in the resource",
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
+          "$ref": "#/definitions/SystemData"
         },
         "properties": {
           "$ref": "#/definitions/AlertProperties",
@@ -4202,7 +4202,7 @@
       "properties": {
         "systemData": {
           "description": "Bandwidth object related to ASE resource",
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
+          "$ref": "#/definitions/SystemData"
         },
         "properties": {
           "$ref": "#/definitions/BandwidthScheduleProperties",
@@ -4501,7 +4501,7 @@
       "properties": {
         "systemData": {
           "description": "Container in DataBoxEdge Resource",
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
+          "$ref": "#/definitions/SystemData"
         },
         "properties": {
           "$ref": "#/definitions/ContainerProperties",
@@ -4634,7 +4634,7 @@
         },
         "systemData": {
           "description": "DataBoxEdge Resource",
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
+          "$ref": "#/definitions/SystemData"
         },
         "properties": {
           "$ref": "#/definitions/DataBoxEdgeDeviceProperties",
@@ -7262,7 +7262,7 @@
         },
         "systemData": {
           "description": "Role configured on ASE resource",
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
+          "$ref": "#/definitions/SystemData"
         }
       },
       "discriminator": "kind"
@@ -7360,7 +7360,7 @@
       "properties": {
         "systemData": {
           "description": "Share on ASE device",
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
+          "$ref": "#/definitions/SystemData"
         },
         "properties": {
           "$ref": "#/definitions/ShareProperties",
@@ -7719,7 +7719,7 @@
       "properties": {
         "systemData": {
           "description": "StorageAccount object on ASE device",
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
+          "$ref": "#/definitions/SystemData"
         },
         "properties": {
           "$ref": "#/definitions/StorageAccountProperties",
@@ -7742,7 +7742,7 @@
       "properties": {
         "systemData": {
           "description": "StorageAccountCredential object",
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
+          "$ref": "#/definitions/SystemData"
         },
         "properties": {
           "$ref": "#/definitions/StorageAccountCredentialProperties",
@@ -7950,6 +7950,59 @@
         }
       }
     },
+    "SystemData": {
+      "description": "Metadata pertaining to creation and last modification of the resource.",
+      "type": "object",
+      "readOnly": true,
+      "properties": {
+        "createdBy": {
+          "type": "string",
+          "description": "The identity that created the resource."
+        },
+        "createdByType": {
+          "type": "string",
+          "description": "The type of identity that created the resource.",
+          "enum": [
+            "User",
+            "Application",
+            "ManagedIdentity",
+            "Key"
+          ],
+          "x-ms-enum": {
+            "name": "createdByType",
+            "modelAsString": true
+          }
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp of resource creation (UTC)."
+        },
+        "lastModifiedBy": {
+          "type": "string",
+          "description": "The identity that last modified the resource."
+        },
+        "lastModifiedByType": {
+          "type": "string",
+          "description": "The type of identity that last modified the resource.",
+          "enum": [
+            "User",
+            "Application",
+            "ManagedIdentity",
+            "Key"
+          ],
+          "x-ms-enum": {
+            "name": "createdByType",
+            "modelAsString": true
+          }
+        },
+        "lastModifiedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The type of identity that last modified the resource."
+        }
+      }
+    },
     "TrackingInfo": {
       "description": "Tracking courier information.",
       "type": "object",
@@ -7986,7 +8039,7 @@
       "properties": {
         "systemData": {
           "description": "Trigger in DataBoxEdge Resource",
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
+          "$ref": "#/definitions/SystemData"
         },
         "kind": {
           "description": "Trigger Kind.",
@@ -8315,7 +8368,7 @@
       "properties": {
         "systemData": {
           "description": "User in DataBoxEdge Resource",
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
+          "$ref": "#/definitions/SystemData"
         },
         "properties": {
           "$ref": "#/definitions/UserProperties",
