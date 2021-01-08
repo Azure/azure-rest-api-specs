@@ -144,7 +144,7 @@
       "properties": {
         "nameAvailable": {
           "description": "if name Available",
-          "type": "boolean"
+          "$ref": "#/definitions/NameAvailability"
         },
         "reason": {
           "description": "Resource Name To Verify",
@@ -196,6 +196,18 @@
           "description": "Description of operation",
           "type": "string"
         }
+      }
+    },
+    "NameAvailability": {
+      "description": "Whether or not the name is available.",
+      "type": "string",
+      "enum": [
+        "true",
+        "false"
+      ],
+      "x-ms-enum": {
+        "name": "NameAvailability",
+        "modelAsString": true
       }
     },
     "NameUnavailableReason": {
