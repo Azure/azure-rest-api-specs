@@ -638,10 +638,6 @@
           "description": "ThreatIntel Whitelist for Firewall Policy.",
           "$ref": "#/definitions/FirewallPolicyThreatIntelWhitelist"
         },
-        "snat": {
-          "description": "The private IP ranges to which traffic will not be SNAT",
-          "$ref": "#/definitions/FirewallPolicySNAT"
-        },
         "dnsSettings": {
           "description": "DNS Proxy Settings definition.",
           "$ref": "#/definitions/DnsSettings"
@@ -1169,19 +1165,6 @@
           "type": "boolean",
           "description": "FQDNs in Network Rules are supported when set to true.",
           "x-nullable": true
-        }
-      }
-    },
-    "FirewallPolicySNAT": {
-      "description": "The private IP ranges to which traffic will not be SNAT",
-      "x-ms-discriminator-value": "FirewallPolicySNAT",
-      "properties": {
-        "privateRanges": {
-          "type": "array",
-          "description": "List of private IP addresses/IP address ranges to not be SNAT.",
-          "items": {
-            "type": "string"
-          }
         }
       }
     },
