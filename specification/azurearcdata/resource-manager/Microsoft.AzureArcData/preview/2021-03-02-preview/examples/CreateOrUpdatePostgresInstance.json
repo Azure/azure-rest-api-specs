@@ -13,6 +13,10 @@
       "properties": {
         "dataControllerId": "dataControllerId",
         "admin": "admin",
+        "basicLoginInformation": {
+          "username": "username",
+          "password": "securestring"
+        },
         "k8sRaw": {
           "apiVersion": "apiVersion",
           "kind": "postgresql-12",
@@ -95,7 +99,11 @@
   "responses": {
     "200": {
       "body": {
-        "properties": {},
+        "properties": {
+          "basicLoginInformation": {
+            "username": "username"
+          }
+        },
         "location": "northeurope",
         "extendedLocation": {
           "type": "CustomLocation",
@@ -119,7 +127,11 @@
     },
     "201": {
       "body": {
-        "properties": {},
+        "properties": {
+          "basicLoginInformation": {
+            "username": "username"
+          }
+        },
         "location": "northeurope",
         "extendedLocation": {
           "type": "CustomLocation",
