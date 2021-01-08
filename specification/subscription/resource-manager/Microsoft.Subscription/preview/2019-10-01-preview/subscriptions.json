@@ -546,7 +546,7 @@
           "200": {
             "description": "Subscription tenant policy has been successfully created/updated.",
             "schema": {
-              "$ref": "#/definitions/TenantPolicyArmResponse"
+              "$ref": "#/definitions/TenantPolicyResponse"
             }
           },
           "default": {
@@ -582,7 +582,7 @@
           "200": {
             "description": "Subscription tenant policy details for user's tenant.",
             "schema": {
-              "$ref": "#/definitions/TenantPolicyArmResponse"
+              "$ref": "#/definitions/TenantPolicyResponse"
             }
           },
           "default": {
@@ -612,7 +612,7 @@
           "200": {
             "description": "Subscription tenant policy details for user's tenant.",
             "schema": {
-              "$ref": "#/definitions/TenantPolicyListArmResponse"
+              "$ref": "#/definitions/TenantPolicyListResponse"
             }
           },
           "default": {
@@ -987,7 +987,7 @@
         }
       }
     },
-    "TenantPolicyArmResponse": {
+    "TenantPolicyResponse": {
       "description": "Tenant policy Information.",
       "properties": {
         "id": {
@@ -1012,7 +1012,7 @@
       },
       "x-ms-azure-resource": true
     },
-    "TenantPolicyListArmResponse": {
+    "TenantPolicyListResponse": {
       "description": "Tenant policy information list.",
       "properties": {
         "value": {
@@ -1020,7 +1020,7 @@
           "type": "array",
           "readOnly": true,
           "items": {
-            "$ref": "#/definitions/TenantPolicyArmResponse"
+            "$ref": "#/definitions/TenantPolicyResponse"
           }
         },
         "nextLink": {
