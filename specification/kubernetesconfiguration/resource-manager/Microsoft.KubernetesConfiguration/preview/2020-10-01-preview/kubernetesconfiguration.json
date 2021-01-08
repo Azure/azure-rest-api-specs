@@ -491,18 +491,6 @@
         "modelAsString": true
       }
     },
-    "EnableHelmOperatorDefinition": {
-      "description": "Option to enable Helm Operator for this git configuration.",
-      "type": "boolean",
-      "enum": [
-        "true",
-        "false"
-      ],
-      "x-ms-enum": {
-        "name": "EnableHelmOperatorType",
-        "modelAsString": true
-      }
-    },
     "SourceControlConfiguration": {
       "description": "The SourceControl Configuration object returned in Get & Put response.",
       "properties": {
@@ -552,7 +540,7 @@
             },
             "enableHelmOperator": {
               "description": "Option to enable Helm Operator for this git configuration.",
-              "$ref": "#/definitions/EnableHelmOperatorDefinition"
+              "type": "boolean"
             },
             "helmOperatorProperties": {
               "description": "Properties for Helm operator.",
