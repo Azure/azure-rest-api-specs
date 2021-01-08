@@ -1778,8 +1778,13 @@
             "isNegated"
           ],
           "properties": {
-            "isNegated": {
-              "type": "boolean"
+            "assertion": {
+              "type": "object",
+              "$ref": "#/definitions/HealthcareAssertion"
+            },
+            "name": {
+              "description": "Preferred name for the entity. Example: 'histologically' would have a 'name' of 'histologic'.",
+              "type": "string"
             },
             "links": {
               "description": "Entity references in known data sources.",
@@ -1805,16 +1810,45 @@
           "description": "Type of relation. Examples include: `DosageOfMedication` or 'FrequencyOfMedication', etc.",
           "type": "string"
         },
-        "bidirectional": {
-          "description": "If true the relation between the entities is bidirectional, otherwise directionality is source to target.",
-          "type": "boolean"
-        },
-        "source": {
-          "description": "Reference link to the source entity.",
+        "entities":{
+          "description": "The entities in the relation.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/HealthcareRelationEntity"
+          }
+        }
+      }
+    },
+    "HealthcareAssertion": {
+      "type": "object",
+      "properties": {
+        "conditionality": {
+          "description": "Describes any conditionality on the entity. Possbile values: conditional, hypothetical",
+          "type": "string"
+        },        
+        "certainty": {
+          "description": "Describes the entities certainty and sentiment. Possible values: positive, postive possible, neutral, negative possible, negative",
           "type": "string"
         },
-        "target": {
-          "description": "Reference link to the target entity.",
+        "association": {
+          "description": "Describes if the entity is the subject of the text or if it describes someone else. Possible values: subject, other",
+          "type": "string"
+        }
+      }
+    },
+    "HealthcareRelationEntity": {
+      "type": "object",
+      "required": [
+        "ref",
+        "role"
+      ],
+      "properties": {
+        "ref": {
+          "description": "Reference link to the entity object.",
+          "type": "string"
+        },
+        "role": {
+          "description": "Role of entity in the relationship. For example: 'CD20-positive diffuse large B-cell lymphoma' has the following entities with their roles in parathesis:  CD20 (GeneOrProtein), Positive (Expression), diffuse large B-cell lymphoma (Diagnosis)",
           "type": "string"
         }
       }
