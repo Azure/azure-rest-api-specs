@@ -691,6 +691,12 @@
         "responses": {
           "200": {
             "description": ""
+          },
+          "default":{
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
           }
         },
         "x-ms-examples": {
@@ -726,12 +732,6 @@
             "description": "Successfully retrieved the list of virtual network rules.",
             "schema": {
               "$ref": "#/definitions/VirtualNetworkRuleListResult"
-            }
-          },
-          "default":{
-            "description": "",
-            "schema": {
-              "$ref": "#/definitions/Error"
             }
           }
         },
@@ -1836,12 +1836,10 @@
       "properties": {
         "code": {
           "type": "string",
-          "readOnly": true,
           "description": "the HTTP status code or error code associated with this error"
         },
         "message": {
           "type": "string",
-          "readOnly": true,
           "description": "the error message to display."
         },
         "target": {
