@@ -62,6 +62,7 @@ NOTE: Currently these tags are the same, but it will need to be split if any fil
 input-file:
 - Microsoft.CertificateRegistration/stable/2020-12-01/AppServiceCertificateOrders.json
 - Microsoft.CertificateRegistration/stable/2020-12-01/CertificateRegistrationProvider.json
+- Microsoft.CertificateRegistration/stable/2020-12-01/CertificateOrdersDiagnostics.json
 - Microsoft.DomainRegistration/stable/2020-12-01/Domains.json
 - Microsoft.DomainRegistration/stable/2020-12-01/TopLevelDomains.json
 - Microsoft.DomainRegistration/stable/2020-12-01/DomainRegistrationProvider.json
@@ -77,6 +78,7 @@ input-file:
 - Microsoft.Web/stable/2020-12-01/AppServiceEnvironments.json
 - Microsoft.Web/stable/2020-12-01/AppServicePlans.json
 - Microsoft.Web/stable/2020-12-01/ResourceHealthMetadata.json
+- Microsoft.Web/stable/2020-12-01/Global.json
 directive:
   # suppress each RPC 3016 error
 - where: $.definitions.FunctionSecrets.properties.trigger_url
