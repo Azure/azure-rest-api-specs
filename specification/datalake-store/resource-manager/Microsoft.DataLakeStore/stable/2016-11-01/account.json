@@ -660,7 +660,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.DataLakeStore/locations/{location}/DeleteVirtualNetworkOrSubnets": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DataLakeStore/locations/{location}/deleteVirtualNetworkOrSubnets": {
       "post": {
         "operationId": "VirtualNetworkOrSubnets_DeleteById",
         "description": "Delete virtual network or subnets.",
@@ -726,6 +726,12 @@
             "description": "Successfully retrieved the list of virtual network rules.",
             "schema": {
               "$ref": "#/definitions/VirtualNetworkRuleListResult"
+            }
+          },
+          "default":{
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/Error"
             }
           }
         },
@@ -1807,26 +1813,6 @@
       },
       "description": "Data Lake Store virtual network rule list information."
     },
-    "ErrorDetails": {
-      "properties": {
-        "code": {
-          "type": "string",
-          "readOnly": true,
-          "description": "the HTTP status code or error code associated with this error"
-        },
-        "message": {
-          "type": "string",
-          "readOnly": true,
-          "description": "the error message localized based on Accept-Language"
-        },
-        "target": {
-          "type": "string",
-          "readOnly": true,
-          "description": "the target of the particular error (for example, the name of the property in error)."
-        }
-      },
-      "description": "Data Lake Store error details information"
-    },
     "InnerError": {
       "properties": {
         "trace": {
@@ -1843,6 +1829,10 @@
       "description": "Data Lake Store inner error information"
     },
     "Error": {
+      "required": [
+        "code",
+        "message"
+      ],
       "properties": {
         "code": {
           "type": "string",
@@ -1863,13 +1853,16 @@
           "type": "array",
           "readOnly": true,
           "items": {
-            "$ref": "#/definitions/ErrorDetails"
+            "$ref": "#/definitions/Error"
           },
           "description": "the list of error details"
         },
-        "innerError": {
-          "$ref": "#/definitions/InnerError",
+        "additionalInfo": {
+          "type": "array",
           "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/InnerError"
+          },
           "description": "the inner exceptions or errors, if any"
         }
       },
