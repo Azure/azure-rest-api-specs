@@ -243,10 +243,10 @@
               "$ref": "#/definitions/DataLakeStoreAccount"
             }
           },
-          "default":{
+          "default": {
             "description": "",
             "schema": {
-              "$ref": "#/definitions/Error"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -339,10 +339,10 @@
               "$ref": "#/definitions/DataLakeStoreAccount"
             }
           },
-          "default":{
+          "default": {
             "description": "",
             "schema": {
-              "$ref": "#/definitions/Error"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -383,10 +383,10 @@
           "204": {
             "description": "The specified account was not found."
           },
-          "default":{
+          "default": {
             "description": "",
             "schema": {
-              "$ref": "#/definitions/Error"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -514,10 +514,10 @@
               "$ref": "#/definitions/FirewallRule"
             }
           },
-          "default":{
+          "default": {
             "description": "",
             "schema": {
-              "$ref": "#/definitions/Error"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -692,10 +692,10 @@
           "200": {
             "description": ""
           },
-          "default":{
+          "default": {
             "description": "",
             "schema": {
-              "$ref": "#/definitions/Error"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -1785,13 +1785,12 @@
           "readOnly": true,
           "type": "string",
           "description": "The resource identifier for the subnet."
-        }
-        ,
+        },
         "state": {
           "readOnly": true,
           "type": "string",
           "description": "The state for the subnet."
-		}
+        }
       },
       "description": "The virtual network rule properties."
     },
@@ -1828,18 +1827,26 @@
       },
       "description": "Data Lake Store inner error information"
     },
+    "ErrorResponse": {
+      "title": "Error response",
+      "description": "Common error response.",
+      "properties": {
+        "error": {
+          "description": "The error object.",
+          "$ref": "#/definitions/Error"
+        }
+      }
+    },
     "Error": {
-      "required": [
-        "code",
-        "message"
-      ],
       "properties": {
         "code": {
           "type": "string",
+          "readOnly": true,
           "description": "the HTTP status code or error code associated with this error"
         },
         "message": {
           "type": "string",
+          "readOnly": true,
           "description": "the error message to display."
         },
         "target": {
@@ -1969,14 +1976,14 @@
     },
     "OperationProperties": {
       "properties": {
-        "serviceSpecification" : {
+        "serviceSpecification": {
           "readOnly": true,
           "$ref": "#/definitions/OperationMetaServiceSpecification",
           "description": "service Specification"
         }
       }
     },
-    "OperationMetaServiceSpecification" :{
+    "OperationMetaServiceSpecification": {
       "properties": {
         "metricSpecifications": {
           "readOnly": true,
@@ -1996,7 +2003,7 @@
         }
       }
     },
-    "OperationMetaMetricSpecification":{
+    "OperationMetaMetricSpecification": {
       "properties": {
         "name": {
           "readOnly": true,
