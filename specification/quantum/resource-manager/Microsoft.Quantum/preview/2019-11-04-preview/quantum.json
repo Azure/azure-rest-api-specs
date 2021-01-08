@@ -130,52 +130,6 @@
           "final-state-via": "azure-async-operation"
         }
       },
-      "patch": {
-        "operationId": "Workspaces_Update",
-        "x-ms-examples": {
-          "QuantumWorkspacesUpdate": {
-            "$ref": "./examples/quantumWorkspacesPatch.json"
-          }
-        },
-        "description": "Updates a Workspace resource.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/WorkspaceNameParameter"
-          },
-          {
-            "name": "QuantumWorkspace",
-            "description": "Quantum workspace details.",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/QuantumWorkspace"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Workspace updated successfully.",
-            "schema": {
-              "$ref": "#/definitions/QuantumWorkspace"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        }
-      },
       "delete": {
         "description": "Deletes a Workspace resource.",
         "operationId": "Workspaces_Delete",
