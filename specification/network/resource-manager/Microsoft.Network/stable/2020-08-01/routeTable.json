@@ -624,6 +624,10 @@
           "readOnly": true,
           "$ref": "./network.json#/definitions/ProvisioningState",
           "description": "The provisioning state of the route resource."
+        },
+        "hasBgpOverride": {
+          "type": "boolean",
+          "description": "A value indicating whether this route overrides overlapping BGP routes regardless of LPM."
         }
       },
       "required": [
@@ -646,6 +650,10 @@
           "readOnly": true,
           "type": "string",
           "description": "A unique read-only string that changes whenever the resource is updated."
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of the resource."
         }
       },
       "allOf": [
@@ -680,6 +688,11 @@
           "readOnly": true,
           "$ref": "./network.json#/definitions/ProvisioningState",
           "description": "The provisioning state of the route table resource."
+        },
+        "resourceGuid": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The resource GUID property of the route table."
         }
       },
       "description": "Route Table resource."
