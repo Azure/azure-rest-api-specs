@@ -2982,7 +2982,7 @@
               "type": "string",
               "x-ms-enum": {
                 "name": "ExportFormatType",
-                "modelAsString": false
+                "modelAsString": true
               }
             }
           }
@@ -4012,7 +4012,7 @@
           },
           {
             "in": "query",
-            "name": "endpointComputeType",
+            "name": "computeType",
             "description": "EndpointComputeType to be filtered by.",
             "type": "string",
             "default": "Managed",
@@ -4023,7 +4023,7 @@
             ],
             "x-ms-enum": {
               "name": "EndpointComputeType",
-              "modelAsString": false
+              "modelAsString": true
             }
           },
           {
@@ -4057,7 +4057,7 @@
             ],
             "x-ms-enum": {
               "name": "OrderString",
-              "modelAsString": false
+              "modelAsString": true
             }
           },
           {
@@ -4595,7 +4595,7 @@
           "type": "string",
           "x-ms-enum": {
             "name": "BatchOutputAction",
-            "modelAsString": false
+            "modelAsString": true
           }
         },
         "appendRowFileName": {
@@ -4634,7 +4634,7 @@
           "type": "string",
           "x-ms-enum": {
             "name": "BatchLoggingLevel",
-            "modelAsString": false
+            "modelAsString": true
           }
         },
         "outputConfiguration": {
@@ -4659,7 +4659,7 @@
           "type": "string",
           "x-ms-enum": {
             "name": "ReferenceType",
-            "modelAsString": false
+            "modelAsString": true
           }
         }
       },
@@ -4797,7 +4797,7 @@
           "readOnly": true,
           "x-ms-enum": {
             "name": "DeploymentProvisioningState",
-            "modelAsString": false
+            "modelAsString": true
           }
         },
         "error": {
@@ -4871,11 +4871,11 @@
     },
     "ComputeConfiguration": {
       "required": [
-        "endpointComputeType"
+        "computeType"
       ],
       "type": "object",
       "properties": {
-        "endpointComputeType": {
+        "computeType": {
           "enum": [
             "Managed",
             "AKS",
@@ -4884,11 +4884,11 @@
           "type": "string",
           "x-ms-enum": {
             "name": "EndpointComputeType",
-            "modelAsString": false
+            "modelAsString": true
           }
         }
       },
-      "discriminator": "endpointComputeType",
+      "discriminator": "computeType",
       "additionalProperties": false
     },
     "AuthKeys": {
@@ -4918,7 +4918,7 @@
           "type": "string",
           "x-ms-enum": {
             "name": "EndpointAuthModeType",
-            "modelAsString": false
+            "modelAsString": true
           }
         },
         "description": {
@@ -4955,7 +4955,7 @@
           "readOnly": true,
           "x-ms-enum": {
             "name": "EndpointProvisioningState",
-            "modelAsString": false
+            "modelAsString": true
           },
           "x-ms-mutability": [
             "read"
@@ -5493,7 +5493,7 @@
           "type": "string",
           "x-ms-enum": {
             "name": "CredentialsType",
-            "modelAsString": false
+            "modelAsString": true
           }
         },
         "accountKey": {
@@ -5811,7 +5811,7 @@
           "type": "string",
           "x-ms-enum": {
             "name": "ContentsType",
-            "modelAsString": false
+            "modelAsString": true
           }
         },
         "azureDataLake": {
@@ -5854,7 +5854,7 @@
           "type": "string",
           "x-ms-enum": {
             "name": "OriginType",
-            "modelAsString": false
+            "modelAsString": true
           }
         }
       },
@@ -5963,7 +5963,7 @@
           "type": "string",
           "x-ms-enum": {
             "name": "DatasetType",
-            "modelAsString": false
+            "modelAsString": true
           }
         },
         "datastoreId": {
@@ -6129,7 +6129,7 @@
           "type": "string",
           "x-ms-enum": {
             "name": "DockerSpecificationType",
-            "modelAsString": false
+            "modelAsString": true
           },
           "x-ms-mutability": [
             "create",
@@ -6154,7 +6154,7 @@
           "readOnly": true,
           "x-ms-enum": {
             "name": "EnvironmentSpecificationType",
-            "modelAsString": false
+            "modelAsString": true
           }
         },
         "docker": {
@@ -6271,7 +6271,7 @@
           "type": "string",
           "x-ms-enum": {
             "name": "DataBindingMode",
-            "modelAsString": false
+            "modelAsString": true
           },
           "x-ms-mutability": [
             "create",
@@ -6297,7 +6297,7 @@
           "type": "string",
           "x-ms-enum": {
             "name": "DistributionType",
-            "modelAsString": false
+            "modelAsString": true
           },
           "x-ms-mutability": [
             "create",
@@ -6372,7 +6372,7 @@
           "type": "string",
           "x-ms-enum": {
             "name": "JobType",
-            "modelAsString": false
+            "modelAsString": true
           },
           "x-ms-mutability": [
             "create",
@@ -6480,7 +6480,7 @@
               "readOnly": true,
               "x-ms-enum": {
                 "name": "JobType",
-                "modelAsString": false
+                "modelAsString": true
               }
             },
             "status": {
@@ -6503,7 +6503,7 @@
               "type": "string",
               "x-ms-enum": {
                 "name": "JobStatus",
-                "modelAsString": false
+                "modelAsString": true
               }
             },
             "maxRunDurationSeconds": {
@@ -6557,7 +6557,7 @@
           "type": "string",
           "x-ms-enum": {
             "name": "ParameterSamplingType",
-            "modelAsString": false
+            "modelAsString": true
           }
         }
       },
@@ -6580,7 +6580,7 @@
           "type": "string",
           "x-ms-enum": {
             "name": "EarlyTerminationPolicyType",
-            "modelAsString": false
+            "modelAsString": true
           }
         },
         "evaluationInterval": {
@@ -6636,7 +6636,7 @@
           "type": "string",
           "x-ms-enum": {
             "name": "PrimaryMetricGoal",
-            "modelAsString": false
+            "modelAsString": true
           }
         }
       },
@@ -6692,7 +6692,7 @@
               "readOnly": true,
               "x-ms-enum": {
                 "name": "JobType",
-                "modelAsString": false
+                "modelAsString": true
               }
             },
             "status": {
@@ -6715,7 +6715,7 @@
               "type": "string",
               "x-ms-enum": {
                 "name": "JobStatus",
-                "modelAsString": false
+                "modelAsString": true
               }
             },
             "parameterSamplingConfiguration": {
@@ -6880,7 +6880,7 @@
           "type": "string",
           "x-ms-enum": {
             "name": "MediaType",
-            "modelAsString": false
+            "modelAsString": true
           },
           "x-ms-mutability": [
             "create",
@@ -6949,7 +6949,7 @@
           "readOnly": true,
           "x-ms-enum": {
             "name": "StatusMessageLevel",
-            "modelAsString": false
+            "modelAsString": true
           },
           "x-ms-mutability": [
             "read"
@@ -7036,7 +7036,7 @@
               "type": "string",
               "x-ms-enum": {
                 "name": "JobStatus",
-                "modelAsString": false
+                "modelAsString": true
               }
             },
             "progressMetrics": {
@@ -7174,7 +7174,7 @@
           "type": "string",
           "x-ms-enum": {
             "name": "ExportFormatType",
-            "modelAsString": false
+            "modelAsString": true
           },
           "x-ms-mutability": [
             "read"
@@ -7236,7 +7236,7 @@
           "readOnly": true,
           "x-ms-enum": {
             "name": "LabelExportState",
-            "modelAsString": false
+            "modelAsString": true
           },
           "x-ms-mutability": [
             "read"
@@ -7457,11 +7457,11 @@
     },
     "DeploymentConfigurationBase": {
       "required": [
-        "endpointComputeType"
+        "computeType"
       ],
       "type": "object",
       "properties": {
-        "endpointComputeType": {
+        "computeType": {
           "enum": [
             "Managed",
             "AKS",
@@ -7470,7 +7470,7 @@
           "type": "string",
           "x-ms-enum": {
             "name": "EndpointComputeType",
-            "modelAsString": false
+            "modelAsString": true
           }
         },
         "appInsightsEnabled": {
@@ -7495,7 +7495,7 @@
           "$ref": "machineLearningServices.json#/definitions/LivenessProbeRequirements"
         }
       },
-      "discriminator": "endpointComputeType",
+      "discriminator": "computeType",
       "additionalProperties": false
     },
     "OnlineDeploymentProperties": {
@@ -7549,7 +7549,7 @@
           "readOnly": true,
           "x-ms-enum": {
             "name": "DeploymentProvisioningState",
-            "modelAsString": false
+            "modelAsString": true
           }
         },
         "error": {
@@ -7646,7 +7646,7 @@
           "type": "string",
           "x-ms-enum": {
             "name": "ContainerType",
-            "modelAsString": false
+            "modelAsString": true
           }
         },
         "tail": {
@@ -7707,7 +7707,7 @@
           "readOnly": true,
           "x-ms-enum": {
             "name": "EndpointProvisioningState",
-            "modelAsString": false
+            "modelAsString": true
           },
           "x-ms-mutability": [
             "read"
@@ -7735,7 +7735,7 @@
           "type": "string",
           "x-ms-enum": {
             "name": "EndpointAuthModeType",
-            "modelAsString": false
+            "modelAsString": true
           }
         },
         "keys": {
@@ -7836,7 +7836,7 @@
           "example": "Primary",
           "x-ms-enum": {
             "name": "KeyType",
-            "modelAsString": false
+            "modelAsString": true
           }
         },
         "keyValue": {
