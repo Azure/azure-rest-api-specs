@@ -9946,10 +9946,7 @@
           "$ref": "#/definitions/BlobTags"
         },
         "ObjectReplicationMetadata": {
-          "type": "string",
-          "xml": {
-            "name": "OrMetadata"
-          }
+          "$ref": "#/definitions/ObjectReplicationMetadata"
         }
       }
     },
@@ -10886,6 +10883,16 @@
             "attribute": true
           }
         }
+      },
+      "additionalProperties": {
+        "type": "string"
+      }
+    },
+    "ObjectReplicationMetadata": {
+      "type": "object",
+      "x-ms-client-name": "OrMetadata",
+      "xml": {
+        "name": "OrMetadata"
       },
       "additionalProperties": {
         "type": "string"
