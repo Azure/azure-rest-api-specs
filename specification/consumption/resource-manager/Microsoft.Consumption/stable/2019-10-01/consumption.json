@@ -3891,6 +3891,11 @@
           "type": "object",
           "$ref": "#/definitions/BudgetFilter"
         },
+        "currencySetting": {
+          "description": "Indicates the currency that is used for this budget.",
+          "type": "string",
+          "readOnly": true
+        },
         "currentSpend": {
           "description": "The current amount of cost which is being tracked for a budget.",
           "$ref": "#/definitions/CurrentSpend",
@@ -4044,12 +4049,12 @@
           "format": "decimal"
         },
         "contactEmails": {
-          "description": "Email addresses to send the budget notification to when the threshold is exceeded.",
+          "description": "Email addresses to send the budget notification to when the threshold is exceeded. Must have at least one for calls outside of Subscription/Resource Group scope.",
           "type": "array",
           "items": {
             "type": "string"
           },
-          "minItems": 1,
+          "minItems": 0,
           "maxItems": 50
         },
         "contactRoles": {
@@ -4060,7 +4065,7 @@
           }
         },
         "contactGroups": {
-          "description": "Action groups to send the budget notification to when the threshold is exceeded.",
+          "description": "Action groups to send the budget notification to when the threshold is exceeded. Only supported at Subscription/Resource Group scope, other scopes must have at least one contactEmail.",
           "type": "array",
           "items": {
             "type": "string"
@@ -4074,6 +4079,7 @@
           "enum": [
             "Actual"
           ],
+          "readOnly": true,
           "x-ms-enum": {
             "name": "ThresholdType",
             "modelAsString": true
