@@ -443,6 +443,64 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/namedValues/{namedValueId}/refreshSecret": {
+      "post": {
+        "tags": [
+          "NamedValue"
+        ],
+        "operationId": "NamedValue_RefreshSecret",
+        "description": "Refresh the secret of the named value specified by its identifier.",
+        "x-ms-examples": {
+          "ApiManagementRefreshNamedValue": {
+            "$ref": "./examples/ApiManagementRefreshNamedValue.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/NamedValueIdParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Request to refresh secret was accepted."
+          },
+          "200": {
+            "description": "Named value was successfully updated.",
+            "schema": {
+              "$ref": "./definitions.json#/definitions/NamedValueContract"
+            },
+            "headers": {
+              "ETag": {
+                "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./apimanagement.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
     }
   },
   "definitions": {},
