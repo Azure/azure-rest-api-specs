@@ -63,6 +63,20 @@
               "$ref": "#/definitions/Vault"
             }
           },
+          "400": {
+            "description": "Bad request.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            },
+            "x-ms-error-response": true
+          },
+          "409": {
+            "description": "A conflict occurred to prevent the operation from completing.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            },
+            "x-ms-error-response": true
+          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
@@ -136,6 +150,20 @@
               "$ref": "#/definitions/Vault"
             }
           },
+          "400": {
+            "description": "Bad request.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            },
+            "x-ms-error-response": true
+          },
+          "409": {
+            "description": "A conflict occurred to prevent the operation from completing.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            },
+            "x-ms-error-response": true
+          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
@@ -189,6 +217,13 @@
           },
           "204": {
             "description": "No Content."
+          },
+          "400": {
+            "description": "Bad request.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            },
+            "x-ms-error-response": true
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -331,6 +366,27 @@
             "schema": {
               "$ref": "#/definitions/VaultAccessPolicyParameters"
             }
+          },
+          "400": {
+            "description": "Bad request.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            },
+            "x-ms-error-response": true
+          },
+          "404": {
+            "description": "The specified resource does not exist.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            },
+            "x-ms-error-response": true
+          },
+          "409": {
+            "description": "A conflict occurred to prevent the operation from completing.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            },
+            "x-ms-error-response": true
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -583,6 +639,20 @@
           "202": {
             "description": "Vault is being purged."
           },
+          "400": {
+            "description": "Bad request.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            },
+            "x-ms-error-response": true
+          },
+          "404": {
+            "description": "The specified resource does not exist.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            },
+            "x-ms-error-response": true
+          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
@@ -808,7 +878,8 @@
             "headers": {
               "Retry-After": {
                 "description": "(specified only if operation does not finish synchronously) The recommended number of seconds to wait before calling the URI specified in Azure-AsyncOperation.",
-                "type": "integer"
+                "type": "integer",
+                "format": "int32"
               },
               "Azure-AsyncOperation": {
                 "description": "(specified only if operation does not finish synchronously) The URI to poll for completion status. The response of this URI may be synchronous or asynchronous.",
@@ -870,7 +941,8 @@
             "headers": {
               "Retry-After": {
                 "description": "The recommended number of seconds to wait before calling the URI specified in the location header.",
-                "type": "integer"
+                "type": "integer",
+                "format": "int32"
               },
               "Location": {
                 "description": "The URI to poll for completion status.",
@@ -1209,7 +1281,15 @@
         },
         "provisioningState": {
           "type": "string",
-          "description": "Provisioning state of the vault."
+          "description": "Provisioning state of the vault.",
+          "enum": [
+            "Succeeded",
+            "RegisteringDns"
+          ],
+          "x-ms-enum": {
+            "name": "VaultProvisioningState",
+            "modelAsString": true
+          }
         },
         "privateEndpointConnections": {
           "readOnly": true,
@@ -1705,7 +1785,7 @@
         },
         "etag": {
           "type": "string",
-          "description": "Modified whenever the user or NRP changes the state of PE connection."
+          "description": "Modified whenever there is a change in the state of private endpoint connection."
         }
       },
       "allOf": [
