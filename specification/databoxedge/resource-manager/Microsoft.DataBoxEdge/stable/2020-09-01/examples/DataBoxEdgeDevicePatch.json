@@ -17,31 +17,49 @@
       "en-US"
     ],
     "parameters": {
-      "tags": {
-        "Key1": "value1",
-        "Key2": "value2"
+      "properties": {
+        "edgeProfile": {
+          "subscription": {
+            "id": "/subscriptions/0d44739e-0563-474f-97e7-24a0cdb23b29/resourceGroups/rapvs-rg/providers/Microsoft.AzureStack/linkedSubscriptions/ca014ddc-5cf2-45f8-b390-e901e4a0ae87"
+          }
+        }
       }
     }
   },
   "responses": {
     "200": {
       "body": {
-        "location": "WUS",
-        "tags": {
-          "Key1": "value1",
-          "Key2": "value2"
-        },
+        "location": "eastus2euap",
+        "tags": {},
         "sku": {
           "name": "Edge",
           "tier": "Standard"
         },
-        "etag": "W/\"datetime'2018-12-19T06%3A33%3A24.983Z'\"_W/\"datetime'2018-12-19T06%3A33%3A25.013Z'\"",
+        "etag": "W/\"datetime'2020-11-19T04%3A43%3A38.6457308Z'\"_W/\"datetime'2020-11-19T04%3A43%3A38.6507339Z'\"",
+        "identity": {
+          "type": "SystemAssigned",
+          "principalId": "b3e34fcc-ab02-4ca4-9d22-5de115419091",
+          "tenantId": "72f988bf-86f1-41af-91ab-2d7cd011db47"
+        },
+        "kind": "AzureStackEdge",
         "properties": {
           "dataBoxEdgeDeviceStatus": "ReadyToSetup",
           "deviceType": "DataBoxEdgeDevice",
-          "deviceLocalCapacity": 0
+          "deviceLocalCapacity": 0,
+          "timeZone": "Pacific Standard Time",
+          "nodeCount": 0,
+          "resourceMoveDetails": {
+            "operationInProgress": "None"
+          },
+          "edgeProfile": {
+            "subscription": {
+              "registrationId": "91d8753b-af42-4908-9a5e-2a61f08b20de",
+              "id": "/subscriptions/4385cf00-2d3a-425a-832f-f4285b1c9dce/resourceGroups/VmMgmtTestPass/providers/Microsoft.AzureStack/edgeSubscriptions/daaac4b0-35c4-4008-bdc6-b72ca5890f16",
+              "state": "Registered"
+            }
+          }
         },
-        "id": "/subscriptions/4385cf00-2d3a-425a-832f-f4285b1c9dce/resourceGroups/GroupForEdgeAutomation/providers/Microsoft.DataBoxEdge/dataBoxEdgeDevices/testedgedevice",
+        "id": "/subscriptions/4385cf00-2d3a-425a-832f-f4285b1c9dce/resourcegroups/VmMgmtTestPass/providers/Microsoft.DataBoxEdge/dataBoxEdgeDevices/testedgedevice",
         "name": "testedgedevice",
         "type": "Microsoft.DataBoxEdge/dataBoxEdgeDevices"
       }
