@@ -26,6 +26,16 @@ modelerfour:
   lenient-model-deduplication: true
 ```
 
+These settings apply when `--track2` and `--AMCS` is specified on the command line.
+
+``` yaml $(track2) && $(AMCS)
+package-version: 0.1.0
+namespace: azure.mgmt.amcs
+package-name: azure-mgmt-amcs
+basic-setup-py: true
+output-folder: $(python-sdks-folder)/amcs/azure-mgmt-amcs
+```
+
 ### Python multi-api
 
 Generate all API versions currently shipped for this package

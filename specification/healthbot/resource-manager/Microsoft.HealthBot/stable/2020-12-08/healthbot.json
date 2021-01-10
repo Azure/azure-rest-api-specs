@@ -37,48 +37,6 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/providers/Microsoft.HealthBot/checkNameAvailability": {
-      "post": {
-        "description": "Check whether a bot name is available.",
-        "operationId": "Bots_CheckNameAvailability",
-        "x-ms-examples": {
-          "check Name Availability": {
-            "$ref": "./examples/CheckNameAvailability.json"
-          }
-        },
-        "parameters": [
-          {
-            "name": "parameters",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/CheckNameAvailabilityRequestBody"
-            },
-            "description": "The request body parameters to provide for the check name availability request"
-          },
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The resource provider should return 200 (OK) to indicate that the operation completed successfully. For other errors (e.g. internal errors) use the appropriate HTTP error code.",
-            "schema": {
-              "$ref": "#/definitions/CheckNameAvailabilityResponseBody"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HealthBot/healthBots/{botName}": {
       "put": {
         "operationId": "Bots_Create",
@@ -87,7 +45,7 @@
             "$ref": "./examples/ResourceCreationPut.json"
           }
         },
-        "description": "Create a new Healthcare Bot.",
+        "description": "Create a new HealthBot.",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionIdParameter"
@@ -143,7 +101,7 @@
             "$ref": "./examples/ResourceInfoGet.json"
           }
         },
-        "description": "Get a Healthcare Bot.",
+        "description": "Get a HealthBot.",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionIdParameter"
@@ -180,7 +138,7 @@
             "$ref": "./examples/ResourceUpdatePatch.json"
           }
         },
-        "description": "Patch a Healthcare Bot.",
+        "description": "Patch a HealthBot.",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionIdParameter"
@@ -232,7 +190,7 @@
             "$ref": "./examples/ResourceDeletionDelete.json"
           }
         },
-        "description": "Delete a Healthcare Bot.",
+        "description": "Delete a HealthBot.",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionIdParameter"
@@ -395,72 +353,11 @@
             "name": "SkuName",
             "modelAsString": false
           }
-        },
-        "tier": {
-          "type": "string",
-          "enum": [
-            "Free",
-            "Standard"
-          ],
-          "x-ms-enum": {
-            "name": "SkuTier",
-            "modelAsString": false
-          },
-          "description": "This field is required to be implemented by the Resource Provider if the service has more than one tier, but is not required on a PUT."
-        },
-        "size": {
-          "type": "string",
-          "description": "The SKU size. When the name field is the combination of tier and some other value, this would be the standalone code. "
-        },
-        "family": {
-          "type": "string",
-          "description": "If the service has different generations of hardware, for the same SKU, then that can be captured here."
-        },
-        "capacity": {
-          "type": "integer",
-          "format": "int32",
-          "description": "If the SKU supports scale out/in then the capacity integer should be included. If scale out/in is not possible for the resource this may be omitted."
         }
       },
       "required": [
         "name"
       ]
-    },
-    "CheckNameAvailabilityRequestBody": {
-      "description": "The request body for a request to to check availability of a bot name.",
-      "type": "object",
-      "properties": {
-        "name": {
-          "description": "the name of the bot for which availability needs to be checked.",
-          "type": "string"
-        },
-        "type": {
-          "description": "the type of the bot for which availability needs to be checked",
-          "type": "string"
-        }
-      },
-      "required": [
-        "name",
-        "type"
-      ]
-    },
-    "CheckNameAvailabilityResponseBody": {
-      "description": "The response body returned for a request to check availability of a bot name.",
-      "type": "object",
-      "properties": {
-        "nameAvailable": {
-          "description": "indicates if the bot name is valid and available.",
-          "type": "boolean"
-        },
-        "reason": {
-          "description": "Reason for the result",
-          "type": "string"
-        },
-        "message": {
-          "description": "additional message from server",
-          "type": "string"
-        }
-      }
     },
     "Resource": {
       "description": "The resource model definition for a ARM tracked top level resource",
@@ -536,9 +433,12 @@
         },
         "properties": {
           "$ref": "#/definitions/HealthBotProperties",
-          "description": "The set of properties specific to healthcare bot resource."
+          "description": "The set of properties specific to Healthbot resource."
         }
-      }
+      },
+      "required": [
+        "sku"
+      ]
     },
     "HealthBotProperties": {
       "title": "HealthBotProperties",
@@ -546,7 +446,7 @@
       "properties": {
         "provisioningState": {
           "type": "string",
-          "description": "The provisioning state of the Healthcare bot resource.",
+          "description": "The provisioning state of the Healthbot resource.",
           "readOnly": true
         },
         "botManagementPortalLink": {
@@ -771,10 +671,10 @@
           "items": {
             "$ref": "#/definitions/HealthBot"
           },
-          "description": "Gets the list of healthcare bot results and their properties."
+          "description": "Gets the list of Healthbot results and their properties."
         }
       },
-      "description": "The list of healthcare bot operation response."
+      "description": "The list of Healthbot operation response."
     }
   },
   "parameters": {
