@@ -81,7 +81,7 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": null
+          "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
           "AvailableSkus": {
@@ -245,7 +245,7 @@
             "type": "string"
           },
           {
-            "name": "DataBoxEdgeDevice",
+            "name": "dataBoxEdgeDevice",
             "in": "body",
             "description": "The resource object.",
             "required": true,
@@ -309,14 +309,14 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Successfully deleted the resource."
-          },
           "202": {
             "description": "Accepted the request to delete the resource."
           },
           "204": {
             "description": "The resource is already deleted."
+          },
+          "200": {
+            "description": "Successfully deleted the resource."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -630,14 +630,14 @@
           }
         ],
         "responses": {
+          "202": {
+            "description": "Accepted the request to create or update the bandwidth schedule."
+          },
           "200": {
             "description": "Successfully created or updated the bandwidth schedule.",
             "schema": {
               "$ref": "#/definitions/BandwidthSchedule"
             }
-          },
-          "202": {
-            "description": "Accepted the request to create or update the bandwidth schedule."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -685,14 +685,14 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Successfully deleted the bandwidth schedule."
-          },
           "202": {
             "description": "Accepted the request to delete the bandwidth schedule."
           },
           "204": {
             "description": "Successfully deleted the bandwidth schedule."
+          },
+          "200": {
+            "description": "Success"
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -735,11 +735,11 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Successfully downloaded the updates on the device."
-          },
           "202": {
             "description": "Accepted the request to download the updates on the device."
+          },
+          "200": {
+            "description": "Successfully downloaded the updates on the device."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -756,12 +756,58 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataBoxEdge/dataBoxEdgeDevices/{deviceName}/generateCertificate": {
+      "post": {
+        "tags": [
+          "Devices"
+        ],
+        "description": "Generates certificate for activation key.",
+        "operationId": "Devices_GenerateCertificate",
+        "parameters": [
+          {
+            "name": "deviceName",
+            "in": "path",
+            "description": "The device name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully generated self signed certificate.",
+            "schema": {
+              "$ref": "#/definitions/GenerateCertResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DownloadUpdatesPost": {
+            "$ref": "./examples/GenerateCertificate.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataBoxEdge/dataBoxEdgeDevices/{deviceName}/getExtendedInformation": {
       "post": {
         "tags": [
           "Devices"
         ],
-        "description": "Gets additional information for the specified Data Box Edge/Data Box Gateway device.",
+        "description": "Gets additional information for the specified Azure Stack Edge/Data Box Gateway device.",
         "operationId": "Devices_GetExtendedInformation",
         "parameters": [
           {
@@ -828,11 +874,11 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Successfully installed updates on the device."
-          },
           "202": {
             "description": "Accepted the request to install updates on the device."
+          },
+          "200": {
+            "description": "Successfully installed updates on the device."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -986,9 +1032,6 @@
               "$ref": "#/definitions/CloudError"
             }
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": null
         },
         "x-ms-examples": {
           "NodesGetAllInDevice": {
@@ -1178,14 +1221,14 @@
           }
         ],
         "responses": {
+          "202": {
+            "description": "Accepted the request to create or update the order."
+          },
           "200": {
             "description": "Successfully created or updated the order.",
             "schema": {
               "$ref": "#/definitions/Order"
             }
-          },
-          "202": {
-            "description": "Accepted the request to create or update the order."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -1226,14 +1269,14 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Successfully deleted the order."
-          },
           "202": {
             "description": "Accepted the request to delete the order."
           },
           "204": {
             "description": "The order is already deleted."
+          },
+          "200": {
+            "description": "Successfully deleted the order."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -1246,6 +1289,52 @@
         "x-ms-examples": {
           "OrderDelete": {
             "$ref": "./examples/OrderDelete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataBoxEdge/dataBoxEdgeDevices/{deviceName}/orders/default/listDCAccessCode": {
+      "post": {
+        "tags": [
+          "Orders"
+        ],
+        "summary": "Gets the DCAccess Code",
+        "operationId": "Orders_ListDCAccessCode",
+        "parameters": [
+          {
+            "name": "deviceName",
+            "in": "path",
+            "description": "The device name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "DC Access code for the device",
+            "schema": {
+              "$ref": "#/definitions/DCAccessCode"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetDCAccessCode": {
+            "$ref": "./examples/GetDCAccessCode.json"
           }
         }
       }
@@ -1392,14 +1481,14 @@
           }
         ],
         "responses": {
+          "202": {
+            "description": "Accepted the request to create or update the role."
+          },
           "200": {
             "description": "Successfully created or updated the role.",
             "schema": {
               "$ref": "#/definitions/Role"
             }
-          },
-          "202": {
-            "description": "Accepted the request to create or update the role."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -1447,14 +1536,14 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Successfully deleted the role."
-          },
           "202": {
             "description": "Accepted the request to delete the role."
           },
           "204": {
             "description": "The role is already deleted."
+          },
+          "200": {
+            "description": "Successfully deleted the role."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -1467,6 +1556,483 @@
         "x-ms-examples": {
           "RoleDelete": {
             "$ref": "./examples/RoleDelete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataBoxEdge/dataBoxEdgeDevices/{deviceName}/roles/{roleName}/addons": {
+      "get": {
+        "tags": [
+          "Addons"
+        ],
+        "description": "Lists all the addons configured in the role.",
+        "operationId": "Addons_ListByRole",
+        "parameters": [
+          {
+            "name": "deviceName",
+            "in": "path",
+            "description": "The device name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "roleName",
+            "in": "path",
+            "description": "The role name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of all the addons configured in the role.",
+            "schema": {
+              "$ref": "#/definitions/AddonList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "RoleListAddOns": {
+            "$ref": "./examples/RoleListAddOns.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataBoxEdge/dataBoxEdgeDevices/{deviceName}/roles/{roleName}/addons/{addonName}": {
+      "get": {
+        "tags": [
+          "Addons"
+        ],
+        "description": "Gets a specific addon by name.",
+        "operationId": "Addons_Get",
+        "parameters": [
+          {
+            "name": "deviceName",
+            "in": "path",
+            "description": "The device name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "roleName",
+            "in": "path",
+            "description": "The role name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "addonName",
+            "in": "path",
+            "description": "The addon name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The addon with the specified name in the role.",
+            "schema": {
+              "$ref": "#/definitions/Addon"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetAddons": {
+            "$ref": "./examples/GetAddons.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Addons"
+        ],
+        "description": "Create or update a addon.",
+        "operationId": "Addons_CreateOrUpdate",
+        "parameters": [
+          {
+            "name": "deviceName",
+            "in": "path",
+            "description": "The device name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "roleName",
+            "in": "path",
+            "description": "The role name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "addonName",
+            "in": "path",
+            "description": "The addon name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "addon",
+            "in": "body",
+            "description": "The addon properties.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Addon"
+            }
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted the request to create or update the addon."
+          },
+          "200": {
+            "description": "Successfully created or updated the addon.",
+            "schema": {
+              "$ref": "#/definitions/Addon"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "PutAddons": {
+            "$ref": "./examples/PutAddons.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Addons"
+        ],
+        "description": "Deletes the addon on the device.",
+        "operationId": "Addons_Delete",
+        "parameters": [
+          {
+            "name": "deviceName",
+            "in": "path",
+            "description": "The device name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "roleName",
+            "in": "path",
+            "description": "The role name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "addonName",
+            "in": "path",
+            "description": "The addon name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted the request to delete the addon."
+          },
+          "204": {
+            "description": "The addon is already deleted."
+          },
+          "200": {
+            "description": "Successfully deleted the addon."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "DeleteAddons": {
+            "$ref": "./examples/DeleteAddons.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataBoxEdge/dataBoxEdgeDevices/{deviceName}/roles/{roleName}/monitoringConfig": {
+      "get": {
+        "tags": [
+          "MonitoringConfig"
+        ],
+        "summary": "Lists metric configurations in a role.",
+        "operationId": "MonitoringConfig_List",
+        "parameters": [
+          {
+            "name": "deviceName",
+            "in": "path",
+            "description": "The device name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "roleName",
+            "in": "path",
+            "description": "The role name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The monitoring config details.",
+            "schema": {
+              "$ref": "#/definitions/MonitoringMetricConfigurationList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "ListMonitoringConfig": {
+            "$ref": "./examples/ListMonitoringConfig.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataBoxEdge/dataBoxEdgeDevices/{deviceName}/roles/{roleName}/monitoringConfig/default": {
+      "get": {
+        "tags": [
+          "MonitoringConfig"
+        ],
+        "summary": "Gets a  metric configuration of a role.",
+        "operationId": "MonitoringConfig_Get",
+        "parameters": [
+          {
+            "name": "deviceName",
+            "in": "path",
+            "description": "The device name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "roleName",
+            "in": "path",
+            "description": "The role name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The monitoring config details.",
+            "schema": {
+              "$ref": "#/definitions/MonitoringMetricConfiguration"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetMonitoringConfig": {
+            "$ref": "./examples/GetMonitoringConfig.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "MonitoringConfig"
+        ],
+        "summary": "Creates a new metric configuration or updates an existing one for a role.",
+        "operationId": "MonitoringConfig_CreateOrUpdate",
+        "parameters": [
+          {
+            "name": "deviceName",
+            "in": "path",
+            "description": "The device name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "roleName",
+            "in": "path",
+            "description": "The role name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "monitoringMetricConfiguration",
+            "in": "body",
+            "description": "The metric configuration.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MonitoringMetricConfiguration"
+            }
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted the request to create or update the metrics configuration."
+          },
+          "200": {
+            "description": "Successfully created or updated the metrics configuration.",
+            "schema": {
+              "$ref": "#/definitions/MonitoringMetricConfiguration"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "PutMonitoringConfig": {
+            "$ref": "./examples/PutMonitoringConfig.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "MonitoringConfig"
+        ],
+        "summary": "deletes a new metric configuration for a role.",
+        "operationId": "MonitoringConfig_Delete",
+        "parameters": [
+          {
+            "name": "deviceName",
+            "in": "path",
+            "description": "The device name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "roleName",
+            "in": "path",
+            "description": "The role name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully deleted the metrics configuration."
+          },
+          "202": {
+            "description": "Accepted the request to delete the metrics configuration."
+          },
+          "204": {
+            "description": "The metrics configuration is already deleted."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "DeleteMonitoringConfig": {
+            "$ref": "./examples/DeleteMonitoringConfig.json"
           }
         }
       }
@@ -1497,11 +2063,11 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Successfully scanned the device for updates."
-          },
           "202": {
             "description": "Accepted the request to scan for updates on the device."
+          },
+          "200": {
+            "description": "Successfully scanned the device for updates."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -1716,14 +2282,14 @@
           }
         ],
         "responses": {
+          "202": {
+            "description": "Accepted the request to create or update the share."
+          },
           "200": {
             "description": "Successfully created or updated the share.",
             "schema": {
               "$ref": "#/definitions/Share"
             }
-          },
-          "202": {
-            "description": "Accepted the request to create or update the share."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -1771,14 +2337,14 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Successfully deleted the share."
-          },
           "202": {
             "description": "Accepted the request to delete the share."
           },
           "204": {
             "description": "The share is already deleted."
+          },
+          "200": {
+            "description": "Successfully deleted the share."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -1828,11 +2394,11 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Successfully refreshed the share on the device."
-          },
           "202": {
             "description": "Accepted the request to refresh the share on the device."
+          },
+          "200": {
+            "description": "Successfully refreshed the share on the device."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -1991,14 +2557,14 @@
           }
         ],
         "responses": {
+          "202": {
+            "description": "Accepted the request to create or update the storage account credential."
+          },
           "200": {
             "description": "Successfully created or updated the storage account credential.",
             "schema": {
               "$ref": "#/definitions/StorageAccountCredential"
             }
-          },
-          "202": {
-            "description": "Accepted the request to create or update the storage account credential."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -2046,14 +2612,14 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Successfully deleted the storage account credential."
-          },
           "202": {
             "description": "Accepted the request to delete the storage account credential."
           },
           "204": {
             "description": "The storage account credential is already deleted."
+          },
+          "200": {
+            "description": "Successfully deleted the storage account credential."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -2075,7 +2641,7 @@
         "tags": [
           "StorageAccounts"
         ],
-        "summary": "Lists all the storage accounts in a Data Box Edge/Data Box Gateway device.",
+        "summary": "Lists all the StorageAccounts in a Data Box Edge/Data Box Gateway device.",
         "operationId": "StorageAccounts_ListByDataBoxEdgeDevice",
         "parameters": [
           {
@@ -2212,14 +2778,14 @@
           }
         ],
         "responses": {
+          "202": {
+            "description": "Accepted the request to create or update the StorageAccount."
+          },
           "200": {
             "description": "Successfully created or updated the StorageAccount.",
             "schema": {
               "$ref": "#/definitions/StorageAccount"
             }
-          },
-          "202": {
-            "description": "Accepted the request to create or update the StorageAccount."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -2451,14 +3017,14 @@
           }
         ],
         "responses": {
+          "202": {
+            "description": "Accepted the request to create or update the container."
+          },
           "200": {
             "description": "Successfully created or updated the container.",
             "schema": {
               "$ref": "#/definitions/Container"
             }
-          },
-          "202": {
-            "description": "Accepted the request to create or update the container."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -2574,11 +3140,11 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Successfully refreshed the container on the device."
-          },
           "202": {
             "description": "Accepted the request to refresh the container on the device."
+          },
+          "200": {
+            "description": "Successfully refreshed the container on the device."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -2620,7 +3186,7 @@
             "$ref": "#/parameters/apiVersionParameter"
           },
           {
-            "name": "$filter",
+            "name": "$expand",
             "in": "query",
             "description": "Specify $filter='CustomContextTag eq <tag>' to filter on custom context tag property",
             "required": false,
@@ -2744,14 +3310,14 @@
           }
         ],
         "responses": {
+          "202": {
+            "description": "Accepted the request to create or update the trigger."
+          },
           "200": {
             "description": "Successfully created or updated the trigger.",
             "schema": {
               "$ref": "#/definitions/Trigger"
             }
-          },
-          "202": {
-            "description": "Accepted the request to create or update the trigger."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -2799,14 +3365,14 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Successfully deleted the trigger."
-          },
           "202": {
             "description": "Accepted the request to delete the trigger."
           },
           "204": {
             "description": "The trigger is already deleted."
+          },
+          "200": {
+            "description": "Successfully deleted the trigger."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -2819,6 +3385,61 @@
         "x-ms-examples": {
           "TriggerDelete": {
             "$ref": "./examples/TriggerDelete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataBoxEdge/dataBoxEdgeDevices/{deviceName}/updateExtendedInformation": {
+      "post": {
+        "tags": [
+          "Devices"
+        ],
+        "description": "Gets additional information for the specified Data Box Edge/Data Box Gateway device.",
+        "operationId": "Devices_UpdateExtendedInformation",
+        "parameters": [
+          {
+            "name": "deviceName",
+            "in": "path",
+            "description": "The device name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The patch object.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DataBoxEdgeDeviceExtendedInfoPatch"
+            }
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Modify additional information.",
+            "schema": {
+              "$ref": "#/definitions/DataBoxEdgeDeviceExtendedInfo"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetUpdateExtendedInfo": {
+            "$ref": "./examples/GetUpdateExtendedInfo.json"
           }
         }
       }
@@ -2949,9 +3570,9 @@
             "$ref": "#/parameters/apiVersionParameter"
           },
           {
-            "name": "$filter",
+            "name": "$expand",
             "in": "query",
-            "description": "Specify $filter='UserType eq <type>' to filter on user type property",
+            "description": "Specify $filter='Type eq <type>' to filter on user type property",
             "required": false,
             "type": "string"
           }
@@ -3073,14 +3694,14 @@
           }
         ],
         "responses": {
+          "202": {
+            "description": "Accepted the request to create or update the user."
+          },
           "200": {
             "description": "Successfully created or updated the user.",
             "schema": {
               "$ref": "#/definitions/User"
             }
-          },
-          "202": {
-            "description": "Accepted the request to create or update the user."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -3128,14 +3749,14 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Successfully deleted the user."
-          },
           "202": {
             "description": "Accepted the request to delete the user."
           },
           "204": {
             "description": "The user is already deleted."
+          },
+          "200": {
+            "description": "Successfully deleted the user."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -3151,62 +3772,63 @@
           }
         }
       }
-    },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.DataBoxEdge/skus": {
-      "get": {
-        "tags": [
-          "Skus"
-        ],
-        "summary": "List all the available Skus in the region and information related to them",
-        "operationId": "Skus_List",
-        "parameters": [
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          },
-          {
-            "name": "$filter",
-            "in": "query",
-            "description": "Specify $filter='location eq <location>' to filter on location.",
-            "required": false,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Lists the available Skus and information related to them.",
-            "schema": {
-              "$ref": "#/definitions/SkuInformationList"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": null
-        },
-        "x-ms-examples": {
-          "ListSkus": {
-            "$ref": "./examples/ListSkus.json"
-          }
-        }
-      }
     }
   },
   "definitions": {
+    "Addon": {
+      "description": "Role Addon",
+      "required": [
+        "kind"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ARMBaseModel"
+        }
+      ],
+      "properties": {
+        "kind": {
+          "description": "Addon type.",
+          "enum": [
+            "IotEdge",
+            "ArcForKubernetes"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "AddonType",
+            "modelAsString": true
+          }
+        },
+        "systemData": {
+          "description": "Addon type",
+          "$ref": "#/definitions/SystemData"
+        }
+      },
+      "discriminator": "kind"
+    },
+    "AddonList": {
+      "description": "Collection of all the Role addon on the Azure Stack Edge device.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The Value.",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Addon"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "Link to the next set of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
     "Address": {
       "description": "The shipping address of the customer.",
       "required": [
-        "addressLine1",
-        "postalCode",
-        "city",
-        "state",
         "country"
       ],
       "type": "object",
@@ -3250,6 +3872,10 @@
         }
       ],
       "properties": {
+        "systemData": {
+          "description": "Alert generated in the resource",
+          "$ref": "#/definitions/SystemData"
+        },
         "properties": {
           "$ref": "#/definitions/AlertProperties",
           "description": "Properties of alert.",
@@ -3286,6 +3912,7 @@
       "properties": {
         "value": {
           "description": "The value.",
+          "uniqueItems": false,
           "type": "array",
           "items": {
             "$ref": "#/definitions/Alert"
@@ -3350,6 +3977,119 @@
             "type": "string"
           },
           "readOnly": true
+        }
+      }
+    },
+    "ArcAddon": {
+      "description": "Arc Addon.",
+      "required": [
+        "properties",
+        "kind"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Addon"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ArcAddonProperties",
+          "description": "Properties specific to Arc addon.",
+          "x-ms-client-flatten": true
+        },
+        "id": {
+          "description": "The path ID that uniquely identifies the object.",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "The object name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "The hierarchical type of the object.",
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "x-ms-discriminator-value": "ArcForKubernetes"
+    },
+    "ArcAddonProperties": {
+      "description": "Arc addon properties.",
+      "required": [
+        "subscriptionId",
+        "resourceGroupName",
+        "resourceName",
+        "resourceLocation"
+      ],
+      "type": "object",
+      "properties": {
+        "subscriptionId": {
+          "description": "Arc resource subscription Id",
+          "type": "string"
+        },
+        "resourceGroupName": {
+          "description": "Arc resource group name",
+          "type": "string"
+        },
+        "resourceName": {
+          "description": "Arc resource Name",
+          "type": "string"
+        },
+        "resourceLocation": {
+          "description": "Arc resource location",
+          "type": "string"
+        },
+        "version": {
+          "description": "Arc resource version",
+          "type": "string",
+          "readOnly": true
+        },
+        "hostPlatform": {
+          "description": "Host OS supported by the Arc addon.",
+          "enum": [
+            "Windows",
+            "Linux"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "PlatformType",
+            "modelAsString": true
+          }
+        },
+        "hostPlatformType": {
+          "description": "Platform where the runtime is hosted.",
+          "enum": [
+            "KubernetesCluster",
+            "LinuxVM"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "HostPlatformType",
+            "modelAsString": true
+          }
+        },
+        "provisioningState": {
+          "description": "Addon Provisioning State",
+          "enum": [
+            "Invalid",
+            "Creating",
+            "Created",
+            "Updating",
+            "Reconfiguring",
+            "Failed",
+            "Deleting"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "AddonState",
+            "modelAsString": true
+          }
         }
       }
     },
@@ -3460,6 +4200,10 @@
         }
       ],
       "properties": {
+        "systemData": {
+          "description": "Bandwidth object related to ASE resource",
+          "$ref": "#/definitions/SystemData"
+        },
         "properties": {
           "$ref": "#/definitions/BandwidthScheduleProperties",
           "description": "The properties of the bandwidth schedule.",
@@ -3492,6 +4236,7 @@
         },
         "days": {
           "description": "The days of the week when this schedule is applicable.",
+          "uniqueItems": false,
           "type": "array",
           "items": {
             "enum": [
@@ -3518,6 +4263,7 @@
       "properties": {
         "value": {
           "description": "The list of bandwidth schedules.",
+          "uniqueItems": false,
           "type": "array",
           "items": {
             "$ref": "#/definitions/BandwidthSchedule"
@@ -3558,6 +4304,80 @@
         }
       }
     },
+    "CloudEdgeManagementRole": {
+      "description": "CloudEdgeManagementRole role.",
+      "required": [
+        "kind"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Role"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/CloudEdgeManagementRoleProperties",
+          "description": "Properties specific to CloudEdgeManagementRole role.",
+          "x-ms-client-flatten": true
+        },
+        "id": {
+          "description": "The path ID that uniquely identifies the object.",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "The object name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "The hierarchical type of the object.",
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "x-ms-discriminator-value": "CloudEdgeManagement"
+    },
+    "CloudEdgeManagementRoleProperties": {
+      "description": "CloudEdgeManagement Role properties.",
+      "required": [
+        "roleStatus"
+      ],
+      "type": "object",
+      "properties": {
+        "localManagementStatus": {
+          "description": "Local Edge Management Status",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "RoleStatus",
+            "modelAsString": true
+          }
+        },
+        "edgeProfile": {
+          "$ref": "#/definitions/EdgeProfile",
+          "description": "Edge Profile of the resource",
+          "readOnly": true
+        },
+        "roleStatus": {
+          "description": "Role status.",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "RoleStatus",
+            "modelAsString": true
+          }
+        }
+      }
+    },
     "CloudError": {
       "description": "An error response from the service.",
       "properties": {
@@ -3589,6 +4409,52 @@
       },
       "x-ms-external": true
     },
+    "CniConfig": {
+      "description": "Cni configuration",
+      "type": "object",
+      "properties": {
+        "type": {
+          "description": "Cni type",
+          "type": "string",
+          "readOnly": true
+        },
+        "version": {
+          "description": "Cni version",
+          "type": "string",
+          "readOnly": true
+        },
+        "podSubnet": {
+          "description": "Pod Subnet",
+          "type": "string",
+          "readOnly": true
+        },
+        "serviceSubnet": {
+          "description": "Service subnet",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ComputeResource": {
+      "description": "Compute infrastructure Resource",
+      "required": [
+        "processorCount",
+        "memoryInGB"
+      ],
+      "type": "object",
+      "properties": {
+        "processorCount": {
+          "format": "int32",
+          "description": "Processor count",
+          "type": "integer"
+        },
+        "memoryInGB": {
+          "format": "int64",
+          "description": "Memory in GB",
+          "type": "integer"
+        }
+      }
+    },
     "ContactDetails": {
       "description": "Contains all the contact details of the customer.",
       "required": [
@@ -3613,6 +4479,7 @@
         },
         "emailList": {
           "description": "The email list.",
+          "uniqueItems": false,
           "type": "array",
           "items": {
             "type": "string"
@@ -3632,6 +4499,10 @@
         }
       ],
       "properties": {
+        "systemData": {
+          "description": "Container in DataBoxEdge Resource",
+          "$ref": "#/definitions/SystemData"
+        },
         "properties": {
           "$ref": "#/definitions/ContainerProperties",
           "description": "The container properties.",
@@ -3645,6 +4516,7 @@
       "properties": {
         "value": {
           "description": "The list of containers.",
+          "uniqueItems": false,
           "type": "array",
           "items": {
             "$ref": "#/definitions/Container"
@@ -3742,6 +4614,28 @@
           "description": "The etag for the devices.",
           "type": "string"
         },
+        "identity": {
+          "$ref": "#/definitions/ResourceIdentity",
+          "description": "Msi identity of the resource"
+        },
+        "kind": {
+          "description": "The etag for the devices.",
+          "enum": [
+            "AzureDataBoxGateway",
+            "AzureStackEdge",
+            "AzureStackHub",
+            "AzureModularDataCentre"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "DataBoxEdgeDeviceKind",
+            "modelAsString": true
+          }
+        },
+        "systemData": {
+          "description": "DataBoxEdge Resource",
+          "$ref": "#/definitions/SystemData"
+        },
         "properties": {
           "$ref": "#/definitions/DataBoxEdgeDeviceProperties",
           "description": "The properties of the Data Box Edge/Gateway device.",
@@ -3765,6 +4659,28 @@
         }
       }
     },
+    "DataBoxEdgeDeviceExtendedInfoPatch": {
+      "description": "The Data Box Edge/Gateway device extended info patch.",
+      "type": "object",
+      "properties": {
+        "clientSecretStoreId": {
+          "description": "The Key Vault ARM Id for client secrets",
+          "type": "string"
+        },
+        "clientSecretStoreUrl": {
+          "description": "The url to access the Client Key Vault",
+          "type": "string"
+        },
+        "channelIntegrityKeyName": {
+          "description": "The name for Channel Integrity Key stored in the Client Key Vault",
+          "type": "string"
+        },
+        "channelIntegrityKeyVersion": {
+          "description": "The version of Channel Integrity Key stored in the Client Key Vault",
+          "type": "string"
+        }
+      }
+    },
     "DataBoxEdgeDeviceExtendedInfoProperties": {
       "description": "The properties of the Data Box Edge/Gateway device extended info.",
       "type": "object",
@@ -3781,6 +4697,22 @@
           "description": "The Resource ID of the Resource.",
           "type": "string",
           "readOnly": true
+        },
+        "clientSecretStoreId": {
+          "description": "The Key Vault ARM Id for client secrets",
+          "type": "string"
+        },
+        "clientSecretStoreUrl": {
+          "description": "The url to access the Client Key Vault",
+          "type": "string"
+        },
+        "channelIntegrityKeyName": {
+          "description": "The name of Channel Integrity Key stored in the Client Key Vault",
+          "type": "string"
+        },
+        "channelIntegrityKeyVersion": {
+          "description": "The version of Channel Integrity Key stored in the Client Key Vault",
+          "type": "string"
         }
       }
     },
@@ -3790,6 +4722,7 @@
       "properties": {
         "value": {
           "description": "The list of Data Box Edge/Gateway devices.",
+          "uniqueItems": false,
           "type": "array",
           "items": {
             "$ref": "#/definitions/DataBoxEdgeDevice"
@@ -3813,6 +4746,15 @@
           "additionalProperties": {
             "type": "string"
           }
+        },
+        "identity": {
+          "$ref": "#/definitions/ResourceIdentity",
+          "description": "Msi identity of the resource"
+        },
+        "properties": {
+          "$ref": "#/definitions/DataBoxEdgeDevicePropertiesPatch",
+          "description": "The properties associated with the Data Box Edge/Gateway resource",
+          "x-ms-client-flatten": true
         }
       }
     },
@@ -3899,13 +4841,17 @@
         },
         "configuredRoleTypes": {
           "description": "Type of compute roles configured.",
+          "uniqueItems": false,
           "type": "array",
           "items": {
             "enum": [
               "IOT",
               "ASA",
               "Functions",
-              "Cognitive"
+              "Cognitive",
+              "MEC",
+              "CloudEdgeManagement",
+              "Kubernetes"
             ],
             "type": "string",
             "x-ms-enum": {
@@ -3920,6 +4866,46 @@
           "description": "The number of nodes in the cluster.",
           "type": "integer",
           "readOnly": true
+        },
+        "resourceMoveDetails": {
+          "$ref": "#/definitions/ResourceMoveDetails",
+          "description": "The details of the move operation on this resource."
+        },
+        "edgeProfile": {
+          "$ref": "#/definitions/EdgeProfile",
+          "description": "The details of Edge Profile for this resource"
+        }
+      }
+    },
+    "DataBoxEdgeDevicePropertiesPatch": {
+      "description": "The Data Box Edge/Gateway device properties patch.",
+      "type": "object",
+      "properties": {
+        "edgeProfile": {
+          "$ref": "#/definitions/EdgeProfilePatch",
+          "description": "Edge Profile property of the Data Box Edge/Gateway device"
+        }
+      }
+    },
+    "DataBoxEdgeMoveRequest": {
+      "description": "Resource Move details",
+      "required": [
+        "targetResourceGroup",
+        "resources"
+      ],
+      "type": "object",
+      "properties": {
+        "targetResourceGroup": {
+          "description": "Target resource group ARMId",
+          "type": "string"
+        },
+        "resources": {
+          "description": "List of resources to be moved",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         }
       }
     },
@@ -3945,9 +4931,17 @@
             "TEA_4Node_UPS_Heater",
             "TMA",
             "TDC",
-            "TCA_Large",
             "TCA_Small",
-            "GPU"
+            "GPU",
+            "TCA_Large",
+            "EdgeP_Base",
+            "EdgeP_High",
+            "EdgePR_Base",
+            "EdgePR_Base_UPS",
+            "EdgeMR_Mini",
+            "RCA_Small",
+            "RCA_Large",
+            "RDC"
           ],
           "type": "string",
           "readOnly": true,
@@ -3985,6 +4979,7 @@
         },
         "locations": {
           "description": "Availability of the Sku for the region.",
+          "uniqueItems": false,
           "type": "array",
           "items": {
             "type": "string"
@@ -3993,6 +4988,7 @@
         },
         "apiVersions": {
           "description": "The API versions in which Sku is available.",
+          "uniqueItems": false,
           "type": "array",
           "items": {
             "type": "string"
@@ -4001,6 +4997,7 @@
         },
         "locationInfo": {
           "description": "Availability of the Sku for the location/zone/site.",
+          "uniqueItems": false,
           "type": "array",
           "items": {
             "$ref": "#/definitions/SkuLocationInfo"
@@ -4009,22 +5006,15 @@
         },
         "costs": {
           "description": "The pricing info of the Sku.",
+          "uniqueItems": false,
           "type": "array",
           "items": {
             "$ref": "#/definitions/SkuCost"
           },
           "readOnly": true
         },
-        "restrictions": {
-          "description": "Restriction info of the SKU.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/SkuRestriction"
-          },
-          "readOnly": true
-        },
         "signupOption": {
-          "description": "Can the SKU be signed up..",
+          "description": "Sku can be signed up by customer or not.",
           "enum": [
             "None",
             "Available"
@@ -4037,7 +5027,7 @@
           }
         },
         "version": {
-          "description": "Sku version.",
+          "description": "Availability of the Sku as preview/stable.",
           "enum": [
             "Stable",
             "Preview"
@@ -4050,7 +5040,7 @@
           }
         },
         "availability": {
-          "description": "Is SKU available",
+          "description": "Links to the next set of results",
           "enum": [
             "Available",
             "Unavailable"
@@ -4061,6 +5051,24 @@
             "name": "SkuAvailability",
             "modelAsString": true
           }
+        },
+        "shipmentTypes": {
+          "description": "List of Shipment Types supported by this SKU",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "enum": [
+              "NotApplicable",
+              "ShippedToCustomer",
+              "SelfPickup"
+            ],
+            "type": "string",
+            "x-ms-enum": {
+              "name": "ShipmentType",
+              "modelAsString": true
+            }
+          },
+          "readOnly": true
         }
       }
     },
@@ -4070,6 +5078,7 @@
       "properties": {
         "value": {
           "description": "List of ResourceType Sku",
+          "uniqueItems": false,
           "type": "array",
           "items": {
             "$ref": "#/definitions/DataBoxEdgeSku"
@@ -4078,6 +5087,111 @@
         },
         "nextLink": {
           "description": "Links to the next set of results",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "DCAccessCode": {
+      "description": "DC Access code in the case of Self Managed Shipping.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/DCAccessCodeProperties",
+          "description": "DCAccessCode properties.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "DCAccessCodeProperties": {
+      "description": "DCAccessCode Properties.",
+      "type": "object",
+      "properties": {
+        "authCode": {
+          "description": "DCAccess Code for the Self Managed shipment.",
+          "type": "string"
+        }
+      }
+    },
+    "EdgeProfile": {
+      "description": "Details about Edge Profile for the resource",
+      "type": "object",
+      "properties": {
+        "subscription": {
+          "$ref": "#/definitions/EdgeProfileSubscription",
+          "description": "Edge Profile Subscription"
+        }
+      }
+    },
+    "EdgeProfilePatch": {
+      "description": "The Data Box Edge/Gateway Edge Profile patch.",
+      "type": "object",
+      "properties": {
+        "subscription": {
+          "$ref": "#/definitions/EdgeProfileSubscriptionPatch",
+          "description": "The Data Box Edge/Gateway Edge Profile Subscription patch"
+        }
+      }
+    },
+    "EdgeProfileSubscription": {
+      "description": "Subscription details for the Edge Profile",
+      "type": "object",
+      "properties": {
+        "registrationId": {
+          "description": "Edge Subscription Registration ID",
+          "type": "string"
+        },
+        "id": {
+          "description": "ARM ID of the subscription",
+          "type": "string"
+        },
+        "state": {
+          "enum": [
+            "Registered",
+            "Warned",
+            "Suspended",
+            "Deleted",
+            "Unregistered"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "SubscriptionState",
+            "modelAsString": true
+          }
+        },
+        "registrationDate": {
+          "type": "string"
+        },
+        "subscriptionId": {
+          "type": "string"
+        },
+        "properties": {
+          "$ref": "#/definitions/SubscriptionProperties",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "EdgeProfileSubscriptionPatch": {
+      "description": "The Data Box Edge/Gateway Edge Profile Subscription patch.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "The path ID that uniquely identifies the subscription of the edge profile.",
+          "type": "string"
+        }
+      }
+    },
+    "EtcdInfo": {
+      "description": "Etcd configuration",
+      "type": "object",
+      "properties": {
+        "type": {
+          "description": "Etcd type",
+          "type": "string",
+          "readOnly": true
+        },
+        "version": {
+          "description": "Etcd version",
           "type": "string",
           "readOnly": true
         }
@@ -4150,6 +5264,25 @@
         },
         "customContextTag": {
           "description": "A custom context tag typically used to correlate the trigger against its usage. For example, if a periodic timer trigger is intended for certain specific IoT modules in the device, the tag can be the name or the image URL of the module.",
+          "maxLength": 192,
+          "type": "string"
+        }
+      }
+    },
+    "GenerateCertResponse": {
+      "description": "Used in activation key generation flow.",
+      "type": "object",
+      "properties": {
+        "publicKey": {
+          "description": "Gets or sets base64 encoded certificate raw data,\r\nthis is the public part needed to be uploaded to cert vault",
+          "type": "string"
+        },
+        "privateKey": {
+          "description": "Gets or sets base64 encoded private part of the certificate,\r\nneeded to form the activation key",
+          "type": "string"
+        },
+        "expiryTimeInUTC": {
+          "description": "Gets or sets expiry time in UTC",
           "type": "string"
         }
       }
@@ -4173,6 +5306,109 @@
         "password": {
           "$ref": "#/definitions/AsymmetricEncryptedSecret",
           "description": "Repository user password."
+        }
+      }
+    },
+    "IoTAddon": {
+      "description": "IoT Addon.",
+      "required": [
+        "properties",
+        "kind"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Addon"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/IoTAddonProperties",
+          "description": "Properties specific to IOT addon.",
+          "x-ms-client-flatten": true
+        },
+        "id": {
+          "description": "The path ID that uniquely identifies the object.",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "The object name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "The hierarchical type of the object.",
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "x-ms-discriminator-value": "IotEdge"
+    },
+    "IoTAddonProperties": {
+      "description": "IoT addon properties.",
+      "required": [
+        "ioTDeviceDetails",
+        "ioTEdgeDeviceDetails"
+      ],
+      "type": "object",
+      "properties": {
+        "ioTDeviceDetails": {
+          "$ref": "#/definitions/IoTDeviceInfo",
+          "description": "IoT device metadata to which appliance needs to be connected."
+        },
+        "ioTEdgeDeviceDetails": {
+          "$ref": "#/definitions/IoTDeviceInfo",
+          "description": "IoT edge device to which the IoT Addon needs to be configured."
+        },
+        "version": {
+          "description": "Version of IoT running on the appliance.",
+          "type": "string",
+          "readOnly": true
+        },
+        "hostPlatform": {
+          "description": "Host OS supported by the IoT addon.",
+          "enum": [
+            "Windows",
+            "Linux"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "PlatformType",
+            "modelAsString": true
+          }
+        },
+        "hostPlatformType": {
+          "description": "Platform where the runtime is hosted.",
+          "enum": [
+            "KubernetesCluster",
+            "LinuxVM"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "HostPlatformType",
+            "modelAsString": true
+          }
+        },
+        "provisioningState": {
+          "description": "Addon Provisioning State",
+          "enum": [
+            "Invalid",
+            "Creating",
+            "Created",
+            "Updating",
+            "Reconfiguring",
+            "Failed",
+            "Deleting"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "AddonState",
+            "modelAsString": true
+          }
         }
       }
     },
@@ -4291,6 +5527,7 @@
         },
         "shareMappings": {
           "description": "Mount points of shares in role(s).",
+          "uniqueItems": false,
           "type": "array",
           "items": {
             "$ref": "#/definitions/MountPointMap"
@@ -4312,6 +5549,10 @@
             "name": "HostPlatformType",
             "modelAsString": true
           }
+        },
+        "computeResource": {
+          "$ref": "#/definitions/ComputeResource",
+          "description": "Resource allocation"
         },
         "roleStatus": {
           "description": "Role status.",
@@ -4444,6 +5685,7 @@
       "properties": {
         "errorDetails": {
           "description": "The error details.",
+          "uniqueItems": false,
           "type": "array",
           "items": {
             "$ref": "#/definitions/JobErrorItem"
@@ -4468,6 +5710,7 @@
       "properties": {
         "recommendations": {
           "description": "The recommended actions.",
+          "uniqueItems": false,
           "type": "array",
           "items": {
             "type": "string"
@@ -4498,7 +5741,10 @@
             "DownloadUpdates",
             "InstallUpdates",
             "RefreshShare",
-            "RefreshContainer"
+            "RefreshContainer",
+            "Backup",
+            "Restore",
+            "TriggerSupportPackage"
           ],
           "type": "string",
           "readOnly": true,
@@ -4563,6 +5809,448 @@
         },
         "folder": {
           "description": "If only subfolders need to be refreshed, then the subfolder path inside the share or container. (The path is empty if there are no subfolders.)",
+          "type": "string"
+        }
+      }
+    },
+    "KubernetesClusterInfo": {
+      "description": "Kubernetes cluster configuration",
+      "required": [
+        "version"
+      ],
+      "type": "object",
+      "properties": {
+        "etcdInfo": {
+          "$ref": "#/definitions/EtcdInfo",
+          "description": "Etcd configuration",
+          "readOnly": true
+        },
+        "nodes": {
+          "description": "Kubernetes cluster nodes",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NodeInfo"
+          },
+          "readOnly": true
+        },
+        "version": {
+          "description": "Kubernetes cluster version",
+          "type": "string"
+        }
+      }
+    },
+    "KubernetesIPConfiguration": {
+      "description": "Kubernetes node IP configuration",
+      "type": "object",
+      "properties": {
+        "port": {
+          "description": "Port of the Kubernetes node.",
+          "type": "string",
+          "readOnly": true
+        },
+        "ipAddress": {
+          "description": "IP address of the Kubernetes node.",
+          "type": "string"
+        }
+      }
+    },
+    "KubernetesRole": {
+      "description": "Kubernetes role.",
+      "required": [
+        "kind"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Role"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/KubernetesRoleProperties",
+          "description": "Properties specific to Kubernetes role.",
+          "x-ms-client-flatten": true
+        },
+        "id": {
+          "description": "The path ID that uniquely identifies the object.",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "The object name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "The hierarchical type of the object.",
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "x-ms-discriminator-value": "Kubernetes"
+    },
+    "KubernetesRoleCompute": {
+      "description": "Kubernetes role compute resource",
+      "required": [
+        "vmProfile"
+      ],
+      "type": "object",
+      "properties": {
+        "vmProfile": {
+          "description": "VM profile",
+          "type": "string"
+        },
+        "memoryInBytes": {
+          "format": "int64",
+          "description": "Memory in bytes",
+          "type": "integer",
+          "readOnly": true
+        },
+        "processorCount": {
+          "format": "int32",
+          "description": "Processor count",
+          "type": "integer",
+          "readOnly": true
+        }
+      }
+    },
+    "KubernetesRoleNetwork": {
+      "description": "Kubernetes role network resource",
+      "type": "object",
+      "properties": {
+        "cniConfig": {
+          "$ref": "#/definitions/CniConfig",
+          "description": "Cni configuration",
+          "readOnly": true
+        },
+        "loadBalancerConfig": {
+          "$ref": "#/definitions/LoadBalancerConfig",
+          "description": "Load balancer configuration",
+          "readOnly": true
+        }
+      }
+    },
+    "KubernetesRoleProperties": {
+      "description": "Kubernetes role properties.",
+      "required": [
+        "hostPlatform",
+        "kubernetesClusterInfo",
+        "kubernetesRoleResources",
+        "roleStatus"
+      ],
+      "type": "object",
+      "properties": {
+        "hostPlatform": {
+          "description": "Host OS supported by the Kubernetes role.",
+          "enum": [
+            "Windows",
+            "Linux"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "PlatformType",
+            "modelAsString": true
+          }
+        },
+        "provisioningState": {
+          "description": "State of Kubernetes deployment",
+          "enum": [
+            "Invalid",
+            "Creating",
+            "Created",
+            "Updating",
+            "Reconfiguring",
+            "Failed",
+            "Deleting"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "KubernetesState",
+            "modelAsString": true
+          }
+        },
+        "hostPlatformType": {
+          "description": "Platform where the runtime is hosted.",
+          "enum": [
+            "KubernetesCluster",
+            "LinuxVM"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "HostPlatformType",
+            "modelAsString": true
+          }
+        },
+        "kubernetesClusterInfo": {
+          "$ref": "#/definitions/KubernetesClusterInfo",
+          "description": "Kubernetes cluster configuration"
+        },
+        "kubernetesRoleResources": {
+          "$ref": "#/definitions/KubernetesRoleResources",
+          "description": "Kubernetes role resources"
+        },
+        "roleStatus": {
+          "description": "Role status.",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "RoleStatus",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "KubernetesRoleResources": {
+      "description": "Kubernetes role resources",
+      "required": [
+        "compute"
+      ],
+      "type": "object",
+      "properties": {
+        "storage": {
+          "$ref": "#/definitions/KubernetesRoleStorage",
+          "description": "Kubernetes role storage resource"
+        },
+        "compute": {
+          "$ref": "#/definitions/KubernetesRoleCompute",
+          "description": "Kubernetes role compute resource"
+        },
+        "network": {
+          "$ref": "#/definitions/KubernetesRoleNetwork",
+          "description": "Kubernetes role network resource",
+          "readOnly": true
+        }
+      }
+    },
+    "KubernetesRoleStorage": {
+      "description": "Kubernetes role storage resource",
+      "type": "object",
+      "properties": {
+        "storageClasses": {
+          "description": "Kubernetes storage class info.",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/KubernetesRoleStorageClassInfo"
+          },
+          "readOnly": true
+        },
+        "endpoints": {
+          "description": "Mount points of shares in role(s).",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MountPointMap"
+          }
+        }
+      }
+    },
+    "KubernetesRoleStorageClassInfo": {
+      "description": "Kubernetes storage class info.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Storage class name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "Storage class type.",
+          "type": "string",
+          "readOnly": true
+        },
+        "posixCompliant": {
+          "description": "If provisioned storage is posix compliant.",
+          "enum": [
+            "Invalid",
+            "Enabled",
+            "Disabled"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "PosixComplianceStatus",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "LoadBalancerConfig": {
+      "description": "Load balancer configuration",
+      "type": "object",
+      "properties": {
+        "type": {
+          "description": "Load balancer type",
+          "type": "string",
+          "readOnly": true
+        },
+        "version": {
+          "description": "Load balancer version",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "MECRole": {
+      "description": "MEC role.",
+      "required": [
+        "kind"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Role"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/MECRoleProperties",
+          "description": "Properties specific to MEC role.",
+          "x-ms-client-flatten": true
+        },
+        "id": {
+          "description": "The path ID that uniquely identifies the object.",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "The object name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "The hierarchical type of the object.",
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "x-ms-discriminator-value": "MEC"
+    },
+    "MECRoleProperties": {
+      "description": "MEC role properties.",
+      "required": [
+        "roleStatus"
+      ],
+      "type": "object",
+      "properties": {
+        "connectionString": {
+          "$ref": "#/definitions/AsymmetricEncryptedSecret",
+          "description": "Activation key of the MEC."
+        },
+        "roleStatus": {
+          "description": "Role status.",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "RoleStatus",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "MetricConfiguration": {
+      "description": "Metric configuration.",
+      "required": [
+        "resourceId",
+        "counterSets"
+      ],
+      "type": "object",
+      "properties": {
+        "resourceId": {
+          "description": "The Resource ID on which the metrics should be pushed.",
+          "type": "string"
+        },
+        "mdmAccount": {
+          "description": "The MDM account to which the counters should be pushed.",
+          "type": "string"
+        },
+        "metricNameSpace": {
+          "description": "The MDM namespace to which the counters should be pushed. This is required if MDMAccount is specified",
+          "type": "string"
+        },
+        "counterSets": {
+          "description": "Host name for the IoT hub associated to the device.",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MetricCounterSet"
+          }
+        }
+      }
+    },
+    "MetricCounter": {
+      "description": "The metric counter",
+      "required": [
+        "name"
+      ],
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "The counter name.",
+          "type": "string"
+        },
+        "instance": {
+          "description": "The instance from which counter should be collected.",
+          "type": "string"
+        },
+        "dimensionFilter": {
+          "description": "The dimension filter.",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MetricDimension"
+          }
+        },
+        "additionalDimensions": {
+          "description": "The additional dimensions to be added to metric.",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MetricDimension"
+          }
+        }
+      }
+    },
+    "MetricCounterSet": {
+      "description": "The metric counter set",
+      "required": [
+        "counters"
+      ],
+      "type": "object",
+      "properties": {
+        "counters": {
+          "description": "The counters that should be collected in this set.",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MetricCounter"
+          }
+        }
+      }
+    },
+    "MetricDimension": {
+      "description": "The metric dimension",
+      "required": [
+        "sourceType",
+        "sourceName"
+      ],
+      "type": "object",
+      "properties": {
+        "sourceType": {
+          "description": "The dimension type.",
+          "type": "string"
+        },
+        "sourceName": {
+          "description": "The dimension value.",
           "type": "string"
         }
       }
@@ -4638,6 +6326,7 @@
         },
         "dimensions": {
           "description": "Metric dimensions, other than default dimension which is resource.",
+          "uniqueItems": false,
           "type": "array",
           "items": {
             "$ref": "#/definitions/MetricDimension_V1"
@@ -4665,6 +6354,7 @@
         },
         "supportedTimeGrainTypes": {
           "description": "Support granularity of metrics.",
+          "uniqueItems": false,
           "type": "array",
           "items": {
             "enum": [
@@ -4686,6 +6376,7 @@
         },
         "supportedAggregationTypes": {
           "description": "Support metric aggregation type.",
+          "uniqueItems": false,
           "type": "array",
           "items": {
             "enum": [
@@ -4702,6 +6393,62 @@
               "name": "MetricAggregationType",
               "modelAsString": true
             }
+          }
+        }
+      }
+    },
+    "MonitoringMetricConfiguration": {
+      "description": "The metric setting details for the role",
+      "required": [
+        "properties"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ARMBaseModel"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/MonitoringMetricConfigurationProperties",
+          "description": "The metric setting properties.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "MonitoringMetricConfigurationList": {
+      "description": "Collection of metric configurations.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The list of metric configurations.",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MonitoringMetricConfiguration"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "Link to the next set of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "MonitoringMetricConfigurationProperties": {
+      "description": "Metrics properties",
+      "required": [
+        "metricConfigurations"
+      ],
+      "type": "object",
+      "properties": {
+        "metricConfigurations": {
+          "description": "The metrics configuration details",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MetricConfiguration"
           }
         }
       }
@@ -4746,7 +6493,10 @@
             "IOT",
             "ASA",
             "Functions",
-            "Cognitive"
+            "Cognitive",
+            "MEC",
+            "CloudEdgeManagement",
+            "Kubernetes"
           ],
           "type": "string",
           "readOnly": true,
@@ -4857,6 +6607,7 @@
         },
         "dnsServers": {
           "description": "The list of DNS Servers of the device.",
+          "uniqueItems": false,
           "type": "array",
           "items": {
             "type": "string"
@@ -4914,6 +6665,7 @@
       "properties": {
         "networkAdapters": {
           "description": "The network adapter list on the device.",
+          "uniqueItems": false,
           "type": "array",
           "items": {
             "$ref": "#/definitions/NetworkAdapter"
@@ -4939,12 +6691,46 @@
         }
       }
     },
+    "NodeInfo": {
+      "description": "Kubernetes node info",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Node name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "Node type - Master/Worker",
+          "enum": [
+            "Invalid",
+            "Master",
+            "Worker"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "KubernetesNodeType",
+            "modelAsString": true
+          }
+        },
+        "ipConfiguration": {
+          "description": "IP Configuration of the Kubernetes node.",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/KubernetesIPConfiguration"
+          }
+        }
+      }
+    },
     "NodeList": {
       "description": "Collection of Nodes.",
       "type": "object",
       "properties": {
         "value": {
           "description": "The list of Nodes.",
+          "uniqueItems": false,
           "type": "array",
           "items": {
             "$ref": "#/definitions/Node"
@@ -5069,6 +6855,7 @@
       "properties": {
         "value": {
           "description": "The value.",
+          "uniqueItems": false,
           "type": "array",
           "items": {
             "$ref": "#/definitions/Operation"
@@ -5102,6 +6889,7 @@
       "properties": {
         "value": {
           "description": "The list of orders.",
+          "uniqueItems": false,
           "type": "array",
           "items": {
             "$ref": "#/definitions/Order"
@@ -5118,8 +6906,7 @@
     "OrderProperties": {
       "description": "Order properties.",
       "required": [
-        "contactInformation",
-        "shippingAddress"
+        "contactInformation"
       ],
       "type": "object",
       "properties": {
@@ -5137,6 +6924,7 @@
         },
         "orderHistory": {
           "description": "List of status changes in the order.",
+          "uniqueItems": false,
           "type": "array",
           "items": {
             "$ref": "#/definitions/OrderStatus"
@@ -5150,6 +6938,7 @@
         },
         "deliveryTrackingInfo": {
           "description": "Tracking information for the package delivered to the customer whether it has an original or a replacement device.",
+          "uniqueItems": false,
           "type": "array",
           "items": {
             "$ref": "#/definitions/TrackingInfo"
@@ -5158,11 +6947,25 @@
         },
         "returnTrackingInfo": {
           "description": "Tracking information for the package returned from the customer whether it has an original or a replacement device.",
+          "uniqueItems": false,
           "type": "array",
           "items": {
             "$ref": "#/definitions/TrackingInfo"
           },
           "readOnly": true
+        },
+        "shipmentType": {
+          "description": "ShipmentType of the order",
+          "enum": [
+            "NotApplicable",
+            "ShippedToCustomer",
+            "SelfPickup"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ShipmentType",
+            "modelAsString": true
+          }
         }
       }
     },
@@ -5189,7 +6992,10 @@
             "ReturnInitiated",
             "AwaitingReturnShipment",
             "ShippedBack",
-            "CollectedAtMicrosoft"
+            "CollectedAtMicrosoft",
+            "AwaitingPickup",
+            "PickupCompleted",
+            "AwaitingDrop"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -5206,6 +7012,11 @@
         "comments": {
           "description": "Comments related to this status change.",
           "type": "string"
+        },
+        "trackingInformation": {
+          "$ref": "#/definitions/TrackingInfo",
+          "description": "Tracking information related to the state in the ordering flow",
+          "readOnly": true
         },
         "additionalOrderDetails": {
           "description": "Dictionary to hold generic information which is not stored\r\nby the already existing properties",
@@ -5271,6 +7082,7 @@
         },
         "customContextTag": {
           "description": "A custom context tag typically used to correlate the trigger against its usage. For example, if a periodic timer trigger is intended for certain specific IoT modules in the device, the tag can be the name or the image URL of the module.",
+          "maxLength": 192,
           "type": "string"
         }
       }
@@ -5346,98 +7158,74 @@
         }
       }
     },
+    "ResourceIdentity": {
+      "description": "Msi identity details of the resource",
+      "type": "object",
+      "properties": {
+        "type": {
+          "description": "Identity type",
+          "enum": [
+            "None",
+            "SystemAssigned",
+            "UserAssigned"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "MsiIdentityType",
+            "modelAsString": true
+          }
+        },
+        "principalId": {
+          "description": "Service Principal Id backing the Msi",
+          "type": "string",
+          "readOnly": true
+        },
+        "tenantId": {
+          "description": "Home Tenant Id",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ResourceMoveDetails": {
+      "description": "Fields for tracking resource move",
+      "type": "object",
+      "properties": {
+        "operationInProgress": {
+          "description": "Denotes whether move operation is in progress",
+          "enum": [
+            "None",
+            "ResourceMoveInProgress",
+            "ResourceMoveFailed"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ResourceMoveStatus",
+            "modelAsString": true
+          }
+        },
+        "operationInProgressLockTimeoutInUTC": {
+          "format": "date-time",
+          "description": "Denotes the timeout of the operation to finish",
+          "type": "string"
+        }
+      }
+    },
     "ResourceTypeSku": {
-      "description": "SkuInformation object",
+      "description": "Resource type Sku object",
       "type": "object",
       "properties": {
         "resourceType": {
-          "description": "The type of the resource",
+          "description": "The resource type.",
           "type": "string",
           "readOnly": true
         },
-        "name": {
-          "description": "The Sku name",
-          "enum": [
-            "Gateway",
-            "Edge",
-            "TEA_1Node",
-            "TEA_1Node_UPS",
-            "TEA_1Node_Heater",
-            "TEA_1Node_UPS_Heater",
-            "TEA_4Node_Heater",
-            "TEA_4Node_UPS_Heater",
-            "TMA",
-            "TDC",
-            "TCA_Large",
-            "TCA_Small",
-            "GPU"
-          ],
-          "type": "string",
-          "readOnly": true,
-          "x-ms-enum": {
-            "name": "SkuName",
-            "modelAsString": true
-          }
-        },
-        "kind": {
-          "description": "The Sku kind",
-          "type": "string",
-          "readOnly": true
-        },
-        "tier": {
-          "description": "The Sku tier",
-          "enum": [
-            "Standard"
-          ],
-          "type": "string",
-          "readOnly": true,
-          "x-ms-enum": {
-            "name": "SkuTier",
-            "modelAsString": true
-          }
-        },
-        "family": {
-          "description": "The Sku family",
-          "type": "string",
-          "readOnly": true
-        },
-        "locations": {
-          "description": "Availability of the SKU for the region",
+        "skus": {
+          "description": "The skus.",
+          "uniqueItems": false,
           "type": "array",
           "items": {
-            "type": "string"
-          },
-          "readOnly": true
-        },
-        "apiVersions": {
-          "description": "The API versions in which SKU is available",
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "readOnly": true
-        },
-        "locationInfo": {
-          "description": "Availability of the SKU for the location/zone",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/SkuLocationInfo"
-          },
-          "readOnly": true
-        },
-        "costs": {
-          "description": "The pricing info of the Sku.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/SkuCost"
-          },
-          "readOnly": true
-        },
-        "restrictions": {
-          "description": "Restrictions of the SKU availability.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/SkuRestriction"
+            "$ref": "#/definitions/SkuInformation"
           },
           "readOnly": true
         }
@@ -5461,13 +7249,20 @@
             "IOT",
             "ASA",
             "Functions",
-            "Cognitive"
+            "Cognitive",
+            "MEC",
+            "CloudEdgeManagement",
+            "Kubernetes"
           ],
           "type": "string",
           "x-ms-enum": {
             "name": "RoleTypes",
             "modelAsString": true
           }
+        },
+        "systemData": {
+          "description": "Role configured on ASE resource",
+          "$ref": "#/definitions/SystemData"
         }
       },
       "discriminator": "kind"
@@ -5478,6 +7273,7 @@
       "properties": {
         "value": {
           "description": "The Value.",
+          "uniqueItems": false,
           "type": "array",
           "items": {
             "$ref": "#/definitions/Role"
@@ -5542,6 +7338,7 @@
       "properties": {
         "metricSpecifications": {
           "description": "Metric specification as defined by shoebox.",
+          "uniqueItems": false,
           "type": "array",
           "items": {
             "$ref": "#/definitions/MetricSpecification_V1"
@@ -5561,6 +7358,10 @@
         }
       ],
       "properties": {
+        "systemData": {
+          "description": "Share on ASE device",
+          "$ref": "#/definitions/SystemData"
+        },
         "properties": {
           "$ref": "#/definitions/ShareProperties",
           "description": "The share properties.",
@@ -5601,6 +7402,7 @@
       "properties": {
         "value": {
           "description": "The list of shares.",
+          "uniqueItems": false,
           "type": "array",
           "items": {
             "$ref": "#/definitions/Share"
@@ -5672,6 +7474,7 @@
         },
         "userAccessRights": {
           "description": "Mapping of users and corresponding access rights on the share (required for SMB protocol).",
+          "uniqueItems": false,
           "type": "array",
           "items": {
             "$ref": "#/definitions/UserAccessRight"
@@ -5679,6 +7482,7 @@
         },
         "clientAccessRights": {
           "description": "List of IP addresses and corresponding access rights on the share(required for NFS protocol).",
+          "uniqueItems": false,
           "type": "array",
           "items": {
             "$ref": "#/definitions/ClientAccessRight"
@@ -5690,6 +7494,7 @@
         },
         "shareMappings": {
           "description": "Share mount point to the role.",
+          "uniqueItems": false,
           "type": "array",
           "items": {
             "$ref": "#/definitions/MountPointMap"
@@ -5727,9 +7532,17 @@
             "TEA_4Node_UPS_Heater",
             "TMA",
             "TDC",
-            "TCA_Large",
             "TCA_Small",
-            "GPU"
+            "GPU",
+            "TCA_Large",
+            "EdgeP_Base",
+            "EdgeP_High",
+            "EdgePR_Base",
+            "EdgePR_Base_UPS",
+            "EdgeMR_Mini",
+            "RCA_Small",
+            "RCA_Large",
+            "RDC"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -5747,22 +7560,6 @@
             "name": "SkuTier",
             "modelAsString": true
           }
-        }
-      }
-    },
-    "SKUCapability": {
-      "description": "The capabilities of the SKU",
-      "type": "object",
-      "properties": {
-        "name": {
-          "description": "The capability name",
-          "type": "string",
-          "readOnly": true
-        },
-        "value": {
-          "description": "The capability value",
-          "type": "string",
-          "readOnly": true
         }
       }
     },
@@ -5792,11 +7589,6 @@
       "description": "Sku information",
       "type": "object",
       "properties": {
-        "resourceType": {
-          "description": "The resource type.",
-          "type": "string",
-          "readOnly": true
-        },
         "name": {
           "description": "The sku name.",
           "type": "string",
@@ -5812,18 +7604,23 @@
           "type": "string",
           "readOnly": true
         },
-        "size": {
-          "description": "The sku size.",
+        "family": {
+          "description": "The Sku family.",
           "type": "string",
           "readOnly": true
         },
-        "family": {
-          "description": "The sku family.",
-          "type": "string",
+        "costs": {
+          "description": "The pricing info of the Sku.",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SkuCost"
+          },
           "readOnly": true
         },
         "locations": {
           "description": "The locations where Sku is available.",
+          "uniqueItems": false,
           "type": "array",
           "items": {
             "type": "string"
@@ -5832,6 +7629,7 @@
         },
         "locationInfo": {
           "description": "The locations where Sku is available with zones and sites info",
+          "uniqueItems": false,
           "type": "array",
           "items": {
             "$ref": "#/definitions/SkuLocationInfo"
@@ -5840,6 +7638,7 @@
         },
         "requiredQuotaIds": {
           "description": "The required quotaIds for the sku to be available.",
+          "uniqueItems": false,
           "type": "array",
           "items": {
             "type": "string"
@@ -5848,25 +7647,10 @@
         },
         "requiredFeatures": {
           "description": "The required features for the sku to be available.",
+          "uniqueItems": false,
           "type": "array",
           "items": {
             "type": "string"
-          },
-          "readOnly": true
-        },
-        "costs": {
-          "description": "The cost of the SKU",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/SkuCost"
-          },
-          "readOnly": true
-        },
-        "capabilities": {
-          "description": "The capabilities of the SKU",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/SKUCapability"
           },
           "readOnly": true
         }
@@ -5877,7 +7661,8 @@
       "type": "object",
       "properties": {
         "value": {
-          "description": "List of ResourceType Sku",
+          "description": "List of ResourceTypeSku objects",
+          "uniqueItems": false,
           "type": "array",
           "items": {
             "$ref": "#/definitions/ResourceTypeSku"
@@ -5902,6 +7687,7 @@
         },
         "zones": {
           "description": "The zones.",
+          "uniqueItems": false,
           "type": "array",
           "items": {
             "type": "string"
@@ -5910,65 +7696,7 @@
         },
         "sites": {
           "description": "The sites.",
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "readOnly": true
-        }
-      }
-    },
-    "SkuRestriction": {
-      "description": "The restrictions because of which SKU cannot be used.",
-      "type": "object",
-      "properties": {
-        "type": {
-          "description": "The type of the restriction.",
-          "type": "string",
-          "readOnly": true
-        },
-        "values": {
-          "description": "The locations where sku is restricted.",
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "readOnly": true
-        },
-        "reasonCode": {
-          "description": "The SKU restriction reason.",
-          "enum": [
-            "NotAvailableForSubscription",
-            "QuotaId"
-          ],
-          "type": "string",
-          "readOnly": true,
-          "x-ms-enum": {
-            "name": "SkuRestrictionReasonCode",
-            "modelAsString": true
-          }
-        },
-        "restrictionInfo": {
-          "$ref": "#/definitions/SkuRestrictionInfo",
-          "description": "Restriction of the SKU for the location/zone",
-          "readOnly": true
-        }
-      }
-    },
-    "SkuRestrictionInfo": {
-      "description": "The restriction info with locations and zones.",
-      "type": "object",
-      "properties": {
-        "locations": {
-          "description": "The locations.",
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "readOnly": true
-        },
-        "zones": {
-          "description": "The zones.",
+          "uniqueItems": false,
           "type": "array",
           "items": {
             "type": "string"
@@ -5989,6 +7717,10 @@
         }
       ],
       "properties": {
+        "systemData": {
+          "description": "StorageAccount object on ASE device",
+          "$ref": "#/definitions/SystemData"
+        },
         "properties": {
           "$ref": "#/definitions/StorageAccountProperties",
           "description": "The Storage Account properties.",
@@ -6008,6 +7740,10 @@
         }
       ],
       "properties": {
+        "systemData": {
+          "description": "StorageAccountCredential object",
+          "$ref": "#/definitions/SystemData"
+        },
         "properties": {
           "$ref": "#/definitions/StorageAccountCredentialProperties",
           "description": "The storage account credential properties.",
@@ -6021,6 +7757,7 @@
       "properties": {
         "value": {
           "description": "The value.",
+          "uniqueItems": false,
           "type": "array",
           "items": {
             "$ref": "#/definitions/StorageAccountCredential"
@@ -6099,6 +7836,7 @@
       "properties": {
         "value": {
           "description": "The list of storageAccounts.",
+          "uniqueItems": false,
           "type": "array",
           "items": {
             "$ref": "#/definitions/StorageAccount"
@@ -6114,6 +7852,9 @@
     },
     "StorageAccountProperties": {
       "description": "The storage account properties.",
+      "required": [
+        "dataPolicy"
+      ],
       "type": "object",
       "properties": {
         "description": {
@@ -6164,6 +7905,41 @@
         }
       }
     },
+    "SubscriptionProperties": {
+      "type": "object",
+      "properties": {
+        "tenantId": {
+          "type": "string"
+        },
+        "locationPlacementId": {
+          "type": "string"
+        },
+        "quotaId": {
+          "type": "string"
+        },
+        "serializedDetails": {
+          "type": "string"
+        },
+        "registeredFeatures": {
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SubscriptionRegisteredFeatures"
+          }
+        }
+      }
+    },
+    "SubscriptionRegisteredFeatures": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "state": {
+          "type": "string"
+        }
+      }
+    },
     "SymmetricKey": {
       "description": "Symmetric key for authentication.",
       "type": "object",
@@ -6171,6 +7947,59 @@
         "connectionString": {
           "$ref": "#/definitions/AsymmetricEncryptedSecret",
           "description": "Connection string based on the symmetric key."
+        }
+      }
+    },
+    "SystemData": {
+      "description": "Metadata pertaining to creation and last modification of the resource.",
+      "type": "object",
+      "readOnly": true,
+      "properties": {
+        "createdBy": {
+          "type": "string",
+          "description": "The identity that created the resource."
+        },
+        "createdByType": {
+          "type": "string",
+          "description": "The type of identity that created the resource.",
+          "enum": [
+            "User",
+            "Application",
+            "ManagedIdentity",
+            "Key"
+          ],
+          "x-ms-enum": {
+            "name": "createdByType",
+            "modelAsString": true
+          }
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp of resource creation (UTC)."
+        },
+        "lastModifiedBy": {
+          "type": "string",
+          "description": "The identity that last modified the resource."
+        },
+        "lastModifiedByType": {
+          "type": "string",
+          "description": "The type of identity that last modified the resource.",
+          "enum": [
+            "User",
+            "Application",
+            "ManagedIdentity",
+            "Key"
+          ],
+          "x-ms-enum": {
+            "name": "createdByType",
+            "modelAsString": true
+          }
+        },
+        "lastModifiedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The type of identity that last modified the resource."
         }
       }
     },
@@ -6208,6 +8037,10 @@
         }
       ],
       "properties": {
+        "systemData": {
+          "description": "Trigger in DataBoxEdge Resource",
+          "$ref": "#/definitions/SystemData"
+        },
         "kind": {
           "description": "Trigger Kind.",
           "enum": [
@@ -6229,6 +8062,7 @@
       "properties": {
         "value": {
           "description": "The list of triggers.",
+          "uniqueItems": false,
           "type": "array",
           "items": {
             "$ref": "#/definitions/Trigger"
@@ -6438,6 +8272,7 @@
         },
         "updateTitles": {
           "description": "The list of updates available for install.",
+          "uniqueItems": false,
           "type": "array",
           "items": {
             "type": "string"
@@ -6531,6 +8366,10 @@
         }
       ],
       "properties": {
+        "systemData": {
+          "description": "User in DataBoxEdge Resource",
+          "$ref": "#/definitions/SystemData"
+        },
         "properties": {
           "$ref": "#/definitions/UserProperties",
           "description": "The storage account credential properties.",
@@ -6571,6 +8410,7 @@
       "properties": {
         "value": {
           "description": "The list of users.",
+          "uniqueItems": false,
           "type": "array",
           "items": {
             "$ref": "#/definitions/User"
@@ -6586,9 +8426,6 @@
     },
     "UserProperties": {
       "description": "The user properties.",
-      "required": [
-        "userType"
-      ],
       "type": "object",
       "properties": {
         "encryptedPassword": {
@@ -6597,6 +8434,7 @@
         },
         "shareAccessRights": {
           "description": "List of shares that the user has rights on. This field should not be specified during user creation.",
+          "uniqueItems": false,
           "type": "array",
           "items": {
             "$ref": "#/definitions/ShareAccessRight"
@@ -6653,13 +8491,13 @@
   },
   "securityDefinitions": {
     "azure_auth": {
-      "type": "oauth2",
-      "description": "Azure Active Directory OAuth2 Flow.",
       "flow": "implicit",
       "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
       "scopes": {
-        "user_impersonation": "impersonate your user account."
-      }
+        "user_impersonation": "impersonate your user account"
+      },
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow"
     }
   },
   "security": [
@@ -6668,5 +8506,6 @@
         "user_impersonation"
       ]
     }
-  ]
+  ],
+  "tags": []
 }
