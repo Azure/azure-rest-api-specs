@@ -106,7 +106,7 @@ input-file:
 - Microsoft.Sql/preview/2018-06-01-preview/PrivateEndpointConnections.json
 - Microsoft.Sql/preview/2018-06-01-preview/PrivateLinkResources.json
 - Microsoft.Sql/preview/2019-06-01-preview/servers.json
-- Microsoft.Sql/preview/2018-06-01-preview/capabilities.json
+- Microsoft.Sql/preview/2020-08-01-preview/LocationCapabilities.json
 - Microsoft.Sql/preview/2018-06-01-preview/LongTermRetentionManagedInstanceBackups.json
 - Microsoft.Sql/preview/2018-06-01-preview/ManagedInstanceLongTermRetentionPolicies.json
 - Microsoft.Sql/preview/2019-06-01-preview/WorkloadGroups.json
@@ -616,7 +616,6 @@ input-file:
  - ./Microsoft.Sql/preview/2020-08-01-preview/EncryptionProtectors.json
  - ./Microsoft.Sql/preview/2020-08-01-preview/FailoverGroups.json
  - ./Microsoft.Sql/preview/2020-08-01-preview/FirewallRules.json
- - ./Microsoft.Sql/preview/2020-08-01-preview/HybridLinks.json
  - ./Microsoft.Sql/preview/2020-08-01-preview/InstanceFailoverGroups.json
  - ./Microsoft.Sql/preview/2020-08-01-preview/InstancePools.json
  - ./Microsoft.Sql/preview/2020-08-01-preview/JobAgents.json
@@ -689,7 +688,7 @@ input-file:
  - ./Microsoft.Sql/preview/2020-08-01-preview/SyncMembers.json
  - ./Microsoft.Sql/preview/2020-08-01-preview/TdeCertificates.json
  - ./Microsoft.Sql/preview/2020-08-01-preview/TimeZones.json
- - ./Microsoft.Sql/preview/2020-08-01-preview/TransparentDataEncryption.json
+ - ./Microsoft.Sql/preview/2020-08-01-preview/TransparentDataEncryptions.json
  - ./Microsoft.Sql/preview/2020-08-01-preview/VirtualClusters.json
  - ./Microsoft.Sql/preview/2020-08-01-preview/VirtualNetworkRules.json
  - ./Microsoft.Sql/preview/2020-08-01-preview/WorkloadClassifiers.json
@@ -734,7 +733,6 @@ input-file:
  - ./Microsoft.Sql/preview/2020-02-02-preview/EncryptionProtectors.json
  - ./Microsoft.Sql/preview/2020-02-02-preview/FailoverGroups.json
  - ./Microsoft.Sql/preview/2020-02-02-preview/FirewallRules.json
- - ./Microsoft.Sql/preview/2020-02-02-preview/HybridLinks.json
  - ./Microsoft.Sql/preview/2020-02-02-preview/InstanceFailoverGroups.json
  - ./Microsoft.Sql/preview/2020-02-02-preview/InstancePools.json
  - ./Microsoft.Sql/preview/2020-02-02-preview/JobAgents.json
@@ -807,7 +805,7 @@ input-file:
  - ./Microsoft.Sql/preview/2020-02-02-preview/SyncMembers.json
  - ./Microsoft.Sql/preview/2020-02-02-preview/TdeCertificates.json
  - ./Microsoft.Sql/preview/2020-02-02-preview/TimeZones.json
- - ./Microsoft.Sql/preview/2020-02-02-preview/TransparentDataEncryption.json
+ - ./Microsoft.Sql/preview/2020-02-02-preview/TransparentDataEncryptions.json
  - ./Microsoft.Sql/preview/2020-02-02-preview/VirtualClusters.json
  - ./Microsoft.Sql/preview/2020-02-02-preview/VirtualNetworkRules.json
  - ./Microsoft.Sql/preview/2020-02-02-preview/WorkloadClassifiers.json

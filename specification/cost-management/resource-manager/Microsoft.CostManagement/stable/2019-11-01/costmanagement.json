@@ -60,6 +60,9 @@
               "$ref": "#/definitions/ViewListResult"
             }
           },
+          "204": {
+            "description": "An empty response is sent when there is no information available within the selected scope."
+          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
@@ -848,6 +851,9 @@
               "$ref": "#/definitions/DimensionsListResult"
             }
           },
+          "204": {
+            "description": "An empty response is sent when there is no information available within the selected scope."
+          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
@@ -1034,6 +1040,9 @@
             "schema": {
               "$ref": "#/definitions/QueryResult"
             }
+          },
+          "204": {
+            "description": "An empty response is sent when there is no information available within the selected scope."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -1292,9 +1301,14 @@
           "description": "Has time period for pulling data for the report.",
           "$ref": "#/definitions/ReportConfigTimePeriod"
         },
-        "dataset": {
+        "dataSet": {
           "description": "Has definition for data in this report config.",
           "$ref": "#/definitions/ReportConfigDataset"
+        },
+        "includeMonetaryCommitment": {
+          "description": "Include monetary commitment",
+          "type": "boolean",
+          "readOnly": true
         }
       },
       "required": [
@@ -1462,10 +1476,6 @@
             "$ref": "#/definitions/ReportConfigFilter"
           },
           "minItems": 2
-        },
-        "not": {
-          "description": "The logical \"NOT\" expression.",
-          "$ref": "#/definitions/ReportConfigFilter"
         },
         "dimension": {
           "description": "Has comparison expression for a dimension",
@@ -2525,15 +2535,11 @@
           },
           "minItems": 2
         },
-        "not": {
-          "description": "The logical \"NOT\" expression.",
-          "$ref": "#/definitions/QueryFilter"
-        },
-        "dimension": {
+        "dimensions": {
           "description": "Has comparison expression for a dimension",
           "$ref": "#/definitions/QueryComparisonExpression"
         },
-        "tag": {
+        "tags": {
           "description": "Has comparison expression for a tag",
           "$ref": "#/definitions/QueryComparisonExpression"
         }
