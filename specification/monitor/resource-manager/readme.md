@@ -403,6 +403,7 @@ input-file:
 - Microsoft.Insights/stable/2018-09-01/actionGroups_API.json
 - Microsoft.Insights/stable/2018-09-01/baseline_API.json
 - Microsoft.Insights/stable/2018-09-01/calculateBaseline_API.json
+- Microsoft.Insights/stable/2018-09-01/metricBaselines_API.json
 ```
 
 
