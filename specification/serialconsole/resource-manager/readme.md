@@ -32,6 +32,7 @@ These settings apply only when `--tag=package-2018-05` is specified on the comma
 ``` yaml $(tag) == 'package-2018-05'
 input-file:
 - Microsoft.SerialConsole/stable/2018-05-01/serialconsole.json
+- Microsoft.SerialConsole/stable/2018-05-01/serialport.json
 ```
 
 ---
