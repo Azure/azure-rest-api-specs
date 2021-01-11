@@ -319,6 +319,12 @@
           },
           "204": {
             "description": "No content: the request was successful, but the response is empty"
+          },
+          "default": {
+            "description": "BadRequest",
+            "schema": {
+              "$ref": "../../stable/2016-03-01/alertRules_API.json#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-examples": {
@@ -475,7 +481,6 @@
     "MetricAlertProperties": {
       "required": [
         "enabled",
-        "description",
         "severity",
         "evaluationFrequency",
         "windowSize",
@@ -488,6 +493,7 @@
         },
         "severity": {
           "type": "integer",
+          "format": "int32",
           "description": "Alert severity {0, 1, 2, 3, 4}"
         },
         "enabled": {
@@ -896,6 +902,7 @@
           "description": "Namespace of the metric."
         },
         "timeAggregation": {
+          "type": "string",
           "enum": [
             "Average",
             "Count",
@@ -904,7 +911,7 @@
             "Total"
           ],
           "x-ms-enum": {
-            "name": "AggregationType",
+            "name": "AggregationTypeEnum",
             "modelAsString": true
           },
           "description": "the criteria time aggregation types."
