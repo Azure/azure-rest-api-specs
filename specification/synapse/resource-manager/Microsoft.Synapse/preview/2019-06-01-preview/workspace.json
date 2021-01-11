@@ -753,6 +753,9 @@
             },
             "description": "OK"
           },
+          "201": {
+            "description": "Created"
+          },
           "default": {
             "schema": {
               "$ref": "../../../../common/v1/types.json#/definitions/ErrorContract"
@@ -763,6 +766,10 @@
         "produces": [
           "application/json"
         ],
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
         "x-ms-examples": {
           "Create or update managed identity sql control settings": {
             "$ref": "./examples/CreateOrUpdateManagedIdentitySqlControlSettings.json"
@@ -1077,12 +1084,12 @@
         }
       }
     },
-    "BabylonConfiguration": {
-      "description": "Babylon Configuration",
+    "PurviewConfiguration": {
+      "description": "Purview Configuration",
       "type": "object",
       "properties": {
-        "babylonResourceId": {
-          "description": "Babylon Resource ID",
+        "purviewResourceId": {
+          "description": "Purview Resource ID",
           "type": "string"
         }
       }
@@ -1197,9 +1204,9 @@
           "description": "Git integration settings",
           "$ref": "#/definitions/WorkspaceRepositoryConfiguration"
         },
-        "babylonConfiguration": {
-          "description": "Babylon Configuration",
-          "$ref": "#/definitions/BabylonConfiguration"
+        "purviewConfiguration": {
+          "description": "Purview Configuration",
+          "$ref": "#/definitions/PurviewConfiguration"
         }
       }
     },
@@ -1241,14 +1248,18 @@
           "description": "Git integration settings",
           "$ref": "#/definitions/WorkspaceRepositoryConfiguration"
         },
-        "babylonConfiguration": {
-          "description": "Babylon Configuration",
-          "$ref": "#/definitions/BabylonConfiguration"
+        "purviewConfiguration": {
+          "description": "Purview Configuration",
+          "$ref": "#/definitions/PurviewConfiguration"
         },
         "provisioningState": {
           "description": "Resource provisioning state",
           "type": "string",
           "readOnly": true
+        },
+        "encryption": {
+          "description": "The encryption details of the workspace",
+          "$ref": "#/definitions/EncryptionDetails"
         }
       }
     },

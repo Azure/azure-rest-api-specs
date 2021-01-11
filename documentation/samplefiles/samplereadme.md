@@ -53,29 +53,31 @@ swagger-to-sdk:
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js
-    after_scripts:
-      - bundle install && rake arm:regen_all_profiles['azure_mgmt_[[ServiceName]]']
   - repo: azure-resource-manager-schemas
     after_scripts:
       - node sdkauto_afterscript.js [[ServiceName]]/resource-manager
+  - repo: azure-cli-extensions
 ```
+## Az
+
+See configuration in [readme.az.md](./readme.az.md)
 
 ## Go
 
-See configuration in [readme.go.md](https://github.com/Azure/azure-rest-api-specs/blob/master/documentation/samplefiles/readme.go.md)
+See configuration in [readme.go.md](./readme.go.md)
 
 ## Python
 
-See configuration in [readme.python.md](https://github.com/Azure/azure-rest-api-specs/blob/master/documentation/samplefiles/readme.python.md)
+See configuration in [readme.python.md](./readme.python.md)
 
 ## TypeScript
 
-See configuration in [readme.typescript.md](https://github.com/Azure/azure-rest-api-specs/blob/master/documentation/samplefiles/readme.typescript.md)
+See configuration in [readme.typescript.md](./readme.typescript.md)
 
 ## CSharp
 
-See configuration in [readme.csharp.md](https://github.com/Azure/azure-rest-api-specs/blob/master/documentation/samplefiles/readme.chsarp.md)
+See configuration in [readme.csharp.md](./readme.csharp.md)
 
 ## AzureResourceSchema
 
-See configuration in [readme.azureresourceschema.md](https://github.com/Azure/azure-rest-api-specs/blob/master/documentation/samplefiles/readme.azureresourceschema.md)
+See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
