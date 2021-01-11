@@ -122,6 +122,18 @@ python:
   clear-output-folder: true
 ```
 
+``` yaml $(python-mode) == 'update' && !$(track2)
+python:                                     
+  no-namespace-folders: true
+  output-folder: $(python-sdks-folder)/appconfiguration/azure-mgmt-appconfiguration/azure/mgmt/appconfiguration
+```
+
+``` yaml $(python-mode) == 'create' && !$(track2)
+python:
+  basic-setup-py: true
+  output-folder: $(python-sdks-folder)/appconfiguration/azure-mgmt-appconfiguration
+```
+
 These settings apply only when `--track2` is specified on the command line.
 
 ``` yaml $(track2)                          // For track2: basic Python package information 
@@ -132,16 +144,11 @@ no-namespace-folders: true
 package-version: 0.1.0
 ```
 
-``` yaml $(python-mode) == 'update'
-// --------------- For track1 -----------------
-python:                                     
-  no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/appconfiguration/azure-mgmt-appconfiguration/azure/mgmt/appconfiguration
-
-// --------------- For track2 -----------------
+``` yaml $(python-mode) == 'update' && $(track2)
 no-namespace-folders: true
 output-folder: $(python-sdks-folder)/appconfiguration/azure-mgmt-appconfiguration/azure/mgmt/appconfiguration
 ```
+
 ``` yaml $(python-mode) == 'create' && $(track2)
 basic-setup-py: true
 output-folder: $(python-sdks-folder)/appconfiguration/azure-mgmt-appconfiguration
