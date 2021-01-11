@@ -40,8 +40,8 @@ These settings apply only when `--tag=package-2021-01` is specified on the comma
 
 ```yaml $(tag) == 'package-2021-01'
 input-file:
-  - Microsoft.MixedReality/stable/2021-01-01/common.json
   - Microsoft.MixedReality/stable/2021-01-01/proxy.json
+  - Microsoft.MixedReality/stable/2021-01-01/spatial-anchors.json
   - Microsoft.MixedReality/stable/2021-01-01/remote-rendering.json
 ```
 ### Tag: package-2020-05
