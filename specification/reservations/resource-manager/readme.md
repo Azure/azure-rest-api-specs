@@ -39,6 +39,16 @@ input-file:
   - Microsoft.Capacity/stable/2020-10-25/quota.json
 ```
 
+### Tag: package-2020-10-25-preview
+
+These settings apply only when `--tag=package-2020-10-25-preview` is specified on the command line. This package with -preview is created for go SDK, as it expected -preview, as reservaryion api is preview.
+
+``` yaml $(tag) == 'package-2020-10-25-preview'
+input-file:
+  - Microsoft.Capacity/preview/2020-10-01-preview/reservations.json
+  - Microsoft.Capacity/stable/2020-10-25/quota.json
+```
+
 ### Tag: package-2020-11-preview
 
 These settings apply only when `--tag=package-2020-11-preview` is specified on the command line.
