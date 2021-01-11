@@ -179,6 +179,7 @@ java:
   with-optional-parameters: true
   with-single-async-method: true
 ```
+
 ### Tag: package-preview-v3.1-preview.4
 
 These settings apply only when `--tag=package-preview-v3.1-preview.4` is specified on the command line.
