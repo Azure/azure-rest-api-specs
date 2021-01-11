@@ -690,6 +690,12 @@
               "items": {
                 "$ref": "#/definitions/KeyPhrasesTask"
               }
+            },
+            "EntityLinkingTasks": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/EntityLinkingTask"
+              }
             }
           },
           "type": "object"
@@ -1121,6 +1127,28 @@
                     "properties": {
                       "results": {
                         "$ref": "#/definitions/KeyPhraseResult"
+                      }
+                    },
+                    "required": [
+                      "results"
+                    ]
+                  }
+                ]
+              }
+            },
+            "EntityLinkingTasks": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "allOf": [
+                  {
+                    "$ref": "#/definitions/TaskState"
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "results": {
+                        "$ref": "#/definitions/EntityLinkingResult"
                       }
                     },
                     "required": [
@@ -2040,6 +2068,20 @@
       }
     },
     "KeyPhrasesTask": {
+      "properties": {
+        "parameters": {
+          "properties": {
+            "model-version": {
+              "default": "latest",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "type": "object"
+    },
+    "EntityLinkingTask": {
       "properties": {
         "parameters": {
           "properties": {
