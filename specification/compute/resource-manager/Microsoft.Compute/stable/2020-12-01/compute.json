@@ -3106,9 +3106,6 @@
           "Create a vm with an extensions time budget.": {
             "$ref": "./examples/CreateAVmWithExtensionsTimeBudget.json"
           },
-          "Create a vm with Application Profile.": {
-            "$ref": "./examples/CreateAVmWithApplicationProfile.json"
-          },
           "Create a VM with Uefi Settings of secureBoot and vTPM.": {
             "$ref": "./examples/CreateAVmWithUefiSettings.json"
           }
@@ -4217,9 +4214,6 @@
           },
           "Create a scale set with Host Encryption using encryptionAtHost property.": {
             "$ref": "./examples/CreateAScaleSetWithEncryptionAtHost.json"
-          },
-          "Create a scale set with Application Profile": {
-            "$ref": "./examples/CreateAScaleSetWithApplicationProfile.json"
           },
           "Create a scale set with Uefi Settings of secureBoot and vTPM.": {
             "$ref": "./examples/CreateAScaleSetWithUefiSettings.json"
@@ -9156,48 +9150,6 @@
       },
       "description": "Specifies the storage settings for the virtual machine disks."
     },
-    "VMGalleryApplication": {
-      "properties": {
-        "tags": {
-          "type": "string",
-          "description": "Optional, Specifies a passthrough value for more generic context."
-        },
-        "order": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Optional, Specifies the order in which the packages have to be installed, has no effect if manuallyManaged is set to true"
-        },
-        "manuallyManaged": {
-          "type": "boolean",
-          "default": false,
-          "description": "Specifies whether the gallery application would be manually managed. If set to true, the VMApplicationExtension would not manage the gallery application"
-        },
-        "packageReferenceId": {
-          "type": "string",
-          "description": "Specifies the GalleryApplicationVersion reference in URL form. e.g. /subscriptions/{SubscriptionId}/resourceGroups/{ResourceGroupName}/providers/Microsoft.Compute/galleries/{galleryName}/applications/{application}/versions/{version}"
-        },
-        "configurationReference": {
-          "type": "string",
-          "description": "Optional, Specifies the uri to an azure blob that will replace the default configuration for the package if provided"
-        }
-      },
-      "required": [
-        "packageReferenceId"
-      ],
-      "description": "Specifies the required information to reference a compute gallery application version"
-    },
-    "ApplicationProfile": {
-      "properties": {
-        "galleryApplications": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/VMGalleryApplication"
-          },
-          "description": "Specifies the gallery applications that should be made available to the VM/VMSS"
-        }
-      },
-      "description": "Contains the list of gallery applications that should be made available to the VM/VMSS"
-    },
     "UefiSettings": {
       "properties": {
         "secureBootEnabled": {
@@ -9850,10 +9802,6 @@
         "hardwareProfile": {
           "$ref": "#/definitions/HardwareProfile",
           "description": "Specifies the hardware settings for the virtual machine."
-        },
-        "applicationProfile": {
-          "$ref": "#/definitions/ApplicationProfile",
-          "description": "Specifies the gallery applications that should be made available to the VM/VMSS"
         },
         "storageProfile": {
           "$ref": "#/definitions/StorageProfile",
@@ -11219,10 +11167,6 @@
           "$ref": "#/definitions/VirtualMachineScaleSetOSProfile",
           "description": "Specifies the operating system settings for the virtual machines in the scale set."
         },
-        "applicationProfile": {
-          "$ref": "#/definitions/ApplicationProfile",
-          "description": "Specifies the gallery applications that should be made available to the VM/VMSS"
-        },
         "storageProfile": {
           "$ref": "#/definitions/VirtualMachineScaleSetStorageProfile",
           "description": "Specifies the storage settings for the virtual machine disks."
@@ -11271,10 +11215,6 @@
         "osProfile": {
           "$ref": "#/definitions/VirtualMachineScaleSetUpdateOSProfile",
           "description": "The virtual machine scale set OS profile."
-        },
-        "applicationProfile": {
-          "$ref": "#/definitions/ApplicationProfile",
-          "description": "Specifies the gallery applications that should be made available to the VM/VMSS"
         },
         "storageProfile": {
           "$ref": "#/definitions/VirtualMachineScaleSetUpdateStorageProfile",
@@ -11916,10 +11856,6 @@
         "hardwareProfile": {
           "$ref": "#/definitions/HardwareProfile",
           "description": "Specifies the hardware settings for the virtual machine."
-        },
-        "applicationProfile": {
-          "$ref": "#/definitions/ApplicationProfile",
-          "description": "Specifies the gallery applications that should be made available to the VM/VMSS"
         },
         "storageProfile": {
           "$ref": "#/definitions/StorageProfile",
