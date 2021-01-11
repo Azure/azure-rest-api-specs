@@ -178,4 +178,13 @@ java:
   output-folder: $(azure-libraries-for-java-folder)/cognitiveservices/data-plane/language/textanalytics
   with-optional-parameters: true
   with-single-async-method: true
+``
+### Tag: package-preview-v3.1-preview.4
+
+These settings apply only when `--tag=package-preview-v3.1-preview.4` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-v3.1-preview.4'
+input-file:
+  - preview/v3.1-preview.4/TextAnalytics.json
 ```
+`
