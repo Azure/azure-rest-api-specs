@@ -899,9 +899,16 @@
           "description": "Raw row values",
           "type": "array",
           "items": {
-            "type": "string"
+            "$ref": "#/definitions/DataTableRowObject"
           }
         }
+      }
+    },
+    "DataTableRowObject": {
+      "description": "Data Table which defines columns and raw row values",
+      "type": "array",
+      "items": {
+        "type": "string"
       }
     },
     "DefaultErrorResponse": {
