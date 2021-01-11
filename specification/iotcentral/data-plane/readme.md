@@ -16,7 +16,39 @@ directive:
   - where:
       - $.definitions.EmailUser.allOf[1].properties.email.format
     suppress:
-      - ValidFormats    
+      - ValidFormats
+  - where:
+      - $.paths[\"/devices/{device_id}/components/{component_name}/properties\"].put
+    suppress:
+      - LongRunningOperationsWithLongRunningExtension
+  - where:
+      - $.paths[\"/devices/{device_id}/components/{component_name}/properties\"].patch
+    suppress:
+      - LongRunningOperationsWithLongRunningExtension
+  - where:
+      - $.paths[\"/devices/{device_id}/modules/{module_name}/components/{component_name}/properties\"].put
+    suppress:
+      - LongRunningOperationsWithLongRunningExtension
+  - where:
+      - $.paths[\"/devices/{device_id}/modules/{module_name}/components/{component_name}/properties\"].patch
+    suppress:
+      - LongRunningOperationsWithLongRunningExtension
+  - where:
+      - $.paths[\"/devices/{device_id}/modules/{module_name}/properties\"].put
+    suppress:
+      - LongRunningOperationsWithLongRunningExtension
+  - where:
+      - $.paths[\"/devices/{device_id}/modules/{module_name}/properties\"].patch
+    suppress:
+      - LongRunningOperationsWithLongRunningExtension
+  - where:
+      - $.paths[\"/devices/{device_id}/properties\"].put
+    suppress:
+      - LongRunningOperationsWithLongRunningExtension
+  - where:
+      - $.paths[\"/devices/{device_id}/properties\"].patch
+    suppress:
+      - LongRunningOperationsWithLongRunningExtension
 ```
 
 ## Configuration
