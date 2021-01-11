@@ -125,17 +125,24 @@
       }
     },
     "DateTimeInterval": {
+      "description": "An interval in time specifying the date and time for the inclusive start and exclusive end, i.e. `[start, end)`.",
       "type": "object",
       "properties": {
         "start": {
-          "format": "date-time",
-          "type": "string"
+          "description": "A datetime indicating the inclusive/closed start of the time interval, i.e. `[`**`start`**`, end)`. Specifying a `start` that occurs chronologically after `end` will result in an error.",
+          "type": "string",
+          "format": "date-time"
         },
         "end": {
-          "format": "date-time",
-          "type": "string"
+          "description": "A datetime indicating the exclusive/open end of the time interval, i.e. `[start, `**`end`**`)`. Specifying an `end` that occurs chronologically before `start` will result in an error.",
+          "type": "string",
+          "format": "date-time"
         }
-      }
+      },
+      "required": [
+        "start",
+        "end"
+      ]
     },
     "ErrorResponse": {
       "title": "Error response.",
@@ -205,7 +212,7 @@
       "in": "query",
       "required": true,
       "type": "string",
-      "description": "Client Api Version."
+      "description": "Api Version."
     }
   }
 }
