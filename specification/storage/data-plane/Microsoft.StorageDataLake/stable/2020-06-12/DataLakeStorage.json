@@ -482,7 +482,7 @@
         }
       ]
     },
-    "/{filesystem}?restype=container&comp=list&include=permissions": {
+    "/{filesystem}?restype=container&comp=list&include=permissions,metadata": {
       "get": {
         "operationId": "FileSystem_BlobListPaths",
         "summary": "List Paths",
@@ -506,6 +506,12 @@
           },
           {
             "$ref": "#/parameters/MaxResults"
+          },
+          {
+            "$ref": "#/parameters/IncludeUpn"
+          },
+          {
+            "$ref": "#/parameters/ListPathsInclude"
           },
           {
             "$ref": "#/parameters/Timeout"
@@ -581,15 +587,6 @@
           "type": "string",
           "enum": [
             "list"
-          ]
-        },
-        {
-          "name": "include",
-          "in": "query",
-          "required": true,
-          "type": "string",
-          "enum": [
-            "permissions"
           ]
         }
       ]
@@ -2817,6 +2814,35 @@
       "x-ms-parameter-location": "method",
       "in": "query",
       "required": false
+    },
+    "IncludeUpn": {
+      "name": "x-ms-upn",
+      "x-ms-client-name": "includeUpn",
+      "description": "Optional. Valid only when Hierarchical Namespace is enabled for the account. If true, the user identity values returned in the owner and group fields of each list entry will be transformed from Azure Active Directory Object IDs to User Principal Names. If false, the values will be returned as Azure Active Directory Object IDs. The default value is false. Note that group and application Object IDs are not translated because they do not have unique friendly names.",
+      "type": "boolean",
+      "x-ms-parameter-location": "method",
+      "in": "header",
+      "required": false
+    },
+    "ListPathsInclude": {
+      "name": "include",
+      "in": "query",
+      "required": true,
+      "type": "array",
+      "collectionFormat": "csv",
+      "items": {
+        "type": "string",
+        "enum": [
+          "metadata",
+          "permissions"
+        ],
+        "x-ms-enum": {
+          "name": "ListPathsIncludeItem",
+          "modelAsString": false
+        }
+      },
+      "x-ms-parameter-location": "method",
+      "description": "Include this parameter to specify one or more datasets to include in the response."
     }
   },
   "definitions": {
@@ -2999,6 +3025,9 @@
       "properties": {
         "Name": {
           "type": "string"
+        },
+        "Properties": {
+          "$ref": "#/definitions/BlobPropertiesInternal"
         }
       }
     },
@@ -3014,6 +3043,9 @@
         },
         "Properties": {
           "$ref": "#/definitions/BlobPropertiesInternal"
+        },
+        "Metadata": {
+          "$ref": "#/definitions/BlobMetadata"
         }
       }
     },
@@ -3054,6 +3086,23 @@
         "Permissions": {
           "type": "string"
         }
+      }
+    },
+    "BlobMetadata": {
+      "type": "object",
+      "xml": {
+        "name": "Metadata"
+      },
+      "properties": {
+        "Encrypted": {
+          "type": "string",
+          "xml": {
+            "attribute": true
+          }
+        }
+      },
+      "additionalProperties": {
+        "type": "string"
       }
     },
     "StorageError": {
