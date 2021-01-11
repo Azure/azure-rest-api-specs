@@ -257,6 +257,45 @@
           }
         }
       }
+    },
+    "/v1.0/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Quantum/workspaces/{workspaceName}/quotas": {
+      "get": {
+        "operationId": "Quotas_List",
+        "description": "List quotas for the given workspace.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/workspaceNameParameter"
+          }
+        ],
+        "x-ms-examples": {
+          "Get a list of quotas for a particular quantum workspace.": {
+            "$ref": "./examples/quotaList.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/QuotaList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/restError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
     }
   },
   "definitions": {
@@ -493,6 +532,73 @@
           "type": "string",
           "readOnly": true,
           "description": "A page with detailed status of the provider."
+        }
+      }
+    },
+    "QuotaList": {
+      "description": "List of quotas.",
+      "properties": {
+        "value": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Quota"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Link to the next page of results."
+        }
+      }
+    },
+    "Quota": {
+      "description": "Quota information.",
+      "type": "object",
+      "properties": {
+        "dimension": {
+          "type": "string",
+          "description": "The name of the dimension associated with the quota."
+        },
+        "scope": {
+          "type": "string",
+          "description": "The scope at which the quota is applied.",
+          "enum": [
+            "Workspace",
+            "Subscription"
+          ],
+          "x-ms-enum": {
+            "name": "DimensionScope",
+            "modelAsString": true
+          }
+        },
+        "providerId": {
+          "type": "string",
+          "description": "The unique identifier for the provider."
+        },
+        "utilization": {
+          "type": "number",
+          "description": "The amount of the usage that has been applied for the current period."
+        },
+        "holds": {
+          "type": "number",
+          "description": "The amount of the usage that has been reserved but not applied for the current period."
+        },
+        "limit": {
+          "type": "number",
+          "description": "The maximum amount of usage allowed for the current period."
+        },
+        "period": {
+          "type": "string",
+          "description": "The time period in which the quota's underlying meter is accumulated. Based on calendar year. 'None' is used for concurrent quotas.",
+          "enum": [
+            "None",
+            "Monthly"
+          ],
+          "x-ms-enum": {
+            "name": "MeterPeriod",
+            "modelAsString": true
+          }
         }
       }
     },
