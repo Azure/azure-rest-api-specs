@@ -69,7 +69,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -121,7 +121,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -157,18 +157,15 @@
             "description": "Successful."
           },
           "202": {
-            "description": "Workspace delete request accepted.",
-            "schema": {
-              "$ref": "#/definitions/QuantumWorkspace"
-            }
+            "description": "Workspace delete request accepted."
           },
           "204": {
-            "description": "No content - The job was successfully cancelled."
+            "description": "No content - The workspace doesn't exist."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -202,7 +199,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -241,7 +238,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -252,11 +249,11 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Quantum/locations/{locationName}/offerings": {
       "get": {
-        "description": "Returns the list of all providers available for the given location.",
+        "description": "Returns the list of all provider offerings available for the given location.",
         "operationId": "Offerings_List",
         "x-ms-examples": {
-          "ProviderList": {
-            "$ref": "./examples/providerList.json"
+          "OfferingsList": {
+            "$ref": "./examples/offeringsList.json"
           }
         },
         "parameters": [
@@ -272,15 +269,15 @@
         ],
         "responses": {
           "200": {
-            "description": "Providers details.",
+            "description": "Offerings details.",
             "schema": {
-              "$ref": "#/definitions/ProviderListResult"
+              "$ref": "#/definitions/OfferingsListResult"
             }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -309,7 +306,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -321,38 +318,6 @@
     }
   },
   "definitions": {
-    "ErrorResponse": {
-      "description": "Error response.",
-      "properties": {
-        "error": {
-          "$ref": "#/definitions/ErrorDefinition",
-          "description": "The error details."
-        }
-      }
-    },
-    "ErrorDefinition": {
-      "description": "Error definition.",
-      "properties": {
-        "code": {
-          "description": "Service specific error code which serves as the substatus for the HTTP error code.",
-          "type": "string",
-          "readOnly": true
-        },
-        "message": {
-          "description": "Description of the error.",
-          "type": "string",
-          "readOnly": true
-        },
-        "details": {
-          "description": "Internal error details.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ErrorDefinition"
-          },
-          "readOnly": true
-        }
-      }
-    },
     "WorkspaceListResult": {
       "properties": {
         "value": {
@@ -369,7 +334,7 @@
       },
       "description": "The response of a list Workspaces operation."
     },
-    "ProviderListResult": {
+    "OfferingsListResult": {
       "properties": {
         "value": {
           "type": "array",
@@ -389,25 +354,6 @@
       "type": "object",
       "description": "The resource proxy definition object for quantum workspace.",
       "properties": {
-        "id": {
-          "type": "string",
-          "description": "The unique id for this workspace.",
-          "readOnly": true
-        },
-        "name": {
-          "type": "string",
-          "description": "The name of this workspace.",
-          "readOnly": true
-        },
-        "type": {
-          "type": "string",
-          "description": "The type of this workspace.",
-          "readOnly": true
-        },
-        "location": {
-          "type": "string",
-          "description": "The location (region) of this workspace."
-        },
         "properties": {
           "x-ms-client-flatten": true,
           "description": "Gets or sets the properties. Define quantum space's specific properties.",
@@ -419,24 +365,38 @@
         },
         "identity": {
           "type": "object",
-          "description": "Managed Identity information",
+          "description": "Managed Identity information.",
           "properties": {
-            "type": {
-              "type": "string",
-              "description": "Type of identity. Supported: SystemAssigned or None (case insensitive)"
-            },
             "principalId": {
+              "readOnly": true,
               "type": "string",
-              "description": "objectId of the managed identity,"
+              "description": "The principal ID of resource identity."
             },
             "tenantId": {
+              "readOnly": true,
               "type": "string",
-              "description": "tenantId where the managed identity lives."
+              "description": "The tenant ID of resource."
+            },
+            "type": {
+              "type": "string",
+              "description": "The identity type.",
+              "enum": [
+                "SystemAssigned",
+                "None"
+              ],
+              "x-ms-enum": {
+                "name": "ResourceIdentityType",
+                "modelAsString": true
+              }
             }
           }
         }
       },
-      "x-ms-azure-resource": true
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/TrackedResource"
+        }
+      ]
     },
     "WorkspaceResourceProperties": {
       "description": "Properties of a Workspace",
@@ -470,7 +430,6 @@
             "ProviderUpdating",
             "ProviderDeleting",
             "ProviderProvisioning",
-            "Deleted",
             "Failed"
           ],
           "x-ms-enum": {
@@ -478,11 +437,6 @@
             "modelAsString": true
           },
           "description": "Provisioning status field",
-          "readOnly": true
-        },
-        "resourceUsageId": {
-          "type": "string",
-          "description": "Unique id to track resource usage.",
           "readOnly": true
         },
         "storageAccount": {
@@ -493,7 +447,7 @@
     },
     "ProviderDescription": {
       "type": "object",
-      "description": "Information about a Provider. A Provider is an entity that offers Targets to run Azure Quantum Jobs.",
+      "description": "Information about an offering. A provider offering is an entity that offers Targets to run Azure Quantum Jobs.",
       "properties": {
         "id": {
           "type": "string",
