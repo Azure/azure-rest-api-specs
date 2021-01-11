@@ -1328,6 +1328,14 @@
           "maxItems": 32,
           "description": "List of Client Certificate Ids."
         },
+        "certificate": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "maxItems": 32,
+          "description": "List of Client Certificate Thumbprints."
+        },
         "query": {
           "type": "object",
           "additionalProperties": {
@@ -1419,6 +1427,10 @@
       "properties": {
         "clientCertificateId": {
           "description": "The client certificate id for the management endpoint.",
+          "type": "string"
+        },
+        "clientCertificatethumbprint": {
+          "description": "The client certificate thumbprint for the management endpoint.",
           "type": "string"
         },
         "maxPartitionResolutionRetries": {
