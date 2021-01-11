@@ -1423,188 +1423,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/linkedServices": {
-      "get": {
-        "tags": [
-          "LinkedServices"
-        ],
-        "x-ms-examples": {
-          "ListLinkedServices": {
-            "$ref": "./examples/listLinkedServices.json"
-          }
-        },
-        "operationId": "LinkedServices_List",
-        "description": "List all linked services under an AML workspace.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/WorkspaceNameParameter"
-          },
-          {
-            "$ref": "#/parameters/APIVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successfully retrieved the linked services.",
-            "schema": {
-              "$ref": "#/definitions/LinkedServiceList"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed",
-            "schema": {
-              "$ref": "#/definitions/MachineLearningServiceError"
-            }
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/linkedServices/{linkName}": {
-      "put": {
-        "tags": [
-          "LinkedServices"
-        ],
-        "operationId": "LinkedServices_Create",
-        "description": "Add a new linked service.",
-        "x-ms-examples": {
-          "CreateLinkedService": {
-            "$ref": "./examples/createLinkedService.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/WorkspaceNameParameter"
-          },
-          {
-            "$ref": "#/parameters/LinkName"
-          },
-          {
-            "$ref": "#/parameters/APIVersionParameter"
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "description": "The object for creating or updating a linked service",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/LinkedServiceRequest"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successfully created the linked service.",
-            "schema": {
-              "$ref": "#/definitions/LinkedServiceResponse"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed",
-            "schema": {
-              "$ref": "#/definitions/MachineLearningServiceError"
-            }
-          }
-        }
-      },
-      "get": {
-        "tags": [
-          "LinkedServices"
-        ],
-        "operationId": "LinkedServices_Get",
-        "description": "Get the detail of a linked service.",
-        "x-ms-examples": {
-          "GetLinkedService": {
-            "$ref": "./examples/getLinkedService.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/WorkspaceNameParameter"
-          },
-          {
-            "$ref": "#/parameters/LinkName"
-          },
-          {
-            "$ref": "#/parameters/APIVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successfully retrieved the detail of the linked service.",
-            "schema": {
-              "$ref": "#/definitions/LinkedServiceResponse"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed",
-            "schema": {
-              "$ref": "#/definitions/MachineLearningServiceError"
-            }
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "LinkedServices"
-        ],
-        "operationId": "LinkedServices_Delete",
-        "description": "Delete a linked service.",
-        "x-ms-examples": {
-          "DeleteLinkedService": {
-            "$ref": "./examples/deleteLinkedService.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/WorkspaceNameParameter"
-          },
-          {
-            "$ref": "#/parameters/LinkName"
-          },
-          {
-            "$ref": "#/parameters/APIVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successfully deleted the linked service."
-          },
-          "204": {
-            "description": "Specific linked service not found."
-          },
-          "default": {
-            "description": "Error response describing why the operation failed",
-            "schema": {
-              "$ref": "#/definitions/MachineLearningServiceError"
-            }
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/services": {
       "get": {
         "tags": [
@@ -2259,14 +2077,6 @@
       "required": true,
       "type": "string",
       "description": "The name of the private endpoint connection associated with the workspace",
-      "x-ms-parameter-location": "method"
-    },
-    "LinkName": {
-      "name": "linkName",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "Friendly name of the linked workspace",
       "x-ms-parameter-location": "method"
     },
     "ModelIdParameter": {
@@ -3208,6 +3018,10 @@
         "sku": {
           "$ref": "#/definitions/Sku",
           "description": "The sku of the workspace."
+        },
+        "systemData": {
+          "$ref": "#/definitions/SystemData",
+          "readOnly": true
         }
       }
     },
@@ -4769,106 +4583,6 @@
         "userAssignedIdentity"
       ]
     },
-    "LinkedServiceResponse": {
-      "description": "Linked service.",
-      "type": "object",
-      "x-ms-azure-resource": true,
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "ResourceId of the link of the linked service.",
-          "readOnly": true
-        },
-        "name": {
-          "type": "string",
-          "description": "Friendly name of the linked service.",
-          "readOnly": true
-        },
-        "type": {
-          "type": "string",
-          "description": "Resource type of linked service.",
-          "readOnly": true
-        },
-        "location": {
-          "description": "location of the linked service.",
-          "type": "string"
-        },
-        "identity": {
-          "$ref": "#/definitions/Identity"
-        },
-        "properties": {
-          "$ref": "#/definitions/LinkedServiceProps"
-        }
-      }
-    },
-    "LinkedServiceRequest": {
-      "type": "object",
-      "description": "object used for creating linked service.",
-      "properties": {
-        "name": {
-          "description": "Friendly name of the linked service",
-          "type": "string"
-        },
-        "location": {
-          "description": "location of the linked service.",
-          "type": "string"
-        },
-        "identity": {
-          "$ref": "#/definitions/Identity"
-        },
-        "properties": {
-          "$ref": "#/definitions/LinkedServiceProps"
-        }
-      }
-    },
-    "LinkedServiceProps": {
-      "type": "object",
-      "description": "LinkedService specific properties.",
-      "required": [
-        "linkedServiceResourceId"
-      ],
-      "properties": {
-        "linkedServiceResourceId": {
-          "description": "ResourceId of the link target of the linked service.",
-          "type": "string"
-        },
-        "linkType": {
-          "description": "Type of the link target.",
-          "type": "string",
-          "enum": [
-            "Synapse"
-          ],
-          "x-ms-enum": {
-            "name": "LinkedServiceLinkType",
-            "modelAsString": false
-          }
-        },
-        "createdTime": {
-          "format": "date-time",
-          "description": "The creation time of the linked service.",
-          "type": "string"
-        },
-        "modifiedTime": {
-          "format": "date-time",
-          "description": "The last modified time of the linked service.",
-          "type": "string"
-        }
-      }
-    },
-    "LinkedServiceList": {
-      "type": "object",
-      "description": "List response of linked service.",
-      "properties": {
-        "value": {
-          "readOnly": true,
-          "type": "array",
-          "description": "Array of linked service.",
-          "items": {
-            "$ref": "#/definitions/LinkedServiceResponse"
-          }
-        }
-      }
-    },
     "ServiceResource": {
       "type": "object",
       "description": "Machine Learning service object wrapped into ARM resource envelope.",
@@ -4886,6 +4600,52 @@
           }
         }
       ]
+    },
+    "SystemData": {
+      "description": "Read only system data",
+      "type": "object",
+      "properties": {
+        "createdBy": {
+          "type": "string",
+          "description": "An identifier for the identity that created the resource"
+        },
+        "createdByType": {
+          "$ref": "#/definitions/IdentityType",
+          "description": "The type of identity that created the resource"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp of resource creation (UTC)"
+        },
+        "lastModifiedBy": {
+          "type": "string",
+          "description": "An identifier for the identity that last modified the resource"
+        },
+        "lastModifiedByType": {
+          "$ref": "#/definitions/IdentityType",
+          "description": "The type of identity that last modified the resource"
+        },
+        "lastModifiedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp of resource last modification (UTC)"
+        }
+      }
+    },
+    "IdentityType": {
+      "description": "The type of identity that creates/modifies resources",
+      "type": "string",
+      "enum": [
+        "user",
+        "application",
+        "managedIdentity",
+        "key"
+      ],
+      "x-ms-enum": {
+        "name": "IdentityType",
+        "modelAsString": true
+      }
     },
     "ServiceResponseBase": {
       "description": "The base service response. The correct inherited response based on computeType will be returned (ex. ACIServiceResponse)",
