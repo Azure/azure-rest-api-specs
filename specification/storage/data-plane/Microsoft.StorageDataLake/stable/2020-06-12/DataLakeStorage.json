@@ -482,7 +482,7 @@
         }
       ]
     },
-    "/{filesystem}?restype=container&comp=list": {
+    "/{filesystem}?restype=container&comp=list&include=permissions": {
       "get": {
         "operationId": "FileSystem_BlobListPaths",
         "summary": "List Paths",
@@ -581,6 +581,15 @@
           "type": "string",
           "enum": [
             "list"
+          ]
+        },
+        {
+          "name": "include",
+          "in": "query",
+          "required": true,
+          "type": "string",
+          "enum": [
+            "permissions"
           ]
         }
       ]
@@ -3035,6 +3044,15 @@
           "type": "integer",
           "format": "int64",
           "description": "Size in bytes"
+        },
+        "Owner": {
+          "type": "string"
+        },
+        "Group": {
+          "type": "string"
+        },
+        "Permissions": {
+          "type": "string"
         }
       }
     },
