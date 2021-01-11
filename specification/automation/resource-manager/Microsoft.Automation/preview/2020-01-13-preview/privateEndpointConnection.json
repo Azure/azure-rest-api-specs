@@ -28,7 +28,7 @@
       "flow": "implicit",
       "description": "Azure Active Directory OAuth2 Flow",
       "scopes": {
-        "user_impersonation": "Impersonate your user account"
+        "user_impersonation": "impersonate your user account"
       }
     }
   },
@@ -154,7 +154,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -198,7 +198,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -212,19 +212,6 @@
     }
   },
   "definitions": {
-    "ErrorResponse": {
-      "properties": {
-        "code": {
-          "description": "Error code.",
-          "type": "string"
-        },
-        "message": {
-          "description": "Error message indicating why the operation failed.",
-          "type": "string"
-        }
-      },
-      "description": "Error Response."
-    },
     "PrivateEndpointConnectionListResult": {
       "description": "A list of private endpoint connections",
       "type": "object",
@@ -250,7 +237,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ProxyResource"
+          "$ref": "../../common/v1/definitions.json#/definitions/ProxyResource"
         }
       ]
     },
