@@ -5336,13 +5336,13 @@
         "ShareProtocolSettings": {
             "description": "Protocol settings",
             "type": "object",
+            "xml": {
+                "name": "ProtocolSettings"
+            },
             "properties": {
                 "Smb": {
                     "description": "Settings for SMB protocol.",
-                    "$ref": "#/definitions/ShareSmbSettings",
-                    "xml": {
-                        "name": "SMB"
-                    }
+                    "$ref": "#/definitions/ShareSmbSettings"
                 }
             }
         },
@@ -5530,6 +5530,9 @@
         "ShareSmbSettings": {
             "description": "Settings for SMB protocol.",
             "type": "object",
+            "xml": {
+                "name": "SMB"
+            },
             "properties": {
                 "Multichannel": {
                     "description": "Settings for SMB Multichannel.",
@@ -5561,10 +5564,7 @@
                 },
                 "Protocol": {
                     "description": "Protocol settings",
-                    "$ref":"#/definitions/ShareProtocolSettings",
-                    "xml": {
-                        "name": "ProtocolSettings"
-                    }
+                    "$ref":"#/definitions/ShareProtocolSettings"
                 }
             }
         },
