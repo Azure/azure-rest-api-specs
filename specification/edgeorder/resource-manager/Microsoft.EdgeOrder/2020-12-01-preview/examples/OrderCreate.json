@@ -19,95 +19,88 @@
     "orderResource": {
       "properties": {
         "orderDetails": {
-          "OrderType": "Purchase",
-          "expectedDataSizeInTeraBytes": 0,
-          "ProductDetails": {
-            "ProductId": "Andrew Cubone"
-          },
-          "Preferences": {
-            "TransportPreferences": {
-              "PreferredShipmentType": "MicrosoftManaged"
-            }
-          }
-        },
-        "addressDetails": {
-          "ShippingAddress": {
-            "Properties": {
-              "ContactDetails": {
-                "ContactName": "first",
-                "Phone": "11111"
+            "orderType": "Purchase",
+            "productDetails": {
+              "hierarchyInformation": {
+                "productFamilyName": "azurestackedge",
+                "productLineName": "azurestackedge",
+                "productName": "azurestackedgeprogpu",
+                "configurationName": "1gpu"
               }
             },
-            "location": "westus"
-          }
-        }
-      },
-      "Tags": {
-        "mango": "fruit",
-        "carrot": "vegetable"
-      },
-      "location": "westus"
-    }
-  },
-  "responses": {
-    "200": {
-      "body": {
-        "properties": {
-          "orderDetails": {
-            "productDetails": {
-              "productId": "Andrew Cubone",
-              "count": 0,
-              "deviceDetails": []
-            },
-            "orderType": "Purchase",
-            "currentStatus": {
-              "orderStatus": "",
-              "lastUpdatedTime": "0001-01-01T05:30:00+05:30"
-            },
-            "orderStatusHistory": [],
             "preferences": {
               "transportPreferences": {
                 "preferredShipmentType": "MicrosoftManaged"
               }
-            },
-            "notificationEmailList": [],
-            "cancellationReason": "",
-            "cancellationStatus": "Cancellable",
-            "deletionStatus": "Allowed",
-            "returnReason": "",
-            "returnStatus": "Returnable"
+            }
           },
           "addressDetails": {
             "shippingAddress": {
-              "properties": {
                 "contactDetails": {
                   "contactName": "first",
                   "phone": "11111"
                 }
-              },
-              "location": "westus",
-              "tags": {},
-              "type": "Microsoft.EdgeOrder/addresses"
             }
-          },
-          "startTime": "0001-01-01T05:30:00+05:30",
-          "orderCollectionId": ""
+          }
         },
-        "location": "westus",
         "tags": {
           "mango": "fruit",
           "carrot": "vegetable"
         },
-        "identity": {
-          "type": "None"
-        },
-        "name": "TestOrderName1",
-        "id": "/subscriptions/fa68082f-8ff7-4a25-95c7-ce9da541242f/resourceGroups/TestRG/providers/Microsoft.EdgeOrder/orders/TestOrderName1",
-        "type": "Microsoft.EdgeOrder/orders"
+        "location": "westus"
       }
     },
-    "202": {
-      "body": ""
+    "responses": {
+      "200": {
+        "body": {
+          "properties": {
+            "orderDetails": {
+              "productDetails": {
+                "hierarchyInformation": {
+                  "productFamilyName": "AzureStackEdge",
+                  "productLineName": "AzureStackEdge",
+                  "productName": "AzureStackEdgeProFPGA",
+                  "configurationName": "1GPU"
+                },
+                "count": 1,
+                "deviceDetails": []
+              },
+              "orderType": "Purchase",
+              "orderStatusHistory": [],
+              "preferences": {
+                "transportPreferences": {
+                  "preferredShipmentType": "MicrosoftManaged"
+                }
+              },
+              "notificationEmailList": [],
+              "cancellationReason": "",
+              "cancellationStatus": "Cancellable",
+              "deletionStatus": "Allowed",
+              "returnReason": "",
+              "returnStatus": "Returnable"
+            },
+            "addressDetails": {
+              "shippingAddress": {
+                  "contactDetails": {
+                    "contactName": "first",
+                    "phone": "11111"
+                  }
+              }
+            },
+            "startTime": "0001-01-01T05:30:00+05:30",
+            "orderCollectionId": ""
+          },
+          "location": "westus",
+          "tags": {
+            "mango": "fruit",
+            "carrot": "vegetable"
+          },
+          "name": "TestOrderName1",
+          "id": "/subscriptions/fa68082f-8ff7-4a25-95c7-ce9da541242f/resourceGroups/TestRG/providers/Microsoft.EdgeOrder/orders/TestOrderName1",
+          "type": "Microsoft.EdgeOrder/orders"
+        }
+      },
+      "202": {
+      }
     }
   }
-}

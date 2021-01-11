@@ -12,17 +12,17 @@
       "application/json; charset=utf-8"
     ],
     "Content-Length": [
-      "103"
+      "120"
     ],
     "productFamiliesRequest": {
-      "filterableProperties": [
-        {
-          "Type": "ShipToCountries",
-          "SupportedValues": [
+      "filterableProperties": {
+        "azurestackedge": {
+          "type": "ShipToCountries",
+          "supportedValues": [
             "US"
           ]
         }
-      ]
+      }
     }
   },
   "responses": {
@@ -37,7 +37,14 @@
                     "products": [
                       {
                         "properties": {
-                          "configurations": [],
+                          "filterableProperties": [
+                            {
+                              "type": "ShipToCountries",
+                              "supportedValues": [
+                                "US"
+                              ]
+                            }
+                          ],
                           "displayName": "Azure Stack Edge Pro - GPU",
                           "description": {
                             "descriptionType": "Base",
@@ -110,15 +117,24 @@
                           "availabilityInformation": {
                             "availabilityStage": "Available",
                             "disabledReason": "None"
+                          },
+                          "hierarchyInformation": {
+                            "productFamilyName": "AzureStackEdge",
+                            "productLineName": "AzureStackEdge",
+                            "productName": "AzureStackEdgeProGPU"
                           }
-                        },
-                        "name": "AzureStackEdgePro-GPU",
-                        "id": "/subscriptions/fa68082f-8ff7-4a25-95c7-ce9da541242f/providers/Microsoft.EdgeOrder/productfamilies/AzureStackEdge/productLines/AzureStackEdge/product/AzureStackEdgePro-GPU",
-                        "type": "Microsoft.EdgeOrder/ProductFamilies/ProductLines/Product"
+                        }
                       },
                       {
                         "properties": {
-                          "configurations": [],
+                          "filterableProperties": [
+                            {
+                              "type": "ShipToCountries",
+                              "supportedValues": [
+                                "UK"
+                              ]
+                            }
+                          ],
                           "displayName": "Azure Stack Edge Pro - FPGA",
                           "description": {
                             "descriptionType": "Base",
@@ -190,15 +206,25 @@
                           "availabilityInformation": {
                             "availabilityStage": "Available",
                             "disabledReason": "None"
+                          },
+                          "hierarchyInformation": {
+                            "productFamilyName": "AzureStackEdge",
+                            "productLineName": "AzureStackEdge",
+                            "productName": "AzureStackEdgeProFPGA"
                           }
-                        },
-                        "name": "AzureStackEdgePro-FPGA",
-                        "id": "/subscriptions/fa68082f-8ff7-4a25-95c7-ce9da541242f/providers/Microsoft.EdgeOrder/productfamilies/AzureStackEdge/productLines/AzureStackEdge/product/AzureStackEdgeProFPGA",
-                        "type": "Microsoft.EdgeOrder/ProductFamilies/ProductLines/Product"
+                        }
                       },
                       {
                         "properties": {
-                          "configurations": [],
+                          "filterableProperties": [
+                            {
+                              "type": "ShipToCountries",
+                              "supportedValues": [
+                                "US",
+                                "UK"
+                              ]
+                            }
+                          ],
                           "displayName": "Azure Stack Edge Pro - R",
                           "description": {
                             "descriptionType": "Base",
@@ -271,11 +297,22 @@
                             "availabilityStage": "ComingSoon",
                             "disabledReason": "NotAvailable",
                             "disabledReasonMessage": "Device is not available yet"
+                          },
+                          "hierarchyInformation": {
+                            "productFamilyName": "AzureStackEdge",
+                            "productLineName": "AzureStackEdge",
+                            "productName": "AzureStackEdgeProFPGA"
                           }
-                        },
-                        "name": "AzureStackEdgePro-R",
-                        "id": "/subscriptions/fa68082f-8ff7-4a25-95c7-ce9da541242f/providers/Microsoft.EdgeOrder/productfamilies/AzureStackEdge/productLines/AzureStackEdge/product/AzureStackEdgePro-R",
-                        "type": "Microsoft.EdgeOrder/ProductFamilies/ProductLines/Product"
+                        }
+                      }
+                    ],
+                    "filterableProperties": [
+                      {
+                        "type": "ShipToCountries",
+                        "supportedValues": [
+                          "US",
+                          "UK"
+                        ]
                       }
                     ],
                     "displayName": "Azure Stack Edge",
@@ -289,18 +326,23 @@
                     "availabilityInformation": {
                       "availabilityStage": "Available",
                       "disabledReason": "None"
+                    },
+                    "hierarchyInformation": {
+                      "productFamilyName": "AzureStackEdge",
+                      "productLineName": "AzureStackEdge"
                     }
-                  },
-                  "name": "AzureStackEdge",
-                  "id": "/subscriptions/fa68082f-8ff7-4a25-95c7-ce9da541242f/providers/Microsoft.EdgeOrder/productfamilies/AzureStackEdge/productLines/AzureStackEdge",
-                  "type": "Microsoft.EdgeOrder/ProductFamilies/ProductLines"
+                  }
                 }
               ],
-              "productFamilyId": "AzureStackEdge",
-              "localizationKeyValueDictionary": {
-                "key1": "Azure Stack Edge is an AI-enabled edge computing device with network data transfer capabilities. The device is powered with NVIDIA T4 GPUs to provide accelerated AI inferencing at the edge. You can choose from the available configurations with one or two GPUs basis your business need",
-                "key2": "Edge"
-              },
+              "filterableProperties": [
+                {
+                  "type": "ShipToCountries",
+                  "supportedValues": [
+                    "US",
+                    "UK"
+                  ]
+                }
+              ],
               "displayName": "Azure Stack Edge",
               "description": {
                 "descriptionType": "Base",
@@ -312,11 +354,11 @@
               "availabilityInformation": {
                 "availabilityStage": "Available",
                 "disabledReason": "None"
+              },
+              "hierarchyInformation": {
+                "productFamilyName": "AzureStackEdge"
               }
-            },
-            "name": "AzureStackEdge",
-            "id": "/subscriptions/fa68082f-8ff7-4a25-95c7-ce9da541242f/providers/Microsoft.EdgeOrder/productfamilies",
-            "type": "Microsoft.EdgeOrder/ProductFamilies"
+            }
           }
         ]
       }

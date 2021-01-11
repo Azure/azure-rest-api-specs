@@ -17,14 +17,14 @@
       "268"
     ],
     "orderUpdateParameter": {
-      "Properties": {
-        "Preferences": {
-          "TransportPreferences": {
-            "PreferredShipmentType": "CustomerManaged"
+        "properties": {
+          "preferences": {
+            "transportPreferences": {
+              "preferredShipmentType": "CustomerManaged"
           }
         }
       },
-      "Tags": {
+        "tags": {
         "pigeon": "bird",
         "tiger": "animal",
         "ant": "insect"
@@ -37,8 +37,13 @@
         "properties": {
           "orderDetails": {
             "productDetails": {
-              "productId": "Andrew Cubone",
-              "count": 0,
+              "hierarchyInformation": {
+                "productFamilyName": "AzureStackEdge",
+                "productLineName": "AzureStackEdge",
+                "productName": "AzureStackEdgeProFPGA",
+                "configurationName": "1GPU"
+              },
+              "count": 1,
               "deviceDetails": []
             },
             "orderType": "Purchase",
@@ -61,15 +66,10 @@
           },
           "addressDetails": {
             "shippingAddress": {
-              "properties": {
                 "contactDetails": {
                   "contactName": "first",
                   "phone": "11111"
                 }
-              },
-              "location": "westus",
-              "tags": {},
-              "type": "Microsoft.EdgeOrder/addresses"
             }
           },
           "startTime": "0001-01-01T05:30:00+05:30",
@@ -81,16 +81,12 @@
           "tiger": "animal",
           "ant": "insect"
         },
-        "identity": {
-          "type": "None"
-        },
         "name": "TestOrderName1",
         "id": "/subscriptions/fa68082f-8ff7-4a25-95c7-ce9da541242f/resourceGroups/TestRG/providers/Microsoft.EdgeOrder/orders/TestOrderName1",
         "type": "Microsoft.EdgeOrder/orders"
       }
     },
     "202": {
-      "body": ""
     }
   }
 }

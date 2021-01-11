@@ -21,7 +21,7 @@
           "Operations"
         ],
         "description": "This method gets all the operations.",
-        "operationId": "List",
+        "operationId": "ListOperations",
         "consumes": [
           "application/json"
         ],
@@ -30,20 +30,20 @@
         ],
         "parameters": [
           {
-            "$ref": "#/parameters/apiVersionParameter"
+            "$ref": "../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/OperationList"
+              "$ref": "../../../../common-types/resource-management/v2/types.json#/definitions/OperationListResult"
             }
           },
           "default": {
             "description": "Error response describing reason for operation failure.",
             "schema": {
-              "$ref": "#/definitions/ApiError"
+              "$ref": "../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -51,7 +51,7 @@
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "List": {
+          "ListOperations": {
             "$ref": "./examples/ListOperations.json"
           }
         }
@@ -72,10 +72,10 @@
         ],
         "parameters": [
           {
-            "$ref": "#/parameters/subscriptionIdParameter"
+            "$ref": "../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/apiVersionParameter"
+            "$ref": "../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
             "name": "$filter",
@@ -102,7 +102,7 @@
           "default": {
             "description": "Error response describing reason for operation failure.",
             "schema": {
-              "$ref": "#/definitions/ApiError"
+              "$ref": "../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -131,10 +131,10 @@
         ],
         "parameters": [
           {
-            "$ref": "#/parameters/subscriptionIdParameter"
+            "$ref": "../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/apiVersionParameter"
+            "$ref": "../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
             "name": "$expand",
@@ -170,7 +170,7 @@
           "default": {
             "description": "Error response describing reason for operation failure.",
             "schema": {
-              "$ref": "#/definitions/ApiError"
+              "$ref": "../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -184,7 +184,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.EdgeOrder/productFamilies/{productFamilyName}/productLines/{productLineName}/products/{productName}/configurations": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.EdgeOrder/listConfigurations": {
       "post": {
         "tags": [
           "ProductsAndConfigurations"
@@ -199,19 +199,10 @@
         ],
         "parameters": [
           {
-            "$ref": "#/parameters/productFamilyNameParameter"
+            "$ref": "../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/productLineNameParameter"
-          },
-          {
-            "$ref": "#/parameters/productNameParameter"
-          },
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
+            "$ref": "../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
             "name": "$skipToken",
@@ -240,7 +231,7 @@
           "default": {
             "description": "Error response describing reason for operation failure.",
             "schema": {
-              "$ref": "#/definitions/ApiError"
+              "$ref": "../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -269,10 +260,10 @@
         ],
         "parameters": [
           {
-            "$ref": "#/parameters/subscriptionIdParameter"
+            "$ref": "../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/apiVersionParameter"
+            "$ref": "../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
             "name": "$skipToken",
@@ -292,7 +283,7 @@
           "default": {
             "description": "Error response describing reason for operation failure.",
             "schema": {
-              "$ref": "#/definitions/ApiError"
+              "$ref": "../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -302,6 +293,51 @@
         "x-ms-examples": {
           "ListProductFamiliesMetadata": {
             "$ref": "./examples/ListProductFamiliesMetadata.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.EdgeOrder/productFamiliesMetadata/{productFamilyName}": {
+      "get": {
+        "tags": [
+          "ProductFamilyMetadata"
+        ],
+        "description": "This method gets the product family metadata for the given subscription.",
+        "operationId": "GetProductFamilyMetadata",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/productFamilyNameParameter"
+          },
+          {
+            "$ref": "../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Gets product family details under subscription.",
+            "schema": {
+              "$ref": "#/definitions/ProductFamiliesMetadataDetails"
+            }
+          },
+          "default": {
+            "description": "Error response describing reason for operation failure.",
+            "schema": {
+              "$ref": "../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetProductFamilyMetadata": {
+            "$ref": "./examples/GetProductFamilyMetadata.json"
           }
         }
       }
@@ -321,10 +357,10 @@
         ],
         "parameters": [
           {
-            "$ref": "#/parameters/subscriptionIdParameter"
+            "$ref": "../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/apiVersionParameter"
+            "$ref": "../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
             "name": "$skipToken",
@@ -344,7 +380,7 @@
           "default": {
             "description": "Error response describing reason for operation failure.",
             "schema": {
-              "$ref": "#/definitions/ApiError"
+              "$ref": "../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -373,10 +409,10 @@
         ],
         "parameters": [
           {
-            "$ref": "#/parameters/subscriptionIdParameter"
+            "$ref": "../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/apiVersionParameter"
+            "$ref": "../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
             "name": "$filter",
@@ -403,7 +439,7 @@
           "default": {
             "description": "Error response describing reason for operation failure.",
             "schema": {
-              "$ref": "#/definitions/ApiError"
+              "$ref": "../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -432,13 +468,13 @@
         ],
         "parameters": [
           {
-            "$ref": "#/parameters/subscriptionIdParameter"
+            "$ref": "../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/resourceGroupNameParameter"
+            "$ref": "../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/apiVersionParameter"
+            "$ref": "../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
             "name": "$filter",
@@ -465,7 +501,7 @@
           "default": {
             "description": "Error response describing reason for operation failure.",
             "schema": {
-              "$ref": "#/definitions/ApiError"
+              "$ref": "../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -497,13 +533,13 @@
             "$ref": "#/parameters/addressNameParameter"
           },
           {
-            "$ref": "#/parameters/subscriptionIdParameter"
+            "$ref": "../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/resourceGroupNameParameter"
+            "$ref": "../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/apiVersionParameter"
+            "$ref": "../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -516,7 +552,7 @@
           "default": {
             "description": "Error response describing reason for operation failure.",
             "schema": {
-              "$ref": "#/definitions/ApiError"
+              "$ref": "../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -543,13 +579,13 @@
             "$ref": "#/parameters/addressNameParameter"
           },
           {
-            "$ref": "#/parameters/subscriptionIdParameter"
+            "$ref": "../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/resourceGroupNameParameter"
+            "$ref": "../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/apiVersionParameter"
+            "$ref": "../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
             "name": "addressResource",
@@ -563,7 +599,10 @@
         ],
         "responses": {
           "200": {
-            "description": "Address object."
+            "description": "Address object.",
+            "schema": {
+              "$ref": "#/definitions/AddressResource"
+            }
           },
           "202": {
             "description": "Accepted request for create Address."
@@ -571,7 +610,7 @@
           "default": {
             "description": "Error response describing reason for operation failure.",
             "schema": {
-              "$ref": "#/definitions/ApiError"
+              "$ref": "../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -599,13 +638,13 @@
             "$ref": "#/parameters/addressNameParameter"
           },
           {
-            "$ref": "#/parameters/subscriptionIdParameter"
+            "$ref": "../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/resourceGroupNameParameter"
+            "$ref": "../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/apiVersionParameter"
+            "$ref": "../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -621,7 +660,7 @@
           "default": {
             "description": "Error response describing reason for operation failure.",
             "schema": {
-              "$ref": "#/definitions/ApiError"
+              "$ref": "../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -649,13 +688,13 @@
             "$ref": "#/parameters/addressNameParameter"
           },
           {
-            "$ref": "#/parameters/subscriptionIdParameter"
+            "$ref": "../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/resourceGroupNameParameter"
+            "$ref": "../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/apiVersionParameter"
+            "$ref": "../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
             "name": "If-Match",
@@ -687,7 +726,7 @@
           "default": {
             "description": "Error response describing reason for operation failure.",
             "schema": {
-              "$ref": "#/definitions/ApiError"
+              "$ref": "../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -695,205 +734,6 @@
         "x-ms-examples": {
           "UpdateAddress": {
             "$ref": "./examples/AddressPatch.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EdgeOrder/listProductFamilies": {
-      "post": {
-        "tags": [
-          "ProductsAndConfigurations"
-        ],
-        "description": "This method provides the list of product families for the given subscription and resource group.",
-        "operationId": "ListProductFamiliesByResourceGroup",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/resourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          },
-          {
-            "name": "$expand",
-            "in": "query",
-            "description": "$expand is supported on configurations parameter for product, which provides details on the configurations for the product.",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "$skipToken",
-            "in": "query",
-            "description": "$skipToken is supported on list of product families, which provides the next page in the list of product families.",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "productFamiliesRequest",
-            "in": "body",
-            "description": "Filters for showing the product families.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ProductFamiliesRequest"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The list of available product families under resource group.",
-            "schema": {
-              "$ref": "#/definitions/ProductFamilies"
-            }
-          },
-          "default": {
-            "description": "Error response describing reason for operation failure.",
-            "schema": {
-              "$ref": "#/definitions/ApiError"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
-        "x-ms-examples": {
-          "ListProductFamiliesByResourceGroup": {
-            "$ref": "./examples/ListProductFamiliesByResourceGroup.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EdgeOrder/productFamilies/{productFamilyName}/productLines/{productLineName}/products/{productName}/configurations": {
-      "post": {
-        "tags": [
-          "ProductsAndConfigurations"
-        ],
-        "description": "This method provides list of configurations for the given product family, product line and product under resource group and subscription.",
-        "operationId": "ListConfigurationsByResourceGroup",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/parameters/productFamilyNameParameter"
-          },
-          {
-            "$ref": "#/parameters/productLineNameParameter"
-          },
-          {
-            "$ref": "#/parameters/productNameParameter"
-          },
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/resourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          },
-          {
-            "name": "$skipToken",
-            "in": "query",
-            "description": "$skipToken is supported on list of configurations, which provides the next page in the list of configurations.",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "configurationsRequest",
-            "in": "body",
-            "description": "Filters for showing the configurations.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ConfigurationsRequest"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The list of configurations for the given product family, product line and product under resource group.",
-            "schema": {
-              "$ref": "#/definitions/Configurations"
-            }
-          },
-          "default": {
-            "description": "Error response describing reason for operation failure.",
-            "schema": {
-              "$ref": "#/definitions/ApiError"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
-        "x-ms-examples": {
-          "ListConfigurationsByResourceGroup": {
-            "$ref": "./examples/ListConfigurationsByResourceGroup.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EdgeOrder/productFamiliesMetadata": {
-      "get": {
-        "tags": [
-          "ProductFamilyMetadata"
-        ],
-        "description": "This method provides the list of product families metadata for the given resource group level.",
-        "operationId": "ListProductFamiliesMetadataAtResourceGroupLevel",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/resourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          },
-          {
-            "name": "$skipToken",
-            "in": "query",
-            "description": "$skipToken is supported on list of product families metadata, which provides the next page in the list of product families metadata.",
-            "required": false,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The list of available product families under subscription.",
-            "schema": {
-              "$ref": "#/definitions/ProductFamiliesMetadata"
-            }
-          },
-          "default": {
-            "description": "Error response describing reason for operation failure.",
-            "schema": {
-              "$ref": "#/definitions/ApiError"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
-        "x-ms-examples": {
-          "ListProductFamiliesMetadataAtResourceGroupLevel": {
-            "$ref": "./examples/ListProductFamiliesMetadataAtResourceGroupLevel.json"
           }
         }
       }
@@ -913,13 +753,13 @@
         ],
         "parameters": [
           {
-            "$ref": "#/parameters/subscriptionIdParameter"
+            "$ref": "../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/resourceGroupNameParameter"
+            "$ref": "../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/apiVersionParameter"
+            "$ref": "../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
             "name": "$skipToken",
@@ -939,7 +779,7 @@
           "default": {
             "description": "Error response describing reason for operation failure.",
             "schema": {
-              "$ref": "#/definitions/ApiError"
+              "$ref": "../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -971,13 +811,13 @@
             "$ref": "#/parameters/orderCollectionNameParameter"
           },
           {
-            "$ref": "#/parameters/subscriptionIdParameter"
+            "$ref": "../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/resourceGroupNameParameter"
+            "$ref": "../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/apiVersionParameter"
+            "$ref": "../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -990,7 +830,7 @@
           "default": {
             "description": "Error response describing reason for operation failure.",
             "schema": {
-              "$ref": "#/definitions/ApiError"
+              "$ref": "../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -1017,13 +857,13 @@
             "$ref": "#/parameters/orderCollectionNameParameter"
           },
           {
-            "$ref": "#/parameters/subscriptionIdParameter"
+            "$ref": "../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/resourceGroupNameParameter"
+            "$ref": "../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/apiVersionParameter"
+            "$ref": "../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
             "name": "orderCollectionResource",
@@ -1037,7 +877,10 @@
         ],
         "responses": {
           "200": {
-            "description": "Returns order collection object"
+            "description": "Returns order collection object",
+            "schema": {
+              "$ref": "#/definitions/OrderCollectionResource"
+            }
           },
           "202": {
             "description": "Accepted request to create order collection."
@@ -1045,7 +888,7 @@
           "default": {
             "description": "Error response describing reason for operation failure.",
             "schema": {
-              "$ref": "#/definitions/ApiError"
+              "$ref": "../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -1073,13 +916,13 @@
             "$ref": "#/parameters/orderCollectionNameParameter"
           },
           {
-            "$ref": "#/parameters/subscriptionIdParameter"
+            "$ref": "../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/resourceGroupNameParameter"
+            "$ref": "../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/apiVersionParameter"
+            "$ref": "../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -1095,7 +938,7 @@
           "default": {
             "description": "Error response describing reason for operation failure.",
             "schema": {
-              "$ref": "#/definitions/ApiError"
+              "$ref": "../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -1123,13 +966,13 @@
             "$ref": "#/parameters/orderCollectionNameParameter"
           },
           {
-            "$ref": "#/parameters/subscriptionIdParameter"
+            "$ref": "../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/resourceGroupNameParameter"
+            "$ref": "../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/apiVersionParameter"
+            "$ref": "../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
             "name": "If-Match",
@@ -1161,7 +1004,7 @@
           "default": {
             "description": "Error response describing reason for operation failure.",
             "schema": {
-              "$ref": "#/definitions/ApiError"
+              "$ref": "../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -1188,13 +1031,13 @@
         ],
         "parameters": [
           {
-            "$ref": "#/parameters/subscriptionIdParameter"
+            "$ref": "../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/resourceGroupNameParameter"
+            "$ref": "../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/apiVersionParameter"
+            "$ref": "../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
             "name": "$filter",
@@ -1221,7 +1064,7 @@
           "default": {
             "description": "Error response describing reason for operation failure.",
             "schema": {
-              "$ref": "#/definitions/ApiError"
+              "$ref": "../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -1253,13 +1096,13 @@
             "$ref": "#/parameters/orderNameParameter"
           },
           {
-            "$ref": "#/parameters/subscriptionIdParameter"
+            "$ref": "../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/resourceGroupNameParameter"
+            "$ref": "../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/apiVersionParameter"
+            "$ref": "../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -1272,7 +1115,7 @@
           "default": {
             "description": "Error response describing reason for operation failure.",
             "schema": {
-              "$ref": "#/definitions/ApiError"
+              "$ref": "../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -1299,13 +1142,13 @@
             "$ref": "#/parameters/orderNameParameter"
           },
           {
-            "$ref": "#/parameters/subscriptionIdParameter"
+            "$ref": "../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/resourceGroupNameParameter"
+            "$ref": "../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/apiVersionParameter"
+            "$ref": "../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
             "name": "orderResource",
@@ -1319,7 +1162,10 @@
         ],
         "responses": {
           "200": {
-            "description": "Returns order object"
+            "description": "Returns order object",
+            "schema": {
+              "$ref": "#/definitions/OrderResource"
+            }
           },
           "202": {
             "description": "Accepted request to create order."
@@ -1327,7 +1173,7 @@
           "default": {
             "description": "Error response describing reason for operation failure.",
             "schema": {
-              "$ref": "#/definitions/ApiError"
+              "$ref": "../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -1355,13 +1201,13 @@
             "$ref": "#/parameters/orderNameParameter"
           },
           {
-            "$ref": "#/parameters/subscriptionIdParameter"
+            "$ref": "../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/resourceGroupNameParameter"
+            "$ref": "../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/apiVersionParameter"
+            "$ref": "../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -1377,7 +1223,7 @@
           "default": {
             "description": "Error response describing reason for operation failure.",
             "schema": {
-              "$ref": "#/definitions/ApiError"
+              "$ref": "../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -1405,13 +1251,13 @@
             "$ref": "#/parameters/orderNameParameter"
           },
           {
-            "$ref": "#/parameters/subscriptionIdParameter"
+            "$ref": "../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/resourceGroupNameParameter"
+            "$ref": "../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/apiVersionParameter"
+            "$ref": "../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
             "name": "If-Match",
@@ -1443,7 +1289,7 @@
           "default": {
             "description": "Error response describing reason for operation failure.",
             "schema": {
-              "$ref": "#/definitions/ApiError"
+              "$ref": "../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -1473,13 +1319,13 @@
             "$ref": "#/parameters/orderNameParameter"
           },
           {
-            "$ref": "#/parameters/subscriptionIdParameter"
+            "$ref": "../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/resourceGroupNameParameter"
+            "$ref": "../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/apiVersionParameter"
+            "$ref": "../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
             "name": "cancellationReason",
@@ -1501,7 +1347,7 @@
           "default": {
             "description": "Error response describing reason for operation failure.",
             "schema": {
-              "$ref": "#/definitions/ApiError"
+              "$ref": "../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -1530,13 +1376,13 @@
             "$ref": "#/parameters/orderNameParameter"
           },
           {
-            "$ref": "#/parameters/subscriptionIdParameter"
+            "$ref": "../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/resourceGroupNameParameter"
+            "$ref": "../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/apiVersionParameter"
+            "$ref": "../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
             "name": "returnOrderDetails",
@@ -1558,7 +1404,7 @@
           "default": {
             "description": "Error response describing reason for operation failure.",
             "schema": {
-              "$ref": "#/definitions/ApiError"
+              "$ref": "../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -1591,11 +1437,11 @@
       "type": "object",
       "properties": {
         "shippingAddress": {
-          "$ref": "#/definitions/AddressResource",
+          "$ref": "#/definitions/AddressProperties",
           "description": "Customer address and contact details. It should be address resource"
         },
         "returnAddress": {
-          "$ref": "#/definitions/AddressResource",
+          "$ref": "#/definitions/AddressProperties",
           "description": "Return shipping address",
           "readOnly": true
         }
@@ -1626,28 +1472,18 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "../../../../common-types/resource-management/v2/types.json#/definitions/TrackedResource"
         }
       ],
       "properties": {
         "properties": {
           "$ref": "#/definitions/AddressProperties",
-          "description": "Properties of a job.",
+          "description": "Properties of an address.",
           "x-ms-client-flatten": true
         },
-        "name": {
-          "description": "Name of the object.",
-          "type": "string",
-          "readOnly": true
-        },
-        "id": {
-          "description": "Id of the object.",
-          "type": "string",
-          "readOnly": true
-        },
-        "type": {
-          "description": "Type of the object.",
-          "type": "string",
+        "systemData": {
+          "$ref": "../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "description": "Represents resource creation and updation time",
           "readOnly": true
         }
       }
@@ -1700,38 +1536,6 @@
         "contactDetails": {
           "$ref": "#/definitions/ContactDetails",
           "description": "Contact details for the address"
-        }
-      }
-    },
-    "ApiError": {
-      "required": [
-        "error"
-      ],
-      "type": "object",
-      "properties": {
-        "error": {
-          "$ref": "#/definitions/ErrorDetail"
-        }
-      }
-    },
-    "ArmBaseObject": {
-      "description": "Base class for all objects under resource.",
-      "type": "object",
-      "properties": {
-        "name": {
-          "description": "Name of the object.",
-          "type": "string",
-          "readOnly": true
-        },
-        "id": {
-          "description": "Id of the object.",
-          "type": "string",
-          "readOnly": true
-        },
-        "type": {
-          "description": "Type of the object.",
-          "type": "string",
-          "readOnly": true
         }
       }
     },
@@ -1864,6 +1668,11 @@
           "$ref": "#/definitions/AvailabilityInformation",
           "description": "Availability information of the product system.",
           "readOnly": true
+        },
+        "hierarchyInformation": {
+          "$ref": "#/definitions/HierarchyInformation",
+          "description": "Hierarchy information of the product system.",
+          "readOnly": true
         }
       }
     },
@@ -1922,14 +1731,29 @@
       },
       "x-ms-external": true
     },
-    "Configuration": {
-      "description": "Configuration object.",
+    "CommonProperties": {
+      "description": "Represents common properties accross product hierarchy",
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/ArmBaseObject"
+          "$ref": "#/definitions/BasicInformation"
         }
       ],
+      "properties": {
+        "filterableProperties": {
+          "description": "list of filters supported for a product",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/FilterableProperty"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "Configuration": {
+      "description": "Configuration object.",
+      "type": "object",
       "properties": {
         "properties": {
           "$ref": "#/definitions/ConfigurationProperties",
@@ -1937,15 +1761,28 @@
           "readOnly": true,
           "x-ms-client-flatten": true
         }
-      },
-      "x-ms-azure-resource": true
+      }
+    },
+    "ConfigurationFilters": {
+      "description": "Configuration filters",
+      "type": "object",
+      "properties": {
+        "hierarchyInformation": {
+          "$ref": "#/definitions/HierarchyInformation",
+          "description": "Product hierarchy information"
+        },
+        "filterableProperty": {
+          "$ref": "#/definitions/FilterableProperty",
+          "description": "Filters specific to product"
+        }
+      }
     },
     "ConfigurationProperties": {
       "description": "Properties of configuration",
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/BasicInformation"
+          "$ref": "#/definitions/CommonProperties"
         }
       ],
       "properties": {
@@ -1982,16 +1819,16 @@
     "ConfigurationsRequest": {
       "description": "Configuration request object.",
       "required": [
-        "filterableProperties"
+        "configurationFilters"
       ],
       "type": "object",
       "properties": {
-        "filterableProperties": {
-          "description": "List of filters on product.",
-          "uniqueItems": false,
+        "configurationFilters": {
+          "description": "Holds details about product hierarchy information and filterable property.",
+          "uniqueItems": true,
           "type": "array",
           "items": {
-            "$ref": "#/definitions/FilterableProperty"
+            "$ref": "#/definitions/ConfigurationFilters"
           }
         },
         "customerSubscriptionDetails": {
@@ -2135,21 +1972,6 @@
         }
       }
     },
-    "Details": {
-      "required": [
-        "code",
-        "message"
-      ],
-      "type": "object",
-      "properties": {
-        "code": {
-          "type": "string"
-        },
-        "message": {
-          "type": "string"
-        }
-      }
-    },
     "DeviceDetails": {
       "description": "Device details.",
       "type": "object",
@@ -2167,31 +1989,6 @@
             "type": "string"
           },
           "readOnly": true
-        }
-      }
-    },
-    "ErrorDetail": {
-      "required": [
-        "code",
-        "message"
-      ],
-      "type": "object",
-      "properties": {
-        "code": {
-          "type": "string"
-        },
-        "message": {
-          "type": "string"
-        },
-        "details": {
-          "uniqueItems": false,
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Details"
-          }
-        },
-        "target": {
-          "type": "string"
         }
       }
     },
@@ -2225,8 +2022,29 @@
           "type": "array",
           "items": {
             "type": "string"
-          },
-          "readOnly": true
+          }
+        }
+      }
+    },
+    "HierarchyInformation": {
+      "description": "Holds details about product hierarchy information",
+      "type": "object",
+      "properties": {
+        "productFamilyName": {
+          "description": "Represents product family name that uniquely identifies product family",
+          "type": "string"
+        },
+        "productLineName": {
+          "description": "Represents product line name that uniquely identifies product line",
+          "type": "string"
+        },
+        "productName": {
+          "description": "Represents product name that uniquely identifies product",
+          "type": "string"
+        },
+        "configurationName": {
+          "description": "Represents configuration name that uniquely identifies configuration",
+          "type": "string"
         }
       }
     },
@@ -2428,84 +2246,6 @@
         }
       }
     },
-    "Operation": {
-      "description": "Operation entity.",
-      "type": "object",
-      "properties": {
-        "name": {
-          "description": "Name of the operation. Format: {resourceProviderNamespace}/{resourceType}/{read|write|delete|action}",
-          "type": "string",
-          "readOnly": true
-        },
-        "display": {
-          "$ref": "#/definitions/OperationDisplay",
-          "description": "Operation display values.",
-          "readOnly": true
-        },
-        "properties": {
-          "$ref": "#/definitions/OperationProperties",
-          "description": "Operation properties.",
-          "readOnly": true,
-          "x-ms-client-flatten": true
-        },
-        "origin": {
-          "description": "Origin of the operation. Can be : user|system|user,system",
-          "type": "string",
-          "readOnly": true
-        },
-        "isDataAction": {
-          "description": "Indicates whether the operation is a data action.",
-          "type": "boolean",
-          "readOnly": true
-        }
-      }
-    },
-    "OperationDisplay": {
-      "description": "Operation display",
-      "type": "object",
-      "properties": {
-        "provider": {
-          "description": "Provider name.",
-          "type": "string"
-        },
-        "resource": {
-          "description": "Resource name.",
-          "type": "string"
-        },
-        "operation": {
-          "description": "Localized name of the operation for display purpose.",
-          "type": "string"
-        },
-        "description": {
-          "description": "Localized description of the operation for display purpose.",
-          "type": "string"
-        }
-      }
-    },
-    "OperationList": {
-      "description": "Operation Collection.",
-      "type": "object",
-      "properties": {
-        "value": {
-          "description": "List of operations.",
-          "uniqueItems": false,
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Operation"
-          },
-          "readOnly": true
-        },
-        "nextLink": {
-          "description": "Link for the next set of operations.",
-          "type": "string"
-        }
-      }
-    },
-    "OperationProperties": {
-      "description": "Operation properties.",
-      "type": "object",
-      "properties": {}
-    },
     "OrderCollectionProperties": {
       "description": "Represents order collection details.",
       "required": [
@@ -2531,7 +2271,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "../../../../common-types/resource-management/v2/types.json#/definitions/TrackedResource"
         }
       ],
       "properties": {
@@ -2540,19 +2280,9 @@
           "description": "Order collection properties",
           "x-ms-client-flatten": true
         },
-        "name": {
-          "description": "Name of the object.",
-          "type": "string",
-          "readOnly": true
-        },
-        "id": {
-          "description": "Id of the object.",
-          "type": "string",
-          "readOnly": true
-        },
-        "type": {
-          "description": "Type of the object.",
-          "type": "string",
+        "systemData": {
+          "$ref": "../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "description": "Represents resource creation and updation time",
           "readOnly": true
         }
       }
@@ -2797,7 +2527,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "../../../../common-types/resource-management/v2/types.json#/definitions/TrackedResource"
         }
       ],
       "properties": {
@@ -2806,19 +2536,9 @@
           "description": "Order properties",
           "x-ms-client-flatten": true
         },
-        "name": {
-          "description": "Name of the object.",
-          "type": "string",
-          "readOnly": true
-        },
-        "id": {
-          "description": "Id of the object.",
-          "type": "string",
-          "readOnly": true
-        },
-        "type": {
-          "description": "Type of the object.",
-          "type": "string",
+        "systemData": {
+          "$ref": "../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "description": "Represents resource creation and updation time",
           "readOnly": true
         }
       }
@@ -2850,7 +2570,12 @@
           "description": "Order status",
           "type": "string",
           "readOnly": true
-        }
+        },
+		"lastUpdatedTime": {
+		 "description": "last time order was updated",
+		 "format": "date-time",
+		 "type": "string"
+		}
       }
     },
     "OrderUpdateParameter": {
@@ -2914,11 +2639,6 @@
     "Product": {
       "description": "List of Products",
       "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/ArmBaseObject"
-        }
-      ],
       "properties": {
         "properties": {
           "$ref": "#/definitions/ProductProperties",
@@ -2926,19 +2646,18 @@
           "readOnly": true,
           "x-ms-client-flatten": true
         }
-      },
-      "x-ms-azure-resource": true
+      }
     },
     "ProductDetails": {
       "description": "Represents product details",
       "required": [
-        "productId"
+        "hierarchyInformation"
       ],
       "type": "object",
       "properties": {
-        "productId": {
-          "description": "Unique id of the product",
-          "type": "string"
+        "hierarchyInformation": {
+          "$ref": "#/definitions/HierarchyInformation",
+          "description": " Hierarchy of the product which uniquely identifies the product"
         },
         "count": {
           "format": "int32",
@@ -2998,38 +2717,20 @@
     "ProductFamiliesMetadataDetails": {
       "description": "Product families metadata details.",
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
+        }
+      ],
       "properties": {
         "properties": {
-          "$ref": "#/definitions/BasicInformation",
+          "$ref": "#/definitions/ProductFamilyProperties",
           "description": "Product family properties",
           "readOnly": true,
           "x-ms-client-flatten": true
-        },
-        "filters": {
-          "description": "list of filters supported for a product family",
-          "uniqueItems": false,
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/FilterableProperty"
-          },
-          "readOnly": true
-        },
-        "name": {
-          "description": "Name of the object.",
-          "type": "string",
-          "readOnly": true
-        },
-        "id": {
-          "description": "Id of the object.",
-          "type": "string",
-          "readOnly": true
-        },
-        "type": {
-          "description": "Type of the object.",
-          "type": "string",
-          "readOnly": true
         }
-      }
+      },
+      "x-ms-azure-resource": true
     },
     "ProductFamiliesRequest": {
       "description": "The filters for showing the product families.",
@@ -3039,19 +2740,10 @@
       "type": "object",
       "properties": {
         "filterableProperties": {
-          "description": "List of filters on product family.",
-          "uniqueItems": false,
-          "type": "array",
-          "items": {
+          "description": "Dictionary of filterable properties on product family.",
+          "type": "object",
+          "additionalProperties": {
             "$ref": "#/definitions/FilterableProperty"
-          }
-        },
-        "productFamilies": {
-          "description": "Product families to filter",
-          "uniqueItems": false,
-          "type": "array",
-          "items": {
-            "type": "string"
           }
         },
         "customerSubscriptionDetails": {
@@ -3063,11 +2755,6 @@
     "ProductFamily": {
       "description": "Product Family",
       "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/ArmBaseObject"
-        }
-      ],
       "properties": {
         "properties": {
           "$ref": "#/definitions/ProductFamilyProperties",
@@ -3075,15 +2762,14 @@
           "readOnly": true,
           "x-ms-client-flatten": true
         }
-      },
-      "x-ms-azure-resource": true
+      }
     },
     "ProductFamilyProperties": {
       "description": "Properties of product family",
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/BasicInformation"
+          "$ref": "#/definitions/CommonProperties"
         }
       ],
       "properties": {
@@ -3101,11 +2787,6 @@
     "ProductLine": {
       "description": "Product line",
       "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/ArmBaseObject"
-        }
-      ],
       "properties": {
         "properties": {
           "$ref": "#/definitions/ProductLineProperties",
@@ -3113,15 +2794,14 @@
           "readOnly": true,
           "x-ms-client-flatten": true
         }
-      },
-      "x-ms-azure-resource": true
+      }
     },
     "ProductLineProperties": {
       "description": "Properties of product line",
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/BasicInformation"
+          "$ref": "#/definitions/CommonProperties"
         }
       ],
       "properties": {
@@ -3141,7 +2821,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/BasicInformation"
+          "$ref": "#/definitions/CommonProperties"
         }
       ],
       "properties": {
@@ -3155,36 +2835,6 @@
           "readOnly": true
         }
       }
-    },
-    "Resource": {
-      "description": "Model of the Resource.",
-      "required": [
-        "location"
-      ],
-      "type": "object",
-      "properties": {
-        "location": {
-          "description": "The location of the resource. This will be one of the supported and registered Azure Regions (e.g. West US, East US, Southeast Asia, etc.). The region of a resource cannot be changed once it is created, but if an identical region is specified on update the request will succeed.",
-          "type": "string",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "tags": {
-          "description": "The list of key value pairs that describe the resource. These tags can be used in viewing and grouping this resource (across resource groups).",
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "systemData": {
-          "$ref": "#/definitions/SystemData",
-          "description": "Represents resource creation and update time",
-          "readOnly": true
-        }
-      },
-      "x-ms-azure-resource": true
     },
     "ResourceIdentity": {
       "description": "Msi identity details of the resource",
@@ -3354,7 +3004,7 @@
           "description": "List of registered feature flags for subscription",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/SubscriptionRegisteredFeatures"
+            "$ref": "#/definitions/CustomerSubscriptionRegisteredFeatures"
           }
         },
         "locationPlacementId": {
@@ -3367,52 +3017,16 @@
         }
       }
     },
-    "SubscriptionRegisteredFeatures": {
+    "CustomerSubscriptionRegisteredFeatures": {
       "type": "object",
       "properties": {
         "name": {
+          "description": "Name of subscription registered feature",
           "type": "string"
         },
         "state": {
+          "description": "State of subscription registered feature",
           "type": "string"
-        }
-      }
-    },
-    "SystemData": {
-      "description": "Provides details about resource creation and update time",
-      "type": "object",
-      "properties": {
-        "createdBy": {
-          "description": "a string identifier for the identity that created the resource",
-          "type": "string",
-          "readOnly": true
-        },
-        "createdByType": {
-          "description": "the type of identity that created the resource: user, application, managedIdentity",
-          "type": "string",
-          "readOnly": true
-        },
-        "createdAt": {
-          "format": "date-time",
-          "description": "the timestamp of resource creation (UTC)",
-          "type": "string",
-          "readOnly": true
-        },
-        "lastModifiedBy": {
-          "description": "a string identifier for the identity that last modified the resource",
-          "type": "string",
-          "readOnly": true
-        },
-        "lastModifiedByType": {
-          "description": "the type of identity that last modified the resource: user, application, managedIdentity",
-          "type": "string",
-          "readOnly": true
-        },
-        "lastModifiedAt": {
-          "format": "date-time",
-          "description": "the timestamp of resource last modification (UTC)",
-          "type": "string",
-          "readOnly": true
         }
       }
     },
@@ -3460,21 +3074,6 @@
       "pattern": "^[-\\w\\.]+$",
       "x-ms-parameter-location": "method"
     },
-    "apiVersionParameter": {
-      "name": "api-version",
-      "in": "query",
-      "description": "The API Version",
-      "required": true,
-      "type": "string"
-    },
-    "configurationNameParameter": {
-      "name": "configurationName",
-      "in": "path",
-      "description": "The name of the configuration",
-      "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "method"
-    },
     "locationParameter": {
       "name": "location",
       "in": "path",
@@ -3506,37 +3105,6 @@
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"
-    },
-    "productLineNameParameter": {
-      "name": "productLineName",
-      "in": "path",
-      "description": "The name of the product line",
-      "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "method"
-    },
-    "productNameParameter": {
-      "name": "productName",
-      "in": "path",
-      "description": "The name of the product",
-      "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "method"
-    },
-    "resourceGroupNameParameter": {
-      "name": "resourceGroupName",
-      "in": "path",
-      "description": "The Resource Group Name",
-      "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "method"
-    },
-    "subscriptionIdParameter": {
-      "name": "subscriptionId",
-      "in": "path",
-      "description": "The Subscription Id",
-      "required": true,
-      "type": "string"
     }
   },
   "securityDefinitions": {
