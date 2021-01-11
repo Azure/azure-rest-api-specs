@@ -479,6 +479,9 @@
           },
           "Create Managed Cluster with EncryptionAtHost enabled": {
             "$ref": "./examples/ManagedClustersCreate_EnableEncryptionAtHost.json"
+          },
+          "Create Managed Cluster with PodIdentity enabled": {
+            "$ref": "./examples/ManagedClustersCreate_PodIdentity.json"
           }
         }
       },
@@ -3330,6 +3333,10 @@
         "enabled": {
           "type": "boolean",
           "description": "Whether the pod identity addon is enabled."
+        },
+        "allowNetworkPluginKubenet": {
+          "type": "boolean",
+          "description": "Customer consent for enabling AAD pod identity addon in cluster using Kubenet network plugin."
         },
         "userAssignedIdentities": {
           "description": "User assigned pod identity settings.",
