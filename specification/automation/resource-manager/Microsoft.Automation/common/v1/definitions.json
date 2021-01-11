@@ -1,7 +1,25 @@
 {
   "swagger": "2.0",
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
   "info": {
-    "version": "1.0",
+    "version": "2018-06-10",
     "title": "Common types"
   },
   "paths": {},
@@ -21,13 +39,13 @@
       "description": "Error response of an operation failure"
     },
     "Resource": {
-      "title": "Resource",
-      "description": "Common fields that are returned in the response for all Azure Resource Manager resources",
+      "description": "The core properties of ARM resources",
+      "type": "object",
       "properties": {
         "id": {
           "readOnly": true,
           "type": "string",
-          "description": "Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}"
+          "description": "Fully qualified resource Id for the resource"
         },
         "name": {
           "readOnly": true,
@@ -37,14 +55,14 @@
         "type": {
           "readOnly": true,
           "type": "string",
-          "description": "The type of the resource. E.g. \"Microsoft.Compute/virtualMachines\" or \"Microsoft.Storage/storageAccounts\""
+          "description": "The type of the resource."
         }
       },
       "x-ms-azure-resource": true
     },
     "TrackedResource": {
-      "title": "Tracked Resource",
-      "description": "The resource model definition for an Azure Resource Manager tracked top level resource which has 'tags' and a 'location'",
+      "description": "The resource model definition for a ARM tracked top level resource",
+      "type": "object",
       "properties": {
         "tags": {
           "type": "object",
@@ -64,12 +82,9 @@
             "read",
             "create"
           ],
-          "description": "The geo-location where the resource lives"
+          "description": "The Azure Region where the resource lives"
         }
       },
-      "required": [
-        "location"
-      ],
       "allOf": [
         {
           "$ref": "#/definitions/Resource"
@@ -77,13 +92,14 @@
       ]
     },
     "ProxyResource": {
-      "title": "Proxy Resource",
-      "description": "The resource model definition for a Azure Resource Manager proxy resource. It will not have tags and a location",
+      "description": "ARM proxy resource.",
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/Resource"
         }
-      ]
+      ],
+      "properties": {}
     }
   },
   "parameters": {
