@@ -188,4 +188,3 @@ These settings apply only when `--tag=package-preview-v3.1-preview.4` is specifi
 input-file:
   - preview/v3.1-preview.4/TextAnalytics.json
 ```
-`
