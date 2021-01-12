@@ -253,6 +253,12 @@
         "x-ms-examples": {
           "Creates the specified Data Lake Store account": {
             "$ref": "./examples/Accounts_Create.json"
+          },
+          "Creates the specified Data Lake Store account no encryption config": {
+            "$ref": "./examples/Accounts_Create1.json"
+          },
+          "Creates the specified Data Lake Store account, live validation- return dataLakePerformanceTierState and firewallAllowDataLakeAnalytics": {
+            "$ref": "./examples/Accounts_Create2.json"
           }
         },
         "x-ms-long-running-operation": true
@@ -283,11 +289,23 @@
             "schema": {
               "$ref": "#/definitions/DataLakeStoreAccount"
             }
+          },
+          "400": {
+            "description": "Bad request."
           }
         },
         "x-ms-examples": {
           "Gets the specified Data Lake Store account": {
             "$ref": "./examples/Accounts_Get.json"
+          },
+          "Gets the specified Data Lake Store account live validation": {
+            "$ref": "./examples/Accounts_Get1.json"
+          },
+          "Gets the specified Data Lake Store account live validation, No encryptionConfig": {
+            "$ref": "./examples/Accounts_Get2.json"
+          },
+          "Account get results in bad request": {
+            "$ref": "./examples/Accounts_Get3.json"
           }
         }
       },
@@ -349,6 +367,12 @@
         "x-ms-examples": {
           "Updates the specified Data Lake Store account information": {
             "$ref": "./examples/Accounts_Update.json"
+          },
+          "Updates the specified Data Lake Store account information- live validation": {
+            "$ref": "./examples/Accounts_Update1.json"
+          },
+          "Updates the specified Data Lake Store account information- live validation return firewallAllowDataLakeAnalytics": {
+            "$ref": "./examples/Accounts_Update2.json"
           }
         },
         "x-ms-long-running-operation": true
@@ -738,6 +762,9 @@
         "x-ms-examples": {
           "Lists the Data Lake Store virtual network rules within the specified Data Lake Store account.": {
             "$ref": "./examples/VirtualNetworkRules_ListByAccount.json"
+          },
+          "Lists the Data Lake Store virtual network rules within the specified Data Lake Store account- return state": {
+            "$ref": "./examples/VirtualNetworkRules_ListByAccount1.json"
           }
         },
         "x-ms-pageable": {
@@ -834,6 +861,9 @@
         "x-ms-examples": {
           "Gets the specified Data Lake Store virtual network rule.": {
             "$ref": "./examples/VirtualNetworkRules_Get.json"
+          },
+          "Gets virtual network rule as per live validation.": {
+            "$ref": "./examples/VirtualNetworkRules_Get1.json"
           }
         }
       },
@@ -1175,6 +1205,9 @@
         "x-ms-examples": {
           "Lists all of the available Data Lake Store REST API operations": {
             "$ref": "./examples/Operations_List.json"
+          },
+          "Lists all of the available Data Lake Store REST API operations Live validation": {
+            "$ref": "./examples/Operations_List1.json"
           }
         }
       }
@@ -1988,7 +2021,7 @@
           "readOnly": true,
           "type": "array",
           "items": {
-            "$ref": "#/definitions/OperationMetaMetricAvailabilitiesSpecification"
+            "$ref": "#/definitions/OperationMetaMetricSpecification"
           },
           "description": "metric Specifications"
         },
