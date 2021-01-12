@@ -1776,18 +1776,6 @@
         "identity": {
           "description": "The managed identities for the IotDps instance.",
           "$ref": "#/definitions/ArmIdentity"
-        },
-        "version": {
-          "description": "Iot Dps Version",
-          "enum": [
-            "V1",
-            "V2"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "IotDpsVersion",
-            "modelAsString": true
-          }
         }
       },
       "allOf": [
@@ -1797,8 +1785,7 @@
       ],
       "required": [
         "sku",
-        "properties",
-        "version"
+        "properties"
       ]
     },
     "IotDpsPropertiesDescription": {
@@ -1901,6 +1888,18 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/SharedAccessSignatureAuthorizationRule[AccessRightsDescription]"
+          }
+        },
+        "version": {
+          "type": "string",
+          "description": "Iot Dps Version",
+          "enum": [
+            "V1",
+            "V2"
+          ],
+          "x-ms-enum": {
+            "name": "IotDpsVersion",
+            "modelAsString": true
           }
         }
       }
