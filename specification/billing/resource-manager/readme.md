@@ -29,6 +29,16 @@ openapi-type: arm
 tag: package-2020-05
 ```
 
+### Tag: package-2020-12-preview
+
+These settings apply only when `--tag=package-2020-12-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-12-preview'
+input-file:
+- Microsoft.Billing/stable/2020-05-01/billing.json
+- Microsoft.Billing/preview/2020-12-01-preview/billingElevateRole.json
+```
+
 ### Tag: package-2020-05
 
 These settings apply only when `--tag=package-2020-05` is specified on the command line.
