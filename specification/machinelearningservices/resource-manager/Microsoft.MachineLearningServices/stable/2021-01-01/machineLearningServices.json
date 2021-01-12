@@ -4865,13 +4865,25 @@
       "properties": {
         "cpu": {
           "format": "double",
-          "description": "The number of CPU cores on the container.",
+          "description": "The minimum amount of CPU cores to be used by the container. More info:\nhttps://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/",
+          "type": "number",
+          "example": 4
+        },
+        "cpuLimit": {
+          "format": "double",
+          "description": "The maximum amount of CPU cores allowed to be used by the container. More info:\nhttps://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/",
           "type": "number",
           "example": 4
         },
         "memoryInGB": {
           "format": "double",
-          "description": "The amount of memory on the container in GB.",
+          "description": "The minimum amount of memory (in GB) to be used by the container. More info:\nhttps://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/",
+          "type": "number",
+          "example": 64
+        },
+        "memoryInGBLimit": {
+          "format": "double",
+          "description": "The maximum amount of memory (in GB) allowed to be used by the container. More info:\nhttps://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/",
           "type": "number",
           "example": 64
         },
