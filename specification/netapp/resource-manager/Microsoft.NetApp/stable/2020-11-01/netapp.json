@@ -1805,7 +1805,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/snapshotPolicies/{snapshotPolicyName}/listVolumes": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/snapshotPolicies/{snapshotPolicyName}/volumes": {
       "get": {
         "tags": [
           "Snapshot Policy List Volumes"
@@ -2859,6 +2859,10 @@
           "items": {
             "$ref": "#/definitions/activeDirectory"
           }
+        },
+        "encryption": {
+          "description": "Encryption settings",
+          "$ref": "#/definitions/accountEncryption"
         }
       }
     },
@@ -2996,9 +3000,23 @@
               "user2"
             ]
           }
-        }
+        },
+        "ldapOverTLS": {
+          "type": "boolean",
+          "description": "Specifies whether or not the LDAP traffic needs to be secured via TLS."
+        }        
       }
     },
+    "accountEncryption": {
+      "type": "object",
+      "description": "Encryption settings",
+      "properties": {
+        "keySource": {
+          "type": "string",
+          "description": "Encryption Key Source. Possible values are: 'Microsoft.NetApp'."
+        }
+      }
+    },    
     "capacityPoolList": {
       "description": "List of capacity pool resources",
       "type": "object",
@@ -3505,6 +3523,10 @@
           "maximum": 4500,
           "minimum": 1,
           "multipleOf": 0.001
+        },
+        "encryptionKeySource": {
+          "description": "Encryption Key Source. Possible values are: 'Microsoft.NetApp'",
+          "type": "string"
         }
       }
     },
@@ -4187,7 +4209,7 @@
         "minute": {
           "type": "integer",
           "description": "Indicates which minute snapshot should be taken",
-          "example": "30",
+          "example": 30,
           "format": "int32"
         },
         "usedBytes": {
@@ -4209,13 +4231,13 @@
         "hour": {
           "type": "integer",
           "description": "Indicates which hour in UTC timezone a snapshot should be taken",
-          "example": "11",
+          "example": 11,
           "format": "int32"
         },
         "minute": {
           "type": "integer",
           "description": "Indicates which minute snapshot should be taken",
-          "example": "30",
+          "example": 30,
           "format": "int32"
         },
         "usedBytes": {
@@ -4242,13 +4264,13 @@
         "hour": {
           "type": "integer",
           "description": "Indicates which hour in UTC timezone a snapshot should be taken",
-          "example": "11",
+          "example": 11,
           "format": "int32"
         },
         "minute": {
           "type": "integer",
           "description": "Indicates which minute snapshot should be taken",
-          "example": "30",
+          "example": 30,
           "format": "int32"
         },
         "usedBytes": {
@@ -4275,13 +4297,13 @@
         "hour": {
           "type": "integer",
           "description": "Indicates which hour in UTC timezone a snapshot should be taken",
-          "example": "11",
+          "example": 11,
           "format": "int32"
         },
         "minute": {
           "type": "integer",
           "description": "Indicates which minute snapshot should be taken",
-          "example": "30",
+          "example": 30,
           "format": "int32"
         },
         "usedBytes": {
@@ -4443,6 +4465,11 @@
           "type": "string",
           "readOnly": true,
           "description": "Type of backup adhoc or scheduled"
+        },
+        "failureReason": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Failure reason"
         }
       }
     },
