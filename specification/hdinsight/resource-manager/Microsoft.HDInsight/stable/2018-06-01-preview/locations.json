@@ -373,7 +373,8 @@
         },
         "currentValue": {
           "description": "The current usage.",
-          "type": "integer"
+          "type": "integer",
+          "format": "int32"
         },
         "limit": {
           "description": "The maximum allowed usage.",
@@ -410,6 +411,13 @@
             "type": "string"
           }
         },
+        "vmSizesWithEncryptionAtHost": {
+          "description": "The vm sizes which enable encryption at host.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
         "vmSizeFilters": {
           "description": "The virtual machine filtering mode. Effectively this can enabling or disabling the virtual machine sizes in a particular set.",
           "type": "array",
@@ -417,12 +425,71 @@
             "$ref": "#/definitions/VmSizeCompatibilityFilterV2"
           }
         },
+        "vmSizeProperties": {
+          "description": "The vm size properties.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VmSizeProperty"
+          },
+          "readOnly": true
+        },
         "billingResources": {
           "description": "The billing and managed disk billing resources for a region.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/BillingResources"
           }
+        }
+      }
+    },
+    "VmSizeProperty": {
+      "type": "object",
+      "description": "The vm size property",
+      "properties": {
+        "name": {
+          "description": "The vm size name.",
+          "type": "string"
+        },
+        "cores": {
+          "description": "The number of cores that the vm size has.",
+          "type": "integer",
+          "format": "int32"
+        },
+        "dataDiskStorageTier": {
+          "description": "The data disk storage tier of the vm size.",
+          "type": "string"
+        },
+        "label": {
+          "description": "The label of the vm size.",
+          "type": "string"
+        },
+        "maxDataDiskCount": {
+          "description": "The max data disk count of the vm size.",
+          "type": "integer",
+          "format": "int64"
+        },
+        "memoryInMb": {
+          "description": "The memory whose unit is MB of the vm size.",
+          "type": "integer",
+          "format": "int64"
+        },
+        "supportedByVirtualMachines": {
+          "description": "This indicates this vm size is supported by virtual machines or not",
+          "type": "boolean"
+        },
+        "supportedByWebWorkerRoles": {
+          "description": "The indicates this vm size is supported by web worker roles or not",
+          "type": "boolean"
+        },
+        "virtualMachineResourceDiskSizeInMb": {
+          "description": "The virtual machine resource disk size whose unit is MB of the vm size.",
+          "type": "integer",
+          "format": "int64"
+        },
+        "webWorkerResourceDiskSizeInMb": {
+          "description": "The web worker resource disk size whose unit is MB of the vm size.",
+          "type": "integer",
+          "format": "int64"
         }
       }
     },
@@ -435,7 +502,9 @@
           "type": "string",
           "enum": [
             "Exclude",
-            "Include"
+            "Include",
+            "Recommend",
+            "Default"
           ],
           "x-ms-enum": {
             "name": "FilterMode",
