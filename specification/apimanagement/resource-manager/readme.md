@@ -69,6 +69,7 @@ input-file:
   - Microsoft.ApiManagement/stable/2020-12-01/apimquotas.json
   - Microsoft.ApiManagement/stable/2020-12-01/apimregions.json
   - Microsoft.ApiManagement/stable/2020-12-01/apimreports.json
+  - Microsoft.ApiManagement/stable/2020-12-01/apimsettings.json
   - Microsoft.ApiManagement/stable/2020-12-01/apimsubscriptions.json
   - Microsoft.ApiManagement/stable/2020-12-01/apimtagresources.json
   - Microsoft.ApiManagement/stable/2020-12-01/apimtags.json
@@ -113,6 +114,7 @@ input-file:
   - Microsoft.ApiManagement/preview/2020-06-01-preview/apimquotas.json
   - Microsoft.ApiManagement/preview/2020-06-01-preview/apimregions.json
   - Microsoft.ApiManagement/preview/2020-06-01-preview/apimreports.json
+  - Microsoft.ApiManagement/preview/2020-06-01-preview/apimsettings.json
   - Microsoft.ApiManagement/preview/2020-06-01-preview/apimsubscriptions.json
   - Microsoft.ApiManagement/preview/2020-06-01-preview/apimtagresources.json
   - Microsoft.ApiManagement/preview/2020-06-01-preview/apimtags.json
