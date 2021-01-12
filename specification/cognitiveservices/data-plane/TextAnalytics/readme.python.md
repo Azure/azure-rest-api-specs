@@ -20,6 +20,7 @@ batch:
  - tag: release_3_0
  - tag: release_3_1_preview.2
  - tag: release_3_1_preview.3
+ - tag: release_3_1_preview.4
  - multiapiscript: true
 ```
  
@@ -52,4 +53,10 @@ output-folder: $(python-sdks-folder)/textanalytics/azure-ai-textanalytics/azure/
 ``` yaml $(tag) == 'release_3_1_preview.3'
 namespace: azure.ai.textanalytics.v3_1_preview_3
 output-folder: $(python-sdks-folder)/textanalytics/azure-ai-textanalytics/azure/ai/textanalytics/v3_1_preview_3
+```
+
+### Tag: release_3_1_preview_4
+``` yaml $(tag) == 'release_3_1_preview.4'
+namespace: azure.ai.textanalytics.v3_1_preview_4
+output-folder: $(python-sdks-folder)/textanalytics/azure-ai-textanalytics/azure/ai/textanalytics/v3_1_preview_4
 ```
