@@ -922,6 +922,12 @@
         "x-ms-examples": {
           "MaintenanceConfigurations_GetForResource": {
             "$ref": "./examples/MaintenanceConfigurations_GetForResource.json"
+          },
+          "MaintenanceConfigurations_GetForResource_GuestOSPatchWindows": {
+            "$ref": "./examples/MaintenanceConfigurations_GetForResource_GuestOSPatchWindows.json"
+          },
+          "MaintenanceConfigurations_GetForResource_GuestOSPatchLinux": {
+            "$ref": "./examples/MaintenanceConfigurations_GetForResource_GuestOSPatchLinux.json"
           }
         }
       },
@@ -1503,13 +1509,27 @@
             "Extension",
             "InGuestPatch",
             "SQLDB",
-            "SQLManagedInstance"
+            "SQLManagedInstance",
+            "Guest"
           ],
           "type": "string",
           "x-ms-enum": {
             "name": "MaintenanceScope",
             "modelAsString": true
           }
+        },
+        "maintenanceScopeType": {
+          "description": "Gets or sets maintenanceScopeType of the configuration",
+          "enum": [
+            "Advance",
+            "Intermediate"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "MaintenanceScopeType",
+            "modelAsString": true
+          },
+          "default": "Intermediate"
         },
         "maintenanceWindow": {
           "$ref": "#/definitions/MaintenanceWindow",
@@ -1527,6 +1547,148 @@
             "name": "Visibility",
             "modelAsString": true
           }
+        },
+        "installPatches": {
+          "$ref": "#/definitions/InputPatchConfiguration",
+          "description": "The input parameters to be passed to the patch run operation."
+        }
+      }
+    },
+    "InputPatchConfiguration": {
+      "type": "object",
+      "properties": {
+        "rebootSetting": {
+          "type": "string",
+          "enum": [
+            "NeverReboot",
+            "RebootIfRequired",
+            "AlwaysReboot"
+          ],
+          "x-ms-enum": {
+            "name": "RebootOptions",
+            "modelAsString": true
+          },
+          "description": "Possible reboot preference as defined by the user based on which it would be decided to reboot the machine or not after the patch operation is completed."
+        },
+        "windowsParameters": {
+          "$ref": "#/definitions/InputWindowsParameters",
+          "description": "Input parameters specific to patching a Windows machine. For Linux machines, do not pass this property."
+        },
+        "linuxParameters": {
+          "$ref": "#/definitions/InputLinuxParameters",
+          "description": "Input parameters specific to patching Linux machine. For Windows machines, do not pass this property."
+        },
+        "tasks": {
+          "description": "Tasks information for the Software update configuration.",
+          "$ref": "#/definitions/softwareUpdateConfigurationTasks",
+          "x-ms-client-flatten": true
+        }
+      },
+      "description": "Input configuration for a patch run"
+    },
+    "InputWindowsParameters": {
+      "type": "object",
+      "properties": {
+        "kbNumbersToExclude": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Windows KBID to be excluded for patching."
+        },
+        "kbNumbersToInclude": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Windows KBID to be included for patching."
+        },
+        "classificationsToInclude": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Classification category of patches to be patched"
+        }
+      },
+      "description": "Input properties for patching a Windows machine."
+    },
+    "InputLinuxParameters": {
+      "type": "object",
+      "properties": {
+        "packageNameMasksToExclude": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Package names to be excluded for patching."
+        },
+        "packageNameMasksToInclude": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Package names to be included for patching."
+        },
+        "classificationsToInclude": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Classification category of patches to be patched"
+        }
+      },
+      "description": "Input properties for patching a Linux machine."
+    },
+    "softwareUpdateConfigurationTasks": {
+      "type": "object",
+      "description": "Task properties of the software update configuration.",
+      "properties": {
+        "preTasks": {
+          "type": "array",
+          "description": "List of pre tasks. e.g. [{'source' :'runbook', 'taskScope': 'Global', 'parameters': { 'arg1': 'value1'}}]",
+          "items": {
+            "$ref": "#/definitions/taskProperties",
+            "x-ms-client-flatten": true
+          }
+        },
+        "postTasks": {
+          "type": "array",
+          "description": "List of post tasks. e.g. [{'source' :'runbook', 'taskScope': 'Resource', 'parameters': { 'arg1': 'value1'}}]",
+          "items": {
+            "$ref": "#/definitions/taskProperties",
+            "x-ms-client-flatten": true
+          }
+        }
+      }
+    },
+    "taskProperties": {
+      "type": "object",
+      "description": "Task properties of the software update configuration.",
+      "properties": {
+        "parameters": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Gets or sets the parameters of the task."
+        },
+        "source": {
+          "type": "string",
+          "description": "Gets or sets the name of the runbook."
+        },
+        "taskScope": {
+          "enum": [
+            "Global",
+            "Resource"
+          ],
+          "description": "Golabl Task execute once when schedule trigger. Resource task execute for each VM.",
+          "type": "string",
+          "x-ms-enum": {
+            "name": "TaskScope",
+            "modelAsString": true
+          },
+          "default": "Global"
         }
       }
     },
@@ -1680,13 +1842,27 @@
             "Extension",
             "InGuestPatch",
             "SQLDB",
-            "SQLManagedInstance"
+            "SQLManagedInstance",
+            "Guest"
           ],
           "type": "string",
           "x-ms-enum": {
             "name": "MaintenanceScope",
             "modelAsString": true
           }
+        },
+        "maintenanceScopeType": {
+          "description": "Gets or sets maintenanceScopeType of the configuration",
+          "enum": [
+            "Advance",
+            "Intermediate"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "MaintenanceScopeType",
+            "modelAsString": true
+          },
+          "default": "Intermediate"
         },
         "impactType": {
           "description": "The impact type",
