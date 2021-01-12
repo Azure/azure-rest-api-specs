@@ -3760,6 +3760,9 @@
           },
           "Create a scale set with Host Encryption using encryptionAtHost property.": {
             "$ref": "./examples/CreateAScaleSetWithEncryptionAtHost.json"
+          },
+          "Create a scale set with Fpga Network Interfaces.": {
+            "$ref": "./examples/CreateAScaleSetFromWithFpgaNetworkInterface.json"
           }
         }
       },
@@ -9926,6 +9929,10 @@
           "type": "boolean",
           "description": "Specifies whether the network interface is accelerated networking-enabled."
         },
+        "enableFpga": {
+          "type": "boolean",
+          "description": "Specifies whether the network interface is FPGA networking-enabled."
+        },
         "networkSecurityGroup": {
           "$ref": "#/definitions/SubResource",
           "description": "The network security group."
@@ -9960,6 +9967,10 @@
         "enableAcceleratedNetworking": {
           "type": "boolean",
           "description": "Specifies whether the network interface is accelerated networking-enabled."
+        },
+        "enableFpga": {
+          "type": "boolean",
+          "description": "Specifies whether the network interface is FPGA networking-enabled."
         },
         "networkSecurityGroup": {
           "$ref": "#/definitions/SubResource",

@@ -56,6 +56,10 @@ directive:
   - suppress: R4009
     from: Microsoft.AVS/preview/2020-07-17-preview/vmware.json
     reason: systemData will be in the next API version
+  - suppress: R3018
+    from: Microsoft.AVS/preview/2020-07-17-preview/vmware.json
+    where: $.definitions.MetricDimension.properties.toBeExportedForShoebox
+    reason: standard property defined by Geneva Metrics
 ```
 
 ### Tag: package-2020-03-20
@@ -87,6 +91,10 @@ directive:
     from: Microsoft.AVS/stable/2020-03-20/vmware.json
     where: $.definitions.Operation.properties.properties
     reason: x-ms-client-flatten not needed for Operation
+  - suppress: R3018
+    from: Microsoft.AVS/stable/2020-03-20/vmware.json
+    where: $.definitions.MetricDimension.properties.toBeExportedForShoebox
+    reason: standard property defined by Geneva Metrics
 ```
 
 ---

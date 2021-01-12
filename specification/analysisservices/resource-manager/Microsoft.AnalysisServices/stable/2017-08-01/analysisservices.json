@@ -838,6 +838,11 @@
               "description": "Operation type: Read, write, delete, etc.",
               "type": "string",
               "readOnly": true
+            },
+            "description": {
+              "description": "Description of the operation object.",
+              "type": "string",
+              "readOnly": true
             }
           }
         },
@@ -1111,6 +1116,20 @@
           },
           "default": 1,
           "description": "The managed mode of the server (0 = not managed, 1 = managed)."
+        },
+        "serverMonitorMode": {
+          "type": "integer",
+          "format": "int32",
+          "enum": [
+            0,
+            1
+          ],
+          "x-ms-enum": {
+            "modelAsString": false,
+            "name": "ServerMonitorMode"
+          },
+          "default": 1,
+          "description": "The server monitor mode for AS server"
         }
       }
     },
@@ -1189,15 +1208,16 @@
       "type": "object",
       "properties": {
         "status": {
-          "type": "string",
+          "type": "integer",
+          "format": "int32",
           "enum": [
-            "Live"
+            0
           ],
           "x-ms-enum": {
             "name": "Status",
             "modelAsString": false
           },
-          "description": "Live message of list gateway."
+          "description": "Live message of list gateway. Status: 0 - Live"
         }
       }
     },
@@ -1222,6 +1242,14 @@
         "message": {
           "type": "string",
           "description": "Error message of list gateway."
+        },
+        "subCode": {
+          "description": "The error sub code",
+          "type": "string"
+        },
+        "httpStatusCode": {
+          "description": "The http status code",
+          "type": "string"
         }
       }
     },
@@ -1346,6 +1374,14 @@
             },
             "message": {
               "description": "Error message indicating why the operation failed.",
+              "type": "string"
+            },
+            "subCode": {
+              "description": "The error sub code",
+              "type": "string"
+            },
+            "httpStatusCode": {
+              "description": "The http status code",
               "type": "string"
             }
           }
