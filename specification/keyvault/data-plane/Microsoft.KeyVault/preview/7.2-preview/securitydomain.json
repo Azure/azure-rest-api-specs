@@ -37,12 +37,12 @@
         "parameters": [
           {
             "in": "body",
-            "name": "Certificates",
+            "name": "CertificateInfoObject",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/CertificateSet"
+              "$ref": "#/definitions/CertificateInfoObject"
             },
-            "description": "Security domain download operation requires customer to provide three certificates containing public key in JWK format."
+            "description": "Security domain download operation requires customer to provide N certificates (minimum 3 and maximum 10) containing public key in JWK format."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -50,7 +50,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Security domain download response",
+            "description": "This is the specification of the security domain as downloaded from the new pool",
             "schema": {
               "$ref": "#/definitions/SecurityDomainObject"
             }
@@ -120,7 +120,7 @@
             "description": "security domain",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/SecurityDomainObject"
+              "$ref": "#/definitions/SecurityDomainUploadObject"
             }
           }
         ],
@@ -185,7 +185,7 @@
     }
   },
   "definitions": {
-    "CertificateSet": {
+    "CertificateInfoObject": {
       "properties": {
         "certificates": {
           "type": "array",
@@ -193,9 +193,16 @@
             "$ref": "#/definitions/SecurityDomainCertificateItem"
           },
           "minItems": 3,
-          "maxItems": 3,
+          "maxItems": 10,
           "uniqueItems": true,
-          "description": "Three certificates needed from customer"
+          "description": "Certificates needed from customer"
+        },
+        "required": {
+          "description": "Customer to specify the number of certificates (minimum 2 and maximum 10) to restore security domain",
+          "type": "integer",
+          "default": 2,
+          "minimum": 2,
+          "maximum": 10
         }
       },
       "required": [
@@ -215,8 +222,14 @@
     },
     "TransferKey": {
       "properties": {
+        "key_format": {
+          "type": "string",
+          "default": "jwk",
+          "description": "Specifies the format of the transfer key"
+        },
         "transfer_key": {
-          "$ref": "#/definitions/SecurityDomainJsonWebKey"
+          "$ref": "#/definitions/SecurityDomainJsonWebKey",
+          "description": "Specifies the transfer key in JWK format"
         }
       },
       "required": [
@@ -225,10 +238,113 @@
     },
     "SecurityDomainObject": {
       "properties": {
-        "value": {
-          "type": "string"
+        "data": {
+          "type": "object",
+          "properties": {
+            "EncData": {
+              "$ref": "#/definitions/EncDataSet",
+              "description": "Array of encrypted data set"
+            },
+            "SharedKeys": {
+              "properties": {
+                "key_algorithm": {
+                  "type": "string",
+                  "default": "shamir_share",
+                  "description": "The Algorithm used for shared keys"
+                },
+                "required": {
+                  "type": "integer",
+                  "minimum": 2,
+                  "maximum": 10,
+                  "description": "The number of keys (minimum 2 and maximum 10) required for security domain. "
+                },
+                "enc_shares": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/Key",
+                    "minItems": 3,
+                    "maxItems": 10
+                  },
+                  "uniqueItems": true,
+                  "description": "Compact JWE wrapped shares array"
+                }
+              },
+              "required": [
+                "key_algorithm",
+                "required",
+                "enc_shares"
+              ],
+              "description": "Array of shared keys"
+            },
+            "version": {
+              "type": "integer"
+            }
+          },
+          "required": [
+            "EncData",
+            "SharedKeys",
+            "version"
+          ]
         }
-      }
+      },
+      "description": "Security domain",
+      "required": [
+        "data"
+      ]
+    },
+    "EncDataSet": {
+      "properties": {
+        "data": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EncDataSetItem",
+            "minItems": 2
+          },
+          "description": "Array of encrypted security domain",
+          "uniqueItems": true
+        },
+        "kdf": {
+          "type": "string",
+          "default": "sp108_kdf",
+          "description": "The key derivation function used"
+        }
+      },
+      "required": [
+        "data",
+        "kdf"
+      ]
+    },
+    "EncDataSetItem": {
+      "properties": {
+        "compact_jwe": {
+          "type": "string",
+          "description": "Encrypted data"
+        },
+        "tag": {
+          "type": "string",
+          "description": "hsm backup tag"
+        }
+      },
+      "required": [
+        "compact_jwe",
+        "tag"
+      ]
+    },
+    "Key": {
+      "properties": {
+        "enc_key": {
+          "type": "string",
+          "description": "Compact JWE wrapped share"
+        },
+        "x5t_256": {
+          "type": "string",
+          "description": "SHA 256 hash of certificate"
+        }
+      },
+      "required": [
+        "enc_key",
+        "x5t_256"
+      ]
     },
     "SecurityDomainOperationStatus": {
       "properties": {
@@ -258,15 +374,7 @@
         },
         "kty": {
           "type": "string",
-          "description": "JsonWebKey Key Type (kty), as defined in https://tools.ietf.org/html/draft-ietf-jose-json-web-algorithms-40. For security domain this value must be RSA",
-          "enum": [
-            "RSA",
-            "RSA-HSM"
-          ],
-          "x-ms-enum": {
-            "name": "JsonWebKeyType",
-            "modelAsString": true
-          }
+          "description": "JsonWebKey Key Type (kty), as defined in https://tools.ietf.org/html/draft-ietf-jose-json-web-algorithms-40. For security domain this value must be RSA"
         },
         "key_ops": {
           "type": "array",
@@ -310,11 +418,50 @@
       "required": [
         "kty",
         "key_ops",
+        "alg",
         "kid",
         "x5c",
         "x5t#S256",
         "n",
         "e"
+      ]
+    },
+    "SecurityDomainUploadObject": {
+      "properties": {
+        "value": {
+          "type": "object",
+          "properties": {
+            "EncData": {
+              "$ref": "#/definitions/EncDataSet",
+              "description": "Array of encrypted data set"
+            },
+            "WrappedKey": {
+              "properties": {
+                "enc_key": {
+                  "type": "string",
+                  "description": "Encryption key used to encrypt the EncData"
+                },
+                "x5t_256": {
+                  "type": "string",
+                  "description": "Thumbprint used to determine which certificate was used to encrypt the enc_key field"
+                }
+              },
+              "required": [
+                "enc_key",
+                "x5t_256"
+              ],
+              "description": "Key object containing the encryption key used to encrypt EncData object"
+            }
+          },
+          "required": [
+            "EncData",
+            "WrappedKey"
+          ]
+        }
+      },
+      "description": "Security domain object uploaded to a new pool",
+      "required": [
+        "value"
       ]
     }
   },

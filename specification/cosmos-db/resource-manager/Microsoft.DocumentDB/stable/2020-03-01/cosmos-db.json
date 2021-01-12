@@ -1680,6 +1680,86 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/sqlDatabases/{databaseName}/throughputSettings/default/migrateToAutoscale": {
+      "post": {
+        "operationId": "SqlResources_MigrateSqlDatabaseToAutoscale",
+        "x-ms-examples": {
+          "CosmosDBSqlDatabaseMigrateToAutoscale": {
+            "$ref": "./examples/CosmosDBSqlDatabaseMigrateToAutoscale.json"
+          }
+        },
+        "description": "Migrate an Azure Cosmos DB SQL database from manual throughput to autoscale",
+        "x-ms-long-running-operation": true,
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/databaseNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The SQL database migrate operation will complete asynchronously."
+          },
+          "200": {
+            "description": "The SQL database migrate operation was completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ThroughputSettingsGetResults"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/sqlDatabases/{databaseName}/throughputSettings/default/migrateToManualThroughput": {
+      "post": {
+        "operationId": "SqlResources_MigrateSqlDatabaseToManualThroughput",
+        "x-ms-examples": {
+          "CosmosDBSqlDatabaseMigrateToManualThroughput": {
+            "$ref": "./examples/CosmosDBSqlDatabaseMigrateToManualThroughput.json"
+          }
+        },
+        "description": "Migrate an Azure Cosmos DB SQL database from autoscale to manual throughput",
+        "x-ms-long-running-operation": true,
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/databaseNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The SQL database migrate operation will complete asynchronously."
+          },
+          "200": {
+            "description": "The SQL database migrate operation was completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ThroughputSettingsGetResults"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/sqlDatabases/{databaseName}/containers": {
       "get": {
         "operationId": "SqlResources_ListSqlContainers",
@@ -1928,6 +2008,92 @@
           },
           "200": {
             "description": "The RUs per second of the SQL container update operation was completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ThroughputSettingsGetResults"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/sqlDatabases/{databaseName}/containers/{containerName}/throughputSettings/default/migrateToAutoscale": {
+      "post": {
+        "operationId": "SqlResources_MigrateSqlContainerToAutoscale",
+        "x-ms-examples": {
+          "CosmosDBSqlContainerMigrateToAutoscale": {
+            "$ref": "./examples/CosmosDBSqlContainerMigrateToAutoscale.json"
+          }
+        },
+        "description": "Migrate an Azure Cosmos DB SQL container from manual throughput to autoscale",
+        "x-ms-long-running-operation": true,
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/databaseNameParameter"
+          },
+          {
+            "$ref": "#/parameters/containerNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The SQL container migrate operation will complete asynchronously."
+          },
+          "200": {
+            "description": "The SQL container migrate operation was completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ThroughputSettingsGetResults"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/sqlDatabases/{databaseName}/containers/{containerName}/throughputSettings/default/migrateToManualThroughput": {
+      "post": {
+        "operationId": "SqlResources_MigrateSqlContainerToManualThroughput",
+        "x-ms-examples": {
+          "CosmosDBSqlContainerMigrateToManualThroughput": {
+            "$ref": "./examples/CosmosDBSqlContainerMigrateToManualThroughput.json"
+          }
+        },
+        "description": "Migrate an Azure Cosmos DB SQL container from autoscale to manual throughput",
+        "x-ms-long-running-operation": true,
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/databaseNameParameter"
+          },
+          {
+            "$ref": "#/parameters/containerNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The SQL container migrate operation will complete asynchronously."
+          },
+          "200": {
+            "description": "The SQL container migrate operation was completed successfully.",
             "schema": {
               "$ref": "#/definitions/ThroughputSettingsGetResults"
             }
@@ -2706,6 +2872,86 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/mongodbDatabases/{databaseName}/throughputSettings/default/migrateToAutoscale": {
+      "post": {
+        "operationId": "MongoDBResources_MigrateMongoDBDatabaseToAutoscale",
+        "x-ms-examples": {
+          "CosmosDBMongoDBDatabaseMigrateToAutoscale": {
+            "$ref": "./examples/CosmosDBMongoDBDatabaseMigrateToAutoscale.json"
+          }
+        },
+        "description": "Migrate an Azure Cosmos DB MongoDB database from manual throughput to autoscale",
+        "x-ms-long-running-operation": true,
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/databaseNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The MongoDB database migrate operation will complete asynchronously."
+          },
+          "200": {
+            "description": "The MongoDB database migrate operation was completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ThroughputSettingsGetResults"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/mongodbDatabases/{databaseName}/throughputSettings/default/migrateToManualThroughput": {
+      "post": {
+        "operationId": "MongoDBResources_MigrateMongoDBDatabaseToManualThroughput",
+        "x-ms-examples": {
+          "CosmosDBMongoDBDatabaseMigrateToManualThroughput": {
+            "$ref": "./examples/CosmosDBMongoDBDatabaseMigrateToManualThroughput.json"
+          }
+        },
+        "description": "Migrate an Azure Cosmos DB MongoDB database from autoscale to manual throughput",
+        "x-ms-long-running-operation": true,
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/databaseNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The MongoDB database migrate operation will complete asynchronously."
+          },
+          "200": {
+            "description": "The MongoDB database migrate operation was completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ThroughputSettingsGetResults"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/mongodbDatabases/{databaseName}/collections": {
       "get": {
         "operationId": "MongoDBResources_ListMongoDBCollections",
@@ -2961,6 +3207,92 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/mongodbDatabases/{databaseName}/collections/{collectionName}/throughputSettings/default/migrateToAutoscale": {
+      "post": {
+        "operationId": "MongoDBResources_MigrateMongoDBCollectionToAutoscale",
+        "x-ms-examples": {
+          "CosmosDBMongoDBCollectionMigrateToAutoscale": {
+            "$ref": "./examples/CosmosDBMongoDBCollectionMigrateToAutoscale.json"
+          }
+        },
+        "description": "Migrate an Azure Cosmos DB MongoDB collection from manual throughput to autoscale",
+        "x-ms-long-running-operation": true,
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/databaseNameParameter"
+          },
+          {
+            "$ref": "#/parameters/collectionNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The MongoDB collection migrate operation will complete asynchronously."
+          },
+          "200": {
+            "description": "The MongoDB collection migrate operation was completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ThroughputSettingsGetResults"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/mongodbDatabases/{databaseName}/collections/{collectionName}/throughputSettings/default/migrateToManualThroughput": {
+      "post": {
+        "operationId": "MongoDBResources_MigrateMongoDBCollectionToManualThroughput",
+        "x-ms-examples": {
+          "CosmosDBMongoDBCollectionMigrateToManualThroughput": {
+            "$ref": "./examples/CosmosDBMongoDBCollectionMigrateToManualThroughput.json"
+          }
+        },
+        "description": "Migrate an Azure Cosmos DB MongoDB collection from autoscale to manual throughput",
+        "x-ms-long-running-operation": true,
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/databaseNameParameter"
+          },
+          {
+            "$ref": "#/parameters/collectionNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The MongoDB collection migrate operation will complete asynchronously."
+          },
+          "200": {
+            "description": "The MongoDB collection migrate operation was completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ThroughputSettingsGetResults"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/tables": {
       "get": {
         "operationId": "TableResources_ListTables",
@@ -3198,6 +3530,86 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/tables/{tableName}/throughputSettings/default/migrateToAutoscale": {
+      "post": {
+        "operationId": "TableResources_MigrateTableToAutoscale",
+        "x-ms-examples": {
+          "CosmosDBTableMigrateToAutoscale": {
+            "$ref": "./examples/CosmosDBTableMigrateToAutoscale.json"
+          }
+        },
+        "description": "Migrate an Azure Cosmos DB Table from manual throughput to autoscale",
+        "x-ms-long-running-operation": true,
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/tableNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The Table migrate operation will complete asynchronously."
+          },
+          "200": {
+            "description": "The Table migrate operation was completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ThroughputSettingsGetResults"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/tables/{tableName}/throughputSettings/default/migrateToManualThroughput": {
+      "post": {
+        "operationId": "TableResources_MigrateTableToManualThroughput",
+        "x-ms-examples": {
+          "CosmosDBTableMigrateToManualThroughput": {
+            "$ref": "./examples/CosmosDBTableMigrateToManualThroughput.json"
+          }
+        },
+        "description": "Migrate an Azure Cosmos DB Table from autoscale to manual throughput",
+        "x-ms-long-running-operation": true,
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/tableNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The Table migrate operation will complete asynchronously."
+          },
+          "200": {
+            "description": "The Table migrate operation was completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ThroughputSettingsGetResults"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/cassandraKeyspaces": {
       "get": {
         "operationId": "CassandraResources_ListCassandraKeyspaces",
@@ -3428,6 +3840,86 @@
           },
           "200": {
             "description": "The RUs per second of the Cassandra Keyspace update operation was completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ThroughputSettingsGetResults"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/cassandraKeyspaces/{keyspaceName}/throughputSettings/default/migrateToAutoscale": {
+      "post": {
+        "operationId": "CassandraResources_MigrateCassandraKeyspaceToAutoscale",
+        "x-ms-examples": {
+          "CosmosDBCassandraKeyspaceMigrateToAutoscale": {
+            "$ref": "./examples/CosmosDBCassandraKeyspaceMigrateToAutoscale.json"
+          }
+        },
+        "description": "Migrate an Azure Cosmos DB Cassandra Keyspace from manual throughput to autoscale",
+        "x-ms-long-running-operation": true,
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/keyspaceNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The Cassandra Keyspace migrate operation will complete asynchronously."
+          },
+          "200": {
+            "description": "The Cassandra Keyspace migrate operation was completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ThroughputSettingsGetResults"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/cassandraKeyspaces/{keyspaceName}/throughputSettings/default/migrateToManualThroughput": {
+      "post": {
+        "operationId": "CassandraResources_MigrateCassandraKeyspaceToManualThroughput",
+        "x-ms-examples": {
+          "CosmosDBCassandraKeyspaceMigrateToManualThroughput": {
+            "$ref": "./examples/CosmosDBCassandraKeyspaceMigrateToManualThroughput.json"
+          }
+        },
+        "description": "Migrate an Azure Cosmos DB Cassandra Keyspace from autoscale to manual throughput",
+        "x-ms-long-running-operation": true,
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/keyspaceNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The Cassandra Keyspace migrate operation will complete asynchronously."
+          },
+          "200": {
+            "description": "The Cassandra Keyspace migrate operation was completed successfully.",
             "schema": {
               "$ref": "#/definitions/ThroughputSettingsGetResults"
             }
@@ -3690,6 +4182,92 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/cassandraKeyspaces/{keyspaceName}/tables/{tableName}/throughputSettings/default/migrateToAutoscale": {
+      "post": {
+        "operationId": "CassandraResources_MigrateCassandraTableToAutoscale",
+        "x-ms-examples": {
+          "CosmosDBCassandraTableMigrateToAutoscale": {
+            "$ref": "./examples/CosmosDBCassandraTableMigrateToAutoscale.json"
+          }
+        },
+        "description": "Migrate an Azure Cosmos DB Cassandra table from manual throughput to autoscale",
+        "x-ms-long-running-operation": true,
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/keyspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/tableNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The Cassandra table migrate operation will complete asynchronously."
+          },
+          "200": {
+            "description": "The Cassandra table migrate operation was completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ThroughputSettingsGetResults"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/cassandraKeyspaces/{keyspaceName}/tables/{tableName}/throughputSettings/default/migrateToManualThroughput": {
+      "post": {
+        "operationId": "CassandraResources_MigrateCassandraTableToManualThroughput",
+        "x-ms-examples": {
+          "CosmosDBCassandraTableMigrateToManualThroughput": {
+            "$ref": "./examples/CosmosDBCassandraTableMigrateToManualThroughput.json"
+          }
+        },
+        "description": "Migrate an Azure Cosmos DB Cassandra table from autoscale to manual throughput",
+        "x-ms-long-running-operation": true,
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/keyspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/tableNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The Cassandra table migrate operation will complete asynchronously."
+          },
+          "200": {
+            "description": "The Cassandra table migrate operation was completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ThroughputSettingsGetResults"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/gremlinDatabases": {
       "get": {
         "operationId": "GremlinResources_ListGremlinDatabases",
@@ -3920,6 +4498,86 @@
           },
           "200": {
             "description": "The RUs per second of the Gremlin database update operation was completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ThroughputSettingsGetResults"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/gremlinDatabases/{databaseName}/throughputSettings/default/migrateToAutoscale": {
+      "post": {
+        "operationId": "GremlinResources_MigrateGremlinDatabaseToAutoscale",
+        "x-ms-examples": {
+          "CosmosDBGremlinDatabaseMigrateToAutoscale": {
+            "$ref": "./examples/CosmosDBGremlinDatabaseMigrateToAutoscale.json"
+          }
+        },
+        "description": "Migrate an Azure Cosmos DB Gremlin database from manual throughput to autoscale",
+        "x-ms-long-running-operation": true,
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/databaseNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The Gremlin database migrate operation will complete asynchronously."
+          },
+          "200": {
+            "description": "The Gremlin database migrate operation was completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ThroughputSettingsGetResults"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/gremlinDatabases/{databaseName}/throughputSettings/default/migrateToManualThroughput": {
+      "post": {
+        "operationId": "GremlinResources_MigrateGremlinDatabaseToManualThroughput",
+        "x-ms-examples": {
+          "CosmosDBGremlinDatabaseMigrateToManualThroughput": {
+            "$ref": "./examples/CosmosDBGremlinDatabaseMigrateToManualThroughput.json"
+          }
+        },
+        "description": "Migrate an Azure Cosmos DB Gremlin database from autoscale to manual throughput",
+        "x-ms-long-running-operation": true,
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/databaseNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The Gremlin database migrate operation will complete asynchronously."
+          },
+          "200": {
+            "description": "The Gremlin database migrate operation was completed successfully.",
             "schema": {
               "$ref": "#/definitions/ThroughputSettingsGetResults"
             }
@@ -4175,6 +4833,92 @@
           },
           "200": {
             "description": "The RUs per second of the Gremlin graph update operation was completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ThroughputSettingsGetResults"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/gremlinDatabases/{databaseName}/graphs/{graphName}/throughputSettings/default/migrateToAutoscale": {
+      "post": {
+        "operationId": "GremlinResources_MigrateGremlinGraphToAutoscale",
+        "x-ms-examples": {
+          "CosmosDBGremlinGraphMigrateToAutoscale": {
+            "$ref": "./examples/CosmosDBGremlinGraphMigrateToAutoscale.json"
+          }
+        },
+        "description": "Migrate an Azure Cosmos DB Gremlin graph from manual throughput to autoscale",
+        "x-ms-long-running-operation": true,
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/databaseNameParameter"
+          },
+          {
+            "$ref": "#/parameters/graphNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The Gremlin graph migrate operation will complete asynchronously."
+          },
+          "200": {
+            "description": "The Gremlin graph migrate operation was completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ThroughputSettingsGetResults"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/gremlinDatabases/{databaseName}/graphs/{graphName}/throughputSettings/default/migrateToManualThroughput": {
+      "post": {
+        "operationId": "GremlinResources_MigrateGremlinGraphToManualThroughput",
+        "x-ms-examples": {
+          "CosmosDBGremlinGraphMigrateToManualThroughput": {
+            "$ref": "./examples/CosmosDBGremlinGraphMigrateToManualThroughput.json"
+          }
+        },
+        "description": "Migrate an Azure Cosmos DB Gremlin graph from autoscale to manual throughput",
+        "x-ms-long-running-operation": true,
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/databaseNameParameter"
+          },
+          {
+            "$ref": "#/parameters/graphNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The Gremlin graph migrate operation will complete asynchronously."
+          },
+          "200": {
+            "description": "The Gremlin graph migrate operation was completed successfully.",
             "schema": {
               "$ref": "#/definitions/ThroughputSettingsGetResults"
             }

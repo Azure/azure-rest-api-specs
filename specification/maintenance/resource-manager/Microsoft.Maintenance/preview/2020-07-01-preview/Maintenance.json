@@ -16,6 +16,96 @@
     "application/json"
   ],
   "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Maintenance/publicMaintenanceConfigurations": {
+      "get": {
+        "tags": [
+          "PublicMaintenanceConfigurations"
+        ],
+        "summary": "Get Public Maintenance Configuration records",
+        "operationId": "PublicMaintenanceConfigurations_List",
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ListMaintenanceConfigurationsResult"
+            }
+          },
+          "default": {
+            "description": "BadRequest",
+            "schema": {
+              "$ref": "#/definitions/MaintenanceError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        },
+        "x-ms-examples": {
+          "PublicMaintenanceConfigurations_List": {
+            "$ref": "./examples/PublicMaintenanceConfigurations_List.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Maintenance/publicMaintenanceConfigurations/{resourceName}": {
+      "get": {
+        "tags": [
+          "PublicMaintenanceConfigurations"
+        ],
+        "summary": "Get Public Maintenance Configuration record",
+        "operationId": "PublicMaintenanceConfigurations_Get",
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "Resource Identifier",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/MaintenanceConfiguration"
+            }
+          },
+          "default": {
+            "description": "BadRequest",
+            "schema": {
+              "$ref": "#/definitions/MaintenanceError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PublicMaintenanceConfigurations_GetForResource": {
+            "$ref": "./examples/PublicMaintenanceConfigurations_GetForResource.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/{providerName}/{resourceParentType}/{resourceParentName}/{resourceType}/{resourceName}/providers/Microsoft.Maintenance/applyUpdates/{applyUpdateName}": {
       "get": {
         "tags": [
@@ -1366,11 +1456,11 @@
       "type": "object",
       "properties": {
         "startDateTime": {
-          "description": "Effective start date of the maintenance window in YYYY-MM-DD hh:mm:ss format. The start date can be set to either the current date or future date. The window will be created in the time zone provided and adjusted to daylight savings according to that time zone.",
+          "description": "Effective start date of the maintenance window in YYYY-MM-DD hh:mm format. The start date can be set to either the current date or future date. The window will be created in the time zone provided and adjusted to daylight savings according to that time zone.",
           "type": "string"
         },
         "expirationDateTime": {
-          "description": "Effective expiration date of the maintenance window in YYYY-MM-DD hh:mm:ss format. The window will be created in the time zone provided and adjusted to daylight savings according to that time zone. Expiration date must be set to a future date. If not provided, it will be set to the maximum datetime 9999-12-31 23:59:59.",
+          "description": "Effective expiration date of the maintenance window in YYYY-MM-DD hh:mm format. The window will be created in the time zone provided and adjusted to daylight savings according to that time zone. Expiration date must be set to a future date. If not provided, it will be set to the maximum datetime 9999-12-31 23:59:59.",
           "type": "string"
         },
         "duration": {
@@ -1411,7 +1501,9 @@
             "InResource",
             "OSImage",
             "Extension",
-            "InGuestPatch"
+            "InGuestPatch",
+            "SQLDB",
+            "SQLManagedInstance"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -1423,6 +1515,18 @@
           "$ref": "#/definitions/MaintenanceWindow",
           "description": "Definition of a MaintenanceWindow",
           "x-ms-client-flatten": true
+        },
+        "visibility": {
+          "description": "Gets or sets the visibility of the configuration",
+          "enum": [
+            "Custom",
+            "Public"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "Visibility",
+            "modelAsString": true
+          }
         }
       }
     },
@@ -1574,7 +1678,9 @@
             "InResource",
             "OSImage",
             "Extension",
-            "InGuestPatch"
+            "InGuestPatch",
+            "SQLDB",
+            "SQLManagedInstance"
           ],
           "type": "string",
           "x-ms-enum": {

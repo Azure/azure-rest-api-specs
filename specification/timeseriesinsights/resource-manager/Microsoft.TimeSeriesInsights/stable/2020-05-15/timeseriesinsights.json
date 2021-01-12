@@ -57,6 +57,12 @@
             "schema": {
               "$ref": "#/definitions/OperationListResult"
             }
+          },
+          "default": {
+            "description": "HTTP 404 (Not Found): The list of operations could not be found.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
         "x-ms-pageable": {
@@ -1342,7 +1348,7 @@
             "Gen2"
           ],
           "x-ms-enum": {
-            "name": "Kind",
+            "name": "EnvironmentKind",
             "modelAsString": true
           }
         },
@@ -1838,7 +1844,7 @@
             "Microsoft.IoTHub"
           ],
           "x-ms-enum": {
-            "name": "Kind",
+            "name": "EventSourceKind",
             "modelAsString": true
           }
         },

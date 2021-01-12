@@ -46,13 +46,13 @@
         },
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/ClusterNamePathParam"
@@ -83,7 +83,7 @@
           "default": {
             "description": "Resource Provider error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -109,13 +109,13 @@
         },
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/ClusterNamePathParam"
@@ -140,7 +140,7 @@
           "default": {
             "description": "Resource Provider error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -159,13 +159,13 @@
         },
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/ClusterNamePathParam"
@@ -181,7 +181,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -200,13 +200,13 @@
         },
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/ClusterNamePathParam"
@@ -225,7 +225,7 @@
           "default": {
             "description": "Resource Provider error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -246,20 +246,35 @@
         "x-ms-examples": {
           "ListClusterUserCredentialsExample": {
             "$ref": "./examples/ConnectedClustersListClusterCredentialsResult.json"
+          },
+          "ListClusterUserCredentialsNonAadExample": {
+            "$ref": "./examples/ConnectedClustersListClusterCredentialsResultNonAad.json"
           }
         },
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/ClusterNamePathParam"
+          },
+          {
+            "$ref": "#/parameters/ClientProxy"
+          },
+          {
+            "in": "body",
+            "required": false,
+            "name": "ClientAuthenticationDetails",
+            "schema": {
+              "$ref": "#/definitions/AuthenticationDetails"
+            },
+            "description": "Authentication parameters supplied by the user to fetch credentials for accessing the cluster."
           }
         ],
         "responses": {
@@ -272,7 +287,7 @@
           "default": {
             "description": "Resource Provider error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -293,13 +308,13 @@
         },
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           }
         ],
         "responses": {
@@ -312,7 +327,7 @@
           "default": {
             "description": "Resource Provider error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -336,10 +351,10 @@
         },
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -352,7 +367,7 @@
           "default": {
             "description": "Resource Provider error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -370,7 +385,7 @@
         ],
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -383,7 +398,7 @@
           "default": {
             "description": "Resource Provider error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -485,7 +500,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/TrackedResource"
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/TrackedResource"
         }
       ],
       "description": "Represents a connected cluster."
@@ -533,7 +548,8 @@
           "description": "Base64 encoded public certificate used by the agent to do the initial handshake to the backend services in Azure."
         },
         "aadProfile": {
-          "$ref": "#/definitions/ConnectedClusterAADProfile"
+          "$ref": "#/definitions/ConnectedClusterAADProfile",
+          "description": "AAD profile of the connected cluster."
         },
         "kubernetesVersion": {
           "readOnly": true,
@@ -545,18 +561,70 @@
           "type": "integer",
           "description": "Number of nodes present in the connected cluster resource"
         },
+        "totalCoreCount": {
+          "readOnly": true,
+          "format": "int32",
+          "type": "integer",
+          "description": "Number of CPU cores present in the connected cluster resource"
+        },
         "agentVersion": {
           "readOnly": true,
           "type": "string",
           "description": "Version of the agent running on the connected cluster resource"
         },
         "provisioningState": {
-          "$ref": "#/definitions/ConnectedClusterProvisioningState"
+          "$ref": "#/definitions/ConnectedClusterProvisioningState",
+          "description": "Provisioning state of the connected cluster resource."
+        },
+        "distribution": {
+          "type": "string",
+          "description": "The Kubernetes distribution running on this connected cluster."
+        },
+        "infrastructure": {
+          "type": "string",
+          "description": "The infrastructure on which the Kubernetes cluster represented by this connected cluster is running on."
+        },
+        "offering": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Connected cluster offering"
+        },
+        "managedIdentityCertificateExpirationTime": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true,
+          "description": "Expiration time of the managed identity certificate"
+        },
+        "lastConnectivityTime": {
+          "type": "string",
+          "readOnly": true,
+          "format": "date-time",
+          "description": "Time representing the last instance when heart beat was received from the cluster"
+        },
+        "connectivityStatus": {
+          "type": "string",
+          "description": "Represents the connectivity status of the connected cluster.",
+          "enum": [
+            "Connecting",
+            "Connected",
+            "Offline",
+            "Expired"
+          ],
+          "x-ms-enum": {
+            "name": "ConnectivityStatus",
+            "modelAsString": true
+          }
         }
-      }
+      },
+      "description": "Properties of the connected cluster."
     },
     "CredentialResults": {
       "properties": {
+        "hybridConnectionConfig": {
+          "$ref": "#/definitions/HybridConnectionConfig",
+          "description": "Contains the REP (rendezvous endpoint) and “Sender” access token.",
+          "readOnly": true
+        },
         "kubeconfigs": {
           "type": "array",
           "readOnly": true,
@@ -605,7 +673,39 @@
           "type": "string",
           "description": "The server app id to access AD server"
         }
-      }
+      },
+      "description": "AAD profile of the connected cluster"
+    },
+    "AuthenticationDetails": {
+      "type": "object",
+      "required": [
+        "authenticationMethod",
+        "value"
+      ],
+      "properties": {
+        "authenticationMethod": {
+          "type": "string",
+          "description": "The mode of client authentication.",
+          "enum": [
+            "Token"
+          ],
+          "x-ms-enum": {
+            "name": "AuthenticationMethod",
+            "modelAsString": true
+          }
+        },
+        "value": {
+          "type": "object",
+          "properties": {
+            "token": {
+              "type": "string",
+              "description": "Authentication token."
+            }
+          },
+          "description": "Authentication token value."
+        }
+      },
+      "description": "Authentication details of the user"
     },
     "ConnectedClusterProvisioningState": {
       "type": "string",
@@ -649,28 +749,30 @@
           "type": "string",
           "description": "Base64 encoded public certificate used by the agent to do the initial handshake to the backend services in Azure."
         }
-      }
+      },
+      "description": "Properties which can be patched on the connected cluster resource."
     },
-    "ErrorResponse": {
-      "description": "The error response that indicates why an operation has failed.",
-      "type": "object",
+    "HybridConnectionConfig": {
+      "description": "Contains the REP (rendezvous endpoint) and “Sender” access token.",
       "properties": {
-        "error": {
-          "$ref": "#/definitions/ErrorDetails"
-        }
-      }
-    },
-    "ErrorDetails": {
-      "description": "The error response details containing error code and error message",
-      "type": "object",
-      "properties": {
-        "code": {
-          "description": "The error code.",
+        "expirationTime": {
+          "description": "Timestamp when this token will be expired.",
+          "type": "integer",
+          "readOnly": true,
+          "format": "int64"
+        },
+        "hybridConnectionName": {
+          "description": "Name of the connection",
           "type": "string",
           "readOnly": true
         },
-        "message": {
-          "description": "The error message.",
+        "relay": {
+          "description": "Name of the relay.",
+          "type": "string",
+          "readOnly": true
+        },
+        "token": {
+          "description": "Sender access token",
           "type": "string",
           "readOnly": true
         }
@@ -684,6 +786,14 @@
       "required": true,
       "type": "string",
       "description": "The name of the Kubernetes cluster on which get is called.",
+      "x-ms-parameter-location": "method"
+    },
+    "ClientProxy": {
+      "name": "ClientProxy",
+      "in": "query",
+      "required": false,
+      "type": "boolean",
+      "description": "Parameter to indicate whether the request is for client side proxy or not",
       "x-ms-parameter-location": "method"
     }
   }
