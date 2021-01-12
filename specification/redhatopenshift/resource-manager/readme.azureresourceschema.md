@@ -7,6 +7,7 @@ These settings apply only when `--azureresourceschema` is specified on the comma
 ``` yaml $(azureresourceschema) && $(multiapi)
 batch:
   - tag: schema-redhatopenshift-2020-04-30
+  - tag: schema-redhatopenshift-2021-01-31-preview
 
 ```
 
@@ -22,3 +23,16 @@ input-file:
   - Microsoft.RedHatOpenShift/stable/2020-04-30/redhatopenshift.json
 
 ```
+
+
+### Tag: schema-redhatopenshift-2021-01-31-preview and azureresourceschema
+
+``` yaml $(tag) == 'schema-redhatopenshift-2021-01-31-preview' && $(azureresourceschema)
+output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
+  - Microsoft.RedHatOpenShift/preview/2021-01-31-preview/redhatopenshift.json
+
+```
+
