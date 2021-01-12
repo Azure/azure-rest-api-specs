@@ -1819,15 +1819,30 @@
       "properties": {
         "conditionality": {
           "description": "Describes any conditionality on the entity. Possible values: conditional, hypothetical",
-          "type": "string"
+          "type": "string",
+          "enum": [
+            "Hypothetical",
+            "Conditional"
+          ]
         },        
         "certainty": {
           "description": "Describes the entities certainty and sentiment. Possible values: positive, positive possible, neutral, negative possible, negative",
-          "type": "string"
+          "type": "string",
+          "enum": [
+            "Positive",
+            "Positive Possible",
+            "Neutral Possible",
+            "Negative Possible",
+            "Negative"
+          ]
         },
         "association": {
           "description": "Describes if the entity is the subject of the text or if it describes someone else. Possible values: subject, other",
-          "type": "string"
+          "type": "string",
+          "enum": [
+            "subject",
+            "other"
+          ]
         }
       }
     },
