@@ -30,11 +30,11 @@ openapi-subtype: rpaas
 tag: package-2020-12-01-preview
 ```
 
-### Tag: package-2020-12-01-alpha
+### Tag: package-2020-12-01-preview
 
 These settings apply only when `--tag=package-2020-12-01-preview` is specified on the command line.
 
-```yaml $(tag) == 'package-2020-12-01-alpha'
+```yaml $(tag) == 'package-2020-12-01-preview'
 input-file:
   - Microsoft.ConfidentialLedger/preview/2020-12-01-preview/confidentialledger.json
 ```
