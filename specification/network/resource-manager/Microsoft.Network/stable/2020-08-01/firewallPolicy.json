@@ -603,7 +603,7 @@
           "items": {
             "$ref": "./network.json#/definitions/SubResource"
           }
-        },
+        },      
         "provisioningState": {
           "readOnly": true,
           "$ref": "./network.json#/definitions/ProvisioningState",
@@ -637,6 +637,10 @@
         "threatIntelWhitelist": {
           "description": "ThreatIntel Whitelist for Firewall Policy.",
           "$ref": "#/definitions/FirewallPolicyThreatIntelWhitelist"
+        },
+        "insights": {
+          "description": "Insights on Firewall Policy.",
+          "$ref": "#/definitions/FirewallPolicyInsights"
         },
         "dnsSettings": {
           "description": "DNS Proxy Settings definition.",
@@ -1146,6 +1150,24 @@
         }
       }
     },
+    "FirewallPolicyInsights": {
+      "description": "Firewall Policy Insights",
+      "x-ms-discriminator-value": "FirewallPolicyInsights",
+      "properties": {
+        "isEnabled": {
+          "type": "boolean",
+          "description": "A flag to indicate if the insights are enabled on the policy"
+        },
+        "retentionDays": {
+          "type": "integer",
+          "description": "Number of days the insights should be enabled on the policy"
+        },
+        "logAnalyticsResources": {
+          "description": "Workspaces needed to configure the Firewall Policy Insights",
+          "$ref": "#/definitions/FirewallPolicyLogAnalyticsResources"
+        }
+      }
+    },
     "DnsSettings": {
       "description": "DNS Proxy Settings in Firewall Policy.",
       "x-ms-discriminator-value": "DnsSettings",
@@ -1331,6 +1353,23 @@
         }
       },
       "description": "SKU of Firewall policy."
+    },
+    "FirewallPolicyLogAnalyticsResources": {
+      "description": "Log Analytics Resources for Firewall Policy Insights",
+      "x-ms-discriminator-value": "FirewallPolicyLogAnalyticsResources",
+      "properties": {
+        "workspaceIds": {
+          "type": "array",
+          "description": "List of workspace Ids for Firewall Polciy Insights",
+          "items": {
+            "type": "string"
+          }
+        },
+        "defaultWorkspaceId": {
+          "type": "string",
+          "description": "The default workspace Id for Firewall Policy Insights"
+        }
+      }
     }
   }
 }
