@@ -390,30 +390,23 @@
       "properties": {
         "actions": {
           "type": "array",
+          "description": "Allowed actions.",
           "items": {
-            "type": "string",
-            "enum": [],
-            "x-ms-enum": {
-              "modelAsString": true
-            }
-          },
-          "description": "Allowed actions."
+            "type": "string"
+          }
         },
         "notActions": {
           "type": "array",
           "items": {
             "type": "string",
-            "enum": [],
-            "x-ms-enum": {
-              "modelAsString": true
-            }
-          },
-          "description": "Denied actions."
+            "description": "Denied actions."
+          }
         },
         "dataActions": {
           "type": "array",
           "items": {
             "type": "string",
+            "description": "Allowed Data actions.",
             "enum": [
               "Microsoft.KeyVault/managedHsm/keys/read/action",
               "Microsoft.KeyVault/managedHsm/keys/write/action",
@@ -446,15 +439,16 @@
               "Microsoft.KeyVault/managedHsm/restore/status/action"
             ],
             "x-ms-enum": {
+              "name": "AllowedDataActions",
               "modelAsString": true
             }
-          },
-          "description": "Allowed Data actions."
+          }
         },
         "notDataActions": {
           "type": "array",
           "items": {
             "type": "string",
+            "description": "Denied Data actions.",
             "enum": [
               "Microsoft.KeyVault/managedHsm/keys/read/action",
               "Microsoft.KeyVault/managedHsm/keys/write/action",
@@ -487,10 +481,10 @@
               "Microsoft.KeyVault/managedHsm/restore/status/action"
             ],
             "x-ms-enum": {
+              "name": "DeniedDataActions",
               "modelAsString": true
             }
-          },
-          "description": "Denied Data actions."
+          }
         }
       },
       "description": "Role definition permissions."
@@ -511,13 +505,11 @@
           "x-ms-client-name": "roleType"
         },
         "permissions": {
-          "anyOf": {
-            "type": "array",
-            "items": {
-              "$ref": "#/definitions/Permission"
-            },
-            "description": "Role definition permissions."
-          }
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Permission"
+          },
+          "description": "Role definition permissions."
         },
         "assignableScopes": {
           "type": "array",
