@@ -6,10 +6,9 @@ Please also specify `--python-sdks-folder=<path to the root directory of your az
 ```yaml $(python)
 azure-arm: true
 license-header: MICROSOFT_MIT_NO_VERSION
-namespace: Microsoft.VMware
-package-name: vmware
-package-version: 2020-10-01-preview
-clear-output-folder: true
+package-name: azure-mgmt-vmware
+package-version: 1.0.0b1
+no-namespace-folders: true
 ```
 
 ### Python multi-api
@@ -17,6 +16,7 @@ clear-output-folder: true
 Generate all API versions currently shipped for this package
 
 ```yaml $(python) && $(multiapi)
+clear-output-folder: true
 batch:
   - tag: package-2019-12-20-privatepreview
   - tag: package-2020-10-01-preview
@@ -35,8 +35,8 @@ These settings apply only when `--tag=package-2020-10-01-preview --python` is sp
 Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
 
 ``` yaml $(tag) == 'package-2020-10-01-preview' && $(python)
-namespace: azure.mgmt.vmware.v2020-10-01-preview
-output-folder: $(python-sdks-folder)/vmware/azure-mgmt-vmware/azure/mgmt/vmware/v2020-10-01-preview
+namespace: azure.mgmt.vmware.v2020_10_01_preview
+output-folder: $(python-sdks-folder)/vmware/azure-mgmt-vmware/azure/mgmt/vmware/v2020_10_01_preview
 ```
 
 ### Tag: package-2019-12-20-privatepreview and python
