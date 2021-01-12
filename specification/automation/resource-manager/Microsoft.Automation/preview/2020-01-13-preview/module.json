@@ -776,22 +776,22 @@
       },
       "description": "Definition of the module error info type."
     },
-    "ModuleListResult": {
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ModuleListItem"
-          },
-          "description": "Gets or sets a list of modules."
+"ModuleListResult": {
+    "properties": {
+      "value": {
+        "type": "array",
+        "items": {
+          "$ref": "#/definitions/Module"
         },
-        "nextLink": {
-          "type": "string",
-          "description": "Gets or sets the next link."
-        }
+        "description": "Gets or sets a list of modules."
       },
-      "description": "The response model for the list module operation."
+      "nextLink": {
+        "type": "string",
+        "description": "Gets or sets the next link."
+      }
     },
+    "description": "The response model for the list module operation."
+  },
     "ContentHash": {
       "properties": {
         "algorithm": {
@@ -1020,20 +1020,6 @@
         }
       },
       "description": "The response model for the list fields operation."
-    },
-    "ModuleListItem": {
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/ModuleProperties",
-          "x-ms-client-flatten": true,
-          "description": "Gets or sets the module properties."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../common/v1/definitions.json#/definitions/Resource"
-        }
-      ]
     }
   },
   "parameters": {}
