@@ -2457,21 +2457,8 @@
           }
         },
         "provisioningState": {
-          "type": "string",
-          "readOnly": true,
-          "description": "The provisioned state of the resource.",
-          "enum": [
-            "Running",
-            "Creating",
-            "Deleting",
-            "Succeeded",
-            "Failed",
-            "Moving"
-          ],
-          "x-ms-enum": {
-            "name": "ProvisioningState",
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The provisioned state of the resource."
         },
         "uri": {
           "type": "string",
@@ -2600,15 +2587,18 @@
         },
         "minimum": {
           "description": "Minimum allowed capacity.",
-          "type": "integer"
+          "type": "integer",
+          "format": "int32"
         },
         "maximum": {
           "description": "Maximum allowed capacity.",
-          "type": "integer"
+          "type": "integer",
+          "format": "int32"
         },
         "default": {
           "description": "The default capacity that would be used.",
-          "type": "integer"
+          "type": "integer",
+          "format": "int32"
         }
       },
       "description": "Azure capacity definition."
@@ -2733,7 +2723,8 @@
         },
         "capacity": {
           "description": "The number of instances of the cluster.",
-          "type": "integer"
+          "type": "integer",
+          "format": "int32"
         },
         "tier": {
           "description": "SKU tier.",
@@ -2768,7 +2759,8 @@
       "properties": {
         "version": {
           "description": "The version of the template defined, for instance 1.",
-          "type": "integer"
+          "type": "integer",
+          "format": "int32"
         },
         "isEnabled": {
           "description": "A boolean value that indicate if the optimized autoscale feature is enabled or not.",
@@ -2776,11 +2768,13 @@
         },
         "minimum": {
           "description": "Minimum allowed instances count.",
-          "type": "integer"
+          "type": "integer",
+          "format": "int32"
         },
         "maximum": {
           "description": "Maximum allowed instances count.",
-          "type": "integer"
+          "type": "integer",
+          "format": "int32"
         }
       },
       "description": "A class that contains the optimized auto scale definition."
@@ -2822,21 +2816,8 @@
     "AttachedDatabaseConfigurationProperties": {
       "properties": {
         "provisioningState": {
-          "type": "string",
-          "readOnly": true,
-          "description": "The provisioned state of the resource.",
-          "enum": [
-            "Running",
-            "Creating",
-            "Deleting",
-            "Succeeded",
-            "Failed",
-            "Moving"
-          ],
-          "x-ms-enum": {
-            "name": "ProvisioningState",
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The provisioned state of the resource."
         },
         "databaseName": {
           "type": "string",
@@ -2878,21 +2859,8 @@
     "ReadWriteDatabaseProperties": {
       "properties": {
         "provisioningState": {
-          "type": "string",
-          "readOnly": true,
-          "description": "The provisioned state of the resource.",
-          "enum": [
-            "Running",
-            "Creating",
-            "Deleting",
-            "Succeeded",
-            "Failed",
-            "Moving"
-          ],
-          "x-ms-enum": {
-            "name": "ProvisioningState",
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The provisioned state of the resource."
         },
         "softDeletePeriod": {
           "type": "string",
@@ -2919,21 +2887,8 @@
     "ReadOnlyFollowingDatabaseProperties": {
       "properties": {
         "provisioningState": {
-          "type": "string",
-          "readOnly": true,
-          "description": "The provisioned state of the resource.",
-          "enum": [
-            "Running",
-            "Creating",
-            "Deleting",
-            "Succeeded",
-            "Failed",
-            "Moving"
-          ],
-          "x-ms-enum": {
-            "name": "ProvisioningState",
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The provisioned state of the resource."
         },
         "softDeletePeriod": {
           "type": "string",
@@ -3011,21 +2966,8 @@
           "description": "The event hub messages compression type"
         },
         "provisioningState": {
-          "type": "string",
-          "readOnly": true,
-          "description": "The provisioned state of the resource.",
-          "enum": [
-            "Running",
-            "Creating",
-            "Deleting",
-            "Succeeded",
-            "Failed",
-            "Moving"
-          ],
-          "x-ms-enum": {
-            "name": "ProvisioningState",
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The provisioned state of the resource."
         }
       },
       "required": [
@@ -3068,21 +3010,8 @@
           "description": "The name of the share access policy"
         },
         "provisioningState": {
-          "type": "string",
-          "readOnly": true,
-          "description": "The provisioned state of the resource.",
-          "enum": [
-            "Running",
-            "Creating",
-            "Deleting",
-            "Succeeded",
-            "Failed",
-            "Moving"
-          ],
-          "x-ms-enum": {
-            "name": "ProvisioningState",
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The provisioned state of the resource."
         }
       },
       "required": [
@@ -3229,21 +3158,8 @@
           "description": "The name of blob storage event type to process."
         },
         "provisioningState": {
-          "type": "string",
-          "readOnly": true,
-          "description": "The provisioned state of the resource.",
-          "enum": [
-            "Running",
-            "Creating",
-            "Deleting",
-            "Succeeded",
-            "Failed",
-            "Moving"
-          ],
-          "x-ms-enum": {
-            "name": "ProvisioningState",
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The provisioned state of the resource."
         }
       },
       "required": [
@@ -3532,21 +3448,8 @@
           "description": "The principal name"
         },
         "provisioningState": {
-          "type": "string",
-          "readOnly": true,
-          "description": "The provisioned state of the resource.",
-          "enum": [
-            "Running",
-            "Creating",
-            "Deleting",
-            "Succeeded",
-            "Failed",
-            "Moving"
-          ],
-          "x-ms-enum": {
-            "name": "ProvisioningState",
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The provisioned state of the resource."
         }
       },
       "description": "A class representing database principal property."
@@ -3603,21 +3506,8 @@
           "description": "The principal name"
         },
         "provisioningState": {
-          "type": "string",
-          "readOnly": true,
-          "description": "The provisioned state of the resource.",
-          "enum": [
-            "Running",
-            "Creating",
-            "Deleting",
-            "Succeeded",
-            "Failed",
-            "Moving"
-          ],
-          "x-ms-enum": {
-            "name": "ProvisioningState",
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The provisioned state of the resource."
         }
       },
       "description": "A class representing cluster principal property."
@@ -3742,7 +3632,7 @@
           ],
           "type": "string",
           "x-ms-enum": {
-            "name": "Kind",
+            "name": "DataConnectionKind",
             "modelAsString": true
           }
         }
@@ -3919,7 +3809,7 @@
             "Microsoft.Kusto/clusters"
           ],
           "x-ms-enum": {
-            "name": "Type",
+            "name": "ClusterType",
             "modelAsString": false
           },
           "description": "The type of resource, Microsoft.Kusto/clusters."
@@ -3970,7 +3860,7 @@
             "Microsoft.Kusto/clusters/principalAssignments"
           ],
           "x-ms-enum": {
-            "name": "Type",
+            "name": "PrincipalAssignmentType",
             "modelAsString": false
           },
           "description": "The type of resource, Microsoft.Kusto/clusters/principalAssignments."
@@ -3995,7 +3885,7 @@
             "Microsoft.Kusto/clusters/databases/dataConnections"
           ],
           "x-ms-enum": {
-            "name": "Type",
+            "name": "DataConnectionType",
             "modelAsString": false
           },
           "description": "The type of resource, Microsoft.Kusto/clusters/databases/dataConnections."
@@ -4020,7 +3910,7 @@
             "Microsoft.Kusto/clusters/databases/principalAssignments"
           ],
           "x-ms-enum": {
-            "name": "Type",
+            "name": "DatabasePrincipalAssignmentType",
             "modelAsString": false
           },
           "description": "The type of resource, Microsoft.Kusto/clusters/databases/principalAssignments."
@@ -4271,6 +4161,23 @@
         }
       },
       "description": "The list of language extension objects."
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "readOnly": true,
+      "description": "The provisioned state of the resource.",
+      "enum": [
+        "Running",
+        "Creating",
+        "Deleting",
+        "Succeeded",
+        "Failed",
+        "Moving"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true
+      }
     }
   },
   "parameters": {

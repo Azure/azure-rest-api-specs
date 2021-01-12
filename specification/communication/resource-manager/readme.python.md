@@ -17,6 +17,19 @@ python:
   clear-output-folder: true
 ```
 
+``` yaml $(python) && $(python-mode) == 'update' && !$(track2)
+python:
+  no-namespace-folders: true
+  output-folder: $(python-sdks-folder)/communication/azure-mgmt-communication/azure/mgmt/communication
+```
+
+``` yaml $(python) && $(python-mode) == 'create' && !$(track2)
+python:
+  basic-setup-py: true
+  output-folder: $(python-sdks-folder)/communication/azure/mgmt/communication
+```
+
+
 These settings apply only when `--track2` is specified on the command line.
 
 ``` yaml $(track2)
@@ -27,18 +40,12 @@ no-namespace-folders: true
 package-version: 1.0.0rc1
 ```
 
-```yaml $(python) && $(python-mode) == 'update'
-python:
-  no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/communication/azure-mgmt-communication/azure/mgmt/communication
+```yaml $(python) && $(python-mode) == 'update' && $(track2)
 no-namespace-folders: true
 output-folder: $(python-sdks-folder)/communication/azure-mgmt-communication/azure/mgmt/communication
 ```
 
-```yaml $(python) && $(python-mode) == 'create'
-python:
-  basic-setup-py: true
-  output-folder: $(python-sdks-folder)/communication/azure-mgmt-communication
+```yaml $(python) && $(python-mode) == 'create' && $(track2)
 basic-setup-py: true
-output-folder: $(python-sdks-folder)/communication/azure-mgmt-communication
+output-folder: $(python-sdks-folder)/communication/azure/mgmt/communication
 ```

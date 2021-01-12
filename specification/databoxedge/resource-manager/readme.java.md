@@ -19,7 +19,7 @@ batch:
   - tag: package-2020-05-preview
   - tag: package-2019-08
   - tag: package-2019-07
-  - tag: package-2019-03  
+  - tag: package-2019-03
 ```
 
 ### Tag: package-2020-05-preview and java
@@ -30,7 +30,7 @@ Please also specify `--azure-libraries-for-java-folder=<path to the root directo
 ``` yaml $(tag) == 'package-2020-05-preview' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.databoxedge.v2020_05_01_preview
-  output-folder: $(azure-libraries-for-java-folder)/sdk/databoxedge/v2020_05_01_preview
+  output-folder: $(azure-libraries-for-java-folder)/sdk/databoxedge/mgmt-v2020_05_01_preview
 regenerate-manager: true
 generate-interface: true
 ```

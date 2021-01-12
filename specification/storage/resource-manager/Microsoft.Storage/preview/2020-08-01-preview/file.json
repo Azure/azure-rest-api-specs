@@ -170,6 +170,9 @@
           },
           "ListDeletedShares": {
             "$ref": "./examples/DeletedFileSharesList.json"
+          },
+          "ListShareSnapshots": {
+            "$ref": "./examples/FileShareSnapshotsList.json"
           }
         },
         "description": "Lists all shares.",
@@ -204,7 +207,8 @@
             "required": false,
             "type": "string",
             "enum": [
-              "deleted"
+              "deleted",
+              "snapshots"
             ],
             "x-ms-enum": {
               "name": "ListSharesExpand",
@@ -268,6 +272,20 @@
               "$ref": "#/definitions/FileShare"
             },
             "description": "Properties of the file share to create."
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "snapshots"
+            ],
+            "x-ms-enum": {
+              "name": "PutSharesExpand",
+              "modelAsString": false
+            },
+            "description": "Optional, used to create a snapshot."
           },
           {
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
@@ -393,6 +411,13 @@
               "modelAsString": false
             },
             "description": "Optional, used to expand the properties within share's properties."
+          },
+          {
+            "name": "x-ms-snapshot",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "description": "Optional, used to retrieve properties of a snapshot."
           }
         ],
         "responses": {
@@ -436,6 +461,13 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "x-ms-snapshot",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "description": "Optional, used to delete a snapshot."
           }
         ],
         "responses": {
@@ -746,6 +778,12 @@
           "format": "int64",
           "readOnly": true,
           "description": "The approximate size of the data stored on the share. Note that this value may not include all recently created or recently resized files."
+        },
+        "snapshotTime": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true,
+          "description": "Creation time of share snapshot returned in the response of list shares with expand param \"snapshots\"."
         }
       },
       "description": "The properties of the file share."
