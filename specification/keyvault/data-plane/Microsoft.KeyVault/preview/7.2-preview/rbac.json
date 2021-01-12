@@ -511,11 +511,13 @@
           "x-ms-client-name": "roleType"
         },
         "permissions": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Permission"
-          },
-          "description": "Role definition permissions."
+          "anyOf": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/Permission"
+            },
+            "description": "Role definition permissions."
+          }
         },
         "assignableScopes": {
           "type": "array",
