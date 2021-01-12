@@ -796,7 +796,7 @@
           }
         },
         "x-ms-examples": {
-          "DownloadUpdatesPost": {
+          "GenerateCertificate": {
             "$ref": "./examples/GenerateCertificate.json"
           }
         }
@@ -1032,6 +1032,9 @@
               "$ref": "#/definitions/CloudError"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
           "NodesGetAllInDevice": {
@@ -3186,7 +3189,7 @@
             "$ref": "#/parameters/apiVersionParameter"
           },
           {
-            "name": "$expand",
+            "name": "$filter",
             "in": "query",
             "description": "Specify $filter='CustomContextTag eq <tag>' to filter on custom context tag property",
             "required": false,
@@ -3572,7 +3575,7 @@
           {
             "name": "$expand",
             "in": "query",
-            "description": "Specify $filter='Type eq <type>' to filter on user type property",
+            "description": "Specify $expand=details to populate additional fields related to the resource or Specify $skipToken=<token> to populate the next page in the list.",
             "required": false,
             "type": "string"
           }
@@ -4125,6 +4128,7 @@
       "properties": {
         "value": {
           "description": "The value of the secret.",
+          "x-ms-secret": true,
           "type": "string"
         },
         "encryptionCertThumbprint": {
@@ -5279,6 +5283,7 @@
         },
         "privateKey": {
           "description": "Gets or sets base64 encoded private part of the certificate,\r\nneeded to form the activation key",
+          "x-ms-secret": true,
           "type": "string"
         },
         "expiryTimeInUTC": {
@@ -6736,6 +6741,10 @@
             "$ref": "#/definitions/Node"
           },
           "readOnly": true
+        },
+        "nextLink": {
+          "description": "Link to the next set of results.",
+          "type": "string"
         }
       }
     },
