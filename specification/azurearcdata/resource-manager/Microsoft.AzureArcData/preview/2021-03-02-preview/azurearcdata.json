@@ -1638,6 +1638,10 @@
           "type": "string",
           "description": "The instance admin"
         },
+        "basicLoginInformation": {
+          "$ref": "#/definitions/BasicLoginInformation",
+          "description": "Username and password for basic authentication."
+        },
         "k8sRaw": {
           "type": "object",
           "description": "The raw kubernetes information"
@@ -1651,7 +1655,10 @@
           "type": "string",
           "readOnly": true
         }
-      }
+      },
+      "required": [
+        "basicLoginInformation"
+      ]
     },
     "PostgresInstance": {
       "description": "A Postgres Instance.",
@@ -1737,6 +1744,10 @@
           "type": "object",
           "description": "The raw kubernetes information"
         },
+        "basicLoginInformation": {
+          "$ref": "#/definitions/BasicLoginInformation",
+          "description": "Username and password for basic authentication."
+        },
         "lastUploadedDate": {
           "type": "string",
           "format": "date-time",
@@ -1746,7 +1757,10 @@
           "type": "string",
           "readOnly": true
         }
-      }
+      },
+      "required": [
+        "basicLoginInformation"
+      ]
     },
     "SqlManagedInstance": {
       "description": "A SqlManagedInstance.",
@@ -2001,6 +2015,23 @@
       "x-ms-enum": {
         "name": "ExtendedLocationTypes",
         "modelAsString": true
+      }
+    },
+    "BasicLoginInformation": {
+      "description": "Username and password for basic login authentication.",
+      "properties": {
+        "username": {
+          "type": "string",
+          "description": "Login username."
+        },
+        "password": {
+          "type": "string",
+          "description": "Login password.",
+          "x-ms-mutability": [
+            "create",
+            "update"
+          ]
+        }
       }
     }
   },
