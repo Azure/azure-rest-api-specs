@@ -10,7 +10,7 @@ python:
   payload-flattening-threshold: 2
   namespace: microsoft.confidentialledger
   package-name: azure-mgmt-confidentialledger
-  package-version: 2020-12-01-alpha
+  package-version: 2020-12-01-preview
   clear-output-folder: true
 ```
 
