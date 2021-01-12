@@ -17,5 +17,5 @@ python:
 ```yaml $(python)
 python:
   no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/azure-mgmt/confidentialledger
+  output-folder: $(python-sdks-folder)/confidentialledger/azure-mgmt-confidentialledger/azure/mgmt/confidentialledger
 ```
