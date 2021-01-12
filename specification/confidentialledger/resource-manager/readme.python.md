@@ -9,7 +9,7 @@ python:
   license-header: MICROSOFT_MIT_NO_VERSION
   payload-flattening-threshold: 2
   namespace: microsoft.confidentialledger
-  package-name: microsoft-confidentialledger
+  package-name: azure-mgmt-confidentialledger
   package-version: 2020-12-01-alpha
   clear-output-folder: true
 ```
@@ -17,5 +17,5 @@ python:
 ```yaml $(python)
 python:
   no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/confidentialledger/microsoft-confidentialledger/microsoft/confidentialledger
+  output-folder: $(python-sdks-folder)/confidentialledger/azure-mgmt-confidentialledger/azure/mgmt/confidentialledger
 ```
