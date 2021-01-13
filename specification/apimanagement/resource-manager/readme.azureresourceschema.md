@@ -6,9 +6,9 @@ These settings apply only when `--azureresourceschema` is specified on the comma
 
 ``` yaml $(azureresourceschema) && $(multiapi)
 batch:
-  # - tag: schema-apimanagement-2020-06-01-preview
+  - tag: schema-apimanagement-2020-06-01-preview
   - tag: schema-apimanagement-2019-12-01-preview
-  # - tag: schema-apimanagement-2019-12-01
+  - tag: schema-apimanagement-2019-12-01
   - tag: schema-apimanagement-2019-01-01
   - tag: schema-apimanagement-2018-06-01-preview
   - tag: schema-apimanagement-2018-01-01
@@ -51,12 +51,14 @@ input-file:
   - Microsoft.ApiManagement/preview/2020-06-01-preview/apimopenidconnectproviders.json
   - Microsoft.ApiManagement/preview/2020-06-01-preview/apimpolicies.json
   - Microsoft.ApiManagement/preview/2020-06-01-preview/apimpolicydescriptions.json
+  - Microsoft.ApiManagement/preview/2020-06-01-preview/apimportalrevisions.json
   - Microsoft.ApiManagement/preview/2020-06-01-preview/apimportalsettings.json
   - Microsoft.ApiManagement/preview/2020-06-01-preview/apimproducts.json
   - Microsoft.ApiManagement/preview/2020-06-01-preview/apimproductsByTags.json
   - Microsoft.ApiManagement/preview/2020-06-01-preview/apimquotas.json
   - Microsoft.ApiManagement/preview/2020-06-01-preview/apimregions.json
   - Microsoft.ApiManagement/preview/2020-06-01-preview/apimreports.json
+  - Microsoft.ApiManagement/preview/2020-06-01-preview/apimsettings.json
   - Microsoft.ApiManagement/preview/2020-06-01-preview/apimsubscriptions.json
   - Microsoft.ApiManagement/preview/2020-06-01-preview/apimtagresources.json
   - Microsoft.ApiManagement/preview/2020-06-01-preview/apimtags.json
