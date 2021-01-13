@@ -48,7 +48,18 @@
             "sku": "16.04.0-LTS",
             "version": "latest"
           },
-          "nodeAgentSKUId": "batch.node.ubuntu 16.04"
+          "nodeAgentSKUId": "batch.node.ubuntu 16.04",
+          "extensions": [
+            {
+              "name": "batchextension1",
+              "type": "SecurityMonitoringForLinux",
+              "publisher": "Microsoft.Azure.Security.Monitoring",
+              "typeHandlerVersion": "1.0",
+              "autoUpgradeMinorVersion": true,
+              "settings": "securitySettings",
+              "protectedSettings": "linuxSecuritySettings"
+            }
+          ]
         }
       }
     }

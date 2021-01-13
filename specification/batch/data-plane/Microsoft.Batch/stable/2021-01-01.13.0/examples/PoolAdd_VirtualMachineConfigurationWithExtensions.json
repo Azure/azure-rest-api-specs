@@ -5,10 +5,26 @@
     "client-request-id": "00000000-0000-0000-0000-000000000000",
     "ocp-date": "Fri, 17 Feb 2017 00:00:00 GMT",
     "pool": {
-      "id": "poolId",
-      "vmSize": "small",
-      "cloudServiceConfiguration": {
-        "osFamily": "4"
+      "id": "pool2",
+      "vmSize": "standard_a1",
+      "virtualMachineConfiguration": {
+        "imageReference": {
+          "publisher": "Canonical",
+          "offer": "UbuntuServer",
+          "sku": "16.04.0-LTS"
+        },
+        "nodeAgentSKUId": "batch.node.ubuntu 16.04",
+        "extensions": [
+          {
+            "name": "batchextension1",
+            "type": "SecurityMonitoringForLinux",
+            "publisher": "Microsoft.Azure.Security.Monitoring",
+            "typeHandlerVersion": "1.0",
+            "autoUpgradeMinorVersion": true,
+            "settings": "{\"settingsKey\":\"settingsValue\"}",
+            "protectedSettings": "{\"protectedSettingsKey\":\"protectedSettingsValue\"}"
+          }
+        ]
       },
       "resizeTimeout": "PT15M",
       "targetDedicatedNodes": 5,
