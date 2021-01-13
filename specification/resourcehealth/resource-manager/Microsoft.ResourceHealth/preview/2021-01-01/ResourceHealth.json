@@ -1239,8 +1239,7 @@
     "potentialOutagesGetResult": {
       "description": "The Get PotentialOutages operation response.",
       "type": "object",
-      "$ref": "#/definitions/potentialoutage",
-      "readOnly": true
+      "$ref": "#/definitions/potentialoutage"
     },
     "potentialoutage": {
       "type": "object",
@@ -1248,59 +1247,69 @@
       "properties": {
         "id": {
           "type": "string",
-          "description": "Id for the potential outage."
+          "description": "Id for the potential outage.",
+          "readOnly": true
         },
         "title": {
           "type": "string",
-          "description": "Title for the potential outage."
+          "description": "Title for the potential outage.",
+          "readOnly": true
         },
         "confidenceScore": {
           "type": "number",
-          "description": "Confidence score for the potential outage."
+          "description": "Confidence score for the potential outage.",
+          "readOnly": true
         },
         "confidence": {
           "type": "string",
-          "description": "Confidence level for the potential outage."
+          "description": "Confidence level for the potential outage.",
+          "readOnly": true
         },
         "impactedRegions": {
           "type": "array",
           "items": {
             "type": "string"
           },
-          "description": "Regions impacted by potential outages."
+          "description": "Regions impacted by potential outages.",
+          "readOnly": true
         },
         "detectedDateTime": {
           "type": "string",
           "description": "Time and date the potential outage is detected.",
-          "format": "date-time"
+          "format": "date-time",
+          "readOnly": true
         },
         "impactedDataCenters": {
           "type": "array",
           "items": {
             "type": "string"
           },
-          "description": "Datacenters impacted by potential outages."
+          "description": "Datacenters impacted by potential outages.",
+          "readOnly": true
         },
         "impactedServices": {
           "type": "array",
           "items": {
             "type": "string"
           },
-          "description": "Services impacted by potential outages."
+          "description": "Services impacted by potential outages.",
+          "readOnly": true
         },
         "impactedResourceTypes": {
           "type": "array",
           "items": {
             "type": "string"
           },
-          "description": "Resource types impacted by potential outages."
+          "description": "Resource types impacted by potential outages.",
+          "readOnly": true
         },
         "symptoms": {
           "type": "array",
           "items": {
             "type": "string"
           },
-          "description": "Symptoms of potential outages."
+          "description": "Symptoms of potential outages.",
+          "readOnly": true
         },
         "incidents": {
           "type": "array",
@@ -1317,12 +1326,14 @@
       "properties": {
         "id": {
           "type": "string",
-          "description": "Id for the incident."
+          "description": "Id for the incident.",
+          "readOnly": true
         },
         "severity": {
           "type": "integer",
           "description": "Incident severity.",
-          "format": "int32"
+          "format": "int32",
+          "readOnly": true
         },
         "state": {
           "type": "string",
@@ -1341,46 +1352,54 @@
           "x-ms-enum": {
             "name": "state",
             "modelAsString": true
-          }
+          },
+          "readOnly": true
         },
         "icmLink": {
           "type": "string",
-          "description": "ICM link for the incident."
+          "description": "ICM link for the incident.",
+          "readOnly": true
         },
         "title": {
           "type": "string",
-          "description": "Title for the incident."
+          "description": "Title for the incident.",
+          "readOnly": true
         },
         "impactStartTime": {
           "type": "string",
           "description": "Incident impact start date and time.",
-          "format": "date-time"
+          "format": "date-time",
+          "readOnly": true
         },
         "impactMitigateTime": {
           "type": "string",
           "description": "Incident impact mitigation date and time.",
-          "format": "date-time"
+          "format": "date-time",
+          "readOnly": true
         },
         "impactedDataCenters": {
           "type": "array",
           "items": {
             "type": "string"
           },
-          "description": "DataCenters impacted by incident."
+          "description": "DataCenters impacted by incident.",
+          "readOnly": true
         },
         "impactedServices": {
           "type": "array",
           "items": {
             "type": "string"
           },
-          "description": "Services impacted by incident."
+          "description": "Services impacted by incident.",
+          "readOnly": true
         },
         "impactedResourceTypes": {
           "type": "array",
           "items": {
             "type": "string"
           },
-          "description": "Resource types impacted by incident."
+          "description": "Resource types impacted by incident.",
+          "readOnly": true
         }
       }
     },
