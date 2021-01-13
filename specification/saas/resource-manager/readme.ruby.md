@@ -14,6 +14,6 @@ These settings apply only when `--tag=package-2018-03-01-beta --ruby` is specifi
 Please also specify `--ruby-sdks-folder=<path to the root directory of your azure-sdk-for-ruby clone>`.
 
 ```yaml $(tag) == 'package-2018-03-01-beta' && $(ruby)
-namespace: microsoft.saas
-output-folder: $(ruby-sdks-folder)/saas
+namespace: saas
+output-folder: $(ruby-sdks-folder)/management/$(namespace)
 ```
