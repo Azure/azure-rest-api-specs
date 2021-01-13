@@ -28,34 +28,6 @@ openapi-type: arm
 tag: package-2020-01-13-preview
 ```
 
-### Tag: package-2015-01-preview
-
-These settings apply only when `--tag=package-2015-01-preview` is specified on the command line.
-
-``` yaml $(tag) == '2015-01-preview'
-input-file:
-- Microsoft.Automation/preview/2015-01-01-preview/account.json
-- Microsoft.Automation/preview/2015-01-01-preview/certificate.json
-- Microsoft.Automation/preview/2015-01-01-preview/connection.json
-- Microsoft.Automation/preview/2015-01-01-preview/connectionType.json
-- Microsoft.Automation/preview/2015-01-01-preview/credential.json
-- Microsoft.Automation/preview/2015-01-01-preview/dscCompilationJob.json
-- Microsoft.Automation/preview/2015-01-01-preview/dscConfiguration.json
-- Microsoft.Automation/preview/2015-01-01-preview/dscNode.json
-- Microsoft.Automation/preview/2015-01-01-preview/dscNodeConfiguration.json
-- Microsoft.Automation/preview/2015-01-01-preview/hybridRunbookWorkerGroup.json
-- Microsoft.Automation/preview/2015-01-01-preview/job.json
-- Microsoft.Automation/preview/2015-01-01-preview/jobSchedule.json
-- Microsoft.Automation/preview/2015-01-01-preview/linkedWorkspace.json
-- Microsoft.Automation/preview/2015-01-01-preview/module.json
-- Microsoft.Automation/preview/2015-01-01-preview/runbook.json
-- Microsoft.Automation/preview/2015-01-01-preview/schedule.json
-- Microsoft.Automation/preview/2015-01-01-preview/variable.json
-- Microsoft.Automation/preview/2015-01-01-preview/watcher.json
-- Microsoft.Automation/preview/2015-01-01-preview/webhook.json
-```
-
-
 ### Tag: package-2015-10
 
 These settings apply only when `--tag=package-2015-10` is specified on the command line.
