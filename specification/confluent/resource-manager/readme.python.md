@@ -14,6 +14,7 @@ clear-output-folder: true
 ```
 
 ``` yaml $(python) && $(python-mode) == 'update'
+no-namespace-folders: true
 output-folder: $(python-sdks-folder)/confluent/azure-mgmt-confluent/azure/mgmt/confluent
 ```
 
