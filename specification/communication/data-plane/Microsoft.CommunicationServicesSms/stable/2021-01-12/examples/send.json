@@ -3,21 +3,94 @@
     "SendMessageRequest": {
       "from": "+18001110000",
       "to": [
-        "+18002220000"
+        "+11234567890",
+        "+11234567891"
       ],
       "message": "Hello world!",
       "sendSmsOptions": {
         "enableDeliveryReport": true
       }
     },
-    "api-version": "2020-07-20-preview1",
+    "api-version": "2021-02-01-ga1",
     "endpoint": "https://contoso.communication.azure.com/"
   },
   "responses": {
-    "200": {
+    "202": {
+      "headers": {},
       "body": {
-        "messageId": "Outgoing_20200610203725bfd4ba70-70bf-4f77-925d-c0bdb5161bb3"
+        "details": [
+          {
+            "to": "+11234567890",
+            "messageId": "Outgoing_20200610203725bfd4ba70-70bf-4f77-925d-c0bdb5161bb3",
+            "code": "HttpStatusCode.Accepted",
+            "message": "Accepted"
+          },
+          {
+            "to": "+11234567891",
+            "messageId": "Outgoing_2020061020025100d1-d07e-4b19-b25d-13525d552822",
+            "code": "HttpStatusCode.Accepted",
+            "message": "Accepted"
+          }
+        ]
+      }
+    },
+    "207": {
+      "headers": {},
+      "body": {
+        "details": [
+          {
+            "to": "+11234567890",
+            "messageId": "Outgoing_20200610203725bfd4ba70-70bf-4f77-925d-c0bdb5161bb3",
+            "code": "HttpStatusCode.Accepted",
+            "message": "Accepted"
+          },
+          {
+            "to": "+112345678901",
+            "messageId": "null",
+            "code": "HttpStatusCode.BadRequest",
+            "message": "BadRequest"
+          }
+        ]
+      }
+    },
+    "400": {
+      "headers": {},
+      "body": {
+        "details": [
+          {
+            "to": "+11234567890",
+            "messageId": "null",
+            "code": "HttpStatusCode.BadRequest",
+            "message": "BadRequest"
+          },
+          {
+            "to": "+112345678901",
+            "messageId": "null",
+            "code": "HttpStatusCode.InternalServerError",
+            "message": "InternalServerError"
+          }
+        ]
+      }
+    },
+    "500": {
+      "headers": {},
+      "body": {
+        "details": [
+          {
+            "to": "+11234567890",
+            "messageId": "null",
+            "code": "HttpStatusCode.InternalServerError",
+            "message": "InternalServerError"
+          },
+          {
+            "to": "+112345678901",
+            "messageId": "null",
+            "code": "HttpStatusCode.ServiceUnavailable",
+            "message": "ServiceUnavailable"
+          }
+        ]
       }
     }
   }
 }
+

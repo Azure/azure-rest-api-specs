@@ -6,7 +6,7 @@
     "contact": {
       "email": "acsdevexdisc@microsoft.com"
     },
-    "version": "2020-07-20-preview1"
+    "version": "2021-02-01-ga1"
   },
   "securityDefinitions": {
     "azure_auth": {
@@ -57,12 +57,45 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "SMS message is successfully scheduled for sending.",
+          "202": {
+            "description": "Accepted",
             "schema": {
-              "$ref": "#/definitions/SendSmsResponse"
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/SendSmsResponse"
+              }
+            }
+          },
+          "207": {
+            "description": "Multi Status",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/SendSmsResponse"
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/SendSmsResponse"
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/SendSmsResponse"
+              }
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     }
@@ -75,6 +108,10 @@
         "enableDeliveryReport": {
           "description": "Enable this flag to receive a delivery report for this message on the Azure Resource EventGrid",
           "type": "boolean"
+        },
+        "tag": {
+          "description": "Enable extra customer content support.",
+          "type": "string"
         }
       }
     },
@@ -93,7 +130,7 @@
         },
         "to": {
           "description": "The recipients' phone number in E.164 format. In this version, only one recipient in the list is supported.",
-          "maxLength": 1,
+          "maxLength": 100,
           "minLength": 1,
           "type": "array",
           "items": {
@@ -112,11 +149,30 @@
       }
     },
     "SendSmsResponse": {
-      "description": "Response for a successful send Sms request.",
       "type": "object",
       "properties": {
+        "details": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/SendSmsResponseItem"
+          }
+        }
+      }
+    },
+    "SendSmsResponseItem": {
+      "type": "object",
+      "properties": {
+        "to": {
+          "type": "string"
+        },
         "messageId": {
-          "description": "The identifier of the outgoing SMS message",
+          "type": "string"
+        },
+        "code": {
+          "type": "string"
+        },
+        "message": {
           "type": "string"
         }
       }
