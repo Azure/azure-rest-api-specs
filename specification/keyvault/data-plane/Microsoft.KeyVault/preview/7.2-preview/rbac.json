@@ -443,7 +443,7 @@
     "RoleAssignmentPropertiesWithScope": {
       "properties": {
         "scope": {
-            "$ref": "#/definitions/RoleScope"
+          "$ref": "#/definitions/RoleScope"
         },
         "roleDefinitionId": {
           "type": "string",
@@ -746,7 +746,17 @@
       ],
       "x-ms-enum": {
         "name": "RoleScope",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Global",
+            "description": "Global scope"
+          },
+          {
+            "value": "Keys",
+            "description": "Keys scope"
+          }
+        ]
       }
     }
   },
