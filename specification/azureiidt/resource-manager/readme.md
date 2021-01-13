@@ -82,7 +82,7 @@ directive:
     from:
       - Microsoft.IntelligentITDigitalTwin/preview/2020-12-01-privatepreview/azureiidt.json
     where:
-      - $.definitions.StorageConnection.properties.sasUrl
+      - $.definitions.StorageConnection.properties.sasToken
     reason: Secrets are OK to return in a POST response.
 ```
 

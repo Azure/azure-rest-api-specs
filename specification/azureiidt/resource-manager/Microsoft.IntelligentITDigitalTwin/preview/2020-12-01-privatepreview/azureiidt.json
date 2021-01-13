@@ -1977,9 +1977,14 @@
     },
     "StorageConnection": {
       "properties": {
-        "sasUrl": {
+        "url": {
+          "description": "The url for the backend storage account.",
+          "type": "string",
+          "x-nullable": true
+        },
+        "sasToken": {
           "x-ms-secret": true,
-          "description": "Short lived sas url for users to upload their test files to the backend database.",
+          "description": "Short lived sas token for users to upload their test files to the backend database.",
           "type": "string",
           "x-nullable": true
         }
