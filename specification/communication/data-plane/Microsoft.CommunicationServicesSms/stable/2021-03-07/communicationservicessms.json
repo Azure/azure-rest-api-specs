@@ -41,7 +41,6 @@
         "parameters": [
           {
             "in": "body",
-            "header": "xs-ms-Repeatable-Id",
             "name": "SendMessageRequest",
             "description": "Represents the body of the send message request.",
             "required": true,
@@ -54,6 +53,13 @@
             "in": "query",
             "description": "Version of API to invoke.",
             "required": true,
+            "type": "string"
+          },
+          {
+            "name": "x-ms-RepeatableId",
+            "in": "header",
+            "description": "Repeatable request id.This should be unique Guid.",
+            "required": false,
             "type": "string"
           }
         ],
