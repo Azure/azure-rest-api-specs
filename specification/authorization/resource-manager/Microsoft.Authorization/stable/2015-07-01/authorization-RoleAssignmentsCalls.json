@@ -193,6 +193,15 @@
             "schema": {
               "$ref": "#/definitions/RoleAssignment"
             }
+          },
+          "204": {
+            "description": "Deleted - Indicates correct deletion without returning additional info"
+          },
+          "default": {
+            "description": "error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-examples": {
@@ -512,6 +521,24 @@
         "principalId": {
           "type": "string",
           "description": "The principal ID."
+        },
+        "createdOn": {
+          "type": "string",
+          "description": "Time it was created",
+          "format": "date-time"
+        },
+        "updatedOn": {
+          "type": "string",
+          "description": "Time it was updated",
+          "format": "date-time"
+        },
+        "createdBy": {
+          "type": "string",
+          "description": "Id of the user who created the assignment"
+        },
+        "updatedBy": {
+          "type": "string",
+          "description": "Id of the user who updated the assignment"
         }
       },
       "description": "Role assignment properties with scope."
