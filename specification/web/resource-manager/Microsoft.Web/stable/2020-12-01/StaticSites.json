@@ -755,7 +755,7 @@
             "description": "A JSON representation of the StaticSiteZipDeployment properties. See example.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/RequestMessageEnvelope[StaticSiteZipDeployment]"
+              "$ref": "#/definitions/StaticSiteZipDeploymentResources"
             }
           },
           {
@@ -1525,6 +1525,11 @@
               "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "Validate a custom domain for a static site": {
+            "$ref": "./examples/ValidateStaticSiteCustomDomain.json"
+          }
         }
       }
     },
@@ -2205,6 +2210,11 @@
             "schema": {
               "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Deploy a site from a zipped package": {
+            "$ref": "./examples/StaticSiteBuildZipDeploy.json"
           }
         }
       }
