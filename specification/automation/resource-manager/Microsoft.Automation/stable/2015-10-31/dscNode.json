@@ -48,7 +48,7 @@
         },
         "x-ms-examples": {
           "Get Agent Registration Information": {
-            "$ref": "./examples/getAgentRegistration.json"
+            "$ref": "./examples/getAgentRegistrationInformation.json"
           }
         },
         "parameters": [
@@ -173,7 +173,10 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DscNode"
+            }
           },
           "default": {
             "description": "Automation error response describing why the operation failed.",
@@ -480,8 +483,8 @@
           "url": "http://aka.ms/azureautomationsdk/dscnodereportoperations"
         },
         "x-ms-examples": {
-          "Get content of node": {
-            "$ref": "./examples/getDscNodeReportContent.json"
+          "List DSC reports by node id.": {
+            "$ref": "./examples/listDscNodeReportsByNode.json"
           }
         },
         "parameters": [

@@ -174,7 +174,10 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DscNode"
+            }
           },
           "default": {
             "description": "Automation error response describing why the operation failed.",
@@ -405,9 +408,6 @@
         "x-ms-examples": {
           "List DSC reports by node id.": {
             "$ref": "./examples/listDscNodeReportsByNode.json"
-          },
-          "List Paged DSC reports by node id.": {
-            "$ref": "./examples/listPagedDscNodeReportsByNode.json"
           }
         },
         "parameters": [
