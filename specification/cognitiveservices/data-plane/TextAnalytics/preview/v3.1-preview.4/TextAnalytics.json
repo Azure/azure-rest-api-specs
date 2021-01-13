@@ -1796,6 +1796,7 @@
     },
     "HealthcareRelation": {
       "type": "object",
+      "description": "Every relation is an entity graph of a certain entityType, where all entities are connected and have specific roles within the relation context.",
       "required": [
         "relationType",
         "entities"
@@ -1818,15 +1819,19 @@
       "type": "object",
       "properties": {
         "conditionality": {
-          "description": "Describes any conditionality on the entity. Possible values: conditional, hypothetical",
+          "description": "Describes any conditionality on the entity.",
           "type": "string",
           "enum": [
             "Hypothetical",
             "Conditional"
-          ]
+          ],
+          "x-ms-enum": {
+            "name": "Conditionality",
+            "modelAsString": false
+          }
         },        
         "certainty": {
-          "description": "Describes the entities certainty and sentiment. Possible values: positive, positive possible, neutral, negative possible, negative",
+          "description": "Describes the entities certainty and sentiment.",
           "type": "string",
           "enum": [
             "Positive",
@@ -1834,15 +1839,23 @@
             "Neutral Possible",
             "Negative Possible",
             "Negative"
-          ]
+          ],
+          "x-ms-enum": {
+            "name": "Certainty",
+            "modelAsString": false
+          }
         },
         "association": {
-          "description": "Describes if the entity is the subject of the text or if it describes someone else. Possible values: subject, other",
+          "description": "Describes if the entity is the subject of the text or if it describes someone else.",
           "type": "string",
           "enum": [
             "subject",
             "other"
-          ]
+          ],
+          "x-ms-enum": {
+            "name": "Association",
+            "modelAsString": false
+          }
         }
       }
     },
@@ -1854,7 +1867,7 @@
       ],
       "properties": {
         "ref": {
-          "description": "Reference link to the entity object.",
+          "description": "Reference link object, using a JSON pointer RFC 6901 (URI Fragment Identifier Representation), pointing to the entity .",
           "type": "string"
         },
         "role": {
