@@ -88,7 +88,7 @@
         "tags": [
           "Identity"
         ],
-        "summary": "Revoke access tokens for the specific identity.",
+        "summary": "Revoke all access tokens for the specific identity.",
         "operationId": "CommunicationIdentity_RevokeAccessTokens",
         "parameters": [
           {
@@ -209,6 +209,7 @@
       }
     },
     "CommunicationIdentityAccessToken": {
+      "description": "An access token.",
       "required": [
         "expiresOn",
         "token"
@@ -227,9 +228,8 @@
       }
     },
     "CommunicationIdentityAccessTokenResult": {
-      "description": "A communication identity.",
+      "description": "A communication identity with access token.",
       "required": [
-        "accessToken",
         "identity"
       ],
       "type": "object",
@@ -264,9 +264,8 @@
       "flow": "implicit",
       "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
       "scopes": {
-        "user_impersonation": "impersonate your identity account"
-      },
-      "description": "Azure Active Directory OAuth2 Flow"
+        "user_impersonation": "impersonate your user account"
+      }
     }
   },
   "x-ms-parameterized-host": {
