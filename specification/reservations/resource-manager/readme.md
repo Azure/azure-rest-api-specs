@@ -39,6 +39,16 @@ input-file:
   - Microsoft.Capacity/stable/2020-10-25/quota.json
 ```
 
+### Tag: package-2020-10-25-stable
+
+These settings apply only when `--tag=package-2020-10-25-stable` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-10-25-stable'
+input-file:
+  - Microsoft.Capacity/stable/2017-11-01/reservations.json
+  - Microsoft.Capacity/stable/2020-10-25/quota.json
+```
+
 ### Tag: package-2020-11-preview
 
 These settings apply only when `--tag=package-2020-11-preview` is specified on the command line.
