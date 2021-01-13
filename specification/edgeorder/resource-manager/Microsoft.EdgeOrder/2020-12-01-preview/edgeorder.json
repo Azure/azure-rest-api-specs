@@ -246,7 +246,7 @@
       }
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.EdgeOrder/productFamiliesMetadata": {
-      "get": {
+      "post": {
         "tags": [
           "ProductFamilyMetadata"
         ],
@@ -293,51 +293,6 @@
         "x-ms-examples": {
           "ListProductFamiliesMetadata": {
             "$ref": "./examples/ListProductFamiliesMetadata.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.EdgeOrder/productFamiliesMetadata/{productFamilyName}": {
-      "get": {
-        "tags": [
-          "ProductFamilyMetadata"
-        ],
-        "description": "This method gets the product family metadata for the given subscription.",
-        "operationId": "GetProductFamilyMetadata",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/parameters/productFamilyNameParameter"
-          },
-          {
-            "$ref": "../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Gets product family details under subscription.",
-            "schema": {
-              "$ref": "#/definitions/ProductFamiliesMetadataDetails"
-            }
-          },
-          "default": {
-            "description": "Error response describing reason for operation failure.",
-            "schema": {
-              "$ref": "../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "GetProductFamilyMetadata": {
-            "$ref": "./examples/GetProductFamilyMetadata.json"
           }
         }
       }
@@ -2717,25 +2672,14 @@
     "ProductFamiliesMetadataDetails": {
       "description": "Product families metadata details.",
       "type": "object",
-      "allOf": [
-        {
-          "$ref": "../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
-        }
-      ],
       "properties": {
         "properties": {
           "$ref": "#/definitions/ProductFamilyProperties",
           "description": "Product family properties",
           "readOnly": true,
           "x-ms-client-flatten": true
-        },
-        "systemData": {
-          "$ref": "../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
-          "description": "Represents resource creation and update time",
-          "readOnly": true
         }
-      },
-      "x-ms-azure-resource": true
+      }
     },
     "ProductFamiliesRequest": {
       "description": "The filters for showing the product families.",
@@ -3099,14 +3043,6 @@
       "name": "orderName",
       "in": "path",
       "description": "The name of the order",
-      "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "method"
-    },
-    "productFamilyNameParameter": {
-      "name": "productFamilyName",
-      "in": "path",
-      "description": "The name of the product family",
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"
