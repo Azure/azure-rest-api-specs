@@ -59,46 +59,6 @@
         }
       }
     },
-    "/libraries/{libraryName}/create": {
-      "put": {
-        "tags": [
-          "Library"
-        ],
-        "operationId": "Library_Create",
-        "x-ms-examples": {
-          "Create Library": {
-            "$ref": "./examples/Library_Create.json"
-          }
-        },
-        "description": "Create Library",
-        "x-ms-long-running-operation": true,
-        "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/LibraryNameParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Ok."
-          },
-          "202": {
-            "description": "Accepted.",
-            "schema": {
-              "$ref": "#/definitions/LibraryResourceInfo"
-            }
-          },
-          "default": {
-            "description": "An error response received from the Azure Synapse service.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        }
-      }
-    },
     "/libraries/{libraryName}/flush": {
       "post": {
         "tags": [
@@ -129,52 +89,6 @@
             "schema": {
               "$ref": "#/definitions/LibraryResourceInfo"
             }
-          },
-          "default": {
-            "description": "An error response received from the Azure Synapse service.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        }
-      }
-    },
-    "/libraries/{libraryName}/append": {
-      "post": {
-        "tags": [
-          "Library"
-        ],
-        "operationId": "Library_Append",
-        "x-ms-examples": {
-          "Append Library": {
-            "$ref": "./examples/Library_Append.json"
-          }
-        },
-        "description": "Append Library",
-        "consumes": [
-          "application/octet-stream"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/LibraryNameParameter"
-          },
-          {
-            "name": "content",
-            "in": "body",
-            "description": "Library file chunk.",
-            "required": true,
-            "schema": {
-              "format": "binary",
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "Accepted."
           },
           "default": {
             "description": "An error response received from the Azure Synapse service.",
@@ -297,6 +211,74 @@
           },
           "304": {
             "description": "Not modified."
+          },
+          "default": {
+            "description": "An error response received from the Azure Synapse service.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Library"
+        ],
+        "operationId": "Library_CreateOrAppend",
+        "x-ms-examples": {
+          "Create Library": {
+            "$ref": "./examples/Library_CreateOrAppend.json"
+          }
+        },
+        "description": "Creates a library with the library name. Use query param 'comp=appendblock' to append the data to the library resource created using the create operation.",
+        "x-ms-long-running-operation": true,
+        "consumes": [
+          "application/octet-stream"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/LibraryNameParameter"
+          },
+          {
+            "$ref": "#/parameters/Component"
+          },
+          {
+            "name": "content",
+            "in": "body",
+            "description": "Library file chunk. Use this content in with append operation.",
+            "required": false,
+            "schema": {
+              "format": "binary",
+              "type": "string"
+            }
+          },
+          {
+            "name": "x-ms-blob-condition-appendpos",
+            "in": "header",
+            "description": "Set this header to a byte offset at which the block is expected to be appended. The request succeeds only if the current offset matches this value. Otherwise, the request fails with the AppendPositionConditionNotMet error (HTTP status code 412 – Precondition Failed)",
+            "required": false,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Ok."
+          },
+          "201": {
+            "description": "This will be returned in case of append operation."
+          },
+          "202": {
+            "description": "In case of create operation, library resource information will be returned.",
+            "schema": {
+              "$ref": "#/definitions/LibraryResourceInfo"
+            }
+          },
+          "412": {
+            "description": "This will happen in case the offset value provided in x-ms-blob-condition-appendpos doesn't match with the current offset value."
           },
           "default": {
             "description": "An error response received from the Azure Synapse service.",
@@ -512,9 +494,10 @@
     "LibraryNameParameter": {
       "name": "libraryName",
       "in": "path",
+      "maxLength": 100,
       "required": true,
       "type": "string",
-      "description": "file name to upload",
+      "description": "file name to upload. Minimum length of the filename should be 1 excluding the extension length.",
       "x-ms-parameter-location": "method"
     },
     "OperationId": {
@@ -531,6 +514,14 @@
       "required": true,
       "type": "string",
       "description": "The Synapse client API Version."
+    },
+    "Component": {
+      "name": "comp",
+      "in": "query",
+      "required": false,
+      "type": "string",
+      "description": "If this param is specified with value appendblock, the api will append the data chunk provided in body to the library created.",
+      "x-ms-parameter-location": "method"
     },
     "Endpoint": {
       "name": "endpoint",
