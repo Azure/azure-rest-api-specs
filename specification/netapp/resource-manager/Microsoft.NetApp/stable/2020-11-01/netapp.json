@@ -3445,6 +3445,7 @@
         "mountTargets": {
           "title": "mountTargets",
           "type": "array",
+          "readOnly": true,
           "description": "List of mount targets",
           "items": {
             "$ref": "#/definitions/mountTargetProperties"
@@ -3484,7 +3485,8 @@
         },
         "snapshotDirectoryVisible": {
           "type": "boolean",
-          "description": "If enabled (true) the volume will contain a read-only .snapshot directory which provides access to each of the volume's snapshots (default to true)."
+          "default": true,
+          "description": "If enabled (true) the volume will contain a read-only snapshot directory which provides access to each of the volume's snapshots (default to true)."
         },
         "kerberosEnabled": {
           "type": "boolean",
@@ -3494,7 +3496,8 @@
         },
         "securityStyle": {
           "type": "string",
-          "description": "The security style of volume",
+          "description": "The security style of volume, default unix, defaults to ntfs for dual protocol or CIFS protocol",
+          "default": "unix",
           "enum": [
             "ntfs",
             "unix"
@@ -3519,6 +3522,7 @@
         "throughputMibps": {
           "title": "Maximum throughput in Mibps that can be achieved by this volume",
           "type": "number",
+          "default": 0.0,
           "example": 128.22,
           "maximum": 4500,
           "minimum": 1,
