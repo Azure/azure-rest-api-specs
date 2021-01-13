@@ -443,8 +443,7 @@
     "RoleAssignmentPropertiesWithScope": {
       "properties": {
         "scope": {
-          "type": "string",
-          "description": "The role assignment scope."
+            "$ref": "#/definitions/RoleScope"
         },
         "roleDefinitionId": {
           "type": "string",
@@ -683,7 +682,7 @@
         "assignableScopes": {
           "type": "array",
           "items": {
-            "type": "string"
+            "$ref": "#/definitions/RoleScope"
           },
           "description": "Role definition assignable scopes."
         }
@@ -737,6 +736,18 @@
         }
       },
       "description": "Role definition list operation result."
+    },
+    "RoleScope": {
+      "type": "string",
+      "description": "The role scope.",
+      "enum": [
+        "/",
+        "/keys"
+      ],
+      "x-ms-enum": {
+        "name": "RoleScope",
+        "modelAsString": true
+      }
     }
   },
   "parameters": {
