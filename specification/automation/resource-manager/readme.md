@@ -159,6 +159,42 @@ input-file:
 - Microsoft.Automation/stable/2018-06-30/watcher.json
 ```
 
+### Tag: package-2019-06
+
+These settings apply only when `--tag=package-2019-06` is specified on the command line.
+
+``` yaml $(tag) == 'package-2019-06'
+input-file:
+- Microsoft.Automation/stable/2019-06-01/runbook.json
+- Microsoft.Automation/stable/2019-06-01/python2package.json
+- Microsoft.Automation/stable/2019-06-01/dscNode.json
+- Microsoft.Automation/stable/2019-06-01/dscCompilationJob.json
+- Microsoft.Automation/stable/2019-06-01/dscNodeConfiguration.json
+- Microsoft.Automation/stable/2019-06-01/dscNodeCounts.json
+- Microsoft.Automation/stable/2019-06-01/softwareUpdateConfigurationRun.json
+- Microsoft.Automation/stable/2019-06-01/softwareUpdateConfigurationMachineRun.json
+- Microsoft.Automation/stable/2019-06-01/sourceControl.json
+- Microsoft.Automation/stable/2019-06-01/sourceControlSyncJob.json
+- Microsoft.Automation/stable/2019-06-01/sourceControlSyncJobStreams.json
+- Microsoft.Automation/stable/2019-06-01/job.json
+- Microsoft.Automation/stable/2019-06-01/account.json
+- Microsoft.Automation/stable/2019-06-01/certificate.json
+- Microsoft.Automation/stable/2019-06-01/connection.json
+- Microsoft.Automation/stable/2019-06-01/connectionType.json
+- Microsoft.Automation/stable/2019-06-01/credential.json
+- Microsoft.Automation/stable/2019-06-01/dscConfiguration.json
+- Microsoft.Automation/stable/2019-06-01/softwareUpdateConfiguration.json
+- Microsoft.Automation/stable/2019-06-01/hybridRunbookWorkerGroup.json
+- Microsoft.Automation/stable/2019-06-01/jobSchedule.json
+- Microsoft.Automation/stable/2019-06-01/linkedWorkspace.json
+- Microsoft.Automation/stable/2019-06-01/module.json
+- Microsoft.Automation/stable/2019-06-01/operations.json
+- Microsoft.Automation/stable/2019-06-01/schedule.json
+- Microsoft.Automation/stable/2019-06-01/variable.json
+- Microsoft.Automation/stable/2019-06-01/watcher.json
+- Microsoft.Automation/stable/2018-06-30/webhook.json
+```
+
 ### Tag: package-2020-01-13-preview
 
 These settings apply only when `--tag=package-2020-01-13-preview` is specified on the command line.
