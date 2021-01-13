@@ -1,0 +1,922 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Azure DevOps",
+    "description": "Azure DevOps Resource Provider",
+    "version": "2020-12-01-preview",
+    "x-ms-code-generation-settings": {
+      "name": "DevOpsClient"
+    }
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/providers/Microsoft.DevOps/operations": {
+      "get": {
+        "operationId": "Operations_List",
+        "description": "Lists all the operations supported by Microsoft.DevOps resource provider.",
+        "tags": [
+          "Operations"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The list of supported operations has been fetched successfully.",
+            "schema": {
+              "$ref": "#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Get a list of operations supported by Microsoft.DevOps resource provider": {
+            "$ref": "./examples/ListOperations.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.DevOps/locations/{location}/operationStatuses/{operationId}": {
+      "get": {
+        "description": "Gets the current status of an async operation.",
+        "operationId": "OperationStatuses_Get",
+        "summary": "Get Operation Status",
+        "tags": [
+          "OperationStatus"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/LocationParameter"
+          },
+          {
+            "$ref": "#/parameters/OperationIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The requested operation status",
+            "schema": {
+              "$ref": "#/definitions/OperationStatus"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get OperationStatus": {
+            "$ref": "./examples/GetOperationStatus.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DevOps/deploymentDetails": {
+      "get": {
+        "operationId": "DeploymentDetails_ListBySubscription",
+        "description": "Lists all the workflow deployment details under the specified subscription.",
+        "tags": [
+          "DeploymentDetail"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The workflow deployment details have been fetched successfully.",
+            "schema": {
+              "$ref": "#/definitions/DeploymentDetailsListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List all deployment details under the specified subscription": {
+            "$ref": "./examples/ListDeploymentDetailsBySubscription.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevOps/deploymentDetails": {
+      "get": {
+        "operationId": "DeploymentDetails_ListByResourceGroup",
+        "description": "Lists all the workflow deployment details under the specified resource group.",
+        "tags": [
+          "DeploymentDetail"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The workflow deployment details have been fetched successfully.",
+            "schema": {
+              "$ref": "#/definitions/DeploymentDetailsListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List all deployment details under the specified subscription": {
+            "$ref": "./examples/ListDeploymentDetailsByResourceGroup.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevOps/deploymentDetails/{deploymentDetailId}": {
+      "put": {
+        "operationId": "DeploymentDetail_Create",
+        "description": "Creates or updates a workflow deployment detail.",
+        "tags": [
+          "DeploymentDetail"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/DeploymentDetailIdParameter"
+          },
+          {
+            "name": "createOperationParameters",
+            "description": "The request payload to create the workflow deployment detail",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DeploymentDetail"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The creation or update of workflow deployment detail completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DeploymentDetail"
+            }
+          },
+          "201": {
+            "description": "The creation or update of workflow deployment detail started.",
+            "schema": {
+              "$ref": "#/definitions/DeploymentDetail"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "Create a deployment for Azure Kubernetes Service": {
+            "$ref": "./examples/CreateDeploymentDetail-AKS.json"
+          },
+          "Bootstrap a deployment configuration for Azure Kubernetes Service": {
+            "$ref": "./examples/CreateDeploymentDetailWithBootstrapConfiguration-AKS.json"
+          }
+        }
+      },
+      "get": {
+        "operationId": "DeploymentDetail_Get",
+        "description": "Gets an existing Continuous-Delivery(CD) deployment detail.",
+        "tags": [
+          "DeploymentDetail"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/DeploymentDetailIdParameter"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "The workflow deployment detail has been fetched successfully.",
+            "schema": {
+              "$ref": "#/definitions/DeploymentDetail"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get deployment detail.": {
+            "$ref": "./examples/GetDeploymentDetail.json"
+          }
+        }
+      },
+      "patch": {
+        "operationId": "DeploymentDetail_Update",
+        "description": "Updates the properties of a workflow deployment detail.",
+        "tags": [
+          "DeploymentDetail"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/DeploymentDetailIdParameter"
+          },
+          {
+            "name": "updateOperationParameters",
+            "description": "The request payload containing the updated deployment detail.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DeploymentDetail"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The workflow deployment detail has been updated successfully.",
+            "schema": {
+              "$ref": "#/definitions/DeploymentDetail"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "Update an existing AKS deployment": {
+            "$ref": "./examples/UpdateDeploymentDetail-AKS.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "DeploymentDetail_Delete",
+        "description": "Deletes a workflow deployment detail.",
+        "tags": [
+          "DeploymentDetail"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/DeploymentDetailIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The workflow deployment detail has been deleted successfully."
+          },
+          "204": {
+            "description": "The workflow deployment detail was not found or has been deleted already."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "Delete an existing Deployment": {
+            "$ref": "./examples/DeleteDeploymentDetail.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "CloudError": {
+      "x-ms-external": true,
+      "properties": {
+        "error": {
+          "description": "Details of the error from the DevOps Resource Provider.",
+          "$ref": "#/definitions/CloudErrorBody"
+        }
+      },
+      "description": "An error response from the DevOps Resource Provider."
+    },
+    "CloudErrorBody": {
+      "x-ms-external": true,
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "An identifier for the error. Codes are invariant and are intended to be consumed programmatically."
+        },
+        "message": {
+          "type": "string",
+          "description": "A message describing the error, intended to be suitable for display in a user interface."
+        },
+        "target": {
+          "type": "string",
+          "description": "The target of the particular error. For example, the name of the property in error or the method where the error occurred."
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CloudErrorBody"
+          },
+          "description": "A list of additional details about the error."
+        }
+      },
+      "description": "An error response from the DevOps Resource Provider."
+    },
+    "OperationListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/Operation"
+          },
+          "description": "List of operations supported by Microsoft.DevOps resource provider."
+        },
+        "nextLink": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The URL to get the next set of operations, if there are any."
+        }
+      },
+      "description": "Result of a request to list all operations supported by Microsoft.DevOps resource provider."
+    },
+    "Operation": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Name of the operation."
+        },
+        "isDataAction": {
+          "type": "string",
+          "description": "Indicates whether the operation applies to data-plane."
+        },
+        "display": {
+          "description": "Display information of the operation.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/OperationDisplayValue"
+        }
+      },
+      "description": "Properties of an Operation."
+    },
+    "OperationDisplayValue": {
+      "properties": {
+        "operation": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Friendly name of the operation."
+        },
+        "resource": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Friendly name of the resource type the operation applies to."
+        },
+        "description": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Friendly description of the operation."
+        },
+        "provider": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Friendly name of the resource provider."
+        }
+      },
+      "description": "Display information of an operation."
+    },
+    "OperationStatus": {
+      "description": "The current status of an async operation",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Fully qualified ID for the operation status.",
+          "type": "string",
+          "readOnly": true
+        },
+        "status": {
+          "description": "Provisioning state of the resource.",
+          "enum": [
+            "Succeeded",
+            "Failed",
+            "Canceled",
+            "Creating",
+            "Deleting",
+            "Moving"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "Status",
+            "modelAsString": true
+          }
+        },
+        "startTime": {
+          "description": "The start time of the operation",
+          "type": "string",
+          "readOnly": true,
+          "format": "date-time"
+        },
+        "endTime": {
+          "description": "The end time of the operation",
+          "type": "string",
+          "readOnly": true,
+          "format": "date-time"
+        },
+        "percentComplete": {
+          "description": "Percent of the operation that is complete",
+          "type": "number",
+          "readOnly": true,
+          "minimum": 0,
+          "maximum": 100
+        },
+        "error": {
+          "description": "Operation Error message",
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "DeploymentDetail": {
+      "type": "object",
+      "description": "Workflow deployment detail on an Azure Resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/DeploymentDetailProperties",
+          "description": "Custom properties of the deploymentDetail.",
+          "x-ms-client-flatten": true
+        },
+        "systemData": {
+          "readOnly": true,
+          "description": "The system meta data relating to this resource.",
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/systemData"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "DeploymentDetailProperties": {
+      "type": "object",
+      "description": "Properties of a workflow deployment detail resource",
+      "properties": {
+        "provisioningState": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The provisioning status of the resource"
+        },
+        "targetResource": {
+          "$ref": "#/definitions/TargetResource",
+          "description": "Target resource associated with the deployment"
+        },
+        "workflowRun": {
+          "$ref": "#/definitions/WorkflowRun",
+          "description": "Properties of the Continuous-Delivery workflow run associated with the deployment"
+        },
+        "artifacts": {
+          "$ref": "#/definitions/DeploymentArtifacts",
+          "description": "Artifacts associated with the deployment"
+        }
+      }
+    },
+    "TargetResource": {
+      "type": "object",
+      "discriminator": "type",
+      "description": "Azure resource on which deployment was targeted",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifer for the target Azure resource"
+        },
+        "type": {
+          "type": "string",
+          "description": "Resource type of the target Azure resource",
+          "enum": [
+            "Microsoft.ContainerService/ManagedClusters"
+          ],
+          "x-ms-enum": {
+            "name": "TargetResourceType",
+            "modelAsString": true
+          }
+        }
+      },
+      "required": [
+        "id",
+        "type"
+      ]
+    },
+    "AzureKubernetesServiceTargetResource": {
+      "type": "object",
+      "x-ms-discriminator-value": "Microsoft.ContainerService/ManagedClusters",
+      "description": "Properties of target Azure Kubernetes Service Resource",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TargetResource"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "properties": {
+              "$ref": "#/definitions/KubernetesResourceProperties",
+              "x-ms-client-flatten": true
+            }
+          }
+        }
+      ]
+    },
+    "KubernetesResourceProperties": {
+      "type": "object",
+      "description": "Properties of a Kubernetes resource",
+      "properties": {
+        "namespace": {
+          "type": "string",
+          "description": "Kubernetes namespace"
+        },
+        "kubernetesObjects": {
+          "type": "array",
+          "description": "List of kubernetes objects impacted by the deployment",
+          "items": {
+            "$ref": "#/definitions/KubernetesObject"
+          }
+        }
+      },
+      "required": [
+        "namespace"
+      ]
+    },
+    "KubernetesObject": {
+      "type": "object",
+      "description": "Represents a kubernetes object which was impacted by the deployment",
+      "properties": {
+        "kind": {
+          "type": "string",
+          "description": "Type of the kubernetes object"
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the kubernetes object"
+        },
+        "version": {
+          "type": "string",
+          "description": "Version of the kubernetes object"
+        }
+      },
+      "required": [
+        "kind",
+        "name",
+        "version"
+      ]
+    },
+    "WorkflowRun": {
+      "type": "object",
+      "description": "Workflow run details for the deployment",
+      "discriminator": "provider",
+      "properties": {
+        "provider": {
+          "description": "Continuous-Deployment (CD) providing service",
+          "enum": [
+            "GitHub"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "Provider",
+            "modelAsString": true
+          }
+        }
+      },
+      "required": [
+        "provider"
+      ]
+    },
+    "GitHubWorkflowRun": {
+      "x-ms-discriminator-value": "GitHub",
+      "type": "object",
+      "description": "GitHub workflow run details for the deployment",
+      "allOf": [
+        {
+          "$ref": "#/definitions/WorkflowRun"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "workflow": {
+              "$ref": "#/definitions/Workflow"
+            },
+            "runUri": {
+              "type": "string",
+              "description": "URL for the workflow run"
+            },
+            "createdBy": {
+              "type": "string",
+              "description": "User identity which triggered the workflow run"
+            },
+            "jobName": {
+              "type": "string",
+              "description": "Name of the job associated with the deployment"
+            },
+            "creationTimestamp": {
+              "type": "string",
+              "description": "Timestamp when the workflow run was created"
+            },
+            "modifiedTimestamp": {
+              "type": "string",
+              "description": "Timestamp when the workflow run was lsat modified"
+            },
+            "status": {
+              "type": "string",
+              "description": "Status of the workflow run"
+            },
+            "commit": {
+              "type": "string",
+              "description": "Commit SHA for the workflow run"
+            }
+          }
+        }
+      ]
+    },
+    "Workflow": {
+      "type": "object",
+      "description": "Details of the workflow associated with the deployment run.",
+      "properties": {
+        "repository": {
+          "type": "string",
+          "description": "Source code repository"
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the workflow"
+        },
+        "path": {
+          "type": "string",
+          "description": "Path of the workflow file"
+        },
+        "ref": {
+          "type": "string",
+          "description": "Branch associated with the workflow run"
+        },
+        "bootstrapConfiguration": {
+          "$ref": "#/definitions/BootstrapConfiguration"
+        }
+      },
+      "required": [
+        "repository",
+        "path"
+      ]
+    },
+    "BootstrapConfiguration": {
+      "type": "object",
+      "description": "Property bag to store workflow bootstrap configuration. ",
+      "additionalProperties": {
+        "type": "object"
+      }
+    },
+    "DeploymentArtifacts": {
+      "type": "array",
+      "description": "Artifacts associated with the deployment",
+      "items": {
+        "$ref": "#/definitions/DeploymentArtifact"
+      }
+    },
+    "DeploymentArtifact": {
+      "type": "object",
+      "description": "Artifact associated with the deployment",
+      "discriminator": "type",
+      "properties": {
+        "type": {
+          "description": "Type of the artifact",
+          "enum": [
+            "ContainerArtifact"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "Type",
+            "modelAsString": true
+          }
+        }
+      },
+      "additionalProperties": {
+        "type": "object"
+      },
+      "required": [
+        "type"
+      ]
+    },
+    "ContainerArtifact": {
+      "x-ms-discriminator-value": "ContainerArtifact",
+      "type": "object",
+      "description": "Container artifact object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DeploymentArtifact"
+        }
+      ],
+      "properties": {
+        "image": {
+          "type": "string",
+          "description": "Container image identifier"
+        },
+        "imageDigest": {
+          "type": "string",
+          "description": "Hash of the docker image"
+        },
+        "dockerfileUrl": {
+          "type": "string",
+          "description": "URL for the docker file"
+        },
+        "helmchartUrls": {
+          "type": "array",
+          "description": "List of helm chart urls",
+          "items": {
+            "type": "string"
+          }
+        },
+        "manifestUrls": {
+          "type": "array",
+          "description": "List of kubernetes manifest urls",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "DeploymentDetailsListResult": {
+      "description": "Result of a request to list all the deployment details under a given scope.",
+      "properties": {
+        "value": {
+          "description": "List of deploymentsDetails.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DeploymentDetail"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "readOnly": true,
+          "description": "URL to get the next set of deploymentDetails, if there are any."
+        }
+      }
+    }
+  },
+  "parameters": {
+    "SubscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Unique identifier of the Azure subscription. This is a GUID-formatted string (e.g. 00000000-0000-0000-0000-000000000000)."
+    },
+    "ResourceGroupNameParameter": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Name of the resource group within the Azure subscription.",
+      "x-ms-parameter-location": "method"
+    },
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "API version to be used with the HTTP request."
+    },
+    "LocationParameter": {
+      "name": "location",
+      "in": "path",
+      "description": "The Azure region",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "OperationIdParameter": {
+      "name": "operationId",
+      "in": "path",
+      "description": "The ID of an ongoing async operation",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "DeploymentDetailIdParameter": {
+      "name": "deploymentDetailId",
+      "description": "The unique identifier of workflow deployment detail in ARM.",
+      "in": "path",
+      "type": "string",
+      "required": true,
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

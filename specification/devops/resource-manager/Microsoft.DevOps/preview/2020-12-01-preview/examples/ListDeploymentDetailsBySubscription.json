@@ -1,0 +1,129 @@
+{
+  "parameters": {
+    "subscriptionId": "{subscriptionId}",
+    "api-version": "2020-12-01-preview"
+  },
+  "responses": {
+    "200": {
+      "description": "The workflow deployment details have been fetched successfully.",
+      "body": {
+        "value": [
+          {
+            "name": "b0e3f6e4-2bf8-492b-8715-529314a2148d",
+            "id": "/subscriptions/{subscriptionId}/resourceGroups/contoso-k8sRg/providers/Microsoft.DevOps/deploymentDetails/b0e3f6e4-2bf8-492b-8715-529314a2148d",
+            "type": "Microsoft.DevOps/deploymentDetails",
+            "properties": {
+              "provisioningState": "Succeeded",
+              "targetResource": {
+                "id": "/subscriptions/c00d16c7-6c1f-4c03-9be1-6934a4c49682/resourceGroups/contoso-k8sRg/providers/Microsoft.ContainerService/managedClusters/contoso-k8s-cluster",
+                "type": "Microsoft.ContainerService/ManagedClusters",
+                "properties": {
+                  "namespace": "prod-wcus",
+                  "kubernetesObjects": [
+                    {
+                      "kind": "services",
+                      "name": "contoso-service",
+                      "version": "v1"
+                    },
+                    {
+                      "kind": "deployments",
+                      "name": "contoso-deployment",
+                      "version": "v1"
+                    }
+                  ]
+                }
+              },
+              "workflowRun": {
+                "provider": "GitHub",
+                "workflow": {
+                  "repository": "contoso/contoso-app",
+                  "name": "Prod deployment",
+                  "path": "./github/workflow/cd.yml",
+                  "ref": "refs/heads/release"
+                },
+                "runUri": "https://github.com/contoso/contoso-app/actions/runs/123",
+                "createdBy": "contosoUser",
+                "jobName": "build-and-deploy",
+                "creationTimestamp": "2020-06-04T07:59:40Z",
+                "modifiedTimestamp": "2020-06-04T08:59:40Z",
+                "status": "success",
+                "commit": "870d8ae5d7558661d59c1d805d41fd53e43a9a6c"
+              },
+              "artifacts": [
+                {
+                  "type": "ContainerArtifact",
+                  "image": "contosoacr.azurecr.io/demo:tag1",
+                  "imageDigest": "sha256:5fd924625f6ab16a19cc9807c7c506ae1813490e4ba675f843d5a10e0baacdb8",
+                  "dockerfileUrl": "https://github.com/contoso/contoso-app/blob/bc191dd28f7066e6e35a78d238af4f15de11ecee/Dockerfile",
+                  "helmchartUrls": [
+                    "https://github.com/contoso/contoso-app/blob/bc191dd28f7066e6e35a78d238af4f15de11ecee/helmchart"
+                  ],
+                  "manifestUrls": [
+                    "https://github.com/contoso/contoso-app/blob/bc191dd28f7066e6e35a78d238af4f15de11ecee/manifest"
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "name": "2be00fc5-4517-41b9-bc1e-4d161c4471be",
+            "id": "/subscriptions/{subscriptionId}/resourceGroups/contoso-k8sRg/providers/Microsoft.DevOps/deploymentDetails/2be00fc5-4517-41b9-bc1e-4d161c4471be",
+            "type": "Microsoft.DevOps/deploymentDetails",
+            "properties": {
+              "provisioningState": "Succeeded",
+              "targetResource": {
+                "id": "/subscriptions/c00d16c7-6c1f-4c03-9be1-6934a4c49682/resourceGroups/contoso-k8sRg/providers/Microsoft.ContainerService/managedClusters/contoso-k8s-cluster",
+                "type": "Microsoft.ContainerService/ManagedClusters",
+                "properties": {
+                  "namespace": "prod-wcus",
+                  "kubernetesObjects": [
+                    {
+                      "kind": "services",
+                      "name": "contoso-service",
+                      "version": "v1beta1"
+                    },
+                    {
+                      "kind": "deployments",
+                      "name": "contoso-deployment-2",
+                      "version": "v1beta1"
+                    }
+                  ]
+                }
+              },
+              "workflowRun": {
+                "provider": "GitHub",
+                "workflow": {
+                  "repository": "contoso/contoso-app",
+                  "name": "Prod deployment",
+                  "path": "./github/workflow/cd.yml",
+                  "ref": "refs/heads/release"
+                },
+                "runUri": "https://github.com/contoso/contoso-app/actions/runs/124",
+                "createdBy": "contosoUser",
+                "jobName": "build-and-deploy",
+                "creationTimestamp": "2020-06-05T07:59:40Z",
+                "modifiedTimestamp": "2020-06-05T08:59:40Z",
+                "status": "success",
+                "commit": "54aeb40a6fe85574c0d0e015b2377339a633d649"
+              },
+              "artifacts": [
+                {
+                  "type": "ContainerArtifact",
+                  "image": "contosoacr.azurecr.io/demo:tag1",
+                  "imageDigest": "sha256:5fd924625f6ab16a19cc9807c7c506ae1813490e4ba675f843d5a10e0baacdb8",
+                  "dockerfileUrl": "https://github.com/contoso/contoso-app/blob/bc191dd28f7066e6e35a78d238af4f15de11ecee/Dockerfile",
+                  "helmchartUrls": [
+                    "https://github.com/contoso/contoso-app/blob/bc191dd28f7066e6e35a78d238af4f15de11ecee/helmchart"
+                  ],
+                  "manifestUrls": [
+                    "https://github.com/contoso/contoso-app/blob/bc191dd28f7066e6e35a78d238af4f15de11ecee/manifest"
+                  ]
+                }
+              ]
+            }
+          }
+        ]
+      }
+    }
+  }
+}
