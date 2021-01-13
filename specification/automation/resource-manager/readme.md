@@ -191,7 +191,7 @@ input-file:
 - Microsoft.Automation/stable/2019-06-01/schedule.json
 - Microsoft.Automation/stable/2019-06-01/variable.json
 - Microsoft.Automation/stable/2019-06-01/watcher.json
-- Microsoft.Automation/stable/2018-06-30/webhook.json
+- Microsoft.Automation/stable/2015-10-31/webhook.json
 ```
 
 ### Tag: package-2020-01-13-preview
@@ -222,13 +222,13 @@ input-file:
 - Microsoft.Automation/preview/2020-01-13-preview/schedule.json
 - Microsoft.Automation/preview/2020-01-13-preview/variable.json
 - Microsoft.Automation/preview/2020-01-13-preview/watcher.json
-- Microsoft.Automation/stable/2018-06-30/dscConfiguration.json
-- Microsoft.Automation/stable/2018-06-30/job.json
-- Microsoft.Automation/stable/2018-06-30/operations.json
-- Microsoft.Automation/stable/2018-06-30/runbook.json
-- Microsoft.Automation/stable/2018-06-30/softwareUpdateConfigurationRun.json
-- Microsoft.Automation/stable/2018-06-30/softwareUpdateConfigurationMachineRun.json
-- Microsoft.Automation/stable/2018-06-30/webhook.json
+- Microsoft.Automation/stable/2019-06-01/dscConfiguration.json
+- Microsoft.Automation/stable/2019-06-01/job.json
+- Microsoft.Automation/stable/2019-06-01/operations.json
+- Microsoft.Automation/stable/2019-06-01/runbook.json
+- Microsoft.Automation/stable/2019-06-01/softwareUpdateConfigurationRun.json
+- Microsoft.Automation/stable/2019-06-01/softwareUpdateConfigurationMachineRun.json
+- Microsoft.Automation/stable/2015-10-31/webhook.json
 ```
 
 ---

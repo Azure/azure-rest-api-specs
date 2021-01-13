@@ -82,7 +82,6 @@ input-file:
   - Microsoft.Automation/stable/2019-06-01/variable.json
   - Microsoft.Automation/stable/2019-06-01/watcher.json
   - Microsoft.Automation/stable/2019-06-01/operations.json
-  - Microsoft.Automation/stable/2018-06-30/webhook.json
 
 ```
 
