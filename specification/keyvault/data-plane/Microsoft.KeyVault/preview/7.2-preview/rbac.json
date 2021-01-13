@@ -663,6 +663,14 @@
         "type": {
           "type": "string",
           "description": "The role type.",
+          "enum": [
+            "AKVBuiltInRole",
+            "CustomRole"
+          ],
+          "x-ms-enum": {
+            "name": "RoleType",
+            "modelAsString": true
+          },
           "x-ms-client-name": "roleType"
         },
         "permissions": {
@@ -696,8 +704,15 @@
         },
         "type": {
           "type": "string",
+          "description": "The role definition type.",
           "readOnly": true,
-          "description": "The role definition type."
+          "enum": [
+            "Microsoft.Authorization/roleDefinitions"
+          ],
+          "x-ms-enum": {
+            "name": "RoleDefinitionType",
+            "modelAsString": true
+          }
         },
         "properties": {
           "x-ms-client-flatten": true,
