@@ -775,11 +775,6 @@
               "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
             }
           }
-        },
-        "x-ms-examples": {
-          "Deploy a site from a zipped package to a particular static site build": {
-            "$ref": "./examples/StaticSiteZipDeploy.json"
-          }
         }
       }
     },
@@ -1507,7 +1502,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/RequestMessageEnvelope[StaticSiteCustomDomainRequestProperties]"
+              "$ref": "#/definitions/StaticSiteCustomDomainRequestPropertiesResources"
             }
           },
           {
@@ -1529,11 +1524,6 @@
             "schema": {
               "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Validate a custom domain for a static site": {
-            "$ref": "./examples/ValidateStaticSiteCustomDomain.json"
           }
         }
       }
@@ -2196,7 +2186,7 @@
             "description": "A JSON representation of the StaticSiteZipDeployment properties. See example.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/RequestMessageEnvelope[StaticSiteZipDeployment]"
+              "$ref": "#/definitions/StaticSiteZipDeploymentResources"
             }
           },
           {
@@ -2215,11 +2205,6 @@
             "schema": {
               "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Deploy a site from a zipped package": {
-            "$ref": "./examples/StaticSiteBuildZipDeploy.json"
           }
         }
       }
@@ -2538,6 +2523,28 @@
         }
       }
     },
+    "StaticSiteCustomDomainRequestPropertiesResources": {
+      "description": "Static Site Custom Domain Request resource.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "./CommonDefinitions.json#/definitions/ProxyOnlyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "StaticSiteCustomDomainRequestPropertiesResources resource specific properties",
+          "properties": {
+            "validationMethod": {
+              "description": "Validation method for adding a custom domain",
+              "default": "cname-delegation",
+              "type": "string"
+            }
+          },
+          "x-ms-client-flatten": true
+        }
+      }
+    },
     "StaticSiteFunctionOverviewARMResource": {
       "description": "Static Site Function Overview ARM resource.",
       "type": "object",
@@ -2781,6 +2788,32 @@
             }
           },
           "x-ms-client-flatten": true
+        }
+      }
+    },
+    "StaticSiteZipDeploymentResources": {
+      "description": "Static Site Zip Deployment resource.",
+      "type": "object",
+      "properties": {
+        "appZipUrl": {
+          "description": "URL for the zipped app content",
+          "type": "string"
+        },
+        "apiZipUrl": {
+          "description": "URL for the zipped api content",
+          "type": "string"
+        },
+        "deploymentTitle": {
+          "description": "A title to label the deployment",
+          "type": "string"
+        },
+        "provider": {
+          "description": "The provider submitting this deployment",
+          "type": "string"
+        },
+        "functionLanguage": {
+          "description": "The language of the api content, if it exists",
+          "type": "string"
         }
       }
     },
