@@ -583,6 +583,92 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/rotateVcenterPassword": {
+      "post": {
+        "operationId": "PrivateClouds_RotateVcenterPassword",
+        "tags": [
+          "PrivateClouds"
+        ],
+        "summary": "Rotate the vCenter password",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/privateCloudName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "x-ms-long-running-operation": true,
+        "responses": {
+          "202": {
+            "description": "The password rotation has started"
+          },
+          "204": {
+            "description": "The password rotation was successful"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PrivateClouds_RotateVcenterPassword": {
+            "$ref": "./examples/PrivateClouds_RotateVcenterPassword.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/rotateNsxtPassword": {
+      "post": {
+        "operationId": "PrivateClouds_RotateNsxtPassword",
+        "tags": [
+          "PrivateClouds"
+        ],
+        "summary": "Rotate the NSX-T Manager password",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/privateCloudName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "x-ms-long-running-operation": true,
+        "responses": {
+          "202": {
+            "description": "The password rotation has started"
+          },
+          "204": {
+            "description": "The password rotation was successful"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PrivateClouds_RotateNsxtPassword": {
+            "$ref": "./examples/PrivateClouds_RotateNsxtPassword.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/clusters": {
       "get": {
         "operationId": "Clusters_List",
@@ -3929,28 +4015,6 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/IdentitySource"
-          }
-        },
-        "vcenterPassword": {
-          "description": "Indicate to rotate the vCenter admin password for the private cloud",
-          "type": "string",
-          "enum": [
-            "OnetimeRotate"
-          ],
-          "x-ms-enum": {
-            "name": "VcsaAdminRotateEnum",
-            "modelAsString": true
-          }
-        },
-        "nsxtPassword": {
-          "description": "Indicate to rotate the NSX-T Manager password for the private cloud",
-          "type": "string",
-          "enum": [
-            "OnetimeRotate"
-          ],
-          "x-ms-enum": {
-            "name": "NsxtAdminRotateEnum",
-            "modelAsString": true
           }
         }
       }
