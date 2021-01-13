@@ -10,6 +10,7 @@ license-header: MICROSOFT_MIT_NO_VERSION
 add-credentials: true
 payload-flattening-threshold: 2
 package-name: azure-ai-textanalytics
+package-version: 0.0.1
 clear-output-folder: true
 credential-scopes: https://cognitiveservices.azure.com/.default
 no-namespace-folders: true
