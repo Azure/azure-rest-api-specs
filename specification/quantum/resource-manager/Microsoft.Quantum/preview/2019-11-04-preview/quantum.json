@@ -130,6 +130,52 @@
           "final-state-via": "azure-async-operation"
         }
       },
+      "patch": {
+        "description": "Updates an existing workspace's tags.",
+        "operationId": "Workspaces_UpdateTags",
+        "x-ms-examples": {
+          "QuantumWorkspacesPatchTags": {
+            "$ref": "./examples/quantumWorkspacesPatch.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "name": "workspaceTags",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TagsObject"
+            },
+            "description": "Parameters supplied to update tags."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful.",
+            "schema": {
+              "$ref": "#/definitions/QuantumWorkspace"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
       "delete": {
         "description": "Deletes a Workspace resource.",
         "operationId": "Workspaces_Delete",
@@ -354,33 +400,10 @@
       "type": "object",
       "description": "The resource proxy definition object for quantum workspace.",
       "properties": {
-        "id": {
-          "type": "string",
-          "description": "The unique id for this workspace.",
-          "readOnly": true
-        },
-        "name": {
-          "type": "string",
-          "description": "The name of this workspace.",
-          "readOnly": true
-        },
-        "type": {
-          "type": "string",
-          "description": "The type of this workspace.",
-          "readOnly": true
-        },
-        "location": {
-          "type": "string",
-          "description": "The location (region) of this workspace."
-        },
         "properties": {
           "x-ms-client-flatten": true,
           "description": "Gets or sets the properties. Define quantum space's specific properties.",
           "$ref": "#/definitions/WorkspaceResourceProperties"
-        },
-        "tags": {
-          "type": "object",
-          "description": "The tags associated with this workspace."
         },
         "identity": {
           "type": "object",
@@ -411,7 +434,23 @@
           }
         }
       },
-      "x-ms-azure-resource": true
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "TagsObject": {
+      "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags."
+        }
+      },
+      "description": "Tags object for patch operations."
     },
     "WorkspaceResourceProperties": {
       "description": "Properties of a Workspace",
