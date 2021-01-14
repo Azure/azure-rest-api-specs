@@ -246,6 +246,103 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IntelligentITDigitalTwin/digitalTwins/{iidtName}/getSasToken": {
+      "post": {
+        "tags": [
+          "ITDigitalTwins"
+        ],
+        "operationId": "ITDigitalTwins_GetSASToken",
+        "description": "The operation to return sSAS token for accessing backend database. The token will be expired is a short amount of time.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "iidtName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the it digital twin."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/StorageConnection"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a SAS token for uploading test.": {
+            "$ref": "./examples/GetSasToken.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IntelligentITDigitalTwin/digitalTwins/{iidtName}/testUploadCompleted": {
+      "post": {
+        "tags": [
+          "ITDigitalTwins"
+        ],
+        "operationId": "ITDigitalTwins_TestUploadCompleted",
+        "description": "This post action uploadFileCompleted send signal to the backend services that the upload is finished.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "iidtName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the it digital twin."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Test upload completed."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Test upload finished.": {
+            "$ref": "./examples/TestUploadCompleted.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IntelligentITDigitalTwin/digitalTwins": {
       "get": {
         "tags": [
@@ -1878,6 +1975,22 @@
       },
       "description": "IT Digital Twins definition for patch operation"
     },
+    "StorageConnection": {
+      "properties": {
+        "url": {
+          "description": "The url for the backend storage account.",
+          "type": "string",
+          "x-nullable": true
+        },
+        "sasToken": {
+          "x-ms-secret": true,
+          "description": "Short lived sas token for users to upload their test files to the backend database.",
+          "type": "string",
+          "x-nullable": true
+        }
+      },
+      "description": "Describes storage account for idt."
+    },
     "AssetProperties": {
       "properties": {
         "assetId": {
@@ -1923,6 +2036,18 @@
           "description": "List the properties of IT Digital Twin Asset",
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/AssetProperties"
+        },
+        "kind": {
+          "description": "The kind of assets.",
+          "enum": [
+            "Enterprise",
+            "Testing"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "kind",
+            "modelAsString": true
+          }
         },
         "systemData": {
           "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
