@@ -7283,12 +7283,13 @@
           }
         },
         "kind": {
-          "description": "Indicates the kind of algorithm used for partitioning",
+          "description": "Indicates the kind of algorithm used for partitioning. For MultiHash, multiple partition keys (upto three maximum) are supported for container create",
           "type": "string",
           "default": "Hash",
           "enum": [
             "Hash",
-            "Range"
+            "Range",
+            "MultiHash"
           ],
           "x-ms-enum": {
             "name": "PartitionKind",
@@ -7301,6 +7302,11 @@
           "minimum": 1,
           "maximum": 2,
           "format": "int32"
+        },
+        "systemKey": {
+          "description": "Indicates if the container is using a system generated partition key",
+          "type": "boolean",
+          "readOnly": true
         }
       }
     },
