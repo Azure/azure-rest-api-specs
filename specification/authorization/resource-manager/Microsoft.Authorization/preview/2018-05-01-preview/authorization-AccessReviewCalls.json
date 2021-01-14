@@ -227,6 +227,9 @@
               "$ref": "#/definitions/AccessReviewScheduleDefinition"
             }
           },
+          "201": {
+            "description": "Created - Indicates succesful review schedule"
+          },
           "default": {
             "description": "Unexpected error",
             "schema": {
@@ -1097,6 +1100,16 @@
           "$ref": "#/definitions/AccessReviewActorIdentity",
           "description": "The user or other identity who created this review."
         },
+        "createdDateTime": {
+          "type": "string",
+          "description": "Time it was created",
+          "format": "date-time"
+        },
+        "lastModifiedDateTime": {
+          "type": "string",
+          "description": "Time it was last modified",
+          "format": "date-time"
+        },
         "settings": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/AccessReviewScheduleSettings",
@@ -1109,6 +1122,13 @@
           "description": "This is used to define what to include in scope of the review. The scope definition includes the resourceId and roleDefinitionId."
         },
         "reviewers": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AccessReviewReviewer"
+          },
+          "description": "This is the collection of reviewers."
+        },
+        "backupReviewers": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/AccessReviewReviewer"
