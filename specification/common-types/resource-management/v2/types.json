@@ -7,6 +7,7 @@
   "paths": {},
   "definitions": {
     "Resource": {
+      "title": "Resource",
       "description": "Common fields that are returned in the response for all Azure Resource Manager resources",
       "properties": {
         "id": {
@@ -29,6 +30,7 @@
     },
     "AzureEntityResource": {
       "x-ms-client-name": "AzureEntityResource",
+      "title": "Entity Resource",
       "description": "The resource model definition for an Azure Resource Manager resource with an etag.",
       "properties": {
         "etag": {
@@ -44,7 +46,8 @@
       ]
     },
     "TrackedResource": {
-      "description": "The resource model definition for an Azure Resource Manager tracked top level resource",
+      "title": "Tracked Resource",
+      "description": "The resource model definition for an Azure Resource Manager tracked top level resource which has 'tags' and a 'location'",
       "properties": {
         "tags": {
           "type": "object",
@@ -77,7 +80,8 @@
       ]
     },
     "ProxyResource": {
-      "description": "The resource model definition for an Azure Resource Manager proxy resource. It will have everything other than required location and tags",
+      "title": "Proxy Resource",
+      "description": "The resource model definition for a Azure Resource Manager proxy resource. It will not have tags and a location",
       "allOf": [
         {
           "$ref": "#/definitions/Resource"
@@ -207,7 +211,7 @@
         "capacity": {
           "type": "integer",
           "format": "int32",
-          "description": "If the SKU supports scale out/in then the capacity integer indicates the current scaling-factor of the resource. If scale out/in is not possible for the resource this may be omitted."
+          "description": "If the SKU supports scale out/in then the capacity integer should be included. If scale out/in is not possible for the resource this may be omitted."
         }
       },
       "required": [
@@ -332,6 +336,7 @@
       "description": "The resource management error additional info."
     },
     "Operation": {
+      "title": "REST API Operation",
       "description": "Details of a REST API operation, returned from the Resource Provider Operations API",
       "type": "object",
       "properties": {
