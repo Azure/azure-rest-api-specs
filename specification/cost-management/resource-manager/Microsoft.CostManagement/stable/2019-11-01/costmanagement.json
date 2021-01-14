@@ -60,6 +60,9 @@
               "$ref": "#/definitions/ViewListResult"
             }
           },
+          "204": {
+            "description": "An empty response is sent when there is no information available within the selected scope."
+          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
@@ -101,6 +104,9 @@
             "schema": {
               "$ref": "#/definitions/ViewListResult"
             }
+          },
+          "204": {
+            "description": "An empty response is sent when there is no information available within the selected scope."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -848,6 +854,9 @@
               "$ref": "#/definitions/DimensionsListResult"
             }
           },
+          "204": {
+            "description": "An empty response is sent when there is no information available within the selected scope."
+          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
@@ -1034,6 +1043,9 @@
             "schema": {
               "$ref": "#/definitions/QueryResult"
             }
+          },
+          "204": {
+            "description": "An empty response is sent when there is no information available within the selected scope."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -1292,9 +1304,14 @@
           "description": "Has time period for pulling data for the report.",
           "$ref": "#/definitions/ReportConfigTimePeriod"
         },
-        "dataset": {
+        "dataSet": {
           "description": "Has definition for data in this report config.",
           "$ref": "#/definitions/ReportConfigDataset"
+        },
+        "includeMonetaryCommitment": {
+          "description": "Include monetary commitment",
+          "type": "boolean",
+          "readOnly": true
         }
       },
       "required": [
@@ -1463,15 +1480,11 @@
           },
           "minItems": 2
         },
-        "not": {
-          "description": "The logical \"NOT\" expression.",
-          "$ref": "#/definitions/ReportConfigFilter"
-        },
-        "dimension": {
+        "dimensions": {
           "description": "Has comparison expression for a dimension",
           "$ref": "#/definitions/ReportConfigComparisonExpression"
         },
-        "tag": {
+        "tags": {
           "description": "Has comparison expression for a tag",
           "$ref": "#/definitions/ReportConfigComparisonExpression"
         }
@@ -2152,6 +2165,20 @@
         }
       ],
       "properties": {
+        "eTag": {
+          "type": "string",
+          "description": "eTag of the resource. To handle concurrent update scenario, this field will be used to determine whether the user is updating the latest version or not."
+        },
+        "location": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource location"
+        },
+        "sku": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource SKU"
+        },
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/QueryProperties",
@@ -2525,15 +2552,11 @@
           },
           "minItems": 2
         },
-        "not": {
-          "description": "The logical \"NOT\" expression.",
-          "$ref": "#/definitions/QueryFilter"
-        },
-        "dimension": {
+        "dimensions": {
           "description": "Has comparison expression for a dimension",
           "$ref": "#/definitions/QueryComparisonExpression"
         },
-        "tag": {
+        "tags": {
           "description": "Has comparison expression for a tag",
           "$ref": "#/definitions/QueryComparisonExpression"
         }
