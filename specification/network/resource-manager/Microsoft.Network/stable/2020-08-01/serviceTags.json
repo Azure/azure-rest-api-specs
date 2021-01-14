@@ -47,6 +47,20 @@
             "description": "The location that will be used as a reference for version (not as a filter based on location, you will get the list of service tags with prefix details across all regions but limited to the cloud that your subscription belongs to)."
           },
           {
+            "name": "noaddressprefixes",
+            "in": "query",
+            "required": false,
+            "type": "bool",
+            "description": "Set to true if addressPrefixes are not required in the response."
+          },
+          {
+            "name": "tagname",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "Specify single tagname such that response contains data for this tag only."
+          },
+          {
             "$ref": "./network.json#/parameters/ApiVersionParameter"
           },
           {
