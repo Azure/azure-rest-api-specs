@@ -2457,13 +2457,23 @@
         "id": {
           "type": "string",
           "description": "The id of the gallery artifact version source. Can specify a disk uri, snapshot uri, user image or storage account resource."
-        },
+        }
+      },
+      "description": "The gallery artifact version source."
+    },
+    "GalleryDiskImageSource": {
+      "properties": {
         "uri": {
           "type": "string",
           "description": "The uri of the gallery artifact version source. Currently used to specify vhd/blob source."
         }
       },
-      "description": "The gallery artifact version source."
+      "allOf": [
+        {
+          "$ref": "#/definitions/GalleryArtifactVersionSource"
+        }
+      ],
+      "description": "The gallery disk image source."
     },
     "GalleryOSDiskImage": {
       "allOf": [
@@ -2513,7 +2523,7 @@
           }
         },
         "source": {
-          "$ref": "#/definitions/GalleryArtifactVersionSource"
+          "$ref": "#/definitions/GalleryDiskImageSource"
         }
       },
       "description": "This is the disk image base class."
