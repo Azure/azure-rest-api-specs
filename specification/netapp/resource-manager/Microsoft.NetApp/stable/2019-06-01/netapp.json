@@ -1809,6 +1809,11 @@
           "minLength": 36,
           "example": "9760acf5-4638-11e7-9bdb-020073ca7778"
         },
+        "name": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Resource name"
+        },
         "creationToken": {
           "title": "Creation Token or File Path",
           "type": "string",
@@ -1878,6 +1883,9 @@
           "items": {
             "type": "string"
           },
+          "default": [
+            "NFSv3"
+          ],
           "example": [
             "NFSv3",
             "NFSv4"
@@ -1914,6 +1922,7 @@
         "mountTargets": {
           "title": "mountTargets",
           "type": "array",
+          "readOnly": true,
           "description": "List of mount targets",
           "items": {
             "$ref": "#/definitions/mountTargetProperties"
