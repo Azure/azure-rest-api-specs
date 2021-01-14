@@ -557,387 +557,24 @@
         },
         "notActions": {
           "type": "array",
+          "description": "Not actions.",
           "items": {
             "type": "string",
-            "description": "Denied actions."
+            "description": "Not actions."
           }
         },
         "dataActions": {
           "type": "array",
+          "description": "Allowed data actions.",
           "items": {
-            "type": "string",
-            "description": "Allowed Data actions.",
-            "enum": [
-              "Microsoft.KeyVault/managedHsm/keys/read/action",
-              "Microsoft.KeyVault/managedHsm/keys/write/action",
-              "Microsoft.KeyVault/managedHsm/keys/deletedKeys/read/action",
-              "Microsoft.KeyVault/managedHsm/keys/deletedKeys/recover/action",
-              "Microsoft.KeyVault/managedHsm/keys/backup/action",
-              "Microsoft.KeyVault/managedHsm/keys/restore/action",
-              "Microsoft.KeyVault/managedHsm/roleAssignments/delete/action",
-              "Microsoft.KeyVault/managedHsm/roleAssignments/read/action",
-              "Microsoft.KeyVault/managedHsm/roleAssignments/write/action",
-              "Microsoft.KeyVault/managedHsm/roleDefinitions/read/action",
-              "Microsoft.KeyVault/managedHsm/keys/encrypt/action",
-              "Microsoft.KeyVault/managedHsm/keys/decrypt/action",
-              "Microsoft.KeyVault/managedHsm/keys/wrap/action",
-              "Microsoft.KeyVault/managedHsm/keys/unwrap/action",
-              "Microsoft.KeyVault/managedHsm/keys/sign/action",
-              "Microsoft.KeyVault/managedHsm/keys/verify/action",
-              "Microsoft.KeyVault/managedHsm/keys/create",
-              "Microsoft.KeyVault/managedHsm/keys/delete",
-              "Microsoft.KeyVault/managedHsm/keys/export/action",
-              "Microsoft.KeyVault/managedHsm/keys/import/action",
-              "Microsoft.KeyVault/managedHsm/keys/deletedKeys/delete",
-              "Microsoft.KeyVault/managedHsm/securitydomain/download/action",
-              "Microsoft.KeyVault/managedHsm/securitydomain/upload/action",
-              "Microsoft.KeyVault/managedHsm/securitydomain/upload/read",
-              "Microsoft.KeyVault/managedHsm/securitydomain/transferkey/read",
-              "Microsoft.KeyVault/managedHsm/backup/start/action",
-              "Microsoft.KeyVault/managedHsm/restore/start/action",
-              "Microsoft.KeyVault/managedHsm/backup/status/action",
-              "Microsoft.KeyVault/managedHsm/restore/status/action"
-            ],
-            "x-ms-enum": {
-              "name": "AllowedDataActions",
-              "modelAsString": true,
-              "values": [
-                {
-                  "name": "ReadHsmKey",
-                  "value": "Microsoft.KeyVault/managedHsm/keys/read/action",
-                  "description": "Read HSM key."
-                },
-                {
-                  "name": "WriteHsmKey",
-                  "value": "Microsoft.KeyVault/managedHsm/keys/write/action",
-                  "description": "Create or update HSM key."
-                },
-                {
-                  "name": "ReadDeletedHsmKey",
-                  "value": "Microsoft.KeyVault/managedHsm/keys/deletedKeys/read/action",
-                  "description": "Read deleted HSM key."
-                },
-                {
-                  "name": "RecoverDeletedHsmKey",
-                  "value": "Microsoft.KeyVault/managedHsm/keys/deletedKeys/recover/action",
-                  "description": "Recover deleted HSM key."
-                },
-                {
-                  "name": "BackupHsmKeys",
-                  "value": "Microsoft.KeyVault/managedHsm/keys/backup/action",
-                  "description": "Backup HSM keys."
-                },
-                {
-                  "name": "RestoreHsmKey",
-                  "value": "Microsoft.KeyVault/managedHsm/keys/restore/action",
-                  "description": "Restore HSM keys."
-                },
-                {
-                  "name": "DeleteRoleAssignment",
-                  "value": "Microsoft.KeyVault/managedHsm/roleAssignments/delete/action",
-                  "description": "Delete role assignment."
-                },
-                {
-                  "name": "GetRoleRoleAssignment",
-                  "value": "Microsoft.KeyVault/managedHsm/roleAssignments/read/action",
-                  "description": "Get role assignment."
-                },
-                {
-                  "name": "WriteRoleAssignment",
-                  "value": "Microsoft.KeyVault/managedHsm/roleAssignments/write/action",
-                  "description": "Create or update role assignment."
-                },
-                {
-                  "name": "ReadRoleDefinition",
-                  "value": "Microsoft.KeyVault/managedHsm/roleDefinitions/read/action",
-                  "description": "Get role definition."
-                },
-                {
-                  "name": "EncryptHsmKeys",
-                  "value": "Microsoft.KeyVault/managedHsm/keys/encrypt/action",
-                  "description": "Encrypt HSM keys."
-                },
-                {
-                  "name": "DecryptHsmKeys",
-                  "value": "Microsoft.KeyVault/managedHsm/keys/decrypt/action",
-                  "description": "Decrypt HSM keys."
-                },
-                {
-                  "name": "WrapHsmKeys",
-                  "value": "Microsoft.KeyVault/managedHsm/keys/wrap/action",
-                  "description": "Wrap HSM keys."
-                },
-                {
-                  "name": "UnwrapHsmKeys",
-                  "value": "Microsoft.KeyVault/managedHsm/keys/unwrap/action",
-                  "description": "Unwrap HSM keys."
-                },
-                {
-                  "name": "SignHsmKeys",
-                  "value": "Microsoft.KeyVault/managedHsm/keys/sign/action",
-                  "description": "Sign HSM keys."
-                },
-                {
-                  "name": "VerifyHsmKeys",
-                  "value": "Microsoft.KeyVault/managedHsm/keys/verify/action",
-                  "description": "Verify HSM keys."
-                },
-                {
-                  "name": "CreateHsmKey",
-                  "value": "Microsoft.KeyVault/managedHsm/keys/create",
-                  "description": "Create HSM key."
-                },
-                {
-                  "name": "DeleteHsmKey",
-                  "value": "Microsoft.KeyVault/managedHsm/keys/delete",
-                  "description": "Delete HSM key."
-                },
-                {
-                  "name": "ExportHsmKey",
-                  "value": "Microsoft.KeyVault/managedHsm/keys/export/action",
-                  "description": "Export HSM key."
-                },
-                {
-                  "name": "ImportHsmKey",
-                  "value": "Microsoft.KeyVault/managedHsm/keys/import/action",
-                  "description": "Import HSM key."
-                },
-                {
-                  "name": "PurgeDeletedHsmKey",
-                  "value": "Microsoft.KeyVault/managedHsm/keys/deletedKeys/delete",
-                  "description": "Purge deleted HSM key."
-                },
-                {
-                  "name": "DownloadHsmSecurityDomain",
-                  "value": "Microsoft.KeyVault/managedHsm/securitydomain/download/action",
-                  "description": "Download HSM security domain."
-                },
-                {
-                  "name": "UploadHsmSecurityDomain",
-                  "value": "Microsoft.KeyVault/managedHsm/securitydomain/upload/action",
-                  "description": "Upload HSM security domain."
-                },
-                {
-                  "name": "ReadHsmSecurityDomainStatus",
-                  "value": "Microsoft.KeyVault/managedHsm/securitydomain/upload/read",
-                  "description": "Check the status of the HSM security domain exchange file."
-                },
-                {
-                  "name": "ReadHsmSecurityDomainTransferKey",
-                  "value": "Microsoft.KeyVault/managedHsm/securitydomain/transferkey/read",
-                  "description": "Download HSM security domain transfer key."
-                },
-                {
-                  "name": "StartHsmBackup",
-                  "value": "Microsoft.KeyVault/managedHsm/backup/start/action",
-                  "description": "Start HSM backup."
-                },
-                {
-                  "name": "StartHsmRestore",
-                  "value": "Microsoft.KeyVault/managedHsm/restore/start/action",
-                  "description": "Start HSM restore."
-                },
-                {
-                  "name": "ReadHsmBackupStatus",
-                  "value": "Microsoft.KeyVault/managedHsm/backup/status/action",
-                  "description": "Read HSM backup status."
-                },
-                {
-                  "name": "ReadHsmRestoreStatus",
-                  "value": "Microsoft.KeyVault/managedHsm/restore/status/action",
-                  "description": "Read HSM restore status."
-                }
-              ]
-            }
+            "$ref": "#/definitions/DataActionPermissions"
           }
         },
         "notDataActions": {
           "type": "array",
+          "description": "Not data actions.",
           "items": {
-            "type": "string",
-            "description": "Denied Data actions.",
-            "enum": [
-              "Microsoft.KeyVault/managedHsm/keys/read/action",
-              "Microsoft.KeyVault/managedHsm/keys/write/action",
-              "Microsoft.KeyVault/managedHsm/keys/deletedKeys/read/action",
-              "Microsoft.KeyVault/managedHsm/keys/deletedKeys/recover/action",
-              "Microsoft.KeyVault/managedHsm/keys/backup/action",
-              "Microsoft.KeyVault/managedHsm/keys/restore/action",
-              "Microsoft.KeyVault/managedHsm/roleAssignments/delete/action",
-              "Microsoft.KeyVault/managedHsm/roleAssignments/read/action",
-              "Microsoft.KeyVault/managedHsm/roleAssignments/write/action",
-              "Microsoft.KeyVault/managedHsm/roleDefinitions/read/action",
-              "Microsoft.KeyVault/managedHsm/keys/encrypt/action",
-              "Microsoft.KeyVault/managedHsm/keys/decrypt/action",
-              "Microsoft.KeyVault/managedHsm/keys/wrap/action",
-              "Microsoft.KeyVault/managedHsm/keys/unwrap/action",
-              "Microsoft.KeyVault/managedHsm/keys/sign/action",
-              "Microsoft.KeyVault/managedHsm/keys/verify/action",
-              "Microsoft.KeyVault/managedHsm/keys/create",
-              "Microsoft.KeyVault/managedHsm/keys/delete",
-              "Microsoft.KeyVault/managedHsm/keys/export/action",
-              "Microsoft.KeyVault/managedHsm/keys/import/action",
-              "Microsoft.KeyVault/managedHsm/keys/deletedKeys/delete",
-              "Microsoft.KeyVault/managedHsm/securitydomain/download/action",
-              "Microsoft.KeyVault/managedHsm/securitydomain/upload/action",
-              "Microsoft.KeyVault/managedHsm/securitydomain/upload/read",
-              "Microsoft.KeyVault/managedHsm/securitydomain/transferkey/read",
-              "Microsoft.KeyVault/managedHsm/backup/start/action",
-              "Microsoft.KeyVault/managedHsm/restore/start/action",
-              "Microsoft.KeyVault/managedHsm/backup/status/action",
-              "Microsoft.KeyVault/managedHsm/restore/status/action"
-            ],
-            "x-ms-enum": {
-              "name": "DeniedDataActions",
-              "modelAsString": true,
-              "values": [
-                {
-                  "name": "ReadHsmKey",
-                  "value": "Microsoft.KeyVault/managedHsm/keys/read/action",
-                  "description": "Read HSM key."
-                },
-                {
-                  "name": "WriteHsmKey",
-                  "value": "Microsoft.KeyVault/managedHsm/keys/write/action",
-                  "description": "Create or update HSM key."
-                },
-                {
-                  "name": "ReadDeleteHsmKey",
-                  "value": "Microsoft.KeyVault/managedHsm/keys/deletedKeys/read/action",
-                  "description": "Read deleted HSM key."
-                },
-                {
-                  "name": "RecoverDeletedHsmKey",
-                  "value": "Microsoft.KeyVault/managedHsm/keys/deletedKeys/recover/action",
-                  "description": "Recover deleted HSM key."
-                },
-                {
-                  "name": "BackupHsmKeys",
-                  "value": "Microsoft.KeyVault/managedHsm/keys/backup/action",
-                  "description": "Backup HSM keys."
-                },
-                {
-                  "name": "RestoreHsmKey",
-                  "value": "Microsoft.KeyVault/managedHsm/keys/restore/action",
-                  "description": "Restore HSM keys."
-                },
-                {
-                  "name": "DeleteRoleAssignment",
-                  "value": "Microsoft.KeyVault/managedHsm/roleAssignments/delete/action",
-                  "description": "Delete role assignment."
-                },
-                {
-                  "name": "GetRoleRoleAssignment",
-                  "value": "Microsoft.KeyVault/managedHsm/roleAssignments/read/action",
-                  "description": "Get role assignment."
-                },
-                {
-                  "name": "WriteRoleAssignment",
-                  "value": "Microsoft.KeyVault/managedHsm/roleAssignments/write/action",
-                  "description": "Create or update role assignment."
-                },
-                {
-                  "name": "ReadRoleDefinition",
-                  "value": "Microsoft.KeyVault/managedHsm/roleDefinitions/read/action",
-                  "description": "Get role definition."
-                },
-                {
-                  "name": "EncryptHsmKeys",
-                  "value": "Microsoft.KeyVault/managedHsm/keys/encrypt/action",
-                  "description": "Encrypt HSM keys."
-                },
-                {
-                  "name": "DecryptHsmKeys",
-                  "value": "Microsoft.KeyVault/managedHsm/keys/decrypt/action",
-                  "description": "Decrypt HSM keys."
-                },
-                {
-                  "name": "WrapHsmKeys",
-                  "value": "Microsoft.KeyVault/managedHsm/keys/wrap/action",
-                  "description": "Wrap HSM keys."
-                },
-                {
-                  "name": "UnwrapHsmKeys",
-                  "value": "Microsoft.KeyVault/managedHsm/keys/unwrap/action",
-                  "description": "Unwrap HSM keys."
-                },
-                {
-                  "name": "SignHsmKeys",
-                  "value": "Microsoft.KeyVault/managedHsm/keys/sign/action",
-                  "description": "Sign HSM keys."
-                },
-                {
-                  "name": "VerifyHsmKeys",
-                  "value": "Microsoft.KeyVault/managedHsm/keys/verify/action",
-                  "description": "Verify HSM keys."
-                },
-                {
-                  "name": "CreateHsmKey",
-                  "value": "Microsoft.KeyVault/managedHsm/keys/create",
-                  "description": "Create HSM key."
-                },
-                {
-                  "name": "DeleteHsmKey",
-                  "value": "Microsoft.KeyVault/managedHsm/keys/delete",
-                  "description": "Delete HSM key."
-                },
-                {
-                  "name": "ExportHsmKey",
-                  "value": "Microsoft.KeyVault/managedHsm/keys/export/action",
-                  "description": "Export HSM key."
-                },
-                {
-                  "name": "ImportHsmKey",
-                  "value": "Microsoft.KeyVault/managedHsm/keys/import/action",
-                  "description": "Import HSM key."
-                },
-                {
-                  "name": "PurgeDeletedHsmKey",
-                  "value": "Microsoft.KeyVault/managedHsm/keys/deletedKeys/delete",
-                  "description": "Purge deleted HSM key."
-                },
-                {
-                  "name": "DownloadHsmSecurityDomain",
-                  "value": "Microsoft.KeyVault/managedHsm/securitydomain/download/action",
-                  "description": "Download HSM security domain."
-                },
-                {
-                  "name": "UploadHsmSecurityDomain",
-                  "value": "Microsoft.KeyVault/managedHsm/securitydomain/upload/action",
-                  "description": "Upload HSM security domain."
-                },
-                {
-                  "name": "ReadHsmSecurityDomainStatus",
-                  "value": "Microsoft.KeyVault/managedHsm/securitydomain/upload/read",
-                  "description": "Check the status of the HSM security domain exchange file."
-                },
-                {
-                  "name": "ReadHsmSecurityDomainTransferKey",
-                  "value": "Microsoft.KeyVault/managedHsm/securitydomain/transferkey/read",
-                  "description": "Download HSM security domain transfer key."
-                },
-                {
-                  "name": "StartHsmBackup",
-                  "value": "Microsoft.KeyVault/managedHsm/backup/start/action",
-                  "description": "Start HSM backup."
-                },
-                {
-                  "name": "StartHsmRestore",
-                  "value": "Microsoft.KeyVault/managedHsm/restore/start/action",
-                  "description": "Start HSM restore."
-                },
-                {
-                  "name": "ReadHsmBackupStatus",
-                  "value": "Microsoft.KeyVault/managedHsm/backup/status/action",
-                  "description": "Read HSM backup status."
-                },
-                {
-                  "name": "ReadHsmRestoreStatus",
-                  "value": "Microsoft.KeyVault/managedHsm/restore/status/action",
-                  "description": "Read HSM restore status."
-                }
-              ]
-            }
+            "$ref": "#/definitions/DataActionPermissions"
           }
         }
       },
@@ -1062,6 +699,192 @@
             "name": "Keys",
             "value": "/keys",
             "description": "Keys scope"
+          }
+        ]
+      }
+    },
+    "DataActionPermissions": {
+      "type": "string",
+      "description": "Allowed Data actions.",
+      "enum": [
+        "Microsoft.KeyVault/managedHsm/keys/read/action",
+        "Microsoft.KeyVault/managedHsm/keys/write/action",
+        "Microsoft.KeyVault/managedHsm/keys/deletedKeys/read/action",
+        "Microsoft.KeyVault/managedHsm/keys/deletedKeys/recover/action",
+        "Microsoft.KeyVault/managedHsm/keys/backup/action",
+        "Microsoft.KeyVault/managedHsm/keys/restore/action",
+        "Microsoft.KeyVault/managedHsm/roleAssignments/delete/action",
+        "Microsoft.KeyVault/managedHsm/roleAssignments/read/action",
+        "Microsoft.KeyVault/managedHsm/roleAssignments/write/action",
+        "Microsoft.KeyVault/managedHsm/roleDefinitions/read/action",
+        "Microsoft.KeyVault/managedHsm/keys/encrypt/action",
+        "Microsoft.KeyVault/managedHsm/keys/decrypt/action",
+        "Microsoft.KeyVault/managedHsm/keys/wrap/action",
+        "Microsoft.KeyVault/managedHsm/keys/unwrap/action",
+        "Microsoft.KeyVault/managedHsm/keys/sign/action",
+        "Microsoft.KeyVault/managedHsm/keys/verify/action",
+        "Microsoft.KeyVault/managedHsm/keys/create",
+        "Microsoft.KeyVault/managedHsm/keys/delete",
+        "Microsoft.KeyVault/managedHsm/keys/export/action",
+        "Microsoft.KeyVault/managedHsm/keys/import/action",
+        "Microsoft.KeyVault/managedHsm/keys/deletedKeys/delete",
+        "Microsoft.KeyVault/managedHsm/securitydomain/download/action",
+        "Microsoft.KeyVault/managedHsm/securitydomain/upload/action",
+        "Microsoft.KeyVault/managedHsm/securitydomain/upload/read",
+        "Microsoft.KeyVault/managedHsm/securitydomain/transferkey/read",
+        "Microsoft.KeyVault/managedHsm/backup/start/action",
+        "Microsoft.KeyVault/managedHsm/restore/start/action",
+        "Microsoft.KeyVault/managedHsm/backup/status/action",
+        "Microsoft.KeyVault/managedHsm/restore/status/action"
+      ],
+      "x-ms-enum": {
+        "name": "DataActions",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "ReadHsmKey",
+            "value": "Microsoft.KeyVault/managedHsm/keys/read/action",
+            "description": "Read HSM key metadata."
+          },
+          {
+            "name": "WriteHsmKey",
+            "value": "Microsoft.KeyVault/managedHsm/keys/write/action",
+            "description": "Update an HSM key."
+          },
+          {
+            "name": "ReadDeletedHsmKey",
+            "value": "Microsoft.KeyVault/managedHsm/keys/deletedKeys/read/action",
+            "description": "Read deleted HSM key."
+          },
+          {
+            "name": "RecoverDeletedHsmKey",
+            "value": "Microsoft.KeyVault/managedHsm/keys/deletedKeys/recover/action",
+            "description": "Recover deleted HSM key."
+          },
+          {
+            "name": "BackupHsmKeys",
+            "value": "Microsoft.KeyVault/managedHsm/keys/backup/action",
+            "description": "Backup HSM keys."
+          },
+          {
+            "name": "RestoreHsmKey",
+            "value": "Microsoft.KeyVault/managedHsm/keys/restore/action",
+            "description": "Restore HSM keys."
+          },
+          {
+            "name": "DeleteRoleAssignment",
+            "value": "Microsoft.KeyVault/managedHsm/roleAssignments/delete/action",
+            "description": "Delete role assignment."
+          },
+          {
+            "name": "GetRoleAssignment",
+            "value": "Microsoft.KeyVault/managedHsm/roleAssignments/read/action",
+            "description": "Get role assignment."
+          },
+          {
+            "name": "WriteRoleAssignment",
+            "value": "Microsoft.KeyVault/managedHsm/roleAssignments/write/action",
+            "description": "Create or update role assignment."
+          },
+          {
+            "name": "ReadRoleDefinition",
+            "value": "Microsoft.KeyVault/managedHsm/roleDefinitions/read/action",
+            "description": "Get role definition."
+          },
+          {
+            "name": "KeyEncrypt",
+            "value": "Microsoft.KeyVault/managedHsm/keys/encrypt/action",
+            "description": "Encrypt using an HSM key."
+          },
+          {
+            "name": "KeyDecrypt",
+            "value": "Microsoft.KeyVault/managedHsm/keys/decrypt/action",
+            "description": "Decrypt using an HSM key."
+          },
+          {
+            "name": "KeyWrap",
+            "value": "Microsoft.KeyVault/managedHsm/keys/wrap/action",
+            "description": "Wrap using an HSM key."
+          },
+          {
+            "name": "KeyUnwrap",
+            "value": "Microsoft.KeyVault/managedHsm/keys/unwrap/action",
+            "description": "Unwrap using an HSM key."
+          },
+          {
+            "name": "KeySign",
+            "value": "Microsoft.KeyVault/managedHsm/keys/sign/action",
+            "description": "Sign using an HSM key."
+          },
+          {
+            "name": "KeyVerify",
+            "value": "Microsoft.KeyVault/managedHsm/keys/verify/action",
+            "description": "Verify using an HSM key."
+          },
+          {
+            "name": "KeyCreate",
+            "value": "Microsoft.KeyVault/managedHsm/keys/create",
+            "description": "Create an HSM key."
+          },
+          {
+            "name": "KeyDelete",
+            "value": "Microsoft.KeyVault/managedHsm/keys/delete",
+            "description": "Delete an HSM key."
+          },
+          {
+            "name": "KeyExport",
+            "value": "Microsoft.KeyVault/managedHsm/keys/export/action",
+            "description": "Export an HSM key."
+          },
+          {
+            "name": "KeyImport",
+            "value": "Microsoft.KeyVault/managedHsm/keys/import/action",
+            "description": "Import an HSM key."
+          },
+          {
+            "name": "KeyPurgeDeleted",
+            "value": "Microsoft.KeyVault/managedHsm/keys/deletedKeys/delete",
+            "description": "Purge a deleted HSM key."
+          },
+          {
+            "name": "DownloadHsmSecurityDomain",
+            "value": "Microsoft.KeyVault/managedHsm/securitydomain/download/action",
+            "description": "Download an HSM security domain."
+          },
+          {
+            "name": "UploadHsmSecurityDomain",
+            "value": "Microsoft.KeyVault/managedHsm/securitydomain/upload/action",
+            "description": "Upload an HSM security domain."
+          },
+          {
+            "name": "ReadHsmSecurityDomainStatus",
+            "value": "Microsoft.KeyVault/managedHsm/securitydomain/upload/read",
+            "description": "Check the status of the HSM security domain exchange file."
+          },
+          {
+            "name": "ReadHsmSecurityDomainTransferKey",
+            "value": "Microsoft.KeyVault/managedHsm/securitydomain/transferkey/read",
+            "description": "Download an HSM security domain transfer key."
+          },
+          {
+            "name": "StartHsmBackup",
+            "value": "Microsoft.KeyVault/managedHsm/backup/start/action",
+            "description": "Start an HSM backup."
+          },
+          {
+            "name": "StartHsmRestore",
+            "value": "Microsoft.KeyVault/managedHsm/restore/start/action",
+            "description": "Start an HSM restore."
+          },
+          {
+            "name": "ReadHsmBackupStatus",
+            "value": "Microsoft.KeyVault/managedHsm/backup/status/action",
+            "description": "Read an HSM backup status."
+          },
+          {
+            "name": "ReadHsmRestoreStatus",
+            "value": "Microsoft.KeyVault/managedHsm/restore/status/action",
+            "description": "Read an HSM restore status."
           }
         ]
       }
