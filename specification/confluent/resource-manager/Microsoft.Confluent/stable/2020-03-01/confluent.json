@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Microsoft.Confluent",
-    "version": "2020-03-01-preview"
+    "version": "2020-03-01"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -77,7 +77,7 @@
         "tags": [
           "Agreements"
         ],
-        "summary": "Create Confluent Marketplace agreement in the subscription.",
+        "summary": "Accept marketplace terms.",
         "operationId": "MarketplaceAgreements_Create",
         "consumes": [
           "application/json"
@@ -92,7 +92,7 @@
           {
             "in": "body",
             "name": "body",
-            "description": "Confluent Marketplace Agreement resource",
+            "description": "Confluent Agreement resource",
             "schema": {
               "$ref": "#/definitions/ConfluentAgreementResource"
             }
@@ -438,7 +438,7 @@
             "description": "Accepted"
           },
           "204": {
-            "description": "The specified confluent resource does not exist in the subscription."
+            "description": "NoContent"
           },
           "default": {
             "description": "Default error response.",
@@ -500,22 +500,22 @@
       }
     },
     "ConfluentAgreementResource": {
-      "description": "Agreement Terms definition",
+      "description": "Confluent Agreements Resource.",
       "type": "object",
       "x-ms-azure-resource": true,
       "properties": {
         "id": {
-          "description": "The ARM id of the resource.",
+          "description": "ARM id of the resource.",
           "type": "string",
           "readOnly": true
         },
         "name": {
-          "description": "The name of the agreement.",
+          "description": "Name of the agreement.",
           "type": "string",
           "readOnly": true
         },
         "type": {
-          "description": "The type of the agreement.",
+          "description": "The type of the resource.",
           "type": "string",
           "readOnly": true
         },
@@ -734,7 +734,7 @@
         },
         "emailAddress": {
           "description": "Email address",
-          "pattern": "^\\S+@\\S+\\.\\S+$",
+          "pattern": "\\S+@\\S+\\.\\S+",
           "type": "string"
         }
       }
@@ -862,7 +862,7 @@
       "required": true,
       "type": "string",
       "enum": [
-        "2020-03-01-preview"
+        "2020-03-01"
       ]
     },
     "SubscriptionIdParameter": {
