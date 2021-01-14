@@ -1767,6 +1767,12 @@
               "$ref": "#/definitions/snapshotPolicy"
             }
           },
+          "202": {
+            "description": "Accepted -- Create or update request accepted; operation will complete asynchronously",
+            "schema": {
+              "$ref": "#/definitions/snapshotPolicy"
+            }
+          },
           "default": {
             "description": "Error response describing why the operation failed."
           }
@@ -2872,6 +2878,7 @@
       "properties": {
         "activeDirectoryId": {
           "type": "string",
+          "readOnly": true,
           "description": "Id of the Active Directory"
         },
         "username": {
@@ -2941,6 +2948,7 @@
         },
         "organizationalUnit": {
           "type": "string",
+          "default": "CN=Computers",
           "description": "The Organizational Unit (OU) within the Windows Active Directory"
         },
         "site": {
@@ -3334,6 +3342,11 @@
           "minLength": 36,
           "example": "9760acf5-4638-11e7-9bdb-020073ca7778"
         },
+        "name": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Resource name"
+        },        
         "creationToken": {
           "title": "Creation Token or File Path",
           "type": "string",
@@ -3399,11 +3412,14 @@
         },
         "protocolTypes": {
           "title": "protocolTypes",
-          "description": "Set of protocol types",
+          "description": "Set of protocol types, default NFSv3, CIFS fro SMB protocol",
           "type": "array",
           "items": {
             "type": "string"
           },
+          "default": [
+            "NFSv3"
+          ],          
           "example": [
             "NFSv4.1"
           ]
@@ -3416,6 +3432,7 @@
         "snapshotId": {
           "title": "Snapshot ID",
           "type": "string",
+          "x-nullable": true,
           "description": "UUID v4 or resource identifier used to identify the Snapshot.",
           "pattern": "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}|(\\\\?([^\\/]*[\\/])*)([^\\/]+)$",
           "maxLength": 36,
