@@ -62,6 +62,12 @@ input-file:
   - Microsoft.Network/stable/2020-08-01/natGateway.json
   - Microsoft.Network/stable/2020-08-01/network.json
   - Microsoft.Network/stable/2020-08-01/networkInterface.json
+  - Microsoft.Network/stable/2020-08-01/networkManagerConnectivityConfiguration.json
+  - Microsoft.Network/stable/2020-08-01/networkManagerSecurityConfiguration.json
+  - Microsoft.Network/stable/2020-08-01/networkManagerGroup.json
+  - Microsoft.Network/stable/2020-08-01/networkManagerActiveConfiguration.json
+  - Microsoft.Network/stable/2020-08-01/networkManager.json
+  - Microsoft.Network/stable/2020-08-01/networkManagerEffectiveConfiguration.json
   - Microsoft.Network/stable/2020-08-01/networkProfile.json
   - Microsoft.Network/stable/2020-08-01/networkSecurityGroup.json
   - Microsoft.Network/stable/2020-08-01/networkVirtualAppliance.json

@@ -1,0 +1,39 @@
+{
+  "title": "List Azure Virtual Network Manager",
+  "parameters": {
+    "api-version": "2020-08-01",
+    "subscriptionId": "subscriptionC",
+    "resourceGroupName": "rg1"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "testNetworkManager",
+            "id": "/subscriptions/subscriptionC/resourceGroup/rg1/providers/Microsoft.Network/networkManagers/testNetworkManager",
+            "type": "Microsoft.Network/networkManager",
+            "etag": "sadf-asdf-asdf-asdf",
+            "properties": {
+              "displayName": "TestNetworkManager",
+              "description": "My Test Network Manager",
+              "networkManagerScopes": {
+                "managementGroups": [],
+                "subscriptions": [
+                  "/subscriptions/00000000-0000-0000-0000-000000000000"        
+                ]
+              },
+              "networkManagerScopeAccesses": [
+                "Security",
+                "Routing",
+                "Connectivity"
+              ],
+              "provisioningState": "Succeeded"
+            }
+          }
+        ],
+        "nextLink": "{baseurl}/subscriptions/subscriptionC/resourceGroup/rg1/providers/Microsoft.Network/networkManagers?api-version=2020-08-01&$skipToken=10"
+      }
+    }
+  }
+}

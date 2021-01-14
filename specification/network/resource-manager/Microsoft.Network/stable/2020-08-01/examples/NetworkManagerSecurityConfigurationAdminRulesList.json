@@ -1,0 +1,55 @@
+{
+  "parameters": {
+    "api-version": "2020-08-01",
+    "subscriptionId": "subId",
+    "resourceGroupName": "rg1",
+    "networkManagerName": "testNetworkManager",
+    "configurationName": "myTestSecurityConfig"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/networkmanagers/testNetworkManager/securityConfigurations/myTestSecurityConfig/rules/SampleAdminRule",
+            "type": "Microsoft.Network/networkManagers/securityConfigurations/rules",
+            "name": "SampleAdminRule",
+            "etag": "sadf-asdf-asdf-asdf",
+            "properties": {
+              "description": "This is Sample Admin Rule",
+              "protocol": "Tcp",
+              "source": [
+                {
+                  "addressPrefixType": "IPPrefix",
+                  "addressPrefix": "*"
+                }
+              ],
+              "destination": [
+                {
+                  "addressPrefixType": "IPPrefix",
+                  "addressPrefix": "*"
+                }
+              ],
+              "sourcePortRanges": [
+                "0-65535"
+              ],
+              "destinationPortRanges": [
+                "22"
+              ],
+              "access": "Deny",
+              "priority": 1,
+              "direction": "Inbound",
+              "appliesToGroups": [
+                {
+                  "networkGroupId": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/networkmanagers/testNetworkManager/networkGroups/testGroup"
+                }
+              ],
+              "provisioningState": "Succeeded"
+            }
+          }
+        ],
+        "nextLink": "{baseurl}/subscriptions/subscriptionC/resourceGroup/rg1/providers/Microsoft.Network/networkManagers/testNetworkManager/networkManagers/myTestSecurityConfig/rules?api-version=2020-08-01&$skipToken=10"
+      }
+    }
+  }
+}

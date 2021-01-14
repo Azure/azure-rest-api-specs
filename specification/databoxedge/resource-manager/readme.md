@@ -29,6 +29,15 @@ openapi-type: arm
 tag: package-2019-08
 ```
 
+### Tag: package-2020-09-01-preview
+
+These settings apply only when `--tag=package-2020-09-01-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-09-01-preview'
+input-file:
+- Microsoft.DataBoxEdge/preview/2020-09-01-preview/databoxedge.json
+```
+
 ### Tag: package-2020-05-preview
 
 These settings apply only when `--tag=package-2020-05-preview` is specified on the command line.
