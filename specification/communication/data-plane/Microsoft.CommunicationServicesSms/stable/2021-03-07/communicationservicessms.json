@@ -67,37 +67,13 @@
           "202": {
             "description": "Accepted",
             "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/SendSmsResponse"
-              }
+              "$ref": "#/definitions/SendSmsResponse"
             }
           },
           "207": {
             "description": "Multi Status",
             "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/SendSmsResponse"
-              }
-            }
-          },
-          "400": {
-            "description": "Bad Request",
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/SendSmsResponse"
-              }
-            }
-          },
-          "500": {
-            "description": "Internal Server Error",
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/SendSmsResponse"
-              }
+              "$ref": "#/definitions/SendSmsResponse"
             }
           }
         },
@@ -136,7 +112,7 @@
           "type": "string"
         },
         "to": {
-          "description": "The recipients' phone number in E.164 format. In this version, only one recipient in the list is supported.",
+          "description": "The recipients' phone number in E.164 format. In this version, a minimum of 1 and upto 100 recipients in the list are supported.",
           "maxLength": 100,
           "minLength": 1,
           "type": "array",
@@ -156,30 +132,43 @@
       }
     },
     "SendSmsResponse": {
+      "description": "Response for a successful or multi status send Sms request.",
       "type": "object",
       "properties": {
-        "details": {
+        "value": {
           "type": "array",
           "items": {
             "type": "object",
             "$ref": "#/definitions/SendSmsResponseItem"
           }
+        },
+        "nextLink": {
+          "type": "string"
         }
       }
     },
     "SendSmsResponseItem": {
+      "description": "Response for a single recipient.",
+      "required": [
+        "httpstatuscode",
+        "to"
+      ],
       "type": "object",
       "properties": {
         "to": {
+          "description": "The recipients' phone number in E.164 format",
           "type": "string"
         },
         "messageId": {
+          "description": "The identifier of the outgoing SMS message. Only present if message processed",
           "type": "string"
         },
-        "code": {
-          "type": "string"
+        "httpstatuscode": {
+          "description": "HTTP Status code",
+          "type": "int "
         },
-        "message": {
+        "errormessage": {
+          "description": "Optional error message in case of 4xx or 5xx errors",
           "type": "string"
         }
       }
