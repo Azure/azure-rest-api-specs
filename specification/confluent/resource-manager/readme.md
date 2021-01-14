@@ -28,7 +28,16 @@ These are the global settings for the Confluent API.
 title: ConfluentManagementClient
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2020-03-01-preview
+tag: package-2020-03-01
+```
+
+### Tag: package-2020-03-01
+
+These settings apply only when `--tag=package-2020-03-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-03-01'
+input-file:
+- Microsoft.Confluent/stable/2020-03-01/confluent.json
 ```
 
 ### Tag: package-2020-03-01-preview
@@ -108,6 +117,7 @@ require: $(this-folder)/../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
+  - $(this-folder)/Microsoft.Confluent/stable/2020-03-01/confluent.json
   - $(this-folder)/Microsoft.Confluent/preview/2020-03-01-preview/confluent.json
   
 ```
