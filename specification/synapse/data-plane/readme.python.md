@@ -48,3 +48,14 @@ no-namespace-folders: true
 namespace: azure.synapse.monitoring
 output-folder: $(python-sdks-folder)/synapse/azure-synapse-monitoring/azure/synapse/monitoring
 ```
+
+### LRO spark methods
+``` yaml $(package-spark)
+directive:
+    from: swagger-document
+    where: $["paths"]["/batches"].post
+    transform: >
+        $["x-ms-long-running-operation"] = true;
+        $["x-python-custom-poller-sync"] = "my.library.CustomPoller";
+        $["x-python-custom-poller-async"] = "my.library.aio.AsyncCustomPoller"
+```
