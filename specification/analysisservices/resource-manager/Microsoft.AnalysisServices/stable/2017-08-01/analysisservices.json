@@ -1245,11 +1245,13 @@
         },
         "subCode": {
           "description": "The error sub code",
-          "type": "string"
+          "type": "integer",
+          "format": "int32"
         },
         "httpStatusCode": {
           "description": "The http status code",
-          "type": "string"
+          "type": "integer",
+          "format": "int32"
         }
       }
     },
@@ -1360,6 +1362,57 @@
         }
       }
     },
+    "ErrorDetail": {
+      "description": "The error detail.",
+      "properties": {
+        "code": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The error code."
+        },
+        "message": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The error message."
+        },
+        "target": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The error target."
+        },
+        "details": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ErrorDetail"
+          },
+          "description": "The error details."
+        },
+        "additionalInfo": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ErrorAdditionalInfo"
+          },
+          "description": "The error additional info."
+        }
+      }
+    },
+    "ErrorAdditionalInfo": {
+      "properties": {
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The additional info type."
+        },
+        "info": {
+          "readOnly": true,
+          "type": "object",
+          "description": "The additional info."
+        }
+      },
+      "description": "The resource management error additional info."
+    },
     "ErrorResponse": {
       "description": "Describes the format of Error response.",
       "type": "object",
@@ -1378,11 +1431,21 @@
             },
             "subCode": {
               "description": "The error sub code",
-              "type": "string"
+              "type": "integer",
+              "format": "int32"
             },
             "httpStatusCode": {
               "description": "The http status code",
-              "type": "string"
+              "type": "integer",
+              "format": "int32"
+            },
+            "details": {
+              "readOnly": true,
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ErrorDetail"
+              },
+              "description": "The error details."
             }
           }
         }
