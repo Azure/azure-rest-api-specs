@@ -11014,6 +11014,10 @@
         "targetProximityPlacementGroupId": {
           "description": "The proximity placement group ARM Id.",
           "type": "string"
+        },
+        "targetAvailabilitySetId": {
+          "description": "The availability set ARM Id.",
+          "type": "string"
         }
       },
       "x-ms-discriminator-value": "HyperVReplicaAzure"
@@ -12284,6 +12288,10 @@
         },
         "targetProximityPlacementGroupId": {
           "description": "The proximity placement group ARM Id.",
+          "type": "string"
+        },
+        "targetAvailabilitySetId": {
+          "description": "The availability set ARM Id.",
           "type": "string"
         }
       },
@@ -15720,6 +15728,26 @@
             "name": "SetMultiVmSyncStatus",
             "modelAsString": true
           }
+        }
+      },
+      "x-ms-discriminator-value": "New"
+    },
+    "NewRecoveryVirtualNetwork": {
+      "description": "Recovery virtual network input to create new virtual network from given source network.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/RecoveryVirtualNetworkCustomDetails"
+        }
+      ],
+      "properties": {
+        "recoveryVirtualNetworkResourceGroupName": {
+          "description": "The name of the resource group to be used to create the recovery virtual network. If absent, target network would be created in the same resource group as target VM.",
+          "type": "string"
+        },
+        "recoveryVirtualNetworkName": {
+          "description": "The recovery virtual network name.",
+          "type": "string"
         }
       },
       "x-ms-discriminator-value": "New"
