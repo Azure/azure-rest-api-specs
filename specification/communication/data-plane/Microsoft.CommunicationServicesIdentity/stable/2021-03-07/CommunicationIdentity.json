@@ -12,7 +12,7 @@
           "Identity"
         ],
         "summary": "Create a new identity.",
-        "operationId": "CommunicationIdentity_CreateIdentity",
+        "operationId": "CommunicationIdentity_Create",
         "consumes": [
           "application/json"
         ],
@@ -21,10 +21,7 @@
         ],
         "parameters": [
           {
-            "in": "query",
-            "name": "api-version",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "in": "body",
@@ -55,7 +52,7 @@
           "Identity"
         ],
         "summary": "Delete the identity, revoke all tokens for the identity and delete all associated data.",
-        "operationId": "CommunicationIdentity_DeleteIdentity",
+        "operationId": "CommunicationIdentity_Delete",
         "parameters": [
           {
             "in": "path",
@@ -65,10 +62,7 @@
             "type": "string"
           },
           {
-            "in": "query",
-            "name": "api-version",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -99,10 +93,7 @@
             "type": "string"
           },
           {
-            "in": "query",
-            "name": "api-version",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -139,10 +130,7 @@
             "type": "string"
           },
           {
-            "in": "query",
-            "name": "api-version",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "in": "body",
@@ -256,6 +244,15 @@
           }
         }
       }
+    }
+  },
+  "parameters": {
+    "ApiVersionParameter": {
+      "in": "query",
+      "name": "api-version",
+      "description": "Version of API to invoke.",
+      "required": true,
+      "type": "string"
     }
   },
   "securityDefinitions": {
