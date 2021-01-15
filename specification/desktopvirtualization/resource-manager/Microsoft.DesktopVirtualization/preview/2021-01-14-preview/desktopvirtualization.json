@@ -3894,7 +3894,8 @@
           "description": "Represents the Health state of the health check we performed."
         },
         "additionalFailureDetails": {
-          "$ref": "#/definitions/SessionHostHealthCheckFailureDetails"
+          "$ref": "#/definitions/SessionHostHealthCheckFailureDetails",
+          "description": "Additional detailed information on the failure."
         }
       }
     },
@@ -3908,6 +3909,7 @@
         },
         "errorCode": {
           "type": "integer",
+          "format": "int32",
           "description": "Error code corresponding for the failure."
         },
         "lastHealthCheckInUTC": {
