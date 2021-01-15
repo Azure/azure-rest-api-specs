@@ -32,6 +32,12 @@
           }
         ],
         "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
           "200": {
             "description": "OK - Returns the created identity.",
             "schema": {
@@ -53,6 +59,9 @@
         ],
         "summary": "Delete the identity, revoke all tokens for the identity and delete all associated data.",
         "operationId": "CommunicationIdentity_Delete",
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "in": "path",
@@ -66,6 +75,12 @@
           }
         ],
         "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
           "204": {
             "description": "Success"
           }
@@ -84,6 +99,9 @@
         ],
         "summary": "Revoke all access tokens for the specific identity.",
         "operationId": "CommunicationIdentity_RevokeAccessTokens",
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "in": "path",
@@ -97,6 +115,12 @@
           }
         ],
         "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
           "204": {
             "description": "Success"
           }
@@ -143,6 +167,12 @@
           }
         ],
         "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
           "200": {
             "description": "Success",
             "schema": {
@@ -179,6 +209,26 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/CommunicationIdentityTokenScope"
+          }
+        }
+      }
+    },
+    "ErrorResponse": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
+        },
+        "target": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ErrorResponse"
           }
         }
       }
