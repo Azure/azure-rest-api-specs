@@ -1790,6 +1790,9 @@
           },
           "Creates or updates a Dynamics365 data connector.": {
             "$ref": "./examples/dataConnectors/CreateDynamics365DataConnetor.json"
+          },
+          "Creates or updates a Threat Intelligence Taxii data connector.": {
+            "$ref": "./examples/dataConnectors/CreateThreatIntelligenceTaxiiDataConnector.json"
           }
         },
         "tags": [
@@ -11277,6 +11280,40 @@
         "password": {
           "description": "The password for the TAXII server.",
           "type": "string"
+        },
+        "taxiiLookbackPeriod": {
+          "description": "The lookback period for the TAXII server.",
+          "format": "date-time",
+          "type": "string",
+          "x-nullable": true
+        },
+        "pollingFrequency": {
+          "description": "The polling frequency for the TAXII server.",
+          "type": "string",
+          "x-nullable": true,
+          "enum": [
+            "OnceAMinute",
+            "OnceAnHour",
+            "OnceADay"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "pollingFrequency",
+            "values": [
+              {
+                "description": "Once a minute",
+                "value": "OnceAMinute"
+              },
+              {
+                "description": "Once an hour",
+                "value": "OnceAnHour"
+              },
+              {
+                "description": "Once a day",
+                "value": "OnceADay"
+              }
+            ]
+          }
         },
         "dataTypes": {
           "$ref": "#/definitions/TiTaxiiDataConnectorDataTypes",
