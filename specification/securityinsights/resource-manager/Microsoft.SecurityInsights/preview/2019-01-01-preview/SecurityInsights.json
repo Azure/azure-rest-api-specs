@@ -10124,1745 +10124,1746 @@
             "description": "The available data types for Threat Intelligence TAXII data connector."
           }
         },
-      "type": "object"
-    },
-    "TiTaxiiCheckRequirements": {
-      "allOf": [
-        {
-          "$ref": "#/definitions/DataConnectorsCheckRequirements"
-        }
-      ],
-      "description": "Threat Intelligence TAXII data connector check requirements",
-      "properties": {
+        "type": "object"
+      },
+      "TiTaxiiCheckRequirements": {
+        "allOf": [
+          {
+            "$ref": "#/definitions/DataConnectorsCheckRequirements"
+          }
+        ],
+        "description": "Threat Intelligence TAXII data connector check requirements",
         "properties": {
-          "$ref": "#/definitions/TiTaxiiCheckRequirementsProperties",
-          "description": "Threat Intelligence TAXII check required properties.",
-          "x-ms-client-flatten": true
-        }
-      },
-      "type": "object",
-      "x-ms-discriminator-value": "ThreatIntelligenceTaxii"
-    },
-    "TiTaxiiCheckRequirementsProperties": {
-      "allOf": [
-        {
-          "$ref": "#/definitions/DataConnectorTenantId"
-        }
-      ],
-      "description": "Threat Intelligence TAXII data connector required properties.",
-      "type": "object"
-    },
-    "ThreatIntelligence": {
-      "description": "ThreatIntelligence property bag.",
-      "properties": {
-        "confidence": {
-          "description": "Confidence (must be between 0 and 1)",
-          "format": "double",
-          "readOnly": true,
-          "type": "number"
-        },
-        "providerName": {
-          "description": "Name of the provider from whom this Threat Intelligence information was received",
-          "readOnly": true,
-          "type": "string"
-        },
-        "reportLink": {
-          "description": "Report link",
-          "readOnly": true,
-          "type": "string"
-        },
-        "threatDescription": {
-          "description": "Threat description (free text)",
-          "readOnly": true,
-          "type": "string"
-        },
-        "threatName": {
-          "description": "Threat name (e.g. \"Jedobot malware\")",
-          "readOnly": true,
-          "type": "string"
-        },
-        "threatType": {
-          "description": "Threat type (e.g. \"Botnet\")",
-          "readOnly": true,
-          "type": "string"
-        }
-      },
-      "type": "object"
-    },
-    "EyesOn": {
-      "allOf": [
-        {
-          "$ref": "#/definitions/Settings"
-        }
-      ],
-      "description": "Settings with single toggle.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/EyesOnSettingsProperties",
-          "description": "EyesOn properties",
-          "x-ms-client-flatten": true
-        }
-      },
-      "type": "object",
-      "x-ms-discriminator-value": "EyesOn"
-    },
-    "EyesOnSettingsProperties": {
-      "description": "EyesOn property bag.",
-      "properties": {
-        "isEnabled": {
-          "description": "Determines whether the setting is enable or disabled.",
-          "readOnly": true,
-          "type": "boolean"
-        }
-      },
-      "type": "object"
-    },
-    "EntityAnalytics": {
-      "allOf": [
-        {
-          "$ref": "#/definitions/Settings"
-        }
-      ],
-      "description": "Settings with single toggle.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/EntityAnalyticsProperties",
-          "description": "EntityAnalytics properties",
-          "x-ms-client-flatten": true
-        }
-      },
-      "type": "object",
-      "x-ms-discriminator-value": "EntityAnalytics"
-    },
-    "EntityAnalyticsProperties": {
-      "description": "EntityAnalytics property bag.",
-      "properties": {
-        "isEnabled": {
-          "description": "Determines whether the setting is enable or disabled.",
-          "readOnly": true,
-          "type": "boolean"
-        }
-      },
-      "type": "object"
-    },
-    "Ueba": {
-      "allOf": [
-        {
-          "$ref": "#/definitions/Settings"
-        }
-      ],
-      "description": "Settings with single toggle.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/UebaProperties",
-          "description": "Ueba properties",
-          "x-ms-client-flatten": true
-        }
-      },
-      "type": "object",
-      "x-ms-discriminator-value": "Ueba"
-    },
-    "UebaProperties": {
-      "description": "Ueba property bag.",
-      "properties": {
-        "dataSources": {
-          "description": "The relevant data sources that enriched by ueba",
-          "items": {
-            "$ref": "#/definitions/UebaDataSources"
-          },
-          "type": "array"
-        }
-      },
-      "type": "object"
-    },
-    "UebaDataSources": {
-      "description": "The data source that enriched by ueba.",
-      "enum": [
-        "AuditLogs",
-        "AzureActivity",
-        "SecurityEvent",
-        "SigninLogs"
-      ],
-      "type": "string",
-      "x-ms-enum": {
-        "modelAsString": true,
-        "name": "UebaDataSources"
-      }
-    },
-    "UrlEntity": {
-      "allOf": [
-        {
-          "$ref": "#/definitions/Entity"
-        }
-      ],
-      "description": "Represents a url entity.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/UrlEntityProperties",
-          "description": "Url entity properties",
-          "x-ms-client-flatten": true
-        }
-      },
-      "type": "object",
-      "x-ms-discriminator-value": "Url"
-    },
-    "UrlEntityProperties": {
-      "allOf": [
-        {
-          "$ref": "#/definitions/EntityCommonProperties"
-        }
-      ],
-      "description": "Url entity property bag.",
-      "properties": {
-        "url": {
-          "description": "A full URL the entity points to",
-          "readOnly": true,
-          "type": "string"
-        }
-      },
-      "type": "object"
-    },
-    "IoTDeviceEntity": {
-      "allOf": [
-        {
-          "$ref": "#/definitions/Entity"
-        }
-      ],
-      "description": "Represents an IoT device entity.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/IoTDeviceEntityProperties",
-          "description": "IoTDevice entity properties",
-          "x-ms-client-flatten": true
-        }
-      },
-      "type": "object",
-      "x-ms-discriminator-value": "IoTDevice"
-    },
-    "IoTDeviceEntityProperties": {
-      "allOf": [
-        {
-          "$ref": "#/definitions/EntityCommonProperties"
-        }
-      ],
-      "description": "IoTDevice entity property bag.",
-      "properties": {
-        "deviceId": {
-          "description": "The ID of the IoT Device in the IoT Hub",
-          "readOnly": true,
-          "type": "string"
-        },
-        "iotSecurityAgentId": {
-          "description": "The ID of the security agent running on the device",
-          "format": "uuid",
-          "readOnly": true,
-          "type": "string"
-        },
-        "deviceType": {
-          "description": "The type of the device",
-          "readOnly": true,
-          "type": "string"
-        },
-        "vendor": {
-          "description": "The vendor of the device",
-          "readOnly": true,
-          "type": "string"
-        },
-        "edgeId": {
-          "description": "The ID of the edge device",
-          "readOnly": true,
-          "type": "string"
-        },
-        "iotHubEntityId": {
-          "description": "The AzureResource entity id of the IoT Hub",
-          "readOnly": true,
-          "type": "string"
-        },
-        "hostEntityId": {
-          "description": "The Host entity id of this device",
-          "readOnly": true,
-          "type": "string"
-        },
-        "threatIntelligence": {
-          "description": "A list of TI contexts attached to the IoTDevice entity.",
-          "items": {
-            "$ref": "#/definitions/ThreatIntelligence"
-          },
-          "readOnly": true,
-          "type": "array"
-        }
-      },
-      "type": "object"
-    },
-    "UserInfo": {
-      "description": "User information that made some action",
-      "properties": {
-        "email": {
-          "description": "The email of the user.",
-          "readOnly": true,
-          "type": "string"
-        },
-        "name": {
-          "description": "The name of the user.",
-          "readOnly": true,
-          "type": "string"
-        },
-        "objectId": {
-          "description": "The object id of the user.",
-          "format": "uuid",
-          "type": "string",
-          "x-nullable": true
-        }
-      },
-      "type": "object"
-    },
-    "IncidentInfo": {
-      "description": "Describes related incident information for the bookmark",
-      "properties": {
-        "incidentId": {
-          "description": "Incident Id",
-          "type": "string"
-        },
-        "severity": {
-          "description": "The severity of the incident",
-          "enum": [
-            "Critical",
-            "High",
-            "Medium",
-            "Low",
-            "Informational"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "modelAsString": true,
-            "name": "CaseSeverity",
-            "values": [
-              {
-                "description": "Critical severity",
-                "value": "Critical"
-              },
-              {
-                "description": "High severity",
-                "value": "High"
-              },
-              {
-                "description": "Medium severity",
-                "value": "Medium"
-              },
-              {
-                "description": "Low severity",
-                "value": "Low"
-              },
-              {
-                "description": "Informational severity",
-                "value": "Informational"
-              }
-            ]
+          "properties": {
+            "$ref": "#/definitions/TiTaxiiCheckRequirementsProperties",
+            "description": "Threat Intelligence TAXII check required properties.",
+            "x-ms-client-flatten": true
           }
         },
-        "title": {
-          "description": "The title of the incident",
-          "type": "string"
-        },
-        "relationName": {
-          "description": "Relation Name",
-          "type": "string"
-        }
+        "type": "object",
+        "x-ms-discriminator-value": "ThreatIntelligenceTaxii"
       },
-      "required": [
-        "incidentId",
-        "severity",
-        "title",
-        "relationName"
-      ],
-      "type": "object"
-    },
-    "WatchlistList": {
-      "description": "List all the watchlists.",
-      "properties": {
-        "nextLink": {
-          "description": "URL to fetch the next set of watchlists.",
-          "readOnly": true,
-          "type": "string"
-        },
-        "value": {
-          "description": "Array of watchlist.",
-          "items": {
-            "$ref": "#/definitions/Watchlist"
-          },
-          "type": "array"
-        }
+      "TiTaxiiCheckRequirementsProperties": {
+        "allOf": [
+          {
+            "$ref": "#/definitions/DataConnectorTenantId"
+          }
+        ],
+        "description": "Threat Intelligence TAXII data connector required properties.",
+        "type": "object"
       },
-      "required": [
-        "value"
-      ]
-    },
-    "Watchlist": {
-      "allOf": [
-        {
-          "$ref": "#/definitions/ResourceWithEtag"
-        }
-      ],
-      "description": "Represents a Watchlist in Azure Security Insights.",
-      "properties": {
+      "ThreatIntelligence": {
+        "description": "ThreatIntelligence property bag.",
         "properties": {
-          "$ref": "#/definitions/WatchlistProperties",
-          "description": "Watchlist properties",
-          "x-ms-client-flatten": true
-        }
-      },
-      "type": "object"
-    },
-    "WatchlistProperties": {
-      "description": "Describes watchlist properties",
-      "properties": {
-        "watchlistId": {
-          "description": "The id (a Guid) of the watchlist",
-          "type": "string"
-        },
-        "displayName": {
-          "description": "The display name of the watchlist",
-          "type": "string"
-        },
-        "provider": {
-          "description": "The provider of the watchlist",
-          "type": "string"
-        },
-        "source": {
-          "description": "The source of the watchlist",
-          "enum": [
-            "Local file",
-            "Remote storage"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "modelAsString": true,
-            "name": "source"
+          "confidence": {
+            "description": "Confidence (must be between 0 and 1)",
+            "format": "double",
+            "readOnly": true,
+            "type": "number"
+          },
+          "providerName": {
+            "description": "Name of the provider from whom this Threat Intelligence information was received",
+            "readOnly": true,
+            "type": "string"
+          },
+          "reportLink": {
+            "description": "Report link",
+            "readOnly": true,
+            "type": "string"
+          },
+          "threatDescription": {
+            "description": "Threat description (free text)",
+            "readOnly": true,
+            "type": "string"
+          },
+          "threatName": {
+            "description": "Threat name (e.g. \"Jedobot malware\")",
+            "readOnly": true,
+            "type": "string"
+          },
+          "threatType": {
+            "description": "Threat type (e.g. \"Botnet\")",
+            "readOnly": true,
+            "type": "string"
           }
         },
-        "created": {
-          "description": "The time the watchlist was created",
-          "format": "date-time",
-          "type": "string"
-        },
-        "updated": {
-          "description": "The last time the watchlist was updated",
-          "format": "date-time",
-          "type": "string"
-        },
-        "createdBy": {
-          "$ref": "#/definitions/UserInfo",
-          "description": "Describes a user that created the watchlist",
-          "type": "object"
-        },
-        "updatedBy": {
-          "$ref": "#/definitions/UserInfo",
-          "description": "Describes a user that updated the watchlist",
-          "type": "object"
-        },
-        "description": {
-          "description": "A description of the watchlist",
-          "type": "string"
-        },
-        "watchlistType": {
-          "description": "The type of the watchlist",
-          "type": "string"
-        },
-        "watchlistAlias": {
-          "description": "The alias of the watchlist",
-          "type": "string"
-        },
-        "isDeleted": {
-          "description": "A flag that indicates if the watchlist is deleted or not",
-          "type": "boolean"
-        },
-        "labels": {
-          "description": "List of labels relevant to this watchlist",
-          "items": {
-            "$ref": "#/definitions/Label"
-          },
-          "type": "array"
-        },
-        "defaultDuration": {
-          "description": "The default duration of a watchlist (in ISO 8601 duration format)",
-          "format": "duration",
-          "type": "string"
-        },
-        "tenantId": {
-          "description": "The tenantId where the watchlist belongs to",
-          "type": "string"
-        },
-        "numberOfLinesToSkip": {
-          "description": "The number of lines in a csv/tsv content to skip before the header",
-          "type": "integer",
-          "format": "int32"
-        },
-        "rawContent": {
-          "description": "The raw content that represents to watchlist items to create. In case of csv/tsv content type, it's the content of the file that will parsed by the endpoint",
-          "type": "string"
-        },
-        "contentType": {
-          "description": "The content type of the raw content. Example : text/csv or text/tsv ",
-          "type": "string"
-        }
+        "type": "object"
       },
-      "required": [
-        "displayName",
-        "source",
-        "provider"
-      ],
-      "type": "object"
-    },
-    "WatchlistItem": {
-      "allOf": [
-        {
-          "$ref": "#/definitions/ResourceWithEtag"
-        }
-      ],
-      "description": "Represents a Watchlist item in Azure Security Insights.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/WatchlistItemProperties",
-          "description": "Watchlist Item properties",
-          "x-ms-client-flatten": true
-        }
-      },
-      "type": "object"
-    },
-    "WatchlistItemProperties": {
-      "description": "Describes watchlist item properties",
-      "properties": {
-        "watchlistItemType": {
-          "description": "The type of the watchlist item",
-          "type": "string"
-        },
-        "watchlistItemId": {
-          "description": "The id (a Guid) of the watchlist item",
-          "type": "string"
-        },
-        "tenantId": {
-          "description": "The tenantId to which the watchlist item belongs to",
-          "type": "string"
-        },
-        "isDeleted": {
-          "description": "A flag that indicates if the watchlist item is deleted or not",
-          "type": "boolean"
-        },
-        "created": {
-          "description": "The time the watchlist item was created",
-          "format": "date-time",
-          "type": "string"
-        },
-        "updated": {
-          "description": "The last time the watchlist item was updated",
-          "format": "date-time",
-          "type": "string"
-        },
-        "createdBy": {
-          "$ref": "#/definitions/UserInfo",
-          "description": "Describes a user that created the watchlist item",
-          "type": "object"
-        },
-        "updatedBy": {
-          "$ref": "#/definitions/UserInfo",
-          "description": "Describes a user that updated the watchlist item",
-          "type": "object"
-        },
-        "itemsKeyValue": {
-          "description": "key-value pairs for a watchlist item",
-          "type": "object"
-        },
-        "entityMapping": {
-          "description": "key-value pairs for a watchlist item entity mapping",
-          "type": "object"
-        }
-      },
-      "required": [
-        "itemsKeyValue"
-      ],
-      "type": "object"
-    },
-    "ThreatIntelligenceInformationList": {
-      "description": "List of all the threat intelligence information objects.",
-      "properties": {
-        "nextLink": {
-          "description": "URL to fetch the next set of information objects.",
-          "readOnly": true,
-          "type": "string"
-        },
-        "value": {
-          "description": "Array of threat intelligence information objects.",
-          "items": {
-            "$ref": "#/definitions/ThreatIntelligenceInformation"
-          },
-          "type": "array"
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
-    "ThreatIntelligenceInformation": {
-      "allOf": [
-        {
-          "$ref": "#/definitions/ResourceWithEtag"
-        },
-        {
-          "$ref": "#/definitions/ThreatIntelligenceResourceKind"
-        }
-      ],
-      "description": "Threat intelligence information object.",
-      "discriminator": "kind",
-      "type": "object",
-      "required": [
-        "kind"
-      ]
-    },
-    "ThreatIntelligenceIndicatorModel": {
-      "allOf": [
-        {
-          "$ref": "#/definitions/ThreatIntelligenceInformation"
-        }
-      ],
-      "description": "Threat intelligence indicator entity.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/ThreatIntelligenceIndicatorProperties",
-          "description": "Threat Intelligence Entity properties",
-          "x-ms-client-flatten": true
-        }
-      },
-      "type": "object",
-      "x-ms-discriminator-value": "indicator"
-    },
-    "ThreatIntelligenceIndicatorModelForRequestBody": {
-      "allOf": [
-        {
-          "$ref": "#/definitions/ThreatIntelligenceResourceKind"
-        }
-      ],
-      "description": "Threat intelligence indicator entity used in request body.",
-      "properties": {
-        "etag": {
-          "description": "Etag of the azure resource",
-          "type": "string"
-        },
-        "properties": {
-          "$ref": "#/definitions/ThreatIntelligenceIndicatorProperties",
-          "description": "Threat Intelligence Entity properties",
-          "x-ms-client-flatten": true
-        }
-      },
-      "type": "object",
-      "x-ms-discriminator-value": "indicator"
-    },
-    "ThreatIntelligenceResourceKind": {
-      "description": "Describes an entity with kind.",
-      "properties": {
-        "kind": {
-          "$ref": "#/definitions/ThreatIntelligenceResourceInnerKind",
-          "description": "The kind of the entity."
-        }
-      },
-      "required": [
-        "kind"
-      ],
-      "type": "object"
-    },
-    "ThreatIntelligenceResourceInnerKind": {
-      "description": "The kind of the threat intelligence entity",
-      "enum": [
-        "indicator"
-      ],
-      "type": "string",
-      "x-ms-enum": {
-        "modelAsString": true,
-        "name": "ThreatIntelligenceResourceKind",
-        "values": [
+      "EyesOn": {
+        "allOf": [
           {
-            "description": "Entity represents threat intelligence indicator in the system.",
-            "value": "indicator"
+            "$ref": "#/definitions/Settings"
           }
-        ]
-      }
-    },
-    "ThreatIntelligenceIndicatorProperties": {
-      "allOf": [
-        {
-          "$ref": "#/definitions/EntityCommonProperties"
-        }
-      ],
-      "description": "Describes threat intelligence entity properties",
-      "properties": {
-        "threatIntelligenceTags": {
-          "description": "List of tags",
-          "items": {
-            "description": "tag",
-            "type": "string"
-          },
-          "type": "array"
-        },
-        "lastUpdatedTimeUtc": {
-          "description": "Last updated time in UTC",
-          "type": "string"
-        },
-        "source": {
-          "description": "Source of a threat intelligence entity",
-          "type": "string"
-        },
-        "displayName": {
-          "description": "Display name of a threat intelligence entity",
-          "type": "string"
-        },
-        "description": {
-          "description": "Description of a threat intelligence entity",
-          "type": "string"
-        },
-        "indicatorTypes": {
-          "description": "Indicator types of threat intelligence entities",
-          "items": {
-            "description": "Indicator type of a threat intelligence entity",
-            "type": "string"
-          },
-          "type": "array"
-        },
-        "pattern": {
-          "description": "Pattern of a threat intelligence entity",
-          "type": "string"
-        },
-        "patternType": {
-          "description": "Pattern type of a threat intelligence entity",
-          "type": "string"
-        },
-        "killChainPhases": {
-          "description": "Kill chain phases",
-          "items": {
-            "description": "Kill chain phase",
-            "$ref": "#/definitions/ThreatIntelligenceKillChainPhase"
-          },
-          "type": "array"
-        },
-        "externalId": {
-          "description": "External ID of threat intelligence entity",
-          "type": "string"
-        },
-        "createdByRef": {
-          "description": "Created by reference of threat intelligence entity",
-          "type": "string"
-        },
-        "externalReferences": {
-          "description": "External References",
-          "items": {
-            "description": "external_reference",
-            "type": "string"
-          },
-          "type": "array"
-        },
-        "granularMarkings": {
-          "description": "Granular Markings",
-          "items": {
-            "description": "Granular marking",
-            "$ref": "#/definitions/ThreatIntelligenceGranularMarkingModel"
-          },
-          "type": "array"
-        },
-        "revoked": {
-          "description": "Is threat intelligence entity revoked",
-          "type": "boolean"
-        },
-        "confidence": {
-          "description": "Confidence of threat intelligence entity",
-          "type": "integer",
-          "format": "int32"
-        },
-        "labels": {
-          "description": "Labels  of threat intelligence entity",
-          "items": {
-            "description": "label",
-            "type": "string"
-          },
-          "type": "array"
-        },
-        "threatTypes": {
-          "description": "Threat types",
-          "items": {
-            "description": "Threat type",
-            "type": "string"
-          },
-          "type": "array"
-        },
-        "validFrom": {
-          "description": "Valid from",
-          "type": "string"
-        },
-        "validUntil": {
-          "description": "Valid until",
-          "type": "string"
-        },
-        "created": {
-          "description": "Created by",
-          "type": "string"
-        },
-        "modified": {
-          "description": "Modified by",
-          "type": "string"
-        }
-      },
-      "type": "object"
-    },
-    "ThreatIntelligenceKillChainPhase": {
-      "description": "Describes threat kill chain phase entity",
-      "properties": {
-        "killChainName": {
-          "description": "Kill chainName name",
-          "type": "string"
-        },
-        "phaseName": {
-          "description": "Phase name",
-          "type": "integer",
-          "format": "int32"
-        }
-      },
-      "type": "object"
-    },
-    "ThreatIntelligenceGranularMarkingModel": {
-      "description": "Describes threat granular marking model entity",
-      "properties": {
-        "language": {
-          "description": "Language granular marking model",
-          "type": "string"
-        },
-        "markingRef": {
-          "description": "marking reference granular marking model",
-          "type": "integer",
-          "format": "int32"
-        },
-        "selectors": {
-          "description": "granular marking model selectors",
-          "items": {
-            "description": "granular marking model selector",
-            "type": "string"
-          },
-          "type": "array"
-        }
-      },
-      "type": "object"
-    },
-    "ThreatIntelligenceFilteringCriteria": {
-      "description": "Filtering criteria for querying threat intelligence indicators.",
-      "properties": {
-        "pageSize": {
-          "description": "Page size",
-          "type": "integer",
-          "format": "int32"
-        },
-        "minConfidence": {
-          "description": "Minimum confidence.",
-          "type": "integer",
-          "format": "int32"
-        },
-        "maxConfidence": {
-          "description": "Maximum confidence.",
-          "type": "integer",
-          "format": "int32"
-        },
-        "minValidUntil": {
-          "description": "Start time for ValidUntil filter.",
-          "type": "string"
-        },
-        "maxValidUntil": {
-          "description": "End time for ValidUntil filter.",
-          "type": "string"
-        },
-        "includeDisabled": {
-          "description": "Parameter to include/exclude disabled indicators.",
-          "type": "boolean"
-        },
-        "sortBy": {
-          "description": "Columns to sort by and sorting order",
-          "items": {
-            "description": "Sort By",
-            "$ref": "#/definitions/ThreatIntelligenceSortingCriteria"
-          },
-          "type": "array"
-        },
-        "sources": {
-          "description": "Sources of threat intelligence indicators",
-          "items": {
-            "description": "Source",
-            "type": "string"
-          },
-          "type": "array"
-        },
-        "patternTypes": {
-          "description": "Pattern types",
-          "items": {
-            "description": "Pattern type",
-            "type": "string"
-          },
-          "type": "array"
-        },
-        "threatTypes": {
-          "description": "Threat types of threat intelligence indicators",
-          "items": {
-            "description": "Threat type of a threat intelligence indicator",
-            "type": "string"
-          },
-          "type": "array"
-        },
-        "ids": {
-          "description": "Ids of threat intelligence indicators",
-          "items": {
-            "description": "Id of a threat intelligence indicator",
-            "type": "string"
-          },
-          "type": "array"
-        },
-        "keywords": {
-          "description": "Keywords for searching threat intelligence indicators",
-          "items": {
-            "description": "keyword for searching threat intelligence indicators",
-            "type": "string"
-          },
-          "type": "array"
-        },
-        "skipToken": {
-          "description": "Skip token.",
-          "type": "string"
-        }
-      },
-      "type": "object"
-    },
-    "ThreatIntelligenceSortingCriteria": {
-      "description": "List of available columns for sorting",
-      "properties": {
-        "itemKey": {
-          "description": "Column name",
-          "type": "string"
-        },
-        "sortOrder": {
-          "$ref": "#/definitions/ThreatIntelligenceSortingOrder",
-          "description": "Sorting order (ascending/descending/unsorted)."
-        }
-      },
-      "type": "object"
-    },
-    "ThreatIntelligenceSortingOrder": {
-      "description": "Sorting order (ascending/descending/unsorted).",
-      "enum": [
-        "unsorted",
-        "ascending",
-        "descending"
-      ],
-      "type": "string",
-      "x-ms-enum": {
-        "modelAsString": true,
-        "name": "ThreatIntelligenceSortingCriteria",
-        "values": [
-          {
-            "value": "unsorted"
-          },
-          {
-            "value": "ascending"
-          },
-          {
-            "value": "descending"
-          }
-        ]
-      }
-    },
-    "ThreatIntelligenceAppendTags": {
-      "description": "Array of tags to be appended to the threat intelligence indicator.",
-      "properties": {
-        "threatIntelligenceTags": {
-          "description": "List of tags to be appended.",
-          "items": {
-            "description": "parameter",
-            "type": "string"
-          },
-          "type": "array"
-        }
-      },
-      "type": "object"
-    },
-    "ThreatIntelligenceMetricsList": {
-      "description": "List of all the threat intelligence metric fields (type/threat type/source).",
-      "properties": {
-        "value": {
-          "description": "Array of threat intelligence metric fields (type/threat type/source).",
-          "items": {
-            "$ref": "#/definitions/ThreatIntelligenceMetrics"
-          },
-          "type": "array"
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
-    "ThreatIntelligenceMetrics": {
-      "description": "Threat intelligence metrics.",
-      "properties": {
+        ],
+        "description": "Settings with single toggle.",
         "properties": {
-          "description": "Threat intelligence metrics.",
-          "$ref": "#/definitions/ThreatIntelligenceMetric"
-        }
-      }
-    },
-    "ThreatIntelligenceMetric": {
-      "description": "Describes threat intelligence metric",
-      "properties": {
-        "lastUpdatedTimeUtc": {
-          "description": "Last updated indicator metric",
-          "type": "string"
+          "properties": {
+            "$ref": "#/definitions/EyesOnSettingsProperties",
+            "description": "EyesOn properties",
+            "x-ms-client-flatten": true
+          }
         },
-        "threatTypeMetrics": {
-          "description": "Threat type metrics",
-          "items": {
-            "description": "parameter",
-            "$ref": "#/definitions/ThreatIntelligenceMetricEntity"
-          },
-          "type": "array"
+        "type": "object",
+        "x-ms-discriminator-value": "EyesOn"
+      },
+      "EyesOnSettingsProperties": {
+        "description": "EyesOn property bag.",
+        "properties": {
+          "isEnabled": {
+            "description": "Determines whether the setting is enable or disabled.",
+            "readOnly": true,
+            "type": "boolean"
+          }
         },
-        "patternTypeMetrics": {
-          "description": "Pattern type metrics",
-          "items": {
-            "description": "parameter",
-            "$ref": "#/definitions/ThreatIntelligenceMetricEntity"
-          },
-          "type": "array"
+        "type": "object"
+      },
+      "EntityAnalytics": {
+        "allOf": [
+          {
+            "$ref": "#/definitions/Settings"
+          }
+        ],
+        "description": "Settings with single toggle.",
+        "properties": {
+          "properties": {
+            "$ref": "#/definitions/EntityAnalyticsProperties",
+            "description": "EntityAnalytics properties",
+            "x-ms-client-flatten": true
+          }
         },
-        "sourceMetrics": {
-          "description": "Source metrics",
-          "items": {
-            "description": "parameter",
-            "$ref": "#/definitions/ThreatIntelligenceMetricEntity"
-          },
-          "type": "array"
+        "type": "object",
+        "x-ms-discriminator-value": "EntityAnalytics"
+      },
+      "EntityAnalyticsProperties": {
+        "description": "EntityAnalytics property bag.",
+        "properties": {
+          "isEnabled": {
+            "description": "Determines whether the setting is enable or disabled.",
+            "readOnly": true,
+            "type": "boolean"
+          }
+        },
+        "type": "object"
+      },
+      "Ueba": {
+        "allOf": [
+          {
+            "$ref": "#/definitions/Settings"
+          }
+        ],
+        "description": "Settings with single toggle.",
+        "properties": {
+          "properties": {
+            "$ref": "#/definitions/UebaProperties",
+            "description": "Ueba properties",
+            "x-ms-client-flatten": true
+          }
+        },
+        "type": "object",
+        "x-ms-discriminator-value": "Ueba"
+      },
+      "UebaProperties": {
+        "description": "Ueba property bag.",
+        "properties": {
+          "dataSources": {
+            "description": "The relevant data sources that enriched by ueba",
+            "items": {
+              "$ref": "#/definitions/UebaDataSources"
+            },
+            "type": "array"
+          }
+        },
+        "type": "object"
+      },
+      "UebaDataSources": {
+        "description": "The data source that enriched by ueba.",
+        "enum": [
+          "AuditLogs",
+          "AzureActivity",
+          "SecurityEvent",
+          "SigninLogs"
+        ],
+        "type": "string",
+        "x-ms-enum": {
+          "modelAsString": true,
+          "name": "UebaDataSources"
         }
       },
-      "type": "object"
-    },
-    "ThreatIntelligenceMetricEntity": {
-      "description": "Describes threat intelligence metric entity",
-      "properties": {
-        "metricName": {
-          "description": "Metric name",
-          "type": "string"
+      "UrlEntity": {
+        "allOf": [
+          {
+            "$ref": "#/definitions/Entity"
+          }
+        ],
+        "description": "Represents a url entity.",
+        "properties": {
+          "properties": {
+            "$ref": "#/definitions/UrlEntityProperties",
+            "description": "Url entity properties",
+            "x-ms-client-flatten": true
+          }
         },
-        "metricValue": {
-          "description": "Metric value",
-          "type": "integer",
-          "format": "int32"
-        }
+        "type": "object",
+        "x-ms-discriminator-value": "Url"
       },
-      "type": "object"
-    },
-    "EntityGetInsightsParameters": {
-      "description": "The parameters required to execute insights operation on the given entity.",
-      "type": "object",
-      "properties": {
-        "startTime": {
-          "description": "The start timeline date, so the results returned are after this date.",
-          "format": "date-time",
-          "type": "string"
+      "UrlEntityProperties": {
+        "allOf": [
+          {
+            "$ref": "#/definitions/EntityCommonProperties"
+          }
+        ],
+        "description": "Url entity property bag.",
+        "properties": {
+          "url": {
+            "description": "A full URL the entity points to",
+            "readOnly": true,
+            "type": "string"
+          }
         },
-        "endTime": {
-          "description": "The end timeline date, so the results returned are before this date.",
-          "format": "date-time",
-          "type": "string"
+        "type": "object"
+      },
+      "IoTDeviceEntity": {
+        "allOf": [
+          {
+            "$ref": "#/definitions/Entity"
+          }
+        ],
+        "description": "Represents an IoT device entity.",
+        "properties": {
+          "properties": {
+            "$ref": "#/definitions/IoTDeviceEntityProperties",
+            "description": "IoTDevice entity properties",
+            "x-ms-client-flatten": true
+          }
         },
-        "addDefaultExtendedTimeRange": {
-          "description": "Indicates if query time range should be extended with default time range of the query. Default value is false",
-          "type": "boolean"
-        },
-        "insightQueryIds": {
-          "description": "List of Insights Query Id. If empty, default value is all insights of this entity",
-          "type": "array",
-          "items": {
-            "description": "Insight Query Id (GUID)",
+        "type": "object",
+        "x-ms-discriminator-value": "IoTDevice"
+      },
+      "IoTDeviceEntityProperties": {
+        "allOf": [
+          {
+            "$ref": "#/definitions/EntityCommonProperties"
+          }
+        ],
+        "description": "IoTDevice entity property bag.",
+        "properties": {
+          "deviceId": {
+            "description": "The ID of the IoT Device in the IoT Hub",
+            "readOnly": true,
+            "type": "string"
+          },
+          "iotSecurityAgentId": {
+            "description": "The ID of the security agent running on the device",
             "format": "uuid",
+            "readOnly": true,
+            "type": "string"
+          },
+          "deviceType": {
+            "description": "The type of the device",
+            "readOnly": true,
+            "type": "string"
+          },
+          "vendor": {
+            "description": "The vendor of the device",
+            "readOnly": true,
+            "type": "string"
+          },
+          "edgeId": {
+            "description": "The ID of the edge device",
+            "readOnly": true,
+            "type": "string"
+          },
+          "iotHubEntityId": {
+            "description": "The AzureResource entity id of the IoT Hub",
+            "readOnly": true,
+            "type": "string"
+          },
+          "hostEntityId": {
+            "description": "The Host entity id of this device",
+            "readOnly": true,
+            "type": "string"
+          },
+          "threatIntelligence": {
+            "description": "A list of TI contexts attached to the IoTDevice entity.",
+            "items": {
+              "$ref": "#/definitions/ThreatIntelligence"
+            },
+            "readOnly": true,
+            "type": "array"
+          }
+        },
+        "type": "object"
+      },
+      "UserInfo": {
+        "description": "User information that made some action",
+        "properties": {
+          "email": {
+            "description": "The email of the user.",
+            "readOnly": true,
+            "type": "string"
+          },
+          "name": {
+            "description": "The name of the user.",
+            "readOnly": true,
+            "type": "string"
+          },
+          "objectId": {
+            "description": "The object id of the user.",
+            "format": "uuid",
+            "type": "string",
+            "x-nullable": true
+          }
+        },
+        "type": "object"
+      },
+      "IncidentInfo": {
+        "description": "Describes related incident information for the bookmark",
+        "properties": {
+          "incidentId": {
+            "description": "Incident Id",
+            "type": "string"
+          },
+          "severity": {
+            "description": "The severity of the incident",
+            "enum": [
+              "Critical",
+              "High",
+              "Medium",
+              "Low",
+              "Informational"
+            ],
+            "type": "string",
+            "x-ms-enum": {
+              "modelAsString": true,
+              "name": "CaseSeverity",
+              "values": [
+                {
+                  "description": "Critical severity",
+                  "value": "Critical"
+                },
+                {
+                  "description": "High severity",
+                  "value": "High"
+                },
+                {
+                  "description": "Medium severity",
+                  "value": "Medium"
+                },
+                {
+                  "description": "Low severity",
+                  "value": "Low"
+                },
+                {
+                  "description": "Informational severity",
+                  "value": "Informational"
+                }
+              ]
+            }
+          },
+          "title": {
+            "description": "The title of the incident",
+            "type": "string"
+          },
+          "relationName": {
+            "description": "Relation Name",
             "type": "string"
           }
-        }
-      },
-      "required": [
-        "startTime",
-        "endTime"
-      ]
-    },
-    "EntityGetInsightsResponse": {
-      "description": "The Get Insights result operation response.",
-      "properties": {
-        "metaData": {
-          "$ref": "#/definitions/GetInsightsResultsMetadata",
-          "description": "The metadata from the get insights operation results."
         },
-        "value": {
-          "description": "The insights result values.",
-          "items": {
-            "$ref": "#/definitions/EntityInsightItem"
+        "required": [
+          "incidentId",
+          "severity",
+          "title",
+          "relationName"
+        ],
+        "type": "object"
+      },
+      "WatchlistList": {
+        "description": "List all the watchlists.",
+        "properties": {
+          "nextLink": {
+            "description": "URL to fetch the next set of watchlists.",
+            "readOnly": true,
+            "type": "string"
           },
-          "type": "array"
-        }
-      }
-    },
-    "GetInsightsResultsMetadata": {
-      "description": "Get Insights result metadata.",
-      "properties": {
-        "totalCount": {
-          "description": "the total items found for the insights request",
-          "type": "integer",
-          "format": "int32"
-        },
-        "errors": {
-          "description": "information about the failed queries",
-          "items": {
-            "$ref": "#/definitions/GetInsightsError"
-          },
-          "type": "array"
-        }
-      },
-      "required": [
-        "totalCount"
-      ],
-      "type": "object"
-    },
-    "GetInsightsError": {
-      "description": "GetInsights Query Errors.",
-      "properties": {
-        "kind": {
-          "description": "the query kind",
-          "type": "string",
-          "enum": [
-            "Insight"
-          ]
-        },
-        "queryId": {
-          "description": "the query id",
-          "type": "string"
-        },
-        "errorMessage": {
-          "description": "the error message",
-          "type": "string"
-        }
-      },
-      "required": [
-        "kind",
-        "errorMessage"
-      ],
-      "type": "object"
-    },
-    "EntityQueryItem": {
-      "description": "An abstract Query item for entity",
-      "type": "object",
-      "discriminator": "kind",
-      "properties": {
-        "kind": {
-          "$ref": "#/definitions/EntityQueryKind",
-          "description": "The entity query kind type."
-        },
-        "id": {
-          "description": "Query Template ARM ID",
-          "type": "string",
-          "format": "uuid",
-          "readOnly": true
-        },
-        "name": {
-          "description": "Query Template ARM Name",
-          "type": "string"
-        },
-        "type": {
-          "description": "ARM Type",
-          "type": "string"
-        }
-      },
-      "required": [
-        "kind"
-      ]
-    },
-    "EntityQueryItemProperties": {
-      "description": "An properties abstract Query item for entity",
-      "type": "object",
-      "properties": {
-        "dataTypes": {
-          "description": "Data types for template",
-          "type": "array",
-          "items": {
-            "properties": {
-              "dataType": {
-                "description": "Data type name",
-                "type": "string"
-              }
-            }
+          "value": {
+            "description": "Array of watchlist.",
+            "items": {
+              "$ref": "#/definitions/Watchlist"
+            },
+            "type": "array"
           }
         },
-        "inputEntityType": {
-          "description": "The type of the entity",
-          "$ref": "#/definitions/EntityInnerType"
+        "required": [
+          "value"
+        ]
+      },
+      "Watchlist": {
+        "allOf": [
+          {
+            "$ref": "#/definitions/ResourceWithEtag"
+          }
+        ],
+        "description": "Represents a Watchlist in Azure Security Insights.",
+        "properties": {
+          "properties": {
+            "$ref": "#/definitions/WatchlistProperties",
+            "description": "Watchlist properties",
+            "x-ms-client-flatten": true
+          }
         },
-        "requiredInputFieldsSets": {
-          "description": "Data types for template",
-          "type": "array",
-          "items": {
+        "type": "object"
+      },
+      "WatchlistProperties": {
+        "description": "Describes watchlist properties",
+        "properties": {
+          "watchlistId": {
+            "description": "The id (a Guid) of the watchlist",
+            "type": "string"
+          },
+          "displayName": {
+            "description": "The display name of the watchlist",
+            "type": "string"
+          },
+          "provider": {
+            "description": "The provider of the watchlist",
+            "type": "string"
+          },
+          "source": {
+            "description": "The source of the watchlist",
+            "enum": [
+              "Local file",
+              "Remote storage"
+            ],
+            "type": "string",
+            "x-ms-enum": {
+              "modelAsString": true,
+              "name": "source"
+            }
+          },
+          "created": {
+            "description": "The time the watchlist was created",
+            "format": "date-time",
+            "type": "string"
+          },
+          "updated": {
+            "description": "The last time the watchlist was updated",
+            "format": "date-time",
+            "type": "string"
+          },
+          "createdBy": {
+            "$ref": "#/definitions/UserInfo",
+            "description": "Describes a user that created the watchlist",
+            "type": "object"
+          },
+          "updatedBy": {
+            "$ref": "#/definitions/UserInfo",
+            "description": "Describes a user that updated the watchlist",
+            "type": "object"
+          },
+          "description": {
+            "description": "A description of the watchlist",
+            "type": "string"
+          },
+          "watchlistType": {
+            "description": "The type of the watchlist",
+            "type": "string"
+          },
+          "watchlistAlias": {
+            "description": "The alias of the watchlist",
+            "type": "string"
+          },
+          "isDeleted": {
+            "description": "A flag that indicates if the watchlist is deleted or not",
+            "type": "boolean"
+          },
+          "labels": {
+            "description": "List of labels relevant to this watchlist",
+            "items": {
+              "$ref": "#/definitions/Label"
+            },
+            "type": "array"
+          },
+          "defaultDuration": {
+            "description": "The default duration of a watchlist (in ISO 8601 duration format)",
+            "format": "duration",
+            "type": "string"
+          },
+          "tenantId": {
+            "description": "The tenantId where the watchlist belongs to",
+            "type": "string"
+          },
+          "numberOfLinesToSkip": {
+            "description": "The number of lines in a csv/tsv content to skip before the header",
+            "type": "integer",
+            "format": "int32"
+          },
+          "rawContent": {
+            "description": "The raw content that represents to watchlist items to create. In case of csv/tsv content type, it's the content of the file that will parsed by the endpoint",
+            "type": "string"
+          },
+          "contentType": {
+            "description": "The content type of the raw content. Example : text/csv or text/tsv ",
+            "type": "string"
+          }
+        },
+        "required": [
+          "displayName",
+          "source",
+          "provider"
+        ],
+        "type": "object"
+      },
+      "WatchlistItem": {
+        "allOf": [
+          {
+            "$ref": "#/definitions/ResourceWithEtag"
+          }
+        ],
+        "description": "Represents a Watchlist item in Azure Security Insights.",
+        "properties": {
+          "properties": {
+            "$ref": "#/definitions/WatchlistItemProperties",
+            "description": "Watchlist Item properties",
+            "x-ms-client-flatten": true
+          }
+        },
+        "type": "object"
+      },
+      "WatchlistItemProperties": {
+        "description": "Describes watchlist item properties",
+        "properties": {
+          "watchlistItemType": {
+            "description": "The type of the watchlist item",
+            "type": "string"
+          },
+          "watchlistItemId": {
+            "description": "The id (a Guid) of the watchlist item",
+            "type": "string"
+          },
+          "tenantId": {
+            "description": "The tenantId to which the watchlist item belongs to",
+            "type": "string"
+          },
+          "isDeleted": {
+            "description": "A flag that indicates if the watchlist item is deleted or not",
+            "type": "boolean"
+          },
+          "created": {
+            "description": "The time the watchlist item was created",
+            "format": "date-time",
+            "type": "string"
+          },
+          "updated": {
+            "description": "The last time the watchlist item was updated",
+            "format": "date-time",
+            "type": "string"
+          },
+          "createdBy": {
+            "$ref": "#/definitions/UserInfo",
+            "description": "Describes a user that created the watchlist item",
+            "type": "object"
+          },
+          "updatedBy": {
+            "$ref": "#/definitions/UserInfo",
+            "description": "Describes a user that updated the watchlist item",
+            "type": "object"
+          },
+          "itemsKeyValue": {
+            "description": "key-value pairs for a watchlist item",
+            "type": "object"
+          },
+          "entityMapping": {
+            "description": "key-value pairs for a watchlist item entity mapping",
+            "type": "object"
+          }
+        },
+        "required": [
+          "itemsKeyValue"
+        ],
+        "type": "object"
+      },
+      "ThreatIntelligenceInformationList": {
+        "description": "List of all the threat intelligence information objects.",
+        "properties": {
+          "nextLink": {
+            "description": "URL to fetch the next set of information objects.",
+            "readOnly": true,
+            "type": "string"
+          },
+          "value": {
+            "description": "Array of threat intelligence information objects.",
+            "items": {
+              "$ref": "#/definitions/ThreatIntelligenceInformation"
+            },
+            "type": "array"
+          }
+        },
+        "required": [
+          "value"
+        ]
+      },
+      "ThreatIntelligenceInformation": {
+        "allOf": [
+          {
+            "$ref": "#/definitions/ResourceWithEtag"
+          },
+          {
+            "$ref": "#/definitions/ThreatIntelligenceResourceKind"
+          }
+        ],
+        "description": "Threat intelligence information object.",
+        "discriminator": "kind",
+        "type": "object",
+        "required": [
+          "kind"
+        ]
+      },
+      "ThreatIntelligenceIndicatorModel": {
+        "allOf": [
+          {
+            "$ref": "#/definitions/ThreatIntelligenceInformation"
+          }
+        ],
+        "description": "Threat intelligence indicator entity.",
+        "properties": {
+          "properties": {
+            "$ref": "#/definitions/ThreatIntelligenceIndicatorProperties",
+            "description": "Threat Intelligence Entity properties",
+            "x-ms-client-flatten": true
+          }
+        },
+        "type": "object",
+        "x-ms-discriminator-value": "indicator"
+      },
+      "ThreatIntelligenceIndicatorModelForRequestBody": {
+        "allOf": [
+          {
+            "$ref": "#/definitions/ThreatIntelligenceResourceKind"
+          }
+        ],
+        "description": "Threat intelligence indicator entity used in request body.",
+        "properties": {
+          "etag": {
+            "description": "Etag of the azure resource",
+            "type": "string"
+          },
+          "properties": {
+            "$ref": "#/definitions/ThreatIntelligenceIndicatorProperties",
+            "description": "Threat Intelligence Entity properties",
+            "x-ms-client-flatten": true
+          }
+        },
+        "type": "object",
+        "x-ms-discriminator-value": "indicator"
+      },
+      "ThreatIntelligenceResourceKind": {
+        "description": "Describes an entity with kind.",
+        "properties": {
+          "kind": {
+            "$ref": "#/definitions/ThreatIntelligenceResourceInnerKind",
+            "description": "The kind of the entity."
+          }
+        },
+        "required": [
+          "kind"
+        ],
+        "type": "object"
+      },
+      "ThreatIntelligenceResourceInnerKind": {
+        "description": "The kind of the threat intelligence entity",
+        "enum": [
+          "indicator"
+        ],
+        "type": "string",
+        "x-ms-enum": {
+          "modelAsString": true,
+          "name": "ThreatIntelligenceResourceKind",
+          "values": [
+            {
+              "description": "Entity represents threat intelligence indicator in the system.",
+              "value": "indicator"
+            }
+          ]
+        }
+      },
+      "ThreatIntelligenceIndicatorProperties": {
+        "allOf": [
+          {
+            "$ref": "#/definitions/EntityCommonProperties"
+          }
+        ],
+        "description": "Describes threat intelligence entity properties",
+        "properties": {
+          "threatIntelligenceTags": {
+            "description": "List of tags",
+            "items": {
+              "description": "tag",
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "lastUpdatedTimeUtc": {
+            "description": "Last updated time in UTC",
+            "type": "string"
+          },
+          "source": {
+            "description": "Source of a threat intelligence entity",
+            "type": "string"
+          },
+          "displayName": {
+            "description": "Display name of a threat intelligence entity",
+            "type": "string"
+          },
+          "description": {
+            "description": "Description of a threat intelligence entity",
+            "type": "string"
+          },
+          "indicatorTypes": {
+            "description": "Indicator types of threat intelligence entities",
+            "items": {
+              "description": "Indicator type of a threat intelligence entity",
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "pattern": {
+            "description": "Pattern of a threat intelligence entity",
+            "type": "string"
+          },
+          "patternType": {
+            "description": "Pattern type of a threat intelligence entity",
+            "type": "string"
+          },
+          "killChainPhases": {
+            "description": "Kill chain phases",
+            "items": {
+              "description": "Kill chain phase",
+              "$ref": "#/definitions/ThreatIntelligenceKillChainPhase"
+            },
+            "type": "array"
+          },
+          "externalId": {
+            "description": "External ID of threat intelligence entity",
+            "type": "string"
+          },
+          "createdByRef": {
+            "description": "Created by reference of threat intelligence entity",
+            "type": "string"
+          },
+          "externalReferences": {
+            "description": "External References",
+            "items": {
+              "description": "external_reference",
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "granularMarkings": {
+            "description": "Granular Markings",
+            "items": {
+              "description": "Granular marking",
+              "$ref": "#/definitions/ThreatIntelligenceGranularMarkingModel"
+            },
+            "type": "array"
+          },
+          "revoked": {
+            "description": "Is threat intelligence entity revoked",
+            "type": "boolean"
+          },
+          "confidence": {
+            "description": "Confidence of threat intelligence entity",
+            "type": "integer",
+            "format": "int32"
+          },
+          "labels": {
+            "description": "Labels  of threat intelligence entity",
+            "items": {
+              "description": "label",
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "threatTypes": {
+            "description": "Threat types",
+            "items": {
+              "description": "Threat type",
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "validFrom": {
+            "description": "Valid from",
+            "type": "string"
+          },
+          "validUntil": {
+            "description": "Valid until",
+            "type": "string"
+          },
+          "created": {
+            "description": "Created by",
+            "type": "string"
+          },
+          "modified": {
+            "description": "Modified by",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "ThreatIntelligenceKillChainPhase": {
+        "description": "Describes threat kill chain phase entity",
+        "properties": {
+          "killChainName": {
+            "description": "Kill chainName name",
+            "type": "string"
+          },
+          "phaseName": {
+            "description": "Phase name",
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "type": "object"
+      },
+      "ThreatIntelligenceGranularMarkingModel": {
+        "description": "Describes threat granular marking model entity",
+        "properties": {
+          "language": {
+            "description": "Language granular marking model",
+            "type": "string"
+          },
+          "markingRef": {
+            "description": "marking reference granular marking model",
+            "type": "integer",
+            "format": "int32"
+          },
+          "selectors": {
+            "description": "granular marking model selectors",
+            "items": {
+              "description": "granular marking model selector",
+              "type": "string"
+            },
+            "type": "array"
+          }
+        },
+        "type": "object"
+      },
+      "ThreatIntelligenceFilteringCriteria": {
+        "description": "Filtering criteria for querying threat intelligence indicators.",
+        "properties": {
+          "pageSize": {
+            "description": "Page size",
+            "type": "integer",
+            "format": "int32"
+          },
+          "minConfidence": {
+            "description": "Minimum confidence.",
+            "type": "integer",
+            "format": "int32"
+          },
+          "maxConfidence": {
+            "description": "Maximum confidence.",
+            "type": "integer",
+            "format": "int32"
+          },
+          "minValidUntil": {
+            "description": "Start time for ValidUntil filter.",
+            "type": "string"
+          },
+          "maxValidUntil": {
+            "description": "End time for ValidUntil filter.",
+            "type": "string"
+          },
+          "includeDisabled": {
+            "description": "Parameter to include/exclude disabled indicators.",
+            "type": "boolean"
+          },
+          "sortBy": {
+            "description": "Columns to sort by and sorting order",
+            "items": {
+              "description": "Sort By",
+              "$ref": "#/definitions/ThreatIntelligenceSortingCriteria"
+            },
+            "type": "array"
+          },
+          "sources": {
+            "description": "Sources of threat intelligence indicators",
+            "items": {
+              "description": "Source",
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "patternTypes": {
+            "description": "Pattern types",
+            "items": {
+              "description": "Pattern type",
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "threatTypes": {
+            "description": "Threat types of threat intelligence indicators",
+            "items": {
+              "description": "Threat type of a threat intelligence indicator",
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "ids": {
+            "description": "Ids of threat intelligence indicators",
+            "items": {
+              "description": "Id of a threat intelligence indicator",
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "keywords": {
+            "description": "Keywords for searching threat intelligence indicators",
+            "items": {
+              "description": "keyword for searching threat intelligence indicators",
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "skipToken": {
+            "description": "Skip token.",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "ThreatIntelligenceSortingCriteria": {
+        "description": "List of available columns for sorting",
+        "properties": {
+          "itemKey": {
+            "description": "Column name",
+            "type": "string"
+          },
+          "sortOrder": {
+            "$ref": "#/definitions/ThreatIntelligenceSortingOrder",
+            "description": "Sorting order (ascending/descending/unsorted)."
+          }
+        },
+        "type": "object"
+      },
+      "ThreatIntelligenceSortingOrder": {
+        "description": "Sorting order (ascending/descending/unsorted).",
+        "enum": [
+          "unsorted",
+          "ascending",
+          "descending"
+        ],
+        "type": "string",
+        "x-ms-enum": {
+          "modelAsString": true,
+          "name": "ThreatIntelligenceSortingCriteria",
+          "values": [
+            {
+              "value": "unsorted"
+            },
+            {
+              "value": "ascending"
+            },
+            {
+              "value": "descending"
+            }
+          ]
+        }
+      },
+      "ThreatIntelligenceAppendTags": {
+        "description": "Array of tags to be appended to the threat intelligence indicator.",
+        "properties": {
+          "threatIntelligenceTags": {
+            "description": "List of tags to be appended.",
+            "items": {
+              "description": "parameter",
+              "type": "string"
+            },
+            "type": "array"
+          }
+        },
+        "type": "object"
+      },
+      "ThreatIntelligenceMetricsList": {
+        "description": "List of all the threat intelligence metric fields (type/threat type/source).",
+        "properties": {
+          "value": {
+            "description": "Array of threat intelligence metric fields (type/threat type/source).",
+            "items": {
+              "$ref": "#/definitions/ThreatIntelligenceMetrics"
+            },
+            "type": "array"
+          }
+        },
+        "required": [
+          "value"
+        ]
+      },
+      "ThreatIntelligenceMetrics": {
+        "description": "Threat intelligence metrics.",
+        "properties": {
+          "properties": {
+            "description": "Threat intelligence metrics.",
+            "$ref": "#/definitions/ThreatIntelligenceMetric"
+          }
+        }
+      },
+      "ThreatIntelligenceMetric": {
+        "description": "Describes threat intelligence metric",
+        "properties": {
+          "lastUpdatedTimeUtc": {
+            "description": "Last updated indicator metric",
+            "type": "string"
+          },
+          "threatTypeMetrics": {
+            "description": "Threat type metrics",
+            "items": {
+              "description": "parameter",
+              "$ref": "#/definitions/ThreatIntelligenceMetricEntity"
+            },
+            "type": "array"
+          },
+          "patternTypeMetrics": {
+            "description": "Pattern type metrics",
+            "items": {
+              "description": "parameter",
+              "$ref": "#/definitions/ThreatIntelligenceMetricEntity"
+            },
+            "type": "array"
+          },
+          "sourceMetrics": {
+            "description": "Source metrics",
+            "items": {
+              "description": "parameter",
+              "$ref": "#/definitions/ThreatIntelligenceMetricEntity"
+            },
+            "type": "array"
+          }
+        },
+        "type": "object"
+      },
+      "ThreatIntelligenceMetricEntity": {
+        "description": "Describes threat intelligence metric entity",
+        "properties": {
+          "metricName": {
+            "description": "Metric name",
+            "type": "string"
+          },
+          "metricValue": {
+            "description": "Metric value",
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "type": "object"
+      },
+      "EntityGetInsightsParameters": {
+        "description": "The parameters required to execute insights operation on the given entity.",
+        "type": "object",
+        "properties": {
+          "startTime": {
+            "description": "The start timeline date, so the results returned are after this date.",
+            "format": "date-time",
+            "type": "string"
+          },
+          "endTime": {
+            "description": "The end timeline date, so the results returned are before this date.",
+            "format": "date-time",
+            "type": "string"
+          },
+          "addDefaultExtendedTimeRange": {
+            "description": "Indicates if query time range should be extended with default time range of the query. Default value is false",
+            "type": "boolean"
+          },
+          "insightQueryIds": {
+            "description": "List of Insights Query Id. If empty, default value is all insights of this entity",
             "type": "array",
             "items": {
+              "description": "Insight Query Id (GUID)",
+              "format": "uuid",
               "type": "string"
             }
           }
         },
-        "entitiesFilter": {
-          "description": "The query applied only to entities matching to all filters",
-          "type": "object"
-        }
-      }
-    },
-    "EntityInsightItem": {
-      "description": "Entity insight Item.",
-      "type": "object",
-      "properties": {
-        "queryId": {
-          "type": "string",
-          "description": "The query id of the insight"
-        },
-        "queryTimeInterval": {
-          "type": "object",
-          "description": "The Time interval that the query actually executed on.",
-          "properties": {
-            "startTime": {
-              "format": "date-time",
-              "type": "string",
-              "description": "Insight query start time"
+        "required": [
+          "startTime",
+          "endTime"
+        ]
+      },
+      "EntityGetInsightsResponse": {
+        "description": "The Get Insights result operation response.",
+        "properties": {
+          "metaData": {
+            "$ref": "#/definitions/GetInsightsResultsMetadata",
+            "description": "The metadata from the get insights operation results."
+          },
+          "value": {
+            "description": "The insights result values.",
+            "items": {
+              "$ref": "#/definitions/EntityInsightItem"
             },
-            "endTime": {
-              "format": "date-time",
-              "type": "string",
-              "description": "Insight query end time"
-            }
+            "type": "array"
+          }
+        }
+      },
+      "GetInsightsResultsMetadata": {
+        "description": "Get Insights result metadata.",
+        "properties": {
+          "totalCount": {
+            "description": "the total items found for the insights request",
+            "type": "integer",
+            "format": "int32"
+          },
+          "errors": {
+            "description": "information about the failed queries",
+            "items": {
+              "$ref": "#/definitions/GetInsightsError"
+            },
+            "type": "array"
           }
         },
-        "tableQueryResults": {
-          "$ref": "#/definitions/InsightsTableResult",
-          "description": "Query results for table insights query."
+        "required": [
+          "totalCount"
+        ],
+        "type": "object"
+      },
+      "GetInsightsError": {
+        "description": "GetInsights Query Errors.",
+        "properties": {
+          "kind": {
+            "description": "the query kind",
+            "type": "string",
+            "enum": [
+              "Insight"
+            ]
+          },
+          "queryId": {
+            "description": "the query id",
+            "type": "string"
+          },
+          "errorMessage": {
+            "description": "the error message",
+            "type": "string"
+          }
         },
-        "chartQueryResults": {
-          "type": "array",
-          "description": "Query results for table insights query.",
-          "items": {
+        "required": [
+          "kind",
+          "errorMessage"
+        ],
+        "type": "object"
+      },
+      "EntityQueryItem": {
+        "description": "An abstract Query item for entity",
+        "type": "object",
+        "discriminator": "kind",
+        "properties": {
+          "kind": {
+            "$ref": "#/definitions/EntityQueryKind",
+            "description": "The entity query kind type."
+          },
+          "id": {
+            "description": "Query Template ARM ID",
+            "type": "string",
+            "format": "uuid",
+            "readOnly": true
+          },
+          "name": {
+            "description": "Query Template ARM Name",
+            "type": "string"
+          },
+          "type": {
+            "description": "ARM Type",
+            "type": "string"
+          }
+        },
+        "required": [
+          "kind"
+        ]
+      },
+      "EntityQueryItemProperties": {
+        "description": "An properties abstract Query item for entity",
+        "type": "object",
+        "properties": {
+          "dataTypes": {
+            "description": "Data types for template",
+            "type": "array",
+            "items": {
+              "properties": {
+                "dataType": {
+                  "description": "Data type name",
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "inputEntityType": {
+            "description": "The type of the entity",
+            "$ref": "#/definitions/EntityInnerType"
+          },
+          "requiredInputFieldsSets": {
+            "description": "Data types for template",
+            "type": "array",
+            "items": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "entitiesFilter": {
+            "description": "The query applied only to entities matching to all filters",
+            "type": "object"
+          }
+        }
+      },
+      "EntityInsightItem": {
+        "description": "Entity insight Item.",
+        "type": "object",
+        "properties": {
+          "queryId": {
+            "type": "string",
+            "description": "The query id of the insight"
+          },
+          "queryTimeInterval": {
+            "type": "object",
+            "description": "The Time interval that the query actually executed on.",
+            "properties": {
+              "startTime": {
+                "format": "date-time",
+                "type": "string",
+                "description": "Insight query start time"
+              },
+              "endTime": {
+                "format": "date-time",
+                "type": "string",
+                "description": "Insight query end time"
+              }
+            }
+          },
+          "tableQueryResults": {
             "$ref": "#/definitions/InsightsTableResult",
             "description": "Query results for table insights query."
+          },
+          "chartQueryResults": {
+            "type": "array",
+            "description": "Query results for table insights query.",
+            "items": {
+              "$ref": "#/definitions/InsightsTableResult",
+              "description": "Query results for table insights query."
+            }
           }
         }
-      }
-    },
-    "InsightsTableResult": {
-      "type": "object",
-      "description": "Query results for table insights query.",
-      "properties": {
-        "columns": {
-          "type": "array",
-          "description": "Columns Metadata of the table",
-          "items": {
-            "properties": {
-              "type": {
+      },
+      "InsightsTableResult": {
+        "type": "object",
+        "description": "Query results for table insights query.",
+        "properties": {
+          "columns": {
+            "type": "array",
+            "description": "Columns Metadata of the table",
+            "items": {
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "description": "the type of the colum"
+                },
+                "name": {
+                  "type": "string",
+                  "description": "the name of the colum"
+                }
+              }
+            }
+          },
+          "rows": {
+            "type": "array",
+            "description": "Rows data of the table",
+            "items": {
+              "type": "array",
+              "description": "Single row of data",
+              "items": {
                 "type": "string",
-                "description": "the type of the colum"
-              },
-              "name": {
-                "type": "string",
-                "description": "the name of the colum"
+                "description": "Cell in the table"
               }
             }
           }
-        },
-        "rows": {
-          "type": "array",
-          "description": "Rows data of the table",
-          "items": {
-            "type": "array",
-            "description": "Single row of data",
-            "items": {
-              "type": "string",
-              "description": "Cell in the table"
-            }
-          }
         }
       }
-    }
-  },
-  "parameters": {
-    "Action": {
-      "description": "The action",
-      "in": "body",
-      "name": "action",
-      "required": true,
-      "schema": {
-        "$ref": "#/definitions/ActionRequest"
+    },
+    "parameters": {
+      "Action": {
+        "description": "The action",
+        "in": "body",
+        "name": "action",
+        "required": true,
+        "schema": {
+          "$ref": "#/definitions/ActionRequest"
+        },
+        "x-ms-parameter-location": "method"
       },
-      "x-ms-parameter-location": "method"
-    },
-    "ActionId": {
-      "description": "Action ID",
-      "in": "path",
-      "name": "actionId",
-      "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "method"
-    },
-    "AggregationsName": {
-      "description": "The aggregation name. Supports - Cases",
-      "in": "path",
-      "name": "aggregationsName",
-      "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "method"
-    },
-    "AlertRule": {
-      "description": "The alert rule",
-      "in": "body",
-      "name": "alertRule",
-      "required": true,
-      "schema": {
-        "$ref": "#/definitions/AlertRule"
+      "ActionId": {
+        "description": "Action ID",
+        "in": "path",
+        "name": "actionId",
+        "required": true,
+        "type": "string",
+        "x-ms-parameter-location": "method"
       },
-      "x-ms-parameter-location": "method"
-    },
-    "AlertRuleTemplateId": {
-      "description": "Alert rule template ID",
-      "in": "path",
-      "name": "alertRuleTemplateId",
-      "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "method"
-    },
-    "ApiVersion": {
-      "description": "API version for the operation",
-      "enum": [
-        "2019-01-01-preview"
-      ],
-      "in": "query",
-      "name": "api-version",
-      "required": true,
-      "type": "string"
-    },
-    "Bookmark": {
-      "description": "The bookmark",
-      "in": "body",
-      "name": "bookmark",
-      "required": true,
-      "schema": {
-        "$ref": "#/definitions/Bookmark"
+      "AggregationsName": {
+        "description": "The aggregation name. Supports - Cases",
+        "in": "path",
+        "name": "aggregationsName",
+        "required": true,
+        "type": "string",
+        "x-ms-parameter-location": "method"
       },
-      "x-ms-parameter-location": "method"
-    },
-    "RelationName": {
-      "name": "relationName",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "Relation Name",
-      "x-ms-parameter-location": "method"
-    },
-    "RelationInputModel": {
-      "name": "relationInputModel",
-      "in": "body",
-      "description": "The relation input model",
-      "required": true,
-      "schema": {
-        "$ref": "#/definitions/RelationsModelInput"
+      "AlertRule": {
+        "description": "The alert rule",
+        "in": "body",
+        "name": "alertRule",
+        "required": true,
+        "schema": {
+          "$ref": "#/definitions/AlertRule"
+        },
+        "x-ms-parameter-location": "method"
       },
-      "x-ms-parameter-location": "method"
-    },
-    "BookmarkId": {
-      "description": "Bookmark ID",
-      "in": "path",
-      "name": "bookmarkId",
-      "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "method"
-    },
-    "Case": {
-      "description": "The case",
-      "in": "body",
-      "name": "case",
-      "required": true,
-      "schema": {
-        "$ref": "#/definitions/Case"
+      "AlertRuleTemplateId": {
+        "description": "Alert rule template ID",
+        "in": "path",
+        "name": "alertRuleTemplateId",
+        "required": true,
+        "type": "string",
+        "x-ms-parameter-location": "method"
       },
-      "x-ms-parameter-location": "method"
-    },
-    "CaseComment": {
-      "description": "The case comment",
-      "in": "body",
-      "name": "caseComment",
-      "required": true,
-      "schema": {
-        "$ref": "#/definitions/CaseComment"
+      "ApiVersion": {
+        "description": "API version for the operation",
+        "enum": [
+          "2019-01-01-preview"
+        ],
+        "in": "query",
+        "name": "api-version",
+        "required": true,
+        "type": "string"
       },
-      "x-ms-parameter-location": "method"
-    },
-    "CaseCommentId": {
-      "description": "Case comment ID",
-      "in": "path",
-      "name": "caseCommentId",
-      "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "method"
-    },
-    "CaseId": {
-      "description": "Case ID",
-      "in": "path",
-      "name": "caseId",
-      "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "method"
-    },
-    "ConsentId": {
-      "description": "consent ID",
-      "in": "path",
-      "name": "consentId",
-      "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "method"
-    },
-    "DataConnector": {
-      "description": "The data connector",
-      "in": "body",
-      "name": "dataConnector",
-      "required": true,
-      "schema": {
-        "$ref": "#/definitions/DataConnector"
+      "Bookmark": {
+        "description": "The bookmark",
+        "in": "body",
+        "name": "bookmark",
+        "required": true,
+        "schema": {
+          "$ref": "#/definitions/Bookmark"
+        },
+        "x-ms-parameter-location": "method"
       },
-      "x-ms-parameter-location": "method"
-    },
-    "DataConnectorId": {
-      "description": "Connector ID",
-      "in": "path",
-      "name": "dataConnectorId",
-      "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "method"
-    },
-    "DataConnectorsCheckRequirementsBody": {
-      "description": "The parameters for requirements check message",
-      "in": "body",
-      "name": "DataConnectorsCheckRequirements",
-      "required": true,
-      "schema": {
-        "$ref": "#/definitions/DataConnectorsCheckRequirements"
+      "RelationName": {
+        "name": "relationName",
+        "in": "path",
+        "required": true,
+        "type": "string",
+        "description": "Relation Name",
+        "x-ms-parameter-location": "method"
       },
-      "x-ms-parameter-location": "method"
-    },
-    "EntityExpandRequestBody": {
-      "description": "The parameters required to execute an expand operation on the given entity.",
-      "in": "body",
-      "name": "parameters",
-      "required": true,
-      "schema": {
-        "$ref": "#/definitions/EntityExpandParameters"
+      "RelationInputModel": {
+        "name": "relationInputModel",
+        "in": "body",
+        "description": "The relation input model",
+        "required": true,
+        "schema": {
+          "$ref": "#/definitions/RelationsModelInput"
+        },
+        "x-ms-parameter-location": "method"
       },
-      "x-ms-parameter-location": "method"
-    },
-    "BookmarkExpandRequestBody": {
-      "description": "The parameters required to execute an expand operation on the given bookmark.",
-      "in": "body",
-      "name": "parameters",
-      "required": true,
-      "schema": {
-        "$ref": "#/definitions/BookmarkExpandParameters"
+      "BookmarkId": {
+        "description": "Bookmark ID",
+        "in": "path",
+        "name": "bookmarkId",
+        "required": true,
+        "type": "string",
+        "x-ms-parameter-location": "method"
       },
-      "x-ms-parameter-location": "method"
-    },
-    "EntityTimelineRequestBody": {
-      "description": "The parameters required to execute an timeline operation on the given entity.",
-      "in": "body",
-      "name": "parameters",
-      "required": true,
-      "schema": {
-        "$ref": "#/definitions/EntityTimelineParameters"
+      "Case": {
+        "description": "The case",
+        "in": "body",
+        "name": "case",
+        "required": true,
+        "schema": {
+          "$ref": "#/definitions/Case"
+        },
+        "x-ms-parameter-location": "method"
       },
-      "x-ms-parameter-location": "method"
-    },
-    "GetInsightsEntityQueriesRequestBody": {
-      "description": "The parameters required to execute insights on the given entity.",
-      "name": "parameters",
-      "in": "body",
-      "required": true,
-      "schema": {
-        "$ref": "#/definitions/EntityGetInsightsParameters"
+      "CaseComment": {
+        "description": "The case comment",
+        "in": "body",
+        "name": "caseComment",
+        "required": true,
+        "schema": {
+          "$ref": "#/definitions/CaseComment"
+        },
+        "x-ms-parameter-location": "method"
       },
-      "x-ms-parameter-location": "method"
-    },
-    "EntityId": {
-      "description": "entity ID",
-      "in": "path",
-      "name": "entityId",
-      "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "method"
-    },
-    "EntityQueryId": {
-      "description": "entity query ID",
-      "in": "path",
-      "name": "entityQueryId",
-      "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "method"
-    },
-    "Incident": {
-      "description": "The incident",
-      "in": "body",
-      "name": "incident",
-      "required": true,
-      "schema": {
-        "$ref": "#/definitions/Incident"
+      "CaseCommentId": {
+        "description": "Case comment ID",
+        "in": "path",
+        "name": "caseCommentId",
+        "required": true,
+        "type": "string",
+        "x-ms-parameter-location": "method"
       },
-      "x-ms-parameter-location": "method"
-    },
-    "IncidentComment": {
-      "description": "The incident comment",
-      "in": "body",
-      "name": "incidentComment",
-      "required": true,
-      "schema": {
-        "$ref": "#/definitions/IncidentComment"
+      "CaseId": {
+        "description": "Case ID",
+        "in": "path",
+        "name": "caseId",
+        "required": true,
+        "type": "string",
+        "x-ms-parameter-location": "method"
       },
-      "x-ms-parameter-location": "method"
-    },
-    "IncidentCommentId": {
-      "description": "Incident comment ID",
-      "in": "path",
-      "name": "incidentCommentId",
-      "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "method"
-    },
-    "IncidentId": {
-      "description": "Incident ID",
-      "in": "path",
-      "name": "incidentId",
-      "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "method"
-    },
-    "EntityQueryKindParam": {
-      "description": "The Kind parameter for queries",
-      "in": "query",
-      "name": "kind",
-      "required": true,
-      "type": "string",
-      "enum": [
-        "Insight"
-      ],
-      "x-ms-enum": {
-        "modelAsString": true,
-        "name": "EntityItemQueryKind",
-        "values": [
-          {
-            "description": "insight",
-            "value": "Insight"
-          }
-        ]
+      "ConsentId": {
+        "description": "consent ID",
+        "in": "path",
+        "name": "consentId",
+        "required": true,
+        "type": "string",
+        "x-ms-parameter-location": "method"
       },
-      "x-ms-parameter-location": "method"
-    },
-    "ODataFilter": {
-      "description": "Filters the results, based on a Boolean condition. Optional.",
-      "in": "query",
-      "name": "$filter",
-      "required": false,
-      "type": "string",
-      "x-ms-parameter-location": "method"
-    },
-    "ODataOrderBy": {
-      "description": "Sorts the results. Optional.",
-      "in": "query",
-      "name": "$orderby",
-      "required": false,
-      "type": "string",
-      "x-ms-parameter-location": "method"
-    },
-    "ODataSkipToken": {
-      "description": "Skiptoken is only used if a previous operation returned a partial result. If a previous response contains a nextLink element, the value of the nextLink element will include a skiptoken parameter that specifies a starting point to use for subsequent calls. Optional.",
-      "in": "query",
-      "name": "$skipToken",
-      "required": false,
-      "type": "string",
-      "x-ms-parameter-location": "method"
-    },
-    "ODataTop": {
-      "description": "Returns only the first n results. Optional.",
-      "format": "int32",
-      "in": "query",
-      "name": "$top",
-      "required": false,
-      "type": "integer",
-      "x-ms-parameter-location": "method"
-    },
-    "OperationalInsightsResourceProvider": {
-      "description": "The namespace of workspaces resource provider- Microsoft.OperationalInsights.",
-      "in": "path",
-      "name": "operationalInsightsResourceProvider",
-      "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "method"
-    },
-    "Relation": {
-      "name": "relation",
-      "in": "body",
-      "description": "The relation model",
-      "required": true,
-      "schema": {
-        "$ref": "#/definitions/Relation"
+      "DataConnector": {
+        "description": "The data connector",
+        "in": "body",
+        "name": "dataConnector",
+        "required": true,
+        "schema": {
+          "$ref": "#/definitions/DataConnector"
+        },
+        "x-ms-parameter-location": "method"
       },
-      "x-ms-parameter-location": "method"
-    },
-    "ResourceGroupName": {
-      "description": "The name of the resource group within the user's subscription. The name is case insensitive.",
-      "in": "path",
-      "maxLength": 90,
-      "minLength": 1,
-      "name": "resourceGroupName",
-      "pattern": "^[-\\w\\._\\(\\)]+$",
-      "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "method"
-    },
-    "RuleId": {
-      "description": "Alert rule ID",
-      "in": "path",
-      "name": "ruleId",
-      "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "method"
-    },
-    "Settings": {
-      "description": "The setting",
-      "in": "body",
-      "name": "settings",
-      "required": true,
-      "schema": {
-        "$ref": "#/definitions/Settings"
+      "DataConnectorId": {
+        "description": "Connector ID",
+        "in": "path",
+        "name": "dataConnectorId",
+        "required": true,
+        "type": "string",
+        "x-ms-parameter-location": "method"
       },
-      "x-ms-parameter-location": "method"
-    },
-    "SettingsName": {
-      "description": "The setting name. Supports - EyesOn, EntityAnalytics, Ueba",
-      "in": "path",
-      "name": "settingsName",
-      "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "method"
-    },
-    "SubscriptionId": {
-      "description": "Azure subscription ID",
-      "in": "path",
-      "name": "subscriptionId",
-      "pattern": "^[0-9A-Fa-f]{8}-([0-9A-Fa-f]{4}-){3}[0-9A-Fa-f]{12}$",
-      "required": true,
-      "type": "string"
-    },
-    "WorkspaceName": {
-      "description": "The name of the workspace.",
-      "in": "path",
-      "maxLength": 90,
-      "minLength": 1,
-      "name": "workspaceName",
-      "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "method"
-    },
-    "WatchlistAlias": {
-      "description": "Watchlist Alias",
-      "in": "path",
-      "name": "watchlistAlias",
-      "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "method"
-    },
-    "Watchlist": {
-      "description": "The watchlist",
-      "in": "body",
-      "name": "watchlist",
-      "required": true,
-      "schema": {
-        "$ref": "#/definitions/Watchlist"
+      "DataConnectorsCheckRequirementsBody": {
+        "description": "The parameters for requirements check message",
+        "in": "body",
+        "name": "DataConnectorsCheckRequirements",
+        "required": true,
+        "schema": {
+          "$ref": "#/definitions/DataConnectorsCheckRequirements"
+        },
+        "x-ms-parameter-location": "method"
       },
-      "x-ms-parameter-location": "method"
-    },
-    "WatchlistItem": {
-      "description": "The watchlist item",
-      "in": "body",
-      "name": "watchlistItem",
-      "required": true,
-      "schema": {
-        "$ref": "#/definitions/WatchlistItem"
+      "EntityExpandRequestBody": {
+        "description": "The parameters required to execute an expand operation on the given entity.",
+        "in": "body",
+        "name": "parameters",
+        "required": true,
+        "schema": {
+          "$ref": "#/definitions/EntityExpandParameters"
+        },
+        "x-ms-parameter-location": "method"
       },
-      "x-ms-parameter-location": "method"
-    },
-    "WatchlistItemId": {
-      "description": "Watchlist Item Id (GUID)",
-      "in": "path",
-      "name": "watchlistItemId",
-      "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "method"
-    },
-    "ThreatIntelligenceName": {
-      "description": "Threat intelligence indicator name field.",
-      "in": "path",
-      "name": "name",
-      "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "method"
-    },
-    "ThreatIntelligenceProperties": {
-      "description": "Properties of threat intelligence indicators to create and update.",
-      "in": "body",
-      "name": "ThreatIntelligenceProperties",
-      "required": true,
-      "schema": {
-        "$ref": "#/definitions/ThreatIntelligenceIndicatorModelForRequestBody"
+      "BookmarkExpandRequestBody": {
+        "description": "The parameters required to execute an expand operation on the given bookmark.",
+        "in": "body",
+        "name": "parameters",
+        "required": true,
+        "schema": {
+          "$ref": "#/definitions/BookmarkExpandParameters"
+        },
+        "x-ms-parameter-location": "method"
       },
-      "x-ms-parameter-location": "method"
-    },
-    "ThreatIntelligenceReplaceTags": {
-      "description": "Tags in the threat intelligence indicator to be replaced.",
-      "in": "body",
-      "name": "ThreatIntelligenceReplaceTags",
-      "required": true,
-      "schema": {
-        "$ref": "#/definitions/ThreatIntelligenceIndicatorModelForRequestBody"
+      "EntityTimelineRequestBody": {
+        "description": "The parameters required to execute an timeline operation on the given entity.",
+        "in": "body",
+        "name": "parameters",
+        "required": true,
+        "schema": {
+          "$ref": "#/definitions/EntityTimelineParameters"
+        },
+        "x-ms-parameter-location": "method"
       },
-      "x-ms-parameter-location": "method"
-    },
-    "ThreatIntelligenceFilteringCriteria": {
-      "description": "Filtering criteria for querying threat intelligence indicators.",
-      "in": "body",
-      "name": "ThreatIntelligenceFilteringCriteria",
-      "required": true,
-      "schema": {
-        "$ref": "#/definitions/ThreatIntelligenceFilteringCriteria"
+      "GetInsightsEntityQueriesRequestBody": {
+        "description": "The parameters required to execute insights on the given entity.",
+        "name": "parameters",
+        "in": "body",
+        "required": true,
+        "schema": {
+          "$ref": "#/definitions/EntityGetInsightsParameters"
+        },
+        "x-ms-parameter-location": "method"
       },
-      "x-ms-parameter-location": "method"
-    },
-    "ThreatIntelligenceIndicatorEntityKind": {
-      "description": "The threat intelligence entity kind",
-      "in": "query",
-      "name": "ctiEntityKind",
-      "required": false,
-      "type": "string",
-      "x-ms-parameter-location": "method"
-    },
-    "ThreatIntelligenceAppendTags": {
-      "description": "The threat intelligence append tags request body",
-      "in": "body",
-      "name": "ThreatIntelligenceAppendTags",
-      "required": true,
-      "schema": {
-        "$ref": "#/definitions/ThreatIntelligenceAppendTags"
+      "EntityId": {
+        "description": "entity ID",
+        "in": "path",
+        "name": "entityId",
+        "required": true,
+        "type": "string",
+        "x-ms-parameter-location": "method"
       },
-      "x-ms-parameter-location": "method"
+      "EntityQueryId": {
+        "description": "entity query ID",
+        "in": "path",
+        "name": "entityQueryId",
+        "required": true,
+        "type": "string",
+        "x-ms-parameter-location": "method"
+      },
+      "Incident": {
+        "description": "The incident",
+        "in": "body",
+        "name": "incident",
+        "required": true,
+        "schema": {
+          "$ref": "#/definitions/Incident"
+        },
+        "x-ms-parameter-location": "method"
+      },
+      "IncidentComment": {
+        "description": "The incident comment",
+        "in": "body",
+        "name": "incidentComment",
+        "required": true,
+        "schema": {
+          "$ref": "#/definitions/IncidentComment"
+        },
+        "x-ms-parameter-location": "method"
+      },
+      "IncidentCommentId": {
+        "description": "Incident comment ID",
+        "in": "path",
+        "name": "incidentCommentId",
+        "required": true,
+        "type": "string",
+        "x-ms-parameter-location": "method"
+      },
+      "IncidentId": {
+        "description": "Incident ID",
+        "in": "path",
+        "name": "incidentId",
+        "required": true,
+        "type": "string",
+        "x-ms-parameter-location": "method"
+      },
+      "EntityQueryKindParam": {
+        "description": "The Kind parameter for queries",
+        "in": "query",
+        "name": "kind",
+        "required": true,
+        "type": "string",
+        "enum": [
+          "Insight"
+        ],
+        "x-ms-enum": {
+          "modelAsString": true,
+          "name": "EntityItemQueryKind",
+          "values": [
+            {
+              "description": "insight",
+              "value": "Insight"
+            }
+          ]
+        },
+        "x-ms-parameter-location": "method"
+      },
+      "ODataFilter": {
+        "description": "Filters the results, based on a Boolean condition. Optional.",
+        "in": "query",
+        "name": "$filter",
+        "required": false,
+        "type": "string",
+        "x-ms-parameter-location": "method"
+      },
+      "ODataOrderBy": {
+        "description": "Sorts the results. Optional.",
+        "in": "query",
+        "name": "$orderby",
+        "required": false,
+        "type": "string",
+        "x-ms-parameter-location": "method"
+      },
+      "ODataSkipToken": {
+        "description": "Skiptoken is only used if a previous operation returned a partial result. If a previous response contains a nextLink element, the value of the nextLink element will include a skiptoken parameter that specifies a starting point to use for subsequent calls. Optional.",
+        "in": "query",
+        "name": "$skipToken",
+        "required": false,
+        "type": "string",
+        "x-ms-parameter-location": "method"
+      },
+      "ODataTop": {
+        "description": "Returns only the first n results. Optional.",
+        "format": "int32",
+        "in": "query",
+        "name": "$top",
+        "required": false,
+        "type": "integer",
+        "x-ms-parameter-location": "method"
+      },
+      "OperationalInsightsResourceProvider": {
+        "description": "The namespace of workspaces resource provider- Microsoft.OperationalInsights.",
+        "in": "path",
+        "name": "operationalInsightsResourceProvider",
+        "required": true,
+        "type": "string",
+        "x-ms-parameter-location": "method"
+      },
+      "Relation": {
+        "name": "relation",
+        "in": "body",
+        "description": "The relation model",
+        "required": true,
+        "schema": {
+          "$ref": "#/definitions/Relation"
+        },
+        "x-ms-parameter-location": "method"
+      },
+      "ResourceGroupName": {
+        "description": "The name of the resource group within the user's subscription. The name is case insensitive.",
+        "in": "path",
+        "maxLength": 90,
+        "minLength": 1,
+        "name": "resourceGroupName",
+        "pattern": "^[-\\w\\._\\(\\)]+$",
+        "required": true,
+        "type": "string",
+        "x-ms-parameter-location": "method"
+      },
+      "RuleId": {
+        "description": "Alert rule ID",
+        "in": "path",
+        "name": "ruleId",
+        "required": true,
+        "type": "string",
+        "x-ms-parameter-location": "method"
+      },
+      "Settings": {
+        "description": "The setting",
+        "in": "body",
+        "name": "settings",
+        "required": true,
+        "schema": {
+          "$ref": "#/definitions/Settings"
+        },
+        "x-ms-parameter-location": "method"
+      },
+      "SettingsName": {
+        "description": "The setting name. Supports - EyesOn, EntityAnalytics, Ueba",
+        "in": "path",
+        "name": "settingsName",
+        "required": true,
+        "type": "string",
+        "x-ms-parameter-location": "method"
+      },
+      "SubscriptionId": {
+        "description": "Azure subscription ID",
+        "in": "path",
+        "name": "subscriptionId",
+        "pattern": "^[0-9A-Fa-f]{8}-([0-9A-Fa-f]{4}-){3}[0-9A-Fa-f]{12}$",
+        "required": true,
+        "type": "string"
+      },
+      "WorkspaceName": {
+        "description": "The name of the workspace.",
+        "in": "path",
+        "maxLength": 90,
+        "minLength": 1,
+        "name": "workspaceName",
+        "required": true,
+        "type": "string",
+        "x-ms-parameter-location": "method"
+      },
+      "WatchlistAlias": {
+        "description": "Watchlist Alias",
+        "in": "path",
+        "name": "watchlistAlias",
+        "required": true,
+        "type": "string",
+        "x-ms-parameter-location": "method"
+      },
+      "Watchlist": {
+        "description": "The watchlist",
+        "in": "body",
+        "name": "watchlist",
+        "required": true,
+        "schema": {
+          "$ref": "#/definitions/Watchlist"
+        },
+        "x-ms-parameter-location": "method"
+      },
+      "WatchlistItem": {
+        "description": "The watchlist item",
+        "in": "body",
+        "name": "watchlistItem",
+        "required": true,
+        "schema": {
+          "$ref": "#/definitions/WatchlistItem"
+        },
+        "x-ms-parameter-location": "method"
+      },
+      "WatchlistItemId": {
+        "description": "Watchlist Item Id (GUID)",
+        "in": "path",
+        "name": "watchlistItemId",
+        "required": true,
+        "type": "string",
+        "x-ms-parameter-location": "method"
+      },
+      "ThreatIntelligenceName": {
+        "description": "Threat intelligence indicator name field.",
+        "in": "path",
+        "name": "name",
+        "required": true,
+        "type": "string",
+        "x-ms-parameter-location": "method"
+      },
+      "ThreatIntelligenceProperties": {
+        "description": "Properties of threat intelligence indicators to create and update.",
+        "in": "body",
+        "name": "ThreatIntelligenceProperties",
+        "required": true,
+        "schema": {
+          "$ref": "#/definitions/ThreatIntelligenceIndicatorModelForRequestBody"
+        },
+        "x-ms-parameter-location": "method"
+      },
+      "ThreatIntelligenceReplaceTags": {
+        "description": "Tags in the threat intelligence indicator to be replaced.",
+        "in": "body",
+        "name": "ThreatIntelligenceReplaceTags",
+        "required": true,
+        "schema": {
+          "$ref": "#/definitions/ThreatIntelligenceIndicatorModelForRequestBody"
+        },
+        "x-ms-parameter-location": "method"
+      },
+      "ThreatIntelligenceFilteringCriteria": {
+        "description": "Filtering criteria for querying threat intelligence indicators.",
+        "in": "body",
+        "name": "ThreatIntelligenceFilteringCriteria",
+        "required": true,
+        "schema": {
+          "$ref": "#/definitions/ThreatIntelligenceFilteringCriteria"
+        },
+        "x-ms-parameter-location": "method"
+      },
+      "ThreatIntelligenceIndicatorEntityKind": {
+        "description": "The threat intelligence entity kind",
+        "in": "query",
+        "name": "ctiEntityKind",
+        "required": false,
+        "type": "string",
+        "x-ms-parameter-location": "method"
+      },
+      "ThreatIntelligenceAppendTags": {
+        "description": "The threat intelligence append tags request body",
+        "in": "body",
+        "name": "ThreatIntelligenceAppendTags",
+        "required": true,
+        "schema": {
+          "$ref": "#/definitions/ThreatIntelligenceAppendTags"
+        },
+        "x-ms-parameter-location": "method"
+      }
     }
   }
 }
