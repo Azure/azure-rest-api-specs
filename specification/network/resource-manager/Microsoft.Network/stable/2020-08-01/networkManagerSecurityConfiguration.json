@@ -181,7 +181,7 @@
           "200": {
             "description": "Post successful.",
             "schema": {
-              "$ref": "#/definitions/SecurityRuleListResult"
+              "$ref": "#/definitions/SecurityConfigurationRuleListResult"
             }
           },
           "default": {
@@ -956,7 +956,7 @@
           "items": {
             "$ref": "#/definitions/SecurityConfigurationUserRule"
           },
-          "description": "A list of managed network security configuration user rules"
+          "description": "A list of network manager security configuration user rules"
         },
         "nextLink": {
           "type": "string",
@@ -964,14 +964,14 @@
         }
       }
     },
-    "SecurityRuleListResult": {
+    "SecurityConfigurationRuleListResult": {
       "properties": {
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/SecurityRule"
+            "$ref": "#/definitions/SecurityConfigurationRule"
           },
-          "description": "A list of managed network security rules"
+          "description": "A list of network manager security configuration rules"
         },
         "failedImports": {
           "$ref": "#/definitions/FailedImports",
@@ -1318,7 +1318,7 @@
         }
       }
     },
-    "SecurityRule": {
+    "SecurityConfigurationRule": {
       "properties": {
         "securityType": {
           "type": "string",
