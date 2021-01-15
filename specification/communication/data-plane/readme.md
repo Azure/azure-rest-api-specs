@@ -29,11 +29,11 @@ openapi-type: data-plane
 tag: package-2021-03-07
 ```
 
-### Tag: package-2020-07-20-preview1
+### Tag: package-2021-03-07
 
 These settings apply only when `--tag=package-2021-03-07` is specified on the command line.
 
-```yaml $(tag) == 'package-2020-07-20-preview1'
+```yaml $(tag) == 'package-2021-03-07'
 input-file:
   - Microsoft.CommunicationServicesAdministration/ga/2021-03-07/phonenumbers.json
 title:
