@@ -34,6 +34,36 @@
     }
   },
   "paths": {
+    "/providers/Microsoft.Solutions/operations": {
+      "get": {
+        "tags": [
+          "Operations"
+        ],
+        "operationId": "ListOperations",
+        "description": "Lists all of the available Microsoft.Solutions REST API operations.",
+        "x-ms-examples": {
+          "List Solutions operations": {
+            "$ref": "./examples/listSolutionsOperations.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/OperationListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Solutions/applications/{applicationName}": {
       "get": {
         "tags": [
@@ -239,7 +269,7 @@
             "name": "parameters",
             "in": "body",
             "schema": {
-              "$ref": "#/definitions/Application"
+              "$ref": "#/definitions/ApplicationPatchable"
             },
             "description": "Parameters supplied to update an existing managed application."
           },
@@ -745,24 +775,43 @@
     }
   },
   "x-ms-paths": {
-    "/{applicationDefinitionId}?disambiguation_dummy": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Solutions/applicationDefinitions/{applicationDefinitionName}?disambiguation_dummy": {
       "get": {
         "tags": [
           "ApplicationDefinitions"
         ],
         "operationId": "ApplicationDefinitions_GetById",
         "description": "Gets the managed application definition.",
+        "x-ms-examples": {
+          "Get managed application definition": {
+            "$ref": "./examples/getApplicationDefinition.json"
+          }
+        },
         "parameters": [
           {
-            "name": "applicationDefinitionId",
+            "name": "resourceGroupName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The fully qualified ID of the managed application definition, including the managed application name and the managed application definition resource type. Use the format, /subscriptions/{guid}/resourceGroups/{resource-group-name}/Microsoft.Solutions/applicationDefinitions/{applicationDefinition-name}",
-            "x-ms-skip-url-encoding": true
+            "description": "The name of the resource group. The name is case insensitive.",
+            "pattern": "^[-\\w\\._\\(\\)]+$",
+            "minLength": 1,
+            "maxLength": 90
+          },
+          {
+            "name": "applicationDefinitionName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the managed application definition.",
+            "minLength": 3,
+            "maxLength": 64
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -789,17 +838,36 @@
         ],
         "operationId": "ApplicationDefinitions_DeleteById",
         "description": "Deletes the managed application definition.",
+        "x-ms-examples": {
+          "Get managed application definition": {
+            "$ref": "./examples/deleteApplicationDefinition.json"
+          }
+        },
         "parameters": [
           {
-            "name": "applicationDefinitionId",
+            "name": "resourceGroupName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The fully qualified ID of the managed application definition, including the managed application name and the managed application definition resource type. Use the format, /subscriptions/{guid}/resourceGroups/{resource-group-name}/Microsoft.Solutions/applicationDefinitions/{applicationDefinition-name}",
-            "x-ms-skip-url-encoding": true
+            "description": "The name of the resource group. The name is case insensitive.",
+            "pattern": "^[-\\w\\._\\(\\)]+$",
+            "minLength": 1,
+            "maxLength": 90
+          },
+          {
+            "name": "applicationDefinitionName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the managed application definition.",
+            "minLength": 3,
+            "maxLength": 64
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -827,14 +895,36 @@
         ],
         "operationId": "ApplicationDefinitions_CreateOrUpdateById",
         "description": "Creates a new managed application definition.",
+        "x-ms-examples": {
+          "Create or update managed application definition": {
+            "$ref": "./examples/createOrUpdateApplicationDefinition.json"
+          }
+        },
         "parameters": [
           {
-            "name": "applicationDefinitionId",
+            "name": "resourceGroupName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The fully qualified ID of the managed application definition, including the managed application name and the managed application definition resource type. Use the format, /subscriptions/{guid}/resourceGroups/{resource-group-name}/Microsoft.Solutions/applicationDefinitions/{applicationDefinition-name}",
-            "x-ms-skip-url-encoding": true
+            "description": "The name of the resource group. The name is case insensitive.",
+            "pattern": "^[-\\w\\._\\(\\)]+$",
+            "minLength": 1,
+            "maxLength": 90
+          },
+          {
+            "name": "applicationDefinitionName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the managed application definition.",
+            "minLength": 3,
+            "maxLength": 64
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
             "name": "parameters",
@@ -844,9 +934,6 @@
               "$ref": "#/definitions/ApplicationDefinition"
             },
             "description": "Parameters supplied to the create or update a managed application definition."
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -1349,6 +1436,49 @@
         "errorMessage": {
           "description": "Error message indicating why the operation failed.",
           "type": "string"
+        }
+      }
+    },
+    "Operation": {
+      "description": "Microsoft.Solutions operation",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Operation name: {provider}/{resource}/{operation}",
+          "type": "string"
+        },
+        "display": {
+          "description": "The object that represents the operation.",
+          "properties": {
+            "provider": {
+              "description": "Service provider: Microsoft.Solutions",
+              "type": "string"
+            },
+            "resource": {
+              "description": "Resource on which the operation is performed: Application, JitRequest, etc.",
+              "type": "string"
+            },
+            "operation": {
+              "description": "Operation type: Read, write, delete, etc.",
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "OperationListResult": {
+      "description": "Result of the request to list Microsoft.Solutions operations. It contains a list of operations and a URL link to get the next set of results.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Operation"
+          },
+          "description": "List of Microsoft.Solutions operations."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "URL to get the next set of operation list results if there are any."
         }
       }
     }

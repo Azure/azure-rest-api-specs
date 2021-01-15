@@ -16,7 +16,7 @@
           "enableSoftDelete": true,
           "softDeleteRetentionInDays": 90,
           "enablePurgeProtection": true,
-          "hsmPoolUri": "https://westus.hsm1.managedhsm.azure.net",
+          "hsmUri": "https://westus.hsm1.managedhsm.azure.net",
           "provisioningState": "Succeeded",
           "statusMessage": "ManagedHsm is functional."
         },
@@ -33,6 +33,13 @@
           "Environment": "dogfood"
         }
       }
-    }
+    },
+    "202": {
+      "headers": {
+        "Retry-After": "60",
+        "Location": "https://some.endpoint.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/hsm-group/providers/Microsoft.KeyVault/managedHSMs/hsm1?api-version=2020-04-01-preview&kv-operation=abJjb2RkIjoiAGVsZXRlTWFuYWdlZEhzbUFzeW5jYm9"
+      }
+    },
+    "204": {}
   }
 }

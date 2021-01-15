@@ -66,14 +66,17 @@
           "Create cluster with TLS 1.2": {
             "$ref": "./examples/CreateHDInsightClusterWithTLS12.json"
           },
-          "Create cluster with custom network settings": {
-            "$ref": "./examples/CreateHDInsightClusterWithCustomNetworkSettings.json"
-          },
           "Create cluster with encryption in transit": {
             "$ref": "./examples/CreateHDInsightClusterWithEncryptionInTransit.json"
           },
           "Create cluster with encryption at host": {
             "$ref": "./examples/CreateHDInsightClusterWithEncryptionAtHost.json"
+          },
+          "Create cluster with network properties": {
+            "$ref": "./examples/CreateHDInsightClusterWithCustomNetworkProperties.json"
+          },
+          "Create cluster with compute isolation properties": {
+            "$ref": "./examples/CreateHDInsightClusterWithComputeIsolationProperties.json"
           }
         },
         "parameters": [
@@ -855,6 +858,7 @@
         },
         "diskSizeGB": {
           "type": "integer",
+          "format": "int32",
           "description": "ReadOnly. The DiskSize in GB. Do not set this value.",
           "readOnly": true
         }
@@ -953,6 +957,10 @@
             "$ref": "./scriptActions.json#/definitions/ScriptAction"
           },
           "description": "The list of script actions on the role."
+        },
+        "encryptDataDisks": {
+          "type": "boolean",
+          "description": "Indicates whether encrypt the data disks."
         }
       },
       "description": "Describes a role on the cluster."
@@ -1014,34 +1022,60 @@
       },
       "description": "The storage profile."
     },
-    "NetworkSettings": {
+    "ExcludedServicesConfig": {
       "properties": {
-        "publicNetworkAccess": {
+        "excludedServicesConfigId": {
           "type": "string",
-          "description": "Specifies whether public network access is enabled for inbound and outbound, or outbound only.",
+          "description": "The config id of excluded services."
+        },
+        "excludedServicesList": {
+          "type": "string",
+          "description": "The list of excluded services."
+        }
+      },
+      "description": "The configuration that services will be excluded when creating cluster."
+    },
+    "NetworkProperties": {
+      "description": "The network properties.",
+      "properties": {
+        "resourceProviderConnection": {
+          "type": "string",
+          "description": "The direction for the resource provider connection.",
           "enum": [
-            "InboundAndOutbound",
-            "OutboundOnly"
+            "Inbound",
+            "Outbound"
           ],
           "x-ms-enum": {
-            "name": "PublicNetworkAccess",
+            "name": "ResourceProviderConnection",
             "modelAsString": true
           }
         },
-        "outboundOnlyPublicNetworkAccessType": {
+        "privateLink": {
           "type": "string",
-          "description": "The mechanism through which the cluster will have outbound access to the public network.",
+          "description": "Indicates whether or not private link is enabled.",
           "enum": [
-            "PublicLoadBalancer",
-            "UDR"
+            "Disabled",
+            "Enabled"
           ],
           "x-ms-enum": {
-            "name": "OutboundOnlyPublicNetworkAccessType",
+            "name": "PrivateLink",
             "modelAsString": true
           }
         }
-      },
-      "description": "The network settings."
+      }
+    },
+    "ComputeIsolationProperties": {
+      "description": "The compute isolation properties.",
+      "properties": {
+        "enableComputeIsolation": {
+          "type": "boolean",
+          "description": "The flag indicates whether enable compute isolation or not."
+        },
+        "hostSku": {
+          "type": "string",
+          "description": "The host sku."
+        }
+      }
     },
     "ClusterCreateProperties": {
       "description": "The cluster create parameters.",
@@ -1106,9 +1140,13 @@
           "type": "string",
           "description": "The minimal supported tls version."
         },
-        "networkSettings": {
-          "$ref": "#/definitions/NetworkSettings",
-          "description": "The network settings."
+        "networkProperties": {
+          "$ref": "#/definitions/NetworkProperties",
+          "description": "The network properties."
+        },
+        "computeIsolationProperties": {
+          "$ref": "#/definitions/ComputeIsolationProperties",
+          "description": "The compute isolation properties."
         }
       }
     },
@@ -1201,6 +1239,10 @@
           "type": "string",
           "description": "The version of the cluster."
         },
+        "clusterHdpVersion": {
+          "type": "string",
+          "description": "The hdp version of the cluster."
+        },
         "osType": {
           "type": "string",
           "description": "The type of operating system.",
@@ -1224,6 +1266,10 @@
             "name": "Tier",
             "modelAsString": false
           }
+        },
+        "clusterId": {
+          "type": "string",
+          "description": "The cluster id."
         },
         "clusterDefinition": {
           "$ref": "#/definitions/ClusterDefinition",
@@ -1290,13 +1336,25 @@
           "$ref": "#/definitions/EncryptionInTransitProperties",
           "description": "The encryption-in-transit properties."
         },
+        "storageProfile": {
+          "$ref": "#/definitions/StorageProfile",
+          "description": "The storage profile."
+        },
         "minSupportedTlsVersion": {
           "type": "string",
           "description": "The minimal supported tls version."
         },
-        "networkSettings": {
-          "$ref": "#/definitions/NetworkSettings",
-          "description": "The network settings."
+        "excludedServicesConfig": {
+          "$ref": "#/definitions/ExcludedServicesConfig",
+          "description": "The excluded services config."
+        },
+        "networkProperties": {
+          "$ref": "#/definitions/NetworkProperties",
+          "description": "The network properties."
+        },
+        "computeIsolationProperties": {
+          "$ref": "#/definitions/ComputeIsolationProperties",
+          "description": "The compute isolation properties."
         }
       },
       "required": [
@@ -1519,6 +1577,10 @@
                 "readOnly": true,
                 "type": "string",
                 "description": "The client id of user assigned identity."
+              },
+              "tenantId": {
+                "type": "string",
+                "description": "The tenant id of user assigned identity."
               }
             }
           },

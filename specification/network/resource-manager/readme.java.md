@@ -39,6 +39,7 @@ batch:
   - tag: package-2019-06
   - tag: package-2019-04
   - tag: package-2019-02
+  - tag: package-2018-11
 ```
 
 ### Tag: package-2020-06 and java
@@ -180,6 +181,19 @@ Please also specify `--azure-libraries-for-java-folder=<path to the root directo
 java:
   namespace: com.microsoft.azure.management.network.v2018_12_01
   output-folder: $(azure-libraries-for-java-folder)/sdk/network/mgmt-v2018_12_01
+  regenerate-manager: true
+  generate-interface: true
+```
+
+### Tag: package-2018-11 and java
+
+These settings apply only when `--tag=package-2018-11 --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2018-11' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.network.v2018_11_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/network/mgmt-v2018_11_01
   regenerate-manager: true
   generate-interface: true
 ```

@@ -9,24 +9,17 @@
     "parameters": {
       "properties": {
         "description": "Example job to illustrate update.",
-        "priority": "High",
         "input": {
-          "@odata.type": "#Microsoft.Media.JobInputs",
-          "inputs": [
-            {
-              "@odata.type": "#Microsoft.Media.JobInputAsset",
-              "files": [],
-              "assetName": "job1 input"
-            }
-          ]
+          "@odata.type": "#Microsoft.Media.JobInputAsset",
+          "assetName": "job1-InputAsset"
         },
         "outputs": [
           {
             "@odata.type": "#Microsoft.Media.JobOutputAsset",
-            "label": "example-custom-label",
-            "assetName": "job1 output"
+            "assetName": "job1-OutputAsset"
           }
-        ]
+        ],
+        "priority": "High"
       }
     }
   },
@@ -46,18 +39,18 @@
               {
                 "@odata.type": "#Microsoft.Media.JobInputAsset",
                 "files": [],
-                "assetName": "job1 input"
+                "assetName": "job1-InputAsset"
               }
             ]
           },
-          "lastModified": "2019-10-10T22:38:03.737608Z",
+          "lastModified": "2020-09-25T03:52:08.0551986Z",
           "outputs": [
             {
               "@odata.type": "#Microsoft.Media.JobOutputAsset",
               "state": "Queued",
               "progress": 0,
               "label": "example-custom-label",
-              "assetName": "job1 output"
+              "assetName": "job1-OutputAsset"
             }
           ],
           "priority": "High",
