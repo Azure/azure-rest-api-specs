@@ -35,6 +35,14 @@
           "repositoryName": "myrepository",
           "collaborationBranch": "master",
           "rootFolder": "/"
+        },
+        "encryption": {
+          "cmk": {
+            "key": {
+              "name": "default",
+              "keyVaultUrl": "https://vault.azure.net/keys/key1"
+            }
+          }
         }
       },
       "location": "East US",
@@ -96,7 +104,17 @@
               }
             }
           ],
-          "workspaceUID": "999b999q-b888-4b44-bacd-2c222cc2222d"
+          "workspaceUID": "999b999q-b888-4b44-bacd-2c222cc2222d",
+          "encryption": {
+            "doubleEncryptionEnabled": true,
+            "cmk": {
+              "status": "Consistent",
+              "key": {
+                "name": "default",
+                "keyVaultUrl": "https://vault.azure.net/keys/key1"
+              }
+            }
+          }
         },
         "tags": {
           "key": "value"
@@ -132,7 +150,17 @@
           "managedResourceGroupName": "workspaceManagedResourceGroupUnique",
           "managedVirtualNetwork": "default",
           "provisioningState": "Provisioning",
-          "workspaceUID": "86984b43-b873-4b91-bacd-2ca083a104c7"
+          "workspaceUID": "86984b43-b873-4b91-bacd-2ca083a104c7",
+          "encryption": {
+            "doubleEncryptionEnabled": true,
+            "cmk": {
+              "status": "Updating",
+              "key": {
+                "name": "default",
+                "keyVaultUrl": "https://vault.azure.net/keys/key1"
+              }
+            }
+          }
         },
         "tags": {
           "key": "value"

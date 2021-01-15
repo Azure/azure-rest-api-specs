@@ -111,6 +111,7 @@ input-file:
 - Microsoft.DBforPostgreSQL/stable/2017-12-01/ServerSecurityAlertPolicies.json
 - Microsoft.DBforPostgreSQL/stable/2018-06-01/PrivateEndpointConnections.json
 - Microsoft.DBforPostgreSQL/stable/2018-06-01/PrivateLinkResources.json
+- Microsoft.DBforPostgreSQL/stable/2018-06-01/QueryPerformanceInsights.json
 ```
 
 
@@ -215,6 +216,7 @@ input-file:
   - $(this-folder)/Microsoft.DBforPostgreSQL/stable/2017-12-01/ServerSecurityAlertPolicies.json
   - $(this-folder)/Microsoft.DBforPostgreSQL/stable/2018-06-01/PrivateEndpointConnections.json
   - $(this-folder)/Microsoft.DBforPostgreSQL/stable/2018-06-01/PrivateLinkResources.json
+  - $(this-folder)/Microsoft.DBforPostgreSQL/stable/2018-06-01/QueryPerformanceInsights.json
   - $(this-folder)/Microsoft.DBforPostgreSQL/stable/2020-01-01/DataEncryptionKeys.json
   - $(this-folder)/Microsoft.DBforPostgreSQL/preview/2018-06-01-privatepreview/PrivateEndpointConnections.json
   - $(this-folder)/Microsoft.DBforPostgreSQL/preview/2018-06-01-privatepreview/PrivateLinkResources.json
