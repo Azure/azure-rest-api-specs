@@ -1,19 +1,35 @@
 {
-  "parameters": {
-    "SendMessageRequest": {
-      "from": "+18001110000",
-      "to": [
-        "+11234567890",
-        "+11234567891"
-      ],
-      "message": "Hello world!",
-      "sendSmsOptions": {
-        "enableDeliveryReport": true
+  "api-version": "2021-03-07",
+  "endpoint": "https://contoso.communication.azure.com/",
+  "parameters": [
+    {
+      "SendMessageRequest": {
+        "from": "+18001110000",
+        "to": [
+          "+11234567890",
+          "+11234567891"
+        ],
+        "message": "Hello world!",
+        "sendSmsOptions": {
+          "enableDeliveryReport": true
+        }
       }
     },
-    "api-version": "2021-03-07",
-    "endpoint": "https://contoso.communication.azure.com/"
-  },
+    {
+      "SendMessageRequest": {
+        "from": "+18001110000",
+        "to": [
+          "+11234567890",
+          "+112345678901",
+          "+11234567892"
+        ],
+        "message": "Hello world!",
+        "sendSmsOptions": {
+          "enableDeliveryReport": true
+        }
+      }
+    }
+  ],
   "responses": {
     "202": {
       "headers": {},
@@ -29,8 +45,7 @@
             "messageId": "Outgoing_2020061020025100d1-d07e-4b19-b25d-13525d552822",
             "httpstatuscode": 202
           }
-        ],
-        "nextLink": "null"
+        ]
       }
     },
     "207": {
@@ -46,11 +61,16 @@
             "to": "+112345678901",
             "httpstatuscode": 400,
             "errormessage": "Invalid number format"
+          },
+          {
+            "to": "+11234567892",
+            "messageId": "Outgoing_2020061020025100d1-d07e-4b19-b25d-13525d552822",
+            "httpstatuscode": 503,
+            "errormessage": "ServiceUnavailable"
           }
         ],
-        "nextLink": "null"
+        "nextLink": "/someNextLink"
       }
     }
   }
 }
-
