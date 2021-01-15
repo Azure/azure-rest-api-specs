@@ -2273,7 +2273,7 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 The following cases would be disallowed :
 1. if the two enums have same x-ms-enum name , but the types are different.
 2. if the two enums have same x-ms-enum name , but the 'modelAsString' are different.
-3. if the two enums have same x-ms-enum name , but the enums have different values.
+3. if the two enums have same x-ms-enum name , but include different values.
 4. if the two enums have same x-ms-enum name and the 'modelAsString' is false , but the enums values have different order.
 
 **CreatedAt**: March 18, 2020
