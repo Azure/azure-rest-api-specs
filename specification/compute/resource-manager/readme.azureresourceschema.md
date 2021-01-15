@@ -97,8 +97,8 @@ output-folder: $(azureresourceschema-folder)/schemas
 
 # all the input files in this apiVersion
 input-file:
-  - Microsoft.Compute/preview/2020-09-30/gallery.json
-  - Microsoft.Compute/preview/2020-09-30/sharedGallery.json
+  - Microsoft.Compute/stable/2020-09-30/gallery.json
+  - Microsoft.Compute/stable/2020-09-30/sharedGallery.json
 
 ```
 
