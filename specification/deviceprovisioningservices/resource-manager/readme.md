@@ -114,6 +114,19 @@ swagger-to-sdk:
       - node sdkauto_afterscript.js deviceprovisioningservices/resource-manager
 ```
 
+## Suppression
+``` yaml
+directive:
+  - suppress: SECRET_PROPERTY
+    from: 
+      - Microsoft.Devices/preview/2021-02-01-preview/iotdps.json
+    where: 
+      - $.definitions.SharedAccessSignatureAuthorizationRule[AccessRightsDescription].properties.primaryKey
+      - $.definitions.SharedAccessSignatureAuthorizationRule[AccessRightsDescription].properties.secondaryKey
+      - $.definitions.VerificationCodeResponse.properties.verificationCode
+    reason: Suppress secret_property error generated in POST method response
+```
+
 ## C#
 
 These settings apply only when `--csharp` is specified on the command line.
@@ -226,16 +239,3 @@ generate-interface: true
 ## AzureResourceSchema
 
 See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
-
-## Suppression
-``` yaml
-directive:
-  - suppress: SECRET_PROPERTY
-    from: 
-      - Microsoft.Devices/preview/2021-02-01-preview/iotdps.json
-    where: 
-      - $.definitions.SharedAccessSignatureAuthorizationRule[AccessRightsDescription].properties.primaryKey
-      - $.definitions.SharedAccessSignatureAuthorizationRule[AccessRightsDescription].properties.secondaryKey
-      - $.definitions.VerificationCodeResponse.properties.verificationCode
-    reason: Suppress secret_property error generated in POST method response
-```
