@@ -226,3 +226,15 @@ generate-interface: true
 ## AzureResourceSchema
 
 See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
+
+## Suppression
+``` yaml
+directive:
+  - suppress: SECRET_PROPERTY
+    from: iotdps.json
+    where: $.definitions.SharedAccessSignatureAuthorizationRule[AccessRightsDescription]
+    reason: Suppress secret_property error generated in POST method response
+  - suppress: SECRET_PROPERTY
+    from: iotdps.json
+    where: $.definitions.VerificationCodeResponse
+    reason: Suppress secret_property error generated in POST method response
