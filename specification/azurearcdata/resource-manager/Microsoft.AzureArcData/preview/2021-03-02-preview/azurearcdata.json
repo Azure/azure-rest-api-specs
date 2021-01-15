@@ -1594,13 +1594,21 @@
           "format": "date-time",
           "description": "Last uploaded date from on premise cluster. Defaults to current date time"
         },
+        "basicLoginInformation": {
+          "ref": "#/definitions/BasicLoginInformation"
+        },
+        "uploadServicePrincipal": {
+          "ref": "#/definitions/UploadServicePrincipal"
+        },
         "provisioningState": {
           "type": "string",
           "readOnly": true
         }
       },
       "required": [
-        "onPremiseProperty"
+        "onPremiseProperty",
+        "basicLoginInformation",
+        "uploadServicePrincipal"
       ]
     },
     "OnPremiseProperty": {
@@ -2027,6 +2035,34 @@
         "password": {
           "type": "string",
           "description": "Login password.",
+          "x-ms-mutability": [
+            "create",
+            "update"
+          ],
+          "x-ms-secret": true
+        }
+      }
+    },
+    "UploadServicePrincipal": {
+      "description": "Service Principal for uploading metrics, logs and billing usage.",
+      "properties": {
+        "clientId": {
+          "type": "string",
+          "format": "uuid",
+          "description": "Client Id of the service principal."
+        },
+        "tenantId": {
+          "type": "string",
+          "format": "uuid",
+          "description": "Tenant Id of the service principal."
+        },
+        "authority": {
+          "type": "string",
+          "description": "Service Principal authority. For example: https://login.microsoftonline.com."
+        },
+        "clientSecret": {
+          "type": "string",
+          "description": "Write only. Secret of the service principal.",
           "x-ms-mutability": [
             "create",
             "update"
