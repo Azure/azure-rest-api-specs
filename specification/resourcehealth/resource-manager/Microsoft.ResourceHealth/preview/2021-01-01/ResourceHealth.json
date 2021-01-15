@@ -62,7 +62,7 @@
           "default": {
             "description": "DefaultErrorResponse",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/WrappedErrorResponse"
             }
           }
         },
@@ -112,7 +112,7 @@
           "default": {
             "description": "DefaultErrorResponse",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/WrappedErrorResponse"
             }
           }
         },
@@ -441,7 +441,7 @@
           "default": {
             "description": "DefaultErrorResponse",
             "schema": {
-              "$ref": "#/definitions/PotentialOutageErrorResponse"
+              "$ref": "#/definitions/WrappedErrorResponse"
             }
           }
         },
@@ -474,7 +474,7 @@
           "default": {
             "description": "DefaultErrorResponse",
             "schema": {
-              "$ref": "#/definitions/PotentialOutageErrorResponse"
+              "$ref": "#/definitions/WrappedErrorResponse"
             }
           }
         },
@@ -644,6 +644,7 @@
                     "properties": {
                       "groupId": {
                         "type": "integer",
+                        "format": "int32",
                         "description": "Recommended action group Id for the service health event."
                       },
                       "actionText": {
@@ -680,6 +681,7 @@
             },
             "priority": {
               "type": "integer",
+              "format": "int32",
               "description": "Priority level of the event."
             },
             "lastUpdateTime": {
@@ -1489,7 +1491,7 @@
         }
       }
     },
-    "PotentialOutageErrorResponse": {
+    "WrappedErrorResponse": {
       "description": "Error details.",
       "type": "object",
       "properties": {
