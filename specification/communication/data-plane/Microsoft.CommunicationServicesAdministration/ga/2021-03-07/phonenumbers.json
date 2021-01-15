@@ -251,6 +251,42 @@
               "$ref": "./examples/GetOperationStatusByIdAsync.json"
             }
           }
+        },
+        "delete": {
+          "tags": [
+            "Operations"
+          ],
+          "operationId": "PhoneNumber_DeleteLongRunningOperation",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "in": "path",
+              "name": "operationId",
+              "required": true,
+              "type": "string"
+            },
+            {
+              "$ref": "#/parameters/ApiVersionParameter"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Success"
+            },
+            "default": {
+              "description": "Failure",
+              "schema": {
+                "$ref": "#/definitions/CommunicationErrorResponse"
+              }
+            }
+          },
+          "x-ms-examples": {
+            "Delete long running operation with the given operation id": {
+              "$ref": "./examples/DeleteLongRunningOperationAsync.json"
+            }
+          }
         }
       },
       "/availablePhoneNumbers/countries/{countryCode}/:search": {
