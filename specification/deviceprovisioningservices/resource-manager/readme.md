@@ -231,10 +231,11 @@ See configuration in [readme.azureresourceschema.md](./readme.azureresourceschem
 ``` yaml
 directive:
   - suppress: SECRET_PROPERTY
-    from: iotdps.json
-    where: $.definitions.SharedAccessSignatureAuthorizationRule[AccessRightsDescription]
+    from: 
+      - Microsoft.Devices/preview/2021-02-01-preview/iotdps.json
+    where: 
+      - $.definitions.SharedAccessSignatureAuthorizationRule[AccessRightsDescription].properties.primaryKey
+      - $.definitions.SharedAccessSignatureAuthorizationRule[AccessRightsDescription].properties.secondaryKey
+      - $.definitions.VerificationCodeResponse.properties.verificationCode
     reason: Suppress secret_property error generated in POST method response
-  - suppress: SECRET_PROPERTY
-    from: iotdps.json
-    where: $.definitions.VerificationCodeResponse
-    reason: Suppress secret_property error generated in POST method response
+```
