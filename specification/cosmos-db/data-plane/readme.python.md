@@ -3,17 +3,18 @@
 These settings apply only when `--python` is specified on the command line.
 Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
 
-``` yaml
+``` yaml $(python)
 python-mode: create
-license-header: MICROSOFT_MIT_NO_VERSION
-namespace: azure.table
-package-name: azure-table
-clear-output-folder: true
-no-namespace-folders: true
-enable-xml: true
-vanilla: true
-output-folder: "$(python-sdks-folder)/tables/azure-data-tables/azure/data/tables/_generated"
-package-version: "2019-02-02"
+python:
+  license-header: MICROSOFT_MIT_NO_VERSION
+  namespace: azure.table
+  package-name: azure-table
+  clear-output-folder: true
+  no-namespace-folders: true
+  enable-xml: true
+  vanilla: true
+  output-folder: "$(python-sdks-folder)/sdk/cosmos/azure-cosmos-table/azure/table/_generated"
+  package-version: "2019-02-02"
 ```
 
 ### Use strings for dates when python doesn't have enough precision
