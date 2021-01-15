@@ -1778,6 +1778,9 @@
         "x-ms-examples": {
           "Creates or updates an Office365 data connector.": {
             "$ref": "./examples/dataConnectors/CreateOfficeDataConnetor.json"
+          },
+          "Creates or updates an Threat Intelligence Platform data connector.": {
+            "$ref": "./examples/dataConnectors/CreateThreatIntelligenceDataConnector.json"
           }
         },
         "tags": [
@@ -9504,13 +9507,18 @@
       "type": "object"
     },
     "TIDataConnectorProperties": {
-      "allOf": [
-        {
-          "$ref": "#/definitions/DataConnectorTenantId"
-        }
-      ],
-      "description": "Threat Intelligence Platforms data connector properties.",
+      "description": "TI (Threat Intelligence) data connector properties.",
       "properties": {
+        "tenantId": {
+          "description": "The tenant id to connect to, and get the data from.",
+          "type": "string"
+        },
+        "tipLookbackPeriod": {
+          "description": "The lookback period for the feed to be imported.",
+          "format": "date-time",
+          "type": "string",
+          "x-nullable": true
+        },
         "dataTypes": {
           "$ref": "#/definitions/TIDataConnectorDataTypes",
           "description": "The available data types for the connector."
