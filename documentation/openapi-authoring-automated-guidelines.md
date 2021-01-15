@@ -2271,10 +2271,10 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 **Description** : This rule will check all the swagger files with the same api-version, and ensure there is no duplicate x-ms-enum name. 
 The following cases are deemed as violation:
-1. if two enums have same x-ms-enum name , but types are different.
-2. if two enums have same x-ms-enum name , but 'modelAsString' are different.
-3. if two enums have same x-ms-enum name , but include different values.
-4. if two enums have same x-ms-enum name and 'modelAsString' is false , but enums' values have different order.
+1. if two enums have the same x-ms-enum name , but types are different.
+2. if two enums have the same x-ms-enum name , but 'modelAsString' are different.
+3. if two enums have the same x-ms-enum name , but include different values.
+4. if two enums have the same x-ms-enum name and 'modelAsString' is false , but enums' values have different order.
 
 **CreatedAt**: March 18, 2020
 
