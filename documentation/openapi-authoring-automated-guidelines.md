@@ -3229,9 +3229,9 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 **Description** : Verifies if a Azure resource has a corresponding 'provisioningState' property. If the 'provisioningState' is not defining explicitly , the client will drop the state when the service does return it. 
 
-**CreatedAt**: December 18, 2020
+**CreatedAt**: January 15, 2021
 
-**LastModifiedAt**: December 18, 2020
+**LastModifiedAt**: January 15, 2021
 
 **Why this rule is important**: Per [Azure RPC](https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/Addendum.md#provisioningstate-property), all Azure resources must support "provisioningState" property. 
 
@@ -3249,8 +3249,8 @@ resourceDefinition": {
     "type": "object",
       "properties" :{
         "provisioningState": {
-        "type": "string",
-        "readOnly": true
+          "type": "string",
+          "readOnly": true
         }
         ...
       }
