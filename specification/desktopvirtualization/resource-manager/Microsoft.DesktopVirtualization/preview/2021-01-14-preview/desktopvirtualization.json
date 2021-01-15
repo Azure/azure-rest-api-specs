@@ -3870,6 +3870,50 @@
         "updateErrorMessage": {
           "type": "string",
           "description": "The error message."
+        },
+        "sessionHostHealthCheckResults": {
+          "type": "array",
+          "readOnly": true,
+          "description": "List of SessionHostHealthCheckReports",
+          "items": {
+            "$ref": "#/definitions/SessionHostHealthCheckReport"
+          }
+        }
+      }
+    },
+    "SessionHostHealthCheckReport": {
+      "type": "object",
+      "description": "The report for session host information.",
+      "properties": {
+        "healthCheckName": {
+          "type": "string",
+          "description": "Represents the name of the health check operation performed."
+        },
+        "healthCheckResult": {
+          "type": "string",
+          "description": "Represents the Health state of the health check we performed."
+        },
+        "additionalFailureDetails": {
+          "$ref": "#/definitions/SessionHostHealthCheckFailureDetails"
+        }
+      }
+    },
+    "SessionHostHealthCheckFailureDetails":  {
+      "type": "object",
+      "description": "Contains details on the failure.",
+      "properties": {
+        "message": {
+          "type": "string",
+          "description": "Failure message: hints on what is wrong and how to recover."
+        },
+        "errorCode": {
+          "type": "integer",
+          "description": "Error code corresponding for the failure."
+        },
+        "lastHealthCheckInUTC": {
+          "format": "date-time",
+          "type": "string",
+          "description": "The timestamp of the last update."
         }
       }
     },
