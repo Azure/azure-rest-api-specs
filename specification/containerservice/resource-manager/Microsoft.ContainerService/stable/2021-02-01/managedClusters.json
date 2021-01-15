@@ -482,6 +482,9 @@
           },
           "Create Managed Cluster with PodIdentity enabled": {
             "$ref": "./examples/ManagedClustersCreate_PodIdentity.json"
+          },
+          "Create Managed Private Cluster with fqdn subdomain specified": {
+            "$ref": "./examples/ManagedClustersCreate_PrivateClusterFQDNSubdomain.json"
           }
         }
       },
@@ -2830,6 +2833,10 @@
         "dnsPrefix": {
           "type": "string",
           "description": "DNS prefix specified when creating the managed cluster."
+        },
+        "fqdnSubdomain": {
+          "type": "string",
+          "description": "FQDN subdomain specified when creating private cluster with custom private dns zone."
         },
         "fqdn": {
           "readOnly": true,
