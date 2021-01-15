@@ -860,11 +860,12 @@
           "enum": [
             "Free",
             "Standard",
-            "Premium"
+            "Premium",
+            "Enterprise"
           ],
           "x-ms-enum": {
             "name": "SkuTier",
-            "modelAsString": false
+            "modelAsString": true
           }
         }
       },
@@ -1026,6 +1027,11 @@
         "apiProperties": {
           "$ref": "#/definitions/CognitiveServicesAccountApiProperties",
           "description": "The api properties for special APIs."
+        },
+        "dateCreated": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Gets the date of cognitive services account creation."
         }
       },
       "description": "Properties of Cognitive Services account."

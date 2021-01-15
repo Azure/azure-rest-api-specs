@@ -1,0 +1,60 @@
+{
+  "parameters": {
+    "api-version": "2020-09-01",
+    "subscriptionId": "subid",
+    "resourceGroupName": "RG",
+    "profileName": "profile1",
+    "metrics": "clientRequestCount",
+    "granularity": "PT5M",
+    "groupBy": "protocol",
+    "dateTimeBegin": "2020-11-04T04:30:00.000Z",
+    "dateTimeEnd": "2020-11-04T05:00:00.000Z"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "dateTimeBegin": "2020-11-04T12:30:27.554+08:00",
+        "dateTimeEnd": "2020-11-04T13:00:27.554+08:00",
+        "granularity": "PT5M",
+        "series": [
+          {
+            "metric": "clientRequestCount",
+            "unit": "count",
+            "groups": [
+              {
+                "name": "protocol",
+                "value": "https"
+              }
+            ],
+            "data": [
+              {
+                "dateTime": "2020-11-04T04:35:00+00:00",
+                "value": 4250
+              },
+              {
+                "dateTime": "2020-11-04T04:40:00+00:00",
+                "value": 3120
+              },
+              {
+                "dateTime": "2020-11-04T04:45:00+00:00",
+                "value": 2221
+              },
+              {
+                "dateTime": "2020-11-04T04:50:00+00:00",
+                "value": 2466
+              },
+              {
+                "dateTime": "2020-11-04T04:55:00+00:00",
+                "value": 2654
+              },
+              {
+                "dateTime": "2020-11-04T05:00:00+00:00",
+                "value": 3565
+              }
+            ]
+          }
+        ]
+      }
+    }
+  }
+}

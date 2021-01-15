@@ -60,7 +60,7 @@
           },
           "default": {
             "schema": {
-              "$ref": "./workspace.json#/definitions/ErrorContract"
+              "$ref": "../../../../common/v1/types.json#/definitions/ErrorContract"
             },
             "description": ""
           }
@@ -122,7 +122,7 @@
           },
           "default": {
             "schema": {
-              "$ref": "./workspace.json#/definitions/ErrorContract"
+              "$ref": "../../../../common/v1/types.json#/definitions/ErrorContract"
             },
             "description": ""
           }
@@ -200,7 +200,7 @@
           },
           "default": {
             "schema": {
-              "$ref": "./workspace.json#/definitions/ErrorContract"
+              "$ref": "../../../../common/v1/types.json#/definitions/ErrorContract"
             },
             "description": ""
           }
@@ -268,7 +268,7 @@
           },
           "default": {
             "schema": {
-              "$ref": "./workspace.json#/definitions/ErrorContract"
+              "$ref": "../../../../common/v1/types.json#/definitions/ErrorContract"
             },
             "description": ""
           }
@@ -315,6 +315,12 @@
           "200": {
             "schema": {
               "$ref": "#/definitions/BigDataPoolResourceInfoListResult"
+            },
+            "description": ""
+          },
+          "default": {
+            "schema": {
+              "$ref": "../../../../common/v1/types.json#/definitions/ErrorContract"
             },
             "description": ""
           }
@@ -409,6 +415,14 @@
         "isComputeIsolationEnabled": {
           "type": "boolean",
           "description": "Whether compute isolation is required or not."
+        },
+        "haveLibraryRequirementsChanged": {
+          "type": "boolean",
+          "description": "Whether library requirements changed."
+        },
+        "sessionLevelPackagesEnabled": {
+          "type": "boolean",
+          "description": "Whether session level packages enabled."
         },
         "sparkEventsFolder": {
           "type": "string",
