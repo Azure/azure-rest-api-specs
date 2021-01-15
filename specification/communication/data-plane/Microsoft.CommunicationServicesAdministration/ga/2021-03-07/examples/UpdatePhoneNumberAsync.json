@@ -1,0 +1,29 @@
+{
+  "parameters": {
+    "api-version": "2021-03-07",
+    "phoneNumber": "+11234567890",
+    "body": {
+      "callbackUrl": "www.callback.com",
+      "applicationId": "abc123"
+    },
+    "endpoint": "https://resourcename.region.dev.communications.azure.net/"
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "id": "11234567890",
+        "phoneNumber": "+11234567890",
+        "countryCode": "US",
+        "assignmentType": "User",
+        "phoneNumberType": "Geographic",
+        "capabilities": {
+          "calling": "InboundAndOutbound",
+          "sms": "Inbound"
+        },
+        "callbackUrl": "callback.net",
+        "applicationId": "myApplicationId"
+      }
+    }
+  }
+}

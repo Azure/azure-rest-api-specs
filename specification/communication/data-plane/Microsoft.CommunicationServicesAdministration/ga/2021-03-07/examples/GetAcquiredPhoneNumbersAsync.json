@@ -1,0 +1,41 @@
+﻿{
+  "parameters": {
+    "api-version": "2021-03-07",
+    "endpoint": "https://resourcename.dev.communications.azure.net/",
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "phoneNumbers": [
+          {
+            "id": "11234567890",
+            "phoneNumber": "+11234567890",
+            "countryCode": "US",
+            "assignmentType": "User",
+            "phoneNumberType": "Geographic",
+            "capabilities": {
+              "calling": "InboundAndOutbound",
+              "sms": "Inbound"
+            },
+            "callbackUrl": "callback1.net",
+            "applicationId": "myApplicationId1"
+          },
+          {
+            "id": "18004567891",
+            "phoneNumber": "+18004567891",
+            "countryCode": "US",
+            "assignmentType": "User",
+            "phoneNumberType": "TollFree",
+            "capabilities": {
+              "calling": "InboundAndOutbound",
+              "sms": "None"
+            },
+            "callbackUrl": "callback2.net",
+            "applicationId": "myApplicationId2"
+          }
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,34 @@
+{
+  "parameters": {
+    "api-version": "2021-03-07",
+    "endpoint": "https://resourcename.dev.communications.azure.net/",
+    "countryCode": "US",
+    "body": {
+      "locationOptions": [
+        {
+          "labelId": "state",
+          "optionsValue": "WA"
+        },
+        {
+          "labelId": "city",
+          "optionsValue": "NOAM-US-WA-SE"
+        }
+      ]
+    },
+    "skip": 0,
+    "take": 3
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "areaCodes": [
+          "206",
+          "360",
+          "425"
+        ],
+        "nextLink": "https://resourcename.region.dev.communications.azure.net?skip=3&take=3"
+      }
+    }
+  }
+}
