@@ -69,8 +69,11 @@
             }
           }
         },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
         "x-ms-examples": {
-          "NetworkGroupsList": {
+          "List effective configuration": {
             "$ref": "./examples/NetworkManagerEffectiveConfigurationsList.json"
           }
         }
@@ -89,7 +92,8 @@
           "x-ms-enum": {
             "name": "ConfigType",
             "modelAsString": true
-          }
+          },
+          "description": "Effective Configuration."
         },
         "connectivityConfiguration": {
           "$ref": "./networkManagerConnectivityConfiguration.json#/definitions/ConnectivityConfiguration",

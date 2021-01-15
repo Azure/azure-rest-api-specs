@@ -305,9 +305,6 @@
           "200": {
             "description": "OK"
           },
-          "202": {
-            "description": "Accepted and the operation will complete asynchronously."
-          },
           "204": {
             "description": "Request successful. Resource does not exist."
           },
@@ -360,7 +357,7 @@
           }
         },
         "x-ms-examples": {
-          "NetworkManagesPut": {
+          "Patch security configuration": {
             "$ref": "./examples/NetworkManagerSecurityConfigurationPatch.json"
           }
         }
@@ -458,7 +455,7 @@
           }
         },
         "x-ms-examples": {
-          "Get security admin rule for a specific security Configuration for a network manager": {
+          "Get security admin rule for a specific security Configuration": {
             "$ref": "./examples/NetworkManagerSecurityConfigurationAdminRuleGet.json"
           }
         }
@@ -522,9 +519,6 @@
           "200": {
             "description": "OK"
           },
-          "202": {
-            "description": "Accepted and the operation will complete asynchronously."
-          },
           "204": {
             "description": "Request successful. Resource does not exist."
           },
@@ -540,7 +534,7 @@
           "final-state-via": "location"
         },
         "x-ms-examples": {
-          "Delete security rule for a specific security Configuration for a network manager": {
+          "Delete security admin rule for a specific security Configuration for a network manager": {
             "$ref": "./examples/NetworkManagerSecurityConfigurationAdminRuleDelete.json"
           }
         }
@@ -577,7 +571,7 @@
           }
         },
         "x-ms-examples": {
-          "NetworkManagesPut": {
+          "Patch security admin rule": {
             "$ref": "./examples/NetworkManagerSecurityConfigurationAdminRulePatch.json"
           }
         }
@@ -623,7 +617,7 @@
           }
         },
         "x-ms-examples": {
-          "List security configuration rules": {
+          "List security user rules": {
             "$ref": "./examples/NetworkManagerSecurityConfigurationUserRulesList.json"
           }
         },
@@ -675,7 +669,7 @@
           }
         },
         "x-ms-examples": {
-          "Get security rule for a specific security Configuration for a network manager": {
+          "Get security user rule for a specific security Configuration for a network manager": {
             "$ref": "./examples/NetworkManagerSecurityConfigurationUserRuleGet.json"
           }
         }
@@ -719,7 +713,7 @@
           }
         },
         "x-ms-examples": {
-          "Create a rule for a network manager security Configuration": {
+          "Create a user rule": {
             "$ref": "./examples/NetworkManagerSecurityConfigurationUserRulePut.json"
           }
         },
@@ -739,9 +733,6 @@
           "200": {
             "description": "OK"
           },
-          "202": {
-            "description": "Accepted and the operation will complete asynchronously."
-          },
           "204": {
             "description": "Request successful. Resource does not exist."
           },
@@ -752,12 +743,8 @@
             }
           }
         },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
         "x-ms-examples": {
-          "Delete security rule for a specific security Configuration for a network manager": {
+          "Delete security user rule for a specific security Configuration": {
             "$ref": "./examples/NetworkManagerSecurityConfigurationUserRuleDelete.json"
           }
         }
@@ -794,7 +781,7 @@
           }
         },
         "x-ms-examples": {
-          "NetworkManagesPut": {
+          "Patch security user rule": {
             "$ref": "./examples/NetworkManagerSecurityConfigurationUserRulePatch.json"
           }
         }
@@ -947,7 +934,8 @@
           "type": "string",
           "description": "Gets the URL to get the next set of results."
         }
-      }
+      },
+      "description": "Security Configuration Admin Rule List Result."
     },
     "SecurityConfigurationUserRuleListResult": {
       "properties": {
@@ -962,7 +950,8 @@
           "type": "string",
           "description": "Gets the URL to get the next set of results."
         }
-      }
+      },
+      "description": "Security Configuration User Rule List Result."
     },
     "SecurityConfigurationRuleListResult": {
       "properties": {
@@ -981,7 +970,8 @@
           "type": "string",
           "description": "Gets the URL to get the next set of results."
         }
-      }
+      },
+      "description": "Security Configuration Rule List Result."
     },
     "SecurityConfigurationAdminRule": {
       "properties": {
@@ -1230,7 +1220,8 @@
           "type": "string",
           "description": "Network manager group Id."
         }
-      }
+      },
+      "description": "Network Manager Security Group Item."
     },
     "AddressPrefixItem": {
       "type": "object",
@@ -1251,7 +1242,8 @@
             "modelAsString": true
           }
         }
-      }
+      },
+      "description": "Address Prefix Item."
     },
     "NetworkManagerSecurityConfigurationImport": {
       "properties": {
@@ -1286,7 +1278,8 @@
           "type": "boolean",
           "description": "Flag if Remove Allow Internet Outbound Rule."
         }
-      }
+      },
+      "description": "Network Manager Security Configuration Import Parameters."
     },
     "SecurityConfigurationImportResult": {
       "properties": {
@@ -1300,9 +1293,10 @@
         },
         "failedImports": {
           "$ref": "#/definitions/FailedImports",
-          "description": "FailedImports"
+          "description": "failed Imports code and reason"
         }
-      }
+      },
+      "description": "Security Configuration Import Result."
     },
     "FailedImports": {
       "type": "object",
@@ -1340,7 +1334,8 @@
           "$ref": "#/definitions/SecurityConfigurationUserRule",
           "description": "Security User Rule."
         }
-      }
+      },
+      "description": "General Security Configuration Rule."
     }
   }
 }
