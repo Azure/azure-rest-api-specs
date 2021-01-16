@@ -4,35 +4,50 @@
   },
   "responses": {
     "200": {
-      "body": [
-        {
-          "name": "Microsoft.KubernetesConfiguration/sourceControlConfigurations/read",
-          "display": {
-            "provider": "Microsoft KubernetesConfiguration",
-            "resource": "sourceControlConfigurations",
-            "operation": "Get Source Control Configuration",
-            "description": "Get the specified Source Control Configuration."
+      "body": {
+        "value": [
+          {
+            "name": "Microsoft.KubernetesConfiguration/sourceControlConfigurations/write",
+            "display": {
+              "operation": "Microsoft.KubernetesConfiguration/sourceControlConfigurations/write",
+              "resource": "Microsoft.KubernetesConfiguration/sourceControlConfigurations",
+              "description": "Creates or updates source control configuration.",
+              "provider": "Microsoft Kubernetes Configuration"
+            },
+            "isDataAction": false
+          },
+          {
+            "name": "Microsoft.KubernetesConfiguration/sourceControlConfigurations/read",
+            "display": {
+              "operation": "Microsoft.KubernetesConfiguration/sourceControlConfigurations/read",
+              "resource": "Microsoft.KubernetesConfiguration/sourceControlConfigurations",
+              "description": "Gets source control configuration.",
+              "provider": "Microsoft Kubernetes Configuration"
+            },
+            "isDataAction": false
+          },
+          {
+            "name": "Microsoft.KubernetesConfiguration/sourceControlConfigurations/delete",
+            "display": {
+              "operation": "Microsoft.KubernetesConfiguration/sourceControlConfigurations/delete",
+              "resource": "Microsoft.KubernetesConfiguration/sourceControlConfigurations",
+              "description": "Deletes source control configuration.",
+              "provider": "Microsoft Kubernetes Configuration"
+            },
+            "isDataAction": false
+          },
+          {
+            "name": "Microsoft.KubernetesConfiguration/register/action",
+            "display": {
+              "operation": "Microsoft.KubernetesConfiguration/register/action",
+              "resource": "Register",
+              "description": "Registers subscription to Microsoft.KubernetesConfiguration resource provider.",
+              "provider": "Microsoft Kubernetes Configuration"
+            },
+            "isDataAction": false
           }
-        },
-        {
-          "name": "Microsoft.KubernetesConfiguration/sourceControlConfigurations/write",
-          "display": {
-            "provider": "Microsoft KubernetesConfiguration",
-            "resource": "sourceControlConfigurations",
-            "operation": "Create a Source Control Configuration",
-            "description": "Create the Source Control Configuration specified."
-          }
-        },
-        {
-          "name": "Microsoft.KubernetesConfiguration/sourceControlConfigurations/delete",
-          "display": {
-            "provider": "Microsoft KubernetesConfiguration",
-            "resource": "sourceControlConfigurations",
-            "operation": "Delete Source Control Configuration",
-            "description": "Delete the specified Source Control Configuration."
-          }
-        }
-      ]
+        ]
+      }
     }
   }
 }

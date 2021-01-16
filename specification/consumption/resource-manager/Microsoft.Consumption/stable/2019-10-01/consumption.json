@@ -462,6 +462,9 @@
               "$ref": "#/definitions/TagsResult"
             }
           },
+          "204": {
+            "description": "An empty response is sent when there is no information available within the selected scope."
+          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
@@ -1098,6 +1101,9 @@
             "schema": {
               "$ref": "#/definitions/ReservationRecommendationsListResult"
             }
+          },
+          "204": {
+            "description": "An empty response is sent when there are no recommendations."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -2985,6 +2991,14 @@
         }
       ],
       "properties": {
+        "location": {
+          "type": "string",
+          "description": "Resource Location."
+        },
+        "sku": {
+          "type": "string",
+          "description": "Resource sku"
+        },
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/ReservationRecommendationDetailsProperties",
@@ -3055,6 +3069,10 @@
           "type": "number",
           "readOnly": true
         },
+        "reservedUnitCount": {
+          "description": "The number of reserved units used to calculate savings. Always 1 for virtual machines.",
+          "type": "number"
+        },
         "savings": {
           "description": "The amount saved by purchasing the recommended quantity of reservation.",
           "type": "number",
@@ -3113,6 +3131,7 @@
         "lookBackPeriod": {
           "description": "Number of days of usage to look back used for computing the recommendation.",
           "type": "integer",
+          "format": "int32",
           "readOnly": true
         },
         "recommendedQuantity": {
@@ -3248,7 +3267,7 @@
         },
         "instanceFlexibilityRatio": {
           "description": "The instance Flexibility Ratio.",
-          "type": "integer",
+          "type": "number",
           "readOnly": true
         },
         "instanceFlexibilityGroup": {
@@ -3367,7 +3386,7 @@
         },
         "instanceFlexibilityRatio": {
           "description": "The instance Flexibility Ratio.",
-          "type": "integer",
+          "type": "number",
           "readOnly": true
         },
         "instanceFlexibilityGroup": {
@@ -3553,7 +3572,7 @@
       "x-ms-discriminator-value": "Modern",
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "#/definitions/ReservationTransactionResource"
         }
       ],
       "properties": {
@@ -3700,7 +3719,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "#/definitions/ReservationTransactionResource"
         }
       ],
       "properties": {
@@ -3772,6 +3791,16 @@
           "items": {
             "$ref": "#/definitions/Tag"
           }
+        },
+        "nextLink": {
+          "description": "The link (url) to the next page of results.",
+          "type": "string",
+          "readOnly": true
+        },
+        "previousLink": {
+          "description": "The link (url) to the previous page of results.",
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -4899,6 +4928,35 @@
           "readOnly": true,
           "type": "object",
           "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags."
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "ReservationTransactionResource": {
+      "description": "The Resource model definition.",
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource Id."
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource name."
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource type."
+        },
+        "tags": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
             "type": "string"
           },
           "description": "Resource tags."

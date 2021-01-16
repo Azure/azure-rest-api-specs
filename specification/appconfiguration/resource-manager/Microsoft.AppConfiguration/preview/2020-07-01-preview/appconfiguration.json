@@ -1656,6 +1656,14 @@
           "description": "Error message indicating why the operation failed.",
           "type": "string",
           "readOnly": true
+        },
+        "additionalInfo": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ErrorAdditionalInfo"
+          },
+          "description": "The error additional info."
         }
       }
     },
@@ -1668,6 +1676,21 @@
           "$ref": "#/definitions/ErrorDetails"
         }
       }
+    },
+    "ErrorAdditionalInfo": {
+      "properties": {
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The additional info type."
+        },
+        "info": {
+          "readOnly": true,
+          "type": "object",
+          "description": "The additional info."
+        }
+      },
+      "description": "The resource management error additional info."
     },
     "Resource": {
       "description": "An Azure resource.",

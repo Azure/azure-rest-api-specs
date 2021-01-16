@@ -46,10 +46,10 @@
         "operationId": "MetricAlerts_ListBySubscription",
         "parameters": [
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -85,13 +85,13 @@
         "operationId": "MetricAlerts_ListByResourceGroup",
         "parameters": [
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -127,7 +127,7 @@
         "operationId": "MetricAlerts_Get",
         "parameters": [
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "#/parameters/ResourceGroupNameParameter"
@@ -136,7 +136,7 @@
             "$ref": "#/parameters/RuleNameParameter"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -185,7 +185,7 @@
         "operationId": "MetricAlerts_CreateOrUpdate",
         "parameters": [
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "#/parameters/ResourceGroupNameParameter"
@@ -194,7 +194,7 @@
             "$ref": "#/parameters/RuleNameParameter"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
             "name": "parameters",
@@ -252,7 +252,7 @@
         "operationId": "MetricAlerts_Update",
         "parameters": [
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "#/parameters/ResourceGroupNameParameter"
@@ -261,7 +261,7 @@
             "$ref": "#/parameters/RuleNameParameter"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
             "name": "parameters",
@@ -301,7 +301,7 @@
         "operationId": "MetricAlerts_Delete",
         "parameters": [
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "#/parameters/ResourceGroupNameParameter"
@@ -310,7 +310,7 @@
             "$ref": "#/parameters/RuleNameParameter"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -319,6 +319,12 @@
           },
           "204": {
             "description": "No content: the request was successful, but the response is empty"
+          },
+          "default": {
+            "description": "BadRequest",
+            "schema": {
+              "$ref": "../../stable/2016-03-01/alertRules_API.json#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-examples": {
@@ -337,7 +343,7 @@
         "operationId": "MetricAlertsStatus_List",
         "parameters": [
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "#/parameters/ResourceGroupNameParameter"
@@ -346,7 +352,7 @@
             "$ref": "#/parameters/RuleNameParameter"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -379,7 +385,7 @@
         "operationId": "MetricAlertsStatus_ListByName",
         "parameters": [
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "#/parameters/ResourceGroupNameParameter"
@@ -391,7 +397,7 @@
             "$ref": "#/parameters/StatusNameParameter"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -475,7 +481,6 @@
     "MetricAlertProperties": {
       "required": [
         "enabled",
-        "description",
         "severity",
         "evaluationFrequency",
         "windowSize",
@@ -488,6 +493,7 @@
         },
         "severity": {
           "type": "integer",
+          "format": "int32",
           "description": "Alert severity {0, 1, 2, 3, 4}"
         },
         "enabled": {
@@ -543,6 +549,70 @@
       },
       "description": "An alert rule."
     },
+    "MetricAlertPropertiesPatch": {
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "the description of the metric alert that will be included in the alert email."
+        },
+        "severity": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Alert severity {0, 1, 2, 3, 4}"
+        },
+        "enabled": {
+          "type": "boolean",
+          "description": "the flag that indicates whether the metric alert is enabled."
+        },
+        "scopes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "the list of resource id's that this metric alert is scoped to."
+        },
+        "evaluationFrequency": {
+          "type": "string",
+          "format": "duration",
+          "description": "how often the metric alert is evaluated represented in ISO 8601 duration format."
+        },
+        "windowSize": {
+          "type": "string",
+          "format": "duration",
+          "description": "the period of time (in ISO 8601 duration format) that is used to monitor alert activity based on the threshold."
+        },
+        "targetResourceType": {
+          "type": "string",
+          "description": "the resource type of the target resource(s) on which the alert is created/updated. Mandatory for MultipleResourceMultipleMetricCriteria."
+        },
+        "targetResourceRegion": {
+          "type": "string",
+          "description": "the region of the target resource(s) on which the alert is created/updated. Mandatory for MultipleResourceMultipleMetricCriteria."
+        },
+        "criteria": {
+          "$ref": "#/definitions/MetricAlertCriteria",
+          "description": "defines the specific alert criteria information."
+        },
+        "autoMitigate": {
+          "type": "boolean",
+          "description": "the flag that indicates whether the alert should be auto resolved or not. The default is true."
+        },
+        "actions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MetricAlertAction"
+          },
+          "description": "the array of actions that are performed when the alert rule becomes active, and when an alert condition is resolved."
+        },
+        "lastUpdatedTime": {
+          "readOnly": true,
+          "type": "string",
+          "format": "date-time",
+          "description": "Last time the rule was updated in ISO8601 format."
+        }
+      },
+      "description": "An alert rule properties for patch."
+    },
     "MetricAlertResource": {
       "type": "object",
       "allOf": [
@@ -572,7 +642,7 @@
         },
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/MetricAlertProperties",
+          "$ref": "#/definitions/MetricAlertPropertiesPatch",
           "description": "The alert rule properties of the resource."
         }
       },
@@ -832,6 +902,7 @@
           "description": "Namespace of the metric."
         },
         "timeAggregation": {
+          "type": "string",
           "enum": [
             "Average",
             "Count",
@@ -840,7 +911,7 @@
             "Total"
           ],
           "x-ms-enum": {
-            "name": "AggregationType",
+            "name": "AggregationTypeEnum",
             "modelAsString": true
           },
           "description": "the criteria time aggregation types."
@@ -937,20 +1008,6 @@
     }
   },
   "parameters": {
-    "SubscriptionIdParameter": {
-      "name": "subscriptionId",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "The Azure subscription Id."
-    },
-    "ApiVersionParameter": {
-      "name": "api-version",
-      "in": "query",
-      "required": true,
-      "type": "string",
-      "description": "Client Api Version."
-    },
     "ResourceGroupNameParameter": {
       "name": "resourceGroupName",
       "in": "path",

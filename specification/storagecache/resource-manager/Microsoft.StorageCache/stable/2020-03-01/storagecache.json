@@ -465,6 +465,12 @@
               "$ref": "#/definitions/Cache"
             }
           },
+          "202": {
+            "description": "Cache creation or update has been initiated. Poll the new Cache's provisioningState property to monitor creation progress.",
+            "schema": {
+              "$ref": "#/definitions/Cache"
+            }
+          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
@@ -984,6 +990,12 @@
               "$ref": "#/definitions/StorageTarget"
             }
           },
+          "202": {
+            "description": "Storage Target creation or update has been initiated. Poll the new Storage Target's provisioningState property to monitor creation progress.",
+            "schema": {
+              "$ref": "#/definitions/StorageTarget"
+            }
+          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
@@ -1087,12 +1099,44 @@
             "resource": {
               "description": "Resource on which the operation is performed: Cache, etc.",
               "type": "string"
+            },
+            "description": {
+              "description": "The description of the operation",
+              "type": "string"
             }
           }
+        },
+        "origin": {
+          "description": "Origin of the operation.",
+          "type": "string"
+        },
+        "isDataAction": {
+          "description": "The flag that indicates whether the operation applies to data plane.",
+          "type": "boolean"
         },
         "name": {
           "description": "Operation name: {provider}/{resource}/{operation}",
           "type": "string"
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Additional details about an operation.",
+          "type": "object",
+          "properties": {
+            "serviceSpecification": {
+              "type": "object",
+              "description": "Specification of the all the metrics provided for a resource type.",
+              "properties": {
+                "metricSpecifications": {
+                  "description": "Details about operations related to metrics.",
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/MetricSpecification"
+                  }
+                }
+              }
+            }
+          }
         }
       },
       "type": "object"
@@ -1224,6 +1268,11 @@
         "identity": {
           "$ref": "#/definitions/CacheIdentity",
           "description": "The identity of the cache, if configured."
+        },
+        "systemData": {
+          "readOnly": true,
+          "description": "The system meta data relating to this resource.",
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
         },
         "properties": {
           "x-ms-client-flatten": true,
@@ -1513,6 +1562,16 @@
           "description": "Type of the Storage Target; Microsoft.StorageCache/Cache/StorageTarget",
           "readOnly": true,
           "type": "string"
+        },
+        "location": {
+          "description": "Region name string.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "systemData": {
+          "readOnly": true,
+          "description": "The system meta data relating to this resource.",
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
         }
       },
       "x-ms-azure-resource": true
@@ -1843,6 +1902,85 @@
         }
       },
       "type": "object"
+    },
+    "MetricSpecification": {
+      "type": "object",
+      "description": "Details about operation related to metrics.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the metric."
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Localized display name of the metric."
+        },
+        "displayDescription": {
+          "type": "string",
+          "description": "The description of the metric."
+        },
+        "unit": {
+          "type": "string",
+          "description": "The unit that the metric is measured in."
+        },
+        "aggregationType": {
+          "type": "string",
+          "description": "The type of metric aggregation."
+        },
+        "supportedAggregationTypes": {
+          "description": "Support metric aggregation type.",
+          "type": "array",
+          "items": {
+            "enum": [
+              "NotSpecified",
+              "None",
+              "Average",
+              "Minimum",
+              "Maximum",
+              "Total",
+              "Count"
+            ],
+            "type": "string",
+            "x-ms-enum": {
+              "name": "MetricAggregationType",
+              "modelAsString": true
+            }
+          }
+        },
+        "metricClass": {
+          "description": "Type of metrics.",
+          "type": "string"
+        },
+        "dimensions": {
+          "description": "Dimensions of the metric",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MetricDimension"
+          }
+        }
+      }
+    },
+    "MetricDimension": {
+      "type": "object",
+      "description": "Specifications of the Dimension of metrics.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the dimension"
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Localized friendly display name of the dimension"
+        },
+        "internalName": {
+          "type": "string",
+          "description": "Internal name of the dimension."
+        },
+        "toBeExportedForShoebox": {
+          "description": "To be exported to shoe box.",
+          "type": "boolean"
+        }
+      }
     }
   },
   "parameters": {

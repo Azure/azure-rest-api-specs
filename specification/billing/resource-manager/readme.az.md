@@ -44,13 +44,104 @@ cli:
 # -------- DO NOT generate those command groups --------
       - select: 'operationGroup'
         where:
-          operationGroup: BillingPeriods|EnrollmentAccounts|Agreements|BillingPermissions|BillingRoleAssignments|BillingRoleDefinitions|Instructions|Address.*$
+          operationGroup: BillingPeriods|EnrollmentAccounts|Address.*$
         hidden: true
 
       # rename --billing-profile-name to --profile-name
       - where:
           param: billingProfileName
         name: profile_name
+
+# -------- Agreements --------
+      - where:
+          group: Agreements
+          param: agreementName
+        name: name
+        alias:
+          - name
+          - n
+      - where:
+          group: Agreements
+        set:
+          groupExtensionMode: preview
+
+# -------- Permission --------
+      - where:
+          group: BillingPermissions
+        name: permission
+        set:
+          groupExtensionMode: preview
+
+# -------- RoleAssignment --------
+      - where:
+          group: BillingRoleAssignments
+        set:
+          name: role_assignment
+          groupExtensionMode: preview
+      - where:
+          group: BillingRoleAssignments
+          param: billingRoleAssignmentName
+        name: name
+        alias:
+          - name
+          - n
+      # the three get API connot auto group for not
+      - where:
+          group: BillingRoleAssignments
+          op: GetByInvoiceSection
+        hidden: True
+      - where:
+          group: BillingRoleAssignments
+          op: GetByBillingAccount
+        hidden: True
+      - where:
+          group: BillingRoleAssignments
+          op: GetByBillingProfile
+        hidden: True
+
+# -------- RoleDefinition --------
+      - where:
+          group: BillingRoleDefinitions
+        set:
+          name: role_definition
+          groupExtensionMode: preview
+      - where:
+          group: BillingRoleDefinitions
+          param: billingRoleDefinitionName
+        name: name
+        alias:
+          - name
+          - n
+      - where:
+          group: BillingRoleDefinitions
+          op: GetByBillingAccount
+        hidden: True
+      - where:
+          group: BillingRoleDefinitions
+          op: GetByInvoiceSection
+        hidden: True
+      - where:
+          group: BillingRoleDefinitions
+          op: GetByBillingProfile
+        hidden: True
+
+# -------- Instruction --------
+      - where:
+          group: Instructions
+        set:
+          name: instruction
+          groupExtensionMode: preview
+      - where:
+          group: Instructions
+          param: instructionName
+        name: name
+        alias:
+          - name
+          - n
+      - where:
+          group: Instructions
+          op: Put
+        name: create
 
  # -------- BillingAccounts --------
       # rename --billing-account-name to --account-name globally
