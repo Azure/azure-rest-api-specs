@@ -7,14 +7,16 @@
     "networkManagerName": "testNetworkManager",
     "networkGroupName": "TestNetworkGroup",
     "parameters": {
-      "tags": {
-        "tag1": "value1",
-        "tag2": "value2"
-      }
+      "op": "Add",
+      "path": "/properties/groupMembers",
+      "value": "/subscriptions/subscriptionC/resourceGroup/rg1/providers/Microsoft.Network/virtualnetworks/vnet2"
     }
   },
   "responses": {
     "200": {
+      "headers": {
+        "ETag": "be3cfaa2-3d02-4624-92d7-a26766306c8b"
+      },
       "body": {
         "name": "TestNetworkGroup",
         "id": "/subscriptions/subscriptionC/resourceGroup/rg1/providers/Microsoft.Network/networkManagers/testNetworkManager/networkGroups/TestNetworkGroup",
@@ -27,14 +29,13 @@
           "groupMembers": [
             {
               "resourceId": "/subscriptions/subscriptionC/resourceGroup/rg1/providers/Microsoft.Network/virtualnetworks/vnet1"
+            },
+            {
+              "resourceId": "/subscriptions/subscriptionC/resourceGroup/rg1/providers/Microsoft.Network/virtualnetworks/vnet2"
             }
           ],
           "conditionalMembership": "",
           "provisioningState": "Succeeded"
-        },
-        "tags": {
-          "tag1": "value1",
-          "tag2": "value2"
         }
       }
     }
