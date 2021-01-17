@@ -8,49 +8,54 @@
       "location": "global",
       "tags": {},
       "properties": {
-          "description": "This is the description of the rule1",
-          "enabled": true,
-          "severity": 3,
-          "windowSize": "P1D",
-          "evaluationFrequency": "PT1H",
-          "scopes": ["/subscriptions/14ddf0c5-77c5-4b53-84f6-e1fa43ad68f7/resourceGroups/gigtest/providers/Microsoft.KeyVault/vaults/keyVaultResource"],
-          "criteria": {
-              "allOf": [
+        "description": "This is the description of the rule1",
+        "enabled": true,
+        "severity": 3,
+        "windowSize": "P1D",
+        "evaluationFrequency": "PT1H",
+        "scopes": [
+          "/subscriptions/14ddf0c5-77c5-4b53-84f6-e1fa43ad68f7/resourceGroups/gigtest/providers/Microsoft.KeyVault/vaults/keyVaultResource"
+        ],
+        "criteria": {
+          "allOf": [
+            {
+              "metricName": "Availability",
+              "metricNamespace": "Microsoft.KeyVault/vaults",
+              "operator": "GreaterThan",
+              "timeAggregation": "Average",
+              "name": "Metric1",
+              "dimensions": [
                 {
-                  "metricName": "Availability",
-                  "metricNamespace": "Microsoft.KeyVault/vaults",
-                  "operator": "GreaterThan",
-                  "timeAggregation": "Average",
-                  "name": "Metric1",
-                  "dimensions": 
-                  [
-                    {
-                        "name": "ActivityName",
-                        "operator": "Include",
-                        "values": ["*"]
-                    }, 
-                    {
-                        "name": "StatusCode",
-                        "operator": "Include",
-                        "values": ["200"]
-                    }
-                  ],
-                  "criterionType": "StaticThresholdCriterion",
-                  "threshold": 55
+                  "name": "ActivityName",
+                  "operator": "Include",
+                  "values": [
+                    "*"
+                  ]
+                },
+                {
+                  "name": "StatusCode",
+                  "operator": "Include",
+                  "values": [
+                    "200"
+                  ]
                 }
               ],
-              "odata.type": "Microsoft.Azure.Monitor.MultipleResourceMultipleMetricCriteria"
-          },
-          "actions": [
-            {
-              "actionGroupId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/gigtest/providers/microsoft.insights/actiongroups/group2",
-              "webHookProperties": {
-                "key11": "value11",
-                "key12": "value12"
-              }
+              "criterionType": "StaticThresholdCriterion",
+              "threshold": 55
             }
           ],
-          "autoMitigate": true
+          "odata.type": "Microsoft.Azure.Monitor.MultipleResourceMultipleMetricCriteria"
+        },
+        "actions": [
+          {
+            "actionGroupId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/gigtest/providers/microsoft.insights/actiongroups/group2",
+            "webHookProperties": {
+              "key11": "value11",
+              "key12": "value12"
+            }
+          }
+        ],
+        "autoMitigate": true
       }
     }
   },
@@ -68,7 +73,9 @@
           "description": "This is the description of the rule1",
           "severity": 3,
           "enabled": true,
-          "scopes": ["/subscriptions/14ddf0c5-77c5-4b53-84f6-e1fa43ad68f7/resourceGroups/gigtest/providers/Microsoft.KeyVault/vaults/keyVaultResource"],
+          "scopes": [
+            "/subscriptions/14ddf0c5-77c5-4b53-84f6-e1fa43ad68f7/resourceGroups/gigtest/providers/Microsoft.KeyVault/vaults/keyVaultResource"
+          ],
           "evaluationFrequency": "PT1H",
           "windowSize": "P1D",
           "targetResourceType": "Microsoft.KeyVault/vaults",
@@ -82,15 +89,21 @@
                 "operator": "GreaterThan",
                 "timeAggregation": "Average",
                 "name": "Metric1",
-                "dimensions": [{
-                        "name": "ActivityName",
-                        "operator": "Include",
-                        "values": ["*"]
-                    }, {
-                        "name": "StatusCode",
-                        "operator": "Include",
-                        "values": ["200"]
-                    }
+                "dimensions": [
+                  {
+                    "name": "ActivityName",
+                    "operator": "Include",
+                    "values": [
+                      "*"
+                    ]
+                  },
+                  {
+                    "name": "StatusCode",
+                    "operator": "Include",
+                    "values": [
+                      "200"
+                    ]
+                  }
                 ],
                 "criterionType": "StaticThresholdCriterion",
                 "threshold": 55
