@@ -27,8 +27,9 @@ output-folder: $(azureresourceschema-folder)/schemas
 
 # all the input files in this apiVersion
 input-file:
-  - ./Microsoft.Sql/preview/2020-08-01-preview/Databases.json
-  - ./Microsoft.Sql/preview/2020-08-01-preview/ElasticPools.json
+  - Microsoft.Sql/preview/2020-08-01-preview/Databases.json
+  - Microsoft.Sql/preview/2020-08-01-preview/ElasticPools.json
+  
 ```
 
 ### Tag: schema-sql-2020-02-02-preview and azureresourceschema
@@ -38,20 +39,15 @@ output-folder: $(azureresourceschema-folder)/schemas
 
 # all the input files in this apiVersion
 input-file:
-  - Microsoft.Sql/preview/2020-02-02-preview/managedDatabases.json
-  - Microsoft.Sql/preview/2020-02-02-preview/ServerAzureADOnlyAuthentications.json
-  - Microsoft.Sql/preview/2020-02-02-preview/managedInstances.json
-  - Microsoft.Sql/preview/2020-02-02-preview/importexport.json
-  - Microsoft.Sql/preview/2020-02-02-preview/ManagedInstanceAzureADOnlyAuthentications.json
-  - Microsoft.Sql/preview/2020-02-02-preview/ServerTrustGroups.json
   - ./Microsoft.Sql/preview/2020-02-02-preview/DatabaseSecurityAlertPolicies.json
-  - ./Microsoft.Sql/preview/2020-02-02-preview/ManagedServerSecurityAlertPolicies.json
-  - ./Microsoft.Sql/preview/2020-02-02-preview/ServerSecurityAlertPolicies.json
-  - ./Microsoft.Sql/preview/2020-02-02-preview/operations.json
-  - ./Microsoft.Sql/preview/2020-02-02-preview/managedDatabases.json
-  - ./Microsoft.Sql/preview/2020-02-02-preview/managedInstances.json
-  - ./Microsoft.Sql/preview/2020-02-02-preview/ServerAzureADOnlyAuthentications.json
+  - ./Microsoft.Sql/preview/2020-02-02-preview/Databases.json
+  - ./Microsoft.Sql/preview/2020-02-02-preview/ManagedDatabases.json
   - ./Microsoft.Sql/preview/2020-02-02-preview/ManagedInstanceAzureADOnlyAuthentications.json
+  - ./Microsoft.Sql/preview/2020-02-02-preview/ManagedInstances.json
+  - ./Microsoft.Sql/preview/2020-02-02-preview/ManagedServerSecurityAlertPolicies.json
+  - ./Microsoft.Sql/preview/2020-02-02-preview/Operations.json
+  - ./Microsoft.Sql/preview/2020-02-02-preview/ServerAzureADOnlyAuthentications.json
+  - ./Microsoft.Sql/preview/2020-02-02-preview/ServerSecurityAlertPolicies.json
   - ./Microsoft.Sql/preview/2020-02-02-preview/ServerTrustGroups.json
 
 ```
