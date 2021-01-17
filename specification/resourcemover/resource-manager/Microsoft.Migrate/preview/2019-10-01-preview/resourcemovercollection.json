@@ -961,7 +961,56 @@
           }
         }
       }
-    }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/moveCollections/{moveCollectionName}/requiredFor": {
+      "get": {
+        "description": "List of the move resources for which an arm resource is required for.",
+        "operationId": "MoveCollections_GetRequiredFor",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/moveCollectionName"
+          },
+          {
+            "name": "sourceId",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "The sourceId for which the api is invoked."
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/RequiredForResourcesCollection"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "UnresolvedDependencies_Get": {
+            "$ref": "./examples/RequiredFor_Get.json"
+          }
+        }
+      }
+	}
   },
   "definitions": {
     "ResourceIdentityType": {
@@ -1608,6 +1657,19 @@
         "nextLink": {
           "description": "Gets or sets the value of  next link.",
           "type": "string"
+        }
+      }
+    },
+    "RequiredForResourcesCollection": {
+      "description": "Required for resources collection.",
+      "type": "object",
+      "properties": {
+        "SourceIds": {
+          "description": "Gets or sets the list of source Ids for which the input resource is required.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         }
       }
     },
