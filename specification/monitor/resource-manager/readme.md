@@ -599,6 +599,9 @@ directive:
   - suppress: R4007
     from: metricBaselines_API.json
     reason: 'Updating the error response to the new format would be a breaking change.'
+  - suppress: R4007
+    from: alertRules_API.json
+    reason: 'Updating the error response to the new format would be a breaking change.'
   - suppress: OBJECT_ADDITIONAL_PROPERTIES
     from: alertRules_API.json
     where: $.definitions.AlertRuleResource
