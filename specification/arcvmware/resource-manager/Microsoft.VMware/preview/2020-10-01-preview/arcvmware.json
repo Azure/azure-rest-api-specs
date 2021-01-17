@@ -1941,7 +1941,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.VMware/VCenters/{vCenterName}/InventoryItems/{inventoryItemName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.VMware/vCenters/{vCenterName}/inventoryItems/{inventoryItemName}": {
       "put": {
         "tags": [
           "InventoryItems"
@@ -2119,7 +2119,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.VMware/VCenters/{vCenterName}/InventoryItems": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.VMware/vCenters/{vCenterName}/inventoryItems": {
       "get": {
         "tags": [
           "InventoryItems"
@@ -3640,6 +3640,10 @@
           "x-ms-client-flatten": true,
           "description": "Resource properties.",
           "$ref": "#/definitions/InventoryItemProperties"
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "description": "The system data."
         }
       },
       "x-ms-azure-resource": true
@@ -3656,7 +3660,7 @@
           "description": "They inventory type.",
           "$ref": "#/definitions/InventoryType"
         },
-        "ManagedResourceId": {
+        "managedResourceId": {
           "description": "Gets or sets the tracked resource id corresponding to the inventory resource.",
           "type": "string"
         }
