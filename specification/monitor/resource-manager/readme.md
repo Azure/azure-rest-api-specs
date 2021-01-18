@@ -609,6 +609,7 @@ directive:
   - suppress: OBJECT_ADDITIONAL_PROPERTIES
     from: metricAlert_API.json
     where: $.definitions.MetricAlertResource
+    reason: 'Action is expected to receive a subclass of Resource'
 ```
 
 ### Tag: profile-hybrid-2019-03-01
