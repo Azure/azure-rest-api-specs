@@ -1777,6 +1777,10 @@
             "description": "Error response describing why the operation failed."
           }
         },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
         "x-ms-examples": {
           "SnapshotPolicies_Update": {
             "$ref": "examples/SnapshotPolicies_Update.json"
@@ -2812,6 +2816,11 @@
           "description": "NetApp Account properties",
           "$ref": "#/definitions/accountProperties",
           "x-ms-client-flatten": true
+        },
+        "systemData": {
+          "readOnly": true,
+          "description": "The system meta data relating to this resource.",
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
         }
       }
     },
