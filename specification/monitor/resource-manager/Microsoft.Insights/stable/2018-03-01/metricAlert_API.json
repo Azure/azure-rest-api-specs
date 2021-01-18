@@ -484,7 +484,8 @@
         "severity",
         "evaluationFrequency",
         "windowSize",
-        "criteria"
+        "criteria",
+        "scopes"
       ],
       "properties": {
         "description": {
@@ -545,6 +546,11 @@
           "type": "string",
           "format": "date-time",
           "description": "Last time the rule was updated in ISO8601 format."
+        },
+        "isMigrated": {
+          "type": "string",
+          "description": "the value indicating whether this alert rule is migrated.",
+          "readOnly": true
         }
       },
       "description": "An alert rule."
@@ -609,6 +615,11 @@
           "type": "string",
           "format": "date-time",
           "description": "Last time the rule was updated in ISO8601 format."
+        },
+        "isMigrated": {
+          "type": "string",
+          "description": "the value indicating whether this alert rule is migrated.",
+          "readOnly": true
         }
       },
       "description": "An alert rule properties for patch."
