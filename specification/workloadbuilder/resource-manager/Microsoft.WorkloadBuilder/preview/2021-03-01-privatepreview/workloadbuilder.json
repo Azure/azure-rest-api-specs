@@ -1,0 +1,2437 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "WorkloadBuilder Client",
+    "description": "Workload builder client provides access to workloads, migrationAgents, versions, artifacts, instances and it's status operations.",
+    "version": "2021-03-01-privatepreview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      },
+      "description": "Azure Active Directory OAuth2"
+    }
+  },
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "paths": {
+    "/providers/Microsoft.WorkloadBuilder/operations": {
+      "get": {
+        "tags": [
+          "Operations"
+        ],
+        "description": "Lists all the available API operations for Workload builder.",
+        "operationId": "Operations_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "Resource provider error response about the failure.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Operations": {
+            "$ref": "./examples/Operations_List.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.WorkloadBuilder/workloads": {
+      "get": {
+        "tags": [
+          "Workloads"
+        ],
+        "description": "Lists workload resources in a subscription.",
+        "operationId": "Workloads_ListBySubscription",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/WorkloadResourcePageList"
+            }
+          },
+          "default": {
+            "description": "Resource provider error response about the failure.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Workloads": {
+            "$ref": "./examples/Workloads_ListBySubscription.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.WorkloadBuilder/workloads": {
+      "get": {
+        "tags": [
+          "Workloads"
+        ],
+        "description": "Lists workload resources in a resource group.",
+        "operationId": "Workloads_ListByResourceGroup",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK -- list of workload resources retrieved",
+            "schema": {
+              "$ref": "#/definitions/WorkloadResourcePageList"
+            }
+          },
+          "default": {
+            "description": "Resource provider error response about the failure.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Workloads": {
+            "$ref": "./examples/Workloads_ListByResourceGroup.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.WorkloadBuilder/workloads/{workloadName}": {
+      "get": {
+        "tags": [
+          "Workloads"
+        ],
+        "description": "Get a workload resource.",
+        "operationId": "Workloads_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkloadNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK -- workload resource retrieved",
+            "schema": {
+              "$ref": "#/definitions/WorkloadResource"
+            }
+          },
+          "default": {
+            "description": "Resource provider error response about the failure.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Workloads": {
+            "$ref": "./examples/Workloads_Get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Workloads"
+        ],
+        "description": "Create or update workload resource.",
+        "operationId": "Workloads_CreateOrUpdate",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkloadNameParameter"
+          },
+          {
+            "in": "body",
+            "name": "WorkloadResource",
+            "description": "Workload resource data",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/WorkloadResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Updated -- Workload resource updated",
+            "schema": {
+              "$ref": "#/definitions/WorkloadResource"
+            }
+          },
+          "default": {
+            "description": "Resource provider error response about the failure.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": false,
+        "x-ms-examples": {
+          "Workloads": {
+            "$ref": "./examples/Workloads_CreateOrUpdate.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Workloads"
+        ],
+        "description": "Update a workload resource.",
+        "operationId": "Workloads_Update",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkloadNameParameter"
+          },
+          {
+            "in": "body",
+            "name": "ResourcePatchRequestBody",
+            "description": "Workload resource update data",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ResourcePatchRequestBody"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK -- resource updated",
+            "schema": {
+              "$ref": "#/definitions/WorkloadResource"
+            }
+          },
+          "default": {
+            "description": "Resource provider error response about the failure.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Workloads": {
+            "$ref": "./examples/Workloads_Update.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Workloads"
+        ],
+        "description": "Delete a workload resource.",
+        "operationId": "Workloads_Delete",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkloadNameParameter"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Resource not found"
+          },
+          "200": {
+            "description": "OK -- Workload resource deleted"
+          },
+          "default": {
+            "description": "Resource provider error response about the failure.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Workloads": {
+            "$ref": "./examples/Workloads_Delete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.WorkloadBuilder/workloads/{workloadName}/instances": {
+      "get": {
+        "tags": [
+          "Instances"
+        ],
+        "description": "Lists the instance resources of a workload.",
+        "operationId": "Instances_ListByWorkloadResource",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkloadNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK -- retrieved list of instance resources of a workload.",
+            "schema": {
+              "$ref": "#/definitions/InstanceResourcePageList"
+            }
+          },
+          "default": {
+            "description": "Resource provider error response about the failure.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Instances": {
+            "$ref": "./examples/Instances_ListByWorkload.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.WorkloadBuilder/workloads/{workloadName}/instances/{instanceName}": {
+      "get": {
+        "tags": [
+          "Instances"
+        ],
+        "description": "Gets an instance resource.",
+        "operationId": "Instances_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkloadNameParameter"
+          },
+          {
+            "$ref": "#/parameters/InstanceNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK -- retrieved instance resource.",
+            "schema": {
+              "$ref": "#/definitions/InstanceResource"
+            }
+          },
+          "default": {
+            "description": "Resource provider error response about the failure.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Instances": {
+            "$ref": "./examples/Instances_Get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Instances"
+        ],
+        "description": "Creates or update instance resource.",
+        "operationId": "Instances_CreateOrUpdate",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkloadNameParameter"
+          },
+          {
+            "$ref": "#/parameters/InstanceNameParameter"
+          },
+          {
+            "in": "body",
+            "name": "InstanceResource",
+            "description": "Instance definition",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/InstanceResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Updated -- instance resource updated.",
+            "schema": {
+              "$ref": "#/definitions/InstanceResource"
+            }
+          },
+          "201": {
+            "description": "Created -- instance resource creation accepted.",
+            "schema": {
+              "$ref": "#/definitions/InstanceResource"
+            }
+          },
+          "default": {
+            "description": "Resource provider error response about the failure.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "Instances": {
+            "$ref": "./examples/Instances_CreateOrUpdate.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Instances"
+        ],
+        "description": "Update instance resource.",
+        "operationId": "Instances_Update",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkloadNameParameter"
+          },
+          {
+            "$ref": "#/parameters/InstanceNameParameter"
+          },
+          {
+            "in": "body",
+            "name": "InstancePatchRequestBody",
+            "description": "Instance resource update data",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {}
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK -- resource updated",
+            "schema": {
+              "$ref": "#/definitions/InstanceResource"
+            }
+          },
+          "default": {
+            "description": "Resource provider error response about the failure.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Workloads": {
+            "$ref": "./examples/Instances_Update.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Instances"
+        ],
+        "description": "Deletes instance resource.",
+        "operationId": "Instances_Delete",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkloadNameParameter"
+          },
+          {
+            "$ref": "#/parameters/InstanceNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK -- instance resource deleted."
+          },
+          "204": {
+            "description": "Resource not found"
+          },
+          "default": {
+            "description": "Resource provider error response about the failure.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Instances": {
+            "$ref": "./examples/Instances_Delete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.WorkloadBuilder/workloads/{workloadName}/versions": {
+      "get": {
+        "tags": [
+          "Versions"
+        ],
+        "description": "List version resources of a workload.",
+        "operationId": "Versions_ListByWorkloadResource",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkloadNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK -- list of version resources retrieved",
+            "schema": {
+              "$ref": "#/definitions/VersionResourcePageList"
+            }
+          },
+          "default": {
+            "description": "Resource provider error response about the failure.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Versions": {
+            "$ref": "./examples/Versions_ListByWorkload.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.WorkloadBuilder/workloads/{workloadName}/versions/{versionName}": {
+      "get": {
+        "tags": [
+          "Versions"
+        ],
+        "description": "Get a version resource.",
+        "operationId": "Versions_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkloadNameParameter"
+          },
+          {
+            "$ref": "#/parameters/VersionNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK -- version resource retrieved",
+            "schema": {
+              "$ref": "#/definitions/VersionResource"
+            }
+          },
+          "default": {
+            "description": "Resource provider error response about the failure.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Versions": {
+            "$ref": "./examples/Versions_Get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Versions"
+        ],
+        "description": "Create or update version resource.",
+        "operationId": "Versions_CreateOrUpdate",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkloadNameParameter"
+          },
+          {
+            "$ref": "#/parameters/VersionNameParameter"
+          },
+          {
+            "in": "body",
+            "name": "VersionResource",
+            "description": "Version data",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/VersionResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Updated -- version resource updated",
+            "schema": {
+              "$ref": "#/definitions/VersionResource"
+            }
+          },
+          "201": {
+            "description": "Created -- version resource creation accepted",
+            "schema": {
+              "$ref": "#/definitions/VersionResource"
+            }
+          },
+          "default": {
+            "description": "Resource provider error response about the failure.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "Versions": {
+            "$ref": "./examples/Versions_CreateOrUpdate.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Versions"
+        ],
+        "description": "Update version resource.",
+        "operationId": "Versions_Update",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkloadNameParameter"
+          },
+          {
+            "$ref": "#/parameters/VersionNameParameter"
+          },
+          {
+            "in": "body",
+            "name": "VersionPatchRequestBody",
+            "description": "Version resource update data",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {}
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK -- resource updated",
+            "schema": {
+              "$ref": "#/definitions/VersionResource"
+            }
+          },
+          "default": {
+            "description": "Resource provider error response about the failure.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Workloads": {
+            "$ref": "./examples/Versions_Update.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Versions"
+        ],
+        "description": "Delete a version resource.",
+        "operationId": "Versions_Delete",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkloadNameParameter"
+          },
+          {
+            "$ref": "#/parameters/VersionNameParameter"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Resource not found"
+          },
+          "200": {
+            "description": "OK -- resource deleted"
+          },
+          "default": {
+            "description": "Resource provider error response about the failure.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Versions": {
+            "$ref": "./examples/Versions_Delete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.WorkloadBuilder/workloads/{workloadName}/versions/{versionName}/artifacts": {
+      "get": {
+        "tags": [
+          "Artifacts"
+        ],
+        "description": "List artifact resources of a version.",
+        "operationId": "Artifacts_ListByVersionResource",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkloadNameParameter"
+          },
+          {
+            "$ref": "#/parameters/VersionNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK -- list of artifact resources retrieved",
+            "schema": {
+              "$ref": "#/definitions/ArtifactResourcePageList"
+            }
+          },
+          "default": {
+            "description": "Resource provider error response about the failure.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Artifacts": {
+            "$ref": "./examples/Artifacts_ListByVersionResource.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.WorkloadBuilder/workloads/{workloadName}/versions/{versionName}/artifacts/{artifactName}": {
+      "get": {
+        "tags": [
+          "Artifacts"
+        ],
+        "description": "Get an artifact resource.",
+        "operationId": "Artifacts_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkloadNameParameter"
+          },
+          {
+            "$ref": "#/parameters/VersionNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ArtifactNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK -- artifact resource retrieved",
+            "schema": {
+              "$ref": "#/definitions/ArtifactResource"
+            }
+          },
+          "default": {
+            "description": "Resource provider error response about the failure.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Artifacts": {
+            "$ref": "./examples/Artifacts_Get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Artifacts"
+        ],
+        "description": "Create or update an artifact resource.",
+        "operationId": "Artifacts_CreateOrUpdate",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkloadNameParameter"
+          },
+          {
+            "$ref": "#/parameters/VersionNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ArtifactNameParameter"
+          },
+          {
+            "in": "body",
+            "name": "ArtifactResource",
+            "description": "Artifact resource",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ArtifactResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK -- artifact resource retrieved",
+            "schema": {
+              "$ref": "#/definitions/ArtifactResource"
+            }
+          },
+          "default": {
+            "description": "Resource provider error response about the failure.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": false,
+        "x-ms-examples": {
+          "Artifacts": {
+            "$ref": "./examples/Artifacts_CreateOrUpdate.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Artifacts"
+        ],
+        "description": "Delete artifact resource.",
+        "operationId": "Artifacts_Delete",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkloadNameParameter"
+          },
+          {
+            "$ref": "#/parameters/VersionNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ArtifactNameParameter"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Resource not found"
+          },
+          "200": {
+            "description": "OK -- resource deleted"
+          },
+          "default": {
+            "description": "Resource provider error response about the failure.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Artifacts": {
+            "$ref": "./examples/Artifacts_Delete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.WorkloadBuilder/migrationAgents": {
+      "get": {
+        "tags": [
+          "MigrationAgents"
+        ],
+        "description": "Lists MigrationAgent resources in a subscription.",
+        "operationId": "MigrationAgents_ListBySubscription",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/MigrationAgentResourcePageList"
+            }
+          },
+          "default": {
+            "description": "Resource provider error response about the failure.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "MigrationAgents": {
+            "$ref": "./examples/MigrationAgents_ListBySubscription.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.WorkloadBuilder/migrationAgents": {
+      "get": {
+        "tags": [
+          "MigrationAgents"
+        ],
+        "description": "Lists MigrationAgent resources in a resource group.",
+        "operationId": "MigrationAgents_ListByResourceGroup",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK -- list of workload resources retrieved",
+            "schema": {
+              "$ref": "#/definitions/MigrationAgentResourcePageList"
+            }
+          },
+          "default": {
+            "description": "Resource provider error response about the failure.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "MigrationAgents": {
+            "$ref": "./examples/MigrationAgents_ListByResourceGroup.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.WorkloadBuilder/migrationAgents/{migrationAgentName}": {
+      "get": {
+        "tags": [
+          "MigrationAgents"
+        ],
+        "description": "Get a migrationAgent resource.",
+        "operationId": "MigrationAgents_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/MigrationAgentNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK -- MigrationAgent resource retrieved",
+            "schema": {
+              "$ref": "#/definitions/MigrationAgentResource"
+            }
+          },
+          "default": {
+            "description": "Resource provider error response about the failure.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Workloads": {
+            "$ref": "./examples/MigrationAgents_Get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "MigrationAgents"
+        ],
+        "description": "Create or update MigrationAgent resource.",
+        "operationId": "MigrationAgents_CreateOrUpdate",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/MigrationAgentNameParameter"
+          },
+          {
+            "in": "body",
+            "name": "MigrationAgentResource",
+            "description": "MigrationAgent resource data",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MigrationAgentResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Updated -- MigrationAgent resource updated",
+            "schema": {
+              "$ref": "#/definitions/MigrationAgentResource"
+            }
+          },
+          "default": {
+            "description": "Resource provider error response about the failure.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": false,
+        "x-ms-examples": {
+          "MigrationAgents": {
+            "$ref": "./examples/MigrationAgents_CreateOrUpdate.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "MigrationAgents"
+        ],
+        "description": "Update MigrationAgent resource.",
+        "operationId": "MigrationAgents_Update",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/MigrationAgentNameParameter"
+          },
+          {
+            "in": "body",
+            "name": "MigrationAgentPatchRequestBody",
+            "description": "MigrationAgent resource update data",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MigrationAgentPatchRequestBody"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK -- resource updated",
+            "schema": {
+              "$ref": "#/definitions/MigrationAgentResource"
+            }
+          },
+          "default": {
+            "description": "Resource provider error response about the failure.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "MigrationAgents": {
+            "$ref": "./examples/MigrationAgents_Update.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "MigrationAgents"
+        ],
+        "description": "Delete a MigrationAgent resource.",
+        "operationId": "MigrationAgents_Delete",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/MigrationAgentNameParameter"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Resource not found"
+          },
+          "200": {
+            "description": "OK -- MigrationAgent resource deleted"
+          },
+          "default": {
+            "description": "Resource provider error response about the failure.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Workloads": {
+            "$ref": "./examples/MigrationAgents_Delete.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ResourceBaseProperties": {
+      "description": "Resource base properties.",
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "description": "Resource provisioning state.",
+          "$ref": "#/definitions/ResourceState",
+          "readOnly": true
+        }
+      }
+    },
+    "WorkloadResourcePageList": {
+      "description": "List of resources page result.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "List of resources in current page.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/WorkloadResource"
+          }
+        },
+        "nextLink": {
+          "description": "Link to next page of resources.",
+          "type": "string"
+        }
+      }
+    },
+    "WorkloadResource": {
+      "description": "Workload resource data.",
+      "required": [
+        "properties"
+      ],
+      "type": "object",
+      "properties": {
+        "properties": {
+          "description": "Workload resource properties",
+          "$ref": "#/definitions/WorkloadProperties",
+          "x-ms-client-flatten": true
+        },
+        "systemData": {
+          "$ref": "#/definitions/systemData"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "WorkloadProperties": {
+      "description": "Workload resource properties.",
+      "required": [
+        "workloadType"
+      ],
+      "type": "object",
+      "properties": {
+        "description": {
+          "description": "Description of the resource.",
+          "maxLength": 512,
+          "type": "string"
+        },
+        "workloadType": {
+          "description": "Workload type",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ],
+          "$ref": "#/definitions/WorkloadType"
+        },
+        "migrationAgentId": {
+          "description": "MigrationAgent resource Arm Id.",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ],
+          "type": "string"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResourceBaseProperties"
+        }
+      ]
+    },
+    "MigrationAgentResourcePageList": {
+      "description": "List of resources page result.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "List of resources in current page.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MigrationAgentResource"
+          }
+        },
+        "nextLink": {
+          "description": "Link to next page of resources.",
+          "type": "string"
+        }
+      }
+    },
+    "MigrationAgentResource": {
+      "description": "MigrationAgent resource data.",
+      "required": [
+        "properties"
+      ],
+      "type": "object",
+      "properties": {
+        "properties": {
+          "description": "MigrationAgent resource properties",
+          "$ref": "#/definitions/MigrationAgentProperties",
+          "x-ms-client-flatten": true
+        },
+        "systemData": {
+          "$ref": "#/definitions/systemData"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "MigrationAgentProperties": {
+      "description": "MigrationAgent resource properties.",
+      "required": [
+        "migrationApplianceId",
+        "storageAccountId",
+        "storageQueueName",
+        "storageTableName"
+      ],
+      "type": "object",
+      "properties": {
+        "migrationApplianceId": {
+          "description": "Migration appliance ARM Id where the agent is running.",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ],
+          "type": "string"
+        },
+        "storageAccountId": {
+          "description": "Customer storage account arm Id where Queue and Table will be created.",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ],
+          "type": "string"
+        },
+        "storageQueueName": {
+          "description": "Queue to be used for handshake between migration agent and workload builder service.",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ],
+          "minLength": 3,
+          "maxLength": 63,
+          "type": "string"
+        },
+        "storageTableName": {
+          "description": "Table to be used for storing information needed to generate spec for individual VMs.",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ],
+          "minLength": 3,
+          "maxLength": 63,
+          "type": "string"
+        },
+        "applicationInsightsInstrumentationKey": {
+          "description": "Application insights instrumentation key to emit the agent logs.",
+          "maxLength": 64,
+          "type": "string"
+        },
+        "agentLastHeartbeat": {
+          "description": "Agent last heartbeat time in UTC.",
+          "format": "date-time",
+          "type": "string"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResourceBaseProperties"
+        }
+      ]
+    },
+    "MigrationAgentPatchRequestBody": {
+      "description": "MigrationAgent patch request properties.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "description": "MigrationAgent PATCH request properties",
+          "$ref": "#/definitions/MigrationAgentPatchProperties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResourcePatchRequestBody"
+        }
+      ]
+    },
+    "MigrationAgentPatchProperties": {
+      "description": "MigrationAgent resource PATCH request properties.",
+      "required": [
+        "agentLastHeartbeat"
+      ],
+      "type": "object",
+      "properties": {
+        "agentLastHeartbeat": {
+          "description": "Agent last heartbeat time in UTC.",
+          "format": "date-time",
+          "type": "string"
+        }
+      }
+    },
+    "VersionResourcePageList": {
+      "description": "List of resources page result.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "List of resources in current page.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VersionResource"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "Link to next page of resources.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "VersionResource": {
+      "description": "Version resource data.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "description": "Version resource properties",
+          "$ref": "#/definitions/VersionProperties",
+          "x-ms-client-flatten": true
+        },
+        "systemData": {
+          "$ref": "#/definitions/systemData"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "VersionProperties": {
+      "description": "Workload version resource properties.",
+      "required": [
+        "contentType",
+        "keyVaultId"
+      ],
+      "type": "object",
+      "properties": {
+        "description": {
+          "description": "Description of the resource.",
+          "maxLength": 512,
+          "type": "string"
+        },
+        "specContent": {
+          "description": "Version spec url or content. This field is empty on migration scenario.",
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "specSummary": {
+          "description": "Summary of the infra spec.",
+          "type": "string",
+          "readOnly": true
+        },
+        "contentType": {
+          "description": "Content type",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ],
+          "$ref": "#/definitions/ContentType"
+        },
+        "keyVaultId": {
+          "description": "Key-vault resource id.\r\n\r\nKey-vault will be used to store secrets like private ssh keys or\r\npasswords for the vms created in user's subscription.",
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "migrationPreRequisites": {
+          "description": "Migration scenario specific prerequisites.",
+          "$ref": "#/definitions/VersionResourceMigrationPrerequisites"
+        },
+        "activityLog": {
+          "description": "Version creation activity log.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/OperationActivityRecord"
+          },
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResourceBaseProperties"
+        }
+      ]
+    },
+    "VersionResourceMigrationPrerequisites": {
+      "description": "Prerequisites for version resource creation in migration scenario.",
+      "type": "object",
+      "properties": {
+        "vmDiscoveryIds": {
+          "description": "Migrating VMs discovery Ids.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "assessmentId": {
+          "description": "Migrating VMs assessment Id.",
+          "type": "string"
+        }
+      }
+    },
+    "ArtifactResourcePageList": {
+      "description": "List of artifact resources page result.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "List of artifact resources in current page.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ArtifactResource"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "Link to next page of resources.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ArtifactResource": {
+      "description": "Artifact resource definition.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "description": "Artifact resource properties",
+          "$ref": "#/definitions/ArtifactProperties",
+          "x-ms-client-flatten": true
+        },
+        "systemData": {
+          "$ref": "#/definitions/systemData"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "ArtifactProperties": {
+      "description": "Workload artifact.",
+      "type": "object",
+      "properties": {
+        "artifactType": {
+          "description": "Artifact type",
+          "$ref": "#/definitions/ArtifactType",
+          "readOnly": true
+        },
+        "purpose": {
+          "description": "Artifact purpose",
+          "$ref": "#/definitions/ArtifactPurpose",
+          "readOnly": true
+        },
+        "executionOrder": {
+          "format": "int32",
+          "description": "Artifact execution order.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "artifactContent": {
+          "description": "Artifact definition content.\r\nFor example, if artifact type is 'Blueprint' then this field holds published blueprint Arm id.",
+          "type": "string",
+          "readOnly": true
+        },
+        "parameters": {
+          "description": "Parameters for the artifact definition.",
+          "type": "object",
+          "additionalProperties": {
+            "description": "Artifact parameters.",
+            "$ref": "#/definitions/ParameterValue"
+          },
+          "readOnly": true
+        },
+        "artifactDependencies": {
+          "description": "List of artifacts the current artifact depends on.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResourceBaseProperties"
+        }
+      ]
+    },
+    "InstanceResourcePageList": {
+      "description": "List of resources page result.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "List of resources in current page.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/InstanceResource"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "Link to next page of resources.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "InstanceResource": {
+      "description": "Instance resource definition.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "description": "Instance resource properties",
+          "$ref": "#/definitions/InstanceProperties",
+          "x-ms-client-flatten": true
+        },
+        "systemData": {
+          "$ref": "#/definitions/systemData"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "InstanceProperties": {
+      "description": "Instance resource properties.",
+      "required": [
+        "versionId",
+        "targetResourceGroupId"
+      ],
+      "type": "object",
+      "properties": {
+        "description": {
+          "description": "Description of the resource.",
+          "maxLength": 512,
+          "type": "string"
+        },
+        "versionId": {
+          "description": "Workload version Id for this instance.",
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "targetResourceGroupId": {
+          "description": "Target resource group Id where workload infra resources will be created.",
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "userManagedIdentity": {
+          "description": "User managed identity id used for deploying the artifacts. This is optional field.\r\nIf provided, then it will be used for deployment operations. And this identity\r\nshould have necessary (owner) permissions on the subscription.",
+          "type": "string"
+        },
+        "parameters": {
+          "description": "Parameters for individual artifacts of the version.",
+          "type": "object",
+          "additionalProperties": {
+            "description": "Parameter collection of an artifact.",
+            "type": "object",
+            "additionalProperties": {
+              "$ref": "#/definitions/ParameterValue"
+            }
+          }
+        },
+        "artifactsStatus": {
+          "description": "Artifacts deployment status.",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/ArtifactStatus"
+          },
+          "readOnly": true
+        },
+        "activityLog": {
+          "description": "Instance creation activity log.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/OperationActivityRecord"
+          },
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResourceBaseProperties"
+        }
+      ]
+    },
+    "ArtifactStatus": {
+      "description": "Artifact deployment status.",
+      "type": "object",
+      "properties": {
+        "state": {
+          "description": "Artifact deployment state",
+          "$ref": "#/definitions/ArtifactDeploymentState",
+          "readOnly": true
+        },
+        "startTimeUtc": {
+          "format": "date-time",
+          "description": "Artifact deployment start time.",
+          "type": "string",
+          "readOnly": true
+        },
+        "endTimeUtc": {
+          "format": "date-time",
+          "description": "Artifact deployment end time.",
+          "type": "string",
+          "readOnly": true
+        },
+        "errorDetails": {
+          "description": "Error details",
+          "$ref": "#/definitions/ErrorDetail",
+          "readOnly": true
+        }
+      }
+    },
+    "OperationActivityRecord": {
+      "description": "Represents the activity record of an operation.\r\n\r\nAn activity represents a particular task or sub-task in an operation,\r\nand this activity can recorded using below class.",
+      "type": "object",
+      "properties": {
+        "timeStamp": {
+          "format": "date-time",
+          "description": "Time of the activity.",
+          "type": "string"
+        },
+        "operation": {
+          "description": "Operation name.",
+          "type": "string"
+        },
+        "activity": {
+          "description": "Activity name.",
+          "type": "string"
+        },
+        "subActivity": {
+          "description": "Sub activity name.\r\n\r\nThis field is useful when an activity is again\r\nsplit into multiple sub-activities.",
+          "type": "string"
+        },
+        "data": {
+          "description": "Activity data.\r\n\r\nActivity data represents the details about activity/sub-activity performed.\r\nMost of the time it could be simple message describing the activity.",
+          "type": "string"
+        },
+        "level": {
+          "format": "int32",
+          "description": "Activity record criticality level.\r\n\r\nIndicates the criticality of the activity record. This can be assumed as log level.\r\n0 - Critical, 1 - Error, 2 - Warning, 3 - info, 4 and above - verbose.",
+          "type": "integer"
+        }
+      }
+    },
+    "ParameterValue": {
+      "description": "Value type to store parameter values.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Parameter value.",
+          "type": "string"
+        },
+        "secureValue": {
+          "description": "Secure parameter value.",
+          "$ref": "#/definitions/SecureValueType"
+        }
+      }
+    },
+    "SecureValueType": {
+      "description": "Secure value type to store key-vault details.",
+      "type": "object",
+      "properties": {
+        "keyVaultId": {
+          "description": "Key vault Id.",
+          "type": "string"
+        },
+        "secretName": {
+          "description": "Secret name.",
+          "maxLength": 128,
+          "type": "string"
+        }
+      }
+    },
+    "ArtifactType": {
+      "description": "Type of supported workload artifact types.",
+      "enum": [
+        "AnsiblePlaybook",
+        "AnsibleHostsFile",
+        "AnsibleVarsFile",
+        "Blueprint",
+        "ShellScript",
+        "PowershellScript",
+        "DataCopy"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "ArtifactType",
+        "modelAsString": true
+      }
+    },
+    "ArtifactPurpose": {
+      "description": "Artifact purpose.",
+      "enum": [
+        "InfraCreation",
+        "AppInstallation",
+        "AppConfiguration",
+        "AppMigration",
+        "AppValidation"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "ArtifactPurpose",
+        "modelAsString": true
+      }
+    },
+    "ArtifactDeploymentState": {
+      "description": "Different states of the artifact deployment.",
+      "enum": [
+        "NotStarted",
+        "InProgress",
+        "Succeeded",
+        "Failed",
+        "Canceled"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "ArtifactDeploymentState",
+        "modelAsString": true
+      }
+    },
+    "ContentType": {
+      "description": "Type of the content.",
+      "enum": [
+        "None",
+        "Yaml",
+        "Url"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "ContentType",
+        "modelAsString": true
+      }
+    },
+    "WorkloadType": {
+      "description": "Type of workloads understood by workload builder.",
+      "enum": [
+        "Unknown",
+        "Jboss",
+        "Lamp",
+        "Custom",
+        "Moodle"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "WorkloadType",
+        "modelAsString": true
+      }
+    },
+    "ResourceState": {
+      "description": "Workload builder resources provisioning states.",
+      "enum": [
+        "NotSpecified",
+        "Accepted",
+        "Creating",
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Deleted",
+        "ProvisioningResources",
+        "InstallingApplication",
+        "ConfiguringApplication",
+        "MigratingApplicationData",
+        "RunningValidations",
+        "CreatingArtifacts",
+        "DeletingArtifacts"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "ResourceState",
+        "modelAsString": true
+      }
+    },
+    "ResourcePatchRequestBody": {
+      "description": "Workload resource patch request body.",
+      "type": "object",
+      "properties": {
+        "tags": {
+          "description": "Resource tags.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "Resource": {
+      "description": "Common fields that are returned in the response for all Azure Resource Manager resources",
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Fully qualified resource ID for the resource."
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The name of the resource"
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The type of the resource. E.g. \"Microsoft.Compute/virtualMachines\" or \"Microsoft.Storage/storageAccounts\""
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "TrackedResource": {
+      "description": "The resource model definition for an Azure Resource Manager tracked top level resource",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-ms-mutability": [
+            "read",
+            "create",
+            "update"
+          ],
+          "description": "Resource tags."
+        },
+        "location": {
+          "type": "string",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ],
+          "description": "The geo-location where the resource lives"
+        }
+      },
+      "required": [
+        "location"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ]
+    },
+    "ProxyResource": {
+      "description": "The resource model definition for an Azure Resource Manager proxy resource. It will have everything other than required location and tags",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ]
+    },
+    "ErrorDetail": {
+      "description": "The error detail.",
+      "properties": {
+        "code": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The error code."
+        },
+        "message": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The error message."
+        },
+        "target": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The error target."
+        },
+        "details": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ErrorDetail"
+          },
+          "description": "The error details."
+        },
+        "additionalInfo": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ErrorAdditionalInfo"
+          },
+          "description": "The error additional info."
+        }
+      }
+    },
+    "ErrorResponse": {
+      "title": "Error response",
+      "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations. (This also follows the OData error response format.).",
+      "properties": {
+        "error": {
+          "description": "The error object.",
+          "$ref": "#/definitions/ErrorDetail"
+        }
+      }
+    },
+    "ErrorAdditionalInfo": {
+      "properties": {
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The additional info type."
+        },
+        "info": {
+          "readOnly": true,
+          "type": "object",
+          "description": "The additional info."
+        }
+      },
+      "description": "The resource management error additional info."
+    },
+    "Operation": {
+      "description": "Details of a REST API operation, returned from the Resource Provider Operations API",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "The name of the operation, as per Resource-Based Access Control (RBAC).",
+          "type": "string",
+          "readOnly": true
+        },
+        "isDataAction": {
+          "description": "Whether the operation applies to data-plane. This is \"true\" for data-plane operations and \"false\" for ARM/control-plane operations.",
+          "type": "boolean",
+          "readOnly": true
+        },
+        "display": {
+          "description": "Localized display information for this particular operation.",
+          "properties": {
+            "provider": {
+              "description": "The localized friendly form of the resource provider name, e.g. \"Microsoft Monitoring Insights\" or \"Microsoft Compute\".",
+              "type": "string",
+              "readOnly": true
+            },
+            "resource": {
+              "description": "The localized friendly name of the resource type related to this operation. E.g. \"Virtual Machines\" or \"Job Schedule Collections\".",
+              "type": "string",
+              "readOnly": true
+            },
+            "operation": {
+              "description": "The concise, localized friendly name for the operation; suitable for dropdowns. E.g. \"Create or Update Virtual Machine\", \"Restart Virtual Machine\".",
+              "type": "string",
+              "readOnly": true
+            },
+            "description": {
+              "description": "The short, localized friendly description of the operation; suitable for tool tips and detailed views.",
+              "type": "string",
+              "readOnly": true
+            }
+          }
+        },
+        "origin": {
+          "description": "The intended executor of the operation; as in Resource Based Access Control (RBAC) and audit logs UX. Default value is \"user,system\"",
+          "type": "string",
+          "readOnly": true,
+          "enum": [
+            "user",
+            "system",
+            "user,system"
+          ],
+          "x-ms-enum": {
+            "name": "Origin",
+            "modelAsString": true
+          }
+        },
+        "actionType": {
+          "description": "Enum. Indicates the action type. \"Internal\" refers to actions that are for internal only APIs.",
+          "type": "string",
+          "readOnly": true,
+          "enum": [
+            "Internal"
+          ],
+          "x-ms-enum": {
+            "name": "ActionType",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "OperationListResult": {
+      "description": "A list of REST API operations supported by an Azure Resource Provider. It contains an URL link to get the next set of results.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Operation"
+          },
+          "description": "List of operations supported by the resource provider",
+          "readOnly": true
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "URL to get the next set of operation list results (if there are any).",
+          "readOnly": true
+        }
+      }
+    },
+    "systemData": {
+      "description": "Metadata pertaining to creation and last modification of the resource.",
+      "type": "object",
+      "readOnly": true,
+      "properties": {
+        "createdBy": {
+          "type": "string",
+          "description": "The identity that created the resource."
+        },
+        "createdByType": {
+          "type": "string",
+          "description": "The type of identity that created the resource.",
+          "enum": [
+            "User",
+            "Application",
+            "ManagedIdentity",
+            "Key"
+          ],
+          "x-ms-enum": {
+            "name": "createdByType",
+            "modelAsString": true
+          }
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp of resource creation (UTC)."
+        },
+        "lastModifiedBy": {
+          "type": "string",
+          "description": "The identity that last modified the resource."
+        },
+        "lastModifiedByType": {
+          "type": "string",
+          "description": "The type of identity that last modified the resource.",
+          "enum": [
+            "User",
+            "Application",
+            "ManagedIdentity",
+            "Key"
+          ],
+          "x-ms-enum": {
+            "name": "createdByType",
+            "modelAsString": true
+          }
+        },
+        "lastModifiedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The type of identity that last modified the resource."
+        }
+      }
+    }
+  },
+  "parameters": {
+    "SubscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The ID of the target subscription.",
+      "minLength": 1
+    },
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "The API version to use for this operation.",
+      "minLength": 1
+    },
+    "ResourceGroupNameParameter": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the resource group. The name is case insensitive.",
+      "pattern": "^[-\\w\\._\\(\\)]+$",
+      "minLength": 1,
+      "maxLength": 90,
+      "x-ms-parameter-location": "method"
+    },
+    "WorkloadNameParameter": {
+      "in": "path",
+      "name": "workloadName",
+      "description": "Workload name.",
+      "required": true,
+      "x-ms-parameter-location": "method",
+      "type": "string"
+    },
+    "MigrationAgentNameParameter": {
+      "in": "path",
+      "name": "migrationAgentName",
+      "description": "MigrationAgent name.",
+      "required": true,
+      "x-ms-parameter-location": "method",
+      "type": "string"
+    },
+    "VersionNameParameter": {
+      "in": "path",
+      "name": "versionName",
+      "description": "Version name.",
+      "required": true,
+      "x-ms-parameter-location": "method",
+      "type": "string"
+    },
+    "ArtifactNameParameter": {
+      "in": "path",
+      "name": "artifactName",
+      "description": "Artifact name.",
+      "required": true,
+      "x-ms-parameter-location": "method",
+      "type": "string"
+    },
+    "InstanceNameParameter": {
+      "in": "path",
+      "name": "instanceName",
+      "description": "Instance name.",
+      "required": true,
+      "x-ms-parameter-location": "method",
+      "type": "string"
+    }
+  }
+}

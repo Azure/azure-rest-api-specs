@@ -10,7 +10,7 @@ python:
   payload-flattening-threshold: 2
   namespace: Microsoft.WorkloadBuilder
   package-name: workloadbuilder
-  package-version: 2020-07-01-privatepreview
+  package-version: 2021-03-01-privatepreview
   clear-output-folder: true
 ```
 

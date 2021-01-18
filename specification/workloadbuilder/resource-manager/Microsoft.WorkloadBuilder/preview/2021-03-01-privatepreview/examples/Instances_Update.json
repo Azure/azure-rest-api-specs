@@ -1,0 +1,45 @@
+{
+  "parameters": {
+    "api-version": "2021-03-01-privatepreview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "dummyrg",
+    "workloadName": "MyJBossApp",
+    "instanceName": "poc1",
+    "InstancePatchRequestBody": {}
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "versionId": "v1",
+          "targetResourceGroupId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/deployment-rg",
+          "userManagedIdentity": "",
+          "parameters": {
+            "infra1": {
+              "param-a": {
+                "value": "value-for-param-a"
+              }
+            }
+          },
+          "artifactsStatus": {
+            "infra1": {
+              "state": "Succeeded",
+              "startTimeUtc": "2019-12-12T13:30:28.958Z",
+              "endTimeUtc": "2019-12-12T13:30:28.958Z",
+              "errorDetails": {
+                "code": "Success",
+                "message": ""
+              }
+            }
+          },
+          "description": "POC deployment",
+          "activityLog": [],
+          "provisioningState": "Succeeded"
+        },
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/dummyrg/providers/Microsoft.WorkloadBuilder/Workloads/MyJBossApp/instances/poc1",
+        "name": "poc1",
+        "type": "Microsoft.WorkloadBuilder/Workloads/instances"
+      }
+    }
+  }
+}

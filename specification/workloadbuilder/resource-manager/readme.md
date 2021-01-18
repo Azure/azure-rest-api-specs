@@ -26,7 +26,8 @@ These are the global settings for the cloudenvironment.
 
 ```yaml
 openapi-type: arm
-tag: package-2020-07-01-privatepreview
+openapi-subtype: rpaas
+tag: package-2021-03-01-privatepreview
 ```
 
 ### Tag: package-2020-07-01-privatepreview
@@ -36,6 +37,15 @@ These settings apply only when `--tag=package-2020-07-01-privatepreview` is spec
 ```yaml $(tag) == 'package-2020-07-01-privatepreview'
 input-file:
   - Microsoft.WorkloadBuilder\preview\2020-07-01-privatepreview\workloadbuilder.json
+```
+
+### Tag: package-2021-03-01-privatepreview
+
+These settings apply only when `--tag=package-2021-03-01-privatepreview` is specified on the command line.
+
+```yaml $(tag) == 'package-2021-03-01-privatepreview'
+input-file:
+  - Microsoft.WorkloadBuilder\preview\2021-03-01-privatepreview\workloadbuilder.json
 ```
 
 ---
@@ -50,17 +60,11 @@ This is not used by Autorest itself.
 ```yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-python
-  - repo: azure-sdk-for-java
-  - repo: azure-sdk-for-go
-  - repo: azure-sdk-for-js
+  - repo: azure-sdk-for-net
   - repo: azure-sdk-for-ruby
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_workloadbuilder']
 ```
-
-## Go
-
-See configuration in [readme.go.md](./readme.go.md)
 
 ## Python
 
@@ -69,10 +73,6 @@ See configuration in [readme.python.md](./readme.python.md)
 ## Ruby
 
 See configuration in [readme.ruby.md](./readme.ruby.md)
-
-## TypeScript
-
-See configuration in [readme.typescript.md](./readme.typescript.md)
 
 ## CSharp
 
