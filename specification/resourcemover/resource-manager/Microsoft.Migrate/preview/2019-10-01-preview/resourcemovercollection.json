@@ -1009,7 +1009,9 @@
         "CommitPending",
         "CommitInProgress",
         "CommitFailed",
-        "Committed"
+        "Committed",
+        "DeleteSourcePending",
+        "ResourceMoveCompleted"
       ],
       "type": "string",
       "readOnly": true,
@@ -1726,7 +1728,11 @@
       "properties": {
         "resourceType": {
           "description": "The resource type. For example, the value can be Microsoft.Compute/virtualMachines.",
-          "type": "string"
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         },
         "targetResourceName": {
           "description": "Gets or sets the target Resource name.",
