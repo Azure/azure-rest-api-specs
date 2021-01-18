@@ -1203,7 +1203,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ResourcePatch"
+              "$ref": "#/definitions/VirtualMachineUpdate"
             }
           }
         ],
@@ -2458,7 +2458,8 @@
         "maxDiskSizeGB": {
           "format": "int32",
           "description": "Gets or sets the max disk size.",
-          "type": "integer"
+          "type": "integer",
+          "readOnly": true
         },
         "diskName": {
           "description": "Gets or sets the name of the virtual disk in vmmServer.",
@@ -2485,7 +2486,8 @@
         },
         "volumeType": {
           "description": "Gets or sets the disk volume type.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "vhdFormatType": {
           "description": "Gets the disk vhd format type.",
@@ -2607,6 +2609,37 @@
         "nextLink": {
           "type": "string",
           "description": "Url to follow for getting next page of resources."
+        }
+      }
+    },
+    "VirtualMachineUpdateProperties": {
+      "description": "Defines the resource properties.",
+      "type": "object",
+      "properties": {
+        "hardwareProfile": {
+          "$ref": "#/definitions/HardwareProfile"
+        },
+        "storageProfile": {
+          "$ref": "#/definitions/StorageProfile"
+        },
+        "networkProfile": {
+          "$ref": "#/definitions/NetworkProfile"
+        }
+      }
+    },
+    "VirtualMachineUpdate": {
+      "description": "Defines the virtualMachineUpdate.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/VirtualMachineUpdateProperties"
+        },
+        "tags": {
+          "description": "Gets or sets the Resource tags.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       }
     },
