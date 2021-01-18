@@ -36,7 +36,7 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/microsoft.insights/alertrules/{ruleName}": {
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Insights/alertrules/{ruleName}": {
       "put": {
         "description": "Creates or updates a classic metric alert rule.",
         "tags": [
@@ -118,6 +118,12 @@
           },
           "200": {
             "description": "Successful request to delete an alert rule"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-examples": {
@@ -151,6 +157,12 @@
             "description": "Successful request to get an alert rule",
             "schema": {
               "$ref": "#/definitions/AlertRuleResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -187,12 +199,6 @@
           }
         ],
         "responses": {
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          },
           "200": {
             "description": "Successful request to update an alert rule",
             "schema": {
@@ -204,6 +210,12 @@
             "schema": {
               "$ref": "#/definitions/AlertRuleResource"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-examples": {
@@ -213,7 +225,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/microsoft.insights/alertrules": {
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Insights/alertrules": {
       "get": {
         "tags": [
           "AlertRules"
@@ -237,6 +249,12 @@
             "schema": {
               "$ref": "#/definitions/AlertRuleResourceCollection"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-pageable": {
@@ -249,7 +267,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/microsoft.insights/alertrules": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Insights/alertrules": {
       "get": {
         "tags": [
           "AlertRules"
@@ -269,6 +287,12 @@
             "description": "Successful request for a list of alert rules",
             "schema": {
               "$ref": "#/definitions/AlertRuleResourceCollection"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
