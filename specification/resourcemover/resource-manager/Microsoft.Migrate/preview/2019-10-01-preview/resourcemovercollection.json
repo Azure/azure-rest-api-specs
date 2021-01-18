@@ -1813,6 +1813,9 @@
         "addressPrefix": {
           "description": "Gets or sets address prefix for the subnet.",
           "type": "string"
+        },
+        "networkSecurityGroup": {
+          "$ref": "#/definitions/NsgReference"
         }
       }
     },
@@ -1936,6 +1939,26 @@
       ],
       "properties": {}
     },
+    "NsgReference": {
+      "description": "Defines reference to NSG.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AzureResourceReference"
+        }
+      ],
+      "properties": {}
+    },
+    "PublicIpReference": {
+      "description": "Defines reference to a public IP.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AzureResourceReference"
+        }
+      ],
+      "properties": {}
+    },
     "NicIpConfigurationResourceSettings": {
       "description": "Defines NIC IP configuration properties.",
       "type": "object",
@@ -1965,6 +1988,16 @@
           "items": {
             "$ref": "#/definitions/LoadBalancerBackendAddressPoolReference"
           }
+        },
+        "loadBalancerNatRules": {
+          "description": "Gets or sets the references of the load balancer NAT rules.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/LoadBalancerNatRuleReference"
+          }
+        },
+        "publicIp": {
+          "$ref": "#/definitions/PublicIpReference"
         }
       }
     },
