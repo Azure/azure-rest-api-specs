@@ -318,6 +318,61 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/certificates/{certificateId}/refreshSecret": {
+      "post": {
+        "tags": [
+          "Certificate"
+        ],
+        "operationId": "Certificate_RefreshSecret",
+        "description": "From KeyVault, Refresh the certificate being used for authentication with the backend.",
+        "externalDocs": {
+          "description": "How to secure back-end services using client certificate authentication in Azure API Management",
+          "url": "https://azure.microsoft.com/en-us/documentation/articles/api-management-howto-mutual-certificates/"
+        },
+        "x-ms-examples": {
+          "ApiManagementRefreshCertificate": {
+            "$ref": "./examples/ApiManagementRefreshCertificate.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/CertificateIdParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The certificate details were successfully updated.",
+            "headers": {
+              "ETag": {
+                "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "./definitions.json#/definitions/CertificateContract"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./apimanagement.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {},
