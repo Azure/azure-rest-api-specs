@@ -241,6 +241,9 @@
           },
           "Create or update a web test alert rule": {
             "$ref": "./examples/createOrUpdateWebTestMetricAlert.json"
+          },
+          "Create or update an alert rules with dimensions": {
+            "$ref": "./examples/createOrUpdateMetricAlertWithDimensions.json"
           }
         }
       },
@@ -474,7 +477,7 @@
             "type": "string",
             "description": "the dictionary of custom properties to include with the post operation. These data are appended to the webhook payload."
           },
-          "description": "The properties of a webhook object."
+          "description": "This field allows specifying custom properties, which would be appended to the alert payload sent as input to the webhook."
         }
       }
     },
@@ -520,11 +523,11 @@
         },
         "targetResourceType": {
           "type": "string",
-          "description": "the resource type of the target resource(s) on which the alert is created/updated. Mandatory for MultipleResourceMultipleMetricCriteria."
+          "description": "the resource type of the target resource(s) on which the alert is created/updated. Mandatory if the scope contains a subscription, resource group, or more than one resource."
         },
         "targetResourceRegion": {
           "type": "string",
-          "description": "the region of the target resource(s) on which the alert is created/updated. Mandatory for MultipleResourceMultipleMetricCriteria."
+          "description": "the region of the target resource(s) on which the alert is created/updated. Mandatory if the scope contains a subscription, resource group, or more than one resource."
         },
         "criteria": {
           "$ref": "#/definitions/MetricAlertCriteria",
