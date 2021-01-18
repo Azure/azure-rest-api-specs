@@ -606,6 +606,9 @@ directive:
     from: alertRules_API.json
     where: $.definitions.AlertRuleResource
     reason: 'Action is expected to receive a subclass of Resource'
+  - suppress: OBJECT_ADDITIONAL_PROPERTIES
+    from: metricAlert_API.json
+    where: $.definitions.MetricAlertResource
 ```
 
 ### Tag: profile-hybrid-2019-03-01
