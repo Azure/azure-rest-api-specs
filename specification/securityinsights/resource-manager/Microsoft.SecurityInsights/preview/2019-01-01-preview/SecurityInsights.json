@@ -8254,38 +8254,6 @@
           "readOnly": true,
           "type": "string"
         },
-        "riskLevel": {
-          "description": "The risk level of this mailbox.",
-          "enum": [
-            "None",
-            "Low",
-            "Medium",
-            "High"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "modelAsString": false,
-            "name": "RiskLevel",
-            "values": [
-              {
-                "description": "No risk level",
-                "value": "None"
-              },
-              {
-                "description": "Low risk level",
-                "value": "Low"
-              },
-              {
-                "description": "Medium risk level",
-                "value": "Medium"
-              },
-              {
-                "description": "High risk level",
-                "value": "High"
-              }
-            ]
-          }
-        },
         "externalDirectoryObjectId": {
           "description": "The AzureAD identifier of mailbox. Similar to AadUserId in account entity but this property is specific to mailbox object on office side",
           "format": "uuid",
@@ -8339,6 +8307,11 @@
           "readOnly": true,
           "type": "object"
         },
+        "countByProtectionStatus": {
+          "description": "Count of mail messages by ProtectionStatus string representation",
+          "readOnly": true,
+          "type": "object"
+        },
         "threats": {
           "description": "The threats of mail messages that are part of the mail cluster",
           "items": {
@@ -8362,7 +8335,8 @@
         "mailCount": {
           "description": "The number of mail messages that are part of the mail cluster",
           "readOnly": true,
-          "type": "integer"
+          "type": "integer",
+          "format": "int32"
         },
         "isVolumeAnomaly": {
           "description": "Is this a volume anomaly mail cluster",
@@ -8371,6 +8345,33 @@
         },
         "source": {
           "description": "The source of the mail cluster (default is 'O365 ATP')",
+          "readOnly": true,
+          "type": "string"
+        },
+        "clusterSourceIdentifier": {
+          "description": "The id of the cluster source",
+          "readOnly": true,
+          "type": "string"
+        },
+        "clusterSourceType": {
+          "description": "The type of the cluster source",
+          "readOnly": true,
+          "type": "string"
+        },
+        "clusterQueryStartTime": {
+          "description": "The cluster query start time",
+          "format": "date-time",
+          "readOnly": true,
+          "type": "string"
+        },
+        "clusterQueryEndTime": {
+          "description": "The cluster query end time",
+          "format": "date-time",
+          "readOnly": true,
+          "type": "string"
+        },
+        "clusterGroup": {
+          "description": "The cluster group",
           "readOnly": true,
           "type": "string"
         }
@@ -8402,10 +8403,10 @@
       ],
       "description": "Mail message entity property bag.",
       "properties": {
-        "files": {
-          "description": "The File entities of this mail message's attachments",
+        "fileEntityIds": {
+          "description": "The File entity ids of this mail message's attachments",
           "items": {
-            "$ref": "#/definitions/FileEntity"
+            "type": "string"
           },
           "readOnly": true,
           "type": "array"
@@ -8433,13 +8434,38 @@
           "readOnly": true,
           "type": "array"
         },
-        "sender": {
-          "description": "The sender's email address",
+        "p1Sender": {
+          "description": "The p1 sender's email address",
+          "readOnly": true,
+          "type": "string"
+        },
+        "p1SenderDisplayName": {
+          "description": "The p1 sender's display name",
+          "readOnly": true,
+          "type": "string"
+        },
+        "p1SenderDomain": {
+          "description": "The p1 sender's domain",
           "readOnly": true,
           "type": "string"
         },
         "senderIP": {
           "description": "The sender's IP address",
+          "readOnly": true,
+          "type": "string"
+        },
+        "p2Sender": {
+          "description": "The p2 sender's email address",
+          "readOnly": true,
+          "type": "string"
+        },
+        "p2SenderDisplayName": {
+          "description": "The p2 sender's display name",
+          "readOnly": true,
+          "type": "string"
+        },
+        "p2SenderDomain": {
+          "description": "The p2 sender's domain",
           "readOnly": true,
           "type": "string"
         },
@@ -8464,6 +8490,45 @@
           "description": "The subject of this mail message",
           "readOnly": true,
           "type": "string"
+        },
+        "language": {
+          "description": "The language of this mail message",
+          "readOnly": true,
+          "type": "string"
+        },
+        "threatDetectionMethods": {
+          "description": "The threat detection methods",
+          "items": {
+            "description": "A threat detection method",
+            "type": "string"
+          },
+          "readOnly": true,
+          "type": "string"
+        },
+        "bodyFingerprintBin1": {
+          "description": "The bodyFingerprintBin1",
+          "type": "integer",
+          "format": "int32"
+        },
+        "bodyFingerprintBin2": {
+          "description": "The bodyFingerprintBin2",
+          "type": "integer",
+          "format": "int32"
+        },
+        "bodyFingerprintBin3": {
+          "description": "The bodyFingerprintBin3",
+          "type": "integer",
+          "format": "int32"
+        },
+        "bodyFingerprintBin4": {
+          "description": "The bodyFingerprintBin4",
+          "type": "integer",
+          "format": "int32"
+        },
+        "bodyFingerprintBin5": {
+          "description": "The bodyFingerprintBin5",
+          "type": "integer",
+          "format": "int32"
         },
         "antispamDirection": {
           "description": "The directionality of this mail message",
@@ -8619,23 +8684,6 @@
       ],
       "description": "Submission mail entity property bag.",
       "properties": {
-        "submissionId": {
-          "description": "The Submission Id",
-          "format": "uuid",
-          "readOnly": true,
-          "type": "string"
-        },
-        "submissionDate": {
-          "description": "Reported Date time for this submission",
-          "format": "date-time",
-          "readOnly": true,
-          "type": "string"
-        },
-        "submitter": {
-          "description": "Count of mail messages by ThreatType string representation",
-          "readOnly": true,
-          "type": "string"
-        },
         "networkMessageId": {
           "description": "The network message id of email to which submission belongs",
           "format": "uuid",
@@ -10726,6 +10774,11 @@
           "readOnly": true,
           "type": "string"
         },
+        "source": {
+          "description": "The source of the device",
+          "readOnly": true,
+          "type": "string"
+        },
         "iotSecurityAgentId": {
           "description": "The ID of the security agent running on the device",
           "format": "uuid",
@@ -10747,6 +10800,31 @@
           "readOnly": true,
           "type": "string"
         },
+        "macAddress": {
+          "description": "The MAC address of the device",
+          "readOnly": true,
+          "type": "string"
+        },
+        "model": {
+          "description": "The model of the device",
+          "readOnly": true,
+          "type": "string"
+        },
+        "serialNumber": {
+          "description": "The serial number of the device",
+          "readOnly": true,
+          "type": "string"
+        },
+        "firmwareVersion": {
+          "description": "The firmware version of the device",
+          "readOnly": true,
+          "type": "string"
+        },
+        "operatingSystem": {
+          "description": "The operating system of the device",
+          "readOnly": true,
+          "type": "string"
+        },
         "iotHubEntityId": {
           "description": "The AzureResource entity id of the IoT Hub",
           "readOnly": true,
@@ -10757,10 +10835,23 @@
           "readOnly": true,
           "type": "string"
         },
+        "ipAddressEntityId": {
+          "description": "The IP entity if of this device",
+          "readOnly": true,
+          "type": "string"
+        },
         "threatIntelligence": {
           "description": "A list of TI contexts attached to the IoTDevice entity.",
           "items": {
             "$ref": "#/definitions/ThreatIntelligence"
+          },
+          "readOnly": true,
+          "type": "array"
+        },
+        "protocols": {
+          "description": "A list of protocols of the IoTDevice entity.",
+          "items": {
+            "type": "string"
           },
           "readOnly": true,
           "type": "array"
