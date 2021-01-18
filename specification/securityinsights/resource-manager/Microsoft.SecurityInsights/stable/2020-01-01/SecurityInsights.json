@@ -1247,15 +1247,15 @@
       },
       "put": {
         "x-ms-examples": {
-          "Creates an incident comment.": {
+          "Creates or updates an incident comment.": {
             "$ref": "./examples/incidents/comments/CreateIncidentComment.json"
           }
         },
         "tags": [
           "IncidentComments"
         ],
-        "description": "Creates the incident comment.",
-        "operationId": "IncidentComments_CreateComment",
+        "description": "Creates or updates the incident comment.",
+        "operationId": "IncidentComments_CreateOrUpdateComment",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersion"
@@ -1280,11 +1280,66 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/IncidentComment"
+            }
+          },
           "201": {
             "description": "Created",
             "schema": {
               "$ref": "#/definitions/IncidentComment"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "delete": {
+        "x-ms-examples": {
+          "Delete the incident comment.": {
+            "$ref": "./examples/incidents/comments/DeleteIncidentComment.json"
+          }
+        },
+        "tags": [
+          "IncidentComments"
+        ],
+        "description": "Delete the incident comment.",
+        "operationId": "IncidentComments_DeleteComment",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/OperationalInsightsResourceProvider"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/IncidentId"
+          },
+          {
+            "$ref": "#/parameters/IncidentCommentId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "No Content"
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -2221,7 +2276,7 @@
     "IncidentComment": {
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "#/definitions/ResourceWithEtag"
         }
       ],
       "description": "Represents an incident comment",
@@ -2259,6 +2314,12 @@
       "properties": {
         "createdTimeUtc": {
           "description": "The time the comment was created",
+          "format": "date-time",
+          "readOnly": true,
+          "type": "string"
+        },
+        "lastModifiedTimeUtc": {
+          "description": "The time the comment was updated",
           "format": "date-time",
           "readOnly": true,
           "type": "string"
