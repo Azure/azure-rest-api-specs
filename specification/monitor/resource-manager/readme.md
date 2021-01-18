@@ -599,6 +599,10 @@ directive:
   - suppress: R4007
     from: metricBaselines_API.json
     reason: 'Updating the error response to the new format would be a breaking change.'
+  - suppress: OBJECT_ADDITIONAL_PROPERTIES
+    from: metricAlert_API.json
+    where: $.definitions.MetricAlertResource
+    reason: 'Action is expected to receive a subclass of Resource'
 ```
 
 ### Tag: profile-hybrid-2019-03-01
