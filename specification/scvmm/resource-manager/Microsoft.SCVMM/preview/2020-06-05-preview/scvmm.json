@@ -2313,6 +2313,57 @@
         }
       }
     },
+    "HardwareProfileUpdate": {
+      "description": "Defines the resource properties.",
+      "type": "object",
+      "properties": {
+        "memoryMB": {
+          "type": "integer",
+          "format": "int32",
+          "description": "MemoryMB is the size of a virtual machine's memory, in MB."
+        },
+        "cpuCount": {
+          "type": "integer",
+          "description": "Gets or sets the number of vCPUs for the vm.",
+          "format": "int32"
+        },
+        "dynamicMemoryEnabled": {
+          "type": "string",
+          "description": "Gets or sets a value indicating whether to enable dynamic memory or not.",
+          "enum": [
+            "false",
+            "true"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "DynamicMemoryEnabled"
+          }
+        },
+        "dynamicMemoryMaxMB": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Gets or sets the max dynamic memory for the vm."
+        },
+        "dynamicMemoryMinMB": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Gets or sets the min dynamic memory for the vm."
+        }
+      }
+    },
+    "NetworkProfileUpdate": {
+      "description": "Defines the resource properties.",
+      "type": "object",
+      "properties": {
+        "networkInterfaces": {
+          "description": "Gets or sets the list of network interfaces associated with the virtual machine.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NetworkInterfacesUpdate"
+          }
+        }
+      }
+    },
     "NetworkProfile": {
       "description": "Defines the resource properties.",
       "type": "object",
@@ -2384,6 +2435,40 @@
           "description": "Gets or sets the name of the virtual network in vmmServer that the nic is connected to.",
           "type": "string",
           "readOnly": true
+        },
+        "ipv4AddressType": {
+          "description": "Gets or sets the ipv4 address type.",
+          "$ref": "#/definitions/AllocationMethod"
+        },
+        "ipv6AddressType": {
+          "description": "Gets or sets the ipv6 address type.",
+          "$ref": "#/definitions/AllocationMethod"
+        },
+        "macAddressType": {
+          "description": "Gets or sets the mac address type.",
+          "$ref": "#/definitions/AllocationMethod"
+        },
+        "nicId": {
+          "description": "Gets or sets the nic id.",
+          "type": "string"
+        }
+      }
+    },
+    "NetworkInterfacesUpdate": {
+      "description": "Network Interface model",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Gets or sets the name of the network interface.",
+          "type": "string"
+        },
+        "macAddress": {
+          "description": "Gets or sets the nic MAC address.",
+          "type": "string"
+        },
+        "virtualNetworkId": {
+          "description": "Gets or sets the ARM Id of the microsoft.scvmm/virtualnetwork resource to connect the nic.",
+          "type": "string"
         },
         "ipv4AddressType": {
           "description": "Gets or sets the ipv4 address type.",
@@ -2516,6 +2601,60 @@
         }
       }
     },
+    "VirtualDiskUpdate": {
+      "description": "Virtual disk model",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Gets or sets the name of the disk.",
+          "type": "string"
+        },
+        "diskId": {
+          "description": "Gets or sets the disk id.",
+          "type": "string"
+        },
+        "diskSizeGB": {
+          "format": "int32",
+          "description": "Gets or sets the disk total size.",
+          "type": "integer"
+        },
+        "bus": {
+          "format": "int32",
+          "description": "Gets or sets the disk bus.",
+          "type": "integer"
+        },
+        "lun": {
+          "format": "int32",
+          "description": "Gets or sets the disk lun.",
+          "type": "integer"
+        },
+        "busType": {
+          "description": "Gets or sets the disk bus type.",
+          "type": "string"
+        },
+        "vhdType": {
+          "description": "Gets or sets the disk vhd type.",
+          "type": "string"
+        },
+        "storageQoSPolicy": {
+          "description": "The QoS policy for the disk.",
+          "$ref": "#/definitions/StorageQoSPolicyDetails"
+        }
+      }
+    },
+    "StorageProfileUpdate": {
+      "description": "Defines the resource properties.",
+      "type": "object",
+      "properties": {
+        "disks": {
+          "description": "Gets or sets the list of virtual disks associated with the virtual machine.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VirtualDiskUpdate"
+          }
+        }
+      }
+    },
     "StorageProfile": {
       "description": "Defines the resource properties.",
       "type": "object",
@@ -2617,13 +2756,13 @@
       "type": "object",
       "properties": {
         "hardwareProfile": {
-          "$ref": "#/definitions/HardwareProfile"
+          "$ref": "#/definitions/HardwareProfileUpdate"
         },
         "storageProfile": {
-          "$ref": "#/definitions/StorageProfile"
+          "$ref": "#/definitions/StorageProfileUpdate"
         },
         "networkProfile": {
-          "$ref": "#/definitions/NetworkProfile"
+          "$ref": "#/definitions/NetworkProfileUpdate"
         }
       }
     },
