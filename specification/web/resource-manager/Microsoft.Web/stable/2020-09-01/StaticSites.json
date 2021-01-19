@@ -757,7 +757,7 @@
             "description": "A JSON representation of the StaticSiteZipDeployment properties. See example.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/RequestMessageEnvelope[StaticSiteZipDeployment]"
+              "$ref": "#/definitions/StaticSiteZipDeploymentARMResource"
             }
           },
           {
@@ -780,7 +780,7 @@
         },
         "x-ms-examples": {
           "Deploy a site from a zipped package to a particular static site build": {
-            "$ref": "./examples/StaticSiteZipDeploy.json"
+            "$ref": "./examples/StaticSiteBuildZipDeploy.json"
           }
         }
       }
@@ -1339,7 +1339,11 @@
             }
           }
         },
-        "x-ms-examples": {}
+        "x-ms-examples": {
+          "Detach the user provided function app from the static site build.": {
+            "$ref": "./examples/DetachUserProvidedFunctionAppFromStaticSiteBuild.json"
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/staticSites/{name}/config/appsettings": {
@@ -2437,9 +2441,8 @@
           }
         }
       }
-    }
-  },
-  "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/staticSites/{name}/userProvidedFunctionApps": {
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/staticSites/{name}/userProvidedFunctionApps": {
       "get": {
         "tags": [
           "StaticSites"
@@ -2705,7 +2708,7 @@
             "description": "A JSON representation of the StaticSiteZipDeployment properties. See example.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/RequestMessageEnvelope[StaticSiteZipDeployment]"
+              "$ref": "#/definitions/StaticSiteZipDeploymentARMResource"
             }
           },
           {
@@ -2728,11 +2731,12 @@
         },
         "x-ms-examples": {
           "Deploy a site from a zipped package": {
-            "$ref": "./examples/StaticSiteBuildZipDeploy.json"
+            "$ref": "./examples/StaticSiteZipDeploy.json"
           }
         }
       }
     }
+  },
   "definitions": {
     "StaticSite": {
       "description": "A static site.",
@@ -3393,6 +3397,48 @@
           "description": "Link to next page of resources.",
           "type": "string",
           "readOnly": true
+        }
+      }
+    },
+    "StaticSiteZipDeployment": {
+      "description": "A static site zip deployment.",
+      "type": "object",
+      "properties": {
+        "appZipUrl": {
+          "description": "URL for the zipped app content",
+          "type": "string"
+        },
+        "apiZipUrl": {
+          "description": "URL for the zipped api content",
+          "type": "string"
+        },
+        "deploymentTitle": {
+          "description": "A title to label the deployment",
+          "type": "string"
+        },
+        "provider": {
+          "description": "The provider submitting this deployment",
+          "type": "string"
+        },
+        "functionLanguage": {
+          "description": "The language of the api content, if it exists",
+          "type": "string"
+        }
+      }
+    },
+    "StaticSiteZipDeploymentARMResource": {
+      "description": "Static site zip deployment ARM resource.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "./CommonDefinitions.json#/definitions/ProxyOnlyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/StaticSiteZipDeployment",
+          "description": "Core resource properties",
+          "x-ms-client-flatten": true
         }
       }
     },
