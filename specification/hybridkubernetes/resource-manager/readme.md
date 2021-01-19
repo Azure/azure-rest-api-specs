@@ -41,19 +41,19 @@ input-file:
 ```
 ### Tag: package-2021-02-01-preview
 
-These settings apply only when `--tag=package-2021-02-01-preview` is specified on the command line.
+These settings apply only when `--tag=package-2021-03-01-preview` is specified on the command line.
 
-```yaml $(tag) == 'package-2021-02-01-preview'
+```yaml $(tag) == 'package-2021-03-01-preview'
 input-file:
-- Microsoft.Kubernetes/preview/2021-02-01-preview/connectedClusters.json
+- Microsoft.Kubernetes/preview/2021-03-01-preview/connectedClusters.json
 ```
 ### Tag: package-2021-02-01
 
-These settings apply only when `--tag=package-2021-02-01` is specified on the command line.
+These settings apply only when `--tag=package-2021-03-01` is specified on the command line.
 
-```yaml $(tag) == 'package-2021-02-01'
+```yaml $(tag) == 'package-2021-03-01'
 input-file:
-- Microsoft.Kubernetes/GA/2021-02-01/connectedClusters.json
+- Microsoft.Kubernetes/GA/2021-03-01/connectedClusters.json
 ```
 ---
 

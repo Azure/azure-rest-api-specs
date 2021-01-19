@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "ConnectedKubernetesClient",
-    "version": "2021-02-01",
+    "version": "2021-03-01",
     "description": "Azure Connected Cluster Resource Provider API for adopting any Kubernetes Cluster"
   },
   "schemes": [
@@ -555,41 +555,6 @@
       },
       "description": "Properties of the connected cluster."
     },
-    "CredentialResults": {
-      "properties": {
-        "hybridConnectionConfig": {
-          "$ref": "#/definitions/HybridConnectionConfig",
-          "description": "Contains the REP (rendezvous endpoint) and “Sender” access token.",
-          "readOnly": true
-        },
-        "kubeconfigs": {
-          "type": "array",
-          "readOnly": true,
-          "items": {
-            "$ref": "#/definitions/CredentialResult"
-          },
-          "description": "Base64-encoded Kubernetes configuration file."
-        }
-      },
-      "description": "The list of credential result response."
-    },
-    "CredentialResult": {
-      "type": "object",
-      "properties": {
-        "name": {
-          "type": "string",
-          "readOnly": true,
-          "description": "The name of the credential."
-        },
-        "value": {
-          "type": "string",
-          "format": "byte",
-          "readOnly": true,
-          "description": "Base64-encoded Kubernetes configuration file."
-        }
-      },
-      "description": "The credential result response."
-    },
     "ConnectedClusterProvisioningState": {
       "type": "string",
       "description": "The current deployment state of connectedClusters.",
@@ -664,14 +629,6 @@
       "required": true,
       "type": "string",
       "description": "The name of the Kubernetes cluster on which get is called.",
-      "x-ms-parameter-location": "method"
-    },
-    "ClientProxy": {
-      "name": "clientProxy",
-      "in": "query",
-      "required": false,
-      "type": "boolean",
-      "description": "Parameter to indicate whether the request is for client side proxy or not",
       "x-ms-parameter-location": "method"
     }
   }
