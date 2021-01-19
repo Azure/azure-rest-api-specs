@@ -611,6 +611,13 @@
           },
           {
             "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "The filter to apply on the operation. For example, you can use $apply=filter(contains(ResourceName, 'net'))."
           }
         ],
         "responses": {
@@ -630,7 +637,7 @@
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         },
-        "x-ms-odata": "#/definitions/UnresolvedDependenciesContract",
+        "x-ms-odata": "#/definitions/UnresolvedDependenciesFilter",
         "x-ms-examples": {
           "UnresolvedDependencies_Get": {
             "$ref": "./examples/UnresolvedDependencies_Get.json"
@@ -1563,15 +1570,15 @@
         }
       }
     },
-    "UnresolvedDependenciesContract": {
+    "UnresolvedDependenciesFilter": {
       "description": "Unresolved dependencies contract.",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/UnresolvedDependenciesContractProperties"
+          "$ref": "#/definitions/UnresolvedDependenciesFilterProperties"
         }
       }
     },
-    "UnresolvedDependenciesContractProperties": {
+    "UnresolvedDependenciesFilterProperties": {
       "properties": {
         "count": {
           "type": "string",
