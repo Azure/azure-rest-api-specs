@@ -108,13 +108,16 @@ swagger-to-sdk:
 ## Suppression
 ```
 directive:
-  - suppress: SECRET_PROPERTY
+  - suppress:
+      - SECRET_PROPERTY
     from:
       - Microsoft.BotService/stable/2020-06-02/botservice.json
     where:
       - $.definitions.FacebookChannelProperties.properties.verifyToken
-    reason: We do need to return verifyToken in FacebookChannelProperties.
-  - suppress: RequiredSystemDataInNewApiVersions
+    reason:
+      - We do need to return verifyToken in FacebookChannelProperties.
+  - suppress:
+      - RequiredSystemDataInNewApiVersions
     from:
       - Microsoft.BotService/stable/2020-06-02/botservice.json
     reason:
