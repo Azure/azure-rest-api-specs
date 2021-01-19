@@ -117,7 +117,7 @@ directive:
     reason:
       - We do need to return verifyToken in FacebookChannelProperties.
   - suppress:
-      - RequiredSystemDataInNewApiVersions
+      - R4009
     from:
       - Microsoft.BotService/stable/2020-06-02/botservice.json
     reason:
