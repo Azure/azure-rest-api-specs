@@ -674,6 +674,7 @@ input-file:
  - ./Microsoft.Sql/preview/2020-08-01-preview/ServerAutomaticTuning.json
  - ./Microsoft.Sql/preview/2020-08-01-preview/ServerAzureADAdministrators.json
  - ./Microsoft.Sql/preview/2020-08-01-preview/ServerAzureADOnlyAuthentications.json
+ - ./Microsoft.Sql/preview/2020-08-01-preview/ServerDevOpsAudit.json
  - ./Microsoft.Sql/preview/2020-08-01-preview/ServerDnsAliases.json
  - ./Microsoft.Sql/preview/2020-08-01-preview/ServerKeys.json
  - ./Microsoft.Sql/preview/2020-08-01-preview/ServerOperations.json
@@ -791,6 +792,7 @@ input-file:
  - ./Microsoft.Sql/preview/2020-02-02-preview/ServerAutomaticTuning.json
  - ./Microsoft.Sql/preview/2020-02-02-preview/ServerAzureADAdministrators.json
  - ./Microsoft.Sql/preview/2020-02-02-preview/ServerAzureADOnlyAuthentications.json
+ - ./Microsoft.Sql/preview/2020-02-02-preview/ServerDevOpsAudit.json
  - ./Microsoft.Sql/preview/2020-02-02-preview/ServerDnsAliases.json
  - ./Microsoft.Sql/preview/2020-02-02-preview/ServerKeys.json
  - ./Microsoft.Sql/preview/2020-02-02-preview/ServerOperations.json
