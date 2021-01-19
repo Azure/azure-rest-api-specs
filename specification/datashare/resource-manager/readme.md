@@ -119,11 +119,3 @@ See configuration in [readme.go.md](./readme.go.md)
 ## AzureResourceSchema
 
 See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
-
-directive:
-  - suppress: R3021 #PathResourceTypeNameCamelCase
-    where:
-      - $.paths
-    from: Microsoft.DataShare/stable/2019-11-01/DataShare.json
-    reason: do not want to update old swagger
-  
