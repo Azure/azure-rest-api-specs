@@ -188,7 +188,7 @@
     },
     "TimeGranularity": {
       "type": "string",
-      "description": "Can only be one of yearly, monthly, weekly, daily, hourly, minutely or secondly. Granularity is used for verify whether input series is valid.",
+      "description": "Optional argument, can be one of yearly, monthly, weekly, daily, hourly, minutely, secondly or microsecond. If granularity is present in the request, it will be used to verify whether input series is valid and to impute missing values.",
       "x-nullable": false,
       "x-ms-enum": {
         "name": "TimeGranularity",
@@ -226,8 +226,64 @@
         "daily",
         "hourly",
         "minutely",
-        "secondly"
+        "secondly",
+        "microsecond"
       ]
+    },
+    "ImputeMode": {
+      "type": "string",
+      "description": "can be one of auto, previous, linear, fixed, zero or notFill.",
+      "x-nullable": false,
+      "x-ms-enum": {
+        "name": "TimeGranularity",
+        "modelAsString": false,
+        "values": [
+          {
+            "value": "auto"
+          },
+          {
+            "value": "previous"
+          },
+          {
+            "value": "linear"
+          },
+          {
+            "value": "fixed"
+          },
+          {
+            "value": "zero"
+          },
+          {
+            "value": "notFill"
+          }
+        ]
+      },
+      "enum": [
+        "auto",
+        "previous",
+        "linear",
+        "fixed",
+        "zero",
+        "notFill"
+      ]
+    },
+    "ImputeStrategy": {
+      "type": "object",
+      "required": [
+        "imputeMode"
+      ],
+      "properties": {
+        "imputeMode": {
+          "$ref": "#/definitions/ImputeMode",
+          "description": "The method that is used to impute missing values in the given time series."
+        },
+        "imputeValue": {
+          "type": "number",
+          "format":"float",
+          "x-nullable": false,
+          "description": "Optional argument, if imputeMode is set to 'fixed', then this value is used to impute missing values."
+        }
+      }
     },
     "CustomInterval": {
       "type": "integer",
@@ -238,7 +294,6 @@
     "DetectRequest": {
       "type": "object",
       "required": [
-        "granularity",
         "series"
       ],
       "properties": {
@@ -270,6 +325,10 @@
           "type": "integer",
           "format": "int32",
           "description": "Optional argument, advanced model parameter, between 0-99, the lower the value is, the larger the margin value will be which means less anomalies will be accepted."
+        },
+        "imputeStrategy": {
+          "$ref":"#/definitions/ImputeStrategy",
+          "description": "Optional argument, indicates how to impute the missing values in the series."
         }
       }
     },
@@ -301,7 +360,8 @@
         "isPositiveAnomaly",
         "lowerMargins",
         "period",
-        "upperMargins"
+        "upperMargins",
+        "severity"
       ],
       "properties": {
         "period": {
@@ -359,6 +419,15 @@
             "type": "boolean",
             "x-nullable": false
           }
+        },
+        "severity": {
+          "type": "array",
+          "description": "Severity contains the severity score for each input point. For a normal point, the severity score is 0. For an anomaly point, the severity score is in (0, 1] that indicates the severity of the anomaly.",
+          "items": {
+            "type": "number",
+            "format": "float",
+            "x-nullable": false
+          }
         }
       }
     },
@@ -372,7 +441,8 @@
         "lowerMargin",
         "period",
         "upperMargin",
-        "suggestedWindow"
+        "suggestedWindow",
+        "severity"
       ],
       "properties": {
         "period": {
@@ -411,6 +481,11 @@
         "isPositiveAnomaly": {
           "type": "boolean",
           "description": "Anomaly status in positive direction of the latest point. True means the latest point is an anomaly and its real value is larger than the expected one."
+        },
+        "severity": {
+          "type": "number",
+          "format": "float",
+          "description": "Severity score of the latest point. For a normal point, the severity score is 0. For an anomaly point, the severity score is in (0, 1] that indicates the severity of the anomaly."
         }
       }
     },
