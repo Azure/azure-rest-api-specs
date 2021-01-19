@@ -1085,9 +1085,9 @@
         "tags": [
           "Keys"
         ],
-        "operationId": "GetKeyPolicy",
+        "operationId": "GetKeyRotationPolicy",
         "summary": "Lists the policy for a key.",
-        "description": "The GetKeyPolicy operation returns the specified key policy resources in the specified key vault. This operation requires the keys/get permission.",
+        "description": "The GetKeyRotationPolicy operation returns the specified key policy resources in the specified key vault. This operation requires the keys/get permission.",
         "parameters": [
           {
             "name": "key-name",
@@ -1102,9 +1102,9 @@
         ],
         "responses": {
           "200": {
-            "description": "The key policy.",
+            "description": "The key rotation policy.",
             "schema": {
-              "$ref": "#/definitions/KeyPolicy"
+              "$ref": "#/definitions/KeyRotationPolicy"
             }
           },
           "default": {
@@ -1115,8 +1115,8 @@
           }
         },
         "x-ms-examples": {
-          "GetKeyPolicy": {
-            "$ref": "./examples/GetKeyPolicy-example.json"
+          "GetKeyRotationPolicy": {
+            "$ref": "./examples/GetKeyRotationPolicy-example.json"
           }
         }
       },
@@ -1124,8 +1124,8 @@
         "tags": [
           "keys"
         ],
-        "operationId": "UpdateKeyPolicy",
-        "summary": "Updates the policy for a key.",
+        "operationId": "UpdateKeyRotationPolicy",
+        "summary": "Updates the rotation policy for a key.",
         "description": "Set specified members in the key policy. Leave others as undefined. This operation requires the keys/update permission.",
         "parameters": [
           {
@@ -1136,11 +1136,11 @@
             "description": "The name of the key in the given vault."
           },
           {
-            "name": "keyPolicy",
+            "name": "KeyRotationPolicy",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/KeyPolicy"
+              "$ref": "#/definitions/KeyRotationPolicy"
             },
             "description": "The policy for the key."
           },
@@ -1152,7 +1152,7 @@
           "200": {
             "description": "The policy for the key.",
             "schema": {
-              "$ref": "#/definitions/KeyPolicy"
+              "$ref": "#/definitions/KeyRotationPolicy"
             }
           },
           "default": {
@@ -1163,8 +1163,8 @@
           }
         },
         "x-ms-examples": {
-          "UpdateKeyPolicy": {
-            "$ref": "./examples/UpdateKeyPolicy-example.json"
+          "UpdateKeyRotationPolicy": {
+            "$ref": "./examples/UpdateKeyRotationPolicy-example.json"
           }
         }
       }
@@ -1493,10 +1493,6 @@
           "readOnly": true,
           "description": "True if the key's lifetime is managed by key vault. If this is a key backing a certificate, then managed will be true."
         },
-        "policy": {
-          "$ref": "#/definitions/KeyPolicy",
-          "description": "The policy for the key."
-        },
         "release_policy": {
           "$ref": "#/definitions/KeyReleasePolicy",
           "description": "The policy rules under which the key can be exported."
@@ -1706,10 +1702,6 @@
             "name": "JsonWebKeyCurveName",
             "modelAsString": true
           }
-        },
-        "policy": {
-          "x-ms-client-name": "keyPolicy",
-          "$ref": "#/definitions/KeyPolicy"
         },
         "release_policy": {
           "$ref": "#/definitions/KeyReleasePolicy",
@@ -2077,7 +2069,7 @@
       },
       "description": "The backup key result, containing the backup blob."
     },
-    "KeyPolicy": {
+    "KeyRotationPolicy": {
       "properties": {
         "id": {
           "type": "string",
@@ -2092,8 +2084,8 @@
           "description": "Actions that will be performed by Key Vault over the lifetime of a key."
         },
         "attributes": {
-          "$ref": "#/definitions/KeyPolicyAttributes",
-          "description": "The key policy attributes."
+          "$ref": "#/definitions/KeyRotationPolicyAttributes",
+          "description": "The key rotation policy attributes."
         }
       },
       "description": "Management policy for a key."
@@ -2155,7 +2147,7 @@
       },
       "description": "The action that will be executed."
     },
-    "KeyPolicyAttributes": {
+    "KeyRotationPolicyAttributes": {
       "properties": {
         "rotationEnabled": {
           "type": "boolean",
@@ -2174,20 +2166,18 @@
           "type": "integer",
           "format": "unixtime",
           "readOnly": true,
-          "required": false,
           "default": null,
-          "description": "The key policy created time in UTC."
+          "description": "The key rotation policy created time in UTC."
         },
         "updated": {
           "type": "integer",
           "format": "unixtime",
           "readOnly": true,
-          "required": false,
           "default": null,
-          "description": "The key policy's last updated time in UTC."
+          "description": "The key rotation policy's last updated time in UTC."
         }
       },
-      "description": "The key policy attributes."
+      "description": "The key rotation policy attributes."
     }
   },
   "parameters": {
