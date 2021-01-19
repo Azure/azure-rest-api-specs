@@ -888,12 +888,10 @@
       "properties": {
         "id": {
           "type": "string",
-          "description": "The id of the conversion supplied when the conversion was created.",
-          "readOnly": true
+          "description": "The id of the conversion supplied when the conversion was created."
         },
         "settings": {
-          "$ref": "#/definitions/conversion_settings",
-          "readOnly": true
+          "$ref": "#/definitions/conversion_settings"
         },
         "output": {
           "type": "object",
@@ -914,18 +912,15 @@
           "description": "The error object containing details about the conversion failure.",
           "type": "object",
           "$ref": "#/definitions/error",
-          "example": null,
-          "readOnly": true
+          "example": null
         },
         "status": {
-          "$ref": "#/definitions/conversion_status",
-          "readOnly": true
+          "$ref": "#/definitions/conversion_status"
         },
         "creationTime": {
           "type": "string",
           "description": "The time when the conversion was created. Date and time in ISO 8601 format.",
-          "format": "date-time",
-          "readOnly": true
+          "format": "date-time"
         }
       },
       "required": [
@@ -944,8 +939,7 @@
             "$ref": "#/definitions/conversion"
           },
           "type": "array",
-          "description": "The list of conversions.",
-          "readOnly": true
+          "description": "The list of conversions."
         },
         "@nextLink": {
           "description": "If more conversions are available this link with the same authentication header can be used to retrieve further values",
@@ -1065,8 +1059,7 @@
         "error": {
           "description": "The error object containing details of why the request failed.",
           "type": "object",
-          "$ref": "#/definitions/error",
-          "readOnly": true
+          "$ref": "#/definitions/error"
         }
       },
       "type": "object",
@@ -1078,13 +1071,11 @@
       "properties": {
         "code": {
           "type": "string",
-          "description": "Error code",
-          "readOnly": true
+          "description": "Error code"
         },
         "message": {
           "type": "string",
-          "description": "A human-readable representation of the error",
-          "readOnly": true
+          "description": "A human-readable representation of the error"
         },
         "details": {
           "type": "array",
@@ -1117,8 +1108,7 @@
         "id": {
           "example": "contoso-session-c2b8ac1d-9494-4852-a59c-8c28813adc28",
           "type": "string",
-          "description": "The id of the session supplied when the conversion was created.",
-          "readOnly": true
+          "description": "The id of the session supplied when the conversion was created."
         },
         "arrInspectorPort": {
           "example": 50052,
@@ -1156,13 +1146,11 @@
         },
         "size": {
           "$ref": "#/definitions/session_size",
-          "example": "Standard",
-          "readOnly": true
+          "example": "Standard"
         },
         "status": {
           "$ref": "#/definitions/session_status",
-          "example": "Ready",
-          "readOnly": true
+          "example": "Ready"
         },
         "teraflops": {
           "example": 10.6,
@@ -1261,8 +1249,7 @@
           "description": "The list of rendering sessions. Does not include sessions in 'Stopped' state.",
           "items": {
             "$ref": "#/definitions/session_properties"
-          },
-          "readOnly": true
+          }
         },
         "@nextLink": {
           "description": "If more rendering sessions are available this link with the same authentication header can be used to retrieve further values",
