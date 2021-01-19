@@ -28,7 +28,22 @@ These are the global settings for the DataBox Edge API.
 openapi-type: arm
 tag: package-2019-08
 ```
+### Tag: package-2020-09-01-preview
 
+These settings apply only when `--tag=package-2020-09-01-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-09-01-preview'
+input-file:
+- Microsoft.DataBoxEdge/preview/2020-09-01-preview/databoxedge.json
+```
+### Tag: package-2020-09-01
+
+These settings apply only when `--tag=package-2020-09-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-09-01'
+input-file:
+- Microsoft.DataBoxEdge/stable/2020-09-01/databoxedge.json
+```
 ### Tag: package-2020-05-preview
 
 These settings apply only when `--tag=package-2020-05-preview` is specified on the command line.
@@ -64,6 +79,16 @@ These settings apply only when `--tag=package-2019-03` is specified on the comma
 input-file:
 - Microsoft.DataBoxEdge/stable/2019-03-01/databoxedge.json
 ```
+
+### Tag: profile-hybrid-2020-09-01
+
+These settings apply only when `--tag=profile-hybrid-2020-09-01` is specified on the command line.
+
+``` yaml $(tag) == 'profile-hybrid-2020-09-01'
+input-file:
+- Microsoft.DataBoxEdge/stable/2019-08-01/databoxedge.json
+```
+
 ---
 # Code Generation
 

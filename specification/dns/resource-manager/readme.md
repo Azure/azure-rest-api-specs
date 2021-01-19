@@ -140,6 +140,15 @@ input-file:
 - Microsoft.Network/preview/2015-05-04-preview/dns.json
 ```
 
+### Tag: profile-hybrid-2020-09-01
+
+These settings apply only when `--tag=profile-hybrid-2020-09-01` is specified on the command line.
+
+``` yaml $(tag) == 'profile-hybrid-2020-09-01'
+input-file:
+- Microsoft.Network/stable/2016-04-01/dns.json
+```
+
 # Code Generation
 
 ## Swagger to SDK

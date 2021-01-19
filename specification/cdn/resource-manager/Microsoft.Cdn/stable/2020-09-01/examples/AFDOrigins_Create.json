@@ -1,0 +1,57 @@
+{
+  "parameters": {
+    "api-version": "2020-09-01",
+    "subscriptionId": "subid",
+    "resourceGroupName": "RG",
+    "profileName": "profile1",
+    "originGroupName": "origingroup1",
+    "originName": "origin1",
+    "origin": {
+      "properties": {
+        "hostName": "host1.blob.core.windows.net",
+        "httpPort": 80,
+        "httpsPort": 443,
+        "originHostHeader": "host1.foo.com",
+        "enabledState": "Enabled"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/subid/resourcegroups/RG/providers/Microsoft.Cdn/profiles/profile1/origingroups/origingroup1/origins/origin1",
+        "type": "Microsoft.Cdn/profiles/origingroups/origins",
+        "name": "origin1",
+        "properties": {
+          "hostName": "host1.blob.core.windows.net",
+          "httpPort": 80,
+          "httpsPort": 443,
+          "originHostHeader": "host1.foo.com",
+          "priority": null,
+          "weight": null,
+          "enabledState": "Enabled",
+          "provisioningState": "Succeeded",
+          "deploymentStatus": "NotStarted"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/subid/resourcegroups/RG/providers/Microsoft.Cdn/profiles/profile1/origingroups/origingroup1/origins/origin1",
+        "type": "Microsoft.Cdn/profiles/origingroups/origins",
+        "name": "origin1",
+        "properties": {
+          "hostName": "host1.blob.core.windows.net",
+          "httpPort": 80,
+          "httpsPort": 443,
+          "originHostHeader": "host1.foo.com",
+          "priority": null,
+          "weight": null,
+          "enabledState": "Enabled",
+          "provisioningState": "Succeeded",
+          "deploymentStatus": "NotStarted"
+        }
+      }
+    }
+  }
+}
