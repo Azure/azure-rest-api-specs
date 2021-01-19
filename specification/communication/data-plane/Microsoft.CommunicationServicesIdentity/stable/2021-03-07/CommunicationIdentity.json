@@ -231,14 +231,19 @@
         },
         "target": {
           "description": "The error target.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "details": {
           "description": "Further details about specific errors that led to this error.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/CommunicationError"
-          }
+          },
+          "readOnly": true
+        },
+        "innerError": {
+          "$ref": "#/definitions/CommunicationError"
         }
       }
     },
