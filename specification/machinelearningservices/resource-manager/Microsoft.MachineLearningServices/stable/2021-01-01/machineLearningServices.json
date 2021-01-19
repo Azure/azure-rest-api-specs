@@ -506,6 +506,9 @@
           "List VM Sizes": {
             "$ref": "./examples/ListVMSizesResult.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
         }
       }
     },
@@ -2031,7 +2034,7 @@
     },
     "PaginationParameter": {
       "in": "query",
-      "name": "$skiptoken",
+      "name": "$skip",
       "type": "string",
       "description": "Continuation token for pagination.",
       "required": false,
@@ -2272,12 +2275,6 @@
         "friendlyName": {
           "description": "The friendly name for this workspace. This name in mutable",
           "type": "string"
-        },
-        "creationTime": {
-          "format": "date-time",
-          "description": "The creation time of the machine learning workspace in ISO8601 format.",
-          "type": "string",
-          "readOnly": true
         },
         "keyVault": {
           "description": "ARM id of the key vault associated with this workspace. This cannot be changed once the workspace has been created",
@@ -3051,7 +3048,8 @@
         },
         "appInsightsInstrumentationKey": {
           "readOnly": true,
-          "type": "string"
+          "type": "string",
+          "x-ms-secret": true
         },
         "containerRegistryCredentials": {
           "readOnly": true,
@@ -3080,7 +3078,8 @@
         },
         "accessToken": {
           "readOnly": true,
-          "type": "string"
+          "type": "string",
+          "x-ms-secret": true
         },
         "tokenType": {
           "readOnly": true,
@@ -3093,7 +3092,8 @@
         },
         "refreshToken": {
           "readOnly": true,
-          "type": "string"
+          "type": "string",
+          "x-ms-secret": true
         },
         "scope": {
           "readOnly": true,
@@ -3202,18 +3202,6 @@
         "description": {
           "type": "string",
           "description": "The description of the Machine Learning compute."
-        },
-        "createdOn": {
-          "type": "string",
-          "description": "The date and time when the compute was created.",
-          "format": "date-time",
-          "readOnly": true
-        },
-        "modifiedOn": {
-          "type": "string",
-          "description": "The date and time when the compute was last modified.",
-          "format": "date-time",
-          "readOnly": true
         },
         "resourceId": {
           "type": "string",
@@ -6361,11 +6349,13 @@
       "properties": {
         "primaryAccessKey": {
           "readOnly": true,
-          "type": "string"
+          "type": "string",
+          "x-ms-secret": true
         },
         "secondaryAccessKey": {
           "readOnly": true,
-          "type": "string"
+          "type": "string",
+          "x-ms-secret": true
         }
       }
     },
@@ -6374,7 +6364,8 @@
       "properties": {
         "userStorageKey": {
           "readOnly": true,
-          "type": "string"
+          "type": "string",
+          "x-ms-secret": true
         }
       }
     },
