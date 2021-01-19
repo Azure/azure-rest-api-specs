@@ -20,6 +20,10 @@
                 },
                 "dataDiskImages": [
                   {
+                    "lun": 0,
+                    "diskEncryptionSetId": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/diskEncryptionSet/myOtherWestUSDiskEncryptionSet"
+                  },
+                  {
                     "lun": 1,
                     "diskEncryptionSetId": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/diskEncryptionSet/myWestUSDiskEncryptionSet"
                   }
@@ -36,6 +40,10 @@
                 },
                 "dataDiskImages": [
                   {
+                    "lun": 0,
+                    "diskEncryptionSetId": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/diskEncryptionSet/myOtherEastUSDiskEncryptionSet"
+                  },
+                  {
                     "lun": 1,
                     "diskEncryptionSetId": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/diskEncryptionSet/myEastUSDiskEncryptionSet"
                   }
@@ -45,21 +53,9 @@
           ]
         },
         "storageProfile": {
-          "osDiskImage": {
-            "source": {
-              "id": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Compute/snapshots/{osSnapshotName}"
-            },
-            "hostCaching": "ReadOnly"
-          },
-          "dataDiskImages": [
-            {
-              "source": {
-                "id": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Compute/disks/{dataDiskName}"
-              },
-              "lun": 1,
-              "hostCaching": "None"
-            }
-          ]
+          "source": {
+            "id": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Compute/virtualMachines/{vmName}"
+          }
         }
       }
     }
@@ -80,6 +76,10 @@
                   },
                   "dataDiskImages": [
                     {
+                      "lun": 0,
+                      "diskEncryptionSetId": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/diskEncryptionSet/myOtherWestUSDiskEncryptionSet"
+                    },
+                    {
                       "lun": 1,
                       "diskEncryptionSetId": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/diskEncryptionSet/myWestUSDiskEncryptionSet"
                     }
@@ -96,6 +96,10 @@
                   },
                   "dataDiskImages": [
                     {
+                      "lun": 0,
+                      "diskEncryptionSetId": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/diskEncryptionSet/myOtherEastUSDiskEncryptionSet"
+                    },
+                    {
                       "lun": 1,
                       "diskEncryptionSetId": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/diskEncryptionSet/myEastUSDiskEncryptionSet"
                     }
@@ -108,18 +112,15 @@
             "storageAccountType": "Standard_LRS"
           },
           "storageProfile": {
+            "source": {
+              "id": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Compute/virtualMachines/{vmName}"
+            },
             "osDiskImage": {
-              "source": {
-                "id": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Compute/snapshots/{osSnapshotName}"
-              },
               "sizeInGB": 10,
               "hostCaching": "ReadOnly"
             },
             "dataDiskImages": [
               {
-                "source": {
-                  "id": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Compute/disks/{dataDiskName}"
-                },
                 "lun": 1,
                 "sizeInGB": 10,
                 "hostCaching": "None"
@@ -147,6 +148,10 @@
                   },
                   "dataDiskImages": [
                     {
+                      "lun": 0,
+                      "diskEncryptionSetId": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/diskEncryptionSet/myOtherWestUSDiskEncryptionSet"
+                    },
+                    {
                       "lun": 1,
                       "diskEncryptionSetId": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/diskEncryptionSet/myWestUSDiskEncryptionSet"
                     }
@@ -163,6 +168,10 @@
                   },
                   "dataDiskImages": [
                     {
+                      "lun": 0,
+                      "diskEncryptionSetId": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/diskEncryptionSet/myOtherEastUSDiskEncryptionSet"
+                    },
+                    {
                       "lun": 1,
                       "diskEncryptionSetId": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/diskEncryptionSet/myEastUSDiskEncryptionSet"
                     }
@@ -175,18 +184,15 @@
             "storageAccountType": "Standard_LRS"
           },
           "storageProfile": {
+            "source": {
+              "id": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Compute/virtualMachines/{vmName}"
+            },
             "osDiskImage": {
-              "source": {
-                "id": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Compute/snapshots/{osSnapshotName}"
-              },
               "sizeInGB": 10,
               "hostCaching": "ReadOnly"
             },
             "dataDiskImages": [
               {
-                "source": {
-                  "id": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Compute/disks/{dataDiskName}"
-                },
                 "lun": 1,
                 "sizeInGB": 10,
                 "hostCaching": "None"
@@ -214,6 +220,10 @@
                   },
                   "dataDiskImages": [
                     {
+                      "lun": 0,
+                      "diskEncryptionSetId": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/diskEncryptionSet/myOtherWestUSDiskEncryptionSet"
+                    },
+                    {
                       "lun": 1,
                       "diskEncryptionSetId": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/diskEncryptionSet/myWestUSDiskEncryptionSet"
                     }
@@ -230,6 +240,10 @@
                   },
                   "dataDiskImages": [
                     {
+                      "lun": 0,
+                      "diskEncryptionSetId": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/diskEncryptionSet/myOtherEastUSDiskEncryptionSet"
+                    },
+                    {
                       "lun": 1,
                       "diskEncryptionSetId": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/diskEncryptionSet/myEastUSDiskEncryptionSet"
                     }
@@ -242,18 +256,15 @@
             "storageAccountType": "Standard_LRS"
           },
           "storageProfile": {
+            "source": {
+              "id": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Compute/virtualMachines/{vmName}"
+            },
             "osDiskImage": {
-              "source": {
-                "id": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Compute/snapshots/{osSnapshotName}"
-              },
               "sizeInGB": 10,
               "hostCaching": "ReadOnly"
             },
             "dataDiskImages": [
               {
-                "source": {
-                  "id": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Compute/disks/{dataDiskName}"
-                },
                 "lun": 1,
                 "sizeInGB": 10,
                 "hostCaching": "None"
