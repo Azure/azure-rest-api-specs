@@ -1,0 +1,162 @@
+{
+  "parameters": {
+    "api-version": "2020-08-01",
+    "subscriptionId": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+    "resourceGroupName": "myResourceGroup",
+    "jobName": "myJob",
+    "body": {
+      "location": "West US",
+      "properties": {
+        "storageAccountId": "/subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/myResourceGroup/providers/Microsoft.ClassicStorage/storageAccounts/test",
+        "jobType": "Import",
+        "returnAddress": {
+          "recipientName": "Test",
+          "streetAddress1": "Street1",
+          "streetAddress2": "street2",
+          "city": "Redmond",
+          "stateOrProvince": "wa",
+          "postalCode": "98007",
+          "countryOrRegion": "USA",
+          "phone": "4250000000",
+          "email": "Test@contoso.com"
+        },
+        "returnShipping": {
+          "carrierName": "FedEx",
+          "carrierAccountNumber": "989ffff"
+        },
+        "diagnosticsPath": "waimportexport",
+        "logLevel": "Verbose",
+        "backupDriveManifest": true,
+        "driveList": [
+          {
+            "driveId": "9CA995BB",
+            "bitLockerKey": "238810-662376-448998-450120-652806-203390-606320-483076",
+            "manifestFile": "\\8a0c23f7-14b7-470a-9633-fcd46590a1bc.manifest",
+            "manifestHash": "4228EC5D8E048CB9B515338C789314BE8D0B2FDBC7C7A0308E1C826242CDE74E",
+            "driveHeaderHash": "0:1048576:FB6B6ED500D49DA6E0D723C98D42C657F2881CC13357C28DCECA6A524F1292501571A321238540E621AB5BD9C9A32637615919A75593E6CB5C1515DAE341CABF;135266304:143360:C957A189AFC38C4E80731252301EB91427CE55E61448FA3C73C6FDDE70ABBC197947EC8D0249A2C639BB10B95957D5820A4BE8DFBBF76FFFA688AE5CE0D42EC3"
+          }
+        ]
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "storageAccountId": "/subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/myResourceGroup/providers/Microsoft.ClassicStorage/storageAccounts/test",
+          "jobType": "Import",
+          "returnAddress": {
+            "recipientName": "Test",
+            "streetAddress1": "Street1",
+            "streetAddress2": "street2",
+            "city": "Redmond",
+            "stateOrProvince": "wa",
+            "postalCode": "98007",
+            "countryOrRegion": "USA",
+            "phone": "4250000000",
+            "email": "Test@contoso.com"
+          },
+          "returnShipping": {
+            "carrierName": "FedEx",
+            "carrierAccountNumber": "989ffff"
+          },
+          "shippingInformation": {
+            "recipientName": "Microsoft Azure Import/Export Service",
+            "streetAddress1": "2045 Lafayette Street",
+            "streetAddress2": "",
+            "city": "Santa Clara",
+            "stateOrProvince": "CA",
+            "postalCode": "95050",
+            "countryOrRegion": "USA",
+            "phone": "408 0000 0000",
+            "additionalInformation": ""
+          },
+          "diagnosticsPath": "waimportexport",
+          "logLevel": "Verbose",
+          "backupDriveManifest": true,
+          "cancelRequested": false,
+          "state": "Creating",
+          "driveList": [
+            {
+              "driveId": "9CA995BB",
+              "manifestFile": "\\8a0c23f7-14b7-470a-9633-fcd46590a1bc.manifest",
+              "manifestHash": "4228EC5D8E048CB9B515338C789314BE8D0B2FDBC7C7A0308E1C826242CDE74E",
+              "driveHeaderHash": "0:1048576:FB6B6ED500D49DA6E0D723C98D42C657F2881CC13357C28DCECA6A524F1292501571A321238540E621AB5BD9C9A32637615919A75593E6CB5C1515DAE341CABF;135266304:143360:C957A189AFC38C4E80731252301EB91427CE55E61448FA3C73C6FDDE70ABBC197947EC8D0249A2C639BB10B95957D5820A4BE8DFBBF76FFFA688AE5CE0D42EC3",
+              "state": "Specified"
+            }
+          ],
+          "provisioningState": "Succeeded",
+          "encryptionKey": {
+            "kekType": "MicrosoftManaged"
+          }
+        },
+        "identity": {
+          "type": "None"
+        },
+        "id": "/subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/myResourceGroup/providers/Microsoft.ImportExport/jobs/myJob",
+        "name": "myJob",
+        "type": "Microsoft.ImportExport/jobs",
+        "location": "West US"
+      }
+    },
+    "201": {
+      "body": {
+        "properties": {
+          "storageAccountId": "/subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/myResourceGroup/providers/Microsoft.ClassicStorage/storageAccounts/test",
+          "jobType": "Import",
+          "returnAddress": {
+            "recipientName": "Test",
+            "streetAddress1": "Street1",
+            "streetAddress2": "street2",
+            "city": "Redmond",
+            "stateOrProvince": "wa",
+            "postalCode": "98007",
+            "countryOrRegion": "USA",
+            "phone": "4250000000",
+            "email": "Test@contoso.com"
+          },
+          "returnShipping": {
+            "carrierName": "FedEx",
+            "carrierAccountNumber": "989ffff"
+          },
+          "shippingInformation": {
+            "recipientName": "Microsoft Azure Import/Export Service",
+            "streetAddress1": "2045 Lafayette Street",
+            "streetAddress2": "",
+            "city": "Santa Clara",
+            "stateOrProvince": "CA",
+            "postalCode": "95050",
+            "countryOrRegion": "USA",
+            "phone": "408 0000 0000",
+            "additionalInformation": ""
+          },
+          "diagnosticsPath": "waimportexport",
+          "logLevel": "Verbose",
+          "backupDriveManifest": true,
+          "cancelRequested": false,
+          "state": "Creating",
+          "driveList": [
+            {
+              "driveId": "9CA995BB",
+              "manifestFile": "\\8a0c23f7-14b7-470a-9633-fcd46590a1bc.manifest",
+              "manifestHash": "4228EC5D8E048CB9B515338C789314BE8D0B2FDBC7C7A0308E1C826242CDE74E",
+              "driveHeaderHash": "0:1048576:FB6B6ED500D49DA6E0D723C98D42C657F2881CC13357C28DCECA6A524F1292501571A321238540E621AB5BD9C9A32637615919A75593E6CB5C1515DAE341CABF;135266304:143360:C957A189AFC38C4E80731252301EB91427CE55E61448FA3C73C6FDDE70ABBC197947EC8D0249A2C639BB10B95957D5820A4BE8DFBBF76FFFA688AE5CE0D42EC3",
+              "state": "Specified"
+            }
+          ],
+          "provisioningState": "Succeeded",
+          "encryptionKey": {
+            "kekType": "MicrosoftManaged"
+          }
+        },
+        "identity": {
+          "type": "None"
+        },
+        "id": "/subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/myResourceGroup/providers/Microsoft.ImportExport/jobs/myJob",
+        "name": "myJob",
+        "type": "Microsoft.ImportExport/jobs",
+        "location": "West US"
+      }
+    }
+  }
+}
