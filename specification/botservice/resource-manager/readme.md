@@ -121,7 +121,7 @@ directive:
     from:
       - Microsoft.BotService/stable/2020-06-02/botservice.json
     reason:
-      - We do not yet support systemdata
+      - We do not yet support systemdata.
 ```
 
 
