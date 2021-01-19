@@ -21,7 +21,7 @@ Generate all API versions currently shipped for this package
 
 ```yaml $(python) && $(multiapi)
 batch:
-  - tag: package-2021-01-01-preview
+  - tag: package-2021-01-01-preview-only
   - tag: package-2020-04-01-preview-only
   - tag: package-2018-09-01-preview-only
   - tag: package-2018-07-01-preview-only
@@ -101,9 +101,9 @@ python:
   output-folder: $(python-sdks-folder)/authorization/azure-mgmt-authorization/azure/mgmt/authorization/v2015_06_01
 ```
 
-### Tag: package-2021-01-01-preview and python
+### Tag: package-2021-01-01-preview-only and python
 
-These settings apply only when `--tag=package-2021-01-01-preview --python` is specified on the command line.
+These settings apply only when `--tag=package-2021-01-01-preview-only --python` is specified on the command line.
 
 ``` yaml $(tag) == 'package-2021-01-01-preview' && $(python)
 python:

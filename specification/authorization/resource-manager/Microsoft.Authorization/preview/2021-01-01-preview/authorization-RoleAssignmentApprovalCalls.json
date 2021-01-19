@@ -142,7 +142,7 @@
         }
       }
     },
-    "/providers/Microsoft.Authorization/roleAssignmentApprovals/{approvalId}/steps": {
+    "/providers/Microsoft.Authorization/roleAssignmentApprovals/{approvalId}/stages": {
       "get": {
         "tags": [
           "GetRoleAssignmentApprovalSteps"
@@ -182,7 +182,7 @@
         }
       }
     },
-    "/providers/Microsoft.Authorization/roleAssignmentApprovals/{approvalId}/steps/{stepId}": {
+    "/providers/Microsoft.Authorization/roleAssignmentApprovals/{approvalId}/stages/{stageId}": {
       "get": {
         "tags": [
           "GetRoleAssignmentApprovalStepById"
@@ -203,11 +203,11 @@
             "description": "The id of the role assignment approval."
           },
           {
-            "name": "stepId",
+            "name": "stageId",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The id of the role assignment approval step."
+            "description": "The id of the role assignment approval stage."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -248,11 +248,11 @@
             "description": "The id of the role assignment approval."
           },
           {
-            "name": "stepId",
+            "name": "stageId",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The id of the role assignment approval step."
+            "description": "The id of the role assignment approval stage."
           },
           {
             "name": "properties",
@@ -261,7 +261,7 @@
             "schema": {
               "$ref": "#/definitions/RoleAssignmentApprovalStepProperties"
             },
-            "description": "Role Assignment Approval step properties to patch."
+            "description": "Role Assignment Approval stage properties to patch."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -302,11 +302,11 @@
             "description": "The id of the role assignment approval."
           },
           {
-            "name": "stepId",
+            "name": "stageId",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The id of the role assignment approval step."
+            "description": "The id of the role assignment approval stage."
           },
           {
             "name": "properties",
@@ -315,7 +315,7 @@
             "schema": {
               "$ref": "#/definitions/RoleAssignmentApprovalStepProperties"
             },
-            "description": "Role Assignment Approval step properties to put."
+            "description": "Role Assignment Approval stage properties to put."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -432,7 +432,7 @@
         }
       }
     },
-    "/{scope}/providers/Microsoft.Authorization/roleAssignmentApprovals/{approvalId}/steps": {
+    "/{scope}/providers/Microsoft.Authorization/roleAssignmentApprovals/{approvalId}/stages": {
       "get": {
         "tags": [
           "ScopeGetRoleAssignmentApprovalSteps"
@@ -480,7 +480,7 @@
         }
       }
     },
-    "/{scope}/providers/Microsoft.Authorization/roleAssignmentApprovals/{approvalId}/steps/{stepId}": {
+    "/{scope}/providers/Microsoft.Authorization/roleAssignmentApprovals/{approvalId}/stages/{stageId}": {
       "get": {
         "tags": [
           "ScopeGetRoleAssignmentApprovalStepById"
@@ -501,11 +501,11 @@
             "description": "The id of the role assignment approval."
           },
           {
-            "name": "stepId",
+            "name": "stageId",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The id of the role assignment approval step."
+            "description": "The id of the role assignment approval stage."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -554,11 +554,11 @@
             "description": "The id of the role assignment approval."
           },
           {
-            "name": "stepId",
+            "name": "stageId",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The id of the role assignment approval step."
+            "description": "The id of the role assignment approval stage."
           },
           {
             "name": "properties",
@@ -567,7 +567,7 @@
             "schema": {
               "$ref": "#/definitions/RoleAssignmentApprovalStepProperties"
             },
-            "description": "Role Assignment Approval step properties to patch."
+            "description": "Role Assignment Approval stage properties to patch."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -616,11 +616,11 @@
             "description": "The id of the role assignment approval."
           },
           {
-            "name": "stepId",
+            "name": "stageId",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The id of the role assignment approval step."
+            "description": "The id of the role assignment approval stage."
           },
           {
             "name": "properties",
@@ -629,7 +629,7 @@
             "schema": {
               "$ref": "#/definitions/RoleAssignmentApprovalStepProperties"
             },
-            "description": "Role Assignment Approval step properties to put."
+            "description": "Role Assignment Approval stage properties to put."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -722,12 +722,12 @@
     },
     "RoleAssignmentApprovalProperties": {
       "properties": {
-        "steps": {
+        "stages": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/RoleAssignmentApprovalStep"
           },
-          "description": "This is the collection of steps returned when one does an expand on it."
+          "description": "This is the collection of stages returned when one does an expand on it."
         }
       },
       "description": "Role Assignment Approval properties."
@@ -755,12 +755,12 @@
         "id": {
           "type": "string",
           "readOnly": true,
-          "description": "The role assignment approval step id."
+          "description": "The role assignment approval stage id."
         },
         "name": {
           "type": "string",
           "readOnly": true,
-          "description": "The role assignment approval step name."
+          "description": "The role assignment approval stage name."
         },
         "type": {
           "type": "string",
@@ -773,13 +773,13 @@
           "description": "Role Assignment Approval Step properties."
         }
       },
-      "description": "Role assignment approval step properties."
+      "description": "Role assignment approval stage properties."
     },
     "RoleAssignmentApprovalStepProperties": {
       "properties": {
         "displayName": {
           "type": "string",
-          "description": "The display name for the approval step."
+          "description": "The display name for the approval stage."
         },
         "status": {
           "type": "string",
@@ -802,7 +802,7 @@
         },
         "assignedToMe": {
           "readOnly": true,
-          "description": "Indicates whether the step is assigned to me for review",
+          "description": "Indicates whether the stage is assigned to me for review",
           "type": "boolean"
         },
         "reviewedBy": {
@@ -821,7 +821,7 @@
         },
         "reviewResult": {
           "type": "string",
-          "description": "The decision on the approval step. This value is initially set to NotReviewed. Approvers can take action of Approve/Deny",
+          "description": "The decision on the approval stage. This value is initially set to NotReviewed. Approvers can take action of Approve/Deny",
           "enum": [
             "Approve",
             "Deny",
@@ -854,7 +854,7 @@
           "description": "The URL to use for getting the next set of results."
         }
       },
-      "description": "List of role assignment approval step list."
+      "description": "List of role assignment approval stage list."
     },
     "ErrorDefinition": {
       "type": "object",
