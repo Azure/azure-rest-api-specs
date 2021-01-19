@@ -506,9 +506,6 @@
           "List VM Sizes": {
             "$ref": "./examples/ListVMSizesResult.json"
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": null
         }
       }
     },
@@ -3040,7 +3037,8 @@
       "properties": {
         "userStorageKey": {
           "readOnly": true,
-          "type": "string"
+          "type": "string",
+          "x-ms-secret": true
         },
         "userStorageResourceId": {
           "readOnly": true,
