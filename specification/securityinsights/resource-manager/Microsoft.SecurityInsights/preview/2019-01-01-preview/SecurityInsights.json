@@ -1735,6 +1735,12 @@
           },
           "Get a Dynamics365 data connector": {
             "$ref": "./examples/dataConnectors/GetDynamics365DataConnectorById.json"
+          },
+          "Get a MicrosoftThreatProtection data connector": {
+            "$ref": "./examples/dataConnectors/GetMicrosoftThreatProtectionById.json"
+          },
+          "Get a MicrosoftThreatIntelligence data connector": {
+            "$ref": "./examples/dataConnectors/GetMicrosoftThreatIntelligenceById.json"
           }
         },
         "tags": [
@@ -1914,6 +1920,12 @@
           },
           "Check requirements for Dynamics365.": {
             "$ref": "./examples/dataConnectors/CheckRequirementsDynamics365.json"
+          },
+          "Check requirements for MicrosoftThreatProtection.": {
+            "$ref": "./examples/dataConnectors/CheckRequirementsMicrosoftThreatProtection.json"
+          },
+          "Check requirements for MicrosoftThreatIntelligence.": {
+            "$ref": "./examples/dataConnectors/CheckRequirementsMicrosoftThreatIntelligence.json"
           }
         },
         "tags": [
@@ -2055,6 +2067,18 @@
           },
           "Get an IoT device entity.": {
             "$ref": "./examples/entities/GetIoTDeviceEntityById.json"
+          },
+          "Get an SubmissionMail entity.": {
+            "$ref": "./examples/entities/GetSubmissionMailEntityById.json"
+          },
+          "Get an Mailbox entity.": {
+            "$ref": "./examples/entities/GetMailboxEntityById.json"
+          },
+          "Get an MailCluster entity.": {
+            "$ref": "./examples/entities/GetMailClusterEntityById.json"
+          },
+          "Get an MailMessage entity.": {
+            "$ref": "./examples/entities/GetMailMessageEntityById.json"
           }
         },
         "tags": [
@@ -4455,6 +4479,173 @@
       "description": "AATP (Azure Advanced Threat Protection) requirements check properties.",
       "type": "object"
     },
+    "MSTIDataConnector": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataConnector"
+        }
+      ],
+      "description": "Represents Microsoft Threat Intelligence data connector.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/MSTIDataConnectorProperties",
+          "description": "Microsoft Threat Intelligence data connector properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object",
+      "x-ms-discriminator-value": "MicrosoftThreatIntelligence"
+    },
+    "MSTIDataConnectorDataTypes": {
+      "description": "The available data types for Microsoft Threat Intelligence Platforms data connector.",
+      "properties": {
+        "bingSafetyPhishingURL": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/DataConnectorDataTypeCommon"
+            }
+          ],
+          "properties": {
+            "lookbackPeriod": {
+              "description": "lookback period",
+              "type": "string"
+            }
+          },
+          "description": "Data type for Microsoft Threat Intelligence Platforms data connector.",
+          "type": "object"
+        },
+        "microsoftEmergingThreatFeed": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/DataConnectorDataTypeCommon"
+            }
+          ],
+          "properties": {
+            "lookbackPeriod": {
+              "description": "lookback period",
+              "type": "string"
+            }
+          },
+          "description": "Data type for Microsoft Threat Intelligence Platforms data connector.",
+          "type": "object"
+        }
+      },
+      "type": "object"
+    },
+    "MSTIDataConnectorProperties": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataConnectorTenantId"
+        }
+      ],
+      "description": "Microsoft Threat Intelligence data connector properties.",
+      "properties": {
+        "dataTypes": {
+          "$ref": "#/definitions/MSTIDataConnectorDataTypes",
+          "description": "The available data types for the connector."
+        }
+      },
+      "type": "object"
+    },
+    "MSTICheckRequirements": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataConnectorsCheckRequirements"
+        }
+      ],
+      "description": "Represents Microsoft Threat Intelligence requirements check request.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/MSTICheckRequirementsProperties",
+          "description": "Microsoft Threat Intelligence requirements check properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object",
+      "x-ms-discriminator-value": "MicrosoftThreatIntelligence"
+    },
+    "MSTICheckRequirementsProperties": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataConnectorTenantId"
+        }
+      ],
+      "description": "Microsoft Threat Intelligence requirements check properties.",
+      "type": "object"
+    },
+    "MTPDataConnector": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataConnector"
+        }
+      ],
+      "description": "Represents MTP (Microsoft Threat Protection) data connector.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/MTPDataConnectorProperties",
+          "description": "MTP (Microsoft Threat Protection) data connector properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object",
+      "x-ms-discriminator-value": "MicrosoftThreatProtection"
+    },
+    "MTPDataConnectorDataTypes": {
+      "description": "The available data types for Microsoft Threat Protection Platforms data connector.",
+      "properties": {
+        "incidents": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/DataConnectorDataTypeCommon"
+            }
+          ],
+          "description": "Data type for Microsoft Threat Protection Platforms data connector.",
+          "type": "object"
+        }
+      },
+      "type": "object"
+    },
+    "MTPDataConnectorProperties": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataConnectorTenantId"
+        }
+      ],
+      "description": "MTP (Microsoft Threat Protection) data connector properties.",
+      "properties": {
+        "dataTypes": {
+          "$ref": "#/definitions/MTPDataConnectorDataTypes",
+          "description": "The available data types for the connector."
+        }
+      },
+      "type": "object"
+    },
+    "MtpCheckRequirements": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataConnectorsCheckRequirements"
+        }
+      ],
+      "description": "Represents MTP (Microsoft Threat Protection) requirements check request.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/MTPCheckRequirementsProperties",
+          "description": "MTP (Microsoft Threat Protection) requirements check properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object",
+      "x-ms-discriminator-value": "MicrosoftThreatProtection"
+    },
+    "MTPCheckRequirementsProperties": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataConnectorTenantId"
+        }
+      ],
+      "description": "MTP (Microsoft Threat Protection) requirements check properties.",
+      "type": "object"
+    },
     "ASCDataConnector": {
       "allOf": [
         {
@@ -4542,12 +4733,14 @@
         "aadTenantId": {
           "description": "The Azure Active Directory tenant id.",
           "readOnly": true,
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "aadUserId": {
           "description": "The Azure Active Directory user id.",
           "readOnly": true,
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "accountName": {
           "description": "The name of the account. This field should hold only the name without any domain added to it, i.e. administrator.",
@@ -4567,7 +4760,8 @@
         "isDomainJoined": {
           "description": "Determines whether this is a domain account.",
           "readOnly": true,
-          "type": "boolean"
+          "type": "boolean",
+          "x-nullable": true
         },
         "ntDomain": {
           "description": "The NetBIOS domain name as it appears in the alert format – domain\\username. Examples: NT AUTHORITY.",
@@ -4578,12 +4772,14 @@
           "description": "The objectGUID attribute is a single-value attribute that is the unique identifier for the object, assigned by active directory.",
           "format": "uuid",
           "readOnly": true,
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "puid": {
           "description": "The Azure Active Directory Passport User ID.",
           "readOnly": true,
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "sid": {
           "description": "The account security identifier, e.g. S-1-5-18.",
@@ -5998,7 +6194,9 @@
             "AmazonWebServicesCloudTrail",
             "AzureAdvancedThreatProtection",
             "MicrosoftDefenderAdvancedThreatProtection",
-            "Dynamics365"
+            "Dynamics365",
+            "MicrosoftThreatProtection",
+            "MicrosoftThreatIntelligence"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -6037,6 +6235,12 @@
               },
               {
                 "value": "Dynamics365"
+              },
+              {
+                "value": "MicrosoftThreatProtection"
+              },
+              {
+                "value": "MicrosoftThreatIntelligence"
               }
             ]
           }
@@ -6173,7 +6377,7 @@
     "Dynamics365DataConnectorDataTypes": {
       "description": "The available data types for Dynamics365 data connector.",
       "properties": {
-        "dynamics365CdsActivities": {
+        "dynamics365CDSActivities": {
           "allOf": [
             {
               "$ref": "#/definitions/DataConnectorDataTypeCommon"
@@ -6241,6 +6445,23 @@
       "required": [
         "kind"
       ]
+    },
+    "EntityEdges": {
+      "description": "The edge that connects the entity to the other entity.",
+      "properties": {
+        "targetEntityId": {
+          "description": "The target entity Id.",
+          "type": "string"
+        },
+        "additionalData": {
+          "additionalProperties": {
+            "type": "object"
+          },
+          "description": "A bag of custom fields that should be part of the entity and will be presented to the user.",
+          "type": "object"
+        }
+      },
+      "type": "object"
     },
     "EntityCommonProperties": {
       "description": "Entity common property bag.",
@@ -6328,6 +6549,13 @@
                 "$ref": "#/definitions/Entity"
               },
               "type": "array"
+            },
+            "edges": {
+              "description": "Array of edges that connects the entity to the list of entities.",
+              "items": {
+                "$ref": "#/definitions/EntityEdges"
+              },
+              "type": "array"
             }
           },
           "type": "object"
@@ -6381,7 +6609,11 @@
         "Url",
         "IoTDevice",
         "SecurityAlert",
-        "Bookmark"
+        "Bookmark",
+        "Mailbox",
+        "MailCluster",
+        "MailMessage",
+        "SubmissionMail"
       ],
       "type": "string",
       "x-ms-enum": {
@@ -6455,6 +6687,22 @@
           {
             "description": "Entity represents bookmark in the system.",
             "value": "Bookmark"
+          },
+          {
+            "description": "Entity represents Mailbox in the system.",
+            "value": "Mailbox"
+          },
+          {
+            "description": "Entity represents MailCluster in the system.",
+            "value": "MailCluster"
+          },
+          {
+            "description": "Entity represents MailMessage in the system.",
+            "value": "MailMessage"
+          },
+          {
+            "description": "Entity represents SubmissionMail in the system.",
+            "value": "SubmissionMail"
           }
         ]
       }
@@ -7043,7 +7291,11 @@
                       "String",
                       "Date",
                       "Entity"
-                    ]
+                    ],
+                    "x-ms-enum": {
+                      "modelAsString": true,
+                      "name": "outputType"
+                    }
                   },
                   "supportDeepLink": {
                     "type": "boolean",
@@ -7204,6 +7456,10 @@
         "productName": {
           "type": "string",
           "description": "The alert product name."
+        },
+        "description": {
+          "type": "string",
+          "description": "The alert description."
         },
         "displayName": {
           "type": "string",
@@ -7518,6 +7774,7 @@
         "osFamily": {
           "description": "The operating system type.",
           "enum": [
+            "Unknown",
             "Linux",
             "Windows",
             "Android",
@@ -7528,6 +7785,10 @@
             "modelAsString": false,
             "name": "OSFamily",
             "values": [
+              {
+                "description": "Unknown enumeration value.",
+                "value": "Unknown"
+              },
               {
                 "description": "Host with Linux operating system.",
                 "value": "Linux"
@@ -8162,6 +8423,404 @@
       "description": "Label that will be used to tag and filter on.",
       "type": "string"
     },
+    "MailMessageEntity": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Entity"
+        }
+      ],
+      "description": "Represents an MailMessage entity.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/MailMessageEntityProperties",
+          "description": "MailMessage entity properties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object",
+      "x-ms-discriminator-value": "MailMessage"
+    },
+    "MailMessageEntityProperties": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/EntityCommonProperties"
+        }
+      ],
+      "description": "MailMessage entity property bag.",
+      "properties": {
+        "fileEntityIds": {
+          "description": "The File entity ids of this mail message's attachments",
+          "type": "array",
+          "items": {
+            "description": "File entity id",
+            "type": "string"
+          }
+        },
+        "recipient": {
+          "description": "The recipient of this mail message. Note that in case of multiple recipients the mail message is forked and each copy has one recipient",
+          "type": "string"
+        },
+        "urls": {
+          "description": "The Urls contained in this mail message",
+          "type": "array",
+          "items": {
+            "description": "url",
+            "type": "string"
+          }
+        },
+        "threats": {
+          "description": "The threats of this mail message",
+          "type": "array",
+          "items": {
+            "description": "threat",
+            "type": "string"
+          }
+        },
+        "p1Sender": {
+          "description": "The sender's email address",
+          "type": "string"
+        },
+        "p1SenderDisplayName": {
+          "description": "The sender's email display name",
+          "type": "string"
+        },
+        "p1SenderDomain": {
+          "description": "The sender's email domain",
+          "type": "string"
+        },
+        "senderIP": {
+          "description": "The sender's email ip",
+          "type": "string"
+        },
+        "p2Sender": {
+          "description": "The sender's email address",
+          "type": "string"
+        },
+        "p2SenderDisplayName": {
+          "description": "The sender's email display name",
+          "type": "string"
+        },
+        "p2SenderDomain": {
+          "description": "The sender's email domain",
+          "type": "string"
+        },
+        "receiveDate": {
+          "description": "The received date of this message",
+          "format": "date-time",
+          "type": "string",
+          "x-nullable": true
+        },
+        "networkMessageId": {
+          "description": "The network message id of this mail message",
+          "type": "string",
+          "format": "uuid",
+          "x-nullable": true
+        },
+        "internetMessageId": {
+          "description": "The internet message id of this mail message",
+          "type": "string"
+        },
+        "subject": {
+          "description": "The subject of this mail message",
+          "type": "string"
+        },
+        "bodyFingerprintBin1": {
+          "description": "The body fingerprint",
+          "type": "integer",
+          "format": "int32",
+          "x-nullable": true
+        },
+        "bodyFingerprintBin2": {
+          "description": "The body fingerprint",
+          "type": "integer",
+          "format": "int32",
+          "x-nullable": true
+        },
+        "bodyFingerprintBin3": {
+          "description": "The body fingerprint",
+          "type": "integer",
+          "format": "int32",
+          "x-nullable": true
+        },
+        "bodyFingerprintBin4": {
+          "description": "The body fingerprint",
+          "type": "integer",
+          "format": "int32",
+          "x-nullable": true
+        },
+        "bodyFingerprintBin5": {
+          "description": "The body fingerprint",
+          "type": "integer",
+          "format": "int32",
+          "x-nullable": true
+        },
+        "antispamDirection": {
+          "description": "The directionality of this mail message",
+          "type": "integer",
+          "format": "int32",
+          "x-nullable": true
+        },
+        "deliveryAction": {
+          "description": "The delivery action of this mail message like Delivered, Blocked, Replaced etc",
+          "$ref": "#/definitions/DeliveryAction",
+          "x-nullable": true
+        },
+        "deliveryLocation": {
+          "description": "The delivery location of this mail message like Inbox, JunkFolder etc",
+          "$ref": "#/definitions/DeliveryLocation",
+          "x-nullable": true
+        },
+        "language": {
+          "description": "The mail language",
+          "type": "string"
+        },
+        "threatDetectionMethods": {
+          "description": "The threat detection methods",
+          "type": "array",
+          "items": {
+            "description": "Threat detection method",
+            "type": "string"
+          }
+        }
+      },
+      "type": "object"
+    },
+    "MailClusterEntity": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Entity"
+        }
+      ],
+      "description": "Represents an MailCluster entity.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/MailClusterEntityProperties",
+          "description": "MailCluster entity properties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object",
+      "x-ms-discriminator-value": "MailCluster"
+    },
+    "MailClusterEntityProperties": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/EntityCommonProperties"
+        }
+      ],
+      "description": "MailCluster entity property bag.",
+      "properties": {
+        "networkMessageIds": {
+          "description": "The mail message IDs that are part of the mail cluster",
+          "type": "array",
+          "items": {
+            "description": "File mail message id",
+            "type": "string"
+          }
+        },
+        "countByDeliveryStatus": {
+          "description": "Count of mail messages by DeliveryStatus string representation",
+          "type": "object",
+          "additionalProperties": {
+            "type": "object"
+          }
+        },
+        "countByThreatType": {
+          "description": "Count of mail messages by ThreatType string representation",
+          "type": "object",
+          "additionalProperties": {
+            "type": "object"
+          }
+        },
+        "countByProtectionStatus": {
+          "description": "Count of mail messages by ProtectionStatus string representation",
+          "type": "object",
+          "additionalProperties": {
+            "type": "object"
+          }
+        },
+        "threats": {
+          "description": "The threats of mail messages that are part of the mail cluster",
+          "type": "array",
+          "items": {
+            "description": "threat of mail",
+            "type": "string"
+          }
+        },
+        "query": {
+          "description": "The query that was used to identify the messages of the mail cluster",
+          "type": "string"
+        },
+        "queryTime": {
+          "description": "The query time",
+          "type": "string",
+          "format": "date-time",
+          "x-nullable": true
+        },
+        "mailCount": {
+          "description": "The mail count",
+          "type": "integer",
+          "x-nullable": true
+        },
+        "isVolumeAnomaly": {
+          "description": "Is this a volume anomaly mail cluster",
+          "type": "boolean",
+          "x-nullable": true
+        },
+        "source": {
+          "description": "The source of the mail cluster (default is 'O365 ATP')",
+          "type": "string"
+        },
+        "clusterSourceIdentifier": {
+          "description": "Cluster source identifier",
+          "type": "string"
+        },
+        "clusterSourceType": {
+          "description": "Cluster source type",
+          "type": "string"
+        },
+        "clusterQueryStartTime": {
+          "description": "Cluster squery start time",
+          "type": "string",
+          "format": "date-time",
+          "x-nullable": true
+        },
+        "clusterQueryEndTime": {
+          "description": "Cluster query end time",
+          "type": "string",
+          "format": "date-time",
+          "x-nullable": true
+        },
+        "clusterGroup": {
+          "description": "Cluster group",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "MailboxEntity": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Entity"
+        }
+      ],
+      "description": "Represents an Mailbox entity.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/MailboxEntityProperties",
+          "description": "Mailbox entity properties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object",
+      "x-ms-discriminator-value": "Mailbox"
+    },
+    "MailboxEntityProperties": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/EntityCommonProperties"
+        }
+      ],
+      "description": "Mailbox entity property bag.",
+      "properties": {
+        "mailboxPrimaryAddress": {
+          "description": "The mailbox's primary address",
+          "readOnly": true,
+          "type": "string"
+        },
+        "displayName": {
+          "description": "The display name",
+          "type": "string"
+        },
+        "upn": {
+          "description": "The mailbox's UPN",
+          "readOnly": true
+        },
+        "externalDirectoryObjectId": {
+          "description": "The AzureAD identifier of mailbox. Similar to AadUserId in account entity but this property is specific to mailbox object on office side",
+          "readOnly": true,
+          "type": "string",
+          "format": "uuid"
+        }
+      },
+      "type": "object"
+    },
+    "SubmissionMailEntity": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Entity"
+        }
+      ],
+      "description": "Represents an SubmissionMail entity.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SubmissionMailEntityProperties",
+          "description": "SubmissionMail entity properties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object",
+      "x-ms-discriminator-value": "SubmissionMail"
+    },
+    "SubmissionMailEntityProperties": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/EntityCommonProperties"
+        }
+      ],
+      "description": "SubmissionMail entity property bag.",
+      "properties": {
+        "submissionId": {
+          "description": "The Submission Id.",
+          "type": "string",
+          "format": "uuid",
+          "x-nullable": true
+        },
+        "submissionDate": {
+          "description": "Reported Date time for this submission.",
+          "type": "string",
+          "format": "date-time",
+          "x-nullable": true
+        },
+        "submitter": {
+          "description": "The submitter email address.",
+          "type": "string"
+        },
+        "networkMessageId": {
+          "description": "The network message id of email to which submission belongs.",
+          "type": "string",
+          "format": "uuid",
+          "x-nullable": true
+        },
+        "timestamp": {
+          "description": "The Time stamp when the message is received (Mail).",
+          "type": "string",
+          "format": "date-time",
+          "x-nullable": true
+        },
+        "recipient": {
+          "description": "The recipient of the mail.",
+          "type": "string"
+        },
+        "sender": {
+          "description": "The sender of the mail.",
+          "type": "string"
+        },
+        "senderIp": {
+          "description": "The sender's IP.",
+          "type": "string"
+        },
+        "subject": {
+          "description": "The subject of submission mail.",
+          "type": "string"
+        },
+        "reportType": {
+          "description": "The submission type for the given instance. This maps to Junk, Phish, Malware or NotJunk.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
     "MCASDataConnector": {
       "allOf": [
         {
@@ -8579,13 +9238,12 @@
     "OfficeConsentProperties": {
       "description": "Consent property bag.",
       "properties": {
-        "tenantId": {
+        "TenantId": {
           "description": "The tenantId of the Office365 with the consent.",
           "type": "string"
         },
-        "tenantName": {
-          "description": "The tenant name of the Office365 with the consent.",
-          "readOnly": true,
+        "consentId": {
+          "description": "Help to easily cascade among the data layers.",
           "type": "string"
         }
       },
@@ -10044,6 +10702,128 @@
       },
       "type": "object"
     },
+    "DeliveryAction": {
+      "description": "The email delivery action.",
+      "enum": [
+        "Unknown",
+        "DeliveredAsSpam",
+        "Delivered",
+        "Blocked",
+        "Replaced"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "DeliveryAction",
+        "values": [
+          {
+            "description": "Unknown action",
+            "value": "Unknown"
+          },
+          {
+            "description": "Delivered as spam action",
+            "value": "DeliveredAsSpam"
+          },
+          {
+            "description": "Delivered action",
+            "value": "Delivered"
+          },
+          {
+            "description": "Blocked action",
+            "value": "Blocked"
+          },
+          {
+            "description": "Replaced action",
+            "value": "Replaced"
+          }
+        ]
+      }
+    },
+    "DeliveryLocation": {
+      "description": "The email delivery location.",
+      "enum": [
+        "Unknown",
+        "Inbox",
+        "JunkFolder",
+        "DeletedFolder",
+        "Quarantine",
+        "External",
+        "Failed",
+        "Dropped",
+        "Forwarded"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "DeliveryLocation",
+        "values": [
+          {
+            "description": "Unknown",
+            "value": "Unknown"
+          },
+          {
+            "description": "Inbox location",
+            "value": "Inbox"
+          },
+          {
+            "description": "Junk Folder location",
+            "value": "JunkFolder"
+          },
+          {
+            "description": "Deleted Folder location",
+            "value": "DeletedFolder"
+          },
+          {
+            "description": "Quarantine location",
+            "value": "Quarantine"
+          },
+          {
+            "description": "External Folder location",
+            "value": "External"
+          },
+          {
+            "description": "Failed location",
+            "value": "Failed"
+          },
+          {
+            "description": "Dropped location",
+            "value": "Dropped"
+          },
+          {
+            "description": "Forwarded location",
+            "value": "Forwarded"
+          }
+        ]
+      }
+    },
+    "IPSyncer": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Settings"
+        }
+      ],
+      "description": "Settings with single toggle.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/IPSyncerSettingsProperties",
+          "description": "IPSyncer properties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object",
+      "x-ms-discriminator-value": "IPSyncer"
+    },
+    "IPSyncerSettingsProperties": {
+      "description": "IPSyncer property bag.",
+      "properties": {
+        "isEnabled": {
+          "description": "Determines whether the setting is enable or disabled.",
+          "readOnly": true,
+          "type": "boolean"
+        }
+      },
+      "type": "object"
+    },
     "EyesOn": {
       "allOf": [
         {
@@ -10211,7 +10991,8 @@
           "description": "The ID of the security agent running on the device",
           "format": "uuid",
           "readOnly": true,
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "deviceType": {
           "description": "The type of the device",
@@ -11043,15 +11824,15 @@
       "description": "An abstract Query item for entity",
       "type": "object",
       "discriminator": "kind",
+      "allOf": [
+        {
+          "$ref": "#/definitions/EntityQueryKind"
+        }
+      ],
       "properties": {
-        "kind": {
-          "$ref": "#/definitions/EntityQueryKind",
-          "description": "The entity query kind type."
-        },
         "id": {
           "description": "Query Template ARM ID",
           "type": "string",
-          "format": "uuid",
           "readOnly": true
         },
         "name": {
