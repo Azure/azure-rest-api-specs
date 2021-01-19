@@ -588,6 +588,28 @@
             "$ref": "#/parameters/moveCollectionName"
           },
           {
+            "name": "dependencyLevel",
+            "in": "query",
+            "description": "Defines the dependency level.",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "Direct",
+              "Descendant"
+            ],
+            "x-ms-enum": {
+              "name": "DependencyLevel",
+              "modelAsString": true
+            }
+          },
+          {
+            "name": "$orderby",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "OData order by query option. For example, you can use $orderby=Count desc."
+          },
+          {
             "$ref": "#/parameters/api-version"
           }
         ],
@@ -605,6 +627,10 @@
             }
           }
         },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-odata": "#/definitions/UnresolvedDependenciesContract",
         "x-ms-examples": {
           "UnresolvedDependencies_Get": {
             "$ref": "./examples/UnresolvedDependencies_Get.json"
@@ -1537,6 +1563,22 @@
         }
       }
     },
+    "UnresolvedDependenciesContract": {
+      "description": "Unresolved dependencies contract.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/UnresolvedDependenciesContractProperties"
+        }
+      }
+    },
+    "UnresolvedDependenciesContractProperties": {
+      "properties": {
+        "count": {
+          "type": "string",
+          "description": "The count of the resource."
+        }
+      }
+    },
     "MoveResourceCollection": {
       "description": "Defines the collection of move resources.",
       "type": "object",
@@ -1610,6 +1652,16 @@
         "nextLink": {
           "description": "Gets or sets the value of  next link.",
           "type": "string"
+        },
+        "summaryCollection": {
+          "description": "Gets or sets the list of summary items and the field on which summary is done.",
+          "$ref": "#/definitions/SummaryCollection"
+        },
+        "totalCount": {
+          "description": "Gets the total count.",
+          "type": "integer",
+          "readOnly": true,
+          "format": "int64"
         }
       }
     },
