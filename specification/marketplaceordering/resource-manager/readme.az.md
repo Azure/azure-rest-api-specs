@@ -29,7 +29,7 @@ python-sdk-output-folder: "$(az-output-folder)/vendored_sdks/marketplaceordering
 ``` yaml
 directive:
   - where:
-      group: marketplaceordering marketplace_agreements
+      group: marketplaceordering marketplace-agreement
     set:
       group: marketplaceordering agreement
 
