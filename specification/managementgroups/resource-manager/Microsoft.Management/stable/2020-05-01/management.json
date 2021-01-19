@@ -1970,8 +1970,7 @@
       "description": "Management group creation parameters.",
       "schema": {
         "$ref": "#/definitions/CreateManagementGroupRequest"
-      },
-      "x-ms-parameter-location": "client"
+      }
     },
     "PatchGroupRequestParameter": {
       "name": "patchGroupRequest",
@@ -1980,8 +1979,7 @@
       "description": "Management group patch parameters.",
       "schema": {
         "$ref": "#/definitions/PatchManagementGroupRequest"
-      },
-      "x-ms-parameter-location": "client"
+      }
     },
     "FilterParameter": {
       "name": "$filter",
@@ -2037,20 +2035,7 @@
       "description": "Tenant level settings request parameter.",
       "schema": {
         "$ref": "#/definitions/CreateOrUpdateSettingsRequest"
-      },
-      "x-ms-parameter-location": "client"
-    },
-    "OperationResultIdParameter": {
-      "name": "operationResultId",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "enum": [
-        "create",
-        "delete"
-      ],
-      "description": "The id of the operation result.",
-      "x-ms-parameter-location": "client"
+      }
     },
     "CheckNameAvailabilityParameter": {
       "name": "checkNameAvailabilityRequest",
@@ -2059,8 +2044,7 @@
       "description": "Management group name availability check parameters.",
       "schema": {
         "$ref": "#/definitions/CheckNameAvailabilityRequest"
-      },
-      "x-ms-parameter-location": "client"
+      }
     },
     "SkipParameter": {
       "name": "$skip",
@@ -2068,7 +2052,7 @@
       "required": false,
       "type": "integer",
       "description": "Number of entities to skip over when retrieving results. Passing this in will override $skipToken.",
-      "x-ms-parameter-location": "client"
+      "x-ms-parameter-location": "method"
     },
     "TopParameter": {
       "name": "$top",
@@ -2076,7 +2060,7 @@
       "required": false,
       "type": "integer",
       "description": "Number of elements to return when retrieving results. Passing this in will override $skipToken.",
-      "x-ms-parameter-location": "client"
+      "x-ms-parameter-location": "method"
     },
     "SkipTokenParameter": {
       "name": "$skiptoken",
@@ -2084,7 +2068,7 @@
       "required": false,
       "type": "string",
       "description": "Page continuation token is only used if a previous operation returned a partial result. \nIf a previous response contains a nextLink element, the value of the nextLink element will include a token parameter that specifies a starting point to use for subsequent calls.\n",
-      "x-ms-parameter-location": "client"
+      "x-ms-parameter-location": "method"
     },
     "CacheControlHeader": {
       "name": "Cache-Control",
