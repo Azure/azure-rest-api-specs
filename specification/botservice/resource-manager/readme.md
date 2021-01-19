@@ -114,7 +114,7 @@ directive:
     where:
       - $.definitions.FacebookChannelProperties.properties.verifyToken
     reason: We do need to return verifyToken in FacebookChannelProperties.
-  - suppress: R4009  # RequiredSystemDataInNewApiVersions
+  - suppress: RequiredSystemDataInNewApiVersions
     from:
       - Microsoft.BotService/stable/2020-06-02/botservice.json
     reason:
