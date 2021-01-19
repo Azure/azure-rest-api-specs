@@ -38,13 +38,13 @@ cli:
     - where:
         group: MarketplaceAgreements
         op: Get
-        hidden: true
+      hidden: true
     - where:
         group: MarketplaceAgreements
         op: Create
-        hidden: true
-    - where:
-        group: Operations
-        op: List
-        hidden: true
+      hidden: true
+    # - where:
+    #     group: Operations
+    #     op: List
+    #   hidden: true
 ```
