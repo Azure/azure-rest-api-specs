@@ -1248,18 +1248,6 @@
         }
       }
     },
-    "ChatMessagePriority": {
-      "description": "The chat message priority.",
-      "enum": [
-        "normal",
-        "high"
-      ],
-      "type": "string",
-      "x-ms-enum": {
-        "name": "ChatMessagePriority",
-        "modelAsString": true
-      }
-    },
     "ChatMessageType": {
       "description": "The chat message type.",
       "enum": [
@@ -1282,9 +1270,6 @@
       ],
       "type": "object",
       "properties": {
-        "priority": {
-          "$ref": "#/definitions/ChatMessagePriority"
-        },
         "content": {
           "description": "Chat message content.",
           "type": "string",
@@ -1372,7 +1357,6 @@
       "required": [
         "createdOn",
         "id",
-        "priority",
         "sequenceId",
         "type",
         "version"
@@ -1386,9 +1370,6 @@
         },
         "type": {
           "$ref": "#/definitions/ChatMessageType"
-        },
-        "priority": {
-          "$ref": "#/definitions/ChatMessagePriority"
         },
         "sequenceId": {
           "description": "Sequence of the chat message in the conversation.",
@@ -1460,9 +1441,6 @@
           "description": "Chat message content.",
           "type": "string",
           "example": "Let's go for lunch together."
-        },
-        "priority": {
-          "$ref": "#/definitions/ChatMessagePriority"
         }
       }
     },
