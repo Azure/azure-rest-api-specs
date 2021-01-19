@@ -123,7 +123,7 @@ directive:
     where: 
       - $.definitions.SharedAccessSignatureAuthorizationRule[AccessRightsDescription].properties.primaryKey
       - $.definitions.SharedAccessSignatureAuthorizationRule[AccessRightsDescription].properties.secondaryKey
-      - $.definitions.VerificationCodeResponse.properties.verificationCode
+      - $.definitions.VerificationCodeResponse.properties.properties.properties.verificationCode
     reason: Suppress secret_property error generated in POST method response
 ```
 
