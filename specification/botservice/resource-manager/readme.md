@@ -37,10 +37,6 @@ These settings apply only when `--tag=package-2020-06-02` is specified on the co
 ```yaml $(tag) == 'package-2020-06-02'
 input-file:
   - Microsoft.BotService/stable/2020-06-02/botservice.json
-directive:
-  - suppress: R4009
-    from: botservice.json
-    reason: We do not yet support systemdata.
 ```
 
 
@@ -112,14 +108,13 @@ swagger-to-sdk:
 ## Suppression
 ```
 directive:
-  - suppress:
-      - SECRET_PROPERTY
-    from:
-      - Microsoft.BotService/stable/2020-06-02/botservice.json
-    where:
-      - $.definitions.FacebookChannelProperties.properties.verifyToken
-    reason:
-      - We do need to return verifyToken in FacebookChannelProperties.
+  - suppress: SECRET_PROPERTY
+    from: Microsoft.BotService/stable/2020-06-02/botservice.json
+    where: $.definitions.FacebookChannelProperties.properties.verifyToken
+    reason: We do need to return verifyToken in FacebookChannelProperties.
+  - suppress: R4009
+    from: Microsoft.BotService/stable/2020-06-02/botservice.json
+    reason: We do not yet support systemdata.
 ```
 
 
