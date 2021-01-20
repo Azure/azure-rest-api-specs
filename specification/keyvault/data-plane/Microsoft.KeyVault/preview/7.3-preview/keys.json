@@ -1136,7 +1136,7 @@
             "description": "The name of the key in the given vault."
           },
           {
-            "name": "KeyRotationPolicy",
+            "name": "keyRotationPolicy",
             "in": "body",
             "required": true,
             "schema": {
@@ -2107,14 +2107,10 @@
       "properties": {
         "timeAfterCreation": {
           "type": "string",
-          "format": "string",
-          "minimum": 1,
-          "maximum": 99,
           "description": "Days after creation to attempt rotate."
         },
         "timeBeforeExpiry": {
           "type": "string",
-          "format": "string",
           "description": "Days before expiry to attempt rotate."
         }
       },
@@ -2156,22 +2152,18 @@
         },
         "rotationTime": {
           "type": "string",
-          "format": "string",
-          "default": null,
           "description": "Time to attempt rotate. Format examples: 90 days: 90D, 3 months: 3M, 48 hours: 48H, 1 year and 10 days: 1Y10D"
         },
         "created": {
           "type": "integer",
           "format": "unixtime",
           "readOnly": true,
-          "default": null,
           "description": "The key rotation policy created time in UTC."
         },
         "updated": {
           "type": "integer",
           "format": "unixtime",
           "readOnly": true,
-          "default": null,
           "description": "The key rotation policy's last updated time in UTC."
         }
       },
