@@ -1450,13 +1450,21 @@
     },
     "BackendCredentialsContract": {
       "properties": {
+        "certificateIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "maxItems": 32,
+          "description": "List of Client Certificate Ids."
+        },
         "certificate": {
           "type": "array",
           "items": {
             "type": "string"
           },
           "maxItems": 32,
-          "description": "List of Client Certificate Thumbprint."
+          "description": "List of Client Certificate Thumbprints. Will be ignored if certificatesIds are provided."
         },
         "query": {
           "type": "object",
@@ -1547,8 +1555,12 @@
     },
     "BackendServiceFabricClusterProperties": {
       "properties": {
+        "clientCertificateId": {
+          "description": "The client certificate id for the management endpoint.",
+          "type": "string"
+        },
         "clientCertificatethumbprint": {
-          "description": "The client certificate thumbprint for the management endpoint.",
+          "description": "The client certificate thumbprint for the management endpoint. Will be ignored if certificatesIds are provided",
           "type": "string"
         },
         "maxPartitionResolutionRetries": {
@@ -1579,8 +1591,7 @@
         }
       },
       "required": [
-        "managementEndpoints",
-        "clientCertificatethumbprint"
+        "managementEndpoints"
       ],
       "description": "Properties of the Service Fabric Type Backend."
     },

@@ -1,0 +1,91 @@
+{
+  "parameters": {
+    "subscriptionId": "fa68082f-8ff7-4a25-95c7-ce9da541242f",
+    "resourceGroupName": "TestRG",
+    "orderName": "TestOrderName1",
+    "api-version": "2020-12-01-preview",
+    "User-Agent": [
+      "vscode-restclient"
+    ],
+    "Referer": [
+      "https://localhost/subscriptions/fa68082f-8ff7-4a25-95c7-ce9da541242f/resourceGroups/TestRG/providers/Microsoft.EdgeOrder/orders/TestOrderName1?api-version=2020-12-01-preview"
+    ],
+    "Content-Type": [
+      "application/json; charset=utf-8"
+    ],
+    "Content-Length": [
+      "268"
+    ],
+    "orderUpdateParameter": {
+      "properties": {
+        "preferences": {
+          "transportPreferences": {
+            "preferredShipmentType": "CustomerManaged"
+          }
+        }
+      },
+      "tags": {
+        "pigeon": "bird",
+        "tiger": "animal",
+        "ant": "insect"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "orderDetails": {
+            "productDetails": {
+              "hierarchyInformation": {
+                "productFamilyName": "AzureStackEdge",
+                "productLineName": "AzureStackEdge",
+                "productName": "AzureStackEdgeProFPGA",
+                "configurationName": "1GPU"
+              },
+              "count": 1,
+              "deviceDetails": []
+            },
+            "orderType": "Purchase",
+            "currentStatus": {
+              "orderStatus": "",
+              "lastUpdatedTime": "0001-01-01T05:30:00+05:30"
+            },
+            "orderStatusHistory": [],
+            "preferences": {
+              "transportPreferences": {
+                "preferredShipmentType": "CustomerManaged"
+              }
+            },
+            "notificationEmailList": [],
+            "cancellationReason": "",
+            "cancellationStatus": "Cancellable",
+            "deletionStatus": "Allowed",
+            "returnReason": "",
+            "returnStatus": "Returnable"
+          },
+          "addressDetails": {
+            "shippingAddress": {
+              "contactDetails": {
+                "contactName": "first",
+                "phone": "11111"
+              }
+            }
+          },
+          "startTime": "0001-01-01T05:30:00+05:30",
+          "orderCollectionId": ""
+        },
+        "location": "westus",
+        "tags": {
+          "pigeon": "bird",
+          "tiger": "animal",
+          "ant": "insect"
+        },
+        "name": "TestOrderName1",
+        "id": "/subscriptions/fa68082f-8ff7-4a25-95c7-ce9da541242f/resourceGroups/TestRG/providers/Microsoft.EdgeOrder/orders/TestOrderName1",
+        "type": "Microsoft.EdgeOrder/orders"
+      }
+    },
+    "202": {}
+  }
+}
