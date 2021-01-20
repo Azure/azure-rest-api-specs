@@ -545,6 +545,7 @@
         },
         "connectivityStatus": {
           "type": "string",
+          "readOnly": true,
           "description": "Represents the connectivity status of the connected cluster.",
           "enum": [
             "Connecting",
@@ -604,32 +605,6 @@
       "type": "object",
       "properties": {},
       "description": "Properties which can be patched on the connected cluster resource."
-    },
-    "HybridConnectionConfig": {
-      "description": "Contains the REP (rendezvous endpoint) and “Sender” access token.",
-      "properties": {
-        "expirationTime": {
-          "description": "Timestamp when this token will be expired.",
-          "type": "integer",
-          "readOnly": true,
-          "format": "int64"
-        },
-        "hybridConnectionName": {
-          "description": "Name of the connection",
-          "type": "string",
-          "readOnly": true
-        },
-        "relay": {
-          "description": "Name of the relay.",
-          "type": "string",
-          "readOnly": true
-        },
-        "token": {
-          "description": "Sender access token",
-          "type": "string",
-          "readOnly": true
-        }
-      }
     },
     "SystemData": {
       "description": "Metadata pertaining to creation and last modification of the resource.",
