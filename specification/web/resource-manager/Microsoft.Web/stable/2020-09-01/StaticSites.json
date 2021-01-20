@@ -3329,28 +3329,13 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "./CommonDefinitions.json#/definitions/ProxyOnlyResource"
+          "$ref": "./CommonDefinitions.json#/definitions/Resource"
         }
       ],
       "properties": {
         "properties": {
-          "description": "StaticSiteUserProvidedFunctionAppARMResource resource specific properties",
-          "properties": {
-            "functionAppResourceId": {
-              "description": "The resource id of the function app registered with the static site",
-              "type": "string"
-            },
-            "functionAppRegion": {
-              "description": "The region of the function app registered with the static site",
-              "type": "string"
-            },
-            "createdOn": {
-              "format": "date-time",
-              "description": "The date and time on which the function app was registered with the static site.",
-              "type": "string",
-              "readOnly": true
-            }
-          },
+          "$ref": "#/definitions/StaticSiteUserProvidedFunctionApp",
+          "description": "Core resource properties",
           "x-ms-client-flatten": true
         }
       }
