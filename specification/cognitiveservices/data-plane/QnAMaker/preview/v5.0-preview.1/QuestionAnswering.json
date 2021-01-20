@@ -2,8 +2,8 @@
   "swagger": "2.0",
   "info": {
     "version": "v1.0-preview.1",
-    "title": "QnAMaker Client",
-    "description": "An API for QnAMaker Service Prebuilt Skill Prediction via Unified Language Service"
+    "title": "Question Answering Client",
+    "description": "An API for Unified Language Service Prebuilt Skill - Question Answering - Prediction"
   },
   "securityDefinitions": {
     "apim_key": {
@@ -49,7 +49,7 @@
           "200": {
             "description": "GenerateAnswer call response.",
             "schema": {
-              "$ref": "#/definitions/QnASearchResultList"
+              "$ref": "#/definitions/SearchResultList"
             }
           },
           "default": {
@@ -68,133 +68,6 @@
     }
   },
   "definitions": {
-    "QnA": {
-      "type": "object",
-      "description": "Q-A object.",
-      "additionalProperties": false,
-      "required": [
-        "answer",
-        "questions"
-      ],
-      "properties": {
-        "id": {
-          "type": "integer",
-          "description": "Unique id for the Q-A.",
-          "format": "int32"
-        },
-        "answer": {
-          "type": "string",
-          "description": "Answer text",
-          "maxLength": 25000,
-          "minLength": 1
-        },
-        "source": {
-          "type": "string",
-          "description": "Source from which Q-A was indexed. eg. https://docs.microsoft.com/en-us/azure/cognitive-services/QnAMaker/FAQs",
-          "maxLength": 300
-        },
-        "questions": {
-          "type": "array",
-          "description": "List of questions associated with the answer.",
-          "maxLength": 100,
-          "minLength": 1,
-          "items": {
-            "type": "string"
-          }
-        },
-        "metadata": {
-          "type": "array",
-          "description": "List of metadata associated with the answer.",
-          "maxLength": 10,
-          "items": {
-            "$ref": "#/definitions/Metadata"
-          }
-        },
-        "context": {
-          "description": "Context of a QnA",
-          "allOf": [
-            {
-              "$ref": "#/definitions/Context"
-            }
-          ]
-        },
-        "lastUpdatedTimestamp": {
-          "type": "string",
-          "description": "Timestamp when the QnA was last updated.",
-          "maxLength": 300
-        }
-      }
-    },
-    "Context": {
-      "type": "object",
-      "description": "Context associated with Qna.",
-      "properties": {
-        "isContextOnly": {
-          "type": "boolean",
-          "description": "To mark if a prompt is relevant only with a previous question or not.\ntrue - Do not include this QnA as search result for queries without context\nfalse - ignores context and includes this QnA in search result"
-        },
-        "prompts": {
-          "type": "array",
-          "description": "List of prompts associated with the answer.",
-          "maxItems": 20,
-          "items": {
-            "$ref": "#/definitions/Prompt"
-          }
-        }
-      }
-    },
-    "Prompt": {
-      "type": "object",
-      "description": "Prompt for an answer.",
-      "properties": {
-        "displayOrder": {
-          "type": "integer",
-          "description": "Index of the prompt - used in ordering of the prompts",
-          "format": "int32"
-        },
-        "qnaId": {
-          "type": "integer",
-          "description": "Qna id corresponding to the prompt - if QnaId is present, QnA object is ignored.",
-          "format": "int32"
-        },
-        "qna": {
-          "description": "QnA - Either QnaId or QnA needs to be present in a Prompt object",
-          "allOf": [
-            {
-              "$ref": "#/definitions/QnA"
-            }
-          ]
-        },
-        "displayText": {
-          "type": "string",
-          "description": "Text displayed to represent a follow up question prompt",
-          "maxLength": 200
-        }
-      }
-    },
-    "Metadata": {
-      "type": "object",
-      "description": "Name - value pair of metadata.",
-      "additionalProperties": false,
-      "required": [
-        "name",
-        "value"
-      ],
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "Metadata name.",
-          "maxLength": 100,
-          "minLength": 1
-        },
-        "value": {
-          "type": "string",
-          "description": "Metadata value.",
-          "maxLength": 500,
-          "minLength": 1
-        }
-      }
-    },
     "ErrorResponse": {
       "type": "object",
       "description": "Error response. As per Microsoft One API guidelines - https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses.",
@@ -278,12 +151,12 @@
     },
     "Query": {
       "type": "object",
-      "description": "POST body schema to query the knowledgebase.",
+      "description": "POST body schema to query for an answer in a paragraph text.",
       "additionalProperties": false,
       "properties": {
         "question": {
           "type": "string",
-          "description": "User question to query against the knowledge base."
+          "description": "User question to query against paragraph text."
         },
         "top": {
           "type": "integer",
@@ -297,10 +170,6 @@
         "scoreThreshold": {
           "type": "number",
           "description": "Minimum threshold score for answers."
-        },
-        "rankerType": {
-          "type": "string",
-          "description": "Optional field. Set to 'QuestionOnly' for using a question only Ranker."
         },
         "answerSpanRequest": {
           "description": "To configure Answer span prediction feature.",
@@ -319,32 +188,25 @@
         }
       }
     },
-    "QnASearchResultList": {
+    "SearchResultList": {
       "type": "object",
-      "description": "Represents List of Question Answers.",
+      "description": "Represents List of Answers.",
       "additionalProperties": false,
       "properties": {
         "answers": {
           "type": "array",
           "description": "Represents Search Result list.",
           "items": {
-            "$ref": "#/definitions/QnASearchResult"
+            "$ref": "#/definitions/SearchResult"
           }
         }
       }
     },
-    "QnASearchResult": {
+    "SearchResult": {
       "type": "object",
       "description": "Represents Search Result.",
       "additionalProperties": false,
       "properties": {
-        "questions": {
-          "type": "array",
-          "description": "List of questions.",
-          "items": {
-            "type": "string"
-          }
-        },
         "answer": {
           "type": "string",
           "description": "Answer."
@@ -353,34 +215,9 @@
           "type": "number",
           "description": "Search result score."
         },
-        "id": {
-          "type": "integer",
-          "description": "Id of the QnA result.",
-          "format": "int32"
-        },
-        "source": {
-          "type": "string",
-          "description": "Source of QnA result."
-        },
-        "metadata": {
-          "type": "array",
-          "description": "List of metadata.",
-          "items": {
-            "$ref": "#/definitions/Metadata"
-          }
-        },
-        "context": {
-          "type": "object",
-          "description": "Context object of the QnA",
-          "allOf": [
-            {
-              "$ref": "#/definitions/Context"
-            }
-          ]
-        },
         "answerSpan": {
           "type": "object",
-          "description": "Answer span object of QnA with respect to user's question.",
+          "description": "Answer span object of Search Result with respect to user's question.",
           "allOf": [
             {
               "$ref": "#/definitions/AnswerSpanResponse"
@@ -414,7 +251,7 @@
     },
     "AnswerSpanResponse": {
       "type": "object",
-      "description": "Answer span object of QnA.",
+      "description": "Answer span object of Answer.",
       "additionalProperties": false,
       "properties": {
         "text": {
@@ -447,22 +284,6 @@
           "type": "string",
           "description": "Text in the document."
         },
-        "id": {
-          "type": "integer",
-          "format":"int32",
-          "description": "Id of the document."
-        },
-        "alternateQuestions": {
-          "type": "array",
-          "description": "List of questions.",
-          "items": {
-            "type": "string"
-          }
-        },
-        "answer": {
-          "type": "string",
-          "description": "One answer to the queries in the alternateQuestions"
-        },
         "language": {
           "type": "string",
           "description": "Language of the document. Please find the list of supported languages <a href=\"https://aka.ms/qnamaker-languages#languages-supported\" target=\"_blank\">here</a>.",
@@ -473,15 +294,6 @@
     }
   },
   "parameters": {
-    "KbId": {
-      "type": "string",
-      "name": "kbId",
-      "in": "path",
-      "required": true,
-      "x-nullable": false,
-      "description": "Knowledgebase id.",
-      "x-ms-parameter-location": "method"
-    },
     "PrebuiltGenerateAnswerPayload": {
       "name": "prebuiltGenerateAnswerPayload",
       "in": "body",
