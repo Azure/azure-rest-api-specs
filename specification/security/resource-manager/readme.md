@@ -213,6 +213,7 @@ input-file:
 - Microsoft.Security/preview/2020-08-06-preview/iotSensors.json
 - Microsoft.Security/preview/2020-08-06-preview/devices.json
 - Microsoft.Security/preview/2020-08-06-preview/onPremiseIotSensors.json
+- Microsoft.Security/preview/2020-08-06-preview/insights.json
 - Microsoft.Security/preview/2020-08-06-preview/iotSites.json
 - Microsoft.Security/preview/2020-08-06-preview/iotAlerts.json
 - Microsoft.Security/preview/2020-08-06-preview/iotAlertTypes.json
