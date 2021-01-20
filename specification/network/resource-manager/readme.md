@@ -146,6 +146,7 @@ input-file:
   - Microsoft.Network/stable/2020-08-01/cloudServiceNetworkInterface.json
   - Microsoft.Network/stable/2020-08-01/cloudServicePublicIpAddress.json
 ```
+
 ### Tag: package-2020-07
 
 These settings apply only when `--tag=package-2020-07` is specified on the command line.
