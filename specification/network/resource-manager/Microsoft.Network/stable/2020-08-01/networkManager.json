@@ -145,7 +145,7 @@
         "tags": [
           "NetworkManagers"
         ],
-        "operationId": "NetworkManagers_Patch",
+        "operationId": "NetworkManagers_Update",
         "description": "Patch a NetworkManager.",
         "parameters": [
           {
@@ -198,7 +198,7 @@
         "tags": [
           "NetworkManagers"
         ],
-        "operationId": "NetworkManager_Commit",
+        "operationId": "NetworkManagerCommits_Post",
         "description": "Post a Network Manager Commit.",
         "parameters": [
           {
@@ -248,7 +248,7 @@
         "tags": [
           "NetworkManagers"
         ],
-        "operationId": "NetworkManagerDeploymentStatus_Post",
+        "operationId": "NetworkManagerDeploymentStatus_List",
         "description": "Post List of Network Manager Deployment Status.",
         "parameters": [
           {
@@ -298,9 +298,6 @@
         ],
         "operationId": "NetworkManagers_ListBySubscription",
         "description": "List all network managers in subscription.",
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
         "parameters": [
           {
             "$ref": "./network.json#/parameters/SubscriptionIdParameter"
@@ -379,9 +376,6 @@
               "$ref": "./network.json#/definitions/CloudError"
             }
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
           "List Network Manager": {
@@ -524,24 +518,13 @@
           },
           "description": "List of locations."
         },
-        "configType": {
+        "deploymentType": {
           "type": "array",
           "items": {
-            "type": "string",
-            "enum": [
-              "AdminPolicy",
-              "UserPolicy",
-              "Routing",
-              "Connectivity"
-            ],
-            "x-ms-enum": {
-              "name": "ConfigType",
-              "modelAsString": true
-            },
-            "description": "Configuration Type."
-          }
-        },
-        "description": "List of Config Types."
+            "$ref": "#/definitions/DeploymentType"
+          },
+          "description": "List of Config deployment Types."
+        }
       },
       "description": "Network Manager Deployment Status Parameter."
     },
@@ -569,7 +552,7 @@
         },
         "region": {
           "type": "string",
-          "description": "Region."
+          "description": "Region Name."
         },
         "deploymentStatus": {
           "type": "string",
@@ -592,19 +575,9 @@
           },
           "description": "List of configuration ids."
         },
-        "configType": {
+        "deploymentType": {
           "type": "string",
-          "enum": [
-            "AdminPolicy",
-            "UserPolicy",
-            "Routing",
-            "Connectivity"
-          ],
-          "x-ms-enum": {
-            "name": "ConfigType",
-            "modelAsString": true
-          },
-          "description": "Configuration Type."
+          "$ref": "#/definitions/DeploymentType"
         },
         "errorMessage": {
           "type": "string",
@@ -612,6 +585,20 @@
         }
       },
       "description": "Network Manager Deployment Status."
+    },
+    "DeploymentType": {
+      "type": "string",
+      "enum": [
+        "AdminPolicy",
+        "UserPolicy",
+        "Routing",
+        "Connectivity"
+      ],
+      "x-ms-enum": {
+        "name": "DeploymentType",
+        "modelAsString": true
+      },
+      "description": "Configuration Deployment Type."
     }
   },
   "parameters": {
