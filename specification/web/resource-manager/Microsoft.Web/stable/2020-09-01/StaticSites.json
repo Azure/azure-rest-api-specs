@@ -2361,7 +2361,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/PrivateLinkARMResources"
+              "$ref": "./CommonDefinitions.json#/definitions/PrivateLinkResourcesWrapper"
             }
           },
           "default": {
@@ -2714,32 +2714,6 @@
     }
   },
   "definitions": {
-    "PrivateLinkARMResources": {
-      "description": "Private Endpoint Resources ARM resource.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "./CommonDefinitions.json#/definitions/ProxyOnlyResource"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "description": "PrivateLinkARMResources resource specific properties",
-          "required": [
-            "value"
-          ],
-          "properties": {
-            "value": {
-              "type": "array",
-              "items": {
-                "$ref": "./CommonDefinitions.json#/definitions/PrivateLinkResource"
-              }
-            }
-          },
-          "x-ms-client-flatten": true
-        }
-      }
-    },
     "StaticSite": {
       "description": "A static site.",
       "type": "object",
