@@ -42,7 +42,7 @@
             "$ref": "./examples/CosmosDBRestorableSqlDatabaseList.json"
           }
         },
-        "description": "Lists all the restorable Azure Cosmos DB SQL databases available under the restorable account.",
+        "description": "Show the event feed of all mutations done on all the Azure Cosmos DB SQL databases under the restorable account.  This helps in scenario where database was accidentally deleted to get the deletion time.  This API requires 'Microsoft.DocumentDB/locations/restorableDatabaseAccounts/*/read' permission",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
@@ -84,7 +84,7 @@
             "$ref": "./examples/CosmosDBRestorableSqlContainerList.json"
           }
         },
-        "description": "Lists all the restorable Azure Cosmos DB SQL containers available for a specific database.",
+        "description": "Show the event feed of all mutations done on all the Azure Cosmos DB SQL container under a specific database.  This helps in scenario where container was accidentally deleted.  This API requires 'Microsoft.DocumentDB/locations/restorableDatabaseAccounts/*/read' permission",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
@@ -129,7 +129,7 @@
             "$ref": "./examples/CosmosDBRestorableSqlResourceList.json"
           }
         },
-        "description": "Lists all the restorable Azure Cosmos DB SQL resources available for a specific database account at a given time and location.",
+        "description": "Return a list of database and container combo that exist on the account at the given timestamp and location. This helps in scenarios to validate what resources exist at given timestamp and location. This API requires 'Microsoft.DocumentDB/locations/restorableDatabaseAccounts/*/read' permission.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
@@ -177,7 +177,7 @@
             "$ref": "./examples/CosmosDBRestorableMongodbDatabaseList.json"
           }
         },
-        "description": "Lists all the restorable Azure Cosmos DB MongoDB databases available under the restorable account.",
+        "description": "Show the event feed of all mutations done on all the Azure Cosmos DB MongoDB databases under the restorable account.  This helps in scenario where database was accidentally deleted to get the deletion time.  This API requires  'Microsoft.DocumentDB/locations/restorableDatabaseAccounts/*/read' permission",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
@@ -219,7 +219,7 @@
             "$ref": "./examples/CosmosDBRestorableMongodbCollectionList.json"
           }
         },
-        "description": "Lists all the restorable Azure Cosmos DB MongoDB collection available for a specific database.",
+        "description": "Show the event feed of all mutations done on all the Azure Cosmos DB MongoDB collections under a specific database.  This helps in scenario where container was accidentally deleted.  This API requires 'Microsoft.DocumentDB/locations/restorableDatabaseAccounts/*/read' permission",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
@@ -264,7 +264,7 @@
             "$ref": "./examples/CosmosDBRestorableMongodbResourceList.json"
           }
         },
-        "description": "Lists all the restorable Azure Cosmos DB MongoDB resources available for a specific database account at a given time and location.",
+        "description": "Return a list of database and collection combo that exist on the account at the given timestamp and location. This helps in scenarios to validate what resources exist at given timestamp and location. This API requires 'Microsoft.DocumentDB/locations/restorableDatabaseAccounts/*/read' permission.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
@@ -328,13 +328,23 @@
           "x-ms-client-flatten": true,
           "description": "The properties of a restorable SQL database.",
           "$ref": "#/definitions/RestorableSqlDatabaseProperties"
+        },
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The unique resource identifier of the ARM resource."
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The name of the ARM resource."
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The type of Azure resource."
         }
-      },
-      "allOf": [
-        {
-          "$ref": "../../preview/2020-06-01-preview/cosmos-db.json#/definitions/ARMResourceProperties"
-        }
-      ]
+      }
     },
     "RestorableSqlDatabaseProperties": {
       "description": "The properties of an Azure Cosmos DB restorable SQL database",
@@ -421,13 +431,23 @@
           "x-ms-client-flatten": true,
           "description": "The properties of a restorable SQL container.",
           "$ref": "#/definitions/RestorableSqlContainerProperties"
+        },
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The unique resource identifier of the ARM resource."
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The name of the ARM resource."
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The type of Azure resource."
         }
-      },
-      "allOf": [
-        {
-          "$ref": "../../preview/2020-06-01-preview/cosmos-db.json#/definitions/ARMResourceProperties"
-        }
-      ]
+      }
     },
     "RestorableSqlContainerProperties": {
       "description": "The properties of an Azure Cosmos DB restorable SQL container",
@@ -517,13 +537,23 @@
           "x-ms-client-flatten": true,
           "description": "The properties of a restorable MongoDB database.",
           "$ref": "#/definitions/RestorableMongodbDatabaseProperties"
+        },
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The unique resource identifier of the ARM resource."
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The name of the ARM resource."
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The type of Azure resource."
         }
-      },
-      "allOf": [
-        {
-          "$ref": "../../preview/2020-06-01-preview/cosmos-db.json#/definitions/ARMResourceProperties"
-        }
-      ]
+      }
     },
     "RestorableMongodbDatabaseProperties": {
       "description": "The properties of an Azure Cosmos DB restorable MongoDB database",
@@ -583,13 +613,23 @@
           "x-ms-client-flatten": true,
           "description": "The properties of a restorable MongoDB collection.",
           "$ref": "#/definitions/RestorableMongodbCollectionProperties"
+        },
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The unique resource identifier of the ARM resource."
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The name of the ARM resource."
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The type of Azure resource."
         }
-      },
-      "allOf": [
-        {
-          "$ref": "../../preview/2020-06-01-preview/cosmos-db.json#/definitions/ARMResourceProperties"
-        }
-      ]
+      }
     },
     "RestorableMongodbCollectionProperties": {
       "description": "The properties of an Azure Cosmos DB restorable MongoDB collection",
