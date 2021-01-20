@@ -15264,7 +15264,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/PrivateEndpointConnectionResource"
+              "$ref": "./CommonDefinitions.json#/definitions/PrivateEndpointConnectionResource"
             }
           },
           "default": {
@@ -15309,7 +15309,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/PrivateLinkConnectionApprovalRequestResource"
+              "$ref": "./CommonDefinitions.json#/definitions/PrivateLinkConnectionApprovalRequestResource"
             }
           },
           {
@@ -15323,13 +15323,13 @@
           "200": {
             "description": "OK.",
             "schema": {
-              "$ref": "#/definitions/PrivateEndpointConnectionResource"
+              "$ref": "./CommonDefinitions.json#/definitions/PrivateEndpointConnectionResource"
             }
           },
           "202": {
             "description": "Asynchronous operation in progress.",
             "schema": {
-              "$ref": "#/definitions/PrivateEndpointConnectionResource"
+              "$ref": "./CommonDefinitions.json#/definitions/PrivateEndpointConnectionResource"
             }
           },
           "default": {
@@ -20333,16 +20333,6 @@
         }
       }
     },
-    "ArmIdWrapper": {
-      "description": "A wrapper for an ARM resource id",
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "string",
-          "readOnly": true
-        }
-      }
-    },
     "AzureBlobStorageApplicationLogsConfig": {
       "description": "Application logs azure blob storage configuration.",
       "type": "object",
@@ -22853,65 +22843,6 @@
         }
       }
     },
-    "PrivateEndpointConnectionResource": {
-      "description": "Private Endpoint Connection ARM resource.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "./CommonDefinitions.json#/definitions/ProxyOnlyResource"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/RemotePrivateEndpointConnection",
-          "description": "Core resource properties",
-          "x-ms-client-flatten": true
-        }
-      }
-    },
-    "PrivateLinkConnectionApprovalRequest": {
-      "description": "A request to approve or reject a private endpoint connection",
-      "type": "object",
-      "properties": {
-        "privateLinkServiceConnectionState": {
-          "$ref": "#/definitions/PrivateLinkConnectionState"
-        }
-      }
-    },
-    "PrivateLinkConnectionApprovalRequestResource": {
-      "description": "Private Endpoint Connection Approval ARM resource.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "./CommonDefinitions.json#/definitions/ProxyOnlyResource"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/PrivateLinkConnectionApprovalRequest",
-          "description": "Core resource properties",
-          "x-ms-client-flatten": true
-        }
-      }
-    },
-    "PrivateLinkConnectionState": {
-      "description": "The state of a private link connection",
-      "type": "object",
-      "properties": {
-        "status": {
-          "description": "Status of a private link connection",
-          "type": "string"
-        },
-        "description": {
-          "description": "Description of a private link connection",
-          "type": "string"
-        },
-        "actionsRequired": {
-          "description": "ActionsRequired for a private link connection",
-          "type": "string"
-        }
-      }
-    },
     "ProcessInfo": {
       "description": "Process Information.",
       "type": "object",
@@ -23397,23 +23328,6 @@
             }
           },
           "x-ms-client-flatten": true
-        }
-      }
-    },
-    "RemotePrivateEndpointConnection": {
-      "description": "A remote private endpoint connection",
-      "type": "object",
-      "properties": {
-        "provisioningState": {
-          "type": "string",
-          "readOnly": true
-        },
-        "privateEndpoint": {
-          "$ref": "#/definitions/ArmIdWrapper",
-          "description": "PrivateEndpoint of a remote private endpoint connection"
-        },
-        "privateLinkServiceConnectionState": {
-          "$ref": "#/definitions/PrivateLinkConnectionState"
         }
       }
     },
