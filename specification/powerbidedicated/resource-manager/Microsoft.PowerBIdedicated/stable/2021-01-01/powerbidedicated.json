@@ -938,6 +938,20 @@
         }
       }
     },
+    "IdentityType": {
+      "description": "The type of identity that created/modified the resource.",
+      "type": "string",
+      "enum": [
+        "User",
+        "Application",
+        "ManagedIdentity",
+        "Key"
+      ],
+      "x-ms-enum": {
+        "name": "IdentityType",
+        "modelAsString": true
+      }
+    },
     "SystemData": {
       "description": "Metadata pertaining to creation and last modification of the resource.",
       "type": "object",
@@ -968,20 +982,6 @@
           "format": "date-time",
           "description": "The timestamp of resource last modification (UTC)"
         }
-      }
-    },
-    "IdentityType": {
-      "description": "The type of identity that created/modified the resource.",
-      "type": "string",
-      "enum": [
-        "User",
-        "Application",
-        "ManagedIdentity",
-        "Key"
-      ],
-      "x-ms-enum": {
-        "name": "IdentityType",
-        "modelAsString": true
       }
     }
   },
