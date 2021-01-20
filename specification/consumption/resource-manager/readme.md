@@ -213,6 +213,7 @@ swagger-to-sdk:
   - repo: azure-sdk-for-net
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-python
+  - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
@@ -411,3 +412,6 @@ generate-interface: true
 
 See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
 
+## Python
+
+See configuration in [readme.python.md](./readme.python.md)

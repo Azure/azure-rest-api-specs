@@ -1023,29 +1023,40 @@
       "type": "object",
       "description": "Just-in-time access policy setting."
     },
-    "ErrorResponse": {
+    "ErrorDefinition": {
       "properties": {
-        "error": {
-          "readOnly": true,
-          "properties": {
-            "code": {
-              "type": "string",
-              "description": "Error code."
-            },
-            "message": {
-              "type": "string",
-              "description": "Error message indicating why the operation failed."
-            }
-          },
-          "required": [
-            "code",
-            "message"
-          ],
-          "type": "object",
-          "description": "Error response indicates Azure Resource Manager is not able to process the incoming request. The reason is provided in the error message."
+        "code": {
+          "type": "string",
+          "description": "Error code."
+        },
+        "message": {
+          "type": "string",
+          "description": "Error message indicating why the operation failed."
+        },
+        "details": {
+          "description": "Internal error details.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ErrorDefinition"
+          }
         }
       },
-      "description": "Error response."
+      "required": [
+        "code",
+        "message"
+      ],
+      "type": "object",
+      "description": "Error response indicates Azure Resource Manager is not able to process the incoming request. The reason is provided in the error message."
+    },
+    "ErrorResponse": {
+      "description": "Error response.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/ErrorDefinition",
+          "description": "The error details.",
+          "type": "object"
+        }
+      }
     }
   },
   "parameters": {

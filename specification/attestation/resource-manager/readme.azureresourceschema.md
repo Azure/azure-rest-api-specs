@@ -19,7 +19,7 @@ output-folder: $(azureresourceschema-folder)/schemas
 
 # all the input files in this apiVersion
 input-file:
-  - Microsoft.Attestation/stable/2018-09-01/attestation.json
+  - Microsoft.Attestation/stable/2018-09-01-preview/attestation.json
   - Microsoft.Attestation/stable/2020-10-01/attestation.json
 
 ```

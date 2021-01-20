@@ -135,6 +135,12 @@
             "schema": {
               "$ref": "#/definitions/RoleAssignmentListResult"
             }
+          },
+          "default": {
+            "description": "error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-pageable": {
@@ -180,6 +186,15 @@
             "description": "OK - Returns information about the role assignment.",
             "schema": {
               "$ref": "#/definitions/RoleAssignment"
+            }
+          },
+          "204": {
+            "description": "Deleted - Indicates correct deletion without returning additional info"
+          },
+          "default": {
+            "description": "error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -230,6 +245,12 @@
             "schema": {
               "$ref": "#/definitions/RoleAssignment"
             }
+          },
+          "default": {
+            "description": "error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-examples": {
@@ -269,6 +290,12 @@
             "description": "OK - Returns information about the role assignment.",
             "schema": {
               "$ref": "#/definitions/RoleAssignment"
+            }
+          },
+          "default": {
+            "description": "error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -417,6 +444,12 @@
             "schema": {
               "$ref": "#/definitions/RoleAssignmentListResult"
             }
+          },
+          "default": {
+            "description": "error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-pageable": {
@@ -462,6 +495,12 @@
             "description": "OK - Returns an array of role assignments.",
             "schema": {
               "$ref": "#/definitions/RoleAssignmentListResult"
+            }
+          },
+          "default": {
+            "description": "error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -540,6 +579,28 @@
         "conditionVersion": {
           "type": "string",
           "description": "Version of the condition. Currently accepted value is '2.0'"
+        },
+        "createdOn": {
+          "type": "string",
+          "description": "Time it was created",
+          "format": "date-time"
+        },
+        "updatedOn": {
+          "type": "string",
+          "description": "Time it was updated",
+          "format": "date-time"
+        },
+        "createdBy": {
+          "type": "string",
+          "description": "Id of the user who created the assignment"
+        },
+        "updatedBy": {
+          "type": "string",
+          "description": "Id of the user who updated the assignment"
+        },
+        "delegatedManagedIdentityResourceId": {
+          "type": "string",
+          "description": "Id of the delegated managed identity resource"
         }
       },
       "description": "Role assignment properties with scope."
