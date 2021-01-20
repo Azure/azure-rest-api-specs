@@ -772,43 +772,44 @@
       "type": "object",
       "properties": {
         "publisherId": {
-        "publisherId": {
-          "description": "Gets or sets publisher Id",
-          "type": "string"
-        },
-        "adminAction": {
-          "description": "Gets or sets admin action",
-          "type": "string",
-          "enum": [
-            "Approved",
-            "Rejected"
-          ],
-          "x-ms-enum": {
-            "name": "adminAction",
-            "modelAsString": true
-          }
-        },
-        "existingRequestedPlans": {
-          "description": "Gets or sets existing plans ids ( of existing requests)",
-          "type": "array",
-          "items": {
+          "publisherId": {
+            "description": "Gets or sets publisher Id",
+            "type": "string"
+          },
+          "adminAction": {
+            "description": "Gets or sets admin action",
+            "type": "string",
+            "enum": [
+              "Approved",
+              "Rejected"
+            ],
+            "x-ms-enum": {
+              "name": "adminAction",
+              "modelAsString": true
+            }
+          },
+          "existingRequestedPlans": {
+            "description": "Gets or sets existing plans ids ( of existing requests)",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "approvedPlans": {
+            "description": "Gets or sets Approved plans ids, empty in case of rejected",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "comment": {
+            "description": "Gets or sets admin comment",
+            "type": "string"
+          },
+          "user": {
+            "description": "Gets or sets admin details",
             "type": "string"
           }
-        },
-        "approvedPlans": {
-          "description": "Gets or sets Approved plans ids, empty in case of rejected",
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "comment": {
-          "description": "Gets or sets admin comment",
-          "type": "string"
-        },
-        "user": {
-          "description": "Gets or sets admin details",
-          "type": "string"
         }
       }
     }
