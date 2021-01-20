@@ -227,7 +227,7 @@
           }
         ],
         "x-ms-pageable": {
-          "nextLinkName": null
+          "nextLinkName": "nextLink"
         },
         "responses": {
           "200": {
@@ -419,17 +419,17 @@
               "$ref": "#/definitions/netAppAccount"
             }
           },
-          "201": {
-            "description": "OK - account created",
+          "202": {
+            "description": "Accepted",
             "schema": {
               "$ref": "#/definitions/netAppAccount"
             }
           },
-          "202": {
-            "description": "Accepted -- Update request accepted; operation will complete asynchronously"
-          },
           "default": {
-            "description": "Error response describing why the operation failed."
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/cloudError"
+            }
           }
         },
         "x-ms-long-running-operation": true,
@@ -466,7 +466,7 @@
           }
         ],
         "x-ms-pageable": {
-          "nextLinkName": null
+          "nextLinkName": "nextLink"
         },
         "responses": {
           "200": {
@@ -573,9 +573,6 @@
             "schema": {
               "$ref": "#/definitions/capacityPool"
             }
-          },
-          "202": {
-            "description": "Accepted -- Create or update request accepted; operation will complete asynchronously"
           },
           "default": {
             "description": "Error response describing why the operation failed."
@@ -889,7 +886,10 @@
             "description": "Accepted -- Create or update request accepted; operation will complete asynchronously"
           },
           "default": {
-            "description": "Error response describing why the operation failed."
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/cloudError"
+            }
           }
         },
         "x-ms-long-running-operation": true,
@@ -2780,6 +2780,10 @@
           "items": {
             "$ref": "#/definitions/netAppAccount"
           }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "URL to get the next set of results."
         }
       }
     },
@@ -3050,6 +3054,10 @@
           "items": {
             "$ref": "#/definitions/capacityPool"
           }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "URL to get the next set of results."
         }
       }
     },
@@ -4776,6 +4784,30 @@
           "description": "Vault Name"
         }
       }
+    },
+    "cloudError": {
+      "x-ms-external": true,
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/cloudErrorBody",
+          "description": "Cloud error body."
+        }
+      },
+      "description": "An error response from the service."
+    },
+    "cloudErrorBody": {
+      "x-ms-external": true,
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "An identifier for the error. Codes are invariant and are intended to be consumed programmatically."
+        },
+        "message": {
+          "type": "string",
+          "description": "A message describing the error, intended to be suitable for display in a user interface."
+        }
+      },
+      "description": "An error response from the service."
     }
   },
   "parameters": {
