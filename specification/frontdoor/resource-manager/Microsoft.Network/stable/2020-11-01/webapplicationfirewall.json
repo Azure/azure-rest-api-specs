@@ -1,4 +1,3 @@
-  
 {
   "swagger": "2.0",
   "info": {
@@ -314,6 +313,14 @@
             "$ref": "#/definitions/RoutingRuleLink"
           }
         },
+        "securityPolicyLinks": {
+          "description": "Describes Security Policy associated with this Web Application Firewall policy.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/SecurityPolicyLink"
+          }
+        },
         "provisioningState": {
           "readOnly": true,
           "type": "string",
@@ -339,24 +346,24 @@
       }
     },
     "Sku": {
-    "description": "The pricing tier of the web application firewall policy.",
-    "properties": {
-      "name": {
-        "description": "Name of the pricing tier.",
-        "enum": [
-          "Classic_AzureFrontDoor",
-          "Standard_AzureFrontDoor",
-          "Premium_AzureFrontDoor"
-        ],
-        "type": "string",
-        "x-ms-enum": {
-          "name": "SkuName",
-          "modelAsString": true
+      "description": "The pricing tier of the web application firewall policy.",
+      "properties": {
+        "name": {
+          "description": "Name of the pricing tier.",
+          "enum": [
+            "Classic_AzureFrontDoor",
+            "Standard_AzureFrontDoor",
+            "Premium_AzureFrontDoor"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "SkuName",
+            "modelAsString": true
+          }
         }
-      }
+      },
+      "type": "object"
     },
-    "type": "object"
-  },
     "WebApplicationFirewallPolicyList": {
       "description": "Defines a list of WebApplicationFirewallPolicies. It contains a list of WebApplicationFirewallPolicy objects and a URL link to get the next set of results.",
       "properties": {
@@ -822,7 +829,8 @@
             "RequestHeaderNames",
             "RequestCookieNames",
             "QueryStringArgNames",
-            "RequestBodyPostArgNames"
+            "RequestBodyPostArgNames",
+            "RequestBodyJsonArgNames"
           ],
           "description": "The variable type to be excluded.",
           "x-ms-enum": {
@@ -919,6 +927,17 @@
     },
     "RoutingRuleLink": {
       "description": "Defines the Resource ID for a Routing Rule.",
+      "type": "object",
+      "readOnly": true,
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Resource ID."
+        }
+      }
+    },
+    "SecurityPolicyLink": {
+      "description": "Defines the Resource ID for a Security Policy.",
       "type": "object",
       "readOnly": true,
       "properties": {
