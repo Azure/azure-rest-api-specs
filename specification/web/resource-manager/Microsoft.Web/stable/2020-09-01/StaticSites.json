@@ -2724,8 +2724,18 @@
       ],
       "properties": {
         "properties": {
-          "$ref": "./CommonDefinitions.json#/definitions/PrivateLinkResourcesWrapper",
-          "description": "Core resource properties",
+          "description": "PrivateLinkARMResources resource specific properties",
+          "required": [
+            "value"
+          ],
+          "properties": {
+            "value": {
+              "type": "array",
+              "items": {
+                "$ref": "./CommonDefinitions.json#/definitions/PrivateLinkResource"
+              }
+            }
+          },
           "x-ms-client-flatten": true
         }
       }
