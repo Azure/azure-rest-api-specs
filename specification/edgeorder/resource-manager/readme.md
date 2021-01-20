@@ -36,6 +36,6 @@ These settings apply only when `--tag=package-2020-12-preview` is specified on t
 
 ``` yaml $(tag) == 'package-2020-12-preview'
 input-file:
-- Microsoft.EdgeOrder/2020-12-01-preview/edgeorder.json
+- Microsoft.EdgeOrder/preview/2020-12-01-preview/edgeorder.json
 ```
 ---
