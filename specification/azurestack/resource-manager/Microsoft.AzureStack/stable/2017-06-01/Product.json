@@ -150,7 +150,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.AzureStack/registrations/{registrationName}/products/_all/getProducts": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.AzureStack/registrations/{registrationName}/products/{productName}/getProducts": {
       "post": {
         "x-ms-examples": {
           "Returns a list of products.": {
@@ -171,6 +171,9 @@
           },
           {
             "$ref": "AzureStack.json#/parameters/RegistrationNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ProductNameParameter"
           },
           {
             "$ref": "#/parameters/DeviceConfigurationParameter"
