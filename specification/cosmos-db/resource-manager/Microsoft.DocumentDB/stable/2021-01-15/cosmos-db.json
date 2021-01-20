@@ -6066,7 +6066,7 @@
           "readOnly": true,
           "description": "List of Private Endpoint Connections configured for the Cosmos DB account.",
           "items": {
-            "$ref": "#/definitions/PrivateEndpointConnection"
+            "$ref": "../../stable/2021-01-15/privateEndpointConnection.json#/definitions/PrivateEndpointConnection"
           }
         },
         "enableMultipleWriteLocations": {
@@ -7105,11 +7105,11 @@
         "indexingMode": {
           "description": "Indicates the indexing mode.",
           "type": "string",
-          "default": "Consistent",
+          "default": "consistent",
           "enum": [
-            "Consistent",
-            "Lazy",
-            "None"
+            "consistent",
+            "lazy",
+            "none"
           ],
           "x-ms-enum": {
             "name": "IndexingMode",
@@ -7231,8 +7231,8 @@
           "description": "Sort order for composite paths.",
           "type": "string",
           "enum": [
-            "Ascending",
-            "Descending"
+            "ascending",
+            "descending"
           ],
           "x-ms-enum": {
             "name": "CompositePathSortOrder",
@@ -7828,61 +7828,6 @@
       "x-ms-enum": {
         "name": "NetworkAclBypass",
         "modelAsString": true
-      }
-    },
-    "PrivateEndpointConnection": {
-      "description": "A private endpoint connection",
-      "type": "object",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/PrivateEndpointConnectionProperties",
-          "description": "Resource properties.",
-          "x-ms-client-flatten": true
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ProxyResource"
-        }
-      ]
-    },
-    "PrivateEndpointConnectionProperties": {
-      "description": "Properties of a private endpoint connection.",
-      "type": "object",
-      "properties": {
-        "privateEndpoint": {
-          "$ref": "#/definitions/PrivateEndpointProperty",
-          "description": "Private endpoint which the connection belongs to."
-        },
-        "privateLinkServiceConnectionState": {
-          "$ref": "#/definitions/PrivateLinkServiceConnectionStateProperty",
-          "description": "Connection State of the Private Endpoint Connection."
-        }
-      }
-    },
-    "PrivateEndpointProperty": {
-      "type": "object",
-      "description": "Private endpoint which the connection belongs to.",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "Resource id of the private endpoint."
-        }
-      }
-    },
-    "PrivateLinkServiceConnectionStateProperty": {
-      "type": "object",
-      "description": "Connection State of the Private Endpoint Connection.",
-      "properties": {
-        "status": {
-          "type": "string",
-          "description": "The private link service connection status."
-        },
-        "actionsRequired": {
-          "type": "string",
-          "description": "Any action that is required beyond basic workflow (approve/ reject/ disconnect)",
-          "readOnly": true
-        }
       }
     },
     "Operation": {
