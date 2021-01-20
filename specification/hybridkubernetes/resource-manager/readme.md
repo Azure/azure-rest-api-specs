@@ -53,7 +53,7 @@ These settings apply only when `--tag=package-2021-03-01` is specified on the co
 
 ```yaml $(tag) == 'package-2021-03-01'
 input-file:
-- Microsoft.Kubernetes/GA/2021-03-01/connectedClusters.json
+- Microsoft.Kubernetes/2021-03-01/connectedClusters.json
 ```
 ---
 
