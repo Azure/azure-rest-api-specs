@@ -1522,8 +1522,27 @@
       ],
       "properties": {
         "properties": {
-          "$ref": "#/definitions/RemotePrivateEndpointConnection",
-          "description": "Core resource properties",
+          "description": "PrivateEndpointConnectionResource resource specific properties",
+          "properties": {
+            "provisioningState": {
+              "type": "string",
+              "readOnly": true
+            },
+            "privateEndpoint": {
+              "$ref": "#/definitions/ArmIdWrapper",
+              "description": "PrivateEndpoint of a remote private endpoint connection"
+            },
+            "privateLinkServiceConnectionState": {
+              "$ref": "#/definitions/PrivateLinkConnectionState"
+            },
+            "ipAddresses": {
+              "description": "Private IPAddresses mapped to the remote private endpoint",
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
           "x-ms-client-flatten": true
         }
       }
