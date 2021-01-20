@@ -229,6 +229,68 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkManagers/{networkManagerName}/deploymentStatus": {
+      "parameters": [
+        {
+          "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "#/parameters/ResourceGroupNameParameter"
+        },
+        {
+          "$ref": "#/parameters/NetworkManagerNameParameter"
+        },
+        {
+          "$ref": "./network.json#/parameters/ApiVersionParameter"
+        }
+      ],
+      "post": {
+        "tags": [
+          "NetworkManagers"
+        ],
+        "operationId": "NetworkManagerDeploymentStatus_Post",
+        "description": "Post List of Network Manager Deployment Status.",
+        "parameters": [
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NetworkManagerDeploymentStatusParameter"
+            },
+            "description": "Parameters supplied to the specify which Managed Network deployment status is."
+          },
+          {
+            "$ref": "#/parameters/ListPageSizeParameter"
+          },
+          {
+            "$ref": "#/parameters/ListSkipTokenParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Returns list of deployment status.",
+            "schema": {
+              "$ref": "#/definitions/NetworkManagerDeploymentStatusListResult"
+            }
+          },
+          "default": {
+            "description": "Resource Provider error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "NetworkManageCommitPost": {
+            "$ref": "./examples/NetworkManagerDeploymentStatusPost.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Network/networkManagers": {
       "get": {
         "tags": [
@@ -245,6 +307,12 @@
           },
           {
             "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ListPageSizeParameter"
+          },
+          {
+            "$ref": "#/parameters/ListSkipTokenParameter"
           }
         ],
         "responses": {
@@ -260,6 +328,9 @@
               "$ref": "./network.json#/definitions/CloudError"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
           "NetworkManagersList": {
@@ -287,6 +358,12 @@
           },
           {
             "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ListPageSizeParameter"
+          },
+          {
+            "$ref": "#/parameters/ListSkipTokenParameter"
           }
         ],
         "responses": {
@@ -302,6 +379,9 @@
               "$ref": "./network.json#/definitions/CloudError"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
           "List Network Manager": {
@@ -434,6 +514,104 @@
         }
       },
       "description": "Network Manager Commit."
+    },
+    "NetworkManagerDeploymentStatusParameter": {
+      "properties": {
+        "region": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "List of locations."
+        },
+        "configType": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "AdminPolicy",
+              "UserPolicy",
+              "Routing",
+              "Connectivity"
+            ],
+            "x-ms-enum": {
+              "name": "ConfigType",
+              "modelAsString": true
+            },
+            "description": "Configuration Type."
+          }
+        },
+        "description": "List of Config Types."
+      },
+      "description": "Network Manager Deployment Status Parameter."
+    },
+    "NetworkManagerDeploymentStatusListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NetworkManagerDeploymentStatus"
+          },
+          "description": "Gets a page of Network Manager Deployment Status"
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Gets the URL to get the next page of results."
+        }
+      },
+      "description": "A list of NetworkManagerDeploymentStatus"
+    },
+    "NetworkManagerDeploymentStatus": {
+      "properties": {
+        "commitTime": {
+          "type": "string",
+          "description": "Commit Time."
+        },
+        "region": {
+          "type": "string",
+          "description": "Region."
+        },
+        "deploymentStatus": {
+          "type": "string",
+          "enum": [
+            "NotStarted",
+            "Deploying",
+            "Deployed",
+            "Failed"
+          ],
+          "x-ms-enum": {
+            "name": "DeploymentStatus",
+            "modelAsString": true
+          },
+          "description": "Deployment Status."
+        },
+        "configurationIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "List of configuration ids."
+        },
+        "configType": {
+          "type": "string",
+          "enum": [
+            "AdminPolicy",
+            "UserPolicy",
+            "Routing",
+            "Connectivity"
+          ],
+          "x-ms-enum": {
+            "name": "ConfigType",
+            "modelAsString": true
+          },
+          "description": "Configuration Type."
+        },
+        "errorMessage": {
+          "type": "string",
+          "description": "Error Message."
+        }
+      },
+      "description": "Network Manager Deployment Status."
     }
   },
   "parameters": {
@@ -451,6 +629,25 @@
       "required": true,
       "type": "string",
       "description": "The name of the network manager.",
+      "x-ms-parameter-location": "method"
+    },
+    "ListPageSizeParameter": {
+      "name": "$top",
+      "description": "May be used to limit the number of results in a page for list queries.",
+      "in": "query",
+      "required": false,
+      "type": "integer",
+      "format": "int32",
+      "minimum": 1,
+      "maximum": 20,
+      "x-ms-parameter-location": "method"
+    },
+    "ListSkipTokenParameter": {
+      "name": "$skiptoken",
+      "description": "Skiptoken is only used if a previous operation returned a partial result. If a previous response contains a nextLink element, the value of the nextLink element will include a skiptoken parameter that specifies a starting point to use for subsequent calls.",
+      "in": "query",
+      "required": false,
+      "type": "string",
       "x-ms-parameter-location": "method"
     }
   }
