@@ -235,7 +235,7 @@
       "description": "can be one of auto, previous, linear, fixed, zero or notFill.",
       "x-nullable": false,
       "x-ms-enum": {
-        "name": "TimeGranularity",
+        "name": "ImputeMode",
         "modelAsString": false,
         "values": [
           {
@@ -335,14 +335,13 @@
     "TimeSeriesPoint": {
       "type": "object",
       "required": [
-        "timestamp",
         "value"
       ],
       "properties": {
         "timestamp": {
           "type": "string",
           "format": "date-time",
-          "description": "Timestamp of a data point (ISO8601 format)."
+          "description": "Optional argument, timestamp of a data point (ISO8601 format)."
         },
         "value": {
           "type": "number",
