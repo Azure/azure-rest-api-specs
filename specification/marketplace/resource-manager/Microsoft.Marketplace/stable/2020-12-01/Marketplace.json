@@ -631,6 +631,119 @@
         }
       }
     },
+    "NewNotifications": {
+      "description": "New plans notification details",
+      "type": "object",
+      "properties": {
+        "offerId": {
+          "description": "Gets offer id",
+          "type": "string"
+        },
+        "displayName": {
+          "description": "Gets offer display name",
+          "type": "string"
+        },
+        "isFuturePlansEnabled": {
+          "description": "Gets a value indicating whether future plans is enabled.",
+          "type": "boolean"
+        },
+        "messageCode": {
+          "description": "Gets or sets the notification message id",
+          "type": "integer"
+        },
+        "icon": {
+          "description": "Gets or sets the icon url",
+          "type": "string"
+        },
+        "plans": {
+          "description": "Gets or sets removed plans notifications",
+          "type": "array",
+          "items": {
+            "type": "#/definitions/PlanNotificationDetails"
+          }
+        }
+      }
+    },
+    "StopSellNotifications": {
+      "description": "Stop sell notification details",
+      "type": "object",
+      "properties": {
+        "offerId": {
+          "description": "Gets offer id",
+          "type": "string"
+        },
+        "displayName": {
+          "description": "Gets offer display name",
+          "type": "string"
+        },
+        "isEntire": {
+          "description": "Gets a value indicating whether entire offer is in stop sell or only few of its plans",
+          "type": "boolean"
+        },
+        "messageCode": {
+          "description": "Gets or sets the notification message id",
+          "type": "integer"
+        },
+        "icon": {
+          "description": "Gets or sets the icon url",
+          "type": "string"
+        },
+        "plans": {
+          "description": "Gets or sets removed plans notifications",
+          "type": "array",
+          "items": {
+            "type": "#/definitions/PlanNotificationDetails"
+          }
+        }
+      }
+    },
+    "ApprovalRequests": {
+      "description": "Approval requests notification details",
+      "type": "object",
+      "properties": {
+        "offerId": {
+          "description": "Gets offer id",
+          "type": "string"
+        },
+        "displayName": {
+          "description": "Gets offer display name",
+          "type": "string"
+        },
+        "publisherId": {
+          "description": "Gets or sets publisher id",
+          "type": "string"
+        },
+        "messageCode": {
+          "description": "Gets or sets the notification message id",
+          "type": "integer"
+        },
+        "icon": {
+          "description": "Gets or sets the icon url",
+          "type": "string"
+        },
+        "plans": {
+          "description": "Gets or sets removed plans notifications",
+          "type": "array",
+          "items": {
+            "type": "#/definitions/PlanNotificationDetails"
+          }
+        }
+      }
+    },
+    "PlanNotificationDetails": {
+      "description": "Plan notification details",
+      "type": "object",
+      "properties": {
+        "planId": {
+          "description": "Gets or sets the plan id",
+          "type": "string"
+        },
+        "PlanDisplayName": {
+          "description": "Gets or sets the plan display name",
+          "type": "string"
+        }
+      }
+    },
     "AdminActionDetails": {
       "description": "Admin action details payload",
       "type": "object",
