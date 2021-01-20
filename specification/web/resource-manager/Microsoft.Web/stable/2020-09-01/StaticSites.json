@@ -1077,7 +1077,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/staticSites/{name}/builds/{prId}/userProvidedFunctionApps": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/staticSites/{name}/builds/{environmentName}/userProvidedFunctionApps": {
       "get": {
         "tags": [
           "StaticSites"
@@ -1097,7 +1097,7 @@
             "type": "string"
           },
           {
-            "name": "prId",
+            "name": "environmentName",
             "in": "path",
             "description": "The stage site identifier.",
             "required": true,
@@ -1113,12 +1113,6 @@
         "responses": {
           "200": {
             "description": "OK.",
-            "schema": {
-              "$ref": "#/definitions/StaticSiteUserProvidedFunctionAppsCollection"
-            }
-          },
-          "202": {
-            "description": "Asynchronous operation in progress.",
             "schema": {
               "$ref": "#/definitions/StaticSiteUserProvidedFunctionAppsCollection"
             }
@@ -1140,7 +1134,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/staticSites/{name}/builds/{prId}/userProvidedFunctionApps/{functionAppName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/staticSites/{name}/builds/{environmentName}/userProvidedFunctionApps/{functionAppName}": {
       "get": {
         "tags": [
           "StaticSites"
@@ -1160,7 +1154,7 @@
             "type": "string"
           },
           {
-            "name": "prId",
+            "name": "environmentName",
             "in": "path",
             "description": "The stage site identifier.",
             "required": true,
@@ -1183,12 +1177,6 @@
         "responses": {
           "200": {
             "description": "OK.",
-            "schema": {
-              "$ref": "#/definitions/StaticSiteUserProvidedFunctionAppARMResource"
-            }
-          },
-          "202": {
-            "description": "Asynchronous operation in progress.",
             "schema": {
               "$ref": "#/definitions/StaticSiteUserProvidedFunctionAppARMResource"
             }
@@ -1225,7 +1213,7 @@
             "type": "string"
           },
           {
-            "name": "prId",
+            "name": "environmentName",
             "in": "path",
             "description": "The stage site identifier.",
             "required": true,
@@ -1305,7 +1293,7 @@
             "type": "string"
           },
           {
-            "name": "prId",
+            "name": "environmentName",
             "in": "path",
             "description": "The stage site identifier.",
             "required": true,
@@ -2475,12 +2463,6 @@
               "$ref": "#/definitions/StaticSiteUserProvidedFunctionAppsCollection"
             }
           },
-          "202": {
-            "description": "Asynchronous operation in progress.",
-            "schema": {
-              "$ref": "#/definitions/StaticSiteUserProvidedFunctionAppsCollection"
-            }
-          },
           "default": {
             "description": "App Service error response.",
             "schema": {
@@ -2534,12 +2516,6 @@
         "responses": {
           "200": {
             "description": "OK.",
-            "schema": {
-              "$ref": "#/definitions/StaticSiteUserProvidedFunctionAppARMResource"
-            }
-          },
-          "202": {
-            "description": "Asynchronous operation in progress.",
             "schema": {
               "$ref": "#/definitions/StaticSiteUserProvidedFunctionAppARMResource"
             }
