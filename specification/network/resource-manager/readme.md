@@ -93,11 +93,7 @@ input-file:
 
 These settings apply only when `--tag=package-2020-08` is specified on the command line.
 
-<<<<<<< HEAD
-```yaml $(tag) == 'package-2020-08'
-=======
 ``` yaml $(tag) == 'package-2020-08'
->>>>>>> f7fa292b3c09370ad03cc5e002a229f0acbcdbd8
 input-file:
   - Microsoft.Network/stable/2020-08-01/applicationGateway.json
   - Microsoft.Network/stable/2020-08-01/applicationSecurityGroup.json
@@ -150,10 +146,6 @@ input-file:
   - Microsoft.Network/stable/2020-08-01/cloudServiceNetworkInterface.json
   - Microsoft.Network/stable/2020-08-01/cloudServicePublicIpAddress.json
 ```
-<<<<<<< HEAD
-=======
-
->>>>>>> f7fa292b3c09370ad03cc5e002a229f0acbcdbd8
 ### Tag: package-2020-07
 
 These settings apply only when `--tag=package-2020-07` is specified on the command line.
