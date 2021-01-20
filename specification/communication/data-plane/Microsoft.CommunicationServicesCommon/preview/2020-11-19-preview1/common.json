@@ -9,6 +9,7 @@
   "definitions": {
     "CommunicationErrorResponse": {
       "description": "The Communication Services error.",
+      "type": "object",
       "required": [
         "error"
       ],
@@ -21,6 +22,7 @@
     },
     "CommunicationError": {
       "description": "The Communication Services error.",
+      "type": "object",
       "required": [
         "code",
         "message"
@@ -63,18 +65,19 @@
         "unknown",
         "communicationUser",
         "phoneNumber",
-        "callingApplication"
+        "callingApplication",
+        "microsoftTeamsUser"
       ],
       "x-ms-enum": {
         "name": "CommunicationIdentifierKind",
         "modelAsString": true
       }
     },
-    "CommunicationIdentifier": {
+    "CommunicationIdentifierModel": {
       "description": "Identifies a participant in Azure Communication services. A participant is, for example, a phone number or an Azure communication user.",
+      "type": "object",
       "required": [
-        "kind",
-        "id"
+        "kind"
       ],
       "properties": {
         "kind": {
@@ -87,8 +90,15 @@
         },
         "phoneNumber": {
           "type": "string",
-          "readOnly": true,
           "description": "The phone number in E.164 format."
+        },
+        "microsoftTeamsUserId": {
+          "type": "string",
+          "description": "The AAD object Id of the Microsoft Teams user."
+        },
+        "isAnonymous": {
+          "type": "boolean",
+          "description": "True if the identifier is anonymous."
         }
       }
     }
