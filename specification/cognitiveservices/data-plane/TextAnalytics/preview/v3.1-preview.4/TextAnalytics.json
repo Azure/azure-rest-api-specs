@@ -1790,12 +1790,14 @@
           "$ref": "#/definitions/Entity"
         },
         {
-          "required": [
-            "isNegated"
-          ],
           "properties": {
-            "isNegated": {
-              "type": "boolean"
+            "assertion": {
+              "type": "object",
+              "$ref": "#/definitions/HealthcareAssertion"
+            },
+            "name": {
+              "description": "Preferred name for the entity. Example: 'histologically' would have a 'name' of 'histologic'.",
+              "type": "string"
             },
             "links": {
               "description": "Entity references in known data sources.",
@@ -1810,27 +1812,82 @@
     },
     "HealthcareRelation": {
       "type": "object",
+      "description": "Every relation is an entity graph of a certain entityType, where all entities are connected and have specific roles within the relation context.",
       "required": [
         "relationType",
-        "bidirectional",
-        "source",
-        "target"
+        "entities"
       ],
       "properties": {
         "relationType": {
           "description": "Type of relation. Examples include: `DosageOfMedication` or 'FrequencyOfMedication', etc.",
           "type": "string"
         },
-        "bidirectional": {
-          "description": "If true the relation between the entities is bidirectional, otherwise directionality is source to target.",
-          "type": "boolean"
+        "entities": {
+          "description": "The entities in the relation.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/HealthcareRelationEntity"
+          }
+        }
+      }
+    },
+    "HealthcareAssertion": {
+      "type": "object",
+      "properties": {
+        "conditionality": {
+          "description": "Describes any conditionality on the entity.",
+          "type": "string",
+          "enum": [
+            "Hypothetical",
+            "Conditional"
+          ],
+          "x-ms-enum": {
+            "name": "Conditionality",
+            "modelAsString": false
+          }
         },
-        "source": {
-          "description": "Reference link to the source entity.",
+        "certainty": {
+          "description": "Describes the entities certainty and sentiment.",
+          "type": "string",
+          "enum": [
+            "Positive",
+            "Positive Possible",
+            "Neutral Possible",
+            "Negative Possible",
+            "Negative"
+          ],
+          "x-ms-enum": {
+            "name": "Certainty",
+            "modelAsString": false
+          }
+        },
+        "association": {
+          "description": "Describes if the entity is the subject of the text or if it describes someone else.",
+          "type": "string",
+          "enum": [
+            "subject",
+            "other"
+          ],
+          "x-ms-enum": {
+            "name": "Association",
+            "modelAsString": false
+          }
+        }
+      }
+    },
+    "HealthcareRelationEntity": {
+      "type": "object",
+      "required": [
+        "ref",
+        "role"
+      ],
+      "properties": {
+        "ref": {
+          "description": "Reference link object, using a JSON pointer RFC 6901 (URI Fragment Identifier Representation), pointing to the entity .",
           "type": "string"
         },
-        "target": {
-          "description": "Reference link to the target entity.",
+        "role": {
+          "description": "Role of entity in the relationship. For example: 'CD20-positive diffuse large B-cell lymphoma' has the following entities with their roles in parenthesis:  CD20 (GeneOrProtein), Positive (Expression), diffuse large B-cell lymphoma (Diagnosis).",
           "type": "string"
         }
       }
