@@ -3887,15 +3887,18 @@
       "properties": {
         "healthCheckName": {
           "type": "string",
-          "description": "Represents the name of the health check operation performed."
+          "description": "Represents the name of the health check operation performed.",
+          "readOnly": true
         },
         "healthCheckResult": {
           "type": "string",
-          "description": "Represents the Health state of the health check we performed."
+          "description": "Represents the Health state of the health check we performed.",
+          "readOnly": true
         },
         "additionalFailureDetails": {
           "$ref": "#/definitions/SessionHostHealthCheckFailureDetails",
-          "description": "Additional detailed information on the failure."
+          "description": "Additional detailed information on the failure.",
+          "readOnly": true
         }
       }
     },
@@ -3905,17 +3908,20 @@
       "properties": {
         "message": {
           "type": "string",
-          "description": "Failure message: hints on what is wrong and how to recover."
+          "description": "Failure message: hints on what is wrong and how to recover.",
+          "readOnly": true
         },
         "errorCode": {
           "type": "integer",
           "format": "int32",
-          "description": "Error code corresponding for the failure."
+          "description": "Error code corresponding for the failure.",
+          "readOnly": true
         },
         "lastHealthCheckInUTC": {
           "format": "date-time",
           "type": "string",
-          "description": "The timestamp of the last update."
+          "description": "The timestamp of the last update.",
+          "readOnly": true
         }
       }
     },
