@@ -63,9 +63,9 @@ Refer to [Oad Docs](https://github.com/Azure/openapi-diff/tree/master/docs) for 
 Run linter locally:
 ```
 npm install -g autorest
-autorest --validation --azure-validator --input-file=<path-to-spec>
+autorest --validation --azure-validator --use=@microsoft.azure/classic-openapi-validator@latest --use=@microsoft.azure/openapi-validator@latest --input-file=<path-to-spec> 
 or
-autorest --validation --azure-validator <path-to-readme>
+autorest --validation --azure-validator --use=@microsoft.azure/classic-openapi-validator@latest --use=@microsoft.azure/openapi-validator@latest [--tag=<readme tag>] <path-to-readme>
 
 ```
 Please see [readme](https://github.com/Azure/azure-openapi-validator/blob/master/README.md) for how to install or run tool in details.
