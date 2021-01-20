@@ -17,6 +17,11 @@ batch:
   - tag: package-access-control-2020-02-01-preview
   - tag: package-monitoring-2019-11-01-preview
   - tag: package-vnet-2019-06-01-preview
+  - tag: package-spark-2020-12-01
+  - tag: package-artifacts-2020-12-01
+  - tag: package-access-control-2020-12-01
+  - tag: package-monitoring-2020-12-01
+  - tag: package-vnet-2020-12-01
 ```
 
 ### Tag:  package-spark-2019-11-01-preview and go
@@ -29,6 +34,16 @@ namespace: spark
 output-folder: $(go-sdk-folder)/services/preview/synapse/2019-11-01-preview/$(namespace)
 ```
 
+### Tag:  package-spark-2020-12-01 and go
+
+These settings apply only when `--tag=package-spark-2020-12-01 --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag) == 'package-spark-2020-12-01' && $(go)
+namespace: spark
+output-folder: $(go-sdk-folder)/services/stable/synapse/2020-12-01/$(namespace)
+```
+
 ### Tag:  package-artifacts-2019-06-01-preview and go
 
 These settings apply only when `--tag=package-artifacts-2019-06-01-preview --go` is specified on the command line.
@@ -37,6 +52,16 @@ Please also specify `--go-sdk-folder=<path to the root directory of your azure-s
 ``` yaml $(tag) == 'package-artifacts-2019-06-01-preview' && $(go)
 namespace: artifacts
 output-folder: $(go-sdk-folder)/services/preview/synapse/2019-06-01-preview/$(namespace)
+```
+
+### Tag:  package-artifacts-2020-12-01 and go
+
+These settings apply only when `--tag=package-artifacts-2020-12-01 --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag) == 'package-artifacts-2020-12-01' && $(go)
+namespace: artifacts
+output-folder: $(go-sdk-folder)/services/stable/synapse/2020-12-01/$(namespace)
 ```
 
 ### Tag:  package-access-control-2020-02-01-preview and go
@@ -49,6 +74,16 @@ namespace: accesscontrol
 output-folder: $(go-sdk-folder)/services/preview/synapse/2020-02-01-preview/$(namespace)
 ```
 
+### Tag:  package-access-control-2020-12-01 and go
+
+These settings apply only when `--tag=package-access-control-2020-12-01 --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag) == 'package-access-control-2020-12-01' && $(go)
+namespace: accesscontrol
+output-folder: $(go-sdk-folder)/services/stable/synapse/2020-12-01/$(namespace)
+```
+
 ### Tag: package-monitoring-2019-11-01-preview
 
 These settings apply only when `--tag=package-monitoring-2019-11-01-preview --go` is specified on the command line.
@@ -59,6 +94,16 @@ namespace: monitoring
 output-folder: $(go-sdk-folder)/services/preview/synapse/2019-11-01-preview/$(namespace)
 ```
 
+### Tag: package-monitoring-2020-12-01
+
+These settings apply only when `--tag=package-monitoring-2020-12-01 --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag) == 'package-monitoring-2020-12-01' && $(go)
+namespace: monitoring
+output-folder: $(go-sdk-folder)/services/stable/synapse/2020-12-01/$(namespace)
+```
+
 ### Tag:  package-vnet-2019-06-01-preview and go
 
 These settings apply only when `--tag=package-vnet-2019-06-01-preview --go` is specified on the command line.
@@ -67,4 +112,14 @@ Please also specify `--go-sdk-folder=<path to the root directory of your azure-s
 ``` yaml $(tag) == 'package-vnet-2019-06-01-preview' && $(go)
 namespace: managedvirtualnetwork
 output-folder: $(go-sdk-folder)/services/preview/synapse/2019-06-01-preview/$(namespace)
+```
+
+### Tag:  package-vnet-2020-12-01 and go
+
+These settings apply only when `--tag=package-vnet-2020-12-01 --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag) == 'package-vnet-2020-12-01' && $(go)
+namespace: managedvirtualnetwork
+output-folder: $(go-sdk-folder)/services/stable/synapse/2020-12-01/$(namespace)
 ```
