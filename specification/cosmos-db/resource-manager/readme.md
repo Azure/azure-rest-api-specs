@@ -39,6 +39,8 @@ These settings apply only when `--tag=package-2021-01` is specified on the comma
 input-file:
   - Microsoft.DocumentDB/stable/2021-01-15/cosmos-db.json
   - Microsoft.DocumentDB/stable/2021-01-15/notebook.json
+  - Microsoft.DocumentDB/stable/2021-01-15/privateLinkResources.json
+  - Microsoft.DocumentDB/stable/2021-01-15/privateEndpointConnection.json
 ```
 ### Tag: package-2020-09
 
