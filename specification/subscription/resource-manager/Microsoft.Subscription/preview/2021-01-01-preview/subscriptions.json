@@ -65,86 +65,6 @@
       }
     },
     "/providers/billingAccount/{billingAccountId}/providers/Microsoft.Subscription/Policies/default": {
-      "put": {
-        "description": "Create Billing Account Policy.",
-        "operationId": "BillingAccount_CreatePolicy",
-        "x-ms-examples": {
-          "CreateAlias": {
-            "$ref": "./examples/createBillingAccountPolicy.json"
-          }
-        },
-        "x-ms-long-running-operation": true,
-        "responses": {
-          "200": {
-            "description": "Normal response for a successful query.",
-            "schema": {
-              "$ref": "#/definitions/BillingAccountPoliciesResponse"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponseBody"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/billingAccountIdParameter"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/PutBillingAccountPoliciesRequest"
-            }
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          }
-        ]
-      },
-      "patch": {
-        "description": "Patch Billing Account Policy.",
-        "operationId": "BillingAccount_PatchPolicy",
-        "x-ms-examples": {
-          "CreateAlias": {
-            "$ref": "./examples/patchBillingAccountPolicy.json"
-          }
-        },
-        "x-ms-long-running-operation": true,
-        "responses": {
-          "200": {
-            "description": "Normal response for a successful query.",
-            "schema": {
-              "$ref": "#/definitions/BillingAccountPoliciesResponse"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponseBody"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/billingAccountIdParameter"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/PatchBillingAccountPoliciesRequest"
-            }
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          }
-        ]
-      },
       "get": {
         "description": "Get Billing Account Policy.",
         "operationId": "BillingAccount_GetPolicy",
@@ -177,7 +97,49 @@
           }
         ]
       }
-    }
+    },
+    "/providers/Microsoft.Subscription/aliases/{aliasName}/redeem": {
+      "post": {
+        "description": "Redeem Alias Subscription.",
+        "operationId": "Subscription_RedeemAlias",
+        "x-ms-examples": {
+          "CreateAlias": {
+            "$ref": "./examples/redeemAlias.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "responses": {
+          "200": {
+            "description": "Normal response for a successful query.",
+            "schema": {
+              "$ref": "#/definitions/PutAliasResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseBody"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/aliasNameParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PutAliasRequest"
+            }
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ]
+      }
+    },
   },
   "definitions": {
     "ErrorResponse": {
@@ -562,48 +524,6 @@
         }
       }
     },
-    "PutBillingAccountPoliciesRequest": {
-      "description": "The parameters required to create a new Billing Account Policy.",
-      "type": "object",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/PutBillingAccountPoliciesRequestProperties",
-          "description": "Put billing account policies request properties."
-        }
-      }
-    },
-    "PatchBillingAccountPoliciesRequest": {
-      "description": "The parameters required to patch a new Billing Account Policy.",
-      "type": "object",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/PutBillingAccountPoliciesRequestProperties",
-          "description": "Put billing account policies request properties."
-        }
-      }
-    },
-    "PutBillingAccountPoliciesRequestProperties": {
-      "description": "Put billing account policies request properties.",
-      "required": [
-        "serviceTenants",
-        "allowTransfers",
-        "allowSubscriptionCreation"
-      ],
-      "properties": {
-        "serviceTenants": {
-          "description": "Service tenant for the billing account.",
-          "type": "array"
-        },
-        "allowTransfers": {
-          "description": "Determine if the transfers are allowed for the billing account",
-          "type": "boolean"
-        },
-        "allowSubscriptionCreation": {
-          "description": "Determine if subscription creation is allowed for the billing account",
-          "type": "boolean"
-        }
-      }
-    },
     "BillingAccountPoliciesResponse": {
       "description": "Billing account policies information.",
       "properties": {
@@ -634,7 +554,10 @@
       "properties": {
         "serviceTenants": {
           "description": "Service tenant for the billing account.",
-          "type": "array"
+          "type": "array",
+          "items":{
+            "type": "string"
+          }
         },
         "allowTransfers": {
           "description": "Determine if the transfers are allowed for the billing account",
