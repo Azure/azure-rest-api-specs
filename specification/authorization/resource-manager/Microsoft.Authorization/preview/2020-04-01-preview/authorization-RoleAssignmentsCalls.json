@@ -440,6 +440,134 @@
         }
       }
     },
+    "providers/microsoft.authorization/roleassignments/{roleId}": {
+      "delete": {
+        "tags": [
+          "RoleAssignments"
+        ],
+        "operationId": "RoleAssignments_DeleteAtRootById",
+        "description": "Deletes a role assignment.",
+        "parameters": [
+          {
+            "name": "roleId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The ID of the role assignment to delete.",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Returns information about the role assignment.",
+            "schema": {
+              "$ref": "#/definitions/RoleAssignment"
+            }
+          },
+          "default": {
+            "description": "error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetConfigurations": {
+            "$ref": "./examples/DeleteRoleAssignmentById.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "RoleAssignments"
+        ],
+        "operationId": "RoleAssignments_CreateAtRootById",
+        "description": "Creates a role assignment by ID.",
+        "parameters": [
+          {
+            "name": "roleId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The ID of the role assignment to create.",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RoleAssignmentCreateParameters"
+            },
+            "description": "Parameters for the role assignment."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created - Returns the role assignment.",
+            "schema": {
+              "$ref": "#/definitions/RoleAssignment"
+            }
+          },
+          "default": {
+            "description": "error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetConfigurations": {
+            "$ref": "./examples/PutRoleAssignmentById.json"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "RoleAssignments"
+        ],
+        "operationId": "RoleAssignments_GetAtRootById",
+        "description": "Gets a role assignment by ID. If no ID is present returns all role assignments in the tenant",
+        "parameters": [
+          {
+            "name": "roleId",
+            "in": "path",
+            "required": false,
+            "type": "string",
+            "description": "The ID of the role assignment to get.",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Returns the role assignment.",
+            "schema": {
+              "$ref": "#/definitions/RoleAssignment"
+            }
+          },
+          "default": {
+            "description": "error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetConfigurations": {
+            "$ref": "./examples/GetRoleAssignmentById.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Authorization/roleAssignments": {
       "get": {
         "tags": [
