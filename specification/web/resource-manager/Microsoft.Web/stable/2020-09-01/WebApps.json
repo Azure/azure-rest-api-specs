@@ -15264,7 +15264,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "./CommonDefinitions.json#/definitions/PrivateEndpointConnectionResource"
+              "$ref": "#/definitions/PrivateEndpointConnectionResource"
             }
           },
           "default": {
@@ -15309,7 +15309,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "./CommonDefinitions.json#/definitions/PrivateLinkConnectionApprovalRequestResource"
+              "$ref": "#/definitions/PrivateLinkConnectionApprovalRequestResource"
             }
           },
           {
@@ -15323,13 +15323,13 @@
           "200": {
             "description": "OK.",
             "schema": {
-              "$ref": "./CommonDefinitions.json#/definitions/PrivateEndpointConnectionResource"
+              "$ref": "#/definitions/PrivateEndpointConnectionResource"
             }
           },
           "202": {
             "description": "Asynchronous operation in progress.",
             "schema": {
-              "$ref": "./CommonDefinitions.json#/definitions/PrivateEndpointConnectionResource"
+              "$ref": "#/definitions/PrivateEndpointConnectionResource"
             }
           },
           "default": {
@@ -15441,7 +15441,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "./CommonDefinitions.json#/definitions/PrivateLinkResourcesWrapper"
+              "$ref": "#/definitions/PrivateLinkResourcesWrapper"
             }
           },
           "default": {
@@ -20333,6 +20333,16 @@
         }
       }
     },
+    "ArmIdWrapper": {
+      "description": "A wrapper for an ARM resource id",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
     "AzureBlobStorageApplicationLogsConfig": {
       "description": "Application logs azure blob storage configuration.",
       "type": "object",
@@ -22843,6 +22853,133 @@
         }
       }
     },
+    "PrivateEndpointConnectionResource": {
+      "description": "Private Endpoint Connection ARM resource.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "./CommonDefinitions.json#/definitions/ProxyOnlyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/RemotePrivateEndpointConnection",
+          "description": "Core resource properties",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "PrivateLinkConnectionApprovalRequest": {
+      "description": "A request to approve or reject a private endpoint connection",
+      "type": "object",
+      "properties": {
+        "privateLinkServiceConnectionState": {
+          "$ref": "#/definitions/PrivateLinkConnectionState"
+        }
+      }
+    },
+    "PrivateLinkConnectionApprovalRequestResource": {
+      "description": "Private Endpoint Connection Approval ARM resource.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "./CommonDefinitions.json#/definitions/ProxyOnlyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PrivateLinkConnectionApprovalRequest",
+          "description": "Core resource properties",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "PrivateLinkConnectionState": {
+      "description": "The state of a private link connection",
+      "type": "object",
+      "properties": {
+        "status": {
+          "description": "Status of a private link connection",
+          "type": "string"
+        },
+        "description": {
+          "description": "Description of a private link connection",
+          "type": "string"
+        },
+        "actionsRequired": {
+          "description": "ActionsRequired for a private link connection",
+          "type": "string"
+        }
+      }
+    },
+    "PrivateLinkResource": {
+      "description": "A private link resource",
+      "required": [
+        "id",
+        "name",
+        "type",
+        "properties"
+      ],
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "description": "Name of a private link resource",
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "properties": {
+          "$ref": "#/definitions/PrivateLinkResourceProperties",
+          "description": "Properties of a private link resource"
+        }
+      }
+    },
+    "PrivateLinkResourceProperties": {
+      "description": "Properties of a private link resource",
+      "type": "object",
+      "properties": {
+        "groupId": {
+          "description": "GroupId of a private link resource",
+          "type": "string",
+          "readOnly": true
+        },
+        "requiredMembers": {
+          "description": "RequiredMembers of a private link resource",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "requiredZoneNames": {
+          "description": "RequiredZoneNames of a private link resource",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "PrivateLinkResourcesWrapper": {
+      "description": "Wrapper for a collection of private link resources",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PrivateLinkResource"
+          }
+        }
+      }
+    },
     "ProcessInfo": {
       "description": "Process Information.",
       "type": "object",
@@ -23328,6 +23465,23 @@
             }
           },
           "x-ms-client-flatten": true
+        }
+      }
+    },
+    "RemotePrivateEndpointConnection": {
+      "description": "A remote private endpoint connection",
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "type": "string",
+          "readOnly": true
+        },
+        "privateEndpoint": {
+          "$ref": "#/definitions/ArmIdWrapper",
+          "description": "PrivateEndpoint of a remote private endpoint connection"
+        },
+        "privateLinkServiceConnectionState": {
+          "$ref": "#/definitions/PrivateLinkConnectionState"
         }
       }
     },
