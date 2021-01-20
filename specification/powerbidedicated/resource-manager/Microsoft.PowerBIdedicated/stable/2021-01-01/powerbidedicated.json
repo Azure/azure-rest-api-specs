@@ -660,51 +660,6 @@
         }
       }
     },
-    "Resource": {
-      "description": "Represents an instance of an PowerBI Dedicated resource.",
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "string",
-          "readOnly": true,
-          "description": "An identifier that represents the PowerBI Dedicated resource."
-        },
-        "name": {
-          "type": "string",
-          "readOnly": true,
-          "description": "The name of the PowerBI Dedicated resource."
-        },
-        "type": {
-          "type": "string",
-          "readOnly": true,
-          "description": "The type of the PowerBI Dedicated resource."
-        },
-        "location": {
-          "type": "string",
-          "description": "Location of the PowerBI Dedicated resource."
-        },
-        "sku": {
-          "$ref": "#/definitions/ResourceSku",
-          "description": "The SKU of the PowerBI Dedicated resource."
-        },
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "Key-value pairs of additional resource provisioning properties."
-        },
-        "systemData": {
-          "$ref": "#/definitions/SystemData",
-          "description": "Metadata pertaining to creation and last modification of the resource."
-        }
-      },
-      "required": [
-        "location",
-        "sku"
-      ],
-      "x-ms-azure-resource": true
-    },
     "DedicatedCapacity": {
       "description": "Represents an instance of a Dedicated Capacity resource.",
       "type": "object",
@@ -815,6 +770,51 @@
           "$ref": "#/definitions/DedicatedCapacityMutableProperties"
         }
       ]
+    },
+    "Resource": {
+      "description": "Represents an instance of an PowerBI Dedicated resource.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "readOnly": true,
+          "description": "An identifier that represents the PowerBI Dedicated resource."
+        },
+        "name": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The name of the PowerBI Dedicated resource."
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The type of the PowerBI Dedicated resource."
+        },
+        "location": {
+          "type": "string",
+          "description": "Location of the PowerBI Dedicated resource."
+        },
+        "sku": {
+          "$ref": "#/definitions/ResourceSku",
+          "description": "The SKU of the PowerBI Dedicated resource."
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Key-value pairs of additional resource provisioning properties."
+        },
+        "systemData": {
+          "$ref": "#/definitions/SystemData",
+          "description": "Metadata pertaining to creation and last modification of the resource."
+        }
+      },
+      "required": [
+        "location",
+        "sku"
+      ],
+      "x-ms-azure-resource": true
     },
     "ResourceSku": {
       "description": "Represents the SKU name and Azure pricing tier for PowerBI Dedicated resource.",
