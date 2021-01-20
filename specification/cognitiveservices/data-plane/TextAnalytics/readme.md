@@ -94,9 +94,9 @@ input-file: preview/v3.1-preview.2/TextAnalytics.json
 
 ### Release 3.1-Preview.3
 
-These settings apply only when `--tag=release_3_2_preview.1` is specified on the command line.
+These settings apply only when `--tag=release_3_1_preview.3` is specified on the command line.
 
-``` yaml $(tag) == 'release_3_2_preview.1'
+``` yaml $(tag) == 'release_3_1_preview.3'
 input-file: preview/v3.1-preview.3/TextAnalytics.json
 ```
 
