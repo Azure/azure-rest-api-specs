@@ -32,6 +32,11 @@ directive:
       group: marketplaceordering marketplace-agreement
     set:
       group: marketplaceordering agreement
+  - where:
+      command: marketplaceordering agreement show-agreement
+    set:
+      command: marketplaceordering agreement show
+      description: 
 
 cli:
   cli-directive:
