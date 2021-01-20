@@ -168,7 +168,7 @@
         "tags": [
           "NetworkGroups"
         ],
-        "operationId": "NetworkGroups_Patch",
+        "operationId": "NetworkGroups_Update",
         "description": "Patch a Network Group.",
         "parameters": [
           {
@@ -176,17 +176,9 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/GroupAction"
+              "$ref": "./network.json#/definitions/TagsObject"
             },
-            "description": "Parameters supplied to update network manager group."
-          },
-          {
-            "name": "If-Match",
-            "in": "header",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "IfMatch",
-            "description": "The ETag of the transformation. Omit this value to always overwrite the current resource. Specify the last-seen ETag value to prevent accidentally overwriting concurrent changes."
+            "description": "Parameters supplied to update network manager group tags."
           }
         ],
         "responses": {
@@ -194,12 +186,6 @@
             "description": "Updated - Returns information about the network manager group tags.",
             "schema": {
               "$ref": "#/definitions/NetworkGroup"
-            },
-            "headers": {
-              "ETag": {
-                "description": "The current entity tag.",
-                "type": "string"
-              }
             }
           },
           "default": {
@@ -358,30 +344,6 @@
         }
       },
       "description": "GroupMembers Item."
-    },
-    "GroupAction": {
-      "properties": {
-        "op": {
-          "type": "string",
-          "enum": [
-            "Add",
-            "Remove"
-          ],
-          "x-ms-enum": {
-            "name": "op",
-            "modelAsString": true
-          }
-        },
-        "path": {
-          "type": "string",
-          "description": "Network manager group property path."
-        },
-        "value": {
-          "type": "string",
-          "description": "Network manager property value."
-        }
-      },
-      "description": "Group action for patch operations."
     }
   },
   "parameters": {

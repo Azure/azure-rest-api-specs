@@ -7,21 +7,23 @@
     "networkManagerName": "testNetworkManager",
     "networkGroupName": "TestNetworkGroup",
     "parameters": {
-      "op": "Add",
-      "path": "/properties/groupMembers",
-      "value": "/subscriptions/subscriptionC/resourceGroup/rg1/providers/Microsoft.Network/virtualnetworks/vnet2"
+      "tags": {
+        "tag1": "value1",
+        "tag2": "value2"
+      }
     }
   },
   "responses": {
     "200": {
-      "headers": {
-        "ETag": "be3cfaa2-3d02-4624-92d7-a26766306c8b"
-      },
       "body": {
         "name": "TestNetworkGroup",
         "id": "/subscriptions/subscriptionC/resourceGroup/rg1/providers/Microsoft.Network/networkManagers/testNetworkManager/networkGroups/TestNetworkGroup",
         "type": "Microsoft.Network/networkManager/networkGroups",
         "etag": "sadf-asdf-asdf-asdf",
+        "tags": {
+          "tag1": "value1",
+          "tag2": "value2"
+        },
         "properties": {
           "displayName": "My Network Groups",
           "description": "A group for all test Virtual Networks",
