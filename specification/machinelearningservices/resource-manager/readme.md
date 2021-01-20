@@ -26,7 +26,7 @@ These are the global settings for the Machine Learning Services API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2020-08-01
+tag: package-2020-09-01-preview
 ```
 
 ### Tag: package-2020-08-01
