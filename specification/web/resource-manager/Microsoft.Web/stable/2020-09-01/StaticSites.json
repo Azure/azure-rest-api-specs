@@ -2124,10 +2124,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "./CommonDefinitions.json#/definitions/RemotePrivateEndpointConnectionWrapper"
-              }
+              "$ref": "./CommonDefinitions.json#/definitions/PrivateEndpointConnectionCollection"
             }
           },
           "default": {
@@ -2141,6 +2138,9 @@
           "Get a list of private endpoint connections associated with a site.": {
             "$ref": "./examples/GetSitePrivateEndpointConnectionList.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },

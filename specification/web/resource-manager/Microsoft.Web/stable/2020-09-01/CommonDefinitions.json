@@ -1492,6 +1492,26 @@
         }
       }
     },
+    "PrivateEndpointConnectionCollection": {
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Collection of resources.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RemotePrivateEndpointConnectionARMResource"
+          }
+        },
+        "nextLink": {
+          "description": "Link to next page of resources.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
     "PrivateEndpointConnectionResource": {
       "description": "Private Endpoint Connection ARM resource.",
       "type": "object",
@@ -1727,52 +1747,38 @@
         }
       }
     },
-    "RemotePrivateEndpointConnection": {
-      "description": "A remote private endpoint connection",
+    "RemotePrivateEndpointConnectionARMResource": {
+      "description": "Remote Private Endpoint Connection ARM resource.",
       "type": "object",
-      "properties": {
-        "provisioningState": {
-          "type": "string",
-          "readOnly": true
-        },
-        "privateEndpoint": {
-          "$ref": "#/definitions/ArmIdWrapper",
-          "description": "PrivateEndpoint of a remote private endpoint connection"
-        },
-        "privateLinkServiceConnectionState": {
-          "$ref": "#/definitions/PrivateLinkConnectionState"
-        },
-        "ipAddresses": {
-          "description": "Private IPAddresses mapped to the remote private endpoint",
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyOnlyResource"
         }
-      }
-    },
-    "RemotePrivateEndpointConnectionWrapper": {
-      "description": "Wrapper for a remote private endpoint connection",
-      "required": [
-        "properties"
       ],
-      "type": "object",
       "properties": {
-        "id": {
-          "type": "string",
-          "readOnly": true
-        },
-        "name": {
-          "description": "Name of a remote private endpoint connection",
-          "type": "string",
-          "readOnly": true
-        },
-        "type": {
-          "type": "string",
-          "readOnly": true
-        },
         "properties": {
-          "$ref": "#/definitions/RemotePrivateEndpointConnection"
+          "description": "RemotePrivateEndpointConnectionARMResource resource specific properties",
+          "properties": {
+            "provisioningState": {
+              "type": "string",
+              "readOnly": true
+            },
+            "privateEndpoint": {
+              "$ref": "#/definitions/ArmIdWrapper",
+              "description": "PrivateEndpoint of a remote private endpoint connection"
+            },
+            "privateLinkServiceConnectionState": {
+              "$ref": "#/definitions/PrivateLinkConnectionState"
+            },
+            "ipAddresses": {
+              "description": "Private IPAddresses mapped to the remote private endpoint",
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "x-ms-client-flatten": true
         }
       }
     },
