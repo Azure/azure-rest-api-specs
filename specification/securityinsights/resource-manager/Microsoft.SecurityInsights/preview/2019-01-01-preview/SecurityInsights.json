@@ -5710,6 +5710,15 @@
           "readOnly": true,
           "type": "string"
         },
+        "metrics": {
+          "description": "Dictionary of metrics, for example the number of alerts in the case",
+          "type": "object",
+          "additionalProperties": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "readOnly": true
+        },
         "owner": {
           "$ref": "#/definitions/UserInfo",
           "description": "Describes a user that the case is assigned to",
@@ -5719,6 +5728,15 @@
           "description": "List of related alert identifiers",
           "items": {
             "description": "related alert id",
+            "type": "string"
+          },
+          "readOnly": true,
+          "type": "array"
+        },
+        "relatedAlertProductNames": {
+          "description": "List of related alert product names",
+          "items": {
+            "description": "related alert product name",
             "type": "string"
           },
           "readOnly": true,
@@ -5819,8 +5837,7 @@
       "required": [
         "title",
         "severity",
-        "status",
-        "startTimeUtc"
+        "status"
       ],
       "type": "object"
     },
