@@ -6,6 +6,7 @@ These settings apply only when `--azureresourceschema` is specified on the comma
 
 ``` yaml $(azureresourceschema) && $(multiapi)
 batch:
+  - tag: schema-apimanagement-2020-06-01-preview
   - tag: schema-apimanagement-2019-12-01-preview
   - tag: schema-apimanagement-2019-12-01
   - tag: schema-apimanagement-2019-01-01
@@ -18,6 +19,52 @@ batch:
 ```
 
 Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
+
+### Tag: schema-apimanagement-2020-06-01-preview and azureresourceschema
+
+``` yaml $(tag) == 'schema-apimanagement-2020-06-01-preview' && $(azureresourceschema)
+output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
+  - Microsoft.ApiManagement/preview/2020-06-01-preview/apimanagement.json
+  - Microsoft.ApiManagement/preview/2020-06-01-preview/apimapis.json
+  - Microsoft.ApiManagement/preview/2020-06-01-preview/apimapisByTags.json
+  - Microsoft.ApiManagement/preview/2020-06-01-preview/apimapiversionsets.json
+  - Microsoft.ApiManagement/preview/2020-06-01-preview/apimauthorizationservers.json
+  - Microsoft.ApiManagement/preview/2020-06-01-preview/apimbackends.json
+  - Microsoft.ApiManagement/preview/2020-06-01-preview/apimcaches.json
+  - Microsoft.ApiManagement/preview/2020-06-01-preview/apimcertificates.json
+  - Microsoft.ApiManagement/preview/2020-06-01-preview/apimcontenttypes.json
+  - Microsoft.ApiManagement/preview/2020-06-01-preview/apimdeletedservices.json
+  - Microsoft.ApiManagement/preview/2020-06-01-preview/apimdeployment.json
+  - Microsoft.ApiManagement/preview/2020-06-01-preview/apimdiagnostics.json
+  - Microsoft.ApiManagement/preview/2020-06-01-preview/apimemailtemplates.json
+  - Microsoft.ApiManagement/preview/2020-06-01-preview/apimgateways.json
+  - Microsoft.ApiManagement/preview/2020-06-01-preview/apimgroups.json
+  - Microsoft.ApiManagement/preview/2020-06-01-preview/apimidentityprovider.json
+  - Microsoft.ApiManagement/preview/2020-06-01-preview/apimissues.json
+  - Microsoft.ApiManagement/preview/2020-06-01-preview/apimloggers.json
+  - Microsoft.ApiManagement/preview/2020-06-01-preview/apimnamedvalues.json
+  - Microsoft.ApiManagement/preview/2020-06-01-preview/apimnetworkstatus.json
+  - Microsoft.ApiManagement/preview/2020-06-01-preview/apimnotifications.json
+  - Microsoft.ApiManagement/preview/2020-06-01-preview/apimopenidconnectproviders.json
+  - Microsoft.ApiManagement/preview/2020-06-01-preview/apimpolicies.json
+  - Microsoft.ApiManagement/preview/2020-06-01-preview/apimpolicydescriptions.json
+  - Microsoft.ApiManagement/preview/2020-06-01-preview/apimportalsettings.json
+  - Microsoft.ApiManagement/preview/2020-06-01-preview/apimproducts.json
+  - Microsoft.ApiManagement/preview/2020-06-01-preview/apimproductsByTags.json
+  - Microsoft.ApiManagement/preview/2020-06-01-preview/apimquotas.json
+  - Microsoft.ApiManagement/preview/2020-06-01-preview/apimregions.json
+  - Microsoft.ApiManagement/preview/2020-06-01-preview/apimreports.json
+  - Microsoft.ApiManagement/preview/2020-06-01-preview/apimsubscriptions.json
+  - Microsoft.ApiManagement/preview/2020-06-01-preview/apimtagresources.json
+  - Microsoft.ApiManagement/preview/2020-06-01-preview/apimtags.json
+  - Microsoft.ApiManagement/preview/2020-06-01-preview/apimtenant.json
+  - Microsoft.ApiManagement/preview/2020-06-01-preview/apimusers.json
+  - Microsoft.ApiManagement/preview/2020-06-01-preview/definitions.json
+
+```
 
 ### Tag: schema-apimanagement-2019-12-01-preview and azureresourceschema
 

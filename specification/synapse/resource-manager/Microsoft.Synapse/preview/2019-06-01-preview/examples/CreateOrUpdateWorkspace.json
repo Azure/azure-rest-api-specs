@@ -13,10 +13,37 @@
           "accountUrl": "https://accountname.dfs.core.windows.net",
           "filesystem": "default"
         },
+        "managedVirtualNetworkSettings": {
+          "preventDataExfiltration": false,
+          "linkedAccessCheckOnTargetResource": false,
+          "allowedAadTenantIdsForLinking": [
+            "740239CE-A25B-485B-86A0-262F29F6EBDB"
+          ]
+        },
+        "purviewConfiguration": {
+          "purviewResourceId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/resourceGroup1/providers/Microsoft.ProjectPurview/accounts/accountname1"
+        },
         "sqlAdministratorLogin": "login",
         "sqlAdministratorLoginPassword": "password",
         "managedVirtualNetwork": "default",
-        "managedResourceGroupName": "workspaceManagedResourceGroupUnique"
+        "managedResourceGroupName": "workspaceManagedResourceGroupUnique",
+        "workspaceRepositoryConfiguration": {
+          "type": "FactoryGitHubConfiguration",
+          "hostName": "",
+          "accountName": "mygithubaccount",
+          "projectName": "myproject",
+          "repositoryName": "myrepository",
+          "collaborationBranch": "master",
+          "rootFolder": "/"
+        },
+        "encryption": {
+          "cmk": {
+            "key": {
+              "name": "default",
+              "keyVaultUrl": "https://vault.azure.net/keys/key1"
+            }
+          }
+        }
       },
       "location": "East US",
       "tags": {
@@ -45,8 +72,17 @@
             "dev": "workspace1.dev.projectarcadia.net",
             "sql": "workspace1.sql.projectarcadia.net"
           },
+          "managedVirtualNetworkSettings": {
+            "preventDataExfiltration": false,
+            "linkedAccessCheckOnTargetResource": false,
+            "allowedAadTenantIdsForLinking": [
+              "740239CE-A25B-485B-86A0-262F29F6EBDB"
+            ]
+          },
+          "purviewConfiguration": {
+            "purviewResourceId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/resourceGroup1/providers/Microsoft.ProjectPurview/accounts/accountname1"
+          },
           "sqlAdministratorLogin": "login",
-          "sqlAdministratorLoginPassword": "password",
           "managedResourceGroupName": "workspaceManagedResourceGroupUnique",
           "managedVirtualNetwork": "default",
           "provisioningState": "Succeeded",
@@ -67,7 +103,18 @@
                 }
               }
             }
-          ]
+          ],
+          "workspaceUID": "999b999q-b888-4b44-bacd-2c222cc2222d",
+          "encryption": {
+            "doubleEncryptionEnabled": true,
+            "cmk": {
+              "status": "Consistent",
+              "key": {
+                "name": "default",
+                "keyVaultUrl": "https://vault.azure.net/keys/key1"
+              }
+            }
+          }
         },
         "tags": {
           "key": "value"
@@ -85,15 +132,35 @@
             "accountUrl": "https://accountname.dfs.core.windows.net",
             "filesystem": "default"
           },
+          "managedVirtualNetworkSettings": {
+            "preventDataExfiltration": false,
+            "linkedAccessCheckOnTargetResource": false,
+            "allowedAadTenantIdsForLinking": [
+              "740239CE-A25B-485B-86A0-262F29F6EBDB"
+            ]
+          },
+          "purviewConfiguration": {
+            "purviewResourceId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/resourceGroup1/providers/Microsoft.ProjectPurview/accounts/accountname1"
+          },
           "connectivityEndpoints": {
             "dev": "workspace1.dev.projectarcadia.net",
             "sql": "workspace1.sql.projectarcadia.net"
           },
           "sqlAdministratorLogin": "login",
-          "sqlAdministratorLoginPassword": "password",
           "managedResourceGroupName": "workspaceManagedResourceGroupUnique",
           "managedVirtualNetwork": "default",
-          "provisioningState": "Provisioning"
+          "provisioningState": "Provisioning",
+          "workspaceUID": "86984b43-b873-4b91-bacd-2ca083a104c7",
+          "encryption": {
+            "doubleEncryptionEnabled": true,
+            "cmk": {
+              "status": "Updating",
+              "key": {
+                "name": "default",
+                "keyVaultUrl": "https://vault.azure.net/keys/key1"
+              }
+            }
+          }
         },
         "tags": {
           "key": "value"

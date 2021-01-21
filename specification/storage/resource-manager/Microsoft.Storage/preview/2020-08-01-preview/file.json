@@ -67,6 +67,9 @@
         "x-ms-examples": {
           "PutFileServices": {
             "$ref": "./examples/FileServicesPut.json"
+          },
+          "PutFileServices_EnableSMBMultichannel": {
+            "$ref": "./examples/FileServicesPut_EnableSMBMultichannel.json"
           }
         },
         "description": "Sets the properties of file services in storage accounts, including CORS (Cross-Origin Resource Sharing) rules. ",
@@ -167,6 +170,9 @@
           },
           "ListDeletedShares": {
             "$ref": "./examples/DeletedFileSharesList.json"
+          },
+          "ListShareSnapshots": {
+            "$ref": "./examples/FileShareSnapshotsList.json"
           }
         },
         "description": "Lists all shares.",
@@ -201,7 +207,8 @@
             "required": false,
             "type": "string",
             "enum": [
-              "deleted"
+              "deleted",
+              "snapshots"
             ],
             "x-ms-enum": {
               "name": "ListSharesExpand",
@@ -265,6 +272,20 @@
               "$ref": "#/definitions/FileShare"
             },
             "description": "Properties of the file share to create."
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "snapshots"
+            ],
+            "x-ms-enum": {
+              "name": "PutSharesExpand",
+              "modelAsString": false
+            },
+            "description": "Optional, used to create a snapshot."
           },
           {
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
@@ -390,6 +411,13 @@
               "modelAsString": false
             },
             "description": "Optional, used to expand the properties within share's properties."
+          },
+          {
+            "name": "x-ms-snapshot",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "description": "Optional, used to retrieve properties of a snapshot."
           }
         ],
         "responses": {
@@ -433,6 +461,13 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "x-ms-snapshot",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "description": "Optional, used to delete a snapshot."
           }
         ],
         "responses": {
@@ -526,6 +561,10 @@
             "shareDeleteRetentionPolicy": {
               "$ref": "./common.json#/definitions/DeleteRetentionPolicy",
               "description": "The file service properties for share soft delete."
+            },
+            "protocolSettings": {
+              "$ref": "#/definitions/ProtocolSettings",
+              "description": "Protocol settings for file service"
             }
           },
           "x-ms-client-flatten": true,
@@ -544,6 +583,33 @@
         }
       ],
       "description": "The properties of File services in storage account."
+    },
+    "ProtocolSettings": {
+      "properties": {
+        "smb": {
+          "$ref": "#/definitions/SmbSetting",
+          "description": "Setting for SMB protocol"
+        }
+      },
+      "description": "Protocol settings for file service"
+    },
+    "SmbSetting": {
+      "properties": {
+        "multichannel": {
+          "$ref": "#/definitions/Multichannel",
+          "description": "Multichannel setting. Applies to Premium FileStorage only."
+        }
+      },
+      "description": "Setting for SMB protocol"
+    },
+    "Multichannel": {
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "Indicates whether multichannel is enabled"
+        }
+      },
+      "description": "Multichannel setting. Applies to Premium FileStorage only."
     },
     "FileShare": {
       "properties": {
@@ -712,6 +778,12 @@
           "format": "int64",
           "readOnly": true,
           "description": "The approximate size of the data stored on the share. Note that this value may not include all recently created or recently resized files."
+        },
+        "snapshotTime": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true,
+          "description": "Creation time of share snapshot returned in the response of list shares with expand param \"snapshots\"."
         }
       },
       "description": "The properties of the file share."

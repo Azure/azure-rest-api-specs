@@ -129,7 +129,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/SparkJob"
-          }
+          },
+          "x-nullable": true
         }
       }
     },
@@ -162,10 +163,12 @@
           }
         },
         "sparkJobDefinition": {
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "pipeline": {
           "uniqueItems": false,
+          "x-nullable": true,
           "type": "array",
           "items": {
             "$ref": "#/definitions/SparkJob"
@@ -176,11 +179,13 @@
         },
         "submitTime": {
           "format": "date-time",
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "endTime": {
           "format": "date-time",
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "queuedDuration": {
           "type": "string"
