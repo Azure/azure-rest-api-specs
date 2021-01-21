@@ -5,8 +5,7 @@
     "workspaceName": "testworkspace",
     "api-version": "2021-03-01-preview",
     "endpointName": "testEndpointName",
-    "deploymentId": "testBatchDeployment",
-    "jobId": "testBatchJobDeployment",
+    "deploymentName": "testBatchDeployment",
     "properties": {
       "properties": {
         "scaleSettings": {
@@ -16,7 +15,10 @@
           "miniBatchSize": 20
         },
         "errorThreshold": 5,
-        "datasetId": "string"
+        "datasetId": "string",
+        "dataset": {
+          "dataInputType": "DatasetId"
+        }
       }
     }
   },
@@ -32,10 +34,13 @@
           },
           "errorThreshold": 5,
           "partitioningScheme": {
-            "partitioningKey": null,
             "miniBatchSize": 20
           },
-          "output": {}
+          "output": {},
+          "datasetId": "string",
+          "dataset": {
+            "dataInputType": "DatasetId"
+          }
         }
       }
     },
@@ -50,10 +55,13 @@
           },
           "errorThreshold": 5,
           "partitioningScheme": {
-            "partitioningKey": null,
             "miniBatchSize": 20
           },
-          "output": {}
+          "output": {},
+          "datasetId": "string",
+          "dataset": {
+            "dataInputType": "DatasetId"
+          }
         }
       }
     }

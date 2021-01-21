@@ -4,8 +4,8 @@
     "resourceGroupName": "resourceGroup-1234",
     "workspaceName": "testworkspace",
     "endpointName": "testBatchEndpoint",
-    "deploymentId": "testBatchJobDeployment",
-    "jobId": "testBatchDeployment",
+    "deploymentName": "testBatchJobDeployment",
+    "id": "testBatchDeployment",
     "api-version": "2021-03-01-preview"
   },
   "responses": {
@@ -20,10 +20,13 @@
           },
           "errorThreshold": 5,
           "partitioningScheme": {
-            "partitioningKey": null,
             "miniBatchSize": 20
           },
-          "output": {}
+          "output": {},
+          "datasetId": "string",
+          "dataset": {
+            "dataInputType": "DatasetId"
+          }
         }
       }
     }
