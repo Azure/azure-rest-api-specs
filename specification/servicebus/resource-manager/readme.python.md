@@ -2,7 +2,7 @@
 
 These settings apply only when `--python` is specified on the command line.
 
-``` yaml !$(track2)
+``` yaml !$(python)
 python:
   azure-arm: true
   license-header: MICROSOFT_MIT_NO_VERSION
@@ -12,9 +12,9 @@ python:
   no-namespace-folders: true
 ```
 
-These settings apply only when `--track2` is specified on the command line.
+These settings apply only when `--python` is specified on the command line.
 
-``` yaml $(track2)
+``` yaml $(python)
 azure-arm: true
 license-header: MICROSOFT_MIT_NO_VERSION
 package-name: azure-mgmt-servicebus
@@ -25,14 +25,14 @@ no-namespace-folders: true
 
 Generate all API versions currently shipped for this package
 
-```yaml $(multiapi) && !$(track2)
+```yaml $(multiapi) && !$(python)
 batch:
   - tag: package-2018-01-preview
   - tag: package-2017-04
   - tag: package-2015-08
 ```
 
-```yaml $(multiapi) && $(track2)
+```yaml $(multiapi) && $(python)
 clear-output-folder: true
 batch:
   - tag: package-2018-01-preview
