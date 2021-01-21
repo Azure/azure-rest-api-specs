@@ -73,6 +73,19 @@
         "modelAsString": true
       }
     },
+    "CommunicationCloud": {
+        "description": "The cloud that the identifier belongs to.",
+        "type": "string",
+        "enum": [
+          "public",
+          "dod",
+          "gcch"
+        ],
+        "x-ms-enum": {
+          "name": "CommunicationCloud",
+          "modelAsString": true
+        }
+      },
     "CommunicationIdentifierModel": {
       "description": "Identifies a participant in Azure Communication services. A participant is, for example, a phone number or an Azure communication user.",
       "type": "object",
@@ -99,6 +112,10 @@
         "isAnonymous": {
           "type": "boolean",
           "description": "True if the identifier is anonymous."
+        },
+        "cloud": {
+          "$ref": "#/definitions/CommunicationCloud",
+          "description": "The cloud that the identifier belongs to."
         }
       }
     }
