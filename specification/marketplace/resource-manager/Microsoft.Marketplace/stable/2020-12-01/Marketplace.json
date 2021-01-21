@@ -213,7 +213,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/ApprovalRequestsDetails"
+              "$ref": "#/definitions/AdminGetApprovalRequestsResponse"
             }
           },
           "default": {
@@ -356,6 +356,7 @@
       "name": "publisherId",
       "in": "query",
       "required": true,
+      "x-ms-parameter-location": "method",
       "type": "string",
       "description": "The publisher id of this offer."
     },
@@ -851,6 +852,40 @@
         "user": {
           "description": "Gets or sets admin details",
           "type": "string"
+        }
+      }
+    },
+    "AdminGetApprovalRequestsResponse": {
+      "description": "Admin action properties data structure",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Gets or sets Id",
+          "type": "string"
+        },
+        "publisherId": {
+          "description": "Gets or sets publisher Id",
+          "type": "string"
+        },
+        "offerId": {
+          "description": "Gets or sets offer Id",
+          "type": "string"
+        },
+        "displayName": {
+          "description": "Gets or sets display name",
+          "type": "string"
+        },
+        "plans": {
+          "description": "Gets or sets plans details",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PlanRequestsDetails"
+          }
+        },
+        "messageCode": {
+          "description": "Gets or sets the notification message id",
+          "type": "integer",
+          "format": "int64"
         }
       }
     },
