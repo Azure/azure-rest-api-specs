@@ -951,99 +951,7 @@
           }
         }
       }
-    },
-    "AlertSimulatorRequestBody": {
-      "type": "object",
-      "description": "Alert Simulator request body.",
-      "properties": {
-        "properties": {
-          "description": "Alert Simulator request body data.",
-          "$ref": "#/definitions/AlertSimulatorRequestProperties"
-        }
-      }
-    },
-    "AlertSimulatorRequestProperties": {
-      "type": "object",
-      "description": "Describes properties of an alert simulation request",
-      "required": [
-        "kind"
-      ],
-      "additionalProperties": true,
-      "properties": {
-        "kind": {
-          "type": "string",
-          "description": "The kind of alert simulation.",
-          "enum": [
-            "Bundles"
-          ],
-          "x-ms-enum": {
-            "name": "SimulationKind",
-            "modelAsString": true,
-            "values": [
-              {
-                "value": "Bundles",
-                "description": "Simulate alerts according to bundles"
-              }
-            ]
-          }
-        }
-      }
-    },
-    "AlertSimulatorBundlesRequestProperties": {
-      "type": "object",
-      "description": "Simulate alerts according to this bundles.",
-      "x-ms-discriminator-value": "Bundles",
-      "properties": {
-        "bundles" : {
-          "type": "array",
-          "description": "Bundles list.",
-          "items": {
-            "$ref": "#/definitions/BundleType"
-          }
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/AlertSimulatorRequestProperties"
-        }
-      ]
-    },
-    "BundleType" : {
-      "type": "string",
-          "description": "Alert Simulator supported bundles.",
-          "enum": [
-            "AppServices",
-            "KeyVaults",
-            "KubernetesService",
-            "SqlServers",
-            "StorageAccounts",
-            "VirtualMachines"
-          ],
-        "x-ms-enum": {
-            "name": "BundleType",
-            "modelAsString": true,
-            "values": [
-              {
-                "value": "AppServices"
-              },
-              {
-                "value": "KeyVaults"
-              },
-              {
-                "value": "KubernetesService"
-              },
-              {
-                "value": "SqlServers"
-              },
-              {
-                "value": "StorageAccounts"
-              },
-              {
-                "value": "VirtualMachines"
-              }
-            ]
-          }
-      }
+    }
   },
   "parameters": {
     "AlertName": {
@@ -1052,16 +960,6 @@
       "required": true,
       "type": "string",
       "description": "Name of the alert object",
-      "x-ms-parameter-location": "method"
-    },
-    "AlertSimulatorRequestBody": {
-      "name": "alertSimulatorRequestBody",
-      "in": "body",
-      "required": true,
-      "description": "Alert Simulator Request Properties",
-      "schema": {
-        "$ref": "#/definitions/AlertSimulatorRequestBody"
-      },
       "x-ms-parameter-location": "method"
     }
   }
