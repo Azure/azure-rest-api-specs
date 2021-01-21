@@ -12,7 +12,7 @@ python:
   no-namespace-folders: true
 ```
 
-These settings apply only when `--track2` is specified on the command line.
+These settings apply only when `--python` is specified on the command line.
 
 ``` yaml $(python)
 azure-arm: true
