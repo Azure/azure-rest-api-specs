@@ -4,7 +4,9 @@
       "from": "+18001110000",
       "to": [
         "+11234567890",
-        "+11234567891"
+        "+11234567891",
+        "+112345678901",
+        "+11234567892"
       ],
       "message": "Hello world!",
       "sendSmsOptions": {
@@ -22,29 +24,17 @@
           {
             "to": "+11234567890",
             "messageId": "Outgoing_20200610203725bfd4ba70-70bf-4f77-925d-c0bdb5161bb3",
-            "httpStatusCode": 202
+            "httpStatusCode": 200
           },
           {
             "to": "+11234567891",
             "messageId": "Outgoing_2020061020025100d1-d07e-4b19-b25d-13525d552822",
-            "httpStatusCode": 202
-          }
-        ]
-      }
-    },
-    "207": {
-      "headers": {},
-      "body": {
-        "value": [
-          {
-            "to": "+11234567890",
-            "messageId": "Outgoing_20200610203725bfd4ba70-70bf-4f77-925d-c0bdb5161bb3",
-            "httpStatusCode": 202
+            "httpStatusCode": 200
           },
           {
             "to": "+112345678901",
             "httpStatusCode": 400,
-            "errorMessage": "Invalid number format"
+            "errorMessage": "Invalid To phone number format."
           },
           {
             "to": "+11234567892",
@@ -52,8 +42,7 @@
             "httpStatusCode": 503,
             "errorMessage": "ServiceUnavailable"
           }
-        ],
-        "nextLink": "/someNextLink"
+        ]
       }
     }
   }

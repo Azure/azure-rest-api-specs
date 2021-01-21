@@ -80,12 +80,6 @@
             "schema": {
               "$ref": "#/definitions/SendSmsResponse"
             }
-          },
-          "207": {
-            "description": "Multi Status",
-            "schema": {
-              "$ref": "#/definitions/SendSmsResponse"
-            }
           }
         },
         "x-ms-pageable": {
@@ -96,7 +90,7 @@
   },
   "definitions": {
     "SendSmsOptions": {
-      "description": "Optional configuration for sending SMS messages",
+      "description": "Optional configuration for sending SMS messages.",
       "type": "object",
       "properties": {
         "enableDeliveryReport": {
@@ -104,7 +98,7 @@
           "type": "boolean"
         },
         "tag": {
-          "description": "Use this field to provide metadata that will then be send back in the corresponding Delivery Report.",
+          "description": "Use this field to provide metadata that will then be sent back in the corresponding Delivery Report.",
           "type": "string"
         }
       }
@@ -123,7 +117,7 @@
           "type": "string"
         },
         "to": {
-          "description": "The recipients' phone number in E.164 format. In this version, a minimum of 1 and upto 100 recipients in the list are supported.",
+          "description": "The recipient's phone number in E.164 format. In this version, a minimum of 1 and upto 100 recipients in the list are supported.",
           "maxLength": 100,
           "minLength": 1,
           "type": "array",
@@ -174,15 +168,15 @@
           "type": "string"
         },
         "messageId": {
-          "description": "The identifier of the outgoing SMS message. Only present if message processed",
+          "description": "The identifier of the outgoing SMS message. Only present if message processed.",
           "type": "string"
         },
         "httpStatusCode": {
-          "description": "HTTP Status code",
+          "description": "HTTP Status code.",
           "type": "integer"
         },
         "errorMessage": {
-          "description": "Optional error message in case of 4xx or 5xx errors",
+          "description": "Optional error message in case of 4xx or 5xx errors.",
           "type": "string"
         }
       }
