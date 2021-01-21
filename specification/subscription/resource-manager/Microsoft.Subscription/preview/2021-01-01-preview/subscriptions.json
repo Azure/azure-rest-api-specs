@@ -64,7 +64,7 @@
         ]
       }
     },
-    "/providers/billingAccount/{billingAccountId}/providers/Microsoft.Subscription/Policies/default": {
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/providers/Microsoft.Subscription/Policies/default": {
       "get": {
         "description": "Get Billing Account Policy.",
         "operationId": "BillingAccount_GetPolicy",
@@ -98,13 +98,13 @@
         ]
       }
     },
-    "/providers/Microsoft.Subscription/aliases/{aliasName}/redeem": {
+    "/providers/Microsoft.Subscription/subscriptions/{subscriptionId}/redeem": {
       "post": {
-        "description": "Redeem Alias Subscription.",
-        "operationId": "Subscription_RedeemAlias",
+        "description": "Redeem subscription.",
+        "operationId": "Subscription_Redeem",
         "x-ms-examples": {
           "CreateAlias": {
-            "$ref": "./examples/redeemAlias.json"
+            "$ref": "./examples/redeemSubscription.json"
           }
         },
         "x-ms-long-running-operation": true,
@@ -124,14 +124,14 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/aliasNameParameter"
+            "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
             "name": "body",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/PutAliasRequest"
+              "$ref": "#/definitions/RedeemSubscriptionRequest"
             }
           },
           {
@@ -139,7 +139,7 @@
           }
         ]
       }
-    },
+    }
   },
   "definitions": {
     "ErrorResponse": {
@@ -366,6 +366,32 @@
         }
       }
     },
+    "RedeemSubscriptionRequest": {
+      "description": "The parameters required to redeem a new subscription.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/RedeemSubscriptionRequestProperties",
+          "description": "Put alias request properties."
+        }
+      }
+    },
+    "RedeemSubscriptionRequestProperties": {
+      "description": "Redeem subscription request properties.",
+      "properties": {
+        "managementGroupId": {
+          "description": "Management group Id for the subscription.",
+          "type": "string"
+        },
+        "tags": {
+          "description": "tags for the subscription",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
     "PutAliasRequest": {
       "description": "The parameters required to create a new subscription.",
       "type": "object",
@@ -562,10 +588,6 @@
         "allowTransfers": {
           "description": "Determine if the transfers are allowed for the billing account",
           "type": "boolean"
-        },
-        "allowSubscriptionCreation": {
-          "description": "Determine if subscription creation is allowed for the billing account",
-          "type": "boolean"
         }
       }
     }
@@ -576,7 +598,7 @@
       "in": "query",
       "required": true,
       "type": "string",
-      "description": "Version of the API to be used with the client request. Current version is 2019-10-01-preview"
+      "description": "Version of the API to be used with the client request. Current version is 2021-01-01-preview"
     },
     "subscriptionIdParameter": {
       "name": "subscriptionId",
