@@ -232,7 +232,7 @@
     },
     "ImputeMode": {
       "type": "string",
-      "description": "can be one of auto, previous, linear, fixed, zero or notFill.",
+      "description": "Can be one of auto, previous, linear, fixed, zero or notFill.",
       "x-nullable": false,
       "x-ms-enum": {
         "name": "ImputeMode",
@@ -420,6 +420,7 @@
         },
         "severity": {
           "type": "array",
+          "readOnly": true,
           "description": "Severity contains the severity score for each input point. For a normal point, the severity score is 0. For an anomaly point, the severity score is in (0, 1] that indicates the severity of the anomaly.",
           "items": {
             "type": "number",
@@ -482,6 +483,7 @@
         "severity": {
           "type": "number",
           "format": "float",
+          "readOnly": true,
           "description": "Severity score of the latest point. For a normal point, the severity score is 0. For an anomaly point, the severity score is in (0, 1] that indicates the severity of the anomaly."
         }
       }
