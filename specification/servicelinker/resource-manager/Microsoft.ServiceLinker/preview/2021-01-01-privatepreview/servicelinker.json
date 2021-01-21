@@ -407,23 +407,20 @@
       "allOf": [
         {
           "$ref": "#/definitions/AuthInfoBase"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "name": {
-              "description": "Username or account name for secret auth.",
-              "type": "string"
-            },
-            "secret": {
-              "description": "Password or account key for secret auth.",
-              "type": "string"
-            }
-          },
-          "required": [
-            "name"
-          ]
         }
+      ],
+      "properties": {
+        "name": {
+          "description": "Username or account name for secret auth.",
+          "type": "string"
+        },
+        "secret": {
+          "description": "Password or account key for secret auth.",
+           "type": "string"
+        }
+      },
+      "required": [
+          "name"
       ]
     },
     "UserAssignedIdentityAuthInfo": {
