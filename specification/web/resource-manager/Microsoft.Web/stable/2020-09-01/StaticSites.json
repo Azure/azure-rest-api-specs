@@ -1564,58 +1564,6 @@
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/staticSites/{name}/customDomains/{domainName}": {
-      "get": {
-        "tags": [
-          "StaticSites"
-        ],
-        "summary": "Gets an existing custom domain for a particular static site.",
-        "description": "Description for Gets an existing custom domain for a particular static site.",
-        "operationId": "StaticSites_GetStaticSiteCustomDomain",
-        "parameters": [
-          {
-            "$ref": "#/parameters/resourceGroupNameParameter"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "Name of the static site resource to search in.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "domainName",
-            "in": "path",
-            "description": "The custom domain name.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/StaticSiteCustomDomainOverviewARMResource"
-            }
-          },
-          "default": {
-            "description": "App Service error response.",
-            "schema": {
-              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Get custom domain for a static site": {
-            "$ref": "./examples/GetStaticSiteCustomDomain.json"
-          }
-        }
-      },
       "put": {
         "tags": [
           "StaticSites"
