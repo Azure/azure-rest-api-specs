@@ -388,6 +388,13 @@
             "description": "A skip token is used to continue retrieving items after an operation returns a partial result. If a previous response contains a nextLink element, the value of the nextLink element will include a skipToken parameter that specifies a starting point to use for subsequent calls.",
             "required": false,
             "type": "string"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "The filter to apply on the access keys. For example, you can use \"$filter=readOnly eq true\" to retrieve only read-only access keys. Properties that support filtering include 'name' and 'readOnly'.",
+            "required": false,
+            "type": "string"
           }
         ],
         "responses": {
