@@ -10818,6 +10818,14 @@
           },
           "type": "array"
         },
+        "parsedPattern": {
+          "description": "Parsed patterns",
+          "items": {
+            "description": "Parsed pattern",
+            "$ref": "#/definitions/ThreatIntelligenceParsedPattern"
+          },
+          "type": "array"
+        },
         "externalId": {
           "description": "External ID of threat intelligence entity",
           "type": "string"
@@ -10859,6 +10867,10 @@
           },
           "type": "array"
         },
+        "language": {
+          "description": "Language of threat intelligence entity",
+          "type": "string"
+        },
         "threatTypes": {
           "description": "Threat types",
           "items": {
@@ -10882,6 +10894,11 @@
         "modified": {
           "description": "Modified by",
           "type": "string"
+        },
+        "extensions": {
+          "description": "Extensions map",
+          "type": "object",
+          "additionalProperties": {}
         }
       },
       "type": "object"
@@ -10895,8 +10912,25 @@
         },
         "phaseName": {
           "description": "Phase name",
-          "type": "integer",
-          "format": "int32"
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "ThreatIntelligenceParsedPattern": {
+      "description": "Describes parsed pattern entity",
+      "properties": {
+        "patternTypeKey": {
+          "description": "Pattern type key",
+          "type": "string"
+        },
+        "patternTypeValues": {
+          "description": "Pattern type keys",
+          "items": {
+            "description": "Pattern type key",
+            "type": "string"
+          },
+          "type": "array"
         }
       },
       "type": "object"
