@@ -8544,8 +8544,7 @@
         },
         "antispamDirection": {
           "description": "The directionality of this mail message",
-          "type": "integer",
-          "format": "int32"
+          "$ref": "#/definitions/AntispamMailDirection"
         },
         "deliveryAction": {
           "description": "The delivery action of this mail message like Delivered, Blocked, Replaced etc",
@@ -8662,7 +8661,7 @@
           "type": "string"
         },
         "clusterQueryStartTime": {
-          "description": "Cluster squery start time",
+          "description": "Cluster query start time",
           "type": "string",
           "format": "date-time"
         },
@@ -10677,6 +10676,38 @@
         }
       },
       "type": "object"
+    },
+    "AntispamMailDirection": {
+      "description": "Email Directionality Status.",
+      "enum": [
+        "Unknown",
+        "Inbound",
+        "Outbound",
+        "Intraorg"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "DeliveryAction",
+        "values": [
+          {
+            "description": "Unknown direction status",
+            "value": "Unknown"
+          },
+          {
+            "description": "Inbound direction status",
+            "value": "Inbound"
+          },
+          {
+            "description": "Outbound direction status",
+            "value": "Outbound"
+          },
+          {
+            "description": "Internal direction status",
+            "value": "Intraorg"
+          }
+        ]
+      }
     },
     "DeliveryAction": {
       "description": "The email delivery action.",
