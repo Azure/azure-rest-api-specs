@@ -399,7 +399,7 @@
       }
     },
     "PrivateStoreNotifications": {
-      "description": "",
+      "description": "Get all private store notifications",
       "type": "object",
       "properties": {
         "stopSellNotifications": {
@@ -565,6 +565,22 @@
       }
     },
     "ApprovalRequestResponse": {
+      "description": "The approval request offer data structure.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ApprovalRequestResponseProperties",
+          "description": "The approval request offer data properties.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "ApprovalRequestResponseProperties": {
       "description": "Created object details",
       "type": "object",
       "properties": {
