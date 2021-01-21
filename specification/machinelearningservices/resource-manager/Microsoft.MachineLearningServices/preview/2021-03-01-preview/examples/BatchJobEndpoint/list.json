@@ -1,0 +1,50 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "resourceGroupName": "resourceGroup-1234",
+    "workspaceName": "testworkspace",
+    "endpointName": "testBatchEndpoint",
+    "api-version": "2020-12-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/resourceGroup-1234/providers/Microsoft.MachineLearningServices/workspaces/testworkspace/batchEndpoints/testEndpointName/jobs/testBatchJob1",
+            "name": "testBatchJob1",
+            "type": "Microsoft.MachineLearningServices/workspaces/batchEndpoints/jobs",
+            "properties": {
+              "scaleSettings": {
+                "nodeCount": 1
+              },
+              "errorThreshold": 5,
+              "partitioningScheme": {
+                "partitioningKey": null,
+                "miniBatchSize": 20
+              },
+              "output": {}
+            }
+          },
+          {
+            "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/resourceGroup-1234/providers/Microsoft.MachineLearningServices/workspaces/testworkspace/batchEndpoints/testEndpointName/jobs/testBatchJob2",
+            "name": "testBatchJob2",
+            "type": "Microsoft.MachineLearningServices/workspaces/batchEndpoints/jobs",
+            "properties": {
+              "scaleSettings": {
+                "nodeCount": 1
+              },
+              "errorThreshold": 5,
+              "partitioningScheme": {
+                "partitioningKey": null,
+                "miniBatchSize": 20
+              },
+              "output": {}
+            }
+          }
+        ],
+        "nextLink": "nextLink"
+      }
+    }
+  }
+}
