@@ -374,48 +374,6 @@
           "nextLinkName": "nextLink"
         }
       }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMariaDB/servers/{serverName}/resetQueryPerformanceInsightData": {
-      "post": {
-        "tags": [
-          "ResetQueryPerformanceInsightData"
-        ],
-        "operationId": "ResetQueryPerformanceInsightData",
-        "x-ms-examples": {
-          "QueryPerformanceInsightResetData": {
-            "$ref": "./examples/QueryPerformanceInsightResetData.json"
-          }
-        },
-        "description": "Reset data for Query Performance Insight.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ServerNameParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/QueryPerformanceInsightResetDataResult"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        }
-      }
     }
   },
   "definitions": {
@@ -753,37 +711,6 @@
           "readOnly": true
         }
       }
-    },
-    "QueryPerformanceInsightResetDataResult": {
-      "description": "Result of Query Performance Insight data reset.",
-      "type": "object",
-      "properties": {
-        "status": {
-          "type": "string",
-          "enum": [
-            "Succeeded",
-            "Failed"
-          ],
-          "x-ms-enum": {
-            "name": "QueryPerformanceInsightResetDataResultState",
-            "modelAsString": true
-          },
-          "description": "Indicates result of the operation."
-        },
-        "message": {
-          "type": "string",
-          "description": "operation message."
-        }
-      }
-    },
-    "CloudError": {
-      "x-ms-external": true,
-      "properties": {
-        "error": {
-          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse"
-        }
-      },
-      "description": "An error response from the Batch service."
     }
   },
   "parameters": {
@@ -793,6 +720,30 @@
       "description": "The name of the server.",
       "required": true,
       "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "QueryIdParameter": {
+      "name": "queryId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The Query-Store query identifier.",
+      "x-ms-parameter-location": "method"
+    },
+    "QueryStatisticIdParameter": {
+      "name": "queryStatisticId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The Query Statistic identifier.",
+      "x-ms-parameter-location": "method"
+    },
+    "WaitStatisticsIdParameter": {
+      "name": "waitStatisticsId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The Wait Statistic identifier.",
       "x-ms-parameter-location": "method"
     }
   }
