@@ -1,0 +1,1960 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "MobileNetworkManagementClient",
+    "description": "The resources in this swagger specification will be used to manage mobile network resources",
+    "version": "2020-06-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MobileNetwork/mobileNetworks/{mobileNetworkName}": {
+      "delete": {
+        "tags": [
+          "MobileNetworks"
+        ],
+        "operationId": "MobileNetworks_Delete",
+        "description": "Deletes the specified mobile network.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "mobileNetworkName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the mobile network."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Delete successful."
+          },
+          "202": {
+            "description": "Accepted. Sets 'Deleting' provisioningState until the operation completes. Returns an operation URI that can be queried to find the current state of the operation."
+          },
+          "204": {
+            "description": "Request successful. Resource does not exist."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete mobile network": {
+            "$ref": "./examples/MobileNetworkDelete.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      },
+      "get": {
+        "tags": [
+          "MobileNetworks"
+        ],
+        "operationId": "MobileNetworks_Get",
+        "description": "Gets information about the specified mobile network.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "mobileNetworkName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of mobile network."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. The operation returns the resulting mobile network resource.",
+            "schema": {
+              "$ref": "#/definitions/MobileNetwork"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get mobile network": {
+            "$ref": "./examples/MobileNetworkGet.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "MobileNetworks"
+        ],
+        "operationId": "MobileNetworks_CreateOrUpdate",
+        "description": "Creates or updates a mobile network.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "mobileNetworkName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the mobile network."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MobileNetwork"
+            },
+            "description": "Parameters supplied to the create or update mobile network operation."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Update successful. The operation returns the resulting mobile network resource.",
+            "schema": {
+              "$ref": "#/definitions/MobileNetwork"
+            }
+          },
+          "201": {
+            "description": "Create successful. The operation returns the resulting mobile network resource.",
+            "schema": {
+              "$ref": "#/definitions/MobileNetwork"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create mobile network": {
+            "$ref": "./examples/MobileNetworkCreate.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      },
+      "patch": {
+        "tags": [
+          "MobileNetworks"
+        ],
+        "operationId": "MobileNetworks_UpdateTags",
+        "description": "Updates a mobile network update tags.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "mobileNetworkName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the mobile network."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "./common.json#/definitions/TagsObject"
+            },
+            "description": "Parameters supplied to update mobile network tags."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Update successful. The operation returns the resulting mobile network resource.",
+            "schema": {
+              "$ref": "#/definitions/MobileNetwork"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update mobile network tags": {
+            "$ref": "./examples/MobileNetworkUpdateTags.json"
+          }
+        }
+      }
+    },
+	"/subscriptions/{subscriptionId}/providers/Microsoft.MobileNetwork/mobileNetworks": {
+      "get": {
+        "tags": [
+          "MobileNetworks"
+        ],
+        "operationId": "MobileNetworks_ListBySubscription",
+        "description": "Lists all the mobile networks in a subscription.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. The operation returns a list of mobile network resources.",
+            "schema": {
+              "$ref": "#/definitions/MobileNetworkListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List all mobile networks": {
+            "$ref": "./examples/MobileNetworkListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MobileNetwork/mobileNetworks": {
+      "get": {
+        "tags": [
+          "MobileNetworks"
+        ],
+        "operationId": "MobileNetworks_ListByResourceGroup",
+        "description": "Lists all the mobile networks in a resource group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. The operation returns a list of mobile network resources.",
+            "schema": {
+              "$ref": "#/definitions/MobileNetworkListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List mobile networks in resource group": {
+            "$ref": "./examples/MobileNetworkListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MobileNetwork/mobileNetworks/{mobileNetworkName}/packetCores/{packetCoreName}": {
+      "delete": {
+        "tags": [
+          "PacketCores"
+        ],
+        "operationId": "PacketCores_Delete",
+        "description": "Deletes the specified packet core.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "mobileNetworkName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the mobile network."
+          },
+          {
+            "name": "packetCoreName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the packet core."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Delete successful."
+          },
+          "202": {
+            "description": "Accepted. Sets 'Deleting' provisioningState until the operation completes. Returns an operation URI that can be queried to find the current state of the operation."
+          },
+          "204": {
+            "description": "Request successful. Resource does not exist."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete packet core resource": {
+            "$ref": "./examples/PacketCoreDelete.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      },
+      "get": {
+        "tags": [
+          "PacketCores"
+        ],
+        "operationId": "PacketCores_Get",
+        "description": "Gets information about the specified packet core.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "mobileNetworkName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the mobile network."
+          },
+          {
+            "name": "packetCoreName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of packet core."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. The operation returns the resulting packet core resource.",
+            "schema": {
+              "$ref": "#/definitions/PacketCore"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get packet core": {
+            "$ref": "./examples/PacketCoreGet.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "PacketCores"
+        ],
+        "operationId": "PacketCores_CreateOrUpdate",
+        "description": "Creates or updates a packet core.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "mobileNetworkName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the mobile network."
+          },
+          {
+            "name": "packetCoreName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the packet core resource."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PacketCore"
+            },
+            "description": "Parameters supplied to the create or update packet core operation."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Update successful. The operation returns the resulting packet core resource.",
+            "schema": {
+              "$ref": "#/definitions/PacketCore"
+            }
+          },
+          "201": {
+            "description": "Create successful. The operation returns the resulting packet core resource.",
+            "schema": {
+              "$ref": "#/definitions/PacketCore"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create packet core": {
+            "$ref": "./examples/PacketCoreCreate.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      },
+      "patch": {
+        "tags": [
+          "PacketCores"
+        ],
+        "operationId": "PacketCores_UpdateTags",
+        "description": "Updates a packet core update tags.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "mobileNetworkName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the mobile network."
+          },
+          {
+            "name": "packetCoreName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the packet core."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "./common.json#/definitions/TagsObject"
+            },
+            "description": "Parameters supplied to update packet core tags."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Update successful. The operation returns the resulting packet core resource.",
+            "schema": {
+              "$ref": "#/definitions/PacketCore"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update packet core tags": {
+            "$ref": "./examples/PacketCoreUpdateTags.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MobileNetwork/mobileNetworks/{mobileNetworkName}/packetCores": {
+      "get": {
+        "tags": [
+          "PacketCores"
+        ],
+        "operationId": "PacketCores_ListByMobileNetwork",
+        "description": "Lists all the packet cores in a mobile network.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "mobileNetworkName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the mobile network."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. The operation returns a list of packet core resources.",
+            "schema": {
+              "$ref": "#/definitions/PacketCoreListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List all packet cores in a mobile network": {
+            "$ref": "./examples/PacketCoreListByMobileNetwork.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MobileNetwork/mobileNetworks/{mobileNetworkName}/sites/{siteName}": {
+      "delete": {
+        "tags": [
+          "Sites"
+        ],
+        "operationId": "Sites_Delete",
+        "description": "Deletes the specified mobile network site.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "mobileNetworkName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the mobile network."
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the mobile network site."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Delete successful."
+          },
+          "202": {
+            "description": "Accepted. Sets 'Deleting' provisioningState until the operation completes. Returns an operation URI that can be queried to find the current state of the operation."
+          },
+          "204": {
+            "description": "Request successful. Resource does not exist."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete mobile network site": {
+            "$ref": "./examples/SiteDelete.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      },
+      "get": {
+        "tags": [
+          "Sites"
+        ],
+        "operationId": "Sites_Get",
+        "description": "Gets information about the specified mobile network site.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "mobileNetworkName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of mobile network."
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the mobile network site."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. The operation returns the resulting mobile network site resource.",
+            "schema": {
+              "$ref": "#/definitions/Site"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get mobile network site": {
+            "$ref": "./examples/SiteGet.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Sites"
+        ],
+        "operationId": "Sites_CreateOrUpdate",
+        "description": "Creates or updates a mobile network site.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "mobileNetworkName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the mobile network site."
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the mobile network site."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Site"
+            },
+            "description": "Parameters supplied to the create or update mobile network site operation."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Update successful. The operation returns the resulting mobile network site resource.",
+            "schema": {
+              "$ref": "#/definitions/Site"
+            }
+          },
+          "201": {
+            "description": "Create successful. The operation returns the resulting mobile network site resource.",
+            "schema": {
+              "$ref": "#/definitions/Site"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create mobile network site": {
+            "$ref": "./examples/SiteCreate.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      },
+      "patch": {
+        "tags": [
+          "Sites"
+        ],
+        "operationId": "Sites_UpdateTags",
+        "description": "Updates a site update tags.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "mobileNetworkName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the mobile network site."
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the mobile network site."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "./common.json#/definitions/TagsObject"
+            },
+            "description": "Parameters supplied to update mobile network site tags."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Update successful. The operation returns the resulting mobile network site resource.",
+            "schema": {
+              "$ref": "#/definitions/Site"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update mobile network site tags": {
+            "$ref": "./examples/SiteUpdateTags.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MobileNetwork/mobileNetworks/{mobileNetworkName}/sites": {
+      "get": {
+        "tags": [
+          "Sites"
+        ],
+        "operationId": "Sites_ListByMobileNetwork",
+        "description": "Lists all sites in the mobile network.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "mobileNetworkName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the mobile network."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. The operation returns a list of mobile network resources.",
+            "schema": {
+              "$ref": "#/definitions/SiteListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List all mobile network sites": {
+            "$ref": "./examples/SiteListByMobileNetwork.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MobileNetwork/sims/{simName}": {
+      "delete": {
+        "tags": [
+          "Sims"
+        ],
+        "operationId": "Sims_Delete",
+        "description": "Deletes the specified sim.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "simName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the sim."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Delete successful."
+          },
+          "202": {
+            "description": "Accepted. Sets 'Deleting' provisioningState until the operation completes. Returns an operation URI that can be queried to find the current state of the operation."
+          },
+          "204": {
+            "description": "Request successful. Resource does not exist."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete sim resource": {
+            "$ref": "./examples/SimDelete.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      },
+      "get": {
+        "tags": [
+          "Sims"
+        ],
+        "operationId": "Sims_Get",
+        "description": "Gets information about the specified sim.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "simName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of sim."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. The operation returns the resulting sim resource.",
+            "schema": {
+              "$ref": "#/definitions/Sim"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get sim": {
+            "$ref": "./examples/SimGet.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Sims"
+        ],
+        "operationId": "Sims_CreateOrUpdate",
+        "description": "Creates or updates a sim.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "simName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the sim."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Sim"
+            },
+            "description": "Parameters supplied to the create or update sim operation."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Update successful. The operation returns the resulting sim resource.",
+            "schema": {
+              "$ref": "#/definitions/Sim"
+            }
+          },
+          "201": {
+            "description": "Create successful. The operation returns the resulting sim resource.",
+            "schema": {
+              "$ref": "#/definitions/Sim"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create sim": {
+            "$ref": "./examples/SimCreate.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      },
+      "patch": {
+        "tags": [
+          "Sims"
+        ],
+        "operationId": "Sims_UpdateTags",
+        "description": "Updates a sim update tags.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "simName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the sim."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "./common.json#/definitions/TagsObject"
+            },
+            "description": "Parameters supplied to update sim tags."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Update successful. The operation returns the resulting sim resource.",
+            "schema": {
+              "$ref": "#/definitions/Sim"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update sim tags": {
+            "$ref": "./examples/SimUpdateTags.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.MobileNetwork/sims": {
+      "get": {
+        "tags": [
+          "Sims"
+        ],
+        "operationId": "Sims_ListBySubscription",
+        "description": "Gets all the sims in a subscription.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. The operation returns a list of sim resources.",
+            "schema": {
+              "$ref": "#/definitions/SimListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List all sims": {
+            "$ref": "./examples/SimListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MobileNetwork/sims": {
+      "get": {
+        "tags": [
+          "Sims"
+        ],
+        "operationId": "Sims_ListByResourceGroup",
+        "description": "Gets all the sims in a subscription.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. The operation returns a list of sim resources.",
+            "schema": {
+              "$ref": "#/definitions/SimListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List sims in resource group": {
+            "$ref": "./examples/SimListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MobileNetwork/sims/{simName}/simProfiles/{simProfileName}": {
+      "delete": {
+        "tags": [
+          "SimProfiles"
+        ],
+        "operationId": "SimProfiles_Delete",
+        "description": "Deletes the specified sim profile.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "simName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the sim."
+          },
+          {
+            "name": "simProfileName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the sim profile."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Delete successful."
+          },
+          "202": {
+            "description": "Accepted. Sets 'Deleting' provisioningState until the operation completes. Returns an operation URI that can be queried to find the current state of the operation."
+          },
+          "204": {
+            "description": "Request successful. Resource does not exist."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete sim profile resource": {
+            "$ref": "./examples/SimProfileDelete.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      },
+      "get": {
+        "tags": [
+          "SimProfiles"
+        ],
+        "operationId": "SimProfiles_Get",
+        "description": "Gets information about the specified sim profile.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "simName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of sim."
+          },
+          {
+            "name": "simProfileName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the sim profile."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. The operation returns the resulting sim profile resource.",
+            "schema": {
+              "$ref": "#/definitions/SimProfile"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get sim profile": {
+            "$ref": "./examples/SimProfileGet.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "SimProfiles"
+        ],
+        "operationId": "SimProfiles_CreateOrUpdate",
+        "description": "Creates or updates a sim profile.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "simName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the sim."
+          },
+          {
+            "name": "simProfileName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the sim profile."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SimProfile"
+            },
+            "description": "Parameters supplied to the create or update sim profile operation."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Update successful. The operation returns the resulting sim profile resource.",
+            "schema": {
+              "$ref": "#/definitions/SimProfile"
+            }
+          },
+          "201": {
+            "description": "Create successful. The operation returns the resulting sim profile resource.",
+            "schema": {
+              "$ref": "#/definitions/SimProfile"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create sim profile": {
+            "$ref": "./examples/SimProfileCreate.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      },
+      "patch": {
+        "tags": [
+          "SimProfiles"
+        ],
+        "operationId": "SimProfiles_UpdateTags",
+        "description": "Updates a sim profile update tags.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "simName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the sim."
+          },
+          {
+            "name": "simProfileName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the sim profile."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "./common.json#/definitions/TagsObject"
+            },
+            "description": "Parameters supplied to update sim profile tags."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Update successful. The operation returns the resulting sim profile resource.",
+            "schema": {
+              "$ref": "#/definitions/SimProfile"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update sim profile tags": {
+            "$ref": "./examples/SimProfileUpdateTags.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MobileNetwork/sims/{simName}/simProfiles": {
+      "get": {
+        "tags": [
+          "SimProfiles"
+        ],
+        "operationId": "SimProfiles_ListBySim",
+        "description": "Lists all sim profiles in the sim",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "simName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the sim."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. The operation returns a list of sim profile resources.",
+            "schema": {
+              "$ref": "#/definitions/SimProfileListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List all sim profiles in a sim": {
+            "$ref": "./examples/SimProfileListBySim.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MobileNetwork/sims/{simName}/simProfiles/{simProfileName}/activate": {
+      "post": {
+        "tags": [
+          "SimProfiles"
+        ],
+        "operationId": "SimProfiles_Activate",
+        "description": "Activates the specified sim profile.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "simName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the sim."
+          },
+          {
+            "name": "simProfileName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the sim profile."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "SimProfile activation successful.",
+            "schema": {
+              "$ref": "#/definitions/SimProfile"
+            }
+          },
+          "202": {
+            "description": "Accepted. Sets 'Activating' in activationState until the operation completes. Returns an operation URI that can be queried to find the current state of the operation.",
+            "schema": {
+              "$ref": "#/definitions/SimProfile"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Activate sim profile": {
+            "$ref": "./examples/SimProfileActivate.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MobileNetwork/sims/{simName}/simProfiles/{simProfileName}/deactivate": {
+      "post": {
+        "tags": [
+          "SimProfiles"
+        ],
+        "operationId": "SimProfiles_Deactivate",
+        "description": "Deactivates the specified sim profiles.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "simName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the sim profile."
+          },
+          {
+            "name": "simProfileName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the sim profile."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Sim deactivation successful.",
+            "schema": {
+              "$ref": "#/definitions/SimProfile"
+            }
+          },
+          "202": {
+            "description": "Accepted. Sets 'Deactivating' in activationState until the operation completes. Returns an operation URI that can be queried to find the current state of the operation.",
+            "schema": {
+              "$ref": "#/definitions/SimProfile"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete sim profile resource": {
+            "$ref": "./examples/SimProfileDeactivate.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "MobileNetwork": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/MobileNetworkPropertiesFormat",
+          "description": "Mobile network properties."
+        },
+        "systemData": {
+          "readOnly": true,
+          "description": "The system meta data relating to this resource.",
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "description": "Mobile network resource."
+    },
+    "MobileNetworkPropertiesFormat": {
+      "description": "Mobile network properties.",
+      "properties": {
+        "provisioningState": {
+          "readOnly": true,
+          "$ref": "./common.json#/definitions/ProvisioningState",
+          "description": "The provisioning state of the mobile network resource."
+        },
+        "mobileCountryCode": {
+          "type": "string",
+          "description": "The mobile country code for the network."
+        },
+        "mobileNetworkCode": {
+          "type": "string",
+          "description": "The mobile network code for the network."
+        },
+        "serviceKey": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The mobile network resource identifier"
+        },
+        "networkType": {
+          "$ref": "./common.json#/definitions/NetworkType",
+          "description": "The type of the mobile network."
+        },
+        "spectrumAccessProvider": {
+          "type": "string",
+          "description": "The spectrum access provider for the mobile network."
+        },
+        "sites": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "./common.json#/definitions/SubResource"
+          },
+          "description": "An array of ids of the sites associated with the mobile network resource."
+        },
+        "sims": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "./common.json#/definitions/SubResource"
+          },
+          "description": "An array of ids of the sims associated with the mobile network resource."
+        },
+        "packetCores": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "./common.json#/definitions/SubResource"
+          },
+          "description": "An array of ids of the packet cores associated with the mobile network resource."
+        }
+      }
+    },
+    "MobileNetworkListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MobileNetwork"
+          },
+          "description": "A list of mobile networks in a resource group."
+        },
+        "nextLink": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The URL to get the next set of results."
+        }
+      },
+      "description": "Response for mobile networks API service call."
+    },
+    "Sim": {
+      "properties": {
+        "systemData": {
+          "readOnly": true,
+          "description": "The system meta data relating to this resource.",
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/SimPropertiesFormat",
+          "description": "Sim properties."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "description": "Sim resource."
+    },
+    "SimPropertiesFormat": {
+      "description": "Sim properties.",
+      "properties": {
+        "provisioningState": {
+          "readOnly": true,
+          "$ref": "./common.json#/definitions/ProvisioningState",
+          "description": "The provisioning state of the sim resource."
+        },
+        "simType": {
+          "$ref": "./common.json#/definitions/SimType",
+          "description": "The type of the sim."
+        },
+        "simProfiles": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "./common.json#/definitions/SubResource"
+          },
+          "description": "Sim profile Properties."
+        }
+      }
+    },
+    "SimListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Sim"
+          },
+          "description": "A list of sims in a resource group."
+        },
+        "nextLink": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The URL to get the next set of results."
+        }
+      },
+      "description": "Response for sims API service call."
+    },
+    "Site": {
+      "properties": {
+        "systemData": {
+          "readOnly": true,
+          "description": "The system meta data relating to this resource.",
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/SitePropertiesFormat",
+          "description": "Site properties."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "description": "Site resource."
+    },
+    "SitePropertiesFormat": {
+      "description": "Site properties.",
+      "properties": {
+        "provisioningState": {
+          "readOnly": true,
+          "$ref": "./common.json#/definitions/ProvisioningState",
+          "description": "The provisioning state of the site resource. **TODO**: Confirm if this is needed."
+        },
+        "customLocation": {
+          "type": "string",
+          "description": "Azure arc custom location where the mobile network site is paired. **TODO**: Confirm type and property."
+        },
+        "trackingAreaCode": {
+          "type": "string",
+          "description": "Tracking area code for the mobile network site."
+        }
+      }
+    },
+    "SiteListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Site"
+          },
+          "description": "A list of sites in a resource group."
+        },
+        "nextLink": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The URL to get the next set of results."
+        }
+      },
+      "description": "Response for sites API service call."
+    },
+    "SimProfile": {
+      "properties": {
+        "systemData": {
+          "readOnly": true,
+          "description": "The system meta data relating to this resource.",
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/SimProfilePropertiesFormat",
+          "description": "Sim profile Properties."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "description": "Sim profile resource."
+    },
+    "SimProfilePropertiesFormat": {
+      "description": "Sim profile properties.",
+      "properties": {
+        "provisioningState": {
+          "readOnly": true,
+          "$ref": "./common.json#/definitions/ProvisioningState",
+          "description": "The provisioning state of the sim profile resource."
+        },
+        "activationState": {
+          "readOnly": true,
+          "$ref": "./common.json#/definitions/ActivationState",
+          "description": "The activation state of the sim profile resource."
+        },
+        "internationalMobileSubscriberIdentity": {
+          "type": "string",
+          "description": "The International Mobile Subscriber Identity (IMSI) for the sim profile."
+        },
+        "integratedCircuitCardIdentifier": {
+          "type": "string",
+          "description": "The Integrated Circuit Card ID (ICC Id) for the sim profile."
+        },
+        "authenticationKey": {
+          "type": "string",
+          "x-ms-secret": true,
+          "x-ms-mutability": [
+            "create"
+          ],
+          "description": "The ki value for the sim profile."
+        },
+        "operatorKeyCode": {
+          "type": "string",
+          "x-ms-secret": true,
+          "x-ms-mutability": [
+            "create"
+          ],
+          "description": "The Opc value for the sim profile."
+        },
+        "mobileNetworks": {
+          "type": "array",
+          "items": {
+            "$ref": "./common.json#/definitions/SubResource"
+          },
+          "description": "A list of mobile network ids that the sim profile is attached. **TODO** Typically one, but can a Sim be attached to multiple networks"
+        }
+      }
+    },
+    "SimProfileListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SimProfile"
+          },
+          "description": "A list of sim profiles in a resource group."
+        },
+        "nextLink": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The URL to get the next set of results."
+        }
+      },
+      "description": "Response for sim profiles API service call."
+    },
+    "PacketCore": {
+      "properties": {
+        "systemData": {
+          "readOnly": true,
+          "description": "The system meta data relating to this resource.",
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/PacketCorePropertiesFormat",
+          "description": "Packet core properties."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "description": "Packet core resource."
+    },
+    "PacketCorePropertiesFormat": {
+      "description": "PacketCore properties.",
+      "properties": {
+        "provisioningState": {
+          "readOnly": true,
+          "$ref": "./common.json#/definitions/ProvisioningState",
+          "description": "The provisioning state of the packet core resource."
+        }
+      }
+    },
+    "PacketCoreListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PacketCore"
+          },
+          "description": "A list of packet cores in a resource group."
+        },
+        "nextLink": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The URL to get the next set of results."
+        }
+      },
+      "description": "Response for packet cores API service call."
+    }
+  }
+}

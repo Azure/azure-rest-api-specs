@@ -1,0 +1,31 @@
+{
+  "parameters": {
+    "api-version": "2020-06-01-preview",
+    "subscriptionId": "subid",
+    "resourceGroupName": "testResourceGroupName",
+    "simName": "testSimName"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "location": "testLocation",
+            "properties": {
+              "provisioningState": "Accepted",
+              "activationState": "Activated",
+              "internationalMobileSubscriberIdentity": "TestImsi",
+              "integratedCircuitCardIdentifier": "testIccid",
+              "mobileNetworks": [
+                {
+                  "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.MobileNetwork/mobileNetworks/testMobileNetwork"
+                }
+              ]
+            }
+          }
+        ],
+        "nextLink": "nextLink"
+      }
+    }
+  }
+}
