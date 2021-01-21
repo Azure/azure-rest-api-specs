@@ -147,6 +147,54 @@
         }
       }
     },
+    "/providers/Microsoft.Features/featureProviderNamespaces/{providerNamespace}/featureConfigurations/{featureName}/{actionName}": {
+      "post": {
+        "description": "Action on a feature configuration.",
+        "operationId": "SubscriptionFeatureConfigurations_Action",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ProviderNamespaceParameter"
+          },
+          {
+            "$ref": "#/parameters/FeatureNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ActionNameParameter"
+          },
+          {
+            "name": "SubscriptionFeatureRegistrationType",
+            "description": "Subscription Feature Registration Type details.",
+            "in": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/SubscriptionFeatureRegistration"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The feature configuration is updated successfully.",
+            "schema": {
+              "$ref": "#/definitions/SubscriptionFeatureRegistration"
+            }
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Action on a feature registration": {
+            "$ref": "./examples/FeatureConfiguration/FeatureConfigurationPOST.json"
+          }
+        }
+      }
+    },
     "/providers/Microsoft.Features/featureProviderNamespaces/{providerNamespace}/featureConfigurations": {
       "get": {
         "description": "Returns feature configurations for given provider namespace.",
@@ -360,6 +408,147 @@
         }
       }
     },
+    "SubscriptionFeatureRegistration": {
+      "type": "object",
+      "description": "Subscription feature registration details",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "properties": {
+            "tenantId": {
+              "type": "string",
+              "description": "The tenantId.",
+              "readOnly": true
+            },
+            "subscriptionId": {
+              "type": "string",
+              "description": "The subscriptionId.",
+              "readOnly": false
+            },
+            "featureName": {
+              "type": "string",
+              "description": "The featureName.",
+              "readOnly": true
+            },
+            "displayName": {
+              "type": "string",
+              "description": "The featureDisplayName.",
+              "readOnly": true
+            },
+            "providerNamespace": {
+              "type": "string",
+              "description": "The providerNamespace.",
+              "readOnly": true
+            },
+            "state": {
+              "description": "The state.",
+              "enum": [
+                "NotSpecified",
+                "NotRegistered",
+                "Pending",
+                "Registering",
+                "Registered",
+                "Unregistering",
+                "Unregistered"
+              ],
+              "x-ms-enum": {
+                "name": "SubscriptionFeatureRegistrationState",
+                "modelAsString": true
+              }
+            },
+            "authorizationProfile": {
+              "$ref": "#/definitions/AuthorizationProfile"
+            },
+            "metadata": {
+              "additionalProperties": {
+                "type": "string",
+                "maxLength": 1000
+              },
+              "description": "Key-value pairs for meta data."
+            },
+            "releaseDate": {
+              "type": "string",
+              "format": "date-time",
+              "description": "The feature release date.",
+              "readOnly": true
+            },
+            "registrationDate": {
+              "type": "string",
+              "format": "date-time",
+              "description": "The feature registration date.",
+              "readOnly": true
+            },
+            "documentationLink": {
+              "type": "string",
+              "maxLength": 1000,
+              "description": "The feature documentation link.",
+              "readOnly": true
+            },
+            "approvalType": {
+              "type": "string",
+              "description": "The feature approval type.",
+              "enum": [
+                "NotSpecified",
+                "ApprovalRequired",
+                "AutoApproval"
+              ],
+              "x-ms-enum": {
+                "name": "SubscriptionFeatureRegistrationApprovalType",
+                "modelAsString": true
+              },
+              "readOnly": true
+            },
+            "shouldFeatureDisplayInPortal": {
+              "type": "boolean",
+              "default": false,
+              "description": "Indicates whether feature should be displayed in Portal."
+            },
+            "description": {
+              "type": "string",
+              "maxLength": 1000,
+              "description": "The feature description."
+            }
+          },
+          "type": "object"
+        }
+      }
+    },
+    "AuthorizationProfile": {
+      "description": "Authorization Profile",
+      "properties": {
+        "RequestedTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "RequestedTime",
+          "readOnly": true
+        },
+        "Requester": {
+          "type": "string",
+          "description": "Requester",
+          "readOnly": true
+        },
+        "RequesterObjectId": {
+          "type": "string",
+          "description": "RequesterObjectId",
+          "readOnly": true
+        },
+        "ApprovedTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "ApprovedTime",
+          "readOnly": true
+        },
+        "Approver": {
+          "type": "string",
+          "description": "Approver",
+          "readOnly": true
+        }
+      }
+    },
     "ErrorResponse": {
       "description": "Error response indicates that the service is not able to process the incoming request.",
       "properties": {
@@ -415,6 +604,14 @@
       "required": true,
       "type": "string",
       "description": "The feature name.",
+      "x-ms-parameter-location": "method"
+    },
+    "ActionNameParameter": {
+      "name": "actionName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The action name.",
       "x-ms-parameter-location": "method"
     }
   }
