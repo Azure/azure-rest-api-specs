@@ -384,11 +384,9 @@
           }
         },
         "approvalRequests": {
-          "anyOf": {
-            "type": "array",
-            "items": {
-              "$ref": "#/definitions/ApprovalRequestsDetails"
-            }
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApprovalRequestsDetails"
           }
         }
       }
@@ -430,10 +428,9 @@
       "type": "object",
       "properties": {
         "properties": {
-          "anyOf": {
-            "$ref": "#/definitions/OfferDetails",
-            "description": "The details to get the offer plans statuses"
-          }
+          "$ref": "#/definitions/OfferDetails",
+          "description": "The details to get the offer plans statuses",
+          "x-ms-client-flatten": true
         }
       }
     },
@@ -445,10 +442,12 @@
           "description": "The offer's publisher id",
           "type": "string"
         },
-        "description": "Current plans list",
-        "type": "array",
-        "items": {
-          "type": "string"
+        "planIds": {
+          "description": "Current plans list",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         }
       }
     },
@@ -550,12 +549,10 @@
           "type": "string"
         },
         "plansDetails": {
-          "anyOf": {
-            "type": "array",
-            "items": {
-              "description": "Gets or sets plans details",
-              "type": "#/definitions/PlanRequestsDetails"
-            }
+          "description": "Gets or sets plans details",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PlanRequestsDetails"
           }
         },
         "createDate": {
@@ -611,12 +608,10 @@
           "type": "string"
         },
         "requesters": {
-          "anyOf": {
-            "type": "array",
-            "items": {
-              "type": "#/definitions/UserRequestDetails",
-              "description": "Gets or sets requesters details list"
-            }
+          "description": "Gets or sets requesters details list",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/UserRequestDetails"
           }
         }
       }
@@ -664,12 +659,10 @@
           "type": "string"
         },
         "plans": {
-          "anyOf": {
-            "type": "array",
-            "items": {
-              "description": "Gets or sets removed plans notifications",
-              "type": "#/definitions/PlanNotificationDetails"
-            }
+          "description": "Gets or sets removed plans notifications",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PlanNotificationDetails"
           }
         }
       }
@@ -699,12 +692,10 @@
           "type": "string"
         },
         "plans": {
-          "anyOf": {
-            "type": "array",
-            "items": {
-              "description": "Gets or sets removed plans notifications",
-              "type": "#/definitions/PlanNotificationDetails"
-            }
+          "description": "Gets or sets removed plans notifications",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PlanNotificationDetails"
           }
         }
       }
@@ -734,12 +725,10 @@
           "type": "string"
         },
         "plans": {
-          "anyOf": {
-            "type": "array",
-            "items": {
-              "description": "Gets or sets removed plans notifications",
-              "type": "#/definitions/PlanNotificationDetails"
-            }
+          "description": "Gets or sets removed plans notifications",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PlanNotificationDetails"
           }
         }
       }
@@ -762,9 +751,11 @@
       "description": "Admin action details payload",
       "type": "object",
       "properties": {
-        "$ref": "#/definitions/AdminActionProperties",
-        "description": "The PrivateStore data structure.",
-        "x-ms-client-flatten": true
+        "properties": {
+          "$ref": "#/definitions/AdminActionProperties",
+          "description": "Admin action properties data structure",
+          "x-ms-client-flatten": true
+        }
       }
     },
     "AdminActionProperties": {
@@ -772,44 +763,42 @@
       "type": "object",
       "properties": {
         "publisherId": {
-          "publisherId": {
-            "description": "Gets or sets publisher Id",
-            "type": "string"
-          },
-          "adminAction": {
-            "description": "Gets or sets admin action",
-            "type": "string",
-            "enum": [
-              "Approved",
-              "Rejected"
-            ],
-            "x-ms-enum": {
-              "name": "adminAction",
-              "modelAsString": true
-            }
-          },
-          "existingRequestedPlans": {
-            "description": "Gets or sets existing plans ids ( of existing requests)",
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
-          },
-          "approvedPlans": {
-            "description": "Gets or sets Approved plans ids, empty in case of rejected",
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
-          },
-          "comment": {
-            "description": "Gets or sets admin comment",
-            "type": "string"
-          },
-          "user": {
-            "description": "Gets or sets admin details",
+          "description": "Gets or sets publisher Id",
+          "type": "string"
+        },
+        "adminAction": {
+          "description": "Gets or sets admin action",
+          "type": "string",
+          "enum": [
+            "Approved",
+            "Rejected"
+          ],
+          "x-ms-enum": {
+            "name": "adminAction",
+            "modelAsString": true
+          }
+        },
+        "existingRequestedPlans": {
+          "description": "Gets or sets existing plans ids ( of existing requests)",
+          "type": "array",
+          "items": {
             "type": "string"
           }
+        },
+        "approvedPlans": {
+          "description": "Gets or sets Approved plans ids, empty in case of rejected",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "comment": {
+          "description": "Gets or sets admin comment",
+          "type": "string"
+        },
+        "user": {
+          "description": "Gets or sets admin details",
+          "type": "string"
         }
       }
     }
