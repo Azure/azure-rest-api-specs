@@ -546,7 +546,7 @@
           "200": {
             "description": "Subscription tenant policy has been successfully created/updated.",
             "schema": {
-              "$ref": "#/definitions/TenantPolicyResponse"
+              "$ref": "#/definitions/GetTenantPolicyResponse"
             }
           },
           "default": {
@@ -562,7 +562,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/TenantPolicy"
+              "$ref": "#/definitions/PutTenantPolicyRequestProperties"
             }
           },
           {
@@ -582,7 +582,7 @@
           "200": {
             "description": "Subscription tenant policy details for user's tenant.",
             "schema": {
-              "$ref": "#/definitions/TenantPolicyResponse"
+              "$ref": "#/definitions/GetTenantPolicyResponse"
             }
           },
           "default": {
@@ -612,7 +612,7 @@
           "200": {
             "description": "Subscription tenant policy details for user's tenant.",
             "schema": {
-              "$ref": "#/definitions/TenantPolicyListResponse"
+              "$ref": "#/definitions/GetTenantPolicyListResponse"
             }
           },
           "default": {
@@ -965,8 +965,8 @@
         }
       }
     },
-    "TenantPolicy": {
-      "description": "Tenant policy.",
+    "PutTenantPolicyRequestProperties": {
+      "description": "Put tenant policy request properties.",
       "properties": {
         "blockSubscriptionsLeavingTenant": {
           "description": "Blocks the leaving of subscriptions from user's tenant.",
@@ -987,7 +987,33 @@
         }
       }
     },
-    "TenantPolicyResponse": {
+ 		"TenantPolicy": {
+			"description": "Tenant policy.",
+			"properties": {
+        "policyId": {
+          "description": "Policy Id.",
+          "type": "string"
+        },
+				"blockSubscriptionsLeavingTenant": {
+					"description": "Blocks the leaving of subscriptions from user's tenant.",
+					"type": "boolean"
+				},
+				"blockSubscriptionsIntoTenant": {
+					"description": "Blocks the entering of subscriptions into user's tenant.",
+					"type": "boolean"
+				},
+				"exemptedPrincipals": {
+					"description": "List of user objectIds that are exempted from the set subscription tenant policies for the user's tenant.",
+					"type": "array",
+					"items": {
+						"format": "uuid",
+						"type": "string",
+						"example": "00000000-0000-0000-0000-000000000000"
+					}
+				}
+			}
+		},   
+    "GetTenantPolicyResponse": {
       "description": "Tenant policy Information.",
       "properties": {
         "id": {
@@ -1001,7 +1027,7 @@
           "type": "string"
         },
         "type": {
-          "description": "Resource type, Microsoft.Subscriptions/Policies/default.",
+          "description": "Resource type, providers/Microsoft.Subscription/Policies/default.",
           "readOnly": true,
           "type": "string"
         },
@@ -1012,7 +1038,7 @@
       },
       "x-ms-azure-resource": true
     },
-    "TenantPolicyListResponse": {
+    "GetTenantPolicyListResponse": {
       "description": "Tenant policy information list.",
       "properties": {
         "value": {
@@ -1020,7 +1046,7 @@
           "type": "array",
           "readOnly": true,
           "items": {
-            "$ref": "#/definitions/TenantPolicyResponse"
+            "$ref": "#/definitions/GetTenantPolicyResponse"
           }
         },
         "nextLink": {
