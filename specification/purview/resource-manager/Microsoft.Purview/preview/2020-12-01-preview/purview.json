@@ -294,6 +294,12 @@
               "$ref": "#/definitions/Account"
             }
           },
+          "202": {
+            "description": "Accepted",
+            "schema": {
+              "$ref": "#/definitions/Account"
+            }
+          },
           "default": {
             "description": "An error response received from the provider.",
             "schema": {
@@ -301,6 +307,7 @@
             }
           }
         },
+        "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "Accounts_Update": {
             "$ref": "./examples/Accounts_Update.json"
@@ -1036,10 +1043,6 @@
           ],
           "readOnly": true
         },
-        "networkAcls": {
-          "$ref": "#/definitions/NetworkAcls",
-          "description": "Get the network ACLs."
-        },
         "privateEndpointConnections": {
           "description": "Gets the private endpoint connections information.",
           "uniqueItems": false,
@@ -1065,6 +1068,19 @@
           "readOnly": true,
           "x-ms-enum": {
             "name": "provisioningState",
+            "modelAsString": true
+          }
+        },
+        "publicNetworkAccess": {
+          "description": "Gets or sets the public network access.",
+          "enum": [
+            "NotSpecified",
+            "Enabled",
+            "Disabled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "publicNetworkAccess",
             "modelAsString": true
           }
         }
@@ -1163,24 +1179,6 @@
           "description": "Gets the managed storage account resource identifier.",
           "type": "string",
           "readOnly": true
-        }
-      }
-    },
-    "NetworkAcls": {
-      "description": "The Network ACLs",
-      "type": "object",
-      "properties": {
-        "defaultAction": {
-          "description": "Gets or sets the default behavior of network ACLs.",
-          "enum": [
-            "Allow",
-            "Deny"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "defaultAction",
-            "modelAsString": true
-          }
         }
       }
     },
@@ -1853,6 +1851,13 @@
     }
   },
   "parameters": {
+    "api-version": {
+      "name": "api-version",
+      "in": "query",
+      "description": "The api version to use.",
+      "required": true,
+      "type": "string"
+    },
     "subscriptionId": {
       "name": "subscriptionId",
       "in": "path",
@@ -1867,13 +1872,6 @@
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"
-    },
-    "api-version": {
-      "name": "api-version",
-      "in": "query",
-      "description": "The api version to use.",
-      "required": true,
-      "type": "string"
     },
     "accountName": {
       "name": "accountName",
