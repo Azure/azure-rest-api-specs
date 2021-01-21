@@ -531,6 +531,45 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Security/locations/{ascLocation}/alerts/default/simulate": {
+      "post": {
+        "x-ms-examples": {
+          "Simulate security alerts on a subscription": {
+            "$ref": "./examples/Alerts/SimulateAlerts_example.json"
+          }
+        },
+        "tags": [
+          "Alerts"
+        ],
+        "description": "Simulate security alerts",
+        "operationId": "Alerts_SimulateAlerts",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/AscLocation"
+          },
+          {
+            "$ref": "#/parameters/AlertSimulatorRequestBody"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {

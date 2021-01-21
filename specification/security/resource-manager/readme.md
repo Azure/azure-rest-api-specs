@@ -193,7 +193,7 @@ input-file:
 - Microsoft.Security/stable/2020-01-01/adaptiveNetworkHardenings.json
 - Microsoft.Security/stable/2020-01-01/allowedConnections.json
 - Microsoft.Security/stable/2020-01-01/topologies.json
-- Microsoft.Security/stable/2020-01-01/alerts.json
+- Microsoft.Security/stable/2021-01-01/alerts.json
 - Microsoft.Security/stable/2020-01-01/jitNetworkAccessPolicies.json
 - Microsoft.Security/stable/2020-01-01/discoveredSecuritySolutions.json
 - Microsoft.Security/stable/2020-01-01/securitySolutionsReferenceData.json
@@ -376,6 +376,7 @@ input-file:
 - Microsoft.Security/stable/2020-01-01/jitNetworkAccessPolicies.json
 - Microsoft.Security/stable/2020-01-01/serverVulnerabilityAssessments.json	
 - Microsoft.Security/stable/2020-01-01/topologies.json
+- Microsoft.Security/stable/2020-01-01/alerts.json
 
 # Needed when there is more than one input file
 override-info:
@@ -398,6 +399,13 @@ override-info:
   title: SecurityCenter
 ```
 
+### Tag: package-2021-01-only
+
+These settings apply only when `--tag=package-2021-01-only` is specified on the command line. This tag is used for Ruby SDK.
+
+``` yaml $(tag) == 'package-2021-01-only'
+input-file:
+- Microsoft.Security/stable/2021-01-01/alerts.json
 ---
 
 # Code Generation
