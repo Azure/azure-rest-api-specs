@@ -126,7 +126,7 @@
           "Alerts"
         ],
         "description": "List all the alerts that are associated with the subscription that are stored in a specific location",
-        "operationId": "Alerts_ListSubscriptionLevelAlertsByRegion",
+        "operationId": "Alerts_ListSubscriptionLevelByRegion",
         "parameters": [
           {
             "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
@@ -168,7 +168,7 @@
           "Alerts"
         ],
         "description": "List all the alerts that are associated with the resource group that are stored in a specific location",
-        "operationId": "Alerts_ListResourceGroupLevelAlertsByRegion",
+        "operationId": "Alerts_ListResourceGroupLevelByRegion",
         "parameters": [
           {
             "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
@@ -213,7 +213,7 @@
           "Alerts"
         ],
         "description": "Get an alert that is associated with a subscription",
-        "operationId": "Alerts_GetSubscriptionLevelAlert",
+        "operationId": "Alerts_GetSubscriptionLevel",
         "parameters": [
           {
             "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
@@ -255,7 +255,7 @@
           "Alerts"
         ],
         "description": "Get an alert that is associated a resource group or a resource in a resource group",
-        "operationId": "Alerts_GetResourceGroupLevelAlerts",
+        "operationId": "Alerts_GetResourceGroupLevel",
         "parameters": [
           {
             "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
@@ -300,7 +300,7 @@
           "Alerts"
         ],
         "description": "Update the alert's state",
-        "operationId": "Alerts_UpdateSubscriptionLevelAlertStateToDismiss",
+        "operationId": "Alerts_UpdateSubscriptionLevelStateToDismiss",
         "parameters": [
           {
             "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
@@ -378,7 +378,7 @@
           "Alerts"
         ],
         "description": "Update the alert's state",
-        "operationId": "Alerts_UpdateSubscriptionLevelAlertStateToReactivate",
+        "operationId": "Alerts_UpdateSubscriptionLevelStateToActivate",
         "parameters": [
           {
             "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
@@ -459,7 +459,7 @@
           "Alerts"
         ],
         "description": "Update the alert's state",
-        "operationId": "Alerts_UpdateResourceGroupLevelAlertStateToDismiss",
+        "operationId": "Alerts_UpdateResourceGroupLevelStateToDismiss",
         "parameters": [
           {
             "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
@@ -501,7 +501,7 @@
           "Alerts"
         ],
         "description": "Update the alert's state",
-        "operationId": "Alerts_UpdateResourceGroupLevelAlertStateToReactivate",
+        "operationId": "Alerts_UpdateResourceGroupLevelStateToActivate",
         "parameters": [
           {
             "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
@@ -517,6 +517,45 @@
           },
           {
             "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupName"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Security/locations/{ascLocation}/alerts/default/simulate": {
+      "post": {
+        "x-ms-examples": {
+          "Simulate security alerts on a subscription": {
+            "$ref": "./examples/Alerts/SimulateAlerts_example.json"
+          }
+        },
+        "tags": [
+          "Alerts"
+        ],
+        "description": "Simulate security alerts",
+        "operationId": "Alerts_SimulateAlerts",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/AscLocation"
+          },
+          {
+            "$ref": "#/parameters/AlertSimulatorRequestBody"
           }
         ],
         "responses": {
