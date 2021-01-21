@@ -14,7 +14,6 @@ go:
 batch:
   - tag: package-2020-12
   - tag: package-2020-11
-  - tag: package-2020-09
   - tag: package-2020-07
   - tag: package-2020-06
   - tag: package-2020-04
