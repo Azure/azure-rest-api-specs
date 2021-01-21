@@ -1642,14 +1642,6 @@
             "type": "string"
           },
           {
-            "name": "staticSiteCustomDomainRequestPropertiesEnvelope",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/StaticSiteCustomDomainRequestPropertiesARMResource"
-            }
-          },
-          {
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
@@ -1760,14 +1752,6 @@
             "description": "The custom domain to validate.",
             "required": true,
             "type": "string"
-          },
-          {
-            "name": "staticSiteCustomDomainRequestPropertiesEnvelope",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/StaticSiteCustomDomainRequestPropertiesARMResource"
-            }
           },
           {
             "$ref": "#/parameters/subscriptionIdParameter"
@@ -2752,10 +2736,6 @@
           "$ref": "#/definitions/StaticSiteBuildProperties",
           "description": "Build properties to configure on the repository."
         },
-        "templateProperties": {
-          "$ref": "#/definitions/StaticSiteTemplateOptions",
-          "description": "Template options for generating a new repository."
-        },
         "contentDistributionEndpoint": {
           "description": "The content distribution endpoint for the static site.",
           "type": "string",
@@ -2792,9 +2772,6 @@
         },
         "sku": {
           "$ref": "./CommonDefinitions.json#/definitions/SkuDescription"
-        },
-        "identity": {
-          "$ref": "./CommonDefinitions.json#/definitions/ManagedServiceIdentity"
         }
       }
     },
@@ -2907,27 +2884,7 @@
           "type": "string"
         },
         "appArtifactLocation": {
-          "description": "Deprecated: The path of the app artifacts after building (deprecated in favor of OutputLocation)",
-          "type": "string"
-        },
-        "outputLocation": {
-          "description": "The output path of the app after building.",
-          "type": "string"
-        },
-        "appBuildCommand": {
-          "description": "A custom command to run during deployment of the static content application.",
-          "type": "string"
-        },
-        "apiBuildCommand": {
-          "description": "A custom command to run during deployment of the Azure Functions API application.",
-          "type": "string"
-        },
-        "skipGithubActionWorkflowGeneration": {
-          "description": "Skip Github Action workflow generation.",
-          "type": "boolean"
-        },
-        "githubActionSecretNameOverride": {
-          "description": "Github Action secret name override.",
+          "description": "The path of the app artifacts after building.",
           "type": "string"
         }
       }
@@ -3025,28 +2982,6 @@
           "description": "Link to next page of resources.",
           "type": "string",
           "readOnly": true
-        }
-      }
-    },
-    "StaticSiteCustomDomainRequestPropertiesARMResource": {
-      "description": "Static Site Custom Domain Request Properties ARM resource.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "./CommonDefinitions.json#/definitions/ProxyOnlyResource"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "description": "StaticSiteCustomDomainRequestPropertiesARMResource resource specific properties",
-          "properties": {
-            "validationMethod": {
-              "description": "Validation method for adding a custom domain",
-              "default": "cname-delegation",
-              "type": "string"
-            }
-          },
-          "x-ms-client-flatten": true
         }
       }
     },
