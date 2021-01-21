@@ -987,32 +987,32 @@
         }
       }
     },
- 		"TenantPolicy": {
-			"description": "Tenant policy.",
-			"properties": {
+    "TenantPolicy": {
+      "description": "Tenant policy.",
+      "properties": {
         "policyId": {
           "description": "Policy Id.",
           "type": "string"
         },
-				"blockSubscriptionsLeavingTenant": {
-					"description": "Blocks the leaving of subscriptions from user's tenant.",
-					"type": "boolean"
-				},
-				"blockSubscriptionsIntoTenant": {
-					"description": "Blocks the entering of subscriptions into user's tenant.",
-					"type": "boolean"
-				},
-				"exemptedPrincipals": {
-					"description": "List of user objectIds that are exempted from the set subscription tenant policies for the user's tenant.",
-					"type": "array",
-					"items": {
-						"format": "uuid",
-						"type": "string",
-						"example": "00000000-0000-0000-0000-000000000000"
-					}
-				}
-			}
-		},   
+        "blockSubscriptionsLeavingTenant": {
+          "description": "Blocks the leaving of subscriptions from user's tenant.",
+          "type": "boolean"
+        },
+        "blockSubscriptionsIntoTenant": {
+          "description": "Blocks the entering of subscriptions into user's tenant.",
+          "type": "boolean"
+        },
+        "exemptedPrincipals": {
+          "description": "List of user objectIds that are exempted from the set subscription tenant policies for the user's tenant.",
+          "type": "array",
+          "items": {
+            "format": "uuid",
+            "type": "string",
+            "example": "00000000-0000-0000-0000-000000000000"
+          }
+        }
+      }
+   },
     "GetTenantPolicyResponse": {
       "description": "Tenant policy Information.",
       "properties": {
