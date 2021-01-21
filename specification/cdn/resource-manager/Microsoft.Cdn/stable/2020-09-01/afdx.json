@@ -3473,7 +3473,8 @@
             "name": "maxRanking",
             "in": "query",
             "required": true,
-            "type": "number"
+            "type": "integer",
+            "format": "int32"
           },
           {
             "name": "dateTimeBegin",
@@ -3791,7 +3792,8 @@
             "name": "maxRanking",
             "in": "query",
             "required": true,
-            "type": "number"
+            "type": "integer",
+            "format": "int32"
           },
           {
             "name": "rankings",
@@ -4484,9 +4486,6 @@
       "allOf": [
         {
           "$ref": "#/definitions/SecretParameters"
-        },
-        {
-          "$ref": "#/definitions/Certificate"
         }
       ]
     },
@@ -4497,9 +4496,6 @@
       "allOf": [
         {
           "$ref": "#/definitions/SecretParameters"
-        },
-        {
-          "$ref": "#/definitions/Certificate"
         }
       ],
       "required": [
