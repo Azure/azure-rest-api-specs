@@ -617,7 +617,7 @@
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "The filter to apply on the operation. For example, you can use $apply=filter(contains(ResourceName, 'net'))."
+            "description": "The filter to apply on the operation. For example, $apply=filter(count eq 2)."
           }
         ],
         "responses": {
@@ -1581,7 +1581,8 @@
     "UnresolvedDependenciesFilterProperties": {
       "properties": {
         "count": {
-          "type": "string",
+          "format": "int32",
+          "type": "integer",
           "description": "The count of the resource."
         }
       }
