@@ -416,11 +416,11 @@
         },
         "secret": {
           "description": "Password or account key for secret auth.",
-           "type": "string"
+          "type": "string"
         }
       },
       "required": [
-          "name"
+        "name"
       ]
     },
     "UserAssignedIdentityAuthInfo": {
@@ -429,19 +429,16 @@
       "allOf": [
         {
           "$ref": "#/definitions/AuthInfoBase"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "id": {
-              "description": "Client Id for userAssignedIdentity.",
-              "type": "string"
-            }
-          },
-          "required": [
-            "id"
-          ]
         }
+      ],
+      "properties": {
+        "id": {
+          "description": "Client Id for userAssignedIdentity.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id"
       ]
     },
     "SystemAssignedIdentityAuthInfo": {
@@ -459,24 +456,21 @@
       "allOf": [
         {
           "$ref": "#/definitions/AuthInfoBase"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "id": {
-              "description": "ServicePrincipal Id for servicePrincipal auth.",
-              "type": "string"
-            },
-            "name": {
-              "description": "ServicePrincipal Name for servicePrincipal auth.",
-              "type": "string"
-            }
-          },
-          "required": [
-            "id",
-            "name"
-          ]
         }
+      ],
+      "properties": {
+        "id": {
+          "description": "ServicePrincipal Id for servicePrincipal auth.",
+          "type": "string"
+        },
+        "name": {
+          "description": "ServicePrincipal Name for servicePrincipal auth.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "name"
       ]
     },
     "LinkerResource": {
