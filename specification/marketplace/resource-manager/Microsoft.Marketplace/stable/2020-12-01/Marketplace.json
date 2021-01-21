@@ -16,7 +16,7 @@
     "application/json"
   ],
   "paths": {
-    "/providers/Microsoft.Marketplace/privateStores/{privateStoreId}/Notifications": {
+    "/providers/Microsoft.Marketplace/privateStores/{privateStoreId}/notifications": {
       "parameters": [
         {
           "$ref": "#/parameters/PrivateStoreIdParameter"
@@ -55,7 +55,7 @@
         }
       }
     },
-    "/providers/Microsoft.Marketplace/privateStores/{privateStoreId}/Offers/{offerId}/Notifications": {
+    "/providers/Microsoft.Marketplace/privateStores/{privateStoreId}/offers/{offerId}/notifications": {
       "parameters": [
         {
           "$ref": "#/parameters/PrivateStoreIdParameter"
@@ -100,7 +100,7 @@
         }
       }
     },
-    "/providers/Microsoft.Marketplace/privateStores/{privateStoreId}/Offers/{offerId}/RequestApprovals": {
+    "/providers/Microsoft.Marketplace/privateStores/{privateStoreId}/offers/{offerId}/requestApprovals": {
       "parameters": [
         {
           "$ref": "#/parameters/PrivateStoreIdParameter"
@@ -183,7 +183,7 @@
         }
       }
     },
-    "/providers/Microsoft.Marketplace/privateStores/{privateStoreId}/Offers/{offerId}/AdminRequestApprovals": {
+    "/providers/Microsoft.Marketplace/privateStores/{privateStoreId}/offers/{offerId}/adminRequestApprovals": {
       "parameters": [
         {
           "$ref": "#/parameters/PrivateStoreIdParameter"
@@ -262,7 +262,7 @@
         }
       }
     },
-    "/providers/Microsoft.Marketplace/privateStores/{privateStoreId}/offers/{offerId}/plans/{planId}/RequestApprovals": {
+    "/providers/Microsoft.Marketplace/privateStores/{privateStoreId}/offers/{offerId}/plans/{planId}/requestApprovals": {
       "parameters": [
         {
           "$ref": "#/parameters/PrivateStoreIdParameter"
@@ -290,6 +290,9 @@
           "200": {
             "description": "OK"
           },
+          "204": {
+            "description": "OK"
+          },
           "default": {
             "description": "Microsoft.Marketplace error response describing why the operation failed.",
             "schema": {
@@ -300,6 +303,34 @@
         "x-ms-examples": {
           "WithdrawRequest": {
             "$ref": "./examples/WithdrawRequest.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Marketplace/operations": {
+      "get": {
+        "tags": [
+          "Operations"
+        ],
+        "description": "Lists all of the available Microsoft.Marketplace REST API operations.",
+        "operationId": "Operations_List",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "Microsoft.Marketplace error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         }
       }
@@ -472,7 +503,8 @@
         },
         "messageCode": {
           "description": "Gets or sets the notification message id",
-          "type": "integer"
+          "type": "integer",
+          "format": "int64"
         }
       }
     },
@@ -493,7 +525,7 @@
             "None"
           ],
           "x-ms-enum": {
-            "name": "status",
+            "name": "plansStatus",
             "modelAsString": true
           }
         },
@@ -563,7 +595,7 @@
           "description": "Gets or sets modified at date",
           "type": "string"
         },
-        "IsClosed": {
+        "isClosed": {
           "description": "Gets or sets a value indicating whether the request is closed",
           "type": "boolean"
         },
@@ -577,7 +609,7 @@
             "None"
           ],
           "x-ms-enum": {
-            "name": "status",
+            "name": "requestStatus",
             "modelAsString": true
           }
         },
@@ -591,7 +623,8 @@
         },
         "messageCode": {
           "description": "Gets or sets the notification message code",
-          "type": "boolean"
+          "type": "integer",
+          "format": "int64"
         }
       }
     },
@@ -652,7 +685,8 @@
         },
         "messageCode": {
           "description": "Gets or sets the notification message id",
-          "type": "integer"
+          "type": "integer",
+          "format": "int64"
         },
         "icon": {
           "description": "Gets or sets the icon url",
@@ -685,7 +719,8 @@
         },
         "messageCode": {
           "description": "Gets or sets the notification message id",
-          "type": "integer"
+          "type": "integer",
+          "format": "int64"
         },
         "icon": {
           "description": "Gets or sets the icon url",
@@ -718,7 +753,8 @@
         },
         "messageCode": {
           "description": "Gets or sets the notification message id",
-          "type": "integer"
+          "type": "integer",
+          "format": "int64"
         },
         "icon": {
           "description": "Gets or sets the icon url",
@@ -741,7 +777,7 @@
           "description": "Gets or sets the plan id",
           "type": "string"
         },
-        "PlanDisplayName": {
+        "planDisplayName": {
           "description": "Gets or sets the plan display name",
           "type": "string"
         }
@@ -800,6 +836,82 @@
           "description": "Gets or sets admin details",
           "type": "string"
         }
+      }
+    },
+    "Operation": {
+      "description": "Microsoft.Marketplace REST API operation",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Operation name: {provider}/{resource}/{operation}",
+          "type": "string"
+        },
+        "display": {
+          "description": "The object that represents the operation.",
+          "properties": {
+            "provider": {
+              "description": "Service provider: Microsoft.Marketplace",
+              "type": "string"
+            },
+            "resource": {
+              "description": "Resource on which the operation is performed: Amendments",
+              "type": "string"
+            },
+            "operation": {
+              "description": "Operation type: Get Amendments etc.",
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "OperationListResult": {
+      "description": "Result of the request to list Marketplace operations. It contains a list of operations and a URL link to get the next set of results.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Operation"
+          },
+          "description": "List of Microsoft.Marketplace operations supported by the Microsoft.Marketplace resource provider."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "URL to get the next set of operation list results if there are any.",
+          "readOnly": true
+        }
+      }
+    },
+    "Resource": {
+      "description": "An Azure resource.",
+      "properties": {
+        "id": {
+          "description": "The resource ID.",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "The name of the resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "The type of the resource.",
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "x-ms-azure-resource": true
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
       }
     }
   }
