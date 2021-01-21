@@ -155,7 +155,7 @@ We request OpenAPI(Swagger) spec authoring be assigned to engineers who have an
 | [R4023](#r4023) | [RPaasPutLongRunningOperation201Only](#r4023) | ARM OpenAPI(swagger) specs |
 | [R4025](#r4025) | [RPaasDeleteLongRunningOperation202Only](#r4025) | ARM OpenAPI(swagger) specs |
 | [R4026](#r4026) | [RPaasPostLongRunningOperation202Only](#r4026) | ARM OpenAPI(swagger) specs |
-
+| [R4031](#r4031) | [RPaasResourceProvisioningState](#r4031) | ARM OpenAPI(swagger) specs |
 ### Documentation
 
 #### Documentation Errors
@@ -2270,10 +2270,15 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 **Output Message** : Must not have duplicate name in x-ms-enum extension , make sure every x-ms-enum name unique.  
 
 **Description** : This rule will check all the swagger files with the same api-version, and ensure there is no duplicate x-ms-enum name. 
+The following cases are deemed as violation:
+1. if two enums have the same x-ms-enum name , but types are different.
+2. if two enums have the same x-ms-enum name , but 'modelAsString' are different.
+3. if two enums have the same x-ms-enum name , but include different values.
+4. if two enums have the same x-ms-enum name and 'modelAsString' is false , but enums' values have different order.
 
 **CreatedAt**: March 18, 2020
 
-**LastModifiedAt**: March 18, 2020
+**LastModifiedAt**: January 14, 2021
 
 **How to fix the violation**: Update the duplicate x-ms-enum name :
 
@@ -3210,6 +3215,48 @@ The following would be valid:
           }
           
         }
+...
+```
+Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [ARM](#arm-violations): [Errors](#arm-errors) or [Warnings](#arm-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
+
+### <a name="r4031"></a>R4031 RPaasResourceProvisioningState
+
+**Category** : RPaaS Error
+
+**Applies to** : ARM OpenAPI(swagger) specs
+
+**Output Message** : [RPaaS] The resource {0} is defined without 'provisioningState' in properties bag, consider adding the provisioningState for it.
+
+**Description** : Verifies if a Azure resource has a corresponding 'provisioningState' property. If the 'provisioningState' is not defining explicitly , the client will drop the state when the service does return it. 
+
+**CreatedAt**: January 15, 2021
+
+**LastModifiedAt**: January 15, 2021
+
+**Why this rule is important**: Per [Azure RPC](https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/Addendum.md#provisioningstate-property), all Azure resources must support "provisioningState" property. 
+
+**How to fix the violation**: Add the 'provisioningState' for every Azure resource.
+
+The following would be valid:
+
+```json
+...
+resourceDefinition": {
+  "description": "resource definition",
+  "type": "object",
+  "properties": {
+    "properties": {
+    "type": "object",
+      "properties" :{
+        "provisioningState": {
+          "type": "string",
+          "readOnly": true
+        }
+        ...
+      }
+    }
+  }
+}
 ...
 ```
 Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [ARM](#arm-violations): [Errors](#arm-errors) or [Warnings](#arm-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
