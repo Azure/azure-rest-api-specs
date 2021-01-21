@@ -407,23 +407,20 @@
       "allOf": [
         {
           "$ref": "#/definitions/AuthInfoBase"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "name": {
-              "description": "Username or account name for secret auth.",
-              "type": "string"
-            },
-            "secret": {
-              "description": "Password or account key for secret auth.",
-              "type": "string"
-            }
-          },
-          "required": [
-            "name"
-          ]
         }
+      ],
+      "properties": {
+        "name": {
+          "description": "Username or account name for secret auth.",
+          "type": "string"
+        },
+        "secret": {
+          "description": "Password or account key for secret auth.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "name"
       ]
     },
     "UserAssignedIdentityAuthInfo": {
@@ -432,19 +429,16 @@
       "allOf": [
         {
           "$ref": "#/definitions/AuthInfoBase"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "id": {
-              "description": "Client Id for userAssignedIdentity.",
-              "type": "string"
-            }
-          },
-          "required": [
-            "id"
-          ]
         }
+      ],
+      "properties": {
+        "id": {
+          "description": "Client Id for userAssignedIdentity.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id"
       ]
     },
     "SystemAssignedIdentityAuthInfo": {
@@ -462,24 +456,21 @@
       "allOf": [
         {
           "$ref": "#/definitions/AuthInfoBase"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "id": {
-              "description": "ServicePrincipal Id for servicePrincipal auth.",
-              "type": "string"
-            },
-            "name": {
-              "description": "ServicePrincipal Name for servicePrincipal auth.",
-              "type": "string"
-            }
-          },
-          "required": [
-            "id",
-            "name"
-          ]
         }
+      ],
+      "properties": {
+        "id": {
+          "description": "ServicePrincipal Id for servicePrincipal auth.",
+          "type": "string"
+        },
+        "name": {
+          "description": "ServicePrincipal Name for servicePrincipal auth.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "name"
       ]
     },
     "LinkerResource": {
@@ -545,6 +536,11 @@
         "authInfo": {
           "description": "The authentication type.",
           "$ref": "#/definitions/AuthInfoBase"
+        },
+        "provisioningState": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The provisioning state. "
         }
       }
     },
