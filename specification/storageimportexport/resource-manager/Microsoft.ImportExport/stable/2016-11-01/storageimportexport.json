@@ -144,7 +144,7 @@
             "description": "An integer value that specifies how many jobs at most should be returned. The value cannot exceed 100.",
             "required": false,
             "type": "integer",
-            "format": "int64"
+            "format": "int32"
           },
           {
             "name": "$filter",
@@ -204,7 +204,7 @@
             "description": "An integer value that specifies how many jobs at most should be returned. The value cannot exceed 100.",
             "required": false,
             "type": "integer",
-            "format": "int64"
+            "format": "int32"
           },
           {
             "name": "$filter",
@@ -672,7 +672,7 @@
         },
         "returnPackage": {
           "description": "Contains information about the package being shipped from the Microsoft data center to the customer to return the drives. The format is the same as the deliveryPackage property above. This property is not included if the drives have not yet been returned. ",
-          "$ref": "#/definitions/PackageInformation"
+          "$ref": "#/definitions/PackageInfomation"
         },
         "diagnosticsPath": {
           "type": "string",
@@ -696,7 +696,7 @@
         },
         "percentComplete": {
           "type": "integer",
-          "format": "int64",
+          "format": "int32",
           "description": "Overall percentage completed for the job."
         },
         "incompleteBlobListUri": {
@@ -1104,7 +1104,7 @@
         }
       }
     },
-    "PackageInformation": {
+    "PackageInfomation": {
       "description": "Contains information about the package being shipped by the customer to the Microsoft data center.",
       "required": [
         "carrierName",
@@ -1123,7 +1123,7 @@
         },
         "driveCount": {
           "type": "integer",
-          "format": "int64",
+          "format": "int32",
           "description": "The number of drives included in the package."
         },
         "shipDate": {
