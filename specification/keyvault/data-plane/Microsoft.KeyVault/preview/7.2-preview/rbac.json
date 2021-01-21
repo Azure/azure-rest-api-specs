@@ -567,14 +567,14 @@
           "type": "array",
           "description": "Data action permissions that are granted.",
           "items": {
-            "$ref": "#/definitions/DataActionPermission"
+            "$ref": "#/definitions/DataAction"
           }
         },
         "notDataActions": {
           "type": "array",
           "description": "Data action permissions that are excluded but not denied. They may be granted by other role definitions assigned to a principal.",
           "items": {
-            "$ref": "#/definitions/DataActionPermission"
+            "$ref": "#/definitions/DataAction"
           }
         }
       },
@@ -703,7 +703,7 @@
         ]
       }
     },
-    "DataActionPermission": {
+    "DataAction": {
       "type": "string",
       "description": "Supported permissions for data actions.",
       "enum": [
@@ -738,7 +738,7 @@
         "Microsoft.KeyVault/managedHsm/restore/status/action"
       ],
       "x-ms-enum": {
-        "name": "DataActionPermission",
+        "name": "DataAction",
         "modelAsString": true,
         "values": [
           {
@@ -767,7 +767,7 @@
             "description": "Backup HSM keys."
           },
           {
-            "name": "RestoreHsmKey",
+            "name": "RestoreHsmKeys",
             "value": "Microsoft.KeyVault/managedHsm/keys/restore/action",
             "description": "Restore HSM keys."
           },
