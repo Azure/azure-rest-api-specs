@@ -1286,6 +1286,23 @@
           "type": "object",
           "description": "The error detail of the operation if any.",
           "$ref": "#/definitions/ErrorResponse"
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Additonal operation specific properties",
+          "$ref": "#/definitions/AscOperationProperties"
+        }
+      }
+    },
+    "AscOperationProperties": {
+      "type": "object",
+      "description": "Operation specific output",
+      "properties": {
+        "output": {
+          "description": "Additional Operation Specific Properties",
+          "additionalProperties": {
+            "type": "object"
+          }
         }
       }
     },
@@ -1568,7 +1585,7 @@
       "description": "Settings for Extended Groups username and group download.",
       "type": "object",
       "properties": {
-        "extendedGroupsEnabled": {
+        "extendedGroups": {
           "type": "boolean",
           "description": "Whether or not Extended Groups is enabled."
         },
@@ -1599,7 +1616,7 @@
           "type": "string",
           "description": "The fully qualified domain name or IP address of the LDAP server to use."
         },
-        "ldapBaseDn": {
+        "ldapBaseDN": {
           "type": "string",
           "description": "The base distinguished name for the LDAP domain."
         },
