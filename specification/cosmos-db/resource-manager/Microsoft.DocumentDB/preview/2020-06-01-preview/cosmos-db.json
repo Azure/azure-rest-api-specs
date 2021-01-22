@@ -7946,17 +7946,19 @@
     "BackupStorageRedundanciesResult": {
       "description": "Available backup storage redundancies in selected region.",
       "type": "object",
-      "properties": {
-        "backupStorageRedundancy": {
-          "type": "object",
-          "x-ms-client-flatten": true,
-          "description": "The properties of a available backup storage redundancies",
-          "$ref": "#/definitions/BackupStorageRedundancy"
-        }
-      },
       "location": {
         "type": "string",
         "description": "The location of the resource group to which the resource belongs."
+      },
+      "properties": {
+        "backupStorageRedundancy": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/BackupStorageRedundancy"
+          },
+          "description": "The properties of a available backup storage redundancies"
+        }
       }
     },
     "BackupStorageRedundancy": {
