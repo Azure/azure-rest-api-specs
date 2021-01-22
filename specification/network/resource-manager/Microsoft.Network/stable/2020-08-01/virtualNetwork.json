@@ -1382,6 +1382,10 @@
           "readOnly": true,
           "type": "string",
           "description": "A unique read-only string that changes whenever the resource is updated."
+        },
+        "type": {
+          "type": "string",
+          "description": "Resource type."
         }
       },
       "allOf": [
@@ -1496,11 +1500,20 @@
         },
         "privateEndpointNetworkPolicies": {
           "type": "string",
+          "default": "Enabled",
           "description": "Enable or Disable apply network policies on private end point in the subnet."
         },
         "privateLinkServiceNetworkPolicies": {
           "type": "string",
+          "default": "Enabled",
           "description": "Enable or Disable apply network policies on private link service in the subnet."
+        },
+        "applicationGatewayIpConfigurations": {
+          "type": "array",
+          "items":{
+            "$ref": "./applicationGateway.json#/definitions/ApplicationGatewayIPConfiguration"
+          },
+          "description": "Application gateway IP configurations of virtual network resource."
         }
       },
       "description": "Properties of the subnet."
@@ -1593,6 +1606,10 @@
           "readOnly": true,
           "type": "string",
           "description": "A unique read-only string that changes whenever the resource is updated."
+        },
+        "type": {
+          "type": "string",
+          "description": "Resource type."
         }
       },
       "allOf": [

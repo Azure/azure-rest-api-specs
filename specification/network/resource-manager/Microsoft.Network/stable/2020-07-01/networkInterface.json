@@ -1035,6 +1035,10 @@
           "readOnly": true,
           "type": "string",
           "description": "A unique read-only string that changes whenever the resource is updated."
+        },
+        "type": {
+          "type": "string",
+          "description": "Resource type."
         }
       },
       "allOf": [
@@ -1153,6 +1157,14 @@
           "readOnly": true,
           "$ref": "./network.json#/definitions/ProvisioningState",
           "description": "The provisioning state of the network interface resource."
+        },
+        "nicType": {
+          "type": "string",
+          "description": "Type of Network Interface resource."
+        },
+        "privateLinkService": {
+          "$ref": "#/definitions/PrivateLinkService",
+          "description": "Privatelinkservice of the network interface resource."
         }
       },
       "description": "NetworkInterface properties."
@@ -1485,7 +1497,8 @@
         },
         "privateIPAllocationMethod": {
           "$ref": "./network.json#/definitions/IPAllocationMethod",
-          "description": "The private IP address allocation method."
+          "description": "The private IP address allocation method.",
+          "default": "Dynamic"
         },
         "subnet": {
           "$ref": "./virtualNetwork.json#/definitions/Subnet",
