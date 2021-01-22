@@ -181,6 +181,12 @@
             "schema": {
               "$ref": "#/definitions/ApplyUpdate"
             }
+          },
+          "default": {
+            "description": "BadRequest",
+            "schema": {
+              "$ref": "#/definitions/MaintenanceError"
+            }
           }
         },
         "x-ms-examples": {
@@ -250,6 +256,12 @@
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/ApplyUpdate"
+            }
+          },
+          "default": {
+            "description": "BadRequest",
+            "schema": {
+              "$ref": "#/definitions/MaintenanceError"
             }
           }
         },
@@ -328,6 +340,12 @@
             "schema": {
               "$ref": "#/definitions/ApplyUpdate"
             }
+          },
+          "default": {
+            "description": "BadRequest",
+            "schema": {
+              "$ref": "#/definitions/MaintenanceError"
+            }
           }
         },
         "x-ms-examples": {
@@ -390,6 +408,12 @@
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/ApplyUpdate"
+            }
+          },
+          "default": {
+            "description": "BadRequest",
+            "schema": {
+              "$ref": "#/definitions/MaintenanceError"
             }
           }
         },
@@ -476,6 +500,12 @@
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/ConfigurationAssignment"
+            }
+          },
+          "default": {
+            "description": "BadRequest",
+            "schema": {
+              "$ref": "#/definitions/MaintenanceError"
             }
           }
         },
@@ -570,6 +600,12 @@
             "schema": {
               "$ref": "#/definitions/ConfigurationAssignment"
             }
+          },
+          "default": {
+            "description": "BadRequest",
+            "schema": {
+              "$ref": "#/definitions/MaintenanceError"
+            }
           }
         },
         "x-ms-examples": {
@@ -652,6 +688,15 @@
             "schema": {
               "$ref": "#/definitions/ConfigurationAssignment"
             }
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "BadRequest",
+            "schema": {
+              "$ref": "#/definitions/MaintenanceError"
+            }
           }
         },
         "x-ms-examples": {
@@ -723,6 +768,12 @@
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/ConfigurationAssignment"
+            }
+          },
+          "default": {
+            "description": "BadRequest",
+            "schema": {
+              "$ref": "#/definitions/MaintenanceError"
             }
           }
         },
@@ -803,6 +854,12 @@
             "schema": {
               "$ref": "#/definitions/ConfigurationAssignment"
             }
+          },
+          "default": {
+            "description": "BadRequest",
+            "schema": {
+              "$ref": "#/definitions/MaintenanceError"
+            }
           }
         },
         "x-ms-examples": {
@@ -870,6 +927,15 @@
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/ConfigurationAssignment"
+            }
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "BadRequest",
+            "schema": {
+              "$ref": "#/definitions/MaintenanceError"
             }
           }
         },
@@ -948,6 +1014,12 @@
             "schema": {
               "$ref": "#/definitions/ListConfigurationAssignmentsResult"
             }
+          },
+          "default": {
+            "description": "BadRequest",
+            "schema": {
+              "$ref": "#/definitions/MaintenanceError"
+            }
           }
         },
         "x-ms-pageable": {
@@ -1013,6 +1085,12 @@
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/ListConfigurationAssignmentsResult"
+            }
+          },
+          "default": {
+            "description": "BadRequest",
+            "schema": {
+              "$ref": "#/definitions/MaintenanceError"
             }
           }
         },
@@ -1187,6 +1265,9 @@
               "$ref": "#/definitions/MaintenanceConfiguration"
             }
           },
+          "204": {
+            "description": "No Content"
+          },
           "default": {
             "description": "BadRequest",
             "schema": {
@@ -1307,6 +1388,192 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Maintenance/maintenanceConfigurations": {
+      "get": {
+        "tags": [
+          "MaintenanceConfigurations"
+        ],
+        "summary": "Get Configuration records within a subscription and resource group",
+        "operationId": "MaintenanceConfigurationsForResourceGroup_List",
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "Resource Group Name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ListMaintenanceConfigurationsResult"
+            }
+          },
+          "default": {
+            "description": "BadRequest",
+            "schema": {
+              "$ref": "#/definitions/MaintenanceError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        },
+        "x-ms-examples": {
+          "MaintenanceConfigurationsResourceGroup_List": {
+            "$ref": "./examples/MaintenanceConfigurationsResourceGroup_List.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Maintenance/applyUpdate": {
+      "get": {
+        "tags": [
+          "ApplyUpdate"
+        ],
+        "summary": "Get Configuration records within a subscription",
+        "operationId": "ApplyUpdates_List",
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ListApplyUpdate"
+            }
+          },
+          "default": {
+            "description": "BadRequest",
+            "schema": {
+              "$ref": "#/definitions/MaintenanceError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        },
+        "x-ms-examples": {
+          "ApplyUpdates_List": {
+            "$ref": "./examples/ApplyUpdates_List.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Maintenance/applyUpdate": {
+      "get": {
+        "tags": [
+          "ApplyUpdate"
+        ],
+        "summary": "Get Configuration records within a subscription and resource group",
+        "operationId": "ApplyUpdateForResourceGroup_List",
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "Resource Group Name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ListApplyUpdate"
+            }
+          },
+          "default": {
+            "description": "BadRequest",
+            "schema": {
+              "$ref": "#/definitions/MaintenanceError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        },
+        "x-ms-examples": {
+          "ApplyUpdatesResourceGroup_List": {
+            "$ref": "./examples/ApplyUpdatesResourceGroup_List.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Maintenance/configurationAssignment": {
+      "get": {
+        "tags": [
+          "ConfigurationAssignments"
+        ],
+        "summary": "Get configuration assignment within a subscription",
+        "operationId": "ConfigurationAssignmentsWithinSubscription_List",
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ListConfigurationAssignmentsResult"
+            }
+          },
+          "default": {
+            "description": "BadRequest",
+            "schema": {
+              "$ref": "#/definitions/MaintenanceError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        },
+        "x-ms-examples": {
+          "ConfigurationAssignmentsResultWithinSubscription_List": {
+            "$ref": "./examples/ConfigurationAssignmentsResultWithinSubscription_List.json"
+          }
+        }
+      }
+    },
     "/providers/Microsoft.Maintenance/operations": {
       "get": {
         "tags": [
@@ -1416,6 +1683,12 @@
             "schema": {
               "$ref": "#/definitions/ListUpdatesResult"
             }
+          },
+          "default": {
+            "description": "BadRequest",
+            "schema": {
+              "$ref": "#/definitions/MaintenanceError"
+            }
           }
         },
         "x-ms-pageable": {
@@ -1482,6 +1755,12 @@
             "schema": {
               "$ref": "#/definitions/ListUpdatesResult"
             }
+          },
+          "default": {
+            "description": "BadRequest",
+            "schema": {
+              "$ref": "#/definitions/MaintenanceError"
+            }
           }
         },
         "x-ms-pageable": {
@@ -1544,6 +1823,12 @@
           "description": "Type of the resource",
           "type": "string",
           "readOnly": true
+        },
+        "systemData": {
+          "readOnly": true,
+          "type": "object",
+          "description": "Azure Resource Manager metadata containing createdBy and modifiedBy information.",
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
         }
       },
       "x-ms-azure-resource": true
@@ -1561,6 +1846,19 @@
           "$ref": "#/definitions/ApplyUpdateProperties",
           "description": "Properties of the apply update",
           "x-ms-client-flatten": true
+        }
+      }
+    },
+    "ListApplyUpdate": {
+      "description": "Response for ConfigurationAssignments list",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The list of configuration Assignments",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApplyUpdate"
+          }
         }
       }
     },
@@ -1943,6 +2241,10 @@
           "description": "Properties of the operation",
           "type": "object",
           "x-ms-client-flatten": true
+        },
+        "isDataAction": {
+          "description": "Indicates whether the operation is a data action",
+          "type": "boolean"
         }
       }
     },
