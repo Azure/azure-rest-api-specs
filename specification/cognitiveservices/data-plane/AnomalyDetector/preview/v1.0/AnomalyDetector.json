@@ -216,6 +216,9 @@
           {
             "name": "perSecond",
             "value": "secondly"
+          },
+          {
+            "value": "microsecond"
           }
         ]
       },
@@ -365,56 +368,69 @@
         "period": {
           "type": "integer",
           "format": "int32",
+          "readOnly": true,
           "description": "Frequency extracted from the series, zero means no recurrent pattern has been found."
         },
         "expectedValues": {
           "type": "array",
+          "readOnly": true,
           "description": "ExpectedValues contain expected value for each input point. The index of the array is consistent with the input series.",
           "items": {
             "type": "number",
             "format": "float",
+            "readOnly": true,
             "x-nullable": false
           }
         },
         "upperMargins": {
           "type": "array",
+          "readOnly": true,
           "description": "UpperMargins contain upper margin of each input point. UpperMargin is used to calculate upperBoundary, which equals to expectedValue + (100 - marginScale)*upperMargin. Anomalies in response can be filtered by upperBoundary and lowerBoundary. By adjusting marginScale value, less significant anomalies can be filtered in client side. The index of the array is consistent with the input series.",
           "items": {
             "type": "number",
             "format": "float",
+            "readOnly": true,
             "x-nullable": false
           }
         },
         "lowerMargins": {
           "type": "array",
+          "readOnly": true,
           "description": "LowerMargins contain lower margin of each input point. LowerMargin is used to calculate lowerBoundary, which equals to expectedValue - (100 - marginScale)*lowerMargin. Points between the boundary can be marked as normal ones in client side. The index of the array is consistent with the input series.",
           "items": {
             "type": "number",
             "format": "float",
+            "readOnly": true,
             "x-nullable": false
           }
         },
         "isAnomaly": {
           "type": "array",
+          "readOnly": true,
           "description": "IsAnomaly contains anomaly properties for each input point. True means an anomaly either negative or positive has been detected. The index of the array is consistent with the input series.",
           "items": {
             "type": "boolean",
+            "readOnly": true,
             "x-nullable": false
           }
         },
         "isNegativeAnomaly": {
           "type": "array",
+          "readOnly": true,
           "description": "IsNegativeAnomaly contains anomaly status in negative direction for each input point. True means a negative anomaly has been detected. A negative anomaly means the point is detected as an anomaly and its real value is smaller than the expected one. The index of the array is consistent with the input series.",
           "items": {
             "type": "boolean",
+            "readOnly": true,
             "x-nullable": false
           }
         },
         "isPositiveAnomaly": {
           "type": "array",
+          "readOnly": true,
           "description": "IsPositiveAnomaly contain anomaly status in positive direction for each input point. True means a positive anomaly has been detected. A positive anomaly means the point is detected as an anomaly and its real value is larger than the expected one. The index of the array is consistent with the input series.",
           "items": {
             "type": "boolean",
+            "readOnly": true,
             "x-nullable": false
           }
         },
@@ -425,6 +441,7 @@
           "items": {
             "type": "number",
             "format": "float",
+            "readOnly": true,
             "x-nullable": false
           }
         }
@@ -432,52 +449,50 @@
     },
     "LastDetectResponse": {
       "type": "object",
-      "required": [
-        "expectedValue",
-        "isAnomaly",
-        "isNegativeAnomaly",
-        "isPositiveAnomaly",
-        "lowerMargin",
-        "period",
-        "upperMargin",
-        "suggestedWindow"
-      ],
       "properties": {
         "period": {
           "type": "integer",
           "format": "int32",
+          "readOnly": true,
           "description": "Frequency extracted from the series, zero means no recurrent pattern has been found."
         },
         "suggestedWindow": {
           "type": "integer",
           "format": "int32",
+          "readOnly": true,
           "description": "Suggested input series points needed for detecting the latest point."
         },
         "expectedValue": {
           "type": "number",
           "format": "float",
+          "readOnly": true,
           "description": "Expected value of the latest point."
         },
         "upperMargin": {
           "type": "number",
           "format": "float",
+          "readOnly": true,
           "description": "Upper margin of the latest point. UpperMargin is used to calculate upperBoundary, which equals to expectedValue + (100 - marginScale)*upperMargin. If the value of latest point is between upperBoundary and lowerBoundary, it should be treated as normal value. By adjusting marginScale value, anomaly status of latest point can be changed."
         },
         "lowerMargin": {
           "type": "number",
           "format": "float",
+          "readOnly": true,
           "description": "Lower margin of the latest point. LowerMargin is used to calculate lowerBoundary, which equals to expectedValue - (100 - marginScale)*lowerMargin. "
         },
         "isAnomaly": {
           "type": "boolean",
+          "readOnly": true,
           "description": "Anomaly status of the latest point, true means the latest point is an anomaly either in negative direction or positive direction."
         },
         "isNegativeAnomaly": {
           "type": "boolean",
+          "readOnly": true,
           "description": "Anomaly status in negative direction of the latest point. True means the latest point is an anomaly and its real value is smaller than the expected one."
         },
         "isPositiveAnomaly": {
           "type": "boolean",
+          "readOnly": true,
           "description": "Anomaly status in positive direction of the latest point. True means the latest point is an anomaly and its real value is larger than the expected one."
         },
         "severity": {
@@ -529,15 +544,11 @@
     },
     "ChangePointDetectResponse": {
       "type": "object",
-      "required": [
-        "isChangePoint",
-        "confidenceScores",
-        "period"
-      ],
       "properties": {
         "period": {
           "type": "integer",
           "format": "int32",
+          "readOnly": true,
           "description": "Frequency extracted from the series, zero means no recurrent pattern has been found."
         },
         "isChangePoint": {
@@ -545,6 +556,7 @@
           "description": "isChangePoint contains change point properties for each input point. True means an anomaly either negative or positive has been detected. The index of the array is consistent with the input series.",
           "items": {
             "type": "boolean",
+            "readOnly": true,
             "x-nullable": false
           }
         },
@@ -554,6 +566,7 @@
           "items": {
             "type": "number",
             "format": "float",
+            "readOnly": true,
             "x-nullable": false
           }
         }
