@@ -233,24 +233,6 @@
     }
   },
   "definitions": {
-    "ErrorDetail": {
-      "description": "Error details",
-      "type": "object",
-      "properties": {
-        "message": {
-          "description": "Error message",
-          "type": "string"
-        },
-        "code": {
-          "description": "Error code",
-          "type": "string"
-        },
-        "target": {
-          "description": "Error target",
-          "type": "string"
-        }
-      }
-    },
     "ErrorContract": {
       "title": "Error details.",
       "description": "Contains details when the response code indicates an error.",
@@ -258,7 +240,7 @@
       "properties": {
         "error": {
           "description": "The error details.",
-          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse"
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
         }
       }
     },
@@ -284,7 +266,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
         }
       ],
       "properties": {
