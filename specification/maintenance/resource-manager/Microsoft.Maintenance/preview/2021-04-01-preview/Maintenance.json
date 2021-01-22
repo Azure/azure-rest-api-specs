@@ -401,6 +401,90 @@
       }
     },
     "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/{providerName}/{resourceParentType}/{resourceParentName}/{resourceType}/{resourceName}/providers/Microsoft.Maintenance/configurationAssignments/{configurationAssignmentName}": {
+      "get": {
+        "tags": [
+          "ConfigurationAssignments"
+        ],
+        "summary": "Get configuration assignment",
+        "description": "Get configuration for resource.",
+        "operationId": "ConfigurationAssignments_GetParent",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "Resource group name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "providerName",
+            "in": "path",
+            "description": "Resource provider name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceParentType",
+            "in": "path",
+            "description": "Resource parent type",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceParentName",
+            "in": "path",
+            "description": "Resource parent identifier",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceType",
+            "in": "path",
+            "description": "Resource type",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "Resource identifier",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "configurationAssignmentName",
+            "in": "path",
+            "description": "Configuration assignment name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ConfigurationAssignment"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ConfigurationAssignments_CreateOrUpdateParent": {
+            "$ref": "./examples/ConfigurationAssignments_GetParent.json"
+          }
+        }
+      },
       "put": {
         "tags": [
           "ConfigurationAssignments"
@@ -578,6 +662,76 @@
       }
     },
     "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/{providerName}/{resourceType}/{resourceName}/providers/Microsoft.Maintenance/configurationAssignments/{configurationAssignmentName}": {
+      "get": {
+        "tags": [
+          "ConfigurationAssignments"
+        ],
+        "summary": "Get configuration assignment",
+        "description": "Get configuration for resource.",
+        "operationId": "ConfigurationAssignments_Get",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "Resource group name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "providerName",
+            "in": "path",
+            "description": "Resource provider name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceType",
+            "in": "path",
+            "description": "Resource type",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "Resource identifier",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "configurationAssignmentName",
+            "in": "path",
+            "description": "Configuration assignment name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ConfigurationAssignment"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ConfigurationAssignments_GetParent": {
+            "$ref": "./examples/ConfigurationAssignments_GetParent.json"
+          }
+        }
+      },
       "put": {
         "tags": [
           "ConfigurationAssignments"
