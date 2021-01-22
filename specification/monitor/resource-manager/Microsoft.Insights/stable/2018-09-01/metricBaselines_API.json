@@ -5,7 +5,7 @@
     "x-ms-code-generation-settings": {
       "name": "MonitorManagementClient"
     },
-    "version": "2019-03-01"
+    "version": "2018-09-01"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -121,46 +121,6 @@
       }
     },
     "MetricBaselinesResponse": {
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/SingleMetricBaseline"
-          },
-          "description": "The list of metric baselines."
-        }
-      },
-      "description": "A list of metric baselines."
-    },
-    "SingleMetricBaseline": {
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "The metric baseline Id."
-        },
-        "type": {
-          "type": "string",
-          "description": "The resource type of the metric baseline resource."
-        },
-        "name": {
-          "type": "string",
-          "description": "The name of the metric for which the baselines were retrieved."
-        },
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/MetricBaselinesProperties",
-          "description": "The metric baseline properties of the metric."
-        }
-      },
-      "required": [
-        "id",
-        "type",
-        "name",
-        "properties"
-      ],
-      "description": "The baseline results of a single metric."
-    },
-    "MetricBaselinesProperties": {
       "type": "object",
       "properties": {
         "timespan": {
@@ -176,6 +136,34 @@
           "type": "string",
           "description": "The namespace of the metrics been queried."
         },
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SingleMetricBaseline"
+          },
+          "description": "The baseline for each time series that was queried."
+        }
+      },
+      "required": [
+        "timespan",
+        "interval"
+      ],
+      "description": "A list of metric baselines."
+    },
+    "SingleMetricBaseline": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The metric baseline Id."
+        },
+        "type": {
+          "type": "string",
+          "description": "The resource type of the metric baseline resource."
+        },
+        "metricName": {
+          "type": "string",
+          "description": "The name of the metric for which the baselines were retrieved."
+        },
         "baselines": {
           "type": "array",
           "items": {
@@ -185,11 +173,12 @@
         }
       },
       "required": [
-        "timespan",
-        "interval",
+        "id",
+        "type",
+        "metricName",
         "baselines"
       ],
-      "description": "The response to a metric baselines query."
+      "description": "The baseline results of a single metric."
     },
     "TimeSeriesBaseline": {
       "properties": {
