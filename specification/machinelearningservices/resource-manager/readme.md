@@ -25,7 +25,7 @@ To see additional help and options, run:
 These are the global settings for the Machine Learning Services API.
 
 ``` yaml
-openapi-type: arm
+openapi-type: arm 
 tag: package-2020-09-01-preview
 ```
 
