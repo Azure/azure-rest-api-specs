@@ -179,6 +179,7 @@ swagger-to-sdk:
   - repo: azure-sdk-for-net-track2
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-python
+  - repo: azure-sdk-for-java
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
   - repo: azure-cli-extensions
@@ -190,7 +191,7 @@ swagger-to-sdk:
 ## C#
 
 These settings apply only when `--csharp` is specified on the command line.
-Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azure-sdk-for-net-track2 clone>`.
+Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azure-sdk-for-net clone>`.
 
 ``` yaml $(csharp)
 csharp:
