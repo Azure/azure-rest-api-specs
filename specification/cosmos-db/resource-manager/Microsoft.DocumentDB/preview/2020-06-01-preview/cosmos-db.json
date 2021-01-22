@@ -4298,6 +4298,45 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DocumentDB/locations/{location}/backupStorageRedundancies": {
+      "get": {
+        "operationId": "BackupStorageRedundancies_ListByLocation",
+        "x-ms-examples": {
+          "CosmosDBDatabaseAccountList": {
+            "$ref": "./examples/CosmosDBBackupStorageRedundanciesList.json"
+          }
+        },
+        "description": "Lists all the available backup redundancies in a region.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/locationParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/BackupStorageRedundanciesResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
     }
   },
   "definitions": {
@@ -7787,6 +7826,11 @@
           "format": "int32",
           "minimum": 0,
           "description": "An integer representing the time (in hours) that each backup is retained"
+        },
+        "backupStorageRedundancy": {
+          "description": "Enum to indicate backup residency",
+          "type": "string",
+          "$ref": "#/definitions/BackupStorageRedundancy"
         }
       }
     },
@@ -7897,6 +7941,36 @@
           "format": "date-time",
           "description": "The time at which the regional restorable database account has been deleted (ISO-8601 format)."
         }
+      }
+    },
+    "BackupStorageRedundanciesResult": {
+      "description": "Available backup storage redundancies in selected region.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "type": "object",
+          "x-ms-client-flatten": true,
+          "description": "The properties of a available backup storage redundancies",
+          "$ref": "#/definitions/BackupStorageRedundancy"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ARMResourceProperties"
+        }
+      ]
+    },
+    "BackupStorageRedundancy": {
+      "description": "Enum to indicate the available backup storage redundancies",
+      "type": "string",
+      "enum": [
+        "Geo",
+        "Local",
+        "Zone"
+      ],
+      "x-ms-enum": {
+        "name": "BackupStorageRedundancy",
+        "modelAsString": true
       }
     }
   },
