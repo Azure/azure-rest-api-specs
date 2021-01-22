@@ -57,6 +57,18 @@ title: SubscriptionClient
 description: The subscription client
 ```
 
+### Tag: package-2021-01-preview
+
+These settings apply only when `--tag=package-2021-01-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-01-preview'
+input-file:
+- Microsoft.Subscription/stable/2016-06-01/subscriptions.json
+- Microsoft.Subscription/preview/2021-01-01-preview/subscriptions.json
+title: SubscriptionClient
+description: The subscription client
+```
+
 ### Tag: package-2019-10-preview
 
 These settings apply only when `--tag=package-2019-10-preview` is specified on the command line.
@@ -161,9 +173,21 @@ output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-subscription
 
 ``` yaml $(java) && $(multiapi)
 batch:
+  - tag: package-2021-01-preview
   - tag: package-2019-10-preview
   - tag: package-2017-11-preview
 ```
+### Tag: package-2021-01-preview and java
+
+These settings apply only when `--tag=package-2021-01-preview --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2021-01-preview' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.subscription.v2021_01_01_preview
+  output-folder: $(azure-libraries-for-java-folder)/sdk/subscription/mgmt-v2021_01_01_preview
+regenerate-manager: true
+generate-interface: true
 
 ### Tag: package-2019-10-preview and java
 
