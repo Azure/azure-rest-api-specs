@@ -414,11 +414,13 @@
             "$ref": "#/parameters/ListSkipTokenParameter"
           },
           {
-            "name": "conditionalMembers",
+            "name": "parameters",
             "in": "body",
             "required": false,
-            "type": "string",
-            "description": "Network group conditional filter."
+            "schema": {
+              "$ref": "#/definitions/EffectiveVirtualNetworksParameter"
+            },
+            "description": "Effective Virtual Networks Parameter."
           }
         ],
         "responses": {
@@ -657,6 +659,15 @@
         "modelAsString": true
       },
       "description": "Configuration Deployment Type."
+    },
+    "EffectiveVirtualNetworksParameter": {
+      "properties": {
+        "conditionalMembers": {
+          "type": "string",
+          "description": "Conditional Members."
+        }
+      },
+      "description": "Effective Virtual Networks Parameter."
     }
   },
   "parameters": {
