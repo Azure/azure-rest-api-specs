@@ -562,7 +562,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.MachineLearningServices/locations/{location}/Quotas": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.MachineLearningServices/locations/{location}/quotas": {
       "get": {
         "tags": [
           "Quota"
@@ -590,6 +590,12 @@
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/ListWorkspaceQuotas"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/MachineLearningServiceError"
             }
           }
         },
@@ -974,9 +980,55 @@
             }
           }
         },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink",
+          "itemName": "nodes"
+        },
         "x-ms-examples": {
           "Get compute nodes information for a compute": {
             "$ref": "./examples/amlComputeListNodes.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/listNotebookAccessToken": {
+      "post": {
+        "tags": [
+          "Workspaces"
+        ],
+        "description": "return notebook access token and refresh token",
+        "operationId": "Workspaces_ListNotebookAccessToken",
+        "x-ms-examples": {
+          "List Workspace Keys": {
+            "$ref": "./examples/listNotebookAccessToken.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/APIVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/NotebookAccessTokenResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/MachineLearningServiceError"
+            }
           }
         }
       }
@@ -1234,7 +1286,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/MachineLearningServiceError"
             }
           }
         }
@@ -1286,7 +1338,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/MachineLearningServiceError"
             }
           }
         }
@@ -1329,7 +1381,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/MachineLearningServiceError"
             }
           }
         }
@@ -1366,188 +1418,6 @@
             "description": "Successfully retrieved private link resources.",
             "schema": {
               "$ref": "#/definitions/PrivateLinkResourceListResult"
-            }
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/linkedServices": {
-      "get": {
-        "tags": [
-          "LinkedServices"
-        ],
-        "x-ms-examples": {
-          "ListLinkedServices": {
-            "$ref": "./examples/listLinkedServices.json"
-          }
-        },
-        "operationId": "LinkedServices_List",
-        "description": "List all linked services under an AML workspace.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/WorkspaceNameParameter"
-          },
-          {
-            "$ref": "#/parameters/APIVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successfully retrieved the linked services.",
-            "schema": {
-              "$ref": "#/definitions/LinkedServiceList"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed",
-            "schema": {
-              "$ref": "#/definitions/MachineLearningServiceError"
-            }
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/linkedServices/{linkName}": {
-      "put": {
-        "tags": [
-          "LinkedServices"
-        ],
-        "operationId": "LinkedServices_Create",
-        "description": "Add a new linked service.",
-        "x-ms-examples": {
-          "CreateLinkedService": {
-            "$ref": "./examples/createLinkedService.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/WorkspaceNameParameter"
-          },
-          {
-            "$ref": "#/parameters/LinkName"
-          },
-          {
-            "$ref": "#/parameters/APIVersionParameter"
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "description": "The object for creating or updating a linked service",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/LinkedServiceRequest"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successfully created the linked service.",
-            "schema": {
-              "$ref": "#/definitions/LinkedServiceResponse"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed",
-            "schema": {
-              "$ref": "#/definitions/MachineLearningServiceError"
-            }
-          }
-        }
-      },
-      "get": {
-        "tags": [
-          "LinkedServices"
-        ],
-        "operationId": "LinkedServices_Get",
-        "description": "Get the detail of a linked service.",
-        "x-ms-examples": {
-          "GetLinkedService": {
-            "$ref": "./examples/getLinkedService.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/WorkspaceNameParameter"
-          },
-          {
-            "$ref": "#/parameters/LinkName"
-          },
-          {
-            "$ref": "#/parameters/APIVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successfully retrieved the detail of the linked service.",
-            "schema": {
-              "$ref": "#/definitions/LinkedServiceResponse"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed",
-            "schema": {
-              "$ref": "#/definitions/MachineLearningServiceError"
-            }
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "LinkedServices"
-        ],
-        "operationId": "LinkedServices_Delete",
-        "description": "Delete a linked service.",
-        "x-ms-examples": {
-          "DeleteLinkedService": {
-            "$ref": "./examples/deleteLinkedService.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/WorkspaceNameParameter"
-          },
-          {
-            "$ref": "#/parameters/LinkName"
-          },
-          {
-            "$ref": "#/parameters/APIVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successfully deleted the linked service."
-          },
-          "204": {
-            "description": "Specific linked service not found."
-          },
-          "default": {
-            "description": "Error response describing why the operation failed",
-            "schema": {
-              "$ref": "#/definitions/MachineLearningServiceError"
             }
           }
         }
@@ -1820,6 +1690,47 @@
           },
           "202": {
             "description": "The request was successful; the request was well-formed and received properly."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/MachineLearningServiceError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/listStorageAccountKeys": {
+      "post": {
+        "tags": [
+          "ProxyOperations"
+        ],
+        "operationId": "StorageAccount_ListKeys",
+        "x-ms-examples": {
+          "List Workspace Keys": {
+            "$ref": "./examples/listStorageAccountKeys.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/APIVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/ListStorageAccountKeysResult"
+            }
           },
           "default": {
             "description": "Error response describing why the operation failed",
@@ -2120,7 +2031,7 @@
     },
     "PaginationParameter": {
       "in": "query",
-      "name": "$skiptoken",
+      "name": "$skip",
       "type": "string",
       "description": "Continuation token for pagination.",
       "required": false,
@@ -2166,14 +2077,6 @@
       "required": true,
       "type": "string",
       "description": "The name of the private endpoint connection associated with the workspace",
-      "x-ms-parameter-location": "method"
-    },
-    "LinkName": {
-      "name": "linkName",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "Friendly name of the linked workspace",
       "x-ms-parameter-location": "method"
     },
     "ModelIdParameter": {
@@ -2370,12 +2273,6 @@
           "description": "The friendly name for this workspace. This name in mutable",
           "type": "string"
         },
-        "creationTime": {
-          "format": "date-time",
-          "description": "The creation time of the machine learning workspace in ISO8601 format.",
-          "type": "string",
-          "readOnly": true
-        },
         "keyVault": {
           "description": "ARM id of the key vault associated with this workspace. This cannot be changed once the workspace has been created",
           "type": "string"
@@ -2457,6 +2354,19 @@
             "$ref": "#/definitions/SharedPrivateLinkResource"
           },
           "description": "The list of shared private link resources in this workspace."
+        },
+        "notebookInfo": {
+          "readOnly": true,
+          "$ref": "#/definitions/NotebookResourceInfo",
+          "description": "The notebook info of Azure ML workspace."
+        },
+        "serviceManagedResourcesSettings": {
+          "$ref": "#/definitions/ServiceManagedResourcesSettings",
+          "description": "The service managed resource settings."
+        },
+        "primaryUserAssignedIdentity": {
+          "description": "The user assigned identity resource id that represents the workspace identity.",
+          "type": "string"
         }
       }
     },
@@ -2474,6 +2384,10 @@
           "$ref": "#/definitions/Sku",
           "description": "The sku of the workspace."
         },
+        "identity": {
+          "$ref": "#/definitions/Identity",
+          "description": "The identity of the resource."
+        },
         "properties": {
           "$ref": "#/definitions/WorkspacePropertiesUpdateParameters",
           "description": "The properties that the machine learning workspace will be updated with.",
@@ -2490,6 +2404,18 @@
         },
         "friendlyName": {
           "description": "The friendly name for this workspace.",
+          "type": "string"
+        },
+        "imageBuildCompute": {
+          "description": "The compute name for image build",
+          "type": "string"
+        },
+        "serviceManagedResourcesSettings": {
+          "$ref": "#/definitions/ServiceManagedResourcesSettings",
+          "description": "The service managed resource settings."
+        },
+        "primaryUserAssignedIdentity": {
+          "description": "The user assigned identity resource id that represents the workspace identity.",
           "type": "string"
         }
       }
@@ -3086,6 +3012,10 @@
         "sku": {
           "$ref": "#/definitions/Sku",
           "description": "The sku of the workspace."
+        },
+        "systemData": {
+          "$ref": "#/definitions/SystemData",
+          "readOnly": true
         }
       }
     },
@@ -3107,7 +3037,8 @@
       "properties": {
         "userStorageKey": {
           "readOnly": true,
-          "type": "string"
+          "type": "string",
+          "x-ms-secret": true
         },
         "userStorageResourceId": {
           "readOnly": true,
@@ -3115,11 +3046,56 @@
         },
         "appInsightsInstrumentationKey": {
           "readOnly": true,
-          "type": "string"
+          "type": "string",
+          "x-ms-secret": true
         },
         "containerRegistryCredentials": {
           "readOnly": true,
           "$ref": "#/definitions/RegistryListCredentialsResult"
+        },
+        "notebookAccessKeys": {
+          "readOnly": true,
+          "$ref": "#/definitions/ListNotebookKeysResult"
+        }
+      }
+    },
+    "NotebookAccessTokenResult": {
+      "type": "object",
+      "properties": {
+        "notebookResourceId": {
+          "readOnly": true,
+          "type": "string"
+        },
+        "hostName": {
+          "readOnly": true,
+          "type": "string"
+        },
+        "publicDns": {
+          "readOnly": true,
+          "type": "string"
+        },
+        "accessToken": {
+          "readOnly": true,
+          "type": "string",
+          "x-ms-secret": true
+        },
+        "tokenType": {
+          "readOnly": true,
+          "type": "string"
+        },
+        "expiresIn": {
+          "readOnly": true,
+          "type": "integer",
+          "format": "int32"
+        },
+        "refreshToken": {
+          "readOnly": true,
+          "type": "string",
+          "x-ms-secret": true
+        },
+        "scope": {
+          "readOnly": true,
+          "type": "string"
         }
       }
     },
@@ -3225,18 +3201,6 @@
           "type": "string",
           "description": "The description of the Machine Learning compute."
         },
-        "createdOn": {
-          "type": "string",
-          "description": "The date and time when the compute was created.",
-          "format": "date-time",
-          "readOnly": true
-        },
-        "modifiedOn": {
-          "type": "string",
-          "description": "The date and time when the compute was last modified.",
-          "format": "date-time",
-          "readOnly": true
-        },
         "resourceId": {
           "type": "string",
           "description": "ARM resource id of the underlying compute"
@@ -3290,9 +3254,23 @@
                   "format": "int32",
                   "minimum": 1
                 },
-                "agentVMSize": {
+                "agentVmSize": {
                   "description": "Agent virtual machine size",
                   "type": "string"
+                },
+                "clusterPurpose": {
+                  "description": "Intended usage of the cluster",
+                  "type": "string",
+                  "default": "FastProd",
+                  "enum": [
+                    "FastProd",
+                    "DenseProd",
+                    "DevTest"
+                  ],
+                  "x-ms-enum": {
+                    "name": "ClusterPurpose",
+                    "modelAsString": true
+                  }
                 },
                 "sslConfiguration": {
                   "description": "SSL configuration",
@@ -3325,6 +3303,7 @@
                 "osType": {
                   "description": "Compute OS Type",
                   "type": "string",
+                  "default": "Linux",
                   "enum": [
                     "Linux",
                     "Windows"
@@ -3540,6 +3519,10 @@
                   "description": "Settings for a personal compute instance.",
                   "$ref": "#/definitions/PersonalComputeInstanceSettings"
                 },
+                "setupScripts": {
+                  "description": "Details of customized scripts to execute for setting up the cluster.",
+                  "$ref": "#/definitions/SetupScripts"
+                },
                 "lastOperation": {
                   "description": "The last operation on ComputeInstance.",
                   "$ref": "#/definitions/ComputeInstanceLastOperation",
@@ -3644,6 +3627,10 @@
                 "databricksAccessToken": {
                   "description": "Databricks access token",
                   "type": "string"
+                },
+                "workspaceUrl": {
+                  "description": "Workspace Url",
+                  "type": "string"
                 }
               }
             }
@@ -3723,7 +3710,8 @@
           "type": "string",
           "enum": [
             "Disabled",
-            "Enabled"
+            "Enabled",
+            "Auto"
           ]
         },
         "cert": {
@@ -3928,6 +3916,11 @@
                 "$ref": "#/definitions/AmlComputeNodeInformation"
               },
               "description": "The collection of returned AmlCompute nodes details."
+            },
+            "nextLink": {
+              "readOnly": true,
+              "type": "string",
+              "description": "The continuation token."
             }
           }
         }
@@ -4371,6 +4364,11 @@
           "readOnly": true,
           "type": "string",
           "description": "The ARM identifier for Private Endpoint"
+        },
+        "subnetArmId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The ARM identifier for Subnet resource that private endpoint links to"
         }
       },
       "description": "The Private Endpoint resource."
@@ -4522,6 +4520,10 @@
             "modelAsString": true
           }
         },
+        "identity": {
+          "$ref": "#/definitions/IdentityForCmk",
+          "description": "The identity that will be used to access the key vault for encryption at rest."
+        },
         "keyVaultProperties": {
           "$ref": "#/definitions/KeyVaultProperties",
           "description": "Customer Key vault properties."
@@ -4554,105 +4556,18 @@
       ],
       "type": "object"
     },
-    "LinkedServiceResponse": {
-      "description": "Linked service.",
+    "IdentityForCmk": {
+      "description": "Identity that will be used to access key vault for encryption at rest",
       "type": "object",
-      "x-ms-azure-resource": true,
       "properties": {
-        "id": {
-          "type": "string",
-          "description": "ResourceId of the link of the linked service.",
-          "readOnly": true
-        },
-        "name": {
-          "type": "string",
-          "description": "Friendly name of the linked service.",
-          "readOnly": true
-        },
-        "type": {
-          "type": "string",
-          "description": "Resource type of linked service.",
-          "readOnly": true
-        },
-        "location": {
-          "description": "location of the linked service.",
+        "userAssignedIdentity": {
+          "description": "The ArmId of the user assigned identity that will be used to access the customer managed key vault",
           "type": "string"
-        },
-        "identity": {
-          "$ref": "#/definitions/Identity"
-        },
-        "properties": {
-          "$ref": "#/definitions/LinkedServiceProps"
         }
-      }
-    },
-    "LinkedServiceRequest": {
-      "type": "object",
-      "description": "object used for creating linked service.",
-      "properties": {
-        "name": {
-          "description": "Friendly name of the linked service",
-          "type": "string"
-        },
-        "location": {
-          "description": "location of the linked service.",
-          "type": "string"
-        },
-        "identity": {
-          "$ref": "#/definitions/Identity"
-        },
-        "properties": {
-          "$ref": "#/definitions/LinkedServiceProps"
-        }
-      }
-    },
-    "LinkedServiceProps": {
-      "type": "object",
-      "description": "LinkedService specific properties.",
+      },
       "required": [
-        "linkedServiceResourceId"
-      ],
-      "properties": {
-        "linkedServiceResourceId": {
-          "description": "ResourceId of the link target of the linked service.",
-          "type": "string"
-        },
-        "linkType": {
-          "description": "Type of the link target.",
-          "type": "string",
-          "enum": [
-            "Synapse"
-          ],
-          "x-ms-enum": {
-            "name": "LinkedServiceLinkType",
-            "modelAsString": false
-          }
-        },
-        "createdTime": {
-          "format": "date-time",
-          "description": "The creation time of the linked service.",
-          "type": "string"
-        },
-        "modifiedTime": {
-          "format": "date-time",
-          "description": "The last modified time of the linked service.",
-          "type": "string"
-        }
-      }
-    },
-    "LinkedServiceList": {
-      "type": "object",
-      "description": "List response of linked service.",
-      "properties": {
-        "value": {
-          "readOnly": true,
-          "type": "array",
-          "description": "Array of linked service.",
-          "items": {
-            "$ref": "#/definitions/LinkedServiceResponse"
-          }
-        }
-      }
+        "userAssignedIdentity"
+      ]
     },
     "ServiceResource": {
       "type": "object",
@@ -4671,6 +4586,52 @@
           }
         }
       ]
+    },
+    "SystemData": {
+      "description": "Read only system data",
+      "type": "object",
+      "properties": {
+        "createdBy": {
+          "type": "string",
+          "description": "An identifier for the identity that created the resource"
+        },
+        "createdByType": {
+          "$ref": "#/definitions/IdentityType",
+          "description": "The type of identity that created the resource"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp of resource creation (UTC)"
+        },
+        "lastModifiedBy": {
+          "type": "string",
+          "description": "An identifier for the identity that last modified the resource"
+        },
+        "lastModifiedByType": {
+          "$ref": "#/definitions/IdentityType",
+          "description": "The type of identity that last modified the resource"
+        },
+        "lastModifiedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp of resource last modification (UTC)"
+        }
+      }
+    },
+    "IdentityType": {
+      "description": "The type of identity that creates/modifies resources",
+      "type": "string",
+      "enum": [
+        "user",
+        "application",
+        "managedIdentity",
+        "key"
+      ],
+      "x-ms-enum": {
+        "name": "IdentityType",
+        "modelAsString": true
+      }
     },
     "ServiceResponseBase": {
       "description": "The base service response. The correct inherited response based on computeType will be returned (ex. ACIServiceResponse)",
@@ -4718,7 +4679,7 @@
           "description": "The error details.",
           "allOf": [
             {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/MachineLearningServiceError"
             }
           ],
           "readOnly": true
@@ -4890,13 +4851,25 @@
       "properties": {
         "cpu": {
           "format": "double",
-          "description": "The number of CPU cores on the container.",
+          "description": "The minimum amount of CPU cores to be used by the container. More info:\nhttps://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/",
+          "type": "number",
+          "example": 4
+        },
+        "cpuLimit": {
+          "format": "double",
+          "description": "The maximum amount of CPU cores allowed to be used by the container. More info:\nhttps://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/",
           "type": "number",
           "example": 4
         },
         "memoryInGB": {
           "format": "double",
-          "description": "The amount of memory on the container in GB.",
+          "description": "The minimum amount of memory (in GB) to be used by the container. More info:\nhttps://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/",
+          "type": "number",
+          "example": 64
+        },
+        "memoryInGBLimit": {
+          "format": "double",
+          "description": "The maximum amount of memory (in GB) allowed to be used by the container. More info:\nhttps://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/",
           "type": "number",
           "example": 64
         },
@@ -5695,7 +5668,7 @@
           "description": "The error details.",
           "allOf": [
             {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/MachineLearningServiceError"
             }
           ]
         }
@@ -6322,14 +6295,22 @@
         "tenantId"
       ]
     },
-    "NotebookListCredentialsResult": {
+    "ServiceManagedResourcesSettings": {
       "type": "object",
       "properties": {
-        "primaryAccessKey": {
-          "type": "string"
-        },
-        "secondaryAccessKey": {
-          "type": "string"
+        "cosmosDb": {
+          "$ref": "#/definitions/CosmosDbSettings",
+          "description": "The settings for the service managed cosmosdb account."
+        }
+      }
+    },
+    "CosmosDbSettings": {
+      "type": "object",
+      "properties": {
+        "collectionsThroughput": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The throughput of the collections in cosmosdb database"
         }
       }
     },
@@ -6366,11 +6347,23 @@
       "properties": {
         "primaryAccessKey": {
           "readOnly": true,
-          "type": "string"
+          "type": "string",
+          "x-ms-secret": true
         },
         "secondaryAccessKey": {
           "readOnly": true,
-          "type": "string"
+          "type": "string",
+          "x-ms-secret": true
+        }
+      }
+    },
+    "ListStorageAccountKeysResult": {
+      "type": "object",
+      "properties": {
+        "userStorageKey": {
+          "readOnly": true,
+          "type": "string",
+          "x-ms-secret": true
         }
       }
     },
@@ -6453,6 +6446,63 @@
         },
         "value": {
           "description": "Value details of the workspace connection.",
+          "type": "string"
+        },
+        "valueFormat": {
+          "description": "format for the workspace connection value",
+          "type": "string",
+          "enum": [
+            "JSON"
+          ],
+          "x-ms-enum": {
+            "name": "ValueFormat",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "SetupScripts": {
+      "type": "object",
+      "description": "Details of customized scripts to execute for setting up the cluster.",
+      "properties": {
+        "scripts": {
+          "description": "Customized setup scripts",
+          "$ref": "#/definitions/ScriptsToExecute"
+        }
+      }
+    },
+    "ScriptsToExecute": {
+      "type": "object",
+      "description": "Customized setup scripts",
+      "properties": {
+        "startupScript": {
+          "description": "Script that's run every time the machine starts.",
+          "$ref": "#/definitions/ScriptReference"
+        },
+        "creationScript": {
+          "description": "Script that's run only once during provision of the compute.",
+          "$ref": "#/definitions/ScriptReference"
+        }
+      }
+    },
+    "ScriptReference": {
+      "type": "object",
+      "description": "Script reference",
+      "properties": {
+        "scriptSource": {
+          "description": "The storage source of the script: inline, workspace.",
+          "type": "string"
+        },
+        "scriptData": {
+          "description": "The location of scripts in the mounted volume.",
+          "type": "string"
+        },
+        "scriptArguments": {
+          "description": "Optional command line arguments passed to the script to run.",
+          "type": "string"
+        },
+        "timeout": {
+          "description": "Optional time period passed to timeout command.",
           "type": "string"
         }
       }
