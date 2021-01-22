@@ -522,6 +522,12 @@
             "in": "query",
             "description": "The number of lines to show from the tail of the container instance log. If not provided, all available logs are shown up to 4mb.",
             "type": "integer"
+          },
+          {
+            "name": "timestamps",
+            "in": "query",
+            "description": "If true, adds a timestamp at the beginning of every line of log output. If not provided, defaults to false.",
+            "type": "boolean"
           }
         ],
         "responses": {
@@ -585,6 +591,53 @@
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/ContainerExecResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.ContainerInstance/containerGroups/{containerGroupName}/containers/{containerName}/attach": {
+      "post": {
+        "operationId": "Containers_Attach",
+        "x-ms-examples": {
+          "ContainerAttach": {
+            "$ref": "./examples/ContainerAttach.json"
+          }
+        },
+        "summary": "Attach to the output of a specific container instance.",
+        "description": "Attach to the output stream of a specific container instance in a specified resource group and container group.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ContainerGroupNameParameter"
+          },
+          {
+            "name": "containerName",
+            "in": "path",
+            "description": "The name of the container instance.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ContainerAttachResponse"
             }
           },
           "default": {
@@ -1089,6 +1142,10 @@
             "name": "Scheme",
             "modelAsString": true
           }
+        },
+        "httpHeaders": {
+          "description": "The HTTP headers.",
+          "$ref": "#/definitions/HttpHeaders"
         }
       },
       "required": [
@@ -1703,6 +1760,34 @@
         "password": {
           "type": "string",
           "description": "The password to start the exec command."
+        }
+      }
+    },
+    "ContainerAttachResponse": {
+      "description": "The information for the output stream from container attach.",
+      "type": "object",
+      "properties": {
+        "webSocketUri": {
+          "type": "string",
+          "description": "The uri for the output stream from the attach."
+        },
+        "password": {
+          "type": "string",
+          "description": "The password to the output stream from the attach. Send as an Authorization header value when connecting to the websocketUri."
+        }
+      }
+    },
+    "HttpHeaders": {
+      "description": "The HTTP headers.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The header name."
+        },
+        "value": {
+          "type": "string",
+          "description": "The header value."
         }
       }
     },
