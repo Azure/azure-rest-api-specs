@@ -3886,11 +3886,38 @@
       "description": "The report for session host information.",
       "properties": {
         "healthCheckName": {
+          "enum": [
+            "DomainJoinedCheck",
+            "DomainTrustCheck",
+            "FSLogixHealthCheck",
+            "SxSStackListenerCheck",
+            "UrlsAccessibleCheck",
+            "MonitoringAgentCheck",
+            "DomainReachable",
+            "WebRTCRedirectorCheck",
+            "SupportedEncryptionCheck",
+            "MetaDataServiceCheck",
+            "AppAttachHealthCheck"
+          ],
+          "x-ms-enum": {
+            "name": "HealthCheckName",
+            "modelAsString": true
+          },
           "type": "string",
           "description": "Represents the name of the health check operation performed.",
           "readOnly": true
         },
         "healthCheckResult": {
+          "enum": [
+            "Unknown",
+            "HealthCheckSucceeded",
+            "HealthCheckFailed",
+            "SessionHostShutdown"
+          ],
+          "x-ms-enum": {
+            "name": "HealthCheckResult",
+            "modelAsString": true
+          },
           "type": "string",
           "description": "Represents the Health state of the health check we performed.",
           "readOnly": true
