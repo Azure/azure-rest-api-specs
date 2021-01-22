@@ -588,7 +588,36 @@
             "$ref": "#/parameters/moveCollectionName"
           },
           {
+            "name": "dependencyLevel",
+            "in": "query",
+            "description": "Defines the dependency level.",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "Direct",
+              "Descendant"
+            ],
+            "x-ms-enum": {
+              "name": "DependencyLevel",
+              "modelAsString": true
+            }
+          },
+          {
+            "name": "$orderby",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "OData order by query option. For example, you can use $orderby=Count desc."
+          },
+          {
             "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "The filter to apply on the operation. For example, $apply=filter(count eq 2)."
           }
         ],
         "responses": {
@@ -605,6 +634,10 @@
             }
           }
         },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-odata": "#/definitions/UnresolvedDependenciesFilter",
         "x-ms-examples": {
           "UnresolvedDependencies_Get": {
             "$ref": "./examples/UnresolvedDependencies_Get.json"
@@ -1537,6 +1570,23 @@
         }
       }
     },
+    "UnresolvedDependenciesFilter": {
+      "description": "Unresolved dependencies contract.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/UnresolvedDependenciesFilterProperties"
+        }
+      }
+    },
+    "UnresolvedDependenciesFilterProperties": {
+      "properties": {
+        "count": {
+          "format": "int32",
+          "type": "integer",
+          "description": "The count of the resource."
+        }
+      }
+    },
     "MoveResourceCollection": {
       "description": "Defines the collection of move resources.",
       "type": "object",
@@ -1610,6 +1660,17 @@
         "nextLink": {
           "description": "Gets or sets the value of  next link.",
           "type": "string"
+        },
+        "summaryCollection": {
+          "description": "Gets or sets the list of summary items and the field on which summary is done.",
+          "readOnly": true,
+          "$ref": "#/definitions/SummaryCollection"
+        },
+        "totalCount": {
+          "description": "Gets the total count.",
+          "type": "integer",
+          "readOnly": true,
+          "format": "int64"
         }
       }
     },
