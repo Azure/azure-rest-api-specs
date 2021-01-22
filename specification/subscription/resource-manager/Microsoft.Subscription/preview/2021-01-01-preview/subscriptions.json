@@ -1212,12 +1212,27 @@
           "description": "Service tenant for the billing account.",
           "type": "array",
           "items":{
-            "type": "string"
+            "type": "object",
+            "$ref": "#/definitions/ServiceTenantResponse",
+            "description": "Billing account service tenant."
           }
         },
         "allowTransfers": {
           "description": "Determine if the transfers are allowed for the billing account",
           "type": "boolean"
+        }
+      }
+    },
+    "ServiceTenantResponse": {
+      "description": "Billing account service tenant.",
+      "properties": {
+        "tenantId": {
+          "description": "Service tenant id.",
+          "type": "string"
+        },
+        "tenantName": {
+          "description": "Service tenant name.",
+          "type": "string"
         }
       }
     },
