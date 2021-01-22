@@ -365,7 +365,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK - Returns information about the network manager.",
+            "description": "OK - Returns list of network managers.",
             "schema": {
               "$ref": "#/definitions/NetworkManagerListResult"
             }
@@ -380,6 +380,64 @@
         "x-ms-examples": {
           "List Network Manager": {
             "$ref": "./examples/NetworkManagerList.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkManagers/{networkManagerName}/effectiveVirtualNetworks": {
+      "post": {
+        "tags": [
+          "NetworkManagers"
+        ],
+        "operationId": "EffectiveVirtualNetworks_ListByNetworkManager",
+        "description": "List effective virtual networks in network manager.",
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "parameters": [
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/NetworkManagerNameParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ListPageSizeParameter"
+          },
+          {
+            "$ref": "#/parameters/ListSkipTokenParameter"
+          },
+          {
+            "name": "conditionalMembers",
+            "in": "body",
+            "required": false,
+            "type": "string",
+            "description": "Network group conditional filter."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Returns list of effective Virtual Networks.",
+            "schema": {
+              "$ref": "./networkManagerGroup.json#/definitions/EffectiveVirtualNetwork"
+            }
+          },
+          "default": {
+            "description": "Resource Provider error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Network Manager": {
+            "$ref": "./examples/NetworkManagerEffectiveVirtualNetworksListbyNetworkManager.json"
           }
         }
       }

@@ -252,6 +252,60 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkManagers/{networkManagerName}/networkGroups/{networkGroupName}/effectiveVirtualNetworks": {
+      "get": {
+        "tags": [
+          "NetworkGroups"
+        ],
+        "operationId": "EffectiveVirtualNetworks_ListByNetworkGroup",
+        "description": "Get the specified effective VirtualNetworks list by network group.",
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "parameters": [
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/NetworkManagerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/NetworkGroupNameParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ListPageSizeParameter"
+          },
+          {
+            "$ref": "#/parameters/ListSkipTokenParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Returns information about the network group.",
+            "schema": {
+              "$ref": "#/definitions/EffectiveVirtualNetworksListResult"
+            }
+          },
+          "default": {
+            "description": "Resource Provider error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NetworkGroupsList": {
+            "$ref": "./examples/NetworkManagerEffectiveVirtualNetworksList.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -333,7 +387,7 @@
           "description": "The provisioning state of the scope assignment resource."
         }
       },
-      "description": "Properties of Managed Network"
+      "description": "Properties of Managed Network Group"
     },
     "groupMembersItem": {
       "type": "object",
@@ -344,6 +398,63 @@
         }
       },
       "description": "GroupMembers Item."
+    },
+    "EffectiveVirtualNetworksListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EffectiveVirtualNetwork"
+          },
+          "description": "Gets a page of EffectiveVirtualNetwork"
+        },
+        "totalRecords": {
+          "description": "Total Records.",
+          "format": "int32",
+          "type": "integer"
+        },
+        "firstIndex": {
+          "description": "First Index.",
+          "format": "int32",
+          "type": "integer"
+        },
+        "pageSize": {
+          "description": "Page Size.",
+          "format": "int32",
+          "type": "integer"
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Gets the URL to get the next set of results."
+        }
+      },
+      "description": "Result of the request to list Effective Virtual Network. It contains a list of groups and a URL link to get the next set of results."
+    },
+    "EffectiveVirtualNetwork": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "effective vnet Id."
+        },
+        "location": {
+          "type": "string",
+          "description": "Location of  vnet."
+        },
+        "membershipType": {
+          "type": "string",
+          "description": "Membership Type.",
+          "enum": [
+            "Static",
+            "Dynamic"
+          ],
+          "x-ms-enum": {
+            "name": "MembershipType",
+            "modelAsString": true
+          }
+        }
+      },
+      "description": "Effective Virtual Network"
     }
   },
   "parameters": {
