@@ -52,7 +52,7 @@
           },
           "default": {
             "schema": {
-              "$ref": "#/definitions/ErrorContract"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             },
             "description": "*** Error Responses: ***\n\n * 400 BadRequest - Invalid request to create a Workspace Key.\n\n * 500 InternalServerError- Some error occurred while creating Workspace Key."
           }
@@ -105,7 +105,7 @@
           },
           "default": {
             "schema": {
-              "$ref": "#/definitions/ErrorContract"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             },
             "description": "*** Error Responses: ***\n\n * 500 InternalServerError- Some error occurred while trying to get details for Workspace Keys."
           }
@@ -162,7 +162,7 @@
           },
           "default": {
             "schema": {
-              "$ref": "#/definitions/ErrorContract"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             },
             "description": "*** Error Responses: ***\n\n * 400 BadRequest - Invalid request to create a Workspace Key.\n\n * 500 InternalServerError- Some error occurred while creating Workspace Key."
           }
@@ -215,7 +215,7 @@
           },
           "default": {
             "schema": {
-              "$ref": "#/definitions/ErrorContract"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             },
             "description": "*** Error Responses: ***\n\n * 500 InternalServerError- Some error occurred while deleting Workspace Key."
           }
@@ -233,17 +233,6 @@
     }
   },
   "definitions": {
-    "ErrorContract": {
-      "title": "Error details.",
-      "description": "Contains details when the response code indicates an error.",
-      "type": "object",
-      "properties": {
-        "error": {
-          "description": "The error details.",
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
-        }
-      }
-    },
     "KeyInfoListResult": {
       "description": "List of keys",
       "type": "object",
