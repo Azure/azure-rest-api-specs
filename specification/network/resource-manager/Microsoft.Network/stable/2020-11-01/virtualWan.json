@@ -2421,6 +2421,11 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/vpnGateways/{gatewayName}/vpnConnections/{connectionName}/vpnLinkConnections/{linkConnectionName}/getikesas": {
       "post": {
         "operationId": "VpnLinkConnections_GetIkeSas",
+        "x-ms-examples": {
+          "GetVpnLinkConnectionIkeSa": {
+            "$ref": "./examples/VpnSiteLinkConnectionGetIkeSas.json"
+          }
+        },
         "description": "Lists IKE Security Associations for Vpn Site Link Connection in the specified resource group.",
         "parameters": [
           {
@@ -2473,11 +2478,6 @@
             "schema": {
               "$ref": "./networkWatcher.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "GetVpnLinkConnectionIkeSa": {
-            "$ref": "./examples/VpnSiteLinkConnectionGetIkeSas.json"
           }
         },
         "x-ms-long-running-operation": true,
