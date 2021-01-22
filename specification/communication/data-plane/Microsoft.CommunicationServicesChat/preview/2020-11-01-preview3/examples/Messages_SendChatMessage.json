@@ -4,7 +4,6 @@
     "api-version": "2020-11-01-preview3",
     "chatThreadId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345",
     "sendChatMessageRequest": {
-      "priority": "Normal",
       "content": "Let's head out for lunch in 15 minutes.",
       "senderDisplayName": "Jane"
     }
@@ -20,26 +19,34 @@
     },
     "401": {
       "body": {
-        "code": "Unauthorized",
-        "message": "Request is not authorized."
+        "error": {
+          "code": "Unauthorized",
+          "message": "Request is not authorized."
+        }
       }
     },
     "403": {
       "body": {
-        "code": "Forbidden",
-        "message": "User is not allowed to perform specified action."
+        "error": {
+          "code": "Forbidden",
+          "message": "User is not allowed to perform specified action."
+        }
       }
     },
     "429": {
       "body": {
-        "code": "TooManyRequests",
-        "message": "Rate limit exceeded."
+        "error": {
+          "code": "TooManyRequests",
+          "message": "Rate limit exceeded."
+        }
       }
     },
     "503": {
       "body": {
-        "code": "ServiceUnavailable",
-        "message": "The server is currently unable to handle the request."
+        "error": {
+          "code": "ServiceUnavailable",
+          "message": "The server is currently unable to handle the request."
+        }
       }
     }
   }
