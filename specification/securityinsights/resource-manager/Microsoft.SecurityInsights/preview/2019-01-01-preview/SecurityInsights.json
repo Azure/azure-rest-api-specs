@@ -5880,7 +5880,7 @@
       "description": "Aggregative results of cases by status property bag.",
       "properties": {
         "totalDismissedStatus": {
-          "description": "Total amount of open cases with status Dismissed",
+          "description": "Total amount of closed cases with status Dismissed",
           "readOnly": true,
           "type": "integer"
         },
@@ -5895,9 +5895,21 @@
           "type": "integer"
         },
         "totalResolvedStatus": {
-          "description": "Total amount of open cases with status Resolved",
+          "description": "Total amount of closed cases with status Resolved",
           "readOnly": true,
           "type": "integer"
+        },
+        "totalFalsePositiveStatus": {
+          "description": "Total amount of closed cases with status Closed and Close reason of False positive",
+          "readOnly": true,
+          "type": "integer",
+          "format": "int32"
+        },
+        "totalTruePositiveStatus": {
+          "description": "Total amount of closed cases with status Closed and Close reason of True positive",
+          "readOnly": true,
+          "type": "integer",
+          "format": "int32"
         }
       },
       "type": "object"
@@ -7642,7 +7654,8 @@
             "Linux",
             "Windows",
             "Android",
-            "IOS"
+            "IOS",
+            "Unknown"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -7664,6 +7677,10 @@
               {
                 "description": "Host with IOS operating system.",
                 "value": "IOS"
+              },
+              {
+                "description": "Host with Unknown operating system.",
+                "value": "Unknown"
               }
             ]
           }
