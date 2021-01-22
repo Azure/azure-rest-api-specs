@@ -1,11 +1,412 @@
 {
   "parameters": {
     "scope": "subscriptions/892f85f0-fd69-4fe8-8ee2-bda821252ac3",
-    "privilegedRolePolicyName": "d693780f-543d-4aad-a4c8-139ff6a1db8d",
-    "api-version": "2020-10-01-preview"
+    "roleManagementPolicyName": "d693780f-543d-4aad-a4c8-139ff6a1db8d",
+    "api-version": "2020-10-01-preview",
+    "parameters": {
+      "properties": {
+        "scope": "/subscriptions/892f85f0-fd69-4fe8-8ee2-bda821252ac3",
+        "isOrganizationDefault": false,
+        "rules": [
+          {
+            "isExpirationRequired": false,
+            "maximumDuration": "90.00:00:00",
+            "id": "Expiration_Admin_ALL_Eligible",
+            "ruleType": "RoleManagementPolicyExpirationRule",
+            "target": {
+              "caller": "Admin",
+              "operations": [
+                "ALL"
+              ],
+              "level": "Eligibility",
+              "targetObjects": null,
+              "inheritableSettings": null,
+              "enforcedSettings": null
+            }
+          },
+          {
+            "notificationType": "Email",
+            "recipientType": "Admin",
+            "notificationLevel": "ALL",
+            "notificationRecipients": [
+              ""
+            ],
+            "id": "Notification_Email_ALL_Admin_Admin_ALL_Eligible",
+            "ruleType": "RoleManagementPolicyNotificationRule",
+            "target": {
+              "caller": "Admin",
+              "operations": [
+                "ALL"
+              ],
+              "level": "Eligibility",
+              "targetObjects": null,
+              "inheritableSettings": null,
+              "enforcedSettings": null
+            }
+          },
+          {
+            "notificationType": "Email",
+            "recipientType": "Requestor",
+            "notificationLevel": "ALL",
+            "notificationRecipients": [
+              ""
+            ],
+            "id": "Notification_Email_ALL_Requestor_Admin_ALL_Eligible",
+            "ruleType": "RoleManagementPolicyNotificationRule",
+            "target": {
+              "caller": "Admin",
+              "operations": [
+                "ALL"
+              ],
+              "level": "Eligibility",
+              "targetObjects": null,
+              "inheritableSettings": null,
+              "enforcedSettings": null
+            }
+          },
+          {
+            "notificationType": "Email",
+            "recipientType": "Approver",
+            "notificationLevel": "ALL",
+            "notificationRecipients": [
+              ""
+            ],
+            "id": "Notification_Email_ALL_Approver_Admin_ALL_Eligible",
+            "ruleType": "RoleManagementPolicyNotificationRule",
+            "target": {
+              "caller": "Admin",
+              "operations": [
+                "ALL"
+              ],
+              "level": "Eligibility",
+              "targetObjects": null,
+              "inheritableSettings": null,
+              "enforcedSettings": null
+            }
+          },
+          {
+            "enabledRules": [],
+            "id": "MultifactorAuthentication_Admin_ALL_Eligible",
+            "ruleType": "RoleManagementPolicyEnablementRule",
+            "target": {
+              "caller": "Admin",
+              "operations": [
+                "ALL"
+              ],
+              "level": "Eligibility",
+              "targetObjects": null,
+              "inheritableSettings": null,
+              "enforcedSettings": null
+            }
+          },
+          {
+            "isExpirationRequired": true,
+            "maximumDuration": "90.00:00:00",
+            "id": "Expiration_Admin_ALL_Member",
+            "ruleType": "RoleManagementPolicyExpirationRule",
+            "target": {
+              "caller": "Admin",
+              "operations": [
+                "ALL"
+              ],
+              "level": "Assignment",
+              "targetObjects": null,
+              "inheritableSettings": null,
+              "enforcedSettings": null
+            }
+          },
+          {
+            "notificationType": "Email",
+            "recipientType": "Admin",
+            "notificationLevel": "ALL",
+            "notificationRecipients": [
+              ""
+            ],
+            "id": "Notification_Email_ALL_Admin_Admin_ALL_Member",
+            "ruleType": "RoleManagementPolicyNotificationRule",
+            "target": {
+              "caller": "Admin",
+              "operations": [
+                "ALL"
+              ],
+              "level": "Assignment",
+              "targetObjects": null,
+              "inheritableSettings": null,
+              "enforcedSettings": null
+            }
+          },
+          {
+            "notificationType": "Email",
+            "recipientType": "Requestor",
+            "notificationLevel": "ALL",
+            "notificationRecipients": [
+              ""
+            ],
+            "id": "Notification_Email_ALL_Requestor_Admin_ALL_Member",
+            "ruleType": "RoleManagementPolicyNotificationRule",
+            "target": {
+              "caller": "Admin",
+              "operations": [
+                "ALL"
+              ],
+              "level": "Assignment",
+              "targetObjects": null,
+              "inheritableSettings": null,
+              "enforcedSettings": null
+            }
+          },
+          {
+            "notificationType": "Email",
+            "recipientType": "Approver",
+            "notificationLevel": "ALL",
+            "notificationRecipients": [
+              ""
+            ],
+            "id": "Notification_Email_ALL_Approver_Admin_ALL_Member",
+            "ruleType": "RoleManagementPolicyNotificationRule",
+            "target": {
+              "caller": "Admin",
+              "operations": [
+                "ALL"
+              ],
+              "level": "Assignment",
+              "targetObjects": null,
+              "inheritableSettings": null,
+              "enforcedSettings": null
+            }
+          },
+          {
+            "enabledRules": [],
+            "id": "MultifactorAuthentication_Admin_ALL_Member",
+            "ruleType": "RoleManagementPolicyEnablementRule",
+            "target": {
+              "caller": "Admin",
+              "operations": [
+                "ALL"
+              ],
+              "level": "Assignment",
+              "targetObjects": null,
+              "inheritableSettings": null,
+              "enforcedSettings": null
+            }
+          },
+          {
+            "isExpirationRequired": true,
+            "maximumDuration": "90.00:00:00",
+            "id": "Expiration_EndUser_ALL_Eligible",
+            "ruleType": "RoleManagementPolicyExpirationRule",
+            "target": {
+              "caller": "EndUser",
+              "operations": [
+                "ALL"
+              ],
+              "level": "Eligibility",
+              "targetObjects": null,
+              "inheritableSettings": null,
+              "enforcedSettings": null
+            }
+          },
+          {
+            "notificationType": "Email",
+            "recipientType": "Admin",
+            "notificationLevel": "ALL",
+            "notificationRecipients": [
+              ""
+            ],
+            "id": "Notification_Email_ALL_Admin_EndUser_ALL_Eligible",
+            "ruleType": "RoleManagementPolicyNotificationRule",
+            "target": {
+              "caller": "EndUser",
+              "operations": [
+                "ALL"
+              ],
+              "level": "Eligibility",
+              "targetObjects": null,
+              "inheritableSettings": null,
+              "enforcedSettings": null
+            }
+          },
+          {
+            "notificationType": "Email",
+            "recipientType": "Requestor",
+            "notificationLevel": "ALL",
+            "notificationRecipients": [
+              ""
+            ],
+            "id": "Notification_Email_ALL_Requestor_EndUser_ALL_Eligible",
+            "ruleType": "RoleManagementPolicyNotificationRule",
+            "target": {
+              "caller": "EndUser",
+              "operations": [
+                "ALL"
+              ],
+              "level": "Eligibility",
+              "targetObjects": null,
+              "inheritableSettings": null,
+              "enforcedSettings": null
+            }
+          },
+          {
+            "notificationType": "Email",
+            "recipientType": "Approver",
+            "notificationLevel": "ALL",
+            "notificationRecipients": [
+              ""
+            ],
+            "id": "Notification_Email_ALL_Approver_EndUser_ALL_Eligible",
+            "ruleType": "RoleManagementPolicyNotificationRule",
+            "target": {
+              "caller": "EndUser",
+              "operations": [
+                "ALL"
+              ],
+              "level": "Eligibility",
+              "targetObjects": null,
+              "inheritableSettings": null,
+              "enforcedSettings": null
+            }
+          },
+          {
+            "enabledRules": [],
+            "id": "MultifactorAuthentication_EndUser_ALL_Eligible",
+            "ruleType": "RoleManagementPolicyEnablementRule",
+            "target": {
+              "caller": "EndUser",
+              "operations": [
+                "ALL"
+              ],
+              "level": "Eligibility",
+              "targetObjects": null,
+              "inheritableSettings": null,
+              "enforcedSettings": null
+            }
+          },
+          {
+            "isEnabled": false,
+            "claimValue": null,
+            "id": "AuthenticationContext_EndUser_ALL_Member",
+            "ruleType": "RoleManagementPolicyAuthenticationContextRule",
+            "target": {
+              "caller": "EndUser",
+              "operations": [
+                "ALL"
+              ],
+              "level": "Assignment",
+              "targetObjects": null,
+              "inheritableSettings": null,
+              "enforcedSettings": null
+            }
+          },
+          {
+            "isExpirationRequired": true,
+            "maximumDuration": "1.00:00:00",
+            "id": "Expiration_EndUser_ALL_Member",
+            "ruleType": "RoleManagementPolicyExpirationRule",
+            "target": {
+              "caller": "EndUser",
+              "operations": [
+                "ALL"
+              ],
+              "level": "Assignment",
+              "targetObjects": null,
+              "inheritableSettings": null,
+              "enforcedSettings": null
+            }
+          },
+          {
+            "notificationType": "Email",
+            "recipientType": "Admin",
+            "notificationLevel": "ALL",
+            "notificationRecipients": [
+              ""
+            ],
+            "id": "Notification_Email_ALL_Admin_EndUser_ALL_Member",
+            "ruleType": "RoleManagementPolicyNotificationRule",
+            "target": {
+              "caller": "EndUser",
+              "operations": [
+                "ALL"
+              ],
+              "level": "Assignment",
+              "targetObjects": null,
+              "inheritableSettings": null,
+              "enforcedSettings": null
+            }
+          },
+          {
+            "notificationType": "Email",
+            "recipientType": "Requestor",
+            "notificationLevel": "ALL",
+            "notificationRecipients": [
+              ""
+            ],
+            "id": "Notification_Email_ALL_Requestor_EndUser_ALL_Member",
+            "ruleType": "RoleManagementPolicyNotificationRule",
+            "target": {
+              "caller": "EndUser",
+              "operations": [
+                "ALL"
+              ],
+              "level": "Assignment",
+              "targetObjects": null,
+              "inheritableSettings": null,
+              "enforcedSettings": null
+            }
+          },
+          {
+            "notificationType": "Email",
+            "recipientType": "Approver",
+            "notificationLevel": "ALL",
+            "notificationRecipients": null,
+            "id": "Notification_Email_ALL_Approver_EndUser_ALL_Member",
+            "ruleType": "RoleManagementPolicyNotificationRule",
+            "target": {
+              "caller": "EndUser",
+              "operations": [
+                "ALL"
+              ],
+              "level": "Assignment",
+              "targetObjects": null,
+              "inheritableSettings": null,
+              "enforcedSettings": null
+            }
+          },
+          {
+            "enabledRules": [],
+            "id": "Ticketing_EndUser_ALL_Member",
+            "ruleType": "RoleManagementPolicyEnablementRule",
+            "target": {
+              "caller": "EndUser",
+              "operations": [
+                "ALL"
+              ],
+              "level": "Assignment",
+              "targetObjects": null,
+              "inheritableSettings": null,
+              "enforcedSettings": null
+            }
+          },
+          {
+            "enabledRules": [],
+            "id": "MultifactorAuthentication_EndUser_ALL_Member",
+            "ruleType": "RoleManagementPolicyEnablementRule",
+            "target": {
+              "caller": "EndUser",
+              "operations": [
+                "ALL"
+              ],
+              "level": "Assignment",
+              "targetObjects": null,
+              "inheritableSettings": null,
+              "enforcedSettings": null
+            }
+          }
+        ]
+      }
+    }
   },
   "responses": {
-    "200": {
+    "201": {
       "body": {
         "properties": {
           "scope": "/subscriptions/892f85f0-fd69-4fe8-8ee2-bda821252ac3",
@@ -18,7 +419,7 @@
               "isExpirationRequired": false,
               "maximumDuration": "90.00:00:00",
               "id": "Expiration_Admin_ALL_Eligible",
-              "ruleType": "PrivilegedRolePolicyExpirationRule",
+              "ruleType": "RoleManagementPolicyExpirationRule",
               "target": {
                 "caller": "Admin",
                 "operations": [
@@ -38,7 +439,7 @@
                 ""
               ],
               "id": "Notification_Email_ALL_Admin_Admin_ALL_Eligible",
-              "ruleType": "PrivilegedRolePolicyNotificationRule",
+              "ruleType": "RoleManagementPolicyNotificationRule",
               "target": {
                 "caller": "Admin",
                 "operations": [
@@ -58,7 +459,7 @@
                 ""
               ],
               "id": "Notification_Email_ALL_Requestor_Admin_ALL_Eligible",
-              "ruleType": "PrivilegedRolePolicyNotificationRule",
+              "ruleType": "RoleManagementPolicyNotificationRule",
               "target": {
                 "caller": "Admin",
                 "operations": [
@@ -78,7 +479,7 @@
                 ""
               ],
               "id": "Notification_Email_ALL_Approver_Admin_ALL_Eligible",
-              "ruleType": "PrivilegedRolePolicyNotificationRule",
+              "ruleType": "RoleManagementPolicyNotificationRule",
               "target": {
                 "caller": "Admin",
                 "operations": [
@@ -93,7 +494,7 @@
             {
               "enabledRules": [],
               "id": "MultifactorAuthentication_Admin_ALL_Eligible",
-              "ruleType": "PrivilegedRolePolicyEnablementRule",
+              "ruleType": "RoleManagementPolicyEnablementRule",
               "target": {
                 "caller": "Admin",
                 "operations": [
@@ -109,7 +510,7 @@
               "isExpirationRequired": true,
               "maximumDuration": "90.00:00:00",
               "id": "Expiration_Admin_ALL_Member",
-              "ruleType": "PrivilegedRolePolicyExpirationRule",
+              "ruleType": "RoleManagementPolicyExpirationRule",
               "target": {
                 "caller": "Admin",
                 "operations": [
@@ -129,7 +530,7 @@
                 ""
               ],
               "id": "Notification_Email_ALL_Admin_Admin_ALL_Member",
-              "ruleType": "PrivilegedRolePolicyNotificationRule",
+              "ruleType": "RoleManagementPolicyNotificationRule",
               "target": {
                 "caller": "Admin",
                 "operations": [
@@ -149,7 +550,7 @@
                 ""
               ],
               "id": "Notification_Email_ALL_Requestor_Admin_ALL_Member",
-              "ruleType": "PrivilegedRolePolicyNotificationRule",
+              "ruleType": "RoleManagementPolicyNotificationRule",
               "target": {
                 "caller": "Admin",
                 "operations": [
@@ -169,7 +570,7 @@
                 ""
               ],
               "id": "Notification_Email_ALL_Approver_Admin_ALL_Member",
-              "ruleType": "PrivilegedRolePolicyNotificationRule",
+              "ruleType": "RoleManagementPolicyNotificationRule",
               "target": {
                 "caller": "Admin",
                 "operations": [
@@ -184,7 +585,7 @@
             {
               "enabledRules": [],
               "id": "MultifactorAuthentication_Admin_ALL_Member",
-              "ruleType": "PrivilegedRolePolicyEnablementRule",
+              "ruleType": "RoleManagementPolicyEnablementRule",
               "target": {
                 "caller": "Admin",
                 "operations": [
@@ -200,7 +601,7 @@
               "isExpirationRequired": true,
               "maximumDuration": "90.00:00:00",
               "id": "Expiration_EndUser_ALL_Eligible",
-              "ruleType": "PrivilegedRolePolicyExpirationRule",
+              "ruleType": "RoleManagementPolicyExpirationRule",
               "target": {
                 "caller": "EndUser",
                 "operations": [
@@ -220,7 +621,7 @@
                 ""
               ],
               "id": "Notification_Email_ALL_Admin_EndUser_ALL_Eligible",
-              "ruleType": "PrivilegedRolePolicyNotificationRule",
+              "ruleType": "RoleManagementPolicyNotificationRule",
               "target": {
                 "caller": "EndUser",
                 "operations": [
@@ -240,7 +641,7 @@
                 ""
               ],
               "id": "Notification_Email_ALL_Requestor_EndUser_ALL_Eligible",
-              "ruleType": "PrivilegedRolePolicyNotificationRule",
+              "ruleType": "RoleManagementPolicyNotificationRule",
               "target": {
                 "caller": "EndUser",
                 "operations": [
@@ -260,7 +661,7 @@
                 ""
               ],
               "id": "Notification_Email_ALL_Approver_EndUser_ALL_Eligible",
-              "ruleType": "PrivilegedRolePolicyNotificationRule",
+              "ruleType": "RoleManagementPolicyNotificationRule",
               "target": {
                 "caller": "EndUser",
                 "operations": [
@@ -275,7 +676,7 @@
             {
               "enabledRules": [],
               "id": "MultifactorAuthentication_EndUser_ALL_Eligible",
-              "ruleType": "PrivilegedRolePolicyEnablementRule",
+              "ruleType": "RoleManagementPolicyEnablementRule",
               "target": {
                 "caller": "EndUser",
                 "operations": [
@@ -291,7 +692,7 @@
               "isEnabled": false,
               "claimValue": null,
               "id": "AuthenticationContext_EndUser_ALL_Member",
-              "ruleType": "PrivilegedRolePolicyAuthenticationContextRule",
+              "ruleType": "RoleManagementPolicyAuthenticationContextRule",
               "target": {
                 "caller": "EndUser",
                 "operations": [
@@ -307,7 +708,7 @@
               "isExpirationRequired": true,
               "maximumDuration": "1.00:00:00",
               "id": "Expiration_EndUser_ALL_Member",
-              "ruleType": "PrivilegedRolePolicyExpirationRule",
+              "ruleType": "RoleManagementPolicyExpirationRule",
               "target": {
                 "caller": "EndUser",
                 "operations": [
@@ -327,7 +728,7 @@
                 ""
               ],
               "id": "Notification_Email_ALL_Admin_EndUser_ALL_Member",
-              "ruleType": "PrivilegedRolePolicyNotificationRule",
+              "ruleType": "RoleManagementPolicyNotificationRule",
               "target": {
                 "caller": "EndUser",
                 "operations": [
@@ -347,7 +748,7 @@
                 ""
               ],
               "id": "Notification_Email_ALL_Requestor_EndUser_ALL_Member",
-              "ruleType": "PrivilegedRolePolicyNotificationRule",
+              "ruleType": "RoleManagementPolicyNotificationRule",
               "target": {
                 "caller": "EndUser",
                 "operations": [
@@ -365,7 +766,7 @@
               "notificationLevel": "ALL",
               "notificationRecipients": null,
               "id": "Notification_Email_ALL_Approver_EndUser_ALL_Member",
-              "ruleType": "PrivilegedRolePolicyNotificationRule",
+              "ruleType": "RoleManagementPolicyNotificationRule",
               "target": {
                 "caller": "EndUser",
                 "operations": [
@@ -380,7 +781,7 @@
             {
               "enabledRules": [],
               "id": "Ticketing_EndUser_ALL_Member",
-              "ruleType": "PrivilegedRolePolicyEnablementRule",
+              "ruleType": "RoleManagementPolicyEnablementRule",
               "target": {
                 "caller": "EndUser",
                 "operations": [
@@ -395,7 +796,7 @@
             {
               "enabledRules": [],
               "id": "MultifactorAuthentication_EndUser_ALL_Member",
-              "ruleType": "PrivilegedRolePolicyEnablementRule",
+              "ruleType": "RoleManagementPolicyEnablementRule",
               "target": {
                 "caller": "EndUser",
                 "operations": [
@@ -413,7 +814,7 @@
               "isExpirationRequired": false,
               "maximumDuration": "90.00:00:00",
               "id": "Expiration_Admin_ALL_Eligible",
-              "ruleType": "PrivilegedRolePolicyExpirationRule",
+              "ruleType": "RoleManagementPolicyExpirationRule",
               "target": {
                 "caller": "Admin",
                 "operations": [
@@ -433,7 +834,7 @@
                 ""
               ],
               "id": "Notification_Email_ALL_Admin_Admin_ALL_Eligible",
-              "ruleType": "PrivilegedRolePolicyNotificationRule",
+              "ruleType": "RoleManagementPolicyNotificationRule",
               "target": {
                 "caller": "Admin",
                 "operations": [
@@ -453,7 +854,7 @@
                 ""
               ],
               "id": "Notification_Email_ALL_Requestor_Admin_ALL_Eligible",
-              "ruleType": "PrivilegedRolePolicyNotificationRule",
+              "ruleType": "RoleManagementPolicyNotificationRule",
               "target": {
                 "caller": "Admin",
                 "operations": [
@@ -473,7 +874,7 @@
                 ""
               ],
               "id": "Notification_Email_ALL_Approver_Admin_ALL_Eligible",
-              "ruleType": "PrivilegedRolePolicyNotificationRule",
+              "ruleType": "RoleManagementPolicyNotificationRule",
               "target": {
                 "caller": "Admin",
                 "operations": [
@@ -488,7 +889,7 @@
             {
               "enabledRules": [],
               "id": "MultifactorAuthentication_Admin_ALL_Eligible",
-              "ruleType": "PrivilegedRolePolicyEnablementRule",
+              "ruleType": "RoleManagementPolicyEnablementRule",
               "target": {
                 "caller": "Admin",
                 "operations": [
@@ -504,7 +905,7 @@
               "isExpirationRequired": true,
               "maximumDuration": "90.00:00:00",
               "id": "Expiration_Admin_ALL_Member",
-              "ruleType": "PrivilegedRolePolicyExpirationRule",
+              "ruleType": "RoleManagementPolicyExpirationRule",
               "target": {
                 "caller": "Admin",
                 "operations": [
@@ -524,7 +925,7 @@
                 ""
               ],
               "id": "Notification_Email_ALL_Admin_Admin_ALL_Member",
-              "ruleType": "PrivilegedRolePolicyNotificationRule",
+              "ruleType": "RoleManagementPolicyNotificationRule",
               "target": {
                 "caller": "Admin",
                 "operations": [
@@ -544,7 +945,7 @@
                 ""
               ],
               "id": "Notification_Email_ALL_Requestor_Admin_ALL_Member",
-              "ruleType": "PrivilegedRolePolicyNotificationRule",
+              "ruleType": "RoleManagementPolicyNotificationRule",
               "target": {
                 "caller": "Admin",
                 "operations": [
@@ -564,7 +965,7 @@
                 ""
               ],
               "id": "Notification_Email_ALL_Approver_Admin_ALL_Member",
-              "ruleType": "PrivilegedRolePolicyNotificationRule",
+              "ruleType": "RoleManagementPolicyNotificationRule",
               "target": {
                 "caller": "Admin",
                 "operations": [
@@ -579,7 +980,7 @@
             {
               "enabledRules": [],
               "id": "MultifactorAuthentication_Admin_ALL_Member",
-              "ruleType": "PrivilegedRolePolicyEnablementRule",
+              "ruleType": "RoleManagementPolicyEnablementRule",
               "target": {
                 "caller": "Admin",
                 "operations": [
@@ -595,7 +996,7 @@
               "isExpirationRequired": true,
               "maximumDuration": "90.00:00:00",
               "id": "Expiration_EndUser_ALL_Eligible",
-              "ruleType": "PrivilegedRolePolicyExpirationRule",
+              "ruleType": "RoleManagementPolicyExpirationRule",
               "target": {
                 "caller": "EndUser",
                 "operations": [
@@ -615,7 +1016,7 @@
                 ""
               ],
               "id": "Notification_Email_ALL_Admin_EndUser_ALL_Eligible",
-              "ruleType": "PrivilegedRolePolicyNotificationRule",
+              "ruleType": "RoleManagementPolicyNotificationRule",
               "target": {
                 "caller": "EndUser",
                 "operations": [
@@ -635,7 +1036,7 @@
                 ""
               ],
               "id": "Notification_Email_ALL_Requestor_EndUser_ALL_Eligible",
-              "ruleType": "PrivilegedRolePolicyNotificationRule",
+              "ruleType": "RoleManagementPolicyNotificationRule",
               "target": {
                 "caller": "EndUser",
                 "operations": [
@@ -655,7 +1056,7 @@
                 ""
               ],
               "id": "Notification_Email_ALL_Approver_EndUser_ALL_Eligible",
-              "ruleType": "PrivilegedRolePolicyNotificationRule",
+              "ruleType": "RoleManagementPolicyNotificationRule",
               "target": {
                 "caller": "EndUser",
                 "operations": [
@@ -670,7 +1071,7 @@
             {
               "enabledRules": [],
               "id": "MultifactorAuthentication_EndUser_ALL_Eligible",
-              "ruleType": "PrivilegedRolePolicyEnablementRule",
+              "ruleType": "RoleManagementPolicyEnablementRule",
               "target": {
                 "caller": "EndUser",
                 "operations": [
@@ -686,7 +1087,7 @@
               "isEnabled": false,
               "claimValue": null,
               "id": "AuthenticationContext_EndUser_ALL_Member",
-              "ruleType": "PrivilegedRolePolicyAuthenticationContextRule",
+              "ruleType": "RoleManagementPolicyAuthenticationContextRule",
               "target": {
                 "caller": "EndUser",
                 "operations": [
@@ -702,7 +1103,7 @@
               "isExpirationRequired": true,
               "maximumDuration": "1.00:00:00",
               "id": "Expiration_EndUser_ALL_Member",
-              "ruleType": "PrivilegedRolePolicyExpirationRule",
+              "ruleType": "RoleManagementPolicyExpirationRule",
               "target": {
                 "caller": "EndUser",
                 "operations": [
@@ -722,7 +1123,7 @@
                 ""
               ],
               "id": "Notification_Email_ALL_Admin_EndUser_ALL_Member",
-              "ruleType": "PrivilegedRolePolicyNotificationRule",
+              "ruleType": "RoleManagementPolicyNotificationRule",
               "target": {
                 "caller": "EndUser",
                 "operations": [
@@ -742,7 +1143,7 @@
                 ""
               ],
               "id": "Notification_Email_ALL_Requestor_EndUser_ALL_Member",
-              "ruleType": "PrivilegedRolePolicyNotificationRule",
+              "ruleType": "RoleManagementPolicyNotificationRule",
               "target": {
                 "caller": "EndUser",
                 "operations": [
@@ -760,7 +1161,7 @@
               "notificationLevel": "ALL",
               "notificationRecipients": null,
               "id": "Notification_Email_ALL_Approver_EndUser_ALL_Member",
-              "ruleType": "PrivilegedRolePolicyNotificationRule",
+              "ruleType": "RoleManagementPolicyNotificationRule",
               "target": {
                 "caller": "EndUser",
                 "operations": [
@@ -775,7 +1176,7 @@
             {
               "enabledRules": [],
               "id": "Ticketing_EndUser_ALL_Member",
-              "ruleType": "PrivilegedRolePolicyEnablementRule",
+              "ruleType": "RoleManagementPolicyEnablementRule",
               "target": {
                 "caller": "EndUser",
                 "operations": [
@@ -790,7 +1191,7 @@
             {
               "enabledRules": [],
               "id": "MultifactorAuthentication_EndUser_ALL_Member",
-              "ruleType": "PrivilegedRolePolicyEnablementRule",
+              "ruleType": "RoleManagementPolicyEnablementRule",
               "target": {
                 "caller": "EndUser",
                 "operations": [
@@ -805,8 +1206,8 @@
           ]
         },
         "name": "d693780f-543d-4aad-a4c8-139ff6a1db8d",
-        "id": "/subscriptions/892f85f0-fd69-4fe8-8ee2-bda821252ac3/providers/Microsoft.Authorization/PrivilegedRolePolicies/d693780f-543d-4aad-a4c8-139ff6a1db8d",
-        "type": "Microsoft.Authorization/PrivilegedRolePolicies"
+        "id": "/subscriptions/892f85f0-fd69-4fe8-8ee2-bda821252ac3/providers/Microsoft.Authorization/RoleManagementPolicies/d693780f-543d-4aad-a4c8-139ff6a1db8d",
+        "type": "Microsoft.Authorization/RoleManagementPolicies"
       }
     }
   }

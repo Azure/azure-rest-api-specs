@@ -83,8 +83,8 @@ input-file:
 - Microsoft.Authorization/preview/2020-10-01-preview/RoleEligibilitySchedule.json
 - Microsoft.Authorization/preview/2020-10-01-preview/RoleEligibilityScheduleInstance.json
 - Microsoft.Authorization/preview/2020-10-01-preview/RoleEligibilityScheduleRequest.json
-- Microsoft.Authorization/preview/2020-10-01-preview/PrivilegedRolePolicy.json
-- Microsoft.Authorization/preview/2020-10-01-preview/PrivilegedRolePolicyAssignment.json
+- Microsoft.Authorization/preview/2020-10-01-preview/RoleManagementPolicy.json
+- Microsoft.Authorization/preview/2020-10-01-preview/RoleManagementPolicyAssignment.json
 ```
 
 ### Tag: package-2020-04-01-preview

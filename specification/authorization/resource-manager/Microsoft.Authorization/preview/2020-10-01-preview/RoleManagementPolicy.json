@@ -34,12 +34,12 @@
     }
   },
   "paths": {
-    "/{scope}/providers/Microsoft.Authorization/privilegedRolePolicies/{privilegedRolePolicyName}": {
+    "/{scope}/providers/Microsoft.Authorization/roleManagementPolicies/{roleManagementPolicyName}": {
       "get": {
         "tags": [
-          "privilegedRolePolicies"
+          "roleManagementPolicies"
         ],
-        "operationId": "privilegedRolePolicies_Get",
+        "operationId": "roleManagementPolicies_Get",
         "description": "Get the specified role management policy for a resource scope",
         "parameters": [
           {
@@ -51,7 +51,7 @@
             "x-ms-skip-url-encoding": true
           },
           {
-            "name": "privilegedRolePolicyName",
+            "name": "roleManagementPolicyName",
             "in": "path",
             "required": true,
             "type": "string",
@@ -65,7 +65,7 @@
           "200": {
             "description": "OK - Returns information about the role management policy.",
             "schema": {
-              "$ref": "#/definitions/PrivilegedRolePolicy"
+              "$ref": "#/definitions/RoleManagementPolicy"
             }
           },
           "default": {
@@ -76,16 +76,16 @@
           }
         },
         "x-ms-examples": {
-          "GetPrivilegedRolePolicyByName": {
-            "$ref": "./examples/GetPrivilegedRolePolicyByName.json"
+          "GetRoleManagementPolicyByName": {
+            "$ref": "./examples/GetRoleManagementPolicyByName.json"
           }
         }
       },
       "put": {
         "tags": [
-          "privilegedRolePolicies"
+          "roleManagementPolicies"
         ],
-        "operationId": "privilegedRolePolicies_Create",
+        "operationId": "roleManagementPolicies_Create",
         "description": "Update or create a role management policy",
         "parameters": [
           {
@@ -97,7 +97,7 @@
             "x-ms-skip-url-encoding": true
           },
           {
-            "name": "privilegedRolePolicyName",
+            "name": "roleManagementPolicyName",
             "in": "path",
             "required": true,
             "type": "string",
@@ -108,7 +108,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/PrivilegedRolePolicy"
+              "$ref": "#/definitions/RoleManagementPolicy"
             },
             "description": "Parameters for the role management policy."
           },
@@ -120,7 +120,7 @@
           "201": {
             "description": "Created - Returns the created or updated policy.",
             "schema": {
-              "$ref": "#/definitions/PrivilegedRolePolicy"
+              "$ref": "#/definitions/RoleManagementPolicy"
             }
           },
           "default": {
@@ -131,16 +131,16 @@
           }
         },
         "x-ms-examples": {
-          "PutPrivilegedRolePolicy": {
-            "$ref": "./examples/PutPrivilegedRolePolicy.json"
+          "PutRoleManagementPolicy": {
+            "$ref": "./examples/PutRoleManagementPolicy.json"
           }
         }
       },
       "delete": {
         "tags": [
-          "privilegedRolePolicies"
+          "roleManagementPolicies"
         ],
-        "operationId": "privilegedRolePolicies_Delete",
+        "operationId": "roleManagementPolicies_Delete",
         "description": "Delete a role management policy",
         "parameters": [
           {
@@ -152,7 +152,7 @@
             "x-ms-skip-url-encoding": true
           },
           {
-            "name": "privilegedRolePolicyName",
+            "name": "roleManagementPolicyName",
             "in": "path",
             "required": true,
             "type": "string",
@@ -177,18 +177,18 @@
           }
         },
         "x-ms-examples": {
-          "DeletePrivilegedRolePolicy": {
-            "$ref": "./examples/DeletePrivilegedRolePolicy.json"
+          "DeleteRoleManagementPolicy": {
+            "$ref": "./examples/DeleteRoleManagementPolicy.json"
           }
         }
       }
     },
-    "/{scope}/providers/Microsoft.Authorization/privilegedRolePolicies": {
+    "/{scope}/providers/Microsoft.Authorization/roleManagementPolicies": {
       "get": {
         "tags": [
-          "privilegedRolePolicies"
+          "roleManagementPolicies"
         ],
-        "operationId": "privilegedRolePolicies_ListForScope",
+        "operationId": "roleManagementPolicies_ListForScope",
         "description": "Gets role management policies for a resource scope.",
         "parameters": [
           {
@@ -207,7 +207,7 @@
           "200": {
             "description": "OK - Returns an array of role management policies.",
             "schema": {
-              "$ref": "#/definitions/PrivilegedRolePolicyListResult"
+              "$ref": "#/definitions/RoleManagementPolicyListResult"
             }
           },
           "default": {
@@ -221,15 +221,15 @@
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "GetPrivilegedRolePolicyByRoleDefinitionFilter": {
-            "$ref": "./examples/GetPrivilegedRolePolicyByScope.json"
+          "GetRoleManagementPolicyByRoleDefinitionFilter": {
+            "$ref": "./examples/GetRoleManagementPolicyByScope.json"
           }
         }
       }
     }
   },
   "definitions": {
-    "PrivilegedRolePolicyProperties": {
+    "RoleManagementPolicyProperties": {
       "properties": {
         "scope": {
           "type": "string",
@@ -256,14 +256,14 @@
         "rules": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/PrivilegedRolePolicyRule"
+            "$ref": "#/definitions/RoleManagementPolicyRule"
           },
           "description": "The rule applied to the policy."
         },
         "effectiveRules": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/PrivilegedRolePolicyRule"
+            "$ref": "#/definitions/RoleManagementPolicyRule"
           },
           "readOnly": true,
           "description": "The readonly computed rule applied to the policy."
@@ -271,7 +271,7 @@
       },
       "description": "Role management policy properties with scope."
     },
-    "PrivilegedRolePolicy": {
+    "RoleManagementPolicy": {
       "properties": {
         "id": {
           "type": "string",
@@ -290,18 +290,18 @@
         },
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/PrivilegedRolePolicyProperties",
+          "$ref": "#/definitions/RoleManagementPolicyProperties",
           "description": "Role management policy properties."
         }
       },
       "description": "Role management policy"
     },
-    "PrivilegedRolePolicyListResult": {
+    "RoleManagementPolicyListResult": {
       "properties": {
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/PrivilegedRolePolicy"
+            "$ref": "#/definitions/RoleManagementPolicy"
           },
           "description": "Role management policy list."
         },
@@ -312,7 +312,7 @@
       },
       "description": "Role management policy list operation result."
     },
-    "PrivilegedRolePolicyRule": {
+    "RoleManagementPolicyRule": {
       "description": "The role management policy rule.",
       "type": "object",
       "required": [
@@ -326,19 +326,19 @@
         },
         "ruleType": {
           "description": "The type of rule",
-          "$ref": "#/definitions/PrivilegedRolePolicyRuleType"
+          "$ref": "#/definitions/RoleManagementPolicyRuleType"
         },
         "target": {
-          "$ref": "#/definitions/PrivilegedRolePolicyRuleTarget",
+          "$ref": "#/definitions/RoleManagementPolicyRuleTarget",
           "description": "The target of the current rule."
         }
       }
     },
-    "PrivilegedRolePolicyApprovalRule": {
+    "RoleManagementPolicyApprovalRule": {
       "description": "The role management policy rule.",
       "allOf": [
         {
-          "$ref": "#/definitions/PrivilegedRolePolicyRule"
+          "$ref": "#/definitions/RoleManagementPolicyRule"
         }
       ],
       "type": "object",
@@ -349,10 +349,10 @@
         },
         "ruleType": {
           "description": "The type of rule",
-          "$ref": "#/definitions/PrivilegedRolePolicyRuleType"
+          "$ref": "#/definitions/RoleManagementPolicyRuleType"
         },
         "target": {
-          "$ref": "#/definitions/PrivilegedRolePolicyRuleTarget",
+          "$ref": "#/definitions/RoleManagementPolicyRuleTarget",
           "description": "The target of the current rule."
         },
         "setting": {
@@ -493,11 +493,11 @@
         }
       }
     },
-    "PrivilegedRolePolicyAuthenticationContextRule": {
+    "RoleManagementPolicyAuthenticationContextRule": {
       "description": "The role management policy rule.",
       "allOf": [
         {
-          "$ref": "#/definitions/PrivilegedRolePolicyRule"
+          "$ref": "#/definitions/RoleManagementPolicyRule"
         }
       ],
       "type": "object",
@@ -508,10 +508,10 @@
         },
         "ruleType": {
           "description": "The type of rule",
-          "$ref": "#/definitions/PrivilegedRolePolicyRuleType"
+          "$ref": "#/definitions/RoleManagementPolicyRuleType"
         },
         "target": {
-          "$ref": "#/definitions/PrivilegedRolePolicyRuleTarget",
+          "$ref": "#/definitions/RoleManagementPolicyRuleTarget",
           "description": "The target of the current rule."
         },
         "isEnabled": {
@@ -524,11 +524,11 @@
         }
       }
     },
-    "PrivilegedRolePolicyEnablementRule": {
+    "RoleManagementPolicyEnablementRule": {
       "description": "The role management policy rule.",
       "allOf": [
         {
-          "$ref": "#/definitions/PrivilegedRolePolicyRule"
+          "$ref": "#/definitions/RoleManagementPolicyRule"
         }
       ],
       "type": "object",
@@ -539,10 +539,10 @@
         },
         "ruleType": {
           "description": "The type of rule",
-          "$ref": "#/definitions/PrivilegedRolePolicyRuleType"
+          "$ref": "#/definitions/RoleManagementPolicyRuleType"
         },
         "target": {
-          "$ref": "#/definitions/PrivilegedRolePolicyRuleTarget",
+          "$ref": "#/definitions/RoleManagementPolicyRuleTarget",
           "description": "The target of the current rule."
         },
         "enabledRules": {
@@ -554,11 +554,11 @@
         }
       }
     },
-    "PrivilegedRolePolicyExpirationRule": {
+    "RoleManagementPolicyExpirationRule": {
       "description": "The role management policy rule.",
       "allOf": [
         {
-          "$ref": "#/definitions/PrivilegedRolePolicyRule"
+          "$ref": "#/definitions/RoleManagementPolicyRule"
         }
       ],
       "type": "object",
@@ -569,10 +569,10 @@
         },
         "ruleType": {
           "description": "The type of rule",
-          "$ref": "#/definitions/PrivilegedRolePolicyRuleType"
+          "$ref": "#/definitions/RoleManagementPolicyRuleType"
         },
         "target": {
-          "$ref": "#/definitions/PrivilegedRolePolicyRuleTarget",
+          "$ref": "#/definitions/RoleManagementPolicyRuleTarget",
           "description": "The target of the current rule."
         },
         "isExpirationRequired": {
@@ -585,11 +585,11 @@
         }
       }
     },
-    "PrivilegedRolePolicyNotificationRule": {
+    "RoleManagementPolicyNotificationRule": {
       "description": "The role management policy rule.",
       "allOf": [
         {
-          "$ref": "#/definitions/PrivilegedRolePolicyRule"
+          "$ref": "#/definitions/RoleManagementPolicyRule"
         }
       ],
       "type": "object",
@@ -600,10 +600,10 @@
         },
         "ruleType": {
           "description": "The type of rule",
-          "$ref": "#/definitions/PrivilegedRolePolicyRuleType"
+          "$ref": "#/definitions/RoleManagementPolicyRuleType"
         },
         "target": {
-          "$ref": "#/definitions/PrivilegedRolePolicyRuleTarget",
+          "$ref": "#/definitions/RoleManagementPolicyRuleTarget",
           "description": "The target of the current rule."
         },
         "notificationType": {
@@ -652,7 +652,7 @@
         }
       }
     },
-    "PrivilegedRolePolicyRuleTarget": {
+    "RoleManagementPolicyRuleTarget": {
       "description": "The role management policy rule target.",
       "type": "object",
       "properties": {
@@ -694,18 +694,18 @@
         }
       }
     },
-    "PrivilegedRolePolicyRuleType": {
+    "RoleManagementPolicyRuleType": {
       "type": "string",
       "description": "The type of rule",
       "enum": [
-        "PrivilegedRolePolicyApprovalRule",
-        "PrivilegedRolePolicyAuthenticationContextRule",
-        "PrivilegedRolePolicyEnablementRule",
-        "PrivilegedRolePolicyExpirationRule",
-        "PrivilegedRolePolicyNotificationRule"
+        "RoleManagementPolicyApprovalRule",
+        "RoleManagementPolicyAuthenticationContextRule",
+        "RoleManagementPolicyEnablementRule",
+        "RoleManagementPolicyExpirationRule",
+        "RoleManagementPolicyNotificationRule"
       ],
       "x-ms-enum": {
-        "name": "PrivilegedRolePolicyRuleType",
+        "name": "RoleManagementPolicyRuleType",
         "modelAsString": true
       }
     },
