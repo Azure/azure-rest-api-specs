@@ -530,7 +530,7 @@
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/batchEndpoints/{endpointName}/jobs": {
-      "post": {
+      "put": {
         "tags": [
           "BatchJob"
         ],
@@ -775,7 +775,7 @@
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/batchEndpoints/{endpointName}/deployments/{deploymentName}/jobs": {
-      "post": {
+      "put": {
         "tags": [
           "BatchJob"
         ],
@@ -3027,6 +3027,24 @@
             "$ref": "machineLearningServices.json#/parameters/PaginationParameter"
           },
           {
+            "in": "query",
+            "name": "jobType",
+            "description": "Type of job to be returned.",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "tags",
+            "description": "Tags for job to be returned.",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "tag",
+            "description": "Jobs returned will have this tag key.",
+            "type": "string"
+          },
+          {
             "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
           },
           {
@@ -4274,7 +4292,10 @@
             }
           },
           "202": {
-            "description": "Success"
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/LongRunningNullResponseLongRunningOperationResponse"
+            }
           },
           "204": {
             "description": "Success"
@@ -4718,7 +4739,10 @@
             "description": "Success"
           },
           "202": {
-            "description": "Success"
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/LongRunningNullResponseLongRunningOperationResponse"
+            }
           },
           "200": {
             "description": "Success"
@@ -5746,14 +5770,6 @@
       ],
       "type": "object",
       "properties": {
-        "datasetId": {
-          "description": "Input dataset version - Deprecated, removing the Required field now so it can be dropped in the next PR",
-          "type": "string",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ]
-        },
         "dataset": {
           "$ref": "#/definitions/InferenceDataInputBase"
         },
@@ -8472,6 +8488,23 @@
           }
         },
         "nextLink": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "LongRunningNullResponse": {
+      "type": "object",
+      "additionalProperties": false
+    },
+    "LongRunningNullResponseLongRunningOperationResponse": {
+      "type": "object",
+      "properties": {
+        "completionResult": {
+          "$ref": "#/definitions/LongRunningNullResponse"
+        },
+        "location": {
+          "format": "uri",
           "type": "string"
         }
       },
