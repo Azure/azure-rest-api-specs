@@ -66,17 +66,18 @@
             "name": "repeatability-first-sent",
             "description": "MUST be sent by clients to specify that a request is repeatable. Repeatability-First-Sent is used to specify the date and time at which the request was first created.eg- Tue, 26 Mar 2019 16:06:51 GMT",
             "type": "string"
-          },
-          {
-            "in": "header",
-            "name": "repeatability-result",
-            "description": "MUST be returned to clients for a request that is repeatable. This response header in the result of a repeatable request with one of the case-insensitive values accepted or rejected.",
-            "type": "string"
           }
         ],
         "responses": {
           "202": {
             "description": "Accepted",
+            "headers": {
+              "repeatability-result":
+              {
+                "type": "string",
+                "description": "Result of repeatibility request, if repeatability-request-id is provided.Values could be accepted or rejected."
+              }
+            },
             "schema": {
               "$ref": "#/definitions/SendSmsResponse"
             }
