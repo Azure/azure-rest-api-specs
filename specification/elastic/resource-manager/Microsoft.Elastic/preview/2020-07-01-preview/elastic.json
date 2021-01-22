@@ -932,6 +932,18 @@
         }
       }
     },
+    "LiftrResourceCategories": {
+      "enum": [
+        "Unknown",
+        "MonitorLogs"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "LiftrResourceCategories"
+      },
+      "readOnly": true
+    },
     "MonitorProperties": {
       "description": "Properties specific to the monitor resource.",
       "type": "object",
@@ -954,6 +966,15 @@
           "x-ms-mutability": [
             "create"
           ]
+        },
+        "liftrResourceCategory": {
+          "$ref": "#/definitions/LiftrResourceCategories"
+        },
+        "liftrResourcePreference": {
+          "description": "The priority of the resource.",
+          "format": "int32",
+          "type": "integer",
+          "readOnly": true
         }
       }
     },
@@ -1178,6 +1199,10 @@
       "description": "Definition of the properties for a TagRules resource.",
       "type": "object",
       "properties": {
+        "provisioningState": {
+          "description": "Provisioning state of the monitoring tag rules.",
+          "$ref": "#/definitions/ProvisioningState"
+        },
         "logRules": {
           "description": "Rules for sending logs.",
           "$ref": "#/definitions/LogRules"
