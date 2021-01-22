@@ -463,6 +463,7 @@
         "defaultCustomBlockResponseStatusCode": {
           "description": "If the action type is block, this field defines the default customer overridable http response status code.",
           "type": "integer",
+          "format": "int32",
           "enum": [
             200,
             403,
@@ -530,6 +531,7 @@
         "priority": {
           "description": "Defines in what order this rule be evaluated in the overall list of custom rules",
           "type": "integer",
+          "format": "int32",
           "maximum": 1000,
           "exclusiveMaximum": false,
           "minimum": 0,
@@ -571,12 +573,14 @@
         "rateLimitThreshold": {
           "description": "Defines rate limit threshold.",
           "type": "integer",
+          "format": "int32",
           "minimum": 0,
           "exclusiveMinimum": false
         },
         "rateLimitDurationInMinutes": {
           "description": "Defines rate limit duration. Default is 1 minute.",
           "type": "integer",
+          "format": "int32",
           "maximum": 60,
           "exclusiveMaximum": false,
           "minimum": 0,
