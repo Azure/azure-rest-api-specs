@@ -31,23 +31,6 @@ use-internal-constructors: true
 add-credentials: true
 ```
 
-## Suppression
-
-``` yaml
-directive:
-  - suppress: AvoidNestedProperties
-    reason: Client defined properties dictionaries should not be flattened.
-  - suppress: GuidUsage
-    reason: Existing properties; cannot change without breaking API
-  - suppress: DeleteMustNotHaveRequestBody
-    reason: Existing API for batch deletion
-  - suppress: LROStatusCodesReturnTypeSchema
-    reason: Not a Long Running Operation
-  - from: hyperdrive.json
-    suppress: DefinitionsPropertiesNamesCamelCase
-    reason: Existing service; would be a breaking change
-```
-
 ### Tag: package-2019-09-preview
 
 These settings apply only when `--tag=package-2019-09-preview` is specified on the command line.
@@ -79,6 +62,22 @@ input-file:
 ---
 # Code Generation
 
+## Suppression
+
+``` yaml
+directive:
+  - suppress: AvoidNestedProperties
+    reason: Client defined properties dictionaries should not be flattened.
+  - suppress: GuidUsage
+    reason: Existing properties; cannot change without breaking API
+  - suppress: DeleteMustNotHaveRequestBody
+    reason: Existing API for batch deletion
+  - suppress: LROStatusCodesReturnTypeSchema
+    reason: Not a Long Running Operation
+  - from: hyperdrive.json
+    suppress: DefinitionsPropertiesNamesCamelCase
+    reason: Existing service; would be a breaking change
+```
 
 ## Swagger to SDK
 
