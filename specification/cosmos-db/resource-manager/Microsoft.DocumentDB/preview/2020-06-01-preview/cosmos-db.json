@@ -7946,10 +7946,21 @@
     "BackupStorageRedundanciesResult": {
       "description": "Available backup storage redundancies in selected region.",
       "type": "object",
-      "location": {
-        "type": "string",
-        "description": "The location of the resource group to which the resource belongs."
-      },
+      "properties": {
+        "location": {
+          "type": "string",
+          "description": "The location of the resource group to which the resource belongs."
+        },
+        "properties": {
+          "type": "object",
+          "description": "x.",
+          "$ref": "#/definitions/BackupStorageRedundancyProperties"
+        }
+      }
+    },
+    "BackupStorageRedundancyProperties": {
+      "description": "x.",
+      "type": "object",
       "properties": {
         "backupStorageRedundancy": {
           "readOnly": true,
