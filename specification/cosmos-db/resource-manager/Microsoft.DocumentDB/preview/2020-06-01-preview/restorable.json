@@ -332,7 +332,7 @@
         "id": {
           "readOnly": true,
           "type": "string",
-          "description": "The unique resource identifier of the ARM resource."
+          "description": "The unique resource IDentifier of the ARM resource."
         },
         "name": {
           "readOnly": true,
@@ -366,19 +366,21 @@
             "eventTimestamp": {
               "type": "string",
               "readOnly": true,
-              "description": "The timestamp of this database event."
+              "description": "The time when this database event happened."
             },
             "ownerId": {
               "type": "string",
               "readOnly": true,
-              "description": "The name of this restorable SQL database."
+              "description": "The name of the SQL database."
             },
             "ownerResourceId": {
               "type": "string",
               "readOnly": true,
-              "description": "The resource Id of this restorable SQL database."
+              "description": "The resource ID of the SQL database."
             },
             "database": {
+              "description": "The properties of an SQL database",
+              "type": "object",
               "properties": {
                 "_colls": {
                   "type": "string",
@@ -435,7 +437,7 @@
         "id": {
           "readOnly": true,
           "type": "string",
-          "description": "The unique resource identifier of the ARM resource."
+          "description": "The unique resource IDentifier of the ARM resource."
         },
         "name": {
           "readOnly": true,
@@ -469,7 +471,7 @@
             "eventTimestamp": {
               "type": "string",
               "readOnly": true,
-              "description": "The timestamp of this container event."
+              "description": "The when this container event happened."
             },
             "ownerId": {
               "type": "string",
@@ -479,9 +481,11 @@
             "ownerResourceId": {
               "type": "string",
               "readOnly": true,
-              "description": "The resource Id of this restorable SQL container."
+              "description": "The resource ID of this restorable SQL container."
             },
             "container": {
+              "type": "object",
+              "description": "Cosmos DB SQL container resource object",
               "properties": {
                 "_self": {
                   "type": "string",
@@ -541,7 +545,7 @@
         "id": {
           "readOnly": true,
           "type": "string",
-          "description": "The unique resource identifier of the ARM resource."
+          "description": "The unique resource IDentifier of the ARM resource."
         },
         "name": {
           "readOnly": true,
@@ -575,7 +579,7 @@
             "eventTimestamp": {
               "type": "string",
               "readOnly": true,
-              "description": "The timestamp of this database event."
+              "description": "The time when this database event happened."
             },
             "ownerId": {
               "type": "string",
@@ -585,7 +589,7 @@
             "ownerResourceId": {
               "type": "string",
               "readOnly": true,
-              "description": "The resource Id of this restorable MongoDB database."
+              "description": "The resource ID of this restorable MongoDB database."
             }
           }
         }
@@ -617,7 +621,7 @@
         "id": {
           "readOnly": true,
           "type": "string",
-          "description": "The unique resource identifier of the ARM resource."
+          "description": "The unique resource IDentifier of the ARM resource."
         },
         "name": {
           "readOnly": true,
@@ -651,7 +655,7 @@
             "eventTimestamp": {
               "type": "string",
               "readOnly": true,
-              "description": "The timestamp of this collection event."
+              "description": "The time when this collection event happened."
             },
             "ownerId": {
               "type": "string",
@@ -661,7 +665,7 @@
             "ownerResourceId": {
               "type": "string",
               "readOnly": true,
-              "description": "The resource Id of this restorable MongoDB collection."
+              "description": "The resource ID of this restorable MongoDB collection."
             }
           }
         }
@@ -703,7 +707,7 @@
       "required": false,
       "type": "string",
       "x-ms-parameter-location": "method",
-      "description": "The resource id of the restorable SQL database."
+      "description": "The resource ID of the restorable SQL database."
     },
     "restorableMongodbDatabaseRidParameter": {
       "name": "restorableMongodbDatabaseRid",
@@ -711,7 +715,7 @@
       "required": false,
       "type": "string",
       "x-ms-parameter-location": "method",
-      "description": "The resource id of the restorable Mongo database."
+      "description": "The resource ID of the restorable Mongo database."
     },
     "restoreLocationParameter": {
       "name": "restoreLocation",
