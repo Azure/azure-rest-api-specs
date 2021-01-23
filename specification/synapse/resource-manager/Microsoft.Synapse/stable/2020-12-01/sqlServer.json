@@ -1089,13 +1089,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/recoverableSqlpools": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/recoverableSqlPools": {
       "get": {
         "tags": [
           "WorkspaceManagedSqlServer",
-          "recoverableSqlpools"
+          "recoverableSqlPools"
         ],
-        "operationId": "WorkspaceManagedSqlServerRecoverableSqlpools_List",
+        "operationId": "WorkspaceManagedSqlServerRecoverableSqlPools_List",
         "summary": "Get list of recoverable sql pools for the server.",
         "description": "Get list of recoverable sql pools for workspace managed sql server.",
         "parameters": [
@@ -1137,7 +1137,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/recoverableSqlPools/{sqlComputeName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/recoverableSqlPools/{sqlPoolName}": {
       "get": {
         "tags": [
           "WorkspaceManagedSqlServer",
@@ -1160,11 +1160,11 @@
             "$ref": "./workspace.json#/parameters/workspaceNameParameter"
           },
           {
-            "name": "sqlComputeName",
+            "name": "sqlPoolName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the sql compute"
+            "description": "The name of the sql pool"
           }
         ],
         "responses": {

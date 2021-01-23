@@ -5353,6 +5353,19 @@
           "type": "string",
           "description": "Date the SQL pool was created",
           "format": "date-time"
+        },
+        "storageAccountType": {
+          "description": "The storage account type used to store backups for this sql pool.",
+          "enum": [
+            "GRS",
+            "LRS",
+            "ZRS"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "StorageAccountType",
+            "modelAsString": true
+          }
         }
       }
     },
