@@ -10928,9 +10928,23 @@
           "description": "Pattern type keys",
           "items": {
             "description": "Pattern type key",
-            "type": "string"
+            "$ref": "#/definitions/ThreatIntelligenceParsedPatternTypeValue"
           },
           "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "ThreatIntelligenceParsedPatternTypeValue": {
+      "description": "Describes threat kill chain phase entity",
+      "properties": {
+        "valueType": {
+          "description": "Type of the value",
+          "type": "string"
+        },
+        "value": {
+          "description": "Value of parsed pattern",
+          "type": "string"
         }
       },
       "type": "object"
