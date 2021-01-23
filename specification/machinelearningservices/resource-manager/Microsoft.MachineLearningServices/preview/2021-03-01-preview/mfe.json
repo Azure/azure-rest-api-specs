@@ -2646,6 +2646,7 @@
         "tags": [
           "EnvironmentSpecification"
         ],
+        "summary": "Creates or updates an EnvironmentSpecificationVersion.",
         "operationId": "EnvironmentSpecificationVersions_CreateOrUpdate",
         "consumes": [
           "application/json"
@@ -2657,12 +2658,14 @@
           {
             "in": "path",
             "name": "name",
+            "description": "Name of EnvironmentSpecificationVersion.",
             "required": true,
             "type": "string"
           },
           {
             "in": "path",
             "name": "version",
+            "description": "Version of EnvironmentSpecificationVersion.",
             "required": true,
             "type": "string"
           },
@@ -2681,6 +2684,7 @@
           {
             "in": "body",
             "name": "body",
+            "description": "Definition of EnvironmentSpecificationVersion.",
             "schema": {
               "description": "Azure Resource Manager resource envelope.",
               "allOf": [
@@ -2838,6 +2842,7 @@
         "tags": [
           "EnvironmentSpecification"
         ],
+        "summary": "Lists EnvironmentSpecificationVersions in container.",
         "operationId": "EnvironmentSpecificationVersions_List",
         "produces": [
           "application/json"
@@ -2846,6 +2851,7 @@
           {
             "in": "path",
             "name": "name",
+            "description": "Name of EnvironmentSpecificationVersion.",
             "required": true,
             "type": "string"
           },
@@ -2855,11 +2861,13 @@
           {
             "in": "query",
             "name": "$orderby",
+            "description": "Order by filter.",
             "type": "string"
           },
           {
             "in": "query",
             "name": "$top",
+            "description": "Top filter.",
             "type": "string"
           },
           {
