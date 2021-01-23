@@ -8,6 +8,7 @@ These settings apply only when `--azureresourceschema` is specified on the comma
 batch:
   - tag: schema-synapse-2020-04-01-preview
   - tag: schema-synapse-2019-06-01-preview
+  - tag: schema-synapse-2020-12-01
 
 ```
 
@@ -44,5 +45,27 @@ input-file:
   - Microsoft.Synapse/preview/2019-06-01-preview/privateEndpointConnections.json
   - Microsoft.Synapse/preview/2019-06-01-preview/privatelinkhub.json
   - Microsoft.Synapse/preview/2019-06-01-preview/sqlServer.json
+  - Microsoft.Synapse/preview/2019-06-01-preview/keys.json
+
+```
+### Tag: schema-synapse-2020-12-01 and azureresourceschema
+
+``` yaml $(tag) == 'schema-synapse-2020-12-01' && $(azureresourceschema)
+output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
+  - Microsoft.Synapse/stable/2020-12-01/bigDataPool.json
+  - Microsoft.Synapse/stable/2020-12-01/checkNameAvailability.json
+  - Microsoft.Synapse/stable/2020-12-01/firewallRule.json
+  - Microsoft.Synapse/stable/2020-12-01/operations.json
+  - Microsoft.Synapse/stable/2020-12-01/sqlPool.json
+  - Microsoft.Synapse/stable/2020-12-01/workspace.json
+  - Microsoft.Synapse/stable/2020-12-01/integrationRuntime.json
+  - Microsoft.Synapse/stable/2020-12-01/privateLinkResources.json
+  - Microsoft.Synapse/stable/2020-12-01/privateEndpointConnections.json
+  - Microsoft.Synapse/stable/2020-12-01/privatelinkhub.json
+  - Microsoft.Synapse/stable/2020-12-01/sqlServer.json
+  - Microsoft.Synapse/stable/2020-12-01/keys.json
 
 ```
