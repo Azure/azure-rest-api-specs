@@ -314,25 +314,25 @@
           "items": {
             "$ref": "#/definitions/RestorableSqlDatabaseGetResult"
           },
-          "description": "List of restorable SQL databases and their properties."
+          "description": "List of SQL database events and their properties."
         }
       },
-      "description": "The List operation response, that contains the restorable SQL databases and their properties."
+      "description": "The List operation response, that contains the SQL database events and their properties."
     },
     "RestorableSqlDatabaseGetResult": {
-      "description": "An Azure Cosmos DB restorable SQL database",
+      "description": "An Azure Cosmos DB SQL database event",
       "type": "object",
       "properties": {
         "properties": {
           "type": "object",
           "x-ms-client-flatten": true,
-          "description": "The properties of a restorable SQL database.",
+          "description": "The properties of a SQL database event.",
           "$ref": "#/definitions/RestorableSqlDatabaseProperties"
         },
         "id": {
           "readOnly": true,
           "type": "string",
-          "description": "The unique resource IDentifier of the ARM resource."
+          "description": "The unique resource Identifier of the ARM resource."
         },
         "name": {
           "readOnly": true,
@@ -347,7 +347,7 @@
       }
     },
     "RestorableSqlDatabaseProperties": {
-      "description": "The properties of an Azure Cosmos DB restorable SQL database",
+      "description": "The properties of an Azure Cosmos DB SQL database event",
       "type": "object",
       "properties": {
         "resource": {
@@ -379,8 +379,6 @@
               "description": "The resource ID of the SQL database."
             },
             "database": {
-              "description": "The properties of an SQL database",
-              "type": "object",
               "properties": {
                 "_colls": {
                   "type": "string",
@@ -419,25 +417,25 @@
           "items": {
             "$ref": "#/definitions/RestorableSqlContainerGetResult"
           },
-          "description": "List of restorable SQL containers and their properties."
+          "description": "List of SQL container events and their properties."
         }
       },
-      "description": "The List operation response, that contains the restorable SQL containers and their properties."
+      "description": "The List operation response, that contains the SQL container events and their properties."
     },
     "RestorableSqlContainerGetResult": {
-      "description": "An Azure Cosmos DB restorable SQL container",
+      "description": "An Azure Cosmos DB SQL container event",
       "type": "object",
       "properties": {
         "properties": {
           "type": "object",
           "x-ms-client-flatten": true,
-          "description": "The properties of a restorable SQL container.",
+          "description": "The properties of a SQL container event.",
           "$ref": "#/definitions/RestorableSqlContainerProperties"
         },
         "id": {
           "readOnly": true,
           "type": "string",
-          "description": "The unique resource IDentifier of the ARM resource."
+          "description": "The unique resource Identifier of the ARM resource."
         },
         "name": {
           "readOnly": true,
@@ -452,7 +450,7 @@
       }
     },
     "RestorableSqlContainerProperties": {
-      "description": "The properties of an Azure Cosmos DB restorable SQL container",
+      "description": "The properties of an Azure Cosmos DB SQL container event",
       "type": "object",
       "properties": {
         "resource": {
@@ -476,12 +474,12 @@
             "ownerId": {
               "type": "string",
               "readOnly": true,
-              "description": "The name of this restorable SQL container."
+              "description": "The name of this SQL container."
             },
             "ownerResourceId": {
               "type": "string",
               "readOnly": true,
-              "description": "The resource ID of this restorable SQL container."
+              "description": "The resource ID of this SQL container."
             },
             "container": {
               "type": "object",
@@ -527,25 +525,25 @@
           "items": {
             "$ref": "#/definitions/RestorableMongodbDatabaseGetResult"
           },
-          "description": "List of restorable MongoDB databases and their properties."
+          "description": "List of MongoDB database events and their properties."
         }
       },
-      "description": "The List operation response, that contains the restorable MongoDB databases and their properties."
+      "description": "The List operation response, that contains the MongoDB database events and their properties."
     },
     "RestorableMongodbDatabaseGetResult": {
-      "description": "An Azure Cosmos DB restorable MongoDB database",
+      "description": "An Azure Cosmos DB MongoDB database event",
       "type": "object",
       "properties": {
         "properties": {
           "type": "object",
           "x-ms-client-flatten": true,
-          "description": "The properties of a restorable MongoDB database.",
+          "description": "The properties of a MongoDB database event.",
           "$ref": "#/definitions/RestorableMongodbDatabaseProperties"
         },
         "id": {
           "readOnly": true,
           "type": "string",
-          "description": "The unique resource IDentifier of the ARM resource."
+          "description": "The unique resource Identifier of the ARM resource."
         },
         "name": {
           "readOnly": true,
@@ -560,7 +558,7 @@
       }
     },
     "RestorableMongodbDatabaseProperties": {
-      "description": "The properties of an Azure Cosmos DB restorable MongoDB database",
+      "description": "The properties of an Azure Cosmos DB MongoDB database event",
       "type": "object",
       "properties": {
         "resource": {
@@ -584,12 +582,12 @@
             "ownerId": {
               "type": "string",
               "readOnly": true,
-              "description": "The name of this restorable MongoDB database."
+              "description": "The name of this MongoDB database."
             },
             "ownerResourceId": {
               "type": "string",
               "readOnly": true,
-              "description": "The resource ID of this restorable MongoDB database."
+              "description": "The resource ID of this MongoDB database."
             }
           }
         }
@@ -603,25 +601,25 @@
           "items": {
             "$ref": "#/definitions/RestorableMongodbCollectionGetResult"
           },
-          "description": "List of restorable MongoDB collections and their properties."
+          "description": "List of MongoDB collection events and their properties."
         }
       },
-      "description": "The List operation response, that contains the restorable MongoDB collections and their properties."
+      "description": "The List operation response, that contains the MongoDB collection events and their properties."
     },
     "RestorableMongodbCollectionGetResult": {
-      "description": "An Azure Cosmos DB restorable MongoDB collection",
+      "description": "An Azure Cosmos DB MongoDB collection event",
       "type": "object",
       "properties": {
         "properties": {
           "type": "object",
           "x-ms-client-flatten": true,
-          "description": "The properties of a restorable MongoDB collection.",
+          "description": "The properties of a MongoDB collection event.",
           "$ref": "#/definitions/RestorableMongodbCollectionProperties"
         },
         "id": {
           "readOnly": true,
           "type": "string",
-          "description": "The unique resource IDentifier of the ARM resource."
+          "description": "The unique resource Identifier of the ARM resource."
         },
         "name": {
           "readOnly": true,
@@ -636,7 +634,7 @@
       }
     },
     "RestorableMongodbCollectionProperties": {
-      "description": "The properties of an Azure Cosmos DB restorable MongoDB collection",
+      "description": "The properties of an Azure Cosmos DB MongoDB collection event",
       "type": "object",
       "properties": {
         "resource": {
@@ -660,12 +658,12 @@
             "ownerId": {
               "type": "string",
               "readOnly": true,
-              "description": "The name of this restorable MongoDB collection."
+              "description": "The name of this MongoDB collection."
             },
             "ownerResourceId": {
               "type": "string",
               "readOnly": true,
-              "description": "The resource ID of this restorable MongoDB collection."
+              "description": "The resource ID of this MongoDB collection."
             }
           }
         }
@@ -707,7 +705,7 @@
       "required": false,
       "type": "string",
       "x-ms-parameter-location": "method",
-      "description": "The resource ID of the restorable SQL database."
+      "description": "The resource ID of the SQL database."
     },
     "restorableMongodbDatabaseRidParameter": {
       "name": "restorableMongodbDatabaseRid",
@@ -715,7 +713,7 @@
       "required": false,
       "type": "string",
       "x-ms-parameter-location": "method",
-      "description": "The resource ID of the restorable Mongo database."
+      "description": "The resource ID of the MongoDB database."
     },
     "restoreLocationParameter": {
       "name": "restoreLocation",
