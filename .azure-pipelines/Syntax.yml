@@ -13,7 +13,8 @@ jobs:
       echo PR_ONLY: $(PR_ONLY)
     displayName: "Info"
   - task: Npm@1
-    displayName: 'npm install'
+    displayName: 'npm ci'
+    command: 'ci'
     inputs:
       verbose: false
   - script: 'npm test -- test/syntax.js'
