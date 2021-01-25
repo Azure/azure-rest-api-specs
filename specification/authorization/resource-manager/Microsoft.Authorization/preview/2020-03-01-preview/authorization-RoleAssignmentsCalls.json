@@ -119,7 +119,6 @@
         }
       }
     },
-
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Authorization/roleAssignments": {
       "get": {
         "operationId": "RoleAssignments_ListForResourceGroup",
@@ -211,7 +210,6 @@
         }
       }
     },
-
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}/providers/Microsoft.Authorization/roleAssignments": {
       "get": {
         "operationId": "RoleAssignments_ListForResource",
@@ -321,7 +319,6 @@
         }
       }
     },
-
     "/{scope}/providers/Microsoft.Authorization/roleAssignments/{roleAssignmentName}": {
       "delete": {
         "tags": [
@@ -341,6 +338,12 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "Role assignment successfully deleted.",
+            "schema": {
+              "$ref": "#/definitions/RoleAssignment"
+            }
+          },
           "204": {
             "description": "Role assignment successfully deleted."
           },
@@ -352,11 +355,8 @@
           }
         },
         "x-ms-examples": {
-          "Delete role assignment that exists": {
-            "$ref": "./examples/DeleteRoleAssignmentThatExists.json"
-          },
-          "Delete role assignment that does not exist or was already deleted": {
-            "$ref": "./examples/DeleteRoleAssignmentThatDoesNotExist.json"
+          "Delete role assignment": {
+            "$ref": "./examples/DeleteRoleAssignment.json"
           }
         }
       },
@@ -438,7 +438,6 @@
         }
       }
     },
-
     "/{roleAssignmentId}": {
       "get": {
         "operationId": "RoleAssignments_GetById",
@@ -543,16 +542,12 @@
           }
         },
         "x-ms-examples": {
-          "Delete role assignment by ID that exists": {
-            "$ref": "./examples/DeleteRoleAssignmentByIdThatExists.json"
-          },
-          "Delete role assignment by ID that does not exist or was already deleted": {
-            "$ref": "./examples/DeleteRoleAssignmentByIdThatDoesNotExist.json"
+          "Delete role assignment by ID": {
+            "$ref": "./examples/DeleteRoleAssignmentById.json"
           }
         }
       }
     }
-
   },
   "definitions": {
     "RoleAssignmentFilter": {
