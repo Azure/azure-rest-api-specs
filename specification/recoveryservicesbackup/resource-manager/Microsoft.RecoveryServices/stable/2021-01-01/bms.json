@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2020-12-01",
+    "version": "2021-01-01",
     "title": "RecoveryServicesBackupClient",
     "x-ms-code-generation-settings": {
       "internalConstructors": false
@@ -639,7 +639,6 @@
             }
           }
         },
-        "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "Get operation result for PrepareDataMove": {
             "$ref": "./examples/BackupDataMove/PrepareDataMoveOperationResult_Get.json"
@@ -1181,6 +1180,7 @@
             "description": "Accepted"
           }
         },
+        "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "Restore to New Azure IaasVm": {
             "$ref": "./examples/AzureIaasVm/TriggerRestore_ALR.json"
@@ -3063,6 +3063,131 @@
           }
         }
       }
+    },
+    "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupFabrics/{fabricName}/protectionContainers/{containerName}/protectedItems/{protectedItemName}/recoveryPoints/{recoveryPointId}/move": {
+      "post": {
+        "tags": [
+          "RecoveryPoint"
+        ],
+        "summary": "Move recovery point from one datastore to another store.",
+        "operationId": "MoveRecoveryPoint",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/VaultName"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "name": "fabricName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "containerName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "protectedItemName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "recoveryPointId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "Move Resource Across Tiers Request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MoveRPAcrossTiersRequestResource"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Trigger RP Move Operation": {
+            "$ref": "./examples/TriggerRecoveryPointMove_Post.json"
+          }
+        }
+      }
+    },
+    "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupFabrics/{fabricName}/protectionContainers/{containerName}/protectedItems/{protectedItemName}/recoveryPointsRecommendedForMove": {
+      "post": {
+        "tags": [
+          "RecoveryPointsRecommendedForMove"
+        ],
+        "description": "Lists the recovery points recommended for move to another tier",
+        "operationId": "RecoveryPointsRecommendedForMove_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/VaultName"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "name": "fabricName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "containerName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "protectedItemName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/RecoveryPointResourceList"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
     }
   },
   "definitions": {
@@ -3352,25 +3477,21 @@
       "properties": {
         "recoveryPointType": {
           "description": "Type of the backup copy. Specifies whether it is a crash consistent backup or app consistent.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "recoveryPointTime": {
           "format": "date-time",
           "description": "Time at which this backup copy was created.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "fileShareSnapshotUri": {
           "description": "Contains Url to the snapshot of fileshare, if applicable",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "recoveryPointSizeInGB": {
           "format": "int32",
           "description": "Contains recovery point size",
-          "type": "integer",
-          "readOnly": true
+          "type": "integer"
         }
       },
       "x-ms-discriminator-value": "AzureFileShareRecoveryPoint"
@@ -4404,8 +4525,7 @@
         "recoveryPointTimeInUTC": {
           "format": "date-time",
           "description": "UTC time at which recovery point was created",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "type": {
           "description": "Type of restore point",
@@ -4414,14 +4534,28 @@
             "Full",
             "Log",
             "Differential",
-            "Incremental"
+            "Incremental",
+            "SnapshotFull"
           ],
           "type": "string",
           "x-ms-enum": {
             "name": "RestorePointType",
             "modelAsString": true
-          },
-          "readOnly": true
+          }
+        },
+        "recoveryPointTierDetails": {
+          "description": "Recovery point tier information.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RecoveryPointTierInformation"
+          }
+        },
+        "recoveryPointMoveReadinessInfo": {
+          "description": "Eligibility of RP to be moved to another tier",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/RecoveryPointMoveReadinessInfo"
+          }
         }
       },
       "x-ms-discriminator-value": "AzureWorkloadRecoveryPoint"
@@ -4470,13 +4604,19 @@
           "enum": [
             "Invalid",
             "FileRecovery",
-            "WorkloadRecovery"
+            "WorkloadRecovery",
+            "SnapshotAttach",
+            "RecoveryUsingSnapshot"
           ],
           "type": "string",
           "x-ms-enum": {
             "name": "RecoveryMode",
             "modelAsString": true
           }
+        },
+        "targetResourceGroupName": {
+          "description": "Defines the Resource group of the Target VM",
+          "type": "string"
         }
       },
       "x-ms-discriminator-value": "AzureWorkloadRestoreRequest"
@@ -4587,16 +4727,14 @@
         "dataDirectoryTimeInUTC": {
           "format": "date-time",
           "description": "UTC time at which data directory info was captured",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "dataDirectoryPaths": {
           "description": "List of data directory paths during restore operation.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/SQLDataDirectory"
-          },
-          "readOnly": true
+          }
         }
       }
     },
@@ -4668,7 +4806,8 @@
             "Differential",
             "FullAndDifferential",
             "All",
-            "Incremental"
+            "Incremental",
+            "SnapshotFull"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -4678,6 +4817,10 @@
         },
         "extendedInfo": {
           "description": "In Get Recovery Point, it tells whether extended information about recovery point is asked.",
+          "type": "boolean"
+        },
+        "moveReadyRPOnly": {
+          "description": "Whether the RP can be moved to another tier",
           "type": "boolean"
         }
       }
@@ -5227,29 +5370,24 @@
       "properties": {
         "recoveryPointType": {
           "description": "Type of the backup copy.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "recoveryPointTime": {
           "format": "date-time",
           "description": "Time at which this backup copy was created.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "recoveryPointAdditionalInfo": {
           "description": "Additional information associated with this backup copy.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "sourceVMStorageType": {
           "description": "Storage type of the VM whose backup copy is created.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "isSourceVMEncrypted": {
           "description": "Identifies whether the VM was encrypted when the backup copy is created.",
-          "type": "boolean",
-          "readOnly": true
+          "type": "boolean"
         },
         "keyAndSecret": {
           "$ref": "#/definitions/KeyAndSecretDetails",
@@ -5291,6 +5429,13 @@
           "type": "array",
           "items": {
             "type": "string"
+          }
+        },
+        "recoveryPointMoveReadinessInfo": {
+          "description": "Eligibility of RP to be moved to another tier",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/RecoveryPointMoveReadinessInfo"
           }
         }
       },
@@ -6665,7 +6810,8 @@
           "enum": [
             "Invalid",
             "InstantRP",
-            "HardenedRP"
+            "HardenedRP",
+            "ArchivedRP"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -6679,12 +6825,20 @@
             "Invalid",
             "Valid",
             "Disabled",
-            "Deleted"
+            "Deleted",
+            "Rehydrated"
           ],
           "type": "string",
           "x-ms-enum": {
             "name": "RecoveryPointTierStatus",
             "modelAsString": false
+          }
+        },
+        "extendedInfo": {
+          "description": "Recovery point tier status.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
           }
         }
       }
@@ -7054,6 +7208,13 @@
         "databaseName": {
           "description": "Database name InstanceName/DataBaseName for SQL or System/DbName for SAP Hana",
           "type": "string"
+        },
+        "targetDirectoryMapping": {
+          "description": "This will contain the target folder mapping for the Full/Diff/Log/Incremental pits.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
         },
         "targetDirectoryForFileRestore": {
           "description": "Target directory location for restore as files.",
@@ -9500,6 +9661,169 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/WorkloadProtectableItemResource"
+          }
+        }
+      }
+    },
+    "AzureWorkloadSAPHanaPointInTimeRestoreWithRehydrateRequest": {
+      "description": "AzureWorkload SAP Hana-specific restore with integrated rehydration of recovery point.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AzureWorkloadSAPHanaPointInTimeRestoreRequest"
+        }
+      ],
+      "properties": {
+        "recoveryPointRehydrationInfo": {
+          "$ref": "#/definitions/RecoveryPointRehydrationInfo",
+          "description": "RP Rehydration Info"
+        }
+      },
+      "x-ms-discriminator-value": "AzureWorkloadSAPHanaPointInTimeRestoreWithRehydrateRequest"
+    },
+    "AzureWorkloadSAPHanaRestoreWithRehydrateRequest": {
+      "description": "AzureWorkload SAP Hana-specific restore with integrated rehydration of recovery point.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AzureWorkloadSAPHanaRestoreRequest"
+        }
+      ],
+      "properties": {
+        "recoveryPointRehydrationInfo": {
+          "$ref": "#/definitions/RecoveryPointRehydrationInfo",
+          "description": "RP Rehydration Info"
+        }
+      },
+      "x-ms-discriminator-value": "AzureWorkloadSAPHanaRestoreWithRehydrateRequest"
+    },
+    "AzureWorkloadSQLPointInTimeRestoreWithRehydrateRequest": {
+      "description": "AzureWorkload SQL-specific restore with integrated rehydration of recovery point.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AzureWorkloadSQLPointInTimeRestoreRequest"
+        }
+      ],
+      "properties": {
+        "recoveryPointRehydrationInfo": {
+          "$ref": "#/definitions/RecoveryPointRehydrationInfo",
+          "description": "RP Rehydration Info"
+        }
+      },
+      "x-ms-discriminator-value": "AzureWorkloadSQLPointInTimeRestoreWithRehydrateRequest"
+    },
+    "AzureWorkloadSQLRestoreWithRehydrateRequest": {
+      "description": "AzureWorkload SQL-specific restore with integrated rehydration of recovery point",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AzureWorkloadSQLRestoreRequest"
+        }
+      ],
+      "properties": {
+        "recoveryPointRehydrationInfo": {
+          "$ref": "#/definitions/RecoveryPointRehydrationInfo",
+          "description": "RP Rehydration Info"
+        }
+      },
+      "x-ms-discriminator-value": "AzureWorkloadSQLRestoreWithRehydrateRequest"
+    },
+    "IaasVMRestoreWithRehydrationRequest": {
+      "description": "IaaS VM workload-specific restore with integrated rehydration of recovery point.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/IaasVMRestoreRequest"
+        }
+      ],
+      "properties": {
+        "recoveryPointRehydrationInfo": {
+          "$ref": "#/definitions/RecoveryPointRehydrationInfo",
+          "description": "RP Rehydration Info"
+        }
+      },
+      "x-ms-discriminator-value": "IaasVMRestoreWithRehydrationRequest"
+    },
+    "MoveRPAcrossTiersRequest": {
+      "type": "object",
+      "properties": {
+        "objectType": {
+          "description": "Gets the class type.",
+          "type": "string"
+        },
+        "sourceTierType": {
+          "description": "Source tier from where RP needs to be moved",
+          "enum": [
+            "Invalid",
+            "InstantRP",
+            "HardenedRP",
+            "ArchivedRP"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "RecoveryPointTierType",
+            "modelAsString": false
+          }
+        },
+        "targetTierType": {
+          "description": "Target tier where RP needs to be moved",
+          "enum": [
+            "Invalid",
+            "InstantRP",
+            "HardenedRP",
+            "ArchivedRP"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "RecoveryPointTierType",
+            "modelAsString": false
+          }
+        }
+      }
+    },
+    "MoveRPAcrossTiersRequestResource": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/MoveRPAcrossTiersRequest",
+          "description": "MoveRPAcrossTiersRequestResource properties"
+        }
+      }
+    },
+    "RecoveryPointMoveReadinessInfo": {
+      "type": "object",
+      "properties": {
+        "isReadyForMove": {
+          "type": "boolean"
+        },
+        "additionalInfo": {
+          "type": "string"
+        }
+      }
+    },
+    "RecoveryPointRehydrationInfo": {
+      "description": "RP Rehydration Info",
+      "type": "object",
+      "properties": {
+        "rehydrationRetentionDuration": {
+          "description": "How long the rehydrated RP should be kept",
+          "type": "string"
+        },
+        "rehydrationPriority": {
+          "description": "Rehydration Priority",
+          "enum": [
+            "Standard",
+            "High"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "RehydrationPriority",
+            "modelAsString": true
           }
         }
       }
