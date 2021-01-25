@@ -27,7 +27,7 @@ These are the global settings for the PolicyInsights API.
 ``` yaml
 title: PolicyInsightsClient
 openapi-type: arm
-tag: package-2019-10
+tag: package-2020-07
 ```
 
 ### Validations
@@ -40,7 +40,7 @@ model-validator: true
 message-format: json
 ```
 
-## Suppression
+### Suppression
 ``` yaml
 directive:
   - suppress: EnumInsteadOfBoolean
@@ -66,7 +66,30 @@ directive:
     where:
       - $.paths["/providers/Microsoft.PolicyInsights/operations"].get
 
+  - suppress: PostOperationIdContainsUrlVerb
+    reason: The operation can be performed at multiple scopes. The operationId needs to indicate the scope.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.PolicyInsights/policyStates/latest/triggerEvaluation"].post.operationId
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.PolicyInsights/policyStates/latest/triggerEvaluation"].post.operationId
+      - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.PolicyInsights/checkPolicyRestrictions"].post.operationId
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.PolicyInsights/checkPolicyRestrictions"].post.operationId
+
 ```
+
+### Tag: package-2020-07
+
+These settings apply only when `--tag=package-2020-07` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-07'
+input-file:
+- Microsoft.PolicyInsights/preview/2018-07-01-preview/policyTrackedResources.json
+- Microsoft.PolicyInsights/stable/2019-07-01/remediations.json
+- Microsoft.PolicyInsights/stable/2019-10-01/policyEvents.json
+- Microsoft.PolicyInsights/stable/2019-10-01/policyStates.json
+- Microsoft.PolicyInsights/stable/2019-10-01/policyMetadata.json
+- Microsoft.PolicyInsights/stable/2020-07-01/checkPolicyRestrictions.json
+```
+
 
 ### Tag: package-2019-10
 
@@ -148,7 +171,7 @@ These settings apply only when `--python` is specified on the command line.
 Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
 Use `--python-mode=update` if you already have a setup.py and just want to update the code itself.
 
-``` yaml $(python)
+``` yaml $(python) && !$(track2)
 python-mode: create
 python:
   azure-arm: true
@@ -158,12 +181,36 @@ python:
   package-name: azure-mgmt-policyinsights
   clear-output-folder: true
 ```
+
+``` yaml $(python) && $(track2)
+python-mode: create
+azure-arm: true
+license-header: MICROSOFT_MIT_NO_VERSION
+namespace: azure.mgmt.policyinsights
+package-name: azure-mgmt-policyinsights
+package-version: 1.0.0b1
+clear-output-folder: true
+
+directive:
+  - from: policyEvents.json
+    where: $.parameters.fromParameter
+    transform: $['x-ms-client-name'] = 'FromProperty'
+
+  - from: policyStates.json
+    where: $.parameters.fromParameter
+    transform: $['x-ms-client-name'] = 'FromProperty'
+```
+
 ``` yaml $(python) && $(python-mode) == 'update'
+no-namespace-folders: true
+output-folder: $(python-sdks-folder)/policyinsights/azure-mgmt-policyinsights/azure/mgmt/policyinsights
 python:
   no-namespace-folders: true
   output-folder: $(python-sdks-folder)/policyinsights/azure-mgmt-policyinsights/azure/mgmt/policyinsights
 ```
 ``` yaml $(python) && $(python-mode) == 'create'
+basic-setup-py: true
+output-folder: $(python-sdks-folder)/policyinsights/azure-mgmt-policyinsights
 python:
   basic-setup-py: true
   output-folder: $(python-sdks-folder)/policyinsights/azure-mgmt-policyinsights
@@ -191,10 +238,25 @@ output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-policyinsights
 
 ``` yaml $(java) && $(multiapi)
 batch:
+  - tag: package-2020-07
   - tag: package-2019-10
   - tag: package-2018-07
   - tag: package-2018-04
 ```
+
+### Tag: package-2020-07 and java
+
+These settings apply only when `--tag=package-2020-07 --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2020-07' && $(java)
+java:
+  namespace: com.microsoft.azure.management.policyinsights.v2020_07_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/policyinsights/mgmt-v2020_07_01
+regenerate-manager: true
+generate-interface: true
+```
+
 
 ### Tag: package-2019-10 and java
 

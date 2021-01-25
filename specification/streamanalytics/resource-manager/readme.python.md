@@ -24,7 +24,6 @@ azure-arm: true
 license-header: MICROSOFT_MIT_NO_VERSION
 package-name: azure-mgmt-streamanalytics
 no-namespace-folders: true
-package-version: 0.1.0
 ```
 
 ``` yaml $(python-mode) == 'update'
@@ -36,8 +35,10 @@ output-folder: $(python-sdks-folder)/streamanalytics/azure-mgmt-streamanalytics/
 ```
 ``` yaml $(python-mode) == 'create'
 python:
+  package-version: 0.1.0
   basic-setup-py: true
   output-folder: $(python-sdks-folder)/streamanalytics/azure-mgmt-streamanalytics
+package-version: 0.1.0
 basic-setup-py: true
 output-folder: $(python-sdks-folder)/streamanalytics/azure-mgmt-streamanalytics
 ```
