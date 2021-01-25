@@ -22,20 +22,25 @@ To see additional help and options, run:
 
 ### Basic Information
 
-There are the global settings for the Azure Monitor Control Service (AMCS) extension.
-``` yaml $(AMCS)
-tag: package-2019-11-01-preview-only
-```
-
 These are the global settings for the MonitorClient API.
 
 ``` yaml
 title: MonitorClient
 description: Monitor Management Client
 openapi-type: arm
-tag: package-2019-06
+tag: package-2020-10
 ```
 
+
+### Tag: package-2020-10
+
+These settings apply only when `--tag=package-2020-10` is specified on the command line.
+
+```yaml $(tag) == 'package-2020-10'
+input-file:
+  - Microsoft.Insights/stable/2020-10-01/actionGroups_API.json
+  - Microsoft.Insights/stable/2020-10-01/activityLogAlerts_API.json
+```
 ### Tag: package-2020-05-preview
 
 These settings apply only when `--tag=package-2020-05-preview` is specified on the command line.
@@ -589,7 +594,7 @@ directive:
     from: dataCollectionRuleAssociations_API.json
     where: $.paths
     reason: 'Operations API is defined in a separate swagger spec for Microsoft.Insights namespace (https://github.com/Azure/azure-rest-api-specs/blob/master/specification/monitor/resource-manager/Microsoft.Insights/stable/2015-04-01/operations_API.json)'
-  - suppress: R4007
+      - suppress: R4007
     from: metricAlert_API.json
     reason: 'Updating the error response to the new format would be a breaking change.'
   - suppress: R4007
