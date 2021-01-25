@@ -34,7 +34,7 @@ These are the global settings for the Compute API.
 title: ComputeManagementClient
 description: Compute Client
 openapi-type: arm
-tag: package-2020-12-01
+tag: package-2020-12-01-preview
 
 directive:
   - where:
@@ -209,7 +209,7 @@ directive:
       - ACS service is deprecated so a PATCH endpoint won't be implemented
 
 ```
-### Tag: package-2020-12-01
+### Tag: package-2020-12-01-preview
 
 These settings apply only when `--tag=package-2020-12-01` is specified on the command line.
 
@@ -218,11 +218,12 @@ input-file:
 - Microsoft.Compute/stable/2020-12-01/compute.json
 - Microsoft.Compute/stable/2020-12-01/runCommands.json
 - Microsoft.Compute/stable/2019-04-01/skus.json
-- Microsoft.Compute/stable/2020-06-30/disk.json
+- Microsoft.Compute/stable/2020-09-30/disk.json
 - Microsoft.Compute/stable/2019-12-01/gallery.json
+- Microsoft.Compute/preview/2020-10-01-preview/cloudService.json
 ```
 
-### Tag: package-2020-12-01-only
+### Tag: package-2020-12-01-preview-only
 
 These settings apply only when `--tag=package-2020-12-01-only` is specified on the command line.
 
@@ -241,7 +242,7 @@ input-file:
 - Microsoft.Compute/stable/2020-06-01/compute.json
 - Microsoft.Compute/stable/2020-06-01/runCommands.json
 - Microsoft.Compute/stable/2019-04-01/skus.json
-- Microsoft.Compute/stable/2020-06-30/disk.json
+- Microsoft.Compute/stable/2020-09-30/disk.json
 - Microsoft.Compute/stable/2019-12-01/gallery.json
 - Microsoft.ContainerService/stable/2017-01-31/containerService.json
 - Microsoft.Compute/preview/2020-10-01-preview/cloudService.json
