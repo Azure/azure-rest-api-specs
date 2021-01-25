@@ -5270,7 +5270,7 @@
       },
       "additionalProperties": false
     },
-    "DeploymentScaleSettings": {
+    "BatchDeploymentScaleSettings": {
       "type": "object",
       "properties": {
         "nodeCount": {
@@ -5530,7 +5530,7 @@
           "description": "Scale settings for deployment",
           "allOf": [
             {
-              "$ref": "#/definitions/DeploymentScaleSettings"
+              "$ref": "#/definitions/BatchDeploymentScaleSettings"
             }
           ]
         },
@@ -6019,7 +6019,7 @@
           "description": "Scale settings for deployment",
           "allOf": [
             {
-              "$ref": "#/definitions/DeploymentScaleSettings"
+              "$ref": "#/definitions/BatchDeploymentScaleSettings"
             }
           ],
           "x-ms-mutability": [
@@ -8918,6 +8918,36 @@
       },
       "additionalProperties": false
     },
+    "OnlineDeploymentScaleSettings": {
+      "type": "object",
+      "properties": {
+        "minimum": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "maximum": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "instanceCount": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "scaleType": {
+          "enum": [
+            "Automatic",
+            "Manual",
+            "None"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ScaleTypeMode",
+            "modelAsString": true
+          }
+        }
+      },
+      "additionalProperties": false
+    },
     "EnvironmentOverrides": {
       "type": "object",
       "properties": {
@@ -8991,7 +9021,7 @@
         "scaleSettings": {
           "allOf": [
             {
-              "$ref": "machineLearningServices.json#/definitions/ScaleSettings"
+              "$ref": "#/definitions/OnlineDeploymentScaleSettings"
             }
           ]
         },
