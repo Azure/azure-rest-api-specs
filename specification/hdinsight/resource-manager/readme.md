@@ -58,7 +58,7 @@ directive:
     reason: This would require a breaking change, and need to be consistent with the response from RP side.
     from: Microsoft.HDInsight/stable/2018-06-01-preview/locations.json
     where:
-      - $.definitions.CapabilitiesResult.properties.vmSize_filters
+      - $.definitions.CapabilitiesResult.properties.vmsize_filters
       - $.definitions.RegionalQuotaCapability.properties.cores_available
       - $.definitions.RegionalQuotaCapability.properties.cores_used
       - $.definitions.RegionalQuotaCapability.properties.region_name
@@ -69,6 +69,15 @@ directive:
       - $.definitions.VmSizeCompatibilityFilter.properties.ClusterFlavors
       - $.definitions.VmSizeCompatibilityFilter.properties.Regions
       - $.definitions.VmSizeCompatibilityFilter.properties.FilterMode
+```
+
+``` yaml
+directive:
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    reason: This would require a breaking change, and need to be consistent with the response from RP side.
+    from: Microsoft.HDInsight/stable/2018-06-01-preview/cluster.json
+    where:
+      - $.definitions.Role.properties.VMGroupName
 ```
 
 ``` yaml
