@@ -5,7 +5,7 @@
     "resourceGroupName": "rg1",
     "resourceName": "clustername1",
     "parameters": {
-      "location": "location1",
+      "location": "eastus",
       "tags": {
         "tier": "production",
         "archv2": ""
@@ -21,7 +21,7 @@
           {
             "name": "nodepool1",
             "count": 3,
-            "vmSize": "Standard_DS1_v2",
+            "vmSize": "Standard_DS2_v2",
             "osType": "Linux",
             "type": "VirtualMachineScaleSets",
             "availabilityZones": [
@@ -29,7 +29,6 @@
               "2",
               "3"
             ],
-            "enableNodePublicIP": true,
             "mode": "System"
           }
         ],
@@ -38,7 +37,7 @@
           "ssh": {
             "publicKeys": [
               {
-                "keyData": "keydata"
+                "keyData": "ssh-rsa"
               }
             ]
           }
@@ -56,29 +55,17 @@
           "balance-similar-node-groups": "true",
           "expander": "priority",
           "max-node-provision-time": "15m",
-          "new-pod-scale-up-delay": "1m",
           "scale-down-delay-after-add": "15m",
           "scan-interval": "20s",
           "skip-nodes-with-system-pods": "false"
         },
-        "windowsProfile": {
-          "adminUsername": "azureuser",
-          "adminPassword": "replacePassword1234$"
-        },
         "servicePrincipalProfile": {
-          "clientId": "clientid",
-          "secret": "secret"
+          "clientId": "40fdd0a8-9491-413f-b5dc-86da72815773",
+          "secret": "<my-secret>"
         },
         "addonProfiles": {},
         "enableRBAC": true,
-        "diskEncryptionSetID": "/subscriptions/subid1/resourceGroups/rg1/providers/Microsoft.Compute/diskEncryptionSets/des",
-        "enablePodSecurityPolicy": true
-      },
-      "identity": {
-        "type": "UserAssigned",
-        "userAssignedIdentities": {
-          "/subscriptions/subid1/resourceGroups/rgName1/providers/Microsoft.ManagedIdentity/userAssignedIdentities/identity1": {}
-        }
+        "enablePodSecurityPolicy": false
       }
     }
   },
