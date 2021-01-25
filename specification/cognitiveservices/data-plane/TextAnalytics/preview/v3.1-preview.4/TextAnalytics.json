@@ -8,7 +8,7 @@
       "email": "mlapi@microsoft.com"
     },
     "title": "Text Analytics Client",
-    "description": "The Text Analytics API is a suite of natural language processing (NLP)  services built with best-in-class Microsoft machine learning algorithms.  The API can be used to analyze unstructured text for tasks such as sentiment analysis,  key phrase extraction and language detection. Further documentation can be found in <a href=\"https://docs.microsoft.com/en-us/azure/cognitive-services/text-analytics/overview\">https://docs.microsoft.com/en-us/azure/cognitive-services/text-analytics/overview</a>"
+    "description": "The Text Analytics API is a suite of natural language processing (NLP)  services built with best-in-class Microsoft machine learning algorithms.  The API can be used to analyze unstructured text for tasks such as sentiment analysis, key phrase extraction and language detection. Functionality for analysis of text specific to the healthcare domain and personal information are also available in the API. Further documentation can be found in <a href=\"https://docs.microsoft.com/en-us/azure/cognitive-services/text-analytics/overview\">https://docs.microsoft.com/en-us/azure/cognitive-services/text-analytics/overview</a>"
   },
   "securityDefinitions": {
     "apim_key": {
@@ -1818,7 +1818,7 @@
     },
     "HealthcareRelation": {
       "type": "object",
-      "description": "Every relation is an entity graph of a certain entityType, where all entities are connected and have specific roles within the relation context.",
+      "description": "Every relation is an entity graph of a certain relationType, where all entities are connected and have specific roles within the relation context.",
       "required": [
         "relationType",
         "entities"
@@ -1853,7 +1853,7 @@
           }
         },
         "certainty": {
-          "description": "Describes the entities certainty and sentiment.",
+          "description": "Describes the entities certainty and polarity.",
           "type": "string",
           "enum": [
             "Positive",
