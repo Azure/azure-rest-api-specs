@@ -330,7 +330,7 @@
           "Actions"
         ],
         "description": "Gets the action of alert rule.",
-        "operationId": "AlertRules_GetAction",
+        "operationId": "Actions_Get",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersion"
@@ -379,7 +379,7 @@
           "Actions"
         ],
         "description": "Creates or updates the action of alert rule.",
-        "operationId": "AlertRules_CreateOrUpdateAction",
+        "operationId": "Actions_CreateOrUpdate",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersion"
@@ -437,7 +437,7 @@
           "Actions"
         ],
         "description": "Delete the action of alert rule.",
-        "operationId": "AlertRules_DeleteAction",
+        "operationId": "Actions_Delete",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersion"
@@ -4870,7 +4870,8 @@
             "MicrosoftSecurityIncidentCreation",
             "Fusion",
             "MLBehaviorAnalytics",
-            "ThreatIntelligence"
+            "ThreatIntelligence",
+            "Anomaly"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -4891,6 +4892,9 @@
               },
               {
                 "value": "ThreatIntelligence"
+              },
+              {
+                "value": "Anomaly"
               }
             ]
           }
@@ -5876,7 +5880,7 @@
       "description": "Aggregative results of cases by status property bag.",
       "properties": {
         "totalDismissedStatus": {
-          "description": "Total amount of open cases with status Dismissed",
+          "description": "Total amount of closed cases with status Dismissed",
           "readOnly": true,
           "type": "integer"
         },
@@ -5891,9 +5895,21 @@
           "type": "integer"
         },
         "totalResolvedStatus": {
-          "description": "Total amount of open cases with status Resolved",
+          "description": "Total amount of closed cases with status Resolved",
           "readOnly": true,
           "type": "integer"
+        },
+        "totalFalsePositiveStatus": {
+          "description": "Total amount of closed cases with status Closed and Close reason of False positive",
+          "readOnly": true,
+          "type": "integer",
+          "format": "int32"
+        },
+        "totalTruePositiveStatus": {
+          "description": "Total amount of closed cases with status Closed and Close reason of True positive",
+          "readOnly": true,
+          "type": "integer",
+          "format": "int32"
         }
       },
       "type": "object"
@@ -7638,7 +7654,8 @@
             "Linux",
             "Windows",
             "Android",
-            "IOS"
+            "IOS",
+            "Unknown"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -7660,6 +7677,10 @@
               {
                 "description": "Host with IOS operating system.",
                 "value": "IOS"
+              },
+              {
+                "description": "Host with Unknown operating system.",
+                "value": "Unknown"
               }
             ]
           }
