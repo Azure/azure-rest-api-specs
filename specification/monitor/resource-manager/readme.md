@@ -602,7 +602,6 @@ directive:
   -from : scheduledQueryRule_API.json 
     where: 
       - $..paths["/stable/2018-04-16/scheduledQueryRule_API.json"]
-    from : scheduledQueryRule_API.json
     suppress:
       - OBJECT_ADDITIONAL_PROPERTIES  
     reason: "false alarm"
