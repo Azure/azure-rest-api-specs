@@ -3771,6 +3771,69 @@
       },
       "description": "Delegation settings contract properties."
     },
+    "PortalSettingsCollection": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PortalSettingsContract"
+          },
+          "description": "Descriptions of APIM policies."
+        },
+        "count": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Total record count number."
+        }
+      },
+      "description": "Descriptions of APIM policies."
+    },
+    "PortalSettingsContract": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/PortalSettingsContractProperties",
+          "description": "Portal Settings contract properties."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./apimanagement.json#/definitions/Resource"
+        }
+      ],
+      "description": "Portal Settings for the Developer Portal."
+    },
+    "PortalSettingsContractProperties": {
+      "properties": {
+        "url": {
+          "type": "string",
+          "description": "A delegation Url."
+        },
+        "validationKey": {
+          "x-ms-secret": true,
+          "type": "string",
+          "description": "A base64-encoded validation key to validate, that a request is coming from Azure API Management."
+        },
+        "subscriptions": {
+          "$ref": "#/definitions/SubscriptionsDelegationSettingsProperties",
+          "description": "Subscriptions delegation settings."
+        },
+        "userRegistration": {
+          "$ref": "#/definitions/RegistrationDelegationSettingsProperties",
+          "description": "User registration delegation settings."
+        },
+        "enabled": {
+          "type": "boolean",
+          "description": "Redirect Anonymous users to the Sign-In page."
+        },
+        "termsOfService": {
+          "type": "object",
+          "$ref": "#/definitions/TermsOfServiceProperties",
+          "description": "Terms of service contract properties."
+        }
+      },
+      "description": "Sign-in settings contract properties."
+    },
     "PortalSigninSettingProperties": {
       "properties": {
         "enabled": {
