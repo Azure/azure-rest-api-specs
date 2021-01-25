@@ -115,13 +115,14 @@ input-file:
 - Microsoft.Sql/preview/2019-06-01-preview/ServerAzureADAdministrators.json
 - Microsoft.Sql/preview/2019-06-01-preview/syncGroups.json
 - Microsoft.Sql/preview/2019-06-01-preview/syncMembers.json
+- Microsoft.Sql/preview/2020-02-02-preview/ImportExport.json
 - Microsoft.Sql/preview/2020-02-02-preview/ManagedDatabases.json
 - Microsoft.Sql/preview/2020-02-02-preview/ManagedDatabaseRestoreDetails.json
 - Microsoft.Sql/preview/2020-02-02-preview/ServerAzureADOnlyAuthentications.json
 - Microsoft.Sql/preview/2020-02-02-preview/ManagedInstances.json
 - Microsoft.Sql/preview/2020-02-02-preview/ManagedInstanceAzureADOnlyAuthentications.json
 - Microsoft.Sql/preview/2020-02-02-preview/ServerTrustGroups.json
-- Microsoft.Sql/preview/2020-08-01-preview/Databases.json
+- Microsoft.Sql/preview/2020-08-01-preview/Databases_legacy.json
 - Microsoft.Sql/preview/2020-08-01-preview/ElasticPools.json
 - Microsoft.Sql/preview/2020-08-01-preview/ServerDevOpsAudit.json
 
@@ -234,6 +235,7 @@ input-file:
 - Microsoft.Sql/preview/2019-06-01-preview/ServerAzureADAdministrators.json
 - Microsoft.Sql/preview/2019-06-01-preview/syncGroups.json
 - Microsoft.Sql/preview/2019-06-01-preview/syncMembers.json
+- Microsoft.Sql/preview/2020-02-02-preview/ImportExport.json
 - Microsoft.Sql/preview/2020-02-02-preview/ManagedDatabases.json
 - Microsoft.Sql/preview/2020-02-02-preview/ServerAzureADOnlyAuthentications.json
 - Microsoft.Sql/preview/2020-02-02-preview/ManagedInstances.json
@@ -602,6 +604,7 @@ input-file:
  - ./Microsoft.Sql/preview/2020-08-01-preview/DatabaseOperations.json
  - ./Microsoft.Sql/preview/2020-08-01-preview/DatabaseRecommendedActions.json
  - ./Microsoft.Sql/preview/2020-08-01-preview/Databases.json
+ - ./Microsoft.Sql/preview/2020-08-01-preview/Databases_legacy.json
  - ./Microsoft.Sql/preview/2020-08-01-preview/DatabaseSchemas.json
  - ./Microsoft.Sql/preview/2020-08-01-preview/DatabaseSecurityAlertPolicies.json
  - ./Microsoft.Sql/preview/2020-08-01-preview/DatabaseTables.json
@@ -734,6 +737,7 @@ input-file:
  - ./Microsoft.Sql/preview/2020-02-02-preview/EncryptionProtectors.json
  - ./Microsoft.Sql/preview/2020-02-02-preview/FailoverGroups.json
  - ./Microsoft.Sql/preview/2020-02-02-preview/FirewallRules.json
+ - ./Microsoft.Sql/preview/2020-02-02-preview/ImportExport.json
  - ./Microsoft.Sql/preview/2020-02-02-preview/InstanceFailoverGroups.json
  - ./Microsoft.Sql/preview/2020-02-02-preview/InstancePools.json
  - ./Microsoft.Sql/preview/2020-02-02-preview/JobAgents.json
