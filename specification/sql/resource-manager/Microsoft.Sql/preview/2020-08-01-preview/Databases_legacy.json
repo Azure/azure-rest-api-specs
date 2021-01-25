@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2020-02-02-preview",
+    "version": "2020-08-01-preview",
     "title": "SqlManagementClient",
     "description": "The Azure SQL Database management API provides a RESTful set of web APIs that interact with Azure SQL Database services to manage your databases. The API enables users to create, retrieve, update, and delete databases, servers, and other entities."
   },
@@ -153,6 +153,9 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
+          "Creates a database with default mode.": {
+            "$ref": "./examples/CreateDatabaseDefaultMode.json"
+          },
           "Creates a VCore database by specifying service objective name.": {
             "$ref": "./examples/CreateVCoreDatabaseByServiceObjective.json"
           },
@@ -165,14 +168,14 @@
           "Creates a database with minimum number of parameters.": {
             "$ref": "./examples/CreateDatabaseMin.json"
           },
-          "Creates a database with default mode.": {
-            "$ref": "./examples/CreateDatabaseDefaultMode.json"
-          },
           "Creates a database as a copy.": {
             "$ref": "./examples/CreateDatabaseCopyMode.json"
           },
           "Creates a database as an on-line secondary.": {
             "$ref": "./examples/CreateDatabaseSecondaryMode.json"
+          },
+          "Creates a database as named replica secondary.": {
+            "$ref": "./examples/CreateDatabaseNamedReplica.json"
           },
           "Creates a database from PointInTimeRestore.": {
             "$ref": "./examples/CreateDatabasePITRMode.json"
@@ -185,6 +188,9 @@
           },
           "Creates a database from recoverableDatabaseId.": {
             "$ref": "./examples/CreateDatabaseRecoveryMode.json"
+          },
+          "Creates a database with preferred maintenance window.": {
+            "$ref": "./examples/CreateDatabaseMaintenanceConfiguration.json"
           }
         }
       },
@@ -280,11 +286,14 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
-          "Updates a VCore database.": {
+          "Updates a database.": {
             "$ref": "./examples/PatchVCoreDatabase.json"
           },
-          "Updates a database.": {
-            "$ref": "./examples/PatchDatabase.json"
+          "Assigns maintenance window to a database.": {
+            "$ref": "./examples/PatchVCoreDatabaseAssignMaintenanceConfiguration.json"
+          },
+          "Resets maintenance window of a database to default.": {
+            "$ref": "./examples/PatchVCoreDatabaseResetMaintenanceConfiguration.json"
           }
         }
       }
@@ -500,6 +509,48 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/inaccessibleDatabases": {
+      "get": {
+        "tags": [
+          "Databases"
+        ],
+        "description": "Gets a list of inaccessible databases in a logical server",
+        "operationId": "Databases_ListInaccessibleByServer",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the list of inaccessible databases in a logical server",
+            "schema": {
+              "$ref": "#/definitions/DatabaseListResult"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription."
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Gets a list of inaccessible databases in a logical server": {
+            "$ref": "./examples/ListVCoreInaccessibleDatabasesByServer.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/upgradeDataWarehouse": {
       "post": {
         "tags": [
@@ -595,48 +646,6 @@
         "x-ms-examples": {
           "Renames a database.": {
             "$ref": "./examples/RenameDatabase.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/inaccessibleDatabases": {
-      "get": {
-        "tags": [
-          "Databases"
-        ],
-        "description": "Gets a list of inaccessible databases in a logical server",
-        "operationId": "Databases_ListInaccessibleByServer",
-        "parameters": [
-          {
-            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
-          },
-          {
-            "$ref": "#/parameters/ServerNameParameter"
-          },
-          {
-            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successfully retrieved the list of inaccessible databases in a logical server",
-            "schema": {
-              "$ref": "#/definitions/DatabaseListResult"
-            }
-          },
-          "default": {
-            "description": "*** Error Responses: ***\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription."
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
-        "x-ms-examples": {
-          "Gets a list of inaccessible databases in a logical server": {
-            "$ref": "./examples/ListVCoreInaccessibleDatabasesByServer.json"
           }
         }
       }
@@ -897,10 +906,22 @@
             "update"
           ]
         },
-        "readReplicaCount": {
+        "highAvailabilityReplicaCount": {
           "format": "int32",
-          "description": "The number of readonly secondary replicas associated with the database.",
+          "description": "The number of secondary replicas associated with the database that are used to provide high availability.",
           "type": "integer"
+        },
+        "secondaryType": {
+          "description": "The secondary type of the database if it is a secondary.  Valid values are Geo and Named.",
+          "enum": [
+            "Geo",
+            "Named"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "SecondaryType",
+            "modelAsString": true
+          }
         },
         "currentSku": {
           "$ref": "../../../common/v1/types.json#/definitions/Sku",
@@ -941,6 +962,10 @@
           "description": "The date when database was resumed by user action or database login (ISO8601 format). Null if the database is paused.",
           "type": "string",
           "readOnly": true
+        },
+        "maintenanceConfigurationId": {
+          "description": "Maintenance configuration id assigned to the database. This configuration defines the period when the maintenance updates will occur.",
+          "type": "string"
         }
       }
     },
