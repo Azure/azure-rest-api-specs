@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "AuthorizationManagementClient",
-    "version": "2020-04-01-preview",
+    "version": "2020-03-01-preview",
     "description": "Role based access control provides you a way to apply granular level policy administration down to individual resources or resource groups. These operations enable you to manage role assignments. A role assignment grants access to Azure Active Directory users."
   },
   "host": "management.azure.com",
@@ -72,49 +72,7 @@
         },
         "x-ms-examples": {
           "List role assignments for subscription": {
-            "$ref": "./examples/ListRoleAssignmentsForSubscription.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Authorization/roleAssignments/{roleAssignmentName}": {
-      "put": {
-        "operationId": "RoleAssignments_CreateForSubscription",
-        "tags": [
-          "RoleAssignments"
-        ],
-        "description": "Create or update a role assignment at the subscription scope.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/RoleAssignmentNameParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/RoleAssignmentCreateParameters"
-          }
-        ],
-        "responses": {
-          "201": {
-            "description": "Returns the newly created role assignment.",
-            "schema": {
-              "$ref": "#/definitions/RoleAssignment"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Create role assignment in subscription": {
-            "$ref": "./examples/CreateRoleAssignmentForSubscription.json"
+            "$ref": "./examples/RoleAssignments_ListForSubscription.json"
           }
         }
       }
@@ -160,52 +118,7 @@
         },
         "x-ms-examples": {
           "List role assignments for resource group": {
-            "$ref": "./examples/ListRoleAssignmentsForResourceGroup.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Authorization/roleAssignments/{roleAssignmentName}": {
-      "put": {
-        "operationId": "RoleAssignments_CreateForResourceGroup",
-        "tags": [
-          "RoleAssignments"
-        ],
-        "description": "Create or update a role assignment at the resource group scope.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/RoleAssignmentNameParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/RoleAssignmentCreateParameters"
-          }
-        ],
-        "responses": {
-          "201": {
-            "description": "Returns the newly created role assignment.",
-            "schema": {
-              "$ref": "#/definitions/RoleAssignment"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Create role assignment in resource group": {
-            "$ref": "./examples/CreateRoleAssignmentForResourceGroup.json"
+            "$ref": "./examples/RoleAssignments_ListForResourceGroup.json"
           }
         }
       }
@@ -225,13 +138,13 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/ResourceProviderNamespaceParameter"
+            "$ref": "./common-types.json#/parameters/ResourceProviderNamespaceParameter"
           },
           {
-            "$ref": "#/parameters/ResourceTypeParameter"
+            "$ref": "./common-types.json#/parameters/ResourceTypeParameter"
           },
           {
-            "$ref": "#/parameters/ResourceNameParameter"
+            "$ref": "./common-types.json#/parameters/ResourceNameParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
@@ -259,156 +172,22 @@
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "List role assignments for resource": {
-            "$ref": "./examples/ListRoleAssignmentsForResource.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}/providers/Microsoft.Authorization/roleAssignments/{roleAssignmentName}": {
-      "put": {
-        "operationId": "RoleAssignments_CreateForResource",
-        "tags": [
-          "RoleAssignments"
-        ],
-        "description": "Create or update a role assignment at the resource scope.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceProviderNamespaceParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceTypeParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceNameParameter"
-          },
-          {
-            "$ref": "#/parameters/RoleAssignmentNameParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/RoleAssignmentCreateParameters"
-          }
-        ],
-        "responses": {
-          "201": {
-            "description": "Returns the newly created role assignment.",
-            "schema": {
-              "$ref": "#/definitions/RoleAssignment"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Create role assignment for resource": {
-            "$ref": "./examples/CreateRoleAssignmentForResource.json"
+          "List role assignments for a resource": {
+            "$ref": "./examples/RoleAssignments_ListForResource.json"
           }
         }
       }
     },
     "/{scope}/providers/Microsoft.Authorization/roleAssignments/{roleAssignmentName}": {
-      "delete": {
-        "tags": [
-          "RoleAssignments"
-        ],
-        "operationId": "RoleAssignments_Delete",
-        "description": "Delete a role assignment.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/RoleAssignmentScopeParameter"
-          },
-          {
-            "$ref": "#/parameters/RoleAssignmentNameParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Role assignment successfully deleted.",
-            "schema": {
-              "$ref": "#/definitions/RoleAssignment"
-            }
-          },
-          "204": {
-            "description": "Role assignment successfully deleted."
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Delete role assignment": {
-            "$ref": "./examples/DeleteRoleAssignment.json"
-          }
-        }
-      },
-      "put": {
-        "tags": [
-          "RoleAssignments"
-        ],
-        "operationId": "RoleAssignments_Create",
-        "description": "Create or update a role assignment.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/RoleAssignmentScopeParameter"
-          },
-          {
-            "$ref": "#/parameters/RoleAssignmentNameParameter"
-          },
-          {
-            "$ref": "#/parameters/RoleAssignmentCreateParameters"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "201": {
-            "description": "Returns the newly created role assignment.",
-            "schema": {
-              "$ref": "#/definitions/RoleAssignment"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Create role assignment in subscription by name": {
-            "$ref": "./examples/CreateRoleAssignment.json"
-          }
-        }
-      },
       "get": {
         "operationId": "RoleAssignments_Get",
         "tags": [
           "RoleAssignments"
         ],
-        "description": "Get a role assignment.",
+        "description": "Get a role assignment by scope and name.",
         "parameters": [
           {
-            "$ref": "#/parameters/RoleAssignmentScopeParameter"
+            "$ref": "./common-types.json#/parameters/ScopeParameter"
           },
           {
             "$ref": "#/parameters/RoleAssignmentNameParameter"
@@ -432,8 +211,137 @@
           }
         },
         "x-ms-examples": {
-          "Get role assignment in subscription by name": {
-            "$ref": "./examples/GetRoleAssignment.json"
+          "Get role assignment by scope and name": {
+            "$ref": "./examples/RoleAssignments_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "RoleAssignments_Create",
+        "tags": [
+          "RoleAssignments"
+        ],
+        "description": "Create or update a role assignment by scope and name.",
+        "parameters": [
+          {
+            "$ref": "./common-types.json#/parameters/ScopeParameter"
+          },
+          {
+            "$ref": "#/parameters/RoleAssignmentNameParameter"
+          },
+          {
+            "$ref": "#/parameters/RoleAssignmentCreateParameters"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Returns the role assignment.",
+            "schema": {
+              "$ref": "#/definitions/RoleAssignment"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create role assignment for subscription": {
+            "$ref": "./examples/RoleAssignments_CreateForSubscription.json"
+          },
+          "Create role assignment for resource group": {
+            "$ref": "./examples/RoleAssignments_CreateForResourceGroup.json"
+          },
+          "Create role assignment for resource": {
+            "$ref": "./examples/RoleAssignments_CreateForResource.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "RoleAssignments_Delete",
+        "tags": [
+          "RoleAssignments"
+        ],
+        "description": "Delete a role assignment by scope and name.",
+        "parameters": [
+          {
+            "$ref": "./common-types.json#/parameters/ScopeParameter"
+          },
+          {
+            "$ref": "#/parameters/RoleAssignmentNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the deleted role assignment.",
+            "schema": {
+              "$ref": "#/definitions/RoleAssignment"
+            }
+          },
+          "204": {
+            "description": "Role assignment was already deleted or does not exist."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete role assignment": {
+            "$ref": "./examples/RoleAssignments_Delete.json"
+          }
+        }
+      }
+    },
+    "/{scope}/providers/Microsoft.Authorization/roleAssignments": {
+      "get": {
+        "tags": [
+          "RoleAssignments"
+        ],
+        "operationId": "RoleAssignments_ListForScope",
+        "description": "Get all role assignments that apply to a scope.",
+        "parameters": [
+          {
+            "$ref": "./common-types.json#/parameters/ScopeParameter"
+          },
+          {
+            "$ref": "#/parameters/RoleAssignmentFilterParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns an array of role assignments.",
+            "schema": {
+              "$ref": "#/definitions/RoleAssignmentListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-odata": "#/definitions/RoleAssignmentFilter",
+        "x-ms-examples": {
+          "List role assignments for scope": {
+            "$ref": "./examples/RoleAssignments_ListForScope.json"
           }
         }
       }
@@ -468,13 +376,13 @@
           }
         },
         "x-ms-examples": {
-          "Get role assignment by id": {
-            "$ref": "./examples/GetRoleAssignmentById.json"
+          "Get role assignment by ID": {
+            "$ref": "./examples/RoleAssignments_GetById.json"
           }
         }
       },
       "put": {
-        "operationId": "RoleAssignments_UpdateById",
+        "operationId": "RoleAssignments_CreateById",
         "tags": [
           "RoleAssignments"
         ],
@@ -492,7 +400,7 @@
         ],
         "responses": {
           "201": {
-            "description": "Returns the newly created role assignment.",
+            "description": "Returns the role assignment.",
             "schema": {
               "$ref": "#/definitions/RoleAssignment"
             }
@@ -505,8 +413,8 @@
           }
         },
         "x-ms-examples": {
-          "Update role assignment by id": {
-            "$ref": "./examples/CreateRoleAssignmentById.json"
+          "Create or update role assignment by ID": {
+            "$ref": "./examples/RoleAssignments_CreateById.json"
           }
         }
       },
@@ -515,7 +423,7 @@
         "tags": [
           "RoleAssignments"
         ],
-        "description": "Delete a role assignment.",
+        "description": "Delete a role assignment by ID.",
         "parameters": [
           {
             "$ref": "#/parameters/RoleAssignmentIdParameter"
@@ -526,7 +434,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Role assignment successfully deleted.",
+            "description": "Returns the deleted role assignment.",
             "schema": {
               "$ref": "#/definitions/RoleAssignment"
             }
@@ -543,7 +451,7 @@
         },
         "x-ms-examples": {
           "Delete role assignment by ID": {
-            "$ref": "./examples/DeleteRoleAssignmentById.json"
+            "$ref": "./examples/RoleAssignments_DeleteById.json"
           }
         }
       }
@@ -747,28 +655,6 @@
     }
   },
   "parameters": {
-    "ResourceProviderNamespaceParameter": {
-      "name": "resourceProviderNamespace",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "The namespace of the resource provider.",
-      "x-ms-parameter-location": "method"
-    },
-    "ResourceTypeParameter": {
-      "name": "resourceType",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "The resource type name. For example the type name of a web app is 'sites' (from Microsoft.Web/sites)."
-    },
-    "ResourceNameParameter": {
-      "name": "resourceName",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "The resource name."
-    },
     "RoleAssignmentFilterParameter": {
       "name": "$filter",
       "in": "query",
@@ -783,23 +669,18 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "The name of the role assignment to create. It can be any valid GUID."
+      "description": "The name of the role assignment. It can be any valid GUID.",
+      "x-ms-skip-url-encoding": true,
+      "x-ms-parameter-location": "method"
     },
     "RoleAssignmentIdParameter": {
       "name": "roleAssignmentId",
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "The fully qualified ID of the role assignment including scope, resource name, and resource type.\nFormat: /{scope}/providers/Microsoft.Authorization/roleAssignments/{roleAssignmentName}.\n\nExamples:\n\n    - /subscriptions/<SUB_ID>/resourcegroups/<RESOURCE_GROUP>/providers/Microsoft.Authorization/roleAssignments/<ROLE_ASSIGNMENT_NAME>",
-      "x-ms-skip-url-encoding": true
-    },
-    "RoleAssignmentScopeParameter": {
-      "name": "scope",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "The scope of the role assignment to delete.",
-      "x-ms-skip-url-encoding": true
+      "description": "The fully qualified ID of the role assignment including scope, resource name, and resource type. Format: /{scope}/providers/Microsoft.Authorization/roleAssignments/{roleAssignmentName}. Example: /subscriptions/<SUB_ID>/resourcegroups/<RESOURCE_GROUP>/providers/Microsoft.Authorization/roleAssignments/<ROLE_ASSIGNMENT_NAME>",
+      "x-ms-skip-url-encoding": true,
+      "x-ms-parameter-location": "method"
     },
     "RoleAssignmentCreateParameters": {
       "name": "parameters",
@@ -808,7 +689,8 @@
       "schema": {
         "$ref": "#/definitions/RoleAssignmentCreateParameters"
       },
-      "description": "Parameters for the role assignment."
+      "description": "Parameters for the role assignment.",
+      "x-ms-parameter-location": "method"
     }
   }
 }
