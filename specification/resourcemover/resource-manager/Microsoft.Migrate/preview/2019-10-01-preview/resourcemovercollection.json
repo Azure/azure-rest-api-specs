@@ -2288,6 +2288,28 @@
       },
       "x-ms-discriminator-value": "Microsoft.Network/publicIPAddresses"
     },
+    "KeyVaultResourceSettings": {
+      "description": "Defines the key vault resource settings.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResourceSettings"
+        }
+      ],
+      "properties": {},
+      "x-ms-discriminator-value": "Microsoft.KeyVault/vaults"
+    },
+    "DiskEncryptionSetResourceSettings": {
+      "description": "Defines the disk encryption set resource settings.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResourceSettings"
+        }
+      ],
+      "properties": {},
+      "x-ms-discriminator-value": "Microsoft.Compute/diskEncryptionSets"
+    },
     "CloudError": {
       "x-ms-external": true,
       "properties": {
