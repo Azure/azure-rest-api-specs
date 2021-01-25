@@ -813,7 +813,7 @@
         "tags": [
           "Keys"
         ],
-        "operationId": "exportKey",
+        "operationId": "export",
         "summary": "Exports a key.",
         "description": "The export key operation is applicable to all key types. The target key must be marked exportable. This operation requires the keys/export permission.",
         "parameters": [
@@ -860,8 +860,8 @@
           }
         },
         "x-ms-examples": {
-          "Export key": {
-            "$ref": "./examples/ExportKey-example.json"
+          "Export": {
+            "$ref": "./examples/export-example.json"
           }
         }
       }
@@ -871,7 +871,7 @@
         "tags": [
           "Keys"
         ],
-        "operationId": "releaseKey",
+        "operationId": "release",
         "summary": "Releases a key.",
         "description": "The release key operation is applicable to all key types. The target key must be marked exportable. This operation requires the keys/release permission.",
         "parameters": [
@@ -907,7 +907,7 @@
           "200": {
             "description": "A key bundle containing the key and its attributes.",
             "schema": {
-              "$ref": "#/definitions/KeyBundle"
+              "$ref": "#/definitions/KeyReleaseResult"
             }
           },
           "default": {
@@ -918,8 +918,8 @@
           }
         },
         "x-ms-examples": {
-          "Export key": {
-            "$ref": "./examples/ReleaseKey-example.json"
+          "Release": {
+            "$ref": "./examples/release-example.json"
           }
         }
       }
@@ -1954,6 +1954,17 @@
         }
       },
       "description": "The backup key result, containing the backup blob."
+    },
+    "KeyReleaseResult": {
+      "properties": {
+        "value": {
+          "type": "string",
+          "format": "base64url",
+          "readOnly": true,
+          "description": "The blob containing the released key."
+        }
+      },
+      "description": "The release result, containing the released key blob."
     }
   },
   "parameters": {
