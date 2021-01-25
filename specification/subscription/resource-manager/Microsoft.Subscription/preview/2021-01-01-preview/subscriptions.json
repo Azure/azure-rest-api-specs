@@ -407,13 +407,13 @@
           "200": {
             "description": "Normal response for a successful query.",
             "schema": {
-              "$ref": "#/definitions/PutAliasResponse"
+              "$ref": "#/definitions/SubscriptionAliasResponse"
             }
           },
           "201": {
             "description": "Accepted. Subscription creation is in progress.",
             "schema": {
-              "$ref": "#/definitions/PutAliasResponse"
+              "$ref": "#/definitions/SubscriptionAliasResponse"
             }
           },
           "default": {
@@ -452,7 +452,7 @@
           "200": {
             "description": "Subscription details.",
             "schema": {
-              "$ref": "#/definitions/PutAliasResponse"
+              "$ref": "#/definitions/SubscriptionAliasResponse"
             }
           },
           "default": {
@@ -516,7 +516,7 @@
           "200": {
             "description": "Subscription details.",
             "schema": {
-              "$ref": "#/definitions/PutAliasListResult"
+              "$ref": "#/definitions/SubscriptionAliasListResult"
             }
           },
           "default": {
@@ -543,7 +543,7 @@
           }
         },
         "responses": {
-          "200": {
+          "201": {
             "description": "Subscription tenant policy has been successfully created/updated.",
             "schema": {
               "$ref": "#/definitions/GetTenantPolicyResponse"
@@ -622,6 +622,9 @@
             }
           }
         },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
         "parameters": [
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -638,7 +641,6 @@
             "$ref": "./examples/getBillingAccountPolicy.json"
           }
         },
-        "x-ms-long-running-operation": true,
         "responses": {
           "200": {
             "description": "Normal response for a successful query.",
@@ -674,10 +676,16 @@
         },
         "x-ms-long-running-operation": true,
         "responses": {
-          "200": {
-            "description": "Normal response for a successful query.",
-            "schema": {
-              "$ref": "#/definitions/PutAliasResponse"
+            "description": "Accepted. Subscription redeem is in progress.",
+            "headers": {
+              "Location": {
+                "description": "GET this URL to retrieve the status of the asynchronous operation.",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "The amount of delay to use while the status of the operation is checked. The value is expressed in seconds.",
+                "type": "string"
+              }
             }
           },
           "default": {
@@ -1007,7 +1015,7 @@
         }
       }
     },
-    "PutAliasResponse": {
+    "SubscriptionAliasResponse": {
       "description": "Subscription Information with the alias.",
       "properties": {
         "id": {
@@ -1026,13 +1034,13 @@
           "type": "string"
         },
         "properties": {
-          "$ref": "#/definitions/PutAliasResponseProperties",
-          "description": "Put Alias response properties."
+          "$ref": "#/definitions/SubscriptionAliasResponseProperties",
+          "description": "Subscription Alias response properties."
         }
       },
       "x-ms-azure-resource": true
     },
-    "PutAliasResponseProperties": {
+    "SubscriptionAliasResponseProperties": {
       "description": "Put subscription creation result properties.",
       "properties": {
         "subscriptionId": {
@@ -1055,9 +1063,11 @@
         },
         "redeemUrl": {
           "description": "Redeem url.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "redeemState": {
+          "readOnly": true,
           "type": "string",
           "description": "The redeem state of the resource.",
           "enum": [
@@ -1071,7 +1081,7 @@
         }
       }
     },
-    "PutAliasListResult": {
+    "SubscriptionAliasListResult": {
       "description": "The list of aliases.",
       "properties": {
         "value": {
@@ -1079,7 +1089,7 @@
           "type": "array",
           "readOnly": true,
           "items": {
-            "$ref": "#/definitions/PutAliasResponse"
+            "$ref": "#/definitions/SubscriptionAliasResponse"
           }
         },
         "nextLink": {
@@ -1116,7 +1126,8 @@
       "properties": {
         "policyId": {
           "description": "Policy Id.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "blockSubscriptionsLeavingTenant": {
           "description": "Blocks the leaving of subscriptions from user's tenant.",
@@ -1151,7 +1162,7 @@
           "type": "string"
         },
         "type": {
-          "description": "Resource type, providers/Microsoft.Subscription/Policies/default.",
+          "description": "Resource type.",
           "readOnly": true,
           "type": "string"
         },
@@ -1194,13 +1205,13 @@
           "type": "string"
         },
         "type": {
-          "description": "Resource type, Microsoft.Subscription/policies.",
+          "description": "Resource type.",
           "readOnly": true,
           "type": "string"
         },
         "properties": {
           "$ref": "#/definitions/BillingAccountPoliciesResponseProperties",
-          "description": "Put Alias response properties."
+          "description": "Billing account policies response properties."
         }
       },
       "x-ms-azure-resource": true
@@ -1242,7 +1253,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/RedeemSubscriptionRequestProperties",
-          "description": "Put alias request properties."
+          "description": "Redeem subscription request properties."
         }
       }
     },
