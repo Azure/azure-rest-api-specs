@@ -20,7 +20,7 @@ To see additional help and options, run:
 
 ## Configuration
 
-## Suppression
+### Suppression
 
 ``` yaml
 directive:
