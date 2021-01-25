@@ -810,3 +810,17 @@ input-file:
 ## AzureResourceSchema
 
 See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
+
+
+
+``` yaml $(tag) == 'package-2020-10-01-preview'
+test-resources:
+  - test: Microsoft.Compute/preview/2020-10-01-preview/test-scenarios/cloudServiceCRUD.yaml
+  - test: Microsoft.Compute/preview/2020-09-30/test-scenarios/galleryCRUD.yaml
+```
+
+
+ ``` yaml $(tag) == 'package-2020-09-30'
+test-resources:
+  - test: Microsoft.Compute/preview/2020-09-30/test-scenarios/galleryCRUD.yaml
+```

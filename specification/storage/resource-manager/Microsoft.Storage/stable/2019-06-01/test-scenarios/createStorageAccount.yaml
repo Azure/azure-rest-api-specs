@@ -1,0 +1,13 @@
+scope: ResourceGroup
+
+
+testScenarios:
+  - description: storageAccount
+    name: testCreateStorageAccount
+    steps:
+      - exampleFile: ../examples/StorageAccountCreate.json
+        step: storageAccountCreate
+      - exampleFile: ../examples/BlobContainersPut.json
+        step: blobContainersPut
+      - exampleFile: ../examples/StorageAccountDelete.json
+        step: storageAccountDelete
