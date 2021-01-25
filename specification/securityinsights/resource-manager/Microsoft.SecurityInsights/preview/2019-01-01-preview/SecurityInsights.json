@@ -2055,6 +2055,18 @@
           },
           "Get an IoT device entity.": {
             "$ref": "./examples/entities/GetIoTDeviceEntityById.json"
+          },
+          "Get a mailCluster entity.": {
+            "$ref": "./examples/entities/GetMailClusterEntityById.json"
+          },
+          "Get a mailbox entity.": {
+            "$ref": "./examples/entities/GetMailboxEntityById.json"
+          },
+          "Get a mailMessage entity.": {
+            "$ref": "./examples/entities/GetMailMessageEntityById.json"
+          },
+          "Get a submissionMail entity.": {
+            "$ref": "./examples/entities/GetSubmissionMailEntityById.json"
           }
         },
         "tags": [
@@ -6514,7 +6526,11 @@
         "Url",
         "IoTDevice",
         "SecurityAlert",
-        "Bookmark"
+        "Bookmark",
+        "Mailbox",
+        "MailCluster",
+        "MailMessage",
+        "SubmissionMail"
       ],
       "type": "string",
       "x-ms-enum": {
@@ -6588,6 +6604,22 @@
           {
             "description": "Entity represents bookmark in the system.",
             "value": "Bookmark"
+          },
+          {
+            "description": "Entity represents mail cluster in the system.",
+            "value": "MailCluster"
+          },
+          {
+            "description": "Entity represents mail message in the system.",
+            "value": "MailMessage"
+          },
+          {
+            "description": "Entity represents mailbox in the system.",
+            "value": "Mailbox"
+          },
+          {
+            "description": "Entity represents submission mail in the system.",
+            "value": "SubmissionMail"
           }
         ]
       }
@@ -6611,7 +6643,11 @@
         "URL",
         "IoTDevice",
         "SecurityAlert",
-        "HuntingBookmark"
+        "HuntingBookmark",
+        "MailCluster",
+        "MailMessage",
+        "Mailbox",
+        "SubmissionMail"
       ],
       "type": "string",
       "x-ms-enum": {
@@ -6685,6 +6721,22 @@
           {
             "description": "Entity represents HuntingBookmark in the system.",
             "value": "HuntingBookmark"
+          },
+          {
+            "description": "Entity represents mail cluster in the system.",
+            "value": "MailCluster"
+          },
+          {
+            "description": "Entity represents mail message in the system.",
+            "value": "MailMessage"
+          },
+          {
+            "description": "Entity represents mailbox in the system.",
+            "value": "Mailbox"
+          },
+          {
+            "description": "Entity represents submission mail in the system.",
+            "value": "SubmissionMail"
           }
         ]
       }
@@ -8299,6 +8351,516 @@
     "Label": {
       "description": "Label that will be used to tag and filter on.",
       "type": "string"
+    },
+    "MailboxEntity": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Entity"
+        }
+      ],
+      "description": "Represents a mailbox entity.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/MailboxEntityProperties",
+          "description": "Mailbox entity properties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object",
+      "x-ms-discriminator-value": "Mailbox"
+    },
+    "MailboxEntityProperties": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/EntityCommonProperties"
+        }
+      ],
+      "description": "Mailbox entity property bag.",
+      "properties": {
+        "mailboxPrimaryAddress": {
+          "description": "The mailbox's primary address",
+          "readOnly": true,
+          "type": "string"
+        },
+        "displayName": {
+          "description": "The mailbox's display name",
+          "readOnly": true,
+          "type": "string"
+        },
+        "upn": {
+          "description": "The mailbox's UPN",
+          "readOnly": true,
+          "type": "string"
+        },
+        "externalDirectoryObjectId": {
+          "description": "The AzureAD identifier of mailbox. Similar to AadUserId in account entity but this property is specific to mailbox object on office side",
+          "format": "uuid",
+          "readOnly": true,
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "MailClusterEntity": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Entity"
+        }
+      ],
+      "description": "Represents a mail cluster entity.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/MailClusterEntityProperties",
+          "description": "Mail cluster entity properties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object",
+      "x-ms-discriminator-value": "MailCluster"
+    },
+    "MailClusterEntityProperties": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/EntityCommonProperties"
+        }
+      ],
+      "description": "Mail cluster entity property bag.",
+      "properties": {
+        "networkMessageIds": {
+          "description": "The mail message IDs that are part of the mail cluster",
+          "items": {
+            "description": "A mail message ID",
+            "type": "string"
+          },
+          "readOnly": true,
+          "type": "array"
+        },
+        "countByDeliveryStatus": {
+          "description": "Count of mail messages by DeliveryStatus string representation",
+          "readOnly": true,
+          "type": "object"
+        },
+        "countByThreatType": {
+          "description": "Count of mail messages by ThreatType string representation",
+          "readOnly": true,
+          "type": "object"
+        },
+        "countByProtectionStatus": {
+          "description": "Count of mail messages by ProtectionStatus string representation",
+          "readOnly": true,
+          "type": "object"
+        },
+        "threats": {
+          "description": "The threats of mail messages that are part of the mail cluster",
+          "items": {
+            "description": "A threat",
+            "type": "string"
+          },
+          "readOnly": true,
+          "type": "array"
+        },
+        "query": {
+          "description": "The query that was used to identify the messages of the mail cluster",
+          "readOnly": true,
+          "type": "string"
+        },
+        "queryTime": {
+          "description": "The query time",
+          "format": "date-time",
+          "readOnly": true,
+          "type": "string"
+        },
+        "mailCount": {
+          "description": "The number of mail messages that are part of the mail cluster",
+          "readOnly": true,
+          "type": "integer",
+          "format": "int32"
+        },
+        "isVolumeAnomaly": {
+          "description": "Is this a volume anomaly mail cluster",
+          "readOnly": true,
+          "type": "boolean"
+        },
+        "source": {
+          "description": "The source of the mail cluster (default is 'O365 ATP')",
+          "readOnly": true,
+          "type": "string"
+        },
+        "clusterSourceIdentifier": {
+          "description": "The id of the cluster source",
+          "readOnly": true,
+          "type": "string"
+        },
+        "clusterSourceType": {
+          "description": "The type of the cluster source",
+          "readOnly": true,
+          "type": "string"
+        },
+        "clusterQueryStartTime": {
+          "description": "The cluster query start time",
+          "format": "date-time",
+          "readOnly": true,
+          "type": "string"
+        },
+        "clusterQueryEndTime": {
+          "description": "The cluster query end time",
+          "format": "date-time",
+          "readOnly": true,
+          "type": "string"
+        },
+        "clusterGroup": {
+          "description": "The cluster group",
+          "readOnly": true,
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "MailMessageEntity": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Entity"
+        }
+      ],
+      "description": "Represents a mail message entity.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/MailMessageEntityProperties",
+          "description": "Mail message entity properties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object",
+      "x-ms-discriminator-value": "MailMessage"
+    },
+    "MailMessageEntityProperties": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/EntityCommonProperties"
+        }
+      ],
+      "description": "Mail message entity property bag.",
+      "properties": {
+        "fileEntityIds": {
+          "description": "The File entity ids of this mail message's attachments",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true,
+          "type": "array"
+        },
+        "recipient": {
+          "description": "The recipient of this mail message. Note that in case of multiple recipients the mail message is forked and each copy has one recipient",
+          "readOnly": true,
+          "type": "string"
+        },
+        "urls": {
+          "description": "The Urls contained in this mail message",
+          "items": {
+            "description": "A Url contained in this mail message",
+            "type": "string"
+          },
+          "readOnly": true,
+          "type": "string"
+        },
+        "threats": {
+          "description": "The threats of this mail message",
+          "items": {
+            "description": "A threat of the mail message",
+            "type": "string"
+          },
+          "readOnly": true,
+          "type": "array"
+        },
+        "p1Sender": {
+          "description": "The p1 sender's email address",
+          "readOnly": true,
+          "type": "string"
+        },
+        "p1SenderDisplayName": {
+          "description": "The p1 sender's display name",
+          "readOnly": true,
+          "type": "string"
+        },
+        "p1SenderDomain": {
+          "description": "The p1 sender's domain",
+          "readOnly": true,
+          "type": "string"
+        },
+        "senderIP": {
+          "description": "The sender's IP address",
+          "readOnly": true,
+          "type": "string"
+        },
+        "p2Sender": {
+          "description": "The p2 sender's email address",
+          "readOnly": true,
+          "type": "string"
+        },
+        "p2SenderDisplayName": {
+          "description": "The p2 sender's display name",
+          "readOnly": true,
+          "type": "string"
+        },
+        "p2SenderDomain": {
+          "description": "The p2 sender's domain",
+          "readOnly": true,
+          "type": "string"
+        },
+        "receivedDate": {
+          "description": "The received date of this message",
+          "format": "date-time",
+          "readOnly": true,
+          "type": "string"
+        },
+        "networkMessageId": {
+          "description": "The network message id of this mail message",
+          "format": "uuid",
+          "readOnly": true,
+          "type": "string"
+        },
+        "internetMessageId": {
+          "description": "The internet message id of this mail message",
+          "readOnly": true,
+          "type": "string"
+        },
+        "subject": {
+          "description": "The subject of this mail message",
+          "readOnly": true,
+          "type": "string"
+        },
+        "language": {
+          "description": "The language of this mail message",
+          "readOnly": true,
+          "type": "string"
+        },
+        "threatDetectionMethods": {
+          "description": "The threat detection methods",
+          "items": {
+            "description": "A threat detection method",
+            "type": "string"
+          },
+          "readOnly": true,
+          "type": "string"
+        },
+        "bodyFingerprintBin1": {
+          "description": "The bodyFingerprintBin1",
+          "type": "integer",
+          "format": "int32"
+        },
+        "bodyFingerprintBin2": {
+          "description": "The bodyFingerprintBin2",
+          "type": "integer",
+          "format": "int32"
+        },
+        "bodyFingerprintBin3": {
+          "description": "The bodyFingerprintBin3",
+          "type": "integer",
+          "format": "int32"
+        },
+        "bodyFingerprintBin4": {
+          "description": "The bodyFingerprintBin4",
+          "type": "integer",
+          "format": "int32"
+        },
+        "bodyFingerprintBin5": {
+          "description": "The bodyFingerprintBin5",
+          "type": "integer",
+          "format": "int32"
+        },
+        "antispamDirection": {
+          "description": "The directionality of this mail message",
+          "enum": [
+            "Unknown",
+            "Inbound",
+            "Outbound",
+            "Intraorg"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "AntispamMailDirection",
+            "values": [
+              {
+                "description": "Unknown",
+                "value": "Unknown"
+              },
+              {
+                "description": "Inbound",
+                "value": "Inbound"
+              },
+              {
+                "description": "Outbound",
+                "value": "Outbound"
+              },
+              {
+                "description": "Intraorg",
+                "value": "Intraorg"
+              }
+            ]
+          }
+        },
+        "deliveryAction": {
+          "description": "The delivery action of this mail message like Delivered, Blocked, Replaced etc",
+          "enum": [
+            "Unknown",
+            "DeliveredAsSpam",
+            "Delivered",
+            "Blocked",
+            "Replaced"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "modelAsString": false,
+            "name": "DeliveryAction",
+            "values": [
+              {
+                "description": "Unknown",
+                "value": "Unknown"
+              },
+              {
+                "description": "DeliveredAsSpam",
+                "value": "DeliveredAsSpam"
+              },
+              {
+                "description": "Delivered",
+                "value": "Delivered"
+              },
+              {
+                "description": "Blocked",
+                "value": "Blocked"
+              },
+              {
+                "description": "Replaced",
+                "value": "Replaced"
+              }
+            ]
+          }
+        },
+        "deliveryLocation": {
+          "description": "The delivery location of this mail message like Inbox, JunkFolder etc",
+          "enum": [
+            "Unknown",
+            "Inbox",
+            "JunkFolder",
+            "DeletedFolder",
+            "Quarantine",
+            "External",
+            "Failed",
+            "Dropped",
+            "Forwarded"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "modelAsString": false,
+            "name": "DeliveryLocation",
+            "values": [
+              {
+                "description": "Unknown",
+                "value": "Unknown"
+              },
+              {
+                "description": "Inbox",
+                "value": "Inbox"
+              },
+              {
+                "description": "JunkFolder",
+                "value": "JunkFolder"
+              },
+              {
+                "description": "DeletedFolder",
+                "value": "DeletedFolder"
+              },
+              {
+                "description": "Quarantine",
+                "value": "Quarantine"
+              },
+              {
+                "description": "External",
+                "value": "External"
+              },
+              {
+                "description": "Failed",
+                "value": "Failed"
+              },
+              {
+                "description": "Dropped",
+                "value": "Dropped"
+              },
+              {
+                "description": "Forwarded",
+                "value": "Forwarded"
+              }
+            ]
+          }
+        }
+      },
+      "type": "object"
+    },
+    "SubmissionMailEntity": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Entity"
+        }
+      ],
+      "description": "Represents a submission mail entity.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SubmissionMailEntityProperties",
+          "description": "Submission mail entity properties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object",
+      "x-ms-discriminator-value": "SubmissionMail"
+    },
+    "SubmissionMailEntityProperties": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/EntityCommonProperties"
+        }
+      ],
+      "description": "Submission mail entity property bag.",
+      "properties": {
+        "networkMessageId": {
+          "description": "The network message id of email to which submission belongs",
+          "format": "uuid",
+          "readOnly": true,
+          "type": "string"
+        },
+        "timestamp": {
+          "description": "The Time stamp when the message is received (Mail)",
+          "format": "date-time",
+          "readOnly": true,
+          "type": "string"
+        },
+        "recipient": {
+          "description": "The recipient of the mail",
+          "readOnly": true,
+          "type": "string"
+        },
+        "sender": {
+          "description": "The sender of the mail",
+          "readOnly": true,
+          "type": "string"
+        },
+        "senderIp": {
+          "description": "The sender's IP",
+          "readOnly": true,
+          "type": "string"
+        },
+        "subject": {
+          "description": "The subject of submission mail",
+          "readOnly": true,
+          "type": "string"
+        },
+        "reportType": {
+          "description": "The submission type for the given instance. This maps to Junk, Phish, Malware or NotJunk.",
+          "readOnly": true,
+          "type": "string"
+        }
+      },
+      "type": "object"
     },
     "MCASDataConnector": {
       "allOf": [
@@ -10345,6 +10907,16 @@
           "readOnly": true,
           "type": "string"
         },
+        "deviceName": {
+          "description": "The friendly name of the device",
+          "readOnly": true,
+          "type": "string"
+        },
+        "source": {
+          "description": "The source of the device",
+          "readOnly": true,
+          "type": "string"
+        },
         "iotSecurityAgentId": {
           "description": "The ID of the security agent running on the device",
           "format": "uuid",
@@ -10366,6 +10938,31 @@
           "readOnly": true,
           "type": "string"
         },
+        "macAddress": {
+          "description": "The MAC address of the device",
+          "readOnly": true,
+          "type": "string"
+        },
+        "model": {
+          "description": "The model of the device",
+          "readOnly": true,
+          "type": "string"
+        },
+        "serialNumber": {
+          "description": "The serial number of the device",
+          "readOnly": true,
+          "type": "string"
+        },
+        "firmwareVersion": {
+          "description": "The firmware version of the device",
+          "readOnly": true,
+          "type": "string"
+        },
+        "operatingSystem": {
+          "description": "The operating system of the device",
+          "readOnly": true,
+          "type": "string"
+        },
         "iotHubEntityId": {
           "description": "The AzureResource entity id of the IoT Hub",
           "readOnly": true,
@@ -10376,10 +10973,23 @@
           "readOnly": true,
           "type": "string"
         },
+        "ipAddressEntityId": {
+          "description": "The IP entity if of this device",
+          "readOnly": true,
+          "type": "string"
+        },
         "threatIntelligence": {
           "description": "A list of TI contexts attached to the IoTDevice entity.",
           "items": {
             "$ref": "#/definitions/ThreatIntelligence"
+          },
+          "readOnly": true,
+          "type": "array"
+        },
+        "protocols": {
+          "description": "A list of protocols of the IoTDevice entity.",
+          "items": {
+            "type": "string"
           },
           "readOnly": true,
           "type": "array"
