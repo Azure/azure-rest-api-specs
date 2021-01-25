@@ -4301,9 +4301,9 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.DocumentDB/locations/{location}/backupStorageRedundancies": {
       "get": {
-        "operationId": "BackupStorageRedundancies_ListByLocation",
+        "operationId": "BackupStorageRedundancies_GetByLocation",
         "x-ms-examples": {
-          "CosmosDBDatabaseAccountList": {
+          "CosmosDBBackupStorageRedundanciesList": {
             "$ref": "./examples/CosmosDBBackupStorageRedundanciesList.json"
           }
         },
@@ -7944,22 +7944,22 @@
       }
     },
     "BackupStorageRedundanciesResult": {
-      "description": "Available backup storage redundancies in selected region.",
+      "description": "Available backup storage redundancies in selected location.",
       "type": "object",
       "properties": {
         "location": {
           "type": "string",
-          "description": "The location of the resource group to which the resource belongs."
+          "description": "The selected location."
         },
         "properties": {
           "type": "object",
-          "description": "x.",
+          "description": "Available backup storage redundancies.",
           "$ref": "#/definitions/BackupStorageRedundancyProperties"
         }
       }
     },
     "BackupStorageRedundancyProperties": {
-      "description": "x.",
+      "description": "Available backup storage redundancies.",
       "type": "object",
       "properties": {
         "backupStorageRedundancies": {
@@ -7968,12 +7968,12 @@
           "items": {
             "$ref": "#/definitions/BackupStorageRedundancy"
           },
-          "description": "The properties of a available backup storage redundancies"
+          "description": "Available backup storage redundancies in list."
         }
       }
     },
     "BackupStorageRedundancy": {
-      "description": "Enum to indicate the available backup storage redundancies",
+      "description": "Enum to indicate the backup storage redundancy.",
       "type": "string",
       "enum": [
         "Geo",
