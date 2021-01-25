@@ -36,7 +36,6 @@ directive:
       command: marketplaceordering agreement show-agreement
     set:
       command: marketplaceordering agreement show
-      description: 
 
 cli:
   cli-directive:
