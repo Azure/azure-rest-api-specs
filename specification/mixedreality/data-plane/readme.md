@@ -20,7 +20,7 @@ For other options on installation see [Installing AutoRest](https://aka.ms/autor
 
 ## Configuration
 
-## Suppression
+### Suppression
 
 ``` yaml
 directive:
