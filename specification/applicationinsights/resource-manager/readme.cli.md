@@ -38,7 +38,7 @@ cli:
         hidden: true
       - select: 'operation'
         where:
-            operatoinGroup: 'APIKeys'
+            operationGroup: 'APIKeys'
             operation: 'get'
         hidden: true
 ```
