@@ -5562,6 +5562,10 @@
         "retentionTimeInDays": {
           "type": "object",
           "description": "The retention time for the files submitted for custom activity. Type: double (or Expression with resultType double)."
+        },
+        "AutoUserSpecification": {
+          "type": "object",
+          "description": "Elevation level and scope for the user (taskadmin/pooladmin), default is nonadmin task. Type: string (or Expression with resultType double)."
         }
       },
       "required": [
@@ -5837,16 +5841,16 @@
           "$ref": "../datafactory.json#/definitions/SecretBase"
         },
         "username": {
-          "description": "Web activity authentication user name for basic authentication.",
-          "type": "string"
+          "description": "Web activity authentication user name for basic authentication. Type: string (or Expression with resultType string).",
+          "type": "object"
         },
         "password": {
           "description": "Password for the PFX file or basic authentication.",
           "$ref": "../datafactory.json#/definitions/SecretBase"
         },
         "resource": {
-          "description": "Resource for which Azure Auth token will be requested when using MSI Authentication.",
-          "type": "string"
+          "description": "Resource for which Azure Auth token will be requested when using MSI Authentication. Type: string (or Expression with resultType string).",
+          "type": "object"
         }
       },
       "required": [
