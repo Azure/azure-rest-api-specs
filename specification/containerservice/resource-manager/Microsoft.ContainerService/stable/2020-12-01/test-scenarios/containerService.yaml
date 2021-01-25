@@ -1,0 +1,50 @@
+scope: ResourceGroup
+
+prepareSteps:
+  - exampleFile: ../examples/ManagedClustersCreate_Update.json
+    step: prepareManagedCluster
+
+requiredVariables:
+  - clientId
+  - clientSecret
+  - keyData
+
+testScenarios:
+  - description: kubernetesCluster agentPool test
+    name: aksAgentPoolBasic
+    steps:
+      - exampleFile: ../examples/AgentPoolsCreate_Update.json
+        step: agentPoolCreate
+  - description: agentPool with ephemeral
+    name:  aksAgentPoolEphemeral
+    variables:
+      agentPoolName: agentpool2
+    steps:
+      - exampleFile: ../examples/AgentPoolsCreate_Ephemeral.json
+        step: agentPool_Ephemeral
+
+  - description: agentPool with Spot
+    name: aksAgentPoolSpot
+    variables:
+      agentPoolName: agentpool3
+    steps:
+      - exampleFile: ../examples/AgentPoolsCreate_Spot.json
+        step: agentPool_Ephemeral
+  
+  - description: agentPool with enableEncryptionAtHost.json
+    name: aksAgentPoolEncryptionAtHost
+    variables:
+      agentPoolName: agentpool4
+    steps:
+      - exampleFile: ../examples/AgentPoolsCreate_EnableEncryptionAtHost.json
+        step: agentPool_Ephemeral
+  
+  - description: agentPool with customNodeConfig
+    name: aksAgentPoolCustomNodeConfig
+    variables:
+      agentPoolName: agentpool5
+    steps:
+      - exampleFile: ../examples/AgentPoolsCreate_CustomNodeConfig.json
+        step: agentPool_Ephemeral
+
+

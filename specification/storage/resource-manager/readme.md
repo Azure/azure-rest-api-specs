@@ -375,3 +375,7 @@ See configuration in [readme.java.md](./readme.java.md)
 
 See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
 
+``` yaml $(tag) == 'package-2019-06'
+test-resources:
+  - test: Microsoft.Storage/stable/2019-06-01/test-scenarios/createStorageAccount.yaml
+```

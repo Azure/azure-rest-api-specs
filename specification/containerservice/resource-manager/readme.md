@@ -670,3 +670,9 @@ directive:
 ## AzureResourceSchema
 
 See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
+
+
+``` yaml $(tag) == 'package-2020-12'
+test-resources:
+  - test: Microsoft.ContainerService/stable/2020-12-01/test-scenarios/containerService.yaml
+```
