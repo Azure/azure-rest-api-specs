@@ -730,7 +730,8 @@
           "Delete Batch Job Endpoint.": {
             "$ref": "./examples/BatchJobEndpoint/delete.json"
           }
-        }
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/batchEndpoints/{endpointName}/jobs/{id}": {
@@ -1002,7 +1003,8 @@
           "Delete Batch Job Deployment.": {
             "$ref": "./examples/BatchJobDeployment/delete.json"
           }
-        }
+        },
+        "x-ms-long-running-operation": true
       },
       "get": {
         "tags": [
@@ -3091,7 +3093,8 @@
           "Delete Sweep Job.": {
             "$ref": "./examples/SweepJob/delete.json"
           }
-        }
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/jobs": {
@@ -3277,7 +3280,8 @@
           "Poll Sweep Job.": {
             "$ref": "./examples/SweepJob/poll.json"
           }
-        }
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/labelingJobs/{id}": {
@@ -3620,7 +3624,8 @@
           "Resume Labeling Job.": {
             "$ref": "./examples/LabelingJob/resume.json"
           }
-        }
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/labelingJobs/{id}/exportLabels": {
@@ -3659,19 +3664,9 @@
           {
             "in": "body",
             "name": "body",
-            "description": "The desired format of export operation.",
+            "description": "The export summary.",
             "schema": {
-              "description": "The format of exported labels.",
-              "enum": [
-                "Dataset",
-                "Coco",
-                "CSV"
-              ],
-              "type": "string",
-              "x-ms-enum": {
-                "name": "ExportFormatType",
-                "modelAsString": true
-              }
+              "$ref": "#/definitions/ExportSummary"
             }
           }
         ],
@@ -3690,7 +3685,8 @@
           "ExportLabels Labeling Job.": {
             "$ref": "./examples/LabelingJob/exportLabels.json"
           }
-        }
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/labelingJobs/{id}/exportLabels/{exportId}": {
@@ -3742,7 +3738,7 @@
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/ExportSummaryResource"
+              "$ref": "#/definitions/ExportSummary"
             }
           }
         },
@@ -4411,7 +4407,8 @@
           "Delete Online Deployment Properties.": {
             "$ref": "./examples/OnlineDeploymentProperties/delete.json"
           }
-        }
+        },
+        "x-ms-long-running-operation": true
       },
       "get": {
         "tags": [
@@ -4548,7 +4545,8 @@
           "CreateOrUpdate Online Deployment Properties.": {
             "$ref": "./examples/OnlineDeploymentProperties/createOrUpdate.json"
           }
-        }
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/onlineEndpoints/{endpointName}/deployments/{deploymentName}/getLogs": {
@@ -4695,7 +4693,8 @@
           "Poll Online Deployment Properties.": {
             "$ref": "./examples/OnlineDeploymentProperties/poll.json"
           }
-        }
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/onlineEndpoints": {
@@ -4866,7 +4865,8 @@
           "Delete Online Endpoint Properties.": {
             "$ref": "./examples/OnlineEndpointProperties/delete.json"
           }
-        }
+        },
+        "x-ms-long-running-operation": true
       },
       "get": {
         "tags": [
@@ -4989,7 +4989,8 @@
           "CreateOrUpdate Online Endpoint Properties.": {
             "$ref": "./examples/OnlineEndpointProperties/createOrUpdate.json"
           }
-        }
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/onlineEndpoints/{endpointName}/regenerateKeys": {
@@ -5060,7 +5061,8 @@
           "RegenerateKeys Online Endpoint Properties.": {
             "$ref": "./examples/OnlineEndpointProperties/regenerateKeys.json"
           }
-        }
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/onlineEndpoints/{endpointName}/listKeys": {
@@ -5223,7 +5225,8 @@
           "Poll Online Endpoint Properties.": {
             "$ref": "./examples/OnlineEndpointProperties/poll.json"
           }
-        }
+        },
+        "x-ms-long-running-operation": true
       }
     }
   },
@@ -8615,6 +8618,7 @@
             "modelAsString": true
           },
           "x-ms-mutability": [
+            "create",
             "read"
           ]
         },
@@ -8682,44 +8686,6 @@
         }
       },
       "discriminator": "format",
-      "additionalProperties": false
-    },
-    "ExportSummaryResource": {
-      "description": "Azure Resource Manager resource envelope.",
-      "required": [
-        "properties"
-      ],
-      "type": "object",
-      "properties": {
-        "id": {
-          "description": "The resource URL of the entity (not URL encoded).",
-          "type": "string",
-          "readOnly": true
-        },
-        "name": {
-          "description": "The name of the resource entity.",
-          "type": "string",
-          "readOnly": true
-        },
-        "type": {
-          "description": "The resource provider and type.",
-          "type": "string",
-          "readOnly": true
-        },
-        "properties": {
-          "$ref": "#/definitions/ExportSummary"
-        },
-        "systemData": {
-          "description": "System data associated with resource provider",
-          "allOf": [
-            {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
-            }
-          ],
-          "readOnly": true
-        }
-      },
-      "x-ms-azure-resource": true,
       "additionalProperties": false
     },
     "ModelVersion": {
