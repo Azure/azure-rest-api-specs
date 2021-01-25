@@ -932,16 +932,7 @@
         },
         "status": {
           "type": "string",
-          "enum": [
-            "Invalid",
-            "Unknown",
-            "Healthy",
-            "Unhealthy"
-          ],
-          "x-ms-enum": {
-            "name": "OperationalStatus",
-            "modelAsString": true
-          },
+          "$ref": "#/definitions/OperationalStatus",
           "description": "Operational status of the Disk Pool."
         },
         "disks": {
@@ -1135,16 +1126,7 @@
         },
         "status": {
           "type": "string",
-          "enum": [
-            "Invalid",
-            "Unknown",
-            "Healthy",
-            "Unhealthy"
-          ],
-          "x-ms-enum": {
-            "name": "OperationalStatus",
-            "modelAsString": true
-          },
+          "$ref": "#/definitions/OperationalStatus",
           "description": "Operational status of the iSCSI Target."
         },
         "tpgs": {
@@ -1166,8 +1148,7 @@
       "type": "object",
       "description": "Properties for iSCSI Target create or update request.",
       "required": [
-        "tpgs",
-        "targetIqn"
+        "tpgs"
       ],
       "properties": {
         "tpgs": {
@@ -1438,6 +1419,24 @@
       },
       "description": "Provisioning state of the iSCSI Target.",
       "readOnly": true
+    },
+    "OperationalStatus": {
+      "type": "string",
+      "enum": [
+        "Invalid",
+        "Unknown",
+        "Healthy",
+        "Unhealthy",
+        "Updating",
+        "Running",
+        "Stopped",
+        "Stopped (deallocated)"
+      ],
+      "x-ms-enum": {
+        "name": "OperationalStatus",
+        "modelAsString": true
+      },
+      "description": "Operational status of the resource."
     },
     "SystemMetadata": {
       "type": "object",
