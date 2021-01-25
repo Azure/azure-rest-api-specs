@@ -605,6 +605,17 @@ directive:
     suppress:
       - OBJECT_ADDITIONAL_PROPERTIES  
     reason: "false alarm"
+  - suppress: R4007
+    from: alertRules_API.json
+    reason: 'Updating the error response to the new format would be a breaking change.'
+  - suppress: OBJECT_ADDITIONAL_PROPERTIES
+    from: alertRules_API.json
+    where: $.definitions.AlertRuleResource
+    reason: 'Action is expected to receive a subclass of Resource'
+  - suppress: OBJECT_ADDITIONAL_PROPERTIES
+    from: metricAlert_API.json
+    where: $.definitions.MetricAlertResource
+    reason: 'Action is expected to receive a subclass of Resource'
 ```
 
 ### Tag: profile-hybrid-2019-03-01
