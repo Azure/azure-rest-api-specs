@@ -39,6 +39,20 @@ input-file:
   - Microsoft.ProviderHub/stable/2020-11-20/providerhub.json
 ```
 
+```yaml
+openapi-type: arm
+openapi-subtype: rpaas
+tag: package-2021-01-01
+```
+
+### Tag: package-2021-01-01
+
+These settings apply only when `--tag=package-2021-01-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2020-11-20'
+input-file:
+  - Microsoft.ProviderHub/stable/2021-01-01/providerhub.json
+```
 ---
 
 # Code Generation
