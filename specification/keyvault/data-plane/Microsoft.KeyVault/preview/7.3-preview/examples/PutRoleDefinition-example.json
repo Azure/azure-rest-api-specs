@@ -1,12 +1,26 @@
 {
   "parameters": {
     "vaultBaseUrl": "https://myvault.vault.azure.net/",
-    "scope": "/",
-    "api-version": "7.2-preview",
-    "roleDefinitionName": "00000000-0000-0000-0000-000000000000"
+    "scope": "keys",
+    "roleDefinitionName": "00000000-0000-0000-0000-000000000000",
+    "parameters": {
+      "properties": {
+        "roleName": "My custom role",
+        "type": "CustomRole",
+        "description": "Role description",
+        "permissions": [
+          {
+            "dataActions": [
+              "Microsoft.KeyVault/managedHsm/keys/sign/action"
+            ]
+          }
+        ]
+      }
+    },
+    "api-version": "7.3-preview"
   },
   "responses": {
-    "200": {
+    "201": {
       "body": {
         "properties": {
           "roleName": "My custom role",
