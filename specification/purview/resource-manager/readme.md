@@ -50,7 +50,7 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-python
+  - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-go
 ```
 
@@ -77,23 +77,19 @@ Use `--python-mode=update` if you already have a setup.py and just want to updat
 
 ``` yaml $(python)
 python-mode: create
-python:
-  azure-arm: true
-  license-header: MICROSOFT_MIT_NO_VERSION
-  payload-flattening-threshold: 2
-  namespace: azure.mgmt.purview
-  package-name: azure-mgmt-purview
-  clear-output-folder: true
+azure-arm: true
+license-header: MICROSOFT_MIT_NO_VERSION
+namespace: azure.mgmt.purview
+package-name: azure-mgmt-purview
+clear-output-folder: true
 ```
 ``` yaml $(python) && $(python-mode) == 'update'
-python:
-  no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/purview/azure-mgmt-purview/azure/mgmt/purview
+no-namespace-folders: true
+output-folder: $(python-sdks-folder)/purview/azure-mgmt-purview/azure/mgmt/purview
 ```
 ``` yaml $(python) && $(python-mode) == 'create'
-python:
-  basic-setup-py: true
-  output-folder: $(python-sdks-folder)/purview/azure-mgmt-purview
+basic-setup-py: true
+output-folder: $(python-sdks-folder)/purview/azure-mgmt-purview
 ```
 
 
