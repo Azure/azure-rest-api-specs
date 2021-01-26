@@ -31,7 +31,7 @@
         }
       }
     },
-    "/ws/api/messages": {
+    "/api/messages": {
       "post": {
         "tags": [
           "webpubsub"
@@ -86,7 +86,7 @@
         }
       }
     },
-    "/ws/api/users/{id}/messages": {
+    "/api/users/{id}/messages": {
       "post": {
         "tags": [
           "webpubsub"
@@ -138,7 +138,7 @@
         }
       }
     },
-    "/ws/api/connections/{connectionId}/messages": {
+    "/api/connections/{connectionId}/messages": {
       "post": {
         "tags": [
           "webpubsub"
@@ -190,7 +190,7 @@
         }
       }
     },
-    "/ws/api/groups/{group}/messages": {
+    "/api/groups/{group}/messages": {
       "post": {
         "tags": [
           "webpubsub"
@@ -252,7 +252,7 @@
         }
       }
     },
-    "/ws/api/connections/{connectionId}": {
+    "/api/connections/{connectionId}": {
       "head": {
         "tags": [
           "webpubsub"
@@ -339,7 +339,7 @@
         }
       }
     },
-    "/ws/api/groups/{group}": {
+    "/api/groups/{group}": {
       "head": {
         "tags": [
           "webpubsub"
@@ -382,7 +382,7 @@
         }
       }
     },
-    "/ws/api/users/{user}": {
+    "/api/users/{user}": {
       "head": {
         "tags": [
           "webpubsub"
@@ -425,7 +425,7 @@
         }
       }
     },
-    "/ws/api/groups/{group}/connections/{connectionId}": {
+    "/api/groups/{group}/connections/{connectionId}": {
       "put": {
         "tags": [
           "webpubsub"
@@ -523,7 +523,7 @@
         }
       }
     },
-    "/ws/api/users/{user}/groups/{group}": {
+    "/api/users/{user}/groups/{group}": {
       "head": {
         "tags": [
           "webpubsub"
@@ -670,7 +670,7 @@
         }
       }
     },
-    "/ws/api/users/{user}/groups": {
+    "/api/users/{user}/groups": {
       "delete": {
         "tags": [
           "webpubsub"
@@ -713,18 +713,5 @@
         }
       }
     }
-  },
-  "securityDefinitions": {
-    "Bearer": {
-      "type": "apiKey",
-      "name": "Authorization",
-      "in": "header",
-      "description": "JWT Authorization header using the Bearer scheme. \r\n\r\n Enter 'Bearer' [space] and then your token in the text input below.\r\n\r\nExample: \"Bearer 12345abcdef\""
-    }
-  },
-  "security": [
-    {
-      "Bearer": []
-    }
-  ]
+  }
 }
