@@ -3,7 +3,7 @@
   "info": {
     "title": "ServiceFabricManagementClient",
     "description": "Azure Service Fabric Resource Provider API Client",
-    "version": "2020-01-01-preview"
+    "version": "2021-01-01-preview"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -656,6 +656,17 @@
           },
           "description": "Describes load balancing rules."
         },
+        "allowRdpAccess": {
+          "type": "boolean",
+          "description": "Default value is false. Setting this to true will add a default NSG rule that will open RDP ports to internet."
+        },
+        "networkSecurityRules": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NetworkSecurityRule"
+          },
+          "description": "Describes Network Security Rules."
+        },
         "clients": {
           "type": "array",
           "items": {
@@ -689,6 +700,10 @@
             "$ref": "#/definitions/ManagedClusterAddOnFeature"
           },
           "description": "client certificates for the cluster."
+        },
+        "enableAutoOSUpgrade": {
+          "type": "boolean",
+          "description": "Setting this to true will enable auto os upgrade for the cluster. Default value is false."
         }
       },
       "description": "Describes the managed cluster resource properties."
@@ -709,6 +724,17 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/LoadBalancingRule"
+          },
+          "description": "Describes load balancing rules."
+        },
+        "allowRdpAccess": {
+          "type": "boolean",
+          "description": "Opt-in for opening RDP port to internet. By default is false."
+        },
+        "networkSecurityRules": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NetworkSecurityRule"
           },
           "description": "Describes load balancing rules."
         },
@@ -777,6 +803,118 @@
       },
       "description": "The detail of the Service Fabric runtime version."
     },
+    "NetworkSecurityRule": {
+      "required": [
+        "name",
+        "protocol",
+        "access",
+        "priority",
+        "direction"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Network security rule name."
+        },
+        "description": {
+          "type": "string",
+          "description": "Network security rule description."
+        },
+        "protocol": {
+          "type": "string",
+          "description": "Network protocol this rule applies to.",
+          "enum": [
+            "http",
+            "https",
+            "tcp",
+            "udp",
+            "icmp",
+            "ah",
+            "esp"
+          ],
+          "x-ms-enum": {
+            "name": "nsgProtocol",
+            "modelAsString": true
+          }
+        },
+        "sourcePortRange": {
+          "type": "string",
+          "description": "The source port or range. Integer or range between 0 and 65535. Asterisk '*' can also be used to match all ports."
+        },
+        "destinationPortRange": {
+          "type": "string",
+          "description": "The destination port ranges."
+        },
+        "sourceAddressPrefix": {
+          "type": "string",
+          "description": "The CIDR or source IP range. Asterisk '*' can also be used to match all source IPs. Default tags such as 'VirtualNetwork', 'AzureLoadBalancer' and 'Internet' can also be used. If this is an ingress rule, specifies where network traffic originates from."
+        },
+        "sourceAddressPrefixes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The CIDR or source IP ranges."
+        },
+        "destinationAddressPrefix": {
+          "type": "string",
+          "description": "The destination address prefix. CIDR or destination IP range. Asterisk '*' can also be used to match all source IPs. Default tags such as 'VirtualNetwork', 'AzureLoadBalancer' and 'Internet' can also be used."
+        },
+        "destinationAddressPrefixes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The destination address prefixes. CIDR or destination IP ranges."
+        },
+        "sourcePortRanges": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The source port ranges."
+        },
+        "destinationPortRanges": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The destination port ranges."
+        },
+        "access": {
+          "type": "string",
+          "description": "The network traffic is allowed or denied.",
+          "enum": [
+            "allow",
+            "deny"
+          ],
+          "x-ms-enum": {
+            "name": "access",
+            "modelAsString": true
+          }
+        },
+        "priority": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The priority of the rule. The value can be in the range 1000 to 3000. Values outside this range are reserved for Service Fabric ManagerCluster Resource Provider. The priority number must be unique for each rule in the collection. The lower the priority number, the higher the priority of the rule.",
+          "minimum": 1000,
+          "maximum": 3000
+        },
+        "direction": {
+          "type": "string",
+          "description": "Network security rule direction.",
+          "enum": [
+            "inbound",
+            "outbound"
+          ],
+          "x-ms-enum": {
+            "name": "direction",
+            "modelAsString": true
+          }
+        }
+      },
+      "description": "Describes a network security rule."
+    },
     "Sku": {
       "required": [
         "name"
@@ -817,154 +955,6 @@
         }
       },
       "description": "Operation supported by the Service Fabric resource provider"
-    },
-    "ApplicationDeltaHealthPolicy": {
-      "type": "object",
-      "description": "Defines a delta health policy used to evaluate the health of an application or one of its child entities when upgrading the cluster.\n",
-      "properties": {
-        "defaultServiceTypeDeltaHealthPolicy": {
-          "$ref": "#/definitions/ServiceTypeDeltaHealthPolicy",
-          "description": "The delta health policy used by default to evaluate the health of a service type when upgrading the cluster."
-        },
-        "serviceTypeDeltaHealthPolicies": {
-          "$ref": "#/definitions/ServiceTypeDeltaHealthPolicyMap",
-          "description": "The map with service type delta health policy per service type name. The map is empty by default."
-        }
-      }
-    },
-    "ApplicationDeltaHealthPolicyMap": {
-      "type": "object",
-      "description": "Defines a map that contains specific application delta health policies for different applications.\nEach entry specifies as key the application name and as value an ApplicationDeltaHealthPolicy used to evaluate the application health when upgrading the cluster.\nThe application name should include the 'fabric:' URI scheme.\nThe map is empty by default.\n",
-      "additionalProperties": {
-        "$ref": "#/definitions/ApplicationDeltaHealthPolicy"
-      }
-    },
-    "ApplicationHealthPolicy": {
-      "type": "object",
-      "description": "Defines a health policy used to evaluate the health of an application or one of its children entities.\n",
-      "properties": {
-        "defaultServiceTypeHealthPolicy": {
-          "$ref": "#/definitions/ServiceTypeHealthPolicy",
-          "description": "The health policy used by default to evaluate the health of a service type."
-        },
-        "serviceTypeHealthPolicies": {
-          "$ref": "#/definitions/ServiceTypeHealthPolicyMap",
-          "description": "The map with service type health policy per service type name. The map is empty by default."
-        }
-      }
-    },
-    "ApplicationHealthPolicyMap": {
-      "type": "object",
-      "description": "Defines a map that contains specific application health policies for different applications.\nEach entry specifies as key the application name and as value an ApplicationHealthPolicy used to evaluate the application health.\nThe application name should include the 'fabric:' URI scheme.\nThe map is empty by default.\n",
-      "additionalProperties": {
-        "$ref": "#/definitions/ApplicationHealthPolicy"
-      }
-    },
-    "ClusterHealthPolicy": {
-      "type": "object",
-      "description": "Defines a health policy used to evaluate the health of the cluster or of a cluster node.\n",
-      "properties": {
-        "maxPercentUnhealthyNodes": {
-          "type": "integer",
-          "description": "The maximum allowed percentage of unhealthy nodes before reporting an error. For example, to allow 10% of nodes to be unhealthy, this value would be 10.\n\nThe percentage represents the maximum tolerated percentage of nodes that can be unhealthy before the cluster is considered in error.\nIf the percentage is respected but there is at least one unhealthy node, the health is evaluated as Warning.\nThe percentage is calculated by dividing the number of unhealthy nodes over the total number of nodes in the cluster.\nThe computation rounds up to tolerate one failure on small numbers of nodes. Default percentage is zero.\n\nIn large clusters, some nodes will always be down or out for repairs, so this percentage should be configured to tolerate that.\n",
-          "default": 0,
-          "minimum": 0,
-          "maximum": 100
-        },
-        "maxPercentUnhealthyApplications": {
-          "type": "integer",
-          "description": "The maximum allowed percentage of unhealthy applications before reporting an error. For example, to allow 10% of applications to be unhealthy, this value would be 10.\n\nThe percentage represents the maximum tolerated percentage of applications that can be unhealthy before the cluster is considered in error.\nIf the percentage is respected but there is at least one unhealthy application, the health is evaluated as Warning.\nThis is calculated by dividing the number of unhealthy applications over the total number of application instances in the cluster, excluding applications of application types that are included in the ApplicationTypeHealthPolicyMap.\nThe computation rounds up to tolerate one failure on small numbers of applications. Default percentage is zero.\n",
-          "default": 0,
-          "minimum": 0,
-          "maximum": 100
-        },
-        "applicationHealthPolicies": {
-          "$ref": "#/definitions/ApplicationHealthPolicyMap",
-          "description": "Defines the application health policy map used to evaluate the health of an application or one of its children entities."
-        }
-      }
-    },
-    "ClusterUpgradeDeltaHealthPolicy": {
-      "description": "Describes the delta health policies for the cluster upgrade.",
-      "required": [
-        "maxPercentDeltaUnhealthyApplications",
-        "maxPercentDeltaUnhealthyNodes",
-        "maxPercentUpgradeDomainDeltaUnhealthyNodes"
-      ],
-      "properties": {
-        "maxPercentDeltaUnhealthyNodes": {
-          "type": "integer",
-          "description": "The maximum allowed percentage of nodes health degradation allowed during cluster upgrades.\nThe delta is measured between the state of the nodes at the beginning of upgrade and the state of the nodes at the time of the health evaluation.\nThe check is performed after every upgrade domain upgrade completion to make sure the global state of the cluster is within tolerated limits.\n",
-          "minimum": 0,
-          "maximum": 100
-        },
-        "maxPercentUpgradeDomainDeltaUnhealthyNodes": {
-          "type": "integer",
-          "description": "The maximum allowed percentage of upgrade domain nodes health degradation allowed during cluster upgrades.\nThe delta is measured between the state of the upgrade domain nodes at the beginning of upgrade and the state of the upgrade domain nodes at the time of the health evaluation.\nThe check is performed after every upgrade domain upgrade completion for all completed upgrade domains to make sure the state of the upgrade domains is within tolerated limits.\n",
-          "minimum": 0,
-          "maximum": 100
-        },
-        "maxPercentDeltaUnhealthyApplications": {
-          "type": "integer",
-          "description": "The maximum allowed percentage of applications health degradation allowed during cluster upgrades.\nThe delta is measured between the state of the applications at the beginning of upgrade and the state of the applications at the time of the health evaluation.\nThe check is performed after every upgrade domain upgrade completion to make sure the global state of the cluster is within tolerated limits. System services are not included in this.\n",
-          "minimum": 0,
-          "maximum": 100
-        },
-        "applicationDeltaHealthPolicies": {
-          "$ref": "#/definitions/ApplicationDeltaHealthPolicyMap",
-          "description": "Defines the application delta health policy map used to evaluate the health of an application or one of its child entities when upgrading the cluster."
-        }
-      }
-    },
-    "ClusterUpgradePolicy": {
-      "required": [
-        "healthCheckRetryTimeout",
-        "healthCheckStableDuration",
-        "healthCheckWaitDuration",
-        "healthPolicy",
-        "upgradeDomainTimeout",
-        "upgradeReplicaSetCheckTimeout",
-        "upgradeTimeout"
-      ],
-      "properties": {
-        "forceRestart": {
-          "type": "boolean",
-          "description": "If true, then processes are forcefully restarted during upgrade even when the code version has not changed (the upgrade only changes configuration or data)."
-        },
-        "upgradeReplicaSetCheckTimeout": {
-          "type": "string",
-          "description": "The maximum amount of time to block processing of an upgrade domain and prevent loss of availability when there are unexpected issues. When this timeout expires, processing of the upgrade domain will proceed regardless of availability loss issues. The timeout is reset at the start of each upgrade domain. The timeout can be in either hh:mm:ss or in d.hh:mm:ss.ms format."
-        },
-        "healthCheckWaitDuration": {
-          "type": "string",
-          "description": "The length of time to wait after completing an upgrade domain before performing health checks. The duration can be in either hh:mm:ss or in d.hh:mm:ss.ms format."
-        },
-        "healthCheckStableDuration": {
-          "type": "string",
-          "description": "The amount of time that the application or cluster must remain healthy before the upgrade proceeds to the next upgrade domain. The duration can be in either hh:mm:ss or in d.hh:mm:ss.ms format."
-        },
-        "healthCheckRetryTimeout": {
-          "type": "string",
-          "description": "The amount of time to retry health evaluation when the application or cluster is unhealthy before the upgrade rolls back. The timeout can be in either hh:mm:ss or in d.hh:mm:ss.ms format."
-        },
-        "upgradeTimeout": {
-          "type": "string",
-          "description": "The amount of time the overall upgrade has to complete before the upgrade rolls back. The timeout can be in either hh:mm:ss or in d.hh:mm:ss.ms format."
-        },
-        "upgradeDomainTimeout": {
-          "type": "string",
-          "description": "The amount of time each upgrade domain has to complete before the upgrade rolls back. The timeout can be in either hh:mm:ss or in d.hh:mm:ss.ms format."
-        },
-        "healthPolicy": {
-          "$ref": "#/definitions/ClusterHealthPolicy",
-          "description": "The cluster health policy used when upgrading the cluster."
-        },
-        "deltaHealthPolicy": {
-          "$ref": "#/definitions/ClusterUpgradeDeltaHealthPolicy",
-          "description": "The cluster delta health policy used when upgrading the cluster."
-        }
-      },
-      "description": "Describes the policy used when upgrading the cluster."
     },
     "ErrorModel": {
       "properties": {
@@ -1086,46 +1076,6 @@
       "description": "The resource model definition.",
       "x-ms-azure-resource": true
     },
-    "ServiceTypeDeltaHealthPolicy": {
-      "type": "object",
-      "description": "Represents the delta health policy used to evaluate the health of services belonging to a service type when upgrading the cluster.\n",
-      "properties": {
-        "maxPercentDeltaUnhealthyServices": {
-          "type": "integer",
-          "description": "The maximum allowed percentage of services health degradation allowed during cluster upgrades.\nThe delta is measured between the state of the services at the beginning of upgrade and the state of the services at the time of the health evaluation.\nThe check is performed after every upgrade domain upgrade completion to make sure the global state of the cluster is within tolerated limits.\n",
-          "default": 0,
-          "minimum": 0,
-          "maximum": 100
-        }
-      }
-    },
-    "ServiceTypeDeltaHealthPolicyMap": {
-      "type": "object",
-      "description": "Defines a map that contains specific delta health policies for different service types.\nEach entry specifies as key the service type name and as value a ServiceTypeDeltaHealthPolicy used to evaluate the service health when upgrading the cluster.\nThe map is empty by default.\n",
-      "additionalProperties": {
-        "$ref": "#/definitions/ServiceTypeDeltaHealthPolicy"
-      }
-    },
-    "ServiceTypeHealthPolicy": {
-      "type": "object",
-      "description": "Represents the health policy used to evaluate the health of services belonging to a service type.\n",
-      "properties": {
-        "maxPercentUnhealthyServices": {
-          "type": "integer",
-          "description": "The maximum percentage of services allowed to be unhealthy before your application is considered in error.\n",
-          "default": 0,
-          "minimum": 0,
-          "maximum": 100
-        }
-      }
-    },
-    "ServiceTypeHealthPolicyMap": {
-      "type": "object",
-      "description": "Defines a ServiceTypeHealthPolicy per service type name.\n\nThe entries in the map replace the default service type health policy for each specified service type.\nFor example, in an application that contains both a stateless gateway service type and a stateful engine service type, the health policies for the stateless and stateful services can be configured differently.\nWith policy per service type, there's more granular control of the health of the service.\n\nIf no policy is specified for a service type name, the DefaultServiceTypeHealthPolicy is used for evaluation.\n",
-      "additionalProperties": {
-        "$ref": "#/definitions/ServiceTypeHealthPolicy"
-      }
-    },
     "SettingsParameterDescription": {
       "required": [
         "name",
@@ -1168,13 +1118,13 @@
     "api-version": {
       "name": "api-version",
       "in": "query",
-      "description": "The version of the Service Fabric resource provider API. This is a required parameter and it's value must be \"2020-01-01-preview\" for this specification.",
+      "description": "The version of the Service Fabric resource provider API. This is a required parameter and it's value must be \"2021-01-01-preview\" for this specification.",
       "required": true,
       "type": "string",
       "enum": [
-        "2020-01-01-preview"
+        "2021-01-01-preview"
       ],
-      "default": "2020-01-01-preview",
+      "default": "2021-01-01-preview",
       "x-ms-parameter-location": "client"
     },
     "clusterNameParameter": {

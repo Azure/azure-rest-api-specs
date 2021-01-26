@@ -3,7 +3,7 @@
   "info": {
     "title": "ServiceFabricManagementClient",
     "description": "Azure Service Fabric Resource Provider API Client",
-    "version": "2020-01-01-preview"
+    "version": "2021-01-01-preview"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -681,6 +681,9 @@
             "$ref": "#/definitions/VMSSExtension"
           }
         },
+        "vmManagedIdentity": {
+          "$ref": "#/definitions/VmManagedIdentity"
+        },
         "provisioningState": {
           "$ref": "#/definitions/ManagedResourceProvisioningState",
           "readOnly": true,
@@ -754,6 +757,9 @@
           "items": {
             "$ref": "#/definitions/VMSSExtension"
           }
+        },
+        "vmManagedIdentity": {
+          "$ref": "#/definitions/VmManagedIdentity"
         }
       },
       "description": "Node type update properties."
@@ -821,6 +827,18 @@
         }
       },
       "description": "Specifies set of certificates that should be installed onto the virtual machines."
+    },
+    "VmManagedIdentity": {
+      "properties": {
+        "userAssignedIdentities": {
+          "type": "array",
+          "description": "The list of user identities associated with the virtual machine scale set under the node type. Each entry will be an ARM resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'.",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "description": "Identities for the virtual machine scale set under the node type."
     },
     "VMSSExtension": {
       "required": [
@@ -1009,13 +1027,13 @@
     "api-version": {
       "name": "api-version",
       "in": "query",
-      "description": "The version of the Service Fabric resource provider API. This is a required parameter and it's value must be \"2020-01-01-preview\" for this specification.",
+      "description": "The version of the Service Fabric resource provider API. This is a required parameter and it's value must be \"2021-01-01-preview\" for this specification.",
       "required": true,
       "type": "string",
       "enum": [
-        "2020-01-01-preview"
+        "2021-01-01-preview"
       ],
-      "default": "2020-01-01-preview",
+      "default": "2021-01-01-preview",
       "x-ms-parameter-location": "client"
     },
     "clusterNameParameter": {
