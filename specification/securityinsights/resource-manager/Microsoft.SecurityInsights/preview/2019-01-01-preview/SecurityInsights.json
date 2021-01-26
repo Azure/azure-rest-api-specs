@@ -7915,7 +7915,6 @@
         "osFamily": {
           "description": "The operating system type.",
           "enum": [
-            "Unknown",
             "Linux",
             "Windows",
             "Android",
@@ -7927,10 +7926,6 @@
             "modelAsString": false,
             "name": "OSFamily",
             "values": [
-              {
-                "description": "Unknown enumeration value.",
-                "value": "Unknown"
-              },
               {
                 "description": "Host with Linux operating system.",
                 "value": "Linux"
@@ -8570,7 +8565,6 @@
       "type": "string"
     },
     "MailboxEntity": {
-
       "allOf": [
         {
           "$ref": "#/definitions/Entity"
@@ -8779,7 +8773,7 @@
             "type": "string"
           },
           "readOnly": true,
-          "type": "string"
+          "type": "array"
         },
         "threats": {
           "description": "The threats of this mail message",
@@ -8859,7 +8853,7 @@
             "type": "string"
           },
           "readOnly": true,
-          "type": "string"
+          "type": "array"
         },
         "bodyFingerprintBin1": {
           "description": "The bodyFingerprintBin1",
@@ -9043,6 +9037,23 @@
         "networkMessageId": {
           "description": "The network message id of email to which submission belongs",
           "format": "uuid",
+          "readOnly": true,
+          "type": "string"
+        },
+        "submissionId": {
+          "description": "The submission id",
+          "format": "uuid",
+          "readOnly": true,
+          "type": "string"
+        },
+        "submitter": {
+          "description": "The submitter",
+          "readOnly": true,
+          "type": "string"
+        },
+        "submissionDate": {
+          "description": "The submission date",
+          "format": "date-time",
           "readOnly": true,
           "type": "string"
         },
