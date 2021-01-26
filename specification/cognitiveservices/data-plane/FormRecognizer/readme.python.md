@@ -17,7 +17,7 @@ credential-scopes: https://cognitiveservices.azure.com/.default
 clear-output-folder: true
 batch:
   - tag: release_2_0
-  - tag: release_2_1_preview
+  - tag: release_2_1_preview.2
   - multiapiscript: true
 ```
 
@@ -33,7 +33,7 @@ namespace: azure.ai.formrecognizer.v2_0
 output-folder: $(python-sdks-folder)/formrecognizer/azure-ai-formrecognizer/azure/ai/formrecognizer/v2_0
 ```
 
-``` yaml $(tag) == 'release_2_1_preview'
+``` yaml $(tag) == 'release_2_1_preview.2'
 namespace: azure.ai.formrecognizer.v2_1_preview_2
 output-folder: $(python-sdks-folder)/formrecognizer/azure-ai-formrecognizer/azure/ai/formrecognizer/v2_1_preview_2
 ```
