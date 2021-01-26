@@ -19,9 +19,9 @@
     "/providers/Microsoft.Billing/enrollmentAccounts/{enrollmentAccountName}/providers/Microsoft.Subscription/createSubscription": {
       "post": {
         "description": "Creates an Azure subscription",
-        "operationId": "Subscription_CreateSubscriptionInEnrollmentAccount",
+        "operationId": "Subscriptions_CreateSubscriptionInEnrollmentAccount",
         "x-ms-examples": {
-          "createSubscription": {
+          "createLegacySubscription": {
             "$ref": "./examples/createLegacySubscription.json"
           }
         },
@@ -49,7 +49,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponseBody"
             }
           }
         },
@@ -103,7 +103,7 @@
           "default": {
             "description": "Describes the error if the operation is not successful.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponseBody"
             }
           }
         }
@@ -139,7 +139,7 @@
           "default": {
             "description": "Describes the error if the operation is not successful.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponseBody"
             }
           }
         }
@@ -172,7 +172,7 @@
           "default": {
             "description": "Describes the error if the operation is not successful.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponseBody"
             }
           }
         }
@@ -187,6 +187,7 @@
             "$ref": "./examples/getSubscriptionOperation.json"
           }
         },
+        "x-ms-long-running-operation": true,
         "responses": {
           "200": {
             "description": "Successful completion of the asynchronous operation",
@@ -203,8 +204,15 @@
               },
               "Retry-After": {
                 "description": "The amount of delay to use while the status of the operation is checked. The value is expressed in seconds.",
-                "type": "integer"
+                "type": "integer",
+                "format": "int32"
               }
+            }
+          },
+          "default": {
+            "description": "Describes the error if the operation is not successful.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseBody"
             }
           }
         },
@@ -246,16 +254,19 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponseBody"
             }
           }
+        },
+        "x-ms-pageable": {
+            "nextLinkName": "nextLink"
         }
       }
     },
     "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/invoiceSections/{invoiceSectionName}/providers/Microsoft.Subscription/createSubscription": {
       "post": {
         "description": "The operation to create a new WebDirect or EA Azure subscription.",
-        "operationId": "Subscription_CreateSubscription",
+        "operationId": "Subscriptions_CreateSubscription",
         "x-ms-examples": {
           "createSubscription": {
             "$ref": "./examples/createSubscription.json"
@@ -278,14 +289,15 @@
               },
               "Retry-After": {
                 "description": "The amount of delay to use while the status of the operation is checked. The value is expressed in seconds.",
-                "type": "integer"
+                "type": "integer",
+                "format": "int32"
               }
             }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponseBody"
             }
           }
         },
@@ -329,9 +341,9 @@
     "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/customers/{customerName}/providers/Microsoft.Subscription/createSubscription": {
       "post": {
         "description": "The operation to create a new CSP subscription.",
-        "operationId": "Subscription_CreateCspSubscription",
+        "operationId": "Subscriptions_CreateCspSubscription",
         "x-ms-examples": {
-          "createSubscription": {
+          "createCspSubscription": {
             "$ref": "./examples/createCspSubscription.json"
           }
         },
@@ -352,14 +364,15 @@
               },
               "Retry-After": {
                 "description": "The amount of delay to use while the status of the operation is checked. The value is expressed in seconds.",
-                "type": "integer"
+                "type": "integer",
+                "format": "int32"
               }
             }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponseBody"
             }
           }
         },
@@ -396,7 +409,7 @@
     "/providers/Microsoft.Subscription/aliases/{aliasName}": {
       "put": {
         "description": "Create Alias Subscription.",
-        "operationId": "Subscription_CreateAlias",
+        "operationId": "Subscriptions_CreateAlias",
         "x-ms-examples": {
           "CreateAlias": {
             "$ref": "./examples/createAlias.json"
@@ -442,7 +455,7 @@
       },
       "get": {
         "description": "Get Alias Subscription.",
-        "operationId": "Subscription_GetAlias",
+        "operationId": "Subscriptions_GetAlias",
         "x-ms-examples": {
           "GetAlias": {
             "$ref": "./examples/getAlias.json"
@@ -473,7 +486,7 @@
       },
       "delete": {
         "description": "Delete Alias.",
-        "operationId": "Subscription_DeleteAlias",
+        "operationId": "Subscriptions_DeleteAlias",
         "x-ms-examples": {
           "DeleteAlias": {
             "$ref": "./examples/deleteAlias.json"
@@ -505,10 +518,10 @@
     },
     "/providers/Microsoft.Subscription/aliases": {
       "get": {
-        "description": "Get Alias Subscription.",
-        "operationId": "Subscription_ListAlias",
+        "description": "List Alias Subscription.",
+        "operationId": "Subscriptions_ListAlias",
         "x-ms-examples": {
-          "GetAlias": {
+          "ListAlias": {
             "$ref": "./examples/listAlias.json"
           }
         },
@@ -602,9 +615,9 @@
     "/providers/Microsoft.Subscription/policies": {
       "get": {
         "description": "Get the subscription tenant policy for the user's tenant.",
-        "operationId": "SubscriptionPolicy_GetPolicyListForTenant",
+        "operationId": "SubscriptionPolicy_ListPolicyForTenant",
         "x-ms-examples": {
-          "getTenantPolicy": {
+          "getTenantPolicyList": {
             "$ref": "./examples/getTenantPolicyList.json"
           }
         },
@@ -637,7 +650,7 @@
         "description": "Get Billing Account Policy.",
         "operationId": "BillingAccount_GetPolicy",
         "x-ms-examples": {
-          "CreateAlias": {
+          "GetBillingAccountPolicy": {
             "$ref": "./examples/getBillingAccountPolicy.json"
           }
         },
@@ -668,9 +681,9 @@
     "/providers/Microsoft.Subscription/subscriptions/{subscriptionId}/redeem": {
       "post": {
         "description": "Redeem subscription.",
-        "operationId": "Subscription_Redeem",
+        "operationId": "Subscriptions_Redeem",
         "x-ms-examples": {
-          "CreateAlias": {
+          "RedeemSubscription": {
             "$ref": "./examples/redeemSubscription.json"
           }
         },
@@ -685,7 +698,8 @@
               },
               "Retry-After": {
                 "description": "The amount of delay to use while the status of the operation is checked. The value is expressed in seconds.",
-                "type": "string"
+                "type": "integer",
+                "format": "int32"
               }
             }
           },
@@ -803,6 +817,10 @@
         "name": {
           "description": "Operation name: {provider}/{resource}/{operation}",
           "type": "string"
+        },
+        "isDataAction": {
+          "description": "Indicates whether the operation is a data action",
+          "type": "boolean"
         },
         "display": {
           "description": "The object that represents the operation.",
