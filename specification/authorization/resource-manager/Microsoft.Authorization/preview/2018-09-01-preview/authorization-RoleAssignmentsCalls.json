@@ -91,6 +91,12 @@
             "schema": {
               "$ref": "#/definitions/RoleAssignmentListResult"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-pageable": {
@@ -98,7 +104,7 @@
         },
         "x-ms-odata": "#/definitions/RoleAssignmentFilter",
         "x-ms-examples": {
-          "GetConfigurations": {
+          "List role assignments for resource": {
             "$ref": "./examples/GetRoleAssignmentsForResource.json"
           }
         }
@@ -135,6 +141,12 @@
             "schema": {
               "$ref": "#/definitions/RoleAssignmentListResult"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-pageable": {
@@ -142,7 +154,7 @@
         },
         "x-ms-odata": "#/definitions/RoleAssignmentFilter",
         "x-ms-examples": {
-          "GetConfigurations": {
+          "List role assignments for resource group": {
             "$ref": "./examples/GetRoleAssignmentsForResourceGroup.json"
           }
         }
@@ -181,10 +193,19 @@
             "schema": {
               "$ref": "#/definitions/RoleAssignment"
             }
+          },
+          "204": {
+            "description": "Role assignment already deleted or does not exist."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-examples": {
-          "GetConfigurations": {
+          "Delete role assignment by name": {
             "$ref": "./examples/DeleteRoleAssignmentByName.json"
           }
         }
@@ -230,10 +251,16 @@
             "schema": {
               "$ref": "#/definitions/RoleAssignment"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-examples": {
-          "GetConfigurations": {
+          "Create role assignment": {
             "$ref": "./examples/PutRoleAssignment.json"
           }
         }
@@ -270,10 +297,16 @@
             "schema": {
               "$ref": "#/definitions/RoleAssignment"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-examples": {
-          "GetConfigurations": {
+          "Get role assignment by name": {
             "$ref": "./examples/GetRoleAssignmentByName.json"
           }
         }
@@ -305,10 +338,19 @@
             "schema": {
               "$ref": "#/definitions/RoleAssignment"
             }
+          },
+          "204": {
+            "description": "Role assignment already deleted or does not exist."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-examples": {
-          "GetConfigurations": {
+          "Delete role assignment by ID": {
             "$ref": "./examples/DeleteRoleAssignmentById.json"
           }
         }
@@ -347,10 +389,16 @@
             "schema": {
               "$ref": "#/definitions/RoleAssignment"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-examples": {
-          "GetConfigurations": {
+          "Create role assignment by ID": {
             "$ref": "./examples/PutRoleAssignmentById.json"
           }
         }
@@ -380,10 +428,16 @@
             "schema": {
               "$ref": "#/definitions/RoleAssignment"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-examples": {
-          "GetConfigurations": {
+          "Get role assignment by ID": {
             "$ref": "./examples/GetRoleAssignmentById.json"
           }
         }
@@ -417,6 +471,12 @@
             "schema": {
               "$ref": "#/definitions/RoleAssignmentListResult"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-pageable": {
@@ -424,7 +484,7 @@
         },
         "x-ms-odata": "#/definitions/RoleAssignmentFilter",
         "x-ms-examples": {
-          "GetConfigurations": {
+          "List role assignments for subscription": {
             "$ref": "./examples/GetAllRoleAssignments.json"
           }
         }
@@ -463,6 +523,12 @@
             "schema": {
               "$ref": "#/definitions/RoleAssignmentListResult"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-pageable": {
@@ -470,7 +536,7 @@
         },
         "x-ms-odata": "#/definitions/RoleAssignmentFilter",
         "x-ms-examples": {
-          "GetConfigurations": {
+          "List role assignments for scope": {
             "$ref": "./examples/GetRoleAssignmentByScope.json"
           }
         }

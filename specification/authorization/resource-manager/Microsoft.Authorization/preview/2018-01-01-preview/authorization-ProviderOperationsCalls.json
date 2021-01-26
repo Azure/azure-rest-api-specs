@@ -63,10 +63,16 @@
             "schema": {
               "$ref": "#/definitions/ProviderOperationsMetadata"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-examples": {
-          "GetConfigurations": {
+          "List provider operations metadata for resource provider": {
             "$ref": "./examples/GetProviderOperationsRP.json"
           }
         }
@@ -98,13 +104,19 @@
             "schema": {
               "$ref": "#/definitions/ProviderOperationsMetadataListResult"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "GetConfigurations": {
+          "List provider operations metadata for all resource providers": {
             "$ref": "./examples/GetAllProviderOperations.json"
           }
         }

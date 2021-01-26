@@ -49,10 +49,16 @@
         "responses": {
           "200": {
             "description": "OK - Returns an HttpResponseMessage with HttpStatusCode 200."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-examples": {
-          "GetConfigurations": {
+          "Elavate access global administrator": {
             "$ref": "./examples/ElevateAccess.json"
           }
         }

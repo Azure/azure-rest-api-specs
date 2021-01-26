@@ -58,13 +58,19 @@
             "schema": {
               "$ref": "#/definitions/PermissionGetResult"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "GetConfigurations": {
+          "List permissions for resource groupd": {
             "$ref": "./examples/GetPermissions.json"
           }
         }
@@ -120,13 +126,19 @@
             "schema": {
               "$ref": "#/definitions/PermissionGetResult"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "GetConfigurations": {
+          "List permissions for resource group": {
             "$ref": "./examples/GetResourcePermissions.json"
           }
         }
@@ -165,10 +177,19 @@
             "schema": {
               "$ref": "#/definitions/RoleDefinition"
             }
+          },
+          "204": {
+            "description": "Role definition already deleted or does not exist."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-examples": {
-          "GetConfigurations": {
+          "Delete role definition": {
             "$ref": "./examples/DeleteRoleDefinition.json"
           }
         }
@@ -205,10 +226,16 @@
             "schema": {
               "$ref": "#/definitions/RoleDefinition"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-examples": {
-          "GetConfigurations": {
+          "Get role definition by name": {
             "$ref": "./examples/GetRoleDefinitionByName.json"
           }
         }
@@ -254,10 +281,16 @@
             "schema": {
               "$ref": "#/definitions/RoleDefinition"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-examples": {
-          "GetConfigurations": {
+          "Create role definition": {
             "$ref": "./examples/PutRoleDefinition.json"
           }
         }
@@ -296,6 +329,12 @@
             "schema": {
               "$ref": "#/definitions/RoleDefinitionListResult"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-pageable": {
@@ -303,7 +342,7 @@
         },
         "x-ms-odata": "#/definitions/RoleDefinitionFilter",
         "x-ms-examples": {
-          "GetConfigurations": {
+          "List role definition for scope": {
             "$ref": "./examples/GetRoleDefinitionAtScope.json"
           }
         }
@@ -337,10 +376,16 @@
             "schema": {
               "$ref": "#/definitions/RoleDefinition"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-examples": {
-          "GetConfigurations": {
+          "Get role definition by ID": {
             "$ref": "./examples/GetRoleDefinitionById.json"
           }
         }
