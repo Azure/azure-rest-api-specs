@@ -306,34 +306,6 @@
           }
         }
       }
-    },
-    "/providers/Microsoft.Marketplace/operations": {
-      "get": {
-        "tags": [
-          "Operations"
-        ],
-        "description": "Lists all of the available Microsoft.Marketplace REST API operations.",
-        "operationId": "Operations_List",
-        "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK. The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/OperationListResult"
-            }
-          },
-          "default": {
-            "description": "Microsoft.Marketplace error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        }
-      }
     }
   },
   "parameters": {
@@ -886,50 +858,6 @@
           "description": "Gets or sets the notification message id",
           "type": "integer",
           "format": "int64"
-        }
-      }
-    },
-    "Operation": {
-      "description": "Microsoft.Marketplace REST API operation",
-      "type": "object",
-      "properties": {
-        "name": {
-          "description": "Operation name: {provider}/{resource}/{operation}",
-          "type": "string"
-        },
-        "display": {
-          "description": "The object that represents the operation.",
-          "properties": {
-            "provider": {
-              "description": "Service provider: Microsoft.Marketplace",
-              "type": "string"
-            },
-            "resource": {
-              "description": "Resource on which the operation is performed: Amendments",
-              "type": "string"
-            },
-            "operation": {
-              "description": "Operation type: Get Amendments etc.",
-              "type": "string"
-            }
-          }
-        }
-      }
-    },
-    "OperationListResult": {
-      "description": "Result of the request to list Marketplace operations. It contains a list of operations and a URL link to get the next set of results.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Operation"
-          },
-          "description": "List of Microsoft.Marketplace operations supported by the Microsoft.Marketplace resource provider."
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "URL to get the next set of operation list results if there are any.",
-          "readOnly": true
         }
       }
     },

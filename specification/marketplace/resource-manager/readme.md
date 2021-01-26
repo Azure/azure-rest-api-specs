@@ -68,15 +68,6 @@ input-file:
   - Microsoft.Marketplace/stable/2020-01-01/Marketplace.json
 ```
 
-### Tag: package-2020-12-01
-
-These settings apply only when `--tag=package-2020-12-01` is specified on the command line.
-
-``` yaml $(tag) == 'package-2020-12-01'
-input-file:
-  - Microsoft.Marketplace/stable/2020-12-01/Marketplace.json
-```
-
 # Code Generation
 
 ## Swagger to SDK
