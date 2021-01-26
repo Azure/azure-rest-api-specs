@@ -2094,6 +2094,71 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/vpnGateways/{gatewayName}/vpnConnections/{connectionName}/vpnLinkConnections/{linkConnectionName}/resetconnection": {
+      "post": {
+        "tags": [
+          "vpnLinkConnections"
+        ],
+        "operationId": "VpnLinkConnections_ResetConnection",
+        "description": "Resets the VpnLink connection specified.",
+        "parameters": [
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "gatewayName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the gateway."
+          },
+          {
+            "name": "connectionName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the vpn connection."
+          },
+          {
+            "name": "linkConnectionName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the vpn link connection."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted and the operation ResetConnection will complete asynchronously."
+          },
+          "default": {
+            "description": "The operation ResetConnection could not be completed.",
+            "schema": {
+              "$ref": "./networkWatcher.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetVpnLinkConnectionIkeSa": {
+            "$ref": "./examples/VpnSiteLinkConnectionReset.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/vpnGateways": {
       "get": {
         "operationId": "VpnGateways_ListByResourceGroup",
