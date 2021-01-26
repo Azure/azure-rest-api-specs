@@ -279,6 +279,15 @@ input-file:
 - Microsoft.Storage/preview/2015-05-01-preview/storage.json
 ```
 
+### Tag: profile-hybrid-2020-09-01
+
+These settings apply only when `--tag=profile-hybrid-2020-09-01` is specified on the command line.
+Creating this tag to pick proper resources from the hybrid profile.
+
+``` yaml $(tag) == 'profile-hybrid-2020-09-01'
+input-file:
+- Microsoft.Storage/stable/2019-06-01/storage.json
+```
 
 ---
 # Code Generation

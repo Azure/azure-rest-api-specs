@@ -344,7 +344,7 @@
           "Budgets"
         ],
         "operationId": "Budgets_CreateOrUpdate",
-        "description": "The operation to create or update a budget. Update operation requires latest eTag to be set in the request mandatorily. You may obtain the latest eTag by performing a get operation. Create operation does not require eTag.",
+        "description": "The operation to create or update a budget. You can optionally provide an eTag if desired as a form of concurrency control. To obtain the latest eTag for a given budget, perform a get operation prior to your put operation.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
         },
@@ -461,6 +461,9 @@
             "schema": {
               "$ref": "#/definitions/TagsResult"
             }
+          },
+          "204": {
+            "description": "An empty response is sent when there is no information available within the selected scope."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -1099,6 +1102,9 @@
               "$ref": "#/definitions/ReservationRecommendationsListResult"
             }
           },
+          "204": {
+            "description": "An empty response is sent when there are no recommendations."
+          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
@@ -1415,7 +1421,7 @@
         ],
         "x-ms-odata": "#/definitions/Forecast",
         "operationId": "Forecasts_List",
-        "description": "Lists the forecast charges by subscriptionId.",
+        "description": "Lists the forecast charges for scope defined. Please note that this API is no longer actively under development. We recommend using our new Forecast API moving forward: https://docs.microsoft.com/en-us/rest/api/cost-management/forecast/usage.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
         },
@@ -2985,6 +2991,14 @@
         }
       ],
       "properties": {
+        "location": {
+          "type": "string",
+          "description": "Resource Location."
+        },
+        "sku": {
+          "type": "string",
+          "description": "Resource sku"
+        },
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/ReservationRecommendationDetailsProperties",
@@ -3055,6 +3069,10 @@
           "type": "number",
           "readOnly": true
         },
+        "reservedUnitCount": {
+          "description": "The number of reserved units used to calculate savings. Always 1 for virtual machines.",
+          "type": "number"
+        },
         "savings": {
           "description": "The amount saved by purchasing the recommended quantity of reservation.",
           "type": "number",
@@ -3113,6 +3131,7 @@
         "lookBackPeriod": {
           "description": "Number of days of usage to look back used for computing the recommendation.",
           "type": "integer",
+          "format": "int32",
           "readOnly": true
         },
         "recommendedQuantity": {
@@ -3248,7 +3267,7 @@
         },
         "instanceFlexibilityRatio": {
           "description": "The instance Flexibility Ratio.",
-          "type": "integer",
+          "type": "number",
           "readOnly": true
         },
         "instanceFlexibilityGroup": {
@@ -3367,7 +3386,7 @@
         },
         "instanceFlexibilityRatio": {
           "description": "The instance Flexibility Ratio.",
-          "type": "integer",
+          "type": "number",
           "readOnly": true
         },
         "instanceFlexibilityGroup": {
@@ -3553,7 +3572,7 @@
       "x-ms-discriminator-value": "Modern",
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "#/definitions/ReservationTransactionResource"
         }
       ],
       "properties": {
@@ -3700,7 +3719,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "#/definitions/ReservationTransactionResource"
         }
       ],
       "properties": {
@@ -3772,6 +3791,16 @@
           "items": {
             "$ref": "#/definitions/Tag"
           }
+        },
+        "nextLink": {
+          "description": "The link (url) to the next page of results.",
+          "type": "string",
+          "readOnly": true
+        },
+        "previousLink": {
+          "description": "The link (url) to the previous page of results.",
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -3858,7 +3887,7 @@
           "$ref": "#/definitions/BudgetTimePeriod"
         },
         "filter": {
-          "description": "May be used to filter budgets by resource group, resource, or meter.",
+          "description": "May be used to filter budgets by user-specified dimensions and/or tags.",
           "type": "object",
           "$ref": "#/definitions/BudgetFilter"
         },
@@ -4015,12 +4044,12 @@
           "format": "decimal"
         },
         "contactEmails": {
-          "description": "Email addresses to send the budget notification to when the threshold is exceeded.",
+          "description": "Email addresses to send the budget notification to when the threshold is exceeded. Must have at least one contact email or contact group specified at the Subscription or Resource Group scopes. All other scopes must have at least one contact email specified.",
           "type": "array",
           "items": {
             "type": "string"
           },
-          "minItems": 1,
+          "minItems": 0,
           "maxItems": 50
         },
         "contactRoles": {
@@ -4031,7 +4060,7 @@
           }
         },
         "contactGroups": {
-          "description": "Action groups to send the budget notification to when the threshold is exceeded.",
+          "description": "Action groups to send the budget notification to when the threshold is exceeded. Must be provided as a fully qualified Azure resource id. Only supported at Subscription or Resource Group scopes.",
           "type": "array",
           "items": {
             "type": "string"
@@ -4048,7 +4077,8 @@
           "x-ms-enum": {
             "name": "ThresholdType",
             "modelAsString": true
-          }
+          },
+          "default": "Actual"
         }
       },
       "required": [
@@ -4185,7 +4215,7 @@
           "readOnly": true
         },
         "grain": {
-          "description": "The granularity of forecast.",
+          "description": "The granularity of forecast. Please note that Yearly is not currently supported in this API. The API will provide responses in the Monthly grain if Yearly is selected. To get yearly grain data, please use our newer Forecast API.",
           "type": "string",
           "enum": [
             "Daily",
@@ -4899,6 +4929,35 @@
           "readOnly": true,
           "type": "object",
           "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags."
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "ReservationTransactionResource": {
+      "description": "The Resource model definition.",
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource Id."
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource name."
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource type."
+        },
+        "tags": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
             "type": "string"
           },
           "description": "Resource tags."

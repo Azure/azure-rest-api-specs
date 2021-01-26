@@ -26,9 +26,26 @@ These are the global settings for the IotHub API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2020-09
-```
 
+tag: package-2020-09
+
+
+### Tag: package-2020-08-31
+
+These settings apply only when `--tag=package-2020-08-31` is specified on the command line.
+
+```yaml $(tag) == 'package-2020-08-31'
+input-file:
+  - Microsoft.Devices/stable/2020-08-31/iothub.json
+```
+### Tag: package-preview-2020-08-31
+
+These settings apply only when `--tag=package-preview-2020-08-31` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2020-08-31'
+input-file:
+  - Microsoft.Devices/preview/2020-08-31-preview/iothub.json
+```
 
 ### Tag: package-2020-09
 
@@ -42,10 +59,11 @@ input-file:
 
 These settings apply only when `--tag=package-2020-08` is specified on the command line.
 
-```yaml $(tag) == 'package-2020-08'
+``` yaml $(tag) == 'package-2020-08'
 input-file:
   - Microsoft.Devices/stable/2020-08-01/iothub.json
 ```
+
 ### Tag: package-preview-2020-07
 
 These settings apply only when `--tag=package-preview-2020-07` is specified on the command line.
@@ -170,6 +188,15 @@ These settings apply only when `--tag=package-2016-02` is specified on the comma
 ``` yaml $(tag) == 'package-2016-02'
 input-file:
 - Microsoft.Devices/stable/2016-02-03/iothub.json
+```
+
+### Tag: profile-hybrid-2020-09-01
+
+These settings apply only when `--tag=profile-hybrid-2020-09-01` is specified on the command line.
+
+``` yaml $(tag) == 'profile-hybrid-2020-09-01'
+input-file:
+- Microsoft.Devices/preview/2019-07-01-preview/iothub.json
 ```
 
 ---

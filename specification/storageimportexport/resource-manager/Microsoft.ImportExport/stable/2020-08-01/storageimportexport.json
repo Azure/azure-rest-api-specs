@@ -666,7 +666,7 @@
         },
         "deliveryPackage": {
           "description": "Contains information about the package being shipped by the customer to the Microsoft data center. ",
-          "$ref": "#/definitions/PackageInformation"
+          "$ref": "#/definitions/DeliveryPackageInformation"
         },
         "returnPackage": {
           "description": "Contains information about the package being shipped from the Microsoft data center to the customer to return the drives. The format is the same as the deliveryPackage property above. This property is not included if the drives have not yet been returned. ",
@@ -796,7 +796,7 @@
             },
             "deliveryPackage": {
               "description": "Contains information about the package being shipped by the customer to the Microsoft data center.",
-              "$ref": "#/definitions/PackageInformation"
+              "$ref": "#/definitions/DeliveryPackageInformation"
             },
             "logLevel": {
               "type": "string",
@@ -1099,6 +1099,32 @@
         "trackingNumber",
         "driveCount",
         "shipDate"
+      ],
+      "properties": {
+        "carrierName": {
+          "type": "string",
+          "description": "The name of the carrier that is used to ship the import or export drives."
+        },
+        "trackingNumber": {
+          "type": "string",
+          "description": "The tracking number of the package."
+        },
+        "driveCount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The number of drives included in the package."
+        },
+        "shipDate": {
+          "type": "string",
+          "description": "The date when the package is shipped."
+        }
+      }
+    },
+    "DeliveryPackageInformation": {
+      "description": "Contains information about the delivery package being shipped by the customer to the Microsoft data center.",
+      "required": [
+        "carrierName",
+        "trackingNumber"
       ],
       "properties": {
         "carrierName": {
