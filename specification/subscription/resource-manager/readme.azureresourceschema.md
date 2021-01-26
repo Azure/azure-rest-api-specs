@@ -6,7 +6,6 @@ These settings apply only when `--azureresourceschema` is specified on the comma
 
 ``` yaml $(azureresourceschema) && $(multiapi)
 batch:
-  - tag: schema-subscription-2021-01-01-preview
   - tag: schema-subscription-2020-09-01
   - tag: schema-subscription-2020-01-01
   - tag: schema-subscription-2019-10-01-preview
@@ -39,17 +38,6 @@ output-folder: $(azureresourceschema-folder)/schemas
 # all the input files in this apiVersion
 input-file:
   - Microsoft.Subscription/stable/2020-01-01/subscriptions.json
-
-```
-
-### Tag: schema-subscription-2021-01-01-preview and azureresourceschema
-
-``` yaml $(tag) == 'schema-subscription-2021-01-01-preview' && $(azureresourceschema)
-output-folder: $(azureresourceschema-folder)/schemas
-
-# all the input files in this apiVersion
-input-file:
-  - Microsoft.Subscription/preview/2021-01-01-preview/subscriptions.json
 
 ```
 
