@@ -10,8 +10,8 @@
         "tags": [
           "Translation"
         ],
-        "summary": "Submit a batch document translation request to the translation service",
-        "description": "Submit a batch request to the document translation service.\r\n            \r\nEach request can consists of multiple inputs.\r\nEach input will contains both a source and destination container for source and target language pair.\r\n            \r\nThe prefix and suffix filter (if supplied) will be used to filter the folders.\r\nThe prefix will be applied to the subpath after the container name\r\n            \r\nGlossaries / Translation memory can be supplied and will be applied when the document is being translated.\r\nIf the glossary is invalid or unreachable during translation time.  An error will be indicated in the document status.\r\n            \r\nIf the file with the same name already exists in the destination, it will be overwritten.\r\nTargetUrl for each target language needs to be unique.",
+        "summary": "Submit a document translation request to the Document Translation service",
+        "description": "Use this API to submit a bulk (batch) translation request to the Document Translation service.\r\nEach request can contain multiple documents and must contain a source and destination container for each document.\r\n            \r\nThe prefix and suffix filter (if supplied) are used to filter folders. The prefix is applied to the subpath after the container name.\r\n            \r\nGlossaries / Translation memory can be included in the request and are applied by the service when the document is translated.\r\n            \r\nIf the glossary is invalid or unreachable during translation, an error is indicated in the document status.\r\nIf a file with the same name already exists at the destination, it will be overwritten. The targetUrl for each target language must be unique.",
         "operationId": "Translation_SubmitBatchRequest",
         "consumes": [
           "application/json",
@@ -68,7 +68,7 @@
               "$ref": "#/definitions/ErrorResponseV2"
             },
             "examples": {
-              "application/json": "{\r\n  \"error\": {\r\n    \"code\": \"RequestRateTooHigh\",\r\n    \"message\": \"User\\u0027s request rate is too high\",\r\n    \"target\": \"batch\",\r\n    \"innerError\": {\r\n      \"code\": 429000,\r\n      \"error\": \"RateTooHigh\",\r\n      \"message\": \"Request rate is too high\"\r\n    }\r\n  }\r\n}"
+              "application/json": "{\r\n  \"error\": {\r\n    \"code\": \"RequestRateTooHigh\",\r\n    \"message\": \"User's request rate is too high\",\r\n    \"target\": \"batch\",\r\n    \"innerError\": {\r\n      \"code\": 429000,\r\n      \"error\": \"RateTooHigh\",\r\n      \"message\": \"Request rate is too high\"\r\n    }\r\n  }\r\n}"
             },
             "x-ms-error-response": true
           },
@@ -103,8 +103,8 @@
         "tags": [
           "Translation"
         ],
-        "summary": "Returns the list of operations submitted and their summary status",
-        "description": "Returns the list of status of the translation batch operation.\r\nThe list will consist only of the batch request submitted by the user (based on their subscription)\r\n            \r\nThe operation status are sorted by the operation Id\r\n            \r\nIf the number of operations exceed our paging limit, server side paging will be used.\r\nPaginated responses will indicate a partial result by including a continuation token in the response. The absence of a continuation token means that no additional pages are available.\r\n            \r\nClients MAY use $top and $skip query parameters to specify a number of results to return and an offset into the collection.\r\nThe server will honor the values specified by the client; however, clients MUST be prepared to handle responses that contain a different page size or contain a continuation token.\r\nWhen both $top and $skip are given by a client, the server SHOULD first apply $skip and then $top on the collection.\r\nNote: If the server can't honor $top and/or $skip, the server MUST return an error to the client informing about it instead of just ignoring the query options. This will avoid the risk of the client making assumptions about the data returned.",
+        "summary": "Returns a list of batch requests submitted and the status for each request",
+        "description": "Returns a list of batch requests submitted and the status for each request.\r\nThis list only contains batch requests submitted by the user (based on the subscription). The status for each request is sorted by id.\r\n            \r\nIf the number of requests exceeds our paging limit, server-side paging is used. Paginated responses indicate a partial result and include a continuation token in the response.\r\nThe absence of a continuation token means that no additional pages are available.\r\n            \r\n$top and $skip query parameters can be used to specify a number of results to return and an offset for the collection.\r\n            \r\nThe server honors the values specified by the client. However, clients must be prepared to handle responses that contain a different page size or contain a continuation token.\r\n            \r\nWhen both $top and $skip are included, the server should first apply $skip and then $top on the collection.\r\nNote: If the server can't honor $top and/or $skip, the server must return an error to the client informing about it instead of just ignoring the query options.\r\nThis reduces the risk of the client making assumptions about the data returned.",
         "operationId": "Translation_GetOperations",
         "produces": [
           "application/json"
@@ -176,7 +176,7 @@
               "$ref": "#/definitions/ErrorResponseV2"
             },
             "examples": {
-              "application/json": "{\r\n  \"error\": {\r\n    \"code\": \"RequestRateTooHigh\",\r\n    \"message\": \"User\\u0027s request rate is too high\",\r\n    \"target\": \"batch\",\r\n    \"innerError\": {\r\n      \"code\": 429000,\r\n      \"error\": \"RateTooHigh\",\r\n      \"message\": \"Request rate is too high\"\r\n    }\r\n  }\r\n}"
+              "application/json": "{\r\n  \"error\": {\r\n    \"code\": \"RequestRateTooHigh\",\r\n    \"message\": \"User's request rate is too high\",\r\n    \"target\": \"batch\",\r\n    \"innerError\": {\r\n      \"code\": 429000,\r\n      \"error\": \"RateTooHigh\",\r\n      \"message\": \"Request rate is too high\"\r\n    }\r\n  }\r\n}"
             },
             "x-ms-error-response": true
           },
@@ -213,8 +213,8 @@
         "tags": [
           "Translation"
         ],
-        "summary": "Returns the status of the specific document",
-        "description": "Returns the status of the translation of the document.",
+        "summary": "Returns the status for a specific document",
+        "description": "Returns the translation status for a specific document based on the request Id and document Id.",
         "operationId": "Translation_GetDocumentStatus",
         "produces": [
           "application/json"
@@ -282,7 +282,7 @@
               "$ref": "#/definitions/ErrorResponseV2"
             },
             "examples": {
-              "application/json": "{\r\n  \"error\": {\r\n    \"code\": \"RequestRateTooHigh\",\r\n    \"message\": \"User\\u0027s request rate is too high\",\r\n    \"target\": \"document\",\r\n    \"innerError\": {\r\n      \"code\": 429000,\r\n      \"error\": \"RateTooHigh\",\r\n      \"message\": \"Request rate is too high\"\r\n    }\r\n  }\r\n}"
+              "application/json": "{\r\n  \"error\": {\r\n    \"code\": \"RequestRateTooHigh\",\r\n    \"message\": \"User's request rate is too high\",\r\n    \"target\": \"document\",\r\n    \"innerError\": {\r\n      \"code\": 429000,\r\n      \"error\": \"RateTooHigh\",\r\n      \"message\": \"Request rate is too high\"\r\n    }\r\n  }\r\n}"
             },
             "x-ms-error-response": true
           },
@@ -319,8 +319,8 @@
         "tags": [
           "Translation"
         ],
-        "summary": "Returns the status of the batch translation operation",
-        "description": "Returns the status of the translation batch operation.\r\nThe status will include the overall job status as well as a summary of the current progress of all the documents being translated.",
+        "summary": "Returns the status for a document translation request",
+        "description": "Returns the status for a document translation request.\r\nThe status includes the overall request status, as well as the status for documents that are being translated as part of that request.",
         "operationId": "Translation_GetOperationStatus",
         "produces": [
           "application/json"
@@ -380,7 +380,7 @@
               "$ref": "#/definitions/ErrorResponseV2"
             },
             "examples": {
-              "application/json": "{\r\n  \"error\": {\r\n    \"code\": \"RequestRateTooHigh\",\r\n    \"message\": \"User\\u0027s request rate is too high\",\r\n    \"target\": \"batch\",\r\n    \"innerError\": {\r\n      \"code\": 429000,\r\n      \"error\": \"RateTooHigh\",\r\n      \"message\": \"Request rate is too high\"\r\n    }\r\n  }\r\n}"
+              "application/json": "{\r\n  \"error\": {\r\n    \"code\": \"RequestRateTooHigh\",\r\n    \"message\": \"User's request rate is too high\",\r\n    \"target\": \"batch\",\r\n    \"innerError\": {\r\n      \"code\": 429000,\r\n      \"error\": \"RateTooHigh\",\r\n      \"message\": \"Request rate is too high\"\r\n    }\r\n  }\r\n}"
             },
             "x-ms-error-response": true
           },
@@ -415,8 +415,8 @@
         "tags": [
           "Translation"
         ],
-        "summary": "Cancel a currently processing or queued operation.",
-        "description": "Cancel a currently processing or queued operation.\r\nAn operation will not be cancelled if it is already completed or failed or cancelling.  A bad request will be returned.\r\nAll documents that have completed translation will not be cancelled and will be charged.\r\nAll pending documents will be cancelled if possible.",
+        "summary": "Cancel a currently processing or queued operation",
+        "description": "Cancel a currently processing or queued operation.\r\nCancel a currently processing or queued operation.\r\nAn operation will not be cancelled if it is already completed or failed or cancelling. A bad request will be returned.\r\nAll documents that have completed translation will not be cancelled and will be charged.\r\nAll pending documents will be cancelled if possible.",
         "operationId": "Translation_CancelOperation",
         "produces": [
           "application/json"
@@ -464,7 +464,7 @@
               "$ref": "#/definitions/ErrorResponseV2"
             },
             "examples": {
-              "application/json": "{\r\n  \"error\": {\r\n    \"code\": \"RequestRateTooHigh\",\r\n    \"message\": \"User\\u0027s request rate is too high\",\r\n    \"target\": \"batch\",\r\n    \"innerError\": {\r\n      \"code\": 429000,\r\n      \"error\": \"RateTooHigh\",\r\n      \"message\": \"Request rate is too high\"\r\n    }\r\n  }\r\n}"
+              "application/json": "{\r\n  \"error\": {\r\n    \"code\": \"RequestRateTooHigh\",\r\n    \"message\": \"User's request rate is too high\",\r\n    \"target\": \"batch\",\r\n    \"innerError\": {\r\n      \"code\": 429000,\r\n      \"error\": \"RateTooHigh\",\r\n      \"message\": \"Request rate is too high\"\r\n    }\r\n  }\r\n}"
             },
             "x-ms-error-response": true
           },
@@ -501,8 +501,8 @@
         "tags": [
           "Translation"
         ],
-        "summary": "Returns the status of the documents of a translation batch operation",
-        "description": "Returns the status of the list of documents translation operation by a given operation id.\r\n            \r\nThe documents are sorted by the document Id\r\n            \r\nIf the number of documents exceed our paging limit, server side paging will be used.\r\nPaginated responses will indicate a partial result by including a continuation token in the response. The absence of a continuation token means that no additional pages are available.\r\n            \r\nClients MAY use $top and $skip query parameters to specify a number of results to return and an offset into the collection.\r\nThe server will honor the values specified by the client; however, clients MUST be prepared to handle responses that contain a different page size or contain a continuation token.\r\nWhen both $top and $skip are given by a client, the server SHOULD first apply $skip and then $top on the collection.\r\nNote: If the server can't honor $top and/or $skip, the server MUST return an error to the client informing about it instead of just ignoring the query options. This will avoid the risk of the client making assumptions about the data returned.",
+        "summary": "Returns the status for all documents in a batch document translation request",
+        "description": "Returns the status for all documents in a batch document translation request.\r\n            \r\nThe documents included in the response are sorted by document Id in descending order. If the number of documents in the response exceeds our paging limit, server-side paging is used.\r\nPaginated responses indicate a partial result and include a continuation token in the response. The absence of a continuation token means that no additional pages are available.\r\n            \r\n$top and $skip query parameters can be used to specify a number of results to return and an offset for the collection.\r\nThe server honors the values specified by the client. However, clients must be prepared to handle responses that contain a different page size or contain a continuation token.\r\n            \r\nWhen both $top and $skip are included, the server should first apply $skip and then $top on the collection.\r\nNote: If the server can't honor $top and/or $skip, the server must return an error to the client informing about it instead of just ignoring the query options.\r\nThis reduces the risk of the client making assumptions about the data returned.",
         "operationId": "Translation_GetOperationDocumentsStatus",
         "produces": [
           "application/json"
@@ -592,7 +592,7 @@
               "$ref": "#/definitions/ErrorResponseV2"
             },
             "examples": {
-              "application/json": "{\r\n  \"error\": {\r\n    \"code\": \"RequestRateTooHigh\",\r\n    \"message\": \"User\\u0027s request rate is too high\",\r\n    \"target\": \"document\",\r\n    \"innerError\": {\r\n      \"code\": 429000,\r\n      \"error\": \"RateTooHigh\",\r\n      \"message\": \"Request rate is too high\"\r\n    }\r\n  }\r\n}"
+              "application/json": "{\r\n  \"error\": {\r\n    \"code\": \"RequestRateTooHigh\",\r\n    \"message\": \"User's request rate is too high\",\r\n    \"target\": \"document\",\r\n    \"innerError\": {\r\n      \"code\": 429000,\r\n      \"error\": \"RateTooHigh\",\r\n      \"message\": \"Request rate is too high\"\r\n    }\r\n  }\r\n}"
             },
             "x-ms-error-response": true
           },
@@ -629,8 +629,8 @@
         "tags": [
           "Translation"
         ],
-        "summary": "Returns the list of supported document formats",
-        "description": "The list of supported document formats supported by our service.\r\nThe list will include the common file extension used and supported as well as the content-type if using the upload API.",
+        "summary": "Returns a list of supported document formats",
+        "description": "The list of supported document formats supported by the Document Translation service.\r\nThe list includes the common file extension, as well as the content-type if using the upload API.",
         "operationId": "Translation_GetDocumentFormats",
         "produces": [
           "application/json"
@@ -648,7 +648,7 @@
               "$ref": "#/definitions/ErrorResponseV2"
             },
             "examples": {
-              "application/json": "{\r\n  \"error\": {\r\n    \"code\": \"RequestRateTooHigh\",\r\n    \"message\": \"User\\u0027s request rate is too high\",\r\n    \"target\": \"format\",\r\n    \"innerError\": {\r\n      \"code\": 429000,\r\n      \"error\": \"RateTooHigh\",\r\n      \"message\": \"Request rate is too high\"\r\n    }\r\n  }\r\n}"
+              "application/json": "{\r\n  \"error\": {\r\n    \"code\": \"RequestRateTooHigh\",\r\n    \"message\": \"User's request rate is too high\",\r\n    \"target\": \"format\",\r\n    \"innerError\": {\r\n      \"code\": 429000,\r\n      \"error\": \"RateTooHigh\",\r\n      \"message\": \"Request rate is too high\"\r\n    }\r\n  }\r\n}"
             },
             "x-ms-error-response": true
           },
@@ -685,8 +685,8 @@
         "tags": [
           "Translation"
         ],
-        "summary": "Returns the list of supported document formats",
-        "description": "The list of supported glossary formats supported by our service.\r\nThe list will include the common file extension used.",
+        "summary": "Returns the list of supported glossary formats",
+        "description": "The list of supported glossary formats supported by the Document Translation service.\r\nThe list includes the common file extension used.",
         "operationId": "Translation_GetGlossaryFormats",
         "produces": [
           "application/json"
@@ -704,7 +704,7 @@
               "$ref": "#/definitions/ErrorResponseV2"
             },
             "examples": {
-              "application/json": "{\r\n  \"error\": {\r\n    \"code\": \"RequestRateTooHigh\",\r\n    \"message\": \"User\\u0027s request rate is too high\",\r\n    \"target\": \"format\",\r\n    \"innerError\": {\r\n      \"code\": 429000,\r\n      \"error\": \"RateTooHigh\",\r\n      \"message\": \"Request rate is too high\"\r\n    }\r\n  }\r\n}"
+              "application/json": "{\r\n  \"error\": {\r\n    \"code\": \"RequestRateTooHigh\",\r\n    \"message\": \"User's request rate is too high\",\r\n    \"target\": \"format\",\r\n    \"innerError\": {\r\n      \"code\": 429000,\r\n      \"error\": \"RateTooHigh\",\r\n      \"message\": \"Request rate is too high\"\r\n    }\r\n  }\r\n}"
             },
             "x-ms-error-response": true
           },
@@ -741,8 +741,8 @@
         "tags": [
           "Translation"
         ],
-        "summary": "Returns the list of supported storage sources",
-        "description": "The list of storage sources supported by our service.",
+        "summary": "Returns a list of supported storage sources",
+        "description": "Returns a list of storage sources/options supported by the Document Translation service.",
         "operationId": "Translation_GetDocumentStorageSource",
         "produces": [
           "application/json"
@@ -760,7 +760,7 @@
               "$ref": "#/definitions/ErrorResponseV2"
             },
             "examples": {
-              "application/json": "{\r\n  \"error\": {\r\n    \"code\": \"RequestRateTooHigh\",\r\n    \"message\": \"User\\u0027s request rate is too high\",\r\n    \"target\": \"source\",\r\n    \"innerError\": {\r\n      \"code\": 429000,\r\n      \"error\": \"RateTooHigh\",\r\n      \"message\": \"Request rate is too high\"\r\n    }\r\n  }\r\n}"
+              "application/json": "{\r\n  \"error\": {\r\n    \"code\": \"RequestRateTooHigh\",\r\n    \"message\": \"User's request rate is too high\",\r\n    \"target\": \"source\",\r\n    \"innerError\": {\r\n      \"code\": 429000,\r\n      \"error\": \"RateTooHigh\",\r\n      \"message\": \"Request rate is too high\"\r\n    }\r\n  }\r\n}"
             },
             "x-ms-error-response": true
           },
@@ -862,6 +862,9 @@
           "description": "Version",
           "type": "string",
           "example": "2.0"
+        },
+        "storageSource": {
+          "$ref": "#/definitions/StorageSource"
         }
       }
     },
