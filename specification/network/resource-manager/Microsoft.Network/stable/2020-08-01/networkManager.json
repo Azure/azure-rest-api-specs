@@ -132,7 +132,10 @@
             "description": "Request successful. Resource does not exist."
           },
           "default": {
-            "description": "Resource Provider error response describing why the operation failed."
+            "description": "Resource Provider error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
           }
         },
         "x-ms-examples": {
@@ -285,7 +288,7 @@
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "NetworkManageCommitPost": {
+          "NetworkManagerDeploymentStatusList": {
             "$ref": "./examples/NetworkManagerDeploymentStatusList.json"
           }
         }
@@ -571,14 +574,14 @@
     },
     "NetworkManagerDeploymentStatusParameter": {
       "properties": {
-        "region": {
+        "regions": {
           "type": "array",
           "items": {
             "type": "string"
           },
           "description": "List of locations."
         },
-        "deploymentType": {
+        "deploymentTypes": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/DeploymentType"
@@ -608,6 +611,7 @@
       "properties": {
         "commitTime": {
           "type": "string",
+          "format": "date-time",
           "description": "Commit Time."
         },
         "region": {
@@ -699,8 +703,8 @@
       "x-ms-parameter-location": "method"
     },
     "ListSkipTokenParameter": {
-      "name": "$skiptoken",
-      "description": "Skiptoken is only used if a previous operation returned a partial result. If a previous response contains a nextLink element, the value of the nextLink element will include a skiptoken parameter that specifies a starting point to use for subsequent calls.",
+      "name": "$skipToken",
+      "description": "SkipToken is only used if a previous operation returned a partial result. If a previous response contains a nextLink element, the value of the nextLink element will include a skiptoken parameter that specifies a starting point to use for subsequent calls.",
       "in": "query",
       "required": false,
       "type": "string",

@@ -155,7 +155,10 @@
             "description": "Request successful. Resource does not exist."
           },
           "default": {
-            "description": "Resource Provider error response describing why the operation failed."
+            "description": "Resource Provider error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
           }
         },
         "x-ms-examples": {
@@ -366,7 +369,7 @@
             "Subnet"
           ],
           "x-ms-enum": {
-            "name": "memberType",
+            "name": "MemberType",
             "modelAsString": true
           }
         },
@@ -494,7 +497,7 @@
       "x-ms-parameter-location": "method"
     },
     "ListSkipTokenParameter": {
-      "name": "$skiptoken",
+      "name": "$skipToken",
       "description": "Skiptoken is only used if a previous operation returned a partial result. If a previous response contains a nextLink element, the value of the nextLink element will include a skiptoken parameter that specifies a starting point to use for subsequent calls.",
       "in": "query",
       "required": false,

@@ -917,8 +917,8 @@
           },
           "description": "A list of network manager security configuration rules"
         },
-        "failedImports": {
-          "$ref": "#/definitions/FailedImports",
+        "failedImport": {
+          "$ref": "#/definitions/FailedImport",
           "description": "Failed Imports."
         },
         "nextLink": {
@@ -963,19 +963,8 @@
         },
         "protocol": {
           "type": "string",
-          "description": "Network protocol this rule applies to.",
-          "enum": [
-            "Tcp",
-            "Udp",
-            "Icmp",
-            "Esp",
-            "Any",
-            "Ah"
-          ],
-          "x-ms-enum": {
-            "name": "SecurityConfigurationRuleProtocol",
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/RuleProtocol",
+          "description": "Network protocol this rule applies to."
         },
         "source": {
           "type": "array",
@@ -1074,19 +1063,8 @@
         },
         "protocol": {
           "type": "string",
-          "description": "Network protocol this rule applies to.",
-          "enum": [
-            "Tcp",
-            "Udp",
-            "Icmp",
-            "Esp",
-            "Any",
-            "Ah"
-          ],
-          "x-ms-enum": {
-            "name": "SecurityConfigurationRuleProtocol",
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/RuleProtocol",
+          "description": "Network protocol this rule applies to."
         },
         "source": {
           "type": "array",
@@ -1168,6 +1146,22 @@
         "modelAsString": true
       }
     },
+    "RuleProtocol": {
+      "type": "string",
+      "description": "Network protocol this rule applies to.",
+      "enum": [
+        "Tcp",
+        "Udp",
+        "Icmp",
+        "Esp",
+        "Any",
+        "Ah"
+      ],
+      "x-ms-enum": {
+        "name": "SecurityConfigurationRuleProtocol",
+        "modelAsString": true
+      }
+    },
     "NetworkManagerSecurityGroupItem": {
       "type": "object",
       "properties": {
@@ -1202,7 +1196,7 @@
     },
     "NetworkManagerSecurityConfigurationImport": {
       "properties": {
-        "networkSecurityGroupURI": {
+        "networkSecurityGroupUris": {
           "type": "array",
           "items": {
             "type": "string"
@@ -1246,14 +1240,14 @@
           "type": "string",
           "description": "Admin Security Configuration."
         },
-        "failedImports": {
-          "$ref": "#/definitions/FailedImports",
+        "failedImport": {
+          "$ref": "#/definitions/FailedImport",
           "description": "failed Imports code and reason"
         }
       },
       "description": "Security Configuration Import Result."
     },
-    "FailedImports": {
+    "FailedImport": {
       "type": "object",
       "description": "Failed Imports.",
       "properties": {
@@ -1338,7 +1332,7 @@
       "x-ms-parameter-location": "method"
     },
     "ListSkipTokenParameter": {
-      "name": "$skiptoken",
+      "name": "$skipToken",
       "description": "Skiptoken is only used if a previous operation returned a partial result. If a previous response contains a nextLink element, the value of the nextLink element will include a skiptoken parameter that specifies a starting point to use for subsequent calls.",
       "in": "query",
       "required": false,
