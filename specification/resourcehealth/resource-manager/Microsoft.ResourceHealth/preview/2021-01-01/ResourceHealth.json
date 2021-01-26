@@ -62,7 +62,7 @@
           "default": {
             "description": "DefaultErrorResponse",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/WrappedErrorResponse"
             }
           }
         },
@@ -112,7 +112,7 @@
           "default": {
             "description": "DefaultErrorResponse",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/WrappedErrorResponse"
             }
           }
         },
@@ -157,7 +157,7 @@
           "default": {
             "description": "DefaultErrorResponse",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/WrappedErrorResponse"
             }
           }
         },
@@ -205,7 +205,7 @@
           "default": {
             "description": "DefaultErrorResponse",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/WrappedErrorResponse"
             }
           }
         },
@@ -255,7 +255,7 @@
           "default": {
             "description": "DefaultErrorResponse",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/WrappedErrorResponse"
             }
           }
         },
@@ -302,7 +302,7 @@
           "default": {
             "description": "DefaultErrorResponse",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/WrappedErrorResponse"
             }
           }
         },
@@ -338,13 +338,13 @@
           "default": {
             "description": "DefaultErrorResponse",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/WrappedErrorResponse"
             }
           }
         }
       }
     },
-    "/providers/Microsoft.ResourceHealth/emergingIssues/{issueName}": {
+    "/providers/Microsoft.ResourceHealth/emergingIssues/default": {
       "get": {
         "tags": [
           "EmergingIssues"
@@ -352,9 +352,6 @@
         "operationId": "EmergingIssues_Get",
         "description": "Gets Azure services' emerging issues.",
         "parameters": [
-          {
-            "$ref": "#/parameters/IssueNameParameter"
-          },
           {
             "$ref": "#/parameters/ApiVersionParameter"
           }
@@ -369,7 +366,7 @@
           "default": {
             "description": "DefaultErrorResponse",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/WrappedErrorResponse"
             }
           }
         },
@@ -402,7 +399,7 @@
           "default": {
             "description": "DefaultErrorResponse",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/WrappedErrorResponse"
             }
           }
         },
@@ -441,7 +438,7 @@
           "default": {
             "description": "DefaultErrorResponse",
             "schema": {
-              "$ref": "#/definitions/PotentialOutageErrorResponse"
+              "$ref": "#/definitions/WrappedErrorResponse"
             }
           }
         },
@@ -474,7 +471,7 @@
           "default": {
             "description": "DefaultErrorResponse",
             "schema": {
-              "$ref": "#/definitions/PotentialOutageErrorResponse"
+              "$ref": "#/definitions/WrappedErrorResponse"
             }
           }
         },
@@ -644,6 +641,7 @@
                     "properties": {
                       "groupId": {
                         "type": "integer",
+                        "format": "int32",
                         "description": "Recommended action group Id for the service health event."
                       },
                       "actionText": {
@@ -680,6 +678,7 @@
             },
             "priority": {
               "type": "integer",
+              "format": "int32",
               "description": "Priority level of the event."
             },
             "lastUpdateTime": {
@@ -1245,7 +1244,7 @@
       "type": "object",
       "description": "Potential outages detected by Brain.",
       "properties": {
-        "id": {
+        "outageId": {
           "type": "string",
           "description": "Id for the potential outage.",
           "readOnly": true
@@ -1324,7 +1323,7 @@
       "type": "object",
       "description": "ICM incidents that are related to a potential outage detected by Brain.",
       "properties": {
-        "id": {
+        "icmId": {
           "type": "string",
           "description": "Id for the incident.",
           "readOnly": true
@@ -1489,7 +1488,7 @@
         }
       }
     },
-    "PotentialOutageErrorResponse": {
+    "WrappedErrorResponse": {
       "description": "Error details.",
       "type": "object",
       "properties": {
@@ -1600,17 +1599,6 @@
       "required": true,
       "type": "string",
       "description": "Client Api Version."
-    },
-    "IssueNameParameter": {
-      "name": "issueName",
-      "in": "path",
-      "description": "The name of the emerging issue.",
-      "required": true,
-      "type": "string",
-      "enum": [
-        "default"
-      ],
-      "x-ms-parameter-location": "method"
     },
     "PotentialOutageNameParameter": {
       "name": "potentialOutageName",
