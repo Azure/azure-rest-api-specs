@@ -612,6 +612,10 @@ directive:
     from: metricAlert_API.json
     where: $.definitions.MetricAlertResource
     reason: 'Action is expected to receive a subclass of Resource'
+  - from : scheduledQueryRule_API.json 
+    suppress:
+      - OBJECT_ADDITIONAL_PROPERTIES  
+    reason: "false alarm"
 ```
 
 ### Tag: profile-hybrid-2019-03-01
