@@ -4307,7 +4307,7 @@
             "$ref": "./examples/CosmosDBBackupStorageRedundanciesList.json"
           }
         },
-        "description": "Lists all the available backup redundancies in a region.",
+        "description": "Lists all the available backup redundancy types in a region.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
@@ -7828,7 +7828,7 @@
           "description": "An integer representing the time (in hours) that each backup is retained"
         },
         "backupStorageRedundancy": {
-          "description": "Enum to indicate backup residency",
+          "description": "Enum to indicate type of backup residency",
           "type": "string",
           "$ref": "#/definitions/BackupStorageRedundancy"
         }
@@ -7944,7 +7944,7 @@
       }
     },
     "BackupStorageRedundanciesResult": {
-      "description": "Available backup storage redundancies in selected location.",
+      "description": "Available backup storage redundancy types in selected location.",
       "type": "object",
       "properties": {
         "location": {
@@ -7953,13 +7953,13 @@
         },
         "properties": {
           "type": "object",
-          "description": "Available backup storage redundancies.",
+          "description": "Available backup storage redundancy types.",
           "$ref": "#/definitions/BackupStorageRedundancyProperties"
         }
       }
     },
     "BackupStorageRedundancyProperties": {
-      "description": "Available backup storage redundancies.",
+      "description": "Available backup storage redundancy types.",
       "type": "object",
       "properties": {
         "backupStorageRedundancies": {
@@ -7968,12 +7968,12 @@
           "items": {
             "$ref": "#/definitions/BackupStorageRedundancy"
           },
-          "description": "Available backup storage redundancies in list."
+          "description": "Available backup storage types in list."
         }
       }
     },
     "BackupStorageRedundancy": {
-      "description": "Enum to indicate the backup storage redundancy.",
+      "description": "Enum to indicate type of backup storage redundancy.",
       "type": "string",
       "enum": [
         "Geo",
