@@ -813,7 +813,7 @@
         "tags": [
           "Keys"
         ],
-        "operationId": "exportKey",
+        "operationId": "export",
         "summary": "Exports a key.",
         "description": "The export key operation is applicable to all key types. The target key must be marked exportable. This operation requires the keys/export permission.",
         "parameters": [
@@ -860,8 +860,66 @@
           }
         },
         "x-ms-examples": {
-          "Export key": {
-            "$ref": "./examples/ExportKey-example.json"
+          "Export": {
+            "$ref": "./examples/export-example.json"
+          }
+        }
+      }
+    },
+    "/keys/{key-name}/{key-version}/release": {
+      "post": {
+        "tags": [
+          "Keys"
+        ],
+        "operationId": "release",
+        "summary": "Releases a key.",
+        "description": "The release key operation is applicable to all key types. The target key must be marked exportable. This operation requires the keys/release permission.",
+        "parameters": [
+          {
+            "name": "key-name",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the key to get."
+          },
+          {
+            "name": "key-version",
+            "required": true,
+            "in": "path",
+            "type": "string",
+            "description": "Adding the version parameter retrieves a specific version of a key."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "x-ms-client-flatten": true,
+            "schema": {
+              "$ref": "#/definitions/KeyReleaseParameters"
+            },
+            "description": "The parameters for the key release operation."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A key bundle containing the key and its attributes.",
+            "schema": {
+              "$ref": "#/definitions/KeyReleaseResult"
+            }
+          },
+          "default": {
+            "description": "Key Vault error response describing why the operation failed.",
+            "schema": {
+              "$ref": "common.json#/definitions/KeyVaultError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Release": {
+            "$ref": "./examples/release-example.json"
           }
         }
       }
@@ -1033,80 +1091,17 @@
     }
   },
   "definitions": {
-    "KeyReleaseCondition": {
-      "properties": {
-        "claim": {
-          "x-ms-client-name": "claimType",
-          "type": "string",
-          "minLength": 1,
-          "description": "claim type name"
-        },
-        "condition": {
-          "x-ms-client-name": "claimCondition",
-          "type": "string",
-          "minLength": 1,
-          "description": "condition to test",
-          "enum": [
-            "equals"
-          ],
-          "x-ms-enum": {
-            "name": "KeyReleaseConditionCondition",
-            "modelAsString": true,
-            "values": [
-              {
-                "value": "equals",
-                "description": "equals comparison."
-              }
-            ]
-          }
-        },
-        "value": {
-          "type": "string"
-        }
-      }
-    },
-    "KeyReleaseAuthority": {
-      "properties": {
-        "authority": {
-          "x-ms-client-name": "authorityURL",
-          "type": "string",
-          "minLength": 1,
-          "description": "Base URL of the attestation service."
-        },
-        "allOf": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/KeyReleaseCondition",
-            "description": "The set of claim conditions that must be met."
-          }
-        }
-      }
-    },
     "KeyReleasePolicy": {
       "properties": {
-        "version": {
-          "description": "key release policy version",
+        "contentType": {
+          "description": "Content type and version of key release policy",
           "type": "string",
-          "enum": [
-            "0.2"
-          ],
-          "x-ms-enum": {
-            "name": "KeyReleasePolicyVersion",
-            "modelAsString": true,
-            "values": [
-              {
-                "value": "0.2",
-                "description": "Schema version 0.2"
-              }
-            ]
-          }
+          "default": "application/json; charset=utf-8; version=1.0"
         },
-        "anyOf": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/KeyReleaseAuthority",
-            "description": "Authorities."
-          }
+        "data": {
+          "description": "Blob encoding the policy rules under which the key can be released.",
+          "type": "string",
+          "format": "base64url"
         }
       }
     },
@@ -1137,7 +1132,7 @@
               },
               {
                 "value": "EC-HSM",
-                "description": "Elliptic Curve with a private key which is not exportable from the HSM."
+                "description": "Elliptic Curve with a private key which is stored in the HSM."
               },
               {
                 "value": "RSA",
@@ -1145,7 +1140,7 @@
               },
               {
                 "value": "RSA-HSM",
-                "description": "RSA with a private key which is not exportable from the HSM."
+                "description": "RSA with a private key which is stored in the HSM."
               },
               {
                 "value": "oct",
@@ -1153,7 +1148,7 @@
               },
               {
                 "value": "oct-HSM",
-                "description": "Octet sequence (used to represent symmetric keys) which is not exportable from the HSM."
+                "description": "Octet sequence (used to represent symmetric keys) which is stored the HSM."
               }
             ]
           }
@@ -1609,6 +1604,18 @@
     },
     "KeyExportParameters": {
       "properties": {
+        "kek": {
+          "$ref": "#/definitions/JsonWebKey",
+          "description": "The export key encryption Json web key. This key MUST be a RSA key that supports encryption."
+        }
+      },
+      "description": "The export key parameters.",
+      "required": [
+        "kek"
+      ]
+    },
+    "KeyReleaseParameters": {
+      "properties": {
         "env": {
           "x-ms-client-name": "environment",
           "type": "string",
@@ -1616,7 +1623,7 @@
           "description": "The target environment assertion."
         }
       },
-      "description": "The export key parameters.",
+      "description": "The release key parameters.",
       "required": [
         "env"
       ]
@@ -1947,6 +1954,17 @@
         }
       },
       "description": "The backup key result, containing the backup blob."
+    },
+    "KeyReleaseResult": {
+      "properties": {
+        "value": {
+          "type": "string",
+          "format": "base64url",
+          "readOnly": true,
+          "description": "The blob containing the released key."
+        }
+      },
+      "description": "The release result, containing the released key blob."
     }
   },
   "parameters": {
