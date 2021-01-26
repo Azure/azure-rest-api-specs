@@ -71,6 +71,22 @@ directive:
     reason: for this case the result of the proposed change would resemble a boolean anyways
 ```
 
+### Tag: package-2020-10-01-preview
+
+These settings apply only when `--tag=package-2020-10-01-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-10-01-preview'
+input-file:
+- Microsoft.Authorization/preview/2020-10-01-preview/RoleAssignmentSchedule.json
+- Microsoft.Authorization/preview/2020-10-01-preview/RoleAssignmentScheduleInstance.json
+- Microsoft.Authorization/preview/2020-10-01-preview/RoleAssignmentScheduleRequest.json
+- Microsoft.Authorization/preview/2020-10-01-preview/RoleEligibilitySchedule.json
+- Microsoft.Authorization/preview/2020-10-01-preview/RoleEligibilityScheduleInstance.json
+- Microsoft.Authorization/preview/2020-10-01-preview/RoleEligibilityScheduleRequest.json
+- Microsoft.Authorization/preview/2020-10-01-preview/RoleManagementPolicy.json
+- Microsoft.Authorization/preview/2020-10-01-preview/RoleManagementPolicyAssignment.json
+```
+
 ### Tag: package-2020-04-01-preview
 
 These settings apply only when `--tag=package-2020-04-01-preview` is specified on the command line.
