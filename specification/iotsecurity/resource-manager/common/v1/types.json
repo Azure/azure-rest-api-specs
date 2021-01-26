@@ -94,25 +94,68 @@
       "x-ms-azure-resource": true
     },
     "TrackedResource": {
+      "description": "Azure ARM Tracked Resource",
       "type": "object",
-      "description": "Describes an Azure tracked resource.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/Resource"
+      "properties": {
+        "id": {
+          "description": "Gets or sets the identifier.",
+          "type": "string",
+          "readOnly": true
         },
-        {
-          "$ref": "#/definitions/AzureTrackedResourceLocation"
+        "identity": {
+          "$ref": "#/definitions/Identity",
+          "description": "Identity Info on the tracked resource"
         },
-        {
-          "$ref": "#/definitions/Kind"
+        "location": {
+          "description": "Gets or sets the location.",
+          "type": "string"
         },
-        {
-          "$ref": "#/definitions/ETag"
+        "name": {
+          "description": "Gets or sets the name.",
+          "type": "string",
+          "readOnly": true
         },
-        {
-          "$ref": "#/definitions/Tags"
+        "tags": {
+          "description": "Tags on the azure resource.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "type": {
+          "description": "Gets or sets the type.",
+          "type": "string",
+          "readOnly": true
         }
-      ]
+      },
+      "x-ms-azure-resource": true
+    },
+    "Identity": {
+      "description": "The Managed Identity of the resource",
+      "type": "object",
+      "properties": {
+        "principalId": {
+          "description": "Service principal object Id",
+          "type": "string",
+          "readOnly": true
+        },
+        "tenantId": {
+          "description": "Tenant Id",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "Identity Type",
+          "enum": [
+            "SystemAssigned"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "type",
+            "modelAsString": true
+          }
+        }
+      }
     },
     "ETag": {
       "type": "object",
