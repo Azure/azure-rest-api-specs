@@ -143,7 +143,8 @@
             "in": "query",
             "description": "An integer value that specifies how many jobs at most should be returned. The value cannot exceed 100.",
             "required": false,
-            "type": "integer"
+            "type": "integer",
+            "format": "int32"
           },
           {
             "name": "$filter",
@@ -202,7 +203,8 @@
             "in": "query",
             "description": "An integer value that specifies how many jobs at most should be returned. The value cannot exceed 100.",
             "required": false,
-            "type": "integer"
+            "type": "integer",
+            "format": "int32"
           },
           {
             "name": "$filter",
@@ -251,8 +253,11 @@
         "operationId": "Jobs_Get",
         "description": "Gets information about an existing job.",
         "x-ms-examples": {
-          "Get job": {
+          "Get import job": {
             "$ref": "examples/GetJob.json"
+          },
+          "Get export job": {
+            "$ref": "examples/GetExportJob.json"
           }
         },
         "externalDocs": {
@@ -301,8 +306,11 @@
         "operationId": "Jobs_Update",
         "description": "Updates specific properties of a job. You can call this operation to notify the Import/Export service that the hard drives comprising the import or export job have been shipped to the Microsoft data center. It can also be used to cancel an existing job.",
         "x-ms-examples": {
-          "Update job": {
+          "Update import job": {
             "$ref": "examples/UpdateJob.json"
+          },
+          "Update export job": {
+            "$ref": "examples/UpdateExportJob.json"
           }
         },
         "externalDocs": {
@@ -360,8 +368,11 @@
         "operationId": "Jobs_Create",
         "description": "Creates a new job or updates an existing job in the specified subscription.",
         "x-ms-examples": {
-          "Create job": {
+          "Create import job": {
             "$ref": "examples/CreateJob.json"
+          },
+          "Create export job": {
+            "$ref": "examples/CreateExportJob.json"
           }
         },
         "externalDocs": {
@@ -657,7 +668,7 @@
         },
         "deliveryPackage": {
           "description": "Contains information about the package being shipped by the customer to the Microsoft data center. ",
-          "$ref": "#/definitions/PackageInfomation"
+          "$ref": "#/definitions/DeliveryPackageInformation"
         },
         "returnPackage": {
           "description": "Contains information about the package being shipped from the Microsoft data center to the customer to return the drives. The format is the same as the deliveryPackage property above. This property is not included if the drives have not yet been returned. ",
@@ -685,6 +696,7 @@
         },
         "percentComplete": {
           "type": "integer",
+          "format": "int32",
           "description": "Overall percentage completed for the job."
         },
         "incompleteBlobListUri": {
@@ -705,6 +717,65 @@
         "provisioningState": {
           "type": "string",
           "description": "Specifies the provisioning state of the job."
+        },
+        "encryptionKey": {
+          "description": "Contains information about the encryption key.",
+          "$ref": "#/definitions/EncryptionKeyDetails"
+        }
+      }
+    },
+    "EncryptionKeyDetails": {
+      "description": "Specifies the encryption key properties",
+      "properties": {
+        "kekType": {
+          "type": "string",
+          "description": "The type of kek encryption key",
+          "default": "MicrosoftManaged",
+          "enum": [
+            "MicrosoftManaged",
+            "CustomerManaged"
+          ],
+          "x-ms-enum": {
+            "name": "EncryptionKekType",
+            "modelAsString": true
+          }
+        },
+        "kekUrl": {
+          "description": "Specifies the url for kek encryption key. ",
+          "type": "string"
+        },
+        "kekVaultResourceID": {
+          "description": "Specifies the keyvault resource id for kek encryption key. ",
+          "type": "string"
+        }
+      }
+    },
+    "IdentityDetails": {
+      "description": "Specifies the identity properties. ",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The type of identity",
+          "default": "None",
+          "enum": [
+            "None",
+            "SystemAssigned",
+            "UserAssigned"
+          ],
+          "x-ms-enum": {
+            "name": "IdentityType",
+            "modelAsString": true
+          }
+        },
+        "principalId": {
+          "description": "Specifies the principal id for the identity for the job. ",
+          "type": "string",
+          "readOnly": true
+        },
+        "tenantId": {
+          "description": "Specifies the tenant id for the identity for the job. ",
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -736,7 +807,7 @@
             },
             "deliveryPackage": {
               "description": "Contains information about the package being shipped by the customer to the Microsoft data center.",
-              "$ref": "#/definitions/PackageInfomation"
+              "$ref": "#/definitions/DeliveryPackageInformation"
             },
             "logLevel": {
               "type": "string",
@@ -778,6 +849,11 @@
       "x-ms-azure-resource": true,
       "description": "Contains the job information.",
       "properties": {
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "description": "SystemData of ImportExport Jobs.",
+          "readOnly": true
+        },
         "id": {
           "type": "string",
           "description": "Specifies the resource identifier of the job.",
@@ -804,6 +880,10 @@
         "properties": {
           "$ref": "#/definitions/JobDetails",
           "description": "Specifies the job properties"
+        },
+        "identity": {
+          "$ref": "#/definitions/IdentityDetails",
+          "description": "Specifies the job identity details"
         }
       }
     },
@@ -893,6 +973,10 @@
               "description": "The phone number for the Azure data center. ",
               "type": "string"
             },
+            "additionalShippingInformation": {
+              "description": "Additional shipping information for customer, specific to datacenter to which customer should send their disks.",
+              "type": "string"
+            },
             "supportedCarriers": {
               "type": "array",
               "description": "A list of carriers that are supported at this location. ",
@@ -980,14 +1064,6 @@
     },
     "ShippingInformation": {
       "description": "Contains information about the Microsoft datacenter to which the drives should be shipped.",
-      "required": [
-        "recipientName",
-        "streetAddress1",
-        "city",
-        "stateOrProvince",
-        "postalCode",
-        "countryOrRegion"
-      ],
       "properties": {
         "recipientName": {
           "type": "string",
@@ -1020,6 +1096,11 @@
         "phone": {
           "type": "string",
           "description": "Phone number of the recipient of the returned drives."
+        },
+        "additionalInformation": {
+          "type": "string",
+          "description": "Additional shipping information for customer, specific to datacenter to which customer should send their disks.",
+          "readOnly": true
         }
       }
     },
@@ -1042,6 +1123,33 @@
         },
         "driveCount": {
           "type": "integer",
+          "format": "int32",
+          "description": "The number of drives included in the package."
+        },
+        "shipDate": {
+          "type": "string",
+          "description": "The date when the package is shipped."
+        }
+      }
+    },
+    "DeliveryPackageInformation": {
+      "description": "Contains information about the delivery package being shipped by the customer to the Microsoft data center.",
+      "required": [
+        "carrierName",
+        "trackingNumber"
+      ],
+      "properties": {
+        "carrierName": {
+          "type": "string",
+          "description": "The name of the carrier that is used to ship the import or export drives."
+        },
+        "trackingNumber": {
+          "type": "string",
+          "description": "The tracking number of the package."
+        },
+        "driveCount": {
+          "type": "integer",
+          "format": "int64",
           "description": "The number of drives included in the package."
         },
         "shipDate": {
@@ -1096,6 +1204,7 @@
         },
         "percentComplete": {
           "type": "integer",
+          "format": "int64",
           "description": "Percentage completed for the drive. "
         },
         "verboseLogUri": {
@@ -1140,7 +1249,7 @@
             }
           }
         },
-        "blobListblobPath": {
+        "blobListBlobPath": {
           "type": "string",
           "description": "The relative URI to the block blob that contains the list of blob paths or blob path prefixes as defined above, beginning with the container name. If the blob is in root container, the URI must begin with $root. "
         }
