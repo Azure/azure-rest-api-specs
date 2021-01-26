@@ -87,15 +87,6 @@
         },
         "parameters": [
           {
-            "name": "parameters",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/PolicyExemption"
-            },
-            "description": "Parameters for the policy exemption."
-          },
-          {
             "$ref": "#/parameters/ScopeParameter"
           },
           {
@@ -103,6 +94,15 @@
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PolicyExemption"
+            },
+            "description": "Parameters for the policy exemption."
           }
         ],
         "responses": {
@@ -505,8 +505,7 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "The ID of the target subscription.",
-      "x-ms-parameter-location": "method"
+      "description": "The ID of the target subscription."
     },
     "ResourceGroupNameParameter": {
       "name": "resourceGroupName",
