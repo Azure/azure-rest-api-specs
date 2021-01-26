@@ -79,6 +79,9 @@
         ],
         "summary": "Create Confluent Marketplace agreement in the subscription.",
         "operationId": "MarketplaceAgreements_Create",
+        "consumes": [
+          "application/json"
+        ],
         "produces": [
           "application/json"
         ],
@@ -89,6 +92,7 @@
           {
             "in": "body",
             "name": "body",
+            "description": "Confluent Marketplace Agreement resource",
             "schema": {
               "$ref": "#/definitions/ConfluentAgreementResource"
             }
@@ -516,13 +520,14 @@
           "readOnly": true
         },
         "properties": {
+          "x-ms-client-flatten": true,
           "$ref": "#/definitions/ConfluentAgreementProperties",
           "description": "Represents the properties of the resource."
         }
       }
     },
     "ConfluentAgreementResourceListResponse": {
-      "description": "Response of a agreements operation.",
+      "description": "Response of a list operation.",
       "type": "object",
       "properties": {
         "value": {
@@ -571,6 +576,10 @@
         "display": {
           "description": "The object that represents the operation.",
           "$ref": "#/definitions/OperationDisplay"
+        },
+        "isDataAction": {
+          "description": "Indicates whether the operation is a data action",
+          "type": "boolean"
         }
       }
     },
