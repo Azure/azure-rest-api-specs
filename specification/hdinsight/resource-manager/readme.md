@@ -32,7 +32,7 @@ azure-arm: true
 tag: package-2018-06-preview
 ```
 
-## Suppression
+### Suppression
 ``` yaml
 directive:
   - suppress: DefinitionsPropertiesNamesCamelCase
