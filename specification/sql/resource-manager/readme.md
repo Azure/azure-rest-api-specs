@@ -24,12 +24,110 @@ These are the global settings for the Sql API.
 title: SqlManagementClient
 description: 'The Azure SQL Database management API provides a RESTful set of web services that interact with Azure SQL Database services to manage your databases. The API enables you to create, retrieve, update, and delete databases.'
 openapi-type: arm
-tag: package-composite-v4
+tag: package-composite-v5
 ```
 
 ## Composite packages
 
 The following packages may be composed from multiple api-versions.
+
+### Tag: package-composite-v5
+
+These settings apply only when `--tag=package-composite-v5` is specified on the command line.
+
+This section contains the "composite-v5" set of APIs, which is composed from a selection of api-versions that will remain backwards compatible with "v5" clients.
+
+APIs must only be added to this section when the API is publicly available in at least 1 production region and at least 1 generated client has been tested end-to-end.
+
+Differences in v5 (compared to v4):
+
+* Added new API for databases
+
+  * `-2020-11-01/LongTermRetentionBackups.json`
+
+``` yaml $(tag) == 'package-composite-v5'
+input-file:
+- Microsoft.Sql/stable/2014-04-01/backups.json
+- Microsoft.Sql/stable/2014-04-01/connectionPolicies.json
+- Microsoft.Sql/stable/2014-04-01/databaseSecurityAlertPolicies.json
+- Microsoft.Sql/stable/2014-04-01/dataMasking.json
+- Microsoft.Sql/stable/2014-04-01/firewallRules.json
+- Microsoft.Sql/stable/2014-04-01/geoBackupPolicies.json
+- Microsoft.Sql/stable/2014-04-01/metrics.json
+- Microsoft.Sql/stable/2014-04-01/recommendedElasticPoolsDecoupled.json
+- Microsoft.Sql/stable/2014-04-01/replicationLinks.json
+- Microsoft.Sql/stable/2014-04-01/serverCommunicationLinks.json
+- Microsoft.Sql/stable/2014-04-01/serviceObjectives.json
+- Microsoft.Sql/stable/2014-04-01/sql.core.json
+- Microsoft.Sql/stable/2014-04-01/usages.json
+- Microsoft.Sql/preview/2015-05-01-preview/databaseAutomaticTuning.json
+- Microsoft.Sql/preview/2015-05-01-preview/encryptionProtectors.json
+- Microsoft.Sql/preview/2015-05-01-preview/failoverGroups.json
+- Microsoft.Sql/preview/2015-05-01-preview/operations.json
+- Microsoft.Sql/preview/2015-05-01-preview/serverKeys.json
+- Microsoft.Sql/preview/2015-05-01-preview/syncAgents.json
+- Microsoft.Sql/preview/2015-05-01-preview/usages.json
+- Microsoft.Sql/preview/2015-05-01-preview/virtualclusters.json
+- Microsoft.Sql/preview/2015-05-01-preview/virtualNetworkRules.json
+- Microsoft.Sql/preview/2017-03-01-preview/blobAuditing.json
+- Microsoft.Sql/preview/2017-03-01-preview/databaseVulnerabilityAssessmentBaselines.json
+- Microsoft.Sql/preview/2017-03-01-preview/databaseVulnerabilityAssessments.json
+- Microsoft.Sql/preview/2017-03-01-preview/jobs.json
+- Microsoft.Sql/preview/2017-03-01-preview/longTermRetention.json
+- Microsoft.Sql/preview/2017-03-01-preview/ManagedBackupShortTermRetention.json
+- Microsoft.Sql/preview/2017-03-01-preview/ManagedRestorableDroppedDatabaseBackupShortTermRetenion.json
+- Microsoft.Sql/preview/2017-03-01-preview/serverAutomaticTuning.json
+- Microsoft.Sql/preview/2017-03-01-preview/serverDnsAliases.json
+- Microsoft.Sql/preview/2017-03-01-preview/serverSecurityAlertPolicies.json
+- Microsoft.Sql/preview/2017-03-01-preview/restorableDroppedManagedDatabases.json
+- Microsoft.Sql/preview/2017-03-01-preview/restorePoints.json
+- Microsoft.Sql/preview/2017-03-01-preview/ManagedDatabaseSecurityAlertPolicies.json
+- Microsoft.Sql/preview/2017-03-01-preview/ManagedServerSecurityAlertPolicy.json
+- Microsoft.Sql/preview/2017-03-01-preview/SensitivityLabels.json
+- Microsoft.Sql/preview/2017-03-01-preview/managedInstanceAdministrators.json
+- Microsoft.Sql/preview/2017-10-01-preview/cancelOperations.json
+- Microsoft.Sql/preview/2017-10-01-preview/cancelPoolOperations.json
+- Microsoft.Sql/preview/2017-10-01-preview/databaseVulnerabilityAssessmentScans.json
+- Microsoft.Sql/preview/2017-10-01-preview/managedDatabaseVulnerabilityAssesmentRuleBaselines.json
+- Microsoft.Sql/preview/2017-10-01-preview/managedDatabaseVulnerabilityAssessmentScans.json
+- Microsoft.Sql/preview/2017-10-01-preview/managedDatabaseVulnerabilityAssessments.json
+- Microsoft.Sql/preview/2017-10-01-preview/instanceFailoverGroups.json
+- Microsoft.Sql/preview/2017-10-01-preview/TdeCertificates.json
+- Microsoft.Sql/preview/2017-10-01-preview/ManagedInstanceTdeCertificates.json
+- Microsoft.Sql/preview/2017-10-01-preview/ManagedInstanceKeys.json
+- Microsoft.Sql/preview/2017-10-01-preview/ManagedInstanceEncryptionProtectors.json
+- Microsoft.Sql/preview/2017-10-01-preview/recoverableManagedDatabases.json
+- Microsoft.Sql/preview/2017-10-01-preview/shortTermRetentionPolicies.json
+- Microsoft.Sql/preview/2018-06-01-preview/ManagedInstanceVulnerabilityAssessments.json
+- Microsoft.Sql/preview/2018-06-01-preview/ServerVulnerabilityAssessments.json
+- Microsoft.Sql/preview/2018-06-01-preview/managedDatabaseSensitivityLabels.json
+- Microsoft.Sql/preview/2018-06-01-preview/instancePools.json
+- Microsoft.Sql/preview/2018-06-01-preview/usages.json
+- Microsoft.Sql/preview/2018-06-01-preview/PrivateEndpointConnections.json
+- Microsoft.Sql/preview/2018-06-01-preview/PrivateLinkResources.json
+- Microsoft.Sql/preview/2019-06-01-preview/servers.json
+- Microsoft.Sql/preview/2018-06-01-preview/capabilities.json
+- Microsoft.Sql/preview/2018-06-01-preview/LongTermRetentionManagedInstanceBackups.json
+- Microsoft.Sql/preview/2018-06-01-preview/ManagedInstanceLongTermRetentionPolicies.json
+- Microsoft.Sql/preview/2019-06-01-preview/WorkloadGroups.json
+- Microsoft.Sql/preview/2019-06-01-preview/WorkloadClassifiers.json
+- Microsoft.Sql/preview/2019-06-01-preview/managedInstanceOperations.json
+- Microsoft.Sql/preview/2019-06-01-preview/ServerAzureADAdministrators.json
+- Microsoft.Sql/preview/2019-06-01-preview/syncGroups.json
+- Microsoft.Sql/preview/2019-06-01-preview/syncMembers.json
+- Microsoft.Sql/preview/2020-02-02-preview/ManagedDatabases.json
+- Microsoft.Sql/preview/2020-02-02-preview/ServerAzureADOnlyAuthentications.json
+- Microsoft.Sql/preview/2020-02-02-preview/ManagedInstances.json
+- Microsoft.Sql/preview/2020-02-02-preview/ManagedInstanceAzureADOnlyAuthentications.json
+- Microsoft.Sql/preview/2020-02-02-preview/ServerTrustGroups.json
+- Microsoft.Sql/preview/2020-08-01-preview/ElasticPools.json
+- Microsoft.Sql/preview/2020-08-01-preview/ServerDevOpsAudit.json
+- Microsoft.Sql/preview/2020-11-01-preview/LongTermRetentionBackups.json
+
+# Needed when there is more than one input file
+override-info:
+  title: SqlManagementClient
+```
 
 ### Tag: package-composite-v4
 
@@ -579,6 +677,26 @@ override-info:
 ## Pure package versions
 
 The following packages are each composed of all apis from only one api-version.
+
+### Tag: package-pure-2020-11-preview
+
+These settings apply only when `--tag=package-pure-2020-11-preview` is specified on the command line.
+
+This section contains all input swagger files for version 2020-08-01-preview. All APIs of that version must be added this section when the API is ready for production.
+
+APIs must only be added to this section when the API is publicly available in at least 1 production region and at least 1 generated client has been tested end-to-end.
+
+These can be regenerated by running the following PowerShell script from this readme file's folder: `dir .\Microsoft.Sql\preview\2020-11-01-preview\ -File | Resolve-Path -Relative | % { " - $_".Replace("\", "/") }`
+
+``` yaml $(tag) == 'package-pure-2020-11-preview'
+input-file:
+
+ - ./Microsoft.Sql/preview/2020-11-01-preview/Databases.json
+
+# Needed when there is more than one input file
+override-info:
+  title: SqlManagementClient
+  ```
 
 ### Tag: package-pure-2020-08-preview
 
@@ -1132,4 +1250,3 @@ directive:
 ## AzureResourceSchema
 
 See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
-
