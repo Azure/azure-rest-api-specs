@@ -204,6 +204,9 @@
           },
           "200": {
             "description": "Ok response definition."
+          },
+          "204": {
+            "description": "No Content response definition."
           }
         },
         "x-ms-long-running-operation": true
@@ -858,6 +861,7 @@
         },
         "diskSizeGB": {
           "type": "integer",
+          "format": "int32",
           "description": "ReadOnly. The DiskSize in GB. Do not set this value.",
           "readOnly": true
         }
@@ -956,6 +960,10 @@
             "$ref": "./scriptActions.json#/definitions/ScriptAction"
           },
           "description": "The list of script actions on the role."
+        },
+        "encryptDataDisks": {
+          "type": "boolean",
+          "description": "Indicates whether encrypt the data disks."
         }
       },
       "description": "Describes a role on the cluster."
@@ -1016,6 +1024,19 @@
         }
       },
       "description": "The storage profile."
+    },
+    "ExcludedServicesConfig": {
+      "properties": {
+        "excludedServicesConfigId": {
+          "type": "string",
+          "description": "The config id of excluded services."
+        },
+        "excludedServicesList": {
+          "type": "string",
+          "description": "The list of excluded services."
+        }
+      },
+      "description": "The configuration that services will be excluded when creating cluster."
     },
     "NetworkProperties": {
       "description": "The network properties.",
@@ -1211,6 +1232,10 @@
           "type": "integer",
           "format": "int32",
           "description": "The port to connect to."
+        },
+        "privateIPAddress": {
+          "type": "string",
+          "description": "The private ip address of the endpoint."
         }
       }
     },
@@ -1220,6 +1245,10 @@
         "clusterVersion": {
           "type": "string",
           "description": "The version of the cluster."
+        },
+        "clusterHdpVersion": {
+          "type": "string",
+          "description": "The hdp version of the cluster."
         },
         "osType": {
           "type": "string",
@@ -1314,9 +1343,17 @@
           "$ref": "#/definitions/EncryptionInTransitProperties",
           "description": "The encryption-in-transit properties."
         },
+        "storageProfile": {
+          "$ref": "#/definitions/StorageProfile",
+          "description": "The storage profile."
+        },
         "minSupportedTlsVersion": {
           "type": "string",
           "description": "The minimal supported tls version."
+        },
+        "excludedServicesConfig": {
+          "$ref": "#/definitions/ExcludedServicesConfig",
+          "description": "The excluded services config."
         },
         "networkProperties": {
           "$ref": "#/definitions/NetworkProperties",
@@ -1547,6 +1584,10 @@
                 "readOnly": true,
                 "type": "string",
                 "description": "The client id of user assigned identity."
+              },
+              "tenantId": {
+                "type": "string",
+                "description": "The tenant id of user assigned identity."
               }
             }
           },

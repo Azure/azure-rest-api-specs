@@ -1169,6 +1169,9 @@
       "type": "object",
       "description": "Reservation purchase details",
       "properties": {
+        "properties": {
+          "$ref": "#/definitions/PurchaseRequest"
+        },
         "billingCurrencyTotal": {
           "$ref": "#/definitions/Price"
         }
@@ -1181,6 +1184,13 @@
         "reservationOrderId": {
           "type": "string",
           "description": "Fully qualified id of the ReservationOrder being purchased"
+        },
+        "reservationId": {
+          "type": "string",
+          "description": "Fully qualified id of the Reservation being purchased. This value is only guaranteed to be non-null if the purchase is successful."
+        },
+        "properties": {
+          "$ref": "#/definitions/PurchaseRequest"
         },
         "billingCurrencyTotal": {
           "$ref": "#/definitions/Price"
