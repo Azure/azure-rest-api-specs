@@ -416,13 +416,18 @@
           "type": "boolean",
           "description": "Whether compute isolation is required or not."
         },
-        "haveLibraryRequirementsChanged": {
-          "type": "boolean",
-          "description": "Whether library requirements changed."
-        },
         "sessionLevelPackagesEnabled": {
           "type": "boolean",
           "description": "Whether session level packages enabled."
+        },
+        "cacheSize": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The cache size"
+        },
+        "dynamicExecutorAllocation": {
+          "$ref": "#/definitions/DynamicExecutorAllocation",
+          "description": "Dynamic Executor Allocation"
         },
         "sparkEventsFolder": {
           "type": "string",
@@ -514,6 +519,16 @@
         "enabled": {
           "type": "boolean",
           "description": "Whether auto-pausing is enabled for the Big Data pool."
+        }
+      }
+    },
+    "DynamicExecutorAllocation": {
+      "type": "object",
+      "description": "Dynamic Executor Allocation Properties",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "Indicates whether Dynamic Executor Allocation is enabled or not."
         }
       }
     },

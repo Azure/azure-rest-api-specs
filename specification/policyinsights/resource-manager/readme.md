@@ -40,7 +40,7 @@ model-validator: true
 message-format: json
 ```
 
-## Suppression
+### Suppression
 ``` yaml
 directive:
   - suppress: EnumInsteadOfBoolean

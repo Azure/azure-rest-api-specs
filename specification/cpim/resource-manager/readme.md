@@ -2,7 +2,7 @@
 
 > see https://aka.ms/autorest
 
-This is the AutoRest configuration file for cpim.
+This is the AutoRest configuration file for azureadb2c.
 
 ## Getting Started
 
@@ -22,11 +22,22 @@ For other options on installation see [Installing AutoRest](https://aka.ms/autor
 
 ### Basic Information
 
-These are the global settings for the cpim.
+These are the global settings for the azureadb2c APIs.
 
 ```yaml
+title: CPIMConfigurationClient
+description: CPIM Configuration Client 
 openapi-type: arm
 tag: package-2020-05-01-preview
+```
+
+### Tag: package-2019-01-01-preview
+
+These settings apply only when `--tag=package-2019-01-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2019-01-01-preview'
+input-file:
+  - Microsoft.AzureActiveDirectory/preview/2019-01-01-preview/cpimTenant.json
 ```
 
 ### Tag: package-2020-05-01-preview
@@ -50,15 +61,8 @@ This is not used by Autorest itself.
 ```yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-python
-  - repo: azure-sdk-for-java
+  - repo: azure-sdk-for-python-track2  
   - repo: azure-sdk-for-go
-  - repo: azure-sdk-for-js
-  - repo: azure-sdk-for-ruby
-    after_scripts:
-      - bundle install && rake arm:regen_all_profiles['azure_mgmt_cpim']
-  - repo: azure-resource-manager-schemas
-    after_scripts:
-      - node sdkauto_afterscript.js cpim/resource-manager
 ```
 
 ## Go
@@ -69,19 +73,6 @@ See configuration in [readme.go.md](./readme.go.md)
 
 See configuration in [readme.python.md](./readme.python.md)
 
-## Ruby
-
-See configuration in [readme.ruby.md](./readme.ruby.md)
-
-## TypeScript
-
-See configuration in [readme.typescript.md](./readme.typescript.md)
-
 ## CSharp
 
 See configuration in [readme.csharp.md](./readme.csharp.md)
-
-## AzureResourceSchema
-
-See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
-
