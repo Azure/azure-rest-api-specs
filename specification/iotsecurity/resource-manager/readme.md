@@ -1,8 +1,8 @@
-# Security Center
+# IoT Security
 
 > see https://aka.ms/autorest
 
-This is the AutoRest configuration file for Security.
+This is the AutoRest configuration file for IoT Security.
 
 ---
 
@@ -26,37 +26,28 @@ To see additional help and options, run:
 directive:
   - suppress: PageableOperation
     from: iotDefenderSettings.json
-    where: '$.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Security/iotDefenderSettings"].get'
+    where: '$.paths["/subscriptions/{subscriptionId}/providers/Microsoft.IoTSecurity/iotDefenderSettings"].get'
     reason: The list returns limited number of items
 ```
 
 ### Basic Information
 
-These are the global settings for the Security API.
+These are the global settings for the IoT Security API.
 
 ``` yaml
 title: IoTSecurity
 description: API spec for Microsoft.IoTSecurity (Azure Defender for IoT) resource provider
 openapi-type: arm
-tag: package-composite-v3
+tag: 2021-02-01-preview
 ```
 
-## Composite packages
+### Tag: 2021-02-01-preview
 
-The following packages may be composed from multiple api-versions.
+These settings apply only when `--tag=2021-02-01-preview` is specified on the command line.
 
-
-### Tag: package-composite-v1
-
-These settings apply only when `--tag=package-composite-v1` is specified on the command line.
-
-``` yaml $(tag) == 'package-composite-v1'
+``` yaml $(tag) == '2021-02-01-preview'
 input-file:
-- Microsoft.Security/preview/2021-02-01-preview/iotDefenderSettings.json
-
-# Needed when there is more than one input file
-override-info:
-  title: IoTSecurity
+- Microsoft.IoTSecurity/preview/2021-02-01-preview/iotDefenderSettings.json
 ```
 
 ---
