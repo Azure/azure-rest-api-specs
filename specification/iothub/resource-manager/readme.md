@@ -26,9 +26,8 @@ These are the global settings for the IotHub API.
 
 ``` yaml
 openapi-type: arm
-
 tag: package-2020-08-31
-
+```
 
 ### Tag: package-2020-08-31
 
