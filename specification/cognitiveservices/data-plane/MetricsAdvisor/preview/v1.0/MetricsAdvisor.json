@@ -21,15 +21,6 @@
             "description": "Success",
             "schema": {
               "$ref": "#/definitions/UsageStats"
-            },
-            "examples": {
-              "application/json": {
-                "timestamp": "2020-03-01T00:00:00Z",
-                "activeSeriesCount": 100,
-                "allSeriesCount": 1000,
-                "metricsCount": 10,
-                "dataFeedCount": 5
-              }
             }
           },
           "default": {
@@ -71,57 +62,6 @@
             "description": "Success",
             "schema": {
               "$ref": "#/definitions/AnomalyAlertingConfiguration"
-            },
-            "examples": {
-              "application/json": {
-                "anomalyAlertingConfigurationId": "44444444-4444-4444-4444-000000000001",
-                "name": "alerting configuration name",
-                "description": "this is an anomaly alerting configuration",
-                "crossMetricsOperator": "AND",
-                "hookIds": [
-                  "00000000-0000-0000-0000-000000000001"
-                ],
-                "metricAlertingConfigurations": [
-                  {
-                    "anomalyDetectionConfigurationId": "33333333-3333-3333-3333-000000000001",
-                    "anomalyScopeType": "All",
-                    "negationOperation": false,
-                    "severityFilter": {
-                      "minAlertSeverity": "Medium",
-                      "maxAlertSeverity": "High"
-                    },
-                    "snoozeFilter": {
-                      "autoSnooze": 0,
-                      "snoozeScope": "Series",
-                      "onlyForSuccessive": true
-                    }
-                  },
-                  {
-                    "anomalyDetectionConfigurationId": "33333333-3333-3333-3333-000000000002",
-                    "anomalyScopeType": "Dimension",
-                    "negationOperation": false,
-                    "dimensionAnomalyScope": {
-                      "dimension": {
-                        "city": "Beijing"
-                      }
-                    },
-                    "severityFilter": {
-                      "minAlertSeverity": "Low",
-                      "maxAlertSeverity": "High"
-                    },
-                    "snoozeFilter": {
-                      "autoSnooze": 0,
-                      "snoozeScope": "Series",
-                      "onlyForSuccessive": true
-                    },
-                    "valueFilter": {
-                      "lower": 0.0,
-                      "upper": 1000.0,
-                      "direction": "Both"
-                    }
-                  }
-                ]
-              }
             }
           },
           "default": {
@@ -316,18 +256,6 @@
             "description": "Success",
             "schema": {
               "$ref": "#/definitions/AlertResultList"
-            },
-            "examples": {
-              "application/json": {
-                "value": [
-                  {
-                    "alertId": "aaaaaaaaaaaa",
-                    "timestamp": "2020-01-01T00:00:00Z",
-                    "createdTime": "2020-03-01T00:00:00Z",
-                    "modifiedTime": "2020-03-01T00:00:00Z"
-                  }
-                ]
-              }
             }
           },
           "default": {
@@ -393,27 +321,6 @@
             "description": "Success",
             "schema": {
               "$ref": "#/definitions/AnomalyResultList"
-            },
-            "examples": {
-              "application/json": {
-                "value": [
-                  {
-                    "metricId": "22222222-2222-2222-2222-000000000001",
-                    "anomalyDetectionConfigurationId": "33333333-3333-3333-3333-000000000001",
-                    "timestamp": "2020-01-01T00:00:00Z",
-                    "createdTime": "2020-03-01T00:00:00Z",
-                    "modifiedTime": "2020-03-01T00:00:00Z",
-                    "dimension": {
-                      "category": "__SUM__",
-                      "city": "Beijing"
-                    },
-                    "property": {
-                      "anomalySeverity": "High",
-                      "anomalyStatus": "Active"
-                    }
-                  }
-                ]
-              }
             }
           },
           "default": {
@@ -479,29 +386,6 @@
             "description": "Success",
             "schema": {
               "$ref": "#/definitions/IncidentResultList"
-            },
-            "examples": {
-              "application/json": {
-                "value": [
-                  {
-                    "metricId": "22222222-2222-2222-2222-000000000001",
-                    "anomalyDetectionConfigurationId": "33333333-3333-3333-3333-000000000001",
-                    "incidentId": "iiiiiiiiiiii",
-                    "startTime": "2020-01-01T00:00:00Z",
-                    "lastTime": "2020-02-01T00:00:00Z",
-                    "rootNode": {
-                      "dimension": {
-                        "category": "__SUM__",
-                        "city": "Beijing"
-                      }
-                    },
-                    "property": {
-                      "maxSeverity": "High",
-                      "incidentStatus": "Active"
-                    }
-                  }
-                ]
-              }
             }
           },
           "default": {
@@ -546,119 +430,6 @@
             "description": "Success",
             "schema": {
               "$ref": "#/definitions/AnomalyDetectionConfiguration"
-            },
-            "examples": {
-              "application/json": {
-                "anomalyDetectionConfigurationId": "33333333-3333-3333-3333-000000000001",
-                "name": "Anomaly detection configuration name",
-                "description": "Anomaly detection configuration description",
-                "metricId": "22222222-2222-2222-2222-000000000001",
-                "wholeMetricConfiguration": {
-                  "conditionOperator": "AND",
-                  "smartDetectionCondition": {
-                    "sensitivity": 91.0,
-                    "anomalyDetectorDirection": "Both",
-                    "suppressCondition": {
-                      "minNumber": 1,
-                      "minRatio": 100.0
-                    }
-                  },
-                  "hardThresholdCondition": {
-                    "lowerBound": 1.0,
-                    "upperBound": 100.0,
-                    "anomalyDetectorDirection": "Both",
-                    "suppressCondition": {
-                      "minNumber": 1,
-                      "minRatio": 100.0
-                    }
-                  },
-                  "changeThresholdCondition": {
-                    "changePercentage": 5.0,
-                    "shiftPoint": 1,
-                    "withinRange": false,
-                    "anomalyDetectorDirection": "Both",
-                    "suppressCondition": {
-                      "minNumber": 1,
-                      "minRatio": 100.0
-                    }
-                  }
-                },
-                "dimensionGroupOverrideConfigurations": [
-                  {
-                    "group": {
-                      "dimension": {
-                        "city": "Beijing"
-                      }
-                    },
-                    "conditionOperator": "AND",
-                    "smartDetectionCondition": {
-                      "sensitivity": 91.0,
-                      "anomalyDetectorDirection": "Both",
-                      "suppressCondition": {
-                        "minNumber": 1,
-                        "minRatio": 100.0
-                      }
-                    },
-                    "hardThresholdCondition": {
-                      "lowerBound": 1.0,
-                      "upperBound": 100.0,
-                      "anomalyDetectorDirection": "Both",
-                      "suppressCondition": {
-                        "minNumber": 1,
-                        "minRatio": 100.0
-                      }
-                    },
-                    "changeThresholdCondition": {
-                      "changePercentage": 5.0,
-                      "shiftPoint": 1,
-                      "withinRange": false,
-                      "anomalyDetectorDirection": "Both",
-                      "suppressCondition": {
-                        "minNumber": 1,
-                        "minRatio": 100.0
-                      }
-                    }
-                  }
-                ],
-                "seriesOverrideConfigurations": [
-                  {
-                    "series": {
-                      "dimension": {
-                        "category": "Jewelry",
-                        "city": "Beijing"
-                      }
-                    },
-                    "conditionOperator": "AND",
-                    "smartDetectionCondition": {
-                      "sensitivity": 91.0,
-                      "anomalyDetectorDirection": "Both",
-                      "suppressCondition": {
-                        "minNumber": 1,
-                        "minRatio": 100.0
-                      }
-                    },
-                    "hardThresholdCondition": {
-                      "lowerBound": 1.0,
-                      "upperBound": 100.0,
-                      "anomalyDetectorDirection": "Both",
-                      "suppressCondition": {
-                        "minNumber": 1,
-                        "minRatio": 100.0
-                      }
-                    },
-                    "changeThresholdCondition": {
-                      "changePercentage": 5.0,
-                      "shiftPoint": 1,
-                      "withinRange": false,
-                      "anomalyDetectorDirection": "Both",
-                      "suppressCondition": {
-                        "minNumber": 1,
-                        "minRatio": 100.0
-                      }
-                    }
-                  }
-                ]
-              }
             }
           },
           "default": {
@@ -827,61 +598,6 @@
             "description": "Success",
             "schema": {
               "$ref": "#/definitions/AnomalyAlertingConfigurationList"
-            },
-            "examples": {
-              "application/json": {
-                "value": [
-                  {
-                    "anomalyAlertingConfigurationId": "44444444-4444-4444-4444-000000000001",
-                    "name": "alerting configuration name",
-                    "description": "this is an anomaly alerting configuration",
-                    "crossMetricsOperator": "AND",
-                    "hookIds": [
-                      "00000000-0000-0000-0000-000000000001"
-                    ],
-                    "metricAlertingConfigurations": [
-                      {
-                        "anomalyDetectionConfigurationId": "33333333-3333-3333-3333-000000000001",
-                        "anomalyScopeType": "All",
-                        "negationOperation": false,
-                        "severityFilter": {
-                          "minAlertSeverity": "Medium",
-                          "maxAlertSeverity": "High"
-                        },
-                        "snoozeFilter": {
-                          "autoSnooze": 0,
-                          "snoozeScope": "Series",
-                          "onlyForSuccessive": true
-                        }
-                      },
-                      {
-                        "anomalyDetectionConfigurationId": "33333333-3333-3333-3333-000000000002",
-                        "anomalyScopeType": "Dimension",
-                        "negationOperation": false,
-                        "dimensionAnomalyScope": {
-                          "dimension": {
-                            "city": "Beijing"
-                          }
-                        },
-                        "severityFilter": {
-                          "minAlertSeverity": "Low",
-                          "maxAlertSeverity": "High"
-                        },
-                        "snoozeFilter": {
-                          "autoSnooze": 0,
-                          "snoozeScope": "Series",
-                          "onlyForSuccessive": true
-                        },
-                        "valueFilter": {
-                          "lower": 0.0,
-                          "upper": 1000.0,
-                          "direction": "Both"
-                        }
-                      }
-                    ]
-                  }
-                ]
-              }
             }
           },
           "default": {
@@ -935,41 +651,6 @@
             "description": "Success",
             "schema": {
               "$ref": "#/definitions/SeriesResultList"
-            },
-            "examples": {
-              "application/json": {
-                "value": [
-                  {
-                    "series": {
-                      "dimension": {
-                        "category": "Jewelry",
-                        "city": "Beijing"
-                      }
-                    },
-                    "timestampList": [
-                      "2020-01-01T00:00:00Z"
-                    ],
-                    "valueList": [
-                      108.3
-                    ],
-                    "isAnomalyList": [
-                      false
-                    ],
-                    "periodList": [
-                      0
-                    ],
-                    "expectedValueList": [
-                      108.0
-                    ],
-                    "lowerBoundaryList": [
-                      100.1
-                    ],
-                    "upperBoundaryList": [
-                      112.8
-                    ]
-                  }
-                ]
-              }
             }
           },
           "default": {
@@ -1037,27 +718,6 @@
             "description": "Success",
             "schema": {
               "$ref": "#/definitions/AnomalyResultList"
-            },
-            "examples": {
-              "application/json": {
-                "value": [
-                  {
-                    "metricId": "22222222-2222-2222-2222-000000000001",
-                    "anomalyDetectionConfigurationId": "33333333-3333-3333-3333-000000000001",
-                    "timestamp": "2020-01-01T00:00:00Z",
-                    "createdTime": "2020-03-01T00:00:00Z",
-                    "modifiedTime": "2020-03-01T00:00:00Z",
-                    "dimension": {
-                      "category": "__SUM__",
-                      "city": "Beijing"
-                    },
-                    "property": {
-                      "anomalySeverity": "High",
-                      "anomalyStatus": "Active"
-                    }
-                  }
-                ]
-              }
             }
           },
           "default": {
@@ -1128,13 +788,6 @@
             "description": "Success",
             "schema": {
               "$ref": "#/definitions/AnomalyDimensionList"
-            },
-            "examples": {
-              "application/json": {
-                "value": [
-                  "Jewelry"
-                ]
-              }
             }
           },
           "default": {
@@ -1198,29 +851,6 @@
             "description": "Success",
             "schema": {
               "$ref": "#/definitions/IncidentResultList"
-            },
-            "examples": {
-              "application/json": {
-                "value": [
-                  {
-                    "metricId": "22222222-2222-2222-2222-000000000001",
-                    "anomalyDetectionConfigurationId": "33333333-3333-3333-3333-000000000001",
-                    "incidentId": "iiiiiiiiiiii",
-                    "startTime": "2020-01-01T00:00:00Z",
-                    "lastTime": "2020-02-01T00:00:00Z",
-                    "rootNode": {
-                      "dimension": {
-                        "category": "__SUM__",
-                        "city": "Beijing"
-                      }
-                    },
-                    "property": {
-                      "maxSeverity": "High",
-                      "incidentStatus": "Active"
-                    }
-                  }
-                ]
-              }
             }
           },
           "default": {
@@ -1276,29 +906,6 @@
             "description": "Success",
             "schema": {
               "$ref": "#/definitions/IncidentResultList"
-            },
-            "examples": {
-              "application/json": {
-                "value": [
-                  {
-                    "metricId": "22222222-2222-2222-2222-000000000001",
-                    "anomalyDetectionConfigurationId": "33333333-3333-3333-3333-000000000001",
-                    "incidentId": "iiiiiiiiiiii",
-                    "startTime": "2020-01-01T00:00:00Z",
-                    "lastTime": "2020-02-01T00:00:00Z",
-                    "rootNode": {
-                      "dimension": {
-                        "category": "__SUM__",
-                        "city": "Beijing"
-                      }
-                    },
-                    "property": {
-                      "maxSeverity": "High",
-                      "incidentStatus": "Active"
-                    }
-                  }
-                ]
-              }
             }
           },
           "default": {
@@ -1350,24 +957,6 @@
             "description": "Success",
             "schema": {
               "$ref": "#/definitions/RootCauseList"
-            },
-            "examples": {
-              "application/json": {
-                "value": [
-                  {
-                    "rootCause": {
-                      "dimension": {
-                        "city": "Beijing"
-                      }
-                    },
-                    "path": [
-                      "city"
-                    ],
-                    "score": 0.67,
-                    "description": "city = Beijing contributes the most to this anomaly."
-                  }
-                ]
-              }
             }
           },
           "default": {
@@ -1486,65 +1075,6 @@
             "description": "Success",
             "schema": {
               "$ref": "#/definitions/DataFeedList"
-            },
-            "examples": {
-              "application/json": {
-                "@nextLink": "https://localhost/dataFeeds?$skip=1&$top=1",
-                "value": [
-                  {
-                    "dataSourceParameter": {
-                      "connectionString": "Server=your_sql_server,1433;Initial Catalog=your_database;Persist Security Info=False;User ID=your_user;Password=your_password;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;",
-                      "query": "select * from your_table where timestamp = @StartTime"
-                    },
-                    "dataFeedId": "11111111-1111-1111-1111-000000000001",
-                    "dataFeedName": "Sample - cost/revenue - city/category",
-                    "dataFeedDescription": "This is a sample data feed.",
-                    "granularityName": "Daily",
-                    "metrics": [
-                      {
-                        "metricId": "22222222-2222-2222-2222-000000000001",
-                        "metricName": "cost",
-                        "metricDisplayName": "cost"
-                      },
-                      {
-                        "metricId": "22222222-2222-2222-2222-000000000002",
-                        "metricName": "revenue",
-                        "metricDisplayName": "revenue"
-                      }
-                    ],
-                    "dimension": [
-                      {
-                        "dimensionName": "category",
-                        "dimensionDisplayName": "category"
-                      },
-                      {
-                        "dimensionName": "city",
-                        "dimensionDisplayName": "city"
-                      }
-                    ],
-                    "timestampColumn": "timestamp",
-                    "dataStartFrom": "2020-01-01T00:00:00Z",
-                    "dataSourceType": "SqlServer",
-                    "startOffsetInSeconds": 86400,
-                    "maxConcurrency": 5,
-                    "minRetryIntervalInSeconds": 3600,
-                    "stopRetryAfterInSeconds": 604800,
-                    "needRollup": "NeedRollup",
-                    "rollUpMethod": "Sum",
-                    "allUpIdentification": "__SUM__",
-                    "fillMissingPointType": "SmartFilling",
-                    "viewMode": "Private",
-                    "admins": [
-                      "admin@company.example"
-                    ],
-                    "viewers": [],
-                    "isAdmin": true,
-                    "creator": "admin@company.example",
-                    "status": "Active",
-                    "createdTime": "2020-03-01T00:00:00Z"
-                  }
-                ]
-              }
             }
           },
           "default": {
@@ -1635,60 +1165,6 @@
             "description": "Success",
             "schema": {
               "$ref": "#/definitions/DataFeedDetail"
-            },
-            "examples": {
-              "application/json": {
-                "dataSourceParameter": {
-                  "connectionString": "Server=your_sql_server,1433;Initial Catalog=your_database;Persist Security Info=False;User ID=your_user;Password=your_password;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;",
-                  "query": "select * from your_table where timestamp = @StartTime"
-                },
-                "dataFeedId": "11111111-1111-1111-1111-000000000001",
-                "dataFeedName": "Sample - cost/revenue - city/category",
-                "dataFeedDescription": "This is a sample data feed.",
-                "granularityName": "Daily",
-                "metrics": [
-                  {
-                    "metricId": "22222222-2222-2222-2222-000000000001",
-                    "metricName": "cost",
-                    "metricDisplayName": "cost"
-                  },
-                  {
-                    "metricId": "22222222-2222-2222-2222-000000000002",
-                    "metricName": "revenue",
-                    "metricDisplayName": "revenue"
-                  }
-                ],
-                "dimension": [
-                  {
-                    "dimensionName": "category",
-                    "dimensionDisplayName": "category"
-                  },
-                  {
-                    "dimensionName": "city",
-                    "dimensionDisplayName": "city"
-                  }
-                ],
-                "timestampColumn": "timestamp",
-                "dataStartFrom": "2020-01-01T00:00:00Z",
-                "dataSourceType": "SqlServer",
-                "startOffsetInSeconds": 86400,
-                "maxConcurrency": 5,
-                "minRetryIntervalInSeconds": 3600,
-                "stopRetryAfterInSeconds": 604800,
-                "needRollup": "NeedRollup",
-                "rollUpMethod": "Sum",
-                "allUpIdentification": "__SUM__",
-                "fillMissingPointType": "SmartFilling",
-                "viewMode": "Private",
-                "admins": [
-                  "admin@company.example"
-                ],
-                "viewers": [],
-                "isAdmin": true,
-                "creator": "admin@company.example",
-                "status": "Active",
-                "createdTime": "2020-03-01T00:00:00Z"
-              }
             }
           },
           "default": {
@@ -1809,137 +1285,6 @@
             "description": "Success",
             "schema": {
               "$ref": "#/definitions/MetricFeedback"
-            },
-            "examples": {
-              "application/json": {
-                "startTime": "2020-01-01T00:00:00Z",
-                "endTime": "2020-01-01T00:00:00Z",
-                "value": {
-                  "anomalyValue": "NotAnomaly"
-                },
-                "anomalyDetectionConfigurationId": "00000000-0000-0000-0000-000000000000",
-                "anomalyDetectionConfigurationSnapshot": {
-                  "anomalyDetectionConfigurationId": "33333333-3333-3333-3333-000000000001",
-                  "name": "Anomaly detection configuration name",
-                  "description": "Anomaly detection configuration description",
-                  "metricId": "22222222-2222-2222-2222-000000000001",
-                  "wholeMetricConfiguration": {
-                    "conditionOperator": "AND",
-                    "smartDetectionCondition": {
-                      "sensitivity": 91.0,
-                      "anomalyDetectorDirection": "Both",
-                      "suppressCondition": {
-                        "minNumber": 1,
-                        "minRatio": 100.0
-                      }
-                    },
-                    "hardThresholdCondition": {
-                      "lowerBound": 1.0,
-                      "upperBound": 100.0,
-                      "anomalyDetectorDirection": "Both",
-                      "suppressCondition": {
-                        "minNumber": 1,
-                        "minRatio": 100.0
-                      }
-                    },
-                    "changeThresholdCondition": {
-                      "changePercentage": 5.0,
-                      "shiftPoint": 1,
-                      "withinRange": false,
-                      "anomalyDetectorDirection": "Both",
-                      "suppressCondition": {
-                        "minNumber": 1,
-                        "minRatio": 100.0
-                      }
-                    }
-                  },
-                  "dimensionGroupOverrideConfigurations": [
-                    {
-                      "group": {
-                        "dimension": {
-                          "city": "Beijing"
-                        }
-                      },
-                      "conditionOperator": "AND",
-                      "smartDetectionCondition": {
-                        "sensitivity": 91.0,
-                        "anomalyDetectorDirection": "Both",
-                        "suppressCondition": {
-                          "minNumber": 1,
-                          "minRatio": 100.0
-                        }
-                      },
-                      "hardThresholdCondition": {
-                        "lowerBound": 1.0,
-                        "upperBound": 100.0,
-                        "anomalyDetectorDirection": "Both",
-                        "suppressCondition": {
-                          "minNumber": 1,
-                          "minRatio": 100.0
-                        }
-                      },
-                      "changeThresholdCondition": {
-                        "changePercentage": 5.0,
-                        "shiftPoint": 1,
-                        "withinRange": false,
-                        "anomalyDetectorDirection": "Both",
-                        "suppressCondition": {
-                          "minNumber": 1,
-                          "minRatio": 100.0
-                        }
-                      }
-                    }
-                  ],
-                  "seriesOverrideConfigurations": [
-                    {
-                      "series": {
-                        "dimension": {
-                          "category": "Jewelry",
-                          "city": "Beijing"
-                        }
-                      },
-                      "conditionOperator": "AND",
-                      "smartDetectionCondition": {
-                        "sensitivity": 91.0,
-                        "anomalyDetectorDirection": "Both",
-                        "suppressCondition": {
-                          "minNumber": 1,
-                          "minRatio": 100.0
-                        }
-                      },
-                      "hardThresholdCondition": {
-                        "lowerBound": 1.0,
-                        "upperBound": 100.0,
-                        "anomalyDetectorDirection": "Both",
-                        "suppressCondition": {
-                          "minNumber": 1,
-                          "minRatio": 100.0
-                        }
-                      },
-                      "changeThresholdCondition": {
-                        "changePercentage": 5.0,
-                        "shiftPoint": 1,
-                        "withinRange": false,
-                        "anomalyDetectorDirection": "Both",
-                        "suppressCondition": {
-                          "minNumber": 1,
-                          "minRatio": 100.0
-                        }
-                      }
-                    }
-                  ]
-                },
-                "feedbackId": "99999999-9999-9999-9999-000000000001",
-                "createdTime": "2020-03-01T00:00:00Z",
-                "userPrincipal": "viewer@company.example",
-                "metricId": "22222222-2222-2222-2222-000000000001",
-                "dimensionFilter": {
-                  "dimension": {
-                    "city": "Beijing"
-                  }
-                },
-                "feedbackType": "Anomaly"
-              }
             }
           },
           "default": {
@@ -1999,142 +1344,6 @@
             "description": "Success",
             "schema": {
               "$ref": "#/definitions/MetricFeedbackList"
-            },
-            "examples": {
-              "application/json": {
-                "@nextLink": "https://localhost/feedback?$skip=1&$top=1",
-                "value": [
-                  {
-                    "startTime": "2020-01-01T00:00:00Z",
-                    "endTime": "2020-01-01T00:00:00Z",
-                    "value": {
-                      "anomalyValue": "NotAnomaly"
-                    },
-                    "anomalyDetectionConfigurationId": "00000000-0000-0000-0000-000000000000",
-                    "anomalyDetectionConfigurationSnapshot": {
-                      "anomalyDetectionConfigurationId": "33333333-3333-3333-3333-000000000001",
-                      "name": "Anomaly detection configuration name",
-                      "description": "Anomaly detection configuration description",
-                      "metricId": "22222222-2222-2222-2222-000000000001",
-                      "wholeMetricConfiguration": {
-                        "conditionOperator": "AND",
-                        "smartDetectionCondition": {
-                          "sensitivity": 91.0,
-                          "anomalyDetectorDirection": "Both",
-                          "suppressCondition": {
-                            "minNumber": 1,
-                            "minRatio": 100.0
-                          }
-                        },
-                        "hardThresholdCondition": {
-                          "lowerBound": 1.0,
-                          "upperBound": 100.0,
-                          "anomalyDetectorDirection": "Both",
-                          "suppressCondition": {
-                            "minNumber": 1,
-                            "minRatio": 100.0
-                          }
-                        },
-                        "changeThresholdCondition": {
-                          "changePercentage": 5.0,
-                          "shiftPoint": 1,
-                          "withinRange": false,
-                          "anomalyDetectorDirection": "Both",
-                          "suppressCondition": {
-                            "minNumber": 1,
-                            "minRatio": 100.0
-                          }
-                        }
-                      },
-                      "dimensionGroupOverrideConfigurations": [
-                        {
-                          "group": {
-                            "dimension": {
-                              "city": "Beijing"
-                            }
-                          },
-                          "conditionOperator": "AND",
-                          "smartDetectionCondition": {
-                            "sensitivity": 91.0,
-                            "anomalyDetectorDirection": "Both",
-                            "suppressCondition": {
-                              "minNumber": 1,
-                              "minRatio": 100.0
-                            }
-                          },
-                          "hardThresholdCondition": {
-                            "lowerBound": 1.0,
-                            "upperBound": 100.0,
-                            "anomalyDetectorDirection": "Both",
-                            "suppressCondition": {
-                              "minNumber": 1,
-                              "minRatio": 100.0
-                            }
-                          },
-                          "changeThresholdCondition": {
-                            "changePercentage": 5.0,
-                            "shiftPoint": 1,
-                            "withinRange": false,
-                            "anomalyDetectorDirection": "Both",
-                            "suppressCondition": {
-                              "minNumber": 1,
-                              "minRatio": 100.0
-                            }
-                          }
-                        }
-                      ],
-                      "seriesOverrideConfigurations": [
-                        {
-                          "series": {
-                            "dimension": {
-                              "category": "Jewelry",
-                              "city": "Beijing"
-                            }
-                          },
-                          "conditionOperator": "AND",
-                          "smartDetectionCondition": {
-                            "sensitivity": 91.0,
-                            "anomalyDetectorDirection": "Both",
-                            "suppressCondition": {
-                              "minNumber": 1,
-                              "minRatio": 100.0
-                            }
-                          },
-                          "hardThresholdCondition": {
-                            "lowerBound": 1.0,
-                            "upperBound": 100.0,
-                            "anomalyDetectorDirection": "Both",
-                            "suppressCondition": {
-                              "minNumber": 1,
-                              "minRatio": 100.0
-                            }
-                          },
-                          "changeThresholdCondition": {
-                            "changePercentage": 5.0,
-                            "shiftPoint": 1,
-                            "withinRange": false,
-                            "anomalyDetectorDirection": "Both",
-                            "suppressCondition": {
-                              "minNumber": 1,
-                              "minRatio": 100.0
-                            }
-                          }
-                        }
-                      ]
-                    },
-                    "feedbackId": "99999999-9999-9999-9999-000000000001",
-                    "createdTime": "2020-03-01T00:00:00Z",
-                    "userPrincipal": "viewer@company.example",
-                    "metricId": "22222222-2222-2222-2222-000000000001",
-                    "dimensionFilter": {
-                      "dimension": {
-                        "city": "Beijing"
-                      }
-                    },
-                    "feedbackType": "Anomaly"
-                  }
-                ]
-              }
             }
           },
           "default": {
@@ -2239,26 +1448,6 @@
             "description": "Success",
             "schema": {
               "$ref": "#/definitions/HookList"
-            },
-            "examples": {
-              "application/json": {
-                "@nextLink": "https://localhost/hooks?$skip=1&$top=1",
-                "value": [
-                  {
-                    "hookParameter": {
-                      "endpoint": "https://localhost/demo/post"
-                    },
-                    "hookId": "00000000-0000-0000-0000-000000000001",
-                    "hookName": "A webhook",
-                    "hookType": "Webhook",
-                    "description": "This is a webhook.",
-                    "externalLink": "",
-                    "admins": [
-                      "admin@company.example"
-                    ]
-                  }
-                ]
-              }
             }
           },
           "default": {
@@ -2349,21 +1538,6 @@
             "description": "Success",
             "schema": {
               "$ref": "#/definitions/HookInfo"
-            },
-            "examples": {
-              "application/json": {
-                "hookParameter": {
-                  "endpoint": "https://localhost/demo/post"
-                },
-                "hookId": "00000000-0000-0000-0000-000000000001",
-                "hookName": "A webhook",
-                "hookType": "Webhook",
-                "description": "This is a webhook.",
-                "externalLink": "",
-                "admins": [
-                  "admin@company.example"
-                ]
-              }
             }
           },
           "default": {
@@ -2510,23 +1684,6 @@
             "description": "Success",
             "schema": {
               "$ref": "#/definitions/IngestionStatusList"
-            },
-            "examples": {
-              "application/json": {
-                "@nextLink": "https://localhost/dataFeeds/01234567-8901-2345-6789-012345678901/ingestionStatus/query?$skip=2&$top=2",
-                "value": [
-                  {
-                    "timestamp": "2020-01-01T00:00:00Z",
-                    "status": "Succeeded",
-                    "message": ""
-                  },
-                  {
-                    "timestamp": "2020-01-02T00:00:00Z",
-                    "status": "Succeeded",
-                    "message": ""
-                  }
-                ]
-              }
             }
           },
           "default": {
@@ -2621,12 +1778,6 @@
             "description": "Success",
             "schema": {
               "$ref": "#/definitions/DataFeedIngestionProgress"
-            },
-            "examples": {
-              "application/json": {
-                "latestSuccessTimestamp": "2020-01-30T00:00:00Z",
-                "latestActiveTimestamp": "2020-01-31T00:00:00Z"
-              }
             }
           },
           "default": {
@@ -2680,29 +1831,6 @@
             "description": "Success",
             "schema": {
               "$ref": "#/definitions/MetricDataList"
-            },
-            "examples": {
-              "application/json": {
-                "value": [
-                  {
-                    "id": {
-                      "metricId": "22222222-2222-2222-2222-000000000001",
-                      "dimension": {
-                        "category": "__SUM__",
-                        "city": "Beijing"
-                      }
-                    },
-                    "timestampList": [
-                      "2020-01-01T00:00:00Z",
-                      "2020-01-02T00:00:00Z"
-                    ],
-                    "valueList": [
-                      2.718281828459045,
-                      3.141592653589793
-                    ]
-                  }
-                ]
-              }
             }
           },
           "default": {
@@ -2770,27 +1898,6 @@
             "description": "Success",
             "schema": {
               "$ref": "#/definitions/MetricSeriesList"
-            },
-            "examples": {
-              "application/json": {
-                "@nextLink": "https://localhost/metrics/22222222-2222-2222-2222-000000000001/series/query?$skip=2&$top=2",
-                "value": [
-                  {
-                    "metricId": "22222222-2222-2222-2222-000000000001",
-                    "dimension": {
-                      "category": "__SUM__",
-                      "city": "Beijing"
-                    }
-                  },
-                  {
-                    "metricId": "22222222-2222-2222-2222-000000000001",
-                    "dimension": {
-                      "category": "Jewelry",
-                      "city": "Beijing"
-                    }
-                  }
-                ]
-              }
             }
           },
           "default": {
@@ -2861,15 +1968,6 @@
             "description": "Success",
             "schema": {
               "$ref": "#/definitions/MetricDimensionList"
-            },
-            "examples": {
-              "application/json": {
-                "@nextLink": "https://localhost/metrics/22222222-2222-2222-2222-000000000001/dimension/query?$skip=2&$top=2",
-                "value": [
-                  "__SUM__",
-                  "Beijing"
-                ]
-              }
             }
           },
           "default": {
@@ -2914,123 +2012,6 @@
             "description": "Success",
             "schema": {
               "$ref": "#/definitions/AnomalyDetectionConfigurationList"
-            },
-            "examples": {
-              "application/json": {
-                "value": [
-                  {
-                    "anomalyDetectionConfigurationId": "33333333-3333-3333-3333-000000000001",
-                    "name": "Anomaly detection configuration name",
-                    "description": "Anomaly detection configuration description",
-                    "metricId": "22222222-2222-2222-2222-000000000001",
-                    "wholeMetricConfiguration": {
-                      "conditionOperator": "AND",
-                      "smartDetectionCondition": {
-                        "sensitivity": 91.0,
-                        "anomalyDetectorDirection": "Both",
-                        "suppressCondition": {
-                          "minNumber": 1,
-                          "minRatio": 100.0
-                        }
-                      },
-                      "hardThresholdCondition": {
-                        "lowerBound": 1.0,
-                        "upperBound": 100.0,
-                        "anomalyDetectorDirection": "Both",
-                        "suppressCondition": {
-                          "minNumber": 1,
-                          "minRatio": 100.0
-                        }
-                      },
-                      "changeThresholdCondition": {
-                        "changePercentage": 5.0,
-                        "shiftPoint": 1,
-                        "withinRange": false,
-                        "anomalyDetectorDirection": "Both",
-                        "suppressCondition": {
-                          "minNumber": 1,
-                          "minRatio": 100.0
-                        }
-                      }
-                    },
-                    "dimensionGroupOverrideConfigurations": [
-                      {
-                        "group": {
-                          "dimension": {
-                            "city": "Beijing"
-                          }
-                        },
-                        "conditionOperator": "AND",
-                        "smartDetectionCondition": {
-                          "sensitivity": 91.0,
-                          "anomalyDetectorDirection": "Both",
-                          "suppressCondition": {
-                            "minNumber": 1,
-                            "minRatio": 100.0
-                          }
-                        },
-                        "hardThresholdCondition": {
-                          "lowerBound": 1.0,
-                          "upperBound": 100.0,
-                          "anomalyDetectorDirection": "Both",
-                          "suppressCondition": {
-                            "minNumber": 1,
-                            "minRatio": 100.0
-                          }
-                        },
-                        "changeThresholdCondition": {
-                          "changePercentage": 5.0,
-                          "shiftPoint": 1,
-                          "withinRange": false,
-                          "anomalyDetectorDirection": "Both",
-                          "suppressCondition": {
-                            "minNumber": 1,
-                            "minRatio": 100.0
-                          }
-                        }
-                      }
-                    ],
-                    "seriesOverrideConfigurations": [
-                      {
-                        "series": {
-                          "dimension": {
-                            "category": "Jewelry",
-                            "city": "Beijing"
-                          }
-                        },
-                        "conditionOperator": "AND",
-                        "smartDetectionCondition": {
-                          "sensitivity": 91.0,
-                          "anomalyDetectorDirection": "Both",
-                          "suppressCondition": {
-                            "minNumber": 1,
-                            "minRatio": 100.0
-                          }
-                        },
-                        "hardThresholdCondition": {
-                          "lowerBound": 1.0,
-                          "upperBound": 100.0,
-                          "anomalyDetectorDirection": "Both",
-                          "suppressCondition": {
-                            "minNumber": 1,
-                            "minRatio": 100.0
-                          }
-                        },
-                        "changeThresholdCondition": {
-                          "changePercentage": 5.0,
-                          "shiftPoint": 1,
-                          "withinRange": false,
-                          "anomalyDetectorDirection": "Both",
-                          "suppressCondition": {
-                            "minNumber": 1,
-                            "minRatio": 100.0
-                          }
-                        }
-                      }
-                    ]
-                  }
-                ]
-              }
             }
           },
           "default": {
@@ -3098,23 +2079,6 @@
             "description": "Success",
             "schema": {
               "$ref": "#/definitions/EnrichmentStatusList"
-            },
-            "examples": {
-              "application/json": {
-                "@nextLink": "https://localhost/metrics/22222222-2222-2222-2222-000000000001/status/enrichment/anomalyDetection/query?$skip=2&$top=2",
-                "value": [
-                  {
-                    "timestamp": "2020-01-01T00:00:00Z",
-                    "status": "Succeeded",
-                    "message": ""
-                  },
-                  {
-                    "timestamp": "2020-01-02T00:00:00Z",
-                    "status": "Succeeded",
-                    "message": ""
-                  }
-                ]
-              }
             }
           },
           "default": {
