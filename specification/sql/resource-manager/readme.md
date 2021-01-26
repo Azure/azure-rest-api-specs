@@ -27,7 +27,7 @@ openapi-type: arm
 tag: package-composite-v4
 ```
 
-## Composite packages
+### Composite packages
 
 The following packages may be composed from multiple api-versions.
 
