@@ -36,6 +36,7 @@
           {
             "in": "body",
             "name": "body",
+            "description": "The phone number search request.",
             "schema": {
               "$ref": "#/definitions/PhoneNumberSearchRequest"
             }
@@ -127,13 +128,12 @@
         "summary": "Purchases phone numbers.",
         "operationId": "PhoneNumbers_PurchasePhoneNumbers",
         "consumes": [
-          "application/json-patch+json",
-          "application/json",
-          "text/json",
-          "application/*+json"
+          "application/json"
         ],
         "produces": [
-          "application/json"
+          "text/plain",
+          "application/json",
+          "text/json"
         ],
         "parameters": [
           {
@@ -142,6 +142,7 @@
           {
             "in": "body",
             "name": "body",
+            "description": "The phone number purchase request",
             "schema": {
               "$ref": "#/definitions/PhoneNumberPurchaseRequest"
             }
