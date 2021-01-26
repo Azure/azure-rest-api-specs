@@ -29,7 +29,7 @@ openapi-type: arm
 tag: package-2020-04-01-preview-only
 ```
 
-## Suppression
+### Suppression
 
 ``` yaml
 directive:
