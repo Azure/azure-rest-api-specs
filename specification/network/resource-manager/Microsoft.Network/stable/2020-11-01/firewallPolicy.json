@@ -638,6 +638,10 @@
           "description": "ThreatIntel Whitelist for Firewall Policy.",
           "$ref": "#/definitions/FirewallPolicyThreatIntelWhitelist"
         },
+        "insights": {
+          "description": "Insights on Firewall Policy.",
+          "$ref": "#/definitions/FirewallPolicyInsights"
+        },
         "snat": {
           "description": "The private IP addresses/IP ranges to which traffic will not be SNAT.",
           "$ref": "#/definitions/FirewallPolicySNAT"
@@ -1150,6 +1154,25 @@
         }
       }
     },
+    "FirewallPolicyInsights": {
+      "description": "Firewall Policy Insights.",
+      "x-ms-discriminator-value": "FirewallPolicyInsights",
+      "properties": {
+        "isEnabled": {
+          "type": "boolean",
+          "description": "A flag to indicate if the insights are enabled on the policy."
+        },
+        "retentionDays": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of days the insights should be enabled on the policy."
+        },
+        "logAnalyticsResources": {
+          "description": "Workspaces needed to configure the Firewall Policy Insights.",
+          "$ref": "#/definitions/FirewallPolicyLogAnalyticsResources"
+        }
+      }
+    },
     "FirewallPolicySNAT": {
       "description": "The private IP addresses/IP ranges to which traffic will not be SNAT.",
       "x-ms-discriminator-value": "FirewallPolicySNAT",
@@ -1348,6 +1371,23 @@
         }
       },
       "description": "SKU of Firewall policy."
+    },
+    "FirewallPolicyLogAnalyticsResources": {
+      "description": "Log Analytics Resources for Firewall Policy Insights.",
+      "x-ms-discriminator-value": "FirewallPolicyLogAnalyticsResources",
+      "properties": {
+        "workspaceIds": {
+          "type": "array",
+          "description": "List of workspace Ids for Firewall Policy Insights.",
+          "items": {
+            "$ref": "./network.json#/definitions/SubResource"
+          }
+        },
+        "defaultWorkspaceId": {
+          "$ref": "./network.json#/definitions/SubResource",
+          "description": "The default workspace Id for Firewall Policy Insights."
+        }
+      }
     }
   }
 }
