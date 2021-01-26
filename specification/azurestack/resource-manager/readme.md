@@ -48,6 +48,7 @@ input-file:
   - Microsoft.AzureStack/preview/2020-06-01-preview/CustomerSubscription.json
   - Microsoft.AzureStack/preview/2020-06-01-preview/Product.json
   - Microsoft.AzureStack/preview/2020-06-01-preview/Registration.json
+  - Microsoft.AzureStack/preview/2020-06-01-preview/LinkedSubscription.json
 ```
 ### Tag: package-2017-06-01
 
