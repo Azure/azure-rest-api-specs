@@ -940,14 +940,17 @@
       "properties": {
         "minPartitionCount": {
           "type": "integer",
+          "format": "int64",
           "description": "Minimum number of named partitions of the service."
         },
         "maxPartitionCount": {
           "type": "integer",
+          "format": "int64",
           "description": "Maximum number of named partitions of the service."
         },
         "scaleIncrement": {
           "type": "integer",
+          "format": "int64",
           "description": "The number of instances to add or remove during a scaling operation."
         }
       }
@@ -1108,9 +1111,6 @@
         },
         "applicationCapacity": {
           "$ref": "#/definitions/ApplicationCapacity"
-        },
-        "systemData": {
-          "$ref": "#/definitions/SystemData"
         }
       }
     },
@@ -1155,9 +1155,6 @@
           "readOnly": true,
           "type": "string",
           "description": "The current deployment or provisioning state, which only appears in the response."
-        },
-        "systemData": {
-          "$ref": "#/definitions/SystemData"
         }
       }
     },
@@ -1209,9 +1206,6 @@
         "appPackageUrl": {
           "type": "string",
           "description": "The URL to the application package"
-        },
-        "systemData": {
-          "$ref": "#/definitions/SystemData"
         }
       }
     },
@@ -1585,6 +1579,9 @@
             "create",
             "read"
           ]
+        },
+        "systemData": {
+          "$ref": "#/definitions/SystemData"
         }
       },
       "description": "The resource model definition for proxy-only resource.",
@@ -2097,9 +2094,6 @@
         "serviceDnsName": {
           "type": "string",
           "description": "The DNS name of the service. It requires the DNS system service to be enabled in Service Fabric cluster."
-        },
-        "systemData": {
-          "$ref": "#/definitions/SystemData"
         }
       }
     },

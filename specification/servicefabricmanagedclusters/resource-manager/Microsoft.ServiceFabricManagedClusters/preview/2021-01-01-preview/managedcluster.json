@@ -567,20 +567,20 @@
           "$ref": "#/definitions/Resource"
         },
         {
-          "type": "object",
-          "properties": {
-            "properties": {
-              "x-ms-client-flatten": true,
-              "$ref": "#/definitions/ManagedClusterProperties",
-              "description": "The managed cluster resource properties"
-            },
-            "sku": {
-              "$ref": "#/definitions/Sku",
-              "description": "The sku of the managed cluster"
-            }
-          }
+          "type": "object"
         }
-      ]
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ManagedClusterProperties",
+          "description": "The managed cluster resource properties"
+        },
+        "sku": {
+          "$ref": "#/definitions/Sku",
+          "description": "The sku of the managed cluster"
+        }
+      }
     },
     "ManagedClusterListResult": {
       "properties": {
@@ -704,9 +704,6 @@
         "enableAutoOSUpgrade": {
           "type": "boolean",
           "description": "Setting this to true will enable auto os upgrade for the cluster. Default value is false."
-        },
-        "systemData": {
-          "$ref": "#/definitions/SystemData"
         }
       },
       "description": "Describes the managed cluster resource properties."
@@ -1082,6 +1079,9 @@
           "type": "string",
           "description": "Azure resource etag.",
           "readOnly": true
+        },
+        "systemData": {
+          "$ref": "#/definitions/SystemData"
         }
       },
       "description": "The resource model definition.",

@@ -56,6 +56,16 @@ directive:
     reason: There are open issues (bugs) in the validator affecting some of the examples and since there is no way to selectively disable the validation for a particular example or paths, all of the example validation is being turned off.
   - suppress: Example Validations
     reason: There are open issues (bugs) in the validator affecting some of the examples and since there is no way to selectively disable the validation for a particular example or paths, all of the example validation is being turned off.
+  - suppress: R3006
+    where:
+      - $.definitions.ManagedCluster.properties
+      - $.definitions.NodeType.properties
+      - $.definitions.ApplicationTypeResource.properties
+      - $.definitions.ApplicationTypeVersionResource.properties
+      - $.definitions.ApplicationResource.properties
+      - $.definitions.ServiceResource.properties
+    reason:
+      - Currently systemData is not allowed.
 
 ```
 
