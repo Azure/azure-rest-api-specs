@@ -1597,6 +1597,9 @@
         "basicLoginInformation": {
           "$ref": "#/definitions/BasicLoginInformation"
         },
+        "uploadServicePrincipal": {
+          "$ref": "#/definitions/UploadServicePrincipal"
+        },
         "provisioningState": {
           "type": "string",
           "readOnly": true
@@ -1604,7 +1607,8 @@
       },
       "required": [
         "onPremiseProperty",
-        "basicLoginInformation"
+        "basicLoginInformation",
+        "uploadServicePrincipal"
       ]
     },
     "OnPremiseProperty": {
@@ -2031,6 +2035,34 @@
         "password": {
           "type": "string",
           "description": "Login password.",
+          "x-ms-mutability": [
+            "create",
+            "update"
+          ],
+          "x-ms-secret": true
+        }
+      }
+    },
+    "UploadServicePrincipal": {
+      "description": "Service principal for uploading billing, metrics and logs.",
+      "properties": {
+        "clientId": {
+          "type": "string",
+          "format": "uuid",
+          "description": "Client ID of the service principal for uploading data."
+        },
+        "tenantId": {
+          "type": "string",
+          "format": "uuid",
+          "description": "Tenant ID of the service principal."
+        },
+        "authority": {
+          "type": "string",
+          "description": "Authority for the service principal. Example: https://login.microsoftonline.com/"
+        },
+        "clientSecret": {
+          "type": "string",
+          "description": "Secret of the service principal",
           "x-ms-mutability": [
             "create",
             "update"
