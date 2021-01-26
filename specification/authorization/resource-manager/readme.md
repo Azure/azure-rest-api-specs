@@ -36,7 +36,7 @@ directive:
   - suppress: OperationsAPIImplementation
     reason: we do have a operations api as "/providers/Microsoft.Authorization/operations"
   - suppress: TopLevelResourcesListByResourceGroup
-    reason: proxy resources don't require list by resource group(Suppresion confirmed by API council)
+    reason: proxy resources don't require list by resource group (Suppression confirmed by API council)
   - suppress: OperationIdNounConflictingModelNames
     where: '$.paths["/providers/Microsoft.Authorization/providerOperations/{resourceProviderNamespace}"].get.operationId'
     from: authorization-ProviderOperationsCalls.json
