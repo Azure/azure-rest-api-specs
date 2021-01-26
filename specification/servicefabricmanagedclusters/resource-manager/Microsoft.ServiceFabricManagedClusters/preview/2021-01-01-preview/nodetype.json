@@ -688,6 +688,9 @@
           "$ref": "#/definitions/ManagedResourceProvisioningState",
           "readOnly": true,
           "description": "The provisioning state of the managed cluster resource."
+        },
+        "systemData": {
+          "$ref": "#/definitions/SystemData"
         }
       },
       "description": "Describes a node type in the cluster, each node type represents sub set of nodes in the cluster."
@@ -760,6 +763,9 @@
         },
         "vmManagedIdentity": {
           "$ref": "#/definitions/VmManagedIdentity"
+        },
+        "systemData": {
+          "$ref": "#/definitions/SystemData"
         }
       },
       "description": "Node type update properties."
@@ -937,10 +943,12 @@
       "properties": {
         "startPort": {
           "type": "integer",
+          "format": "int32",
           "description": "Starting port of a range of ports"
         },
         "endPort": {
           "type": "integer",
+          "format": "int32",
           "description": "End port of a range of ports"
         }
       },
@@ -1007,6 +1015,10 @@
           "type": "string",
           "description": "The name of the operation."
         },
+        "isDataAction": {
+          "type": "boolean",
+          "description": "Indicates whether the operation is a data action"
+        },
         "display": {
           "$ref": "#/definitions/AvailableOperationDisplay",
           "description": "The object that represents the operation."
@@ -1021,6 +1033,59 @@
         }
       },
       "description": "Available operation list result"
+    },
+    "SystemData": {
+      "description": "Metadata pertaining to creation and last modification of the resource.",
+      "type": "object",
+      "readOnly": true,
+      "properties": {
+        "createdBy": {
+          "type": "string",
+          "description": "The identity that created the resource."
+        },
+        "createdByType": {
+          "type": "string",
+          "description": "The type of identity that created the resource.",
+          "enum": [
+            "User",
+            "Application",
+            "ManagedIdentity",
+            "Key"
+          ],
+          "x-ms-enum": {
+            "name": "createdByType",
+            "modelAsString": true
+          }
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp of resource creation (UTC)."
+        },
+        "lastModifiedBy": {
+          "type": "string",
+          "description": "The identity that last modified the resource."
+        },
+        "lastModifiedByType": {
+          "type": "string",
+          "description": "The type of identity that last modified the resource.",
+          "enum": [
+            "User",
+            "Application",
+            "ManagedIdentity",
+            "Key"
+          ],
+          "x-ms-enum": {
+            "name": "createdByType",
+            "modelAsString": true
+          }
+        },
+        "lastModifiedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The type of identity that last modified the resource."
+        }
+      }
     }
   },
   "parameters": {

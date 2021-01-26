@@ -704,6 +704,9 @@
         "enableAutoOSUpgrade": {
           "type": "boolean",
           "description": "Setting this to true will enable auto os upgrade for the cluster. Default value is false."
+        },
+        "systemData": {
+          "$ref": "#/definitions/SystemData"
         }
       },
       "description": "Describes the managed cluster resource properties."
@@ -766,6 +769,10 @@
             "$ref": "#/definitions/ManagedClusterAddOnFeature"
           },
           "description": "client certificates for the cluster."
+        },
+        "enableAutoOSUpgrade": {
+          "type": "boolean",
+          "description": "Setting this to true will enable auto os upgrade for the cluster. Default value is false."
         }
       },
       "description": "Describes the managed cluster resource properties."
@@ -1017,6 +1024,10 @@
           "type": "string",
           "description": "The name of the operation."
         },
+        "isDataAction": {
+          "type": "boolean",
+          "description": "Indicates whether the operation is a data action"
+        },
         "display": {
           "$ref": "#/definitions/AvailableOperationDisplay",
           "description": "The object that represents the operation."
@@ -1112,6 +1123,59 @@
         }
       },
       "description": "Describes a section in the fabric settings of the cluster."
+    },
+    "SystemData": {
+      "description": "Metadata pertaining to creation and last modification of the resource.",
+      "type": "object",
+      "readOnly": true,
+      "properties": {
+        "createdBy": {
+          "type": "string",
+          "description": "The identity that created the resource."
+        },
+        "createdByType": {
+          "type": "string",
+          "description": "The type of identity that created the resource.",
+          "enum": [
+            "User",
+            "Application",
+            "ManagedIdentity",
+            "Key"
+          ],
+          "x-ms-enum": {
+            "name": "createdByType",
+            "modelAsString": true
+          }
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp of resource creation (UTC)."
+        },
+        "lastModifiedBy": {
+          "type": "string",
+          "description": "The identity that last modified the resource."
+        },
+        "lastModifiedByType": {
+          "type": "string",
+          "description": "The type of identity that last modified the resource.",
+          "enum": [
+            "User",
+            "Application",
+            "ManagedIdentity",
+            "Key"
+          ],
+          "x-ms-enum": {
+            "name": "createdByType",
+            "modelAsString": true
+          }
+        },
+        "lastModifiedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The type of identity that last modified the resource."
+        }
+      }
     }
   },
   "parameters": {

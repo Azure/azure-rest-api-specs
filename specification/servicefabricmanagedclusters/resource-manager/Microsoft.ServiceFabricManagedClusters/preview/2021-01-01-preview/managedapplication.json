@@ -209,6 +209,9 @@
           "204": {
             "description": "The resource was not found."
           },
+          "200": {
+            "description": "The operation completed successfully."
+          },
           "default": {
             "description": "The detailed error response.",
             "schema": {
@@ -422,6 +425,9 @@
           "204": {
             "description": "The resource was not found."
           },
+          "200": {
+            "description": "The operation completed successfully."
+          },
           "default": {
             "description": "The detailed error response.",
             "schema": {
@@ -631,6 +637,9 @@
           },
           "204": {
             "description": "The resource was not found."
+          },
+          "200": {
+            "description": "The operation completed successfully."
           },
           "default": {
             "description": "The detailed error response.",
@@ -848,6 +857,9 @@
           "204": {
             "description": "The resource was not found."
           },
+          "200": {
+            "description": "The operation completed successfully."
+          },
           "default": {
             "description": "The detailed error response.",
             "schema": {
@@ -976,6 +988,7 @@
         },
         "maxPercentUnhealthyDeployedApplications": {
           "type": "integer",
+          "format": "int32",
           "description": "The maximum allowed percentage of unhealthy deployed applications. Allowed values are Byte values from zero to 100.\nThe percentage represents the maximum tolerated percentage of deployed applications that can be unhealthy before the application is considered in error.\nThis is calculated by dividing the number of unhealthy deployed applications over the number of nodes where the application is currently deployed on in the cluster.\nThe computation rounds up to tolerate one failure on small numbers of nodes. Default percentage is zero.\n"
         },
         "defaultServiceTypeHealthPolicy": {
@@ -1095,6 +1108,9 @@
         },
         "applicationCapacity": {
           "$ref": "#/definitions/ApplicationCapacity"
+        },
+        "systemData": {
+          "$ref": "#/definitions/SystemData"
         }
       }
     },
@@ -1139,6 +1155,9 @@
           "readOnly": true,
           "type": "string",
           "description": "The current deployment or provisioning state, which only appears in the response."
+        },
+        "systemData": {
+          "$ref": "#/definitions/SystemData"
         }
       }
     },
@@ -1190,6 +1209,9 @@
         "appPackageUrl": {
           "type": "string",
           "description": "The URL to the application package"
+        },
+        "systemData": {
+          "$ref": "#/definitions/SystemData"
         }
       }
     },
@@ -1486,14 +1508,17 @@
       "properties": {
         "minInstanceCount": {
           "type": "integer",
+          "format": "int32",
           "description": "Minimum number of instances of the partition."
         },
         "maxInstanceCount": {
           "type": "integer",
+          "format": "int32",
           "description": "Maximum number of instances of the partition."
         },
         "scaleIncrement": {
           "type": "integer",
+          "format": "int32",
           "description": "The number of instances to add or remove during a scaling operation."
         }
       }
@@ -1769,14 +1794,17 @@
         },
         "primaryDefaultLoad": {
           "type": "integer",
+          "format": "int32",
           "description": "Used only for Stateful services. The default amount of load, as a number, that this service creates for this metric when it is a Primary replica."
         },
         "secondaryDefaultLoad": {
           "type": "integer",
+          "format": "int32",
           "description": "Used only for Stateful services. The default amount of load, as a number, that this service creates for this metric when it is a Secondary replica."
         },
         "defaultLoad": {
           "type": "integer",
+          "format": "int32",
           "description": "Used only for Stateless services. The default amount of load, as a number, that this service creates for this metric."
         }
       }
@@ -2069,6 +2097,9 @@
         "serviceDnsName": {
           "type": "string",
           "description": "The DNS name of the service. It requires the DNS system service to be enabled in Service Fabric cluster."
+        },
+        "systemData": {
+          "$ref": "#/definitions/SystemData"
         }
       }
     },
@@ -2151,18 +2182,21 @@
       "properties": {
         "maxPercentUnhealthyServices": {
           "type": "integer",
+          "format": "int32",
           "description": "The maximum allowed percentage of unhealthy services.\n\nThe percentage represents the maximum tolerated percentage of services that can be unhealthy before the application is considered in error.\nIf the percentage is respected but there is at least one unhealthy service, the health is evaluated as Warning.\nThis is calculated by dividing the number of unhealthy services of the specific service type over the total number of services of the specific service type.\nThe computation rounds up to tolerate one failure on small numbers of services.\n",
           "minimum": 0,
           "maximum": 100
         },
         "maxPercentUnhealthyPartitionsPerService": {
           "type": "integer",
+          "format": "int32",
           "description": "The maximum allowed percentage of unhealthy partitions per service.\n\nThe percentage represents the maximum tolerated percentage of partitions that can be unhealthy before the service is considered in error.\nIf the percentage is respected but there is at least one unhealthy partition, the health is evaluated as Warning.\nThe percentage is calculated by dividing the number of unhealthy partitions over the total number of partitions in the service.\nThe computation rounds up to tolerate one failure on small numbers of partitions.\n",
           "minimum": 0,
           "maximum": 100
         },
         "maxPercentUnhealthyReplicasPerPartition": {
           "type": "integer",
+          "format": "int32",
           "description": "The maximum allowed percentage of unhealthy replicas per partition.\n\nThe percentage represents the maximum tolerated percentage of replicas that can be unhealthy before the partition is considered in error.\nIf the percentage is respected but there is at least one unhealthy replica, the health is evaluated as Warning.\nThe percentage is calculated by dividing the number of unhealthy replicas over the total number of replicas in the partition.\nThe computation rounds up to tolerate one failure on small numbers of replicas.\n",
           "minimum": 0,
           "maximum": 100
@@ -2204,11 +2238,13 @@
         },
         "targetReplicaSetSize": {
           "type": "integer",
+          "format": "int32",
           "minimum": 1,
           "description": "The target replica set size as a number."
         },
         "minReplicaSetSize": {
           "type": "integer",
+          "format": "int32",
           "minimum": 1,
           "description": "The minimum replica set size as a number."
         },
@@ -2248,15 +2284,18 @@
       "properties": {
         "instanceCount": {
           "type": "integer",
+          "format": "int32",
           "minimum": -1,
           "description": "The instance count."
         },
         "minInstanceCount": {
           "type": "integer",
+          "format": "int32",
           "description": "MinInstanceCount is the minimum number of instances that must be up to meet the EnsureAvailability safety check during operations like upgrade or deactivate node. The actual number that is used is max( MinInstanceCount, ceil( MinInstancePercentage/100.0 * InstanceCount) ). Note, if InstanceCount is set to -1, during MinInstanceCount computation -1 is first converted into the number of nodes on which the instances are allowed to be placed according to the placement constraints on the service."
         },
         "minInstancePercentage": {
           "type": "integer",
+          "format": "int32",
           "description": "MinInstancePercentage is the minimum percentage of InstanceCount that must be up to meet the EnsureAvailability safety check during operations like upgrade or deactivate node. The actual number that is used is max( MinInstanceCount, ceil( MinInstancePercentage/100.0 * InstanceCount) ). Note, if InstanceCount is set to -1, during MinInstancePercentage computation, -1 is first converted into the number of nodes on which the instances are allowed to be placed according to the placement constraints on the service."
         },
         "instanceCloseDelayDuration": {
@@ -2286,6 +2325,7 @@
       "properties": {
         "count": {
           "type": "integer",
+          "format": "int32",
           "description": "The number of partitions."
         },
         "lowKey": {
@@ -2395,6 +2435,10 @@
           "type": "string",
           "description": "The name of the operation."
         },
+        "isDataAction": {
+          "type": "boolean",
+          "description": "Indicates whether the operation is a data action"
+        },
         "display": {
           "$ref": "#/definitions/AvailableOperationDisplay",
           "description": "The object that represents the operation."
@@ -2409,6 +2453,59 @@
         }
       },
       "description": "Available operation list result"
+    },
+    "SystemData": {
+      "description": "Metadata pertaining to creation and last modification of the resource.",
+      "type": "object",
+      "readOnly": true,
+      "properties": {
+        "createdBy": {
+          "type": "string",
+          "description": "The identity that created the resource."
+        },
+        "createdByType": {
+          "type": "string",
+          "description": "The type of identity that created the resource.",
+          "enum": [
+            "User",
+            "Application",
+            "ManagedIdentity",
+            "Key"
+          ],
+          "x-ms-enum": {
+            "name": "createdByType",
+            "modelAsString": true
+          }
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp of resource creation (UTC)."
+        },
+        "lastModifiedBy": {
+          "type": "string",
+          "description": "The identity that last modified the resource."
+        },
+        "lastModifiedByType": {
+          "type": "string",
+          "description": "The type of identity that last modified the resource.",
+          "enum": [
+            "User",
+            "Application",
+            "ManagedIdentity",
+            "Key"
+          ],
+          "x-ms-enum": {
+            "name": "createdByType",
+            "modelAsString": true
+          }
+        },
+        "lastModifiedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The type of identity that last modified the resource."
+        }
+      }
     }
   },
   "parameters": {
