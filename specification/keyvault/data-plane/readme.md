@@ -183,6 +183,14 @@ require: $(this-folder)/../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
+  - $(this-folder)/Microsoft.KeyVault/preview/7.3-preview/certificates.json
+  - $(this-folder)/Microsoft.KeyVault/preview/7.3-preview/common.json
+  - $(this-folder)/Microsoft.KeyVault/preview/7.3-preview/keys.json
+  - $(this-folder)/Microsoft.KeyVault/preview/7.3-preview/rbac.json
+  - $(this-folder)/Microsoft.KeyVault/preview/7.3-preview/secrets.json
+  - $(this-folder)/Microsoft.KeyVault/preview/7.3-preview/storage.json
+  - $(this-folder)/Microsoft.KeyVault/preview/7.3-preview/backuprestore.json
+  - $(this-folder)/Microsoft.KeyVault/preview/7.3-preview/securitydomain.json
   - $(this-folder)/Microsoft.KeyVault/preview/7.2-preview/certificates.json
   - $(this-folder)/Microsoft.KeyVault/preview/7.2-preview/common.json
   - $(this-folder)/Microsoft.KeyVault/preview/7.2-preview/keys.json
