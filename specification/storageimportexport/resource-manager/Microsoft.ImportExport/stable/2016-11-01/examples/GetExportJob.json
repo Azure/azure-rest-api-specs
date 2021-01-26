@@ -18,7 +18,7 @@
         },
         "properties": {
           "storageAccountId": "/subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/myResourceGroup/providers/Microsoft.ClassicStorage/storageAccounts/test",
-          "jobType": "Import",
+          "jobType": "Export",
           "returnAddress": {
             "recipientName": "Test",
             "streetAddress1": "Street1",
@@ -50,15 +50,14 @@
           "backupDriveManifest": true,
           "cancelRequested": false,
           "state": "Creating",
-          "driveList": [
-            {
-              "driveId": "9CA995BB",
-              "manifestFile": "\\DriveManifest.xml",
-              "manifestHash": "109B21108597EF36D5785F08303F3638",
-              "driveHeaderHash": "",
-              "state": "Specified"
+          "driveList": [],
+          "export": {
+            "blobList": {
+              "blobPathPrefix": [
+                "/"
+              ]
             }
-          ],
+          },
           "provisioningState": "Succeeded",
           "encryptionKey": {
             "kekType": "MicrosoftManaged"
