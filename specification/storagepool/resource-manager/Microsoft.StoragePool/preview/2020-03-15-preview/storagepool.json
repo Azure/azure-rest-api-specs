@@ -938,7 +938,7 @@
         },
         "disks": {
           "type": "array",
-          "description": "List of Azure Managed Disks to attach to a Disk pool.",
+          "description": "List of Azure Managed Disks to attach to a Disk pool. Can attach 8 disks at most.",
           "items": {
             "$ref": "#/definitions/Disk"
           },
@@ -989,7 +989,7 @@
         },
         "disks": {
           "type": "array",
-          "description": "List of Azure Managed Disks to attach to a Disk pool.",
+          "description": "List of Azure Managed Disks to attach to a Disk pool. Can attach 8 disks at most.",
           "items": {
             "$ref": "#/definitions/Disk"
           },
@@ -1028,7 +1028,7 @@
       "properties": {
         "disks": {
           "type": "array",
-          "description": "List of Azure Managed Disks to attach to a Disk pool.",
+          "description": "List of Azure Managed Disks to attach to a Disk pool. Can attach 8 disks at most.",
           "items": {
             "$ref": "#/definitions/Disk"
           },
@@ -1151,7 +1151,7 @@
         },
         "tpgs": {
           "type": "array",
-          "description": "List of iSCSI target portal groups.",
+          "description": "List of iSCSI target portal groups. Can have 1 portal group at most.",
           "items": {
             "$ref": "#/definitions/TargetPortalGroup"
           },
@@ -1173,7 +1173,7 @@
       "properties": {
         "tpgs": {
           "type": "array",
-          "description": "List of iSCSI target portal groups.",
+          "description": "List of iSCSI target portal groups. Can have 1 portal group at most.",
           "items": {
             "$ref": "#/definitions/TargetPortalGroupCreate"
           },
@@ -1195,7 +1195,7 @@
       "properties": {
         "tpgs": {
           "type": "array",
-          "description": "List of iSCSI target portal groups.",
+          "description": "List of iSCSI target portal groups. Can have 1 portal group at most.",
           "items": {
             "$ref": "#/definitions/TargetPortalGroupUpdate"
           },
@@ -1400,8 +1400,8 @@
       "properties": {
         "name": {
           "type": "string",
-          "minimum": 7,
-          "maximum": 12,
+          "minimum": 1,
+          "maximum": 90,
           "description": "User defined name for iSCSI LUN; example: \"lun0\""
         },
         "managedDiskAzureResourceId": {
