@@ -265,10 +265,12 @@
             "$ref": "#/parameters/ClusterNamePathParam"
           },
           {
-            "$ref": "#/parameters/ClientProxy"
+            "$ref": "#/parameters/ClientProxy",
+            "required": true
           },
           {
-            "$ref": "#/parameters/TokenAuth"
+            "$ref": "#/parameters/TokenAuth",
+            "required": true
           }
         ],
         "responses": {
@@ -766,32 +768,53 @@
         }
       },
       "readOnly": true
+    },
+    "AuthenticationMethod": {
+      "description": "Authentication method used by the user to fetch credentials for accessing the cluster.",
+    "enum": [
+      "AAD",
+      "Token"
+    ],
+    "x-ms-enum": {
+      "name": "AuthenticationMethod",
+      "modelAsString": true
     }
   },
-  "parameters": {
-    "ClusterNamePathParam": {
-      "name": "clusterName",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "The name of the Kubernetes cluster on which get is called.",
-      "x-ms-parameter-location": "method"
-    },
-    "ClientProxy": {
-      "name": "clientProxy",
-      "in": "body",
-      "required": true,
-      "type": "boolean",
-      "description": "Parameter to indicate whether the request is for client side proxy or not",
-      "x-ms-parameter-location": "method"
-    },
-    "TokenAuth": {
-      "name": "isTokenAuth",
-      "in": "body",
-      "required": true,
-      "type": "boolean",
-      "description": "Parameter to indicate whether the request is token based authentication or AAD based authentication",
-      "x-ms-parameter-location": "method"
-    }
+  "ClientProxy": {
+    "description": "Boolean value to indicate whether the request is for client side proxy or not",
+    "type": "boolean"
   }
+},
+"parameters": {
+"ClusterNamePathParam": {
+  "name": "clusterName",
+  "in": "path",
+  "required": true,
+  "type": "string",
+  "description": "The name of the Kubernetes cluster on which get is called.",
+  "x-ms-parameter-location": "method"
+},
+"ClientProxy": {
+  "name": "clientProxy",
+  "in": "body",
+  "required": true,
+  "type": "boolean",
+  "schema": {
+    "$ref": "#/definitions/ClientProxy"
+  },
+  "description": "Parameter to indicate whether the request is for client side proxy or not",
+  "x-ms-parameter-location": "method"
+},
+"AuthMethod": {
+  "name": "authMethod",
+  "in": "body",
+  "required": true,
+  "type": "boolean",
+  "schema": {
+    "$ref": "#/definitions/AuthenticationMethod"
+  },
+  "description": "Parameter to indicate whether the request is token based authentication or AAD based authentication",
+  "x-ms-parameter-location": "method"
+}
+}
 }
