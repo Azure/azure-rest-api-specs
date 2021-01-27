@@ -91,6 +91,12 @@ directive:
       - $..["restAuthCredential.password"]
 ```
 
+``` yaml
+directive:
+  - suppress: R4007 # to suppress (DefaultErrorResponseSchema)
+    reason: Update the default error response to a new format would be a braking change for service.
+```
+
 ### Tag: package-2018-06-preview
 
 These settings apply only when `--tag=package-2018-06-preview` is specified on the command line.
