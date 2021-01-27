@@ -38,7 +38,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/PrivateStoreNotifications"
+              "$ref": "#/definitions/PrivateStoreNotificationsResource"
             }
           },
           "default": {
@@ -55,7 +55,7 @@
         }
       }
     },
-    "/providers/Microsoft.Marketplace/privateStores/{privateStoreId}/offers/{offerId}/notifications": {
+    "/providers/Microsoft.Marketplace/privateStores/{privateStoreId}/notifications/{offerId}": {
       "parameters": [
         {
           "$ref": "#/parameters/PrivateStoreIdParameter"
@@ -67,7 +67,7 @@
           "$ref": "#/parameters/ApiVersionParameter"
         }
       ],
-      "post": {
+      "put": {
         "tags": [
           "PrivateStores"
         ],
@@ -78,7 +78,7 @@
             "in": "body",
             "name": "payload",
             "schema": {
-              "$ref": "#/definitions/UpdateNotificationDetails"
+              "$ref": "#/definitions/PrivateStoreNotificationsProperties"
             }
           }
         ],
@@ -100,7 +100,7 @@
         }
       }
     },
-    "/providers/Microsoft.Marketplace/privateStores/{privateStoreId}/offers/{offerId}/requestApprovals": {
+    "/providers/Microsoft.Marketplace/privateStores/{privateStoreId}/requestApprovals/{offerId}": {
       "parameters": [
         {
           "$ref": "#/parameters/PrivateStoreIdParameter"
@@ -123,7 +123,7 @@
             "in": "body",
             "name": "payload",
             "schema": {
-              "$ref": "#/definitions/OfferDetailsProperties"
+              "$ref": "#/definitions/PrivateStoreApprovalRequestProperties"
             }
           }
         ],
@@ -131,7 +131,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/PrivateStoreOfferWithRequestApproval"
+              "$ref": "#/definitions/PrivateStoreApprovalRequestResource"
             }
           },
           "default": {
@@ -158,7 +158,7 @@
             "in": "body",
             "name": "payload",
             "schema": {
-              "$ref": "#/definitions/CreateApprovalRequestDetails"
+              "$ref": "#/definitions/PrivateStoreApprovalRequestProperties"
             }
           }
         ],
@@ -166,7 +166,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/ApprovalRequestResponse"
+              "$ref": "#/definitions/PrivateStoreApprovalRequestResource"
             }
           },
           "default": {
@@ -183,7 +183,7 @@
         }
       }
     },
-    "/providers/Microsoft.Marketplace/privateStores/{privateStoreId}/offers/{offerId}/adminRequestApprovals": {
+    "/providers/Microsoft.Marketplace/privateStores/{privateStoreId}/adminRequestApprovals/{offerId}": {
       "parameters": [
         {
           "$ref": "#/parameters/PrivateStoreIdParameter"
@@ -213,7 +213,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/AdminGetApprovalRequestsResponse"
+              "$ref": "#/definitions/PrivateStoreApprovalRequestResource"
             }
           },
           "default": {
@@ -240,13 +240,16 @@
             "in": "body",
             "name": "payload",
             "schema": {
-              "$ref": "#/definitions/AdminActionDetails"
+              "$ref": "#/definitions/PrivateStoreApprovalRequestProperties"
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PrivateStoreApprovalRequestResource"
+            }
           },
           "default": {
             "description": "Microsoft.Marketplace error response describing why the operation failed.",
@@ -262,7 +265,7 @@
         }
       }
     },
-    "/providers/Microsoft.Marketplace/privateStores/{privateStoreId}/offers/{offerId}/plans/{planId}/requestApprovals": {
+    "/providers/Microsoft.Marketplace/privateStores/{privateStoreId}/requestApprovals/{offerId}/plans/{planId}": {
       "parameters": [
         {
           "$ref": "#/parameters/PrivateStoreIdParameter"
@@ -861,6 +864,106 @@
         }
       }
     },
+    "PrivateStoreNotificationsResource": {
+      "description": "The privateStore notifications data structure.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PrivateStoreNotificationsProperties",
+          "description": "The privateStore notifications data structure.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "PrivateStoreNotificationsProperties": {
+      "description": "Notifications data structure properties",
+      "type": "object",
+      "properties": {
+        "details": {
+          "description": "Notifications details",
+          "type": "object",
+          "items": {
+            "$ref": "#/definitions/PrivateStoreNotifications"
+          }
+        },
+        "Update": {
+          "description": "Update notification object",
+          "type": "object",
+          "items": {
+            "$ref": "#/definitions/UpdateNotificationDetails"
+          }
+        }
+      }
+    },
+    "PrivateStoreApprovalRequestResource": {
+      "description": "Approval request resource.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PrivateStoreApprovalRequestProperties",
+          "description": "The privateStore offer Approval request  data structure.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "PrivateStoreApprovalRequestProperties": {
+      "description": "Approval request resource properties",
+      "type": "object",
+      "properties": {
+        "userPayload": {
+          "description": "user request payload",
+          "type": "object",
+          "items": {
+            "$ref": "#/definitions/OfferDetailsProperties"
+          }
+        },
+        "userResponse": {
+          "description": "user request response",
+          "type": "object",
+          "items": {
+            "$ref": "#/definitions/PrivateStoreOfferWithRequestApproval"
+          }
+        },
+        "userUpsertPayload": {
+          "description": "get offer request details for the user",
+          "type": "object",
+          "items": {
+            "$ref": "#/definitions/CreateApprovalRequestDetails"
+          }
+        },
+        "userUpsertResponse": {
+          "description": "Approval request response for user",
+          "type": "object",
+          "items": {
+            "$ref": "#/definitions/ApprovalRequestResponse"
+          }
+        },
+        "adminRequestApprovalResponse": {
+          "description": "request details for admin view",
+          "type": "object",
+          "items": {
+            "$ref": "#/definitions/AdminGetApprovalRequestsResponse"
+          }
+        },
+        "adminApprovalPayload": {
+          "description": "admin action details: approve or reject the request",
+          "type": "object",
+          "items": {
+            "$ref": "#/definitions/AdminActionDetails"
+          }
+        }
+      }
+    },
     "Resource": {
       "description": "An Azure resource.",
       "properties": {
@@ -878,9 +981,61 @@
           "description": "The type of the resource.",
           "type": "string",
           "readOnly": true
+        },
+        "systemData": {
+          "$ref": "#/definitions/SystemData",
+          "readOnly": true,
+          "description": "Metadata pertaining to creation and last modification of the resource"
         }
       },
       "x-ms-azure-resource": true
+    },
+    "SystemData": {
+      "description": "Read only system data",
+      "type": "object",
+      "readOnly": true,
+      "properties": {
+        "createdBy": {
+          "type": "string",
+          "description": "The identity that created the resource."
+        },
+        "createdByType": {
+          "$ref": "#/definitions/IdentityType",
+          "description": "The type of identity that created the resource"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp of resource creation (UTC)"
+        },
+        "lastModifiedBy": {
+          "type": "string",
+          "description": "The identity that last modified the resource."
+        },
+        "lastModifiedByType": {
+          "$ref": "#/definitions/IdentityType",
+          "description": "The type of identity that last modified the resource"
+        },
+        "lastModifiedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp of resource last modification (UTC)"
+        }
+      }
+    },
+    "IdentityType": {
+      "description": "The type of identity that creates/modifies resources",
+      "type": "string",
+      "enum": [
+        "User",
+        "Application",
+        "ManagedIdentity",
+        "Key"
+      ],
+      "x-ms-enum": {
+        "name": "IdentityType",
+        "modelAsString": true
+      }
     }
   },
   "securityDefinitions": {
