@@ -66,7 +66,7 @@
           }
         },
         "x-ms-examples": {
-          "ListResourceHealthAlertRules": {
+          "Migration Triggering": {
             "$ref": "./examples/migrateFromSmartDetectionsTrigger.json"
           }
         }
@@ -105,7 +105,7 @@
           }
         },
         "x-ms-examples": {
-          "ListResourceHealthAlertRules": {
+          "Get Migration Status": {
             "$ref": "./examples/migrateFromSmartDetectionsGet.json"
           }
         }
@@ -141,7 +141,7 @@
         },
         "customActionGroupName": {
           "type": "string",
-          "description": "A custom name of an existing Action Group to attach to the created alert rules"
+          "description": "A custom name of an existing Action Group to attach to the created alert rules. Required only when actionGroupCreationPolicy is 'Custom'"
         }
       },
       "description": "The smart detection migration request"
@@ -173,17 +173,17 @@
           },
           "description": "The current status of the migration process"
         },
-        "scopes": {
+        "scope": {
           "type": "array",
           "items": {
             "type": "string"
           },
-          "description": "the list of resource id's that this health alert is scoped to."
+          "description": "the list of resource id's that the requested migration should act upon"
         },
         "armDeploymentName": {
           "type": "string",
           "description": "the name of the ARM deployment associated with the migration process"
-        },
+        }
       },
       "description": "A migration status response."
     },
