@@ -1880,6 +1880,10 @@
           "$ref": "#/definitions/Sku",
           "description": "The SKU of the Redis cache to deploy."
         },
+        "redisVersion": {
+          "type": "string",
+          "description": "Redis version. Valid values: (4, 6)"
+        },
         "subnetId": {
           "type": "string",
           "pattern": "^/subscriptions/[^/]*/resourceGroups/[^/]*/providers/Microsoft.(ClassicNetwork|Network)/virtualNetworks/[^/]*/subnets/[^/]*$",
@@ -1919,11 +1923,6 @@
     },
     "RedisProperties": {
       "properties": {
-        "redisVersion": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Redis version."
-        },
         "provisioningState": {
           "readOnly": true,
           "type": "string",
