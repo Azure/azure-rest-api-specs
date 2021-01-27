@@ -121,6 +121,7 @@ input-file:
 - Microsoft.Sql/preview/2020-02-02-preview/ServerTrustGroups.json
 - Microsoft.Sql/preview/2020-08-01-preview/Databases.json
 - Microsoft.Sql/preview/2020-08-01-preview/ElasticPools.json
+- Microsoft.Sql/preview/2020-08-01-preview/LongTermRetentionPolicies.json
 - Microsoft.Sql/preview/2020-08-01-preview/ServerDevOpsAudit.json
 - Microsoft.Sql/preview/2020-11-01-preview/LongTermRetentionBackups.json
 
