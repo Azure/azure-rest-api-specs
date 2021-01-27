@@ -31,7 +31,7 @@ openapi-type: arm
 tag: package-preview-2020-10
 ```
 
-## Suppression
+### Suppression
 
 ``` yaml
 directive:
