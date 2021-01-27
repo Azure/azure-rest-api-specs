@@ -413,7 +413,7 @@
         }
       }
     },
-    "/providers/Microsoft.ResourceHealth/potentialOutages/{potentialOutageName}": {
+    "/providers/Microsoft.ResourceHealth/potentialOutages/default": {
       "get": {
         "tags": [
           "PotentialOutages"
@@ -421,9 +421,6 @@
         "operationId": "PotentialOutages_Get",
         "description": "Gets Azure services' potential outages.",
         "parameters": [
-          {
-            "$ref": "#/parameters/PotentialOutageNameParameter"
-          },
           {
             "$ref": "#/parameters/ApiVersionParameter"
           }
@@ -1238,7 +1235,18 @@
     "potentialOutagesGetResult": {
       "description": "The Get PotentialOutages operation response.",
       "type": "object",
-      "$ref": "#/definitions/potentialoutage"
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/potentialoutage",
+          "description": "The emerging issue entity properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/Resource"
+        }
+      ]
     },
     "potentialoutage": {
       "type": "object",
@@ -1609,14 +1617,6 @@
       "enum": [
         "default"
       ],
-      "x-ms-parameter-location": "method"
-    },
-    "ResourceGroupNameParameter": {
-      "name": "resourceGroupName",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "The name of the resource group.",
       "x-ms-parameter-location": "method"
     },
     "FilterParameter": {
