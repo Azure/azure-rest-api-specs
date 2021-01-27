@@ -25,8 +25,8 @@ To see additional help and options, run:
 ``` yaml
 directive:
   - suppress: PageableOperation
-    from: iotDefenderSettings.json
-    where: '$.paths["/subscriptions/{subscriptionId}/providers/Microsoft.IoTSecurity/iotDefenderSettings"].get'
+    from: defenderSettings.json
+    where: '$.paths["/subscriptions/{subscriptionId}/providers/Microsoft.IoTSecurity/defenderSettings"].get'
     reason: The list returns limited number of items
 ```
 
@@ -47,7 +47,7 @@ These settings apply only when `--tag=2021-02-01-preview` is specified on the co
 
 ``` yaml $(tag) == '2021-02-01-preview'
 input-file:
-- Microsoft.IoTSecurity/preview/2021-02-01-preview/iotDefenderSettings.json
+- Microsoft.IoTSecurity/preview/2021-02-01-preview/defenderSettings.json
 - Microsoft.IoTSecurity/preview/2021-02-01-preview/operations.json
 ```
 
