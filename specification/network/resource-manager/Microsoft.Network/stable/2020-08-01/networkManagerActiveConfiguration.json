@@ -34,64 +34,6 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkManagers/{networkManagerName}/activeConfigurations/{locationName}": {
-      "parameters": [
-        {
-          "$ref": "./network.json#/parameters/ApiVersionParameter"
-        },
-        {
-          "$ref": "./network.json#/parameters/SubscriptionIdParameter"
-        },
-        {
-          "$ref": "#/parameters/ResourceGroupNameParameter"
-        },
-        {
-          "$ref": "#/parameters/NetworkManagerNameParameter"
-        },
-        {
-          "name": "locationName",
-          "in": "path",
-          "required": true,
-          "type": "string",
-          "description": "The location Name."
-        },
-        {
-          "$ref": "#/parameters/ListPageSizeParameter"
-        },
-        {
-          "$ref": "#/parameters/ListSkipTokenParameter"
-        }
-      ],
-      "get": {
-        "tags": [
-          "NetworkManagerActiveConfigurations"
-        ],
-        "operationId": "ActiveConfigurations_ListByRegion",
-        "description": "The list active configuration operation to list an active configuration per region",
-        "responses": {
-          "200": {
-            "description": "Get successful. The operation returns the specified Managed Network active configuration resource.",
-            "schema": {
-              "$ref": "#/definitions/ActiveConfigurationListResult"
-            }
-          },
-          "default": {
-            "description": "Resource Provider error response describing why the operation failed.",
-            "schema": {
-              "$ref": "./network.json#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
-        "x-ms-examples": {
-          "List active configuration by regions": {
-            "$ref": "./examples/NetworkManagerActiveConfigurationListByRegion.json"
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkManagers/{networkManagerName}/activeConfigurations": {
       "parameters": [
         {
@@ -111,6 +53,14 @@
         },
         {
           "$ref": "#/parameters/ListSkipTokenParameter"
+        },
+        {
+          "name": "region",
+          "in": "query",
+          "description": "Location Name",
+          "required": false,
+          "type": "string",
+          "x-ms-parameter-location": "method"
         }
       ],
       "get": {
