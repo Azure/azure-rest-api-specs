@@ -27,7 +27,7 @@ These are the global settings for the Azure Synapse Analytics API.
 description: Azure Synapse Analytics Management Client
 openapi-type: arm
 azure-arm: true
-tag: package-2019-06-01-preview
+tag: package-2020-12-01
 generate-empty-classes: true
 ```
 
@@ -209,10 +209,6 @@ csharp:
   namespace: Microsoft.Azure.Management.Synapse
   output-folder: $(csharp-sdks-folder)/synapse/Microsoft.Azure.Management.Synapse/src/Generated
   clear-output-folder: true
-batch:
- - tag: package-2019-06-01-preview
- - tag: package-sqlGen3-2020-04-01-preview
- - tag: package-2020-12-01
 ```
 
 ## Go
