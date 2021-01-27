@@ -10,6 +10,7 @@ azure-arm: true
 license-header: MICROSOFT_MIT_NO_VERSION
 namespace: azure.mgmt.loganalytics
 package-name: azure-mgmt-loganalytics
+package-version: 7.0.0b1
 clear-output-folder: true
 ```
 
