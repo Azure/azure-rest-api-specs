@@ -32,7 +32,7 @@
         "tags": [
           "SmartDetectionsMigration"
         ],
-        "description": "Starts an asyncrounous migration process of Applications Insights resource from Smart Detections to Smart Alerts",
+        "description": "Starts an asynchronous migration process of Smart Detections to Smart Alerts in an Application Insights resource.",
         "operationId": "SmartDetectionsMigration_Trigger",
         "parameters": [
           {
@@ -48,12 +48,12 @@
             "schema": {
               "$ref": "#/definitions/SmartDetectionMigrationRequest"
             },
-            "description": "The parameters controlling the migratio process"
+            "description": "The parameters controlling the migratio process."
           }
         ],
         "responses": {
           "202": {
-            "description": "Successful request to start an async migration process",
+            "description": "Migration requst was accepted. Processing will start promptly.",
             "schema": {
               "$ref": "#/definitions/MigrationStatusResponse"
             }
@@ -77,7 +77,7 @@
         "tags": [
           "SmartDetectionsMigration"
         ],
-        "description": "Retrieve the status of a migration process",
+        "description": "Retrieve the status of a migration process.",
         "operationId": "SmartDetectionsMigration_Get",
         "parameters": [
           {
@@ -92,7 +92,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Successful request for the status of a migration process",
+            "description": "OK",
             "schema": {
               "$ref": "#/definitions/MigrationStatusResponse"
             }
@@ -124,7 +124,7 @@
           "items": {
             "type": "string"
           },
-          "description": "the list of resource id's that the requested migration should act upon"
+          "description": "The list of resource IDs that the requested migration should be performed on."
         },
         "actionGroupCreationPolicy": {
           "type": "string",
@@ -138,7 +138,7 @@
             "values": [
               {
                 "value": "Default",
-                "description": "Create all Alert Rules with Smart Alerts default Action Group."
+                "description": "Create all Alert Rules with the default Smart Alerts Action Group."
               },
               {
                 "value": "Custom",
@@ -146,19 +146,19 @@
               },
               {
                 "value": "Auto",
-                "description": "Automatically create an Action Group for each unique setting in the Smart Detections. "
+                "description": "Automatically create an Action Group for each unique setting in the Smart Detection Rules."
               }
             ],
             "modelAsString": true
           },
-          "description": "The policy for migrating the email settings in the Smart Detections rules into Action Groups"
+          "description": "The policy for migrating the email settings in the Smart Detection Rules into Action Groups."
         },
         "customActionGroupName": {
           "type": "string",
-          "description": "A custom name of an existing Action Group to attach to the created alert rules. Required only when actionGroupCreationPolicy is 'Custom'"
+          "description": "A custom name of an existing Action Group to attach to the created alert rules. Required only when actionGroupCreationPolicy is set to 'Custom'."
         }
       },
-      "description": "The smart detection migration request"
+      "description": "The Smart Detection migration request."
     },
     "MigrationStatusResponse": {
       "required": [
@@ -169,7 +169,7 @@
       "properties": {
         "id": {
           "type": "string",
-          "description": "the migration process unique id"
+          "description": "The migration process unique id."
         },
         "status": {
           "type": "string",
@@ -186,7 +186,7 @@
             "values": [
               {
                 "value": "Starting",
-                "description": "The migration was accepted and is will start shortly."
+                "description": "The migration was accepted and will start shortly."
               },
               {
                 "value": "InProcess", 
@@ -198,7 +198,7 @@
               },
               {
                 "value": "Completed",
-                "description": "The migration completed successfuly."
+                "description": "The migration completed successfully."
               },
               {
                 "value": "Failed",
@@ -218,17 +218,17 @@
           "items": {
             "type": "string"
           },
-          "description": "the list of resource id's that the requested migration should act upon"
+          "description": "The list of resource IDs that the requested migration should be performed on."
         },
         "armDeploymentName": {
           "type": "string",
-          "description": "the name of the ARM deployment associated with the migration process"
+          "description": "The name of the ARM deployment associated with the migration process."
         }
       },
       "description": "A migration status response."
     },
     "MigrationErrorResponse": {
-      "description": "Describes the format of Error response.",
+      "description": "Api error",
       "type": "object",
       "properties": {
         "error": {
@@ -237,7 +237,7 @@
       }
     },
     "MigrationErrorResponseBody": {
-      "description": "Describes the format of Error response.",
+      "description": "Api error body.",
       "type": "object",
       "properties": {
         "code": {
