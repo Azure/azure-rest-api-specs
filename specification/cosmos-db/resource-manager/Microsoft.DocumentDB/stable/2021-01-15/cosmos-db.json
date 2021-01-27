@@ -5344,9 +5344,6 @@
         },
         "tags": {
           "$ref": "#/definitions/Tags"
-        },
-        "identity": {
-          "$ref": "#/definitions/ManagedServiceIdentity"
         }
       },
       "x-ms-azure-resource": true
@@ -5390,6 +5387,9 @@
             "name": "DatabaseAccountKind",
             "modelAsString": true
           }
+        },
+        "identity": {
+          "$ref": "#/definitions/ManagedServiceIdentity"
         },
         "properties": {
           "x-ms-client-flatten": true,
@@ -6260,6 +6260,9 @@
             "modelAsString": true
           }
         },
+        "identity": {
+          "$ref": "#/definitions/ManagedServiceIdentity"
+        },
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/DatabaseAccountCreateUpdateProperties"
@@ -6388,12 +6391,12 @@
           "type": "string",
           "description": "The location of the resource group to which the resource belongs."
         },
+        "identity": {
+          "$ref": "#/definitions/ManagedServiceIdentity"
+        },
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/DatabaseAccountUpdateProperties"
-        },
-        "identity": {
-          "$ref": "#/definitions/ManagedServiceIdentity"
         }
       }
     },
