@@ -74,6 +74,11 @@ directive:
       - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.PolicyInsights/checkPolicyRestrictions"].post.operationId
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.PolicyInsights/checkPolicyRestrictions"].post.operationId
 
+  - suppress: BodyTopLevelProperties
+    from: attestations.json
+    where: $.definitions.Attestation.properties
+    reason: systemData is now a required top level property
+
 ```
 
 ### Tag: package-2021-01
@@ -88,7 +93,7 @@ input-file:
 - Microsoft.PolicyInsights/stable/2019-10-01/policyStates.json
 - Microsoft.PolicyInsights/stable/2019-10-01/policyMetadata.json
 - Microsoft.PolicyInsights/stable/2020-07-01/checkPolicyRestrictions.json
-- Microsoft.PolicyInsights/stable/2019-10-01/attestations.json
+- Microsoft.PolicyInsights/stable/2021-01-01/attestations.json
 ```
 
 ### Tag: package-2020-07
