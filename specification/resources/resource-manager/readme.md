@@ -37,7 +37,7 @@ tag: package-locks-2016-09
 ```
 
 ``` yaml $(package-policy)
-tag: package-policy-2020-09
+tag: package-policy-2020-03
 ```
 
 ``` yaml $(package-resources)
@@ -83,6 +83,7 @@ input-file:
 - Microsoft.Authorization/stable/2020-09-01/policyAssignments.json
 - Microsoft.Authorization/stable/2020-09-01/policyDefinitions.json
 - Microsoft.Authorization/stable/2020-09-01/policySetDefinitions.json
+- Microsoft.Authorization/preview/2020-07-01-preview/policyExemptions.json
 
 # Needed when there is more than one input file
 override-info:
