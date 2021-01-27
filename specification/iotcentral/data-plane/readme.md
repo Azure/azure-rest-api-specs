@@ -30,10 +30,12 @@ tag: package-2019-10-28-preview
 These settings apply only when `--tag=package-2019-10-28-preview` is specified on the command line.
 
 ```yaml $(package-2019-10-28-preview-global)
-input-file: Microsoft.IoTCentral/preview/2019-10-28-preview/iotcentralapps.json
+input-file:
+  - Microsoft.IoTCentral/preview/2019-10-28-preview/iotcentralapps.json
 ```
 ```yaml $(package-2019-10-28-preview-app)
-input-file: Microsoft.IoTCentral/preview/2019-10-28-preview/iotcentral.json
+input-file:
+  - Microsoft.IoTCentral/preview/2019-10-28-preview/iotcentral.json
 ```
 
 ```yaml

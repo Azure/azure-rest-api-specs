@@ -23,10 +23,5 @@ python:
 ``` yaml $(python) && $(python-mode) == 'update'
 python:
     no-namespace-folders: true
-    output-folder: $(python-sdks-folder)/providerhub/azure-mgmt-providerhub/azure/mgmt/providerhub
-```
-``` yaml $(python) && $(python-mode) == 'create'
-python:
-    basic-setup-py: true
-    output-folder: $(python-sdks-folder)/providerhub/azure-mgmt-providerhub
+    output-folder: $(python-sdks-folder)/azure-mgmt/providerhub/azure/mgmt/providerhub
 ```

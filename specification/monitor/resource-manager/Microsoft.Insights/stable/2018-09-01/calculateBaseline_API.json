@@ -36,7 +36,7 @@
     }
   },
   "paths": {
-    "/{resourceUri}/providers/microsoft.insights/calculatebaseline": {
+    "/{resourceUri}/providers/Microsoft.Insights/calculatebaseline": {
       "post": {
         "tags": [
           "Baseline"
@@ -48,7 +48,7 @@
             "$ref": "#/parameters/ExtendedResourceUriParameter"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
             "name": "TimeSeriesInformation",
@@ -154,6 +154,33 @@
             "$ref": "#/definitions/Baseline"
           },
           "description": "The baseline values for each sensitivity."
+        },
+        "statistics": {
+          "type": "object",
+          "properties": {
+            "isEligible": {
+              "type": "boolean",
+              "description": "is series eligible for dynamic threshold analysis"
+            },
+            "status": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "The list of extended status for calculating the baseline."
+            },
+            "seasonalityPeriod": {
+              "type": "integer",
+              "format": "int32",
+              "description": "The seasonality period for calculating the baseline."
+            }
+          },
+          "description": "The statistics"
+        },
+        "internalOperationId": {
+          "type": "string",
+          "readOnly": true,
+          "description": "internal operation id"
         }
       },
       "required": [
@@ -195,6 +222,15 @@
             "description": "A single high threshold value."
           },
           "description": "The high thresholds of the baseline."
+        },
+        "timestamps": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "date-time",
+            "description": "the timestamp for the baseline value in ISO 8601 format."
+          },
+          "description": "the array of timestamps of the baselines."
         }
       },
       "required": [
@@ -214,13 +250,6 @@
       "description": "The identifier of the resource. It has the following structure: subscriptions/{subscriptionName}/resourceGroups/{resourceGroupName}/providers/{providerName}/{resourceName}. For example: subscriptions/b368ca2f-e298-46b7-b0ab-012281956afa/resourceGroups/vms/providers/Microsoft.Compute/virtualMachines/vm1",
       "x-ms-parameter-location": "method",
       "x-ms-skip-url-encoding": true
-    },
-    "ApiVersionParameter": {
-      "name": "api-version",
-      "in": "query",
-      "required": true,
-      "type": "string",
-      "description": "Client Api Version."
     }
   }
 }

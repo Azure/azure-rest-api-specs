@@ -26,9 +26,18 @@ These are the global settings for the digitaltwins.
 
 ``` yaml
 openapi-type: arm
-tag: package-2020-10
+tag: package-2020-12
 ```
 
+
+### Tag: package-2020-12
+
+These settings apply only when `--tag=package-2020-12` is specified on the command line.
+
+```yaml $(tag) == 'package-2020-12'
+input-file:
+  - Microsoft.DigitalTwins/stable/2020-12-01/digitaltwins.json
+```
 ### Tag: package-2020-10
 
 These settings apply only when `--tag=package-2020-10` is specified on the command line.
@@ -58,9 +67,7 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-python
-    after_scripts:
-      - python ./scripts/multiapi_init_gen.py azure-mgmt-digitaltwins
+  - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js
@@ -134,4 +141,7 @@ directive:
     where: '$.definitions.EventHub.allOf["1"].properties.connectionStringSecondaryKey'
     from: digitaltwins.json
     reason: Secrets are obfuscated on read.
+  - suppress: R4009
+    from: digitaltwins.json
+    reason: Warning raised to error while PR was being reviewed. Will implement in next version.
 ```
