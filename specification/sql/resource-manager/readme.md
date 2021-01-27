@@ -41,7 +41,7 @@ APIs must only be added to this section when the API is publicly available in at
 
 Differences in v5 (compared to v4):
 
-* Added new API for databases
+* Added new API version for Long Term Retention Backups 
 
   * `-2020-11-01/LongTermRetentionBackups.json`
 
@@ -124,6 +124,7 @@ input-file:
 - Microsoft.Sql/preview/2020-08-01-preview/ElasticPools.json
 - Microsoft.Sql/preview/2020-08-01-preview/ServerDevOpsAudit.json
 - Microsoft.Sql/preview/2020-11-01-preview/LongTermRetentionBackups.json
+
 
 # Needed when there is more than one input file
 override-info:
@@ -356,7 +357,7 @@ Differences in v2 (compared to v1):
 
 * Updated to LTRv2
 
-  * `-201 4-04-01/backupLongTermRetentionPolicies.json`
+  * `-2014-04-01/backupLongTermRetentionPolicies.json`
 
   * `-2014-04-01/backupLongTermRetentionVaults.json`
 
