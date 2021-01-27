@@ -12344,7 +12344,7 @@
     },
     "ExtendedLocationType": {
       "type": "string",
-      "description": "The supported ExtendedLocation types. Currently only EdgeZone is supported in Microsoft.Compute resources.",
+      "description": "The type of extendedLocation.",
       "enum": [
         "EdgeZone"
       ],
@@ -12354,7 +12354,7 @@
       }
     },
     "ExtendedLocation": {
-      "description": "ExtendedLocation complex type.",
+      "description": "The complex type of the extended location.",
       "properties": {
         "name": {
           "type": "string",
@@ -12364,11 +12364,7 @@
           "$ref": "#/definitions/ExtendedLocationType",
           "description": "The type of the extended location."
         }
-      },
-      "required": [
-        "name",
-        "type"
-      ]
+      }
     },
     "RecoveryWalkResponse": {
       "properties": {
