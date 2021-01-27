@@ -704,38 +704,6 @@
         }
       }
     },
-    "CommunicationError": {
-      "description": "Represents the Communication Services error.",
-      "required": [
-        "code",
-        "message"
-      ],
-      "type": "object",
-      "properties": {
-        "code": {
-          "description": "The error code.",
-          "type": "string"
-        },
-        "message": {
-          "description": "The error message.",
-          "type": "string"
-        },
-        "target": {
-          "description": "The error target.",
-          "type": "string"
-        },
-        "details": {
-          "description": "Further details about specific errors that led to this error.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/CommunicationError"
-          }
-        },
-        "innererror": {
-          "$ref": "#/definitions/CommunicationError"
-        }
-      }
-    },
     "PhoneNumberOperation": {
       "description": "Long running operation.",
       "required": [
@@ -767,7 +735,7 @@
           "type": "string"
         },
         "error": {
-          "$ref": "#/definitions/CommunicationError"
+          "$ref": "../../../Microsoft.CommunicationServicesCommon/preview/2020-11-19-preview1/common.json#/definitions/CommunicationError"
         },
         "id": {
           "description": "Id of operation.",
