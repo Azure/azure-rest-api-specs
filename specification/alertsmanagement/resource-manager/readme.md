@@ -24,7 +24,7 @@ To see additional help and options, run:
 
 These are the global settings for the AlertManagement API.
 
-## Suppression
+### Suppression
 ``` yaml
 directive:
   - suppress: R3025
