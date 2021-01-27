@@ -26,10 +26,18 @@ These are the global settings for the Redis API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2020-06
+tag: package-2020-12
 ```
 
 
+### Tag: package-2020-12
+
+These settings apply only when `--tag=package-2020-12` is specified on the command line.
+
+```yaml $(tag) == 'package-2020-12'
+input-file:
+  - Microsoft.Cache/stable/2020-12-01/redis.json
+```
 ### Tag: package-2020-06
 
 These settings apply only when `--tag=package-2020-06` is specified on the command line.
@@ -38,6 +46,7 @@ These settings apply only when `--tag=package-2020-06` is specified on the comma
 input-file:
   - Microsoft.Cache/stable/2020-06-01/redis.json
 ```
+
 ### Tag: package-2019-07-preview
 
 These settings apply only when `--tag=package-2019-07-preview` is specified on the command line.
