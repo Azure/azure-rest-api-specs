@@ -1,0 +1,238 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2021-01-01-preview",
+    "title": "Azure Alerts Management Service Resource Provider",
+    "description": "APIs for managing migration from Smart Detections to Smart Alerts."
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AlertsManagement/migrateFromSmartDetections": {
+      "post": {
+        "tags": [
+          "SmartDetectionsMigration"
+        ],
+        "description": "Starts an asyncrounous migration process of Applications Insights resource from Smart Detections to Smart Alerts",
+        "operationId": "SmartDetectionsMigration_Trigger",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SmartDetectionMigrationRequest"
+            },
+            "description": "The parameters controlling the migratio process"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Successful request to start an async migration process",
+            "schema": {
+              "$ref": "#/definitions/MigrationStatusResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/MigrationErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ListResourceHealthAlertRules": {
+            "$ref": "./examples/migrateFromSmartDetectionsTrigger.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AlertsManagement/migrateFromSmartDetections/{migrationId}": {
+      "get": {
+        "tags": [
+          "SmartDetectionsMigration"
+        ],
+        "description": "Retrieve the status of a migration process",
+        "operationId": "SmartDetectionsMigration_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/MigrationIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful request for the status of a migration process",
+            "schema": {
+              "$ref": "#/definitions/MigrationStatusResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/MigrationErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ListResourceHealthAlertRules": {
+            "$ref": "./examples/migrateFromSmartDetectionsGet.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "SmartDetectionMigrationRequest": {
+      "required": [
+        "scope",
+        "actionGroupCreationPolicy"
+      ],
+      "properties": {
+        "scope": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "the list of resource id's that the requested migration should act upon"
+        },
+        "actionGroupCreationPolicy": {
+          "type": "string",
+          "enum": [
+            "Default",
+            "Custom",
+            "Auto"
+          ],
+          "x-ms-enum": {
+            "name": "ActionGroupCreationPolicy",
+            "modelAsString": true
+          },
+          "description": "The policy for migrating the email settings in the Smart Detections rules into Action Groups"
+        },
+        "customActionGroupName": {
+          "type": "string",
+          "description": "A custom name of an existing Action Group to attach to the created alert rules"
+        }
+      },
+      "description": "The smart detection migration request"
+    },
+    "MigrationStatusResponse": {
+      "required": [
+        "id",
+        "status",
+        "scope"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "the migration process unique id"
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "Starting",
+            "InProcess",
+            "Deploying",
+            "Completed",
+            "Failed",
+            "Canceled"
+          ],
+          "x-ms-enum": {
+            "name": "MigrationStatus",
+            "modelAsString": true
+          },
+          "description": "The current status of the migration process"
+        },
+        "scopes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "the list of resource id's that this health alert is scoped to."
+        },
+        "armDeploymentName": {
+          "type": "string",
+          "description": "the name of the ARM deployment associated with the migration process"
+        },
+      },
+      "description": "A migration status response."
+    },
+    "MigrationErrorResponse": {
+      "description": "Describes the format of Error response.",
+      "type": "object",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/HealthAlertsErrorResponseBody"
+        }
+      }
+    },
+    "HealthAlertsErrorResponseBody": {
+      "description": "Describes the format of Error response.",
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "Error code",
+          "type": "string"
+        },
+        "message": {
+          "description": "Error message indicating why the operation failed.",
+          "type": "string"
+        }
+      }
+    }
+  },
+  "parameters": {
+    "SubscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The Azure subscription Id."
+    },
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "Client Api Version."
+    },
+    "MigrationIdParameter": {
+      "name": "migrationId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The id of the remigration process.",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}
