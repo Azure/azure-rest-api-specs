@@ -807,7 +807,16 @@
       "description": "Describes the format of Error response.",
       "type": "object",
       "properties": {
-        "code": {
+        "error": {
+          "description": "The error object.",
+          "$ref": "#/definitions/ErrorDetail"
+        }
+      }
+    },
+    "ErrorDetail": {
+      "description": "The error detail.",
+      "properties": {
+      	"code": {
           "description": "Error code",
           "type": "string"
         },
@@ -816,7 +825,7 @@
           "type": "string"
         }
       }
-    },
+	},      	
     "ActionGroupPatchBody": {
       "description": "An action group object for the body of patch operations.",
       "properties": {
