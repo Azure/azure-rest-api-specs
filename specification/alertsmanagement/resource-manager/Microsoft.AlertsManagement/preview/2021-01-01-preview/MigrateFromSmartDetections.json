@@ -135,6 +135,20 @@
           ],
           "x-ms-enum": {
             "name": "ActionGroupCreationPolicy",
+            "values": [
+              {
+                "value": "Default",
+                "description": "Create all Alert Rules with Smart Alerts default Action Group."
+              },
+              {
+                "value": "Custom",
+                "description": "Create all Alert Rules with a custom Action Group that is specified in 'customActionGroupName'."
+              },
+              {
+                "value": "Auto",
+                "description": "Automatically create an Action Group for each unique setting in the Smart Detections. "
+              }
+            ],
             "modelAsString": true
           },
           "description": "The policy for migrating the email settings in the Smart Detections rules into Action Groups"
@@ -169,6 +183,32 @@
           ],
           "x-ms-enum": {
             "name": "MigrationStatus",
+            "values": [
+              {
+                "value": "Starting",
+                "description": "The migration was accepted and is will start shortly."
+              },
+              {
+                "value": "InProcess", 
+                "description": "The migration is in progress."
+              },
+              {
+                "value": "Deploying",
+                "description": "The migration template is deploying."
+              },
+              {
+                "value": "Completed",
+                "description": "The migration completed successfuly."
+              },
+              {
+                "value": "Failed",
+                "description": "The migration failed."
+              },
+              {
+                "value": "Canceled",
+                "description": "The migration was canceled by the user."
+              }
+            ],
             "modelAsString": true
           },
           "description": "The current status of the migration process"
