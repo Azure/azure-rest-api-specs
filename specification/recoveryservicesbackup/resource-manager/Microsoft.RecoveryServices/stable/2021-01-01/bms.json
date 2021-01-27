@@ -3375,7 +3375,7 @@
             "description": "Move Resource Across Tiers Request",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/MoveRPAcrossTiersRequestResource"
+              "$ref": "#/definitions/MoveRPAcrossTiersRequest"
             }
           }
         ],
@@ -3438,6 +3438,15 @@
             "in": "path",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "List Recovery points Recommended for Move Request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ListRecoveryPointsRecommendedForMoveRequest"
+            }
           }
         ],
         "responses": {
@@ -10057,19 +10066,6 @@
         }
       }
     },
-    "MoveRPAcrossTiersRequestResource": {
-      "allOf": [
-        {
-          "$ref": "#/definitions/Resource"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/MoveRPAcrossTiersRequest",
-          "description": "MoveRPAcrossTiersRequestResource properties"
-        }
-      }
-    },
     "RecoveryPointMoveReadinessInfo": {
       "type": "object",
       "properties": {
@@ -10086,7 +10082,7 @@
       "type": "object",
       "properties": {
         "rehydrationRetentionDuration": {
-          "description": "How long the rehydrated RP should be kept",
+          "description": "How long the rehydrated RP should be kept\r\nShould be ISO8601 Duration format e.g. \"P7D\"",
           "type": "string"
         },
         "rehydrationPriority": {
@@ -10099,6 +10095,23 @@
           "x-ms-enum": {
             "name": "RehydrationPriority",
             "modelAsString": true
+          }
+        }
+      }
+    },
+    "ListRecoveryPointsRecommendedForMoveRequest": {
+      "description": "ListRecoveryPointsRecommendedForMoveRequest Request",
+      "type": "object",
+      "properties": {
+        "objectType": {
+          "description": "Gets the class type.",
+          "type": "string"
+        },
+        "excludedRPList": {
+          "description": "List of Recovery Points excluded from Move",
+          "type": "array",
+          "items": {
+            "type": "string"
           }
         }
       }
