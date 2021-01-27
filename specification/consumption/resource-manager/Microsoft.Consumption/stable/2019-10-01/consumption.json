@@ -134,6 +134,7 @@
             "in": "query",
             "required": false,
             "type": "integer",
+            "format": "int32",
             "minimum": 1,
             "maximum": 1000
           },
@@ -220,6 +221,7 @@
             "in": "query",
             "required": false,
             "type": "integer",
+            "format": "int32",
             "minimum": 1,
             "maximum": 1000
           },
@@ -1320,6 +1322,7 @@
             "in": "query",
             "required": false,
             "type": "integer",
+            "format": "int32",
             "minimum": 1,
             "maximum": 1000
           },
@@ -1385,6 +1388,7 @@
             "in": "query",
             "required": false,
             "type": "integer",
+            "format": "int32",
             "minimum": 1,
             "maximum": 1000
           },
@@ -1550,7 +1554,7 @@
         }
       }
     },
-    "/providers/Microsoft.Management/managementGroups/{managementGroupId}/providers/Microsoft.Billing/billingPeriods/{billingPeriodName}/Microsoft.Consumption/aggregatedcost": {
+    "/providers/Microsoft.Management/managementGroups/{managementGroupId}/providers/Microsoft.Billing/billingPeriods/{billingPeriodName}/Microsoft.Consumption/aggregatedCost": {
       "get": {
         "tags": [
           "AggregatedCost"
@@ -4613,6 +4617,11 @@
       "description": "A Consumption REST API operation.",
       "type": "object",
       "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Operation Id."
+        },
         "name": {
           "description": "Operation name: {provider}/{resource}/{operation}.",
           "type": "string",
@@ -4924,6 +4933,11 @@
           "readOnly": true,
           "type": "string",
           "description": "Resource type."
+        },
+        "etag": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource etag."
         },
         "tags": {
           "readOnly": true,
