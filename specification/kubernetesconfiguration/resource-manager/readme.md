@@ -26,18 +26,27 @@ These are the global settings for the kubernetesconfiguration.
 
 ``` yaml
 openapi-type: arm
-tag: package-preview-2020-10
+tag: package-2021-03
 ```
 
 
+### Tag: package-2021-03
+
+These settings apply only when `--tag=package-2021-03` is specified on the command line.
+
+```yaml $(tag) == 'package-2021-03'
+input-file:
+  - Microsoft.KubernetesConfiguration/stable/2021-03-01/kubernetesconfiguration.json
+```
 ### Tag: package-preview-2020-10
 
 These settings apply only when `--tag=package-preview-2020-10` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2020-10'
+``` yaml $(tag) == 'package-preview-2020-10'
 input-file:
   - Microsoft.KubernetesConfiguration/preview/2020-10-01-preview/kubernetesconfiguration.json
 ```
+
 ### Tag: package-2019-11-01-preview
 
 These settings apply only when `--tag=package-2019-11-01-preview` is specified on the command line.
