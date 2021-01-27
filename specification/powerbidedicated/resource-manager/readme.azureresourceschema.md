@@ -31,5 +31,6 @@ output-folder: $(azureresourceschema-folder)/schemas
 # all the input files in this apiVersion
 input-file:
   - Microsoft.PowerBIdedicated/stable/2021-01-01/powerbidedicated.json
+  - Microsoft.PowerBIdedicated/stable/2021-01-01/autoScaleVCores.json
 
 ```

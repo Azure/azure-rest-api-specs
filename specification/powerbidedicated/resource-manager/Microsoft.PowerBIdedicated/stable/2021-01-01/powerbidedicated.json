@@ -681,11 +681,11 @@
         },
         "location": {
           "type": "string",
-          "description": "Location of the PowerBI Dedicated resource."
-        },
-        "sku": {
-          "$ref": "#/definitions/ResourceSku",
-          "description": "The SKU of the PowerBI Dedicated resource."
+          "description": "Location of the PowerBI Dedicated resource.",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         },
         "tags": {
           "type": "object",
@@ -700,8 +700,7 @@
         }
       },
       "required": [
-        "location",
-        "sku"
+        "location"
       ],
       "x-ms-azure-resource": true
     },
@@ -709,6 +708,10 @@
       "description": "Represents an instance of a Dedicated Capacity resource.",
       "type": "object",
       "properties": {
+        "sku": {
+          "$ref": "#/definitions/CapacitySku",
+          "description": "The SKU of the PowerBI Dedicated capacity resource."
+        },
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/DedicatedCapacityProperties",
@@ -719,6 +722,9 @@
         {
           "$ref": "#/definitions/Resource"
         }
+      ],
+      "required": [
+        "sku"
       ]
     },
     "DedicatedCapacities": {
@@ -742,7 +748,7 @@
       "type": "object",
       "properties": {
         "sku": {
-          "$ref": "#/definitions/ResourceSku",
+          "$ref": "#/definitions/CapacitySku",
           "description": "The SKU of the Dedicated capacity resource."
         },
         "tags": {
@@ -803,7 +809,7 @@
             "Scaling"
           ],
           "x-ms-enum": {
-            "name": "ProvisioningState",
+            "name": "CapacityProvisioningState",
             "modelAsString": true
           },
           "readOnly": true,
@@ -816,8 +822,8 @@
         }
       ]
     },
-    "ResourceSku": {
-      "description": "Represents the SKU name and Azure pricing tier for PowerBI Dedicated resource.",
+    "CapacitySku": {
+      "description": "Represents the SKU name and Azure pricing tier for PowerBI Dedicated capacity resource.",
       "type": "object",
       "properties": {
         "name": {
@@ -832,7 +838,7 @@
             "AutoPremiumHost"
           ],
           "x-ms-enum": {
-            "name": "SkuTier",
+            "name": "CapacitySkuTier",
             "modelAsString": true
           },
           "description": "The name of the Azure pricing tier to which the SKU applies."
@@ -873,7 +879,7 @@
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ResourceSku"
+            "$ref": "#/definitions/CapacitySku"
           },
           "description": "The collection of available SKUs for new resources"
         }
@@ -897,7 +903,7 @@
       "type": "object",
       "properties": {
         "sku": {
-          "$ref": "#/definitions/ResourceSku",
+          "$ref": "#/definitions/CapacitySku",
           "description": "The SKU in SKU details for existing resources."
         }
       }
