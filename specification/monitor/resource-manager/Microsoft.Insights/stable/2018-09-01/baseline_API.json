@@ -358,6 +358,38 @@
             "description": "the timestamp for the baseline value in ISO 8601 format."
           },
           "description": "the array of timestamps of the baselines."
+        },
+        "PredictionResultType": {
+          "type": "integer",
+          "format": "int32",
+          "enum": [
+            0,
+            1,
+            2
+          ],
+          "x-ms-enum": {
+            "name": "PredictionResultType",
+            "modelAsString": false
+          },
+          "description": "The prediction result type of the baseline."
+        },
+        "ErrorType": {
+          "type": "integer",
+          "format": "int32",
+          "enum": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            100,
+            200
+          ],
+          "x-ms-enum": {
+            "name": "ErrorType",
+            "modelAsString": false
+          },
+          "description": "The error type of the baseline."
         }
       },
       "required": [
