@@ -627,6 +627,70 @@
           },
           "description": "Specifies the maximum resolution at which your video is analyzed. The default behavior is \"SourceResolution,\" which will keep the input video at its original resolution when analyzed. Using \"StandardDefinition\" will resize input videos to standard definition while preserving the appropriate aspect ratio. It will only resize if the video is of higher resolution. For example, a 1920x1080 input would be scaled to 640x360 before processing. Switching to \"StandardDefinition\" will reduce the time it takes to process high resolution video. It may also reduce the cost of using this component (see https://azure.microsoft.com/en-us/pricing/details/media-services/#analytics for details). However, faces that end up being too small in the resized video may not be detected."
         },
+        "mode": {
+          "type": "string",
+          "enum": [
+            "Analyze",
+            "Redact",
+            "Combined"
+          ],
+          "x-ms-enum": {
+            "name": "FaceRedactorMode",
+            "values": [
+              {
+                "value": "Analyze",
+                "description": "Analyze mode detects faces and outputs a metadata file with the results. Allows editing of the metadata file before faces are blurred with Redact mode."
+              },
+              {
+                "value": "Redact",
+                "description": "Redact mode consumes the metadata file from Analyze mode and redacts the faces found."
+              },
+              {
+                "value": "Combined",
+                "description": "Combined mode does the Analyze and Redact steps in one pass when editing the analyzed faces is not desired."
+              }
+            ],
+            "modelAsString": true
+          },
+          "description": "This mode provides the ability to choose between the following settings: 1) Analyze - For detection only.This mode generates a metadata JSON file marking appearances of faces throughout the video.Where possible, appearances of the same person are assigned the same ID. 2) Combined - Additionally redacts(blurs) detected faces. 3) Redact - This enables a 2-pass process, allowing for selective redaction of a subset of detected faces.It takes in the metadata file from a prior analyze pass, along with the source video, and a user-selected subset of IDs that require redaction."
+        },
+        "blurType": {
+          "type": "string",
+          "enum": [
+            "Box",
+            "Low",
+            "Med",
+            "High",
+            "Black"
+          ],
+          "x-ms-enum": {
+            "name": "BlurType",
+            "values": [
+              {
+                "value": "Box",
+                "description": "Box: debug filter, bounding box only"
+              },
+              {
+                "value": "Low",
+                "description": "Low: box-car blur filter"
+              },
+              {
+                "value": "Med",
+                "description": "Med: Gaussian blur filter"
+              },
+              {
+                "value": "High",
+                "description": "High: Confuse blur filter"
+              },
+              {
+                "value": "Black",
+                "description": "Black: Black out filter"
+              }
+            ],
+            "modelAsString": true
+          },
+          "description": "Blur type"
+        },
         "experimentalOptions": {
           "type": "object",
           "additionalProperties": {
@@ -636,7 +700,7 @@
         }
       },
       "type": "object",
-      "description": "Describes all the settings to be used when analyzing a video in order to detect all the faces present."
+      "description": "Describes all the settings to be used when analyzing a video in order to detect (and optionally redact) all the faces present."
     },
     "AudioAnalyzerPreset": {
       "x-ms-discriminator-value": "#Microsoft.Media.AudioAnalyzerPreset",
@@ -785,7 +849,7 @@
         },
         "filenamePattern": {
           "type": "string",
-          "description": "The pattern of the file names for the generated output files. The following macros are supported in the file name: {Basename} - An expansion macro that will use the name of the input video file. If the base name(the file suffix is not included) of the input video file is less than 32 characters long, the base name of input video files will be used. If the length of base name of the input video file exceeds 32 characters, the base name is truncated to the first 32 characters in total length. {Extension} - The appropriate extension for this format. {Label} - The label assigned to the codec/layer. {Index} - A unique index for thumbnails. Only applicable to thumbnails. {Bitrate} - The audio/video bitrate. Not applicable to thumbnails. {Codec} - The type of the audio/video codec. Any unsubstituted macros will be collapsed and removed from the filename."
+          "description": "The pattern of the file names for the generated output files. The following macros are supported in the file name: {Basename} - An expansion macro that will use the name of the input video file. If the base name(the file suffix is not included) of the input video file is less than 32 characters long, the base name of input video files will be used. If the length of base name of the input video file exceeds 32 characters, the base name is truncated to the first 32 characters in total length. {Extension} - The appropriate extension for this format. {Label} - The label assigned to the codec/layer. {Index} - A unique index for thumbnails. Only applicable to thumbnails. {Bitrate} - The audio/video bitrate. Not applicable to thumbnails. {Codec} - The type of the audio/video codec. {Resolution} - The video resolution. Any unsubstituted macros will be collapsed and removed from the filename."
         }
       },
       "type": "object",
@@ -1744,7 +1808,7 @@
           "items": {
             "type": "string"
           },
-          "description": "List of files. Required for JobInputHttp. Maximum of 4000 characters each. Query strings will not be returned in service responses to prevent sensitive data exposure."
+          "description": "List of files. Required for JobInputHttp. Maximum of 4000 characters each."
         },
         "start": {
           "$ref": "#/definitions/ClipTime",
@@ -1871,7 +1935,7 @@
       "properties": {
         "baseUri": {
           "type": "string",
-          "description": "Base URI for HTTPS job input. It will be concatenated with provided file names. If no base uri is given, then the provided file list is assumed to be fully qualified uris. Maximum length of 4000 characters. The query strings will not be returned in service responses to prevent sensitive data exposure."
+          "description": "Base URI for HTTPS job input. It will be concatenated with provided file names. If no base uri is given, then the provided file list is assumed to be fully qualified uris. Maximum length of 4000 characters."
         }
       },
       "type": "object",
@@ -2312,12 +2376,12 @@
           "$ref": "#/definitions/JobProperties",
           "description": "The resource properties.",
           "x-ms-client-flatten": true
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/systemData",
+          "description": "The system metadata relating to this resource.",
+          "readOnly": true
         }
-      },
-      "systemData": {
-        "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/systemData",
-        "description": "The system metadata relating to this resource.",
-        "readOnly": true
       },
       "type": "object",
       "description": "A Job resource type. The progress and state can be obtained by polling a Job or subscribing to events using EventGrid."
