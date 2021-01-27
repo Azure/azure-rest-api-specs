@@ -267,7 +267,7 @@
           {
             "in": "body",
             "required": true,
-            "name": "ListClusterUserCredentialsProperties",
+            "name": "Properties",
             "schema": {
               "$ref": "#/definitions/ListClusterUserCredentialsProperties"
             },
@@ -772,6 +772,10 @@
     },
     "ListClusterUserCredentialsProperties": {
       "type": "object",
+      "required": [
+        "authenticationMethod",
+        "clientProxy"
+      ],
       "properties": {
         "authenticationMethod": {
           "type": "string",
