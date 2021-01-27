@@ -13,11 +13,11 @@ To see additional help and options, run:
 
 ``` yaml
 directive:
-    - where:
+    - from: iotcentral.json
+      where:
         - $.definitions.EmailUser.allOf[1].properties.email.format
-        suppress:
+      suppress:
         - ValidFormats
-
 ```
 
 ## Configuration
