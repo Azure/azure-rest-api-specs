@@ -73,7 +73,6 @@ input-file:
 - Microsoft.Sql/preview/2017-03-01-preview/databaseVulnerabilityAssessmentBaselines.json
 - Microsoft.Sql/preview/2017-03-01-preview/databaseVulnerabilityAssessments.json
 - Microsoft.Sql/preview/2017-03-01-preview/jobs.json
-- Microsoft.Sql/preview/2017-03-01-preview/longTermRetention.json
 - Microsoft.Sql/preview/2017-03-01-preview/ManagedBackupShortTermRetention.json
 - Microsoft.Sql/preview/2017-03-01-preview/ManagedRestorableDroppedDatabaseBackupShortTermRetenion.json
 - Microsoft.Sql/preview/2017-03-01-preview/serverAutomaticTuning.json
