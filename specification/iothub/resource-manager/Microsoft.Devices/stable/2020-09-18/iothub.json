@@ -3173,7 +3173,7 @@
         }
       },
       "identity": {
-        "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/Identity"
+        "$ref": "#/definitions/ArmIdentity"
       },
       "allOf": [
         {
@@ -4171,8 +4171,17 @@
           "readOnly": true
         },
         "type": {
-          "description": "Identity type. Only allowed values are SystemAssigned and UserAssigned. Comma separated if both for ex: SystemAssigned,UserAssigned",
-          "type": "string"
+          "type": "string",
+          "description": "The identity type.",
+          "enum": [
+            "SystemAssigned",
+            "UserAssigned",
+            "SystemAssignd, UserAssigned"
+          ],
+          "x-ms-enum": {
+            "name": "ResourceIdentityType",
+            "modelAsString": false
+          }
         },
         "userAssignedIdentities": {
           "type": "object",
