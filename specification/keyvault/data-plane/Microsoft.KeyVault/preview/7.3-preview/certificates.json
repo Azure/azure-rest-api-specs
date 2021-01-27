@@ -513,7 +513,7 @@
         ],
         "operationId": "ImportCertificate",
         "summary": "Imports a certificate into a specified key vault.",
-        "description": "Imports an existing valid certificate, containing a private key, into Azure Key Vault. The certificate to be imported can be in either PFX or PEM format. If the certificate is in PEM format the PEM file must contain the key as well as x509 certificates. This operation requires the certificates/import permission.",
+        "description": "Imports an existing valid certificate, containing a private key, into Azure Key Vault. This operation requires the certificates/import permission. The certificate to be imported can be in either PFX or PEM format. If the certificate is in PEM format the PEM file must contain the key as well as x509 certificates. Key Vault will only accept a key in PKCS#8 format.",
         "parameters": [
           {
             "name": "certificate-name",
@@ -1384,7 +1384,7 @@
         },
         "contentType": {
           "type": "string",
-          "description": "The content type of the secret."
+          "description": "The content type of the secret. eg. 'application/x-pem-file' or 'application/x-pkcs12', "
         },
         "attributes": {
           "$ref": "#/definitions/CertificateAttributes",
