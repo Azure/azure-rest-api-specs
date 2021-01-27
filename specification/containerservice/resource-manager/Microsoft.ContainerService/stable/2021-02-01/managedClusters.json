@@ -485,6 +485,9 @@
           },
           "Create Managed Private Cluster with fqdn subdomain specified": {
             "$ref": "./examples/ManagedClustersCreate_PrivateClusterFQDNSubdomain.json"
+          },
+          "Create Managed Cluster with Node Public IP Prefix": {
+            "$ref": "./examples/ManagedClustersCreate_NodePublicIPPrefix.json"
           }
         }
       },
@@ -2189,6 +2192,10 @@
         "enableNodePublicIP": {
           "type": "boolean",
           "description": "Enable public IP for nodes"
+        },
+        "nodePublicIPPrefixID": {
+          "type": "string",
+          "description": "Public IP Prefix ID. VM nodes use IPs assigned from this Public IP Prefix."
         },
         "scaleSetPriority": {
           "$ref": "#/definitions/ScaleSetPriority",
