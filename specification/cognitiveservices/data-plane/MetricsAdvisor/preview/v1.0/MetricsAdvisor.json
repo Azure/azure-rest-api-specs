@@ -5882,12 +5882,17 @@
     }
   },
   "securityDefinitions": {
-    "apiKeyHeader": {
+    "apim_key": {
       "type": "apiKey",
       "name": "Ocp-Apim-Subscription-Key",
       "in": "header"
     }
   },
+  "security": [
+    {
+      "apim_key": []
+    }
+  ],
   "parameters": {
     "Endpoint": {
       "name": "endpoint",
