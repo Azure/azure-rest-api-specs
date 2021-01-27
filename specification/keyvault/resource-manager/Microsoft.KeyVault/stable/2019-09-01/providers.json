@@ -38,7 +38,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ProviderError"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -159,16 +159,16 @@
         }
       }
     },
-    "ProviderError": {
+    "CloudError": {
       "description": "An error response from Key Vault resource provider",
       "properties": {
         "error": {
-          "$ref": "#/definitions/ProviderErrorBody"
+          "$ref": "#/definitions/CloudErrorBody"
         }
       },
       "x-ms-external": true
     },
-    "ProviderErrorBody": {
+    "CloudErrorBody": {
       "description": "An error response from Key Vault resource provider",
       "properties": {
         "code": {
