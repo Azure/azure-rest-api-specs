@@ -265,12 +265,13 @@
             "$ref": "#/parameters/ClusterNamePathParam"
           },
           {
-            "$ref": "#/parameters/ClientProxy",
-            "required": true
-          },
-          {
-            "$ref": "#/parameters/AuthMethod",
-            "required": true
+            "in": "body",
+            "required": true,
+            "name": "Properties",
+            "schema": {
+              "$ref": "#/definitions/Properties"
+            },
+            "description": "properties"
           }
         ],
         "responses": {
@@ -769,20 +770,23 @@
       },
       "readOnly": true
     },
-    "AuthenticationMethod": {
-      "description": "Authentication method used by the user to fetch credentials for accessing the cluster.",
-      "enum": [
-        "AAD",
-        "Token"
-      ],
-      "x-ms-enum": {
-        "name": "AuthenticationMethod",
-        "modelAsString": true
+    "Properties": {
+      "authenticationMethod": {
+        "type": "string",
+        "description": "The mode of client authentication.",
+        "enum": [
+          "Token",
+          "AAD"
+        ],
+        "x-ms-enum": {
+          "name": "AuthenticationMethod",
+          "modelAsString": true
+        }
+      },
+      "clientProxy": {
+        "type": "boolean",
+        "description": "Boolean value to indicate whether the request is for client side proxy or not"
       }
-    },
-    "ClientProxy": {
-      "description": "Boolean value to indicate whether the request is for client side proxy or not",
-      "type": "boolean"
     }
   },
   "parameters": {
@@ -792,28 +796,6 @@
       "required": true,
       "type": "string",
       "description": "The name of the Kubernetes cluster on which get is called.",
-      "x-ms-parameter-location": "method"
-    },
-    "ClientProxy": {
-      "name": "clientProxy",
-      "in": "path",
-      "required": true,
-      "type": "boolean",
-      "schema": {
-        "$ref": "#/definitions/ClientProxy"
-      },
-      "description": "Parameter to indicate whether the request is for client side proxy or not",
-      "x-ms-parameter-location": "method"
-    },
-    "AuthMethod": {
-      "name": "authMethod",
-      "in": "path",
-      "required": true,
-      "type": "boolean",
-      "schema": {
-        "$ref": "#/definitions/AuthenticationMethod"
-      },
-      "description": "Parameter to indicate whether the request is token based authentication or AAD based authentication",
       "x-ms-parameter-location": "method"
     }
   }
