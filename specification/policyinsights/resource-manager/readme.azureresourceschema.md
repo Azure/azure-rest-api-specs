@@ -37,6 +37,7 @@ input-file:
   - Microsoft.PolicyInsights/stable/2019-10-01/policyEvents.json
   - Microsoft.PolicyInsights/stable/2019-10-01/policyStates.json
   - Microsoft.PolicyInsights/stable/2019-10-01/policyMetadata.json
+  - Microsoft.PolicyInsights/stable/2019-10-01/attestations.json
 
 ```
 

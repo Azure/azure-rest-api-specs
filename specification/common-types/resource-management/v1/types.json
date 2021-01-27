@@ -448,8 +448,18 @@
           "description": "The identity that created the resource."
         },
         "createdByType": {
-          "$ref": "#/definitions/createdByType",
-          "description": "The type of identity that created the resource."
+          "type": "string",
+          "description": "The type of identity that created the resource.",
+          "enum": [
+            "User",
+            "Application",
+            "ManagedIdentity",
+            "Key"
+          ],
+          "x-ms-enum": {
+            "name": "createdByType",
+            "modelAsString": true
+          }
         },
         "createdAt": {
           "type": "string",
@@ -461,28 +471,24 @@
           "description": "The identity that last modified the resource."
         },
         "lastModifiedByType": {
-          "$ref": "#/definitions/createdByType",
-          "description": "The type of identity that last modified the resource."
+          "type": "string",
+          "description": "The type of identity that last modified the resource.",
+          "enum": [
+            "User",
+            "Application",
+            "ManagedIdentity",
+            "Key"
+          ],
+          "x-ms-enum": {
+            "name": "createdByType",
+            "modelAsString": true
+          }
         },
         "lastModifiedAt": {
           "type": "string",
           "format": "date-time",
           "description": "The type of identity that last modified the resource."
         }
-      }
-    },
-    "createdByType": {
-      "type": "string",
-      "description": "The type of identity that operated on the resource.",
-      "enum": [
-        "User",
-        "Application",
-        "ManagedIdentity",
-        "Key"
-      ],
-      "x-ms-enum": {
-        "name": "createdByType",
-        "modelAsString": true
       }
     },
     "encryptionProperties": {
