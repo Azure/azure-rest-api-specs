@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "ConnectedKubernetesClient",
-    "version": "2021-03-01-preview",
+    "version": "2021-04-01-preview",
     "description": "Azure Connected Cluster Resource Provider API for adopting any Kubernetes Cluster"
   },
   "schemes": [
@@ -265,10 +265,12 @@
             "$ref": "#/parameters/ClusterNamePathParam"
           },
           {
-            "$ref": "#/parameters/ClientProxy"
+            "$ref": "#/parameters/ClientProxy",
+            "required": true
           },
           {
-            "$ref": "#/parameters/TokenAuth"
+            "$ref": "#/parameters/TokenAuth",
+            "required": true
           }
         ],
         "responses": {
@@ -766,6 +768,21 @@
         }
       },
       "readOnly": true
+    },
+    "AuthenticationMethod": {
+      "description": "Authentication method used by the user to fetch credentials for accessing the cluster.",
+      "enum": [
+        "AAD",
+        "Token"
+      ],
+      "x-ms-enum": {
+        "name": "AuthenticationMethod",
+        "modelAsString": true
+      }
+    },
+    "ClientProxy": {
+      "description": "Boolean value to indicate whether the request is for client side proxy or not",
+      "type": "boolean"
     }
   },
   "parameters": {
@@ -782,14 +799,20 @@
       "in": "body",
       "required": true,
       "type": "boolean",
+      "schema": {
+        "$ref": "#/definitions/ClientProxy"
+      },
       "description": "Parameter to indicate whether the request is for client side proxy or not",
       "x-ms-parameter-location": "method"
     },
-    "TokenAuth": {
-      "name": "isTokenAuth",
+    "AuthMethod": {
+      "name": "authMethod",
       "in": "body",
       "required": true,
       "type": "boolean",
+      "schema": {
+        "$ref": "#/definitions/AuthenticationMethod"
+      },
       "description": "Parameter to indicate whether the request is token based authentication or AAD based authentication",
       "x-ms-parameter-location": "method"
     }
