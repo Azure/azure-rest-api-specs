@@ -771,21 +771,24 @@
       "readOnly": true
     },
     "Properties": {
-      "authenticationMethod": {
-        "type": "string",
-        "description": "The mode of client authentication.",
-        "enum": [
-          "Token",
-          "AAD"
-        ],
-        "x-ms-enum": {
-          "name": "AuthenticationMethod",
-          "modelAsString": true
+      "properties": {
+        "type": "object",
+        "authenticationMethod": {
+          "type": "string",
+          "description": "The mode of client authentication.",
+          "enum": [
+            "Token",
+            "AAD"
+          ],
+          "x-ms-enum": {
+            "name": "AuthenticationMethod",
+            "modelAsString": true
+          }
+        },
+        "clientProxy": {
+          "type": "boolean",
+          "description": "Boolean value to indicate whether the request is for client side proxy or not"
         }
-      },
-      "clientProxy": {
-        "type": "boolean",
-        "description": "Boolean value to indicate whether the request is for client side proxy or not"
       }
     }
   },
