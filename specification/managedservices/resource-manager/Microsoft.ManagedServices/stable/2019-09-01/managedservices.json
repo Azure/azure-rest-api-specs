@@ -380,6 +380,48 @@
         }
       }
     },
+    "/{scope}/providers/Microsoft.ManagedServices/marketplaceRegistrationDefinitions": {
+      "get": {
+        "tags": [
+          "MarketplaceRegistrationDefinitions"
+        ],
+        "operationId": "MarketplaceRegistrationDefinitions_List",
+        "description": "Gets a list of the marketplace registration definitions for the marketplace identifier.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ScopeParameter"
+          },
+          {
+            "$ref": "#/parameters/Filter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Returns a list of the marketplace registration definitions.",
+            "schema": {
+              "$ref": "#/definitions/MarketplaceRegistrationDefinitionList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Get Registration Definitions": {
+            "$ref": "./examples/GetMarketplaceRegistrationDefinitions.json"
+          }
+        }
+      }
+    },
     "/providers/Microsoft.ManagedServices/marketplaceRegistrationDefinitions": {
       "get": {
         "tags": [
@@ -415,6 +457,45 @@
         "x-ms-examples": {
           "Get Registration Definitions": {
             "$ref": "./examples/GetMarketplaceRegistrationDefinitions.json"
+          }
+        }
+      }
+    },
+    "/{scope}/providers/Microsoft.ManagedServices/marketplaceRegistrationDefinitions/{marketplaceIdentifier}": {
+      "get": {
+        "tags": [
+          "MarketplaceRegistrationDefinitions"
+        ],
+        "operationId": "MarketplaceRegistrationDefinitions_Get",
+        "description": "Get the marketplace registration definition for the marketplace identifier.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ScopeParameter"
+          },
+          {
+            "$ref": "#/parameters/MarketplaceIdentifier"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Returns the details of the marketplace registration definition.",
+            "schema": {
+              "$ref": "#/definitions/MarketplaceRegistrationDefinition"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Registration Definitions": {
+            "$ref": "./examples/GetMarketplaceRegistrationDefinition.json"
           }
         }
       }
