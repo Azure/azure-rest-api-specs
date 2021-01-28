@@ -203,7 +203,7 @@
           }
         ],
         "x-ms-examples": {
-          "Patch a node type": {
+          "Patch an application type": {
             "$ref": "./examples/ApplicationTypeNamePatchOperation_example.json"
           }
         },
@@ -472,7 +472,7 @@
           }
         ],
         "x-ms-examples": {
-          "Patch a node type": {
+          "Patch an application type version": {
             "$ref": "./examples/ApplicationTypeVersionPatchOperation_example.json"
           }
         },
@@ -741,7 +741,7 @@
           }
         ],
         "x-ms-examples": {
-          "Patch a node type": {
+          "Patch an application": {
             "$ref": "./examples/ApplicationPatchOperation_example.json"
           }
         },
@@ -1013,7 +1013,7 @@
           }
         ],
         "x-ms-examples": {
-          "Patch a node type": {
+          "Patch a service": {
             "$ref": "./examples/ServicePatchOperation_example.json"
           }
         },
@@ -1248,10 +1248,7 @@
           "type": "string",
           "description": "The current deployment or provisioning state, which only appears in the response"
         },
-        "typeName": {
-          "$ref": "#/definitions/ApplicationTypeName"
-        },
-        "typeVersion": {
+        "version": {
           "$ref": "#/definitions/ApplicationTypeVersion"
         },
         "parameters": {
@@ -1268,10 +1265,6 @@
           }
         }
       }
-    },
-    "ApplicationTypeName": {
-      "type": "string",
-      "description": "The application type name as defined in the application manifest. This can only be updated if upgrade policy recreateApplication=true."
     },
     "ApplicationTypeResource": {
       "description": "The application type name resource",
@@ -1327,7 +1320,7 @@
     },
     "ApplicationTypeVersion": {
       "type": "string",
-      "description": "The version of the application type as defined in the application manifest."
+      "description": "The version of the application type as defined in the application manifest.\nThis name must be the full Arm Resource ID for the referenced application type version.\n"
     },
     "ApplicationTypeVersionResource": {
       "description": "An application type version resource for the specified application type name resource.",
