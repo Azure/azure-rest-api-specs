@@ -1376,16 +1376,30 @@
       "description": "Log Analytics Resources for Firewall Policy Insights.",
       "x-ms-discriminator-value": "FirewallPolicyLogAnalyticsResources",
       "properties": {
-        "workspaceIds": {
+        "workspaces": {
           "type": "array",
-          "description": "List of workspace Ids for Firewall Policy Insights.",
+          "description": "List of workspaces for Firewall Policy Insights.",
           "items": {
-            "$ref": "./network.json#/definitions/SubResource"
+            "$ref": "./network.json#/definitions/FirewallPolicyLogAnalyticsWorkspace"
           }
         },
         "defaultWorkspaceId": {
           "$ref": "./network.json#/definitions/SubResource",
           "description": "The default workspace Id for Firewall Policy Insights."
+        }
+      }
+    },
+    "FirewallPolicyLogAnalyticsWorkspace": {
+      "description": "Log Analytics Workspace for Firewall Policy Insights.",
+      "x-ms-discriminator-value": "FirewallPolicyLogAnalyticsWorkspace",
+      "properties": {
+        "region": {
+          "type": "string",
+          "description": "Region to configure the Workspace."
+        },
+        "WorkspaceId": {
+          "$ref": "./network.json#/definitions/SubResource",
+          "description": "The workspace Id for Firewall Policy Insights."
         }
       }
     }
