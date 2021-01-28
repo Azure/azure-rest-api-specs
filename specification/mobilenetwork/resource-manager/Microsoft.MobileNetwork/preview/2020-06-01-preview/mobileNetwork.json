@@ -34,13 +34,13 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MobileNetwork/mobileNetworks/{mobileNetworkName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MobileNetwork/networks/{networkName}": {
       "delete": {
         "tags": [
-          "MobileNetworks"
+          "Networks"
         ],
-        "operationId": "MobileNetworks_Delete",
-        "description": "Deletes the specified mobile network.",
+        "operationId": "Networks_Delete",
+        "description": "Deletes the specified network.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
@@ -52,11 +52,11 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "name": "mobileNetworkName",
+            "name": "networkName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the mobile network."
+            "description": "The name of the network."
           }
         ],
         "responses": {
@@ -77,8 +77,8 @@
           }
         },
         "x-ms-examples": {
-          "Delete mobile network": {
-            "$ref": "./examples/MobileNetworkDelete.json"
+          "Delete network": {
+            "$ref": "./examples/NetworkDelete.json"
           }
         },
         "x-ms-long-running-operation": true,
@@ -88,10 +88,10 @@
       },
       "get": {
         "tags": [
-          "MobileNetworks"
+          "Networks"
         ],
-        "operationId": "MobileNetworks_Get",
-        "description": "Gets information about the specified mobile network.",
+        "operationId": "Networks_Get",
+        "description": "Gets information about the specified network.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
@@ -103,18 +103,18 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "name": "mobileNetworkName",
+            "name": "networkName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of mobile network."
+            "description": "The name of network."
           }
         ],
         "responses": {
           "200": {
-            "description": "Request successful. The operation returns the resulting mobile network resource.",
+            "description": "Request successful. The operation returns the resulting network resource.",
             "schema": {
-              "$ref": "#/definitions/MobileNetwork"
+              "$ref": "#/definitions/Network"
             }
           },
           "default": {
@@ -125,17 +125,17 @@
           }
         },
         "x-ms-examples": {
-          "Get mobile network": {
-            "$ref": "./examples/MobileNetworkGet.json"
+          "Get network": {
+            "$ref": "./examples/NetworkGet.json"
           }
         }
       },
       "put": {
         "tags": [
-          "MobileNetworks"
+          "Networks"
         ],
-        "operationId": "MobileNetworks_CreateOrUpdate",
-        "description": "Creates or updates a mobile network.",
+        "operationId": "Networks_CreateOrUpdate",
+        "description": "Creates or updates a network.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
@@ -147,33 +147,33 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "name": "mobileNetworkName",
+            "name": "networkName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the mobile network."
+            "description": "Name of network."
           },
           {
             "name": "parameters",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/MobileNetwork"
+              "$ref": "#/definitions/Network"
             },
-            "description": "Parameters supplied to the create or update mobile network operation."
+            "description": "Parameters supplied to the create or update network operation."
           }
         ],
         "responses": {
           "200": {
-            "description": "Update successful. The operation returns the resulting mobile network resource.",
+            "description": "Update successful. The operation returns the resulting network resource.",
             "schema": {
-              "$ref": "#/definitions/MobileNetwork"
+              "$ref": "#/definitions/Network"
             }
           },
           "201": {
-            "description": "Create successful. The operation returns the resulting mobile network resource.",
+            "description": "Create successful. The operation returns the resulting network resource.",
             "schema": {
-              "$ref": "#/definitions/MobileNetwork"
+              "$ref": "#/definitions/Network"
             }
           },
           "default": {
@@ -184,8 +184,8 @@
           }
         },
         "x-ms-examples": {
-          "Create mobile network": {
-            "$ref": "./examples/MobileNetworkCreate.json"
+          "Create network": {
+            "$ref": "./examples/NetworkCreate.json"
           }
         },
         "x-ms-long-running-operation": true,
@@ -195,10 +195,10 @@
       },
       "patch": {
         "tags": [
-          "MobileNetworks"
+          "Networks"
         ],
-        "operationId": "MobileNetworks_UpdateTags",
-        "description": "Updates a mobile network update tags.",
+        "operationId": "Networks_UpdateTags",
+        "description": "Updates a network update tags.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
@@ -210,11 +210,11 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "name": "mobileNetworkName",
+            "name": "networkName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the mobile network."
+            "description": "The name of the network."
           },
           {
             "name": "parameters",
@@ -223,14 +223,14 @@
             "schema": {
               "$ref": "./common.json#/definitions/TagsObject"
             },
-            "description": "Parameters supplied to update mobile network tags."
+            "description": "Parameters supplied to update network tags."
           }
         ],
         "responses": {
           "200": {
-            "description": "Update successful. The operation returns the resulting mobile network resource.",
+            "description": "Update successful. The operation returns the resulting network resource.",
             "schema": {
-              "$ref": "#/definitions/MobileNetwork"
+              "$ref": "#/definitions/Network"
             }
           },
           "default": {
@@ -241,19 +241,19 @@
           }
         },
         "x-ms-examples": {
-          "Update mobile network tags": {
-            "$ref": "./examples/MobileNetworkUpdateTags.json"
+          "Update network tags": {
+            "$ref": "./examples/NetworkUpdateTags.json"
           }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.MobileNetwork/mobileNetworks": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.MobileNetwork/networks": {
       "get": {
         "tags": [
-          "MobileNetworks"
+          "Networks"
         ],
-        "operationId": "MobileNetworks_ListBySubscription",
-        "description": "Lists all the mobile networks in a subscription.",
+        "operationId": "Networks_ListBySubscription",
+        "description": "Lists all the  networks in a subscription.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
@@ -264,9 +264,9 @@
         ],
         "responses": {
           "200": {
-            "description": "Request successful. The operation returns a list of mobile network resources.",
+            "description": "Request successful. The operation returns a list of network resources.",
             "schema": {
-              "$ref": "#/definitions/MobileNetworkListResult"
+              "$ref": "#/definitions/NetworkListResult"
             }
           },
           "default": {
@@ -277,8 +277,8 @@
           }
         },
         "x-ms-examples": {
-          "List all mobile networks": {
-            "$ref": "./examples/MobileNetworkListBySubscription.json"
+          "List all networks": {
+            "$ref": "./examples/NetworkListBySubscription.json"
           }
         },
         "x-ms-pageable": {
@@ -286,13 +286,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MobileNetwork/mobileNetworks": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MobileNetwork/networks": {
       "get": {
         "tags": [
-          "MobileNetworks"
+          "Networks"
         ],
-        "operationId": "MobileNetworks_ListByResourceGroup",
-        "description": "Lists all the mobile networks in a resource group.",
+        "operationId": "Networks_ListByResourceGroup",
+        "description": "Lists all the networks in a resource group.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
@@ -306,9 +306,9 @@
         ],
         "responses": {
           "200": {
-            "description": "Request successful. The operation returns a list of mobile network resources.",
+            "description": "Request successful. The operation returns a list of network resources.",
             "schema": {
-              "$ref": "#/definitions/MobileNetworkListResult"
+              "$ref": "#/definitions/NetworkListResult"
             }
           },
           "default": {
@@ -319,8 +319,8 @@
           }
         },
         "x-ms-examples": {
-          "List mobile networks in resource group": {
-            "$ref": "./examples/MobileNetworkListByResourceGroup.json"
+          "List networks in resource group": {
+            "$ref": "./examples/NetworkListByResourceGroup.json"
           }
         },
         "x-ms-pageable": {
@@ -328,7 +328,63 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MobileNetwork/mobileNetworks/{mobileNetworkName}/packetCores/{packetCoreName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MobileNetwork/networks/{networkName}/listSimProfileIds": {
+      "post": {
+        "tags": [
+          "Networks"
+        ],
+        "operationId": "SimProfileIds_ByNetwork",
+        "description": "List sim profile ids under a network.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "networkName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the network."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List sim profile ids successful.",
+            "schema": {
+              "$ref": "#/definitions/SimProfileIdListResult"
+            }
+          },
+          "202": {
+            "description": "Accepted. Returns an operation URI that can be queried to find the current state of the operation.",
+            "schema": {
+              "$ref": "#/definitions/SimProfileIdListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List sim profile ids by network": {
+            "$ref": "./examples/SimProfileIdListByNetwork.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MobileNetwork/packetCores/{packetCoreName}": {
       "delete": {
         "tags": [
           "PacketCores"
@@ -346,18 +402,11 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "name": "mobileNetworkName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the mobile network."
-          },
-          {
             "name": "packetCoreName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the packet core."
+            "description": "The name of the packetCore."
           }
         ],
         "responses": {
@@ -378,7 +427,7 @@
           }
         },
         "x-ms-examples": {
-          "Delete packet core resource": {
+          "Delete packetCore": {
             "$ref": "./examples/PacketCoreDelete.json"
           }
         },
@@ -392,7 +441,7 @@
           "PacketCores"
         ],
         "operationId": "PacketCores_Get",
-        "description": "Gets information about the specified packet core.",
+        "description": "Gets information about the specified PacketCore.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
@@ -404,23 +453,16 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "name": "mobileNetworkName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the mobile network."
-          },
-          {
             "name": "packetCoreName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of packet core."
+            "description": "The name of packetCore."
           }
         ],
         "responses": {
           "200": {
-            "description": "Request successful. The operation returns the resulting packet core resource.",
+            "description": "Request successful. The operation returns the resulting mobile network resource.",
             "schema": {
               "$ref": "#/definitions/PacketCore"
             }
@@ -433,7 +475,7 @@
           }
         },
         "x-ms-examples": {
-          "Get packet core": {
+          "Get packetCore": {
             "$ref": "./examples/PacketCoreGet.json"
           }
         }
@@ -443,7 +485,7 @@
           "PacketCores"
         ],
         "operationId": "PacketCores_CreateOrUpdate",
-        "description": "Creates or updates a packet core.",
+        "description": "Creates or updates a packetCore.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
@@ -455,18 +497,11 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "name": "mobileNetworkName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the mobile network."
-          },
-          {
             "name": "packetCoreName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the packet core resource."
+            "description": "The name of the packetCore."
           },
           {
             "name": "parameters",
@@ -475,18 +510,18 @@
             "schema": {
               "$ref": "#/definitions/PacketCore"
             },
-            "description": "Parameters supplied to the create or update packet core operation."
+            "description": "Parameters supplied to the create or update packetCore operation."
           }
         ],
         "responses": {
           "200": {
-            "description": "Update successful. The operation returns the resulting packet core resource.",
+            "description": "Update successful. The operation returns the resulting packetCore resource.",
             "schema": {
               "$ref": "#/definitions/PacketCore"
             }
           },
           "201": {
-            "description": "Create successful. The operation returns the resulting packet core resource.",
+            "description": "Create successful. The operation returns the resulting packetCore resource.",
             "schema": {
               "$ref": "#/definitions/PacketCore"
             }
@@ -499,8 +534,8 @@
           }
         },
         "x-ms-examples": {
-          "Create packet core": {
-            "$ref": "./examples/PacketCoreCreate.json"
+          "Create packetCore": {
+            "$ref": "./examples/packetCoreCreate.json"
           }
         },
         "x-ms-long-running-operation": true,
@@ -513,7 +548,7 @@
           "PacketCores"
         ],
         "operationId": "PacketCores_UpdateTags",
-        "description": "Updates a packet core update tags.",
+        "description": "Updates a packetCore update tags.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
@@ -525,18 +560,11 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "name": "mobileNetworkName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the mobile network."
-          },
-          {
             "name": "packetCoreName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the packet core."
+            "description": "The name of the packetCore."
           },
           {
             "name": "parameters",
@@ -545,12 +573,12 @@
             "schema": {
               "$ref": "./common.json#/definitions/TagsObject"
             },
-            "description": "Parameters supplied to update packet core tags."
+            "description": "Parameters supplied to update packetCore tags."
           }
         ],
         "responses": {
           "200": {
-            "description": "Update successful. The operation returns the resulting packet core resource.",
+            "description": "Update successful. The operation returns the resulting packetCore resource.",
             "schema": {
               "$ref": "#/definitions/PacketCore"
             }
@@ -563,68 +591,19 @@
           }
         },
         "x-ms-examples": {
-          "Update packet core tags": {
+          "Update packetCore tags": {
             "$ref": "./examples/PacketCoreUpdateTags.json"
           }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MobileNetwork/mobileNetworks/{mobileNetworkName}/packetCores": {
-      "get": {
-        "tags": [
-          "PacketCores"
-        ],
-        "operationId": "PacketCores_ListByMobileNetwork",
-        "description": "Lists all the packet cores in a mobile network.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "name": "mobileNetworkName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the mobile network."
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Request successful. The operation returns a list of packet core resources.",
-            "schema": {
-              "$ref": "#/definitions/PacketCoreListResult"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "List all packet cores in a mobile network": {
-            "$ref": "./examples/PacketCoreListByMobileNetwork.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MobileNetwork/mobileNetworks/{mobileNetworkName}/sites/{siteName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MobileNetwork/networks/{networkName}/sites/{siteName}": {
       "delete": {
         "tags": [
           "Sites"
         ],
         "operationId": "Sites_Delete",
-        "description": "Deletes the specified mobile network site.",
+        "description": "Deletes the specified network site.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
@@ -636,18 +615,18 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "name": "mobileNetworkName",
+            "name": "networkName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the mobile network."
+            "description": "The name of the network."
           },
           {
             "name": "siteName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the mobile network site."
+            "description": "The name of the network site."
           }
         ],
         "responses": {
@@ -668,7 +647,7 @@
           }
         },
         "x-ms-examples": {
-          "Delete mobile network site": {
+          "Delete network site": {
             "$ref": "./examples/SiteDelete.json"
           }
         },
@@ -682,7 +661,7 @@
           "Sites"
         ],
         "operationId": "Sites_Get",
-        "description": "Gets information about the specified mobile network site.",
+        "description": "Gets information about the specified network site.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
@@ -694,23 +673,23 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "name": "mobileNetworkName",
+            "name": "networkName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of mobile network."
+            "description": "The name of network."
           },
           {
             "name": "siteName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the mobile network site."
+            "description": "The name of the network site."
           }
         ],
         "responses": {
           "200": {
-            "description": "Request successful. The operation returns the resulting mobile network site resource.",
+            "description": "Request successful. The operation returns the resulting network site resource.",
             "schema": {
               "$ref": "#/definitions/Site"
             }
@@ -723,7 +702,7 @@
           }
         },
         "x-ms-examples": {
-          "Get mobile network site": {
+          "Get network site": {
             "$ref": "./examples/SiteGet.json"
           }
         }
@@ -733,7 +712,7 @@
           "Sites"
         ],
         "operationId": "Sites_CreateOrUpdate",
-        "description": "Creates or updates a mobile network site.",
+        "description": "Creates or updates a network site.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
@@ -745,18 +724,18 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "name": "mobileNetworkName",
+            "name": "networkName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the mobile network site."
+            "description": "The name of the network site."
           },
           {
             "name": "siteName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the mobile network site."
+            "description": "The name of the network site."
           },
           {
             "name": "parameters",
@@ -765,18 +744,18 @@
             "schema": {
               "$ref": "#/definitions/Site"
             },
-            "description": "Parameters supplied to the create or update mobile network site operation."
+            "description": "Parameters supplied to the create or update network site operation."
           }
         ],
         "responses": {
           "200": {
-            "description": "Update successful. The operation returns the resulting mobile network site resource.",
+            "description": "Update successful. The operation returns the resulting network site resource.",
             "schema": {
               "$ref": "#/definitions/Site"
             }
           },
           "201": {
-            "description": "Create successful. The operation returns the resulting mobile network site resource.",
+            "description": "Create successful. The operation returns the resulting network site resource.",
             "schema": {
               "$ref": "#/definitions/Site"
             }
@@ -789,7 +768,7 @@
           }
         },
         "x-ms-examples": {
-          "Create mobile network site": {
+          "Create network site": {
             "$ref": "./examples/SiteCreate.json"
           }
         },
@@ -815,18 +794,18 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "name": "mobileNetworkName",
+            "name": "networkName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the mobile network site."
+            "description": "The name of the network site."
           },
           {
             "name": "siteName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the mobile network site."
+            "description": "The name of the network site."
           },
           {
             "name": "parameters",
@@ -835,12 +814,12 @@
             "schema": {
               "$ref": "./common.json#/definitions/TagsObject"
             },
-            "description": "Parameters supplied to update mobile network site tags."
+            "description": "Parameters supplied to update network site tags."
           }
         ],
         "responses": {
           "200": {
-            "description": "Update successful. The operation returns the resulting mobile network site resource.",
+            "description": "Update successful. The operation returns the resulting network site resource.",
             "schema": {
               "$ref": "#/definitions/Site"
             }
@@ -853,19 +832,19 @@
           }
         },
         "x-ms-examples": {
-          "Update mobile network site tags": {
+          "Update network site tags": {
             "$ref": "./examples/SiteUpdateTags.json"
           }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MobileNetwork/mobileNetworks/{mobileNetworkName}/sites": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MobileNetwork/networks/{networkName}/sites": {
       "get": {
         "tags": [
           "Sites"
         ],
-        "operationId": "Sites_ListByMobileNetwork",
-        "description": "Lists all sites in the mobile network.",
+        "operationId": "Sites_ListByNetwork",
+        "description": "Lists all sites in the network.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
@@ -877,16 +856,16 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "name": "mobileNetworkName",
+            "name": "networkName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the mobile network."
+            "description": "The name of the network."
           }
         ],
         "responses": {
           "200": {
-            "description": "Request successful. The operation returns a list of mobile network resources.",
+            "description": "Request successful. The operation returns a list of network site resources.",
             "schema": {
               "$ref": "#/definitions/SiteListResult"
             }
@@ -899,8 +878,8 @@
           }
         },
         "x-ms-examples": {
-          "List all mobile network sites": {
-            "$ref": "./examples/SiteListByMobileNetwork.json"
+          "List all network sites": {
+            "$ref": "./examples/SiteListByNetwork.json"
           }
         },
         "x-ms-pageable": {
@@ -1153,6 +1132,87 @@
         "x-ms-examples": {
           "List all sims": {
             "$ref": "./examples/SimListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.MobileNetwork/packetCores": {
+      "get": {
+        "tags": [
+          "PacketCores"
+        ],
+        "operationId": "PacketCores_ListBySubscription",
+        "description": "Lists all the packet cores in a subscription.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. The operation returns a list of packet core resources.",
+            "schema": {
+              "$ref": "#/definitions/PacketCoreListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List all packet cores": {
+            "$ref": "./examples/PacketCoreTestListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MobileNetwork/packetCores": {
+      "get": {
+        "tags": [
+          "PacketCores"
+        ],
+        "operationId": "PacketCores_ListByResourceGroup",
+        "description": "Lists all the packet cores in a resource group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. The operation returns a list of packet core resources.",
+            "schema": {
+              "$ref": "#/definitions/PacketCoreListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List packet cores in resource group": {
+            "$ref": "./examples/PacketCoreTestListByResourceGroup.json"
           }
         },
         "x-ms-pageable": {
@@ -1620,12 +1680,12 @@
     }
   },
   "definitions": {
-    "MobileNetwork": {
+    "Network": {
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/MobileNetworkPropertiesFormat",
-          "description": "Mobile network properties."
+          "$ref": "#/definitions/NetworkPropertiesFormat",
+          "description": "Network properties."
         },
         "systemData": {
           "readOnly": true,
@@ -1638,15 +1698,15 @@
           "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/TrackedResource"
         }
       ],
-      "description": "Mobile network resource."
+      "description": "Network resource."
     },
-    "MobileNetworkPropertiesFormat": {
-      "description": "Mobile network properties.",
+    "NetworkPropertiesFormat": {
+      "description": "Network properties.",
       "properties": {
         "provisioningState": {
           "readOnly": true,
           "$ref": "./common.json#/definitions/ProvisioningState",
-          "description": "The provisioning state of the mobile network resource."
+          "description": "The provisioning state of the network resource."
         },
         "mobileCountryCode": {
           "type": "string",
@@ -1659,31 +1719,15 @@
         "serviceKey": {
           "type": "string",
           "readOnly": true,
-          "description": "The mobile network resource identifier"
+          "description": "The network resource identifier"
         },
         "networkType": {
           "$ref": "./common.json#/definitions/NetworkType",
-          "description": "The type of the mobile network."
+          "description": "The type of the network."
         },
         "spectrumAccessProvider": {
           "type": "string",
-          "description": "The spectrum access provider for the mobile network."
-        },
-        "sites": {
-          "type": "array",
-          "readOnly": true,
-          "items": {
-            "$ref": "./common.json#/definitions/SubResource"
-          },
-          "description": "An array of ids of the sites associated with the mobile network resource."
-        },
-        "simProfiles": {
-          "type": "array",
-          "readOnly": true,
-          "items": {
-            "$ref": "./common.json#/definitions/SubResource"
-          },
-          "description": "An array of ids of the sim profiles associated with the mobile network resource."
+          "description": "The spectrum access provider for the network."
         },
         "packetCores": {
           "type": "array",
@@ -1691,18 +1735,18 @@
           "items": {
             "$ref": "./common.json#/definitions/SubResource"
           },
-          "description": "An array of ids of the packet cores associated with the mobile network resource."
+          "description": "An array of ids of the packet cores associated with the network resource."
         }
       }
     },
-    "MobileNetworkListResult": {
+    "NetworkListResult": {
       "properties": {
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/MobileNetwork"
+            "$ref": "#/definitions/Network"
           },
-          "description": "A list of mobile networks in a resource group."
+          "description": "A list of networks in a resource group."
         },
         "nextLink": {
           "type": "string",
@@ -1710,7 +1754,7 @@
           "description": "The URL to get the next set of results."
         }
       },
-      "description": "Response for mobile networks API service call."
+      "description": "Response for networks API service call."
     },
     "Sim": {
       "properties": {
@@ -1743,14 +1787,6 @@
         "simType": {
           "$ref": "./common.json#/definitions/SimType",
           "description": "The type of the sim."
-        },
-        "simProfiles": {
-          "type": "array",
-          "readOnly": true,
-          "items": {
-            "$ref": "./common.json#/definitions/SubResource"
-          },
-          "description": "Sim profile Properties."
         }
       }
     },
@@ -1801,11 +1837,11 @@
         },
         "customLocation": {
           "type": "string",
-          "description": "Azure arc custom location where the mobile network site is paired. **TODO**: Confirm type and property."
+          "description": "Azure arc custom location where the network site is paired. **TODO**: Confirm type and property."
         },
         "trackingAreaCode": {
           "type": "string",
-          "description": "Tracking area code for the mobile network site."
+          "description": "Tracking area code for the network site."
         }
       }
     },
@@ -1883,14 +1919,31 @@
           ],
           "description": "The Opc value for the sim profile."
         },
-        "mobileNetworks": {
+        "networks": {
           "type": "array",
           "items": {
             "$ref": "./common.json#/definitions/SubResource"
           },
-          "description": "A list of mobile network ids that the sim profile is attached. **TODO** Typically one, but can a Sim be attached to multiple networks"
+          "description": "A list of network ids that the sim profile is attached. **TODO** Typically one, but can a Sim be attached to multiple networks"
         }
       }
+    },
+    "SimProfileIdListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "./common.json#/definitions/SubResource"
+          },
+          "description": "A list of sim profile ids in a resource group."
+        },
+        "nextLink": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The URL to get the next set of results."
+        }
+      },
+      "description": "Response for sim profile ids API service call."
     },
     "SimProfileListResult": {
       "properties": {
