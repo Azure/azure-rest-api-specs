@@ -1,0 +1,36 @@
+{
+  "parameters": {
+    "api-version": "2020-11-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "description": "Gets the available logs for Microsoft ContainerRegistry",
+            "displayName": "Read Microsoft ContainerRegistry log definitions",
+            "isDataAction": false,
+            "name": "Microsoft.ContainerRegistry/registries/providers/Microsoft.Insights/logDefinitions/read",
+            "origin": "system",
+            "properties": {
+              "serviceSpecification": {
+                "logSpecifications": [
+                  {
+                    "blobDuration": "PT1H",
+                    "displayName": "RepositoryEvent logs",
+                    "name": "ContainerRegistryRepositoryEvents"
+                  },
+                  {
+                    "blobDuration": "PT1H",
+                    "displayName": "Login Events",
+                    "name": "ContainerRegistryLoginEvents"
+                  }
+                ]
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}
