@@ -79,6 +79,7 @@ input-file:
 - Microsoft.Synapse/stable/2020-12-01/privatelinkhub.json
 - Microsoft.Synapse/stable/2020-12-01/sqlServer.json
 - Microsoft.Synapse/stable/2020-12-01/keys.json
+- Microsoft.Synapse/stable/2020-12-01/library.json
 ```
 
 ## Suppressions
