@@ -31,7 +31,7 @@
         }
       }
     },
-    "/api/hubs/{hub}/messages": {
+    "/api/hubs/{hub}/:send": {
       "post": {
         "tags": [
           "signalr"
@@ -87,51 +87,7 @@
         }
       }
     },
-    "/api/hubs/{hub}/users/{user}": {
-      "head": {
-        "tags": [
-          "signalr"
-        ],
-        "summary": "Check if there are any client connections connected for the given user",
-        "operationId": "ServiceApi_CheckUserExistence",
-        "parameters": [
-          {
-            "in": "path",
-            "name": "hub",
-            "description": "Target hub name, which should start with alphabetic characters and only contain alpha-numeric characters or underscore.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[A-Za-z][A-Za-z0-9_`,.[\\]]{0,127}$"
-          },
-          {
-            "in": "path",
-            "name": "user",
-            "description": "The user Id.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "name": "api-version",
-            "type": "string",
-            "default": "2020-10-01"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success"
-          },
-          "404": {
-            "description": "Not Found"
-          },
-          "default": {
-            "description": "Error response",
-            "x-ms-error-response": true
-          }
-        }
-      }
-    },
-    "/api/hubs/{hub}/users/{user}/messages": {
+    "/api/hubs/{hub}/users/{user}/:send": {
       "post": {
         "tags": [
           "signalr"
@@ -156,6 +112,122 @@
             "description": "The user Id.",
             "required": true,
             "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "api-version",
+            "type": "string",
+            "default": "2020-10-01"
+          },
+          {
+            "in": "body",
+            "name": "payloadMessage",
+            "description": "The message body.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PayloadMessage"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Success"
+          },
+          "default": {
+            "description": "Error response",
+            "x-ms-error-response": true
+          }
+        }
+      }
+    },
+    "/api/hubs/{hub}/connections/{connectionId}/:send": {
+      "post": {
+        "tags": [
+          "signalr"
+        ],
+        "summary": "Send message to the specific connection.",
+        "operationId": "ServiceApi_SendToConnection",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "hub",
+            "description": "Target hub name, which should start with alphabetic characters and only contain alpha-numeric characters or underscore.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z][A-Za-z0-9_`,.[\\]]{0,127}$"
+          },
+          {
+            "in": "path",
+            "name": "connectionId",
+            "description": "The connection Id.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "api-version",
+            "type": "string",
+            "default": "2020-10-01"
+          },
+          {
+            "in": "body",
+            "name": "payloadMessage",
+            "description": "The message body.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PayloadMessage"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Success"
+          },
+          "default": {
+            "description": "Error response",
+            "x-ms-error-response": true
+          }
+        }
+      }
+    },
+    "/api/hubs/{hub}/groups/{group}/:send": {
+      "post": {
+        "tags": [
+          "signalr"
+        ],
+        "summary": "Broadcast a message to all clients within the target group.",
+        "operationId": "ServiceApi_GroupBroadcast",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "hub",
+            "description": "Target hub name, which should start with alphabetic characters and only contain alpha-numeric characters or underscore.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z][A-Za-z0-9_`,.[\\]]{0,127}$"
+          },
+          {
+            "in": "path",
+            "name": "group",
+            "description": "Target group name, which length should be greater than 0 and less than 1025.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "excluded",
+            "description": "Excluded connection Ids",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
           },
           {
             "in": "query",
@@ -263,60 +335,7 @@
           }
         ],
         "responses": {
-          "202": {
-            "description": "Success"
-          },
-          "default": {
-            "description": "Error response",
-            "x-ms-error-response": true
-          }
-        }
-      }
-    },
-    "/api/hubs/{hub}/connections/{connectionId}/messages": {
-      "post": {
-        "tags": [
-          "signalr"
-        ],
-        "summary": "Send message to the specific connection.",
-        "operationId": "ServiceApi_SendToConnection",
-        "consumes": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "hub",
-            "description": "Target hub name, which should start with alphabetic characters and only contain alpha-numeric characters or underscore.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[A-Za-z][A-Za-z0-9_`,.[\\]]{0,127}$"
-          },
-          {
-            "in": "path",
-            "name": "connectionId",
-            "description": "The connection Id.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "name": "api-version",
-            "type": "string",
-            "default": "2020-10-01"
-          },
-          {
-            "in": "body",
-            "name": "payloadMessage",
-            "description": "The message body.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/PayloadMessage"
-            }
-          }
-        ],
-        "responses": {
-          "202": {
+          "200": {
             "description": "Success"
           },
           "default": {
@@ -370,16 +389,13 @@
         }
       }
     },
-    "/api/hubs/{hub}/groups/{group}/messages": {
-      "post": {
+    "/api/hubs/{hub}/users/{user}": {
+      "head": {
         "tags": [
           "signalr"
         ],
-        "summary": "Broadcast a message to all clients within the target group.",
-        "operationId": "ServiceApi_GroupBroadcast",
-        "consumes": [
-          "application/json"
-        ],
+        "summary": "Check if there are any client connections connected for the given user",
+        "operationId": "ServiceApi_CheckUserExistence",
         "parameters": [
           {
             "in": "path",
@@ -391,40 +407,24 @@
           },
           {
             "in": "path",
-            "name": "group",
-            "description": "Target group name, which length should be greater than 0 and less than 1025.",
+            "name": "user",
+            "description": "The user Id.",
             "required": true,
             "type": "string"
-          },
-          {
-            "in": "query",
-            "name": "excluded",
-            "description": "Excluded connection Ids",
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "collectionFormat": "multi"
           },
           {
             "in": "query",
             "name": "api-version",
             "type": "string",
             "default": "2020-10-01"
-          },
-          {
-            "in": "body",
-            "name": "payloadMessage",
-            "description": "The message body.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/PayloadMessage"
-            }
           }
         ],
         "responses": {
-          "202": {
+          "200": {
             "description": "Success"
+          },
+          "404": {
+            "description": "Not Found"
           },
           "default": {
             "description": "Error response",
@@ -673,7 +673,7 @@
           }
         ],
         "responses": {
-          "202": {
+          "200": {
             "description": "Success"
           },
           "default": {
@@ -717,9 +717,6 @@
           "200": {
             "description": "The user is deleted"
           },
-          "202": {
-            "description": "The delete request is accepted and service is handling the request int the background"
-          },
           "default": {
             "description": "Error response",
             "x-ms-error-response": true
@@ -746,18 +743,5 @@
         }
       }
     }
-  },
-  "securityDefinitions": {
-    "Bearer": {
-      "type": "apiKey",
-      "name": "Authorization",
-      "in": "header",
-      "description": "JWT Authorization header using the Bearer scheme. \r\n\r\n Enter 'Bearer' [space] and then your token in the text input below.\r\n\r\nExample: \"Bearer 12345abcdef\""
-    }
-  },
-  "security": [
-    {
-      "Bearer": []
-    }
-  ]
+  }
 }
