@@ -69,7 +69,8 @@
           "Migration Triggering": {
             "$ref": "./examples/migrateFromSmartDetectionsTrigger.json"
           }
-        }
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.AlertsManagement/migrateFromSmartDetections/{migrationId}": {
@@ -226,7 +227,8 @@
       "type": "object",
       "properties": {
         "error": {
-          "$ref": "#/definitions/MigrationErrorResponseBody"
+          "$ref": "#/definitions/MigrationErrorResponseBody",
+          "description": "The API error body."
         }
       }
     },
