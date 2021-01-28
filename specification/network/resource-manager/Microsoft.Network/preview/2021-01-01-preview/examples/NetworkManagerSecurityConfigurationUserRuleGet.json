@@ -1,0 +1,47 @@
+{
+  "parameters": {
+    "api-version": "2021-01-01-preview",
+    "subscriptionId": "subId",
+    "resourceGroupName": "rg1",
+    "configurationName": "myTestSecurityConfig",
+    "networkManagerName": "testNetworkManager",
+    "ruleName": "SampleUserRule"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/networkManagers/testNetworkManager/securityConfigurations/myTestSecurityConfig/rules/SampleUserRule",
+        "type": "Microsoft.Network/networkManagers/securityConfigurations/rules",
+        "name": "SampleUserRule",
+        "etag": "123451424",
+        "properties": {
+          "displayName": "SampleUserRule",
+          "description": "Sample User Rule",
+          "protocol": "Tcp",
+          "source": [
+            {
+              "addressPrefixType": "IPPrefix",
+              "addressPrefix": "*"
+            }
+          ],
+          "destination": [
+            {
+              "addressPrefixType": "IPPrefix",
+              "addressPrefix": "*"
+            }
+          ],
+          "sourcePortRanges": [
+            "0-65535"
+          ],
+          "destinationPortRanges": [
+            "22"
+          ],
+          "access": "Deny",
+          "priority": 1,
+          "direction": "Inbound",
+          "provisioningState": "Succeeded"
+        }
+      }
+    }
+  }
+}

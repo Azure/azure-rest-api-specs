@@ -1,0 +1,122 @@
+{
+  "parameters": {
+    "api-version": "2021-01-01-preview",
+    "subscriptionId": "subId",
+    "resourceGroupName": "rg1",
+    "networkManagerName": "testNetworkManager",
+    "configurationName": "myTestSecurityConfig",
+    "ruleName": "SampleAdminRule",
+    "securityConfigurationAdminRule": {
+      "properties": {
+        "description": "This is Sample Admin Rule",
+        "protocol": "Tcp",
+        "source": [
+          {
+            "addressPrefixType": "ServiceTag",
+            "addressPrefix": "Internet"
+          }
+        ],
+        "destination": [
+          {
+            "addressPrefixType": "IPPrefix",
+            "addressPrefix": "*"
+          }
+        ],
+        "sourcePortRanges": [
+          "0-65535"
+        ],
+        "destinationPortRanges": [
+          "22"
+        ],
+        "access": "Deny",
+        "priority": 1,
+        "direction": "Inbound",
+        "appliesToGroups": [
+          {
+            "networkGroupId": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/networkManagers/testNetworkManager/networkGroups/testGroup"
+          }
+        ]
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/networkManagers/testNetworkManager/SecurityConfigurations/myTestSecurityConfig/rules/SampleAdminRule",
+        "type": "Microsoft.Network/networkManagers/securityConfigurations/rules",
+        "name": "SampleAdminRule",
+        "etag": "asdf-asdf-asdf2",
+        "properties": {
+          "description": "This is Sample Admin Rule",
+          "protocol": "Tcp",
+          "source": [
+            {
+              "addressPrefixType": "ServiceTag",
+              "addressPrefix": "Internet"
+            }
+          ],
+          "destination": [
+            {
+              "addressPrefixType": "IPPrefix",
+              "addressPrefix": "*"
+            }
+          ],
+          "sourcePortRanges": [
+            "0-65535"
+          ],
+          "destinationPortRanges": [
+            "22"
+          ],
+          "access": "Deny",
+          "priority": 1,
+          "direction": "Inbound",
+          "appliesToGroups": [
+            {
+              "networkGroupId": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/networkManagers/testNetworkManager/networkGroups/testGroup"
+            }
+          ],
+          "provisioningState": "Succeeded"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/networkManagers/testNetworkManager/SecurityConfigurations/myTestSecurityConfig/rules/SampleAdminRule",
+        "type": "Microsoft.Network/networkManagers/securityConfigurations/rules",
+        "name": "SampleAdminRule",
+        "etag": "asdf-asdf-asdf2",
+        "properties": {
+          "description": "This is Sample Admin Rule",
+          "protocol": "Tcp",
+          "source": [
+            {
+              "addressPrefixType": "ServiceTag",
+              "addressPrefix": "Internet"
+            }
+          ],
+          "destination": [
+            {
+              "addressPrefixType": "IPPrefix",
+              "addressPrefix": "*"
+            }
+          ],
+          "sourcePortRanges": [
+            "0-65535"
+          ],
+          "destinationPortRanges": [
+            "22"
+          ],
+          "access": "Deny",
+          "priority": 1,
+          "direction": "Inbound",
+          "appliesToGroups": [
+            {
+              "networkGroupId": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/networkManagers/testNetworkManager/networkGroups/testGroup"
+            }
+          ],
+          "provisioningState": "Succeeded"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "parameters": {
+    "api-version": "2021-01-01-preview",
+    "subscriptionId": "subId",
+    "resourceGroupName": "rg1",
+    "configurationName": "Policy1",
+    "networkManagerName": "testNetworkManager",
+    "parameters": {
+      "tags": {
+        "tag1": "value1",
+        "tag2": "value2"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/networkManagers/testNetworkManager/securityConfigurations/Policy1",
+        "name": "Policy1",
+        "type": "Microsoft.Network/networkManagerSecurityConfigurations",
+        "etag": "sadf-asdf-asdf-asdf",
+        "tags": {
+          "tag1": "value1",
+          "tag2": "value2"
+        },
+        "properties": {
+          "description": "A sample policy",
+          "securityType": "UserPolicy",
+          "deleteExistingNSGs": true,
+          "appliesToGroups": [
+            {
+              "networkGroupId": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/networkManagers/testNetworkManager/networkGroups/testGroup"
+            }
+          ]
+        }
+      }
+    }
+  }
+}
