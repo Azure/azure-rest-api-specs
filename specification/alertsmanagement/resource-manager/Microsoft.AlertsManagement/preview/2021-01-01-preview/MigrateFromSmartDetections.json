@@ -27,13 +27,13 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/providers/Microsoft.AlertsManagement/migrateFromSmartDetections": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AlertsManagement/migrateFromSmartDetection": {
       "post": {
         "tags": [
-          "SmartDetectionsMigration"
+          "MigrateFromSmartDetection"
         ],
         "description": "Starts an asynchronous migration process of Smart Detection to smart alerts in an Application Insights resource.",
-        "operationId": "SmartDetectionsMigration_StartMigration",
+        "operationId": "MigrateFromSmartDetection_StartMigration",
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -67,22 +67,22 @@
         },
         "x-ms-examples": {
           "Migration Triggering": {
-            "$ref": "./examples/migrateFromSmartDetectionsTrigger.json"
+            "$ref": "./examples/migrateFromSmartDetectionStartMigration.json"
           }
         },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
-          "final-state-via": "locatiion"
+          "final-state-via": "location"
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.AlertsManagement/migrateFromSmartDetections/{migrationId}": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AlertsManagement/migrateFromSmartDetection/{migrationId}": {
       "get": {
         "tags": [
-          "SmartDetectionsMigration"
+          "MigrateFromSmartDetection"
         ],
         "description": "Retrieve the status of a migration process.",
-        "operationId": "SmartDetectionsMigration_Get",
+        "operationId": "MigrateFromSmartDetection_Get",
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -110,7 +110,7 @@
         },
         "x-ms-examples": {
           "Get Migration Status": {
-            "$ref": "./examples/migrateFromSmartDetectionsGet.json"
+            "$ref": "./examples/migrateFromSmartDetectionGet.json"
           }
         }
       }
