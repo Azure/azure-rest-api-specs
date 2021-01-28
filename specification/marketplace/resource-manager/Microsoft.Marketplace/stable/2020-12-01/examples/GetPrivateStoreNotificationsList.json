@@ -6,138 +6,51 @@
   "responses": {
     "200": {
       "body": {
-        "id": "/providers/Microsoft.Marketplace/privateStores/a0e28e55-90c4-41d8-8e34-bb7ef7775406/notification",
-        "type": "Microsoft.Marketplace/privateStores/notifications",
-        "name": "notifications",
-        "systemData": {
-          "createdBy": "test@somedomain.com",
-          "createdByType": "User",
-          "createdAt": "2020-10-05T17:18:19.1234567Z",
-          "lastModifiedBy": "testuser@somedomail.com",
-          "lastModifiedByType": "User",
-          "lastModifiedAt": "2020-10-05T17:18:19.1234567Z"
-        },
-        "properties": {
-          "details": {
-            "stopSellNotifications": [],
-            "newNotifications": [
-              {
-                "offerId": "data3-limited-1019419.d3_azure_managed_services",
-                "displayName": "Data#3 Azure Managed Services",
-                "isFuturePlansEnabled": true,
-                "plans": [
+        "value": [
+          {
+            "systemData": {
+              "createdBy": "test@somedomain.com",
+              "createdByType": "User",
+              "createdAt": "2020-10-05T17:18:19.1234567Z",
+              "lastModifiedBy": "testuser@somedomail.com",
+              "lastModifiedByType": "User",
+              "lastModifiedAt": "2020-10-05T17:18:19.1234567Z"
+            },
+            "id": "/providers/Microsoft.Marketplace/privateStores/a0e28e55-90c4-41d8-8e34-bb7ef7775406/notifications",
+            "name": "notifications",
+            "type": "Microsoft.Marketplace/privateStores/notifications",
+            "properties": {
+              "details": {
+                "stopSellNotifications": [],
+                "newNotifications": [],
+                "approvalRequests": [
                   {
-                    "planDisplayName": "Azure Health Check",
-                    "planId": "d3-azure-health-check"
+                    "publisherId": "test-publisher",
+                    "offerId": "marketplacetestthirdparty.md-test-third-party-2",
+                    "displayName": "Display name",
+                    "plans": [
+                      {
+                        "planDisplayName": "*",
+                        "planId": "*"
+                      },
+                      {
+                        "planDisplayName": "Plan name",
+                        "planId": "plan-id"
+                      },
+                      {
+                        "planDisplayName": "plan name b",
+                        "planId": "plan-id-b"
+                      }
+                    ],
+                    "icon": "https://store-images.s-microsoft.com/image/88d8-356589260747",
+                    "messageCode": 0
                   }
-                ],
-                "messageCode": 10001,
-                "icon": "https://store-images.s-microsoft.com/image/apps.33169.691280b6-4519-4532-a123-c106dc5495cc.98b4450b-a020-4e2f-9e57-c5c5fec0d33f.a331afc8-d85c-4af7-88d8-356589260747"
-              }
-            ],
-            "approvalRequests": [
-              {
-                "publisherId": "viacode_consulting-1089577",
-                "offerId": "viacode_consulting-1089577.viacodems",
-                "displayName": "VIAcode Managed Services for Azure",
-                "plans": [
-                  {
-                    "planDisplayName": "*",
-                    "planId": "*"
-                  },
-                  {
-                    "planDisplayName": "Azure Optimization Assessment ",
-                    "planId": "mgmt-assessment"
-                  },
-                  {
-                    "planDisplayName": "Standard Azure Managed Service ",
-                    "planId": "mgmt-limited-free"
-                  }
-                ],
-                "icon": "https://store-images.s-microsoft.com/image/apps.11304.47605afb-1bc3-45f5-a78c-bf55cf92dc9c.7c6d203c-1d3f-4eed-b0f7-0ebf1489637f.d582093a-325f-40be-99c9-31ea23c6f388",
-                "messageCode": 0
+                ]
               },
-              {
-                "publisherId": "data3-limited-1019419",
-                "offerId": "data3-limited-1019419.d3_azure_managed_services",
-                "displayName": "Data#3 Azure Managed Services",
-                "plans": [
-                  {
-                    "planDisplayName": "Azure Optimiser",
-                    "planId": "data3-azure-optimiser-plan"
-                  },
-                  {
-                    "planDisplayName": "Azure Health Check",
-                    "planId": "d3-azure-health-check"
-                  }
-                ],
-                "icon": "https://store-images.s-microsoft.com/image/apps.33169.691280b6-4519-4532-a123-c106dc5495cc.98b4450b-a020-4e2f-9e57-c5c5fec0d33f.a331afc8-d85c-4af7-88d8-356589260747",
-                "messageCode": 0
-              },
-              {
-                "publisherId": "apps-4-rent",
-                "offerId": "apps-4-rent.quickfx-administration",
-                "displayName": "Quick-Fix Administration",
-                "plans": [
-                  {
-                    "planDisplayName": "*",
-                    "planId": "*"
-                  },
-                  {
-                    "planDisplayName": "Quick-Fix Administration",
-                    "planId": "quick-fix-administration"
-                  }
-                ],
-                "icon": "https://store-images.s-microsoft.com/image/apps.39174.32aba8a1-30dd-49b4-b064-c5478a856495.c3a79ddf-afad-4b5d-994a-f2f38c90f46e.62cf0b71-a15b-4793-8cb5-0b61b964635a",
-                "messageCode": 0
-              },
-              {
-                "publisherId": "barracudanetworks",
-                "offerId": "barracudanetworks.barracuda-waf-as-a-service",
-                "displayName": "Barracuda WAF-as-a-Service",
-                "plans": [
-                  {
-                    "planDisplayName": "*",
-                    "planId": "*"
-                  }
-                ],
-                "icon": "https://store-images.s-microsoft.com/image/apps.57257.0cb69765-fac8-4346-9ebd-b4ae25271f57.85cab900-946c-43ea-a4ef-12c1bcac0ff3.37ae8c43-9434-4ecd-b695-e46e59d80068",
-                "messageCode": 0
-              },
-              {
-                "publisherId": "Sendgrid",
-                "offerId": "Sendgrid.sendgrid_azure",
-                "displayName": "SendGrid",
-                "plans": [
-                  {
-                    "planDisplayName": "Bronze",
-                    "planId": "bronze"
-                  },
-                  {
-                    "planDisplayName": "Premier Volume",
-                    "planId": "AzureStoreCustomPlan_Diamond"
-                  }
-                ],
-                "icon": "http://store-images.s-microsoft.com/image/apps.28783.8d928a43-a0a5-4a14-9725-bfcfa897e4ef.451b9cd7-1237-4cf0-9f93-8e843b643a19.3494a7ea-343a-46d6-b15b-de9022ce862e",
-                "messageCode": 0
-              },
-              {
-                "publisherId": "barracudanetworks",
-                "offerId": "barracudanetworks.barracuda-email-security-gateway",
-                "displayName": "Barracuda Email Security Gateway",
-                "plans": [
-                  {
-                    "planDisplayName": "Barracuda Email Security Gateway - PAYG",
-                    "planId": "hourly"
-                  }
-                ],
-                "icon": "https://store-images.s-microsoft.com/image/apps.213.01eede69-41dc-4f18-9243-8ebe968369eb.34a0a871-ab03-41dd-8161-0b33c9ae0103.b617a791-0a2a-4e61-be2d-33fd4616f4a2",
-                "messageCode": 0
-              }
-            ]
-          },
-          "update": null
-        }
+              "update": null
+            }
+          }
+        ]
       }
     }
   }
