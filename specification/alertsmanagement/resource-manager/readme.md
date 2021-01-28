@@ -51,7 +51,7 @@ These settings apply only when `--tag=package-preview-2021-01` is specified on t
 
 ```yaml $(tag) == 'package-preview-2021-01-preview'
 input-file:
-  - Microsoft.AlertsManagement/preview/2021-01-01/MigrateFromSmartDetections.json
+  - Microsoft.AlertsManagement/preview/2021-01-01-preview/MigrateFromSmartDetections.json
 ```
 ### Tag: package-2019-06-preview
 
