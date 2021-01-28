@@ -3,7 +3,7 @@
   "info": {
     "version": "2021-01-01-preview",
     "title": "Azure Alerts Management Service Resource Provider",
-    "description": "APIs for managing a migration from Smart Detections to Smart Alerts."
+    "description": "APIs for managing a migration from Smart Detection to smart alerts."
   },
   "host": "management.azure.com",
   "schemes": [
@@ -32,8 +32,8 @@
         "tags": [
           "SmartDetectionsMigration"
         ],
-        "description": "Starts an asynchronous migration process of Smart Detections to Smart Alerts in an Application Insights resource.",
-        "operationId": "SmartDetectionsMigration_Trigger",
+        "description": "Starts an asynchronous migration process of Smart Detection to smart alerts in an Application Insights resource.",
+        "operationId": "SmartDetectionsMigration_StartMigration",
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -53,7 +53,7 @@
         ],
         "responses": {
           "202": {
-            "description": "Migration requst was accepted. Processing will start promptly.",
+            "description": "Migration request was accepted. Processing will start promptly.",
             "schema": {
               "$ref": "#/definitions/MigrationStatusResponse"
             }
@@ -115,8 +115,7 @@
   "definitions": {
     "SmartDetectionMigrationRequest": {
       "required": [
-        "scope",
-        "actionGroupCreationPolicy"
+        "scope"
       ],
       "properties": {
         "scope": {
@@ -129,7 +128,6 @@
         "actionGroupCreationPolicy": {
           "type": "string",
           "enum": [
-            "Default",
             "Custom",
             "Auto"
           ],
@@ -137,25 +135,21 @@
             "name": "ActionGroupCreationPolicy",
             "values": [
               {
-                "value": "Default",
-                "description": "Create all Alert Rules with the default Smart Alerts Action Group."
-              },
-              {
                 "value": "Custom",
-                "description": "Create all Alert Rules with a custom Action Group that is specified in 'customActionGroupName'."
+                "description": "Create all alert rules with a custom action group that is specified in 'customActionGroupName'."
               },
               {
                 "value": "Auto",
-                "description": "Automatically create an Action Group for each unique setting in the Smart Detection Rules."
+                "description": "Automatically create an action group for each unique setting in the Smart Detection settings."
               }
             ],
             "modelAsString": true
           },
-          "description": "The policy for migrating the email settings in the Smart Detection Rules into Action Groups."
+          "description": "The policy for migrating the email settings in the Smart Detection Rules into action groups. If not specified, 'Auto' policy is used."
         },
         "customActionGroupName": {
           "type": "string",
-          "description": "A custom name of an existing Action Group to attach to the created alert rules. Required only when actionGroupCreationPolicy is set to 'Custom'."
+          "description": "A custom name of an existing action group to attach to the created alert rules. Required only when actionGroupCreationPolicy is set to 'Custom'."
         }
       },
       "description": "The Smart Detection migration request."
@@ -228,7 +222,7 @@
       "description": "A migration status response."
     },
     "MigrationErrorResponse": {
-      "description": "Api error",
+      "description": "API error.",
       "type": "object",
       "properties": {
         "error": {
@@ -237,11 +231,11 @@
       }
     },
     "MigrationErrorResponseBody": {
-      "description": "Api error body.",
+      "description": "API error body.",
       "type": "object",
       "properties": {
         "code": {
-          "description": "Error code",
+          "description": "Error code.",
           "type": "string"
         },
         "message": {
@@ -264,7 +258,7 @@
       "in": "query",
       "required": true,
       "type": "string",
-      "description": "Client Api Version."
+      "description": "Client API Version."
     },
     "MigrationIdParameter": {
       "name": "migrationId",
