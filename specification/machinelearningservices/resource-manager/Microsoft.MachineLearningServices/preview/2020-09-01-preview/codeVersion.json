@@ -1,0 +1,353 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Azure Machine Learning Workspaces",
+    "description": "These APIs allow end users to operate on Azure Machine Learning Workspace resources.",
+    "version": "2020-09-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/codes/{name}/versions": {
+      "get": {
+        "tags": [
+          "CodeVersion"
+        ],
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "description": "List code versions.",
+        "operationId": "CodeVersions_List",
+        "x-ms-examples": {
+          "List CodeVersions": {
+            "$ref": "./examples/listCodeVersions.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/APIVersionParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/PaginationParameter"
+          },
+          {
+            "$ref": "#/parameters/CodeVersionNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/CodeVersionResourceArmPaginatedResult"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "machineLearningServices.json#/definitions/MachineLearningServiceError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/codes/{name}/versions/{version}": {
+      "delete": {
+        "tags": [
+          "CodeVersion"
+        ],
+        "description": "Delete code.",
+        "operationId": "CodeVersions_Delete",
+        "x-ms-examples": {
+          "Delete CodeVersion": {
+            "$ref": "./examples/deleteCodeVersion.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/APIVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/CodeVersionNameParameter"
+          },
+          {
+            "$ref": "#/parameters/CodeVersionVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "204": {
+            "description": "Success"
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "machineLearningServices.json#/definitions/MachineLearningServiceError"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "CodeVersion"
+        ],
+        "description": "Get code.",
+        "operationId": "CodeVersions_Get",
+        "x-ms-examples": {
+          "Get CodeVersion": {
+            "$ref": "./examples/getCodeVersion.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/APIVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/CodeVersionNameParameter"
+          },
+          {
+            "$ref": "#/parameters/CodeVersionVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/CodeVersionResource"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "machineLearningServices.json#/definitions/MachineLearningServiceError"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "CodeVersion"
+        ],
+        "description": "Create or update code.",
+        "operationId": "CodeVersions_CreateOrUpdate",
+        "x-ms-examples": {
+          "Create or Update CodeVersion": {
+            "$ref": "./examples/createOrUpdateCodeVersion.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/APIVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/CodeVersionNameParameter"
+          },
+          {
+            "$ref": "#/parameters/CodeVersionVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Code entity to create or update.",
+            "schema": {
+              "$ref": "#/definitions/CodeVersionResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/CodeVersionResource"
+            }
+          },
+          "201": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/CodeVersionResource"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "machineLearningServices.json#/definitions/MachineLearningServiceError"
+            }
+          }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "CodeVersionNameParameter": {
+      "in": "path",
+      "name": "name",
+      "type": "string",
+      "description": "Code name.",
+      "required": true,
+      "x-ms-parameter-location": "method"
+    },
+    "CodeVersionVersionParameter": {
+      "in": "path",
+      "name": "version",
+      "type": "string",
+      "description": "Code version.",
+      "required": true,
+      "x-ms-parameter-location": "method"
+    }
+  },
+  "definitions": {
+    "AssetPath": {
+      "description": "Details of an AssetUri.",
+      "type": "object",
+      "properties": {
+        "path": {
+          "description": "The path of file/directory.",
+          "type": "string"
+        },
+        "isDirectory": {
+          "description": "Whether the path defines a directory or a single file.",
+          "type": "boolean"
+        }
+      },
+      "additionalProperties": false
+    },
+    "CodeVersion": {
+      "required": [
+        "assetPaths"
+      ],
+      "type": "object",
+      "description": "Details of an RegisteredCode",
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "The Asset description text."
+        },
+        "datastoreId": {
+          "type": "string",
+          "description": "The Asset datastoreId"
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "The Asset tag dictionary."
+        },
+        "properties": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "The Asset property dictionary."
+        },
+        "assetPaths": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AssetPath"
+          },
+          "description": "Details of asset path\r\nAdding list of back compat"
+        }
+      },
+      "additionalProperties": false
+    },
+    "CodeVersionResource": {
+      "type": "object",
+      "description": "Azure Resource Manager resource Envelope",
+      "required": [
+        "properties"
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/CodeVersion"
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "machineLearningServices.json#/definitions/ResourceBase"
+        }
+      ],
+      "additionalProperties": false
+    },
+    "CodeVersionResourceArmPaginatedResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CodeVersionResource"
+          }
+        },
+        "nextLink": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}
