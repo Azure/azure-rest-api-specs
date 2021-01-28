@@ -6149,6 +6149,10 @@
       "description": "Filter for the Event Channel.",
       "type": "object",
       "properties": {
+        "enableAdvancedFilteringOnArrays": {
+          "description": "Allows advanced filters to be evaluated against an array of values instead of expecting a singular value.",
+          "type": "boolean"
+        },
         "advancedFilters": {
           "description": "An array of advanced filters that are used for filtering event channels.",
           "type": "array",
@@ -6390,8 +6394,11 @@
           "description": "The set of filter values.",
           "type": "array",
           "items": {
-            "format": "double",
-            "type": "number"
+            "type": "array",
+            "items": {
+              "format": "double",
+              "type": "number"
+            }
           }
         }
       },
@@ -6410,8 +6417,11 @@
           "description": "The set of filter values.",
           "type": "array",
           "items": {
-            "format": "double",
-            "type": "number"
+            "type": "array",
+            "items": {
+              "format": "double",
+              "type": "number"
+            }
           }
         }
       },
@@ -6474,8 +6484,8 @@
       },
       "x-ms-discriminator-value": "StringNotContains"
     },
-    "IsNullAdvancedFilter": {
-      "description": "BoolEquals Advanced Filter.",
+    "IsNullOrUndefinedAdvancedFilter": {
+      "description": "IsNullOrUndefined Advanced Filter.",
       "type": "object",
       "allOf": [
         {
@@ -6483,7 +6493,7 @@
         }
       ],
       "properties": {},
-      "x-ms-discriminator-value": "IsNull"
+      "x-ms-discriminator-value": "IsNullOrUndefined"
     },
     "IsNotNullAdvancedFilter": {
       "description": "IsNotNull Advanced Filter.",
@@ -6523,7 +6533,7 @@
             "StringNotBeginsWith",
             "StringNotEndsWith",
             "StringNotContains",
-            "IsNull",
+            "IsNullOrUndefined",
             "IsNotNull"
           ],
           "type": "string",
