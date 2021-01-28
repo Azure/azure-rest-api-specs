@@ -713,6 +713,9 @@
     "PhoneNumberOperation": {
       "description": "Long running operation.",
       "required": [
+        "createdDateTime",
+        "id",
+        "operationType",
         "status"
       ],
       "type": "object",
@@ -756,7 +759,6 @@
             "updatePhoneNumberCapabilities"
           ],
           "type": "string",
-          "readOnly": true,
           "x-ms-enum": {
             "name": "PhoneNumberOperationType",
             "modelAsString": true
@@ -855,6 +857,9 @@
     },
     "AcquiredPhoneNumbers": {
       "description": "The list of acquired phone numbers.",
+      "required": [
+        "phoneNumbers"
+      ],
       "type": "object",
       "properties": {
         "phoneNumbers": {
