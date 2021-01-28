@@ -94,7 +94,7 @@ swagger-to-sdk:
   - repo: azure-sdk-for-net
   - repo: azure-sdk-for-python
     after_scripts:
-      - bundle install && rake arm:regen_all_profiles['azure_mgmt_service_fabric']
+      - bundle install && rake arm:regen_all_profiles['azure_mgmt_service_fabric_managed_clusters']
   - repo: azure-resource-manager-schemas
     after_scripts:
       - node sdkauto_afterscript.js servicefabricmanagedlusters/resource-manager
