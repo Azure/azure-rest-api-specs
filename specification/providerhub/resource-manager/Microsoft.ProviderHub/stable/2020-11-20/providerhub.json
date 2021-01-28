@@ -99,7 +99,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/CustomRolloutSpecification"
+              "$ref": "#/definitions/CustomRolloutProperties"
             },
             "description": "The custom rollout properties supplied to the CreateOrUpdate operation."
           },
@@ -722,15 +722,6 @@
             "$ref": "#/parameters/ProviderNamespaceParameter"
           },
           {
-            "name": "properties",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/OperationsContent"
-            },
-            "description": "The operations content properties supplied to the CreateOrUpdate operation."
-          },
-          {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           }
         ],
@@ -772,6 +763,15 @@
           },
           {
             "$ref": "#/parameters/ProviderNamespaceParameter"
+          },
+          {
+            "name": "OperationsPutContent",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/OperationsPutContent"
+            },
+            "description": "The operations content properties supplied to the CreateOrUpdate operation."
           },
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
@@ -900,7 +900,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ProviderRegistration"
+              "$ref": "#/definitions/ProviderRegistrationProperties"
             },
             "description": "The provider registration properties supplied to the CreateOrUpdate operation."
           },
@@ -1173,7 +1173,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ResourceTypeRegistration"
+              "$ref": "#/definitions/ResourceTypeRegistrationProperties"
             },
             "description": "The Kusto cluster parameters supplied to the CreateOrUpdate operation."
           },
@@ -3560,6 +3560,17 @@
         }
       },
       "x-ms-azure-resource": true
+    },
+    "OperationsPutContent": {
+      "type": "object",
+      "properties": {
+        "Contents": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/OperationsDefinition"
+          }
+        }
+      }
     },
     "OperationsDefinitionArrayResponseWithContinuation": {
       "type": "object",

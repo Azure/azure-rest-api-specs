@@ -3,26 +3,24 @@
     "subscriptionId": "ab7a8701-f7ef-471a-a2f4-d0ebbf494f77",
     "providerNamespace": "Microsoft.Contoso",
     "api-version": "2020-11-20",
-    "ProviderRegistration": {
-      "properties": {
-        "providerType": "Internal",
-        "providerVersion": "2.0",
-        "management": {
-          "incidentRoutingService": "Contoso Resource Provider",
-          "incidentRoutingTeam": "Contoso Triage",
-          "incidentContactEmail": "helpme@contoso.com"
+    "properties": {
+      "providerType": "Internal",
+      "providerVersion": "2.0",
+      "management": {
+        "incidentRoutingService": "Contoso Resource Provider",
+        "incidentRoutingTeam": "Contoso Triage",
+        "incidentContactEmail": "helpme@contoso.com"
+      },
+      "capabilities": [
+        {
+          "quotaId": "CSP_2015-05-01",
+          "effect": "Allow"
         },
-        "capabilities": [
-          {
-            "quotaId": "CSP_2015-05-01",
-            "effect": "Allow"
-          },
-          {
-            "quotaId": "CSP_MG_2017-12-01",
-            "effect": "Allow"
-          }
-        ]
-      }
+        {
+          "quotaId": "CSP_MG_2017-12-01",
+          "effect": "Allow"
+        }
+      ]
     }
   },
   "responses": {
