@@ -221,6 +221,11 @@
           "$ref": "#/definitions/SubnetEndpointProperty",
           "description": "Endpoint of the subnet."
         },
+        "vnetid": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The virtual network ID. This is typically a GUID. Expect a null GUID by default."
+        },
         "status": {
           "$ref": "#/definitions/SubnetState",
           "description": "Connection State of the subnet."
@@ -237,6 +242,7 @@
       "properties": {
         "id": {
           "type": "string",
+          "pattern": "^/subscriptions/[^/]*/resourceGroups/[^/]*/providers/Microsoft.(ClassicNetwork|Network)/virtualNetworks/[^/]*/subnets/[^/]*$",
           "description": "Resource id of the subnet."
         }
       }

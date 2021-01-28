@@ -31,7 +31,6 @@ batch:
   - tag: package-2017-10
   - tag: package-2018-05-01-preview
   - tag: package-2018-06-17-preview
-  - tag: package-2019-09-01-preview
   - tag: package-2019-10-17-preview
   - tag: package-2020-02-02-preview
   - tag: package-2020-03-01-preview
@@ -43,7 +42,6 @@ batch:
   - tag: package-2017-10
   - tag: package-2018-05-01-preview
   - tag: package-2018-06-17-preview
-  - tag: package-2019-09-01-preview
   - tag: package-2019-10-17-preview
   - tag: package-2020-02-02-preview
   - tag: package-2020-03-01-preview
@@ -125,20 +123,6 @@ python:
 ``` yaml $(tag) == 'package-2018-05-01-preview' && $(python) && $(track2)
 namespace: azure.mgmt.applicationinsights.v2018_05_01_preview
 output-folder: $(python-sdks-folder)/applicationinsights/azure-mgmt-applicationinsights/azure/mgmt/applicationinsights/v2018_05_01_preview
-```
-
-### Tag: package-2019-09-01-preview and python
-
-These settings apply only when `--tag=package-2019-09-01-preview --python` is specified on the command line.
-
-``` yaml $(tag) == 'package-2019-09-01-preview' && $(python) && !$(track2)
-python:
-  namespace: azure.mgmt.applicationinsights.v2019_09_01_preview
-  output-folder: $(python-sdks-folder)/applicationinsights/azure-mgmt-applicationinsights/azure/mgmt/applicationinsights/v2019_09_01_preview
-```
-``` yaml $(tag) == 'package-2019-09-01-preview' && $(python) && $(track2)
-namespace: azure.mgmt.applicationinsights.v2019_09_01_preview
-output-folder: $(python-sdks-folder)/applicationinsights/azure-mgmt-applicationinsights/azure/mgmt/applicationinsights/v2019_09_01_preview
 ```
 
 ### Tag: package-2020-02-02-preview and python
