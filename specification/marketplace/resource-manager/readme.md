@@ -78,8 +78,6 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-net
-    after_scripts:
-      - bundle install && rake arm:regen_all_profiles['azure_mgmt_marketplace']
   - repo: azure-resource-manager-schemas
     after_scripts:
       - node sdkauto_afterscript.js marketplace/resource-manager
