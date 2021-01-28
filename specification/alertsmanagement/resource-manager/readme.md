@@ -49,10 +49,9 @@ tag: package-2019-06-preview
 
 These settings apply only when `--tag=package-preview-2021-01` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2021-01'
+```yaml $(tag) == 'package-preview-2021-01-preview'
 input-file:
-  - Microsoft.AlertsManagement/preview/2021-01-01/AlertsManagement.json
-  - Microsoft.AlertsManagement/preview/2021-01-01/ResourceHealthAlertRules.json
+  - Microsoft.AlertsManagement/preview/2021-01-01/MigrateFromSmartDetections.json
 ```
 ### Tag: package-2019-06-preview
 
