@@ -9,15 +9,6 @@ To see additional help and options, run:
 > `autorest --help`
 ---
 
-## Suppression
-
-``` yaml
-directive:
-    - suppress: ValidFormats
-        from: iotcentral.json
-        where: $.definitions.EmailUser.allOf[1].properties.email.format
-        reason: email format is allowed
-```
 
 ## Configuration
 These are the global settings for the IoT Central API.
