@@ -18,7 +18,7 @@
     "application/json"
   ],
   "paths": {
-    "/subscriptions/{subscriptionId}/providers/Microsoft.RecoveryServices/locations/{azureRegion}/backupAadProperties/default": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.RecoveryServices/locations/{azureRegion}/backupAadProperties": {
       "get": {
         "tags": [
           "AadProperties"
@@ -274,10 +274,6 @@
               "$ref": "#/definitions/NewErrorResponse"
             }
           }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
         },
         "x-ms-examples": {
           "Get Operation Results for Cross Region Restore": {
@@ -2858,6 +2854,13 @@
         "recoveryPointDiskConfiguration": {
           "$ref": "#/definitions/RecoveryPointDiskConfiguration",
           "description": "Disk configuration"
+        },
+        "zones": {
+          "description": "Identifies the zone of the VM at the time of backup. Applicable only for zone-pinned Vms",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         }
       },
       "x-ms-discriminator-value": "IaasVMRecoveryPoint"
@@ -2953,6 +2956,13 @@
         "diskEncryptionSetId": {
           "description": "DiskEncryptionSet's ID - needed if the VM needs to be encrypted at rest during restore with customer managed key.",
           "type": "string"
+        },
+        "zones": {
+          "description": "Target zone where the VM and its disks should be restored.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         }
       },
       "x-ms-discriminator-value": "IaasVMRestoreRequest"
