@@ -3,7 +3,7 @@
   "info": {
     "title": "Resource Mover Service API",
     "description": "A first party Azure service orchestrating the move of Azure resources from one Azure region to another or between zones within a region.",
-    "version": "2019-10-01-preview"
+    "version": "2021-01-01"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -1350,6 +1350,9 @@
           "type": "string",
           "description": "The type of the resource."
         },
+        "systemData": {
+          "$ref": "#/definitions/SystemData"
+        },
         "properties": {
           "$ref": "#/definitions/MoveResourceProperties"
         }
@@ -1464,6 +1467,9 @@
         },
         "identity": {
           "$ref": "#/definitions/Identity"
+        },
+        "systemData": {
+          "$ref": "#/definitions/SystemData"
         },
         "properties": {
           "$ref": "#/definitions/MoveCollectionProperties"
@@ -2536,6 +2542,59 @@
           "items": {
             "$ref": "#/definitions/AffectedMoveResource"
           }
+        }
+      }
+    },
+    "SystemData": {
+      "description": "Metadata pertaining to creation and last modification of the resource.",
+      "type": "object",
+      "readOnly": true,
+      "properties": {
+        "createdBy": {
+          "type": "string",
+          "description": "The identity that created the resource."
+        },
+        "createdByType": {
+          "type": "string",
+          "description": "The type of identity that created the resource.",
+          "enum": [
+            "User",
+            "Application",
+            "ManagedIdentity",
+            "Key"
+          ],
+          "x-ms-enum": {
+            "name": "createdByType",
+            "modelAsString": true
+          }
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp of resource creation (UTC)."
+        },
+        "lastModifiedBy": {
+          "type": "string",
+          "description": "The identity that last modified the resource."
+        },
+        "lastModifiedByType": {
+          "type": "string",
+          "description": "The type of identity that last modified the resource.",
+          "enum": [
+            "User",
+            "Application",
+            "ManagedIdentity",
+            "Key"
+          ],
+          "x-ms-enum": {
+            "name": "createdByType",
+            "modelAsString": true
+          }
+        },
+        "lastModifiedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp of resource modification (UTC)."
         }
       }
     }

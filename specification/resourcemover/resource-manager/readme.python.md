@@ -10,7 +10,7 @@ python:
   payload-flattening-threshold: 2
   namespace: azure.mgmt.resourcemover
   package-name: azure-mgmt-resourcemover
-  package-version: 0.1.0-preview
+  package-version: 1.0.0
   clear-output-folder: true
 ```
 
@@ -20,7 +20,7 @@ license-header: MICROSOFT_MIT_NO_VERSION
 package-name: azure-mgmt-resourcemover
 clear-output-folder: true
 no-namespace-folders: true
-package-version: 0.1.0-preview
+package-version: 1.0.0
 ```
 
 ```yaml $(python) && $(python-mode) == 'update'
