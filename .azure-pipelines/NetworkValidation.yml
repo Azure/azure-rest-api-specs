@@ -1,6 +1,5 @@
 jobs:
 - job: "NetworkValidation"
-  condition: and(startsWith(variables['System.PullRequest.TargetBranch'], 'network-'), endsWith(variables['System.PullRequest.TargetBranch'], '-release'))
   continueOnError: true
   pool:
     vmImage: vs2017-win2016
