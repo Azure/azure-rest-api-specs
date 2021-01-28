@@ -169,6 +169,59 @@
           }
         }
       },
+      "patch": {
+        "tags": [
+          "ApplicationType"
+        ],
+        "operationId": "ApplicationTypes_Update",
+        "summary": "Updates the tags of an application type resource of a given managed cluster.",
+        "description": "Updates the tags of an application type resource of a given managed cluster.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/clusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/applicationTypeName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The application type resource updated tags.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ApplicationTypeUpdateParameters"
+            }
+          }
+        ],
+        "x-ms-examples": {
+          "Patch a node type": {
+            "$ref": "./examples/ApplicationTypeNamePatchOperation_example.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ApplicationTypeResource"
+            }
+          },
+          "default": {
+            "description": "The detailed error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        }
+      },
       "delete": {
         "tags": [
           "ApplicationType"
@@ -370,6 +423,62 @@
           },
           "202": {
             "description": "The request was accepted and the operation will complete asynchronously.",
+            "schema": {
+              "$ref": "#/definitions/ApplicationTypeVersionResource"
+            }
+          },
+          "default": {
+            "description": "The detailed error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "ApplicationTypeVersion"
+        ],
+        "operationId": "ApplicationTypeVersions_Update",
+        "summary": "Updates the tags of an application type version resource of a given managed cluster.",
+        "description": "Updates the tags of an application type version resource of a given managed cluster.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/clusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/applicationTypeName"
+          },
+          {
+            "$ref": "#/parameters/version"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The application type version resource updated tags.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ApplicationTypeVersionUpdateParameters"
+            }
+          }
+        ],
+        "x-ms-examples": {
+          "Patch a node type": {
+            "$ref": "./examples/ApplicationTypeVersionPatchOperation_example.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/ApplicationTypeVersionResource"
             }
@@ -598,6 +707,59 @@
           }
         }
       },
+      "patch": {
+        "tags": [
+          "Application"
+        ],
+        "operationId": "Applications_Update",
+        "summary": "Updates the tags of an application resource of a given managed cluster.",
+        "description": "Updates the tags of an application resource of a given managed cluster.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/clusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/applicationName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The application resource updated tags.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ApplicationUpdateParameters"
+            }
+          }
+        ],
+        "x-ms-examples": {
+          "Patch a node type": {
+            "$ref": "./examples/ApplicationPatchOperation_example.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ApplicationResource"
+            }
+          },
+          "default": {
+            "description": "The detailed error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        }
+      },
       "delete": {
         "tags": [
           "Application"
@@ -814,6 +976,62 @@
           }
         }
       },
+      "patch": {
+        "tags": [
+          "Services"
+        ],
+        "operationId": "Services_Update",
+        "summary": "Updates the tags of a service resource of a given managed cluster.",
+        "description": "Updates the tags of a service resource of a given managed cluster.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/clusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/applicationName"
+          },
+          {
+            "$ref": "#/parameters/serviceName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The service resource updated tags.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ServiceUpdateParameters"
+            }
+          }
+        ],
+        "x-ms-examples": {
+          "Patch a node type": {
+            "$ref": "./examples/ServicePatchOperation_example.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ServiceResource"
+            }
+          },
+          "default": {
+            "description": "The detailed error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        }
+      },
       "delete": {
         "tags": [
           "Service"
@@ -955,28 +1173,6 @@
         }
       }
     },
-    "ApplicationCapacity": {
-      "type": "object",
-      "description": "Describes capacity information for services of this application. This description can be used for describing the following:\n- Reserving the capacity for the services on the nodes\n- Limiting the total number of nodes that services of this application can run on\n- Limiting the custom capacity metrics to limit the total consumption of this metric by the services of this application\n",
-      "properties": {
-        "minimumNodes": {
-          "type": "integer",
-          "format": "int64",
-          "description": "The minimum number of nodes where Service Fabric will reserve capacity for this application. Note that this does not mean that the services of this application will be placed on all of those nodes. If this property is set to zero, no capacity will be reserved. The value of this property cannot be more than the value of the MaximumNodes property.",
-          "minimum": 0
-        },
-        "maximumNodes": {
-          "type": "integer",
-          "format": "int64",
-          "description": "The maximum number of nodes where Service Fabric will reserve capacity for this application. Note that this does not mean that the services of this application will be placed on all of those nodes. By default, the value of this property is zero and it means that the services can be placed on any node.",
-          "minimum": 0,
-          "default": 0
-        },
-        "metrics": {
-          "$ref": "#/definitions/ApplicationMetricList"
-        }
-      }
-    },
     "ApplicationHealthPolicy": {
       "type": "object",
       "description": "Defines a health policy used to evaluate the health of an application or one of its children entities.\n",
@@ -1003,44 +1199,6 @@
           "description": "The map with service type health policy per service type name. The map is empty by default."
         }
       }
-    },
-    "ApplicationMetric": {
-      "type": "object",
-      "description": "Describes capacity information for a custom resource balancing metric. This can be used to limit the total consumption of this metric by the services of this application.\n",
-      "required": [
-        "name",
-        "maximumCapacity",
-        "reservationCapacity",
-        "totalApplicationCapacity"
-      ],
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "The name of the metric."
-        },
-        "maximumCapacity": {
-          "type": "integer",
-          "format": "int64",
-          "description": "The maximum node capacity for Service Fabric application.\nThis is the maximum Load for an instance of this application on a single node. Even if the capacity of node is greater than this value, Service Fabric will limit the total load of services within the application on each node to this value.\nIf set to zero, capacity for this metric is unlimited on each node.\nWhen creating a new application with application capacity defined, the product of MaximumNodes and this value must always be smaller than or equal to TotalApplicationCapacity.\nWhen updating existing application with application capacity, the product of MaximumNodes and this value must always be smaller than or equal to TotalApplicationCapacity.\n"
-        },
-        "reservationCapacity": {
-          "type": "integer",
-          "format": "int64",
-          "description": "The node reservation capacity for Service Fabric application.\nThis is the amount of load which is reserved on nodes which have instances of this application.\nIf MinimumNodes is specified, then the product of these values will be the capacity reserved in the cluster for the application.\nIf set to zero, no capacity is reserved for this metric.\nWhen setting application capacity or when updating application capacity; this value must be smaller than or equal to MaximumCapacity for each metric.\n"
-        },
-        "totalApplicationCapacity": {
-          "description": "The total metric capacity for Service Fabric application.\nThis is the total metric capacity for this application in the cluster. Service Fabric will try to limit the sum of loads of services within the application to this value.\nWhen creating a new application with application capacity defined, the product of MaximumNodes and MaximumCapacity must always be smaller than or equal to this value.\n",
-          "type": "integer",
-          "format": "int64"
-        }
-      }
-    },
-    "ApplicationMetricList": {
-      "type": "array",
-      "items": {
-        "$ref": "#/definitions/ApplicationMetric"
-      },
-      "description": "List of application capacity metric description."
     },
     "ApplicationParameterList": {
       "type": "object",
@@ -1108,9 +1266,6 @@
           "items": {
             "$ref": "#/definitions/ApplicationUserAssignedIdentity"
           }
-        },
-        "applicationCapacity": {
-          "$ref": "#/definitions/ApplicationCapacity"
         }
       }
     },
@@ -1157,6 +1312,18 @@
           "description": "The current deployment or provisioning state, which only appears in the response."
         }
       }
+    },
+    "ApplicationTypeUpdateParameters": {
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Application type update parameters",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "description": "Application type update request"
     },
     "ApplicationTypeVersion": {
       "type": "string",
@@ -1208,6 +1375,30 @@
           "description": "The URL to the application package"
         }
       }
+    },
+    "ApplicationTypeVersionUpdateParameters": {
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Application type version update parameters",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "description": "Application type version update request"
+    },
+    "ApplicationUpdateParameters": {
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Application update parameters",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "description": "Application update request"
     },
     "ApplicationUpgradePolicy": {
       "description": "Describes the policy for a monitored application upgrade.",
@@ -2203,6 +2394,18 @@
       "additionalProperties": {
         "$ref": "#/definitions/ServiceTypeHealthPolicy"
       }
+    },
+    "ServiceUpdateParameters": {
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Service update parameters",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "description": "Service update request"
     },
     "SingletonPartitionScheme": {
       "description": "Describes the partition scheme of a singleton-partitioned, or non-partitioned service.",

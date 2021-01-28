@@ -203,12 +203,6 @@
           "final-state-via": "location"
         },
         "responses": {
-          "201": {
-            "description": "The request was accepted and the operation will complete asynchronously.",
-            "schema": {
-              "$ref": "#/definitions/ManagedCluster"
-            }
-          },
           "200": {
             "description": "The operation completed successfully.",
             "schema": {
@@ -234,8 +228,8 @@
           "ManagedCluster"
         ],
         "operationId": "ManagedClusters_Update",
-        "summary": "Updates the configuration of a Service Fabric managed cluster resource.",
-        "description": "Update the configuration of a Service Fabric managed cluster resource with the specified name.",
+        "summary": "Updates the tags of of a Service Fabric managed cluster resource.",
+        "description": "Update the tags of of a Service Fabric managed cluster resource with the specified name.",
         "parameters": [
           {
             "$ref": "#/parameters/resourceGroupNameParameter"
@@ -252,7 +246,7 @@
           {
             "name": "parameters",
             "in": "body",
-            "description": "The parameters to update the managed cluster configuration.",
+            "description": "The managed cluster resource updated tags.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/ManagedClusterUpdateParameters"
@@ -260,10 +254,6 @@
             "x-ms-parameter-location": "method"
           }
         ],
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
         "x-ms-examples": {
           "Patch a managed cluster": {
             "$ref": "./examples/ManagedClusterPatchOperation_example.json"
@@ -272,12 +262,6 @@
         "responses": {
           "200": {
             "description": "The operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/ManagedCluster"
-            }
-          },
-          "202": {
-            "description": "The request was accepted and the operation will complete asynchronously.",
             "schema": {
               "$ref": "#/definitions/ManagedCluster"
             }
@@ -379,53 +363,6 @@
           "nextLinkName": "nextLink"
         }
       }
-    },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.ServiceFabric/managedclusters/locations/{location}/osType/{osType}/clusterVersions": {
-      "get": {
-        "operationId": "ManagedClusterVersions_ListByOS",
-        "summary": "Gets the list of Service Fabric cluster code versions available for the specified OS type.",
-        "description": "Gets all available code versions for Service Fabric cluster resources by OS type.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/locationForClusterCodeVersions"
-          },
-          {
-            "$ref": "#/parameters/osType"
-          },
-          {
-            "$ref": "#/parameters/api-version"
-          },
-          {
-            "$ref": "#/parameters/subscriptionId"
-          }
-        ],
-        "x-ms-examples": {
-          "List cluster versions by OS": {
-            "$ref": "./examples/ManagedClusterVersionsListByOS_example.json"
-          }
-        },
-        "tags": [
-          "ManagedClusterVersion"
-        ],
-        "responses": {
-          "200": {
-            "description": "The operation completed successfully.",
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/ManagedClusterVersionDetails"
-              },
-              "description": "The list of available Service Fabric runtime versions."
-            }
-          },
-          "default": {
-            "description": "The detailed error response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorModel"
-            }
-          }
-        }
-      }
     }
   },
   "definitions": {
@@ -478,16 +415,6 @@
         }
       },
       "description": "Client certificate definition."
-    },
-    "ClusterOsType": {
-      "type": "string",
-      "description": "Cluster operating system type.",
-      "enum": [
-        "Windows",
-        "Ubuntu",
-        "RedHat",
-        "Ubuntu18_04"
-      ]
     },
     "ClusterState": {
       "type": "string",
@@ -712,78 +639,8 @@
       },
       "description": "Describes the managed cluster resource properties."
     },
-    "ManagedClusterPropertiesUpdateParameters": {
-      "properties": {
-        "clientConnectionPort": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The port used for client connections to the cluster."
-        },
-        "httpGatewayConnectionPort": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The port used for HTTP connections to the cluster."
-        },
-        "loadBalancingRules": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/LoadBalancingRule"
-          },
-          "description": "Load balancing rules that are applied to the public load balancer of the cluster."
-        },
-        "allowRdpAccess": {
-          "type": "boolean",
-          "description": "Setting this to true enables RDP access to the VM. The default NSG rule opens RDP port to internet which can be overridden with custom Network Security Rules. The default value for this setting is false."
-        },
-        "networkSecurityRules": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/NetworkSecurityRule"
-          },
-          "description": "Load balancing rules that are applied to the public load balancer of the cluster."
-        },
-        "clients": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ClientCertificate"
-          },
-          "description": "Client certificates that are allowed to manage the cluster."
-        },
-        "azureActiveDirectory": {
-          "$ref": "#/definitions/AzureActiveDirectory",
-          "description": "The AAD authentication settings of the cluster."
-        },
-        "fabricSettings": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/SettingsSectionDescription"
-          },
-          "description": "The list of custom fabric settings to configure the cluster."
-        },
-        "clusterCodeVersion": {
-          "type": "string",
-          "description": "The Service Fabric runtime version of the cluster. This property can only by set the user when **upgradeMode** is set to 'Manual'. To get list of available Service Fabric versions for new clusters use [ClusterVersion API](./ClusterVersion.md). To get the list of available version for existing clusters use **availableClusterVersions**."
-        },
-        "addonFeatures": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ManagedClusterAddOnFeature"
-          },
-          "description": "List of add-on features to enable on the cluster."
-        },
-        "enableAutoOSUpgrade": {
-          "type": "boolean",
-          "description": "Setting this to true enables automatic OS upgrade for the node types that are created using any platform OS image with version 'latest'. The default value for this setting is false."
-        }
-      },
-      "description": "Describes the managed cluster resource properties."
-    },
     "ManagedClusterUpdateParameters": {
       "properties": {
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/ManagedClusterPropertiesUpdateParameters"
-        },
         "tags": {
           "type": "object",
           "description": "Managed cluster update parameters",
@@ -793,23 +650,6 @@
         }
       },
       "description": "Managed cluster update request"
-    },
-    "ManagedClusterVersionDetails": {
-      "properties": {
-        "msiVersion": {
-          "type": "string",
-          "description": "The Service Fabric runtime version of the cluster."
-        },
-        "supportExpiryUtc": {
-          "type": "string",
-          "description": "The date of expiry of support of the version."
-        },
-        "osType": {
-          "$ref": "#/definitions/ClusterOsType",
-          "description": "Indicates the operating system of the cluster."
-        }
-      },
-      "description": "The detail of the Service Fabric runtime version."
     },
     "NetworkSecurityRule": {
       "required": [
@@ -845,28 +685,12 @@
             "modelAsString": true
           }
         },
-        "sourcePortRange": {
-          "type": "string",
-          "description": "The source port or range. Integer or range between 0 and 65535. Asterisk '*' can also be used to match all ports."
-        },
-        "destinationPortRange": {
-          "type": "string",
-          "description": "The destination port ranges."
-        },
-        "sourceAddressPrefix": {
-          "type": "string",
-          "description": "The CIDR or source IP range. Asterisk '*' can also be used to match all source IPs. Default tags such as 'VirtualNetwork', 'AzureLoadBalancer' and 'Internet' can also be used. If this is an ingress rule, specifies where network traffic originates from."
-        },
         "sourceAddressPrefixes": {
           "type": "array",
           "items": {
             "type": "string"
           },
           "description": "The CIDR or source IP ranges."
-        },
-        "destinationAddressPrefix": {
-          "type": "string",
-          "description": "The destination address prefix. CIDR or destination IP range. Asterisk '*' can also be used to match all source IPs. Default tags such as 'VirtualNetwork', 'AzureLoadBalancer' and 'Internet' can also be used."
         },
         "destinationAddressPrefixes": {
           "type": "array",
@@ -1201,36 +1025,6 @@
       "description": "The name of the cluster resource.",
       "required": true,
       "type": "string",
-      "x-ms-parameter-location": "method"
-    },
-    "clusterVersion": {
-      "name": "clusterVersion",
-      "in": "path",
-      "description": "The cluster code version.",
-      "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "method"
-    },
-    "locationForClusterCodeVersions": {
-      "name": "location",
-      "in": "path",
-      "description": "The location for the cluster code versions. This is different from cluster location.",
-      "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "method"
-    },
-    "osType": {
-      "name": "osType",
-      "in": "path",
-      "description": "The operating system of the cluster.",
-      "required": true,
-      "type": "string",
-      "enum": [
-        "Windows",
-        "Ubuntu",
-        "RedHat",
-        "Ubuntu18_04"
-      ],
       "x-ms-parameter-location": "method"
     },
     "resourceGroupNameParameter": {

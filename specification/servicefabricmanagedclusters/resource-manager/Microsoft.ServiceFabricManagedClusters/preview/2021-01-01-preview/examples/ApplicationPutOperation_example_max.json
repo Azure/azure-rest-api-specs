@@ -9,10 +9,10 @@
     "location": "eastus",
     "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/resRg/providers/Microsoft.ServiceFabric/managedclusters/myCluster/applications/myApp",
     "name": "myApp",
-    "tags": {
-      "tagged": "tags"
-    },
     "parameters": {
+      "tags": {
+        "a": "b"
+      },
       "properties": {
         "typeName": "myAppType",
         "typeVersion": "1.0",
@@ -61,9 +61,11 @@
         "location": "eastus",
         "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/resRg/providers/Microsoft.ServiceFabric/managedclusters/myCluster/applications/myApp",
         "name": "myApp",
-        "tags": {},
+        "tags": {
+          "a": "b"
+        },
         "properties": {
-          "provisioningState": "Updating",
+          "provisioningState": "Creating",
           "typeName": "myAppType",
           "typeVersion": "1.0",
           "parameters": {
@@ -99,18 +101,6 @@
             "instanceCloseDelayDuration": 600,
             "upgradeMode": "UnmonitoredAuto",
             "recreateApplication": false
-          },
-          "applicationCapacity": {
-            "maximumNodes": 10,
-            "minimumNodes": 3,
-            "metrics": [
-              {
-                "name": "metric1",
-                "reservationCapacity": 2,
-                "maximumCapacity": 3,
-                "totalApplicationCapacity": 30
-              }
-            ]
           }
         }
       }
@@ -125,7 +115,7 @@
         "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/resRg/providers/Microsoft.ServiceFabric/managedclusters/myCluster/applications/myApp",
         "name": "myApp",
         "tags": {
-          "tag1": "tagged"
+          "a": "b"
         },
         "properties": {
           "provisioningState": "Updating",
@@ -164,18 +154,6 @@
             "instanceCloseDelayDuration": 600,
             "upgradeMode": "UnmonitoredAuto",
             "recreateApplication": false
-          },
-          "applicationCapacity": {
-            "maximumNodes": 10,
-            "minimumNodes": 3,
-            "metrics": [
-              {
-                "name": "metric1",
-                "reservationCapacity": 2,
-                "maximumCapacity": 3,
-                "totalApplicationCapacity": 30
-              }
-            ]
           }
         }
       }

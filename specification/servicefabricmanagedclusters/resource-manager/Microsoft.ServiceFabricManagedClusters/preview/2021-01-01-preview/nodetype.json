@@ -388,12 +388,6 @@
           "final-state-via": "location"
         },
         "responses": {
-          "201": {
-            "description": "The request was accepted and the operation will complete asynchronously.",
-            "schema": {
-              "$ref": "#/definitions/NodeType"
-            }
-          },
           "200": {
             "description": "The operation completed successfully.",
             "schema": {
@@ -419,8 +413,8 @@
           "NodeType"
         ],
         "operationId": "NodeTypes_Update",
-        "summary": "Updates the configuration of a node type of a given managed cluster.",
-        "description": "Update the configuration of a node type of a given managed cluster.",
+        "summary": "Update the tags of a node type resource of a given managed cluster.",
+        "description": "Update the configuration of a node type of a given managed cluster, only updating tags.",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -448,10 +442,6 @@
             "x-ms-parameter-location": "method"
           }
         ],
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
         "x-ms-examples": {
           "Patch a node type": {
             "$ref": "./examples/NodeTypePatchOperation_example.json"
@@ -460,12 +450,6 @@
         "responses": {
           "200": {
             "description": "The operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/NodeType"
-            }
-          },
-          "202": {
-            "description": "The request was accepted and the operation will complete asynchronously.",
             "schema": {
               "$ref": "#/definitions/NodeType"
             }
@@ -712,68 +696,8 @@
       },
       "description": "Node type list results"
     },
-    "NodeTypePropertiesUpdateParameters": {
-      "properties": {
-        "vmInstanceCount": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The number of nodes in the node type.",
-          "minimum": 1,
-          "maximum": 2147483647
-        },
-        "placementProperties": {
-          "type": "object",
-          "description": "The placement tags applied to nodes in the node type, which can be used to indicate where certain services (workload) should run.",
-          "additionalProperties": {
-            "type": "string",
-            "description": "Placement tag value"
-          }
-        },
-        "capacities": {
-          "type": "object",
-          "description": "The capacity tags applied to the nodes in the node type, the cluster resource manager uses these tags to understand how much resource a node has.",
-          "additionalProperties": {
-            "type": "string",
-            "description": "Capacity tag value"
-          }
-        },
-        "applicationPorts": {
-          "$ref": "#/definitions/EndpointRangeDescription",
-          "description": "The range of ports from which cluster assigned port to Service Fabric applications."
-        },
-        "ephemeralPorts": {
-          "$ref": "#/definitions/EndpointRangeDescription",
-          "description": "The range of ephemeral ports that nodes in this node type should be configured with."
-        },
-        "vmSecrets": {
-          "type": "array",
-          "title": "virtual machine secretes.",
-          "description": "The secrets to install in the virtual machines.",
-          "items": {
-            "$ref": "#/definitions/VaultSecretGroup"
-          }
-        },
-        "vmExtensions": {
-          "type": "array",
-          "title": "virtual machine extensions.",
-          "description": "Set of extensions that should be installed onto the virtual machines.",
-          "items": {
-            "$ref": "#/definitions/VMSSExtension"
-          }
-        },
-        "vmManagedIdentity": {
-          "$ref": "#/definitions/VmManagedIdentity"
-        }
-      },
-      "description": "Node type update properties."
-    },
     "NodeTypeUpdateParameters": {
       "properties": {
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/NodeTypePropertiesUpdateParameters",
-          "description": "Node type update properties."
-        },
         "tags": {
           "type": "object",
           "description": "Node type update parameters",

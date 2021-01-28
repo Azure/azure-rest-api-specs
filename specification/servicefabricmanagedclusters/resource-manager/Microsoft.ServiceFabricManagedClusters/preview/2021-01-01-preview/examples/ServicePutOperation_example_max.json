@@ -10,10 +10,10 @@
     "type": "Microsoft.ServiceFabric/managedclusters/applications/services",
     "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/resRg/providers/Microsoft.ServiceFabric/managedclusters/myCluster/applications/myApp/services/myService",
     "name": "myService",
-    "tags": {
-      "tagged": "tags"
-    },
     "parameters": {
+      "tags": {
+        "a": "b"
+      },
       "properties": {
         "serviceKind": "Stateless",
         "placementConstraints": "NodeType==frontend",
@@ -73,7 +73,11 @@
         "type": "Microsoft.ServiceFabric/managedclusters/applications/services",
         "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/resRg/providers/Microsoft.ServiceFabric/managedclusters/myCluster/applications/myApp/services/myService",
         "name": "myService",
+        "tags": {
+          "a": "b"
+        },
         "properties": {
+          "provisioningState": "Creating",
           "serviceKind": "Stateless",
           "placementConstraints": "NodeType==frontend",
           "serviceTypeName": "myServiceType",
@@ -134,7 +138,11 @@
         "type": "Microsoft.ServiceFabric/managedclusters/applications/services",
         "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/resRg/providers/Microsoft.ServiceFabric/managedclusters/myCluster/applications/myApp/services/myService",
         "name": "myService",
+        "tags": {
+          "a": "b"
+        },
         "properties": {
+          "provisioningState": "Updating",
           "serviceKind": "Stateless",
           "placementConstraints": "NodeType==frontend",
           "serviceTypeName": "myServiceType",
