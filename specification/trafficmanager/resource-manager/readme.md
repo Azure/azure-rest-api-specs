@@ -25,7 +25,7 @@ These are the global settings for the TrafficManager API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2020-12
+tag: package-2020-12-preview
 ```
 
 ## Suppression
@@ -57,13 +57,13 @@ directive:
     where: $.definitions.UserMetricsModel
 ```
 
-### Tag: package-2020-12
+### Tag: package-2020-12-preview
 
-These settings apply only when `--tag=package-2020-12` is specified on the command line.
+These settings apply only when `--tag=package-2020-12-preview` is specified on the command line.
 
-``` yaml $(tag) == 'package-2020-12'
+``` yaml $(tag) == 'package-2020-12-preview'
 input-file:
-- Microsoft.Network/stable/2020-12-01/trafficmanager.json
+- Microsoft.Network/preview/2020-12-01-preview/trafficmanager.json
 ```
 
 ### Tag: package-2018-04

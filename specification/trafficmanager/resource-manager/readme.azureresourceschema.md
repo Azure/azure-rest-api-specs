@@ -6,7 +6,7 @@ These settings apply only when `--azureresourceschema` is specified on the comma
 
 ``` yaml $(azureresourceschema) && $(multiapi)
 batch:
-  - tag: schema-network-2020-12-01
+  - tag: schema-network-2020-12-01-preview
   - tag: schema-network-2018-04-01
   - tag: schema-network-2018-03-01
   - tag: schema-network-2018-02-01
@@ -19,14 +19,14 @@ batch:
 
 Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
 
-### Tag: schema-network-2020-12-01 and azureresourceschema
+### Tag: schema-network-2020-12-01-preview and azureresourceschema
 
-``` yaml $(tag) == 'schema-network-2020-12-01' && $(azureresourceschema)
+``` yaml $(tag) == 'schema-network-2020-12-01-preview' && $(azureresourceschema)
 output-folder: $(azureresourceschema-folder)/schemas
 
 # all the input files in this apiVersion
 input-file:
-  - Microsoft.Network/stable/2020-12-01/trafficmanager.json
+  - Microsoft.Network/preview/2020-12-01-preview/trafficmanager.json
 
 ```
 
