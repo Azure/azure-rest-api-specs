@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "AuthorizationManagementClient",
-    "version": "2018-01-01-preview",
+    "version": "2020-03-01-preview",
     "description": "Role based access control provides you a way to apply granular level policy administration down to individual resources or resource groups. These operations allow you to manage role definitions. A role definition describes the set of actions that can be performed on resources."
   },
   "host": "management.azure.com",
@@ -34,182 +34,185 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Authorization/permissions": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Authorization/roleDefinitions": {
       "get": {
-        "tags": [
-          "Permissions"
-        ],
-        "operationId": "Permissions_ListForResourceGroup",
-        "description": "Gets all permissions the caller has for a resource group.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK - Returns an array of permissions.",
-            "schema": {
-              "$ref": "#/definitions/PermissionGetResult"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
-        "x-ms-examples": {
-          "GetConfigurations": {
-            "$ref": "./examples/GetPermissions.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{parentResourcePath}/{resourceType}/{resourceName}/providers/Microsoft.Authorization/permissions": {
-      "get": {
-        "tags": [
-          "Permissions"
-        ],
-        "operationId": "Permissions_ListForResource",
-        "description": "Gets all permissions the caller has for a resource.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceProviderNamespaceParameter"
-          },
-          {
-            "name": "parentResourcePath",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The parent resource identity.",
-            "x-ms-skip-url-encoding": true
-          },
-          {
-            "name": "resourceType",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The resource type of the resource.",
-            "x-ms-skip-url-encoding": true
-          },
-          {
-            "name": "resourceName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource to get the permissions for."
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK - Returns an array of permissions.",
-            "schema": {
-              "$ref": "#/definitions/PermissionGetResult"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
-        "x-ms-examples": {
-          "GetConfigurations": {
-            "$ref": "./examples/GetResourcePermissions.json"
-          }
-        }
-      }
-    },
-    "/{scope}/providers/Microsoft.Authorization/roleDefinitions/{roleDefinitionId}": {
-      "delete": {
         "tags": [
           "RoleDefinitions"
         ],
-        "operationId": "RoleDefinitions_Delete",
-        "description": "Deletes a role definition.",
+        "operationId": "RoleDefinitions_ListForSubscription",
+        "description": "List all role definitions that apply to a subscription.",
         "parameters": [
           {
-            "name": "scope",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The scope of the role definition.",
-            "x-ms-skip-url-encoding": true
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "name": "roleDefinitionId",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The ID of the role definition to delete."
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/RoleDefinitionFilterParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "OK - Returns information about the role definition.",
+            "description": "Returns an array of role definitions.",
             "schema": {
-              "$ref": "#/definitions/RoleDefinition"
+              "$ref": "#/definitions/RoleDefinitionListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
+        "x-ms-odata": "#/definitions/RoleDefinitionFilter",
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
         "x-ms-examples": {
-          "GetConfigurations": {
-            "$ref": "./examples/DeleteRoleDefinition.json"
+          "List role definitions for subscription": {
+            "$ref": "./examples/RoleDefinitions_ListForSubscription.json"
           }
         }
-      },
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Authorization/roleDefinitions": {
+      "get": {
+        "tags": [
+          "RoleDefinitions"
+        ],
+        "operationId": "RoleDefinitions_ListForResourceGroup",
+        "description": "List all role definitions that apply to a resource group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/RoleDefinitionFilterParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns an array of role definitions.",
+            "schema": {
+              "$ref": "#/definitions/RoleDefinitionListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-odata": "#/definitions/RoleDefinitionFilter",
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List role definitions for resource group": {
+            "$ref": "./examples/RoleDefinitions_ListForResourceGroup.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}/providers/Microsoft.Authorization/roleDefinitions": {
+      "get": {
+        "tags": [
+          "RoleDefinitions"
+        ],
+        "operationId": "RoleDefinitions_ListForResource",
+        "description": "List all role definitions that apply to a resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./common-types.json#/parameters/ResourceProviderNamespaceParameter"
+          },
+          {
+            "$ref": "./common-types.json#/parameters/ResourceTypeParameter"
+          },
+          {
+            "$ref": "./common-types.json#/parameters/ResourceNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/RoleDefinitionFilterParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns an array of role definitions.",
+            "schema": {
+              "$ref": "#/definitions/RoleDefinitionListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-odata": "#/definitions/RoleDefinitionFilter",
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List role definitions for a resource": {
+            "$ref": "./examples/RoleDefinitions_ListForResource.json"
+          }
+        }
+      }
+    },
+    "/{scope}/providers/Microsoft.Authorization/roleDefinitions/{roleDefinitionName}": {
       "get": {
         "tags": [
           "RoleDefinitions"
         ],
         "operationId": "RoleDefinitions_Get",
-        "description": "Get role definition by name (GUID).",
+        "description": "Get a role definition by scope and name.",
         "parameters": [
           {
-            "name": "scope",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The scope of the role definition.",
-            "x-ms-skip-url-encoding": true
+            "$ref": "./common-types.json#/parameters/ScopeParameter"
           },
           {
-            "name": "roleDefinitionId",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The ID of the role definition."
+            "$ref": "#/parameters/RoleDefinitionNameParameter"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "OK - Returns information about the role definition.",
+            "description": "Returns the role definition.",
             "schema": {
               "$ref": "#/definitions/RoleDefinition"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
         "x-ms-examples": {
-          "GetConfigurations": {
-            "$ref": "./examples/GetRoleDefinitionByName.json"
+          "Get role definition by scope and name": {
+            "$ref": "./examples/RoleDefinitions_Get.json"
           }
         }
       },
@@ -217,48 +220,85 @@
         "tags": [
           "RoleDefinitions"
         ],
-        "operationId": "RoleDefinitions_CreateOrUpdate",
-        "description": "Creates or updates a role definition.",
+        "operationId": "RoleDefinitions_Create",
+        "description": "Create or update a role definition by scope and name.",
         "parameters": [
           {
-            "name": "scope",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The scope of the role definition.",
-            "x-ms-skip-url-encoding": true
+            "$ref": "./common-types.json#/parameters/ScopeParameter"
           },
           {
-            "name": "roleDefinitionId",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The ID of the role definition."
+            "$ref": "#/parameters/RoleDefinitionNameParameter"
           },
           {
-            "name": "roleDefinition",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/RoleDefinition"
-            },
-            "description": "The values for the role definition."
+            "$ref": "#/parameters/RoleDefinitionCreateParameters"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "201": {
-            "description": "OK - Returns information about the role definition.",
+            "description": "Returns the role definition.",
             "schema": {
               "$ref": "#/definitions/RoleDefinition"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
         "x-ms-examples": {
-          "GetConfigurations": {
-            "$ref": "./examples/PutRoleDefinition.json"
+          "Create role definition for subscription": {
+            "$ref": "./examples/RoleDefinitions_CreateForSubscription.json"
+          },
+          "Create role definition for resource group": {
+            "$ref": "./examples/RoleDefinitions_CreateForResourceGroup.json"
+          },
+          "Create role definition for resource": {
+            "$ref": "./examples/RoleDefinitions_CreateForResource.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "RoleDefinitions"
+        ],
+        "operationId": "RoleDefinitions_Delete",
+        "description": "Delete a role definition by scope and name.",
+        "parameters": [
+          {
+            "$ref": "./common-types.json#/parameters/ScopeParameter"
+          },
+          {
+            "$ref": "#/parameters/RoleDefinitionNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the deleted role definition.",
+            "schema": {
+              "$ref": "#/definitions/RoleDefinition"
+            }
+          },
+          "204": {
+            "description": "Role definition was already deleted or does not exist."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete role definition": {
+            "$ref": "./examples/RoleDefinitions_Delete.json"
           }
         }
       }
@@ -268,33 +308,30 @@
         "tags": [
           "RoleDefinitions"
         ],
-        "operationId": "RoleDefinitions_List",
-        "description": "Get all role definitions that are applicable at scope and above.",
+        "operationId": "RoleDefinitions_ListForScope",
+        "description": "List all role definitions that apply to a scope.",
         "parameters": [
           {
-            "name": "scope",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The scope of the role definition.",
-            "x-ms-skip-url-encoding": true
+            "$ref": "./common-types.json#/parameters/ScopeParameter"
           },
           {
-            "name": "$filter",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "description": "The filter to apply on the operation. Use atScopeAndBelow filter to search below the given scope as well."
+            "$ref": "#/parameters/RoleDefinitionFilterParameter"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "OK - Returns an array of role definitions.",
+            "description": "Returns an array of role definitions.",
             "schema": {
               "$ref": "#/definitions/RoleDefinitionListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -303,45 +340,118 @@
         },
         "x-ms-odata": "#/definitions/RoleDefinitionFilter",
         "x-ms-examples": {
-          "GetConfigurations": {
-            "$ref": "./examples/GetRoleDefinitionAtScope.json"
+          "List role definitions for scope": {
+            "$ref": "./examples/RoleDefinitions_ListForScope.json"
           }
         }
       }
-    }
-  },
-  "x-ms-paths": {
-    "/{roleId}?disambiguation_dummy": {
+    },
+    "/{roleDefinitionId}": {
       "get": {
         "tags": [
           "RoleDefinitions"
         ],
         "operationId": "RoleDefinitions_GetById",
-        "description": "Gets a role definition by ID.",
+        "description": "Get a role definition by ID.",
         "parameters": [
           {
-            "name": "roleId",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The fully qualified role definition ID. Use the format, /subscriptions/{guid}/providers/Microsoft.Authorization/roleDefinitions/{roleDefinitionId} for subscription level role definitions, or /providers/Microsoft.Authorization/roleDefinitions/{roleDefinitionId} for tenant level role definitions.",
-            "x-ms-skip-url-encoding": true
+            "$ref": "#/parameters/RoleDefinitionIdParameter"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "OK - Returns information about the role definition.",
+            "description": "Returns the role definition.",
             "schema": {
               "$ref": "#/definitions/RoleDefinition"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
         "x-ms-examples": {
-          "GetConfigurations": {
-            "$ref": "./examples/GetRoleDefinitionById.json"
+          "Get role definition by ID": {
+            "$ref": "./examples/RoleDefinitions_GetById.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "RoleDefinitions"
+        ],
+        "operationId": "RoleDefinitions_CreateById",
+        "description": "Create or update a role definition by ID.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/RoleDefinitionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/RoleDefinitionCreateParameters"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Returns the role definition.",
+            "schema": {
+              "$ref": "#/definitions/RoleDefinition"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create or update role definition by ID": {
+            "$ref": "./examples/RoleDefinitions_CreateById.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "RoleDefinitions"
+        ],
+        "operationId": "RoleDefinitions_DeleteById",
+        "description": "Delete a role definition by ID.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/RoleDefinitionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the deleted role definition.",
+            "schema": {
+              "$ref": "#/definitions/RoleDefinition"
+            }
+          },
+          "204": {
+            "description": "Role definition already deleted or does not exist."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete role definition by ID": {
+            "$ref": "./examples/RoleDefinitions_DeleteById.json"
           }
         }
       }
@@ -379,7 +489,7 @@
         "permissions": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/Permission"
+            "$ref": "./common-types.json#/definitions/Permission"
           },
           "description": "Role definition permissions."
         },
@@ -433,94 +543,44 @@
         }
       },
       "description": "Role definition list operation result."
-    },
-    "PermissionGetResult": {
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Permission"
-          },
-          "description": "An array of permissions."
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "The URL to use for getting the next set of results."
-        }
-      },
-      "description": "Permissions information."
-    },
-    "Permission": {
-      "properties": {
-        "actions": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "description": "Allowed actions."
-        },
-        "notActions": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "description": "Denied actions."
-        },
-        "dataActions": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "description": "Allowed Data actions."
-        },
-        "notDataActions": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "description": "Denied Data actions."
-        }
-      },
-      "description": "Role definition permissions."
     }
   },
   "parameters": {
-    "SubscriptionIdParameter": {
-      "name": "subscriptionId",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "The ID of the target subscription."
-    },
-    "ApiVersionParameter": {
-      "name": "api-version",
-      "in": "query",
-      "required": true,
-      "type": "string",
-      "description": "The API version to use for this operation."
-    },
-    "ResourceGroupNameParameter": {
-      "name": "resourceGroupName",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "The name of the resource group.",
-      "x-ms-parameter-location": "method"
-    },
-    "ResourceProviderNamespaceParameter": {
-      "name": "resourceProviderNamespace",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "The namespace of the resource provider.",
-      "x-ms-parameter-location": "method"
-    },
-    "FilterParameter": {
+    "RoleDefinitionFilterParameter": {
       "name": "$filter",
       "in": "query",
       "required": false,
       "type": "string",
-      "description": "The filter to apply on the operation. Use $filter=atScope() to return all deny assignments at or above the scope. Use $filter=denyAssignmentName eq '{name}' to search deny assignments by name at specified scope. Use $filter=principalId eq '{id}' to return all deny assignments at, above and below the scope for the specified principal. Use $filter=gdprExportPrincipalId eq '{id}' to return all deny assignments at, above and below the scope for the specified principal. This filter is different from the principalId filter as it returns not only those deny assignments that contain the specified principal is the Principals list but also those deny assignments that contain the specified principal is the ExcludePrincipals list. Additionally, when gdprExportPrincipalId filter is used, only the deny assignment name and description properties are returned.",
+      "description": "The filter to apply on the operation. Use $filter=atScope() to return all deny definitions at or above the scope. Use $filter=denyDefinitionName eq '{name}' to search deny definitions by name at specified scope. Use $filter=principalId eq '{id}' to return all deny definitions at, above and below the scope for the specified principal. Use $filter=gdprExportPrincipalId eq '{id}' to return all deny definitions at, above and below the scope for the specified principal. This filter is different from the principalId filter as it returns not only those deny definitions that contain the specified principal is the Principals list but also those deny definitions that contain the specified principal is the ExcludePrincipals list. Additionally, when gdprExportPrincipalId filter is used, only the deny definition name and description properties are returned.",
+      "x-ms-skip-url-encoding": true,
+      "x-ms-parameter-location": "method"
+    },
+    "RoleDefinitionIdParameter": {
+      "name": "roleDefinitionId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The ID of the role definition to delete.",
+      "x-ms-skip-url-encoding": true,
+      "x-ms-parameter-location": "method"
+    },
+    "RoleDefinitionNameParameter": {
+      "name": "roleDefinitionName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the role definition to delete.",
+      "x-ms-skip-url-encoding": true,
+      "x-ms-parameter-location": "method"
+    },
+    "RoleDefinitionCreateParameters": {
+      "name": "roleDefinition",
+      "in": "body",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/RoleDefinition"
+      },
+      "description": "Parameters for the role definition.",
       "x-ms-parameter-location": "method"
     }
   }

@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "AuthorizationManagementClient",
-    "version": "2015-07-01",
+    "version": "2020-03-01-preview",
     "description": "Role based access control provides you a way to apply granular level policy administration down to individual resources or resource groups. These operations enable you to manage role definitions and role assignments. A role definition describes the set of actions that can be performed on resources. A role assignment grants access to Azure Active Directory users."
   },
   "host": "management.azure.com",
@@ -40,13 +40,13 @@
           "ClassicAdministrators"
         ],
         "operationId": "ClassicAdministrators_List",
-        "description": "Gets service administrator, account administrator, and co-administrators for the subscription.",
+        "description": "List service administrator, account administrator, and co-administrators for the subscription.",
         "parameters": [
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -55,14 +55,20 @@
             "schema": {
               "$ref": "#/definitions/ClassicAdministratorListResult"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "GetConfigurations": {
-            "$ref": "./examples/GetClassicAdministrators.json"
+          "List classic administrators": {
+            "$ref": "./examples/ClassicAdministrators_List.json"
           }
         }
       }
@@ -121,20 +127,5 @@
       "description": "ClassicAdministrator list result information."
     }
   },
-  "parameters": {
-    "SubscriptionIdParameter": {
-      "name": "subscriptionId",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "The ID of the target subscription."
-    },
-    "ApiVersionParameter": {
-      "name": "api-version",
-      "in": "query",
-      "required": true,
-      "type": "string",
-      "description": "The API version to use for this operation."
-    }
-  }
+  "parameters": {}
 }

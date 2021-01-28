@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "AuthorizationManagementClient",
-    "version": "2018-01-01-preview",
+    "version": "2020-03-01-preview",
     "description": "Role based access control provides you a way to apply granular level policy administration down to individual resources or resource groups. These calls handle provider operations."
   },
   "host": "management.azure.com",
@@ -40,34 +40,35 @@
           "ProviderOperationsMetadata"
         ],
         "operationId": "ProviderOperationsMetadata_Get",
-        "description": "Gets provider operations metadata for the specified resource provider.",
+        "description": "List provider operations metadata for the specified resource provider.",
         "parameters": [
           {
-            "$ref": "#/parameters/ResourceProviderNamespaceParameter"
+            "$ref": "./common-types.json#/parameters/ResourceProviderNamespaceParameter"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "name": "$expand",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "default": "resourceTypes",
-            "description": "Specifies whether to expand the values."
+            "$ref": "#/parameters/ExpandParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "OK - Returns the operations metadata.",
+            "description": "Returns the operations metadata.",
             "schema": {
               "$ref": "#/definitions/ProviderOperationsMetadata"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
         "x-ms-examples": {
-          "GetConfigurations": {
-            "$ref": "./examples/GetProviderOperationsRP.json"
+          "List provider operations metadata for resource provider": {
+            "$ref": "./examples/ProviderOperations_ListForRP.json"
           }
         }
       }
@@ -78,25 +79,26 @@
           "ProviderOperationsMetadata"
         ],
         "operationId": "ProviderOperationsMetadata_List",
-        "description": "Gets provider operations metadata for all resource providers.",
+        "description": "List provider operations metadata for all resource providers.",
         "parameters": [
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "name": "$expand",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "default": "resourceTypes",
-            "description": "Specifies whether to expand the values."
+            "$ref": "#/parameters/ExpandParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "OK - Returns an array of the operations metadata.",
+            "description": "Returns an array of operations metadata.",
             "schema": {
               "$ref": "#/definitions/ProviderOperationsMetadataListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -104,8 +106,8 @@
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "GetConfigurations": {
-            "$ref": "./examples/GetAllProviderOperations.json"
+          "List provider operations metadata for all resource providers": {
+            "$ref": "./examples/ProviderOperations_List.json"
           }
         }
       }
@@ -215,34 +217,13 @@
     }
   },
   "parameters": {
-    "SubscriptionIdParameter": {
-      "name": "subscriptionId",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "The ID of the target subscription."
-    },
-    "ApiVersionParameter": {
-      "name": "api-version",
+    "ExpandParameter": {
+      "name": "$expand",
       "in": "query",
-      "required": true,
+      "required": false,
       "type": "string",
-      "description": "The API version to use for this operation."
-    },
-    "ResourceGroupNameParameter": {
-      "name": "resourceGroupName",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "The name of the resource group.",
-      "x-ms-parameter-location": "method"
-    },
-    "ResourceProviderNamespaceParameter": {
-      "name": "resourceProviderNamespace",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "The namespace of the resource provider.",
+      "default": "resourceTypes",
+      "description": "Specifies whether to expand the values.",
       "x-ms-parameter-location": "method"
     }
   }

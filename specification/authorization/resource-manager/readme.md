@@ -110,6 +110,21 @@ input-file:
 - Microsoft.Authorization/preview/2020-04-01-preview/authorization-RoleAssignmentsCalls.json
 ```
 
+### Tag: package-2020-03-01-preview
+
+These settings apply only when `--tag=package-2020-03-01-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-03-01-preview'
+input-file:
+- Microsoft.Authorization/preview/2020-03-01-preview/authorization-ClassicAdminCalls.json
+- Microsoft.Authorization/preview/2020-03-01-preview/authorization-ElevateAccessCalls.json
+- Microsoft.Authorization/preview/2020-03-01-preview/authorization-ProviderOperationsCalls.json
+- Microsoft.Authorization/preview/2020-03-01-preview/authorization-RoleDefinitionsCalls.json
+- Microsoft.Authorization/preview/2020-03-01-preview/authorization-DenyAssignmentGetCalls.json
+- Microsoft.Authorization/preview/2020-03-01-preview/authorization-RoleAssignmentsCalls.json
+- Microsoft.Authorization/preview/2020-03-01-preview/authorization-PermissionsCalls.json
+```
+
 ### Tag: package-2018-09-01-preview
 
 These settings apply only when `--tag=package-2018-09-01-preview` is specified on the command line.
