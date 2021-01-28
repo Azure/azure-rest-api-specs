@@ -5,16 +5,18 @@
     "api-version": "2020-12-01",
     "AdminActionDetails": {
       "properties": {
-        "publisherId": "marketplacetestthirdparty",
-        "adminAction": "Approved",
-        "existingRequestedPlans": [
-          "plan1"
-        ],
-        "approvedPlans": [
-          "plan2"
-        ],
-        "comment": "ok",
-        "user": ""
+        "adminApprovalPayload": {
+          "publisherId": "marketplacetestthirdparty",
+          "adminAction": "Approved",
+          "existingRequestedPlans": [
+            "testplanid"
+          ],
+          "approvedPlans": [
+            "testplanid"
+          ],
+          "comment": "some comment",
+          "user": ""
+        }
       }
     }
   },
@@ -24,7 +26,25 @@
         "id": "/providers/Microsoft.Marketplace/privateStores/9afd3c45-5230-4d58-9469-2cacc00bba68/notification/marketplacetestthirdparty.md-test-third-party-2",
         "name": "marketplacetestthirdparty.md-test-third-party-2",
         "type": "Microsoft.Marketplace/privateStores/notifications",
-        "properties": {}
+        "systemData": {
+          "createdBy": "test@somedomain.com",
+          "createdByType": "User",
+          "createdAt": "2020-10-05T17:18:19.1234567Z",
+          "lastModifiedBy": "testuser@somedomail.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2020-10-05T17:18:19.1234567Z"
+        },
+        "properties": {
+          "adminRequestApprovalResponse": {
+            "id": null,
+            "publisherId": null,
+            "offerId": "marketplacetestthirdparty.md-test-third-party-2",
+            "displayName": null,
+            "plans": null,
+            "messageCode": 0
+          },
+          "adminApprovalPayload": null
+        }
       }
     }
   }
