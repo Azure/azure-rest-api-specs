@@ -4466,6 +4466,111 @@
     }
   },
   "definitions": {
+    "MLBehaviorAnalyticsAlertRule": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/AlertRule"
+        }
+      ],
+      "description": "Represents MLBehaviorAnalytics alert rule.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/MLBehaviorAnalyticsAlertRuleProperties",
+          "description": "MLBehaviorAnalytics alert rule properties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object",
+      "x-ms-discriminator-value": "MLBehaviorAnalytics"
+    },
+    "MLBehaviorAnalyticsAlertRuleProperties": {
+      "description": "MLBehaviorAnalytics alert rule base property bag.",
+      "properties": {
+        "alertRuleTemplateName": {
+          "description": "The Name of the alert rule template used to create this rule.",
+          "type": "string"
+        },
+        "description": {
+          "description": "The description of the alert rule.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "displayName": {
+          "description": "The display name for alerts created by this alert rule.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "enabled": {
+          "description": "Determines whether this alert rule is enabled or disabled.",
+          "type": "boolean"
+        },
+        "lastModifiedUtc": {
+          "description": "The last time that this alert rule has been modified.",
+          "format": "date-time",
+          "readOnly": true,
+          "type": "string"
+        },
+        "severity": {
+          "$ref": "#/definitions/AlertSeverity",
+          "description": "The severity for alerts created by this alert rule.",
+          "readOnly": true
+        },
+        "tactics": {
+          "description": "The tactics of the alert rule",
+          "items": {
+            "$ref": "#/definitions/AttackTactic"
+          },
+          "readOnly": true,
+          "type": "array"
+        }
+      },
+      "required": [
+        "alertRuleTemplateName",
+        "enabled"
+      ],
+      "type": "object"
+    },
+    "MLBehaviorAnalyticsAlertRuleTemplate": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/AlertRuleTemplate"
+        }
+      ],
+      "description": "Represents MLBehaviorAnalytics alert rule template.",
+      "properties": {
+        "properties": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/AlertRuleTemplatePropertiesBase"
+            }
+          ],
+          "description": "MLBehaviorAnalytics alert rule template properties.",
+          "properties": {
+            "severity": {
+              "$ref": "#/definitions/AlertSeverity",
+              "description": "The severity for alerts created by this alert rule."
+            },
+            "tactics": {
+              "description": "The tactics of the alert rule template.",
+              "items": {
+                "$ref": "#/definitions/AttackTactic"
+              },
+              "type": "array"
+            }
+          },
+          "required": [
+            "displayName",
+            "description",
+            "status",
+            "severity",
+            "alertRulesCreatedByTemplateCount"
+          ],
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object",
+      "x-ms-discriminator-value": "MLBehaviorAnalytics"
+    },
     "AADDataConnector": {
       "allOf": [
         {
@@ -5726,6 +5831,15 @@
           "readOnly": true,
           "type": "string"
         },
+        "metrics": {
+          "description": "Dictionary of metrics, for example the number of alerts in the case",
+          "type": "object",
+          "additionalProperties": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "readOnly": true
+        },
         "owner": {
           "$ref": "#/definitions/UserInfo",
           "description": "Describes a user that the case is assigned to",
@@ -5735,6 +5849,15 @@
           "description": "List of related alert identifiers",
           "items": {
             "description": "related alert id",
+            "type": "string"
+          },
+          "readOnly": true,
+          "type": "array"
+        },
+        "relatedAlertProductNames": {
+          "description": "List of related alert product names",
+          "items": {
+            "description": "related alert product name",
             "type": "string"
           },
           "readOnly": true,
@@ -5835,8 +5958,7 @@
       "required": [
         "title",
         "severity",
-        "status",
-        "startTimeUtc"
+        "status"
       ],
       "type": "object"
     },
@@ -8207,6 +8329,14 @@
           },
           "type": "array"
         },
+        "providerName": {
+          "description": "The name of the source provider that generated the incident",
+          "type": "string"
+        },
+        "providerIncidentId": {
+          "description": "The incident ID assigned by the incident provider",
+          "type": "string"
+        },
         "lastActivityTimeUtc": {
           "description": "The time of the last activity in the incident",
           "format": "date-time",
@@ -9822,7 +9952,7 @@
       "x-ms-discriminator-value": "Scheduled"
     },
     "ScheduledAlertRuleCommonProperties": {
-      "description": "Schedule alert rule template property bag.",
+      "description": "Scheduled alert rule template property bag.",
       "properties": {
         "query": {
           "description": "The query that creates alerts for this rule.",
