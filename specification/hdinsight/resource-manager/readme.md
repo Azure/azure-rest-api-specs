@@ -58,7 +58,7 @@ directive:
     reason: This would require a breaking change, and need to be consistent with the response from RP side.
     from: Microsoft.HDInsight/stable/2018-06-01-preview/locations.json
     where:
-      - $.definitions.CapabilitiesResult.properties.vmSize_filters
+      - $.definitions.CapabilitiesResult.properties.vmsize_filters
       - $.definitions.RegionalQuotaCapability.properties.cores_available
       - $.definitions.RegionalQuotaCapability.properties.cores_used
       - $.definitions.RegionalQuotaCapability.properties.region_name
@@ -73,6 +73,15 @@ directive:
 
 ``` yaml
 directive:
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    reason: This would require a breaking change, and need to be consistent with the response from RP side.
+    from: Microsoft.HDInsight/stable/2018-06-01-preview/cluster.json
+    where:
+      - $.definitions.Role.properties.VMGroupName
+```
+
+``` yaml
+directive:
   - suppress: R3016 # to suppress (DefinitionsPropertiesNamesCamelCase)
     from: cluster.json
     reason: The casing of this property is not incorrect.
@@ -80,6 +89,12 @@ directive:
       - $..["restAuthCredential.isEnabled"]
       - $..["restAuthCredential.username"]
       - $..["restAuthCredential.password"]
+```
+
+``` yaml
+directive:
+  - suppress: R4007 # to suppress (DefaultErrorResponseSchema)
+    reason: Update the default error response to a new format would be a braking change for service.
 ```
 
 ### Tag: package-2018-06-preview
