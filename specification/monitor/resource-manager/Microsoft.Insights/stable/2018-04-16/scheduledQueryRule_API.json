@@ -68,7 +68,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorContract"
             }
           },
           "200": {
@@ -120,7 +120,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorContract"
             }
           },
           "200": {
@@ -169,7 +169,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorContract"
             }
           },
           "200": {
@@ -209,7 +209,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorContract"
             }
           },
           "200": {
@@ -248,7 +248,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorContract"
             }
           },
           "200": {
@@ -294,7 +294,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorContract"
             }
           },
           "200": {
@@ -347,6 +347,16 @@
             "type": "string"
           },
           "description": "Resource tags"
+        },
+        "kind": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Metadata used by portal/tooling/etc to render different UX experiences for resources of the same type; e.g. ApiApps are a kind of Microsoft.Web/sites type.  If supported, the resource provider must validate and persist this value."
+        },
+        "etag": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The etag field is *not* required. If it is provided in the response body, it must also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields. "
         }
       },
       "required": [
@@ -520,10 +530,13 @@
     "ConditionalOperator": {
       "type": "string",
       "enum": [
+        "GreaterThanOrEqual",
+        "LessThanOrEqual",
         "GreaterThan",
         "LessThan",
         "Equal"
       ],
+      "default": "GreaterThanOrEqual",
       "x-ms-enum": {
         "name": "ConditionalOperator",
         "modelAsString": true
@@ -536,6 +549,7 @@
         "Consecutive",
         "Total"
       ],
+      "default": "Consecutive",
       "x-ms-enum": {
         "name": "metricTriggerType",
         "modelAsString": true
@@ -574,6 +588,10 @@
         "description": {
           "type": "string",
           "description": "The description of the Log Search rule."
+        },
+        "displayName": {
+          "type": "string",
+          "description": "The display name of the alert rule"
         },
         "enabled": {
           "type": "string",
@@ -764,6 +782,16 @@
       "required": [
         "criteria"
       ]
+    },
+    "ErrorContract": {
+      "description": "Describes the format of Error response.",
+      "type": "object",
+      "properties": {
+        "error": {
+          "description": "The error details.",
+          "$ref": "#/definitions/ErrorResponse"
+        }
+      }
     },
     "ErrorResponse": {
       "description": "Describes the format of Error response.",
