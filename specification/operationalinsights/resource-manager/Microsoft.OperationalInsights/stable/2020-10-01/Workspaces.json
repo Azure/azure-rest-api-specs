@@ -569,14 +569,19 @@
           "description": "List of linked private link scope resources."
         },
         "features": {
-          "type": "object",
-          "additionalProperties": true,
-          "x-nullable": true,
-          "default": null,
-          "description": "Features enabled for this Workspace."
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/WorkspaceFeatures",
+          "description": "Workspace features.",
+          "default": null
         }
       },
       "description": "Workspace properties."
+    },
+    "WorkspacesFeatures": {
+      "properties": {
+      },
+      "additionalProperties": true,
+      "description": "Workspace features."
     },
     "PrivateLinkScopedResource": {
       "properties": {
