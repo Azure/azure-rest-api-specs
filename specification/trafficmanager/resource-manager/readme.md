@@ -28,7 +28,7 @@ openapi-type: arm
 tag: package-2018-04
 ```
 
-## Suppression
+### Suppression
 ``` yaml
 directive:
   - suppress: OperationsAPIImplementation
