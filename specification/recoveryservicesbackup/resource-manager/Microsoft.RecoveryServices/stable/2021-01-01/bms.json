@@ -4818,8 +4818,7 @@
             "Full",
             "Log",
             "Differential",
-            "Incremental",
-            "SnapshotFull"
+            "Incremental"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -4888,19 +4887,13 @@
           "enum": [
             "Invalid",
             "FileRecovery",
-            "WorkloadRecovery",
-            "SnapshotAttach",
-            "RecoveryUsingSnapshot"
+            "WorkloadRecovery"
           ],
           "type": "string",
           "x-ms-enum": {
             "name": "RecoveryMode",
             "modelAsString": true
           }
-        },
-        "targetResourceGroupName": {
-          "description": "Defines the Resource group of the Target VM",
-          "type": "string"
         }
       },
       "x-ms-discriminator-value": "AzureWorkloadRestoreRequest"
@@ -5090,8 +5083,7 @@
             "Differential",
             "FullAndDifferential",
             "All",
-            "Incremental",
-            "SnapshotFull"
+            "Incremental"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -7492,13 +7484,6 @@
         "databaseName": {
           "description": "Database name InstanceName/DataBaseName for SQL or System/DbName for SAP Hana",
           "type": "string"
-        },
-        "targetDirectoryMapping": {
-          "description": "This will contain the target folder mapping for the Full/Diff/Log/Incremental pits.",
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
         },
         "targetDirectoryForFileRestore": {
           "description": "Target directory location for restore as files.",
