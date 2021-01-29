@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "ConnectivityConfiguration",
-    "description": "The Microsoft Azure Network Manager Connectivity Configuration API provides a RESTful set of web services that interact with Microsoft Azure Network Manager service to manage your network resources.",
+    "description": "The Microsoft Azure Virtual Network Manager Connectivity Configuration API provides a RESTful set of web services that interact with Microsoft Azure Network Manager service to manage your network resources.",
     "version": "2021-01-01-preview"
   },
   "host": "management.azure.com",
@@ -57,7 +57,7 @@
           "ConnectivityConfigurations"
         ],
         "operationId": "ConnectivityConfigurations_Get",
-        "description": "The Get ConnectivityConfigurations operation gets a Managed Network Connectivity Configuration resource, specified by the  resource group, Managed Network name, and connectivity Configuration name",
+        "description": "Gets a Network Connectivity Configuration, specified by the resource group, network manager name, and connectivity Configuration name",
         "responses": {
           "200": {
             "description": "Get successful. The operation returns the specified Managed Network Connectivity Configuration resource.",
@@ -83,7 +83,7 @@
           "ConnectivityConfigurations"
         ],
         "operationId": "ConnectivityConfigurations_CreateOrUpdate",
-        "description": "The Put ConnectivityConfigurations operation creates/updates a new Managed Network Peering Configuration",
+        "description": "Creates/Updates a new network manager connectivity configuration",
         "parameters": [
           {
             "name": "connectivityConfiguration",
@@ -92,18 +92,18 @@
             "schema": {
               "$ref": "#/definitions/ConnectivityConfiguration"
             },
-            "description": "Parameters supplied to create/update a Managed Network Peering Configuration"
+            "description": "Parameters supplied to create/update a network manager connectivity configuration"
           }
         ],
         "responses": {
           "200": {
-            "description": "Update successful. The operation returns the resulting Managed Network Peering Configuration resource.",
+            "description": "Update successful. The operation returns the resulting network manager connectivity configuration.",
             "schema": {
               "$ref": "#/definitions/ConnectivityConfiguration"
             }
           },
           "201": {
-            "description": "Create successful. The operation returns the resulting Managed Network Peering Configuration resource.",
+            "description": "Create successful. The operation returns the resulting network manager connectivity configuration.",
             "schema": {
               "$ref": "#/definitions/ConnectivityConfiguration"
             }
@@ -126,7 +126,7 @@
           "ConnectivityConfigurations"
         ],
         "operationId": "ConnectivityConfigurations_Delete",
-        "description": "The Delete ConnectivityConfigurations operation deletes a Managed Network Connectivity Configuration, specified by the  resource group, Managed Network name, and connectivity Configuration name",
+        "description": "Deletes a network manager connectivity configuration, specified by the resource group, network manager name, and connectivity configuration name",
         "responses": {
           "200": {
             "description": "Delete successful."
@@ -151,8 +151,8 @@
         "tags": [
           "ConnectivityConfigurations"
         ],
-        "operationId": "ConnectivityConfigurations_Update",
-        "description": "Update a ConnectivityConfiguration.",
+        "operationId": "ConnectivityConfigurations_UpdateTags",
+        "description": "Update connectivity configuration tags.",
         "parameters": [
           {
             "name": "parameters",
@@ -161,18 +161,18 @@
             "schema": {
               "$ref": "./network.json#/definitions/TagsObject"
             },
-            "description": "Parameters supplied to update network manager ConnectivityConfigurations tags."
+            "description": "Parameters supplied to update network manager connectivity configurations tags."
           }
         ],
         "responses": {
           "200": {
-            "description": "Updated - Returns information about the network manager ConnectivityConfigurations.",
+            "description": "Updated - Returns information about the network manager connectivity configurations.",
             "schema": {
               "$ref": "#/definitions/ConnectivityConfiguration"
             }
           },
           "default": {
-            "description": "Resource Provider error response describing why the operation failed.",
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "./network.json#/definitions/CloudError"
             }
@@ -191,7 +191,7 @@
           "ConnectivityConfigurations"
         ],
         "operationId": "ConnectivityConfigurations_List",
-        "description": "The List By network Manager PeeringConfigurations operation retrieves all the Managed Network Peering Configurations in a specified Managed Network, in a paginated format.",
+        "description": "Lists all the network manager connectivity configuration in a specified network manager.",
         "parameters": [
           {
             "$ref": "./network.json#/parameters/ApiVersionParameter"
@@ -214,13 +214,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Get successful. The operation returns all Managed Network Peering Configuration resources in the specified Managed Network, in a paginated format",
+            "description": "Get successful. The operation returns all network manager connectivity configuration resources in the specified network manager, in a paginated format",
             "schema": {
               "$ref": "#/definitions/ConnectivityConfigurationListResult"
             }
           },
           "default": {
-            "description": "Resource Provider error response describing why the operation failed.",
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "./network.json#/definitions/CloudError"
             }
@@ -230,7 +230,7 @@
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "ConnectivityConfigurationsListByResourceGroup": {
+          "ConnectivityConfigurationsList": {
             "$ref": "./examples/NetworkManagerConnectivityConfigurationList.json"
           }
         }
@@ -252,14 +252,14 @@
           "description": "Gets the URL to get the next page of results."
         }
       },
-      "description": "Result of the request to list Managed Network Connectivity Configurations. It contains a list of Configurations and a URL link to get the next set of results."
+      "description": "Result of the request to list network manager connectivity configurations. It contains a list of configurations and a link to get the next set of results."
     },
     "ConnectivityConfiguration": {
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/ConnectivityConfigurationProperties",
-          "description": "Gets or sets the properties of a Managed Network Configuration"
+          "description": "Properties of a network manager connectivity configuration"
         },
         "tags": {
           "type": "object",
@@ -274,17 +274,17 @@
           "$ref": "./network.json#/definitions/ProxyResource"
         }
       ],
-      "description": "The Managed Network Peering Configuration resource"
+      "description": "The network manager connectivity configuration resource"
     },
     "ConnectivityConfigurationProperties": {
       "properties": {
         "displayName": {
           "type": "string",
-          "description": "A friendly name for the assignment."
+          "description": "A friendly name for the resource."
         },
         "description": {
           "type": "string",
-          "description": "A description of the Connectivity Configuration."
+          "description": "A description of the connectivity configuration."
         },
         "connectivityTopology": {
           "type": "string",
@@ -296,15 +296,15 @@
             "name": "ConnectivityTopology",
             "modelAsString": true
           },
-          "description": "Gets or sets the connectivity type of a network structure Configuration"
+          "description": "Connectivity topology type."
         },
         "hubId": {
           "type": "string",
-          "description": "Gets or sets the hub virtual network ID"
+          "description": "The hub vnet Id."
         },
         "isGlobal": {
           "type": "boolean",
-          "description": "Flag if global mesh supported."
+          "description": "Flag if global mesh is supported."
         },
         "appliesToGroups": {
           "type": "array",
@@ -316,32 +316,32 @@
         "provisioningState": {
           "readOnly": true,
           "$ref": "./network.json#/definitions/ProvisioningState",
-          "description": "The provisioning state of the peering Configuration resource."
+          "description": "The provisioning state of the connectivity configuration resource."
         },
         "deleteExistingPeering": {
           "type": "boolean",
-          "description": "Flag if need to remove current peerings."
+          "description": "Flag if need to remove current existing peerings."
         }
       },
       "required": [
         "connectivityTopology"
       ],
-      "description": "Properties of a Managed Network Peering Configuration"
+      "description": "Properties of network manager connectivity configuration"
     },
     "connectivityGroupItem": {
       "type": "object",
       "properties": {
         "networkGroupId": {
           "type": "string",
-          "description": "Network manager group Id."
+          "description": "Network group Id."
         },
         "useHubGateway": {
           "type": "boolean",
-          "description": "Flag if need to use hub gateways."
+          "description": "Flag if need to use hub gateway."
         },
         "isGlobal": {
           "type": "boolean",
-          "description": "Flag if global hub/spoke transit group supported."
+          "description": "Flag if global is supported."
         },
         "groupConnectivity": {
           "type": "string",
@@ -353,7 +353,7 @@
             "name": "GroupConnectivity",
             "modelAsString": true
           },
-          "description": "Group Connectivity."
+          "description": "Group connectivity type."
         }
       }
     }
@@ -364,7 +364,7 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "The name of the Managed Network Peering Configuration.",
+      "description": "The name of the network manager connectivity configuration.",
       "x-ms-parameter-location": "method"
     },
     "ResourceGroupNameParameter": {
@@ -396,7 +396,7 @@
     },
     "ListSkipTokenParameter": {
       "name": "$skipToken",
-      "description": "Skiptoken is only used if a previous operation returned a partial result. If a previous response contains a nextLink element, the value of the nextLink element will include a skiptoken parameter that specifies a starting point to use for subsequent calls.",
+      "description": "SkipToken is only used if a previous operation returned a partial result. If a previous response contains a nextLink element, the value of the nextLink element will include a skipToken parameter that specifies a starting point to use for subsequent calls.",
       "in": "query",
       "required": false,
       "type": "string",

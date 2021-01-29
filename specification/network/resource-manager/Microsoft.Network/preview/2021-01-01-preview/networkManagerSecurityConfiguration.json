@@ -39,7 +39,7 @@
           "SecurityConfigurations"
         ],
         "operationId": "SecurityConfigurations_List",
-        "description": "The list securityConfigurations operation retrieves all the Managed Network Security Configurations in a resource group, in a paginated format.",
+        "description": "Lists all the network manager security configurations in a network manager, in a paginated format.",
         "parameters": [
           {
             "$ref": "./network.json#/parameters/ApiVersionParameter"
@@ -62,13 +62,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Get successful. The operation returns all Managed Network Security Configuration resources in the specified Managed Network, in a paginated format",
+            "description": "Get successful. The operation returns all security configuration resources in the specified network manager, in a paginated format",
             "schema": {
               "$ref": "#/definitions/SecurityConfigurationListResult"
             }
           },
           "default": {
-            "description": "Resource Provider error response describing why the operation failed.",
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "./network.json#/definitions/CloudError"
             }
@@ -90,7 +90,7 @@
           "SecurityConfigurations"
         ],
         "operationId": "SecurityConfigurations_Import",
-        "description": "The operation to import nsg to security configurations.",
+        "description": "Imports network security rules to network manager security rules.",
         "parameters": [
           {
             "$ref": "./network.json#/parameters/ApiVersionParameter"
@@ -125,7 +125,7 @@
             }
           },
           "default": {
-            "description": "Resource Provider error response describing why the operation failed.",
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "./network.json#/definitions/CloudError"
             }
@@ -174,7 +174,7 @@
             "schema": {
               "$ref": "#/definitions/NetworkManagerSecurityConfigurationImport"
             },
-            "description": "Import Security configuration parameter"
+            "description": "Import security configuration parameter"
           }
         ],
         "responses": {
@@ -185,7 +185,7 @@
             }
           },
           "default": {
-            "description": "Resource Provider error response describing why the operation failed.",
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "./network.json#/definitions/CloudError"
             }
@@ -223,7 +223,6 @@
         "tags": [
           "SecurityConfigurations"
         ],
-        "summary": "Get",
         "description": "Retrieves a network manager security Configuration.",
         "operationId": "SecurityConfigurations_Get",
         "responses": {
@@ -250,8 +249,7 @@
         "tags": [
           "SecurityConfigurations"
         ],
-        "summary": "Create Or Update",
-        "description": "Creates or updates a network manager security Configuration in a subscription.  This operation creates or updates a network manager security Configuration in the given subscription with the given name.",
+        "description": "Creates or updates a network manager security Configuration.",
         "operationId": "SecurityConfigurations_CreateOrUpdate",
         "parameters": [
           {
@@ -261,7 +259,7 @@
             "schema": {
               "$ref": "#/definitions/SecurityConfiguration"
             },
-            "description": "The security Configuration to create or update"
+            "description": "The security configuration to create or update"
           }
         ],
         "responses": {
@@ -285,7 +283,7 @@
           }
         },
         "x-ms-examples": {
-          "Create network manager security Configuration for a subscription": {
+          "Create network manager security Configuration": {
             "$ref": "./examples/NetworkManagerSecurityConfigurationPut.json"
           }
         }
@@ -294,8 +292,7 @@
         "tags": [
           "SecurityConfigurations"
         ],
-        "summary": "Delete",
-        "description": "Deletes a network manager security Configuration in a subscription. This operation deletes the network manager security Configuration in the given subscription with the given name.",
+        "description": "Deletes a network manager security Configuration.",
         "operationId": "SecurityConfigurations_Delete",
         "responses": {
           "200": {
@@ -321,8 +318,8 @@
         "tags": [
           "SecurityConfigurations"
         ],
-        "operationId": "SecurityConfigurations_Update",
-        "description": "Update a SecurityConfiguration.",
+        "operationId": "SecurityConfigurations_UpdateTags",
+        "description": "Update a SecurityConfiguration tags.",
         "parameters": [
           {
             "name": "parameters",
@@ -342,7 +339,7 @@
             }
           },
           "default": {
-            "description": "Resource Provider error response describing why the operation failed.",
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "./network.json#/definitions/CloudError"
             }
@@ -381,16 +378,15 @@
       ],
       "get": {
         "tags": [
-          "SecurityConfigurationAdminRules"
+          "AdminRules"
         ],
-        "summary": "List",
-        "description": "Retrieves a network manager security Configuration admin rule. This operation retrieves a rule for a network manager security Configuration in the given subscription with the given name.",
-        "operationId": "SecurityConfigurationAdminRules_List",
+        "description": "Retrieves a network manager security configuration admin rule.",
+        "operationId": "AdminRules_List",
         "responses": {
           "200": {
-            "description": "successful operation",
+            "description": "Successful operation",
             "schema": {
-              "$ref": "#/definitions/SecurityConfigurationAdminRuleListResult"
+              "$ref": "#/definitions/AdminRuleListResult"
             }
           },
           "default": {
@@ -401,8 +397,8 @@
           }
         },
         "x-ms-examples": {
-          "List security configuration rules": {
-            "$ref": "./examples/NetworkManagerSecurityConfigurationAdminRulesList.json"
+          "List security admin rules": {
+            "$ref": "./examples/NetworkManagerAdminRulesList.json"
           }
         },
         "x-ms-pageable": {
@@ -433,16 +429,15 @@
       ],
       "get": {
         "tags": [
-          "SecurityConfigurationAdminRules"
+          "AdminRules"
         ],
-        "summary": "Get",
-        "description": "Retrieves a network manager security Configuration admin rule in a subscription. This operation retrieves a rule for a network manager security Configuration in the given subscription with the given name.",
-        "operationId": "SecurityConfigurationAdminRules_Get",
+        "description": "Gets a network manager security configuration admin rule in a subscription.",
+        "operationId": "AdminRules_Get",
         "responses": {
           "200": {
-            "description": "successful operation",
+            "description": "Successful operation",
             "schema": {
-              "$ref": "#/definitions/SecurityConfigurationAdminRule"
+              "$ref": "#/definitions/AdminRule"
             }
           },
           "default": {
@@ -453,40 +448,39 @@
           }
         },
         "x-ms-examples": {
-          "Get security admin rule for a specific security Configuration": {
-            "$ref": "./examples/NetworkManagerSecurityConfigurationAdminRuleGet.json"
+          "Gets security admin rule": {
+            "$ref": "./examples/NetworkManagerAdminRuleGet.json"
           }
         }
       },
       "put": {
         "tags": [
-          "SecurityConfigurationAdminRules"
+          "AdminRules"
         ],
-        "summary": "Create Or Update",
-        "description": "Creates or updates a admin rule for a network manager security Configuration in a subscription. This operation creates or updates an admin rule for a network manager security Configuration in the given subscription with the given name.",
-        "operationId": "SecurityConfigurationAdminRules_CreateOrUpdate",
+        "description": "Creates or updates an admin rule.",
+        "operationId": "AdminRules_CreateOrUpdate",
         "parameters": [
           {
-            "name": "securityConfigurationAdminRule",
+            "name": "AdminRule",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/SecurityConfigurationAdminRule"
+              "$ref": "#/definitions/AdminRule"
             },
-            "description": "The security rule to create or update"
+            "description": "The admin rule to create or update"
           }
         ],
         "responses": {
           "200": {
             "description": "Updated rule",
             "schema": {
-              "$ref": "#/definitions/SecurityConfigurationAdminRule"
+              "$ref": "#/definitions/AdminRule"
             }
           },
           "201": {
             "description": "Created rule",
             "schema": {
-              "$ref": "#/definitions/SecurityConfigurationAdminRule"
+              "$ref": "#/definitions/AdminRule"
             }
           },
           "default": {
@@ -497,18 +491,17 @@
           }
         },
         "x-ms-examples": {
-          "Create a rule for a network manager security Configuration": {
-            "$ref": "./examples/NetworkManagerSecurityConfigurationAdminRulePut.json"
+          "Create an admin rule": {
+            "$ref": "./examples/AdminRulePut.json"
           }
         }
       },
       "delete": {
         "tags": [
-          "SecurityConfigurationAdminRules"
+          "AdminRules"
         ],
-        "summary": "Delete",
-        "description": "Deletes an admin rule for a network manager security Configuration in a subscription. This operation deletes an admin rule for a network manager security Configuration in the given subscription with the given name.",
-        "operationId": "SecurityConfigurationAdminRules_Delete",
+        "description": "Deletes an admin rule.",
+        "operationId": "AdminRules_Delete",
         "responses": {
           "200": {
             "description": "OK"
@@ -524,17 +517,17 @@
           }
         },
         "x-ms-examples": {
-          "Delete security admin rule for a specific security Configuration for a network manager": {
-            "$ref": "./examples/NetworkManagerSecurityConfigurationAdminRuleDelete.json"
+          "Deletes an admin rule.": {
+            "$ref": "./examples/NetworkManagerAdminRuleDelete.json"
           }
         }
       },
       "patch": {
         "tags": [
-          "SecurityConfigurationAdminRules"
+          "AdminRules"
         ],
-        "operationId": "SecurityConfigurationAdminRules_Update",
-        "description": "Update a SecurityConfiguration Admin Rule.",
+        "operationId": "AdminRules_UpdateTags",
+        "description": "Update admin rule tags.",
         "parameters": [
           {
             "name": "parameters",
@@ -543,14 +536,14 @@
             "schema": {
               "$ref": "./network.json#/definitions/TagsObject"
             },
-            "description": "Parameters supplied to update network manager SecurityConfiguration admin rule tags."
+            "description": "Parameters supplied to update network manager admin rule tags."
           }
         ],
         "responses": {
           "200": {
-            "description": "Updated - Returns information about the network manager SecurityConfiguration admin Rule.",
+            "description": "Updated - Returns information about the network manager admin Rule.",
             "schema": {
-              "$ref": "#/definitions/SecurityConfigurationAdminRule"
+              "$ref": "#/definitions/AdminRule"
             }
           },
           "default": {
@@ -561,8 +554,8 @@
           }
         },
         "x-ms-examples": {
-          "Patch security admin rule": {
-            "$ref": "./examples/NetworkManagerSecurityConfigurationAdminRulePatch.json"
+          "Patch admin rule tags": {
+            "$ref": "./examples/NetworkManagerAdminRulePatch.json"
           }
         }
       }
@@ -593,16 +586,15 @@
       ],
       "get": {
         "tags": [
-          "SecurityConfigurationUserRules"
+          "UserRules"
         ],
-        "summary": "List",
-        "description": "Retrieves a network manager security Configuration user rule. This operation retrieves a user rule for a network manager security Configuration in the given subscription with the given name.",
-        "operationId": "SecurityConfigurationUserRules_List",
+        "description": "Lists all user rules in a security configuraton.",
+        "operationId": "UserRules_List",
         "responses": {
           "200": {
-            "description": "successful operation",
+            "description": "Successful operation",
             "schema": {
-              "$ref": "#/definitions/SecurityConfigurationUserRuleListResult"
+              "$ref": "#/definitions/UserRuleListResult"
             }
           },
           "default": {
@@ -614,7 +606,7 @@
         },
         "x-ms-examples": {
           "List security user rules": {
-            "$ref": "./examples/NetworkManagerSecurityConfigurationUserRulesList.json"
+            "$ref": "./examples/NetworkManagerUserRulesList.json"
           }
         },
         "x-ms-pageable": {
@@ -645,16 +637,15 @@
       ],
       "get": {
         "tags": [
-          "SecurityConfigurationUserRules"
+          "UserRules"
         ],
-        "summary": "Get",
-        "description": "Retrieves a network manager security Configuration user rule in a subscription. This operation retrieves a rule for a network manager security Configuration in the given subscription with the given name.",
-        "operationId": "SecurityConfigurationUserRules_Get",
+        "description": "Gets a user rule.",
+        "operationId": "UserRules_Get",
         "responses": {
           "200": {
-            "description": "successful operation",
+            "description": "Successful operation",
             "schema": {
-              "$ref": "#/definitions/SecurityConfigurationUserRule"
+              "$ref": "#/definitions/UserRule"
             }
           },
           "default": {
@@ -665,40 +656,39 @@
           }
         },
         "x-ms-examples": {
-          "Get security user rule for a specific security Configuration for a network manager": {
-            "$ref": "./examples/NetworkManagerSecurityConfigurationUserRuleGet.json"
+          "Gets a user rule": {
+            "$ref": "./examples/NetworkManagerUserRuleGet.json"
           }
         }
       },
       "put": {
         "tags": [
-          "SecurityConfigurationUserRules"
+          "UserRules"
         ],
-        "summary": "Create Or Update",
-        "description": "Creates or updates a user rule for a network manager security Configuration in a subscription. This operation creates or updates a rule for a network manager security Configuration in the given subscription with the given name.",
-        "operationId": "SecurityConfigurationUserRules_CreateOrUpdate",
+        "description": "Creates or updates a user rule.",
+        "operationId": "UserRules_CreateOrUpdate",
         "parameters": [
           {
-            "name": "securityConfigurationUserRule",
+            "name": "UserRule",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/SecurityConfigurationUserRule"
+              "$ref": "#/definitions/UserRule"
             },
-            "description": "The security rule to create or update"
+            "description": "The user rule to create or update"
           }
         ],
         "responses": {
           "200": {
             "description": "Updated rule",
             "schema": {
-              "$ref": "#/definitions/SecurityConfigurationUserRule"
+              "$ref": "#/definitions/UserRule"
             }
           },
           "201": {
             "description": "Created rule",
             "schema": {
-              "$ref": "#/definitions/SecurityConfigurationUserRule"
+              "$ref": "#/definitions/UserRule"
             }
           },
           "default": {
@@ -710,20 +700,19 @@
         },
         "x-ms-examples": {
           "Create a user rule": {
-            "$ref": "./examples/NetworkManagerSecurityConfigurationUserRulePut.json"
+            "$ref": "./examples/NetworkManagerUserRulePut.json"
           }
         }
       },
       "delete": {
         "tags": [
-          "SecurityConfigurationUserRules"
+          "UserRules"
         ],
-        "summary": "Delete",
-        "description": "Deletes a user rule for a network manager security Configuration in a subscription. This operation deletes a user rule for a network manager security Configuration in the given subscription with the given name.",
-        "operationId": "SecurityConfigurationUserRules_Delete",
+        "description": "Deletes a user rule.",
+        "operationId": "UserRules_Delete",
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Delete Succeed."
           },
           "204": {
             "description": "Request successful. Resource does not exist."
@@ -736,17 +725,17 @@
           }
         },
         "x-ms-examples": {
-          "Delete security user rule for a specific security Configuration": {
+          "Delete a user rule.": {
             "$ref": "./examples/NetworkManagerSecurityConfigurationUserRuleDelete.json"
           }
         }
       },
       "patch": {
         "tags": [
-          "SecurityConfigurationUserRules"
+          "UserRules"
         ],
-        "operationId": "SecurityConfigurationUserRules_Update",
-        "description": "Update a SecurityConfiguration User Rule.",
+        "operationId": "UserRules_UpdateTags",
+        "description": "Update a user rule tags.",
         "parameters": [
           {
             "name": "parameters",
@@ -755,14 +744,14 @@
             "schema": {
               "$ref": "./network.json#/definitions/TagsObject"
             },
-            "description": "Parameters supplied to update network manager SecurityConfiguration rule tags."
+            "description": "Parameters supplied to update network manager user rule tags."
           }
         ],
         "responses": {
           "200": {
-            "description": "Updated - Returns information about the network manager SecurityConfiguration Rule.",
+            "description": "Updated - Returns information about the network manager user rule.",
             "schema": {
-              "$ref": "#/definitions/SecurityConfigurationUserRule"
+              "$ref": "#/definitions/UserRule"
             }
           },
           "default": {
@@ -773,7 +762,7 @@
           }
         },
         "x-ms-examples": {
-          "Patch security user rule": {
+          "Patch security user rule tags": {
             "$ref": "./examples/NetworkManagerSecurityConfigurationUserRulePatch.json"
           }
         }
@@ -786,7 +775,7 @@
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/SecurityConfigurationPropertiesFormat",
-          "description": "Indicates the properties for the managed network security Configuration."
+          "description": "Indicates the properties for the network manager security Configuration."
         },
         "tags": {
           "type": "object",
@@ -801,17 +790,17 @@
           "$ref": "./network.json#/definitions/ProxyResource"
         }
       ],
-      "description": "Defines the security Configuration for a managed network"
+      "description": "Defines the security Configuration"
     },
     "SecurityConfigurationPropertiesFormat": {
       "properties": {
         "displayName": {
           "type": "string",
-          "description": "A display name of the network manager security Configuration."
+          "description": "A display name of the security Configuration."
         },
         "description": {
           "type": "string",
-          "description": "A description of the network manager security Configuration."
+          "description": "A description of the security Configuration."
         },
         "securityType": {
           "type": "string",
@@ -827,7 +816,7 @@
         },
         "deleteExistingNSGs": {
           "type": "boolean",
-          "description": "Flag if delete existing network security groups."
+          "description": "Flag if need to delete existing network security groups."
         },
         "appliesToGroups": {
           "type": "array",
@@ -842,7 +831,7 @@
           "description": "The provisioning state of the scope assignment resource."
         }
       },
-      "description": "Defines the security Configuration properties for a managed network"
+      "description": "Defines the security Configuration properties."
     },
     "SecurityConfigurationListResult": {
       "properties": {
@@ -860,37 +849,37 @@
       },
       "description": "A list of managed network security configurations"
     },
-    "SecurityConfigurationAdminRuleListResult": {
+    "AdminRuleListResult": {
       "properties": {
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/SecurityConfigurationAdminRule"
+            "$ref": "#/definitions/AdminRule"
           },
-          "description": "A list of managed network security configuration admin rules"
+          "description": "A list of admin rules"
         },
         "nextLink": {
           "type": "string",
           "description": "Gets the URL to get the next set of results."
         }
       },
-      "description": "Security Configuration Admin Rule List Result."
+      "description": "Security configuration admin rule list result."
     },
-    "SecurityConfigurationUserRuleListResult": {
+    "UserRuleListResult": {
       "properties": {
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/SecurityConfigurationUserRule"
+            "$ref": "#/definitions/UserRule"
           },
-          "description": "A list of network manager security configuration user rules"
+          "description": "A list of user rules"
         },
         "nextLink": {
           "type": "string",
           "description": "Gets the URL to get the next set of results."
         }
       },
-      "description": "Security Configuration User Rule List Result."
+      "description": "Security configuration user rule list result."
     },
     "SecurityConfigurationRuleListResult": {
       "properties": {
@@ -910,12 +899,12 @@
           "description": "Gets the URL to get the next set of results."
         }
       },
-      "description": "Security Configuration Rule List Result."
+      "description": "Security configuration rule list result."
     },
-    "SecurityConfigurationAdminRule": {
+    "AdminRule": {
       "properties": {
         "properties": {
-          "$ref": "#/definitions/SecurityConfigurationRuleAdminPropertiesFormat",
+          "$ref": "#/definitions/AdminPropertiesFormat",
           "x-ms-client-flatten": true,
           "description": "Indicates the properties of the security admin rule"
         },
@@ -932,9 +921,9 @@
           "$ref": "./network.json#/definitions/ProxyResource"
         }
       ],
-      "description": "Network security admin rule."
+      "description": "Network admin rule."
     },
-    "SecurityConfigurationRuleAdminPropertiesFormat": {
+    "AdminPropertiesFormat": {
       "type": "object",
       "properties": {
         "displayName": {
@@ -943,7 +932,7 @@
         },
         "description": {
           "type": "string",
-          "description": "A description for this rule. Restricted to 140 chars."
+          "description": "A description for this rule."
         },
         "protocol": {
           "type": "string",
@@ -1012,10 +1001,10 @@
       ],
       "description": "Security rule resource."
     },
-    "SecurityConfigurationUserRule": {
+    "UserRule": {
       "properties": {
         "properties": {
-          "$ref": "#/definitions/SecurityConfigurationUserRulePropertiesFormat",
+          "$ref": "#/definitions/UserRulePropertiesFormat",
           "x-ms-client-flatten": true,
           "description": "Indicates the properties of the security user rule"
         },
@@ -1034,7 +1023,7 @@
       ],
       "description": "Network security admin rule."
     },
-    "SecurityConfigurationUserRulePropertiesFormat": {
+    "UserRulePropertiesFormat": {
       "type": "object",
       "properties": {
         "displayName": {
@@ -1154,18 +1143,18 @@
           "description": "Network manager group Id."
         }
       },
-      "description": "Network Manager Security Group Item."
+      "description": "Network manager security group item."
     },
     "AddressPrefixItem": {
       "type": "object",
       "properties": {
         "addressPrefix": {
           "type": "string",
-          "description": "Address Prefix."
+          "description": "Address prefix."
         },
         "addressPrefixType": {
           "type": "string",
-          "description": "Address Prefix Type.",
+          "description": "Address prefix type.",
           "enum": [
             "IPPrefix",
             "ServiceTag"
@@ -1176,7 +1165,7 @@
           }
         }
       },
-      "description": "Address Prefix Item."
+      "description": "Address prefix item."
     },
     "NetworkManagerSecurityConfigurationImport": {
       "properties": {
@@ -1189,59 +1178,59 @@
         },
         "importDenyRulesAsAdminRules": {
           "type": "boolean",
-          "description": "Flag if Import Deny Rules As Admin Rules."
+          "description": "Flag if import deny rules as admin rules."
         },
         "adminSecurityConfigurationUri": {
           "type": "string",
-          "description": "admin Security Configuration Uri."
+          "description": "Admin security configuration Uri."
         },
         "removeAllowVnetInboundRule": {
           "type": "boolean",
-          "description": "Flag if Remove Allow Vnet Inbound Rule."
+          "description": "Flag if need to remove allow vnet inbound rule."
         },
         "removeAllowAzureLoadBalancerInboundRule": {
           "type": "boolean",
-          "description": "Flag if Remove Allow Azure Load Balancer Inbound Rule."
+          "description": "Flag if need to remove allow azure load balancer inbound rule."
         },
         "removeAllowVnetOutboundRule": {
           "type": "boolean",
-          "description": "Flag if Remove Allow Vnet Outbound Rule."
+          "description": "Flag if need to remove allow vnet outbound rule."
         },
         "removeAllowInternetOutboundRule": {
           "type": "boolean",
-          "description": "Flag if Remove Allow Internet Outbound Rule."
+          "description": "Flag if need to remove allow Internet outbound rule."
         }
       },
-      "description": "Network Manager Security Configuration Import Parameters."
+      "description": "Network manager security configuration import parameters."
     },
     "SecurityConfigurationImportResult": {
       "properties": {
         "userSecurityConfiguration": {
           "type": "string",
-          "description": "User Security Configuration."
+          "description": "User security configuration Id."
         },
         "adminSecurityConfiguration": {
           "type": "string",
-          "description": "Admin Security Configuration."
+          "description": "Admin security configuration Id."
         },
         "failedImport": {
           "$ref": "#/definitions/FailedImport",
-          "description": "failed Imports code and reason"
+          "description": "failed imports code and reason"
         }
       },
-      "description": "Security Configuration Import Result."
+      "description": "Security configuration import Result."
     },
     "FailedImport": {
       "type": "object",
-      "description": "Failed Imports.",
+      "description": "Failed imports object.",
       "properties": {
         "failureCode": {
           "type": "string",
-          "description": "Failure Code."
+          "description": "Failure code."
         },
         "failureReason": {
           "type": "string",
-          "description": "Failure Reason."
+          "description": "Failure reason."
         }
       }
     },
@@ -1261,14 +1250,14 @@
         },
         "securityAdminRule": {
           "$ref": "#/definitions/SecurityConfigurationAdminRule",
-          "description": "Security Admin Rule."
+          "description": "Security admin rule."
         },
         "securityUserRule": {
           "$ref": "#/definitions/SecurityConfigurationUserRule",
-          "description": "Security User Rule."
+          "description": "Security user rule."
         }
       },
-      "description": "General Security Configuration Rule."
+      "description": "General security configuration Rule."
     }
   },
   "parameters": {
@@ -1317,7 +1306,7 @@
     },
     "ListSkipTokenParameter": {
       "name": "$skipToken",
-      "description": "Skiptoken is only used if a previous operation returned a partial result. If a previous response contains a nextLink element, the value of the nextLink element will include a skiptoken parameter that specifies a starting point to use for subsequent calls.",
+      "description": "SkipToken is only used if a previous operation returned a partial result. If a previous response contains a nextLink element, the value of the nextLink element will include a skipToken parameter that specifies a starting point to use for subsequent calls.",
       "in": "query",
       "required": false,
       "type": "string",

@@ -54,7 +54,7 @@
           "NetworkManagers"
         ],
         "operationId": "NetworkManagers_Get",
-        "description": "Get the specified Network Manager.",
+        "description": "Gets the specified Network Manager.",
         "responses": {
           "200": {
             "description": "OK - Returns information about the network manager.",
@@ -63,7 +63,7 @@
             }
           },
           "default": {
-            "description": "Resource Provider error response describing why the operation failed.",
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "./network.json#/definitions/CloudError"
             }
@@ -80,7 +80,7 @@
           "NetworkManagers"
         ],
         "operationId": "NetworkManagers_CreateOrUpdate",
-        "description": "Creates a Network Manager.",
+        "description": "Creates or updates a Network Manager.",
         "parameters": [
           {
             "name": "parameters",
@@ -106,7 +106,7 @@
             }
           },
           "default": {
-            "description": "Resource Provider error response describing why the operation failed.",
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "./network.json#/definitions/CloudError"
             }
@@ -132,7 +132,7 @@
             "description": "Request successful. Resource does not exist."
           },
           "default": {
-            "description": "Resource Provider error response describing why the operation failed.",
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "./network.json#/definitions/CloudError"
             }
@@ -148,8 +148,8 @@
         "tags": [
           "NetworkManagers"
         ],
-        "operationId": "NetworkManagers_Update",
-        "description": "Patch a NetworkManager.",
+        "operationId": "NetworkManagers_UpdateTags",
+        "description": "Updates NetworkManager Tags.",
         "parameters": [
           {
             "name": "parameters",
@@ -169,7 +169,7 @@
             }
           },
           "default": {
-            "description": "Resource Provider error response describing why the operation failed.",
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "./network.json#/definitions/CloudError"
             }
@@ -219,7 +219,7 @@
             "description": "Commit Succeed"
           },
           "default": {
-            "description": "Resource Provider error response describing why the operation failed.",
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "./network.json#/definitions/CloudError"
             }
@@ -278,7 +278,7 @@
             }
           },
           "default": {
-            "description": "Resource Provider error response describing why the operation failed.",
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "./network.json#/definitions/CloudError"
             }
@@ -300,7 +300,7 @@
           "NetworkManagers"
         ],
         "operationId": "NetworkManagers_ListBySubscription",
-        "description": "List all network managers in subscription.",
+        "description": "List all network managers in a subscription.",
         "parameters": [
           {
             "$ref": "./network.json#/parameters/SubscriptionIdParameter"
@@ -323,7 +323,7 @@
             }
           },
           "default": {
-            "description": "Resource Provider error response describing why the operation failed.",
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "./network.json#/definitions/CloudError"
             }
@@ -345,7 +345,7 @@
           "NetworkManagers"
         ],
         "operationId": "NetworkManagers_List",
-        "description": "List network manager in resource group.",
+        "description": "List network manager in a resource group.",
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         },
@@ -374,7 +374,7 @@
             }
           },
           "default": {
-            "description": "Resource Provider error response describing why the operation failed.",
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "./network.json#/definitions/CloudError"
             }
@@ -393,7 +393,7 @@
           "NetworkManagers"
         ],
         "operationId": "EffectiveVirtualNetworks_ListByNetworkManager",
-        "description": "List effective virtual networks in network manager.",
+        "description": "List effective virtual networks in a network manager.",
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         },
@@ -434,7 +434,7 @@
             }
           },
           "default": {
-            "description": "Resource Provider error response describing why the operation failed.",
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "./network.json#/definitions/CloudError"
             }
@@ -480,10 +480,10 @@
         },
         "nextLink": {
           "type": "string",
-          "description": "Gets the URL to get the next set of results."
+          "description": "Gets the URL to get the next page of results."
         }
       },
-      "description": "Result of the request to list NetworkManager. It contains a list of groups and a URL link to get the next set of results."
+      "description": "Result of the request to list NetworkManager. It contains a list of networkmanagers and a URL link to get the next set of results."
     },
     "NetworkManagerProperties": {
       "type": "object",
@@ -605,7 +605,7 @@
           "description": "Gets the URL to get the next page of results."
         }
       },
-      "description": "A list of NetworkManagerDeploymentStatus"
+      "description": "A list of Network Manager Deployment Status"
     },
     "NetworkManagerDeploymentStatus": {
       "properties": {
@@ -704,7 +704,7 @@
     },
     "ListSkipTokenParameter": {
       "name": "$skipToken",
-      "description": "Skiptoken is only used if a previous operation returned a partial result. If a previous response contains a nextLink element, the value of the nextLink element will include a skiptoken parameter that specifies a starting point to use for subsequent calls.",
+      "description": "SkipToken is only used if a previous operation returned a partial result. If a previous response contains a nextLink element, the value of the nextLink element will include a skipToken parameter that specifies a starting point to use for subsequent calls.",
       "in": "query",
       "required": false,
       "type": "string",

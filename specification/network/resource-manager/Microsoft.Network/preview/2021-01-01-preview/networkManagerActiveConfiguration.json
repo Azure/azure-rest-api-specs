@@ -57,7 +57,7 @@
         {
           "name": "region",
           "in": "query",
-          "description": "Location Name",
+          "description": "Location name",
           "required": false,
           "type": "string",
           "x-ms-parameter-location": "method"
@@ -68,7 +68,7 @@
           "NetworkManagerActiveConfigurations"
         ],
         "operationId": "ActiveConfigurations_List",
-        "description": "The List active configuration operation to list active configurations",
+        "description": "Lists active configurations in a netowrk manager",
         "responses": {
           "200": {
             "description": "Get successful. The operation returns the specified Managed Network active configuration resource.",
@@ -77,7 +77,7 @@
             }
           },
           "default": {
-            "description": "Resource Provider error response describing why the operation failed.",
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "./network.json#/definitions/CloudError"
             }
@@ -128,7 +128,7 @@
           "description": "Gets the URL to get the next set of results."
         }
       },
-      "description": "Result of the request to list ActiveConfiguration. It contains a list of groups and a URL link to get the next set of results."
+      "description": "Result of the request to list activeConfigurations. It contains a list of groups and a URL link to get the next set of results."
     }
   },
   "parameters": {
@@ -161,7 +161,7 @@
     },
     "ListSkipTokenParameter": {
       "name": "$skipToken",
-      "description": "Skiptoken is only used if a previous operation returned a partial result. If a previous response contains a nextLink element, the value of the nextLink element will include a skiptoken parameter that specifies a starting point to use for subsequent calls.",
+      "description": "SkipToken is only used if a previous operation returned a partial result. If a previous response contains a nextLink element, the value of the nextLink element will include a skipToken parameter that specifies a starting point to use for subsequent calls.",
       "in": "query",
       "required": false,
       "type": "string",

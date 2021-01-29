@@ -57,7 +57,7 @@
           "NetworkGroups"
         ],
         "operationId": "NetworkGroups_Get",
-        "description": "Get the specified network group.",
+        "description": "Gets the specified network group.",
         "responses": {
           "200": {
             "description": "OK - Returns information about the network group.",
@@ -66,7 +66,7 @@
             }
           },
           "default": {
-            "description": "Resource Provider error response describing why the operation failed.",
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "./network.json#/definitions/CloudError"
             }
@@ -83,7 +83,7 @@
           "NetworkGroups"
         ],
         "operationId": "NetworkGroups_CreateOrUpdate",
-        "description": "Creates a network group.",
+        "description": "Creates or updates a network group.",
         "parameters": [
           {
             "name": "parameters",
@@ -129,7 +129,7 @@
             }
           },
           "default": {
-            "description": "Resource Provider error response describing why the operation failed.",
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "./network.json#/definitions/CloudError"
             }
@@ -155,7 +155,7 @@
             "description": "Request successful. Resource does not exist."
           },
           "default": {
-            "description": "Resource Provider error response describing why the operation failed.",
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "./network.json#/definitions/CloudError"
             }
@@ -171,8 +171,8 @@
         "tags": [
           "NetworkGroups"
         ],
-        "operationId": "NetworkGroups_Update",
-        "description": "Patch a Network Group.",
+        "operationId": "NetworkGroups_UpdateTags",
+        "description": "Patches Network Group tags.",
         "parameters": [
           {
             "name": "parameters",
@@ -192,14 +192,14 @@
             }
           },
           "default": {
-            "description": "Resource Provider error response describing why the operation failed.",
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "./network.json#/definitions/CloudError"
             }
           }
         },
         "x-ms-examples": {
-          "patch network manager group": {
+          "patch network manager group tags": {
             "$ref": "./examples/NetworkManagerGroupPatch.json"
           }
         }
@@ -211,7 +211,7 @@
           "NetworkGroups"
         ],
         "operationId": "NetworkGroups_List",
-        "description": "Get the specified network group list.",
+        "description": "Lists the specified network group.",
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         },
@@ -243,7 +243,7 @@
             }
           },
           "default": {
-            "description": "Resource Provider error response describing why the operation failed.",
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "./network.json#/definitions/CloudError"
             }
@@ -262,7 +262,7 @@
           "NetworkGroups"
         ],
         "operationId": "EffectiveVirtualNetworks_ListByNetworkGroup",
-        "description": "Get the specified effective VirtualNetworks list by network group.",
+        "description": "Lists all effective virtual networks by specified network group.",
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         },
@@ -291,13 +291,13 @@
         ],
         "responses": {
           "200": {
-            "description": "OK - Returns information about the network group.",
+            "description": "OK - Returns information about the effective virtual networks.",
             "schema": {
               "$ref": "#/definitions/EffectiveVirtualNetworksListResult"
             }
           },
           "default": {
-            "description": "Resource Provider error response describing why the operation failed.",
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "./network.json#/definitions/CloudError"
             }
@@ -332,7 +332,7 @@
           "$ref": "./network.json#/definitions/ProxyResource"
         }
       ],
-      "description": "The Managed Network resource"
+      "description": "The network group resource"
     },
     "NetworkGroupListResult": {
       "properties": {
@@ -363,7 +363,7 @@
         },
         "memberType": {
           "type": "string",
-          "description": "Group member Type.",
+          "description": "Group member type.",
           "enum": [
             "VirtualNetwork",
             "Subnet"
@@ -390,7 +390,7 @@
           "description": "The provisioning state of the scope assignment resource."
         }
       },
-      "description": "Properties of Managed Network Group"
+      "description": "Properties of network group"
     },
     "groupMembersItem": {
       "type": "object",
@@ -438,11 +438,11 @@
       "properties": {
         "id": {
           "type": "string",
-          "description": "effective vnet Id."
+          "description": "Effective vnet Id."
         },
         "location": {
           "type": "string",
-          "description": "Location of  vnet."
+          "description": "Location of vnet."
         },
         "membershipType": {
           "type": "string",
@@ -498,7 +498,7 @@
     },
     "ListSkipTokenParameter": {
       "name": "$skipToken",
-      "description": "Skiptoken is only used if a previous operation returned a partial result. If a previous response contains a nextLink element, the value of the nextLink element will include a skiptoken parameter that specifies a starting point to use for subsequent calls.",
+      "description": "SkipToken is only used if a previous operation returned a partial result. If a previous response contains a nextLink element, the value of the nextLink element will include a skipToken parameter that specifies a starting point to use for subsequent calls.",
       "in": "query",
       "required": false,
       "type": "string",

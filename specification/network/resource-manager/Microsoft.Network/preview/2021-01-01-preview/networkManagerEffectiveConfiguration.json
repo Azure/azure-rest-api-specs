@@ -60,7 +60,7 @@
           "NetworkManagerEffectiveConfiguration"
         ],
         "operationId": "EffectiveConfigurations_List",
-        "description": "List all configurations in a vnet.",
+        "description": "List all configurations in a virtual network.",
         "responses": {
           "200": {
             "description": "OK - Returns information about the configurations.",
@@ -99,19 +99,19 @@
             "name": "ConfigType",
             "modelAsString": true
           },
-          "description": "Effective Configuration."
+          "description": "Effective configuration."
         },
         "connectivityConfiguration": {
           "$ref": "./networkManagerConnectivityConfiguration.json#/definitions/ConnectivityConfiguration",
-          "description": "Connectivity Configuration."
+          "description": "Connectivity configuration object."
         },
         "securityAdminRule": {
           "$ref": "./networkManagerSecurityConfiguration.json#/definitions/SecurityConfigurationAdminRule",
-          "description": "Security Rule."
+          "description": "Security admin rule object."
         },
         "securityUserRule": {
           "$ref": "./networkManagerSecurityConfiguration.json#/definitions/SecurityConfigurationUserRule",
-          "description": "Security Rule."
+          "description": "Security user rule object."
         },
         "configurationGroups": {
           "type": "array",
@@ -121,7 +121,7 @@
           "description": "Effective configuration groups."
         }
       },
-      "description": "The Network Manager Effective Configuration"
+      "description": "The network manager effective configuration"
     },
     "NetworkManagerEffectiveConfigurationListResult": {
       "properties": {
@@ -170,7 +170,7 @@
     },
     "ListSkipTokenParameter": {
       "name": "$skipToken",
-      "description": "Skiptoken is only used if a previous operation returned a partial result. If a previous response contains a nextLink element, the value of the nextLink element will include a skiptoken parameter that specifies a starting point to use for subsequent calls.",
+      "description": "SkipToken is only used if a previous operation returned a partial result. If a previous response contains a nextLink element, the value of the nextLink element will include a skipToken parameter that specifies a starting point to use for subsequent calls.",
       "in": "query",
       "required": false,
       "type": "string",
