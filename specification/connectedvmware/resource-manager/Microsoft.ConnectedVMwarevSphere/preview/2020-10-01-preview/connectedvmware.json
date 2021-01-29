@@ -57,6 +57,12 @@
             "schema": {
               "$ref": "#/definitions/operationsList"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         },
         "deprecated": false,
@@ -65,7 +71,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ConnectedVMwarevSphere/ResourcePools/{resourcePoolName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ConnectedVMwarevSphere/resourcePools/{resourcePoolName}": {
       "put": {
         "tags": [
           "ResourcePools"
@@ -314,7 +320,7 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.ConnectedVMwarevSphere/ResourcePools": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ConnectedVMwarevSphere/resourcePools": {
       "get": {
         "tags": [
           "ResourcePools"
@@ -357,7 +363,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ConnectedVMwarevSphere/ResourcePools": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ConnectedVMwarevSphere/resourcePools": {
       "get": {
         "tags": [
           "ResourcePools"
@@ -403,7 +409,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ConnectedVMwarevSphere/VCenters/{vCenterName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ConnectedVMwarevSphere/vcenters/{vcenterName}": {
       "put": {
         "tags": [
           "VCenters"
@@ -431,7 +437,7 @@
           },
           {
             "in": "path",
-            "name": "vCenterName",
+            "name": "vcenterName",
             "required": true,
             "type": "string",
             "description": "Name of the vCenter."
@@ -503,7 +509,7 @@
           },
           {
             "in": "path",
-            "name": "vCenterName",
+            "name": "vcenterName",
             "required": true,
             "type": "string",
             "description": "Name of the vCenter."
@@ -554,7 +560,7 @@
           },
           {
             "in": "path",
-            "name": "vCenterName",
+            "name": "vcenterName",
             "required": true,
             "type": "string",
             "description": "Name of the vCenter."
@@ -610,7 +616,7 @@
           },
           {
             "in": "path",
-            "name": "vCenterName",
+            "name": "vcenterName",
             "required": true,
             "type": "string",
             "description": "Name of the vCenter."
@@ -652,7 +658,7 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.ConnectedVMwarevSphere/VCenters": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ConnectedVMwarevSphere/vcenters": {
       "get": {
         "tags": [
           "VCenters"
@@ -695,7 +701,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ConnectedVMwarevSphere/VCenters": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ConnectedVMwarevSphere/vcenters": {
       "get": {
         "tags": [
           "VCenters"
@@ -741,7 +747,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ConnectedVMwarevSphere/VirtualMachines/{virtualMachineName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ConnectedVMwarevSphere/virtualMachines/{virtualMachineName}": {
       "put": {
         "tags": [
           "VirtualMachines"
@@ -1176,7 +1182,7 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.ConnectedVMwarevSphere/VirtualMachines": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ConnectedVMwarevSphere/virtualMachines": {
       "get": {
         "tags": [
           "VirtualMachines"
@@ -1219,7 +1225,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ConnectedVMwarevSphere/VirtualMachines": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ConnectedVMwarevSphere/virtualMachines": {
       "get": {
         "tags": [
           "VirtualMachines"
@@ -1265,7 +1271,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ConnectedVMwarevSphere/VirtualMachineTemplates/{virtualMachineTemplateName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ConnectedVMwarevSphere/virtualMachineTemplates/{virtualMachineTemplateName}": {
       "put": {
         "tags": [
           "VirtualMachineTemplates"
@@ -1514,7 +1520,7 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.ConnectedVMwarevSphere/VirtualMachineTemplates": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ConnectedVMwarevSphere/virtualMachineTemplates": {
       "get": {
         "tags": [
           "VirtualMachineTemplates"
@@ -1557,7 +1563,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ConnectedVMwarevSphere/VirtualMachineTemplates": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ConnectedVMwarevSphere/virtualMachineTemplates": {
       "get": {
         "tags": [
           "VirtualMachineTemplates"
@@ -1603,7 +1609,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ConnectedVMwarevSphere/VirtualNetworks/{virtualNetworkName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ConnectedVMwarevSphere/virtualNetworks/{virtualNetworkName}": {
       "put": {
         "tags": [
           "VirtualNetworks"
@@ -1852,7 +1858,7 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.ConnectedVMwarevSphere/VirtualNetworks": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ConnectedVMwarevSphere/virtualNetworks": {
       "get": {
         "tags": [
           "VirtualNetworks"
@@ -1895,7 +1901,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ConnectedVMwarevSphere/VirtualNetworks": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ConnectedVMwarevSphere/virtualNetworks": {
       "get": {
         "tags": [
           "VirtualNetworks"
@@ -2189,9 +2195,6 @@
     },
     "ResourcePoolProperties": {
       "description": "Defines the resource properties.",
-      "required": [
-        "moRefId"
-      ],
       "type": "object",
       "properties": {
         "uuid": {
@@ -2205,6 +2208,10 @@
         },
         "moRefId": {
           "description": "Gets or sets the vCenter MoRef (Managed Object Reference) ID for the resource pool.",
+          "type": "string"
+        },
+        "inventoryItemId": {
+          "description": "Gets or sets the inventory Item ID for the resource pool.",
           "type": "string"
         },
         "moName": {
@@ -2851,6 +2858,10 @@
           "description": "Gets or sets the vCenter MoRef (Managed Object Reference) ID for the virtual machine.",
           "type": "string"
         },
+        "inventoryItemId": {
+          "description": "Gets or sets the inventory Item ID for the virtual machine.",
+          "type": "string"
+        },
         "moName": {
           "description": "Gets or sets the vCenter Managed Object name for the virtual machine.",
           "type": "string",
@@ -2966,6 +2977,8 @@
       "type": "object",
       "properties": {
         "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Resource properties.",
           "$ref": "#/definitions/VirtualMachineUpdateProperties"
         },
         "tags": {
@@ -3009,9 +3022,6 @@
     },
     "VirtualMachineTemplateProperties": {
       "description": "Defines the resource properties.",
-      "required": [
-        "moRefId"
-      ],
       "type": "object",
       "properties": {
         "uuid": {
@@ -3025,6 +3035,10 @@
         },
         "moRefId": {
           "description": "Gets or sets the vCenter MoRef (Managed Object Reference) ID for the virtual machine\r\ntemplate.",
+          "type": "string"
+        },
+        "inventoryItemId": {
+          "description": "Gets or sets the inventory Item ID for the virtual machine template.",
           "type": "string"
         },
         "moName": {
@@ -3172,9 +3186,6 @@
     },
     "VirtualNetworkProperties": {
       "description": "Defines the resource properties.",
-      "required": [
-        "moRefId"
-      ],
       "type": "object",
       "properties": {
         "uuid": {
@@ -3188,6 +3199,10 @@
         },
         "moRefId": {
           "description": "Gets or sets the vCenter MoRef (Managed Object Reference) ID for the virtual network.",
+          "type": "string"
+        },
+        "inventoryItemId": {
+          "description": "Gets or sets the inventory Item ID for the virtual network.",
           "type": "string"
         },
         "moName": {
@@ -3643,6 +3658,15 @@
         "managedResourceId": {
           "description": "Gets or sets the tracked resource id corresponding to the inventory resource.",
           "type": "string"
+        },
+        "moRefId": {
+          "description": "Gets or sets the MoRef (Managed Object Reference) ID for the inventory item.",
+          "type": "string"
+        },
+        "provisioningState": {
+          "description": "Gets or sets the provisioning state.",
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -3654,12 +3678,6 @@
           "$ref": "#/definitions/InventoryItemProperties"
         }
       ],
-      "properties": {
-        "moRefId": {
-          "description": "Gets or sets the vCenter MoRef (Managed Object Reference) ID for the resource pool.",
-          "type": "string"
-        }
-      },
       "x-ms-discriminator-value": "ResourcePool"
     },
     "VirtualMachineInventoryItem": {
@@ -3670,12 +3688,6 @@
           "$ref": "#/definitions/InventoryItemProperties"
         }
       ],
-      "properties": {
-        "moRefId": {
-          "description": "Gets or sets the vCenter MoRef (Managed Object Reference) ID for the VM.",
-          "type": "string"
-        }
-      },
       "x-ms-discriminator-value": "VirtualMachine"
     },
     "VirtualMachineTemplateInventoryItem": {
@@ -3686,12 +3698,6 @@
           "$ref": "#/definitions/InventoryItemProperties"
         }
       ],
-      "properties": {
-        "moRefId": {
-          "description": "Gets or sets the vCenter MoRef (Managed Object Reference) ID for the VM template.",
-          "type": "string"
-        }
-      },
       "x-ms-discriminator-value": "VirtualMachineTemplate"
     },
     "VirtualNetworkInventoryItem": {
@@ -3702,12 +3708,6 @@
           "$ref": "#/definitions/InventoryItemProperties"
         }
       ],
-      "properties": {
-        "moRefId": {
-          "description": "Gets or sets the vCenter MoRef (Managed Object Reference) ID for the virtual network.",
-          "type": "string"
-        }
-      },
       "x-ms-discriminator-value": "VirtualNetwork"
     },
     "InventoryType": {
