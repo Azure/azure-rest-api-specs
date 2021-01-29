@@ -81,6 +81,7 @@ azure-arm: true
 license-header: MICROSOFT_MIT_NO_VERSION
 namespace: azure.mgmt.purview
 package-name: azure-mgmt-purview
+package-version: 1.0.0
 clear-output-folder: true
 ```
 ``` yaml $(python) && $(python-mode) == 'update'
