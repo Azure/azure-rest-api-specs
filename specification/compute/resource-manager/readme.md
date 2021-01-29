@@ -223,7 +223,7 @@ input-file:
 - Microsoft.Compute/preview/2020-10-01-preview/cloudService.json
 ```
 
-### Tag: package-2020-12-01-only
+### Tag: package-2020-12-01-preview-only
 
 These settings apply only when `--tag=package-2020-12-01-preview-only` is specified on the command line.
 
@@ -237,7 +237,7 @@ input-file:
 
 These settings apply only when `--tag=package-2020-10-01-preview` is specified on the command line.
 
-``` yaml $(tag) == 'package-2020-10-01'
+``` yaml $(tag) == 'package-2020-10-01-preview'
 input-file:
 - Microsoft.Compute/stable/2020-06-01/compute.json
 - Microsoft.Compute/stable/2020-06-01/runCommands.json
