@@ -619,6 +619,51 @@
         },
         "x-ms-long-running-operation": true
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HDInsight/clusters/{clusterName}/azureasyncoperations/{operationId}": {
+      "get": {
+        "tags": [
+          "Clusters"
+        ],
+        "operationId": "Clusters_GetAzureAsyncOperationStatus",
+        "description": "The the async operation status.",
+        "x-ms-examples": {
+          "Get Async Operation Status of Creating Cluster": {
+            "$ref": "./examples/GetClusterCreatingAsyncOperationStatus.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/OperationIdParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./operations.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "OK response definition.",
+            "schema": {
+              "$ref": "#/definitions/AsyncOperationResult"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -930,6 +975,10 @@
           "format": "int32",
           "description": "The instance count of the cluster."
         },
+        "VMGroupName": {
+          "type": "string",
+          "description": "The name of the virtual machine group."
+        },
         "autoscale": {
           "$ref": "#/definitions/Autoscale",
           "x-ms-client-name": "autoscaleConfiguration",
@@ -1009,6 +1058,14 @@
         "msiResourceId": {
           "type": "string",
           "description": "The managed identity (MSI) that is allowed to access the storage account, only to be specified for Azure Data Lake Storage Gen 2."
+        },
+        "saskey": {
+          "type": "string",
+          "description": "The shared access signature key."
+        },
+        "fileshare": {
+          "type": "string",
+          "description": "The file share name."
         }
       },
       "description": "The storage Account."
@@ -1733,7 +1790,7 @@
       },
       "description": "Gateway settings."
     },
-    "OperationResource": {
+    "AsyncOperationResult": {
       "properties": {
         "status": {
           "type": "string",
@@ -1845,6 +1902,14 @@
       "required": true,
       "type": "string",
       "description": "The HDInsight client API Version."
+    },
+    "OperationIdParameter": {
+      "name": "operationId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The long running operation id.",
+      "x-ms-parameter-location": "method"
     }
   }
 }
