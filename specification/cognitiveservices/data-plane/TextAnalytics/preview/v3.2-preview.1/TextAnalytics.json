@@ -831,38 +831,6 @@
       }
     }
   },
-  "JobManifest": {
-    "properties": {
-      "tasks": {
-        "description": "The set of tasks to execute on the input documents. Cannot specify the same task more than once.",
-        "properties": {
-          "entityRecognitionTasks": {
-            "type": "array",
-            "items": {
-              "$ref": "#/definitions/EntitiesTask"
-            }
-          },
-          "entityRecognitionPiiTasks": {
-            "type": "array",
-            "items": {
-              "$ref": "#/definitions/PiiTask"
-            }
-          },
-          "keyPhraseExtractionTasks": {
-            "type": "array",
-            "items": {
-              "$ref": "#/definitions/KeyPhrasesTask"
-            }
-          }
-        },
-        "type": "object"
-      }
-    },
-    "required": [
-      "tasks"
-    ],
-    "type": "object"
-  },
   "MultiLanguageBatchInput": {
     "type": "object",
     "required": [
