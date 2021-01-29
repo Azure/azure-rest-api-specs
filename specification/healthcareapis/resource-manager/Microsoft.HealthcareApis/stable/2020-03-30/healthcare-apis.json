@@ -173,7 +173,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The tags for the resource were updated successfully.",
+            "description": "The tags/properties for the resource were updated successfully.",
             "schema": {
               "$ref": "#/definitions/ServicesDescription"
             }
@@ -818,6 +818,7 @@
       "properties": {
         "offerThroughput": {
           "type": "integer",
+          "format": "int32",
           "description": "The provisioned throughput for the backing database.",
           "readOnly": false,
           "minimum": 400,
@@ -881,6 +882,7 @@
         },
         "maxAge": {
           "type": "integer",
+          "format": "int32",
           "description": "The max age to be allowed via CORS.",
           "readOnly": false,
           "minimum": 0,
