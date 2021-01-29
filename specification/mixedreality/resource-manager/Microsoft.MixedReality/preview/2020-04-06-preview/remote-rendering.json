@@ -355,7 +355,14 @@
             "$ref": "./common.json#/parameters/accountNameParameter"
           },
           {
-            "$ref": "./common.json#/parameters/accountKeyRegenerateParameter"
+            "name": "regenerate",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "./common.json#/definitions/AccountKeyRegenerateRequest"
+            },
+            "x-ms-parameter-location": "method",
+            "description": "Required information for key regeneration."
           },
           {
             "$ref": "./common.json#/parameters/apiVersionParameter"
