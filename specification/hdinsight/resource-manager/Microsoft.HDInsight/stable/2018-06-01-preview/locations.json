@@ -150,6 +150,48 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.HDInsight/locations/{location}/azureasyncoperations/{operationId}": {
+      "get": {
+        "tags": [
+          "Regions"
+        ],
+        "operationId": "Locations_GetAzureAsyncOperationStatus",
+        "description": "Get the async operation status.",
+        "x-ms-examples": {
+          "Get the subscription billingSpecs for the specified location": {
+            "$ref": "./examples/HDI_Locations_GetAsyncOperationStatus.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/LocationParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/OperationIdParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./operations.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "OK response definition.",
+            "schema": {
+              "$ref": "./cluster.json#/definitions/AsyncOperationResult"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -165,7 +207,7 @@
           "description": "The display name"
         },
         "isDefault": {
-          "type": "string",
+          "type": "boolean",
           "description": "Whether or not the version is the default version."
         },
         "componentVersions": {
@@ -322,14 +364,14 @@
             "$ref": "#/definitions/RegionsCapability"
           }
         },
-        "vmSizes": {
+        "vmsizes": {
           "description": "The virtual machine sizes.",
           "type": "object",
           "additionalProperties": {
             "$ref": "#/definitions/VmSizesCapability"
           }
         },
-        "vmSize_filters": {
+        "vmsize_filters": {
           "description": "The virtual machine size compatibility filters.",
           "type": "array",
           "items": {
@@ -374,11 +416,12 @@
         "currentValue": {
           "description": "The current usage.",
           "type": "integer",
-          "format": "int32"
+          "format": "int64"
         },
         "limit": {
           "description": "The maximum allowed usage.",
-          "type": "integer"
+          "type": "integer",
+          "format": "int64"
         },
         "name": {
           "description": "The details about the localizable name of the used resource.",
@@ -654,6 +697,14 @@
       "required": true,
       "type": "string",
       "description": "The HDInsight client API Version."
+    },
+    "OperationIdParameter": {
+      "name": "operationId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The long running operation id.",
+      "x-ms-parameter-location": "method"
     }
   }
 }

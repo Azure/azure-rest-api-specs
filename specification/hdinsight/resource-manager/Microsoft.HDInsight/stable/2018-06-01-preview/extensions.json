@@ -262,7 +262,7 @@
           "200": {
             "description": "OK. The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/Extension"
+              "$ref": "#/definitions/ClusterMonitoringResponse"
             }
           }
         }
@@ -318,7 +318,7 @@
   },
   "definitions": {
     "Extension": {
-      "description": "Cluster monitoring extensions",
+      "description": "Cluster monitoring extensions.",
       "properties": {
         "workspaceId": {
           "description": "The workspace ID for the cluster monitoring extension.",
@@ -331,27 +331,27 @@
       }
     },
     "ClusterMonitoringResponse": {
-      "description": "The Operations Management Suite (OMS) status response",
+      "description": "The cluster monitoring status response.",
       "properties": {
         "clusterMonitoringEnabled": {
-          "description": "The status of the Operations Management Suite (OMS) on the HDInsight cluster.",
+          "description": "The status of the monitor on the HDInsight cluster.",
           "type": "boolean"
         },
         "workspaceId": {
-          "description": "The workspace ID of the Operations Management Suite (OMS) on the HDInsight cluster.",
+          "description": "The workspace ID of the monitor on the HDInsight cluster.",
           "type": "string"
         }
       }
     },
     "ClusterMonitoringRequest": {
-      "description": "The Operations Management Suite (OMS) parameters.",
+      "description": "The cluster monitor parameters.",
       "properties": {
         "workspaceId": {
-          "description": "The Operations Management Suite (OMS) workspace ID.",
+          "description": "The cluster monitor workspace ID.",
           "type": "string"
         },
         "primaryKey": {
-          "description": "The Operations Management Suite (OMS) workspace key.",
+          "description": "The cluster monitor workspace key.",
           "type": "string"
         }
       }
