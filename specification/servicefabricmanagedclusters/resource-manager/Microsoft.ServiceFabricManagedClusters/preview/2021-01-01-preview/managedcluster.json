@@ -375,6 +375,20 @@
         "ResourceMonitorService"
       ]
     },
+    "ApplicationTypeVersionsCleanupPolicy": {
+      "required": [
+        "maxUnusedVersionsToKeep"
+      ],
+      "properties": {
+        "maxUnusedVersionsToKeep": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0,
+          "description": "Number of unused versions per application type to keep."
+        }
+      },
+      "description": "The policy used to clean up unused versions."
+    },
     "AzureActiveDirectory": {
       "properties": {
         "tenantId": {
@@ -635,6 +649,10 @@
         "enableAutoOSUpgrade": {
           "type": "boolean",
           "description": "Setting this to true enables automatic OS upgrade for the node types that are created using any platform OS image with version 'latest'. The default value for this setting is false."
+        },
+        "applicationTypeVersionsCleanupPolicy": {
+          "$ref": "#/definitions/ApplicationTypeVersionsCleanupPolicy",
+          "description": "The policy used to clean up unused versions."
         }
       },
       "description": "Describes the managed cluster resource properties."
