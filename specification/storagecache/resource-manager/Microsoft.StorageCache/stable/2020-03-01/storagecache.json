@@ -1222,6 +1222,23 @@
           "type": "object",
           "description": "The error detail of the operation if any.",
           "$ref": "#/definitions/ErrorResponse"
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Additional operation specific properties",
+          "$ref": "#/definitions/AscOperationProperties"
+        }
+      }
+    },
+    "AscOperationProperties": {
+      "type": "object",
+      "description": "Operation specific output",
+      "properties": {
+        "output": {
+          "description": "Additional Operation Specific Properties",
+          "additionalProperties": {
+            "type": "object"
+          }
         }
       }
     },
