@@ -46,7 +46,7 @@
           }
         },
         "operationId": "IntelligencePacks_Disable",
-        "description": "Disables an intelligence pack for a given workspace.",
+        "description": "Legacy operation. Disables a Solution for a given workspace. This will break the reference of an existing Solution resource if it exists.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
@@ -59,7 +59,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the intelligence pack to be disabled."
+            "description": "The name of the Solution to be disabled."
           },
           {
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
@@ -87,7 +87,7 @@
           }
         },
         "operationId": "IntelligencePacks_Enable",
-        "description": "Enables an intelligence pack for a given workspace.",
+        "description": "Legacy operation. Enables a Solution for a given workspace. This does not create a Solution resource but has the same effect.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
@@ -100,7 +100,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the intelligence pack to be enabled."
+            "description": "The name of the Solution to be enabled."
           },
           {
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
@@ -128,7 +128,7 @@
           }
         },
         "operationId": "IntelligencePacks_List",
-        "description": "Lists all the intelligence packs possible and whether they are enabled or disabled for a given workspace.",
+        "description": "Legacy operation. Lists all the Solutions possible and whether they are enabled or disabled for a given workspace.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
@@ -162,15 +162,23 @@
       "properties": {
         "name": {
           "type": "string",
-          "description": "The name of the intelligence pack."
+          "description": "The name of the Solution."
         },
         "enabled": {
           "type": "boolean",
-          "description": "The enabled boolean for the intelligence pack."
+          "description": "The enabled boolean for the Solution."
         },
-        "displayName": {
+        "displayname": {
           "type": "string",
-          "description": "The display name of the intelligence pack."
+          "description": "The display name of the Solution."
+        },
+        "createdDate": {
+          "type": "string",
+          "description": "Creation date."
+        },
+        "modifiedDate": {
+          "type": "string",
+          "description": "Modification date."
         }
       },
       "description": "Intelligence Pack containing a string name and boolean indicating if it's enabled."

@@ -230,8 +230,13 @@
           "type": "string",
           "description": "The resource id of the resource that will be linked to the workspace. This should be used for linking resources which require write access"
         },
+        "resourceMetadata": {
+          "type": "string",
+          "description": "Custom metadata. See specific documentation for this linked service."
+        },
         "provisioningState": {
           "type": "string",
+          "readOnly": true,
           "description": "The provisioning state of the linked service.",
           "enum": [
             "Succeeded",
