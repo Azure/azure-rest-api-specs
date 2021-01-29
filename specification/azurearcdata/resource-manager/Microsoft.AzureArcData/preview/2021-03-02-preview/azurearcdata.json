@@ -1606,7 +1606,6 @@
         }
       },
       "required": [
-        "onPremiseProperty",
         "basicLoginInformation",
         "uploadServicePrincipal"
       ]
@@ -1628,7 +1627,11 @@
           "type": "string",
           "description": "Unique thumbprint returned to customer to verify the certificate being uploaded"
         }
-      }
+      },
+      "required": [
+        "id",
+        "publicSigningKey"
+      ]
     },
     "PostgresInstanceProperties": {
       "description": "Postgres Instance properties.",
