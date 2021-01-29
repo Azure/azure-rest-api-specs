@@ -8,6 +8,8 @@
     "component_name": "Thermostat_1o",
     "command_name": "CoolDown",
     "body": {
+      "connectionTimeout": 10,
+      "responseTimeout": 10,
       "request": {
         "tempVal": 30
       }
@@ -15,7 +17,15 @@
   },
   "responses": {
     "201": {
-      "body": {}
+      "body": {
+        "request": {
+          "tempVal": 30
+        },
+        "connectionTimeout": 10,
+        "responseTimeout": 10,
+        "response": "Sample response value",
+        "responseCode": 200
+      }
     }
   }
 }
