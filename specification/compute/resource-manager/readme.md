@@ -34,7 +34,7 @@ These are the global settings for the Compute API.
 title: ComputeManagementClient
 description: Compute Client
 openapi-type: arm
-tag: package-2020-12-01-preview
+tag: package-2020-12-01
 
 directive:
   - where:
@@ -209,11 +209,11 @@ directive:
       - ACS service is deprecated so a PATCH endpoint won't be implemented
 
 ```
-### Tag: package-2020-12-01-preview
+### Tag: package-2020-12-01
 
-These settings apply only when `--tag=package-2020-12-01-preview` is specified on the command line.
+These settings apply only when `--tag=package-2020-12-01` is specified on the command line.
 
-``` yaml $(tag) == 'package-2020-12-01-preview'
+``` yaml $(tag) == 'package-2020-12-01'
 input-file:
 - Microsoft.Compute/stable/2020-12-01/compute.json
 - Microsoft.Compute/stable/2020-12-01/runCommands.json
@@ -223,11 +223,11 @@ input-file:
 - Microsoft.Compute/preview/2020-10-01-preview/cloudService.json
 ```
 
-### Tag: package-2020-12-01-preview-only
+### Tag: package-2020-12-01-only
 
-These settings apply only when `--tag=package-2020-12-01-preview-only` is specified on the command line.
+These settings apply only when `--tag=package-2020-12-01-only` is specified on the command line.
 
-``` yaml $(tag) == 'package-2020-12-01-preview-only'
+``` yaml $(tag) == 'package-2020-12-01-only'
 input-file:
 - Microsoft.Compute/stable/2020-12-01/compute.json
 - Microsoft.Compute/stable/2020-12-01/runCommands.json
