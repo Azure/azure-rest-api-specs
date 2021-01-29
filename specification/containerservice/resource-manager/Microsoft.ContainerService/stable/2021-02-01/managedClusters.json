@@ -3831,13 +3831,14 @@
     "KubeletDiskType": {
       "type": "string",
       "enum": [
-        "OS"
+        "OS",
+        "Temporary"
       ],
       "x-ms-enum": {
         "name": "KubeletDiskType",
         "modelAsString": true
       },
-      "description": "KubeletDiskType determines the placement of emptyDir volumes, container runtime data root, and Kubelet ephemeral storage. Currently allows one value, OS, resulting in Kubelet using the OS disk for data."
+      "description": "KubeletDiskType determines the placement of emptyDir volumes, container runtime data root, and Kubelet ephemeral storage. Allowed values: 'OS', 'Temporary' (preview)."
     },
     "KubeletConfig": {
       "description": "Kubelet configurations of agent nodes.",
