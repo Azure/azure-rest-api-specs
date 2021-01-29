@@ -784,9 +784,13 @@
       "x-ms-client-flatten": true,
       "properties": {
         "keyVaultProperties": {
-          "$ref": "#/definitions/KeyVaultProperties",
-          "description": "Properties of KeyVault"
-        },
+		  "type": "array",
+		  "items": {
+			"$ref": "#/definitions/KeyVaultProperties"
+		  },
+		  "x-ms-client-name": "KeyVaultProperties",
+		  "description": "Properties of KeyVault"
+		},
         "keySource": {
           "type": "string",
           "description": "Enumerates the possible value of keySource for Encryption",
