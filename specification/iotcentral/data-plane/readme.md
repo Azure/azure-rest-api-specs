@@ -9,7 +9,6 @@ To see additional help and options, run:
 > `autorest --help`
 ---
 
-
 ## Configuration
 These are the global settings for the IoT Central API.
 ``` yaml
