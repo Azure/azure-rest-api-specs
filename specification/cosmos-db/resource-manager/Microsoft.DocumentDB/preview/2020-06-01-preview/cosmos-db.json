@@ -4298,45 +4298,6 @@
           }
         }
       }
-    },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.DocumentDB/locations/{location}/backupStorageRedundancies": {
-      "get": {
-        "operationId": "BackupStorageRedundancies_GetByLocation",
-        "x-ms-examples": {
-          "CosmosDBBackupStorageRedundanciesList": {
-            "$ref": "./examples/CosmosDBBackupStorageRedundanciesList.json"
-          }
-        },
-        "description": "Lists all the available backup redundancy types in a region.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/locationParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/BackupStorageRedundanciesResult"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/DefaultErrorResponse"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": null
-        }
-      }
     }
   },
   "definitions": {
@@ -7940,35 +7901,6 @@
           "readOnly": true,
           "format": "date-time",
           "description": "The time at which the regional restorable database account has been deleted (ISO-8601 format)."
-        }
-      }
-    },
-    "BackupStorageRedundanciesResult": {
-      "description": "Available backup storage redundancy types in selected location.",
-      "type": "object",
-      "properties": {
-        "location": {
-          "type": "string",
-          "description": "The selected location."
-        },
-        "properties": {
-          "type": "object",
-          "description": "Available backup storage redundancy types.",
-          "$ref": "#/definitions/BackupStorageRedundancyProperties"
-        }
-      }
-    },
-    "BackupStorageRedundancyProperties": {
-      "description": "Available backup storage redundancy types.",
-      "type": "object",
-      "properties": {
-        "backupStorageRedundancies": {
-          "readOnly": true,
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/BackupStorageRedundancy"
-          },
-          "description": "Available backup storage types in list."
         }
       }
     },
