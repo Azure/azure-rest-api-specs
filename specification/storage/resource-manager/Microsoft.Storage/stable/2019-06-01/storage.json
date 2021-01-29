@@ -3924,7 +3924,7 @@
       ],
       "description": "An object that defines the blob inventory rule filter conditions."
     },
-    "ErrorResponse": {
+    "ErrorResponseBody": {
       "properties": {
         "code": {
           "type": "string",
@@ -3933,6 +3933,15 @@
         "message": {
           "type": "string",
           "description": "A message describing the error, intended to be suitable for display in a user interface."
+        }
+      },
+      "description": "Error response body contract."
+    },
+    "ErrorResponse": {
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/ErrorResponseBody",
+          "description": "Azure Storage Resource Provider error response body."
         }
       },
       "description": "An error response from the storage resource provider."
