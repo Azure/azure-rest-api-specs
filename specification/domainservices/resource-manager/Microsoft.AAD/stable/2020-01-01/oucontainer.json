@@ -367,9 +367,39 @@
         "etag": {
           "type": "string",
           "description": "Resource etag"
+        },
+        "sku": {
+          "$ref": "#/definitions/ResourceSku",
+          "description": "Resource sku"
         }
       },
       "x-ms-azure-resource": true
+    },
+    "ResourceSku": {
+      "description": "Resource Sku.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "default": "",
+          "description": "Resource Sku Name"
+        },
+        "tier": {
+          "type": "string",
+          "description": "Resource Sku Tier"
+        },
+        "size": {
+          "type": "string",
+          "description": "Resource Sku Size"
+        },
+        "family": {
+          "type": "string",
+          "description": "Resource Sku Family"
+        },
+        "capacity": {
+          "type": "integer",
+          "description": "Resource Sku Capacity"
+        }
+      }
     },
     "OuContainerListResult": {
       "properties": {
