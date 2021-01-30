@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2019-11-01",
+    "version": "2020-09-01",
     "title": "DataShareManagementClient",
     "description": "Creates a Microsoft.DataShare management client."
   },
@@ -311,7 +311,7 @@
         }
       }
     },
-    "/providers/Microsoft.DataShare/ListInvitations": {
+    "/providers/Microsoft.DataShare/listInvitations": {
       "get": {
         "tags": [
           "ConsumerInvitation"
@@ -403,7 +403,7 @@
         }
       }
     },
-    "/providers/Microsoft.DataShare/locations/{location}/RejectInvitation": {
+    "/providers/Microsoft.DataShare/locations/{location}/rejectInvitation": {
       "post": {
         "tags": [
           "ConsumerInvitation"
@@ -588,6 +588,9 @@
           },
           "DataSets_SqlDBTable_Create": {
             "$ref": "./examples/DataSets_SqlDBTable_Create.json"
+          },
+          "DataSets_SynapseWorkspaceSqlPoolTable_Create": {
+            "$ref": "./examples/DataSets_SynapseWorkspaceSqlPoolTable_Create.json"
           }
         }
       },
@@ -857,6 +860,9 @@
           },
           "DataSetMappings_SqlDWDataSetToAdlsGen2File_Create": {
             "$ref": "./examples/DataSetMappings_SqlDWDataSetToAdlsGen2File_Create.json"
+          },
+          "DataSetMappings_SynapseWorkspaceSqlPoolTable_Create": {
+            "$ref": "./examples/DataSetMappings_SynapseWorkspaceSqlPoolTable_Create.json"
           }
         }
       },
@@ -1440,6 +1446,72 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataShare/accounts/{accountName}/shares/{shareName}/providerShareSubscriptions/{providerShareSubscriptionId}/adjust": {
+      "post": {
+        "tags": [
+          "Share"
+        ],
+        "summary": "Adjust the expiration date of a share subscription in a provider share.",
+        "description": "Adjust a share subscription's expiration date in a provider share",
+        "operationId": "ProviderShareSubscriptions_Adjust",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/accountName"
+          },
+          {
+            "name": "shareName",
+            "in": "path",
+            "description": "The name of the share.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "providerShareSubscriptionId",
+            "in": "path",
+            "description": "To locate shareSubscription",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "providerShareSubscription",
+            "in": "body",
+            "description": "The provider share subscription",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ProviderShareSubscription"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ProviderShareSubscription"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Microsoft.DataShare resource provider.",
+            "schema": {
+              "$ref": "#/definitions/DataShareError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ProviderShareSubscriptions_Adjust": {
+            "$ref": "./examples/ProviderShareSubscriptions_Adjust.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataShare/accounts/{accountName}/shares/{shareName}/providerShareSubscriptions/{providerShareSubscriptionId}/reinstate": {
       "post": {
         "tags": [
@@ -1474,6 +1546,15 @@
           },
           {
             "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "providerShareSubscription",
+            "in": "body",
+            "description": "The provider share subscription",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ProviderShareSubscription"
+            }
           }
         ],
         "responses": {
@@ -1985,7 +2066,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataShare/accounts/{accountName}/shareSubscriptions/{shareSubscriptionName}/ConsumerSourceDataSets": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataShare/accounts/{accountName}/shareSubscriptions/{shareSubscriptionName}/consumerSourceDataSets": {
       "get": {
         "tags": [
           "ShareSubscription"
@@ -2262,7 +2343,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataShare/accounts/{accountName}/shareSubscriptions/{shareSubscriptionName}/Synchronize": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataShare/accounts/{accountName}/shareSubscriptions/{shareSubscriptionName}/synchronize": {
       "post": {
         "tags": [
           "ShareSubscription"
@@ -2627,7 +2708,7 @@
           "SynchronizationSetting"
         ],
         "summary": "Adds a new synchronization setting to an existing share.",
-        "description": "Create or update a synchronizationSetting ",
+        "description": "Create a synchronizationSetting",
         "operationId": "SynchronizationSettings_Create",
         "parameters": [
           {
@@ -4219,6 +4300,12 @@
           "type": "string",
           "readOnly": true
         },
+        "expirationDate": {
+          "format": "date-time",
+          "description": "The expiration date for the share subscription created by accepting the invitation.",
+          "type": "string",
+          "readOnly": true
+        },
         "invitationId": {
           "description": "Unique id of the invitation.",
           "type": "string"
@@ -4367,7 +4454,8 @@
             "KustoCluster",
             "KustoDatabase",
             "SqlDBTable",
-            "SqlDWTable"
+            "SqlDWTable",
+            "SynapseWorkspaceSqlPoolTable"
           ],
           "type": "string",
           "readOnly": true,
@@ -4404,7 +4492,8 @@
             "KustoCluster",
             "KustoDatabase",
             "SqlDBTable",
-            "SqlDWTable"
+            "SqlDWTable",
+            "SynapseWorkspaceSqlPoolTable"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -4460,7 +4549,8 @@
             "KustoCluster",
             "KustoDatabase",
             "SqlDBTable",
-            "SqlDWTable"
+            "SqlDWTable",
+            "SynapseWorkspaceSqlPoolTable"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -4552,6 +4642,10 @@
           "description": "Name of the azure resource",
           "type": "string",
           "readOnly": true
+        },
+        "systemData": {
+          "$ref": "#/definitions/SystemData",
+          "description": "System Data of the Azure resource."
         },
         "tags": {
           "description": "Tags on the azure resource.",
@@ -4650,6 +4744,11 @@
       "description": "Invitation property bag.",
       "type": "object",
       "properties": {
+        "expirationDate": {
+          "format": "date-time",
+          "description": "The expiration date for the invitation and share subscription.",
+          "type": "string"
+        },
         "invitationId": {
           "description": "unique invitation id",
           "type": "string",
@@ -5039,6 +5138,10 @@
           "description": "enable regional mdm account",
           "type": "string"
         },
+        "fillGapWithZero": {
+          "description": "fill gap with zero",
+          "type": "string"
+        },
         "internalMetricName": {
           "description": "internal metric name",
           "type": "string"
@@ -5251,6 +5354,11 @@
           "type": "string",
           "readOnly": true
         },
+        "expirationDate": {
+          "format": "date-time",
+          "description": "Expiration date of the share subscription in UTC format",
+          "type": "string"
+        },
         "providerEmail": {
           "description": "Email of the provider who created the share",
           "type": "string",
@@ -5302,6 +5410,10 @@
           "description": "Name of the azure resource",
           "type": "string",
           "readOnly": true
+        },
+        "systemData": {
+          "$ref": "#/definitions/SystemData",
+          "description": "System Data of the Azure resource."
         },
         "type": {
           "description": "Type of the azure resource",
@@ -5678,6 +5790,11 @@
           "description": "Time at which the share subscription was created.",
           "type": "string",
           "readOnly": true
+        },
+        "expirationDate": {
+          "format": "date-time",
+          "description": "The expiration date of the share subscription.",
+          "type": "string"
         },
         "invitationId": {
           "description": "The invitation id.",
@@ -6241,6 +6358,113 @@
         }
       }
     },
+    "SynapseWorkspaceSqlPoolTableDataSet": {
+      "description": "A Synapse Workspace Sql Pool Table data set.",
+      "required": [
+        "properties",
+        "kind"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataSet"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SynapseWorkspaceSqlPoolTableDataSetProperties",
+          "description": "Synapse Workspace Sql Pool Table data set properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "x-ms-discriminator-value": "SynapseWorkspaceSqlPoolTable"
+    },
+    "SynapseWorkspaceSqlPoolTableDataSetMapping": {
+      "description": "A Synapse Workspace Sql Pool Table data set mapping",
+      "required": [
+        "properties",
+        "kind"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataSetMapping"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SynapseWorkspaceSqlPoolTableDataSetMappingProperties",
+          "description": "A Synapse Workspace Sql Pool Table data set mapping properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "x-ms-discriminator-value": "SynapseWorkspaceSqlPoolTable"
+    },
+    "SynapseWorkspaceSqlPoolTableDataSetMappingProperties": {
+      "description": "Properties of the Synapse Workspace SQL Pool Table data set mapping",
+      "required": [
+        "synapseWorkspaceSqlPoolTableResourceId",
+        "dataSetId"
+      ],
+      "type": "object",
+      "properties": {
+        "dataSetId": {
+          "description": "The id of the source data set.",
+          "type": "string"
+        },
+        "dataSetMappingStatus": {
+          "description": "Gets the status of the data set mapping.",
+          "enum": [
+            "Ok",
+            "Broken"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "dataSetMappingStatus",
+            "modelAsString": true
+          }
+        },
+        "provisioningState": {
+          "description": "Provisioning state of the data set mapping.",
+          "enum": [
+            "Succeeded",
+            "Creating",
+            "Deleting",
+            "Moving",
+            "Failed"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "provisioningState",
+            "modelAsString": true
+          }
+        },
+        "synapseWorkspaceSqlPoolTableResourceId": {
+          "description": "Resource id of the Synapse Workspace SQL Pool Table",
+          "type": "string"
+        }
+      }
+    },
+    "SynapseWorkspaceSqlPoolTableDataSetProperties": {
+      "description": "Properties of the Synapse Workspace SQL Pool Table data set.",
+      "required": [
+        "synapseWorkspaceSqlPoolTableResourceId"
+      ],
+      "type": "object",
+      "properties": {
+        "dataSetId": {
+          "description": "Unique id for identifying a data set resource",
+          "type": "string",
+          "readOnly": true
+        },
+        "synapseWorkspaceSqlPoolTableResourceId": {
+          "description": "Resource id of the Synapse Workspace SQL Pool Table",
+          "type": "string"
+        }
+      }
+    },
     "SynchronizationDetails": {
       "description": "Synchronization details at data set level",
       "type": "object",
@@ -6264,7 +6488,8 @@
             "KustoCluster",
             "KustoDatabase",
             "SqlDBTable",
-            "SqlDWTable"
+            "SqlDWTable",
+            "SynapseWorkspaceSqlPoolTable"
           ],
           "type": "string",
           "readOnly": true,
@@ -6433,6 +6658,38 @@
             "name": "synchronizationMode",
             "modelAsString": true
           }
+        }
+      }
+    },
+    "SystemData": {
+      "description": "Metadata pertaining to creation and last modification of the resource.",
+      "type": "object",
+      "properties": {
+        "createdAt": {
+          "format": "date-time",
+          "description": "The timestamp of resource creation (UTC).",
+          "type": "string"
+        },
+        "createdBy": {
+          "description": "The identity that created the resource.",
+          "type": "string"
+        },
+        "createdByType": {
+          "description": "The type of identity that created the resource. Possible values include: 'User', 'Application', 'ManagedIdentity', 'Key'.",
+          "type": "string"
+        },
+        "lastModifiedAt": {
+          "format": "date-time",
+          "description": "The type of identity that last modified the resource.",
+          "type": "string"
+        },
+        "lastModifiedBy": {
+          "description": "The identity that last modified the resource.",
+          "type": "string"
+        },
+        "lastModifiedByType": {
+          "description": "The type of identity that last modified the resource. Possible values include: 'User', 'Application', 'ManagedIdentity', 'Key'.",
+          "type": "string"
         }
       }
     },
