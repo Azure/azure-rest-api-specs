@@ -1748,7 +1748,18 @@
             }
           },
           "202": {
-            "description": "The operation was accepted and will be performed in the background."
+            "description": "The operation was accepted and will be performed in the background.",
+            "headers": {
+              "Location": {
+                "description": "The URL of the resource used to check the status of the asynchronous operation.",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "Suggested delay to check the status of the asynchronous operation. The value is an integer that represents the seconds.",
+                "type": "integer",
+                "format": "int32"
+              }
+            }
           },
           "204": {
             "description": "The operation was successful."

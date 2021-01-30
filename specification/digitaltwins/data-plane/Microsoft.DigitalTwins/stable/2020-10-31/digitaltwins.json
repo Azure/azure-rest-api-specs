@@ -266,7 +266,7 @@
           "Query"
         ],
         "operationId": "Query_QueryTwins",
-        "description": "Executes a query that allows traversing relationships and filtering by property values.\nStatus codes:\n* 200 OK\n* 400 Bad Request\n  * BadRequest - The continuation token is invalid.\n  * SqlQueryError - The query contains some errors.\n* 429 Too Many Requests\n  * QuotaReachedError - The maximum query rate limit has been reached.",
+        "description": "Executes a query that allows traversing relationships and filtering by property values.\nStatus codes:\n* 200 OK\n* 400 Bad Request\n  * BadRequest - The continuation token is invalid.\n  * SqlQueryError - The query contains some errors.\n  * TimeoutError - The query execution timed out after 60 seconds. Try simplifying the query or adding conditions to reduce the result size.\n * 429 Too Many Requests\n  * QuotaReachedError - The maximum query rate limit has been reached.",
         "x-ms-examples": {
           "Query for digital twins": {
             "$ref": "./examples/QueryFirstPage.json"

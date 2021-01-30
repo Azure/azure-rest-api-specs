@@ -205,6 +205,7 @@ input-file:
 - Microsoft.Insights/stable/2018-03-01/metricAlert_API.json
 - Microsoft.Insights/stable/2018-04-16/scheduledQueryRule_API.json
 - Microsoft.Insights/preview/2017-12-01-preview/metricNamespaces_API.json
+- Microsoft.Insights/stable/2018-09-01/metricBaselines_API.json
 ```
 
 ### Tag: package-2018-03
@@ -372,6 +373,7 @@ input-file:
 - Microsoft.Insights/stable/2018-09-01/actionGroups_API.json
 - Microsoft.Insights/stable/2018-09-01/baseline_API.json
 - Microsoft.Insights/stable/2018-09-01/calculateBaseline_API.json
+- Microsoft.Insights/stable/2018-09-01/metricBaselines_API.json
 ```
 
 
@@ -533,9 +535,6 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-net
-  - repo: azure-sdk-for-python
-    after_scripts:
-      - python ./scripts/multiapi_init_gen.py azure-mgmt-monitor
   - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
@@ -599,6 +598,21 @@ directive:
   - suppress: R4007
     from: metricBaselines_API.json
     reason: 'Updating the error response to the new format would be a breaking change.'
+  - suppress: R4007
+    from: alertRules_API.json
+    reason: 'Updating the error response to the new format would be a breaking change.'
+  - suppress: OBJECT_ADDITIONAL_PROPERTIES
+    from: alertRules_API.json
+    where: $.definitions.AlertRuleResource
+    reason: 'Action is expected to receive a subclass of Resource'
+  - suppress: OBJECT_ADDITIONAL_PROPERTIES
+    from: metricAlert_API.json
+    where: $.definitions.MetricAlertResource
+    reason: 'Action is expected to receive a subclass of Resource'
+  - from : scheduledQueryRule_API.json 
+    suppress:
+      - OBJECT_ADDITIONAL_PROPERTIES  
+    reason: "false alarm"
 ```
 
 ### Tag: profile-hybrid-2019-03-01
