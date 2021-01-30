@@ -1,0 +1,40 @@
+{
+  "parameters": {
+    "api-version": "2021-01-01-alpha",
+    "subscriptionId": "{subscriptionId}",
+    "resourceGroupName": "rg1",
+    "organization": "{organizationName}",
+    "body": {
+      "properties": {
+        "displayName": "Contoso Engineering",
+        "description": "Engineering organization"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/{subscriptionId}/resourceGroups/rg1/providers/Microsoft.DevTestCenter/organization/{organizationName}",
+        "name": "{organizationName}",
+        "type": "Microsoft.DevTestCenter/organizations",
+        "tags": {
+          "CostCode": "12345"
+        },
+        "location": "centralus",
+        "properties": {
+          "displayName": "Contoso Engineering",
+          "description": "Engineering organization",
+          "provisioningState": "Succeeded"
+        },
+        "systemData": {
+          "createdBy": "user1",
+          "createdByType": "User",
+          "createdAt": "2020-11-11T22:00:08.896Z",
+          "lastModifiedBy": "user2",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2020-11-11T22:00:10.896Z"
+        }
+      }
+    }
+  }
+}

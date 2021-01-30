@@ -1,0 +1,41 @@
+{
+  "parameters": {
+    "api-version": "2021-01-01-alpha",
+    "subscriptionId": "{subscriptionId}",
+    "resourceGroupName": "rg1",
+    "organization": "{organizationName}"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/{subscriptionId}/resourceGroups/rg1/providers/Microsoft.DevTestCenter/organization/{organizationName}/templatesources/contosorepo",
+            "name": "contosorepo",
+            "type": "Microsoft.DevTestCenter/organizations/templatesources",
+            "properties": {
+              "displayName": "Contoso Central Template Repository",
+              "gitHub": {
+                "uri": "https://github.com/Contoso/centralrepo-fake.git",
+                "branch": "main",
+                "securityTokenId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg/providers/Microsoft.KeyVault/vaults/projectKeyVault/secrets/CentralRepoPat",
+                "templatePath": "/templates"
+              },
+              "provisioningState": "Succeeded"
+            },
+            "systemData": {
+              "createdBy": "User1",
+              "createdByType": "User",
+              "createdAt": "2020-11-18T18:24:24.818Z",
+              "lastModifiedBy": "User1",
+              "lastModifiedByType": "User",
+              "lastModifiedAt": "2020-11-18T18:24:24.818Z"
+            },
+            "location": "centralus",
+            "tags": {}
+          }
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,50 @@
+{
+  "parameters": {
+    "api-version": "2021-01-01-alpha",
+    "subscriptionId": "{subscriptionId}",
+    "resourceGroupName": "rg1",
+    "organization": "{organizationName}",
+    "project": "{projectName}"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/{subscriptionId}/resourceGroups/rg1/providers/Microsoft.DevTestCenter/organization/{organizationName}/projects/{projectName}/environments/mydevenv",
+            "name": "mydevenv",
+            "type": "Microsoft.DevTestCenter/organizations/projects/environments",
+            "properties": {
+              "displayName": "Personal Dev Environment",
+              "type": "DevTest",
+              "templateId": "/subscriptions/{subscriptionId}/resourceGroups/rg1/providers/Microsoft.DevTestCenter/organization/{organizationName}/templatesources/contosorepo/templates/helloworld",
+              "deploymentParameters": {},
+              "provisioningState": "Succeeded",
+              "resources": [
+                {
+                  "id": "subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/deployedResourcesGroup1/providers/Microsoft.Web/sites/mytestservice",
+                  "endpoint": "mytestservice.azurewebsites.net",
+                  "type": "Microsoft.Web/sites"
+                }
+              ]
+            },
+            "systemData": {
+              "createdBy": "user1",
+              "createdByType": "User",
+              "createdAt": "2020-11-18T18:00:36.993Z",
+              "lastModifiedBy": "user1",
+              "lastModifiedByType": "User",
+              "lastModifiedAt": "2020-11-18T18:30:36.993Z"
+            },
+            "location": "centralus",
+            "tags": {
+              "Role": "Development",
+              "Tech": "NetCore",
+              "ProjectType": "WebApi"
+            }
+          }
+        ]
+      }
+    }
+  }
+}
