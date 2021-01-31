@@ -34,6 +34,7 @@ batch:
   - tag: package-2019-11-01-preview-only
   - tag: package-2019-10-17-preview-only
   - tag: package-2019-06-01-only
+  - tag: package-2020-10-01-only
   - tag: package-2019-03-01-only
   - tag: package-2018-11-27-preview-only
   - tag: package-2018-09-01-only
@@ -108,7 +109,15 @@ Please also specify `--python-sdks-folder=<path to the root directory of your az
 namespace: $(python-base-namespace).v2019_06_01
 output-folder: $(python-sdks-folder)/$(python-base-folder)/v2019_06_01
 ```
+### Tag: package-2020-10-01-only and python
 
+These settings apply only when `--tag=package-2020-10-01-only --python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
+
+``` yaml $(tag) == 'package-2020-10-01-only'
+namespace: $(python-base-namespace).v2020_10_01
+output-folder: $(python-sdks-folder)/$(python-base-folder)/v2020_10_01
+```
 ### Tag: package-2019-03-01-only and python
 
 These settings apply only when `--tag=package-2019-03-01-only --python` is specified on the command line.
