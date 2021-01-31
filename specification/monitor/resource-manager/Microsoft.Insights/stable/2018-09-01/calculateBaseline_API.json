@@ -181,6 +181,24 @@
           "type": "string",
           "readOnly": true,
           "description": "internal operation id"
+        },
+        "errorType": {
+          "type": "integer",
+          "format": "int32",
+          "enum": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            100,
+            200
+          ],
+          "x-ms-enum": {
+            "name": "ErrorType",
+            "modelAsString": false
+          },
+          "description": "The error type for calculating the baseline."
         }
       },
       "required": [
