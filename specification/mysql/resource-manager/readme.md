@@ -127,10 +127,6 @@ input-file:
 ``` yaml
 directive:
   - suppress: PathResourceProviderNamePascalCase
-    from: ServerSecurityAlertPolicies.json
-    reason: The name of the provider is Microsoft.DBforMySQL
-  - suppress: PathResourceProviderNamePascalCase
-    from: Servers.json
     reason: The name of the provider is Microsoft.DBforMySQL
   - suppress: OperationsApiResponseSchema
     from: mysql.json
