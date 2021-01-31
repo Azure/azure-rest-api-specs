@@ -34,6 +34,12 @@
             "schema": {
               "$ref": "#/definitions/OperationListResult"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "common.json#/definitions/CloudError"
+            }
           }
         },
         "x-ms-pageable": {
@@ -108,6 +114,10 @@
           "x-ms-client-flatten": true,
           "x-ms-client-name": "OperationProperties",
           "$ref": "#/definitions/OperationProperties"
+        },
+        "isDataAction": {
+          "type": "boolean",
+          "description": "Property to specify whether the action is a data action."
         }
       }
     },

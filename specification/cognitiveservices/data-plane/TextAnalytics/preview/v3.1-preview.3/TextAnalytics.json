@@ -954,7 +954,7 @@
     "AnalyzeJobState": {
       "allOf": [
         {
-          "$ref": "#/definitions/JobMetadata"
+          "$ref": "#/definitions/AnalyzeJobMetadata"
         },
         {
           "$ref": "#/definitions/TasksState"
@@ -1020,10 +1020,11 @@
         },
         "status": {
           "enum": [
-            "notstarted",
+            "notStarted",
             "running",
             "succeeded",
             "failed",
+            "rejected",
             "cancelled",
             "cancelling"
           ],
@@ -1034,7 +1035,6 @@
         }
       },
       "required": [
-        "name",
         "status",
         "lastUpdateDateTime"
       ],
@@ -1045,11 +1045,11 @@
         "tasks": {
           "properties": {
             "details": {
-              "properties": {
-                "allof": {
+              "allOf": [
+                {
                   "$ref": "#/definitions/TaskState"
                 }
-              },
+              ],
               "type": "object"
             },
             "completed": {
@@ -1078,7 +1078,10 @@
                       "results": {
                         "$ref": "#/definitions/EntitiesResult"
                       }
-                    }
+                    },
+                    "required": [
+                      "results"
+                    ]
                   }
                 ]
               }
@@ -1097,7 +1100,10 @@
                       "results": {
                         "$ref": "#/definitions/PiiResult"
                       }
-                    }
+                    },
+                    "required": [
+                      "results"
+                    ]
                   }
                 ]
               }
@@ -1116,7 +1122,10 @@
                       "results": {
                         "$ref": "#/definitions/KeyPhraseResult"
                       }
-                    }
+                    },
+                    "required": [
+                      "results"
+                    ]
                   }
                 ]
               }
@@ -1915,9 +1924,6 @@
           "format": "date-time",
           "type": "string"
         },
-        "displayName": {
-          "type": "string"
-        },
         "expirationDateTime": {
           "format": "date-time",
           "type": "string"
@@ -1954,6 +1960,21 @@
         "status"
       ],
       "type": "object"
+    },
+    "AnalyzeJobMetadata": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/JobMetadata"
+        },
+        {
+          "properties": {
+            "displayName": {
+              "type": "string"
+            }
+          }
+        }
+      ]
     },
     "KeyPhraseResult": {
       "type": "object",
