@@ -5,9 +5,8 @@
     "resourceGroupName": "myResourceGroup",
     "diskPoolName": "myDiskPool",
     "iscsiTargetName": "myIscsiTarget",
-    "iscsiTargetCreatePayload": {
+    "iscsiTargetUpdatePayload": {
       "properties": {
-        "targetIqn": "iqn.2005-03.org.iscsi:server1",
         "tpgs": [
           {
             "luns": [
@@ -27,11 +26,7 @@
                   "password": "some_password"
                 }
               }
-            ],
-            "attributes": {
-              "authentication": true,
-              "prodModeWriteProtect": false
-            }
+            ]
           }
         ]
       }
