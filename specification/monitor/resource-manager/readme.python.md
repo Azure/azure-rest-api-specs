@@ -34,7 +34,6 @@ batch:
   - tag: package-2019-11-01-preview-only
   - tag: package-2019-10-17-preview-only
   - tag: package-2019-06-01-only
-  - tag: package-2020-10-01-only
   - tag: package-2019-03-01-only
   - tag: package-2018-11-27-preview-only
   - tag: package-2018-09-01-only
