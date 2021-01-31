@@ -238,7 +238,7 @@ input-file:
 - Microsoft.Insights/preview/2017-11-01-preview/calculateBaseline_API.json
 - Microsoft.Insights/stable/2018-03-01/metricAlert_API.json
 - Microsoft.Insights/stable/2018-04-16/scheduledQueryRule_API.json
-- Microsoft.Insights/preview/2017-12-01-preview/metricNamespaces_API.json
+- Microsoft.Insights/stable/2018-09-01/metricBaselines_API.json
 ```
 
 ### Tag: package-2018-03
