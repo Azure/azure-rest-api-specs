@@ -1,5 +1,5 @@
 # Cognitive Services Translator Text SDK
-
+ 
 > see https://aka.ms/autorest
 
 Configuration for generating Translator Text SDK.
