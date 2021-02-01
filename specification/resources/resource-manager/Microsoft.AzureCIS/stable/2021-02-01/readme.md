@@ -10,4 +10,5 @@ openapi-subtype: rpaas
 ```yaml $(tag) == '2021-02-01'
 input-file: 
   - environment.json
+  - examples/CreateEnvironment.json
 ```
