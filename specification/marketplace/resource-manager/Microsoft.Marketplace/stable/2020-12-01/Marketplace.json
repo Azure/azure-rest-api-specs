@@ -81,7 +81,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "OK, notification was acknowledged by the RP" 
           },
           "default": {
             "description": "Microsoft.Marketplace error response describing why the operation failed.",
@@ -682,7 +682,8 @@
         },
         "nextLink": {
           "description": "URL to get the next set of notifications list results if there are any.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -812,7 +813,8 @@
         },
         "nextLink": {
           "description": "URL to get the next set of notifications list results if there are any.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -841,7 +843,7 @@
           "type": "string"
         },
         "offerDisplayName": {
-          "description": "Gets or sets offer display name",
+          "description": "Gets offer display name",
           "type": "string",
           "readOnly": true
         },
@@ -857,7 +859,7 @@
           }
         },
         "isClosed": {
-          "description": "Gets or sets a value indicating whether the request is closed",
+          "description": "Gets a value indicating whether the request is closed",
           "type": "boolean",
           "readOnly": true
         },
@@ -877,7 +879,7 @@
           "type": "string"
         },
         "status": {
-          "description": "Gets or sets the plan status",
+          "description": "Gets the plan status",
           "type": "string",
           "readOnly": true,
           "enum": [
@@ -892,8 +894,8 @@
           }
         },
         "requestDate": {
-          "description": "Gets or sets request date",
-          "type": "string",
+          "description": "Gets request date",
+          "type": "date-time",
           "readOnly": true
         },
         "justification": {
