@@ -1827,7 +1827,7 @@
         "relationType": {
           "description": "Type of relation. Examples include: `DosageOfMedication` or 'FrequencyOfMedication', etc.",
           "type": "string",
-          "x-extensible-enum":[
+          "enum":[
             "Abbreviation",
             "DirectionOfBodystructure",
             "DirectionOfCondition",
@@ -1849,7 +1849,11 @@
             "UnitOfExamination",
             "ValueOfCondition",
             "ValueOfExamination"
-          ]
+          ],
+          "x-ms-enum": {
+            "name": "relationType",
+            "modelAsString": true
+         }
         },
         "entities": {
           "description": "The entities in the relation.",
