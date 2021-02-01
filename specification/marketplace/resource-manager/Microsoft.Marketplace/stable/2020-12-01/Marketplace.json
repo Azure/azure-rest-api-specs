@@ -255,7 +255,7 @@
         }
       }
     },
-    "/providers/Microsoft.Marketplace/privateStores/{PrivateStoreId}/requestApprovals/{requestApprovalId}/withdrawPlan": {
+    "/providers/Microsoft.Marketplace/privateStores/{privateStoreId}/requestApprovals/{requestApprovalId}/withdrawPlan": {
       "parameters": [
         {
           "$ref": "#/parameters/PrivateStoreIdParameter"
@@ -503,7 +503,7 @@
             "$ref": "#/definitions/NewNotifications"
           }
         },
-        "requestsApprovals": {
+        "approvalRequests": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/RequestApprovalsDetails"
@@ -541,7 +541,8 @@
             "items": {
               "type": "string"
             }
-          }
+          },
+          "x-ms-client-flatten": true
         }
       }
     },
@@ -957,7 +958,8 @@
           "publisherId": {
             "description": "The offer's publisher id",
             "type": "string"
-          }
+          },
+          "x-ms-client-flatten": true
         }
       }
     },
