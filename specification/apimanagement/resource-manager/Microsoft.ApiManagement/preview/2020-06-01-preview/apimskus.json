@@ -58,7 +58,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/ResourceSkusResult"
+              "$ref": "#/definitions/ApiManagementSkusResult"
             }
           }
         },
@@ -69,24 +69,24 @@
     }
   },
   "definitions": {
-    "ResourceSkuCapacity": {
+    "ApiManagementSkuCapacity": {
       "properties": {
         "minimum": {
           "type": "integer",
           "readOnly": true,
-          "format": "int64",
+          "format": "int32",
           "description": "The minimum capacity."
         },
         "maximum": {
           "type": "integer",
           "readOnly": true,
-          "format": "int64",
+          "format": "int32",
           "description": "The maximum capacity that can be set."
         },
         "default": {
           "type": "integer",
           "readOnly": true,
-          "format": "int64",
+          "format": "int32",
           "description": "The default capacity."
         },
         "scaleType": {
@@ -99,14 +99,14 @@
             "None"
           ],
           "x-ms-enum": {
-            "name": "ResourceSkuCapacityScaleType",
+            "name": "ApiManagementSkuCapacityScaleType",
             "modelAsString": false
           }
         }
       },
       "description": "Describes scaling information of a SKU."
     },
-    "ResourceSkuCosts": {
+    "ApiManagementSkuCosts": {
       "properties": {
         "meterID": {
           "type": "string",
@@ -127,7 +127,7 @@
       },
       "description": "Describes metadata for retrieving price info."
     },
-    "ResourceSkuCapabilities": {
+    "ApiManagementSkuCapabilities": {
       "properties": {
         "name": {
           "type": "string",
@@ -142,7 +142,7 @@
       },
       "description": "Describes The SKU capabilities object."
     },
-    "ResourceSkuZoneDetails": {
+    "ApiManagementSkuZoneDetails": {
       "properties": {
         "name": {
           "type": "array",
@@ -156,14 +156,14 @@
           "type": "array",
           "readOnly": true,
           "items": {
-            "$ref": "#/definitions/ResourceSkuCapabilities"
+            "$ref": "#/definitions/ApiManagementSkuCapabilities"
           },
           "description": "A list of capabilities that are available for the SKU in the specified list of zones."
         }
       },
       "description": "Describes The zonal capabilities of a SKU."
     },
-    "ResourceSkuRestrictions": {
+    "ApiManagementSkuRestrictions": {
       "properties": {
         "type": {
           "type": "string",
@@ -174,7 +174,7 @@
             "Zone"
           ],
           "x-ms-enum": {
-            "name": "ResourceSkuRestrictionsType",
+            "name": "ApiManagementSkuRestrictionsType",
             "modelAsString": false
           }
         },
@@ -187,7 +187,7 @@
           "description": "The value of restrictions. If the restriction type is set to location. This would be different locations where the SKU is restricted."
         },
         "restrictionInfo": {
-          "$ref": "#/definitions/ResourceSkuRestrictionInfo",
+          "$ref": "#/definitions/ApiManagementSkuRestrictionInfo",
           "readOnly": true,
           "description": "The information about the restriction where the SKU cannot be used."
         },
@@ -200,14 +200,14 @@
             "NotAvailableForSubscription"
           ],
           "x-ms-enum": {
-            "name": "ResourceSkuRestrictionsReasonCode",
+            "name": "ApiManagementSkuRestrictionsReasonCode",
             "modelAsString": false
           }
         }
       },
       "description": "Describes scaling information of a SKU."
     },
-    "ResourceSku": {
+    "ApiManagementSku": {
       "properties": {
         "resourceType": {
           "readOnly": true,
@@ -240,7 +240,7 @@
           "description": "The Kind of resources that are supported in this SKU."
         },
         "capacity": {
-          "$ref": "#/definitions/ResourceSkuCapacity",
+          "$ref": "#/definitions/ApiManagementSkuCapacity",
           "readOnly": true,
           "description": "Specifies the number of virtual machines in the scale set."
         },
@@ -256,7 +256,7 @@
           "type": "array",
           "readOnly": true,
           "items": {
-            "$ref": "#/definitions/ResourceSkuLocationInfo"
+            "$ref": "#/definitions/ApiManagementSkuLocationInfo"
           },
           "description": "A list of locations and availability zones in those locations where the SKU is available."
         },
@@ -272,7 +272,7 @@
           "type": "array",
           "readOnly": true,
           "items": {
-            "$ref": "#/definitions/ResourceSkuCosts"
+            "$ref": "#/definitions/ApiManagementSkuCosts"
           },
           "description": "Metadata for retrieving price info."
         },
@@ -280,7 +280,7 @@
           "type": "array",
           "readOnly": true,
           "items": {
-            "$ref": "#/definitions/ResourceSkuCapabilities"
+            "$ref": "#/definitions/ApiManagementSkuCapabilities"
           },
           "description": "A name value pair to describe the capability."
         },
@@ -288,14 +288,14 @@
           "type": "array",
           "readOnly": true,
           "items": {
-            "$ref": "#/definitions/ResourceSkuRestrictions"
+            "$ref": "#/definitions/ApiManagementSkuRestrictions"
           },
           "description": "The restrictions because of which SKU cannot be used. This is empty if there are no restrictions."
         }
       },
       "description": "Describes an available ApiManagement SKU."
     },
-    "ResourceSkuLocationInfo": {
+    "ApiManagementSkuLocationInfo": {
       "properties": {
         "location": {
           "readOnly": true,
@@ -314,13 +314,13 @@
           "readOnly": true,
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ResourceSkuZoneDetails"
+            "$ref": "#/definitions/ApiManagementSkuZoneDetails"
           },
           "description": "Details of capabilities available to a SKU in specific zones."
         }
       }
     },
-    "ResourceSkuRestrictionInfo": {
+    "ApiManagementSkuRestrictionInfo": {
       "properties": {
         "locations": {
           "readOnly": true,
@@ -340,12 +340,12 @@
         }
       }
     },
-    "ResourceSkusResult": {
+    "ApiManagementSkusResult": {
       "properties": {
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ResourceSku"
+            "$ref": "#/definitions/ApiManagementSku"
           },
           "description": "The list of skus available for the subscription."
         },
