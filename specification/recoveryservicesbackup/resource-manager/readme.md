@@ -28,7 +28,7 @@ These are the global settings for the RecoveryServicesBackup API.
 title: Recovery Services Backup Client
 description: Open API 2.0 Specs for Azure RecoveryServices Backup service
 openapi-type: arm
-tag: package-2020-12
+tag: package-2021-01
 csharp-sdks-folder: ./Generated/CSharp
 python-sdks-folder: ./Generated/Python
 go-sdk-folder: ./Generated/Golang
@@ -45,6 +45,19 @@ model-validator: true
 semantic-validator: true
 message-format: json
 ```
+
+### Tag: package-2021-01
+
+These settings apply only when `--tag=package-2021-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-01'
+input-file:
+- Microsoft.RecoveryServices/stable/2021-01-01/bms.json
+- Microsoft.RecoveryServices/stable/2018-12-20/bms.json
+- Microsoft.RecoveryServices/stable/2017-07-01/bms.json
+- Microsoft.RecoveryServices/stable/2016-08-10/operations.json
+```
+
 ### Tag: package-2020-12
 
 These settings apply only when `--tag=package-2020-12` is specified on the command line.
