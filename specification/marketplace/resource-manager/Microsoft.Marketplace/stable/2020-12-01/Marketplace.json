@@ -516,34 +516,43 @@
       "type": "object",
       "properties": {
         "properties": {
-          "acknowledge": {
-            "description": "Gets or sets a value indicating whether acknowledge action flag is enabled",
-            "type": "boolean"
-          },
-          "dismiss": {
-            "description": "Gets or sets a value indicating whether dismiss action flag is enabled",
-            "type": "boolean"
-          },
-          "removeOffer": {
-            "description": "Gets or sets a value indicating whether remove offer action flag is enabled",
-            "type": "boolean"
-          },
-          "addPlans": {
-            "description": "Gets or sets added plans",
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
-          },
-          "removePlans": {
-            "description": "Gets or sets remove plans",
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
-          },
+          "$ref": "#/definitions/AcknowledgeOfferNotificationDetails",
+          "description": "Notification update request payload details",
           "x-ms-client-flatten": true
         }
+      }
+    },
+    "AcknowledgeOfferNotificationDetails": {
+      "description": "Notification update request payload details",
+      "type": "object",
+      "properties": {
+        "acknowledge": {
+          "description": "Gets or sets a value indicating whether acknowledge action flag is enabled",
+          "type": "boolean"
+        },
+        "dismiss": {
+          "description": "Gets or sets a value indicating whether dismiss action flag is enabled",
+          "type": "boolean"
+        },
+        "removeOffer": {
+          "description": "Gets or sets a value indicating whether remove offer action flag is enabled",
+          "type": "boolean"
+        },
+        "addPlans": {
+          "description": "Gets or sets added plans",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "removePlans": {
+          "description": "Gets or sets remove plans",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "x-ms-client-flatten": true
       }
     },
     "NewNotifications": {
@@ -947,20 +956,29 @@
       }
     },
     "WithdrawProperties": {
-      "description": "Return plan with request details",
+      "description": "Withdraw properties",
       "type": "object",
       "properties": {
         "properties": {
-          "planId": {
-            "description": "Gets or sets Plan Id ",
-            "type": "string"
-          },
-          "publisherId": {
-            "description": "The offer's publisher id",
-            "type": "string"
-          },
+          "$ref": "#/definitions/WithdrawDetails",
+          "description": "Withdraw properties details",
           "x-ms-client-flatten": true
         }
+      }
+    },
+    "WithdrawDetails": {
+      "description": "Withdraw properties details",
+      "type": "object",
+      "properties": {
+        "planId": {
+          "description": "Gets or sets Plan Id ",
+          "type": "string"
+        },
+        "publisherId": {
+          "description": "The offer's publisher id",
+          "type": "string"
+        },
+        "x-ms-client-flatten": true
       }
     },
     "Resource": {
