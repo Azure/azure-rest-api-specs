@@ -76,7 +76,7 @@ python:
   payload-flattening-threshold: 2
   namespace: azure.cognitiveservices.translatortext
   package-name: azure-cognitiveservices-translatortext
-	package-version: 1.0.0
+  package-version: 1.0.0
   clear-output-folder: true
 ```
 ``` yaml $(python) && $(python-mode) == 'update'
