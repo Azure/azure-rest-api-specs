@@ -17,6 +17,7 @@ output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-recoveryservicesbac
 
 ``` yaml $(java) && $(multiapi)
 batch:
+  - tag: package-2021-01
   - tag: package-2020-12
   - tag: package-2016-08
   - tag: package-2020-02
@@ -25,6 +26,19 @@ directive:
       from: Operations_List
       to: Operation_List
 ```
+### Tag: package-2021-01 and java
+
+These settings apply only when `--tag=package-2021-01 --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2021-01' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.recoveryservices.backup.v2021_01_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/recoveryservices.backup/mgmt-v2021_01_01
+regenerate-manager: true
+generate-interface: true
+```
+
 ### Tag: package-2020-12 and java
 
 These settings apply only when `--tag=package-2020-12 --java` is specified on the command line.
