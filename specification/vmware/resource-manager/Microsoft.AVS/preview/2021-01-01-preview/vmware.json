@@ -944,7 +944,101 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/clusters/{clusterName}/datastores": {
+      "get": {
+        "operationId": "Datastores_List",
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "tags": [
+          "Datastores"
+        ],
+        "summary": "List cloud datastores in a private cloud",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/privateCloudName"
+          },
+          {
+            "$ref": "#/parameters/clusterName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/DatastoreList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Datastores_List": {
+            "$ref": "./examples/Datastores_List.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/clusters/{clusterName}/datastores/{datastoreName}": {
+      "get": {
+        "operationId": "Datastores_Get",
+        "tags": [
+          "Datastores"
+        ],
+        "summary": "Get a datastore in a private cloud",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/privateCloudName"
+          },
+          {
+            "$ref": "#/parameters/clusterName"
+          },
+          {
+            "$ref": "#/parameters/datastoreName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/Datastore"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Datastores_Get": {
+            "$ref": "./examples/Datastores_Get.json"
+          }
+        }
+      },
       "put": {
         "operationId": "Datastores_Create",
         "x-ms-long-running-operation": true,
@@ -960,25 +1054,13 @@
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "privateCloudName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the private cloud."
+            "$ref": "#/parameters/privateCloudName"
           },
           {
-            "name": "clusterName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the cluster."
+            "$ref": "#/parameters/clusterName"
           },
           {
-            "name": "datastoreName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the datastore."
+            "$ref": "#/parameters/datastoreName"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
@@ -1045,7 +1127,7 @@
             "description": "Accepted. The delete will complete asynchronously"
           },
           "204": {
-            "description": "No Content. No cluster to delete"
+            "description": "No Content. No datastore to delete"
           },
           "default": {
             "description": "Error response describing why the operation failed",
@@ -4370,6 +4452,24 @@
         }
       }
     },
+    "DatastoreList": {
+      "description": "A paged list of datastores",
+      "properties": {
+        "value": {
+          "description": "The items on a page",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/Datastore"
+          }
+        },
+        "nextLink": {
+          "description": "URL to get the next page if any",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
     "Datastore": {
       "description": "A datastore resource",
       "allOf": [
@@ -4431,9 +4531,12 @@
     "DiskPoolVolumeProperties": {
       "description": "A model which holds properties of an iSCSI volume of Microsoft.StoragePool provider",
       "properties": {
-        "targetId": {
-          "type": "string",
-          "description": "Resource ID of the iSCSI target"
+        "endpoints": {
+          "description": "iSCSI provider target IP address list",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         },
         "lunName": {
           "type": "string",
