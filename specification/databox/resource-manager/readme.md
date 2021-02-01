@@ -106,6 +106,12 @@ csharp:
   payload-flattening-threshold: 2
   output-folder: $(csharp-sdks-folder)/databox/Microsoft.Azure.Management.DataBox/src/Generated
   clear-output-folder: true
+  
+directive:
+- from: swagger-document
+  where: $.definitions.ShippingAddress
+  transform: >
+    $.required = [ "streetAddress1", "country", "postalCode" ];
 ```
 
 ## Python

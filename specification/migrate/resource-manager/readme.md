@@ -68,6 +68,11 @@ To see additional help and options, run:
 
 These are the global settings for the API.
 
+``` yaml
+openapi-type: arm
+tag: package-2018-09
+```
+
 ### Tag: package-2018-02
 
 These settings apply only when `--tag=package-2018-02` is specified on the command line.
