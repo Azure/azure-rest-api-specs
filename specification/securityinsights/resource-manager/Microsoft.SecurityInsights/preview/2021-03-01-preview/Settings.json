@@ -37,7 +37,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/settings": {
       "get": {
         "x-ms-examples": {
-          "Get EyesOn settings.": {
+          "Get all settings.": {
             "$ref": "./examples/settings/GetAllSettings.json"
           }
         },
@@ -256,7 +256,10 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "OK",
+            "schema": {
+              "$ref": "#/parameters/OnboardingRequest"
+            }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
