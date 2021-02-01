@@ -16,7 +16,7 @@
     "application/json"
   ],
   "paths": {
-    "/providers/Microsoft.Marketplace/privateStores/{privateStoreId}/notifications": {
+    "/providers/Microsoft.Marketplace/privateStores/{privateStoreId}/queryNotificationsState": {
       "parameters": [
         {
           "$ref": "#/parameters/PrivateStoreIdParameter"
@@ -25,17 +25,17 @@
           "$ref": "#/parameters/ApiVersionParameter"
         }
       ],
-      "get": {
+      "post": {
         "tags": [
           "PrivateStores"
         ],
-        "operationId": "PrivateStore_Notifications",
-        "description": "Get all private store notifications",
+        "operationId": "PrivateStore_QueryNotificationsState",
+        "description": "Get private store notifications state",
         "responses": {
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/PrivateStoreNotificationsList"
+              "$ref": "#/definitions/PrivateStoreNotificationsState"
             }
           },
           "default": {
@@ -46,13 +46,13 @@
           }
         },
         "x-ms-examples": {
-          "GetPrivateStoreNotifications": {
-            "$ref": "./examples/GetPrivateStoreNotificationsList.json"
+          "NotificationsState": {
+            "$ref": "./examples/NotificationsState.json"
           }
         }
       }
     },
-    "/providers/Microsoft.Marketplace/privateStores/{privateStoreId}/notifications/{offerId}": {
+    "/providers/Microsoft.Marketplace/privateStores/{privateStoreId}/offers/{offerId}/acknowledgeNotification": {
       "parameters": [
         {
           "$ref": "#/parameters/PrivateStoreIdParameter"
@@ -64,27 +64,24 @@
           "$ref": "#/parameters/ApiVersionParameter"
         }
       ],
-      "put": {
+      "post": {
         "tags": [
           "PrivateStores"
         ],
-        "operationId": "PrivateStore_UpdateNotification",
-        "description": "Update notification for offer",
+        "operationId": "PrivateStore_AcknowledgeOfferNotification",
+        "description": "Acknowledge notification for offer",
         "parameters": [
           {
             "in": "body",
             "name": "payload",
             "schema": {
-              "$ref": "#/definitions/PrivateStoreNotificationsProperties"
+              "$ref": "#/definitions/AcknowledgeOfferNotificationProperties"
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/PrivateStoreNotificationsResource"
-            }
+            "description": "OK"
           },
           "default": {
             "description": "Microsoft.Marketplace error response describing why the operation failed.",
@@ -94,34 +91,8 @@
           }
         },
         "x-ms-examples": {
-          "UpdateOfferNotification": {
-            "$ref": "./examples/UpdateOfferNotification.json"
-          }
-        }
-      },
-      "get": {
-        "tags": [
-          "PrivateStores"
-        ],
-        "operationId": "PrivateStore_GetNotification",
-        "description": "Get private store notification",
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/PrivateStoreNotificationsResource"
-            }
-          },
-          "default": {
-            "description": "Microsoft.Marketplace error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "GetPrivateStoreNotification": {
-            "$ref": "./examples/GetPrivateStoreNotification.json"
+          "AcknowledgeNotification": {
+            "$ref": "./examples/AcknowledgeNotification.json"
           }
         }
       }
@@ -139,13 +110,13 @@
         "tags": [
           "PrivateStores"
         ],
-        "operationId": "PrivateStore_GetAllApprovalRequestsList",
-        "description": "Get all opened approval requests",
+        "operationId": "PrivateStore_GetApprovalRequestsList",
+        "description": "Get all open approval requests of current user",
         "responses": {
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/ApprovalRequestList"
+              "$ref": "#/definitions/RequestApprovalsList"
             }
           },
           "default": {
@@ -156,121 +127,35 @@
           }
         },
         "x-ms-examples": {
-          "GetAllApprovalRequests": {
-            "$ref": "./examples/GetAllApprovalRequestsList.json"
+          "GetApprovalRequestsList": {
+            "$ref": "./examples/GetApprovalRequestsList.json"
           }
         }
       }
     },
-    "/providers/Microsoft.Marketplace/privateStores/{privateStoreId}/requestApprovals/{offerId}/query": {
+    "/providers/Microsoft.Marketplace/privateStores/{privateStoreId}/requestApprovals/{requestApprovalId}": {
       "parameters": [
         {
           "$ref": "#/parameters/PrivateStoreIdParameter"
         },
         {
-          "$ref": "#/parameters/OfferIdPathParameter"
+          "$ref": "#/parameters/RequestApprovalIdPathParameter"
         },
         {
           "$ref": "#/parameters/ApiVersionParameter"
         }
       ],
-      "post": {
-        "tags": [
-          "PrivateStores"
-        ],
-        "operationId": "PrivateStore_GetOfferWithApprovalRequestsStatuses",
-        "description": "Get offer with approval request status foreach plan, this api is used as a complex GET operation.",
-        "parameters": [
-          {
-            "in": "body",
-            "name": "payload",
-            "schema": {
-              "$ref": "#/definitions/PrivateStoreApprovalRequestProperties"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/PrivateStoreApprovalRequestResource"
-            }
-          },
-          "default": {
-            "description": "Microsoft.Marketplace error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "GetPrivateStoreOfferWithRequestApproval": {
-            "$ref": "./examples/GetPrivateStoreOfferWithRequestApproval.json"
-          }
-        }
-      }
-    },
-    "/providers/Microsoft.Marketplace/privateStores/{privateStoreId}/requestApprovals/{offerId}": {
-      "parameters": [
-        {
-          "$ref": "#/parameters/PrivateStoreIdParameter"
-        },
-        {
-          "$ref": "#/parameters/OfferIdPathParameter"
-        },
-        {
-          "$ref": "#/parameters/ApiVersionParameter"
-        }
-      ],
-      "put": {
-        "tags": [
-          "PrivateStores"
-        ],
-        "operationId": "PrivateStore_CreateApprovalRequest",
-        "description": "Create approval request",
-        "parameters": [
-          {
-            "in": "body",
-            "name": "payload",
-            "schema": {
-              "$ref": "#/definitions/PrivateStoreApprovalRequestProperties"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/PrivateStoreApprovalRequestResource"
-            }
-          },
-          "default": {
-            "description": "Microsoft.Marketplace error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "UpsertApprovalRequest": {
-            "$ref": "./examples/UpsertApprovalRequest.json"
-          },
-          "DeleteApprovalRequest": {
-            "$ref": "./examples/DeleteApprovalRequest.json"
-          }
-        }
-      },
       "get": {
         "tags": [
           "PrivateStores"
         ],
-        "operationId": "PrivateStore_GetApprovalRequest",
-        "description": "Get approval request",
+        "operationId": "PrivateStore_GetRequestApproval",
+        "description": "Get open request approval details",
         "responses": {
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/PrivateStoreApprovalRequestResource"
+              "$ref": "#/definitions/RequestApprovalResource"
             }
           },
           "default": {
@@ -282,51 +167,7 @@
         },
         "x-ms-examples": {
           "GetApprovalRequest": {
-            "$ref": "./examples/GetApprovalRequest.json"
-          }
-        }
-      }
-    },
-    "/providers/Microsoft.Marketplace/privateStores/{privateStoreId}/adminRequestApprovals/{offerId}": {
-      "parameters": [
-        {
-          "$ref": "#/parameters/PrivateStoreIdParameter"
-        },
-        {
-          "$ref": "#/parameters/OfferIdPathParameter"
-        },
-        {
-          "$ref": "#/parameters/ApiVersionParameter"
-        }
-      ],
-      "get": {
-        "tags": [
-          "PrivateStores"
-        ],
-        "operationId": "PrivateStore_GetOfferAdminApprovalRequests",
-        "description": "Get open approval requests for offer, admin view",
-        "parameters": [
-          {
-            "$ref": "#/parameters/PublisherIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/PrivateStoreAdminApprovalRequestResource"
-            }
-          },
-          "default": {
-            "description": "Microsoft.Marketplace error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "GetOfferAdminApprovalRequests": {
-            "$ref": "./examples/GetOfferAdminApprovalRequests.json"
+            "$ref": "./examples/GetRequestApproval.json"
           }
         }
       },
@@ -334,14 +175,14 @@
         "tags": [
           "PrivateStores"
         ],
-        "operationId": "PrivateStore_UpdateAdminAction",
-        "description": "Update the admin action, weather the request is approved or rejected ",
+        "operationId": "PrivateStore_CreateApprovalRequest",
+        "description": "Create approval request",
         "parameters": [
           {
             "in": "body",
             "name": "payload",
             "schema": {
-              "$ref": "#/definitions/PrivateStoreAdminApprovalRequestProperties"
+              "$ref": "#/definitions/RequestApprovalResource"
             }
           }
         ],
@@ -349,7 +190,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/PrivateStoreAdminApprovalRequestResource"
+              "$ref": "#/definitions/RequestApprovalResource"
             }
           },
           "default": {
@@ -360,8 +201,101 @@
           }
         },
         "x-ms-examples": {
-          "UpdateAdminAction": {
-            "$ref": "./examples/UpdateAdminAction.json"
+          "CreateApprovalRequest": {
+            "$ref": "./examples/CreateApprovalRequest.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Marketplace/privateStores/{privateStoreId}/requestApprovals/{requestApprovalId}/query": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/PrivateStoreIdParameter"
+        },
+        {
+          "$ref": "#/parameters/RequestApprovalIdPathParameter"
+        },
+        {
+          "$ref": "#/parameters/ApiVersionParameter"
+        }
+      ],
+      "post": {
+        "tags": [
+          "PrivateStores"
+        ],
+        "operationId": "PrivateStore_QueryRequestApproval",
+        "description": "Get request statuses foreach plan, this api is used as a complex GET action.",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "payload",
+            "schema": {
+              "$ref": "#/definitions/QueryRequestApprovalProperties"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/QueryRequestApproval"
+            }
+          },
+          "default": {
+            "description": "Microsoft.Marketplace error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "QueryRequestApproval": {
+            "$ref": "./examples/QueryRequestApproval.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Marketplace/privateStores/{PrivateStoreId}/requestApprovals/{requestApprovalId}/withdrawPlan": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/PrivateStoreIdParameter"
+        },
+        {
+          "$ref": "#/parameters/RequestApprovalIdPathParameter"
+        },
+        {
+          "$ref": "#/parameters/ApiVersionParameter"
+        }
+      ],
+      "post": {
+        "tags": [
+          "PrivateStores"
+        ],
+        "operationId": "PrivateStore_WithdrawPlan",
+        "description": "Withdraw a user request approval on specific plan",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "payload",
+            "schema": {
+              "$ref": "#/definitions/WithdrawProperties"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "default": {
+            "description": "Microsoft.Marketplace error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "WithdrawPlan": {
+            "$ref": "./examples/WithdrawPlan.json"
           }
         }
       }
@@ -379,13 +313,13 @@
         "tags": [
           "PrivateStores"
         ],
-        "operationId": "PrivateStore_GetAdminApprovalRequestsList",
-        "description": "Get list of approval request, admin view",
+        "operationId": "PrivateStore_AdminRequestApprovalsList",
+        "description": "Get list of admin request approvals",
         "responses": {
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/AdminApprovalRequestList"
+              "$ref": "#/definitions/AdminRequestApprovalsList"
             }
           },
           "default": {
@@ -396,8 +330,87 @@
           }
         },
         "x-ms-examples": {
-          "GetAdminApprovalRequestsList": {
-            "$ref": "./examples/GetAdminApprovalRequestsList.json"
+          "AdminRequestApprovalsList": {
+            "$ref": "./examples/AdminRequestApprovalsList.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Marketplace/privateStores/{privateStoreId}/adminRequestApprovals/{adminRequestApprovalId}": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/PrivateStoreIdParameter"
+        },
+        {
+          "$ref": "#/parameters/AdminRequestApprovalIdPathParameter"
+        },
+        {
+          "$ref": "#/parameters/ApiVersionParameter"
+        }
+      ],
+      "get": {
+        "tags": [
+          "PrivateStores"
+        ],
+        "operationId": "PrivateStore_GetAdminRequestApproval",
+        "description": "Get open approval requests",
+        "parameters": [
+          {
+            "$ref": "#/parameters/PublisherIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AdminRequestApprovalsResource"
+            }
+          },
+          "default": {
+            "description": "Microsoft.Marketplace error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetAdminRequestApproval": {
+            "$ref": "./examples/GetAdminRequestApproval.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "PrivateStores"
+        ],
+        "operationId": "PrivateStore_UpdateAdminRequestApproval",
+        "description": "Update the admin action, weather the request is approved or rejected and the approved plans",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "payload",
+            "schema": {
+              "$ref": "#/definitions/AdminRequestApprovalsResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AdminRequestApprovalsResource"
+            }
+          },
+          "default": {
+            "description": "Microsoft.Marketplace error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "UpdateAdminRequestApproval": {
+            "$ref": "./examples/UpdateAdminRequestApproval.json"
           }
         }
       }
@@ -435,13 +448,21 @@
       "required": true,
       "description": "The offer ID to update or delete"
     },
-    "PlanIdParameter": {
-      "name": "planId",
+    "AdminRequestApprovalIdPathParameter": {
       "in": "path",
+      "name": "adminRequestApprovalId",
       "type": "string",
       "x-ms-parameter-location": "method",
       "required": true,
-      "description": "The plan ID to update or delete"
+      "description": "The admin request approval ID to get create or update"
+    },
+    "RequestApprovalIdPathParameter": {
+      "in": "path",
+      "name": "requestApprovalId",
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "required": true,
+      "description": "The request approval ID to get create or update"
     }
   },
   "definitions": {
@@ -466,8 +487,8 @@
         }
       }
     },
-    "PrivateStoreNotifications": {
-      "description": "Get all private store notifications",
+    "PrivateStoreNotificationsState": {
+      "description": "Get private store notifications state",
       "type": "object",
       "properties": {
         "stopSellNotifications": {
@@ -482,308 +503,45 @@
             "$ref": "#/definitions/NewNotifications"
           }
         },
-        "approvalRequests": {
+        "requestsApprovals": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ApprovalRequestsDetails"
+            "$ref": "#/definitions/RequestApprovalsDetails"
           }
         }
       }
     },
-    "UpdateNotificationDetails": {
+    "AcknowledgeOfferNotificationProperties": {
       "description": "Notification update request payload",
       "type": "object",
       "properties": {
-        "acknowledge": {
-          "description": "Gets or sets a value indicating whether acknowledge action flag is enabled",
-          "type": "boolean"
-        },
-        "dismiss": {
-          "description": "Gets or sets a value indicating whether dismiss action flag is enabled",
-          "type": "boolean"
-        },
-        "removeOffer": {
-          "description": "Gets or sets a value indicating whether remove offer action flag is enabled",
-          "type": "boolean"
-        },
-        "addPlans": {
-          "description": "Gets or sets added plans",
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "removePlans": {
-          "description": "Gets or sets remove plans",
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "AdminApprovalRequestList": {
-      "description": "Describes the json payload for the list of opened approval requests, admin view",
-      "type": "object",
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/PrivateStoreAdminApprovalRequestResource"
-          }
-        },
-        "nextLink": {
-          "description": "URL to get the next set of ApprovalRequests list results if there are any.",
-          "type": "string"
-        }
-      }
-    },
-    "ApprovalRequestList": {
-      "description": "Describes the json payload for the list of opened approval requests",
-      "type": "object",
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/PrivateStoreApprovalRequestResource"
-          }
-        },
-        "nextLink": {
-          "description": "URL to get the next set of ApprovalRequests list results if there are any.",
-          "type": "string"
-        }
-      }
-    },
-    "OfferDetails": {
-      "description": "Offer details needed to get the plans statuses",
-      "type": "object",
-      "properties": {
-        "publisherId": {
-          "description": "The offer's publisher id",
-          "type": "string"
-        },
-        "planIds": {
-          "description": "Current plans list",
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "PrivateStoreOfferWithRequestApproval": {
-      "description": "Gets the offer plans list with indication on each plan whether is allowed by the admin, has pending request or not requested yet",
-      "type": "object",
-      "properties": {
-        "uniqueOfferId": {
-          "description": "Gets or sets unique offer id.",
-          "type": "string"
-        },
-        "plansDetails": {
-          "description": "Gets or sets the plans details",
-          "type": "object",
-          "additionalProperties": {
-            "$ref": "#/definitions/planDetails"
-          }
-        },
-        "etag": {
-          "description": "Gets or sets e-tag field ",
-          "type": "string"
-        },
-        "messageCode": {
-          "description": "Gets or sets the notification message id",
-          "type": "integer",
-          "format": "int64"
-        }
-      }
-    },
-    "planDetails": {
-      "description": "Return plan with request details",
-      "type": "object",
-      "properties": {
-        "planId": {
-          "description": "Gets or sets Plan Id ",
-          "type": "string"
-        },
-        "status": {
-          "description": "Gets or sets the plan status",
-          "type": "string",
-          "enum": [
-            "AllowedByAdmin",
-            "Pending",
-            "None"
-          ],
-          "x-ms-enum": {
-            "name": "plansStatus",
-            "modelAsString": true
-          }
-        },
-        "requestDate": {
-          "description": "Gets or sets request date",
-          "type": "string"
-        },
-        "justification": {
-          "description": "Gets or sets user's justification for the plan's request",
-          "type": "string"
-        }
-      }
-    },
-    "UpdatePayloadProperties": {
-      "description": "update payload properties",
-      "type": "object",
-      "properties": {
-        "publisherId": {
-          "description": "Gets or sets publisher id",
-          "type": "string"
-        },
-        "planIds": {
-          "description": "Gets or sets the requests plan id. Can be one or more",
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "justification": {
-          "description": "Gets or sets user justification",
-          "type": "string"
-        },
-        "user": {
-          "description": "Gets or sets user details",
-          "type": "string"
-        },
-        "userPayload": {
-          "description": "Gets or sets usr payload",
-          "type": "object",
-          "items": {
-            "$ref": "#/definitions/OfferDetails"
-          }
-        },
-        "activity": {
-          "description": "Gets or sets user activity",
-          "type": "string"
-        },
-        "deletedPlanId": {
-          "description": "Gets or sets deleted PlanId",
-          "type": "string"
-        }
-      }
-    },
-    "ApprovalRequestResponse": {
-      "description": "The approval request offer data structure.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/Resource"
-        }
-      ],
-      "properties": {
         "properties": {
-          "$ref": "#/definitions/ApprovalRequestResponseProperties",
-          "description": "The approval request offer data properties.",
-          "x-ms-client-flatten": true
-        }
-      }
-    },
-    "ApprovalRequestResponseProperties": {
-      "description": "Created object details",
-      "type": "object",
-      "properties": {
-        "offerId": {
-          "description": "Gets or sets offer id",
-          "type": "string"
-        },
-        "publisherId": {
-          "description": "Gets or sets publisher id",
-          "type": "string"
-        },
-        "offerDisplayName": {
-          "description": "Gets or sets offer display name",
-          "type": "string"
-        },
-        "plansDetails": {
-          "description": "Gets or sets plans details",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/PlanRequestsDetails"
+          "acknowledge": {
+            "description": "Gets or sets a value indicating whether acknowledge action flag is enabled",
+            "type": "boolean"
+          },
+          "dismiss": {
+            "description": "Gets or sets a value indicating whether dismiss action flag is enabled",
+            "type": "boolean"
+          },
+          "removeOffer": {
+            "description": "Gets or sets a value indicating whether remove offer action flag is enabled",
+            "type": "boolean"
+          },
+          "addPlans": {
+            "description": "Gets or sets added plans",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "removePlans": {
+            "description": "Gets or sets remove plans",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
           }
-        },
-        "createDate": {
-          "description": "Gets or sets create date",
-          "type": "string"
-        },
-        "modifiedAt": {
-          "description": "Gets or sets modified at date",
-          "type": "string"
-        },
-        "isClosed": {
-          "description": "Gets or sets a value indicating whether the request is closed",
-          "type": "boolean"
-        },
-        "status": {
-          "description": "Gets or sets the request status",
-          "type": "string",
-          "enum": [
-            "Pending",
-            "Rejected",
-            "Approved",
-            "None"
-          ],
-          "x-ms-enum": {
-            "name": "requestStatus",
-            "modelAsString": true
-          }
-        },
-        "admin": {
-          "description": "Gets or sets admin details",
-          "type": "string"
-        },
-        "adminActionDate": {
-          "description": "Gets or sets admin action date",
-          "type": "string"
-        },
-        "messageCode": {
-          "description": "Gets or sets the notification message code",
-          "type": "integer",
-          "format": "int64"
-        }
-      }
-    },
-    "PlanRequestsDetails": {
-      "description": "The request details of specific plan",
-      "type": "object",
-      "properties": {
-        "planId": {
-          "description": "Gets or sets plan id",
-          "type": "string"
-        },
-        "planDisplayName": {
-          "description": "Gets or sets plan display name",
-          "type": "string"
-        },
-        "requesters": {
-          "description": "Gets or sets requesters details list",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/UserRequestDetails"
-          }
-        }
-      }
-    },
-    "UserRequestDetails": {
-      "description": "user request details",
-      "type": "object",
-      "properties": {
-        "user": {
-          "description": "Gets or sets user id",
-          "type": "string"
-        },
-        "date": {
-          "description": "Gets or sets request date",
-          "type": "string"
-        },
-        "justification": {
-          "description": "Gets or sets justification",
-          "type": "string"
         }
       }
     },
@@ -855,8 +613,22 @@
         }
       }
     },
-    "ApprovalRequestsDetails": {
-      "description": "Approval requests notification details",
+    "PlanNotificationDetails": {
+      "description": "Plan notification details",
+      "type": "object",
+      "properties": {
+        "planId": {
+          "description": "Gets or sets the plan id",
+          "type": "string"
+        },
+        "planDisplayName": {
+          "description": "Gets or sets the plan display name",
+          "type": "string"
+        }
+      }
+    },
+    "RequestApprovalsDetails": {
+      "description": "Request approvals details",
       "type": "object",
       "properties": {
         "offerId": {
@@ -889,24 +661,51 @@
         }
       }
     },
-    "PlanNotificationDetails": {
-      "description": "Plan notification details",
+    "AdminRequestApprovalsList": {
+      "description": "List of admin request approval resources",
       "type": "object",
       "properties": {
-        "planId": {
-          "description": "Gets or sets the plan id",
-          "type": "string"
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AdminRequestApprovalsResource"
+          }
         },
-        "planDisplayName": {
-          "description": "Gets or sets the plan display name",
+        "nextLink": {
+          "description": "URL to get the next set of notifications list results if there are any.",
           "type": "string"
         }
       }
     },
-    "AdminActionDetails": {
-      "description": "Admin action properties data structure",
+    "AdminRequestApprovalsResource": {
+      "description": "Admin request approval resource.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AdminRequestApprovalProperties",
+          "description": "The privateStore admin Approval request data structure.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "AdminRequestApprovalProperties": {
+      "description": "Admin approval request resource properties",
       "type": "object",
       "properties": {
+        "offerId": {
+          "description": "Gets or sets offer Id",
+          "type": "string"
+        },
+        "displayName": {
+          "description": "Gets display name",
+          "type": "string",
+          "readOnly": true
+        },
         "publisherId": {
           "description": "Gets or sets publisher Id",
           "type": "string"
@@ -923,13 +722,6 @@
             "modelAsString": true
           }
         },
-        "existingRequestedPlans": {
-          "description": "Gets or sets existing plans ids ( of existing requests)",
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
         "approvedPlans": {
           "description": "Gets or sets Approved plans ids, empty in case of rejected",
           "type": "array",
@@ -941,54 +733,72 @@
           "description": "Gets or sets admin comment",
           "type": "string"
         },
-        "user": {
+        "administrator": {
           "description": "Gets or sets admin details",
-          "type": "string"
-        }
-      }
-    },
-    "AdminGetApprovalRequestsResponse": {
-      "description": "Admin action properties data structure",
-      "type": "object",
-      "properties": {
-        "id": {
-          "description": "Gets or sets Id",
-          "type": "string"
-        },
-        "publisherId": {
-          "description": "Gets or sets publisher Id",
-          "type": "string"
-        },
-        "offerId": {
-          "description": "Gets or sets offer Id",
-          "type": "string"
-        },
-        "displayName": {
-          "description": "Gets or sets display name",
           "type": "string"
         },
         "plans": {
-          "description": "Gets or sets plans details",
+          "description": "Gets list of plans with requesters details",
           "type": "array",
+          "readOnly": true,
           "items": {
-            "$ref": "#/definitions/PlanRequestsDetails"
+            "$ref": "#/definitions/PlanRequesterDetails"
           }
-        },
-        "messageCode": {
-          "description": "Gets or sets the notification message id",
-          "type": "integer",
-          "format": "int64"
         }
       }
     },
-    "PrivateStoreNotificationsList": {
-      "description": "Describes the json payload for the list of notifications",
+    "PlanRequesterDetails": {
+      "description": "Plan with requesters details",
+      "properties": {
+        "planId": {
+          "description": "Gets the plan id",
+          "type": "string",
+          "readOnly": true
+        },
+        "planDisplayName": {
+          "description": "Gets the plan display name",
+          "type": "string",
+          "readOnly": true
+        },
+        "requesters": {
+          "description": "Gets requesters details list",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/UserRequestDetails"
+          }
+        }
+      }
+    },
+    "UserRequestDetails": {
+      "description": "user request details",
+      "type": "object",
+      "properties": {
+        "user": {
+          "description": "Gets user id",
+          "type": "string",
+          "readOnly": true
+        },
+        "date": {
+          "description": "Gets request date",
+          "type": "string",
+          "readOnly": true
+        },
+        "justification": {
+          "description": "Gets justification",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "RequestApprovalsList": {
+      "description": "List of admin request approval resources",
       "type": "object",
       "properties": {
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/PrivateStoreNotificationsResource"
+            "$ref": "#/definitions/RequestApprovalResource"
           }
         },
         "nextLink": {
@@ -997,8 +807,8 @@
         }
       }
     },
-    "PrivateStoreNotificationsResource": {
-      "description": "The privateStore notifications data structure.",
+    "RequestApprovalResource": {
+      "description": "Request approval resource.",
       "type": "object",
       "allOf": [
         {
@@ -1007,111 +817,146 @@
       ],
       "properties": {
         "properties": {
-          "$ref": "#/definitions/PrivateStoreNotificationsProperties",
-          "description": "The privateStore notifications data structure.",
+          "$ref": "#/definitions/RequestApprovalProperties",
+          "description": "The privateStore approval request data structure.",
           "x-ms-client-flatten": true
         }
       }
     },
-    "PrivateStoreNotificationsProperties": {
-      "description": "Notifications data structure properties",
-      "type": "object",
-      "properties": {
-        "details": {
-          "description": "Notifications details",
-          "type": "object",
-          "items": {
-            "$ref": "#/definitions/PrivateStoreNotifications"
-          },
-          "readOnly": true
-        },
-        "update": {
-          "description": "Update notification object",
-          "type": "object",
-          "items": {
-            "$ref": "#/definitions/UpdateNotificationDetails"
-          }
-        }
-      }
-    },
-    "PrivateStoreApprovalRequestResource": {
-      "description": "Approval request resource.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/Resource"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/PrivateStoreApprovalRequestProperties",
-          "description": "The privateStore offer Approval request  data structure.",
-          "x-ms-client-flatten": true
-        }
-      }
-    },
-    "PrivateStoreApprovalRequestProperties": {
+    "RequestApprovalProperties": {
       "description": "Approval request resource properties",
       "type": "object",
       "properties": {
-        "updatePayload": {
-          "description": "user request payload",
-          "type": "object",
+        "offerId": {
+          "description": "Gets or sets unique offer id.",
+          "type": "string"
+        },
+        "offerDisplayName": {
+          "description": "Gets or sets offer display name",
+          "type": "string",
+          "readOnly": true
+        },
+        "publisherId": {
+          "description": "The offer's publisher id",
+          "type": "string"
+        },
+        "plansDetails": {
+          "description": "Gets or sets the plans details",
+          "type": "array",
           "items": {
-            "$ref": "#/definitions/UpdatePayloadProperties"
+            "$ref": "#/definitions/planDetails"
           }
         },
-        "userResponse": {
-          "description": "user request response",
-          "type": "object",
-          "items": {
-            "$ref": "#/definitions/PrivateStoreOfferWithRequestApproval"
-          },
+        "isClosed": {
+          "description": "Gets or sets a value indicating whether the request is closed",
+          "type": "boolean",
           "readOnly": true
         },
-        "userUpsertResponse": {
-          "description": "Approval request response for user",
-          "type": "object",
-          "items": {
-            "$ref": "#/definitions/ApprovalRequestResponse"
-          },
-          "readOnly": true
+        "messageCode": {
+          "description": "Gets or sets the request approval message code",
+          "type": "integer",
+          "format": "int64"
         }
       }
     },
-    "PrivateStoreAdminApprovalRequestResource": {
-      "description": "Admin approval request resource.",
+    "planDetails": {
+      "description": "Return plan with request details",
       "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/Resource"
+      "properties": {
+        "planId": {
+          "description": "Gets or sets Plan Id ",
+          "type": "string"
+        },
+        "status": {
+          "description": "Gets or sets the plan status",
+          "type": "string",
+          "readOnly": true,
+          "enum": [
+            "Pending",
+            "Rejected",
+            "Approved",
+            "None"
+          ],
+          "x-ms-enum": {
+            "name": "status",
+            "modelAsString": true
+          }
+        },
+        "requestDate": {
+          "description": "Gets or sets request date",
+          "type": "string",
+          "readOnly": true
+        },
+        "justification": {
+          "description": "Gets or sets user's justification for the plan's request",
+          "type": "string"
         }
-      ],
+      }
+    },
+    "QueryRequestApproval": {
+      "description": "Gets the request plans with indication on each plan whether is approved by the admin, has pending request or not requested yet",
+      "type": "object",
+      "properties": {
+        "uniqueOfferId": {
+          "description": "Gets or sets unique offer id.",
+          "type": "string"
+        },
+        "plansDetails": {
+          "description": "Gets or sets the plans details",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/planDetails"
+          }
+        },
+        "etag": {
+          "description": "Gets or sets e-tag field ",
+          "type": "string"
+        },
+        "messageCode": {
+          "description": "Gets or sets the notification message id",
+          "type": "integer"
+        }
+      }
+    },
+    "QueryRequestApprovalProperties": {
+      "description": "The details to get the request plans statuses",
+      "type": "object",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/PrivateStoreAdminApprovalRequestProperties",
-          "description": "The privateStore admin Approval request data structure.",
-          "x-ms-client-flatten": true
+          "$ref": "#/definitions/RequestDetails",
+          "description": "The details to get the request plans statuses"
         }
       }
     },
-    "PrivateStoreAdminApprovalRequestProperties": {
-      "description": "Admin approval request resource properties",
+    "RequestDetails": {
+      "description": "Request details needed to get the plans statuses",
       "type": "object",
       "properties": {
-        "adminRequestApprovalResponse": {
-          "description": "request details for admin view",
-          "type": "object",
-          "items": {
-            "$ref": "#/definitions/AdminGetApprovalRequestsResponse"
-          },
-          "readOnly": true
+        "publisherId": {
+          "description": "The offer's publisher id",
+          "type": "string"
         },
-        "adminApprovalPayload": {
-          "description": "admin action details: approve or reject the request",
-          "type": "object",
+        "planIds": {
+          "description": "Current plans list",
+          "type": "array",
           "items": {
-            "$ref": "#/definitions/AdminActionDetails"
+            "type": "string"
+          }
+        }
+      }
+    },
+    "WithdrawProperties": {
+      "description": "Return plan with request details",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "planId": {
+            "description": "Gets or sets Plan Id ",
+            "type": "string"
+          },
+          "publisherId": {
+            "description": "The offer's publisher id",
+            "type": "string"
           }
         }
       }
@@ -1188,16 +1033,16 @@
         "name": "IdentityType",
         "modelAsString": true
       }
-    }
-  },
-  "securityDefinitions": {
-    "azure_auth": {
-      "type": "oauth2",
-      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
-      "flow": "implicit",
-      "description": "Azure Active Directory OAuth2 Flow",
-      "scopes": {
-        "user_impersonation": "impersonate your user account"
+    },
+    "securityDefinitions": {
+      "azure_auth": {
+        "type": "oauth2",
+        "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+        "flow": "implicit",
+        "description": "Azure Active Directory OAuth2 Flow",
+        "scopes": {
+          "user_impersonation": "impersonate your user account"
+        }
       }
     }
   }
