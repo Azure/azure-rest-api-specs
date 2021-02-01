@@ -9,7 +9,7 @@
     "version": "2021-03-07"
   },
   "paths": {
-    "/availablePhoneNumbers/countries/{countryCode}/:search": {
+    "/availablePhoneNumbers/countries/{countryCode}/~search": {
       "post": {
         "tags": [
           "Find and purchase available phone numbers"
@@ -120,7 +120,7 @@
         }
       }
     },
-    "/availablePhoneNumbers/:purchase": {
+    "/availablePhoneNumbers/~purchase": {
       "post": {
         "tags": [
           "Find and purchase available phone numbers"
@@ -529,6 +529,64 @@
         "x-ms-examples": {
           "Update phoneNumber capabilities": {
             "$ref": "./examples/UpdatePhoneNumberCapabilities.json"
+          }
+        }
+      }
+    },
+    "/recording/download/{documentId}": {
+      "get": {
+        "tags": [
+          "RecordingDownload"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "documentId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "default": {
+            "description": "Failure",
+            "schema": {
+              "$ref": "../../../Microsoft.CommunicationServicesCommon/preview/2020-11-19-preview1/common.json#/definitions/CommunicationErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/recording/download/{documentId}/metadata": {
+      "get": {
+        "tags": [
+          "RecordingDownload"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "documentId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "default": {
+            "description": "Failure",
+            "schema": {
+              "$ref": "../../../Microsoft.CommunicationServicesCommon/preview/2020-11-19-preview1/common.json#/definitions/CommunicationErrorResponse"
+            }
           }
         }
       }
