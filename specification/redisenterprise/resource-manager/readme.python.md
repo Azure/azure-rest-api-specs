@@ -7,7 +7,6 @@ Please also specify `--python-sdks-folder=<path to the root directory of your az
 python-mode: create
 azure-arm: true
 license-header: MICROSOFT_MIT_NO_VERSION
-namespace: Microsoft.Cache
 namespace: azure.mgmt.redisenterprise
 package-name: azure-mgmt-redisenterprise
 package-version: 1.0.0b1
