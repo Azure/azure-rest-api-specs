@@ -69,6 +69,12 @@
             "schema": {
               "$ref": "#/definitions/Advisor"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         }
       }
@@ -104,6 +110,12 @@
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/AdvisorsResultList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -154,6 +166,12 @@
           },
           "202": {
             "description": "Accepted"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
         "x-ms-long-running-operation": true
@@ -196,6 +214,12 @@
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/RecommendationAction"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
             }
           }
         }
@@ -243,6 +267,12 @@
             "schema": {
               "$ref": "#/definitions/RecommendationActionsResultList"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
         "x-ms-pageable": {
@@ -281,6 +311,12 @@
             "description": "OK.",
             "schema": {
               "$ref": "#/definitions/RecommendedActionSessionsOperationStatus"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
             }
           }
         }
@@ -323,6 +359,12 @@
             "description": "Created",
             "schema": {
               "$ref": "#/definitions/RecommendationActionsResultList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -465,6 +507,15 @@
         }
       },
       "description": "Recommendation action session operation status."
+    },
+    "CloudError": {
+      "x-ms-external": true,
+      "properties": {
+        "error": {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse"
+        }
+      },
+      "description": "An error response from the Batch service."
     }
   },
   "parameters": {
