@@ -48,7 +48,7 @@ These are the global settings for the Marketplace Agreements API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2015-06-01
+tag: package-2021-01-01
 ```
 
 
