@@ -588,7 +588,36 @@
             "$ref": "#/parameters/moveCollectionName"
           },
           {
+            "name": "dependencyLevel",
+            "in": "query",
+            "description": "Defines the dependency level.",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "Direct",
+              "Descendant"
+            ],
+            "x-ms-enum": {
+              "name": "DependencyLevel",
+              "modelAsString": true
+            }
+          },
+          {
+            "name": "$orderby",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "OData order by query option. For example, you can use $orderby=Count desc."
+          },
+          {
             "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "The filter to apply on the operation. For example, $apply=filter(count eq 2)."
           }
         ],
         "responses": {
@@ -605,6 +634,10 @@
             }
           }
         },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-odata": "#/definitions/UnresolvedDependenciesFilter",
         "x-ms-examples": {
           "UnresolvedDependencies_Get": {
             "$ref": "./examples/UnresolvedDependencies_Get.json"
@@ -961,6 +994,55 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/moveCollections/{moveCollectionName}/requiredFor": {
+      "get": {
+        "description": "List of the move resources for which an arm resource is required for.",
+        "operationId": "MoveCollections_ListRequiredFor",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/moveCollectionName"
+          },
+          {
+            "name": "sourceId",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "The sourceId for which the api is invoked."
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/RequiredForResourcesCollection"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "RequiredFor_Get": {
+            "$ref": "./examples/RequiredFor_Get.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -1009,7 +1091,9 @@
         "CommitPending",
         "CommitInProgress",
         "CommitFailed",
-        "Committed"
+        "Committed",
+        "DeleteSourcePending",
+        "ResourceMoveCompleted"
       ],
       "type": "string",
       "readOnly": true,
@@ -1083,11 +1167,6 @@
         },
         "errors": {
           "$ref": "#/definitions/MoveResourceError"
-        },
-        "targetId": {
-          "description": "Gets the Target ARM Id of the resource.",
-          "type": "string",
-          "readOnly": true
         }
       }
     },
@@ -1535,6 +1614,23 @@
         }
       }
     },
+    "UnresolvedDependenciesFilter": {
+      "description": "Unresolved dependencies contract.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/UnresolvedDependenciesFilterProperties"
+        }
+      }
+    },
+    "UnresolvedDependenciesFilterProperties": {
+      "properties": {
+        "count": {
+          "format": "int32",
+          "type": "integer",
+          "description": "The count of the resource."
+        }
+      }
+    },
     "MoveResourceCollection": {
       "description": "Defines the collection of move resources.",
       "type": "object",
@@ -1608,6 +1704,30 @@
         "nextLink": {
           "description": "Gets or sets the value of  next link.",
           "type": "string"
+        },
+        "summaryCollection": {
+          "description": "Gets or sets the list of summary items and the field on which summary is done.",
+          "readOnly": true,
+          "$ref": "#/definitions/SummaryCollection"
+        },
+        "totalCount": {
+          "description": "Gets the total count.",
+          "type": "integer",
+          "readOnly": true,
+          "format": "int64"
+        }
+      }
+    },
+    "RequiredForResourcesCollection": {
+      "description": "Required for resources collection.",
+      "type": "object",
+      "properties": {
+        "sourceIds": {
+          "description": "Gets or sets the list of source Ids for which the input resource is required.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         }
       }
     },
@@ -1726,7 +1846,11 @@
       "properties": {
         "resourceType": {
           "description": "The resource type. For example, the value can be Microsoft.Compute/virtualMachines.",
-          "type": "string"
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         },
         "targetResourceName": {
           "description": "Gets or sets the target Resource name.",
@@ -1807,6 +1931,9 @@
         "addressPrefix": {
           "description": "Gets or sets address prefix for the subnet.",
           "type": "string"
+        },
+        "networkSecurityGroup": {
+          "$ref": "#/definitions/NsgReference"
         }
       }
     },
@@ -1930,6 +2057,26 @@
       ],
       "properties": {}
     },
+    "NsgReference": {
+      "description": "Defines reference to NSG.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AzureResourceReference"
+        }
+      ],
+      "properties": {}
+    },
+    "PublicIpReference": {
+      "description": "Defines reference to a public IP.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AzureResourceReference"
+        }
+      ],
+      "properties": {}
+    },
     "NicIpConfigurationResourceSettings": {
       "description": "Defines NIC IP configuration properties.",
       "type": "object",
@@ -1959,6 +2106,16 @@
           "items": {
             "$ref": "#/definitions/LoadBalancerBackendAddressPoolReference"
           }
+        },
+        "loadBalancerNatRules": {
+          "description": "Gets or sets the references of the load balancer NAT rules.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/LoadBalancerNatRuleReference"
+          }
+        },
+        "publicIp": {
+          "$ref": "#/definitions/PublicIpReference"
         }
       }
     },
@@ -2174,7 +2331,7 @@
           "description": "Gets or sets the domain name label.",
           "type": "string"
         },
-        "fQDN": {
+        "fqdn": {
           "description": "Gets or sets the fully qualified domain name.",
           "type": "string"
         },
@@ -2192,6 +2349,28 @@
         }
       },
       "x-ms-discriminator-value": "Microsoft.Network/publicIPAddresses"
+    },
+    "KeyVaultResourceSettings": {
+      "description": "Defines the key vault resource settings.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResourceSettings"
+        }
+      ],
+      "properties": {},
+      "x-ms-discriminator-value": "Microsoft.KeyVault/vaults"
+    },
+    "DiskEncryptionSetResourceSettings": {
+      "description": "Defines the disk encryption set resource settings.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResourceSettings"
+        }
+      ],
+      "properties": {},
+      "x-ms-discriminator-value": "Microsoft.Compute/diskEncryptionSets"
     },
     "CloudError": {
       "x-ms-external": true,
