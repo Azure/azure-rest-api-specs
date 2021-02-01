@@ -507,6 +507,7 @@ These settings apply only when `--tag=package-2015-07-01-only` is specified on t
 ```yaml $(tag) == 'package-2015-07-01-only'
 input-file:
 - Microsoft.Insights/stable/2015-07-01/serviceDiagnosticsSettings_API.json
+- Microsoft.Insights/stable/2014-04-01/alertRules_API.json
 ```
 
 
@@ -521,6 +522,7 @@ input-file:
 - Microsoft.Insights/stable/2015-04-01/eventCategories_API.json
 - Microsoft.Insights/stable/2015-04-01/operations_API.json
 - Microsoft.Insights/stable/2015-04-01/tenantActivityLogs_API.json
+- Microsoft.Insights/stable/2014-04-01/alertRules_API.json
 ```
 
 ---
@@ -535,9 +537,6 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-net
-  - repo: azure-sdk-for-python
-    after_scripts:
-      - python ./scripts/multiapi_init_gen.py azure-mgmt-monitor
   - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
@@ -612,6 +611,10 @@ directive:
     from: metricAlert_API.json
     where: $.definitions.MetricAlertResource
     reason: 'Action is expected to receive a subclass of Resource'
+  - from : scheduledQueryRule_API.json 
+    suppress:
+      - OBJECT_ADDITIONAL_PROPERTIES  
+    reason: "false alarm"
 ```
 
 ### Tag: profile-hybrid-2019-03-01
