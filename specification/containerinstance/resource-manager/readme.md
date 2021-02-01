@@ -38,6 +38,7 @@ These settings apply only when `--tag=package-2020-11` is specified on the comma
 input-file:
   - Microsoft.ContainerInstance/stable/2020-11-01/containerInstance.json
 ```
+
 ### Tag: package-2019-12
 
 These settings apply only when `--tag=package-2019-12` is specified on the command line.
