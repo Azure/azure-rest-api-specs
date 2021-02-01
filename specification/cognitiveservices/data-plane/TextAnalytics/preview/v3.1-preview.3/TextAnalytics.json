@@ -954,7 +954,7 @@
     "AnalyzeJobState": {
       "allOf": [
         {
-          "$ref": "#/definitions/JobMetadata"
+          "$ref": "#/definitions/AnalyzeJobMetadata"
         },
         {
           "$ref": "#/definitions/TasksState"
@@ -1924,9 +1924,6 @@
           "format": "date-time",
           "type": "string"
         },
-        "displayName": {
-          "type": "string"
-        },
         "expirationDateTime": {
           "format": "date-time",
           "type": "string"
@@ -1963,6 +1960,21 @@
         "status"
       ],
       "type": "object"
+    },
+    "AnalyzeJobMetadata": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/JobMetadata"
+        },
+        {
+          "properties": {
+            "displayName": {
+              "type": "string"
+            }
+          }
+        }
+      ]
     },
     "KeyPhraseResult": {
       "type": "object",
