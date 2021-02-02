@@ -3865,14 +3865,70 @@
             "Shutdown",
             "Disconnected",
             "Upgrading",
-            "UpgradeFailed"
+            "UpgradeFailed",
+            "NoHeartbeat",
+            "NotJoinedToDomain",
+            "DomainTrustRelationshipLost",
+            "SxSStackListenerNotReady",
+            "FSLogixNotHealthy",
+            "NeedsAssistance"
           ],
           "x-ms-enum": {
             "name": "Status",
-            "modelAsString": true
+            "modelAsString": false,
+            "values": [
+              {
+                "value": "Available",
+                "description": "Session Host has passed all the health checks and is available to handle connections."
+              },
+              {
+                "value": "Unavailable",
+                "description": "Session Host is either turned off or has failed critical health checks which is causing service not to be able to route connections to this session host. Note this replaces previous 'NoHeartBeat' status."
+              },
+              {
+                "value": "Shutdown",
+                "description": "Session Host is shutdown - RD Agent reported session host to be stopped or deallocated."
+              },
+              {
+                "value": "Disconnected",
+                "description": "The Session Host is unavailable because it is currently disconnected."
+              },
+              {
+                "value": "Upgrading",
+                "description": "Session Host is unavailable because currently an upgrade of RDAgent/side-by-side stack is in progress. Note: this state will be removed once the upgrade completes and the host is able to accept connections."
+              },
+              {
+                "value": "UpgradeFailed",
+                "description": "Session Host is unavailable because the critical component upgrade (agent, side-by-side stack, etc.) failed."
+              },
+              {
+                "value": "NoHeartbeat",
+                "description": "The Session Host is not heart beating."
+              },
+              {
+                "value": "NotJoinedToDomain",
+                "description": "SessionHost is not joined to domain."
+              },
+              {
+                "value": "DomainTrustRelationshipLost",
+                "description": "SessionHost's domain trust relationship lost"
+              },
+              {
+                "value": "SxSStackListenerNotReady",
+                "description": "SxS stack installed on the SessionHost is not ready to receive connections."
+              },
+              {
+                "value": "FSLogixNotHealthy",
+                "description": "FSlogix is in an unhealthy state on the session host."
+              },
+              {
+                "value": "NeedsAssistance",
+                "description": "New status to inform admins that the health on their endpoint needs to be fixed. The connections might not fail, as these issues are not fatal."
+              }
+            ]
           },
           "type": "string",
-          "description": "Status for a SessionHost. Available - Session Host has passed all the health checks and is available to handle connections. Unavailable - Session Host is either turned off or has failed critical health checks which is causing service not to be able to route connections to this session host. Note this replaces previous 'NoHeartBeat' status. Shutdown - Session Host is shutdown - RD Agent reported session host to be stopped or deallocated. Disconnected - The Session Host is unavailable because it is currently disconnected. Upgrading - Session Host is unavailable because currently an upgrade of RDAgent/side-by-side stack is in progress. Note: this state will be removed once the upgrade completes and the host is able to accept connections. UpgradeFailed - Session Host is unavailable because the critical component upgrade (agent, side-by-side stack, etc.) failed."
+          "description": "Status for a SessionHost."
         },
         "statusTimestamp": {
           "format": "date-time",
@@ -3943,10 +3999,56 @@
           ],
           "x-ms-enum": {
             "name": "HealthCheckName",
-            "modelAsString": true
+            "modelAsString": false,
+            "values": [
+              {
+                "value": "DomainJoinedCheck",
+                "description": "Verifies the SessionHost is joined to a domain. If this check fails is classified as fatal as no connection can succeed if the SessionHost is not joined to the domain."
+              },
+              {
+                "value": "DomainTrustCheck",
+                "description": "Verifies the SessionHost is not experiencing domain trust issues that will prevent authentication on SessionHost at connection time when session is created. If this check fails is classified as fatal as no connection can succeed if we cannot reach the domain for authentication on the SessionHost."
+              },
+              {
+                "value": "FSLogixHealthCheck",
+                "description": "Verifies the FSLogix service is up and running to make sure users' profiles are loaded in the session. If this check fails is classified as fatal as even if the connection can succeed, user experience is bad as the user profile cannot be loaded and user will get a temporary profile in the session."
+              },
+              {
+                "value": "SxSStackListenerCheck",
+                "description": "Verifies that the SxS stack is up and running so connections can succeed. If this check fails is classified as fatal as no connection can succeed if the SxS stack is not ready."
+              },
+              {
+                "value": "UrlsAccessibleCheck",
+                "description": "Verifies that the required WVD service and Geneva URLs are reachable from the SessionHost. These URLs are: RdTokenUri, RdBrokerURI, RdDiagnosticsUri and storage blob URLs for agent monitoring (geneva). If this check fails, it is non fatal and the machine still can service connections, main issue may be that monitoring agent is unable to store warm path data (logs, operations ...)."
+              },
+              {
+                "value": "MonitoringAgentCheck",
+                "description": "Verifies that the required Geneva agent is running. If this check fails, it is non fatal and the machine still can service connections, main issue may be that monitoring agent is missing or running (possibly) older version."
+              },
+              {
+                "value": "DomainReachable",
+                "description": "Verifies the domain the SessionHost is joined to is still reachable. If this check fails is classified as fatal as no connection can succeed if the domain the SessionHost is joined is not reachable at the time of connection."
+              },
+              {
+                "value": "WebRTCRedirectorCheck",
+                "description": "Verifies whether the WebRTCRedirector component is healthy. The WebRTCRedirector component is used to optimize video and audio performance in Microsoft Teams. This checks whether the component is still running, and whether there is a higher version available. If this check fails, it is non fatal and the machine still can service connections, main issue may be the WebRTCRedirector component has to be restarted or updated."
+              },
+              {
+                "value": "SupportedEncryptionCheck",
+                "description": "Verifies the value of SecurityLayer registration key. If the value is 0 (SecurityLayer.RDP) this check fails with Error code = NativeMethodErrorCode.E_FAIL and is fatal. If the value is 1 (SecurityLayer.Negotiate) this check fails with Error code = NativeMethodErrorCode.ERROR_SUCCESS and is non fatal."
+              },
+              {
+                "value": "MetaDataServiceCheck",
+                "description": "Verifies the metadata service is accessible and return compute properties."
+              },
+              {
+                "value": "AppAttachHealthCheck",
+                "description": "Verifies that the AppAttachService is healthy (there were no issues during package staging). The AppAttachService is used to enable the staging/registration (and eventual deregistration/destaging) of MSIX apps that have been set up by the tenant admin. This checks whether the component had any failures during package staging. Failures in staging will prevent some MSIX apps from working properly for the end user. If this check fails, it is non fatal and the machine still can service connections, main issue may be certain apps will not work for end-users."
+              }
+            ]
           },
           "type": "string",
-          "description": "Represents the name of the health check operation performed. DomainJoinedCheck - Verifies the SessionHost is joined to a domain. If this check fails is classified as fatal as no connection can succeed if the SessionHost is not joined to the domain. DomainTrustCheck - Verifies the SessionHost is not experiencing domain trust issues that will prevent authentication on SessionHost at connection time when session is created. If this check fails is classified as fatal as no connection can succeed if we cannot reach the domain for authentication on the SessionHost. FSLogixHealthCheck - Verifies the FSLogix service is up and running to make sure users' profiles are loaded in the session. If this check fails is classified as fatal as even if the connection can succeed, user experience is bad as the user profile cannot be loaded and user will get a temporary profile in the session. SxSStackListenerCheck - Verifies that the SxS stack is up and running so connections can succeed. If this check fails is classified as fatal as no connection can succeed if the SxS stack is not ready. UrlsAccessibleCheck - Verifies that the required WVD service and Geneva URLs are reachable from the SessionHost. These URLs are: RdTokenUri, RdBrokerURI, RdDiagnosticsUri and storage blob URLs for agent monitoring (geneva). If this check fails, it is non fatal and the machine still can service connections, main issue may be that monitoring agent is unable to store warm path data (logs, operations ...). MonitoringAgentCheck - Verifies that the required Geneva agent is running. If this check fails, it is non fatal and the machine still can service connections, main issue may be that monitoring agent is missing or running (possibly) older version. DomainReachable - Verifies the domain the SessionHost is joined to is still reachable. If this check fails is classified as fatal as no connection can succeed if the domain the SessionHost is joined is not reachable at the time of connection. WebRTCRedirectorCheck - Verifies whether the WebRTCRedirector component is healthy. The WebRTCRedirector component is used to optimize video and audio performance in Microsoft Teams. This checks whether the component is still running, and whether there is a higher version available. If this check fails, it is non fatal and the machine still can service connections, main issue may be the WebRTCRedirector component has to be restarted or updated. SupportedEncryptionCheck - Verifies the value of SecurityLayer registration key. If the value is 0 (SecurityLayer.RDP) this check fails with Error code = NativeMethodErrorCode.E_FAIL and is fatal. If the value is 1 (SecurityLayer.Negotiate) this check fails with Error code = NativeMethodErrorCode.ERROR_SUCCESS and is non fatal. MetaDataServiceCheck - Verifies the metadata service is accessible and return compute properties. AppAttachHealthCheck - Verifies that the AppAttachService is healthy (there were no issues during package staging). The AppAttachService is used to enable the staging/registration (and eventual deregistration/destaging) of MSIX apps that have been set up by the tenant admin. This checks whether the component had any failures during package staging. Failures in staging will prevent some MSIX apps from working properly for the end user. If this check fails, it is non fatal and the machine still can service connections, main issue may be certain apps will not work for end-users.",
+          "description": "Represents the name of the health check operation performed.",
           "readOnly": true
         },
         "healthCheckResult": {
@@ -3958,10 +4060,28 @@
           ],
           "x-ms-enum": {
             "name": "HealthCheckResult",
-            "modelAsString": true
+            "modelAsString": false,
+            "values": [
+              {
+                "value": "Unknown",
+                "description": "Health check result is not currently known."
+              },
+              {
+                "value": "HealthCheckSucceeded",
+                "description": "Health check passed."
+              },
+              {
+                "value": "HealthCheckFailed",
+                "description": "Health check failed."
+              },
+              {
+                "value": "SessionHostShutdown",
+                "description": "We received a Shutdown notification."
+              }
+            ]
           },
           "type": "string",
-          "description": "Represents the Health state of the health check we performed. Unknown - Health check result is not currently known. HealthCheckSucceeded - Health check passed. HealthCheckFailed - Health check failed. SessionHostShutdown - We received a Shutdown notification.",
+          "description": "Represents the Health state of the health check we performed.",
           "readOnly": true
         },
         "additionalFailureDetails": {
