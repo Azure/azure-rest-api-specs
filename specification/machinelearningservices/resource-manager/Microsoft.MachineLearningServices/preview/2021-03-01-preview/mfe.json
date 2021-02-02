@@ -2512,6 +2512,59 @@
             "$ref": "./examples/LabelingJob/exportLabels.json"
           }
         }
+      },
+      "get": {
+        "tags": [
+          "LabelingJob"
+        ],
+        "summary": "List export summaries from a labeling job.",
+        "operationId": "LabelingJobs_ListExportSummary",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "description": "The name and identifier for the LabelingJob.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/APIVersionParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "machineLearningServices.json#/definitions/MachineLearningServiceError"
+            }
+          },
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ExportSummaryArmPaginatedResult"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ListExportSummaries Labeling Job.": {
+            "$ref": "./examples/LabelingJob/listExportSummaries.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/labelingJobs/{id}/exportLabels/{exportId}": {
@@ -5784,6 +5837,23 @@
         }
       },
       "discriminator": "format",
+      "additionalProperties": false
+    },
+    "ExportSummaryArmPaginatedResult": {
+      "description": "A paginated list of ExportSummary entities.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "An array of objects of type ExportSummary.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ExportSummary"
+          }
+        },
+        "nextLink": {
+          "type": "string"
+        }
+      },
       "additionalProperties": false
     },
     "ModelContainer": {
