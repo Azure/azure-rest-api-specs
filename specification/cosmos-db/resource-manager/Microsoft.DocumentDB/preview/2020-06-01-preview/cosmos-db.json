@@ -7787,6 +7787,11 @@
           "format": "int32",
           "minimum": 0,
           "description": "An integer representing the time (in hours) that each backup is retained"
+        },
+        "backupStorageRedundancy": {
+          "description": "Enum to indicate type of backup residency",
+          "type": "string",
+          "$ref": "#/definitions/BackupStorageRedundancy"
         }
       }
     },
@@ -7897,6 +7902,19 @@
           "format": "date-time",
           "description": "The time at which the regional restorable database account has been deleted (ISO-8601 format)."
         }
+      }
+    },
+    "BackupStorageRedundancy": {
+      "description": "Enum to indicate type of backup storage redundancy.",
+      "type": "string",
+      "enum": [
+        "Geo",
+        "Local",
+        "Zone"
+      ],
+      "x-ms-enum": {
+        "name": "BackupStorageRedundancy",
+        "modelAsString": true
       }
     }
   },
