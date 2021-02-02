@@ -313,43 +313,6 @@
             "$ref": "./examples/NetworkManagerSecurityConfigurationDelete.json"
           }
         }
-      },
-      "patch": {
-        "tags": [
-          "SecurityConfigurations"
-        ],
-        "operationId": "SecurityConfigurations_UpdateTags",
-        "description": "Update a SecurityConfiguration tags.",
-        "parameters": [
-          {
-            "name": "parameters",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "./network.json#/definitions/TagsObject"
-            },
-            "description": "Parameters supplied to update network manager SecurityConfiguration tags."
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Updated - Returns information about the network manager SecurityConfiguration.",
-            "schema": {
-              "$ref": "#/definitions/SecurityConfiguration"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "./network.json#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Patch security configuration": {
-            "$ref": "./examples/NetworkManagerSecurityConfigurationPatch.json"
-          }
-        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkManagers/{networkManagerName}/securityConfigurations/{configurationName}/adminRules": {
@@ -519,43 +482,6 @@
         "x-ms-examples": {
           "Deletes an admin rule.": {
             "$ref": "./examples/NetworkManagerAdminRuleDelete.json"
-          }
-        }
-      },
-      "patch": {
-        "tags": [
-          "AdminRules"
-        ],
-        "operationId": "AdminRules_UpdateTags",
-        "description": "Update admin rule tags.",
-        "parameters": [
-          {
-            "name": "parameters",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "./network.json#/definitions/TagsObject"
-            },
-            "description": "Parameters supplied to update network manager admin rule tags."
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Updated - Returns information about the network manager admin Rule.",
-            "schema": {
-              "$ref": "#/definitions/AdminRule"
-            }
-          },
-          "default": {
-            "description": "Resource Provider error response.",
-            "schema": {
-              "$ref": "./network.json#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Patch admin rule tags": {
-            "$ref": "./examples/NetworkManagerAdminRulePatch.json"
           }
         }
       }
@@ -729,43 +655,6 @@
             "$ref": "./examples/NetworkManagerUserRuleDelete.json"
           }
         }
-      },
-      "patch": {
-        "tags": [
-          "UserRules"
-        ],
-        "operationId": "UserRules_UpdateTags",
-        "description": "Update a user rule tags.",
-        "parameters": [
-          {
-            "name": "parameters",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "./network.json#/definitions/TagsObject"
-            },
-            "description": "Parameters supplied to update network manager user rule tags."
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Updated - Returns information about the network manager user rule.",
-            "schema": {
-              "$ref": "#/definitions/UserRule"
-            }
-          },
-          "default": {
-            "description": "Resource Provider error response describing why the operation failed.",
-            "schema": {
-              "$ref": "./network.json#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Patch security user rule tags": {
-            "$ref": "./examples/NetworkManagerUserRulePatch.json"
-          }
-        }
       }
     }
   },
@@ -776,13 +665,6 @@
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/SecurityConfigurationPropertiesFormat",
           "description": "Indicates the properties for the network manager security Configuration."
-        },
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "Resource tags."
         }
       },
       "allOf": [
@@ -907,13 +789,6 @@
           "$ref": "#/definitions/AdminPropertiesFormat",
           "x-ms-client-flatten": true,
           "description": "Indicates the properties of the security admin rule"
-        },
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "Resource tags."
         }
       },
       "allOf": [
@@ -1007,13 +882,6 @@
           "$ref": "#/definitions/UserRulePropertiesFormat",
           "x-ms-client-flatten": true,
           "description": "Indicates the properties of the security user rule"
-        },
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "Resource tags."
         }
       },
       "allOf": [

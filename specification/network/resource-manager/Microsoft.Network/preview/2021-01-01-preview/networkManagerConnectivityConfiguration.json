@@ -146,43 +146,6 @@
             "$ref": "./examples/NetworkManagerConnectivityConfigurationDelete.json"
           }
         }
-      },
-      "patch": {
-        "tags": [
-          "ConnectivityConfigurations"
-        ],
-        "operationId": "ConnectivityConfigurations_UpdateTags",
-        "description": "Update connectivity configuration tags.",
-        "parameters": [
-          {
-            "name": "parameters",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "./network.json#/definitions/TagsObject"
-            },
-            "description": "Parameters supplied to update network manager connectivity configurations tags."
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Updated - Returns information about the network manager connectivity configurations.",
-            "schema": {
-              "$ref": "#/definitions/ConnectivityConfiguration"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "./network.json#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "NetworkManagesPut": {
-            "$ref": "./examples/NetworkManagerConnectivityConfigurationPatch.json"
-          }
-        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkManagers/{networkManagerName}/connectivityConfigurations": {
@@ -260,13 +223,6 @@
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/ConnectivityConfigurationProperties",
           "description": "Properties of a network manager connectivity configuration"
-        },
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "Resource tags."
         }
       },
       "allOf": [

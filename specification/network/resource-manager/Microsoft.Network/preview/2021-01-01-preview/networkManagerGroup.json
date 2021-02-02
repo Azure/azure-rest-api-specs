@@ -166,43 +166,6 @@
             "$ref": "./examples/NetworkManagerGroupDelete.json"
           }
         }
-      },
-      "patch": {
-        "tags": [
-          "NetworkGroups"
-        ],
-        "operationId": "NetworkGroups_UpdateTags",
-        "description": "Patches Network Group tags.",
-        "parameters": [
-          {
-            "name": "parameters",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "./network.json#/definitions/TagsObject"
-            },
-            "description": "Parameters supplied to update network manager group tags."
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Updated - Returns information about the network manager group tags.",
-            "schema": {
-              "$ref": "#/definitions/NetworkGroup"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "./network.json#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "patch network manager group tags": {
-            "$ref": "./examples/NetworkManagerGroupPatch.json"
-          }
-        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkManagers/{networkManagerName}/networkGroups": {
@@ -318,13 +281,6 @@
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/NetworkGroupProperties",
           "description": "The Network Group properties"
-        },
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "Resource tags."
         }
       },
       "allOf": [
