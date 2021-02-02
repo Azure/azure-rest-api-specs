@@ -129,6 +129,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "OperationList": {
+            "$ref": "./examples/OperationList.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -1992,14 +1997,16 @@
       "properties": {
         "serviceUri": {
           "description": "The service URI for the webhook to post notifications.",
-          "type": "string"
+          "type": "string",
+          "x-ms-secret": true
         },
         "customHeaders": {
           "description": "Custom headers that will be added to the webhook notifications.",
           "type": "object",
           "additionalProperties": {
             "type": "string"
-          }
+          },
+          "x-ms-secret": true
         },
         "status": {
           "description": "The status of the webhook at the time the operation was called.",
@@ -2061,14 +2068,16 @@
       "properties": {
         "serviceUri": {
           "description": "The service URI for the webhook to post notifications.",
-          "type": "string"
+          "type": "string",
+          "x-ms-secret": true
         },
         "customHeaders": {
           "description": "Custom headers that will be added to the webhook notifications.",
           "type": "object",
           "additionalProperties": {
             "type": "string"
-          }
+          },
+          "x-ms-secret": true
         },
         "status": {
           "description": "The status of the webhook at the time the operation was called.",
