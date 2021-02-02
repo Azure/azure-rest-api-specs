@@ -209,6 +209,24 @@ directive:
       - ACS service is deprecated so a PATCH endpoint won't be implemented
 
 ```
+### Tag: package-2020-12-01
+
+These settings apply only when `--tag=package-2020-12-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-12-01'
+input-file:
+- Microsoft.Compute/stable/2020-12-01/disk.json
+```
+
+### Tag: package-2020-12-01-only
+
+These settings apply only when `--tag=package-2020-12-01-only` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-12-01-only'
+input-file:
+- Microsoft.Compute/stable/2020-12-01/disk.json
+```
+
 ### Tag: package-2020-10-01-preview
 
 These settings apply only when `--tag=package-2020-10-01-preview` is specified on the command line.
