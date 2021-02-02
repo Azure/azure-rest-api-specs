@@ -28,7 +28,27 @@ These are the global settings for the Marketplace API.
 openapi-type: arm
 tag: package-2020-01-01
 ```
+### Composite packages
 
+The following packages may be composed from multiple api-versions.
+
+### Tag: package-composite-v1
+
+These settings apply only when `--tag=package-composite-v1` is specified on the command line.
+
+This section contains the "composite-v1" set of APIs, which is composed from a selection of api-versions that will remain backwards compatible with "v1" clients.
+
+APIs must only be added to this section when the API is publicly available in at least 1 production region and at least 1 generated client has been tested end-to-end.
+
+``` yaml $(tag) == 'package-composite-v1'
+input-file:
+- Microsoft.Marketplace/stable/2020-01-01/Marketplace.json
+- Microsoft.Marketplace/stable/2020-12-01/Marketplace.json
+
+# Needed when there is more than one input file
+override-info:
+  title: MarketplaceManagementClient
+```
 
 ### Tag: package-2019-12-01
 
@@ -58,8 +78,6 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-net
-    after_scripts:
-      - bundle install && rake arm:regen_all_profiles['azure_mgmt_marketplace']
   - repo: azure-resource-manager-schemas
     after_scripts:
       - node sdkauto_afterscript.js marketplace/resource-manager
