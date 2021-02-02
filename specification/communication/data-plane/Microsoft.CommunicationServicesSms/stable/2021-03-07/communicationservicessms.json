@@ -79,7 +79,7 @@
               }
             },
             "schema": {
-              "$ref": "#/definitions/SendSmsResponse"
+              "$ref": "#/definitions/SmsSendResponse"
             }
           }
         },
@@ -90,13 +90,14 @@
     }
   },
   "definitions": {
-    "SendSmsOptions": {
+    "SmsSendOptions": {
       "description": "Optional configuration for sending SMS messages.",
       "type": "object",
       "properties": {
         "enableDeliveryReport": {
           "description": "Enable this flag to receive a delivery report for this message on the Azure Resource EventGrid.",
-          "type": "boolean"
+          "type": "boolean",
+          "default": false
         },
         "tag": {
           "description": "Use this field to provide metadata that will then be sent back in the corresponding Delivery Report.",
@@ -132,12 +133,12 @@
           "minLength": 0,
           "type": "string"
         },
-        "sendSmsOptions": {
-          "$ref": "#/definitions/SendSmsOptions"
+        "smsSendOptions": {
+          "$ref": "#/definitions/SmsSendOptions"
         }
       }
     },
-    "SendSmsResponse": {
+    "SmsSendResponse": {
       "description": "Response for a successful or multi status send Sms request.",
       "required": [
         "value"
@@ -148,7 +149,7 @@
           "type": "array",
           "items": {
             "type": "object",
-            "$ref": "#/definitions/SendSmsResponseItem"
+            "$ref": "#/definitions/SmsSendResponseItem"
           }
         },
         "nextLink": {
@@ -156,11 +157,12 @@
         }
       }
     },
-    "SendSmsResponseItem": {
+    "SmsSendResponseItem": {
       "description": "Response for a single recipient.",
       "required": [
         "httpStatusCode",
-        "to"
+        "to",
+        "succeeded"
       ],
       "type": "object",
       "properties": {
@@ -175,6 +177,10 @@
         "httpStatusCode": {
           "description": "HTTP Status code.",
           "type": "integer"
+        },
+        "succeeded": {
+          "description": "Flag to check if message processing succeeded or not.",
+          "type": "boolean"
         },
         "errorMessage": {
           "description": "Optional error message in case of 4xx or 5xx errors.",
