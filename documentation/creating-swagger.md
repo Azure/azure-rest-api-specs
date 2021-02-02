@@ -786,43 +786,47 @@ prevent the automatic encoding behavior.
 
 ## Enable Asynchronous Operations with x-ms-long-running-operation<a name="longrunning"></a>
 Some requests like creating/deleting a resource cannot be carried out immediately. In such a situation, the server 
-sends a 201 (Created) or 202 (Accepted) and provides a link to monitor the status of the request. When such an operation 
+sends an initial response of 201 (Created) or 202 (Accepted) and provides a link to monitor the status of the [Long Running Operation](https://github.com/Azure/adx-documentation-pr/blob/master/sdks/LRO/LRO_AzureSDK.md) (LRO). When such an operation 
 is marked with extension `"x-ms-long-running-operation": true,` in Swagger, the generated code will know how to fetch 
 the link to monitor the status. It will keep on polling at regular intervals till the request reaches one of the 
-terminal states`Succeeded|Failed|Canceled`.
+terminal states`Succeeded|Failed|Canceled`. In Swagger, you model the responses of LRO when it reaches a terminal state, not the initial response.
 ```json5
 "paths": {
   "/products/{name}": {
     "put": {
-      "operationId": "products_create",
+      "operationId": "Products_CreateOrUpdate",
       "x-ms-long-running-operation": true,
-      "description": "A pageable list of Products.",
+      "description": "Create or update a product",
       "parameters": [
         {
           "name": "name",
           "in": "path",
           "required": true,
           "type": "string",
-          "description": "The name of the Product."
+          "description": "The name of the product"
         },
         {
           "name": "parameters",
           "in": "body",
           "required": true,
           "schema": {
-            "$ref": "#/definitions/ProductCreateParameters"
+            "$ref": "#/definitions/Product"
           },
-          "description": "The parameters to provide for the created product."
+          "description": "The product"
         }
       ],
       "responses": {
         "200": {
+          "description": "Product updated",
           "schema": {
             "$ref": "#/definitions/Product"
           }
         },
-        "202": {
-          "description": ""
+        "201": {
+          "description": "Product created",
+          "schema": {
+            "$ref": "#/definitions/Product"
+          }
         }
       }
     }
