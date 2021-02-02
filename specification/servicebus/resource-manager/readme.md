@@ -26,7 +26,7 @@ These are the global settings for the ServiceBus API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2018-01-preview
+tag: package-2021-01-preview
 ```
 
 ### Tag: package-2021-01-preview
@@ -36,6 +36,7 @@ These settings apply only when `--tag=package-2021-01-preview` is specified on t
 ``` yaml $(tag) == 'package-2021-01-preview'
 input-file:
 - Microsoft.ServiceBus/preview/2021-01-01-preview/namespace-preview.json
+- Microsoft.ServiceBus/preview/2021-01-01-preview/operations.json
 ```
 
 ### Tag: package-2018-01-preview
