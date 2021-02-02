@@ -33,6 +33,7 @@ Generate all API versions currently shipped for this package
 ```yaml $(multiapi)
 clear-output-folder: true
 batch:
+  - tag: package-2020-10-01-preview-only
   - tag: package-2020-09-30-only
   - tag: package-2020-06-30-only
   - tag: package-2020-06-01-only
@@ -59,6 +60,16 @@ batch:
 output-folder: $(python-sdks-folder)/compute/azure-mgmt-compute/azure/mgmt/compute/
 clear-output-folder: false
 perform-load: false
+```
+
+### Tag: package-2020-10-01-preview-only and python
+
+These settings apply only when `--tag=package-2020-10-01-preview-only --python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
+
+``` yaml $(tag) == 'package-2020-10-01-preview-only'
+namespace: azure.mgmt.compute.v2020_10_01_preview
+output-folder: $(python-sdks-folder)/compute/azure-mgmt-compute/azure/mgmt/compute/v2020_10_01_preview
 ```
 
 ### Tag: package-2020-09-30-only and python
