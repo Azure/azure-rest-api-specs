@@ -5449,38 +5449,6 @@
       },
       "x-ms-azure-resource": true
     },
-    "SystemData": {
-      "description": "Read only system data",
-      "type": "object",
-      "properties": {
-        "createdBy": {
-          "type": "string",
-          "description": "An identifier for the identity that created the resource"
-        },
-        "createdByType": {
-          "$ref": "#/definitions/IdentityType",
-          "description": "The type of identity that created the resource"
-        },
-        "createdAt": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The timestamp of resource creation (UTC)"
-        },
-        "lastModifiedBy": {
-          "type": "string",
-          "description": "An identifier for the identity that last modified the resource"
-        },
-        "lastModifiedByType": {
-          "$ref": "#/definitions/IdentityType",
-          "description": "The type of identity that last modified the resource"
-        },
-        "lastModifiedAt": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The timestamp of resource last modification (UTC)"
-        }
-      }
-    },
     "IdentityType": {
       "description": "The type of identity that creates/modifies resources",
       "type": "string",
@@ -5614,6 +5582,38 @@
           "description": "Error message indicating why the operation failed.",
           "readOnly": true,
           "type": "string"
+        }
+      }
+    },
+    "SystemData": {
+      "description": "Read only system data",
+      "type": "object",
+      "properties": {
+        "createdBy": {
+          "type": "string",
+          "description": "An identifier for the identity that created the resource"
+        },
+        "createdByType": {
+          "$ref": "#/definitions/IdentityType",
+          "description": "The type of identity that created the resource"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp of resource creation (UTC)"
+        },
+        "lastModifiedBy": {
+          "type": "string",
+          "description": "An identifier for the identity that last modified the resource"
+        },
+        "lastModifiedByType": {
+          "$ref": "#/definitions/IdentityType",
+          "description": "The type of identity that last modified the resource"
+        },
+        "lastModifiedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp of resource last modification (UTC)"
         }
       }
     }
