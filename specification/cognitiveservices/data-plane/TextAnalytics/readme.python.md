@@ -23,7 +23,7 @@ batch:
 ```
 
 ``` yaml $(multiapiscript)
-output-folder: $(python-sdks-folder)/textanalytics/azure-ai-textanalytics/azure/ai/textanalytics
+output-folder: $(python-sdks-folder)/textanalytics/azure-ai-textanalytics/azure/ai/textanalytics/_generated
 default-api: v3_0
 clear-output-folder: false
 perform-load: false
@@ -32,14 +32,13 @@ perform-load: false
 ### Tag: release_3_0
 ``` yaml $(tag) == 'release_3_0'
 namespace: azure.ai.textanalytics.v3_0
-output-folder: $(python-sdks-folder)/textanalytics/azure-ai-textanalytics/azure/ai/textanalytics/v3_0
+output-folder: $(python-sdks-folder)/textanalytics/azure-ai-textanalytics/azure/ai/textanalytics/_generated/v3_0
 ```
-
 
 ### Tag: release_3_1_preview_3
 ``` yaml $(tag) == 'release_3_1_preview.3'
 namespace: azure.ai.textanalytics.v3_1_preview_3
-output-folder: $(python-sdks-folder)/textanalytics/azure-ai-textanalytics/azure/ai/textanalytics/v3_1_preview_3
+output-folder: $(python-sdks-folder)/textanalytics/azure-ai-textanalytics/azure/ai/textanalytics/_generated/v3_1_preview_3
 ```
 
 ### Override Healthcare's pager and poller
@@ -49,8 +48,10 @@ directive:
     where: '$.paths["/entities/health/jobs"].post'
     transform: >
         $["responses"]["200"] = {"description": "dummy schema", "schema": {"$ref": "#/definitions/HealthcareJobState"}};
-        $["x-python-custom-poller-sync"] = "azure.ai.textanalytics.TextAnalyticsLROPoller";
-        $["x-python-custom-poller-async"] = "azure.ai.textanalytics.AsyncTextAnalyticsLROPoller";
+        $["x-python-custom-poller-sync"] = "...._lro.AnalyzeBatchActionsLROPoller";
+        $["x-python-custom-poller-async"] = "....._async_lro.AsyncAnalyzeBatchActionsLROPoller";
+        $["x-python-custom-default-polling-method-sync"] = "...._lro.AnalyzeBatchActionsLROPollingMethod";
+        $["x-python-custom-default-polling-method-async"] = "....._async_lro.AsyncAnalyzeBatchActionsLROPollingMethod";
 ```
 
 ### Override Analyze's pager and poller
@@ -60,6 +61,8 @@ directive:
     where: '$.paths["/analyze"].post'
     transform: >
         $["responses"]["200"] = {"description": "dummy schema", "schema": {"$ref": "#/definitions/AnalyzeJobState"}};
-        $["x-python-custom-poller-sync"] = "...._polling.TextAnalyticsLROPoller";
-        $["x-python-custom-poller-async"] = "...._polling.AsyncTextAnalyticsLROPoller";
+        $["x-python-custom-poller-sync"] = "...._lro.AnalyzeBatchActionsLROPoller";
+        $["x-python-custom-poller-async"] = "....._async_lro.AsyncAnalyzeBatchActionsLROPoller";
+        $["x-python-custom-default-polling-method-sync"] = "...._lro.AnalyzeBatchActionsLROPollingMethod";
+        $["x-python-custom-default-polling-method-async"] = "....._async_lro.AsyncAnalyzeBatchActionsLROPollingMethod";
 ```
