@@ -594,6 +594,80 @@
         }
       }
     },
+    "/providers/Microsoft.Capacity/reservationOrders/{reservationOrderId}/reservations/{reservationId}/archive": {
+      "post": {
+        "summary": "Archive a `Reservation`.",
+        "description": "Archiving a `Reservation` moves it to `Archived` state.",
+        "operationId": "Reservation_Archive",
+        "x-ms-examples": {
+          "Archive": {
+            "$ref": "./examples/Archive.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ReservationOrderIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ReservationIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "tags": [
+          "Reservation, Archive"
+        ],
+        "responses": {
+          "200": {
+            "description": "Archived a reservation."
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Capacity/reservationOrders/{reservationOrderId}/reservations/{reservationId}/unarchive": {
+      "post": {
+        "summary": "Unarchive a `Reservation`.",
+        "description": "Unarchiving a `Reservation` moves it to the state it was before archiving.\n",
+        "operationId": "Reservation_Unarchive",
+        "x-ms-examples": {
+          "Unarchive": {
+            "$ref": "./examples/Unarchive.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ReservationOrderIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ReservationIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "tags": [
+          "Reservation, Unarchive"
+        ],
+        "responses": {
+          "200": {
+            "description": "Unarchive complete for the reservation."
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
     "/providers/Microsoft.Capacity/operations": {
       "get": {
         "summary": "Get operations.",
@@ -1639,6 +1713,27 @@
           "format": "double"
         }
       }
+    },
+    "AvailableScopeRequest": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AvailableScopeRequestProperties"
+        }
+      }
+    },
+    "AvailableScopeRequestProperties": {
+      "description": "List of scopes for which availability should be checked",
+      "type": "object",
+      "properties": {
+        "scopes": {
+          "description": "Scopes to be checked for availability",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
     }
   },
   "parameters": {
@@ -1647,11 +1742,9 @@
       "x-ms-parameter-location": "method",
       "in": "body",
       "required": true,
+      "description": "Parameter for listing the available scopes",
       "schema": {
-        "type": "array",
-        "items": {
-          "type": "string"
-        }
+        "$ref": "#/definitions/AvailableScopeRequest"
       }
     },
     "PurchaseParameter": {

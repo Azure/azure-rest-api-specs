@@ -160,6 +160,9 @@
             "$ref": "#/parameters/TemplateSpecNameParameter"
           },
           {
+            "$ref": "#/parameters/TemplateSpecExpandParameter"
+          },
+          {
             "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
@@ -236,6 +239,9 @@
             "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
+            "$ref": "#/parameters/TemplateSpecExpandParameter"
+          },
+          {
             "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
@@ -276,6 +282,9 @@
           },
           {
             "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/TemplateSpecExpandParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -591,6 +600,14 @@
           "type": "string",
           "maxLength": 64,
           "description": "Template Spec display name."
+        },
+        "versions": {
+          "type": "object",
+          "readOnly": true,
+          "description": "High-level information about the versions within this Template Spec. The keys are the version names. Only populated if the $expand query parameter is set to 'versions'.",
+          "additionalProperties": {
+            "$ref": "#/definitions/TemplateSpecVersionInfo"
+          }
         }
       }
     },
@@ -800,6 +817,29 @@
         }
       ]
     },
+    "TemplateSpecVersionInfo": {
+      "type": "object",
+      "description": "High-level information about a Template Spec version.",
+      "properties": {
+        "description": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Template Spec version description."
+        },
+        "timeCreated": {
+          "type": "string",
+          "readOnly": true,
+          "format": "date-time",
+          "description": "The timestamp of when the version was created."
+        },
+        "timeModified": {
+          "type": "string",
+          "readOnly": true,
+          "format": "date-time",
+          "description": "The timestamp of when the version was last modified."
+        }
+      }
+    },
     "TemplateSpecsError": {
       "properties": {
         "error": {
@@ -850,6 +890,27 @@
       "minLength": 1,
       "maxLength": 90,
       "x-ms-parameter-location": "method"
+    },
+    "TemplateSpecExpandParameter": {
+      "name": "$expand",
+      "in": "query",
+      "required": false,
+      "type": "string",
+      "description": "Allows for expansion of additional Template Spec details in the response. Optional.",
+      "x-ms-parameter-location": "method",
+      "enum": [
+        "versions"
+      ],
+      "x-ms-enum": {
+        "name": "TemplateSpecExpandKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "versions",
+            "description": "Includes version information with the Template Spec."
+          }
+        ]
+      }
     },
     "ApiVersionParameter": {
       "name": "api-version",

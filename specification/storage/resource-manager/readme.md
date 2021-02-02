@@ -279,6 +279,15 @@ input-file:
 - Microsoft.Storage/preview/2015-05-01-preview/storage.json
 ```
 
+### Tag: profile-hybrid-2020-09-01
+
+These settings apply only when `--tag=profile-hybrid-2020-09-01` is specified on the command line.
+Creating this tag to pick proper resources from the hybrid profile.
+
+``` yaml $(tag) == 'profile-hybrid-2020-09-01'
+input-file:
+- Microsoft.Storage/stable/2019-06-01/storage.json
+```
 
 ---
 # Code Generation
@@ -292,12 +301,6 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-net
-  - repo: azure-sdk-for-python
-    autorest_options:
-      use: "@microsoft.azure/autorest.python@4.0.70"
-    after_scripts:
-      - python ./scripts/multiapi_init_gen.py azure-mgmt-storage
-      - python ./scripts/trim_aio.py ./sdk/storage/azure-mgmt-storage
   - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
