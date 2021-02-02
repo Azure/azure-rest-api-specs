@@ -5,11 +5,6 @@
     "title": "MixedRealityRemoteRendering",
     "version": "2021-01-01-preview"
   },
-  "host": "remoterendering.westus2.mixedreality.azure.com",
-  "basePath": "/",
-  "schemes": [
-    "https"
-  ],
   "paths": {
     "/accounts/{account_id}/conversions/{conversion_id}": {
       "put": {
@@ -962,7 +957,7 @@
         },
         "storageContainerReadListSas": {
           "type": "string",
-          "description": "An Azure blob storage container shared access signature giving read and list access to the storage container. Optional. If not is not provided the Azure Remote Rendering rendering account needs to be linked with the storage account containing the blob container."
+          "description": "An Azure blob storage container shared access signature giving read and list access to the storage container. Optional. If not is not provided the Azure Remote Rendering rendering account needs to be linked with the storage account containing the blob container. For security purposes this field will never be filled out in responses bodies."
         },
         "blobPrefix": {
           "type": "string",
@@ -992,7 +987,7 @@
         },
         "storageContainerWriteSas": {
           "type": "string",
-          "description": "An Azure blob storage container shared access signature giving write access to the storage container. Optional. If not is not provided the Azure Remote Rendering rendering account needs to be linked with the storage account containing the blob container."
+          "description": "An Azure blob storage container shared access signature giving write access to the storage container. Optional. If not is not provided the Azure Remote Rendering rendering account needs to be linked with the storage account containing the blob container. For security purposes this field will never be filled out in responses bodies."
         },
         "blobPrefix": {
           "type": "string",
