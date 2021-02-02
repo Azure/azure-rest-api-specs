@@ -230,6 +230,61 @@
           "readOnly": true,
           "description": "The name and the display name of the metric, i.e. it is localizable string."
         },
+        "timestamps": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "date-time",
+            "description": "The timestamp for the baseline value in ISO 8601 format."
+          },
+          "description": "The array of timestamps of the baselines."
+        },
+        "baseline": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Baseline"
+          },
+          "description": "The baseline values for each sensitivity."
+        },
+        "metdata": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/BaselineMetadataValue"
+          },
+          "description": "The baseline metadata values."
+        },
+        "predictionResultType": {
+          "type": "integer",
+          "format": "int32",
+          "enum": [
+            0,
+            1,
+            2
+          ],
+          "x-ms-enum": {
+            "name": "PredictionResultType",
+            "modelAsString": false
+          },
+          "description": "The prediction result type of the baseline."
+        },
+        "errorType": {
+          "type": "integer",
+          "format": "int32",
+          "enum": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            100,
+            200
+          ],
+          "x-ms-enum": {
+            "name": "ErrorType",
+            "modelAsString": false
+          },
+          "description": "The error type of the baseline."
+        },
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/BaselineProperties",
@@ -253,28 +308,10 @@
           "type": "string",
           "description": "The aggregation type of the metric."
         },
-        "timestamps": {
-          "type": "array",
-          "items": {
-            "type": "string",
-            "format": "date-time",
-            "description": "The timestamp for the baseline value in ISO 8601 format."
-          },
-          "description": "The array of timestamps of the baselines."
-        },
-        "baseline": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Baseline"
-          },
-          "description": "The baseline values for each sensitivity."
-        },
-        "metadata": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/BaselineMetadataValue"
-          },
-          "description": "The baseline metadata values."
+        "internalOperationId": {
+          "type": "string",
+          "readOnly": true,
+          "description": "internal operation id"
         }
       },
       "description": "The baseline properties class."
@@ -321,6 +358,38 @@
             "description": "the timestamp for the baseline value in ISO 8601 format."
           },
           "description": "the array of timestamps of the baselines."
+        },
+        "PredictionResultType": {
+          "type": "integer",
+          "format": "int32",
+          "enum": [
+            0,
+            1,
+            2
+          ],
+          "x-ms-enum": {
+            "name": "PredictionResultType",
+            "modelAsString": false
+          },
+          "description": "The prediction result type of the baseline."
+        },
+        "ErrorType": {
+          "type": "integer",
+          "format": "int32",
+          "enum": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            100,
+            200
+          ],
+          "x-ms-enum": {
+            "name": "ErrorType",
+            "modelAsString": false
+          },
+          "description": "The error type of the baseline."
         }
       },
       "required": [
