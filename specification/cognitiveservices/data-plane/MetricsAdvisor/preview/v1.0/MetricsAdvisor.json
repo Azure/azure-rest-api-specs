@@ -12,7 +12,7 @@
           "Admin"
         ],
         "summary": "Get latest usage stats",
-        "operationId": "GetActiveSeriesCount",
+        "operationId": "getActiveSeriesCount",
         "produces": [
           "application/json"
         ],
@@ -43,14 +43,14 @@
           "AnomalyAlerting"
         ],
         "summary": "Query a single anomaly alerting configuration",
-        "operationId": "GetAnomalyAlertingConfiguration",
+        "operationId": "getAnomalyAlertingConfiguration",
         "produces": [
           "application/json"
         ],
         "parameters": [
           {
-            "name": "configurationId",
             "in": "path",
+            "name": "configurationId",
             "description": "anomaly alerting configuration unique id",
             "required": true,
             "type": "string",
@@ -82,7 +82,7 @@
           "AnomalyAlerting"
         ],
         "summary": "Update anomaly alerting configuration",
-        "operationId": "UpdateAnomalyAlertingConfiguration",
+        "operationId": "updateAnomalyAlertingConfiguration",
         "consumes": [
           "application/merge-patch+json"
         ],
@@ -130,7 +130,7 @@
           "AnomalyAlerting"
         ],
         "summary": "Delete anomaly alerting configuration",
-        "operationId": "DeleteAnomalyAlertingConfiguration",
+        "operationId": "deleteAnomalyAlertingConfiguration",
         "produces": [
           "application/json"
         ],
@@ -168,7 +168,7 @@
           "AnomalyAlerting"
         ],
         "summary": "Create anomaly alerting configuration",
-        "operationId": "CreateAnomalyAlertingConfiguration",
+        "operationId": "createAnomalyAlertingConfiguration",
         "consumes": [
           "application/json"
         ],
@@ -216,7 +216,7 @@
           "AnomalyAlerting"
         ],
         "summary": "Query alerts under anomaly alerting configuration",
-        "operationId": "GetAlertsByAnomalyAlertingConfiguration",
+        "operationId": "getAlertsByAnomalyAlertingConfiguration",
         "consumes": [
           "application/json"
         ],
@@ -286,7 +286,7 @@
           "AnomalyAlerting"
         ],
         "summary": "Query anomalies under a specific alert",
-        "operationId": "GetAnomaliesFromAlertByAnomalyAlertingConfiguration",
+        "operationId": "getAnomaliesFromAlertByAnomalyAlertingConfiguration",
         "produces": [
           "application/json"
         ],
@@ -351,7 +351,7 @@
           "AnomalyAlerting"
         ],
         "summary": "Query incidents under a specific alert",
-        "operationId": "GetIncidentsFromAlertByAnomalyAlertingConfiguration",
+        "operationId": "getIncidentsFromAlertByAnomalyAlertingConfiguration",
         "produces": [
           "application/json"
         ],
@@ -416,7 +416,7 @@
           "AnomalyDetection"
         ],
         "summary": "Query a single anomaly detection configuration",
-        "operationId": "GetAnomalyDetectionConfiguration",
+        "operationId": "getAnomalyDetectionConfiguration",
         "produces": [
           "application/json"
         ],
@@ -455,7 +455,7 @@
           "AnomalyDetection"
         ],
         "summary": "Update anomaly detection configuration",
-        "operationId": "UpdateAnomalyDetectionConfiguration",
+        "operationId": "updateAnomalyDetectionConfiguration",
         "consumes": [
           "application/merge-patch+json"
         ],
@@ -503,7 +503,7 @@
           "AnomalyDetection"
         ],
         "summary": "Delete anomaly detection configuration",
-        "operationId": "DeleteAnomalyDetectionConfiguration",
+        "operationId": "deleteAnomalyDetectionConfiguration",
         "produces": [
           "application/json"
         ],
@@ -541,7 +541,7 @@
           "AnomalyDetection"
         ],
         "summary": "Create anomaly detection configuration",
-        "operationId": "CreateAnomalyDetectionConfiguration",
+        "operationId": "createAnomalyDetectionConfiguration",
         "consumes": [
           "application/json"
         ],
@@ -589,7 +589,7 @@
           "AnomalyDetection"
         ],
         "summary": "Query all anomaly alerting configurations for specific anomaly detection configuration",
-        "operationId": "GetAnomalyAlertingConfigurationsByAnomalyDetectionConfiguration",
+        "operationId": "getAnomalyAlertingConfigurationsByAnomalyDetectionConfiguration",
         "produces": [
           "application/json"
         ],
@@ -630,7 +630,7 @@
           "AnomalyDetection"
         ],
         "summary": "Query series enriched by anomaly detection",
-        "operationId": "GetSeriesByAnomalyDetectionConfiguration",
+        "operationId": "getSeriesByAnomalyDetectionConfiguration",
         "consumes": [
           "application/json"
         ],
@@ -683,7 +683,7 @@
           "AnomalyDetection"
         ],
         "summary": "Query anomalies under anomaly detection configuration",
-        "operationId": "GetAnomaliesByAnomalyDetectionConfiguration",
+        "operationId": "getAnomaliesByAnomalyDetectionConfiguration",
         "consumes": [
           "application/json"
         ],
@@ -753,7 +753,7 @@
           "AnomalyDetection"
         ],
         "summary": "Query dimension values of anomalies",
-        "operationId": "GetDimensionOfAnomaliesByAnomalyDetectionConfiguration",
+        "operationId": "getDimensionOfAnomaliesByAnomalyDetectionConfiguration",
         "consumes": [
           "application/json"
         ],
@@ -823,7 +823,7 @@
           "AnomalyDetection"
         ],
         "summary": "Query incidents under anomaly detection configuration",
-        "operationId": "GetIncidentsByAnomalyDetectionConfiguration",
+        "operationId": "getIncidentsByAnomalyDetectionConfiguration",
         "consumes": [
           "application/json"
         ],
@@ -884,7 +884,7 @@
           "AnomalyDetection"
         ],
         "summary": "Query incidents under anomaly detection configuration",
-        "operationId": "GetIncidentsByAnomalyDetectionConfigurationNextPages",
+        "operationId": "getIncidentsByAnomalyDetectionConfigurationNextPages",
         "produces": [
           "application/json"
         ],
@@ -941,7 +941,7 @@
           "AnomalyDetection"
         ],
         "summary": "Query root cause for incident",
-        "operationId": "GetRootCauseOfIncidentByAnomalyDetectionConfiguration",
+        "operationId": "getRootCauseOfIncidentByAnomalyDetectionConfiguration",
         "produces": [
           "application/json"
         ],
@@ -989,7 +989,7 @@
           "DataFeed"
         ],
         "summary": "List all data feeds",
-        "operationId": "ListDataFeeds",
+        "operationId": "listDataFeeds",
         "produces": [
           "application/json"
         ],
@@ -1108,7 +1108,7 @@
           "DataFeed"
         ],
         "summary": "Create a new data feed",
-        "operationId": "CreateDataFeed",
+        "operationId": "createDataFeed",
         "consumes": [
           "application/json"
         ],
@@ -1156,7 +1156,7 @@
           "DataFeed"
         ],
         "summary": "Get a data feed by its id",
-        "operationId": "GetDataFeedById",
+        "operationId": "getDataFeedById",
         "produces": [
           "application/json"
         ],
@@ -1195,7 +1195,7 @@
           "DataFeed"
         ],
         "summary": "Update a data feed",
-        "operationId": "UpdateDataFeed",
+        "operationId": "updateDataFeed",
         "consumes": [
           "application/merge-patch+json"
         ],
@@ -1243,7 +1243,7 @@
           "DataFeed"
         ],
         "summary": "Delete a data feed",
-        "operationId": "DeleteDataFeed",
+        "operationId": "deleteDataFeed",
         "produces": [
           "application/json"
         ],
@@ -1281,7 +1281,7 @@
           "Feedback"
         ],
         "summary": "Get a metric feedback by its id",
-        "operationId": "GetMetricFeedback",
+        "operationId": "getMetricFeedback",
         "produces": [
           "application/json"
         ],
@@ -1322,7 +1322,7 @@
           "Feedback"
         ],
         "summary": "List feedback on the given metric",
-        "operationId": "ListMetricFeedbacks",
+        "operationId": "listMetricFeedbacks",
         "consumes": [
           "application/json"
         ],
@@ -1384,7 +1384,7 @@
           "Feedback"
         ],
         "summary": "Create a new metric feedback",
-        "operationId": "CreateMetricFeedback",
+        "operationId": "createMetricFeedback",
         "consumes": [
           "application/json"
         ],
@@ -1432,7 +1432,7 @@
           "Hook"
         ],
         "summary": "List all hooks",
-        "operationId": "ListHooks",
+        "operationId": "listHooks",
         "produces": [
           "application/json"
         ],
@@ -1486,7 +1486,7 @@
           "Hook"
         ],
         "summary": "Create a new hook",
-        "operationId": "CreateHook",
+        "operationId": "createHook",
         "consumes": [
           "application/json"
         ],
@@ -1534,7 +1534,7 @@
           "Hook"
         ],
         "summary": "Get a hook by its id",
-        "operationId": "GetHook",
+        "operationId": "getHook",
         "produces": [
           "application/json"
         ],
@@ -1573,7 +1573,7 @@
           "Hook"
         ],
         "summary": "Update a hook",
-        "operationId": "UpdateHook",
+        "operationId": "updateHook",
         "consumes": [
           "application/merge-patch+json"
         ],
@@ -1621,7 +1621,7 @@
           "Hook"
         ],
         "summary": "Delete a hook",
-        "operationId": "DeleteHook",
+        "operationId": "deleteHook",
         "produces": [
           "application/json"
         ],
@@ -1659,7 +1659,7 @@
           "IngestionStatus"
         ],
         "summary": "Get data ingestion status by data feed",
-        "operationId": "GetDataFeedIngestionStatus",
+        "operationId": "getDataFeedIngestionStatus",
         "consumes": [
           "application/json"
         ],
@@ -1729,7 +1729,7 @@
           "IngestionStatus"
         ],
         "summary": "Reset data ingestion status by data feed to backfill data",
-        "operationId": "ResetDataFeedIngestionStatus",
+        "operationId": "resetDataFeedIngestionStatus",
         "consumes": [
           "application/json"
         ],
@@ -1779,7 +1779,7 @@
           "IngestionStatus"
         ],
         "summary": "Get data last success ingestion job timestamp by data feed",
-        "operationId": "GetIngestionProgress",
+        "operationId": "getIngestionProgress",
         "produces": [
           "application/json"
         ],
@@ -1820,7 +1820,7 @@
           "Metric"
         ],
         "summary": "Get time series data from metric",
-        "operationId": "GetMetricData",
+        "operationId": "getMetricData",
         "consumes": [
           "application/json"
         ],
@@ -1873,7 +1873,7 @@
           "Metric"
         ],
         "summary": "List series (dimension combinations) from metric",
-        "operationId": "GetMetricSeries",
+        "operationId": "getMetricSeries",
         "consumes": [
           "application/json"
         ],
@@ -1943,7 +1943,7 @@
           "Metric"
         ],
         "summary": "List dimension from certain metric",
-        "operationId": "GetMetricDimension",
+        "operationId": "getMetricDimension",
         "consumes": [
           "application/json"
         ],
@@ -2013,7 +2013,7 @@
           "Metric"
         ],
         "summary": "Query all anomaly detection configurations for specific metric",
-        "operationId": "GetAnomalyDetectionConfigurationsByMetric",
+        "operationId": "getAnomalyDetectionConfigurationsByMetric",
         "produces": [
           "application/json"
         ],
@@ -2054,7 +2054,7 @@
           "Metric"
         ],
         "summary": "Query anomaly detection status",
-        "operationId": "GetEnrichmentStatusByMetric",
+        "operationId": "getEnrichmentStatusByMetric",
         "consumes": [
           "application/json"
         ],
@@ -5882,6 +5882,11 @@
     }
   },
   "securityDefinitions": {
+    "ma_api_key": {
+      "type": "apiKey",
+      "name": "x-api-key",
+      "in": "header"
+    },
     "apim_key": {
       "type": "apiKey",
       "name": "Ocp-Apim-Subscription-Key",
@@ -5890,7 +5895,8 @@
   },
   "security": [
     {
-      "apim_key": []
+      "apim_key": [],
+      "ma_api_key": []
     }
   ],
   "parameters": {
@@ -5905,7 +5911,7 @@
     }
   },
   "x-ms-parameterized-host": {
-    "hostTemplate": "{endpoint}/metricsadvisor/v1.0/",
+    "hostTemplate": "{endpoint}/metricsadvisor/v1.0",
     "useSchemePrefix": false,
     "parameters": [
       {
