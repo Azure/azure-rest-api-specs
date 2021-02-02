@@ -15,9 +15,9 @@ clear-output-folder: true
 
 ```yaml $(python) && $(python-mode) == 'update'
 no-namespace-folders: true
-output-folder: $(python-sdks-folder)/azure-mgmt-redisenterprise/azure/mgmt/redisenterprise
+output-folder: $(python-sdks-folder)/redisenterprise/azure-mgmt-redisenterprise/azure/mgmt/redisenterprise
 ```
 ```yaml $(python) && $(python-mode) == 'create'
 basic-setup-py: true
-output-folder: $(python-sdks-folder)/azure-mgmt-redisenterprise
+output-folder: $(python-sdks-folder)/redisenterprise/azure-mgmt-redisenterprise
 ```
