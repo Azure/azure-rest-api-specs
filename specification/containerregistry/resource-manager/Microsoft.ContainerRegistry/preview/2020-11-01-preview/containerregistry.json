@@ -777,6 +777,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "OperationList": {
+            "$ref": "./examples/OperationList.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -3534,6 +3539,13 @@
           "items": {
             "$ref": "#/definitions/OperationMetricSpecificationDefinition"
           }
+        },
+        "logSpecifications": {
+          "description": "A list of Azure Monitoring log definitions.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/OperationLogSpecificationDefinition"
+          }
         }
       }
     },
@@ -3563,6 +3575,24 @@
         },
         "internalMetricName": {
           "description": "Internal metric name.",
+          "type": "string"
+        }
+      }
+    },
+    "OperationLogSpecificationDefinition": {
+      "description": "The definition of Azure Monitoring log.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Log name.",
+          "type": "string"
+        },
+        "displayName": {
+          "description": "Log display name.",
+          "type": "string"
+        },
+        "blobDuration": {
+          "description": "Log blob duration.",
           "type": "string"
         }
       }
@@ -4356,6 +4386,10 @@
       "description": "The parameters for updating a container registry.",
       "type": "object",
       "properties": {
+        "identity": {
+          "$ref": "#/definitions/IdentityProperties",
+          "description": "The identity of the container registry."
+        },
         "tags": {
           "description": "The tags for the container registry.",
           "type": "object",
@@ -4366,10 +4400,6 @@
         "sku": {
           "$ref": "#/definitions/Sku",
           "description": "The SKU of the container registry."
-        },
-        "identity": {
-          "$ref": "#/definitions/IdentityProperties",
-          "description": "The identity of the container registry."
         },
         "properties": {
           "$ref": "#/definitions/RegistryPropertiesUpdateParameters",
@@ -5200,14 +5230,16 @@
       "properties": {
         "serviceUri": {
           "description": "The service URI for the webhook to post notifications.",
-          "type": "string"
+          "type": "string",
+          "x-ms-secret": true
         },
         "customHeaders": {
           "description": "Custom headers that will be added to the webhook notifications.",
           "type": "object",
           "additionalProperties": {
             "type": "string"
-          }
+          },
+          "x-ms-secret": true
         },
         "status": {
           "description": "The status of the webhook at the time the operation was called.",
@@ -5269,14 +5301,16 @@
       "properties": {
         "serviceUri": {
           "description": "The service URI for the webhook to post notifications.",
-          "type": "string"
+          "type": "string",
+          "x-ms-secret": true
         },
         "customHeaders": {
           "description": "Custom headers that will be added to the webhook notifications.",
           "type": "object",
           "additionalProperties": {
             "type": "string"
-          }
+          },
+          "x-ms-secret": true
         },
         "status": {
           "description": "The status of the webhook at the time the operation was called.",
