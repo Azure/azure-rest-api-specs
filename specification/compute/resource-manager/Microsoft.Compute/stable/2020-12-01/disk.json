@@ -826,6 +826,9 @@
         "x-ms-examples": {
           "Update a disk encryption set.": {
             "$ref": "./examples/UpdateADiskEncryptionSet.json"
+          },
+          "Update a disk encryption set with rotationToLatestKeyVersionEnabled set to true.": {
+            "$ref": "./examples/UpdateADiskEncryptionSetWithRotationToLatestKeyVersionEnabled.json"
           }
         },
         "x-ms-long-running-operation": true
@@ -2113,6 +2116,16 @@
           "readOnly": true,
           "type": "string",
           "description": "The disk encryption set provisioning state."
+        },
+        "rotationToLatestKeyVersionEnabled": {
+          "type": "boolean",
+          "description": "Set this flag to true to enable auto-updating of this disk encryption set to the latest key version or the last failed key. Also, it will make any subsequent update performed on this disk encryption set to update the active key."
+        },
+        "lastKeyRotationTimestamp": {
+          "readOnly": true,
+          "type": "string",
+          "format": "date-time",
+          "description": "The time when the active key of this disk encryption set was updated."
         }
       }
     },
