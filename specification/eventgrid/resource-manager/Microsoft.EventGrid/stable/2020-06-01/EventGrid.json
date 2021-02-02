@@ -163,9 +163,6 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK"
-          },
           "202": {
             "description": "Accepted"
           },
@@ -622,9 +619,6 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK"
-          },
           "202": {
             "description": "Accepted"
           },
@@ -1818,9 +1812,6 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK"
-          },
           "202": {
             "description": "Accepted"
           },
@@ -2813,8 +2804,7 @@
           "x-ms-enum": {
             "name": "PublicNetworkAccess",
             "modelAsString": true
-          },
-          "default": "Enabled"
+          }
         },
         "inboundIpRules": {
           "description": "This can be used to restrict traffic from specific IPs instead of all IPs. Note: These are considered only if PublicNetworkAccess is enabled.",
@@ -3126,8 +3116,7 @@
           "x-ms-enum": {
             "name": "PublicNetworkAccess",
             "modelAsString": true
-          },
-          "default": "Enabled"
+          }
         },
         "inboundIpRules": {
           "description": "This can be used to restrict traffic from specific IPs instead of all IPs. Note: These are considered only if PublicNetworkAccess is enabled.",
@@ -3863,13 +3852,11 @@
         "maxEventsPerBatch": {
           "format": "int32",
           "description": "Maximum number of events per batch.",
-          "default": 1,
           "type": "integer"
         },
         "preferredBatchSizeInKilobytes": {
           "format": "int32",
           "description": "Preferred batch size in Kilobytes.",
-          "default": 64,
           "type": "integer"
         }
       }
@@ -3931,12 +3918,6 @@
           "$ref": "#/definitions/EventSubscriptionProperties",
           "description": "Properties of the event subscription.",
           "x-ms-client-flatten": true
-        },
-        "systemData": {
-          "description": "The system metadata relating to Event Subscription resource.",
-          "type": "object",
-          "readOnly": true,
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
         }
       }
     },
@@ -4103,11 +4084,11 @@
           "type": "string"
         },
         "name": {
-          "description": "Name of the resource.",
+          "description": "Name of the resource",
           "type": "string"
         },
         "type": {
-          "description": "Type of the resource.",
+          "description": "Type of the resource",
           "type": "string"
         }
       }
@@ -4217,8 +4198,7 @@
           "x-ms-enum": {
             "name": "PublicNetworkAccess",
             "modelAsString": true
-          },
-          "default": "Enabled"
+          }
         },
         "inboundIpRules": {
           "description": "This can be used to restrict traffic from specific IPs instead of all IPs. Note: These are considered only if PublicNetworkAccess is enabled.",
@@ -4277,8 +4257,7 @@
           "x-ms-enum": {
             "name": "PublicNetworkAccess",
             "modelAsString": true
-          },
-          "default": "Enabled"
+          }
         },
         "inboundIpRules": {
           "description": "This can be used to restrict traffic from specific IPs instead of all IPs. Note: These are considered only if PublicNetworkAccess is enabled.",
@@ -4500,7 +4479,6 @@
       "description": "The number of results to return per page for the list operation. Valid range for top parameter is 1 to 100. If not specified, the default number of results to be returned is 20 items per page.",
       "required": false,
       "type": "integer",
-      "format": "int32",
       "x-ms-parameter-location": "method"
     }
   },
