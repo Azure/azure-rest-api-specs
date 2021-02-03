@@ -1,21 +1,9 @@
 {
   "parameters": {
-    "subscriptionId": "{subscription-id}",
+    "subscriptionId": "{subscriptionId}",
     "resourceGroupName": "myResourceGroup",
     "name": "myMachine",
-    "api-version": "2020-08-15-preview",
-    "location": "eastus2euap",
-    "parameters": {
-      "properties": {
-        "locationData": {
-          "name": "Redmond"
-        },
-        "privateLinkScopeResourceId": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.HybridCompute/privateLinkScopes/privateLinkScopeName"
-      },
-      "identity": {
-        "type": "SystemAssigned"
-      }
-    }
+    "api-version": "2021-01-28-preview"
   },
   "responses": {
     "200": {
@@ -53,7 +41,10 @@
           },
           "vmId": "b7a098cc-b0b8-46e8-a205-62f301a62a8f",
           "locationData": {
-            "name": "Redmond"
+            "name": "Redmond",
+            "city": "redmond",
+            "district": null,
+            "countryOrRegion": "usa"
           },
           "clientPublicKey": "string",
           "privateLinkScopeResourceId": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.HybridCompute/privateLinkScopes/privateLinkScopeName"
