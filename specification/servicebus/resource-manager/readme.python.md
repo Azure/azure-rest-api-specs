@@ -27,6 +27,7 @@ Generate all API versions currently shipped for this package
 
 ```yaml $(multiapi) && !$(track2)
 batch:
+  - tag: package-2021-01-preview
   - tag: package-2018-01-preview
   - tag: package-2017-04
   - tag: package-2015-08
@@ -35,6 +36,7 @@ batch:
 ```yaml $(multiapi) && $(track2)
 clear-output-folder: true
 batch:
+  - tag: package-2021-01-preview
   - tag: package-2018-01-preview
   - tag: package-2017-04
   - tag: package-2015-08
@@ -46,6 +48,20 @@ output-folder: $(python-sdks-folder)/servicebus/azure-mgmt-servicebus/azure/mgmt
 clear-output-folder: false
 perform-load: false
 ```
+
+### Tag: package-2021-01-preview and python
+
+These settings apply only when `--tag=package-2021-01-preview --python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
+
+``` yaml $(tag) == 'package-2021-01-preview'
+namespace: azure.mgmt.servicebus.v2021_01_01_preview
+output-folder: $(python-sdks-folder)/servicebus/azure-mgmt-servicebus/azure/mgmt/servicebus/v2021_01_01_preview
+python:
+  namespace: azure.mgmt.servicebus.v2021_01_01_preview
+  output-folder: $(python-sdks-folder)/servicebus/azure-mgmt-servicebus/azure/mgmt/servicebus/v2021_01_01_preview
+```
+
 
 ### Tag: package-2018-01-preview and python
 
