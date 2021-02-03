@@ -128,6 +128,12 @@
         "x-ms-examples": {
           "StorageAccountCreate": {
             "$ref": "./examples/StorageAccountCreate.json"
+          },
+          "NfsV3AccountCreate": {
+            "$ref": "./examples/NfsV3AccountCreate.json"
+          },
+          "StorageAccountCreateUserAssignedEncryptionIdentityWithCMK": {
+            "$ref": "./examples/StorageAccountCreateUserAssignedEncryptionIdentityWithCMK.json"
           }
         },
         "parameters": [
@@ -267,7 +273,10 @@
           },
           "StorageAccountEnableCMK": {
             "$ref": "./examples/StorageAccountEnableCMK.json"
-          }
+          },
+          "StorageAccountUpdateUserAssignedEncryptionIdentityWithCMK": {
+            "$ref": "./examples/StorageAccountUpdateUserAssignedEncryptionIdentityWithCMK.json"
+          }          
         },
         "parameters": [
           {
@@ -2166,12 +2175,54 @@
           "$ref": "#/definitions/KeyVaultProperties",
           "x-ms-client-name": "KeyVaultProperties",
           "description": "Properties provided by key vault."
+        },
+        "identity": {
+          "$ref": "#/definitions/EncryptionIdentity",
+          "x-ms-client-name": "EncryptionIdentity",
+          "description": "The identity to be used with service-side encryption at rest."
         }
       },
       "required": [
         "keySource"
       ],
       "description": "The encryption settings on the storage account."
+    },
+    "EncryptionIdentity": {
+      "properties": {
+        "userAssignedIdentity": {
+          "type": "string",
+          "description": "Resource identifier of the UserAssigned identity to be associated with server-side encryption on the storage account.",
+          "x-ms-client-name": "EncryptionUserAssignedIdentity"
+        },
+        "type": {
+          "type": "string",
+          "description": "The Encryption Identity type.",
+          "enum": [
+            "ManagedServiceIdentity",
+            "StorageService"
+          ],
+          "x-ms-enum": {
+            "name": "EncryptionIdentityType",
+            "modelAsString": true
+          }
+        }
+      },
+      "description": "Encryption identity for the storage account."
+    },
+    "UserAssignedIdentity": {
+      "properties": {
+        "principalId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The principal ID of the identity."
+        },
+        "clientId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The client ID of the identity."
+        }
+      },
+      "description": "UserAssignedIdentity for the resource."
     },
     "ResourceAccessRule": {
       "properties": {
@@ -2208,11 +2259,11 @@
         "state": {
           "type": "string",
           "enum": [
-            "provisioning",
-            "deprovisioning",
-            "succeeded",
-            "failed",
-            "networkSourceDeleted"
+            "Provisioning",
+            "Deprovisioning",
+            "Succeeded",
+            "Failed",
+            "NetworkSourceDeleted"
           ],
           "x-ms-enum": {
             "name": "State",
@@ -2452,6 +2503,11 @@
         "allowSharedKeyAccess": {
           "type": "boolean",
           "description": "Indicates whether the storage account permits requests to be authorized with the account access key via Shared Key. If false, then all requests, including shared access signatures, must be authorized with Azure Active Directory (Azure AD). The default value is null, which is equivalent to true."
+        },
+        "isNfsV3Enabled": {
+          "type": "boolean",
+          "x-ms-client-name": "EnableNfsV3",
+          "description": "NFS 3.0 protocol support enabled if set to true."
         }
       },
       "description": "The parameters used to create the storage account."
@@ -2472,12 +2528,22 @@
           "type": "string",
           "description": "The identity type.",
           "enum": [
-            "SystemAssigned"
+            "None",
+            "SystemAssigned",
+            "UserAssigned",
+            "SystemAssigned,UserAssigned"
           ],
           "x-ms-enum": {
             "name": "IdentityType",
-            "modelAsString": false
+            "modelAsString": true
           }
+        },
+        "userAssignedIdentities": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/UserAssignedIdentity"
+          },
+          "description": "Gets or sets a list of key value pairs that describe the set of User Assigned identities that will be used with this storage account. The key is the ARM resource identifier of the identity."
         }
       },
       "required": [
@@ -2966,6 +3032,11 @@
         "allowSharedKeyAccess": {
           "type": "boolean",
           "description": "Indicates whether the storage account permits requests to be authorized with the account access key via Shared Key. If false, then all requests, including shared access signatures, must be authorized with Azure Active Directory (Azure AD). The default value is null, which is equivalent to true."
+        },
+        "isNfsV3Enabled": {
+          "type": "boolean",
+          "x-ms-client-name": "EnableNfsV3",
+          "description": "NFS 3.0 protocol support enabled if set to true."
         }
       },
       "description": "Properties of the storage account."
@@ -3896,6 +3967,10 @@
         "keyVaultProperties": {
           "$ref": "#/definitions/EncryptionScopeKeyVaultProperties",
           "description": "The key vault properties for the encryption scope. This is a required field if encryption scope 'source' attribute is set to 'Microsoft.KeyVault'."
+        },
+        "requireInfrastructureEncryption": {
+          "type": "boolean",
+          "description": "A boolean indicating whether or not the service applies a secondary layer of encryption with platform managed keys for data at rest."
         }
       },
       "description": "Properties of the encryption scope."
@@ -3905,6 +3980,17 @@
         "keyUri": {
           "type": "string",
           "description": "The object identifier for a key vault key object. When applied, the encryption scope will use the key referenced by the identifier to enable customer-managed key support on this encryption scope."
+        },
+        "currentVersionedKeyIdentifier": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The object identifier of the current versioned Key Vault Key in use."
+        },
+        "lastKeyRotationTimestamp": {
+          "type": "string",
+          "readOnly": true,
+          "format": "date-time",
+          "description": "Timestamp of last rotation of the Key Vault Key."
         }
       },
       "description": "The key vault properties for the encryption scope. This is a required field if encryption scope 'source' attribute is set to 'Microsoft.KeyVault'."

@@ -70,7 +70,10 @@
           },
           "PutFileServices_EnableSMBMultichannel": {
             "$ref": "./examples/FileServicesPut_EnableSMBMultichannel.json"
-          }
+          },
+          "PutFileServices_EnableSecureSmbFeatures": {
+            "$ref": "./examples/FileServicesPut_EnableSecureSmbFeatures.json"
+          }          
         },
         "description": "Sets the properties of file services in storage accounts, including CORS (Cross-Origin Resource Sharing) rules. ",
         "parameters": [
@@ -598,6 +601,22 @@
         "multichannel": {
           "$ref": "#/definitions/Multichannel",
           "description": "Multichannel setting. Applies to Premium FileStorage only."
+        },
+        "versions": {
+          "type": "string",
+          "description": "SMB protocol versions supported by server. Valid values are SMB2.1, SMB3.0, SMB3.1.1. Should be passed as a string with delimiter ';'."
+        },
+        "authenticationMethods": {
+          "type": "string",
+          "description": "SMB authentication methods supported by server. Valid values are NTLMv2, Kerberos. Should be passed as a string with delimiter ';'."
+        },
+        "kerberosTicketEncryption": {
+          "type": "string",
+          "description": "Kerberos ticket encryption supported by server. Valid values are RC4-HMAC, AES-256. Should be passed as a string with delimiter ';'"
+        },
+        "channelEncryption": {
+          "type": "string",
+          "description": "SMB channel encryption supported by server. Valid values are AES-128-CCM, AES-128-GCM, AES-256-GCM. Should be passed as a string with delimiter ';'."
         }
       },
       "description": "Setting for SMB protocol"
