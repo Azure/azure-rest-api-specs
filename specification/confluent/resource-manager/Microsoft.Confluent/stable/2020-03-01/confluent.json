@@ -45,6 +45,9 @@
         ],
         "parameters": [
           {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
             "$ref": "#/parameters/SubscriptionIdParameter"
           }
         ],
@@ -86,6 +89,9 @@
           "application/json"
         ],
         "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
           },
@@ -751,7 +757,8 @@
         },
         "provisioningState": {
           "description": "Provision states for confluent RP",
-          "$ref": "#/definitions/ProvisioningState"
+          "$ref": "#/definitions/ProvisioningState",
+          "readOnly": true
         },
         "organizationId": {
           "description": "Id of the Confluent organization.",
