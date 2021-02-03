@@ -70,13 +70,12 @@ Use `--python-mode=update` if you already have a setup.py and just want to updat
 
 ``` yaml $(python)
 python-mode: create
-python:
-  license-header: MICROSOFT_MIT_NO_VERSION
-  add-credentials: true
-  payload-flattening-threshold: 2
-  namespace: azure.cognitiveservices.translatortext
-  package-name: azure-cognitiveservices-translatortext
-  clear-output-folder: true
+license-header: MICROSOFT_MIT_NO_VERSION
+add-credentials: true
+payload-flattening-threshold: 2
+namespace: azure.ai.translatortext
+package-name: azure-ai-translatortext
+clear-output-folder: true
 ```
 ``` yaml $(python) && $(python-mode) == 'update'
 python:
