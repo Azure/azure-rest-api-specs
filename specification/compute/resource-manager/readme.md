@@ -232,29 +232,6 @@ input-file:
 - Microsoft.Compute/stable/2020-12-01/runCommands.json
 ```
 
-### Tag: package-2020-12-01-stable
-
-These settings apply only when `--tag=package-2020-12-01-stable` is specified on the command line.
-
-``` yaml $(tag) == 'package-2020-12-01-stable'
-input-file:
-- Microsoft.Compute/stable/2020-12-01/compute.json
-- Microsoft.Compute/stable/2020-12-01/runCommands.json
-- Microsoft.Compute/stable/2019-04-01/skus.json
-- Microsoft.Compute/stable/2020-09-30/disk.json
-- Microsoft.Compute/stable/2019-12-01/gallery.json
-```
-
-### Tag: package-2020-12-01-stable-only
-
-These settings apply only when `--tag=package-2020-12-01-stable-only` is specified on the command line.
-
-``` yaml $(tag) == 'package-2020-12-01-stable-only'
-input-file:
-- Microsoft.Compute/stable/2020-12-01/compute.json
-- Microsoft.Compute/stable/2020-12-01/runCommands.json
-```
-
 ### Tag: package-2020-10-01-preview
 
 These settings apply only when `--tag=package-2020-10-01-preview` is specified on the command line.
