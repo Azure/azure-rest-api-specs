@@ -1,0 +1,164 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2020-12-01",
+    "title": "Industry Data Workbench APIs in Synpase"
+  },
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{endpoint}",
+    "useSchemePrefix": false,
+    "parameters": [
+      {
+        "$ref": "#/parameters/Endpoint"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "paths": {
+    "/builtinmodels": {
+      "get": {
+        "tags": [
+          "IndustryDataWorkbench"
+        ],
+        "operationId": "Idw_ListBuiltnnModels",
+        "description": "List builtin models of Industry Data Workbench.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/BaseModelVersion"
+              }
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List role assignments": {
+            "$ref": "./examples/Idw_ListBuiltinModels.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "BaseModelVersion": {
+      "description": "BaseModelVersion tracked resource object.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "systemData": {
+          "description": "Metadata pertaining to creation and last modification of the resource.",
+          "allOf": [
+            {
+              "$ref": "../../../../common/v1/types.json#/definitions/SystemData"
+            }
+          ],
+          "readOnly": true
+        },
+        "properties": {
+          "description": "BaseModelVersion resource properties.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/BaseModelVersionProperties"
+            }
+          ],
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "BaseModelVersionProperties": {
+      "description": "BaseModel objects property bag.",
+      "type": "object",
+      "properties": {
+        "description": {
+          "description": "A brief description of BuiltInModel. Eg: CDM standard entities.",
+          "type": "string"
+        },
+        "hostname": {
+          "description": "ADLS dfs primary endpoint Eg: adlsgen2Retail.dfs.core.windows.net.",
+          "type": "string"
+        },
+        "accessKey": {
+          "description": "AccessKey of the ADLS gen2 storage account.",
+          "type": "string"
+        },
+        "containerName": {
+          "description": "ADLS container name Eg basemodels",
+          "type": "string"
+        },
+        "folderPath": {
+          "description": "FolderPath to root manifest Eg: /core/",
+          "type": "string"
+        },
+        "manifestName": {
+          "description": "Root manifest file name Eg: core.manifest.cdm.json.",
+          "type": "string"
+        },
+        "customCoreFiles": {
+          "description": "Custom core files. example: IDMConcepts.cdm.json.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "provisioningState": {
+          "description": "State of async operation.",
+          "enum": [
+            "Unknown",
+            "Creating",
+            "Updating",
+            "Succeeded",
+            "Failed",
+            "Deleting",
+            "Canceled"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": true
+          }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "Endpoint": {
+      "name": "endpoint",
+      "description": "The workspace development endpoint, for example https://myworkspace.dev.azuresynapse.net.",
+      "required": true,
+      "type": "string",
+      "in": "path",
+      "x-ms-skip-url-encoding": true,
+      "x-ms-parameter-location": "client"
+    },
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "The Synapse client API Version."
+    }
+  }
+}
