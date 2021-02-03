@@ -5,6 +5,18 @@
     "title": "MixedRealityRemoteRendering",
     "version": "2021-01-01-preview"
   },
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{endpoint}",
+    "useSchemePrefix": false,
+    "parameters": [
+      {
+        "$ref": "#/parameters/Endpoint"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
   "paths": {
     "/accounts/{account_id}/conversions/{conversion_id}": {
       "put": {
@@ -1258,6 +1270,15 @@
     }
   },
   "parameters": {
+    "Endpoint": {
+      "name": "endpoint",
+      "description": "The endpoint to use e.g. https://remoterendering.eastus.mixedreality.azure.com a list can be found at https://docs.microsoft.com/en-us/azure/remote-rendering/reference/regions",
+      "required": true,
+      "type": "string",
+      "in": "path",
+      "x-ms-skip-url-encoding": true,
+      "x-ms-parameter-location": "client"
+    },
     "api_version": {
       "name": "api-version",
       "in": "query",
