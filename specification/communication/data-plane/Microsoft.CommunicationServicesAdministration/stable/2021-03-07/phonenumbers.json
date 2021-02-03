@@ -2,10 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "PhoneNumbersClient",
-    "description": "The phone numbers client uses the Communication Services to acquire and manage phone numbers.",
-    "contact": {
-      "email": "acsdevexdisc@microsoft.com"
-    },
+    "description": "The phone numbers client uses Azure Communication Services to acquire and manage phone numbers.",
     "version": "2021-03-07"
   },
   "paths": {
@@ -37,6 +34,7 @@
             "in": "body",
             "name": "body",
             "description": "The phone number search request.",
+            "required": true,
             "schema": {
               "$ref": "#/definitions/PhoneNumberSearchRequest"
             }
@@ -82,7 +80,7 @@
         "tags": [
           "Find and purchase available phone numbers"
         ],
-        "summary": "Gets phone number search by search id.",
+        "summary": "Gets a phone number search result by search id.",
         "operationId": "PhoneNumbers_GetSearchResult",
         "produces": [
           "application/json"
@@ -114,8 +112,8 @@
           }
         },
         "x-ms-examples": {
-          "Get PhoneNumber Search Details": {
-            "$ref": "./examples/GetPhoneNumberSearch.json"
+          "Get PhoneNumber Search Result": {
+            "$ref": "./examples/GetPhoneNumberSearchResult.json"
           }
         }
       }
@@ -141,6 +139,7 @@
             "in": "body",
             "name": "body",
             "description": "The phone number purchase request",
+            "required": true,
             "schema": {
               "$ref": "#/definitions/PhoneNumberPurchaseRequest"
             }
@@ -276,7 +275,7 @@
           {
             "in": "path",
             "name": "phoneNumber",
-            "description": "The acquired phone number whose details are to be fetched, e.g. +11234567890.",
+            "description": "The acquired phone number whose details are to be fetched in E.164 format, e.g. +11234567890.",
             "required": true,
             "type": "string"
           },
@@ -574,7 +573,7 @@
       }
     },
     "PhoneNumberSearchRequest": {
-      "description": "Represents a phone number search request to reserve some phone numbers.",
+      "description": "Represents a phone number search request to find phone numbers. Found phone numbers are temporarily held for a following purchase.",
       "required": [
         "assignmentType",
         "capabilities",
@@ -583,7 +582,7 @@
       "type": "object",
       "properties": {
         "phoneNumberType": {
-          "description": "The type of phone numbers to search for, e.g. Geographic, or TollFree.",
+          "description": "The type of phone numbers to search for, e.g. geographic, or tollFree.",
           "enum": [
             "geographic",
             "tollFree"
@@ -624,6 +623,11 @@
     },
     "PhoneNumberCost": {
       "description": "The incurred cost for a single phone number.",
+      "required": [
+        "amount",
+        "billingFrequency",
+        "currencyCode"
+      ],
       "type": "object",
       "properties": {
         "amount": {
@@ -650,6 +654,14 @@
     },
     "PhoneNumberSearchResult": {
       "description": "The result of a phone number search operation.",
+      "required": [
+        "assignmentType",
+        "capabilities",
+        "phoneNumbers",
+        "phoneNumberType",
+        "searchExpiresBy",
+        "searchId"
+      ],
       "type": "object",
       "properties": {
         "searchId": {
@@ -664,7 +676,7 @@
           }
         },
         "phoneNumberType": {
-          "description": "The phone number's type, e.g. Geographic, or TollFree.",
+          "description": "The phone number's type, e.g. geographic, or tollFree.",
           "enum": [
             "geographic",
             "tollFree"
@@ -777,6 +789,7 @@
       "required": [
         "assignmentType",
         "capabilities",
+        "cost",
         "countryCode",
         "id",
         "phoneNumber",
@@ -921,7 +934,7 @@
     "Endpoint": {
       "in": "path",
       "name": "endpoint",
-      "description": "The endpoint of the Azure Communication resource.",
+      "description": "The communication resource, for example https://resourcename.communication.azure.com",
       "required": true,
       "type": "string",
       "x-ms-skip-url-encoding": true,
