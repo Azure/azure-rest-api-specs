@@ -2166,15 +2166,6 @@
             "type": "string"
           },
           {
-            "name": "ruleSet",
-            "in": "body",
-            "description": "RuleSet properties",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/RuleSet"
-            }
-          },
-          {
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
@@ -3365,7 +3356,11 @@
                 "originRequestTraffic",
                 "originRequestBandwidth",
                 "totalLatency"
-              ]
+              ],
+              "x-ms-enum": {
+                  "name": "LogMetric",
+                  "modelAsString": true
+              }
             }
           },
           {
@@ -3391,7 +3386,11 @@
               "PT5M",
               "PT1H",
               "P1D"
-            ]
+            ],
+            "x-ms-enum": {
+              "name": "LogMetricsGranularity",
+              "modelAsString": true
+            }
           },
           {
             "name": "groupBy",
@@ -3406,7 +3405,11 @@
                 "cacheStatus",
                 "country",
                 "customDomain"
-              ]
+              ],
+              "x-ms-enum": {
+                "name": "LogMetricsGroupBy",
+                "modelAsString": true
+              }
             }
           },
           {
@@ -3430,7 +3433,7 @@
           {
             "name": "customDomains",
             "type": "array",
-            "required": false,
+            "required": true,
             "in": "query",
             "items": {
               "type": "string"
@@ -3439,7 +3442,7 @@
           {
             "name": "protocols",
             "type": "array",
-            "required": false,
+            "required": true,
             "in": "query",
             "items": {
               "type": "string"
@@ -3504,7 +3507,11 @@
                 "browser",
                 "userAgent",
                 "countryOrRegion"
-              ]
+              ],
+              "x-ms-enum": {
+                "name": "LogRanking",
+                "modelAsString": true
+              }
             }
           },
           {
@@ -3517,10 +3524,15 @@
               "enum": [
                 "clientRequestCount",
                 "clientRequestTraffic",
-                "clientRequestBandwidth",
-                "originRequestTraffic",
-                "originRequestBandwidth"
-              ]
+                "hitCount",
+                "missCount",
+                "userErrorCount",
+                "errorCount"
+              ],
+              "x-ms-enum": {
+                "name": "LogRankingMetric",
+                "modelAsString": true
+              }
             }
           },
           {
@@ -3700,7 +3712,11 @@
               "type": "string",
               "enum": [
                 "clientRequestCount"
-              ]
+              ],
+              "x-ms-enum": {
+                "name": "WafMetric",
+                "modelAsString": true
+              }
             }
           },
           {
@@ -3726,7 +3742,11 @@
               "PT5M",
               "PT1H",
               "P1D"
-            ]
+            ],
+            "x-ms-enum": {
+              "name": "WafGranularity",
+              "modelAsString": true
+            }
           },
           {
             "name": "actions",
@@ -3740,7 +3760,11 @@
                 "block",
                 "log",
                 "redirect"
-              ]
+              ],
+              "x-ms-enum": {
+                "name": "WafAction",
+                "modelAsString": true
+              }
             }
           },
           {
@@ -3753,7 +3777,11 @@
               "enum": [
                 "httpStatusCode",
                 "customDomain"
-              ]
+              ],
+              "x-ms-enum": {
+                "name": "WafRankingGroupBy",
+                "modelAsString": true
+              }
             }
           },
           {
@@ -3767,7 +3795,11 @@
                 "managed",
                 "custom",
                 "bot"
-              ]
+              ],
+              "x-ms-enum": {
+                "name": "WafRuleType",
+                "modelAsString": true
+              }
             }
           }
         ],
@@ -3825,7 +3857,11 @@
               "type": "string",
               "enum": [
                 "clientRequestCount"
-              ]
+              ],
+              "x-ms-enum": {
+                "name": "WafMetric",
+                "modelAsString": true
+              }
             }
           },
           {
@@ -3865,7 +3901,11 @@
                 "url",
                 "country",
                 "ruleType"
-              ]
+              ],
+              "x-ms-enum": {
+                "name": "WafRankingType",
+                "modelAsString": true
+              }
             }
           },
           {
@@ -3880,7 +3920,11 @@
                 "block",
                 "log",
                 "redirect"
-              ]
+              ],
+              "x-ms-enum": {
+                "name": "WafAction",
+                "modelAsString": true
+              }
             }
           },
           {
@@ -3894,7 +3938,11 @@
                 "managed",
                 "custom",
                 "bot"
-              ]
+              ],
+              "x-ms-enum": {
+                "name": "WafRuleType",
+                "modelAsString": true
+              }
             }
           }
         ],
