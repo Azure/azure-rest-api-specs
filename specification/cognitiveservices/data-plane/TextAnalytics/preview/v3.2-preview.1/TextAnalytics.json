@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "v3.1-preview.2",
+    "version": "v3.2-preview.2",
     "contact": {
       "name": "Microsoft Cognitive Services",
       "url": "https://azure.microsoft.com/en-us/services/cognitive-services/text-analytics/",
@@ -23,7 +23,7 @@
     }
   ],
   "x-ms-parameterized-host": {
-    "hostTemplate": "{Endpoint}/text/analytics/v3.1-preview.2",
+    "hostTemplate": "{Endpoint}/{ServicePrefix}/v3.2-preview.1",
     "useSchemePrefix": false,
     "parameters": [
       {
@@ -332,7 +332,7 @@
         "deprecated": false
       }
     },
-    "/questionanswering/{kbId}/generateanswer": {
+    "/qna/{kbId}/generateanswer": {
       "post": {
         "tags": [
           "Knowledgebases"
@@ -1869,6 +1869,15 @@
       "in": "path",
       "x-ms-skip-url-encoding": true
     },
+    "ServicePrefix": {
+      "name": "ServicePrefix",
+      "description": "Supported sub service prefixes through this cognitive service.",
+      "x-ms-parameter-location": "client",
+      "required": true,
+      "type": "string",
+      "in": "path",
+      "x-ms-skip-url-encoding": true
+    },
     "StringIndexType": {
       "name": "stringIndexType",
       "in": "query",
@@ -1934,6 +1943,26 @@
       "schema": {
         "$ref": "#/definitions/LanguageBatchInput"
       },
+      "x-ms-parameter-location": "method"
+    },
+    "KbId": {
+      "type": "string",
+      "name": "kbId",
+      "in": "path",
+      "required": true,
+      "x-nullable": false,
+      "description": "Knowledgebase id.",
+      "x-ms-parameter-location": "method"
+    },
+    "GenerateAnswerPayload": {
+      "name": "generateAnswerPayload",
+      "in": "body",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/Query"
+      },
+      "x-nullable": true,
+      "description": "Post body of the request.",
       "x-ms-parameter-location": "method"
     }
   }
