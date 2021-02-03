@@ -4644,8 +4644,13 @@
           "readOnly": true
         },
         "systemData": {
-          "$ref": "#/definitions/SystemData",
-          "description": "System Data of the Azure resource."
+          "description": "System Data of the Azure resource.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/SystemData"
+            }
+          ],
+          "readOnly": true
         },
         "tags": {
           "description": "Tags on the azure resource.",
@@ -5413,8 +5418,13 @@
           "readOnly": true
         },
         "systemData": {
-          "$ref": "#/definitions/SystemData",
-          "description": "System Data of the Azure resource."
+          "description": "System Data of the Azure resource.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/SystemData"
+            }
+          ],
+          "readOnly": true
         },
         "type": {
           "description": "Type of the azure resource",
@@ -6676,8 +6686,18 @@
           "type": "string"
         },
         "createdByType": {
-          "description": "The type of identity that created the resource. Possible values include: 'User', 'Application', 'ManagedIdentity', 'Key'.",
-          "type": "string"
+          "description": "The type of identity that created the resource.",
+          "enum": [
+            "User",
+            "Application",
+            "ManagedIdentity",
+            "Key"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "createdByType",
+            "modelAsString": true
+          }
         },
         "lastModifiedAt": {
           "format": "date-time",
@@ -6689,8 +6709,18 @@
           "type": "string"
         },
         "lastModifiedByType": {
-          "description": "The type of identity that last modified the resource. Possible values include: 'User', 'Application', 'ManagedIdentity', 'Key'.",
-          "type": "string"
+          "description": "The type of identity that last modified the resource.",
+          "enum": [
+            "User",
+            "Application",
+            "ManagedIdentity",
+            "Key"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "lastModifiedByType",
+            "modelAsString": true
+          }
         }
       }
     },
