@@ -29,6 +29,33 @@ openapi-type: arm
 tag: package-2019-06
 ```
 
+### Tag: package-2021-01
+
+These settings apply only when `--tag=package-2021-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-01'
+input-file:
+- Microsoft.Storage/stable/2021-01-01/storage.json
+- Microsoft.Storage/stable/2021-01-01/blob.json
+- Microsoft.Storage/stable/2021-01-01/file.json
+- Microsoft.Storage/stable/2021-01-01/queue.json
+- Microsoft.Storage/stable/2021-01-01/table.json
+
+directive:
+  - suppress: R3018
+    reason: Existing boolean properties
+    approved-by: "@fearthecowboy"
+
+  - where:
+    - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/blobServices/default/containers/{containerName}/setLegalHold"].post.operationId
+    - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/blobServices/default/containers/{containerName}/clearLegalHold"].post.operationId
+    - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/regenerateKey"].post.operationId
+    suppress: R1003
+    reason: APIs return array of values, is not actually a 'list' operation
+    approved-by: "@fearthecowboy"
+
+```
+
 ### Tag: package-2020-08-preview
 
 These settings apply only when `--tag=package-2020-08-preview` is specified on the command line.
