@@ -167,13 +167,13 @@
           "200": {
             "description": "Namespace created successfully.",
             "schema": {
-              "$ref": "#/definitions/SBNamespaceResponse"
+              "$ref": "#/definitions/SBNamespace"
             }
           },
           "201": {
             "description": "Namespace create request accepted.",
             "schema": {
-              "$ref": "#/definitions/SBNamespaceResponse"
+              "$ref": "#/definitions/SBNamespace"
             }
           },
           "202": {
@@ -267,7 +267,7 @@
           "200": {
             "description": "Namespace successfully returned.",
             "schema": {
-              "$ref": "#/definitions/SBNamespaceResponse"
+              "$ref": "#/definitions/SBNamespace"
             }
           },
           "default": {
@@ -316,13 +316,13 @@
           "200": {
             "description": "Namespace updated successfully.",
             "schema": {
-              "$ref": "#/definitions/SBNamespaceResponse"
+              "$ref": "#/definitions/SBNamespace"
             }
           },
           "201": {
             "description": "Namespace update request accepted.",
             "schema": {
-              "$ref": "#/definitions/SBNamespaceResponse"
+              "$ref": "#/definitions/SBNamespace"
             }
           },
           "202": {
@@ -365,7 +365,7 @@
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/SBNamespaceResponse"
+            "$ref": "#/definitions/SBNamespace"
           },
           "description": "Result of the List Namespace operation."
         },
@@ -376,7 +376,7 @@
       },
       "description": "The response of the List Namespace operation."
     },
-	"SBNamespaceResponse": {
+    "SBNamespace": {
       "properties": {
         "sku": {
           "$ref": "#/definitions/SBSku",
@@ -390,29 +390,6 @@
           "readOnly": true,
           "description": "The system meta data relating to this resource.",
           "$ref": "../../../common/v2/types.json#/definitions/systemData"
-        },
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/SBNamespaceProperties",
-          "description": "Properties of the namespace."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../common/v1/definitions.json#/definitions/TrackedResource"
-        }
-      ],
-      "description": "Description of a namespace resource."
-    },
-    "SBNamespace": {
-      "properties": {
-        "sku": {
-          "$ref": "#/definitions/SBSku",
-          "description": "Properties of SKU"
-        },
-        "identity": {
-          "$ref": "#/definitions/Identity",
-          "description": "Properties of BYOK Identity description"
         },
         "properties": {
           "x-ms-client-flatten": true,
