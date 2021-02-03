@@ -55,18 +55,17 @@ directive:
     approved-by: "@fearthecowboy"
 
   - where:
-      - $.paths[($.operationId["BlobServices_*"])]
-      - $.paths[($.operationId["FileServices_*"])]
-      - $.paths[($.operationId["QueueServices_*"])]
-      - $.paths[($.operationId["TableServices_*"])]
-      - $.paths[($.operationId["StorageAccounts_*"])]
-      - $.paths[($.operationId["DeletedAccounts_*"])]
-      - $.paths[($.operationId["ObjectReplicationPolicies_*"])]
-      - $.paths[($.operationId["EncryptionScopes_*"])]
-      - $.paths[($.operationId["ManagementPolicies_*"])]
-      - $.paths[($.operationId["PrivateEndpointConnections_*"])]
-    suppress-validations: 
-      - R4009
+    - $.paths[($.operationId["BlobServices_*"])]
+    - $.paths[($.operationId["FileServices_*"])]
+    - $.paths[($.operationId["QueueServices_*"])]
+    - $.paths[($.operationId["TableServices_*"])]
+    - $.paths[($.operationId["StorageAccounts_*"])]
+    - $.paths[($.operationId["DeletedAccounts_*"])]
+    - $.paths[($.operationId["ObjectReplicationPolicies_*"])]
+    - $.paths[($.operationId["EncryptionScopes_*"])]
+    - $.paths[($.operationId["ManagementPolicies_*"])]
+    - $.paths[($.operationId["PrivateEndpointConnections_*"])]
+    suppress: R4009
 ```
 
 ### Tag: package-2020-08-preview
