@@ -69,7 +69,7 @@
   },
   "definitions": {
     "SmsRecipient": {
-      "description": "Recipient Details for sending SMS messages.",
+      "description": "Recipient details for sending SMS messages.",
       "required": [
         "to"
       ],
@@ -178,10 +178,11 @@
         },
         "repeatability-result": {
           "description": "The result of a repeatable request with one of the case-insensitive values accepted or rejected.",
-          "type": "string"
+          "type": "string",
+          "enum": [ "accepted", "rejected" ]
         },
         "successful": {
-          "description": "Flag to check if message processing succeeded or not.",
+          "description": "Indicates if the message is processed successfully or not.",
           "type": "boolean"
         },
         "errorMessage": {
