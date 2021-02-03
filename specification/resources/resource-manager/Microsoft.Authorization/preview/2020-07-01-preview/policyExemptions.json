@@ -87,15 +87,6 @@
         },
         "parameters": [
           {
-            "name": "parameters",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/PolicyExemption"
-            },
-            "description": "Parameters for the policy exemption."
-          },
-          {
             "$ref": "#/parameters/ScopeParameter"
           },
           {
@@ -103,6 +94,15 @@
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PolicyExemption"
+            },
+            "description": "Parameters for the policy exemption."
           }
         ],
         "responses": {
@@ -377,7 +377,11 @@
   "definitions": {
     "CloudError": {
       "x-ms-external": true,
-      "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse",
+      "properties": {
+        "error": {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse"
+        }
+      },
       "description": "An error response from a policy operation."
     },
     "PolicyExemptionProperties": {
@@ -454,15 +458,25 @@
           "type": "object",
           "description": "Azure Resource Manager metadata containing createdBy and modifiedBy information.",
           "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
+        },
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The ID of the policy exemption."
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The name of the policy exemption."
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The type of the resource (Microsoft.Authorization/policyExemptions)."
         }
       },
       "description": "The policy exemption.",
-      "x-ms-azure-resource": true,
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
-        }
-      ]
+      "x-ms-azure-resource": true
     },
     "PolicyExemptionListResult": {
       "properties": {
@@ -505,8 +519,7 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "The ID of the target subscription.",
-      "x-ms-parameter-location": "method"
+      "description": "The ID of the target subscription."
     },
     "ResourceGroupNameParameter": {
       "name": "resourceGroupName",
