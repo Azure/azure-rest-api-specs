@@ -413,7 +413,7 @@
         }
       }
     },
-    "/providers/Microsoft.ResourceHealth/potentialOutages/default": {
+    "/providers/Microsoft.ResourceHealth/potentialOutages/{outageId}": {
       "get": {
         "tags": [
           "PotentialOutages"
@@ -423,6 +423,9 @@
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/OutageIdParameter"
           }
         ],
         "responses": {
@@ -1607,6 +1610,14 @@
       "required": true,
       "type": "string",
       "description": "Client Api Version."
+    },
+    "OutageIdParameter": {
+      "name": "outageId",
+      "in": "path",
+      "description": "The id of the potential outage.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
     },
     "ResourceGroupNameParameter": {
       "name": "resourceGroupName",
