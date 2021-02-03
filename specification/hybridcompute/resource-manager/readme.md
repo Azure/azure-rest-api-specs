@@ -29,9 +29,13 @@ openapi-type: arm
 tag: package-preview-2021-01
 ```
 
-
 ### Tag: package-preview-2021-01
 
+<<<<<<< HEAD
+### Tag: package-preview-2021-01
+
+=======
+>>>>>>> master
 These settings apply only when `--tag=package-preview-2021-01` is specified on the command line.
 
 ```yaml $(tag) == 'package-preview-2021-01'
