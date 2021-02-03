@@ -426,3 +426,49 @@ See configuration in [readme.java.md](./readme.java.md)
 
 See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
 
+
+## Suppression
+
+``` yaml
+directive:  
+  - suppress: R4009
+    from: apimapis.json
+    reason: Warning raised to error while PR was being reviewed. SystemData will implement in next preview version.
+  - suppress: R4009
+    from: apimapiversionsets.json
+    reason: Warning raised to error while PR was being reviewed. SystemData will implement in next preview version.
+  - suppress: R4009
+    from: apimauthorizationservers.json
+    reason: Warning raised to error while PR was being reviewed. SystemData will implement in next preview version.
+  - suppress: R4009
+    from: apimbackends.json
+    reason: Warning raised to error while PR was being reviewed. SystemData will implement in next preview version.
+  - suppress: R4009
+    from: apimbackends.json
+    reason: Warning raised to error while PR was being reviewed. SystemData will implement in next preview version.
+  - suppress: R4009
+    from: apimcaches.json
+    reason: Warning raised to error while PR was being reviewed. SystemData will implement in next preview version.
+  - suppress: R4009
+    from: apimcertificates.json
+    reason: Warning raised to error while PR was being reviewed. SystemData will implement in next preview version.
+  - suppress: R4009
+    from: apimdeployment.json
+    reason: Warning raised to error while PR was being reviewed. SystemData will implement in next preview version.
+  - suppress: R4009
+    from: apimsubscriptions.json
+    reason: Warning raised to error while PR was being reviewed. SystemData will implement in next preview version.
+  - suppress: R4009
+    from: apimusers.json
+    reason: Warning raised to error while PR was being reviewed. SystemData will implement in next preview version.
+  - suppress: R4009
+    from: apimproducts.json
+    reason: Warning raised to error while PR was being reviewed. SystemData will implement in next preview version.
+  - suppress: R4009
+    from: apimnamedvalues.json
+    reason: Warning raised to error while PR was being reviewed. SystemData will implement in next preview version.   
+  - suppress: R4009
+    from: apimusers.json
+    reason: Warning raised to error while PR was being reviewed. SystemData will implement in next preview version.   
+```
+
