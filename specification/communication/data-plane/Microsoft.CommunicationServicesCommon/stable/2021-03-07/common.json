@@ -3,7 +3,7 @@
   "info": {
     "title": "Communication",
     "description": "Communication Services API common types.",
-    "version": "2020-11-19-preview1"
+    "version": "2021-03-07"
   },
   "paths": {},
   "definitions": {
@@ -71,7 +71,7 @@
       }
     },
     "CommunicationIdentifierModel": {
-      "description": "Identifies a participant in Azure Communication services. A participant is, for example, a phone number or an Azure communication user.",
+      "description": "Identifies a participant in Azure Communication services. A participant is, for example, a phone number or an Azure communication user. This model must be interpreted as a union: Apart from rawId, at most one further property may be set.",
       "type": "object",
       "properties": {
         "rawId": {
@@ -83,11 +83,11 @@
           "description": "The communication user."
         },
         "phoneNumber": {
-          "$ref":  "#/definitions/PhoneNumberIdentifierModel",
+          "$ref": "#/definitions/PhoneNumberIdentifierModel",
           "description": "The phone number."
         },
         "microsoftTeamsUser": {
-          "type": "string",
+          "$ref": "#/definitions/MicrosoftTeamsUserIdentifierModel",
           "description": "The Microsoft Teams user."
         }
       }
@@ -131,11 +131,11 @@
         },
         "isAnonymous": {
           "type": "boolean",
-          "description": "True if the Microsoft Teams user is anonymous."
+          "description": "True if the Microsoft Teams user is anonymous. By default false if missing."
         },
         "cloud": {
           "$ref": "#/definitions/CommunicationCloudEnvironmentModel",
-          "description": "The cloud that the Microsoft Teams user belongs to."
+          "description": "The cloud that the Microsoft Teams user belongs to. By default 'public' if missing."
         }
       }
     }
