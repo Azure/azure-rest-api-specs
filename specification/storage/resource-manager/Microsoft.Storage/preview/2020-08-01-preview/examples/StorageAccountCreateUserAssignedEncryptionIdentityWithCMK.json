@@ -5,12 +5,11 @@
     "accountName": "sto4445",
     "api-version": "2020-08-01-preview",
     "parameters": {
-	   "identity": {
-		 "type": "UserAssigned", 
-		 "userAssignedIdentities": { 
-			 "/subscriptions/{subscription-id}/resourceGroups/res9101/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{managed-identity-name}": {
-		   } 
-	   }
+      "identity": {
+        "type": "UserAssigned",
+        "userAssignedIdentities": {
+          "/subscriptions/{subscription-id}/resourceGroups/res9101/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{managed-identity-name}": {}
+        }
       },
       "sku": {
         "name": "Standard_LRS"
@@ -29,13 +28,13 @@
               "enabled": true
             }
           },
-		  "keyvaultproperties": {
+          "keyvaultproperties": {
             "keyvaulturi": "https://myvault8569.vault.azure.net",
             "keyname": "wrappingKey",
             "keyversion": ""
           },
           "keySource": "Microsoft.Keyvault",
-          "identity":{
+          "identity": {
             "type": "ManagedServiceIdentity",
             "userAssignedIdentity": "/subscriptions/{subscription-id}/resourceGroups/res9101/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{managed-identity-name}"
           }
@@ -73,50 +72,50 @@
             "virtualNetworkRules": [],
             "ipRules": [],
             "defaultAction": "Allow"
-        },
-        "supportsHttpsTrafficOnly": true,
-        "encryption": {
-          "identity": {
-            "type": "ManagedServiceIdentity",
-            "userAssignedIdentity": "/subscriptions/{subscription-id}/resourcegroups/res9101/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{managed-identity-name}"
           },
-        "keyvaultproperties": {
-           "keyvaulturi": "https://myvault8569.vault.azure.net",
-           "keyname": "wrappingKey",
-           "keyversion": "",
-           "currentVersionedKeyIdentifier": "https://myvault8569.vault.azure.net/keys/wrappingKey/0682afdd9c104f4285df20107e956cad",
-           "lastKeyRotationTimestamp": "2019-12-13T20:36:23.7023290Z"
+          "supportsHttpsTrafficOnly": true,
+          "encryption": {
+            "identity": {
+              "type": "ManagedServiceIdentity",
+              "userAssignedIdentity": "/subscriptions/{subscription-id}/resourcegroups/res9101/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{managed-identity-name}"
+            },
+            "keyvaultproperties": {
+              "keyvaulturi": "https://myvault8569.vault.azure.net",
+              "keyname": "wrappingKey",
+              "keyversion": "",
+              "currentVersionedKeyIdentifier": "https://myvault8569.vault.azure.net/keys/wrappingKey/0682afdd9c104f4285df20107e956cad",
+              "lastKeyRotationTimestamp": "2019-12-13T20:36:23.7023290Z"
+            },
+            "services": {
+              "file": {
+                "keyType": "Account",
+                "enabled": true,
+                "lastEnabledTime": "2020-12-15T00:43:14.1739587Z"
+              },
+              "blob": {
+                "keyType": "Account",
+                "enabled": true,
+                "lastEnabledTime": "2020-12-15T00:43:14.1739587Z"
+              }
+            },
+            "keySource": "Microsoft.Keyvault"
           },
-        "services": {
-           "file": {
-             "keyType": "Account",
-             "enabled": true,
-             "lastEnabledTime": "2020-12-15T00:43:14.1739587Z"
-           },
-          "blob": {
-             "keyType": "Account",
-             "enabled": true,
-             "lastEnabledTime": "2020-12-15T00:43:14.1739587Z"
-           }
-         },
-         "keySource": "Microsoft.Keyvault"
-        },
-        "accessTier": "Hot",
-        "provisioningState": "Succeeded",
-        "creationTime": "2020-12-15T00:43:14.0839093Z",
-        "primaryEndpoints": {
-          "web": "https://sto4445.web.core.windows.net/",
-          "dfs": "https://sto4445.dfs.core.windows.net/",
-          "blob": "https://sto4445.blob.core.windows.net/",
-          "file": "https://sto4445.file.core.windows.net/",
-          "queue": "https://sto4445.queue.core.windows.net/",
-          "table": "https://sto4445.table.core.windows.net/"
-        },
-        "primaryLocation": "eastus",
-        "statusOfPrimary": "available"
-       }
+          "accessTier": "Hot",
+          "provisioningState": "Succeeded",
+          "creationTime": "2020-12-15T00:43:14.0839093Z",
+          "primaryEndpoints": {
+            "web": "https://sto4445.web.core.windows.net/",
+            "dfs": "https://sto4445.dfs.core.windows.net/",
+            "blob": "https://sto4445.blob.core.windows.net/",
+            "file": "https://sto4445.file.core.windows.net/",
+            "queue": "https://sto4445.queue.core.windows.net/",
+            "table": "https://sto4445.table.core.windows.net/"
+          },
+          "primaryLocation": "eastus",
+          "statusOfPrimary": "available"
+        }
       }
-   },
+    },
     "202": {}
   }
 }

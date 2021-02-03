@@ -2138,27 +2138,27 @@
         }
       }
     },
-    "EncryptionIdentity":{
-       "description": "Identity to be used for server-side encryption on the storage account",
-       "properties": {
-         "userAssignedIdentity":{
-           "type": "string",
-           "description": "ResourceID of the UserAssignedIdentity to be associated with server-side encryption on the storage account.",
-           "x-ms-client-name": "UserAssignedIdentity"
-         },
-         "type": {
+    "EncryptionIdentity": {
+      "description": "Identity to be used for server-side encryption on the storage account",
+      "properties": {
+        "userAssignedIdentity": {
+          "type": "string",
+          "description": "ResourceID of the UserAssignedIdentity to be associated with server-side encryption on the storage account.",
+          "x-ms-client-name": "UserAssignedIdentity"
+        },
+        "type": {
           "type": "string",
           "description": "The Encryption Identity type.",
           "enum": [
             "ManagedServiceIdentity",
-                  "StorageService"
+            "StorageService"
           ],
           "x-ms-enum": {
             "name": "EncryptionIdentityType",
             "modelAsString": true
           }
         }
-       }
+      }
     },
     "Encryption": {
       "properties": {
@@ -2479,7 +2479,7 @@
       },
       "description": "The parameters used to create the storage account."
     },
-    "UserAssignedIdentityType":{
+    "UserAssignedIdentityType": {
       "properties": {
         "principalId": {
           "readOnly": true,
@@ -2525,14 +2525,14 @@
             "modelAsString": true
           }
         },
-            "userAssignedIdentities":{
-              "type": "object",
-              "description": "Dictionary to map userAssignedIdentityID strings to userAssignedIdentity properties",
-              "additionalProperties": {
-              "$ref": "#/definitions/UserAssignedIdentityType"
-            }
+        "userAssignedIdentities": {
+          "type": "object",
+          "description": "Dictionary to map userAssignedIdentityID strings to userAssignedIdentity properties",
+          "additionalProperties": {
+            "$ref": "#/definitions/UserAssignedIdentityType"
           }
-    },
+        }
+      },
       "required": [
         "type"
       ],
