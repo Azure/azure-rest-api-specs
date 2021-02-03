@@ -1561,6 +1561,9 @@
         "x-ms-examples": {
           "StorageAccountPutEncryptionScope": {
             "$ref": "./examples/StorageAccountPutEncryptionScope.json"
+          },
+          "StorageAccountPutEncryptionScopeWithInfrastructureEncryption": {
+            "$ref": "./examples/StorageAccountPutEncryptionScopeWithInfrastructureEncryption.json"
           }
         },
         "parameters": [
@@ -2255,7 +2258,7 @@
           ],
           "x-ms-enum": {
             "name": "State",
-            "modelAsString": false
+            "modelAsString": true
           },
           "description": "Gets the state of virtual network rule."
         }
@@ -2531,7 +2534,7 @@
           "additionalProperties": {
             "$ref": "#/definitions/UserAssignedIdentity"
           },
-          "description": "Gets or sets a list of key value pairs that describe the set of User Assigned identities that will be used with this storage account. The key is the ARM resource identifier of the identity."
+          "description": "Gets or sets a list of key value pairs that describe the set of User Assigned identities that will be used with this storage account. The key is the ARM resource identifier of the identity. Only 1 User Assigned identity is permitted here."
         }
       },
       "required": [
