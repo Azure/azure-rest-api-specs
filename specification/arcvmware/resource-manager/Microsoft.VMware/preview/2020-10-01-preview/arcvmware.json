@@ -121,12 +121,6 @@
             "description": "Created",
             "schema": {
               "$ref": "#/definitions/ResourcePool"
-            },
-            "headers": {
-              "Azure-AsyncOperation": {
-                "description": "Tracking URL for long running operation.",
-                "type": "string"
-              }
             }
           },
           "default": {
@@ -293,13 +287,7 @@
             "description": "Success"
           },
           "202": {
-            "description": "Accepted",
-            "headers": {
-              "Azure-AsyncOperation": {
-                "description": "Tracking URL for long running operation.",
-                "type": "string"
-              }
-            }
+            "description": "Accepted"
           },
           "204": {
             "description": "No Content"
@@ -459,12 +447,6 @@
             "description": "Created",
             "schema": {
               "$ref": "#/definitions/VCenter"
-            },
-            "headers": {
-              "Azure-AsyncOperation": {
-                "description": "Tracking URL for long running operation.",
-                "type": "string"
-              }
             }
           },
           "default": {
@@ -631,13 +613,7 @@
             "description": "Success"
           },
           "202": {
-            "description": "Accepted",
-            "headers": {
-              "Azure-AsyncOperation": {
-                "description": "Tracking URL for long running operation.",
-                "type": "string"
-              }
-            }
+            "description": "Accepted"
           },
           "204": {
             "description": "No Content"
@@ -797,12 +773,6 @@
             "description": "Created",
             "schema": {
               "$ref": "#/definitions/VirtualMachine"
-            },
-            "headers": {
-              "Azure-AsyncOperation": {
-                "description": "Tracking URL for long running operation.",
-                "type": "string"
-              }
             }
           },
           "default": {
@@ -920,12 +890,6 @@
             "description": "Created",
             "schema": {
               "$ref": "#/definitions/VirtualMachine"
-            },
-            "headers": {
-              "Azure-AsyncOperation": {
-                "description": "Tracking URL for long running operation.",
-                "type": "string"
-              }
             }
           },
           "default": {
@@ -982,13 +946,7 @@
             "description": "Success"
           },
           "202": {
-            "description": "Accepted",
-            "headers": {
-              "Azure-AsyncOperation": {
-                "description": "Tracking URL for long running operation.",
-                "type": "string"
-              }
-            }
+            "description": "Accepted"
           },
           "204": {
             "description": "No Content"
@@ -1050,13 +1008,7 @@
             "description": "Success"
           },
           "202": {
-            "description": "Accepted",
-            "headers": {
-              "Azure-AsyncOperation": {
-                "description": "Tracking URL for long running operation.",
-                "type": "string"
-              }
-            }
+            "description": "Accepted"
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -1104,13 +1056,7 @@
             "description": "Success"
           },
           "202": {
-            "description": "Accepted",
-            "headers": {
-              "Azure-AsyncOperation": {
-                "description": "Tracking URL for long running operation.",
-                "type": "string"
-              }
-            }
+            "description": "Accepted"
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -1158,13 +1104,7 @@
             "description": "Success"
           },
           "202": {
-            "description": "Accepted",
-            "headers": {
-              "Azure-AsyncOperation": {
-                "description": "Tracking URL for long running operation.",
-                "type": "string"
-              }
-            }
+            "description": "Accepted"
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -1321,12 +1261,6 @@
             "description": "Created",
             "schema": {
               "$ref": "#/definitions/VirtualMachineTemplate"
-            },
-            "headers": {
-              "Azure-AsyncOperation": {
-                "description": "Tracking URL for long running operation.",
-                "type": "string"
-              }
             }
           },
           "default": {
@@ -1493,13 +1427,7 @@
             "description": "Success"
           },
           "202": {
-            "description": "Accepted",
-            "headers": {
-              "Azure-AsyncOperation": {
-                "description": "Tracking URL for long running operation.",
-                "type": "string"
-              }
-            }
+            "description": "Accepted"
           },
           "204": {
             "description": "No Content"
@@ -1659,12 +1587,6 @@
             "description": "Created",
             "schema": {
               "$ref": "#/definitions/VirtualNetwork"
-            },
-            "headers": {
-              "Azure-AsyncOperation": {
-                "description": "Tracking URL for long running operation.",
-                "type": "string"
-              }
             }
           },
           "default": {
@@ -1831,13 +1753,7 @@
             "description": "Success"
           },
           "202": {
-            "description": "Accepted",
-            "headers": {
-              "Azure-AsyncOperation": {
-                "description": "Tracking URL for long running operation.",
-                "type": "string"
-              }
-            }
+            "description": "Accepted"
           },
           "204": {
             "description": "No Content"
@@ -3663,6 +3579,11 @@
         "managedResourceId": {
           "description": "Gets or sets the tracked resource id corresponding to the inventory resource.",
           "type": "string"
+        },
+        "provisioningState": {
+          "description": "Gets or sets the provisioning state.",
+          "type": "string",
+          "readOnly": true
         }
       }
     },
