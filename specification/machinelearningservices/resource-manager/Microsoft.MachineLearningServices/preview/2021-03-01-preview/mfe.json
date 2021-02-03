@@ -2512,59 +2512,6 @@
             "$ref": "./examples/LabelingJob/exportLabels.json"
           }
         }
-      },
-      "get": {
-        "tags": [
-          "LabelingJob"
-        ],
-        "summary": "List export summaries from a labeling job.",
-        "operationId": "LabelingJobs_ListExportSummary",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "id",
-            "description": "The name and identifier for the LabelingJob.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/APIVersionParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
-          }
-        ],
-        "responses": {
-          "default": {
-            "description": "Error",
-            "schema": {
-              "$ref": "machineLearningServices.json#/definitions/MachineLearningServiceError"
-            }
-          },
-          "200": {
-            "description": "Success",
-            "schema": {
-              "$ref": "#/definitions/ExportSummaryArmPaginatedResult"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "ListExportSummaries Labeling Job.": {
-            "$ref": "./examples/LabelingJob/listExportSummaries.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/labelingJobs/{id}/exportLabels/{exportId}": {
@@ -5444,6 +5391,60 @@
       "discriminator": "mediaType",
       "additionalProperties": false
     },
+    "LabelingJobImageProperties": {
+      "description": "Properties of a labeling job for image data",
+      "allOf": [
+        {
+          "$ref": "#/definitions/LabelingJobMediaProperties"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "annotationType": {
+              "description": "Annotation type of image labeling job.",
+              "enum": [
+                "Classification",
+                "BoundingBox",
+                "InstanceSegmentation"
+              ],
+              "type": "string",
+              "x-ms-enum": {
+                "name": "ImageAnnotationType",
+                "modelAsString": true
+              }
+            }
+          }
+        }
+      ],
+      "x-ms-discriminator-value": "Image",
+      "additionalProperties": false
+    },
+    "LabelingJobTextProperties": {
+      "description": "Properties of a labeling job for text data",
+      "allOf": [
+        {
+          "$ref": "#/definitions/LabelingJobMediaProperties"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "annotationType": {
+              "description": "Annotation type of text labeling job.",
+              "enum": [
+                "Classification"
+              ],
+              "type": "string",
+              "x-ms-enum": {
+                "name": "TextAnnotationType",
+                "modelAsString": true
+              }
+            }
+          }
+        }
+      ],
+      "x-ms-discriminator-value": "Text",
+      "additionalProperties": false
+    },
     "ProgressMetrics": {
       "description": "Progress metrics definition",
       "type": "object",
@@ -5839,21 +5840,66 @@
       "discriminator": "format",
       "additionalProperties": false
     },
-    "ExportSummaryArmPaginatedResult": {
-      "description": "A paginated list of ExportSummary entities.",
-      "type": "object",
-      "properties": {
-        "value": {
-          "description": "An array of objects of type ExportSummary.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ExportSummary"
-          }
+    "CocoExportSummary": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/ExportSummary"
         },
-        "nextLink": {
-          "type": "string"
+        {
+          "type": "object",
+          "properties": {
+            "snapshotPath": {
+              "description": "The output path where the labels will be exported.",
+              "type": "string"
+            },
+            "containerName": {
+              "description": "The container name to which the labels will be exported.",
+              "type": "string"
+            }
+          }
         }
-      },
+      ],
+      "x-ms-discriminator-value": "Coco",
+      "additionalProperties": false
+    },
+    "CsvExportSummary": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/ExportSummary"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "snapshotPath": {
+              "description": "The output path where the labels will be exported.",
+              "type": "string"
+            },
+            "containerName": {
+              "description": "The container name to which the labels will be exported.",
+              "type": "string"
+            }
+          }
+        }
+      ],
+      "x-ms-discriminator-value": "CSV",
+      "additionalProperties": false
+    },
+    "DatasetExportSummary": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/ExportSummary"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "labeledAssetName": {
+              "description": "The unique name of the labeled data asset.",
+              "type": "string"
+            }
+          }
+        }
+      ],
+      "x-ms-discriminator-value": "Dataset",
       "additionalProperties": false
     },
     "ModelContainer": {
