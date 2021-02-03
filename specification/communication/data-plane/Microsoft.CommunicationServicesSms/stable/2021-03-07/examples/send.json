@@ -2,11 +2,28 @@
   "parameters": {
     "SendMessageRequest": {
       "from": "+18001110000",
-      "to": [
-        "+11234567890",
-        "+11234567891",
-        "+112345678901",
-        "+11234567892"
+      "recipient": [
+        {
+          "to": "+11234567890"
+        },
+        {
+          "to": "+11234567891"
+        },
+        {
+          "to": "+112345678901"
+        },
+        {
+          "to": "+11234567892"
+        },
+        {
+          "to": "+11234567893",
+          "repeatability-request-id": "fda6d242-46aa-4247-8bf6-619a1206f9c3",
+          "repeatability-first-sent": "Mon, 01 Apr 2019 06:22:03 GMT"
+        },
+        {
+          "to": "+11234567894",
+          "repeatability-request-id": "fda6d242-46aa-4247-8bf6-619a1206f9c3"
+        }
       ],
       "message": "Hello world!",
       "smsSendOptions": {
@@ -44,6 +61,21 @@
             "messageId": "Outgoing_2020061020025100d1-d07e-4b19-b25d-13525d552822",
             "httpStatusCode": 503,
             "errorMessage": "ServiceUnavailable",
+            "succeeded": false
+          },
+          {
+            "to": "+11234567893",
+            "messageId": "Outgoing_2020061020025100d1-d07e-4b19-b25d-13525d552822_noam",
+            "httpStatusCode": 200,
+            "repeatability-result": "accepted",
+            "succeeded": true
+          },
+          {
+            "to": "+11234567894",
+            "messageId": "Outgoing_2020061020025100d1-d07e-4b19-b25d-13525d552822",
+            "httpStatusCode": 400,
+            "repeatability-result": "rejected",
+            "errorMessage": "Request sent with Invalid DateTime value for repeatability-first-sent.\r\n Expected is DateTime ,RFC1123 pattern.",
             "succeeded": false
           }
         ]
