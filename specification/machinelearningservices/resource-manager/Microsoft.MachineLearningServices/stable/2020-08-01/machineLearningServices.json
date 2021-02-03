@@ -1219,6 +1219,10 @@
             }
           }
         },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink",
+          "itemName": "nodes"
+        },
         "x-ms-examples": {
           "Get compute nodes information for a compute": {
             "$ref": "./examples/amlComputeListNodes.json"
@@ -2510,8 +2514,8 @@
           "description": "The identity type.",
           "enum": [
             "SystemAssigned",
-            "UserAssigned",
             "SystemAssigned,UserAssigned",
+            "UserAssigned",
             "None"
           ],
           "x-ms-enum": {
@@ -2785,9 +2789,10 @@
                 "agentCount": {
                   "description": "Number of agents",
                   "type": "integer",
+                  "format": "int32",
                   "minimum": 1
                 },
-                "agentVMSize": {
+                "agentVmSize": {
                   "description": "Agent virtual machine size",
                   "type": "string"
                 },
@@ -2819,6 +2824,19 @@
               "description": "AML Compute properties",
               "type": "object",
               "properties": {
+                "osType": {
+                  "description": "Compute OS Type",
+                  "type": "string",
+                  "default": "Linux",
+                  "enum": [
+                    "Linux",
+                    "Windows"
+                  ],
+                  "x-ms-enum": {
+                    "name": "OsType",
+                    "modelAsString": true
+                  }
+                },
                 "vmSize": {
                   "description": "Virtual Machine Size",
                   "type": "string"
@@ -2992,6 +3010,24 @@
                   "description": "The current state of this ComputeInstance.",
                   "$ref": "#/definitions/ComputeInstanceState",
                   "readOnly": true
+                },
+                "computeInstanceAuthorizationType": {
+                  "type": "string",
+                  "title": "Compute Instance Authorization type.",
+                  "description": "The Compute Instance Authorization type. Available values are personal (default).",
+                  "default": "personal",
+                  "enum": [
+                    "personal"
+                  ],
+                  "x-ms-enum": {
+                    "name": "ComputeInstanceAuthorizationType",
+                    "modelAsString": true
+                  }
+                },
+                "personalComputeInstanceSettings": {
+                  "title": "Personal Compute Instance settings.",
+                  "description": "Settings for a personal compute instance.",
+                  "$ref": "#/definitions/PersonalComputeInstanceSettings"
                 },
                 "lastOperation": {
                   "description": "The last operation on ComputeInstance.",
@@ -3174,7 +3210,8 @@
           "type": "string",
           "enum": [
             "Disabled",
-            "Enabled"
+            "Enabled",
+            "Auto"
           ]
         },
         "cert": {
@@ -3255,7 +3292,7 @@
         "nodeIdleTimeBeforeScaleDown": {
           "type": "string",
           "format": "duration",
-          "description": "Node Idle Time before scaling down amlCompute"
+          "description": "Node Idle Time before scaling down amlCompute. This string needs to be in the RFC Format."
         }
       },
       "required": [
@@ -3364,6 +3401,11 @@
                 "$ref": "#/definitions/AmlComputeNodeInformation"
               },
               "description": "The collection of returned AmlCompute nodes details."
+            },
+            "nextLink": {
+              "readOnly": true,
+              "type": "string",
+              "description": "The continuation token."
             }
           }
         }
@@ -4260,6 +4302,35 @@
           "description": "Uniquely identifies the user within his/her organization."
         }
       }
+    },
+    "PersonalComputeInstanceSettings": {
+      "type": "object",
+      "properties": {
+        "assignedUser": {
+          "$ref": "#/definitions/AssignedUser",
+          "title": "Assigned User.",
+          "description": "A user explicitly assigned to a personal compute instance."
+        }
+      },
+      "description": "Settings for a personal compute instance."
+    },
+    "AssignedUser": {
+      "type": "object",
+      "description": "A user that can be assigned to a compute instance.",
+      "properties": {
+        "objectId": {
+          "type": "string",
+          "description": "User’s AAD Object Id."
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "User’s AAD Tenant Id."
+        }
+      },
+      "required": [
+        "objectId",
+        "tenantId"
+      ]
     }
   }
 }
