@@ -5,8 +5,15 @@
     "title": "MixedRealityRemoteRendering",
     "version": "2021-01-01-preview"
   },
-  "host": "remoterendering.westus2.mixedreality.azure.com",
-  "basePath": "/",
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{endpoint}",
+    "useSchemePrefix": false,
+    "parameters": [
+      {
+        "$ref": "#/parameters/Endpoint"
+      }
+    ]
+  },
   "schemes": [
     "https"
   ],
@@ -27,21 +34,13 @@
         },
         "parameters": [
           {
-            "name": "account_id",
-            "description": "the Azure Remote Rendering account id",
-            "format": "uuid",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "x-example": "30ea64bd-100f-4bf0-adc9-29fa45d4880c"
+            "$ref": "#/parameters/api_version"
           },
           {
-            "description": "An ID uniquely identifying the conversion for the given account. The ID is case sensitive, can contain any combination of alphanumeric characters including hyphens and underscores, and cannot contain more than 256 characters.",
-            "in": "path",
-            "name": "conversion_id",
-            "required": true,
-            "type": "string",
-            "x-example": "contoso-conversion-fbc3646c-0b97-4553-81ca-6fae2bfb754e"
+            "$ref": "#/parameters/account_id"
+          },
+          {
+            "$ref": "#/parameters/conversion_id"
           },
           {
             "description": "Request body configuring the settings for an asset conversion.",
@@ -49,7 +48,7 @@
             "name": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/conversion_request"
+              "$ref": "#/definitions/create_conversion_settings"
             }
           }
         ],
@@ -58,7 +57,7 @@
             "description": "Ok. A new conversion was created. A status code of 200 indicates that there was already a conversion with the same settings present. This is expected when a conversion creation is retried.",
             "headers": {
               "MS-CV": {
-                "description": "Microsoft Correlation Vector. Include this value when reporting errors to the Azure Remote Rendering team.",
+                "description": "Microsoft Correlation Vector. Include this value when reporting issues.",
                 "type": "string"
               }
             },
@@ -70,7 +69,7 @@
             "description": "Created. A new conversion was created.",
             "headers": {
               "MS-CV": {
-                "description": "Microsoft Correlation Vector. Include this value when reporting errors to the Azure Remote Rendering team.",
+                "description": "Microsoft Correlation Vector. Include this value when reporting issues.",
                 "type": "string"
               }
             },
@@ -80,9 +79,10 @@
           },
           "400": {
             "description": "Bad Request. An error object describes which issues occurred.",
+            "x-ms-error-response": true,
             "headers": {
               "MS-CV": {
-                "description": "Microsoft Correlation Vector. Include this value when reporting errors to the Azure Remote Rendering team.",
+                "description": "Microsoft Correlation Vector. Include this value when reporting issues.",
                 "type": "string"
               }
             },
@@ -92,9 +92,10 @@
           },
           "401": {
             "description": "Unauthorized",
+            "x-ms-error-response": true,
             "headers": {
               "MS-CV": {
-                "description": "Microsoft Correlation Vector. Include this value when reporting errors to the Azure Remote Rendering team.",
+                "description": "Microsoft Correlation Vector. Include this value when reporting issues.",
                 "type": "string"
               },
               "WWW-Authenticate": {
@@ -105,18 +106,20 @@
           },
           "403": {
             "description": "Forbidden",
+            "x-ms-error-response": true,
             "headers": {
               "MS-CV": {
-                "description": "Microsoft Correlation Vector. Include this value when reporting errors to the Azure Remote Rendering team.",
+                "description": "Microsoft Correlation Vector. Include this value when reporting issues.",
                 "type": "string"
               }
             }
           },
           "409": {
             "description": "Conflict. A conversion already exists. An error object describes which issues occurred.",
+            "x-ms-error-response": true,
             "headers": {
               "MS-CV": {
-                "description": "Microsoft Correlation Vector. Include this value when reporting errors to the Azure Remote Rendering team.",
+                "description": "Microsoft Correlation Vector. Include this value when reporting issues.",
                 "type": "string"
               }
             },
@@ -126,9 +129,10 @@
           },
           "429": {
             "description": "Too Many Requests. In case the rate limit has been exceeded. Retry the request after the duration given in the Retry-After header.",
+            "x-ms-error-response": true,
             "headers": {
               "MS-CV": {
-                "description": "Microsoft Correlation Vector. Include this value when reporting errors to the Azure Remote Rendering team.",
+                "description": "Microsoft Correlation Vector. Include this value when reporting issues.",
                 "type": "string"
               },
               "Retry-After": {
@@ -139,14 +143,7 @@
           },
           "500": {
             "description": "Internal server error",
-            "examples": {
-              "application/json": {
-                "error": {
-                  "code": "InternalServerError",
-                  "message": "An internal server error occurred."
-                }
-              }
-            },
+            "x-ms-error-response": true,
             "schema": {
               "$ref": "#/definitions/error_response"
             }
@@ -165,21 +162,13 @@
         ],
         "parameters": [
           {
-            "description": "the Azure Remote Rendering account id",
-            "format": "uuid",
-            "in": "path",
-            "name": "account_id",
-            "required": true,
-            "type": "string",
-            "x-example": "30ea64bd-100f-4bf0-adc9-29fa45d4880c"
+            "$ref": "#/parameters/api_version"
           },
           {
-            "description": "the conversion id",
-            "in": "path",
-            "name": "conversion_id",
-            "required": true,
-            "type": "string",
-            "x-example": "contoso-conversion-fbc3646c-0b97-4553-81ca-6fae2bfb754e"
+            "$ref": "#/parameters/account_id"
+          },
+          {
+            "$ref": "#/parameters/conversion_id"
           }
         ],
         "x-ms-examples": {
@@ -190,31 +179,9 @@
         "responses": {
           "200": {
             "description": "OK",
-            "examples": {
-              "application/json": {
-                "id": "contoso-conversion-1",
-                "creationTime": "2020-11-11T11:11:11.111Z",
-                "settings": {
-                  "inputLocation": {
-                    "storageContainerUri": "https://contoso.blob.core.windows.net/arr",
-                    "blobPrefix": "architecture/",
-                    "relativeInputAssetPath": "house.fbx"
-                  },
-                  "outputLocation": {
-                    "storageContainerUri": "https://contoso.blob.core.windows.net/arr",
-                    "blobPrefix": "architecture-output/"
-                  }
-                },
-                "status": "Success",
-                "output": {
-                  "outputAssetUri": "https://contoso.blob.core.windows.net/arr/architecture-output/house.arrAsset"
-                },
-                "error": null
-              }
-            },
             "headers": {
               "MS-CV": {
-                "description": "Microsoft Correlation Vector. Include this value when reporting errors to the Azure Remote Rendering team.",
+                "description": "Microsoft Correlation Vector. Include this value when reporting issues.",
                 "type": "string"
               },
               "Retry-After": {
@@ -228,9 +195,10 @@
           },
           "401": {
             "description": "Unauthorized",
+            "x-ms-error-response": true,
             "headers": {
               "MS-CV": {
-                "description": "Microsoft Correlation Vector. Include this value when reporting errors to the Azure Remote Rendering team.",
+                "description": "Microsoft Correlation Vector. Include this value when reporting issues.",
                 "type": "string"
               },
               "WWW-Authenticate": {
@@ -241,27 +209,30 @@
           },
           "403": {
             "description": "Forbidden",
+            "x-ms-error-response": true,
             "headers": {
               "MS-CV": {
-                "description": "Microsoft Correlation Vector. Include this value when reporting errors to the Azure Remote Rendering team.",
+                "description": "Microsoft Correlation Vector. Include this value when reporting issues.",
                 "type": "string"
               }
             }
           },
           "404": {
             "description": "Not found. No conversion with the provided conversion id exists",
+            "x-ms-error-response": true,
             "headers": {
               "MS-CV": {
-                "description": "Microsoft Correlation Vector. Include this value when reporting errors to the Azure Remote Rendering team.",
+                "description": "Microsoft Correlation Vector. Include this value when reporting issues.",
                 "type": "string"
               }
             }
           },
           "429": {
             "description": "In case the rate limit has been exceeded.",
+            "x-ms-error-response": true,
             "headers": {
               "MS-CV": {
-                "description": "Microsoft Correlation Vector. Include this value when reporting errors to the Azure Remote Rendering team.",
+                "description": "Microsoft Correlation Vector. Include this value when reporting issues.",
                 "type": "string"
               },
               "Retry-After": {
@@ -272,18 +243,11 @@
           },
           "500": {
             "description": "InternalError",
+            "x-ms-error-response": true,
             "headers": {
               "MS-CV": {
-                "description": "Microsoft Correlation Vector. Include this value when reporting errors to the Azure Remote Rendering team.",
+                "description": "Microsoft Correlation Vector. Include this value when reporting issues.",
                 "type": "string"
-              }
-            },
-            "examples": {
-              "application/json": {
-                "error": {
-                  "code": "InternalServerError",
-                  "message": "An internal server error occurred."
-                }
               }
             },
             "schema": {
@@ -300,22 +264,15 @@
     "/accounts/{account_id}/conversions": {
       "get": {
         "operationId": "ListConversions",
-        "x-ms-pageable": {
-          "itemName": "conversions",
-          "nextLinkName": "@nextLink"
-        },
         "produces": [
           "application/json"
         ],
         "parameters": [
           {
-            "description": "the Azure Remote Rendering account id",
-            "format": "uuid",
-            "in": "path",
-            "name": "account_id",
-            "required": true,
-            "type": "string",
-            "x-example": "30ea64bd-100f-4bf0-adc9-29fa45d4880c"
+            "$ref": "#/parameters/api_version"
+          },
+          {
+            "$ref": "#/parameters/account_id"
           }
         ],
         "x-ms-examples": {
@@ -326,56 +283,9 @@
         "responses": {
           "200": {
             "description": "OK",
-            "examples": {
-              "application/json": {
-                "@nextLink": "https://remoterendering.westus2.mixedreality.azure.com/accounts/30ea64bd-100f-4bf0-adc9-29fa45d4880c/conversions?skiptoken=someskiptokenvalue",
-                "conversions": [
-                  {
-                    "id": "contoso-conversion-1",
-                    "creationTime": "2020-11-11T11:11:11.111Z",
-                    "settings": {
-                      "inputLocation": {
-                        "storageContainerUri": "https://contoso.blob.core.windows.net/arr",
-                        "blobPrefix": "architecture/",
-                        "relativeInputAssetPath": "house.fbx"
-                      },
-                      "outputLocation": {
-                        "storageContainerUri": "https://contoso.blob.core.windows.net/arr",
-                        "blobPrefix": "architecture-output/"
-                      }
-                    },
-                    "status": "Success",
-                    "output": {
-                      "outputAssetUri": "https://contoso.blob.core.windows.net/arr/architecture-output/house.arrAsset"
-                    },
-                    "error": null
-                  },
-                  {
-                    "id": "contoso-conversion-2",
-                    "creationTime": "2020-11-12T12:12:12.112Z",
-                    "settings": {
-                      "inputLocation": {
-                        "storageContainerUri": "https://contoso.blob.core.windows.net/arr",
-                        "blobPrefix": "architecture2/",
-                        "relativeInputAssetPath": "house2.fbx"
-                      },
-                      "outputLocation": {
-                        "storageContainerUri": "https://contoso.blob.core.windows.net/arr",
-                        "blobPrefix": "architecture-output/"
-                      }
-                    },
-                    "status": "Success",
-                    "output": {
-                      "outputAssetUri": "https://contoso.blob.core.windows.net/arr/architecture-output/house2.arrAsset"
-                    },
-                    "error": null
-                  }
-                ]
-              }
-            },
             "headers": {
               "MS-CV": {
-                "description": "Microsoft Correlation Vector. Include this value when reporting errors to the Azure Remote Rendering team.",
+                "description": "Microsoft Correlation Vector. Include this value when reporting issues.",
                 "type": "string"
               }
             },
@@ -385,6 +295,7 @@
           },
           "401": {
             "description": "Unauthorized",
+            "x-ms-error-response": true,
             "headers": {
               "MS-CV": {
                 "description": "Microsoft Correlation Vector. Include this value when reporting errors to the Azure Remote Rendering team.",
@@ -398,6 +309,7 @@
           },
           "403": {
             "description": "Forbidden",
+            "x-ms-error-response": true,
             "headers": {
               "MS-CV": {
                 "description": "Microsoft Correlation Vector. Include this value when reporting errors to the Azure Remote Rendering team.",
@@ -407,6 +319,7 @@
           },
           "429": {
             "description": "In case the rate limit has been exceeded.",
+            "x-ms-error-response": true,
             "headers": {
               "MS-CV": {
                 "description": "Microsoft Correlation Vector. Include this value when reporting errors to the Azure Remote Rendering team.",
@@ -420,24 +333,21 @@
           },
           "500": {
             "description": "InternalError",
+            "x-ms-error-response": true,
             "headers": {
               "MS-CV": {
                 "description": "Microsoft Correlation Vector. Include this value when reporting errors to the Azure Remote Rendering team.",
                 "type": "string"
               }
             },
-            "examples": {
-              "application/json": {
-                "error": {
-                  "code": "InternalServerError",
-                  "message": "An internal server error occurred."
-                }
-              }
-            },
             "schema": {
               "$ref": "#/definitions/error_response"
             }
           }
+        },
+        "x-ms-pageable": {
+          "itemName": "conversions",
+          "nextLinkName": "@nextLink"
         },
         "tags": [
           "conversion"
@@ -456,21 +366,13 @@
         ],
         "parameters": [
           {
-            "name": "account_id",
-            "description": "the Azure Remote Rendering account id",
-            "format": "uuid",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "x-example": "30ea64bd-100f-4bf0-adc9-29fa45d4880c"
+            "$ref": "#/parameters/api_version"
           },
           {
-            "name": "session_id",
-            "description": "An ID uniquely identifying the rendering session for the given account. The ID is case sensitive, can contain any combination of alphanumeric characters including hyphens and underscores, and cannot contain more than 256 characters.",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "x-example": "contoso-session-1"
+            "$ref": "#/parameters/account_id"
+          },
+          {
+            "$ref": "#/parameters/session_id"
           },
           {
             "description": "Settings of the session to be created",
@@ -478,7 +380,7 @@
             "name": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/create_session_body"
+              "$ref": "#/definitions/create_session_settings"
             }
           }
         ],
@@ -492,16 +394,6 @@
             "description": "Ok. The session was created successfully. A status code of 200 indicates that there was already a session with the same settings present. This is expected when session creation is retried.",
             "schema": {
               "$ref": "#/definitions/session_properties"
-            },
-            "examples": {
-              "application/json": {
-                "id": "contoso-session-c2b8ac1d-9494-4852-a59c-8c28813adc28",
-                "creationTime": "2020-11-11T11:11:11.111Z",
-                "maxLeaseTimeMinutes": 60,
-                "size": "Standard",
-                "status": "Starting",
-                "error": null
-              }
             }
           },
           "201": {
@@ -509,28 +401,19 @@
             "schema": {
               "$ref": "#/definitions/session_properties"
             },
-            "examples": {
-              "application/json": {
-                "id": "contoso-session-c2b8ac1d-9494-4852-a59c-8c28813adc28",
-                "creationTime": "2020-11-11T11:11:11.111Z",
-                "maxLeaseTimeMinutes": 60,
-                "size": "Standard",
-                "status": "Starting",
-                "error": null
-              }
-            },
             "headers": {
               "MS-CV": {
-                "description": "Microsoft Correlation Vector. Include this value when reporting errors to the Azure Remote Rendering team.",
+                "description": "Microsoft Correlation Vector. Include this value when reporting issues.",
                 "type": "string"
               }
             }
           },
           "400": {
             "description": "BadRequest",
+            "x-ms-error-response": true,
             "headers": {
               "MS-CV": {
-                "description": "Microsoft Correlation Vector. Include this value when reporting errors to the Azure Remote Rendering team.",
+                "description": "Microsoft Correlation Vector. Include this value when reporting issues.",
                 "type": "string"
               }
             },
@@ -540,9 +423,10 @@
           },
           "401": {
             "description": "Unauthorized",
+            "x-ms-error-response": true,
             "headers": {
               "MS-CV": {
-                "description": "Microsoft Correlation Vector. Include this value when reporting errors to the Azure Remote Rendering team.",
+                "description": "Microsoft Correlation Vector. Include this value when reporting issues.",
                 "type": "string"
               },
               "WWW-Authenticate": {
@@ -553,24 +437,27 @@
           },
           "403": {
             "description": "Forbidden",
+            "x-ms-error-response": true,
             "headers": {
               "MS-CV": {
-                "description": "Microsoft Correlation Vector. Include this value when reporting errors to the Azure Remote Rendering team.",
+                "description": "Microsoft Correlation Vector. Include this value when reporting issues.",
                 "type": "string"
               }
             }
           },
           "409": {
             "description": "Conflict. A rendering session with the ID already exists for the remote rendering account.",
+            "x-ms-error-response": true,
             "schema": {
               "$ref": "#/definitions/error_response"
             }
           },
           "429": {
             "description": "In case the rate limit has been exceeded.",
+            "x-ms-error-response": true,
             "headers": {
               "MS-CV": {
-                "description": "Microsoft Correlation Vector. Include this value when reporting errors to the Azure Remote Rendering team.",
+                "description": "Microsoft Correlation Vector. Include this value when reporting issues.",
                 "type": "string"
               },
               "Retry-After": {
@@ -581,18 +468,11 @@
           },
           "500": {
             "description": "InternalError",
+            "x-ms-error-response": true,
             "headers": {
               "MS-CV": {
-                "description": "Microsoft Correlation Vector. Include this value when reporting errors to the Azure Remote Rendering team.",
+                "description": "Microsoft Correlation Vector. Include this value when reporting issues.",
                 "type": "string"
-              }
-            },
-            "examples": {
-              "application/json": {
-                "error": {
-                  "code": "InternalServerError",
-                  "message": "An internal server error occurred."
-                }
               }
             },
             "schema": {
@@ -612,21 +492,13 @@
         ],
         "parameters": [
           {
-            "description": "the Azure Remote Rendering account id",
-            "format": "uuid",
-            "in": "path",
-            "name": "account_id",
-            "required": true,
-            "type": "string",
-            "x-example": "30ea64bd-100f-4bf0-adc9-29fa45d4880c"
+            "$ref": "#/parameters/api_version"
           },
           {
-            "description": "ID of a previously created session",
-            "in": "path",
-            "name": "session_id",
-            "required": true,
-            "type": "string",
-            "x-example": "contoso-session-c2b8ac1d-9494-4852-a59c-8c28813adc28"
+            "$ref": "#/parameters/account_id"
+          },
+          {
+            "$ref": "#/parameters/session_id"
           }
         ],
         "x-ms-examples": {
@@ -639,28 +511,14 @@
             "description": "OK - returns a session properties object",
             "schema": {
               "$ref": "#/definitions/session_properties"
-            },
-            "examples": {
-              "application/json": {
-                "id": "contoso-session-c2b8ac1d-9494-4852-a59c-8c28813adc28",
-                "creationTime": "2020-11-11T11:11:11.111Z",
-                "arrInspectorPort": 50052,
-                "handshakePort": 50051,
-                "elapsedTimeMinutes": 10,
-                "hostname": "d4cefb7b-10b9-4631-934d-67445ffa9126.remoterenderingvm.westus2.mixedreality.azure.com",
-                "maxLeaseTimeMinutes": 60,
-                "size": "Standard",
-                "status": "Ready",
-                "error": null,
-                "teraflops": 10.6
-              }
             }
           },
           "401": {
             "description": "Unauthorized",
+            "x-ms-error-response": true,
             "headers": {
               "MS-CV": {
-                "description": "Microsoft Correlation Vector. Include this value when reporting errors to the Azure Remote Rendering team.",
+                "description": "Microsoft Correlation Vector. Include this value when reporting issues.",
                 "type": "string"
               },
               "WWW-Authenticate": {
@@ -671,27 +529,30 @@
           },
           "403": {
             "description": "Forbidden",
+            "x-ms-error-response": true,
             "headers": {
               "MS-CV": {
-                "description": "Microsoft Correlation Vector. Include this value when reporting errors to the Azure Remote Rendering team.",
+                "description": "Microsoft Correlation Vector. Include this value when reporting issues.",
                 "type": "string"
               }
             }
           },
           "404": {
             "description": "The specified resource was not found.",
+            "x-ms-error-response": true,
             "headers": {
               "MS-CV": {
-                "description": "Microsoft Correlation Vector. Include this value when reporting errors to the Azure Remote Rendering team.",
+                "description": "Microsoft Correlation Vector. Include this value when reporting issues.",
                 "type": "string"
               }
             }
           },
           "429": {
             "description": "In case the rate limit has been exceeded.",
+            "x-ms-error-response": true,
             "headers": {
               "MS-CV": {
-                "description": "Microsoft Correlation Vector. Include this value when reporting errors to the Azure Remote Rendering team.",
+                "description": "Microsoft Correlation Vector. Include this value when reporting issues.",
                 "type": "string"
               },
               "Retry-After": {
@@ -702,18 +563,11 @@
           },
           "500": {
             "description": "InternalError",
+            "x-ms-error-response": true,
             "headers": {
               "MS-CV": {
-                "description": "Microsoft Correlation Vector. Include this value when reporting errors to the Azure Remote Rendering team.",
+                "description": "Microsoft Correlation Vector. Include this value when reporting issues.",
                 "type": "string"
-              }
-            },
-            "examples": {
-              "application/json": {
-                "error": {
-                  "code": "InternalServerError",
-                  "message": "An internal server error occurred."
-                }
               }
             },
             "schema": {
@@ -736,21 +590,13 @@
         ],
         "parameters": [
           {
-            "description": "the Azure Remote Rendering account ID",
-            "format": "uuid",
-            "in": "path",
-            "name": "account_id",
-            "required": true,
-            "type": "string",
-            "x-example": "30ea64bd-100f-4bf0-adc9-29fa45d4880c"
+            "$ref": "#/parameters/api_version"
           },
           {
-            "description": "ID of a previously created session",
-            "in": "path",
-            "name": "session_id",
-            "required": true,
-            "type": "string",
-            "x-example": "contoso-session-c2b8ac1d-9494-4852-a59c-8c28813adc28"
+            "$ref": "#/parameters/account_id"
+          },
+          {
+            "$ref": "#/parameters/session_id"
           },
           {
             "description": "Settings of the session to be updated",
@@ -758,7 +604,7 @@
             "name": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/update_session_body"
+              "$ref": "#/definitions/update_session_settings"
             }
           }
         ],
@@ -772,28 +618,14 @@
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/session_properties"
-            },
-            "examples": {
-              "application/json": {
-                "id": "contoso-session-c2b8ac1d-9494-4852-a59c-8c28813adc28",
-                "creationTime": "2020-11-11T11:11:11.111Z",
-                "arrInspectorPort": 50052,
-                "handshakePort": 50051,
-                "elapsedTimeMinutes": 10,
-                "hostname": "d4cefb7b-10b9-4631-934d-67445ffa9126.remoterenderingvm.westus2.mixedreality.azure.com",
-                "maxLeaseTimeMinutes": 72,
-                "size": "Standard",
-                "status": "Ready",
-                "error": null,
-                "teraflops": 10.6
-              }
             }
           },
           "401": {
             "description": "Unauthorized",
+            "x-ms-error-response": true,
             "headers": {
               "MS-CV": {
-                "description": "Microsoft Correlation Vector. Include this value when reporting errors to the Azure Remote Rendering team.",
+                "description": "Microsoft Correlation Vector. Include this value when reporting issues.",
                 "type": "string"
               },
               "WWW-Authenticate": {
@@ -804,27 +636,30 @@
           },
           "403": {
             "description": "Forbidden",
+            "x-ms-error-response": true,
             "headers": {
               "MS-CV": {
-                "description": "Microsoft Correlation Vector. Include this value when reporting errors to the Azure Remote Rendering team.",
+                "description": "Microsoft Correlation Vector. Include this value when reporting issues.",
                 "type": "string"
               }
             }
           },
           "404": {
             "description": "The specified resource was not found.",
+            "x-ms-error-response": true,
             "headers": {
               "MS-CV": {
-                "description": "Microsoft Correlation Vector. Include this value when reporting errors to the Azure Remote Rendering team.",
+                "description": "Microsoft Correlation Vector. Include this value when reporting issues.",
                 "type": "string"
               }
             }
           },
           "429": {
             "description": "In case the rate limit has been exceeded.",
+            "x-ms-error-response": true,
             "headers": {
               "MS-CV": {
-                "description": "Microsoft Correlation Vector. Include this value when reporting errors to the Azure Remote Rendering team.",
+                "description": "Microsoft Correlation Vector. Include this value when reporting issues.",
                 "type": "string"
               },
               "Retry-After": {
@@ -834,10 +669,11 @@
             }
           },
           "422": {
-            "description": "Unprocessable Entity. The maxLeaseTimeMinutes value was invalid. It has to be bigger than the current value of elapsedTimeMinutes.",
+            "description": "Unprocessable Entity. The maxLeaseTimeMinutes value was invalid. It has to be bigger than the current value of maxLeaseTimeMinutes.",
+            "x-ms-error-response": true,
             "headers": {
               "MS-CV": {
-                "description": "Microsoft Correlation Vector. Include this value when reporting errors to the Azure Remote Rendering team.",
+                "description": "Microsoft Correlation Vector. Include this value when reporting issues.",
                 "type": "string"
               }
             },
@@ -847,18 +683,11 @@
           },
           "500": {
             "description": "InternalError",
+            "x-ms-error-response": true,
             "headers": {
               "MS-CV": {
-                "description": "Microsoft Correlation Vector. Include this value when reporting errors to the Azure Remote Rendering team.",
+                "description": "Microsoft Correlation Vector. Include this value when reporting issues.",
                 "type": "string"
-              }
-            },
-            "examples": {
-              "application/json": {
-                "error": {
-                  "code": "InternalServerError",
-                  "message": "An internal server error occurred."
-                }
               }
             },
             "schema": {
@@ -880,21 +709,13 @@
         ],
         "parameters": [
           {
-            "description": "the Azure Remote Rendering account id",
-            "format": "uuid",
-            "in": "path",
-            "name": "account_id",
-            "required": true,
-            "type": "string",
-            "x-example": "30ea64bd-100f-4bf0-adc9-29fa45d4880c"
+            "$ref": "#/parameters/api_version"
           },
           {
-            "name": "session_id",
-            "description": "ID of the session to stop",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "x-example": "contoso-session-c2b8ac1d-9494-4852-a59c-8c28813adc28"
+            "$ref": "#/parameters/account_id"
+          },
+          {
+            "$ref": "#/parameters/session_id"
           }
         ],
         "x-ms-examples": {
@@ -907,16 +728,17 @@
             "description": "NoContent - stop request was successful. The rendering session is stopped.",
             "headers": {
               "MS-CV": {
-                "description": "Microsoft Correlation Vector. Include this value when reporting errors to the Azure Remote Rendering team.",
+                "description": "Microsoft Correlation Vector. Include this value when reporting issues.",
                 "type": "string"
               }
             }
           },
           "401": {
             "description": "Unauthorized",
+            "x-ms-error-response": true,
             "headers": {
               "MS-CV": {
-                "description": "Microsoft Correlation Vector. Include this value when reporting errors to the Azure Remote Rendering team.",
+                "description": "Microsoft Correlation Vector. Include this value when reporting issues.",
                 "type": "string"
               },
               "WWW-Authenticate": {
@@ -927,27 +749,30 @@
           },
           "403": {
             "description": "Forbidden",
+            "x-ms-error-response": true,
             "headers": {
               "MS-CV": {
-                "description": "Microsoft Correlation Vector. Include this value when reporting errors to the Azure Remote Rendering team.",
+                "description": "Microsoft Correlation Vector. Include this value when reporting issues.",
                 "type": "string"
               }
             }
           },
           "404": {
             "description": "The specified resource was not found.",
+            "x-ms-error-response": true,
             "headers": {
               "MS-CV": {
-                "description": "Microsoft Correlation Vector. Include this value when reporting errors to the Azure Remote Rendering team.",
+                "description": "Microsoft Correlation Vector. Include this value when reporting issues.",
                 "type": "string"
               }
             }
           },
           "429": {
             "description": "In case the rate limit has been exceeded.",
+            "x-ms-error-response": true,
             "headers": {
               "MS-CV": {
-                "description": "Microsoft Correlation Vector. Include this value when reporting errors to the Azure Remote Rendering team.",
+                "description": "Microsoft Correlation Vector. Include this value when reporting issues.",
                 "type": "string"
               },
               "Retry-After": {
@@ -958,9 +783,10 @@
           },
           "500": {
             "description": "InternalError",
+            "x-ms-error-response": true,
             "headers": {
               "MS-CV": {
-                "description": "Microsoft Correlation Vector. Include this value when reporting errors to the Azure Remote Rendering team.",
+                "description": "Microsoft Correlation Vector. Include this value when reporting issues.",
                 "type": "string"
               }
             },
@@ -987,13 +813,10 @@
         },
         "parameters": [
           {
-            "description": "the Azure Remote Rendering account id",
-            "format": "uuid",
-            "in": "path",
-            "name": "account_id",
-            "required": true,
-            "type": "string",
-            "x-example": "30ea64bd-100f-4bf0-adc9-29fa45d4880c"
+            "$ref": "#/parameters/api_version"
+          },
+          {
+            "$ref": "#/parameters/account_id"
           }
         ],
         "x-ms-examples": {
@@ -1006,43 +829,14 @@
             "description": "OK - returns the list of sessions which are in a Starting or Ready state",
             "schema": {
               "$ref": "#/definitions/sessions_list"
-            },
-            "examples": {
-              "application/json": {
-                "sessions": [
-                  {
-                    "id": "contoso-session-1",
-                    "arrInspectorPort": 50052,
-                    "handshakePort": 50051,
-                    "elapsedTimeMinutes": 10,
-                    "hostname": "d4cefb7b-10b9-4631-934d-67445ffa9126.remoterenderingvm.westus2.mixedreality.azure.com",
-                    "maxLeaseTimeMinutes": 60,
-                    "size": "Standard",
-                    "status": "Ready",
-                    "error": null,
-                    "teraflops": 10.6
-                  },
-                  {
-                    "id": "contoso-session-2",
-                    "arrInspectorPort": 50052,
-                    "handshakePort": 50051,
-                    "elapsedTimeMinutes": 2,
-                    "hostname": "8fea8b3e-ae49-43da-a3cc-f609c1636f36.remoterenderingvm.westus2.mixedreality.azure.com",
-                    "maxLeaseTimeMinutes": 60,
-                    "size": "Standard",
-                    "status": "Ready",
-                    "error": null,
-                    "teraflops": 10.6
-                  }
-                ]
-              }
             }
           },
           "401": {
             "description": "Unauthorized",
+            "x-ms-error-response": true,
             "headers": {
               "MS-CV": {
-                "description": "Microsoft Correlation Vector. Include this value when reporting errors to the Azure Remote Rendering team.",
+                "description": "Microsoft Correlation Vector. Include this value when reporting issues.",
                 "type": "string"
               },
               "WWW-Authenticate": {
@@ -1053,18 +847,20 @@
           },
           "403": {
             "description": "Forbidden",
+            "x-ms-error-response": true,
             "headers": {
               "MS-CV": {
-                "description": "Microsoft Correlation Vector. Include this value when reporting errors to the Azure Remote Rendering team.",
+                "description": "Microsoft Correlation Vector. Include this value when reporting issues.",
                 "type": "string"
               }
             }
           },
           "429": {
             "description": "In case the rate limit has been exceeded.",
+            "x-ms-error-response": true,
             "headers": {
               "MS-CV": {
-                "description": "Microsoft Correlation Vector. Include this value when reporting errors to the Azure Remote Rendering team.",
+                "description": "Microsoft Correlation Vector. Include this value when reporting issues.",
                 "type": "string"
               },
               "Retry-After": {
@@ -1075,9 +871,10 @@
           },
           "500": {
             "description": "InternalError",
+            "x-ms-error-response": true,
             "headers": {
               "MS-CV": {
-                "description": "Microsoft Correlation Vector. Include this value when reporting errors to the Azure Remote Rendering team.",
+                "description": "Microsoft Correlation Vector. Include this value when reporting issues.",
                 "type": "string"
               }
             },
@@ -1097,25 +894,29 @@
     "conversion": {
       "properties": {
         "id": {
-          "type": "string"
+          "type": "string",
+          "description": "The id of the conversion supplied when the conversion was created."
         },
         "settings": {
           "$ref": "#/definitions/conversion_settings"
         },
         "output": {
           "type": "object",
+          "description": "Information about the output of a successful conversion. Only present when the status of the conversion is 'Succeeded'.",
           "properties": {
             "outputAssetUri": {
               "type": "string",
-              "x-nullable": true,
+              "description": "URL of the asset generated by the conversion process.",
               "format": "uri",
-              "example": "https://contoso.blob.core.windows.net/arr/architecture-output/house.arrAsset"
+              "example": "https://contoso.blob.core.windows.net/arr/architecture-output/house.arrAsset",
+              "readOnly": true
             }
-          }
+          },
+          "readOnly": true
         },
         "error": {
           "x-nullable": true,
-          "description": "The error object containing details about the rendering session startup failure.",
+          "description": "The error object containing details about the conversion failure.",
           "type": "object",
           "$ref": "#/definitions/error",
           "example": null
@@ -1125,6 +926,7 @@
         },
         "creationTime": {
           "type": "string",
+          "description": "The time when the conversion was created. Date and time in ISO 8601 format.",
           "format": "date-time"
         }
       },
@@ -1132,28 +934,9 @@
         "id",
         "settings",
         "status",
-        "error"
+        "error",
+        "creationTime"
       ],
-      "example": {
-        "application/json": {
-          "id": "contoso-conversion-1",
-          "creationTime": "2020-11-11T11:11:11.111Z",
-          "settings": {
-            "inputLocation": {
-              "storageContainerUri": "https://contoso.blob.core.windows.net/arr",
-              "blobPrefix": "architecture/",
-              "relativeInputAssetPath": "house.fbx"
-            },
-            "outputLocation": {
-              "storageContainerUri": "https://contoso.blob.core.windows.net/arr",
-              "blobPrefix": "architecture-output/"
-            }
-          },
-          "status": "Created",
-          "output": null,
-          "error": null
-        }
-      },
       "type": "object"
     },
     "conversion_list": {
@@ -1162,11 +945,13 @@
           "items": {
             "$ref": "#/definitions/conversion"
           },
-          "type": "array"
+          "type": "array",
+          "description": "The list of conversions."
         },
         "@nextLink": {
           "description": "If more conversions are available this link with the same authentication header can be used to retrieve further values",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         }
       },
       "required": [
@@ -1178,46 +963,62 @@
       "properties": {
         "storageContainerUri": {
           "type": "string",
-          "format": "uri"
+          "description": "The URI of the Azure blob storage container containing the input model.",
+          "format": "uri",
+          "example": "https://contosostorage01.blob.core.windows.net/arrInput"
         },
         "storageContainerReadListSas": {
-          "type": "string"
+          "type": "string",
+          "description": "An Azure blob storage container shared access signature giving read and list access to the storage container. Optional. If not is not provided the Azure Remote Rendering rendering account needs to be linked with the storage account containing the blob container. For security purposes this field will never be filled out in responses bodies."
         },
         "blobPrefix": {
-          "type": "string"
+          "type": "string",
+          "description": "Only Blobs starting with this prefix will be downloaded to perform the conversion.",
+          "example": "models/"
         },
         "relativeInputAssetPath": {
-          "type": "string"
+          "type": "string",
+          "description": "The relative path starting at blobPrefix (or at the container root if blobPrefix is not specified) to the input model. Must point to file with a supported file format ending.",
+          "example": "house.fbx"
         }
       },
       "required": [
         "storageContainerUri",
         "relativeInputAssetPath"
       ],
-      "type": "object"
+      "type": "object",
+      "description": "Settings for the conversion input."
     },
     "conversion_output_settings": {
       "properties": {
         "storageContainerUri": {
           "type": "string",
-          "format": "uri"
+          "description": "The URI of the Azure blob storage container where the result of the conversion should be written to.",
+          "format": "uri",
+          "example": "https://contosostorage01.blob.core.windows.net/arrOutput"
         },
         "storageContainerWriteSas": {
-          "type": "string"
+          "type": "string",
+          "description": "An Azure blob storage container shared access signature giving write access to the storage container. Optional. If not is not provided the Azure Remote Rendering rendering account needs to be linked with the storage account containing the blob container. For security purposes this field will never be filled out in responses bodies."
         },
         "blobPrefix": {
-          "type": "string"
+          "type": "string",
+          "description": "A prefix which gets prepended in front of all files produced by the conversion process. Will be treaded as a virtual folder.",
+          "example": "conversionOutput/fbc3646c-0b97-4553-81ca-6fae2bfb754e"
         },
         "outputAssetFilename": {
-          "type": "string"
+          "type": "string",
+          "description": "The file name of the output asset. Must end in '.arrAsset'.",
+          "example": "house.arrAsset"
         }
       },
       "required": [
         "storageContainerUri"
       ],
-      "type": "object"
+      "type": "object",
+      "description": "Settings for the conversion output."
     },
-    "conversion_request": {
+    "create_conversion_settings": {
       "description": "Request to start a conversion",
       "properties": {
         "settings": {
@@ -1230,7 +1031,7 @@
       "type": "object"
     },
     "conversion_settings": {
-      "description": "Settings for where to retrieve input files from and where to write output files",
+      "description": "Settings for where to retrieve input files from and where to write output files. Supplied when creating the conversion.",
       "properties": {
         "inputLocation": {
           "$ref": "#/definitions/conversion_input_settings"
@@ -1246,6 +1047,7 @@
       "type": "object"
     },
     "conversion_status": {
+      "description": "The status of the conversion. Terminal states are 'Cancelled', 'Failed', 'Succeeded'",
       "enum": [
         "NotStarted",
         "Running",
@@ -1255,7 +1057,7 @@
       ],
       "type": "string",
       "x-ms-enum": {
-        "name": "createdByType",
+        "name": "ConversionStatus",
         "modelAsString": true
       }
     },
@@ -1267,7 +1069,10 @@
           "$ref": "#/definitions/error"
         }
       },
-      "type": "object"
+      "type": "object",
+      "required": [
+        "error"
+      ]
     },
     "error": {
       "properties": {
@@ -1284,49 +1089,67 @@
           "items": {
             "$ref": "#/definitions/error"
           },
-          "description": "An array of details about specific errors that led to this reported error."
+          "description": "An array of details about specific errors that led to this reported error.",
+          "readOnly": true
         },
         "target": {
-          "description": "The target of the error",
-          "type": "string"
+          "description": "The target of the particular error (e.g., the name of the property in error).",
+          "type": "string",
+          "readOnly": true
         },
-        "innererror": {
+        "innerError": {
           "type": "object",
           "$ref": "#/definitions/error",
-          "description": "An object containing more specific information than the current object about the error."
+          "description": "An object containing more specific information than the current object about the error.",
+          "readOnly": true
         }
-      }
+      },
+      "type": "object",
+      "required": [
+        "code",
+        "message"
+      ]
     },
     "session_properties": {
       "properties": {
         "id": {
           "example": "contoso-session-c2b8ac1d-9494-4852-a59c-8c28813adc28",
-          "type": "string"
+          "type": "string",
+          "description": "The id of the session supplied when the sessions was created."
         },
         "arrInspectorPort": {
           "example": 50052,
           "maximum": 65534,
           "minimum": 49152,
-          "type": "integer"
+          "type": "integer",
+          "description": "The TCP port at which the Azure Remote Rendering Inspector tool is hosted.",
+          "readOnly": true
         },
         "handshakePort": {
           "example": 50051,
           "maximum": 65534,
           "minimum": 49152,
-          "type": "integer"
+          "type": "integer",
+          "description": "The TCP port used for the handshake.",
+          "readOnly": true
         },
         "elapsedTimeMinutes": {
           "description": "Amount of time in minutes the session is or has been in Ready state. Time is rounded down to a full minute.",
           "example": 10,
-          "type": "integer"
+          "type": "integer",
+          "readOnly": true
         },
         "hostname": {
           "example": "d4cefb7b-10b9-4631-934d-67445ffa9126.remoterenderingvm.westus2.mixedreality.azure.com",
-          "type": "string"
+          "type": "string",
+          "description": "The hostname under which the rendering session is reachable.",
+          "readOnly": true
         },
         "maxLeaseTimeMinutes": {
+          "type": "integer",
+          "description": "The time in minutes the session will run after reaching the 'Ready' state.",
           "example": 60,
-          "type": "integer"
+          "readOnly": true
         },
         "size": {
           "$ref": "#/definitions/session_size",
@@ -1339,27 +1162,38 @@
         "teraflops": {
           "example": 10.6,
           "format": "float",
-          "type": "number"
+          "type": "number",
+          "description": "The computational power of the rendering session GPU measured in Teraflops.",
+          "readOnly": true
         },
         "error": {
           "x-nullable": true,
           "description": "The error object containing details about the rendering session startup failure.",
           "type": "object",
           "$ref": "#/definitions/error",
-          "example": null
+          "example": null,
+          "readOnly": true
         },
         "creationTime": {
           "type": "string",
-          "format": "date-time"
+          "format": "date-time",
+          "description": "The time when the rendering session was created. Date and time in ISO 8601 format.",
+          "readOnly": true
         }
       },
-      "type": "object"
+      "type": "object",
+      "required": [
+        "id",
+        "size",
+        "status"
+      ]
     },
-    "create_session_body": {
+    "create_session_settings": {
       "properties": {
         "maxLeaseTimeMinutes": {
           "example": 60,
-          "type": "integer"
+          "type": "integer",
+          "description": "The time in minutes the session will run after reaching the 'Ready' state."
         },
         "size": {
           "$ref": "#/definitions/session_size"
@@ -1371,10 +1205,11 @@
         "size"
       ]
     },
-    "update_session_body": {
+    "update_session_settings": {
       "type": "object",
       "properties": {
         "maxLeaseTimeMinutes": {
+          "description": "Update to the time the session will run after it reached the 'Ready' state.  It has to be bigger than the current value of maxLeaseTimeMinutes.",
           "example": 72,
           "type": "integer"
         }
@@ -1391,16 +1226,26 @@
         "Ready",
         "Stopped"
       ],
+      "x-ms-enum": {
+        "name": "SessionStatus",
+        "modelAsString": true
+      },
       "type": "string",
-      "example": "Ready"
+      "example": "Ready",
+      "description": "The status of the rendering session. Once the status reached the 'Ready' state it can be connected to. The terminal state is 'Stopped'."
     },
     "session_size": {
       "enum": [
         "Standard",
         "Premium"
       ],
+      "x-ms-enum": {
+        "name": "SessionSize",
+        "modelAsString": true
+      },
       "example": "Standard",
-      "type": "string"
+      "type": "string",
+      "description": "Size of the server used for the rendering session. Remote Rendering with Standard size server has a maximum scene size of 20 million polygons. Remote Rendering with Premium size does not enforce a hard maximum, but performance may be degraded if your content exceeds the rendering capabilities of the service."
     },
     "sessions_list": {
       "description": "The result of a list sessions request.",
@@ -1408,15 +1253,68 @@
       "properties": {
         "sessions": {
           "type": "array",
+          "description": "The list of rendering sessions. Does not include sessions in 'Stopped' state.",
           "items": {
             "$ref": "#/definitions/session_properties"
           }
         },
         "@nextLink": {
           "description": "If more rendering sessions are available this link with the same authentication header can be used to retrieve further values",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         }
-      }
+      },
+      "required": [
+        "sessions"
+      ]
+    }
+  },
+  "parameters": {
+    "Endpoint": {
+      "name": "endpoint",
+      "description": "The endpoint to use e.g. https://remoterendering.eastus.mixedreality.azure.com a list can be found at https://docs.microsoft.com/en-us/azure/remote-rendering/reference/regions",
+      "required": true,
+      "type": "string",
+      "in": "path",
+      "x-ms-skip-url-encoding": true,
+      "x-ms-parameter-location": "client"
+    },
+    "api_version": {
+      "name": "api-version",
+      "in": "query",
+      "description": "The API version to be used with the HTTP request.",
+      "required": true,
+      "type": "string",
+      "x-example": "2021-01-01-preview",
+      "x-ms-parameter-location": "method"
+    },
+    "account_id": {
+      "name": "account_id",
+      "description": "the Azure Remote Rendering account id",
+      "format": "uuid",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-example": "30ea64bd-100f-4bf0-adc9-29fa45d4880c",
+      "x-ms-parameter-location": "method"
+    },
+    "conversion_id": {
+      "description": "An ID uniquely identifying the conversion for the given account. The ID is case sensitive, can contain any combination of alphanumeric characters including hyphens and underscores, and cannot contain more than 256 characters.",
+      "in": "path",
+      "name": "conversion_id",
+      "required": true,
+      "type": "string",
+      "x-example": "contoso-conversion-fbc3646c-0b97-4553-81ca-6fae2bfb754e",
+      "x-ms-parameter-location": "method"
+    },
+    "session_id": {
+      "name": "session_id",
+      "description": "An ID uniquely identifying the rendering session for the given account. The ID is case sensitive, can contain any combination of alphanumeric characters including hyphens and underscores, and cannot contain more than 256 characters.",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-example": "contoso-session-c2b8ac1d-9494-4852-a59c-8c28813adc28",
+      "x-ms-parameter-location": "method"
     }
   },
   "securityDefinitions": {
@@ -1430,100 +1328,5 @@
     {
       "MrcBearerAuth": []
     }
-  ],
-  "x-components": {
-    "parameters": {
-      "account_id": {
-        "description": "the Azure Remote Rendering account id",
-        "format": "uuid",
-        "in": "path",
-        "required": true,
-        "type": "string",
-        "x-example": "30ea64bd-100f-4bf0-adc9-29fa45d4880c"
-      },
-      "conversion_id": {
-        "description": "An ID uniquely identifying the conversion for the given account. The ID is case sensitive, can contain any combination of alphanumeric characters including hyphens and underscores, and cannot contain more than 256 characters.",
-        "in": "path",
-        "name": "conversion_id",
-        "required": true,
-        "type": "string",
-        "x-example": "contoso-conversion-1"
-      },
-      "session_id": {
-        "description": "An ID uniquely identifying the rendering session for the given account. The ID is case sensitive, can contain any combination of alphanumeric characters including hyphens and underscores, and cannot contain more than 256 characters.",
-        "in": "path",
-        "name": "session_id",
-        "required": true,
-        "type": "string",
-        "x-example": "contoso-session-1"
-      }
-    },
-    "responses": {
-      "200Ok": {
-        "description": "OK"
-      },
-      "400UserError": {
-        "description": "BadRequest",
-        "headers": {
-          "MS-CV": {
-            "$ref": "#/x-components/headers/mscv"
-          }
-        }
-      },
-      "401Unauthorized": {
-        "description": "Unauthorized",
-        "headers": {
-          "MS-CV": {
-            "$ref": "#/x-components/headers/mscv"
-          },
-          "WWW-Authenticate": {
-            "description": "Describes the error encountered while trying to authenticate the resource.",
-            "type": "string"
-          }
-        }
-      },
-      "403Forbidden": {
-        "description": "Forbidden",
-        "headers": {
-          "MS-CV": {
-            "$ref": "#/x-components/headers/mscv"
-          }
-        }
-      },
-      "404NotFound": {
-        "description": "The specified resource was not found.",
-        "headers": {
-          "MS-CV": {
-            "$ref": "#/x-components/headers/mscv"
-          }
-        }
-      },
-      "429Throttled": {
-        "description": "In case the rate limit has been exceeded.",
-        "headers": {
-          "MS-CV": {
-            "$ref": "#/x-components/headers/mscv"
-          },
-          "Retry-After": {
-            "description": "The minimum number of seconds to wait before not getting this response anymore.",
-            "type": "integer"
-          }
-        }
-      },
-      "500InternalError": {
-        "description": "InternalError",
-        "headers": {
-          "MS-CV": {
-            "$ref": "#/x-components/headers/mscv"
-          }
-        }
-      }
-    },
-    "headers": {
-      "mscv": {
-        "description": "Microsoft Correlation Vector. Include this value when reporting errors to the Azure Remote Rendering team.",
-        "type": "string"
-      }
-    }
-  }
+  ]
 }
