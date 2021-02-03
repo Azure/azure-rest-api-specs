@@ -5445,9 +5445,45 @@
           "description": "Resource type.",
           "readOnly": true,
           "type": "string"
+        },
+        "systemData": {
+          "$ref": "#/definitions/SystemData",
+          "readOnly": true
         }
       },
       "x-ms-azure-resource": true
+    },
+    "SystemData": {
+      "description": "Read only system data",
+      "type": "object",
+      "properties": {
+        "createdBy": {
+          "type": "string",
+          "description": "An identifier for the identity that created the resource"
+        },
+        "createdByType": {
+          "$ref": "#/definitions/IdentityType",
+          "description": "The type of identity that created the resource"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp of resource creation (UTC)"
+        },
+        "lastModifiedBy": {
+          "type": "string",
+          "description": "An identifier for the identity that last modified the resource"
+        },
+        "lastModifiedByType": {
+          "$ref": "#/definitions/IdentityType",
+          "description": "The type of identity that last modified the resource"
+        },
+        "lastModifiedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp of resource last modification (UTC)"
+        }
+      }
     },
     "IdentityType": {
       "description": "The type of identity that creates/modifies resources",
@@ -5486,10 +5522,6 @@
             "update"
           ],
           "description": "Resource tags."
-        },
-        "systemData": {
-          "$ref": "#/definitions/SystemData",
-          "readOnly": true
         }
       },
       "required": [
@@ -5504,10 +5536,6 @@
         }
       ],
       "properties": {
-        "systemData": {
-          "$ref": "#/definitions/SystemData",
-          "readOnly": true
-        }
       }
     },
     "QueryStringCachingBehavior": {
@@ -5584,38 +5612,6 @@
           "type": "string"
         }
       }
-    },
-    "SystemData": {
-      "description": "Read only system data",
-      "type": "object",
-      "properties": {
-        "createdBy": {
-          "type": "string",
-          "description": "An identifier for the identity that created the resource"
-        },
-        "createdByType": {
-          "$ref": "#/definitions/IdentityType",
-          "description": "The type of identity that created the resource"
-        },
-        "createdAt": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The timestamp of resource creation (UTC)"
-        },
-        "lastModifiedBy": {
-          "type": "string",
-          "description": "An identifier for the identity that last modified the resource"
-        },
-        "lastModifiedByType": {
-          "$ref": "#/definitions/IdentityType",
-          "description": "The type of identity that last modified the resource"
-        },
-        "lastModifiedAt": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The timestamp of resource last modification (UTC)"
-        }
-      }
     }
   },
   "parameters": {
@@ -5631,7 +5627,7 @@
       "in": "query",
       "required": true,
       "type": "string",
-      "description": "Version of the API to be used with the client request. Current version is 2020-09-01."
+      "description": "Version of the API to be used with the client request. Current version is 2017-04-02."
     },
     "resourceGroupNameParameter": {
       "name": "resourceGroupName",
