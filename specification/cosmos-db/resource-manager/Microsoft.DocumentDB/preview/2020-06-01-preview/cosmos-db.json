@@ -4470,6 +4470,19 @@
       },
       "description": "The List operation response, that contains the graphs and their properties."
     },
+    "ErrorResponse": {
+      "properties": {
+        "code": {
+          "description": "Error code.",
+          "type": "string"
+        },
+        "message": {
+          "description": "Error message indicating why the operation failed.",
+          "type": "string"
+        }
+      },
+      "description": "Error Response."
+    },
     "CloudError": {
       "x-ms-external": true,
       "properties": {
@@ -4477,7 +4490,7 @@
           "$ref": "#/definitions/CloudErrorBody"
         }
       },
-      "description": "An error response from the Storage service."
+      "description": "An error response from the Cosmos DB service."
     },
     "CloudErrorBody": {
       "x-ms-external": true,
@@ -4489,20 +4502,9 @@
         "message": {
           "type": "string",
           "description": "A message describing the error, intended to be suitable for display in a user interface."
-        },
-        "target": {
-          "type": "string",
-          "description": "The target of the particular error. For example, the name of the property in error."
-        },
-        "details": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/CloudErrorBody"
-          },
-          "description": "A list of additional details about the error."
         }
       },
-      "description": "An error response from the Storage service."
+      "description": "An error response from the Cosmos DB service."
     },
     "FailoverPolicies": {
       "properties": {
