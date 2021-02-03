@@ -26,7 +26,7 @@ These are the global settings for the Storage API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2019-06
+tag: package-2021-01
 ```
 
 ### Tag: package-2021-01
@@ -54,6 +54,19 @@ directive:
     reason: APIs return array of values, is not actually a 'list' operation
     approved-by: "@fearthecowboy"
 
+  - where:
+      - $..paths[($..operationId["BlobServices_*"])]
+      - $..paths[($..operationId["FileServices_*"])]
+      - $..paths[($..operationId["QueueServices_*"])]
+      - $..paths[($..operationId["TableServices_*"])]
+      - $..paths[($..operationId["StorageAccounts_*"])]
+      - $..paths[($..operationId["DeletedAccounts_*"])]
+      - $..paths[($..operationId["ObjectReplicationPolicies_*"])]
+      - $..paths[($..operationId["EncryptionScopes_*"])]
+      - $..paths[($..operationId["ManagementPolicies_*"])]
+      - $..paths[($..operationId["PrivateEndpointConnections_*"])]
+    suppress-validations: 
+      - R4009
 ```
 
 ### Tag: package-2020-08-preview
