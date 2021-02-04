@@ -297,6 +297,12 @@
               "$ref": "#/definitions/AFDDomain"
             }
           },
+          "202": {
+            "description": "Accepted. The request has been accepted for processing and the operation will complete asynchronously.",
+            "schema": {
+              "$ref": "#/definitions/AFDDomain"
+            }
+          },
           "default": {
             "description": "CDN error response describing why the operation failed.",
             "schema": {
@@ -417,6 +423,9 @@
         ],
         "responses": {
           "200": {
+            "description": "OK. The request has succeeded."
+          },
+          "202": {
             "description": "Accepted"
           },
           "204": {
@@ -651,6 +660,12 @@
               "$ref": "#/definitions/AFDEndpoint"
             }
           },
+          "202": {
+            "description": "Accepted. The request has been accepted for processing and the operation will complete asynchronously.",
+            "schema": {
+              "$ref": "#/definitions/AFDEndpoint"
+            }
+          },
           "default": {
             "description": "CDN error response describing why the operation failed.",
             "schema": {
@@ -771,6 +786,9 @@
         ],
         "responses": {
           "200": {
+            "description": "OK. The request has succeeded."
+          },
+          "202": {
             "description": "Accepted"
           },
           "204": {
@@ -1132,6 +1150,12 @@
               "$ref": "#/definitions/AFDOriginGroup"
             }
           },
+          "202": {
+            "description": "Accepted. The request has been accepted for processing and the operation will complete asynchronously.",
+            "schema": {
+              "$ref": "#/definitions/AFDOriginGroup"
+            }
+          },
           "default": {
             "description": "CDN error response describing why the operation failed.",
             "schema": {
@@ -1252,6 +1276,9 @@
         ],
         "responses": {
           "200": {
+            "description": "OK. The request has succeeded."
+          },
+          "202": {
             "description": "Accepted"
           },
           "204": {
@@ -1506,6 +1533,12 @@
               "$ref": "#/definitions/AFDOrigin"
             }
           },
+          "202": {
+            "description": "Accepted. The request has been accepted for processing and the operation will complete asynchronously.",
+            "schema": {
+              "$ref": "#/definitions/AFDOrigin"
+            }
+          },
           "default": {
             "description": "CDN error response describing why the operation failed.",
             "schema": {
@@ -1640,6 +1673,9 @@
         ],
         "responses": {
           "200": {
+            "description": "OK. The request has succeeded."
+          },
+          "202": {
             "description": "Accepted"
           },
           "204": {
@@ -1838,6 +1874,12 @@
               "$ref": "#/definitions/Route"
             }
           },
+          "202": {
+            "description": "Accepted. The request has been accepted for processing and the operation will complete asynchronously.",
+            "schema": {
+              "$ref": "#/definitions/Route"
+            }
+          },
           "default": {
             "description": "CDN error response describing why the operation failed.",
             "schema": {
@@ -1972,6 +2014,9 @@
         ],
         "responses": {
           "200": {
+            "description": "OK. The request has succeeded."
+          },
+          "202": {
             "description": "Accepted"
           },
           "204": {
@@ -2145,6 +2190,12 @@
           },
           "201": {
             "description": "Created. The request has been fulfilled and a new rule set has been created.",
+            "schema": {
+              "$ref": "#/definitions/RuleSet"
+            }
+          },
+          "202": {
+            "description": "Accepted. The request has been accepted for processing and the operation will complete asynchronously.",
             "schema": {
               "$ref": "#/definitions/RuleSet"
             }
@@ -2453,6 +2504,12 @@
               "$ref": "#/definitions/Rule"
             }
           },
+          "202": {
+            "description": "Accepted. The request has been accepted for processing and the operation will complete asynchronously.",
+            "schema": {
+              "$ref": "#/definitions/Rule"
+            }
+          },
           "default": {
             "description": "CDN error response describing why the operation failed.",
             "schema": {
@@ -2587,6 +2644,9 @@
         ],
         "responses": {
           "200": {
+            "description": "OK. The request has succeeded."
+          },
+          "202": {
             "description": "Accepted"
           },
           "204": {
@@ -2764,6 +2824,12 @@
               "$ref": "#/definitions/SecurityPolicy"
             }
           },
+          "202": {
+            "description": "Accepted. The request has been accepted for processing and the operation will complete asynchronously.",
+            "schema": {
+              "$ref": "#/definitions/SecurityPolicy"
+            }
+          },
           "default": {
             "description": "CDN error response describing why the operation failed.",
             "schema": {
@@ -2806,12 +2872,12 @@
             "type": "string"
           },
           {
-            "name": "securityPolicyParameters",
+            "name": "securityPolicyProperties",
             "in": "body",
             "description": "Security policy update properties",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/SecurityPolicyWebApplicationFirewallParameters"
+              "$ref": "#/definitions/SecurityPolicyProperties"
             }
           },
           {
@@ -2884,6 +2950,9 @@
         ],
         "responses": {
           "200": {
+            "description": "OK. The request has succeeded."
+          },
+          "202": {
             "description": "Accepted"
           },
           "204": {
@@ -3061,6 +3130,12 @@
               "$ref": "#/definitions/Secret"
             }
           },
+          "202": {
+            "description": "Accepted. The request has been accepted for processing and the operation will complete asynchronously.",
+            "schema": {
+              "$ref": "#/definitions/Secret"
+            }
+          },
           "default": {
             "description": "CDN error response describing why the operation failed.",
             "schema": {
@@ -3181,6 +3256,9 @@
         ],
         "responses": {
           "200": {
+            "description": "OK. The request has succeeded."
+          },
+          "202": {
             "description": "Accepted"
           },
           "204": {
@@ -3449,7 +3527,8 @@
             "name": "maxRanking",
             "in": "query",
             "required": true,
-            "type": "number"
+            "type": "integer",
+            "format": "int32"
           },
           {
             "name": "dateTimeBegin",
@@ -3767,7 +3846,8 @@
             "name": "maxRanking",
             "in": "query",
             "required": true,
-            "type": "number"
+            "type": "integer",
+            "format": "int32"
           },
           {
             "name": "rankings",
@@ -4148,7 +4228,7 @@
       "properties": {
         "parameters": {
           "description": "object which contains security policy parameters",
-          "$ref": "#/definitions/SecurityPolicyWebApplicationFirewallParameters"
+          "$ref": "#/definitions/SecurityPolicyParameters"
         }
       }
     },
@@ -4460,9 +4540,6 @@
       "allOf": [
         {
           "$ref": "#/definitions/SecretParameters"
-        },
-        {
-          "$ref": "#/definitions/Certificate"
         }
       ]
     },
@@ -4473,9 +4550,6 @@
       "allOf": [
         {
           "$ref": "#/definitions/SecretParameters"
-        },
-        {
-          "$ref": "#/definitions/Certificate"
         }
       ],
       "required": [
@@ -4931,12 +5005,17 @@
           }
         },
         "queryStringCachingBehavior": {
-          "description": "Defines how AzureFrontDoor caches requests that include query strings. You can ignore any query strings when caching, bypass caching to prevent requests that contain query strings from being cached, or cache every request with a unique URL.",
-          "$ref": "./cdn.json#/definitions/QueryStringCachingBehavior"
-        },
-        "optimizationType": {
-          "description": "Specifies what scenario the customer wants this AzureFrontDoor endpoint to optimize for, e.g. Download, Media services. With this information, AzureFrontDoor can apply scenario driven optimization.",
-          "$ref": "./cdn.json#/definitions/OptimizationType"
+          "description": "Defines how CDN caches requests that include query strings. You can ignore any query strings when caching, bypass caching to prevent requests that contain query strings from being cached, or cache every request with a unique URL.",
+          "enum": [
+            "IgnoreQueryString",
+            "UseQueryString",
+            "NotSet"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "afdQueryStringCachingBehavior",
+            "modelAsString": false
+          }
         },
         "forwardingProtocol": {
           "description": "Protocol this rule will use when forwarding traffic to backends.",
