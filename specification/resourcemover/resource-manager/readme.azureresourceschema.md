@@ -7,6 +7,7 @@ These settings apply only when `--azureresourceschema` is specified on the comma
 ``` yaml $(azureresourceschema) && $(multiapi)
 batch:
   - tag: schema-migrate-2019-10-01-preview
+  - tag: schema-migrate-2021-01-01
 
 ```
 
@@ -20,5 +21,16 @@ output-folder: $(azureresourceschema-folder)/schemas
 # all the input files in this apiVersion
 input-file:
   - Microsoft.Migrate/preview/2019-10-01-preview/resourcemovercollection.json
+
+```
+
+### Tag: schema-migrate-2021-01-01 and azureresourceschema
+
+``` yaml $(tag) == 'schema-migrate-2021-01-01' && $(azureresourceschema)
+output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
+  - Microsoft.Migrate/stable/2021-01-01/resourcemovercollection.json
 
 ```
