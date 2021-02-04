@@ -2260,6 +2260,26 @@
       "type": "object",
       "x-ms-discriminator-value": "AzureBackupRule"
     },
+    "AzureOperationalStoreParameters": {
+      "description": "Parameters for Operational-Tier DataStore",
+      "required": [
+        "objectType",
+        "dataStoreType"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataStoreParameters"
+        }
+      ],
+      "properties": {
+        "resourceGroupId": {
+          "description": "Gets or sets the Resource Group Uri.",
+          "type": "string"
+        }
+      },
+      "x-ms-discriminator-value": "AzureOperationalStoreParameters"
+    },
     "AzureRetentionRule": {
       "allOf": [
         {
@@ -2855,11 +2875,11 @@
       "description": "DataStoreInfo base",
       "properties": {
         "dataStoreType": {
-          "description": "type of datastore; SnapShot/Hot/Archive",
+          "description": "type of datastore; Operational/Vault/Archive",
           "enum": [
-            "ArchiveStore",
-            "SnapshotStore",
-            "VaultStore"
+            "OperationalStore",
+            "VaultStore",
+            "ArchiveStore"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -2879,6 +2899,35 @@
       ],
       "title": "DataStoreInfoBase",
       "type": "object"
+    },
+    "DataStoreParameters": {
+      "description": "Parameters for DataStore",
+      "required": [
+        "objectType",
+        "dataStoreType"
+      ],
+      "type": "object",
+      "properties": {
+        "objectType": {
+          "description": "Type of the specific object - used for deserializing",
+          "type": "string",
+          "readOnly": false
+        },
+        "dataStoreType": {
+          "description": "type of datastore; Operational/Vault/Archive",
+          "enum": [
+            "OperationalStore",
+            "VaultStore",
+            "ArchiveStore"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "DataStoreTypes",
+            "modelAsString": true
+          }
+        }
+      },
+      "discriminator": "objectType"
     },
     "Day": {
       "description": "Day of the week",
@@ -3403,6 +3452,10 @@
         "policyVersion": {
           "readOnly": true,
           "type": "string"
+        },
+        "policyParameters": {
+          "$ref": "#/definitions/PolicyParameters",
+          "description": "Policy parameters for the backup instance"
         }
       },
       "required": [
@@ -3410,6 +3463,19 @@
       ],
       "title": "PolicyInfo",
       "type": "object"
+    },
+    "PolicyParameters": {
+      "description": "Parameters in Policy",
+      "type": "object",
+      "properties": {
+        "dataStoreParametersList": {
+          "description": "Gets or sets the DataStore Parameters",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DataStoreParameters"
+          }
+        }
+      }
     },
     "ProtectionStatusDetails": {
       "description": "Protection status details",
