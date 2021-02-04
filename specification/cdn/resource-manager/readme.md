@@ -29,6 +29,8 @@ title: CdnManagementClient
 description: Cdn Management Client
 openapi-type: arm
 tag: package-2020-09
+modelerfour:
+    lenient-model-deduplication: true
 ```
 
 ### Tag: package-2020-09
