@@ -27,13 +27,45 @@
     "application/json"
   ],
   "paths": {
+    "/securitydomain/download/pending": {
+      "get": {
+        "tags": [
+          "HSMSecurityDomain"
+        ],
+        "operationId": "HSMSecurityDomain_DownloadPending",
+        "description": "Retrieves the Security Domain download operation status",
+        "responses": {
+          "200": {
+            "description": "Security domain download operation status",
+            "schema": {
+              "$ref": "#/definitions/SecurityDomainOperationStatus"
+            }
+          },
+          "default": {
+            "description": "Key Vault error response describing why the operation failed.",
+            "schema": {
+              "$ref": "common.json#/definitions/KeyVaultError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Find security domain download operation status": {
+            "$ref": "./examples/securitydomainoperationstatus-example.json"
+          }
+        }
+      }
+    },
     "/securitydomain/download": {
       "post": {
         "tags": [
           "HSMSecurityDomain"
         ],
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
         "operationId": "HSMSecurityDomain_Download",
-        "description": "Retrieves Security domain from HSM enclave",
+        "description": "Retrieves the Security Domain from the managed HSM. Calling this endpoint can be used to activated a provisioned managed HSM resource.",
         "parameters": [
           {
             "in": "body",
@@ -49,10 +81,20 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "This is the specification of the security domain as downloaded from the new pool",
+          "202": {
+            "description": "The download request was accepted and contains the Security Domain of the managed HSM.",
             "schema": {
               "$ref": "#/definitions/SecurityDomainObject"
+            },
+            "headers": {
+              "Retry-After": {
+                "description": "The recommended number of seconds to wait before calling the URI specified in Azure-AsyncOperation.",
+                "type": "integer"
+              },
+              "Azure-AsyncOperation": {
+                "description": "The URI to poll for completion status.",
+                "type": "string"
+              }
             }
           },
           "default": {
