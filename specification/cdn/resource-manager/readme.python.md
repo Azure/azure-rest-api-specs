@@ -14,20 +14,14 @@ python:
   package-name: azure-mgmt-cdn
   package-version: 2.0.0
   clear-output-folder: true
-  modelerfour:
-    lenient-model-deduplication: true
 ```
 ``` yaml $(python) && $(python-mode) == 'update'
 python:
   no-namespace-folders: true
   output-folder: $(python-sdks-folder)/cdn/azure-mgmt-cdn/azure/mgmt/cdn
-  modelerfour:
-    lenient-model-deduplication: true
 ```
 ``` yaml $(python) && $(python-mode) == 'create'
 python:
   basic-setup-py: true
   output-folder: $(python-sdks-folder)/cdn/azure-mgmt-cdn
-  modelerfour:
-    lenient-model-deduplication: true
 ```
