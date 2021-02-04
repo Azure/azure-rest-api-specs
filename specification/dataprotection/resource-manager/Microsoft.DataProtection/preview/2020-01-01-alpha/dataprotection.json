@@ -1925,7 +1925,7 @@
           "type": "string"
         },
         "errorDetails": {
-          "description": "A List, detatiling the errors related to the job",
+          "description": "A List, detailing the errors related to the job",
           "items": {
             "$ref": "#/definitions/UserFacingError"
           },
@@ -1974,7 +1974,7 @@
           "type": "string"
         },
         "sourceResourceGroup": {
-          "description": "Name of the Datasource's Resource Group",
+          "description": "Resource Group Name of the Datasource",
           "type": "string"
         },
         "sourceSubscriptionID": {
@@ -2397,7 +2397,7 @@
       "description": "Rule based backup policy",
       "properties": {
         "policyRules": {
-          "description": "Policy rule dictionary that contains rules for each backptype i.e Full/Incremental/Logs etc",
+          "description": "Policy rule dictionary that contains rules for each backuptype i.e Full/Incremental/Logs etc",
           "items": {
             "$ref": "#/definitions/BasePolicyRule"
           },
@@ -2717,7 +2717,7 @@
       "type": "object"
     },
     "CloudError": {
-      "description": "An error response from Azure Backuup.",
+      "description": "An error response from Azure Backup.",
       "properties": {
         "error": {
           "$ref": "#/definitions/Error"
@@ -3213,7 +3213,7 @@
           "additionalProperties": {
             "type": "string"
           },
-          "description": "Any Key value pairs that can be provided to the cleint for additional  verbose information.",
+          "description": "Any Key value pairs that can be provided to the client for additional  verbose information.",
           "type": "object"
         },
         "code": {
@@ -3243,8 +3243,8 @@
           "readOnly": true,
           "type": "string"
         },
-        "dataTransferedInBytes": {
-          "description": "Number of bytes transfered",
+        "dataTransferredInBytes": {
+          "description": "Number of bytes transferred",
           "format": "double",
           "readOnly": true,
           "type": "number"
@@ -3283,7 +3283,7 @@
             "readOnly": true,
             "type": "string"
           },
-          "description": "Sub Tasks's additional details"
+          "description": "Additional details of Sub Tasks"
         },
         "taskId": {
           "description": "Task Id of the Sub Task",
@@ -3698,7 +3698,7 @@
           "type": "array"
         },
         "weeksOfTheMonth": {
-          "description": "It should be Fisrt/Second/Third/Fourth/Last",
+          "description": "It should be First/Second/Third/Fourth/Last",
           "items": {
             "enum": [
               "First",
@@ -3953,7 +3953,7 @@
       "type": "object"
     },
     "UserFacingError": {
-      "description": "Error object used by layers that have access to localized content, and propogate that to user",
+      "description": "Error object used by layers that have access to localized content, and propagate that to user",
       "properties": {
         "code": {
           "description": "Unique code for this error",
@@ -3982,7 +3982,7 @@
           "type": "string"
         },
         "recommendedAction": {
-          "description": "RecommendedAction � Localised.",
+          "description": "RecommendedAction � localized.",
           "items": {
             "type": "string"
           },
