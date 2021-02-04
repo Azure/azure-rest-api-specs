@@ -34,16 +34,16 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SecurityAndCompliance/privateLinkServicesForSCC/{resourceName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SecurityAndCompliance/privateLinkServicesForOffice365ManagementActivityAPI/{resourceName}": {
       "get": {
         "tags": [
           "Resource"
         ],
-        "description": "Get the metadata of a privateLinkServicesForSCC resource.",
-        "operationId": "privateLinkServicesForSCC_Get",
+        "description": "Get the metadata of a privateLinkServicesForOffice365ManagementActivityAPI resource.",
+        "operationId": "privateLinkServicesForOffice365ManagementActivityAPI_Get",
         "x-ms-examples": {
           "Get metadata": {
-            "$ref": "./examples/ServiceGet.json"
+            "$ref": "./examples/ManagementAPIServiceGet.json"
           }
         },
         "parameters": [
@@ -62,9 +62,9 @@
         ],
         "responses": {
           "200": {
-            "description": "The body contains all of the properties of the privateLinkServicesForSCC instance.",
+            "description": "The body contains all of the properties of the privateLinkServicesForOffice365ManagementActivityAPI instance.",
             "schema": {
-              "$ref": "#/definitions/privateLinkServicesForSCCDescription"
+              "$ref": "#/definitions/privateLinkServicesForOffice365ManagementActivityAPIDescription"
             }
           },
           "default": {
@@ -80,14 +80,14 @@
         "tags": [
           "Resource"
         ],
-        "description": "Create or update the metadata of a privateLinkServicesForSCC instance.",
-        "operationId": "privateLinkServicesForSCC_CreateOrUpdate",
+        "description": "Create or update the metadata of a privateLinkServicesForOffice365ManagementActivityAPI instance.",
+        "operationId": "privateLinkServicesForOffice365ManagementActivityAPI_CreateOrUpdate",
         "x-ms-examples": {
           "Create or Update a service with all parameters": {
-            "$ref": "./examples/ServiceCreate.json"
+            "$ref": "./examples/ManagementAPIServiceCreate.json"
           },
           "Create or Update a service with minimum parameters": {
-            "$ref": "./examples/ServiceCreateMinimum.json"
+            "$ref": "./examples/ManagementAPIServiceCreateMinimum.json"
           }
         },
         "x-ms-long-running-operation": true,
@@ -108,12 +108,12 @@
             "$ref": "#/parameters/resourceName"
           },
           {
-            "name": "privateLinkServicesForSCCDescription",
+            "name": "privateLinkServicesForOffice365ManagementActivityAPIDescription",
             "in": "body",
             "description": "The service instance metadata.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/privateLinkServicesForSCCDescription"
+              "$ref": "#/definitions/privateLinkServicesForOffice365ManagementActivityAPIDescription"
             }
           }
         ],
@@ -121,13 +121,13 @@
           "200": {
             "description": "Updated - Put request accepted and an existing resource is being updated; the operation will complete asynchronously.",
             "schema": {
-              "$ref": "#/definitions/privateLinkServicesForSCCDescription"
+              "$ref": "#/definitions/privateLinkServicesForOffice365ManagementActivityAPIDescription"
             }
           },
           "201": {
             "description": "Created - Put request accepted and a new resource was created; the operation will complete asynchronously.",
             "schema": {
-              "$ref": "#/definitions/privateLinkServicesForSCCDescription"
+              "$ref": "#/definitions/privateLinkServicesForOffice365ManagementActivityAPIDescription"
             }
           },
           "default": {
@@ -143,11 +143,11 @@
         "tags": [
           "Resource"
         ],
-        "description": "Update the metadata of a privateLinkServicesForSCC instance.",
-        "operationId": "privateLinkServicesForSCC_Update",
+        "description": "Update the metadata of a privateLinkServicesForOffice365ManagementActivityAPI instance.",
+        "operationId": "privateLinkServicesForOffice365ManagementActivityAPI_Update",
         "x-ms-examples": {
           "Patch service": {
-            "$ref": "./examples/ServicePatch.json"
+            "$ref": "./examples/ManagementAPIServicePatch.json"
           }
         },
         "x-ms-long-running-operation": true,
@@ -181,13 +181,13 @@
           "200": {
             "description": "The tags for the resource were updated successfully.",
             "schema": {
-              "$ref": "#/definitions/privateLinkServicesForSCCDescription"
+              "$ref": "#/definitions/privateLinkServicesForOffice365ManagementActivityAPIDescription"
             }
           },
           "202": {
             "description": "The tags for the resource were updated successfully.",
             "schema": {
-              "$ref": "#/definitions/privateLinkServicesForSCCDescription"
+              "$ref": "#/definitions/privateLinkServicesForOffice365ManagementActivityAPIDescription"
             }
           },
           "default": {
@@ -207,7 +207,7 @@
         "operationId": "Services_Delete",
         "x-ms-examples": {
           "Delete service": {
-            "$ref": "./examples/ServiceDelete.json"
+            "$ref": "./examples/ManagementAPIServiceDelete.json"
           }
         },
         "x-ms-long-running-operation": true,
@@ -247,16 +247,16 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.SecurityAndCompliance/privateLinkServicesForSCC": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.SecurityAndCompliance/privateLinkServicesForOffice365ManagementActivityAPI": {
       "get": {
         "tags": [
           "Collection"
         ],
-        "description": "Get all the privateLinkServicesForSCC instances in a subscription.",
-        "operationId": "privateLinkServicesForSCC_List",
+        "description": "Get all the privateLinkServicesForOffice365ManagementActivityAPI instances in a subscription.",
+        "operationId": "privateLinkServicesForOffice365ManagementActivityAPI_List",
         "x-ms-examples": {
           "List all services in subscription": {
-            "$ref": "./examples/ServiceList.json"
+            "$ref": "./examples/ManagementAPIServiceList.json"
           }
         },
         "x-ms-pageable": {
@@ -272,9 +272,9 @@
         ],
         "responses": {
           "200": {
-            "description": "This is a synchronous operation. The body contains a JSON-serialized array of the metadata from all the privateLinkServicesForSCC instances in the subscription.",
+            "description": "This is a synchronous operation. The body contains a JSON-serialized array of the metadata from all the privateLinkServicesForOffice365ManagementActivityAPI instances in the subscription.",
             "schema": {
-              "$ref": "#/definitions/privateLinkServicesForSCCDescriptionListResult"
+              "$ref": "#/definitions/privateLinkServicesForOffice365ManagementActivityAPIDescriptionListResult"
             }
           },
           "default": {
@@ -287,16 +287,16 @@
         "deprecated": false
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SecurityAndCompliance/privateLinkServicesForSCC": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SecurityAndCompliance/privateLinkServicesForOffice365ManagementActivityAPI": {
       "get": {
         "tags": [
           "Collection"
         ],
         "description": "Get all the service instances in a resource group.",
-        "operationId": "privateLinkServicesForSCC_ListByResourceGroup",
+        "operationId": "privateLinkServicesForOffice365ManagementActivityAPI_ListByResourceGroup",
         "x-ms-examples": {
           "List all services in resource group": {
-            "$ref": "./examples/ServiceListByResourceGroup.json"
+            "$ref": "./examples/ManagementAPIServiceListByResourceGroup.json"
           }
         },
         "x-ms-pageable": {
@@ -315,9 +315,9 @@
         ],
         "responses": {
           "200": {
-            "description": "This is a synchronous operation. The body contains a JSON-serialized array of the metadata from all the privateLinkServicesForSCC instances in the resource group.",
+            "description": "This is a synchronous operation. The body contains a JSON-serialized array of the metadata from all the privateLinkServicesForOffice365ManagementActivityAPI instances in the resource group.",
             "schema": {
-              "$ref": "#/definitions/privateLinkServicesForSCCDescriptionListResult"
+              "$ref": "#/definitions/privateLinkServicesForOffice365ManagementActivityAPIDescriptionListResult"
             }
           },
           "default": {
@@ -339,7 +339,7 @@
         "operationId": "Operations_List",
         "x-ms-examples": {
           "List operations": {
-            "$ref": "./examples/OperationsList.json"
+            "$ref": "./examples/ManagementAPIOperationsList.json"
           }
         },
         "x-ms-pageable": {
@@ -373,10 +373,10 @@
           "Proxy"
         ],
         "description": "Check if a service instance name is available.",
-        "operationId": "privateLinkServicesForSCC_CheckNameAvailability",
+        "operationId": "privateLinkServicesForOffice365ManagementActivityAPI_CheckNameAvailability",
         "x-ms-examples": {
           "Check name availability": {
-            "$ref": "./examples/CheckNameAvailabilityPost.json"
+            "$ref": "./examples/ManagementAPICheckNameAvailabilityPost.json"
           }
         },
         "parameters": [
@@ -422,7 +422,7 @@
         "operationId": "OperationResults_Get",
         "x-ms-examples": {
           "Get operation result": {
-            "$ref": "./examples/OperationResultsGet.json"
+            "$ref": "./examples/ManagementAPIOperationResultsGet.json"
           }
         },
         "parameters": [
@@ -456,7 +456,7 @@
         "deprecated": false
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SecurityAndCompliance/privateLinkServicesForSCC/{resourceName}/privateEndpointConnections": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SecurityAndCompliance/privateLinkServicesForOffice365ManagementActivityAPI/{resourceName}/privateEndpointConnections": {
       "get": {
         "tags": [
           "PrivateEndpointConnections"
@@ -493,7 +493,7 @@
         },
         "x-ms-examples": {
           "PrivateEndpointConnection_List": {
-            "$ref": "./examples/ServiceListPrivateEndpointConnections.json"
+            "$ref": "./examples/ManagementAPIServiceListPrivateEndpointConnections.json"
           }
         },
         "x-ms-pageable": {
@@ -501,7 +501,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SecurityAndCompliance/privateLinkServicesForSCC/{resourceName}/privateEndpointConnections/{privateEndpointConnectionName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SecurityAndCompliance/privateLinkServicesForOffice365ManagementActivityAPI/{resourceName}/privateEndpointConnections/{privateEndpointConnectionName}": {
       "get": {
         "tags": [
           "PrivateEndpointConnections"
@@ -541,7 +541,7 @@
         },
         "x-ms-examples": {
           "PrivateEndpointConnection_GetConnection": {
-            "$ref": "./examples/ServiceGetPrivateEndpointConnection.json"
+            "$ref": "./examples/ManagementAPIServiceGetPrivateEndpointConnection.json"
           }
         }
       },
@@ -599,7 +599,7 @@
         },
         "x-ms-examples": {
           "PrivateEndpointConnection_CreateOrUpdate": {
-            "$ref": "./examples/ServiceCreatePrivateEndpointConnection.json"
+            "$ref": "./examples/ManagementAPIServiceCreatePrivateEndpointConnection.json"
           }
         },
         "x-ms-long-running-operation": true,
@@ -649,7 +649,7 @@
         },
         "x-ms-examples": {
           "PrivateEndpointConnections_Delete": {
-            "$ref": "./examples/ServiceDeletePrivateEndpointConnection.json"
+            "$ref": "./examples/ManagementAPIServiceDeletePrivateEndpointConnection.json"
           }
         },
         "x-ms-long-running-operation": true,
@@ -658,7 +658,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SecurityAndCompliance/privateLinkServicesForSCC/{resourceName}/privateLinkResources": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SecurityAndCompliance/privateLinkServicesForOffice365ManagementActivityAPI/{resourceName}/privateLinkResources": {
       "get": {
         "tags": [
           "PrivateLinkResources"
@@ -695,12 +695,12 @@
         },
         "x-ms-examples": {
           "PrivateLinkResources_ListGroupIds": {
-            "$ref": "./examples/PrivateLinkResourcesListByService.json"
+            "$ref": "./examples/ManagementAPIPrivateLinkResourcesListByService.json"
           }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SecurityAndCompliance/privateLinkServicesForSCC/{resourceName}/privateLinkResources/{groupName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SecurityAndCompliance/privateLinkServicesForOffice365ManagementActivityAPI/{resourceName}/privateLinkResources/{groupName}": {
       "get": {
         "tags": [
           "PrivateLinkResources"
@@ -744,7 +744,7 @@
         },
         "x-ms-examples": {
           "PrivateLinkResources_Get": {
-            "$ref": "./examples/PrivateLinkResourceGet.json"
+            "$ref": "./examples/ManagementAPIPrivateLinkResourceGet.json"
           }
         }
       }
@@ -943,7 +943,7 @@
       "description": "A method for CORS.",
       "type": "string"
     },
-    "privateLinkServicesForSCCDescription": {
+    "privateLinkServicesForOffice365ManagementActivityAPIDescription": {
       "description": "The description of the service.",
       "type": "object",
       "properties": {
@@ -1099,7 +1099,7 @@
         }
       }
     },
-    "privateLinkServicesForSCCDescriptionListResult": {
+    "privateLinkServicesForOffice365ManagementActivityAPIDescriptionListResult": {
       "description": "A list of service description objects with a next link.",
       "type": "object",
       "properties": {
@@ -1112,7 +1112,7 @@
           "description": "A list of service description objects.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/privateLinkServicesForSCCDescription"
+            "$ref": "#/definitions/privateLinkServicesForOffice365ManagementActivityAPIDescription"
           }
         }
       }
