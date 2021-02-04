@@ -5,7 +5,7 @@
     "description": "REST API for managing Redis Enterprise resources in Azure.",
     "version": "2021-03-01",
     "x-ms-code-generation-settings": {
-      "name": "redisenterpriseClient"
+      "name": "redisEnterpriseClient"
     }
   },
   "host": "management.azure.com",
@@ -73,7 +73,7 @@
         "tags": [
           "OperationStatus"
         ],
-        "operationId": "Get_OperationStatus",
+        "operationId": "OperationStatus_Get",
         "x-ms-examples": {
           "OperationStatusGet": {
             "$ref": "./examples/OperationStatusGet.json"
@@ -1402,6 +1402,10 @@
             "modelAsString": true
           }
         },
+        "persistence": {
+          "$ref": "#/definitions/Persistence",
+          "description": "Persistence settings"
+        },
         "modules": {
           "type": "array",
           "description": "Optional set of redis modules to enable in this database - modules can only be added at creation time.",
@@ -1431,6 +1435,45 @@
         }
       },
       "description": "The response of a list-all operation."
+    },
+    "Persistence": {
+      "title": "Persistence settings",
+      "description": "Persistence-related configuration for the RedisEnterprise database",
+      "properties": {
+        "aofEnabled": {
+          "type": "boolean",
+          "description": "Sets whether AOF is enabled."
+        },
+        "rdbEnabled": {
+          "type": "boolean",
+          "description": "Sets whether RDB is enabled."
+        },
+        "aofFrequency": {
+          "type": "string",
+          "description": "Sets the frequency at which data is fsynced to disk.",
+          "enum": [
+            "1s",
+            "always"
+          ],
+          "x-ms-enum": {
+            "name": "AofFrequency",
+            "modelAsString": true
+          }
+        },
+        "rdbFrequency": {
+          "type": "string",
+          "description": "Sets the frequency at which a snapshot of the database is created.",
+          "enum": [
+            "1h",
+            "6h",
+            "12h"
+          ],
+          "x-ms-enum": {
+            "name": "RdbFrequency",
+            "modelAsString": true
+          }
+        }
+      }
     },
     "Module": {
       "title": "Module settings",

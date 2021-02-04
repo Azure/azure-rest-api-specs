@@ -9,11 +9,10 @@
       "properties": {
         "clientProtocol": "Encrypted",
         "evictionPolicy": "AllKeysLRU",
-        "modules": [
-          {
-            "name": "RediSearch"
-          }
-        ]
+        "persistence": {
+          "rdbEnabled": true,
+          "rdbFrequency": "12h"
+        }
       }
     }
   },
@@ -29,6 +28,10 @@
           "clientProtocol": "Encrypted",
           "clusteringPolicy": "OSSCluster",
           "evictionPolicy": "AllKeysLRU",
+          "persistence": {
+            "rdbEnabled": true,
+            "rdbFrequency": "12h"
+          },
           "port": 10000,
           "modules": [
             {

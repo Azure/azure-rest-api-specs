@@ -10,6 +10,10 @@
         "clientProtocol": "Encrypted",
         "clusteringPolicy": "EnterpriseCluster",
         "evictionPolicy": "AllKeysLRU",
+        "persistence": {
+          "aofEnabled": true,
+          "aofFrequency": "1s"
+        },
         "port": 10000,
         "modules": [
           {
@@ -39,6 +43,10 @@
           "clientProtocol": "Encrypted",
           "clusteringPolicy": "EnterpriseCluster",
           "evictionPolicy": "AllKeysLRU",
+          "persistence": {
+            "aofEnabled": true,
+            "aofFrequency": "1s"
+          },
           "port": 10000,
           "modules": [
             {
@@ -68,9 +76,13 @@
         "properties": {
           "provisioningState": "Creating",
           "resourceState": "Creating",
-          "clientProtocol": "Plaintext",
+          "clientProtocol": "Encrypted",
           "clusteringPolicy": "EnterpriseCluster",
           "evictionPolicy": "AllKeysLRU",
+          "persistence": {
+            "aofEnabled": true,
+            "aofFrequency": "1s"
+          },
           "port": 10000,
           "modules": [
             {
