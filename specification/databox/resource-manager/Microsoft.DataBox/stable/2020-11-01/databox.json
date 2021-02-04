@@ -2269,11 +2269,11 @@
       "description": "Dc access security code",
       "type": "object",
       "properties": {
-        "reverseDcAccessCode": {
+        "reverseDCAccessCode": {
           "description": "Reverse Dc access security code.",
           "type": "string"
         },
-        "forwardDcAccessCode": {
+        "forwardDCAccessCode": {
           "description": "Forward Dc access security code.",
           "type": "string"
         }
@@ -2299,7 +2299,7 @@
       "required": [
         "storageLocation",
         "skuName",
-        "expectedDataSizeInTerabytes"
+        "expectedDataSizeInTeraBytes"
       ],
       "type": "object",
       "allOf": [
@@ -2308,7 +2308,7 @@
         }
       ],
       "properties": {
-        "expectedDataSizeInTerabytes": {
+        "expectedDataSizeInTeraBytes": {
           "format": "int32",
           "description": "The expected size of the data, which needs to be transferred in this job, in terabytes.",
           "type": "integer"
@@ -2561,7 +2561,7 @@
           "$ref": "#/definitions/KeyEncryptionKey",
           "description": "Details about which key encryption type is being used."
         },
-        "expectedDataSizeInTerabytes": {
+        "expectedDataSizeInTeraBytes": {
           "format": "int32",
           "description": "The expected size of the data, which needs to be transferred in this job, in terabytes.",
           "type": "integer"
@@ -3558,8 +3558,7 @@
             "BlockBlob",
             "PageBlob",
             "AzureFile",
-            "ManagedDisk",
-            "AzurePremiumFiles"
+            "ManagedDisk"
           ],
           "type": "string",
           "readOnly": true,
@@ -3590,10 +3589,6 @@
               {
                 "value": "ManagedDisk",
                 "description": "Azure Compute Disk."
-              },
-              {
-                "value": "AzurePremiumFiles",
-                "description": "Azure storage Premium Files format"
               }
             ]
           }
