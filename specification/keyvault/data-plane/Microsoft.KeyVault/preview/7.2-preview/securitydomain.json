@@ -189,6 +189,9 @@
               "$ref": "#/definitions/SecurityDomainOperationStatus"
             }
           },
+          "204": {
+            "description": "Final response"
+          },
           "default": {
             "description": "Key Vault error response describing why the operation failed.",
             "schema": {
@@ -289,7 +292,6 @@
         "value": {
           "type": "string",
           "format": "base64url",
-          "readOnly": true,
           "description": "A blob containing the Security Domain."
         }
       },
