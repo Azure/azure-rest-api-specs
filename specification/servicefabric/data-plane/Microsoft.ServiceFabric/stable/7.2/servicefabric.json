@@ -10410,6 +10410,10 @@
         "ApplicationDefinitionKind": {
           "$ref": "#/definitions/ApplicationDefinitionKind",
           "description": "The mechanism used to define a Service Fabric application."
+        },
+        "ManagedApplicationIdentity": {
+          "$ref": "#/definitions/ManagedApplicationIdentityDescription",
+          "description": "Managed application identity description."
         }
       }
     },
@@ -10814,6 +10818,10 @@
         "InstanceCloseDelayDurationInSeconds": {
           "$ref": "#/definitions/InstanceCloseDelayDurationInSeconds",
           "description": "Duration in seconds, to wait before a stateless instance is closed, to allow the active requests to drain gracefully. This would be effective when the instance is closing during the application/cluster\nupgrade, only for those instances which have a non-zero delay duration configured in the service description. See InstanceCloseDelayDurationSeconds property in $ref: \"#/definitions/StatelessServiceDescription.yaml\" for details.\nNote, the default value of InstanceCloseDelayDurationInSeconds is 4294967295, which indicates that the behavior will entirely depend on the delay configured in the stateless service description."
+        },
+        "ManagedApplicationIdentity": {
+          "$ref": "#/definitions/ManagedApplicationIdentityDescription",
+          "description": "Managed application identity description."
         }
       },
       "required": [
@@ -14625,6 +14633,21 @@
         }
       ]
     },
+    "ServicePlacementAllowMultipleStatelessInstancesOnNodePolicyDescription": {
+      "x-ms-discriminator-value": "AllowMultipleStatelessInstancesOnNode",
+      "description": "Describes the policy to be used for placement of a Service Fabric service allowing multiple stateless instances of a partition of the service to be placed on a node.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ServicePlacementPolicyDescription"
+        }
+      ],
+      "properties": {
+        "DomainName": {
+          "type": "string",
+          "description": "Holdover from other policy descriptions, not used for this policy, values are ignored by runtime. Keeping it for any backwards-compatibility with clients."
+        }
+      }
+    },
     "ServicePlacementPolicyDescription": {
       "discriminator": "Type",
       "description": "Describes the policy to be used for placement of a Service Fabric service.",
@@ -17584,7 +17607,7 @@
         },
         "Flags": {
           "type": "integer",
-          "description": "Flags indicating whether other properties are set. Each of the associated properties corresponds to a flag, specified below, which, if set, indicate that the property is specified.\nThis property can be a combination of those flags obtained using bitwise 'OR' operator.\nFor example, if the provided value is 1 then the flags for InstanceCloseDelayDuration is set.\n\n- None - Does not indicate any other properties are set. The value is zero.\n- InstanceCloseDelayDuration - Indicates the InstanceCloseDelayDuration property is set. The value is 1."
+          "description": "Flags indicating whether other properties are set. Each of the associated properties corresponds to a flag, specified below, which, if set, indicate that the property is specified.\nThis property can be a combination of those flags obtained using bitwise 'OR' operator.\nFor example, if the provided value is 1 then the flags for InstanceCloseDelayDuration is set.\n\n- None - Does not indicate any other properties are set. The value is zero.\n- InstanceCloseDelayDuration - Indicates the InstanceCloseDelayDuration property is set. The value is 1.\n- InstanceRestartWaitDuration - Indicates the InstanceRestartWaitDurationSeconds property is set. The value is 2."
         },
         "InstanceCloseDelayDurationSeconds": {
           "type": "integer",
@@ -17592,6 +17615,13 @@
           "minimum": 0,
           "maximum": 4294967295,
           "description": "Duration in seconds, to wait before a stateless instance is closed, to allow the active requests to drain gracefully. This would be effective when the instance is closing during the application/cluster upgrade and disabling node.\nThe endpoint exposed on this instance is removed prior to starting the delay, which prevents new connections to this instance.\nIn addition, clients that have subscribed to service endpoint change events(https://docs.microsoft.com/dotnet/api/system.fabric.fabricclient.servicemanagementclient.registerservicenotificationfilterasync), can do\nthe following upon receiving the endpoint removal notification:\n    - Stop sending new requests to this instance.\n    - Close existing connections after in-flight requests have completed.\n    - Connect to a different instance of the service partition for future requests.\nNote, the default value of InstanceCloseDelayDuration is 0, which indicates that there won't be any delay or removal of the endpoint prior to closing the instance."
+        },
+        "InstanceRestartWaitDurationSeconds": {
+          "type": "integer",
+          "format": "int64",
+          "minimum": 0,
+          "maximum": 4294967295,
+          "description": "When a stateless instance goes down, this timer starts. When it expires Service Fabric will create a new instance on any node in the cluster. \nThis configuration is to reduce unnecessary creation of a new instance in situations where the instance going down is likely to recover in a short time. For example, during an upgrade.\nThe default value is 0, which indicates that when stateless instance goes down, Service Fabric will immediately start building its replacement."
         }
       }
     },
@@ -18255,6 +18285,13 @@
         "InstanceCloseDelayDurationSeconds": {
           "type": "string",
           "description": "Duration in seconds, to wait before a stateless instance is closed, to allow the active requests to drain gracefully. This would be effective when the instance is closing during the application/cluster upgrade and disabling node.\nThe endpoint exposed on this instance is removed prior to starting the delay, which prevents new connections to this instance.\nIn addition, clients that have subscribed to service endpoint change events(https://docs.microsoft.com/dotnet/api/system.fabric.fabricclient.servicemanagementclient.registerservicenotificationfilterasync), can do\nthe following upon receiving the endpoint removal notification:\n    - Stop sending new requests to this instance.\n    - Close existing connections after in-flight requests have completed.\n    - Connect to a different instance of the service partition for future requests."
+        },
+        "InstanceRestartWaitDurationSeconds": {
+          "type": "integer",
+          "format": "int64",
+          "minimum": 0,
+          "maximum": 4294967295,
+          "description": "When a stateless instance goes down, this timer starts. When it expires Service Fabric will create a new instance on any node in the cluster. \nThis configuration is to reduce unnecessary creation of a new instance in situations where the instance going down is likely to recover in a short time. For example, during an upgrade.\nThe default value is 0, which indicates that when stateless instance goes down, Service Fabric will immediately start building its replacement."
         }
       }
     },
@@ -21573,7 +21610,8 @@
         "MetricName",
         "LowerLoadThreshold",
         "UpperLoadThreshold",
-        "ScaleIntervalInSeconds"
+        "ScaleIntervalInSeconds",
+        "UseOnlyPrimaryLoad"
       ],
       "properties": {
         "MetricName": {
@@ -21596,6 +21634,10 @@
           "minimum": 0,
           "maximum": 4294967295,
           "description": "The period in seconds on which a decision is made whether to scale or not."
+        },
+        "UseOnlyPrimaryLoad": {
+          "type": "boolean",
+          "description": "Flag determines whether only the load of primary replica should be considered for scaling.\nIf set to true, then trigger will only consider the load of primary replicas of stateful service. \nIf set to false, trigger will consider load of all replicas. \nThis parameter cannot be set to true for stateless service."
         }
       }
     },
@@ -26267,7 +26309,7 @@
         },
         "successThreshold": {
           "type": "integer",
-          "description": "The count of successful probe executions after which probe is considered success.",
+          "description": "The count of succcessful probe executions after which probe is considered success.",
           "default": 1
         },
         "failureThreshold": {
@@ -26293,7 +26335,7 @@
       "description": "Exec command to run inside the container.",
       "properties": {
         "command": {
-          "description": "Comma separated command to run inside the container for example \"sh, -c, echo hello world\".",
+          "description": "Comma seperated command to run inside the container for example \"sh, -c, echo hello world\".",
           "type": "string"
         }
       },
@@ -26340,7 +26382,7 @@
               },
               {
                 "value": "https",
-                "description": "Indicates that the probe is https. No cert validation."
+                "description": "Indicates that the probe is https. No cert validaton."
               }
             ]
           }
