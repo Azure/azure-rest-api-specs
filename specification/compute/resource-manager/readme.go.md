@@ -31,6 +31,7 @@ directive:
 
 ```yaml $(go) && $(multiapi)
 batch:
+  - tag: package-2020-10-01-preview
   - tag: profile-hybrid-2020-09-01
   - tag: package-2020-06-30
   - tag: package-2020-06-01
@@ -50,6 +51,16 @@ batch:
   - tag: package-container-service-2016-09
   - tag: package-container-service-2016-03
   - tag: package-container-service-2015-11-preview
+```
+
+### Tag: package-2020-10-01-preview and go
+
+These settings apply only when `--tag=package-2020-10-01-preview --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+```yaml $(tag)=='package-2020-10-01-preview' && $(go)
+namespace: compute
+output-folder: $(go-sdk-folder)/services/preview/$(namespace)/mgmt/2020-10-01-preview/$(namespace)
 ```
 
 ### Tag: profile-hybrid-2020-09-01 and go
