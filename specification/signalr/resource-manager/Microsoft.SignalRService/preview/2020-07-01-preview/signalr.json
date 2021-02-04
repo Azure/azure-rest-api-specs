@@ -57,7 +57,7 @@
         "tags": [
           "SignalR"
         ],
-        "description": "Checks that the SignalR name is valid and is not already in use.",
+        "description": "Checks that the resource name is valid and is not already in use.",
         "operationId": "SignalR_CheckNameAvailability",
         "parameters": [
           {
@@ -109,7 +109,7 @@
         "tags": [
           "SignalR"
         ],
-        "description": "List usage quotas for Azure SignalR service by location.",
+        "description": "List resource usage quotas by location.",
         "operationId": "Usages_List",
         "parameters": [
           {
@@ -167,7 +167,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success. The response describes the list of SignalR services in the subscription.",
+            "description": "Success. The response describes the list of resources in the subscription.",
             "schema": {
               "$ref": "#/definitions/SignalRResourceList"
             }
@@ -209,7 +209,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success. The response describes the list of SignalR services in a resourceGroup.",
+            "description": "Success. The response describes the list of resources in a resourceGroup.",
             "schema": {
               "$ref": "#/definitions/SignalRResourceList"
             }
@@ -236,7 +236,7 @@
         "tags": [
           "SignalR"
         ],
-        "description": "Get the SignalR service and its properties.",
+        "description": "Get the resource and its properties.",
         "operationId": "SignalR_Get",
         "parameters": [
           {
@@ -254,7 +254,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success. The response describes the corresponding SignalR service.",
+            "description": "Success. The response describes the corresponding resource.",
             "schema": {
               "$ref": "#/definitions/SignalRResource"
             }
@@ -276,7 +276,7 @@
         "tags": [
           "SignalR"
         ],
-        "description": "Create a new SignalR service and update an exiting SignalR service.",
+        "description": "Create or update a resource.",
         "operationId": "SignalR_CreateOrUpdate",
         "parameters": [
           {
@@ -303,19 +303,19 @@
         ],
         "responses": {
           "200": {
-            "description": "Success. The response describes a SignalR service.",
+            "description": "Success. The response describes a resource.",
             "schema": {
               "$ref": "#/definitions/SignalRResource"
             }
           },
           "201": {
-            "description": "Created. The response describes the new service and contains a Location header to query the operation result.",
+            "description": "Created. The response describes the new resource and contains a Location header to query the operation result.",
             "schema": {
               "$ref": "#/definitions/SignalRResource"
             }
           },
           "202": {
-            "description": "Accepted. The response indicates the exiting SignalR service is now updating and contains a Location header to query the operation result.."
+            "description": "Accepted. The response indicates the exiting resource is now updating and contains a Location header to query the operation result.."
           },
           "default": {
             "description": "An unexpected error occurred during the operation.",
@@ -335,7 +335,7 @@
         "tags": [
           "SignalR"
         ],
-        "description": "Operation to delete a SignalR service.",
+        "description": "Operation to delete a resource.",
         "operationId": "SignalR_Delete",
         "parameters": [
           {
@@ -376,7 +376,7 @@
         "tags": [
           "SignalR"
         ],
-        "description": "Operation to update an exiting SignalR service.",
+        "description": "Operation to update an exiting resource.",
         "operationId": "SignalR_Update",
         "parameters": [
           {
@@ -403,13 +403,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Success. The response describes a SignalR service.",
+            "description": "Success. The response describes a resource.",
             "schema": {
               "$ref": "#/definitions/SignalRResource"
             }
           },
           "202": {
-            "description": "Accepted. The response indicates the exiting SignalR service is now updating  and contains a Location header to query the operation result.."
+            "description": "Accepted. The response indicates the exiting resource is now updating and contains a Location header to query the operation result.."
           },
           "default": {
             "description": "An unexpected error occurred during the operation.",
@@ -431,7 +431,7 @@
         "tags": [
           "SignalR"
         ],
-        "description": "Get the access keys of the SignalR resource.",
+        "description": "Get the access keys of the resource.",
         "operationId": "SignalR_ListKeys",
         "parameters": [
           {
@@ -449,7 +449,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success. The response describes SignalR service access keys.",
+            "description": "Success. The response describes access keys of the resource.",
             "schema": {
               "$ref": "#/definitions/SignalRKeys"
             }
@@ -671,7 +671,7 @@
         "tags": [
           "SignalR"
         ],
-        "description": "Regenerate SignalR service access key. PrimaryKey and SecondaryKey cannot be regenerated at the same time.",
+        "description": "Regenerate the access key for the resource. PrimaryKey and SecondaryKey cannot be regenerated at the same time.",
         "operationId": "SignalR_RegenerateKey",
         "parameters": [
           {
@@ -726,7 +726,7 @@
         "tags": [
           "SignalR"
         ],
-        "description": "Operation to restart a SignalR service.",
+        "description": "Operation to restart a resource.",
         "operationId": "SignalR_Restart",
         "parameters": [
           {
@@ -999,7 +999,7 @@
       "type": "object",
       "properties": {
         "type": {
-          "description": "The resource type. Should be always \"Microsoft.SignalRService/SignalR\".",
+          "description": "The resource type. Can be \"Microsoft.SignalRService/SignalR\" or \"Microsoft.SignalRService/webPubSub\"",
           "type": "string"
         },
         "name": {
@@ -1029,7 +1029,7 @@
       }
     },
     "Operation": {
-      "description": "REST API operation supported by SignalR resource provider.",
+      "description": "REST API operation supported by resource provider.",
       "type": "object",
       "properties": {
         "name": {
@@ -1318,7 +1318,7 @@
       "x-ms-azure-resource": true
     },
     "ResourceSku": {
-      "description": "The billing information of the SignalR resource.",
+      "description": "The billing information of the resource.",
       "required": [
         "name"
       ],
@@ -1350,7 +1350,7 @@
       }
     },
     "ServerlessUpstreamSettings": {
-      "description": "The settings for the Upstream when the Azure SignalR is in server-less mode.",
+      "description": "The settings for the Upstream when the service is in server-less mode.",
       "type": "object",
       "properties": {
         "templates": {
@@ -1363,7 +1363,7 @@
       }
     },
     "ServiceKind": {
-      "description": "The kind of the service - e.g. \"SignalR\", or \"RawWebSockets\" for \"Microsoft.SignalRService/SignalR\"",
+      "description": "The kind of the service - e.g. \"SignalR\" for \"Microsoft.SignalRService/SignalR\"",
       "enum": [
         "SignalR",
         "RawWebSockets"
@@ -1460,7 +1460,7 @@
       }
     },
     "SignalRKeys": {
-      "description": "A class represents the access keys of SignalR service.",
+      "description": "A class represents the access keys of the resource.",
       "type": "object",
       "properties": {
         "primaryKey": {
@@ -1472,17 +1472,17 @@
           "type": "string"
         },
         "primaryConnectionString": {
-          "description": "SignalR connection string constructed via the primaryKey",
+          "description": "Connection string constructed via the primaryKey",
           "type": "string"
         },
         "secondaryConnectionString": {
-          "description": "SignalR connection string constructed via the secondaryKey",
+          "description": "Connection string constructed via the secondaryKey",
           "type": "string"
         }
       }
     },
     "SignalRNetworkACLs": {
-      "description": "Network ACLs for SignalR",
+      "description": "Network ACLs for the resource",
       "type": "object",
       "properties": {
         "defaultAction": {
@@ -1504,7 +1504,7 @@
       }
     },
     "SignalRProperties": {
-      "description": "A class that describes the properties of the SignalR service that should contain more read-only properties than AzSignalR.Models.SignalRCreateOrUpdateProperties",
+      "description": "A class that describes the properties of the resource",
       "type": "object",
       "allOf": [
         {
@@ -1518,34 +1518,34 @@
           "readOnly": true
         },
         "externalIP": {
-          "description": "The publicly accessible IP of the SignalR service.",
+          "description": "The publicly accessible IP of the resource.",
           "type": "string",
           "readOnly": true
         },
         "hostName": {
-          "description": "FQDN of the SignalR service instance. Format: xxx.service.signalr.net",
+          "description": "FQDN of the service instance.",
           "type": "string",
           "readOnly": true
         },
         "publicPort": {
           "format": "int32",
-          "description": "The publicly accessible port of the SignalR service which is designed for browser/client side usage.",
+          "description": "The publicly accessible port of the resource which is designed for browser/client side usage.",
           "type": "integer",
           "readOnly": true
         },
         "serverPort": {
           "format": "int32",
-          "description": "The publicly accessible port of the SignalR service which is designed for customer server side usage.",
+          "description": "The publicly accessible port of the resource which is designed for customer server side usage.",
           "type": "integer",
           "readOnly": true
         },
         "version": {
-          "description": "Version of the SignalR resource. Probably you need the same or higher version of client SDKs.",
+          "description": "Version of the resource. Probably you need the same or higher version of client SDKs.",
           "type": "string",
           "readOnly": true
         },
         "privateEndpointConnections": {
-          "description": "Private endpoint connections to the SignalR resource.",
+          "description": "Private endpoint connections to the resource.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/PrivateEndpointConnection"
@@ -1572,7 +1572,7 @@
       }
     },
     "SignalRResource": {
-      "description": "A class represent a SignalR service resource.",
+      "description": "A class represent a resource.",
       "type": "object",
       "allOf": [
         {
@@ -1591,7 +1591,7 @@
         },
         "kind": {
           "$ref": "#/definitions/ServiceKind",
-          "description": "The kind of the service - e.g. \"SignalR\", or \"RawWebSockets\" for \"Microsoft.SignalRService/SignalR\"",
+          "description": "The kind of the service - e.g. \"SignalR\" for \"Microsoft.SignalRService/SignalR\"",
           "x-ms-mutability": [
             "read",
             "create"
@@ -1604,11 +1604,11 @@
       }
     },
     "SignalRResourceList": {
-      "description": "Object that includes an array of SignalR services and a possible link for next set.",
+      "description": "Object that includes an array of resources and a possible link for next set.",
       "type": "object",
       "properties": {
         "value": {
-          "description": "List of SignalR services",
+          "description": "List of the resources",
           "type": "array",
           "items": {
             "$ref": "#/definitions/SignalRResource"
@@ -1635,7 +1635,7 @@
       }
     },
     "SignalRTlsSettings": {
-      "description": "TLS settings for SignalR",
+      "description": "TLS settings for the resource",
       "type": "object",
       "properties": {
         "clientCertEnabled": {
@@ -1645,7 +1645,7 @@
       }
     },
     "SignalRUsage": {
-      "description": "Object that describes a specific usage of SignalR resources.",
+      "description": "Object that describes a specific usage of the resources.",
       "type": "object",
       "properties": {
         "id": {
@@ -1673,11 +1673,11 @@
       }
     },
     "SignalRUsageList": {
-      "description": "Object that includes an array of SignalR resource usages and a possible link for next set.",
+      "description": "Object that includes an array of the resource usages and a possible link for next set.",
       "type": "object",
       "properties": {
         "value": {
-          "description": "List of SignalR usages",
+          "description": "List of the resource usages",
           "type": "array",
           "items": {
             "$ref": "#/definitions/SignalRUsage"
@@ -1713,7 +1713,7 @@
       ],
       "properties": {
         "location": {
-          "description": "The GEO location of the SignalR service. e.g. West US | East US | North Central US | South Central US.",
+          "description": "The GEO location of the resource. e.g. West US | East US | North Central US | South Central US.",
           "type": "string",
           "x-ms-mutability": [
             "read",
