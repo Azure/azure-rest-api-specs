@@ -571,6 +571,9 @@
           },
           "Create or update a simple Gallery Image Version using snapshots as a source.": {
             "$ref": "./examples/CreateOrUpdateASimpleGalleryImageVersionWithSnapshotsAsSource.json"
+          },
+          "Create or update a simple Gallery Image Version using vhd as a source.": {
+            "$ref": "./examples/CreateOrUpdateASimpleGalleryImageVersionWithVHD.json"
           }
         }
       },
@@ -717,6 +720,9 @@
           },
           "Get a gallery Image Version with snapshots as a source.": {
             "$ref": "./examples/GetAGalleryImageVersionWithSnapshotsAsSource.json"
+          },
+          "Get a gallery image version with vhd as a source.": {
+            "$ref": "./examples/GetAGalleryImageVersionWithVhdAsSource.json"
           }
         }
       },
@@ -1936,6 +1942,13 @@
             "modelAsString": true
           }
         },
+        "features": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/GalleryImageFeature"
+          },
+          "description": "A list of gallery image features."
+        },
         "endOfLifeDate": {
           "type": "string",
           "format": "date-time",
@@ -1974,6 +1987,19 @@
         "identifier"
       ],
       "description": "Describes the properties of a gallery Image Definition."
+    },
+    "GalleryImageFeature": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the gallery image feature."
+        },
+        "value": {
+          "type": "string",
+          "description": "The value of the gallery image feature."
+        }
+      },
+      "description": "A feature for gallery image."
     },
     "GalleryImageIdentifier": {
       "properties": {
@@ -2293,10 +2319,24 @@
       "properties": {
         "id": {
           "type": "string",
-          "description": "The id of the gallery artifact version source. Can specify a disk uri, snapshot uri, or user image."
+          "description": "The id of the gallery artifact version source. Can specify a disk uri, snapshot uri, user image or storage account resource."
         }
       },
       "description": "The gallery artifact version source."
+    },
+    "GalleryDiskImageSource": {
+      "properties": {
+        "uri": {
+          "type": "string",
+          "description": "The uri of the gallery artifact version source. Currently used to specify vhd/blob source."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/GalleryArtifactVersionSource"
+        }
+      ],
+      "description": "The gallery disk image source."
     },
     "GalleryOSDiskImage": {
       "allOf": [
@@ -2346,7 +2386,7 @@
           }
         },
         "source": {
-          "$ref": "#/definitions/GalleryArtifactVersionSource"
+          "$ref": "#/definitions/GalleryDiskImageSource"
         }
       },
       "description": "This is the disk image base class."
