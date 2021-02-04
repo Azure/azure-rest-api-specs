@@ -74,6 +74,7 @@ output-folder: $(python-sdks-folder)/compute/azure-mgmt-compute/azure/mgmt/compu
 python:
   namespace: azure.mgmt.compute.v2020_12_01
   output-folder: $(python-sdks-folder)/compute/azure-mgmt-compute/azure/mgmt/compute/v2020_12_01
+```
 
 ### Tag: package-2020-10-01-preview-only and python
 
