@@ -42,5 +42,5 @@ Please also specify `--go-sdks-folder=<path to the root directory of your azure-
 
 ```yaml $(tag) == 'package-2021-03-01' && $(go)
 namespace: hybridkubernetes
-output-folder: $(go-sdk-folder)/services/stable/$(namespace)/mgmt/2021-03-01/$(namespace)
+output-folder: $(go-sdk-folder)/services/$(namespace)/mgmt/2021-03-01/$(namespace)
 ```
