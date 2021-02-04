@@ -84,6 +84,9 @@ These settings apply only when `--tag=package-2021-03-07` is specified on the co
 ```yaml $(tag) == 'package-2021-03-07'
 input-file:
   - Microsoft.CommunicationServicesIdentity/stable/2021-03-07/CommunicationIdentity.json
+  - Microsoft.CommunicationServicesSms/stable/2021-03-07/communicationservicessms.json
+title:
+  Azure Communication Services
 ```
 
 ### Tag: package-2021-02-22-preview1
@@ -102,15 +105,6 @@ These settings apply only when `--tag=package-2020-11-19-preview1` is specified 
 ```yaml $(tag) == 'package-2020-11-19-preview1'
 input-file:
   - Microsoft.CommunicationServicesCommon/preview/2020-11-19-preview1/common.json
-```
-
-### Tag: package-2021-03-07
-
-These settings apply only when `--tag=package-2021-03-07` is specified on the command line.
-
-```yaml $(tag) == 'package-2021-03-07'
-input-file:
-  - Microsoft.CommunicationServicesSms/stable/2021-03-07/communicationservicessms.json
 ```
 
 ---
