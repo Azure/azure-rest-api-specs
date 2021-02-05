@@ -3622,46 +3622,38 @@
       }
     },
     "CloudError": {
+      "x-ms-external": true,
       "properties": {
         "error": {
-          "type": "object",
-          "description": "The error object.",
-          "properties": {
-            "code": {
-              "readOnly": true,
-              "type": "string",
-              "description": "The error code."
-            },
-            "message": {
-              "readOnly": true,
-              "type": "string",
-              "description": "The error message."
-            },
-            "target": {
-              "readOnly": true,
-              "type": "string",
-              "description": "The error target."
-            },
-            "details": {
-              "readOnly": true,
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/CloudError"
-              },
-              "description": "The error details."
-            },
-            "additionalInfo": {
-              "readOnly": true,
-              "type": "array",
-              "items": {
-                "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorAdditionalInfo"
-              },
-              "description": "The error additional info."
-            }
-          }
+          "$ref": "#/definitions/CloudErrorBody"
         }
       },
-      "description": "The resource management error response."
+      "description": "An error response from the Container Instance service."
+    },
+    "CloudErrorBody": {
+      "x-ms-external": true,
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "An identifier for the error. Codes are invariant and are intended to be consumed programmatically."
+        },
+        "message": {
+          "type": "string",
+          "description": "A message describing the error, intended to be suitable for display in a user interface."
+        },
+        "target": {
+          "type": "string",
+          "description": "The target of the particular error. For example, the name of the property in error."
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CloudErrorBody"
+          },
+          "description": "A list of additional details about the error."
+        }
+      },
+      "description": "An error response from the Container Instance service."
     },
     "NewErrorResponse": {
       "properties": {
