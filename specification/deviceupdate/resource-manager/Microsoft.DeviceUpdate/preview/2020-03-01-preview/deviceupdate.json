@@ -733,156 +733,156 @@
             "type": "string"
           }
         },
-        "required": [
-          "resourceId",
-          "ioTHubConnectionString",
-          "eventHubConnectionString"
-        ]
       },
-      "ErrorResponse": {
-        "description": "Error response indicates that the service is not able to process the incoming request.",
-        "properties": {
-          "code": {
-            "description": "The error status code.",
-            "type": "string"
-          },
-          "error": {
-            "$ref": "#/definitions/ErrorDefinition",
-            "description": "The error details."
-          }
-        }
-      },
-      "ErrorDefinition": {
-        "description": "Error definition.",
-        "properties": {
-          "code": {
-            "description": "Service specific error code which serves as the substatus for the HTTP error code.",
-            "type": "string",
-            "readOnly": true
-          },
-          "message": {
-            "description": "Description of the error.",
-            "type": "string",
-            "readOnly": true
-          },
-          "details": {
-            "description": "Internal error details.",
-            "type": "array",
-            "items": {
-              "$ref": "#/definitions/ErrorDefinition"
-            }
-          }
-        }
-      },
-      "TagUpdate": {
-        "description": "Request payload used to update an existing resource's tags.",
-        "type": "object",
-        "properties": {
-          "tags": {
-            "type": "object",
-            "description": "List of key value pairs that describe the resource. This will overwrite the existing tags.",
-            "additionalProperties": {
-              "type": "string"
-            }
-          }
-        }
-      },
-      "Operation": {
-        "description": "Operation provided by provider.",
-        "properties": {
-          "name": {
-            "type": "string",
-            "description": "Name of the operation."
-          },
-          "display": {
-            "type": "object",
-            "description": "Properties of the operation.",
-            "properties": {
-              "provider": {
-                "type": "string",
-                "description": "Provider name."
-              },
-              "resource": {
-                "type": "string",
-                "description": "Resource name."
-              },
-              "operation": {
-                "type": "string",
-                "description": "Operation name."
-              },
-              "description": {
-                "type": "string",
-                "description": "Description of the operation."
-              }
-            }
-          }
-        }
-      },
-      "OperationsList": {
-        "description": "Lists the operations available.",
-        "properties": {
-          "nextLink": {
-            "description": "Url to follow for getting next page of operations.",
-            "type": "string"
-          },
-          "value": {
-            "description": "Array of operations.",
-            "type": "array",
-            "items": {
-              "$ref": "#/definitions/Operation"
-            }
-          }
+      "required": [
+        "resourceId",
+        "ioTHubConnectionString",
+        "eventHubConnectionString"
+      ]
+    },
+    "ErrorResponse": {
+      "description": "Error response indicates that the service is not able to process the incoming request.",
+      "properties": {
+        "code": {
+          "description": "The error status code.",
+          "type": "string"
         },
-        "required": [
-          "value"
-        ]
+        "error": {
+          "$ref": "#/definitions/ErrorDefinition",
+          "description": "The error details."
+        }
       }
     },
-    "parameters": {
-      "SubscriptionIdParameter": {
-        "name": "subscriptionId",
-        "in": "path",
-        "required": true,
-        "type": "string",
-        "description": "The Azure subscription ID."
-      },
-      "ApiVersionParameter": {
-        "name": "api-version",
-        "in": "query",
-        "required": true,
-        "type": "string",
-        "description": "ADU schema API version."
-      },
-      "ResourceGroupNameParameter": {
-        "name": "resourceGroupName",
-        "in": "path",
-        "required": true,
-        "type": "string",
-        "description": "The resource group name.",
-        "x-ms-parameter-location": "method"
-      },
-      "AccountNameParameter": {
-        "name": "accountName",
-        "in": "path",
-        "required": true,
-        "type": "string",
-        "description": "Account name.",
-        "x-ms-parameter-location": "method",
-        "pattern": "^[A-Za-z][A-Za-z0-9]+$",
-        "minLength": 3,
-        "maxLength": 24
-      },
-      "InstanceNameParameter": {
-        "name": "instanceName",
-        "in": "path",
-        "required": true,
-        "type": "string",
-        "description": "Instance name.",
-        "x-ms-parameter-location": "method",
-        "pattern": "^[A-Za-z][A-Za-z0-9]+$",
-        "minLength": 3,
-        "maxLength": 36
+    "ErrorDefinition": {
+      "description": "Error definition.",
+      "properties": {
+        "code": {
+          "description": "Service specific error code which serves as the substatus for the HTTP error code.",
+          "type": "string",
+          "readOnly": true
+        },
+        "message": {
+          "description": "Description of the error.",
+          "type": "string",
+          "readOnly": true
+        },
+        "details": {
+          "description": "Internal error details.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ErrorDefinition"
+          }
+        }
       }
+    },
+    "TagUpdate": {
+      "description": "Request payload used to update an existing resource's tags.",
+      "type": "object",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "List of key value pairs that describe the resource. This will overwrite the existing tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "Operation": {
+      "description": "Operation provided by provider.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the operation."
+        },
+        "display": {
+          "type": "object",
+          "description": "Properties of the operation.",
+          "properties": {
+            "provider": {
+              "type": "string",
+              "description": "Provider name."
+            },
+            "resource": {
+              "type": "string",
+              "description": "Resource name."
+            },
+            "operation": {
+              "type": "string",
+              "description": "Operation name."
+            },
+            "description": {
+              "type": "string",
+              "description": "Description of the operation."
+            }
+          }
+        }
+      }
+    },
+    "OperationsList": {
+      "description": "Lists the operations available.",
+      "properties": {
+        "nextLink": {
+          "description": "Url to follow for getting next page of operations.",
+          "type": "string"
+        },
+        "value": {
+          "description": "Array of operations.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Operation"
+          }
+        }
+      },
+      "required": [
+        "value"
+      ]
+    }
+  },
+  "parameters": {
+    "SubscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The Azure subscription ID."
+    },
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "ADU schema API version."
+    },
+    "ResourceGroupNameParameter": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The resource group name.",
+      "x-ms-parameter-location": "method"
+    },
+    "AccountNameParameter": {
+      "name": "accountName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Account name.",
+      "x-ms-parameter-location": "method",
+      "pattern": "^[A-Za-z][A-Za-z0-9]+$",
+      "minLength": 3,
+      "maxLength": 24
+    },
+    "InstanceNameParameter": {
+      "name": "instanceName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Instance name.",
+      "x-ms-parameter-location": "method",
+      "pattern": "^[A-Za-z][A-Za-z0-9]+$",
+      "minLength": 3,
+      "maxLength": 36
     }
   }
 }
