@@ -27,21 +27,33 @@ These are the global settings for the Cosmos-DB API.
 ``` yaml
 title: CosmosDBManagementClient
 openapi-type: arm
-tag: package-2020-09
+tag: package-preview-2021-03
 ```
 
 
+### Tag: package-preview-2021-03
+
+These settings apply only when `--tag=package-preview-2021-03` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2021-03'
+input-file:
+  - Microsoft.DocumentDB/preview/2021-03-01-preview/cosmos-db.json
+  - Microsoft.DocumentDB/preview/2021-03-01-preview/notebook.json
+  - Microsoft.DocumentDB/preview/2021-03-01-preview/rbac.json
+  - Microsoft.DocumentDB/preview/2021-03-01-preview/restorable.json
+```
 ### Tag: package-2020-09
 
 These settings apply only when `--tag=package-2020-09` is specified on the command line.
 
-```yaml $(tag) == 'package-2020-09'
+``` yaml $(tag) == 'package-2020-09'
 input-file:
   - Microsoft.DocumentDB/stable/2020-09-01/cosmos-db.json
   - Microsoft.DocumentDB/stable/2020-09-01/notebook.json
   - Microsoft.DocumentDB/preview/2019-08-01-preview/privateLinkResources.json
   - Microsoft.DocumentDB/preview/2019-08-01-preview/privateEndpointConnection.json
 ```
+
 ### Tag: package-2020-06-preview
 
 These settings apply only when `--tag=package-2020-06-preview` is specified on the command line.
@@ -291,7 +303,7 @@ See configuration in [readme.java.md](./readme.java.md)
 
 See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
 
-## Multi-API/Profile support for AutoRest v3 generators 
+## Multi-API/Profile support for AutoRest v3 generators
 
 AutoRest V3 generators require the use of `--tag=all-api-versions` to select api files.
 
@@ -324,7 +336,7 @@ input-file:
 
 ```
 
-If there are files that should not be in the `all-api-versions` set, 
+If there are files that should not be in the `all-api-versions` set,
 uncomment the  `exclude-file` section below and add the file paths.
 
 ``` yaml $(tag) == 'all-api-versions'
