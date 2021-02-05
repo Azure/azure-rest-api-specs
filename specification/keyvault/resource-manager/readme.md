@@ -72,6 +72,7 @@ These settings apply only when `--tag=package-2018-02-14-preview` is specified o
 input-file:
 - Microsoft.KeyVault/preview/2018-02-14-preview/keyvault.json
 - Microsoft.KeyVault/preview/2018-02-14-preview/providers.json
+- Microsoft.KeyVault/preview/2018-02-14-preview/secrets.json
 ```
 
 ### Tag: package-2018-02

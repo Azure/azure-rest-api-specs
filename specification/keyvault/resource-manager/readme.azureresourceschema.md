@@ -54,6 +54,7 @@ output-folder: $(azureresourceschema-folder)/schemas
 input-file:
   - Microsoft.KeyVault/preview/2018-02-14-preview/keyvault.json
   - Microsoft.KeyVault/preview/2018-02-14-preview/providers.json
+  - Microsoft.KeyVault/preview/2018-02-14-preview/secrets.json
 
 ```
 
