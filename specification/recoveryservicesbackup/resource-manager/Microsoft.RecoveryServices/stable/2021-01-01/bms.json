@@ -3621,57 +3621,33 @@
         }
       }
     },
-    "ErrorDetails": {
-      "properties": {
-        "code": {
-          "type": "string",
-          "description": "Error code."
-        },
-        "target": {
-          "type": "string",
-          "description": "Error target."
-        },
-        "message": {
-          "type": "string",
-          "description": "Error message."
-        }
-      },
-      "description": "Common error details representation."
-    },
     "CloudError": {
-      "x-ms-external": true,
-      "properties": {
-        "error": {
-          "$ref": "#/definitions/CloudErrorBody",
-          "description": "Cloud error body."
-        }
-      },
-      "description": "An error response from the service."
-    },
-    "CloudErrorBody": {
-      "x-ms-external": true,
-      "properties": {
-        "code": {
-          "type": "string",
-          "description": "An identifier for the error. Codes are invariant and are intended to be consumed programmatically."
-        },
-        "message": {
-          "type": "string",
-          "description": "A message describing the error, intended to be suitable for display in a user interface."
-        },
-        "target": {
-          "type": "string",
-          "description": "The target of the particular error. For example, the name of the property in error."
-        },
-        "details": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/CloudErrorBody"
+          "properties": {
+            "code": {
+              "readOnly": true,
+              "type": "string",
+              "description": "The error code."
+            },
+            "message": {
+              "readOnly": true,
+              "type": "string",
+              "description": "The error message."
+            },
+            "target": {
+              "readOnly": true,
+              "type": "string",
+              "description": "The error target."
+            },
+            "details": {
+              "readOnly": true,
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/CloudError"
+              },
+              "description": "The error details."
+            }
           },
-          "description": "A list of additional details about the error."
-        }
-      },
-      "description": "An error response from the service."
+      "description": "The resource management error response."
     },
     "NewErrorResponse": {
       "properties": {
