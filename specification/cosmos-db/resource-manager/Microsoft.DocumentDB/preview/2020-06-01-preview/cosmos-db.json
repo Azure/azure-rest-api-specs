@@ -4332,15 +4332,15 @@
             "in": "body",
             "name": "location",
             "required": true,
-            "description": "The name of the region.",
+            "description": "The name of the continuous backup restore location.",
             "schema": {
-              "$ref": "#/definitions/RegionForBackupInformation"
+              "$ref": "#/definitions/ContinuousBackupRestoreLocation"
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "The Sql container get backup information operation completed successfully.",
+            "description": "The Sql container retrieve backup information operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/BackupInformation"
             }
@@ -7983,9 +7983,15 @@
         "modelAsString": true
       }
     },
-    "RegionForBackupInformation": {
-      "type": "string",
-      "description": "The name of the region."
+    "ContinuousBackupRestoreLocation": {
+      "type": "object",
+      "description": "Properties of the regional restorable account.",
+      "properties": {
+        "location": {
+          "type": "string",
+          "description": "The name of the continuous backup restore location."
+        }
+      }
     },
     "BackupInformation": {
       "description": "Backup information of a resource.",
