@@ -63,7 +63,7 @@ These settings apply only when `--tag=package-2020-10-01-preview` is specified o
 
 ``` yaml $(tag) == 'package-2020-10-01-preview'
 input-file:
-- Microsoft.DataShare/stable/2020-10-01-preview/DataShare.json
+- Microsoft.DataShare/preview/2020-10-01-preview/DataShare.json
 ```
 
 ---
