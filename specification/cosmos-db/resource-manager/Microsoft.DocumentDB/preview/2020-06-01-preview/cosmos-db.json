@@ -4299,15 +4299,15 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/sqlDatabases/{databaseName}/containers/{containerName}/getBackupInformation": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/sqlDatabases/{databaseName}/containers/{containerName}/retrieveContinuousBackupInformation": {
       "post": {
-        "operationId": "SqlResources_GetBackupInformation",
+        "operationId": "SqlResources_RetrieveContinuousBackupInformation",
         "x-ms-examples": {
           "CosmosDBSqlContainerBackupInformation": {
             "$ref": "./examples/CosmosDBBackupInformation.json"
           }
         },
-        "description": "Gets continuous backup information for a container resource.",
+        "description": "Retrieves continuous backup information for a container resource.",
         "x-ms-long-running-operation": true,
         "parameters": [
           {
@@ -4329,11 +4329,13 @@
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "in": "query",
+            "in": "body",
             "name": "location",
             "required": true,
-            "type": "string",
-            "description": "The name of the region."
+            "description": "The name of the region.",
+            "schema": {
+              "$ref": "#/definitions/RegionForBackupInformation"
+            }
           }
         ],
         "responses": {
@@ -4344,7 +4346,7 @@
             }
           },
           "202": {
-            "description": "The sql container get backup information operation will complete asynchronously."
+            "description": "The sql container retrieve backup information operation will complete asynchronously."
           }
         }
       }
@@ -7980,6 +7982,10 @@
         "name": "BackupStorageRedundancy",
         "modelAsString": true
       }
+    },
+    "RegionForBackupInformation": {
+      "type": "string",
+      "description": "The name of the region."
     },
     "BackupInformation": {
       "description": "Backup information of a resource.",
