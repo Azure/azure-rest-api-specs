@@ -10,7 +10,7 @@
         "value": [
           {
             "tags": {
-              "Dept": "ContosoAds"
+              "Dept": "Contoso"
             },
             "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/scgroup/providers/Microsoft.StorageCache/caches/sc1",
             "location": "westus",
@@ -28,7 +28,13 @@
               "cacheSizeGB": 3072,
               "health": {
                 "state": "Transitioning",
-                "statusDescription": "Cache is being created."
+                "statusDescription": "Cache is being created.",
+                "conditions": [
+                  {
+                    "timestamp": "2021-04-21T18:25:43.511Z",
+                    "message": "Cannot contact DNS server"
+                  }
+                ]
               },
               "mountAddresses": [
                 "192.168.1.1",
@@ -44,7 +50,13 @@
                 "pendingFirmwareVersion": "V5.1.15"
               },
               "networkSettings": {
-                "mtu": 1500
+                "mtu": 1500,
+                "dnsServers": [
+                  "10.1.22.33",
+                  "10.1.12.33"
+                ],
+                "dnsSearchDomain": "contoso.com",
+                "ntpServer": "time.contoso.com"
               },
               "securitySettings": {
                 "accessPolicies": [
@@ -100,7 +112,7 @@
           },
           {
             "tags": {
-              "Dept": "ContosoAds"
+              "Dept": "Contoso"
             },
             "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/scgroup/providers/Microsoft.StorageCache/caches/sc2",
             "location": "westus",
@@ -118,7 +130,13 @@
               "cacheSizeGB": 3072,
               "health": {
                 "state": "Transitioning",
-                "statusDescription": "Cache is being created."
+                "statusDescription": "Cache is being created.",
+                "conditions": [
+                  {
+                    "timestamp": "2021-04-21T18:25:43.511Z",
+                    "message": "Cannot contact DNS server"
+                  }
+                ]
               },
               "mountAddresses": [
                 "192.168.1.1",
@@ -134,7 +152,13 @@
                 "pendingFirmwareVersion": "V5.1.15"
               },
               "networkSettings": {
-                "mtu": 1500
+                "mtu": 1500,
+                "dnsServers": [
+                  "10.1.22.33",
+                  "10.1.12.33"
+                ],
+                "dnsSearchDomain": "contoso.com",
+                "ntpServer": "time.contoso.com"
               },
               "securitySettings": {
                 "accessPolicies": [

@@ -6,14 +6,20 @@
     "api-version": "2021-03-01",
     "cache": {
       "tags": {
-        "Dept": "ContosoAds"
+        "Dept": "Contoso"
       },
       "location": "westus",
       "properties": {
         "cacheSizeGB": 3072,
         "subnet": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/scgroup/providers/Microsoft.Network/virtualNetworks/scvnet/subnets/sub1",
         "networkSettings": {
-          "mtu": 1400
+          "mtu": 1500,
+          "dnsServers": [
+            "10.1.22.33",
+            "10.1.12.33"
+          ],
+          "dnsSearchDomain": "contoso.com",
+          "ntpServer": "time.contoso.com"
         },
         "securitySettings": {
           "accessPolicies": [
@@ -84,7 +90,7 @@
     "200": {
       "body": {
         "tags": {
-          "Dept": "ContosoAds"
+          "Dept": "Contoso"
         },
         "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/scgroup/providers/Microsoft.StorageCache/caches/sc1",
         "location": "westus",
@@ -102,7 +108,13 @@
           "cacheSizeGB": 3072,
           "health": {
             "state": "Transitioning",
-            "statusDescription": "Cache is being created."
+            "statusDescription": "Cache is being created.",
+            "conditions": [
+              {
+                "timestamp": "2021-04-21T18:25:43.511Z",
+                "message": "Cannot contact DNS server"
+              }
+            ]
           },
           "mountAddresses": [
             "192.168.1.1",
@@ -118,7 +130,13 @@
             "pendingFirmwareVersion": "V5.1.15"
           },
           "networkSettings": {
-            "mtu": 1400
+            "mtu": 1500,
+            "dnsServers": [
+              "10.1.22.33",
+              "10.1.12.33"
+            ],
+            "dnsSearchDomain": "contoso.com",
+            "ntpServer": "time.contoso.com"
           },
           "securitySettings": {
             "accessPolicies": [

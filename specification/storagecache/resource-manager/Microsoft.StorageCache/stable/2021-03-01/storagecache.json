@@ -260,11 +260,7 @@
         ],
         "parameters": [
           {
-            "description": "Target resource group.",
-            "in": "path",
-            "name": "resourceGroupName",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/ResourceGroupParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -309,19 +305,10 @@
         ],
         "parameters": [
           {
-            "description": "Target resource group.",
-            "in": "path",
-            "name": "resourceGroupName",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/ResourceGroupParameter"
           },
           {
-            "description": "Name of Cache. Length of name must not be greater than 80 and chars must be from the [-0-9a-zA-Z_] char class.",
-            "in": "path",
-            "name": "cacheName",
-            "pattern": "^[-0-9a-zA-Z_]{1,80}$",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/CacheNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -365,19 +352,10 @@
         ],
         "parameters": [
           {
-            "description": "Target resource group.",
-            "in": "path",
-            "name": "resourceGroupName",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/ResourceGroupParameter"
           },
           {
-            "description": "Name of Cache. Length of name must not be greater than 80 and chars must be from the [-0-9a-zA-Z_] char class.",
-            "in": "path",
-            "name": "cacheName",
-            "pattern": "^[-0-9a-zA-Z_]{1,80}$",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/CacheNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -420,11 +398,7 @@
         ],
         "parameters": [
           {
-            "description": "Target resource group.",
-            "in": "path",
-            "name": "resourceGroupName",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/ResourceGroupParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -433,12 +407,7 @@
             "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "description": "Name of Cache. Length of name must not be greater than 80 and chars must be from the [-0-9a-zA-Z_] char class.",
-            "in": "path",
-            "name": "cacheName",
-            "pattern": "^[-0-9a-zA-Z_]{1,80}$",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/CacheNameParameter"
           },
           {
             "description": "Object containing the user-selectable properties of the new Cache. If read-only properties are included, they must match the existing values of those properties.",
@@ -496,11 +465,7 @@
         ],
         "parameters": [
           {
-            "description": "Target resource group.",
-            "in": "path",
-            "name": "resourceGroupName",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/ResourceGroupParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -509,12 +474,7 @@
             "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "description": "Name of Cache. Length of name must not be greater than 80 and chars must be from the [-0-9a-zA-Z_] char class.",
-            "in": "path",
-            "name": "cacheName",
-            "pattern": "^[-0-9a-zA-Z_]{1,80}$",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/CacheNameParameter"
           },
           {
             "description": "Object containing the user-selectable properties of the Cache. If read-only properties are included, they must match the existing values of those properties.",
@@ -554,18 +514,14 @@
         "operationId": "Caches_Update"
       }
     },
-    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.StorageCache/caches/{cacheName}/debugInfo": {
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.StorageCache/caches/{cacheName}/storageTargets/{storageTargetName}/dnsRefresh": {
       "post": {
         "produces": [
           "application/json"
         ],
         "parameters": [
           {
-            "description": "Target resource group.",
-            "in": "path",
-            "name": "resourceGroupName",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/ResourceGroupParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -574,12 +530,59 @@
             "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "description": "Name of Cache. Length of name must not be greater than 80 and chars must be from the [-0-9a-zA-Z_] char class.",
-            "in": "path",
-            "name": "cacheName",
-            "pattern": "^[-0-9a-zA-Z_]{1,80}$",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/CacheNameParameter"
+          },
+          {
+            "$ref": "#/parameters/StorageTargetParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Cache has refreshed the storage target's DNS information."
+          },
+          "202": {
+            "description": "Cache has started refreshing storage target DNS information."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Caches_DnsRefresh": {
+            "$ref": "./examples/StorageTargets_DnsRefresh.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "tags": [
+          "StorageTargets"
+        ],
+        "description": "Tells a storage target to refresh its DNS information.",
+        "operationId": "StorageTargets_DnsRefresh"
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.StorageCache/caches/{cacheName}/debugInfo": {
+      "post": {
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/CacheNameParameter"
           }
         ],
         "responses": {
@@ -622,11 +625,7 @@
         ],
         "parameters": [
           {
-            "description": "Target resource group.",
-            "in": "path",
-            "name": "resourceGroupName",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/ResourceGroupParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -635,12 +634,7 @@
             "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "description": "Name of Cache. Length of name must not be greater than 80 and chars must be from the [-0-9a-zA-Z_] char class.",
-            "in": "path",
-            "name": "cacheName",
-            "pattern": "^[-0-9a-zA-Z_]{1,80}$",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/CacheNameParameter"
           }
         ],
         "responses": {
@@ -683,11 +677,7 @@
         ],
         "parameters": [
           {
-            "description": "Target resource group.",
-            "in": "path",
-            "name": "resourceGroupName",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/ResourceGroupParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -696,12 +686,7 @@
             "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "description": "Name of Cache. Length of name must not be greater than 80 and chars must be from the [-0-9a-zA-Z_] char class.",
-            "in": "path",
-            "name": "cacheName",
-            "pattern": "^[-0-9a-zA-Z_]{1,80}$",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/CacheNameParameter"
           }
         ],
         "responses": {
@@ -744,11 +729,7 @@
         ],
         "parameters": [
           {
-            "description": "Target resource group.",
-            "in": "path",
-            "name": "resourceGroupName",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/ResourceGroupParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -757,12 +738,7 @@
             "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "description": "Name of Cache. Length of name must not be greater than 80 and chars must be from the [-0-9a-zA-Z_] char class.",
-            "in": "path",
-            "name": "cacheName",
-            "pattern": "^[-0-9a-zA-Z_]{1,80}$",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/CacheNameParameter"
           }
         ],
         "responses": {
@@ -805,11 +781,7 @@
         ],
         "parameters": [
           {
-            "description": "Target resource group.",
-            "in": "path",
-            "name": "resourceGroupName",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/ResourceGroupParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -818,12 +790,7 @@
             "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "description": "Name of Cache. Length of name must not be greater than 80 and chars must be from the [-0-9a-zA-Z_] char class.",
-            "in": "path",
-            "name": "cacheName",
-            "pattern": "^[-0-9a-zA-Z_]{1,80}$",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/CacheNameParameter"
           }
         ],
         "responses": {
@@ -862,11 +829,7 @@
         ],
         "parameters": [
           {
-            "description": "Target resource group.",
-            "in": "path",
-            "name": "resourceGroupName",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/ResourceGroupParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -875,25 +838,15 @@
             "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "description": "Name of Cache. Length of name must not be greater than 80 and chars must be from the [-0-9a-zA-Z_] char class.",
-            "in": "path",
-            "name": "cacheName",
-            "pattern": "^[-0-9a-zA-Z_]{1,80}$",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/CacheNameParameter"
           },
           {
-            "description": "Name of Storage Target.",
-            "in": "path",
-            "name": "storageTargetName",
-            "pattern": "^[-0-9a-zA-Z_]{1,80}$",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/StorageTargetParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "Storage target deleted."
+            "description": "Storage Target deleted."
           },
           "202": {
             "description": "Started the Storage Target's deletion. Poll the Cache's Storage Targets to monitor."
@@ -926,11 +879,7 @@
         ],
         "parameters": [
           {
-            "description": "Target resource group.",
-            "in": "path",
-            "name": "resourceGroupName",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/ResourceGroupParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -939,20 +888,10 @@
             "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "description": "Name of Cache. Length of name must not be greater than 80 and chars must be from the [-0-9a-zA-Z_] char class.",
-            "in": "path",
-            "name": "cacheName",
-            "pattern": "^[-0-9a-zA-Z_]{1,80}$",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/CacheNameParameter"
           },
           {
-            "description": "Name of the Storage Target. Length of name must not be greater than 80 and chars must be from the [-0-9a-zA-Z_] char class.",
-            "in": "path",
-            "name": "storageTargetName",
-            "pattern": "^[-0-9a-zA-Z_]{1,80}$",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/StorageTargetParameter"
           }
         ],
         "responses": {
@@ -989,11 +928,7 @@
         ],
         "parameters": [
           {
-            "description": "Target resource group.",
-            "in": "path",
-            "name": "resourceGroupName",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/ResourceGroupParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1002,20 +937,10 @@
             "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "description": "Name of Cache. Length of name must not be greater than 80 and chars must be from the [-0-9a-zA-Z_] char class.",
-            "in": "path",
-            "name": "cacheName",
-            "pattern": "^[-0-9a-zA-Z_]{1,80}$",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/CacheNameParameter"
           },
           {
-            "description": "Name of the Storage Target. Length of name must not be greater than 80 and chars must be from the [-0-9a-zA-Z_] char class.",
-            "in": "path",
-            "name": "storageTargetName",
-            "pattern": "^[-0-9a-zA-Z_]{1,80}$",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/StorageTargetParameter"
           },
           {
             "description": "Object containing the definition of a Storage Target.",
@@ -1072,11 +997,7 @@
         ],
         "parameters": [
           {
-            "description": "Target resource group.",
-            "in": "path",
-            "name": "resourceGroupName",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/ResourceGroupParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1085,12 +1006,7 @@
             "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "description": "Name of Cache. Length of name must not be greater than 80 and chars must be from the [-0-9a-zA-Z_] char class.",
-            "in": "path",
-            "name": "cacheName",
-            "pattern": "^[-0-9a-zA-Z_]{1,80}$",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/CacheNameParameter"
           }
         ],
         "responses": {
@@ -1271,17 +1187,17 @@
         },
         "properties": {
           "x-ms-client-flatten": true,
-          "description": "Additional operation specific properties",
+          "description": "Additional operation-specific properties",
           "$ref": "#/definitions/AscOperationProperties"
         }
       }
     },
     "AscOperationProperties": {
       "type": "object",
-      "description": "Operation specific output",
+      "description": "Additional operation-specific output.",
       "properties": {
         "output": {
-          "description": "Additional Operation Specific Properties",
+          "description": "Additional operation-specific output.",
           "additionalProperties": {
             "type": "object"
           }
@@ -1461,6 +1377,21 @@
             "type": "string"
           },
           "type": "array"
+        },
+        "dnsServers": {
+          "description": "DNS servers for the cache to use. The default is determined by the network configuration.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "dnsSearchDomain": {
+          "description": "DNS search domain",
+          "type": "string"
+        },
+        "ntpServer": {
+          "description": "NTP server IP Address or FQDN for the cache to use. The default is time.windows.com.",
+          "type": "string"
         }
       }
     },
@@ -1795,6 +1726,28 @@
         "statusDescription": {
           "description": "Describes explanation of state.",
           "type": "string"
+        },
+        "conditions": {
+          "description": "Outstanding conditions that need to be investigated and resolved.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Condition"
+          }
+        }
+      }
+    },
+    "Condition": {
+      "type": "object",
+      "description": "Outstanding conditions that will need to be resolved.",
+      "properties": {
+        "timestamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time when the condition was raised."
+        },
+        "message": {
+          "type": "string",
+          "description": "The issue requiring attention."
         }
       }
     },
@@ -2318,6 +2271,32 @@
       "required": true,
       "type": "string",
       "description": "Client API version."
+    },
+    "ResourceGroupParameter": {
+      "description": "Target resource group.",
+      "in": "path",
+      "name": "resourceGroupName",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "CacheNameParameter": {
+      "description": "Name of Cache. Length of name must not be greater than 80 and chars must be from the [-0-9a-zA-Z_] char class.",
+      "in": "path",
+      "name": "cacheName",
+      "pattern": "^[-0-9a-zA-Z_]{1,80}$",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "StorageTargetParameter": {
+      "description": "Name of Storage Target.",
+      "in": "path",
+      "name": "storageTargetName",
+      "pattern": "^[-0-9a-zA-Z_]{1,80}$",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
     }
   }
 }
