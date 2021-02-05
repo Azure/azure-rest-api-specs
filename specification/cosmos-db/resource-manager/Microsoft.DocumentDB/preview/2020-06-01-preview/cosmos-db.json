@@ -4307,7 +4307,7 @@
             "$ref": "./examples/CosmosDBLocationGet.json"
           }
         },
-        "description": "Retrieves the properties of an existing Azure Cosmos DB location",
+        "description": "Retrieves the properties of an existing Cosmos DB location",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
@@ -4321,7 +4321,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The restorable database account properties were retrieved successfully.",
+            "description": "The Cosmos DB location properties were retrieved successfully.",
             "schema": {
               "$ref": "#/definitions/LocationGetResult"
             }
@@ -7910,7 +7910,7 @@
       }
     },
     "LocationGetResult": {
-      "description": "Cosmos DB location meta data",
+      "description": "Cosmos DB location get result",
       "type": "object",
       "properties": {
         "id": {
@@ -7934,40 +7934,36 @@
         },
         "properties": {
           "type": "object",
-          "description": "xxxxxxxxxxxxxx",
+          "description": "Cosmos DB location metadata",
           "$ref": "#/definitions/LocationProperties"
         }
       }
     },
     "LocationProperties": {
-      "description": "x.",
+      "description": "Cosmos DB location metadata",
       "type": "object",
       "properties": {
         "status": {
-          "description": "Status of location",
+          "description": "The current status of location in Azure.",
           "type": "string"
         },
         "supportsAvailabilityZone": {
-          "description": "Is AZ supported location",
+          "description": "Flag indicating whether the location supports availability zones or not.",
           "type": "boolean"
         },
         "isResidencyRestricted": {
-          "description": "Is residency sensitive location",
+          "description": "Flag indicating whether the location is residency sensitive.",
           "type": "boolean"
         },
         "backupStorageRedundancies": {
           "readOnly": true,
           "type": "array",
           "items": {
-            "$ref": "#/definitions/BackupStorageRedundancyProperties"
+            "$ref": "#/definitions/BackupStorageRedundancy"
           },
-          "description": "The properties of a available backup storage redundancies"
+          "description": "The properties of available backup storage redundancies."
         }
       }
-    },
-    "BackupStorageRedundancyProperties": {
-      "description": "x.",
-      "type": "string"
     },
     "ApiType": {
       "description": "Enum to indicate the API type of the restorable database account.",
