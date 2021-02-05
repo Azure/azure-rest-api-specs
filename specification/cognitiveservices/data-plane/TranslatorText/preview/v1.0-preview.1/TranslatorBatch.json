@@ -8,7 +8,7 @@
     "/batches": {
       "post": {
         "tags": [
-          "Translation"
+          "Document Translation"
         ],
         "summary": "Submit a document translation request to the Document Translation service",
         "description": "Use this API to submit a bulk (batch) translation request to the Document Translation service.\r\nEach request can contain multiple documents and must contain a source and destination container for each document.\r\n            \r\nThe prefix and suffix filter (if supplied) are used to filter folders. The prefix is applied to the subpath after the container name.\r\n            \r\nGlossaries / Translation memory can be included in the request and are applied by the service when the document is translated.\r\n            \r\nIf the glossary is invalid or unreachable during translation, an error is indicated in the document status.\r\nIf a file with the same name already exists at the destination, it will be overwritten. The targetUrl for each target language must be unique.",
@@ -101,7 +101,7 @@
       },
       "get": {
         "tags": [
-          "Translation"
+          "Document Translation"
         ],
         "summary": "Returns a list of batch requests submitted and the status for each request",
         "description": "Returns a list of batch requests submitted and the status for each request.\r\nThis list only contains batch requests submitted by the user (based on the subscription). The status for each request is sorted by id.\r\n            \r\nIf the number of requests exceeds our paging limit, server-side paging is used. Paginated responses indicate a partial result and include a continuation token in the response.\r\nThe absence of a continuation token means that no additional pages are available.\r\n            \r\n$top and $skip query parameters can be used to specify a number of results to return and an offset for the collection.\r\n            \r\nThe server honors the values specified by the client. However, clients must be prepared to handle responses that contain a different page size or contain a continuation token.\r\n            \r\nWhen both $top and $skip are included, the server should first apply $skip and then $top on the collection.\r\nNote: If the server can't honor $top and/or $skip, the server must return an error to the client informing about it instead of just ignoring the query options.\r\nThis reduces the risk of the client making assumptions about the data returned.",
@@ -211,7 +211,7 @@
     "/batches/{id}/documents/{documentId}": {
       "get": {
         "tags": [
-          "Translation"
+          "Document Translation"
         ],
         "summary": "Returns the status for a specific document",
         "description": "Returns the translation status for a specific document based on the request Id and document Id.",
@@ -317,7 +317,7 @@
     "/batches/{id}": {
       "get": {
         "tags": [
-          "Translation"
+          "Document Translation"
         ],
         "summary": "Returns the status for a document translation request",
         "description": "Returns the status for a document translation request.\r\nThe status includes the overall request status, as well as the status for documents that are being translated as part of that request.",
@@ -413,7 +413,7 @@
       },
       "delete": {
         "tags": [
-          "Translation"
+          "Document Translation"
         ],
         "summary": "Cancel a currently processing or queued operation",
         "description": "Cancel a currently processing or queued operation.\r\nCancel a currently processing or queued operation.\r\nAn operation will not be cancelled if it is already completed or failed or cancelling. A bad request will be returned.\r\nAll documents that have completed translation will not be cancelled and will be charged.\r\nAll pending documents will be cancelled if possible.",
@@ -499,7 +499,7 @@
     "/batches/{id}/documents": {
       "get": {
         "tags": [
-          "Translation"
+          "Document Translation"
         ],
         "summary": "Returns the status for all documents in a batch document translation request",
         "description": "Returns the status for all documents in a batch document translation request.\r\n            \r\nThe documents included in the response are sorted by document Id in descending order. If the number of documents in the response exceeds our paging limit, server-side paging is used.\r\nPaginated responses indicate a partial result and include a continuation token in the response. The absence of a continuation token means that no additional pages are available.\r\n            \r\n$top and $skip query parameters can be used to specify a number of results to return and an offset for the collection.\r\nThe server honors the values specified by the client. However, clients must be prepared to handle responses that contain a different page size or contain a continuation token.\r\n            \r\nWhen both $top and $skip are included, the server should first apply $skip and then $top on the collection.\r\nNote: If the server can't honor $top and/or $skip, the server must return an error to the client informing about it instead of just ignoring the query options.\r\nThis reduces the risk of the client making assumptions about the data returned.",
@@ -627,7 +627,7 @@
     "/documents/formats": {
       "get": {
         "tags": [
-          "Translation"
+          "Document Translation"
         ],
         "summary": "Returns a list of supported document formats",
         "description": "The list of supported document formats supported by the Document Translation service.\r\nThe list includes the common file extension, as well as the content-type if using the upload API.",
@@ -683,7 +683,7 @@
     "/glossaries/formats": {
       "get": {
         "tags": [
-          "Translation"
+          "Document Translation"
         ],
         "summary": "Returns the list of supported glossary formats",
         "description": "The list of supported glossary formats supported by the Document Translation service.\r\nThe list includes the common file extension used.",
@@ -739,7 +739,7 @@
     "/storagesources": {
       "get": {
         "tags": [
-          "Translation"
+          "Document Translation"
         ],
         "summary": "Returns a list of supported storage sources",
         "description": "Returns a list of storage sources/options supported by the Document Translation service.",
