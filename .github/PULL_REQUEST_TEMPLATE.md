@@ -46,7 +46,7 @@ If there are following updates in the PR, ensure to request an approval from API
 - [ ] Removing properties in stable version
 - [ ] Removing API version(s) in stable version
 - [ ] Updating API in stable version with Breaking Change Validation errors
-- [ ] Updating API(s) in preview over 1 year
+- [ ] When you are targeting to deploy new service/feature to public regions? Please provide date, or month to public if date is not available yet. (Ensure your swagger merge right after your service published)
 
 **Action**: to initiate an evaluation of the breaking change, create a new intake using the [template for breaking changes](https://aka.ms/Breakingchangetemplate). Addition details on the process and office hours are on the [Breaking change Wiki](https://dev.azure.com/msazure/AzureWiki/_wiki/wikis/AzureWiki.wiki/37684/Breaking-Changes).
 
