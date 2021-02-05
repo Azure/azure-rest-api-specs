@@ -167,6 +167,139 @@
         "x-ms-long-running-operation": true
       }
     },
+	"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HDInsight/clusters/{clusterName}/extensions/AzureMonitor": {
+      "put": {
+        "tags": [
+          "Extensions"
+        ],
+        "description": "Installs the Azure Monitor Integration on the HDInsight cluster.",
+        "x-ms-examples": {
+          "Install Azure Monitor Integration": {
+            "$ref": "./examples/InstallAzureMonitor.json"
+          }
+        },
+        "operationId": "Extension_InstallAzureMonitor",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AzureMonitorRequest"
+            },
+            "description": "The Azure Monitor Integration workspace parameters."
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./operations.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Ok response definition."
+          },
+          "202": {
+            "description": "Accepted response definition."
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "get": {
+        "tags": [
+          "Extensions"
+        ],
+        "description": "Gets the status of Azure Monitor Integration on the HDInsight cluster.",
+        "x-ms-examples": {
+          "Get Azure Monitor Integration status": {
+            "$ref": "./examples/GetAzureMonitorStatus.json"
+          }
+        },
+        "operationId": "Extension_GetAzureMonitorStatus",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./operations.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/AzureMonitorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Extensions"
+        ],
+        "description": "Uninstalls the Azure Monitor Integration on the HDInsight cluster.",
+        "x-ms-examples": {
+          "Uninstall Azure Monitor Integration": {
+            "$ref": "./examples/UninstallAzureMonitor.json"
+          }
+        },
+        "operationId": "Extension_UninstallAzureMonitor",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./operations.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Ok response definition."
+          },
+          "202": {
+            "description": "OK response definition."
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HDInsight/clusters/{clusterName}/extensions/{extensionName}": {
       "put": {
         "tags": [
@@ -344,6 +477,44 @@
         },
         "primaryKey": {
           "description": "The Operations Management Suite (OMS) workspace key.",
+          "type": "string"
+        }
+      }
+    },
+	"description": "Azure Monitor extensions",
+      "properties": {
+        "workspaceId": {
+          "description": "The workspace ID for the Azure Monitor Integration extension.",
+          "type": "string"
+        },
+        "primaryKey": {
+          "description": "The workspace key for the Azure Monitor Integration extensions.",
+          "type": "string"
+        }
+      }
+    },
+    "AzureMonitorResponse": {
+      "description": "The Azure Monitor Integration status response",
+      "properties": {
+        "clusterMonitoringEnabled": {
+          "description": "The status of the Azure Monitor Integration on the HDInsight cluster.",
+          "type": "boolean"
+        },
+        "workspaceId": {
+          "description": "The workspace ID of the Azure Monitor Integration on the HDInsight cluster.",
+          "type": "string"
+        }
+      }
+    },
+    "AzureMonitorRequest": {
+      "description": "The Azure Monitor Integration request parameters.",
+      "properties": {
+        "workspaceId": {
+          "description": "The Azure Monitor Integration  workspace ID.",
+          "type": "string"
+        },
+        "primaryKey": {
+          "description": "The Azure Monitor Integration  workspace key.",
           "type": "string"
         }
       }
