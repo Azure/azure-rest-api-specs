@@ -34,6 +34,12 @@
             "schema": {
               "$ref": "#/definitions/OperationListResult"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
         "x-ms-pageable": {
@@ -152,6 +158,29 @@
           "description": "Blob duration of specification."
         }
       }
+    },
+    "CloudError": {
+      "description": "An error response from Key Vault resource provider",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/CloudErrorBody"
+        }
+      },
+      "x-ms-external": true
+    },
+    "CloudErrorBody": {
+      "description": "An error response from Key Vault resource provider",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Error code. This is a mnemonic that can be consumed programmatically."
+        },
+        "message": {
+          "type": "string",
+          "description": "User friendly error message. The message is typically localized and may vary with service version."
+        }
+      },
+      "x-ms-external": true
     }
   },
   "parameters": {
