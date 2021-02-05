@@ -769,7 +769,8 @@
           "description": "Branch associated with the workflow run"
         },
         "bootstrapConfiguration": {
-          "$ref": "#/definitions/BootstrapConfiguration"
+          "$ref": "#/definitions/BootstrapConfiguration",
+          "description": "Configuration used to boostrap workflow"
         }
       },
       "required": [
@@ -779,10 +780,84 @@
     },
     "BootstrapConfiguration": {
       "type": "object",
-      "description": "Property bag to store workflow bootstrap configuration. ",
+      "description": "Configuration used to boostrap workflow",
+      "properties": {
+        "pipelineTemplateId": {
+          "type": "string",
+          "description": "Unique identifier of the pipeline template"
+        },
+        "pipelineTemplateParameters": {
+          "$ref": "#/definitions/PipelineTemplateParameters",
+          "description": "Dictionary of input parameters used in the pipeline template."
+        },
+        "pipelineConfiguration": {
+          "$ref": "#/definitions/PipelineConfiguration",
+          "description": "Pipeline Configuration"
+        },
+        "provisioningConfiguration": {
+          "$ref": "#/definitions/ProvisioningConfiguration",
+          "description": "Custom workflow provisioning configuration"
+        }
+      },
+      "required": [
+        "pipelineTemplateId"
+      ]
+    },
+    "PipelineConfiguration": {
+      "type": "object",
+      "description": "Pipeline Configuration",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Id to identify workflow file and related objects"
+        },
+        "files": {
+          "type": "array",
+          "description": "Workflow and its associated files",
+          "items": {
+            "$ref": "#/definitions/File"
+          }
+        }
+      },
+      "required": [
+        "files"
+      ]
+    },
+    "PipelineTemplateParameters": {
+      "type": "object",
+      "description": "Dictionary of input parameters used in the pipeline template.",
       "additionalProperties": {
-        "type": "object"
+        "type": "string"
       }
+    },
+    "ProvisioningConfiguration": {
+      "type": "object",
+      "description": "Custom workflow provisioning configuration",
+      "properties": {
+        "commitMessage": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Commit message for commiting files"
+        }
+      }
+    },
+    "File": {
+      "type": "object",
+      "description": "Workflow or its dependent file",
+      "properties": {
+        "path": {
+          "type": "string",
+          "description": "file path w.r.t to repository root"
+        },
+        "content": {
+          "type": "string",
+          "description": "Base-64 encoded file content"
+        }
+      },
+      "required": [
+        "path",
+        "content"
+      ]
     },
     "DeploymentArtifacts": {
       "type": "array",
