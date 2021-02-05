@@ -28,8 +28,8 @@ Please also specify the `--azure-libraries-for-java-folder=<path to the root dir
 
 ``` yaml $(tag) == 'package-2021-01-01-preview' && $(java) && $(multiapi)
 java:
-  namespace: com.microsoft.azure.management.avs.v2020_07_17_preview
-  output-folder: $(azure-libraries-for-java-folder)/sdk/avs/mgmt-v2020_07_17_preview
+  namespace: com.microsoft.azure.management.avs.v2021_01_01_preview
+  output-folder: $(azure-libraries-for-java-folder)/sdk/avs/mgmt-v2021_01_01_preview
 regenerate-manager: true
 generate-interface: true
 ```
