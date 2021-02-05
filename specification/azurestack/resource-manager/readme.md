@@ -34,7 +34,7 @@ These are the global settings for the Azure Stack API.
 title: AzureStackManagementClient
 description: Azure Stack
 openapi-type: arm
-tag: package-2016-01
+tag: package-2017-06-01
 ```
 
 
@@ -45,7 +45,6 @@ These settings apply only when `--tag=package-2016-01` is specified on the comma
 ```yaml $(tag) == 'package-2016-01'
 input-file:
   - Microsoft.AzureStack/stable/2016-01-01/AzureStack.json
-  - Microsoft.AzureStack/stable/2016-01-01/CustomerSubscription.json
   - Microsoft.AzureStack/stable/2016-01-01/Product.json
   - Microsoft.AzureStack/stable/2016-01-01/Registration.json
 ```
