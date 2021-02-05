@@ -678,7 +678,7 @@
         ]
       }
     },
-    "/providers/Microsoft.Subscription/subscriptions/{subscriptionId}/redeem": {
+    "/providers/Microsoft.Subscription/{subscriptionId}/acceptOwnership": {
       "post": {
         "description": "Redeem subscription.",
         "operationId": "Subscriptions_Redeem",
@@ -715,12 +715,37 @@
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
-            "name": "body",
-            "in": "body",
-            "required": true,
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ]
+      }
+    },
+    "/providers/Microsoft.Subscription/{subscriptionId}/acceptOwnershipStatus": {
+      "get": {
+        "description": "Redeem subscription status.",
+        "operationId": "Subscriptions_RedeemStatus",
+        "x-ms-examples": {
+          "RedeemSubscriptionStatus": {
+            "$ref": "./examples/redeemSubscriptionStatus.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Subscription details.",
             "schema": {
-              "$ref": "#/definitions/RedeemSubscriptionRequest"
+              "$ref": "#/definitions/SubscriptionAliasRedeemResponse"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseBody"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -1266,28 +1291,38 @@
         }
       }
     },
-    "RedeemSubscriptionRequest": {
-      "description": "The parameters required to redeem a new subscription.",
-      "type": "object",
+    "SubscriptionAliasRedeemResponse": {
+      "description": "Put subscription redeem result.",
       "properties": {
-        "properties": {
-          "$ref": "#/definitions/RedeemSubscriptionRequestProperties",
-          "description": "Redeem subscription request properties."
-        }
-      }
-    },
-    "RedeemSubscriptionRequestProperties": {
-      "description": "Redeem subscription request properties.",
-      "properties": {
-        "managementGroupId": {
-          "description": "Management group Id for the subscription.",
+        "subscriptionId": {
+          "description": "Newly created subscription Id.",
+          "readOnly": true,
           "type": "string"
         },
-        "tags": {
-          "description": "tags for the subscription",
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
+        "provisioningState": {
+          "type": "string",
+          "description": "The provisioning state of the resource.",
+          "enum": [
+            "Accepted",
+            "Succeeded",
+            "Failed"
+          ],
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": true
+          }
+        },
+        "redeemState": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The redeem state of the resource.",
+          "enum": [
+            "Pending",
+            "Completed"
+          ],
+          "x-ms-enum": {
+            "name": "RedeemState",
+            "modelAsString": true
           }
         }
       }
