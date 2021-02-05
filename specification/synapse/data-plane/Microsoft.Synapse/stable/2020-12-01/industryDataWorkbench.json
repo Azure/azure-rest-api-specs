@@ -208,6 +208,29 @@
           "readOnly": true
         }
       }
+    },
+    "InnerError": {
+      "description": "Inner error containing list of errors.",
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "Specific error code than was provided by the containing error.",
+          "type": "string",
+          "readOnly": true
+        },
+        "innerError": {
+          "description": "Object containing more specific information than the current object about the error.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/InnerError"
+            }
+          ],
+          "readOnly": true
+        }
+      },
+      "additionalProperties": {
+        "type": "object"
+      }
     }
   },
   "parameters": {
