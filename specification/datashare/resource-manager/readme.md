@@ -145,7 +145,7 @@ input-file:
   - $(this-folder)/Microsoft.DataShare/preview/2018-11-01-preview/DataShare.json
   - $(this-folder)/Microsoft.DataShare/stable/2019-11-01/DataShare.json
   - $(this-folder)/Microsoft.DataShare/stable/2020-09-01/DataShare.json
-  - $(this-folder)/Microsoft.DataShare/stable/2020-10-01-preview/DataShare.json
+  - $(this-folder)/Microsoft.DataShare/preview/2020-10-01-preview/DataShare.json
 
 ```
 
