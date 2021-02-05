@@ -75,10 +75,6 @@ See configuration in [readme.ruby.md](./readme.ruby.md)
 
 See configuration in [readme.typescript.md](./readme.typescript.md)
 
-## Go
-
-See configuration in [readme.go.md](./readme.go.md)
-
 ## Java
 
 See configuration in [readme.java.md](./readme.java.md)
