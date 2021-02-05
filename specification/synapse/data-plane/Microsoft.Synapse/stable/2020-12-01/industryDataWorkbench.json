@@ -38,7 +38,7 @@
             "schema": {
               "type": "array",
               "items": {
-                "$ref": "#/definitions/BaseModelVersion"
+                "$ref": "#/definitions/DatabaseEntity"
               }
             }
           },
@@ -58,87 +58,102 @@
     }
   },
   "definitions": {
-    "BaseModelVersion": {
-      "description": "BaseModelVersion tracked resource object.",
+    "DatabaseEntity": {
       "type": "object",
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ProxyResource"
-        }
-      ],
       "properties": {
-        "systemData": {
-          "description": "Metadata pertaining to creation and last modification of the resource.",
+        "source": {
           "allOf": [
             {
-              "$ref": "../../../../common/v1/types.json#/definitions/SystemData"
+              "$ref": "#/definitions/DataSource"
             }
+          ]
+        },
+        "origin": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/OperationalCatalog"
+            }
+          ]
+        },
+        "originObjectId": {
+          "type": "string"
+        },
+        "objectId": {
+          "type": "string"
+        },
+        "objectVersion": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "name": {
+          "type": "string"
+        },
+        "entityType": {
+          "enum": [
+            "DATABASE",
+            "TABLE",
+            "SCHEMA",
+            "VIEW",
+            "FUNCTION",
+            "ROLEASSIGNMENT"
           ],
-          "readOnly": true
+          "type": "string",
+          "x-ms-enum": {
+            "name": "SASEntityType",
+            "modelAsString": true
+          }
+        },
+        "publishStatus": {
+          "enum": [
+            "NOTPUBLISHED",
+            "PUBLISHED"
+          ],
+          "type": "string"
         },
         "properties": {
-          "description": "BaseModelVersion resource properties.",
-          "allOf": [
-            {
-              "$ref": "#/definitions/BaseModelVersionProperties"
-            }
-          ],
-          "x-ms-client-flatten": true
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       }
     },
-    "BaseModelVersionProperties": {
-      "description": "BaseModel objects property bag.",
+    "DataSource": {
       "type": "object",
       "properties": {
-        "description": {
-          "description": "A brief description of BuiltInModel. Eg: CDM standard entities.",
+        "provider": {
           "type": "string"
         },
-        "hostname": {
-          "description": "ADLS dfs primary endpoint Eg: adlsgen2Retail.dfs.core.windows.net.",
+        "location": {
           "type": "string"
         },
-        "accessKey": {
-          "description": "AccessKey of the ADLS gen2 storage account.",
-          "type": "string"
-        },
-        "containerName": {
-          "description": "ADLS container name Eg basemodels",
-          "type": "string"
-        },
-        "folderPath": {
-          "description": "FolderPath to root manifest Eg: /core/",
-          "type": "string"
-        },
-        "manifestName": {
-          "description": "Root manifest file name Eg: core.manifest.cdm.json.",
-          "type": "string"
-        },
-        "customCoreFiles": {
-          "description": "Custom core files. example: IDMConcepts.cdm.json.",
-          "type": "array",
-          "items": {
+        "properties": {
+          "type": "object",
+          "additionalProperties": {
             "type": "string"
           }
-        },
-        "provisioningState": {
-          "description": "State of async operation.",
+        }
+      }
+    },
+    "OperationalCatalog": {
+      "type": "object",
+      "properties": {
+        "type": {
           "enum": [
-            "Unknown",
-            "Creating",
-            "Updating",
-            "Succeeded",
-            "Failed",
-            "Deleting",
-            "Canceled"
+            "SPARK",
+            "SQLOD",
+            "SQLDW",
+            "MASTER",
+            "SCOPE"
           ],
           "type": "string",
-          "readOnly": true,
           "x-ms-enum": {
-            "name": "ProvisioningState",
+            "name": "SASOriginType",
             "modelAsString": true
           }
+        },
+        "instanceId": {
+          "type": "string"
         }
       }
     }
