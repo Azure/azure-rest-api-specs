@@ -12023,7 +12023,7 @@
           "type": "string",
           "format": "duration",
           "title": "The minimum time to retain the Task directory on the Compute Node where it ran, from the time it completes execution. After this time, the Batch service may delete the Task directory and all its contents.",
-          "description": "The default is 7 days, i.e. the Task directory will be retained for 7 days unless the Compute Node is removed or the Job is deleted."
+          "description": "The default is 7 days, i.e. the Task directory will be retained for 7 days unless the Compute Node is removed or the Job is deleted. Note that when using smaller VM sizes, task retention should be kept short to limit resource usage."
         },
         "maxTaskRetryCount": {
           "type": "integer",
@@ -12229,7 +12229,7 @@
           "type": "string",
           "format": "duration",
           "title": "The minimum time to retain the Task directory for the Job Release Task on the Compute Node. After this time, the Batch service may delete the Task directory and all its contents.",
-          "description": "The default is 7 days, i.e. the Task directory will be retained for 7 days unless the Compute Node is removed or the Job is deleted."
+          "description": "The default is 7 days, i.e. the Task directory will be retained for 7 days unless the Compute Node is removed or the Job is deleted. Note that when using smaller VM sizes, task retention should be kept short to limit resource usage."
         },
         "userIdentity": {
           "$ref": "#/definitions/UserIdentity",
