@@ -4298,6 +4298,56 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/sqlDatabases/{databaseName}/containers/{containerName}/getBackupInformation": {
+      "post": {
+        "operationId": "SqlResources_GetBackupInformation",
+        "x-ms-examples": {
+          "CosmosDBSqlContainerBackupInformation": {
+            "$ref": "./examples/CosmosDBBackupInformation.json"
+          }
+        },
+        "description": "Gets continuous backup information for a container resource.",
+        "x-ms-long-running-operation": true,
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/databaseNameParameter"
+          },
+          {
+            "$ref": "#/parameters/containerNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "query",
+            "name": "location",
+            "required": true,
+            "type": "string",
+            "description": "The name of the region."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The Sql container get backup information operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/BackupInformation"
+            }
+          },
+          "202": {
+            "description": "The sql container get backup information operation will complete asynchronously."
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -7929,6 +7979,26 @@
       "x-ms-enum": {
         "name": "BackupStorageRedundancy",
         "modelAsString": true
+      }
+    },
+    "BackupInformation": {
+      "description": "Backup information of a resource.",
+      "type": "object",
+      "properties": {
+        "ContinuousBackupInformation": {
+          "type": "object",
+          "$ref": "#/definitions/ContinuousBackupInformation"
+        }
+      }
+    },
+    "ContinuousBackupInformation": {
+      "description": "Continuous backup description.",
+      "type": "object",
+      "properties": {
+        "LatestRestorableTimestamp": {
+          "type": "string",
+          "description": "The latest restorable timestamp for a resource."
+        }
       }
     }
   },
