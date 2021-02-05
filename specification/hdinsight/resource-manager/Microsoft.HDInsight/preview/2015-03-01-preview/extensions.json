@@ -39,13 +39,13 @@
         "tags": [
           "Extensions"
         ],
-        "description": "Enables the Operations Management Suite (OMS) on the HDInsight cluster.",
+        "description": "Installs the Azure Monitor Classic Integration (OMS) on the HDInsight cluster.",
         "x-ms-examples": {
           "Enable cluster monitoring": {
-            "$ref": "./examples/EnableLinuxClusterMonitoring.json"
+            "$ref": "./examples/InstallAzureMonitorClassic.json"
           }
         },
-        "operationId": "Extension_EnableMonitoring",
+        "operationId": "Extension_InstallAzureMonitorClassic",
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -64,9 +64,9 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ClusterMonitoringRequest"
+              "$ref": "#/definitions/AzureMonitorClassicRequest"
             },
-            "description": "The Operations Management Suite (OMS) workspace parameters."
+            "description": "The Azure Monitor Classic (OMS) workspace parameters."
           }
         ],
         "responses": {
@@ -89,13 +89,13 @@
         "tags": [
           "Extensions"
         ],
-        "description": "Gets the status of Operations Management Suite (OMS) on the HDInsight cluster.",
+        "description": "Gets the status of Azure Monitor Classic Integration (OMS) on the HDInsight cluster.",
         "x-ms-examples": {
           "Enable cluster monitoring": {
-            "$ref": "./examples/GetLinuxClusterMonitoringStatus.json"
+            "$ref": "./examples/GetAzureMonitorClassicStatus.json"
           }
         },
-        "operationId": "Extension_GetMonitoringStatus",
+        "operationId": "Extension_GetAzureMonitorClassicStatus",
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -120,7 +120,7 @@
           "200": {
             "description": "OK. The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/ClusterMonitoringResponse"
+              "$ref": "#/definitions/AzureMonitorClassicResponse"
             }
           }
         }
@@ -129,13 +129,13 @@
         "tags": [
           "Extensions"
         ],
-        "description": "Disables the Operations Management Suite (OMS) on the HDInsight cluster.",
+        "description": "Uninstalls the Azure Monitor Classic Integration (OMS) on the HDInsight cluster.",
         "x-ms-examples": {
           "Enable cluster monitoring": {
-            "$ref": "./examples/DisableLinuxClusterMonitoring.json"
+            "$ref": "./examples/UninstallAzureMonitorClassic.json"
           }
         },
-        "operationId": "Extension_DisableMonitoring",
+        "operationId": "Extension_UninstallAzureMonitorClassic",
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -443,40 +443,40 @@
   },
   "definitions": {
     "Extension": {
-      "description": "Cluster monitoring extensions",
+      "description": "Azure Monitor Classic extensions",
       "properties": {
         "workspaceId": {
-          "description": "The workspace ID for the cluster monitoring extension.",
+          "description": "The workspace ID for the Azure Monitor Classic extension.",
           "type": "string"
         },
         "primaryKey": {
-          "description": "The certificate for the cluster monitoring extensions.",
+          "description": "The certificate for the Azure Monitor Classic extensions.",
           "type": "string"
         }
       }
     },
-    "ClusterMonitoringResponse": {
-      "description": "The Operations Management Suite (OMS) status response",
+    "AzureMonitorClassicResponse": {
+      "description": "The Azure Monitor Classic (OMS) status response",
       "properties": {
         "clusterMonitoringEnabled": {
-          "description": "The status of the Operations Management Suite (OMS) on the HDInsight cluster.",
+          "description": "The status of the Azure Monitor Classic (OMS) on the HDInsight cluster.",
           "type": "boolean"
         },
         "workspaceId": {
-          "description": "The workspace ID of the Operations Management Suite (OMS) on the HDInsight cluster.",
+          "description": "The workspace ID of the Azure Monitor Classic (OMS) on the HDInsight cluster.",
           "type": "string"
         }
       }
     },
-    "ClusterMonitoringRequest": {
-      "description": "The Operations Management Suite (OMS) parameters.",
+    "AzureMonitorClassicRequest": {
+      "description": "The Azure Monitor Classic (OMS) parameters.",
       "properties": {
         "workspaceId": {
-          "description": "The Operations Management Suite (OMS) workspace ID.",
+          "description": "The Azure Monitor Classic (OMS) workspace ID.",
           "type": "string"
         },
         "primaryKey": {
-          "description": "The Operations Management Suite (OMS) workspace key.",
+          "description": "The Azure Monitor Classic(OMS) workspace key.",
           "type": "string"
         }
       }
