@@ -26,15 +26,28 @@ These are the global settings for the KeyVault API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2019-09
+tag: package-preview-2021-04
 ```
 
+
+### Tag: package-preview-2021-04
+
+These settings apply only when `--tag=package-preview-2021-04` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2021-04'
+input-file:
+  - Microsoft.KeyVault/preview/2021-04-01-preview/common.json
+  - Microsoft.KeyVault/preview/2021-04-01-preview/keyvault.json
+  - Microsoft.KeyVault/preview/2021-04-01-preview/managedHsm.json
+  - Microsoft.KeyVault/preview/2021-04-01-preview/providers.json
+  - Microsoft.KeyVault/preview/2021-04-01-preview/secrets.json
+```
 ### Tag: package-preview-2020-04
 
 These settings apply only when `--tag=package-preview-2020-04` is specified on the command line.
 This tag is for the development of preview features related to managed HSM of Azure CLI and PowerShell.
 
-```yaml $(tag) == 'package-preview-2020-04'
+``` yaml $(tag) == 'package-preview-2020-04'
 input-file:
   - Microsoft.KeyVault/stable/2019-09-01/keyvault.json
   - Microsoft.KeyVault/stable/2019-09-01/providers.json
@@ -45,7 +58,7 @@ input-file:
 
 These settings apply only when `--tag=package-preview-2020-04-full` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2020-04-full'
+``` yaml $(tag) == 'package-preview-2020-04-full'
 input-file:
   - Microsoft.KeyVault/preview/2020-04-01-preview/keyvault.json
   - Microsoft.KeyVault/preview/2020-04-01-preview/providers.json
@@ -160,4 +173,3 @@ See configuration in [readme.java.md](./readme.java.md)
 ## AzureResourceSchema
 
 See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
-
