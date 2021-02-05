@@ -35,7 +35,7 @@
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "#/definitions/CommunicationErrorResponse"
+              "$ref": "../../../Microsoft.CommunicationServicesCommon/stable/2021-03-07/common.json#/definitions/CommunicationErrorResponse"
             }
           },
           "201": {
@@ -78,7 +78,7 @@
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "#/definitions/CommunicationErrorResponse"
+              "$ref": "../../../Microsoft.CommunicationServicesCommon/stable/2021-03-07/common.json#/definitions/CommunicationErrorResponse"
             }
           },
           "204": {
@@ -118,7 +118,7 @@
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "#/definitions/CommunicationErrorResponse"
+              "$ref": "../../../Microsoft.CommunicationServicesCommon/stable/2021-03-07/common.json#/definitions/CommunicationErrorResponse"
             }
           },
           "204": {
@@ -170,7 +170,7 @@
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "#/definitions/CommunicationErrorResponse"
+              "$ref": "../../../Microsoft.CommunicationServicesCommon/stable/2021-03-07/common.json#/definitions/CommunicationErrorResponse"
             }
           },
           "200": {
@@ -210,52 +210,6 @@
           "items": {
             "$ref": "#/definitions/CommunicationIdentityTokenScope"
           }
-        }
-      }
-    },
-    "CommunicationError": {
-      "description": "The Communication Services error.",
-      "required": [
-        "code",
-        "message"
-      ],
-      "type": "object",
-      "properties": {
-        "code": {
-          "description": "The error code.",
-          "type": "string"
-        },
-        "message": {
-          "description": "The error message.",
-          "type": "string"
-        },
-        "target": {
-          "description": "The error target.",
-          "type": "string",
-          "readOnly": true
-        },
-        "details": {
-          "description": "Further details about specific errors that led to this error.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/CommunicationError"
-          },
-          "readOnly": true
-        },
-        "innerError": {
-          "$ref": "#/definitions/CommunicationError"
-        }
-      }
-    },
-    "CommunicationErrorResponse": {
-      "description": "The Communication Services error.",
-      "required": [
-        "error"
-      ],
-      "type": "object",
-      "properties": {
-        "error": {
-          "$ref": "#/definitions/CommunicationError"
         }
       }
     },
