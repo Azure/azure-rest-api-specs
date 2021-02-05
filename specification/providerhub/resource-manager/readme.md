@@ -37,6 +37,10 @@ These settings apply only when `--tag=package-2020-11-20` is specified on the co
 ```yaml $(tag) == 'package-2020-11-20'
 input-file:
   - Microsoft.ProviderHub/stable/2020-11-20/providerhub.json
+directive:
+  - suppress: R4009
+    from: providerhub.json
+    reason: This version doesn't support systemData.
 ```
 
 ---
