@@ -22,7 +22,7 @@
         "tags": [
           "IndustryDataWorkbench"
         ],
-        "operationId": "Idw_ListBuiltnnModels",
+        "operationId": "Idw_ListBuiltinModels",
         "description": "List builtin models of Industry Data Workbench.",
         "produces": [
           "application/json"
@@ -154,6 +154,58 @@
         },
         "instanceId": {
           "type": "string"
+        }
+      }
+    },
+    "ErrorResponse": {
+      "description": "Standard error response.",
+      "type": "object",
+      "properties": {
+        "error": {
+          "description": "Standard error object.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/Error"
+            }
+          ]
+        }
+      }
+    },
+    "Error": {
+      "description": "Standard error object.",
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "Server-defined set of error codes.",
+          "type": "string",
+          "readOnly": true
+        },
+        "message": {
+          "description": "Human-readable representation of the error.",
+          "type": "string",
+          "readOnly": true
+        },
+        "target": {
+          "description": "Target of the error.",
+          "type": "string",
+          "readOnly": true
+        },
+        "details": {
+          "description": "Array of details about specific errors that led to this reported error.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Error"
+          },
+          "readOnly": true
+        },
+        "innerError": {
+          "description": "Object containing more specific information than  the current object about the error.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/InnerError"
+            }
+          ],
+          "readOnly": true
         }
       }
     }
