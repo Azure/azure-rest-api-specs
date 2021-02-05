@@ -52,6 +52,7 @@ This is not used by Autorest itself.
 swagger-to-sdk:
   - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-go
+  - repo: azure-resource-manager-schemas
 ```
 
 
@@ -65,7 +66,7 @@ csharp:
   azure-arm: true
   license-header: MICROSOFT_MIT_NO_VERSION
   namespace: Microsoft.Azure.Management.Purview
-  output-folder: $(csharp-sdks-folder)/Purview/Management.Purview/Generated
+  output-folder: $(csharp-sdks-folder)/Purview/Microsoft.Azure.Management.Purview/Generated
   clear-output-folder: true
 ```
 
