@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2021-01-01",
+    "version": "2020-10-01",
     "title": "PeeringManagementClient",
     "description": "APIs to manage Peering resources through the Azure Resource Manager."
   },
@@ -3342,13 +3342,6 @@
         "serviceProviderName": {
           "description": "The name of the service provider.",
           "type": "string"
-        },
-        "peeringLocations": {
-          "description": "The list of locations at which the service provider peers with Microsoft.",
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
         }
       }
     },
@@ -3405,19 +3398,11 @@
       "type": "object",
       "properties": {
         "peeringServiceLocation": {
-          "description": "The location (state/province) of the customer.",
-          "type": "string"
-        },
-        "providerPrimaryPeeringLocation": {
-          "description": "The primary peering (Microsoft/service provider) location to be used for customer traffic.",
-          "type": "string"
-        },
-        "providerBackupPeeringLocation": {
-          "description": "The backup peering (Microsoft/service provider) location to be used for customer traffic.",
+          "description": "The PeeringServiceLocation of the Customer.",
           "type": "string"
         },
         "peeringServiceProvider": {
-          "description": "The name of the service provider.",
+          "description": "The MAPS Provider Name.",
           "type": "string"
         },
         "provisioningState": {
