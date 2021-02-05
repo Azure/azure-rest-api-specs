@@ -855,6 +855,18 @@
         "administration": {
           "$ref": "#/definitions/DedicatedCapacityAdministrators",
           "description": "A collection of Dedicated capacity administrators"
+        },
+        "mode": {
+          "description": "An array of administrator user identities",
+          "type": "string",
+          "enum": [
+            "Gen1",
+            "Gen2"
+          ],
+          "x-ms-enum": {
+            "name": "State",
+            "modelAsString": true
+          }
         }
       }
     },
