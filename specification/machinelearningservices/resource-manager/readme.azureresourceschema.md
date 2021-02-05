@@ -32,6 +32,7 @@ output-folder: $(azureresourceschema-folder)/schemas
 
 # all the input files in this apiVersion
 input-file:
+  - Microsoft.MachineLearningServices/preview/2020-09-01-preview/jobs.json
   - Microsoft.MachineLearningServices/preview/2020-09-01-preview/machineLearningServices.json
 
 ```
