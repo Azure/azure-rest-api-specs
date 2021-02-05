@@ -1027,48 +1027,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ProviderHub/providerRegistrations": {
-      "get": {
-        "tags": [
-          "ProviderRegistration"
-        ],
-        "description": "Pending route: Gets the list of the provider registrations by the resource group.",
-        "operationId": "ProviderRegistrations_ListByResourceGroup",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "x-ms-examples": {
-          "ProviderRegistrations_ListByResourceGroup": {
-            "$ref": "./examples/ProviderRegistrations_ListByResourceGroup.json"
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Successfully retrieved the provider registrations.",
-            "schema": {
-              "$ref": "#/definitions/ProviderRegistrationArrayResponseWithContinuation"
-            }
-          },
-          "default": {
-            "description": "Error",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.ProviderHub/providerRegistrations/{providerNamespace}/generateOperations": {
       "post": {
         "tags": [
