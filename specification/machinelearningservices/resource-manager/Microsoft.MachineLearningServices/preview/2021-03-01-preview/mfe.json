@@ -2452,31 +2452,13 @@
             }
           },
           "202": {
-            "description": "Success",
-            "headers": {
-              "Location": {
-                "description": "URI to poll for asynchronous operation result.",
-                "type": "string"
-              },
-              "Retry-After": {
-                "description": "Duration the client should wait between requests, in seconds.",
-                "type": "integer",
-                "format": "int32",
-                "default": 60,
-                "maximum": 600,
-                "minimum": 10
-              }
-            }
+            "description": "Success"
           }
         },
         "x-ms-examples": {
           "Resume Labeling Job.": {
             "$ref": "./examples/LabelingJob/resume.json"
           }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
         }
       }
     },
