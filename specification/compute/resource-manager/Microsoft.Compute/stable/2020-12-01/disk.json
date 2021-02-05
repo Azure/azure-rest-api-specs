@@ -111,6 +111,9 @@
           },
           "Create an empty managed disk in extended location.": {
             "$ref": "./examples/CreateAnEmptyManagedDiskInExtendedLocation.json"
+          },
+          "Create a managed disk with security profile": {
+            "$ref": "./examples/CreateAManagedDiskWithSecurityProfile.json"
           }
         },
         "x-ms-long-running-operation": true
@@ -2369,6 +2372,10 @@
         "purchasePlan": {
           "$ref": "#/definitions/PurchasePlan",
           "description": "Purchase plan information to be added on the OS disk"
+        },
+        "securityProfile": {
+          "$ref": "#/definitions/SecurityProfile",
+          "description": "Contains the security related information for the resource."
         }
       },
       "description": "Disk resource update properties."
@@ -2596,6 +2603,25 @@
         "product"
       ],
       "description": "Used for establishing the purchase context of any 3rd Party artifact through MarketPlace."
+    },
+    "SecurityProfile": {
+      "properties": {
+        "securityType": {
+          "type": "string",
+          "description": "Specifies the SecurityType of the VM. Applicable for OS disks only.",
+          "enum": [
+           "TrustedLaunch"
+          ],
+          "x-ms-enum": {
+            "name": "SecurityTypes",
+            "modelAsString": true
+          }
+        }
+      },
+      "required": [
+        "securityType"
+      ],
+      "description": "Contains the security related information for the resource."
     },
     "GrantAccessData": {
       "properties": {
