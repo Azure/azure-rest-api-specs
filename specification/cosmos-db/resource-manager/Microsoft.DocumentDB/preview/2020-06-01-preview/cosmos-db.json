@@ -4298,6 +4298,42 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DocumentDB/locations/{location}": {
+      "get": {
+        "operationId": "LocationGet",
+        "x-ms-examples": {
+          "CosmosDBLocationGet": {
+            "$ref": "./examples/CosmosDBLocationGet.json"
+          }
+        },
+        "description": "Retrieves the properties of an existing Azure Cosmos DB location",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/locationParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The restorable database account properties were retrieved successfully.",
+            "schema": {
+              "$ref": "#/definitions/LocationGetResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/DefaultErrorResponse"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -7872,6 +7908,66 @@
           }
         }
       }
+    },
+    "LocationGetResult": {
+      "description": "Cosmos DB location meta data",
+      "type": "object",
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The unique resource identifier of the ARM resource."
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The name of the ARM resource."
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The type of Azure resource."
+        },
+        "location": {
+          "type": "string",
+          "description": "The location of the resource group to which the resource belongs."
+        },
+        "properties": {
+          "type": "object",
+          "description": "xxxxxxxxxxxxxx",
+          "$ref": "#/definitions/LocationProperties"
+        }
+      }
+    },
+    "LocationProperties": {
+      "description": "x.",
+      "type": "object",
+      "properties": {
+        "status": {
+          "description": "Status of location",
+          "type": "string"
+        },
+        "supportsAvailabilityZone": {
+          "description": "Is AZ supported location",
+          "type": "boolean"
+        },
+        "isResidencyRestricted": {
+          "description": "Is residency sensitive location",
+          "type": "boolean"
+        },
+        "backupStorageRedundancies": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/BackupStorageRedundancyProperties"
+          },
+          "description": "The properties of a available backup storage redundancies"
+        }
+      }
+    },
+    "BackupStorageRedundancyProperties": {
+      "description": "x.",
+      "type": "string"
     },
     "ApiType": {
       "description": "Enum to indicate the API type of the restorable database account.",
