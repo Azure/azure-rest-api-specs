@@ -664,6 +664,58 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HDInsight/clusters/{clusterName}/updateClusterIdentityCertificate": {
+      "post": {
+        "tags": [
+          "Clusters"
+        ],
+        "operationId": "Clusters_UpdateClusterIdentityCertificate",
+        "description": "Updates the cluster identity certificate.",
+        "x-ms-examples": {
+          "Update cluster identity certificate": {
+            "$ref": "./examples/HDI_Clusters_UpdateClusterIdentityCertificate.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UpdateClusterIdentityCertificateParameters"
+            },
+            "description": "The cluster configurations."
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./operations.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "OK response definition."
+          },
+          "202": {
+            "description": "Accepted response definition"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
     }
   },
   "definitions": {
@@ -1811,6 +1863,24 @@
         }
       },
       "description": "The azure async operation response."
+    },
+    "UpdateClusterIdentityCertificateParameters": {
+      "type": "object",
+      "description": "The update cluster identity certificate request parameters.",
+      "properties": {
+        "applicationId": {
+          "description": "The application id.",
+          "type": "string"
+        },
+        "certificate": {
+          "description": "The certificate in base64 encoded format.",
+          "type": "string"
+        },
+        "certificatePassword": {
+          "description": "The password of the certificate.",
+          "type": "string"
+        }
+      }
     },
     "Resource": {
       "description": "The core properties of ARM resources",

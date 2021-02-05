@@ -192,6 +192,100 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.HDInsight/locations/{location}/checkNameAvailability": {
+      "get": {
+        "tags": [
+          "Regions"
+        ],
+        "operationId": "Locations_CheckNameAvailability",
+        "description": "Check the cluster name is available or not.",
+        "x-ms-examples": {
+          "Get the subscription usages for specific location": {
+            "$ref": "./examples/CheckClusterNameAvailability.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/LocationParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "spec",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NameAvailabilityCheckRequestSpec"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./operations.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "OK response definition.",
+            "schema": {
+              "$ref": "#/definitions/NameAvailabilityCheckResponseSpec"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.HDInsight/locations/{location}/validateCreateRequest": {
+      "get": {
+        "tags": [
+          "Regions"
+        ],
+        "operationId": "Locations_ValidateClusterCreateRequest",
+        "description": "Validate the cluster create request spec is valid or not.",
+        "x-ms-examples": {
+          "Get the subscription usages for specific location": {
+            "$ref": "./examples/ValidateClusterCreateRequest.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/LocationParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "spec",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ClusterCreateRequestValidationSpec"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./operations.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "OK response definition.",
+            "schema": {
+              "$ref": "#/definitions/ClusterCreateValidationResponseSpec"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -673,6 +767,154 @@
           }
         }
       }
+    },
+    "NameAvailabilityCheckRequestSpec": {
+      "type": "object",
+      "description": "The request spec of checking name availability.",
+      "properties": {
+        "name": {
+          "description": "The resource name.",
+          "type": "string"
+        },
+        "type": {
+          "description": "The resource type",
+          "type": "string"
+        }
+      }
+    },
+    "NameAvailabilityCheckResponseSpec": {
+      "type": "object",
+      "description": "The response spec of checking name availability.",
+      "properties": {
+        "nameAvailable": {
+          "description": "This indicates whether the name is available.",
+          "type": "boolean"
+        },
+        "reason": {
+          "description": "The reason of the result.",
+          "type": "string",
+          "readOnly": true
+        },
+        "message": {
+          "description": "The related message.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ClusterCreateRequestValidationSpec": {
+      "type": "object",
+      "description": "The cluster create request specification.",
+      "allOf": [
+        {
+          "$ref": "./cluster.json#/definitions/ClusterCreateParametersExtended"
+        }
+      ],
+      "properties": {
+        "name": {
+          "description": "The cluster name.",
+          "type": "string"
+        },
+        "tenantId": {
+          "description": "The tenant id.",
+          "type": "string"
+        },
+        "fetchAaddsResource": {
+          "description": "This indicates whether fetch Aadds resource or not.",
+          "type": "boolean"
+        }
+      }
+    },
+    "ClusterCreateValidationResponseSpec": {
+      "type": "object",
+      "description": "The response of cluster create request validation.",
+      "properties": {
+        "validationErrors": {
+          "description": "The validation errors.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ValidationErrorInfo"
+          }
+        },
+        "validationWarnings": {
+          "description": "The validation warnings.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ValidationErrorInfo"
+          }
+        },
+        "estimatedCreationDuration": {
+          "description": "The estimated creation duration.",
+          "type": "string",
+          "format": "duration"
+        },
+        "aaddsResourcesDetails": {
+          "description": "The Azure active directory domain service resource details.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AaddsResourceDetails"
+          }
+        }
+      }
+    },
+    "ValidationErrorInfo": {
+      "type": "object",
+      "description": "The validation error information.",
+      "properties": {
+        "code": {
+          "description": "The error code.",
+          "type": "string"
+        },
+        "message": {
+          "description": "The error message.",
+          "type": "string"
+        },
+        "errorResource": {
+          "description": "The error resource.",
+          "type": "string"
+        },
+        "messageArguments": {
+          "description": "The message arguments",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "AaddsResourceDetails": {
+      "type": "object",
+      "description": "The Azure active directory domain service resource details.",
+      "properties": {
+        "domainName": {
+          "description": "The Azure active directory domain service name.",
+          "type": "string"
+        },
+        "initialSyncComplete": {
+          "description": "This indicates whether initial sync complete or not.",
+          "type": "boolean"
+        },
+        "ldapsEnabled": {
+          "description": "This indicates whether enable ldaps or not.",
+          "type": "boolean"
+        },
+        "ldapsPublicCertificateInBase64": {
+          "description": "The base 64 format string of public ldap certificate.",
+          "type": "string"
+        },
+        "resourceId": {
+          "description": "The resource id of azure active directory domain service.",
+          "type": "string"
+        },
+        "subnetId": {
+          "description": "The subnet resource id.",
+          "type": "string"
+        },
+        "tenantId": {
+          "description": "The tenant id of azure active directory domain service .",
+          "type": "string"
+        }
+      }
     }
   },
   "parameters": {
@@ -704,6 +946,16 @@
       "required": true,
       "type": "string",
       "description": "The long running operation id.",
+      "x-ms-parameter-location": "method"
+    },
+    "ValidationLevelParameter": {
+      "name": "validation-level",
+      "in": "query",
+      "required": true,
+      "type": "integer",
+      "format": "int32",
+      "default": -1,
+      "description": "The validation level.",
       "x-ms-parameter-location": "method"
     }
   }
