@@ -1,12 +1,9 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "redisEnterprise",
-    "description": "REST API for managing Redis Enterprise resources in Azure.",
     "version": "2021-03-01",
-    "x-ms-code-generation-settings": {
-      "name": "redisEnterpriseClient"
-    }
+    "title": "RedisEnterpriseManagementClient",
+    "description": "REST API for managing Redis Enterprise resources in Azure."
   },
   "host": "management.azure.com",
   "schemes": [
@@ -1086,7 +1083,7 @@
         "tags": [
           "PrivateLinkResources"
         ],
-        "operationId": "PrivateLinkResources_ListByRedisEnterpriseCache",
+        "operationId": "PrivateLinkResources_ListByCluster",
         "description": "Gets the private link resources that need to be created for a RedisEnterprise cluster.",
         "x-ms-examples": {
           "RedisEnterpriseListPrivateLinkResources": {
@@ -1450,7 +1447,7 @@
         },
         "aofFrequency": {
           "type": "string",
-          "description": "Sets the frequency at which data is fsynced to disk.",
+          "description": "Sets the frequency at which data is written to disk.",
           "enum": [
             "1s",
             "always"
