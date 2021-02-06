@@ -77,7 +77,27 @@
         "$ref": "#/definitions/PipelinePolicy"
       }
     },
-
+    "PipelinePolicy": {
+      "description": "Pipeline Policy.",
+      "type": "object",
+      "properties": {
+        "elapsedTimeMetric": {
+          "description": "Pipeline ElapsedTime Metric Policy.",
+          "type": "object",
+          "$ref": "#/definitions/PipelineElapsedTimeMetricPolicy"
+        }
+      }
+    },
+    "PipelineElapsedTimeMetricPolicy": {
+      "description": "Pipeline ElapsedTime Metric Policy.",
+      "type": "object",
+      "properties": {
+        "duration": {
+          "description": "TimeSpan value, after which an Azure Monitoring Metric is fired.",
+          "type": "object"
+        }
+      }
+    },
     "Activity": {
       "discriminator": "type",
       "description": "A pipeline activity.",
