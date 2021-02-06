@@ -60,14 +60,14 @@ input-file:
   - Microsoft.Network/stable/2020-08-01/ipGroups.json
   - Microsoft.Network/stable/2020-08-01/loadBalancer.json
   - Microsoft.Network/stable/2020-08-01/natGateway.json
-  - Microsoft.Network/preview/2021-01-01-preview/network.json
+  - Microsoft.Network/preview/2021-02-01-preview/network.json
   - Microsoft.Network/stable/2020-08-01/networkInterface.json
-  - Microsoft.Network/preview/2021-01-01-preview/networkManager.json
-  - Microsoft.Network/preview/2021-01-01-preview/networkManagerActiveConfiguration.json
-  - Microsoft.Network/preview/2021-01-01-preview/networkManagerConnectivityConfiguration.json
-  - Microsoft.Network/preview/2021-01-01-preview/networkManagerEffectiveConfiguration.json
-  - Microsoft.Network/preview/2021-01-01-preview/networkManagerGroup.json
-  - Microsoft.Network/preview/2021-01-01-preview/networkManagerSecurityConfiguration.json
+  - Microsoft.Network/preview/2021-02-01-preview/networkManager.json
+  - Microsoft.Network/preview/2021-02-01-preview/networkManagerActiveConfiguration.json
+  - Microsoft.Network/preview/2021-02-01-preview/networkManagerConnectivityConfiguration.json
+  - Microsoft.Network/preview/2021-02-01-preview/networkManagerEffectiveConfiguration.json
+  - Microsoft.Network/preview/2021-02-01-preview/networkManagerGroup.json
+  - Microsoft.Network/preview/2021-02-01-preview/networkManagerSecurityConfiguration.json
   - Microsoft.Network/stable/2020-08-01/networkProfile.json
   - Microsoft.Network/stable/2020-08-01/networkSecurityGroup.json
   - Microsoft.Network/stable/2020-08-01/networkVirtualAppliance.json
