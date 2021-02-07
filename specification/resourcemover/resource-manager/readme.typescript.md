@@ -6,7 +6,7 @@ Please also specify `--typescript-sdks-folder=<path to root folder of your azure
 ```yaml $(typescript)
 typescript:
   azure-arm: true
-  package-name: "resourcemover"
+  package-name: "@azure/arm-resourcemover"
   output-folder: "$(typescript-sdks-folder)/sdk/resourcemover/arm-resourcemover"
   payload-flattening-threshold: 1
   generate-metadata: true
