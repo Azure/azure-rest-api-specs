@@ -161,7 +161,6 @@
     "MigrationStatusResponse": {
       "description": "Response for the quota submission request.",
       "type": "object",
-      "x-ms-azure-resource": true,
       "properties": {
         "id": {
           "description": "The migration process ID.",
@@ -258,7 +257,8 @@
       "properties": {
         "error": {
           "$ref": "#/definitions/MigrationErrorResponseBody",
-          "description": "The API error body."
+          "description": "The API error body.",
+          "x-ms-client-flatten": true
         }
       }
     },
