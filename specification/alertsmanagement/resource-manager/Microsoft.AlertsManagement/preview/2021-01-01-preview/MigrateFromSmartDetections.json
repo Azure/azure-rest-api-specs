@@ -42,7 +42,7 @@
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "name": "parameters",
+            "name": "smartDetectionMigrationRequest",
             "in": "body",
             "required": true,
             "schema": {
@@ -69,6 +69,10 @@
           "Migration Triggering": {
             "$ref": "./examples/migrateFromSmartDetectionStartMigration.json"
           }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
         }
       }
     },
@@ -108,10 +112,6 @@
           "Get Migration Status": {
             "$ref": "./examples/migrateFromSmartDetectionGet.json"
           }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
         }
       }
     }
@@ -159,6 +159,33 @@
       "description": "The Smart Detection migration request."
     },
     "MigrationStatusResponse": {
+      "description": "Response for the quota submission request.",
+      "type": "object",
+      "x-ms-azure-resource": true,
+      "properties": {
+        "id": {
+          "description": "The migration process ID.",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "The migration process name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Type of resource. \"Microsoft.AlertsManagement/migrateFromSmartDetection\""
+        },
+        "properties": {
+          "description": "The details of the migration response",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/MigrationStatusResponseProperties"
+        }
+      }
+    },
+    "MigrationStatusResponseProperties": {
       "required": [
         "migrationId",
         "status",

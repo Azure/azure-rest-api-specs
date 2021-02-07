@@ -2,7 +2,7 @@
   "parameters": {
     "subscriptionId": "70afbb35-0463-4758-badf-d5aab5bce520",
     "api-version": "2021-01-01-preview",
-    "parameters": {
+    "smartDetectionMigrationRequest": {
       "scope": [
         "/subscriptions/70afbb35-0463-4758-badf-d5aab5bce520/resourceGroups/MyRg/providers/microsoft.insights/components/myai"
       ],
@@ -11,13 +11,20 @@
   },
   "responses": {
     "202": {
-      "headers": {},
+      "headers": {
+        "location": "https://management.azure.com/subscriptions/70afbb35-0463-4758-badf-d5aab5bce520/providers/Microsoft.AlertsManagement/migrateFromSmartDetection/ebf4f1bf-2f56-44b2-99b0-870867ae549b?api-version=2021-01-01-preview"
+      },
       "body": {
-        "migrationId": "ebf4f1bf-2f56-44b2-99b0-870867ae549b",
-        "status": "Starting",
-        "scope": [
-          "/subscriptions/70afbb35-0463-4758-badf-d5aab5bce520/resourceGroups/MyRg/providers/microsoft.insights/components/myai"
-        ]
+        "id": "/subscriptions/70afbb35-0463-4758-badf-d5aab5bce520/providers/Microsoft.AlertsManagement/migrateFromSmartDetection/ebf4f1bf-2f56-44b2-99b0-870867ae549b",
+        "name": "ebf4f1bf-2f56-44b2-99b0-870867ae549b",
+        "type": "Microsoft.AlertsManagement/migrateFromSmartDetection",
+        "properties": {
+          "migrationId": "ebf4f1bf-2f56-44b2-99b0-870867ae549b",
+          "status": "Starting",
+          "scope": [
+            "/subscriptions/70afbb35-0463-4758-badf-d5aab5bce520/resourceGroups/MyRg/providers/microsoft.insights/components/myai"
+          ]
+        }
       }
     }
   }
