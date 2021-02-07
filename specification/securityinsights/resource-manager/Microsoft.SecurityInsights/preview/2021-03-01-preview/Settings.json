@@ -314,7 +314,6 @@
     }
   },
   "definitions": {
-  
     "SettingList": {
       "description": "List of all the settings.",
       "properties": {
@@ -477,19 +476,19 @@
         },
         "sku": {
           "description": "The pricing tier of the solution",
-            "$ref": "#/definitions/Sku"
+          "$ref": "#/definitions/Sku"
         },
         "entityAnalytics": {
           "description": "flag that indicates if the user wants EntityAnalytics",
           "$ref": "#/definitions/EntityAnalyticsOnboardingParameters",
-            "type": "object"
+          "type": "object"
         }
       },
       "type": "object"
     },
     "Sku": {
       "description": "The pricing tier of the solution",
-      "properties":{
+      "properties": {
         "name": {
           "description": "The kind of the tier",
           "enum": [
@@ -515,10 +514,10 @@
           "description": "A flag indicates that the user wants enity analytics",
           "type": "boolean"
         },
-        "uebaDataSources":{
-            "description": "The data source be profiled by ueba engine",
-            "$ref" : "#/definitions/UebaProperties",
-            "x-ms-client-flatten": true
+        "uebaDataSources": {
+          "description": "The data source be profiled by ueba engine",
+          "$ref": "#/definitions/UebaProperties",
+          "x-ms-client-flatten": true
         }
       },
       "type": "object"
@@ -580,7 +579,7 @@
       "type": "string",
       "x-ms-parameter-location": "method"
     },
-    "OnboardingRequest" : {
+    "OnboardingRequest": {
       "description": "The onboarding request parameters",
       "in": "body",
       "name": "onboardingRequest",

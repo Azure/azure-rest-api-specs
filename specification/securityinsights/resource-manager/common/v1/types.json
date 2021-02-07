@@ -7,107 +7,107 @@
   "paths": {},
   "definitions": {
     "CloudError": {
-        "description": "Error response structure.",
-        "properties": {
-          "error": {
-            "$ref": "#/definitions/CloudErrorBody",
-            "description": "Error data",
-            "x-ms-client-flatten": true
-          }
-        },
-        "type": "object",
-        "x-ms-external": true
+      "description": "Error response structure.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/CloudErrorBody",
+          "description": "Error data",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object",
+      "x-ms-external": true
     },
     "CloudErrorBody": {
-        "description": "Error details.",
-        "properties": {
-          "code": {
-            "description": "An identifier for the error. Codes are invariant and are intended to be consumed programmatically.",
-            "readOnly": true,
-            "type": "string"
-          },
-          "message": {
-            "description": "A message describing the error, intended to be suitable for display in a user interface.",
-            "readOnly": true,
-            "type": "string"
-          }
+      "description": "Error details.",
+      "properties": {
+        "code": {
+          "description": "An identifier for the error. Codes are invariant and are intended to be consumed programmatically.",
+          "readOnly": true,
+          "type": "string"
         },
-        "type": "object",
-        "x-ms-external": true
+        "message": {
+          "description": "A message describing the error, intended to be suitable for display in a user interface.",
+          "readOnly": true,
+          "type": "string"
+        }
+      },
+      "type": "object",
+      "x-ms-external": true
     },
     "ResourceWithEtag": {
-        "description": "An azure resource object with an Etag property",
-        "properties": {
-          "id": {
-            "description": "Azure resource Id",
-            "readOnly": true,
-            "type": "string"
-          },
-          "name": {
-            "description": "Azure resource name",
-            "readOnly": true,
-            "type": "string"
-          },
-          "type": {
-            "description": "Azure resource type",
-            "readOnly": true,
-            "type": "string"
-          },
-          "etag": {
-            "description": "Etag of the azure resource",
-            "type": "string"
-          }
+      "description": "An azure resource object with an Etag property",
+      "properties": {
+        "id": {
+          "description": "Azure resource Id",
+          "readOnly": true,
+          "type": "string"
         },
-        "x-ms-azure-resource": true
-      }
+        "name": {
+          "description": "Azure resource name",
+          "readOnly": true,
+          "type": "string"
+        },
+        "type": {
+          "description": "Azure resource type",
+          "readOnly": true,
+          "type": "string"
+        },
+        "etag": {
+          "description": "Etag of the azure resource",
+          "type": "string"
+        }
+      },
+      "x-ms-azure-resource": true
+    }
   },
   "parameters": {
     "ApiVersion": {
-        "description": "API version for the operation",
-        "enum": [
-          "2021-03-01-preview"
-        ],
-        "in": "query",
-        "name": "api-version",
-        "required": true,
-        "type": "string"
+      "description": "API version for the operation",
+      "enum": [
+        "2021-03-01-preview"
+      ],
+      "in": "query",
+      "name": "api-version",
+      "required": true,
+      "type": "string"
     },
     "SubscriptionId": {
-        "description": "Azure subscription ID",
-        "in": "path",
-        "name": "subscriptionId",
-        "pattern": "^[0-9A-Fa-f]{8}-([0-9A-Fa-f]{4}-){3}[0-9A-Fa-f]{12}$",
-        "required": true,
-        "type": "string"
-      },
-      "ResourceGroupName": {
-        "description": "The name of the resource group within the user's subscription. The name is case insensitive.",
-        "in": "path",
-        "maxLength": 90,
-        "minLength": 1,
-        "name": "resourceGroupName",
-        "pattern": "^[-\\w\\._\\(\\)]+$",
-        "required": true,
-        "type": "string",
-        "x-ms-parameter-location": "method"
-      },
-      "WorkspaceName": {
-        "description": "The name of the workspace.",
-        "in": "path",
-        "maxLength": 90,
-        "minLength": 1,
-        "name": "workspaceName",
-        "required": true,
-        "type": "string",
-        "x-ms-parameter-location": "method"
-      },
-      "OperationalInsightsResourceProvider": {
-        "description": "The namespace of workspaces resource provider- Microsoft.OperationalInsights.",
-        "in": "path",
-        "name": "operationalInsightsResourceProvider",
-        "required": true,
-        "type": "string",
-        "x-ms-parameter-location": "method"
-      }
+      "description": "Azure subscription ID",
+      "in": "path",
+      "name": "subscriptionId",
+      "pattern": "^[0-9A-Fa-f]{8}-([0-9A-Fa-f]{4}-){3}[0-9A-Fa-f]{12}$",
+      "required": true,
+      "type": "string"
+    },
+    "ResourceGroupName": {
+      "description": "The name of the resource group within the user's subscription. The name is case insensitive.",
+      "in": "path",
+      "maxLength": 90,
+      "minLength": 1,
+      "name": "resourceGroupName",
+      "pattern": "^[-\\w\\._\\(\\)]+$",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "WorkspaceName": {
+      "description": "The name of the workspace.",
+      "in": "path",
+      "maxLength": 90,
+      "minLength": 1,
+      "name": "workspaceName",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "OperationalInsightsResourceProvider": {
+      "description": "The namespace of workspaces resource provider- Microsoft.OperationalInsights.",
+      "in": "path",
+      "name": "operationalInsightsResourceProvider",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    }
   }
 }
