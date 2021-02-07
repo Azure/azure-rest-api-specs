@@ -258,7 +258,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/parameters/OnboardingRequest"
+              "$ref": "#/definitions/OnboardingRequest"
             }
           },
           "default": {
@@ -445,10 +445,10 @@
           "description": "The relevant data sources that enriched by ueba",
           "items": {
             "$ref": "#/definitions/UebaDataSources"
-          }
+          },
+          "type": "array"
         }
-      },
-      "type": "array"
+      }
     },
     "UebaDataSources": {
       "description": "The data source that enriched by ueba.",
@@ -518,8 +518,7 @@
         "uebaDataSources":{
             "description": "The data source be profiled by ueba engine",
             "$ref" : "#/definitions/UebaProperties",
-            "x-ms-client-flatten": true,
-            "type": "array"
+            "x-ms-client-flatten": true
         }
       },
       "type": "object"
