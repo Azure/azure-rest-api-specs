@@ -4215,7 +4215,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/DefaultErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -4251,7 +4251,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/DefaultErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -4293,7 +4293,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/DefaultErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         }
@@ -4483,7 +4483,8 @@
       },
       "description": "Error Response."
     },
-    "DefaultErrorResponse": {
+    "CloudError": {
+      "x-ms-external": true,
       "description": "An error response from the service.",
       "properties": {
         "error": {
