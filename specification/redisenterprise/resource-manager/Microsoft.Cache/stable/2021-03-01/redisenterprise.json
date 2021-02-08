@@ -1256,7 +1256,16 @@
       "properties": {
         "minimumTlsVersion": {
           "type": "string",
-          "description": "The minimum TLS version for the cluster to support, e.g. '1.2'"
+          "description": "The minimum TLS version for the cluster to support, e.g. '1.2'",
+          "enum": [
+            "1.0",
+            "1.1",
+            "1.2"
+          ],
+          "x-ms-enum": {
+            "name": "TlsVersion",
+            "modelAsString": true
+          }
         },
         "hostName": {
           "type": "string",
@@ -1510,12 +1519,14 @@
         "primaryKey": {
           "readOnly": true,
           "type": "string",
-          "description": "The current primary key that clients can use to authenticate"
+          "description": "The current primary key that clients can use to authenticate",
+          "x-ms-secret": true
         },
         "secondaryKey": {
           "readOnly": true,
           "type": "string",
-          "description": "The current secondary key that clients can use to authenticate"
+          "description": "The current secondary key that clients can use to authenticate",
+          "x-ms-secret": true
         }
       }
     },
@@ -1545,7 +1556,8 @@
       "properties": {
         "sasUri": {
           "type": "string",
-          "description": "SAS URI for the target blob to import from"
+          "description": "SAS URI for the target blob to import from",
+          "x-ms-secret": true
         }
       },
       "required": [
@@ -1558,7 +1570,8 @@
       "properties": {
         "sasUri": {
           "type": "string",
-          "description": "SAS URI for the target directory to export to"
+          "description": "SAS URI for the target directory to export to",
+          "x-ms-secret": true
         }
       },
       "required": [
