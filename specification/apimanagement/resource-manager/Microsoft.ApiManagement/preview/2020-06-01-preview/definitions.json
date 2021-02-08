@@ -6025,6 +6025,48 @@
       },
       "description": "Gateway hostname configuration details."
     },
+    "GatewayCertificateAuthorityCollection": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/GatewayCertificateAuthorityContract"
+          },
+          "description": "Page values.",
+          "readOnly": true
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Next page link if any.",
+          "readOnly": true
+        }
+      },
+      "description": "Paged Gateway certificate authority list representation."
+    },
+    "GatewayCertificateAuthorityContract": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/GatewayCertificateAuthorityContractProperties",
+          "description": "Gateway certificate authority details."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./apimanagement.json#/definitions/Resource"
+        }
+      ],
+      "description": "Gateway certificate authority details."
+    },
+    "GatewayCertificateAuthorityContractProperties": {
+      "properties": {
+        "isTrusted": {
+          "type": "boolean",
+          "description": "Determines whether certificate authority is trusted."
+        }
+      },
+      "description": "Gateway certificate authority details."
+    },
     "AssociationContract": {
       "properties": {
         "properties": {
