@@ -24,7 +24,7 @@ output-folder: $(azureresourceschema-folder)/schemas
 # all the input files in this apiVersion
 input-file:
   - Microsoft.Peering/stable/2020-10-01/peering.json
-  
+
 ```
 
 ### Tag: schema-peering-2020-04-01 and azureresourceschema

@@ -12,6 +12,7 @@ batch:
   - tag: schema-solutions-2017-09-01
   - tag: schema-solutions-2016-09-01-preview
   - tag: schema-resources-2020-10-01
+  - tag: schema-resources-2020-08-01
   - tag: schema-resources-2020-06-01
   - tag: schema-resources-2020-01-01
   - tag: schema-resources-2019-11-01
@@ -115,7 +116,19 @@ output-folder: $(azureresourceschema-folder)/schemas
 
 # all the input files in this apiVersion
 input-file:
+  - Microsoft.Resources/stable/2020-10-01/resources.json
   - Microsoft.Resources/stable/2020-10-01/deploymentScripts.json
+
+```
+
+### Tag: schema-resources-2020-08-01 and azureresourceschema
+
+``` yaml $(tag) == 'schema-resources-2020-08-01' && $(azureresourceschema)
+output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
+  - Microsoft.Resources/stable/2020-08-01/resources.json
 
 ```
 
@@ -370,6 +383,7 @@ output-folder: $(azureresourceschema-folder)/schemas
 
 # all the input files in this apiVersion
 input-file:
+  - Microsoft.Authorization/stable/2020-09-01/dataPolicyManifests.json
   - Microsoft.Authorization/stable/2020-09-01/policyAssignments.json
   - Microsoft.Authorization/stable/2020-09-01/policyDefinitions.json
   - Microsoft.Authorization/stable/2020-09-01/policySetDefinitions.json

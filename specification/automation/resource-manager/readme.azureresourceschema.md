@@ -28,6 +28,7 @@ input-file:
   - Microsoft.Automation/preview/2020-01-13-preview/privateLinkResources.json
   - Microsoft.Automation/preview/2020-01-13-preview/python2package.json
   - Microsoft.Automation/preview/2020-01-13-preview/dscNode.json
+  - Microsoft.Automation/preview/2020-01-13-preview/dscNodeConfiguration.json
   - Microsoft.Automation/preview/2020-01-13-preview/dscCompilationJob.json
   - Microsoft.Automation/preview/2020-01-13-preview/dscNodeCounts.json
   - Microsoft.Automation/preview/2020-01-13-preview/sourceControl.json
@@ -78,10 +79,10 @@ input-file:
   - Microsoft.Automation/stable/2019-06-01/jobSchedule.json
   - Microsoft.Automation/stable/2019-06-01/linkedWorkspace.json
   - Microsoft.Automation/stable/2019-06-01/module.json
+  - Microsoft.Automation/stable/2019-06-01/operations.json
   - Microsoft.Automation/stable/2019-06-01/schedule.json
   - Microsoft.Automation/stable/2019-06-01/variable.json
   - Microsoft.Automation/stable/2019-06-01/watcher.json
-  - Microsoft.Automation/stable/2019-06-01/operations.json
 
 ```
 
@@ -152,7 +153,7 @@ input-file:
   - Microsoft.Automation/stable/2015-10-31/runbook.json
   - Microsoft.Automation/stable/2015-10-31/schedule.json
   - Microsoft.Automation/stable/2015-10-31/variable.json
-  - Microsoft.Automation/stable/2015-10-31/webhook.json
   - Microsoft.Automation/stable/2015-10-31/watcher.json
+  - Microsoft.Automation/stable/2015-10-31/webhook.json
 
 ```

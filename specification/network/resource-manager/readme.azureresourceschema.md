@@ -6,6 +6,8 @@ These settings apply only when `--azureresourceschema` is specified on the comma
 
 ``` yaml $(azureresourceschema) && $(multiapi)
 batch:
+  - tag: schema-network-2020-08-01
+  - tag: schema-network-2020-07-01
   - tag: schema-network-2020-06-01
   - tag: schema-network-2020-05-01
   - tag: schema-network-2020-04-01
@@ -43,6 +45,126 @@ batch:
 ```
 
 Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
+
+### Tag: schema-network-2020-08-01 and azureresourceschema
+
+``` yaml $(tag) == 'schema-network-2020-08-01' && $(azureresourceschema)
+output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
+  - Microsoft.Network/stable/2020-08-01/applicationGateway.json
+  - Microsoft.Network/stable/2020-08-01/applicationSecurityGroup.json
+  - Microsoft.Network/stable/2020-08-01/availableDelegations.json
+  - Microsoft.Network/stable/2020-08-01/availableServiceAliases.json
+  - Microsoft.Network/stable/2020-08-01/azureFirewall.json
+  - Microsoft.Network/stable/2020-08-01/azureFirewallFqdnTag.json
+  - Microsoft.Network/stable/2020-08-01/azureWebCategory.json
+  - Microsoft.Network/stable/2020-08-01/bastionHost.json
+  - Microsoft.Network/stable/2020-08-01/checkDnsAvailability.json
+  - Microsoft.Network/stable/2020-08-01/customIpPrefix.json
+  - Microsoft.Network/stable/2020-08-01/ddosCustomPolicy.json
+  - Microsoft.Network/stable/2020-08-01/ddosProtectionPlan.json
+  - Microsoft.Network/stable/2020-08-01/dscpConfiguration.json
+  - Microsoft.Network/stable/2020-08-01/endpointService.json
+  - Microsoft.Network/stable/2020-08-01/expressRouteCircuit.json
+  - Microsoft.Network/stable/2020-08-01/expressRouteCrossConnection.json
+  - Microsoft.Network/stable/2020-08-01/expressRoutePort.json
+  - Microsoft.Network/stable/2020-08-01/firewallPolicy.json
+  - Microsoft.Network/stable/2020-08-01/ipAllocation.json
+  - Microsoft.Network/stable/2020-08-01/ipGroups.json
+  - Microsoft.Network/stable/2020-08-01/loadBalancer.json
+  - Microsoft.Network/stable/2020-08-01/natGateway.json
+  - Microsoft.Network/stable/2020-08-01/network.json
+  - Microsoft.Network/stable/2020-08-01/networkInterface.json
+  - Microsoft.Network/stable/2020-08-01/networkProfile.json
+  - Microsoft.Network/stable/2020-08-01/networkSecurityGroup.json
+  - Microsoft.Network/stable/2020-08-01/networkVirtualAppliance.json
+  - Microsoft.Network/stable/2020-08-01/networkWatcher.json
+  - Microsoft.Network/stable/2020-08-01/operation.json
+  - Microsoft.Network/stable/2020-08-01/privateEndpoint.json
+  - Microsoft.Network/stable/2020-08-01/privateLinkService.json
+  - Microsoft.Network/stable/2020-08-01/publicIpAddress.json
+  - Microsoft.Network/stable/2020-08-01/publicIpPrefix.json
+  - Microsoft.Network/stable/2020-08-01/routeFilter.json
+  - Microsoft.Network/stable/2020-08-01/routeTable.json
+  - Microsoft.Network/stable/2020-08-01/securityPartnerProvider.json
+  - Microsoft.Network/stable/2020-08-01/serviceCommunity.json
+  - Microsoft.Network/stable/2020-08-01/serviceEndpointPolicy.json
+  - Microsoft.Network/stable/2020-08-01/serviceTags.json
+  - Microsoft.Network/stable/2020-08-01/usage.json
+  - Microsoft.Network/stable/2020-08-01/virtualNetwork.json
+  - Microsoft.Network/stable/2020-08-01/virtualNetworkGateway.json
+  - Microsoft.Network/stable/2020-08-01/virtualNetworkTap.json
+  - Microsoft.Network/stable/2020-08-01/virtualRouter.json
+  - Microsoft.Network/stable/2020-08-01/virtualWan.json
+  - Microsoft.Network/stable/2020-08-01/vmssNetworkInterface.json
+  - Microsoft.Network/stable/2020-08-01/vmssPublicIpAddress.json
+  - Microsoft.Network/stable/2020-08-01/webapplicationfirewall.json
+  - Microsoft.Network/stable/2020-08-01/cloudServiceNetworkInterface.json
+  - Microsoft.Network/stable/2020-08-01/cloudServicePublicIpAddress.json
+
+```
+
+### Tag: schema-network-2020-07-01 and azureresourceschema
+
+``` yaml $(tag) == 'schema-network-2020-07-01' && $(azureresourceschema)
+output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
+  - Microsoft.Network/stable/2020-07-01/applicationGateway.json
+  - Microsoft.Network/stable/2020-07-01/applicationSecurityGroup.json
+  - Microsoft.Network/stable/2020-07-01/availableDelegations.json
+  - Microsoft.Network/stable/2020-07-01/availableServiceAliases.json
+  - Microsoft.Network/stable/2020-07-01/azureFirewall.json
+  - Microsoft.Network/stable/2020-07-01/azureFirewallFqdnTag.json
+  - Microsoft.Network/stable/2020-07-01/azureWebCategory.json
+  - Microsoft.Network/stable/2020-07-01/bastionHost.json
+  - Microsoft.Network/stable/2020-07-01/checkDnsAvailability.json
+  - Microsoft.Network/stable/2020-07-01/customIpPrefix.json
+  - Microsoft.Network/stable/2020-07-01/ddosCustomPolicy.json
+  - Microsoft.Network/stable/2020-07-01/ddosProtectionPlan.json
+  - Microsoft.Network/stable/2020-07-01/dscpConfiguration.json
+  - Microsoft.Network/stable/2020-07-01/endpointService.json
+  - Microsoft.Network/stable/2020-07-01/expressRouteCircuit.json
+  - Microsoft.Network/stable/2020-07-01/expressRouteCrossConnection.json
+  - Microsoft.Network/stable/2020-07-01/expressRoutePort.json
+  - Microsoft.Network/stable/2020-07-01/firewallPolicy.json
+  - Microsoft.Network/stable/2020-07-01/ipAllocation.json
+  - Microsoft.Network/stable/2020-07-01/ipGroups.json
+  - Microsoft.Network/stable/2020-07-01/loadBalancer.json
+  - Microsoft.Network/stable/2020-07-01/natGateway.json
+  - Microsoft.Network/stable/2020-07-01/network.json
+  - Microsoft.Network/stable/2020-07-01/networkInterface.json
+  - Microsoft.Network/stable/2020-07-01/networkProfile.json
+  - Microsoft.Network/stable/2020-07-01/networkSecurityGroup.json
+  - Microsoft.Network/stable/2020-07-01/networkVirtualAppliance.json
+  - Microsoft.Network/stable/2020-07-01/networkWatcher.json
+  - Microsoft.Network/stable/2020-07-01/operation.json
+  - Microsoft.Network/stable/2020-07-01/privateEndpoint.json
+  - Microsoft.Network/stable/2020-07-01/privateLinkService.json
+  - Microsoft.Network/stable/2020-07-01/publicIpAddress.json
+  - Microsoft.Network/stable/2020-07-01/publicIpPrefix.json
+  - Microsoft.Network/stable/2020-07-01/routeFilter.json
+  - Microsoft.Network/stable/2020-07-01/routeTable.json
+  - Microsoft.Network/stable/2020-07-01/securityPartnerProvider.json
+  - Microsoft.Network/stable/2020-07-01/serviceCommunity.json
+  - Microsoft.Network/stable/2020-07-01/serviceEndpointPolicy.json
+  - Microsoft.Network/stable/2020-07-01/serviceTags.json
+  - Microsoft.Network/stable/2020-07-01/usage.json
+  - Microsoft.Network/stable/2020-07-01/virtualNetwork.json
+  - Microsoft.Network/stable/2020-07-01/virtualNetworkGateway.json
+  - Microsoft.Network/stable/2020-07-01/virtualNetworkTap.json
+  - Microsoft.Network/stable/2020-07-01/virtualRouter.json
+  - Microsoft.Network/stable/2020-07-01/virtualWan.json
+  - Microsoft.Network/stable/2020-07-01/vmssNetworkInterface.json
+  - Microsoft.Network/stable/2020-07-01/vmssPublicIpAddress.json
+  - Microsoft.Network/stable/2020-07-01/webapplicationfirewall.json
+  - Microsoft.Network/stable/2020-07-01/cloudServiceNetworkInterface.json
+  - Microsoft.Network/stable/2020-07-01/cloudServicePublicIpAddress.json
+
+```
 
 ### Tag: schema-network-2020-06-01 and azureresourceschema
 

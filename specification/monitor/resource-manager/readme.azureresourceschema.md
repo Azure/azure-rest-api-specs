@@ -27,6 +27,7 @@ batch:
   - tag: schema-insights-2016-03-01
   - tag: schema-insights-2015-07-01
   - tag: schema-insights-2015-04-01
+  - tag: schema-insights-2014-04-01
 
 ```
 
@@ -119,6 +120,7 @@ output-folder: $(azureresourceschema-folder)/schemas
 # all the input files in this apiVersion
 input-file:
   - Microsoft.Insights/stable/2018-09-01/actionGroups_API.json
+  - Microsoft.Insights/stable/2018-09-01/metricBaselines_API.json
   - Microsoft.Insights/stable/2018-09-01/baseline_API.json
   - Microsoft.Insights/stable/2018-09-01/calculateBaseline_API.json
 
@@ -202,8 +204,8 @@ output-folder: $(azureresourceschema-folder)/schemas
 # all the input files in this apiVersion
 input-file:
   - Microsoft.Insights/preview/2017-05-01-preview/diagnosticsSettings_API.json
-  - Microsoft.Insights/preview/2017-05-01-preview/diagnosticsSettingsCategories_API.json
   - Microsoft.Insights/preview/2017-05-01-preview/subscriptionDiagnosticsSettings_API.json
+  - Microsoft.Insights/preview/2017-05-01-preview/diagnosticsSettingsCategories_API.json
   - Microsoft.Insights/preview/2017-05-01-preview/metricDefinitions_API.json
   - Microsoft.Insights/preview/2017-05-01-preview/metrics_API.json
 
@@ -281,5 +283,16 @@ input-file:
   - Microsoft.Insights/stable/2015-04-01/activityLogs_API.json
   - Microsoft.Insights/stable/2015-04-01/eventCategories_API.json
   - Microsoft.Insights/stable/2015-04-01/tenantActivityLogs_API.json
+
+```
+
+### Tag: schema-insights-2014-04-01 and azureresourceschema
+
+``` yaml $(tag) == 'schema-insights-2014-04-01' && $(azureresourceschema)
+output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
+  - Microsoft.Insights/stable/2014-04-01/alertRules_API.json
 
 ```

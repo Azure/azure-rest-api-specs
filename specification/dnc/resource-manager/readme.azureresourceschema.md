@@ -19,6 +19,9 @@ output-folder: $(azureresourceschema-folder)/schemas
 
 # all the input files in this apiVersion
 input-file:
-  - Microsoft.DelegatedNetwork/preview/2020-08-08-preview/DelegatedNetwork.json
+  - Microsoft.DelegatedNetwork/preview/2020-08-08-preview/controller.json
+  - Microsoft.DelegatedNetwork/preview/2020-08-08-preview/orchestrators.json
+  - Microsoft.DelegatedNetwork/preview/2020-08-08-preview/delegatedSubnets.json
+  - Microsoft.DelegatedNetwork/preview/2020-08-08-preview/operations.json
 
 ```
