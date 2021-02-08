@@ -19,6 +19,6 @@ output-folder: $(azureresourceschema-folder)/schemas
 
 # all the input files in this apiVersion
 input-file:
-  - Microsoft.ADHybridHealthService\stable\2014-01-01\ADHybridHealthService.json
+  - Microsoft.ADHybridHealthService/stable/2014-01-01/ADHybridHealthService.json
 
 ```

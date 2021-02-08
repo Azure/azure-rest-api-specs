@@ -29,6 +29,13 @@ input-file:
   - Microsoft.EventHub/preview/2018-01-01-preview/quotaConfiguration-preview.json
   - Microsoft.EventHub/preview/2018-01-01-preview/virtualnetworkrules-preview.json
   - Microsoft.EventHub/preview/2018-01-01-preview/networkrulessets-preview.json
+  - Microsoft.EventHub/preview/2018-01-01-preview/AuthorizationRules.json
+  - Microsoft.EventHub/preview/2018-01-01-preview/CheckNameAvailability.json
+  - Microsoft.EventHub/preview/2018-01-01-preview/consumergroups.json
+  - Microsoft.EventHub/preview/2018-01-01-preview/disasterRecoveryConfigs.json
+  - Microsoft.EventHub/preview/2018-01-01-preview/operations.json
+  - Microsoft.EventHub/preview/2018-01-01-preview/eventhubs.json
+  - Microsoft.EventHub/preview/2018-01-01-preview/sku.json
 
 ```
 
