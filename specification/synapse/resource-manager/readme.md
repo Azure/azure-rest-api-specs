@@ -79,6 +79,7 @@ input-file:
 - Microsoft.Synapse/stable/2020-12-01/privatelinkhub.json
 - Microsoft.Synapse/stable/2020-12-01/sqlServer.json
 - Microsoft.Synapse/stable/2020-12-01/keys.json
+- Microsoft.Synapse/stable/2020-12-01/library.json
 ```
 
 ## Suppressions
@@ -167,6 +168,9 @@ directive:
       - $.definitions.IntegrationRuntimeResource.properties.properties
       - $.definitions.IntegrationRuntimeStatusResponse.properties.properties
       - $.definitions.SsisObjectMetadataStatusResponse.properties.properties
+  - suppress: R4009
+    reason: systemData will be in the next API version
+    from: Microsoft.Synapse/stable/2020-12-01/library.json
 ```
 
 ---
