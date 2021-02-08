@@ -2478,6 +2478,73 @@
               "$ref": "machineLearningServices.json#/definitions/MachineLearningServiceError"
             }
           },
+          "200": {
+            "description": "Success"
+          }
+        },
+        "x-ms-examples": {
+          "Resume Labeling Job.": {
+            "$ref": "./examples/LabelingJob/resume.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/labelingJobs/{id}/exportLabels": {
+      "post": {
+        "tags": [
+          "LabelingJob"
+        ],
+        "summary": "Export labels from a labeling job.",
+        "operationId": "LabelingJobs_ExportLabels",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "description": "The name and identifier for the LabelingJob.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/APIVersionParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "The export summary.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ExportSummary"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "machineLearningServices.json#/definitions/MachineLearningServiceError"
+            }
+          },
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ExportSummary"
+            }
+          },
           "202": {
             "description": "Success",
             "headers": {
@@ -2497,8 +2564,8 @@
           }
         },
         "x-ms-examples": {
-          "Resume Labeling Job.": {
-            "$ref": "./examples/LabelingJob/resume.json"
+          "ExportLabels Labeling Job.": {
+            "$ref": "./examples/LabelingJob/exportLabels.json"
           }
         },
         "x-ms-long-running-operation": true,
@@ -5730,6 +5797,139 @@
           "type": "string"
         }
       },
+      "additionalProperties": false
+    },
+    "ExportSummary": {
+      "required": [
+        "format"
+      ],
+      "type": "object",
+      "properties": {
+        "format": {
+          "description": "The format of exported labels, also as the discriminator.",
+          "enum": [
+            "Dataset",
+            "Coco",
+            "CSV"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ExportFormatType",
+            "modelAsString": true
+          },
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "exportId": {
+          "format": "uuid",
+          "description": "The unique identifier of completed Export Labels operation.",
+          "type": "string",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        },
+        "labelingJobId": {
+          "description": "Name and identifier of the job containing exported labels.",
+          "type": "string",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        },
+        "exportedRowCount": {
+          "format": "int64",
+          "description": "The total number of labeled datapoints exported.",
+          "type": "integer",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        },
+        "startTimeUtc": {
+          "format": "date-time",
+          "description": "The time when the export was requested.",
+          "type": "string",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        },
+        "endTimeUtc": {
+          "format": "date-time",
+          "description": "The time when the export was completed.",
+          "type": "string",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        }
+      },
+      "discriminator": "format",
+      "additionalProperties": false
+    },
+    "CocoExportSummary": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/ExportSummary"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "snapshotPath": {
+              "description": "The output path where the labels will be exported.",
+              "type": "string"
+            },
+            "containerName": {
+              "description": "The container name to which the labels will be exported.",
+              "type": "string"
+            }
+          }
+        }
+      ],
+      "x-ms-discriminator-value": "Coco",
+      "additionalProperties": false
+    },
+    "CsvExportSummary": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/ExportSummary"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "snapshotPath": {
+              "description": "The output path where the labels will be exported.",
+              "type": "string"
+            },
+            "containerName": {
+              "description": "The container name to which the labels will be exported.",
+              "type": "string"
+            }
+          }
+        }
+      ],
+      "x-ms-discriminator-value": "CSV",
+      "additionalProperties": false
+    },
+    "DatasetExportSummary": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/ExportSummary"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "labeledAssetName": {
+              "description": "The unique name of the labeled data asset.",
+              "type": "string"
+            }
+          }
+        }
+      ],
+      "x-ms-discriminator-value": "Dataset",
       "additionalProperties": false
     },
     "ModelContainer": {
