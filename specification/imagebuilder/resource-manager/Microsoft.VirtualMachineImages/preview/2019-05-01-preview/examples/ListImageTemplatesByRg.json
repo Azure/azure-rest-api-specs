@@ -38,7 +38,8 @@
                 }
               ],
               "vmProfile": {
-                "vmSize": "Standard_D2s_v3"
+                "vmSize": "Standard_D2s_v3",
+                "osDiskSizeGB": 64
               }
             }
           },
@@ -72,15 +73,13 @@
                 {
                   "type": "SharedImage",
                   "galleryImageId": "/subscriptions/{subscription-id}/resourceGroups/rg1/providers/Microsoft.Compute/gallery/baseimages/images/baseimage",
-                  "replicationRegions": [
-                    "eastus",
-                    "westus"
-                  ],
+                  "replicationRegions":[ "eastus", "westus"],
                   "runOutputName": "gallery"
                 }
               ],
               "vmProfile": {
-                "vmSize": "Standard_D8s_v3"
+                "vmSize": "Standard_D8s_v3",
+                "osDiskSizeGB": 64
               }
             }
           }

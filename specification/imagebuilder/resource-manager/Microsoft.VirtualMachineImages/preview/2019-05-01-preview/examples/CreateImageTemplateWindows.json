@@ -2,7 +2,7 @@
   "parameters": {
     "subscriptionId": "{subscription-id}",
     "resourceGroupName": "myResourceGroup",
-    "api-version": "2019-05-01-preview",
+    "api-version": "2020-02-14",
     "imageTemplateName": "myImageTemplate",
     "parameters": {
       "location": "westus",
@@ -17,9 +17,35 @@
         },
         "customize": [
           {
-            "type": "Shell",
-            "name": "Shell Customizer Example",
-            "scriptUri": "https://example.com/path/to/script.sh"
+            "type": "PowerShell",
+            "name": "PowerShell (inline) Customizer Example",
+            "inline": [
+              "Powershell command-1",
+              "Powershell command-2",
+              "Powershell command-3"
+            ]
+          },
+          {
+            "type": "PowerShell",
+            "name": "PowerShell (script) Customizer Example",
+            "scriptUri": "https://example.com/path/to/script.ps1",
+            "validExitCodes":[0, 1]
+          },
+          {
+            "type": "WindowsRestart",
+            "name": "Restart Customizer Example",
+            "restartCommand": "shutdown /f /r /t 0 /c \"packer restart\"",
+            "restartCheckCommand": "powershell -command \"& {Write-Output 'restarted.'}\"",
+            "restartTimeout": "10m"
+          },
+          {
+            "type": "WindowsUpdate",
+            "name": "Windows Update Customizer Example",
+            "searchCriteria":"BrowseOnly=0 and IsInstalled=0",
+            "filters":[
+              "$_.BrowseOnly"
+           ],
+           "updateLimit": 100
           }
         ],
         "distribute": [
@@ -34,7 +60,13 @@
           }
         ],
         "vmProfile": {
-          "vmSize": "Standard_D2s_v3"
+          "vmSize": "Standard_D2s_v3",
+          "osDiskSizeGB": 64,
+          "vnetConfig": {
+            "name": "myVnetName",
+            "subnetName": "mySubnetName",
+            "resourceGroupName":"myResourceGroupName"
+          }
         }
       }
     }
@@ -70,7 +102,13 @@
             }
           ],
           "vmProfile": {
-            "vmSize": "Standard_D2s_v3"
+            "vmSize": "Standard_D2s_v3",
+            "osDiskSizeGB": 64,
+            "vnetConfig": {
+              "name": "myVnetName",
+              "subnetName": "mySubnetName",
+              "resourceGroupName":"myResourceGroupName"
+            }
           }
         }
       }
@@ -105,7 +143,8 @@
             }
           ],
           "vmProfile": {
-            "vmSize": "Standard_D2s_v3"
+            "vmSize": "Standard_D2s_v3",
+            "osDiskSizeGB": 64
           }
         }
       }
