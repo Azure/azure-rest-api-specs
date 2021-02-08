@@ -1,14 +1,14 @@
-# Security Center
+# Advisor
 
 > see https://aka.ms/autorest
 
-This is the AutoRest configuration file for Security.
+This is the AutoRest configuration file for Advisor.
 
 ---
 
 ## Getting Started
 
-To build the SDK for Security, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
+To build the SDK for Advisor, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
 
@@ -20,426 +20,59 @@ To see additional help and options, run:
 
 ## Configuration
 
-## Suppression
-
-``` yaml
-directive:
-  - suppress: ValidFormats
-    from: securityContacts.json
-    where: $.definitions.SecurityContactProperties.properties.email.format
-    reason: email format is allowed
-  - suppress: ValidFormats
-    from: automations.json
-    where: $.definitions.AutomationActionLogicApp.properties.uri.format
-    reason: uri format is allowed
-  - suppress: PageableOperation
-    from: iotSecuritySolutionAnalytics.json
-    where: '$.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/iotSecuritySolutions/{solutionName}/analyticsModels"].get'
-    reason: The list returns limited number of items
-  - suppress: PageableOperation
-    from: alertTypes.json
-    where: '$.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/iotSecuritySolutions/{solutionName}/alertTypes"].get'
-    reason: The list returns limited number of items
-  - suppress: PageableOperation
-    from: recommendationTypes.json
-    where: '$.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/iotSecuritySolutions/{solutionName}/recommendationTypes"].get'
-    reason: The list returns limited number of items
-  - suppress: PageableOperation
-    from: iotDefenderSettings.json
-    where: '$.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Security/iotDefenderSettings"].get'
-    reason: The list returns limited number of items
-  - suppress: PageableOperation
-    from: iotSensors.json
-    where: '$.paths["/{scope}/providers/Microsoft.Security/iotSensors/{iotSensorName}"].get'
-    reason: The list returns limited number of items
-  - suppress: PageableOperation
-    from: onPremiseIotSensors.json
-    where: '$.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Security/onPremiseIotSensors"].get'
-    reason: The list returns limited number of items
-  - suppress: TopLevelResourcesListByResourceGroup
-    from: onPremiseIotSensors.json
-    where: $.definitions.OnPremiseIotSensor
-    reason: The resource is managed in a subscription level (instead of inside a resource group)
-```
-
 ### Basic Information
 
-These are the global settings for the Security API.
+These are the global settings for the Advisor API.
 
 ``` yaml
-title: SecurityCenter
-description: API spec for Microsoft.Security (Azure Security Center) resource provider
 openapi-type: arm
-tag: package-composite-v3
+tag: package-2020-01
 ```
 
-## Composite packages
+### Tag: package-2020-07-preview
 
-The following packages may be composed from multiple api-versions.
+These settings apply only when `--tag=package-2020-07-preview` is specified on the command line.
 
-
-### Tag: package-composite-v1
-
-These settings apply only when `--tag=package-composite-v1` is specified on the command line.
-
-``` yaml $(tag) == 'package-composite-v1'
+```yaml $(tag) == 'package-2020-07-preview'
 input-file:
-- Microsoft.Security/preview/2020-07-01-preview/sqlVulnerabilityAssessmentsScanOperations.json
-- Microsoft.Security/preview/2020-07-01-preview/sqlVulnerabilityAssessmentsScanResultsOperations.json
-- Microsoft.Security/preview/2020-07-01-preview/sqlVulnerabilityAssessmentsBaselineRuleOperations.json
-- Microsoft.Security/preview/2020-01-01-preview/secureScore.json
-- Microsoft.Security/preview/2020-01-01-preview/connectors.json
-- Microsoft.Security/preview/2019-01-01-preview/automations.json
-- Microsoft.Security/preview/2019-01-01-preview/subAssessments.json
-- Microsoft.Security/preview/2019-01-01-preview/regulatoryCompliance.json
-- Microsoft.Security/preview/2017-08-01-preview/pricings.json
-- Microsoft.Security/preview/2017-08-01-preview/securityContacts.json
-- Microsoft.Security/preview/2017-08-01-preview/workspaceSettings.json
-- Microsoft.Security/preview/2017-08-01-preview/autoProvisioningSettings.json
-- Microsoft.Security/preview/2017-08-01-preview/compliances.json
-- Microsoft.Security/preview/2017-08-01-preview/advancedThreatProtectionSettings.json
-- Microsoft.Security/preview/2017-08-01-preview/deviceSecurityGroups.json
-- Microsoft.Security/preview/2017-08-01-preview/settings.json
-- Microsoft.Security/preview/2017-08-01-preview/informationProtectionPolicies.json
-- Microsoft.Security/preview/2015-06-01-preview/operations.json
-- Microsoft.Security/preview/2015-06-01-preview/locations.json
-- Microsoft.Security/preview/2015-06-01-preview/tasks.json
-- Microsoft.Security/preview/2015-06-01-preview/alerts.json
-- Microsoft.Security/preview/2015-06-01-preview/discoveredSecuritySolutions.json
-- Microsoft.Security/preview/2015-06-01-preview/jitNetworkAccessPolicies.json
-- Microsoft.Security/preview/2015-06-01-preview/applicationWhitelistings.json
-- Microsoft.Security/preview/2015-06-01-preview/externalSecuritySolutions.json
-- Microsoft.Security/preview/2015-06-01-preview/topologies.json
-- Microsoft.Security/preview/2015-06-01-preview/allowedConnections.json
-- Microsoft.Security/preview/2015-06-01-preview/adaptiveNetworkHardenings.json
-- Microsoft.Security/preview/2019-01-01-preview/alertsSuppressionRules.json
-
-# Needed when there is more than one input file
-override-info:
-  title: SecurityCenter
+  - Microsoft.Advisor/preview/2020-07-01-preview/advisor.json
 ```
 
-### Tag: package-composite-v2
+### Tag: package-2020-01
 
-These settings apply only when `--tag=package-composite-v2` is specified on the command line.
+These settings apply only when `--tag=package-2020-01` is specified on the command line.
 
-``` yaml $(tag) == 'package-composite-v2'
+```yaml $(tag) == 'package-2020-01'
 input-file:
-- Microsoft.Security/preview/2020-07-01-preview/sqlVulnerabilityAssessmentsScanOperations.json
-- Microsoft.Security/preview/2020-07-01-preview/sqlVulnerabilityAssessmentsScanResultsOperations.json
-- Microsoft.Security/preview/2020-07-01-preview/sqlVulnerabilityAssessmentsBaselineRuleOperations.json
-- Microsoft.Security/preview/2020-01-01-preview/secureScore.json
-- Microsoft.Security/preview/2020-01-01-preview/connectors.json
-- Microsoft.Security/preview/2019-01-01-preview/automations.json
-- Microsoft.Security/preview/2019-01-01-preview/subAssessments.json
-- Microsoft.Security/preview/2019-01-01-preview/regulatoryCompliance.json
-- Microsoft.Security/stable/2018-06-01/pricings.json
-- Microsoft.Security/preview/2017-08-01-preview/securityContacts.json
-- Microsoft.Security/preview/2017-08-01-preview/workspaceSettings.json
-- Microsoft.Security/preview/2017-08-01-preview/autoProvisioningSettings.json
-- Microsoft.Security/preview/2017-08-01-preview/compliances.json
-- Microsoft.Security/preview/2017-08-01-preview/advancedThreatProtectionSettings.json
-- Microsoft.Security/preview/2017-08-01-preview/deviceSecurityGroups.json
-- Microsoft.Security/preview/2017-08-01-preview/settings.json
-- Microsoft.Security/preview/2017-08-01-preview/informationProtectionPolicies.json
-- Microsoft.Security/preview/2017-08-01-preview/iotSecuritySolutions.json
-- Microsoft.Security/preview/2017-08-01-preview/iotSecuritySolutionAnalytics.json
-- Microsoft.Security/preview/2015-06-01-preview/operations.json
-- Microsoft.Security/preview/2015-06-01-preview/locations.json
-- Microsoft.Security/preview/2015-06-01-preview/tasks.json
-- Microsoft.Security/stable/2019-01-01/alerts.json
-- Microsoft.Security/preview/2015-06-01-preview/discoveredSecuritySolutions.json
-- Microsoft.Security/preview/2015-06-01-preview/jitNetworkAccessPolicies.json
-- Microsoft.Security/preview/2015-06-01-preview/applicationWhitelistings.json
-- Microsoft.Security/preview/2015-06-01-preview/externalSecuritySolutions.json
-- Microsoft.Security/preview/2015-06-01-preview/topologies.json
-- Microsoft.Security/preview/2015-06-01-preview/allowedConnections.json
-- Microsoft.Security/preview/2015-06-01-preview/adaptiveNetworkHardenings.json
-- Microsoft.Security/preview/2019-01-01-preview/alertsSuppressionRules.json
+  - Microsoft.Advisor/stable/2020-01-01/advisor.json
+```
+### Tag: package-2017-04
 
-# Needed when there is more than one input file
-override-info:
-  title: SecurityCenter
+These settings apply only when `--tag=package-2017-04` is specified on the command line.
+
+``` yaml $(tag) == 'package-2017-04'
+input-file:
+- Microsoft.Advisor/stable/2017-04-19/advisor.json
 ```
 
-### Tag: package-composite-v3
+### Tag: package-2017-03
 
-These settings apply only when `--tag=package-composite-v3` is specified on the command line.
+These settings apply only when `--tag=package-2017-03` is specified on the command line.
 
-``` yaml $(tag) == 'package-composite-v3'
+``` yaml $(tag) == 'package-2017-03'
 input-file:
-- Microsoft.Security/stable/2017-08-01/complianceResults.json
-- Microsoft.Security/stable/2018-06-01/pricings.json
-- Microsoft.Security/stable/2019-01-01/settings.json
-- Microsoft.Security/stable/2019-01-01/advancedThreatProtectionSettings.json
-- Microsoft.Security/stable/2019-08-01/deviceSecurityGroups.json
-- Microsoft.Security/stable/2019-08-01/iotSecuritySolutions.json
-- Microsoft.Security/stable/2019-08-01/iotSecuritySolutionAnalytics.json
-- Microsoft.Security/stable/2019-08-01/iotAlertTypes.json
-- Microsoft.Security/stable/2019-08-01/iotAlerts.json
-- Microsoft.Security/stable/2019-08-01/iotRecommendationTypes.json
-- Microsoft.Security/stable/2019-08-01/iotRecommendations.json
-- Microsoft.Security/preview/2015-06-01-preview/locations.json
-- Microsoft.Security/preview/2015-06-01-preview/operations.json
-- Microsoft.Security/preview/2015-06-01-preview/tasks.json
-- Microsoft.Security/preview/2017-08-01-preview/autoProvisioningSettings.json
-- Microsoft.Security/preview/2017-08-01-preview/compliances.json
-- Microsoft.Security/preview/2017-08-01-preview/informationProtectionPolicies.json
-- Microsoft.Security/preview/2017-08-01-preview/securityContacts.json
-- Microsoft.Security/preview/2017-08-01-preview/workspaceSettings.json
-- Microsoft.Security/preview/2019-01-01-preview/regulatoryCompliance.json
-- Microsoft.Security/preview/2019-01-01-preview/subAssessments.json
-- Microsoft.Security/preview/2019-01-01-preview/automations.json
-- Microsoft.Security/preview/2019-01-01-preview/alertsSuppressionRules.json
-- Microsoft.Security/stable/2020-01-01/serverVulnerabilityAssessments.json
-- Microsoft.Security/stable/2020-01-01/assessmentMetadata.json
-- Microsoft.Security/stable/2020-01-01/assessments.json
-- Microsoft.Security/stable/2020-01-01/applicationWhitelistings.json
-- Microsoft.Security/stable/2020-01-01/adaptiveNetworkHardenings.json
-- Microsoft.Security/stable/2020-01-01/allowedConnections.json
-- Microsoft.Security/stable/2020-01-01/topologies.json
-- Microsoft.Security/stable/2020-01-01/jitNetworkAccessPolicies.json
-- Microsoft.Security/stable/2020-01-01/discoveredSecuritySolutions.json
-- Microsoft.Security/stable/2020-01-01/securitySolutionsReferenceData.json
-- Microsoft.Security/stable/2020-01-01/externalSecuritySolutions.json
-- Microsoft.Security/stable/2020-01-01/secureScore.json
-- Microsoft.Security/stable/2020-01-01/SecuritySolutions.json
-- Microsoft.Security/preview/2020-01-01-preview/connectors.json
-- Microsoft.Security/preview/2020-07-01-preview/sqlVulnerabilityAssessmentsScanOperations.json
-- Microsoft.Security/preview/2020-07-01-preview/sqlVulnerabilityAssessmentsScanResultsOperations.json
-- Microsoft.Security/preview/2020-07-01-preview/sqlVulnerabilityAssessmentsBaselineRuleOperations.json
-- Microsoft.Security/preview/2020-08-06-preview/iotDefenderSettings.json
-- Microsoft.Security/preview/2020-08-06-preview/iotSensors.json
-- Microsoft.Security/preview/2020-08-06-preview/devices.json
-- Microsoft.Security/preview/2020-08-06-preview/onPremiseIotSensors.json
-- Microsoft.Security/preview/2020-08-06-preview/iotSites.json
-- Microsoft.Security/preview/2020-08-06-preview/iotAlerts.json
-- Microsoft.Security/preview/2020-08-06-preview/iotAlertTypes.json
-- Microsoft.Security/preview/2020-08-06-preview/iotRecommendations.json
-- Microsoft.Security/preview/2020-08-06-preview/iotRecommendationTypes.json
-- Microsoft.Security/stable/2021-01-01/alerts.json
-
-# Needed when there is more than one input file
-override-info:
-  title: SecurityCenter
+- Microsoft.Advisor/stable/2017-03-31/advisor.json
 ```
 
-### Tag: package-2015-06-preview-only
+### Tag: package-2016-07-preview
 
-These settings apply only when `--tag=package-2015-06-preview-only` is specified on the command line. This tag is used for Ruby SDK.
+These settings apply only when `--tag=package-2016-07-preview` is specified on the command line.
 
-``` yaml $(tag) == 'package-2015-06-preview-only'
+``` yaml $(tag) == 'package-2016-07-preview'
 input-file:
-- Microsoft.Security/preview/2015-06-01-preview/adaptiveNetworkHardenings.json
-- Microsoft.Security/preview/2015-06-01-preview/alerts.json
-- Microsoft.Security/preview/2015-06-01-preview/allowedConnections.json
-- Microsoft.Security/preview/2015-06-01-preview/applicationWhitelistings.json
-- Microsoft.Security/preview/2015-06-01-preview/discoveredSecuritySolutions.json
-- Microsoft.Security/preview/2015-06-01-preview/externalSecuritySolutions.json
-- Microsoft.Security/preview/2015-06-01-preview/jitNetworkAccessPolicies.json
-- Microsoft.Security/preview/2015-06-01-preview/locations.json
-- Microsoft.Security/preview/2015-06-01-preview/operations.json
-- Microsoft.Security/preview/2015-06-01-preview/tasks.json
-- Microsoft.Security/preview/2015-06-01-preview/topologies.json
-
-# Needed when there is more than one input file
-override-info:
-  title: SecurityCenter
+- Microsoft.Advisor/preview/2016-07-12-preview/advisor.json
 ```
 
-### Tag: package-2017-08-preview-only
-
-These settings apply only when `--tag=package-2017-08-preview-only` is specified on the command line. This tag is used for Ruby SDK.
-
-``` yaml $(tag) == 'package-2017-08-preview-only'
-input-file:
-- Microsoft.Security/preview/2017-08-01-preview/advancedThreatProtectionSettings.json
-- Microsoft.Security/preview/2017-08-01-preview/autoProvisioningSettings.json
-- Microsoft.Security/preview/2017-08-01-preview/compliances.json
-- Microsoft.Security/preview/2017-08-01-preview/deviceSecurityGroups.json
-- Microsoft.Security/preview/2017-08-01-preview/informationProtectionPolicies.json
-- Microsoft.Security/preview/2017-08-01-preview/iotSecuritySolutionAnalytics.json
-- Microsoft.Security/preview/2017-08-01-preview/iotSecuritySolutions.json
-- Microsoft.Security/preview/2017-08-01-preview/pricings.json
-- Microsoft.Security/preview/2017-08-01-preview/securityContacts.json
-- Microsoft.Security/preview/2017-08-01-preview/settings.json
-- Microsoft.Security/preview/2017-08-01-preview/workspaceSettings.json
-
-# Needed when there is more than one input file
-override-info:
-  title: SecurityCenter
-```
-
-### Tag: package-2019-01-preview-only
-
-These settings apply only when `--tag=package-2019-01-preview-only` is specified on the command line. This tag is used for Ruby SDK.
-
-``` yaml $(tag) == 'package-2019-01-preview-only'
-input-file:
-- Microsoft.Security/preview/2019-01-01-preview/regulatoryCompliance.json
-- Microsoft.Security/preview/2019-01-01-preview/alertsSuppressionRules.json
-- Microsoft.Security/preview/2019-01-01-preview/assessmentMetadata.json
-- Microsoft.Security/preview/2019-01-01-preview/assessments.json
-
-# Needed when there is more than one input file
-override-info:
-  title: SecurityCenter
-```
-
-### Tag: package-2020-01-preview-only
-
-These settings apply only when `--tag=package-2020-01-preview-only` is specified on the command line. This tag is used for Ruby SDK.
-
-``` yaml $(tag) == 'package-2020-01-preview-only'
-input-file:
-- Microsoft.Security/preview/2020-01-01-preview/secureScore.json
-- Microsoft.Security/preview/2020-01-01-preview/connectors.json
-
-# Needed when there is more than one input file
-override-info:
-  title: SecurityCenter
-```
-
-### Tag: package-2017-08-only
-
-These settings apply only when `--tag=package-2017-08-only` is specified on the command line. This tag is used for Ruby SDK.
-
-``` yaml $(tag) == 'package-2017-08-only'
-input-file:
-- Microsoft.Security/stable/2017-08-01/complianceResults.json
-
-# Needed when there is more than one input file
-override-info:
-  title: SecurityCenter
-```
-
-### Tag: package-2018-06-only
-
-These settings apply only when `--tag=package-2018-06-only` is specified on the command line. This tag is used for Ruby SDK.
-
-``` yaml $(tag) == 'package-2018-06-only'
-input-file:
-- Microsoft.Security/stable/2018-06-01/pricings.json
-
-# Needed when there is more than one input file
-override-info:
-  title: SecurityCenter
-```
-
-### Tag: package-2019-01-only
-
-These settings apply only when `--tag=package-2019-01-only` is specified on the command line. This tag is used for Ruby SDK.
-
-``` yaml $(tag) == 'package-2019-01-only'
-input-file:
-- Microsoft.Security/stable/2019-01-01/alerts.json
-- Microsoft.Security/stable/2019-01-01/settings.json
-
-# Needed when there is more than one input file
-override-info:
-  title: SecurityCenter
-```
-
-### Tag: package-2019-08-only
-
-These settings apply only when `--tag=package-2019-08-only` is specified on the command line. This tag is used for Ruby SDK.
-
-``` yaml $(tag) == 'package-2019-08-only'
-input-file:
-- Microsoft.Security/stable/2019-08-01/iotSecuritySolutionAnalytics.json
-- Microsoft.Security/stable/2019-08-01/iotSecuritySolutions.json
-- Microsoft.Security/stable/2019-08-01/iotAlertTypes.json
-- Microsoft.Security/stable/2019-08-01/iotAlerts.json
-- Microsoft.Security/stable/2019-08-01/iotRecommendationTypes.json
-- Microsoft.Security/stable/2019-08-01/iotRecommendations.json
-
-# Needed when there is more than one input file
-override-info:
-  title: SecurityCenter
-```
-
-### Tag: package-2020-01-preview-only
-
-These settings apply only when `--tag=package-2020-01-preview-only` is specified on the command line. This tag is used for Ruby SDK.
-
-``` yaml $(tag) == 'package-package-2020-01-preview-only'
-input-file:
-- Microsoft.Security/preview/2020-01-01-preview/secureScore.json
-
-# Needed when there is more than one input file
-override-info:
-  title: SecurityCenter
-```
-
-### Tag: package-2020-01-only
-
-These settings apply only when `--tag=package-2020-01-only` is specified on the command line. This tag is used for Ruby SDK.
-
-``` yaml $(tag) == 'package-2020-01-only'
-input-file:
-- Microsoft.Security/stable/2020-01-01/adaptiveNetworkHardenings.json
-- Microsoft.Security/stable/2020-01-01/allowedConnections.json
-- Microsoft.Security/stable/2020-01-01/applicationWhitelistings.json
-- Microsoft.Security/stable/2020-01-01/assessmentMetadata.json
-- Microsoft.Security/stable/2020-01-01/assessments.json
-- Microsoft.Security/stable/2020-01-01/discoveredSecuritySolutions.json
-- Microsoft.Security/stable/2020-01-01/SecuritySolutions.json
-- Microsoft.Security/stable/2020-01-01/securitySolutionsReferenceData.json
-- Microsoft.Security/stable/2020-01-01/externalSecuritySolutions.json
-- Microsoft.Security/stable/2020-01-01/jitNetworkAccessPolicies.json
-- Microsoft.Security/stable/2020-01-01/serverVulnerabilityAssessments.json
-- Microsoft.Security/stable/2020-01-01/topologies.json
-- Microsoft.Security/stable/2020-01-01/alerts.json
-- Microsoft.Security/stable/2020-01-01/secureScore.json
-
-# Needed when there is more than one input file
-override-info:
-  title: SecurityCenter
-```
-
-### Tag: package-2020-07-preview-only
-
-These settings apply only when `--tag=package-2020-07-preview-only` is specified on the command line. This tag is used for Ruby SDK.
-
-``` yaml $(tag) == 'package-2020-07-preview-only'
-input-file:
-- Microsoft.Security/preview/2020-07-01-preview/sqlVulnerabilityAssessmentsScanOperations.json
-- Microsoft.Security/preview/2020-07-01-preview/sqlVulnerabilityAssessmentsScanResultsOperations.json
-- Microsoft.Security/preview/2020-07-01-preview/sqlVulnerabilityAssessmentsBaselineRuleOperations.json
-
-# Needed when there is more than one input file
-override-info:
-  title: SecurityCenter
-```
-
-### Tag: package-2020-08-preview-only
-
-These settings apply only when `--tag=package-2020-08-preview-only` is specified on the command line. This tag is used for Ruby SDK.
-
-``` yaml $(tag) == 'package-2020-08-preview-only'
-input-file:
-- Microsoft.Security/preview/2020-08-06-preview/iotDefenderSettings.json
-- Microsoft.Security/preview/2020-08-06-preview/iotSensors.json
-- Microsoft.Security/preview/2020-08-06-preview/devices.json
-- Microsoft.Security/preview/2020-08-06-preview/onPremiseIotSensors.json
-- Microsoft.Security/preview/2020-08-06-preview/iotSites.json
-- Microsoft.Security/preview/2020-08-06-preview/iotAlerts.json
-- Microsoft.Security/preview/2020-08-06-preview/iotAlertTypes.json
-- Microsoft.Security/preview/2020-08-06-preview/iotRecommendations.json
-- Microsoft.Security/preview/2020-08-06-preview/iotRecommendationTypes.json
-
-# Needed when there is more than one input file
-override-info:
-  title: SecurityCenter
-```
-
-### Tag: package-2021-01-only
-
-These settings apply only when `--tag=package-2021-01-only` is specified on the command line. This tag is used for Ruby SDK.
-
-``` yaml $(tag) == 'package-2021-01-only'
-input-file:
-- Microsoft.Security/stable/2021-01-01/alerts.json
 ---
 
 # Code Generation
@@ -452,40 +85,83 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-net
-  - repo: azure-sdk-for-go
   - repo: azure-sdk-for-python
+  - repo: azure-sdk-for-java
+  - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
   - repo: azure-resource-manager-schemas
     after_scripts:
-      - node sdkauto_afterscript.js security/resource-manager
+      - node sdkauto_afterscript.js advisor/resource-manager
 ```
 
-## C#
+## Python
 
-See configuration in [readme.csharp.md](./readme.csharp.md)
+These settings apply only when `--python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
+Use `--python-mode=update` if you already have a setup.py and just want to update the code itself.
+
+``` yaml $(python) && !$(track2)
+python-mode: create
+python:
+  azure-arm: true
+  license-header: MICROSOFT_MIT_NO_VERSION
+  payload-flattening-threshold: 2
+  namespace: azure.mgmt.advisor
+  package-name: azure-mgmt-advisor
+  package-version: 1.0.1
+  clear-output-folder: true
+```
+
+``` yaml $(python) && $(track2)
+python-mode: create
+azure-arm: true
+license-header: MICROSOFT_MIT_NO_VERSION
+namespace: azure.mgmt.advisor
+package-name: azure-mgmt-advisor
+package-version: 9.0.0b1
+clear-output-folder: true
+```
+
+``` yaml $(python) && $(python-mode) == 'update'
+no-namespace-folders: true
+output-folder: $(python-sdks-folder)/advisor/azure-mgmt-advisor/azure/mgmt/advisor
+python:
+  no-namespace-folders: true
+  output-folder: $(python-sdks-folder)/advisor/azure-mgmt-advisor/azure/mgmt/advisor
+```
+
+``` yaml $(python) && $(python-mode) == 'create'
+basic-setup-py: true
+output-folder: $(python-sdks-folder)/advisor/azure-mgmt-advisor
+python:
+  basic-setup-py: true
+  output-folder: $(python-sdks-folder)/advisor/azure-mgmt-advisor
+```
 
 ## Go
 
 See configuration in [readme.go.md](./readme.go.md)
 
-## Python
+## C#
 
-See configuration in [readme.python.md](./readme.python.md)
+These settings apply only when `--csharp` is specified on the command line.
+Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azure-sdk-for-net clone>`.
 
-## Node.js
+``` yaml $(csharp)
+csharp:
+  azure-arm: true
+  payload-flattening-threshold: 1
+  license-header: MICROSOFT_MIT_NO_VERSION
+  namespace: Microsoft.Azure.Management.Advisor
+  output-folder: $(csharp-sdks-folder)/advisor/Microsoft.Azure.Management.Advisor/src/Generated
+  clear-output-folder: true
+```
 
-See configuration in [readme.nodejs.md](./readme.nodejs.md)
+## Java
 
-## TypeScript
-
-See configuration in [readme.typescript.md](./readme.typescript.md)
-
-## Ruby
-
-See configuration in [readme.ruby.md](./readme.ruby.md)
+See configuration in [readme.java.md](./readme.java.md)
 
 ## AzureResourceSchema
 
 See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
-
