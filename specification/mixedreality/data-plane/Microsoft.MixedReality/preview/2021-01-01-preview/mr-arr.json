@@ -54,7 +54,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Ok. A new conversion was created. A status code of 200 indicates that there was already a conversion with the same settings present. This is expected when a conversion creation is retried.",
+            "description": "OK. Indicates that there was already a conversion with the same settings present. This is expected when a conversion creation is retried.",
             "headers": {
               "MS-CV": {
                 "description": "Microsoft Correlation Vector. Include this value when reporting issues.",
@@ -91,7 +91,7 @@
             }
           },
           "401": {
-            "description": "Unauthorized",
+            "description": "Unauthorized. Missing or invalid authorization.",
             "x-ms-error-response": true,
             "headers": {
               "MS-CV": {
@@ -105,7 +105,7 @@
             }
           },
           "403": {
-            "description": "Forbidden",
+            "description": "Forbidden. Authorization insufficient for given resource.",
             "x-ms-error-response": true,
             "headers": {
               "MS-CV": {
@@ -128,7 +128,7 @@
             }
           },
           "429": {
-            "description": "Too Many Requests. In case the rate limit has been exceeded. Retry the request after the duration given in the Retry-After header.",
+            "description": "Too Many Requests. The rate limit has been exceeded. Retry the request after the duration given in the Retry-After header.",
             "x-ms-error-response": true,
             "headers": {
               "MS-CV": {
@@ -142,7 +142,7 @@
             }
           },
           "500": {
-            "description": "Internal server error",
+            "description": "InternalError. Server has encountered internal error. Retrying the request may produce successful results.",
             "x-ms-error-response": true,
             "schema": {
               "$ref": "#/definitions/error_response"
@@ -152,7 +152,6 @@
         "tags": [
           "conversion"
         ],
-        "description": "Creates a conversion using an asset stored in an Azure Blob Storage account.\nIf the remote rendering account has been linked with the storage account no Shared Access Signatures (storageContainerReadListSas, storageContainerWriteSas) for storage access need to be provided.\nDocumentation how to link your Azure Remote Rendering account with the Azure Blob Storage account can be found in the [documentation](https://docs.microsoft.com/azure/remote-rendering/how-tos/create-an-account#link-storage-accounts).\n  \nAll files in the input container starting with the blobPrefix will be retrieved to perform the conversion. To cut down on conversion times only necessary files should be available under the blobPrefix.\n",
         "summary": "Creates a conversion using an asset stored in an Azure Blob Storage account."
       },
       "get": {
@@ -178,7 +177,7 @@
         },
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "OK.",
             "headers": {
               "MS-CV": {
                 "description": "Microsoft Correlation Vector. Include this value when reporting issues.",
@@ -194,7 +193,7 @@
             }
           },
           "401": {
-            "description": "Unauthorized",
+            "description": "Unauthorized. Missing or invalid authorization.",
             "x-ms-error-response": true,
             "headers": {
               "MS-CV": {
@@ -208,7 +207,7 @@
             }
           },
           "403": {
-            "description": "Forbidden",
+            "description": "Forbidden. Authorization insufficient for given resource.",
             "x-ms-error-response": true,
             "headers": {
               "MS-CV": {
@@ -218,7 +217,7 @@
             }
           },
           "404": {
-            "description": "Not found. No conversion with the provided conversion id exists",
+            "description": "Not found. No conversion with the provided conversion ID exists.",
             "x-ms-error-response": true,
             "headers": {
               "MS-CV": {
@@ -228,7 +227,7 @@
             }
           },
           "429": {
-            "description": "In case the rate limit has been exceeded.",
+            "description": "Too Many Requests. The rate limit has been exceeded. Retry the request after the duration given in the Retry-After header.",
             "x-ms-error-response": true,
             "headers": {
               "MS-CV": {
@@ -242,7 +241,7 @@
             }
           },
           "500": {
-            "description": "InternalError",
+            "description": "InternalError. Server has encountered internal error. Retrying the request may produce successful results.",
             "x-ms-error-response": true,
             "headers": {
               "MS-CV": {
@@ -258,7 +257,7 @@
         "tags": [
           "conversion"
         ],
-        "summary": "Gets the status of a previously created asset conversion"
+        "summary": "Gets the status of a particular conversion."
       }
     },
     "/accounts/{account_id}/conversions": {
@@ -282,7 +281,7 @@
         },
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "OK.",
             "headers": {
               "MS-CV": {
                 "description": "Microsoft Correlation Vector. Include this value when reporting issues.",
@@ -294,7 +293,7 @@
             }
           },
           "401": {
-            "description": "Unauthorized",
+            "description": "Unauthorized. Missing or invalid authorization.",
             "x-ms-error-response": true,
             "headers": {
               "MS-CV": {
@@ -308,7 +307,7 @@
             }
           },
           "403": {
-            "description": "Forbidden",
+            "description": "Forbidden. Authorization insufficient for given resource.",
             "x-ms-error-response": true,
             "headers": {
               "MS-CV": {
@@ -318,7 +317,7 @@
             }
           },
           "429": {
-            "description": "In case the rate limit has been exceeded.",
+            "description": "Too Many Requests. The rate limit has been exceeded. Retry the request after the duration given in the Retry-After header.",
             "x-ms-error-response": true,
             "headers": {
               "MS-CV": {
@@ -332,7 +331,7 @@
             }
           },
           "500": {
-            "description": "InternalError",
+            "description": "InternalError. Server has encountered internal error. Retrying the request may produce successful results.",
             "x-ms-error-response": true,
             "headers": {
               "MS-CV": {
@@ -352,7 +351,7 @@
         "tags": [
           "conversion"
         ],
-        "summary": "Gets a list of all conversions. Returns a batch of conversions- if more conversions are available the @nextLink property contains the a URL where the next batch of conversions can be requested. This URL will need the same authentication as all calls to the Azure Remote Rendering API."
+        "summary": "Gets a list of all conversions."
       }
     },
     "/accounts/{account_id}/sessions/{session_id}": {
@@ -375,7 +374,7 @@
             "$ref": "#/parameters/session_id"
           },
           {
-            "description": "Settings of the session to be created",
+            "description": "Settings of the session to be created.",
             "in": "body",
             "name": "body",
             "required": true,
@@ -391,7 +390,7 @@
         },
         "responses": {
           "200": {
-            "description": "Ok. The session was created successfully. A status code of 200 indicates that there was already a session with the same settings present. This is expected when session creation is retried.",
+            "description": "OK. Indicates that there was already a session with the same settings present. This is expected when session creation is retried.",
             "schema": {
               "$ref": "#/definitions/session_properties"
             }
@@ -409,7 +408,7 @@
             }
           },
           "400": {
-            "description": "BadRequest",
+            "description": "BadRequest.",
             "x-ms-error-response": true,
             "headers": {
               "MS-CV": {
@@ -422,7 +421,7 @@
             }
           },
           "401": {
-            "description": "Unauthorized",
+            "description": "Unauthorized. Missing or invalid authorization.",
             "x-ms-error-response": true,
             "headers": {
               "MS-CV": {
@@ -436,7 +435,7 @@
             }
           },
           "403": {
-            "description": "Forbidden",
+            "description": "Forbidden. Authorization insufficient for given resource.",
             "x-ms-error-response": true,
             "headers": {
               "MS-CV": {
@@ -453,7 +452,7 @@
             }
           },
           "429": {
-            "description": "In case the rate limit has been exceeded.",
+            "description": "Too Many Requests. The rate limit has been exceeded. Retry the request after the duration given in the Retry-After header.",
             "x-ms-error-response": true,
             "headers": {
               "MS-CV": {
@@ -467,7 +466,7 @@
             }
           },
           "500": {
-            "description": "InternalError",
+            "description": "InternalError. Server has encountered internal error. Retrying the request may produce successful results.",
             "x-ms-error-response": true,
             "headers": {
               "MS-CV": {
@@ -483,7 +482,7 @@
         "tags": [
           "rendering session"
         ],
-        "summary": "Creates a new rendering session"
+        "summary": "Creates a new rendering session."
       },
       "get": {
         "operationId": "GetSession",
@@ -508,13 +507,13 @@
         },
         "responses": {
           "200": {
-            "description": "OK - returns a session properties object",
+            "description": "OK.",
             "schema": {
               "$ref": "#/definitions/session_properties"
             }
           },
           "401": {
-            "description": "Unauthorized",
+            "description": "Unauthorized. Missing or invalid authorization.",
             "x-ms-error-response": true,
             "headers": {
               "MS-CV": {
@@ -528,7 +527,7 @@
             }
           },
           "403": {
-            "description": "Forbidden",
+            "description": "Forbidden. Authorization insufficient for given resource.",
             "x-ms-error-response": true,
             "headers": {
               "MS-CV": {
@@ -538,7 +537,7 @@
             }
           },
           "404": {
-            "description": "The specified resource was not found.",
+            "description": "Not found. No session with the provided session ID exists.",
             "x-ms-error-response": true,
             "headers": {
               "MS-CV": {
@@ -548,7 +547,7 @@
             }
           },
           "429": {
-            "description": "In case the rate limit has been exceeded.",
+            "description": "Too Many Requests. The rate limit has been exceeded. Retry the request after the duration given in the Retry-After header.",
             "x-ms-error-response": true,
             "headers": {
               "MS-CV": {
@@ -562,7 +561,7 @@
             }
           },
           "500": {
-            "description": "InternalError",
+            "description": "InternalError. Server has encountered internal error. Retrying the request may produce successful results.",
             "x-ms-error-response": true,
             "headers": {
               "MS-CV": {
@@ -578,7 +577,7 @@
         "tags": [
           "rendering session"
         ],
-        "summary": "Gets properties of a particular rendering session"
+        "summary": "Gets the properties of a particular rendering session."
       },
       "patch": {
         "operationId": "UpdateSession",
@@ -615,13 +614,13 @@
         },
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "OK. Session has been updated.",
             "schema": {
               "$ref": "#/definitions/session_properties"
             }
           },
           "401": {
-            "description": "Unauthorized",
+            "description": "Unauthorized. Missing or invalid authorization.",
             "x-ms-error-response": true,
             "headers": {
               "MS-CV": {
@@ -635,7 +634,7 @@
             }
           },
           "403": {
-            "description": "Forbidden",
+            "description": "Forbidden. Authorization insufficient for given resource.",
             "x-ms-error-response": true,
             "headers": {
               "MS-CV": {
@@ -645,7 +644,7 @@
             }
           },
           "404": {
-            "description": "The specified resource was not found.",
+            "description": "Not found. No session with the provided session ID exists.",
             "x-ms-error-response": true,
             "headers": {
               "MS-CV": {
@@ -655,7 +654,7 @@
             }
           },
           "429": {
-            "description": "In case the rate limit has been exceeded.",
+            "description": "Too Many Requests. The rate limit has been exceeded. Retry the request after the duration given in the Retry-After header.",
             "x-ms-error-response": true,
             "headers": {
               "MS-CV": {
@@ -682,7 +681,7 @@
             }
           },
           "500": {
-            "description": "InternalError",
+            "description": "InternalError. Server has encountered internal error. Retrying the request may produce successful results.",
             "x-ms-error-response": true,
             "headers": {
               "MS-CV": {
@@ -698,7 +697,7 @@
         "tags": [
           "rendering session"
         ],
-        "summary": "Updates a particular rendering session"
+        "summary": "Updates a particular rendering session."
       }
     },
     "/accounts/{account_id}/sessions/{session_id}/:stop": {
@@ -725,7 +724,7 @@
         },
         "responses": {
           "204": {
-            "description": "NoContent - stop request was successful. The rendering session is stopped.",
+            "description": "NoContent. Stop request was successful. The rendering session is stopped.",
             "headers": {
               "MS-CV": {
                 "description": "Microsoft Correlation Vector. Include this value when reporting issues.",
@@ -734,7 +733,7 @@
             }
           },
           "401": {
-            "description": "Unauthorized",
+            "description": "Unauthorized. Missing or invalid authorization.",
             "x-ms-error-response": true,
             "headers": {
               "MS-CV": {
@@ -748,7 +747,7 @@
             }
           },
           "403": {
-            "description": "Forbidden",
+            "description": "Forbidden. Authorization insufficient for given resource.",
             "x-ms-error-response": true,
             "headers": {
               "MS-CV": {
@@ -758,7 +757,7 @@
             }
           },
           "404": {
-            "description": "The specified resource was not found.",
+            "description": "Not found. No session with the provided session ID exists.",
             "x-ms-error-response": true,
             "headers": {
               "MS-CV": {
@@ -768,7 +767,7 @@
             }
           },
           "429": {
-            "description": "In case the rate limit has been exceeded.",
+            "description": "Too Many Requests. The rate limit has been exceeded. Retry the request after the duration given in the Retry-After header.",
             "x-ms-error-response": true,
             "headers": {
               "MS-CV": {
@@ -782,7 +781,7 @@
             }
           },
           "500": {
-            "description": "InternalError",
+            "description": "InternalError. Server has encountered internal error. Retrying the request may produce successful results.",
             "x-ms-error-response": true,
             "headers": {
               "MS-CV": {
@@ -798,7 +797,7 @@
         "tags": [
           "rendering session"
         ],
-        "summary": "Stops a particular rendering session"
+        "summary": "Stops a particular rendering session."
       }
     },
     "/accounts/{account_id}/sessions": {
@@ -826,13 +825,13 @@
         },
         "responses": {
           "200": {
-            "description": "OK - returns the list of sessions which are in a Starting or Ready state",
+            "description": "OK. Returns the list of sessions which are in a 'Starting' or 'Ready' state.",
             "schema": {
               "$ref": "#/definitions/sessions_list"
             }
           },
           "401": {
-            "description": "Unauthorized",
+            "description": "Unauthorized. Missing or invalid authorization.",
             "x-ms-error-response": true,
             "headers": {
               "MS-CV": {
@@ -846,7 +845,7 @@
             }
           },
           "403": {
-            "description": "Forbidden",
+            "description": "Forbidden. Authorization insufficient for given resource.",
             "x-ms-error-response": true,
             "headers": {
               "MS-CV": {
@@ -856,7 +855,7 @@
             }
           },
           "429": {
-            "description": "In case the rate limit has been exceeded.",
+            "description": "Too Many Requests. The rate limit has been exceeded. Retry the request after the duration given in the Retry-After header.",
             "x-ms-error-response": true,
             "headers": {
               "MS-CV": {
@@ -870,7 +869,7 @@
             }
           },
           "500": {
-            "description": "InternalError",
+            "description": "InternalError. Server has encountered internal error. Retrying the request may produce successful results.",
             "x-ms-error-response": true,
             "headers": {
               "MS-CV": {
@@ -886,7 +885,7 @@
         "tags": [
           "rendering session"
         ],
-        "summary": "Get a list of all rendering sessions"
+        "summary": "Gets a list of all rendering sessions."
       }
     }
   },
@@ -895,7 +894,7 @@
       "properties": {
         "id": {
           "type": "string",
-          "description": "The id of the conversion supplied when the conversion was created."
+          "description": "The ID of the conversion supplied when the conversion was created."
         },
         "settings": {
           "$ref": "#/definitions/conversion_settings"
@@ -940,6 +939,7 @@
       "type": "object"
     },
     "conversion_list": {
+      "description": "List of conversions.",
       "properties": {
         "conversions": {
           "items": {
@@ -949,7 +949,7 @@
           "description": "The list of conversions."
         },
         "@nextLink": {
-          "description": "If more conversions are available this link with the same authentication header can be used to retrieve further values",
+          "description": "If more conversions are available this property will contain a URL where the next batch of conversions can be requested. This URL will need the same authentication as all calls to the Azure Remote Rendering API.",
           "type": "string",
           "readOnly": true
         }
@@ -973,12 +973,12 @@
         },
         "blobPrefix": {
           "type": "string",
-          "description": "Only Blobs starting with this prefix will be downloaded to perform the conversion.",
+          "description": "Only Blobs starting with this prefix will be downloaded to perform the conversion. Optional. If not provided, all Blobs from the container will be downloaded.",
           "example": "models/"
         },
         "relativeInputAssetPath": {
           "type": "string",
-          "description": "The relative path starting at blobPrefix (or at the container root if blobPrefix is not specified) to the input model. Must point to file with a supported file format ending.",
+          "description": "The relative path starting at blobPrefix (or at the container root if blobPrefix is not provided) to the input model. Must point to file with a supported file format ending. See https://docs.microsoft.com/en-us/azure/remote-rendering/how-tos/conversion/model-conversion for details.",
           "example": "house.fbx"
         }
       },
@@ -1003,12 +1003,12 @@
         },
         "blobPrefix": {
           "type": "string",
-          "description": "A prefix which gets prepended in front of all files produced by the conversion process. Will be treaded as a virtual folder.",
+          "description": "A prefix which gets prepended in front of all files produced by the conversion process. Will be treaded as a virtual folder. Optional. If not provided, output files will be stored at container root.",
           "example": "conversionOutput/fbc3646c-0b97-4553-81ca-6fae2bfb754e"
         },
         "outputAssetFilename": {
           "type": "string",
-          "description": "The file name of the output asset. Must end in '.arrAsset'.",
+          "description": "The file name of the output asset. Must end in '.arrAsset'. Optional. If not provided, file name will the same name as the input asset, with '.arrAsset' extension",
           "example": "house.arrAsset"
         }
       },
@@ -1047,7 +1047,7 @@
       "type": "object"
     },
     "conversion_status": {
-      "description": "The status of the conversion. Terminal states are 'Cancelled', 'Failed', 'Succeeded'",
+      "description": "The status of the conversion. Terminal states are 'Cancelled', 'Failed', 'Succeeded'.",
       "enum": [
         "NotStarted",
         "Running",
@@ -1057,11 +1057,34 @@
       ],
       "type": "string",
       "x-ms-enum": {
-        "name": "ConversionStatus",
-        "modelAsString": true
+        "name": "conversion_status",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "NotStarted",
+            "description": "The conversion was created but hasn't started."
+          },
+          {
+            "value": "Running",
+            "description": "The conversion is running."
+          },
+          {
+            "value": "Cancelled",
+            "description": "The conversion was cancelled. This is a terminal state."
+          },
+          {
+            "value": "Failed",
+            "description": "The conversion has failed. Check the 'error' field for more details. This is a terminal state."
+          },
+          {
+            "value": "Succeeded",
+            "description": "The conversion has succeeded. Check the 'output' field for output asset location. This is a terminal state."
+          }
+        ]
       }
     },
     "error_response": {
+      "description": "The error response containing details of why the request failed.",
       "properties": {
         "error": {
           "description": "The error object containing details of why the request failed.",
@@ -1075,14 +1098,15 @@
       ]
     },
     "error": {
+      "description": "The error object containing details of why the request failed.",
       "properties": {
         "code": {
           "type": "string",
-          "description": "Error code"
+          "description": "Error code."
         },
         "message": {
           "type": "string",
-          "description": "A human-readable representation of the error"
+          "description": "A human-readable representation of the error."
         },
         "details": {
           "type": "array",
@@ -1111,11 +1135,12 @@
       ]
     },
     "session_properties": {
+      "description": "The properties of a rendering session.",
       "properties": {
         "id": {
           "example": "contoso-session-c2b8ac1d-9494-4852-a59c-8c28813adc28",
           "type": "string",
-          "description": "The id of the session supplied when the sessions was created."
+          "description": "The ID of the session supplied when the sessions was created."
         },
         "arrInspectorPort": {
           "example": 50052,
@@ -1134,7 +1159,7 @@
           "readOnly": true
         },
         "elapsedTimeMinutes": {
-          "description": "Amount of time in minutes the session is or has been in Ready state. Time is rounded down to a full minute.",
+          "description": "Amount of time in minutes the session is or has been in the Ready state. Time is rounded down to a full minute.",
           "example": 10,
           "type": "integer",
           "readOnly": true
@@ -1163,7 +1188,7 @@
           "example": 10.6,
           "format": "float",
           "type": "number",
-          "description": "The computational power of the rendering session GPU measured in Teraflops.",
+          "description": "The computational power of the rendering session GPU measured in teraflops.",
           "readOnly": true
         },
         "error": {
@@ -1189,6 +1214,7 @@
       ]
     },
     "create_session_settings": {
+      "description": "Settings of the session to be created.",
       "properties": {
         "maxLeaseTimeMinutes": {
           "example": 60,
@@ -1209,7 +1235,7 @@
       "type": "object",
       "properties": {
         "maxLeaseTimeMinutes": {
-          "description": "Update to the time the session will run after it reached the 'Ready' state.  It has to be bigger than the current value of maxLeaseTimeMinutes.",
+          "description": "Update to the time the session will run after it reached the 'Ready' state. It has to be bigger than the current value of maxLeaseTimeMinutes.",
           "example": 72,
           "type": "integer"
         }
@@ -1227,12 +1253,34 @@
         "Stopped"
       ],
       "x-ms-enum": {
-        "name": "SessionStatus",
-        "modelAsString": true
+        "name": "session_status",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Error",
+            "description": "The rendering session has encountered an error, and is unusable. This is a terminal state."
+          },
+          {
+            "value": "Expired",
+            "description": "The rendering session enters the 'Expired' state when it has been in the 'Ready' state longer than its lease time. This is a terminal state."
+          },
+          {
+            "value": "Starting",
+            "description": "The rendering session is starting, and cannot be connected to yet."
+          },
+          {
+            "value": "Ready",
+            "description": "The rendering session is ready for incoming connections."
+          },
+          {
+            "value": "Stopped",
+            "description": "The rendering session has been stopped with 'StopSession' operation. This is a terminal state."
+          }
+        ]
       },
       "type": "string",
       "example": "Ready",
-      "description": "The status of the rendering session. Once the status reached the 'Ready' state it can be connected to. The terminal state is 'Stopped'."
+      "description": "The status of the rendering session. Once the status reached the 'Ready' state it can be connected to."
     },
     "session_size": {
       "enum": [
@@ -1240,12 +1288,22 @@
         "Premium"
       ],
       "x-ms-enum": {
-        "name": "SessionSize",
-        "modelAsString": true
+        "name": "session_size",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Standard",
+            "description": "Standard size server has a maximum scene size of 20 million polygons."
+          },
+          {
+            "value": "Premium",
+            "description": "Premium size server does not enforce a hard maximum, but performance may be degraded if your content exceeds the rendering capabilities of the service."
+          }
+        ]
       },
       "example": "Standard",
       "type": "string",
-      "description": "Size of the server used for the rendering session. Remote Rendering with Standard size server has a maximum scene size of 20 million polygons. Remote Rendering with Premium size does not enforce a hard maximum, but performance may be degraded if your content exceeds the rendering capabilities of the service."
+      "description": "Size of the server used for the rendering session. The size of the server impacts the number of polygons the server can render."
     },
     "sessions_list": {
       "description": "The result of a list sessions request.",
@@ -1259,7 +1317,7 @@
           }
         },
         "@nextLink": {
-          "description": "If more rendering sessions are available this link with the same authentication header can be used to retrieve further values",
+          "description": "If more rendering sessions are available this property will contain a URL where the next batch of sessions can be requested. This URL will need the same authentication as all calls to the Azure Remote Rendering API.",
           "type": "string",
           "readOnly": true
         }
@@ -1272,7 +1330,7 @@
   "parameters": {
     "Endpoint": {
       "name": "endpoint",
-      "description": "The endpoint to use e.g. https://remoterendering.eastus.mixedreality.azure.com a list can be found at https://docs.microsoft.com/en-us/azure/remote-rendering/reference/regions",
+      "description": "The endpoint to use e.g. https://remoterendering.eastus.mixedreality.azure.com. A list can be found at https://docs.microsoft.com/en-us/azure/remote-rendering/reference/regions.",
       "required": true,
       "type": "string",
       "in": "path",
@@ -1290,7 +1348,7 @@
     },
     "account_id": {
       "name": "account_id",
-      "description": "the Azure Remote Rendering account id",
+      "description": "The Azure Remote Rendering account ID.",
       "format": "uuid",
       "in": "path",
       "required": true,
@@ -1321,7 +1379,8 @@
     "MrcBearerAuth": {
       "in": "header",
       "name": "Authorization",
-      "type": "apiKey"
+      "type": "apiKey",
+      "description": "A token returned by the Mixed Reality Secure Token Service. See https://docs.microsoft.com/en-us/azure/remote-rendering/how-tos/tokens for details."
     }
   },
   "security": [
