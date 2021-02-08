@@ -469,7 +469,10 @@ directive:
     from: apimnamedvalues.json
     reason: Warning raised to error while PR was being reviewed. SystemData will implement in next preview version.   
   - suppress: R4009
-    from: apimusers.json
+    from: apimgateways.json
     reason: Warning raised to error while PR was being reviewed. SystemData will implement in next preview version.   
+  - suppress: R4009
+    from: apimgroups.json
+    reason: Warning raised to error while PR was being reviewed. SystemData will implement in next preview version.  
 ```
 
