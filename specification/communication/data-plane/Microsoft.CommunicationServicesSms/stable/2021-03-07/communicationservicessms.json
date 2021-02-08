@@ -196,22 +196,19 @@
     }
   },
   "parameters": {
-    "Endpoint": {
-      "in": "path",
-      "name": "endpoint",
-      "description": "The endpoint of the Azure Communication resource.",
-      "required": true,
-      "type": "string",
-      "x-ms-skip-url-encoding": true,
-      "x-ms-parameter-location": "client"
-    }
   },
   "x-ms-parameterized-host": {
     "hostTemplate": "{endpoint}",
     "useSchemePrefix": false,
     "parameters": [
       {
-        "$ref": "#/parameters/Endpoint"
+        "in": "path",
+        "name": "endpoint",
+        "description": "The endpoint of the Azure Communication resource.",
+        "required": true,
+        "type": "string",
+        "x-ms-skip-url-encoding": true,
+        "x-ms-parameter-location": "client"
       }
     ]
   }
