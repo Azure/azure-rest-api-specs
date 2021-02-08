@@ -1,21 +1,27 @@
 {
   "parameters": {
     "api-version": "2021-03-07",
-    "endpoint": "https://resourcename.communication.azure.net/",
-    "phoneNumber": "+11234567890"
+    "endpoint": "https://resourcename.communication.azure.com/",
+    "phoneNumber": "+14792000102",
+    "body": {
+      "calling": "inbound+outbound",
+      "sms": "none"
+    }
   },
   "responses": {
     "200": {
-      "headers": {},
+      "headers": {
+        "Operation-Location": "/phoneNumbers/operations/capabilities-be9d57d9-11ea-442d-b065-ee2748958709"
+      },
       "body": {
-        "id": "11234567890",
-        "phoneNumber": "+11234567890",
+        "id": "14792000102",
+        "phoneNumber": "+14792000102",
         "countryCode": "US",
         "assignmentType": "user",
         "phoneNumberType": "geographic",
         "capabilities": {
           "calling": "inbound+outbound",
-          "sms": "inbound"
+          "sms": "none"
         },
         "purchaseDate": "2020-11-19T16:31:49.048Z",
         "callbackUri": "callback.net",

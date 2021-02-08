@@ -6,7 +6,7 @@
     "version": "2021-03-07"
   },
   "paths": {
-    "/availablePhoneNumbers/countries/{countryCode}/~search": {
+    "/availablePhoneNumbers/countries/{countryCode}/:search": {
       "post": {
         "tags": [
           "Find and purchase available phone numbers"
@@ -118,7 +118,7 @@
         }
       }
     },
-    "/availablePhoneNumbers/~purchase": {
+    "/availablePhoneNumbers/:purchase": {
       "post": {
         "tags": [
           "Find and purchase available phone numbers"
@@ -174,8 +174,8 @@
           "final-state-via": "location"
         },
         "x-ms-examples": {
-          "Purchase phone number search": {
-            "$ref": "./examples/PurchaseSearch.json"
+          "Purchase phone numbers": {
+            "$ref": "./examples/PurchasePhoneNumbers.json"
           }
         }
       }
@@ -614,7 +614,8 @@
         },
         "quantity": {
           "format": "int32",
-          "description": "The quantity of phone numbers in the search. Should be at least 1.",
+          "description": "The quantity of desired phone numbers. The default value is 1.",
+          "default": 1,
           "maximum": 2147483647,
           "minimum": 1,
           "type": "integer"
