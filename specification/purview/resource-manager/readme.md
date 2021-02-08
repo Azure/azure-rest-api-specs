@@ -66,7 +66,7 @@ csharp:
   azure-arm: true
   license-header: MICROSOFT_MIT_NO_VERSION
   namespace: Microsoft.Azure.Management.Purview
-  output-folder: $(csharp-sdks-folder)/Purview/Microsoft.Azure.Management.Purview/Generated
+  output-folder: $(csharp-sdks-folder)/Purview/Microsoft.Azure.Management.Purview/src/Generated
   clear-output-folder: true
 ```
 
