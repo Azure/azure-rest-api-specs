@@ -35,7 +35,7 @@ These settings apply only when `--tag=package-2021-03-07` is specified on the co
 
 ```yaml $(tag) == 'package-2021-03-07'
 input-file:
-  - Microsoft.CommunicationServicesAdministration/stable/2021-03-07/phonenumbers.json
+  - Microsoft.CommunicationServicesPhoneNumbers/stable/2021-03-07/phonenumbers.json
 title:
   Azure Communication Services
 ```
