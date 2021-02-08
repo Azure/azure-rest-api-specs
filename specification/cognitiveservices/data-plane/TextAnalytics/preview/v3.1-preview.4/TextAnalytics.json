@@ -1826,7 +1826,34 @@
       "properties": {
         "relationType": {
           "description": "Type of relation. Examples include: `DosageOfMedication` or 'FrequencyOfMedication', etc.",
-          "type": "string"
+          "type": "string",
+          "enum":[
+            "Abbreviation",
+            "DirectionOfBodystructure",
+            "DirectionOfCondition",
+            "DirectionOfExamination",
+            "DirectionOfTreatment",
+            "DosageOfMedication",
+            "FormOfMedication",
+            "FrequencyOfMedication",
+            "FrequencyOfTreatment",
+            "QualifierOfCondition",
+            "RelationOfExamination",
+            "RouteOfMedication",
+            "TimeOfCondition",
+            "TimeOfEvent",
+            "TimeOfExamination",
+            "TimeOfMedication",
+            "TimeOfTreatment",
+            "UnitOfCondition",
+            "UnitOfExamination",
+            "ValueOfCondition",
+            "ValueOfExamination"
+          ],
+          "x-ms-enum": {
+            "name": "relationType",
+            "modelAsString": true
+         }
         },
         "entities": {
           "description": "The entities in the relation.",
