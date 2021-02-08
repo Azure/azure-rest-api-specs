@@ -31,12 +31,12 @@ openapi-type: arm
 tag: package-2020-08
 ```
 
-### Tag: package-2021-01-preview
+### Tag: package-2021-02-preview
 
 
-These settings apply only when `--tag=2021-01-preview` is specified on the command line.
+These settings apply only when `--tag=2021-02-preview` is specified on the command line.
 
-```yaml $(tag) == 'package-2021-01-preview'
+```yaml $(tag) == 'package-2021-02-preview'
 input-file:
   - Microsoft.Network/stable/2020-08-01/applicationGateway.json
   - Microsoft.Network/stable/2020-08-01/applicationSecurityGroup.json
