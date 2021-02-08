@@ -6,19 +6,19 @@ These settings apply only when `--azureresourceschema` is specified on the comma
 
 ``` yaml $(azureresourceschema) && $(multiapi)
 batch:
-  - tag: schema-storagepool-2020-03-15-preview
+  - tag: schema-providerhub-2020-11-20
 
 ```
 
 Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
 
-### Tag: schema-storagepool-2020-03-15-preview and azureresourceschema
+### Tag: schema-providerhub-2020-11-20 and azureresourceschema
 
-``` yaml $(tag) == 'schema-storagepool-2020-03-15-preview' && $(azureresourceschema)
+``` yaml $(tag) == 'schema-providerhub-2020-11-20' && $(azureresourceschema)
 output-folder: $(azureresourceschema-folder)/schemas
 
 # all the input files in this apiVersion
 input-file:
-  - Microsoft.StoragePool/preview/2020-03-15-preview/storagepool.json
+  - Microsoft.ProviderHub/stable/2020-11-20/providerhub.json
 
 ```

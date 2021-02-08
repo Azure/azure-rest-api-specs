@@ -7,6 +7,7 @@ These settings apply only when `--azureresourceschema` is specified on the comma
 ``` yaml $(azureresourceschema) && $(multiapi)
 batch:
   - tag: schema-machinelearningservices-2020-09-01-preview
+  - tag: schema-machinelearningservices-2020-08-01
   - tag: schema-machinelearningservices-2020-06-01
   - tag: schema-machinelearningservices-2020-05-15-preview
   - tag: schema-machinelearningservices-2020-05-01-preview
@@ -34,6 +35,17 @@ output-folder: $(azureresourceschema-folder)/schemas
 input-file:
   - Microsoft.MachineLearningServices/preview/2020-09-01-preview/jobs.json
   - Microsoft.MachineLearningServices/preview/2020-09-01-preview/machineLearningServices.json
+
+```
+
+### Tag: schema-machinelearningservices-2020-08-01 and azureresourceschema
+
+``` yaml $(tag) == 'schema-machinelearningservices-2020-08-01' && $(azureresourceschema)
+output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
+  - Microsoft.MachineLearningServices/stable/2020-08-01/machineLearningServices.json
 
 ```
 
