@@ -6,16 +6,15 @@ These settings apply only when `--azureresourceschema` is specified on the comma
 
 ``` yaml $(azureresourceschema) && $(multiapi)
 batch:
+  - tag: schema-desktopvirtualization-2021-02-01-preview
+  - tag: schema-desktopvirtualization-2021-01-14-preview
+  - tag: schema-desktopvirtualization-2020-11-10-preview
+  - tag: schema-desktopvirtualization-2020-11-02-preview
+  - tag: schema-desktopvirtualization-2020-10-19-preview
+  - tag: schema-desktopvirtualization-2020-09-21-preview
   - tag: schema-desktopvirtualization-2019-12-10-preview
   - tag: schema-desktopvirtualization-2019-09-24-preview
   - tag: schema-desktopvirtualization-2019-01-23-preview
-  - tag: schema-desktopvirtualization-2020-09-21-preview
-  - tag: schema-desktopvirtualization-2020-10-19-preview
-  - tag: schema-desktopvirtualization-2020-11-02-preview
-  - tag: schema-desktopvirtualization-2020-11-10-preview
-  - tag: schema-desktopvirtualization-2021-01-14-preview
-  - tag: schema-desktopvirtualization-2021-02-01-preview
-
 ```
 
 Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
