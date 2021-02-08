@@ -39,6 +39,12 @@ directive:
   - suppress: SECRET_PROPERTY
     from:
       - Microsoft.MixedReality/stable/2021-01-01/common.json
+    where:
+      - $.definitions.AccountKeys.properties.primaryKey
+      - $.definitions.AccountKeys.properties.secondaryKey
+    reason: Secrets are OK to return in a POST response.
+  - suppress: SECRET_PROPERTY
+    from:
       - Microsoft.MixedReality/stable/2020-05-01/common.json
     where:
       - $.definitions.AccountKeys.properties.primaryKey
