@@ -64,6 +64,9 @@
         "x-ms-examples": {
           "PutBlobServices": {
             "$ref": "./examples/BlobServicesPut.json"
+          },
+          "BlobServicesPutLastAccessTimeBasedTracking": {
+            "$ref": "./examples/BlobServicesPutLastAccessTimeBasedTracking.json"
           }
         },
         "description": "Sets the properties of a storage account’s Blob service, including properties for Storage Analytics and CORS (Cross-Origin Resource Sharing) rules. ",
@@ -1204,6 +1207,10 @@
             "containerDeleteRetentionPolicy": {
               "$ref": "./common.json#/definitions/DeleteRetentionPolicy",
               "description": "The blob service properties for container soft delete."
+            },
+            "lastAccessTimeTrackingPolicy": {
+              "$ref": "#/definitions/LastAccessTimeTrackingPolicy",
+              "description": "The blob service property to configure last access time based tracking policy."
             }
           },
           "x-ms-client-flatten": true,
@@ -1240,6 +1247,13 @@
         "enabled": {
           "type": "boolean",
           "description": "Indicates whether change feed event logging is enabled for the Blob service."
+        },
+        "retentionInDays": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 146000,
+          "format": "int32",
+          "description": "Indicates the duration of changeFeed retention in days. Minimum value is 1 day and maximum value is 146000 days (400 years). A null value indicates an infinite retention of the change feed."
         }
       },
       "description": "The blob service properties for change feed events."
@@ -1273,6 +1287,41 @@
         "enabled"
       ],
       "description": "The blob service properties for blob restore policy"
+    },
+    "LastAccessTimeTrackingPolicy": {
+      "properties": {
+        "enable": {
+          "type": "boolean",
+          "description": "When set to true last access time based tracking is enabled."
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the policy. The valid value is AccessTimeTracking. This field is currently read only",
+          "enum": [
+            "AccessTimeTracking"
+          ],
+          "x-ms-enum": {
+            "name": "name",
+            "modelAsString": true
+          }
+        },
+        "trackingGranularityInDays": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The field specifies blob object tracking granularity in days, typically how often the blob object should be tracked.This field is currently read only with value as 1"
+        },
+        "blobType": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "An array of predefined supported blob types. Only blockBlob is the supported value. This field is currently read only"
+        }
+      },
+      "required": [
+        "enable"
+      ],
+      "description": "The blob service properties for Last access time based tracking policy."
     },
     "LeaseContainerRequest": {
       "properties": {
