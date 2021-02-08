@@ -83,6 +83,21 @@
             "name": "standard"
           },
           "tenantId": "00000000-0000-0000-0000-000000000000",
+          "networkAcls": {
+            "bypass": "AzureServices",
+            "defaultAction": "Deny",
+            "ipRules": [
+              {
+                "value": ""
+              }
+            ],
+            "virtualNetworkRules": [
+              {
+                "id": "",
+                "ignoreMissingVnetServiceEndpoint": false
+              }
+            ]
+          },
           "accessPolicies": [
             {
               "tenantId": "00000000-0000-0000-0000-000000000000",
@@ -132,6 +147,21 @@
                   "recover",
                   "purge"
                 ]
+              }
+            }
+          ],
+          "privateEndpointConnections": [
+            {
+              "id": "",
+              "properties": {
+                "provisioningState": "Succeeded",
+                "privateEndpoint": {
+                  "id": ""
+                },
+                "privateLinkServiceConnectionState": {
+                  "status": "Approved",
+                  "actionsRequired": "None"
+                }
               }
             }
           ],
