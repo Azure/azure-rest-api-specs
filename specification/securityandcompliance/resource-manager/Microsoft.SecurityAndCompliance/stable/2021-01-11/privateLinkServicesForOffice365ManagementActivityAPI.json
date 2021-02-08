@@ -119,7 +119,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Updated - Put request accepted and an existing resource is being updated; the operation will complete asynchronously.",
+            "description": "OK. Updated - Put request accepted and an existing resource is being updated; the operation will complete asynchronously.",
             "schema": {
               "$ref": "#/definitions/privateLinkServicesForOffice365ManagementActivityAPIDescription"
             }
@@ -179,13 +179,13 @@
         ],
         "responses": {
           "200": {
-            "description": "The tags for the resource were updated successfully.",
+            "description": "OK. The resource was updated successfully.",
             "schema": {
               "$ref": "#/definitions/privateLinkServicesForOffice365ManagementActivityAPIDescription"
             }
           },
           "202": {
-            "description": "The tags for the resource were updated successfully.",
+            "description": "The resource was updated successfully.",
             "schema": {
               "$ref": "#/definitions/privateLinkServicesForOffice365ManagementActivityAPIDescription"
             }
@@ -352,7 +352,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK. The request has succeeded.",
+            "description": "OK. The request was successful; the request was well-formed and received properly.",
             "schema": {
               "$ref": "#/definitions/OperationListResult"
             }
@@ -479,7 +479,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The request was successful; the request was well-formed and received properly.",
+            "description": "OK. The request was successful; the request was well-formed and received properly.",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v1/privatelinks.json#/definitions/PrivateEndpointConnectionListResult"
             }
@@ -497,7 +497,7 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": null
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -579,13 +579,13 @@
         ],
         "responses": {
           "200": {
-            "description": "The request was successful; the request was well-formed and received properly.",
+            "description": "OK. The request was successful; the request was well-formed and received properly.",
             "schema": {
               "$ref": "#/definitions/PrivateEndpointConnection"
             }
           },
           "201": {
-            "description": "The request was successful; the request was well-formed and received properly.",
+            "description": "Created. The request was successful; the request was well-formed and received properly.",
             "schema": {
               "$ref": "#/definitions/PrivateEndpointConnection"
             }
@@ -730,7 +730,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The request was successful; the request was well-formed and received properly.",
+            "description": "OK. The request was successful; the request was well-formed and received properly.",
             "schema": {
               "$ref": "#/definitions/PrivateLinkResource"
             }
@@ -981,18 +981,15 @@
       "description": "The common properties of a service.",
       "properties": {
         "id": {
-          "readOnly": true,
           "type": "string",
           "description": "The resource identifier."
         },
         "name": {
-          "readOnly": true,
           "type": "string",
           "description": "The resource name.",
           "pattern": "^[a-z0-9][a-z0-9-]{1,21}[a-z0-9]$"
         },
         "type": {
-          "readOnly": true,
           "type": "string",
           "description": "The resource type."
         },
@@ -1140,8 +1137,7 @@
       "properties": {
         "groupId": {
           "description": "The private link resource group id.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "requiredMembers": {
           "description": "The private link resource required member names.",
