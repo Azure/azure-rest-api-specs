@@ -1989,6 +1989,10 @@
         "burstingEnabled": {
           "type": "boolean",
           "description": "Set to true to enable bursting beyond the provisioned performance target of the disk. Bursting is disabled by default. Does not apply to Ultra disks."
+        },
+        "securityProfile": {
+          "$ref": "#/definitions/SecurityProfile",
+          "description": "Contains the security related information for the resource."
         }
       },
       "required": [
@@ -2372,10 +2376,6 @@
         "purchasePlan": {
           "$ref": "#/definitions/PurchasePlan",
           "description": "Purchase plan information to be added on the OS disk"
-        },
-        "securityProfile": {
-          "$ref": "#/definitions/SecurityProfile",
-          "description": "Contains the security related information for the resource."
         }
       },
       "description": "Disk resource update properties."
@@ -2604,18 +2604,27 @@
       ],
       "description": "Used for establishing the purchase context of any 3rd Party artifact through MarketPlace."
     },
+	"SecurityType": {
+      "type": "string",
+      "description": "Specifies the SecurityType of the VM. Applicable for OS disks only.",
+      "enum": [
+        "TrustedLaunch"
+      ],
+      "x-ms-enum": {
+        "name": "SecurityTypes",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "TrustedLaunch",
+            "description": "Resource supports creation of Trusted VM."
+          }
+        ]
+      }
+    },
     "SecurityProfile": {
       "properties": {
         "securityType": {
-          "type": "string",
-          "description": "Specifies the SecurityType of the VM. Applicable for OS disks only.",
-          "enum": [
-           "TrustedLaunch"
-          ],
-          "x-ms-enum": {
-            "name": "SecurityTypes",
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/SecurityType"
         }
       },
       "required": [
