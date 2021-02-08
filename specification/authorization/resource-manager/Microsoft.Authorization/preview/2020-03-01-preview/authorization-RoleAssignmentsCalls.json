@@ -243,6 +243,12 @@
               "$ref": "#/definitions/RoleAssignment"
             }
           },
+          "200": {
+            "description": "Returns the role assignment.",
+            "schema": {
+              "$ref": "#/definitions/RoleAssignment"
+            }
+          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
@@ -405,6 +411,12 @@
               "$ref": "#/definitions/RoleAssignment"
             }
           },
+          "200": {
+            "description": "Returns the role assignment.",
+            "schema": {
+              "$ref": "#/definitions/RoleAssignment"
+            }
+          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
@@ -471,7 +483,24 @@
       },
       "description": "Role Assignments filter"
     },
-    "RoleAssignmentPropertiesWithScope": {
+    "RoleAssignmentListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RoleAssignment"
+          },
+          "description": "Role assignment list."
+        },
+        "nextLink": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The URL to use for getting the next set of results."
+        }
+      },
+      "description": "Role assignment list operation result."
+    },
+    "RoleAssignmentProperties": {
       "properties": {
         "scope": {
           "type": "string",
@@ -505,14 +534,6 @@
             "modelAsString": true
           }
         },
-        "canDelegate": {
-          "type": "boolean",
-          "description": "The Delegation flag for the role assignment"
-        },
-        "description": {
-          "type": "string",
-          "description": "Description of role assignment"
-        },
         "condition": {
           "type": "string",
           "description": "The conditions on the role assignment. This limits the resources it can be assigned to. e.g.: @Resource[Microsoft.Storage/storageAccounts/blobServices/containers:ContainerName] StringEqualsIgnoreCase 'foo_storage_container'"
@@ -522,31 +543,44 @@
           "description": "Version of the condition. Currently accepted value is '2.0'"
         },
         "createdOn": {
+          "readOnly": true,
           "type": "string",
           "description": "Time it was created",
           "format": "date-time"
         },
         "updatedOn": {
+          "readOnly": true,
           "type": "string",
           "description": "Time it was updated",
           "format": "date-time"
         },
         "createdBy": {
+          "readOnly": true,
           "type": "string",
           "description": "Id of the user who created the assignment"
         },
         "updatedBy": {
+          "readOnly": true,
           "type": "string",
           "description": "Id of the user who updated the assignment"
         },
         "delegatedManagedIdentityResourceId": {
           "type": "string",
           "description": "Id of the delegated managed identity resource"
+        },
+        "canDelegate": {
+          "type": "boolean",
+          "description": "The delegation flag used for creating a role assignment"
         }
       },
-      "description": "Role assignment properties with scope."
+      "required": [
+        "roleDefinitionId",
+        "principalId"
+      ],
+      "description": "Role assignment properties."
     },
     "RoleAssignment": {
+      "x-ms-azure-resource": true,
       "properties": {
         "id": {
           "type": "string",
@@ -565,76 +599,11 @@
         },
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/RoleAssignmentPropertiesWithScope",
+          "$ref": "#/definitions/RoleAssignmentProperties",
           "description": "Role assignment properties."
         }
       },
       "description": "Role Assignments"
-    },
-    "RoleAssignmentListResult": {
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/RoleAssignment"
-          },
-          "description": "Role assignment list."
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "The URL to use for getting the next set of results."
-        }
-      },
-      "description": "Role assignment list operation result."
-    },
-    "RoleAssignmentProperties": {
-      "properties": {
-        "roleDefinitionId": {
-          "type": "string",
-          "description": "The role definition ID used in the role assignment."
-        },
-        "principalId": {
-          "type": "string",
-          "description": "The principal ID assigned to the role. This maps to the ID inside the Active Directory. It can point to a user, service principal, or security group."
-        },
-        "principalType": {
-          "type": "string",
-          "description": "The principal type of the assigned principal ID.",
-          "enum": [
-            "User",
-            "Group",
-            "ServicePrincipal",
-            "Unknown",
-            "DirectoryRoleTemplate",
-            "ForeignGroup",
-            "Application",
-            "MSI",
-            "DirectoryObjectOrGroup",
-            "Everyone"
-          ],
-          "x-ms-enum": {
-            "name": "PrincipalType",
-            "modelAsString": true
-          }
-        },
-        "canDelegate": {
-          "type": "boolean",
-          "description": "The delegation flag used for creating a role assignment"
-        },
-        "condition": {
-          "type": "string",
-          "description": "The conditions on the role assignment. This limits the resources it can be assigned to. e.g.: @Resource[Microsoft.Storage/storageAccounts/blobServices/containers:ContainerName] StringEqualsIgnoreCase 'foo_storage_container'"
-        },
-        "conditionVersion": {
-          "type": "string",
-          "description": "Version of the condition. Currently accepted value is '2.0'"
-        }
-      },
-      "required": [
-        "roleDefinitionId",
-        "principalId"
-      ],
-      "description": "Role assignment properties."
     },
     "RoleAssignmentCreateParameters": {
       "properties": {
