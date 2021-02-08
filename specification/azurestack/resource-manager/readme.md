@@ -59,6 +59,18 @@ input-file:
 - Microsoft.AzureStack/stable/2017-06-01/Registration.json
 - Microsoft.AzureStack/stable/2017-06-01/CustomerSubscription.json
 ```
+### Tag: package-preview-2020-06
+
+These settings apply only when `--tag=package-preview-2020-06` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2020-06'
+input-file:
+  - Microsoft.AzureStack/preview/2020-06-01-preview/AzureStack.json
+  - Microsoft.AzureStack/preview/2020-06-01-preview/CustomerSubscription.json
+  - Microsoft.AzureStack/preview/2020-06-01-preview/Product.json
+  - Microsoft.AzureStack/preview/2020-06-01-preview/Registration.json
+  - Microsoft.AzureStack/preview/2020-06-01-preview/LinkedSubscription.json
+```
 
 ---
 
