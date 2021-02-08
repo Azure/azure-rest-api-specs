@@ -423,6 +423,48 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Insights/metricAlerts/{ruleName}/quota": {
+      "get": {
+        "tags": [
+          "MetricAlertsQuota"
+        ],
+        "description": "Retrieve an alert rule quota.",
+        "operationId": "MetricAlerts_GetQuota",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/RuleNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful request to get metric alert rule quota",
+            "schema": {
+              "$ref": "#/definitions/MetricAlertsQuota"
+            }
+          },
+          "default": {
+            "description": "BadRequest",
+            "schema": {
+              "$ref": "../../stable/2016-03-01/alertRules_API.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get an alert rule status": {
+            "$ref": "./examples/MetricAlertsQuota.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -1019,6 +1061,23 @@
         }
       },
       "description": "The minimum number of violations required within the selected lookback time window required to raise an alert."
+    },
+    "MetricAlertsQuota": {
+      "required": [
+        "maxAlertRulesPerSubscription",
+        "maxTimeSeriesPerAlertRule"
+      ],
+      "properties": {
+        "maxAlertRulesPerSubscription": {
+          "type": "number",
+          "description": "The maximum number of alert rules allowed per subscription."
+        },
+        "maxTimeSeriesPerAlertRule": {
+          "type": "number",
+          "description": "The maximum number of time series allowed per alert rule."
+        }
+      },
+      "description": "The metric alerts quota."
     }
   },
   "parameters": {
