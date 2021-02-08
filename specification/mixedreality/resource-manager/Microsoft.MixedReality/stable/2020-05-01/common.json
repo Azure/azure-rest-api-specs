@@ -12,11 +12,13 @@
       "type": "object",
       "properties": {
         "primaryKey": {
+          "x-ms-secret": true,
           "description": "value of primary key.",
           "readOnly": true,
           "type": "string"
         },
         "secondaryKey": {
+          "x-ms-secret": true,
           "description": "value of secondary key.",
           "readOnly": true,
           "type": "string"
@@ -57,6 +59,7 @@
       "x-ms-external": true,
       "properties": {
         "error": {
+          "description": "An Error response.",
           "$ref": "#/definitions/CloudErrorBody"
         }
       },
@@ -91,6 +94,10 @@
       "description": "Common Properties shared by Mixed Reality Accounts",
       "type": "object",
       "properties": {
+        "storageAccountName": {
+          "description": "The name of the storage account associated with this accountId",
+          "type": "string"
+        },
         "accountId": {
           "description": "unique id of certain account.",
           "readOnly": true,
