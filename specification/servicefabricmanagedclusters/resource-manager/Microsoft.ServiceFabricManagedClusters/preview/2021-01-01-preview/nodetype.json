@@ -34,42 +34,6 @@
     }
   ],
   "paths": {
-    "/providers/Microsoft.ServiceFabric/operations": {
-      "get": {
-        "tags": [
-          "Operations"
-        ],
-        "summary": "Lists all of the available Service Fabric resource provider API operations.",
-        "description": "Get the list of available Service Fabric resource provider API operations.",
-        "operationId": "Operations_List",
-        "parameters": [
-          {
-            "name": "api-version",
-            "in": "query",
-            "description": "The version of the Service Fabric resource provider API",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK. The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/OperationListResult"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorModel"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.ServiceFabric/managedClusters/{clusterName}/nodeTypes": {
       "get": {
         "operationId": "NodeTypes_ListByManagedClusters",
@@ -912,23 +876,6 @@
         "Deleted",
         "Other"
       ]
-    },
-    "OperationListResult": {
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "List of operations supported by the Service Fabric resource provider.",
-          "items": {
-            "$ref": "#/definitions/OperationResult"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "URL to get the next set of operation list results if there are any.",
-          "readOnly": true
-        }
-      },
-      "description": "Describes the result of the request to list Service Fabric resource provider operations."
     },
     "OperationResult": {
       "properties": {
