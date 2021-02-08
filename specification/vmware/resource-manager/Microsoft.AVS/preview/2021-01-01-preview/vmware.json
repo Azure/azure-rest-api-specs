@@ -4615,17 +4615,17 @@
           }
         },
         "netAppVolume": {
-          "description": "Resource ID of the Azure NetApp Files volume",
-          "$ref": "#/definitions/NetAppVolumeProperties"
+          "description": "An Azure NetApp Files volume",
+          "$ref": "#/definitions/NetAppVolume"
         },
         "diskPoolVolume": {
-          "description": "Resource ID of the iSCSI target from a Storage Pool and LUN to be used",
-          "$ref": "#/definitions/DiskPoolVolumeProperties"
+          "description": "An iSCSI volume",
+          "$ref": "#/definitions/DiskPoolVolume"
         }
       }
     },
-    "NetAppVolumeProperties": {
-      "description": "A model which holds properties of an Azure NetApp Files volume of Microsoft.NetApp provider",
+    "NetAppVolume": {
+      "description": "An Azure NetApp Files volume from Microsoft.NetApp provider",
       "properties": {
         "nfsProviderIp": {
           "type": "string",
@@ -4635,11 +4635,10 @@
           "type": "string",
           "description": "File path through which the NFS volume is exposed by the provider"
         }
-      },
-      "x-ms-azure-resource": true
+      }
     },
-    "DiskPoolVolumeProperties": {
-      "description": "A model which holds properties of an iSCSI volume of Microsoft.StoragePool provider",
+    "DiskPoolVolume": {
+      "description": "An iSCSI volume from Microsoft.StoragePool provider",
       "properties": {
         "endpoints": {
           "description": "iSCSI provider target IP address list",
@@ -4652,8 +4651,7 @@
           "type": "string",
           "description": "Name of the LUN to be used"
         }
-      },
-      "x-ms-azure-resource": true
+      }
     },
     "AdminCredentials": {
       "description": "Administrative credentials for accessing vCenter and NSX-T",
