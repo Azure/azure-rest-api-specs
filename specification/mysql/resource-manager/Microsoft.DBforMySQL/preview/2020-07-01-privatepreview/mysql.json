@@ -1197,6 +1197,64 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBForMySql/flexibleServers/{serverName}/updateConfigurations": {
+      "post": {
+        "tags": [
+          "Configurations"
+        ],
+        "operationId": "ServerParameters_BatchUpdate",
+        "x-ms-examples": {
+          "ConfigurationList": {
+            "$ref": "./examples/ConfigurationsBatchUpdate.json"
+          }
+        },
+        "description": "Update a list of configurations in a given server.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "name": "value",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ConfigurationListResult"
+            },
+            "description": "The parameters for updating a list of server configuration."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ConfigurationListResult"
+            }
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBForMySql/flexibleServers/{serverName}/configurations": {
       "get": {
         "tags": [
@@ -2085,7 +2143,6 @@
       "description": "Represents a Configuration."
     },
     "ConfigurationListResult": {
-      "type": "object",
       "properties": {
         "value": {
           "type": "array",
@@ -2184,6 +2241,11 @@
           "format": "int64",
           "description": "supported memory per vCore in MB",
           "readOnly": true
+        },
+        "status": {
+          "type": "string",
+          "description": "The status of the capability.",
+          "readOnly": true
         }
       },
       "description": "Vcores capability"
@@ -2202,6 +2264,11 @@
           "items": {
             "$ref": "#/definitions/VcoreCapability"
           },
+          "readOnly": true
+        },
+        "status": {
+          "type": "string",
+          "description": "The status of the capability.",
           "readOnly": true
         }
       },
@@ -2235,6 +2302,11 @@
           "format": "int64",
           "description": "Maximum backup retention days",
           "readOnly": true
+        },
+        "status": {
+          "type": "string",
+          "description": "The status of the capability.",
+          "readOnly": true
         }
       },
       "description": "storage edition capability"
@@ -2261,6 +2333,11 @@
             "$ref": "#/definitions/ServerVersionCapability"
           },
           "readOnly": true
+        },
+        "status": {
+          "type": "string",
+          "description": "The status of the capability.",
+          "readOnly": true
         }
       },
       "description": "Server edition capabilities."
@@ -2278,6 +2355,11 @@
           "items": {
             "$ref": "#/definitions/ServerEditionCapability"
           },
+          "readOnly": true
+        },
+        "status": {
+          "type": "string",
+          "description": "The status of the capability.",
           "readOnly": true
         }
       },

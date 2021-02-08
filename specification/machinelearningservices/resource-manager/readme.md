@@ -42,20 +42,20 @@ input-file:
 
 These settings apply only when `--tag=package-2020-06` is specified on the command line.
 
-```yaml $(tag) == 'package-2020-06-01'
+``` yaml $(tag) == 'package-2020-06-01'
 input-file:
   - Microsoft.MachineLearningServices/stable/2020-06-01/machineLearningServices.json
 ```
-
 
 ### Tag: package-preview-2020-05
 
 These settings apply only when `--tag=package-preview-2020-05` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2020-05'
+``` yaml $(tag) == 'package-preview-2020-05'
 input-file:
   - Microsoft.MachineLearningServices/preview/2020-05-15-preview/machineLearningServices.json
 ```
+
 ### Tag: package-2020-04-01
 
 These settings apply only when `--tag=package-2020-04` is specified on the command line.
@@ -125,6 +125,7 @@ These settings apply only when `--tag=package-2020-09-01-preview` is specified o
 
 ``` yaml $(tag) == 'package-2020-09-01-preview'
 input-file:
+- Microsoft.MachineLearningServices/preview/2020-09-01-preview/jobs.json
 - Microsoft.MachineLearningServices/preview/2020-09-01-preview/machineLearningServices.json
 ```
 
@@ -237,6 +238,7 @@ batch:
   - tag: package-2020-02-18-preview
   - tag: package-2018-03-preview
 ```
+
 ### Tag: package-2020-08-01 and java
 
 These settings apply only when `--tag=package-2020-08-01 --java` is specified on the command line.
@@ -409,4 +411,3 @@ generate-interface: true
 ## AzureResourceSchema
 
 See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
-

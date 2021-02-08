@@ -27,7 +27,7 @@ These are the global settings for the Azure Synapse Analytics API.
 description: Azure Synapse Analytics Management Client
 openapi-type: arm
 azure-arm: true
-tag: package-2019-06-01-preview
+tag: package-2020-12-01
 generate-empty-classes: true
 ```
 
@@ -79,6 +79,7 @@ input-file:
 - Microsoft.Synapse/stable/2020-12-01/privatelinkhub.json
 - Microsoft.Synapse/stable/2020-12-01/sqlServer.json
 - Microsoft.Synapse/stable/2020-12-01/keys.json
+- Microsoft.Synapse/stable/2020-12-01/library.json
 ```
 
 ## Suppressions
@@ -167,6 +168,9 @@ directive:
       - $.definitions.IntegrationRuntimeResource.properties.properties
       - $.definitions.IntegrationRuntimeStatusResponse.properties.properties
       - $.definitions.SsisObjectMetadataStatusResponse.properties.properties
+  - suppress: R4009
+    reason: systemData will be in the next API version
+    from: Microsoft.Synapse/stable/2020-12-01/library.json
 ```
 
 ---
@@ -209,10 +213,6 @@ csharp:
   namespace: Microsoft.Azure.Management.Synapse
   output-folder: $(csharp-sdks-folder)/synapse/Microsoft.Azure.Management.Synapse/src/Generated
   clear-output-folder: true
-batch:
- - tag: package-2019-06-01-preview
- - tag: package-sqlGen3-2020-04-01-preview
- - tag: package-2020-12-01
 ```
 
 ## Go
