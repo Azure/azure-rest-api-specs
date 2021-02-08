@@ -998,7 +998,7 @@
         "tags": [
           "Datastores"
         ],
-        "summary": "Get a datastore in a private cloud",
+        "summary": "Get a datastore in a private cloud cluster",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
@@ -1045,7 +1045,7 @@
         "tags": [
           "Datastores"
         ],
-        "summary": "Create a datastore in a private cloud",
+        "summary": "Create a datastore in a private cloud cluster",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
@@ -1061,6 +1061,15 @@
           },
           {
             "$ref": "#/parameters/datastoreName"
+          },
+          {
+            "name": "datastore",
+            "description": "A datastore in a private cloud cluster",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Datastore"
+            }
           },
           {
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
