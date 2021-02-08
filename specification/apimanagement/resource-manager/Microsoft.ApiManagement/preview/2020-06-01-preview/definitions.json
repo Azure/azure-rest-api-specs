@@ -858,7 +858,7 @@
         },
         "versioningScheme": {
           "type": "string",
-          "description": "An value that determines where the API Version identifer will be located in a HTTP request.",
+          "description": "An value that determines where the API Version identifier will be located in a HTTP request.",
           "enum": [
             "Segment",
             "Query",
@@ -885,7 +885,7 @@
         },
         "versioningScheme": {
           "type": "string",
-          "description": "An value that determines where the API Version identifer will be located in a HTTP request.",
+          "description": "An value that determines where the API Version identifier will be located in a HTTP request.",
           "enum": [
             "Segment",
             "Query",
@@ -963,7 +963,7 @@
         },
         "versioningScheme": {
           "type": "string",
-          "description": "An value that determines where the API Version identifer will be located in a HTTP request.",
+          "description": "An value that determines where the API Version identifier will be located in a HTTP request.",
           "enum": [
             "Segment",
             "Query",
@@ -6024,6 +6024,48 @@
         }
       },
       "description": "Gateway hostname configuration details."
+    },
+    "GatewayCertificateAuthorityCollection": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/GatewayCertificateAuthorityContract"
+          },
+          "description": "Page values.",
+          "readOnly": true
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Next page link if any.",
+          "readOnly": true
+        }
+      },
+      "description": "Paged Gateway certificate authority list representation."
+    },
+    "GatewayCertificateAuthorityContract": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/GatewayCertificateAuthorityContractProperties",
+          "description": "Gateway certificate authority details."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./apimanagement.json#/definitions/Resource"
+        }
+      ],
+      "description": "Gateway certificate authority details."
+    },
+    "GatewayCertificateAuthorityContractProperties": {
+      "properties": {
+        "isTrusted": {
+          "type": "boolean",
+          "description": "Determines whether certificate authority is trusted."
+        }
+      },
+      "description": "Gateway certificate authority details."
     },
     "AssociationContract": {
       "properties": {
