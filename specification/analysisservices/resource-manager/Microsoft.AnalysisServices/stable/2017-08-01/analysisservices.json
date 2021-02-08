@@ -1360,6 +1360,11 @@
           "description": "The http status code",
           "type": "integer",
           "format": "int32"
+        },
+        "timeStamp": {
+          "description": "the timestamp for the error.",
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -1426,7 +1431,7 @@
         "error": {
           "type": "object",
           "description": "The error detail of the operation if any.",
-          "$ref": "#/definitions/ErrorResponse"
+          "$ref": "#/definitions/ErrorObject"
         }
       }
     },
@@ -1521,46 +1526,50 @@
       },
       "description": "The resource management error additional info."
     },
+    "ErrorObject": {
+      "type": "object",
+      "description": "The error object",
+      "properties": {
+        "code": {
+          "description": "Error code",
+          "type": "string"
+        },
+        "message": {
+          "description": "Error message indicating why the operation failed.",
+          "type": "string"
+        },
+        "subCode": {
+          "description": "The error sub code",
+          "type": "integer",
+          "format": "int32"
+        },
+        "httpStatusCode": {
+          "description": "The http status code",
+          "type": "integer",
+          "format": "int32"
+        },
+        "timeStamp": {
+          "description": "the timestamp for the error.",
+          "type": "string",
+          "readOnly": true
+        },
+        "details": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ErrorDetail"
+          },
+          "description": "The error details."
+        }
+      }
+    },
     "ErrorResponse": {
       "description": "Describes the format of Error response.",
       "type": "object",
       "properties": {
         "error": {
-          "type": "object",
           "description": "The error object",
-          "properties": {
-            "code": {
-              "description": "Error code",
-              "type": "string"
-            },
-            "message": {
-              "description": "Error message indicating why the operation failed.",
-              "type": "string"
-            },
-            "subCode": {
-              "description": "The error sub code",
-              "type": "integer",
-              "format": "int32"
-            },
-            "httpStatusCode": {
-              "description": "The http status code",
-              "type": "integer",
-              "format": "int32"
-            },
-            "timeStamp": {
-              "description": "the timestamp for the error.",
-              "type": "string",
-              "readOnly": true
-            },
-            "details": {
-              "readOnly": true,
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/ErrorDetail"
-              },
-              "description": "The error details."
-            }
-          }
+          "$ref": "#/definitions/ErrorObject"
         }
       }
     }
