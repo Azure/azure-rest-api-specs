@@ -455,6 +455,19 @@
             "$ref": "machineLearningServices.json#/parameters/APIVersionParameter"
           },
           {
+            "in": "query",
+            "name": "$orderby",
+            "description": "Ordering of list.",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$top",
+            "description": "Top of list.",
+            "type": "integer",
+            "format": "int32"
+          },
+          {
             "$ref": "machineLearningServices.json#/parameters/PaginationParameter"
           },
           {
@@ -1258,6 +1271,19 @@
             "$ref": "machineLearningServices.json#/parameters/APIVersionParameter"
           },
           {
+            "in": "query",
+            "name": "$orderby",
+            "description": "Ordering of list.",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$top",
+            "description": "Top of list.",
+            "type": "integer",
+            "format": "int32"
+          },
+          {
             "$ref": "machineLearningServices.json#/parameters/PaginationParameter"
           },
           {
@@ -1723,7 +1749,7 @@
         "tags": [
           "EnvironmentSpecification"
         ],
-        "summary": "Lists EnvironmentSpecificationVersions in container.",
+        "summary": "List versions.",
         "operationId": "EnvironmentSpecificationVersions_List",
         "produces": [
           "application/json"
@@ -1732,7 +1758,7 @@
           {
             "in": "path",
             "name": "name",
-            "description": "Name of EnvironmentSpecificationVersion.",
+            "description": "Container name.",
             "required": true,
             "type": "string"
           },
@@ -1742,14 +1768,15 @@
           {
             "in": "query",
             "name": "$orderby",
-            "description": "Order by filter.",
+            "description": "Ordering of list.",
             "type": "string"
           },
           {
             "in": "query",
             "name": "$top",
-            "description": "Top filter.",
-            "type": "string"
+            "description": "Top of list.",
+            "type": "integer",
+            "format": "int32"
           },
           {
             "$ref": "machineLearningServices.json#/parameters/PaginationParameter"
