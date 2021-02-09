@@ -45,6 +45,18 @@ directive:
 
 ---
 
+### Tag: package-2021-03-preview-only
+
+These settings apply only when `--tag=package-2021-03-preview-only` is specified on the command line.
+
+```yaml $(tag) == 'package-2021-03-preview-only'
+input-file:
+- Microsoft.SecurityInsights/preview/2021-03-01-preview/Settings.json
+- Microsoft.SecurityInsights/preview/2021-03-01-preview/operations.json
+```
+
+---
+
 ### Tag: package-2019-01-preview-only
 
 These settings apply only when `--tag=package-2019-01-preview-only` is specified on the command line.
@@ -62,18 +74,6 @@ directive:
     from: Microsoft.SecurityInsights/preview/2019-01-01-preview/SecurityInsights.json
     where: $.definitions.Watchlist
     reason: The Watchlist does not support list by subscription. It's not a top-level resource. To get the Watchlist, we should have a subscription as well as a resource group and Log Analytics workspace. 
-```
-
----
-
-### Tag: package-2021-03-preview-only
-
-These settings apply only when `--tag=package-2021-03-preview-only` is specified on the command line.
-
-```yaml $(tag) == 'package-2021-03-preview-only'
-input-file:
-- Microsoft.SecurityInsights/preview/2021-03-01-preview/Settings.json
-- Microsoft.SecurityInsights/preview/2021-03-01-preview/operations.json
 ```
 
 ---
