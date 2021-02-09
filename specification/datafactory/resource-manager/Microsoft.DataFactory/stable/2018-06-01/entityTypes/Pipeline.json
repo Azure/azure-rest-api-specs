@@ -5833,24 +5833,28 @@
       "description": "Web activity authentication properties.",
       "properties": {
         "type": {
-          "description": "Web activity authentication (Basic/ClientCertificate/MSI)",
+          "description": "Web activity authentication (Basic/ClientCertificate/MSI/ServicePrincipal)",
           "type": "string"
         },
         "pfx": {
-          "description": "Base64-encoded contents of a PFX file.",
+          "description": "Base64-encoded contents of a PFX file or Certificate when used for ServicePrincipal",
           "$ref": "../datafactory.json#/definitions/SecretBase"
         },
         "username": {
-          "description": "Web activity authentication user name for basic authentication.",
+          "description": "Web activity authentication user name for basic authentication or ClientID when used for ServicePrincipal",
           "type": "string"
         },
         "password": {
-          "description": "Password for the PFX file or basic authentication.",
+          "description": "Password for the PFX file or basic authentication / Secret when used for ServicePrincipal",
           "$ref": "../datafactory.json#/definitions/SecretBase"
         },
         "resource": {
           "description": "Resource for which Azure Auth token will be requested when using MSI Authentication.",
           "type": "string"
+        },
+        "userTenant": {
+          "description": "TenantId for which Azure Auth token will be requested when using ServicePrincipal Authentication. Type: string (or Expression with resultType string).",
+          "type": "object"
         }
       },
       "required": [
