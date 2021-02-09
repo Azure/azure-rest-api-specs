@@ -6,8 +6,9 @@ Please also specify `--typescript-sdks-folder=<path to root folder of your azure
 ```yaml $(typescript)
 typescript:
   azure-arm: true
-  package-name: "redisenterprise"
-  output-folder: "$(typescript-sdks-folder)/packages/redisenterprise"
+  package-name: "@azure/arm-redisenterprisecache"
+  output-folder: "$(typescript-sdks-folder)/sdk/redisenterprise/arm-redisenterprisecache"
+  clear-output-folder: true
   payload-flattening-threshold: 1
   generate-metadata: true
 ```
