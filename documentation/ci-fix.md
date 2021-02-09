@@ -21,7 +21,7 @@ Or if you want to fix specified service:
 
 ```
 npm install
-npm run prettier -- --write "specification/<service>/**/*.json"
+npm run prettier --write "specification/<service>/**/*.json"
 ```
 
 Then please commit and push changes made by prettier.
