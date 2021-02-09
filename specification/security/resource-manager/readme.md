@@ -390,6 +390,7 @@ input-file:
 - Microsoft.Security/stable/2020-01-01/serverVulnerabilityAssessments.json
 - Microsoft.Security/stable/2020-01-01/topologies.json
 - Microsoft.Security/stable/2020-01-01/secureScore.json
+- Microsoft.Security/preview/2020-01-01/alerts.json
 
 # Needed when there is more than one input file
 override-info:
