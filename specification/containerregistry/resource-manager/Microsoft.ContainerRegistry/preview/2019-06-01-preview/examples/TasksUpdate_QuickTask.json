@@ -1,0 +1,62 @@
+{
+  "parameters": {
+    "subscriptionId": "4385cf00-2d3a-425a-832f-f4285b1c9dce",
+    "resourceGroupName": "myResourceGroup",
+    "registryName": "myRegistry",
+    "api-version": "2019-06-01-preview",
+    "taskName": "quicktask",
+    "taskUpdateParameters": {
+      "properties": {
+        "status": "Enabled",
+        "logTemplate": "acr/tasks:{{.Run.OS}}"
+      },
+      "tags": {
+        "testkey": "value"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "provisioningState": "Succeeded",
+          "creationDate": "2018-01-25T06:54:23.536Z",
+          "status": "Enabled",
+          "platform": null,
+          "agentConfiguration": null,
+          "trigger": null,
+          "logTemplate": "acr/tasks:{{.Run.OS}}"
+        },
+        "id": "/subscriptions/4385cf00-2d3a-425a-832f-f4285b1c9dce/resourceGroups/myResourceGroup/providers/Microsoft.ContainerRegistry/registries/myRegistry/tasks/myTask",
+        "name": "myTask",
+        "type": "Microsoft.ContainerRegistry/registries/tasks",
+        "location": "eastus",
+        "identity": null,
+        "tags": {
+          "testkey": "value"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "properties": {
+          "provisioningState": "Succeeded",
+          "creationDate": "2018-01-25T06:54:23.536Z",
+          "status": "Enabled",
+          "platform": null,
+          "agentConfiguration": null,
+          "trigger": null,
+          "logTemplate": "acr/tasks:{{.Run.OS}}"
+        },
+        "id": "/subscriptions/4385cf00-2d3a-425a-832f-f4285b1c9dce/resourceGroups/myResourceGroup/providers/Microsoft.ContainerRegistry/registries/myRegistry/tasks/myTask",
+        "name": "quicktask",
+        "type": "Microsoft.ContainerRegistry/registries/tasks",
+        "location": "eastus",
+        "identity": null,
+        "tags": {
+          "testkey": "value"
+        }
+      }
+    }
+  }
+}

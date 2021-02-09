@@ -835,6 +835,10 @@
     },
     "WorkspaceCustomParameters": {
       "properties": {
+        "amlWorkspaceId": {
+          "$ref": "#/definitions/WorkspaceCustomStringParameter",
+          "description": "The ID of a Azure Machine Learning workspace to link with Databricks workspace"
+        },
         "customVirtualNetworkId": {
           "$ref": "#/definitions/WorkspaceCustomStringParameter",
           "description": "The ID of a Virtual Network where this Databricks Cluster should be created"
@@ -858,6 +862,10 @@
         "encryption": {
           "$ref": "#/definitions/WorkspaceEncryptionParameter",
           "description": "Contains the encryption details for Customer-Managed Key (CMK) enabled workspace."
+        },
+        "requireInfrastructureEncryption": {
+          "$ref": "#/definitions/WorkspaceCustomBooleanParameter",
+          "description": "A boolean indicating whether or not the DBFS root file system will be enabled with secondary layer of encryption with platform managed keys for data at rest."
         }
       },
       "description": "Custom Parameters used for Cluster Creation."

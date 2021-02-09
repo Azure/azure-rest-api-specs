@@ -1,13 +1,13 @@
 # HybridCompute
-    
+
 > see https://aka.ms/autorest
 
 This is the AutoRest configuration file for HybridCompute RP.
 
-
-
 ---
-## Getting Started 
+
+## Getting Started
+
 To build the SDK for HybridCompute, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
@@ -15,18 +15,30 @@ To build the SDK for HybridCompute, simply [Install AutoRest](https://aka.ms/aut
 To see additional help and options, run:
 
 > `autorest --help`
+
 ---
 
 ## Configuration
 
-### Basic Information 
+### Basic Information
+
 These are the global settings for the HybridCompute API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2019-12
+tag: package-2020-08-02
 ```
 
+
+### Tag: package-preview-2020-08
+
+These settings apply only when `--tag=package-preview-2020-08` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2020-08'
+input-file:
+  - Microsoft.HybridCompute/preview/2020-08-15-preview/HybridCompute.json
+  - Microsoft.HybridCompute/preview/2020-08-15-preview/privateLinkScopes.json
+```
 ### Tag: package-2019-03
 
 These settings apply only when `--tag=package-2019-03` is specified on the command line.
@@ -54,7 +66,26 @@ input-file:
 - Microsoft.HybridCompute/stable/2019-12-12/HybridCompute.json
 ```
 
+### Tag: package-2020-07-30-preview
+
+These settings apply only when `--tag=package-2020-07-30-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-07-30-preview'
+input-file:
+- Microsoft.HybridCompute/preview/2020-07-30-preview/HybridCompute.json
+```
+
+### Tag: package-2020-08-02
+
+These settings apply only when `--tag=package-2020-08-02` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-08-02'
+input-file:
+- Microsoft.HybridCompute/stable/2020-08-02/HybridCompute.json
+```
+
 ---
+
 # Code Generation
 
 ## Swagger to SDK
@@ -69,186 +100,47 @@ swagger-to-sdk:
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js
+  - repo: azure-cli-extensions
+  - repo: azure-resource-manager-schemas
+    after_scripts:
+      - node sdkauto_afterscript.js hybridcompute/resource-manager
 ```
 
 ---
-## C# 
 
-These settings apply only when `--csharp` is specified on the command line.
-Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azure-sdk-for-net clone>`.
+## AzureResourceSchema
 
-``` yaml $(csharp)
-csharp:
-  azure-arm: true
-  license-header: MICROSOFT_MIT_NO_VERSION
-  namespace: Microsoft.Azure.Management.HybridCompute
-  output-folder: $(csharp-sdks-folder)/HybridCompute/Microsoft.Azure.Management.HybridCompute/src/Generated
-  clear-output-folder: true
-directive:
-  - remove-operation: 
-    - Machines_Reconnect
-    - Machines_CreateOrUpdate
-    - Machines_Update
-    - MachineExtensions_CreateOrUpdate
-    - MachineExtensions_Update
-    - MachineExtensions_Delete
-    - MachineExtensions_Get
-    - MachineExtensions_List
-```
+See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
 
-## PowerShell
+## az CLI
 
-``` yaml $(powershell)
-powershell:
-  namespace: Microsoft.Azure.Management.HybridCompute
-  output-folder: generated
-  clear-output-folder: true
-directive:
-  - remove-operation: 
-    - Machines_Reconnect
-    - Machines_CreateOrUpdate
-    - Machines_Update
-    - MachineExtensions_CreateOrUpdate
-    - MachineExtensions_Update
-    - MachineExtensions_Delete
-    - MachineExtensions_Get
-    - MachineExtensions_List
-```
+See configuration in [readme.az.md](./readme.az.md) and [readme.cli.md](./readme.cli.md)
 
+## C#
 
-## Python
-
-These settings apply only when `--python` is specified on the command line.
-Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
-Use `--python-mode=update` if you already have a setup.py and just want to update the code itself.
-
-``` yaml $(python)
-python-mode: create
-python:
-  azure-arm: true
-  license-header: MICROSOFT_MIT_NO_VERSION
-  payload-flattening-threshold: 2
-  namespace: azure.mgmt.hybridcompute
-  package-name: azure-mgmt-hybridcompute
-  clear-output-folder: true
-```
-``` yaml $(python) && $(python-mode) == 'update'
-python:
-  no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/hybridcompute/azure-mgmt-hybridcompute/azure/mgmt/hybridcompute
-directive:
-  - remove-operation: 
-    - Machines_Reconnect
-    - Machines_CreateOrUpdate
-    - Machines_Update
-    - MachineExtensions_CreateOrUpdate
-    - MachineExtensions_Update
-    - MachineExtensions_Delete
-    - MachineExtensions_Get
-    - MachineExtensions_List
-```
-``` yaml $(python) && $(python-mode) == 'create'
-python:
-  basic-setup-py: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-hybridcompute
-directive:
-  - remove-operation: 
-    - Machines_Reconnect
-    - Machines_CreateOrUpdate
-    - Machines_Update
-    - MachineExtensions_CreateOrUpdate
-    - MachineExtensions_Update
-    - MachineExtensions_Delete
-    - MachineExtensions_Get
-    - MachineExtensions_List
-```
+See configuration in [readme.csharp.md](./readme.csharp.md)
 
 ## Go
 
-These settings apply only when `--go` is specified on the command line.
-
-``` yaml $(go)
-go:
-  license-header: MICROSOFT_APACHE_NO_VERSION
-  clear-output-folder: true
-  namespace: hybridcompute
-```
-
-
-### Go multi-api
-
-``` yaml $(go) && $(multiapi)
-batch:
-  - tag: package-2019-12
-```
-
-### Tag: package-2019-12 and go
-
-These settings apply only when `--tag=package-2019-12 --go` is specified on the command line.
-Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
-
-``` yaml $(tag)=='package-2019-12' && $(go)
-output-folder: $(go-sdk-folder)/services/preview/hybridcompute/mgmt/2019-12-12/hybridcompute
-```
+See configuration in [readme.go.md](./readme.go.md)
 
 ## Java
 
-These settings apply only when `--java` is specified on the command line.
-Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-libraries-for-java clone>`.
+See configuration in [readme.java.md](./readme.java.md)
 
-``` yaml $(java)
-azure-arm: true
-fluent: true
-namespace: com.microsoft.azure.management.hybridcompute
-license-header: MICROSOFT_MIT_NO_CODEGEN
-payload-flattening-threshold: 1
-output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-hybridcompute
-```
+## PowerShell
 
-### Java multi-api
+See configuration in the [Azure PowerShell repo](https://github.com/Azure/azure-powershell/tree/generation/src/ConnectedMachine)
 
-``` yaml $(java) && $(multiapi)
-batch:
-  - tag: package-2019-12
-```
+## Python
 
-### Tag: package-2019-12 and java
+See configuration in [readme.python.md](./readme.python.md)
 
-These settings apply only when `--tag=package-2019-12 --java` is specified on the command line.
-Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
+## Ruby
 
-``` yaml $(tag) == 'package-2019-12' && $(java) && $(multiapi)
-java:
-  namespace: com.microsoft.azure.management.hybridcompute.v2019_12_12
-  output-folder: $(azure-libraries-for-java-folder)/sdk/hybridcompute/mgmt-v2019_12_12
+See configuration in [readme.ruby.md](./readme.ruby.md)
 
-regenerate-manager: true
-generate-interface: true
-```
+## TypeScript
 
-## Multi-API/Profile support for AutoRest v3 generators 
-
-AutoRest V3 generators require the use of `--tag=all-api-versions` to select api files.
-
-This block is updated by an automatic script. Edits may be lost!
-
-``` yaml $(tag) == 'all-api-versions' /* autogenerated */
-# include the azure profile definitions from the standard location
-require: $(this-folder)/../../../profiles/readme.md
-
-# all the input files across all versions
-input-file:
-  - $(this-folder)/Microsoft.HybridCompute/preview/2019-03-18/HybridCompute.json
-  - $(this-folder)/Microsoft.HybridCompute/preview/2019-08-02/HybridCompute.json
-  - $(this-folder)/Microsoft.HybridCompute/stable/2019-12-12/HybridCompute.json
-
-```
-
-If there are files that should not be in the `all-api-versions` set, 
-uncomment the  `exclude-file` section below and add the file paths.
-
-``` yaml $(tag) == 'all-api-versions'
-#exclude-file: 
-#  - $(this-folder)/Microsoft.Example/stable/2010-01-01/somefile.json
-```
+See configuration in [readme.typescript](./readme.typescript.md)
 

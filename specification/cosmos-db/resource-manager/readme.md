@@ -4,10 +4,10 @@
 
 This is the AutoRest configuration file for Cosmos-DB.
 
-
-
 ---
+
 ## Getting Started
+
 To build the SDK for Cosmos-DB, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
@@ -15,21 +15,33 @@ To build the SDK for Cosmos-DB, simply [Install AutoRest](https://aka.ms/autores
 To see additional help and options, run:
 
 > `autorest --help`
+
 ---
 
 ## Configuration
 
-
-
 ### Basic Information
+
 These are the global settings for the Cosmos-DB API.
 
 ``` yaml
 title: CosmosDBManagementClient
 openapi-type: arm
-tag: package-2020-04
+tag: package-2020-09
 ```
 
+
+### Tag: package-2020-09
+
+These settings apply only when `--tag=package-2020-09` is specified on the command line.
+
+```yaml $(tag) == 'package-2020-09'
+input-file:
+  - Microsoft.DocumentDB/stable/2020-09-01/cosmos-db.json
+  - Microsoft.DocumentDB/stable/2020-09-01/notebook.json
+  - Microsoft.DocumentDB/preview/2019-08-01-preview/privateLinkResources.json
+  - Microsoft.DocumentDB/preview/2019-08-01-preview/privateEndpointConnection.json
+```
 ### Tag: package-2020-06-preview
 
 These settings apply only when `--tag=package-2020-06-preview` is specified on the command line.
@@ -38,8 +50,12 @@ These settings apply only when `--tag=package-2020-06-preview` is specified on t
 input-file:
 - Microsoft.DocumentDB/preview/2020-06-01-preview/cosmos-db.json
 - Microsoft.DocumentDB/preview/2020-06-01-preview/notebook.json
+- Microsoft.DocumentDB/preview/2020-06-01-preview/rbac.json
+- Microsoft.DocumentDB/preview/2020-06-01-preview/restorable.json
 - Microsoft.DocumentDB/preview/2019-08-01-preview/privateLinkResources.json
 - Microsoft.DocumentDB/preview/2019-08-01-preview/privateEndpointConnection.json
+modelerfour:
+  lenient-model-deduplication: true
 ```
 
 ### Tag: package-2020-04
@@ -146,6 +162,7 @@ input-file:
 ```
 
 ## Suppression
+
 ``` yaml
 directive:
   - suppress: TrackedResourceGetOperation
@@ -220,11 +237,14 @@ directive:
   - suppress: PathResourceProviderNamePascalCase
     from: privateLinkResources.json
     reason: The name of the provider is Microsoft.DocumentDB
+  - suppress: PathResourceProviderNamePascalCase
+    from: rbac.json
+    reason: The name of the provider is Microsoft.DocumentDB
 ```
 
 ---
-# Code Generation
 
+# Code Generation
 
 ## Swagger to SDK
 
@@ -238,8 +258,10 @@ swagger-to-sdk:
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
+  - repo: azure-resource-manager-schemas
+    after_scripts:
+      - node sdkauto_afterscript.js cosmos-db/resource-manager
 ```
-
 
 ## C#
 
@@ -266,6 +288,11 @@ See configuration in [readme.go.md](./readme.go.md)
 ## Java
 
 See configuration in [readme.java.md](./readme.java.md)
+
+## AzureResourceSchema
+
+See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
+
 ## Multi-API/Profile support for AutoRest v3 generators 
 
 AutoRest V3 generators require the use of `--tag=all-api-versions` to select api files.
@@ -280,10 +307,11 @@ require: $(this-folder)/../../../profiles/readme.md
 input-file:
   - $(this-folder)/Microsoft.DocumentDB/preview/2020-06-01-preview/cosmos-db.json
   - $(this-folder)/Microsoft.DocumentDB/preview/2020-06-01-preview/notebook.json
-  - $(this-folder)/Microsoft.DocumentDB/stable/2020-04-01/cosmos-db.json
-  - $(this-folder)/Microsoft.DocumentDB/stable/2020-04-01/notebook.json
+  - $(this-folder)/Microsoft.DocumentDB/preview/2020-06-01-preview/rbac.json
   - $(this-folder)/Microsoft.DocumentDB/preview/2019-08-01-preview/privateLinkResources.json
   - $(this-folder)/Microsoft.DocumentDB/preview/2019-08-01-preview/privateEndpointConnection.json
+  - $(this-folder)/Microsoft.DocumentDB/stable/2020-04-01/cosmos-db.json
+  - $(this-folder)/Microsoft.DocumentDB/stable/2020-04-01/notebook.json
   - $(this-folder)/Microsoft.DocumentDB/stable/2020-03-01/cosmos-db.json
   - $(this-folder)/Microsoft.DocumentDB/stable/2020-03-01/notebook.json
   - $(this-folder)/Microsoft.DocumentDB/stable/2019-12-12/cosmos-db.json
@@ -305,4 +333,3 @@ uncomment the  `exclude-file` section below and add the file paths.
 #exclude-file: 
 #  - $(this-folder)/Microsoft.Example/stable/2010-01-01/somefile.json
 ```
-

@@ -256,6 +256,45 @@
           "type": "object"
         }
       }
+    },
+    "StorageLifecyclePolicyCompletedEventData": {
+      "description": "Schema of the Data property of an EventGridEvent for an Microsoft.Storage.LifecyclePolicyCompleted event.",
+      "type": "object",
+      "properties": {
+        "scheduleTime": {
+          "description": "The time the policy task was scheduled.",
+          "type": "string"
+        },
+        "deleteSummary": {
+          "$ref": "#/definitions/StorageLifecyclePolicyActionSummaryDetail"
+        },
+        "tierToCoolSummary": {
+          "$ref": "#/definitions/StorageLifecyclePolicyActionSummaryDetail"
+        },
+        "tierToArchiveSummary": {
+          "$ref": "#/definitions/StorageLifecyclePolicyActionSummaryDetail"
+        }
+      }
+    },
+    "StorageLifecyclePolicyActionSummaryDetail": {
+      "description": "Execution statistics of a specific policy action in a Blob Management cycle.",
+      "type": "object",
+      "properties": {
+        "totalObjectsCount": {
+          "description": "Total number of objects to be acted on by this action.",
+          "type": "integer",
+          "format": "int64"
+        },
+        "successCount": {
+          "description": "Number of success operations of this action.",
+          "type": "integer",
+          "format": "int64"
+        },
+        "errorList": {
+          "description": "Error messages of this action if any.",
+          "type": "string"
+        }
+      }
     }
   }
 }

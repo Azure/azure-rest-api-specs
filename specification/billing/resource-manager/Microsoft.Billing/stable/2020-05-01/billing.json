@@ -588,7 +588,8 @@
               },
               "Retry-After": {
                 "description": "Recommended time to wait before making another request to check the status of the operation. The time is specified in seconds.",
-                "type": "integer"
+                "type": "integer",
+                "format": "int32"
               }
             }
           },
@@ -607,7 +608,7 @@
           "Customers"
         ],
         "x-ms-examples": {
-          "CustomersListByBillingAccount": {
+          "CustomersListByBillingProfile": {
             "$ref": "./examples/CustomersListByBillingProfile.json"
           }
         },
@@ -800,7 +801,8 @@
               },
               "Retry-After": {
                 "description": "Recommended time to wait before making another request to check the status of the operation. The time is specified in seconds.",
-                "type": "integer"
+                "type": "integer",
+                "format": "int32"
               }
             }
           },
@@ -1064,6 +1066,9 @@
         "x-ms-examples": {
           "BillingAccountInvoicesList": {
             "$ref": "./examples/BillingAccountInvoicesList.json"
+          },
+          "BillingAccountInvoicesListWithRebillDetails": {
+            "$ref": "./examples/BillingAccountInvoicesListWithRebillDetails.json"
           }
         },
         "operationId": "Invoices_ListByBillingAccount",
@@ -1120,6 +1125,9 @@
         "x-ms-examples": {
           "InvoicesListByBillingProfile": {
             "$ref": "./examples/InvoicesListByBillingProfile.json"
+          },
+          "InvoicesListByBillingProfileWithRebillDetails": {
+            "$ref": "./examples/InvoicesListByBillingProfileWithRebillDetails.json"
           }
         },
         "operationId": "Invoices_ListByBillingProfile",
@@ -1179,6 +1187,15 @@
         "x-ms-examples": {
           "Invoice": {
             "$ref": "./examples/Invoice.json"
+          },
+          "InvoiceWithRebillDetails": {
+            "$ref": "./examples/InvoiceWithRebillDetails.json"
+          },
+          "VoidInvoice": {
+            "$ref": "./examples/VoidInvoice.json"
+          },
+          "CreditNote": {
+            "$ref": "./examples/CreditNote.json"
           }
         },
         "operationId": "Invoices_Get",
@@ -1259,7 +1276,7 @@
         ],
         "x-ms-examples": {
           "InvoiceDownload": {
-            "$ref": "./examples/InvoiceDownload.json"
+            "$ref": "./examples/ModernInvoiceDownload.json"
           }
         },
         "operationId": "Invoices_DownloadInvoice",
@@ -1287,6 +1304,74 @@
             "in": "query",
             "required": true,
             "type": "string"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted.",
+            "headers": {
+              "Location": {
+                "description": "GET this URL to retrieve the status of the asynchronous operation.",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "The amount of delay to use while the status of the operation is checked. The value is expressed in seconds.",
+                "type": "string"
+              }
+            }
+          },
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/DownloadUrl"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/downloadDocuments": {
+      "post": {
+        "tags": [
+          "Invoices"
+        ],
+        "x-ms-examples": {
+          "BillingProfileInvoiceDownload": {
+            "$ref": "./examples/MultipleModernInvoiceDownload.json"
+          }
+        },
+        "operationId": "Invoices_DownloadMultipleBillingProfileInvoices",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "description": "Gets a URL to download multiple invoice documents (invoice pdf, tax receipts, credit notes) as a zip file. The operation is supported for billing accounts with agreement type Microsoft Partner Agreement or Microsoft Customer Agreement.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/billingAccountNameParameter"
+          },
+          {
+            "name": "downloadUrls",
+            "in": "body",
+            "required": true,
+            "description": "An array of download urls for individual documents",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
           }
         ],
         "responses": {
@@ -1493,6 +1578,74 @@
             "in": "query",
             "required": true,
             "type": "string"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted.",
+            "headers": {
+              "Location": {
+                "description": "GET this URL to retrieve the status of the asynchronous operation.",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "The amount of delay to use while the status of the operation is checked. The value is expressed in seconds.",
+                "type": "string"
+              }
+            }
+          },
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/DownloadUrl"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/default/billingSubscriptions/{subscriptionId}/downloadDocuments": {
+      "post": {
+        "tags": [
+          "Invoices"
+        ],
+        "x-ms-examples": {
+          "BillingSubscriptionInvoiceDownload": {
+            "$ref": "./examples/MultipleBillingSubscriptionInvoiceDownload.json"
+          }
+        },
+        "operationId": "Invoices_DownloadMultipleBillingSubscriptionInvoices",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "description": "Gets a URL to download multiple invoice documents (invoice pdf, tax receipts, credit notes) as a zip file.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "name": "downloadUrls",
+            "in": "body",
+            "required": true,
+            "description": "An array of download urls for individual documents",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
           }
         ],
         "responses": {
@@ -1754,7 +1907,8 @@
               },
               "Retry-After": {
                 "description": "Recommended time to wait before making another request to check the status of the operation. The time is specified in seconds.",
-                "type": "integer"
+                "type": "integer",
+                "format": "int32"
               }
             }
           },
@@ -2113,7 +2267,8 @@
               },
               "Retry-After": {
                 "description": "Recommended time to wait before making another request to check the status of the operation. The time is specified in seconds.",
-                "type": "integer"
+                "type": "integer",
+                "format": "int32"
               }
             }
           },
@@ -3568,14 +3723,26 @@
       "type": "string",
       "description": "Error code of the transfer validation response.",
       "enum": [
-        "InvalidSource",
-        "SubscriptionNotActive",
-        "InsufficientPermissionOnSource",
-        "InsufficientPermissionOnDestination",
-        "DestinationBillingProfilePastDue",
-        "SubscriptionTypeNotSupported",
+        "BillingAccountInactive",
         "CrossBillingAccountNotAllowed",
-        "NotAvailableForDestinationMarket"
+        "DestinationBillingProfileInactive",
+        "DestinationBillingProfileNotFound",
+        "DestinationBillingProfilePastDue",
+        "DestinationInvoiceSectionInactive",
+        "DestinationInvoiceSectionNotFound",
+        "InsufficientPermissionOnDestination",
+        "InsufficientPermissionOnSource",
+        "InvalidDestination",
+        "InvalidSource",
+        "MarketplaceNotEnabledOnDestination",
+        "NotAvailableForDestinationMarket",
+        "ProductInactive",
+        "ProductNotFound",
+        "ProductTypeNotSupported",
+        "SourceBillingProfilePastDue",
+        "SourceInvoiceSectionInactive",
+        "SubscriptionNotActive",
+        "SubscriptionTypeNotSupported"
       ],
       "x-ms-enum": {
         "name": "subscriptionTransferValidationErrorCode",
@@ -4164,9 +4331,29 @@
           "description": "The purchase order name that will appear on the invoices generated for the billing profile.",
           "type": "string"
         },
+        "billingRelationshipType": {
+          "description": "Identifies which services and purchases are paid by a billing profile.",
+          "type": "string",
+          "enum": [
+            "Direct",
+            "IndirectCustomer",
+            "IndirectPartner",
+            "CSPPartner"
+          ],
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "BillingRelationshipType",
+            "modelAsString": true
+          }
+        },
         "billTo": {
           "description": "Billing address.",
           "$ref": "#/definitions/AddressDetails"
+        },
+        "indirectRelationshipInfo": {
+          "description": "Identifies the billing profile that is linked to another billing profile in indirect purchase motion.",
+          "readOnly": true,
+          "$ref": "#/definitions/IndirectRelationshipInfo"
         },
         "invoiceEmailOptIn": {
           "description": "Flag controlling whether the invoices for the billing profile are sent through email.",
@@ -4175,6 +4362,7 @@
         "invoiceDay": {
           "description": "The day of the month when the invoice for the billing profile is generated.",
           "type": "integer",
+          "format": "int32",
           "readOnly": true
         },
         "currency": {
@@ -4242,6 +4430,14 @@
           "x-ms-enum": {
             "name": "SpendingLimit",
             "modelAsString": true
+          }
+        },
+        "targetClouds": {
+          "description": "Identifies the cloud environments that are associated with a billing profile. This is a system managed optional field and gets updated as the billing profile gets associated with accounts in various clouds.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/TargetCloud"
           }
         }
       }
@@ -4324,6 +4520,23 @@
         }
       }
     },
+    "IndirectRelationshipInfo": {
+      "description": "The billing profile details of the partner of the customer for an indirect motion.",
+      "properties": {
+        "billingAccountName": {
+          "description": "The billing account name of the partner or the customer for an indirect motion.",
+          "type": "string"
+        },
+        "billingProfileName": {
+          "description": "The billing profile name of the partner or the customer for an indirect motion.",
+          "type": "string"
+        },
+        "displayName": {
+          "description": "The display name of the partner or customer for an indirect motion.",
+          "type": "string"
+        }
+      }
+    },
     "InvoiceSectionCreationRequest": {
       "description": "The properties of the invoice section.",
       "properties": {
@@ -4382,9 +4595,27 @@
           },
           "maxItems": 1000
         },
+        "state": {
+          "description": "Identifies the state of an invoice section.",
+          "type": "string",
+          "enum": [
+            "Active",
+            "Restricted"
+          ],
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "InvoiceSectionState",
+            "modelAsString": true
+          }
+        },
         "systemId": {
           "description": "The system generated unique identifier for an invoice section.",
           "type": "string",
+          "readOnly": true
+        },
+        "targetCloud": {
+          "description": "Identifies the cloud environments that are associated with an invoice section. This is a system managed optional field and gets updated as the invoice section gets associated with accounts in various clouds.",
+          "$ref": "#/definitions/TargetCloud",
           "readOnly": true
         }
       }
@@ -4537,6 +4768,11 @@
           "description": "The target of the particular error.",
           "type": "string",
           "readOnly": true
+        },
+        "details": {
+          "description": "The sub details of the error.",
+          "readOnly": true,
+          "$ref": "#/definitions/ErrorSubDetails"
         }
       }
     },
@@ -4547,6 +4783,29 @@
         "error": {
           "description": "The details of the error.",
           "$ref": "#/definitions/ErrorDetails"
+        }
+      }
+    },
+    "ErrorSubDetails": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "description": "Error code.",
+            "type": "string",
+            "readOnly": true
+          },
+          "message": {
+            "description": "Error message indicating why the operation failed.",
+            "type": "string",
+            "readOnly": true
+          },
+          "target": {
+            "description": "The target of the particular error.",
+            "type": "string",
+            "readOnly": true
+          }
         }
       }
     },
@@ -4641,7 +4900,8 @@
           "enum": [
             "Due",
             "OverDue",
-            "Paid"
+            "Paid",
+            "Void"
           ],
           "readOnly": true,
           "x-ms-enum": {
@@ -4751,6 +5011,38 @@
             "$ref": "#/definitions/PaymentProperties"
           }
         },
+        "rebillDetails": {
+          "description": "Rebill details for an invoice.",
+          "type": "object",
+          "readOnly": true,
+          "additionalProperties": {
+            "type": "object",
+            "$ref": "#/definitions/RebillDetails"
+          }
+        },
+        "documentType": {
+          "description": "The type of the document.",
+          "type": "string",
+          "enum": [
+            "Invoice",
+            "CreditNote"
+          ],
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "InvoiceDocumentType",
+            "modelAsString": true
+          }
+        },
+        "billedDocumentId": {
+          "description": "The Id of the active invoice which is originally billed after this invoice was voided. This field is applicable to the void invoices only.",
+          "type": "string",
+          "readOnly": true
+        },
+        "creditForDocumentId": {
+          "description": "The Id of the invoice which got voided and this credit note was issued as a result. This field is applicable to the credit notes only.",
+          "type": "string",
+          "readOnly": true
+        },
         "subscriptionId": {
           "description": "The ID of the subscription for which the invoice is generated.",
           "type": "string",
@@ -4795,6 +5087,30 @@
           "description": "The type of payment method.",
           "type": "string",
           "readOnly": true
+        }
+      }
+    },
+    "RebillDetails": {
+      "description": "The rebill details of an invoice.",
+      "properties": {
+        "creditNoteDocumentId": {
+          "description": "The ID of credit note.",
+          "type": "string",
+          "readOnly": true
+        },
+        "invoiceDocumentId": {
+          "description": "The ID of invoice.",
+          "type": "string",
+          "readOnly": true
+        },
+        "rebillDetails": {
+          "description": "Rebill details for an invoice.",
+          "type": "object",
+          "readOnly": true,
+          "additionalProperties": {
+            "type": "object",
+            "$ref": "#/definitions/RebillDetails"
+          }
         }
       }
     },
@@ -5214,6 +5530,19 @@
         }
       }
     },
+    "TargetCloud": {
+      "type": "string",
+      "description": "Possible cloud environments.",
+      "enum": [
+        "USGov",
+        "USNat",
+        "USSec"
+      ],
+      "x-ms-enum": {
+        "name": "targetCloud",
+        "modelAsString": true
+      }
+    },
     "TransactionListResult": {
       "description": "The list of transactions.",
       "properties": {
@@ -5329,6 +5658,7 @@
         "quantity": {
           "description": "The quantity purchased in the transaction.",
           "type": "integer",
+          "format": "int32",
           "readOnly": true
         },
         "invoiceSectionId": {

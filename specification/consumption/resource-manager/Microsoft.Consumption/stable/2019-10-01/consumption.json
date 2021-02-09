@@ -134,6 +134,7 @@
             "in": "query",
             "required": false,
             "type": "integer",
+            "format": "int32",
             "minimum": 1,
             "maximum": 1000
           },
@@ -220,6 +221,7 @@
             "in": "query",
             "required": false,
             "type": "integer",
+            "format": "int32",
             "minimum": 1,
             "maximum": 1000
           },
@@ -344,7 +346,7 @@
           "Budgets"
         ],
         "operationId": "Budgets_CreateOrUpdate",
-        "description": "The operation to create or update a budget. Update operation requires latest eTag to be set in the request mandatorily. You may obtain the latest eTag by performing a get operation. Create operation does not require eTag.",
+        "description": "The operation to create or update a budget. You can optionally provide an eTag if desired as a form of concurrency control. To obtain the latest eTag for a given budget, perform a get operation prior to your put operation.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
         },
@@ -461,6 +463,9 @@
             "schema": {
               "$ref": "#/definitions/TagsResult"
             }
+          },
+          "204": {
+            "description": "An empty response is sent when there is no information available within the selected scope."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -792,6 +797,9 @@
           },
           "ReservationSummariesMonthlyWithBillingProfileId": {
             "$ref": "./examples/ReservationSummariesMonthlyWithBillingProfileId.json"
+          },
+          "ReservationSummariesMonthlyWithBillingProfileIdReservationId": {
+            "$ref": "./examples/ReservationSummariesMonthlyWithBillingProfileIdReservationId.json"
           }
         },
         "parameters": [
@@ -823,6 +831,22 @@
             "in": "query",
             "required": false,
             "type": "string"
+          },
+          {
+            "name": "reservationId",
+            "in": "query",
+            "description": "Reservation Id GUID. Only valid if reservationOrderId is also provided. Filter to a specific reservation",
+            "required": false,
+            "type": "string",
+            "x-ms-parameter-location": "method"
+          },
+          {
+            "name": "reservationOrderId",
+            "in": "query",
+            "description": "Reservation Order Id GUID. Required if reservationId is provided. Filter to a specific reservation order",
+            "required": false,
+            "type": "string",
+            "x-ms-parameter-location": "method"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -868,7 +892,7 @@
           },
           {
             "name": "$filter",
-            "description": "Filter reservation details by date range. The properties/UsageDate for start date and end date. The filter supports 'le' and  'ge' ",
+            "description": "Filter reservation details by date range. The properties/UsageDate for start date and end date. The filter supports 'le' and  'ge'",
             "in": "query",
             "required": true,
             "type": "string"
@@ -964,6 +988,9 @@
           },
           "ReservationDetailsByBillingProfileId": {
             "$ref": "./examples/ReservationDetailsByBillingProfileId.json"
+          },
+          "ReservationDetailsByBillingProfileIdReservationId": {
+            "$ref": "./examples/ReservationDetailsByBillingProfileIdReservationId.json"
           }
         },
         "parameters": [
@@ -992,6 +1019,22 @@
             "in": "query",
             "required": false,
             "type": "string"
+          },
+          {
+            "name": "reservationId",
+            "in": "query",
+            "description": "Reservation Id GUID. Only valid if reservationOrderId is also provided. Filter to a specific reservation",
+            "required": false,
+            "type": "string",
+            "x-ms-parameter-location": "method"
+          },
+          {
+            "name": "reservationOrderId",
+            "in": "query",
+            "description": "Reservation Order Id GUID. Required if reservationId is provided. Filter to a specific reservation order",
+            "required": false,
+            "type": "string",
+            "x-ms-parameter-location": "method"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -1060,6 +1103,9 @@
             "schema": {
               "$ref": "#/definitions/ReservationRecommendationsListResult"
             }
+          },
+          "204": {
+            "description": "An empty response is sent when there are no recommendations."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -1276,6 +1322,7 @@
             "in": "query",
             "required": false,
             "type": "integer",
+            "format": "int32",
             "minimum": 1,
             "maximum": 1000
           },
@@ -1341,6 +1388,7 @@
             "in": "query",
             "required": false,
             "type": "integer",
+            "format": "int32",
             "minimum": 1,
             "maximum": 1000
           },
@@ -1377,7 +1425,7 @@
         ],
         "x-ms-odata": "#/definitions/Forecast",
         "operationId": "Forecasts_List",
-        "description": "Lists the forecast charges by subscriptionId.",
+        "description": "Lists the forecast charges for scope defined. Please note that this API is no longer actively under development. We recommend using our new Forecast API moving forward: https://docs.microsoft.com/en-us/rest/api/cost-management/forecast/usage.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
         },
@@ -1506,7 +1554,7 @@
         }
       }
     },
-    "/providers/Microsoft.Management/managementGroups/{managementGroupId}/providers/Microsoft.Billing/billingPeriods/{billingPeriodName}/Microsoft.Consumption/aggregatedcost": {
+    "/providers/Microsoft.Management/managementGroups/{managementGroupId}/providers/Microsoft.Billing/billingPeriods/{billingPeriodName}/Microsoft.Consumption/aggregatedCost": {
       "get": {
         "tags": [
           "AggregatedCost"
@@ -2947,6 +2995,14 @@
         }
       ],
       "properties": {
+        "location": {
+          "type": "string",
+          "description": "Resource Location."
+        },
+        "sku": {
+          "type": "string",
+          "description": "Resource sku"
+        },
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/ReservationRecommendationDetailsProperties",
@@ -3017,6 +3073,10 @@
           "type": "number",
           "readOnly": true
         },
+        "reservedUnitCount": {
+          "description": "The number of reserved units used to calculate savings. Always 1 for virtual machines.",
+          "type": "number"
+        },
         "savings": {
           "description": "The amount saved by purchasing the recommended quantity of reservation.",
           "type": "number",
@@ -3075,6 +3135,7 @@
         "lookBackPeriod": {
           "description": "Number of days of usage to look back used for computing the recommendation.",
           "type": "integer",
+          "format": "int32",
           "readOnly": true
         },
         "recommendedQuantity": {
@@ -3210,7 +3271,7 @@
         },
         "instanceFlexibilityRatio": {
           "description": "The instance Flexibility Ratio.",
-          "type": "integer",
+          "type": "number",
           "readOnly": true
         },
         "instanceFlexibilityGroup": {
@@ -3329,7 +3390,7 @@
         },
         "instanceFlexibilityRatio": {
           "description": "The instance Flexibility Ratio.",
-          "type": "integer",
+          "type": "number",
           "readOnly": true
         },
         "instanceFlexibilityGroup": {
@@ -3515,7 +3576,7 @@
       "x-ms-discriminator-value": "Modern",
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "#/definitions/ReservationTransactionResource"
         }
       ],
       "properties": {
@@ -3662,7 +3723,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "#/definitions/ReservationTransactionResource"
         }
       ],
       "properties": {
@@ -3734,6 +3795,16 @@
           "items": {
             "$ref": "#/definitions/Tag"
           }
+        },
+        "nextLink": {
+          "description": "The link (url) to the next page of results.",
+          "type": "string",
+          "readOnly": true
+        },
+        "previousLink": {
+          "description": "The link (url) to the previous page of results.",
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -3820,7 +3891,7 @@
           "$ref": "#/definitions/BudgetTimePeriod"
         },
         "filter": {
-          "description": "May be used to filter budgets by resource group, resource, or meter.",
+          "description": "May be used to filter budgets by user-specified dimensions and/or tags.",
           "type": "object",
           "$ref": "#/definitions/BudgetFilter"
         },
@@ -3871,14 +3942,27 @@
           "description": "The logical \"AND\" expression. Must have at least 2 items.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/BudgetFilter"
+            "$ref": "#/definitions/BudgetFilterProperties"
           },
-          "minItems": 2
+          "minItems": 0
         },
         "not": {
           "description": "The logical \"NOT\" expression.",
-          "$ref": "#/definitions/BudgetFilter"
+          "$ref": "#/definitions/BudgetFilterProperties"
         },
+        "dimensions": {
+          "description": "Has comparison expression for a dimension",
+          "$ref": "#/definitions/BudgetComparisonExpression"
+        },
+        "tags": {
+          "description": "Has comparison expression for a tag",
+          "$ref": "#/definitions/BudgetComparisonExpression"
+        }
+      }
+    },
+    "BudgetFilterProperties": {
+      "description": "The Dimensions or Tags to filter a budget by.",
+      "properties": {
         "dimensions": {
           "description": "Has comparison expression for a dimension",
           "$ref": "#/definitions/BudgetComparisonExpression"
@@ -3913,7 +3997,7 @@
           "items": {
             "type": "string"
           },
-          "minItems": 1
+          "minItems": 0
         }
       },
       "required": [
@@ -3964,12 +4048,12 @@
           "format": "decimal"
         },
         "contactEmails": {
-          "description": "Email addresses to send the budget notification to when the threshold is exceeded.",
+          "description": "Email addresses to send the budget notification to when the threshold is exceeded. Must have at least one contact email or contact group specified at the Subscription or Resource Group scopes. All other scopes must have at least one contact email specified.",
           "type": "array",
           "items": {
             "type": "string"
           },
-          "minItems": 1,
+          "minItems": 0,
           "maxItems": 50
         },
         "contactRoles": {
@@ -3980,7 +4064,7 @@
           }
         },
         "contactGroups": {
-          "description": "Action groups to send the budget notification to when the threshold is exceeded.",
+          "description": "Action groups to send the budget notification to when the threshold is exceeded. Must be provided as a fully qualified Azure resource id. Only supported at Subscription or Resource Group scopes.",
           "type": "array",
           "items": {
             "type": "string"
@@ -3997,7 +4081,8 @@
           "x-ms-enum": {
             "name": "ThresholdType",
             "modelAsString": true
-          }
+          },
+          "default": "Actual"
         }
       },
       "required": [
@@ -4134,7 +4219,7 @@
           "readOnly": true
         },
         "grain": {
-          "description": "The granularity of forecast.",
+          "description": "The granularity of forecast. Please note that Yearly is not currently supported in this API. The API will provide responses in the Monthly grain if Yearly is selected. To get yearly grain data, please use our newer Forecast API.",
           "type": "string",
           "enum": [
             "Daily",
@@ -4532,6 +4617,11 @@
       "description": "A Consumption REST API operation.",
       "type": "object",
       "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Operation Id."
+        },
         "name": {
           "description": "Operation name: {provider}/{resource}/{operation}.",
           "type": "string",
@@ -4844,10 +4934,44 @@
           "type": "string",
           "description": "Resource type."
         },
+        "etag": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource etag."
+        },
         "tags": {
           "readOnly": true,
           "type": "object",
           "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags."
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "ReservationTransactionResource": {
+      "description": "The Resource model definition.",
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource Id."
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource name."
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource type."
+        },
+        "tags": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
             "type": "string"
           },
           "description": "Resource tags."

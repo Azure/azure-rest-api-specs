@@ -1311,6 +1311,13 @@
           "description": "Timestamp of the last backup operation on this backup item.",
           "type": "string"
         },
+        "kpisHealths": {
+          "description": "Health details of different KPIs",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/KPIResourceHealthDetails"
+          }
+        },
         "extendedInfo": {
           "$ref": "#/definitions/AzureFileshareProtectedItemExtendedInfo",
           "description": "Additional information with this backup item."
@@ -1831,6 +1838,13 @@
             "$ref": "#/definitions/AzureIaaSVMHealthDetails"
           }
         },
+        "kpisHealths": {
+          "description": "Health details of different KPIs",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/KPIResourceHealthDetails"
+          }
+        },
         "lastBackupStatus": {
           "description": "Last backup operation status.",
           "type": "string"
@@ -2180,6 +2194,13 @@
         "extendedInfo": {
           "$ref": "#/definitions/AzureVmWorkloadProtectedItemExtendedInfo",
           "description": "Additional information for this backup item."
+        },
+        "kpisHealths": {
+          "description": "Health details of different KPIs",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/KPIResourceHealthDetails"
+          }
         }
       },
       "x-ms-discriminator-value": "AzureVmWorkloadProtectedItem"
@@ -4035,6 +4056,35 @@
         }
       },
       "discriminator": "objectType"
+    },
+    "KPIResourceHealthDetails": {
+      "description": "KPI Resource Health Details",
+      "type": "object",
+      "properties": {
+        "resourceHealthStatus": {
+          "description": "Resource Health Status",
+          "enum": [
+            "Healthy",
+            "TransientDegraded",
+            "PersistentDegraded",
+            "TransientUnhealthy",
+            "PersistentUnhealthy",
+            "Invalid"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ResourceHealthStatus",
+            "modelAsString": true
+          }
+        },
+        "resourceHealthDetails": {
+          "description": "Resource Health Status",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ResourceHealthDetails"
+          }
+        }
+      }
     },
     "OperationResultInfoBaseResource": {
       "description": "Base class for operation result info.",

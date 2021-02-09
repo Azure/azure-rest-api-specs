@@ -1,0 +1,80 @@
+{
+  "parameters": {
+    "serverName": "targetserver",
+    "resourceGroupName": "TargetResourceGroup",
+    "api-version": "2020-07-01-preview",
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
+    "parameters": {
+      "location": "westus",
+      "properties": {
+        "createMode": "Replica",
+        "sourceServerId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/PrimaryResourceGroup/providers/Microsoft.DBforMySQL/flexibleServers/primaryserver"
+      }
+    }
+  },
+  "responses": {
+    "201": {
+      "body": {
+        "sku": {
+          "name": "Standard_D14_v2",
+          "tier": "GeneralPurpose"
+        },
+        "properties": {
+          "administratorLogin": "cloudsa",
+          "storageProfile": {
+            "storageMB": 128000,
+            "storageIops": 200,
+            "backupRetentionDays": 14
+          },
+          "version": "5.7",
+          "sslEnforcement": "Enabled",
+          "publicNetworkAccess": "Enabled",
+          "state": "Ready",
+          "fullyQualifiedDomainName": "targetserver.mysql.database.azure.com",
+          "replicationRole": "Replica",
+          "sourceServerId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/PrimaryResourceGroup/providers/Microsoft.DBforMySQL/flexibleServers/primaryserver",
+          "replicaCapacity": 0
+        },
+        "location": "westus",
+        "tags": {
+          "ElasticServer": "1"
+        },
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TargetResourceGroup/providers/Microsoft.DBforMySQL/flexibleServers/targetserver",
+        "name": "targetserver",
+        "type": "Microsoft.DBforMySQL/flexibleServers"
+      }
+    },
+    "200": {
+      "body": {
+        "sku": {
+          "name": "Standard_D14_v2",
+          "tier": "GeneralPurpose"
+        },
+        "properties": {
+          "administratorLogin": "cloudsa",
+          "storageProfile": {
+            "storageMB": 128000,
+            "storageIops": 200,
+            "backupRetentionDays": 14
+          },
+          "version": "5.7",
+          "sslEnforcement": "Enabled",
+          "publicNetworkAccess": "Enabled",
+          "state": "Ready",
+          "fullyQualifiedDomainName": "targetserver.mysql.database.azure.com",
+          "replicationRole": "Replica",
+          "sourceServerId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/PrimaryResourceGroup/providers/Microsoft.DBforMySQL/flexibleServers/primaryserver",
+          "replicaCapacity": 0
+        },
+        "location": "westus",
+        "tags": {
+          "ElasticServer": "1"
+        },
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TargetResourceGroup/providers/Microsoft.DBforMySQL/flexibleServers/targetserver",
+        "name": "targetserver",
+        "type": "Microsoft.DBforMySQL/flexibleServers"
+      }
+    },
+    "202": {}
+  }
+}

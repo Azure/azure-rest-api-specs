@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "version": "2020-04-01-preview",
-    "title": "SynapseManagementClient",
+    "title": "SynapseSqlV3ManagementClient",
     "description": "Azure Synapse Analytics APIs"
   },
   "host": "management.azure.com",
@@ -23,11 +23,11 @@
   "paths": {
     "/providers/Microsoft.Synapse/operations": {
       "get": {
-        "operationId": "Operations_List",
+        "operationId": "SqlV3Operations_List",
         "summary": "All operations",
         "description": "Get all available operations",
         "tags": [
-          "Operations"
+          "SqlV3Operations"
         ],
         "deprecated": false,
         "consumes": [],
@@ -43,6 +43,12 @@
               }
             },
             "description": ""
+          },
+          "default": {
+            "schema": {
+              "$ref": "../../../../common/v1/types.json#/definitions/ErrorContract"
+            },
+            "description": ""
           }
         },
         "x-ms-examples": {
@@ -54,11 +60,11 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/operationResults/{operationId}": {
       "get": {
-        "operationId": "Operations_GetLocationHeaderResult",
+        "operationId": "SqlV3Operations_GetLocationHeaderResult",
         "summary": "Get operation result",
         "description": "Get the result of an operation",
         "tags": [
-          "Operations"
+          "SqlV3Operations"
         ],
         "deprecated": false,
         "consumes": [],
@@ -109,11 +115,11 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/operationStatuses/{operationId}": {
       "get": {
-        "operationId": "Operations_GetAzureAsyncHeaderResult",
+        "operationId": "SqlV3Operations_GetAzureAsyncHeaderResult",
         "summary": "Get operation status",
         "description": "Get the status of an operation",
         "tags": [
-          "Operations"
+          "SqlV3Operations"
         ],
         "deprecated": false,
         "consumes": [],
@@ -148,10 +154,7 @@
             },
             "description": ""
           },
-          "404": {
-            "description": ""
-          },
-          "500": {
+          "default": {
             "schema": {
               "$ref": "../../../../common/v1/types.json#/definitions/ErrorContract"
             },

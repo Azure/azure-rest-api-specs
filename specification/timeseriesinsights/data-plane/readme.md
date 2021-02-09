@@ -84,7 +84,6 @@ require: $(this-folder)/../../../profiles/readme.md
 # all the input files across all versions
 input-file:
   - $(this-folder)/Microsoft.TimeSeriesInsights/stable/2020-07-31/timeseriesinsights.json
-  - $(this-folder)/Microsoft.TimeSeriesInsights/preview/2018-11-01-preview/timeseriesinsights.json
 
 ```
 

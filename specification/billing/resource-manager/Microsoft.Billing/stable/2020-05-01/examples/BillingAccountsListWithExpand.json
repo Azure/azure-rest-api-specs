@@ -39,6 +39,7 @@
                     "type": "Microsoft.Billing/billingAccounts/billingProfiles",
                     "properties": {
                       "displayName": "BillingProfile1",
+                      "billingRelationshipType": "Direct",
                       "billTo": {
                         "companyName": "Contoso",
                         "firstName": "Test",
@@ -85,6 +86,7 @@
                                 "pcCode": "A123456",
                                 "costCategory": "Support"
                               },
+                              "state": "Active",
                               "systemId": "9XXX-11XX-XX1-XXXX-XXX"
                             }
                           },
@@ -98,6 +100,7 @@
                                 "pcCode": "B223456",
                                 "costCategory": "Finance"
                               },
+                              "state": "Active",
                               "systemId": "9XXX-22XX-XX1-XXXX-XXX"
                             }
                           }
@@ -111,6 +114,7 @@
                     "type": "Microsoft.Billing/billingAccounts/billingProfiles",
                     "properties": {
                       "displayName": "BillingProfile2",
+                      "billingRelationshipType": "CSPPartner",
                       "billTo": {
                         "companyName": "Contoso",
                         "firstName": "Test",
@@ -156,6 +160,7 @@
                                 "pcCode": "Z223456",
                                 "costCategory": "Marketing"
                               },
+                              "state": "Active",
                               "systemId": "9XXX-33XX-XX1-XXXX-XXX"
                             }
                           }
@@ -201,6 +206,7 @@
                         "email": "abc@contoso.com",
                         "phoneNumber": "000-000-0000"
                       },
+                      "billingRelationshipType": "IndirectPartner",
                       "currency": "USD",
                       "enabledAzurePlans": [
                         {
@@ -212,6 +218,11 @@
                           "skuDescription": "Microsoft Azure Plan for DevTest"
                         }
                       ],
+                      "indirectRelationshipInfo": {
+                        "billingAccountName": "20000000-0000-0000-0000-000000000001_00000000-0000-0000-0000-000000000000",
+                        "billingProfileName": "22000000-0000-0000-0000-000000000001",
+                        "displayName": "Customer1"
+                      },
                       "invoiceDay": 5,
                       "invoiceEmailOptIn": true,
                       "poNumber": "ABC12345",
@@ -220,6 +231,10 @@
                       "status": "Warned",
                       "statusReasonCode": "PastDue",
                       "spendingLimit": "On",
+                      "targetClouds": [
+                        "USNat",
+                        "USSec"
+                      ],
                       "invoiceSections": {
                         "hasMoreResults": true,
                         "value": [
@@ -233,7 +248,9 @@
                                 "pcCode": "C123456",
                                 "costCategory": "Support"
                               },
-                              "systemId": "9XXX-44XX-XX1-XXXX-XXX"
+                              "state": "Restricted",
+                              "systemId": "9XXX-44XX-XX1-XXXX-XXX",
+                              "targetCloud": "USNat"
                             }
                           },
                           {
@@ -246,7 +263,9 @@
                                 "pcCode": "D123456",
                                 "costCategory": "Marketing"
                               },
-                              "systemId": "9XXX-55XX-XX1-XXXX-XXX"
+                              "state": "Restricted",
+                              "systemId": "9XXX-55XX-XX1-XXXX-XXX",
+                              "targetCloud": "USSec"
                             }
                           }
                         ]
@@ -273,6 +292,7 @@
                         "email": "abc@contoso.com",
                         "phoneNumber": "000-000-0000"
                       },
+                      "billingRelationshipType": "IndirectCustomer",
                       "currency": "USD",
                       "enabledAzurePlans": [
                         {
@@ -284,6 +304,11 @@
                           "skuDescription": "Microsoft Azure Plan for DevTest"
                         }
                       ],
+                      "indirectRelationshipInfo": {
+                        "billingAccountName": "30000000-0000-0000-0000-000000000001_00000000-0000-0000-0000-000000000000",
+                        "billingProfileName": "33000000-0000-0000-0000-000000000001",
+                        "displayName": "Partner1"
+                      },
                       "invoiceDay": 5,
                       "invoiceEmailOptIn": true,
                       "poNumber": "ABC12345",
@@ -292,6 +317,9 @@
                       "status": "Warned",
                       "statusReasonCode": "PastDue",
                       "spendingLimit": "On",
+                      "targetClouds": [
+                        "USSec"
+                      ],
                       "invoiceSections": {
                         "hasMoreResults": true,
                         "value": [
@@ -305,6 +333,7 @@
                                 "pcCode": "E123456",
                                 "costCategory": "Finance"
                               },
+                              "state": "Active",
                               "systemId": "9XXX-66XX-XX1-XXXX-XXX"
                             }
                           },
@@ -318,7 +347,9 @@
                                 "pcCode": "O123456",
                                 "costCategory": "Support"
                               },
-                              "systemId": "9XXX-77XX-XX1-XXXX-XXX"
+                              "state": "Restricted",
+                              "systemId": "9XXX-77XX-XX1-XXXX-XXX",
+                              "targetCloud": "USSec"
                             }
                           }
                         ]

@@ -1,0 +1,944 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2019-05-05-preview",
+    "title": "Azure Alerts Management Service Resource Provider",
+    "description": "APIs for Azure Action Rules CRUD operations."
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AlertsManagement/actionRules": {
+      "get": {
+        "summary": "Get all action rule in a given subscription",
+        "description": "List all action rules of the subscription and given input filters",
+        "operationId": "ActionRules_ListBySubscription",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/targetResourceGroup"
+          },
+          {
+            "$ref": "#/parameters/targetResourceType"
+          },
+          {
+            "$ref": "#/parameters/targetResource"
+          },
+          {
+            "$ref": "#/parameters/severity"
+          },
+          {
+            "$ref": "#/parameters/monitorService"
+          },
+          {
+            "$ref": "#/parameters/impactedScope"
+          },
+          {
+            "$ref": "#/parameters/description"
+          },
+          {
+            "$ref": "#/parameters/alertRuleId"
+          },
+          {
+            "$ref": "#/parameters/actionGroup"
+          },
+          {
+            "$ref": "#/parameters/actionRuleName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. Return the list of action rules",
+            "headers": {
+              "x-ms-request-id": {
+                "type": "string",
+                "description": "Service generated Request ID."
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/ActionRulesList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/errorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "GetActionRulesSubscriptionWide": {
+            "$ref": "./examples/ActionRules_List_Subscription.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AlertsManagement/actionRules": {
+      "get": {
+        "summary": "Get all action rules created in a resource group",
+        "operationId": "ActionRules_ListByResourceGroup",
+        "description": "List all action rules of the subscription, created in given resource group and given input filters",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/targetResourceGroup"
+          },
+          {
+            "$ref": "#/parameters/targetResourceType"
+          },
+          {
+            "$ref": "#/parameters/targetResource"
+          },
+          {
+            "$ref": "#/parameters/severity"
+          },
+          {
+            "$ref": "#/parameters/monitorService"
+          },
+          {
+            "$ref": "#/parameters/impactedScope"
+          },
+          {
+            "$ref": "#/parameters/description"
+          },
+          {
+            "$ref": "#/parameters/alertRuleId"
+          },
+          {
+            "$ref": "#/parameters/actionGroup"
+          },
+          {
+            "$ref": "#/parameters/actionRuleName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. Return the list of action rules",
+            "headers": {
+              "x-ms-request-id": {
+                "type": "string",
+                "description": "Service generated Request ID."
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/ActionRulesList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/errorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "GetActionRulesResourceGroupWide": {
+            "$ref": "./examples/ActionRules_List_ResourceGroup.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AlertsManagement/actionRules/{actionRuleName}": {
+      "get": {
+        "summary": "Get action rule by name",
+        "operationId": "ActionRules_GetByName",
+        "description": "Get a specific action rule",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "name": "actionRuleName",
+            "in": "path",
+            "description": "The name of action rule that needs to be fetched",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. Returns the specific action rule",
+            "headers": {
+              "x-ms-request-id": {
+                "type": "string",
+                "description": "Service generated Request ID."
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/ActionRule"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/errorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetActionRuleById": {
+            "$ref": "./examples/ActionRules_GetById.json"
+          }
+        }
+      },
+      "put": {
+        "summary": "Create/update an action rule",
+        "operationId": "ActionRules_CreateUpdate",
+        "description": "Creates/Updates a specific action rule",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "name": "actionRuleName",
+            "in": "path",
+            "description": "The name of action rule that needs to be created/updated",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "actionRule",
+            "in": "body",
+            "description": "action rule to be created/updated",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ActionRule"
+            }
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. Returns the created/updated action rule",
+            "headers": {
+              "x-ms-request-id": {
+                "type": "string",
+                "description": "Service generated Request ID."
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/ActionRule"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/errorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PutActionRule": {
+            "$ref": "./examples/ActionRules_Create_SuppressionRule.json"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete action rule",
+        "description": "Deletes a given action rule",
+        "operationId": "ActionRules_Delete",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "name": "actionRuleName",
+            "in": "path",
+            "description": "The name that needs to be deleted",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. Returns true if deleted successfully",
+            "headers": {
+              "x-ms-request-id": {
+                "type": "string",
+                "description": "Service generated Request ID."
+              }
+            },
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/errorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DeleteActionRule": {
+            "$ref": "./examples/ActionRules_Delete.json"
+          }
+        }
+      },
+      "patch": {
+        "summary": "Patch action rule",
+        "description": "Update enabled flag and/or tags for the given action rule",
+        "operationId": "ActionRules_Update",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "name": "actionRuleName",
+            "in": "path",
+            "description": "The name that needs to be updated",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "actionRulePatch",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PatchObject"
+            },
+            "description": "Parameters supplied to the operation."
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. Returns the created/updated action rule",
+            "headers": {
+              "x-ms-request-id": {
+                "type": "string",
+                "description": "Service generated Request ID."
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/ActionRule"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/errorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PatchActionRule": {
+            "$ref": "./examples/ActionRules_Patch.json"
+          }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "subscriptionId": {
+      "name": "subscriptionId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The ID of the target subscription.",
+      "minLength": 1
+    },
+    "resourceGroupName": {
+      "name": "resourceGroupName",
+      "description": "Resource group name where the resource is created.",
+      "type": "string",
+      "in": "path",
+      "required": true,
+      "x-ms-parameter-location": "method"
+    },
+    "api-version": {
+      "name": "api-version",
+      "description": "client API version",
+      "type": "string",
+      "in": "query",
+      "required": true,
+      "enum": [
+        "2019-05-05-preview"
+      ],
+      "x-ms-enum": {
+        "name": "api-version",
+        "modelAsString": true
+      }
+    },
+    "targetResourceGroup": {
+      "description": "Filter by target resource group name. Default value is select all.",
+      "name": "targetResourceGroup",
+      "type": "string",
+      "in": "query",
+      "required": false,
+      "x-ms-parameter-location": "method"
+    },
+    "targetResource": {
+      "description": "Filter by target resource( which is full ARM ID) Default value is select all.",
+      "name": "targetResource",
+      "type": "string",
+      "in": "query",
+      "required": false,
+      "x-ms-parameter-location": "method"
+    },
+    "targetResourceType": {
+      "description": "Filter by target resource type. Default value is select all.",
+      "name": "targetResourceType",
+      "type": "string",
+      "in": "query",
+      "required": false,
+      "x-ms-parameter-location": "method"
+    },
+    "monitorService": {
+      "description": "Filter by monitor service which generates the alert instance. Default value is select all.",
+      "name": "monitorService",
+      "type": "string",
+      "in": "query",
+      "required": false,
+      "x-ms-parameter-location": "method",
+      "enum": [
+        "Application Insights",
+        "ActivityLog Administrative",
+        "ActivityLog Security",
+        "ActivityLog Recommendation",
+        "ActivityLog Policy",
+        "ActivityLog Autoscale",
+        "Log Analytics",
+        "Nagios",
+        "Platform",
+        "SCOM",
+        "ServiceHealth",
+        "SmartDetector",
+        "VM Insights",
+        "Zabbix"
+      ],
+      "x-ms-enum": {
+        "name": "MonitorService",
+        "modelAsString": true
+      }
+    },
+    "severity": {
+      "description": "Filter by severity.  Default value is select all.",
+      "name": "severity",
+      "type": "string",
+      "in": "query",
+      "required": false,
+      "x-ms-parameter-location": "method",
+      "enum": [
+        "Sev0",
+        "Sev1",
+        "Sev2",
+        "Sev3",
+        "Sev4"
+      ],
+      "x-ms-enum": {
+        "name": "Severity",
+        "modelAsString": true
+      }
+    },
+    "description": {
+      "description": "filter by alert rule description",
+      "name": "description",
+      "type": "string",
+      "in": "query",
+      "required": false,
+      "x-ms-parameter-location": "method"
+    },
+    "alertRuleId": {
+      "description": "filter by alert rule id",
+      "name": "alertRuleId",
+      "type": "string",
+      "in": "query",
+      "required": false,
+      "x-ms-parameter-location": "method"
+    },
+    "actionGroup": {
+      "description": "filter by action group configured as part of action rule",
+      "name": "actionGroup",
+      "type": "string",
+      "in": "query",
+      "required": false,
+      "x-ms-parameter-location": "method"
+    },
+    "actionRuleName": {
+      "description": "filter by action rule name",
+      "name": "name",
+      "type": "string",
+      "in": "query",
+      "required": false,
+      "x-ms-parameter-location": "method"
+    },
+    "impactedScope": {
+      "description": "filter by impacted/target scope (provide comma separated list for multiple scopes). The value should be an well constructed ARM id of the scope.",
+      "name": "impactedScope",
+      "type": "string",
+      "in": "query",
+      "required": false,
+      "x-ms-parameter-location": "method"
+    }
+  },
+  "definitions": {
+    "errorResponse": {
+      "description": "An error response from the service.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/errorResponseBody"
+        }
+      }
+    },
+    "errorResponseBody": {
+      "description": "Details of error response.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Error code, intended to be consumed programmatically."
+        },
+        "message": {
+          "type": "string",
+          "description": "Description of the error, intended for display in user interface."
+        },
+        "target": {
+          "type": "string",
+          "description": "Target of the particular error, for example name of the property."
+        },
+        "details": {
+          "type": "array",
+          "description": "A list of additional details about the error.",
+          "items": {
+            "$ref": "#/definitions/errorResponseBody"
+          }
+        }
+      }
+    },
+    "Resource": {
+      "x-ms-azure-resource": true,
+      "description": "An azure resource object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Azure resource Id"
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Azure resource type"
+        },
+        "name": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Azure resource name"
+        }
+      }
+    },
+    "ManagedResource": {
+      "description": "An azure managed resource object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "location": {
+          "type": "string",
+          "description": "Resource location",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "tags": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags"
+        }
+      },
+      "required": [
+        "location"
+      ]
+    },
+    "Scope": {
+      "type": "object",
+      "description": "Target scope for a given action rule. By default scope will be the subscription. User can also provide list of resource groups or list of resources from the scope subscription as well.",
+      "properties": {
+        "scopeType": {
+          "type": "string",
+          "description": "type of target scope",
+          "enum": [
+            "ResourceGroup",
+            "Resource",
+            "Subscription"
+          ],
+          "x-ms-enum": {
+            "name": "ScopeType",
+            "modelAsString": true
+          }
+        },
+        "values": {
+          "type": "array",
+          "description": "list of ARM IDs of the given scope type which will be the target of the given action rule.",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "Condition": {
+      "type": "object",
+      "description": "condition to trigger an action rule",
+      "properties": {
+        "operator": {
+          "type": "string",
+          "description": "operator for a given condition",
+          "enum": [
+            "Equals",
+            "NotEquals",
+            "Contains",
+            "DoesNotContain"
+          ],
+          "x-ms-enum": {
+            "name": "Operator",
+            "modelAsString": true
+          }
+        },
+        "values": {
+          "type": "array",
+          "description": "list of values to match for a given condition.",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "Conditions": {
+      "type": "object",
+      "description": "Conditions in alert instance to be matched for a given action rule. Default value is all. Multiple values could be provided with comma separation.",
+      "properties": {
+        "severity": {
+          "description": "filter alerts by severity",
+          "$ref": "#/definitions/Condition"
+        },
+        "monitorService": {
+          "description": "filter alerts by monitor service",
+          "$ref": "#/definitions/Condition"
+        },
+        "monitorCondition": {
+          "description": "filter alerts by monitor condition",
+          "$ref": "#/definitions/Condition"
+        },
+        "targetResourceType": {
+          "description": "filter alerts by target resource type",
+          "$ref": "#/definitions/Condition"
+        },
+        "alertRuleId": {
+          "description": "filter alerts by alert rule id",
+          "$ref": "#/definitions/Condition"
+        },
+        "description": {
+          "description": "filter alerts by alert rule description",
+          "$ref": "#/definitions/Condition"
+        },
+        "alertContext": {
+          "description": "filter alerts by alert context (payload)",
+          "$ref": "#/definitions/Condition"
+        }
+      }
+    },
+    "SuppressionConfig": {
+      "type": "object",
+      "description": "Suppression logic for a given action rule",
+      "required": [
+        "recurrenceType"
+      ],
+      "properties": {
+        "recurrenceType": {
+          "type": "string",
+          "description": "Specifies when the suppression should be applied",
+          "enum": [
+            "Always",
+            "Once",
+            "Daily",
+            "Weekly",
+            "Monthly"
+          ],
+          "x-ms-enum": {
+            "name": "SuppressionType",
+            "modelAsString": true
+          }
+        },
+        "schedule": {
+          "description": "suppression schedule configuration",
+          "$ref": "#/definitions/SuppressionSchedule"
+        }
+      }
+    },
+    "SuppressionSchedule": {
+      "type": "object",
+      "description": "Schedule for a given suppression configuration.",
+      "properties": {
+        "startDate": {
+          "type": "string",
+          "description": "Start date for suppression"
+        },
+        "endDate": {
+          "type": "string",
+          "description": "End date for suppression"
+        },
+        "startTime": {
+          "type": "string",
+          "description": "Start time for suppression"
+        },
+        "endTime": {
+          "type": "string",
+          "description": "End date for suppression"
+        },
+        "recurrenceValues": {
+          "type": "array",
+          "description": "Specifies the values for recurrence pattern",
+          "items": {
+            "type": "integer"
+          }
+        }
+      }
+    },
+    "ActionRule": {
+      "description": "Action rule object containing target scope, conditions and suppression logic",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ManagedResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "action rule properties",
+          "$ref": "#/definitions/ActionRuleProperties"
+        }
+      }
+    },
+    "ActionRuleProperties": {
+      "description": "Action rule properties defining scope, conditions, suppression logic for action rule",
+      "discriminator": "type",
+      "required": [
+        "type"
+      ],
+      "properties": {
+        "scope": {
+          "description": "scope on which action rule will apply",
+          "$ref": "#/definitions/Scope"
+        },
+        "conditions": {
+          "description": "conditions on which alerts will be filtered",
+          "$ref": "#/definitions/Conditions"
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of action rule"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Creation time of action rule. Date-Time in ISO-8601 format.",
+          "readOnly": true
+        },
+        "lastModifiedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Last updated time of action rule. Date-Time in ISO-8601 format.",
+          "readOnly": true
+        },
+        "createdBy": {
+          "type": "string",
+          "description": "Created by user name.",
+          "readOnly": true
+        },
+        "lastModifiedBy": {
+          "type": "string",
+          "description": "Last modified by user name.",
+          "readOnly": true
+        },
+        "status": {
+          "type": "string",
+          "description": "Indicates if the given action rule is enabled or disabled",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "ActionRuleStatus",
+            "modelAsString": true
+          }
+        },
+        "type": {
+          "type": "string",
+          "description": "Indicates type of action rule",
+          "enum": [
+            "Suppression",
+            "ActionGroup",
+            "Diagnostics"
+          ],
+          "x-ms-enum": {
+            "name": "ActionRuleType",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "Suppression": {
+      "title": "Suppression based Action Rule",
+      "description": "Action rule with suppression configuration",
+      "required": [
+        "suppressionConfig"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ActionRuleProperties"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "suppressionConfig": {
+              "description": "suppression configuration for the action rule",
+              "$ref": "#/definitions/SuppressionConfig"
+            }
+          }
+        }
+      ]
+    },
+    "ActionGroup": {
+      "title": "Action Group based Action Rule",
+      "description": "Action rule with action group configuration",
+      "required": [
+        "actionGroupId"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ActionRuleProperties"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "actionGroupId": {
+              "type": "string",
+              "description": "Action group to trigger if action rule matches"
+            }
+          }
+        }
+      ]
+    },
+    "Diagnostics": {
+      "title": "Diagnostics based Action Rule",
+      "description": "Action rule with diagnostics configuration",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ActionRuleProperties"
+        },
+        {
+          "type": "object"
+        }
+      ]
+    },
+    "ActionRulesList": {
+      "description": "List of action rules",
+      "properties": {
+        "nextLink": {
+          "type": "string",
+          "description": "URL to fetch the next set of action rules"
+        },
+        "value": {
+          "type": "array",
+          "description": "List of action rules",
+          "items": {
+            "$ref": "#/definitions/ActionRule"
+          }
+        }
+      }
+    },
+    "PatchProperties": {
+      "description": "Action rule properties supported by patch",
+      "properties": {
+        "status": {
+          "type": "string",
+          "description": "Indicates if the given action rule is enabled or disabled",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "ActionRuleStatus",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "PatchObject": {
+      "description": "Data contract for patch",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "properties supported by patch operation",
+          "$ref": "#/definitions/PatchProperties"
+        },
+        "tags": {
+          "type": "object",
+          "description": "tags to be updated"
+        }
+      }
+    }
+  }
+}

@@ -48,6 +48,15 @@ input-file:
 - Microsoft.DataShare/stable/2019-11-01/DataShare.json
 ```
 
+### Tag: package-2020-09-01
+
+These settings apply only when `--tag=package-2020-09-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-09-01'
+input-file:
+- Microsoft.DataShare/stable/2020-09-01/DataShare.json
+```
+
 ---
 # Code Generation
 
@@ -126,6 +135,7 @@ require: $(this-folder)/../../../profiles/readme.md
 input-file:
   - $(this-folder)/Microsoft.DataShare/preview/2018-11-01-preview/DataShare.json
   - $(this-folder)/Microsoft.DataShare/stable/2019-11-01/DataShare.json
+  - $(this-folder)/Microsoft.DataShare/stable/2020-09-01/DataShare.json
 
 ```
 
