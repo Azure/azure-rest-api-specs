@@ -6241,12 +6241,24 @@
           "description": "ID of the published Azure ML pipeline. Type: string (or Expression with resultType string).",
           "type": "object"
         },
+        "mlPipelineEndpointId": {
+          "description": "ID of the published Azure ML pipeline endpoint. Type: string (or Expression with resultType string).",
+          "type": "object"
+        },
+        "version": {
+          "description": "Version of the published Azure ML pipeline endpoint. Type: string (or Expression with resultType string).",
+          "type": "object"
+        },
         "experimentName": {
           "description": "Run history experiment name of the pipeline run. This information will be passed in the ExperimentName property of the published pipeline execution request. Type: string (or Expression with resultType string).",
           "type": "object"
         },
         "mlPipelineParameters": {
           "description": "Key,Value pairs to be passed to the published Azure ML pipeline endpoint. Keys must match the names of pipeline parameters defined in the published pipeline. Values will be passed in the ParameterAssignments property of the published pipeline execution request. Type: object with key value pairs (or Expression with resultType object).",
+          "type": "object"
+        },
+        "dataPathAssignments": {
+          "description": "Dictionary used for changing data path assignments without retraining. Values will be passed in the dataPathAssignments property of the published pipeline execution request. Type: object with key value pairs (or Expression with resultType object).",
           "type": "object"
         },
         "mlParentRunId": {
@@ -6257,13 +6269,18 @@
           "description": "Whether to continue execution of other steps in the PipelineRun if a step fails. This information will be passed in the continueOnStepFailure property of the published pipeline execution request. Type: boolean (or Expression with resultType boolean).",
           "type": "object"
         }
-      },
-      "required": [
-        "mlPipelineId"
-      ]
+      }
     },
     "AzureMLPipelineParameters": {
       "description": "Key,Value pairs to be passed to the published Azure ML pipeline endpoint. Keys must match the names of pipeline parameters defined in the published pipeline. Values will be passed in the ParameterAssignments property of the published pipeline execution request.",
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "description": "Type: string (or Expression with resultType string)."
+      }
+    },
+    "AzureDataPathAssignments": {
+      "description": "Dictionary used for changing data path assignments without retraining. Values will be passed in the dataPathAssignments property of the published pipeline execution request.",
       "type": "object",
       "additionalProperties": {
         "type": "object",
