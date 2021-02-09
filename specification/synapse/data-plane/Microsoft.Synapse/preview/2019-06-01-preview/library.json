@@ -297,7 +297,7 @@
             "name": "x-ms-blob-condition-appendpos",
             "in": "header",
             "description": "Set this header to a byte offset at which the block is expected to be appended. The request succeeds only if the current offset matches this value. Otherwise, the request fails with the AppendPositionConditionNotMet error (HTTP status code 412 – Precondition Failed)",
-            "required": true,
+            "required": false,
             "type": "integer",
             "format": "int64"
           }
@@ -413,7 +413,7 @@
       }
     },
     "LibraryResource": {
-      "description": "Library response details",
+      "description": "Library resource details",
       "allOf": [
         {
           "$ref": "#/definitions/SubResource"
@@ -434,37 +434,30 @@
       "type": "object",
       "properties": {
         "name": {
-          "readOnly": true,
           "type": "string",
           "description": "Name of the library/package."
         },
         "path": {
-          "readOnly": true,
           "type": "string",
           "description": "Location of library/package in storage account."
         },
         "containerName": {
-          "readOnly": true,
           "type": "string",
           "description": "Container name of the library/package."
         },
         "uploadedTimestamp": {
-          "readOnly": true,
           "type": "string",
           "description": "The last update time of the library/package."
         },
         "type": {
-          "readOnly": true,
           "type": "string",
           "description": "Type of the library/package."
         },
         "provisioningStatus": {
-          "readOnly": true,
           "type": "string",
           "description": "Provisioning status of the library/package."
         },
         "creatorId": {
-          "readOnly": true,
           "type": "string",
           "description": "Creator Id of the library/package."
         }
