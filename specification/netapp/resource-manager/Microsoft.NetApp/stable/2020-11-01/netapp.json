@@ -2200,9 +2200,19 @@
               "$ref": "#/definitions/backup"
             }
           },
+          "202": {
+            "description": "Accepted -- Create or update request accepted; operation will complete asynchronously",
+            "schema": {
+              "$ref": "#/definitions/backup"
+            }
+          },
           "default": {
             "description": "Error response describing why the operation failed."
           }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
         },
         "x-ms-examples": {
           "Backups_Update": {
@@ -3385,11 +3395,6 @@
           "maxLength": 36,
           "minLength": 36,
           "example": "9760acf5-4638-11e7-9bdb-020073ca7778"
-        },
-        "name": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Resource name"
         },
         "creationToken": {
           "title": "Creation Token or File Path",
