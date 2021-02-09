@@ -806,6 +806,12 @@
               "$ref": "#/definitions/AsyncOperationResult"
             }
           },
+          "202": {
+            "description": "DPS call returns a 202 Accepted status code with valid Location and Retry-After headers. The resource provider also sets the Azure-AsyncOperation header with a URL that points to the operation resource for this operation. Subsequent GET attempts on the resource after a DELETE operation return a resource representation that indicates a transitional provisioning state (such as Terminating). To retrieve the status of the operation, a client can either poll the URL returned in the Location header after the Retry-After interval, get the IoT Hub service status directly, or query the operation resource.",
+            "schema": {
+              "$ref": "#/definitions/AsyncOperationResult"
+            }
+          },
           "default": {
             "description": "Default error response.",
             "schema": {
@@ -1716,6 +1722,11 @@
           "type": "boolean",
           "readOnly": true
         },
+        "certificate": {
+          "description": "base-64 representation of X509 certificate .cer file or just .pem file content.",
+          "type": "string",
+          "readOnly": true
+        },
         "created": {
           "description": "The certificate's creation date and time.",
           "type": "string",
@@ -1763,6 +1774,14 @@
       "properties": {
         "etag": {
           "description": "The Etag field is *not* required. If it is provided in the response body, it must also be provided as a header per the normal ETag convention.",
+          "type": "string"
+        },
+        "resourceGroup": {
+          "description": "The resource group for the particular subscription id",
+          "type": "string"
+        },
+        "subscriptionid": {
+          "description": "subscription id that belongs to the account",
           "type": "string"
         },
         "properties": {
@@ -2252,7 +2271,8 @@
       "properties": {
         "code": {
           "description": "The error code.",
-          "type": "string",
+          "type": "integer",
+          "format":  "int32",
           "readOnly": true
         },
         "httpStatusCode": {
@@ -2439,6 +2459,10 @@
             "isVerified": {
               "type": "boolean",
               "description": "Indicate if the certificate is verified by owner of private key."
+            },
+            "certificate": {
+              "description": "base-64 representation of X509 certificate .cer file or just .pem file content.",
+              "type": "string"
             },
             "created": {
               "type": "string",
