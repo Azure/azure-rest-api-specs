@@ -1517,14 +1517,15 @@
       "x-ms-enum": {
         "modelAsString": true,
         "name": "MonitoringStatus"
-      },
-      "readOnly": true
+      }
     },
     "MarketplaceSubscriptionStatus": {
       "description": "Flag specifying the Marketplace Subscription Status of the resource. If payment is not made in time, the resource will go in Suspended state.",
       "enum": [
+        "Provisioning",
         "Active",
-        "Suspended"
+        "Suspended",
+        "Unsubscribed"
       ],
       "type": "string",
       "x-ms-enum": {
@@ -1557,6 +1558,28 @@
         },
         "linkingClientId": {
           "description": "The client_id from an existing in exchange for an auth token to link organization.",
+          "type": "string",
+          "x-ms-mutability": [
+            "create"
+          ]
+        },
+        "redirectUri": {
+          "description": "The redirect uri for linking.",
+          "type": "string",
+          "x-ms-mutability": [
+            "create"
+          ]
+        },
+        "apiKey": {
+          "description": "Api key associated to the Datadog organization.",
+          "type": "string",
+          "x-ms-mutability": [
+            "create"
+          ],
+          "x-ms-secret": true
+        },
+        "applicationKey": {
+          "description": "Application key associated to the Datadog organization.",
           "type": "string",
           "x-ms-mutability": [
             "create"
@@ -1829,6 +1852,9 @@
       "description": "Definition of the properties for a TagRules resource.",
       "type": "object",
       "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState"
+        },
         "logRules": {
           "$ref": "#/definitions/LogRules"
         },
@@ -1896,6 +1922,9 @@
     "DatadogSingleSignOnProperties": {
       "type": "object",
       "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState"
+        },
         "singleSignOnState": {
           "$ref": "#/definitions/SingleSignOnStates"
         },
