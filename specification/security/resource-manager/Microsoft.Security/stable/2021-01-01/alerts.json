@@ -543,7 +543,7 @@
           "Alerts"
         ],
         "description": "Simulate security alerts",
-        "operationId": "Alerts_SimulateAlerts",
+        "operationId": "Alerts_Simulate",
         "parameters": [
           {
             "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
@@ -1004,13 +1004,13 @@
     "AlertSimulatorRequestProperties": {
       "type": "object",
       "description": "Describes properties of an alert simulation request",
-      "discriminator": "kind",
+      "discriminator": "SimulationKind",
       "required": [
-        "kind"
+        "SimulationKind"
       ],
       "additionalProperties": true,
       "properties": {
-        "kind": {
+        "SimulationKind": {
           "type": "string",
           "description": "The kind of alert simulation.",
           "enum": [
