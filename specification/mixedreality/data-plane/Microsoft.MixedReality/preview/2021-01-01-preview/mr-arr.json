@@ -78,7 +78,7 @@
             }
           },
           "400": {
-            "description": "Bad Request. An error object describes which issues occurred.",
+            "description": "Bad Request. Returned error object describes which issues occurred.",
             "x-ms-error-response": true,
             "headers": {
               "MS-CV": {
@@ -142,7 +142,7 @@
             }
           },
           "500": {
-            "description": "InternalError. Server has encountered internal error. Retrying the request may produce successful results.",
+            "description": "Internal Error. Server has encountered internal error. Retrying the request may produce successful results.",
             "x-ms-error-response": true,
             "schema": {
               "$ref": "#/definitions/error_response"
@@ -241,7 +241,7 @@
             }
           },
           "500": {
-            "description": "InternalError. Server has encountered internal error. Retrying the request may produce successful results.",
+            "description": "Internal Error. Server has encountered internal error. Retrying the request may produce successful results.",
             "x-ms-error-response": true,
             "headers": {
               "MS-CV": {
@@ -331,7 +331,7 @@
             }
           },
           "500": {
-            "description": "InternalError. Server has encountered internal error. Retrying the request may produce successful results.",
+            "description": "Internal Error. Server has encountered internal error. Retrying the request may produce successful results.",
             "x-ms-error-response": true,
             "headers": {
               "MS-CV": {
@@ -408,7 +408,7 @@
             }
           },
           "400": {
-            "description": "BadRequest.",
+            "description": "Bad Request. Returned error object describes which issues occurred.",
             "x-ms-error-response": true,
             "headers": {
               "MS-CV": {
@@ -466,7 +466,7 @@
             }
           },
           "500": {
-            "description": "InternalError. Server has encountered internal error. Retrying the request may produce successful results.",
+            "description": "Internal Error. Server has encountered internal error. Retrying the request may produce successful results.",
             "x-ms-error-response": true,
             "headers": {
               "MS-CV": {
@@ -561,7 +561,7 @@
             }
           },
           "500": {
-            "description": "InternalError. Server has encountered internal error. Retrying the request may produce successful results.",
+            "description": "Internal Error. Server has encountered internal error. Retrying the request may produce successful results.",
             "x-ms-error-response": true,
             "headers": {
               "MS-CV": {
@@ -598,7 +598,7 @@
             "$ref": "#/parameters/session_id"
           },
           {
-            "description": "Settings of the session to be updated",
+            "description": "Settings used to update the session.",
             "in": "body",
             "name": "body",
             "required": true,
@@ -681,7 +681,7 @@
             }
           },
           "500": {
-            "description": "InternalError. Server has encountered internal error. Retrying the request may produce successful results.",
+            "description": "Internal Error. Server has encountered internal error. Retrying the request may produce successful results.",
             "x-ms-error-response": true,
             "headers": {
               "MS-CV": {
@@ -697,7 +697,7 @@
         "tags": [
           "rendering session"
         ],
-        "summary": "Updates a particular rendering session."
+        "summary": "Updates the max lease time of a particular rendering session."
       }
     },
     "/accounts/{account_id}/sessions/{session_id}/:stop": {
@@ -781,7 +781,7 @@
             }
           },
           "500": {
-            "description": "InternalError. Server has encountered internal error. Retrying the request may produce successful results.",
+            "description": "Internal Error. Server has encountered internal error. Retrying the request may produce successful results.",
             "x-ms-error-response": true,
             "headers": {
               "MS-CV": {
@@ -869,7 +869,7 @@
             }
           },
           "500": {
-            "description": "InternalError. Server has encountered internal error. Retrying the request may produce successful results.",
+            "description": "Internal Error. Server has encountered internal error. Retrying the request may produce successful results.",
             "x-ms-error-response": true,
             "headers": {
               "MS-CV": {
@@ -891,6 +891,7 @@
   },
   "definitions": {
     "conversion": {
+      "description": "The properties of the conversion.",
       "properties": {
         "id": {
           "type": "string",
@@ -949,7 +950,7 @@
           "description": "The list of conversions."
         },
         "@nextLink": {
-          "description": "If more conversions are available this property will contain a URL where the next batch of conversions can be requested. This URL will need the same authentication as all calls to the Azure Remote Rendering API.",
+          "description": "If more conversions are available this field will contain a URL where the next batch of conversions can be requested. This URL will need the same authentication as all calls to the Azure Remote Rendering API.",
           "type": "string",
           "readOnly": true
         }
@@ -969,7 +970,7 @@
         },
         "storageContainerReadListSas": {
           "type": "string",
-          "description": "An Azure blob storage container shared access signature giving read and list access to the storage container. Optional. If not is not provided the Azure Remote Rendering rendering account needs to be linked with the storage account containing the blob container. For security purposes this field will never be filled out in responses bodies."
+          "description": "An Azure blob storage container shared access signature giving read and list access to the storage container. Optional. If not is not provided the Azure Remote Rendering rendering account needs to be linked with the storage account containing the blob container. See https://docs.microsoft.com/en-us/azure/remote-rendering/how-tos/create-an-account#link-storage-accounts for details. For security purposes this field will never be filled out in responses bodies."
         },
         "blobPrefix": {
           "type": "string",
@@ -987,7 +988,7 @@
         "relativeInputAssetPath"
       ],
       "type": "object",
-      "description": "Settings for the conversion input."
+      "description": "Conversion input settings describe the origin of conversion input."
     },
     "conversion_output_settings": {
       "properties": {
@@ -999,7 +1000,7 @@
         },
         "storageContainerWriteSas": {
           "type": "string",
-          "description": "An Azure blob storage container shared access signature giving write access to the storage container. Optional. If not is not provided the Azure Remote Rendering rendering account needs to be linked with the storage account containing the blob container. For security purposes this field will never be filled out in responses bodies."
+          "description": "An Azure blob storage container shared access signature giving write access to the storage container. Optional. If not is not provided the Azure Remote Rendering rendering account needs to be linked with the storage account containing the blob container. See https://docs.microsoft.com/en-us/azure/remote-rendering/how-tos/create-an-account#link-storage-accounts for details. For security purposes this field will never be filled out in responses bodies."
         },
         "blobPrefix": {
           "type": "string",
@@ -1016,7 +1017,7 @@
         "storageContainerUri"
       ],
       "type": "object",
-      "description": "Settings for the conversion output."
+      "description": "Conversion output settings describe the destination of conversion output."
     },
     "create_conversion_settings": {
       "description": "Request to start a conversion",
@@ -1031,7 +1032,7 @@
       "type": "object"
     },
     "conversion_settings": {
-      "description": "Settings for where to retrieve input files from and where to write output files. Supplied when creating the conversion.",
+      "description": "Conversion settings describe the origin of input files and destination of output files.",
       "properties": {
         "inputLocation": {
           "$ref": "#/definitions/conversion_input_settings"
@@ -1155,7 +1156,7 @@
           "maximum": 65534,
           "minimum": 49152,
           "type": "integer",
-          "description": "The TCP port used for the handshake.",
+          "description": "The TCP port used for the handshake when establishing a connection.",
           "readOnly": true
         },
         "elapsedTimeMinutes": {
@@ -1219,7 +1220,7 @@
         "maxLeaseTimeMinutes": {
           "example": 60,
           "type": "integer",
-          "description": "The time in minutes the session will run after reaching the 'Ready' state."
+          "description": "The time in minutes the session will run after reaching the 'Ready' state. It has to be between 0 and 1440."
         },
         "size": {
           "$ref": "#/definitions/session_size"
@@ -1232,10 +1233,11 @@
       ]
     },
     "update_session_settings": {
+      "description": "Settings used to update the session.",
       "type": "object",
       "properties": {
         "maxLeaseTimeMinutes": {
-          "description": "Update to the time the session will run after it reached the 'Ready' state. It has to be bigger than the current value of maxLeaseTimeMinutes.",
+          "description": "Update to the time the session will run after it reached the 'Ready' state. It has to be bigger than the current value of maxLeaseTimeMinutes and less than 1440.",
           "example": 72,
           "type": "integer"
         }
@@ -1266,7 +1268,7 @@
           },
           {
             "value": "Starting",
-            "description": "The rendering session is starting, and cannot be connected to yet."
+            "description": "The rendering session is starting, but not accepting incoming connections yet."
           },
           {
             "value": "Ready",
@@ -1274,13 +1276,13 @@
           },
           {
             "value": "Stopped",
-            "description": "The rendering session has been stopped with 'StopSession' operation. This is a terminal state."
+            "description": "The rendering session has been stopped with 'Stop Session' operation. This is a terminal state."
           }
         ]
       },
       "type": "string",
       "example": "Ready",
-      "description": "The status of the rendering session. Once the status reached the 'Ready' state it can be connected to."
+      "description": "The status of the rendering session."
     },
     "session_size": {
       "enum": [
@@ -1293,11 +1295,11 @@
         "values": [
           {
             "value": "Standard",
-            "description": "Standard size server has a maximum scene size of 20 million polygons."
+            "description": "Standard size has a maximum scene size of 20 million polygons."
           },
           {
             "value": "Premium",
-            "description": "Premium size server does not enforce a hard maximum, but performance may be degraded if your content exceeds the rendering capabilities of the service."
+            "description": "Premium size does not enforce a hard maximum polygon count, but performance may be degraded if your content exceeds the rendering capabilities of the service."
           }
         ]
       },
@@ -1317,7 +1319,7 @@
           }
         },
         "@nextLink": {
-          "description": "If more rendering sessions are available this property will contain a URL where the next batch of sessions can be requested. This URL will need the same authentication as all calls to the Azure Remote Rendering API.",
+          "description": "If more rendering sessions are available this field will contain a URL where the next batch of sessions can be requested. This URL will need the same authentication as all calls to the Azure Remote Rendering API.",
           "type": "string",
           "readOnly": true
         }
@@ -1380,7 +1382,7 @@
       "in": "header",
       "name": "Authorization",
       "type": "apiKey",
-      "description": "A token returned by the Mixed Reality Secure Token Service. See https://docs.microsoft.com/en-us/azure/remote-rendering/how-tos/tokens for details."
+      "description": "A bearer token returned by the Mixed Reality Secure Token Service. See https://docs.microsoft.com/en-us/azure/remote-rendering/how-tos/tokens for details."
     }
   },
   "security": [
