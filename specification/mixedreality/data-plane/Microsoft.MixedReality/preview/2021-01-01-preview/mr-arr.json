@@ -20,7 +20,7 @@
   "paths": {
     "/accounts/{account_id}/conversions/{conversion_id}": {
       "put": {
-        "operationId": "CreateConversion",
+        "operationId": "Conversion_CreateConversion",
         "consumes": [
           "application/json"
         ],
@@ -150,12 +150,12 @@
           }
         },
         "tags": [
-          "conversion"
+          "Conversion"
         ],
         "summary": "Creates a conversion using an asset stored in an Azure Blob Storage account."
       },
       "get": {
-        "operationId": "GetConversion",
+        "operationId": "Conversion_GetConversion",
         "produces": [
           "application/json"
         ],
@@ -255,14 +255,14 @@
           }
         },
         "tags": [
-          "conversion"
+          "Conversion"
         ],
         "summary": "Gets the status of a particular conversion."
       }
     },
     "/accounts/{account_id}/conversions": {
       "get": {
-        "operationId": "ListConversions",
+        "operationId": "Conversion_ListConversions",
         "produces": [
           "application/json"
         ],
@@ -349,14 +349,14 @@
           "nextLinkName": "@nextLink"
         },
         "tags": [
-          "conversion"
+          "Conversion"
         ],
         "summary": "Gets a list of all conversions."
       }
     },
     "/accounts/{account_id}/sessions/{session_id}": {
       "put": {
-        "operationId": "CreateSession",
+        "operationId": "RenderingSession_CreateSession",
         "consumes": [
           "application/json"
         ],
@@ -480,12 +480,12 @@
           }
         },
         "tags": [
-          "rendering session"
+          "RenderingSession"
         ],
         "summary": "Creates a new rendering session."
       },
       "get": {
-        "operationId": "GetSession",
+        "operationId": "RenderingSession_GetSession",
         "produces": [
           "application/json"
         ],
@@ -575,12 +575,12 @@
           }
         },
         "tags": [
-          "rendering session"
+          "RenderingSession"
         ],
         "summary": "Gets the properties of a particular rendering session."
       },
       "patch": {
-        "operationId": "UpdateSession",
+        "operationId": "RenderingSession_UpdateSession",
         "consumes": [
           "application/json"
         ],
@@ -695,14 +695,14 @@
           }
         },
         "tags": [
-          "rendering session"
+          "RenderingSession"
         ],
         "summary": "Updates a particular rendering session."
       }
     },
     "/accounts/{account_id}/sessions/{session_id}/:stop": {
       "post": {
-        "operationId": "StopSession",
+        "operationId": "RenderingSession_StopSession",
         "produces": [
           "application/json"
         ],
@@ -795,14 +795,14 @@
           }
         },
         "tags": [
-          "rendering session"
+          "RenderingSession"
         ],
         "summary": "Stops a particular rendering session."
       }
     },
     "/accounts/{account_id}/sessions": {
       "get": {
-        "operationId": "ListSessions",
+        "operationId": "RenderingSession_ListSessions",
         "produces": [
           "application/json"
         ],
@@ -883,7 +883,7 @@
           }
         },
         "tags": [
-          "rendering session"
+          "RenderingSession"
         ],
         "summary": "Gets a list of all rendering sessions."
       }
