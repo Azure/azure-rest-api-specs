@@ -2842,12 +2842,11 @@
           "description": "NetApp Account properties",
           "$ref": "#/definitions/accountProperties",
           "x-ms-client-flatten": true
-        },
+        },        
         "systemData": {
           "readOnly": true,
           "description": "The system meta data relating to this resource.",
-          "$ref": "#/definitions/systemData"
-        }
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
       }
     },
     "netAppAccountPatch": {
@@ -3396,6 +3395,7 @@
           "minLength": 36,
           "example": "9760acf5-4638-11e7-9bdb-020073ca7778"
         },
+
         "creationToken": {
           "title": "Creation Token or File Path",
           "type": "string",
@@ -4834,59 +4834,6 @@
         }
       },
       "description": "An error response from the service."
-    },
-    "systemData": {
-      "description": "Metadata pertaining to creation and last modification of the resource.",
-      "type": "object",
-      "readOnly": true,
-      "properties": {
-        "createdBy": {
-          "type": "string",
-          "description": "The identity that created the resource."
-        },
-        "createdByType": {
-          "type": "string",
-          "description": "The type of identity that created the resource.",
-          "enum": [
-            "User",
-            "Application",
-            "ManagedIdentity",
-            "Key"
-          ],
-          "x-ms-enum": {
-            "name": "createdByType",
-            "modelAsString": true
-          }
-        },
-        "createdAt": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The timestamp of resource creation (UTC)."
-        },
-        "lastModifiedBy": {
-          "type": "string",
-          "description": "The identity that last modified the resource."
-        },
-        "lastModifiedByType": {
-          "type": "string",
-          "description": "The type of identity that last modified the resource.",
-          "enum": [
-            "User",
-            "Application",
-            "ManagedIdentity",
-            "Key"
-          ],
-          "x-ms-enum": {
-            "name": "createdByType",
-            "modelAsString": true
-          }
-        },
-        "lastModifiedAt": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The type of identity that last modified the resource."
-        }
-      }
     }
   },
   "parameters": {
