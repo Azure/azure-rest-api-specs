@@ -10,6 +10,7 @@ batch:
   - tag: schema-containerservice-2016-09-30
   - tag: schema-containerservice-2016-03-30
   - tag: schema-containerservice-2015-11-01-preview
+  - tag: schema-compute-2020-12-01
   - tag: schema-compute-2020-10-01-preview
   - tag: schema-compute-2020-09-30
   - tag: schema-compute-2020-06-30
@@ -79,6 +80,18 @@ input-file:
 
 ```
 
+### Tag: schema-compute-2020-12-01 and azureresourceschema
+
+``` yaml $(tag) == 'schema-compute-2020-12-01' && $(azureresourceschema)
+output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
+  - Microsoft.Compute/stable/2020-12-01/compute.json
+  - Microsoft.Compute/stable/2020-12-01/runCommands.json
+
+```
+
 ### Tag: schema-compute-2020-10-01-preview and azureresourceschema
 
 ``` yaml $(tag) == 'schema-compute-2020-10-01-preview' && $(azureresourceschema)
@@ -97,6 +110,7 @@ output-folder: $(azureresourceschema-folder)/schemas
 
 # all the input files in this apiVersion
 input-file:
+  - Microsoft.Compute/stable/2020-09-30/disk.json
   - Microsoft.Compute/preview/2020-09-30/gallery.json
   - Microsoft.Compute/preview/2020-09-30/sharedGallery.json
 

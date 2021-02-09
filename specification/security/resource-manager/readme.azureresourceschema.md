@@ -7,6 +7,7 @@ These settings apply only when `--azureresourceschema` is specified on the comma
 ``` yaml $(azureresourceschema) && $(multiapi)
 batch:
   - tag: schema-security-2020-08-06-preview
+  - tag: schema-security-2020-07-01-preview
   - tag: schema-security-2020-01-01-preview
   - tag: schema-security-2020-01-01
   - tag: schema-security-2019-08-01
@@ -30,8 +31,26 @@ output-folder: $(azureresourceschema-folder)/schemas
 input-file:
   - Microsoft.Security/preview/2020-08-06-preview/iotDefenderSettings.json
   - Microsoft.Security/preview/2020-08-06-preview/iotSensors.json
-  - $(this-folder)/Microsoft.Security/preview/2020-08-06-preview/iotDefenderSettings.json
-  - $(this-folder)/Microsoft.Security/preview/2020-08-06-preview/iotSensors.json
+  - Microsoft.Security/preview/2020-08-06-preview/devices.json
+  - Microsoft.Security/preview/2020-08-06-preview/onPremiseIotSensors.json
+  - Microsoft.Security/preview/2020-08-06-preview/iotSites.json
+  - Microsoft.Security/preview/2020-08-06-preview/iotAlerts.json
+  - Microsoft.Security/preview/2020-08-06-preview/iotAlertTypes.json
+  - Microsoft.Security/preview/2020-08-06-preview/iotRecommendations.json
+  - Microsoft.Security/preview/2020-08-06-preview/iotRecommendationTypes.json
+
+```
+
+### Tag: schema-security-2020-07-01-preview and azureresourceschema
+
+``` yaml $(tag) == 'schema-security-2020-07-01-preview' && $(azureresourceschema)
+output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
+  - Microsoft.Security/preview/2020-07-01-preview/sqlVulnerabilityAssessmentsScanOperations.json
+  - Microsoft.Security/preview/2020-07-01-preview/sqlVulnerabilityAssessmentsScanResultsOperations.json
+  - Microsoft.Security/preview/2020-07-01-preview/sqlVulnerabilityAssessmentsBaselineRuleOperations.json
 
 ```
 
@@ -44,9 +63,6 @@ output-folder: $(azureresourceschema-folder)/schemas
 input-file:
   - Microsoft.Security/preview/2020-01-01-preview/secureScore.json
   - Microsoft.Security/preview/2020-01-01-preview/connectors.json
-  - $(this-folder)/Microsoft.Security/preview/2020-01-01-preview/secureScore.json
-  - $(this-folder)/Microsoft.Security/preview/2020-01-01-preview/connectors.json
-  - $(this-folder)/Microsoft.Security/preview/2020-01-01-preview/securityContacts.json
 
 ```
 
@@ -69,20 +85,8 @@ input-file:
   - Microsoft.Security/stable/2020-01-01/discoveredSecuritySolutions.json
   - Microsoft.Security/stable/2020-01-01/securitySolutionsReferenceData.json
   - Microsoft.Security/stable/2020-01-01/externalSecuritySolutions.json
+  - Microsoft.Security/stable/2020-01-01/secureScore.json
   - Microsoft.Security/stable/2020-01-01/SecuritySolutions.json
-  - $(this-folder)/Microsoft.Security/stable/2020-01-01/serverVulnerabilityAssessments.json
-  - $(this-folder)/Microsoft.Security/stable/2020-01-01/assessmentMetadata.json
-  - $(this-folder)/Microsoft.Security/stable/2020-01-01/assessments.json
-  - $(this-folder)/Microsoft.Security/stable/2020-01-01/applicationWhitelistings.json
-  - $(this-folder)/Microsoft.Security/stable/2020-01-01/adaptiveNetworkHardenings.json
-  - $(this-folder)/Microsoft.Security/stable/2020-01-01/allowedConnections.json
-  - $(this-folder)/Microsoft.Security/stable/2020-01-01/topologies.json
-  - $(this-folder)/Microsoft.Security/stable/2020-01-01/alerts.json
-  - $(this-folder)/Microsoft.Security/stable/2020-01-01/jitNetworkAccessPolicies.json
-  - $(this-folder)/Microsoft.Security/stable/2020-01-01/discoveredSecuritySolutions.json
-  - $(this-folder)/Microsoft.Security/stable/2020-01-01/securitySolutionsReferenceData.json
-  - $(this-folder)/Microsoft.Security/stable/2020-01-01/SecuritySolutions.json
-  - $(this-folder)/Microsoft.Security/stable/2020-01-01/externalSecuritySolutions.json
 
 ```
 
@@ -100,13 +104,6 @@ input-file:
   - Microsoft.Security/stable/2019-08-01/iotAlerts.json
   - Microsoft.Security/stable/2019-08-01/iotRecommendationTypes.json
   - Microsoft.Security/stable/2019-08-01/iotRecommendations.json
-  - $(this-folder)/Microsoft.Security/stable/2019-08-01/deviceSecurityGroups.json
-  - $(this-folder)/Microsoft.Security/stable/2019-08-01/iotSecuritySolutions.json
-  - $(this-folder)/Microsoft.Security/stable/2019-08-01/iotSecuritySolutionAnalytics.json
-  - $(this-folder)/Microsoft.Security/stable/2019-08-01/iotAlertTypes.json
-  - $(this-folder)/Microsoft.Security/stable/2019-08-01/iotAlerts.json
-  - $(this-folder)/Microsoft.Security/stable/2019-08-01/iotRecommendationTypes.json
-  - $(this-folder)/Microsoft.Security/stable/2019-08-01/iotRecommendations.json
 
 ```
 
@@ -123,12 +120,6 @@ input-file:
   - Microsoft.Security/preview/2019-01-01-preview/alertsSuppressionRules.json
   - Microsoft.Security/preview/2019-01-01-preview/assessmentMetadata.json
   - Microsoft.Security/preview/2019-01-01-preview/assessments.json
-  - $(this-folder)/Microsoft.Security/preview/2019-01-01-preview/automations.json
-  - $(this-folder)/Microsoft.Security/preview/2019-01-01-preview/subAssessments.json
-  - $(this-folder)/Microsoft.Security/preview/2019-01-01-preview/regulatoryCompliance.json
-  - $(this-folder)/Microsoft.Security/preview/2019-01-01-preview/alertsSuppressionRules.json
-  - $(this-folder)/Microsoft.Security/preview/2019-01-01-preview/assessmentMetadata.json
-  - $(this-folder)/Microsoft.Security/preview/2019-01-01-preview/assessments.json
 
 ```
 
@@ -142,8 +133,6 @@ input-file:
   - Microsoft.Security/stable/2019-01-01/alerts.json
   - Microsoft.Security/stable/2019-01-01/settings.json
   - Microsoft.Security/stable/2019-01-01/advancedThreatProtectionSettings.json
-  - $(this-folder)/Microsoft.Security/stable/2019-01-01/settings.json
-  - $(this-folder)/Microsoft.Security/stable/2019-01-01/advancedThreatProtectionSettings.json
 
 ```
 
@@ -155,7 +144,6 @@ output-folder: $(azureresourceschema-folder)/schemas
 # all the input files in this apiVersion
 input-file:
   - Microsoft.Security/stable/2018-06-01/pricings.json
-  - $(this-folder)/Microsoft.Security/stable/2018-06-01/pricings.json
 
 ```
 
@@ -177,17 +165,6 @@ input-file:
   - Microsoft.Security/preview/2017-08-01-preview/informationProtectionPolicies.json
   - Microsoft.Security/preview/2017-08-01-preview/iotSecuritySolutions.json
   - Microsoft.Security/preview/2017-08-01-preview/iotSecuritySolutionAnalytics.json
-  - $(this-folder)/Microsoft.Security/preview/2017-08-01-preview/pricings.json
-  - $(this-folder)/Microsoft.Security/preview/2017-08-01-preview/securityContacts.json
-  - $(this-folder)/Microsoft.Security/preview/2017-08-01-preview/workspaceSettings.json
-  - $(this-folder)/Microsoft.Security/preview/2017-08-01-preview/autoProvisioningSettings.json
-  - $(this-folder)/Microsoft.Security/preview/2017-08-01-preview/compliances.json
-  - $(this-folder)/Microsoft.Security/preview/2017-08-01-preview/advancedThreatProtectionSettings.json
-  - $(this-folder)/Microsoft.Security/preview/2017-08-01-preview/deviceSecurityGroups.json
-  - $(this-folder)/Microsoft.Security/preview/2017-08-01-preview/settings.json
-  - $(this-folder)/Microsoft.Security/preview/2017-08-01-preview/informationProtectionPolicies.json
-  - $(this-folder)/Microsoft.Security/preview/2017-08-01-preview/iotSecuritySolutions.json
-  - $(this-folder)/Microsoft.Security/preview/2017-08-01-preview/iotSecuritySolutionAnalytics.json
 
 ```
 
@@ -199,7 +176,6 @@ output-folder: $(azureresourceschema-folder)/schemas
 # all the input files in this apiVersion
 input-file:
   - Microsoft.Security/stable/2017-08-01/complianceResults.json
-  - $(this-folder)/Microsoft.Security/stable/2017-08-01/complianceResults.json
 
 ```
 
@@ -221,16 +197,5 @@ input-file:
   - Microsoft.Security/preview/2015-06-01-preview/topologies.json
   - Microsoft.Security/preview/2015-06-01-preview/allowedConnections.json
   - Microsoft.Security/preview/2015-06-01-preview/adaptiveNetworkHardenings.json
-  - $(this-folder)/Microsoft.Security/preview/2015-06-01-preview/operations.json
-  - $(this-folder)/Microsoft.Security/preview/2015-06-01-preview/locations.json
-  - $(this-folder)/Microsoft.Security/preview/2015-06-01-preview/tasks.json
-  - $(this-folder)/Microsoft.Security/preview/2015-06-01-preview/alerts.json
-  - $(this-folder)/Microsoft.Security/preview/2015-06-01-preview/discoveredSecuritySolutions.json
-  - $(this-folder)/Microsoft.Security/preview/2015-06-01-preview/jitNetworkAccessPolicies.json
-  - $(this-folder)/Microsoft.Security/preview/2015-06-01-preview/applicationWhitelistings.json
-  - $(this-folder)/Microsoft.Security/preview/2015-06-01-preview/externalSecuritySolutions.json
-  - $(this-folder)/Microsoft.Security/preview/2015-06-01-preview/topologies.json
-  - $(this-folder)/Microsoft.Security/preview/2015-06-01-preview/allowedConnections.json
-  - $(this-folder)/Microsoft.Security/preview/2015-06-01-preview/adaptiveNetworkHardenings.json
 
 ```

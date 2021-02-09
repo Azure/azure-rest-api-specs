@@ -124,44 +124,6 @@
             "$ref": "./examples/ReplicationLinkGet.json"
           }
         }
-      },
-      "delete": {
-        "tags": [
-          "ReplicationLinks"
-        ],
-        "description": "Deletes the replication link.",
-        "operationId": "ReplicationLinks_Delete",
-        "parameters": [
-          {
-            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
-          },
-          {
-            "$ref": "#/parameters/ServerNameParameter"
-          },
-          {
-            "$ref": "#/parameters/DatabaseNameParameter"
-          },
-          {
-            "name": "replicationLinkName",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successfully deleted the replication link."
-          },
-          "default": {
-            "description": "*** Error Responses: ***\n\n * 400 ReplicationLinksReplicationLinkNameIsInvalid - Replication link name should be a valid guid.\n\n * 400 ReplicationLinksDeleteIsNotSupported - This action is not yet available, please use 2014-04-01 for this action.\n\n * 404 ResourceNotFound - The requested resource was not found."
-          }
-        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/replicationLinks": {
@@ -311,24 +273,7 @@
       }
     }
   },
-  "parameters": {
-    "ServerNameParameter": {
-      "name": "serverName",
-      "in": "path",
-      "description": "The name of the server.",
-      "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "method"
-    },
-    "DatabaseNameParameter": {
-      "name": "databaseName",
-      "in": "path",
-      "description": "The name of the database.",
-      "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "method"
-    }
-  },
+  "parameters": {},
   "securityDefinitions": {
     "azure_auth": {
       "type": "oauth2",

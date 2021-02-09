@@ -74,6 +74,32 @@
         "value"
       ]
     },
+    "Application": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Unique ID of the application.",
+          "type": "string",
+          "readOnly": true
+        },
+        "displayName": {
+          "description": "Display name of the application.",
+          "type": "string"
+        },
+        "subdomain": {
+          "description": "The URL subdomain of the application.",
+          "type": "string"
+        },
+        "host": {
+          "description": "The URL host of the application.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "subdomain",
+        "host"
+      ]
+    },
     "Attestation": {
       "type": "object",
       "properties": {
@@ -255,6 +281,14 @@
           "type": "string",
           "readOnly": true
         },
+        "connectionTimeout": {
+          "description": "Connection Timeout in seconds to wait for a disconnected device to come online. Acceptable timeout values are from 0 to 30 seconds. Defaults to 0 seconds.",
+          "type": "integer"
+        },
+        "responseTimeout": {
+          "description": "Response Timeout in seconds to wait for a command completion on a device. Acceptable timeout values are from 5 to 30 seconds. Defaults to 30 seconds.",
+          "type": "integer"
+        },
         "request": {
           "description": "The payload for the device command."
         },
@@ -391,12 +425,10 @@
           "type": "string"
         },
         "capabilityModel": {
-          "description": "The capability model utilized by this device template.",
-          "type": "object"
+          "description": "The capability model utilized by this device template."
         },
         "solutionModel": {
-          "description": "The solution model utilized by this device template.",
-          "type": "object"
+          "description": "The solution model utilized by this device template."
         }
       },
       "required": [
@@ -933,7 +965,7 @@
         }
       },
       "put": {
-        "operationId": "ApiTokens_Set",
+        "operationId": "ApiTokens_Create",
         "summary": "Create a new API token in the application to use in the IoT Central public API. The token value will be returned in the response, and won't be returned again in subsequent requests.",
         "x-ms-examples": {
           "Create API token": {
@@ -1041,7 +1073,7 @@
         }
       },
       "put": {
-        "operationId": "ContinuousDataExports_Set",
+        "operationId": "ContinuousDataExports_Create",
         "summary": "Create a new continuous data export or update an existing one by ID.",
         "x-ms-examples": {
           "Create or update export": {
@@ -1063,6 +1095,39 @@
             "schema": {
               "$ref": "#/definitions/ContinuousDataExport"
             },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ContinuousDataExport"
+            }
+          }
+        }
+      },
+      "patch": {
+        "operationId": "ContinuousDataExports_Update",
+        "summary": "Update an existing continuous data export via PATCH.",
+        "x-ms-examples": {
+          "Update export": {
+            "$ref": "./examples/continuousdataexports_update.json"
+          }
+        },
+        "parameters": [
+          {
+            "in": "path",
+            "name": "export_id",
+            "description": "Unique ID for the continuous data export.",
+            "type": "string",
+            "required": true
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Data export patch body.",
+            "schema": {},
             "required": true
           }
         ],
@@ -1167,11 +1232,11 @@
         }
       },
       "put": {
-        "operationId": "DeviceTemplates_Set",
+        "operationId": "DeviceTemplates_Create",
         "summary": "Publish a new device template or update the cloud properties and overrides of an existing device template. Default views will be automatically generated for new device templates created this way.",
         "x-ms-examples": {
           "Create a device template": {
-            "$ref": "./examples/devicetemplates_create.json"
+            "$ref": "./examples/devicetemplates_set.json"
           }
         },
         "parameters": [
@@ -1316,12 +1381,12 @@
         }
       },
       "put": {
-        "operationId": "Devices_Set",
+        "operationId": "Devices_Create",
         "summary": "Create or update a device",
         "description": "Create a new device or update an existing one by device ID.",
         "x-ms-examples": {
           "Create device": {
-            "$ref": "./examples/devices_create.json"
+            "$ref": "./examples/devices_set.json"
           }
         },
         "parameters": [
@@ -1335,6 +1400,36 @@
             "schema": {
               "$ref": "#/definitions/Device"
             },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/Device"
+            }
+          }
+        }
+      },
+      "patch": {
+        "operationId": "Devices_Update",
+        "summary": "Update a device via patch",
+        "description": "Update an existing device by ID.",
+        "x-ms-examples": {
+          "Update device": {
+            "$ref": "./examples/devices_update.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/DeviceId"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Device patch body.",
+            "schema": {},
             "required": true
           }
         ],
@@ -1392,7 +1487,7 @@
         }
       },
       "put": {
-        "operationId": "Devices_SetAttestation",
+        "operationId": "Devices_CreateAttestation",
         "summary": "Create or update an individual device attestation",
         "x-ms-examples": {
           "Create or update device attestation - Symmetric Key": {
@@ -1473,12 +1568,12 @@
         }
       },
       "put": {
-        "operationId": "Devices_UpdateCloudProperties",
+        "operationId": "Devices_SetCloudProperties",
         "summary": "Update device cloud properties",
         "description": "Update all cloud property values of a device by device ID.",
         "x-ms-examples": {
           "Update cloud properties": {
-            "$ref": "./examples/devices_cloudproperties_update.json"
+            "$ref": "./examples/devices_cloudproperties_set.json"
           }
         },
         "parameters": [
@@ -1492,6 +1587,36 @@
             "schema": {
               "$ref": "#/definitions/DeviceCloudProperties"
             },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/DeviceCloudProperties"
+            }
+          }
+        }
+      },
+      "patch": {
+        "operationId": "Devices_UpdateCloudProperties",
+        "summary": "Update device cloud properties via PATCH",
+        "description": "Update cloud property values of a device by device ID.",
+        "x-ms-examples": {
+          "Update cloud properties": {
+            "$ref": "./examples/devices_cloudproperties_update.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/DeviceId"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Device properties patch.",
+            "schema": {},
             "required": true
           }
         ],
@@ -1692,7 +1817,7 @@
         }
       },
       "put": {
-        "operationId": "Devices_UpdateComponentProperties",
+        "operationId": "Devices_SetComponentProperties",
         "summary": "Update device properties for a specific component",
         "x-ms-examples": {
           "Update properties on components": {
@@ -1713,6 +1838,38 @@
             "schema": {
               "$ref": "#/definitions/DeviceProperties"
             },
+            "required": true
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/DeviceProperties"
+            }
+          }
+        }
+      },
+      "patch": {
+        "operationId": "Devices_UpdateComponentProperties",
+        "summary": "Update device properties for a specific component via PATCH",
+        "x-ms-examples": {
+          "Update properties on components": {
+            "$ref": "./examples/devices_properties_components_update.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/DeviceId"
+          },
+          {
+            "$ref": "#/parameters/ComponentName"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Device properties patch.",
+            "schema": {},
             "required": true
           }
         ],
@@ -2010,7 +2167,7 @@
         }
       },
       "put": {
-        "operationId": "Devices_UpdateModuleComponentProperties",
+        "operationId": "Devices_SetModuleComponentProperties",
         "summary": "Update module properties for a specific component",
         "x-ms-examples": {
           "Update properties of a module within a component": {
@@ -2034,6 +2191,41 @@
             "schema": {
               "$ref": "#/definitions/DeviceProperties"
             },
+            "required": true
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/DeviceProperties"
+            }
+          }
+        }
+      },
+      "patch": {
+        "operationId": "Devices_UpdateModuleComponentProperties",
+        "summary": "Update module properties for a specific component via PATCH",
+        "x-ms-examples": {
+          "Update properties of a module within a component": {
+            "$ref": "./examples/modules_properties_components_update.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/DeviceId"
+          },
+          {
+            "$ref": "#/parameters/ModuleName"
+          },
+          {
+            "$ref": "#/parameters/ComponentName"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Module properties patch.",
+            "schema": {},
             "required": true
           }
         ],
@@ -2109,12 +2301,12 @@
         }
       },
       "put": {
-        "operationId": "Devices_UpdateModuleProperties",
+        "operationId": "Devices_SetModuleProperties",
         "summary": "Update module properties",
         "description": "Update all property values of a module.",
         "x-ms-examples": {
           "Update properties of a module": {
-            "$ref": "./examples/modules_properties_update.json"
+            "$ref": "./examples/modules_properties_set.json"
           }
         },
         "parameters": [
@@ -2131,6 +2323,39 @@
             "schema": {
               "$ref": "#/definitions/DeviceProperties"
             },
+            "required": true
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/DeviceProperties"
+            }
+          }
+        }
+      },
+      "patch": {
+        "operationId": "Devices_UpdateModuleProperties",
+        "summary": "Update module properties via PATCH",
+        "description": "Update property values of a module.",
+        "x-ms-examples": {
+          "Update properties of a module": {
+            "$ref": "./examples/modules_properties_update.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/DeviceId"
+          },
+          {
+            "$ref": "#/parameters/ModuleName"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Module properties patch.",
+            "schema": {},
             "required": true
           }
         ],
@@ -2200,12 +2425,12 @@
         }
       },
       "put": {
-        "operationId": "Devices_UpdateProperties",
+        "operationId": "Devices_SetProperties",
         "summary": "Update device properties",
         "description": "Update all property values of a device by device ID.",
         "x-ms-examples": {
           "Update properties": {
-            "$ref": "./examples/devices_properties_update.json"
+            "$ref": "./examples/devices_properties_set.json"
           }
         },
         "parameters": [
@@ -2219,6 +2444,36 @@
             "schema": {
               "$ref": "#/definitions/DeviceProperties"
             },
+            "required": true
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/DeviceProperties"
+            }
+          }
+        }
+      },
+      "patch": {
+        "operationId": "Devices_UpdateProperties",
+        "summary": "Update device properties via PATCH",
+        "description": "Update property values of a device by device ID.",
+        "x-ms-examples": {
+          "Update properties": {
+            "$ref": "./examples/devices_properties_update.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/DeviceId"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Device properties patch.",
+            "schema": {},
             "required": true
           }
         ],
@@ -2307,7 +2562,7 @@
         }
       },
       "put": {
-        "operationId": "Jobs_Set",
+        "operationId": "Jobs_Create",
         "summary": "Execute a new job",
         "description": "Create and execute a new job via its job definition.",
         "x-ms-examples": {
@@ -2541,7 +2796,7 @@
         }
       },
       "put": {
-        "operationId": "Users_Set",
+        "operationId": "Users_Create",
         "summary": "Create or update a user in the application",
         "x-ms-examples": {
           "Add or update a service principal user": {
@@ -2566,6 +2821,42 @@
             "schema": {
               "$ref": "#/definitions/User"
             },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          }
+        }
+      },
+      "patch": {
+        "operationId": "Users_Update",
+        "summary": "Update a user in the application via PATCH",
+        "x-ms-examples": {
+          "Update a service principal user": {
+            "$ref": "./examples/users_set_serviceprincipal.json"
+          },
+          "Update an email user": {
+            "$ref": "./examples/users_update.json"
+          }
+        },
+        "parameters": [
+          {
+            "in": "path",
+            "name": "user_id",
+            "description": "Unique ID of the user.",
+            "type": "string",
+            "required": true
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "User patch body.",
+            "schema": {},
             "required": true
           }
         ],
