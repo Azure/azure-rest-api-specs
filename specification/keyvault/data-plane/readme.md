@@ -397,10 +397,14 @@ directive:
     reason: Consistency with other properties.
   - suppress: DefinitionsPropertiesNamesCamelCase
     from: securitydomain.json
-    where: $.definitions.SecurityDomainOperationStatus.properties.key_ops
+    where: $.definitions.SecurityDomainJsonWebKey.properties.key_ops
     reason: Consistency with other properties.
   - suppress: DefinitionsPropertiesNamesCamelCase
     from: securitydomain.json
-    where: $.definitions.SecurityDomainOperationStatus.properties.x5t#S256
+    where: $.definitions.SecurityDomainJsonWebKey.properties["x5t#S256"]
     reason: Consistency with other properties.
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    from: securitydomain.json
+    where: $.definitions.TransferKey.properties.key_format
+    reason: Consistency with other properties
 ```
