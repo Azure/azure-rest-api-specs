@@ -359,7 +359,7 @@
     },
     "JsonFormatFilePattern": {
       "description": "JSON format file pattern. A property of JsonFormat.",
-      "type": "string",
+      "type": "object",
       "enum": [
         "setOfObjects",
         "arrayOfObjects"
@@ -472,10 +472,37 @@
         }
       }
     },
+    "DatasetTarCompression": {
+      "x-ms-discriminator-value": "Tar",
+      "description": "The Tar archive method used on a dataset.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DatasetCompression"
+        }
+      ],
+      "properties": {}
+    },
+    "DatasetTarGZipCompression": {
+      "x-ms-discriminator-value": "TarGZip",
+      "description": "The TarGZip compression method used on a dataset.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DatasetCompression"
+        }
+      ],
+      "properties": {
+        "level": {
+          "description": "The TarGZip compression level.",
+          "$ref": "#/definitions/CompressionLevel"
+        }
+      }
+    },
     "CompressionLevel": {
       "title": "Microsoft.Azure.Management.DataFactories.Models.CompressionLevel",
       "description": "All available compression levels.",
-      "type": "string",
+      "type": "object",
       "enum": [
         "Optimal",
         "Fastest"
@@ -484,6 +511,66 @@
         "name": "DatasetCompressionLevel",
         "modelAsString": true
       }
+    },
+    "AmazonS3Dataset": {
+      "x-ms-discriminator-value": "AmazonS3Object",
+      "description": "A single Amazon Simple Storage Service (S3) object or a set of S3 objects.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Dataset"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "Amazon S3 dataset properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/AmazonS3DatasetTypeProperties"
+        }
+      },
+      "required": [
+        "typeProperties"
+      ]
+    },
+    "AmazonS3DatasetTypeProperties": {
+      "description": "Amazon S3 dataset properties.",
+      "properties": {
+        "bucketName": {
+          "type": "object",
+          "description": "The name of the Amazon S3 bucket. Type: string (or Expression with resultType string)."
+        },
+        "key": {
+          "type": "object",
+          "description": "The key of the Amazon S3 object. Type: string (or Expression with resultType string)."
+        },
+        "prefix": {
+          "type": "object",
+          "description": "The prefix filter for the S3 object name. Type: string (or Expression with resultType string)."
+        },
+        "version": {
+          "type": "object",
+          "description": "The version for the S3 object. Type: string (or Expression with resultType string)."
+        },
+        "modifiedDatetimeStart": {
+          "type": "object",
+          "description": "The start of S3 object's modified datetime. Type: string (or Expression with resultType string)."
+        },
+        "modifiedDatetimeEnd": {
+          "type": "object",
+          "description": "The end of S3 object's modified datetime. Type: string (or Expression with resultType string)."
+        },
+        "format": {
+          "description": "The format of files.",
+          "$ref": "#/definitions/DatasetStorageFormat"
+        },
+        "compression": {
+          "description": "The data compression method used for the Amazon S3 object.",
+          "$ref": "#/definitions/DatasetCompression"
+        }
+      },
+      "required": [
+        "bucketName"
+      ]
     },
     "AvroDataset": {
       "x-ms-discriminator-value": "Avro",
@@ -519,7 +606,7 @@
             "bzip2"
           ],
           "x-ms-enum": {
-            "name": "AvroCompressionCodec",
+            "name": "avroCompressionCodec",
             "modelAsString": true
           }
         },
@@ -531,6 +618,56 @@
       },
       "required": [
         "location"
+      ]
+    },
+    "ExcelDataset": {
+      "x-ms-discriminator-value": "Excel",
+      "description": "Excel dataset.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Dataset"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "Excel dataset properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ExcelDatasetTypeProperties"
+        }
+      }
+    },
+    "ExcelDatasetTypeProperties": {
+      "description": "Excel dataset properties.",
+      "properties": {
+        "location": {
+          "$ref": "#/definitions/DatasetLocation",
+          "description": "The location of the excel storage."
+        },
+        "sheetName": {
+          "type": "object",
+          "description": "The sheet of excel file. Type: string (or Expression with resultType string)."
+        },
+        "range": {
+          "type": "object",
+          "description": "The partial data of one sheet. Type: string (or Expression with resultType string)."
+        },
+        "firstRowAsHeader": {
+          "type": "object",
+          "description": "When used as input, treat the first row of data as headers. When used as output,write the headers into the output as the first row of data. The default value is false. Type: boolean (or Expression with resultType boolean)."
+        },
+        "compression": {
+          "description": "The data compression method used for the json dataset.",
+          "$ref": "#/definitions/DatasetCompression"
+        },
+        "nullValue": {
+          "type": "object",
+          "description": "The null value string. Type: string (or Expression with resultType string)."
+        }
+      },
+      "required": [
+        "location",
+        "sheetName"
       ]
     },
     "ParquetDataset": {
@@ -558,7 +695,7 @@
           "description": "The location of the parquet storage."
         },
         "compressionCodec": {
-          "type": "string",
+          "type": "object",
           "enum": [
             "none",
             "gzip",
@@ -566,7 +703,7 @@
             "lzo"
           ],
           "x-ms-enum": {
-            "name": "ParquetCompressionCodec",
+            "name": "compressionCodec",
             "modelAsString": true
           }
         }
@@ -612,17 +749,19 @@
           "description": "The code page name of the preferred encoding. If miss, the default value is UTF-8, unless BOM denotes another Unicode encoding. Refer to the name column of the table in the following link to set supported values: https://msdn.microsoft.com/library/system.text.encoding.aspx. Type: string (or Expression with resultType string)."
         },
         "compressionCodec": {
-          "type": "string",
+          "type": "object",
           "enum": [
             "bzip2",
             "gzip",
             "deflate",
             "zipDeflate",
             "snappy",
-            "lz4"
+            "lz4",
+            "tar",
+            "tarGZip"
           ],
           "x-ms-enum": {
-            "name": "DelimitedTextCompressionCodec",
+            "name": "compressionCodec",
             "modelAsString": true
           }
         },
@@ -688,6 +827,47 @@
         "location"
       ]
     },
+    "XmlDataset": {
+      "x-ms-discriminator-value": "Xml",
+      "description": "Xml dataset.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Dataset"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "Xml dataset properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/XmlDatasetTypeProperties"
+        }
+      }
+    },
+    "XmlDatasetTypeProperties": {
+      "description": "Xml dataset properties.",
+      "properties": {
+        "location": {
+          "$ref": "#/definitions/DatasetLocation",
+          "description": "The location of the json data storage."
+        },
+        "encodingName": {
+          "type": "object",
+          "description": "The code page name of the preferred encoding. If not specified, the default value is UTF-8, unless BOM denotes another Unicode encoding. Refer to the name column of the table in the following link to set supported values: https://msdn.microsoft.com/library/system.text.encoding.aspx. Type: string (or Expression with resultType string)."
+        },
+        "nullValue": {
+          "type": "object",
+          "description": "The null value string. Type: string (or Expression with resultType string)."
+        },
+        "compression": {
+          "description": "The data compression method used for the json dataset.",
+          "$ref": "#/definitions/DatasetCompression"
+        }
+      },
+      "required": [
+        "location"
+      ]
+    },
     "OrcDataset": {
       "x-ms-discriminator-value": "Orc",
       "description": "ORC dataset.",
@@ -717,10 +897,11 @@
           "enum": [
             "none",
             "zlib",
-            "snappy"
+            "snappy",
+            "lzo"
           ],
           "x-ms-enum": {
-            "name": "OrcCompressionCodec",
+            "name": "orcCompressionCodec",
             "modelAsString": true
           }
         }
@@ -762,6 +943,56 @@
       "required": [
         "location"
       ]
+    },
+    "AzureBlobDataset": {
+      "x-ms-discriminator-value": "AzureBlob",
+      "description": "The Azure Blob storage.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Dataset"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "Azure Blob dataset properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/AzureBlobDatasetTypeProperties"
+        }
+      }
+    },
+    "AzureBlobDatasetTypeProperties": {
+      "description": "Azure Blob dataset properties.",
+      "properties": {
+        "folderPath": {
+          "type": "object",
+          "description": "The path of the Azure Blob storage. Type: string (or Expression with resultType string)."
+        },
+        "tableRootLocation": {
+          "type": "object",
+          "description": "The root of blob path. Type: string (or Expression with resultType string)."
+        },
+        "fileName": {
+          "type": "object",
+          "description": "The name of the Azure Blob. Type: string (or Expression with resultType string)."
+        },
+        "modifiedDatetimeStart": {
+          "type": "object",
+          "description": "The start of Azure Blob's modified datetime. Type: string (or Expression with resultType string)."
+        },
+        "modifiedDatetimeEnd": {
+          "type": "object",
+          "description": "The end of Azure Blob's modified datetime. Type: string (or Expression with resultType string)."
+        },
+        "format": {
+          "description": "The format of the Azure Blob storage.",
+          "$ref": "#/definitions/DatasetStorageFormat"
+        },
+        "compression": {
+          "description": "The data compression method used for the blob storage.",
+          "$ref": "#/definitions/DatasetCompression"
+        }
+      }
     },
     "AzureTableDataset": {
       "x-ms-discriminator-value": "AzureTable",
@@ -1085,6 +1316,82 @@
         }
       }
     },
+    "AzureDataLakeStoreDataset": {
+      "x-ms-discriminator-value": "AzureDataLakeStoreFile",
+      "description": "Azure Data Lake Store dataset.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Dataset"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "Azure Data Lake Store dataset properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/AzureDataLakeStoreDatasetTypeProperties"
+        }
+      }
+    },
+    "AzureDataLakeStoreDatasetTypeProperties": {
+      "description": "Azure Data Lake Store dataset properties.",
+      "properties": {
+        "folderPath": {
+          "type": "object",
+          "description": "Path to the folder in the Azure Data Lake Store. Type: string (or Expression with resultType string)."
+        },
+        "fileName": {
+          "type": "object",
+          "description": "The name of the file in the Azure Data Lake Store. Type: string (or Expression with resultType string)."
+        },
+        "format": {
+          "description": "The format of the Data Lake Store.",
+          "$ref": "#/definitions/DatasetStorageFormat"
+        },
+        "compression": {
+          "description": "The data compression method used for the item(s) in the Azure Data Lake Store.",
+          "$ref": "#/definitions/DatasetCompression"
+        }
+      }
+    },
+    "AzureBlobFSDataset": {
+      "x-ms-discriminator-value": "AzureBlobFSFile",
+      "description": "The Azure Data Lake Storage Gen2 storage.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Dataset"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "Azure Data Lake Storage Gen2 dataset properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/AzureBlobFSDatasetTypeProperties"
+        }
+      }
+    },
+    "AzureBlobFSDatasetTypeProperties": {
+      "description": "Azure Data Lake Storage Gen2 dataset properties.",
+      "properties": {
+        "folderPath": {
+          "type": "object",
+          "description": "The path of the Azure Data Lake Storage Gen2 storage. Type: string (or Expression with resultType string)."
+        },
+        "fileName": {
+          "type": "object",
+          "description": "The name of the Azure Data Lake Storage Gen2. Type: string (or Expression with resultType string)."
+        },
+        "format": {
+          "description": "The format of the Azure Data Lake Storage Gen2 storage.",
+          "$ref": "#/definitions/DatasetStorageFormat"
+        },
+        "compression": {
+          "description": "The data compression method used for the blob storage.",
+          "$ref": "#/definitions/DatasetCompression"
+        }
+      }
+    },
     "Office365Dataset": {
       "x-ms-discriminator-value": "Office365Table",
       "description": "The Office365 account.",
@@ -1121,6 +1428,56 @@
         "tableName"
       ]
     },
+    "FileShareDataset": {
+      "x-ms-discriminator-value": "FileShare",
+      "description": "An on-premises file system dataset.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Dataset"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "On-premises file system dataset properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/FileShareDatasetTypeProperties"
+        }
+      }
+    },
+    "FileShareDatasetTypeProperties": {
+      "description": "On-premises file system dataset properties.",
+      "properties": {
+        "folderPath": {
+          "type": "object",
+          "description": "The path of the on-premises file system. Type: string (or Expression with resultType string)."
+        },
+        "fileName": {
+          "type": "object",
+          "description": "The name of the on-premises file system. Type: string (or Expression with resultType string)."
+        },
+        "modifiedDatetimeStart": {
+          "type": "object",
+          "description": "The start of file's modified datetime. Type: string (or Expression with resultType string)."
+        },
+        "modifiedDatetimeEnd": {
+          "type": "object",
+          "description": "The end of file's modified datetime. Type: string (or Expression with resultType string)."
+        },
+        "format": {
+          "description": "The format of the files.",
+          "$ref": "#/definitions/DatasetStorageFormat"
+        },
+        "fileFilter": {
+          "type": "object",
+          "description": "Specify a filter to be used to select a subset of files in the folderPath rather than all files. Type: string (or Expression with resultType string)."
+        },
+        "compression": {
+          "description": "The data compression method used for the file system.",
+          "$ref": "#/definitions/DatasetCompression"
+        }
+      }
+    },
     "MongoDbCollectionDataset": {
       "x-ms-discriminator-value": "MongoDbCollection",
       "description": "The MongoDB database dataset.",
@@ -1151,6 +1508,38 @@
       },
       "required": [
         "collectionName"
+      ]
+    },
+    "MongoDbAtlasCollectionDataset": {
+      "x-ms-discriminator-value": "MongoDbAtlasCollection",
+      "description": "The MongoDB Atlas database dataset.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Dataset"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "MongoDB Atlas database dataset properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/MongoDbAtlasCollectionDatasetTypeProperties"
+        }
+      },
+      "required": [
+        "typeProperties"
+      ]
+    },
+    "MongoDbAtlasCollectionDatasetTypeProperties": {
+      "description": "MongoDB Atlas database dataset properties.",
+      "properties": {
+        "collection": {
+          "type": "object",
+          "description": "The collection name of the MongoDB Atlas database. Type: string (or Expression with resultType string)."
+        }
+      },
+      "required": [
+        "collection"
       ]
     },
     "MongoDbV2CollectionDataset": {
@@ -1971,6 +2360,52 @@
         "indexName"
       ]
     },
+    "HttpDataset": {
+      "x-ms-discriminator-value": "HttpFile",
+      "description": "A file in an HTTP web server.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Dataset"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "Properties specific to this dataset type.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/HttpDatasetTypeProperties"
+        }
+      }
+    },
+    "HttpDatasetTypeProperties": {
+      "description": "Properties specific to this dataset type.",
+      "properties": {
+        "relativeUrl": {
+          "type": "object",
+          "description": "The relative URL based on the URL in the HttpLinkedService refers to an HTTP file Type: string (or Expression with resultType string)."
+        },
+        "requestMethod": {
+          "type": "object",
+          "description": "The HTTP method for the HTTP request. Type: string (or Expression with resultType string)."
+        },
+        "requestBody": {
+          "type": "object",
+          "description": "The body for the HTTP request. Type: string (or Expression with resultType string)."
+        },
+        "additionalHeaders": {
+          "type": "object",
+          "description": "The headers for the HTTP Request. e.g. request-header-name-1:request-header-value-1\r\n...\r\nrequest-header-name-n:request-header-value-n Type: string (or Expression with resultType string)."
+        },
+        "format": {
+          "description": "The format of files.",
+          "$ref": "#/definitions/DatasetStorageFormat"
+        },
+        "compression": {
+          "description": "The data compression method used on files.",
+          "$ref": "#/definitions/DatasetCompression"
+        }
+      }
+    },
     "GenericDatasetTypeProperties": {
       "description": "Properties specific to this dataset type.",
       "properties": {
@@ -2786,6 +3221,95 @@
           "description": "Properties specific to this dataset type.",
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/GenericDatasetTypeProperties"
+        }
+      }
+    },
+    "SnowflakeDataset": {
+      "x-ms-discriminator-value": "SnowflakeTable",
+      "description": "The snowflake dataset.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Dataset"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "Snowflake dataset properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/SnowflakeDatasetTypeProperties"
+        }
+      },
+      "required": [
+        "typeProperties"
+      ]
+    },
+    "SnowflakeDatasetTypeProperties": {
+      "description": "Snowflake dataset properties.",
+      "properties": {
+        "schema": {
+          "type": "object",
+          "description": "The schema name of the Snowflake database. Type: string (or Expression with resultType string)."
+        },
+        "table": {
+          "type": "object",
+          "description": "The table name of the Snowflake database. Type: string (or Expression with resultType string)."
+        }
+      }
+    },
+    "SharePointOnlineListResourceDataset": {
+      "x-ms-discriminator-value": "SharePointOnlineListResource",
+      "description": "The sharepoint online list resource dataset.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Dataset"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "Sharepoint online list dataset properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/SharePointOnlineListDatasetTypeProperties"
+        }
+      }
+    },
+    "SharePointOnlineListDatasetTypeProperties": {
+      "description": "Sharepoint online list dataset properties.",
+      "properties": {
+        "listName": {
+          "type": "object",
+          "description": "The name of the SharePoint Online list. Type: string (or Expression with resultType string)."
+        }
+      }
+    },
+    "AzureDatabricksDeltaLakeDataset": {
+      "x-ms-discriminator-value": "AzureDatabricksDeltaLakeDataset",
+      "description": "Azure Databricks Delta Lake dataset.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Dataset"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "Properties specific to this dataset type.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/AzureDatabricksDeltaLakeDatasetTypeProperties"
+        }
+      }
+    },
+    "AzureDatabricksDeltaLakeDatasetTypeProperties": {
+      "description": "Azure Databricks Delta Lake Dataset Properties",
+      "properties": {
+        "table": {
+          "type": "object",
+          "description": "The name of delta table. Type: string (or Expression with resultType string)."
+        },
+        "database": {
+          "type": "object",
+          "description": "The database name of delta table. Type: string (or Expression with resultType string)."
         }
       }
     }
