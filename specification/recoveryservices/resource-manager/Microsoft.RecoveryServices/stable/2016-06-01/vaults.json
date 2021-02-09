@@ -48,6 +48,12 @@
             "schema": {
               "$ref": "#/definitions/PrivateLinkResources"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+          }
           }
         },
         "deprecated": false,
@@ -98,6 +104,12 @@
             "schema": {
               "$ref": "#/definitions/PrivateLinkResource"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+          }
           }
         },
         "deprecated": false,
@@ -154,6 +166,12 @@
             "schema": {
               "$ref": "#/definitions/CheckNameAvailabilityResult"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+          }
           }
         },
         "x-ms-examples": {
@@ -190,6 +208,12 @@
             "schema": {
               "$ref": "#/definitions/VaultList"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+          }
           }
         },
         "deprecated": false,
@@ -225,6 +249,12 @@
             "schema": {
               "$ref": "#/definitions/ClientDiscoveryResponse"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+          }
           }
         },
         "deprecated": false,
@@ -266,6 +296,12 @@
             "schema": {
               "$ref": "#/definitions/VaultList"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+          }
           }
         },
         "deprecated": false,
@@ -310,6 +346,12 @@
             "schema": {
               "$ref": "#/definitions/Vault"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+          }
           }
         },
         "deprecated": false,
@@ -366,11 +408,17 @@
             "schema": {
               "$ref": "#/definitions/Vault"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+          }
           }
         },
         "deprecated": false,
         "x-ms-examples": {
-          "Create of Update Recovery Services vault": {
+          "Create or Update Recovery Services vault": {
             "$ref": "./examples/PUTVault.json"
           }
         }
@@ -401,6 +449,12 @@
         "responses": {
           "200": {
             "description": "OK"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
         "deprecated": false,
@@ -457,6 +511,12 @@
             "schema": {
               "$ref": "#/definitions/Vault"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+          }
           }
         },
         "deprecated": false,
@@ -497,6 +557,12 @@
             "schema": {
               "$ref": "#/definitions/VaultExtendedInfoResource"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+          }
           }
         },
         "deprecated": false,
@@ -547,6 +613,12 @@
             "schema": {
               "$ref": "#/definitions/VaultExtendedInfoResource"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+          }
           }
         },
         "deprecated": false,
@@ -597,6 +669,12 @@
             "schema": {
               "$ref": "#/definitions/VaultExtendedInfoResource"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+          }
           }
         },
         "deprecated": false,
@@ -759,7 +837,7 @@
           "type": "string",
           "readOnly": true
         },
-        "eTag": {
+        "etag": {
           "description": "Optional ETag.",
           "type": "string"
         }
@@ -784,6 +862,10 @@
             "name": "SkuName",
             "modelAsString": true
           }
+        },
+        "tier": {
+          "description": "The Sku tier.",
+          "type": "string"
         }
       }
     },
