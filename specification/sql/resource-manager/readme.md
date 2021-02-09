@@ -607,6 +607,7 @@ input-file:
   - Microsoft.Sql/preview/2020-11-01-preview/DatabaseVulnerabilityAssesmentRuleBaselines.json
   - Microsoft.Sql/preview/2020-11-01-preview/DatabaseVulnerabilityAssessmentScans.json
   - Microsoft.Sql/preview/2020-11-01-preview/DatabaseVulnerabilityAssessments.json
+  - Microsoft.Sql/preview/2020-11-01-preview/Databases.json
   - Microsoft.Sql/preview/2020-11-01-preview/Databases_legacy.json
   - Microsoft.Sql/preview/2020-11-01-preview/DeletedServers.json
   - Microsoft.Sql/preview/2020-11-01-preview/ElasticPoolOperations.json
@@ -728,7 +729,7 @@ input-file:
  - ./Microsoft.Sql/preview/2020-08-01-preview/DatabaseVulnerabilityAssessments.json
  - ./Microsoft.Sql/preview/2020-08-01-preview/DatabaseVulnerabilityAssessmentScans.json
  - ./Microsoft.Sql/preview/2020-08-01-preview/DataWarehouseUserActivities.json
- - ./Microsoft.Sql/fpreview/2020-08-01-preview/DeletedServers.json
+ - ./Microsoft.Sql/preview/2020-08-01-preview/DeletedServers.json
  - ./Microsoft.Sql/preview/2020-08-01-preview/ElasticPoolOperations.json
  - ./Microsoft.Sql/preview/2020-08-01-preview/ElasticPools.json
  - ./Microsoft.Sql/preview/2020-08-01-preview/EncryptionProtectors.json
