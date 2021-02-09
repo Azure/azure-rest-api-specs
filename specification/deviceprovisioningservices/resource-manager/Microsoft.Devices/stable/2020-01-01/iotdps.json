@@ -1418,6 +1418,11 @@
           "type": "boolean",
           "readOnly": true
         },
+        "certificate": {
+          "description": "base-64 representation of X509 certificate .cer file or just .pem file content.",
+          "type": "string",
+          "readOnly": true
+        },
         "created": {
           "description": "The certificate's creation date and time.",
           "type": "string",
@@ -1467,13 +1472,22 @@
           "description": "The Etag field is *not* required. If it is provided in the response body, it must also be provided as a header per the normal ETag convention.",
           "type": "string"
         },
+        "resourceGroup": {
+          "description": "The resource group for the particular subscription id",
+          "type": "string"
+        },
+        "subscriptionid": {
+          "description": "subscription id that belongs to the account",
+          "type": "string"
+        },
         "properties": {
           "description": "Service specific properties for a provisioning service",
           "$ref": "#/definitions/IotDpsPropertiesDescription"
         },
         "sku": {
           "description": "Sku info for a provisioning Service.",
-          "$ref": "#/definitions/IotDpsSkuInfo"
+          "$ref": "#/definitions/IotDpsSkuInfo",
+          "readOnly": true
         }
       },
       "allOf": [
@@ -1510,7 +1524,8 @@
           "x-ms-enum": {
             "name": "state",
             "modelAsString": true
-          }
+          },
+          "readOnly": true
         },
         "ipFilterRules": {
           "description": "The IP filter rules.",
@@ -1541,7 +1556,8 @@
           "x-ms-enum": {
             "name": "AllocationPolicy",
             "modelAsString": true
-          }
+          },
+          "readOnly": true
         },
         "serviceOperationsHostName": {
           "description": "Service endpoint for provisioning service.",
@@ -1772,7 +1788,7 @@
       "properties": {
         "code": {
           "description": "The error code.",
-          "type": "string",
+          "type": "integer",
           "readOnly": true
         },
         "httpStatusCode": {
@@ -1960,10 +1976,15 @@
               "type": "boolean",
               "description": "Indicate if the certificate is verified by owner of private key."
             },
+            "certificate": {
+              "description": "base-64 representation of X509 certificate .cer file or just .pem file content.",
+              "type": "string"
+            },
             "created": {
               "type": "string",
               "description": "Certificate created time."
             },
+
             "updated": {
               "type": "string",
               "description": "Certificate updated time."
