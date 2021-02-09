@@ -12,6 +12,7 @@ package-version: 1.0.0b1
 ```
 
 ``` yaml $(python-mode) == 'update'
+no-namespace-folders: true
 output-folder: $(python-sdks-folder)/[[ServiceName]]/azure-mgmt-[[ServiceName]]/azure/mgmt/[[ServiceName]]
 ```
 ``` yaml $(python-mode) == 'create'
