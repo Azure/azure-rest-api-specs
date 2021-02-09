@@ -30,7 +30,7 @@
     "/timeseries/entire/detect": {
       "post": {
         "summary": "Detect anomalies for the entire series in batch.",
-        "description": "This operation generates a model using an entire series, each point is detected with the same model. With this method, points before and after a certain point are used to determine whether it is an anomaly. The entire detection can give user an overall status of the time series.",
+        "description": "This operation generates a model with an entire series, each point is detected with the same model. With this method, points before and after a certain point are used to determine whether it is an anomaly. The entire detection can give user an overall status of the time series.",
         "operationId": "DetectEntireSeries",
         "parameters": [
           {
@@ -188,7 +188,7 @@
     },
     "TimeGranularity": {
       "type": "string",
-      "description": "Can only be one of yearly, monthly, weekly, daily, hourly, minutely or secondly. Granularity is used for verify whether input series is valid.",
+      "description": "Optional argument, can be one of yearly, monthly, weekly, daily, hourly, minutely, secondly, microsecond or none. If granularity is not present, it will be none by default. If granularity is none, the timestamp property in time series point can be absent.",
       "x-nullable": false,
       "x-ms-enum": {
         "name": "TimeGranularity",
@@ -216,6 +216,12 @@
           {
             "name": "perSecond",
             "value": "secondly"
+          },
+          {
+            "value": "microsecond"
+          },
+          {
+            "value": "none"
           }
         ]
       },
@@ -226,7 +232,9 @@
         "daily",
         "hourly",
         "minutely",
-        "secondly"
+        "secondly",
+        "microsecond",
+        "none"
       ]
     },
     "CustomInterval": {
@@ -238,7 +246,6 @@
     "DetectRequest": {
       "type": "object",
       "required": [
-        "granularity",
         "series"
       ],
       "properties": {
@@ -276,14 +283,13 @@
     "TimeSeriesPoint": {
       "type": "object",
       "required": [
-        "timestamp",
         "value"
       ],
       "properties": {
         "timestamp": {
           "type": "string",
           "format": "date-time",
-          "description": "Timestamp of a data point (ISO8601 format)."
+          "description": "Optional argument, timestamp of a data point (ISO8601 format)."
         },
         "value": {
           "type": "number",
@@ -455,15 +461,11 @@
     },
     "ChangePointDetectResponse": {
       "type": "object",
-      "required": [
-        "isChangePoint",
-        "confidenceScores",
-        "period"
-      ],
       "properties": {
         "period": {
           "type": "integer",
           "format": "int32",
+          "readOnly": true,
           "description": "Frequency extracted from the series, zero means no recurrent pattern has been found."
         },
         "isChangePoint": {
@@ -471,6 +473,7 @@
           "description": "isChangePoint contains change point properties for each input point. True means an anomaly either negative or positive has been detected. The index of the array is consistent with the input series.",
           "items": {
             "type": "boolean",
+            "readOnly": true,
             "x-nullable": false
           }
         },
@@ -480,6 +483,7 @@
           "items": {
             "type": "number",
             "format": "float",
+            "readOnly": true,
             "x-nullable": false
           }
         }
