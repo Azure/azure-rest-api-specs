@@ -25,6 +25,7 @@ output-folder: $(azureresourceschema-folder)/schemas
 # all the input files in this apiVersion
 input-file:
   - Microsoft.AlertsManagement/preview/2020-08-04-preview/AlertsManagement.json
+  - Microsoft.AlertsManagement/preview/2020-08-04-preview/ResourceHealthAlertRules.json
 
 ```
 
