@@ -224,6 +224,7 @@ input-file:
 - Microsoft.Sql/preview/2019-06-01-preview/ServerAzureADAdministrators.json
 - Microsoft.Sql/preview/2019-06-01-preview/syncGroups.json
 - Microsoft.Sql/preview/2019-06-01-preview/syncMembers.json
+- Microsoft.Sql/preview/2020-02-02-preview/ImportExport.json
 - Microsoft.Sql/preview/2020-02-02-preview/ManagedDatabases.json
 - Microsoft.Sql/preview/2020-02-02-preview/ManagedDatabaseRestoreDetails.json
 - Microsoft.Sql/preview/2020-02-02-preview/ServerAzureADOnlyAuthentications.json
@@ -232,7 +233,7 @@ input-file:
 - Microsoft.Sql/preview/2020-02-02-preview/ServerTrustGroups.json
 - Microsoft.Sql/preview/2020-08-01-preview/ElasticPools.json
 - Microsoft.Sql/preview/2020-08-01-preview/ServerDevOpsAudit.json
-- Microsoft.Sql/preview/2020-11-01-preview/Databases.json 
+- Microsoft.Sql/preview/2020-11-01-preview/Databases_legacy.json 
 - Microsoft.Sql/preview/2020-11-01-preview/LongTermRetentionBackups.json
 - Microsoft.Sql/preview/2020-11-01-preview/LongTermRetentionPolicies.json
 
