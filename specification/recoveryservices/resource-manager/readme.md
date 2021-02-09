@@ -52,7 +52,17 @@ input-file:
 - Microsoft.RecoveryServices/stable/2016-06-01/vaults.json
 - Microsoft.RecoveryServices/stable/2016-06-01/vaultusages.json
 ```
+### Tag: package-2020-02
 
+These settings apply only when `--tag=package-2020-02` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-02'
+input-file:
+- Microsoft.RecoveryServices/stable/2020-02-02/registeredidentities.json
+- Microsoft.RecoveryServices/stable/2020-02-02/replicationusages.json
+- Microsoft.RecoveryServices/stable/2020-02-02/vaults.json
+- Microsoft.RecoveryServices/stable/2020-02-02/vaultusages.json
+```
 
 ---
 # Code Generation
