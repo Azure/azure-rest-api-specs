@@ -64,7 +64,7 @@
           "200": {
             "description": "The body contains all of the properties of the privateLinkServicesForM365ComplianceCenter instance.",
             "schema": {
-              "$ref": "#/definitions/privateLinkServicesForM365ComplianceCenterDescription"
+              "$ref": "#/definitions/PrivateLinkServicesForM365ComplianceCenterDescription"
             }
           },
           "default": {
@@ -113,7 +113,7 @@
             "description": "The service instance metadata.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/privateLinkServicesForM365ComplianceCenterDescription"
+              "$ref": "#/definitions/PrivateLinkServicesForM365ComplianceCenterDescription"
             }
           }
         ],
@@ -121,13 +121,13 @@
           "200": {
             "description": "OK. Updated - Put request accepted and an existing resource is being updated; the operation will complete asynchronously.",
             "schema": {
-              "$ref": "#/definitions/privateLinkServicesForM365ComplianceCenterDescription"
+              "$ref": "#/definitions/PrivateLinkServicesForM365ComplianceCenterDescription"
             }
           },
           "201": {
             "description": "Created - Put request accepted and a new resource was created; the operation will complete asynchronously.",
             "schema": {
-              "$ref": "#/definitions/privateLinkServicesForM365ComplianceCenterDescription"
+              "$ref": "#/definitions/PrivateLinkServicesForM365ComplianceCenterDescription"
             }
           },
           "default": {
@@ -181,13 +181,13 @@
           "200": {
             "description": "OK. The resource was updated successfully.",
             "schema": {
-              "$ref": "#/definitions/privateLinkServicesForM365ComplianceCenterDescription"
+              "$ref": "#/definitions/PrivateLinkServicesForM365ComplianceCenterDescription"
             }
           },
           "202": {
             "description": "The resource was updated successfully.",
             "schema": {
-              "$ref": "#/definitions/privateLinkServicesForM365ComplianceCenterDescription"
+              "$ref": "#/definitions/PrivateLinkServicesForM365ComplianceCenterDescription"
             }
           },
           "default": {
@@ -274,7 +274,7 @@
           "200": {
             "description": "This is a synchronous operation. The body contains a JSON-serialized array of the metadata from all the privateLinkServicesForM365ComplianceCenter instances in the subscription.",
             "schema": {
-              "$ref": "#/definitions/privateLinkServicesForM365ComplianceCenterDescriptionListResult"
+              "$ref": "#/definitions/PrivateLinkServicesForM365ComplianceCenterDescriptionListResult"
             }
           },
           "default": {
@@ -317,7 +317,7 @@
           "200": {
             "description": "This is a synchronous operation. The body contains a JSON-serialized array of the metadata from all the privateLinkServicesForM365ComplianceCenter instances in the resource group.",
             "schema": {
-              "$ref": "#/definitions/privateLinkServicesForM365ComplianceCenterDescriptionListResult"
+              "$ref": "#/definitions/PrivateLinkServicesForM365ComplianceCenterDescriptionListResult"
             }
           },
           "default": {
@@ -522,14 +522,14 @@
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/privatelinks.json#/parameters/PrivateEndpointConnectionName"
+            "$ref": "./privatelinks.json#/parameters/PrivateEndpointConnectionName"
           }
         ],
         "responses": {
           "200": {
             "description": "The request was successful; the request was well-formed and received properly.",
             "schema": {
-              "$ref": "#/definitions/PrivateEndpointConnection"
+              "$ref": "./privatelinks.json#/definitions/PrivateEndpointConnection"
             }
           },
           "default": {
@@ -565,14 +565,14 @@
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/privatelinks.json#/parameters/PrivateEndpointConnectionName"
+            "$ref": "./privatelinks.json#/parameters/PrivateEndpointConnectionName"
           },
           {
             "name": "properties",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/PrivateEndpointConnection"
+              "$ref": "./privatelinks.json#/definitions/PrivateEndpointConnection"
             },
             "description": "The private endpoint connection properties."
           }
@@ -581,13 +581,13 @@
           "200": {
             "description": "OK. The request was successful; the request was well-formed and received properly.",
             "schema": {
-              "$ref": "#/definitions/PrivateEndpointConnection"
+              "$ref": "./privatelinks.json#/definitions/PrivateEndpointConnection"
             }
           },
           "201": {
             "description": "Created. The request was successful; the request was well-formed and received properly.",
             "schema": {
-              "$ref": "#/definitions/PrivateEndpointConnection"
+              "$ref": "./privatelinks.json#/definitions/PrivateEndpointConnection"
             }
           },
           "default": {
@@ -627,7 +627,7 @@
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/privatelinks.json#/parameters/PrivateEndpointConnectionName"
+            "$ref": "./privatelinks.json#/parameters/PrivateEndpointConnectionName"
           }
         ],
         "responses": {
@@ -683,7 +683,7 @@
           "200": {
             "description": "The request was successful; the request was well-formed and received properly.",
             "schema": {
-              "$ref": "#/definitions/PrivateLinkResourceListResult"
+              "$ref": "./privatelinks.json#/definitions/PrivateLinkResourceListResult"
             }
           },
           "default": {
@@ -732,7 +732,7 @@
           "200": {
             "description": "OK. The request was successful; the request was well-formed and received properly.",
             "schema": {
-              "$ref": "#/definitions/PrivateLinkResource"
+              "$ref": "./privatelinks.json#/definitions/PrivateLinkResource"
             }
           },
           "default": {
@@ -799,7 +799,7 @@
           "description": "The list of private endpoint connections that are set up for this resource.",
           "type": "array",
           "items": {
-            "$ref": "../../../../../common-types/resource-management/v1/privatelinks.json#/definitions/PrivateEndpointConnection"
+            "$ref": "./privatelinks.json#/definitions/PrivateEndpointConnection"
           }
         },
         "publicNetworkAccess": {
@@ -943,7 +943,7 @@
       "description": "A method for CORS.",
       "type": "string"
     },
-    "privateLinkServicesForM365ComplianceCenterDescription": {
+    "PrivateLinkServicesForM365ComplianceCenterDescription": {
       "description": "The description of the service.",
       "type": "object",
       "properties": {
@@ -1096,7 +1096,7 @@
         }
       }
     },
-    "privateLinkServicesForM365ComplianceCenterDescriptionListResult": {
+    "PrivateLinkServicesForM365ComplianceCenterDescriptionListResult": {
       "description": "A list of service description objects with a next link.",
       "type": "object",
       "properties": {
@@ -1109,7 +1109,7 @@
           "description": "A list of service description objects.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/privateLinkServicesForM365ComplianceCenterDescription"
+            "$ref": "#/definitions/PrivateLinkServicesForM365ComplianceCenterDescription"
           }
         }
       }
