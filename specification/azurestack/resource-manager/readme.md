@@ -34,7 +34,7 @@ These are the global settings for the Azure Stack API.
 title: AzureStackManagementClient
 description: Azure Stack
 openapi-type: arm
-tag: package-2017-06-01
+tag: package-preview-2020-06
 ```
 
 
