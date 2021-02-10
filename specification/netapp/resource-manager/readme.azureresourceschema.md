@@ -9,8 +9,10 @@ batch:
   - tag: schema-netapp-2020-11-01
   - tag: schema-netapp-2020-09-01
   - tag: schema-netapp-2020-08-01
-  - tag: schema-netapp-2020-07-01  
+  - tag: schema-netapp-2020-07-01
   - tag: schema-netapp-2020-06-01
+  - tag: schema-netapp-2020-05-01
+  - tag: schema-netapp-2020-03-01
   - tag: schema-netapp-2020-02-01
   - tag: schema-netapp-2019-11-01
   - tag: schema-netapp-2019-10-01
@@ -23,6 +25,7 @@ batch:
 ```
 
 Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
+
 ### Tag: schema-netapp-2020-11-01 and azureresourceschema
 
 ``` yaml $(tag) == 'schema-netapp-2020-11-01' && $(azureresourceschema)
@@ -33,7 +36,6 @@ input-file:
   - Microsoft.NetApp/stable/2020-11-01/netapp.json
 
 ```
-
 
 ### Tag: schema-netapp-2020-09-01 and azureresourceschema
 
@@ -76,6 +78,28 @@ output-folder: $(azureresourceschema-folder)/schemas
 # all the input files in this apiVersion
 input-file:
   - Microsoft.NetApp/stable/2020-06-01/netapp.json
+
+```
+
+### Tag: schema-netapp-2020-05-01 and azureresourceschema
+
+``` yaml $(tag) == 'schema-netapp-2020-05-01' && $(azureresourceschema)
+output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
+  - Microsoft.NetApp/stable/2020-05-01/netapp.json
+
+```
+
+### Tag: schema-netapp-2020-03-01 and azureresourceschema
+
+``` yaml $(tag) == 'schema-netapp-2020-03-01' && $(azureresourceschema)
+output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
+  - Microsoft.NetApp/stable/2020-03-01/netapp.json
 
 ```
 

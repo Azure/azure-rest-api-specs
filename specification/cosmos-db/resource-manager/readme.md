@@ -54,6 +54,8 @@ input-file:
 - Microsoft.DocumentDB/preview/2020-06-01-preview/restorable.json
 - Microsoft.DocumentDB/preview/2019-08-01-preview/privateLinkResources.json
 - Microsoft.DocumentDB/preview/2019-08-01-preview/privateEndpointConnection.json
+modelerfour:
+  lenient-model-deduplication: true
 ```
 
 ### Tag: package-2020-04
