@@ -1179,7 +1179,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/HighCasedErrorResponse"
             }
           }
         }
@@ -3003,6 +3003,10 @@
           "type": "string",
           "description": "Resource sku"
         },
+        "etag": {
+          "type": "string",
+          "description": "Resource etag."
+        },
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/ReservationRecommendationDetailsProperties",
@@ -3295,6 +3299,11 @@
           "format": "uuid",
           "readOnly": true
         },
+        "resourceType": {
+          "description": "The azure resource type.",
+          "type": "string",
+          "readOnly": true
+        },
         "term": {
           "description": "RI recommendations in one or three year terms.",
           "type": "string",
@@ -3385,7 +3394,8 @@
       "properties": {
         "lookBackPeriod": {
           "description": "The number of days of usage to look back for recommendation.",
-          "type": "string",
+          "type": "integer",
+          "format": "int32",
           "readOnly": true
         },
         "instanceFlexibilityRatio": {
@@ -4600,6 +4610,31 @@
           "description": "Error message indicating why the operation failed.",
           "type": "string",
           "readOnly": true
+        }
+      }
+    },
+    "HighCasedErrorDetails": {
+      "description": "The details of the error.",
+      "properties": {
+        "Code": {
+          "description": "Error code.",
+          "type": "string",
+          "readOnly": true
+        },
+        "Message": {
+          "description": "Error message indicating why the operation failed.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "HighCasedErrorResponse": {
+      "description": "Error response indicates that the service is not able to process the incoming request. The reason is provided in the error message. \n\nSome Error responses: \n\n * 429 TooManyRequests - Request is throttled. Retry after waiting for the time specified in the \"x-ms-ratelimit-microsoft.consumption-retry-after\" header. \n\n * 503 ServiceUnavailable - Service is temporarily unavailable. Retry after waiting for the time specified in the \"Retry-After\" header.",
+      "type": "object",
+      "properties": {
+        "Error": {
+          "description": "The details of the error.",
+          "$ref": "#/definitions/HighCasedErrorDetails"
         }
       }
     },
