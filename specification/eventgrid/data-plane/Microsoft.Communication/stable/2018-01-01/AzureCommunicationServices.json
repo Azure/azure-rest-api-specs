@@ -139,9 +139,9 @@
         }
       ],
       "properties": {
-        "createdBy": {
-          "description": "The MRI of the creator of the thread",
-          "type": "string"
+        "createdByCommunicationIdentifier": {
+          "description": "The communication identifier of the user who created the thread",
+          "$ref": "../../../../../communication/data-plane/Microsoft.CommunicationServicesCommon/stable/2021-03-07/common.json#/definitions/CommunicationIdentifierModel"
         },
         "properties": {
           "description": "The thread properties",
@@ -150,11 +150,11 @@
             "type": "object"
           }
         },
-        "members": {
-          "description": "The list of properties of users who are part of the thread",
+        "participants": {
+          "description": "The list of properties of participants who are part of the thread",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ACSChatThreadMemberProperties"
+            "$ref": "#/definitions/ACSChatThreadParticipantProperties"
           }
         }
       }
@@ -186,9 +186,9 @@
         }
       ],
       "properties": {
-        "deletedBy": {
-          "description": "The MRI of the user who deleted the thread",
-          "type": "string"
+        "deletedByCommunicationIdentifier": {
+          "description": "The communication identifier of the user who deleted the thread",
+          "$ref": "../../../../../communication/data-plane/Microsoft.CommunicationServicesCommon/stable/2021-03-07/common.json#/definitions/CommunicationIdentifierModel"
         },
         "deleteTime": {
           "description": "The deletion time of the thread",
@@ -231,9 +231,9 @@
         }
       ],
       "properties": {
-        "editedBy": {
-          "description": "The MRI of the user who updated the thread properties",
-          "type": "string"
+        "editedByCommunicationIdentifier": {
+          "description": "The communication identifier of the user who updated the thread properties",
+          "$ref": "../../../../../communication/data-plane/Microsoft.CommunicationServicesCommon/stable/2021-03-07/common.json#/definitions/CommunicationIdentifierModel"
         },
         "editTime": {
           "description": "The time at which the properties of the thread were updated",
@@ -295,8 +295,8 @@
         }
       }
     },
-    "ACSChatMemberAddedToThreadEventData": {
-      "description": "Schema of the Data property of an EventGridEvent for an Microsoft.Communication.ChatMemberAddedToThread event.",
+    "ACSChatParticipantAddedToThreadEventData": {
+      "description": "Schema of the Data property of an EventGridEvent for an Microsoft.Communication.ChatParticipantAddedToThread event.",
       "allOf": [
         {
           "$ref": "#/definitions/ACSChatEventInThreadBaseProperties"
@@ -308,13 +308,13 @@
           "format": "date-time",
           "type": "string"
         },
-        "addedBy": {
-          "description": "The MRI of the user who added the user",
-          "type": "string"
+        "addedByCommunicationIdentifier": {
+          "description": "The communication identifier of the user who added the user",
+          "$ref": "../../../../../communication/data-plane/Microsoft.CommunicationServicesCommon/stable/2021-03-07/common.json#/definitions/CommunicationIdentifierModel"
         },
-        "memberAdded": {
+        "participantAdded": {
           "description": "The details of the user who was added",
-          "$ref": "#/definitions/ACSChatThreadMemberProperties"
+          "$ref": "#/definitions/ACSChatThreadParticipantProperties"
         },
         "version": {
           "description": "The version of the thread",
@@ -323,8 +323,8 @@
         }
       }
     },
-    "ACSChatMemberRemovedFromThreadEventData": {
-      "description": "Schema of the Data property of an EventGridEvent for an Microsoft.Communication.ChatMemberRemovedFromThread event.",
+    "ACSChatParticipantRemovedFromThreadEventData": {
+      "description": "Schema of the Data property of an EventGridEvent for an Microsoft.Communication.ChatParticipantRemovedFromThread event.",
       "allOf": [
         {
           "$ref": "#/definitions/ACSChatEventInThreadBaseProperties"
@@ -336,13 +336,13 @@
           "format": "date-time",
           "type": "string"
         },
-        "removedBy": {
-          "description": "The MRI of the user who removed the user",
-          "type": "string"
+        "removedByCommunicationIdentifier": {
+          "description": "The communication identifier of the user who removed the user",
+          "$ref": "../../../../../communication/data-plane/Microsoft.CommunicationServicesCommon/stable/2021-03-07/common.json#/definitions/CommunicationIdentifierModel"
         },
-        "memberRemoved": {
+        "participantRemoved": {
           "description": "The details of the user who was removed",
-          "$ref": "#/definitions/ACSChatThreadMemberProperties"
+          "$ref": "#/definitions/ACSChatThreadParticipantProperties"
         },
         "version": {
           "description": "The version of the thread",
@@ -488,9 +488,9 @@
           "description": "The chat message id",
           "type": "string"
         },
-        "senderId": {
-          "description": "The MRI of the sender",
-          "type": "string"
+        "senderCommunicationIdentifier": {
+          "description": "The communication identifier of the sender",
+          "$ref": "../../../../../communication/data-plane/Microsoft.CommunicationServicesCommon/stable/2021-03-07/common.json#/definitions/CommunicationIdentifierModel"
         },
         "senderDisplayName": {
           "description": "The display name of the sender",
@@ -541,7 +541,7 @@
       }
     },
     "ACSChatThreadParticipantProperties": {
-      "description": "Schema of the chat thread member",
+      "description": "Schema of the chat thread participant",
       "type": "object",
       "properties": {
         "displayName": {
