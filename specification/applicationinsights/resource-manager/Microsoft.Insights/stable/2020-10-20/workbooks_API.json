@@ -76,7 +76,7 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": null
+          "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
           "WorkbooksList": {
@@ -147,7 +147,7 @@
           }
         ],
         "responses": {
-          "201": {
+          "200": {
             "description": "The workbook has been successfully deleted."
           },
           "204": {
@@ -254,7 +254,7 @@
           }
         ],
         "responses": {
-          "200": {
+          "201": {
             "description": "The workbook definition updated.",
             "schema": {
               "$ref": "#/definitions/Workbook"
@@ -287,30 +287,27 @@
         },
         "id": {
           "type": "string",
-          "readOnly": true,
-          "description": "Azure resource Id"
+          "description": "Azure resource Id",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         },
         "name": {
           "type": "string",
-          "readOnly": true,
-          "description": "Azure resource name. This is GUID value. The display name should be assigned within properties field."
+          "description": "Azure resource name",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         },
         "type": {
           "type": "string",
-          "readOnly": true,
-          "description": "Azure resource type"
-        },
-        "kind": {
-          "type": "string",
-          "description": "The kind of workbook. Choices are user and shared.",
-          "enum": [
-            "user",
-            "shared"
-          ],
-          "x-ms-enum": {
-            "name": "SharedTypeKind",
-            "modelAsString": true
-          }
+          "description": "Azure resource type",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         },
         "location": {
           "type": "string",
@@ -321,16 +318,18 @@
           ]
         },
         "tags": {
-          "type": "object",
           "additionalProperties": {
             "type": "string"
           },
           "description": "Resource tags"
+        },
+        "etag": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource etag"
         }
       },
-      "required": [
-        "location"
-      ],
       "x-ms-azure-resource": true,
       "description": "An azure resource object"
     },
@@ -338,10 +337,14 @@
       "properties": {
         "value": {
           "type": "array",
+          "readOnly": true,
           "items": {
             "$ref": "#/definitions/Workbook"
           },
           "description": "An array of workbooks."
+        },
+        "nextLink": {
+          "type": "string"
         }
       },
       "description": "Workbook list result."
@@ -354,6 +357,18 @@
         }
       ],
       "properties": {
+        "kind": {
+          "type": "string",
+          "description": "The kind of workbook. Choices are user and shared.",
+          "enum": [
+            "user",
+            "shared"
+          ],
+          "x-ms-enum": {
+            "name": "kind",
+            "modelAsString": true
+          }
+        },
         "properties": {
           "x-ms-client-flatten": true,
           "description": "Metadata describing a workbook for an Azure resource.",
@@ -375,7 +390,12 @@
         },
         "serializedData": {
           "type": "string",
+          "x-nullable": true,
           "description": "Configuration of this particular workbook. Configuration data is a string containing valid JSON"
+        },
+        "version": {
+          "type": "string",
+          "description": "Workbook version"
         },
         "timeModified": {
           "type": "string",
@@ -385,10 +405,6 @@
         "category": {
           "type": "string",
           "description": "Workbook category, as defined by the user at creation time."
-        },
-        "version": {
-          "type": "string",
-          "description": "Workbook version"
         },
         "tags": {
           "type": "array",
@@ -408,6 +424,7 @@
         },
         "storageUri": {
           "type": "string",
+          "x-nullable": true,
           "description": "BYOS Storage Account URI"
         }
       }
@@ -465,40 +482,47 @@
         }
       }
     },
-    "ErrorFieldContract": {
-      "properties": {
-        "code": {
-          "type": "string",
-          "description": "Property level error code."
-        },
-        "message": {
-          "type": "string",
-          "description": "Human-readable representation of property-level error."
-        },
-        "target": {
-          "type": "string",
-          "description": "Property name."
-        }
-      },
-      "description": "Error Field contract."
-    },
     "WorkbookError": {
-      "description": "Error message body that will indicate why the operation failed.",
+      "description": "Error response.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/ErrorDefinition",
+          "description": "The error details."
+        }
+      }
+    },
+    "ErrorDefinition": {
+      "description": "Error definition.",
       "properties": {
         "code": {
+          "description": "Service specific error code which serves as the substatus for the HTTP error code.",
           "type": "string",
-          "description": "Service-defined error code. This code serves as a sub-status for the HTTP error code specified in the response."
+          "readOnly": true
         },
         "message": {
+          "description": "Description of the error.",
           "type": "string",
-          "description": "Human-readable representation of the error."
+          "readOnly": true
         },
-        "details": {
+        "innererror": {
+          "description": "Internal error details.",
+          "items": {
+            "$ref": "#/definitions/InnerErrorTrace"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "InnerErrorTrace": {
+      "description": "Error details",
+      "properties": {
+        "trace": {
+          "description": "detailed error trace",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ErrorFieldContract"
+            "type": "string"
           },
-          "description": "The list of invalid fields send in request, in case of validation error."
+          "readOnly": true
         }
       }
     },
@@ -564,7 +588,7 @@
     "SourceIdParameter": {
       "name": "sourceId",
       "in": "query",
-      "required": true,
+      "required": false,
       "type": "string",
       "description": "Azure Resource Id that will fetch all linked workbooks.",
       "x-ms-parameter-location": "method"
