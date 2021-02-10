@@ -44,6 +44,17 @@ openapi-type: arm
 tag: package-2019-06-preview
 ```
 
+
+### Tag: package-preview-2021-02
+
+These settings apply only when `--tag=package-preview-2021-02` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2021-02'
+input-file:
+  - Microsoft.AlertsManagement/preview/2021-02-01-preview/ActionRules.json
+  - Microsoft.AlertsManagement/preview/2021-02-01-preview/AlertsManagement.json
+  - Microsoft.AlertsManagement/preview/2021-02-01-preview/SmartGroups.json
+```
 ### Tag: package-2019-06-preview
 
 These settings apply only when `--tag=package-2019-06-preview` is specified on the command line.
