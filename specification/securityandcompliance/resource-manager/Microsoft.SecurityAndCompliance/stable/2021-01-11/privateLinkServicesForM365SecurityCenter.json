@@ -367,52 +367,6 @@
         "deprecated": false
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.SecurityAndCompliance/checkNameAvailability": {
-      "post": {
-        "tags": [
-          "Proxy"
-        ],
-        "description": "Check if a service instance name is available.",
-        "operationId": "privateLinkServicesForM365SecurityCenter_CheckNameAvailability",
-        "x-ms-examples": {
-          "Check name availability": {
-            "$ref": "./examples/SecurityCenterCheckNameAvailabilityPost.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/subscriptionId"
-          },
-          {
-            "name": "checkNameAvailabilityInputs",
-            "in": "body",
-            "description": "Set the name parameter in the CheckNameAvailabilityParameters structure to the name of the service instance to check.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/CheckNameAvailabilityParameters"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "This is a synchronous operation. The body contains a JSON-serialized response that specifies whether the service name is available. If the name is not available, the body contains the reason.",
-            "schema": {
-              "$ref": "#/definitions/ServicesNameAvailabilityInfo"
-            }
-          },
-          "default": {
-            "description": "DefaultErrorResponse",
-            "schema": {
-              "$ref": "#/definitions/ErrorDetails"
-            }
-          }
-        },
-        "deprecated": false
-      }
-    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.SecurityAndCompliance/locations/{locationName}/operationresults/{operationResultId}": {
       "get": {
         "tags": [
@@ -1200,52 +1154,6 @@
             "name": "PublicNetworkAccess",
             "modelAsString": true
           }
-        }
-      }
-    },
-    "CheckNameAvailabilityParameters": {
-      "description": "Input values.",
-      "type": "object",
-      "properties": {
-        "name": {
-          "description": "The name of the service instance to check.",
-          "type": "string"
-        },
-        "type": {
-          "description": "The fully qualified resource type which includes provider namespace.",
-          "type": "string"
-        }
-      },
-      "required": [
-        "name",
-        "type"
-      ]
-    },
-    "ServicesNameAvailabilityInfo": {
-      "description": "The properties indicating whether a given service name is available.",
-      "type": "object",
-      "properties": {
-        "nameAvailable": {
-          "description": "The value which indicates whether the provided name is available.",
-          "type": "boolean",
-          "readOnly": true
-        },
-        "reason": {
-          "description": "The reason for unavailability.",
-          "enum": [
-            "Invalid",
-            "AlreadyExists"
-          ],
-          "type": "string",
-          "readOnly": true,
-          "x-ms-enum": {
-            "name": "ServiceNameUnavailabilityReason",
-            "modelAsString": false
-          }
-        },
-        "message": {
-          "description": "The detailed reason message.",
-          "type": "string"
         }
       }
     },

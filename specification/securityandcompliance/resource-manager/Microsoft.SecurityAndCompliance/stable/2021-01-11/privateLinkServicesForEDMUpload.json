@@ -34,16 +34,16 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SecurityAndCompliance/privateLinkServicesForOffice365ManagementActivityAPI/{resourceName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SecurityAndCompliance/privateLinkServicesForEDMUpload/{resourceName}": {
       "get": {
         "tags": [
           "Resource"
         ],
-        "description": "Get the metadata of a privateLinkServicesForOffice365ManagementActivityAPI resource.",
-        "operationId": "privateLinkServicesForOffice365ManagementActivityAPI_Get",
+        "description": "Get the metadata of a privateLinkServicesForEDMUpload resource.",
+        "operationId": "privateLinkServicesForEDMUpload_Get",
         "x-ms-examples": {
           "Get metadata": {
-            "$ref": "./examples/ManagementAPIServiceGet.json"
+            "$ref": "./examples/EdmUploadServiceGet.json"
           }
         },
         "parameters": [
@@ -62,9 +62,9 @@
         ],
         "responses": {
           "200": {
-            "description": "The body contains all of the properties of the privateLinkServicesForOffice365ManagementActivityAPI instance.",
+            "description": "The body contains all of the properties of the privateLinkServicesForEDMUpload instance.",
             "schema": {
-              "$ref": "#/definitions/PrivateLinkServicesForOffice365ManagementActivityAPIDescription"
+              "$ref": "#/definitions/PrivateLinkServicesForEDMUploadDescription"
             }
           },
           "default": {
@@ -80,14 +80,14 @@
         "tags": [
           "Resource"
         ],
-        "description": "Create or update the metadata of a privateLinkServicesForOffice365ManagementActivityAPI instance.",
-        "operationId": "privateLinkServicesForOffice365ManagementActivityAPI_CreateOrUpdate",
+        "description": "Create or update the metadata of a privateLinkServicesForEDMUpload instance.",
+        "operationId": "privateLinkServicesForEDMUpload_CreateOrUpdate",
         "x-ms-examples": {
           "Create or Update a service with all parameters": {
-            "$ref": "./examples/ManagementAPIServiceCreate.json"
+            "$ref": "./examples/EdmUploadServiceCreate.json"
           },
           "Create or Update a service with minimum parameters": {
-            "$ref": "./examples/ManagementAPIServiceCreateMinimum.json"
+            "$ref": "./examples/EdmUploadServiceCreateMinimum.json"
           }
         },
         "x-ms-long-running-operation": true,
@@ -108,26 +108,26 @@
             "$ref": "#/parameters/resourceName"
           },
           {
-            "name": "privateLinkServicesForOffice365ManagementActivityAPIDescription",
+            "name": "privateLinkServicesForEDMUploadDescription",
             "in": "body",
             "description": "The service instance metadata.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/PrivateLinkServicesForOffice365ManagementActivityAPIDescription"
+              "$ref": "#/definitions/PrivateLinkServicesForEDMUploadDescription"
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "OK. Updated - Put request accepted and an existing resource is being updated; the operation will complete asynchronously.",
+            "description": "Ok. Updated - Put request accepted and an existing resource is being updated; the operation will complete asynchronously.",
             "schema": {
-              "$ref": "#/definitions/PrivateLinkServicesForOffice365ManagementActivityAPIDescription"
+              "$ref": "#/definitions/PrivateLinkServicesForEDMUploadDescription"
             }
           },
           "201": {
             "description": "Created - Put request accepted and a new resource was created; the operation will complete asynchronously.",
             "schema": {
-              "$ref": "#/definitions/PrivateLinkServicesForOffice365ManagementActivityAPIDescription"
+              "$ref": "#/definitions/PrivateLinkServicesForEDMUploadDescription"
             }
           },
           "default": {
@@ -143,11 +143,11 @@
         "tags": [
           "Resource"
         ],
-        "description": "Update the metadata of a privateLinkServicesForOffice365ManagementActivityAPI instance.",
-        "operationId": "privateLinkServicesForOffice365ManagementActivityAPI_Update",
+        "description": "Update the metadata of a privateLinkServicesForEDMUpload instance.",
+        "operationId": "privateLinkServicesForEDMUpload_Update",
         "x-ms-examples": {
           "Patch service": {
-            "$ref": "./examples/ManagementAPIServicePatch.json"
+            "$ref": "./examples/EdmUploadServicePatch.json"
           }
         },
         "x-ms-long-running-operation": true,
@@ -181,13 +181,13 @@
           "200": {
             "description": "OK. The resource was updated successfully.",
             "schema": {
-              "$ref": "#/definitions/PrivateLinkServicesForOffice365ManagementActivityAPIDescription"
+              "$ref": "#/definitions/PrivateLinkServicesForEDMUploadDescription"
             }
           },
           "202": {
             "description": "The resource was updated successfully.",
             "schema": {
-              "$ref": "#/definitions/PrivateLinkServicesForOffice365ManagementActivityAPIDescription"
+              "$ref": "#/definitions/PrivateLinkServicesForEDMUploadDescription"
             }
           },
           "default": {
@@ -207,7 +207,7 @@
         "operationId": "Services_Delete",
         "x-ms-examples": {
           "Delete service": {
-            "$ref": "./examples/ManagementAPIServiceDelete.json"
+            "$ref": "./examples/EdmUploadServiceDelete.json"
           }
         },
         "x-ms-long-running-operation": true,
@@ -247,16 +247,16 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.SecurityAndCompliance/privateLinkServicesForOffice365ManagementActivityAPI": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.SecurityAndCompliance/privateLinkServicesForEDMUpload": {
       "get": {
         "tags": [
           "Collection"
         ],
-        "description": "Get all the privateLinkServicesForOffice365ManagementActivityAPI instances in a subscription.",
-        "operationId": "privateLinkServicesForOffice365ManagementActivityAPI_List",
+        "description": "Get all the privateLinkServicesForEDMUpload instances in a subscription.",
+        "operationId": "privateLinkServicesForEDMUpload_List",
         "x-ms-examples": {
           "List all services in subscription": {
-            "$ref": "./examples/ManagementAPIServiceList.json"
+            "$ref": "./examples/EdmUploadServiceList.json"
           }
         },
         "x-ms-pageable": {
@@ -272,9 +272,9 @@
         ],
         "responses": {
           "200": {
-            "description": "This is a synchronous operation. The body contains a JSON-serialized array of the metadata from all the privateLinkServicesForOffice365ManagementActivityAPI instances in the subscription.",
+            "description": "This is a synchronous operation. The body contains a JSON-serialized array of the metadata from all the privateLinkServicesForEDMUpload instances in the subscription.",
             "schema": {
-              "$ref": "#/definitions/PrivateLinkServicesForOffice365ManagementActivityAPIDescriptionListResult"
+              "$ref": "#/definitions/PrivateLinkServicesForEDMUploadDescriptionListResult"
             }
           },
           "default": {
@@ -287,16 +287,16 @@
         "deprecated": false
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SecurityAndCompliance/privateLinkServicesForOffice365ManagementActivityAPI": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SecurityAndCompliance/privateLinkServicesForEDMUpload": {
       "get": {
         "tags": [
           "Collection"
         ],
         "description": "Get all the service instances in a resource group.",
-        "operationId": "privateLinkServicesForOffice365ManagementActivityAPI_ListByResourceGroup",
+        "operationId": "privateLinkServicesForEDMUpload_ListByResourceGroup",
         "x-ms-examples": {
           "List all services in resource group": {
-            "$ref": "./examples/ManagementAPIServiceListByResourceGroup.json"
+            "$ref": "./examples/EdmUploadServiceListByResourceGroup.json"
           }
         },
         "x-ms-pageable": {
@@ -315,9 +315,9 @@
         ],
         "responses": {
           "200": {
-            "description": "This is a synchronous operation. The body contains a JSON-serialized array of the metadata from all the privateLinkServicesForOffice365ManagementActivityAPI instances in the resource group.",
+            "description": "This is a synchronous operation. The body contains a JSON-serialized array of the metadata from all the privateLinkServicesForEDMUpload instances in the resource group.",
             "schema": {
-              "$ref": "#/definitions/PrivateLinkServicesForOffice365ManagementActivityAPIDescriptionListResult"
+              "$ref": "#/definitions/PrivateLinkServicesForEDMUploadDescriptionListResult"
             }
           },
           "default": {
@@ -339,7 +339,7 @@
         "operationId": "Operations_List",
         "x-ms-examples": {
           "List operations": {
-            "$ref": "./examples/ManagementAPIOperationsList.json"
+            "$ref": "./examples/EdmUploadOperationsList.json"
           }
         },
         "x-ms-pageable": {
@@ -367,52 +367,6 @@
         "deprecated": false
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.SecurityAndCompliance/checkNameAvailability": {
-      "post": {
-        "tags": [
-          "Proxy"
-        ],
-        "description": "Check if a service instance name is available.",
-        "operationId": "privateLinkServicesForOffice365ManagementActivityAPI_CheckNameAvailability",
-        "x-ms-examples": {
-          "Check name availability": {
-            "$ref": "./examples/ManagementAPICheckNameAvailabilityPost.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/subscriptionId"
-          },
-          {
-            "name": "checkNameAvailabilityInputs",
-            "in": "body",
-            "description": "Set the name parameter in the CheckNameAvailabilityParameters structure to the name of the service instance to check.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/CheckNameAvailabilityParameters"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "This is a synchronous operation. The body contains a JSON-serialized response that specifies whether the service name is available. If the name is not available, the body contains the reason.",
-            "schema": {
-              "$ref": "#/definitions/ServicesNameAvailabilityInfo"
-            }
-          },
-          "default": {
-            "description": "DefaultErrorResponse",
-            "schema": {
-              "$ref": "#/definitions/ErrorDetails"
-            }
-          }
-        },
-        "deprecated": false
-      }
-    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.SecurityAndCompliance/locations/{locationName}/operationresults/{operationResultId}": {
       "get": {
         "tags": [
@@ -422,7 +376,7 @@
         "operationId": "OperationResults_Get",
         "x-ms-examples": {
           "Get operation result": {
-            "$ref": "./examples/ManagementAPIOperationResultsGet.json"
+            "$ref": "./examples/EdmUploadOperationResultsGet.json"
           }
         },
         "parameters": [
@@ -456,7 +410,7 @@
         "deprecated": false
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SecurityAndCompliance/privateLinkServicesForOffice365ManagementActivityAPI/{resourceName}/privateEndpointConnections": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SecurityAndCompliance/privateLinkServicesForEDMUpload/{resourceName}/privateEndpointConnections": {
       "get": {
         "tags": [
           "PrivateEndpointConnections"
@@ -493,7 +447,7 @@
         },
         "x-ms-examples": {
           "PrivateEndpointConnection_List": {
-            "$ref": "./examples/ManagementAPIServiceListPrivateEndpointConnections.json"
+            "$ref": "./examples/EdmUploadServiceListPrivateEndpointConnections.json"
           }
         },
         "x-ms-pageable": {
@@ -501,7 +455,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SecurityAndCompliance/privateLinkServicesForOffice365ManagementActivityAPI/{resourceName}/privateEndpointConnections/{privateEndpointConnectionName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SecurityAndCompliance/privateLinkServicesForEDMUpload/{resourceName}/privateEndpointConnections/{privateEndpointConnectionName}": {
       "get": {
         "tags": [
           "PrivateEndpointConnections"
@@ -541,7 +495,7 @@
         },
         "x-ms-examples": {
           "PrivateEndpointConnection_GetConnection": {
-            "$ref": "./examples/ManagementAPIServiceGetPrivateEndpointConnection.json"
+            "$ref": "./examples/EdmUploadServiceGetPrivateEndpointConnection.json"
           }
         }
       },
@@ -599,7 +553,7 @@
         },
         "x-ms-examples": {
           "PrivateEndpointConnection_CreateOrUpdate": {
-            "$ref": "./examples/ManagementAPIServiceCreatePrivateEndpointConnection.json"
+            "$ref": "./examples/EdmUploadServiceCreatePrivateEndpointConnection.json"
           }
         },
         "x-ms-long-running-operation": true,
@@ -649,7 +603,7 @@
         },
         "x-ms-examples": {
           "PrivateEndpointConnections_Delete": {
-            "$ref": "./examples/ManagementAPIServiceDeletePrivateEndpointConnection.json"
+            "$ref": "./examples/EdmUploadServiceDeletePrivateEndpointConnection.json"
           }
         },
         "x-ms-long-running-operation": true,
@@ -658,7 +612,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SecurityAndCompliance/privateLinkServicesForOffice365ManagementActivityAPI/{resourceName}/privateLinkResources": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SecurityAndCompliance/privateLinkServicesForEDMUpload/{resourceName}/privateLinkResources": {
       "get": {
         "tags": [
           "PrivateLinkResources"
@@ -695,12 +649,12 @@
         },
         "x-ms-examples": {
           "PrivateLinkResources_ListGroupIds": {
-            "$ref": "./examples/ManagementAPIPrivateLinkResourcesListByService.json"
+            "$ref": "./examples/EdmUploadPrivateLinkResourcesListByService.json"
           }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SecurityAndCompliance/privateLinkServicesForOffice365ManagementActivityAPI/{resourceName}/privateLinkResources/{groupName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SecurityAndCompliance/privateLinkServicesForEDMUpload/{resourceName}/privateLinkResources/{groupName}": {
       "get": {
         "tags": [
           "PrivateLinkResources"
@@ -744,7 +698,7 @@
         },
         "x-ms-examples": {
           "PrivateLinkResources_Get": {
-            "$ref": "./examples/ManagementAPIPrivateLinkResourceGet.json"
+            "$ref": "./examples/EdmUploadPrivateLinkResourceGet.json"
           }
         }
       }
@@ -799,7 +753,7 @@
           "description": "The list of private endpoint connections that are set up for this resource.",
           "type": "array",
           "items": {
-            "$ref": "../../../../../common-types/resource-management/v1/privatelinks.json#/definitions/PrivateEndpointConnection"
+            "$ref": "./privatelinks.json#/definitions/PrivateEndpointConnection"
           }
         },
         "publicNetworkAccess": {
@@ -943,7 +897,7 @@
       "description": "A method for CORS.",
       "type": "string"
     },
-    "PrivateLinkServicesForOffice365ManagementActivityAPIDescription": {
+    "PrivateLinkServicesForEDMUploadDescription": {
       "description": "The description of the service.",
       "type": "object",
       "properties": {
@@ -1096,7 +1050,7 @@
         }
       }
     },
-    "PrivateLinkServicesForOffice365ManagementActivityAPIDescriptionListResult": {
+    "PrivateLinkServicesForEDMUploadDescriptionListResult": {
       "description": "A list of service description objects with a next link.",
       "type": "object",
       "properties": {
@@ -1109,7 +1063,7 @@
           "description": "A list of service description objects.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/PrivateLinkServicesForOffice365ManagementActivityAPIDescription"
+            "$ref": "#/definitions/PrivateLinkServicesForEDMUploadDescription"
           }
         }
       }
@@ -1200,52 +1154,6 @@
             "name": "PublicNetworkAccess",
             "modelAsString": true
           }
-        }
-      }
-    },
-    "CheckNameAvailabilityParameters": {
-      "description": "Input values.",
-      "type": "object",
-      "properties": {
-        "name": {
-          "description": "The name of the service instance to check.",
-          "type": "string"
-        },
-        "type": {
-          "description": "The fully qualified resource type which includes provider namespace.",
-          "type": "string"
-        }
-      },
-      "required": [
-        "name",
-        "type"
-      ]
-    },
-    "ServicesNameAvailabilityInfo": {
-      "description": "The properties indicating whether a given service name is available.",
-      "type": "object",
-      "properties": {
-        "nameAvailable": {
-          "description": "The value which indicates whether the provided name is available.",
-          "type": "boolean",
-          "readOnly": true
-        },
-        "reason": {
-          "description": "The reason for unavailability.",
-          "enum": [
-            "Invalid",
-            "AlreadyExists"
-          ],
-          "type": "string",
-          "readOnly": true,
-          "x-ms-enum": {
-            "name": "ServiceNameUnavailabilityReason",
-            "modelAsString": false
-          }
-        },
-        "message": {
-          "description": "The detailed reason message.",
-          "type": "string"
         }
       }
     },

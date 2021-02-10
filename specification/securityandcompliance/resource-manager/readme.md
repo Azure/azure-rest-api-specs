@@ -37,11 +37,11 @@ These settings apply only when `--tag=package-2021-01-11` is specified on the co
 ``` yaml $(tag) == 'package-2021-01-11'
 input-file:
 - Microsoft.SecurityAndCompliance/stable/2021-01-11/privatelinks.json
-- Microsoft.SecurityAndCompliance/stable/2021-01-11/privateLinkServicesForExactDataMatchUpload.json
+- Microsoft.SecurityAndCompliance/stable/2021-01-11/privateLinkServicesForEDMUpload.json
 - Microsoft.SecurityAndCompliance/stable/2021-01-11/privateLinkServicesForM365ComplianceCenter.json
 - Microsoft.SecurityAndCompliance/stable/2021-01-11/privateLinkServicesForM365SecurityCenter.json
-- Microsoft.SecurityAndCompliance/stable/2021-01-11/privateLinkServicesForOffice365ManagementActivityAPI.json
-- Microsoft.SecurityAndCompliance/stable/2021-01-11/privateLinkServicesForSecurityandComplianceCenterPowershell.json
+- Microsoft.SecurityAndCompliance/stable/2021-01-11/privateLinkServicesForO365ManagementActivityAPI.json
+- Microsoft.SecurityAndCompliance/stable/2021-01-11/privateLinkServicesForSCCPowershell.json
 ```
 
 ---

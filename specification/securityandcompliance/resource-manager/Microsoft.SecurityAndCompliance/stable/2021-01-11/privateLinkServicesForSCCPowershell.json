@@ -34,16 +34,16 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SecurityAndCompliance/privateLinkServicesForExactDataMatchUpload/{resourceName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SecurityAndCompliance/privateLinkServicesForSCCPowershell/{resourceName}": {
       "get": {
         "tags": [
           "Resource"
         ],
-        "description": "Get the metadata of a privateLinkServicesForExactDataMatchUpload resource.",
-        "operationId": "privateLinkServicesForExactDataMatchUpload_Get",
+        "description": "Get the metadata of a privateLinkServicesForSCCPowershell resource.",
+        "operationId": "privateLinkServicesForSCCPowershell_Get",
         "x-ms-examples": {
           "Get metadata": {
-            "$ref": "./examples/EdmUploadServiceGet.json"
+            "$ref": "./examples/SCCPowershellServiceGet.json"
           }
         },
         "parameters": [
@@ -62,9 +62,9 @@
         ],
         "responses": {
           "200": {
-            "description": "The body contains all of the properties of the privateLinkServicesForExactDataMatchUpload instance.",
+            "description": "The body contains all of the properties of the privateLinkServicesForSCCPowershell instance.",
             "schema": {
-              "$ref": "#/definitions/PrivateLinkServicesForExactDataMatchUploadDescription"
+              "$ref": "#/definitions/PrivateLinkServicesForSCCPowershellDescription"
             }
           },
           "default": {
@@ -80,14 +80,14 @@
         "tags": [
           "Resource"
         ],
-        "description": "Create or update the metadata of a privateLinkServicesForExactDataMatchUpload instance.",
-        "operationId": "privateLinkServicesForExactDataMatchUpload_CreateOrUpdate",
+        "description": "Create or update the metadata of a privateLinkServicesForSCCPowershell instance.",
+        "operationId": "privateLinkServicesForSCCPowershell_CreateOrUpdate",
         "x-ms-examples": {
           "Create or Update a service with all parameters": {
-            "$ref": "./examples/EdmUploadServiceCreate.json"
+            "$ref": "./examples/SCCPowershellServiceCreate.json"
           },
           "Create or Update a service with minimum parameters": {
-            "$ref": "./examples/EdmUploadServiceCreateMinimum.json"
+            "$ref": "./examples/SCCPowershellServiceCreateMinimum.json"
           }
         },
         "x-ms-long-running-operation": true,
@@ -108,26 +108,26 @@
             "$ref": "#/parameters/resourceName"
           },
           {
-            "name": "privateLinkServicesForExactDataMatchUploadDescription",
+            "name": "privateLinkServicesForSCCPowershellDescription",
             "in": "body",
             "description": "The service instance metadata.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/PrivateLinkServicesForExactDataMatchUploadDescription"
+              "$ref": "#/definitions/PrivateLinkServicesForSCCPowershellDescription"
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "Ok. Updated - Put request accepted and an existing resource is being updated; the operation will complete asynchronously.",
+            "description": "OK. Updated - Put request accepted and an existing resource is being updated; the operation will complete asynchronously.",
             "schema": {
-              "$ref": "#/definitions/PrivateLinkServicesForExactDataMatchUploadDescription"
+              "$ref": "#/definitions/PrivateLinkServicesForSCCPowershellDescription"
             }
           },
           "201": {
             "description": "Created - Put request accepted and a new resource was created; the operation will complete asynchronously.",
             "schema": {
-              "$ref": "#/definitions/PrivateLinkServicesForExactDataMatchUploadDescription"
+              "$ref": "#/definitions/PrivateLinkServicesForSCCPowershellDescription"
             }
           },
           "default": {
@@ -143,11 +143,11 @@
         "tags": [
           "Resource"
         ],
-        "description": "Update the metadata of a privateLinkServicesForExactDataMatchUpload instance.",
-        "operationId": "privateLinkServicesForExactDataMatchUpload_Update",
+        "description": "Update the metadata of a privateLinkServicesForSCCPowershell instance.",
+        "operationId": "privateLinkServicesForSCCPowershell_Update",
         "x-ms-examples": {
           "Patch service": {
-            "$ref": "./examples/EdmUploadServicePatch.json"
+            "$ref": "./examples/SCCPowershellServicePatch.json"
           }
         },
         "x-ms-long-running-operation": true,
@@ -181,13 +181,13 @@
           "200": {
             "description": "OK. The resource was updated successfully.",
             "schema": {
-              "$ref": "#/definitions/PrivateLinkServicesForExactDataMatchUploadDescription"
+              "$ref": "#/definitions/PrivateLinkServicesForSCCPowershellDescription"
             }
           },
           "202": {
             "description": "The resource was updated successfully.",
             "schema": {
-              "$ref": "#/definitions/PrivateLinkServicesForExactDataMatchUploadDescription"
+              "$ref": "#/definitions/PrivateLinkServicesForSCCPowershellDescription"
             }
           },
           "default": {
@@ -207,7 +207,7 @@
         "operationId": "Services_Delete",
         "x-ms-examples": {
           "Delete service": {
-            "$ref": "./examples/EdmUploadServiceDelete.json"
+            "$ref": "./examples/SCCPowershellServiceDelete.json"
           }
         },
         "x-ms-long-running-operation": true,
@@ -247,16 +247,16 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.SecurityAndCompliance/privateLinkServicesForExactDataMatchUpload": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.SecurityAndCompliance/privateLinkServicesForSCCPowershell": {
       "get": {
         "tags": [
           "Collection"
         ],
-        "description": "Get all the privateLinkServicesForExactDataMatchUpload instances in a subscription.",
-        "operationId": "privateLinkServicesForExactDataMatchUpload_List",
+        "description": "Get all the privateLinkServicesForSCCPowershell instances in a subscription.",
+        "operationId": "privateLinkServicesForSCCPowershell_List",
         "x-ms-examples": {
           "List all services in subscription": {
-            "$ref": "./examples/EdmUploadServiceList.json"
+            "$ref": "./examples/SCCPowershellServiceList.json"
           }
         },
         "x-ms-pageable": {
@@ -272,9 +272,9 @@
         ],
         "responses": {
           "200": {
-            "description": "This is a synchronous operation. The body contains a JSON-serialized array of the metadata from all the privateLinkServicesForExactDataMatchUpload instances in the subscription.",
+            "description": "This is a synchronous operation. The body contains a JSON-serialized array of the metadata from all the privateLinkServicesForSCCPowershell instances in the subscription.",
             "schema": {
-              "$ref": "#/definitions/PrivateLinkServicesForExactDataMatchUploadDescriptionListResult"
+              "$ref": "#/definitions/PrivateLinkServicesForSCCPowershellDescriptionListResult"
             }
           },
           "default": {
@@ -287,16 +287,16 @@
         "deprecated": false
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SecurityAndCompliance/privateLinkServicesForExactDataMatchUpload": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SecurityAndCompliance/privateLinkServicesForSCCPowershell": {
       "get": {
         "tags": [
           "Collection"
         ],
         "description": "Get all the service instances in a resource group.",
-        "operationId": "privateLinkServicesForExactDataMatchUpload_ListByResourceGroup",
+        "operationId": "privateLinkServicesForSCCPowershell_ListByResourceGroup",
         "x-ms-examples": {
           "List all services in resource group": {
-            "$ref": "./examples/EdmUploadServiceListByResourceGroup.json"
+            "$ref": "./examples/SCCPowershellServiceListByResourceGroup.json"
           }
         },
         "x-ms-pageable": {
@@ -315,9 +315,9 @@
         ],
         "responses": {
           "200": {
-            "description": "This is a synchronous operation. The body contains a JSON-serialized array of the metadata from all the privateLinkServicesForExactDataMatchUpload instances in the resource group.",
+            "description": "This is a synchronous operation. The body contains a JSON-serialized array of the metadata from all the privateLinkServicesForSCCPowershell instances in the resource group.",
             "schema": {
-              "$ref": "#/definitions/PrivateLinkServicesForExactDataMatchUploadDescriptionListResult"
+              "$ref": "#/definitions/PrivateLinkServicesForSCCPowershellDescriptionListResult"
             }
           },
           "default": {
@@ -339,7 +339,7 @@
         "operationId": "Operations_List",
         "x-ms-examples": {
           "List operations": {
-            "$ref": "./examples/EdmUploadOperationsList.json"
+            "$ref": "./examples/SCCPowershellOperationsList.json"
           }
         },
         "x-ms-pageable": {
@@ -367,52 +367,6 @@
         "deprecated": false
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.SecurityAndCompliance/checkNameAvailability": {
-      "post": {
-        "tags": [
-          "Proxy"
-        ],
-        "description": "Check if a service instance name is available.",
-        "operationId": "privateLinkServicesForExactDataMatchUpload_CheckNameAvailability",
-        "x-ms-examples": {
-          "Check name availability": {
-            "$ref": "./examples/EdmUploadCheckNameAvailabilityPost.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/subscriptionId"
-          },
-          {
-            "name": "checkNameAvailabilityInputs",
-            "in": "body",
-            "description": "Set the name parameter in the CheckNameAvailabilityParameters structure to the name of the service instance to check.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/CheckNameAvailabilityParameters"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "This is a synchronous operation. The body contains a JSON-serialized response that specifies whether the service name is available. If the name is not available, the body contains the reason.",
-            "schema": {
-              "$ref": "#/definitions/ServicesNameAvailabilityInfo"
-            }
-          },
-          "default": {
-            "description": "DefaultErrorResponse",
-            "schema": {
-              "$ref": "#/definitions/ErrorDetails"
-            }
-          }
-        },
-        "deprecated": false
-      }
-    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.SecurityAndCompliance/locations/{locationName}/operationresults/{operationResultId}": {
       "get": {
         "tags": [
@@ -422,7 +376,7 @@
         "operationId": "OperationResults_Get",
         "x-ms-examples": {
           "Get operation result": {
-            "$ref": "./examples/EdmUploadOperationResultsGet.json"
+            "$ref": "./examples/SCCPowershellOperationResultsGet.json"
           }
         },
         "parameters": [
@@ -456,7 +410,7 @@
         "deprecated": false
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SecurityAndCompliance/privateLinkServicesForExactDataMatchUpload/{resourceName}/privateEndpointConnections": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SecurityAndCompliance/privateLinkServicesForSCCPowershell/{resourceName}/privateEndpointConnections": {
       "get": {
         "tags": [
           "PrivateEndpointConnections"
@@ -493,7 +447,7 @@
         },
         "x-ms-examples": {
           "PrivateEndpointConnection_List": {
-            "$ref": "./examples/EdmUploadServiceListPrivateEndpointConnections.json"
+            "$ref": "./examples/SCCPowershellServiceListPrivateEndpointConnections.json"
           }
         },
         "x-ms-pageable": {
@@ -501,7 +455,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SecurityAndCompliance/privateLinkServicesForExactDataMatchUpload/{resourceName}/privateEndpointConnections/{privateEndpointConnectionName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SecurityAndCompliance/privateLinkServicesForSCCPowershell/{resourceName}/privateEndpointConnections/{privateEndpointConnectionName}": {
       "get": {
         "tags": [
           "PrivateEndpointConnections"
@@ -541,7 +495,7 @@
         },
         "x-ms-examples": {
           "PrivateEndpointConnection_GetConnection": {
-            "$ref": "./examples/EdmUploadServiceGetPrivateEndpointConnection.json"
+            "$ref": "./examples/SCCPowershellServiceGetPrivateEndpointConnection.json"
           }
         }
       },
@@ -599,7 +553,7 @@
         },
         "x-ms-examples": {
           "PrivateEndpointConnection_CreateOrUpdate": {
-            "$ref": "./examples/EdmUploadServiceCreatePrivateEndpointConnection.json"
+            "$ref": "./examples/SCCPowershellServiceCreatePrivateEndpointConnection.json"
           }
         },
         "x-ms-long-running-operation": true,
@@ -649,7 +603,7 @@
         },
         "x-ms-examples": {
           "PrivateEndpointConnections_Delete": {
-            "$ref": "./examples/EdmUploadServiceDeletePrivateEndpointConnection.json"
+            "$ref": "./examples/SCCPowershellServiceDeletePrivateEndpointConnection.json"
           }
         },
         "x-ms-long-running-operation": true,
@@ -658,7 +612,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SecurityAndCompliance/privateLinkServicesForExactDataMatchUpload/{resourceName}/privateLinkResources": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SecurityAndCompliance/privateLinkServicesForSCCPowershell/{resourceName}/privateLinkResources": {
       "get": {
         "tags": [
           "PrivateLinkResources"
@@ -695,12 +649,12 @@
         },
         "x-ms-examples": {
           "PrivateLinkResources_ListGroupIds": {
-            "$ref": "./examples/EdmUploadPrivateLinkResourcesListByService.json"
+            "$ref": "./examples/SCCPowershellPrivateLinkResourcesListByService.json"
           }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SecurityAndCompliance/privateLinkServicesForExactDataMatchUpload/{resourceName}/privateLinkResources/{groupName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SecurityAndCompliance/privateLinkServicesForSCCPowershell/{resourceName}/privateLinkResources/{groupName}": {
       "get": {
         "tags": [
           "PrivateLinkResources"
@@ -744,7 +698,7 @@
         },
         "x-ms-examples": {
           "PrivateLinkResources_Get": {
-            "$ref": "./examples/EdmUploadPrivateLinkResourceGet.json"
+            "$ref": "./examples/SCCPowershellPrivateLinkResourceGet.json"
           }
         }
       }
@@ -943,7 +897,7 @@
       "description": "A method for CORS.",
       "type": "string"
     },
-    "PrivateLinkServicesForExactDataMatchUploadDescription": {
+    "PrivateLinkServicesForSCCPowershellDescription": {
       "description": "The description of the service.",
       "type": "object",
       "properties": {
@@ -1096,7 +1050,7 @@
         }
       }
     },
-    "PrivateLinkServicesForExactDataMatchUploadDescriptionListResult": {
+    "PrivateLinkServicesForSCCPowershellDescriptionListResult": {
       "description": "A list of service description objects with a next link.",
       "type": "object",
       "properties": {
@@ -1109,7 +1063,7 @@
           "description": "A list of service description objects.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/PrivateLinkServicesForExactDataMatchUploadDescription"
+            "$ref": "#/definitions/PrivateLinkServicesForSCCPowershellDescription"
           }
         }
       }
@@ -1200,52 +1154,6 @@
             "name": "PublicNetworkAccess",
             "modelAsString": true
           }
-        }
-      }
-    },
-    "CheckNameAvailabilityParameters": {
-      "description": "Input values.",
-      "type": "object",
-      "properties": {
-        "name": {
-          "description": "The name of the service instance to check.",
-          "type": "string"
-        },
-        "type": {
-          "description": "The fully qualified resource type which includes provider namespace.",
-          "type": "string"
-        }
-      },
-      "required": [
-        "name",
-        "type"
-      ]
-    },
-    "ServicesNameAvailabilityInfo": {
-      "description": "The properties indicating whether a given service name is available.",
-      "type": "object",
-      "properties": {
-        "nameAvailable": {
-          "description": "The value which indicates whether the provided name is available.",
-          "type": "boolean",
-          "readOnly": true
-        },
-        "reason": {
-          "description": "The reason for unavailability.",
-          "enum": [
-            "Invalid",
-            "AlreadyExists"
-          ],
-          "type": "string",
-          "readOnly": true,
-          "x-ms-enum": {
-            "name": "ServiceNameUnavailabilityReason",
-            "modelAsString": false
-          }
-        },
-        "message": {
-          "description": "The detailed reason message.",
-          "type": "string"
         }
       }
     },
