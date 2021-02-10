@@ -32,6 +32,16 @@ azure-validator: false
 
 ---
 
+### Tag: package-preview-2020-12
+
+These settings apply only when `--tag=package-preview-2020-12` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2020-12'
+input-file:
+  - Microsoft.CostManagement/stable/2020-06-01/costmanagement.exports.json
+  - Microsoft.CostManagement/preview/2020-12-01-preview/costmanagement.generatedetailedcostreport.json
+  - Microsoft.CostManagement/stable/2020-06-01/costmanagement.json
+```
 
 ### Tag: package-preview-2020-03
 
