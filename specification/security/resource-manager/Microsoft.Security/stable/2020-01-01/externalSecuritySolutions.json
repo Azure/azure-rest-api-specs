@@ -190,7 +190,7 @@
           "$ref": "../../../common/v1/types.json#/definitions/Resource"
         },
         {
-          "$ref": "#/definitions/ExternalSecuritySolutionKind"
+          "$ref": "../../../common/v1/types.json#/definitions/ExternalSecuritySolutionKind"
         },
         {
           "$ref": "../../../common/v1/types.json#/definitions/Location"
@@ -239,36 +239,6 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/AadSolutionProperties"
-        }
-      }
-    },
-    "ExternalSecuritySolutionKind": {
-      "type": "object",
-      "description": "Describes an Azure resource with kind",
-      "properties": {
-        "kind": {
-          "type": "string",
-          "description": "The kind of the external solution",
-          "enum": [
-            "CEF",
-            "ATA",
-            "AAD"
-          ],
-          "x-ms-enum": {
-            "name": "ExternalSecuritySolutionKind",
-            "modelAsString": true,
-            "values": [
-              {
-                "value": "CEF"
-              },
-              {
-                "value": "ATA"
-              },
-              {
-                "value": "AAD"
-              }
-            ]
-          }
         }
       }
     },
