@@ -806,12 +806,6 @@
               "$ref": "#/definitions/AsyncOperationResult"
             }
           },
-          "202": {
-            "description": "DPS call returns a 202 Accepted status code with valid Location and Retry-After headers. The resource provider also sets the Azure-AsyncOperation header with a URL that points to the operation resource for this operation. Subsequent GET attempts on the resource after a DELETE operation return a resource representation that indicates a transitional provisioning state (such as Terminating). To retrieve the status of the operation, a client can either poll the URL returned in the Location header after the Retry-After interval, get the IoT Hub service status directly, or query the operation resource.",
-            "schema": {
-              "$ref": "#/definitions/AsyncOperationResult"
-            }
-          },
           "default": {
             "description": "Default error response.",
             "schema": {
@@ -2263,8 +2257,7 @@
       "properties": {
         "code": {
           "description": "The error code.",
-          "type": "integer",
-          "format":  "int32",
+          "type": "string",
           "readOnly": true
         },
         "httpStatusCode": {
