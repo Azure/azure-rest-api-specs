@@ -421,6 +421,47 @@
         }
       }
     },
+    "OperationStatusResult": {
+      "description": "The current status of an async operation.",
+      "type": "object",
+      "required": [
+        "status"
+      ],
+      "properties": {
+        "id": {
+          "description": "Fully qualified ID for the async operation.",
+          "type": "string"
+        },
+        "name": {
+          "description": "Name of the async operation.",
+          "type": "string"
+        },
+        "status": {
+          "description": "Operation status.",
+          "type": "string"
+        },
+        "percentComplete": {
+          "description": "Percent of the operation that is complete.",
+          "type": "number",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "startTime": {
+          "description": "The start time of the operation.",
+          "type": "string",
+          "format": "date-time"
+        },
+        "endTime": {
+          "description": "The end time of the operation.",
+          "type": "string",
+          "format": "date-time"
+        },
+        "error": {
+          "description": "If present, details of the operation error.",
+          "$ref": "#/definitions/ErrorDetail"
+        }
+      }
+    },
     "locationData": {
       "description": "Metadata pertaining to the geographic location of the resource.",
       "type": "object",
@@ -562,6 +603,15 @@
       "pattern": "^[-\\w\\._\\(\\)]+$",
       "minLength": 1,
       "maxLength": 90,
+      "x-ms-parameter-location": "method"
+    },
+    "OperationIdParameter": {
+      "name": "operationId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The ID of an ongoing async operation.",
+      "minLength": 1,
       "x-ms-parameter-location": "method"
     }
   }
