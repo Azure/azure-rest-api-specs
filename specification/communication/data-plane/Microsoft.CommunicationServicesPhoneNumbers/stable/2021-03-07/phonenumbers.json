@@ -42,7 +42,7 @@
         ],
         "responses": {
           "202": {
-            "description": "The service has accepted the request and will start processing later. It will return 'Accepted' immediately and include an 'Operation-Location' header. Client side should further query the operation status using the URL specified in this header.",
+            "description": "The service has accepted the request and will start processing later. It will return 'Accepted' immediately and include an 'Operation-Location' and 'Location' headers. Client side should further query the operation status using the URL specified in 'Operation-Location' header. When operation completes successfully query final result using URL specified in 'Location' header.",
             "schema": {
               "$ref": "#/definitions/PhoneNumberSearchResult"
             },
@@ -54,13 +54,21 @@
               "Location": {
                 "description": "Url to retrieve the final result after operation completes.",
                 "type": "string"
+              },
+              "operation-id": {
+                "description": "The operation id.",
+                "type": "string"
+              },
+              "search-id": {
+                "description": "The search id.",
+                "type": "string"
               }
             }
           },
           "default": {
             "description": "Failure",
             "schema": {
-              "$ref": "../../../Microsoft.CommunicationServicesCommon/preview/2020-11-19-preview1/common.json#/definitions/CommunicationErrorResponse"
+              "$ref": "../../../Microsoft.CommunicationServicesCommon/stable/2021-03-07/common.json#/definitions/CommunicationErrorResponse"
             }
           }
         },
@@ -107,7 +115,7 @@
           "default": {
             "description": "Failure",
             "schema": {
-              "$ref": "../../../Microsoft.CommunicationServicesCommon/preview/2020-11-19-preview1/common.json#/definitions/CommunicationErrorResponse"
+              "$ref": "../../../Microsoft.CommunicationServicesCommon/stable/2021-03-07/common.json#/definitions/CommunicationErrorResponse"
             }
           }
         },
@@ -147,7 +155,7 @@
         ],
         "responses": {
           "202": {
-            "description": "The service has accepted the request and will start processing later. It will return 'Accepted' immediately and include an 'Operation-Location' header. Client side should further query the operation status using the URL specified in this header.",
+            "description": "The service has accepted the request and will start processing later. It will return 'Accepted' immediately and include an 'Operation-Location' and 'Location' headers. Client side should further query the operation status using the URL specified in 'Operation-Location' header. When operation completes successfully query final result using URL specified in 'Location' header.",
             "schema": {
               "$ref": "#/definitions/PhoneNumberSearchResult"
             },
@@ -159,13 +167,21 @@
               "Location": {
                 "description": "Url to retrieve the final result after operation completes.",
                 "type": "string"
+              },
+              "operation-id": {
+                "description": "The operation id.",
+                "type": "string"
+              },
+              "purchase-id": {
+                "description": "The purchase id.",
+                "type": "string"
               }
             }
           },
           "default": {
             "description": "Failure",
             "schema": {
-              "$ref": "../../../Microsoft.CommunicationServicesCommon/preview/2020-11-19-preview1/common.json#/definitions/CommunicationErrorResponse"
+              "$ref": "../../../Microsoft.CommunicationServicesCommon/stable/2021-03-07/common.json#/definitions/CommunicationErrorResponse"
             }
           }
         },
@@ -204,15 +220,21 @@
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "When the operation is completed, query the final result of the operation using the URL specified in the 'Location' attribute in the response header.",
             "schema": {
               "$ref": "#/definitions/PhoneNumberOperation"
+            },
+            "headers": {
+              "Location": {
+                "description": "Url to retrieve the final result after operation completes.",
+                "type": "string"
+              }
             }
           },
           "default": {
             "description": "Failure",
             "schema": {
-              "$ref": "../../../Microsoft.CommunicationServicesCommon/preview/2020-11-19-preview1/common.json#/definitions/CommunicationErrorResponse"
+              "$ref": "../../../Microsoft.CommunicationServicesCommon/stable/2021-03-07/common.json#/definitions/CommunicationErrorResponse"
             }
           }
         },
@@ -247,7 +269,7 @@
           "default": {
             "description": "Failure",
             "schema": {
-              "$ref": "../../../Microsoft.CommunicationServicesCommon/preview/2020-11-19-preview1/common.json#/definitions/CommunicationErrorResponse"
+              "$ref": "../../../Microsoft.CommunicationServicesCommon/stable/2021-03-07/common.json#/definitions/CommunicationErrorResponse"
             }
           }
         },
@@ -293,7 +315,7 @@
           "default": {
             "description": "Failure",
             "schema": {
-              "$ref": "../../../Microsoft.CommunicationServicesCommon/preview/2020-11-19-preview1/common.json#/definitions/CommunicationErrorResponse"
+              "$ref": "../../../Microsoft.CommunicationServicesCommon/stable/2021-03-07/common.json#/definitions/CommunicationErrorResponse"
             }
           }
         },
@@ -323,22 +345,12 @@
         ],
         "responses": {
           "204": {
-            "description": "The service has accepted the request and will start processing later. It will return 'NoContent' immediately and include an 'Operation-Location' header. Client side should further query the operation status using the URL specified in this header.",
-            "headers": {
-              "Operation-Location": {
-                "description": "URL to query for status of the operation.",
-                "type": "string"
-              },
-              "Location": {
-                "description": "Url to retrieve the final result after operation completes.",
-                "type": "string"
-              }
-            }
+            "description": "Success"
           },
           "default": {
             "description": "Failure",
             "schema": {
-              "$ref": "../../../Microsoft.CommunicationServicesCommon/preview/2020-11-19-preview1/common.json#/definitions/CommunicationErrorResponse"
+              "$ref": "../../../Microsoft.CommunicationServicesCommon/stable/2021-03-07/common.json#/definitions/CommunicationErrorResponse"
             }
           }
         },
@@ -397,7 +409,7 @@
           "default": {
             "description": "Failure",
             "schema": {
-              "$ref": "../../../Microsoft.CommunicationServicesCommon/preview/2020-11-19-preview1/common.json#/definitions/CommunicationErrorResponse"
+              "$ref": "../../../Microsoft.CommunicationServicesCommon/stable/2021-03-07/common.json#/definitions/CommunicationErrorResponse"
             }
           }
         },
@@ -447,7 +459,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The service has accepted the request and will start processing later. It will return 'OK' immediately and include an 'Operation-Location' header. Client side should further query the operation status using the URL specified in this header.",
+            "description": "The service has accepted the request and will start processing later. It will return 'OK' immediately and include an 'Operation-Location' and 'Location' headers. Client side should further query the operation status using the URL specified in 'Operation-Location' header. When operation completes successfully query final result using URL specified in 'Location' header.",
             "schema": {
               "$ref": "#/definitions/AcquiredPhoneNumber"
             },
@@ -459,13 +471,21 @@
               "Location": {
                 "description": "Url to retrieve the final result after operation completes.",
                 "type": "string"
+              },
+              "operation-id": {
+                "description": "The operation id.",
+                "type": "string"
+              },
+              "capabilities-id": {
+                "description": "The capabilities id.",
+                "type": "string"
               }
             }
           },
           "default": {
             "description": "Failure",
             "schema": {
-              "$ref": "../../../Microsoft.CommunicationServicesCommon/preview/2020-11-19-preview1/common.json#/definitions/CommunicationErrorResponse"
+              "$ref": "../../../Microsoft.CommunicationServicesCommon/stable/2021-03-07/common.json#/definitions/CommunicationErrorResponse"
             }
           }
         },
@@ -706,7 +726,7 @@
           "type": "string"
         },
         "error": {
-          "$ref": "../../../Microsoft.CommunicationServicesCommon/preview/2020-11-19-preview1/common.json#/definitions/CommunicationError"
+          "$ref": "../../../Microsoft.CommunicationServicesCommon/stable/2021-03-07/common.json#/definitions/CommunicationError"
         },
         "id": {
           "description": "Id of operation.",
