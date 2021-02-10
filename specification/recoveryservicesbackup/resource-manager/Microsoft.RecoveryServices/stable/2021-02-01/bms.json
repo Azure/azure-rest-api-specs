@@ -18,7 +18,6 @@
     "application/json"
   ],
   "paths": {
-
     "/Subscriptions/{subscriptionId}/providers/Microsoft.RecoveryServices/locations/{azureRegion}/backupPreValidateProtection": {
       "post": {
         "tags": [
@@ -11232,54 +11231,62 @@
       }
     }
   },
-    "parameters": {
-      "SubscriptionId": {
-        "name": "subscriptionId",
-        "in": "path",
-        "description": "The subscription Id.",
-        "required": true,
-        "type": "string"
-      },
-      "ResourceGroupName": {
-        "name": "resourceGroupName",
-        "in": "path",
-        "description": "The name of the resource group where the recovery services vault is present.",
-        "required": true,
-        "type": "string",
-        "x-ms-parameter-location": "method"
-      },
-      "VaultName": {
-        "name": "vaultName",
-        "in": "path",
-        "description": "The name of the recovery services vault.",
-        "required": true,
-        "type": "string",
-        "x-ms-parameter-location": "method"
-      },
-      "ApiVersion": {
-        "name": "api-version",
-        "in": "query",
-        "description": "Client Api Version.",
-        "required": true,
-        "type": "string"
-      }
+  "parameters": {
+    "SubscriptionId": {
+      "name": "subscriptionId",
+      "in": "path",
+      "description": "The subscription Id.",
+      "required": true,
+      "type": "string"
     },
-    "securityDefinitions": {
-      "azure_auth": {
-        "type": "oauth2",
-        "description": "Azure Active Directory OAuth2 Flow",
-        "flow": "implicit",
-        "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
-        "scopes": {
-          "user_impersonation": "impersonate your user account."
-        }
-      }
+    "AzureRegion": {
+      "name": "azureRegion",
+      "in": "path",
+      "description": "Azure region to hit Api",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
     },
-    "security": [
-      {
-        "azure_auth": [
-          "user_impersonation"
-        ]
+    "ResourceGroupName": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "description": "The name of the resource group where the recovery services vault is present.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "VaultName": {
+      "name": "vaultName",
+      "in": "path",
+      "description": "The name of the recovery services vault.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "ApiVersion": {
+      "name": "api-version",
+      "in": "query",
+      "description": "Client Api Version.",
+      "required": true,
+      "type": "string"
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account."
       }
-    ]
-  }
+    }
+  },
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ]
+}
