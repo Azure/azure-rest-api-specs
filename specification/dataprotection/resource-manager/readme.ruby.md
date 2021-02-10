@@ -12,15 +12,15 @@ azure-arm: true
 
 ``` yaml $(ruby) && $(multiapi)
 batch:
-  - tag: package-2020-01
+  - tag: package-2021-01
 ```
 
-### Tag: package-2020-01 and ruby
+### Tag: package-2021-01 and ruby
 
-These settings apply only when `--tag=package-2020-01 --ruby` is specified on the command line.
+These settings apply only when `--tag=package-2021-01 --ruby` is specified on the command line.
 Please also specify `--ruby-sdks-folder=<path to the root directory of your azure-sdk-for-ruby clone>`.
 
-``` yaml $(tag) == 'package-2020-01' && $(ruby)
-namespace: "Azure::DataProtection::Mgmt::V2020_01_01"
+``` yaml $(tag) == 'package-2021-01' && $(ruby)
+namespace: "Azure::DataProtection::Mgmt::V2021_01_01"
 output-folder: $(ruby-sdks-folder)/management/azure_mgmt_data_protection/lib
 ```
