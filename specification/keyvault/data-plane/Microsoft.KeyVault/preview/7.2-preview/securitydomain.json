@@ -27,13 +27,45 @@
     "application/json"
   ],
   "paths": {
+    "/securitydomain/download/pending": {
+      "get": {
+        "tags": [
+          "HSMSecurityDomain"
+        ],
+        "operationId": "HSMSecurityDomain_DownloadPending",
+        "description": "Retrieves the Security Domain download operation status",
+        "responses": {
+          "200": {
+            "description": "Security Domain download operation status",
+            "schema": {
+              "$ref": "#/definitions/SecurityDomainOperationStatus"
+            }
+          },
+          "default": {
+            "description": "Key Vault error response describing why the operation failed.",
+            "schema": {
+              "$ref": "common.json#/definitions/KeyVaultError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Find Security Domain download operation status": {
+            "$ref": "./examples/securitydomainoperationstatus-example.json"
+          }
+        }
+      }
+    },
     "/securitydomain/download": {
       "post": {
         "tags": [
           "HSMSecurityDomain"
         ],
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
         "operationId": "HSMSecurityDomain_Download",
-        "description": "Retrieves Security domain from HSM enclave",
+        "description": "Retrieves the Security Domain from the managed HSM. Calling this endpoint can be used to activate a provisioned managed HSM resource.",
         "parameters": [
           {
             "in": "body",
@@ -42,15 +74,31 @@
             "schema": {
               "$ref": "#/definitions/CertificateInfoObject"
             },
-            "description": "Security domain download operation requires customer to provide N certificates (minimum 3 and maximum 10) containing public key in JWK format."
+            "description": "The Security Domain download operation requires customer to provide N certificates (minimum 3 and maximum 10) containing a public key in JWK format."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
+          "202": {
+            "description": "The response contains the Security Domain that is being confirmed.",
+            "schema": {
+              "$ref": "#/definitions/SecurityDomainObject"
+            },
+            "headers": {
+              "Retry-After": {
+                "description": "The recommended number of seconds to wait before calling the URI specified in Azure-AsyncOperation.",
+                "type": "integer"
+              },
+              "Azure-AsyncOperation": {
+                "description": "The URI to poll for completion status.",
+                "type": "string"
+              }
+            }
+          },
           "200": {
-            "description": "This is the specification of the security domain as downloaded from the new pool",
+            "description": "The response contains the confirmed Security Domain.",
             "schema": {
               "$ref": "#/definitions/SecurityDomainObject"
             }
@@ -63,7 +111,7 @@
           }
         },
         "x-ms-examples": {
-          "Retrieve Security domain": {
+          "Retrieve Security Domain": {
             "$ref": "./examples/securitydomaindownloadpost-example.json"
           }
         }
@@ -80,10 +128,10 @@
           }
         ],
         "operationId": "HSMSecurityDomain_TransferKey",
-        "description": "Retrieve security domain transfer key",
+        "description": "Retrieve Security Domain transfer key",
         "responses": {
           "200": {
-            "description": "Security domain transfer key operation",
+            "description": "Security Domain transfer key response",
             "schema": {
               "$ref": "#/definitions/TransferKey"
             }
@@ -96,7 +144,7 @@
           }
         },
         "x-ms-examples": {
-          "Retrieve security domain transfer key": {
+          "Retrieve Security Domain transfer key": {
             "$ref": "./examples/securitydomaintransferkey-example.json"
           }
         }
@@ -112,21 +160,21 @@
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
         },
-        "description": "Request Security domain upload operation",
+        "description": "Restore the provided Security Domain.",
         "parameters": [
           {
             "in": "body",
             "name": "security_domain",
-            "description": "security domain",
+            "description": "The Security Domain to be restored.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/SecurityDomainUploadObject"
+              "$ref": "#/definitions/SecurityDomainObject"
             }
           }
         ],
         "responses": {
           "202": {
-            "description": "Security domain upload operation started",
+            "description": "Restore of the Security Domain started.",
             "headers": {
               "Retry-After": {
                 "description": "The recommended number of seconds to wait before calling the URI specified in Azure-AsyncOperation.",
@@ -141,6 +189,9 @@
               "$ref": "#/definitions/SecurityDomainOperationStatus"
             }
           },
+          "204": {
+            "description": "Final response"
+          },
           "default": {
             "description": "Key Vault error response describing why the operation failed.",
             "schema": {
@@ -149,7 +200,7 @@
           }
         },
         "x-ms-examples": {
-          "Security domain upload operation": {
+          "Security Domain upload operation": {
             "$ref": "./examples/securitydomainuploadoperation-example.json"
           }
         }
@@ -161,10 +212,10 @@
           "HSMSecurityDomain"
         ],
         "operationId": "HSMSecurityDomain_UploadPending",
-        "description": "Get Security domain upload operation status",
+        "description": "Get Security Domain upload operation status",
         "responses": {
           "200": {
-            "description": "Security domain upload operation status",
+            "description": "Security Domain upload operation status",
             "schema": {
               "$ref": "#/definitions/SecurityDomainOperationStatus"
             }
@@ -177,7 +228,7 @@
           }
         },
         "x-ms-examples": {
-          "Find security domain upload operation status": {
+          "Find Security Domain upload operation status": {
             "$ref": "./examples/securitydomainoperationstatus-example.json"
           }
         }
@@ -198,7 +249,7 @@
           "description": "Certificates needed from customer"
         },
         "required": {
-          "description": "Customer to specify the number of certificates (minimum 2 and maximum 10) to restore security domain",
+          "description": "Customer to specify the number of certificates (minimum 2 and maximum 10) to restore Security Domain",
           "type": "integer",
           "default": 2,
           "minimum": 2,
@@ -238,112 +289,15 @@
     },
     "SecurityDomainObject": {
       "properties": {
-        "data": {
-          "type": "object",
-          "properties": {
-            "EncData": {
-              "$ref": "#/definitions/EncDataSet",
-              "description": "Array of encrypted data set"
-            },
-            "SharedKeys": {
-              "properties": {
-                "key_algorithm": {
-                  "type": "string",
-                  "default": "shamir_share",
-                  "description": "The Algorithm used for shared keys"
-                },
-                "required": {
-                  "type": "integer",
-                  "minimum": 2,
-                  "maximum": 10,
-                  "description": "The number of keys (minimum 2 and maximum 10) required for security domain. "
-                },
-                "enc_shares": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/definitions/Key",
-                    "minItems": 3,
-                    "maxItems": 10
-                  },
-                  "uniqueItems": true,
-                  "description": "Compact JWE wrapped shares array"
-                }
-              },
-              "required": [
-                "key_algorithm",
-                "required",
-                "enc_shares"
-              ],
-              "description": "Array of shared keys"
-            },
-            "version": {
-              "type": "integer"
-            }
-          },
-          "required": [
-            "EncData",
-            "SharedKeys",
-            "version"
-          ]
+        "value": {
+          "type": "string",
+          "format": "base64url",
+          "description": "A blob containing the Security Domain."
         }
       },
-      "description": "Security domain",
+      "description": "The Security Domain.",
       "required": [
-        "data"
-      ]
-    },
-    "EncDataSet": {
-      "properties": {
-        "data": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/EncDataSetItem",
-            "minItems": 2
-          },
-          "description": "Array of encrypted security domain",
-          "uniqueItems": true
-        },
-        "kdf": {
-          "type": "string",
-          "default": "sp108_kdf",
-          "description": "The key derivation function used"
-        }
-      },
-      "required": [
-        "data",
-        "kdf"
-      ]
-    },
-    "EncDataSetItem": {
-      "properties": {
-        "compact_jwe": {
-          "type": "string",
-          "description": "Encrypted data"
-        },
-        "tag": {
-          "type": "string",
-          "description": "hsm backup tag"
-        }
-      },
-      "required": [
-        "compact_jwe",
-        "tag"
-      ]
-    },
-    "Key": {
-      "properties": {
-        "enc_key": {
-          "type": "string",
-          "description": "Compact JWE wrapped share"
-        },
-        "x5t_256": {
-          "type": "string",
-          "description": "SHA 256 hash of certificate"
-        }
-      },
-      "required": [
-        "enc_key",
-        "x5t_256"
+        "value"
       ]
     },
     "SecurityDomainOperationStatus": {
@@ -374,7 +328,7 @@
         },
         "kty": {
           "type": "string",
-          "description": "JsonWebKey Key Type (kty), as defined in https://tools.ietf.org/html/draft-ietf-jose-json-web-algorithms-40. For security domain this value must be RSA"
+          "description": "JsonWebKey Key Type (kty), as defined in https://tools.ietf.org/html/draft-ietf-jose-json-web-algorithms-40. For Security Domain this value must be RSA."
         },
         "key_ops": {
           "type": "array",
@@ -424,44 +378,6 @@
         "x5t#S256",
         "n",
         "e"
-      ]
-    },
-    "SecurityDomainUploadObject": {
-      "properties": {
-        "value": {
-          "type": "object",
-          "properties": {
-            "EncData": {
-              "$ref": "#/definitions/EncDataSet",
-              "description": "Array of encrypted data set"
-            },
-            "WrappedKey": {
-              "properties": {
-                "enc_key": {
-                  "type": "string",
-                  "description": "Encryption key used to encrypt the EncData"
-                },
-                "x5t_256": {
-                  "type": "string",
-                  "description": "Thumbprint used to determine which certificate was used to encrypt the enc_key field"
-                }
-              },
-              "required": [
-                "enc_key",
-                "x5t_256"
-              ],
-              "description": "Key object containing the encryption key used to encrypt EncData object"
-            }
-          },
-          "required": [
-            "EncData",
-            "WrappedKey"
-          ]
-        }
-      },
-      "description": "Security domain object uploaded to a new pool",
-      "required": [
-        "value"
       ]
     }
   },

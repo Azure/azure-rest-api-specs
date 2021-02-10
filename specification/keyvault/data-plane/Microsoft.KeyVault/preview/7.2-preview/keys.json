@@ -808,64 +808,6 @@
         }
       }
     },
-    "/keys/{key-name}/{key-version}/export": {
-      "post": {
-        "tags": [
-          "Keys"
-        ],
-        "operationId": "exportKey",
-        "summary": "Exports a key.",
-        "description": "The export key operation is applicable to all key types. The target key must be marked exportable. This operation requires the keys/export permission.",
-        "parameters": [
-          {
-            "name": "key-name",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the key to get."
-          },
-          {
-            "name": "key-version",
-            "required": true,
-            "in": "path",
-            "type": "string",
-            "description": "Adding the version parameter retrieves a specific version of a key."
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "required": true,
-            "x-ms-client-flatten": true,
-            "schema": {
-              "$ref": "#/definitions/KeyExportParameters"
-            },
-            "description": "The parameters for the key export operation."
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "A key bundle containing the key and its attributes.",
-            "schema": {
-              "$ref": "#/definitions/KeyBundle"
-            }
-          },
-          "default": {
-            "description": "Key Vault error response describing why the operation failed.",
-            "schema": {
-              "$ref": "common.json#/definitions/KeyVaultError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Export key": {
-            "$ref": "./examples/ExportKey-example.json"
-          }
-        }
-      }
-    },
     "/deletedkeys": {
       "get": {
         "tags": [
@@ -1248,10 +1190,6 @@
           },
           "readOnly": true,
           "x-nullable": false
-        },
-        "exportable": {
-          "type": "boolean",
-          "description": "Indicates if the private key can be exported."
         }
       },
       "description": "The attributes of a key managed by the key vault service."
@@ -1277,10 +1215,6 @@
           "type": "boolean",
           "readOnly": true,
           "description": "True if the key's lifetime is managed by key vault. If this is a key backing a certificate, then managed will be true."
-        },
-        "release_policy": {
-          "$ref": "#/definitions/KeyReleasePolicy",
-          "description": "The policy rules under which the key can be exported."
         }
       },
       "description": "A KeyBundle consisting of a WebKey plus its attributes."
@@ -1309,20 +1243,6 @@
         }
       },
       "description": "The key item containing key metadata."
-    },
-    "KeyReleasePolicy": {
-      "properties": {
-        "contentType": {
-          "description": "Content type and version of key release policy",
-          "type": "string",
-          "default": "application/json; charset=utf-8; version=1.0"
-        },
-        "data": {
-          "description": "Blob encoding the policy rules under which the key can be exported.",
-          "type": "string",
-          "format": "base64url"
-        }
-      }
     },
     "DeletedKeyBundle": {
       "allOf": [
@@ -1378,10 +1298,6 @@
     },
     "KeyProperties": {
       "properties": {
-        "exportable": {
-          "type": "boolean",
-          "description": "Indicates if the private key can be exported."
-        },
         "kty": {
           "x-ms-client-name": "keyType",
           "type": "string",
@@ -1467,8 +1383,7 @@
               "verify",
               "wrapKey",
               "unwrapKey",
-              "import",
-              "export"
+              "import"
             ],
             "x-ms-enum": {
               "name": "JsonWebKeyOperation",
@@ -1501,10 +1416,6 @@
             "name": "JsonWebKeyCurveName",
             "modelAsString": true
           }
-        },
-        "release_policy": {
-          "$ref": "#/definitions/KeyReleasePolicy",
-          "description": "The policy rules under which the key can be exported."
         }
       },
       "description": "The key create parameters.",
@@ -1533,29 +1444,11 @@
             "type": "string"
           },
           "description": "Application specific metadata in the form of key-value pairs."
-        },
-        "release_policy": {
-          "$ref": "#/definitions/KeyReleasePolicy",
-          "description": "The policy rules under which the key can be exported."
         }
       },
       "description": "The key import parameters.",
       "required": [
         "key"
-      ]
-    },
-    "KeyExportParameters": {
-      "properties": {
-        "env": {
-          "x-ms-client-name": "environment",
-          "type": "string",
-          "minLength": 1,
-          "description": "The target environment assertion."
-        }
-      },
-      "description": "The export key parameters.",
-      "required": [
-        "env"
       ]
     },
     "KeyOperationsParameters": {
@@ -1753,8 +1646,7 @@
               "verify",
               "wrapKey",
               "unwrapKey",
-              "import",
-              "export"
+              "import"
             ],
             "x-ms-enum": {
               "name": "JsonWebKeyOperation",
@@ -1773,10 +1665,6 @@
             "type": "string"
           },
           "description": "Application specific metadata in the form of key-value pairs."
-        },
-        "release_policy": {
-          "$ref": "#/definitions/KeyReleasePolicy",
-          "description": "The policy rules under which the key can be exported."
         }
       },
       "description": "The key update parameters."
