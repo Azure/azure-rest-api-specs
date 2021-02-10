@@ -134,6 +134,7 @@
             "in": "query",
             "required": false,
             "type": "integer",
+            "format": "int32",
             "minimum": 1,
             "maximum": 1000
           },
@@ -220,6 +221,7 @@
             "in": "query",
             "required": false,
             "type": "integer",
+            "format": "int32",
             "minimum": 1,
             "maximum": 1000
           },
@@ -344,7 +346,7 @@
           "Budgets"
         ],
         "operationId": "Budgets_CreateOrUpdate",
-        "description": "The operation to create or update a budget. Update operation requires latest eTag to be set in the request mandatorily. You may obtain the latest eTag by performing a get operation. Create operation does not require eTag.",
+        "description": "The operation to create or update a budget. You can optionally provide an eTag if desired as a form of concurrency control. To obtain the latest eTag for a given budget, perform a get operation prior to your put operation.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
         },
@@ -1177,7 +1179,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/HighCasedErrorResponse"
             }
           }
         }
@@ -1320,6 +1322,7 @@
             "in": "query",
             "required": false,
             "type": "integer",
+            "format": "int32",
             "minimum": 1,
             "maximum": 1000
           },
@@ -1385,6 +1388,7 @@
             "in": "query",
             "required": false,
             "type": "integer",
+            "format": "int32",
             "minimum": 1,
             "maximum": 1000
           },
@@ -1421,7 +1425,7 @@
         ],
         "x-ms-odata": "#/definitions/Forecast",
         "operationId": "Forecasts_List",
-        "description": "Lists the forecast charges by subscriptionId.",
+        "description": "Lists the forecast charges for scope defined. Please note that this API is no longer actively under development. We recommend using our new Forecast API moving forward: https://docs.microsoft.com/en-us/rest/api/cost-management/forecast/usage.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
         },
@@ -1550,7 +1554,7 @@
         }
       }
     },
-    "/providers/Microsoft.Management/managementGroups/{managementGroupId}/providers/Microsoft.Billing/billingPeriods/{billingPeriodName}/Microsoft.Consumption/aggregatedcost": {
+    "/providers/Microsoft.Management/managementGroups/{managementGroupId}/providers/Microsoft.Billing/billingPeriods/{billingPeriodName}/Microsoft.Consumption/aggregatedCost": {
       "get": {
         "tags": [
           "AggregatedCost"
@@ -2999,6 +3003,10 @@
           "type": "string",
           "description": "Resource sku"
         },
+        "etag": {
+          "type": "string",
+          "description": "Resource etag."
+        },
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/ReservationRecommendationDetailsProperties",
@@ -3291,6 +3299,11 @@
           "format": "uuid",
           "readOnly": true
         },
+        "resourceType": {
+          "description": "The azure resource type.",
+          "type": "string",
+          "readOnly": true
+        },
         "term": {
           "description": "RI recommendations in one or three year terms.",
           "type": "string",
@@ -3381,7 +3394,8 @@
       "properties": {
         "lookBackPeriod": {
           "description": "The number of days of usage to look back for recommendation.",
-          "type": "string",
+          "type": "integer",
+          "format": "int32",
           "readOnly": true
         },
         "instanceFlexibilityRatio": {
@@ -3887,7 +3901,7 @@
           "$ref": "#/definitions/BudgetTimePeriod"
         },
         "filter": {
-          "description": "May be used to filter budgets by resource group, resource, or meter.",
+          "description": "May be used to filter budgets by user-specified dimensions and/or tags.",
           "type": "object",
           "$ref": "#/definitions/BudgetFilter"
         },
@@ -3940,7 +3954,7 @@
           "items": {
             "$ref": "#/definitions/BudgetFilterProperties"
           },
-          "minItems": 2
+          "minItems": 0
         },
         "not": {
           "description": "The logical \"NOT\" expression.",
@@ -3993,7 +4007,7 @@
           "items": {
             "type": "string"
           },
-          "minItems": 1
+          "minItems": 0
         }
       },
       "required": [
@@ -4044,12 +4058,12 @@
           "format": "decimal"
         },
         "contactEmails": {
-          "description": "Email addresses to send the budget notification to when the threshold is exceeded.",
+          "description": "Email addresses to send the budget notification to when the threshold is exceeded. Must have at least one contact email or contact group specified at the Subscription or Resource Group scopes. All other scopes must have at least one contact email specified.",
           "type": "array",
           "items": {
             "type": "string"
           },
-          "minItems": 1,
+          "minItems": 0,
           "maxItems": 50
         },
         "contactRoles": {
@@ -4060,7 +4074,7 @@
           }
         },
         "contactGroups": {
-          "description": "Action groups to send the budget notification to when the threshold is exceeded.",
+          "description": "Action groups to send the budget notification to when the threshold is exceeded. Must be provided as a fully qualified Azure resource id. Only supported at Subscription or Resource Group scopes.",
           "type": "array",
           "items": {
             "type": "string"
@@ -4077,7 +4091,8 @@
           "x-ms-enum": {
             "name": "ThresholdType",
             "modelAsString": true
-          }
+          },
+          "default": "Actual"
         }
       },
       "required": [
@@ -4214,7 +4229,7 @@
           "readOnly": true
         },
         "grain": {
-          "description": "The granularity of forecast.",
+          "description": "The granularity of forecast. Please note that Yearly is not currently supported in this API. The API will provide responses in the Monthly grain if Yearly is selected. To get yearly grain data, please use our newer Forecast API.",
           "type": "string",
           "enum": [
             "Daily",
@@ -4598,6 +4613,31 @@
         }
       }
     },
+    "HighCasedErrorDetails": {
+      "description": "The details of the error.",
+      "properties": {
+        "Code": {
+          "description": "Error code.",
+          "type": "string",
+          "readOnly": true
+        },
+        "Message": {
+          "description": "Error message indicating why the operation failed.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "HighCasedErrorResponse": {
+      "description": "Error response indicates that the service is not able to process the incoming request. The reason is provided in the error message. \n\nSome Error responses: \n\n * 429 TooManyRequests - Request is throttled. Retry after waiting for the time specified in the \"x-ms-ratelimit-microsoft.consumption-retry-after\" header. \n\n * 503 ServiceUnavailable - Service is temporarily unavailable. Retry after waiting for the time specified in the \"Retry-After\" header.",
+      "type": "object",
+      "properties": {
+        "Error": {
+          "description": "The details of the error.",
+          "$ref": "#/definitions/HighCasedErrorDetails"
+        }
+      }
+    },
     "ErrorResponse": {
       "description": "Error response indicates that the service is not able to process the incoming request. The reason is provided in the error message. \n\nSome Error responses: \n\n * 429 TooManyRequests - Request is throttled. Retry after waiting for the time specified in the \"x-ms-ratelimit-microsoft.consumption-retry-after\" header. \n\n * 503 ServiceUnavailable - Service is temporarily unavailable. Retry after waiting for the time specified in the \"Retry-After\" header.",
       "type": "object",
@@ -4612,6 +4652,11 @@
       "description": "A Consumption REST API operation.",
       "type": "object",
       "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Operation Id."
+        },
         "name": {
           "description": "Operation name: {provider}/{resource}/{operation}.",
           "type": "string",
@@ -4923,6 +4968,11 @@
           "readOnly": true,
           "type": "string",
           "description": "Resource type."
+        },
+        "etag": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource etag."
         },
         "tags": {
           "readOnly": true,

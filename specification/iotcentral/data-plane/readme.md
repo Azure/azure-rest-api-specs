@@ -9,16 +9,6 @@ To see additional help and options, run:
 > `autorest --help`
 ---
 
-## Suppression
-
-``` yaml
-directive:
-    - suppress: ValidFormats
-        from: iotcentral.json
-        where: $.definitions.EmailUser.allOf[1].properties.email.format
-        reason: email format is allowed
-```
-
 ## Configuration
 These are the global settings for the IoT Central API.
 ``` yaml
@@ -30,10 +20,12 @@ tag: package-2019-10-28-preview
 These settings apply only when `--tag=package-2019-10-28-preview` is specified on the command line.
 
 ```yaml $(package-2019-10-28-preview-global)
-input-file: Microsoft.IoTCentral/preview/2019-10-28-preview/iotcentralapps.json
+input-file:
+  - Microsoft.IoTCentral/preview/2019-10-28-preview/iotcentralapps.json
 ```
 ```yaml $(package-2019-10-28-preview-app)
-input-file: Microsoft.IoTCentral/preview/2019-10-28-preview/iotcentral.json
+input-file:
+  - Microsoft.IoTCentral/preview/2019-10-28-preview/iotcentral.json
 ```
 
 ```yaml

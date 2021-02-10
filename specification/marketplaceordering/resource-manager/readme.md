@@ -48,9 +48,17 @@ These are the global settings for the Marketplace Agreements API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2015-06-01
+tag: package-2021-01-01
 ```
 
+### Tag: package-2021-01-01
+
+These settings apply only when `--tag=package-2021-01-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-01-01'
+input-file:
+- Microsoft.MarketplaceOrdering/stable/2021-01-01/Agreements.json
+```
 
 ### Tag: package-2015-06-01
 

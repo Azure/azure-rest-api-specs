@@ -204,6 +204,9 @@
           },
           "200": {
             "description": "Ok response definition."
+          },
+          "204": {
+            "description": "No Content response definition."
           }
         },
         "x-ms-long-running-operation": true
@@ -616,6 +619,51 @@
         },
         "x-ms-long-running-operation": true
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HDInsight/clusters/{clusterName}/azureasyncoperations/{operationId}": {
+      "get": {
+        "tags": [
+          "Clusters"
+        ],
+        "operationId": "Clusters_GetAzureAsyncOperationStatus",
+        "description": "The the async operation status.",
+        "x-ms-examples": {
+          "Get Async Operation Status of Creating Cluster": {
+            "$ref": "./examples/GetClusterCreatingAsyncOperationStatus.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/OperationIdParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./operations.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "OK response definition.",
+            "schema": {
+              "$ref": "#/definitions/AsyncOperationResult"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -858,6 +906,7 @@
         },
         "diskSizeGB": {
           "type": "integer",
+          "format": "int32",
           "description": "ReadOnly. The DiskSize in GB. Do not set this value.",
           "readOnly": true
         }
@@ -926,6 +975,10 @@
           "format": "int32",
           "description": "The instance count of the cluster."
         },
+        "VMGroupName": {
+          "type": "string",
+          "description": "The name of the virtual machine group."
+        },
         "autoscale": {
           "$ref": "#/definitions/Autoscale",
           "x-ms-client-name": "autoscaleConfiguration",
@@ -956,6 +1009,10 @@
             "$ref": "./scriptActions.json#/definitions/ScriptAction"
           },
           "description": "The list of script actions on the role."
+        },
+        "encryptDataDisks": {
+          "type": "boolean",
+          "description": "Indicates whether encrypt the data disks."
         }
       },
       "description": "Describes a role on the cluster."
@@ -1001,6 +1058,14 @@
         "msiResourceId": {
           "type": "string",
           "description": "The managed identity (MSI) that is allowed to access the storage account, only to be specified for Azure Data Lake Storage Gen 2."
+        },
+        "saskey": {
+          "type": "string",
+          "description": "The shared access signature key."
+        },
+        "fileshare": {
+          "type": "string",
+          "description": "The file share name."
         }
       },
       "description": "The storage Account."
@@ -1016,6 +1081,19 @@
         }
       },
       "description": "The storage profile."
+    },
+    "ExcludedServicesConfig": {
+      "properties": {
+        "excludedServicesConfigId": {
+          "type": "string",
+          "description": "The config id of excluded services."
+        },
+        "excludedServicesList": {
+          "type": "string",
+          "description": "The list of excluded services."
+        }
+      },
+      "description": "The configuration that services will be excluded when creating cluster."
     },
     "NetworkProperties": {
       "description": "The network properties.",
@@ -1211,6 +1289,10 @@
           "type": "integer",
           "format": "int32",
           "description": "The port to connect to."
+        },
+        "privateIPAddress": {
+          "type": "string",
+          "description": "The private ip address of the endpoint."
         }
       }
     },
@@ -1220,6 +1302,10 @@
         "clusterVersion": {
           "type": "string",
           "description": "The version of the cluster."
+        },
+        "clusterHdpVersion": {
+          "type": "string",
+          "description": "The hdp version of the cluster."
         },
         "osType": {
           "type": "string",
@@ -1314,9 +1400,17 @@
           "$ref": "#/definitions/EncryptionInTransitProperties",
           "description": "The encryption-in-transit properties."
         },
+        "storageProfile": {
+          "$ref": "#/definitions/StorageProfile",
+          "description": "The storage profile."
+        },
         "minSupportedTlsVersion": {
           "type": "string",
           "description": "The minimal supported tls version."
+        },
+        "excludedServicesConfig": {
+          "$ref": "#/definitions/ExcludedServicesConfig",
+          "description": "The excluded services config."
         },
         "networkProperties": {
           "$ref": "#/definitions/NetworkProperties",
@@ -1547,6 +1641,10 @@
                 "readOnly": true,
                 "type": "string",
                 "description": "The client id of user assigned identity."
+              },
+              "tenantId": {
+                "type": "string",
+                "description": "The tenant id of user assigned identity."
               }
             }
           },
@@ -1692,7 +1790,7 @@
       },
       "description": "Gateway settings."
     },
-    "OperationResource": {
+    "AsyncOperationResult": {
       "properties": {
         "status": {
           "type": "string",
@@ -1804,6 +1902,14 @@
       "required": true,
       "type": "string",
       "description": "The HDInsight client API Version."
+    },
+    "OperationIdParameter": {
+      "name": "operationId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The long running operation id.",
+      "x-ms-parameter-location": "method"
     }
   }
 }
