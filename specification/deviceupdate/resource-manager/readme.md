@@ -39,6 +39,16 @@ input-file:
   - Microsoft.DeviceUpdate/preview/2020-03-01-preview/deviceupdate.json
 ```
 
+## Suppression
+
+``` yaml
+directive:
+  - suppress: ENUM_CASE_MISMATCH
+    where: $.definitions.Identity.properties.type
+    from: deviceupdate.json
+    reason: Managed Identity type can be case in-sensitive
+```
+
 ---
 
 # Code Generation
@@ -53,6 +63,8 @@ swagger-to-sdk:
   - repo: azure-sdk-for-net
   - repo: azure-sdk-for-python
   - repo: azure-sdk-for-go
+    after_scripts:
+      - bundle install && rake arm:regen_all_profiles['azure_mgmt_deviceupdate']
 ```
 
 ## CSharp
