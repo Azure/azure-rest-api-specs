@@ -52,6 +52,9 @@
             "$ref": "#/parameters/TagsParameter"
           },
           {
+            "$ref": "#/parameters/SourceIdParameter"
+          },
+          {
             "$ref": "#/parameters/CanFetchWorkbookContentParameter"
           },
           {
@@ -73,11 +76,14 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": null
+          "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
           "WorkbooksList": {
             "$ref": "./examples/MyWorkbooksList.json"
+          },
+          "WorkbooksList2": {
+            "$ref": "./examples/MyWorkbooksList2.json"
           }
         }
       }
@@ -118,11 +124,14 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": null
+          "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
           "WorkbooksList": {
             "$ref": "./examples/MyWorkbooksList.json"
+          },
+          "WorkbooksList2": {
+            "$ref": "./examples/MyWorkbooksList2.json"
           }
         }
       }
@@ -183,7 +192,7 @@
           }
         ],
         "responses": {
-          "201": {
+          "200": {
             "description": "The private workbook has been successfully deleted."
           },
           "204": {
@@ -214,6 +223,9 @@
           },
           {
             "$ref": "#/parameters/WorkbookResourceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SourceIdParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
@@ -268,6 +280,9 @@
             "$ref": "#/parameters/WorkbookResourceNameParameter"
           },
           {
+            "$ref": "#/parameters/SourceIdParameter"
+          },
+          {
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
           },
           {
@@ -281,7 +296,7 @@
           }
         ],
         "responses": {
-          "200": {
+          "201": {
             "description": "The private workbook definition updated.",
             "schema": {
               "$ref": "#/definitions/MyWorkbook"
@@ -346,6 +361,12 @@
             "type": "string"
           },
           "description": "Resource tags"
+        },
+        "etag": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource etag"
         }
       },
       "x-ms-azure-resource": true,
@@ -360,6 +381,9 @@
             "$ref": "#/definitions/MyWorkbook"
           },
           "description": "An array of private workbooks."
+        },
+        "nextLink": {
+          "type": "string"
         }
       },
       "description": "Workbook list result."
@@ -380,7 +404,7 @@
             "shared"
           ],
           "x-ms-enum": {
-            "name": "SharedTypeKind",
+            "name": "kind",
             "modelAsString": true
           }
         },
@@ -405,6 +429,7 @@
         },
         "serializedData": {
           "type": "string",
+          "x-nullable": true,
           "description": "Configuration of this particular private workbook. Configuration data is a string containing valid JSON"
         },
         "version": {
@@ -438,46 +463,54 @@
         },
         "storageUri": {
           "type": "string",
+          "x-nullable": true,
           "description": "BYOS Storage Account URI"
         }
       }
     },
-    "ErrorFieldContract": {
-      "properties": {
-        "code": {
-          "type": "string",
-          "description": "Property level error code."
-        },
-        "message": {
-          "type": "string",
-          "description": "Human-readable representation of property-level error."
-        },
-        "target": {
-          "type": "string",
-          "description": "Property name."
-        }
-      },
-      "description": "Error Field contract."
-    },
     "MyWorkbookError": {
+      "description": "Error response.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/ErrorDefinition",
+          "description": "The error details."
+        }
+      }
+    },
+    "ErrorDefinition": {
+      "description": "Error definition.",
       "properties": {
         "code": {
+          "description": "Service specific error code which serves as the substatus for the HTTP error code.",
           "type": "string",
-          "description": "Service-defined error code. This code serves as a sub-status for the HTTP error code specified in the response."
+          "readOnly": true
         },
         "message": {
+          "description": "Description of the error.",
           "type": "string",
-          "description": "Human-readable representation of the error."
+          "readOnly": true
         },
-        "details": {
+        "innererror": {
+          "description": "Internal error details.",
+          "items": {
+            "$ref": "#/definitions/InnerErrorTrace"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "InnerErrorTrace": {
+      "description": "Error details",
+      "properties": {
+        "trace": {
+          "description": "detailed error trace",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ErrorFieldContract"
+            "type": "string"
           },
-          "description": "The list of invalid fields send in request, in case of validation error."
+          "readOnly": true
         }
-      },
-      "description": "Error message body that will indicate why the operation failed."
+      }
     },
     "ManagedIdentity": {
       "description": "Customer Managed Identity",
@@ -541,17 +574,9 @@
     "SourceIdParameter": {
       "name": "sourceId",
       "in": "query",
-      "required": true,
+      "required": false,
       "type": "string",
       "description": "Azure Resource Id that will fetch all linked workbooks.",
-      "x-ms-parameter-location": "method"
-    },
-    "ResourceIdParameter": {
-      "name": "resourceId",
-      "in": "query",
-      "required": true,
-      "type": "string",
-      "description": "Azure Resource Id or any target workbook resource id.",
       "x-ms-parameter-location": "method"
     },
     "CanFetchWorkbookContentParameter": {

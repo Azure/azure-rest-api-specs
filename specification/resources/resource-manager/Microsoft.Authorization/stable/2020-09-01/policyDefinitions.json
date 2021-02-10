@@ -491,7 +491,11 @@
   "definitions": {
     "CloudError": {
       "x-ms-external": true,
-      "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse",
+      "properties": {
+        "error": {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse"
+        }
+      },
       "description": "An error response from a policy operation."
     },
     "PolicyDefinitionProperties": {

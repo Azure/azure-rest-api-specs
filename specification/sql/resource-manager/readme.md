@@ -27,7 +27,7 @@ openapi-type: arm
 tag: package-composite-v4
 ```
 
-## Composite packages
+### Composite packages
 
 The following packages may be composed from multiple api-versions.
 
@@ -106,7 +106,7 @@ input-file:
 - Microsoft.Sql/preview/2018-06-01-preview/PrivateEndpointConnections.json
 - Microsoft.Sql/preview/2018-06-01-preview/PrivateLinkResources.json
 - Microsoft.Sql/preview/2019-06-01-preview/servers.json
-- Microsoft.Sql/preview/2018-06-01-preview/capabilities.json
+- Microsoft.Sql/preview/2020-08-01-preview/LocationCapabilities.json
 - Microsoft.Sql/preview/2018-06-01-preview/LongTermRetentionManagedInstanceBackups.json
 - Microsoft.Sql/preview/2018-06-01-preview/ManagedInstanceLongTermRetentionPolicies.json
 - Microsoft.Sql/preview/2019-06-01-preview/WorkloadGroups.json
@@ -115,13 +115,14 @@ input-file:
 - Microsoft.Sql/preview/2019-06-01-preview/ServerAzureADAdministrators.json
 - Microsoft.Sql/preview/2019-06-01-preview/syncGroups.json
 - Microsoft.Sql/preview/2019-06-01-preview/syncMembers.json
+- Microsoft.Sql/preview/2020-02-02-preview/ImportExport.json
 - Microsoft.Sql/preview/2020-02-02-preview/ManagedDatabases.json
 - Microsoft.Sql/preview/2020-02-02-preview/ManagedDatabaseRestoreDetails.json
 - Microsoft.Sql/preview/2020-02-02-preview/ServerAzureADOnlyAuthentications.json
 - Microsoft.Sql/preview/2020-02-02-preview/ManagedInstances.json
 - Microsoft.Sql/preview/2020-02-02-preview/ManagedInstanceAzureADOnlyAuthentications.json
 - Microsoft.Sql/preview/2020-02-02-preview/ServerTrustGroups.json
-- Microsoft.Sql/preview/2020-08-01-preview/Databases.json
+- Microsoft.Sql/preview/2020-08-01-preview/Databases_legacy.json
 - Microsoft.Sql/preview/2020-08-01-preview/ElasticPools.json
 - Microsoft.Sql/preview/2020-08-01-preview/ServerDevOpsAudit.json
 
@@ -234,6 +235,7 @@ input-file:
 - Microsoft.Sql/preview/2019-06-01-preview/ServerAzureADAdministrators.json
 - Microsoft.Sql/preview/2019-06-01-preview/syncGroups.json
 - Microsoft.Sql/preview/2019-06-01-preview/syncMembers.json
+- Microsoft.Sql/preview/2020-02-02-preview/ImportExport.json
 - Microsoft.Sql/preview/2020-02-02-preview/ManagedDatabases.json
 - Microsoft.Sql/preview/2020-02-02-preview/ServerAzureADOnlyAuthentications.json
 - Microsoft.Sql/preview/2020-02-02-preview/ManagedInstances.json
@@ -602,6 +604,7 @@ input-file:
  - ./Microsoft.Sql/preview/2020-08-01-preview/DatabaseOperations.json
  - ./Microsoft.Sql/preview/2020-08-01-preview/DatabaseRecommendedActions.json
  - ./Microsoft.Sql/preview/2020-08-01-preview/Databases.json
+ - ./Microsoft.Sql/preview/2020-08-01-preview/Databases_legacy.json
  - ./Microsoft.Sql/preview/2020-08-01-preview/DatabaseSchemas.json
  - ./Microsoft.Sql/preview/2020-08-01-preview/DatabaseSecurityAlertPolicies.json
  - ./Microsoft.Sql/preview/2020-08-01-preview/DatabaseTables.json
@@ -616,7 +619,6 @@ input-file:
  - ./Microsoft.Sql/preview/2020-08-01-preview/EncryptionProtectors.json
  - ./Microsoft.Sql/preview/2020-08-01-preview/FailoverGroups.json
  - ./Microsoft.Sql/preview/2020-08-01-preview/FirewallRules.json
- - ./Microsoft.Sql/preview/2020-08-01-preview/HybridLinks.json
  - ./Microsoft.Sql/preview/2020-08-01-preview/InstanceFailoverGroups.json
  - ./Microsoft.Sql/preview/2020-08-01-preview/InstancePools.json
  - ./Microsoft.Sql/preview/2020-08-01-preview/JobAgents.json
@@ -675,6 +677,7 @@ input-file:
  - ./Microsoft.Sql/preview/2020-08-01-preview/ServerAutomaticTuning.json
  - ./Microsoft.Sql/preview/2020-08-01-preview/ServerAzureADAdministrators.json
  - ./Microsoft.Sql/preview/2020-08-01-preview/ServerAzureADOnlyAuthentications.json
+ - ./Microsoft.Sql/preview/2020-08-01-preview/ServerDevOpsAudit.json
  - ./Microsoft.Sql/preview/2020-08-01-preview/ServerDnsAliases.json
  - ./Microsoft.Sql/preview/2020-08-01-preview/ServerKeys.json
  - ./Microsoft.Sql/preview/2020-08-01-preview/ServerOperations.json
@@ -689,7 +692,7 @@ input-file:
  - ./Microsoft.Sql/preview/2020-08-01-preview/SyncMembers.json
  - ./Microsoft.Sql/preview/2020-08-01-preview/TdeCertificates.json
  - ./Microsoft.Sql/preview/2020-08-01-preview/TimeZones.json
- - ./Microsoft.Sql/preview/2020-08-01-preview/TransparentDataEncryption.json
+ - ./Microsoft.Sql/preview/2020-08-01-preview/TransparentDataEncryptions.json
  - ./Microsoft.Sql/preview/2020-08-01-preview/VirtualClusters.json
  - ./Microsoft.Sql/preview/2020-08-01-preview/VirtualNetworkRules.json
  - ./Microsoft.Sql/preview/2020-08-01-preview/WorkloadClassifiers.json
@@ -734,7 +737,7 @@ input-file:
  - ./Microsoft.Sql/preview/2020-02-02-preview/EncryptionProtectors.json
  - ./Microsoft.Sql/preview/2020-02-02-preview/FailoverGroups.json
  - ./Microsoft.Sql/preview/2020-02-02-preview/FirewallRules.json
- - ./Microsoft.Sql/preview/2020-02-02-preview/HybridLinks.json
+ - ./Microsoft.Sql/preview/2020-02-02-preview/ImportExport.json
  - ./Microsoft.Sql/preview/2020-02-02-preview/InstanceFailoverGroups.json
  - ./Microsoft.Sql/preview/2020-02-02-preview/InstancePools.json
  - ./Microsoft.Sql/preview/2020-02-02-preview/JobAgents.json
@@ -793,6 +796,7 @@ input-file:
  - ./Microsoft.Sql/preview/2020-02-02-preview/ServerAutomaticTuning.json
  - ./Microsoft.Sql/preview/2020-02-02-preview/ServerAzureADAdministrators.json
  - ./Microsoft.Sql/preview/2020-02-02-preview/ServerAzureADOnlyAuthentications.json
+ - ./Microsoft.Sql/preview/2020-02-02-preview/ServerDevOpsAudit.json
  - ./Microsoft.Sql/preview/2020-02-02-preview/ServerDnsAliases.json
  - ./Microsoft.Sql/preview/2020-02-02-preview/ServerKeys.json
  - ./Microsoft.Sql/preview/2020-02-02-preview/ServerOperations.json
@@ -807,7 +811,7 @@ input-file:
  - ./Microsoft.Sql/preview/2020-02-02-preview/SyncMembers.json
  - ./Microsoft.Sql/preview/2020-02-02-preview/TdeCertificates.json
  - ./Microsoft.Sql/preview/2020-02-02-preview/TimeZones.json
- - ./Microsoft.Sql/preview/2020-02-02-preview/TransparentDataEncryption.json
+ - ./Microsoft.Sql/preview/2020-02-02-preview/TransparentDataEncryptions.json
  - ./Microsoft.Sql/preview/2020-02-02-preview/VirtualClusters.json
  - ./Microsoft.Sql/preview/2020-02-02-preview/VirtualNetworkRules.json
  - ./Microsoft.Sql/preview/2020-02-02-preview/WorkloadClassifiers.json
