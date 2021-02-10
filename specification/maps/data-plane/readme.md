@@ -4,9 +4,10 @@
 
 This is the AutoRest configuration file for MapsClient
 
-
 ---
+
 ## Getting Started
+
 To build the SDK for Maps, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
@@ -14,11 +15,13 @@ To build the SDK for Maps, simply [Install AutoRest](https://aka.ms/autorest/ins
 To see additional help and options, run:
 
 > `autorest --help`
+
 ---
 
 ## Configuration
 
 ### Basic Information
+
 These are the global settings for MapsClient.
 
 ``` yaml
@@ -46,6 +49,7 @@ input-file:
   - Microsoft.Maps/Alias/preview/1.0/alias.json
   - Microsoft.Maps/Data/preview/1.0/data.json
   - Microsoft.Maps/Dataset/preview/1.0/dataset.json
+  - Microsoft.Maps/DEM/preview/1.0/elevation.json
   - Microsoft.Maps/DwgConversion/preview/1.0/dwgconversion.json
   - Microsoft.Maps/FeatureState/preview/1.0/featurestate.json
   - Microsoft.Maps/Feedback/preview/1.0/feedback.json

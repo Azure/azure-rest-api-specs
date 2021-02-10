@@ -298,7 +298,7 @@
     "/featureState/stateset": {
       "post": {
         "x-publish": true,
-        "description": "**Applies to:** S1 pricing tier.\n<br>\n\nThis POST API allows the user to create a new Stateset and define stateset style using request body.\n\nCreator makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. The Feature State API is part of Creator. \n\nThe Feature State service allows the user to update the states of a feature and query them to be used in other services. The dynamic properties of a feature that don't belong to the dataset are referred to as *states* here.\n\nThis Feature State service pivot on the Stateset. Like Tileset, Stateset encapsulates the storage mechanism for feature states for a dataset.\n\nOnce the stateset is created, users can use that statesetId to post feature state updates and retrieve the current feature states. A feature can have any number of states. \n\nFeature state is defined by the key name, value and the timestamp. When a feature state update is posted to Azure Maps, the state value gets updated only if the provided state’s timestamp is later than the stored timestamp. \n\nAzure Maps MapControl provides a way to use these feature states to style the features. Please refer to the State Tile documentation for more information.",
+        "description": "**Applies to:** S1 pricing tier.\n<br>\n\nThis POST API allows the user to create a new Stateset and define stateset style using request body.\n\nCreator makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. The Feature State API is part of Creator. \n\nThe Feature State service allows the user to update the states of a feature and query them to be used in other services. The dynamic properties of a feature that don't belong to the dataset are referred to as *states* here.\n\nThis Feature State service pivot on the Stateset. Like Tileset, Stateset encapsulates the storage mechanism for feature states for a dataset.\n\nOnce the stateset is created, users can use that statesetId to post feature state updates and retrieve the current feature states. A feature can have only one state at a given point in time. \n\nFeature state is defined by the key name, value and the timestamp. When a feature state update is posted to Azure Maps, the state value gets updated only if the provided state’s timestamp is later than the stored timestamp. \n\nAzure Maps MapControl provides a way to use these feature states to style the features. Please refer to the State Tile documentation for more information.",
         "operationId": "FeatureState_CreateStatesetPreview",
         "x-ms-examples": {
           "Create a new stateset with a datasetId": {
@@ -677,7 +677,7 @@
       "type": "object",
       "properties": {
         "styles": {
-          "description": "An array of stateset styles.",
+          "description": "An array of stateset styles. The style rule could be a numeric or string or a boolean type style rule.  Refer to NumberRuleObject, StringRuleObject and BooleanRuleObject definitions [here](https://aka.ms/AzureMapsStatesetStylesObject). ",
           "type": "array",
           "items": {
             "$ref": "#/definitions/StyleObject"
@@ -686,7 +686,7 @@
       }
     },
     "StyleObject": {
-      "description": "The stateset style model. The style rule could be a numeric type style rule or a boolean type style rule.  Refer to NumberRuleObject and BooleanRuleObject definition.",
+      "description": "The stateset style model. The style rule could be a numeric type style rule or a boolean type style rule.  Refer to NumberRuleObject, StringRuleObject and BooleanRuleObject definitions [here](https://aka.ms/AzureMapsStatesetStylesObject). ",
       "type": "object"
     },
     "NumberRuleObject": {
@@ -733,17 +733,35 @@
       "type": "object",
       "properties": {
         "true": {
-          "description": "The color when value is true",
+          "description": "The color when value is true.",
           "type": "string"
         },
         "false": {
-          "description": "The color when value is false",
+          "description": "The color when value is false.",
+          "type": "string"
+        }
+      }
+    },
+    "StringRuleObject": {
+      "description": "The string rule. The string value matching is case sensitive. If a feature's state doesn't match any of the values defined here, that feature will not have any dynamic style. If duplicate string values are given, the first one takes precedence.",
+      "type": "object",
+      "properties": {
+        "stateValue1": {
+          "description": "The color when value string is stateValue1.",
+          "type": "string"
+        },
+        "stateValue2": {
+          "description": "The color when value string is stateValue2.",
+          "type": "string"
+        },
+        "stateValueN": {
+          "description": "The color when value string is stateValueN.",
           "type": "string"
         }
       }
     },
     "StyleRuleBase": {
-      "description": "contains common properties for numeric style rules and boolean style rules.",
+      "description": "contains common properties for numeric, string and boolean style rules.",
       "discriminator": "type",
       "required": [
         "keyName",
@@ -759,7 +777,8 @@
           "type": "string",
           "enum": [
             "number",
-            "boolean"
+            "boolean",
+            "string"
           ]
         }
       }
@@ -796,6 +815,24 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/NumberRuleObject"
+          }
+        }
+      }
+    },
+    "StringTypeStyleRule": {
+      "description": "The string type style rule object.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/StyleRuleBase"
+        }
+      ],
+      "properties": {
+        "rules": {
+          "description": "String style rules.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/StringRuleObject"
           }
         }
       }
