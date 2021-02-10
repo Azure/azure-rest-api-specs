@@ -1,0 +1,81 @@
+{
+  "parameters": {
+    "api-version": "2019-05-05-preview",
+    "subscriptionId": "1e3ff1c0-771a-4119-a03b-be82a51e232d",
+    "resourceGroupName": "alertscorrelationrg",
+    "actionRuleName": "WeeklySuppression",
+    "actionRulePatch": {
+      "tags": {
+        "key1": "value1",
+        "key2": "value2"
+      },
+      "properties": {
+        "status": "Disabled"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "scope": {
+            "scopeType": "ResourceGroup",
+            "values": [
+              "/subscriptions/1e3ff1c0-771a-4119-a03b-be82a51e232d/resourceGroups/alertscorrelationrg"
+            ]
+          },
+          "conditions": {
+            "severity": {
+              "operator": "Equals",
+              "values": [
+                "Sev0",
+                "Sev2"
+              ]
+            },
+            "monitorService": {
+              "operator": "Equals",
+              "values": [
+                "Platform",
+                "Application Insights"
+              ]
+            },
+            "targetResourceType": {
+              "operator": "NotEquals",
+              "values": [
+                "Microsoft.Compute/VirtualMachines"
+              ]
+            }
+          },
+          "suppressionConfig": {
+            "recurrenceType": "Weekly",
+            "schedule": {
+              "startDate": "12/09/2018",
+              "endDate": "12/18/2018",
+              "startTime": "06:00:00",
+              "endTime": "14:00:00",
+              "recurrenceValues": [
+                1,
+                2
+              ]
+            }
+          },
+          "type": "Suppression",
+          "description": "Action rule on resource group for weekly suppression",
+          "status": "Disabled",
+          "createdAt": "2018-06-12T22:05:09Z",
+          "lastModifiedAt": "2018-06-12T22:05:09Z",
+          "createdBy": "abc@microsoft.com",
+          "lastModifiedBy": "xyz@microsoft.com"
+        },
+        "id": "/subscriptions/1e3ff1c0-771a-4119-a03b-be82a51e232d/resourceGroups/alertscorrelationrg/providers/Microsoft.AlertsManagement/actionRules/WeeklySuppression",
+        "type": "Microsoft.AlertsManagement/actionRules",
+        "name": "WeeklySuppression",
+        "location": "Global",
+        "tags": {
+          "key1": "value1",
+          "key2": "value2"
+        }
+      }
+    }
+  }
+}
