@@ -980,6 +980,9 @@
           },
           "StorageTargets_CreateOrUpdate_NoJunctions": {
             "$ref": "./examples/StorageTargets_CreateOrUpdate_NoJunctions.json"
+          },
+          "StorageTargets_CreateOrUpdate_BlobNfs": {
+            "$ref": "./examples/StorageTargets_CreateOrUpdate_BlobNfs.json"
           }
         },
         "x-ms-long-running-operation": true,
@@ -1048,6 +1051,7 @@
       "description": "REST API operation description: see https://github.com/Azure/azure-rest-api-specs/blob/master/documentation/openapi-authoring-automated-guidelines.md#r3023-operationsapiimplementation",
       "properties": {
         "display": {
+          "type": "object",
           "description": "The object that represents the operation.",
           "properties": {
             "operation": {
@@ -1197,6 +1201,7 @@
       "description": "Additional operation-specific output.",
       "properties": {
         "output": {
+          "type": "object",
           "description": "Additional operation-specific output.",
           "additionalProperties": {
             "type": "object"
@@ -1222,8 +1227,11 @@
       "description": "A Cache instance. Follows Azure Resource Manager standards: https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/resource-api-reference.md",
       "properties": {
         "tags": {
-          "description": "ARM tags as name/value pairs.",
-          "type": "object"
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags."
         },
         "id": {
           "description": "Resource ID of the Cache.",
@@ -1333,6 +1341,7 @@
       "type": "object"
     },
     "CacheIdentity": {
+      "type": "object",
       "description": "Cache identity properties.",
       "properties": {
         "principalId": {
@@ -1360,6 +1369,7 @@
       }
     },
     "CacheNetworkSettings": {
+      "type": "object",
       "description": "Cache network settings.",
       "properties": {
         "mtu": {
@@ -1396,6 +1406,7 @@
       }
     },
     "CacheEncryptionSettings": {
+      "type": "object",
       "description": "Cache encryption settings.",
       "properties": {
         "keyEncryptionKey": {
@@ -1406,6 +1417,7 @@
       }
     },
     "CacheSecuritySettings": {
+      "type": "object",
       "description": "Cache security settings.",
       "properties": {
         "accessPolicies": {
@@ -1470,6 +1482,7 @@
           }
         },
         "credentials": {
+          "type": "object",
           "description": "Active Directory admin credentials used to join the HPC Cache to a domain.",
           "properties": {
             "username": {
@@ -1566,6 +1579,7 @@
           }
         },
         "credentials": {
+          "type": "object",
           "description": "When present, these are the credentials for the secure LDAP connection.",
           "properties": {
             "bindDn": {
@@ -1582,6 +1596,7 @@
       }
     },
     "NfsAccessPolicy": {
+      "type": "object",
       "description": "A set of rules describing access policies applied to NFSv3 clients of the cache.",
       "properties": {
         "name": {
@@ -1602,6 +1617,7 @@
       ]
     },
     "NfsAccessRule": {
+      "type": "object",
       "description": "Rule to place restrictions on portions of the cache namespace being presented to clients.",
       "properties": {
         "scope": {
@@ -1663,6 +1679,7 @@
       ]
     },
     "KeyVaultKeyReference": {
+      "type": "object",
       "description": "Describes a reference to Key Vault Key.",
       "properties": {
         "keyUrl": {
@@ -1670,6 +1687,7 @@
           "description": "The URL referencing a key encryption key in Key Vault."
         },
         "sourceVault": {
+          "type": "object",
           "description": "Describes a resource Id to source Key Vault.",
           "properties": {
             "id": {
@@ -1702,6 +1720,7 @@
       "type": "object"
     },
     "CacheHealth": {
+      "type": "object",
       "description": "An indication of Cache health. Gives more information about health than just that related to provisioning.",
       "properties": {
         "state": {
@@ -1816,6 +1835,7 @@
       }
     },
     "StorageTargetResource": {
+      "type": "object",
       "description": "Resource used by a Cache.",
       "properties": {
         "name": {
@@ -1849,7 +1869,6 @@
     "StorageTargetProperties": {
       "type": "object",
       "description": "Properties of the Storage Target.",
-      "discriminator": "targetType",
       "required": [
         "targetType"
       ],
@@ -1866,7 +1885,8 @@
           "enum": [
             "nfs3",
             "clfs",
-            "unknown"
+            "unknown",
+            "blobNfs"
           ],
           "x-ms-enum": {
             "name": "StorageTargetType",
@@ -1901,20 +1921,15 @@
         "unknown": {
           "description": "Properties when targetType is unknown.",
           "$ref": "#/definitions/UnknownTarget"
+        },
+        "blobNfs": {
+          "description": "Properties when targetType is blobNfs.",
+          "$ref": "#/definitions/BlobNfsTarget"
         }
       }
     },
-    "Nfs3TargetProperties": {
-      "description": "An NFSv3 mount point for use as a Storage Target.",
-      "type": "object",
-      "x-ms-discriminator-value": "nfs3",
-      "allOf": [
-        {
-          "$ref": "#/definitions/StorageTargetProperties"
-        }
-      ]
-    },
     "Nfs3Target": {
+      "type": "object",
       "description": "Properties pertaining to the Nfs3Target",
       "properties": {
         "target": {
@@ -1928,17 +1943,8 @@
         }
       }
     },
-    "ClfsTargetProperties": {
-      "description": "Storage container for use as a CLFS Storage Target.",
-      "type": "object",
-      "x-ms-discriminator-value": "clfs",
-      "allOf": [
-        {
-          "$ref": "#/definitions/StorageTargetProperties"
-        }
-      ]
-    },
     "ClfsTarget": {
+      "type": "object",
       "description": "Properties pertaining to the ClfsTarget",
       "properties": {
         "target": {
@@ -1947,22 +1953,27 @@
         }
       }
     },
-    "UnknownTargetProperties": {
-      "description": "Storage container for use as an Unknown Storage Target.",
-      "type": "object",
-      "x-ms-discriminator-value": "unknown",
-      "allOf": [
-        {
-          "$ref": "#/definitions/StorageTargetProperties"
-        }
-      ]
-    },
     "UnknownTarget": {
+      "type": "object",
       "description": "Properties pertaining to the UnknownTarget",
       "properties": {
-        "unknownMap": {
+        "attributes": {
           "description": "Dictionary of string->string pairs containing information about the Storage Target.",
           "$ref": "#/definitions/UnknownProperties"
+        }
+      }
+    },
+    "BlobNfsTarget": {
+      "type": "object",
+      "description": "Properties pertaining to the BlobNfsTarget.",
+      "properties": {
+        "target": {
+          "description": "Resource ID of the storage container.",
+          "$ref": "#/definitions/URLString"
+        },
+        "usageModel": {
+          "description": "Identifies the usage model to be used for this Storage Target. Get choices from .../usageModels",
+          "type": "string"
         }
       }
     },
@@ -2016,6 +2027,7 @@
       "type": "object"
     },
     "Restriction": {
+      "type": "object",
       "properties": {
         "type": {
           "readOnly": true,
@@ -2077,6 +2089,7 @@
       "type": "object"
     },
     "ResourceSkusResult": {
+      "type": "object",
       "description": "The response from the List Cache SKUs operation.",
       "properties": {
         "nextLink": {
