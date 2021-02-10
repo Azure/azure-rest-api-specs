@@ -4628,29 +4628,15 @@
     "DefaultDto": {
       "description": "Base data transfer object implementation for default resources.",
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyDto"
+        }
+      ],
       "properties": {
-        "id": {
-          "description": "The resource id of the azure resource",
-          "type": "string",
-          "readOnly": true
-        },
         "location": {
           "description": "Location of the azure resource.",
           "type": "string"
-        },
-        "name": {
-          "description": "Name of the azure resource",
-          "type": "string",
-          "readOnly": true
-        },
-        "systemData": {
-          "description": "System Data of the Azure resource.",
-          "allOf": [
-            {
-              "$ref": "#/definitions/SystemData"
-            }
-          ],
-          "readOnly": true
         },
         "tags": {
           "description": "Tags on the azure resource.",
@@ -4658,14 +4644,8 @@
           "additionalProperties": {
             "type": "string"
           }
-        },
-        "type": {
-          "description": "Type of the azure resource",
-          "type": "string",
-          "readOnly": true
         }
-      },
-      "x-ms-azure-resource": true
+      }
     },
     "DimensionProperties": {
       "description": "properties for dimension",
@@ -5417,12 +5397,8 @@
           "readOnly": true
         },
         "systemData": {
+          "$ref": "#/definitions/SystemData",
           "description": "System Data of the Azure resource.",
-          "allOf": [
-            {
-              "$ref": "#/definitions/SystemData"
-            }
-          ],
           "readOnly": true
         },
         "type": {
