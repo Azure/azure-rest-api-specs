@@ -151,6 +151,97 @@
       ],
       "description": "The encoder can be configured to produce video and/or images (thumbnails) at different resolutions, by specifying a layer for each desired resolution. A layer represents the properties for the video or image at a resolution."
     },
+    "H265VideoLayer": {
+      "x-ms-discriminator-value": "#Microsoft.Media.H265VideoLayer",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Layer"
+        }
+      ],
+      "properties": {
+        "bitrate": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The average bitrate in bits per second at which to encode the input video when generating this layer. For example: a target bitrate of 3000Kbps or 3Mbps means this value should be 3000000 This is a required field."
+        },
+        "maxBitrate": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The maximum bitrate (in bits per second), at which the VBV buffer should be assumed to refill. If not specified, defaults to the same value as bitrate."
+        },
+        "bFrames": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of B-frames to be used when encoding this layer.  If not specified, the encoder chooses an appropriate number based on the video profile and level."
+        },
+        "frameRate": {
+          "type": "string",
+          "description": "The frame rate (in frames per second) at which to encode this layer. The value can be in the form of M/N where M and N are integers (For example, 30000/1001), or in the form of a number (For example, 30, or 29.97). The encoder enforces constraints on allowed frame rates based on the profile and level. If it is not specified, the encoder will use the same frame rate as the input video."
+        },
+        "slices": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of slices to be used when encoding this layer. If not specified, default is zero, which means that encoder will use a single slice for each frame."
+        },
+        "adaptiveBFrame": {
+          "type": "boolean",
+          "description": "Specifies whether or not adaptive B-frames are to be used when encoding this layer. If not specified, the encoder will turn it on whenever the video profile permits its use."
+        }
+      },
+      "type": "object",
+      "required": [
+        "bitrate"
+      ],
+      "description": "Describes the settings to be used when encoding the input video into a desired output bitrate layer."
+    },
+    "H265Layer": {
+      "x-ms-discriminator-value": "#Microsoft.Media.H265Layer",
+      "allOf": [
+        {
+          "$ref": "#/definitions/H265VideoLayer"
+        }
+      ],
+      "properties": {
+        "profile": {
+          "type": "string",
+          "enum": [
+            "Auto",
+            "Main"
+          ],
+          "x-ms-enum": {
+            "name": "H265VideoProfile",
+            "values": [
+              {
+                "value": "Auto",
+                "description": "Tells the encoder to automatically determine the appropriate H.265 profile."
+              },
+              {
+                "value": "Main",
+                "description": "Main profile (https://x265.readthedocs.io/en/default/cli.html?highlight=profile#profile-level-tier)"
+              }
+            ],
+            "modelAsString": true
+          },
+          "description": "We currently support Main. Default is Auto."
+        },
+        "level": {
+          "type": "string",
+          "description": "We currently support Level up to 6.2. The value can be Auto, or a number that matches the H.265 profile. If not specified, the default is Auto, which lets the encoder choose the Level that is appropriate for this layer."
+        },
+        "bufferWindow": {
+          "type": "string",
+          "format": "duration",
+          "description": "The VBV buffer window length. The value should be in ISO 8601 format. The value should be in the range [0.1-100] seconds. The default is 5 seconds (for example, PT5S)."
+        },
+        "referenceFrames": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of reference frames to be used when encoding this layer. If not specified, the encoder determines an appropriate number based on the encoder complexity setting."
+        }
+      },
+      "type": "object",
+      "description": "Describes the settings to be used when encoding the input video into a desired output bitrate layer with the H.265 video codec."
+    },
     "Video": {
       "x-ms-discriminator-value": "#Microsoft.Media.Video",
       "allOf": [
@@ -227,6 +318,287 @@
       "type": "object",
       "description": "Describes the basic properties for encoding the input video."
     },
+    "H265Video": {
+      "x-ms-discriminator-value": "#Microsoft.Media.H265Video",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Video"
+        }
+      ],
+      "properties": {
+        "sceneChangeDetection": {
+          "type": "boolean",
+          "description": "Specifies whether or not the encoder should insert key frames at scene changes. If not specified, the default is false. This flag should be set to true only when the encoder is being configured to produce a single output video."
+        },
+        "complexity": {
+          "type": "string",
+          "enum": [
+            "Speed",
+            "Balanced",
+            "Quality"
+          ],
+          "x-ms-enum": {
+            "name": "H265Complexity",
+            "values": [
+              {
+                "value": "Speed",
+                "description": "Tells the encoder to use settings that are optimized for faster encoding. Quality is sacrificed to decrease encoding time."
+              },
+              {
+                "value": "Balanced",
+                "description": "Tells the encoder to use settings that achieve a balance between speed and quality."
+              },
+              {
+                "value": "Quality",
+                "description": "Tells the encoder to use settings that are optimized to produce higher quality output at the expense of slower overall encode time."
+              }
+            ],
+            "modelAsString": true
+          },
+          "description": "Tells the encoder how to choose its encoding settings.  Quality will provide for a higher compression ratio but at a higher cost and longer compute time.  Speed will produce a relatively larger file but is faster and more economical. The default value is Balanced."
+        },
+        "layers": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/H265Layer"
+          },
+          "description": "The collection of output H.265 layers to be produced by the encoder."
+        }
+      },
+      "type": "object",
+      "description": "Describes all the properties for encoding a video with the H.265 codec."
+    },
+    "TrackDescriptor": {
+      "discriminator": "@odata.type",
+      "properties": {
+        "@odata.type": {
+          "type": "string",
+          "description": "The discriminator for derived types."
+        }
+      },
+      "type": "object",
+      "required": [
+        "@odata.type"
+      ],
+      "description": "Base type for all TrackDescriptor types, which define the metadata and selection for tracks that should be processed by a Job"
+    },
+    "AudioTrackDescriptor": {
+      "x-ms-discriminator-value": "#Microsoft.Media.AudioTrackDescriptor",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TrackDescriptor"
+        }
+      ],
+      "properties": {
+        "channelMapping": {
+          "type": "string",
+          "enum": [
+            "FrontLeft",
+            "FrontRight",
+            "Center",
+            "LowFrequencyEffects",
+            "BackLeft",
+            "BackRight",
+            "StereoLeft",
+            "StereoRight"
+          ],
+          "x-ms-enum": {
+            "name": "ChannelMapping",
+            "values": [
+              {
+                "value": "FrontLeft",
+                "description": "The Front Left Channel."
+              },
+              {
+                "value": "FrontRight",
+                "description": "The Front Right Channel."
+              },
+              {
+                "value": "Center",
+                "description": "The Center Channel."
+              },
+              {
+                "value": "LowFrequencyEffects",
+                "description": "Low Frequency Effects Channel.  Sometimes referred to as the Subwoofer."
+              },
+              {
+                "value": "BackLeft",
+                "description": "The Back Left Channel.  Sometimes referred to as the Left Surround Channel."
+              },
+              {
+                "value": "BackRight",
+                "description": "The Back Right Channel.  Sometimes referred to as the Right Surround Channel."
+              },
+              {
+                "value": "StereoLeft",
+                "description": "The Left Stereo channel.  Sometimes referred to as Down Mix Left."
+              },
+              {
+                "value": "StereoRight",
+                "description": "The Right Stereo channel.  Sometimes referred to as Down Mix Right."
+              }
+            ],
+            "modelAsString": true
+          },
+          "description": "Optional designation for single channel audio tracks.  Can be used to combine the tracks into stereo or multi-channel audio tracks."
+        }
+      },
+      "type": "object",
+      "description": "A TrackSelection to select audio tracks."
+    },
+    "SelectAudioTrackByAttribute": {
+      "x-ms-discriminator-value": "#Microsoft.Media.SelectAudioTrackByAttribute",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AudioTrackDescriptor"
+        }
+      ],
+      "properties": {
+        "attribute": {
+          "type": "string",
+          "enum": [
+            "Bitrate",
+            "Language"
+          ],
+          "x-ms-enum": {
+            "name": "TrackAttribute",
+            "values": [
+              {
+                "value": "Bitrate",
+                "description": "The bitrate of the track."
+              },
+              {
+                "value": "Language",
+                "description": "The language of the track."
+              }
+            ],
+            "modelAsString": true
+          },
+          "description": "The TrackAttribute to filter the tracks by."
+        },
+        "filter": {
+          "type": "string",
+          "enum": [
+            "All",
+            "Top",
+            "Bottom",
+            "ValueEquals"
+          ],
+          "x-ms-enum": {
+            "name": "AttributeFilter",
+            "values": [
+              {
+                "value": "All",
+                "description": "All tracks will be included."
+              },
+              {
+                "value": "Top",
+                "description": "The first track will be included when the attribute is sorted in descending order.  Generally used to select the largest bitrate."
+              },
+              {
+                "value": "Bottom",
+                "description": "The first track will be included when the attribute is sorted in ascending order.  Generally used to select the smallest bitrate."
+              },
+              {
+                "value": "ValueEquals",
+                "description": "Any tracks that have an attribute equal to the value given will be included."
+              }
+            ],
+            "modelAsString": true
+          },
+          "description": "The type of AttributeFilter to apply to the TrackAttribute in order to select the tracks."
+        },
+        "filterValue": {
+          "type": "string",
+          "description": "The value to filter the tracks by.  Only used when AttributeFilter.ValueEquals is specified for the Filter property."
+        }
+      },
+      "type": "object",
+      "required": [
+        "attribute",
+        "filter"
+      ],
+      "description": "Select audio tracks from the input by specifying an attribute and an attribute filter."
+    },
+    "SelectAudioTrackById": {
+      "x-ms-discriminator-value": "#Microsoft.Media.SelectAudioTrackById",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AudioTrackDescriptor"
+        }
+      ],
+      "properties": {
+        "trackId": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Track identifier to select"
+        }
+      },
+      "type": "object",
+      "required": [
+        "trackId"
+      ],
+      "description": "Select audio tracks from the input by specifying a track identifier."
+    },
+    "InputDefinition": {
+      "discriminator": "@odata.type",
+      "properties": {
+        "@odata.type": {
+          "type": "string",
+          "description": "The discriminator for derived types."
+        },
+        "includedTracks": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TrackDescriptor"
+          },
+          "description": "The list of TrackDescriptors which define the metadata and selection of tracks in the input."
+        }
+      },
+      "type": "object",
+      "required": [
+        "@odata.type"
+      ],
+      "description": "Base class for defining an input. Use sub classes of this class to specify tracks selections and related metadata."
+    },
+    "FromAllInputFile": {
+      "x-ms-discriminator-value": "#Microsoft.Media.FromAllInputFile",
+      "allOf": [
+        {
+          "$ref": "#/definitions/InputDefinition"
+        }
+      ],
+      "properties": {},
+      "type": "object",
+      "description": "An InputDefinition that looks across all of the files provided to select tracks specified by the IncludedTracks property. Generally used with the AudioTrackByAttribute and VideoTrackByAttribute to allow selection of a single track across a set of input files."
+    },
+    "FromEachInputFile": {
+      "x-ms-discriminator-value": "#Microsoft.Media.FromEachInputFile",
+      "allOf": [
+        {
+          "$ref": "#/definitions/InputDefinition"
+        }
+      ],
+      "properties": {},
+      "type": "object",
+      "description": "An InputDefinition that looks at each input file provided to select tracks specified by the IncludedTracks property. Generally used with the AudioTrackByAttribute and VideoTrackByAttribute to select tracks from each file given."
+    },
+    "InputFile": {
+      "x-ms-discriminator-value": "#Microsoft.Media.InputFile",
+      "allOf": [
+        {
+          "$ref": "#/definitions/InputDefinition"
+        }
+      ],
+      "properties": {
+        "filename": {
+          "type": "string",
+          "description": "Name of the file that this input definition applies to."
+        }
+      },
+      "type": "object",
+      "description": "An InputDefinition for a single file.  TrackSelections are scoped to the file specified."
+    },
     "FaceDetectorPreset": {
       "x-ms-discriminator-value": "#Microsoft.Media.FaceDetectorPreset",
       "allOf": [
@@ -255,6 +627,70 @@
           },
           "description": "Specifies the maximum resolution at which your video is analyzed. The default behavior is \"SourceResolution,\" which will keep the input video at its original resolution when analyzed. Using \"StandardDefinition\" will resize input videos to standard definition while preserving the appropriate aspect ratio. It will only resize if the video is of higher resolution. For example, a 1920x1080 input would be scaled to 640x360 before processing. Switching to \"StandardDefinition\" will reduce the time it takes to process high resolution video. It may also reduce the cost of using this component (see https://azure.microsoft.com/en-us/pricing/details/media-services/#analytics for details). However, faces that end up being too small in the resized video may not be detected."
         },
+        "mode": {
+          "type": "string",
+          "enum": [
+            "Analyze",
+            "Redact",
+            "Combined"
+          ],
+          "x-ms-enum": {
+            "name": "FaceRedactorMode",
+            "values": [
+              {
+                "value": "Analyze",
+                "description": "Analyze mode detects faces and outputs a metadata file with the results. Allows editing of the metadata file before faces are blurred with Redact mode."
+              },
+              {
+                "value": "Redact",
+                "description": "Redact mode consumes the metadata file from Analyze mode and redacts the faces found."
+              },
+              {
+                "value": "Combined",
+                "description": "Combined mode does the Analyze and Redact steps in one pass when editing the analyzed faces is not desired."
+              }
+            ],
+            "modelAsString": true
+          },
+          "description": "This mode provides the ability to choose between the following settings: 1) Analyze - For detection only.This mode generates a metadata JSON file marking appearances of faces throughout the video.Where possible, appearances of the same person are assigned the same ID. 2) Combined - Additionally redacts(blurs) detected faces. 3) Redact - This enables a 2-pass process, allowing for selective redaction of a subset of detected faces.It takes in the metadata file from a prior analyze pass, along with the source video, and a user-selected subset of IDs that require redaction."
+        },
+        "blurType": {
+          "type": "string",
+          "enum": [
+            "Box",
+            "Low",
+            "Med",
+            "High",
+            "Black"
+          ],
+          "x-ms-enum": {
+            "name": "BlurType",
+            "values": [
+              {
+                "value": "Box",
+                "description": "Box: debug filter, bounding box only"
+              },
+              {
+                "value": "Low",
+                "description": "Low: box-car blur filter"
+              },
+              {
+                "value": "Med",
+                "description": "Med: Gaussian blur filter"
+              },
+              {
+                "value": "High",
+                "description": "High: Confuse blur filter"
+              },
+              {
+                "value": "Black",
+                "description": "Black: Black out filter"
+              }
+            ],
+            "modelAsString": true
+          },
+          "description": "Blur type"
+        },
         "experimentalOptions": {
           "type": "object",
           "additionalProperties": {
@@ -264,7 +700,7 @@
         }
       },
       "type": "object",
-      "description": "Describes all the settings to be used when analyzing a video in order to detect all the faces present."
+      "description": "Describes all the settings to be used when analyzing a video in order to detect (and optionally redact) all the faces present."
     },
     "AudioAnalyzerPreset": {
       "x-ms-discriminator-value": "#Microsoft.Media.AudioAnalyzerPreset",
@@ -320,7 +756,7 @@
         },
         "inputLabel": {
           "type": "string",
-          "description": "The label of the job input which is to be used as an overlay. The Input must specify exactly one file. You can specify an image file in JPG or PNG formats, or an audio file (such as a WAV, MP3, WMA or M4A file), or a video file. See https://aka.ms/mesformats for the complete list of supported audio and video file formats."
+          "description": "The label of the job input which is to be used as an overlay. The Input must specify exactly one file. You can specify an image file in JPG, PNG, GIF or BMP format, or an audio file (such as a WAV, MP3, WMA or M4A file), or a video file. See https://aka.ms/mesformats for the complete list of supported audio and video file formats."
         },
         "start": {
           "type": "string",
@@ -413,7 +849,7 @@
         },
         "filenamePattern": {
           "type": "string",
-          "description": "The pattern of the file names for the generated output files. The following macros are supported in the file name: {Basename} - An expansion macro that will use the name of the input video file. If the base name(the file suffix is not included) of the input video file is less than 32 characters long, the base name of input video files will be used. If the length of base name of the input video file exceeds 32 characters, the base name is truncated to the first 32 characters in total length. {Extension} - The appropriate extension for this format. {Label} - The label assigned to the codec/layer. {Index} - A unique index for thumbnails. Only applicable to thumbnails. {Bitrate} - The audio/video bitrate. Not applicable to thumbnails. {Codec} - The type of the audio/video codec. Any unsubstituted macros will be collapsed and removed from the filename."
+          "description": "The pattern of the file names for the generated output files. The following macros are supported in the file name: {Basename} - An expansion macro that will use the name of the input video file. If the base name(the file suffix is not included) of the input video file is less than 32 characters long, the base name of input video files will be used. If the length of base name of the input video file exceeds 32 characters, the base name is truncated to the first 32 characters in total length. {Extension} - The appropriate extension for this format. {Label} - The label assigned to the codec/layer. {Index} - A unique index for thumbnails. Only applicable to thumbnails. {Bitrate} - The audio/video bitrate. Not applicable to thumbnails. {Codec} - The type of the audio/video codec. {Resolution} - The video resolution. Any unsubstituted macros will be collapsed and removed from the filename."
         }
       },
       "type": "object",
@@ -928,7 +1364,12 @@
             "CopyAllBitrateNonInterleaved",
             "H264MultipleBitrate1080p",
             "H264MultipleBitrate720p",
-            "H264MultipleBitrateSD"
+            "H264MultipleBitrateSD",
+            "H265ContentAwareEncoding",
+            "H265AdaptiveStreaming",
+            "H265SingleBitrate720p",
+            "H265SingleBitrate1080p",
+            "H265SingleBitrate4K"
           ],
           "x-ms-enum": {
             "name": "EncoderNamedPreset",
@@ -976,6 +1417,26 @@
               {
                 "value": "H264MultipleBitrateSD",
                 "description": "Produces a set of 5 GOP-aligned MP4 files, ranging from 1900kbps to 400 kbps, and stereo AAC audio. Resolution starts at 480p and goes down to 240p."
+              },
+              {
+                "value": "H265ContentAwareEncoding",
+                "description": "Produces a set of GOP-aligned MP4s by using content-aware encoding. Given any input content, the service performs an initial lightweight analysis of the input content, and uses the results to determine the optimal number of layers, appropriate bitrate and resolution settings for delivery by adaptive streaming. This preset is particularly effective for low and medium complexity videos, where the output files will be at lower bitrates but at a quality that still delivers a good experience to viewers. The output will contain MP4 files with video and audio interleaved."
+              },
+              {
+                "value": "H265AdaptiveStreaming",
+                "description": "Produces a set of GOP aligned MP4 files with H.265 video and stereo AAC audio. Auto-generates a bitrate ladder based on the input resolution, bitrate and frame rate. The auto-generated preset will never exceed the input resolution. For example, if the input is 720p, output will remain 720p at best."
+              },
+              {
+                "value": "H265SingleBitrate720p",
+                "description": "Produces an MP4 file where the video is encoded with H.265 codec at 1800 kbps and a picture height of 720 pixels, and the stereo audio is encoded with AAC-LC codec at 128 kbps."
+              },
+              {
+                "value": "H265SingleBitrate1080p",
+                "description": "Produces an MP4 file where the video is encoded with H.265 codec at 3500 kbps and a picture height of 1080 pixels, and the stereo audio is encoded with AAC-LC codec at 128 kbps."
+              },
+              {
+                "value": "H265SingleBitrate4K",
+                "description": "Produces an MP4 file where the video is encoded with H.265 codec at 9500 kbps and a picture height of 2160 pixels, and the stereo audio is encoded with AAC-LC codec at 128 kbps."
               }
             ],
             "modelAsString": true
@@ -1098,6 +1559,111 @@
       "type": "object",
       "description": "Describes the properties of a video overlay."
     },
+    "VideoTrackDescriptor": {
+      "x-ms-discriminator-value": "#Microsoft.Media.VideoTrackDescriptor",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TrackDescriptor"
+        }
+      ],
+      "properties": {},
+      "type": "object",
+      "description": "A TrackSelection to select video tracks."
+    },
+    "SelectVideoTrackByAttribute": {
+      "x-ms-discriminator-value": "#Microsoft.Media.SelectVideoTrackByAttribute",
+      "allOf": [
+        {
+          "$ref": "#/definitions/VideoTrackDescriptor"
+        }
+      ],
+      "properties": {
+        "attribute": {
+          "type": "string",
+          "enum": [
+            "Bitrate",
+            "Language"
+          ],
+          "x-ms-enum": {
+            "name": "TrackAttribute",
+            "values": [
+              {
+                "value": "Bitrate",
+                "description": "The bitrate of the track."
+              },
+              {
+                "value": "Language",
+                "description": "The language of the track."
+              }
+            ],
+            "modelAsString": true
+          },
+          "description": "The TrackAttribute to filter the tracks by."
+        },
+        "filter": {
+          "type": "string",
+          "enum": [
+            "All",
+            "Top",
+            "Bottom",
+            "ValueEquals"
+          ],
+          "x-ms-enum": {
+            "name": "AttributeFilter",
+            "values": [
+              {
+                "value": "All",
+                "description": "All tracks will be included."
+              },
+              {
+                "value": "Top",
+                "description": "The first track will be included when the attribute is sorted in descending order.  Generally used to select the largest bitrate."
+              },
+              {
+                "value": "Bottom",
+                "description": "The first track will be included when the attribute is sorted in ascending order.  Generally used to select the smallest bitrate."
+              },
+              {
+                "value": "ValueEquals",
+                "description": "Any tracks that have an attribute equal to the value given will be included."
+              }
+            ],
+            "modelAsString": true
+          },
+          "description": "The type of AttributeFilter to apply to the TrackAttribute in order to select the tracks."
+        },
+        "filterValue": {
+          "type": "string",
+          "description": "The value to filter the tracks by.  Only used when AttributeFilter.ValueEquals is specified for the Filter property. For TrackAttribute.Bitrate, this should be an integer value in bits per second (e.g: '1500000').  The TrackAttribute.Language is not supported for video tracks."
+        }
+      },
+      "type": "object",
+      "required": [
+        "attribute",
+        "filter"
+      ],
+      "description": "Select video tracks from the input by specifying an attribute and an attribute filter."
+    },
+    "SelectVideoTrackById": {
+      "x-ms-discriminator-value": "#Microsoft.Media.SelectVideoTrackById",
+      "allOf": [
+        {
+          "$ref": "#/definitions/VideoTrackDescriptor"
+        }
+      ],
+      "properties": {
+        "trackId": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Track identifier to select"
+        }
+      },
+      "type": "object",
+      "required": [
+        "trackId"
+      ],
+      "description": "Select video tracks from the input by specifying a track identifier."
+    },
     "TransformOutput": {
       "properties": {
         "onError": {
@@ -1205,6 +1771,11 @@
           "$ref": "#/definitions/TransformProperties",
           "description": "The resource properties.",
           "x-ms-client-flatten": true
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/systemData",
+          "description": "The system metadata relating to this resource.",
+          "readOnly": true
         }
       },
       "type": "object",
@@ -1250,6 +1821,13 @@
         "label": {
           "type": "string",
           "description": "A label that is assigned to a JobInputClip, that is used to satisfy a reference used in the Transform. For example, a Transform can be authored so as to take an image file with the label 'xyz' and apply it as an overlay onto the input video before it is encoded. When submitting a Job, exactly one of the JobInputs should be the image file, and it should have the label 'xyz'."
+        },
+        "inputDefinitions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/InputDefinition"
+          },
+          "description": "Defines a list of InputDefinitions. For each InputDefinition, it defines a list of track selections and related metadata."
         }
       },
       "type": "object",
@@ -1768,6 +2346,25 @@
       ],
       "description": "Properties of the Job."
     },
+    "JobInputSequence": {
+      "x-ms-discriminator-value": "#Microsoft.Media.JobInputSequence",
+      "allOf": [
+        {
+          "$ref": "#/definitions/JobInput"
+        }
+      ],
+      "properties": {
+        "inputs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/JobInputClip"
+          },
+          "description": "JobInputs that make up the timeline."
+        }
+      },
+      "type": "object",
+      "description": "A Sequence contains an ordered list of Clips where each clip is a JobInput.  The Sequence will be treated as a single input."
+    },
     "Job": {
       "allOf": [
         {
@@ -1779,6 +2376,11 @@
           "$ref": "#/definitions/JobProperties",
           "description": "The resource properties.",
           "x-ms-client-flatten": true
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/systemData",
+          "description": "The system metadata relating to this resource.",
+          "readOnly": true
         }
       },
       "type": "object",

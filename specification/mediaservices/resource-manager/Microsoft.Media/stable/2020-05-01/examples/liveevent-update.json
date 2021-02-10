@@ -16,7 +16,17 @@
         "description": "test event updated",
         "input": {
           "streamingProtocol": "FragmentedMP4",
-          "keyFrameIntervalDuration": "PT6S"
+          "keyFrameIntervalDuration": "PT6S",
+          "accessControl": {
+            "ip": {
+              "allow": [
+                {
+                  "name": "AllowOne",
+                  "address": "192.1.1.0"
+                }
+              ]
+            }
+          }
         },
         "preview": {
           "accessControl": {
@@ -57,7 +67,18 @@
             "keyFrameIntervalDuration": "PT6S",
             "streamingProtocol": "FragmentedMP4",
             "accessToken": "<accessToken>",
-            "endpoints": []
+            "endpoints": [],
+            "accessControl": {
+              "ip": {
+                "allow": [
+                  {
+                    "name": "AllowOne",
+                    "address": "192.1.1.0",
+                    "subnetPrefixLength": null
+                  }
+                ]
+              }
+            }
           },
           "preview": {
             "previewLocator": "c10ea3fc-587f-4daf-b2b2-fa8f647a9ed2",
@@ -105,7 +126,18 @@
             "keyFrameIntervalDuration": "PT6S",
             "streamingProtocol": "FragmentedMP4",
             "accessToken": "<accessToken>",
-            "endpoints": []
+            "endpoints": [],
+            "accessControl": {
+              "ip": {
+                "allow": [
+                  {
+                    "name": "AllowOne",
+                    "address": "192.1.1.0",
+                    "subnetPrefixLength": null
+                  }
+                ]
+              }
+            }
           },
           "preview": {
             "previewLocator": "c10ea3fc-587f-4daf-b2b2-fa8f647a9ed2",
