@@ -94,7 +94,6 @@ These settings apply only when `--tag=package-2019-05-01` is specified on the co
 ``` yaml $(tag) == 'package-2019-05-01'
 input-file:
     - "Microsoft.Fabric.Admin/preview/2016-05-01/ApplicationOperationResults.json"
-    - "Microsoft.Fabric.Admin/preview/2016-05-01/ComputeOperationResults.json"
     - "Microsoft.Fabric.Admin/preview/2016-05-01/Fabric.json"
     - "Microsoft.Fabric.Admin/preview/2016-05-01/EdgeGateway.json"
     - "Microsoft.Fabric.Admin/preview/2016-05-01/EdgeGatewayPool.json"
@@ -107,13 +106,28 @@ input-file:
     - "Microsoft.Fabric.Admin/preview/2016-05-01/LogicalSubnet.json"
     - "Microsoft.Fabric.Admin/preview/2016-05-01/MacAddressPool.json"
     - "Microsoft.Fabric.Admin/preview/2016-05-01/NetworkOperationResults.json"
-    - "Microsoft.Fabric.Admin/preview/2016-05-01/ScaleUnit.json"
-    - "Microsoft.Fabric.Admin/preview/2016-05-01/ScaleUnitNode.json"
     - "Microsoft.Fabric.Admin/preview/2016-05-01/SlbMuxInstance.json"
     - "Microsoft.Fabric.Admin/preview/2016-05-01/StorageOperationResults.json"
     - "Microsoft.Fabric.Admin/preview/2018-10-01/StorageSubSystem.json"
     - "Microsoft.Fabric.Admin/preview/2019-05-01/Drive.json"
     - "Microsoft.Fabric.Admin/preview/2019-05-01/Volume.json"
+    - "Microsoft.Fabric.Admin/preview/2019-05-01/NasCluster.json"
+    - "Microsoft.Fabric.Admin/preview/2020-10-01/ComputeOperationResults.json"
+    - "Microsoft.Fabric.Admin/preview/2020-10-01/ScaleUnit.json"
+    - "Microsoft.Fabric.Admin/preview/2020-10-01/ScaleUnitNode.json"
+```
+
+## Suppression
+``` yaml
+directive:
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    from: FabricLocation.json
+    where: $.definitions.FabricLocationModel.properties.externalDNSIPAddress01      
+    reason: externalDNSIPAddress01 is a customized name, no camel case restriction needed.
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    from: FabricLocation.json
+    where: $.definitions.FabricLocationModel.properties.externalDNSIPAddress02      
+    reason: externalDNSIPAddress02 is a customized name, no camel case restriction needed.
 ```
 
 ---
@@ -172,6 +186,10 @@ input-file:
   - $(this-folder)/Microsoft.Fabric.Admin/preview/2018-10-01/Volume.json
   - $(this-folder)/Microsoft.Fabric.Admin/preview/2019-05-01/Drive.json
   - $(this-folder)/Microsoft.Fabric.Admin/preview/2019-05-01/Volume.json
+  - $(this-folder)/Microsoft.Fabric.Admin/preview/2019-05-01/NasCluster.json
+  - $(this-folder)/Microsoft.Fabric.Admin/preview/2020-10-01/ScaleUnit.json
+  - $(this-folder)/Microsoft.Fabric.Admin/preview/2020-10-01/ScaleUnitNode.json
+  - $(this-folder)/Microsoft.Fabric.Admin/preview/2020-10-01/ComputeOperationResults.json
 
 ```
 
@@ -182,4 +200,3 @@ uncomment the  `exclude-file` section below and add the file paths.
 #exclude-file: 
 #  - $(this-folder)/Microsoft.Example/stable/2010-01-01/somefile.json
 ```
-

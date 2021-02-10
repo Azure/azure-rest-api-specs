@@ -1,0 +1,506 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2020-08-08-preview",
+    "title": "DNC",
+    "description": "DNC web api provides way to create, get and delete dnc controller"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DelegatedNetwork/controller/{resourceName}": {
+      "get": {
+        "description": "Gets details about the specified dnc controller.",
+        "x-ms-examples": {
+          "Get details of a controller": {
+            "$ref": "./examples/getController.json"
+          }
+        },
+        "tags": [
+          "Controller"
+        ],
+        "operationId": "Controller_GetDetails",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The operation was successful.",
+            "schema": {
+              "$ref": "#/definitions/DelegatedController"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "description": "Create a dnc controller",
+        "x-ms-examples": {
+          "Create controller": {
+            "$ref": "./examples/putController.json"
+          }
+        },
+        "tags": [
+          "Controller"
+        ],
+        "operationId": "Controller_Create",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DelegatedController"
+            },
+            "description": "controller type parameters"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DelegatedController"
+            }
+          },
+          "201": {
+            "description": "InProgress. The operation is still in progress.",
+            "schema": {
+              "$ref": "#/definitions/DelegatedController"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "description": "Deletes the DNC controller",
+        "x-ms-examples": {
+          "Delete controller": {
+            "$ref": "./examples/deleteController.json"
+          }
+        },
+        "tags": [
+          "Controller"
+        ],
+        "operationId": "Controller_Delete",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK."
+          },
+          "202": {
+            "description": "Accepted."
+          },
+          "204": {
+            "description": "No Content."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "description": "Update dnc controller",
+        "x-ms-examples": {
+          "update controller": {
+            "$ref": "./examples/patchController.json"
+          }
+        },
+        "tags": [
+          "Controller"
+        ],
+        "operationId": "Controller_Patch",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ControllerResourceUpdateParameters"
+            },
+            "description": "controller type parameters"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DelegatedController"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DelegatedNetwork/controllers": {
+      "get": {
+        "tags": [
+          "DelegatedControllers"
+        ],
+        "description": "Get all the delegatedController resources in a subscription.",
+        "operationId": "DelegatedNetwork_ListBySubscription",
+        "x-ms-examples": {
+          "Get DelegatedController resources by subscription": {
+            "$ref": "./examples/controllerListBySub.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "This is a synchronous operation. The body contains a JSON-serialized array of the metadata from all the DelegatedControllers in the subscription.",
+            "schema": {
+              "$ref": "#/definitions/DelegatedControllers"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DelegatedNetwork/controllers": {
+      "get": {
+        "tags": [
+          "DelegatedControllers"
+        ],
+        "description": "Get all the delegatedController resources in a resource group.",
+        "operationId": "DelegatedNetwork_ListByResourceGroup",
+        "x-ms-examples": {
+          "Get DelegatedNetwork resources by resource group": {
+            "$ref": "./examples/controllerListByRG.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "This is a synchronous operation. The body contains a JSON-serialized array of the metadata from all the delegatedControllers in the resource group.",
+            "schema": {
+              "$ref": "#/definitions/DelegatedControllers"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ControllerResource": {
+      "description": "Represents an instance of a resource.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "readOnly": true,
+          "description": "An identifier that represents the resource."
+        },
+        "name": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The name of the resource."
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The type of resource."
+        },
+        "location": {
+          "type": "string",
+          "description": "Location of the resource."
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "The resource tags."
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "ControllerResourceUpdateParameters": {
+      "description": "Parameters for updating a resource.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "The resource tags."
+        }
+      }
+    },
+    "DelegatedControllers": {
+      "description": "An array of Delegated controller resources.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DelegatedController"
+          },
+          "description": "An array of Delegated controller resources."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URL to get the next set of controllers.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "DelegatedController": {
+      "description": "Represents an instance of a DNC controller.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ControllerResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "readOnly": true,
+          "$ref": "#/definitions/DelegatedControllerProperties",
+          "description": "Properties of the provision operation request."
+        }
+      }
+    },
+    "DelegatedControllerProperties": {
+      "description": "Properties of Delegated controller resource.",
+      "type": "object",
+      "properties": {
+        "resourceGuid": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Resource guid."
+        },
+        "provisioningState": {
+          "type": "string",
+          "enum": [
+            "Deleting",
+            "Succeeded",
+            "Failed",
+            "Provisioning"
+          ],
+          "x-ms-enum": {
+            "name": "ControllerState",
+            "modelAsString": true
+          },
+          "readOnly": true,
+          "description": "The current state of dnc controller resource."
+        },
+        "dncAppId": {
+          "type": "string",
+          "readOnly": true,
+          "description": "dnc application id should be used by customer to authenticate with dnc gateway."
+        },
+        "dncTenantId": {
+          "type": "string",
+          "readOnly": true,
+          "description": "tenant id of dnc application id"
+        },
+        "dncEndpoint": {
+          "type": "string",
+          "readOnly": true,
+          "description": "dnc endpoint url that customers can use to connect to"
+        }
+      }
+    },
+    "ErrorResponse": {
+      "description": "Error response.",
+      "properties": {
+        "error": {
+          "description": "Error description",
+          "$ref": "#/definitions/ErrorDefinition"
+        }
+      }
+    },
+    "ErrorDefinition": {
+      "description": "Error definition.",
+      "properties": {
+        "code": {
+          "description": "Service specific error code which serves as the substatus for the HTTP error code.",
+          "type": "string",
+          "readOnly": true
+        },
+        "message": {
+          "description": "Description of the error.",
+          "type": "string",
+          "readOnly": true
+        },
+        "details": {
+          "description": "Internal error details.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ErrorDefinition"
+          },
+          "readOnly": true
+        }
+      }
+    }
+  },
+  "parameters": {
+    "SubscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "A unique identifier for a Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
+    },
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "The client API version."
+    },
+    "ResourceGroupNameParameter": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[-\\w\\._\\(\\)]+$",
+      "minLength": 1,
+      "maxLength": 90,
+      "x-ms-parameter-location": "method",
+      "description": "The name of the Azure Resource group of which a given DelegatedNetwork resource is part. This name must be at least 1 character in length, and no more than 90."
+    },
+    "resourceNameParameter": {
+      "name": "resourceName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9]*$",
+      "minLength": 3,
+      "maxLength": 63,
+      "x-ms-parameter-location": "method",
+      "description": "The name of the resource. It must be a minimum of 3 characters, and a maximum of 63."
+    }
+  }
+}

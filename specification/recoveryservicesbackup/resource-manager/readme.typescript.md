@@ -8,5 +8,6 @@ typescript:
   azure-arm: true
   package-name: "@azure/arm-recoveryservicesbackup"
   output-folder: "$(typescript-sdks-folder)/sdk/recoveryservicesbackup/arm-recoveryservicesbackup"
+  clear-output-folder: true
   generate-metadata: true
 ```

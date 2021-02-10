@@ -8,6 +8,7 @@ typescript:
   azure-arm: true
   package-name: "azureactivedirectory"
   output-folder: "$(typescript-sdks-folder)/packages/azureactivedirectory"
+  clear-output-folder: true
   payload-flattening-threshold: 1
   generate-metadata: true
 ```

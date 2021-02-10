@@ -8,5 +8,6 @@ typescript:
   azure-arm: true
   package-name: "@azure/arm-kusto"
   output-folder: "$(typescript-sdks-folder)/sdk/kusto/arm-kusto"
+  clear-output-folder: true
   generate-metadata: true
 ```

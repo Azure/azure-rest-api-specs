@@ -1,0 +1,115 @@
+{
+  "parameters": {
+    "serverName": "pgtestsvc4",
+    "resourceGroupName": "testrg",
+    "api-version": "2020-02-14-privatepreview",
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
+    "parameters": {
+      "location": "westus",
+      "sku": {
+        "tier": "GeneralPurpose",
+        "name": "Standard_D4s_v3"
+      },
+      "properties": {
+        "administratorLogin": "cloudsa",
+        "administratorLoginPassword": "password",
+        "version": "12",
+        "haEnabled": "Enabled",
+        "delegatedSubnetArguments": {
+          "subnetArmResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.Network/virtualNetworks/test-vnet/subnets/test-vnet-subnet"
+        },
+        "storageProfile": {
+          "storageMB": 524288,
+          "backupRetentionDays": 7
+        },
+        "availabilityZone": "1"
+      },
+      "tags": {
+        "ElasticServer": "1"
+      }
+    }
+  },
+  "responses": {
+    "201": {
+      "body": {
+        "sku": {
+          "tier": "GeneralPurpose",
+          "name": "Standard_D4s_v3"
+        },
+        "properties": {
+          "administratorLogin": "cloudsa",
+          "version": "12",
+          "state": "Ready",
+          "haState": "NotEnabled",
+          "fullyQualifiedDomainName": "pgtestsvc4.postgres.database.azure.com",
+          "displayName": "demosingleserver",
+          "publicNetworkAccess": "Enabled",
+          "haEnabled": "Enabled",
+          "delegatedSubnetArguments": {
+            "subnetArmResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.Network/virtualNetworks/test-vnet/subnets/test-vnet-subnet"
+          },
+          "storageProfile": {
+            "storageMB": 524288,
+            "backupRetentionDays": 7
+          },
+          "availabilityZone": "1",
+          "standbyAvailabilityZone": "2",
+          "maintenanceWindow": {
+            "dayOfWeek": 0,
+            "startHour": 0,
+            "startMinute": 0,
+            "customWindow": "Disabled"
+          }
+        },
+        "location": "westus",
+        "tags": {
+          "ElasticServer": "1"
+        },
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBforPostgreSQL/flexibleServers/pgtestsvc4",
+        "name": "pgtestsvc4",
+        "type": "Microsoft.DBforPostgreSQL/flexibleServers"
+      }
+    },
+    "200": {
+      "body": {
+        "sku": {
+          "tier": "GeneralPurpose",
+          "name": "Standard_D4s_v3"
+        },
+        "properties": {
+          "administratorLogin": "cloudsa",
+          "version": "12",
+          "state": "Ready",
+          "haState": "NotEnabled",
+          "fullyQualifiedDomainName": "pgtestsvc4.postgres.database.azure.com",
+          "displayName": "demosingleserver",
+          "publicNetworkAccess": "Enabled",
+          "haEnabled": "Enabled",
+          "delegatedSubnetArguments": {
+            "subnetArmResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.Network/virtualNetworks/test-vnet/subnets/test-vnet-subnet"
+          },
+          "storageProfile": {
+            "storageMB": 524288,
+            "backupRetentionDays": 7
+          },
+          "availabilityZone": "1",
+          "standbyAvailabilityZone": "2",
+          "maintenanceWindow": {
+            "dayOfWeek": 0,
+            "startHour": 0,
+            "startMinute": 0,
+            "customWindow": "Disabled"
+          }
+        },
+        "location": "westus",
+        "tags": {
+          "ElasticServer": "1"
+        },
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBforPostgreSQL/flexibleServers/pgtestsvc4",
+        "name": "pgtestsvc4",
+        "type": "Microsoft.DBforPostgreSQL/flexibleServers"
+      }
+    },
+    "202": {}
+  }
+}

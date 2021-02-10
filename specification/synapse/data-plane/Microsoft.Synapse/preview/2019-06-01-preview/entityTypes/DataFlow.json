@@ -1,0 +1,137 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "ArtifactsClient",
+    "version": "2019-06-01-preview"
+  },
+  "paths": {},
+  "definitions": {
+    "DataFlow": {
+      "description": "Azure Synapse nested object which contains a flow with data movements and transformations.",
+      "type": "object",
+      "discriminator": "type",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Type of data flow."
+        },
+        "description": {
+          "description": "The description of the data flow.",
+          "type": "string"
+        },
+        "annotations": {
+          "description": "List of tags that can be used for describing the data flow.",
+          "type": "array",
+          "items": {
+            "type": "object"
+          }
+        },
+        "folder": {
+          "description": "The folder that this data flow is in. If not specified, Data flow will appear at the root level.",
+          "type": "object",
+          "properties": {
+            "name": {
+              "description": "The name of the folder that this data flow is in.",
+              "type": "string"
+            }
+          }
+        }
+      },
+      "required": [
+        "type"
+      ]
+    },
+    "MappingDataFlow": {
+      "x-ms-discriminator-value": "MappingDataFlow",
+      "description": "Mapping data flow.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataFlow"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "Mapping data flow type properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/MappingDataFlowTypeProperties"
+        }
+      }
+    },
+    "MappingDataFlowTypeProperties": {
+      "description": "Mapping data flow type properties.",
+      "properties": {
+        "sources": {
+          "type": "array",
+          "description": "List of sources in data flow.",
+          "items": {
+            "$ref": "#/definitions/DataFlowSource"
+          }
+        },
+        "sinks": {
+          "type": "array",
+          "description": "List of sinks in data flow.",
+          "items": {
+            "$ref": "#/definitions/DataFlowSink"
+          }
+        },
+        "transformations": {
+          "type": "array",
+          "description": "List of transformations in data flow.",
+          "items": {
+            "$ref": "#/definitions/Transformation"
+          }
+        },
+        "script": {
+          "type": "string",
+          "description": "DataFlow script."
+        }
+      }
+    },
+    "Transformation": {
+      "description": "A data flow transformation.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Transformation name.",
+          "type": "string"
+        },
+        "description": {
+          "description": "Transformation description.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "name"
+      ]
+    },
+    "DataFlowSource": {
+      "description": "Transformation for data flow source.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Transformation"
+        }
+      ],
+      "properties": {
+        "dataset": {
+          "description": "Dataset reference.",
+          "$ref": "../artifacts.json#/definitions/DatasetReference"
+        }
+      }
+    },
+    "DataFlowSink": {
+      "description": "Transformation for data flow sink.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Transformation"
+        }
+      ],
+      "properties": {
+        "dataset": {
+          "description": "Dataset reference.",
+          "$ref": "../artifacts.json#/definitions/DatasetReference"
+        }
+      }
+    }
+  }
+}

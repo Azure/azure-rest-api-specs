@@ -1,0 +1,112 @@
+{
+  "parameters": {
+    "connectionName": "vpnConnection1",
+    "gatewayName": "gateway1",
+    "resourceGroupName": "rg1",
+    "api-version": "2020-03-01",
+    "subscriptionId": "subid",
+    "VpnConnectionParameters": {
+      "properties": {
+        "remoteVpnSite": {
+          "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/vpnSites/vpnSite1"
+        },
+        "vpnLinkConnections": [
+          {
+            "name": "Connection-Link1",
+            "properties": {
+              "vpnSiteLink": {
+                "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/vpnSites/vpnSite1/vpnSiteLinks/siteLink1"
+              },
+              "connectionBandwidth": 200,
+              "vpnConnectionProtocolType": "IKEv2",
+              "sharedKey": "key"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "vpnConnection1",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/vpnGateways/gateway1/vpnConnections/vpnConnection1",
+        "etag": "w/\\00000000-0000-0000-0000-000000000000\\",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "remoteVpnSite": {
+            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/vpnSites/vpnSite1"
+          },
+          "enableInternetSecurity": false,
+          "ingressBytesTransferred": 0,
+          "egressBytesTransferred": 0,
+          "vpnLinkConnections": [
+            {
+              "name": "Connection-Link1",
+              "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/vpnGateways/gateway1/vpnConnections/vpnConnection1/VpnSiteLinkConnections/Connection-Link1",
+              "etag": "w/\\00000000-0000-0000-0000-000000000000\\",
+              "type": "Microsoft.Network/vpnGateways/vpnConnections/VpnSiteLinkConnections",
+              "properties": {
+                "provisioningState": "Succeeded",
+                "vpnSiteLink": {
+                  "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/vpnSites/vpnSite1/vpnSiteLinks/siteLink1"
+                },
+                "connectionBandwidth": 200,
+                "ipsecPolicies": [],
+                "vpnConnectionProtocolType": "IKEv2",
+                "sharedKey": "key",
+                "ingressBytesTransferred": 0,
+                "egressBytesTransferred": 0,
+                "enableBgp": false,
+                "enableRateLimiting": false,
+                "useLocalAzureIpAddress": false,
+                "usePolicyBasedTrafficSelectors": false,
+                "routingWeight": 0
+              }
+            }
+          ]
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "vpnConnection1",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/vpnGateways/gateway1/vpnConnections/vpnConnection1",
+        "etag": "w/\\00000000-0000-0000-0000-000000000000\\",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "remoteVpnSite": {
+            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/vpnSites/vpnSite1"
+          },
+          "enableInternetSecurity": false,
+          "ingressBytesTransferred": 0,
+          "egressBytesTransferred": 0,
+          "vpnLinkConnections": [
+            {
+              "name": "Connection-Link1",
+              "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/vpnGateways/gateway1/vpnConnections/vpnConnection1/VpnSiteLinkConnections/Connection-Link1",
+              "etag": "w/\\00000000-0000-0000-0000-000000000000\\",
+              "properties": {
+                "provisioningState": "Succeeded",
+                "vpnSiteLink": {
+                  "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/vpnSites/vpnSite1/vpnSiteLinks/siteLink1"
+                },
+                "connectionBandwidth": 200,
+                "ipsecPolicies": [],
+                "vpnConnectionProtocolType": "IKEv2",
+                "sharedKey": "key",
+                "ingressBytesTransferred": 0,
+                "egressBytesTransferred": 0,
+                "enableBgp": false,
+                "enableRateLimiting": false,
+                "useLocalAzureIpAddress": false,
+                "usePolicyBasedTrafficSelectors": false,
+                "routingWeight": 0
+              }
+            }
+          ]
+        }
+      }
+    }
+  }
+}

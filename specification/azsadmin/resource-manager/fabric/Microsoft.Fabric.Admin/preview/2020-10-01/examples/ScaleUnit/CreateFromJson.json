@@ -1,0 +1,44 @@
+{
+  "parameters": {
+    "api-version": "2020-10-01",
+    "subscriptionId": "20ff7fc3-e762-44dd-bd96-b71116dcdc23",
+    "resourceGroupName": "System.local",
+    "location": "local",
+    "scaleUnit": "cluster",
+    "creationData": {
+      "clusterName": "cluster",
+      "physicalNodes": [
+        {
+          "bmcIpAddress": "192.0.0.1",
+          "name": "machine"
+        }
+      ],
+      "torSwitchBgpAsn": "64703",
+      "softwareBgpAsn": "64703",
+      "torSwitchBgpPeerIp": [
+        "10.0.0.1"
+      ],
+      "infrastructureNetwork": {
+        "subnet": [
+          "10.0.0.1/24"
+        ],
+        "vlanId": [
+          "0"
+        ]
+      },
+      "storageNetwork": {
+        "subnet": [
+          "10.0.0.1/24"
+        ],
+        "vlanId": [
+          "0"
+        ]
+      },
+      "netQosPriority": 1
+    }
+  },
+  "responses": {
+    "200": {},
+    "202": {}
+  }
+}

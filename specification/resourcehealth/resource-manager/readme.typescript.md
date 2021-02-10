@@ -8,5 +8,6 @@ typescript:
   azure-arm: true
   package-name: "@azure/arm-resourcehealth"
   output-folder: "$(typescript-sdks-folder)/sdk/resourcehealth/arm-resourcehealth"
+  clear-output-folder: true
   generate-metadata: true
 ```

@@ -1,0 +1,4689 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2020-04-01",
+    "title": "DataBoxManagementClient"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/providers/Microsoft.DataBox/operations": {
+      "get": {
+        "tags": [
+          "Operations"
+        ],
+        "description": "This method gets all the operations.",
+        "operationId": "Operations_List",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The supported operations list.",
+            "schema": {
+              "$ref": "#/definitions/OperationList"
+            }
+          },
+          "default": {
+            "description": "Error response describing reason for operation failure.",
+            "schema": {
+              "$ref": "#/definitions/ApiError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "OperationsGet": {
+            "$ref": "./examples/OperationsGet.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DataBox/jobs": {
+      "get": {
+        "tags": [
+          "Jobs"
+        ],
+        "description": "Lists all the jobs available under the subscription.",
+        "operationId": "Jobs_List",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "$skipToken",
+            "in": "query",
+            "description": "$skipToken is supported on Get list of jobs, which provides the next page in the list of jobs.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of jobs available under the subscription.",
+            "schema": {
+              "$ref": "#/definitions/JobResourceList"
+            }
+          },
+          "default": {
+            "description": "Error response describing reason for operation failure.",
+            "schema": {
+              "$ref": "#/definitions/ApiError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "JobsList": {
+            "$ref": "./examples/JobsList.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataBox/locations/{location}/availableSkus": {
+      "post": {
+        "tags": [
+          "Service"
+        ],
+        "description": "This method provides the list of available skus for the given subscription, resource group and location.",
+        "operationId": "Service_ListAvailableSkusByResourceGroup",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/locationParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "availableSkuRequest",
+            "in": "body",
+            "description": "Filters for showing the available skus.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AvailableSkuRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The list of available skus under Resource group.",
+            "schema": {
+              "$ref": "#/definitions/AvailableSkusResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing reason for operation failure.",
+            "schema": {
+              "$ref": "#/definitions/ApiError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "AvailableSkusPost": {
+            "$ref": "./examples/AvailableSkusPost.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DataBox/locations/{location}/validateAddress": {
+      "post": {
+        "tags": [
+          "Service"
+        ],
+        "description": "[DEPRECATED NOTICE: This operation will soon be removed]. This method validates the customer shipping address and provide alternate addresses if any.",
+        "operationId": "Service_ValidateAddress",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/locationParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "validateAddress",
+            "in": "body",
+            "description": "Shipping address of the customer.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ValidateAddress"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The valid and alternate addresses.",
+            "schema": {
+              "$ref": "#/definitions/AddressValidationOutput"
+            }
+          },
+          "default": {
+            "description": "Error response describing reason for operation failure.",
+            "schema": {
+              "$ref": "#/definitions/ApiError"
+            }
+          }
+        },
+        "deprecated": true,
+        "x-ms-examples": {
+          "ValidateAddressPost": {
+            "$ref": "./examples/ValidateAddressPost.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataBox/locations/{location}/validateInputs": {
+      "post": {
+        "tags": [
+          "Service"
+        ],
+        "description": "This method does all necessary pre-job creation validation under resource group.",
+        "operationId": "Service_ValidateInputsByResourceGroup",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/locationParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "validationRequest",
+            "in": "body",
+            "description": "Inputs of the customer.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ValidationRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The validation status and responses of each validating parameter.",
+            "schema": {
+              "$ref": "#/definitions/ValidationResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing reason for operation failure.",
+            "schema": {
+              "$ref": "#/definitions/ApiError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ValidateInputsByResourceGroup": {
+            "$ref": "./examples/ValidateInputsByResourceGroup.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DataBox/locations/{location}/validateInputs": {
+      "post": {
+        "tags": [
+          "Service"
+        ],
+        "description": "This method does all necessary pre-job creation validation under subscription.",
+        "operationId": "Service_ValidateInputs",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/locationParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "validationRequest",
+            "in": "body",
+            "description": "Inputs of the customer.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ValidationRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The validation status and responses of each validating parameter.",
+            "schema": {
+              "$ref": "#/definitions/ValidationResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing reason for operation failure.",
+            "schema": {
+              "$ref": "#/definitions/ApiError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ValidateInputs": {
+            "$ref": "./examples/ValidateInputs.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataBox/jobs": {
+      "get": {
+        "tags": [
+          "Jobs"
+        ],
+        "description": "Lists all the jobs available under the given resource group.",
+        "operationId": "Jobs_ListByResourceGroup",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "$skipToken",
+            "in": "query",
+            "description": "$skipToken is supported on Get list of jobs, which provides the next page in the list of jobs.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of jobs by resource group.",
+            "schema": {
+              "$ref": "#/definitions/JobResourceList"
+            }
+          },
+          "default": {
+            "description": "Error response describing reason for operation failure.",
+            "schema": {
+              "$ref": "#/definitions/ApiError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "JobsListByResourceGroup": {
+            "$ref": "./examples/JobsListByResourceGroup.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataBox/jobs/{jobName}": {
+      "get": {
+        "tags": [
+          "Jobs"
+        ],
+        "description": "Gets information about the specified job.",
+        "operationId": "Jobs_Get",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/jobNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "description": "$expand is supported on details parameter for job, which provides details on the job stages.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Job object.",
+            "schema": {
+              "$ref": "#/definitions/JobResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing reason for operation failure.",
+            "schema": {
+              "$ref": "#/definitions/ApiError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "JobsGet": {
+            "$ref": "./examples/JobsGet.json"
+          },
+          "JobsGetCmk": {
+            "$ref": "./examples/JobsGetCmk.json"
+          },
+          "JobsGetExport": {
+            "$ref": "./examples/JobsGetExport.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Jobs"
+        ],
+        "description": "Creates a new job with the specified parameters. Existing job cannot be updated with this API and should instead be updated with the Update job API.",
+        "operationId": "Jobs_Create",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/jobNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "jobResource",
+            "in": "body",
+            "description": "Job details from request body.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/JobResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Job object.",
+            "schema": {
+              "$ref": "#/definitions/JobResource"
+            }
+          },
+          "202": {
+            "description": "Accepted request for create Job."
+          },
+          "default": {
+            "description": "Error response describing reason for operation failure.",
+            "schema": {
+              "$ref": "#/definitions/ApiError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "JobsCreate": {
+            "$ref": "./examples/JobsCreate.json"
+          },
+          "JobsCreateDevicePassword": {
+            "$ref": "./examples/JobsCreateDevicePassword.json"
+          },
+          "JobsCreateExport": {
+            "$ref": "./examples/JobsCreateExport.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Jobs"
+        ],
+        "description": "Deletes a job.",
+        "operationId": "Jobs_Delete",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/jobNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Just for swagger we are adding this status code."
+          },
+          "202": {
+            "description": "Accepted request for delete Job."
+          },
+          "204": {
+            "description": "Job deleted."
+          },
+          "default": {
+            "description": "Error response describing reason for operation failure.",
+            "schema": {
+              "$ref": "#/definitions/ApiError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "JobsDelete": {
+            "$ref": "./examples/JobsDelete.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Jobs"
+        ],
+        "description": "Updates the properties of an existing job.",
+        "operationId": "Jobs_Update",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/jobNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "description": "Defines the If-Match condition. The patch will be performed only if the ETag of the job on the server matches this value.",
+            "type": "string"
+          },
+          {
+            "name": "jobResourceUpdateParameter",
+            "in": "body",
+            "description": "Job update parameters from request body.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/JobResourceUpdateParameter"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Job object.",
+            "schema": {
+              "$ref": "#/definitions/JobResource"
+            }
+          },
+          "202": {
+            "description": "Accepted request for job updated."
+          },
+          "default": {
+            "description": "Error response describing reason for operation failure.",
+            "schema": {
+              "$ref": "#/definitions/ApiError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "JobsPatch": {
+            "$ref": "./examples/JobsPatch.json"
+          },
+          "JobsPatchCmk": {
+            "$ref": "./examples/JobsPatchCmk.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataBox/jobs/{jobName}/bookShipmentPickUp": {
+      "post": {
+        "tags": [
+          "Jobs"
+        ],
+        "description": "Book shipment pick up.",
+        "operationId": "Jobs_BookShipmentPickUp",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/jobNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "shipmentPickUpRequest",
+            "in": "body",
+            "description": "Details of shipment pick up request.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ShipmentPickUpRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Booked shipment pick up successfully.",
+            "schema": {
+              "$ref": "#/definitions/ShipmentPickUpResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing reason for operation failure.",
+            "schema": {
+              "$ref": "#/definitions/ApiError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "BookShipmentPickupPost": {
+            "$ref": "./examples/BookShipmentPickupPost.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataBox/jobs/{jobName}/cancel": {
+      "post": {
+        "tags": [
+          "Jobs"
+        ],
+        "description": "CancelJob.",
+        "operationId": "Jobs_Cancel",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/jobNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "cancellationReason",
+            "in": "body",
+            "description": "Reason for cancellation.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CancellationReason"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Job cancelled."
+          },
+          "default": {
+            "description": "Error response describing reason for operation failure.",
+            "schema": {
+              "$ref": "#/definitions/ApiError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "JobsCancelPost": {
+            "$ref": "./examples/JobsCancelPost.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataBox/jobs/{jobName}/listCredentials": {
+      "post": {
+        "tags": [
+          "Jobs"
+        ],
+        "description": "This method gets the unencrypted secrets related to the job.",
+        "operationId": "Jobs_ListCredentials",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/jobNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of unencrypted credentials of the job.",
+            "schema": {
+              "$ref": "#/definitions/UnencryptedCredentialsList"
+            }
+          },
+          "default": {
+            "description": "Error response describing reason for operation failure.",
+            "schema": {
+              "$ref": "#/definitions/ApiError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        },
+        "x-ms-examples": {
+          "JobsListCredentials": {
+            "$ref": "./examples/JobsListCredentials.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DataBox/locations/{location}/regionConfiguration": {
+      "post": {
+        "tags": [
+          "Service"
+        ],
+        "description": "This API provides configuration details specific to given region/location at Subscription level.",
+        "operationId": "Service_RegionConfiguration",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/locationParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "regionConfigurationRequest",
+            "in": "body",
+            "description": "Request body to get the configuration for the region.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RegionConfigurationRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Region configuration response.",
+            "schema": {
+              "$ref": "#/definitions/RegionConfigurationResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing reason for operation failure.",
+            "schema": {
+              "$ref": "#/definitions/ApiError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "RegionConfiguration": {
+            "$ref": "./examples/RegionConfiguration.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataBox/locations/{location}/regionConfiguration": {
+      "post": {
+        "tags": [
+          "Service"
+        ],
+        "description": "This API provides configuration details specific to given region/location at Resource group level.",
+        "operationId": "Service_RegionConfigurationByResourceGroup",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/locationParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "regionConfigurationRequest",
+            "in": "body",
+            "description": "Request body to get the configuration for the region at resource group level.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RegionConfigurationRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Region configuration response.",
+            "schema": {
+              "$ref": "#/definitions/RegionConfigurationResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing reason for operation failure.",
+            "schema": {
+              "$ref": "#/definitions/ApiError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "RegionConfigurationByResourceGroup": {
+            "$ref": "./examples/RegionConfigurationByResourceGroup.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "AccountCredentialDetails": {
+      "description": "Credential details of the account.",
+      "type": "object",
+      "properties": {
+        "accountName": {
+          "description": "Name of the account.",
+          "type": "string",
+          "readOnly": true
+        },
+        "dataAccountType": {
+          "description": "Type of the account.",
+          "enum": [
+            "StorageAccount",
+            "ManagedDisk"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "DataAccountType",
+            "modelAsExtensible": true,
+            "values": [
+              {
+                "value": "StorageAccount",
+                "description": "Storage Accounts ."
+              },
+              {
+                "value": "ManagedDisk",
+                "description": "Azure Managed disk storage."
+              }
+            ]
+          }
+        },
+        "accountConnectionString": {
+          "description": "Connection string of the account endpoint to use the account as a storage endpoint on the device.",
+          "type": "string",
+          "readOnly": true
+        },
+        "shareCredentialDetails": {
+          "description": "Per share level unencrypted access credentials.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ShareCredentialDetails"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "AdditionalErrorInfo": {
+      "type": "object",
+      "description": "Additional error info.",
+      "properties": {
+        "type": {
+          "description": "Additional error type.",
+          "type": "string"
+        },
+        "info": {
+          "description": "Additional error info.",
+          "type": "object"
+        }
+      }
+    },
+    "AddressValidationOutput": {
+      "description": "Output of the address validation api.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AddressValidationProperties",
+          "description": "The address validation properties.",
+          "readOnly": true,
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "AddressValidationProperties": {
+      "description": "The address validation output.",
+      "required": [
+        "validationType"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ValidationInputResponse"
+        }
+      ],
+      "properties": {
+        "validationStatus": {
+          "description": "The address validation status.",
+          "enum": [
+            "Valid",
+            "Invalid",
+            "Ambiguous"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "AddressValidationStatus",
+            "modelAsExtensible": true,
+            "values": [
+              {
+                "value": "Valid",
+                "description": "Address provided is valid."
+              },
+              {
+                "value": "Invalid",
+                "description": "Address provided is invalid or not supported."
+              },
+              {
+                "value": "Ambiguous",
+                "description": "Address provided is ambiguous, please choose one of the alternate addresses returned."
+              }
+            ]
+          }
+        },
+        "alternateAddresses": {
+          "description": "List of alternate addresses.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ShippingAddress"
+          },
+          "readOnly": true
+        }
+      },
+      "x-ms-discriminator-value": "ValidateAddress"
+    },
+    "ApiError": {
+      "required": [
+        "error"
+      ],
+      "type": "object",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/ErrorDetail"
+        }
+      }
+    },
+    "ApplianceNetworkConfiguration": {
+      "description": "The Network Adapter configuration of a DataBox.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Name of the network.",
+          "type": "string",
+          "readOnly": true
+        },
+        "macAddress": {
+          "description": "Mac Address.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ArmBaseObject": {
+      "description": "Base class for all objects under resource.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Name of the object.",
+          "type": "string",
+          "readOnly": true
+        },
+        "id": {
+          "description": "Id of the object.",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "Type of the object.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "AvailableSkuRequest": {
+      "description": "The filters for showing the available skus.",
+      "required": [
+        "transferType",
+        "country",
+        "location"
+      ],
+      "type": "object",
+      "properties": {
+        "transferType": {
+          "description": "Type of the transfer.",
+          "enum": [
+            "ImportToAzure",
+            "ExportFromAzure"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "TransferType",
+            "modelAsExtensible": true,
+            "values": [
+              {
+                "value": "ImportToAzure",
+                "description": "Import data to azure."
+              },
+              {
+                "value": "ExportFromAzure",
+                "description": "Export data from azure."
+              }
+            ]
+          }
+        },
+        "country": {
+          "description": "ISO country code. Country for hardware shipment. For codes check: https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements",
+          "type": "string"
+        },
+        "location": {
+          "description": "Location for data transfer. For locations check: https://management.azure.com/subscriptions/SUBSCRIPTIONID/locations?api-version=2018-01-01",
+          "type": "string"
+        },
+        "skuNames": {
+          "description": "Sku Names to filter for available skus",
+          "type": "array",
+          "items": {
+            "enum": [
+              "DataBox",
+              "DataBoxDisk",
+              "DataBoxHeavy"
+            ],
+            "type": "string",
+            "x-ms-enum": {
+              "name": "SkuName",
+              "modelAsExtensible": true,
+              "values": [
+                {
+                  "value": "DataBox",
+                  "description": "Data Box."
+                },
+                {
+                  "value": "DataBoxDisk",
+                  "description": "Data Box Disk."
+                },
+                {
+                  "value": "DataBoxHeavy",
+                  "description": "Data Box Heavy."
+                }
+              ]
+            }
+          }
+        }
+      }
+    },
+    "AvailableSkusResult": {
+      "description": "The available skus operation response.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "List of available skus.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SkuInformation"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "Link for the next set of skus.",
+          "type": "string"
+        }
+      }
+    },
+    "AzureFileFilterDetails": {
+      "description": "Filter details to transfer Azure files",
+      "type": "object",
+      "properties": {
+        "filePrefixList": {
+          "description": "Prefix list of the Azure files to be transferred.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "filePathList": {
+          "description": "List of full path of the files to be transferred.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "fileShareList": {
+          "description": "List of file shares to be transferred.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "BlobFilterDetails": {
+      "description": "Filter details to transfer Azure Blobs",
+      "type": "object",
+      "properties": {
+        "blobPrefixList": {
+          "description": "Prefix list of the Azure blobs to be transferred.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "blobPathList": {
+          "description": "List of full path of the blobs to be transferred.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "containerList": {
+          "description": "List of blob containers to be transferred.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "CancellationReason": {
+      "description": "Reason for cancellation.",
+      "required": [
+        "reason"
+      ],
+      "type": "object",
+      "properties": {
+        "reason": {
+          "description": "Reason for cancellation.",
+          "type": "string"
+        }
+      }
+    },
+    "CloudError": {
+      "description": "Cloud error.",
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "Cloud error code.",
+          "type": "string"
+        },
+        "message": {
+          "description": "Cloud error message.",
+          "type": "string"
+        },
+        "target": {
+          "description": "Cloud error target.",
+          "type": "string"
+        },
+        "details": {
+          "description": "Cloud error details.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CloudError"
+          },
+          "readOnly": true
+        },
+        "additionalInfo": {
+          "description": "Cloud error additional info.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AdditionalErrorInfo"
+          },
+          "readOnly": true
+        }
+      },
+      "x-ms-external": true
+    },
+    "ContactDetails": {
+      "description": "Contact Details.",
+      "required": [
+        "contactName",
+        "phone",
+        "emailList"
+      ],
+      "type": "object",
+      "properties": {
+        "contactName": {
+          "description": "Contact name of the person.",
+          "type": "string"
+        },
+        "phone": {
+          "description": "Phone number of the contact person.",
+          "type": "string"
+        },
+        "phoneExtension": {
+          "description": "Phone extension number of the contact person.",
+          "type": "string"
+        },
+        "mobile": {
+          "description": "Mobile number of the contact person.",
+          "type": "string"
+        },
+        "emailList": {
+          "description": "List of Email-ids to be notified about job progress.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "notificationPreference": {
+          "description": "Notification preference for a job stage.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NotificationPreference"
+          }
+        }
+      }
+    },
+    "CopyLogDetails": {
+      "description": "Details for log generated during copy.",
+      "required": [
+        "copyLogDetailsType"
+      ],
+      "type": "object",
+      "properties": {
+        "copyLogDetailsType": {
+          "description": "Indicates the type of job details.",
+          "enum": [
+            "DataBox",
+            "DataBoxDisk",
+            "DataBoxHeavy"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ClassDiscriminator",
+            "modelAsExtensible": false,
+            "values": [
+              {
+                "value": "DataBox",
+                "description": "Data Box orders."
+              },
+              {
+                "value": "DataBoxDisk",
+                "description": "Data Box Disk orders."
+              },
+              {
+                "value": "DataBoxHeavy",
+                "description": "Data Box Heavy orders."
+              }
+            ]
+          }
+        }
+      },
+      "discriminator": "copyLogDetailsType"
+    },
+    "CopyProgress": {
+      "description": "Copy progress.",
+      "type": "object",
+      "properties": {
+        "storageAccountName": {
+          "description": "Name of the storage account. This will be empty for data account types other than storage account.",
+          "type": "string",
+          "readOnly": true
+        },
+        "transferType": {
+          "description": "Transfer type of data",
+          "enum": [
+            "ImportToAzure",
+            "ExportFromAzure"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "TransferType",
+            "modelAsExtensible": true,
+            "values": [
+              {
+                "value": "ImportToAzure",
+                "description": "Import data to azure."
+              },
+              {
+                "value": "ExportFromAzure",
+                "description": "Export data from azure."
+              }
+            ]
+          }
+        },
+        "dataAccountType": {
+          "description": "Data Account Type.",
+          "enum": [
+            "StorageAccount",
+            "ManagedDisk"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "DataAccountType",
+            "modelAsExtensible": true,
+            "values": [
+              {
+                "value": "StorageAccount",
+                "description": "Storage Accounts ."
+              },
+              {
+                "value": "ManagedDisk",
+                "description": "Azure Managed disk storage."
+              }
+            ]
+          }
+        },
+        "accountId": {
+          "description": "Id of the account where the data needs to be uploaded.",
+          "type": "string",
+          "readOnly": true
+        },
+        "bytesProcessed": {
+          "format": "int64",
+          "description": "To indicate bytes transferred.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "totalBytesToProcess": {
+          "format": "int64",
+          "description": "Total amount of data to be processed by the job.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "filesProcessed": {
+          "format": "int64",
+          "description": "Number of files processed",
+          "type": "integer",
+          "readOnly": true
+        },
+        "totalFilesToProcess": {
+          "format": "int64",
+          "description": "Total files to process",
+          "type": "integer",
+          "readOnly": true
+        },
+        "invalidFilesProcessed": {
+          "format": "int64",
+          "description": "Number of files not adhering to azure naming conventions which were processed by automatic renaming",
+          "type": "integer",
+          "readOnly": true
+        },
+        "invalidFileBytesUploaded": {
+          "format": "int64",
+          "description": "Total amount of data not adhering to azure naming conventions which were processed by automatic renaming",
+          "type": "integer",
+          "readOnly": true
+        },
+        "renamedContainerCount": {
+          "format": "int64",
+          "description": "Number of folders not adhering to azure naming conventions which were processed by automatic renaming",
+          "type": "integer",
+          "readOnly": true
+        },
+        "filesErroredOut": {
+          "format": "int64",
+          "description": "Number of files which could not be copied",
+          "type": "integer",
+          "readOnly": true
+        },
+        "directoriesErroredOut": {
+          "format": "int64",
+          "description": "To indicate directories errored out in the job.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "invalidDirectoriesProcessed": {
+          "format": "int64",
+          "description": "To indicate directories renamed",
+          "type": "integer",
+          "readOnly": true
+        },
+        "isEnumerationInProgress": {
+          "description": "To indicate if enumeration of data is in progress. \r\nUntil this is true, the TotalBytesToProcess may not be valid.",
+          "type": "boolean",
+          "readOnly": true
+        }
+      }
+    },
+    "CreateJobValidations": {
+      "description": "It does all pre-job creation validations.",
+      "required": [
+        "validationCategory",
+        "individualRequestDetails"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ValidationRequest"
+        }
+      ],
+      "properties": {},
+      "x-ms-discriminator-value": "JobCreationValidation"
+    },
+    "CreateOrderLimitForSubscriptionValidationRequest": {
+      "description": "Request to validate create order limit for current subscription.",
+      "required": [
+        "deviceType",
+        "validationType"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ValidationInputRequest"
+        }
+      ],
+      "properties": {
+        "deviceType": {
+          "description": "Device type to be used for the job.",
+          "enum": [
+            "DataBox",
+            "DataBoxDisk",
+            "DataBoxHeavy"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "SkuName",
+            "modelAsExtensible": true,
+            "values": [
+              {
+                "value": "DataBox",
+                "description": "Data Box."
+              },
+              {
+                "value": "DataBoxDisk",
+                "description": "Data Box Disk."
+              },
+              {
+                "value": "DataBoxHeavy",
+                "description": "Data Box Heavy."
+              }
+            ]
+          }
+        }
+      },
+      "x-ms-discriminator-value": "ValidateCreateOrderLimit"
+    },
+    "CreateOrderLimitForSubscriptionValidationResponseProperties": {
+      "description": "Properties of create order limit for subscription validation response.",
+      "required": [
+        "validationType"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ValidationInputResponse"
+        }
+      ],
+      "properties": {
+        "status": {
+          "description": "Create order limit validation status.",
+          "enum": [
+            "Valid",
+            "Invalid",
+            "Skipped"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "ValidationStatus",
+            "modelAsExtensible": true,
+            "values": [
+              {
+                "value": "Valid",
+                "description": "Validation is successful"
+              },
+              {
+                "value": "Invalid",
+                "description": "Validation is not successful"
+              },
+              {
+                "value": "Skipped",
+                "description": "Validation is skipped"
+              }
+            ]
+          }
+        }
+      },
+      "x-ms-discriminator-value": "ValidateCreateOrderLimit"
+    },
+    "DataAccountDetails": {
+      "description": "Account details of the data to be transferred",
+      "required": [
+        "dataAccountType"
+      ],
+      "type": "object",
+      "properties": {
+        "dataAccountType": {
+          "description": "Account Type of the data to be transferred.",
+          "enum": [
+            "StorageAccount",
+            "ManagedDisk"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "DataAccountType",
+            "modelAsExtensible": true,
+            "values": [
+              {
+                "value": "StorageAccount",
+                "description": "Storage Accounts ."
+              },
+              {
+                "value": "ManagedDisk",
+                "description": "Azure Managed disk storage."
+              }
+            ]
+          }
+        },
+        "sharePassword": {
+          "description": "Password for all the shares to be created on the device. Should not be passed for TransferType:ExportFromAzure jobs. If this is not passed, the service will generate password itself. This will not be returned in Get Call. Password Requirements :  Password must be minimum of 12 and maximum of 64 characters. Password must have at least one uppercase alphabet, one number and one special character. Password cannot have the following characters : IilLoO0 Password can have only alphabets, numbers and these characters : @#\\-$%^!+=;:_()]+",
+          "type": "string",
+          "x-ms-secret": true,
+          "x-ms-mutability": [
+            "create"
+          ]
+        }
+      },
+      "discriminator": "dataAccountType"
+    },
+    "DataBoxAccountCopyLogDetails": {
+      "description": "Copy log details for a storage account of a DataBox job",
+      "required": [
+        "copyLogDetailsType"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopyLogDetails"
+        }
+      ],
+      "properties": {
+        "accountName": {
+          "description": "Account name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "copyLogLink": {
+          "description": "Link for copy logs.",
+          "type": "string",
+          "readOnly": true
+        },
+        "copyVerboseLogLink": {
+          "description": "Link for copy verbose logs. This will be set only when LogCollectionLevel is set to Verbose.",
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "x-ms-discriminator-value": "DataBox"
+    },
+    "DataBoxDiskCopyLogDetails": {
+      "description": "Copy Log Details for a disk",
+      "required": [
+        "copyLogDetailsType"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopyLogDetails"
+        }
+      ],
+      "properties": {
+        "diskSerialNumber": {
+          "description": "Disk Serial Number.",
+          "type": "string",
+          "readOnly": true
+        },
+        "errorLogLink": {
+          "description": "Link for copy error logs.",
+          "type": "string",
+          "readOnly": true
+        },
+        "verboseLogLink": {
+          "description": "Link for copy verbose logs.",
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "x-ms-discriminator-value": "DataBoxDisk"
+    },
+    "DataBoxDiskCopyProgress": {
+      "description": "DataBox Disk Copy Progress",
+      "type": "object",
+      "properties": {
+        "serialNumber": {
+          "description": "The serial number of the disk",
+          "type": "string",
+          "readOnly": true
+        },
+        "bytesCopied": {
+          "format": "int64",
+          "description": "Bytes copied during the copy of disk.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "percentComplete": {
+          "format": "int32",
+          "description": "Indicates the percentage completed for the copy of the disk.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "status": {
+          "description": "The Status of the copy",
+          "enum": [
+            "NotStarted",
+            "InProgress",
+            "Completed",
+            "CompletedWithErrors",
+            "Failed",
+            "NotReturned",
+            "HardwareError",
+            "DeviceFormatted",
+            "DeviceMetadataModified",
+            "StorageAccountNotAccessible",
+            "UnsupportedData"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "CopyStatus",
+            "modelAsExtensible": true,
+            "values": [
+              {
+                "value": "NotStarted",
+                "description": "Data copy hasn't started yet."
+              },
+              {
+                "value": "InProgress",
+                "description": "Data copy is in progress."
+              },
+              {
+                "value": "Completed",
+                "description": "Data copy completed."
+              },
+              {
+                "value": "CompletedWithErrors",
+                "description": "Data copy completed with errors."
+              },
+              {
+                "value": "Failed",
+                "description": "Data copy failed. No data was copied."
+              },
+              {
+                "value": "NotReturned",
+                "description": "No copy triggered as device was not returned."
+              },
+              {
+                "value": "HardwareError",
+                "description": "The Device has hit hardware issues."
+              },
+              {
+                "value": "DeviceFormatted",
+                "description": "Data copy failed. The Device was formatted by user."
+              },
+              {
+                "value": "DeviceMetadataModified",
+                "description": "Data copy failed. Device metadata was modified by user."
+              },
+              {
+                "value": "StorageAccountNotAccessible",
+                "description": "Data copy failed. Storage Account was not accessible during copy."
+              },
+              {
+                "value": "UnsupportedData",
+                "description": "Data copy failed. The Device data content is not supported."
+              }
+            ]
+          }
+        }
+      }
+    },
+    "DataBoxDiskJobDetails": {
+      "description": "DataBox Disk Job Details.",
+      "required": [
+        "contactDetails",
+        "jobDetailsType"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/JobDetails"
+        }
+      ],
+      "properties": {
+        "preferredDisks": {
+          "description": "User preference on what size disks are needed for the job. The map is from the disk size in TB to the count. Eg. {2,5} means 5 disks of 2 TB size. Key is string but will be checked against an int.",
+          "type": "object",
+          "additionalProperties": {
+            "format": "int32",
+            "type": "integer"
+          }
+        },
+        "copyProgress": {
+          "description": "Copy progress per disk.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DataBoxDiskCopyProgress"
+          },
+          "readOnly": true
+        },
+        "disksAndSizeDetails": {
+          "description": "Contains the map of disk serial number to the disk size being used for the job. Is returned only after the disks are shipped to the customer.",
+          "type": "object",
+          "additionalProperties": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "readOnly": true
+        },
+        "passkey": {
+          "description": "User entered passkey for DataBox Disk job.",
+          "type": "string"
+        }
+      },
+      "x-ms-discriminator-value": "DataBoxDisk"
+    },
+    "DataBoxDiskJobSecrets": {
+      "description": "The secrets related to disk job.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/JobSecrets"
+        }
+      ],
+      "properties": {
+        "diskSecrets": {
+          "description": "Contains the list of secrets object for that device.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DiskSecret"
+          },
+          "readOnly": true
+        },
+        "passKey": {
+          "description": "PassKey for the disk Job.",
+          "type": "string",
+          "readOnly": true
+        },
+        "isPasskeyUserDefined": {
+          "description": "Whether passkey was provided by user.",
+          "type": "boolean",
+          "readOnly": true
+        }
+      },
+      "x-ms-discriminator-value": "DataBoxDisk"
+    },
+    "DataBoxHeavyAccountCopyLogDetails": {
+      "description": "Copy log details for a storage account for Databox heavy",
+      "required": [
+        "copyLogDetailsType"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopyLogDetails"
+        }
+      ],
+      "properties": {
+        "accountName": {
+          "description": "Account name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "copyLogLink": {
+          "description": "Link for copy logs.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "copyVerboseLogLink": {
+          "description": "Link for copy verbose logs. This will be set only when the LogCollectionLevel is set to verbose.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        }
+      },
+      "x-ms-discriminator-value": "DataBoxHeavy"
+    },
+    "DataBoxHeavyJobDetails": {
+      "description": "Databox Heavy Device Job Details",
+      "required": [
+        "contactDetails",
+        "jobDetailsType"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/JobDetails"
+        }
+      ],
+      "properties": {
+        "copyProgress": {
+          "description": "Copy progress per account.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CopyProgress"
+          },
+          "readOnly": true
+        },
+        "devicePassword": {
+          "description": "Set Device password for unlocking Databox Heavy. Should not be passed for TransferType:ExportFromAzure jobs. If this is not passed, the service will generate password itself. This will not be returned in Get Call. Password Requirements :  Password must be minimum of 12 and maximum of 64 characters. Password must have at least one uppercase alphabet, one number and one special character. Password cannot have the following characters : IilLoO0 Password can have only alphabets, numbers and these characters : @#\\-$%^!+=;:_()]+",
+          "type": "string"
+        }
+      },
+      "x-ms-discriminator-value": "DataBoxHeavy"
+    },
+    "DataBoxHeavyJobSecrets": {
+      "description": "The secrets related to a databox heavy job.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/JobSecrets"
+        }
+      ],
+      "properties": {
+        "cabinetPodSecrets": {
+          "description": "Contains the list of secret objects for a databox heavy job.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DataBoxHeavySecret"
+          },
+          "readOnly": true
+        }
+      },
+      "x-ms-discriminator-value": "DataBoxHeavy"
+    },
+    "DataBoxHeavySecret": {
+      "description": "The secrets related to a databox heavy.",
+      "type": "object",
+      "properties": {
+        "deviceSerialNumber": {
+          "description": "Serial number of the assigned device.",
+          "type": "string",
+          "readOnly": true
+        },
+        "devicePassword": {
+          "description": "Password for out of the box experience on device.",
+          "type": "string",
+          "readOnly": true
+        },
+        "networkConfigurations": {
+          "description": "Network configuration of the appliance.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApplianceNetworkConfiguration"
+          },
+          "readOnly": true
+        },
+        "encodedValidationCertPubKey": {
+          "description": "The base 64 encoded public key to authenticate with the device",
+          "type": "string",
+          "readOnly": true
+        },
+        "accountCredentialDetails": {
+          "description": "Per account level access credentials.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AccountCredentialDetails"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "DataBoxJobDetails": {
+      "description": "Databox Job Details",
+      "required": [
+        "contactDetails",
+        "jobDetailsType"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/JobDetails"
+        }
+      ],
+      "properties": {
+        "copyProgress": {
+          "description": "Copy progress per storage account.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CopyProgress"
+          },
+          "readOnly": true
+        },
+        "devicePassword": {
+          "description": "Set Device password for unlocking Databox. Should not be passed for TransferType:ExportFromAzure jobs. If this is not passed, the service will generate password itself. This will not be returned in Get Call. Password Requirements :  Password must be minimum of 12 and maximum of 64 characters. Password must have at least one uppercase alphabet, one number and one special character. Password cannot have the following characters : IilLoO0 Password can have only alphabets, numbers and these characters : @#\\-$%^!+=;:_()]+",
+          "type": "string"
+        }
+      },
+      "x-ms-discriminator-value": "DataBox"
+    },
+    "DataboxJobSecrets": {
+      "description": "The secrets related to a databox job.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/JobSecrets"
+        }
+      ],
+      "properties": {
+        "podSecrets": {
+          "description": "Contains the list of secret objects for a job.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DataBoxSecret"
+          }
+        }
+      },
+      "x-ms-discriminator-value": "DataBox"
+    },
+    "DataBoxScheduleAvailabilityRequest": {
+      "description": "Request body to get the availability for scheduling data box orders orders.",
+      "required": [
+        "storageLocation",
+        "skuName"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ScheduleAvailabilityRequest"
+        }
+      ],
+      "properties": {},
+      "x-ms-discriminator-value": "DataBox"
+    },
+    "DataBoxSecret": {
+      "description": "The secrets related to a DataBox.",
+      "type": "object",
+      "properties": {
+        "deviceSerialNumber": {
+          "description": "Serial number of the assigned device.",
+          "type": "string",
+          "readOnly": true
+        },
+        "devicePassword": {
+          "description": "Password for out of the box experience on device.",
+          "type": "string",
+          "readOnly": true
+        },
+        "networkConfigurations": {
+          "description": "Network configuration of the appliance.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApplianceNetworkConfiguration"
+          },
+          "readOnly": true
+        },
+        "encodedValidationCertPubKey": {
+          "description": "The base 64 encoded public key to authenticate with the device",
+          "type": "string",
+          "readOnly": true
+        },
+        "accountCredentialDetails": {
+          "description": "Per account level access credentials.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AccountCredentialDetails"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "DataExportDetails": {
+      "description": "Details of the data to be used for exporting data from azure.",
+      "required": [
+        "transferConfiguration",
+        "accountDetails"
+      ],
+      "type": "object",
+      "properties": {
+        "transferConfiguration": {
+          "$ref": "#/definitions/TransferConfiguration",
+          "description": "Configuration for the data transfer."
+        },
+        "logCollectionLevel": {
+          "description": "Level of the logs to be collected.",
+          "enum": [
+            "Error",
+            "Verbose"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "LogCollectionLevel",
+            "modelAsExtensible": true,
+            "values": [
+              {
+                "value": "Error",
+                "description": "Only Errors will be collected in the logs."
+              },
+              {
+                "value": "Verbose",
+                "description": "Verbose logging (includes Errors, CRC, size information and others)."
+              }
+            ]
+          }
+        },
+        "accountDetails": {
+          "$ref": "#/definitions/DataAccountDetails",
+          "description": "Account details of the data to be transferred"
+        }
+      }
+    },
+    "DataImportDetails": {
+      "description": "Details of the data to be used for importing data to azure.",
+      "required": [
+        "accountDetails"
+      ],
+      "type": "object",
+      "properties": {
+        "accountDetails": {
+          "$ref": "#/definitions/DataAccountDetails",
+          "description": "Account details of the data to be transferred"
+        }
+      }
+    },
+    "DataLocationToServiceLocationMap": {
+      "description": "Map of data location to service location",
+      "type": "object",
+      "properties": {
+        "dataLocation": {
+          "description": "Location of the data.",
+          "type": "string",
+          "readOnly": true
+        },
+        "serviceLocation": {
+          "description": "Location of the service.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "DataTransferDetailsValidationRequest": {
+      "description": "Request to validate export and import data details.",
+      "required": [
+        "deviceType",
+        "transferType",
+        "validationType"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ValidationInputRequest"
+        }
+      ],
+      "properties": {
+        "dataExportDetails": {
+          "description": "List of DataTransfer details to be used to export data from azure.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DataExportDetails"
+          }
+        },
+        "dataImportDetails": {
+          "description": "List of DataTransfer details to be used to import data to azure.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DataImportDetails"
+          }
+        },
+        "deviceType": {
+          "description": "Device type.",
+          "enum": [
+            "DataBox",
+            "DataBoxDisk",
+            "DataBoxHeavy"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "SkuName",
+            "modelAsExtensible": true,
+            "values": [
+              {
+                "value": "DataBox",
+                "description": "Data Box."
+              },
+              {
+                "value": "DataBoxDisk",
+                "description": "Data Box Disk."
+              },
+              {
+                "value": "DataBoxHeavy",
+                "description": "Data Box Heavy."
+              }
+            ]
+          }
+        },
+        "transferType": {
+          "description": "Type of the transfer.",
+          "enum": [
+            "ImportToAzure",
+            "ExportFromAzure"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "TransferType",
+            "modelAsExtensible": true,
+            "values": [
+              {
+                "value": "ImportToAzure",
+                "description": "Import data to azure."
+              },
+              {
+                "value": "ExportFromAzure",
+                "description": "Export data from azure."
+              }
+            ]
+          }
+        }
+      },
+      "x-ms-discriminator-value": "ValidateDataTransferDetails"
+    },
+    "DataTransferDetailsValidationResponseProperties": {
+      "description": "Properties of data transfer details validation response.",
+      "required": [
+        "validationType"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ValidationInputResponse"
+        }
+      ],
+      "properties": {
+        "status": {
+          "description": "Data transfer details validation status.",
+          "enum": [
+            "Valid",
+            "Invalid",
+            "Skipped"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "ValidationStatus",
+            "modelAsExtensible": true,
+            "values": [
+              {
+                "value": "Valid",
+                "description": "Validation is successful"
+              },
+              {
+                "value": "Invalid",
+                "description": "Validation is not successful"
+              },
+              {
+                "value": "Skipped",
+                "description": "Validation is skipped"
+              }
+            ]
+          }
+        }
+      },
+      "x-ms-discriminator-value": "ValidateDataTransferDetails"
+    },
+    "DcAccessSecurityCode": {
+      "description": "Dc access security code",
+      "type": "object",
+      "properties": {
+        "reverseDcAccessCode": {
+          "description": "Reverse Dc access security code.",
+          "type": "string"
+        },
+        "forwardDcAccessCode": {
+          "description": "Forward Dc access security code.",
+          "type": "string"
+        }
+      }
+    },
+    "Details": {
+      "required": [
+        "code",
+        "message"
+      ],
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
+        }
+      }
+    },
+    "DiskScheduleAvailabilityRequest": {
+      "description": "Request body to get the availability for scheduling disk orders.",
+      "required": [
+        "storageLocation",
+        "skuName",
+        "expectedDataSizeInTerabytes"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ScheduleAvailabilityRequest"
+        }
+      ],
+      "properties": {
+        "expectedDataSizeInTerabytes": {
+          "format": "int32",
+          "description": "The expected size of the data, which needs to be transferred in this job, in terabytes.",
+          "type": "integer"
+        }
+      },
+      "x-ms-discriminator-value": "DataBoxDisk"
+    },
+    "DiskSecret": {
+      "description": "Contains all the secrets of a Disk.",
+      "type": "object",
+      "properties": {
+        "diskSerialNumber": {
+          "description": "Serial number of the assigned disk.",
+          "type": "string",
+          "readOnly": true
+        },
+        "bitLockerKey": {
+          "description": "Bit Locker key of the disk which can be used to unlock the disk to copy data.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ErrorDetail": {
+      "required": [
+        "code",
+        "message"
+      ],
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Details"
+          }
+        },
+        "target": {
+          "type": "string"
+        }
+      }
+    },
+    "FilterFileDetails": {
+      "description": "Details of the filter files to be used for data transfer.",
+      "required": [
+        "filterFileType",
+        "filterFilePath"
+      ],
+      "type": "object",
+      "properties": {
+        "filterFileType": {
+          "description": "Type of the filter file.",
+          "enum": [
+            "AzureBlob",
+            "AzureFile"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "FilterFileType",
+            "modelAsExtensible": true,
+            "values": [
+              {
+                "value": "AzureBlob",
+                "description": "Filter file is of the type AzureBlob."
+              },
+              {
+                "value": "AzureFile",
+                "description": "Filter file is of the type AzureFiles."
+              }
+            ]
+          }
+        },
+        "filterFilePath": {
+          "description": "Path of the file that contains the details of all items to transfer.",
+          "type": "string"
+        }
+      }
+    },
+    "HeavyScheduleAvailabilityRequest": {
+      "description": "Request body to get the availability for scheduling heavy orders.",
+      "required": [
+        "storageLocation",
+        "skuName"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ScheduleAvailabilityRequest"
+        }
+      ],
+      "properties": {},
+      "x-ms-discriminator-value": "DataBoxHeavy"
+    },
+    "JobDeliveryInfo": {
+      "description": "Additional delivery info.",
+      "type": "object",
+      "properties": {
+        "scheduledDateTime": {
+          "format": "date-time",
+          "description": "Scheduled date time.",
+          "type": "string"
+        }
+      }
+    },
+    "JobDetails": {
+      "description": "Job details.",
+      "required": [
+        "contactDetails",
+        "jobDetailsType"
+      ],
+      "type": "object",
+      "properties": {
+        "jobStages": {
+          "description": "List of stages that run in the job.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/JobStages"
+          },
+          "readOnly": true
+        },
+        "contactDetails": {
+          "$ref": "#/definitions/ContactDetails",
+          "description": "Contact details for notification and shipping."
+        },
+        "shippingAddress": {
+          "$ref": "#/definitions/ShippingAddress",
+          "description": "Shipping address of the customer."
+        },
+        "deliveryPackage": {
+          "$ref": "#/definitions/PackageShippingDetails",
+          "description": "Delivery package shipping details.",
+          "readOnly": true
+        },
+        "returnPackage": {
+          "$ref": "#/definitions/PackageShippingDetails",
+          "description": "Return package shipping details.",
+          "readOnly": true
+        },
+        "dataImportDetails": {
+          "description": "Details of the data to be imported into azure.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DataImportDetails"
+          }
+        },
+        "dataExportDetails": {
+          "description": "Details of the data to be exported from azure.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DataExportDetails"
+          }
+        },
+        "jobDetailsType": {
+          "description": "Indicates the type of job details.",
+          "enum": [
+            "DataBox",
+            "DataBoxDisk",
+            "DataBoxHeavy"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ClassDiscriminator",
+            "modelAsExtensible": false,
+            "values": [
+              {
+                "value": "DataBox",
+                "description": "Data Box orders."
+              },
+              {
+                "value": "DataBoxDisk",
+                "description": "Data Box Disk orders."
+              },
+              {
+                "value": "DataBoxHeavy",
+                "description": "Data Box Heavy orders."
+              }
+            ]
+          }
+        },
+        "preferences": {
+          "$ref": "#/definitions/Preferences",
+          "description": "Preferences for the order."
+        },
+        "copyLogDetails": {
+          "description": "List of copy log details.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CopyLogDetails"
+          },
+          "readOnly": true
+        },
+        "reverseShipmentLabelSasKey": {
+          "description": "Shared access key to download the return shipment label",
+          "type": "string",
+          "readOnly": true
+        },
+        "chainOfCustodySasKey": {
+          "description": "Shared access key to download the chain of custody logs",
+          "type": "string",
+          "readOnly": true
+        },
+        "keyEncryptionKey": {
+          "$ref": "#/definitions/KeyEncryptionKey",
+          "description": "Details about which key encryption type is being used.",
+          "readOnly": true
+        },
+        "expectedDataSizeInTerabytes": {
+          "format": "int32",
+          "description": "The expected size of the data, which needs to be transferred in this job, in terabytes.",
+          "type": "integer"
+        }
+      },
+      "discriminator": "jobDetailsType"
+    },
+    "JobProperties": {
+      "description": "Job Properties",
+      "required": [
+        "transferType"
+      ],
+      "type": "object",
+      "properties": {
+        "transferType": {
+          "description": "Type of the data transfer.",
+          "enum": [
+            "ImportToAzure",
+            "ExportFromAzure"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "TransferType",
+            "modelAsExtensible": true,
+            "values": [
+              {
+                "value": "ImportToAzure",
+                "description": "Import data to azure."
+              },
+              {
+                "value": "ExportFromAzure",
+                "description": "Export data from azure."
+              }
+            ]
+          }
+        },
+        "isCancellable": {
+          "description": "Describes whether the job is cancellable or not.",
+          "type": "boolean",
+          "readOnly": true
+        },
+        "isDeletable": {
+          "description": "Describes whether the job is deletable or not.",
+          "type": "boolean",
+          "readOnly": true
+        },
+        "isShippingAddressEditable": {
+          "description": "Describes whether the shipping address is editable or not.",
+          "type": "boolean",
+          "readOnly": true
+        },
+        "isPrepareToShipEnabled": {
+          "description": "Is Prepare To Ship Enabled on this job",
+          "type": "boolean",
+          "readOnly": true
+        },
+        "status": {
+          "description": "Name of the stage which is in progress.",
+          "enum": [
+            "DeviceOrdered",
+            "DevicePrepared",
+            "Dispatched",
+            "Delivered",
+            "PickedUp",
+            "AtAzureDC",
+            "DataCopy",
+            "Completed",
+            "CompletedWithErrors",
+            "Cancelled",
+            "Failed_IssueReportedAtCustomer",
+            "Failed_IssueDetectedAtAzureDC",
+            "Aborted",
+            "CompletedWithWarnings",
+            "ReadyToDispatchFromAzureDC",
+            "ReadyToReceiveAtAzureDC"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "StageName",
+            "modelAsExtensible": true,
+            "values": [
+              {
+                "value": "DeviceOrdered",
+                "description": "An order has been created."
+              },
+              {
+                "value": "DevicePrepared",
+                "description": "A device has been prepared for the order."
+              },
+              {
+                "value": "Dispatched",
+                "description": "Device has been dispatched to the user of the order."
+              },
+              {
+                "value": "Delivered",
+                "description": "Device has been delivered to the user of the order."
+              },
+              {
+                "value": "PickedUp",
+                "description": "Device has been picked up from user and in transit to Azure datacenter."
+              },
+              {
+                "value": "AtAzureDC",
+                "description": "Device has been received at Azure datacenter from the user."
+              },
+              {
+                "value": "DataCopy",
+                "description": "Data copy from the device at Azure datacenter."
+              },
+              {
+                "value": "Completed",
+                "description": "Order has completed."
+              },
+              {
+                "value": "CompletedWithErrors",
+                "description": "Order has completed with errors."
+              },
+              {
+                "value": "Cancelled",
+                "description": "Order has been cancelled."
+              },
+              {
+                "value": "Failed_IssueReportedAtCustomer",
+                "description": "Order has failed due to issue reported by user."
+              },
+              {
+                "value": "Failed_IssueDetectedAtAzureDC",
+                "description": "Order has failed due to issue detected at Azure datacenter."
+              },
+              {
+                "value": "Aborted",
+                "description": "Order has been aborted."
+              },
+              {
+                "value": "CompletedWithWarnings",
+                "description": "Order has completed with warnings."
+              },
+              {
+                "value": "ReadyToDispatchFromAzureDC",
+                "description": "Device is ready to be handed to customer from Azure DC."
+              },
+              {
+                "value": "ReadyToReceiveAtAzureDC",
+                "description": "Device can be dropped off at Azure DC."
+              }
+            ]
+          }
+        },
+        "startTime": {
+          "format": "date-time",
+          "description": "Time at which the job was started in UTC ISO 8601 format.",
+          "type": "string",
+          "readOnly": true
+        },
+        "error": {
+          "$ref": "#/definitions/CloudError",
+          "description": "Top level error for the job.",
+          "readOnly": true
+        },
+        "details": {
+          "$ref": "#/definitions/JobDetails",
+          "description": "Details of a job run. This field will only be sent for expand details filter."
+        },
+        "cancellationReason": {
+          "description": "Reason for cancellation.",
+          "type": "string",
+          "readOnly": true
+        },
+        "deliveryType": {
+          "description": "Delivery type of Job.",
+          "enum": [
+            "NonScheduled",
+            "Scheduled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "JobDeliveryType",
+            "modelAsExtensible": true,
+            "values": [
+              {
+                "value": "NonScheduled",
+                "description": "Non Scheduled job."
+              },
+              {
+                "value": "Scheduled",
+                "description": "Scheduled job."
+              }
+            ]
+          }
+        },
+        "deliveryInfo": {
+          "$ref": "#/definitions/JobDeliveryInfo",
+          "description": "Delivery Info of Job."
+        },
+        "isCancellableWithoutFee": {
+          "description": "Flag to indicate cancellation of scheduled job.",
+          "type": "boolean",
+          "readOnly": true
+        }
+      }
+    },
+    "JobResource": {
+      "description": "Job Resource.",
+      "required": [
+        "properties"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/JobProperties",
+          "description": "Properties of a job.",
+          "x-ms-client-flatten": true
+        },
+        "name": {
+          "description": "Name of the object.",
+          "type": "string",
+          "readOnly": true
+        },
+        "id": {
+          "description": "Id of the object.",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "Type of the object.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "JobResourceList": {
+      "description": "Job Resource Collection",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "List of job resources.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/JobResource"
+          }
+        },
+        "nextLink": {
+          "description": "Link for the next set of job resources.",
+          "type": "string"
+        }
+      }
+    },
+    "JobResourceUpdateParameter": {
+      "description": "The JobResourceUpdateParameter.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/UpdateJobProperties",
+          "description": "Properties of a job to be updated.",
+          "x-ms-client-flatten": true
+        },
+        "tags": {
+          "description": "The list of key value pairs that describe the resource. These tags can be used in viewing and grouping this resource (across resource groups).",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "identity": {
+          "$ref": "#/definitions/ResourceIdentity",
+          "description": "Msi identity of the resource"
+        }
+      }
+    },
+    "JobSecrets": {
+      "description": "The base class for the secrets",
+      "required": [
+        "jobSecretsType"
+      ],
+      "type": "object",
+      "properties": {
+        "jobSecretsType": {
+          "description": "Used to indicate what type of job secrets object.",
+          "enum": [
+            "DataBox",
+            "DataBoxDisk",
+            "DataBoxHeavy"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ClassDiscriminator",
+            "modelAsExtensible": false,
+            "values": [
+              {
+                "value": "DataBox",
+                "description": "Data Box orders."
+              },
+              {
+                "value": "DataBoxDisk",
+                "description": "Data Box Disk orders."
+              },
+              {
+                "value": "DataBoxHeavy",
+                "description": "Data Box Heavy orders."
+              }
+            ]
+          }
+        },
+        "dcAccessSecurityCode": {
+          "$ref": "#/definitions/DcAccessSecurityCode",
+          "description": "Dc Access Security Code for Customer Managed Shipping",
+          "readOnly": true
+        },
+        "error": {
+          "$ref": "#/definitions/CloudError",
+          "description": "Error while fetching the secrets.",
+          "readOnly": true
+        }
+      },
+      "discriminator": "jobSecretsType"
+    },
+    "JobStages": {
+      "description": "Job stages.",
+      "type": "object",
+      "properties": {
+        "stageName": {
+          "description": "Name of the job stage.",
+          "enum": [
+            "DeviceOrdered",
+            "DevicePrepared",
+            "Dispatched",
+            "Delivered",
+            "PickedUp",
+            "AtAzureDC",
+            "DataCopy",
+            "Completed",
+            "CompletedWithErrors",
+            "Cancelled",
+            "Failed_IssueReportedAtCustomer",
+            "Failed_IssueDetectedAtAzureDC",
+            "Aborted",
+            "CompletedWithWarnings",
+            "ReadyToDispatchFromAzureDC",
+            "ReadyToReceiveAtAzureDC"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "StageName",
+            "modelAsExtensible": true,
+            "values": [
+              {
+                "value": "DeviceOrdered",
+                "description": "An order has been created."
+              },
+              {
+                "value": "DevicePrepared",
+                "description": "A device has been prepared for the order."
+              },
+              {
+                "value": "Dispatched",
+                "description": "Device has been dispatched to the user of the order."
+              },
+              {
+                "value": "Delivered",
+                "description": "Device has been delivered to the user of the order."
+              },
+              {
+                "value": "PickedUp",
+                "description": "Device has been picked up from user and in transit to Azure datacenter."
+              },
+              {
+                "value": "AtAzureDC",
+                "description": "Device has been received at Azure datacenter from the user."
+              },
+              {
+                "value": "DataCopy",
+                "description": "Data copy from the device at Azure datacenter."
+              },
+              {
+                "value": "Completed",
+                "description": "Order has completed."
+              },
+              {
+                "value": "CompletedWithErrors",
+                "description": "Order has completed with errors."
+              },
+              {
+                "value": "Cancelled",
+                "description": "Order has been cancelled."
+              },
+              {
+                "value": "Failed_IssueReportedAtCustomer",
+                "description": "Order has failed due to issue reported by user."
+              },
+              {
+                "value": "Failed_IssueDetectedAtAzureDC",
+                "description": "Order has failed due to issue detected at Azure datacenter."
+              },
+              {
+                "value": "Aborted",
+                "description": "Order has been aborted."
+              },
+              {
+                "value": "CompletedWithWarnings",
+                "description": "Order has completed with warnings."
+              },
+              {
+                "value": "ReadyToDispatchFromAzureDC",
+                "description": "Device is ready to be handed to customer from Azure DC."
+              },
+              {
+                "value": "ReadyToReceiveAtAzureDC",
+                "description": "Device can be dropped off at Azure DC."
+              }
+            ]
+          }
+        },
+        "displayName": {
+          "description": "Display name of the job stage.",
+          "type": "string",
+          "readOnly": true
+        },
+        "stageStatus": {
+          "description": "Status of the job stage.",
+          "enum": [
+            "None",
+            "InProgress",
+            "Succeeded",
+            "Failed",
+            "Cancelled",
+            "Cancelling",
+            "SucceededWithErrors",
+            "WaitingForCustomerAction",
+            "SucceededWithWarnings"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "StageStatus",
+            "modelAsExtensible": true,
+            "values": [
+              {
+                "value": "None",
+                "description": "No status available yet."
+              },
+              {
+                "value": "InProgress",
+                "description": "Stage is in progress."
+              },
+              {
+                "value": "Succeeded",
+                "description": "Stage has succeeded."
+              },
+              {
+                "value": "Failed",
+                "description": "Stage has failed."
+              },
+              {
+                "value": "Cancelled",
+                "description": "Stage has been cancelled."
+              },
+              {
+                "value": "Cancelling",
+                "description": "Stage is cancelling."
+              },
+              {
+                "value": "SucceededWithErrors",
+                "description": "Stage has succeeded with errors."
+              },
+              {
+                "value": "WaitingForCustomerAction",
+                "description": "Stage is stuck until customer takes some action."
+              },
+              {
+                "value": "SucceededWithWarnings",
+                "description": "Stage has succeeded with warnings."
+              }
+            ]
+          }
+        },
+        "stageTime": {
+          "format": "date-time",
+          "description": "Time for the job stage in UTC ISO 8601 format.",
+          "type": "string",
+          "readOnly": true
+        },
+        "jobStageDetails": {
+          "description": "Job Stage Details",
+          "type": "object",
+          "readOnly": true
+        }
+      }
+    },
+    "KeyEncryptionKey": {
+      "description": "Encryption key containing details about key to encrypt different keys.",
+      "required": [
+        "kekType"
+      ],
+      "type": "object",
+      "properties": {
+        "kekType": {
+          "description": "Type of encryption key used for key encryption.",
+          "enum": [
+            "MicrosoftManaged",
+            "CustomerManaged"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "KekType",
+            "modelAsExtensible": true,
+            "values": [
+              {
+                "value": "MicrosoftManaged",
+                "description": "Key encryption key is managed by Microsoft."
+              },
+              {
+                "value": "CustomerManaged",
+                "description": "Key encryption key is managed by the Customer."
+              }
+            ]
+          }
+        },
+        "kekUrl": {
+          "description": "Key encryption key. It is required in case of Customer managed KekType.",
+          "type": "string"
+        },
+        "kekVaultResourceID": {
+          "description": "Kek vault resource id. It is required in case of Customer managed KekType.",
+          "type": "string"
+        }
+      }
+    },
+    "ManagedDiskDetails": {
+      "description": "Details of the managed disks.",
+      "required": [
+        "resourceGroupId",
+        "stagingStorageAccountId",
+        "dataAccountType"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataAccountDetails"
+        }
+      ],
+      "properties": {
+        "resourceGroupId": {
+          "description": "Resource Group Id of the compute disks.",
+          "type": "string"
+        },
+        "stagingStorageAccountId": {
+          "description": "Resource Id of the storage account that can be used to copy the vhd for staging.",
+          "type": "string"
+        }
+      },
+      "x-ms-discriminator-value": "ManagedDisk"
+    },
+    "NotificationPreference": {
+      "description": "Notification preference for a job stage.",
+      "required": [
+        "stageName",
+        "sendNotification"
+      ],
+      "type": "object",
+      "properties": {
+        "stageName": {
+          "description": "Name of the stage.",
+          "enum": [
+            "DevicePrepared",
+            "Dispatched",
+            "Delivered",
+            "PickedUp",
+            "AtAzureDC",
+            "DataCopy"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "NotificationStageName",
+            "modelAsExtensible": true,
+            "values": [
+              {
+                "value": "DevicePrepared",
+                "description": "Notification at device prepared stage."
+              },
+              {
+                "value": "Dispatched",
+                "description": "Notification at device dispatched stage."
+              },
+              {
+                "value": "Delivered",
+                "description": "Notification at device delivered stage."
+              },
+              {
+                "value": "PickedUp",
+                "description": "Notification at device picked up from user stage."
+              },
+              {
+                "value": "AtAzureDC",
+                "description": "Notification at device received at Azure datacenter stage."
+              },
+              {
+                "value": "DataCopy",
+                "description": "Notification at data copy started stage."
+              }
+            ]
+          }
+        },
+        "sendNotification": {
+          "description": "Notification is required or not.",
+          "type": "boolean"
+        }
+      }
+    },
+    "Operation": {
+      "description": "Operation entity.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Name of the operation. Format: {resourceProviderNamespace}/{resourceType}/{read|write|delete|action}",
+          "type": "string",
+          "readOnly": true
+        },
+        "display": {
+          "$ref": "#/definitions/OperationDisplay",
+          "description": "Operation display values.",
+          "readOnly": true
+        },
+        "properties": {
+          "$ref": "#/definitions/OperationProperties",
+          "description": "Operation properties.",
+          "readOnly": true,
+          "x-ms-client-flatten": true
+        },
+        "origin": {
+          "description": "Origin of the operation. Can be : user|system|user,system",
+          "type": "string",
+          "readOnly": true
+        },
+        "isDataAction": {
+          "description": "Indicates whether the operation is a data action",
+          "type": "boolean"
+        }
+      }
+    },
+    "OperationDisplay": {
+      "description": "Operation display",
+      "type": "object",
+      "properties": {
+        "provider": {
+          "description": "Provider name.",
+          "type": "string"
+        },
+        "resource": {
+          "description": "Resource name.",
+          "type": "string"
+        },
+        "operation": {
+          "description": "Localized name of the operation for display purpose.",
+          "type": "string"
+        },
+        "description": {
+          "description": "Localized description of the operation for display purpose.",
+          "type": "string"
+        }
+      }
+    },
+    "OperationList": {
+      "description": "Operation Collection.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "List of operations.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Operation"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "Link for the next set of operations.",
+          "type": "string"
+        }
+      }
+    },
+    "OperationProperties": {
+      "description": "Operation properties.",
+      "type": "object",
+      "properties": {}
+    },
+    "PackageShippingDetails": {
+      "description": "Shipping details.",
+      "type": "object",
+      "properties": {
+        "carrierName": {
+          "description": "Name of the carrier.",
+          "type": "string",
+          "readOnly": true
+        },
+        "trackingId": {
+          "description": "Tracking Id of shipment.",
+          "type": "string",
+          "readOnly": true
+        },
+        "trackingUrl": {
+          "description": "Url where shipment can be tracked.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "Preferences": {
+      "description": "Preferences related to the order",
+      "type": "object",
+      "properties": {
+        "preferredDataCenterRegion": {
+          "description": "Preferred data center region.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "transportPreferences": {
+          "$ref": "#/definitions/TransportPreferences",
+          "description": "Preferences related to the shipment logistics of the sku."
+        }
+      }
+    },
+    "PreferencesValidationRequest": {
+      "description": "Request to validate preference of transport and data center.",
+      "required": [
+        "deviceType",
+        "validationType"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ValidationInputRequest"
+        }
+      ],
+      "properties": {
+        "preference": {
+          "description": "Preference of transport and data center.",
+          "$ref": "#/definitions/Preferences"
+        },
+        "deviceType": {
+          "description": "Device type to be used for the job.",
+          "enum": [
+            "DataBox",
+            "DataBoxDisk",
+            "DataBoxHeavy"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "SkuName",
+            "modelAsExtensible": true,
+            "values": [
+              {
+                "value": "DataBox",
+                "description": "Data Box."
+              },
+              {
+                "value": "DataBoxDisk",
+                "description": "Data Box Disk."
+              },
+              {
+                "value": "DataBoxHeavy",
+                "description": "Data Box Heavy."
+              }
+            ]
+          }
+        }
+      },
+      "x-ms-discriminator-value": "ValidatePreferences"
+    },
+    "PreferencesValidationResponseProperties": {
+      "description": "Properties of data center and transport preference validation response.",
+      "required": [
+        "validationType"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ValidationInputResponse"
+        }
+      ],
+      "properties": {
+        "status": {
+          "description": "Validation status of requested data center and transport.",
+          "enum": [
+            "Valid",
+            "Invalid",
+            "Skipped"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "ValidationStatus",
+            "modelAsExtensible": true,
+            "values": [
+              {
+                "value": "Valid",
+                "description": "Validation is successful"
+              },
+              {
+                "value": "Invalid",
+                "description": "Validation is not successful"
+              },
+              {
+                "value": "Skipped",
+                "description": "Validation is skipped"
+              }
+            ]
+          }
+        }
+      },
+      "x-ms-discriminator-value": "ValidatePreferences"
+    },
+    "RegionConfigurationRequest": {
+      "description": "Request body to get the configuration for the region.",
+      "type": "object",
+      "properties": {
+        "scheduleAvailabilityRequest": {
+          "$ref": "#/definitions/ScheduleAvailabilityRequest",
+          "description": "Request body to get the availability for scheduling orders."
+        },
+        "transportAvailabilityRequest": {
+          "$ref": "#/definitions/TransportAvailabilityRequest",
+          "description": "Request body to get the transport availability for given sku."
+        }
+      }
+    },
+    "RegionConfigurationResponse": {
+      "description": "Configuration response specific to a region.",
+      "type": "object",
+      "properties": {
+        "scheduleAvailabilityResponse": {
+          "$ref": "#/definitions/ScheduleAvailabilityResponse",
+          "description": "Schedule availability for given sku in a region.",
+          "readOnly": true
+        },
+        "transportAvailabilityResponse": {
+          "$ref": "#/definitions/TransportAvailabilityResponse",
+          "description": "Transport options available for given sku in a region.",
+          "readOnly": true
+        }
+      }
+    },
+    "Resource": {
+      "description": "Model of the Resource.",
+      "required": [
+        "location",
+        "sku"
+      ],
+      "type": "object",
+      "properties": {
+        "location": {
+          "description": "The location of the resource. This will be one of the supported and registered Azure Regions (e.g. West US, East US, Southeast Asia, etc.). The region of a resource cannot be changed once it is created, but if an identical region is specified on update the request will succeed.",
+          "type": "string",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "tags": {
+          "description": "The list of key value pairs that describe the resource. These tags can be used in viewing and grouping this resource (across resource groups).",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "sku": {
+          "$ref": "#/definitions/Sku",
+          "description": "The sku type."
+        },
+        "identity": {
+          "$ref": "#/definitions/ResourceIdentity",
+          "description": "Msi identity of the resource"
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "ResourceIdentity": {
+      "description": "Msi identity details of the resource",
+      "type": "object",
+      "properties": {
+        "type": {
+          "description": "Identity type",
+          "type": "string"
+        },
+        "principalId": {
+          "description": "Service Principal Id backing the Msi",
+          "type": "string",
+          "readOnly": true
+        },
+        "tenantId": {
+          "description": "Home Tenant Id",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ScheduleAvailabilityRequest": {
+      "description": "Request body to get the availability for scheduling orders.",
+      "required": [
+        "storageLocation",
+        "skuName"
+      ],
+      "type": "object",
+      "properties": {
+        "storageLocation": {
+          "description": "Location for data transfer. For locations check: https://management.azure.com/subscriptions/SUBSCRIPTIONID/locations?api-version=2018-01-01",
+          "type": "string"
+        },
+        "skuName": {
+          "description": "Sku Name for which the order is to be scheduled.",
+          "enum": [
+            "DataBox",
+            "DataBoxDisk",
+            "DataBoxHeavy"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "SkuName",
+            "modelAsExtensible": true,
+            "values": [
+              {
+                "value": "DataBox",
+                "description": "Data Box."
+              },
+              {
+                "value": "DataBoxDisk",
+                "description": "Data Box Disk."
+              },
+              {
+                "value": "DataBoxHeavy",
+                "description": "Data Box Heavy."
+              }
+            ]
+          }
+        },
+        "country": {
+          "description": "Country in which storage location should be supported.",
+          "type": "string"
+        }
+      },
+      "discriminator": "skuName"
+    },
+    "ScheduleAvailabilityResponse": {
+      "description": "Schedule availability for given sku in a region.",
+      "type": "object",
+      "properties": {
+        "availableDates": {
+          "description": "List of dates available to schedule",
+          "type": "array",
+          "items": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "ShareCredentialDetails": {
+      "description": "Credential details of the shares in account.",
+      "type": "object",
+      "properties": {
+        "shareName": {
+          "description": "Name of the share.",
+          "type": "string",
+          "readOnly": true
+        },
+        "shareType": {
+          "description": "Type of the share.",
+          "enum": [
+            "UnknownType",
+            "HCS",
+            "BlockBlob",
+            "PageBlob",
+            "AzureFile",
+            "ManagedDisk"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "ShareDestinationFormatType",
+            "modelAsExtensible": true,
+            "values": [
+              {
+                "value": "UnknownType",
+                "description": "Unknown format."
+              },
+              {
+                "value": "HCS",
+                "description": "Storsimple data format."
+              },
+              {
+                "value": "BlockBlob",
+                "description": "Azure storage block blob format."
+              },
+              {
+                "value": "PageBlob",
+                "description": "Azure storage page blob format."
+              },
+              {
+                "value": "AzureFile",
+                "description": "Azure storage file format."
+              },
+              {
+                "value": "ManagedDisk",
+                "description": "Azure Compute Disk."
+              }
+            ]
+          }
+        },
+        "userName": {
+          "description": "User name for the share.",
+          "type": "string",
+          "readOnly": true
+        },
+        "password": {
+          "description": "Password for the share.",
+          "type": "string",
+          "readOnly": true
+        },
+        "supportedAccessProtocols": {
+          "description": "Access protocols supported on the device.",
+          "type": "array",
+          "items": {
+            "enum": [
+              "SMB",
+              "NFS"
+            ],
+            "type": "string",
+            "x-ms-enum": {
+              "name": "AccessProtocol",
+              "modelAsExtensible": true,
+              "values": [
+                {
+                  "value": "SMB",
+                  "description": "Server Message Block protocol(SMB)."
+                },
+                {
+                  "value": "NFS",
+                  "description": "Network File System protocol(NFS)."
+                }
+              ]
+            }
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "ShipmentPickUpRequest": {
+      "description": "Shipment pick up request details.",
+      "required": [
+        "startTime",
+        "endTime",
+        "shipmentLocation"
+      ],
+      "type": "object",
+      "properties": {
+        "startTime": {
+          "format": "date-time",
+          "description": "Minimum date after which the pick up should commence, this must be in local time of pick up area.",
+          "type": "string"
+        },
+        "endTime": {
+          "format": "date-time",
+          "description": "Maximum date before which the pick up should commence, this must be in local time of pick up area.",
+          "type": "string"
+        },
+        "shipmentLocation": {
+          "description": "Shipment Location in the pickup place. Eg.front desk",
+          "type": "string"
+        }
+      }
+    },
+    "ShipmentPickUpResponse": {
+      "description": "Shipment pick up response.",
+      "type": "object",
+      "properties": {
+        "confirmationNumber": {
+          "description": "Confirmation number for the pick up request.",
+          "type": "string",
+          "readOnly": true
+        },
+        "readyByTime": {
+          "format": "date-time",
+          "description": "Time by which shipment should be ready for pick up, this is in local time of pick up area.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ShippingAddress": {
+      "description": "Shipping address where customer wishes to receive the device.",
+      "required": [
+        "streetAddress1",
+        "country",
+        "postalCode"
+      ],
+      "type": "object",
+      "properties": {
+        "streetAddress1": {
+          "description": "Street Address line 1.",
+          "type": "string"
+        },
+        "streetAddress2": {
+          "description": "Street Address line 2.",
+          "type": "string"
+        },
+        "streetAddress3": {
+          "description": "Street Address line 3.",
+          "type": "string"
+        },
+        "city": {
+          "description": "Name of the City.",
+          "type": "string"
+        },
+        "stateOrProvince": {
+          "description": "Name of the State or Province.",
+          "type": "string"
+        },
+        "country": {
+          "description": "Name of the Country.",
+          "type": "string"
+        },
+        "postalCode": {
+          "description": "Postal code.",
+          "type": "string"
+        },
+        "zipExtendedCode": {
+          "description": "Extended Zip Code.",
+          "type": "string"
+        },
+        "companyName": {
+          "description": "Name of the company.",
+          "type": "string"
+        },
+        "addressType": {
+          "description": "Type of address.",
+          "enum": [
+            "None",
+            "Residential",
+            "Commercial"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "AddressType",
+            "modelAsExtensible": true,
+            "values": [
+              {
+                "value": "None",
+                "description": "Address type not known."
+              },
+              {
+                "value": "Residential",
+                "description": "Residential Address."
+              },
+              {
+                "value": "Commercial",
+                "description": "Commercial Address."
+              }
+            ]
+          }
+        }
+      }
+    },
+    "Sku": {
+      "description": "The Sku.",
+      "required": [
+        "name"
+      ],
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "The sku name.",
+          "enum": [
+            "DataBox",
+            "DataBoxDisk",
+            "DataBoxHeavy"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "SkuName",
+            "modelAsExtensible": true,
+            "values": [
+              {
+                "value": "DataBox",
+                "description": "Data Box."
+              },
+              {
+                "value": "DataBoxDisk",
+                "description": "Data Box Disk."
+              },
+              {
+                "value": "DataBoxHeavy",
+                "description": "Data Box Heavy."
+              }
+            ]
+          }
+        },
+        "displayName": {
+          "description": "The display name of the sku.",
+          "type": "string"
+        },
+        "family": {
+          "description": "The sku family.",
+          "type": "string"
+        }
+      }
+    },
+    "SkuAvailabilityValidationRequest": {
+      "description": "Request to validate sku availability.",
+      "required": [
+        "deviceType",
+        "transferType",
+        "country",
+        "location",
+        "validationType"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ValidationInputRequest"
+        }
+      ],
+      "properties": {
+        "deviceType": {
+          "description": "Device type to be used for the job.",
+          "enum": [
+            "DataBox",
+            "DataBoxDisk",
+            "DataBoxHeavy"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "SkuName",
+            "modelAsExtensible": true,
+            "values": [
+              {
+                "value": "DataBox",
+                "description": "Data Box."
+              },
+              {
+                "value": "DataBoxDisk",
+                "description": "Data Box Disk."
+              },
+              {
+                "value": "DataBoxHeavy",
+                "description": "Data Box Heavy."
+              }
+            ]
+          }
+        },
+        "transferType": {
+          "description": "Type of the transfer.",
+          "enum": [
+            "ImportToAzure",
+            "ExportFromAzure"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "TransferType",
+            "modelAsExtensible": true,
+            "values": [
+              {
+                "value": "ImportToAzure",
+                "description": "Import data to azure."
+              },
+              {
+                "value": "ExportFromAzure",
+                "description": "Export data from azure."
+              }
+            ]
+          }
+        },
+        "country": {
+          "description": "ISO country code. Country for hardware shipment. For codes check: https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements",
+          "type": "string"
+        },
+        "location": {
+          "description": "Location for data transfer. For locations check: https://management.azure.com/subscriptions/SUBSCRIPTIONID/locations?api-version=2018-01-01",
+          "type": "string"
+        }
+      },
+      "x-ms-discriminator-value": "ValidateSkuAvailability"
+    },
+    "SkuAvailabilityValidationResponseProperties": {
+      "description": "Properties of sku availability validation response.",
+      "required": [
+        "validationType"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ValidationInputResponse"
+        }
+      ],
+      "properties": {
+        "status": {
+          "description": "Sku availability validation status.",
+          "enum": [
+            "Valid",
+            "Invalid",
+            "Skipped"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "ValidationStatus",
+            "modelAsExtensible": true,
+            "values": [
+              {
+                "value": "Valid",
+                "description": "Validation is successful"
+              },
+              {
+                "value": "Invalid",
+                "description": "Validation is not successful"
+              },
+              {
+                "value": "Skipped",
+                "description": "Validation is skipped"
+              }
+            ]
+          }
+        }
+      },
+      "x-ms-discriminator-value": "ValidateSkuAvailability"
+    },
+    "SkuCapacity": {
+      "description": "Capacity of the sku.",
+      "type": "object",
+      "properties": {
+        "usable": {
+          "description": "Usable capacity in TB.",
+          "type": "string",
+          "readOnly": true
+        },
+        "maximum": {
+          "description": "Maximum capacity in TB.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "SkuCost": {
+      "description": "Describes metadata for retrieving price info.",
+      "type": "object",
+      "properties": {
+        "meterId": {
+          "description": "Meter id of the Sku.",
+          "type": "string",
+          "readOnly": true
+        },
+        "meterType": {
+          "description": "The type of the meter.",
+          "type": "string",
+          "readOnly": true
+        },
+        "multiplier": {
+          "format": "double",
+          "description": "Multiplier specifies the region specific value to be multiplied with 1$ guid. Eg: Our new regions will be using 1$ shipping guid with appropriate multiplier specific to region.",
+          "type": "number",
+          "readOnly": true
+        }
+      }
+    },
+    "SkuInformation": {
+      "description": "Information of the sku.",
+      "type": "object",
+      "properties": {
+        "sku": {
+          "$ref": "#/definitions/Sku",
+          "description": "The Sku.",
+          "readOnly": true
+        },
+        "enabled": {
+          "description": "The sku is enabled or not.",
+          "type": "boolean",
+          "readOnly": true
+        },
+        "properties": {
+          "$ref": "#/definitions/SkuProperties",
+          "description": "Properties of the sku.",
+          "readOnly": true,
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "SkuProperties": {
+      "description": "Properties of the sku.",
+      "type": "object",
+      "properties": {
+        "dataLocationToServiceLocationMap": {
+          "description": "The map of data location to service location.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DataLocationToServiceLocationMap"
+          },
+          "readOnly": true
+        },
+        "capacity": {
+          "$ref": "#/definitions/SkuCapacity",
+          "description": "Capacity of the Sku.",
+          "readOnly": true
+        },
+        "costs": {
+          "description": "Cost of the Sku.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SkuCost"
+          },
+          "readOnly": true
+        },
+        "apiVersions": {
+          "description": "Api versions that support this Sku.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "disabledReason": {
+          "description": "Reason why the Sku is disabled.",
+          "enum": [
+            "None",
+            "Country",
+            "Region",
+            "Feature",
+            "OfferType",
+            "NoSubscriptionInfo"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "SkuDisabledReason",
+            "modelAsExtensible": true,
+            "values": [
+              {
+                "value": "None",
+                "description": "SKU is not disabled."
+              },
+              {
+                "value": "Country",
+                "description": "SKU is not available in the requested country."
+              },
+              {
+                "value": "Region",
+                "description": "SKU is not available to push data to the requested Azure region."
+              },
+              {
+                "value": "Feature",
+                "description": "Required features are not enabled for the SKU."
+              },
+              {
+                "value": "OfferType",
+                "description": "Subscription does not have required offer types for the SKU."
+              },
+              {
+                "value": "NoSubscriptionInfo",
+                "description": "Subscription has not registered to Microsoft.DataBox and Service does not have the subscription notification."
+              }
+            ]
+          }
+        },
+        "disabledReasonMessage": {
+          "description": "Message for why the Sku is disabled.",
+          "type": "string",
+          "readOnly": true
+        },
+        "requiredFeature": {
+          "description": "Required feature to access the sku.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "StorageAccountDetails": {
+      "description": "Details for the storage account.",
+      "required": [
+        "storageAccountId",
+        "dataAccountType"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataAccountDetails"
+        }
+      ],
+      "properties": {
+        "storageAccountId": {
+          "description": "Storage Account Resource Id.",
+          "type": "string"
+        }
+      },
+      "x-ms-discriminator-value": "StorageAccount"
+    },
+    "SubscriptionIsAllowedToCreateJobValidationRequest": {
+      "description": "Request to validate subscription permission to create jobs.",
+      "required": [
+        "validationType"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ValidationInputRequest"
+        }
+      ],
+      "properties": {},
+      "x-ms-discriminator-value": "ValidateSubscriptionIsAllowedToCreateJob"
+    },
+    "SubscriptionIsAllowedToCreateJobValidationResponseProperties": {
+      "description": "Properties of subscription permission to create job validation response.",
+      "required": [
+        "validationType"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ValidationInputResponse"
+        }
+      ],
+      "properties": {
+        "status": {
+          "description": "Validation status of subscription permission to create job.",
+          "enum": [
+            "Valid",
+            "Invalid",
+            "Skipped"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "ValidationStatus",
+            "modelAsExtensible": true,
+            "values": [
+              {
+                "value": "Valid",
+                "description": "Validation is successful"
+              },
+              {
+                "value": "Invalid",
+                "description": "Validation is not successful"
+              },
+              {
+                "value": "Skipped",
+                "description": "Validation is skipped"
+              }
+            ]
+          }
+        }
+      },
+      "x-ms-discriminator-value": "ValidateSubscriptionIsAllowedToCreateJob"
+    },
+    "TransferAllDetails": {
+      "description": "Details to transfer all data.",
+      "required": [
+        "dataAccountType"
+      ],
+      "type": "object",
+      "properties": {
+        "dataAccountType": {
+          "description": "Type of the account of data",
+          "enum": [
+            "StorageAccount",
+            "ManagedDisk"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "DataAccountType",
+            "modelAsExtensible": true,
+            "values": [
+              {
+                "value": "StorageAccount",
+                "description": "Storage Accounts ."
+              },
+              {
+                "value": "ManagedDisk",
+                "description": "Azure Managed disk storage."
+              }
+            ]
+          }
+        },
+        "transferAllBlobs": {
+          "description": "To indicate if all Azure blobs have to be transferred",
+          "type": "boolean"
+        },
+        "transferAllFiles": {
+          "description": "To indicate if all Azure Files have to be transferred",
+          "type": "boolean"
+        }
+      }
+    },
+    "TransferConfiguration": {
+      "description": "Configuration for defining the transfer of data.",
+      "required": [
+        "transferConfigurationType"
+      ],
+      "type": "object",
+      "properties": {
+        "transferConfigurationType": {
+          "description": "Type of the configuration for transfer.",
+          "enum": [
+            "TransferAll",
+            "TransferUsingFilter"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "TransferConfigurationType",
+            "modelAsExtensible": true,
+            "values": [
+              {
+                "value": "TransferAll",
+                "description": "Transfer all the data."
+              },
+              {
+                "value": "TransferUsingFilter",
+                "description": "Transfer using filter."
+              }
+            ]
+          }
+        },
+        "transferFilterDetails": {
+          "description": "Map of filter type and the details to filter. This field is required only if the TransferConfigurationType is given as TransferUsingFilter.",
+          "type": "object",
+          "properties": {
+            "include": {
+              "description": "Details of the filtering the transfer of data.",
+              "$ref": "#/definitions/TransferFilterDetails"
+            }
+          }
+        },
+        "transferAllDetails": {
+          "description": "Map of filter type and the details to transfer all data. This field is required only if the TransferConfigurationType is given as TransferAll",
+          "type": "object",
+          "properties": {
+            "include": {
+              "description": "Details to transfer all data.",
+              "$ref": "#/definitions/TransferAllDetails"
+            }
+          }
+        }
+      }
+    },
+    "TransferFilterDetails": {
+      "description": "Details of the filtering the transfer of data.",
+      "required": [
+        "dataAccountType"
+      ],
+      "type": "object",
+      "properties": {
+        "dataAccountType": {
+          "description": "Type of the account of data.",
+          "enum": [
+            "StorageAccount",
+            "ManagedDisk"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "DataAccountType",
+            "modelAsExtensible": true,
+            "values": [
+              {
+                "value": "StorageAccount",
+                "description": "Storage Accounts ."
+              },
+              {
+                "value": "ManagedDisk",
+                "description": "Azure Managed disk storage."
+              }
+            ]
+          }
+        },
+        "blobFilterDetails": {
+          "$ref": "#/definitions/BlobFilterDetails",
+          "description": "Filter details to transfer blobs."
+        },
+        "azureFileFilterDetails": {
+          "$ref": "#/definitions/AzureFileFilterDetails",
+          "description": "Filter details to transfer Azure files."
+        },
+        "filterFileDetails": {
+          "description": "Details of the filter files to be used for data transfer.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/FilterFileDetails"
+          }
+        }
+      }
+    },
+    "TransportAvailabilityDetails": {
+      "description": "Transport options availability details for given region.",
+      "type": "object",
+      "properties": {
+        "shipmentType": {
+          "description": "Transport Shipment Type supported for given region.",
+          "enum": [
+            "CustomerManaged",
+            "MicrosoftManaged"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "TransportShipmentTypes",
+            "modelAsExtensible": true,
+            "values": [
+              {
+                "value": "CustomerManaged",
+                "description": "Shipment Logistics is handled by the customer."
+              },
+              {
+                "value": "MicrosoftManaged",
+                "description": "Shipment Logistics is handled by Microsoft."
+              }
+            ]
+          }
+        }
+      }
+    },
+    "TransportAvailabilityRequest": {
+      "description": "Request body to get the transport availability for given sku.",
+      "type": "object",
+      "properties": {
+        "skuName": {
+          "description": "Type of the device.",
+          "enum": [
+            "DataBox",
+            "DataBoxDisk",
+            "DataBoxHeavy"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "SkuName",
+            "modelAsExtensible": true,
+            "values": [
+              {
+                "value": "DataBox",
+                "description": "Data Box."
+              },
+              {
+                "value": "DataBoxDisk",
+                "description": "Data Box Disk."
+              },
+              {
+                "value": "DataBoxHeavy",
+                "description": "Data Box Heavy."
+              }
+            ]
+          }
+        }
+      }
+    },
+    "TransportAvailabilityResponse": {
+      "description": "Transport options available for given sku in a region.",
+      "type": "object",
+      "properties": {
+        "transportAvailabilityDetails": {
+          "description": "List of transport availability details for given region",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TransportAvailabilityDetails"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "TransportPreferences": {
+      "description": "Preferences related to the shipment logistics of the sku",
+      "required": [
+        "preferredShipmentType"
+      ],
+      "type": "object",
+      "properties": {
+        "preferredShipmentType": {
+          "description": "Indicates Shipment Logistics type that the customer preferred.",
+          "enum": [
+            "CustomerManaged",
+            "MicrosoftManaged"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "TransportShipmentTypes",
+            "modelAsExtensible": true,
+            "values": [
+              {
+                "value": "CustomerManaged",
+                "description": "Shipment Logistics is handled by the customer."
+              },
+              {
+                "value": "MicrosoftManaged",
+                "description": "Shipment Logistics is handled by Microsoft."
+              }
+            ]
+          }
+        }
+      }
+    },
+    "UnencryptedCredentials": {
+      "description": "Unencrypted credentials for accessing device.",
+      "type": "object",
+      "properties": {
+        "jobName": {
+          "description": "Name of the job.",
+          "type": "string",
+          "readOnly": true
+        },
+        "jobSecrets": {
+          "$ref": "#/definitions/JobSecrets",
+          "description": "Secrets related to this job.",
+          "readOnly": true
+        }
+      }
+    },
+    "UnencryptedCredentialsList": {
+      "description": "List of unencrypted credentials for accessing device.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "List of unencrypted credentials.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/UnencryptedCredentials"
+          }
+        },
+        "nextLink": {
+          "description": "Link for the next set of unencrypted credentials.",
+          "type": "string"
+        }
+      }
+    },
+    "UpdateJobDetails": {
+      "description": "Job details for update.",
+      "type": "object",
+      "properties": {
+        "contactDetails": {
+          "$ref": "#/definitions/ContactDetails",
+          "description": "Contact details for notification and shipping."
+        },
+        "shippingAddress": {
+          "$ref": "#/definitions/ShippingAddress",
+          "description": "Shipping address of the customer."
+        },
+        "keyEncryptionKey": {
+          "$ref": "#/definitions/KeyEncryptionKey",
+          "description": "Key encryption key for the job."
+        }
+      }
+    },
+    "UpdateJobProperties": {
+      "description": "Job Properties for update",
+      "type": "object",
+      "properties": {
+        "details": {
+          "$ref": "#/definitions/UpdateJobDetails",
+          "description": "Details of a job to be updated."
+        }
+      }
+    },
+    "ValidateAddress": {
+      "description": "The requirements to validate customer address where the device needs to be shipped.",
+      "required": [
+        "shippingAddress",
+        "deviceType",
+        "validationType"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ValidationInputRequest"
+        }
+      ],
+      "properties": {
+        "shippingAddress": {
+          "$ref": "#/definitions/ShippingAddress",
+          "description": "Shipping address of the customer."
+        },
+        "deviceType": {
+          "description": "Device type to be used for the job.",
+          "enum": [
+            "DataBox",
+            "DataBoxDisk",
+            "DataBoxHeavy"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "SkuName",
+            "modelAsExtensible": true,
+            "values": [
+              {
+                "value": "DataBox",
+                "description": "Data Box."
+              },
+              {
+                "value": "DataBoxDisk",
+                "description": "Data Box Disk."
+              },
+              {
+                "value": "DataBoxHeavy",
+                "description": "Data Box Heavy."
+              }
+            ]
+          }
+        },
+        "transportPreferences": {
+          "$ref": "#/definitions/TransportPreferences",
+          "description": "Preferences related to the shipment logistics of the sku."
+        }
+      },
+      "x-ms-discriminator-value": "ValidateAddress"
+    },
+    "ValidationInputRequest": {
+      "description": "Minimum fields that must be present in any type of validation request.",
+      "required": [
+        "validationType"
+      ],
+      "type": "object",
+      "properties": {
+        "validationType": {
+          "description": "Identifies the type of validation request.",
+          "enum": [
+            "ValidateAddress",
+            "ValidateSubscriptionIsAllowedToCreateJob",
+            "ValidatePreferences",
+            "ValidateCreateOrderLimit",
+            "ValidateSkuAvailability",
+            "ValidateDataTransferDetails"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ValidationInputDiscriminator",
+            "modelAsExtensible": true,
+            "values": [
+              {
+                "value": "ValidateAddress",
+                "description": "Identify request and response of address validation."
+              },
+              {
+                "value": "ValidateSubscriptionIsAllowedToCreateJob",
+                "description": "Identify request and response for validation of subscription permission to create job."
+              },
+              {
+                "value": "ValidatePreferences",
+                "description": "Identify request and response of preference validation."
+              },
+              {
+                "value": "ValidateCreateOrderLimit",
+                "description": "Identify request and response of create order limit for subscription validation."
+              },
+              {
+                "value": "ValidateSkuAvailability",
+                "description": "Identify request and response of active job limit for sku availability."
+              },
+              {
+                "value": "ValidateDataTransferDetails",
+                "description": "Identify request and response of data transfer details validation."
+              }
+            ]
+          }
+        }
+      },
+      "discriminator": "validationType"
+    },
+    "ValidationInputResponse": {
+      "description": "Minimum properties that should be present in each individual validation response.",
+      "required": [
+        "validationType"
+      ],
+      "type": "object",
+      "properties": {
+        "validationType": {
+          "description": "Identifies the type of validation response.",
+          "enum": [
+            "ValidateAddress",
+            "ValidateSubscriptionIsAllowedToCreateJob",
+            "ValidatePreferences",
+            "ValidateCreateOrderLimit",
+            "ValidateSkuAvailability",
+            "ValidateDataTransferDetails"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ValidationInputDiscriminator",
+            "modelAsExtensible": true,
+            "values": [
+              {
+                "value": "ValidateAddress",
+                "description": "Identify request and response of address validation."
+              },
+              {
+                "value": "ValidateSubscriptionIsAllowedToCreateJob",
+                "description": "Identify request and response for validation of subscription permission to create job."
+              },
+              {
+                "value": "ValidatePreferences",
+                "description": "Identify request and response of preference validation."
+              },
+              {
+                "value": "ValidateCreateOrderLimit",
+                "description": "Identify request and response of create order limit for subscription validation."
+              },
+              {
+                "value": "ValidateSkuAvailability",
+                "description": "Identify request and response of active job limit for sku availability."
+              },
+              {
+                "value": "ValidateDataTransferDetails",
+                "description": "Identify request and response of data transfer details validation."
+              }
+            ]
+          }
+        },
+        "error": {
+          "$ref": "#/definitions/CloudError",
+          "description": "Error code and message of validation response.",
+          "readOnly": true
+        }
+      },
+      "discriminator": "validationType"
+    },
+    "ValidationRequest": {
+      "description": "Minimum request requirement of any validation category.",
+      "required": [
+        "validationCategory",
+        "individualRequestDetails"
+      ],
+      "type": "object",
+      "properties": {
+        "validationCategory": {
+          "description": "Identify the nature of validation.",
+          "enum": [
+            "JobCreationValidation"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ValidationCategory",
+            "modelAsExtensible": true,
+            "values": [
+              {
+                "value": "JobCreationValidation",
+                "description": "Identify request of pre-job creation validations."
+              }
+            ]
+          }
+        },
+        "individualRequestDetails": {
+          "description": "List of request details contain validationType and its request as key and value respectively.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ValidationInputRequest"
+          }
+        }
+      },
+      "discriminator": "validationCategory"
+    },
+    "ValidationResponse": {
+      "description": "Response of pre job creation validations.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ValidationResponseProperties",
+          "description": "Properties of pre job creation validation response.",
+          "readOnly": true,
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "ValidationResponseProperties": {
+      "description": "Properties of pre job creation validation response.",
+      "type": "object",
+      "properties": {
+        "status": {
+          "description": "Overall validation status.",
+          "enum": [
+            "AllValidToProceed",
+            "InputsRevisitRequired",
+            "CertainInputValidationsSkipped"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "OverallValidationStatus",
+            "modelAsExtensible": true,
+            "values": [
+              {
+                "value": "AllValidToProceed",
+                "description": "Every input request is valid."
+              },
+              {
+                "value": "InputsRevisitRequired",
+                "description": "Some input requests are not valid."
+              },
+              {
+                "value": "CertainInputValidationsSkipped",
+                "description": "Certain input validations skipped."
+              }
+            ]
+          }
+        },
+        "individualResponseDetails": {
+          "description": "List of response details contain validationType and its response as key and value respectively.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ValidationInputResponse"
+          },
+          "readOnly": true
+        }
+      }
+    }
+  },
+  "parameters": {
+    "apiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "description": "The API Version",
+      "required": true,
+      "type": "string"
+    },
+    "jobNameParameter": {
+      "name": "jobName",
+      "in": "path",
+      "description": "The name of the job Resource within the specified resource group. job names must be between 3 and 24 characters in length and use any alphanumeric and underscore only",
+      "required": true,
+      "type": "string",
+      "maxLength": 24,
+      "minLength": 3,
+      "pattern": "^[-\\w\\.]+$",
+      "x-ms-parameter-location": "method"
+    },
+    "locationParameter": {
+      "name": "location",
+      "in": "path",
+      "description": "The location of the resource",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "resourceGroupNameParameter": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "description": "The Resource Group Name",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "subscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "description": "The Subscription Id",
+      "required": true,
+      "type": "string"
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ]
+}

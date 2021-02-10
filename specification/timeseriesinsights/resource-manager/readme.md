@@ -25,25 +25,16 @@ These are the global settings for the TimeSeriesInsights API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2017-11-15
+tag: package-2020-05-15
 ```
 
-### Tag: package-2017-02-preview
+### Tag: package-2020-05-15
 
-These settings apply only when `--tag=package-2017-02-preview` is specified on the command line.
+These settings apply only when `--tag=package-2020-05-15` is specified on the command line.
 
-``` yaml $(tag) == 'package-2017-02-preview'
+``` yaml $(tag) == 'package-2020-05-15'
 input-file:
-- Microsoft.TimeSeriesInsights/preview/2017-02-28-preview/timeseriesinsights.json
-```
-
-### Tag: package-2017-11-15
-
-These settings apply only when `--tag=package-2017-11-15` is specified on the command line.
-
-``` yaml $(tag) == 'package-2017-11-15'
-input-file:
-- Microsoft.TimeSeriesInsights/stable/2017-11-15/timeseriesinsights.json
+- Microsoft.TimeSeriesInsights/stable/2020-05-15/timeseriesinsights.json
 ```
 
 ### Tag: package-2018-08-preview
@@ -55,16 +46,45 @@ input-file:
 - Microsoft.TimeSeriesInsights/preview/2018-08-15-preview/timeseriesinsights.json
 ```
 
+### Tag: package-2017-11-15
+
+These settings apply only when `--tag=package-2017-11-15` is specified on the command line.
+
+``` yaml $(tag) == 'package-2017-11-15'
+input-file:
+- Microsoft.TimeSeriesInsights/stable/2017-11-15/timeseriesinsights.json
+```
+
+### Tag: package-2017-02-preview
+
+These settings apply only when `--tag=package-2017-02-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2017-02-preview'
+input-file:
+- Microsoft.TimeSeriesInsights/preview/2017-02-28-preview/timeseriesinsights.json
+```
+
 ## Suppression
 
 ``` yaml
 directive:
+  - suppress: READONLY_PROPERTY_NOT_ALLOWED_IN_REQUEST
+    where: 
+      - $.definitions.EnvironmentUpdateParameters.properties.kind
+      - $.definitions.EventSourceUpdateParameters.properties.kind
+    from: timeseriesinsights.json
+    reason: This property is the discriminator for polymorph, but it can not be in request body.
+  - suppress: OAV131 # DISCRIMINATOR_NOT_REQUIRED
+    from: timeseriesinsights.json
+    reason: kind is a non-settable property from the client in patch method.
   - suppress: R3025  # Tracked resource 'XXX' must have a get operation
     where:
       - $.definitions.StandardEnvironmentResource
       - $.definitions.LongTermEnvironmentResource
       - $.definitions.EventHubEventSourceResource
       - $.definitions.IoTHubEventSourceResource
+      - $.definitions.Gen1EnvironmentResource
+      - $.definitions.Gen2EnvironmentResource
     from: timeseriesinsights.json
     reason: These violations are false positives. The EventSources_Get operation returns an EventSourceResource, and both EventHubEventSourceResource and IoTHubEventSourceResource inherit from EventSourceResource. Similarly, the Environments_Get operation returns an EnvironmentResource, from which both StandardEnvironmentResource and LongTermEnvironmentResource inherit.
 
@@ -74,6 +94,8 @@ directive:
       - $.definitions.LongTermEnvironmentResource 
       - $.definitions.EventHubEventSourceResource
       - $.definitions.IoTHubEventSourceResource
+      - $.definitions.Gen1EnvironmentResource
+      - $.definitions.Gen2EnvironmentResource
     from: timeseriesinsights.json
     reason: These violations are false positives. The EventSources_Update operation takes an EventSourceUpdateParameters as the body, and EventHubEventSourceUpdateParameters and IoTHubEventSourceUpdateParameters both inherit from EventSourceUpdateParameters. Similarly, the Environments_Update operation takes an EnvironmentUpdateParameters as the body, and both StandardEnvironmentUpdateParameters and LongTermEnvironmentUpdateParameters inherit from EnvironmentUpdateParameters. These definitions can be used to update mutable properties of the event source, including the Tags collection.
 ```
@@ -92,6 +114,10 @@ swagger-to-sdk:
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-node
   - repo: azure-sdk-for-js
+  - repo: azure-sdk-for-python
+  - repo: azure-resource-manager-schemas
+    after_scripts:
+      - node sdkauto_afterscript.js timeseriesinsights/resource-manager
 ```
 
 ## Go
@@ -112,6 +138,10 @@ payload-flattening-threshold: 1
 output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-timeseriesinsights
 ```
 
+## Python
+
+See configuration in [readme.python.md](./readme.python.md)
+
 ### Java multi-api
 
 ``` yaml $(java) && $(multiapi)
@@ -119,6 +149,7 @@ batch:
   - tag: package-2017-11-15
   - tag: package-2017-02-preview
   - tag: package-2018-08-preview
+  - tag: package-2020-05-15
 ```
 
 ### Tag: package-2017-11-15 and java
@@ -129,7 +160,7 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 ``` yaml $(tag) == 'package-2017-11-15' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.timeseriesinsights.v2017_11_15
-  output-folder: $(azure-libraries-for-java-folder)/timeseriesinsights/resource-manager/v2017_11_15
+  output-folder: $(azure-libraries-for-java-folder)/sdk/timeseriesinsights/mgmt-v2017_11_15
 regenerate-manager: true
 generate-interface: true
 ```
@@ -142,7 +173,7 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 ``` yaml $(tag) == 'package-2017-02-preview' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.timeseriesinsights.v2017_02_28_preview
-  output-folder: $(azure-libraries-for-java-folder)/timeseriesinsights/resource-manager/v2017_02_28_preview
+  output-folder: $(azure-libraries-for-java-folder)/sdk/timeseriesinsights/mgmt-v2017_02_28_preview
 regenerate-manager: true
 generate-interface: true
 ```
@@ -155,34 +186,25 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 ``` yaml $(tag) == 'package-2018-08-preview' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.timeseriesinsights.v2018_08_15_preview
-  output-folder: $(azure-libraries-for-java-folder)/timeseriesinsights/resource-manager/v2018_08_15_preview
+  output-folder: $(azure-libraries-for-java-folder)/sdk/timeseriesinsights/mgmt-v2018_08_15_preview
 regenerate-manager: true
 generate-interface: true
 ```
 
-## Multi-API/Profile support for AutoRest v3 generators 
+### Tag: package-2020-05-15 and java
 
-AutoRest V3 generators require the use of `--tag=all-api-versions` to select api files.
+These settings apply only when `--tag=package-2020-05-15 --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
 
-This block is updated by an automatic script. Edits may be lost!
-
-``` yaml $(tag) == 'all-api-versions' /* autogenerated */
-# include the azure profile definitions from the standard location
-require: $(this-folder)/../../../profiles/readme.md
-
-# all the input files across all versions
-input-file:
-  - $(this-folder)/Microsoft.TimeSeriesInsights/preview/2017-02-28-preview/timeseriesinsights.json
-  - $(this-folder)/Microsoft.TimeSeriesInsights/stable/2017-11-15/timeseriesinsights.json
-  - $(this-folder)/Microsoft.TimeSeriesInsights/preview/2018-08-15-preview/timeseriesinsights.json
-
+``` yaml $(tag) == 'package-2020-05-15' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.timeseriesinsights.v2020_05_15
+  output-folder: $(azure-libraries-for-java-folder)/sdk/timeseriesinsights/mgmt-v2020_05_15
+regenerate-manager: true
+generate-interface: true
 ```
 
-If there are files that should not be in the `all-api-versions` set, 
-uncomment the  `exclude-file` section below and add the file paths.
+## AzureResourceSchema
 
-``` yaml $(tag) == 'all-api-versions'
-#exclude-file: 
-#  - $(this-folder)/Microsoft.Example/stable/2010-01-01/somefile.json
-```
+See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
 

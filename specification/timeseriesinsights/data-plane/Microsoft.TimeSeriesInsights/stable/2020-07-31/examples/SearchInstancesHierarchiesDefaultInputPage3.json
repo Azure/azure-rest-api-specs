@@ -1,0 +1,66 @@
+{
+  "parameters": {
+    "api-version": "2020-07-31",
+    "environmentFqdn": "10000000-0000-0000-0000-100000000109.env.timeseries.azure.com",
+    "continuationToken": "aHsic2tpcCI6MiwidGFrZSI6MiwicmVxdWVzdEhhc2hDb2RlIjotNzA4NTgyODU0LCJlbnZpcm9ubWVudElkIjoiYmY0M2YxMzMtM2Y2OC00ZWMwLWJjYjQtZmQ2NDUzMGU0MjU2In0=",
+    "parameters": {
+      "searchString": "floor 100",
+      "path": null,
+      "instances": {
+        "recursive": true,
+        "sort": {
+          "by": "Rank"
+        },
+        "highlights": true,
+        "pageSize": 1
+      },
+      "hierarchies": {
+        "expand": {
+          "kind": "UntilChildren"
+        },
+        "sort": {
+          "by": "CumulativeInstanceCount"
+        },
+        "pageSize": 1
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "instances": null,
+        "hierarchyNodes": {
+          "hits": [
+            {
+              "name": "Location",
+              "cumulativeInstanceCount": 2,
+              "hierarchyNodes": {
+                "hits": [
+                  {
+                    "name": "California",
+                    "cumulativeInstanceCount": 2,
+                    "hierarchyNodes": {
+                      "hits": [
+                        {
+                          "name": "San Diego",
+                          "cumulativeInstanceCount": 1,
+                          "hierarchyNodes": null
+                        }
+                      ],
+                      "hitCount": 2,
+                      "continuationToken": "aHsic2tpcCI6MiwidGFrZSI6MiwicmVxdWVzdEhhc2hDb2RlIjotNzA4NTgyODU0LCJlbnZpcm9ubWVudElkIjoiYmY0M2YxMzMtM2Y2OC00ZWMwLWJjYjQtZmQ2NDUzMGU0MjU2In0="
+                    }
+                  }
+                ],
+                "hitCount": 1,
+                "continuationToken": null
+              }
+            }
+          ],
+          "hitCount": 1,
+          "continuationToken": null
+        }
+      }
+    }
+  }
+}

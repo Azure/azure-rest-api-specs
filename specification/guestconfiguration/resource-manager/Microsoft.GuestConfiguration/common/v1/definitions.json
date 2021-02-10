@@ -26,9 +26,18 @@
   "definitions": {
     "ErrorResponse": {
       "properties": {
-        "message": {
-          "description": "Error message indicating why the operation failed.",
-          "type": "string"
+        "error": {
+          "type": "object",
+          "properties": {
+            "code": {
+              "description": "Error code.",
+              "type": "string"
+            },
+            "message": {
+              "description": "Detail error message indicating why the operation failed.",
+              "type": "string"
+            }
+          }
         }
       },
       "description": "Error response of an operation failure"
@@ -44,12 +53,12 @@
         },
         "name": {
           "type": "string",
-          "readOnly": true,
+          "readOnly": false,
           "description": "Name of the guest configuration assignment."
         },
         "location": {
           "type": "string",
-          "readOnly": true,
+          "readOnly": false,
           "description": "Region where the VM is located."
         },
         "type": {
@@ -176,6 +185,14 @@
       "required": true,
       "type": "string",
       "description": "The name of the virtual machine.",
+      "x-ms-parameter-location": "method"
+    },
+    "MachineNameParameter": {
+      "name": "machineName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the ARC machine.",
       "x-ms-parameter-location": "method"
     },
     "ResourceGroupNameParameter": {

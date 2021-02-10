@@ -8,5 +8,6 @@ typescript:
   azure-arm: true
   package-name: "@azure/arm-resourcegraph"
   output-folder: "$(typescript-sdks-folder)/sdk/resourcegraph/arm-resourcegraph"
+  clear-output-folder: true
   generate-metadata: true
 ```

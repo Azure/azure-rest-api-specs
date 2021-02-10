@@ -59,6 +59,24 @@
           },
           "Create HDInsight cluster with Autoscale configuration": {
             "$ref": "./examples/CreateHDInsightClusterWithAutoscaleConfig.json"
+          },
+          "Create Kafka cluster with Kafka Rest Proxy": {
+            "$ref": "./examples/CreateKafkaClusterWithKafkaRestProxy.json"
+          },
+          "Create cluster with TLS 1.2": {
+            "$ref": "./examples/CreateHDInsightClusterWithTLS12.json"
+          },
+          "Create cluster with encryption in transit": {
+            "$ref": "./examples/CreateHDInsightClusterWithEncryptionInTransit.json"
+          },
+          "Create cluster with encryption at host": {
+            "$ref": "./examples/CreateHDInsightClusterWithEncryptionAtHost.json"
+          },
+          "Create cluster with network properties": {
+            "$ref": "./examples/CreateHDInsightClusterWithCustomNetworkProperties.json"
+          },
+          "Create cluster with compute isolation properties": {
+            "$ref": "./examples/CreateHDInsightClusterWithComputeIsolationProperties.json"
           }
         },
         "parameters": [
@@ -186,6 +204,9 @@
           },
           "200": {
             "description": "Ok response definition."
+          },
+          "204": {
+            "description": "No Content response definition."
           }
         },
         "x-ms-long-running-operation": true
@@ -323,6 +344,78 @@
               "$ref": "#/definitions/ClusterResizeParameters"
             },
             "description": "The parameters for the resize operation."
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./operations.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "OK response definition."
+          },
+          "202": {
+            "description": "Accepted response definition."
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HDInsight/clusters/{clusterName}/roles/{roleName}/autoscale": {
+      "post": {
+        "tags": [
+          "Clusters"
+        ],
+        "operationId": "Clusters_UpdateAutoScaleConfiguration",
+        "description": "Updates the Autoscale Configuration for HDInsight cluster.",
+        "x-ms-examples": {
+          "Enable or Update Autoscale with the load based configuration for HDInsight cluster": {
+            "$ref": "./examples/EnableOrUpdateAutoScaleWithLoadBasedConfiguration.json"
+          },
+          "Enable or Update Autoscale with the schedule based configuration for HDInsight cluster": {
+            "$ref": "./examples/EnableOrUpdateAutoScaleWithScheduleBasedConfiguration.json"
+          },
+          "Disable Autoscale for the HDInsight cluster": {
+            "$ref": "./examples/DisableClusterAutoScale.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "name": "roleName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The constant value for the roleName",
+            "enum": [
+              "workernode"
+            ],
+            "x-ms-enum": {
+              "name": "RoleName",
+              "modelAsString": true
+            }
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AutoscaleConfigurationUpdateParameter"
+            },
+            "description": "The parameters for the update autoscale configuration operation."
           }
         ],
         "responses": {
@@ -526,6 +619,51 @@
         },
         "x-ms-long-running-operation": true
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HDInsight/clusters/{clusterName}/azureasyncoperations/{operationId}": {
+      "get": {
+        "tags": [
+          "Clusters"
+        ],
+        "operationId": "Clusters_GetAzureAsyncOperationStatus",
+        "description": "The the async operation status.",
+        "x-ms-examples": {
+          "Get Async Operation Status of Creating Cluster": {
+            "$ref": "./examples/GetClusterCreatingAsyncOperationStatus.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/OperationIdParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./operations.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "OK response definition.",
+            "schema": {
+              "$ref": "#/definitions/AsyncOperationResult"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -550,6 +688,28 @@
         "configurations": {
           "type": "object",
           "description": "The cluster configurations."
+        }
+      }
+    },
+    "ClientGroupInfo": {
+      "description": "The information of AAD security group.",
+      "properties": {
+        "groupName": {
+          "type": "string",
+          "description": "The AAD security group name."
+        },
+        "groupId": {
+          "type": "string",
+          "description": "The AAD security group id."
+        }
+      }
+    },
+    "KafkaRestProperties": {
+      "description": "The kafka rest proxy configuration which contains AAD security group information.",
+      "properties": {
+        "clientGroupInfo": {
+          "$ref": "#/definitions/ClientGroupInfo",
+          "description": "The information of AAD security group."
         }
       }
     },
@@ -700,6 +860,15 @@
       },
       "description": "The autoscale request parameters"
     },
+    "AutoscaleConfigurationUpdateParameter": {
+      "properties": {
+        "autoscale": {
+          "$ref": "#/definitions/Autoscale",
+          "description": "The autoscale configuration."
+        }
+      },
+      "description": "The autoscale configuration update parameter."
+    },
     "HardwareProfile": {
       "properties": {
         "vmSize": {
@@ -737,6 +906,7 @@
         },
         "diskSizeGB": {
           "type": "integer",
+          "format": "int32",
           "description": "ReadOnly. The DiskSize in GB. Do not set this value.",
           "readOnly": true
         }
@@ -805,6 +975,10 @@
           "format": "int32",
           "description": "The instance count of the cluster."
         },
+        "VMGroupName": {
+          "type": "string",
+          "description": "The name of the virtual machine group."
+        },
         "autoscale": {
           "$ref": "#/definitions/Autoscale",
           "x-ms-client-name": "autoscaleConfiguration",
@@ -835,6 +1009,10 @@
             "$ref": "./scriptActions.json#/definitions/ScriptAction"
           },
           "description": "The list of script actions on the role."
+        },
+        "encryptDataDisks": {
+          "type": "boolean",
+          "description": "Indicates whether encrypt the data disks."
         }
       },
       "description": "Describes a role on the cluster."
@@ -867,7 +1045,7 @@
         },
         "fileSystem": {
           "type": "string",
-          "description": "The filesystem, only to be specified for Azure Data Lake Storage type Gen 2."
+          "description": "The filesystem, only to be specified for Azure Data Lake Storage Gen 2."
         },
         "key": {
           "type": "string",
@@ -880,6 +1058,14 @@
         "msiResourceId": {
           "type": "string",
           "description": "The managed identity (MSI) that is allowed to access the storage account, only to be specified for Azure Data Lake Storage Gen 2."
+        },
+        "saskey": {
+          "type": "string",
+          "description": "The shared access signature key."
+        },
+        "fileshare": {
+          "type": "string",
+          "description": "The file share name."
         }
       },
       "description": "The storage Account."
@@ -895,6 +1081,61 @@
         }
       },
       "description": "The storage profile."
+    },
+    "ExcludedServicesConfig": {
+      "properties": {
+        "excludedServicesConfigId": {
+          "type": "string",
+          "description": "The config id of excluded services."
+        },
+        "excludedServicesList": {
+          "type": "string",
+          "description": "The list of excluded services."
+        }
+      },
+      "description": "The configuration that services will be excluded when creating cluster."
+    },
+    "NetworkProperties": {
+      "description": "The network properties.",
+      "properties": {
+        "resourceProviderConnection": {
+          "type": "string",
+          "description": "The direction for the resource provider connection.",
+          "enum": [
+            "Inbound",
+            "Outbound"
+          ],
+          "x-ms-enum": {
+            "name": "ResourceProviderConnection",
+            "modelAsString": true
+          }
+        },
+        "privateLink": {
+          "type": "string",
+          "description": "Indicates whether or not private link is enabled.",
+          "enum": [
+            "Disabled",
+            "Enabled"
+          ],
+          "x-ms-enum": {
+            "name": "PrivateLink",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "ComputeIsolationProperties": {
+      "description": "The compute isolation properties.",
+      "properties": {
+        "enableComputeIsolation": {
+          "type": "boolean",
+          "description": "The flag indicates whether enable compute isolation or not."
+        },
+        "hostSku": {
+          "type": "string",
+          "description": "The host sku."
+        }
+      }
     },
     "ClusterCreateProperties": {
       "description": "The cluster create parameters.",
@@ -931,6 +1172,10 @@
           "$ref": "#/definitions/ClusterDefinition",
           "description": "The cluster definition."
         },
+        "kafkaRestProperties": {
+          "$ref": "#/definitions/KafkaRestProperties",
+          "description": "The cluster kafka rest proxy configuration."
+        },
         "securityProfile": {
           "$ref": "#/definitions/SecurityProfile",
           "description": "The security profile."
@@ -946,6 +1191,22 @@
         "diskEncryptionProperties": {
           "$ref": "#/definitions/DiskEncryptionProperties",
           "description": "The disk encryption properties."
+        },
+        "encryptionInTransitProperties": {
+          "$ref": "#/definitions/EncryptionInTransitProperties",
+          "description": "The encryption-in-transit properties."
+        },
+        "minSupportedTlsVersion": {
+          "type": "string",
+          "description": "The minimal supported tls version."
+        },
+        "networkProperties": {
+          "$ref": "#/definitions/NetworkProperties",
+          "description": "The network properties."
+        },
+        "computeIsolationProperties": {
+          "$ref": "#/definitions/ComputeIsolationProperties",
+          "description": "The compute isolation properties."
         }
       }
     },
@@ -1028,6 +1289,10 @@
           "type": "integer",
           "format": "int32",
           "description": "The port to connect to."
+        },
+        "privateIPAddress": {
+          "type": "string",
+          "description": "The private ip address of the endpoint."
         }
       }
     },
@@ -1037,6 +1302,10 @@
         "clusterVersion": {
           "type": "string",
           "description": "The version of the cluster."
+        },
+        "clusterHdpVersion": {
+          "type": "string",
+          "description": "The hdp version of the cluster."
         },
         "osType": {
           "type": "string",
@@ -1062,9 +1331,17 @@
             "modelAsString": false
           }
         },
+        "clusterId": {
+          "type": "string",
+          "description": "The cluster id."
+        },
         "clusterDefinition": {
           "$ref": "#/definitions/ClusterDefinition",
           "description": "The cluster definition."
+        },
+        "kafkaRestProperties": {
+          "$ref": "#/definitions/KafkaRestProperties",
+          "description": "The cluster kafka rest proxy configuration."
         },
         "securityProfile": {
           "$ref": "#/definitions/SecurityProfile",
@@ -1118,6 +1395,30 @@
         "diskEncryptionProperties": {
           "$ref": "#/definitions/DiskEncryptionProperties",
           "description": "The disk encryption properties."
+        },
+        "encryptionInTransitProperties": {
+          "$ref": "#/definitions/EncryptionInTransitProperties",
+          "description": "The encryption-in-transit properties."
+        },
+        "storageProfile": {
+          "$ref": "#/definitions/StorageProfile",
+          "description": "The storage profile."
+        },
+        "minSupportedTlsVersion": {
+          "type": "string",
+          "description": "The minimal supported tls version."
+        },
+        "excludedServicesConfig": {
+          "$ref": "#/definitions/ExcludedServicesConfig",
+          "description": "The excluded services config."
+        },
+        "networkProperties": {
+          "$ref": "#/definitions/NetworkProperties",
+          "description": "The network properties."
+        },
+        "computeIsolationProperties": {
+          "$ref": "#/definitions/ComputeIsolationProperties",
+          "description": "The compute isolation properties."
         }
       },
       "required": [
@@ -1340,6 +1641,10 @@
                 "readOnly": true,
                 "type": "string",
                 "description": "The client id of user assigned identity."
+              },
+              "tenantId": {
+                "type": "string",
+                "description": "The tenant id of user assigned identity."
               }
             }
           },
@@ -1423,6 +1728,21 @@
         "msiResourceId": {
           "type": "string",
           "description": "Resource ID of Managed Identity that is used to access the key vault."
+        },
+        "encryptionAtHost": {
+          "type": "boolean",
+          "default": false,
+          "description": "Indicates whether or not resource disk encryption is enabled."
+        }
+      }
+    },
+    "EncryptionInTransitProperties": {
+      "description": "The encryption-in-transit properties.",
+      "properties": {
+        "isEncryptionInTransitEnabled": {
+          "type": "boolean",
+          "default": false,
+          "description": "Indicates whether or not inter cluster node communication is encrypted in transit."
         }
       }
     },
@@ -1470,7 +1790,7 @@
       },
       "description": "Gateway settings."
     },
-    "OperationResource": {
+    "AsyncOperationResult": {
       "properties": {
         "status": {
           "type": "string",
@@ -1582,6 +1902,14 @@
       "required": true,
       "type": "string",
       "description": "The HDInsight client API Version."
+    },
+    "OperationIdParameter": {
+      "name": "operationId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The long running operation id.",
+      "x-ms-parameter-location": "method"
     }
   }
 }

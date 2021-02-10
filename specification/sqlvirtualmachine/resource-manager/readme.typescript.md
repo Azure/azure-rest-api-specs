@@ -8,5 +8,6 @@ typescript:
   azure-arm: true
   package-name: "@azure/arm-sqlvirtualmachine"
   output-folder: "$(typescript-sdks-folder)/sdk/sqlvirtualmachine/arm-sqlvirtualmachine"
+  clear-output-folder: true
   generate-metadata: true
 ```

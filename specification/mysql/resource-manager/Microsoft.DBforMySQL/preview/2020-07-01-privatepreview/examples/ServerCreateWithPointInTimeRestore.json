@@ -1,0 +1,82 @@
+{
+  "parameters": {
+    "serverName": "targetserver",
+    "resourceGroupName": "TargetResourceGroup",
+    "api-version": "2020-07-01-privatepreview",
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
+    "parameters": {
+      "location": "brazilsouth",
+      "properties": {
+        "restorePointInTime": "2017-12-14T00:00:37.467Z",
+        "createMode": "PointInTimeRestore",
+        "sourceServerId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/SourceResourceGroup/providers/Microsoft.DBforMySQL/flexibleServers/sourceserver"
+      },
+      "sku": {
+        "name": "Standard_D14_v2",
+        "tier": "GeneralPurpose"
+      },
+      "tags": {
+        "ElasticServer": "1"
+      }
+    }
+  },
+  "responses": {
+    "201": {
+      "body": {
+        "sku": {
+          "name": "Standard_D14_v2",
+          "tier": "GeneralPurpose"
+        },
+        "properties": {
+          "administratorLogin": "cloudsa",
+          "storageProfile": {
+            "storageMB": 128000,
+            "storageIops": 200,
+            "backupRetentionDays": 7
+          },
+          "version": "5.7",
+          "sslEnforcement": "Enabled",
+          "publicNetworkAccess": "Enabled",
+          "state": "Ready",
+          "fullyQualifiedDomainName": "targetserver.mysql.database.azure.com"
+        },
+        "location": "brazilsouth",
+        "tags": {
+          "ElasticServer": "1"
+        },
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBforMySQL/flexibleServers/targetserver",
+        "name": "targetserver",
+        "type": "Microsoft.DBforMySQL/flexibleServers"
+      }
+    },
+    "200": {
+      "body": {
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBforMySQL/flexibleServers/targetserver",
+        "name": "targetserver",
+        "type": "Microsoft.DBforMySQL/flexibleServers",
+        "location": "brazilsouth",
+        "sku": {
+          "name": "Standard_D14_v2",
+          "tier": "GeneralPurpose"
+        },
+        "tags": {
+          "elasticServer": "1"
+        },
+        "properties": {
+          "administratorLogin": "cloudsa",
+          "storageProfile": {
+            "storageMB": 128000,
+            "storageIops": 200,
+            "backupRetentionDays": 7
+          },
+          "version": "5.7",
+          "sslEnforcement": "Enabled",
+          "publicNetworkAccess": "Enabled",
+          "state": "Ready",
+          "fullyQualifiedDomainName": "targetserver.mysql.database.azure.com"
+        }
+      }
+    },
+    "202": {}
+  }
+}

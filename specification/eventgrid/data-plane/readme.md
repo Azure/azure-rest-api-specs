@@ -56,6 +56,19 @@ input-file:
 - Microsoft.AppConfiguration/stable/2018-01-01/AppConfiguration.json
 - Microsoft.SignalRService/stable/2018-01-01/SignalRService.json
 - Microsoft.KeyVault/stable/2018-01-01/KeyVault.json
+- Microsoft.MachineLearningServices/stable/2018-01-01/MachineLearningServices.json
+- Microsoft.Cache/stable/2018-01-01/RedisCache.json
+- Microsoft.Web/stable/2018-01-01/Web.json
+- Microsoft.Communication/stable/2018-01-01/AzureCommunicationServices.json
+```
+
+### Suppression
+``` yaml
+directive:
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    from: Microsoft.EventGrid/stable/2018-01-01/EventGrid.json
+    where: $.definitions.CloudEventEvent.properties.data_base64
+    reason: This parameter name is defined by the Cloud Events 1.0 specification
 ```
 
 ---
@@ -105,6 +118,7 @@ Please also specify `--azure-libraries-for-java-folder=<path to the root directo
 
 ``` yaml $(java)
 azure-arm: true
+fluent: true
 namespace: com.microsoft.azure.eventgrid
 license-header: MICROSOFT_MIT_NO_CODEGEN
 payload-flattening-threshold: 1
@@ -135,6 +149,10 @@ input-file:
   - $(this-folder)/Microsoft.AppConfiguration/stable/2018-01-01/AppConfiguration.json
   - $(this-folder)/Microsoft.SignalRService/stable/2018-01-01/SignalRService.json
   - $(this-folder)/Microsoft.KeyVault/stable/2018-01-01/KeyVault.json
+  - $(this-folder)/Microsoft.MachineLearningServices/stable/2018-01-01/MachineLearningServices.json
+  - $(this-folder)/Microsoft.Cache/stable/2018-01-01/RedisCache.json
+  - $(this-folder)/Microsoft.Web/stable/2018-01-01/Web.json
+  - $(this-folder)/Microsoft.Communication/stable/2018-01-01/AzureCommunicationServices.json
 
 ```
 
