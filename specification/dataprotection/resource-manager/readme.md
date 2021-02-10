@@ -52,7 +52,7 @@ These settings apply only when `--tag=package-2021-01` is specified on the comma
 
 ``` yaml $(tag) == 'package-2021-01'
 input-file:
-- Microsoft.DataProtection/preview/2021-01-01/dataprotection.json
+- Microsoft.DataProtection/stable/2021-01-01/dataprotection.json
 ```
 
 ### Tag: package-2021-01-only
@@ -61,7 +61,7 @@ These settings apply only when `--tag=package-2021-01` is specified on the comma
 
 ``` yaml $(tag) == 'package-2021-01-only'
 input-file:
-- Microsoft.DataProtection/preview/2021-01-01/dataprotection.json
+- Microsoft.DataProtection/stable/2021-01-01/dataprotection.json
 ```
 
 ---
@@ -122,7 +122,7 @@ require: $(this-folder)/../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
-  - Microsoft.DataProtection/preview/2021-01-01/dataprotection.json  
+  - Microsoft.DataProtection/stable/2021-01-01/dataprotection.json  
 ```
 
 If there are files that should not be in the `all-api-versions` set,
