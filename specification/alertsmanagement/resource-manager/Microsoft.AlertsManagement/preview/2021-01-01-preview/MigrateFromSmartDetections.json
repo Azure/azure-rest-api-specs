@@ -32,7 +32,7 @@
         "tags": [
           "MigrateFromSmartDetection"
         ],
-        "description": "Starts an asynchronous migration process of Smart Detection to smart alerts in an Application Insights resource.",
+        "description": "Starts an asynchronous migration process of Smart Detection to smart alerts in an Application Insights resource. Use the HTTP address in the responce location header to GET the status of the migration process.",
         "operationId": "MigrateFromSmartDetection_StartMigration",
         "parameters": [
           {
@@ -58,6 +58,12 @@
               "$ref": "#/definitions/MigrationStatusResponse"
             }
           },
+          "200": {
+            "description": "Migration for the requested resouces was already completed.",
+            "schema": {
+              "$ref": "#/definitions/MigrationStatusResponse"
+            }
+          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
@@ -73,45 +79,6 @@
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.AlertsManagement/migrateFromSmartDetection/{migrationId}": {
-      "get": {
-        "tags": [
-          "MigrateFromSmartDetection"
-        ],
-        "description": "Retrieve the status of a migration process.",
-        "operationId": "MigrateFromSmartDetection_Get",
-        "parameters": [
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/MigrationIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/MigrationStatusResponse"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/MigrationErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Get Migration Status": {
-            "$ref": "./examples/migrateFromSmartDetectionGet.json"
-          }
         }
       }
     }
@@ -163,7 +130,7 @@
       "type": "object",
       "properties": {
         "id": {
-          "description": "The migration process ID.",
+          "description": "The migration resource identifier.",
           "type": "string",
           "readOnly": true
         },
