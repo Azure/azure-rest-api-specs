@@ -100,6 +100,9 @@
             "schema": {
               "$ref": "#/definitions/BlockchainMember"
             }
+          },
+          "400": {
+            "description": "Bad Request"
           }
         },
         "x-ms-long-running-operation": true,
@@ -139,6 +142,9 @@
           },
           "204": {
             "description": "Success"
+          },
+          "400": {
+            "description": "Bad Request"
           }
         },
         "x-ms-long-running-operation": true,
@@ -433,10 +439,14 @@
               "$ref": "#/definitions/OperationResult"
             }
           },
+          "202": {
+            "description": "Accepted"
+          },
           "204": {
             "description": "Success"
           }
         },
+        "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "BlockchainMemberOperationResults_Get": {
             "$ref": "./examples/BlockchainMemberOperationResults_Get.json"
@@ -999,6 +1009,38 @@
           "readOnly": true,
           "x-ms-enum": {
             "name": "BlockchainMemberProvisioningState",
+            "modelAsString": true
+          }
+        },
+        "nodeProvisioningState": {
+          "description": "Gets or sets Node Provisioning state of default transaction node.",
+          "enum": [
+            "NotSpecified",
+            "Updating",
+            "Deleting",
+            "Succeeded",
+            "Failed"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "NodeProvisioningState",
+            "modelAsString": true
+          }
+        },
+        "egressIP": {
+          "description": "Gets or sets Node Provisioning state of default transaction node.",
+          "enum": [
+            "NotSpecified",
+            "Updating",
+            "Deleting",
+            "Succeeded",
+            "Failed"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "NodeProvisioningState",
             "modelAsString": true
           }
         },
@@ -1592,6 +1634,14 @@
           "x-ms-mutability": [
             "read",
             "create"
+          ]
+        },
+        "kind": {
+          "description": "The Kind of Blockchain Protocol",
+          "type": "string",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
           ]
         },
         "tags": {
