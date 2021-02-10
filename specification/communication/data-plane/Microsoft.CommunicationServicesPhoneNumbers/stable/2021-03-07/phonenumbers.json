@@ -60,7 +60,7 @@
           "default": {
             "description": "Failure",
             "schema": {
-              "$ref": "../../../Microsoft.CommunicationServicesCommon/stable/2021-03-07/common.json#/definitions/CommunicationErrorResponse"
+              "$ref": "../../../Microsoft.CommunicationServicesCommon/preview/2020-11-19-preview1/common.json#/definitions/CommunicationErrorResponse"
             }
           }
         },
@@ -107,7 +107,7 @@
           "default": {
             "description": "Failure",
             "schema": {
-              "$ref": "../../../Microsoft.CommunicationServicesCommon/stable/2021-03-07/common.json#/definitions/CommunicationErrorResponse"
+              "$ref": "../../../Microsoft.CommunicationServicesCommon/preview/2020-11-19-preview1/common.json#/definitions/CommunicationErrorResponse"
             }
           }
         },
@@ -165,7 +165,7 @@
           "default": {
             "description": "Failure",
             "schema": {
-              "$ref": "../../../Microsoft.CommunicationServicesCommon/stable/2021-03-07/common.json#/definitions/CommunicationErrorResponse"
+              "$ref": "../../../Microsoft.CommunicationServicesCommon/preview/2020-11-19-preview1/common.json#/definitions/CommunicationErrorResponse"
             }
           }
         },
@@ -212,7 +212,7 @@
           "default": {
             "description": "Failure",
             "schema": {
-              "$ref": "../../../Microsoft.CommunicationServicesCommon/stable/2021-03-07/common.json#/definitions/CommunicationErrorResponse"
+              "$ref": "../../../Microsoft.CommunicationServicesCommon/preview/2020-11-19-preview1/common.json#/definitions/CommunicationErrorResponse"
             }
           }
         },
@@ -247,7 +247,7 @@
           "default": {
             "description": "Failure",
             "schema": {
-              "$ref": "../../../Microsoft.CommunicationServicesCommon/stable/2021-03-07/common.json#/definitions/CommunicationErrorResponse"
+              "$ref": "../../../Microsoft.CommunicationServicesCommon/preview/2020-11-19-preview1/common.json#/definitions/CommunicationErrorResponse"
             }
           }
         },
@@ -293,7 +293,7 @@
           "default": {
             "description": "Failure",
             "schema": {
-              "$ref": "../../../Microsoft.CommunicationServicesCommon/stable/2021-03-07/common.json#/definitions/CommunicationErrorResponse"
+              "$ref": "../../../Microsoft.CommunicationServicesCommon/preview/2020-11-19-preview1/common.json#/definitions/CommunicationErrorResponse"
             }
           }
         },
@@ -338,7 +338,7 @@
           "default": {
             "description": "Failure",
             "schema": {
-              "$ref": "../../../Microsoft.CommunicationServicesCommon/stable/2021-03-07/common.json#/definitions/CommunicationErrorResponse"
+              "$ref": "../../../Microsoft.CommunicationServicesCommon/preview/2020-11-19-preview1/common.json#/definitions/CommunicationErrorResponse"
             }
           }
         },
@@ -354,58 +354,6 @@
         "produces": [
           "application/json"
         ]
-      },
-      "patch": {
-        "tags": [
-          "Manage acquired phone numbers"
-        ],
-        "summary": "Updates the configuration of a phone number.",
-        "operationId": "PhoneNumbers_Update",
-        "consumes": [
-          "application/merge-patch+json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "phoneNumber",
-            "description": "Phone number to be updated, e.g. +11234567890.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "in": "body",
-            "name": "body",
-            "description": "Defines the update request.",
-            "schema": {
-              "$ref": "#/definitions/PhoneNumberUpdateRequest"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "$ref": "#/definitions/AcquiredPhoneNumber"
-            }
-          },
-          "default": {
-            "description": "Failure",
-            "schema": {
-              "$ref": "../../../Microsoft.CommunicationServicesCommon/stable/2021-03-07/common.json#/definitions/CommunicationErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Update phoneNumber": {
-            "$ref": "./examples/UpdatePhoneNumber.json"
-          }
-        }
       }
     },
     "/phoneNumbers": {
@@ -449,7 +397,7 @@
           "default": {
             "description": "Failure",
             "schema": {
-              "$ref": "../../../Microsoft.CommunicationServicesCommon/stable/2021-03-07/common.json#/definitions/CommunicationErrorResponse"
+              "$ref": "../../../Microsoft.CommunicationServicesCommon/preview/2020-11-19-preview1/common.json#/definitions/CommunicationErrorResponse"
             }
           }
         },
@@ -517,7 +465,7 @@
           "default": {
             "description": "Failure",
             "schema": {
-              "$ref": "../../../Microsoft.CommunicationServicesCommon/stable/2021-03-07/common.json#/definitions/CommunicationErrorResponse"
+              "$ref": "../../../Microsoft.CommunicationServicesCommon/preview/2020-11-19-preview1/common.json#/definitions/CommunicationErrorResponse"
             }
           }
         },
@@ -756,7 +704,7 @@
           "type": "string"
         },
         "error": {
-          "$ref": "../../../Microsoft.CommunicationServicesCommon/stable/2021-03-07/common.json#/definitions/CommunicationError"
+          "$ref": "../../../Microsoft.CommunicationServicesCommon/preview/2020-11-19-preview1/common.json#/definitions/CommunicationError"
         },
         "id": {
           "description": "Id of operation.",
@@ -840,30 +788,8 @@
           "description": "The date and time that the phone number was purchased.",
           "type": "string"
         },
-        "callbackUri": {
-          "description": "The webhook for receiving incoming events, e.g. https://{{site-name}}.azurewebsites.net/api/updates",
-          "type": "string"
-        },
-        "applicationId": {
-          "description": "The application id of the server application the phone number is assigned to. The property is empty if the phone number is assigned to a person.",
-          "type": "string"
-        },
         "cost": {
           "$ref": "#/definitions/PhoneNumberCost"
-        }
-      }
-    },
-    "PhoneNumberUpdateRequest": {
-      "description": "Property updates for a phone number",
-      "type": "object",
-      "properties": {
-        "callbackUri": {
-          "description": "The webhook for receiving incoming events.\r\ne.g. \"https://{{site-name}}.azurewebsites.net/api/updates\".\r\nPlease read https://docs.microsoft.com/en-us/azure/communication-services/concepts/event-handling\r\nfor integration with Azure Event Grid to deliver real-time event notifications.",
-          "type": "string"
-        },
-        "applicationId": {
-          "description": "The application id of the application to which to configure.",
-          "type": "string"
         }
       }
     },
