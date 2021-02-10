@@ -1406,7 +1406,21 @@
     },
     "EnvironmentUpdateParameters": {
       "type": "object",
+      "discriminator": "kind",
       "properties": {
+        "kind": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The kind of the environment.",
+          "enum": [
+            "Gen1",
+            "Gen2"
+          ],
+          "x-ms-enum": {
+            "name": "EnvironmentKind",
+            "modelAsString": true
+          }
+        },
         "tags": {
           "type": "object",
           "additionalProperties": {
@@ -1419,6 +1433,7 @@
     },
     "Gen1EnvironmentUpdateParameters": {
       "type": "object",
+      "x-ms-discriminator-value": "Gen1",
       "properties": {
         "sku": {
           "$ref": "#/definitions/Sku",
@@ -1439,6 +1454,7 @@
     },
     "Gen2EnvironmentUpdateParameters": {
       "type": "object",
+      "x-ms-discriminator-value": "Gen2",
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
@@ -1894,8 +1910,22 @@
       "description": "Parameters supplied to the Create or Update Event Source operation for an IoTHub event source."
     },
     "EventSourceUpdateParameters": {
+      "discriminator": "kind",
       "type": "object",
       "properties": {
+        "kind": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The kind of the event source.",
+          "enum": [
+            "Microsoft.EventHub",
+            "Microsoft.IoTHub"
+          ],
+          "x-ms-enum": {
+            "name": "EventSourceKind",
+            "modelAsString": true
+          }
+        },
         "tags": {
           "type": "object",
           "additionalProperties": {
