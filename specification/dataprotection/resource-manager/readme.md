@@ -28,7 +28,7 @@ These are the global settings for the DataProtection API.
 title: Data Protection Client
 description: Open API 2.0 Specs for Azure Data Protection service
 openapi-type: arm
-tag: package-2020-01
+tag: package-2021-01
 csharp-sdks-folder: ./Generated/CSharp
 python-sdks-folder: ./Generated/Python
 go-sdk-folder: ./Generated/Golang
@@ -46,22 +46,22 @@ semantic-validator: true
 message-format: json
 ```
 
-### Tag: package-2020-01
+### Tag: package-2021-01
 
-These settings apply only when `--tag=package-2020-01` is specified on the command line.
+These settings apply only when `--tag=package-2021-01` is specified on the command line.
 
-``` yaml $(tag) == 'package-2020-01'
+``` yaml $(tag) == 'package-2021-01'
 input-file:
-- Microsoft.DataProtection/preview/2020-01-01-alpha/dataprotection.json
+- Microsoft.DataProtection/preview/2021-01-01/dataprotection.json
 ```
 
-### Tag: package-2020-01-only
+### Tag: package-2021-01-only
 
-These settings apply only when `--tag=package-2020-01` is specified on the command line.
+These settings apply only when `--tag=package-2021-01` is specified on the command line.
 
-``` yaml $(tag) == 'package-2020-01-only'
+``` yaml $(tag) == 'package-2021-01-only'
 input-file:
-- Microsoft.DataProtection/preview/2020-01-01-alpha/dataprotection.json
+- Microsoft.DataProtection/preview/2021-01-01/dataprotection.json
 ```
 
 ---
@@ -122,7 +122,7 @@ require: $(this-folder)/../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
-  - Microsoft.DataProtection/preview/2020-01-01-alpha/dataprotection.json  
+  - Microsoft.DataProtection/preview/2021-01-01/dataprotection.json  
 ```
 
 If there are files that should not be in the `all-api-versions` set,

@@ -17,18 +17,18 @@ output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-dataprotection
 
 ``` yaml $(java) && $(multiapi)
 batch:
-  - tag: package-2020-01
+  - tag: package-2021-01
 ```
 
-### Tag: package-2020-01 and java
+### Tag: package-2021-01 and java
 
-These settings apply only when `--tag=package-2020-01 --java` is specified on the command line.
+These settings apply only when `--tag=package-2021-01 --java` is specified on the command line.
 Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
 
-``` yaml $(tag) == 'package-2020-01' && $(java) && $(multiapi)
+``` yaml $(tag) == 'package-2021-01' && $(java) && $(multiapi)
 java:
-  namespace: com.microsoft.azure.management.dataprotection.v2020_01_01
-  output-folder: $(azure-libraries-for-java-folder)/dataprotection/resource-manager/v2020_01_01
+  namespace: com.microsoft.azure.management.dataprotection.v2021_01_01
+  output-folder: $(azure-libraries-for-java-folder)/dataprotection/resource-manager/v2021_01_01
 regenerate-manager: true
 generate-interface: true
 ```
