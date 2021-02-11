@@ -32,13 +32,13 @@
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "#/definitions/CommunicationErrorResponse"
+              "$ref": "../../../Microsoft.CommunicationServicesCommon/stable/2021-03-07/common.json#/definitions/CommunicationErrorResponse"
             }
           },
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/TurnCredentialsResponse"
+              "$ref": "#/definitions/CommunicationTurnCredentialsResponse"
             }
           }
         },
@@ -51,53 +51,7 @@
     }
   },
   "definitions": {
-    "CommunicationError": {
-      "description": "The Communication Services error.",
-      "required": [
-        "code",
-        "message"
-      ],
-      "type": "object",
-      "properties": {
-        "code": {
-          "description": "The error code.",
-          "type": "string"
-        },
-        "message": {
-          "description": "The error message.",
-          "type": "string"
-        },
-        "target": {
-          "description": "The error target.",
-          "type": "string",
-          "readOnly": true
-        },
-        "details": {
-          "description": "Further details about specific errors that led to this error.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/CommunicationError"
-          },
-          "readOnly": true
-        },
-        "innerError": {
-          "$ref": "#/definitions/CommunicationError"
-        }
-      }
-    },
-    "CommunicationErrorResponse": {
-      "description": "The Communication Services error.",
-      "required": [
-        "error"
-      ],
-      "type": "object",
-      "properties": {
-        "error": {
-          "$ref": "#/definitions/CommunicationError"
-        }
-      }
-    },
-    "TurnServer": {
+    "CommunicationTurnServer": {
       "description": "An instance of a TURN server with credentials.",
       "required": [
         "credential",
@@ -120,7 +74,7 @@
         }
       }
     },
-    "TurnCredentialsResponse": {
+    "CommunicationTurnCredentialsResponse": {
       "description": "A TURN credentials response.",
       "required": [
         "expiresOn",
@@ -137,7 +91,7 @@
           "description": "An array representing the credentials and the TURN server URL.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/TurnServer"
+            "$ref": "#/definitions/CommunicationTurnServer"
           }
         }
       }
