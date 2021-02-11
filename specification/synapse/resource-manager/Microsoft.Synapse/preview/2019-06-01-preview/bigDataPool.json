@@ -446,7 +446,7 @@
           "description": "List of custom libraries/packages associated with the spark pool.",
           "type": "array",
           "items": {
-            "$ref": "../../../../data-plane/Microsoft.Synapse/preview/2019-06-01-preview/library.json#/definitions/LibraryResourceProperties"
+            "$ref": "#/definitions/LibraryInfo"
           }
         },
         "sparkConfigProperties": {
@@ -489,6 +489,12 @@
             "name": "NodeSizeFamily",
             "modelAsString": true
           }
+        },
+        "lastSucceededTimestamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time when the Big Data pool was updated successfully.",
+          "readOnly": true
         }
       }
     },
@@ -536,6 +542,45 @@
         "enabled": {
           "type": "boolean",
           "description": "Indicates whether Dynamic Executor Allocation is enabled or not."
+        }
+      }
+    },
+    "LibraryInfo": {
+      "type": "object",
+      "description": "Library/package information of a Big Data pool powered by Apache Spark",
+      "title": "Information about a library/package created at the workspace level.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the library."
+        },
+        "path": {
+          "type": "string",
+          "description": "Storage blob path of library."
+        },
+        "containerName": {
+          "type": "string",
+          "description": "Storage blob container name."
+        },
+        "uploadedTimestamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The last update time of the library.",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "description": "Type of the library."
+        },
+        "provisioningStatus": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Provisioning status of the library/package."
+        },
+        "creatorId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Creator Id of the library/package."
         }
       }
     },
