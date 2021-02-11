@@ -48,11 +48,16 @@
           },
           "properties": {
             "activeKey": {
-              "keyUrl": "https://myvaultdifferentsub.vault-int.azure-int.net/keys/keyName/KeyVersion2"
+              "keyUrl": "https://myvaultdifferentsub.vault-int.azure-int.net/keys/keyName/keyVersion2"
             },
             "encryptionType": "EncryptionAtRestWithCustomerKey",
             "rotationToLatestKeyVersionEnabled": true,
-            "provisioningState": "Succeeded",
+            "previousKeys": [
+              {
+                "keyUrl": "https://myvaultdifferentsub.vault-int.azure-int.net/keys/keyName/keyVersion1"
+              }
+            ],
+            "provisioningState": "Updating",
             "lastKeyRotationTimestamp": "2020-12-01T04:41:35.079872+00:00"
           }
         }
