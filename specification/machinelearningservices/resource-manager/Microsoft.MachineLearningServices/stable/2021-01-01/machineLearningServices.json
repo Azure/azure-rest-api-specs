@@ -398,6 +398,7 @@
         ],
         "description": "Resync all the keys associated with this workspace. This includes keys for the storage account, app insights and password for container registry",
         "operationId": "Workspaces_ResyncKeys",
+        "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "Resync Workspace Keys": {
             "$ref": "./examples/resyncWorkspaceKeys.json"
@@ -419,6 +420,12 @@
         ],
         "responses": {
           "200": {
+            "description": "The request was successful; the request was well-formed and received properly."
+          },
+          "201": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+          },
+          "202": {
             "description": "The request was successful; the request was well-formed and received properly."
           },
           "default": {
