@@ -29,7 +29,7 @@
   "paths": {
     "/subscriptions/{subscriptionId}/providers/Microsoft.AlertsManagement/actionRules": {
       "get": {
-        "summary": "Get all action rule in a given subscription",
+        "summary": "Get all action rules in a given subscription",
         "description": "List all action rules of the subscription and given input filters",
         "operationId": "ActionRules_ListBySubscription",
         "parameters": [
@@ -713,7 +713,9 @@
       "type": "object",
       "description": "Recurrence object",
       "discriminator": "recurrenceType",
-      "required": ["recurrenceType"],
+      "required": [
+        "recurrenceType"
+      ],
       "properties": {
         "recurrenceType": {
           "type": "string",
@@ -741,7 +743,10 @@
     "Daily": {
       "type": "object",
       "description": "Daily recurrence object",
-      "required": ["startTime" , "endTime"],
+      "required": [
+        "startTime",
+        "endTime"
+      ],
       "allOf": [
         {
           "$ref": "#/definitions/Recurrences"
@@ -754,7 +759,9 @@
     "Weekly": {
       "type": "object",
       "description": "Weekly recurrence object",
-      "required": ["daysOfWeek"],
+      "required": [
+        "daysOfWeek"
+      ],
       "allOf": [
         {
           "$ref": "#/definitions/Recurrences"
@@ -776,7 +783,9 @@
     "Monthly": {
       "type": "object",
       "description": "Monthly recurrence object",
-      "required": ["daysOfMonth"],
+      "required": [
+        "daysOfMonth"
+      ],
       "allOf": [
         {
           "$ref": "#/definitions/Recurrences"
@@ -831,7 +840,9 @@
     },
     "ActionRuleProperties": {
       "description": "Action rule properties defining scopes, conditions, scheduling logic for action rule",
-      "required": ["scopes"],
+      "required": [
+        "scopes"
+      ],
       "properties": {
         "scopes": {
           "description": "Scopes on which action rule will apply",
@@ -847,7 +858,7 @@
         },
         "actions": {
           "description": "Actions to be applied",
-          "$ref" : "#/definitions/Actions"
+          "$ref": "#/definitions/Actions"
         },
         "description": {
           "type": "string",

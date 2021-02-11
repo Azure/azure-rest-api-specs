@@ -27,8 +27,8 @@
         },
         "properties": {
           "scopes": [
-              "/subscriptions/1e3ff1c0-771a-4119-a03b-be82a51e232d/resourceGroups/alertscorrelationrg"
-            ],
+            "/subscriptions/1e3ff1c0-771a-4119-a03b-be82a51e232d/resourceGroups/alertscorrelationrg"
+          ],
           "conditions": {
             "severity": {
               "operator": "Equals",
@@ -55,14 +55,17 @@
             "effectiveFrom": "2018-12-10T22:05:09Z",
             "effectiveUntil": "2018-12-05T22:05:09Z",
             "timeZone": "Pacific Standard Time",
-            "recurrences": [{
-              "recurrenceType": "Weekly",
-              "startTime": "06:00:00",
-              "endTime": "14:00:00",
-              "daysOfWeek": [
-                "Tuesday", "Friday"
-              ]
-            }]
+            "recurrences": [
+              {
+                "recurrenceType": "Weekly",
+                "startTime": "06:00:00",
+                "endTime": "14:00:00",
+                "daysOfWeek": [
+                  "Tuesday",
+                  "Friday"
+                ]
+              }
+            ]
           },
           "actions": {
             "removeAllActionGroups": true

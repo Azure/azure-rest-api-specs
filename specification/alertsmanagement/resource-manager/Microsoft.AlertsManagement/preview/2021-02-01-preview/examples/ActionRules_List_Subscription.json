@@ -18,9 +18,9 @@
               "lastModifiedAt": "2018-06-12T22:05:09Z"
             },
             "properties": {
-              "scopes":  [
-                  "/subscriptions/1e3ff1c0-771a-4119-a03b-be82a51e232d/resourceGroups/alertscorrelationrg"
-                ],
+              "scopes": [
+                "/subscriptions/1e3ff1c0-771a-4119-a03b-be82a51e232d/resourceGroups/alertscorrelationrg"
+              ],
               "conditions": {
                 "severity": {
                   "operator": "Equals",
@@ -47,11 +47,13 @@
                 "effectiveFrom": "2018-01-10T22:05:09Z",
                 "effectiveUntil": "2018-12-10T22:05:09Z",
                 "timeZone": "Pacific Standard Time",
-                "recurrences": [{
-                  "recurrenceType": "Daily",
-                  "startTime": "06:00:00",
-                  "endTime": "14:00:00"
-                }]
+                "recurrences": [
+                  {
+                    "recurrenceType": "Daily",
+                    "startTime": "06:00:00",
+                    "endTime": "14:00:00"
+                  }
+                ]
               },
               "actions": {
                 "removeAllActionGroups": true
@@ -76,8 +78,8 @@
             },
             "properties": {
               "scopes": [
-                  "/subscriptions/1e3ff1c0-771a-4119-a03b-be82a51e232d/resourceGroups/alertscorrelationrg/providers/Microsoft.Compute/VirtualMachines/testResource"
-                ],
+                "/subscriptions/1e3ff1c0-771a-4119-a03b-be82a51e232d/resourceGroups/alertscorrelationrg/providers/Microsoft.Compute/VirtualMachines/testResource"
+              ],
               "conditions": {
                 "monitorCondition": {
                   "operator": "Equals",
@@ -97,7 +99,9 @@
               "enabled": true,
               "actions": {
                 "addActionGroups": {
-                  "actionGroupIds": ["actiongGroup1"]
+                  "actionGroupIds": [
+                    "actiongGroup1"
+                  ]
                 }
               }
             },
