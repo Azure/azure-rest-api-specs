@@ -10,20 +10,25 @@
         "key2": "value2"
       },
       "properties": {
-        "status": "Disabled"
+        "enabled": false
       }
     }
   },
   "responses": {
     "200": {
       "body": {
+        "systemData": {
+          "createdBy": "abc@microsoft.com",
+          "createdByType": "User",
+          "createdAt": "2018-06-12T22:05:09Z",
+          "lastModifiedBy": "xyz@microsoft.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2018-06-12T22:05:09Z"
+        },
         "properties": {
-          "scope": {
-            "scopeType": "ResourceGroup",
-            "values": [
+          "scopes": [
               "/subscriptions/1e3ff1c0-771a-4119-a03b-be82a51e232d/resourceGroups/alertscorrelationrg"
-            ]
-          },
+            ],
           "conditions": {
             "severity": {
               "operator": "Equals",
@@ -46,26 +51,24 @@
               ]
             }
           },
-          "suppressionConfig": {
-            "recurrenceType": "Weekly",
-            "schedule": {
-              "startDate": "12/09/2018",
-              "endDate": "12/18/2018",
+          "schedulingConfig": {
+            "effectiveFrom": "2018-12-10T22:05:09Z",
+            "effectiveUntil": "2018-12-05T22:05:09Z",
+            "timeZone": "Pacific Standard Time",
+            "recurrences": [{
+              "recurrenceType": "Weekly",
               "startTime": "06:00:00",
               "endTime": "14:00:00",
-              "recurrenceValues": [
-                1,
-                2
+              "daysOfWeek": [
+                "Tuesday", "Friday"
               ]
-            }
+            }]
           },
-          "type": "Suppression",
+          "actions": {
+            "removeAllActionGroups": true
+          },
           "description": "Action rule on resource group for weekly suppression",
-          "status": "Disabled",
-          "createdAt": "2018-06-12T22:05:09Z",
-          "lastModifiedAt": "2018-06-12T22:05:09Z",
-          "createdBy": "abc@microsoft.com",
-          "lastModifiedBy": "xyz@microsoft.com"
+          "enabled": false
         },
         "id": "/subscriptions/1e3ff1c0-771a-4119-a03b-be82a51e232d/resourceGroups/alertscorrelationrg/providers/Microsoft.AlertsManagement/actionRules/WeeklySuppression",
         "type": "Microsoft.AlertsManagement/actionRules",

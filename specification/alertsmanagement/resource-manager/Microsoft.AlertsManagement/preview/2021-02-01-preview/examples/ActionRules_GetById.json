@@ -8,13 +8,22 @@
   "responses": {
     "200": {
       "body": {
+        "id": "/subscriptions/1e3ff1c0-771a-4119-a03b-be82a51e232d/resourceGroups/alertscorrelationrg/providers/Microsoft.AlertsManagement/actionRules/DailySuppression",
+        "type": "Microsoft.AlertsManagement/actionRules",
+        "name": "DailySuppression",
+        "location": "Global",
+        "systemData": {
+          "createdBy": "abc@microsoft.com",
+          "createdByType": "User",
+          "createdAt": "2018-06-12T22:05:09Z",
+          "lastModifiedBy": "xyz@microsoft.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2018-06-12T22:05:09Z"
+        },
         "properties": {
-          "scope": {
-            "scopeType": "ResourceGroup",
-            "values": [
+          "scopes": [
               "/subscriptions/1e3ff1c0-771a-4119-a03b-be82a51e232d/resourceGroups/alertscorrelationrg"
-            ]
-          },
+            ],
           "conditions": {
             "severity": {
               "operator": "Equals",
@@ -43,27 +52,32 @@
               ]
             }
           },
-          "type": "Suppression",
-          "suppressionConfig": {
-            "recurrenceType": "Daily",
-            "schedule": {
-              "startDate": "12/09/2018",
-              "endDate": "12/18/2018",
+          "schedulingConfig": {
+            "effectiveFrom": "2018-01-10T22:05:09Z",
+            "effectiveUntil": "2018-12-10T22:05:09Z",
+            "timeZone": "Pacific Standard Time",
+            "recurrences": [{
+              "recurrenceType": "Daily",
               "startTime": "06:00:00",
               "endTime": "14:00:00"
+            },
+            {
+              "recurrenceType": "Weekly",
+              "startTime": "10:00:00",
+              "endTime": "20:00:00",
+              "daysOfWeek": ["Saturday", "Sunday"]
             }
+          ]
           },
-          "description": "Action rule on resource group for daily suppression",
-          "status": "Enabled",
-          "createdAt": "2018-06-12T22:05:09Z",
-          "lastModifiedAt": "2018-06-12T22:05:09Z",
-          "createdBy": "abc@microsoft.com",
-          "lastModifiedBy": "xyz@microsoft.com"
+          "actions": {
+            "addActionGroups": {
+              "actionGroupIds": ["actiongGroup1", "actiongGroup2"]
+            },
+            "removeAllActionGroups": false
+          },
+          "description": "Action rule on resource group for daily and weekly scheduling",
+          "enabled": true
         },
-        "id": "/subscriptions/1e3ff1c0-771a-4119-a03b-be82a51e232d/resourceGroups/alertscorrelationrg/providers/Microsoft.AlertsManagement/actionRules/DailySuppression",
-        "type": "Microsoft.AlertsManagement/actionRules",
-        "name": "DailySuppression",
-        "location": "Global",
         "tags": {}
       }
     }

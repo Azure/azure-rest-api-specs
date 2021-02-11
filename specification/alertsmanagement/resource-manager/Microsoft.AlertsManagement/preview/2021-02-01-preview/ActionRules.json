@@ -246,7 +246,7 @@
           {
             "name": "actionRule",
             "in": "body",
-            "description": "action rule to be created/updated",
+            "description": "Action rule to be created/updated",
             "required": true,
             "schema": {
               "$ref": "#/definitions/ActionRule"
@@ -413,6 +413,7 @@
       "in": "query",
       "required": true,
       "enum": [
+        "2019-05-05-preview",
         "2021-02-01-preview"
       ],
       "x-ms-enum": {
@@ -429,7 +430,7 @@
       "x-ms-parameter-location": "method"
     },
     "targetResource": {
-      "description": "Filter by target resource( which is full ARM ID) Default value is select all.",
+      "description": "Filter by target resource (which is full ARM ID). Default value is select all.",
       "name": "targetResource",
       "type": "string",
       "in": "query",
@@ -473,7 +474,7 @@
       }
     },
     "severity": {
-      "description": "Filter by severity.  Default value is select all.",
+      "description": "Filter by severity. Default value is select all.",
       "name": "severity",
       "type": "string",
       "in": "query",
@@ -492,7 +493,7 @@
       }
     },
     "description": {
-      "description": "filter by alert rule description",
+      "description": "Filter by alert rule description.",
       "name": "description",
       "type": "string",
       "in": "query",
@@ -500,7 +501,7 @@
       "x-ms-parameter-location": "method"
     },
     "alertRuleId": {
-      "description": "filter by alert rule id",
+      "description": "Filter by alert rule id.",
       "name": "alertRuleId",
       "type": "string",
       "in": "query",
@@ -508,7 +509,7 @@
       "x-ms-parameter-location": "method"
     },
     "actionGroup": {
-      "description": "filter by action group configured as part of action rule",
+      "description": "Filter by action group configured as part of action rule.",
       "name": "actionGroup",
       "type": "string",
       "in": "query",
@@ -516,7 +517,7 @@
       "x-ms-parameter-location": "method"
     },
     "actionRuleName": {
-      "description": "filter by action rule name",
+      "description": "Filter by action rule name.",
       "name": "name",
       "type": "string",
       "in": "query",
@@ -524,7 +525,7 @@
       "x-ms-parameter-location": "method"
     },
     "impactedScope": {
-      "description": "filter by impacted/target scope (provide comma separated list for multiple scopes). The value should be an well constructed ARM id of the scope.",
+      "description": "Filter by impacted/target scope (provide comma separated list for multiple scopes). The value should be a well constructed ARM id of the scope.",
       "name": "impactedScope",
       "type": "string",
       "in": "query",
@@ -603,6 +604,7 @@
           ]
         },
         "tags": {
+          "type": "object",
           "additionalProperties": {
             "type": "string"
           },
@@ -613,39 +615,20 @@
         "location"
       ]
     },
-    "Scope": {
-      "type": "object",
-      "description": "Target scope for a given action rule. By default scope will be the subscription. User can also provide list of resource groups or list of resources from the scope subscription as well.",
-      "properties": {
-        "scopeType": {
-          "type": "string",
-          "description": "type of target scope",
-          "enum": [
-            "ResourceGroup",
-            "Resource",
-            "Subscription"
-          ],
-          "x-ms-enum": {
-            "name": "ScopeType",
-            "modelAsString": true
-          }
-        },
-        "values": {
-          "type": "array",
-          "description": "list of ARM IDs of the given scope type which will be the target of the given action rule.",
-          "items": {
-            "type": "string"
-          }
-        }
+    "Scopes": {
+      "type": "array",
+      "description": "List of ARM IDs which will be the target of the given action rule.",
+      "items": {
+        "type": "string"
       }
     },
     "Condition": {
       "type": "object",
-      "description": "condition to trigger an action rule",
+      "description": "Condition to trigger an action rule",
       "properties": {
         "operator": {
           "type": "string",
-          "description": "operator for a given condition",
+          "description": "Operator for a given condition",
           "enum": [
             "Equals",
             "NotEquals",
@@ -659,7 +642,7 @@
         },
         "values": {
           "type": "array",
-          "description": "list of values to match for a given condition.",
+          "description": "List of values to match for a given condition.",
           "items": {
             "type": "string"
           }
@@ -671,94 +654,168 @@
       "description": "Conditions in alert instance to be matched for a given action rule. Default value is all. Multiple values could be provided with comma separation.",
       "properties": {
         "severity": {
-          "description": "filter alerts by severity",
+          "description": "Filter alerts by severity",
           "$ref": "#/definitions/Condition"
         },
         "monitorService": {
-          "description": "filter alerts by monitor service",
+          "description": "Filter alerts by monitor service",
           "$ref": "#/definitions/Condition"
         },
         "monitorCondition": {
-          "description": "filter alerts by monitor condition",
+          "description": "Filter alerts by monitor condition",
           "$ref": "#/definitions/Condition"
         },
         "targetResourceType": {
-          "description": "filter alerts by target resource type",
+          "description": "Filter alerts by target resource type",
           "$ref": "#/definitions/Condition"
         },
         "alertRuleId": {
-          "description": "filter alerts by alert rule id",
+          "description": "Filter alerts by alert rule id",
           "$ref": "#/definitions/Condition"
         },
         "description": {
-          "description": "filter alerts by alert rule description",
+          "description": "Filter alerts by alert rule description",
           "$ref": "#/definitions/Condition"
         },
         "alertContext": {
-          "description": "filter alerts by alert context (payload)",
+          "description": "Filter alerts by alert context (payload)",
           "$ref": "#/definitions/Condition"
         }
       }
     },
-    "SuppressionConfig": {
+    "SchedulingConfig": {
       "type": "object",
-      "description": "Suppression logic for a given action rule",
-      "required": [
-        "recurrenceType"
-      ],
+      "description": "Scheduling configuration for a given action rule",
+      "properties": {
+        "effectiveFrom": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Scheduling effective from time. Date-Time in ISO-8601 format."
+        },
+        "effectiveUntil": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Scheduling effective until time. Date-Time in ISO-8601 format."
+        },
+        "timeZone": {
+          "type": "string",
+          "description": "Scheduling time zone"
+        },
+        "recurrences": {
+          "type": "array",
+          "description": "List of recurrences",
+          "items": {
+            "$ref": "#/definitions/Recurrences"
+          }
+        }
+      }
+    },
+    "Recurrences": {
+      "type": "object",
+      "description": "Recurrence object",
+      "discriminator": "recurrenceType",
+      "required": ["recurrenceType"],
       "properties": {
         "recurrenceType": {
           "type": "string",
-          "description": "Specifies when the suppression should be applied",
+          "description": "Specifies when the recurrence should be applied",
           "enum": [
-            "Always",
-            "Once",
             "Daily",
             "Weekly",
             "Monthly"
           ],
           "x-ms-enum": {
-            "name": "SuppressionType",
+            "name": "RecurrenceType",
             "modelAsString": true
           }
         },
-        "schedule": {
-          "description": "suppression schedule configuration",
-          "$ref": "#/definitions/SuppressionSchedule"
-        }
-      }
-    },
-    "SuppressionSchedule": {
-      "type": "object",
-      "description": "Schedule for a given suppression configuration.",
-      "properties": {
-        "startDate": {
-          "type": "string",
-          "description": "Start date for suppression"
-        },
-        "endDate": {
-          "type": "string",
-          "description": "End date for suppression"
-        },
         "startTime": {
           "type": "string",
-          "description": "Start time for suppression"
+          "format": "time",
+          "description": "Start time for recurrence"
         },
         "endTime": {
           "type": "string",
-          "description": "End date for suppression"
-        },
-        "recurrenceValues": {
-          "type": "array",
-          "description": "Specifies the values for recurrence pattern",
-          "items": {
-            "type": "integer"
-          }
+          "format": "time",
+          "description": "End date for recurrence"
         }
       }
     },
+    "Daily": {
+      "type": "object",
+      "description": "Daily recurrence object",
+      "required": ["startTime" , "endTime"],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Recurrences"
+        },
+        {
+          "type": "object"
+        }
+      ]
+    },
+    "Weekly": {
+      "type": "object",
+      "description": "Weekly recurrence object",
+      "required": ["daysOfWeek"],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Recurrences"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "daysOfWeek": {
+              "type": "array",
+              "description": "Specifies the values for weekly recurrence pattern",
+              "items": {
+                "$ref": "#/definitions/DaysOfWeek"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "Monthly": {
+      "type": "object",
+      "description": "Monthly recurrence object",
+      "required": ["daysOfMonth"],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Recurrences"
+        },
+        {
+          "properties": {
+            "daysOfMonth": {
+              "type": "array",
+              "description": "Specifies the values for monthly recurrence pattern",
+              "items": {
+                "type": "integer"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "DaysOfWeek": {
+      "type": "string",
+      "description": "Days of week",
+      "enum": [
+        "Sunday",
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday"
+      ],
+      "x-ms-enum": {
+        "name": "DaysOfWeek",
+        "modelAsString": true
+      }
+    },
     "ActionRule": {
-      "description": "Action rule object containing target scope, conditions and suppression logic",
+      "description": "Action rule object containing target scopes, conditions and scheduling logic",
       "allOf": [
         {
           "$ref": "#/definitions/ManagedResource"
@@ -766,29 +823,84 @@
       ],
       "properties": {
         "properties": {
-          "description": "action rule properties",
+          "description": "Action rule properties",
           "$ref": "#/definitions/ActionRuleProperties"
+        },
+        "systemData": {
+          "description": "Action rule system data",
+          "$ref": "#/definitions/SystemDataProperties"
         }
       }
     },
     "ActionRuleProperties": {
-      "description": "Action rule properties defining scope, conditions, suppression logic for action rule",
-      "discriminator": "type",
-      "required": [
-        "type"
-      ],
+      "description": "Action rule properties defining scopes, conditions, scheduling logic for action rule",
+      "required": ["scopes"],
       "properties": {
-        "scope": {
-          "description": "scope on which action rule will apply",
-          "$ref": "#/definitions/Scope"
+        "scopes": {
+          "description": "Scopes on which action rule will apply",
+          "$ref": "#/definitions/Scopes"
         },
         "conditions": {
-          "description": "conditions on which alerts will be filtered",
+          "description": "Conditions on which alerts will be filtered",
           "$ref": "#/definitions/Conditions"
+        },
+        "schedulingConfig": {
+          "description": "Scheduling for action rule",
+          "$ref": "#/definitions/SchedulingConfig"
+        },
+        "actions": {
+          "description": "Actions to be applied",
+          "$ref" : "#/definitions/Actions"
         },
         "description": {
           "type": "string",
           "description": "Description of action rule"
+        },
+        "enabled": {
+          "type": "boolean",
+          "description": "Indicates if the given action rule is enabled or disabled"
+        }
+      }
+    },
+    "Actions": {
+      "type": "object",
+      "description": "Actions to be applied",
+      "properties": {
+        "addActionGroups": {
+          "description": "Action groups to add to action rule",
+          "$ref": "#/definitions/ActionGroups"
+        },
+        "removeAllActionGroups": {
+          "type": "boolean",
+          "description": "Indicates if all action groups should be removed"
+        }
+      }
+    },
+    "ActionGroups": {
+      "type": "object",
+      "description": "Action group Ids to add",
+      "properties": {
+        "actionGroupIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "SystemDataProperties": {
+      "description": "Action rule system data properties defining created, modified for action rule",
+      "readOnly": true,
+      "properties": {
+        "createdBy": {
+          "type": "string",
+          "description": "Created by",
+          "readOnly": true
+        },
+        "createdByType": {
+          "type": "string",
+          "description": "Created by type",
+          "readOnly": true
         },
         "createdAt": {
           "type": "string",
@@ -796,102 +908,23 @@
           "description": "Creation time of action rule. Date-Time in ISO-8601 format.",
           "readOnly": true
         },
+        "lastModifiedBy": {
+          "type": "string",
+          "description": "Last modified by",
+          "readOnly": true
+        },
+        "lastModifiedByType": {
+          "type": "string",
+          "description": "Last modified by type",
+          "readOnly": true
+        },
         "lastModifiedAt": {
           "type": "string",
           "format": "date-time",
-          "description": "Last updated time of action rule. Date-Time in ISO-8601 format.",
+          "description": "Last modified time of action rule. Date-Time in ISO-8601 format.",
           "readOnly": true
-        },
-        "createdBy": {
-          "type": "string",
-          "description": "Created by user name.",
-          "readOnly": true
-        },
-        "lastModifiedBy": {
-          "type": "string",
-          "description": "Last modified by user name.",
-          "readOnly": true
-        },
-        "status": {
-          "type": "string",
-          "description": "Indicates if the given action rule is enabled or disabled",
-          "enum": [
-            "Enabled",
-            "Disabled"
-          ],
-          "x-ms-enum": {
-            "name": "ActionRuleStatus",
-            "modelAsString": true
-          }
-        },
-        "type": {
-          "type": "string",
-          "description": "Indicates type of action rule",
-          "enum": [
-            "Suppression",
-            "ActionGroup",
-            "Diagnostics"
-          ],
-          "x-ms-enum": {
-            "name": "ActionRuleType",
-            "modelAsString": true
-          }
         }
       }
-    },
-    "Suppression": {
-      "title": "Suppression based Action Rule",
-      "description": "Action rule with suppression configuration",
-      "required": [
-        "suppressionConfig"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/ActionRuleProperties"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "suppressionConfig": {
-              "description": "suppression configuration for the action rule",
-              "$ref": "#/definitions/SuppressionConfig"
-            }
-          }
-        }
-      ]
-    },
-    "ActionGroup": {
-      "title": "Action Group based Action Rule",
-      "description": "Action rule with action group configuration",
-      "required": [
-        "actionGroupId"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/ActionRuleProperties"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "actionGroupId": {
-              "type": "string",
-              "description": "Action group to trigger if action rule matches"
-            }
-          }
-        }
-      ]
-    },
-    "Diagnostics": {
-      "title": "Diagnostics based Action Rule",
-      "description": "Action rule with diagnostics configuration",
-      "allOf": [
-        {
-          "$ref": "#/definitions/ActionRuleProperties"
-        },
-        {
-          "type": "object"
-        }
-      ]
     },
     "ActionRulesList": {
       "description": "List of action rules",
@@ -912,17 +945,9 @@
     "PatchProperties": {
       "description": "Action rule properties supported by patch",
       "properties": {
-        "status": {
-          "type": "string",
-          "description": "Indicates if the given action rule is enabled or disabled",
-          "enum": [
-            "Enabled",
-            "Disabled"
-          ],
-          "x-ms-enum": {
-            "name": "ActionRuleStatus",
-            "modelAsString": true
-          }
+        "enabled": {
+          "type": "boolean",
+          "description": "Indicates if the given action rule is enabled or disabled"
         }
       }
     },
@@ -931,12 +956,15 @@
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "description": "properties supported by patch operation",
+          "description": "Properties supported by patch operation",
           "$ref": "#/definitions/PatchProperties"
         },
         "tags": {
           "type": "object",
-          "description": "tags to be updated"
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Tags to be updated"
         }
       }
     }
