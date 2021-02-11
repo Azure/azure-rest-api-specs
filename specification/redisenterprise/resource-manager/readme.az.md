@@ -2,7 +2,7 @@
 
 These settings apply only when `--az` is specified on the command line.
 
-``` yaml $(az) && $(target-mode) != core
+``` yaml $(az) && $(target-mode) != 'core'
 az:
     extensions: redisenterprise
     namespace: azure.mgmt.redisenterprise
@@ -12,7 +12,7 @@ python-sdk-output-folder: "$(az-output-folder)/azext_redisenterprise/vendored_sd
 # add additional configuration here specific for Azure CLI
 # refer to the faq.md for more details
 ```
-``` yaml $(az) && $(target-mode) == core
+``` yaml $(az) && $(target-mode) == 'core'
 az:
     extensions: redisenterprise
     namespace: azure.mgmt.redisenterprise
