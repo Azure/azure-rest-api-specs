@@ -582,6 +582,46 @@
           "type": "string"
         }
       }
+    },
+    "CheckNameAvailabilityRequest": {
+      "description": "The check availability request body.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "The name of the resource for which availability needs to be checked.",
+          "type": "string"
+        },
+        "type": {
+          "description": "The resource type.",
+          "type": "string"
+        }
+      }
+    },
+    "CheckNameAvailabilityResponse": {
+      "description": "The check availability result.",
+      "type": "object",
+      "properties": {
+        "nameAvailable": {
+          "description": "Indicates if the resource name is available.",
+          "type": "boolean"
+        },
+        "reason": {
+          "description": "The reason why the given name is not available.",
+          "type": "string",
+          "enum": [
+            "Invalid",
+            "AlreadyExists"
+          ],
+          "x-ms-enum": {
+            "name": "CheckNameAvailabilityReason",
+            "modelAsString": true
+          }
+        },
+        "message": {
+          "description": "Detailed reason why the given name is available.",
+          "type": "string"
+        }
+      }
     }
   },
   "parameters": {
@@ -618,6 +658,15 @@
       "required": true,
       "type": "string",
       "description": "The ID of an ongoing async operation.",
+      "minLength": 1,
+      "x-ms-parameter-location": "method"
+    },
+    "LocationParameter": {
+      "name": "location",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of Azure region.",
       "minLength": 1,
       "x-ms-parameter-location": "method"
     }
