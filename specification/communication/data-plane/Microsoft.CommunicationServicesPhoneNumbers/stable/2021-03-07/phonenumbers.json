@@ -60,7 +60,7 @@
                 "type": "string"
               },
               "search-id": {
-                "description": "The search id.",
+                "description": "The search operation id.",
                 "type": "string"
               }
             }
@@ -173,7 +173,7 @@
                 "type": "string"
               },
               "purchase-id": {
-                "description": "The purchase id.",
+                "description": "The purchase operation id.",
                 "type": "string"
               }
             }
@@ -345,7 +345,25 @@
         ],
         "responses": {
           "204": {
-            "description": "Success"
+            "description": "The service has accepted the request and will start processing later. It will return 'NoContent' immediately and include an 'Operation-Location' and 'Location' headers. Client side should further query the operation status using the URL specified in 'Operation-Location' header. When operation completes successfully query final result using URL specified in 'Location' header.",
+            "headers": {
+              "Operation-Location": {
+                "description": "URL to query for status of the operation.",
+                "type": "string"
+              },
+              "Location": {
+                "description": "Url to retrieve the final result after operation completes.",
+                "type": "string"
+              },
+              "operation-id": {
+                "description": "The operation id.",
+                "type": "string"
+              },
+              "release-id": {
+                "description": "The release operation id.",
+                "type": "string"
+              }
+            }
           },
           "default": {
             "description": "Failure",
@@ -477,7 +495,7 @@
                 "type": "string"
               },
               "capabilities-id": {
-                "description": "The capabilities id.",
+                "description": "The capabilities operation id.",
                 "type": "string"
               }
             }
