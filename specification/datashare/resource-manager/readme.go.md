@@ -42,3 +42,13 @@ Please also specify `--go-sdk-folder=<path to the root directory of your azure-s
 
 ``` yaml $(tag) == 'package-2020-09-01' && $(go)
 output-folder: $(go-sdk-folder)/services/datashare/mgmt/2020-09-01/$(namespace)
+```
+
+### Tag: package-2020-10-01-preview and go
+
+These settings apply only when `--tag=package-2020-10-01-preview --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag) == 'package-2020-10-01-preview' && $(go)
+output-folder: $(go-sdk-folder)/services/preview/datashare/mgmt/2020-10-01-preview/$(namespace)
+```
