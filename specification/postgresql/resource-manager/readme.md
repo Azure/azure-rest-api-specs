@@ -98,6 +98,8 @@ These settings apply only when `--tag=package-2018-06-01-privatepreview` is spec
 input-file:
 - Microsoft.DBforPostgreSQL/preview/2018-06-01-privatepreview/PrivateEndpointConnections.json
 - Microsoft.DBforPostgreSQL/preview/2018-06-01-privatepreview/PrivateLinkResources.json
+- Microsoft.DBforPostgreSQL/preview/2018-06-01-privatepreview/PerformanceRecommendations.json
+- Microsoft.DBforPostgreSQL/preview/2018-06-01-privatepreview/QueryPerformanceInsights.json
 ```
 
 ### Tag: package-2018-06-01
