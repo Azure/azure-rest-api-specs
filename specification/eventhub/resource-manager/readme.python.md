@@ -19,6 +19,8 @@ azure-arm: true
 license-header: MICROSOFT_MIT_NO_VERSION
 package-name: azure-mgmt-eventhub
 no-namespace-folders: true
+modelerfour:
+  lenient-model-deduplication: true
 ```
 
 ### Python multi-api
