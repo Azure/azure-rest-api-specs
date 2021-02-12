@@ -27,6 +27,8 @@ input-file:
   - Microsoft.MixedReality/preview/2021-03-01-preview/proxy.json
   - Microsoft.MixedReality/preview/2021-03-01-preview/spatial-anchors.json
   - Microsoft.MixedReality/preview/2021-03-01-preview/remote-rendering.json
+  - Microsoft.MixedReality/preview/2021-03-01-preview/object-anchors.json
+
 ```
 
 ### Tag: schema-mixedreality-2021-01-01 and azureresourceschema
