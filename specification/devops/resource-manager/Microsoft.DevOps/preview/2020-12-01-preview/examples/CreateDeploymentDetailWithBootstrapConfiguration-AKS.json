@@ -19,6 +19,7 @@
             "repository": "contoso/contoso-app",
             "name": "Prod deployment",
             "ref": "refs/heads/release",
+            "accessToken": "xxxxxx",
             "bootstrapConfiguration": {
               "pipelineTemplateId": "ms.vss-continuous-delivery-pipeline-templates.aks-cd-with-dockerfile-github",
               "pipelineTemplateParameters": {
@@ -40,8 +41,7 @@
                 "dockerContext": ".",
                 "armAuthToken": "Bearer xxxxxx",
                 "azureAuth": "{\"scheme\":\"ServicePrincipal\",\"parameters\":{\"serviceprincipalid\":\"00000000-0000-0000-0000-000000000000\",\"serviceprincipalkey\":\"xxx%xxx%xxx#xxx(xx(\",\"subscriptionId\":\"00000000-0000-0000-0000-000000000000\",\"tenantid\":\"00000000-0000-0000-0000-000000000000\"}}"
-              },
-              "accessToken": "xxxxxx"
+              }
             }
           }
         }
@@ -98,10 +98,10 @@
               "name": "Prod deployment",
               "path": "./github/workflow/cd.yml",
               "ref": "refs/heads/release",
+              "accessToken": "",
               "bootstrapConfiguration": {
                 "pipelineTemplateId": "ms.vss-continuous-delivery-pipeline-templates.aks-cd-with-dockerfile-github",
-                "pipelineTemplateParameters": {},
-                "accessToken": ""
+                "pipelineTemplateParameters": {}
               }
             },
             "runUri": "https://github.com/contoso/contoso-app/actions/runs/123",
