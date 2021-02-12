@@ -1,845 +1,798 @@
 {
-    "swagger": "2.0",
-    "info": {
-        "title": "AzureSphereManagementClient",
-        "description": "Use these APIs to manage Azure Sphere in your Azure subscription",
-        "version": "2021-02-01-preview"
-    },
-    "host": "management.azure.com",
-    "schemes": [
-        "https"
-    ],
-    "consumes": [
-        "application/json"
-    ],
-    "produces": [
-        "application/json"
-    ],
-    "security": [
-        {
-            "azure_auth": [
-                "user_impersonation"
-            ]
-        }
-    ],
-    "securityDefinitions": {
-        "azure_auth": {
-            "type": "oauth2",
-            "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
-            "flow": "implicit",
-            "description": "Azure Active Directory OAuth2 Flow.",
-            "scopes": {
-                "user_impersonation": "impersonate your user account"
-            }
-        }
-    },
-    "paths": {
-        "/subscriptions/{subscriptionId}/providers/Microsoft.AzureSphere/operations": {
-            "get": {
-                "tags": [
-                    "Operations"
-                ],
-                "summary": "Lists all of the available Azure Sphere REST API operations.",
-                "operationId": "Operations_List",
-                "parameters": [
-                    {
-                        "$ref": "#/parameters/ApiVersionParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/SubscriptionIdParameter"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK. The request has succeeded.",
-                        "schema": {
-                            "$ref": "#/definitions/OperationList"
-                        }
-                    },
-                    "default": {
-                        "description": "Error response describing why the operation failed.",
-                        "schema": {
-                            "$ref": "#/definitions/DefaultErrorResponse"
-                        }
-                    }
-                },
-                "x-ms-pageable": {
-                    "nextLinkName": "nextLink"
-                }
-            }
-        },
-        "/subscriptions/{subscriptionId}/providers/Microsoft.AzureSphere/azSphereRUs": {
-            "get": {
-                "tags": [
-                    "AzureSphereRUs"
-                ],
-                "description": "Returns a list of Azure Sphere Respource Units for the given subscriptionId",
-                "operationId": "AzureSphereRUsBySubscription_List",
-                "parameters": [
-                    {
-                        "$ref": "#/parameters/ApiVersionParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/SubscriptionIdParameter"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Azure Sphere Resource Units for the subscription details.",
-                        "schema": {
-                            "$ref": "#/definitions/AzureSphereRUList"
-                        }
-                    },
-                    "default": {
-                        "description": "Error response describing why the operation failed.",
-                        "schema": {
-                            "$ref": "#/definitions/DefaultErrorResponse"
-                        }
-                    }
-                },
-                "deprecated": false,
-                "x-ms-pageable": {
-                    "nextLinkName": "nextLink"
-                }
-            }
-        },
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/azSphereRUs": {
-            "get": {
-                "tags": [
-                    "AzureSphereRUs"
-                ],
-                "description": "Returns a list of Azure Sphere Resource Units in the given resource group.",
-                "operationId": "AzureSphereRUs_List",
-                "parameters": [
-                    {
-                        "$ref": "#/parameters/ResourceGroupNameParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/ApiVersionParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/SubscriptionIdParameter"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "The list of Azure Sphere Resource Units for the subscription.",
-                        "schema": {
-                            "$ref": "#/definitions/AzureSphereRUList"
-                        }
-                    },
-                    "default": {
-                        "description": "Error response describing why the operation failed.",
-                        "schema": {
-                            "$ref": "#/definitions/DefaultErrorResponse"
-                        }
-                    }
-                },
-                "deprecated": false,
-                "x-ms-pageable": {
-                    "nextLinkName": "nextLink"
-                }
-            }
-        },
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/azSphereRUs/{azureSphereRUName}": {
-            "get": {
-                "tags": [
-                    "AzureSphereRUs"
-                ],
-                "description": "Returns an Azure Sphere Resource Unit by name.",
-                "operationId": "AzureSphereRUs_Get",
-                "parameters": [
-                    {
-                        "$ref": "#/parameters/ResourceGroupNameParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/ApiVersionParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/SubscriptionIdParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/AzureSphereRUNameParameter"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Azure Sphere Resource Unit details.",
-                        "schema": {
-                            "$ref": "#/definitions/AzureSphereRU"
-                        }
-                    },
-                    "default": {
-                        "description": "Error response describing why the operation failed.",
-                        "schema": {
-                            "$ref": "#/definitions/DefaultErrorResponse"
-                        }
-                    }
-                }
-            },
-            "put": {
-                "tags": [
-                    "AzureSphereRUs"
-                ],
-                "description": "Create or update an Azure Sphere Resource Unit.",
-                "operationId": "AzureSphereRUs_CreateOrUpdate",
-                "parameters": [
-                    {
-                        "$ref": "#/parameters/ResourceGroupNameParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/ApiVersionParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/SubscriptionIdParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/AzureSphereRUNameParameter"
-                    },
-                    {
-                        "name": "AzureSphereRU",
-                        "description": "Azure Sphere Resource Unit details.",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/AzureSphereRU"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Successful.",
-                        "schema": {
-                            "$ref": "#/definitions/AzureSphereRU"
-                        }
-                    },
-                    "default": {
-                        "description": "Error response describing why the operation failed.",
-                        "schema": {
-                            "$ref": "#/definitions/DefaultErrorResponse"
-                        }
-                    }
-                }
-            },
-            "patch": {
-                "tags": [
-                    "AzureSphereRUs"
-                ],
-                "description": "Patch an Azure Sphere Resource Unit.",
-                "operationId": "AzureSphereRUs_Update",
-                "parameters": [
-                    {
-                        "$ref": "#/parameters/ResourceGroupNameParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/ApiVersionParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/SubscriptionIdParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/AzureSphereRUNameParameter"
-                    },
-                    {
-                        "name": "AzureSphereRU",
-                        "description": "Azure Sphere Resource Unit details.",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/AzureSphereRU"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Successful.",
-                        "schema": {
-                            "$ref": "#/definitions/AzureSphereRU"
-                        }
-                    },
-                    "default": {
-                        "description": "Error response describing why the operation failed.",
-                        "schema": {
-                            "$ref": "#/definitions/DefaultErrorResponse"
-                        }
-                    }
-                }
-            },
-            "delete": {
-                "tags": [
-                    "AzureSphereRUs"
-                ],
-                "description": "Delete an Azure Sphere Resource Unit.",
-                "operationId": "AzureSphereRUs_Delete",
-                "parameters": [
-                    {
-                        "$ref": "#/parameters/ResourceGroupNameParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/ApiVersionParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/SubscriptionIdParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/AzureSphereRUNameParameter"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Successful.",
-                        "schema": {
-                            "$ref": "#/definitions/AzureSphereRU"
-                        }
-                    },
-                    "204": {
-                        "description": "Successful. Resource marked for deletion",
-                        "schema": {
-                            "$ref": "#/definitions/AzureSphereRU"
-                        }
-                    },
-                    "default": {
-                        "description": "Error response describing why the operation failed.",
-                        "schema": {
-                            "$ref": "#/definitions/DefaultErrorResponse"
-                        }
-                    }
-                }
-            }
-        },
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/azSphereRUs/{azureSphereRUName}/products": {
-            "get": {
-                "tags": [
-                    "Products"
-                ],
-                "description": "Returns the associated products of a given Azure Sphere Resource Unit by Name",
-                "operationId": "Products_List",
-                "parameters": [
-                    {
-                        "$ref": "#/parameters/ResourceGroupNameParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/ApiVersionParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/SubscriptionIdParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/AzureSphereRUNameParameter"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Azure Sphere Products for the Azure Sphere Resource unit in the subscription.",
-                        "schema": {
-                            "$ref": "#/definitions/ProductList"
-                        }
-                    },
-                    "default": {
-                        "description": "Error response describing why the operation failed.",
-                        "schema": {
-                            "$ref": "#/definitions/DefaultErrorResponse"
-                        }
-                    }
-                },
-                "deprecated": false,
-                "x-ms-pageable": {
-                    "nextLinkName": "nextLink"
-                }
-            }
-        },
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/azSphereRUs/{azureSphereRUName}/products/{productName}": {
-            "get": {
-                "tags": [
-                    "Products"
-                ],
-                "description": "Returns the associated Product for a given Azure Sphere Resource Unit by Name",
-                "operationId": "Products_Get",
-                "parameters": [
-                    {
-                        "$ref": "#/parameters/ResourceGroupNameParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/ApiVersionParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/SubscriptionIdParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/AzureSphereRUNameParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/ProductNameParameter"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Product.",
-                        "schema": {
-                            "$ref": "#/definitions/Product"
-                        }
-                    },
-                    "default": {
-                        "description": "Error response describing why the operation failed.",
-                        "schema": {
-                            "$ref": "#/definitions/DefaultErrorResponse"
-                        }
-                    }
-                }
-            },
-            "put": {
-                "tags": [
-                    "Products"
-                ],
-                "description": "Create or update an Azure Sphere Product.",
-                "operationId": "Products_CreateOrUpdate",
-                "parameters": [
-                    {
-                        "$ref": "#/parameters/ResourceGroupNameParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/ApiVersionParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/SubscriptionIdParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/AzureSphereRUNameParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/ProductNameParameter"
-                    },
-                    {
-                        "name": "Product",
-                        "description": "Azure Sphere Product details.",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/Product"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Successful.",
-                        "schema": {
-                            "$ref": "#/definitions/Product"
-                        }
-                    },
-                    "default": {
-                        "description": "Error response describing why the operation failed.",
-                        "schema": {
-                            "$ref": "#/definitions/DefaultErrorResponse"
-                        }
-                    }
-                }
-            },
-            "patch": {
-                "tags": [
-                    "Products"
-                ],
-                "description": "Patch Azure Sphere Product.",
-                "operationId": "Products_Update",
-                "parameters": [
-                    {
-                        "$ref": "#/parameters/ResourceGroupNameParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/ApiVersionParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/SubscriptionIdParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/AzureSphereRUNameParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/ProductNameParameter"
-                    },
-                    {
-                        "name": "ProductPatch",
-                        "description": "Azure Sphere Product patch details.",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/ProductPatch"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Successful.",
-                        "schema": {
-                            "$ref": "#/definitions/Product"
-                        }
-                    },
-                    "default": {
-                        "description": "Error response describing why the operation failed.",
-                        "schema": {
-                            "$ref": "#/definitions/DefaultErrorResponse"
-                        }
-                    }
-                }
-            },
-            "delete": {
-                "tags": [
-                    "Products"
-                ],
-                "description": "Delete Product in an Azure Sphere Resource Unit.",
-                "operationId": "Products_Delete",
-                "parameters": [
-                    {
-                        "$ref": "#/parameters/ResourceGroupNameParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/ApiVersionParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/SubscriptionIdParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/AzureSphereRUNameParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/ProductNameParameter"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Successful.",
-                        "schema": {
-                            "$ref": "#/definitions/Product"
-                        }
-                    },
-                    "204": {
-                        "description": "Successful. Resource marked for deletion",
-                        "schema": {
-                            "$ref": "#/definitions/Product"
-                        }
-                    },
-                    "default": {
-                        "description": "Error response describing why the operation failed.",
-                        "schema": {
-                            "$ref": "#/definitions/DefaultErrorResponse"
-                        }
-                    }
-                }
-            }
-        }
-    },
-    "definitions": {
-        "Resource": {
-            "description": "An Azure Sphere Resource.",
-            "properties": {
-                "id": {
-                    "description": "Azure Sphere resource Id.",
-                    "type": "string",
-                    "readOnly": true
-                },
-                "name": {
-                    "description": "Azure Sphere resource name.",
-                    "type": "string",
-                    "readOnly": true
-                },
-                "type": {
-                    "description": "Azure Sphere resource type.",
-                    "type": "string",
-                    "readOnly": true
-                },
-                "location": {
-                    "type": "string",
-                    "description": "The Azure Sphere resource location.",
-                    "x-ms-mutability": [
-                        "read",
-                        "create"
-                    ]
-                },
-                "systemData": {
-                    "description": "Metadata pertaining to creation and last modification of the resource.",
-                    "$ref": "#/definitions/SystemData",
-                    "readOnly": true
-                },
-                "tags": {
-                    "description": "resource tags.",
-                    "type": "object",
-                    "readOnly": false,
-                    "additionalProperties": {
-                        "type": "string"
-                    }
-                }
-            },
-            "x-ms-azure-resource": true
-        },
-        "SystemData": {
-            "description": "Metadata pertaining to creation and last modification of the resource.",
-            "type": "object",
-            "readOnly": true,
-            "properties": {
-                "createdBy": {
-                    "type": "string",
-                    "description": "The identity that created the resource."
-                },
-                "createdByType": {
-                    "type": "string",
-                    "description": "The type of identity that created the resource.",
-                    "enum": [
-                        "User",
-                        "Application",
-                        "ManagedIdentity",
-                        "Key"
-                    ],
-                    "x-ms-enum": {
-                        "name": "createdByType",
-                        "modelAsString": true
-                    }
-                },
-                "createdAt": {
-                    "type": "string",
-                    "format": "date-time",
-                    "description": "The timestamp of resource creation (UTC)."
-                },
-                "lastModifiedBy": {
-                    "type": "string",
-                    "description": "The identity that last modified the resource."
-                },
-                "lastModifiedByType": {
-                    "type": "string",
-                    "description": "The type of identity that last modified the resource.",
-                    "enum": [
-                        "User",
-                        "Application",
-                        "ManagedIdentity",
-                        "Key"
-                    ],
-                    "x-ms-enum": {
-                        "name": "createdByType",
-                        "modelAsString": true
-                    }
-                },
-                "lastModifiedAt": {
-                    "type": "string",
-                    "format": "date-time",
-                    "description": "The type of identity that last modified the resource."
-                }
-            }
-        },
-        "AzureSphereRU": {
-            "type": "object",
-            "description": "Azure Sphere Resource Unit details",
-            "allOf": [
-                {
-                    "$ref": "#/definitions/Resource"
-                }
-            ],
-            "properties": {
-                "properties": {
-                    "properties": {
-                        "provisioningState": {
-                            "type": "string",
-                            "description": "Gets or sets the state of the provisioning."
-                        }
-                    },
-                    "type": "object",
-                    "description": "Specific properties of the Azure Sphere Resource Unit object"
-                }
-            }
-        },
-        "AzureSphereOperation": {
-            "type": "object",
-            "description": "Azure Sphere operation details",
-            "allOf": [
-                {
-                    "$ref": "#/definitions/Resource"
-                }
-            ]
-        },
-        "ErrorResponseBody": {
-            "description": "The error object.",
-            "type": "object",
-            "properties": {
-                "code": {
-                    "description": "Error code.",
-                    "type": "string",
-                    "readOnly": true
-                },
-                "message": {
-                    "description": "Error message.",
-                    "type": "string",
-                    "readOnly": true
-                },
-                "target": {
-                    "description": "Error target.",
-                    "type": "string",
-                    "readOnly": true
-                },
-                "details": {
-                    "description": "Error details.",
-                    "type": "array",
-                    "readOnly": true,
-                    "items": {
-                        "$ref": "#/definitions/ErrorResponseBody"
-                    }
-                }
-            }
-        },
-        "DefaultErrorResponse": {
-            "type": "object",
-            "description": "Default error response on failure.",
-            "properties": {
-                "error": {
-                    "description": "The error object.",
-                    "readOnly": true,
-                    "$ref": "#/definitions/ErrorResponseBody"
-                }
-            }
-        },
-        "OperationList": {
-            "description": "The list of Azure Sphere Operations.",
-            "type": "object",
-            "properties": {
-                "nextLink": {
-                    "description": "The link used to get the next page of Azure Sphere Operations list.",
-                    "type": "string"
-                },
-                "value": {
-                    "description": "The list of Azure Sphere Operations.",
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/AzureSphereOperation"
-                    }
-                }
-            }
-        },
-        "AzureSphereRUList": {
-            "description": "The list of Azure Sphere Resource Units.",
-            "type": "object",
-            "properties": {
-                "nextLink": {
-                    "description": "The link used to get the next page of Azure Sphere Resource Unit list.",
-                    "type": "string"
-                },
-                "value": {
-                    "description": "The list of Azure Sphere Resource Units.",
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/AzureSphereRU"
-                    }
-                }
-            }
-        },
-        "Product": {
-            "type": "object",
-            "description": "Azure Sphere Product details",
-            "allOf": [
-                {
-                    "$ref": "#/definitions/Resource"
-                }
-            ],
-            "properties": {
-                "properties": {
-                    "properties": {
-                        "description": {
-                            "type": "string",
-                            "description": "Azure Sphere Product description.",
-                            "minLength": 1,
-                            "maxLength": 150,
-                            "pattern": "^[A-Za-z0-9-._ ]+$"
-                        },
-                        "provisioningState": {
-                            "type": "string",
-                            "description": "Gets or sets the state of the provisioning."
-                        }
-                    },
-                    "required": [
-                        "description"
-                    ],
-                    "type": "object"
-                }
-            }
-        },
-        "ProductPatch": {
-            "type": "object",
-            "description": "Azure Sphere Product details for patching purposes.",
-            "allOf": [
-                {
-                    "$ref": "#/definitions/Resource"
-                }
-            ],
-            "properties": {
-                "properties": {
-                    "properties": {
-                        "description": {
-                            "type": "string",
-                            "description": "Azure Sphere Product description.",
-                            "minLength": 1,
-                            "maxLength": 150,
-                            "pattern": "^[A-Za-z0-9-._ ]+$"
-                        },
-                        "provisioningState": {
-                            "type": "string",
-                            "description": "Gets or sets the state of the provisioning."
-                        }
-                    },
-                    "type": "object"
-                }
-            }
-        },
-        "ProductList": {
-            "description": "The list of Azure Sphere Products.",
-            "type": "object",
-            "properties": {
-                "nextLink": {
-                    "description": "The link used to get the next page of the Azure Sphere Product list.",
-                    "type": "string"
-                },
-                "value": {
-                    "description": "The list of Azure Sphere products.",
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/Product"
-                    }
-                }
-            }
-        }
-    },
-    "parameters": {
-        "SubscriptionIdParameter": {
-            "name": "subscriptionId",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The Azure subscription ID."
-        },
-        "ApiVersionParameter": {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "Client Api Version."
-        },
-        "ResourceGroupNameParameter": {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group.",
-            "x-ms-parameter-location": "method"
-        },
-        "AzureSphereRUNameParameter": {
-            "name": "azureSphereRUName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the Azure Sphere Resource Unit.",
-            "x-ms-parameter-location": "method"
-        },
-        "ProductNameParameter": {
-            "name": "productName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of associated Azure Sphere Product.",
-            "x-ms-parameter-location": "method"
-        }
+  "swagger": "2.0",
+  "info": {
+    "title": "AzureSphereManagementClient",
+    "description": "Use these APIs to manage Azure Sphere in your Azure subscription",
+    "version": "2021-02-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": ["https"],
+  "consumes": ["application/json"],
+  "produces": ["application/json"],
+  "security": [
+    {
+      "azure_auth": ["user_impersonation"]
     }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AzureSphere/operations": {
+      "get": {
+        "tags": ["Operations"],
+        "summary": "Lists all of the available Azure Sphere REST API operations.",
+        "operationId": "Operations_List",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/OperationList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AzureSphere/azSphereRUs": {
+      "get": {
+        "tags": ["AzureSphereRUs"],
+        "description": "Returns a list of Azure Sphere Respource Units for the given subscriptionId",
+        "operationId": "AzureSphereRUsBySubscription_List",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure Sphere Resource Units for the subscription details.",
+            "schema": {
+              "$ref": "#/definitions/AzureSphereRUList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "deprecated": false,
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/azSphereRUs": {
+      "get": {
+        "tags": ["AzureSphereRUs"],
+        "description": "Returns a list of Azure Sphere Resource Units in the given resource group.",
+        "operationId": "AzureSphereRUs_List",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The list of Azure Sphere Resource Units for the subscription.",
+            "schema": {
+              "$ref": "#/definitions/AzureSphereRUList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "deprecated": false,
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/azSphereRUs/{azureSphereRUName}": {
+      "get": {
+        "tags": ["AzureSphereRUs"],
+        "description": "Returns an Azure Sphere Resource Unit by name.",
+        "operationId": "AzureSphereRUs_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/AzureSphereRUNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure Sphere Resource Unit details.",
+            "schema": {
+              "$ref": "#/definitions/AzureSphereRU"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/DefaultErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": ["AzureSphereRUs"],
+        "description": "Create or update an Azure Sphere Resource Unit.",
+        "operationId": "AzureSphereRUs_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/AzureSphereRUNameParameter"
+          },
+          {
+            "name": "AzureSphereRU",
+            "description": "Azure Sphere Resource Unit details.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AzureSphereRU"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful.",
+            "schema": {
+              "$ref": "#/definitions/AzureSphereRU"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/DefaultErrorResponse"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": ["AzureSphereRUs"],
+        "description": "Patch an Azure Sphere Resource Unit.",
+        "operationId": "AzureSphereRUs_Update",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/AzureSphereRUNameParameter"
+          },
+          {
+            "name": "AzureSphereRU",
+            "description": "Azure Sphere Resource Unit details.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AzureSphereRU"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful.",
+            "schema": {
+              "$ref": "#/definitions/AzureSphereRU"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/DefaultErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": ["AzureSphereRUs"],
+        "description": "Delete an Azure Sphere Resource Unit.",
+        "operationId": "AzureSphereRUs_Delete",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/AzureSphereRUNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful.",
+            "schema": {
+              "$ref": "#/definitions/AzureSphereRU"
+            }
+          },
+          "204": {
+            "description": "Successful. Resource marked for deletion",
+            "schema": {
+              "$ref": "#/definitions/AzureSphereRU"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/DefaultErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/azSphereRUs/{azureSphereRUName}/products": {
+      "get": {
+        "tags": ["Products"],
+        "description": "Returns the associated products of a given Azure Sphere Resource Unit by Name",
+        "operationId": "Products_List",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/AzureSphereRUNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure Sphere Products for the Azure Sphere Resource unit in the subscription.",
+            "schema": {
+              "$ref": "#/definitions/ProductList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "deprecated": false,
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/azSphereRUs/{azureSphereRUName}/products/{productName}": {
+      "get": {
+        "tags": ["Products"],
+        "description": "Returns the associated Product for a given Azure Sphere Resource Unit by Name",
+        "operationId": "Products_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/AzureSphereRUNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ProductNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Product.",
+            "schema": {
+              "$ref": "#/definitions/Product"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/DefaultErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": ["Products"],
+        "description": "Create or update an Azure Sphere Product.",
+        "operationId": "Products_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/AzureSphereRUNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ProductNameParameter"
+          },
+          {
+            "name": "Product",
+            "description": "Azure Sphere Product details.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Product"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful.",
+            "schema": {
+              "$ref": "#/definitions/Product"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/DefaultErrorResponse"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": ["Products"],
+        "description": "Patch Azure Sphere Product.",
+        "operationId": "Products_Update",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/AzureSphereRUNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ProductNameParameter"
+          },
+          {
+            "name": "ProductPatch",
+            "description": "Azure Sphere Product patch details.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ProductPatch"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful.",
+            "schema": {
+              "$ref": "#/definitions/Product"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/DefaultErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": ["Products"],
+        "description": "Delete Product in an Azure Sphere Resource Unit.",
+        "operationId": "Products_Delete",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/AzureSphereRUNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ProductNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful.",
+            "schema": {
+              "$ref": "#/definitions/Product"
+            }
+          },
+          "204": {
+            "description": "Successful. Resource marked for deletion",
+            "schema": {
+              "$ref": "#/definitions/Product"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/DefaultErrorResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Resource": {
+      "description": "An Azure Sphere Resource.",
+      "properties": {
+        "id": {
+          "description": "Azure Sphere resource Id.",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "Azure Sphere resource name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "Azure Sphere resource type.",
+          "type": "string",
+          "readOnly": true
+        },
+        "location": {
+          "type": "string",
+          "description": "The Azure Sphere resource location.",
+          "x-ms-mutability": ["read", "create"]
+        },
+        "systemData": {
+          "description": "Metadata pertaining to creation and last modification of the resource.",
+          "$ref": "#/definitions/SystemData",
+          "readOnly": true
+        },
+        "tags": {
+          "description": "resource tags.",
+          "type": "object",
+          "readOnly": false,
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "SystemData": {
+      "description": "Metadata pertaining to creation and last modification of the resource.",
+      "type": "object",
+      "readOnly": true,
+      "properties": {
+        "createdBy": {
+          "type": "string",
+          "description": "The identity that created the resource."
+        },
+        "createdByType": {
+          "type": "string",
+          "description": "The type of identity that created the resource.",
+          "enum": ["User", "Application", "ManagedIdentity", "Key"],
+          "x-ms-enum": {
+            "name": "createdByType",
+            "modelAsString": true
+          }
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp of resource creation (UTC)."
+        },
+        "lastModifiedBy": {
+          "type": "string",
+          "description": "The identity that last modified the resource."
+        },
+        "lastModifiedByType": {
+          "type": "string",
+          "description": "The type of identity that last modified the resource.",
+          "enum": ["User", "Application", "ManagedIdentity", "Key"],
+          "x-ms-enum": {
+            "name": "createdByType",
+            "modelAsString": true
+          }
+        },
+        "lastModifiedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The type of identity that last modified the resource."
+        }
+      }
+    },
+    "AzureSphereRU": {
+      "type": "object",
+      "description": "Azure Sphere Resource Unit details",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "properties": {
+            "provisioningState": {
+              "type": "string",
+              "description": "Gets or sets the state of the provisioning."
+            }
+          },
+          "type": "object",
+          "description": "Specific properties of the Azure Sphere Resource Unit object"
+        }
+      }
+    },
+    "AzureSphereOperation": {
+      "type": "object",
+      "description": "Azure Sphere operation details",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ]
+    },
+    "ErrorResponseBody": {
+      "description": "The error object.",
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "Error code.",
+          "type": "string",
+          "readOnly": true
+        },
+        "message": {
+          "description": "Error message.",
+          "type": "string",
+          "readOnly": true
+        },
+        "target": {
+          "description": "Error target.",
+          "type": "string",
+          "readOnly": true
+        },
+        "details": {
+          "description": "Error details.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/ErrorResponseBody"
+          }
+        }
+      }
+    },
+    "DefaultErrorResponse": {
+      "type": "object",
+      "description": "Default error response on failure.",
+      "properties": {
+        "error": {
+          "description": "The error object.",
+          "readOnly": true,
+          "$ref": "#/definitions/ErrorResponseBody"
+        }
+      }
+    },
+    "OperationList": {
+      "description": "The list of Azure Sphere Operations.",
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "The link used to get the next page of Azure Sphere Operations list.",
+          "type": "string"
+        },
+        "value": {
+          "description": "The list of Azure Sphere Operations.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AzureSphereOperation"
+          }
+        }
+      }
+    },
+    "AzureSphereRUList": {
+      "description": "The list of Azure Sphere Resource Units.",
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "The link used to get the next page of Azure Sphere Resource Unit list.",
+          "type": "string"
+        },
+        "value": {
+          "description": "The list of Azure Sphere Resource Units.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AzureSphereRU"
+          }
+        }
+      }
+    },
+    "Product": {
+      "type": "object",
+      "description": "Azure Sphere Product details",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "properties": {
+            "description": {
+              "type": "string",
+              "description": "Azure Sphere Product description.",
+              "minLength": 1,
+              "maxLength": 150,
+              "pattern": "^[A-Za-z0-9-._ ]+$"
+            },
+            "provisioningState": {
+              "type": "string",
+              "description": "Gets or sets the state of the provisioning."
+            }
+          },
+          "required": ["description"],
+          "type": "object"
+        }
+      }
+    },
+    "ProductPatch": {
+      "type": "object",
+      "description": "Azure Sphere Product details for patching purposes.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "properties": {
+            "description": {
+              "type": "string",
+              "description": "Azure Sphere Product description.",
+              "minLength": 1,
+              "maxLength": 150,
+              "pattern": "^[A-Za-z0-9-._ ]+$"
+            },
+            "provisioningState": {
+              "type": "string",
+              "description": "Gets or sets the state of the provisioning."
+            }
+          },
+          "type": "object"
+        }
+      }
+    },
+    "ProductList": {
+      "description": "The list of Azure Sphere Products.",
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "The link used to get the next page of the Azure Sphere Product list.",
+          "type": "string"
+        },
+        "value": {
+          "description": "The list of Azure Sphere products.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Product"
+          }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "SubscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The Azure subscription ID."
+    },
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "Client Api Version."
+    },
+    "ResourceGroupNameParameter": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the resource group.",
+      "x-ms-parameter-location": "method"
+    },
+    "AzureSphereRUNameParameter": {
+      "name": "azureSphereRUName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the Azure Sphere Resource Unit.",
+      "x-ms-parameter-location": "method"
+    },
+    "ProductNameParameter": {
+      "name": "productName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of associated Azure Sphere Product.",
+      "x-ms-parameter-location": "method"
+    }
+  }
 }
