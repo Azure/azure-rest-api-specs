@@ -2,7 +2,7 @@
   "parameters": {
     "api-version": "2018-09-15",
     "subscriptionId": "{subscriptionId}",
-    "resourceGroupName": "{resourceGroupName}",
+    "resourceGroupName": "resourceGroupName",
     "labName": "{labName}"
   },
   "responses": {
@@ -13,15 +13,15 @@
             "properties": {
               "allowedSubnets": [
                 {
-                  "resourceId": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworks/{virtualNetworkName}/subnets/{virtualNetworkName}Subnet",
+                  "resourceId": "/subscriptions/{subscriptionId}/resourceGroups/resourceGroupName/providers/Microsoft.Network/virtualNetworks/{virtualNetworkName}/subnets/{virtualNetworkName}Subnet",
                   "labSubnetName": "{virtualNetworkName}Subnet",
                   "allowPublicIp": "Allow"
                 }
               ],
-              "externalProviderResourceId": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworks/{virtualNetworkName}",
+              "externalProviderResourceId": "/subscriptions/{subscriptionId}/resourceGroups/resourceGroupName/providers/Microsoft.Network/virtualNetworks/{virtualNetworkName}",
               "subnetOverrides": [
                 {
-                  "resourceId": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworks/{virtualNetworkName}/subnets/{virtualNetworkName}Subnet",
+                  "resourceId": "/subscriptions/{subscriptionId}/resourceGroups/resourceGroupName/providers/Microsoft.Network/virtualNetworks/{virtualNetworkName}/subnets/{virtualNetworkName}Subnet",
                   "labSubnetName": "{virtualNetworkName}Subnet",
                   "useInVmCreationPermission": "Allow",
                   "usePublicIpAddressPermission": "Allow",
@@ -43,7 +43,7 @@
               "provisioningState": "Succeeded",
               "uniqueIdentifier": "{uniqueIdentifier}"
             },
-            "id": "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/microsoft.devtestlab/labs/{labName}/virtualnetworks/{virtualNetworkName}",
+            "id": "/subscriptions/{subscriptionId}/resourcegroups/resourceGroupName/providers/microsoft.devtestlab/labs/{labName}/virtualnetworks/{virtualNetworkName}",
             "name": "{virtualNetworkName}",
             "type": "Microsoft.DevTestLab/labs/virtualNetworks",
             "tags": {

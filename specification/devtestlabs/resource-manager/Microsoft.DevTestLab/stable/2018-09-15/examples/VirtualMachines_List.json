@@ -2,7 +2,7 @@
   "parameters": {
     "api-version": "2018-09-15",
     "subscriptionId": "{subscriptionId}",
-    "resourceGroupName": "{resourceGroupName}",
+    "resourceGroupName": "resourceGroupName",
     "labName": "{labName}"
   },
   "responses": {
@@ -21,7 +21,7 @@
               "size": "Standard_A2_v2",
               "userName": "{userName}",
               "labSubnetName": "{virtualNetworkName}Subnet",
-              "labVirtualNetworkId": "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/microsoft.devtestlab/labs/{labName}/virtualnetworks/{virtualNetworkName}",
+              "labVirtualNetworkId": "/subscriptions/{subscriptionId}/resourcegroups/resourceGroupName/providers/microsoft.devtestlab/labs/{labName}/virtualnetworks/{virtualNetworkName}",
               "disallowPublicIpAddress": true,
               "artifactDeploymentStatus": {
                 "artifactsApplied": 0,
@@ -42,7 +42,7 @@
               "provisioningState": "Succeeded",
               "uniqueIdentifier": "{uniqueIdentifier}"
             },
-            "id": "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/microsoft.devtestlab/labs/{labName}/virtualmachines/{vmName}",
+            "id": "/subscriptions/{subscriptionId}/resourcegroups/resourceGroupName/providers/microsoft.devtestlab/labs/{labName}/virtualmachines/{vmName}",
             "name": "{vmName}",
             "type": "Microsoft.DevTestLab/labs/virtualMachines",
             "location": "{location}",
