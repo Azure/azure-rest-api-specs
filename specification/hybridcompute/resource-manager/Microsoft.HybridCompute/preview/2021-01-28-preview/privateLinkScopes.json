@@ -1,9 +1,9 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "HybridComputeManagementPrivateLinkClient",
+    "title": "HybridComputeManagementClient",
     "x-ms-code-generation-settings": {
-      "name": "HybridComputeManagementPrivateLinkClient"
+      "name": "HybridComputeManagementClient"
     },
     "description": "Azure Arc( Servers and K8s Clusters) API reference for Private Link's Scopes management.",
     "version": "2021-01-28-preview"
@@ -1112,6 +1112,7 @@
       "in": "path",
       "required": true,
       "type": "string",
+      "x-ms-parameter-location": "method",
       "description": "The location of the target resource.",
       "minLength": 1
     },
@@ -1121,7 +1122,8 @@
       "required": true,
       "type": "string",
       "description": "The name of the target machine to get the private link scope validation details for.",
-      "minLength": 1
+      "minLength": 1,
+      "x-ms-parameter-location": "method"
     }
   }
 }
