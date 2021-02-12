@@ -70,8 +70,14 @@
               "repository": "contoso/contoso-app",
               "name": "Prod deployment",
               "path": "./github/workflow/cd.yml",
-              "ref": "refs/heads/release"
-            }
+              "ref": "refs/heads/release",
+              "accessToken": "",
+              "bootstrapConfiguration": {
+                "pipelineTemplateId": "ms.vss-continuous-delivery-pipeline-templates.aks-cd-with-dockerfile-github",
+                "pipelineTemplateParameters": {}
+              }
+            },
+            "commit": "870d8ae5d7558661d59c1d805d41fd53e43a9a6c"
           }
         }
       }
@@ -104,12 +110,6 @@
                 "pipelineTemplateParameters": {}
               }
             },
-            "runUri": "https://github.com/contoso/contoso-app/actions/runs/123",
-            "createdBy": "contosoUser",
-            "jobName": "build-and-deploy",
-            "creationTimestamp": "2020-06-04T07:59:40Z",
-            "modifiedTimestamp": "2020-06-04T08:59:40Z",
-            "status": "success",
             "commit": "870d8ae5d7558661d59c1d805d41fd53e43a9a6c"
           }
         }
