@@ -47,12 +47,12 @@
               "$ref": "#/definitions/PhoneNumberSearchResult"
             },
             "headers": {
-              "Operation-Location": {
-                "description": "URL to query for status of the operation.",
+              "Location": {
+                "description": "URL to retrieve the final result after operation completes.",
                 "type": "string"
               },
-              "Location": {
-                "description": "Url to retrieve the final result after operation completes.",
+              "Operation-Location": {
+                "description": "URL to query for status of the operation.",
                 "type": "string"
               },
               "operation-id": {
@@ -160,12 +160,12 @@
               "$ref": "#/definitions/PhoneNumberSearchResult"
             },
             "headers": {
-              "Operation-Location": {
-                "description": "URL to query for status of the operation.",
+              "Location": {
+                "description": "URL to retrieve the final result after operation completes.",
                 "type": "string"
               },
-              "Location": {
-                "description": "Url to retrieve the final result after operation completes.",
+              "Operation-Location": {
+                "description": "URL to query for status of the operation.",
                 "type": "string"
               },
               "operation-id": {
@@ -263,7 +263,7 @@
           }
         ],
         "responses": {
-          "200": {
+          "204": {
             "description": "Success"
           },
           "default": {
@@ -344,15 +344,11 @@
           }
         ],
         "responses": {
-          "204": {
-            "description": "The service has accepted the request and will start processing later. It will return 'NoContent' immediately and include an 'Operation-Location' and 'Location' headers. Client side should further query the operation status using the URL specified in 'Operation-Location' header. When operation completes successfully query final result using URL specified in 'Location' header.",
+          "202": {
+            "description": "The service has accepted the request and will start processing later. It will return 'Accepted' immediately and include an 'Operation-Location' and 'Location' headers. Client side should further query the operation status using the URL specified in 'Operation-Location' header. When operation completes successfully query final result using URL specified in 'Location' header.",
             "headers": {
               "Operation-Location": {
                 "description": "URL to query for status of the operation.",
-                "type": "string"
-              },
-              "Location": {
-                "description": "Url to retrieve the final result after operation completes.",
                 "type": "string"
               },
               "operation-id": {
@@ -476,18 +472,18 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "The service has accepted the request and will start processing later. It will return 'OK' immediately and include an 'Operation-Location' and 'Location' headers. Client side should further query the operation status using the URL specified in 'Operation-Location' header. When operation completes successfully query final result using URL specified in 'Location' header.",
+          "202": {
+            "description": "The service has accepted the request and will start processing later. It will return 'Accepted' immediately and include an 'Operation-Location' and 'Location' headers. Client side should further query the operation status using the URL specified in 'Operation-Location' header. When operation completes successfully query final result using URL specified in 'Location' header.",
             "schema": {
               "$ref": "#/definitions/AcquiredPhoneNumber"
             },
             "headers": {
-              "Operation-Location": {
-                "description": "URL to query for status of the operation.",
+              "Location": {
+                "description": "URL to retrieve the final result after operation completes.",
                 "type": "string"
               },
-              "Location": {
-                "description": "Url to retrieve the final result after operation completes.",
+              "Operation-Location": {
+                "description": "URL to query for status of the operation.",
                 "type": "string"
               },
               "operation-id": {
@@ -582,7 +578,7 @@
         "assignmentType": {
           "description": "The assignment type of the phone numbers to search for. A phone number can be assigned to a person, or to an application.",
           "enum": [
-            "user",
+            "person",
             "application"
           ],
           "type": "string",
@@ -678,7 +674,7 @@
         "assignmentType": {
           "description": "Phone number's assignment type.",
           "enum": [
-            "user",
+            "person",
             "application"
           ],
           "type": "string",
@@ -814,7 +810,7 @@
         "assignmentType": {
           "description": "The assignment type of the phone number. A phone number can be assigned to a person, or to an application.",
           "enum": [
-            "user",
+            "person",
             "application"
           ],
           "type": "string",
