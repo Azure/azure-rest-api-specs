@@ -587,7 +587,7 @@
         }
       }
     },
-    "subscriptions/{subscriptionId}/providers/Microsoft.HybridCompute/locations/{location}/privateLinkScopes/{privateLinkScopeId}": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.HybridCompute/locations/{location}/privateLinkScopes/{privateLinkScopeId}": {
       "get": {
         "description": "Returns a Azure Arc PrivateLinkScope's validation details.",
         "operationId": "PrivateLinkScopes_GetValidationDetails",
@@ -622,48 +622,6 @@
         "x-ms-examples": {
           "PrivateLinkScopeGet": {
             "$ref": "./examples/PrivateLinkScopesGetValidation.json"
-          }
-        }
-      }
-    },
-    "subscriptions/{subscriptionId}/providers/Microsoft.HybridCompute/locations/{location}/resourceGroup/{resourceGroup}/machines/{machineName}/privateLinkScope": {
-      "get": {
-        "description": "Returns a Azure Arc PrivateLinkScope's validation details for a given machine.",
-        "operationId": "PrivateLinkScopes_GetValidationDetails",
-        "parameters": [
-          {
-            "$ref": "#/parameters/LocationParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/MachineNameParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure Arc PrivateLinkScope validation details definition.",
-            "schema": {
-              "$ref": "#/definitions/PrivateLinkScopeValidationDetails"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponseV2"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "PrivateLinkScopeGet": {
-            "$ref": "./examples/PrivateLinkScopesGetValidationForMachine.json"
           }
         }
       }
