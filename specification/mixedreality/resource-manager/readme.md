@@ -4,6 +4,7 @@
 
 This is the AutoRest configuration file for Mixed-Reality Azure Resource Management.
 
+
 ---
 
 ## Getting Started
