@@ -1,0 +1,255 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "version": "2021-02-01",
+        "title": "PaymentManagementClient",
+        "description": "Payment client provides access to payment resources for Azure subscriptions."
+    },
+    "host": "management.azure.com",
+    "schemes": [
+        "https"
+    ],
+    "consumes": [
+        "application/json"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "paths": {
+        "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/paymentMethods": {
+            "get": {
+                "tags": [
+                    "PaymentMethods"
+                ],
+                "operationId": "PaymentMethods_ListByBillingAccount",
+                "description": "Lists the payment Methods for a billing account. The operation is supported only for billing accounts with agreement type Microsoft Customer Agreement.",
+                "externalDocs": {
+                    "url": "https://docs.microsoft.com/en-us/rest/api/billing/2021-02-01/paymentmethods"
+                },
+                "x-ms-examples": {
+                    "PaymentMethodsListByBillingAccount": {
+                        "$ref": "./examples/PaymentMethodsListByBillingAccount.json"
+                    }
+                },
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/billingAccountNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/apiVersionParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK. The request has succeeded.",
+                        "schema": {
+                            "$ref": "#/definitions/PaymentMethodsListResult"
+                        }
+                    },
+                    "default": {
+                        "description": "Error response describing why the operation failed.",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
+                        }
+                    }
+                },
+                "x-ms-pageable": {
+                    "nextLinkName": "nextLink"
+                }
+            }
+        }
+    },
+    "definitions": {
+        "PaymentMethodsListResult": {
+            "description": "The list of payment methods.",
+            "properties": {
+                "value": {
+                    "description": "The list of payment methods.",
+                    "type": "array",
+                    "readOnly": true,
+                    "items": {
+                        "$ref": "#/definitions/PaymentMethod"
+                    }
+                },
+                "nextLink": {
+                    "description": "The link (url) to the next page of results.",
+                    "type": "string",
+                    "readOnly": true
+                }
+            }
+        },
+        "PaymentMethod": {
+            "description": "A payment method.",
+            "type": "object",
+            "allOf": [
+                {
+                    "$ref": "#/definitions/Resource"
+                }
+            ],
+            "properties": {
+                "properties": {
+                    "x-ms-client-flatten": true,
+                    "$ref": "#/definitions/PaymentMethodProperties",
+                    "title": "Payment method properties"
+                }
+            }
+        },
+        "PaymentMethodProperties": {
+            "description": "The properties of a payment method.",
+            "properties": {
+                "paymentMethodType": {
+                    "description": "The type of payment method.",
+                    "type": "string",
+                    "enum": [
+                        "Credits",
+                        "CreditCard",
+                        "ChequeWire"
+                    ],
+                    "x-ms-enum": {
+                        "name": "PaymentMethodType",
+                        "modelAsString": true
+                    }
+                },
+                "details": {
+                    "description": "Details about the payment method.",
+                    "type": "string",
+                    "readOnly": true
+                },
+                "billingProfileDisplayName": {
+                    "description": "Name of the Billing Profile associated with the payment method.",
+                    "type": "string",
+                    "readOnly": true
+                },
+                "billingProfileId": {
+                    "description": "The ID that uniquely identifies the Billing Profile associated with the payment method.",
+                    "type": "string",
+                    "readOnly": true
+                },
+                "expiration": {
+                    "description": "Expiration month and year.",
+                    "type": "string",
+                    "readOnly": true
+                },
+                "currency": {
+                    "description": "The currency associated with the payment method.",
+                    "type": "string",
+                    "readOnly": true
+                }
+            }
+        },
+        "Resource": {
+            "description": "The Resource model definition.",
+            "properties": {
+                "id": {
+                    "readOnly": true,
+                    "type": "string",
+                    "description": "Resource Id."
+                },
+                "name": {
+                    "readOnly": true,
+                    "type": "string",
+                    "description": "Resource name."
+                },
+                "type": {
+                    "readOnly": true,
+                    "type": "string",
+                    "description": "Resource type."
+                }
+            },
+            "x-ms-azure-resource": true
+        },
+        "ErrorDetails": {
+            "description": "The details of the error.",
+            "properties": {
+                "code": {
+                    "description": "Error code.",
+                    "type": "string",
+                    "readOnly": true
+                },
+                "message": {
+                    "description": "Error message indicating why the operation failed.",
+                    "type": "string",
+                    "readOnly": true
+                },
+                "target": {
+                    "description": "The target of the particular error.",
+                    "type": "string",
+                    "readOnly": true
+                },
+                "details": {
+                    "description": "The sub details of the error.",
+                    "readOnly": true,
+                    "$ref": "#/definitions/ErrorSubDetails"
+                }
+            }
+        },
+        "ErrorResponse": {
+            "description": "Error response indicates that the service is not able to process the incoming request. The reason is provided in the error message.",
+            "type": "object",
+            "properties": {
+                "error": {
+                    "description": "The details of the error.",
+                    "$ref": "#/definitions/ErrorDetails"
+                }
+            }
+        },
+        "ErrorSubDetails": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "code": {
+                        "description": "Error code.",
+                        "type": "string",
+                        "readOnly": true
+                    },
+                    "message": {
+                        "description": "Error message indicating why the operation failed.",
+                        "type": "string",
+                        "readOnly": true
+                    },
+                    "target": {
+                        "description": "The target of the particular error.",
+                        "type": "string",
+                        "readOnly": true
+                    }
+                }
+            }
+        }
+    },
+    "parameters": {
+        "apiVersionParameter": {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "The version of the API to be used with the client request. The current version is 2021-02-01."
+        },
+        "billingAccountNameParameter": {
+            "name": "billingAccountName",
+            "in": "path",
+            "description": "The ID that uniquely identifies a billing account.",
+            "required": true,
+            "type": "string",
+            "x-ms-parameter-location": "method"
+        }
+    },
+    "security": [
+        {
+            "azure_auth": [
+                "user_impersonation"
+            ]
+        }
+    ],
+    "securityDefinitions": {
+        "azure_auth": {
+            "type": "oauth2",
+            "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+            "flow": "implicit",
+            "description": "Azure Active Directory OAuth2 Flow.",
+            "scopes": {
+                "user_impersonation": "impersonate your user account"
+            }
+        }
+    }
+}
