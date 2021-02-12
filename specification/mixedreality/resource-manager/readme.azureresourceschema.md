@@ -17,7 +17,7 @@ batch:
 
 Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
 
-### Tag: schema-mixedreality-2021-01-01 and azureresourceschema
+### Tag: schema-mixedreality-2021-03-01-preview and azureresourceschema
 
 ``` yaml $(tag) == 'schema-mixedreality-2021-03-01-preview' && $(azureresourceschema)
 output-folder: $(azureresourceschema-folder)/schemas
