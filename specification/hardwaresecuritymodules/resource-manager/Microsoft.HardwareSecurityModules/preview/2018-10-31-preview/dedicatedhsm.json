@@ -9,7 +9,14 @@
   "schemes": [
     "https"
   ],
-  "security": [{
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
       "azure_auth": [
         "user_impersonation"
       ]
@@ -27,6 +34,42 @@
     }
   },
   "paths": {
+    "/providers/Microsoft.HardwareSecurityModules/operations": {
+      "get": {
+        "tags": [
+          "DedicatedHsmOperations"
+        ],
+        "operationId": "Operations_List",
+        "description": "Get a list of Dedicated HSM operations.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DedicatedHsmOperationListResult"
+            }
+          },
+          "default": {
+            "description": "The error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/DedicatedHsmError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a list of Dedicated HSM operations": {
+            "$ref": "./examples//DedicatedHsm_OperationsList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HardwareSecurityModules/dedicatedHSMs/{name}": {
       "put": {
         "tags": [
@@ -35,20 +78,23 @@
         "operationId": "DedicatedHsm_CreateOrUpdate",
         "x-ms-long-running-operation": true,
         "description": "Create or Update a dedicated HSM in the specified subscription.",
-        "parameters": [{
+        "parameters": [
+          {
             "name": "resourceGroupName",
             "in": "path",
             "required": true,
             "type": "string",
             "description": "The name of the Resource Group to which the resource belongs."
-          }, {
+          },
+          {
             "name": "name",
             "in": "path",
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9-]{3,24}$",
             "description": "Name of the dedicated Hsm"
-          }, {
+          },
+          {
             "name": "parameters",
             "in": "body",
             "required": true,
@@ -56,9 +102,11 @@
               "$ref": "#/definitions/DedicatedHsm"
             },
             "description": "Parameters to create or update the dedicated hsm"
-          }, {
+          },
+          {
             "$ref": "#/parameters/ApiVersionParameter"
-          }, {
+          },
+          {
             "$ref": "#/parameters/SubscriptionIdParameter"
           }
         ],
@@ -86,13 +134,7 @@
           "Create a new or update an existing dedicated HSM": {
             "$ref": "./examples//DedicatedHsm_CreateOrUpdate.json"
           }
-        },
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ]
+        }
       },
       "patch": {
         "tags": [
@@ -101,20 +143,23 @@
         "operationId": "DedicatedHsm_Update",
         "x-ms-long-running-operation": true,
         "description": "Update a dedicated HSM in the specified subscription.",
-        "parameters": [{
+        "parameters": [
+          {
             "name": "resourceGroupName",
             "in": "path",
             "required": true,
             "type": "string",
             "description": "The name of the Resource Group to which the server belongs."
-          }, {
+          },
+          {
             "name": "name",
             "in": "path",
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9-]{3,24}$",
             "description": "Name of the dedicated HSM"
-          }, {
+          },
+          {
             "name": "parameters",
             "in": "body",
             "required": true,
@@ -123,9 +168,11 @@
               "$ref": "#/definitions/DedicatedHsmPatchParameters"
             },
             "description": "Parameters to patch the dedicated HSM"
-          }, {
+          },
+          {
             "$ref": "#/parameters/ApiVersionParameter"
-          }, {
+          },
+          {
             "$ref": "#/parameters/SubscriptionIdParameter"
           }
         ],
@@ -147,13 +194,7 @@
           "Update an existing dedicated HSM": {
             "$ref": "./examples//DedicatedHsm_Update.json"
           }
-        },
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ]
+        }
       },
       "delete": {
         "tags": [
@@ -162,21 +203,25 @@
         "operationId": "DedicatedHsm_Delete",
         "x-ms-long-running-operation": true,
         "description": "Deletes the specified Azure Dedicated HSM.",
-        "parameters": [{
+        "parameters": [
+          {
             "name": "resourceGroupName",
             "in": "path",
             "required": true,
             "type": "string",
             "description": "The name of the Resource Group to which the dedicated HSM belongs."
-          }, {
+          },
+          {
             "name": "name",
             "in": "path",
             "required": true,
             "type": "string",
             "description": "The name of the dedicated HSM to delete"
-          }, {
+          },
+          {
             "$ref": "#/parameters/ApiVersionParameter"
-          }, {
+          },
+          {
             "$ref": "#/parameters/SubscriptionIdParameter"
           }
         ],
@@ -201,13 +246,7 @@
           "Delete a dedicated HSM": {
             "$ref": "./examples//DedicatedHsm_Delete.json"
           }
-        },
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ]
+        }
       },
       "get": {
         "tags": [
@@ -215,21 +254,25 @@
         ],
         "operationId": "DedicatedHsm_Get",
         "description": "Gets the specified Azure dedicated HSM.",
-        "parameters": [{
+        "parameters": [
+          {
             "name": "resourceGroupName",
             "in": "path",
             "required": true,
             "type": "string",
             "description": "The name of the Resource Group to which the dedicated hsm belongs."
-          }, {
+          },
+          {
             "name": "name",
             "in": "path",
             "required": true,
             "type": "string",
             "description": "The name of the dedicated HSM."
-          }, {
+          },
+          {
             "$ref": "#/parameters/ApiVersionParameter"
-          }, {
+          },
+          {
             "$ref": "#/parameters/SubscriptionIdParameter"
           }
         ],
@@ -251,13 +294,7 @@
           "Get a dedicated HSM": {
             "$ref": "./examples//DedicatedHsm_Get.json"
           }
-        },
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ]
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HardwareSecurityModules/dedicatedHSMs": {
@@ -267,21 +304,25 @@
         ],
         "operationId": "DedicatedHsm_ListByResourceGroup",
         "description": "The List operation gets information about the dedicated hsms associated with the subscription and within the specified resource group.",
-        "parameters": [{
+        "parameters": [
+          {
             "name": "resourceGroupName",
             "in": "path",
             "required": true,
             "type": "string",
             "description": "The name of the Resource Group to which the dedicated HSM belongs."
-          }, {
+          },
+          {
             "name": "$top",
             "in": "query",
             "type": "integer",
             "format": "int32",
             "description": "Maximum number of results to return."
-          }, {
+          },
+          {
             "$ref": "#/parameters/ApiVersionParameter"
-          }, {
+          },
+          {
             "$ref": "#/parameters/SubscriptionIdParameter"
           }
         ],
@@ -306,13 +347,7 @@
           "List dedicated HSM devices in a resource group": {
             "$ref": "./examples//DedicatedHsm_ListByResourceGroup.json"
           }
-        },
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ]
+        }
       }
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.HardwareSecurityModules/dedicatedHSMs": {
@@ -322,15 +357,18 @@
         ],
         "operationId": "DedicatedHsm_ListBySubscription",
         "description": "The List operation gets information about the dedicated HSMs associated with the subscription.",
-        "parameters": [{
+        "parameters": [
+          {
             "name": "$top",
             "in": "query",
             "type": "integer",
             "format": "int32",
             "description": "Maximum number of results to return."
-          }, {
+          },
+          {
             "$ref": "#/parameters/ApiVersionParameter"
-          }, {
+          },
+          {
             "$ref": "#/parameters/SubscriptionIdParameter"
           }
         ],
@@ -355,17 +393,58 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
-        },
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ]
+        }
       }
     }
   },
   "definitions": {
+    "DedicatedHsmOperation": {
+      "description": "REST API operation",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "The name of the Dedicated HSM Resource Provider Operation.",
+          "type": "string"
+        },
+        "isDataAction": {
+          "description": "Gets or sets a value indicating whether it is a data plane action",
+          "type": "string",
+          "readOnly": true
+        },
+        "display": {
+          "properties": {
+            "provider": {
+              "description": "The Resource Provider of the operation",
+              "type": "string"
+            },
+            "resource": {
+              "description": "Resource on which the operation is performed.",
+              "type": "string"
+            },
+            "operation": {
+              "description": "Operation type: Read, write, delete, etc.",
+              "type": "string"
+            },
+            "description": {
+              "description": "The object that represents the operation.",
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "DedicatedHsmOperationListResult": {
+      "description": "Result of the request to list Dedicated HSM Provider operations. It contains a list of operations.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DedicatedHsmOperation"
+          },
+          "description": "List of Dedicated HSM Resource Provider operations."
+        }
+      }
+    },
     "ApiEntityReference": {
       "properties": {
         "id": {
@@ -375,14 +454,14 @@
       },
       "description": "The API entity reference."
     },
-	  "NetworkInterface": {
+    "NetworkInterface": {
       "properties": {
         "id": {
           "readOnly": true,
           "type": "string",
           "description": "The ARM resource id in the form of /subscriptions/{SubscriptionId}/resourceGroups/{ResourceGroupName}/..."
         },
-		    "privateIpAddress": {
+        "privateIpAddress": {
           "type": "string",
           "description": "Private Ip address of the interface"
         }
@@ -392,15 +471,15 @@
     "NetworkProfile": {
       "properties": {
         "subnet": {
-            "$ref": "#/definitions/ApiEntityReference",
-            "description": "Specifies the identifier of the subnet."
+          "$ref": "#/definitions/ApiEntityReference",
+          "description": "Specifies the identifier of the subnet."
         },
         "networkInterfaces": {
-            "type": "array",
-            "items": {
-              "$ref": "#/definitions/NetworkInterface"
-            },
-            "description": "Specifies the list of resource Ids for the network interfaces associated with the dedicated HSM."
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NetworkInterface"
+          },
+          "description": "Specifies the list of resource Ids for the network interfaces associated with the dedicated HSM."
         }
       }
     },
@@ -434,7 +513,15 @@
           "readOnly": true,
           "type": "string",
           "description": "Provisioning state.",
-          "enum": [ "Succeeded", "Provisioning", "Allocating", "Connecting", "Failed", "CheckingQuota", "Deleting" ],
+          "enum": [
+            "Succeeded",
+            "Provisioning",
+            "Allocating",
+            "Connecting",
+            "Failed",
+            "CheckingQuota",
+            "Deleting"
+          ],
           "x-ms-enum": {
             "name": "JsonWebKeyType",
             "modelAsString": true,
@@ -481,7 +568,8 @@
           "description": "Properties of the dedicated HSM"
         }
       },
-      "allOf": [{
+      "allOf": [
+        {
           "$ref": "#/definitions/Resource"
         }
       ],

@@ -1,0 +1,3137 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2018-09-01-preview",
+    "title": "Azure Migrate Hub",
+    "description": "Migrate your workloads to Azure.",
+    "contact": {
+      "name": "Microsoft",
+      "email": "azuremigratehub@microsoft.com"
+    }
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "parameters": {
+    "subscriptionId": {
+      "name": "subscriptionId",
+      "description": "Azure Subscription Id in which migrate project was created.",
+      "type": "string",
+      "in": "path",
+      "required": true
+    },
+    "resourceGroupName": {
+      "name": "resourceGroupName",
+      "description": "Name of the Azure Resource Group that migrate project is part of.",
+      "type": "string",
+      "in": "path",
+      "x-ms-parameter-location": "method",
+      "required": true
+    },
+    "migrateProjectName": {
+      "name": "migrateProjectName",
+      "description": "Name of the Azure Migrate project.",
+      "type": "string",
+      "in": "path",
+      "x-ms-parameter-location": "method",
+      "required": true
+    },
+    "machineName": {
+      "name": "machineName",
+      "description": "Unique name of a machine in Azure migration hub.",
+      "type": "string",
+      "in": "path",
+      "x-ms-parameter-location": "method",
+      "required": true
+    },
+    "databaseName": {
+      "name": "databaseName",
+      "description": "Unique name of a database in Azure migration hub.",
+      "type": "string",
+      "in": "path",
+      "x-ms-parameter-location": "method",
+      "required": true
+    },
+    "databaseInstanceName": {
+      "name": "databaseInstanceName",
+      "description": "Unique name of a database instance in Azure migration hub.",
+      "type": "string",
+      "in": "path",
+      "x-ms-parameter-location": "method",
+      "required": true
+    },
+    "solutionName": {
+      "name": "solutionName",
+      "description": "Unique name of a migration solution within a migrate project.",
+      "type": "string",
+      "in": "path",
+      "x-ms-parameter-location": "method",
+      "required": true
+    },
+    "eventName": {
+      "name": "eventName",
+      "description": "Unique name of an event within a migrate project.",
+      "type": "string",
+      "in": "path",
+      "x-ms-parameter-location": "method",
+      "required": true
+    },
+    "continuationToken": {
+      "name": "continuationToken",
+      "description": "The continuation token.",
+      "type": "string",
+      "in": "query",
+      "required": false,
+      "x-ms-parameter-location": "method"
+    },
+    "pageSize": {
+      "name": "pageSize",
+      "description": "The number of items to be returned in a single page. This value is honored only if it is less than the 100.",
+      "type": "integer",
+      "in": "query",
+      "required": false,
+      "x-ms-parameter-location": "method"
+    },
+    "api-version": {
+      "name": "api-version",
+      "description": "Standard request header. Used by service to identify API version used by client.",
+      "type": "string",
+      "in": "query",
+      "required": true,
+      "enum": [
+        "2018-09-01-preview"
+      ]
+    },
+    "acceptLanguage": {
+      "description": "Standard request header. Used by service to respond to client in appropriate language.",
+      "name": "Accept-Language",
+      "type": "string",
+      "in": "header",
+      "x-ms-parameter-location": "client"
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/migrateProjects/{migrateProjectName}/databaseInstances": {
+      "get": {
+        "tags": [
+          "DatabaseInstances"
+        ],
+        "summary": "Gets a list of database instances in the migrate project.",
+        "operationId": "DatabaseInstances_EnumerateDatabaseInstances",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/migrateProjectName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "$ref": "#/parameters/continuationToken"
+          },
+          {
+            "$ref": "#/parameters/pageSize"
+          },
+          {
+            "$ref": "#/parameters/acceptLanguage"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DatabaseInstanceCollection"
+            }
+          }
+        },
+        "deprecated": false,
+        "x-ms-examples": {
+          "DatabaseInstances_List": {
+            "$ref": "./examples/DatabaseInstances_List.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/migrateProjects/{migrateProjectName}/databaseInstances/{databaseInstanceName}": {
+      "get": {
+        "tags": [
+          "DatabaseInstances"
+        ],
+        "summary": "Gets a database instance in the migrate project.",
+        "operationId": "DatabaseInstances_GetDatabaseInstance",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/migrateProjectName"
+          },
+          {
+            "$ref": "#/parameters/databaseInstanceName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "$ref": "#/parameters/acceptLanguage"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DatabaseInstance"
+            }
+          }
+        },
+        "deprecated": false,
+        "x-ms-examples": {
+          "DatabaseInstances_Get": {
+            "$ref": "./examples/DatabaseInstances_Get.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/migrateProjects/{migrateProjectName}/databases": {
+      "get": {
+        "tags": [
+          "Databases"
+        ],
+        "summary": "Gets a list of databases in the migrate project.",
+        "operationId": "Databases_EnumerateDatabases",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/migrateProjectName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "$ref": "#/parameters/continuationToken"
+          },
+          {
+            "$ref": "#/parameters/pageSize"
+          },
+          {
+            "$ref": "#/parameters/acceptLanguage"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DatabaseCollection"
+            }
+          }
+        },
+        "deprecated": false,
+        "x-ms-examples": {
+          "Databases_List": {
+            "$ref": "./examples/Databases_List.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/migrateProjects/{migrateProjectName}/databases/{databaseName}": {
+      "get": {
+        "tags": [
+          "Databases"
+        ],
+        "summary": "Gets a database in the migrate project.",
+        "operationId": "Databases_GetDatabase",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/migrateProjectName"
+          },
+          {
+            "$ref": "#/parameters/databaseName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "$ref": "#/parameters/acceptLanguage"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Database"
+            }
+          }
+        },
+        "deprecated": false,
+        "x-ms-examples": {
+          "Databases_Get": {
+            "$ref": "./examples/Databases_Get.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/migrateProjects/{migrateProjectName}/migrateEvents": {
+      "get": {
+        "tags": [
+          "Events"
+        ],
+        "summary": "Gets a list of events in the migrate project.",
+        "operationId": "Events_EnumerateEvents",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/migrateProjectName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "$ref": "#/parameters/continuationToken"
+          },
+          {
+            "$ref": "#/parameters/pageSize"
+          },
+          {
+            "$ref": "#/parameters/acceptLanguage"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/EventCollection"
+            }
+          }
+        },
+        "deprecated": false,
+        "x-ms-examples": {
+          "MigrateEvents_List": {
+            "$ref": "./examples/MigrateEvents_List.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/migrateProjects/{migrateProjectName}/migrateEvents/{eventName}": {
+      "get": {
+        "tags": [
+          "Events"
+        ],
+        "summary": "Gets an event in the migrate project.",
+        "operationId": "Events_GetEvent",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/migrateProjectName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "$ref": "#/parameters/eventName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/MigrateEvent"
+            }
+          }
+        },
+        "deprecated": false,
+        "x-ms-examples": {
+          "MigrateEvents_Get": {
+            "$ref": "./examples/MigrateEvents_Get.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Events"
+        ],
+        "summary": "Delete the migrate event",
+        "description": "Delete the migrate event. Deleting non-existent migrate event is a no-operation.",
+        "operationId": "Events_DeleteEvent",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/migrateProjectName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "$ref": "#/parameters/eventName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "deprecated": false,
+        "x-ms-examples": {
+          "MigrateEvents_Delete": {
+            "$ref": "./examples/MigrateEvents_Delete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/migrateProjects/{migrateProjectName}/machines": {
+      "get": {
+        "tags": [
+          "Machines"
+        ],
+        "summary": "Gets a list of machines in the migrate project.",
+        "operationId": "Machines_EnumerateMachines",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/migrateProjectName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "$ref": "#/parameters/continuationToken"
+          },
+          {
+            "$ref": "#/parameters/pageSize"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/MachineCollection"
+            }
+          }
+        },
+        "deprecated": false,
+        "x-ms-examples": {
+          "Machines_List": {
+            "$ref": "./examples/Machines_List.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/migrateProjects/{migrateProjectName}/machines/{machineName}": {
+      "get": {
+        "tags": [
+          "Machines"
+        ],
+        "summary": "Gets a machine in the migrate project.",
+        "operationId": "Machines_GetMachine",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/migrateProjectName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "$ref": "#/parameters/machineName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Machine"
+            }
+          }
+        },
+        "deprecated": false,
+        "x-ms-examples": {
+          "Machines_Get": {
+            "$ref": "./examples/Machines_Get.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/migrateProjects/{migrateProjectName}": {
+      "get": {
+        "tags": [
+          "MigrateProjects"
+        ],
+        "summary": "Method to get a migrate project.",
+        "operationId": "MigrateProjects_GetMigrateProject",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/migrateProjectName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/MigrateProject"
+            }
+          }
+        },
+        "deprecated": false,
+        "x-ms-examples": {
+          "MigrateProjects_Get": {
+            "$ref": "./examples/MigrateProjects_Get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "MigrateProjects"
+        ],
+        "summary": "Method to create or update a migrate project.",
+        "operationId": "MigrateProjects_PutMigrateProject",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/migrateProjectName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Body with migrate project details.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MigrateProject"
+            }
+          },
+          {
+            "$ref": "#/parameters/acceptLanguage"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/MigrateProject"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/MigrateProject"
+            }
+          }
+        },
+        "deprecated": false,
+        "x-ms-examples": {
+          "MigrateProjects_Put": {
+            "$ref": "./examples/MigrateProjects_Put.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "MigrateProjects"
+        ],
+        "summary": "Update migrate project.",
+        "description": "Update a migrate project with specified name. Supports partial updates, for example only tags can be provided.",
+        "operationId": "MigrateProjects_PatchMigrateProject",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/migrateProjectName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Body with migrate project details.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MigrateProject"
+            }
+          },
+          {
+            "$ref": "#/parameters/acceptLanguage"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/MigrateProject"
+            }
+          }
+        },
+        "deprecated": false,
+        "x-ms-examples": {
+          "MigrateProjects_Patch": {
+            "$ref": "./examples/MigrateProjects_Patch.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "MigrateProjects"
+        ],
+        "summary": "Delete the migrate project",
+        "description": "Delete the migrate project. Deleting non-existent project is a no-operation.",
+        "operationId": "MigrateProjects_DeleteMigrateProject",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/migrateProjectName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "$ref": "#/parameters/acceptLanguage"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "deprecated": false,
+        "x-ms-examples": {
+          "MigrateProjects_Delete": {
+            "$ref": "./examples/MigrateProjects_Delete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/migrateProjects/{migrateProjectName}/registerTool": {
+      "post": {
+        "tags": [
+          "MigrateProjects"
+        ],
+        "summary": "Registers a tool with the migrate project.",
+        "operationId": "MigrateProjects_RegisterTool",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/migrateProjectName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "input",
+            "in": "body",
+            "description": "Input containing the name of the tool to be registered.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RegisterToolInput"
+            }
+          },
+          {
+            "$ref": "#/parameters/acceptLanguage"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/RegistrationResult"
+            }
+          }
+        },
+        "deprecated": false,
+        "x-ms-examples": {
+          "MigrateProjects_RegisterTool": {
+            "$ref": "./examples/MigrateProjects_RegisterTool.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/migrateProjects/{migrateProjectName}/refreshSummary": {
+      "post": {
+        "tags": [
+          "MigrateProjects"
+        ],
+        "summary": "Refresh the summary of the migrate project.",
+        "operationId": "MigrateProjects_RefreshMigrateProjectSummary",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/migrateProjectName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "input",
+            "in": "body",
+            "description": "The goal input which needs to be refreshed.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RefreshSummaryInput"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/RefreshSummaryResult"
+            }
+          }
+        },
+        "deprecated": false,
+        "x-ms-examples": {
+          "MigrateProjects_RefreshSummary": {
+            "$ref": "./examples/MigrateProjects_RefreshSummary.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/migrateProjects/{migrateProjectName}/solutions/{solutionName}": {
+      "get": {
+        "tags": [
+          "Solutions"
+        ],
+        "summary": "Gets a solution in the migrate project.",
+        "operationId": "Solutions_GetSolution",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/migrateProjectName"
+          },
+          {
+            "$ref": "#/parameters/solutionName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Solution"
+            }
+          }
+        },
+        "deprecated": false,
+        "x-ms-examples": {
+          "Solutions_Get": {
+            "$ref": "./examples/Solutions_Get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Solutions"
+        ],
+        "summary": "Creates a solution in the migrate project.",
+        "operationId": "Solutions_PutSolution",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/migrateProjectName"
+          },
+          {
+            "$ref": "#/parameters/solutionName"
+          },
+          {
+            "name": "solutionInput",
+            "in": "body",
+            "description": "The input for the solution.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Solution"
+            }
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Solution"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/Solution"
+            }
+          }
+        },
+        "deprecated": false,
+        "x-ms-examples": {
+          "Solutions_Put": {
+            "$ref": "./examples/Solutions_Put.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Solutions"
+        ],
+        "summary": "Update solution.",
+        "description": "Update a solution with specified name. Supports partial updates, for example only tags can be provided.",
+        "operationId": "Solutions_PatchSolution",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/migrateProjectName"
+          },
+          {
+            "$ref": "#/parameters/solutionName"
+          },
+          {
+            "name": "solutionInput",
+            "in": "body",
+            "description": "The input for the solution.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Solution"
+            }
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Solution"
+            }
+          }
+        },
+        "deprecated": false,
+        "x-ms-examples": {
+          "Solutions_Patch": {
+            "$ref": "./examples/Solutions_Patch.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Solutions"
+        ],
+        "summary": "Delete the solution",
+        "description": "Delete the solution. Deleting non-existent project is a no-operation.",
+        "operationId": "Solutions_DeleteSolution",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/migrateProjectName"
+          },
+          {
+            "$ref": "#/parameters/solutionName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "$ref": "#/parameters/acceptLanguage"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "deprecated": false,
+        "x-ms-examples": {
+          "Solutions_Delete": {
+            "$ref": "./examples/Solutions_Delete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/migrateProjects/{migrateProjectName}/solutions": {
+      "get": {
+        "tags": [
+          "Solutions"
+        ],
+        "summary": "Gets the list of solutions in the migrate project.",
+        "operationId": "Solutions_EnumerateSolutions",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/migrateProjectName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SolutionsCollection"
+            }
+          }
+        },
+        "deprecated": false,
+        "x-ms-examples": {
+          "Solutions_List": {
+            "$ref": "./examples/Solutions_List.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/migrateProjects/{migrateProjectName}/solutions/{solutionName}/getConfig": {
+      "post": {
+        "tags": [
+          "Solutions"
+        ],
+        "summary": "Gets the config for the solution in the migrate project.",
+        "operationId": "Solutions_GetConfig",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/migrateProjectName"
+          },
+          {
+            "$ref": "#/parameters/solutionName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SolutionConfig"
+            }
+          }
+        },
+        "deprecated": false,
+        "x-ms-examples": {
+          "Solutions_GetConfig": {
+            "$ref": "./examples/Solutions_GetConfig.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/migrateProjects/{migrateProjectName}/solutions/{solutionName}/cleanupData": {
+      "post": {
+        "tags": [
+          "Solutions"
+        ],
+        "summary": "Cleanup the solution data in the migrate project.",
+        "operationId": "Solutions_CleanupSolutionData",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/migrateProjectName"
+          },
+          {
+            "$ref": "#/parameters/solutionName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "deprecated": false,
+        "x-ms-examples": {
+          "Solutions_CleanupData": {
+            "$ref": "./examples/Solutions_CleanupData.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Migrate/operations": {
+      "get": {
+        "summary": "Get list of operations supported in the API.",
+        "description": "Get a list of REST API supported by Microsoft.Migrate provider.",
+        "operationId": "Operations_List",
+        "responses": {
+          "200": {
+            "description": "OK. Returns list of operations.",
+            "schema": {
+              "$ref": "#/definitions/OperationResultList"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        },
+        "x-ms-examples": {
+          "Operations_List": {
+            "$ref": "./examples/Operations_List.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Object": {
+      "type": "object",
+      "properties": {}
+    },
+    "DatabaseInstanceCollection": {
+      "description": "Collection of database instances.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Gets or sets the database instances.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DatabaseInstance"
+          }
+        },
+        "nextLink": {
+          "description": "Gets or sets the value of nextLink.",
+          "type": "string"
+        }
+      }
+    },
+    "DatabaseInstance": {
+      "description": "DatabaseInstance REST resource.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Gets or sets the relative URL to get to this REST resource.",
+          "type": "string"
+        },
+        "name": {
+          "description": "Gets or sets the name of this REST resource.",
+          "type": "string"
+        },
+        "type": {
+          "description": "Gets the type of this REST resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "properties": {
+          "$ref": "#/definitions/DatabaseInstanceProperties",
+          "description": "Gets or sets the properties of the machine."
+        }
+      }
+    },
+    "DatabaseInstanceProperties": {
+      "description": "Properties of the database instance resource.",
+      "type": "object",
+      "properties": {
+        "discoveryData": {
+          "description": "Gets or sets the assessment details of the database instance published by various sources.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DatabaseInstanceDiscoveryDetails"
+          }
+        },
+        "summary": {
+          "description": "Gets or sets the database instances summary per solution. The key of dictionary is the solution name and value is the corresponding database instance summary object.",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/DatabaseInstanceSummary"
+          }
+        },
+        "lastUpdatedTime": {
+          "format": "date-time",
+          "description": "Gets or sets the time of the last modification of the database.",
+          "type": "string"
+        }
+      }
+    },
+    "DatabaseInstanceDiscoveryDetails": {
+      "description": "Discovery properties that can be shared by various publishers.",
+      "type": "object",
+      "properties": {
+        "lastUpdatedTime": {
+          "format": "date-time",
+          "description": "Gets or sets the time of the last modification of the database instance details.",
+          "type": "string"
+        },
+        "instanceId": {
+          "description": "Gets or sets the database instance Id.",
+          "type": "string"
+        },
+        "enqueueTime": {
+          "description": "Gets or sets the time the message was enqueued.",
+          "type": "string"
+        },
+        "solutionName": {
+          "description": "Gets or sets the name of the solution that sent the data.",
+          "type": "string"
+        },
+        "instanceName": {
+          "description": "Gets or sets the database instance name.",
+          "type": "string"
+        },
+        "instanceVersion": {
+          "description": "Gets or sets the database instance version.",
+          "type": "string"
+        },
+        "instanceType": {
+          "description": "Gets or sets the database instance type.",
+          "type": "string"
+        },
+        "hostName": {
+          "description": "Gets or sets the host name of the database server.",
+          "type": "string"
+        },
+        "ipAddress": {
+          "description": "Gets or sets the IP addresses of the database server. IP addresses could be IP V4 or IP V6.",
+          "type": "string"
+        },
+        "portNumber": {
+          "format": "int32",
+          "description": "Gets or sets the port number of the database server.",
+          "type": "integer"
+        },
+        "extendedInfo": {
+          "description": "Gets or sets the extended properties of the database server.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "DatabaseInstanceSummary": {
+      "description": "Class representing the database instance summary object.",
+      "type": "object",
+      "properties": {
+        "databasesAssessedCount": {
+          "format": "int32",
+          "description": "Gets or sets the count of databases assessed.",
+          "type": "integer"
+        },
+        "migrationReadyCount": {
+          "format": "int32",
+          "description": "Gets or sets the count of databases ready for migration.",
+          "type": "integer"
+        }
+      }
+    },
+    "DatabaseCollection": {
+      "description": "Collection of databases.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Gets or sets the databases.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Database"
+          }
+        },
+        "nextLink": {
+          "description": "Gets or sets the value of nextLink.",
+          "type": "string"
+        }
+      }
+    },
+    "Database": {
+      "description": "Database REST resource.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Gets or sets the relative URL to get to this REST resource.",
+          "type": "string"
+        },
+        "name": {
+          "description": "Gets or sets the name of this REST resource.",
+          "type": "string"
+        },
+        "type": {
+          "description": "Gets the type of this REST resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "properties": {
+          "$ref": "#/definitions/DatabaseProperties",
+          "description": "Gets or sets the properties of the database."
+        }
+      }
+    },
+    "DatabaseProperties": {
+      "description": "Properties of the database resource.",
+      "type": "object",
+      "properties": {
+        "assessmentData": {
+          "description": "Gets or sets the assessment details of the database published by various sources.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DatabaseAssessmentDetails"
+          }
+        },
+        "lastUpdatedTime": {
+          "format": "date-time",
+          "description": "Gets or sets the time of the last modification of the database.",
+          "type": "string"
+        }
+      }
+    },
+    "DatabaseAssessmentDetails": {
+      "description": "Assessment properties that can be shared by various publishers.",
+      "type": "object",
+      "properties": {
+        "assessmentId": {
+          "description": "Gets or sets the database assessment scope/Id.",
+          "type": "string"
+        },
+        "migrationBlockersCount": {
+          "format": "int32",
+          "description": "Gets or sets the number of blocking changes found.",
+          "type": "integer"
+        },
+        "breakingChangesCount": {
+          "format": "int32",
+          "description": "Gets or sets the number of breaking changes found.",
+          "type": "integer"
+        },
+        "isReadyForMigration": {
+          "description": "Gets or sets a value indicating whether the database is ready for migration.",
+          "type": "boolean"
+        },
+        "assessmentTargetType": {
+          "description": "Gets or sets the assessed target database type.",
+          "type": "string"
+        },
+        "lastAssessedTime": {
+          "format": "date-time",
+          "description": "Gets or sets the time when the database was last assessed.",
+          "type": "string"
+        },
+        "compatibilityLevel": {
+          "description": "Gets or sets the compatibility level of the database.",
+          "type": "string"
+        },
+        "databaseSizeInMB": {
+          "description": "Gets or sets the database size.",
+          "type": "string"
+        },
+        "lastUpdatedTime": {
+          "format": "date-time",
+          "description": "Gets or sets the time of the last modification of the database details.",
+          "type": "string"
+        },
+        "enqueueTime": {
+          "description": "Gets or sets the time the message was enqueued.",
+          "type": "string"
+        },
+        "solutionName": {
+          "description": "Gets or sets the name of the solution that sent the data.",
+          "type": "string"
+        },
+        "instanceId": {
+          "description": "Gets or sets the database server instance Id.",
+          "type": "string"
+        },
+        "databaseName": {
+          "description": "Gets or sets the database name.",
+          "type": "string"
+        },
+        "extendedInfo": {
+          "description": "Gets or sets the extended properties of the database.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "EventCollection": {
+      "description": "Collection of events.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Gets or sets the machines.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MigrateEvent"
+          }
+        },
+        "nextLink": {
+          "description": "Gets or sets the value of nextLink.",
+          "type": "string"
+        }
+      }
+    },
+    "MigrateEvent": {
+      "description": "MigrateEvent REST resource.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Gets or sets the relative URL to get to this REST resource.",
+          "type": "string"
+        },
+        "name": {
+          "description": "Gets or sets the name of this REST resource.",
+          "type": "string"
+        },
+        "type": {
+          "description": "Gets the type of this REST resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "properties": {
+          "$ref": "#/definitions/MigrateEventProperties",
+          "description": "Gets or sets the properties of the event."
+        }
+      }
+    },
+    "MigrateEventProperties": {
+      "description": "Properties of the error resource.",
+      "type": "object",
+      "properties": {
+        "instanceType": {
+          "description": "Gets the Instance type.",
+          "type": "string",
+          "readOnly": true
+        },
+        "errorCode": {
+          "description": "Gets or sets the error code.",
+          "type": "string"
+        },
+        "errorMessage": {
+          "description": "Gets or sets the error message.",
+          "type": "string"
+        },
+        "recommendation": {
+          "description": "Gets or sets the recommendation for the error.",
+          "type": "string"
+        },
+        "possibleCauses": {
+          "description": "Gets or sets the possible causes for the error.",
+          "type": "string"
+        },
+        "solution": {
+          "description": "Gets or sets the solution for which the error is being reported.",
+          "type": "string"
+        },
+        "clientRequestId": {
+          "description": "Gets or sets the client request Id of the payload for which the event is being reported.",
+          "type": "string"
+        }
+      },
+      "discriminator": "instanceType"
+    },
+    "ODataQueryOptions`1": {
+      "type": "object",
+      "properties": {
+        "filter": {
+          "$ref": "#/definitions/FilterQueryOption",
+          "readOnly": true
+        }
+      }
+    },
+    "ODataQueryContext": {
+      "type": "object",
+      "properties": {
+        "defaultQuerySettings": {
+          "$ref": "#/definitions/DefaultQuerySettings",
+          "readOnly": true
+        },
+        "model": {
+          "$ref": "#/definitions/IEdmModel",
+          "readOnly": true
+        },
+        "elementType": {
+          "$ref": "#/definitions/IEdmType",
+          "readOnly": true
+        },
+        "navigationSource": {
+          "$ref": "#/definitions/IEdmNavigationSource",
+          "readOnly": true
+        },
+        "elementClrType": {
+          "type": "string",
+          "readOnly": true
+        },
+        "path": {
+          "$ref": "#/definitions/ODataPath",
+          "readOnly": true
+        },
+        "requestContainer": {
+          "$ref": "#/definitions/IServiceProvider",
+          "readOnly": true
+        }
+      }
+    },
+    "ODataRawQueryOptions": {
+      "type": "object",
+      "properties": {
+        "filter": {
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "FilterQueryOption": {
+      "type": "object",
+      "properties": {
+        "context": {
+          "$ref": "#/definitions/ODataQueryContext",
+          "readOnly": true
+        },
+        "validator": {
+          "$ref": "#/definitions/FilterQueryValidator"
+        },
+        "filterClause": {
+          "$ref": "#/definitions/FilterClause",
+          "readOnly": true
+        },
+        "rawValue": {
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ODataQueryValidator": {
+      "type": "object",
+      "properties": {}
+    },
+    "DefaultQuerySettings": {
+      "type": "object",
+      "properties": {
+        "enableExpand": {
+          "type": "boolean"
+        },
+        "enableSelect": {
+          "type": "boolean"
+        },
+        "enableCount": {
+          "type": "boolean"
+        },
+        "enableOrderBy": {
+          "type": "boolean"
+        },
+        "enableFilter": {
+          "type": "boolean"
+        },
+        "maxTop": {
+          "format": "int32",
+          "type": "integer"
+        }
+      }
+    },
+    "IEdmModel": {
+      "type": "object",
+      "properties": {
+        "schemaElements": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/IEdmSchemaElement"
+          },
+          "readOnly": true
+        },
+        "vocabularyAnnotations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/IEdmVocabularyAnnotation"
+          },
+          "readOnly": true
+        },
+        "referencedModels": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/IEdmModel"
+          },
+          "readOnly": true
+        },
+        "declaredNamespaces": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "directValueAnnotationsManager": {
+          "$ref": "#/definitions/IEdmDirectValueAnnotationsManager",
+          "readOnly": true
+        },
+        "entityContainer": {
+          "$ref": "#/definitions/IEdmEntityContainer",
+          "readOnly": true
+        }
+      }
+    },
+    "IEdmType": {
+      "type": "object",
+      "properties": {
+        "typeKind": {
+          "enum": [
+            "None",
+            "Primitive",
+            "Entity",
+            "Complex",
+            "Collection",
+            "EntityReference",
+            "Enum",
+            "TypeDefinition",
+            "Untyped",
+            "Path"
+          ],
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "IEdmNavigationSource": {
+      "type": "object",
+      "properties": {
+        "navigationPropertyBindings": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/IEdmNavigationPropertyBinding"
+          },
+          "readOnly": true
+        },
+        "path": {
+          "$ref": "#/definitions/IEdmPathExpression",
+          "readOnly": true
+        },
+        "type": {
+          "$ref": "#/definitions/IEdmType",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ODataPath": {
+      "type": "object",
+      "properties": {
+        "edmType": {
+          "$ref": "#/definitions/IEdmType",
+          "readOnly": true
+        },
+        "navigationSource": {
+          "$ref": "#/definitions/IEdmNavigationSource",
+          "readOnly": true
+        },
+        "segments": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ODataPathSegment"
+          },
+          "readOnly": true
+        },
+        "pathTemplate": {
+          "type": "string",
+          "readOnly": true
+        },
+        "path": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ODataPathSegment"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "IServiceProvider": {
+      "type": "object",
+      "properties": {}
+    },
+    "SelectExpandQueryValidator": {
+      "type": "object",
+      "properties": {}
+    },
+    "SelectExpandClause": {
+      "type": "object",
+      "properties": {
+        "selectedItems": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SelectItem"
+          },
+          "readOnly": true
+        },
+        "allSelected": {
+          "type": "boolean",
+          "readOnly": true
+        }
+      }
+    },
+    "ApplyClause": {
+      "type": "object",
+      "properties": {
+        "transformations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TransformationNode"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "FilterQueryValidator": {
+      "type": "object",
+      "properties": {}
+    },
+    "FilterClause": {
+      "type": "object",
+      "properties": {
+        "expression": {
+          "$ref": "#/definitions/SingleValueNode",
+          "readOnly": true
+        },
+        "rangeVariable": {
+          "$ref": "#/definitions/RangeVariable",
+          "readOnly": true
+        },
+        "itemType": {
+          "$ref": "#/definitions/IEdmTypeReference",
+          "readOnly": true
+        }
+      }
+    },
+    "IEdmSchemaElement": {
+      "type": "object",
+      "properties": {
+        "schemaElementKind": {
+          "enum": [
+            "None",
+            "TypeDefinition",
+            "Term",
+            "Action",
+            "EntityContainer",
+            "Function"
+          ],
+          "type": "string",
+          "readOnly": true
+        },
+        "namespace": {
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "IEdmVocabularyAnnotation": {
+      "type": "object",
+      "properties": {
+        "qualifier": {
+          "type": "string",
+          "readOnly": true
+        },
+        "term": {
+          "$ref": "#/definitions/IEdmTerm",
+          "readOnly": true
+        },
+        "target": {
+          "$ref": "#/definitions/IEdmVocabularyAnnotatable",
+          "readOnly": true
+        },
+        "value": {
+          "$ref": "#/definitions/IEdmExpression",
+          "readOnly": true
+        }
+      }
+    },
+    "IEdmDirectValueAnnotationsManager": {
+      "type": "object",
+      "properties": {}
+    },
+    "IEdmEntityContainer": {
+      "type": "object",
+      "properties": {
+        "elements": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/IEdmEntityContainerElement"
+          },
+          "readOnly": true
+        },
+        "schemaElementKind": {
+          "enum": [
+            "None",
+            "TypeDefinition",
+            "Term",
+            "Action",
+            "EntityContainer",
+            "Function"
+          ],
+          "type": "string",
+          "readOnly": true
+        },
+        "namespace": {
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "IEdmNavigationPropertyBinding": {
+      "type": "object",
+      "properties": {
+        "navigationProperty": {
+          "$ref": "#/definitions/IEdmNavigationProperty",
+          "readOnly": true
+        },
+        "target": {
+          "$ref": "#/definitions/IEdmNavigationSource",
+          "readOnly": true
+        },
+        "path": {
+          "$ref": "#/definitions/IEdmPathExpression",
+          "readOnly": true
+        }
+      }
+    },
+    "IEdmPathExpression": {
+      "type": "object",
+      "properties": {
+        "pathSegments": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "path": {
+          "type": "string",
+          "readOnly": true
+        },
+        "expressionKind": {
+          "enum": [
+            "None",
+            "BinaryConstant",
+            "BooleanConstant",
+            "DateTimeOffsetConstant",
+            "DecimalConstant",
+            "FloatingConstant",
+            "GuidConstant",
+            "IntegerConstant",
+            "StringConstant",
+            "DurationConstant",
+            "Null",
+            "Record",
+            "Collection",
+            "Path",
+            "If",
+            "Cast",
+            "IsType",
+            "FunctionApplication",
+            "LabeledExpressionReference",
+            "Labeled",
+            "PropertyPath",
+            "NavigationPropertyPath",
+            "DateConstant",
+            "TimeOfDayConstant",
+            "EnumMember",
+            "AnnotationPath"
+          ],
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ODataPathSegment": {
+      "type": "object",
+      "properties": {
+        "edmType": {
+          "$ref": "#/definitions/IEdmType",
+          "readOnly": true
+        },
+        "identifier": {
+          "type": "string"
+        }
+      }
+    },
+    "SelectItem": {
+      "type": "object",
+      "properties": {}
+    },
+    "TransformationNode": {
+      "type": "object",
+      "properties": {
+        "kind": {
+          "enum": [
+            "Aggregate",
+            "GroupBy",
+            "Filter",
+            "Compute"
+          ],
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "SingleValueNode": {
+      "type": "object",
+      "properties": {
+        "typeReference": {
+          "$ref": "#/definitions/IEdmTypeReference",
+          "readOnly": true
+        },
+        "kind": {
+          "enum": [
+            "None",
+            "Constant",
+            "Convert",
+            "NonResourceRangeVariableReference",
+            "BinaryOperator",
+            "UnaryOperator",
+            "SingleValuePropertyAccess",
+            "CollectionPropertyAccess",
+            "SingleValueFunctionCall",
+            "Any",
+            "CollectionNavigationNode",
+            "SingleNavigationNode",
+            "SingleValueOpenPropertyAccess",
+            "SingleResourceCast",
+            "All",
+            "CollectionResourceCast",
+            "ResourceRangeVariableReference",
+            "SingleResourceFunctionCall",
+            "CollectionFunctionCall",
+            "CollectionResourceFunctionCall",
+            "NamedFunctionParameter",
+            "ParameterAlias",
+            "EntitySet",
+            "KeyLookup",
+            "SearchTerm",
+            "CollectionOpenPropertyAccess",
+            "CollectionComplexNode",
+            "SingleComplexNode",
+            "Count",
+            "SingleValueCast",
+            "CollectionPropertyNode",
+            "AggregatedCollectionPropertyNode",
+            "In",
+            "CollectionConstant"
+          ],
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "RangeVariable": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "readOnly": true
+        },
+        "typeReference": {
+          "$ref": "#/definitions/IEdmTypeReference",
+          "readOnly": true
+        },
+        "kind": {
+          "format": "int32",
+          "type": "integer",
+          "readOnly": true
+        }
+      }
+    },
+    "IEdmTypeReference": {
+      "type": "object",
+      "properties": {
+        "isNullable": {
+          "type": "boolean",
+          "readOnly": true
+        },
+        "definition": {
+          "$ref": "#/definitions/IEdmType",
+          "readOnly": true
+        }
+      }
+    },
+    "IEdmTerm": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/IEdmTypeReference",
+          "readOnly": true
+        },
+        "appliesTo": {
+          "type": "string",
+          "readOnly": true
+        },
+        "defaultValue": {
+          "type": "string",
+          "readOnly": true
+        },
+        "schemaElementKind": {
+          "enum": [
+            "None",
+            "TypeDefinition",
+            "Term",
+            "Action",
+            "EntityContainer",
+            "Function"
+          ],
+          "type": "string",
+          "readOnly": true
+        },
+        "namespace": {
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "IEdmVocabularyAnnotatable": {
+      "type": "object",
+      "properties": {}
+    },
+    "IEdmExpression": {
+      "type": "object",
+      "properties": {
+        "expressionKind": {
+          "enum": [
+            "None",
+            "BinaryConstant",
+            "BooleanConstant",
+            "DateTimeOffsetConstant",
+            "DecimalConstant",
+            "FloatingConstant",
+            "GuidConstant",
+            "IntegerConstant",
+            "StringConstant",
+            "DurationConstant",
+            "Null",
+            "Record",
+            "Collection",
+            "Path",
+            "If",
+            "Cast",
+            "IsType",
+            "FunctionApplication",
+            "LabeledExpressionReference",
+            "Labeled",
+            "PropertyPath",
+            "NavigationPropertyPath",
+            "DateConstant",
+            "TimeOfDayConstant",
+            "EnumMember",
+            "AnnotationPath"
+          ],
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "IEdmEntityContainerElement": {
+      "type": "object",
+      "properties": {
+        "containerElementKind": {
+          "enum": [
+            "None",
+            "EntitySet",
+            "ActionImport",
+            "FunctionImport",
+            "Singleton"
+          ],
+          "type": "string",
+          "readOnly": true
+        },
+        "container": {
+          "$ref": "#/definitions/IEdmEntityContainer",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "IEdmNavigationProperty": {
+      "type": "object",
+      "properties": {
+        "partner": {
+          "$ref": "#/definitions/IEdmNavigationProperty",
+          "readOnly": true
+        },
+        "onDelete": {
+          "enum": [
+            "None",
+            "Cascade"
+          ],
+          "type": "string",
+          "readOnly": true
+        },
+        "containsTarget": {
+          "type": "boolean",
+          "readOnly": true
+        },
+        "referentialConstraint": {
+          "$ref": "#/definitions/IEdmReferentialConstraint",
+          "readOnly": true
+        },
+        "propertyKind": {
+          "enum": [
+            "None",
+            "Structural",
+            "Navigation"
+          ],
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "$ref": "#/definitions/IEdmTypeReference",
+          "readOnly": true
+        },
+        "declaringType": {
+          "$ref": "#/definitions/IEdmStructuredType",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "IEdmReferentialConstraint": {
+      "type": "object",
+      "properties": {
+        "propertyPairs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EdmReferentialConstraintPropertyPair"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "IEdmStructuredType": {
+      "type": "object",
+      "properties": {
+        "isAbstract": {
+          "type": "boolean",
+          "readOnly": true
+        },
+        "isOpen": {
+          "type": "boolean",
+          "readOnly": true
+        },
+        "baseType": {
+          "$ref": "#/definitions/IEdmStructuredType",
+          "readOnly": true
+        },
+        "declaredProperties": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/IEdmProperty"
+          },
+          "readOnly": true
+        },
+        "typeKind": {
+          "enum": [
+            "None",
+            "Primitive",
+            "Entity",
+            "Complex",
+            "Collection",
+            "EntityReference",
+            "Enum",
+            "TypeDefinition",
+            "Untyped",
+            "Path"
+          ],
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "EdmReferentialConstraintPropertyPair": {
+      "type": "object",
+      "properties": {
+        "dependentProperty": {
+          "$ref": "#/definitions/IEdmStructuralProperty",
+          "readOnly": true
+        },
+        "principalProperty": {
+          "$ref": "#/definitions/IEdmStructuralProperty",
+          "readOnly": true
+        }
+      }
+    },
+    "IEdmProperty": {
+      "type": "object",
+      "properties": {
+        "propertyKind": {
+          "enum": [
+            "None",
+            "Structural",
+            "Navigation"
+          ],
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "$ref": "#/definitions/IEdmTypeReference",
+          "readOnly": true
+        },
+        "declaringType": {
+          "$ref": "#/definitions/IEdmStructuredType",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "IEdmStructuralProperty": {
+      "type": "object",
+      "properties": {
+        "defaultValueString": {
+          "type": "string",
+          "readOnly": true
+        },
+        "propertyKind": {
+          "enum": [
+            "None",
+            "Structural",
+            "Navigation"
+          ],
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "$ref": "#/definitions/IEdmTypeReference",
+          "readOnly": true
+        },
+        "declaringType": {
+          "$ref": "#/definitions/IEdmStructuredType",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "MachineCollection": {
+      "description": "Collection of machines.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Gets or sets the machines.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Machine"
+          }
+        },
+        "nextLink": {
+          "description": "Gets or sets the value of nextLink.",
+          "type": "string"
+        }
+      }
+    },
+    "Machine": {
+      "description": "Machine REST resource.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Gets or sets the relative URL to get to this REST resource.",
+          "type": "string"
+        },
+        "name": {
+          "description": "Gets or sets the name of this REST resource.",
+          "type": "string"
+        },
+        "type": {
+          "description": "Gets the type of this REST resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "properties": {
+          "$ref": "#/definitions/MachineProperties",
+          "description": "Gets or sets the properties of the machine."
+        }
+      }
+    },
+    "MachineProperties": {
+      "description": "Properties of the machine resource.",
+      "type": "object",
+      "properties": {
+        "discoveryData": {
+          "description": "Gets or sets the discovery details of the machine published by various sources.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DiscoveryDetails"
+          }
+        },
+        "assessmentData": {
+          "description": "Gets or sets the assessment details of the machine published by various sources.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AssessmentDetails"
+          }
+        },
+        "migrationData": {
+          "description": "Gets or sets the migration details of the machine published by various sources.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MigrationDetails"
+          }
+        },
+        "lastUpdatedTime": {
+          "format": "date-time",
+          "description": "Gets or sets the time of the last modification of the machine.",
+          "type": "string"
+        }
+      }
+    },
+    "DiscoveryDetails": {
+      "description": "Discovery properties that can be published by various ISVs.",
+      "type": "object",
+      "properties": {
+        "osType": {
+          "description": "Gets or sets the OS type.",
+          "type": "string"
+        },
+        "osName": {
+          "description": "Gets or sets the OS name.",
+          "type": "string"
+        },
+        "osVersion": {
+          "description": "Gets or sets the OS version.",
+          "type": "string"
+        },
+        "enqueueTime": {
+          "description": "Gets or sets the time the message was enqueued.",
+          "type": "string"
+        },
+        "solutionName": {
+          "description": "Gets or sets the name of the solution that sent the data.",
+          "type": "string"
+        },
+        "machineId": {
+          "description": "Gets or sets the unique identifier of the machine.",
+          "type": "string"
+        },
+        "machineManagerId": {
+          "description": "Gets or sets the unique identifier of the virtual machine manager(vCenter/VMM).",
+          "type": "string"
+        },
+        "fabricType": {
+          "description": "Gets or sets the fabric type.",
+          "type": "string"
+        },
+        "lastUpdatedTime": {
+          "format": "date-time",
+          "description": "Gets or sets the time of the last modification of the machine details.",
+          "type": "string"
+        },
+        "machineName": {
+          "description": "Gets or sets the name of the machine.",
+          "type": "string"
+        },
+        "ipAddresses": {
+          "description": "Gets or sets the list of IP addresses of the machine. IP addresses could be IP V4 or IP V6.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "fqdn": {
+          "description": "Gets or sets the FQDN of the machine.",
+          "type": "string"
+        },
+        "biosId": {
+          "description": "Gets or sets the BIOS ID of the machine.",
+          "type": "string"
+        },
+        "macAddresses": {
+          "description": "Gets or sets the list of MAC addresses of the machine.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "extendedInfo": {
+          "description": "Gets or sets the ISV specific extended information.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "AssessmentDetails": {
+      "description": "Assessment properties that can be shared by various publishers.",
+      "type": "object",
+      "properties": {
+        "assessmentId": {
+          "description": "Gets or sets the id of the assessment done on the machine.",
+          "type": "string"
+        },
+        "targetVMSize": {
+          "description": "Gets or sets the target VM size.",
+          "type": "string"
+        },
+        "targetVMLocation": {
+          "description": "Gets or sets the target VM location.",
+          "type": "string"
+        },
+        "targetStorageType": {
+          "description": "Gets or sets the target storage type.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "enqueueTime": {
+          "description": "Gets or sets the time the message was enqueued.",
+          "type": "string"
+        },
+        "solutionName": {
+          "description": "Gets or sets the name of the solution that sent the data.",
+          "type": "string"
+        },
+        "machineId": {
+          "description": "Gets or sets the unique identifier of the machine.",
+          "type": "string"
+        },
+        "machineManagerId": {
+          "description": "Gets or sets the unique identifier of the virtual machine manager(vCenter/VMM).",
+          "type": "string"
+        },
+        "fabricType": {
+          "description": "Gets or sets the fabric type.",
+          "type": "string"
+        },
+        "lastUpdatedTime": {
+          "format": "date-time",
+          "description": "Gets or sets the time of the last modification of the machine details.",
+          "type": "string"
+        },
+        "machineName": {
+          "description": "Gets or sets the name of the machine.",
+          "type": "string"
+        },
+        "ipAddresses": {
+          "description": "Gets or sets the list of IP addresses of the machine. IP addresses could be IP V4 or IP V6.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "fqdn": {
+          "description": "Gets or sets the FQDN of the machine.",
+          "type": "string"
+        },
+        "biosId": {
+          "description": "Gets or sets the BIOS ID of the machine.",
+          "type": "string"
+        },
+        "macAddresses": {
+          "description": "Gets or sets the list of MAC addresses of the machine.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "extendedInfo": {
+          "description": "Gets or sets the ISV specific extended information.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "MigrationDetails": {
+      "description": "Migration properties that can be shared by various publishers.",
+      "type": "object",
+      "properties": {
+        "migrationPhase": {
+          "description": "Gets or sets the phase of migration of the machine.",
+          "type": "string"
+        },
+        "migrationTested": {
+          "description": "Gets or sets a value indicating whether migration was tested on the machine.",
+          "type": "boolean"
+        },
+        "replicationProgressPercentage": {
+          "format": "int32",
+          "description": "Gets or sets the progress percentage of migration on the machine.",
+          "type": "integer"
+        },
+        "targetVMArmId": {
+          "description": "Gets or sets the ARM id the migrated VM.",
+          "type": "string"
+        },
+        "enqueueTime": {
+          "description": "Gets or sets the time the message was enqueued.",
+          "type": "string"
+        },
+        "solutionName": {
+          "description": "Gets or sets the name of the solution that sent the data.",
+          "type": "string"
+        },
+        "machineId": {
+          "description": "Gets or sets the unique identifier of the machine.",
+          "type": "string"
+        },
+        "machineManagerId": {
+          "description": "Gets or sets the unique identifier of the virtual machine manager(vCenter/VMM).",
+          "type": "string"
+        },
+        "fabricType": {
+          "description": "Gets or sets the fabric type.",
+          "type": "string"
+        },
+        "lastUpdatedTime": {
+          "format": "date-time",
+          "description": "Gets or sets the time of the last modification of the machine details.",
+          "type": "string"
+        },
+        "machineName": {
+          "description": "Gets or sets the name of the machine.",
+          "type": "string"
+        },
+        "ipAddresses": {
+          "description": "Gets or sets the list of IP addresses of the machine. IP addresses could be IP V4 or IP V6.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "fqdn": {
+          "description": "Gets or sets the FQDN of the machine.",
+          "type": "string"
+        },
+        "biosId": {
+          "description": "Gets or sets the BIOS ID of the machine.",
+          "type": "string"
+        },
+        "macAddresses": {
+          "description": "Gets or sets the list of MAC addresses of the machine.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "extendedInfo": {
+          "description": "Gets or sets the ISV specific extended information.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "MigrateProject": {
+      "description": "Migrate Project REST Resource.",
+      "type": "object",
+      "x-ms-azure-resource": true,
+      "properties": {
+        "eTag": {
+          "description": "Gets or sets the eTag for concurrency control.",
+          "type": "string"
+        },
+        "location": {
+          "description": "Gets or sets the Azure location in which migrate project is created.",
+          "type": "string"
+        },
+        "properties": {
+          "$ref": "#/definitions/MigrateProjectProperties",
+          "description": "Gets or sets the nested properties."
+        },
+        "id": {
+          "description": "Gets the relative URL to get this migrate project.",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "Gets the name of the migrate project.",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "Handled by resource provider. Type = Microsoft.Migrate/MigrateProject.",
+          "type": "string",
+          "readOnly": true
+        },
+        "tags": {
+          "description": "Gets or sets the tags.",
+          "type": "object",
+          "properties": {
+            "additionalProperties": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "MigrateProjectProperties": {
+      "description": "Class for migrate project properties.",
+      "type": "object",
+      "properties": {
+        "registeredTools": {
+          "description": "Gets or sets the list of tools registered with the migrate project.",
+          "type": "array",
+          "items": {
+            "enum": [
+              "ServerDiscovery",
+              "ServerAssessment",
+              "ServerMigration",
+              "Cloudamize",
+              "Turbonomic",
+              "Zerto",
+              "CorentTech",
+              "ServerAssessmentV1",
+              "ServerMigration_Replication",
+              "Carbonite",
+              "DataMigrationAssistant",
+              "DatabaseMigrationService"
+            ],
+            "type": "string"
+          }
+        },
+        "summary": {
+          "description": "Gets the summary of the migrate project.",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/ProjectSummary"
+          },
+          "readOnly": true
+        },
+        "lastSummaryRefreshedTime": {
+          "format": "date-time",
+          "description": "Gets the last time the project summary was refreshed.",
+          "type": "string",
+          "readOnly": true
+        },
+        "refreshSummaryState": {
+          "description": "Gets the refresh summary state.",
+          "enum": [
+            "Started",
+            "InProgress",
+            "Completed",
+            "Failed"
+          ],
+          "type": "string",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "type": "string",
+          "enum": [
+            "Accepted",
+            "Creating",
+            "Deleting",
+            "Failed",
+            "Moving",
+            "Succeeded"
+          ],
+          "description": "Provisioning state of the migrate project.",
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "ProjectSummary": {
+      "description": "The project summary class.",
+      "type": "object",
+      "properties": {
+        "instanceType": {
+          "description": "Gets the Instance type.",
+          "type": "string",
+          "readOnly": true
+        },
+        "refreshSummaryState": {
+          "description": "Gets or sets the state of refresh summary.",
+          "enum": [
+            "Started",
+            "InProgress",
+            "Completed",
+            "Failed"
+          ],
+          "type": "string"
+        },
+        "lastSummaryRefreshedTime": {
+          "format": "date-time",
+          "description": "Gets or sets the time when summary was last refreshed.",
+          "type": "string"
+        },
+        "extendedSummary": {
+          "description": "Gets or sets the extended summary.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "discriminator": "instanceType"
+    },
+    "RegisterToolInput": {
+      "description": "Class representing the register tool input.",
+      "type": "object",
+      "properties": {
+        "tool": {
+          "description": "Gets or sets the tool to be registered.",
+          "enum": [
+            "ServerDiscovery",
+            "ServerAssessment",
+            "ServerMigration",
+            "Cloudamize",
+            "Turbonomic",
+            "Zerto",
+            "CorentTech",
+            "ServerAssessmentV1",
+            "ServerMigration_Replication",
+            "Carbonite",
+            "DataMigrationAssistant",
+            "DatabaseMigrationService"
+          ],
+          "type": "string"
+        }
+      }
+    },
+    "RegistrationResult": {
+      "description": "Class representing the registration status of a tool with the migrate project.",
+      "type": "object",
+      "properties": {
+        "isRegistered": {
+          "description": "Gets or sets a value indicating whether the tool is registered or not.",
+          "type": "boolean"
+        }
+      }
+    },
+    "RefreshSummaryResult": {
+      "description": "Class representing the refresh summary status of the migrate project.",
+      "type": "object",
+      "properties": {
+        "isRefreshed": {
+          "description": "Gets or sets a value indicating whether the migrate project summary is refreshed.",
+          "type": "boolean"
+        }
+      }
+    },
+    "RefreshSummaryInput": {
+      "description": "Class representing the refresh summary input.",
+      "type": "object",
+      "properties": {
+        "goal": {
+          "description": "Gets or sets the goal for which summary needs to be refreshed.",
+          "enum": [
+            "Servers",
+            "Databases"
+          ],
+          "type": "string"
+        }
+      }
+    },
+    "Solution": {
+      "description": "Solution REST Resource.",
+      "x-ms-azure-resource": true,
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Gets the relative URL to get to this REST resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "Gets the name of this REST resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "Gets the type of this REST resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "etag": {
+          "description": "Gets or sets the ETAG for optimistic concurrency control.",
+          "type": "string"
+        },
+        "properties": {
+          "$ref": "#/definitions/SolutionProperties",
+          "description": "Gets or sets the properties of the solution."
+        }
+      }
+    },
+    "SolutionProperties": {
+      "description": "Class for solution properties.",
+      "type": "object",
+      "properties": {
+        "tool": {
+          "description": "Gets or sets the tool being used in the solution.",
+          "enum": [
+            "ServerDiscovery",
+            "ServerAssessment",
+            "ServerMigration",
+            "Cloudamize",
+            "Turbonomic",
+            "Zerto",
+            "CorentTech",
+            "ServerAssessmentV1",
+            "ServerMigration_Replication",
+            "Carbonite",
+            "DataMigrationAssistant",
+            "DatabaseMigrationService"
+          ],
+          "type": "string"
+        },
+        "purpose": {
+          "description": "Gets or sets the purpose of the solution.",
+          "enum": [
+            "Discovery",
+            "Assessment",
+            "Migration"
+          ],
+          "type": "string"
+        },
+        "goal": {
+          "description": "Gets or sets the goal of the solution.",
+          "enum": [
+            "Servers",
+            "Databases"
+          ],
+          "type": "string"
+        },
+        "status": {
+          "description": "Gets or sets the current status of the solution.",
+          "enum": [
+            "Inactive",
+            "Active"
+          ],
+          "type": "string"
+        },
+        "cleanupState": {
+          "description": "Gets or sets the cleanup state of the solution.",
+          "enum": [
+            "None",
+            "Started",
+            "InProgress",
+            "Completed",
+            "Failed"
+          ],
+          "type": "string"
+        },
+        "summary": {
+          "$ref": "#/definitions/SolutionSummary",
+          "description": "Gets or sets the summary of the solution."
+        },
+        "details": {
+          "$ref": "#/definitions/SolutionDetails",
+          "description": "Gets or sets the details of the solution."
+        }
+      }
+    },
+    "SolutionSummary": {
+      "description": "The solution summary class.",
+      "type": "object",
+      "properties": {
+        "instanceType": {
+          "description": "Gets the Instance type.",
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "discriminator": "instanceType"
+    },
+    "SolutionDetails": {
+      "description": "Class representing the details of the solution.",
+      "type": "object",
+      "properties": {
+        "groupCount": {
+          "format": "int32",
+          "description": "Gets or sets the count of groups reported by the solution.",
+          "type": "integer"
+        },
+        "assessmentCount": {
+          "format": "int32",
+          "description": "Gets or sets the count of assessments reported by the solution.",
+          "type": "integer"
+        },
+        "extendedDetails": {
+          "description": "Gets or sets the extended details reported by the solution.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "SolutionsCollection": {
+      "description": "Collection of solutions.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Gets or sets the list of solutions.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Solution"
+          }
+        },
+        "nextLink": {
+          "description": "Gets or sets the value of next link.",
+          "type": "string"
+        }
+      }
+    },
+    "SolutionConfig": {
+      "description": "Class representing the config for the solution in the migrate project.",
+      "type": "object",
+      "properties": {
+        "publisherSasUri": {
+          "description": "Gets or sets the publisher sas uri for the solution.",
+          "type": "string"
+        }
+      }
+    },
+    "ServersProjectSummary": {
+      "description": "Class representing the servers project summary.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProjectSummary"
+        }
+      ],
+      "properties": {
+        "discoveredCount": {
+          "format": "int32",
+          "description": "Gets or sets the count of entities discovered.",
+          "type": "integer"
+        },
+        "assessedCount": {
+          "format": "int32",
+          "description": "Gets or sets the count of entities assessed.",
+          "type": "integer"
+        },
+        "replicatingCount": {
+          "format": "int32",
+          "description": "Gets or sets the count of entities being replicated.",
+          "type": "integer"
+        },
+        "testMigratedCount": {
+          "format": "int32",
+          "description": "Gets or sets the count of entities test migrated.",
+          "type": "integer"
+        },
+        "migratedCount": {
+          "format": "int32",
+          "description": "Gets or sets the count of entities migrated.",
+          "type": "integer"
+        }
+      },
+      "x-ms-discriminator-value": "Servers"
+    },
+    "DatabaseProjectSummary": {
+      "description": "The database project summary class.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProjectSummary"
+        }
+      ],
+      "properties": {},
+      "x-ms-discriminator-value": "Databases"
+    },
+    "ServersSolutionSummary": {
+      "description": "Class representing the servers solution summary.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SolutionSummary"
+        }
+      ],
+      "properties": {
+        "discoveredCount": {
+          "format": "int32",
+          "description": "Gets or sets the count of servers discovered.",
+          "type": "integer"
+        },
+        "assessedCount": {
+          "format": "int32",
+          "description": "Gets or sets the count of servers assessed.",
+          "type": "integer"
+        },
+        "replicatingCount": {
+          "format": "int32",
+          "description": "Gets or sets the count of servers being replicated.",
+          "type": "integer"
+        },
+        "testMigratedCount": {
+          "format": "int32",
+          "description": "Gets or sets the count of servers test migrated.",
+          "type": "integer"
+        },
+        "migratedCount": {
+          "format": "int32",
+          "description": "Gets or sets the count of servers migrated.",
+          "type": "integer"
+        }
+      },
+      "x-ms-discriminator-value": "Servers"
+    },
+    "DatabasesSolutionSummary": {
+      "description": "Class representing the databases solution summary.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SolutionSummary"
+        }
+      ],
+      "properties": {
+        "databasesAssessedCount": {
+          "format": "int32",
+          "description": "Gets or sets the count of databases assessed.",
+          "type": "integer"
+        },
+        "databaseInstancesAssessedCount": {
+          "format": "int32",
+          "description": "Gets or sets the count of database instances assessed.",
+          "type": "integer"
+        },
+        "migrationReadyCount": {
+          "format": "int32",
+          "description": "Gets or sets the count of databases ready for migration.",
+          "type": "integer"
+        }
+      },
+      "x-ms-discriminator-value": "Databases"
+    },
+    "MachineMigrateEventProperties": {
+      "description": "Properties of the machine error resource.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/MigrateEventProperties"
+        }
+      ],
+      "properties": {
+        "machine": {
+          "description": "Gets or sets the machine for which the error is being reported.",
+          "type": "string"
+        }
+      },
+      "x-ms-discriminator-value": "Servers"
+    },
+    "DatabaseMigrateEventProperties": {
+      "description": "Properties of the database error resource.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/MigrateEventProperties"
+        }
+      ],
+      "properties": {
+        "database": {
+          "description": "Gets or sets the database for which the error is being reported.",
+          "type": "string"
+        },
+        "databaseInstanceId": {
+          "description": "Gets or sets the database instance for which the error is being reported.",
+          "type": "string"
+        }
+      },
+      "x-ms-discriminator-value": "Databases"
+    },
+    "OperationResultList": {
+      "type": "object",
+      "description": "List of API operations.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of operations.",
+          "items": {
+            "$ref": "#/definitions/Operation"
+          }
+        }
+      }
+    },
+    "Operation": {
+      "type": "object",
+      "description": "A REST API operation supported by the provider.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the operation.",
+          "readOnly": true
+        },
+        "display": {
+          "description": "Displayable properties of the operation.",
+          "$ref": "#/definitions/OperationDisplay"
+        },
+        "origin": {
+          "type": "string",
+          "description": "Origin of the operation.",
+          "readOnly": true
+        }
+      }
+    },
+    "OperationDisplay": {
+      "type": "object",
+      "description": "Displayable properties of the operation.",
+      "readOnly": true,
+      "properties": {
+        "provider": {
+          "type": "string",
+          "description": "Provider of the operation.",
+          "readOnly": true
+        },
+        "resource": {
+          "type": "string",
+          "description": "Resource operated on by the operation.",
+          "readOnly": true
+        },
+        "operation": {
+          "type": "string",
+          "description": "Operation Type.",
+          "readOnly": true
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of the operation.",
+          "readOnly": true
+        }
+      }
+    }
+  }
+}

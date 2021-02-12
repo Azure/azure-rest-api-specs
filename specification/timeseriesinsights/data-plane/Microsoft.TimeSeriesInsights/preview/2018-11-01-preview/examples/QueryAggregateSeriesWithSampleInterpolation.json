@@ -1,0 +1,114 @@
+{
+  "parameters": {
+    "api-version": "2018-11-01-preview",
+    "environmentFqdn": "10000000-0000-0000-0000-100000000109.env.timeseries.azure.com",
+    "continuationToken": "aXsic2tpcCI6MTAwMCwidGFrZSI6MTAwMH0=",
+    "parameters": {
+      "aggregateSeries": {
+        "timeSeriesId": [
+          "006dfc2d-0324-4937-998c-d16f3b4f1952",
+          "T1"
+        ],
+        "searchSpan": {
+          "from": "2016-08-01T00:00:00Z",
+          "to": "2016-08-01T00:16:50Z"
+        },
+        "interval": "PT1M",
+        "inlineVariables": {
+          "LinearSampleInterpolation": {
+            "kind": "numeric",
+            "value": {
+              "tsx": "$event.Temperature"
+            },
+            "filter": null,
+            "interpolation": {
+              "kind": "Linear",
+              "boundary": {
+                "span": "P1D"
+              }
+            },
+            "aggregation": {
+              "tsx": "left($value)"
+            }
+          },
+          "StepSampleInterpolation": {
+            "kind": "numeric",
+            "value": {
+              "tsx": "$event.Temperature"
+            },
+            "filter": null,
+            "interpolation": {
+              "kind": "Step",
+              "boundary": {
+                "span": "P1D"
+              }
+            },
+            "aggregation": {
+              "tsx": "left($value)"
+            }
+          }
+        },
+        "projectedVariables": [
+          "LinearSampleInterpolation",
+          "StepSampleInterpolation"
+        ]
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "timestamps": [
+          "2016-08-01T00:00:00Z",
+          "2016-08-01T00:01:00Z",
+          "2016-08-01T00:02:00Z",
+          "2016-08-01T00:03:00Z",
+          "2016-08-01T00:04:00Z",
+          "2016-08-01T00:05:00Z",
+          "2016-08-01T00:06:00Z",
+          "2016-08-01T00:07:00Z",
+          "2016-08-01T00:08:00Z",
+          "2016-08-01T00:09:00Z",
+          "2016-08-01T00:10:00Z"
+        ],
+        "properties": [
+          {
+            "name": "LinearSampleInterpolation",
+            "type": "Double",
+            "values": [
+              50.0,
+              60.0,
+              60.0,
+              60.0,
+              60.0,
+              60.0,
+              60.0,
+              60.0,
+              60.0,
+              60.0,
+              62.0
+            ]
+          },
+          {
+            "name": "StepSampleInterpolation",
+            "type": "Double",
+            "values": [
+              71.25,
+              85.0,
+              82.5,
+              80.0,
+              89.166666666666671,
+              75.0,
+              90.0,
+              75.833333333333329,
+              85.0,
+              82.5,
+              84.0
+            ]
+          }
+        ],
+        "progress": 100.0
+      }
+    }
+  }
+}

@@ -400,7 +400,9 @@
         "responses": {
           "200": {
             "description": "OK.",
-            "schema": { "$ref": "#/definitions/ListSkusResult" }
+            "schema": {
+              "$ref": "#/definitions/ListSkusResult"
+            }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -546,7 +548,9 @@
         "responses": {
           "200": {
             "description": "OK.",
-            "schema": { "$ref": "#/definitions/ListResourceSkusResult" }
+            "schema": {
+              "$ref": "#/definitions/ListResourceSkusResult"
+            }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -1073,6 +1077,60 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Kusto/clusters/{clusterName}/databases/{databaseName}/checkNameAvailability": {
+      "post": {
+        "tags": [
+          "DataConnections"
+        ],
+        "operationId": "DataConnections_CheckNameAvailability",
+        "x-ms-examples": {
+          "KustoDatabaseCheckNameAvailability": {
+            "$ref": "./examples/KustoDataConnectionsCheckNameAvailability.json"
+          }
+        },
+        "description": "Checks that the data connection name is valid and is not already in use.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DatabaseNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "dataConnectionName",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DataConnectionCheckNameRequest"
+            },
+            "description": "The name of the data connection."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK -- Operation to check the Kusto resource name availability was successful.",
+            "schema": {
+              "$ref": "#/definitions/CheckNameResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Kusto/clusters/{clusterName}/databases/{databaseName}/dataConnections/{dataConnectionName}": {
       "get": {
         "tags": [
@@ -1418,7 +1476,7 @@
         },
         "capacity": {
           "$ref": "#/definitions/AzureCapacity",
-          "description": "The SKU capacity."
+          "description": "The number of instances of the cluster."
         }
       },
       "description": "Azure resource SKU definition."
@@ -1446,11 +1504,11 @@
           }
         },
         "minimum": {
-          "description": "Minimum allowed capacity.",
+          "description": "Minimum allowed instances count.",
           "type": "integer"
         },
         "maximum": {
-          "description": "Maximum allowed capacity.",
+          "description": "Maximum allowed instances count.",
           "type": "integer"
         },
         "default": {
@@ -1471,13 +1529,18 @@
           "description": "SKU name.",
           "type": "string",
           "enum": [
-            "D13_v2",
-            "D14_v2",
-            "L8",
-            "L16",
-            "D11_v2",
-            "D12_v2",
-            "L4"
+            "Standard_DS13_v2+1TB_PS",
+            "Standard_DS13_v2+2TB_PS",
+            "Standard_DS14_v2+3TB_PS",
+            "Standard_DS14_v2+4TB_PS",
+            "Standard_D13_v2",
+            "Standard_D14_v2",
+            "Standard_L8s",
+            "Standard_L16s",
+            "Standard_D11_v2",
+            "Standard_D12_v2",
+            "Standard_L4s",
+            "Dev(No SLA)_Standard_D11_v2"
           ],
           "x-ms-enum": {
             "name": "AzureSkuName",
@@ -1485,13 +1548,14 @@
           }
         },
         "capacity": {
-          "description": "SKU capacity.",
+          "description": "The number of instances of the cluster.",
           "type": "integer"
         },
         "tier": {
           "description": "SKU tier.",
           "type": "string",
           "enum": [
+            "Basic",
             "Standard"
           ],
           "x-ms-enum": {
@@ -2002,6 +2066,31 @@
       ],
       "description": "The result returned from a database check name availability request."
     },
+    "DataConnectionCheckNameRequest": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Data Connection name."
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "Microsoft.Kusto/clusters/databases/dataConnections"
+          ],
+          "x-ms-enum": {
+            "name": "Type",
+            "modelAsString": false
+          },
+          "description": "The type of resource, Microsoft.Kusto/clusters/databases/dataConnections."
+        }
+      },
+      "required": [
+        "name",
+        "type"
+      ],
+      "description": "The result returned from a data connections check name availability request."
+    },
     "CheckNameResult": {
       "type": "object",
       "properties": {
@@ -2016,6 +2105,18 @@
         "message": {
           "type": "string",
           "description": "Message indicating an unavailable name due to a conflict, or a description of the naming rules that are violated."
+        },
+        "reason": {
+          "type": "string",
+          "enum": [
+            "Invalid",
+            "AlreadyExists"
+          ],
+          "x-ms-enum": {
+            "name": "reason",
+            "modelAsString": true
+          },
+          "description": "Message providing the reason why the given name is invalid."
         }
       },
       "description": "The result returned from a check name availability request."
@@ -2026,7 +2127,9 @@
       "properties": {
         "value": {
           "type": "array",
-          "items": { "$ref": "#/definitions/AzureResourceSku" },
+          "items": {
+            "$ref": "#/definitions/AzureResourceSku"
+          },
           "description": "The collection of available SKUs for an existing resource."
         }
       }
@@ -2037,7 +2140,9 @@
       "properties": {
         "value": {
           "type": "array",
-          "items": { "$ref": "#/definitions/AzureSku" },
+          "items": {
+            "$ref": "#/definitions/AzureSku"
+          },
           "description": "The collection of available SKUs for new resources."
         }
       }
@@ -2176,13 +2281,13 @@
   },
   "securityDefinitions": {
     "azure_auth": {
-        "type": "oauth2",
-        "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
-        "flow": "implicit",
-        "description": "Azure Active Directory OAuth2 Flow",
-        "scopes": {
-            "user_impersonation": "impersonate your user account"
-        }
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
     }
   }
 }

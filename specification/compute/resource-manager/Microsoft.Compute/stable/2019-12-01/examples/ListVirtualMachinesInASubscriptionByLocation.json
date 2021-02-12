@@ -1,0 +1,127 @@
+{
+  "parameters": {
+    "subscriptionId": "{subscriptionId}",
+    "location": "eastus",
+    "api-version": "2019-12-01"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "properties": {
+              "vmId": "{vmId}",
+              "availabilitySet": {
+                "id": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/availabilitySets/{availabilitySetName}"
+              },
+              "hardwareProfile": {
+                "vmSize": "Standard_A0"
+              },
+              "storageProfile": {
+                "imageReference": {
+                  "publisher": "MicrosoftWindowsServer",
+                  "offer": "WindowsServer",
+                  "sku": "2012-R2-Datacenter",
+                  "version": "4.127.20170406"
+                },
+                "osDisk": {
+                  "osType": "Windows",
+                  "name": "test",
+                  "createOption": "FromImage",
+                  "vhd": {
+                    "uri": "https://{storageAccountName}.blob.core.windows.net/{containerName}/{vhdName}.vhd"
+                  },
+                  "caching": "None",
+                  "diskSizeGB": 127
+                },
+                "dataDisks": []
+              },
+              "osProfile": {
+                "computerName": "Test",
+                "adminUsername": "Foo12",
+                "windowsConfiguration": {
+                  "provisionVMAgent": true,
+                  "enableAutomaticUpdates": true
+                },
+                "secrets": [],
+                "allowExtensionOperations": true
+              },
+              "networkProfile": {
+                "networkInterfaces": [
+                  {
+                    "id": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkInterfaces/{networkInterfaceName}"
+                  }
+                ]
+              },
+              "provisioningState": "Succeeded"
+            },
+            "type": "Microsoft.Compute/virtualMachines",
+            "location": "eastus",
+            "tags": {
+              "RG": "rg",
+              "testTag": "1"
+            },
+            "id": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{virtualMachineName}",
+            "name": "{virtualMachineName}"
+          },
+          {
+            "properties": {
+              "vmId": "{vmId}",
+              "availabilitySet": {
+                "id": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/availabilitySets/{availabilitySetName}"
+              },
+              "hardwareProfile": {
+                "vmSize": "Standard_A0"
+              },
+              "storageProfile": {
+                "imageReference": {
+                  "publisher": "MicrosoftWindowsServer",
+                  "offer": "WindowsServer",
+                  "sku": "2012-R2-Datacenter",
+                  "version": "4.127.20170406"
+                },
+                "osDisk": {
+                  "osType": "Windows",
+                  "name": "test",
+                  "createOption": "FromImage",
+                  "vhd": {
+                    "uri": "https://{storageAccountName}.blob.core.windows.net/{containerName}/{vhdName}.vhd"
+                  },
+                  "caching": "None",
+                  "diskSizeGB": 127
+                },
+                "dataDisks": []
+              },
+              "osProfile": {
+                "computerName": "Test",
+                "adminUsername": "Foo12",
+                "windowsConfiguration": {
+                  "provisionVMAgent": true,
+                  "enableAutomaticUpdates": true
+                },
+                "secrets": [],
+                "allowExtensionOperations": true
+              },
+              "networkProfile": {
+                "networkInterfaces": [
+                  {
+                    "id": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkInterfaces/{networkInterfaceName}"
+                  }
+                ]
+              },
+              "provisioningState": "Succeeded"
+            },
+            "type": "Microsoft.Compute/virtualMachines",
+            "location": "eastus",
+            "tags": {
+              "RG": "rg",
+              "testTag": "1"
+            },
+            "id": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{virtualMachineName}",
+            "name": "{virtualMachineName}"
+          }
+        ]
+      }
+    }
+  }
+}

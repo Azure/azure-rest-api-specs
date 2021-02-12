@@ -28,7 +28,7 @@ These are the global settings for the HANA on Azure API.
 title: HanaManagementClient
 description: HANA on Azure Client
 openapi-type: arm
-tag: package-2017-11
+tag: package-2020-02-07-preview
 azure-arm: true
 ```
 
@@ -41,6 +41,16 @@ These settings apply only when `--tag=package-2017-11` is specified on the comma
 input-file:
 - Microsoft.HanaOnAzure/preview/2017-11-03-preview/hanaonazure.json
 ```
+
+### Tag: package-2020-02-07-preview
+
+These settings apply only when `--tag=package-2020-02-07-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-02-07-preview'
+input-file:
+- Microsoft.HanaOnAzure/preview/2020-02-07-preview/hanaonazure.json
+```
+
 
 # Code Generation
 
@@ -57,34 +67,9 @@ swagger-to-sdk:
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
-```
-
-## Python
-
-These settings apply only when `--python` is specified on the command line.
-Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
-Use `--python-mode=update` if you already have a setup.py and just want to update the code itself.
-
-``` yaml $(python)
-python-mode: create
-python:
-  azure-arm: true
-  license-header: MICROSOFT_MIT_NO_VERSION
-  payload-flattening-threshold: 2
-  namespace: azure.mgmt.hanaonazure
-  package-name: azure-mgmt-hanaonazure
-  clear-output-folder: true
-  package-version: 0.1.0
-```
-``` yaml $(python) && $(python-mode) == 'update'
-python:
-  no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-hanaonazure/azure/mgmt/hanaonazure
-```
-``` yaml $(python) && $(python-mode) == 'create'
-python:
-  basic-setup-py: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-hanaonazure
+  - repo: azure-resource-manager-schemas
+    after_scripts:
+      - node sdkauto_afterscript.js hanaonazure/resource-manager
 ```
 
 ## Go
@@ -120,9 +105,14 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 ``` yaml $(tag) == 'package-2017-11' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.hanaonazure.v2017_11_03_preview
-  output-folder: $(azure-libraries-for-java-folder)/hanaonazure/resource-manager/v2017_11_03_preview
+  output-folder: $(azure-libraries-for-java-folder)/sdk/hanaonazure/mgmt-v2017_11_03_preview
 regenerate-manager: true
 generate-interface: true
 ```
 
+
+
+## AzureResourceSchema
+
+See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
 

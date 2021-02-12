@@ -5,7 +5,7 @@
     "title": "FabricAdminClient",
     "version": "2016-05-01"
   },
-  "host": "adminmanagement.local.azurestack.external",
+  "host": "management.azure.com",
   "schemes": [
     "https"
   ],
@@ -16,17 +16,17 @@
     "application/json"
   ],
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fabric.Admin/fabricLocations/{location}/scaleUnits/{scaleUnit}/ScaleOut": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fabric.Admin/fabricLocations/{location}/scaleUnits/{scaleUnit}/scaleOut": {
       "post": {
         "x-ms-examples": {
-          "Add a new scale unit.": {
+          "Scales out a scale unit.": {
             "$ref": "./examples/ScaleUnit/ScaleOut.json"
           }
         },
         "tags": [
           "ScaleUnits"
         ],
-        "description": "Add a new scale unit.",
+        "description": "Scales out a scale unit.",
         "operationId": "ScaleUnits_ScaleOut",
         "parameters": [
           {
@@ -43,6 +43,49 @@
           },
           {
             "$ref": "#/parameters/ScaleOutScaleUnitParametersInBody"
+          },
+          {
+            "$ref": "Fabric.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "202": {
+            "description": "ACCEPTED"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fabric.Admin/fabricLocations/{location}/scaleUnits/{scaleUnit}/createFromJson": {
+      "post": {
+        "x-ms-examples": {
+          "Add a new scale unit.": {
+            "$ref": "./examples/ScaleUnit/CreateFromJson.json"
+          }
+        },
+        "tags": [
+          "ScaleUnits"
+        ],
+        "description": "Add a new scale unit.",
+        "operationId": "ScaleUnits_CreateFromJson",
+        "parameters": [
+          {
+            "$ref": "Fabric.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "Fabric.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "Fabric.json#/parameters/LocationParameter"
+          },
+          {
+            "$ref": "#/parameters/ScaleUnitParameter"
+          },
+          {
+            "$ref": "#/parameters/CreateFromJsonScaleUnitParametersInBody"
           },
           {
             "$ref": "Fabric.json#/parameters/ApiVersionParameter"
@@ -288,6 +331,86 @@
           "type": "boolean"
         }
       }
+    },
+    "NetworkDefinitionParameter": {
+      "description": "A definition of the network received from a new cluster operation.",
+      "type": "object",
+      "properties": {
+        "subnet": {
+          "description": "The subnet IP mask in the example format 10.0.0.0/25.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "vlanId": {
+          "description": "The Vlan ID of the subnet.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "DeploymentJsonPhysicalNodeParameters": {
+      "description": "Description of a bare metal node used for scale unit scale out operations.",
+      "type": "object",
+      "properties": {
+        "bmcIpAddress": {
+          "x-ms-client-name": "BMCIPAddress",
+          "description": "BMC address of the physical machine.",
+          "type": "string"
+        },
+        "name": {
+          "description": "Computer name of the physical machine.",
+          "type": "string"
+        }
+      }
+    },
+    "CreateFromJsonScaleUnitParametersList": {
+      "description": "A list of input data that allows for creating the new scale unit.",
+      "type": "object",
+      "properties": {
+        "clusterName": {
+          "description": "Cluster name for the new scale unit.",
+          "type": "string"
+        },
+        "physicalNodes": {
+          "description": "List of nodes in the scale unit.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DeploymentJsonPhysicalNodeParameters"
+          }
+        },
+        "torSwitchBgpAsn": {
+          "description": "The ASN for the cluster's rack TOR.",
+          "type": "string"
+        },
+        "softwareBgpAsn": {
+          "description": "The software ASN for the cluster's rack.",
+          "type": "string"
+        },
+        "torSwitchBgpPeerIp": {
+          "description": "The list of IP addresses used for TOR communication.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "infrastructureNetwork": {
+          "description": "The information associated with the infrastructure network that will be subdivided into subnets.",
+          "$ref": "#/definitions/NetworkDefinitionParameter"
+        },
+        "storageNetwork": {
+          "description": "The information associated with the storage network that will be subdivided into subnets.",
+          "$ref": "#/definitions/NetworkDefinitionParameter"
+        },
+        "netQosPriority": {
+          "description": "The network QOS priority setting.",
+          "type": "integer",
+          "format": "int32"
+        }
+      }
     }
   },
   "parameters": {
@@ -300,12 +423,22 @@
       "x-ms-parameter-location": "method"
     },
     "ScaleOutScaleUnitParametersInBody": {
-      "name": "nodeList",
+      "name": "scaleUnitNodeParameters",
       "description": "A list of input data that allows for adding a set of scale unit nodes.",
       "in": "body",
       "required": true,
       "schema": {
         "$ref": "#/definitions/ScaleOutScaleUnitParametersList"
+      },
+      "x-ms-parameter-location": "method"
+    },
+    "CreateFromJsonScaleUnitParametersInBody": {
+      "name": "creationData",
+      "description": "A list of input data that allows for creating the new scale unit.",
+      "in": "body",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/CreateFromJsonScaleUnitParametersList"
       },
       "x-ms-parameter-location": "method"
     }

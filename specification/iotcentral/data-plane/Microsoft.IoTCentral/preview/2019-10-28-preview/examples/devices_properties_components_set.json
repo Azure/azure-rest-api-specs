@@ -1,0 +1,36 @@
+{
+  "title": "Set device properties in component",
+  "description": "Set the read-write property values within a component of a device.",
+  "parameters": {
+    "centralDnsSuffixInPath": "azureiotcentral.com",
+    "subdomain": "appsubdomain",
+    "device_id": "mx1",
+    "component_name": "settings",
+    "body": {
+      "fanSpeed": 35,
+      "voltage": 5,
+      "current": 2,
+      "irSwitch": true
+    }
+  },
+  "responses": {
+    "202": {
+      "body": {
+        "$metadata": {
+          "fanSpeed": {
+            "desiredValue": 35
+          },
+          "voltage": {
+            "desiredValue": 5
+          },
+          "current": {
+            "desiredValue": 2
+          },
+          "irSwitch": {
+            "desiredValue": true
+          }
+        }
+      }
+    }
+  }
+}

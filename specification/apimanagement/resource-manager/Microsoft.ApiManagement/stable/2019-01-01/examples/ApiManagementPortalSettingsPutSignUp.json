@@ -1,0 +1,37 @@
+{
+  "parameters": {
+    "serviceName": "apimService1",
+    "resourceGroupName": "rg1",
+    "api-version": "2019-01-01",
+    "subscriptionId": "subid",
+    "userId": "5931a75ae4bbd512288c680b",
+    "If-Match": "*",
+    "parameters": {
+      "properties": {
+        "enabled": true,
+        "termsOfService": {
+          "enabled": true,
+          "text": "Terms of service text.",
+          "consentRequired": true
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/portalsettings/signup",
+        "type": "Microsoft.ApiManagement/service/portalsettings",
+        "name": "signup",
+        "properties": {
+          "enabled": true,
+          "termsOfService": {
+            "text": "Terms of service text.",
+            "enabled": true,
+            "consentRequired": true
+          }
+        }
+      }
+    }
+  }
+}

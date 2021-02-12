@@ -1,32 +1,30 @@
 {
   "parameters": {
     "api-version": "2018-11-01-preview",
-    "billingAccountId": "2000100"
+    "billingAccountName": "{billingAccountName}"
   },
   "responses": {
     "200": {
       "body": {
-        "id": "/providers/Microsoft.Billing/billingAccounts/2000100",
-        "name": "2000100",
+        "id": "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}",
+        "name": "{billingAccountName}",
         "type": "Microsoft.Billing/billingAccounts",
         "properties": {
           "displayName": "Test Account",
-          "company": "Test Account",
           "accountType": "Organization",
           "address": {
-            "AddressLine1": "Test Address",
-            "AddressLine2": "Test Address",
-            "AddressLine3": "Test Address",
-            "City": "City",
-            "PostalCode": "00000",
-            "Region": "WA",
-            "Country": "US",
-            "PhoneNumber": "000-000-0000"
+            "companyName": "Contoso",
+            "firstName": "Test",
+            "lastName": "User",
+            "addressLine1": "Test Address",
+            "addressLine2": "Test Address",
+            "addressLine3": "Test Address",
+            "city": "City",
+            "postalCode": "00000",
+            "region": "WA",
+            "country": "US"
           },
-          "country": "United States",
-          "agreements": [
-            "wwww.contoso.com/agreements"
-          ]
+          "hasReadAccess": true
         }
       }
     }

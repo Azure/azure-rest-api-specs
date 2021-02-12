@@ -1,0 +1,36 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "contoso",
+    "accountName": "contososports",
+    "name": "connectionName1",
+    "api-version": "2020-05-01",
+    "parameters": {
+      "properties": {
+        "privateLinkServiceConnectionState": {
+          "status": "Approved",
+          "description": "Test description."
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "connectionName1",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/fabrikam/providers/Microsoft.Media/mediaservices/contososports/privateEndpointConnections/connectionName1",
+        "type": "Microsoft.Media/mediaservices/privateEndpointConnections",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "privateLinkServiceConnectionState": {
+            "status": "Approved",
+            "description": "Test description."
+          },
+          "privateEndpoint": {
+            "id": "/subscriptions/11111111-1111-1111-1111-111111111111/resourceGroups/reosuceGroup1/providers/Microsoft.Network/privateEndpoints/privateEndpointName1"
+          }
+        }
+      }
+    }
+  }
+}

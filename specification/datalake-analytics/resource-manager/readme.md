@@ -73,6 +73,7 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
+  - repo: azure-sdk-for-net
   - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
@@ -80,6 +81,9 @@ swagger-to-sdk:
   - repo: azure-sdk-for-ruby
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_datalake_analytics']
+  - repo: azure-resource-manager-schemas
+    after_scripts:
+      - node sdkauto_afterscript.js datalake-analytics/resource-manager
 ```
 
 
@@ -93,7 +97,7 @@ csharp:
   azure-arm: true
   license-header: MICROSOFT_MIT_NO_VERSION
   namespace: Microsoft.Azure.Management.DataLake.Analytics
-  output-folder: $(csharp-sdks-folder)/DataLake.Analytics/Management.DataLake.Analytics/Generated
+  output-folder: $(csharp-sdks-folder)/datalake-analytics/Microsoft.Azure.Management.DataLake.Analytics/src/Generated
   clear-output-folder: true
 ```
 
@@ -111,7 +115,7 @@ python:
   clear-output-folder: true
   no-namespace-folders: true
   namespace: azure.mgmt.datalake.analytics.account
-  output-folder: $(python-sdks-folder)/azure-mgmt-datalake-analytics/azure/mgmt/datalake/analytics/account
+  output-folder: $(python-sdks-folder)/datalake/azure-mgmt-datalake-analytics/azure/mgmt/datalake/analytics/account
 ```
 
 ## Go
@@ -147,7 +151,7 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 ``` yaml $(tag) == 'package-2015-10-preview' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.datalakeanalytics.v2015_10_01_preview
-  output-folder: $(azure-libraries-for-java-folder)/datalakeanalytics/resource-manager/v2015_10_01_preview
+  output-folder: $(azure-libraries-for-java-folder)/sdk/datalakeanalytics/mgmt-v2015_10_01_preview
 regenerate-manager: true
 generate-interface: true
 ```
@@ -160,9 +164,14 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 ``` yaml $(tag) == 'package-2016-11' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.datalakeanalytics.v2016_11_01
-  output-folder: $(azure-libraries-for-java-folder)/datalakeanalytics/resource-manager/v2016_11_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/datalakeanalytics/mgmt-v2016_11_01
 regenerate-manager: true
 generate-interface: true
 ```
 
+
+
+## AzureResourceSchema
+
+See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
 

@@ -24,7 +24,9 @@
         "operationId": "ServerConnectionPolicies_CreateOrUpdate",
         "description": "Creates or updates the server's connection policy.",
         "x-ms-examples": {
-          "Create or update a server's secure connection policy": { "$ref": "./examples/ServerConnectionPolicyCreateOrUpdate.json" }
+          "Create or update a server's secure connection policy": {
+            "$ref": "./examples/ServerConnectionPolicyCreateOrUpdate.json"
+          }
         },
         "parameters": [
           {
@@ -74,7 +76,9 @@
         "operationId": "ServerConnectionPolicies_Get",
         "description": "Gets the server's secure connection policy.",
         "x-ms-examples": {
-          "Get a server's secure connection policy": { "$ref": "./examples/ServerConnectionPolicyGet.json" }
+          "Get a server's secure connection policy": {
+            "$ref": "./examples/ServerConnectionPolicyGet.json"
+          }
         },
         "parameters": [
           {
@@ -120,7 +124,9 @@
           }
         }
       },
-      "required": [ "connectionType" ],
+      "required": [
+        "connectionType"
+      ],
       "description": "The properties of a server secure connection policy."
     },
     "ServerConnectionPolicy": {
@@ -130,9 +136,9 @@
           "type": "string",
           "description": "Metadata used for the Azure portal experience."
         },
-        "location":{
-          "type":"string",
-          "description":"Resource location.",
+        "location": {
+          "type": "string",
+          "description": "Resource location.",
           "readOnly": true
         },
         "properties": {
@@ -163,7 +169,9 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "enum": ["default"],
+      "enum": [
+        "default"
+      ],
       "description": "The name of the connection policy.",
       "x-ms-enum": {
         "modelAsString": true,

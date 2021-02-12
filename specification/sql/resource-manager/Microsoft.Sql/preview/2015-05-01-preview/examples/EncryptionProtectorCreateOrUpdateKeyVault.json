@@ -1,31 +1,31 @@
 {
+  "parameters": {
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "resourceGroupName": "sqlcrudtest-7398",
+    "serverName": "sqlcrudtest-4645",
+    "encryptionProtectorName": "current",
+    "api-version": "2015-05-01-preview",
     "parameters": {
-        "subscriptionId": "00000000-1111-2222-3333-444444444444",
-        "resourceGroupName": "sqlcrudtest-7398",
-        "serverName": "sqlcrudtest-4645",
-        "encryptionProtectorName": "current",
-        "api-version": "2015-05-01-preview",
-        "parameters": {
-            "properties": {
-                "serverKeyType": "AzureKeyVault",
-                "serverKeyName": "someVault_someKey_01234567890123456789012345678901"
-            }
-        }
-    },
-    "responses": {
-        "200": {
-            "body": {
-                "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/sqlcrudtest-7398/providers/Microsoft.Sql/servers/sqlcrudtest-4645/encryptionProtector/current",
-                "name": "current",
-                "type": "Microsoft.Sql/servers/encryptionProtector",
-                "location": "West US",
-                "kind": "azurekeyvault",
-                "properties": {
-                    "serverKeyName": "someVault_someKey_01234567890123456789012345678901",
-                    "serverKeyType": "AzureKeyVault"
-                }
-            }
-        },
-        "202": { }
+      "properties": {
+        "serverKeyType": "AzureKeyVault",
+        "serverKeyName": "someVault_someKey_01234567890123456789012345678901"
+      }
     }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/sqlcrudtest-7398/providers/Microsoft.Sql/servers/sqlcrudtest-4645/encryptionProtector/current",
+        "name": "current",
+        "type": "Microsoft.Sql/servers/encryptionProtector",
+        "location": "West US",
+        "kind": "azurekeyvault",
+        "properties": {
+          "serverKeyName": "someVault_someKey_01234567890123456789012345678901",
+          "serverKeyType": "AzureKeyVault"
+        }
+      }
+    },
+    "202": {}
+  }
 }

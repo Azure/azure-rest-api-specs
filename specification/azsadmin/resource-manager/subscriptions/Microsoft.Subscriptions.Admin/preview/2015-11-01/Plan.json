@@ -1,378 +1,378 @@
 {
-    "swagger": "2.0",
-    "info": {
-        "version": "2015-11-01",
-        "title": "SubscriptionsManagementClient",
-        "description": "The Admin Subscriptions Management Client."
-    },
-    "host": "adminmanagement.local.azurestack.external",
-    "schemes": [
-        "https"
-    ],
-    "produces": [
-        "application/json"
-    ],
-    "consumes": [
-        "application/json"
-    ],
-    "paths": {
-        "/subscriptions/{subscriptionId}/providers/Microsoft.Subscriptions.Admin/plans": {
-            "get": {
-                "x-ms-examples": {
-                    "Get the list of plans.": {
-                        "$ref": "./examples/Plan/ListAll.json"
-                    }
-                },
-                "description": "List all plans across all subscriptions.",
-                "tags": [
-                    "Plans"
-                ],
-                "operationId": "Plans_ListAll",
-                "parameters": [
-                    {
-                        "$ref": "Subscriptions.json#/parameters/SubscriptionIdParameter"
-                    },
-                    {
-                        "$ref": "Subscriptions.json#/parameters/ApiVersionParameter"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "#/definitions/PlanList"
-                        }
-                    }
-                },
-                "x-ms-pageable": {
-                    "nextLinkName": "nextLink"
-                }
-            }
+  "swagger": "2.0",
+  "info": {
+    "version": "2015-11-01",
+    "title": "SubscriptionsManagementClient",
+    "description": "The Admin Subscriptions Management Client."
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Subscriptions.Admin/plans": {
+      "get": {
+        "x-ms-examples": {
+          "Get the list of plans.": {
+            "$ref": "./examples/Plan/ListAll.json"
+          }
         },
-        "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Subscriptions.Admin/plans": {
-            "get": {
-                "x-ms-examples": {
-                    "Get the list of plans under a resource group.": {
-                        "$ref": "./examples/Plan/List.json"
-                    }
-                },
-                "description": "Get the list of plans under a resource group.",
-                "tags": [
-                    "Plans"
-                ],
-                "operationId": "Plans_List",
-                "parameters": [
-                    {
-                        "$ref": "Subscriptions.json#/parameters/SubscriptionIdParameter"
-                    },
-                    {
-                        "$ref": "Subscriptions.json#/parameters/ResourceGroupParameter"
-                    },
-                    {
-                        "$ref": "Subscriptions.json#/parameters/ApiVersionParameter"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "#/definitions/PlanList"
-                        }
-                    }
-                },
-                "x-ms-pageable": {
-                    "nextLinkName": "nextLink"
-                }
-            }
-        },
-        "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Subscriptions.Admin/plans/{plan}": {
-            "get": {
-                "x-ms-examples": {
-                    "Get the specified plan.": {
-                        "$ref": "./examples/Plan/Get.json"
-                    }
-                },
-                "description": "Get the specified plan.",
-                "tags": [
-                    "Plans"
-                ],
-                "operationId": "Plans_Get",
-                "parameters": [
-                    {
-                        "$ref": "Subscriptions.json#/parameters/SubscriptionIdParameter"
-                    },
-                    {
-                        "$ref": "Subscriptions.json#/parameters/ResourceGroupParameter"
-                    },
-                    {
-                        "$ref": "Subscriptions.json#/parameters/PlanParameter"
-                    },
-                    {
-                        "$ref": "Subscriptions.json#/parameters/ApiVersionParameter"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "#/definitions/Plan"
-                        }
-                    }
-                }
-            },
-            "put": {
-                "x-ms-examples": {
-                    "Create or update the plan.": {
-                        "$ref": "./examples/Plan/Create.json"
-                    }
-                },
-                "description": "Create or update the plan.",
-                "tags": [
-                    "Plans"
-                ],
-                "operationId": "Plans_CreateOrUpdate",
-                "parameters": [
-                    {
-                        "$ref": "Subscriptions.json#/parameters/SubscriptionIdParameter"
-                    },
-                    {
-                        "$ref": "Subscriptions.json#/parameters/ResourceGroupParameter"
-                    },
-                    {
-                        "$ref": "Subscriptions.json#/parameters/PlanParameter"
-                    },
-                    {
-                        "$ref": "Subscriptions.json#/parameters/ApiVersionParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/NewPlanParameter"
-                    }
-                ],
-                "responses": {
-                    "201": {
-                        "description": "Created",
-                        "schema": {
-                            "$ref": "#/definitions/Plan"
-                        }
-                     },
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "#/definitions/Plan"
-                        }                        
-                    }
-                }
-              },
-            "delete": {
-                "x-ms-examples": {
-                    "Delete the specified plan.": {
-                        "$ref": "./examples/Plan/Delete.json"
-                    }
-                },
-                "description": "Delete the specified plan.",
-                "tags": [
-                    "Plans"
-                ],
-                "operationId": "Plans_Delete",
-                "parameters": [
-                    {
-                        "$ref": "Subscriptions.json#/parameters/SubscriptionIdParameter"
-                    },
-                    {
-                        "$ref": "Subscriptions.json#/parameters/ResourceGroupParameter"
-                    },
-                    {
-                        "$ref": "Subscriptions.json#/parameters/PlanParameter"
-                    },
-                    {
-                        "$ref": "Subscriptions.json#/parameters/ApiVersionParameter"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK"
-                    },
-                    "204": {
-                        "description": "No Content"
-                    }                   
-                }
-            }
-        },
-        "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Subscriptions.Admin/plans/{plan}/Metrics": {
-            "get": {
-                "x-ms-examples": {
-                    "Get the metrics of the specified plan.": {
-                        "$ref": "./examples/Plan/Metrics.json"
-                    }
-                },
-                "description": "Get the metrics of the specified plan.",
-                "tags": [
-                    "Plans"
-                ],
-                "operationId": "Plans_ListMetrics",
-                "parameters": [
-                    {
-                        "$ref": "Subscriptions.json#/parameters/SubscriptionIdParameter"
-                    },
-                    {
-                        "$ref": "Subscriptions.json#/parameters/ResourceGroupParameter"
-                    },
-                    {
-                        "$ref": "Subscriptions.json#/parameters/PlanParameter"
-                    },
-                    {
-                        "$ref": "Subscriptions.json#/parameters/ApiVersionParameter"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "Subscriptions.json#/definitions/MetricList"
-                        }
-                    }
-                }
-            }
-        },
-        "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Subscriptions.Admin/plans/{plan}/MetricDefinitions": {
-            "get": {
-                "x-ms-examples": {
-                    "Get the metric definitions of the specified plan.": {
-                        "$ref": "./examples/Plan/MetricDefinitions.json"
-                    }
-                },
-                "description": "Get the metric definitions of the specified plan.",
-                "tags": [
-                    "Plans"
-                ],
-                "operationId": "Plans_ListMetricDefinitions",
-                "parameters": [
-                    {
-                        "$ref": "Subscriptions.json#/parameters/SubscriptionIdParameter"
-                    },
-                    {
-                        "$ref": "Subscriptions.json#/parameters/ResourceGroupParameter"
-                    },
-                    {
-                        "$ref": "Subscriptions.json#/parameters/PlanParameter"
-                    },
-                    {
-                        "$ref": "Subscriptions.json#/parameters/ApiVersionParameter"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "Subscriptions.json#/definitions/MetricDefinitionList"
-                        }
-                    }
-                }
-            }
-        }
-    },
-    "definitions": {
-        "Plan": {
-            "description": "A plan represents a package of quotas and capabilities that are offered tenants. A tenant can acquire this plan through an offer to upgrade his access to underlying cloud services.",
-            "type": "object",
-            "properties": {
-                "properties": {
-                    "description": "Properties of a plan.",
-                    "x-ms-client-flatten": true,
-                    "$ref": "#/definitions/PlanProperties"
-                }
-            },
-            "allOf": [
-                {
-                    "$ref": "Subscriptions.json#/definitions/Resource"
-                }
-            ]
-        },
-        "PlanProperties": {
-            "description": "Properties of a plan.",
-            "type": "object",
-            "properties": {
-                "description": {
-                    "description": "Description of the plan.",
-                    "type": "string"
-                },
-                "displayName": {
-                    "description": "Display name.",
-                    "type": "string"
-                },
-                "externalReferenceId": {
-                    "description": "External reference identifier.",
-                    "type": "string"
-                },
-                "quotaIds": {
-                    "description": "Quota identifiers under the plan.",
-                    "type": "array",
-                    "items": {
-                        "type": "string"
-                    }
-                },
-                "name": {
-                    "description": "Name of the plan.",
-                    "type": "string"
-                },
-                "subscriptionCount": {
-                    "description": "Subscription count.",
-                    "type": "integer"
-                },
-                "skuIds": {
-                    "description": "SKU identifiers.",
-                    "type": "array",
-                    "items": {
-                        "type": "string"
-                    }
-                }
-            }
-        },
-        "PlanList": {
-            "description": "List of plans",
-            "properties": {
-                "value": {
-                    "description": "Array of plans.",
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/Plan"
-                    }
-                },
-                "nextLink": {
-                    "type": "string",
-                    "description": "Continuation token"
-                }
-            }
-        }
-    },
-    "parameters": {
-        "NewPlanParameter": {
-            "description": "New plan.",
-            "name": "newPlan",
-            "in": "body",
-            "required": true,
+        "description": "List all plans across all subscriptions.",
+        "tags": [
+          "Plans"
+        ],
+        "operationId": "Plans_ListAll",
+        "parameters": [
+          {
+            "$ref": "Subscriptions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "Subscriptions.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
             "schema": {
-                "$ref": "#/definitions/Plan"
-            },
-            "x-ms-parameter-location": "method"
-        }
-    },
-    "securityDefinitions": {
-        "azure_auth": {
-            "type": "oauth2",
-            "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
-            "flow": "implicit",
-            "description": "Azure Active Directory OAuth2 flow",
-            "scopes": {
-                "user_impersonation": "impersonate your user account"
+              "$ref": "#/definitions/PlanList"
             }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
+      }
     },
-    "security": [
-        {
-            "azure_auth": [
-                "user_impersonation"
-            ]
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Subscriptions.Admin/plans": {
+      "get": {
+        "x-ms-examples": {
+          "Get the list of plans under a resource group.": {
+            "$ref": "./examples/Plan/List.json"
+          }
+        },
+        "description": "Get the list of plans under a resource group.",
+        "tags": [
+          "Plans"
+        ],
+        "operationId": "Plans_List",
+        "parameters": [
+          {
+            "$ref": "Subscriptions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "Subscriptions.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "Subscriptions.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PlanList"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
-    ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Subscriptions.Admin/plans/{plan}": {
+      "get": {
+        "x-ms-examples": {
+          "Get the specified plan.": {
+            "$ref": "./examples/Plan/Get.json"
+          }
+        },
+        "description": "Get the specified plan.",
+        "tags": [
+          "Plans"
+        ],
+        "operationId": "Plans_Get",
+        "parameters": [
+          {
+            "$ref": "Subscriptions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "Subscriptions.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "Subscriptions.json#/parameters/PlanParameter"
+          },
+          {
+            "$ref": "Subscriptions.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Plan"
+            }
+          }
+        }
+      },
+      "put": {
+        "x-ms-examples": {
+          "Create or update the plan.": {
+            "$ref": "./examples/Plan/Create.json"
+          }
+        },
+        "description": "Create or update the plan.",
+        "tags": [
+          "Plans"
+        ],
+        "operationId": "Plans_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "Subscriptions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "Subscriptions.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "Subscriptions.json#/parameters/PlanParameter"
+          },
+          {
+            "$ref": "Subscriptions.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/PlanDefinitionParameter"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/Plan"
+            }
+          },
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Plan"
+            }
+          }
+        }
+      },
+      "delete": {
+        "x-ms-examples": {
+          "Delete the specified plan.": {
+            "$ref": "./examples/Plan/Delete.json"
+          }
+        },
+        "description": "Delete the specified plan.",
+        "tags": [
+          "Plans"
+        ],
+        "operationId": "Plans_Delete",
+        "parameters": [
+          {
+            "$ref": "Subscriptions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "Subscriptions.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "Subscriptions.json#/parameters/PlanParameter"
+          },
+          {
+            "$ref": "Subscriptions.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "No Content"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Subscriptions.Admin/plans/{plan}/metrics": {
+      "get": {
+        "x-ms-examples": {
+          "Get the metrics of the specified plan.": {
+            "$ref": "./examples/Plan/Metrics.json"
+          }
+        },
+        "description": "Get the metrics of the specified plan.",
+        "tags": [
+          "Plans"
+        ],
+        "operationId": "Plans_ListMetrics",
+        "parameters": [
+          {
+            "$ref": "Subscriptions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "Subscriptions.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "Subscriptions.json#/parameters/PlanParameter"
+          },
+          {
+            "$ref": "Subscriptions.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "Subscriptions.json#/definitions/MetricList"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Subscriptions.Admin/plans/{plan}/metricDefinitions": {
+      "get": {
+        "x-ms-examples": {
+          "Get the metric definitions of the specified plan.": {
+            "$ref": "./examples/Plan/MetricDefinitions.json"
+          }
+        },
+        "description": "Get the metric definitions of the specified plan.",
+        "tags": [
+          "Plans"
+        ],
+        "operationId": "Plans_ListMetricDefinitions",
+        "parameters": [
+          {
+            "$ref": "Subscriptions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "Subscriptions.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "Subscriptions.json#/parameters/PlanParameter"
+          },
+          {
+            "$ref": "Subscriptions.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "Subscriptions.json#/definitions/MetricDefinitionList"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Plan": {
+      "description": "A plan represents a package of quotas and capabilities that are offered tenants. A tenant can acquire this plan through an offer to upgrade his access to underlying cloud services.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "description": "Properties of a plan.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/PlanProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "Subscriptions.json#/definitions/Resource"
+        }
+      ]
+    },
+    "PlanProperties": {
+      "description": "Properties of a plan.",
+      "type": "object",
+      "properties": {
+        "description": {
+          "description": "Description of the plan.",
+          "type": "string"
+        },
+        "displayName": {
+          "description": "Display name.",
+          "type": "string"
+        },
+        "externalReferenceId": {
+          "description": "External reference identifier.",
+          "type": "string"
+        },
+        "quotaIds": {
+          "description": "Quota identifiers under the plan.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "name": {
+          "description": "Name of the plan.",
+          "type": "string"
+        },
+        "subscriptionCount": {
+          "description": "Subscription count.",
+          "type": "integer"
+        },
+        "skuIds": {
+          "description": "SKU identifiers.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "PlanList": {
+      "description": "List of plans",
+      "properties": {
+        "value": {
+          "description": "Array of plans.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Plan"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Continuation token"
+        }
+      }
+    }
+  },
+  "parameters": {
+    "PlanDefinitionParameter": {
+      "description": "New plan.",
+      "name": "planDefinition",
+      "in": "body",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/Plan"
+      },
+      "x-ms-parameter-location": "method"
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ]
 }

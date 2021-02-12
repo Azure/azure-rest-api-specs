@@ -172,7 +172,7 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
-          "final-state-via":"azure-async-operation"
+          "final-state-via": "azure-async-operation"
         }
       },
       "patch": {
@@ -303,7 +303,7 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
-          "final-state-via":"azure-async-operation"
+          "final-state-via": "azure-async-operation"
         },
         "x-ms-examples": {
           "Delete an Image Template.": {
@@ -349,7 +349,7 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
-          "final-state-via":"azure-async-operation"
+          "final-state-via": "azure-async-operation"
         },
         "x-ms-examples": {
           "Create image(s) from existing imageTemplate.": {
@@ -481,7 +481,7 @@
     }
   },
   "definitions": {
-    "ImageTemplateListResult" : {
+    "ImageTemplateListResult": {
       "properties": {
         "value": {
           "type": "array",
@@ -563,13 +563,13 @@
       "allOf": [
         {
           "$ref": "#/definitions/ImageTemplateSource"
-        } 
+        }
       ],
       "properties": {
         "imageId": {
           "type": "string",
           "description": "ARM resource id of the managed image in customer subscription"
-        } 
+        }
       },
       "required": [
         "imageId"
@@ -656,7 +656,7 @@
             "type": "string"
           }
         },
-        "validExitCodes" : {
+        "validExitCodes": {
           "type": "array",
           "description": "Valid exit codes for the PowerShell script. [Default: 0]",
           "items": {
@@ -782,7 +782,7 @@
           "description": "Error code of the provisioning failure"
         },
         "message": {
-          "type":"string",
+          "type": "string",
           "description": "Verbose error message about the provisioning failure"
         }
       }
@@ -957,7 +957,10 @@
         "location": {
           "type": "string",
           "description": "Resource location",
-          "x-ms-mutability": [ "create", "read" ]
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         },
         "tags": {
           "type": "object",

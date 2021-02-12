@@ -6,12 +6,20 @@
     "version": "2017-08-01-preview"
   },
   "host": "management.azure.com",
-  "schemes": ["https"],
-  "consumes": ["application/json"],
-  "produces": ["application/json"],
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
   "security": [
     {
-      "azure_auth": ["user_impersonation"]
+      "azure_auth": [
+        "user_impersonation"
+      ]
     }
   ],
   "securityDefinitions": {
@@ -33,7 +41,9 @@
             "$ref": "./examples/Pricings/GetPricingsSubscription_example.json"
           }
         },
-        "tags": ["Pricings"],
+        "tags": [
+          "Pricings"
+        ],
         "description": "Security pricing configurations in the subscription",
         "operationId": "Pricings_List",
         "parameters": [
@@ -70,7 +80,9 @@
             "$ref": "./examples/Pricings/GetPricingsResourceGroup_example.json"
           }
         },
-        "tags": ["Pricings"],
+        "tags": [
+          "Pricings"
+        ],
         "description": "Security pricing configurations in the resource group",
         "operationId": "Pricings_ListByResourceGroup",
         "parameters": [
@@ -110,7 +122,9 @@
             "$ref": "./examples/Pricings/GetPricingSubscription_example.json"
           }
         },
-        "tags": ["Pricings"],
+        "tags": [
+          "Pricings"
+        ],
         "description": "Security pricing configuration in the subscriptionSecurity pricing configuration in the subscription",
         "operationId": "Pricings_GetSubscriptionPricing",
         "parameters": [
@@ -145,7 +159,9 @@
             "$ref": "./examples/Pricings/CreatePricingsSubscription_example.json"
           }
         },
-        "tags": ["Pricings"],
+        "tags": [
+          "Pricings"
+        ],
         "description": "Security pricing configuration in the subscription",
         "operationId": "Pricings_UpdateSubscriptionPricing",
         "parameters": [
@@ -185,7 +201,9 @@
             "$ref": "./examples/Pricings/GetPricingResourceGroup_example.json"
           }
         },
-        "tags": ["Pricings"],
+        "tags": [
+          "Pricings"
+        ],
         "description": "Security pricing configuration in the resource group",
         "operationId": "Pricings_GetResourceGroupPricing",
         "parameters": [
@@ -223,7 +241,9 @@
             "$ref": "./examples/Pricings/CreatePricingsResourceGroup_example.json"
           }
         },
-        "tags": ["Pricings"],
+        "tags": [
+          "Pricings"
+        ],
         "description": "Security pricing configuration in the resource group",
         "operationId": "Pricings_CreateOrUpdateResourceGroupPricing",
         "parameters": [
@@ -263,7 +283,9 @@
   "definitions": {
     "PricingList": {
       "description": "List of pricing configurations response",
-      "required": ["value"],
+      "required": [
+        "value"
+      ],
       "properties": {
         "value": {
           "type": "array",
@@ -302,7 +324,10 @@
         "pricingTier": {
           "type": "string",
           "description": "Pricing tier type",
-          "enum": ["Free", "Standard"],
+          "enum": [
+            "Free",
+            "Standard"
+          ],
           "x-ms-enum": {
             "name": "pricingTier",
             "modelAsString": true,
@@ -319,7 +344,9 @@
           }
         }
       },
-      "required": ["pricingTier"]
+      "required": [
+        "pricingTier"
+      ]
     }
   },
   "parameters": {

@@ -49,6 +49,24 @@ input-file:
 - Microsoft.ResourceHealth/stable/2015-01-01/resourcehealth.json
 ```
 
+### Tag: package-2018-08-preview
+
+These settings apply only when `--tag=package-2018-08-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2018-08-preview'
+input-file:
+- Microsoft.ResourceHealth/preview/2018-08-01/ResourceHealth.json
+```
+
+### Tag: package-2018-07-01
+
+These settings apply only when `--tag=package-2018-07-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-2018-07-01'
+input-file:
+- Microsoft.ResourceHealth/stable/2018-07-01/ResourceHealth.json
+```
+
 
 ---
 # Code Generation
@@ -64,6 +82,15 @@ swagger-to-sdk:
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
+  - repo: azure-sdk-for-python
+  - repo: azure-sdk-for-java
+  - repo: azure-sdk-for-net
+  - repo: azure-sdk-for-ruby
+    after_scripts:
+    - bundle install && rake arm:regen_all_profiles['azure_mgmt_resourcehealth']
+  - repo: azure-resource-manager-schemas
+    after_scripts:
+      - node sdkauto_afterscript.js resourcehealth/resource-manager
 ```
 
 ## Go
@@ -90,6 +117,8 @@ output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-resourcehealth
 batch:
   - tag: package-2017-07
   - tag: package-2015-01
+  - tag: package-2018-08-preview
+  - tag: package-2018-07-01
 ```
 
 ### Tag: package-2017-07 and java
@@ -100,7 +129,7 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 ``` yaml $(tag) == 'package-2017-07' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.resourcehealth.v2017_07_01
-  output-folder: $(azure-libraries-for-java-folder)/resourcehealth/resource-manager/v2017_07_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/resourcehealth/mgmt-v2017_07_01
 regenerate-manager: true
 generate-interface: true
 ```
@@ -113,9 +142,37 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 ``` yaml $(tag) == 'package-2015-01' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.resourcehealth.v2015_01_01
-  output-folder: $(azure-libraries-for-java-folder)/resourcehealth/resource-manager/v2015_01_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/resourcehealth/mgmt-v2015_01_01
+regenerate-manager: true
+generate-interface: true
+```
+### Tag: package-2018-08-preview and java
+
+These settings apply only when `--tag=package-2018-08-preview --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2018-08-preview' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.resourcehealth.v2018_08_01_preview
+  output-folder: $(azure-libraries-for-java-folder)/sdk/resourcehealth/mgmt-v2018_08_01_preview
+regenerate-manager: true
+generate-interface: true
+```
+### Tag: package-2018-07-01 and java
+
+These settings apply only when `--tag=package-2018-07-01 --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2018-07-01' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.resourcehealth.v2018_08_01_preview
+  output-folder: $(azure-libraries-for-java-folder)/sdk/resourcehealth/mgmt-v2018_08_01_preview
 regenerate-manager: true
 generate-interface: true
 ```
 
+
+## AzureResourceSchema
+
+See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
 

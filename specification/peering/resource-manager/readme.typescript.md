@@ -9,6 +9,7 @@ typescript:
   license-header: MICROSOFT_MIT_NO_VERSION
   payload-flattening-threshold: 2
   package-name: "@azure/arm-peering"
-  output-folder: "$(typescript-sdks-folder)/packages/@azure/arm-peering"
+  output-folder: "$(typescript-sdks-folder)/sdk/peering/arm-peering"
+  clear-output-folder: true
   generate-metadata: true
 ```

@@ -1,48 +1,48 @@
 {
-    "parameters": {
-        "api-version": "2018-01-01-preview",
-        "groupId": "ChildGroup",
-        "createGroupRequest": {
-            "properties": {
-                "displayName": "ChildGroup",
-                "parent": {
-                    "id": "/providers/Microsoft.Management/managementGroups/RootGroup"
-                }
-            }
-        },
-        "Cache-Control": "no-cache"
-    },
-    "responses": {
-        "200": {
-			"body": {
-				"id": "/providers/Microsoft.Management/managementGroups/ChildGroup",
-				"type": "/providers/Microsoft.Management/managementGroups",
-				"name": "ChildGroup",
-				"properties": {
-					"tenantId": "20000000-0000-0000-0000-000000000000",
-					"displayName": "ChildGroup",
-					"details": {
-						"version": 1,
-						"updatedTime": "2018-01-01T00:00:00.00Z",
-						"updatedBy": "16b8ef21-5c9f-420c-bcc9-e4f8c9f30b4b",
-						"parent": {
-							"id": "/providers/Microsoft.Management/managementGroups/RootGroup",
-							"name": "RootGroup",
-							"displayName": "RootGroup"
-						}
-					}
-				}
-			}
-		},
-        "202": {
-            "body": {
-                "id": "/providers/Microsoft.Management/managementGroups/ChildGroup",
-                "type": "/providers/Microsoft.Management/managementGroups",
-                "name": "ChildGroup",
-                "properties": {
-                    "provisioningState": "Updating"
-                }
-            }
+  "parameters": {
+    "api-version": "2018-01-01-preview",
+    "groupId": "ChildGroup",
+    "createManagementGroupRequest": {
+      "properties": {
+        "displayName": "ChildGroup",
+        "parent": {
+          "id": "/providers/Microsoft.Management/managementGroups/RootGroup"
         }
+      }
+    },
+    "Cache-Control": "no-cache"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/providers/Microsoft.Management/managementGroups/ChildGroup",
+        "type": "/providers/Microsoft.Management/managementGroups",
+        "name": "ChildGroup",
+        "properties": {
+          "tenantId": "20000000-0000-0000-0000-000000000000",
+          "displayName": "ChildGroup",
+          "details": {
+            "version": 1,
+            "updatedTime": "2018-01-01T00:00:00.00Z",
+            "updatedBy": "16b8ef21-5c9f-420c-bcc9-e4f8c9f30b4b",
+            "parent": {
+              "id": "/providers/Microsoft.Management/managementGroups/RootGroup",
+              "name": "RootGroup",
+              "displayName": "RootGroup"
+            }
+          }
+        }
+      }
+    },
+    "202": {
+      "body": {
+        "id": "/providers/Microsoft.Management/managementGroups/ChildGroup",
+        "type": "/providers/Microsoft.Management/managementGroups",
+        "name": "ChildGroup",
+        "properties": {
+          "provisioningState": "Updating"
+        }
+      }
     }
+  }
 }

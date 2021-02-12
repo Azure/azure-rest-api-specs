@@ -10,6 +10,6 @@ csharp:
   license-header: MICROSOFT_MIT_NO_VERSION
   namespace: Microsoft.Azure.Management.Peering
   payload-flattening-threshold: 2
-  output-folder: $(csharp-sdks-folder)/Peering/Management.Peering/Generated
+  output-folder: $(csharp-sdks-folder)/peering/Microsoft.Azure.Management.Peering/src/Generated
   clear-output-folder: true
 ```

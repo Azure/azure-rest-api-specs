@@ -387,7 +387,7 @@
           "nextLinkName": "nextLink"
         }
       }
-  },
+    },
     "/providers/Microsoft.Billing/departments/{departmentId}/providers/Microsoft.Consumption/usageDetails": {
       "get": {
         "tags": [
@@ -473,7 +473,7 @@
       }
     },
     "/providers/Microsoft.Billing/departments/{departmentId}/providers/Microsoft.Billing/billingPeriods/{billingPeriodName}/providers/Microsoft.Consumption/usageDetails": {
-"get": {
+      "get": {
         "tags": [
           "UsageDetails"
         ],
@@ -558,7 +558,7 @@
           "nextLinkName": "nextLink"
         }
       }
-  },
+    },
     "/providers/Microsoft.Billing/enrollmentAccounts/{enrollmentAccountId}/providers/Microsoft.Consumption/usageDetails": {
       "get": {
         "tags": [
@@ -644,7 +644,7 @@
       }
     },
     "/providers/Microsoft.Billing/enrollmentAccounts/{enrollmentAccountId}/providers/Microsoft.Billing/billingPeriods/{billingPeriodName}/providers/Microsoft.Consumption/usageDetails": {
-"get": {
+      "get": {
         "tags": [
           "UsageDetails"
         ],
@@ -729,7 +729,7 @@
           "nextLinkName": "nextLink"
         }
       }
-  },
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Consumption/marketplaces": {
       "get": {
         "tags": [
@@ -1351,7 +1351,7 @@
         }
       }
     },
-	"/providers/Microsoft.Capacity/reservationorders/{reservationOrderId}/providers/Microsoft.Consumption/reservationSummaries": {
+    "/providers/Microsoft.Capacity/reservationorders/{reservationOrderId}/providers/Microsoft.Consumption/reservationSummaries": {
       "get": {
         "tags": [
           "ReservedInstances"
@@ -2066,7 +2066,7 @@
             }
           },
           "default": {
-          "description": "Error response describing why the operation failed.",
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
@@ -2421,7 +2421,7 @@
         "meterId": {
           "description": "The meter id (GUID).",
           "type": "string",
-          "format":"uuid",
+          "format": "uuid",
           "readOnly": true
         },
         "meterDetails": {
@@ -2432,7 +2432,7 @@
         "subscriptionGuid": {
           "description": "Subscription guid.",
           "type": "string",
-          "format":"uuid",
+          "format": "uuid",
           "readOnly": true
         },
         "subscriptionName": {
@@ -2589,13 +2589,13 @@
         "meterId": {
           "description": "The meter id (GUID).",
           "type": "string",
-          "format":"uuid",
+          "format": "uuid",
           "readOnly": true
         },
         "subscriptionGuid": {
           "description": "Subscription guid.",
           "type": "string",
-          "format":"uuid",
+          "format": "uuid",
           "readOnly": true
         },
         "subscriptionName": {
@@ -2686,37 +2686,37 @@
         "adjustments": {
           "description": "Total adjustment amount.",
           "type": "number",
-		  "format": "decimal",
+          "format": "decimal",
           "readOnly": true
         },
         "utilized": {
           "description": "Total Commitment usage.",
           "type": "number",
-		  "format": "decimal",
+          "format": "decimal",
           "readOnly": true
         },
         "serviceOverage": {
           "description": "Overage for Azure services.",
           "type": "number",
-		  "format": "decimal",
+          "format": "decimal",
           "readOnly": true
         },
         "chargesBilledSeparately": {
           "description": "Charges Billed separately.",
           "type": "number",
-		  "format": "decimal",
+          "format": "decimal",
           "readOnly": true
         },
         "totalOverage": {
           "description": "serviceOverage + chargesBilledSeparately.",
           "type": "number",
-		  "format": "decimal",
+          "format": "decimal",
           "readOnly": true
         },
         "totalUsage": {
           "description": "Azure service commitment + total Overage.",
           "type": "number",
-		  "format": "decimal",
+          "format": "decimal",
           "readOnly": true
         },
         "azureMarketplaceServiceCharges": {
@@ -2727,7 +2727,7 @@
         },
         "billingFrequency": {
           "description": "The billing frequency.",
-		  "type": "string",
+          "type": "string",
           "enum": [
             "Month",
             "Quarter",
@@ -2737,7 +2737,7 @@
             "name": "BillingFrequency",
             "modelAsString": true
           }
-          },
+        },
         "priceHidden": {
           "description": "Price is hidden or not.",
           "type": "boolean",
@@ -2746,48 +2746,48 @@
         "newPurchasesDetails": {
           "description": "List of new purchases.",
           "type": "array",
-		  "items": {
-			"type" : "object",
-			"properties" : {
-				"name" : {
-			      "description": "the name of new purchase.",
-				  "type": "string",
-                  "readOnly": true
-				},
-				"value": {
-				  "description": "the value of new purchase.",
-				  "type": "number",
-			      "format": "decimal",
-				  "readOnly": true
-				}
-			}
-		  },
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "description": "the name of new purchase.",
+                "type": "string",
+                "readOnly": true
+              },
+              "value": {
+                "description": "the value of new purchase.",
+                "type": "number",
+                "format": "decimal",
+                "readOnly": true
+              }
+            }
+          },
           "readOnly": true
         },
         "adjustmentDetails": {
           "description": "List of Adjustments (Promo credit, SIE credit etc.).",
           "type": "array",
-		  "items": {
-			"type" : "object",
-			"properties" : {
-				"name" : {
-			      "description": "the name of new adjustment.",
-				  "type": "string",
-                  "readOnly": true
-				},
-				"value": {
-				  "description": "the value of new adjustment.",
-				  "type": "number",
-				  "format": "decimal",
-				  "readOnly": true
-				}
-			}
-		  },
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "description": "the name of new adjustment.",
+                "type": "string",
+                "readOnly": true
+              },
+              "value": {
+                "description": "the value of new adjustment.",
+                "type": "number",
+                "format": "decimal",
+                "readOnly": true
+              }
+            }
+          },
           "readOnly": true
         }
       }
     },
-	"ReservationSummaries": {
+    "ReservationSummaries": {
       "description": "reservation summaries resource.",
       "type": "object",
       "allOf": [
@@ -2922,7 +2922,7 @@
         "meterId": {
           "description": "The meter id (GUID)",
           "type": "string",
-          "format":"uuid",
+          "format": "uuid",
           "readOnly": true
         },
         "term": {
@@ -3232,7 +3232,7 @@
           "type": "array",
           "items": {
             "type": "string",
-            "format":"uuid"
+            "format": "uuid"
           },
           "minItems": 0,
           "maxItems": 10
@@ -3550,7 +3550,7 @@
         "meterId": {
           "description": "The meter id (GUID)",
           "type": "string",
-          "format":"uuid",
+          "format": "uuid",
           "readOnly": true
         },
         "meterDetails": {
@@ -3584,8 +3584,8 @@
           "description": "Currency Code",
           "type": "string",
           "readOnly": true
-		    }
-	    }
+        }
+      }
     }
   },
   "parameters": {

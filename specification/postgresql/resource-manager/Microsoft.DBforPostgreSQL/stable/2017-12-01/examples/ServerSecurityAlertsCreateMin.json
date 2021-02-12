@@ -1,34 +1,37 @@
 {
+  "parameters": {
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "resourceGroupName": "securityalert-4799",
+    "serverName": "securityalert-6440",
+    "securityAlertPolicyName": "Default",
+    "api-version": "2017-12-01",
     "parameters": {
-        "subscriptionId": "00000000-1111-2222-3333-444444444444",
-        "resourceGroupName": "securityalert-4799",
-        "serverName": "securityalert-6440",
-        "securityAlertPolicyName": "Default",
-        "api-version": "2017-12-01",
-        "parameters": {
-            "properties": {
-                "state": "Disabled",
-                "emailAccountAdmins": true
-            }
-        }
-    },
-    "responses": {
-        "200": {
-            "body": {
-                "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/securityalert-4799/providers/Microsoft.DBforPostgreSQL/servers/securityalert-6440/securityAlertPolicies/default",
-                "name": "Default",
-                "type": "Microsoft.DBforPostgreSQL/servers/securityAlertPolicies",
-                "properties": {
-                    "state": "Enabled",
-                    "emailAccountAdmins": true,
-                    "emailAddresses": [""],
-                    "disabledAlerts": [""],
-                    "retentionDays": 0,
-                    "storageEndpoint": ""
-                }
-            }
-        },
-        "202": {
-        }
+      "properties": {
+        "state": "Disabled",
+        "emailAccountAdmins": true
+      }
     }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/securityalert-4799/providers/Microsoft.DBforPostgreSQL/servers/securityalert-6440/securityAlertPolicies/default",
+        "name": "Default",
+        "type": "Microsoft.DBforPostgreSQL/servers/securityAlertPolicies",
+        "properties": {
+          "state": "Enabled",
+          "emailAccountAdmins": true,
+          "emailAddresses": [
+            ""
+          ],
+          "disabledAlerts": [
+            ""
+          ],
+          "retentionDays": 0,
+          "storageEndpoint": ""
+        }
+      }
+    },
+    "202": {}
+  }
 }

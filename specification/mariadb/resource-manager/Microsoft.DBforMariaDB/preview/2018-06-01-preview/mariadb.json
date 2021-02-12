@@ -34,7 +34,7 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMariaDB/servers/{serverName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBForMariaDB/servers/{serverName}": {
       "put": {
         "tags": [
           "Servers"
@@ -44,11 +44,14 @@
           "Create a new server": {
             "$ref": "./examples/ServerCreate.json"
           },
-          "Create a database as a point in time restore":{
-              "$ref":"./examples/ServerCreatePointInTimeRestore.json"
+          "Create a database as a point in time restore": {
+            "$ref": "./examples/ServerCreatePointInTimeRestore.json"
           },
           "Create a server as a geo restore ": {
             "$ref": "./examples/ServerCreateGeoRestoreMode.json"
+          },
+          "Create a replica server": {
+            "$ref": "./examples/ServerCreateReplicaMode.json"
           }
         },
         "description": "Creates a new server or updates an existing server. The update action will overwrite the existing server.",
@@ -214,7 +217,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMariaDB/servers": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBForMariaDB/servers": {
       "get": {
         "tags": [
           "Servers"
@@ -250,7 +253,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.DBforMariaDB/servers": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DBForMariaDB/servers": {
       "get": {
         "tags": [
           "Servers"
@@ -283,7 +286,89 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMariaDB/servers/{serverName}/firewallRules/{firewallRuleName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBForMariaDB/servers/{serverName}/restart": {
+      "post": {
+        "tags": [
+          "ServerRestart"
+        ],
+        "operationId": "Servers_Restart",
+        "x-ms-examples": {
+          "ServerRestart": {
+            "$ref": "./examples/ServerRestart.json"
+          }
+        },
+        "description": "Restarts a server.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBForMariaDB/servers/{serverName}/replicas": {
+      "get": {
+        "tags": [
+          "Replicas"
+        ],
+        "operationId": "Replicas_ListByServer",
+        "x-ms-examples": {
+          "ReplicasListByServer": {
+            "$ref": "./examples/ReplicasListByServer.json"
+          }
+        },
+        "description": "List all the replicas for a given server.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ServerListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBForMariaDB/servers/{serverName}/firewallRules/{firewallRuleName}": {
       "put": {
         "tags": [
           "FirewallRules"
@@ -419,7 +504,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMariaDB/servers/{serverName}/firewallRules": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBForMariaDB/servers/{serverName}/firewallRules": {
       "get": {
         "tags": [
           "FirewallRules"
@@ -458,7 +543,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMariaDB/servers/{serverName}/virtualNetworkRules/{virtualNetworkRuleName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBForMariaDB/servers/{serverName}/virtualNetworkRules/{virtualNetworkRuleName}": {
       "get": {
         "tags": [
           "VirtualNetworkRules"
@@ -603,7 +688,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMariaDB/servers/{serverName}/virtualNetworkRules": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBForMariaDB/servers/{serverName}/virtualNetworkRules": {
       "get": {
         "tags": [
           "VirtualNetworkRules"
@@ -645,7 +730,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMariaDB/servers/{serverName}/databases/{databaseName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBForMariaDB/servers/{serverName}/databases/{databaseName}": {
       "put": {
         "tags": [
           "Databases"
@@ -781,7 +866,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMariaDB/servers/{serverName}/databases": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBForMariaDB/servers/{serverName}/databases": {
       "get": {
         "tags": [
           "Databases"
@@ -820,7 +905,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMariaDB/servers/{serverName}/configurations/{configurationName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBForMariaDB/servers/{serverName}/configurations/{configurationName}": {
       "put": {
         "tags": [
           "Configurations"
@@ -909,7 +994,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMariaDB/servers/{serverName}/configurations": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBForMariaDB/servers/{serverName}/configurations": {
       "get": {
         "tags": [
           "Configurations"
@@ -948,7 +1033,65 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMariaDB/servers/{serverName}/logFiles": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBForMariaDB/servers/{serverName}/updateConfigurations": {
+      "post": {
+        "tags": [
+          "UpdateConfigurations"
+        ],
+        "operationId": "ServerParameters_ListUpdateConfigurations",
+        "x-ms-examples": {
+          "ConfigurationList": {
+            "$ref": "./examples/ConfigurationsUpdateByServer.json"
+          }
+        },
+        "description": "Update a list of configurations in a given server.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "name": "value",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ConfigurationListResult"
+            },
+            "description": "The parameters for updating a list of server configuration."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ConfigurationListResult"
+            }
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBForMariaDB/servers/{serverName}/logFiles": {
       "get": {
         "tags": [
           "LogFiles"
@@ -987,7 +1130,94 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.DBforMariaDB/locations/{locationName}/performanceTiers": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBForMariaDB/servers/{serverName}/recoverableServers": {
+      "get": {
+        "tags": [
+          "RecoverableServers"
+        ],
+        "operationId": "RecoverableServers_Get",
+        "x-ms-examples": {
+          "ReplicasListByServer": {
+            "$ref": "./examples/RecoverableServersGet.json"
+          }
+        },
+        "description": "Gets a recoverable MariaDB Server.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/RecoverableServerResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBForMariaDB/servers/{serverName}/performanceTiers": {
+      "get": {
+        "tags": [
+          "ServerBasedPerformanceTier"
+        ],
+        "operationId": "ServerBasedPerformanceTier_List",
+        "x-ms-examples": {
+          "PerformanceTiersList": {
+            "$ref": "./examples/PerformanceTiersListByServer.json"
+          }
+        },
+        "description": "List all the performance tiers for a MariaDB server.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PerformanceTierListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DBForMariaDB/locations/{locationName}/performanceTiers": {
       "get": {
         "tags": [
           "LocationBasedPerformanceTier"
@@ -1023,7 +1253,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.DBforMariaDB/checkNameAvailability": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DBForMariaDB/checkNameAvailability": {
       "post": {
         "tags": [
           "CheckNameAvailability"
@@ -1062,7 +1292,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMariaDB/servers/{serverName}/securityAlertPolicies/{securityAlertPolicyName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBForMariaDB/servers/{serverName}/securityAlertPolicies/{securityAlertPolicyName}": {
       "get": {
         "tags": [
           "ServerSecurityAlertPolicies"
@@ -1182,7 +1412,49 @@
         }
       }
     },
-    "/providers/Microsoft.DBforMariaDB/operations": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMariaDB/servers/{serverName}/securityAlertPolicies": {
+      "get": {
+        "tags": [
+          "ServerSecurityAlertPolicies"
+        ],
+        "description": "Get the server's threat detection policies.",
+        "operationId": "ServerSecurityAlertPolicies_ListByServer",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the server threat detection policies.",
+            "schema": {
+              "$ref": "#/definitions/ServerSecurityAlertPolicyListResult"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 SecurityAlertPoliciesInvalidStorageAccountName - The provided storage account is not valid or does not exist.\n\n * 400 SecurityAlertPoliciesInvalidStorageAccountCredentials - The provided storage account access key is not valid.\n\n * 400 InvalidServerSecurityAlertPolicyCreateRequest - The create server Threat Detection security alert policy request does not exist or has no properties object.\n\n * 400 DataSecurityInvalidUserSuppliedParameter - An invalid parameter value was provided by the client.\n\n * 400 UpsertServerSecurityAlertPolicyFailed - An error has occurred while saving Threat detection settings, please try again later\n\n * 400 UpsertServerSecurityAlertPolicyFailed - An error has occurred while saving Threat detection settings, please try again later\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 UpsertServerSecurityAlertPolicyFailed - An error has occurred while saving Threat detection settings, please try again later\n\n * 409 ServerSecurityAlertPolicyInProgress - Set server security alert policy is already in progress\n\n * 409 UpsertServerSecurityAlertPolicyFailed - An error has occurred while saving Threat detection settings, please try again later\n\n * 500 DatabaseIsUnavailable - Loading failed. Please try again later.\n\n * 500 UpsertServerSecurityAlertPolicyFailed - An error has occurred while saving Threat detection settings, please try again later\n\n * 500 GetServerSecurityAlertPolicyFailed - Failed to get Threat Detection settings"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List the server's threat detection policies": {
+            "$ref": "./examples/ServerSecurityAlertsListByServer.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.DBForMariaDB/operations": {
       "get": {
         "tags": [
           "Operations"
@@ -1235,55 +1507,6 @@
         "modelAsString": false
       }
     },
-    "ProxyResource": {
-      "description": "Resource properties.",
-      "properties": {
-        "id": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Resource ID"
-        },
-        "name": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Resource name."
-        },
-        "type": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Resource type."
-        }
-      },
-      "x-ms-azure-resource": true
-    },
-    "TrackedResource": {
-      "description": "Resource properties including location and tags for track resources.",
-      "properties": {
-        "location": {
-          "type": "string",
-          "x-ms-mutability": [
-            "read",
-            "create"
-           ],
-          "description": "The location the resource resides in."
-        },
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "Application-specific metadata in the form of key-value pairs."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/ProxyResource"
-        }
-      ],
-      "required": [
-        "location"
-      ]
-    },
     "ServerProperties": {
       "properties": {
         "administratorLogin": {
@@ -1323,6 +1546,20 @@
         "storageProfile": {
           "$ref": "#/definitions/StorageProfile",
           "description": "Storage profile of a server."
+        },
+        "replicationRole": {
+          "type": "string",
+          "description": "The replication role of the server."
+        },
+        "masterServerId": {
+          "type": "string",
+          "description": "The master server id of a replica server."
+        },
+        "replicaCapacity": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0,
+          "description": "The maximum number of replicas that a master server can have."
         }
       },
       "description": "The properties of a server."
@@ -1331,6 +1568,7 @@
       "properties": {
         "backupRetentionDays": {
           "type": "integer",
+          "format": "int32",
           "description": "Backup retention days for the server."
         },
         "geoRedundantBackup": {
@@ -1349,6 +1587,18 @@
           "type": "integer",
           "format": "int32",
           "description": "Max storage allowed for a server."
+        },
+        "storageAutogrow": {
+          "type": "string",
+          "description": "Enable Storage Auto Grow.",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "StorageAutogrow",
+            "modelAsString": true
+          }
         }
       },
       "description": "Storage Profile properties of a server"
@@ -1377,7 +1627,8 @@
           "enum": [
             "Default",
             "PointInTimeRestore",
-            "GeoRestore"
+            "GeoRestore",
+            "Replica"
           ],
           "x-ms-enum": {
             "name": "CreateMode",
@@ -1402,7 +1653,8 @@
         "administratorLoginPassword": {
           "type": "string",
           "format": "password",
-          "description": "The password of the administrator login."
+          "description": "The password of the administrator login.",
+          "x-ms-secret": true
         }
       },
       "required": [
@@ -1453,6 +1705,24 @@
       ],
       "description": "The properties used to create a new server by restoring to a different region from a geo replicated backup."
     },
+    "ServerPropertiesForReplica": {
+      "x-ms-discriminator-value": "Replica",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ServerPropertiesForCreate"
+        }
+      ],
+      "properties": {
+        "sourceServerId": {
+          "type": "string",
+          "description": "The master server id to create replica from."
+        }
+      },
+      "required": [
+        "sourceServerId"
+      ],
+      "description": "The properties to create a new replica."
+    },
     "Sku": {
       "properties": {
         "name": {
@@ -1487,10 +1757,46 @@
           "description": "The family of hardware."
         }
       },
+      "required": [
+        "name"
+      ],
       "description": "Billing information related properties of a server."
+    },
+    "ResourceIdentity": {
+      "description": "Azure Active Directory identity configuration for a resource.",
+      "type": "object",
+      "properties": {
+        "principalId": {
+          "format": "uuid",
+          "description": "The Azure Active Directory principal id.",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "The identity type. Set this to 'SystemAssigned' in order to automatically create and assign an Azure Active Directory principal for the resource.",
+          "enum": [
+            "SystemAssigned"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "IdentityType",
+            "modelAsString": true
+          }
+        },
+        "tenantId": {
+          "format": "uuid",
+          "description": "The Azure Active Directory tenant id.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
     },
     "Server": {
       "properties": {
+        "identity": {
+          "$ref": "#/definitions/ResourceIdentity",
+          "description": "The Azure Active Directory identity of the server."
+        },
         "sku": {
           "$ref": "#/definitions/Sku",
           "description": "The SKU (pricing tier) of the server."
@@ -1503,7 +1809,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/TrackedResource"
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/TrackedResource"
         }
       ],
       "description": "Represents a server."
@@ -1561,6 +1867,10 @@
             "sslEnforcement": {
               "$ref": "#/definitions/SslEnforcement",
               "description": "Enable ssl enforcement or not when connect to server."
+            },
+            "replicationRole": {
+              "type": "string",
+              "description": "The replication role of the server."
             }
           },
           "x-ms-client-flatten": true,
@@ -1617,7 +1927,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/ProxyResource"
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ProxyResource"
         }
       ],
       "required": [
@@ -1675,7 +1985,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/ProxyResource"
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ProxyResource"
         }
       ],
       "properties": {
@@ -1728,7 +2038,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/ProxyResource"
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ProxyResource"
         }
       ],
       "description": "Represents a Database."
@@ -1788,7 +2098,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/ProxyResource"
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ProxyResource"
         }
       ],
       "description": "Represents a Configuration."
@@ -1926,7 +2236,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/ProxyResource"
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ProxyResource"
         }
       ],
       "description": "Represents a log file."
@@ -1955,6 +2265,7 @@
         },
         "vCore": {
           "type": "integer",
+          "format": "int32",
           "description": "vCore associated with the service level objective"
         },
         "hardwareGeneration": {
@@ -1963,10 +2274,12 @@
         },
         "maxBackupRetentionDays": {
           "type": "integer",
+          "format": "int32",
           "description": "Maximum Backup retention in days for the performance tier edition"
         },
         "minBackupRetentionDays": {
           "type": "integer",
+          "format": "int32",
           "description": "Minimum Backup retention in days for the performance tier edition"
         },
         "maxStorageMB": {
@@ -1987,6 +2300,36 @@
         "id": {
           "type": "string",
           "description": "ID of the performance tier."
+        },
+        "maxBackupRetentionDays": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Maximum Backup retention in days for the performance tier edition"
+        },
+        "minBackupRetentionDays": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Minimum Backup retention in days for the performance tier edition"
+        },
+        "maxStorageMB": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Max storage allowed for a server."
+        },
+        "minLargeStorageMB": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Max storage allowed for a server."
+        },
+        "maxLargeStorageMB": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Max storage allowed for a server."
+        },
+        "minStorageMB": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Max storage allowed for a server."
         },
         "serviceLevelObjectives": {
           "type": "array",
@@ -2100,12 +2443,118 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/ProxyResource"
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ProxyResource"
         }
       ],
       "properties": {
         "properties": {
           "$ref": "#/definitions/SecurityAlertPolicyProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "CloudError": {
+      "x-ms-external": true,
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/CloudErrorBody"
+        }
+      },
+      "description": "An error response from the Batch service."
+    },
+    "ServerSecurityAlertPolicyListResult": {
+      "description": "A list of the server's security alert policies.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Array of results.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ServerSecurityAlertPolicy"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "Link to retrieve next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "CloudErrorBody": {
+      "x-ms-external": true,
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "An identifier for the error. Codes are invariant and are intended to be consumed programmatically."
+        },
+        "message": {
+          "type": "string",
+          "description": "A message describing the error, intended to be suitable for display in a user interface."
+        },
+        "target": {
+          "type": "string",
+          "description": "The target of the particular error. For example, the name of the property in error."
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CloudErrorBody"
+          },
+          "description": "A list of additional details about the error."
+        }
+      },
+      "description": "An error response from the Batch service."
+    },
+    "RecoverableServerProperties": {
+      "description": "The recoverable server's properties.",
+      "type": "object",
+      "properties": {
+        "lastAvailableBackupDateTime": {
+          "type": "string",
+          "description": "The last available backup date time.",
+          "readOnly": true
+        },
+        "serviceLevelObjective": {
+          "type": "string",
+          "description": "The service level objective",
+          "readOnly": true
+        },
+        "edition": {
+          "type": "string",
+          "description": "Edition of the performance tier.",
+          "readOnly": true
+        },
+        "vCore": {
+          "type": "integer",
+          "format": "int32",
+          "description": "vCore associated with the service level objective",
+          "readOnly": true
+        },
+        "hardwareGeneration": {
+          "type": "string",
+          "description": "Hardware generation associated with the service level objective",
+          "readOnly": true
+        },
+        "version": {
+          "type": "string",
+          "description": "The MariaDB version",
+          "readOnly": true
+        }
+      }
+    },
+    "RecoverableServerResource": {
+      "description": "A recoverable server resource.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/RecoverableServerProperties",
           "description": "Resource properties.",
           "x-ms-client-flatten": true
         }

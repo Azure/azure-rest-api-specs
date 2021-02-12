@@ -1,0 +1,59 @@
+{
+  "parameters": {
+    "api-version": "2018-11-01-preview",
+    "environmentFqdn": "10000000-0000-0000-0000-100000000109.env.timeseries.azure.com",
+    "parameters": {
+      "searchString": "floor 100",
+      "path": [
+        "Location"
+      ],
+      "instances": null,
+      "hierarchies": {
+        "expand": {
+          "kind": "UntilChildren"
+        },
+        "sort": {
+          "by": "Name"
+        },
+        "pageSize": 2
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "instances": {
+          "hits": [],
+          "hitCount": 0,
+          "continuationToken": null
+        },
+        "hierarchyNodes": {
+          "hits": [
+            {
+              "name": "California",
+              "cumulativeInstanceCount": 2,
+              "hierarchyNodes": {
+                "hits": [
+                  {
+                    "name": "San Diego",
+                    "cumulativeInstanceCount": 1,
+                    "hierarchyNodes": null
+                  },
+                  {
+                    "name": "San Francisco",
+                    "cumulativeInstanceCount": 1,
+                    "hierarchyNodes": null
+                  }
+                ],
+                "hitCount": 2,
+                "continuationToken": null
+              }
+            }
+          ],
+          "hitCount": 1,
+          "continuationToken": null
+        }
+      }
+    }
+  }
+}

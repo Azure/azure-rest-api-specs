@@ -2,29 +2,29 @@
   "parameters": {
     "api-version": "2019-03-01-preview",
     "billingAccountId": "70664866",
-    "parameters":{
-        "type": "Usage",
-        "timeframe": "Custom",
-        "timePeriod": {
-          "from": "2018-10-01T00:00:00.000Z",
-          "to": "2018-10-31T00:00:00.000Z"
+    "parameters": {
+      "type": "Usage",
+      "timeframe": "Custom",
+      "timePeriod": {
+        "from": "2018-10-01T00:00:00.000Z",
+        "to": "2018-10-31T00:00:00.000Z"
+      },
+      "dataset": {
+        "granularity": "None",
+        "aggregation": {
+          "totalCost": {
+            "name": "PreTaxCost",
+            "function": "Sum"
+          }
         },
-        "dataset": {
-          "granularity": "None",
-          "aggregation": {
-            "totalCost": {
-              "name": "PreTaxCost",
-              "function": "Sum"
-            }
-          },
-          "grouping": [
-            {
-              "type": "Dimension",
-              "name": "SubscriptionName"
-            }
-          ]      
-       }
-    }     
+        "grouping": [
+          {
+            "type": "Dimension",
+            "name": "SubscriptionName"
+          }
+        ]
+      }
+    }
   },
   "responses": {
     "200": {
@@ -44,7 +44,7 @@
                 {
                   "name": "SubscriptionName",
                   "type": "String"
-                },               
+                },
                 {
                   "name": "Currency",
                   "type": "String"
@@ -53,17 +53,17 @@
               "rows": [
                 [
                   19.545363672276512,
-                  "Trial Subscription",              
+                  "Trial Subscription",
                   "USD"
                 ],
                 [
                   173.41979241290323,
-                  "DEV Subscription",                 
+                  "DEV Subscription",
                   "USD"
                 ],
                 [
                   20.359416562625452,
-                  "Cost Management Subscrioption",               
+                  "Cost Management Subscrioption",
                   "USD"
                 ]
               ]

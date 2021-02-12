@@ -116,7 +116,7 @@
           }
         }
       },
-	  "delete": {
+      "delete": {
         "tags": [
           "ManagementLocks"
         ],
@@ -157,7 +157,7 @@
           }
         }
       },
-	  "get": {
+      "get": {
         "tags": [
           "ManagementLocks"
         ],
@@ -234,7 +234,7 @@
           }
         ],
         "responses": {
-           "200": {
+          "200": {
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/ManagementLockObject"
@@ -812,6 +812,46 @@
         },
         "x-ms-odata": "#/definitions/ManagementLockObject"
       }
+    },
+    "/{scope}/providers/Microsoft.Authorization/locks": {
+      "get": {
+        "tags": [
+          "ManagementLocks"
+        ],
+        "operationId": "ManagementLocks_ListByScope",
+        "description": "Gets all the management locks for a scope.",
+        "parameters": [
+          {
+            "name": "scope",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The scope for the lock. When providing a scope for the assignment, use '/subscriptions/{subscriptionId}' for subscriptions, '/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}' for resource groups, and '/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{parentResourcePathIfPresent}/{resourceType}/{resourceName}' for resources."
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "The filter to apply on the operation."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Returns an array of resource locks.",
+            "schema": {
+              "$ref": "#/definitions/ManagementLockListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-odata": "#/definitions/ManagementLockObject"
+      }
     }
   },
   "definitions": {
@@ -851,7 +891,9 @@
           "description": "The owners of the lock."
         }
       },
-      "required": [ "level" ],
+      "required": [
+        "level"
+      ],
       "description": "The lock properties."
     },
     "ManagementLockObject": {
@@ -877,7 +919,9 @@
           "description": "The name of the lock."
         }
       },
-      "required": [ "properties" ],
+      "required": [
+        "properties"
+      ],
       "description": "The lock information.",
       "x-ms-azure-resource": true
     },

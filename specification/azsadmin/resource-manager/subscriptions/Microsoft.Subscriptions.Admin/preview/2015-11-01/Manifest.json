@@ -1,0 +1,943 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2015-11-01",
+    "title": "SubscriptionsManagementClient",
+    "description": "The Admin Subscriptions Management Client."
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Subscriptions.Admin/manifests": {
+      "get": {
+        "x-ms-examples": {
+          "Get a list of all manifests.": {
+            "$ref": "./examples/Manifest/List.json"
+          }
+        },
+        "description": "Get a list of all manifests.",
+        "tags": [
+          "Manifests"
+        ],
+        "operationId": "Manifests_List",
+        "parameters": [
+          {
+            "$ref": "Subscriptions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "Subscriptions.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ManifestList"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Subscriptions.Admin/manifests/{manifestName}": {
+      "get": {
+        "x-ms-examples": {
+          "Get the specified manifest.": {
+            "$ref": "./examples/Manifest/Get.json"
+          }
+        },
+        "description": "Get the specified manifest.",
+        "tags": [
+          "Manifests"
+        ],
+        "operationId": "Manifests_Get",
+        "parameters": [
+          {
+            "$ref": "Subscriptions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "Subscriptions.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ManifestParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Manifest"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Manifest": {
+      "description": "The manifest.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "The unique identifier of the registration.",
+          "type": "string"
+        },
+        "displayName": {
+          "description": "The display name.",
+          "type": "string"
+        },
+        "resourceTags": {
+          "description": "The resource tags.",
+          "type": "object"
+        },
+        "namespace": {
+          "description": "The namespace.",
+          "type": "string"
+        },
+        "providerLocation": {
+          "description": "The location of the provider.",
+          "type": "string"
+        },
+        "providerType": {
+          "description": "The type of the provider.",
+          "$ref": "#/definitions/ResourceProviderType"
+        },
+        "enabled": {
+          "description": "A value indicating whether this resource provider is enabled.",
+          "type": "boolean"
+        },
+        "extensionCollection": {
+          "description": "The extensions.",
+          "$ref": "#/definitions/ExtensionCollectionDefinition"
+        },
+        "resourceTypes": {
+          "description": "The resource types",
+          "$ref": "#/definitions/ResourceTypeList"
+        },
+        "providerAuthorization": {
+          "description": "The resource provider authorization.",
+          "$ref": "#/definitions/ResourceProviderAuthorization"
+        },
+        "resourceHydrationAccounts": {
+          "description": "The resource hydration accounts.",
+          "$ref": "#/definitions/AzureResourceHydrationAccountList"
+        },
+        "linkedNotificationRules": {
+          "description": "The linked notification rules.",
+          "$ref": "#/definitions/FanoutLinkedNotificationRuleList"
+        },
+        "provisioningState": {
+          "description": "The provisioning state.",
+          "$ref": "#/definitions/ManifestProvisioningState"
+        },
+        "resourceGroupName": {
+          "description": "The name of the resource group.",
+          "type": "string"
+        },
+        "resourceLocation": {
+          "description": "The location of the resource.",
+          "type": "string"
+        },
+        "subscriptionId": {
+          "description": "The subscription ID under which RP is registered.",
+          "type": "string"
+        },
+        "alwaysRoutable": {
+          "description": "A value indicating whether the manifest is always routable by all subscriptions.",
+          "type": "boolean"
+        },
+        "routingResourceManagerType": {
+          "description": "The routing resource manager type.",
+          "$ref": "Subscriptions.json#/definitions/ResourceManagerType"
+        },
+        "metadata": {
+          "description": "The metadata.",
+          "type": "object"
+        }
+      }
+    },
+    "ManifestList": {
+      "description": "List of manifests.",
+      "properties": {
+        "value": {
+          "description": "List of manifests.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Manifest"
+          }
+        },
+        "nextLink": {
+          "description": "URI to next page.",
+          "type": "string"
+        }
+      }
+    },
+    "ResourceProviderType": {
+      "description": "The resource provider type.",
+      "type": "string",
+      "enum": [
+        "NotSpecified",
+        "Internal",
+        "External",
+        "RegistrationFree",
+        "TenantOnly",
+        "AlwaysRoutable"
+      ],
+      "x-ms-enum": {
+        "name": "ResourceProviderType",
+        "modelAsString": true,
+        "values": [
+          {
+            "description": "The resource provider type is not specified.",
+            "name": "NotSpecified",
+            "value": "NotSpecified"
+          },
+          {
+            "description": "The resource provider type is internal.",
+            "name": "Internal",
+            "value": "Internal"
+          },
+          {
+            "description": "The resource provider type is external. This is used for 3rd party resource providers.",
+            "name": "External",
+            "value": "External"
+          },
+          {
+            "description": "The resource provider doesn't require subscription registrations.",
+            "name": "RegistrationFree",
+            "value": "RegistrationFree"
+          },
+          {
+            "description": "The resource provider operates only at tenant level.",
+            "name": "TenantOnly",
+            "value": "TenantOnly"
+          },
+          {
+            "description": "The resource provider can always be routed to without explicit access via plan.",
+            "name": "AlwaysRoutable",
+            "value": "AlwaysRoutable"
+          }
+        ]
+      }
+    },
+    "ExtensionCollectionDefinition": {
+      "description": "The manifest extension collection definition.",
+      "type": "object",
+      "properties": {
+        "version": {
+          "description": "The version of the format a.b[.c[.d]]. see System.Version documentation for more details.",
+          "type": "string"
+        },
+        "extensions": {
+          "description": "The extensions.",
+          "$ref": "#/definitions/ExtensionList"
+        }
+      }
+    },
+    "ExtensionList": {
+      "description": "List of the extensions.",
+      "properties": {
+        "value": {
+          "description": "List of the extensions.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ExtensionDefinition"
+          }
+        },
+        "nextLink": {
+          "description": "URI to next page.",
+          "type": "string"
+        }
+      }
+    },
+    "ExtensionDefinition": {
+      "description": "The data contract for specifying extensions in resource provider manifests.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "The name.",
+          "type": "string"
+        },
+        "uri": {
+          "description": "The Uri",
+          "type": "string"
+        },
+        "properties": {
+          "description": "The extension properties.",
+          "$ref": "#/definitions/ExtensionPropertiesDefinition"
+        },
+        "obsoleteBundlesBitmask": {
+          "description": "The obsolete bundles bitmask.",
+          "type": "integer"
+        },
+        "resourceAccess": {
+          "description": "The resource access.",
+          "$ref": "#/definitions/ResourceAccessList"
+        }
+      }
+    },
+    "ExtensionPropertiesDefinition": {
+      "description": "The extension properties definition.",
+      "type": "object",
+      "properties": {
+        "quotaCreateBladeName": {
+          "description": "The quota create blade.",
+          "type": "string"
+        },
+        "resourceProviderDashboardBladeName": {
+          "description": "The resource provider dashboard blade.",
+          "type": "string"
+        }
+      }
+    },
+    "ResourceAccessList": {
+      "description": "List of the resource access.",
+      "properties": {
+        "value": {
+          "description": "List of the resource access.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ResourceAccess"
+          }
+        },
+        "nextLink": {
+          "description": "URI to next page.",
+          "type": "string"
+        }
+      }
+    },
+    "ResourceAccess": {
+      "description": "Extension Client Access Section.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "The name.",
+          "type": "string"
+        },
+        "resource": {
+          "description": "The resource.",
+          "type": "string"
+        }
+      }
+    },
+    "ResourceTypeList": {
+      "description": "List of the resource types.",
+      "properties": {
+        "value": {
+          "description": "List of the resource types.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ResourceType"
+          }
+        },
+        "nextLink": {
+          "description": "URI to next page.",
+          "type": "string"
+        }
+      }
+    },
+    "ResourceType": {
+      "description": "The resource type definition.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "The name.",
+          "type": "string"
+        },
+        "routingType": {
+          "description": "The resource routing type.",
+          "$ref": "#/definitions/RoutingType"
+        },
+        "resourceDeletionPolicy": {
+          "description": "The resource deletion policy.",
+          "$ref": "#/definitions/ResourceDeletionPolicy"
+        },
+        "allowedUnauthorizedActions": {
+          "description": "The allowed unauthorized actions.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "authorizationActionMappings": {
+          "description": "The read-only actions.",
+          "$ref": "#/definitions/AuthorizationActionMappingList"
+        },
+        "linkedAccessChecks": {
+          "description": "The linked access checks.",
+          "$ref": "#/definitions/LinkedAccessCheckList"
+        },
+        "linkedNotificationRules": {
+          "description": "The linked notification rules.",
+          "$ref": "#/definitions/LinkedNotificationRuleList"
+        },
+        "linkedOperationRules": {
+          "description": "The linked operation rules.",
+          "$ref": "#/definitions/LinkedOperationRuleList"
+        },
+        "apiProfiles": {
+          "description": "The API profiles.",
+          "$ref": "#/definitions/ApiProfileList"
+        },
+        "endpoints": {
+          "description": "The resource provider endpoints.",
+          "$ref": "#/definitions/ResourceProviderEndpointList"
+        },
+        "marketplaceType": {
+          "description": "The resource type behavior in the marketplace.",
+          "$ref": "#/definitions/MarketplaceType"
+        },
+        "inGlobalLocation": {
+          "description": "A value indicating whether the resource type is in global location.",
+          "type": "boolean"
+        },
+        "meteredResourceIds": {
+          "description": "The metered resource ids.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "RoutingType": {
+      "description": "The resource routing type.",
+      "type": "string",
+      "enum": [
+        "Default",
+        "ProxyOnly",
+        "HostBased",
+        "Extension",
+        "Tenant",
+        "Fanout",
+        "LocationBased"
+      ],
+      "x-ms-enum": {
+        "name": "RoutingType",
+        "modelAsString": true,
+        "values": [
+          {
+            "description": "The resource routing type is default.",
+            "name": "Default",
+            "value": "Default"
+          },
+          {
+            "description": "The resource routing type is proxy only.",
+            "name": "ProxyOnly",
+            "value": "ProxyOnly"
+          },
+          {
+            "description": "The resource routing type is host based.",
+            "name": "HostBased",
+            "value": "HostBased"
+          },
+          {
+            "description": "The resource routing type is extension.",
+            "name": "Extension",
+            "value": "Extension"
+          },
+          {
+            "description": "The resource routing type is tenant.",
+            "name": "Tenant",
+            "value": "Tenant"
+          },
+          {
+            "description": "The resource routing type is fan out.",
+            "name": "Fanout",
+            "value": "Fanout"
+          },
+          {
+            "description": "The resource routing type is Location based.",
+            "name": "LocationBased",
+            "value": "LocationBased"
+          }
+        ]
+      }
+    },
+    "ResourceDeletionPolicy": {
+      "description": "The resource deletion policy.",
+      "type": "string",
+      "enum": [
+        "NotSpecified",
+        "Cascade"
+      ],
+      "x-ms-enum": {
+        "name": "ResourceDeletionPolicy",
+        "modelAsString": true,
+        "values": [
+          {
+            "description": "The resource deletion policy is not specified.",
+            "name": "NotSpecified",
+            "value": "NotSpecified"
+          },
+          {
+            "description": "The resource deletion policy is cascade.",
+            "name": "Cascade",
+            "value": "Cascade"
+          }
+        ]
+      }
+    },
+    "AuthorizationActionMappingList": {
+      "description": "List of the read-only actions.",
+      "properties": {
+        "value": {
+          "description": "List of the read-only actions.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AuthorizationActionMapping"
+          }
+        },
+        "nextLink": {
+          "description": "URI to next page.",
+          "type": "string"
+        }
+      }
+    },
+    "AuthorizationActionMapping": {
+      "description": "The linked resource access checks.",
+      "properties": {
+        "original": {
+          "description": "The original action name.",
+          "type": "string"
+        },
+        "desired": {
+          "description": "The desired action name.",
+          "type": "string"
+        }
+      }
+    },
+    "LinkedAccessCheckList": {
+      "description": "List of the linked access checks.",
+      "properties": {
+        "value": {
+          "description": "List of the linked access checks.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/LinkedAccessCheck"
+          }
+        },
+        "nextLink": {
+          "description": "URI to next page.",
+          "type": "string"
+        }
+      }
+    },
+    "LinkedAccessCheck": {
+      "description": "The linked resource access checks.",
+      "properties": {
+        "actionName": {
+          "description": "The action name.",
+          "type": "string"
+        },
+        "linkedProperty": {
+          "description": "The linked property.",
+          "type": "string"
+        },
+        "linkedAction": {
+          "description": "The linked action.",
+          "type": "string"
+        },
+        "linkedActionVerb": {
+          "description": "The linked action verb.",
+          "type": "string"
+        },
+        "linkedType": {
+          "description": "The linked type.",
+          "type": "string"
+        }
+      }
+    },
+    "LinkedNotificationRuleList": {
+      "description": "List of the linked notification rules.",
+      "properties": {
+        "value": {
+          "description": "List of the linked notification rules.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/LinkedNotificationRule"
+          }
+        },
+        "nextLink": {
+          "description": "URI to next page.",
+          "type": "string"
+        }
+      }
+    },
+    "LinkedNotificationRule": {
+      "description": "The linked notification rule.",
+      "properties": {
+        "actions": {
+          "description": "List of actions.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "LinkedOperationRuleList": {
+      "description": "List of the linked operation rules.",
+      "properties": {
+        "value": {
+          "description": "List of the linked operation rules.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/LinkedOperationRule"
+          }
+        },
+        "nextLink": {
+          "description": "URI to next page.",
+          "type": "string"
+        }
+      }
+    },
+    "LinkedOperationRule": {
+      "description": "The linked resource access checks.",
+      "properties": {
+        "linkedOperation": {
+          "description": "The linked operation.",
+          "$ref": "#/definitions/LinkedOperation"
+        },
+        "linkedAction": {
+          "description": "The linked action.",
+          "$ref": "#/definitions/LinkedAction"
+        },
+        "dependsOnTypes": {
+          "description": "The list of resource types this rule depends on.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "LinkedOperation": {
+      "description": "The linked operation.",
+      "type": "string",
+      "enum": [
+        "None",
+        "CrossResourceGroupResourceMove",
+        "CrossSubscriptionResourceMove"
+      ],
+      "x-ms-enum": {
+        "name": "LinkedOperation",
+        "modelAsString": true,
+        "values": [
+          {
+            "description": "The operation is none.",
+            "name": "None",
+            "value": "None"
+          },
+          {
+            "description": "Move resources between resource groups within the same subscription.",
+            "name": "CrossResourceGroupResourceMove",
+            "value": "CrossResourceGroupResourceMove"
+          },
+          {
+            "description": "Move resources across subscriptions.",
+            "name": "CrossSubscriptionResourceMove",
+            "value": "CrossSubscriptionResourceMove"
+          }
+        ]
+      }
+    },
+    "LinkedAction": {
+      "description": "The resource type linked action.",
+      "type": "string",
+      "enum": [
+        "NotSpecified",
+        "Blocked",
+        "Validate",
+        "Enabled"
+      ],
+      "x-ms-enum": {
+        "name": "LinkedAction",
+        "modelAsString": true,
+        "values": [
+          {
+            "description": "The action is not specified.",
+            "name": "NotSpecified",
+            "value": "NotSpecified"
+          },
+          {
+            "description": "The operation is blocked.",
+            "name": "Blocked",
+            "value": "Blocked"
+          },
+          {
+            "description": "The operation must be validated.",
+            "name": "Validate",
+            "value": "Validate"
+          },
+          {
+            "description": "The operation must be Enabled.",
+            "name": "Enabled",
+            "value": "Enabled"
+          }
+        ]
+      }
+    },
+    "ApiProfileList": {
+      "description": "List of the API profiles.",
+      "properties": {
+        "value": {
+          "description": "List of the API profiles.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApiProfile"
+          }
+        },
+        "nextLink": {
+          "description": "URI to next page.",
+          "type": "string"
+        }
+      }
+    },
+    "ApiProfile": {
+      "description": "Represents the API profile.",
+      "properties": {
+        "profileVersion": {
+          "description": "The profile version.",
+          "type": "string"
+        },
+        "apiVersion": {
+          "description": "The API version.",
+          "type": "string"
+        }
+      }
+    },
+    "ResourceProviderEndpointList": {
+      "description": "List of the resource provider endpoints.",
+      "properties": {
+        "value": {
+          "description": "List of the resource provider endpoints.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ResourceProviderEndpoint"
+          }
+        },
+        "nextLink": {
+          "description": "URI to next page.",
+          "type": "string"
+        }
+      }
+    },
+    "ResourceProviderEndpoint": {
+      "description": "The API versions supported by the endpoint.",
+      "properties": {
+        "apiVersions": {
+          "description": "The API versions supported by the endpoint.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "enabled": {
+          "description": "The enabled.",
+          "type": "boolean"
+        },
+        "endpointUri": {
+          "description": "The endpoint uri.",
+          "type": "string"
+        },
+        "timeout": {
+          "description": "The timeout.",
+          "type": "string"
+        }
+      }
+    },
+    "MarketplaceType": {
+      "description": "The type of marketplace behavior for the resource type.",
+      "type": "string",
+      "enum": [
+        "NotSpecified",
+        "AddOn"
+      ],
+      "x-ms-enum": {
+        "name": "MarketplaceType",
+        "modelAsString": true,
+        "values": [
+          {
+            "description": "The marketplace type is not specified.",
+            "name": "NotSpecified",
+            "value": "NotSpecified"
+          },
+          {
+            "description": "The marketplace offer is an add-on to a resource.",
+            "name": "AddOn",
+            "value": "AddOn"
+          }
+        ]
+      }
+    },
+    "ResourceProviderAuthorization": {
+      "description": "The resource provider authorization information.",
+      "properties": {
+        "applicationId": {
+          "description": "The application id of resource provider in AAD.",
+          "type": "string"
+        },
+        "roleDefinitionId": {
+          "description": "The role definition identifier against which a role assignment is created.",
+          "type": "string"
+        }
+      }
+    },
+    "AzureResourceHydrationAccountList": {
+      "description": "List of the resource hydration accounts.",
+      "properties": {
+        "value": {
+          "description": "List of the resource hydration accounts.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AzureResourceHydrationAccount"
+          }
+        },
+        "nextLink": {
+          "description": "URI to next page.",
+          "type": "string"
+        }
+      }
+    },
+    "AzureResourceHydrationAccount": {
+      "description": "The API versions supported by the endpoint.",
+      "properties": {
+        "subscriptionId": {
+          "description": "The subscription identifier.",
+          "type": "string"
+        },
+        "accountName": {
+          "description": "The account name.",
+          "type": "string"
+        },
+        "encryptedKey": {
+          "description": "The encrypted key.",
+          "type": "string"
+        },
+        "maxChildResourceConsistencyJobLimit": {
+          "description": "The next child resource consistency job limit.",
+          "type": "integer"
+        }
+      }
+    },
+    "FanoutLinkedNotificationRuleList": {
+      "description": "List of the linked notification rules.",
+      "properties": {
+        "value": {
+          "description": "List of the linked notification rules.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/FanoutLinkedNotificationRule"
+          }
+        },
+        "nextLink": {
+          "description": "URI to next page.",
+          "type": "string"
+        }
+      }
+    },
+    "FanoutLinkedNotificationRule": {
+      "description": "The fan-out linked notification rule.",
+      "properties": {
+        "actions": {
+          "description": "The list of actions.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "endpoints": {
+          "description": "The list of endpoint uris.",
+          "$ref": "#/definitions/ResourceProviderEndpointList"
+        }
+      }
+    },
+    "ManifestProvisioningState": {
+      "description": "The provisioning state.",
+      "type": "string",
+      "enum": [
+        "Accepted",
+        "Creating",
+        "Deleting",
+        "Moving",
+        "Failed",
+        "Succeeded"
+      ],
+      "x-ms-enum": {
+        "name": "ManifestProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "description": "The accepted provisioning state.",
+            "name": "Accepted",
+            "value": "Accepted"
+          },
+          {
+            "description": "The creating provisioning state.",
+            "name": "Creating",
+            "value": "Creating"
+          },
+          {
+            "description": "The deleting provisioning state.",
+            "name": "Deleting",
+            "value": "Deleting"
+          },
+          {
+            "description": "The moving provisioning state.",
+            "name": "Moving",
+            "value": "Moving"
+          },
+          {
+            "description": "The failed provisioning state.",
+            "name": "Failed",
+            "value": "Failed"
+          },
+          {
+            "description": "The succeeded provisioning state.",
+            "name": "Succeeded",
+            "value": "Succeeded"
+          }
+        ]
+      }
+    }
+  },
+  "parameters": {
+    "ManifestParameter": {
+      "description": "The manifest name.",
+      "name": "manifestName",
+      "in": "path",
+      "type": "string",
+      "required": true,
+      "x-ms-parameter-location": "method"
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ]
+}

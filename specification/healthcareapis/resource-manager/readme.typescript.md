@@ -7,6 +7,7 @@ Please also specify `--typescript-sdks-folder=<path to root folder of your azure
 typescript:
   azure-arm: true
   package-name: "@azure/arm-healthcareapis"
-  output-folder: "$(typescript-sdks-folder)/packages/@azure/arm-healthcareapis"
+  output-folder: "$(typescript-sdks-folder)/sdk/healthcareapis/arm-healthcareapis"
+  clear-output-folder: true
   generate-metadata: true
 ```

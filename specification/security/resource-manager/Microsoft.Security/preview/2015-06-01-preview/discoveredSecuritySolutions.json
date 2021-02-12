@@ -6,12 +6,20 @@
     "version": "2015-06-01-preview"
   },
   "host": "management.azure.com",
-  "schemes": ["https"],
-  "consumes": ["application/json"],
-  "produces": ["application/json"],
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
   "security": [
     {
-      "azure_auth": ["user_impersonation"]
+      "azure_auth": [
+        "user_impersonation"
+      ]
     }
   ],
   "securityDefinitions": {
@@ -33,7 +41,9 @@
             "$ref": "./examples/DiscoveredSecuritySolutions/GetDiscoveredSecuritySolutionsSubscription_example.json"
           }
         },
-        "tags": ["DiscoveredSecuritySolutions"],
+        "tags": [
+          "DiscoveredSecuritySolutions"
+        ],
         "description": "Gets a list of discovered Security Solutions for the subscription.",
         "operationId": "DiscoveredSecuritySolutions_List",
         "parameters": [
@@ -70,7 +80,9 @@
             "$ref": "./examples/DiscoveredSecuritySolutions/GetDiscoveredSecuritySolutionsSubscriptionLocation_example.json"
           }
         },
-        "tags": ["DiscoveredSecuritySolutions"],
+        "tags": [
+          "DiscoveredSecuritySolutions"
+        ],
         "description": "Gets a list of discovered Security Solutions for the subscription and location.",
         "operationId": "DiscoveredSecuritySolutions_ListByHomeRegion",
         "parameters": [
@@ -110,7 +122,9 @@
             "$ref": "./examples/DiscoveredSecuritySolutions/GetDiscoveredSecuritySolutionResourceGroupLocation_example.json"
           }
         },
-        "tags": ["DiscoveredSecuritySolutions"],
+        "tags": [
+          "DiscoveredSecuritySolutions"
+        ],
         "description": "Gets a specific discovered Security Solution.",
         "operationId": "DiscoveredSecuritySolutions_Get",
         "parameters": [
@@ -172,7 +186,9 @@
           "$ref": "#/definitions/DiscoveredSecuritySolutionProperties"
         }
       },
-      "required": ["properties"],
+      "required": [
+        "properties"
+      ],
       "allOf": [
         {
           "$ref": "../../../common/v1/types.json#/definitions/Resource"
@@ -188,7 +204,12 @@
         "securityFamily": {
           "type": "string",
           "description": "The security family of the discovered solution",
-          "enum": ["Waf", "Ngfw", "SaasWaf", "Va"],
+          "enum": [
+            "Waf",
+            "Ngfw",
+            "SaasWaf",
+            "Va"
+          ],
           "x-ms-enum": {
             "name": "securityFamily",
             "modelAsString": true,
@@ -221,7 +242,12 @@
           "description": "The security solutions' image sku"
         }
       },
-      "required": ["securityFamily", "offer", "publisher", "sku"]
+      "required": [
+        "securityFamily",
+        "offer",
+        "publisher",
+        "sku"
+      ]
     }
   },
   "parameters": {

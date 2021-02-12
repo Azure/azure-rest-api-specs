@@ -1,213 +1,213 @@
 {
-    "swagger": "2.0",
-    "info": {
-        "description": "Virtual Network admin operation endpoints and objects.",
-        "title": "NetworkAdminManagementClient",
-        "version": "2015-06-15"
-    },
-    "host": "adminmanagement.local.azurestack.external",
-    "schemes": [
-        "https"
-    ],
-    "consumes": [
-        "application/json"
-    ],
-    "produces": [
-        "application/json"
-    ],
-    "paths": {
-        "/subscriptions/{subscriptionId}/providers/Microsoft.Network.Admin/adminVirtualNetworks": {
-            "get": {
-                "x-ms-examples": {
-                    "List of all virtual networks.": {
-                        "$ref": "./examples/VirtualNetworks/List.json"
-                    }
-                },
-                "tags": [
-                    "VirtualNetworks"
-                ],
-                "description": "Get a list of all virtual networks.",
-                "operationId": "VirtualNetworks_List",
-                "parameters": [
-                    {
-                        "$ref": "Network.json#/parameters/SubscriptionIdParameter"
-                    },
-                    {
-                        "$ref": "Network.json#/parameters/ApiVersionParameter"
-                    },
-                    {
-                        "$ref": "Network.json#/parameters/FilterParameter"
-                    },
-                    {
-                        "$ref": "Network.json#/parameters/OrderByParameter"
-                    },
-                    {
-                        "$ref": "Network.json#/parameters/TopParameter"
-                    },
-                    {
-                        "$ref": "Network.json#/parameters/SkipParameter"
-                    },
-                    {
-                        "$ref": "Network.json#/parameters/InlineCountParameter"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "#/definitions/VirtualNetworksList"
-                        }
-                    }
-                },
-                "x-ms-pageable": {
-                    "nextLinkName": "nextLink"
-                },
-                "x-ms-odata": "#/definitions/VirtualNetwork"
+  "swagger": "2.0",
+  "info": {
+    "description": "Virtual Network admin operation endpoints and objects.",
+    "title": "NetworkAdminManagementClient",
+    "version": "2015-06-15"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Network.Admin/adminVirtualNetworks": {
+      "get": {
+        "x-ms-examples": {
+          "List of all virtual networks.": {
+            "$ref": "./examples/VirtualNetworks/List.json"
+          }
+        },
+        "tags": [
+          "VirtualNetworks"
+        ],
+        "description": "Get a list of all virtual networks.",
+        "operationId": "VirtualNetworks_List",
+        "parameters": [
+          {
+            "$ref": "Network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "Network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "Network.json#/parameters/FilterParameter"
+          },
+          {
+            "$ref": "Network.json#/parameters/OrderByParameter"
+          },
+          {
+            "$ref": "Network.json#/parameters/TopParameter"
+          },
+          {
+            "$ref": "Network.json#/parameters/SkipParameter"
+          },
+          {
+            "$ref": "Network.json#/parameters/InlineCountParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/VirtualNetworksList"
             }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-odata": "#/definitions/VirtualNetwork"
+      }
+    }
+  },
+  "definitions": {
+    "VirtualNetwork": {
+      "description": "This represents a virtual network.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "description": "Properties of a virtual network.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/VirtualNetworkProperties"
         }
-    },
-    "definitions": {
-        "VirtualNetwork": {
-            "description": "This represents a virtual network.",
-            "type": "object",
-            "properties": {
-                "properties": {
-                    "description": "Properties of a virtual network.",
-                    "x-ms-client-flatten": true,
-                    "$ref": "#/definitions/VirtualNetworkProperties"
-                }
-            },
-            "allOf": [
-                {
-                    "$ref": "Network.json#/definitions/Resource"
-                }
-            ]
-        },
-        "VirtualNetworkProperties": {
-            "description": "Properties of a virtual network.",
-            "type": "object",
-            "properties": {
-                "configurationState": {
-                    "description": "The virtual network configuration state.",
-                    "$ref": "#/definitions/VirtualNetworkConfigurationState"
-                }
-            },
-            "allOf": [
-                {
-                    "$ref": "Network.json#/definitions/ProvisionedResource"
-                },
-                {
-                    "$ref": "Network.json#/definitions/TenantResource"
-                }
-            ]
-        },
-        "VirtualNetworkConfigurationState": {
-            "description": "The virtual network configuration state.",
-            "type": "object",
-            "properties": {
-                "status": {
-                    "description": "The virtual network status.",
-                    "enum": [
-                        "Failure",
-                        "Warning",
-                        "Success",
-                        "Uninitialized",
-                        "InProgress",
-                        "Unknown"
-                    ],
-                    "type": "string",
-                    "x-ms-enum": {
-                        "modelAsString": true,
-                        "name": "VirtualNetworkConfigurationStateStatusType"
-                    },
-                    "readOnly": true
-                },
-                "lastUpdatedTime": {
-                    "description": "Last updated time for the running state.",
-                    "type": "string",
-                    "format": "date-time",
-                    "readOnly": true
-                },
-                "virtualNetworkInterfaceErrors": {
-                    "description": "List of NIC errors associated with the resource.",
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/VirtualNetworkConfigurationStatus"
-                    }
-                },
-                "hostErrors": {
-                    "description": "List of NIC errors associated with the resource.",
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/VirtualNetworkConfigurationStatus"
-                    }
-                }
-            }
-        },
-        "VirtualNetworkConfigurationStatus": {
-            "description": "Virtual network configuration status.",
-            "type": "object",
-            "properties": {
-                "status": {
-                    "description": "The virtual network configuration status.",
-                    "enum": [
-                        "Failure",
-                        "Warning",
-                        "Success",
-                        "Uninitialized",
-                        "InProgress",
-                        "Unknown"
-                    ],
-                    "type": "string",
-                    "x-ms-enum": {
-                        "modelAsString": true,
-                        "name": "VirtualNetworkConfigurationStatusType"
-                    },
-                    "readOnly": true
-                },
-                "lastUpdatedTime": {
-                    "description": "Last updated time for the configuration status.",
-                    "type": "string",
-                    "format": "date-time",
-                    "readOnly": true
-                }
-            }
-        },
-        "VirtualNetworksList": {
-            "description": "Pageable list of virtual networks.",
-            "type": "object",
-            "properties": {
-                "value": {
-                    "description": "List of virtual networks for this page.",
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/VirtualNetwork"
-                    }
-                },
-                "nextLink": {
-                    "description": "URI to the next page.",
-                    "type": "string"
-                }
-            }
-        }
-    },
-    "parameters": {},
-    "securityDefinitions": {
-        "azure_auth": {
-            "type": "oauth2",
-            "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
-            "flow": "implicit",
-            "description": "Azure Active Directory OAuth2 flow.",
-            "scopes": {
-                "user_impersonation": "impersonate your user account"
-            }
-        }
-    },
-    "security": [
+      },
+      "allOf": [
         {
-            "azure_auth": [
-                "user_impersonation"
-            ]
+          "$ref": "Network.json#/definitions/Resource"
         }
-    ]
+      ]
+    },
+    "VirtualNetworkProperties": {
+      "description": "Properties of a virtual network.",
+      "type": "object",
+      "properties": {
+        "configurationState": {
+          "description": "The virtual network configuration state.",
+          "$ref": "#/definitions/VirtualNetworkConfigurationState"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "Network.json#/definitions/ProvisionedResource"
+        },
+        {
+          "$ref": "Network.json#/definitions/TenantResource"
+        }
+      ]
+    },
+    "VirtualNetworkConfigurationState": {
+      "description": "The virtual network configuration state.",
+      "type": "object",
+      "properties": {
+        "status": {
+          "description": "The virtual network status.",
+          "enum": [
+            "Failure",
+            "Warning",
+            "Success",
+            "Uninitialized",
+            "InProgress",
+            "Unknown"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "VirtualNetworkConfigurationStateStatusType"
+          },
+          "readOnly": true
+        },
+        "lastUpdatedTime": {
+          "description": "Last updated time for the running state.",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "virtualNetworkInterfaceErrors": {
+          "description": "List of NIC errors associated with the resource.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VirtualNetworkConfigurationStatus"
+          }
+        },
+        "hostErrors": {
+          "description": "List of NIC errors associated with the resource.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VirtualNetworkConfigurationStatus"
+          }
+        }
+      }
+    },
+    "VirtualNetworkConfigurationStatus": {
+      "description": "Virtual network configuration status.",
+      "type": "object",
+      "properties": {
+        "status": {
+          "description": "The virtual network configuration status.",
+          "enum": [
+            "Failure",
+            "Warning",
+            "Success",
+            "Uninitialized",
+            "InProgress",
+            "Unknown"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "VirtualNetworkConfigurationStatusType"
+          },
+          "readOnly": true
+        },
+        "lastUpdatedTime": {
+          "description": "Last updated time for the configuration status.",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        }
+      }
+    },
+    "VirtualNetworksList": {
+      "description": "Pageable list of virtual networks.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "List of virtual networks for this page.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VirtualNetwork"
+          }
+        },
+        "nextLink": {
+          "description": "URI to the next page.",
+          "type": "string"
+        }
+      }
+    }
+  },
+  "parameters": {},
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ]
 }

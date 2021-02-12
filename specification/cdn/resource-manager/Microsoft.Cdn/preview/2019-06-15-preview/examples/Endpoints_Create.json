@@ -1,0 +1,377 @@
+{
+  "parameters": {
+    "api-version": "2019-06-15-preview",
+    "subscriptionId": "subid",
+    "resourceGroupName": "RG",
+    "profileName": "profile1",
+    "endpointName": "endpoint1",
+    "endpoint": {
+      "properties": {
+        "originHostHeader": "www.bing.com",
+        "originPath": "/photos",
+        "contentTypesToCompress": [
+          "text/html",
+          "application/octet-stream"
+        ],
+        "isCompressionEnabled": true,
+        "isHttpAllowed": true,
+        "isHttpsAllowed": true,
+        "queryStringCachingBehavior": "BypassCaching",
+        "deliveryPolicy": {
+          "description": "Test description for a policy.",
+          "rules": [
+            {
+              "name": "rule1",
+              "order": 1,
+              "conditions": [
+                {
+                  "name": "RemoteAddress",
+                  "parameters": {
+                    "operator": "IPMatch",
+                    "negateCondition": true,
+                    "matchValues": [
+                      "192.168.1.0/24",
+                      "10.0.0.0/24"
+                    ],
+                    "@odata.type": "#Microsoft.Azure.Cdn.Models.DeliveryRuleRemoteAddressConditionParameters"
+                  }
+                }
+              ],
+              "actions": [
+                {
+                  "name": "CacheExpiration",
+                  "parameters": {
+                    "cacheBehavior": "Override",
+                    "cacheDuration": "10:10:09",
+                    "@odata.type": "#Microsoft.Azure.Cdn.Models.DeliveryRuleCacheExpirationActionParameters",
+                    "cacheType": "All"
+                  }
+                },
+                {
+                  "name": "ModifyResponseHeader",
+                  "parameters": {
+                    "headerAction": "Overwrite",
+                    "headerName": "Access-Control-Allow-Origin",
+                    "value": "*",
+                    "@odata.type": "#Microsoft.Azure.Cdn.Models.DeliveryRuleHeaderActionParameters"
+                  }
+                },
+                {
+                  "name": "ModifyRequestHeader",
+                  "parameters": {
+                    "headerAction": "Overwrite",
+                    "headerName": "Accept-Encoding",
+                    "value": "gzip",
+                    "@odata.type": "#Microsoft.Azure.Cdn.Models.DeliveryRuleHeaderActionParameters"
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        "origins": [
+          {
+            "name": "origin1",
+            "properties": {
+              "hostName": "host1.hello.com"
+            }
+          }
+        ],
+        "webApplicationFirewallPolicyLink": {
+          "id": "/subscriptions/subid/resourceGroups/RG/providers/Microsoft.Cdn/CdnWebApplicationFirewallPolicies/cdnWafPolicy1"
+        }
+      },
+      "location": "WestUs",
+      "tags": {
+        "kay1": "value1"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "endpoint4899",
+        "id": "/subscriptions/subid/resourcegroups/RG/providers/Microsoft.Cdn/profiles/profile1/endpoints/endpoint1",
+        "type": "Microsoft.Cdn/profiles/endpoints",
+        "tags": {
+          "kay1": "value1"
+        },
+        "location": "WestUs",
+        "properties": {
+          "hostName": "endpoint4899.azureedge-test.net",
+          "originHostHeader": "www.bing.com",
+          "provisioningState": "Creating",
+          "resourceState": "Creating",
+          "isHttpAllowed": true,
+          "isHttpsAllowed": true,
+          "queryStringCachingBehavior": "BypassCaching",
+          "originPath": "/photos",
+          "origins": [
+            {
+              "name": "origin1",
+              "properties": {
+                "hostName": "host1.hello.com",
+                "httpPort": null,
+                "httpsPort": null
+              }
+            }
+          ],
+          "contentTypesToCompress": [
+            "text/html",
+            "application/octet-stream"
+          ],
+          "isCompressionEnabled": true,
+          "optimizationType": null,
+          "probePath": null,
+          "geoFilters": [],
+          "deliveryPolicy": {
+            "description": "Test description for a policy.",
+            "rules": [
+              {
+                "name": "rule1",
+                "order": 1,
+                "conditions": [
+                  {
+                    "name": "RemoteAddress",
+                    "parameters": {
+                      "@odata.type": "#Microsoft.Azure.Cdn.Models.DeliveryRuleRemoteAddressConditionParameters",
+                      "operator": "IPMatch",
+                      "negateCondition": true,
+                      "matchValues": [
+                        "192.168.1.0/24",
+                        "10.0.0.0/24"
+                      ],
+                      "transforms": []
+                    }
+                  }
+                ],
+                "actions": [
+                  {
+                    "name": "CacheExpiration",
+                    "parameters": {
+                      "@odata.type": "#Microsoft.Azure.Cdn.Models.DeliveryRuleCacheExpirationActionParameters",
+                      "cacheBehavior": "Override",
+                      "cacheDuration": "10:10:09",
+                      "cacheType": "All"
+                    }
+                  },
+                  {
+                    "name": "ModifyResponseHeader",
+                    "parameters": {
+                      "@odata.type": "#Microsoft.Azure.Cdn.Models.DeliveryRuleHeaderActionParameters",
+                      "headerAction": "Overwrite",
+                      "headerName": "Access-Control-Allow-Origin",
+                      "value": "*"
+                    }
+                  },
+                  {
+                    "name": "ModifyRequestHeader",
+                    "parameters": {
+                      "@odata.type": "#Microsoft.Azure.Cdn.Models.DeliveryRuleHeaderActionParameters",
+                      "headerAction": "Overwrite",
+                      "headerName": "Accept-Encoding",
+                      "value": "gzip"
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "webApplicationFirewallPolicyLink": {
+            "id": "/subscriptions/subid/resourceGroups/RG/providers/Microsoft.Cdn/CdnWebApplicationFirewallPolicies/cdnWafPolicy1"
+          }
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "endpoint4899",
+        "id": "/subscriptions/subid/resourcegroups/RG/providers/Microsoft.Cdn/profiles/profile1/endpoints/endpoint1",
+        "type": "Microsoft.Cdn/profiles/endpoints",
+        "tags": {
+          "kay1": "value1"
+        },
+        "location": "WestUs",
+        "properties": {
+          "hostName": "endpoint4899.azureedge-test.net",
+          "originHostHeader": "www.bing.com",
+          "provisioningState": "Creating",
+          "resourceState": "Creating",
+          "isHttpAllowed": true,
+          "isHttpsAllowed": true,
+          "queryStringCachingBehavior": "BypassCaching",
+          "originPath": "/photos",
+          "origins": [
+            {
+              "name": "origin1",
+              "properties": {
+                "hostName": "host1.hello.com",
+                "httpPort": null,
+                "httpsPort": null
+              }
+            }
+          ],
+          "contentTypesToCompress": [
+            "text/html",
+            "application/octet-stream"
+          ],
+          "isCompressionEnabled": true,
+          "optimizationType": null,
+          "probePath": null,
+          "geoFilters": [],
+          "deliveryPolicy": {
+            "description": "Test description for a policy.",
+            "rules": [
+              {
+                "name": "rule1",
+                "order": 1,
+                "conditions": [
+                  {
+                    "name": "RemoteAddress",
+                    "parameters": {
+                      "@odata.type": "#Microsoft.Azure.Cdn.Models.DeliveryRuleRemoteAddressConditionParameters",
+                      "operator": "IPMatch",
+                      "negateCondition": true,
+                      "matchValues": [
+                        "192.168.1.0/24",
+                        "10.0.0.0/24"
+                      ],
+                      "transforms": []
+                    }
+                  }
+                ],
+                "actions": [
+                  {
+                    "name": "CacheExpiration",
+                    "parameters": {
+                      "@odata.type": "#Microsoft.Azure.Cdn.Models.DeliveryRuleCacheExpirationActionParameters",
+                      "cacheBehavior": "Override",
+                      "cacheDuration": "10:10:09",
+                      "cacheType": "All"
+                    }
+                  },
+                  {
+                    "name": "ModifyResponseHeader",
+                    "parameters": {
+                      "@odata.type": "#Microsoft.Azure.Cdn.Models.DeliveryRuleHeaderActionParameters",
+                      "headerAction": "Overwrite",
+                      "headerName": "Access-Control-Allow-Origin",
+                      "value": "*"
+                    }
+                  },
+                  {
+                    "name": "ModifyRequestHeader",
+                    "parameters": {
+                      "@odata.type": "#Microsoft.Azure.Cdn.Models.DeliveryRuleHeaderActionParameters",
+                      "headerAction": "Overwrite",
+                      "headerName": "Accept-Encoding",
+                      "value": "gzip"
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "webApplicationFirewallPolicyLink": {
+            "id": "/subscriptions/subid/resourceGroups/RG/providers/Microsoft.Cdn/CdnWebApplicationFirewallPolicies/cdnWafPolicy1"
+          }
+        }
+      }
+    },
+    "202": {
+      "body": {
+        "name": "endpoint4899",
+        "id": "/subscriptions/subid/resourcegroups/RG/providers/Microsoft.Cdn/profiles/profile1/endpoints/endpoint1",
+        "type": "Microsoft.Cdn/profiles/endpoints",
+        "tags": {
+          "kay1": "value1"
+        },
+        "location": "WestUs",
+        "properties": {
+          "hostName": "endpoint4899.azureedge-test.net",
+          "originHostHeader": "www.bing.com",
+          "provisioningState": "Creating",
+          "resourceState": "Creating",
+          "isHttpAllowed": true,
+          "isHttpsAllowed": true,
+          "queryStringCachingBehavior": "BypassCaching",
+          "originPath": "/photos",
+          "origins": [
+            {
+              "name": "origin1",
+              "properties": {
+                "hostName": "host1.hello.com",
+                "httpPort": null,
+                "httpsPort": null
+              }
+            }
+          ],
+          "contentTypesToCompress": [
+            "text/html",
+            "application/octet-stream"
+          ],
+          "isCompressionEnabled": true,
+          "optimizationType": null,
+          "probePath": null,
+          "geoFilters": [],
+          "deliveryPolicy": {
+            "description": "Test description for a policy.",
+            "rules": [
+              {
+                "name": "rule1",
+                "order": 1,
+                "conditions": [
+                  {
+                    "name": "RemoteAddress",
+                    "parameters": {
+                      "@odata.type": "#Microsoft.Azure.Cdn.Models.DeliveryRuleRemoteAddressConditionParameters",
+                      "operator": "IPMatch",
+                      "negateCondition": true,
+                      "matchValues": [
+                        "192.168.1.0/24",
+                        "10.0.0.0/24"
+                      ],
+                      "transforms": []
+                    }
+                  }
+                ],
+                "actions": [
+                  {
+                    "name": "CacheExpiration",
+                    "parameters": {
+                      "@odata.type": "#Microsoft.Azure.Cdn.Models.DeliveryRuleCacheExpirationActionParameters",
+                      "cacheBehavior": "Override",
+                      "cacheDuration": "10:10:09",
+                      "cacheType": "All"
+                    }
+                  },
+                  {
+                    "name": "ModifyResponseHeader",
+                    "parameters": {
+                      "@odata.type": "#Microsoft.Azure.Cdn.Models.DeliveryRuleHeaderActionParameters",
+                      "headerAction": "Overwrite",
+                      "headerName": "Access-Control-Allow-Origin",
+                      "value": "*"
+                    }
+                  },
+                  {
+                    "name": "ModifyRequestHeader",
+                    "parameters": {
+                      "@odata.type": "#Microsoft.Azure.Cdn.Models.DeliveryRuleHeaderActionParameters",
+                      "headerAction": "Overwrite",
+                      "headerName": "Accept-Encoding",
+                      "value": "gzip"
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "webApplicationFirewallPolicyLink": {
+            "id": "/subscriptions/subid/resourceGroups/RG/providers/Microsoft.Cdn/CdnWebApplicationFirewallPolicies/cdnWafPolicy1"
+          }
+        }
+      }
+    }
+  }
+}

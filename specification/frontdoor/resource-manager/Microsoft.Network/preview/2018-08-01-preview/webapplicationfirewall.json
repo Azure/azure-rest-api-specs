@@ -238,7 +238,7 @@
           "Delete protection policy": {
             "$ref": "./examples/WafPolicyDelete.json"
           }
-        },        
+        },
         "x-ms-long-running-operation": true
       }
     }
@@ -323,7 +323,7 @@
       "description": "Defines contents of a web application firewall global configuration",
       "properties": {
         "enabledState": {
-          "description": "describes if the policy is in enabled state or disabled state", 
+          "description": "describes if the policy is in enabled state or disabled state",
           "type": "string",
           "enum": [
             "Disabled",
@@ -332,7 +332,7 @@
           "x-ms-enum": {
             "name": "enabledState",
             "modelAsString": true
-          }          
+          }
         },
         "mode": {
           "description": "Describes if it is in detection mode  or prevention mode at policy level",
@@ -362,12 +362,12 @@
     },
     "CustomRule": {
       "description": "Defines contents of a web application rule",
-      "required": [  
-        "priority",  
-        "ruleType",  
-        "matchConditions",  
-        "action"  
-      ], 	  
+      "required": [
+        "priority",
+        "ruleType",
+        "matchConditions",
+        "action"
+      ],
       "properties": {
         "name": {
           "type": "string",
@@ -378,11 +378,11 @@
           "type": "string",
           "readOnly": true,
           "description": "Gets a unique read-only string that changes whenever the resource is updated."
-        },        
+        },
         "priority": {
           "description": "Describes priority of the rule. Rules with a lower value will be evaluated before rules with a higher value",
           "type": "integer"
-        },        
+        },
         "ruleType": {
           "description": "Describes type of rule",
           "type": "string",
@@ -451,9 +451,9 @@
     },
     "MatchCondition": {
       "description": "Define match conditions",
-      "required": [  
-        "matchVariable",  
-        "operator", 
+      "required": [
+        "matchVariable",
+        "operator",
         "matchValue"
       ],
       "properties": {
@@ -571,7 +571,7 @@
       "required": [
         "ruleGroupOverride",
         "action"
-      ], 
+      ],
       "properties": {
         "ruleGroupOverride": {
           "description": "Describes override rule group",

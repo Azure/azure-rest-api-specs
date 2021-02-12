@@ -3,7 +3,7 @@
     "api-version": "2018-12-01-preview",
     "billingAccountId": "70664866",
     "enrollmentAccountId": "456",
-    "parameters":{
+    "parameters": {
       "type": "Usage",
       "timeframe": "Custom",
       "timePeriod": {
@@ -11,35 +11,35 @@
         "to": "2018-10-31T00:00:00.000Z"
       },
       "dataset": {
-        "granularity": "Daily",               
-        "filter":{
-          "or":[
+        "granularity": "Daily",
+        "filter": {
+          "or": [
             {
               "dimension": {
-              "name": "SubscriptionName",
-              "operator": "In",
-              "values": [
-                "Azure Dev Subscription",
-                "Azure Prod Subscription",
-                "Azure PPE Subscription"
-               ]
+                "name": "SubscriptionName",
+                "operator": "In",
+                "values": [
+                  "Azure Dev Subscription",
+                  "Azure Prod Subscription",
+                  "Azure PPE Subscription"
+                ]
               }
             },
             {
-             "tag": {
-             "name": "Environment",
-             "operator": "In",
-              "values": [
-               "Dev",
-               "PPE",
-               "Prod"
-              ]
+              "tag": {
+                "name": "Environment",
+                "operator": "In",
+                "values": [
+                  "Dev",
+                  "PPE",
+                  "Prod"
+                ]
               }
             }
           ]
-        }                 
+        }
       }
-    }    
+    }
   },
   "responses": {
     "200": {

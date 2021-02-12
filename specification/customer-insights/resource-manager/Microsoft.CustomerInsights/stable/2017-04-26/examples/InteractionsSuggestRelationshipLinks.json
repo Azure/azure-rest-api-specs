@@ -1,40 +1,50 @@
 {
-	"parameters": {
-		"hubName": "sdkTestHub",
-		"resourceGroupName": "TestHubRG",
-		"interactionName": "Deposit",
-		"api-version": "2017-01-01",
-		"subscriptionId": "subid"
-	},
-	"responses": {
-		"200": {
-			"body": {
-				"interactionName": "Deposit",
-				"suggestedRelationships": [{
-					"profileName": "Branch",
-					"profilePropertyReferences": [{
-						"interactionPropertyName": "BranchId",
-						"profilePropertyName": "BranchId"
-					}],
-					"relatedProfileName": "Contact",
-					"relatedProfilePropertyReferences": [{
-						"interactionPropertyName": "ContactId",
-						"profilePropertyName": "ContactId"
-					}]
-				},
-				{
-					"profileName": "Contact",
-					"profilePropertyReferences": [{
-						"interactionPropertyName": "ContactId",
-						"profilePropertyName": "ContactId"
-					}],
-					"relatedProfileName": "Branch",
-					"relatedProfilePropertyReferences": [{
-						"interactionPropertyName": "BranchId",
-						"profilePropertyName": "BranchId"
-					}]
-				}]
-			}
-		}
-	}
+  "parameters": {
+    "hubName": "sdkTestHub",
+    "resourceGroupName": "TestHubRG",
+    "interactionName": "Deposit",
+    "api-version": "2017-01-01",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "interactionName": "Deposit",
+        "suggestedRelationships": [
+          {
+            "profileName": "Branch",
+            "profilePropertyReferences": [
+              {
+                "interactionPropertyName": "BranchId",
+                "profilePropertyName": "BranchId"
+              }
+            ],
+            "relatedProfileName": "Contact",
+            "relatedProfilePropertyReferences": [
+              {
+                "interactionPropertyName": "ContactId",
+                "profilePropertyName": "ContactId"
+              }
+            ]
+          },
+          {
+            "profileName": "Contact",
+            "profilePropertyReferences": [
+              {
+                "interactionPropertyName": "ContactId",
+                "profilePropertyName": "ContactId"
+              }
+            ],
+            "relatedProfileName": "Branch",
+            "relatedProfilePropertyReferences": [
+              {
+                "interactionPropertyName": "BranchId",
+                "profilePropertyName": "BranchId"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  }
 }

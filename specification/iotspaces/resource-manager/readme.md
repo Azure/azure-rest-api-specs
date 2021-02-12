@@ -21,7 +21,7 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 ``` yaml $(tag) == 'package-2017-10-preview' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.iotspacesservice.v2017_10_01_preview
-  output-folder: $(azure-libraries-for-java-folder)/iotspacesservice/resource-manager/v2017_10_01_preview
+  output-folder: $(azure-libraries-for-java-folder)/sdk/iotspacesservice/mgmt-v2017_10_01_preview
 regenerate-manager: true
 generate-interface: true
 ```
@@ -69,9 +69,13 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
+  - repo: azure-sdk-for-net
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
+  - repo: azure-resource-manager-schemas
+    after_scripts:
+      - node sdkauto_afterscript.js iotspaces/resource-manager
 ```
 
 ## CSharp Settings
@@ -85,10 +89,15 @@ csharp:
   license-header: MICROSOFT_MIT_NO_VERSION
   namespace: Microsoft.Azure.Management.IoTSpaces
   payload-flattening-threshold: 1
-  output-folder: $(csharp-sdks-folder)/IoTSpaces/Management.IoTSpaces/Generated
+  output-folder: $(csharp-sdks-folder)/iotspaces/Microsoft.Azure.Management.IoTSpaces/src/Generated
   clear-output-folder: true
 ```
 
 ## Go
 
 See configuration in [readme.go.md](./readme.go.md)
+
+## AzureResourceSchema
+
+See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
+

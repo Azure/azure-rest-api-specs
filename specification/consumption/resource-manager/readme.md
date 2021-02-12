@@ -26,18 +26,63 @@ These are the global settings for the Consumption API.
 
 ``` yaml
 openapi-type: arm
-tag: package-preview-2018-11
+tag: package-2019-10
 ```
 
+
+### Tag: package-2019-10
+
+These settings apply only when `--tag=package-2019-10` is specified on the command line.
+
+```yaml $(tag) == 'package-2019-10'
+input-file:
+  - Microsoft.Consumption/stable/2019-10-01/consumption.json
+```
+### Tag: package-2019-06
+
+These settings apply only when `--tag=package-2019-06` is specified on the command line.
+
+``` yaml $(tag) == 'package-2019-06'
+input-file:
+  - Microsoft.Consumption/stable/2019-06-01/consumption.json
+```
+
+### Tag: package-2019-05
+
+These settings apply only when `--tag=package-2019-05` is specified on the command line.
+
+``` yaml $(tag) == 'package-2019-05'
+input-file:
+  - Microsoft.Consumption/stable/2019-05-01/consumption.json
+```
+
+### Tag: package-preview-2019-05
+
+These settings apply only when `--tag=package-preview-2019-05` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2019-05'
+input-file:
+  - Microsoft.Consumption/preview/2019-05-01-preview/consumption.json
+```
+
+### Tag: package-preview-2019-04
+
+These settings apply only when `--tag=package-preview-2019-04` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2019-04'
+input-file:
+  - Microsoft.Consumption/preview/2019-04-01-preview/consumption.json
+```
 
 ### Tag: package-preview-2018-11
 
 These settings apply only when `--tag=package-preview-2018-11` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2018-11'
+``` yaml $(tag) == 'package-preview-2018-11'
 input-file:
   - Microsoft.Consumption/preview/2018-11-01-preview/consumption.json
 ```
+
 ### Tag: package-2019-01
 
 These settings apply only when `--tag=package-2019-01` is specified on the command line.
@@ -165,14 +210,19 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
+  - repo: azure-sdk-for-net
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-python
+  - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
   - repo: azure-sdk-for-ruby
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_consumption']
+  - repo: azure-resource-manager-schemas
+    after_scripts:
+      - node sdkauto_afterscript.js consumption/resource-manager
 ```
 
 ## C#
@@ -185,38 +235,8 @@ csharp:
   azure-arm: true
   license-header: MICROSOFT_MIT_NO_VERSION
   namespace: Microsoft.Azure.Management.Consumption
-  output-folder: $(csharp-sdks-folder)/Consumption/Management.Consumption/Generated
+  output-folder: $(csharp-sdks-folder)/consumption/Microsoft.Azure.Management.Consumption/src/Generated
   clear-output-folder: true
-```
-
-## Python
-
-These settings apply only when `--python` is specified on the command line.
-Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
-Use `--python-mode=update` if you already have a setup.py and just want to update the code itself.
-
-``` yaml $(python)
-python-mode: create
-python:
-  azure-arm: true
-  license-header: MICROSOFT_MIT_NO_VERSION
-  payload-flattening-threshold: 2
-  namespace: azure.mgmt.consumption
-  package-name: azure-mgmt-consumption
-  package-version: 1.2.0
-  clear-output-folder: true
-```
-
-``` yaml $(python) && $(python-mode) == 'update'
-python:
-  no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-consumption/azure/mgmt/consumption
-```
-
-``` yaml $(python) && $(python-mode) == 'create'
-python:
-  basic-setup-py: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-consumption
 ```
 
 ## Java
@@ -256,7 +276,7 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 ``` yaml $(tag) == 'package-2017-04-preview' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.consumption.v2017_04_24_preview
-  output-folder: $(azure-libraries-for-java-folder)/consumption/resource-manager/v2017_04_24_preview
+  output-folder: $(azure-libraries-for-java-folder)/sdk/consumption/mgmt-v2017_04_24_preview
 regenerate-manager: true
 generate-interface: true
 ```
@@ -269,7 +289,7 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 ``` yaml $(tag) == 'package-2017-11' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.consumption.v2017_11_30
-  output-folder: $(azure-libraries-for-java-folder)/consumption/resource-manager/v2017_11_30
+  output-folder: $(azure-libraries-for-java-folder)/sdk/consumption/mgmt-v2017_11_30
 regenerate-manager: true
 generate-interface: true
 ```
@@ -282,7 +302,7 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 ``` yaml $(tag) == 'package-2018-01' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.consumption.v2018_01_31
-  output-folder: $(azure-libraries-for-java-folder)/consumption/resource-manager/v2018_01_31
+  output-folder: $(azure-libraries-for-java-folder)/sdk/consumption/mgmt-v2018_01_31
 regenerate-manager: true
 generate-interface: true
 ```
@@ -295,15 +315,15 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 ``` yaml $(tag) == 'package-2018-03' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.consumption.v2018_03_31
-  output-folder: $(azure-libraries-for-java-folder)/consumption/resource-manager/v2018_03_31
+  output-folder: $(azure-libraries-for-java-folder)/sdk/consumption/mgmt-v2018_03_31
 regenerate-manager: true
 generate-interface: true
-directive: 
- - rename-model: 
-     from: CostTags 
+directive:
+ - rename-model:
+     from: CostTags
      to: CostTagsModel
  - rename-model:
-     from: Tags 
+     from: Tags
      to: TagsModel
  - rename-model:
      from: ReservationRecommendations
@@ -318,7 +338,7 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 ``` yaml $(tag) == 'package-2017-12-preview' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.consumption.v2017_12_30_preview
-  output-folder: $(azure-libraries-for-java-folder)/consumption/resource-manager/v2017_12_30_preview
+  output-folder: $(azure-libraries-for-java-folder)/sdk/consumption/mgmt-v2017_12_30_preview
 regenerate-manager: true
 generate-interface: true
 ```
@@ -331,7 +351,7 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 ``` yaml $(tag) == 'package-2018-05' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.consumption.v2018_05_31
-  output-folder: $(azure-libraries-for-java-folder)/consumption/resource-manager/v2018_05_31
+  output-folder: $(azure-libraries-for-java-folder)/sdk/consumption/mgmt-v2018_05_31
 regenerate-manager: true
 generate-interface: true
 ```
@@ -344,7 +364,7 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 ``` yaml $(tag) == 'package-2018-06' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.consumption.v2018_06_30
-  output-folder: $(azure-libraries-for-java-folder)/consumption/resource-manager/v2018_06_30
+  output-folder: $(azure-libraries-for-java-folder)/sdk/consumption/mgmt-v2018_06_30
 regenerate-manager: true
 generate-interface: true
 ```
@@ -357,7 +377,7 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 ``` yaml $(tag) == 'package-2018-08' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.consumption.v2018_08_31
-  output-folder: $(azure-libraries-for-java-folder)/consumption/resource-manager/v2018_08_31
+  output-folder: $(azure-libraries-for-java-folder)/sdk/consumption/mgmt-v2018_08_31
 regenerate-manager: true
 generate-interface: true
 ```
@@ -370,7 +390,7 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 ``` yaml $(tag) == 'package-2018-10' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.consumption.v2018_10_01
-  output-folder: $(azure-libraries-for-java-folder)/consumption/resource-manager/v2018_10_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/consumption/mgmt-v2018_10_01
 regenerate-manager: true
 generate-interface: true
 ```
@@ -383,7 +403,15 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 ``` yaml $(tag) == 'package-2019-01' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.consumption.v2019_01_01
-  output-folder: $(azure-libraries-for-java-folder)/consumption/resource-manager/v2019_01_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/consumption/mgmt-v2019_01_01
 regenerate-manager: true
 generate-interface: true
 ```
+
+## AzureResourceSchema
+
+See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
+
+## Python
+
+See configuration in [readme.python.md](./readme.python.md)

@@ -1,0 +1,196 @@
+{
+  "parameters": {
+    "api-version": "2019-04-30",
+    "subscriptionId": "subid1",
+    "resourceGroupName": "rg1",
+    "resourceName": "clustername1",
+    "parameters": {
+      "location": "location1",
+      "tags": {
+        "tier": "production",
+        "archv2": ""
+      },
+      "properties": {
+        "openShiftVersion": "v3.11",
+        "networkProfile": {
+          "vnetCidr": "10.0.0.0/8"
+        },
+        "masterPoolProfile": {
+          "name": "master",
+          "count": 3,
+          "vmSize": "Standard_D4s_v3",
+          "osType": "Linux",
+          "subnetCidr": "10.0.0.0/24"
+        },
+        "agentPoolProfiles": [
+          {
+            "name": "infra",
+            "role": "infra",
+            "count": 2,
+            "vmSize": "Standard_D4s_v3",
+            "osType": "Linux",
+            "subnetCidr": "10.0.0.0/24"
+          },
+          {
+            "name": "compute",
+            "role": "compute",
+            "count": 4,
+            "vmSize": "Standard_D4s_v3",
+            "osType": "Linux",
+            "subnetCidr": "10.0.0.0/24"
+          }
+        ],
+        "routerProfiles": [
+          {
+            "name": "default"
+          }
+        ],
+        "authProfile": {
+          "identityProviders": [
+            {
+              "name": "Azure AD",
+              "provider": {
+                "kind": "AADIdentityProvider",
+                "clientId": "clientId",
+                "secret": "secret",
+                "tenantId": "tenantId",
+                "customerAdminGroupId": "customerAdminGroupId"
+              }
+            }
+          ]
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/subid1/resourcegroups/rg1/providers/Microsoft.ContainerService/openShiftManagedClusters/clustername1",
+        "location": "location1",
+        "name": "clustername1",
+        "tags": {
+          "archv2": "",
+          "tier": "production"
+        },
+        "type": "Microsoft.ContainerService/OpenShiftManagedClusters",
+        "properties": {
+          "provisioningState": "Updating",
+          "openShiftVersion": "v3.11",
+          "clusterVersion": "osa.1",
+          "fqdn": "df9337748a4b.location1.cloudapp.azure.com",
+          "publicHostname": "openshift.1225bdf9337748a4bd3a.location1.azmosa.io",
+          "networkProfile": {
+            "vnetCidr": "10.0.0.0/8"
+          },
+          "masterPoolProfile": {
+            "count": 3,
+            "vmSize": "Standard_D4s_v3",
+            "subnetCidr": "10.0.0.0/24"
+          },
+          "agentPoolProfiles": [
+            {
+              "name": "infra",
+              "role": "infra",
+              "count": 2,
+              "vmSize": "Standard_D4s_v3",
+              "osType": "Linux",
+              "subnetCidr": "10.0.0.0/24"
+            },
+            {
+              "name": "compute",
+              "role": "compute",
+              "count": 4,
+              "vmSize": "Standard_D4s_v3",
+              "osType": "Linux",
+              "subnetCidr": "10.0.0.0/24"
+            }
+          ],
+          "routerProfiles": [
+            {
+              "name": "default",
+              "fqdn": "osa2925bdf9337748f4bd3b.location1.cloudapp.azure.com",
+              "publicSubdomain": "apps.bc309ee87c164153871c.location1.azmosa.io"
+            }
+          ],
+          "authProfile": {
+            "identityProviders": [
+              {
+                "name": "Azure AD",
+                "provider": {
+                  "kind": "AADIdentityProvider",
+                  "clientId": "clientId",
+                  "tenantId": "tenantId",
+                  "customerAdminGroupId": "customerAdminGroupId"
+                }
+              }
+            ]
+          }
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/subid1/resourcegroups/rg1/providers/Microsoft.ContainerService/openShiftManagedClusters/clustername1",
+        "location": "location1",
+        "name": "clustername1",
+        "tags": {
+          "archv2": "",
+          "tier": "production"
+        },
+        "type": "Microsoft.ContainerService/OpenShiftManagedClusters",
+        "properties": {
+          "provisioningState": "Creating",
+          "openShiftVersion": "v3.11",
+          "clusterVersion": "osa.1",
+          "fqdn": "df9337748a4b.location1.cloudapp.azure.com",
+          "networkProfile": {
+            "vnetCidr": "10.0.0.0/8"
+          },
+          "masterPoolProfile": {
+            "name": "master",
+            "count": 3,
+            "vmSize": "Standard_D4s_v3",
+            "osType": "Linux",
+            "subnetCidr": "10.0.0.0/24"
+          },
+          "agentPoolProfiles": [
+            {
+              "name": "infra",
+              "role": "infra",
+              "count": 2,
+              "vmSize": "Standard_D4s_v3",
+              "osType": "Linux",
+              "subnetCidr": "10.0.0.0/24"
+            },
+            {
+              "name": "compute",
+              "role": "compute",
+              "count": 4,
+              "vmSize": "Standard_D4s_v3",
+              "osType": "Linux",
+              "subnetCidr": "10.0.0.0/24"
+            }
+          ],
+          "routerProfiles": [
+            {
+              "name": "default"
+            }
+          ],
+          "authProfile": {
+            "identityProviders": [
+              {
+                "name": "Azure AD",
+                "provider": {
+                  "kind": "AADIdentityProvider",
+                  "clientId": "clientId",
+                  "tenantId": "tenantId",
+                  "customerAdminGroupId": "customerAdminGroupId"
+                }
+              }
+            ]
+          }
+        }
+      }
+    }
+  }
+}

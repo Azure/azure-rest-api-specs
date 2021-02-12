@@ -39,6 +39,26 @@ input-file:
     - Microsoft.AzureBridge.Admin/preview/2016-01-01/Activation.json
 ```
 
+## Suppression
+``` yaml
+directive:
+  - suppress: RequiredPropertiesMissingInResourceModel
+    from: Activation.json
+    where: $.definitions.ActivationResource
+  - suppress: RequiredPropertiesMissingInResourceModel
+    from: AzureBridge.json
+    where: $.definitions.DownloadedProductResource
+  - suppress: RequiredPropertiesMissingInResourceModel
+    from: Product.json
+    where: $.definitions.ProductResource
+  - suppress: PathResourceProviderNamePascalCase
+    from: Activation.json
+  - suppress: PathResourceProviderNamePascalCase
+    from: DownloadedProduct.json
+  - suppress: PathResourceProviderNamePascalCase
+    from: Product.json
+```
+
 ---
 # Code Generation
 
@@ -52,4 +72,16 @@ csharp:
   payload-flattening-threshold: 1
   output-folder: $(csharp-sdks-folder)/Generated
   clear-output-folder: true
+```
+
+# AutoRest v3 generators
+
+> see https://aka.ms/autorest
+
+``` yaml
+input-file:
+  - Microsoft.AzureBridge.Admin/preview/2016-01-01/AzureBridge.json
+  - Microsoft.AzureBridge.Admin/preview/2016-01-01/DownloadedProduct.json
+  - Microsoft.AzureBridge.Admin/preview/2016-01-01/Product.json
+  - Microsoft.AzureBridge.Admin/preview/2016-01-01/Activation.json
 ```

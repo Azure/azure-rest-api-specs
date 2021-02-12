@@ -1,30 +1,29 @@
 {
-    "parameters": {
-      "api-version": "2018-11-01",
-      "subscriptionId": "300de4e3-b973-4d69-8b57-da07971b4280"
-    },
-    "responses": {
-      "200": {
-        "body": {
-          "value": {
-            "id": "/subscriptions/300de4e3-b973-4d69-8b57-da07971b4280/providers/Microsoft.Billing/billingProperty",
-            "name": "300de4e3-b973-4d69-8b57-da07971b4280",
-            "type": "Microsoft.Billing/BillingProperty",
-            "properties": {
-              "productId": "providers/Microsoft.Billing/billingAccounts/ec4e5646-246e-47db-936e-34b91bf3e7d4/invoiceSections/c8c5a313-35d3-44fd-a41b-3629b71a3d1a/products/56bab771-3a48-45c9-a675-3e70fbd82874",
-              "productName": "AssetSummaryDescription",
-              "billingTenantId": "97d90bbc-69ce-4e8b-bf18-a2d439079d15",
-              "billingAccountId": "providers/Microsoft.Billing/billingAccounts/ec4e5646-246e-47db-936e-34b91bf3e7d4",
-              "billingAccountName": "My Account",
-              "invoiceSectionId": "providers/Microsoft.Billing/billingAccounts/ec4e5646-246e-47db-936e-34b91bf3e7d4/invoiceSections/c8c5a313-35d3-44fd-a41b-3629b71a3d1a",
-              "invoiceSectionName": "Contoso operations invoice section",
-              "billingProfileId": "providers/Microsoft.Billing/billingAccounts/ec4e5646-246e-47db-936e-34b91bf3e7d4/billingProfiles/b1f996ea-d439-4e63-a8c6-2f9c86c7eafb",
-              "billingProfileName": "Contoso operations billing",
-              "skuId": "0001",
-              "skuDescription": "Microsoft Azure Standard"
-            }
-          }
+  "parameters": {
+    "api-version": "2018-11-01-preview",
+    "subscriptionId": "{subscriptionId}"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/{subscriptionId}/providers/Microsoft.Billing/billingProperty/default",
+        "name": "default",
+        "type": "Microsoft.Billing/billingProperty",
+        "properties": {
+          "billingTenantId": "90000000-0000-0000-0000-000000000011",
+          "billingAccountId": "/providers/Microsoft.Billing/billingAccounts/00000000-0000-0000-0000-000000000000",
+          "billingAccountName": "My Account",
+          "billingProfileId": "/providers/Microsoft.Billing/billingAccounts/00000000-0000-0000-0000-000000000000/billingProfiles/11000000-0000-0000-0000-000000000000",
+          "billingProfileName": "Contoso operations billing",
+          "costCenter": "1010",
+          "invoiceSectionId": "/providers/Microsoft.Billing/billingAccounts/00000000-0000-0000-0000-000000000000/invoiceSections/22000000-0000-0000-0000-000000000000",
+          "invoiceSectionName": "Contoso operations invoice section",
+          "productId": "/providers/Microsoft.Billing/billingAccounts/00000000-0000-0000-0000-000000000000/invoiceSections/22000000-0000-0000-0000-000000000000/products/44000000-0000-0000-0000-000000000000",
+          "productName": "Standard Dev",
+          "skuId": "0001",
+          "skuDescription": "Microsoft Azure Standard"
         }
       }
     }
   }
+}

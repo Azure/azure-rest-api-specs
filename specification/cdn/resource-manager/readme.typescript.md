@@ -9,6 +9,7 @@ typescript:
   license-header: MICROSOFT_MIT_NO_VERSION
   payload-flattening-threshold: 2
   package-name: "@azure/arm-cdn"
-  output-folder: "$(typescript-sdks-folder)/packages/@azure/arm-cdn"
+  output-folder: "$(typescript-sdks-folder)/sdk/cdn/arm-cdn"
+  clear-output-folder: true
   generate-metadata: true
 ```

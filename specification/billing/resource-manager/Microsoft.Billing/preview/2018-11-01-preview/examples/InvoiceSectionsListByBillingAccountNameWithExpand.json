@@ -1,7 +1,7 @@
 {
   "parameters": {
     "api-version": "2018-11-01-preview",
-    "billingAccountId": "{billingAccountId}",
+    "billingAccountName": "{billingAccountName}",
     "$expand": "billingProfiles"
   },
   "responses": {
@@ -9,33 +9,30 @@
       "body": {
         "value": [
           {
-            "id": "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/invoiceSections/invoiceSectionId1",
-            "name": "invoiceSectionId1",
+            "id": "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/invoiceSections/22000000-0000-0000-0000-000000000000",
+            "name": "22000000-0000-0000-0000-000000000000",
             "type": "Microsoft.Billing/invoiceSections",
             "properties": {
-              "displayName": "invoiceSectionName1",
+              "displayName": "invoiceSection1",
               "billingProfiles": [
                 {
-                  "id": "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/BillingProfileId1",
-                  "name": "BillingProfileId1",
+                  "id": "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/11000000-0000-0000-0000-000000000000",
+                  "name": "11000000-0000-0000-0000-000000000000",
                   "type": "Microsoft.Billing/billingProfiles",
                   "properties": {
-                    "displayName": "BillingProfileName1",
-                    "poNumber": "ABC12345",
-                    "billingAddress": {
-                      "AddressLine1": "Test Address",
-                      "AddressLine2": "Test Address",
-                      "AddressLine3": "Test Address",
-                      "City": "City",
-                      "PostalCode": "00000",
-                      "Region": "WA",
-                      "Country": "US",
-                      "PhoneNumber": "000-000-0000"
+                    "displayName": "BillingProfile1",
+                    "address": {
+                      "companyName": "Contoso",
+                      "firstName": "Test",
+                      "lastName": "User",
+                      "addressLine1": "Test Address1",
+                      "addressLine2": "Test Address2",
+                      "addressLine3": "Test Address3",
+                      "city": "City",
+                      "postalCode": "00000",
+                      "region": "WA",
+                      "country": "US"
                     },
-                    "billingContact": "ronald@contoso.com",
-                    "emailInvoice": true,
-                    "isClassic": false,
-                    "invoiceDay": "5th of the month",
                     "currency": "USD",
                     "enabledAzureSKUs": [
                       {
@@ -46,30 +43,31 @@
                         "skuId": "0002",
                         "skuDescription": "Microsoft Azure Standard"
                       }
-                    ]
+                    ],
+                    "isClassic": false,
+                    "invoiceDay": 5,
+                    "invoiceEmailOptIn": true,
+                    "poNumber": "ABC12345"
                   }
                 },
                 {
-                  "id": "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/BillingProfileId2",
-                  "name": "BillingProfileId2",
+                  "id": "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/11000000-0000-0000-0000-000000000001",
+                  "name": "11000000-0000-0000-0000-000000000001",
                   "type": "Microsoft.Billing/billingProfiles",
                   "properties": {
-                    "displayName": "BillingProfileName2",
-                    "poNumber": "ABC12345",
-                    "billingAddress": {
-                      "AddressLine1": "Test Address",
-                      "AddressLine2": "Test Address",
-                      "AddressLine3": "Test Address",
-                      "City": "City",
-                      "PostalCode": "00000",
-                      "Region": "WA",
-                      "Country": "US",
-                      "PhoneNumber": "000-000-0000"
+                    "displayName": "BillingProfile2",
+                    "address": {
+                      "companyName": "Contoso",
+                      "firstName": "Test",
+                      "lastName": "User",
+                      "addressLine1": "Test Address1",
+                      "addressLine2": "Test Address2",
+                      "addressLine3": "Test Address3",
+                      "city": "City",
+                      "postalCode": "00000",
+                      "region": "WA",
+                      "country": "US"
                     },
-                    "billingContact": "ronald@contoso.com",
-                    "emailInvoice": true,
-                    "isClassic": false,
-                    "invoiceDay": "5th of the month",
                     "currency": "USD",
                     "enabledAzureSKUs": [
                       {
@@ -80,40 +78,41 @@
                         "skuId": "0002",
                         "skuDescription": "Microsoft Azure Standard"
                       }
-                    ]
+                    ],
+                    "isClassic": false,
+                    "invoiceDay": 5,
+                    "invoiceEmailOptIn": true,
+                    "poNumber": "ABC12345"
                   }
                 }
               ]
             }
           },
           {
-            "id": "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/invoiceSections/invoiceSectionId2",
-            "name": "invoiceSectionId2",
+            "id": "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/invoiceSections/22000000-0000-0000-0000-000000000011",
+            "name": "22000000-0000-0000-0000-000000000011",
             "type": "Microsoft.Billing/invoiceSections",
             "properties": {
-              "displayName": "invoiceSectionName2",
+              "displayName": "invoiceSection2",
               "billingProfiles": [
                 {
-                  "id": "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/BillingProfileId3",
-                  "name": "BillingProfileId3",
+                  "id": "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/11000000-0000-0000-0000-000000000004",
+                  "name": "11000000-0000-0000-0000-000000000004",
                   "type": "Microsoft.Billing/billingProfiles",
                   "properties": {
-                    "displayName": "BillingProfileName3",
-                    "poNumber": "ABC12345",
-                    "billingAddress": {
-                      "AddressLine1": "Test Address",
-                      "AddressLine2": "Test Address",
-                      "AddressLine3": "Test Address",
-                      "City": "City",
-                      "PostalCode": "00000",
-                      "Region": "WA",
-                      "Country": "US",
-                      "PhoneNumber": "000-000-0000"
+                    "displayName": "BillingProfile3",
+                    "address": {
+                      "companyName": "Contoso Test",
+                      "firstName": "Test",
+                      "lastName": "User",
+                      "addressLine1": "Test Address1",
+                      "addressLine2": "Test Address2",
+                      "addressLine3": "Test Address3",
+                      "city": "City",
+                      "postalCode": "00000",
+                      "region": "WA",
+                      "country": "US"
                     },
-                    "billingContact": "ronald@contoso.com",
-                    "emailInvoice": true,
-                    "isClassic": false,
-                    "invoiceDay": "5th of the month",
                     "currency": "USD",
                     "enabledAzureSKUs": [
                       {
@@ -124,30 +123,31 @@
                         "skuId": "0002",
                         "skuDescription": "Microsoft Azure Standard"
                       }
-                    ]
+                    ],
+                    "isClassic": false,
+                    "invoiceDay": 5,
+                    "invoiceEmailOptIn": true,
+                    "poNumber": "ABC12345"
                   }
                 },
                 {
-                  "id": "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/BillingProfileId4",
-                  "name": "BillingProfileId4",
+                  "id": "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/11000000-0000-0000-0000-000000000005",
+                  "name": "11000000-0000-0000-0000-000000000005",
                   "type": "Microsoft.Billing/billingProfiles",
                   "properties": {
-                    "displayName": "BillingProfileName4",
-                    "poNumber": "ABC12345",
-                    "billingAddress": {
-                      "AddressLine1": "Test Address",
-                      "AddressLine2": "Test Address",
-                      "AddressLine3": "Test Address",
-                      "City": "City",
-                      "PostalCode": "00000",
-                      "Region": "WA",
-                      "Country": "US",
-                      "PhoneNumber": "000-000-0000"
+                    "displayName": "BillingProfile4",
+                    "address": {
+                      "companyName": "Contoso Test",
+                      "firstName": "Test",
+                      "lastName": "User",
+                      "addressLine1": "Test Address1",
+                      "addressLine2": "Test Address2",
+                      "addressLine3": "Test Address3",
+                      "city": "City",
+                      "postalCode": "00000",
+                      "region": "WA",
+                      "country": "US"
                     },
-                    "billingContact": "ronald@contoso.com",
-                    "emailInvoice": true,
-                    "isClassic": false,
-                    "invoiceDay": "5th of the month",
                     "currency": "USD",
                     "enabledAzureSKUs": [
                       {
@@ -158,7 +158,11 @@
                         "skuId": "0002",
                         "skuDescription": "Microsoft Azure Standard"
                       }
-                    ]
+                    ],
+                    "isClassic": false,
+                    "invoiceDay": 5,
+                    "invoiceEmailOptIn": true,
+                    "poNumber": "ABC12345"
                   }
                 }
               ]

@@ -1,3236 +1,2859 @@
 {
-    "parameters": {
-        "location": "West US",
-        "api-version": "2015-03-01-preview",
-        "subscriptionId": "subid"
-    },
-    "responses": {
-        "200": {
-            "Body": {
-                "versions": {
-                    "paas": {
-                        "available": [{
-                                "friendlyName": "1.6",
-                                "displayName": "HdInsight version 1.6.1.0.335536",
-                                "isDefault": false
-                            },
-                            {
-                                "friendlyName": "2.1",
-                                "displayName": "Version 2.1.9.406.1221105",
-                                "isDefault": false,
-                                "componentVersions": {
-                                    "HDP": "1.3",
-                                    "Hadoop": "1.2.0"
-                                }
-                            },
-                            {
-                                "friendlyName": "3.0",
-                                "displayName": "Version 3.0.6.989.2441725",
-                                "isDefault": false,
-                                "componentVersions": {
-                                    "HDP": "2.0",
-                                    "Hadoop": "2.2.0"
-                                }
-                            },
-                            {
-                                "friendlyName": "3.1",
-                                "displayName": "Version 3.1.4.989.2441725",
-                                "isDefault": false,
-                                "componentVersions": {
-                                    "HDP": "2.1.7",
-                                    "Hadoop": "2.4.0",
-                                    "HBase": "0.98"
-                                }
-                            },
-                            {
-                                "friendlyName": "3.2",
-                                "displayName": "Version 3.2.7.989.2441725",
-                                "isDefault": false,
-                                "componentVersions": {
-                                    "HDP": "2.2",
-                                    "Hadoop": "2.6.0",
-                                    "HBase": "0.98.4",
-                                    "Storm": "0.9.3"
-                                }
-                            },
-                            {
-                                "friendlyName": "3.3",
-                                "displayName": "Version 3.3.0.989.2441725",
-                                "isDefault": true,
-                                "componentVersions": {
-                                    "HDP": "2.3",
-                                    "Hadoop": "2.7.0",
-                                    "HBase": "1.1.2",
-                                    "Storm": "0.10.0"
-                                }
-                            }
-                        ]
-                    },
-                    "iaas": {
-                        "available": [{
-                                "friendlyName": "3.2",
-                                "displayName": "Version 3.2.1000.0.8840373",
-                                "isDefault": false,
-                                "componentVersions": {
-                                    "HDP": "2.2",
-                                    "Hadoop": "2.6.0",
-                                    "HBase": "0.98.4",
-                                    "Storm": "0.9.3"
-                                }
-                            },
-                            {
-                                "friendlyName": "3.3",
-                                "displayName": "Version 3.3.1000.0.9776961",
-                                "isDefault": false,
-                                "componentVersions": {
-                                    "HDP": "2.3",
-                                    "Hadoop": "2.7.0",
-                                    "HBase": "1.1.2",
-                                    "Storm": "0.10.0",
-                                    "Spark": "1.5.2"
-                                }
-                            },
-                            {
-                                "friendlyName": "3.4",
-                                "displayName": "Version 3.4.1000.0.9719475",
-                                "isDefault": false,
-                                "componentVersions": {
-                                    "HDP": "2.4",
-                                    "Hadoop": "2.7.1",
-                                    "HBase": "1.1.2",
-                                    "Storm": "0.10.0",
-                                    "Spark": "1.6.2",
-                                    "RServer": "8.0"
-                                }
-                            },
-                            {
-                                "friendlyName": "3.5",
-                                "displayName": "Version 3.5.1000.0.9732704",
-                                "isDefault": true,
-                                "componentVersions": {
-                                    "HDP": "2.5",
-                                    "Hadoop": "2.7.3",
-                                    "InteractiveHive": "2.1.0",
-                                    "HBase": "1.1.2",
-                                    "Storm": "1.0.1",
-                                    "Spark": "1.6.3,2.0.2",
-                                    "RServer": "9.0"
-                                }
-                            },
-                            {
-                                "friendlyName": "3.6",
-                                "displayName": "Version 3.6.1000.0.9503998",
-                                "isDefault": false,
-                                "componentVersions": {
-                                    "HDP": "2.6",
-                                    "Spark": "2.1.0"
-                                }
-                            },
-                            {
-                                "friendlyName": "99.152",
-                                "displayName": "Version 99.152.1000.0.6943836",
-                                "isDefault": false
-                            }
-                        ]
-                    }
-                },
-                "regions": {
-                    "paas": {
-                        "available": [
-                            "AUSTRALIA EAST",
-                            "AUSTRALIA SOUTHEAST",
-                            "BRAZIL SOUTH",
-                            "CENTRAL INDIA",
-                            "CENTRAL US",
-                            "EAST ASIA",
-                            "EAST US",
-                            "EAST US 2",
-                            "JAPAN EAST",
-                            "JAPAN WEST",
-                            "NORTH CENTRAL US",
-                            "NORTH EUROPE",
-                            "SOUTH CENTRAL US",
-                            "SOUTHEAST ASIA",
-                            "WEST EUROPE",
-                            "WEST US",
-                            "WEST US 2"
-                        ]
-                    },
-                    "iaas": {
-                        "available": [
-                            "AUSTRALIA EAST",
-                            "AUSTRALIA SOUTHEAST",
-                            "BRAZIL SOUTH",
-                            "CANADA CENTRAL",
-                            "CANADA EAST",
-                            "CENTRAL INDIA",
-                            "CENTRAL US",
-                            "CENTRAL US EUAP",
-                            "EAST ASIA",
-                            "EAST US",
-                            "EAST US 2",
-                            "JAPAN EAST",
-                            "JAPAN WEST",
-                            "NORTH CENTRAL US",
-                            "NORTH EUROPE",
-                            "SOUTH CENTRAL US",
-                            "SOUTHEAST ASIA",
-                            "WEST CENTRAL US",
-                            "WEST EUROPE",
-                            "WEST US",
-                            "WEST US 2"
-                        ]
-                    }
-                },
-                "vmsizes": {
-                    "paas": {
-                        "available": [
-                            "A5",
-                            "A6",
-                            "A7",
-                            "EXTRALARGE",
-                            "LARGE",
-                            "MEDIUM",
-                            "SMALL",
-                            "STANDARD_D1",
-                            "STANDARD_D1_V2",
-                            "STANDARD_D11",
-                            "STANDARD_D11_V2",
-                            "STANDARD_D12",
-                            "STANDARD_D12_V2",
-                            "STANDARD_D13",
-                            "STANDARD_D13_V2",
-                            "STANDARD_D14",
-                            "STANDARD_D14_V2",
-                            "STANDARD_D2",
-                            "STANDARD_D2_V2",
-                            "STANDARD_D3",
-                            "STANDARD_D3_V2",
-                            "STANDARD_D4",
-                            "STANDARD_D4_V2",
-                            "STANDARD_D5_V2"
-                        ]
-                    },
-                    "iaas": {
-                        "available": [
-                            "A5",
-                            "A6",
-                            "A7",
-                            "EXTRALARGE",
-                            "LARGE",
-                            "MEDIUM",
-                            "SMALL",
-                            "STANDARD_D1",
-                            "STANDARD_D1_V2",
-                            "STANDARD_D11",
-                            "STANDARD_D11_V2",
-                            "STANDARD_D12",
-                            "STANDARD_D12_V2",
-                            "STANDARD_D13",
-                            "STANDARD_D13_V2",
-                            "STANDARD_D14",
-                            "STANDARD_D14_V2",
-                            "STANDARD_D2",
-                            "STANDARD_D2_V2",
-                            "STANDARD_D3",
-                            "STANDARD_D3_V2",
-                            "STANDARD_D4",
-                            "STANDARD_D4_V2",
-                            "STANDARD_D5_V2"
-                        ]
-                    }
-                },
-                "vmsize_filters": [{
-                        "FilterMode": "Exclude",
-                        "Regions": [
-                            "*"
-                        ],
-                        "ClusterFlavors": [
-                            "Sandbox"
-                        ],
-                        "NodeTypes": [
-                            "*"
-                        ],
-                        "ClusterVersions": [
-                            "*"
-                        ],
-                        "OsType": [
-                            "*"
-                        ],
-                        "VMSizes": [
-                            "A5"
-                        ]
-                    },
-                    {
-                        "FilterMode": "Exclude",
-                        "Regions": [
-                            "*"
-                        ],
-                        "ClusterFlavors": [
-                            "*"
-                        ],
-                        "NodeTypes": [
-                            "HeadNodeRole",
-                            "WorkerNodeRole",
-                            "EdgeNodeRole"
-                        ],
-                        "ClusterVersions": [
-                            "*"
-                        ],
-                        "OsType": [
-                            "*"
-                        ],
-                        "VMSizes": [
-                            "A5"
-                        ]
-                    },
-                    {
-                        "FilterMode": "Exclude",
-                        "Regions": [
-                            "*"
-                        ],
-                        "ClusterFlavors": [
-                            "Hadoop",
-                            "Spark"
-                        ],
-                        "NodeTypes": [
-                            "ZookeeperRole"
-                        ],
-                        "ClusterVersions": [
-                            "*"
-                        ],
-                        "OsType": [
-                            "*"
-                        ],
-                        "VMSizes": [
-                            "A5"
-                        ]
-                    },
-                    {
-                        "FilterMode": "Exclude",
-                        "Regions": [
-                            "*"
-                        ],
-                        "ClusterFlavors": [
-                            "*"
-                        ],
-                        "NodeTypes": [
-                            "*"
-                        ],
-                        "ClusterVersions": [
-                            "1.6",
-                            "2.1",
-                            "3.0"
-                        ],
-                        "OsType": [
-                            "*"
-                        ],
-                        "VMSizes": [
-                            "A5"
-                        ]
-                    },
-                    {
-                        "FilterMode": "Exclude",
-                        "Regions": [
-                            "*"
-                        ],
-                        "ClusterFlavors": [
-                            "InteractiveHive"
-                        ],
-                        "NodeTypes": [
-                            "HeadNodeRole",
-                            "WorkerNodeRole"
-                        ],
-                        "ClusterVersions": [
-                            "*"
-                        ],
-                        "OsType": [
-                            "*"
-                        ],
-                        "VMSizes": [
-                            "A5"
-                        ]
-                    },
-                    {
-                        "FilterMode": "Exclude",
-                        "Regions": [
-                            "*"
-                        ],
-                        "ClusterFlavors": [
-                            "Sandbox"
-                        ],
-                        "NodeTypes": [
-                            "*"
-                        ],
-                        "ClusterVersions": [
-                            "*"
-                        ],
-                        "OsType": [
-                            "*"
-                        ],
-                        "VMSizes": [
-                            "A6"
-                        ]
-                    },
-                    {
-                        "FilterMode": "Exclude",
-                        "Regions": [
-                            "*"
-                        ],
-                        "ClusterFlavors": [
-                            "Hadoop",
-                            "Spark"
-                        ],
-                        "NodeTypes": [
-                            "ZookeeperRole"
-                        ],
-                        "ClusterVersions": [
-                            "*"
-                        ],
-                        "OsType": [
-                            "*"
-                        ],
-                        "VMSizes": [
-                            "A6"
-                        ]
-                    },
-                    {
-                        "FilterMode": "Exclude",
-                        "Regions": [
-                            "*"
-                        ],
-                        "ClusterFlavors": [
-                            "*"
-                        ],
-                        "NodeTypes": [
-                            "*"
-                        ],
-                        "ClusterVersions": [
-                            "1.6",
-                            "2.1",
-                            "3.0"
-                        ],
-                        "OsType": [
-                            "*"
-                        ],
-                        "VMSizes": [
-                            "A6"
-                        ]
-                    },
-                    {
-                        "FilterMode": "Exclude",
-                        "Regions": [
-                            "*"
-                        ],
-                        "ClusterFlavors": [
-                            "InteractiveHive"
-                        ],
-                        "NodeTypes": [
-                            "HeadNodeRole",
-                            "WorkerNodeRole"
-                        ],
-                        "ClusterVersions": [
-                            "*"
-                        ],
-                        "OsType": [
-                            "*"
-                        ],
-                        "VMSizes": [
-                            "A6"
-                        ]
-                    },
-                    {
-                        "FilterMode": "Exclude",
-                        "Regions": [
-                            "*"
-                        ],
-                        "ClusterFlavors": [
-                            "Sandbox"
-                        ],
-                        "NodeTypes": [
-                            "*"
-                        ],
-                        "ClusterVersions": [
-                            "*"
-                        ],
-                        "OsType": [
-                            "*"
-                        ],
-                        "VMSizes": [
-                            "A7"
-                        ]
-                    },
-                    {
-                        "FilterMode": "Exclude",
-                        "Regions": [
-                            "*"
-                        ],
-                        "ClusterFlavors": [
-                            "Hadoop",
-                            "Spark"
-                        ],
-                        "NodeTypes": [
-                            "ZookeeperRole"
-                        ],
-                        "ClusterVersions": [
-                            "*"
-                        ],
-                        "OsType": [
-                            "*"
-                        ],
-                        "VMSizes": [
-                            "A7"
-                        ]
-                    },
-                    {
-                        "FilterMode": "Exclude",
-                        "Regions": [
-                            "*"
-                        ],
-                        "ClusterFlavors": [
-                            "*"
-                        ],
-                        "NodeTypes": [
-                            "*"
-                        ],
-                        "ClusterVersions": [
-                            "1.6",
-                            "2.1",
-                            "3.0"
-                        ],
-                        "OsType": [
-                            "*"
-                        ],
-                        "VMSizes": [
-                            "A7"
-                        ]
-                    },
-                    {
-                        "FilterMode": "Exclude",
-                        "Regions": [
-                            "*"
-                        ],
-                        "ClusterFlavors": [
-                            "InteractiveHive"
-                        ],
-                        "NodeTypes": [
-                            "HeadNodeRole",
-                            "WorkerNodeRole"
-                        ],
-                        "ClusterVersions": [
-                            "*"
-                        ],
-                        "OsType": [
-                            "*"
-                        ],
-                        "VMSizes": [
-                            "A7"
-                        ]
-                    },
-                    {
-                        "FilterMode": "Exclude",
-                        "Regions": [
-                            "*"
-                        ],
-                        "ClusterFlavors": [
-                            "Sandbox"
-                        ],
-                        "NodeTypes": [
-                            "*"
-                        ],
-                        "ClusterVersions": [
-                            "*"
-                        ],
-                        "OsType": [
-                            "*"
-                        ],
-                        "VMSizes": [
-                            "EXTRALARGE"
-                        ]
-                    },
-                    {
-                        "FilterMode": "Exclude",
-                        "Regions": [
-                            "*"
-                        ],
-                        "ClusterFlavors": [
-                            "Hadoop",
-                            "Spark"
-                        ],
-                        "NodeTypes": [
-                            "ZookeeperRole"
-                        ],
-                        "ClusterVersions": [
-                            "*"
-                        ],
-                        "OsType": [
-                            "*"
-                        ],
-                        "VMSizes": [
-                            "EXTRALARGE"
-                        ]
-                    },
-                    {
-                        "FilterMode": "Exclude",
-                        "Regions": [
-                            "*"
-                        ],
-                        "ClusterFlavors": [
-                            "*"
-                        ],
-                        "NodeTypes": [
-                            "WorkerNodeRole",
-                            "EdgeNodeRole",
-                            "ZookeeperRole"
-                        ],
-                        "ClusterVersions": [
-                            "1.6",
-                            "2.1",
-                            "3.0"
-                        ],
-                        "OsType": [
-                            "*"
-                        ],
-                        "VMSizes": [
-                            "EXTRALARGE"
-                        ]
-                    },
-                    {
-                        "FilterMode": "Exclude",
-                        "Regions": [
-                            "*"
-                        ],
-                        "ClusterFlavors": [
-                            "InteractiveHive"
-                        ],
-                        "NodeTypes": [
-                            "HeadNodeRole",
-                            "WorkerNodeRole"
-                        ],
-                        "ClusterVersions": [
-                            "*"
-                        ],
-                        "OsType": [
-                            "*"
-                        ],
-                        "VMSizes": [
-                            "EXTRALARGE"
-                        ]
-                    },
-                    {
-                        "FilterMode": "Exclude",
-                        "Regions": [
-                            "*"
-                        ],
-                        "ClusterFlavors": [
-                            "Sandbox"
-                        ],
-                        "NodeTypes": [
-                            "*"
-                        ],
-                        "ClusterVersions": [
-                            "*"
-                        ],
-                        "OsType": [
-                            "*"
-                        ],
-                        "VMSizes": [
-                            "LARGE"
-                        ]
-                    },
-                    {
-                        "FilterMode": "Exclude",
-                        "Regions": [
-                            "*"
-                        ],
-                        "ClusterFlavors": [
-                            "Hadoop",
-                            "Spark"
-                        ],
-                        "NodeTypes": [
-                            "ZookeeperRole"
-                        ],
-                        "ClusterVersions": [
-                            "*"
-                        ],
-                        "OsType": [
-                            "*"
-                        ],
-                        "VMSizes": [
-                            "LARGE"
-                        ]
-                    },
-                    {
-                        "FilterMode": "Exclude",
-                        "Regions": [
-                            "*"
-                        ],
-                        "ClusterFlavors": [
-                            "*"
-                        ],
-                        "NodeTypes": [
-                            "ZookeeperRole"
-                        ],
-                        "ClusterVersions": [
-                            "1.6",
-                            "2.1",
-                            "3.0"
-                        ],
-                        "OsType": [
-                            "*"
-                        ],
-                        "VMSizes": [
-                            "LARGE"
-                        ]
-                    },
-                    {
-                        "FilterMode": "Exclude",
-                        "Regions": [
-                            "*"
-                        ],
-                        "ClusterFlavors": [
-                            "InteractiveHive"
-                        ],
-                        "NodeTypes": [
-                            "HeadNodeRole",
-                            "WorkerNodeRole"
-                        ],
-                        "ClusterVersions": [
-                            "*"
-                        ],
-                        "OsType": [
-                            "*"
-                        ],
-                        "VMSizes": [
-                            "LARGE"
-                        ]
-                    },
-                    {
-                        "FilterMode": "Exclude",
-                        "Regions": [
-                            "*"
-                        ],
-                        "ClusterFlavors": [
-                            "Sandbox"
-                        ],
-                        "NodeTypes": [
-                            "*"
-                        ],
-                        "ClusterVersions": [
-                            "*"
-                        ],
-                        "OsType": [
-                            "*"
-                        ],
-                        "VMSizes": [
-                            "MEDIUM"
-                        ]
-                    },
-                    {
-                        "FilterMode": "Exclude",
-                        "Regions": [
-                            "*"
-                        ],
-                        "ClusterFlavors": [
-                            "*"
-                        ],
-                        "NodeTypes": [
-                            "HeadNodeRole",
-                            "WorkerNodeRole",
-                            "EdgeNodeRole"
-                        ],
-                        "ClusterVersions": [
-                            "*"
-                        ],
-                        "OsType": [
-                            "*"
-                        ],
-                        "VMSizes": [
-                            "MEDIUM"
-                        ]
-                    },
-                    {
-                        "FilterMode": "Exclude",
-                        "Regions": [
-                            "*"
-                        ],
-                        "ClusterFlavors": [
-                            "InteractiveHive"
-                        ],
-                        "NodeTypes": [
-                            "HeadNodeRole",
-                            "WorkerNodeRole"
-                        ],
-                        "ClusterVersions": [
-                            "*"
-                        ],
-                        "OsType": [
-                            "*"
-                        ],
-                        "VMSizes": [
-                            "MEDIUM"
-                        ]
-                    },
-                    {
-                        "FilterMode": "Exclude",
-                        "Regions": [
-                            "*"
-                        ],
-                        "ClusterFlavors": [
-                            "Sandbox"
-                        ],
-                        "NodeTypes": [
-                            "*"
-                        ],
-                        "ClusterVersions": [
-                            "*"
-                        ],
-                        "OsType": [
-                            "*"
-                        ],
-                        "VMSizes": [
-                            "SMALL"
-                        ]
-                    },
-                    {
-                        "FilterMode": "Exclude",
-                        "Regions": [
-                            "*"
-                        ],
-                        "ClusterFlavors": [
-                            "*"
-                        ],
-                        "NodeTypes": [
-                            "HeadNodeRole",
-                            "WorkerNodeRole",
-                            "EdgeNodeRole"
-                        ],
-                        "ClusterVersions": [
-                            "*"
-                        ],
-                        "OsType": [
-                            "*"
-                        ],
-                        "VMSizes": [
-                            "SMALL"
-                        ]
-                    },
-                    {
-                        "FilterMode": "Exclude",
-                        "Regions": [
-                            "*"
-                        ],
-                        "ClusterFlavors": [
-                            "HBase",
-                            "Spark"
-                        ],
-                        "NodeTypes": [
-                            "ZookeeperRole"
-                        ],
-                        "ClusterVersions": [
-                            "*"
-                        ],
-                        "OsType": [
-                            "*"
-                        ],
-                        "VMSizes": [
-                            "SMALL"
-                        ]
-                    },
-                    {
-                        "FilterMode": "Exclude",
-                        "Regions": [
-                            "*"
-                        ],
-                        "ClusterFlavors": [
-                            "InteractiveHive"
-                        ],
-                        "NodeTypes": [
-                            "HeadNodeRole",
-                            "WorkerNodeRole"
-                        ],
-                        "ClusterVersions": [
-                            "*"
-                        ],
-                        "OsType": [
-                            "*"
-                        ],
-                        "VMSizes": [
-                            "SMALL"
-                        ]
-                    },
-                    {
-                        "FilterMode": "Exclude",
-                        "Regions": [
-                            "*"
-                        ],
-                        "ClusterFlavors": [
-                            "Sandbox"
-                        ],
-                        "NodeTypes": [
-                            "*"
-                        ],
-                        "ClusterVersions": [
-                            "*"
-                        ],
-                        "OsType": [
-                            "*"
-                        ],
-                        "VMSizes": [
-                            "STANDARD_D1"
-                        ]
-                    },
-                    {
-                        "FilterMode": "Exclude",
-                        "Regions": [
-                            "*"
-                        ],
-                        "ClusterFlavors": [
-                            "*"
-                        ],
-                        "NodeTypes": [
-                            "HeadNodeRole",
-                            "WorkerNodeRole",
-                            "EdgeNodeRole"
-                        ],
-                        "ClusterVersions": [
-                            "*"
-                        ],
-                        "OsType": [
-                            "*"
-                        ],
-                        "VMSizes": [
-                            "STANDARD_D1"
-                        ]
-                    },
-                    {
-                        "FilterMode": "Exclude",
-                        "Regions": [
-                            "*"
-                        ],
-                        "ClusterFlavors": [
-                            "Hadoop",
-                            "Spark"
-                        ],
-                        "NodeTypes": [
-                            "ZookeeperRole"
-                        ],
-                        "ClusterVersions": [
-                            "*"
-                        ],
-                        "OsType": [
-                            "*"
-                        ],
-                        "VMSizes": [
-                            "STANDARD_D1"
-                        ]
-                    },
-                    {
-                        "FilterMode": "Exclude",
-                        "Regions": [
-                            "Central India"
-                        ],
-                        "ClusterFlavors": [
-                            "*"
-                        ],
-                        "NodeTypes": [
-                            "*"
-                        ],
-                        "ClusterVersions": [
-                            "*"
-                        ],
-                        "OsType": [
-                            "*"
-                        ],
-                        "VMSizes": [
-                            "STANDARD_D1"
-                        ]
-                    },
-                    {
-                        "FilterMode": "Exclude",
-                        "Regions": [
-                            "*"
-                        ],
-                        "ClusterFlavors": [
-                            "*"
-                        ],
-                        "NodeTypes": [
-                            "*"
-                        ],
-                        "ClusterVersions": [
-                            "1.6",
-                            "2.1",
-                            "3.0"
-                        ],
-                        "OsType": [
-                            "*"
-                        ],
-                        "VMSizes": [
-                            "STANDARD_D1"
-                        ]
-                    },
-                    {
-                        "FilterMode": "Exclude",
-                        "Regions": [
-                            "*"
-                        ],
-                        "ClusterFlavors": [
-                            "InteractiveHive"
-                        ],
-                        "NodeTypes": [
-                            "HeadNodeRole",
-                            "WorkerNodeRole"
-                        ],
-                        "ClusterVersions": [
-                            "*"
-                        ],
-                        "OsType": [
-                            "*"
-                        ],
-                        "VMSizes": [
-                            "STANDARD_D1"
-                        ]
-                    },
-                    {
-                        "FilterMode": "Exclude",
-                        "Regions": [
-                            "*"
-                        ],
-                        "ClusterFlavors": [
-                            "Sandbox"
-                        ],
-                        "NodeTypes": [
-                            "*"
-                        ],
-                        "ClusterVersions": [
-                            "*"
-                        ],
-                        "OsType": [
-                            "*"
-                        ],
-                        "VMSizes": [
-                            "STANDARD_D1_V2"
-                        ]
-                    },
-                    {
-                        "FilterMode": "Exclude",
-                        "Regions": [
-                            "*"
-                        ],
-                        "ClusterFlavors": [
-                            "*"
-                        ],
-                        "NodeTypes": [
-                            "HeadNodeRole",
-                            "WorkerNodeRole",
-                            "EdgeNodeRole"
-                        ],
-                        "ClusterVersions": [
-                            "*"
-                        ],
-                        "OsType": [
-                            "*"
-                        ],
-                        "VMSizes": [
-                            "STANDARD_D1_V2"
-                        ]
-                    },
-                    {
-                        "FilterMode": "Exclude",
-                        "Regions": [
-                            "*"
-                        ],
-                        "ClusterFlavors": [
-                            "Hadoop",
-                            "Spark"
-                        ],
-                        "NodeTypes": [
-                            "ZookeeperRole"
-                        ],
-                        "ClusterVersions": [
-                            "*"
-                        ],
-                        "OsType": [
-                            "*"
-                        ],
-                        "VMSizes": [
-                            "STANDARD_D1_V2"
-                        ]
-                    },
-                    {
-                        "FilterMode": "Exclude",
-                        "Regions": [
-                            "Brazil South",
-                            "Japan West"
-                        ],
-                        "ClusterFlavors": [
-                            "*"
-                        ],
-                        "NodeTypes": [
-                            "*"
-                        ],
-                        "ClusterVersions": [
-                            "*"
-                        ],
-                        "OsType": [
-                            "*"
-                        ],
-                        "VMSizes": [
-                            "STANDARD_D1_V2"
-                        ]
-                    },
-                    {
-                        "FilterMode": "Exclude",
-                        "Regions": [
-                            "*"
-                        ],
-                        "ClusterFlavors": [
-                            "*"
-                        ],
-                        "NodeTypes": [
-                            "*"
-                        ],
-                        "ClusterVersions": [
-                            "1.6",
-                            "2.1",
-                            "3.0"
-                        ],
-                        "OsType": [
-                            "*"
-                        ],
-                        "VMSizes": [
-                            "STANDARD_D1_V2"
-                        ]
-                    },
-                    {
-                        "FilterMode": "Exclude",
-                        "Regions": [
-                            "*"
-                        ],
-                        "ClusterFlavors": [
-                            "InteractiveHive"
-                        ],
-                        "NodeTypes": [
-                            "HeadNodeRole",
-                            "WorkerNodeRole"
-                        ],
-                        "ClusterVersions": [
-                            "*"
-                        ],
-                        "OsType": [
-                            "*"
-                        ],
-                        "VMSizes": [
-                            "STANDARD_D1_V2"
-                        ]
-                    },
-                    {
-                        "FilterMode": "Exclude",
-                        "Regions": [
-                            "*"
-                        ],
-                        "ClusterFlavors": [
-                            "Sandbox"
-                        ],
-                        "NodeTypes": [
-                            "*"
-                        ],
-                        "ClusterVersions": [
-                            "*"
-                        ],
-                        "OsType": [
-                            "*"
-                        ],
-                        "VMSizes": [
-                            "STANDARD_D11"
-                        ]
-                    },
-                    {
-                        "FilterMode": "Exclude",
-                        "Regions": [
-                            "*"
-                        ],
-                        "ClusterFlavors": [
-                            "*"
-                        ],
-                        "NodeTypes": [
-                            "HeadNodeRole",
-                            "WorkerNodeRole",
-                            "EdgeNodeRole"
-                        ],
-                        "ClusterVersions": [
-                            "*"
-                        ],
-                        "OsType": [
-                            "*"
-                        ],
-                        "VMSizes": [
-                            "STANDARD_D11"
-                        ]
-                    },
-                    {
-                        "FilterMode": "Exclude",
-                        "Regions": [
-                            "*"
-                        ],
-                        "ClusterFlavors": [
-                            "Hadoop",
-                            "Spark"
-                        ],
-                        "NodeTypes": [
-                            "ZookeeperRole"
-                        ],
-                        "ClusterVersions": [
-                            "*"
-                        ],
-                        "OsType": [
-                            "*"
-                        ],
-                        "VMSizes": [
-                            "STANDARD_D11"
-                        ]
-                    },
-                    {
-                        "FilterMode": "Exclude",
-                        "Regions": [
-                            "Central India"
-                        ],
-                        "ClusterFlavors": [
-                            "*"
-                        ],
-                        "NodeTypes": [
-                            "*"
-                        ],
-                        "ClusterVersions": [
-                            "*"
-                        ],
-                        "OsType": [
-                            "*"
-                        ],
-                        "VMSizes": [
-                            "STANDARD_D11"
-                        ]
-                    },
-                    {
-                        "FilterMode": "Exclude",
-                        "Regions": [
-                            "*"
-                        ],
-                        "ClusterFlavors": [
-                            "*"
-                        ],
-                        "NodeTypes": [
-                            "*"
-                        ],
-                        "ClusterVersions": [
-                            "1.6",
-                            "2.1",
-                            "3.0"
-                        ],
-                        "OsType": [
-                            "*"
-                        ],
-                        "VMSizes": [
-                            "STANDARD_D11"
-                        ]
-                    },
-                    {
-                        "FilterMode": "Exclude",
-                        "Regions": [
-                            "*"
-                        ],
-                        "ClusterFlavors": [
-                            "InteractiveHive"
-                        ],
-                        "NodeTypes": [
-                            "HeadNodeRole",
-                            "WorkerNodeRole"
-                        ],
-                        "ClusterVersions": [
-                            "*"
-                        ],
-                        "OsType": [
-                            "*"
-                        ],
-                        "VMSizes": [
-                            "STANDARD_D11"
-                        ]
-                    },
-                    {
-                        "FilterMode": "Exclude",
-                        "Regions": [
-                            "*"
-                        ],
-                        "ClusterFlavors": [
-                            "Sandbox"
-                        ],
-                        "NodeTypes": [
-                            "*"
-                        ],
-                        "ClusterVersions": [
-                            "*"
-                        ],
-                        "OsType": [
-                            "*"
-                        ],
-                        "VMSizes": [
-                            "STANDARD_D11_V2"
-                        ]
-                    },
-                    {
-                        "FilterMode": "Exclude",
-                        "Regions": [
-                            "*"
-                        ],
-                        "ClusterFlavors": [
-                            "*"
-                        ],
-                        "NodeTypes": [
-                            "HeadNodeRole",
-                            "WorkerNodeRole",
-                            "EdgeNodeRole"
-                        ],
-                        "ClusterVersions": [
-                            "*"
-                        ],
-                        "OsType": [
-                            "*"
-                        ],
-                        "VMSizes": [
-                            "STANDARD_D11_V2"
-                        ]
-                    },
-                    {
-                        "FilterMode": "Exclude",
-                        "Regions": [
-                            "*"
-                        ],
-                        "ClusterFlavors": [
-                            "Hadoop",
-                            "Spark"
-                        ],
-                        "NodeTypes": [
-                            "ZookeeperRole"
-                        ],
-                        "ClusterVersions": [
-                            "*"
-                        ],
-                        "OsType": [
-                            "*"
-                        ],
-                        "VMSizes": [
-                            "STANDARD_D11_V2"
-                        ]
-                    },
-                    {
-                        "FilterMode": "Exclude",
-                        "Regions": [
-                            "Brazil South",
-                            "Japan West"
-                        ],
-                        "ClusterFlavors": [
-                            "*"
-                        ],
-                        "NodeTypes": [
-                            "*"
-                        ],
-                        "ClusterVersions": [
-                            "*"
-                        ],
-                        "OsType": [
-                            "*"
-                        ],
-                        "VMSizes": [
-                            "STANDARD_D11_V2"
-                        ]
-                    },
-                    {
-                        "FilterMode": "Exclude",
-                        "Regions": [
-                            "*"
-                        ],
-                        "ClusterFlavors": [
-                            "*"
-                        ],
-                        "NodeTypes": [
-                            "*"
-                        ],
-                        "ClusterVersions": [
-                            "1.6",
-                            "2.1",
-                            "3.0"
-                        ],
-                        "OsType": [
-                            "*"
-                        ],
-                        "VMSizes": [
-                            "STANDARD_D11_V2"
-                        ]
-                    },
-                    {
-                        "FilterMode": "Exclude",
-                        "Regions": [
-                            "*"
-                        ],
-                        "ClusterFlavors": [
-                            "InteractiveHive"
-                        ],
-                        "NodeTypes": [
-                            "HeadNodeRole",
-                            "WorkerNodeRole"
-                        ],
-                        "ClusterVersions": [
-                            "*"
-                        ],
-                        "OsType": [
-                            "*"
-                        ],
-                        "VMSizes": [
-                            "STANDARD_D11_V2"
-                        ]
-                    },
-                    {
-                        "FilterMode": "Exclude",
-                        "Regions": [
-                            "*"
-                        ],
-                        "ClusterFlavors": [
-                            "Sandbox"
-                        ],
-                        "NodeTypes": [
-                            "*"
-                        ],
-                        "ClusterVersions": [
-                            "*"
-                        ],
-                        "OsType": [
-                            "*"
-                        ],
-                        "VMSizes": [
-                            "STANDARD_D12"
-                        ]
-                    },
-                    {
-                        "FilterMode": "Exclude",
-                        "Regions": [
-                            "*"
-                        ],
-                        "ClusterFlavors": [
-                            "Hadoop",
-                            "Spark"
-                        ],
-                        "NodeTypes": [
-                            "ZookeeperRole"
-                        ],
-                        "ClusterVersions": [
-                            "*"
-                        ],
-                        "OsType": [
-                            "*"
-                        ],
-                        "VMSizes": [
-                            "STANDARD_D12"
-                        ]
-                    },
-                    {
-                        "FilterMode": "Exclude",
-                        "Regions": [
-                            "Central India"
-                        ],
-                        "ClusterFlavors": [
-                            "*"
-                        ],
-                        "NodeTypes": [
-                            "*"
-                        ],
-                        "ClusterVersions": [
-                            "*"
-                        ],
-                        "OsType": [
-                            "*"
-                        ],
-                        "VMSizes": [
-                            "STANDARD_D12"
-                        ]
-                    },
-                    {
-                        "FilterMode": "Exclude",
-                        "Regions": [
-                            "*"
-                        ],
-                        "ClusterFlavors": [
-                            "*"
-                        ],
-                        "NodeTypes": [
-                            "*"
-                        ],
-                        "ClusterVersions": [
-                            "1.6",
-                            "2.1",
-                            "3.0"
-                        ],
-                        "OsType": [
-                            "*"
-                        ],
-                        "VMSizes": [
-                            "STANDARD_D12"
-                        ]
-                    },
-                    {
-                        "FilterMode": "Exclude",
-                        "Regions": [
-                            "*"
-                        ],
-                        "ClusterFlavors": [
-                            "InteractiveHive"
-                        ],
-                        "NodeTypes": [
-                            "HeadNodeRole",
-                            "WorkerNodeRole"
-                        ],
-                        "ClusterVersions": [
-                            "*"
-                        ],
-                        "OsType": [
-                            "*"
-                        ],
-                        "VMSizes": [
-                            "STANDARD_D12"
-                        ]
-                    },
-                    {
-                        "FilterMode": "Exclude",
-                        "Regions": [
-                            "*"
-                        ],
-                        "ClusterFlavors": [
-                            "Sandbox"
-                        ],
-                        "NodeTypes": [
-                            "*"
-                        ],
-                        "ClusterVersions": [
-                            "*"
-                        ],
-                        "OsType": [
-                            "*"
-                        ],
-                        "VMSizes": [
-                            "STANDARD_D12_V2"
-                        ]
-                    },
-                    {
-                        "FilterMode": "Exclude",
-                        "Regions": [
-                            "*"
-                        ],
-                        "ClusterFlavors": [
-                            "Hadoop",
-                            "Spark"
-                        ],
-                        "NodeTypes": [
-                            "ZookeeperRole"
-                        ],
-                        "ClusterVersions": [
-                            "*"
-                        ],
-                        "OsType": [
-                            "*"
-                        ],
-                        "VMSizes": [
-                            "STANDARD_D12_V2"
-                        ]
-                    },
-                    {
-                        "FilterMode": "Exclude",
-                        "Regions": [
-                            "Brazil South",
-                            "Japan West"
-                        ],
-                        "ClusterFlavors": [
-                            "*"
-                        ],
-                        "NodeTypes": [
-                            "*"
-                        ],
-                        "ClusterVersions": [
-                            "*"
-                        ],
-                        "OsType": [
-                            "*"
-                        ],
-                        "VMSizes": [
-                            "STANDARD_D12_V2"
-                        ]
-                    },
-                    {
-                        "FilterMode": "Exclude",
-                        "Regions": [
-                            "*"
-                        ],
-                        "ClusterFlavors": [
-                            "*"
-                        ],
-                        "NodeTypes": [
-                            "*"
-                        ],
-                        "ClusterVersions": [
-                            "1.6",
-                            "2.1",
-                            "3.0"
-                        ],
-                        "OsType": [
-                            "*"
-                        ],
-                        "VMSizes": [
-                            "STANDARD_D12_V2"
-                        ]
-                    },
-                    {
-                        "FilterMode": "Exclude",
-                        "Regions": [
-                            "*"
-                        ],
-                        "ClusterFlavors": [
-                            "InteractiveHive"
-                        ],
-                        "NodeTypes": [
-                            "HeadNodeRole",
-                            "WorkerNodeRole"
-                        ],
-                        "ClusterVersions": [
-                            "*"
-                        ],
-                        "OsType": [
-                            "*"
-                        ],
-                        "VMSizes": [
-                            "STANDARD_D12_V2"
-                        ]
-                    },
-                    {
-                        "FilterMode": "Exclude",
-                        "Regions": [
-                            "*"
-                        ],
-                        "ClusterFlavors": [
-                            "Sandbox"
-                        ],
-                        "NodeTypes": [
-                            "*"
-                        ],
-                        "ClusterVersions": [
-                            "*"
-                        ],
-                        "OsType": [
-                            "*"
-                        ],
-                        "VMSizes": [
-                            "STANDARD_D13"
-                        ]
-                    },
-                    {
-                        "FilterMode": "Exclude",
-                        "Regions": [
-                            "*"
-                        ],
-                        "ClusterFlavors": [
-                            "Hadoop",
-                            "Spark"
-                        ],
-                        "NodeTypes": [
-                            "ZookeeperRole"
-                        ],
-                        "ClusterVersions": [
-                            "*"
-                        ],
-                        "OsType": [
-                            "*"
-                        ],
-                        "VMSizes": [
-                            "STANDARD_D13"
-                        ]
-                    },
-                    {
-                        "FilterMode": "Exclude",
-                        "Regions": [
-                            "Central India"
-                        ],
-                        "ClusterFlavors": [
-                            "*"
-                        ],
-                        "NodeTypes": [
-                            "*"
-                        ],
-                        "ClusterVersions": [
-                            "*"
-                        ],
-                        "OsType": [
-                            "*"
-                        ],
-                        "VMSizes": [
-                            "STANDARD_D13"
-                        ]
-                    },
-                    {
-                        "FilterMode": "Exclude",
-                        "Regions": [
-                            "*"
-                        ],
-                        "ClusterFlavors": [
-                            "*"
-                        ],
-                        "NodeTypes": [
-                            "*"
-                        ],
-                        "ClusterVersions": [
-                            "1.6",
-                            "2.1",
-                            "3.0"
-                        ],
-                        "OsType": [
-                            "*"
-                        ],
-                        "VMSizes": [
-                            "STANDARD_D13"
-                        ]
-                    },
-                    {
-                        "FilterMode": "Exclude",
-                        "Regions": [
-                            "*"
-                        ],
-                        "ClusterFlavors": [
-                            "Hadoop",
-                            "Spark"
-                        ],
-                        "NodeTypes": [
-                            "ZookeeperRole"
-                        ],
-                        "ClusterVersions": [
-                            "*"
-                        ],
-                        "OsType": [
-                            "*"
-                        ],
-                        "VMSizes": [
-                            "STANDARD_D13_V2"
-                        ]
-                    },
-                    {
-                        "FilterMode": "Exclude",
-                        "Regions": [
-                            "Brazil South",
-                            "Japan West"
-                        ],
-                        "ClusterFlavors": [
-                            "*"
-                        ],
-                        "NodeTypes": [
-                            "*"
-                        ],
-                        "ClusterVersions": [
-                            "*"
-                        ],
-                        "OsType": [
-                            "*"
-                        ],
-                        "VMSizes": [
-                            "STANDARD_D13_V2"
-                        ]
-                    },
-                    {
-                        "FilterMode": "Exclude",
-                        "Regions": [
-                            "*"
-                        ],
-                        "ClusterFlavors": [
-                            "*"
-                        ],
-                        "NodeTypes": [
-                            "*"
-                        ],
-                        "ClusterVersions": [
-                            "1.6",
-                            "2.1",
-                            "3.0"
-                        ],
-                        "OsType": [
-                            "*"
-                        ],
-                        "VMSizes": [
-                            "STANDARD_D13_V2"
-                        ]
-                    },
-                    {
-                        "FilterMode": "Exclude",
-                        "Regions": [
-                            "*"
-                        ],
-                        "ClusterFlavors": [
-                            "Sandbox"
-                        ],
-                        "NodeTypes": [
-                            "*"
-                        ],
-                        "ClusterVersions": [
-                            "*"
-                        ],
-                        "OsType": [
-                            "*"
-                        ],
-                        "VMSizes": [
-                            "STANDARD_D14"
-                        ]
-                    },
-                    {
-                        "FilterMode": "Exclude",
-                        "Regions": [
-                            "*"
-                        ],
-                        "ClusterFlavors": [
-                            "Hadoop",
-                            "Spark"
-                        ],
-                        "NodeTypes": [
-                            "ZookeeperRole"
-                        ],
-                        "ClusterVersions": [
-                            "*"
-                        ],
-                        "OsType": [
-                            "*"
-                        ],
-                        "VMSizes": [
-                            "STANDARD_D14"
-                        ]
-                    },
-                    {
-                        "FilterMode": "Exclude",
-                        "Regions": [
-                            "Central India"
-                        ],
-                        "ClusterFlavors": [
-                            "*"
-                        ],
-                        "NodeTypes": [
-                            "*"
-                        ],
-                        "ClusterVersions": [
-                            "*"
-                        ],
-                        "OsType": [
-                            "*"
-                        ],
-                        "VMSizes": [
-                            "STANDARD_D14"
-                        ]
-                    },
-                    {
-                        "FilterMode": "Exclude",
-                        "Regions": [
-                            "*"
-                        ],
-                        "ClusterFlavors": [
-                            "*"
-                        ],
-                        "NodeTypes": [
-                            "*"
-                        ],
-                        "ClusterVersions": [
-                            "1.6",
-                            "2.1",
-                            "3.0"
-                        ],
-                        "OsType": [
-                            "*"
-                        ],
-                        "VMSizes": [
-                            "STANDARD_D14"
-                        ]
-                    },
-                    {
-                        "FilterMode": "Exclude",
-                        "Regions": [
-                            "*"
-                        ],
-                        "ClusterFlavors": [
-                            "Sandbox"
-                        ],
-                        "NodeTypes": [
-                            "*"
-                        ],
-                        "ClusterVersions": [
-                            "*"
-                        ],
-                        "OsType": [
-                            "*"
-                        ],
-                        "VMSizes": [
-                            "STANDARD_D14_V2"
-                        ]
-                    },
-                    {
-                        "FilterMode": "Exclude",
-                        "Regions": [
-                            "*"
-                        ],
-                        "ClusterFlavors": [
-                            "Hadoop",
-                            "Spark"
-                        ],
-                        "NodeTypes": [
-                            "ZookeeperRole"
-                        ],
-                        "ClusterVersions": [
-                            "*"
-                        ],
-                        "OsType": [
-                            "*"
-                        ],
-                        "VMSizes": [
-                            "STANDARD_D14_V2"
-                        ]
-                    },
-                    {
-                        "FilterMode": "Exclude",
-                        "Regions": [
-                            "Brazil South",
-                            "Japan West"
-                        ],
-                        "ClusterFlavors": [
-                            "*"
-                        ],
-                        "NodeTypes": [
-                            "*"
-                        ],
-                        "ClusterVersions": [
-                            "*"
-                        ],
-                        "OsType": [
-                            "*"
-                        ],
-                        "VMSizes": [
-                            "STANDARD_D14_V2"
-                        ]
-                    },
-                    {
-                        "FilterMode": "Exclude",
-                        "Regions": [
-                            "*"
-                        ],
-                        "ClusterFlavors": [
-                            "*"
-                        ],
-                        "NodeTypes": [
-                            "*"
-                        ],
-                        "ClusterVersions": [
-                            "1.6",
-                            "2.1",
-                            "3.0"
-                        ],
-                        "OsType": [
-                            "*"
-                        ],
-                        "VMSizes": [
-                            "STANDARD_D14_V2"
-                        ]
-                    },
-                    {
-                        "FilterMode": "Exclude",
-                        "Regions": [
-                            "*"
-                        ],
-                        "ClusterFlavors": [
-                            "Sandbox"
-                        ],
-                        "NodeTypes": [
-                            "*"
-                        ],
-                        "ClusterVersions": [
-                            "*"
-                        ],
-                        "OsType": [
-                            "*"
-                        ],
-                        "VMSizes": [
-                            "STANDARD_D2"
-                        ]
-                    },
-                    {
-                        "FilterMode": "Exclude",
-                        "Regions": [
-                            "*"
-                        ],
-                        "ClusterFlavors": [
-                            "*"
-                        ],
-                        "NodeTypes": [
-                            "HeadNodeRole",
-                            "WorkerNodeRole",
-                            "EdgeNodeRole"
-                        ],
-                        "ClusterVersions": [
-                            "*"
-                        ],
-                        "OsType": [
-                            "*"
-                        ],
-                        "VMSizes": [
-                            "STANDARD_D2"
-                        ]
-                    },
-                    {
-                        "FilterMode": "Exclude",
-                        "Regions": [
-                            "*"
-                        ],
-                        "ClusterFlavors": [
-                            "Hadoop",
-                            "Spark"
-                        ],
-                        "NodeTypes": [
-                            "ZookeeperRole"
-                        ],
-                        "ClusterVersions": [
-                            "*"
-                        ],
-                        "OsType": [
-                            "*"
-                        ],
-                        "VMSizes": [
-                            "STANDARD_D2"
-                        ]
-                    },
-                    {
-                        "FilterMode": "Exclude",
-                        "Regions": [
-                            "Central India"
-                        ],
-                        "ClusterFlavors": [
-                            "*"
-                        ],
-                        "NodeTypes": [
-                            "*"
-                        ],
-                        "ClusterVersions": [
-                            "*"
-                        ],
-                        "OsType": [
-                            "*"
-                        ],
-                        "VMSizes": [
-                            "STANDARD_D2"
-                        ]
-                    },
-                    {
-                        "FilterMode": "Exclude",
-                        "Regions": [
-                            "*"
-                        ],
-                        "ClusterFlavors": [
-                            "*"
-                        ],
-                        "NodeTypes": [
-                            "*"
-                        ],
-                        "ClusterVersions": [
-                            "1.6",
-                            "2.1",
-                            "3.0"
-                        ],
-                        "OsType": [
-                            "*"
-                        ],
-                        "VMSizes": [
-                            "STANDARD_D2"
-                        ]
-                    },
-                    {
-                        "FilterMode": "Exclude",
-                        "Regions": [
-                            "*"
-                        ],
-                        "ClusterFlavors": [
-                            "InteractiveHive"
-                        ],
-                        "NodeTypes": [
-                            "HeadNodeRole",
-                            "WorkerNodeRole"
-                        ],
-                        "ClusterVersions": [
-                            "*"
-                        ],
-                        "OsType": [
-                            "*"
-                        ],
-                        "VMSizes": [
-                            "STANDARD_D2"
-                        ]
-                    },
-                    {
-                        "FilterMode": "Exclude",
-                        "Regions": [
-                            "*"
-                        ],
-                        "ClusterFlavors": [
-                            "Sandbox"
-                        ],
-                        "NodeTypes": [
-                            "*"
-                        ],
-                        "ClusterVersions": [
-                            "*"
-                        ],
-                        "OsType": [
-                            "*"
-                        ],
-                        "VMSizes": [
-                            "STANDARD_D2_V2"
-                        ]
-                    },
-                    {
-                        "FilterMode": "Exclude",
-                        "Regions": [
-                            "*"
-                        ],
-                        "ClusterFlavors": [
-                            "*"
-                        ],
-                        "NodeTypes": [
-                            "HeadNodeRole",
-                            "WorkerNodeRole",
-                            "EdgeNodeRole"
-                        ],
-                        "ClusterVersions": [
-                            "*"
-                        ],
-                        "OsType": [
-                            "*"
-                        ],
-                        "VMSizes": [
-                            "STANDARD_D2_V2"
-                        ]
-                    },
-                    {
-                        "FilterMode": "Exclude",
-                        "Regions": [
-                            "*"
-                        ],
-                        "ClusterFlavors": [
-                            "Hadoop",
-                            "Spark"
-                        ],
-                        "NodeTypes": [
-                            "ZookeeperRole"
-                        ],
-                        "ClusterVersions": [
-                            "*"
-                        ],
-                        "OsType": [
-                            "*"
-                        ],
-                        "VMSizes": [
-                            "STANDARD_D2_V2"
-                        ]
-                    },
-                    {
-                        "FilterMode": "Exclude",
-                        "Regions": [
-                            "Brazil South",
-                            "Japan West"
-                        ],
-                        "ClusterFlavors": [
-                            "*"
-                        ],
-                        "NodeTypes": [
-                            "*"
-                        ],
-                        "ClusterVersions": [
-                            "*"
-                        ],
-                        "OsType": [
-                            "*"
-                        ],
-                        "VMSizes": [
-                            "STANDARD_D2_V2"
-                        ]
-                    },
-                    {
-                        "FilterMode": "Exclude",
-                        "Regions": [
-                            "*"
-                        ],
-                        "ClusterFlavors": [
-                            "*"
-                        ],
-                        "NodeTypes": [
-                            "*"
-                        ],
-                        "ClusterVersions": [
-                            "1.6",
-                            "2.1",
-                            "3.0"
-                        ],
-                        "OsType": [
-                            "*"
-                        ],
-                        "VMSizes": [
-                            "STANDARD_D2_V2"
-                        ]
-                    },
-                    {
-                        "FilterMode": "Exclude",
-                        "Regions": [
-                            "*"
-                        ],
-                        "ClusterFlavors": [
-                            "InteractiveHive"
-                        ],
-                        "NodeTypes": [
-                            "HeadNodeRole",
-                            "WorkerNodeRole"
-                        ],
-                        "ClusterVersions": [
-                            "*"
-                        ],
-                        "OsType": [
-                            "*"
-                        ],
-                        "VMSizes": [
-                            "STANDARD_D2_V2"
-                        ]
-                    },
-                    {
-                        "FilterMode": "Exclude",
-                        "Regions": [
-                            "*"
-                        ],
-                        "ClusterFlavors": [
-                            "Sandbox"
-                        ],
-                        "NodeTypes": [
-                            "*"
-                        ],
-                        "ClusterVersions": [
-                            "*"
-                        ],
-                        "OsType": [
-                            "*"
-                        ],
-                        "VMSizes": [
-                            "STANDARD_D3"
-                        ]
-                    },
-                    {
-                        "FilterMode": "Exclude",
-                        "Regions": [
-                            "*"
-                        ],
-                        "ClusterFlavors": [
-                            "Hadoop",
-                            "Spark"
-                        ],
-                        "NodeTypes": [
-                            "ZookeeperRole"
-                        ],
-                        "ClusterVersions": [
-                            "*"
-                        ],
-                        "OsType": [
-                            "*"
-                        ],
-                        "VMSizes": [
-                            "STANDARD_D3"
-                        ]
-                    },
-                    {
-                        "FilterMode": "Exclude",
-                        "Regions": [
-                            "Central India"
-                        ],
-                        "ClusterFlavors": [
-                            "*"
-                        ],
-                        "NodeTypes": [
-                            "*"
-                        ],
-                        "ClusterVersions": [
-                            "*"
-                        ],
-                        "OsType": [
-                            "*"
-                        ],
-                        "VMSizes": [
-                            "STANDARD_D3"
-                        ]
-                    },
-                    {
-                        "FilterMode": "Exclude",
-                        "Regions": [
-                            "*"
-                        ],
-                        "ClusterFlavors": [
-                            "*"
-                        ],
-                        "NodeTypes": [
-                            "*"
-                        ],
-                        "ClusterVersions": [
-                            "1.6",
-                            "2.1",
-                            "3.0"
-                        ],
-                        "OsType": [
-                            "*"
-                        ],
-                        "VMSizes": [
-                            "STANDARD_D3"
-                        ]
-                    },
-                    {
-                        "FilterMode": "Exclude",
-                        "Regions": [
-                            "*"
-                        ],
-                        "ClusterFlavors": [
-                            "InteractiveHive"
-                        ],
-                        "NodeTypes": [
-                            "HeadNodeRole",
-                            "WorkerNodeRole"
-                        ],
-                        "ClusterVersions": [
-                            "*"
-                        ],
-                        "OsType": [
-                            "*"
-                        ],
-                        "VMSizes": [
-                            "STANDARD_D3"
-                        ]
-                    },
-                    {
-                        "FilterMode": "Exclude",
-                        "Regions": [
-                            "*"
-                        ],
-                        "ClusterFlavors": [
-                            "Sandbox"
-                        ],
-                        "NodeTypes": [
-                            "*"
-                        ],
-                        "ClusterVersions": [
-                            "*"
-                        ],
-                        "OsType": [
-                            "*"
-                        ],
-                        "VMSizes": [
-                            "STANDARD_D3_V2"
-                        ]
-                    },
-                    {
-                        "FilterMode": "Exclude",
-                        "Regions": [
-                            "*"
-                        ],
-                        "ClusterFlavors": [
-                            "Hadoop",
-                            "Spark"
-                        ],
-                        "NodeTypes": [
-                            "ZookeeperRole"
-                        ],
-                        "ClusterVersions": [
-                            "*"
-                        ],
-                        "OsType": [
-                            "*"
-                        ],
-                        "VMSizes": [
-                            "STANDARD_D3_V2"
-                        ]
-                    },
-                    {
-                        "FilterMode": "Exclude",
-                        "Regions": [
-                            "Brazil South",
-                            "Japan West"
-                        ],
-                        "ClusterFlavors": [
-                            "*"
-                        ],
-                        "NodeTypes": [
-                            "*"
-                        ],
-                        "ClusterVersions": [
-                            "*"
-                        ],
-                        "OsType": [
-                            "*"
-                        ],
-                        "VMSizes": [
-                            "STANDARD_D3_V2"
-                        ]
-                    },
-                    {
-                        "FilterMode": "Exclude",
-                        "Regions": [
-                            "*"
-                        ],
-                        "ClusterFlavors": [
-                            "*"
-                        ],
-                        "NodeTypes": [
-                            "*"
-                        ],
-                        "ClusterVersions": [
-                            "1.6",
-                            "2.1",
-                            "3.0"
-                        ],
-                        "OsType": [
-                            "*"
-                        ],
-                        "VMSizes": [
-                            "STANDARD_D3_V2"
-                        ]
-                    },
-                    {
-                        "FilterMode": "Exclude",
-                        "Regions": [
-                            "*"
-                        ],
-                        "ClusterFlavors": [
-                            "InteractiveHive"
-                        ],
-                        "NodeTypes": [
-                            "HeadNodeRole",
-                            "WorkerNodeRole"
-                        ],
-                        "ClusterVersions": [
-                            "*"
-                        ],
-                        "OsType": [
-                            "*"
-                        ],
-                        "VMSizes": [
-                            "STANDARD_D3_V2"
-                        ]
-                    },
-                    {
-                        "FilterMode": "Exclude",
-                        "Regions": [
-                            "*"
-                        ],
-                        "ClusterFlavors": [
-                            "Sandbox"
-                        ],
-                        "NodeTypes": [
-                            "*"
-                        ],
-                        "ClusterVersions": [
-                            "*"
-                        ],
-                        "OsType": [
-                            "*"
-                        ],
-                        "VMSizes": [
-                            "STANDARD_D4"
-                        ]
-                    },
-                    {
-                        "FilterMode": "Exclude",
-                        "Regions": [
-                            "*"
-                        ],
-                        "ClusterFlavors": [
-                            "Hadoop",
-                            "Spark"
-                        ],
-                        "NodeTypes": [
-                            "ZookeeperRole"
-                        ],
-                        "ClusterVersions": [
-                            "*"
-                        ],
-                        "OsType": [
-                            "*"
-                        ],
-                        "VMSizes": [
-                            "STANDARD_D4"
-                        ]
-                    },
-                    {
-                        "FilterMode": "Exclude",
-                        "Regions": [
-                            "Central India"
-                        ],
-                        "ClusterFlavors": [
-                            "*"
-                        ],
-                        "NodeTypes": [
-                            "*"
-                        ],
-                        "ClusterVersions": [
-                            "*"
-                        ],
-                        "OsType": [
-                            "*"
-                        ],
-                        "VMSizes": [
-                            "STANDARD_D4"
-                        ]
-                    },
-                    {
-                        "FilterMode": "Exclude",
-                        "Regions": [
-                            "*"
-                        ],
-                        "ClusterFlavors": [
-                            "*"
-                        ],
-                        "NodeTypes": [
-                            "*"
-                        ],
-                        "ClusterVersions": [
-                            "1.6",
-                            "2.1",
-                            "3.0"
-                        ],
-                        "OsType": [
-                            "*"
-                        ],
-                        "VMSizes": [
-                            "STANDARD_D4"
-                        ]
-                    },
-                    {
-                        "FilterMode": "Exclude",
-                        "Regions": [
-                            "*"
-                        ],
-                        "ClusterFlavors": [
-                            "InteractiveHive"
-                        ],
-                        "NodeTypes": [
-                            "HeadNodeRole",
-                            "WorkerNodeRole"
-                        ],
-                        "ClusterVersions": [
-                            "*"
-                        ],
-                        "OsType": [
-                            "*"
-                        ],
-                        "VMSizes": [
-                            "STANDARD_D4"
-                        ]
-                    },
-                    {
-                        "FilterMode": "Exclude",
-                        "Regions": [
-                            "*"
-                        ],
-                        "ClusterFlavors": [
-                            "Sandbox"
-                        ],
-                        "NodeTypes": [
-                            "*"
-                        ],
-                        "ClusterVersions": [
-                            "*"
-                        ],
-                        "OsType": [
-                            "*"
-                        ],
-                        "VMSizes": [
-                            "STANDARD_D4_V2"
-                        ]
-                    },
-                    {
-                        "FilterMode": "Exclude",
-                        "Regions": [
-                            "*"
-                        ],
-                        "ClusterFlavors": [
-                            "Hadoop",
-                            "Spark"
-                        ],
-                        "NodeTypes": [
-                            "ZookeeperRole"
-                        ],
-                        "ClusterVersions": [
-                            "*"
-                        ],
-                        "OsType": [
-                            "*"
-                        ],
-                        "VMSizes": [
-                            "STANDARD_D4_V2"
-                        ]
-                    },
-                    {
-                        "FilterMode": "Exclude",
-                        "Regions": [
-                            "Brazil South",
-                            "Japan West"
-                        ],
-                        "ClusterFlavors": [
-                            "*"
-                        ],
-                        "NodeTypes": [
-                            "*"
-                        ],
-                        "ClusterVersions": [
-                            "*"
-                        ],
-                        "OsType": [
-                            "*"
-                        ],
-                        "VMSizes": [
-                            "STANDARD_D4_V2"
-                        ]
-                    },
-                    {
-                        "FilterMode": "Exclude",
-                        "Regions": [
-                            "*"
-                        ],
-                        "ClusterFlavors": [
-                            "*"
-                        ],
-                        "NodeTypes": [
-                            "*"
-                        ],
-                        "ClusterVersions": [
-                            "1.6",
-                            "2.1",
-                            "3.0"
-                        ],
-                        "OsType": [
-                            "*"
-                        ],
-                        "VMSizes": [
-                            "STANDARD_D4_V2"
-                        ]
-                    },
-                    {
-                        "FilterMode": "Exclude",
-                        "Regions": [
-                            "*"
-                        ],
-                        "ClusterFlavors": [
-                            "InteractiveHive"
-                        ],
-                        "NodeTypes": [
-                            "HeadNodeRole",
-                            "WorkerNodeRole"
-                        ],
-                        "ClusterVersions": [
-                            "*"
-                        ],
-                        "OsType": [
-                            "*"
-                        ],
-                        "VMSizes": [
-                            "STANDARD_D4_V2"
-                        ]
-                    },
-                    {
-                        "FilterMode": "Exclude",
-                        "Regions": [
-                            "*"
-                        ],
-                        "ClusterFlavors": [
-                            "Sandbox"
-                        ],
-                        "NodeTypes": [
-                            "*"
-                        ],
-                        "ClusterVersions": [
-                            "*"
-                        ],
-                        "OsType": [
-                            "*"
-                        ],
-                        "VMSizes": [
-                            "STANDARD_D5_V2"
-                        ]
-                    },
-                    {
-                        "FilterMode": "Exclude",
-                        "Regions": [
-                            "*"
-                        ],
-                        "ClusterFlavors": [
-                            "Hadoop",
-                            "Spark"
-                        ],
-                        "NodeTypes": [
-                            "ZookeeperRole"
-                        ],
-                        "ClusterVersions": [
-                            "*"
-                        ],
-                        "OsType": [
-                            "*"
-                        ],
-                        "VMSizes": [
-                            "STANDARD_D5_V2"
-                        ]
-                    },
-                    {
-                        "FilterMode": "Exclude",
-                        "Regions": [
-                            "Brazil South",
-                            "Japan West"
-                        ],
-                        "ClusterFlavors": [
-                            "*"
-                        ],
-                        "NodeTypes": [
-                            "*"
-                        ],
-                        "ClusterVersions": [
-                            "*"
-                        ],
-                        "OsType": [
-                            "*"
-                        ],
-                        "VMSizes": [
-                            "STANDARD_D5_V2"
-                        ]
-                    },
-                    {
-                        "FilterMode": "Exclude",
-                        "Regions": [
-                            "*"
-                        ],
-                        "ClusterFlavors": [
-                            "*"
-                        ],
-                        "NodeTypes": [
-                            "*"
-                        ],
-                        "ClusterVersions": [
-                            "1.6",
-                            "2.1",
-                            "3.0"
-                        ],
-                        "OsType": [
-                            "*"
-                        ],
-                        "VMSizes": [
-                            "STANDARD_D5_V2"
-                        ]
-                    },
-                    {
-                        "FilterMode": "Exclude",
-                        "Regions": [
-                            "*"
-                        ],
-                        "ClusterFlavors": [
-                            "InteractiveHive"
-                        ],
-                        "NodeTypes": [
-                            "HeadNodeRole",
-                            "WorkerNodeRole"
-                        ],
-                        "ClusterVersions": [
-                            "*"
-                        ],
-                        "OsType": [
-                            "*"
-                        ],
-                        "VMSizes": [
-                            "STANDARD_D5_V2"
-                        ]
-                    },
-                    {
-                        "FilterMode": "Include",
-                        "Regions": [
-                            "Central India"
-                        ],
-                        "ClusterFlavors": [
-                            "HBase",
-                            "Storm"
-                        ],
-                        "NodeTypes": [
-                            "ZookeeperRole"
-                        ],
-                        "ClusterVersions": [
-                            "*"
-                        ],
-                        "OsType": [
-                            "*"
-                        ],
-                        "VMSizes": [
-                            "STANDARD_D1_V2"
-                        ]
-                    },
-                    {
-                        "FilterMode": "Include",
-                        "Regions": [
-                            "Central India"
-                        ],
-                        "ClusterFlavors": [
-                            "HBase",
-                            "Storm"
-                        ],
-                        "NodeTypes": [
-                            "ZookeeperRole"
-                        ],
-                        "ClusterVersions": [
-                            "*"
-                        ],
-                        "OsType": [
-                            "*"
-                        ],
-                        "VMSizes": [
-                            "STANDARD_D11_V2"
-                        ]
-                    },
-                    {
-                        "FilterMode": "Include",
-                        "Regions": [
-                            "Central India"
-                        ],
-                        "ClusterFlavors": [
-                            "*"
-                        ],
-                        "NodeTypes": [
-                            "HeadNodeRole",
-                            "WorkerNodeRole"
-                        ],
-                        "ClusterVersions": [
-                            "*"
-                        ],
-                        "OsType": [
-                            "*"
-                        ],
-                        "VMSizes": [
-                            "STANDARD_D12_V2"
-                        ]
-                    },
-                    {
-                        "FilterMode": "Include",
-                        "Regions": [
-                            "Central India"
-                        ],
-                        "ClusterFlavors": [
-                            "HBase",
-                            "Storm"
-                        ],
-                        "NodeTypes": [
-                            "ZookeeperRole"
-                        ],
-                        "ClusterVersions": [
-                            "*"
-                        ],
-                        "OsType": [
-                            "*"
-                        ],
-                        "VMSizes": [
-                            "STANDARD_D12_V2"
-                        ]
-                    },
-                    {
-                        "FilterMode": "Include",
-                        "Regions": [
-                            "Central India"
-                        ],
-                        "ClusterFlavors": [
-                            "*"
-                        ],
-                        "NodeTypes": [
-                            "HeadNodeRole",
-                            "WorkerNodeRole"
-                        ],
-                        "ClusterVersions": [
-                            "*"
-                        ],
-                        "OsType": [
-                            "*"
-                        ],
-                        "VMSizes": [
-                            "STANDARD_D13_V2"
-                        ]
-                    },
-                    {
-                        "FilterMode": "Include",
-                        "Regions": [
-                            "Central India"
-                        ],
-                        "ClusterFlavors": [
-                            "HBase",
-                            "Storm"
-                        ],
-                        "NodeTypes": [
-                            "ZookeeperRole"
-                        ],
-                        "ClusterVersions": [
-                            "*"
-                        ],
-                        "OsType": [
-                            "*"
-                        ],
-                        "VMSizes": [
-                            "STANDARD_D13_V2"
-                        ]
-                    },
-                    {
-                        "FilterMode": "Include",
-                        "Regions": [
-                            "Central India"
-                        ],
-                        "ClusterFlavors": [
-                            "*"
-                        ],
-                        "NodeTypes": [
-                            "HeadNodeRole",
-                            "WorkerNodeRole"
-                        ],
-                        "ClusterVersions": [
-                            "*"
-                        ],
-                        "OsType": [
-                            "*"
-                        ],
-                        "VMSizes": [
-                            "STANDARD_D14_V2"
-                        ]
-                    },
-                    {
-                        "FilterMode": "Include",
-                        "Regions": [
-                            "Central India"
-                        ],
-                        "ClusterFlavors": [
-                            "HBase",
-                            "Storm"
-                        ],
-                        "NodeTypes": [
-                            "ZookeeperRole"
-                        ],
-                        "ClusterVersions": [
-                            "*"
-                        ],
-                        "OsType": [
-                            "*"
-                        ],
-                        "VMSizes": [
-                            "STANDARD_D14_V2"
-                        ]
-                    },
-                    {
-                        "FilterMode": "Include",
-                        "Regions": [
-                            "Central India"
-                        ],
-                        "ClusterFlavors": [
-                            "HBase",
-                            "Storm"
-                        ],
-                        "NodeTypes": [
-                            "ZookeeperRole"
-                        ],
-                        "ClusterVersions": [
-                            "*"
-                        ],
-                        "OsType": [
-                            "*"
-                        ],
-                        "VMSizes": [
-                            "STANDARD_D2_V2"
-                        ]
-                    },
-                    {
-                        "FilterMode": "Include",
-                        "Regions": [
-                            "Central India"
-                        ],
-                        "ClusterFlavors": [
-                            "*"
-                        ],
-                        "NodeTypes": [
-                            "HeadNodeRole",
-                            "WorkerNodeRole"
-                        ],
-                        "ClusterVersions": [
-                            "*"
-                        ],
-                        "OsType": [
-                            "*"
-                        ],
-                        "VMSizes": [
-                            "STANDARD_D3_V2"
-                        ]
-                    },
-                    {
-                        "FilterMode": "Include",
-                        "Regions": [
-                            "Central India"
-                        ],
-                        "ClusterFlavors": [
-                            "HBase",
-                            "Storm"
-                        ],
-                        "NodeTypes": [
-                            "ZookeeperRole"
-                        ],
-                        "ClusterVersions": [
-                            "*"
-                        ],
-                        "OsType": [
-                            "*"
-                        ],
-                        "VMSizes": [
-                            "STANDARD_D3_V2"
-                        ]
-                    },
-                    {
-                        "FilterMode": "Include",
-                        "Regions": [
-                            "Central India"
-                        ],
-                        "ClusterFlavors": [
-                            "*"
-                        ],
-                        "NodeTypes": [
-                            "HeadNodeRole",
-                            "WorkerNodeRole"
-                        ],
-                        "ClusterVersions": [
-                            "*"
-                        ],
-                        "OsType": [
-                            "*"
-                        ],
-                        "VMSizes": [
-                            "STANDARD_D4_V2"
-                        ]
-                    },
-                    {
-                        "FilterMode": "Include",
-                        "Regions": [
-                            "Central India"
-                        ],
-                        "ClusterFlavors": [
-                            "HBase",
-                            "Storm"
-                        ],
-                        "NodeTypes": [
-                            "ZookeeperRole"
-                        ],
-                        "ClusterVersions": [
-                            "*"
-                        ],
-                        "OsType": [
-                            "*"
-                        ],
-                        "VMSizes": [
-                            "STANDARD_D4_V2"
-                        ]
-                    }
-                ],
-                "features": [
-                    "ALLOW_GATEWAY_AUTH_BYPASS",
-                    "AUX_IAAS_FUNCTIONALITIES",
-                    "BLOCK_APPS_FOR_SECURE_CLUSTER",
-                    "CLUSTER_RESIZE",
-                    "CLUSTERS_CONTRACT_1",
-                    "CLUSTERS_CONTRACT_1_SDK",
-                    "CLUSTERS_CONTRACT_2_SDK",
-                    "CLUSTERS_CONTRACT_VERSION_3_SDK",
-                    "COLLECTANONYMIZEDLOGS",
-                    "CONTAINER_LOG_COLLECTOR",
-                    "CONTAINER_RESOURCE_V3",
-                    "CUSTOM_ACTIONS_V2",
-                    "DATALAKE",
-                    "DATALAKE_3_2",
-                    "DATALAKE_3_4",
-                    "DATALAKE_3_5",
-                    "DATALAKE_DEFAULTFS_3_5",
-                    "DEFAULT_CONTAINER_IDENTIFIER_AND_STORAGEFQDN_ALREADY_USED",
-                    "DOCUMENT_VALIDATION_IN_API",
-                    "ENABLEDATALAKE",
-                    "ENABLEGENEVAANALYTICS",
-                    "HADOOP_VIRTUAL_NETWORK_ENABLED",
-                    "HS2_ZK_ROUTER_INTERACTIVEHIVE",
-                    "IAAS_ALLOW_CUSTOM_DNS",
-                    "IAAS_AMBARI_APP_TIMELINE_SERVER_HA_SERVICE",
-                    "IAAS_AMBARI_DEPENDENCY_BASED_DEPLOYMENT",
-                    "IAAS_AMBARI_HA_SERVICES",
-                    "IAAS_AMBARI_HISTORYSERVER_HA_SERVICE",
-                    "IAAS_AMBARI_LOWER_LATENCY",
-                    "IAAS_AMBARI_SKIP_COMPONENTS_INSTALL",
-                    "IAAS_ARM_PROVISIONING",
-                    "IAAS_CLOSE_HEAD_HTTPS_END_POINT_AFTER_CLUSTER_CREATE",
-                    "IAAS_CLUSTER_APPLICATION_ALLOW_MULTIPLE_ROLE_INSTANCES",
-                    "IAAS_CLUSTER_APPLICATION_REMOVE",
-                    "IAAS_CLUSTER_CONTAINER_PREUPLOAD_SUBMIT_WAIT",
-                    "IAAS_CLUSTER_RSERVER",
-                    "IAAS_DB_CREATION_IN_PARALLEL_TO_VM",
-                    "IAAS_DELETE_LEAKED_RESOURCES",
-                    "IAAS_DEPLOYMENTS",
-                    "IAAS_DO_NOT_CREATE_WASB_TABLES_IN_CUSTOMER_STORAGE",
-                    "IAAS_ENABLE_CLUSTER_CONFIG_OVERRIDES",
-                    "IAAS_ENABLE_OFFLINE_CLEANUP",
-                    "IAAS_ENABLE_OFFLINE_CLEANUP_FOR_DELETING_VMS",
-                    "IAAS_INCLUDE_STORAGE_IN_SUBSCRIPTION_SELECTION",
-                    "IAAS_PARALLEL_DB_CREATE",
-                    "IAAS_PREPROVISION_METASTORES_SCHEMAS",
-                    "IAAS_SCRIPTACTIONS_DELETE_VMS_CRUD_FAILURES",
-                    "IAAS_SCRIPTACTIONS_RUNNING",
-                    "IAAS_SHORT_VM_NAME",
-                    "IAAS_SUBMIT_AMBARI_REQUEST_ONCE_LINUX_VM_ARE_AVAILABLE",
-                    "IAAS_TEZ_ATS_V15",
-                    "IAAS_USE_UNATTENDED_UPGRADES_FOR_PATCHING",
-                    "IAAS_VALIDATE_CUSTOM_VNET",
-                    "IAAS_VALIDATE_NSG",
-                    "IAAS_WAIT_FOR_CLOSING_HEAD_HTTPS_END_POINT_AFTER_CLUSTER_CREATE",
-                    "IAAS_YARN_HDINSIGHT_SQL_TIMELINE_STORE",
-                    "IAAS_YARN_HDINSIGHT_TIMELINE_STORE",
-                    "INTERACTIVEHIVE",
-                    "MDSCENTRALLOGGING",
-                    "NODE_SETUP_POLLER_ENABLED",
-                    "OVERPROVISION_HOSTGROUP_edgenode",
-                    "OVERPROVISION_HOSTGROUP_Gateway",
-                    "OVERPROVISION_HOSTGROUP_Workernode",
-                    "OVERPROVISION_HOSTGROUP_zookeepernode",
-                    "PERF_OPTIMIZED_RESOURCE_LOCATION_FETCH",
-                    "PORTALAPPINSTALL",
-                    "POWERSHELL_SCRIPT_ACTION",
-                    "POWERSHELL_SCRIPT_ACTION_SDK",
-                    "PREMIUM_TIER_PREVIEW",
-                    "PROVISIONING_AGENT",
-                    "RMHA",
-                    "RSERVER_CLUSTERTYPE_3_5_ENABLED",
-                    "RSERVER_CLUSTERTYPE_ENABLED",
-                    "SHOW_HUMBOLDT_GA",
-                    "SHOW_IBIZA_CREATE",
-                    "SPARK_2_1",
-                    "SPARK_EXPERIMENTAL",
-                    "STORM_PREVIEW",
-                    "UI_CREATE_WIZARD_V2",
-                    "VIRTUAL_NETWORK_ENABLED",
-                    "VMSIZES_AUX"
-                ],
-                "quota": {
-                    "cores_used": 72,
-                    "max_cores_allowed": 1000,
-                    "regionalQuotas": [{
-                            "region_name": "Australia East",
-                            "cores_used": 0,
-                            "cores_available": 1000
-                        },
-                        {
-                            "region_name": "Australia Southeast",
-                            "cores_used": 0,
-                            "cores_available": 1000
-                        },
-                        {
-                            "region_name": "Brazil South",
-                            "cores_used": 0,
-                            "cores_available": 1000
-                        },
-                        {
-                            "region_name": "Canada Central",
-                            "cores_used": 0,
-                            "cores_available": 1000
-                        },
-                        {
-                            "region_name": "Canada East",
-                            "cores_used": 0,
-                            "cores_available": 1000
-                        },
-                        {
-                            "region_name": "Central India",
-                            "cores_used": 0,
-                            "cores_available": 1000
-                        },
-                        {
-                            "region_name": "Central US",
-                            "cores_used": 24,
-                            "cores_available": 1000
-                        },
-                        {
-                            "region_name": "Central US EUAP",
-                            "cores_used": 0,
-                            "cores_available": 1000
-                        },
-                        {
-                            "region_name": "East Asia",
-                            "cores_used": 24,
-                            "cores_available": 1000
-                        },
-                        {
-                            "region_name": "East US",
-                            "cores_used": 24,
-                            "cores_available": 1000
-                        },
-                        {
-                            "region_name": "East US 2",
-                            "cores_used": 0,
-                            "cores_available": 1000
-                        },
-                        {
-                            "region_name": "Japan East",
-                            "cores_used": 0,
-                            "cores_available": 1000
-                        },
-                        {
-                            "region_name": "Japan West",
-                            "cores_used": 0,
-                            "cores_available": 1000
-                        },
-                        {
-                            "region_name": "North Central US",
-                            "cores_used": 0,
-                            "cores_available": 1000
-                        },
-                        {
-                            "region_name": "North Europe",
-                            "cores_used": 0,
-                            "cores_available": 1000
-                        },
-                        {
-                            "region_name": "South Central US",
-                            "cores_used": 0,
-                            "cores_available": 1000
-                        },
-                        {
-                            "region_name": "Southeast Asia",
-                            "cores_used": 0,
-                            "cores_available": 1000
-                        },
-                        {
-                            "region_name": "West Central US",
-                            "cores_used": 0,
-                            "cores_available": 1000
-                        },
-                        {
-                            "region_name": "West Europe",
-                            "cores_used": 0,
-                            "cores_available": 1000
-                        },
-                        {
-                            "region_name": "West US",
-                            "cores_used": 132,
-                            "cores_available": 1000
-                        },
-                        {
-                            "region_name": "West US 2",
-                            "cores_used": 0,
-                            "cores_available": 1000
-                        }
-                    ]
+  "parameters": {
+    "location": "West US",
+    "api-version": "2015-03-01-preview",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "versions": {
+          "paas": {
+            "available": [
+              {
+                "friendlyName": "1.6",
+                "displayName": "HdInsight version 1.6.1.0.335536",
+                "isDefault": "false"
+              },
+              {
+                "friendlyName": "2.1",
+                "displayName": "Version 2.1.9.406.1221105",
+                "isDefault": "false",
+                "componentVersions": {
+                  "HDP": "1.3",
+                  "Hadoop": "1.2.0"
                 }
+              },
+              {
+                "friendlyName": "3.0",
+                "displayName": "Version 3.0.6.989.2441725",
+                "isDefault": "false",
+                "componentVersions": {
+                  "HDP": "2.0",
+                  "Hadoop": "2.2.0"
+                }
+              },
+              {
+                "friendlyName": "3.1",
+                "displayName": "Version 3.1.4.989.2441725",
+                "isDefault": "false",
+                "componentVersions": {
+                  "HDP": "2.1.7",
+                  "Hadoop": "2.4.0",
+                  "HBase": "0.98"
+                }
+              },
+              {
+                "friendlyName": "3.2",
+                "displayName": "Version 3.2.7.989.2441725",
+                "isDefault": "false",
+                "componentVersions": {
+                  "HDP": "2.2",
+                  "Hadoop": "2.6.0",
+                  "HBase": "0.98.4",
+                  "Storm": "0.9.3"
+                }
+              },
+              {
+                "friendlyName": "3.3",
+                "displayName": "Version 3.3.0.989.2441725",
+                "isDefault": "true",
+                "componentVersions": {
+                  "HDP": "2.3",
+                  "Hadoop": "2.7.0",
+                  "HBase": "1.1.2",
+                  "Storm": "0.10.0"
+                }
+              }
+            ]
+          },
+          "iaas": {
+            "available": [
+              {
+                "friendlyName": "3.2",
+                "displayName": "Version 3.2.1000.0.8840373",
+                "isDefault": "false",
+                "componentVersions": {
+                  "HDP": "2.2",
+                  "Hadoop": "2.6.0",
+                  "HBase": "0.98.4",
+                  "Storm": "0.9.3"
+                }
+              },
+              {
+                "friendlyName": "3.3",
+                "displayName": "Version 3.3.1000.0.9776961",
+                "isDefault": "false",
+                "componentVersions": {
+                  "HDP": "2.3",
+                  "Hadoop": "2.7.0",
+                  "HBase": "1.1.2",
+                  "Storm": "0.10.0",
+                  "Spark": "1.5.2"
+                }
+              },
+              {
+                "friendlyName": "3.4",
+                "displayName": "Version 3.4.1000.0.9719475",
+                "isDefault": "false",
+                "componentVersions": {
+                  "HDP": "2.4",
+                  "Hadoop": "2.7.1",
+                  "HBase": "1.1.2",
+                  "Storm": "0.10.0",
+                  "Spark": "1.6.2",
+                  "RServer": "8.0"
+                }
+              },
+              {
+                "friendlyName": "3.5",
+                "displayName": "Version 3.5.1000.0.9732704",
+                "isDefault": "true",
+                "componentVersions": {
+                  "HDP": "2.5",
+                  "Hadoop": "2.7.3",
+                  "InteractiveHive": "2.1.0",
+                  "HBase": "1.1.2",
+                  "Storm": "1.0.1",
+                  "Spark": "1.6.3,2.0.2",
+                  "RServer": "9.0"
+                }
+              },
+              {
+                "friendlyName": "3.6",
+                "displayName": "Version 3.6.1000.0.9503998",
+                "isDefault": "false",
+                "componentVersions": {
+                  "HDP": "2.6",
+                  "Spark": "2.1.0"
+                }
+              },
+              {
+                "friendlyName": "99.152",
+                "displayName": "Version 99.152.1000.0.6943836",
+                "isDefault": "false"
+              }
+            ]
+          }
+        },
+        "regions": {
+          "paas": {
+            "available": [
+              "AUSTRALIA EAST",
+              "AUSTRALIA SOUTHEAST",
+              "BRAZIL SOUTH",
+              "CENTRAL INDIA",
+              "CENTRAL US",
+              "EAST ASIA",
+              "EAST US",
+              "EAST US 2",
+              "JAPAN EAST",
+              "JAPAN WEST",
+              "NORTH CENTRAL US",
+              "NORTH EUROPE",
+              "SOUTH CENTRAL US",
+              "SOUTHEAST ASIA",
+              "WEST EUROPE",
+              "WEST US",
+              "WEST US 2"
+            ]
+          },
+          "iaas": {
+            "available": [
+              "AUSTRALIA EAST",
+              "AUSTRALIA SOUTHEAST",
+              "BRAZIL SOUTH",
+              "CANADA CENTRAL",
+              "CANADA EAST",
+              "CENTRAL INDIA",
+              "CENTRAL US",
+              "CENTRAL US EUAP",
+              "EAST ASIA",
+              "EAST US",
+              "EAST US 2",
+              "JAPAN EAST",
+              "JAPAN WEST",
+              "NORTH CENTRAL US",
+              "NORTH EUROPE",
+              "SOUTH CENTRAL US",
+              "SOUTHEAST ASIA",
+              "WEST CENTRAL US",
+              "WEST EUROPE",
+              "WEST US",
+              "WEST US 2"
+            ]
+          }
+        },
+        "vmSizes": {
+          "paas": {
+            "available": [
+              "A5",
+              "A6",
+              "A7",
+              "EXTRALARGE",
+              "LARGE",
+              "MEDIUM",
+              "SMALL",
+              "STANDARD_D1",
+              "STANDARD_D1_V2",
+              "STANDARD_D11",
+              "STANDARD_D11_V2",
+              "STANDARD_D12",
+              "STANDARD_D12_V2",
+              "STANDARD_D13",
+              "STANDARD_D13_V2",
+              "STANDARD_D14",
+              "STANDARD_D14_V2",
+              "STANDARD_D2",
+              "STANDARD_D2_V2",
+              "STANDARD_D3",
+              "STANDARD_D3_V2",
+              "STANDARD_D4",
+              "STANDARD_D4_V2",
+              "STANDARD_D5_V2"
+            ]
+          },
+          "iaas": {
+            "available": [
+              "A5",
+              "A6",
+              "A7",
+              "EXTRALARGE",
+              "LARGE",
+              "MEDIUM",
+              "SMALL",
+              "STANDARD_D1",
+              "STANDARD_D1_V2",
+              "STANDARD_D11",
+              "STANDARD_D11_V2",
+              "STANDARD_D12",
+              "STANDARD_D12_V2",
+              "STANDARD_D13",
+              "STANDARD_D13_V2",
+              "STANDARD_D14",
+              "STANDARD_D14_V2",
+              "STANDARD_D2",
+              "STANDARD_D2_V2",
+              "STANDARD_D3",
+              "STANDARD_D3_V2",
+              "STANDARD_D4",
+              "STANDARD_D4_V2",
+              "STANDARD_D5_V2"
+            ]
+          }
+        },
+        "vmSize_filters": [
+          {
+            "FilterMode": "Exclude",
+            "Regions": [
+              "*"
+            ],
+            "ClusterFlavors": [
+              "Sandbox"
+            ],
+            "NodeTypes": [
+              "*"
+            ],
+            "ClusterVersions": [
+              "*"
+            ],
+            "vmsizes": [
+              "A5"
+            ]
+          },
+          {
+            "FilterMode": "Exclude",
+            "Regions": [
+              "*"
+            ],
+            "ClusterFlavors": [
+              "*"
+            ],
+            "NodeTypes": [
+              "HeadNodeRole",
+              "WorkerNodeRole",
+              "EdgeNodeRole"
+            ],
+            "ClusterVersions": [
+              "*"
+            ],
+            "vmsizes": [
+              "A5"
+            ]
+          },
+          {
+            "FilterMode": "Exclude",
+            "Regions": [
+              "*"
+            ],
+            "ClusterFlavors": [
+              "Hadoop",
+              "Spark"
+            ],
+            "NodeTypes": [
+              "ZookeeperRole"
+            ],
+            "ClusterVersions": [
+              "*"
+            ],
+            "vmsizes": [
+              "A5"
+            ]
+          },
+          {
+            "FilterMode": "Exclude",
+            "Regions": [
+              "*"
+            ],
+            "ClusterFlavors": [
+              "*"
+            ],
+            "NodeTypes": [
+              "*"
+            ],
+            "ClusterVersions": [
+              "1.6",
+              "2.1",
+              "3.0"
+            ],
+            "vmsizes": [
+              "A5"
+            ]
+          },
+          {
+            "FilterMode": "Exclude",
+            "Regions": [
+              "*"
+            ],
+            "ClusterFlavors": [
+              "InteractiveHive"
+            ],
+            "NodeTypes": [
+              "HeadNodeRole",
+              "WorkerNodeRole"
+            ],
+            "ClusterVersions": [
+              "*"
+            ],
+            "vmsizes": [
+              "A5"
+            ]
+          },
+          {
+            "FilterMode": "Exclude",
+            "Regions": [
+              "*"
+            ],
+            "ClusterFlavors": [
+              "Sandbox"
+            ],
+            "NodeTypes": [
+              "*"
+            ],
+            "ClusterVersions": [
+              "*"
+            ],
+            "vmsizes": [
+              "A6"
+            ]
+          },
+          {
+            "FilterMode": "Exclude",
+            "Regions": [
+              "*"
+            ],
+            "ClusterFlavors": [
+              "Hadoop",
+              "Spark"
+            ],
+            "NodeTypes": [
+              "ZookeeperRole"
+            ],
+            "ClusterVersions": [
+              "*"
+            ],
+            "vmsizes": [
+              "A6"
+            ]
+          },
+          {
+            "FilterMode": "Exclude",
+            "Regions": [
+              "*"
+            ],
+            "ClusterFlavors": [
+              "*"
+            ],
+            "NodeTypes": [
+              "*"
+            ],
+            "ClusterVersions": [
+              "1.6",
+              "2.1",
+              "3.0"
+            ],
+            "vmsizes": [
+              "A6"
+            ]
+          },
+          {
+            "FilterMode": "Exclude",
+            "Regions": [
+              "*"
+            ],
+            "ClusterFlavors": [
+              "InteractiveHive"
+            ],
+            "NodeTypes": [
+              "HeadNodeRole",
+              "WorkerNodeRole"
+            ],
+            "ClusterVersions": [
+              "*"
+            ],
+            "vmsizes": [
+              "A6"
+            ]
+          },
+          {
+            "FilterMode": "Exclude",
+            "Regions": [
+              "*"
+            ],
+            "ClusterFlavors": [
+              "Sandbox"
+            ],
+            "NodeTypes": [
+              "*"
+            ],
+            "ClusterVersions": [
+              "*"
+            ],
+            "vmsizes": [
+              "A7"
+            ]
+          },
+          {
+            "FilterMode": "Exclude",
+            "Regions": [
+              "*"
+            ],
+            "ClusterFlavors": [
+              "Hadoop",
+              "Spark"
+            ],
+            "NodeTypes": [
+              "ZookeeperRole"
+            ],
+            "ClusterVersions": [
+              "*"
+            ],
+            "vmsizes": [
+              "A7"
+            ]
+          },
+          {
+            "FilterMode": "Exclude",
+            "Regions": [
+              "*"
+            ],
+            "ClusterFlavors": [
+              "*"
+            ],
+            "NodeTypes": [
+              "*"
+            ],
+            "ClusterVersions": [
+              "1.6",
+              "2.1",
+              "3.0"
+            ],
+            "vmsizes": [
+              "A7"
+            ]
+          },
+          {
+            "FilterMode": "Exclude",
+            "Regions": [
+              "*"
+            ],
+            "ClusterFlavors": [
+              "InteractiveHive"
+            ],
+            "NodeTypes": [
+              "HeadNodeRole",
+              "WorkerNodeRole"
+            ],
+            "ClusterVersions": [
+              "*"
+            ],
+            "vmsizes": [
+              "A7"
+            ]
+          },
+          {
+            "FilterMode": "Exclude",
+            "Regions": [
+              "*"
+            ],
+            "ClusterFlavors": [
+              "Sandbox"
+            ],
+            "NodeTypes": [
+              "*"
+            ],
+            "ClusterVersions": [
+              "*"
+            ],
+            "vmsizes": [
+              "EXTRALARGE"
+            ]
+          },
+          {
+            "FilterMode": "Exclude",
+            "Regions": [
+              "*"
+            ],
+            "ClusterFlavors": [
+              "Hadoop",
+              "Spark"
+            ],
+            "NodeTypes": [
+              "ZookeeperRole"
+            ],
+            "ClusterVersions": [
+              "*"
+            ],
+            "vmsizes": [
+              "EXTRALARGE"
+            ]
+          },
+          {
+            "FilterMode": "Exclude",
+            "Regions": [
+              "*"
+            ],
+            "ClusterFlavors": [
+              "*"
+            ],
+            "NodeTypes": [
+              "WorkerNodeRole",
+              "EdgeNodeRole",
+              "ZookeeperRole"
+            ],
+            "ClusterVersions": [
+              "1.6",
+              "2.1",
+              "3.0"
+            ],
+            "vmsizes": [
+              "EXTRALARGE"
+            ]
+          },
+          {
+            "FilterMode": "Exclude",
+            "Regions": [
+              "*"
+            ],
+            "ClusterFlavors": [
+              "InteractiveHive"
+            ],
+            "NodeTypes": [
+              "HeadNodeRole",
+              "WorkerNodeRole"
+            ],
+            "ClusterVersions": [
+              "*"
+            ],
+            "vmsizes": [
+              "EXTRALARGE"
+            ]
+          },
+          {
+            "FilterMode": "Exclude",
+            "Regions": [
+              "*"
+            ],
+            "ClusterFlavors": [
+              "Sandbox"
+            ],
+            "NodeTypes": [
+              "*"
+            ],
+            "ClusterVersions": [
+              "*"
+            ],
+            "vmsizes": [
+              "LARGE"
+            ]
+          },
+          {
+            "FilterMode": "Exclude",
+            "Regions": [
+              "*"
+            ],
+            "ClusterFlavors": [
+              "Hadoop",
+              "Spark"
+            ],
+            "NodeTypes": [
+              "ZookeeperRole"
+            ],
+            "ClusterVersions": [
+              "*"
+            ],
+            "vmsizes": [
+              "LARGE"
+            ]
+          },
+          {
+            "FilterMode": "Exclude",
+            "Regions": [
+              "*"
+            ],
+            "ClusterFlavors": [
+              "*"
+            ],
+            "NodeTypes": [
+              "ZookeeperRole"
+            ],
+            "ClusterVersions": [
+              "1.6",
+              "2.1",
+              "3.0"
+            ],
+            "vmsizes": [
+              "LARGE"
+            ]
+          },
+          {
+            "FilterMode": "Exclude",
+            "Regions": [
+              "*"
+            ],
+            "ClusterFlavors": [
+              "InteractiveHive"
+            ],
+            "NodeTypes": [
+              "HeadNodeRole",
+              "WorkerNodeRole"
+            ],
+            "ClusterVersions": [
+              "*"
+            ],
+            "vmsizes": [
+              "LARGE"
+            ]
+          },
+          {
+            "FilterMode": "Exclude",
+            "Regions": [
+              "*"
+            ],
+            "ClusterFlavors": [
+              "Sandbox"
+            ],
+            "NodeTypes": [
+              "*"
+            ],
+            "ClusterVersions": [
+              "*"
+            ],
+            "vmsizes": [
+              "MEDIUM"
+            ]
+          },
+          {
+            "FilterMode": "Exclude",
+            "Regions": [
+              "*"
+            ],
+            "ClusterFlavors": [
+              "*"
+            ],
+            "NodeTypes": [
+              "HeadNodeRole",
+              "WorkerNodeRole",
+              "EdgeNodeRole"
+            ],
+            "ClusterVersions": [
+              "*"
+            ],
+            "vmsizes": [
+              "MEDIUM"
+            ]
+          },
+          {
+            "FilterMode": "Exclude",
+            "Regions": [
+              "*"
+            ],
+            "ClusterFlavors": [
+              "InteractiveHive"
+            ],
+            "NodeTypes": [
+              "HeadNodeRole",
+              "WorkerNodeRole"
+            ],
+            "ClusterVersions": [
+              "*"
+            ],
+            "vmsizes": [
+              "MEDIUM"
+            ]
+          },
+          {
+            "FilterMode": "Exclude",
+            "Regions": [
+              "*"
+            ],
+            "ClusterFlavors": [
+              "Sandbox"
+            ],
+            "NodeTypes": [
+              "*"
+            ],
+            "ClusterVersions": [
+              "*"
+            ],
+            "vmsizes": [
+              "SMALL"
+            ]
+          },
+          {
+            "FilterMode": "Exclude",
+            "Regions": [
+              "*"
+            ],
+            "ClusterFlavors": [
+              "*"
+            ],
+            "NodeTypes": [
+              "HeadNodeRole",
+              "WorkerNodeRole",
+              "EdgeNodeRole"
+            ],
+            "ClusterVersions": [
+              "*"
+            ],
+            "vmsizes": [
+              "SMALL"
+            ]
+          },
+          {
+            "FilterMode": "Exclude",
+            "Regions": [
+              "*"
+            ],
+            "ClusterFlavors": [
+              "HBase",
+              "Spark"
+            ],
+            "NodeTypes": [
+              "ZookeeperRole"
+            ],
+            "ClusterVersions": [
+              "*"
+            ],
+            "vmsizes": [
+              "SMALL"
+            ]
+          },
+          {
+            "FilterMode": "Exclude",
+            "Regions": [
+              "*"
+            ],
+            "ClusterFlavors": [
+              "InteractiveHive"
+            ],
+            "NodeTypes": [
+              "HeadNodeRole",
+              "WorkerNodeRole"
+            ],
+            "ClusterVersions": [
+              "*"
+            ],
+            "vmsizes": [
+              "SMALL"
+            ]
+          },
+          {
+            "FilterMode": "Exclude",
+            "Regions": [
+              "*"
+            ],
+            "ClusterFlavors": [
+              "Sandbox"
+            ],
+            "NodeTypes": [
+              "*"
+            ],
+            "ClusterVersions": [
+              "*"
+            ],
+            "vmsizes": [
+              "STANDARD_D1"
+            ]
+          },
+          {
+            "FilterMode": "Exclude",
+            "Regions": [
+              "*"
+            ],
+            "ClusterFlavors": [
+              "*"
+            ],
+            "NodeTypes": [
+              "HeadNodeRole",
+              "WorkerNodeRole",
+              "EdgeNodeRole"
+            ],
+            "ClusterVersions": [
+              "*"
+            ],
+            "vmsizes": [
+              "STANDARD_D1"
+            ]
+          },
+          {
+            "FilterMode": "Exclude",
+            "Regions": [
+              "*"
+            ],
+            "ClusterFlavors": [
+              "Hadoop",
+              "Spark"
+            ],
+            "NodeTypes": [
+              "ZookeeperRole"
+            ],
+            "ClusterVersions": [
+              "*"
+            ],
+            "vmsizes": [
+              "STANDARD_D1"
+            ]
+          },
+          {
+            "FilterMode": "Exclude",
+            "Regions": [
+              "Central India"
+            ],
+            "ClusterFlavors": [
+              "*"
+            ],
+            "NodeTypes": [
+              "*"
+            ],
+            "ClusterVersions": [
+              "*"
+            ],
+            "vmsizes": [
+              "STANDARD_D1"
+            ]
+          },
+          {
+            "FilterMode": "Exclude",
+            "Regions": [
+              "*"
+            ],
+            "ClusterFlavors": [
+              "*"
+            ],
+            "NodeTypes": [
+              "*"
+            ],
+            "ClusterVersions": [
+              "1.6",
+              "2.1",
+              "3.0"
+            ],
+            "vmsizes": [
+              "STANDARD_D1"
+            ]
+          },
+          {
+            "FilterMode": "Exclude",
+            "Regions": [
+              "*"
+            ],
+            "ClusterFlavors": [
+              "InteractiveHive"
+            ],
+            "NodeTypes": [
+              "HeadNodeRole",
+              "WorkerNodeRole"
+            ],
+            "ClusterVersions": [
+              "*"
+            ],
+            "vmsizes": [
+              "STANDARD_D1"
+            ]
+          },
+          {
+            "FilterMode": "Exclude",
+            "Regions": [
+              "*"
+            ],
+            "ClusterFlavors": [
+              "Sandbox"
+            ],
+            "NodeTypes": [
+              "*"
+            ],
+            "ClusterVersions": [
+              "*"
+            ],
+            "vmsizes": [
+              "STANDARD_D1_V2"
+            ]
+          },
+          {
+            "FilterMode": "Exclude",
+            "Regions": [
+              "*"
+            ],
+            "ClusterFlavors": [
+              "*"
+            ],
+            "NodeTypes": [
+              "HeadNodeRole",
+              "WorkerNodeRole",
+              "EdgeNodeRole"
+            ],
+            "ClusterVersions": [
+              "*"
+            ],
+            "vmsizes": [
+              "STANDARD_D1_V2"
+            ]
+          },
+          {
+            "FilterMode": "Exclude",
+            "Regions": [
+              "*"
+            ],
+            "ClusterFlavors": [
+              "Hadoop",
+              "Spark"
+            ],
+            "NodeTypes": [
+              "ZookeeperRole"
+            ],
+            "ClusterVersions": [
+              "*"
+            ],
+            "vmsizes": [
+              "STANDARD_D1_V2"
+            ]
+          },
+          {
+            "FilterMode": "Exclude",
+            "Regions": [
+              "Brazil South",
+              "Japan West"
+            ],
+            "ClusterFlavors": [
+              "*"
+            ],
+            "NodeTypes": [
+              "*"
+            ],
+            "ClusterVersions": [
+              "*"
+            ],
+            "vmsizes": [
+              "STANDARD_D1_V2"
+            ]
+          },
+          {
+            "FilterMode": "Exclude",
+            "Regions": [
+              "*"
+            ],
+            "ClusterFlavors": [
+              "*"
+            ],
+            "NodeTypes": [
+              "*"
+            ],
+            "ClusterVersions": [
+              "1.6",
+              "2.1",
+              "3.0"
+            ],
+            "vmsizes": [
+              "STANDARD_D1_V2"
+            ]
+          },
+          {
+            "FilterMode": "Exclude",
+            "Regions": [
+              "*"
+            ],
+            "ClusterFlavors": [
+              "InteractiveHive"
+            ],
+            "NodeTypes": [
+              "HeadNodeRole",
+              "WorkerNodeRole"
+            ],
+            "ClusterVersions": [
+              "*"
+            ],
+            "vmsizes": [
+              "STANDARD_D1_V2"
+            ]
+          },
+          {
+            "FilterMode": "Exclude",
+            "Regions": [
+              "*"
+            ],
+            "ClusterFlavors": [
+              "Sandbox"
+            ],
+            "NodeTypes": [
+              "*"
+            ],
+            "ClusterVersions": [
+              "*"
+            ],
+            "vmsizes": [
+              "STANDARD_D11"
+            ]
+          },
+          {
+            "FilterMode": "Exclude",
+            "Regions": [
+              "*"
+            ],
+            "ClusterFlavors": [
+              "*"
+            ],
+            "NodeTypes": [
+              "HeadNodeRole",
+              "WorkerNodeRole",
+              "EdgeNodeRole"
+            ],
+            "ClusterVersions": [
+              "*"
+            ],
+            "vmsizes": [
+              "STANDARD_D11"
+            ]
+          },
+          {
+            "FilterMode": "Exclude",
+            "Regions": [
+              "*"
+            ],
+            "ClusterFlavors": [
+              "Hadoop",
+              "Spark"
+            ],
+            "NodeTypes": [
+              "ZookeeperRole"
+            ],
+            "ClusterVersions": [
+              "*"
+            ],
+            "vmsizes": [
+              "STANDARD_D11"
+            ]
+          },
+          {
+            "FilterMode": "Exclude",
+            "Regions": [
+              "Central India"
+            ],
+            "ClusterFlavors": [
+              "*"
+            ],
+            "NodeTypes": [
+              "*"
+            ],
+            "ClusterVersions": [
+              "*"
+            ],
+            "vmsizes": [
+              "STANDARD_D11"
+            ]
+          },
+          {
+            "FilterMode": "Exclude",
+            "Regions": [
+              "*"
+            ],
+            "ClusterFlavors": [
+              "*"
+            ],
+            "NodeTypes": [
+              "*"
+            ],
+            "ClusterVersions": [
+              "1.6",
+              "2.1",
+              "3.0"
+            ],
+            "vmsizes": [
+              "STANDARD_D11"
+            ]
+          },
+          {
+            "FilterMode": "Exclude",
+            "Regions": [
+              "*"
+            ],
+            "ClusterFlavors": [
+              "InteractiveHive"
+            ],
+            "NodeTypes": [
+              "HeadNodeRole",
+              "WorkerNodeRole"
+            ],
+            "ClusterVersions": [
+              "*"
+            ],
+            "vmsizes": [
+              "STANDARD_D11"
+            ]
+          },
+          {
+            "FilterMode": "Exclude",
+            "Regions": [
+              "*"
+            ],
+            "ClusterFlavors": [
+              "Sandbox"
+            ],
+            "NodeTypes": [
+              "*"
+            ],
+            "ClusterVersions": [
+              "*"
+            ],
+            "vmsizes": [
+              "STANDARD_D11_V2"
+            ]
+          },
+          {
+            "FilterMode": "Exclude",
+            "Regions": [
+              "*"
+            ],
+            "ClusterFlavors": [
+              "*"
+            ],
+            "NodeTypes": [
+              "HeadNodeRole",
+              "WorkerNodeRole",
+              "EdgeNodeRole"
+            ],
+            "ClusterVersions": [
+              "*"
+            ],
+            "vmsizes": [
+              "STANDARD_D11_V2"
+            ]
+          },
+          {
+            "FilterMode": "Exclude",
+            "Regions": [
+              "*"
+            ],
+            "ClusterFlavors": [
+              "Hadoop",
+              "Spark"
+            ],
+            "NodeTypes": [
+              "ZookeeperRole"
+            ],
+            "ClusterVersions": [
+              "*"
+            ],
+            "vmsizes": [
+              "STANDARD_D11_V2"
+            ]
+          },
+          {
+            "FilterMode": "Exclude",
+            "Regions": [
+              "Brazil South",
+              "Japan West"
+            ],
+            "ClusterFlavors": [
+              "*"
+            ],
+            "NodeTypes": [
+              "*"
+            ],
+            "ClusterVersions": [
+              "*"
+            ],
+            "vmsizes": [
+              "STANDARD_D11_V2"
+            ]
+          },
+          {
+            "FilterMode": "Exclude",
+            "Regions": [
+              "*"
+            ],
+            "ClusterFlavors": [
+              "*"
+            ],
+            "NodeTypes": [
+              "*"
+            ],
+            "ClusterVersions": [
+              "1.6",
+              "2.1",
+              "3.0"
+            ],
+            "vmsizes": [
+              "STANDARD_D11_V2"
+            ]
+          },
+          {
+            "FilterMode": "Exclude",
+            "Regions": [
+              "*"
+            ],
+            "ClusterFlavors": [
+              "InteractiveHive"
+            ],
+            "NodeTypes": [
+              "HeadNodeRole",
+              "WorkerNodeRole"
+            ],
+            "ClusterVersions": [
+              "*"
+            ],
+            "vmsizes": [
+              "STANDARD_D11_V2"
+            ]
+          },
+          {
+            "FilterMode": "Exclude",
+            "Regions": [
+              "*"
+            ],
+            "ClusterFlavors": [
+              "Sandbox"
+            ],
+            "NodeTypes": [
+              "*"
+            ],
+            "ClusterVersions": [
+              "*"
+            ],
+            "vmsizes": [
+              "STANDARD_D12"
+            ]
+          },
+          {
+            "FilterMode": "Exclude",
+            "Regions": [
+              "*"
+            ],
+            "ClusterFlavors": [
+              "Hadoop",
+              "Spark"
+            ],
+            "NodeTypes": [
+              "ZookeeperRole"
+            ],
+            "ClusterVersions": [
+              "*"
+            ],
+            "vmsizes": [
+              "STANDARD_D12"
+            ]
+          },
+          {
+            "FilterMode": "Exclude",
+            "Regions": [
+              "Central India"
+            ],
+            "ClusterFlavors": [
+              "*"
+            ],
+            "NodeTypes": [
+              "*"
+            ],
+            "ClusterVersions": [
+              "*"
+            ],
+            "vmsizes": [
+              "STANDARD_D12"
+            ]
+          },
+          {
+            "FilterMode": "Exclude",
+            "Regions": [
+              "*"
+            ],
+            "ClusterFlavors": [
+              "*"
+            ],
+            "NodeTypes": [
+              "*"
+            ],
+            "ClusterVersions": [
+              "1.6",
+              "2.1",
+              "3.0"
+            ],
+            "vmsizes": [
+              "STANDARD_D12"
+            ]
+          },
+          {
+            "FilterMode": "Exclude",
+            "Regions": [
+              "*"
+            ],
+            "ClusterFlavors": [
+              "InteractiveHive"
+            ],
+            "NodeTypes": [
+              "HeadNodeRole",
+              "WorkerNodeRole"
+            ],
+            "ClusterVersions": [
+              "*"
+            ],
+            "vmsizes": [
+              "STANDARD_D12"
+            ]
+          },
+          {
+            "FilterMode": "Exclude",
+            "Regions": [
+              "*"
+            ],
+            "ClusterFlavors": [
+              "Sandbox"
+            ],
+            "NodeTypes": [
+              "*"
+            ],
+            "ClusterVersions": [
+              "*"
+            ],
+            "vmsizes": [
+              "STANDARD_D12_V2"
+            ]
+          },
+          {
+            "FilterMode": "Exclude",
+            "Regions": [
+              "*"
+            ],
+            "ClusterFlavors": [
+              "Hadoop",
+              "Spark"
+            ],
+            "NodeTypes": [
+              "ZookeeperRole"
+            ],
+            "ClusterVersions": [
+              "*"
+            ],
+            "vmsizes": [
+              "STANDARD_D12_V2"
+            ]
+          },
+          {
+            "FilterMode": "Exclude",
+            "Regions": [
+              "Brazil South",
+              "Japan West"
+            ],
+            "ClusterFlavors": [
+              "*"
+            ],
+            "NodeTypes": [
+              "*"
+            ],
+            "ClusterVersions": [
+              "*"
+            ],
+            "vmsizes": [
+              "STANDARD_D12_V2"
+            ]
+          },
+          {
+            "FilterMode": "Exclude",
+            "Regions": [
+              "*"
+            ],
+            "ClusterFlavors": [
+              "*"
+            ],
+            "NodeTypes": [
+              "*"
+            ],
+            "ClusterVersions": [
+              "1.6",
+              "2.1",
+              "3.0"
+            ],
+            "vmsizes": [
+              "STANDARD_D12_V2"
+            ]
+          },
+          {
+            "FilterMode": "Exclude",
+            "Regions": [
+              "*"
+            ],
+            "ClusterFlavors": [
+              "InteractiveHive"
+            ],
+            "NodeTypes": [
+              "HeadNodeRole",
+              "WorkerNodeRole"
+            ],
+            "ClusterVersions": [
+              "*"
+            ],
+            "vmsizes": [
+              "STANDARD_D12_V2"
+            ]
+          },
+          {
+            "FilterMode": "Exclude",
+            "Regions": [
+              "*"
+            ],
+            "ClusterFlavors": [
+              "Sandbox"
+            ],
+            "NodeTypes": [
+              "*"
+            ],
+            "ClusterVersions": [
+              "*"
+            ],
+            "vmsizes": [
+              "STANDARD_D13"
+            ]
+          },
+          {
+            "FilterMode": "Exclude",
+            "Regions": [
+              "*"
+            ],
+            "ClusterFlavors": [
+              "Hadoop",
+              "Spark"
+            ],
+            "NodeTypes": [
+              "ZookeeperRole"
+            ],
+            "ClusterVersions": [
+              "*"
+            ],
+            "vmsizes": [
+              "STANDARD_D13"
+            ]
+          },
+          {
+            "FilterMode": "Exclude",
+            "Regions": [
+              "Central India"
+            ],
+            "ClusterFlavors": [
+              "*"
+            ],
+            "NodeTypes": [
+              "*"
+            ],
+            "ClusterVersions": [
+              "*"
+            ],
+            "vmsizes": [
+              "STANDARD_D13"
+            ]
+          },
+          {
+            "FilterMode": "Exclude",
+            "Regions": [
+              "*"
+            ],
+            "ClusterFlavors": [
+              "*"
+            ],
+            "NodeTypes": [
+              "*"
+            ],
+            "ClusterVersions": [
+              "1.6",
+              "2.1",
+              "3.0"
+            ],
+            "vmsizes": [
+              "STANDARD_D13"
+            ]
+          },
+          {
+            "FilterMode": "Exclude",
+            "Regions": [
+              "*"
+            ],
+            "ClusterFlavors": [
+              "Hadoop",
+              "Spark"
+            ],
+            "NodeTypes": [
+              "ZookeeperRole"
+            ],
+            "ClusterVersions": [
+              "*"
+            ],
+            "vmsizes": [
+              "STANDARD_D13_V2"
+            ]
+          },
+          {
+            "FilterMode": "Exclude",
+            "Regions": [
+              "Brazil South",
+              "Japan West"
+            ],
+            "ClusterFlavors": [
+              "*"
+            ],
+            "NodeTypes": [
+              "*"
+            ],
+            "ClusterVersions": [
+              "*"
+            ],
+            "vmsizes": [
+              "STANDARD_D13_V2"
+            ]
+          },
+          {
+            "FilterMode": "Exclude",
+            "Regions": [
+              "*"
+            ],
+            "ClusterFlavors": [
+              "*"
+            ],
+            "NodeTypes": [
+              "*"
+            ],
+            "ClusterVersions": [
+              "1.6",
+              "2.1",
+              "3.0"
+            ],
+            "vmsizes": [
+              "STANDARD_D13_V2"
+            ]
+          },
+          {
+            "FilterMode": "Exclude",
+            "Regions": [
+              "*"
+            ],
+            "ClusterFlavors": [
+              "Sandbox"
+            ],
+            "NodeTypes": [
+              "*"
+            ],
+            "ClusterVersions": [
+              "*"
+            ],
+            "vmsizes": [
+              "STANDARD_D14"
+            ]
+          },
+          {
+            "FilterMode": "Exclude",
+            "Regions": [
+              "*"
+            ],
+            "ClusterFlavors": [
+              "Hadoop",
+              "Spark"
+            ],
+            "NodeTypes": [
+              "ZookeeperRole"
+            ],
+            "ClusterVersions": [
+              "*"
+            ],
+            "vmsizes": [
+              "STANDARD_D14"
+            ]
+          },
+          {
+            "FilterMode": "Exclude",
+            "Regions": [
+              "Central India"
+            ],
+            "ClusterFlavors": [
+              "*"
+            ],
+            "NodeTypes": [
+              "*"
+            ],
+            "ClusterVersions": [
+              "*"
+            ],
+            "vmsizes": [
+              "STANDARD_D14"
+            ]
+          },
+          {
+            "FilterMode": "Exclude",
+            "Regions": [
+              "*"
+            ],
+            "ClusterFlavors": [
+              "*"
+            ],
+            "NodeTypes": [
+              "*"
+            ],
+            "ClusterVersions": [
+              "1.6",
+              "2.1",
+              "3.0"
+            ],
+            "vmsizes": [
+              "STANDARD_D14"
+            ]
+          },
+          {
+            "FilterMode": "Exclude",
+            "Regions": [
+              "*"
+            ],
+            "ClusterFlavors": [
+              "Sandbox"
+            ],
+            "NodeTypes": [
+              "*"
+            ],
+            "ClusterVersions": [
+              "*"
+            ],
+            "vmsizes": [
+              "STANDARD_D14_V2"
+            ]
+          },
+          {
+            "FilterMode": "Exclude",
+            "Regions": [
+              "*"
+            ],
+            "ClusterFlavors": [
+              "Hadoop",
+              "Spark"
+            ],
+            "NodeTypes": [
+              "ZookeeperRole"
+            ],
+            "ClusterVersions": [
+              "*"
+            ],
+            "vmsizes": [
+              "STANDARD_D14_V2"
+            ]
+          },
+          {
+            "FilterMode": "Exclude",
+            "Regions": [
+              "Brazil South",
+              "Japan West"
+            ],
+            "ClusterFlavors": [
+              "*"
+            ],
+            "NodeTypes": [
+              "*"
+            ],
+            "ClusterVersions": [
+              "*"
+            ],
+            "vmsizes": [
+              "STANDARD_D14_V2"
+            ]
+          },
+          {
+            "FilterMode": "Exclude",
+            "Regions": [
+              "*"
+            ],
+            "ClusterFlavors": [
+              "*"
+            ],
+            "NodeTypes": [
+              "*"
+            ],
+            "ClusterVersions": [
+              "1.6",
+              "2.1",
+              "3.0"
+            ],
+            "vmsizes": [
+              "STANDARD_D14_V2"
+            ]
+          },
+          {
+            "FilterMode": "Exclude",
+            "Regions": [
+              "*"
+            ],
+            "ClusterFlavors": [
+              "Sandbox"
+            ],
+            "NodeTypes": [
+              "*"
+            ],
+            "ClusterVersions": [
+              "*"
+            ],
+            "vmsizes": [
+              "STANDARD_D2"
+            ]
+          },
+          {
+            "FilterMode": "Exclude",
+            "Regions": [
+              "*"
+            ],
+            "ClusterFlavors": [
+              "*"
+            ],
+            "NodeTypes": [
+              "HeadNodeRole",
+              "WorkerNodeRole",
+              "EdgeNodeRole"
+            ],
+            "ClusterVersions": [
+              "*"
+            ],
+            "vmsizes": [
+              "STANDARD_D2"
+            ]
+          },
+          {
+            "FilterMode": "Exclude",
+            "Regions": [
+              "*"
+            ],
+            "ClusterFlavors": [
+              "Hadoop",
+              "Spark"
+            ],
+            "NodeTypes": [
+              "ZookeeperRole"
+            ],
+            "ClusterVersions": [
+              "*"
+            ],
+            "vmsizes": [
+              "STANDARD_D2"
+            ]
+          },
+          {
+            "FilterMode": "Exclude",
+            "Regions": [
+              "Central India"
+            ],
+            "ClusterFlavors": [
+              "*"
+            ],
+            "NodeTypes": [
+              "*"
+            ],
+            "ClusterVersions": [
+              "*"
+            ],
+            "vmsizes": [
+              "STANDARD_D2"
+            ]
+          },
+          {
+            "FilterMode": "Exclude",
+            "Regions": [
+              "*"
+            ],
+            "ClusterFlavors": [
+              "*"
+            ],
+            "NodeTypes": [
+              "*"
+            ],
+            "ClusterVersions": [
+              "1.6",
+              "2.1",
+              "3.0"
+            ],
+            "vmsizes": [
+              "STANDARD_D2"
+            ]
+          },
+          {
+            "FilterMode": "Exclude",
+            "Regions": [
+              "*"
+            ],
+            "ClusterFlavors": [
+              "InteractiveHive"
+            ],
+            "NodeTypes": [
+              "HeadNodeRole",
+              "WorkerNodeRole"
+            ],
+            "ClusterVersions": [
+              "*"
+            ],
+            "vmsizes": [
+              "STANDARD_D2"
+            ]
+          },
+          {
+            "FilterMode": "Exclude",
+            "Regions": [
+              "*"
+            ],
+            "ClusterFlavors": [
+              "Sandbox"
+            ],
+            "NodeTypes": [
+              "*"
+            ],
+            "ClusterVersions": [
+              "*"
+            ],
+            "vmsizes": [
+              "STANDARD_D2_V2"
+            ]
+          },
+          {
+            "FilterMode": "Exclude",
+            "Regions": [
+              "*"
+            ],
+            "ClusterFlavors": [
+              "*"
+            ],
+            "NodeTypes": [
+              "HeadNodeRole",
+              "WorkerNodeRole",
+              "EdgeNodeRole"
+            ],
+            "ClusterVersions": [
+              "*"
+            ],
+            "vmsizes": [
+              "STANDARD_D2_V2"
+            ]
+          },
+          {
+            "FilterMode": "Exclude",
+            "Regions": [
+              "*"
+            ],
+            "ClusterFlavors": [
+              "Hadoop",
+              "Spark"
+            ],
+            "NodeTypes": [
+              "ZookeeperRole"
+            ],
+            "ClusterVersions": [
+              "*"
+            ],
+            "vmsizes": [
+              "STANDARD_D2_V2"
+            ]
+          },
+          {
+            "FilterMode": "Exclude",
+            "Regions": [
+              "Brazil South",
+              "Japan West"
+            ],
+            "ClusterFlavors": [
+              "*"
+            ],
+            "NodeTypes": [
+              "*"
+            ],
+            "ClusterVersions": [
+              "*"
+            ],
+            "vmsizes": [
+              "STANDARD_D2_V2"
+            ]
+          },
+          {
+            "FilterMode": "Exclude",
+            "Regions": [
+              "*"
+            ],
+            "ClusterFlavors": [
+              "*"
+            ],
+            "NodeTypes": [
+              "*"
+            ],
+            "ClusterVersions": [
+              "1.6",
+              "2.1",
+              "3.0"
+            ],
+            "vmsizes": [
+              "STANDARD_D2_V2"
+            ]
+          },
+          {
+            "FilterMode": "Exclude",
+            "Regions": [
+              "*"
+            ],
+            "ClusterFlavors": [
+              "InteractiveHive"
+            ],
+            "NodeTypes": [
+              "HeadNodeRole",
+              "WorkerNodeRole"
+            ],
+            "ClusterVersions": [
+              "*"
+            ],
+            "vmsizes": [
+              "STANDARD_D2_V2"
+            ]
+          },
+          {
+            "FilterMode": "Exclude",
+            "Regions": [
+              "*"
+            ],
+            "ClusterFlavors": [
+              "Sandbox"
+            ],
+            "NodeTypes": [
+              "*"
+            ],
+            "ClusterVersions": [
+              "*"
+            ],
+            "vmsizes": [
+              "STANDARD_D3"
+            ]
+          },
+          {
+            "FilterMode": "Exclude",
+            "Regions": [
+              "*"
+            ],
+            "ClusterFlavors": [
+              "Hadoop",
+              "Spark"
+            ],
+            "NodeTypes": [
+              "ZookeeperRole"
+            ],
+            "ClusterVersions": [
+              "*"
+            ],
+            "vmsizes": [
+              "STANDARD_D3"
+            ]
+          },
+          {
+            "FilterMode": "Exclude",
+            "Regions": [
+              "Central India"
+            ],
+            "ClusterFlavors": [
+              "*"
+            ],
+            "NodeTypes": [
+              "*"
+            ],
+            "ClusterVersions": [
+              "*"
+            ],
+            "vmsizes": [
+              "STANDARD_D3"
+            ]
+          },
+          {
+            "FilterMode": "Exclude",
+            "Regions": [
+              "*"
+            ],
+            "ClusterFlavors": [
+              "*"
+            ],
+            "NodeTypes": [
+              "*"
+            ],
+            "ClusterVersions": [
+              "1.6",
+              "2.1",
+              "3.0"
+            ],
+            "vmsizes": [
+              "STANDARD_D3"
+            ]
+          },
+          {
+            "FilterMode": "Exclude",
+            "Regions": [
+              "*"
+            ],
+            "ClusterFlavors": [
+              "InteractiveHive"
+            ],
+            "NodeTypes": [
+              "HeadNodeRole",
+              "WorkerNodeRole"
+            ],
+            "ClusterVersions": [
+              "*"
+            ],
+            "vmsizes": [
+              "STANDARD_D3"
+            ]
+          },
+          {
+            "FilterMode": "Exclude",
+            "Regions": [
+              "*"
+            ],
+            "ClusterFlavors": [
+              "Sandbox"
+            ],
+            "NodeTypes": [
+              "*"
+            ],
+            "ClusterVersions": [
+              "*"
+            ],
+            "vmsizes": [
+              "STANDARD_D3_V2"
+            ]
+          },
+          {
+            "FilterMode": "Exclude",
+            "Regions": [
+              "*"
+            ],
+            "ClusterFlavors": [
+              "Hadoop",
+              "Spark"
+            ],
+            "NodeTypes": [
+              "ZookeeperRole"
+            ],
+            "ClusterVersions": [
+              "*"
+            ],
+            "vmsizes": [
+              "STANDARD_D3_V2"
+            ]
+          },
+          {
+            "FilterMode": "Exclude",
+            "Regions": [
+              "Brazil South",
+              "Japan West"
+            ],
+            "ClusterFlavors": [
+              "*"
+            ],
+            "NodeTypes": [
+              "*"
+            ],
+            "ClusterVersions": [
+              "*"
+            ],
+            "vmsizes": [
+              "STANDARD_D3_V2"
+            ]
+          },
+          {
+            "FilterMode": "Exclude",
+            "Regions": [
+              "*"
+            ],
+            "ClusterFlavors": [
+              "*"
+            ],
+            "NodeTypes": [
+              "*"
+            ],
+            "ClusterVersions": [
+              "1.6",
+              "2.1",
+              "3.0"
+            ],
+            "vmsizes": [
+              "STANDARD_D3_V2"
+            ]
+          },
+          {
+            "FilterMode": "Exclude",
+            "Regions": [
+              "*"
+            ],
+            "ClusterFlavors": [
+              "InteractiveHive"
+            ],
+            "NodeTypes": [
+              "HeadNodeRole",
+              "WorkerNodeRole"
+            ],
+            "ClusterVersions": [
+              "*"
+            ],
+            "vmsizes": [
+              "STANDARD_D3_V2"
+            ]
+          },
+          {
+            "FilterMode": "Exclude",
+            "Regions": [
+              "*"
+            ],
+            "ClusterFlavors": [
+              "Sandbox"
+            ],
+            "NodeTypes": [
+              "*"
+            ],
+            "ClusterVersions": [
+              "*"
+            ],
+            "vmsizes": [
+              "STANDARD_D4"
+            ]
+          },
+          {
+            "FilterMode": "Exclude",
+            "Regions": [
+              "*"
+            ],
+            "ClusterFlavors": [
+              "Hadoop",
+              "Spark"
+            ],
+            "NodeTypes": [
+              "ZookeeperRole"
+            ],
+            "ClusterVersions": [
+              "*"
+            ],
+            "vmsizes": [
+              "STANDARD_D4"
+            ]
+          },
+          {
+            "FilterMode": "Exclude",
+            "Regions": [
+              "Central India"
+            ],
+            "ClusterFlavors": [
+              "*"
+            ],
+            "NodeTypes": [
+              "*"
+            ],
+            "ClusterVersions": [
+              "*"
+            ],
+            "vmsizes": [
+              "STANDARD_D4"
+            ]
+          },
+          {
+            "FilterMode": "Exclude",
+            "Regions": [
+              "*"
+            ],
+            "ClusterFlavors": [
+              "*"
+            ],
+            "NodeTypes": [
+              "*"
+            ],
+            "ClusterVersions": [
+              "1.6",
+              "2.1",
+              "3.0"
+            ],
+            "vmsizes": [
+              "STANDARD_D4"
+            ]
+          },
+          {
+            "FilterMode": "Exclude",
+            "Regions": [
+              "*"
+            ],
+            "ClusterFlavors": [
+              "InteractiveHive"
+            ],
+            "NodeTypes": [
+              "HeadNodeRole",
+              "WorkerNodeRole"
+            ],
+            "ClusterVersions": [
+              "*"
+            ],
+            "vmsizes": [
+              "STANDARD_D4"
+            ]
+          },
+          {
+            "FilterMode": "Exclude",
+            "Regions": [
+              "*"
+            ],
+            "ClusterFlavors": [
+              "Sandbox"
+            ],
+            "NodeTypes": [
+              "*"
+            ],
+            "ClusterVersions": [
+              "*"
+            ],
+            "vmsizes": [
+              "STANDARD_D4_V2"
+            ]
+          },
+          {
+            "FilterMode": "Exclude",
+            "Regions": [
+              "*"
+            ],
+            "ClusterFlavors": [
+              "Hadoop",
+              "Spark"
+            ],
+            "NodeTypes": [
+              "ZookeeperRole"
+            ],
+            "ClusterVersions": [
+              "*"
+            ],
+            "vmsizes": [
+              "STANDARD_D4_V2"
+            ]
+          },
+          {
+            "FilterMode": "Exclude",
+            "Regions": [
+              "Brazil South",
+              "Japan West"
+            ],
+            "ClusterFlavors": [
+              "*"
+            ],
+            "NodeTypes": [
+              "*"
+            ],
+            "ClusterVersions": [
+              "*"
+            ],
+            "vmsizes": [
+              "STANDARD_D4_V2"
+            ]
+          },
+          {
+            "FilterMode": "Exclude",
+            "Regions": [
+              "*"
+            ],
+            "ClusterFlavors": [
+              "*"
+            ],
+            "NodeTypes": [
+              "*"
+            ],
+            "ClusterVersions": [
+              "1.6",
+              "2.1",
+              "3.0"
+            ],
+            "vmsizes": [
+              "STANDARD_D4_V2"
+            ]
+          },
+          {
+            "FilterMode": "Exclude",
+            "Regions": [
+              "*"
+            ],
+            "ClusterFlavors": [
+              "InteractiveHive"
+            ],
+            "NodeTypes": [
+              "HeadNodeRole",
+              "WorkerNodeRole"
+            ],
+            "ClusterVersions": [
+              "*"
+            ],
+            "vmsizes": [
+              "STANDARD_D4_V2"
+            ]
+          },
+          {
+            "FilterMode": "Exclude",
+            "Regions": [
+              "*"
+            ],
+            "ClusterFlavors": [
+              "Sandbox"
+            ],
+            "NodeTypes": [
+              "*"
+            ],
+            "ClusterVersions": [
+              "*"
+            ],
+            "vmsizes": [
+              "STANDARD_D5_V2"
+            ]
+          },
+          {
+            "FilterMode": "Exclude",
+            "Regions": [
+              "*"
+            ],
+            "ClusterFlavors": [
+              "Hadoop",
+              "Spark"
+            ],
+            "NodeTypes": [
+              "ZookeeperRole"
+            ],
+            "ClusterVersions": [
+              "*"
+            ],
+            "vmsizes": [
+              "STANDARD_D5_V2"
+            ]
+          },
+          {
+            "FilterMode": "Exclude",
+            "Regions": [
+              "Brazil South",
+              "Japan West"
+            ],
+            "ClusterFlavors": [
+              "*"
+            ],
+            "NodeTypes": [
+              "*"
+            ],
+            "ClusterVersions": [
+              "*"
+            ],
+            "vmsizes": [
+              "STANDARD_D5_V2"
+            ]
+          },
+          {
+            "FilterMode": "Exclude",
+            "Regions": [
+              "*"
+            ],
+            "ClusterFlavors": [
+              "*"
+            ],
+            "NodeTypes": [
+              "*"
+            ],
+            "ClusterVersions": [
+              "1.6",
+              "2.1",
+              "3.0"
+            ],
+            "vmsizes": [
+              "STANDARD_D5_V2"
+            ]
+          },
+          {
+            "FilterMode": "Exclude",
+            "Regions": [
+              "*"
+            ],
+            "ClusterFlavors": [
+              "InteractiveHive"
+            ],
+            "NodeTypes": [
+              "HeadNodeRole",
+              "WorkerNodeRole"
+            ],
+            "ClusterVersions": [
+              "*"
+            ],
+            "vmsizes": [
+              "STANDARD_D5_V2"
+            ]
+          },
+          {
+            "FilterMode": "Include",
+            "Regions": [
+              "Central India"
+            ],
+            "ClusterFlavors": [
+              "HBase",
+              "Storm"
+            ],
+            "NodeTypes": [
+              "ZookeeperRole"
+            ],
+            "ClusterVersions": [
+              "*"
+            ],
+            "vmsizes": [
+              "STANDARD_D1_V2"
+            ]
+          },
+          {
+            "FilterMode": "Include",
+            "Regions": [
+              "Central India"
+            ],
+            "ClusterFlavors": [
+              "HBase",
+              "Storm"
+            ],
+            "NodeTypes": [
+              "ZookeeperRole"
+            ],
+            "ClusterVersions": [
+              "*"
+            ],
+            "vmsizes": [
+              "STANDARD_D11_V2"
+            ]
+          },
+          {
+            "FilterMode": "Include",
+            "Regions": [
+              "Central India"
+            ],
+            "ClusterFlavors": [
+              "*"
+            ],
+            "NodeTypes": [
+              "HeadNodeRole",
+              "WorkerNodeRole"
+            ],
+            "ClusterVersions": [
+              "*"
+            ],
+            "vmsizes": [
+              "STANDARD_D12_V2"
+            ]
+          },
+          {
+            "FilterMode": "Include",
+            "Regions": [
+              "Central India"
+            ],
+            "ClusterFlavors": [
+              "HBase",
+              "Storm"
+            ],
+            "NodeTypes": [
+              "ZookeeperRole"
+            ],
+            "ClusterVersions": [
+              "*"
+            ],
+            "vmsizes": [
+              "STANDARD_D12_V2"
+            ]
+          },
+          {
+            "FilterMode": "Include",
+            "Regions": [
+              "Central India"
+            ],
+            "ClusterFlavors": [
+              "*"
+            ],
+            "NodeTypes": [
+              "HeadNodeRole",
+              "WorkerNodeRole"
+            ],
+            "ClusterVersions": [
+              "*"
+            ],
+            "vmsizes": [
+              "STANDARD_D13_V2"
+            ]
+          },
+          {
+            "FilterMode": "Include",
+            "Regions": [
+              "Central India"
+            ],
+            "ClusterFlavors": [
+              "HBase",
+              "Storm"
+            ],
+            "NodeTypes": [
+              "ZookeeperRole"
+            ],
+            "ClusterVersions": [
+              "*"
+            ],
+            "vmsizes": [
+              "STANDARD_D13_V2"
+            ]
+          },
+          {
+            "FilterMode": "Include",
+            "Regions": [
+              "Central India"
+            ],
+            "ClusterFlavors": [
+              "*"
+            ],
+            "NodeTypes": [
+              "HeadNodeRole",
+              "WorkerNodeRole"
+            ],
+            "ClusterVersions": [
+              "*"
+            ],
+            "vmsizes": [
+              "STANDARD_D14_V2"
+            ]
+          },
+          {
+            "FilterMode": "Include",
+            "Regions": [
+              "Central India"
+            ],
+            "ClusterFlavors": [
+              "HBase",
+              "Storm"
+            ],
+            "NodeTypes": [
+              "ZookeeperRole"
+            ],
+            "ClusterVersions": [
+              "*"
+            ],
+            "vmsizes": [
+              "STANDARD_D14_V2"
+            ]
+          },
+          {
+            "FilterMode": "Include",
+            "Regions": [
+              "Central India"
+            ],
+            "ClusterFlavors": [
+              "HBase",
+              "Storm"
+            ],
+            "NodeTypes": [
+              "ZookeeperRole"
+            ],
+            "ClusterVersions": [
+              "*"
+            ],
+            "vmsizes": [
+              "STANDARD_D2_V2"
+            ]
+          },
+          {
+            "FilterMode": "Include",
+            "Regions": [
+              "Central India"
+            ],
+            "ClusterFlavors": [
+              "*"
+            ],
+            "NodeTypes": [
+              "HeadNodeRole",
+              "WorkerNodeRole"
+            ],
+            "ClusterVersions": [
+              "*"
+            ],
+            "vmsizes": [
+              "STANDARD_D3_V2"
+            ]
+          },
+          {
+            "FilterMode": "Include",
+            "Regions": [
+              "Central India"
+            ],
+            "ClusterFlavors": [
+              "HBase",
+              "Storm"
+            ],
+            "NodeTypes": [
+              "ZookeeperRole"
+            ],
+            "ClusterVersions": [
+              "*"
+            ],
+            "vmsizes": [
+              "STANDARD_D3_V2"
+            ]
+          },
+          {
+            "FilterMode": "Include",
+            "Regions": [
+              "Central India"
+            ],
+            "ClusterFlavors": [
+              "*"
+            ],
+            "NodeTypes": [
+              "HeadNodeRole",
+              "WorkerNodeRole"
+            ],
+            "ClusterVersions": [
+              "*"
+            ],
+            "vmsizes": [
+              "STANDARD_D4_V2"
+            ]
+          },
+          {
+            "FilterMode": "Include",
+            "Regions": [
+              "Central India"
+            ],
+            "ClusterFlavors": [
+              "HBase",
+              "Storm"
+            ],
+            "NodeTypes": [
+              "ZookeeperRole"
+            ],
+            "ClusterVersions": [
+              "*"
+            ],
+            "vmsizes": [
+              "STANDARD_D4_V2"
+            ]
+          }
+        ],
+        "features": [
+          "ALLOW_GATEWAY_AUTH_BYPASS",
+          "AUX_IAAS_FUNCTIONALITIES",
+          "BLOCK_APPS_FOR_SECURE_CLUSTER",
+          "CLUSTER_RESIZE",
+          "CLUSTERS_CONTRACT_1",
+          "CLUSTERS_CONTRACT_1_SDK",
+          "CLUSTERS_CONTRACT_2_SDK",
+          "CLUSTERS_CONTRACT_VERSION_3_SDK",
+          "COLLECTANONYMIZEDLOGS",
+          "CONTAINER_LOG_COLLECTOR",
+          "CONTAINER_RESOURCE_V3",
+          "CUSTOM_ACTIONS_V2",
+          "DATALAKE",
+          "DATALAKE_3_2",
+          "DATALAKE_3_4",
+          "DATALAKE_3_5",
+          "DATALAKE_DEFAULTFS_3_5",
+          "DEFAULT_CONTAINER_IDENTIFIER_AND_STORAGEFQDN_ALREADY_USED",
+          "DOCUMENT_VALIDATION_IN_API",
+          "ENABLEDATALAKE",
+          "ENABLEGENEVAANALYTICS",
+          "HADOOP_VIRTUAL_NETWORK_ENABLED",
+          "HS2_ZK_ROUTER_INTERACTIVEHIVE",
+          "IAAS_ALLOW_CUSTOM_DNS",
+          "IAAS_AMBARI_APP_TIMELINE_SERVER_HA_SERVICE",
+          "IAAS_AMBARI_DEPENDENCY_BASED_DEPLOYMENT",
+          "IAAS_AMBARI_HA_SERVICES",
+          "IAAS_AMBARI_HISTORYSERVER_HA_SERVICE",
+          "IAAS_AMBARI_LOWER_LATENCY",
+          "IAAS_AMBARI_SKIP_COMPONENTS_INSTALL",
+          "IAAS_ARM_PROVISIONING",
+          "IAAS_CLOSE_HEAD_HTTPS_END_POINT_AFTER_CLUSTER_CREATE",
+          "IAAS_CLUSTER_APPLICATION_ALLOW_MULTIPLE_ROLE_INSTANCES",
+          "IAAS_CLUSTER_APPLICATION_REMOVE",
+          "IAAS_CLUSTER_CONTAINER_PREUPLOAD_SUBMIT_WAIT",
+          "IAAS_CLUSTER_RSERVER",
+          "IAAS_DB_CREATION_IN_PARALLEL_TO_VM",
+          "IAAS_DELETE_LEAKED_RESOURCES",
+          "IAAS_DEPLOYMENTS",
+          "IAAS_DO_NOT_CREATE_WASB_TABLES_IN_CUSTOMER_STORAGE",
+          "IAAS_ENABLE_CLUSTER_CONFIG_OVERRIDES",
+          "IAAS_ENABLE_OFFLINE_CLEANUP",
+          "IAAS_ENABLE_OFFLINE_CLEANUP_FOR_DELETING_VMS",
+          "IAAS_INCLUDE_STORAGE_IN_SUBSCRIPTION_SELECTION",
+          "IAAS_PARALLEL_DB_CREATE",
+          "IAAS_PREPROVISION_METASTORES_SCHEMAS",
+          "IAAS_SCRIPTACTIONS_DELETE_VMS_CRUD_FAILURES",
+          "IAAS_SCRIPTACTIONS_RUNNING",
+          "IAAS_SHORT_VM_NAME",
+          "IAAS_SUBMIT_AMBARI_REQUEST_ONCE_LINUX_VM_ARE_AVAILABLE",
+          "IAAS_TEZ_ATS_V15",
+          "IAAS_USE_UNATTENDED_UPGRADES_FOR_PATCHING",
+          "IAAS_VALIDATE_CUSTOM_VNET",
+          "IAAS_VALIDATE_NSG",
+          "IAAS_WAIT_FOR_CLOSING_HEAD_HTTPS_END_POINT_AFTER_CLUSTER_CREATE",
+          "IAAS_YARN_HDINSIGHT_SQL_TIMELINE_STORE",
+          "IAAS_YARN_HDINSIGHT_TIMELINE_STORE",
+          "INTERACTIVEHIVE",
+          "MDSCENTRALLOGGING",
+          "NODE_SETUP_POLLER_ENABLED",
+          "OVERPROVISION_HOSTGROUP_edgenode",
+          "OVERPROVISION_HOSTGROUP_Gateway",
+          "OVERPROVISION_HOSTGROUP_Workernode",
+          "OVERPROVISION_HOSTGROUP_zookeepernode",
+          "PERF_OPTIMIZED_RESOURCE_LOCATION_FETCH",
+          "PORTALAPPINSTALL",
+          "POWERSHELL_SCRIPT_ACTION",
+          "POWERSHELL_SCRIPT_ACTION_SDK",
+          "PREMIUM_TIER_PREVIEW",
+          "PROVISIONING_AGENT",
+          "RMHA",
+          "RSERVER_CLUSTERTYPE_3_5_ENABLED",
+          "RSERVER_CLUSTERTYPE_ENABLED",
+          "SHOW_HUMBOLDT_GA",
+          "SHOW_IBIZA_CREATE",
+          "SPARK_2_1",
+          "SPARK_EXPERIMENTAL",
+          "STORM_PREVIEW",
+          "UI_CREATE_WIZARD_V2",
+          "VIRTUAL_NETWORK_ENABLED",
+          "VMSIZES_AUX"
+        ],
+        "quota": {
+          "cores_used": 0,
+          "max_cores_allowed": 3000,
+          "regionalQuotas": [
+            {
+              "region_name": "Australia East",
+              "cores_used": 0,
+              "cores_available": 1000
+            },
+            {
+              "region_name": "Australia Southeast",
+              "cores_used": 0,
+              "cores_available": 1000
+            },
+            {
+              "region_name": "Brazil South",
+              "cores_used": 0,
+              "cores_available": 1000
+            },
+            {
+              "region_name": "Canada Central",
+              "cores_used": 0,
+              "cores_available": 1000
+            },
+            {
+              "region_name": "Canada East",
+              "cores_used": 0,
+              "cores_available": 1000
+            },
+            {
+              "region_name": "Central India",
+              "cores_used": 0,
+              "cores_available": 1000
+            },
+            {
+              "region_name": "Central US",
+              "cores_used": 24,
+              "cores_available": 1000
+            },
+            {
+              "region_name": "Central US EUAP",
+              "cores_used": 0,
+              "cores_available": 1000
+            },
+            {
+              "region_name": "East Asia",
+              "cores_used": 24,
+              "cores_available": 1000
+            },
+            {
+              "region_name": "East US",
+              "cores_used": 24,
+              "cores_available": 1000
+            },
+            {
+              "region_name": "East US 2",
+              "cores_used": 0,
+              "cores_available": 1000
+            },
+            {
+              "region_name": "Japan East",
+              "cores_used": 0,
+              "cores_available": 1000
+            },
+            {
+              "region_name": "Japan West",
+              "cores_used": 0,
+              "cores_available": 1000
+            },
+            {
+              "region_name": "North Central US",
+              "cores_used": 0,
+              "cores_available": 1000
+            },
+            {
+              "region_name": "North Europe",
+              "cores_used": 0,
+              "cores_available": 1000
+            },
+            {
+              "region_name": "South Central US",
+              "cores_used": 0,
+              "cores_available": 1000
+            },
+            {
+              "region_name": "Southeast Asia",
+              "cores_used": 0,
+              "cores_available": 1000
+            },
+            {
+              "region_name": "West Central US",
+              "cores_used": 0,
+              "cores_available": 1000
+            },
+            {
+              "region_name": "West Europe",
+              "cores_used": 0,
+              "cores_available": 1000
+            },
+            {
+              "region_name": "West US",
+              "cores_used": 132,
+              "cores_available": 1000
+            },
+            {
+              "region_name": "West US 2",
+              "cores_used": 0,
+              "cores_available": 1000
             }
+          ]
         }
+      }
     }
+  }
 }

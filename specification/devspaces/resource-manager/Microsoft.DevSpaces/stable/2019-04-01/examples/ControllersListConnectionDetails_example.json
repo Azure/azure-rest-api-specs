@@ -1,0 +1,25 @@
+{
+  "parameters": {
+    "api-version": "2019-04-01",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "myResourceGroup",
+    "name": "myControllerResource",
+    "listConnectionDetailsParameters": {
+      "targetContainerHostResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.ContainerService/managedClusters/myCluster"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "connectionDetailsList": [
+          {
+            "orchestratorSpecificConnectionDetails": {
+              "instanceType": "Kubernetes",
+              "kubeConfig": "0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

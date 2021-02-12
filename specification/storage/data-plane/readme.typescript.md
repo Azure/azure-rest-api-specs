@@ -7,6 +7,6 @@ Please also specify `--typescript-sdks-folder=<path to root folder of your azure
 typescript:
   azure-arm: true
   package-name: "@azure/storage-datalake"
-  output-folder: "$(typescript-sdks-folder)/packages/@azure/storage-datalake"
+  output-folder: "$(typescript-sdks-folder)/sdk/storage/storage-datalake"
   generate-metadata: true
 ```

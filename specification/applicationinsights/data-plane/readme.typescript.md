@@ -9,6 +9,6 @@ directive:
     remove-operation: Events_GetOdataMetadata
 typescript:
   package-name: "@azure/applicationinsights-query"
-  output-folder: "$(typescript-sdks-folder)/packages/@azure/applicationinsights-query"
+  output-folder: "$(typescript-sdks-folder)/sdk/applicationinsights/applicationinsights-query"
   generate-metadata: true
 ```

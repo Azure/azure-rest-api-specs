@@ -1,0 +1,31 @@
+{
+  "title": "Get components from a device",
+  "description": "Get the list of components in a device.",
+  "parameters": {
+    "centralDnsSuffixInPath": "azureiotcentral.com",
+    "subdomain": "appsubdomain",
+    "device_id": "device1"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "@id": "<id>",
+            "@type": [
+              "InterfaceInstance"
+            ],
+            "name": "LocationTracking"
+          },
+          {
+            "@id": "<id>",
+            "@type": [
+              "InterfaceInstance"
+            ],
+            "name": "EnvironmentSensing"
+          }
+        ]
+      }
+    }
+  }
+}

@@ -4,9 +4,9 @@
     "title": "Microsoft Storage Sync",
     "description": "Microsoft Storage Sync Service API",
     "version": "2018-04-02",
-	"x-ms-code-generation-settings": {
+    "x-ms-code-generation-settings": {
       "name": "StorageSyncManagementClient"
-     }
+    }
   },
   "host": "management.azure.com",
   "schemes": [
@@ -74,12 +74,16 @@
         ],
         "operationId": "StorageSyncServices_CheckNameAvailability",
         "x-ms-examples": {
-          "StorageSyncServiceCheckNameAvailability_Available": { "$ref": "./examples/StorageSyncServiceCheckNameAvailability_Available.json" },
-		  "StorageSyncServiceCheckNameAvailability_AlreadyExists": { "$ref": "./examples/StorageSyncServiceCheckNameAvailability_AlreadyExists.json" }
+          "StorageSyncServiceCheckNameAvailability_Available": {
+            "$ref": "./examples/StorageSyncServiceCheckNameAvailability_Available.json"
+          },
+          "StorageSyncServiceCheckNameAvailability_AlreadyExists": {
+            "$ref": "./examples/StorageSyncServiceCheckNameAvailability_AlreadyExists.json"
+          }
         },
         "description": "Check the give namespace name availability.",
         "parameters": [
-        {
+          {
             "name": "locationName",
             "in": "path",
             "required": true,
@@ -2406,7 +2410,7 @@
       "type": "object",
       "description": "Error type",
       "properties": {
-         "error": {
+        "error": {
           "$ref": "#/definitions/StorageSyncApiError",
           "description": "Error details of the given entry."
         },
@@ -2496,11 +2500,11 @@
         }
       ],
       "properties": {
-            "properties": {
-              "x-ms-client-flatten": true,
-              "$ref": "#/definitions/StorageSyncServiceProperties",
-              "description": "Storage Sync Service properties."
-            }
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/StorageSyncServiceProperties",
+          "description": "Storage Sync Service properties."
+        }
       }
     },
     "SyncGroup": {
@@ -2510,13 +2514,13 @@
         {
           "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/Resource"
         }
-	  ],
+      ],
       "properties": {
-         "properties": {
-              "x-ms-client-flatten": true,
-              "$ref": "#/definitions/SyncGroupProperties",
-              "description": "SyncGroup properties."
-         }
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/SyncGroupProperties",
+          "description": "SyncGroup properties."
+        }
       }
     },
     "CloudEndpoint": {
@@ -2526,12 +2530,12 @@
         {
           "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/Resource"
         }
-	  ],
+      ],
       "properties": {
         "properties": {
-           "x-ms-client-flatten": true,
-           "$ref": "#/definitions/CloudEndpointProperties",
-            "description": "Cloud Endpoint properties."
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/CloudEndpointProperties",
+          "description": "Cloud Endpoint properties."
         }
       }
     },
@@ -2588,8 +2592,7 @@
     "SyncGroupCreateParametersProperties": {
       "type": "object",
       "description": "Sync Group Create Properties object.",
-      "properties": {
-       }
+      "properties": {}
     },
     "CloudEndpointCreateParameters": {
       "properties": {
@@ -2616,16 +2619,16 @@
       "description": "CloudEndpoint Properties object.",
       "properties": {
         "storageAccountResourceId": {
-            "type": "string",
-            "description": "Storage Account Resource Id"
+          "type": "string",
+          "description": "Storage Account Resource Id"
         },
         "storageAccountShareName": {
-            "type": "string",
-            "description": "Storage Account Share name"
+          "type": "string",
+          "description": "Storage Account Share name"
         },
         "storageAccountTenantId": {
-            "type": "string",
-            "description": "Storage Account Tenant Id"
+          "type": "string",
+          "description": "Storage Account Tenant Id"
         }
       }
     },
@@ -2763,13 +2766,13 @@
         {
           "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/Resource"
         }
-	  ],
+      ],
       "properties": {
-         "properties": {
-            "x-ms-client-flatten": true,
-            "$ref": "#/definitions/ServerEndpointProperties",
-            "description": "Server Endpoint properties."
-         }
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ServerEndpointProperties",
+          "description": "Server Endpoint properties."
+        }
       }
     },
     "RegisteredServer": {
@@ -2779,13 +2782,13 @@
         {
           "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/Resource"
         }
-	  ],
+      ],
       "properties": {
-         "properties": {
-            "x-ms-client-flatten": true,
-            "$ref": "#/definitions/RegisteredServerProperties",
-            "description": "RegisteredServer properties."
-         }
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/RegisteredServerProperties",
+          "description": "RegisteredServer properties."
+        }
       }
     },
     "ResourcesMoveInfo": {
@@ -2812,13 +2815,13 @@
         {
           "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/Resource"
         }
-	  ],
+      ],
       "properties": {
-         "properties": {
-            "x-ms-client-flatten": true,
-            "$ref": "#/definitions/WorkflowProperties",
-            "description": "Workflow properties."
-         }
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/WorkflowProperties",
+          "description": "Workflow properties."
+        }
       }
     },
     "OperationEntityListResult": {
@@ -2908,7 +2911,9 @@
         },
         "type": {
           "type": "string",
-          "enum": [ "Microsoft.StorageSync/storageSyncServices" ],
+          "enum": [
+            "Microsoft.StorageSync/storageSyncServices"
+          ],
           "x-ms-enum": {
             "name": "Type",
             "modelAsString": false
@@ -3187,8 +3192,7 @@
     "StorageSyncServiceUpdateProperties": {
       "type": "object",
       "description": "Storage Sync Service Update Properties object.",
-      "properties": {
-      }
+      "properties": {}
     },
     "StorageSyncServiceProperties": {
       "type": "object",

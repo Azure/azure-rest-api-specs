@@ -1,0 +1,166 @@
+{
+  "parameters": {
+    "subscriptionId": "fa68082f-8ff7-4a25-95c7-ce9da541242f",
+    "resourceGroupName": "SdkRg5154",
+    "jobName": "SdkJob952",
+    "api-version": "2020-11-01",
+    "$expand": "details",
+    "x-ms-client-request-id": [
+      "e76214b0-6013-499e-8f91-3a287f421f2e"
+    ],
+    "Accept-Language": [
+      "en-US"
+    ],
+    "User-Agent": [
+      "FxVersion/4.6.29017.01",
+      "OSName/Windows",
+      "OSVersion/Microsoft.Windows.10.0.18363.",
+      "Microsoft.Azure.Management.DataBox.DataBoxManagementClient/1.1.0"
+    ]
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "transferType": "ImportToAzure",
+          "isCancellable": true,
+          "isDeletable": false,
+          "isShippingAddressEditable": true,
+          "isPrepareToShipEnabled": true,
+          "status": "DeviceOrdered",
+          "startTime": "2020-08-07T10:50:36.3341513+05:30",
+          "details": {
+            "copyProgress": [],
+            "jobStages": [
+              {
+                "stageName": "DeviceOrdered",
+                "displayName": "Ordered",
+                "stageStatus": "Succeeded",
+                "stageTime": "2020-08-07T10:50:40.1872217+05:30"
+              },
+              {
+                "stageName": "DevicePrepared",
+                "displayName": "Processed",
+                "stageStatus": "None"
+              },
+              {
+                "stageName": "Dispatched",
+                "displayName": "Dispatched",
+                "stageStatus": "None"
+              },
+              {
+                "stageName": "Delivered",
+                "displayName": "Delivered",
+                "stageStatus": "None"
+              },
+              {
+                "stageName": "PickedUp",
+                "displayName": "Picked up",
+                "stageStatus": "None"
+              },
+              {
+                "stageName": "AtAzureDC",
+                "displayName": "Received",
+                "stageStatus": "None"
+              },
+              {
+                "stageName": "DataCopy",
+                "displayName": "Data copy in progress",
+                "stageStatus": "None"
+              },
+              {
+                "stageName": "Completed",
+                "displayName": "Completed",
+                "stageStatus": "None"
+              }
+            ],
+            "contactDetails": {
+              "contactName": "Public SDK Test",
+              "phone": "1234567890",
+              "phoneExtension": "1234",
+              "emailList": [
+                "testing@microsoft.com"
+              ],
+              "notificationPreference": [
+                {
+                  "stageName": "DevicePrepared",
+                  "sendNotification": true
+                },
+                {
+                  "stageName": "Dispatched",
+                  "sendNotification": true
+                },
+                {
+                  "stageName": "Delivered",
+                  "sendNotification": true
+                },
+                {
+                  "stageName": "PickedUp",
+                  "sendNotification": true
+                },
+                {
+                  "stageName": "AtAzureDC",
+                  "sendNotification": true
+                },
+                {
+                  "stageName": "DataCopy",
+                  "sendNotification": true
+                }
+              ]
+            },
+            "shippingAddress": {
+              "streetAddress1": "16 TOWNSEND ST",
+              "streetAddress2": "Unit 1",
+              "city": "San Francisco",
+              "stateOrProvince": "CA",
+              "country": "US",
+              "postalCode": "94107",
+              "companyName": "Microsoft",
+              "addressType": "Commercial"
+            },
+            "deliveryPackage": {
+              "carrierName": "",
+              "trackingId": "",
+              "trackingUrl": ""
+            },
+            "returnPackage": {
+              "carrierName": "",
+              "trackingId": "",
+              "trackingUrl": ""
+            },
+            "dataImportDetails": [
+              {
+                "accountDetails": {
+                  "storageAccountId": "/subscriptions/fa68082f-8ff7-4a25-95c7-ce9da541242f/resourcegroups/databoxbvt/providers/Microsoft.Storage/storageAccounts/databoxbvttestaccount",
+                  "dataAccountType": "StorageAccount"
+                }
+              }
+            ],
+            "jobDetailsType": "DataBox",
+            "copyLogDetails": [],
+            "reverseShipmentLabelSasKey": "https://wusbeta.blob.core.windows.net/customer-reverse-shipment-instructions/CustomerShipmentInstructions_MicrosoftManaged.PDF?sv=2018-03-28&sr=b&sig=urwfAELvNV69IGHdcXlRCn6o3O3dWZQKaRipmoAdrI0%3D&st=2020-08-07T05%3A10%3A58Z&se=2020-08-08T05%3A20%3A58Z&sp=r",
+            "keyEncryptionKey": {
+              "kekType": "MicrosoftManaged"
+            }
+          },
+          "deliveryType": "NonScheduled",
+          "deliveryInfo": {
+            "scheduledDateTime": "0001-01-01T05:30:00+05:30"
+          },
+          "isCancellableWithoutFee": true
+        },
+        "location": "westus",
+        "tags": {},
+        "sku": {
+          "name": "DataBox"
+        },
+        "identity": {
+          "type": "None"
+        },
+        "name": "SdkJob952",
+        "id": "/subscriptions/fa68082f-8ff7-4a25-95c7-ce9da541242f/resourceGroups/SdkRg5154/providers/Microsoft.DataBox/jobs/SdkJob952",
+        "type": "Microsoft.DataBox/jobs"
+      }
+    }
+  }
+}

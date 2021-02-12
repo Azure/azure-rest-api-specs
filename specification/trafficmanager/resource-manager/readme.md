@@ -28,7 +28,7 @@ openapi-type: arm
 tag: package-2018-04
 ```
 
-## Suppression
+### Suppression
 ``` yaml
 directive:
   - suppress: OperationsAPIImplementation
@@ -172,6 +172,7 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
+  - repo: azure-sdk-for-net
   - repo: azure-sdk-for-python
   - repo: azure-libraries-for-java
   - repo: azure-sdk-for-go
@@ -180,6 +181,9 @@ swagger-to-sdk:
   - repo: azure-sdk-for-ruby
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_traffic_manager']
+  - repo: azure-resource-manager-schemas
+    after_scripts:
+      - node sdkauto_afterscript.js trafficmanager/resource-manager
 ```
 
 
@@ -195,7 +199,7 @@ csharp:
   license-header: MICROSOFT_MIT_NO_VERSION
   namespace: Microsoft.Azure.Management.TrafficManager
   payload-flattening-threshold: 2
-  output-folder: $(csharp-sdks-folder)/TrafficManager/Management.TrafficManager/Generated
+  output-folder: $(csharp-sdks-folder)/trafficmanager/Microsoft.Azure.Management.TrafficManager/src/Generated
   clear-output-folder: true
 ```
 
@@ -218,12 +222,12 @@ python:
 ``` yaml $(python) && $(python-mode) == 'update'
 python:
   no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-trafficmanager/azure/mgmt/trafficmanager
+  output-folder: $(python-sdks-folder)/trafficmanager/azure-mgmt-trafficmanager/azure/mgmt/trafficmanager
 ```
 ``` yaml $(python) && $(python-mode) == 'create'
 python:
   basic-setup-py: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-trafficmanager
+  output-folder: $(python-sdks-folder)/trafficmanager/azure-mgmt-trafficmanager
 ```
 
 ## Go
@@ -244,3 +248,8 @@ java:
   payload-flattening-threshold: 1
   output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-trafficmanager
 ```
+
+## AzureResourceSchema
+
+See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
+

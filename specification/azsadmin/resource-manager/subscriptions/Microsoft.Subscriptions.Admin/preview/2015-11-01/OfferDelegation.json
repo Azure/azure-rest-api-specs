@@ -1,263 +1,263 @@
 {
-    "swagger": "2.0",
-    "info": {
-        "version": "2015-11-01",
-        "title": "SubscriptionsManagementClient",
-        "description": "The Admin Subscriptions Management Client."
-    },
-    "host": "adminmanagement.local.azurestack.external",
-    "schemes": [
-        "https"
-    ],
-    "produces": [
-        "application/json"
-    ],
-    "consumes": [
-        "application/json"
-    ],
-    "paths": {
-        "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Subscriptions.Admin/offers/{offer}/offerDelegations": {
-            "get": {
-                "x-ms-examples": {
-                    "Get the list of offer delegations.": {
-                        "$ref": "./examples/OfferDelegation/List.json"
-                    }
-                },
-                "description": "Get the list of offer delegations.",
-                "tags": [
-                    "OfferDelegations"
-                ],
-                "operationId": "OfferDelegations_List",
-                "parameters": [
-                    {
-                        "$ref": "Subscriptions.json#/parameters/SubscriptionIdParameter"
-                    },
-                    {
-                        "$ref": "Subscriptions.json#/parameters/ResourceGroupParameter"
-                    },
-                    {
-                        "$ref": "Subscriptions.json#/parameters/OfferParameter"
-                    },
-                    {
-                        "$ref": "Subscriptions.json#/parameters/ApiVersionParameter"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "#/definitions/OfferDelegationList"
-                        }
-                    }
-                },
-                "x-ms-pageable": {
-                    "nextLinkName": "nextLink"
-                }
-            }
+  "swagger": "2.0",
+  "info": {
+    "version": "2015-11-01",
+    "title": "SubscriptionsManagementClient",
+    "description": "The Admin Subscriptions Management Client."
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Subscriptions.Admin/offers/{offer}/offerDelegations": {
+      "get": {
+        "x-ms-examples": {
+          "Get the list of offer delegations.": {
+            "$ref": "./examples/OfferDelegation/List.json"
+          }
         },
-        "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Subscriptions.Admin/offers/{offer}/offerDelegations/{offerDelegationName}": {
-            "get": {
-                "x-ms-examples": {
-                    "Get the specified offer delegation.": {
-                        "$ref": "./examples/OfferDelegation/Get.json"
-                    }
-                },
-                "description": "Get the specified offer delegation.",
-                "tags": [
-                    "OfferDelegations"
-                ],
-                "operationId": "OfferDelegations_Get",
-                "parameters": [
-                    {
-                        "$ref": "Subscriptions.json#/parameters/SubscriptionIdParameter"
-                    },
-                    {
-                        "$ref": "Subscriptions.json#/parameters/ResourceGroupParameter"
-                    },
-                    {
-                        "$ref": "Subscriptions.json#/parameters/OfferParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/OfferDelegationParameter"
-                    },
-                    {
-                        "$ref": "Subscriptions.json#/parameters/ApiVersionParameter"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "#/definitions/OfferDelegation"
-                        }
-                    }
-                }
-            },
-            "put": {
-                "x-ms-examples": {
-                    "Create or update the offer delegation.": {
-                        "$ref": "./examples/OfferDelegation/Create.json"
-                    }
-                },
-                "description": "Create or update the offer delegation.",
-                "tags": [
-                    "OfferDelegations"
-                ],
-                "operationId": "OfferDelegations_CreateOrUpdate",
-                "parameters": [
-                    {
-                        "$ref": "Subscriptions.json#/parameters/SubscriptionIdParameter"
-                    },
-                    {
-                        "$ref": "Subscriptions.json#/parameters/ResourceGroupParameter"
-                    },
-                    {
-                        "$ref": "Subscriptions.json#/parameters/OfferParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/OfferDelegationParameter"
-                    },
-                    {
-                        "$ref": "Subscriptions.json#/parameters/ApiVersionParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/NewOfferDelegationParameter"
-                    }
-                ],
-                "responses": {
-                    "201": {
-                        "description": "Created",
-                        "schema": {
-                            "$ref": "#/definitions/OfferDelegation"
-                        }
-                    },
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "#/definitions/OfferDelegation"
-                        }                        
-                    }
-                }
-            },
-            "delete": {
-                "x-ms-examples": {
-                    "Delete the specified offer delegation.": {
-                        "$ref": "./examples/OfferDelegation/Delete.json"
-                    }
-                },
-                "description": "Delete the specified offer delegation.",
-                "tags": [
-                    "OfferDelegations"
-                ],
-                "operationId": "OfferDelegations_Delete",
-                "parameters": [
-                    {
-                        "$ref": "Subscriptions.json#/parameters/SubscriptionIdParameter"
-                    },
-                    {
-                        "$ref": "Subscriptions.json#/parameters/ResourceGroupParameter"
-                    },
-                    {
-                        "$ref": "Subscriptions.json#/parameters/OfferParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/OfferDelegationParameter"
-                    },
-                    {
-                        "$ref": "Subscriptions.json#/parameters/ApiVersionParameter"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK"
-                    },
-                    "204": {
-                        "description": "No Content"
-                    }                   
-                }
-            }
-        }
-    },
-    "definitions": {
-        "OfferDelegation": {
-            "description": "Offer delegation.",
-            "type": "object",
-            "properties": {
-                "properties": {
-                    "x-ms-client-flatten": true,
-                    "description": "Properties for an offer.",
-                    "$ref": "#/definitions/OfferDelegationProperties"
-                }
-            },
-            "allOf": [
-                {
-                    "$ref": "Subscriptions.json#/definitions/Resource"
-                }
-            ]
-        },
-        "OfferDelegationProperties": {
-            "description": "Properties for an offer delegation.",
-            "type": "object",
-            "properties": {
-                "subscriptionId": {
-                    "description": "Identifier of the subscription receiving the delegated offer.",
-                    "type": "string"
-                }
-            }
-        },
-        "OfferDelegationList": {
-            "description": ".",
-            "properties": {
-                "value": {
-                    "description": "Array of usage aggregates.",
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/OfferDelegation"
-                    }
-                },
-                "nextLink": {
-                    "type": "string",
-                    "description": "Continuation token"
-                }
-            }
-        }
-    },
-    "parameters": {
-        "OfferDelegationParameter": {
-            "description": "Name of a offer delegation.",
-            "name": "offerDelegationName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "x-ms-parameter-location": "method"
-        },
-        "NewOfferDelegationParameter": {
-            "description": "New offer delegation parameter.",
-            "name": "newOfferDelegation",
-            "in": "body",
-            "required": true,
+        "description": "Get the list of offer delegations.",
+        "tags": [
+          "OfferDelegations"
+        ],
+        "operationId": "OfferDelegations_List",
+        "parameters": [
+          {
+            "$ref": "Subscriptions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "Subscriptions.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "Subscriptions.json#/parameters/OfferParameter"
+          },
+          {
+            "$ref": "Subscriptions.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
             "schema": {
-                "$ref": "#/definitions/OfferDelegation"
-            },
-            "x-ms-parameter-location": "method"
-        }
-    },
-    "securityDefinitions": {
-        "azure_auth": {
-            "type": "oauth2",
-            "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
-            "flow": "implicit",
-            "description": "Azure Active Directory OAuth2 flow",
-            "scopes": {
-                "user_impersonation": "impersonate your user account"
+              "$ref": "#/definitions/OfferDelegationList"
             }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
+      }
     },
-    "security": [
-        {
-            "azure_auth": [
-                "user_impersonation"
-            ]
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Subscriptions.Admin/offers/{offer}/offerDelegations/{offerDelegationName}": {
+      "get": {
+        "x-ms-examples": {
+          "Get the specified offer delegation.": {
+            "$ref": "./examples/OfferDelegation/Get.json"
+          }
+        },
+        "description": "Get the specified offer delegation.",
+        "tags": [
+          "OfferDelegations"
+        ],
+        "operationId": "OfferDelegations_Get",
+        "parameters": [
+          {
+            "$ref": "Subscriptions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "Subscriptions.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "Subscriptions.json#/parameters/OfferParameter"
+          },
+          {
+            "$ref": "#/parameters/OfferDelegationParameter"
+          },
+          {
+            "$ref": "Subscriptions.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/OfferDelegation"
+            }
+          }
         }
-    ]
+      },
+      "put": {
+        "x-ms-examples": {
+          "Create or update the offer delegation.": {
+            "$ref": "./examples/OfferDelegation/Create.json"
+          }
+        },
+        "description": "Create or update the offer delegation.",
+        "tags": [
+          "OfferDelegations"
+        ],
+        "operationId": "OfferDelegations_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "Subscriptions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "Subscriptions.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "Subscriptions.json#/parameters/OfferParameter"
+          },
+          {
+            "$ref": "#/parameters/OfferDelegationParameter"
+          },
+          {
+            "$ref": "Subscriptions.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/OfferDelegationDefinitionParameter"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/OfferDelegation"
+            }
+          },
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/OfferDelegation"
+            }
+          }
+        }
+      },
+      "delete": {
+        "x-ms-examples": {
+          "Delete the specified offer delegation.": {
+            "$ref": "./examples/OfferDelegation/Delete.json"
+          }
+        },
+        "description": "Delete the specified offer delegation.",
+        "tags": [
+          "OfferDelegations"
+        ],
+        "operationId": "OfferDelegations_Delete",
+        "parameters": [
+          {
+            "$ref": "Subscriptions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "Subscriptions.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "Subscriptions.json#/parameters/OfferParameter"
+          },
+          {
+            "$ref": "#/parameters/OfferDelegationParameter"
+          },
+          {
+            "$ref": "Subscriptions.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "No Content"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "OfferDelegation": {
+      "description": "Offer delegation.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Properties for an offer.",
+          "$ref": "#/definitions/OfferDelegationProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "Subscriptions.json#/definitions/Resource"
+        }
+      ]
+    },
+    "OfferDelegationProperties": {
+      "description": "Properties for an offer delegation.",
+      "type": "object",
+      "properties": {
+        "subscriptionId": {
+          "description": "Identifier of the subscription receiving the delegated offer.",
+          "type": "string"
+        }
+      }
+    },
+    "OfferDelegationList": {
+      "description": ".",
+      "properties": {
+        "value": {
+          "description": "Array of usage aggregates.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/OfferDelegation"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Continuation token"
+        }
+      }
+    }
+  },
+  "parameters": {
+    "OfferDelegationParameter": {
+      "description": "Name of a offer delegation.",
+      "name": "offerDelegationName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "OfferDelegationDefinitionParameter": {
+      "description": "New offer delegation parameter.",
+      "name": "offerDelegationDefinition",
+      "in": "body",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/OfferDelegation"
+      },
+      "x-ms-parameter-location": "method"
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ]
 }

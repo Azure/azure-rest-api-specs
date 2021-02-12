@@ -226,7 +226,6 @@
     "ConnectionInfo": {
       "type": "object",
       "description": "Defines the connection properties of a server",
-      "x-ms-discriminator-value": "Unknown",
       "properties": {
         "type": {
           "type": "string",
@@ -241,7 +240,9 @@
           "description": "Password credential."
         }
       },
-      "required": [ "type" ],
+      "required": [
+        "type"
+      ],
       "discriminator": "type"
     },
     "AuthenticationType": {
@@ -292,7 +293,9 @@
           "default": false
         }
       },
-      "required": [ "dataSource" ]
+      "required": [
+        "dataSource"
+      ]
     },
     "ServerLevelPermissionsGroup": {
       "type": "string",

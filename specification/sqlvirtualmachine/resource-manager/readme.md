@@ -52,8 +52,13 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
+  - repo: azure-sdk-for-net
   - repo: azure-sdk-for-python
   - repo: azure-sdk-for-go
+  - repo: azure-sdk-for-java
+  - repo: azure-resource-manager-schemas
+    after_scripts:
+      - node sdkauto_afterscript.js sqlvirtualmachine/resource-manager
 ```
 
 
@@ -67,7 +72,7 @@ csharp:
   azure-arm: true
   license-header: MICROSOFT_MIT_NO_VERSION
   namespace: Microsoft.Azure.Management.SqlVirtualMachine
-  output-folder: $(csharp-sdks-folder)/SqlVirtualMachine/Management.SqlVirtualMachine/Generated
+  output-folder: $(csharp-sdks-folder)/sqlvirtualmachine/Microsoft.Azure.Management.SqlVirtualMachine/src/Generated
   clear-output-folder: true
 ```
 
@@ -92,15 +97,24 @@ python:
 ``` yaml $(python) && $(python-mode) == 'update'
 python:
   no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-sqlvirtualmachine/azure/mgmt/sqlvirtualmachine
+  output-folder: $(python-sdks-folder)/sql/azure-mgmt-sqlvirtualmachine/azure/mgmt/sqlvirtualmachine
 ```
 
 ``` yaml $(python) && $(python-mode) == 'create'
 python:
   basic-setup-py: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-sqlvirtualmachine
+  output-folder: $(python-sdks-folder)/sql/azure-mgmt-sqlvirtualmachine
 ```
 
 ### Go
 
 See configuration in [readme.go.md](./readme.go.md)
+
+### Java
+
+See configuration in [readme.java.md](./readme.java.md)
+
+## AzureResourceSchema
+
+See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
+

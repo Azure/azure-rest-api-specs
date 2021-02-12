@@ -46,7 +46,7 @@
           }
         ],
         "tags": [
-          "partner"
+          "Partner"
         ],
         "responses": {
           "200": {
@@ -81,7 +81,7 @@
           }
         ],
         "tags": [
-          "partner"
+          "Partner"
         ],
         "responses": {
           "200": {
@@ -116,7 +116,7 @@
           }
         ],
         "tags": [
-          "partner"
+          "Partner"
         ],
         "responses": {
           "200": {
@@ -151,7 +151,7 @@
           }
         ],
         "tags": [
-          "partner"
+          "Partner"
         ],
         "responses": {
           "200": {
@@ -192,6 +192,40 @@
             "description": "List all the operations.",
             "schema": {
               "$ref": "#/definitions/OperationList"
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.ManagementPartner/partners": {
+      "get": {
+        "summary": "Get a specific `Partner`.",
+        "description": "Get the management partner using the objectId and tenantId.",
+        "operationId": "Partners_Get",
+        "x-ms-examples": {
+          "GetPartnerDetails": {
+            "$ref": "./examples/GetPartnerDetailsNoPartnerId.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "tags": [
+          "Partners"
+        ],
+        "responses": {
+          "200": {
+            "description": "Get the details of the `Partner`.",
+            "schema": {
+              "$ref": "#/definitions/PartnerResponse"
             }
           },
           "default": {
@@ -257,7 +291,8 @@
           "description": "This is the object id."
         },
         "version": {
-          "type": "string",
+          "type": "integer",
+          "format": "int32",
           "description": "This is the version."
         },
         "updatedTime": {
@@ -365,7 +400,6 @@
         "resource": {
           "type": "string",
           "description": "the is management partner resource"
-
         },
         "operation": {
           "type": "string",

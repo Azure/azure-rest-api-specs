@@ -59,9 +59,13 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
+  - repo: azure-sdk-for-net
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-python
+  - repo: azure-resource-manager-schemas
+    after_scripts:
+      - node sdkauto_afterscript.js blueprint/resource-manager
 ```
 
 
@@ -76,7 +80,7 @@ csharp:
   namespace: Microsoft.Azure.Management.Blueprint
   payload-flattening-threshold: 1
   license-header: MICROSOFT_MIT_NO_VERSION
-  output-folder: $(csharp-sdks-folder)/Blueprint/Management.Blueprint/Generated
+  output-folder: $(csharp-sdks-folder)/blueprint/Microsoft.Azure.Management.Blueprint/src/Generated
   clear-output-folder: true
 ```
 
@@ -129,3 +133,8 @@ directive:
     where: $.paths
     reason: OperationsAPI for Microsoft.Management is out of scope.    
 ```
+
+## AzureResourceSchema
+
+See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
+

@@ -6,6 +6,7 @@ Please also specify `--node-sdks-folder=<path to root folder of your azure-sdk-f
 ``` yaml $(nodejs)
 nodejs:
   azure-arm: true
+  license-header: MICROSOFT_MIT_NO_VERSION
   package-name: azure-batch
   output-folder: $(node-sdks-folder)/lib/services/batch
   payload-flattening-threshold: 1

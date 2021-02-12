@@ -31,6 +31,16 @@ openapi-type: arm
 tag: package-2016-06
 ```
 
+### Validations
+Run validations when `--validate` is specified on command line
+
+``` yaml $(validate)
+azure-validator: true
+model-validator: true
+semantic-validator: true
+message-format: json
+```
+
 ### Tag: package-2016-06
 
 These settings apply only when `--tag=package-2016-06` is specified on the command line.
@@ -42,7 +52,17 @@ input-file:
 - Microsoft.RecoveryServices/stable/2016-06-01/vaults.json
 - Microsoft.RecoveryServices/stable/2016-06-01/vaultusages.json
 ```
+### Tag: package-2020-02
 
+These settings apply only when `--tag=package-2020-02` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-02'
+input-file:
+- Microsoft.RecoveryServices/stable/2020-02-02/registeredidentities.json
+- Microsoft.RecoveryServices/stable/2020-02-02/replicationusages.json
+- Microsoft.RecoveryServices/stable/2020-02-02/vaults.json
+- Microsoft.RecoveryServices/stable/2020-02-02/vaultusages.json
+```
 
 ---
 # Code Generation
@@ -55,6 +75,7 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
+  - repo: azure-sdk-for-net
   - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
@@ -63,6 +84,9 @@ swagger-to-sdk:
   - repo: azure-sdk-for-ruby
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_recovery_services']
+  - repo: azure-resource-manager-schemas
+    after_scripts:
+      - node sdkauto_afterscript.js recoveryservices/resource-manager
 ```
 
 
@@ -77,35 +101,8 @@ csharp:
   license-header: MICROSOFT_MIT_NO_VERSION
   payload-flattening-threshold: 1
   namespace: Microsoft.Azure.Management.RecoveryServices
-  output-folder: $(csharp-sdks-folder)/RecoveryServices/Management.RecoveryServices/Generated
+  output-folder: $(csharp-sdks-folder)/recoveryservices/Microsoft.Azure.Management.RecoveryServices/src/Generated
   clear-output-folder: true
-```
-
-## Python
-
-These settings apply only when `--python` is specified on the command line.
-Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
-Use `--python-mode=update` if you already have a setup.py and just want to update the code itself.
-
-``` yaml $(python)
-python-mode: create
-python:
-  azure-arm: true
-  license-header: MICROSOFT_MIT_NO_VERSION
-  payload-flattening-threshold: 2
-  namespace: azure.mgmt.recoveryservices
-  package-name: azure-mgmt-recoveryservices
-  clear-output-folder: true
-```
-``` yaml $(python) && $(python-mode) == 'update'
-python:
-  no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-recoveryservices/azure/mgmt/recoveryservices
-```
-``` yaml $(python) && $(python-mode) == 'create'
-python:
-  basic-setup-py: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-recoveryservices
 ```
 
 ## Go
@@ -141,9 +138,14 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 ``` yaml $(tag) == 'package-2016-06' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.recoveryservices.v2016_06_01
-  output-folder: $(azure-libraries-for-java-folder)/recoveryservices/resource-manager/v2016_06_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/recoveryservices/mgmt-v2016_06_01
 regenerate-manager: true
 generate-interface: true
 ```
 
+
+
+## AzureResourceSchema
+
+See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
 

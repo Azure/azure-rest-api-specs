@@ -1,57 +1,57 @@
 {
-    "parameters": {
-      "subscriptionId": "00000000-0000-0000-0000-000000000000",
-      "resourceGroupName": "sbz_demo",
-      "api-version": "2018-07-01-preview",
-      "applicationName": "helloWorldApp",
-      "serviceName": "helloWorldService"
-    },
-    "responses": {
-      "200": {
-        "body": {
-          "name": "helloWorldService",
-          "type": "Microsoft.ServiceFabricMesh/services",
-          "properties": {
-            "osType": "Linux",
-            "codePackages": [
-              {
-                "name": "helloWorldCode",
-                "image": "seabreeze/sbz-helloworld:1.0-alpine",
-                "endpoints": [
-                  {
-                    "name": "helloWorldListener",
-                    "port": 80
-                  }
-                ],
-                "resources": {
-                  "requests": {
-                    "memoryInGB": 1,
-                    "cpu": 1
-                  }
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "sbz_demo",
+    "api-version": "2018-07-01-preview",
+    "applicationName": "helloWorldApp",
+    "serviceName": "helloWorldService"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "helloWorldService",
+        "type": "Microsoft.ServiceFabricMesh/services",
+        "properties": {
+          "osType": "Linux",
+          "codePackages": [
+            {
+              "name": "helloWorldCode",
+              "image": "seabreeze/sbz-helloworld:1.0-alpine",
+              "endpoints": [
+                {
+                  "name": "helloWorldListener",
+                  "port": 80
                 }
-              },
-              {
-                "name": "helloWorldSideCar",
-                "image": "seabreeze/sbz-helloworld-sidecar:1.0-alpine",
-                "resources": {
-                  "requests": {
-                    "memoryInGB": 1,
-                    "cpu": 1
-                  }
+              ],
+              "resources": {
+                "requests": {
+                  "memoryInGB": 1,
+                  "cpu": 1
                 }
               }
-            ],
-            "networkRefs": [
-              {
-                "name": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/sbz_demo/providers/Microsoft.ServiceFabricMesh/networks/helloWorldNetwork"
+            },
+            {
+              "name": "helloWorldSideCar",
+              "image": "seabreeze/sbz-helloworld-sidecar:1.0-alpine",
+              "resources": {
+                "requests": {
+                  "memoryInGB": 1,
+                  "cpu": 1
+                }
               }
-            ],
-            "description": "SeaBreeze Hello World Service.",
-            "replicaCount": 2,
-            "healthState": "Ok",
-            "status": "Unknown"
-          }
+            }
+          ],
+          "networkRefs": [
+            {
+              "name": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/sbz_demo/providers/Microsoft.ServiceFabricMesh/networks/helloWorldNetwork"
+            }
+          ],
+          "description": "SeaBreeze Hello World Service.",
+          "replicaCount": 2,
+          "healthState": "Ok",
+          "status": "Unknown"
         }
       }
     }
   }
+}

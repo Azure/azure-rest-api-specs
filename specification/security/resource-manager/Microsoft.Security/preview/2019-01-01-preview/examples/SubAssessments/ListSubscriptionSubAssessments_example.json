@@ -1,0 +1,66 @@
+{
+  "parameters": {
+    "api-version": "2019-01-01-preview",
+    "scope": "subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/myRg/providers/Microsoft.ContainerRegistry/registries/myRegistry/providers/Microsoft.Security/assessments/21300918-b2e3-0346-785f-c77ff57d243b/subAssessments/8c98f353-8b41-4e77-979b-6adeecd5d168",
+            "name": "8c98f353-8b41-4e77-979b-6adeecd5d168",
+            "type": "Microsoft.Security/assessments/subAssessments",
+            "properties": {
+              "displayName": "'Back Orifice' Backdoor",
+              "id": "1001",
+              "status": {
+                "code": "Unhealthy",
+                "cause": "",
+                "severity": "High",
+                "description": "The resource is unhealthy"
+              },
+              "resourceDetails": {
+                "source": "Azure",
+                "id": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/myRg/providers/Microsoft.ContainerRegistry/registries/myRegistry/repository/myRepo/imageDigest/c186fc44-3154-4ce2-ba18-b719d895c3b0/providers/Microsoft.Security/assessments/21300918-b2e3-0346-785f-c77ff57d243b/subAssessments/8c98f353-8b41-4e77-979b-6adeecd5d168"
+              },
+              "remediation": "Use a recent anti-virus program to remove this backdoor and check your system regularly with anti-virus software.",
+              "impact": "3",
+              "category": "Backdoors and trojan horses",
+              "description": "The backdoor 'Back Orifice' was detected on this system.  The presence of this backdoor indicates that your system has already been compromised.  Unauthorized users can access your host at any time. Unauthorized users can take complete control of the host and manipulate data.  They can steal the data or even wipe out the host.",
+              "timeGenerated": "2019-06-23T12:20:08.7644808Z",
+              "additionalData": {
+                "assessedResourceType": "ContainerRegistryVulnerability",
+                "imageDigest": "c186fc44-3154-4ce2-ba18-b719d895c3b0",
+                "repositoryName": "myRepo",
+                "type": "Vulnerability",
+                "cvss": {
+                  "2.0": {
+                    "base": 10
+                  },
+                  "3.0": {
+                    "base": 10
+                  }
+                },
+                "patchable": true,
+                "cve": [
+                  {
+                    "title": "CVE-2019-12345",
+                    "link": "http://contoso.com"
+                  }
+                ],
+                "publishedTime": "2018-01-01T00:00:00.0000000Z",
+                "vendorReferences": [
+                  {
+                    "title": "Reference_1",
+                    "link": "http://contoso.com"
+                  }
+                ]
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}

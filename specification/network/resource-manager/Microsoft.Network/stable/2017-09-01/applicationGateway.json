@@ -212,7 +212,9 @@
           }
         },
         "x-ms-examples": {
-          "Update Application Gateway tags": { "$ref": "./examples/ApplicationGatewayUpdateTags.json" }
+          "Update Application Gateway tags": {
+            "$ref": "./examples/ApplicationGatewayUpdateTags.json"
+          }
         },
         "x-ms-long-running-operation": true
       }
@@ -394,7 +396,7 @@
             "required": false,
             "type": "string",
             "description": "Expands BackendAddressPool and BackendHttpSettings referenced in backend health."
-          }		  
+          }
         ],
         "responses": {
           "200": {
@@ -410,7 +412,7 @@
         "x-ms-long-running-operation": true
       }
     },
-     "/subscriptions/{subscriptionId}/providers/Microsoft.Network/applicationGatewayAvailableWafRuleSets": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Network/applicationGatewayAvailableWafRuleSets": {
       "get": {
         "tags": [
           "ApplicationGateways"
@@ -442,7 +444,9 @@
         ],
         "operationId": "ApplicationGateways_ListAvailableSslOptions",
         "x-ms-examples": {
-          "ApplicationGatewayAvailableSslOptionsGet": { "$ref": "./examples/ApplicationGatewayAvailableSslOptionsGet.json" }
+          "ApplicationGatewayAvailableSslOptionsGet": {
+            "$ref": "./examples/ApplicationGatewayAvailableSslOptionsGet.json"
+          }
         },
         "description": "Lists available Ssl options for configuring Ssl policy.",
         "parameters": [
@@ -470,7 +474,9 @@
         ],
         "operationId": "ApplicationGateways_ListAvailableSslPredefinedPolicies",
         "x-ms-examples": {
-          "ApplicationGatewayAvailableSslOptionsPredefinedPoliciesGet": { "$ref": "./examples/ApplicationGatewayAvailableSslOptionsPredefinedPoliciesGet.json" }
+          "ApplicationGatewayAvailableSslOptionsPredefinedPoliciesGet": {
+            "$ref": "./examples/ApplicationGatewayAvailableSslOptionsPredefinedPoliciesGet.json"
+          }
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
@@ -501,7 +507,9 @@
         ],
         "operationId": "ApplicationGateways_GetSslPredefinedPolicy",
         "x-ms-examples": {
-          "ApplicationGatewayAvailableSslOptionsPredefinedPolicyGet": { "$ref": "./examples/ApplicationGatewayAvailableSslOptionsPredefinedPolicyGet.json" }
+          "ApplicationGatewayAvailableSslOptionsPredefinedPolicyGet": {
+            "$ref": "./examples/ApplicationGatewayAvailableSslOptionsPredefinedPolicyGet.json"
+          }
         },
         "description": "Gets Ssl predefined policy with the specified policy name.",
         "parameters": [
@@ -535,25 +543,25 @@
       "properties": {
         "backendAddressPools": {
           "type": "array",
-	        "items": {
+          "items": {
             "$ref": "#/definitions/ApplicationGatewayBackendHealthPool"
-	        }
-	      }
-	    },
-	    "description": "List of ApplicationGatewayBackendHealthPool resources."
-	},	
+          }
+        }
+      },
+      "description": "List of ApplicationGatewayBackendHealthPool resources."
+    },
     "ApplicationGatewayBackendHealthPool": {
       "properties": {
         "backendAddressPool": {
           "$ref": "#/definitions/ApplicationGatewayBackendAddressPool",
           "description": "Reference of an ApplicationGatewayBackendAddressPool resource."
-        },	  
+        },
         "backendHttpSettingsCollection": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/ApplicationGatewayBackendHealthHttpSettings"
           },
-        "description": "List of ApplicationGatewayBackendHealthHttpSettings resources."
+          "description": "List of ApplicationGatewayBackendHealthHttpSettings resources."
         }
       },
       "description": "Application gateway BackendHealth pool."
@@ -563,27 +571,27 @@
         "backendHttpSettings": {
           "$ref": "#/definitions/ApplicationGatewayBackendHttpSettings",
           "description": "Reference of an ApplicationGatewayBackendHttpSettings resource."
-        },	  
+        },
         "servers": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/ApplicationGatewayBackendHealthServer"
-        },
-        "description": "List of ApplicationGatewayBackendHealthServer resources."
+          },
+          "description": "List of ApplicationGatewayBackendHealthServer resources."
         }
       },
       "description": "Application gateway BackendHealthHttp settings."
-    },	
+    },
     "ApplicationGatewayBackendHealthServer": {
       "properties": {
         "address": {
-        "type": "string",
-        "description": "IP address or FQDN of backend server."
-        },	  
+          "type": "string",
+          "description": "IP address or FQDN of backend server."
+        },
         "ipConfiguration": {
           "$ref": "./networkInterface.json#/definitions/NetworkInterfaceIPConfiguration",
           "description": "Reference of IP configuration of backend server."
-        },	  
+        },
         "health": {
           "type": "string",
           "description": "Health of backend server.",
@@ -599,9 +607,9 @@
             "modelAsString": true
           }
         }
-      },	
+      },
       "description": "Application gateway backendhealth http settings."
-    },  
+    },
     "ApplicationGatewaySku": {
       "properties": {
         "name": {
@@ -644,7 +652,7 @@
         "disabledSslProtocols": {
           "type": "array",
           "description": "Ssl protocols to be disabled on application gateway.",
-          "items":{
+          "items": {
             "type": "string",
             "$ref": "#/definitions/ProtocolsEnum",
             "x-ms-enum": {
@@ -665,18 +673,18 @@
             "modelAsString": true
           }
         },
-        "policyName":{
+        "policyName": {
           "$ref": "#/definitions/PolicyNameEnum",
           "description": "Name of Ssl predefined policy"
         },
-        "cipherSuites":{
+        "cipherSuites": {
           "type": "array",
-          "items":{
+          "items": {
             "$ref": "#/definitions/CipherSuitesEnum"
           },
-          "description":"Ssl cipher suites to be enabled in the specified order to application gateway."
+          "description": "Ssl cipher suites to be enabled in the specified order to application gateway."
         },
-        "minProtocolVersion":{
+        "minProtocolVersion": {
           "$ref": "#/definitions/ProtocolsEnum",
           "description": "Minimum version of Ssl protocol to be supported on application gateway."
         }
@@ -1017,8 +1025,8 @@
           "description": "Array of references to application gateway authentication certificates."
         },
         "connectionDraining": {
-            "$ref": "#/definitions/ApplicationGatewayConnectionDraining",
-            "description": "Connection draining of the backend http settings resource."
+          "$ref": "#/definitions/ApplicationGatewayConnectionDraining",
+          "description": "Connection draining of the backend http settings resource."
         },
         "hostName": {
           "type": "string",
@@ -1041,8 +1049,8 @@
           "description": "Path which should be used as a prefix for all HTTP requests. Null means no path will be prefixed. Default value is null."
         },
         "provisioningState": {
-            "type": "string",
-            "description": "Provisioning state of the backend http settings resource. Possible values are: 'Updating', 'Deleting', and 'Failed'."
+          "type": "string",
+          "description": "Provisioning state of the backend http settings resource. Possible values are: 'Updating', 'Deleting', and 'Failed'."
         }
       },
       "description": "Properties of Backend address pool settings of an application gateway."
@@ -1231,16 +1239,16 @@
           "format": "int32",
           "description": "The probe retry count. Backend server is marked down after consecutive probe failure count reaches UnhealthyThreshold. Acceptable values are from 1 second to 20."
         },
-        "pickHostNameFromBackendHttpSettings":{
-          "type":"boolean",
+        "pickHostNameFromBackendHttpSettings": {
+          "type": "boolean",
           "description": "Whether the host header should be picked from the backend http settings. Default value is false."
         },
-        "minServers":{
-          "type":"integer",
+        "minServers": {
+          "type": "integer",
           "format": "int32",
           "description": "Minimum number of servers that are always marked healthy. Default value is 0."
         },
-        "match":{
+        "match": {
           "$ref": "#/definitions/ApplicationGatewayProbeHealthResponseMatch",
           "description": "Criterion for classifying a healthy probe response."
         },
@@ -1253,16 +1261,16 @@
     },
     "ApplicationGatewayProbeHealthResponseMatch": {
       "properties": {
-        "body":{
+        "body": {
           "type": "string",
           "description": "Body that must be contained in the health response. Default value is empty."
         },
-        "statusCodes":{
+        "statusCodes": {
           "type": "array",
-          "items":{
+          "items": {
             "type": "string"
           },
-          "description":"Allowed ranges of healthy status codes. Default range of healthy status codes is 200-399."
+          "description": "Allowed ranges of healthy status codes. Default range of healthy status codes is 200-399."
         }
       },
       "description": "Application gateway probe health response match"
@@ -1364,7 +1372,7 @@
       "properties": {
         "redirectType": {
           "type": "string",
-          "$ref":"#/definitions/RedirectTypeEnum",
+          "$ref": "#/definitions/RedirectTypeEnum",
           "description": "Supported http redirection types - Permanent, Temporary, Found, SeeOther.",
           "x-ms-enum": {
             "name": "ApplicationGatewayRedirectType",
@@ -1372,7 +1380,7 @@
           }
         },
         "targetListener": {
-          "$ref":"./network.json#/definitions/SubResource",
+          "$ref": "./network.json#/definitions/SubResource",
           "description": "Reference to a listener to redirect the request to."
         },
         "targetUrl": {
@@ -1397,14 +1405,14 @@
         "urlPathMaps": {
           "type": "array",
           "items": {
-            "$ref":"./network.json#/definitions/SubResource"
+            "$ref": "./network.json#/definitions/SubResource"
           },
           "description": "Url path maps specifying default redirect configuration."
         },
         "pathRules": {
           "type": "array",
           "items": {
-            "$ref":"./network.json#/definitions/SubResource"
+            "$ref": "./network.json#/definitions/SubResource"
           },
           "description": "Path rules specifying redirect configuration."
         }
@@ -1692,26 +1700,26 @@
       "description": "Application gateway web application firewall configuration."
     },
     "ApplicationGatewayConnectionDraining": {
-        "properties": {
-            "enabled": {
-                "type": "boolean",
-                "description": "Whether connection draining is enabled or not."
-            },
-            "drainTimeoutInSec": {
-                "type": "integer",
-                "format": "int32",
-                "maximum": 3600,
-                "exclusiveMaximum": false,
-                "minimum": 1,
-                "exclusiveMinimum": false,
-                "description": "The number of seconds connection draining is active. Acceptable values are from 1 second to 3600 seconds."
-            }
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "Whether connection draining is enabled or not."
         },
-        "required": [
-            "enabled",
-            "drainTimeoutInSec"
-        ],
-        "description": "Connection draining allows open connections to a backend server to be active for a specified time after the backend server got removed from the configuration."
+        "drainTimeoutInSec": {
+          "type": "integer",
+          "format": "int32",
+          "maximum": 3600,
+          "exclusiveMaximum": false,
+          "minimum": 1,
+          "exclusiveMinimum": false,
+          "description": "The number of seconds connection draining is active. Acceptable values are from 1 second to 3600 seconds."
+        }
+      },
+      "required": [
+        "enabled",
+        "drainTimeoutInSec"
+      ],
+      "description": "Connection draining allows open connections to a backend server to be active for a specified time after the backend server got removed from the configuration."
     },
     "ApplicationGatewayFirewallDisabledRuleGroup": {
       "properties": {
@@ -1845,28 +1853,28 @@
       "description": "Response for ApplicationGatewayAvailableSslOptions API service call."
     },
     "ApplicationGatewayAvailableSslOptionsPropertiesFormat": {
-        "properties": {
-          "predefinedPolicies":{
-            "type": "array",
-            "items": {
-              "$ref": "./network.json#/definitions/SubResource"
-            },
-            "description": "List of available Ssl predefined policy."
+      "properties": {
+        "predefinedPolicies": {
+          "type": "array",
+          "items": {
+            "$ref": "./network.json#/definitions/SubResource"
           },
-          "defaultPolicy":{
-            "$ref": "#/definitions/PolicyNameEnum",
-            "description": "Name of the Ssl predefined policy applied by default to application gateway"
+          "description": "List of available Ssl predefined policy."
+        },
+        "defaultPolicy": {
+          "$ref": "#/definitions/PolicyNameEnum",
+          "description": "Name of the Ssl predefined policy applied by default to application gateway"
+        },
+        "availableCipherSuites": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CipherSuitesEnum"
           },
-          "availableCipherSuites":{
-            "type":"array",
-            "items":{
-              "$ref": "#/definitions/CipherSuitesEnum"
-            },
-            "description": "List of available Ssl cipher suites."
-          },
-          "availableProtocols":{
-            "type":"array",
-            "items":{
+          "description": "List of available Ssl cipher suites."
+        },
+        "availableProtocols": {
+          "type": "array",
+          "items": {
             "$ref": "#/definitions/ProtocolsEnum"
           },
           "description": "List of available Ssl protocols."
@@ -1876,7 +1884,7 @@
     },
     "ApplicationGatewayAvailableSslPredefinedPolicies": {
       "properties": {
-        "value":{
+        "value": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/ApplicationGatewaySslPredefinedPolicy"
@@ -1901,59 +1909,59 @@
           "$ref": "#/definitions/ApplicationGatewaySslPredefinedPolicyPropertiesFormat"
         }
       },
-      "allOf":[
+      "allOf": [
         {
           "$ref": "./network.json#/definitions/SubResource"
         }
       ],
       "description": "An Ssl predefined policy"
     },
-    "ApplicationGatewaySslPredefinedPolicyPropertiesFormat":{
-      "properties":{
-        "cipherSuites":{
-          "type":"array",
-          "items":{
+    "ApplicationGatewaySslPredefinedPolicyPropertiesFormat": {
+      "properties": {
+        "cipherSuites": {
+          "type": "array",
+          "items": {
             "$ref": "#/definitions/CipherSuitesEnum"
           },
           "description": "Ssl cipher suites to be enabled in the specified order for application gateway."
         },
-        "minProtocolVersion":{
+        "minProtocolVersion": {
           "$ref": "#/definitions/ProtocolsEnum",
           "description": "Minimum version of Ssl protocol to be supported on application gateway."
         }
       },
       "description": "Properties of ApplicationGatewaySslPredefinedPolicy"
     },
-    "PolicyNameEnum":{
+    "PolicyNameEnum": {
       "type": "string",
       "description": "Ssl predefined policy name enums.",
-      "enum":[
+      "enum": [
         "AppGwSslPolicy20150501",
         "AppGwSslPolicy20170401",
         "AppGwSslPolicy20170401S"
       ],
-      "x-ms-enum":{
+      "x-ms-enum": {
         "name": "ApplicationGatewaySslPolicyName",
         "modelAsString": true
       }
     },
-    "ProtocolsEnum":{
+    "ProtocolsEnum": {
       "type": "string",
       "description": "Ssl protocol enums.",
-      "enum":[
+      "enum": [
         "TLSv1_0",
         "TLSv1_1",
         "TLSv1_2"
       ],
-      "x-ms-enum":{
+      "x-ms-enum": {
         "name": "ApplicationGatewaySslProtocol",
         "modelAsString": true
       }
     },
-    "CipherSuitesEnum":{
+    "CipherSuitesEnum": {
       "type": "string",
       "description": "Ssl cipher suites enums.",
-      "enum":[
+      "enum": [
         "TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384",
         "TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256",
         "TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA",
@@ -1978,22 +1986,25 @@
         "TLS_DHE_DSS_WITH_AES_128_CBC_SHA256",
         "TLS_DHE_DSS_WITH_AES_256_CBC_SHA",
         "TLS_DHE_DSS_WITH_AES_128_CBC_SHA",
-        "TLS_RSA_WITH_3DES_EDE_CBC_SHA"
+        "TLS_RSA_WITH_3DES_EDE_CBC_SHA",
+        "TLS_DHE_DSS_WITH_3DES_EDE_CBC_SHA",
+        "TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256",
+        "TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384"
       ],
       "x-ms-enum": {
         "name": "ApplicationGatewaySslCipherSuite",
         "modelAsString": true
       }
     },
-    "RedirectTypeEnum":{
+    "RedirectTypeEnum": {
       "type": "string",
-      "enum":[
+      "enum": [
         "Permanent",
         "Found",
         "SeeOther",
         "Temporary"
       ],
-      "x-ms-enum":{
+      "x-ms-enum": {
         "name": "ApplicationGatewayRedirectType",
         "modelAsString": true
       }

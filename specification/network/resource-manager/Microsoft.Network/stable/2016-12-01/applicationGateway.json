@@ -36,7 +36,7 @@
     }
   },
   "paths": {
-  	"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/applicationGateways/{applicationGatewayName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/applicationGateways/{applicationGatewayName}": {
       "delete": {
         "tags": [
           "ApplicationGateways"
@@ -346,7 +346,7 @@
             "required": false,
             "type": "string",
             "description": "Expands BackendAddressPool and BackendHttpSettings referenced in backend health."
-          }		  
+          }
         ],
         "responses": {
           "200": {
@@ -368,25 +368,25 @@
       "properties": {
         "backendAddressPools": {
           "type": "array",
-	        "items": {
+          "items": {
             "$ref": "#/definitions/ApplicationGatewayBackendHealthPool"
-	        }
-	      }
-	    },
-	    "description": "List of ApplicationGatewayBackendHealthPool resources."
-	},	
+          }
+        }
+      },
+      "description": "List of ApplicationGatewayBackendHealthPool resources."
+    },
     "ApplicationGatewayBackendHealthPool": {
       "properties": {
         "backendAddressPool": {
           "$ref": "#/definitions/ApplicationGatewayBackendAddressPool",
           "description": "Reference of an ApplicationGatewayBackendAddressPool resource."
-        },	  
+        },
         "backendHttpSettingsCollection": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/ApplicationGatewayBackendHealthHttpSettings"
           },
-        "description": "List of ApplicationGatewayBackendHealthHttpSettings resources."
+          "description": "List of ApplicationGatewayBackendHealthHttpSettings resources."
         }
       },
       "description": "Application gateway BackendHealth pool."
@@ -396,27 +396,27 @@
         "backendHttpSettings": {
           "$ref": "#/definitions/ApplicationGatewayBackendHttpSettings",
           "description": "Reference of an ApplicationGatewayBackendHttpSettings resource."
-        },	  
+        },
         "servers": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/ApplicationGatewayBackendHealthServer"
-        },
-        "description": "List of ApplicationGatewayBackendHealthServer resources."
+          },
+          "description": "List of ApplicationGatewayBackendHealthServer resources."
         }
       },
       "description": "Application gateway BackendHealthHttp settings."
-    },	
+    },
     "ApplicationGatewayBackendHealthServer": {
       "properties": {
         "address": {
-        "type": "string",
-        "description": "IP address or FQDN of backend server."
-        },	  
+          "type": "string",
+          "description": "IP address or FQDN of backend server."
+        },
         "ipConfiguration": {
           "$ref": "./network.json#/definitions/SubResource",
           "description": "Reference of IP configuration of backend server."
-        },	  
+        },
         "health": {
           "type": "string",
           "description": "Health of backend server. Possible values are: 'Unknown', 'Up', 'Down', and 'Partial'.",
@@ -431,9 +431,9 @@
             "modelAsString": true
           }
         }
-      },	
+      },
       "description": "Application gateway backendhealth http settings."
-    },  
+    },
     "ApplicationGatewaySku": {
       "properties": {
         "name": {
@@ -802,12 +802,12 @@
           "description": "Array of references to application gateway authentication certificates."
         },
         "provisioningState": {
-            "type": "string",
-            "description": "Provisioning state of the backend http settings resource. Possible values are: 'Updating', 'Deleting', and 'Failed'."
+          "type": "string",
+          "description": "Provisioning state of the backend http settings resource. Possible values are: 'Updating', 'Deleting', and 'Failed'."
         },
         "connectionDraining": {
-            "$ref": "#/definitions/ApplicationGatewayConnectionDraining",
-            "description": "Connection draining of the backend http settings resource."
+          "$ref": "#/definitions/ApplicationGatewayConnectionDraining",
+          "description": "Connection draining of the backend http settings resource."
         }
       },
       "description": "Properties of Backend address pool settings of an application gateway."
@@ -1290,26 +1290,26 @@
       "description": "Application gateway web application firewall configuration."
     },
     "ApplicationGatewayConnectionDraining": {
-        "properties": {
-            "enabled": {
-                "type": "boolean",
-                "description": "Whether connection draining is enabled or not."
-            },
-            "drainTimeoutInSec": {
-                "type": "integer",
-                "format": "int32",
-                "maximum": 3600,
-                "exclusiveMaximum": false,
-                "minimum": 1,
-                "exclusiveMinimum": false,
-                "description": "The number of seconds connection draining is active. Acceptable values are from 1 second to 3600 seconds."
-            }
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "Whether connection draining is enabled or not."
         },
-        "required": [
-            "enabled",
-            "drainTimeoutInSec"
-        ],
-        "description": "Connection draining allows open connections to a backend server to be active for a specified time after the backend server got removed from the configuration."
+        "drainTimeoutInSec": {
+          "type": "integer",
+          "format": "int32",
+          "maximum": 3600,
+          "exclusiveMaximum": false,
+          "minimum": 1,
+          "exclusiveMinimum": false,
+          "description": "The number of seconds connection draining is active. Acceptable values are from 1 second to 3600 seconds."
+        }
+      },
+      "required": [
+        "enabled",
+        "drainTimeoutInSec"
+      ],
+      "description": "Connection draining allows open connections to a backend server to be active for a specified time after the backend server got removed from the configuration."
     }
   },
   "parameters": {

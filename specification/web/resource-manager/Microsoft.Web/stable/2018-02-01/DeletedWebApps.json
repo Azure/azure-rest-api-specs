@@ -49,6 +49,102 @@
           "nextLinkName": "nextLink"
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Web/locations/{location}/deletedSites": {
+      "get": {
+        "tags": [
+          "DeletedWebApps"
+        ],
+        "summary": "Get all deleted apps for a subscription at location",
+        "description": "Get all deleted apps for a subscription at location",
+        "operationId": "DeletedWebApps_ListByLocation",
+        "parameters": [
+          {
+            "name": "location",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DeletedWebAppCollection"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Deleted Web App by Location": {
+            "$ref": "./examples/ListDeletedWebAppsByLocation.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Web/locations/{location}/deletedSites/{deletedSiteId}": {
+      "get": {
+        "tags": [
+          "DeletedWebApps"
+        ],
+        "summary": "Get deleted app for a subscription at location.",
+        "description": "Get deleted app for a subscription at location.",
+        "operationId": "DeletedWebApps_GetDeletedWebAppByLocation",
+        "parameters": [
+          {
+            "name": "location",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "deletedSiteId",
+            "in": "path",
+            "description": "The numeric ID of the deleted app, e.g. 12345",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DeletedSite"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Deleted Web App by Location": {
+            "$ref": "./examples/GetDeletedWebAppByLocation.json"
+          }
+        }
+      }
     }
   },
   "definitions": {

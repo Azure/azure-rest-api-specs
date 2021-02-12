@@ -87,7 +87,9 @@
           }
         },
         "x-ms-examples": {
-          "UpdateVirtualNetworkGateway": { "$ref": "./examples/VirtualNetworkGatewayUpdate.json" }
+          "UpdateVirtualNetworkGateway": {
+            "$ref": "./examples/VirtualNetworkGatewayUpdate.json"
+          }
         },
         "x-ms-long-running-operation": true
       },
@@ -128,7 +130,9 @@
           }
         },
         "x-ms-examples": {
-          "GetVirtualNetworkGateway": { "$ref": "./examples/VirtualNetworkGatewayGet.json" }
+          "GetVirtualNetworkGateway": {
+            "$ref": "./examples/VirtualNetworkGatewayGet.json"
+          }
         }
       },
       "delete": {
@@ -171,9 +175,14 @@
           }
         },
         "x-ms-examples": {
-          "DeleteVirtualNetworkGateway": { "$ref": "./examples/VirtualNetworkGatewayDelete.json" }
+          "DeleteVirtualNetworkGateway": {
+            "$ref": "./examples/VirtualNetworkGatewayDelete.json"
+          }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
       },
       "patch": {
         "tags": [
@@ -221,7 +230,9 @@
           }
         },
         "x-ms-examples": {
-          "UpdateVirtualNetworkGatewayTags": { "$ref": "./examples/VirtualNetworkGatewayUpdateTags.json" }
+          "UpdateVirtualNetworkGatewayTags": {
+            "$ref": "./examples/VirtualNetworkGatewayUpdateTags.json"
+          }
         },
         "x-ms-long-running-operation": true
       }
@@ -257,7 +268,9 @@
           }
         },
         "x-ms-examples": {
-          "ListVirtualNetworkGatewaysinResourceGroup": { "$ref": "./examples/VirtualNetworkGatewayList.json" }
+          "ListVirtualNetworkGatewaysinResourceGroup": {
+            "$ref": "./examples/VirtualNetworkGatewayList.json"
+          }
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
@@ -305,7 +318,9 @@
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "VirtualNetworkGatewaysListConnections": { "$ref": "./examples/VirtualNetworkGatewaysListConnections.json" }
+          "VirtualNetworkGatewaysListConnections": {
+            "$ref": "./examples/VirtualNetworkGatewaysListConnections.json"
+          }
         }
       }
     },
@@ -357,9 +372,14 @@
           }
         },
         "x-ms-examples": {
-          "ResetVirtualNetworkGateway": { "$ref": "./examples/VirtualNetworkGatewayReset.json" }
+          "ResetVirtualNetworkGateway": {
+            "$ref": "./examples/VirtualNetworkGatewayReset.json"
+          }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/generatevpnclientpackage": {
@@ -406,12 +426,20 @@
             "schema": {
               "type": "string"
             }
+          },
+          "202": {
+            "description": "Accepted and the operation will complete asynchronously."
           }
         },
         "x-ms-examples": {
-          "GenerateVPNClientPackage": { "$ref": "./examples/VirtualNetworkGatewayGenerateVpnClientPackage.json" }
+          "GenerateVPNClientPackage": {
+            "$ref": "./examples/VirtualNetworkGatewayGenerateVpnClientPackage.json"
+          }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/generatevpnprofile": {
@@ -464,9 +492,14 @@
           }
         },
         "x-ms-examples": {
-          "GenerateVirtualNetworkGatewayVPNProfile": { "$ref": "./examples/VirtualNetworkGatewayGenerateVpnProfile.json" }
+          "GenerateVirtualNetworkGatewayVPNProfile": {
+            "$ref": "./examples/VirtualNetworkGatewayGenerateVpnProfile.json"
+          }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/getvpnprofilepackageurl": {
@@ -510,9 +543,14 @@
           }
         },
         "x-ms-examples": {
-          "GetVirtualNetworkGatewayVPNProfilePackageURL": { "$ref": "./examples/VirtualNetworkGatewayGetVpnProfilePackageUrl.json" }
+          "GetVirtualNetworkGatewayVPNProfilePackageURL": {
+            "$ref": "./examples/VirtualNetworkGatewayGetVpnProfilePackageUrl.json"
+          }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/getBgpPeerStatus": {
@@ -563,9 +601,14 @@
           }
         },
         "x-ms-examples": {
-          "GetVirtualNetworkGatewayBGPPeerStatus": { "$ref": "./examples/VirtualNetworkGatewayGetBGPPeerStatus.json" }
+          "GetVirtualNetworkGatewayBGPPeerStatus": {
+            "$ref": "./examples/VirtualNetworkGatewayGetBGPPeerStatus.json"
+          }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/supportedvpndevices": {
@@ -606,7 +649,9 @@
           }
         },
         "x-ms-examples": {
-          "ListVirtualNetworkGatewaySupportedVPNDevices": { "$ref": "./examples/VirtualNetworkGatewaySupportedVpnDevice.json" }
+          "ListVirtualNetworkGatewaySupportedVPNDevices": {
+            "$ref": "./examples/VirtualNetworkGatewaySupportedVpnDevice.json"
+          }
         }
       }
     },
@@ -651,9 +696,14 @@
           }
         },
         "x-ms-examples": {
-          "GetVirtualNetworkGatewayLearnedRoutes": { "$ref": "./examples/VirtualNetworkGatewayLearnedRoutes.json" }
+          "GetVirtualNetworkGatewayLearnedRoutes": {
+            "$ref": "./examples/VirtualNetworkGatewayLearnedRoutes.json"
+          }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/getAdvertisedRoutes": {
@@ -704,9 +754,14 @@
           }
         },
         "x-ms-examples": {
-          "GetVirtualNetworkGatewayAdvertisedRoutes": { "$ref": "./examples/VirtualNetworkGatewayGetAdvertisedRoutes.json" }
+          "GetVirtualNetworkGatewayAdvertisedRoutes": {
+            "$ref": "./examples/VirtualNetworkGatewayGetAdvertisedRoutes.json"
+          }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/setvpnclientipsecparameters": {
@@ -759,12 +814,17 @@
           }
         },
         "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
         "x-ms-examples": {
-          "Set VirtualNetworkGateway VpnClientIpsecParameters": { "$ref": "./examples/VirtualNetworkGatewaySetVpnClientIpsecParameters.json" }
+          "Set VirtualNetworkGateway VpnClientIpsecParameters": {
+            "$ref": "./examples/VirtualNetworkGatewaySetVpnClientIpsecParameters.json"
+          }
         }
       }
     },
-	"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/getvpnclientipsecparameters": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/getvpnclientipsecparameters": {
       "post": {
         "tags": [
           "VirtualNetworkGateways"
@@ -802,10 +862,14 @@
           }
         },
         "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
         "x-ms-examples": {
-          "Get VirtualNetworkGateway VpnClientIpsecParameters": { "$ref": "./examples/VirtualNetworkGatewayGetVpnClientIpsecParameters.json" }
+          "Get VirtualNetworkGateway VpnClientIpsecParameters": {
+            "$ref": "./examples/VirtualNetworkGatewayGetVpnClientIpsecParameters.json"
+          }
         }
-
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/connections/{virtualNetworkGatewayConnectionName}/vpndeviceconfigurationscript": {
@@ -855,7 +919,9 @@
           }
         },
         "x-ms-examples": {
-          "GetVPNDeviceConfigurationScript": { "$ref": "./examples/VirtualNetworkGatewayVpnDeviceConfigurationScript.json" }
+          "GetVPNDeviceConfigurationScript": {
+            "$ref": "./examples/VirtualNetworkGatewayVpnDeviceConfigurationScript.json"
+          }
         }
       }
     },
@@ -912,7 +978,9 @@
           }
         },
         "x-ms-examples": {
-          "CreateVirtualNetworkGatewayConnection_S2S": { "$ref": "./examples/VirtualNetworkGatewayConnectionCreate.json" }
+          "CreateVirtualNetworkGatewayConnection_S2S": {
+            "$ref": "./examples/VirtualNetworkGatewayConnectionCreate.json"
+          }
         },
         "x-ms-long-running-operation": true
       },
@@ -953,7 +1021,9 @@
           }
         },
         "x-ms-examples": {
-          "GetVirtualNetworkGatewayConnection": { "$ref": "./examples/VirtualNetworkGatewayConnectionGet.json" }
+          "GetVirtualNetworkGatewayConnection": {
+            "$ref": "./examples/VirtualNetworkGatewayConnectionGet.json"
+          }
         }
       },
       "delete": {
@@ -996,9 +1066,14 @@
           }
         },
         "x-ms-examples": {
-          "DeleteVirtualNetworkGatewayConnection": { "$ref": "./examples/VirtualNetworkGatewayConnectionDelete.json" }
+          "DeleteVirtualNetworkGatewayConnection": {
+            "$ref": "./examples/VirtualNetworkGatewayConnectionDelete.json"
+          }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
       },
       "patch": {
         "tags": [
@@ -1046,7 +1121,9 @@
           }
         },
         "x-ms-examples": {
-          "UpdateVirtualNetworkGatewayConnectionTags": { "$ref": "./examples/VirtualNetworkGatewayConnectionUpdateTags.json" }
+          "UpdateVirtualNetworkGatewayConnectionTags": {
+            "$ref": "./examples/VirtualNetworkGatewayConnectionUpdateTags.json"
+          }
         },
         "x-ms-long-running-operation": true
       }
@@ -1104,7 +1181,9 @@
           }
         },
         "x-ms-examples": {
-          "SetVirtualNetworkGatewayConnectionSharedKey": { "$ref": "./examples/VirtualNetworkGatewayConnectionSetSharedKey.json" }
+          "SetVirtualNetworkGatewayConnectionSharedKey": {
+            "$ref": "./examples/VirtualNetworkGatewayConnectionSetSharedKey.json"
+          }
         },
         "x-ms-long-running-operation": true
       },
@@ -1145,7 +1224,9 @@
           }
         },
         "x-ms-examples": {
-          "GetVirtualNetworkGatewayConnectionSharedKey": { "$ref": "./examples/VirtualNetworkGatewayConnectionGetSharedKey.json" }
+          "GetVirtualNetworkGatewayConnectionSharedKey": {
+            "$ref": "./examples/VirtualNetworkGatewayConnectionGetSharedKey.json"
+          }
         }
       }
     },
@@ -1180,7 +1261,9 @@
           }
         },
         "x-ms-examples": {
-          "ListVirtualNetworkGatewayConnectionsinResourceGroup": { "$ref": "./examples/VirtualNetworkGatewayConnectionsList.json" }
+          "ListVirtualNetworkGatewayConnectionsinResourceGroup": {
+            "$ref": "./examples/VirtualNetworkGatewayConnectionsList.json"
+          }
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
@@ -1237,9 +1320,14 @@
           }
         },
         "x-ms-examples": {
-          "ResetVirtualNetworkGatewayConnectionSharedKey": { "$ref": "./examples/VirtualNetworkGatewayConnectionResetSharedKey.json" }
+          "ResetVirtualNetworkGatewayConnectionSharedKey": {
+            "$ref": "./examples/VirtualNetworkGatewayConnectionResetSharedKey.json"
+          }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/localNetworkGateways/{localNetworkGatewayName}": {
@@ -1296,7 +1384,9 @@
           }
         },
         "x-ms-examples": {
-          "CreateLocalNetworkGateway": { "$ref": "./examples/LocalNetworkGatewayCreate.json" }
+          "CreateLocalNetworkGateway": {
+            "$ref": "./examples/LocalNetworkGatewayCreate.json"
+          }
         },
         "x-ms-long-running-operation": true
       },
@@ -1338,7 +1428,9 @@
           }
         },
         "x-ms-examples": {
-          "GetLocalNetworkGateway": { "$ref": "./examples/LocalNetworkGatewayGet.json" }
+          "GetLocalNetworkGateway": {
+            "$ref": "./examples/LocalNetworkGatewayGet.json"
+          }
         }
       },
       "delete": {
@@ -1382,9 +1474,14 @@
           }
         },
         "x-ms-examples": {
-          "DeleteLocalNetworkGateway": { "$ref": "./examples/LocalNetworkGatewayDelete.json" }
+          "DeleteLocalNetworkGateway": {
+            "$ref": "./examples/LocalNetworkGatewayDelete.json"
+          }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
       },
       "patch": {
         "tags": [
@@ -1433,7 +1530,9 @@
           }
         },
         "x-ms-examples": {
-          "UpdateLocalNetworkGatewayTags": { "$ref": "./examples/LocalNetworkGatewayUpdateTags.json" }
+          "UpdateLocalNetworkGatewayTags": {
+            "$ref": "./examples/LocalNetworkGatewayUpdateTags.json"
+          }
         },
         "x-ms-long-running-operation": true
       }
@@ -1469,7 +1568,9 @@
           }
         },
         "x-ms-examples": {
-          "ListLocalNetworkGateways": { "$ref": "./examples/LocalNetworkGatewayList.json" }
+          "ListLocalNetworkGateways": {
+            "$ref": "./examples/LocalNetworkGatewayList.json"
+          }
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
@@ -1717,7 +1818,7 @@
           },
           "description": "VpnClientProtocols for Virtual network gateway."
         },
-		"vpnClientIpsecPolicies": {
+        "vpnClientIpsecPolicies": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/IpsecPolicy"
@@ -2232,7 +2333,7 @@
           "description": "The virtual network connection shared key value."
         }
       },
-	  "allOf": [
+      "allOf": [
         {
           "$ref": "./network.json#/definitions/SubResource"
         }

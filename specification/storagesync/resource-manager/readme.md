@@ -26,14 +26,59 @@ These are the global settings for the Storage Sync API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2019-02-01
+tag: package-preview-2020-09-01
+```
+
+
+### Tag: package-preview-2020-09-01
+
+These settings apply only when `--tag=package-preview-2020-09-01` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2020-09-01'
+input-file:
+  - Microsoft.StorageSync/preview/2020-09-01/storagesync.json
+```
+### Tag: package-2020-03-01
+
+These settings apply only when `--tag=package-2020-03-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-03-01'
+input-file:
+  - Microsoft.StorageSync/stable/2020-03-01/storagesync.json
+```
+
+### Tag: package-2019-10-01
+
+These settings apply only when `--tag=package-2019-10-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-2019-10-01'
+input-file:
+  - Microsoft.StorageSync/stable/2019-10-01/storagesync.json
+```
+
+### Tag: package-2019-06-01
+
+These settings apply only when `--tag=package-2019-06-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-2019-06-01'
+input-file:
+  - Microsoft.StorageSync/stable/2019-06-01/storagesync.json
+```
+
+### Tag: package-2019-03-01
+
+These settings apply only when `--tag=package-2019-03-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-2019-03-01'
+input-file:
+  - Microsoft.StorageSync/stable/2019-03-01/storagesync.json
 ```
 
 ### Tag: package-2019-02-01
 
 These settings apply only when `--tag=package-2019-02-01` is specified on the command line.
 
-```yaml $(tag) == 'package-2019-02-01'
+``` yaml $(tag) == 'package-2019-02-01'
 input-file:
   - Microsoft.StorageSync/stable/2019-02-01/storagesync.json
 ```
@@ -85,11 +130,16 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
+  - repo: azure-sdk-for-net
   - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
+  - repo: azure-cli-extensions
+  - repo: azure-resource-manager-schemas
+    after_scripts:
+      - node sdkauto_afterscript.js storagesync/resource-manager
 ```
 
 ## C#
@@ -103,7 +153,7 @@ csharp:
   license-header: MICROSOFT_MIT_NO_VERSION
   namespace: Microsoft.Azure.Management.StorageSync
   payload-flattening-threshold: 1
-  output-folder: $(csharp-sdks-folder)/StorageSync/Management.StorageSync/Generated
+  output-folder: $(csharp-sdks-folder)/storagesync/Microsoft.Azure.Management.StorageSync/src/Generated
   clear-output-folder: true
 ```
 
@@ -128,13 +178,13 @@ python:
 ``` yaml $(python) && $(python-mode) == 'update'
 python:
   no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-storagesync/azure/mgmt/storagesync
+  output-folder: $(python-sdks-folder)/storage/azure-mgmt-storagesync/azure/mgmt/storagesync
 ```
 
 ``` yaml $(python) && $(python-mode) == 'create'
 python:
   basic-setup-py: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-storagesync
+  output-folder: $(python-sdks-folder)/storage/azure-mgmt-storagesync
 ```
 
 ## Go
@@ -144,3 +194,8 @@ See configuration in [readme.go.md](./readme.go.md)
 ## Java
 
 See configuration in [readme.java.md](./readme.java.md)
+
+## AzureResourceSchema
+
+See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
+

@@ -1678,15 +1678,15 @@
       }
     },
     "CertificateBodyDescription": {
-       "description": "The JSON-serialized X509 Certificate.",
-       "type": "object",
-       "properties": {
-         "certificate": {
-           "description": "base-64 representation of the X509 leaf certificate .cer file or just .pem file content.",
-           "type": "string"
-         }
-       }
-     },
+      "description": "The JSON-serialized X509 Certificate.",
+      "type": "object",
+      "properties": {
+        "certificate": {
+          "description": "base-64 representation of the X509 leaf certificate .cer file or just .pem file content.",
+          "type": "string"
+        }
+      }
+    },
     "CertificateDescription": {
       "description": "The X509 Certificate.",
       "type": "object",
@@ -1976,6 +1976,35 @@
           "type": "string",
           "x-ms-enum": {
             "name": "Capabilities",
+            "modelAsString": true
+          }
+        },
+        "locations": {
+          "description": "Primary and secondary location for iot hub",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/IotHubLocationDescription"
+          }
+        }
+      }
+    },
+    "IotHubLocationDescription": {
+      "description": "Public representation of one of the locations where a resource is provisioned.",
+      "type": "object",
+      "properties": {
+        "location": {
+          "description": "Azure Geo Regions",
+          "type": "string"
+        },
+        "role": {
+          "description": "Specific Role assigned to this location",
+          "enum": [
+            "primary",
+            "secondary"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "IotHubReplicaRoleType",
             "modelAsString": true
           }
         }
@@ -3132,11 +3161,11 @@
         },
         "properties": {
           "properties": {
-            "desired" : {
+            "desired": {
               "description": "Twin desired properties",
               "type": "object"
             },
-            "reported" : {
+            "reported": {
               "description": "Twin desired properties",
               "type": "object"
             }

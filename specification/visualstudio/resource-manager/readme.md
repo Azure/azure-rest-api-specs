@@ -60,6 +60,9 @@ swagger-to-sdk:
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-node
   - repo: azure-sdk-for-js
+  - repo: azure-resource-manager-schemas
+    after_scripts:
+      - node sdkauto_afterscript.js visualstudio/resource-manager
 ```
 
 ## Go
@@ -95,9 +98,14 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 ``` yaml $(tag) == 'package-2014-04-preview' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.visualstudio.v2014_04_01_preview
-  output-folder: $(azure-libraries-for-java-folder)/visualstudio/resource-manager/v2014_04_01_preview
+  output-folder: $(azure-libraries-for-java-folder)/sdk/visualstudio/mgmt-v2014_04_01_preview
 regenerate-manager: true
 generate-interface: true
 ```
 
+
+
+## AzureResourceSchema
+
+See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
 

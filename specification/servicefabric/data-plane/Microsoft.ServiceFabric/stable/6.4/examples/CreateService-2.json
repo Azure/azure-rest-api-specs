@@ -1,23 +1,23 @@
 {
-    "operationId": "CreateService",
-    "description": "This example shows how to create a basic stateful Service Fabric service.",
-    "parameters": {
-        "applicationId": "test",
-        "api-version": "6.0",
-        "ServiceDescription": {
-            "ServiceKind": "Stateful",
-            "ApplicationName": "fabric:\/test",
-            "ServiceName": "fabric:\/test\/test2",
-            "ServiceTypeName": "StatefulBackendService",
-            "PartitionDescription": {
-                "PartitionScheme": "Singleton"
-            },
-            "TargetReplicaSetSize": 3,
-            "MinReplicaSetSize": 2,
-            "HasPersistedState": false
-        }
-    },
-    "responses": {
-        "202": {}
+  "operationId": "CreateService",
+  "description": "This example shows how to create a basic stateful Service Fabric service.",
+  "parameters": {
+    "applicationId": "test",
+    "api-version": "6.0",
+    "ServiceDescription": {
+      "ServiceKind": "Stateful",
+      "ApplicationName": "fabric:/test",
+      "ServiceName": "fabric:/test/test2",
+      "ServiceTypeName": "StatefulBackendService",
+      "PartitionDescription": {
+        "PartitionScheme": "Singleton"
+      },
+      "TargetReplicaSetSize": 3,
+      "MinReplicaSetSize": 2,
+      "HasPersistedState": false
     }
+  },
+  "responses": {
+    "202": {}
+  }
 }

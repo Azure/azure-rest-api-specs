@@ -1,48 +1,46 @@
 {
+  "parameters": {
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "resourceGroupName": "Default-SQL-SouthEastAsia",
+    "managedInstanceName": "managedInstance",
+    "administratorName": "ActiveDirectory",
+    "api-version": "2017-03-01-preview",
     "parameters": {
-        "subscriptionId": "00000000-1111-2222-3333-444444444444",
-        "resourceGroupName": "Default-SQL-SouthEastAsia",
-        "managedInstanceName": "managedInstance",
-        "administratorName": "ActiveDirectory",
-        "api-version": "2017-03-01-preview",
-        "parameters": {
-            "properties": {
-                "administratorType": "ActiveDirectory",
-                "login": "bob@contoso.com",
-                "sid": "44444444-3333-2222-1111-000000000000",
-                "tenantId": "55555555-4444-3333-2222-111111111111"
-            }
-        }
-    },
-    "responses": {
-        "200": {
-            "body": {
-                "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/Default-SQL-SouthEastAsia/providers/Microsoft.Sql/managedInstances/managedInstance/administrators/ActiveDirectory",
-				"location": "southeastasia", 
-                "name": "ActiveDirectory",
-                "properties": {
-                    "administratorType": "ActiveDirectory",
-                    "login": "bob@contoso.com",
-                    "sid": "44444444-3333-2222-1111-000000000000",
-                    "tenantId": "55555555-4444-3333-2222-111111111111"
-                },
-                "type": "Microsoft.Sql/managedInstances/administrators"
-            }
-        },
-        "201": {
-            "body": {
-                "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/Default-SQL-SouthEastAsia/providers/Microsoft.Sql/managedInstances/managedInstance/administrators/ActiveDirectory",
-				"location": "southeastasia", 
-                "name": "ActiveDirectory",
-                "properties": {
-                    "administratorType": "ActiveDirectory",
-                    "login": "bob@contoso.com",
-                    "sid": "44444444-3333-2222-1111-000000000000",
-                    "tenantId": "55555555-4444-3333-2222-111111111111"
-                },
-                "type": "Microsoft.Sql/managedInstances/administrators"
-            }
-        },
-        "202": {}
+      "properties": {
+        "administratorType": "ActiveDirectory",
+        "login": "bob@contoso.com",
+        "sid": "44444444-3333-2222-1111-000000000000",
+        "tenantId": "55555555-4444-3333-2222-111111111111"
+      }
     }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/Default-SQL-SouthEastAsia/providers/Microsoft.Sql/managedInstances/managedInstance/administrators/ActiveDirectory",
+        "name": "ActiveDirectory",
+        "properties": {
+          "administratorType": "ActiveDirectory",
+          "login": "bob@contoso.com",
+          "sid": "44444444-3333-2222-1111-000000000000",
+          "tenantId": "55555555-4444-3333-2222-111111111111"
+        },
+        "type": "Microsoft.Sql/managedInstances/administrators"
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/Default-SQL-SouthEastAsia/providers/Microsoft.Sql/managedInstances/managedInstance/administrators/ActiveDirectory",
+        "name": "ActiveDirectory",
+        "properties": {
+          "administratorType": "ActiveDirectory",
+          "login": "bob@contoso.com",
+          "sid": "44444444-3333-2222-1111-000000000000",
+          "tenantId": "55555555-4444-3333-2222-111111111111"
+        },
+        "type": "Microsoft.Sql/managedInstances/administrators"
+      }
+    },
+    "202": {}
+  }
 }

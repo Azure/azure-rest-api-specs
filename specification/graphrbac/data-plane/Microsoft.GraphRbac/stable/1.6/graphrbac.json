@@ -1435,6 +1435,88 @@
         }
       }
     },
+    "/{tenantID}/servicePrincipals/{objectId}/appRoleAssignedTo": {
+      "get": {
+        "tags": [
+          "ServicePrincipalAppRoleAssignedTo"
+        ],
+        "operationId": "ServicePrincipals_ListAppRoleAssignedTo",
+        "summary": "Principals (users, groups, and service principals) that are assigned to this service principal.",
+        "parameters": [
+          {
+            "name": "objectId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The object ID of the service principal for which to get owners."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/tenantIDInPath"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The operation was successful.",
+            "schema": {
+              "$ref": "#/definitions/AppRoleAssignmentListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/GraphError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "odata.nextLink"
+        }
+      }
+    },
+    "/{tenantID}/servicePrincipals/{objectId}/appRoleAssignments": {
+      "get": {
+        "tags": [
+          "ServicePrincipalAppRoleAssignments"
+        ],
+        "operationId": "ServicePrincipals_ListAppRoleAssignments",
+        "summary": "Applications that the service principal is assigned to.",
+        "parameters": [
+          {
+            "name": "objectId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The object ID of the service principal for which to get owners."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/tenantIDInPath"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The operation was successful.",
+            "schema": {
+              "$ref": "#/definitions/AppRoleAssignmentListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/GraphError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "odata.nextLink"
+        }
+      }
+    },
     "/{tenantID}/servicePrincipals/{objectId}/owners": {
       "get": {
         "tags": [
@@ -1474,6 +1556,92 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "odata.nextLink"
+        }
+      }
+    },
+    "/{tenantID}/servicePrincipals/{objectId}/$links/owners": {
+      "post": {
+        "tags": [
+          "ServicePrincipalOwners"
+        ],
+        "operationId": "ServicePrincipals_AddOwner",
+        "description": "Add an owner to a service principal.",
+        "parameters": [
+          {
+            "name": "objectId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The object ID of the service principal to which to add the owner."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AddOwnerParameters"
+            },
+            "description": "The URL of the owner object, such as https://graph.windows.net/0b1f9851-1bf0-433f-aec3-cb9272f093dc/directoryObjects/f260bbc4-c254-447b-94cf-293b5ec434dd."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/tenantIDInPath"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content. Indicates success. No response body is returned."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/GraphError"
+            }
+          }
+        }
+      }
+    },
+    "/{tenantID}/servicePrincipals/{objectId}/$links/owners/{ownerObjectId}": {
+      "delete": {
+        "tags": [
+          "ServicePrincipalOwners"
+        ],
+        "operationId": "ServicePrincipals_RemoveOwner",
+        "description": "Remove a member from owners.",
+        "parameters": [
+          {
+            "name": "objectId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The object ID of the service principal from which to remove the owner."
+          },
+          {
+            "name": "ownerObjectId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Owner object id"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/tenantIDInPath"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content. Indicates success. No response body is returned."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/GraphError"
+            }
+          }
         }
       }
     },
@@ -1695,6 +1863,13 @@
             "required": false,
             "type": "string",
             "description": "The filter to apply to the operation."
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "The expand value for the operation result."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -2000,7 +2175,9 @@
         ],
         "operationId": "OAuth2PermissionGrant_List",
         "description": "Queries OAuth2 permissions grants for the relevant SP ObjectId of an app.",
-        "produces": [ "application/json" ],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "name": "$filter",
@@ -2034,10 +2211,14 @@
         "tags": [
           "OAuth2PermissionGrant_Create"
         ],
-        "consumes": [ "application/json" ],
+        "consumes": [
+          "application/json"
+        ],
         "operationId": "OAuth2PermissionGrant_Create",
         "description": "Grants OAuth2 permissions for the relevant resource Ids of an app.",
-        "produces": [ "application/json" ],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "in": "body",
@@ -2107,48 +2288,48 @@
   },
   "x-ms-paths": {
     "/{tenantID}/{nextLink}?OAuth2PermissionGrant_ListNext": {
-        "get": {
-          "tags": [
-            "OAuth2PermissionGrant_ListNext"
-          ],
-          "operationId": "OAuth2PermissionGrant_ListNext",
-          "description": "Gets the next page of OAuth2 permission grants",
-          "parameters": [
-            {
-              "name": "nextLink",
-              "in": "path",
-              "required": true,
-              "type": "string",
-              "description": "Next link for the list operation.",
-              "x-ms-skip-url-encoding": true
-            },
-            {
-              "$ref": "#/parameters/ApiVersionParameter"
-            },
-            {
-              "$ref": "#/parameters/tenantIDInPath"
-            }
-          ],
-          "responses": {
-            "200": {
-              "description": "OK. The operation was successful.",
-              "schema": {
-                "$ref": "#/definitions/OAuth2PermissionGrantListResult"
-              }
-            },
-            "default": {
-              "description": "Error response describing why the operation failed.",
-              "schema": {
-                "$ref": "#/definitions/GraphError"
-              }
+      "get": {
+        "tags": [
+          "OAuth2PermissionGrant_ListNext"
+        ],
+        "operationId": "OAuth2PermissionGrant_ListNext",
+        "description": "Gets the next page of OAuth2 permission grants",
+        "parameters": [
+          {
+            "name": "nextLink",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Next link for the list operation.",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/tenantIDInPath"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The operation was successful.",
+            "schema": {
+              "$ref": "#/definitions/OAuth2PermissionGrantListResult"
             }
           },
-          "x-ms-pageable": {
-            "nextLinkName": "odata.nextLink",
-            "operationName": "OAuth2PermissionGrant_ListNext"
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/GraphError"
+            }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "odata.nextLink",
+          "operationName": "OAuth2PermissionGrant_ListNext"
         }
-      },
+      }
+    },
     "/{tenantID}/{nextLink}?SignedInUser_ListOwnedObjectsNext": {
       "get": {
         "tags": [
@@ -2701,16 +2882,19 @@
         },
         "objectType": {
           "type": "string",
-          "description": "The object type.",
-          "readOnly": true
+          "description": "The object type."
         },
         "deletionTimestamp": {
           "type": "string",
           "format": "date-time",
           "description": "The time at which the directory object was deleted.",
-          "readOnly": true
+          "readOnly": true,
+          "x-nullable": true
         }
       },
+      "required": [
+        "objectType"
+      ],
       "additionalProperties": {
         "type": "object"
       },
@@ -2831,6 +3015,7 @@
       "description": "Specifies an OAuth 2.0 permission scope or an app role that an application requires. The resourceAccess property of the RequiredResourceAccess type is a collection of ResourceAccess."
     },
     "GroupMembershipClaims": {
+      "type": "string",
       "description": "Configures the groups claim issued in a user or OAuth 2.0 access token that the app expects.",
       "enum": [
         "None",
@@ -3232,10 +3417,10 @@
       "type": "object",
       "properties": {
         "value": {
-            "type": "string",
-            "description": "The Object ID of the service principal with the specified application ID."
+          "type": "string",
+          "description": "The Object ID of the service principal with the specified application ID."
         },
-       "odata.metadata": {
+        "odata.metadata": {
           "type": "string",
           "description": "The URL representing edm equivalent."
         }
@@ -3302,6 +3487,59 @@
         }
       },
       "description": "KeyCredential list operation result."
+    },
+    "AppRoleAssignmentListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AppRoleAssignment"
+          },
+          "description": "A collection of AppRoleAssignment."
+        },
+        "odata.nextLink": {
+          "type": "string",
+          "description": "The URL to get the next set of results."
+        }
+      },
+      "description": "AppRoleAssignment list operation result."
+    },
+    "AppRoleAssignment": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DirectoryObject"
+        }
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The role id that was assigned to the principal. This role must be declared by the target resource application resourceId in its appRoles property."
+        },
+        "principalDisplayName": {
+          "type": "string",
+          "description": "The display name of the principal that was granted the access."
+        },
+        "principalId": {
+          "type": "string",
+          "description": "The unique identifier (objectId) for the principal being granted the access."
+        },
+        "principalType": {
+          "type": "string",
+          "description": "The type of principal. This can either be \"User\", \"Group\" or \"ServicePrincipal\"."
+        },
+        "resourceDisplayName": {
+          "type": "string",
+          "description": "The display name of the resource to which the assignment was made."
+        },
+        "resourceId": {
+          "type": "string",
+          "description": "The unique identifier (objectId) for the target resource (service principal) for which the assignment was made."
+        }
+      },
+      "x-ms-discriminator-value": "AppRoleAssignment",
+      "description": "AppRoleAssignment information."
     },
     "DirectoryObjectListResult": {
       "type": "object",
@@ -3391,7 +3629,9 @@
         "mailEnabled": {
           "type": "boolean",
           "description": "Whether the group is mail-enabled. Must be false. This is because only pure security groups can be created using the Graph API.",
-          "enum": [ false ]
+          "enum": [
+            false
+          ]
         },
         "mailNickname": {
           "type": "string",
@@ -3400,7 +3640,9 @@
         "securityEnabled": {
           "type": "boolean",
           "description": "Whether the group is a security group. Must be true. This is because only pure security groups can be created using the Graph API.",
-          "enum": [ true ]
+          "enum": [
+            true
+          ]
         }
       },
       "required": [
@@ -3532,7 +3774,7 @@
       "properties": {
         "accountEnabled": {
           "description": "whether or not the service principal account is enabled",
-          "type": "string"
+          "type": "boolean"
         },
         "appRoleAssignmentRequired": {
           "description": "Specifies whether an AppRoleAssignment to a user or group is required before Azure AD will issue a user or access token to the application.",
@@ -3603,7 +3845,7 @@
       "properties": {
         "accountEnabled": {
           "description": "whether or not the service principal account is enabled",
-          "type": "string"
+          "type": "boolean"
         },
         "alternativeNames": {
           "description": "alternative names",
@@ -3658,7 +3900,6 @@
         "logoutUrl": {
           "type": "string",
           "description": "A URL provided by the author of the associated application to logout"
-
         },
         "oauth2Permissions": {
           "description": "The OAuth 2.0 permissions exposed by the associated application.",
@@ -3856,6 +4097,10 @@
         "mailNickname": {
           "type": "string",
           "description": "The mail alias for the user."
+        },
+        "mail": {
+          "type": "string",
+          "description": "The primary email address of the user."
         }
       },
       "description": "Request parameters for updating an existing work or school account user."

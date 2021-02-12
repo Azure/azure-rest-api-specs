@@ -1,0 +1,1485 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2019-04-01-preview",
+    "title": "CostManagementClient"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/providers/Microsoft.CostManagement/views": {
+      "get": {
+        "tags": [
+          "Views"
+        ],
+        "operationId": "Views_List",
+        "description": "Lists all views by tenant and object.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
+        },
+        "x-ms-examples": {
+          "PrivateViewList": {
+            "$ref": "./examples/PrivateViewList.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ViewListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/{scope}/providers/Microsoft.CostManagement/views": {
+      "get": {
+        "tags": [
+          "Views"
+        ],
+        "operationId": "Views_ListByScope",
+        "description": "Lists all views at the given scope.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
+        },
+        "x-ms-examples": {
+          "ResourceGroupViewList": {
+            "$ref": "./examples/ViewListByResourceGroup.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/scopeViewParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ViewListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.CostManagement/views/{viewName}": {
+      "get": {
+        "tags": [
+          "Views"
+        ],
+        "operationId": "Views_Get",
+        "description": "Gets the view by view name.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
+        },
+        "x-ms-examples": {
+          "PrivateView": {
+            "$ref": "./examples/PrivateView.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/viewNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/View"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Views"
+        ],
+        "operationId": "Views_CreateOrUpdate",
+        "description": "The operation to create or update a view. Update operation requires latest eTag to be set in the request. You may obtain the latest eTag by performing a get operation. Create operation does not require eTag.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
+        },
+        "x-ms-examples": {
+          "CreateOrUpdatePrivateView": {
+            "$ref": "./examples/PrivateViewCreateOrUpdate.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/viewNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/View"
+            },
+            "description": "Parameters supplied to the CreateOrUpdate View operation."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/View"
+            }
+          },
+          "201": {
+            "description": "Created.",
+            "schema": {
+              "$ref": "#/definitions/View"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Views"
+        ],
+        "operationId": "Views_Delete",
+        "description": "The operation to delete a view.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
+        },
+        "x-ms-examples": {
+          "DeletePrivateView": {
+            "$ref": "./examples/PrivateViewDelete.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/viewNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded."
+          },
+          "204": {
+            "description": "NoContent. Resource is not available."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/{scope}/providers/Microsoft.CostManagement/views/{viewName}": {
+      "get": {
+        "tags": [
+          "Views"
+        ],
+        "operationId": "Views_GetByScope",
+        "description": "Gets the view for the defined scope by view name.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
+        },
+        "x-ms-examples": {
+          "ResourceGroupView": {
+            "$ref": "./examples/ViewByResourceGroup.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/scopeViewParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/viewNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/View"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Views"
+        ],
+        "operationId": "Views_CreateOrUpdateByScope",
+        "description": "The operation to create or update a view. Update operation requires latest eTag to be set in the request. You may obtain the latest eTag by performing a get operation. Create operation does not require eTag.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
+        },
+        "x-ms-examples": {
+          "ResourceGroupCreateOrUpdateView": {
+            "$ref": "./examples/ViewCreateOrUpdateByResourceGroup.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/scopeViewParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/viewNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/View"
+            },
+            "description": "Parameters supplied to the CreateOrUpdate View operation."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/View"
+            }
+          },
+          "201": {
+            "description": "Created.",
+            "schema": {
+              "$ref": "#/definitions/View"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Views"
+        ],
+        "operationId": "Views_DeleteByScope",
+        "description": "The operation to delete a view.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
+        },
+        "x-ms-examples": {
+          "ResourceGroupDeleteView": {
+            "$ref": "./examples/ViewDeleteByResourceGroup.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/scopeViewParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/viewNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded."
+          },
+          "204": {
+            "description": "NoContent. Resource is not available."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/{scope}/providers/Microsoft.CostManagement/budgets": {
+      "get": {
+        "tags": [
+          "Budgets"
+        ],
+        "operationId": "Budgets_List",
+        "description": "Lists all budgets for the defined scope.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/cost-management/"
+        },
+        "x-ms-examples": {
+          "BudgetsList": {
+            "$ref": "./examples/BudgetsList.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/scopeBudgetParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/BudgetsListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/{scope}/providers/Microsoft.CostManagement/budgets/{budgetName}": {
+      "get": {
+        "tags": [
+          "Budgets"
+        ],
+        "operationId": "Budget_Get",
+        "description": "Gets the budget for the scope by budget name.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/cost-management/"
+        },
+        "x-ms-examples": {
+          "Budget": {
+            "$ref": "./examples/Budget.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/scopeBudgetParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/budgetNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/BudgetModel"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Budgets"
+        ],
+        "operationId": "Budget_CreateOrUpdate",
+        "description": "The operation to create or update a budget. Update operation requires latest eTag to be set in the request mandatorily. You may obtain the latest eTag by performing a get operation. Create operation does not require eTag.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/cost-management/"
+        },
+        "x-ms-examples": {
+          "CreateOrUpdateBudget": {
+            "$ref": "./examples/CreateOrUpdateBudget.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/scopeBudgetParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/budgetNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "x-required": true,
+            "schema": {
+              "$ref": "#/definitions/BudgetModel"
+            },
+            "description": "Parameters supplied to the Create Budget operation."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/BudgetModel"
+            }
+          },
+          "201": {
+            "description": "Created.",
+            "schema": {
+              "$ref": "#/definitions/BudgetModel"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Budgets"
+        ],
+        "operationId": "Budget_Delete",
+        "description": "The operation to delete a budget.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/cost-management/"
+        },
+        "x-ms-examples": {
+          "DeleteBudget": {
+            "$ref": "./examples/DeleteBudget.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/scopeBudgetParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/budgetNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded."
+          },
+          "204": {
+            "description": "NoContent. Resource is not available."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.CostManagement/operations": {
+      "get": {
+        "tags": [
+          "Operations"
+        ],
+        "operationId": "Operations_List",
+        "description": "Lists all of the available consumption REST API operations.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ErrorBase": {
+      "description": "The details of the error.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "A machine readable error code.",
+          "readOnly": true
+        },
+        "message": {
+          "type": "string",
+          "description": "A human readable error message.",
+          "readOnly": true
+        },
+        "target": {
+          "type": "string",
+          "description": "Indicates which property in the request is responsible for the error.",
+          "readOnly": true
+        }
+      }
+    },
+    "ErrorDetails": {
+      "description": "The details of the error.",
+      "properties": {
+        "code": {
+          "description": "A machine readable error code.",
+          "type": "string",
+          "readOnly": true
+        },
+        "message": {
+          "description": "A human readable error message.",
+          "type": "string",
+          "readOnly": true
+        },
+        "target": {
+          "description": "Indicates which property in the request is responsible for the error.",
+          "type": "string"
+        },
+        "details": {
+          "description": "error details.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ErrorBase"
+          }
+        }
+      }
+    },
+    "ErrorResponse": {
+      "description": "Error response indicates that the service is not able to process the incoming request. The reason is provided in the error message.",
+      "type": "object",
+      "properties": {
+        "error": {
+          "description": "The details of the error.",
+          "$ref": "#/definitions/ErrorDetails"
+        }
+      }
+    },
+    "Resource": {
+      "description": "The Resource model definition.",
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource Id."
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource name."
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource type."
+        },
+        "tags": {
+          "readOnly": true,
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags."
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "ProxyResource": {
+      "description": "The Resource model definition.",
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource Id."
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource name."
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource type."
+        },
+        "eTag": {
+          "type": "string",
+          "description": "eTag of the resource. To handle concurrent update scenario, this field will be used to determine whether the user is updating the latest version or not."
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "ReportConfigDefinition": {
+      "description": "The definition of a report config.",
+      "properties": {
+        "type": {
+          "description": "The type of the report. Usage represents actual usage, forecast represents forecasted data and UsageAndForecast represents both usage and forecasted data. Actual usage and forecasted data can be differentiated based on dates.",
+          "type": "string",
+          "enum": [
+            "Usage"
+          ],
+          "x-ms-enum": {
+            "name": "ReportType",
+            "modelAsString": true
+          }
+        },
+        "timeframe": {
+          "description": "The time frame for pulling data for the report. If custom, then a specific time period must be provided.",
+          "type": "string",
+          "enum": [
+            "WeekToDate",
+            "MonthToDate",
+            "YearToDate",
+            "Custom"
+          ],
+          "x-ms-enum": {
+            "name": "TimeframeType",
+            "modelAsString": true
+          }
+        },
+        "timePeriod": {
+          "description": "Has time period for pulling data for the report.",
+          "$ref": "#/definitions/ReportConfigTimePeriod"
+        },
+        "dataset": {
+          "description": "Has definition for data in this report config.",
+          "$ref": "#/definitions/ReportConfigDataset"
+        }
+      },
+      "required": [
+        "type",
+        "timeframe"
+      ]
+    },
+    "ReportConfigTimePeriod": {
+      "description": "The start and end date for pulling data for the report.",
+      "properties": {
+        "from": {
+          "description": "The start date to pull data from.",
+          "type": "string",
+          "format": "date-time"
+        },
+        "to": {
+          "description": "The end date to pull data to.",
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "from",
+        "to"
+      ]
+    },
+    "ReportConfigDataset": {
+      "description": "The definition of data present in the report.",
+      "properties": {
+        "granularity": {
+          "description": "The granularity of rows in the report.",
+          "type": "string",
+          "enum": [
+            "Daily",
+            "Monthly"
+          ],
+          "x-ms-enum": {
+            "name": "GranularityType",
+            "modelAsString": true
+          }
+        },
+        "configuration": {
+          "description": "Has configuration information for the data in the report. The configuration will be ignored if aggregation and grouping are provided.",
+          "$ref": "#/definitions/ReportConfigDatasetConfiguration"
+        },
+        "aggregation": {
+          "type": "object",
+          "description": "Dictionary of aggregation expression to use in the report. The key of each item in the dictionary is the alias for the aggregated column. Report can have up to 2 aggregation clauses.",
+          "additionalProperties": {
+            "type": "object",
+            "$ref": "#/definitions/ReportConfigAggregation"
+          },
+          "maxItems": 2
+        },
+        "grouping": {
+          "description": "Array of group by expression to use in the report. Report can have up to 2 group by clauses.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ReportConfigGrouping"
+          },
+          "maxItems": 2
+        },
+        "sorting": {
+          "description": "Array of order by expression to use in the report.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ReportConfigSorting"
+          }
+        },
+        "filter": {
+          "type": "object",
+          "description": "Has filter expression to use in the report.",
+          "$ref": "#/definitions/ReportConfigFilter"
+        }
+      }
+    },
+    "ReportConfigDatasetConfiguration": {
+      "description": "The configuration of dataset in the report.",
+      "properties": {
+        "columns": {
+          "description": "Array of column names to be included in the report. Any valid report column name is allowed. If not provided, then report includes all columns.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "ReportConfigAggregation": {
+      "description": "The aggregation expression to be used in the report.",
+      "properties": {
+        "name": {
+          "description": "The name of the column to aggregate.",
+          "type": "string"
+        },
+        "function": {
+          "description": "The name of the aggregation function to use.",
+          "type": "string",
+          "enum": [
+            "Sum"
+          ],
+          "x-ms-enum": {
+            "name": "FunctionType",
+            "modelAsString": true
+          }
+        }
+      },
+      "required": [
+        "name",
+        "function"
+      ]
+    },
+    "ReportConfigSorting": {
+      "description": "The order by expression to be used in the report.",
+      "properties": {
+        "direction": {
+          "description": "Direction of sort.",
+          "type": "string",
+          "enum": [
+            "Ascending",
+            "Descending"
+          ]
+        },
+        "name": {
+          "description": "The name of the column to sort.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "name"
+      ]
+    },
+    "ReportConfigGrouping": {
+      "description": "The group by expression to be used in the report.",
+      "properties": {
+        "type": {
+          "description": "Has type of the column to group.",
+          "$ref": "#/definitions/ReportConfigColumnType"
+        },
+        "name": {
+          "description": "The name of the column to group. This version supports subscription lowest possible grain.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "type",
+        "name"
+      ]
+    },
+    "ReportConfigFilter": {
+      "description": "The filter expression to be used in the report.",
+      "properties": {
+        "and": {
+          "description": "The logical \"AND\" expression. Must have at least 2 items.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ReportConfigFilter"
+          },
+          "minItems": 2
+        },
+        "or": {
+          "description": "The logical \"OR\" expression. Must have at least 2 items.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ReportConfigFilter"
+          },
+          "minItems": 2
+        },
+        "not": {
+          "description": "The logical \"NOT\" expression.",
+          "$ref": "#/definitions/ReportConfigFilter"
+        },
+        "dimension": {
+          "description": "Has comparison expression for a dimension",
+          "$ref": "#/definitions/ReportConfigComparisonExpression"
+        },
+        "tag": {
+          "description": "Has comparison expression for a tag",
+          "$ref": "#/definitions/ReportConfigComparisonExpression"
+        }
+      }
+    },
+    "ReportConfigColumnType": {
+      "description": "The type of the column in the report.",
+      "type": "string",
+      "enum": [
+        "Tag",
+        "Dimension"
+      ],
+      "x-ms-enum": {
+        "name": "ReportConfigColumnType",
+        "modelAsString": true
+      }
+    },
+    "ReportConfigComparisonExpression": {
+      "description": "The comparison expression to be used in the report.",
+      "properties": {
+        "name": {
+          "description": "The name of the column to use in comparison.",
+          "type": "string"
+        },
+        "operator": {
+          "description": "The operator to use for comparison.",
+          "type": "string",
+          "enum": [
+            "In",
+            "Contains"
+          ],
+          "x-ms-enum": {
+            "name": "OperatorType",
+            "modelAsString": true
+          }
+        },
+        "values": {
+          "description": "Array of values to use for comparison",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1
+        }
+      },
+      "required": [
+        "name",
+        "operator",
+        "values"
+      ]
+    },
+    "OperationListResult": {
+      "description": "Result of listing cost management operations. It contains a list of operations and a URL link to get the next set of results.",
+      "properties": {
+        "value": {
+          "description": "List of cost management operations supported by the Microsoft.CostManagement resource provider.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/Operation"
+          }
+        },
+        "nextLink": {
+          "description": "URL to get the next set of operation list results if there are any.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "Operation": {
+      "description": "A Cost management REST API operation.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Operation name: {provider}/{resource}/{operation}.",
+          "type": "string",
+          "readOnly": true
+        },
+        "display": {
+          "description": "The object that represents the operation.",
+          "properties": {
+            "provider": {
+              "description": "Service provider: Microsoft.CostManagement.",
+              "type": "string",
+              "readOnly": true
+            },
+            "resource": {
+              "description": "Resource on which the operation is performed: Dimensions, Query.",
+              "type": "string",
+              "readOnly": true
+            },
+            "operation": {
+              "description": "Operation type: Read, write, delete, etc.",
+              "type": "string",
+              "readOnly": true
+            }
+          }
+        }
+      }
+    },
+    "Scope": {
+      "type": "object",
+      "description": "The Scope model definition",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Scope id"
+        },
+        "name": {
+          "type": "string",
+          "description": "Scope name"
+        },
+        "type": {
+          "type": "string",
+          "description": "Scope type"
+        },
+        "childScope": {
+          "$ref": "#/definitions/Scope"
+        }
+      }
+    },
+    "ViewListResult": {
+      "description": "Result of listing views. It contains a list of available views.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The list of views.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/View"
+          }
+        },
+        "nextLink": {
+          "description": "The link (url) to the next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "View": {
+      "description": "States and configurations of Cost Analysis.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ViewProperties",
+          "title": "View properties"
+        }
+      }
+    },
+    "ViewProperties": {
+      "type": "object",
+      "description": "The properties of the view.",
+      "properties": {
+        "displayName": {
+          "description": "User input name of the view. Required.",
+          "type": "string"
+        },
+        "scope": {
+          "description": "Cost Management scope to save the view on. This includes 'subscriptions/{subscriptionId}' for subscription scope, 'subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}' for resourceGroup scope, 'providers/Microsoft.Billing/billingAccounts/{billingAccountId}' for Billing Account scope, 'providers/Microsoft.Billing/billingAccounts/{billingAccountId}/departments/{departmentId}' for Department scope, 'providers/Microsoft.Billing/billingAccounts/{billingAccountId}/enrollmentAccounts/{enrollmentAccountId}' for EnrollmentAccount scope, 'providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}' for BillingProfile scope, 'providers/Microsoft.Billing/billingAccounts/{billingAccountId}/invoiceSections/{invoiceSectionId}' for InvoiceSection scope, 'providers/Microsoft.Management/managementGroups/{managementGroupId}' for Management Group scope, '/providers/Microsoft.CostManagement/externalBillingAccounts/{externalBillingAccountName}' for ExternalBillingAccount scope, and '/providers/Microsoft.CostManagement/externalSubscriptions/{externalSubscriptionName}' for ExternalSubscription scope.",
+          "type": "string"
+        },
+        "createdOn": {
+          "description": "Date the user created this view.",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "modifiedOn": {
+          "description": "Date when the user last modified this view.",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "query": {
+          "description": "Query body configuration. Required.",
+          "type": "object",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ReportConfigDefinition"
+        },
+        "chart": {
+          "description": "Chart type of the main view in Cost Analysis. Required.",
+          "type": "string",
+          "enum": [
+            "Area",
+            "Line",
+            "StackedColumn",
+            "GroupedColumn",
+            "Table"
+          ],
+          "x-ms-enum": {
+            "name": "ChartType",
+            "modelAsString": true
+          }
+        },
+        "accumulated": {
+          "description": "Show costs accumulated over time.",
+          "type": "string",
+          "enum": [
+            "true",
+            "false"
+          ],
+          "x-ms-enum": {
+            "name": "AccumulatedType",
+            "modelAsString": true
+          }
+        },
+        "metric": {
+          "description": "Metric to use when displaying costs.",
+          "type": "string",
+          "enum": [
+            "ActualCost",
+            "AmortizedCost",
+            "AHUB"
+          ],
+          "x-ms-enum": {
+            "name": "MetricType",
+            "modelAsString": true
+          }
+        },
+        "kpis": {
+          "description": "List of KPIs to show in Cost Analysis UI.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/KpiProperties"
+          }
+        },
+        "pivots": {
+          "description": "Configuration of 3 sub-views in the Cost Analysis UI.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PivotProperties"
+          }
+        }
+      }
+    },
+    "KpiProperties": {
+      "description": "Each KPI must contain a 'type' and 'enabled' key.",
+      "type": "object",
+      "properties": {
+        "type": {
+          "description": "KPI type (Forecast, Budget).",
+          "type": "string",
+          "enum": [
+            "Forecast",
+            "Budget"
+          ],
+          "x-ms-enum": {
+            "name": "KpiTypeType",
+            "modelAsString": true
+          }
+        },
+        "id": {
+          "description": "ID of resource related to metric (budget).",
+          "type": "string"
+        },
+        "enabled": {
+          "description": "show the KPI in the UI?",
+          "type": "boolean"
+        }
+      }
+    },
+    "PivotProperties": {
+      "description": "Each pivot must contain a 'type' and 'name'.",
+      "type": "object",
+      "properties": {
+        "type": {
+          "description": "Data type to show in view.",
+          "type": "string",
+          "enum": [
+            "Dimension",
+            "TagKey"
+          ],
+          "x-ms-enum": {
+            "name": "PivotTypeType",
+            "modelAsString": true
+          }
+        },
+        "name": {
+          "description": "Data field to show in view.",
+          "type": "string"
+        }
+      }
+    },
+    "BudgetsListResult": {
+      "description": "Result of listing budgets. It contains a list of available budgets in the scope provided.",
+      "properties": {
+        "value": {
+          "description": "The list of budgets.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/BudgetModel"
+          }
+        },
+        "nextLink": {
+          "description": "The link (url) to the next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "BudgetModel": {
+      "description": "A budget resource.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/BudgetProperties",
+          "title": "Budget properties"
+        }
+      }
+    },
+    "BudgetProperties": {
+      "description": "The properties of the budget.",
+      "properties": {
+        "category": {
+          "description": "The category of the budget, whether the budget tracks cost or usage.",
+          "type": "string",
+          "enum": [
+            "Cost",
+            "Usage"
+          ],
+          "x-ms-enum": {
+            "name": "CategoryType",
+            "modelAsString": true
+          }
+        },
+        "amount": {
+          "description": "The total amount of cost to track with the budget",
+          "type": "number",
+          "format": "decimal"
+        },
+        "timeGrain": {
+          "description": "The time covered by a budget. Tracking of the amount will be reset based on the time grain.",
+          "type": "string",
+          "enum": [
+            "Monthly",
+            "Quarterly",
+            "Annually"
+          ],
+          "x-ms-enum": {
+            "name": "TimeGrainType",
+            "modelAsString": true
+          }
+        },
+        "timePeriod": {
+          "description": "Has start and end date of the budget. The start date must be first of the month and should be less than the end date. Budget start date must be on or after June 1, 2017. Future start date should not be more than three months. Past start date should  be selected within the timegrain period. There are no restrictions on the end date.",
+          "$ref": "#/definitions/BudgetTimePeriod"
+        },
+        "filter": {
+          "description": "May be used to filter budgets.",
+          "type": "object",
+          "$ref": "#/definitions/ReportConfigFilter"
+        },
+        "currentSpend": {
+          "description": "The current amount of cost which is being tracked for a budget.",
+          "$ref": "#/definitions/CurrentSpend",
+          "readOnly": true
+        },
+        "notifications": {
+          "type": "object",
+          "description": "Dictionary of notifications associated with the budget. Budget can have up to five notifications.",
+          "additionalProperties": {
+            "type": "object",
+            "$ref": "#/definitions/Notification"
+          },
+          "maxItems": 5
+        }
+      },
+      "required": [
+        "category",
+        "amount",
+        "timeGrain",
+        "timePeriod"
+      ]
+    },
+    "BudgetTimePeriod": {
+      "description": "The start and end date for a budget.",
+      "properties": {
+        "startDate": {
+          "description": "The start date for the budget.",
+          "type": "string",
+          "format": "date-time"
+        },
+        "endDate": {
+          "description": "The end date for the budget. If not provided, we default this to 10 years from the start date.",
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "startDate"
+      ]
+    },
+    "CurrentSpend": {
+      "description": "The current amount of cost which is being tracked for a budget.",
+      "properties": {
+        "amount": {
+          "description": "The total amount of cost which is being tracked by the budget.",
+          "type": "number",
+          "format": "decimal",
+          "readOnly": true
+        },
+        "unit": {
+          "description": "The unit of measure for the budget amount.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "Notification": {
+      "description": "The notification associated with a budget.",
+      "properties": {
+        "enabled": {
+          "description": "The notification is enabled or not.",
+          "type": "boolean"
+        },
+        "operator": {
+          "description": "The comparison operator.",
+          "type": "string",
+          "enum": [
+            "EqualTo",
+            "GreaterThan",
+            "GreaterThanOrEqualTo"
+          ],
+          "x-ms-enum": {
+            "name": "NotificationOperatorType",
+            "modelAsString": true
+          }
+        },
+        "threshold": {
+          "description": "Threshold value associated with a notification. Notification is sent when the cost exceeded the threshold. It is always percent and has to be between 0 and 1000.",
+          "type": "number",
+          "format": "decimal"
+        },
+        "contactEmails": {
+          "description": "Email addresses to send the budget notification to when the threshold is exceeded.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "maxItems": 50
+        },
+        "contactRoles": {
+          "description": "Contact roles to send the budget notification to when the threshold is exceeded.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "contactGroups": {
+          "description": "Action groups to send the budget notification to when the threshold is exceeded.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 0,
+          "maxItems": 50
+        }
+      },
+      "required": [
+        "enabled",
+        "operator",
+        "threshold",
+        "contactEmails"
+      ]
+    }
+  },
+  "parameters": {
+    "apiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "Version of the API to be used with the client request. The current version is 2019-04-01-preview"
+    },
+    "subscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "description": "Azure Subscription ID.",
+      "required": true,
+      "type": "string"
+    },
+    "billingAccountIdParameter": {
+      "name": "billingAccountId",
+      "in": "path",
+      "description": "BillingAccount ID",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "managementGroupIdParameter": {
+      "name": "managementGroupId",
+      "in": "path",
+      "description": "ManagementGroup ID",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "departmentIdParameter": {
+      "name": "departmentId",
+      "in": "path",
+      "description": "Department ID",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "enrollmentAccountIdParameter": {
+      "name": "enrollmentAccountId",
+      "in": "path",
+      "description": "Enrollment Account ID",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "resourceGroupNameParameter": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "description": "Azure Resource Group Name.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "scopeViewParameter": {
+      "name": "scope",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The scope associated with view operations. This includes 'subscriptions/{subscriptionId}' for subscription scope, 'subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}' for resourceGroup scope, 'providers/Microsoft.Billing/billingAccounts/{billingAccountId}' for Billing Account scope, 'providers/Microsoft.Billing/billingAccounts/{billingAccountId}/departments/{departmentId}' for Department scope, 'providers/Microsoft.Billing/billingAccounts/{billingAccountId}/enrollmentAccounts/{enrollmentAccountId}' for EnrollmentAccount scope, 'providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}' for BillingProfile scope, 'providers/Microsoft.Billing/billingAccounts/{billingAccountId}/invoiceSections/{invoiceSectionId}' for InvoiceSection scope, 'providers/Microsoft.Management/managementGroups/{managementGroupId}' for Management Group scope, 'providers/Microsoft.CostManagement/externalBillingAccounts/{externalBillingAccountName}' for External Billing Account scope and 'providers/Microsoft.CostManagement/externalSubscriptions/{externalSubscriptionName}' for External Subscription scope.",
+      "x-ms-parameter-location": "method"
+    },
+    "viewNameParameter": {
+      "name": "viewName",
+      "in": "path",
+      "description": "View name",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "scopeBudgetParameter": {
+      "name": "scope",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The scope associated with budget operations. This includes '/subscriptions/{subscriptionId}/' for subscription scope, '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}' for resourceGroup scope, '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}' for Billing Account scope, '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/departments/{departmentId}' for Department scope, '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/enrollmentAccounts/{enrollmentAccountId}' for EnrollmentAccount scope, '/providers/Microsoft.Management/managementGroups/{managementGroupId}' for Management Group scope, '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}' for billingProfile scope, 'providers/Microsoft.Billing/billingAccounts/{billingAccountId}/invoiceSections/{invoiceSectionId}' for invoiceSection scope.",
+      "x-ms-parameter-location": "method",
+      "x-ms-skip-url-encoding": true
+    },
+    "budgetNameParameter": {
+      "name": "budgetName",
+      "in": "path",
+      "description": "Budget Name.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

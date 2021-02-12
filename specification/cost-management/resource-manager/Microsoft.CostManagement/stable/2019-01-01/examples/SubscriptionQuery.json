@@ -2,15 +2,16 @@
   "parameters": {
     "api-version": "2019-01-01",
     "subscriptionId": "00000000-0000-0000-0000-000000000000",
-    "parameters":{
+    "scope": "subscriptions/00000000-0000-0000-0000-000000000000",
+    "parameters": {
       "type": "Usage",
       "timeframe": "MonthToDate",
       "dataset": {
-        "granularity": "Daily",           
-        "filter":{
+        "granularity": "Daily",
+        "filter": {
           "and": [
             {
-              "or":[
+              "or": [
                 {
                   "dimension": {
                     "name": "ResourceLocation",
@@ -42,16 +43,16 @@
                 ]
               }
             }
-          ]                      
+          ]
         },
-		"sorting": [
-		{
-		 "name": "UsageDate",
-		 "sortingDirection": "Ascending"
-		}
-		]	
-      } 
-    }   
+        "sorting": [
+          {
+            "name": "UsageDate",
+            "querySortingDirection": "Ascending"
+          }
+        ]
+      }
+    }
   },
   "responses": {
     "200": {

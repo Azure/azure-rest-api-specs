@@ -31,7 +31,7 @@ Please also specify `--python-sdks-folder=<path to the root directory of your az
 ``` yaml $(tag) == 'package-2018-05' && $(python)
 python:
   namespace: azure.mgmt.dns.v2018_05_01
-  output-folder: $(python-sdks-folder)/azure-mgmt-dns/azure/mgmt/dns/v2018_05_01
+  output-folder: $(python-sdks-folder)/network/azure-mgmt-dns/azure/mgmt/dns/v2018_05_01
 ```
 
 ### Tag: package-2018-03-preview and python
@@ -42,7 +42,7 @@ Please also specify `--python-sdks-folder=<path to the root directory of your az
 ``` yaml $(tag) == 'package-2018-03-preview' && $(python)
 python:
   namespace: azure.mgmt.dns.v2018_03_01_preview
-  output-folder: $(python-sdks-folder)/azure-mgmt-dns/azure/mgmt/dns/v2018_03_01_preview
+  output-folder: $(python-sdks-folder)/network/azure-mgmt-dns/azure/mgmt/dns/v2018_03_01_preview
 ```
 
 ### Tag: package-2016-04 and python
@@ -53,5 +53,5 @@ Please also specify `--python-sdks-folder=<path to the root directory of your az
 ``` yaml $(tag) == 'package-2016-04' && $(python)
 python:
   namespace: azure.mgmt.dns.v2016_04_01
-  output-folder: $(python-sdks-folder)/azure-mgmt-dns/azure/mgmt/dns/v2016_04_01
+  output-folder: $(python-sdks-folder)/network/azure-mgmt-dns/azure/mgmt/dns/v2016_04_01
 ```

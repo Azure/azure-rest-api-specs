@@ -15,7 +15,7 @@
   "produces": [
     "application/json"
   ],
-  "paths": {   
+  "paths": {
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/managementPolicies/{managementPolicyName}": {
       "get": {
         "tags": [
@@ -24,7 +24,9 @@
         "operationId": "ManagementPolicies_Get",
         "description": "Gets the data policy rules associated with the specified storage account.",
         "x-ms-examples": {
-          "StorageAccountGetManagementPolicies": { "$ref": "./examples/StorageAccountGetManagementPolicy.json" }
+          "StorageAccountGetManagementPolicies": {
+            "$ref": "./examples/StorageAccountGetManagementPolicy.json"
+          }
         },
         "parameters": [
           {
@@ -40,7 +42,7 @@
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ManagementPolicyName"            
+            "$ref": "#/parameters/ManagementPolicyName"
           }
         ],
         "responses": {
@@ -59,7 +61,9 @@
         "operationId": "ManagementPolicies_CreateOrUpdate",
         "description": "Sets the data policy rules associated with the specified storage account.",
         "x-ms-examples": {
-          "StorageAccountSetManagementPolicies": { "$ref": "./examples/StorageAccountSetManagementPolicy.json" }
+          "StorageAccountSetManagementPolicies": {
+            "$ref": "./examples/StorageAccountSetManagementPolicy.json"
+          }
         },
         "parameters": [
           {
@@ -75,7 +79,7 @@
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ManagementPolicyName"            
+            "$ref": "#/parameters/ManagementPolicyName"
           },
           {
             "name": "properties",
@@ -103,7 +107,9 @@
         "operationId": "ManagementPolicies_Delete",
         "description": "Deletes the data policy rules associated with the specified storage account.",
         "x-ms-examples": {
-          "StorageAccountDeleteManagementPolicies": { "$ref": "./examples/StorageAccountDeleteManagementPolicy.json" }
+          "StorageAccountDeleteManagementPolicies": {
+            "$ref": "./examples/StorageAccountDeleteManagementPolicy.json"
+          }
         },
         "parameters": [
           {
@@ -119,13 +125,13 @@
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ManagementPolicyName"            
+            "$ref": "#/parameters/ManagementPolicyName"
           }
         ],
         "responses": {
           "200": {
             "description": "OK -- Delete management policies successfully."
-          },   
+          },
           "204": {
             "description": "No Content -- The management policies does not exist."
           }
@@ -142,7 +148,7 @@
           "readOnly": true,
           "description": "Returns the Storage Account Data Policies Rules."
         }
-      },      
+      },
       "allOf": [
         {
           "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/Resource"
@@ -158,7 +164,7 @@
           "format": "date-time",
           "description": "Returns the date and time the ManagementPolicies was last modified."
         }
-      },      
+      },
       "allOf": [
         {
           "$ref": "#/definitions/ManagementPoliciesRules"
@@ -178,10 +184,10 @@
     },
     "ManagementPoliciesRules": {
       "properties": {
-          "policy": {
-            "type": "object",
-            "description": "The Storage Account ManagementPolicies Rules, in JSON format. See more details in: https://docs.microsoft.com/en-us/azure/storage/common/storage-lifecycle-managment-concepts."
-          }
+        "policy": {
+          "type": "object",
+          "description": "The Storage Account ManagementPolicies Rules, in JSON format. See more details in: https://docs.microsoft.com/en-us/azure/storage/common/storage-lifecycle-managment-concepts."
+        }
       },
       "description": "The Storage Account ManagementPolicies Rules, in JSON format. See more details in: https://docs.microsoft.com/en-us/azure/storage/common/storage-lifecycle-managment-concepts."
     }
@@ -193,12 +199,12 @@
       "required": true,
       "type": "string",
       "description": "The name of the Storage Account Management Policy. It should always be 'default'",
-      "enum":[
+      "enum": [
         "default"
       ],
       "x-ms-enum": {
-          "name": "ManagementPolicyName",
-          "modelAsString": true
+        "name": "ManagementPolicyName",
+        "modelAsString": true
       },
       "x-ms-parameter-location": "method"
     }

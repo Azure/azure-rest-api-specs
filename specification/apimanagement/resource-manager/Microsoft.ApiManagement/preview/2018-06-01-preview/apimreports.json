@@ -77,14 +77,14 @@
           "200": {
             "description": "Lists a collection of Report record.",
             "schema": {
-              "$ref": "#/definitions/ReportCollection"
+              "$ref": "./definitions.json#/definitions/ReportCollection"
             }
           }
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         },
-        "x-ms-odata": "#/definitions/ReportRecordContract"
+        "x-ms-odata": "./definitions.json#/definitions/ReportRecordContract"
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/reports/byUser": {
@@ -130,14 +130,14 @@
           "200": {
             "description": "Lists a collection of Report record.",
             "schema": {
-              "$ref": "#/definitions/ReportCollection"
+              "$ref": "./definitions.json#/definitions/ReportCollection"
             }
           }
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         },
-        "x-ms-odata": "#/definitions/ReportRecordContract"
+        "x-ms-odata": "./definitions.json#/definitions/ReportRecordContract"
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/reports/byOperation": {
@@ -183,14 +183,14 @@
           "200": {
             "description": "Lists a collection of Report record.",
             "schema": {
-              "$ref": "#/definitions/ReportCollection"
+              "$ref": "./definitions.json#/definitions/ReportCollection"
             }
           }
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         },
-        "x-ms-odata": "#/definitions/ReportRecordContract"
+        "x-ms-odata": "./definitions.json#/definitions/ReportRecordContract"
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/reports/byProduct": {
@@ -236,14 +236,14 @@
           "200": {
             "description": "Lists a collection of Report record.",
             "schema": {
-              "$ref": "#/definitions/ReportCollection"
+              "$ref": "./definitions.json#/definitions/ReportCollection"
             }
           }
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         },
-        "x-ms-odata": "#/definitions/ReportRecordContract"
+        "x-ms-odata": "./definitions.json#/definitions/ReportRecordContract"
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/reports/byGeo": {
@@ -289,14 +289,14 @@
           "200": {
             "description": "Lists a collection of Report record.",
             "schema": {
-              "$ref": "#/definitions/ReportCollection"
+              "$ref": "./definitions.json#/definitions/ReportCollection"
             }
           }
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         },
-        "x-ms-odata": "#/definitions/ReportRecordContract"
+        "x-ms-odata": "./definitions.json#/definitions/ReportRecordContract"
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/reports/bySubscription": {
@@ -342,14 +342,14 @@
           "200": {
             "description": "Lists a collection of Report record.",
             "schema": {
-              "$ref": "#/definitions/ReportCollection"
+              "$ref": "./definitions.json#/definitions/ReportCollection"
             }
           }
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         },
-        "x-ms-odata": "#/definitions/ReportRecordContract"
+        "x-ms-odata": "./definitions.json#/definitions/ReportRecordContract"
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/reports/byTime": {
@@ -403,14 +403,14 @@
           "200": {
             "description": "Lists a collection of Report record.",
             "schema": {
-              "$ref": "#/definitions/ReportCollection"
+              "$ref": "./definitions.json#/definitions/ReportCollection"
             }
           }
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         },
-        "x-ms-odata": "#/definitions/ReportRecordContract"
+        "x-ms-odata": "./definitions.json#/definitions/ReportRecordContract"
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/reports/byRequest": {
@@ -456,267 +456,17 @@
           "200": {
             "description": "Lists a collection of Report record.",
             "schema": {
-              "$ref": "#/definitions/RequestReportCollection"
+              "$ref": "./definitions.json#/definitions/RequestReportCollection"
             }
           }
         },
         "x-ms-pageable": {
           "nextLinkName": null
         },
-        "x-ms-odata": "#/definitions/RequestReportRecordContract"
+        "x-ms-odata": "./definitions.json#/definitions/RequestReportRecordContract"
       }
     }
   },
-  "definitions": {
-    "ReportCollection": {
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ReportRecordContract"
-          },
-          "description": "Page values."
-        },
-        "count": {
-          "type": "integer",
-          "format": "int64",
-          "description": "Total record count number across all pages."
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "Next page link if any."
-        }
-      },
-      "description": "Paged Report records list representation."
-    },
-    "ReportRecordContract": {
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "Name depending on report endpoint specifies product, API, operation or developer name."
-        },
-        "timestamp": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Start of aggregation period. The date conforms to the following format: `yyyy-MM-ddTHH:mm:ssZ` as specified by the ISO 8601 standard.\n"
-        },
-        "interval": {
-          "type": "string",
-          "description": "Length of aggregation period.  Interval must be multiple of 15 minutes and may not be zero. The value should be in ISO 8601 format (http://en.wikipedia.org/wiki/ISO_8601#Durations)."
-        },
-        "country": {
-          "type": "string",
-          "description": "Country to which this record data is related."
-        },
-        "region": {
-          "type": "string",
-          "description": "Country region to which this record data is related."
-        },
-        "zip": {
-          "type": "string",
-          "description": "Zip code to which this record data is related."
-        },
-        "userId": {
-          "readOnly": true,
-          "type": "string",
-          "description": "User identifier path. /users/{userId}"
-        },
-        "productId": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Product identifier path. /products/{productId}"
-        },
-        "apiId": {
-          "type": "string",
-          "description": "API identifier path. /apis/{apiId}"
-        },
-        "operationId": {
-          "type": "string",
-          "description": "Operation identifier path. /apis/{apiId}/operations/{operationId}"
-        },
-        "apiRegion": {
-          "type": "string",
-          "description": "API region identifier."
-        },
-        "subscriptionId": {
-          "type": "string",
-          "description": "Subscription identifier path. /subscriptions/{subscriptionId}"
-        },
-        "callCountSuccess": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Number of successful calls. This includes calls returning HttpStatusCode <= 301 and HttpStatusCode.NotModified and HttpStatusCode.TemporaryRedirect"
-        },
-        "callCountBlocked": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Number of calls blocked due to invalid credentials. This includes calls returning HttpStatusCode.Unauthorized and HttpStatusCode.Forbidden and HttpStatusCode.TooManyRequests"
-        },
-        "callCountFailed": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Number of calls failed due to proxy or backend errors. This includes calls returning HttpStatusCode.BadRequest(400) and any Code between HttpStatusCode.InternalServerError (500) and 600"
-        },
-        "callCountOther": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Number of other calls."
-        },
-        "callCountTotal": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Total number of calls."
-        },
-        "bandwidth": {
-          "type": "integer",
-          "format": "int64",
-          "description": "Bandwidth consumed."
-        },
-        "cacheHitCount": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Number of times when content was served from cache policy."
-        },
-        "cacheMissCount": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Number of times content was fetched from backend."
-        },
-        "apiTimeAvg": {
-          "type": "number",
-          "format": "double",
-          "description": "Average time it took to process request."
-        },
-        "apiTimeMin": {
-          "type": "number",
-          "format": "double",
-          "description": "Minimum time it took to process request."
-        },
-        "apiTimeMax": {
-          "type": "number",
-          "format": "double",
-          "description": "Maximum time it took to process request."
-        },
-        "serviceTimeAvg": {
-          "type": "number",
-          "format": "double",
-          "description": "Average time it took to process request on backend."
-        },
-        "serviceTimeMin": {
-          "type": "number",
-          "format": "double",
-          "description": "Minimum time it took to process request on backend."
-        },
-        "serviceTimeMax": {
-          "type": "number",
-          "format": "double",
-          "description": "Maximum time it took to process request on backend."
-        }
-      },
-      "description": "Report data."
-    },
-    "RequestReportCollection": {
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/RequestReportRecordContract"
-          },
-          "description": "Page values."
-        },
-        "count": {
-          "type": "integer",
-          "format": "int64",
-          "description": "Total record count number across all pages."
-        }
-      },
-      "description": "Paged Report records list representation."
-    },
-    "RequestReportRecordContract": {
-      "properties": {
-        "apiId": {
-          "type": "string",
-          "description": "API identifier path. /apis/{apiId}"
-        },
-        "operationId": {
-          "type": "string",
-          "description": "Operation identifier path. /apis/{apiId}/operations/{operationId}"
-        },
-        "productId": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Product identifier path. /products/{productId}"
-        },
-        "userId": {
-          "readOnly": true,
-          "type": "string",
-          "description": "User identifier path. /users/{userId}"
-        },
-        "method": {
-          "type": "string",
-          "description": "The HTTP method associated with this request.."
-        },
-        "url": {
-          "type": "string",
-          "description": "The full URL associated with this request."
-        },
-        "ipAddress": {
-          "type": "string",
-          "description": "The client IP address associated with this request."
-        },
-        "backendResponseCode": {
-          "type": "string",
-          "description": "The HTTP status code received by the gateway as a result of forwarding this request to the backend."
-        },
-        "responseCode": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The HTTP status code returned by the gateway."
-        },
-        "responseSize": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The size of the response returned by the gateway."
-        },
-        "timestamp": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The date and time when this request was received by the gateway in ISO 8601 format."
-        },
-        "cache": {
-          "type": "string",
-          "description": "Specifies if response cache was involved in generating the response. If the value is none, the cache was not used. If the value is hit, cached response was returned. If the value is miss, the cache was used but lookup resulted in a miss and request was fulfilled by the backend."
-        },
-        "apiTime": {
-          "type": "number",
-          "format": "double",
-          "description": "The total time it took to process this request."
-        },
-        "serviceTime": {
-          "type": "number",
-          "format": "double",
-          "description": "he time it took to forward this request to the backend and get the response back."
-        },
-        "apiRegion": {
-          "type": "string",
-          "description": "Azure region where the gateway that processed this request is located."
-        },
-        "subscriptionId": {
-          "type": "string",
-          "description": "Subscription identifier path. /subscriptions/{subscriptionId}"
-        },
-        "requestId": {
-          "type": "string",
-          "description": "Request Identifier."
-        },
-        "requestSize": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The size of this request.."
-        }
-      },
-      "description": "Request Report data."
-    }
-  },
+  "definitions": {},
   "parameters": {}
 }

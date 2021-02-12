@@ -4,10 +4,10 @@
 
 This is the AutoRest configuration file for Reservations RP.
 
-
-
 ---
+
 ## Getting Started
+
 To build the SDK for Reservations, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
@@ -15,20 +15,69 @@ To build the SDK for Reservations, simply [Install AutoRest](https://aka.ms/auto
 To see additional help and options, run:
 
 > `autorest --help`
+
 ---
 
 ## Configuration
 
-
-
 ### Basic Information
+
 These are the global settings for the Reservations API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2018-06
+tag: package-2020-10-25
 ```
 
+### Tag: package-2020-10-25
+
+These settings apply only when `--tag=package-2020-10-25` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-10-25'
+input-file:
+  - Microsoft.Capacity/preview/2020-10-01-preview/reservations.json
+  - Microsoft.Capacity/stable/2020-10-25/quota.json
+```
+
+### Tag: package-2020-11-preview
+
+These settings apply only when `--tag=package-2020-11-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2020-11-preview'
+input-file:
+  - Microsoft.Capacity/preview/2019-07-19/quota.json
+  - Microsoft.Capacity/preview/2020-10-01-preview/reservations.json
+  - Microsoft.Capacity/preview/2020-11-15-preview/reservationsChangeDirectory.json
+```
+
+### Tag: package-2020-10-preview
+
+These settings apply only when `--tag=package-2020-10-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2020-10-preview'
+input-file:
+  - Microsoft.Capacity/preview/2019-07-19/quota.json
+  - Microsoft.Capacity/preview/2020-10-01-preview/reservations.json
+```
+
+### Tag: package-preview-2019-07-19
+
+These settings apply only when `--tag=package-preview-2019-07-19` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2019-07-19'
+input-file:
+  - Microsoft.Capacity/preview/2019-07-19/quota.json
+  - Microsoft.Capacity/preview/2019-04-01/reservations.json
+```
+
+### Tag: package-preview-2019-04
+
+These settings apply only when `--tag=package-preview-2019-04` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2019-04'
+input-file:
+  - Microsoft.Capacity/preview/2019-04-01/reservations.json
+```
 ### Tag: package-2018-06
 
 These settings apply only when `--tag=package-2018-06` is specified on the command line.
@@ -48,8 +97,8 @@ input-file:
 ```
 
 ---
-# Code Generation
 
+# Code Generation
 
 ## Swagger to SDK
 
@@ -58,10 +107,14 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
+  - repo: azure-sdk-for-net
   - repo: azure-sdk-for-python
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
+  - repo: azure-resource-manager-schemas
+    after_scripts:
+      - node sdkauto_afterscript.js reservations/resource-manager
 ```
 
 ## C#
@@ -74,7 +127,7 @@ csharp:
   azure-arm: true
   license-header: MICROSOFT_MIT_NO_VERSION
   namespace: Microsoft.Azure.Management.Reservations
-  output-folder: $(csharp-sdks-folder)/Reservations/Management.Reservations/Generated
+  output-folder: $(csharp-sdks-folder)/reservations/Microsoft.Azure.Management.Reservations/src/Generated
   clear-output-folder: true
 ```
 
@@ -84,7 +137,7 @@ These settings apply only when `--python` is specified on the command line.
 Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
 Use `--python-mode=update` if you already have a setup.py and just want to update the code itself.
 
-``` yaml $(python)
+``` yaml $(python) && !$(track2)
 python-mode: create
 python:
   azure-arm: true
@@ -95,17 +148,41 @@ python:
   package-version: 0.3.2
   clear-output-folder: true
 ```
-``` yaml $(python) && $(python-mode) == 'update'
+``` yaml $(python) && $(track2)
+python-mode: create
+azure-arm: true
+license-header: MICROSOFT_MIT_NO_VERSION
+namespace: azure.mgmt.reservations
+package-name: azure-mgmt-reservations
+package-version: 0.3.2
+clear-output-folder: true
+```
+
+``` yaml $(python) && $(python-mode) == 'update' && !$(track2)
 python:
   no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-reservations/azure/mgmt/reservations
+  output-folder: $(python-sdks-folder)/reservations/azure-mgmt-reservations/azure/mgmt/reservations
 ```
-``` yaml $(python) && $(python-mode) == 'create'
+``` yaml $(python) && $(python-mode) == 'create' && !$(track2)
 python:
   basic-setup-py: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-reservations
+  output-folder: $(python-sdks-folder)/reservations/azure-mgmt-reservations
+```
+
+``` yaml $(python) && $(python-mode) == 'update' && $(track2)
+no-namespace-folders: true
+output-folder: $(python-sdks-folder)/reservations/azure-mgmt-reservations/azure/mgmt/reservations
+```
+``` yaml $(python) && $(python-mode) == 'create' && $(track2)
+basic-setup-py: true
+output-folder: $(python-sdks-folder)/reservations/azure-mgmt-reservations
 ```
 
 ## Go
 
 See configuration in [readme.go.md](./readme.go.md)
+
+## AzureResourceSchema
+
+See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
+

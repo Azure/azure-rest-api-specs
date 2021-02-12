@@ -1,0 +1,549 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "SubscriptionClient",
+    "version": "2018-06-01",
+    "description": "All resource groups and resources exist within subscriptions. These operation enable you get information about your subscriptions and tenants. A tenant is a dedicated instance of Azure Active Directory (Azure AD) for your organization."
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/providers/Microsoft.Resources/operations": {
+      "get": {
+        "tags": [
+          "Operations"
+        ],
+        "operationId": "Operations_List",
+        "description": "Lists all of the available Microsoft.Resources REST API operations.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/OperationListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/locations": {
+      "get": {
+        "tags": [
+          "Subscriptions"
+        ],
+        "operationId": "Subscriptions_ListLocations",
+        "summary": "Gets all available geo-locations.",
+        "description": "This operation provides all the locations that are available for resource providers; however, each resource provider may support a subset of this list.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Returns an array of locations.",
+            "schema": {
+              "$ref": "#/definitions/LocationListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}": {
+      "get": {
+        "tags": [
+          "Subscriptions"
+        ],
+        "operationId": "Subscriptions_Get",
+        "description": "Gets details about a specified subscription.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Returns information about the subscription.",
+            "schema": {
+              "$ref": "#/definitions/Subscription"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions": {
+      "get": {
+        "tags": [
+          "Subscriptions"
+        ],
+        "operationId": "Subscriptions_List",
+        "description": "Gets all subscriptions for a tenant.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Returns an array of subscriptions.",
+            "schema": {
+              "$ref": "#/definitions/SubscriptionListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/tenants": {
+      "get": {
+        "tags": [
+          "Tenants"
+        ],
+        "operationId": "Tenants_List",
+        "description": "Gets the tenants for your account.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Returns an array of tenants.",
+            "schema": {
+              "$ref": "#/definitions/TenantListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.Resources/checkResourceName": {
+      "post": {
+        "tags": [
+          "Tenants"
+        ],
+        "operationId": "checkResourceName",
+        "description": "A resource name is valid if it is not a reserved word, does not contains a reserved word and does not start with a reserved word",
+        "summary": "Checks resource name validity",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/CheckResourceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Returns status as allowed or not.",
+            "schema": {
+              "$ref": "#/definitions/CheckResourceNameResult"
+            }
+          },
+          "default": {
+            "description": "Error response saying resource name is invalid",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Check validity for a resource name.": {
+            "$ref": "./examples/CheckResourceName.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Location": {
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The fully qualified ID of the location. For example, /subscriptions/00000000-0000-0000-0000-000000000000/locations/westus."
+        },
+        "subscriptionId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The subscription ID."
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The location name."
+        },
+        "displayName": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The display name of the location."
+        },
+        "latitude": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The latitude of the location."
+        },
+        "longitude": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The longitude of the location."
+        }
+      },
+      "description": "Location information."
+    },
+    "LocationListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Location"
+          },
+          "description": "An array of locations."
+        }
+      },
+      "description": "Location list operation response."
+    },
+    "Subscription": {
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The fully qualified ID for the subscription. For example, /subscriptions/00000000-0000-0000-0000-000000000000."
+        },
+        "subscriptionId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The subscription ID."
+        },
+        "displayName": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The subscription display name."
+        },
+        "tenantId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The subscription tenant ID."
+        },
+        "state": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The subscription state. Possible values are Enabled, Warned, PastDue, Disabled, and Deleted.",
+          "enum": [
+            "Enabled",
+            "Warned",
+            "PastDue",
+            "Disabled",
+            "Deleted"
+          ],
+          "x-ms-enum": {
+            "name": "SubscriptionState",
+            "modelAsString": false
+          }
+        },
+        "subscriptionPolicies": {
+          "$ref": "#/definitions/SubscriptionPolicies",
+          "description": "The subscription policies."
+        },
+        "authorizationSource": {
+          "type": "string",
+          "description": "The authorization source of the request. Valid values are one or more combinations of Legacy, RoleBased, Bypassed, Direct and Management. For example, 'Legacy, RoleBased'."
+        }
+      },
+      "description": "Subscription information."
+    },
+    "SubscriptionPolicies": {
+      "properties": {
+        "locationPlacementId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The subscription location placement ID. The ID indicates which regions are visible for a subscription. For example, a subscription with a location placement Id of Public_2014-09-01 has access to Azure public regions."
+        },
+        "quotaId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The subscription quota ID."
+        },
+        "spendingLimit": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The subscription spending limit.",
+          "enum": [
+            "On",
+            "Off",
+            "CurrentPeriodOff"
+          ],
+          "x-ms-enum": {
+            "name": "spendingLimit",
+            "modelAsString": false
+          }
+        }
+      },
+      "description": "Subscription policies."
+    },
+    "SubscriptionListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Subscription"
+          },
+          "description": "An array of subscriptions."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URL to get the next set of results."
+        }
+      },
+      "required": [
+        "nextLink"
+      ],
+      "description": "Subscription list operation response."
+    },
+    "TenantIdDescription": {
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The fully qualified ID of the tenant. For example, /tenants/00000000-0000-0000-0000-000000000000."
+        },
+        "tenantId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The tenant ID. For example, 00000000-0000-0000-0000-000000000000."
+        },
+        "country": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Country/region name of the address for the tenant."
+        },
+        "countryCode": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Country/region abbreviation for the tenant."
+        },
+        "displayName": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The display name of the tenant."
+        },
+        "domains": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "type": "string",
+            "description": "The domain name for a tenant."
+          },
+          "description": "The list of domains for the tenant."
+        }
+      },
+      "description": "Tenant Id information."
+    },
+    "TenantListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TenantIdDescription"
+          },
+          "description": "An array of tenants."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URL to use for getting the next set of results."
+        }
+      },
+      "required": [
+        "nextLink"
+      ],
+      "description": "Tenant Ids information."
+    },
+    "ResourceName": {
+      "description": "Name and Type of the Resource",
+      "required": [
+        "name",
+        "type"
+      ],
+      "properties": {
+        "name": {
+          "description": "Name of the resource",
+          "type": "string"
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of the resource"
+        }
+      }
+    },
+    "ErrorResponse": {
+      "description": "Error response.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/ErrorDefinition",
+          "description": "The error details."
+        }
+      }
+    },
+    "ErrorDefinition": {
+      "description": "Error description and code explaining why resource name is invalid.",
+      "properties": {
+        "message": {
+          "type": "string",
+          "description": "Description of the error."
+        },
+        "code": {
+          "type": "string",
+          "description": "Code of the error."
+        }
+      }
+    },
+    "CheckResourceNameResult": {
+      "properties": {
+        "name": {
+          "description": "Name of Resource",
+          "type": "string"
+        },
+        "type": {
+          "description": "Type of Resource",
+          "type": "string"
+        },
+        "status": {
+          "description": "Is the resource name Allowed or Reserved",
+          "type": "string",
+          "enum": [
+            "Allowed",
+            "Reserved"
+          ],
+          "x-ms-enum": {
+            "name": "ResourceNameStatus",
+            "modelAsString": true
+          }
+        }
+      },
+      "description": "Resource Name valid if not a reserved word, does not contain a reserved word and does not start with a reserved word"
+    },
+    "Operation": {
+      "description": "Microsoft.Resources operation",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Operation name: {provider}/{resource}/{operation}",
+          "type": "string"
+        },
+        "display": {
+          "description": "The object that represents the operation.",
+          "properties": {
+            "provider": {
+              "description": "Service provider: Microsoft.Resources",
+              "type": "string"
+            },
+            "resource": {
+              "description": "Resource on which the operation is performed: Profile, endpoint, etc.",
+              "type": "string"
+            },
+            "operation": {
+              "description": "Operation type: Read, write, delete, etc.",
+              "type": "string"
+            },
+            "description": {
+              "description": "Description of the operation.",
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "OperationListResult": {
+      "description": "Result of the request to list Microsoft.Resources operations. It contains a list of operations and a URL link to get the next set of results.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Operation"
+          },
+          "description": "List of Microsoft.Resources operations."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "URL to get the next set of operation list results if there are any."
+        }
+      }
+    }
+  },
+  "parameters": {
+    "SubscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The ID of the target subscription.",
+      "x-ms-parameter-location": "method"
+    },
+    "CheckResourceNameParameter": {
+      "description": "Resource object with values for resource name and resource type",
+      "in": "body",
+      "name": "Resource Name Definition",
+      "schema": {
+        "$ref": "#/definitions/ResourceName"
+      },
+      "x-ms-parameter-location": "method"
+    },
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "The API version to use for the operation.",
+      "x-ms-parameter-location": "client"
+    }
+  }
+}

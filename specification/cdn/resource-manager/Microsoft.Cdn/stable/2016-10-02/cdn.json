@@ -274,7 +274,7 @@
           {
             "name": "profileName",
             "in": "path",
-            "description": "Name of the CDN profile which is unique within the resource group.",      
+            "description": "Name of the CDN profile which is unique within the resource group.",
             "required": true,
             "type": "string"
           },
@@ -816,7 +816,7 @@
           {
             "name": "endpointName",
             "in": "path",
-            "description": "Name of the endpoint under the profile which is unique globally.", 
+            "description": "Name of the endpoint under the profile which is unique globally.",
             "required": true,
             "type": "string"
           },
@@ -1721,14 +1721,14 @@
           }
         },
         "provisioningState": {
-          "readOnly": true,          
+          "readOnly": true,
           "description": "Provisioning status of the profile.",
           "type": "string"
         }
       }
     },
     "ProfileListResult": {
-      "description":"Result of the request to list profiles. It contains a list of profile objects and a URL link to get the next set of results.",
+      "description": "Result of the request to list profiles. It contains a list of profile objects and a URL link to get the next set of results.",
       "properties": {
         "value": {
           "type": "array",
@@ -1799,7 +1799,7 @@
       }
     },
     "EndpointProperties": {
-      "description":"The JSON object that contains the properties required to create an endpoint.",
+      "description": "The JSON object that contains the properties required to create an endpoint.",
       "required": [
         "origins"
       ],
@@ -1807,7 +1807,7 @@
         {
           "$ref": "#/definitions/EndpointPropertiesUpdateParameters"
         }
-      ],      
+      ],
       "properties": {
         "hostName": {
           "description": "The host name of the endpoint structured as {endpointName}.{DNSZone}, e.g. contoso.azureedge.net",
@@ -1839,7 +1839,7 @@
           }
         },
         "provisioningState": {
-          "readOnly": true,          
+          "readOnly": true,
           "description": "Provisioning status of the endpoint.",
           "type": "string"
         }
@@ -1880,7 +1880,7 @@
       "x-ms-azure-resource": true
     },
     "EndpointPropertiesUpdateParameters": {
-      "description":"Result of the request to list endpoints. It contains a list of endpoints and a URL link to get the next set of results.",
+      "description": "Result of the request to list endpoints. It contains a list of endpoints and a URL link to get the next set of results.",
       "properties": {
         "originHostHeader": {
           "description": "The host header CDN sends along with content requests to origin. The default value is the host name of the origin.",
@@ -1995,11 +1995,11 @@
           ],
           "type": "string",
           "x-ms-enum": {
-          "name": "GeoFilterActions",
+            "name": "GeoFilterActions",
             "modelAsString": false
           }
         },
-        "countryCodes":    {
+        "countryCodes": {
           "description": "Two letter country codes defining user country access in a geo filter, e.g. AU, MX, US.",
           "type": "array",
           "items": {
@@ -2056,7 +2056,7 @@
       }
     },
     "OriginProperties": {
-      "description":"The JSON object that contains the properties of the origin to create.",
+      "description": "The JSON object that contains the properties of the origin to create.",
       "required": [
         "hostName"
       ],
@@ -2096,7 +2096,7 @@
           }
         },
         "provisioningState": {
-          "readOnly": true,          
+          "readOnly": true,
           "description": "Provisioning status of the origin.",
           "type": "string"
         }
@@ -2139,7 +2139,7 @@
       }
     },
     "OriginListResult": {
-      "description":"Result of the request to list origins. It contains a list of origin objects and a URL link to get the next set of results.",
+      "description": "Result of the request to list origins. It contains a list of origin objects and a URL link to get the next set of results.",
       "properties": {
         "value": {
           "type": "array",
@@ -2214,7 +2214,7 @@
           "type": "string"
         },
         "provisioningState": {
-          "readOnly": true,          
+          "readOnly": true,
           "description": "Provisioning status of the custom domain.",
           "type": "string"
         }
@@ -2402,7 +2402,7 @@
       }
     },
     "OperationListResult": {
-     "description": "Result of the request to list CDN operations. It contains a list of operations and a URL link to get the next set of results.",
+      "description": "Result of the request to list CDN operations. It contains a list of operations and a URL link to get the next set of results.",
       "properties": {
         "value": {
           "type": "array",
@@ -2418,7 +2418,7 @@
       }
     },
     "EdgenodeResult": {
-     "description": "Result of the request to list CDN edgenodes. It contains a list of ip address group and a URL link to get the next set of results.",
+      "description": "Result of the request to list CDN edgenodes. It contains a list of ip address group and a URL link to get the next set of results.",
       "properties": {
         "value": {
           "type": "array",
@@ -2449,10 +2449,10 @@
       }
     },
     "EdgeNodeProperties": {
-      "description":"The JSON object that contains the properties required to create an edgenode.",
+      "description": "The JSON object that contains the properties required to create an edgenode.",
       "required": [
         "ipAddressGroups"
-      ],    
+      ],
       "properties": {
         "ipAddressGroups": {
           "description": "List of ip address groups.",
@@ -2621,9 +2621,9 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "pattern": "^[-\\w\\._\\(\\)]+$", 
-      "minLength": 1, 
-      "maxLength": 90 ,
+      "pattern": "^[-\\w\\._\\(\\)]+$",
+      "minLength": 1,
+      "maxLength": 90,
       "x-ms-parameter-location": "method",
       "description": "Name of the Resource group within the Azure subscription."
     }

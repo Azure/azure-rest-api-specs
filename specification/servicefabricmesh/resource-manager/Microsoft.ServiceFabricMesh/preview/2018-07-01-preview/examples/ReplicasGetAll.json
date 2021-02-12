@@ -1,207 +1,207 @@
 {
-    "parameters": {
-      "subscriptionId": "00000000-0000-0000-0000-000000000000",
-      "resourceGroupName": "sbz_demo",
-      "api-version": "2018-07-01-preview",
-      "applicationName": "helloWorldApp",
-      "serviceName": "helloWorldService"
-    },
-    "responses": {
-      "200": {
-        "body": {
-          "value": [
-            {
-              "osType": "Linux",
-              "codePackages": [
-                {
-                  "name": "helloWorldCode",
-                  "image": "seabreeze/sbz-helloworld:1.0-alpine",
-                  "endpoints": [
-                    {
-                      "name": "helloWorldListener",
-                      "port": 80
-                    }
-                  ],
-                  "resources": {
-                    "requests": {
-                      "memoryInGB": 1,
-                      "cpu": 1
-                    }
-                  },
-                  "instanceView": {
-                    "restartCount": 1,
-                    "currentState": {
-                      "state": "Running",
-                      "exitCode": "0"
-                    },
-                    "previousState": {
-                      "state": "NotSpecified",
-                      "exitCode": "0"
-                    },
-                    "events": [
-                      {
-                        "count": 3,
-                        "firstTimestamp": "2018-04-05T22:37:20.9016844",
-                        "lastTimestamp": "2018-04-06T06:36:06.0887046",
-                        "name": "Created",
-                        "message": "Container created and started.",
-                        "type": "Normal"
-                      },
-                      {
-                        "count": 1,
-                        "firstTimestamp": "2018-04-06T06:34:00.6622454",
-                        "lastTimestamp": "2018-04-06T06:34:00.6622454",
-                        "name": "Stopped",
-                        "message": "Container was stopped.",
-                        "type": "Normal"
-                      }
-                    ]
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "sbz_demo",
+    "api-version": "2018-07-01-preview",
+    "applicationName": "helloWorldApp",
+    "serviceName": "helloWorldService"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "osType": "Linux",
+            "codePackages": [
+              {
+                "name": "helloWorldCode",
+                "image": "seabreeze/sbz-helloworld:1.0-alpine",
+                "endpoints": [
+                  {
+                    "name": "helloWorldListener",
+                    "port": 80
+                  }
+                ],
+                "resources": {
+                  "requests": {
+                    "memoryInGB": 1,
+                    "cpu": 1
                   }
                 },
-                {
-                  "name": "helloWorldSideCar",
-                  "image": "seabreeze/sbz-helloworld-sidecar:1.0-alpine",
-                  "resources": {
-                    "requests": {
-                      "memoryInGB": 1,
-                      "cpu": 1
-                    }
+                "instanceView": {
+                  "restartCount": 1,
+                  "currentState": {
+                    "state": "Running",
+                    "exitCode": "0"
                   },
-                  "instanceView": {
-                    "restartCount": 1,
-                    "currentState": {
-                      "state": "Running",
-                      "exitCode": "0"
-                    },
-                    "previousState": {
-                      "state": "NotSpecified",
-                      "exitCode": "0"
-                    },
-                    "events": [
-                      {
-                        "count": 3,
-                        "firstTimestamp": "2018-04-05T22:37:20.906688",
-                        "lastTimestamp": "2018-04-06T06:36:06.0827003",
-                        "name": "Created",
-                        "message": "Container created and started.",
-                        "type": "Normal"
-                      },
-                      {
-                        "count": 1,
-                        "firstTimestamp": "2018-04-06T06:34:00.656241",
-                        "lastTimestamp": "2018-04-06T06:34:00.656241",
-                        "name": "Stopped",
-                        "message": "Container was stopped.",
-                        "type": "Normal"
-                      }
-                    ]
-                  }
-                }
-              ],
-              "networkRefs": [
-                {
-                  "name": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/sbz_demo/providers/Microsoft.ServiceFabricMesh/networks/helloWorldNetwork"
-                }
-              ],
-              "replicaName": "1"
-            },
-            {
-              "osType": "Linux",
-              "codePackages": [
-                {
-                  "name": "helloWorldCode",
-                  "image": "seabreeze/sbz-helloworld:1.0-alpine",
-                  "endpoints": [
+                  "previousState": {
+                    "state": "NotSpecified",
+                    "exitCode": "0"
+                  },
+                  "events": [
                     {
-                      "name": "helloWorldListener",
-                      "port": 80
-                    }
-                  ],
-                  "resources": {
-                    "requests": {
-                      "memoryInGB": 1,
-                      "cpu": 1
-                    }
-                  },
-                  "instanceView": {
-                    "restartCount": 1,
-                    "currentState": {
-                      "state": "Running",
-                      "exitCode": "0"
+                      "count": 3,
+                      "firstTimestamp": "2018-04-05T22:37:20.9016844",
+                      "lastTimestamp": "2018-04-06T06:36:06.0887046",
+                      "name": "Created",
+                      "message": "Container created and started.",
+                      "type": "Normal"
                     },
-                    "previousState": {
-                      "state": "NotSpecified",
-                      "exitCode": "0"
-                    },
-                    "events": [
-                      {
-                        "count": 3,
-                        "firstTimestamp": "2018-04-05T22:37:20.9016844",
-                        "lastTimestamp": "2018-04-06T06:36:06.0887046",
-                        "name": "Created",
-                        "message": "Container created and started.",
-                        "type": "Normal"
-                      },
-                      {
-                        "count": 1,
-                        "firstTimestamp": "2018-04-06T06:34:00.6622454",
-                        "lastTimestamp": "2018-04-06T06:34:00.6622454",
-                        "name": "Stopped",
-                        "message": "Container was stopped.",
-                        "type": "Normal"
-                      }
-                    ]
+                    {
+                      "count": 1,
+                      "firstTimestamp": "2018-04-06T06:34:00.6622454",
+                      "lastTimestamp": "2018-04-06T06:34:00.6622454",
+                      "name": "Stopped",
+                      "message": "Container was stopped.",
+                      "type": "Normal"
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "helloWorldSideCar",
+                "image": "seabreeze/sbz-helloworld-sidecar:1.0-alpine",
+                "resources": {
+                  "requests": {
+                    "memoryInGB": 1,
+                    "cpu": 1
                   }
                 },
-                {
-                  "name": "helloWorldSideCar",
-                  "image": "seabreeze/sbz-helloworld-sidecar:1.0-alpine",
-                  "resources": {
-                    "requests": {
-                      "memoryInGB": 1,
-                      "cpu": 1
-                    }
+                "instanceView": {
+                  "restartCount": 1,
+                  "currentState": {
+                    "state": "Running",
+                    "exitCode": "0"
                   },
-                  "instanceView": {
-                    "restartCount": 1,
-                    "currentState": {
-                      "state": "Running",
-                      "exitCode": "0"
+                  "previousState": {
+                    "state": "NotSpecified",
+                    "exitCode": "0"
+                  },
+                  "events": [
+                    {
+                      "count": 3,
+                      "firstTimestamp": "2018-04-05T22:37:20.906688",
+                      "lastTimestamp": "2018-04-06T06:36:06.0827003",
+                      "name": "Created",
+                      "message": "Container created and started.",
+                      "type": "Normal"
                     },
-                    "previousState": {
-                      "state": "NotSpecified",
-                      "exitCode": "0"
-                    },
-                    "events": [
-                      {
-                        "count": 3,
-                        "firstTimestamp": "2018-04-05T22:37:20.906688",
-                        "lastTimestamp": "2018-04-06T06:36:06.0827003",
-                        "name": "Created",
-                        "message": "Container created and started.",
-                        "type": "Normal"
-                      },
-                      {
-                        "count": 1,
-                        "firstTimestamp": "2018-04-06T06:34:00.656241",
-                        "lastTimestamp": "2018-04-06T06:34:00.656241",
-                        "name": "Stopped",
-                        "message": "Container was stopped.",
-                        "type": "Normal"
-                      }
-                    ]
+                    {
+                      "count": 1,
+                      "firstTimestamp": "2018-04-06T06:34:00.656241",
+                      "lastTimestamp": "2018-04-06T06:34:00.656241",
+                      "name": "Stopped",
+                      "message": "Container was stopped.",
+                      "type": "Normal"
+                    }
+                  ]
+                }
+              }
+            ],
+            "networkRefs": [
+              {
+                "name": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/sbz_demo/providers/Microsoft.ServiceFabricMesh/networks/helloWorldNetwork"
+              }
+            ],
+            "replicaName": "1"
+          },
+          {
+            "osType": "Linux",
+            "codePackages": [
+              {
+                "name": "helloWorldCode",
+                "image": "seabreeze/sbz-helloworld:1.0-alpine",
+                "endpoints": [
+                  {
+                    "name": "helloWorldListener",
+                    "port": 80
                   }
+                ],
+                "resources": {
+                  "requests": {
+                    "memoryInGB": 1,
+                    "cpu": 1
+                  }
+                },
+                "instanceView": {
+                  "restartCount": 1,
+                  "currentState": {
+                    "state": "Running",
+                    "exitCode": "0"
+                  },
+                  "previousState": {
+                    "state": "NotSpecified",
+                    "exitCode": "0"
+                  },
+                  "events": [
+                    {
+                      "count": 3,
+                      "firstTimestamp": "2018-04-05T22:37:20.9016844",
+                      "lastTimestamp": "2018-04-06T06:36:06.0887046",
+                      "name": "Created",
+                      "message": "Container created and started.",
+                      "type": "Normal"
+                    },
+                    {
+                      "count": 1,
+                      "firstTimestamp": "2018-04-06T06:34:00.6622454",
+                      "lastTimestamp": "2018-04-06T06:34:00.6622454",
+                      "name": "Stopped",
+                      "message": "Container was stopped.",
+                      "type": "Normal"
+                    }
+                  ]
                 }
-              ],
-              "networkRefs": [
-                {
-                  "name": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/sbz_demo/providers/Microsoft.ServiceFabricMesh/networks/helloWorldNetwork"
+              },
+              {
+                "name": "helloWorldSideCar",
+                "image": "seabreeze/sbz-helloworld-sidecar:1.0-alpine",
+                "resources": {
+                  "requests": {
+                    "memoryInGB": 1,
+                    "cpu": 1
+                  }
+                },
+                "instanceView": {
+                  "restartCount": 1,
+                  "currentState": {
+                    "state": "Running",
+                    "exitCode": "0"
+                  },
+                  "previousState": {
+                    "state": "NotSpecified",
+                    "exitCode": "0"
+                  },
+                  "events": [
+                    {
+                      "count": 3,
+                      "firstTimestamp": "2018-04-05T22:37:20.906688",
+                      "lastTimestamp": "2018-04-06T06:36:06.0827003",
+                      "name": "Created",
+                      "message": "Container created and started.",
+                      "type": "Normal"
+                    },
+                    {
+                      "count": 1,
+                      "firstTimestamp": "2018-04-06T06:34:00.656241",
+                      "lastTimestamp": "2018-04-06T06:34:00.656241",
+                      "name": "Stopped",
+                      "message": "Container was stopped.",
+                      "type": "Normal"
+                    }
+                  ]
                 }
-              ],
-              "replicaName": "0"
-            }
-          ]
-        }
+              }
+            ],
+            "networkRefs": [
+              {
+                "name": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/sbz_demo/providers/Microsoft.ServiceFabricMesh/networks/helloWorldNetwork"
+              }
+            ],
+            "replicaName": "0"
+          }
+        ]
       }
     }
   }
+}

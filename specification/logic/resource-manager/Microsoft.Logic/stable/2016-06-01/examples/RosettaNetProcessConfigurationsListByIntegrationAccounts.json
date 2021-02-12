@@ -1,0 +1,135 @@
+{
+  "title": "List by integration account rosettanet process configuration examples",
+  "parameters": {
+    "api-version": "2016-06-01",
+    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345",
+    "resourceGroupName": "testrg123",
+    "integrationAccountName": "testia123"
+  },
+  "responses": {
+    "200": {
+      "headers": {
+        "Cache-Control": "no-cache",
+        "Pragma": "no-cache",
+        "Content-Type": "application/json; charset=utf-8",
+        "Expires": -1,
+        "Vary": "Accept-Encoding",
+        "Date": "Tue, 28 May 2019 20:43:03 GMT"
+      },
+      "body": {
+        "value": [
+          {
+            "properties": {
+              "processCode": "0A1",
+              "processVersion": "V02.00.00",
+              "processName": "0A1",
+              "activitySettings": {
+                "activityType": "InformationDistribution",
+                "activityBehavior": {
+                  "isAuthorizationRequired": false,
+                  "persistentConfidentialityScope": "None",
+                  "isSecuredTransportRequired": false,
+                  "actionType": "SingleAction",
+                  "responseType": "Async",
+                  "nonRepudiationOfOriginAndContent": false,
+                  "retryCount": 4,
+                  "timeToPerformInSeconds": 86400
+                },
+                "acknowledgmentOfReceiptSettings": {
+                  "isNonRepudiationRequired": false,
+                  "timeToAcknowledgeInSeconds": 36400
+                }
+              },
+              "initiatorRoleSettings": {
+                "action": "Failure Notification Action",
+                "role": "PIP Failure Notifier",
+                "description": "An organizational process that automatically notifies the appropriate Failure Report Administrator of a PIP process failure.",
+                "roleType": "Functional",
+                "service": "PIP Failure Notifier Service",
+                "serviceClassification": "Business Service",
+                "businessDocument": {
+                  "name": "Failure Notification",
+                  "description": "An unsolicited formal notification of the failure to perform a business activity.",
+                  "version": "V02.00.00"
+                }
+              },
+              "responderRoleSettings": {
+                "action": "Failure Notification Action",
+                "role": "Failure Report Administrator",
+                "description": "An employee or organizational entity that receives and processes PIP Failure Notifications.",
+                "roleType": "Organizational",
+                "service": "Failure Report Administrator Service",
+                "serviceClassification": "Business Service",
+                "businessDocument": {
+                  "name": "Failure Notification",
+                  "description": "An unsolicited formal notification of the failure to perform a business activity.",
+                  "version": "V02.00.00"
+                }
+              },
+              "createdTime": "2019-05-22T13:47:26.330972Z",
+              "changedTime": "2019-05-22T13:47:26.3328234Z"
+            },
+            "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/testrg123/providers/Microsoft.Logic/integrationAccounts/testia123//rosettaNetProcessConfigurations/0A1",
+            "name": "IntegrationAccountSession1662",
+            "type": "Microsoft.Logic/integrationAccounts/sessions"
+          },
+          {
+            "properties": {
+              "processCode": "3A3",
+              "processVersion": "R02.00.00",
+              "processName": "3A3",
+              "activitySettings": {
+                "activityType": "RequestResponse",
+                "activityBehavior": {
+                  "isAuthorizationRequired": false,
+                  "persistentConfidentialityScope": "None",
+                  "isSecuredTransportRequired": false,
+                  "actionType": "DoubleAction",
+                  "responseType": "Async",
+                  "nonRepudiationOfOriginAndContent": false,
+                  "retryCount": 4,
+                  "timeToPerformInSeconds": 86400
+                },
+                "acknowledgmentOfReceiptSettings": {
+                  "isNonRepudiationRequired": false,
+                  "timeToAcknowledgeInSeconds": 36400
+                }
+              },
+              "initiatorRoleSettings": {
+                "action": "Shopping Cart Transfer Request Action",
+                "role": "Sales Facilitator",
+                "description": "This partner role facilitates the sale of product between partners in the supply chain.",
+                "roleType": "Functional",
+                "service": "Sales Facilitator Service",
+                "serviceClassification": "Business Service",
+                "businessDocument": {
+                  "name": "Shopping Cart Transfer Request",
+                  "description": "Requests a Supplier to confirm the transfer of a shopping cart.",
+                  "version": "R02.00.00"
+                }
+              },
+              "responderRoleSettings": {
+                "action": "Shopping Cart Transfer Confirmation Action",
+                "role": "Supplier",
+                "description": "This partner role supplies product to customers in the supply chain.",
+                "roleType": "Organizational",
+                "service": "Supplier Service",
+                "serviceClassification": "Business Service",
+                "businessDocument": {
+                  "name": "Shopping Cart Transfer Confirmation",
+                  "description": "Confirms the transfer of a shopping cart from a Sales Facilitator to a Supplier.",
+                  "version": "R02.00.00"
+                }
+              },
+              "createdTime": "2019-05-31T06:46:08.1261454Z",
+              "changedTime": "2019-05-31T06:46:08.129905Z"
+            },
+            "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/testrg123/providers/Microsoft.Logic/integrationAccounts/testia123/rosettaNetProcessConfigurations/3A3",
+            "name": "3A3",
+            "type": "Microsoft.Logic/integrationAccounts/rosettaNetProcessConfigurations"
+          }
+        ]
+      }
+    }
+  }
+}

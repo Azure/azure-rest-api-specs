@@ -12,7 +12,7 @@ directive:
     $ = $.replace( /mode, url/g, "url, mode" );
 typescript:
   package-name: "@azure/cognitiveservices-computervision"
-  output-folder: "$(typescript-sdks-folder)/packages/@azure/cognitiveservices-computervision"
+  output-folder: "$(typescript-sdks-folder)/sdk/cognitiveservices/cognitiveservices-computervision"
   azure-arm: false
   generate-metadata: true
 ```

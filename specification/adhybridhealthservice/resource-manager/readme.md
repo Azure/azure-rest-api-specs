@@ -36,7 +36,7 @@ These settings apply only when `--tag=package-2014-01` is specified on the comma
 
 ``` yaml $(tag) == 'package-2014-01'
 input-file:
-- Microsoft.ADHybridHealthService\stable\2014-01-01\ADHybridHealthService.json
+- Microsoft.ADHybridHealthService/stable/2014-01-01/ADHybridHealthService.json
 ```
 
 ---
@@ -54,6 +54,9 @@ swagger-to-sdk:
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-node
+  - repo: azure-resource-manager-schemas
+    after_scripts:
+      - node sdkauto_afterscript.js adhybridhealthservice/resource-manager
 ```
 
 
@@ -92,21 +95,9 @@ See configuration in [readme.go.md](./readme.go.md)
 
 ## Java
 
-These settings apply only when `--java` is specified on the command line.
-Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-libraries-for-java clone>`.
+See configuration in [readme.java.md](./readme.java.md)
 
-``` yaml $(java)
-azure-arm: true
-fluent: true
-namespace: com.microsoft.azure.management.adhybridhealthservice
-license-header: MICROSOFT_MIT_NO_CODEGEN
-payload-flattening-threshold: 1
-output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-adhybridhealthservice
-directive:
-  - rename-operation:
-      from: addsService_getMetrics
-      to: addsServices_getMetrics
-  - rename-operation:
-      from: service_getMetrics
-      to: services_getMetrics
-```
+## AzureResourceSchema
+
+See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
+

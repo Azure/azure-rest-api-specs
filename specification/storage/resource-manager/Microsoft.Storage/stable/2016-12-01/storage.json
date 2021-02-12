@@ -489,7 +489,9 @@
         },
         "type": {
           "type": "string",
-          "enum": [ "Microsoft.Storage/storageAccounts" ]
+          "enum": [
+            "Microsoft.Storage/storageAccounts"
+          ]
         }
       },
       "required": [
@@ -625,10 +627,14 @@
         "keySource": {
           "type": "string",
           "description": "The encryption keySource (provider). Possible values (case-insensitive):  Microsoft.Storage",
-          "enum": [ "Microsoft.Storage" ]
+          "enum": [
+            "Microsoft.Storage"
+          ]
         }
       },
-      "required": [ "keySource" ],
+      "required": [
+        "keySource"
+      ],
       "description": "The encryption settings on the storage account."
     },
     "StorageAccountPropertiesCreateParameters": {
@@ -1175,7 +1181,7 @@
       "properties": {
         "canonicalizedResource": {
           "type": "string",
-          "description" : "The canonical path to the signed resource."
+          "description": "The canonical path to the signed resource."
         },
         "signedResource": {
           "type": "string",
@@ -1185,6 +1191,10 @@
             "f",
             "s"
           ],
+          "x-ms-enum": {
+            "name": "signedResource",
+            "modelAsString": true
+          },
           "x-ms-client-name": "Resource",
           "description": "The signed services accessible with the service SAS. Possible values include: Blob (b), Container (c), File (f), Share (s)."
         },
@@ -1200,6 +1210,10 @@
             "u",
             "p"
           ],
+          "x-ms-enum": {
+            "name": "Permissions",
+            "modelAsString": true
+          },
           "x-ms-client-name": "Permissions",
           "description": "The signed permissions for the service SAS. Possible values include: Read (r), Write (w), Delete (d), List (l), Add (a), Create (c), Update (u) and Process (p)."
         },

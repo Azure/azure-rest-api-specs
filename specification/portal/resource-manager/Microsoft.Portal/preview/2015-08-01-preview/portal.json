@@ -1,0 +1,686 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2015-08-01-preview",
+    "title": "portal",
+    "description": "Allows creation and deletion of Azure Shared Dashboards.",
+    "x-ms-code-generation-settings": {
+      "name": "PortalClient"
+    }
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/providers/Microsoft.Portal/operations": {
+      "get": {
+        "tags": [
+          "Operations"
+        ],
+        "operationId": "Operations_List",
+        "x-ms-examples": {
+          "List the portal operations": {
+            "$ref": "examples/operationsList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "description": "The Microsoft Portal operations API.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Describe the result of a successful operation.",
+            "schema": {
+              "$ref": "#/definitions/ResourceProviderOperationList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Portal/dashboards/{dashboardName}": {
+      "put": {
+        "tags": [
+          "Dashboard"
+        ],
+        "operationId": "Dashboards_CreateOrUpdate",
+        "x-ms-examples": {
+          "Create or update a Dashboard": {
+            "$ref": "examples/createOrUpdateDashboard.json"
+          }
+        },
+        "description": "Creates or updates a Dashboard.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DashboardNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "dashboard",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Dashboard"
+            },
+            "description": "The parameters required to create or update a dashboard."
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created response definition. Resource has been created",
+            "schema": {
+              "$ref": "#/definitions/Dashboard"
+            }
+          },
+          "200": {
+            "description": "Resource already exists.",
+            "schema": {
+              "$ref": "#/definitions/Dashboard"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ]
+      },
+      "delete": {
+        "tags": [
+          "Dashboard"
+        ],
+        "operationId": "Dashboards_Delete",
+        "x-ms-examples": {
+          "Delete a Dashboard": {
+            "$ref": "examples/deleteDashboard.json"
+          }
+        },
+        "description": "Deletes the Dashboard.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DashboardNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK response definition."
+          },
+          "204": {
+            "description": "OK resource was not found."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ]
+      },
+      "get": {
+        "tags": [
+          "Dashboard"
+        ],
+        "operationId": "Dashboards_Get",
+        "x-ms-examples": {
+          "Get a Dashboard": {
+            "$ref": "examples/getDashboard.json"
+          }
+        },
+        "description": "Gets the Dashboard.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DashboardNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK response definition.",
+            "schema": {
+              "$ref": "#/definitions/Dashboard"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ]
+      },
+      "patch": {
+        "tags": [
+          "Dashboard"
+        ],
+        "operationId": "Dashboards_Update",
+        "x-ms-examples": {
+          "Update a Dashboard": {
+            "$ref": "examples/updateDashboard.json"
+          }
+        },
+        "description": "Updates an existing Dashboard.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DashboardNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "dashboard",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PatchableDashboard"
+            },
+            "description": "The updatable fields of a Dashboard."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK response definition.",
+            "schema": {
+              "$ref": "#/definitions/Dashboard"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Portal/dashboards": {
+      "get": {
+        "tags": [
+          "Dashboard"
+        ],
+        "operationId": "Dashboards_ListByResourceGroup",
+        "x-ms-examples": {
+          "List all custom resource providers on the resourceGroup": {
+            "$ref": "examples/listDashboardsByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "description": "Gets all the Dashboards within a resource group.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Returns an array of Dashboards.",
+            "schema": {
+              "$ref": "#/definitions/DashboardListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Portal/dashboards": {
+      "get": {
+        "tags": [
+          "Dashboard"
+        ],
+        "operationId": "Dashboards_ListBySubscription",
+        "x-ms-examples": {
+          "List all custom resource providers on the subscription": {
+            "$ref": "examples/listDashboardsBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "description": "Gets all the dashboards within a subscription.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Returns an array of dashboards.",
+            "schema": {
+              "$ref": "#/definitions/DashboardListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "DashboardListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Dashboard"
+          },
+          "description": "The array of custom resource provider manifests."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URL to use for getting the next set of results."
+        }
+      },
+      "description": "List of dashboards."
+    },
+    "DashboardParts": {
+      "type": "object",
+      "description": "A dashboard part.",
+      "required": [
+        "position"
+      ],
+      "properties": {
+        "position": {
+          "type": "object",
+          "required": [
+            "x",
+            "y",
+            "rowSpan",
+            "colSpan"
+          ],
+          "description": "The dashboard's part position.",
+          "properties": {
+            "x": {
+              "type": "integer",
+              "description": "The dashboard's part x coordinate."
+            },
+            "y": {
+              "type": "integer",
+              "description": "The dashboard's part y coordinate."
+            },
+            "rowSpan": {
+              "type": "integer",
+              "description": "The dashboard's part row span."
+            },
+            "colSpan": {
+              "type": "integer",
+              "description": "The dashboard's part column span."
+            },
+            "metadata": {
+              "description": "The dashboard part's metadata.",
+              "type": "object",
+              "additionalProperties": {
+                "type": "object"
+              }
+            }
+          }
+        },
+        "metadata": {
+          "description": "The dashboard part's metadata.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "object"
+          }
+        }
+      }
+    },
+    "DashboardLens": {
+      "type": "object",
+      "description": "A dashboard lens.",
+      "required": [
+        "order",
+        "parts"
+      ],
+      "properties": {
+        "order": {
+          "type": "integer",
+          "description": "The lens order."
+        },
+        "parts": {
+          "type": "object",
+          "description": "The dashboard parts.",
+          "additionalProperties": {
+            "$ref": "#/definitions/DashboardParts"
+          }
+        },
+        "metadata": {
+          "description": "The dashboard len's metadata.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "object"
+          }
+        }
+      }
+    },
+    "DashboardProperties": {
+      "type": "object",
+      "description": "The shared dashboard properties.",
+      "properties": {
+        "lenses": {
+          "type": "object",
+          "description": "The dashboard lenses.",
+          "additionalProperties": {
+            "$ref": "#/definitions/DashboardLens"
+          }
+        },
+        "metadata": {
+          "description": "The dashboard metadata.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "object"
+          }
+        }
+      }
+    },
+    "Dashboard": {
+      "type": "object",
+      "description": "The shared dashboard resource definition.",
+      "x-ms-azure-resource": true,
+      "x-ms-client-flatten": true,
+      "required": [
+        "location"
+      ],
+      "properties": {
+        "properties": {
+          "description": "The shared dashboard properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/DashboardProperties"
+        },
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource Id"
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource name"
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource type"
+        },
+        "location": {
+          "type": "string",
+          "description": "Resource location",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags"
+        }
+      }
+    },
+    "PatchableDashboard": {
+      "type": "object",
+      "description": "The shared dashboard resource definition.",
+      "x-ms-azure-resource": true,
+      "x-ms-client-flatten": true,
+      "properties": {
+        "properties": {
+          "description": "The shared dashboard properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/DashboardProperties"
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags"
+        }
+      }
+    },
+    "ResourceProviderOperationList": {
+      "type": "object",
+      "description": "Results of the request to list operations.",
+      "readOnly": true,
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ResourceProviderOperation"
+          },
+          "description": "List of operations supported by this resource provider."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URL to use for getting the next set of results."
+        }
+      }
+    },
+    "ResourceProviderOperation": {
+      "type": "object",
+      "description": "Supported operations of this resource provider.",
+      "readOnly": true,
+      "properties": {
+        "name": {
+          "description": "Operation name, in format of {provider}/{resource}/{operation}",
+          "type": "string"
+        },
+        "isDataAction": {
+          "description": "Indicates whether the operation applies to data-plane.",
+          "type": "string"
+        },
+        "display": {
+          "description": "Display metadata associated with the operation.",
+          "properties": {
+            "provider": {
+              "description": "Resource provider: Microsoft Custom Providers.",
+              "type": "string"
+            },
+            "resource": {
+              "description": "Resource on which the operation is performed.",
+              "type": "string"
+            },
+            "operation": {
+              "description": "Type of operation: get, read, delete, etc.",
+              "type": "string"
+            },
+            "description": {
+              "description": "Description of this operation.",
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "ErrorResponse": {
+      "type": "object",
+      "description": "Error response.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/ErrorDefinition",
+          "description": "The error details."
+        }
+      }
+    },
+    "ErrorDefinition": {
+      "type": "object",
+      "description": "Error definition.",
+      "properties": {
+        "code": {
+          "description": "Service specific error code which serves as the substatus for the HTTP error code.",
+          "type": "string",
+          "readOnly": true
+        },
+        "message": {
+          "description": "Description of the error.",
+          "type": "string",
+          "readOnly": true
+        },
+        "details": {
+          "description": "Internal error details.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ErrorDefinition"
+          },
+          "readOnly": true
+        }
+      }
+    }
+  },
+  "parameters": {
+    "SubscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The Azure subscription ID. This is a GUID-formatted string (e.g. 00000000-0000-0000-0000-000000000000)"
+    },
+    "ResourceGroupNameParameter": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the resource group.",
+      "x-ms-parameter-location": "method"
+    },
+    "DashboardNameParameter": {
+      "name": "dashboardName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the dashboard.",
+      "minLength": 3,
+      "maxLength": 64,
+      "x-ms-parameter-location": "method"
+    },
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "The API version to be used with the HTTP request."
+    }
+  }
+}

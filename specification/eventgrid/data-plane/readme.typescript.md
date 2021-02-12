@@ -7,6 +7,6 @@ Please also specify `--typescript-sdks-folder=<path to root folder of your azure
 typescript:
   azure-arm: true
   package-name: "@azure/eventgrid"
-  output-folder: "$(typescript-sdks-folder)/packages/@azure/eventgrid"
+  output-folder: "$(typescript-sdks-folder)/sdk/eventgrid/eventgrid"
   generate-metadata: true
 ```

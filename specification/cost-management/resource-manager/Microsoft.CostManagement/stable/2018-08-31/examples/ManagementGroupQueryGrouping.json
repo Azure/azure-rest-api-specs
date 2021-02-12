@@ -2,31 +2,31 @@
   "parameters": {
     "api-version": "2018-08-31",
     "managementGroupId": "MyMgId",
-    "parameters":{
-        "type": "Usage",
-        "timeframe": "TheLastMonth",
-        "dataset": {
-          "granularity": "None",
-          "aggregation": {
-            "totalCost": {
-              "name": "PreTaxCost",
-              "function": "Sum"
-            }
-          },
-          "grouping": [
-            {
-              "type": "Dimension",
-              "name": "ResourceGroup"
-            }
-          ],
-          "sorting": [
-            {
-              "name": "ResourceGroup",
-              "direction": "Descending"
-            }
-          ]         
+    "parameters": {
+      "type": "Usage",
+      "timeframe": "TheLastMonth",
+      "dataset": {
+        "granularity": "None",
+        "aggregation": {
+          "totalCost": {
+            "name": "PreTaxCost",
+            "function": "Sum"
+          }
+        },
+        "grouping": [
+          {
+            "type": "Dimension",
+            "name": "ResourceGroup"
+          }
+        ],
+        "sorting": [
+          {
+            "name": "ResourceGroup",
+            "direction": "Descending"
+          }
+        ]
       }
-    }    
+    }
   },
   "responses": {
     "200": {
@@ -56,7 +56,7 @@
                   "type": "String"
                 }
               ],
-              "rows": [                
+              "rows": [
                 [
                   20.359416562625452,
                   "VSTSHOL-1595322048000",

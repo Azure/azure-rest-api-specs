@@ -23,8 +23,10 @@
         ],
         "operationId": "ElasticPoolActivities_ListByElasticPool",
         "description": "Returns elastic pool activities.",
-        "x-ms-examples":{
-          "List Elastic pool activity": { "$ref": "./examples/ElasticPoolActivityList.json" }
+        "x-ms-examples": {
+          "List Elastic pool activity": {
+            "$ref": "./examples/ElasticPoolActivityList.json"
+          }
         },
         "parameters": [
           {
@@ -67,8 +69,10 @@
         ],
         "operationId": "ElasticPoolDatabaseActivities_ListByElasticPool",
         "description": "Returns activity on databases inside of an elastic pool.",
-        "x-ms-examples":{
-          "List elastic pool database activity": { "$ref": "./examples/ElasticPoolDatabaseActivityList.json" }
+        "x-ms-examples": {
+          "List elastic pool database activity": {
+            "$ref": "./examples/ElasticPoolDatabaseActivityList.json"
+          }
         },
         "parameters": [
           {
@@ -112,7 +116,9 @@
         "operationId": "ServiceTierAdvisors_Get",
         "description": "Gets a service tier advisor.",
         "x-ms-examples": {
-          "Get a service tier advisor": { "$ref": "./examples/ServiceTierAdvisorGet.json" }
+          "Get a service tier advisor": {
+            "$ref": "./examples/ServiceTierAdvisorGet.json"
+          }
         },
         "parameters": [
           {
@@ -160,7 +166,9 @@
         "operationId": "ServiceTierAdvisors_ListByDatabase",
         "description": "Returns service tier advisors for specified database.",
         "x-ms-examples": {
-          "Get a list of a service tier advisors": { "$ref": "./examples/ServiceTierAdvisorList.json" }
+          "Get a list of a service tier advisors": {
+            "$ref": "./examples/ServiceTierAdvisorList.json"
+          }
         },
         "parameters": [
           {
@@ -204,7 +212,9 @@
         "operationId": "TransparentDataEncryptions_CreateOrUpdate",
         "description": "Creates or updates a database's transparent data encryption configuration.",
         "x-ms-examples": {
-          "Create or update a database's transparent data encryption configuration": { "$ref": "./examples/DatabaseTransparentDataEncryptionCreateOrUpdate.json" }
+          "Create or update a database's transparent data encryption configuration": {
+            "$ref": "./examples/DatabaseTransparentDataEncryptionCreateOrUpdate.json"
+          }
         },
         "parameters": [
           {
@@ -261,7 +271,9 @@
         "operationId": "TransparentDataEncryptions_Get",
         "description": "Gets a database's transparent data encryption configuration.",
         "x-ms-examples": {
-          "Get a database's transparent data encryption configuration": { "$ref": "./examples/DatabaseTransparentDataEncryptionGet.json" }
+          "Get a database's transparent data encryption configuration": {
+            "$ref": "./examples/DatabaseTransparentDataEncryptionGet.json"
+          }
         },
         "parameters": [
           {
@@ -305,7 +317,9 @@
         "operationId": "TransparentDataEncryptionActivities_ListByConfiguration",
         "description": "Returns a database's transparent data encryption operation result.",
         "x-ms-examples": {
-          "List a database's transparent data encryption activities": { "$ref": "./examples/DatabaseTransparentDataEncryptionActivityList.json" }
+          "List a database's transparent data encryption activities": {
+            "$ref": "./examples/DatabaseTransparentDataEncryptionActivityList.json"
+          }
         },
         "parameters": [
           {
@@ -468,13 +482,13 @@
     },
     "ElasticPoolActivity": {
       "properties": {
-        "location":{
-          "type":"string",
-          "x-ms-mutability":[
+        "location": {
+          "type": "string",
+          "x-ms-mutability": [
             "read",
             "create"
           ],
-          "description":"The geo-location where the resource lives"
+          "description": "The geo-location where the resource lives"
         },
         "properties": {
           "$ref": "#/definitions/ElasticPoolActivityProperties",
@@ -499,7 +513,9 @@
           "description": "The list of elastic pool activities."
         }
       },
-      "required": ["value"],
+      "required": [
+        "value"
+      ],
       "description": "Represents the response to a list elastic pool activity request."
     },
     "ElasticPoolDatabaseActivityProperties": {
@@ -591,13 +607,13 @@
     },
     "ElasticPoolDatabaseActivity": {
       "properties": {
-        "location":{
-          "type":"string",
-          "x-ms-mutability":[
+        "location": {
+          "type": "string",
+          "x-ms-mutability": [
             "read",
             "create"
           ],
-          "description":"The geo-location where the resource lives"
+          "description": "The geo-location where the resource lives"
         },
         "properties": {
           "$ref": "#/definitions/ElasticPoolDatabaseActivityProperties",
@@ -622,7 +638,9 @@
           "description": "The list of elastic pool database activities."
         }
       },
-      "required": ["value"],
+      "required": [
+        "value"
+      ],
       "description": "Represents the response to a list elastic pool database activity request."
     },
     "RecommendedIndexProperties": {
@@ -637,7 +655,7 @@
           ],
           "description": "The proposed index action. You can create a missing index, drop an unused index, or rebuild an existing index to improve its performance.",
           "x-ms-enum": {
-           "name": "RecommendedIndexAction"
+            "name": "RecommendedIndexAction"
           }
         },
         "state": {
@@ -658,7 +676,7 @@
           "type": "string",
           "description": "The current recommendation state.",
           "x-ms-enum": {
-           "name": "RecommendedIndexState"
+            "name": "RecommendedIndexState"
           }
         },
         "created": {
@@ -684,7 +702,7 @@
           "type": "string",
           "description": "The type of index (CLUSTERED, NONCLUSTERED, COLUMNSTORE, CLUSTERED COLUMNSTORE)",
           "x-ms-enum": {
-           "name": "RecommendedIndexType"
+            "name": "RecommendedIndexType"
           }
         },
         "schema": {
@@ -772,9 +790,9 @@
     "TransparentDataEncryption": {
       "properties": {
         "location": {
-          "type":"string",
+          "type": "string",
           "readOnly": true,
-          "description":"Resource location."
+          "description": "Resource location."
         },
         "properties": {
           "x-ms-client-flatten": true,
@@ -993,10 +1011,10 @@
             "DS1500",
             "DS2000",
             "ElasticPool"
-            ],
+          ],
           "x-ms-enum": {
-              "modelAsString": true,
-              "name": "ServiceObjectiveName"
+            "modelAsString": true,
+            "name": "ServiceObjectiveName"
           },
           "readOnly": true
         },
@@ -1054,7 +1072,9 @@
           "description": "The list of service tier advisors for specified database."
         }
       },
-      "required": ["value"],
+      "required": [
+        "value"
+      ],
       "description": "Represents the response to a list service tier advisor request."
     },
     "TransparentDataEncryptionActivityProperties": {
@@ -1083,10 +1103,10 @@
     },
     "TransparentDataEncryptionActivity": {
       "properties": {
-        "location":{
-          "type":"string",
+        "location": {
+          "type": "string",
           "readOnly": true,
-          "description":"Resource location."
+          "description": "Resource location."
         },
         "properties": {
           "x-ms-client-flatten": true,
@@ -1111,7 +1131,9 @@
           "description": "The list of database transparent data encryption activities."
         }
       },
-      "required": ["value"],
+      "required": [
+        "value"
+      ],
       "description": "Represents the response to a list database transparent data encryption activity request."
     }
   },
@@ -1137,9 +1159,11 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "enum": ["current"],
+      "enum": [
+        "current"
+      ],
       "description": "The name of the transparent data encryption configuration.",
-      "x-ms-enum":{
+      "x-ms-enum": {
         "modelAsString": true,
         "name": "TransparentDataEncryptionName"
       },
@@ -1158,4 +1182,3 @@
     }
   }
 }
-

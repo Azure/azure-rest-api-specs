@@ -1,0 +1,87 @@
+{
+  "parameters": {
+    "serverName": "targetserver",
+    "resourceGroupName": "TargetResourceGroup",
+    "api-version": "2017-12-01-preview",
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
+    "parameters": {
+      "location": "westus",
+      "properties": {
+        "createMode": "GeoRestore",
+        "sourceServerId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/SourceResourceGroup/providers/Microsoft.DBforMySQL/servers/sourceserver"
+      },
+      "sku": {
+        "name": "GP_Gen5_2",
+        "tier": "GeneralPurpose",
+        "family": "Gen5",
+        "capacity": 2
+      },
+      "tags": {
+        "ElasticServer": "1"
+      }
+    }
+  },
+  "responses": {
+    "201": {
+      "body": {
+        "sku": {
+          "name": "GP_Gen5_2",
+          "tier": "GeneralPurpose",
+          "family": "Gen5",
+          "capacity": 2
+        },
+        "properties": {
+          "administratorLogin": "cloudsa",
+          "storageProfile": {
+            "storageMB": 128000,
+            "backupRetentionDays": 14,
+            "geoRedundantBackup": "Enabled"
+          },
+          "version": "5.7",
+          "sslEnforcement": "Enabled",
+          "userVisibleState": "Ready",
+          "fullyQualifiedDomainName": "targetserver.mysql.database.azure.com",
+          "earliestRestoreDate": "2018-03-14T18:02:41.577+00:00"
+        },
+        "location": "westus",
+        "tags": {
+          "ElasticServer": "1"
+        },
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBforMySQL/servers/targetserver",
+        "name": "targetserver",
+        "type": "Microsoft.DBforMySQL/servers"
+      }
+    },
+    "200": {
+      "body": {
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBforMySQL/servers/targetserver",
+        "name": "targetserver",
+        "type": "Microsoft.DBforMySQL/servers",
+        "location": "westus",
+        "sku": {
+          "name": "GP_Gen5_2",
+          "tier": "GeneralPurpose",
+          "family": "Gen5",
+          "capacity": 2
+        },
+        "tags": {
+          "elasticServer": "1"
+        },
+        "properties": {
+          "administratorLogin": "cloudsa",
+          "storageProfile": {
+            "storageMB": 128000,
+            "backupRetentionDays": 14,
+            "geoRedundantBackup": "Enabled"
+          },
+          "version": "5.7",
+          "sslEnforcement": "Enabled",
+          "userVisibleState": "Ready",
+          "fullyQualifiedDomainName": "targetserver.mysql.database.azure.com",
+          "earliestRestoreDate": "2018-03-14T18:02:41.577+00:00"
+        }
+      }
+    },
+    "202": {}
+  }
+}

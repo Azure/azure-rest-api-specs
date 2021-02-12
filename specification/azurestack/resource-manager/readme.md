@@ -4,16 +4,16 @@
 
 This is the AutoRest configuration file for Azure Stack.
 
-
 The Azure Stack RP comprises of small services where each service has its own tag.
 Hence, each sub-service has its own swagger spec.
 
 All of them are tied together using this configuration and are packaged together into one Azure Stack client library.
 This makes it easier for customers to download one (NuGet/npm/pip/maven/gem) Azure Stack client library package rather than installing individual packages for each sub service.
 
-
 ---
+
 ## Getting Started
+
 To build the SDK for Azure Stack, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
@@ -21,21 +21,35 @@ To build the SDK for Azure Stack, simply [Install AutoRest](https://aka.ms/autor
 To see additional help and options, run:
 
 > `autorest --help`
+
 ---
 
 ## Configuration
 
-
 ### Basic Information
+
 These are the global settings for the Azure Stack API.
 
 ``` yaml
 title: AzureStackManagementClient
 description: Azure Stack
 openapi-type: arm
-tag: package-2017-06-01
+tag: package-preview-2020-06
 ```
 
+
+### Tag: package-preview-2020-06
+
+These settings apply only when `--tag=package-preview-2020-06` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2020-06'
+input-file:
+  - Microsoft.AzureStack/preview/2020-06-01-preview/AzureStack.json
+  - Microsoft.AzureStack/preview/2020-06-01-preview/CustomerSubscription.json
+  - Microsoft.AzureStack/preview/2020-06-01-preview/Product.json
+  - Microsoft.AzureStack/preview/2020-06-01-preview/Registration.json
+  - Microsoft.AzureStack/preview/2020-06-01-preview/LinkedSubscription.json
+```
 ### Tag: package-2017-06-01
 
 These settings apply only when `--tag=package-2017-06-01` is specified on the command line.
@@ -51,6 +65,7 @@ input-file:
 ---
 
 ### Validations
+
 Run validations when `--validate` is specified on command line
 
 ``` yaml $(validate)
@@ -61,6 +76,7 @@ message-format: json
 ```
 
 ---
+
 # Code Generation
 
 ## Swagger to SDK
@@ -75,6 +91,9 @@ swagger-to-sdk:
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
+  - repo: azure-resource-manager-schemas
+    after_scripts:
+      - node sdkauto_afterscript.js azurestack/resource-manager
 ```
 
 ## C#
@@ -89,7 +108,7 @@ csharp:
   license-header: MICROSOFT_MIT_NO_VERSION
   namespace: Microsoft.Azure.Management.AzureStack
   payload-flattening-threshold: 1
-  output-folder: $(csharp-sdks-folder)/AzureStack/Management.AzureStack/Generated
+  output-folder: $(csharp-sdks-folder)/azurestack/Microsoft.Azure.Management.AzureStack/src/Generated
   clear-output-folder: true
 ```
 
@@ -126,9 +145,15 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 ``` yaml $(tag) == 'package-2017-06-01' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.azurestack.v2017_06_01
-  output-folder: $(azure-libraries-for-java-folder)/azurestack/resource-manager/v2017_06_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/azurestack/mgmt-v2017_06_01
 regenerate-manager: true
 generate-interface: true
 ```
 
+## Python
 
+See configuration in [readme.python.md](./readme.python.md)
+
+## AzureResourceSchema
+
+See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)

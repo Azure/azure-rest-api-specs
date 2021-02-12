@@ -334,6 +334,61 @@
       },
       "type": "object"
     },
+    "ListEdgePoliciesInput": {
+      "properties": {
+        "deviceId": {
+          "type": "string",
+          "description": "Unique identifier of the edge device."
+        }
+      },
+      "type": "object"
+    },
+    "EdgeUsageDataEventHub": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the Event Hub where usage will be reported."
+        },
+        "namespace": {
+          "type": "string",
+          "description": "Namespace of the Event Hub where usage will be reported."
+        },
+        "token": {
+          "type": "string",
+          "description": "SAS token needed to interact with Event Hub."
+        }
+      },
+      "type": "object"
+    },
+    "EdgeUsageDataCollectionPolicy": {
+      "properties": {
+        "dataCollectionFrequency": {
+          "type": "string",
+          "description": "Usage data collection frequency in ISO 8601 duration format e.g. PT10M , PT5H."
+        },
+        "dataReportingFrequency": {
+          "type": "string",
+          "description": "Usage data reporting frequency in ISO 8601 duration format e.g. PT10M , PT5H."
+        },
+        "maxAllowedUnreportedUsageDuration": {
+          "type": "string",
+          "description": "Maximum time for which the functionality of the device will not be hampered for not reporting the usage data."
+        },
+        "eventHubDetails": {
+          "$ref": "#/definitions/EdgeUsageDataEventHub",
+          "description": "Details of Event Hub where the usage will be reported."
+        }
+      },
+      "type": "object"
+    },
+    "EdgePolicies": {
+      "properties": {
+        "usageDataCollectionPolicy": {
+          "$ref": "#/definitions/EdgeUsageDataCollectionPolicy"
+        }
+      },
+      "type": "object"
+    },
     "SubscriptionMediaService": {
       "description": "A Media Services account.",
       "allOf": [
@@ -763,6 +818,59 @@
         "x-ms-examples": {
           "Synchronizes Storage Account Keys": {
             "$ref": "examples/accounts-sync-storage-keys.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Media/mediaservices/{accountName}/listEdgePolicies": {
+      "post": {
+        "summary": "List the media edge policies associated with the Media Services account.",
+        "description": "List the media edge policies associated with the Media Services account.",
+        "operationId": "Mediaservices_ListEdgePolicies",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/EdgePolicies"
+            }
+          },
+          "default": {
+            "description": "Detailed error information.",
+            "schema": {
+              "$ref": "#/definitions/ApiError"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The Media Services account name."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ListEdgePoliciesInput"
+            },
+            "description": "The request parameters"
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
+          }
+        ],
+        "x-ms-examples": {
+          "List the media edge policies.": {
+            "$ref": "examples/accounts-list-media-edge-policies.json"
           }
         }
       }

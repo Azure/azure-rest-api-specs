@@ -50,6 +50,7 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
+  - repo: azure-sdk-for-net
   - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
@@ -58,6 +59,9 @@ swagger-to-sdk:
   - repo: azure-sdk-for-ruby
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_labservices']
+  - repo: azure-resource-manager-schemas
+    after_scripts:
+      - node sdkauto_afterscript.js labservices/resource-manager
 ```
 
 
@@ -71,7 +75,7 @@ csharp:
   azure-arm: true
   license-header: MICROSOFT_MIT_NO_VERSION
   namespace: Microsoft.Azure.Management.LabServices
-  output-folder: $(csharp-sdks-folder)/LabServices/Management.LabServices/Generated
+  output-folder: $(csharp-sdks-folder)/labservices/Microsoft.Azure.Management.LabServices/src/Generated
   clear-output-folder: true
 ```
 
@@ -81,7 +85,7 @@ These settings apply only when `--python` is specified on the command line.
 Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
 Use `--python-mode=update` if you already have a setup.py and just want to update the code itself.
 
-``` yaml $(python)
+``` yaml $(python) && !$(track2)
 python-mode: create
 python:
   azure-arm: true
@@ -91,15 +95,31 @@ python:
   package-name: azure-mgmt-labservices
   clear-output-folder: true
 ```
-``` yaml $(python) && $(python-mode) == 'update'
+``` yaml $(python) && $(track2)
+python-mode: create
+azure-arm: true
+license-header: MICROSOFT_MIT_NO_VERSION
+namespace: azure.mgmt.labservices
+package-name: azure-mgmt-labservices
+clear-output-folder: true
+```
+``` yaml $(python) && $(python-mode) == 'update' && !$(track2)
 python:
   no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-labservices/azure/mgmt/labservices
+  output-folder: $(python-sdks-folder)/labservices/azure-mgmt-labservices/azure/mgmt/labservices
 ```
-``` yaml $(python) && $(python-mode) == 'create'
+``` yaml $(python) && $(python-mode) == 'create' && !$(track2)
 python:
   basic-setup-py: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-labservices
+  output-folder: $(python-sdks-folder)/labservices/azure-mgmt-labservices
+```
+``` yaml $(python) && $(python-mode) == 'update' && $(track2)
+no-namespace-folders: true
+output-folder: $(python-sdks-folder)/labservices/azure-mgmt-labservices/azure/mgmt/labservices
+```
+``` yaml $(python) && $(python-mode) == 'create' && $(track2)
+basic-setup-py: true
+output-folder: $(python-sdks-folder)/labservices/azure-mgmt-labservices
 ```
 
 ## Go
@@ -135,10 +155,15 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 ``` yaml $(tag) == 'package-2018-10' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.labservices.v2018_10_15
-  output-folder: $(azure-libraries-for-java-folder)/labservices/resource-manager/v2018_10_15
+  output-folder: $(azure-libraries-for-java-folder)/sdk/labservices/mgmt-v2018_10_15
 regenerate-manager: true
 generate-interface: true
 ```
 
 
+
+
+## AzureResourceSchema
+
+See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
 

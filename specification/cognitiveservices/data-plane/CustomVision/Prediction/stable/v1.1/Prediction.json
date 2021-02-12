@@ -1,386 +1,386 @@
 {
-    "swagger": "2.0",
-    "info": {
-        "version": "1.1",
-        "title": "PredictionEndpoint"
-    },
-    "host": "southcentralus.api.cognitive.microsoft.com",
-    "basePath": "/customvision/v1.1/Prediction",
-    "schemes": [
-        "https"
-    ],
-    "paths": {
-        "/{projectId}/url": {
-            "post": {
-                "tags": [
-                    "ImagePredictionApi"
-                ],
-                "summary": "Predict an image url and saves the result",
-                "operationId": "PredictImageUrl",
-                "consumes": [
-                    "application/json",
-                    "text/json",
-                    "application/xml",
-                    "text/xml",
-                    "application/x-www-form-urlencoded"
-                ],
-                "produces": [
-                    "application/json",
-                    "text/json",
-                    "application/xml",
-                    "text/xml"
-                ],
-                "parameters": [
-                    {
-                        "name": "projectId",
-                        "in": "path",
-                        "description": "The project id",
-                        "required": true,
-                        "type": "string",
-                        "format": "uuid",
-                        "x-nullable": false
-                    },
-                    {
-                        "name": "imageUrl",
-                        "in": "body",
-                        "description": "An {Iris.Web.Api.Models.ImageUrl} that contains the url of the image to be evaluated",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/ImageUrl"
-                        }
-                    },
-                    {
-                        "name": "iterationId",
-                        "in": "query",
-                        "description": "Optional. Specifies the id of a particular iteration to evaluate against.\r\n            The default iteration for the project will be used when not specified",
-                        "required": false,
-                        "type": "string",
-                        "format": "uuid",
-                        "x-nullable": true
-                    },
-                    {
-                        "name": "application",
-                        "in": "query",
-                        "description": "Optional. Specifies the name of application using the endpoint",
-                        "required": false,
-                        "type": "string",
-                        "x-nullable": true
-                    },
-                    {
-                        "$ref": "#/parameters/ApiKey"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "#/definitions/ImagePredictionResultModel"
-                        }
-                    }
-                },
-                "x-ms-examples": {
-                    "Successful Prediction with Url request": {
-                        "$ref": "./examples/SuccessfulPredictionWithUrl.json"
-                    }
-                }
-            }
-        },
-        "/{projectId}/image": {
-            "post": {
-                "tags": [
-                    "ImagePredictionApi"
-                ],
-                "summary": "Predict an image and saves the result",
-                "operationId": "PredictImage",
-                "consumes": [
-                    "multipart/form-data",
-                    "application/octet-stream"
-                ],
-                "produces": [
-                    "application/json",
-                    "text/json",
-                    "application/xml",
-                    "text/xml"
-                ],
-                "parameters": [
-                    {
-                        "name": "projectId",
-                        "in": "path",
-                        "description": "The project id",
-                        "required": true,
-                        "type": "string",
-                        "format": "uuid",
-                        "x-nullable": false
-                    },
-                    {
-                        "name": "iterationId",
-                        "in": "query",
-                        "description": "Optional. Specifies the id of a particular iteration to evaluate against.\r\n            The default iteration for the project will be used when not specified",
-                        "required": false,
-                        "type": "string",
-                        "format": "uuid",
-                        "x-nullable": true
-                    },
-                    {
-                        "name": "application",
-                        "in": "query",
-                        "description": "Optional. Specifies the name of application using the endpoint",
-                        "required": false,
-                        "type": "string",
-                        "x-nullable": true
-                    },
-                    {
-                        "name": "imageData",
-                        "in": "formData",
-                        "required": true,
-                        "type": "file"
-                    },
-                    {
-                        "$ref": "#/parameters/ApiKey"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "#/definitions/ImagePredictionResultModel"
-                        }
-                    }
-                },
-                "x-ms-examples": {
-                    "Successful Prediction with Image request": {
-                        "$ref": "./examples/SuccessfulPredictionWithImage.json"
-                    }
-                }
-            }
-        },
-        "/{projectId}/url/nostore": {
-            "post": {
-                "tags": [
-                    "ImagePredictionApi"
-                ],
-                "summary": "Predict an image url without saving the result",
-                "operationId": "PredictImageUrlWithNoStore",
-                "consumes": [
-                    "application/json",
-                    "text/json",
-                    "application/xml",
-                    "text/xml",
-                    "application/x-www-form-urlencoded"
-                ],
-                "produces": [
-                    "application/json",
-                    "text/json",
-                    "application/xml",
-                    "text/xml"
-                ],
-                "parameters": [
-                    {
-                        "name": "projectId",
-                        "in": "path",
-                        "description": "The project id",
-                        "required": true,
-                        "type": "string",
-                        "format": "uuid",
-                        "x-nullable": false
-                    },
-                    {
-                        "name": "imageUrl",
-                        "in": "body",
-                        "description": "An {Iris.Web.Api.Models.ImageUrl} that contains the url of the image to be evaluated",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/ImageUrl"
-                        }
-                    },
-                    {
-                        "name": "iterationId",
-                        "in": "query",
-                        "description": "Optional. Specifies the id of a particular iteration to evaluate against.\r\n            The default iteration for the project will be used when not specified",
-                        "required": false,
-                        "type": "string",
-                        "format": "uuid",
-                        "x-nullable": true
-                    },
-                    {
-                        "name": "application",
-                        "in": "query",
-                        "description": "Optional. Specifies the name of application using the endpoint",
-                        "required": false,
-                        "type": "string",
-                        "x-nullable": true
-                    },
-                    {
-                        "$ref": "#/parameters/ApiKey"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "#/definitions/ImagePredictionResultModel"
-                        }
-                    }
-                },
-                "x-ms-examples": {
-                    "Successful Prediction with Url request": {
-                        "$ref": "./examples/SuccessfulPredictionWithUrl.json"
-                    }
-                }
-            }
-        },
-        "/{projectId}/image/nostore": {
-            "post": {
-                "tags": [
-                    "ImagePredictionApi"
-                ],
-                "summary": "Predict an image without saving the result",
-                "operationId": "PredictImageWithNoStore",
-                "consumes": [
-                    "multipart/form-data",
-                    "application/octet-stream"
-                ],
-                "produces": [
-                    "application/json",
-                    "text/json",
-                    "application/xml",
-                    "text/xml"
-                ],
-                "parameters": [
-                    {
-                        "name": "projectId",
-                        "in": "path",
-                        "description": "The project id",
-                        "required": true,
-                        "type": "string",
-                        "format": "uuid",
-                        "x-nullable": false
-                    },
-                    {
-                        "name": "iterationId",
-                        "in": "query",
-                        "description": "Optional. Specifies the id of a particular iteration to evaluate against.\r\n            The default iteration for the project will be used when not specified",
-                        "required": false,
-                        "type": "string",
-                        "format": "uuid",
-                        "x-nullable": true
-                    },
-                    {
-                        "name": "application",
-                        "in": "query",
-                        "description": "Optional. Specifies the name of application using the endpoint",
-                        "required": false,
-                        "type": "string",
-                        "x-nullable": true
-                    },
-                    {
-                        "name": "imageData",
-                        "in": "formData",
-                        "required": true,
-                        "type": "file"
-                    },
-                    {
-                        "$ref": "#/parameters/ApiKey"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "#/definitions/ImagePredictionResultModel"
-                        }
-                    }
-                },
-                "x-ms-examples": {
-                    "Successful Prediction with Image request": {
-                        "$ref": "./examples/SuccessfulPredictionWithImage.json"
-                    }
-                }
-            }
-        }
-    },
-    "definitions": {
-        "ImageUrl": {
-            "type": "object",
-            "properties": {
-                "Url": {
-                    "type": "string",
-                    "x-nullable": true
-                }
-            },
-            "x-nullable": true
-        },
-        "ImagePredictionResultModel": {
-            "description": "result of an image prediction request",
-            "type": "object",
-            "properties": {
-                "Id": {
-                    "format": "uuid",
-                    "type": "string",
-                    "readOnly": true,
-                    "x-nullable": false
-                },
-                "Project": {
-                    "format": "uuid",
-                    "type": "string",
-                    "readOnly": true,
-                    "x-nullable": false
-                },
-                "Iteration": {
-                    "format": "uuid",
-                    "type": "string",
-                    "readOnly": true,
-                    "x-nullable": false
-                },
-                "Created": {
-                    "format": "date-time",
-                    "type": "string",
-                    "readOnly": true,
-                    "x-nullable": false
-                },
-                "Predictions": {
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/ImageTagPredictionModel"
-                    },
-                    "readOnly": true,
-                    "x-nullable": true
-                }
-            },
-            "x-nullable": true
-        },
-        "ImageTagPredictionModel": {
-            "type": "object",
-            "properties": {
-                "TagId": {
-                    "format": "uuid",
-                    "type": "string",
-                    "readOnly": true,
-                    "x-nullable": false
-                },
-                "Tag": {
-                    "type": "string",
-                    "readOnly": true,
-                    "x-nullable": true
-                },
-                "Probability": {
-                    "format": "float",
-                    "type": "number",
-                    "readOnly": true,
-                    "x-nullable": false
-                }
-            },
-            "x-nullable": true
-        }
-    },
-    "parameters": {
-        "ApiKey": {
-            "name": "Prediction-Key",
-            "in": "header",
+  "swagger": "2.0",
+  "info": {
+    "version": "1.1",
+    "title": "PredictionEndpoint"
+  },
+  "host": "southcentralus.api.cognitive.microsoft.com",
+  "basePath": "/customvision/v1.1/Prediction",
+  "schemes": [
+    "https"
+  ],
+  "paths": {
+    "/{projectId}/url": {
+      "post": {
+        "tags": [
+          "ImagePredictionApi"
+        ],
+        "summary": "Predict an image url and saves the result",
+        "operationId": "PredictImageUrl",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml",
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "projectId",
+            "in": "path",
+            "description": "The project id",
             "required": true,
             "type": "string",
-            "x-ms-client-name": "ApiKey",
-            "x-ms-parameter-location": "client"
+            "format": "uuid",
+            "x-nullable": false
+          },
+          {
+            "name": "imageUrl",
+            "in": "body",
+            "description": "An {Iris.Web.Api.Models.ImageUrl} that contains the url of the image to be evaluated",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ImageUrl"
+            }
+          },
+          {
+            "name": "iterationId",
+            "in": "query",
+            "description": "Optional. Specifies the id of a particular iteration to evaluate against.\r\n            The default iteration for the project will be used when not specified",
+            "required": false,
+            "type": "string",
+            "format": "uuid",
+            "x-nullable": true
+          },
+          {
+            "name": "application",
+            "in": "query",
+            "description": "Optional. Specifies the name of application using the endpoint",
+            "required": false,
+            "type": "string",
+            "x-nullable": true
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ImagePredictionResultModel"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful Prediction with Url request": {
+            "$ref": "./examples/SuccessfulPredictionWithUrl.json"
+          }
         }
+      }
+    },
+    "/{projectId}/image": {
+      "post": {
+        "tags": [
+          "ImagePredictionApi"
+        ],
+        "summary": "Predict an image and saves the result",
+        "operationId": "PredictImage",
+        "consumes": [
+          "multipart/form-data",
+          "application/octet-stream"
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "projectId",
+            "in": "path",
+            "description": "The project id",
+            "required": true,
+            "type": "string",
+            "format": "uuid",
+            "x-nullable": false
+          },
+          {
+            "name": "iterationId",
+            "in": "query",
+            "description": "Optional. Specifies the id of a particular iteration to evaluate against.\r\n            The default iteration for the project will be used when not specified",
+            "required": false,
+            "type": "string",
+            "format": "uuid",
+            "x-nullable": true
+          },
+          {
+            "name": "application",
+            "in": "query",
+            "description": "Optional. Specifies the name of application using the endpoint",
+            "required": false,
+            "type": "string",
+            "x-nullable": true
+          },
+          {
+            "name": "imageData",
+            "in": "formData",
+            "required": true,
+            "type": "file"
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ImagePredictionResultModel"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful Prediction with Image request": {
+            "$ref": "./examples/SuccessfulPredictionWithImage.json"
+          }
+        }
+      }
+    },
+    "/{projectId}/url/nostore": {
+      "post": {
+        "tags": [
+          "ImagePredictionApi"
+        ],
+        "summary": "Predict an image url without saving the result",
+        "operationId": "PredictImageUrlWithNoStore",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml",
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "projectId",
+            "in": "path",
+            "description": "The project id",
+            "required": true,
+            "type": "string",
+            "format": "uuid",
+            "x-nullable": false
+          },
+          {
+            "name": "imageUrl",
+            "in": "body",
+            "description": "An {Iris.Web.Api.Models.ImageUrl} that contains the url of the image to be evaluated",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ImageUrl"
+            }
+          },
+          {
+            "name": "iterationId",
+            "in": "query",
+            "description": "Optional. Specifies the id of a particular iteration to evaluate against.\r\n            The default iteration for the project will be used when not specified",
+            "required": false,
+            "type": "string",
+            "format": "uuid",
+            "x-nullable": true
+          },
+          {
+            "name": "application",
+            "in": "query",
+            "description": "Optional. Specifies the name of application using the endpoint",
+            "required": false,
+            "type": "string",
+            "x-nullable": true
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ImagePredictionResultModel"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful Prediction with Url request": {
+            "$ref": "./examples/SuccessfulPredictionWithUrl.json"
+          }
+        }
+      }
+    },
+    "/{projectId}/image/nostore": {
+      "post": {
+        "tags": [
+          "ImagePredictionApi"
+        ],
+        "summary": "Predict an image without saving the result",
+        "operationId": "PredictImageWithNoStore",
+        "consumes": [
+          "multipart/form-data",
+          "application/octet-stream"
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "projectId",
+            "in": "path",
+            "description": "The project id",
+            "required": true,
+            "type": "string",
+            "format": "uuid",
+            "x-nullable": false
+          },
+          {
+            "name": "iterationId",
+            "in": "query",
+            "description": "Optional. Specifies the id of a particular iteration to evaluate against.\r\n            The default iteration for the project will be used when not specified",
+            "required": false,
+            "type": "string",
+            "format": "uuid",
+            "x-nullable": true
+          },
+          {
+            "name": "application",
+            "in": "query",
+            "description": "Optional. Specifies the name of application using the endpoint",
+            "required": false,
+            "type": "string",
+            "x-nullable": true
+          },
+          {
+            "name": "imageData",
+            "in": "formData",
+            "required": true,
+            "type": "file"
+          },
+          {
+            "$ref": "#/parameters/ApiKey"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ImagePredictionResultModel"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful Prediction with Image request": {
+            "$ref": "./examples/SuccessfulPredictionWithImage.json"
+          }
+        }
+      }
     }
+  },
+  "definitions": {
+    "ImageUrl": {
+      "type": "object",
+      "properties": {
+        "Url": {
+          "type": "string",
+          "x-nullable": true
+        }
+      },
+      "x-nullable": true
+    },
+    "ImagePredictionResultModel": {
+      "description": "result of an image prediction request",
+      "type": "object",
+      "properties": {
+        "Id": {
+          "format": "uuid",
+          "type": "string",
+          "readOnly": true,
+          "x-nullable": false
+        },
+        "Project": {
+          "format": "uuid",
+          "type": "string",
+          "readOnly": true,
+          "x-nullable": false
+        },
+        "Iteration": {
+          "format": "uuid",
+          "type": "string",
+          "readOnly": true,
+          "x-nullable": false
+        },
+        "Created": {
+          "format": "date-time",
+          "type": "string",
+          "readOnly": true,
+          "x-nullable": false
+        },
+        "Predictions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ImageTagPredictionModel"
+          },
+          "readOnly": true,
+          "x-nullable": true
+        }
+      },
+      "x-nullable": true
+    },
+    "ImageTagPredictionModel": {
+      "type": "object",
+      "properties": {
+        "TagId": {
+          "format": "uuid",
+          "type": "string",
+          "readOnly": true,
+          "x-nullable": false
+        },
+        "Tag": {
+          "type": "string",
+          "readOnly": true,
+          "x-nullable": true
+        },
+        "Probability": {
+          "format": "float",
+          "type": "number",
+          "readOnly": true,
+          "x-nullable": false
+        }
+      },
+      "x-nullable": true
+    }
+  },
+  "parameters": {
+    "ApiKey": {
+      "name": "Prediction-Key",
+      "in": "header",
+      "required": true,
+      "type": "string",
+      "x-ms-client-name": "ApiKey",
+      "x-ms-parameter-location": "client"
+    }
+  }
 }

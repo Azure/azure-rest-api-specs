@@ -26,7 +26,61 @@ These are the global settings for the Batch API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2018-12
+tag: package-2021-01
+```
+
+### Tag: package-2021-01
+
+These settings apply only when `--tag=package-2021-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2021-01'
+input-file:
+  - Microsoft.Batch/stable/2021-01-01/BatchManagement.json
+```
+
+### Tag: package-2020-09
+
+These settings apply only when `--tag=package-2020-09` is specified on the command line.
+
+```yaml $(tag) == 'package-2020-09'
+input-file:
+  - Microsoft.Batch/stable/2020-09-01/BatchManagement.json
+```
+
+### Tag: package-2020-05
+
+These settings apply only when `--tag=package-2020-05` is specified on the command line.
+
+```yaml $(tag) == 'package-2020-05'
+input-file:
+  - Microsoft.Batch/stable/2020-05-01/BatchManagement.json
+```
+
+### Tag: package-2020-03
+
+These settings apply only when `--tag=package-2020-03` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-03'
+input-file:
+  - Microsoft.Batch/stable/2020-03-01/BatchManagement.json
+```
+
+### Tag: package-2019-08
+
+These settings apply only when `--tag=package-2019-08` is specified on the command line.
+
+``` yaml $(tag) == 'package-2019-08'
+input-file:
+  - Microsoft.Batch/stable/2019-08-01/BatchManagement.json
+```
+
+### Tag: package-2019-04
+
+These settings apply only when `--tag=package-2019-04` is specified on the command line.
+
+``` yaml $(tag) == 'package-2019-04'
+input-file:
+  - Microsoft.Batch/stable/2019-04-01/BatchManagement.json
 ```
 
 ### Tag: package-2018-12
@@ -122,7 +176,9 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
+  - repo: azure-sdk-for-net
   - repo: azure-sdk-for-python
+  - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-node
@@ -130,6 +186,9 @@ swagger-to-sdk:
   - repo: azure-sdk-for-ruby
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_batch']
+  - repo: azure-resource-manager-schemas
+    after_scripts:
+      - node sdkauto_afterscript.js batch/resource-manager
 ```
 
 ## C#
@@ -144,42 +203,13 @@ csharp:
   license-header: MICROSOFT_MIT_NO_VERSION
   namespace: Microsoft.Azure.Management.Batch
   payload-flattening-threshold: 1
-  output-folder: $(csharp-sdks-folder)/Batch/Management/Management.Batch/Generated
+  output-folder: $(csharp-sdks-folder)/batch/Microsoft.Azure.Management.Batch/src/Generated
   clear-output-folder: true
 ```
 
 ## Go
 
 See configuration in [readme.go.md](./readme.go.md)
-
-## Python
-
-These settings apply only when `--python` is specified on the command line.
-Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
-Use `--python-mode=update` if you already have a setup.py and just want to update the code itself.
-
-``` yaml $(python)
-python-mode: create
-python:
-  azure-arm: true
-  license-header: MICROSOFT_MIT_NO_VERSION
-  payload-flattening-threshold: 2
-  namespace: azure.mgmt.batch
-  package-name: azure-mgmt-batch
-  clear-output-folder: true
-```
-
-``` yaml $(python) && $(python-mode) == 'update'
-python:
-  no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-batch/azure/mgmt/batch
-```
-
-``` yaml $(python) && $(python-mode) == 'create'
-python:
-  basic-setup-py: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-batch
-```
 
 ## Java
 
@@ -213,7 +243,7 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 ``` yaml $(tag) == 'package-2015-12' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.batch.v2015_12_01
-  output-folder: $(azure-libraries-for-java-folder)/batch/resource-manager/v2015_12_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/batch/mgmt-v2015_12_01
 regenerate-manager: true
 generate-interface: true
 ```
@@ -226,7 +256,7 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 ``` yaml $(tag) == 'package-2017-09' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.batch.v2017_09_01
-  output-folder: $(azure-libraries-for-java-folder)/batch/resource-manager/v2017_09_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/batch/mgmt-v2017_09_01
 regenerate-manager: true
 generate-interface: true
 ```
@@ -239,7 +269,7 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 ``` yaml $(tag) == 'package-2017-01' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.batch.v2017_01_01
-  output-folder: $(azure-libraries-for-java-folder)/batch/resource-manager/v2017_01_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/batch/mgmt-v2017_01_01
 regenerate-manager: true
 generate-interface: true
 ```
@@ -252,9 +282,14 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 ``` yaml $(tag) == 'package-2017-05' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.batch.v2017_05_01
-  output-folder: $(azure-libraries-for-java-folder)/batch/resource-manager/v2017_05_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/batch/mgmt-v2017_05_01
 regenerate-manager: true
 generate-interface: true
 ```
 
 `
+
+## AzureResourceSchema
+
+See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
+

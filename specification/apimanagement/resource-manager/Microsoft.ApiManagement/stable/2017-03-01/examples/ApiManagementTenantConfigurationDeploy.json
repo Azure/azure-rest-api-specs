@@ -1,31 +1,31 @@
 {
+  "parameters": {
+    "serviceName": "apimService1",
+    "resourceGroupName": "rg1",
+    "api-version": "2017-03-01",
+    "subscriptionId": "subid",
+    "configurationName": "configuration",
     "parameters": {
-        "serviceName": "apimService1",
-        "resourceGroupName": "rg1",
-        "api-version": "2017-03-01",
-        "subscriptionId": "subid",
-        "configurationName": "configuration",
-        "parameters": {
-            "branch": "master"
-        }
-    },
-    "responses": {
-        "202": {
-            "headers": {
-                "location": "https://management.azure.com/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/tenant/operationResults/5a1af4ae2a6d2e0b688d7517?api-version=2017-03-01"
-            }
-        },
-        "200": {
-            "body": {
-                "id": "5a1af4ae2a6d2e0b688d7517",
-                "status": "Failed",
-                "started": "2017-11-26T17:06:54.303Z",
-                "updated": "2017-11-26T17:07:21.777Z",
-                "error": {
-                    "code": "ValidationError",
-                    "message": "File not found: 'api-management/configuration.json'"
-                }
-            }
-        }
+      "branch": "master"
     }
+  },
+  "responses": {
+    "202": {
+      "headers": {
+        "location": "https://management.azure.com/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/tenant/operationResults/5a1af4ae2a6d2e0b688d7517?api-version=2017-03-01"
+      }
+    },
+    "200": {
+      "body": {
+        "id": "5a1af4ae2a6d2e0b688d7517",
+        "status": "Failed",
+        "started": "2017-11-26T17:06:54.303Z",
+        "updated": "2017-11-26T17:07:21.777Z",
+        "error": {
+          "code": "ValidationError",
+          "message": "File not found: 'api-management/configuration.json'"
+        }
+      }
+    }
+  }
 }

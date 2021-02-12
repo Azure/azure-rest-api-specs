@@ -26,7 +26,26 @@ These are the global settings for the Billing API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2018-11-preview
+tag: package-2020-05
+```
+
+### Tag: package-2020-05
+
+These settings apply only when `--tag=package-2020-05` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-05'
+input-file:
+- Microsoft.Billing/stable/2020-05-01/billing.json
+- Microsoft.Billing/preview/2018-03-01-preview/billingV2.json
+```
+
+### Tag: package-2019-10-preview
+
+These settings apply only when `--tag=package-2019-10-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2019-10-preview'
+input-file:
+- Microsoft.Billing/preview/2019-10-01-preview/billing.json
 ```
 
 ### Tag: package-2018-11-preview
@@ -76,14 +95,19 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
+  - repo: azure-sdk-for-net
   - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
   - repo: azure-sdk-for-ruby
+  - repo: azure-cli-extensions
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_billing']
+  - repo: azure-resource-manager-schemas
+    after_scripts:
+      - node sdkauto_afterscript.js billing/resource-manager
 ```
 
 
@@ -97,41 +121,13 @@ csharp:
   azure-arm: true
   license-header: MICROSOFT_MIT_NO_VERSION
   namespace: Microsoft.Azure.Management.Billing
-  output-folder: $(csharp-sdks-folder)/Billing/Management.Billing/Generated
+  output-folder: $(csharp-sdks-folder)/billing/Microsoft.Azure.Management.Billing/src/Generated
   clear-output-folder: true
 ```
 
 ## Go
 
 See configuration in [readme.go.md](./readme.go.md)
-
-## Python
-
-These settings apply only when `--python` is specified on the command line.
-Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
-Use `--python-mode=update` if you already have a setup.py and just want to update the code itself.
-
-``` yaml $(python)
-python-mode: create
-python:
-  azure-arm: true
-  license-header: MICROSOFT_MIT_NO_VERSION
-  payload-flattening-threshold: 2
-  namespace: azure.mgmt.billing
-  package-name: azure-mgmt-billing
-  package-version: 0.2.0
-  clear-output-folder: true
-```
-``` yaml $(python) && $(python-mode) == 'update'
-python:
-  no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-billing/azure/mgmt/billing
-```
-``` yaml $(python) && $(python-mode) == 'create'
-python:
-  basic-setup-py: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-billing
-```
 
 ## Java
 
@@ -151,10 +147,38 @@ output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-billing
 
 ``` yaml $(java) && $(multiapi)
 batch:
+  - tag: package-2020-05
+  - tag: package-2019-10-preview
   - tag: package-2018-11-preview
   - tag: package-2018-03-preview
   - tag: package-2017-04-preview
   - tag: package-2017-02-preview
+```
+
+### Tag: package-2020-05 and java
+
+These settings apply only when `--tag=package-2020-05 --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2020-05' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.billing.v2020_05_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/billing/mgmt-v2020_05_01
+regenerate-manager: true
+generate-interface: true
+```
+
+### Tag: package-2019-10-preview and java
+
+These settings apply only when `--tag=package-2019-10-preview --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2019-10-preview' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.billing.v2019_10_01_preview
+  output-folder: $(azure-libraries-for-java-folder)/sdk/billing/mgmt-v2019_10_01_preview
+regenerate-manager: true
+generate-interface: true
 ```
 
 ### Tag: package-2018-11-preview and java
@@ -165,7 +189,7 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 ``` yaml $(tag) == 'package-2018-11-preview' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.billing.v2018_11_01_preview
-  output-folder: $(azure-libraries-for-java-folder)/billing/resource-manager/v2018_11_01_preview
+  output-folder: $(azure-libraries-for-java-folder)/sdk/billing/mgmt-v2018_11_01_preview
 regenerate-manager: true
 generate-interface: true
 ```
@@ -178,7 +202,7 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 ``` yaml $(tag) == 'package-2018-03-preview' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.billing.v2018_03_01_preview
-  output-folder: $(azure-libraries-for-java-folder)/billing/resource-manager/v2018_03_01_preview
+  output-folder: $(azure-libraries-for-java-folder)/sdk/billing/mgmt-v2018_03_01_preview
 regenerate-manager: true
 generate-interface: true
 ```
@@ -191,7 +215,7 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 ``` yaml $(tag) == 'package-2017-04-preview' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.billing.v2017_04_24_preview
-  output-folder: $(azure-libraries-for-java-folder)/billing/resource-manager/v2017_04_24_preview
+  output-folder: $(azure-libraries-for-java-folder)/sdk/billing/mgmt-v2017_04_24_preview
 regenerate-manager: true
 generate-interface: true
 ```
@@ -204,9 +228,13 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 ``` yaml $(tag) == 'package-2017-02-preview' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.billing.v2017_02_27_preview
-  output-folder: $(azure-libraries-for-java-folder)/billing/resource-manager/v2017_02_27_preview
+  output-folder: $(azure-libraries-for-java-folder)/sdk/billing/mgmt-v2017_02_27_preview
 regenerate-manager: true
 generate-interface: true
 ```
 
 
+
+## AzureResourceSchema
+
+See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)

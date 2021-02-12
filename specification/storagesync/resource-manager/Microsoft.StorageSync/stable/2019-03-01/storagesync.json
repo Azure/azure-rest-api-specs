@@ -1,0 +1,4129 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Microsoft Storage Sync",
+    "description": "Microsoft Storage Sync Service API",
+    "version": "2019-03-01",
+    "x-ms-code-generation-settings": {
+      "name": "StorageSyncManagementClient"
+    }
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/providers/Microsoft.StorageSync/operations": {
+      "get": {
+        "tags": [
+          "ResourceProvider",
+          "Operations"
+        ],
+        "operationId": "Operations_List",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "description": "Lists all of the available Storage Sync Rest API operations.",
+        "x-ms-examples": {
+          "Operations_List": {
+            "$ref": "./examples/Operations_List.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Array of operations resources in the Resource Provider",
+            "schema": {
+              "$ref": "#/definitions/OperationEntityListResult"
+            },
+            "headers": {
+              "x-ms-request-id": {
+                "description": "request id.",
+                "type": "string"
+              },
+              "x-ms-correlation-request-id": {
+                "description": "correlation request id.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error message indicating why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/StorageSyncError"
+            }
+          }
+        },
+        "deprecated": false,
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.StorageSync/locations/{locationName}/checkNameAvailability": {
+      "post": {
+        "tags": [
+          "StorageSyncService"
+        ],
+        "operationId": "StorageSyncServices_CheckNameAvailability",
+        "x-ms-examples": {
+          "StorageSyncServiceCheckNameAvailability_Available": {
+            "$ref": "./examples/StorageSyncServiceCheckNameAvailability_Available.json"
+          },
+          "StorageSyncServiceCheckNameAvailability_AlreadyExists": {
+            "$ref": "./examples/StorageSyncServiceCheckNameAvailability_AlreadyExists.json"
+          }
+        },
+        "description": "Check the give namespace name availability.",
+        "parameters": [
+          {
+            "name": "locationName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The desired region for the name check."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CheckNameAvailabilityParameters"
+            },
+            "description": "Parameters to check availability of the given namespace name"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "check availability returned successfully.",
+            "schema": {
+              "$ref": "#/definitions/CheckNameAvailabilityResult"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageSync/storageSyncServices/{storageSyncServiceName}": {
+      "put": {
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "storageSyncServiceName",
+            "in": "path",
+            "description": "Name of Storage Sync Service resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "Storage Sync Service resource name.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/StorageSyncServiceCreateParameters"
+            }
+          }
+        ],
+        "tags": [
+          "StorageSyncServices Resource"
+        ],
+        "operationId": "StorageSyncServices_Create",
+        "description": "Create a new StorageSyncService.",
+        "x-ms-examples": {
+          "StorageSyncServices_Create": {
+            "$ref": "./examples/StorageSyncServices_Create.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Storage Sync Service object created/updated",
+            "schema": {
+              "$ref": "#/definitions/StorageSyncService"
+            }
+          },
+          "default": {
+            "description": "Error message indicating why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/StorageSyncError"
+            }
+          }
+        }
+      },
+      "get": {
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "storageSyncServiceName",
+            "in": "path",
+            "description": "Name of Storage Sync Service resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "tags": [
+          "StorageSyncServices Resource"
+        ],
+        "operationId": "StorageSyncServices_Get",
+        "description": "Get a given StorageSyncService.",
+        "x-ms-examples": {
+          "StorageSyncServices_Get": {
+            "$ref": "./examples/StorageSyncServices_Get.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Storage Sync Service object",
+            "schema": {
+              "$ref": "#/definitions/StorageSyncService"
+            },
+            "headers": {
+              "x-ms-request-id": {
+                "description": "request id.",
+                "type": "string"
+              },
+              "x-ms-correlation-request-id": {
+                "description": "correlation request id.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error message indicating why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/StorageSyncError"
+            }
+          }
+        }
+      },
+      "patch": {
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "storageSyncServiceName",
+            "in": "path",
+            "description": "Name of Storage Sync Service resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "Storage Sync Service resource.",
+            "schema": {
+              "$ref": "#/definitions/StorageSyncServiceUpdateParameters"
+            }
+          }
+        ],
+        "tags": [
+          "StorageSyncServices Resource"
+        ],
+        "operationId": "StorageSyncServices_Update",
+        "description": "Patch a given StorageSyncService.",
+        "x-ms-examples": {
+          "StorageSyncServices_Update": {
+            "$ref": "./examples/StorageSyncServices_Update.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Storage Sync Service object created/updated",
+            "schema": {
+              "$ref": "#/definitions/StorageSyncService"
+            },
+            "headers": {
+              "x-ms-request-id": {
+                "description": "request id.",
+                "type": "string"
+              },
+              "x-ms-correlation-request-id": {
+                "description": "correlation request id.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error message indicating why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/StorageSyncError"
+            }
+          }
+        }
+      },
+      "delete": {
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "storageSyncServiceName",
+            "in": "path",
+            "description": "Name of Storage Sync Service resource.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "StorageSyncServices Resource"
+        ],
+        "operationId": "StorageSyncServices_Delete",
+        "description": "Delete a given StorageSyncService.",
+        "x-ms-examples": {
+          "StorageSyncServices_Delete": {
+            "$ref": "./examples/StorageSyncServices_Delete.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Storage Sync Service object was deleted.",
+            "headers": {
+              "x-ms-request-id": {
+                "description": "request id.",
+                "type": "string"
+              },
+              "x-ms-correlation-request-id": {
+                "description": "correlation request id.",
+                "type": "string"
+              }
+            }
+          },
+          "204": {
+            "description": "Storage Sync Service Resource doesn't exist"
+          },
+          "default": {
+            "description": "Error message indicating why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/StorageSyncError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageSync/storageSyncServices": {
+      "get": {
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "tags": [
+          "StorageSyncServices Resource"
+        ],
+        "operationId": "StorageSyncServices_ListByResourceGroup",
+        "description": "Get a StorageSyncService list by Resource group name.",
+        "x-ms-examples": {
+          "StorageSyncServices_ListByResourceGroup": {
+            "$ref": "./examples/StorageSyncServices_ListByResourceGroup.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Array of registered Storage Sync Service resources in the Resource Group",
+            "schema": {
+              "$ref": "#/definitions/StorageSyncServiceArray"
+            },
+            "headers": {
+              "x-ms-request-id": {
+                "description": "request id.",
+                "type": "string"
+              },
+              "x-ms-correlation-request-id": {
+                "description": "correlation request id.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error message indicating why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/StorageSyncError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.StorageSync/storageSyncServices": {
+      "get": {
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "tags": [
+          "StorageSyncServices Resource"
+        ],
+        "operationId": "StorageSyncServices_ListBySubscription",
+        "description": "Get a StorageSyncService list by subscription.",
+        "x-ms-examples": {
+          "StorageSyncServices_ListBySubscription": {
+            "$ref": "./examples/StorageSyncServices_ListBySubscription.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Array of registered Storage Sync Service resources in the subscription.",
+            "schema": {
+              "$ref": "#/definitions/StorageSyncServiceArray"
+            },
+            "headers": {
+              "x-ms-request-id": {
+                "description": "request id.",
+                "type": "string"
+              },
+              "x-ms-correlation-request-id": {
+                "description": "correlation request id.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error message indicating why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/StorageSyncError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageSync/storageSyncServices/{storageSyncServiceName}/syncGroups": {
+      "get": {
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "storageSyncServiceName",
+            "in": "path",
+            "description": "Name of Storage Sync Service resource.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "SyncGroup Resource"
+        ],
+        "operationId": "SyncGroups_ListByStorageSyncService",
+        "description": "Get a SyncGroup List.",
+        "x-ms-examples": {
+          "SyncGroups_ListByStorageSyncService": {
+            "$ref": "./examples/SyncGroups_ListByStorageSyncService.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Array of Sync Group resources in Storage Sync Service",
+            "schema": {
+              "$ref": "#/definitions/SyncGroupArray"
+            },
+            "headers": {
+              "x-ms-request-id": {
+                "description": "request id.",
+                "type": "string"
+              },
+              "x-ms-correlation-request-id": {
+                "description": "correlation request id.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error message indicating why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/StorageSyncError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageSync/storageSyncServices/{storageSyncServiceName}/syncGroups/{syncGroupName}": {
+      "put": {
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "storageSyncServiceName",
+            "in": "path",
+            "description": "Name of Storage Sync Service resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "syncGroupName",
+            "in": "path",
+            "description": "Name of Sync Group resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "Sync Group Body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SyncGroupCreateParameters"
+            }
+          }
+        ],
+        "tags": [
+          "SyncGroup Resource"
+        ],
+        "operationId": "SyncGroups_Create",
+        "description": "Create a new SyncGroup.",
+        "x-ms-examples": {
+          "SyncGroups_Create": {
+            "$ref": "./examples/SyncGroups_Create.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Sync Group object",
+            "schema": {
+              "$ref": "#/definitions/SyncGroup"
+            },
+            "headers": {
+              "x-ms-request-id": {
+                "description": "request id.",
+                "type": "string"
+              },
+              "x-ms-correlation-request-id": {
+                "description": "correlation request id.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error message indicating why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/StorageSyncError"
+            }
+          }
+        }
+      },
+      "get": {
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "storageSyncServiceName",
+            "in": "path",
+            "description": "Name of Storage Sync Service resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "syncGroupName",
+            "in": "path",
+            "description": "Name of Sync Group resource.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "SyncGroup Resource"
+        ],
+        "operationId": "SyncGroups_Get",
+        "description": "Get a given SyncGroup.",
+        "x-ms-examples": {
+          "SyncGroups_Get": {
+            "$ref": "./examples/SyncGroups_Get.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Sync Group object",
+            "schema": {
+              "$ref": "#/definitions/SyncGroup"
+            },
+            "headers": {
+              "x-ms-request-id": {
+                "description": "request id.",
+                "type": "string"
+              },
+              "x-ms-correlation-request-id": {
+                "description": "correlation request id.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error message indicating why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/StorageSyncError"
+            }
+          }
+        }
+      },
+      "delete": {
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "storageSyncServiceName",
+            "in": "path",
+            "description": "Name of Storage Sync Service resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "syncGroupName",
+            "in": "path",
+            "description": "Name of Sync Group resource.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "SyncGroup Resource"
+        ],
+        "operationId": "SyncGroups_Delete",
+        "description": "Delete a given SyncGroup.",
+        "x-ms-examples": {
+          "SyncGroups_Delete": {
+            "$ref": "./examples/SyncGroups_Delete.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Sync Group object was deleted",
+            "headers": {
+              "x-ms-request-id": {
+                "description": "Request id",
+                "type": "string"
+              },
+              "x-ms-correlation-request-id": {
+                "description": "correlation request id",
+                "type": "string"
+              }
+            }
+          },
+          "204": {
+            "description": "Resource doesn't exist"
+          },
+          "default": {
+            "description": "Error message indicating why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/StorageSyncError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageSync/storageSyncServices/{storageSyncServiceName}/syncGroups/{syncGroupName}/cloudEndpoints/{cloudEndpointName}": {
+      "put": {
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "storageSyncServiceName",
+            "in": "path",
+            "description": "Name of Storage Sync Service resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "syncGroupName",
+            "in": "path",
+            "description": "Name of Sync Group resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "cloudEndpointName",
+            "in": "path",
+            "description": "Name of Cloud Endpoint object.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "Body of Cloud Endpoint resource.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CloudEndpointCreateParameters"
+            }
+          }
+        ],
+        "tags": [
+          "CloudEndpoint Resource"
+        ],
+        "operationId": "CloudEndpoints_Create",
+        "description": "Create a new CloudEndpoint.",
+        "x-ms-examples": {
+          "CloudEndpoints_Create": {
+            "$ref": "./examples/CloudEndpoints_Create.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Cloud Endpoint object",
+            "schema": {
+              "$ref": "#/definitions/CloudEndpoint"
+            },
+            "headers": {
+              "x-ms-request-id": {
+                "description": "request id.",
+                "type": "string"
+              },
+              "x-ms-correlation-request-id": {
+                "description": "correlation request id.",
+                "type": "string"
+              }
+            }
+          },
+          "202": {
+            "description": "Asynchronous Operation Status Location",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "Operation Status Location URI",
+                "type": "string"
+              },
+              "Location": {
+                "description": "Operation Status Location URI",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "Retry After",
+                "type": "string"
+              },
+              "x-ms-request-id": {
+                "description": "Request id",
+                "type": "string"
+              },
+              "x-ms-correlation-request-id": {
+                "description": "correlation request id",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error message indicating why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/StorageSyncError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "get": {
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "storageSyncServiceName",
+            "in": "path",
+            "description": "Name of Storage Sync Service resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "syncGroupName",
+            "in": "path",
+            "description": "Name of Sync Group resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "cloudEndpointName",
+            "in": "path",
+            "description": "Name of Cloud Endpoint object.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "CloudEndpoint Resource"
+        ],
+        "operationId": "CloudEndpoints_Get",
+        "description": "Get a given CloudEndpoint.",
+        "x-ms-examples": {
+          "CloudEndpoints_Get": {
+            "$ref": "./examples/CloudEndpoints_Get.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Cloud Endpoint object",
+            "schema": {
+              "$ref": "#/definitions/CloudEndpoint"
+            },
+            "headers": {
+              "x-ms-request-id": {
+                "description": "request id.",
+                "type": "string"
+              },
+              "x-ms-correlation-request-id": {
+                "description": "correlation request id.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error message indicating why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/StorageSyncError"
+            }
+          }
+        }
+      },
+      "delete": {
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "storageSyncServiceName",
+            "in": "path",
+            "description": "Name of Storage Sync Service resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "syncGroupName",
+            "in": "path",
+            "description": "Name of Sync Group resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "cloudEndpointName",
+            "in": "path",
+            "description": "Name of Cloud Endpoint object.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "CloudEndpoint Resource"
+        ],
+        "operationId": "CloudEndpoints_Delete",
+        "description": "Delete a given CloudEndpoint.",
+        "x-ms-examples": {
+          "CloudEndpoints_Delete": {
+            "$ref": "./examples/CloudEndpoints_Delete.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "headers": {
+              "x-ms-request-id": {
+                "description": "request id.",
+                "type": "string"
+              },
+              "x-ms-correlation-request-id": {
+                "description": "correlation request id.",
+                "type": "string"
+              }
+            }
+          },
+          "202": {
+            "description": "Asynchronous Operation Status Location",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "Operation Status Location URI",
+                "type": "string"
+              },
+              "Location": {
+                "description": "Operation Status Location URI",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "Retry After",
+                "type": "string"
+              },
+              "x-ms-request-id": {
+                "description": "Request id",
+                "type": "string"
+              },
+              "x-ms-correlation-request-id": {
+                "description": "correlation request id",
+                "type": "string"
+              }
+            }
+          },
+          "204": {
+            "description": "Resource doesn't exist"
+          },
+          "default": {
+            "description": "Error message indicating why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/StorageSyncError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageSync/storageSyncServices/{storageSyncServiceName}/syncGroups/{syncGroupName}/cloudEndpoints": {
+      "get": {
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "storageSyncServiceName",
+            "in": "path",
+            "description": "Name of Storage Sync Service resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "syncGroupName",
+            "in": "path",
+            "description": "Name of Sync Group resource.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "CloudEndpoint Resource"
+        ],
+        "operationId": "CloudEndpoints_ListBySyncGroup",
+        "description": "Get a CloudEndpoint List.",
+        "x-ms-examples": {
+          "CloudEndpoints_ListBySyncGroup": {
+            "$ref": "./examples/CloudEndpoints_ListBySyncGroup.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Array of Cloud Endpoint resources in Sync Group",
+            "schema": {
+              "$ref": "#/definitions/CloudEndpointArray"
+            },
+            "headers": {
+              "x-ms-request-id": {
+                "description": "request id.",
+                "type": "string"
+              },
+              "x-ms-correlation-request-id": {
+                "description": "correlation request id.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error message indicating why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/StorageSyncError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageSync/storageSyncServices/{storageSyncServiceName}/syncGroups/{syncGroupName}/cloudEndpoints/{cloudEndpointName}/prebackup": {
+      "post": {
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "storageSyncServiceName",
+            "in": "path",
+            "description": "Name of Storage Sync Service resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "syncGroupName",
+            "in": "path",
+            "description": "Name of Sync Group resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "cloudEndpointName",
+            "in": "path",
+            "description": "Name of Cloud Endpoint object.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "Body of Backup request.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/BackupRequest"
+            }
+          }
+        ],
+        "tags": [
+          "CloudEndpoint Resource",
+          "Actions",
+          "Backup Restore"
+        ],
+        "operationId": "CloudEndpoints_PreBackup",
+        "description": "Pre Backup a given CloudEndpoint.",
+        "x-ms-examples": {
+          "CloudEndpoints_PreBackup": {
+            "$ref": "./examples/CloudEndpoints_PreBackup.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "headers": {
+              "Location": {
+                "description": "Operation Status Location URI",
+                "type": "string"
+              },
+              "x-ms-request-id": {
+                "description": "request id.",
+                "type": "string"
+              },
+              "x-ms-correlation-request-id": {
+                "description": "correlation request id.",
+                "type": "string"
+              }
+            }
+          },
+          "202": {
+            "description": "Asynchronous Operation Status Location",
+            "headers": {
+              "Location": {
+                "description": "Operation Status Location URI",
+                "type": "string"
+              },
+              "x-ms-request-id": {
+                "description": "request id.",
+                "type": "string"
+              },
+              "x-ms-correlation-request-id": {
+                "description": "correlation request id.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error message indicating why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/StorageSyncError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageSync/storageSyncServices/{storageSyncServiceName}/syncGroups/{syncGroupName}/cloudEndpoints/{cloudEndpointName}/postbackup": {
+      "post": {
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "storageSyncServiceName",
+            "in": "path",
+            "description": "Name of Storage Sync Service resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "syncGroupName",
+            "in": "path",
+            "description": "Name of Sync Group resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "cloudEndpointName",
+            "in": "path",
+            "description": "Name of Cloud Endpoint object.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "Body of Backup request.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/BackupRequest"
+            }
+          }
+        ],
+        "tags": [
+          "CloudEndpoint Resource",
+          "Actions",
+          "Backup Restore"
+        ],
+        "operationId": "CloudEndpoints_PostBackup",
+        "description": "Post Backup a given CloudEndpoint.",
+        "x-ms-examples": {
+          "CloudEndpoints_PostBackup": {
+            "$ref": "./examples/CloudEndpoints_PostBackup.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "schema": {
+              "$ref": "#/definitions/PostBackupResponse"
+            },
+            "headers": {
+              "Location": {
+                "description": "Operation Status Location URI",
+                "type": "string"
+              },
+              "x-ms-request-id": {
+                "description": "request id.",
+                "type": "string"
+              },
+              "x-ms-correlation-request-id": {
+                "description": "correlation request id.",
+                "type": "string"
+              }
+            }
+          },
+          "202": {
+            "description": "Asynchronous Operation Status Location",
+            "headers": {
+              "Location": {
+                "description": "Operation Status Location URI",
+                "type": "string"
+              },
+              "x-ms-request-id": {
+                "description": "request id.",
+                "type": "string"
+              },
+              "x-ms-correlation-request-id": {
+                "description": "correlation request id.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error message indicating why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/StorageSyncError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageSync/storageSyncServices/{storageSyncServiceName}/syncGroups/{syncGroupName}/cloudEndpoints/{cloudEndpointName}/prerestore": {
+      "post": {
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "storageSyncServiceName",
+            "in": "path",
+            "description": "Name of Storage Sync Service resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "syncGroupName",
+            "in": "path",
+            "description": "Name of Sync Group resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "cloudEndpointName",
+            "in": "path",
+            "description": "Name of Cloud Endpoint object.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "Body of Cloud Endpoint object.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PreRestoreRequest"
+            }
+          }
+        ],
+        "tags": [
+          "CloudEndpoint Resource",
+          "Actions",
+          "Backup Restore"
+        ],
+        "operationId": "CloudEndpoints_PreRestore",
+        "description": "Pre Restore a given CloudEndpoint.",
+        "x-ms-examples": {
+          "CloudEndpoints_PreRestore": {
+            "$ref": "./examples/CloudEndpoints_PreRestore.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Ok"
+          },
+          "202": {
+            "description": "Asynchronous Operation Status Location",
+            "headers": {
+              "Location": {
+                "description": "Operation Status Location URI",
+                "type": "string"
+              },
+              "x-ms-request-id": {
+                "description": "request id.",
+                "type": "string"
+              },
+              "x-ms-correlation-request-id": {
+                "description": "correlation request id.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error message indicating why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/StorageSyncError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageSync/storageSyncServices/{storageSyncServiceName}/syncGroups/{syncGroupName}/cloudEndpoints/{cloudEndpointName}/restoreheartbeat": {
+      "post": {
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "storageSyncServiceName",
+            "in": "path",
+            "description": "Name of Storage Sync Service resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "syncGroupName",
+            "in": "path",
+            "description": "Name of Sync Group resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "cloudEndpointName",
+            "in": "path",
+            "description": "Name of Cloud Endpoint object.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "CloudEndpoint Resource",
+          "Actions",
+          "Backup Restore"
+        ],
+        "operationId": "CloudEndpoints_restoreheartbeat",
+        "description": "Restore Heartbeat a given CloudEndpoint.",
+        "x-ms-examples": {
+          "CloudEndpoints_restoreheartbeat": {
+            "$ref": "./examples/CloudEndpoints_RestoreHeatbeat.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Restore Heartbeat Operation has ran successfully.",
+            "headers": {
+              "x-ms-request-id": {
+                "description": "request id.",
+                "type": "string"
+              },
+              "x-ms-correlation-request-id": {
+                "description": "correlation request id.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error message indicating why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/StorageSyncError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageSync/storageSyncServices/{storageSyncServiceName}/syncGroups/{syncGroupName}/cloudEndpoints/{cloudEndpointName}/postrestore": {
+      "post": {
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "storageSyncServiceName",
+            "in": "path",
+            "description": "Name of Storage Sync Service resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "syncGroupName",
+            "in": "path",
+            "description": "Name of Sync Group resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "cloudEndpointName",
+            "in": "path",
+            "description": "Name of Cloud Endpoint object.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "Body of Cloud Endpoint object.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PostRestoreRequest"
+            }
+          }
+        ],
+        "tags": [
+          "CloudEndpoint Resource",
+          "Actions",
+          "Backup Restore"
+        ],
+        "operationId": "CloudEndpoints_PostRestore",
+        "description": "Post Restore a given CloudEndpoint.",
+        "x-ms-examples": {
+          "CloudEndpoints_PostRestore": {
+            "$ref": "./examples/CloudEndpoints_PostRestore.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Ok"
+          },
+          "202": {
+            "description": "Asynchronous Operation Status Location",
+            "headers": {
+              "Location": {
+                "description": "Operation Status Location URI",
+                "type": "string"
+              },
+              "x-ms-request-id": {
+                "description": "request id.",
+                "type": "string"
+              },
+              "x-ms-correlation-request-id": {
+                "description": "correlation request id.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error message indicating why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/StorageSyncError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageSync/storageSyncServices/{storageSyncServiceName}/syncGroups/{syncGroupName}/cloudEndpoints/{cloudEndpointName}/triggerChangeDetection": {
+      "post": {
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "storageSyncServiceName",
+            "in": "path",
+            "description": "Name of Storage Sync Service resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "syncGroupName",
+            "in": "path",
+            "description": "Name of Sync Group resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "cloudEndpointName",
+            "in": "path",
+            "description": "Name of Cloud Endpoint object.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "Trigger Change Detection Action parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TriggerChangeDetectionParameters"
+            }
+          }
+        ],
+        "tags": [
+          "CloudEndpoint Resource",
+          "Actions",
+          "Change Detection"
+        ],
+        "operationId": "CloudEndpoints_TriggerChangeDetection",
+        "description": "Triggers detection of changes performed on Azure File share connected to the specified Azure File Sync Cloud Endpoint.",
+        "x-ms-examples": {
+          "CloudEndpoints_TriggerChangeDetection": {
+            "$ref": "./examples/CloudEndpoints_TriggerChangeDetection.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Ok"
+          },
+          "202": {
+            "description": "Asynchronous Operation Status Location",
+            "headers": {
+              "Location": {
+                "description": "Operation Status Location URI",
+                "type": "string"
+              },
+              "x-ms-request-id": {
+                "description": "request id.",
+                "type": "string"
+              },
+              "x-ms-correlation-request-id": {
+                "description": "correlation request id.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error message indicating why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/StorageSyncError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageSync/storageSyncServices/{storageSyncServiceName}/syncGroups/{syncGroupName}/serverEndpoints/{serverEndpointName}": {
+      "put": {
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "storageSyncServiceName",
+            "in": "path",
+            "description": "Name of Storage Sync Service resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "syncGroupName",
+            "in": "path",
+            "description": "Name of Sync Group resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "serverEndpointName",
+            "in": "path",
+            "description": "Name of Server Endpoint object.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "Body of Server Endpoint object.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ServerEndpointCreateParameters"
+            }
+          }
+        ],
+        "tags": [
+          "ServerEndpoint Resource"
+        ],
+        "operationId": "ServerEndpoints_Create",
+        "description": "Create a new ServerEndpoint.",
+        "x-ms-examples": {
+          "ServerEndpoints_Create": {
+            "$ref": "./examples/ServerEndpoints_Create.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Server Endpoint object",
+            "schema": {
+              "$ref": "#/definitions/ServerEndpoint"
+            },
+            "headers": {
+              "x-ms-request-id": {
+                "description": "request id.",
+                "type": "string"
+              },
+              "x-ms-correlation-request-id": {
+                "description": "correlation request id.",
+                "type": "string"
+              }
+            }
+          },
+          "202": {
+            "description": "Asynchronous Operation Status Location",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "Operation Status Location URI",
+                "type": "string"
+              },
+              "Location": {
+                "description": "Operation Status Location URI",
+                "type": "string"
+              },
+              "x-ms-request-id": {
+                "description": "request id.",
+                "type": "string"
+              },
+              "x-ms-correlation-request-id": {
+                "description": "correlation request id.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error message indicating why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/StorageSyncError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "storageSyncServiceName",
+            "in": "path",
+            "description": "Name of Storage Sync Service resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "syncGroupName",
+            "in": "path",
+            "description": "Name of Sync Group resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "serverEndpointName",
+            "in": "path",
+            "description": "Name of Server Endpoint object.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "Any of the properties applicable in PUT request.",
+            "schema": {
+              "$ref": "#/definitions/ServerEndpointUpdateParameters"
+            }
+          }
+        ],
+        "tags": [
+          "ServerEndpoint Resource"
+        ],
+        "operationId": "ServerEndpoints_Update",
+        "description": "Patch a given ServerEndpoint.",
+        "x-ms-examples": {
+          "ServerEndpoints_Update": {
+            "$ref": "./examples/ServerEndpoints_Update.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Server Endpoint object",
+            "schema": {
+              "$ref": "#/definitions/ServerEndpoint"
+            },
+            "headers": {
+              "x-ms-request-id": {
+                "description": "request id.",
+                "type": "string"
+              },
+              "x-ms-correlation-request-id": {
+                "description": "correlation request id.",
+                "type": "string"
+              }
+            }
+          },
+          "202": {
+            "description": "Asynchronous Operation Status Location",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "Operation Status Location URI",
+                "type": "string"
+              },
+              "Location": {
+                "description": "Operation Status Location URI",
+                "type": "string"
+              },
+              "x-ms-request-id": {
+                "description": "request id.",
+                "type": "string"
+              },
+              "x-ms-correlation-request-id": {
+                "description": "correlation request id.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error message indicating why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/StorageSyncError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "get": {
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "storageSyncServiceName",
+            "in": "path",
+            "description": "Name of Storage Sync Service resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "syncGroupName",
+            "in": "path",
+            "description": "Name of Sync Group resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "serverEndpointName",
+            "in": "path",
+            "description": "Name of Server Endpoint object.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "ServerEndpoint Resource"
+        ],
+        "operationId": "ServerEndpoints_Get",
+        "description": "Get a ServerEndpoint.",
+        "x-ms-examples": {
+          "ServerEndpoints_Get": {
+            "$ref": "./examples/ServerEndpoints_Get.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Server Endpoint object",
+            "schema": {
+              "$ref": "#/definitions/ServerEndpoint"
+            },
+            "headers": {
+              "x-ms-request-id": {
+                "description": "request id.",
+                "type": "string"
+              },
+              "x-ms-correlation-request-id": {
+                "description": "correlation request id.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error message indicating why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/StorageSyncError"
+            }
+          }
+        }
+      },
+      "delete": {
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "storageSyncServiceName",
+            "in": "path",
+            "description": "Name of Storage Sync Service resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "syncGroupName",
+            "in": "path",
+            "description": "Name of Sync Group resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "serverEndpointName",
+            "in": "path",
+            "description": "Name of Server Endpoint object.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "ServerEndpoint Resource"
+        ],
+        "operationId": "ServerEndpoints_Delete",
+        "description": "Delete a given ServerEndpoint.",
+        "x-ms-examples": {
+          "ServerEndpoints_Delete": {
+            "$ref": "./examples/ServerEndpoints_Delete.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "headers": {
+              "x-ms-request-id": {
+                "description": "request id.",
+                "type": "string"
+              },
+              "x-ms-correlation-request-id": {
+                "description": "correlation request id.",
+                "type": "string"
+              }
+            }
+          },
+          "202": {
+            "description": "Asynchronous Operation Status Location",
+            "headers": {
+              "Location": {
+                "description": "Operation Status Location URI",
+                "type": "string"
+              },
+              "x-ms-request-id": {
+                "description": "request id.",
+                "type": "string"
+              },
+              "x-ms-correlation-request-id": {
+                "description": "correlation request id.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error message indicating why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/StorageSyncError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageSync/storageSyncServices/{storageSyncServiceName}/syncGroups/{syncGroupName}/serverEndpoints": {
+      "get": {
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "storageSyncServiceName",
+            "in": "path",
+            "description": "Name of Storage Sync Service resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "syncGroupName",
+            "in": "path",
+            "description": "Name of Sync Group resource.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "ServerEndpoint Resource"
+        ],
+        "operationId": "ServerEndpoints_ListBySyncGroup",
+        "description": "Get a ServerEndpoint list.",
+        "x-ms-examples": {
+          "ServerEndpoints_ListBySyncGroup": {
+            "$ref": "./examples/ServerEndpoints_ListBySyncGroup.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Array of Server Endpoint resources in Sync Group",
+            "schema": {
+              "$ref": "#/definitions/ServerEndpointArray"
+            },
+            "headers": {
+              "Location": {
+                "description": "Operation Status Location URI",
+                "type": "string"
+              },
+              "x-ms-request-id": {
+                "description": "request id.",
+                "type": "string"
+              },
+              "x-ms-correlation-request-id": {
+                "description": "correlation request id.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error message indicating why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/StorageSyncError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageSync/storageSyncServices/{storageSyncServiceName}/syncGroups/{syncGroupName}/serverEndpoints/{serverEndpointName}/recallAction": {
+      "post": {
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "storageSyncServiceName",
+            "in": "path",
+            "description": "Name of Storage Sync Service resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "syncGroupName",
+            "in": "path",
+            "description": "Name of Sync Group resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "serverEndpointName",
+            "in": "path",
+            "description": "Name of Server Endpoint object.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "Body of Recall Action object.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RecallActionParameters"
+            }
+          }
+        ],
+        "tags": [
+          "ServerEndpoint Resource",
+          "Actions"
+        ],
+        "operationId": "ServerEndpoints_recallAction",
+        "description": "Recall a server endpoint.",
+        "x-ms-examples": {
+          "ServerEndpoints_recallAction": {
+            "$ref": "./examples/ServerEndpoints_Recall.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Server Endpoint object",
+            "headers": {
+              "x-ms-request-id": {
+                "description": "request id.",
+                "type": "string"
+              },
+              "x-ms-correlation-request-id": {
+                "description": "correlation request id.",
+                "type": "string"
+              }
+            }
+          },
+          "202": {
+            "description": "Asynchronous Operation Status Location",
+            "headers": {
+              "Location": {
+                "description": "Operation Status Location URI",
+                "type": "string"
+              },
+              "x-ms-request-id": {
+                "description": "request id.",
+                "type": "string"
+              },
+              "x-ms-correlation-request-id": {
+                "description": "correlation request id.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error message indicating why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/StorageSyncError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageSync/storageSyncServices/{storageSyncServiceName}/registeredServers": {
+      "get": {
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "storageSyncServiceName",
+            "in": "path",
+            "description": "Name of Storage Sync Service resource.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "RegisteredServer Resource"
+        ],
+        "operationId": "RegisteredServers_ListByStorageSyncService",
+        "description": "Get a given registered server list.",
+        "x-ms-examples": {
+          "RegisteredServers_ListByStorageSyncService": {
+            "$ref": "./examples/RegisteredServers_ListByStorageSyncService.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Array of Registered Server resources in Storage Sync Service",
+            "schema": {
+              "$ref": "#/definitions/RegisteredServerArray"
+            },
+            "headers": {
+              "x-ms-request-id": {
+                "description": "request id.",
+                "type": "string"
+              },
+              "x-ms-correlation-request-id": {
+                "description": "correlation request id.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error message indicating why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/StorageSyncError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageSync/storageSyncServices/{storageSyncServiceName}/registeredServers/{serverId}": {
+      "get": {
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "storageSyncServiceName",
+            "in": "path",
+            "description": "Name of Storage Sync Service resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "serverId",
+            "in": "path",
+            "description": "GUID identifying the on-premises server.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "RegisteredServer Resource"
+        ],
+        "operationId": "RegisteredServers_Get",
+        "description": "Get a given registered server.",
+        "x-ms-examples": {
+          "RegisteredServers_Get": {
+            "$ref": "./examples/RegisteredServers_Get.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Registered Server resources in Sync Group",
+            "schema": {
+              "$ref": "#/definitions/RegisteredServer"
+            },
+            "headers": {
+              "x-ms-request-id": {
+                "description": "request id.",
+                "type": "string"
+              },
+              "x-ms-correlation-request-id": {
+                "description": "correlation request id.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error message indicating why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/StorageSyncError"
+            }
+          }
+        }
+      },
+      "put": {
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "storageSyncServiceName",
+            "in": "path",
+            "description": "Name of Storage Sync Service resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "serverId",
+            "in": "path",
+            "description": "GUID identifying the on-premises server.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "Body of Registered Server object.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RegisteredServerCreateParameters"
+            }
+          }
+        ],
+        "tags": [
+          "RegisteredServer Resource"
+        ],
+        "operationId": "RegisteredServers_Create",
+        "description": "Add a new registered server.",
+        "x-ms-examples": {
+          "RegisteredServers_Create": {
+            "$ref": "./examples/RegisteredServers_Create.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Registered Server resources in Sync Group",
+            "schema": {
+              "$ref": "#/definitions/RegisteredServer"
+            },
+            "headers": {
+              "x-ms-request-id": {
+                "description": "request id.",
+                "type": "string"
+              },
+              "x-ms-correlation-request-id": {
+                "description": "correlation request id.",
+                "type": "string"
+              }
+            }
+          },
+          "202": {
+            "description": "Asynchronous Operation Status Location",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "Operation Status Location URI",
+                "type": "string"
+              },
+              "Location": {
+                "description": "Operation Status Location URI",
+                "type": "string"
+              },
+              "x-ms-request-id": {
+                "description": "request id.",
+                "type": "string"
+              },
+              "x-ms-correlation-request-id": {
+                "description": "correlation request id.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error message indicating why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/StorageSyncError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "storageSyncServiceName",
+            "in": "path",
+            "description": "Name of Storage Sync Service resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "serverId",
+            "in": "path",
+            "description": "GUID identifying the on-premises server.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "RegisteredServer Resource"
+        ],
+        "operationId": "RegisteredServers_Delete",
+        "description": "Delete the given registered server.",
+        "x-ms-examples": {
+          "RegisteredServers_Delete": {
+            "$ref": "./examples/RegisteredServers_Delete.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "headers": {
+              "x-ms-request-id": {
+                "description": "request id.",
+                "type": "string"
+              },
+              "x-ms-correlation-request-id": {
+                "description": "correlation request id.",
+                "type": "string"
+              }
+            }
+          },
+          "202": {
+            "description": "Asynchronous Operation Status Location",
+            "headers": {
+              "Location": {
+                "description": "Operation Status Location URI",
+                "type": "string"
+              },
+              "x-ms-request-id": {
+                "description": "request id.",
+                "type": "string"
+              },
+              "x-ms-correlation-request-id": {
+                "description": "correlation request id.",
+                "type": "string"
+              }
+            }
+          },
+          "204": {
+            "description": "Resource doesn't exist"
+          },
+          "default": {
+            "description": "Error message indicating why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/StorageSyncError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageSync/storageSyncServices/{storageSyncServiceName}/registeredServers/{serverId}/triggerRollover": {
+      "post": {
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "storageSyncServiceName",
+            "in": "path",
+            "description": "Name of Storage Sync Service resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "serverId",
+            "in": "path",
+            "description": "Server Id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "Body of Trigger Rollover request.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TriggerRolloverRequest"
+            }
+          }
+        ],
+        "tags": [
+          "RegisteredServer Resource",
+          "Actions"
+        ],
+        "operationId": "RegisteredServers_triggerRollover",
+        "description": "Triggers Server certificate rollover.",
+        "x-ms-examples": {
+          "RegisteredServers_triggerRollover": {
+            "$ref": "./examples/RegisteredServers_TriggerRollover.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Trigger Rollover success status",
+            "headers": {
+              "x-ms-request-id": {
+                "description": "request id.",
+                "type": "string"
+              },
+              "x-ms-correlation-request-id": {
+                "description": "correlation request id.",
+                "type": "string"
+              }
+            }
+          },
+          "202": {
+            "description": "Asynchronous Operation Status Location",
+            "headers": {
+              "Location": {
+                "description": "Operation Status Location URI",
+                "type": "string"
+              },
+              "x-ms-request-id": {
+                "description": "request id.",
+                "type": "string"
+              },
+              "x-ms-correlation-request-id": {
+                "description": "correlation request id.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error message indicating why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/StorageSyncError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageSync/storageSyncServices/{storageSyncServiceName}/workflows": {
+      "get": {
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "storageSyncServiceName",
+            "in": "path",
+            "description": "Name of Storage Sync Service resource.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Workflow Resource"
+        ],
+        "operationId": "Workflows_ListByStorageSyncService",
+        "description": "Get a Workflow List",
+        "x-ms-examples": {
+          "Workflows_ListByStorageSyncService": {
+            "$ref": "./examples/Workflows_ListByStorageSyncService.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Array of Workflow resources in Storage Sync Service",
+            "schema": {
+              "$ref": "#/definitions/WorkflowArray"
+            },
+            "headers": {
+              "x-ms-request-id": {
+                "description": "request id.",
+                "type": "string"
+              },
+              "x-ms-correlation-request-id": {
+                "description": "correlation request id.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error message indicating why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/StorageSyncError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageSync/storageSyncServices/{storageSyncServiceName}/workflows/{workflowId}": {
+      "get": {
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "storageSyncServiceName",
+            "in": "path",
+            "description": "Name of Storage Sync Service resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "workflowId",
+            "in": "path",
+            "description": "workflow Id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Workflow Resource"
+        ],
+        "operationId": "Workflows_Get",
+        "description": "Get Workflows resource",
+        "x-ms-examples": {
+          "Workflows_Get": {
+            "$ref": "./examples/Workflows_Get.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Workflow object",
+            "schema": {
+              "$ref": "#/definitions/Workflow"
+            },
+            "headers": {
+              "x-ms-request-id": {
+                "description": "request id.",
+                "type": "string"
+              },
+              "x-ms-correlation-request-id": {
+                "description": "correlation request id.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error message indicating why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/StorageSyncError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageSync/storageSyncServices/{storageSyncServiceName}/workflows/{workflowId}/abort": {
+      "post": {
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "storageSyncServiceName",
+            "in": "path",
+            "description": "Name of Storage Sync Service resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "workflowId",
+            "in": "path",
+            "description": "workflow Id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Workflow Resource",
+          "Actions"
+        ],
+        "operationId": "Workflows_Abort",
+        "description": "Abort the given workflow.",
+        "x-ms-examples": {
+          "Workflows_Abort": {
+            "$ref": "./examples/Workflows_Abort.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "success",
+            "headers": {
+              "x-ms-request-id": {
+                "description": "request id.",
+                "type": "string"
+              },
+              "x-ms-correlation-request-id": {
+                "description": "correlation request id.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error message indicating why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/StorageSyncError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageSync/locations/{locationName}/workflows/{workflowId}/operations/{operationId}": {
+      "get": {
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "locationName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The desired region to obtain information from."
+          },
+          {
+            "name": "workflowId",
+            "in": "path",
+            "description": "workflow Id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "operationId",
+            "in": "path",
+            "description": "operation Id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Operation Status"
+        ],
+        "operationId": "OperationStatus_Get",
+        "description": "Get Operation status",
+        "x-ms-examples": {
+          "Workflows_Get": {
+            "$ref": "./examples/OperationStatus_Get.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Operation Status",
+            "schema": {
+              "$ref": "#/definitions/OperationStatus"
+            },
+            "headers": {
+              "x-ms-request-id": {
+                "description": "request id.",
+                "type": "string"
+              },
+              "x-ms-correlation-request-id": {
+                "description": "correlation request id.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error message indicating why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/StorageSyncError"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "StorageSyncError": {
+      "type": "object",
+      "description": "Error type",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/StorageSyncApiError",
+          "description": "Error details of the given entry."
+        },
+        "innererror": {
+          "$ref": "#/definitions/StorageSyncApiError",
+          "description": "Error details of the given entry."
+        }
+      }
+    },
+    "StorageSyncApiError": {
+      "type": "object",
+      "description": "Error type",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Error code of the given entry."
+        },
+        "message": {
+          "type": "string",
+          "description": "Error message of the given entry."
+        },
+        "target": {
+          "type": "string",
+          "description": "Target of the given error entry."
+        },
+        "details": {
+          "$ref": "#/definitions/StorageSyncErrorDetails",
+          "description": "Error details of the given entry."
+        }
+      }
+    },
+    "StorageSyncErrorDetails": {
+      "type": "object",
+      "description": "Error Details object.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Error code of the given entry."
+        },
+        "message": {
+          "type": "string",
+          "description": "Error message of the given entry."
+        },
+        "target": {
+          "type": "string",
+          "description": "Target of the given entry."
+        }
+      }
+    },
+    "SubscriptionState": {
+      "type": "object",
+      "description": "Subscription State object.",
+      "properties": {
+        "state": {
+          "type": "string",
+          "description": "State of Azure Subscription",
+          "enum": [
+            "Registered",
+            "Unregistered",
+            "Warned",
+            "Suspended",
+            "Deleted"
+          ],
+          "x-ms-enum": {
+            "name": "Reason",
+            "modelAsString": true
+          }
+        },
+        "istransitioning": {
+          "type": "boolean",
+          "description": "Is Transitioning",
+          "readOnly": true
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/SubscriptionStateProperties",
+          "description": "Subscription state properties."
+        }
+      }
+    },
+    "StorageSyncService": {
+      "type": "object",
+      "description": "Storage Sync Service object.",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/StorageSyncServiceProperties",
+          "description": "Storage Sync Service properties."
+        }
+      }
+    },
+    "SyncGroup": {
+      "type": "object",
+      "description": "Sync Group object.",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/SyncGroupProperties",
+          "description": "SyncGroup properties."
+        }
+      }
+    },
+    "CloudEndpoint": {
+      "type": "object",
+      "description": "Cloud Endpoint object.",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/CloudEndpointProperties",
+          "description": "Cloud Endpoint properties."
+        }
+      }
+    },
+    "TriggerChangeDetectionParameters": {
+      "properties": {
+        "directoryPath": {
+          "type": "string",
+          "description": "Relative path to a directory Azure File share for which change detection is to be performed."
+        },
+        "changeDetectionMode": {
+          "type": "string",
+          "description": "Change Detection Mode. Applies to a directory specified in directoryPath parameter.",
+          "enum": [
+            "Default",
+            "Recursive"
+          ],
+          "x-ms-enum": {
+            "name": "changeDetectionMode",
+            "modelAsString": true
+          }
+        },
+        "paths": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Array of relative paths on the Azure File share to be included in the change detection. Can be files and directories."
+        }
+      },
+      "description": "The parameters used when calling trigger change detection action on cloud endpoint."
+    },
+    "RecallActionParameters": {
+      "properties": {
+        "pattern": {
+          "type": "string",
+          "description": "Pattern of the files."
+        },
+        "recallPath": {
+          "type": "string",
+          "description": "Recall path."
+        }
+      },
+      "description": "The parameters used when calling recall action on server endpoint."
+    },
+    "StorageSyncServiceCreateParameters": {
+      "properties": {
+        "location": {
+          "type": "string",
+          "description": "Required. Gets or sets the location of the resource. This will be one of the supported and registered Azure Geo Regions (e.g. West US, East US, Southeast Asia, etc.). The geo region of a resource cannot be changed once it is created, but if an identical geo region is specified on update, the request will succeed."
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Gets or sets a list of key value pairs that describe the resource. These tags can be used for viewing and grouping this resource (across resource groups). A maximum of 15 tags can be provided for a resource. Each tag must have a key with a length no greater than 128 characters and a value with a length no greater than 256 characters."
+        },
+        "properties": {}
+      },
+      "required": [
+        "location"
+      ],
+      "description": "The parameters used when creating a storage sync service."
+    },
+    "SyncGroupCreateParameters": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/SyncGroupCreateParametersProperties",
+          "description": "The parameters used to create the sync group"
+        }
+      },
+      "description": "The parameters used when creating a sync group."
+    },
+    "SyncGroupCreateParametersProperties": {
+      "type": "object",
+      "description": "Sync Group Create Properties object.",
+      "properties": {}
+    },
+    "CloudEndpointCreateParameters": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/CloudEndpointCreateParametersProperties",
+          "description": "The parameters used to create the cloud endpoint."
+        }
+      },
+      "description": "The parameters used when creating a cloud endpoint."
+    },
+    "CloudEndpointCreateParametersProperties": {
+      "description": "CloudEndpoint Properties object.",
+      "properties": {
+        "storageAccountResourceId": {
+          "type": "string",
+          "description": "Storage Account Resource Id"
+        },
+        "azureFileShareName": {
+          "type": "string",
+          "description": "Azure file share name"
+        },
+        "storageAccountTenantId": {
+          "type": "string",
+          "description": "Storage Account Tenant Id"
+        },
+        "friendlyName": {
+          "type": "string",
+          "description": "Friendly Name"
+        }
+      }
+    },
+    "ServerEndpointCreateParameters": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ServerEndpointCreateParametersProperties",
+          "description": "The parameters used to create the server endpoint."
+        }
+      },
+      "description": "The parameters used when creating a server endpoint."
+    },
+    "ServerEndpointCreateParametersProperties": {
+      "description": "ServerEndpoint Properties object.",
+      "properties": {
+        "serverLocalPath": {
+          "$ref": "#/definitions/PhysicalPath",
+          "description": "Server Local path."
+        },
+        "cloudTiering": {
+          "$ref": "#/definitions/FeatureStatus",
+          "description": "Cloud Tiering."
+        },
+        "volumeFreeSpacePercent": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 100,
+          "description": "Level of free space to be maintained by Cloud Tiering if it is enabled."
+        },
+        "tierFilesOlderThanDays": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 2147483647,
+          "description": "Tier files older than days."
+        },
+        "friendlyName": {
+          "type": "string",
+          "description": "Friendly Name"
+        },
+        "serverResourceId": {
+          "$ref": "#/definitions/ResourceId",
+          "description": "Server Resource Id."
+        },
+        "offlineDataTransfer": {
+          "$ref": "#/definitions/FeatureStatus",
+          "description": "Offline data transfer"
+        },
+        "offlineDataTransferShareName": {
+          "type": "string",
+          "description": "Offline data transfer share name"
+        }
+      }
+    },
+    "TriggerRolloverRequest": {
+      "type": "object",
+      "description": "Trigger Rollover Request.",
+      "properties": {
+        "serverCertificate": {
+          "type": "string",
+          "description": "Certificate Data"
+        }
+      }
+    },
+    "RegisteredServerCreateParameters": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/RegisteredServerCreateParametersProperties",
+          "description": "The parameters used to create the registered server."
+        }
+      },
+      "description": "The parameters used when creating a registered server."
+    },
+    "RegisteredServerCreateParametersProperties": {
+      "properties": {
+        "serverCertificate": {
+          "type": "string",
+          "description": "Registered Server Certificate"
+        },
+        "agentVersion": {
+          "type": "string",
+          "description": "Registered Server Agent Version"
+        },
+        "serverOSVersion": {
+          "type": "string",
+          "description": "Registered Server OS Version"
+        },
+        "lastHeartBeat": {
+          "type": "string",
+          "description": "Registered Server last heart beat"
+        },
+        "serverRole": {
+          "type": "string",
+          "description": "Registered Server serverRole"
+        },
+        "clusterId": {
+          "type": "string",
+          "description": "Registered Server clusterId"
+        },
+        "clusterName": {
+          "type": "string",
+          "description": "Registered Server clusterName"
+        },
+        "serverId": {
+          "type": "string",
+          "description": "Registered Server serverId"
+        },
+        "friendlyName": {
+          "type": "string",
+          "description": "Friendly Name"
+        }
+      }
+    },
+    "ServerEndpointUpdateParameters": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ServerEndpointUpdateProperties",
+          "description": "The properties of the server endpoint."
+        }
+      },
+      "description": "Parameters for updating an Server Endpoint."
+    },
+    "ServerEndpoint": {
+      "type": "object",
+      "description": "Server Endpoint object.",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ServerEndpointProperties",
+          "description": "Server Endpoint properties."
+        }
+      }
+    },
+    "RegisteredServer": {
+      "type": "object",
+      "description": "Registered Server resource.",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/RegisteredServerProperties",
+          "description": "RegisteredServer properties."
+        }
+      }
+    },
+    "ResourcesMoveInfo": {
+      "type": "object",
+      "description": "Resource Move Info.",
+      "properties": {
+        "targetResourceGroup": {
+          "type": "string",
+          "description": "Target resource group."
+        },
+        "resources": {
+          "type": "array",
+          "description": "Collection of Resources.",
+          "items": {
+            "$ref": "#/definitions/ResourceId"
+          }
+        }
+      }
+    },
+    "Workflow": {
+      "type": "object",
+      "description": "Workflow resource.",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/WorkflowProperties",
+          "description": "Workflow properties."
+        }
+      }
+    },
+    "OperationEntityListResult": {
+      "description": "The list of storage sync operations.",
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "The link used to get the next page of operations.",
+          "type": "string"
+        },
+        "value": {
+          "description": "The list of operations.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/OperationEntity"
+          }
+        }
+      }
+    },
+    "OperationEntity": {
+      "description": "The operation supported by storage sync.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Operation name: {provider}/{resource}/{operation}.",
+          "type": "string"
+        },
+        "display": {
+          "$ref": "#/definitions/OperationDisplayInfo",
+          "description": "The operation supported by storage sync."
+        },
+        "origin": {
+          "type": "string",
+          "description": "The origin."
+        }
+      }
+    },
+    "OperationDisplayInfo": {
+      "description": "The operation supported by storage sync.",
+      "type": "object",
+      "properties": {
+        "description": {
+          "description": "The description of the operation.",
+          "type": "string"
+        },
+        "operation": {
+          "description": "The action that users can perform, based on their permission level.",
+          "type": "string"
+        },
+        "provider": {
+          "description": "Service provider: Microsoft StorageSync.",
+          "type": "string"
+        },
+        "resource": {
+          "description": "Resource on which the operation is performed.",
+          "type": "string"
+        }
+      }
+    },
+    "OperationDisplayResource": {
+      "type": "object",
+      "description": "Operation Display Resource object.",
+      "properties": {
+        "provider": {
+          "type": "string",
+          "description": "Operation Display Resource Provider."
+        },
+        "resource": {
+          "type": "string",
+          "description": "Operation Display Resource."
+        },
+        "operation": {
+          "type": "string",
+          "description": "Operation Display Resource Operation."
+        },
+        "description": {
+          "type": "string",
+          "description": "Operation Display Resource Description."
+        }
+      }
+    },
+    "CheckNameAvailabilityParameters": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name to check for availability"
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "Microsoft.StorageSync/storageSyncServices"
+          ],
+          "x-ms-enum": {
+            "name": "Type",
+            "modelAsString": false
+          },
+          "description": "The resource type. Must be set to Microsoft.StorageSync/storageSyncServices"
+        }
+      },
+      "required": [
+        "name",
+        "type"
+      ],
+      "description": "Parameters for a check name availability request."
+    },
+    "CheckNameAvailabilityResult": {
+      "properties": {
+        "nameAvailable": {
+          "readOnly": true,
+          "type": "boolean",
+          "description": "Gets a boolean value that indicates whether the name is available for you to use. If true, the name is available. If false, the name has already been taken or invalid and cannot be used."
+        },
+        "reason": {
+          "readOnly": true,
+          "type": "string",
+          "enum": [
+            "Invalid",
+            "AlreadyExists"
+          ],
+          "x-ms-enum": {
+            "name": "NameAvailabilityReason",
+            "modelAsString": false
+          },
+          "description": "Gets the reason that a Storage Sync Service name could not be used. The Reason element is only returned if NameAvailable is false."
+        },
+        "message": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Gets an error message explaining the Reason value in more detail."
+        }
+      },
+      "description": "The CheckNameAvailability operation response."
+    },
+    "PostRestoreRequest": {
+      "type": "object",
+      "description": "Post Restore Request",
+      "properties": {
+        "partition": {
+          "type": "string",
+          "description": "Post Restore partition."
+        },
+        "replicaGroup": {
+          "type": "string",
+          "description": "Post Restore replica group."
+        },
+        "requestId": {
+          "type": "string",
+          "description": "Post Restore request id."
+        },
+        "azureFileShareUri": {
+          "type": "string",
+          "description": "Post Restore Azure file share uri."
+        },
+        "status": {
+          "type": "string",
+          "description": "Post Restore Azure status."
+        },
+        "sourceAzureFileShareUri": {
+          "type": "string",
+          "description": "Post Restore Azure source azure file share uri."
+        },
+        "failedFileList": {
+          "type": "string",
+          "description": "Post Restore Azure failed file list."
+        },
+        "restoreFileSpec": {
+          "type": "array",
+          "description": "Post Restore restore file spec array.",
+          "items": {
+            "$ref": "#/definitions/RestoreFileSpec",
+            "description": "Post Restore restore file spec items array."
+          }
+        }
+      }
+    },
+    "PreRestoreRequest": {
+      "type": "object",
+      "description": "Pre Restore request object.",
+      "properties": {
+        "partition": {
+          "type": "string",
+          "description": "Pre Restore partition."
+        },
+        "replicaGroup": {
+          "type": "string",
+          "description": "Pre Restore replica group."
+        },
+        "requestId": {
+          "type": "string",
+          "description": "Pre Restore request id."
+        },
+        "azureFileShareUri": {
+          "type": "string",
+          "description": "Pre Restore Azure file share uri."
+        },
+        "status": {
+          "type": "string",
+          "description": "Pre Restore Azure status."
+        },
+        "sourceAzureFileShareUri": {
+          "type": "string",
+          "description": "Pre Restore Azure source azure file share uri."
+        },
+        "backupMetadataPropertyBag": {
+          "type": "string",
+          "description": "Pre Restore backup metadata property bag."
+        },
+        "restoreFileSpec": {
+          "type": "array",
+          "description": "Pre Restore restore file spec array.",
+          "items": {
+            "$ref": "#/definitions/RestoreFileSpec",
+            "description": "Pre Restore restore file spec items array."
+          }
+        },
+        "pauseWaitForSyncDrainTimePeriodInSeconds": {
+          "type": "integer",
+          "description": "Pre Restore pause wait for sync drain time period in seconds."
+        }
+      }
+    },
+    "BackupRequest": {
+      "type": "object",
+      "description": "Backup request",
+      "properties": {
+        "azureFileShare": {
+          "type": "string",
+          "description": "Azure File Share."
+        }
+      }
+    },
+    "PostBackupResponse": {
+      "type": "object",
+      "description": "Post Backup Response",
+      "properties": {
+        "backupMetadata": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/PostBackupResponseProperties",
+          "description": "Post Backup Response Properties"
+        }
+      }
+    },
+    "RestoreFileSpec": {
+      "type": "object",
+      "description": "Restore file spec.",
+      "properties": {
+        "path": {
+          "type": "string",
+          "description": "Restore file spec path"
+        },
+        "isdir": {
+          "type": "boolean",
+          "description": "Restore file spec isdir",
+          "readOnly": true
+        }
+      }
+    },
+    "StorageSyncServiceArray": {
+      "type": "object",
+      "description": "Array of StorageSyncServices",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "Collection of StorageSyncServices.",
+          "items": {
+            "$ref": "#/definitions/StorageSyncService"
+          }
+        }
+      }
+    },
+    "SyncGroupArray": {
+      "type": "object",
+      "description": "Array of SyncGroup",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "Collection of SyncGroup.",
+          "items": {
+            "$ref": "#/definitions/SyncGroup"
+          }
+        }
+      }
+    },
+    "CloudEndpointArray": {
+      "type": "object",
+      "description": "Array of CloudEndpoint",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "Collection of CloudEndpoint.",
+          "items": {
+            "$ref": "#/definitions/CloudEndpoint"
+          }
+        }
+      }
+    },
+    "ServerEndpointArray": {
+      "description": "Array of ServerEndpoint",
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "Collection of ServerEndpoint.",
+          "items": {
+            "$ref": "#/definitions/ServerEndpoint"
+          }
+        }
+      }
+    },
+    "RegisteredServerArray": {
+      "description": "Array of RegisteredServer",
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "Collection of Registered Server.",
+          "items": {
+            "$ref": "#/definitions/RegisteredServer"
+          }
+        }
+      }
+    },
+    "WorkflowArray": {
+      "description": "Array of Workflow",
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "Collection of workflow items.",
+          "items": {
+            "$ref": "#/definitions/Workflow"
+          }
+        }
+      }
+    },
+    "SubscriptionStateProperties": {
+      "type": "object",
+      "description": "Subscription State properties."
+    },
+    "PostBackupResponseProperties": {
+      "type": "object",
+      "description": "Post Backup Response Properties object.",
+      "properties": {
+        "cloudEndpointName": {
+          "type": "string",
+          "description": "cloud endpoint Name.",
+          "readOnly": true
+        }
+      }
+    },
+    "StorageSyncServiceUpdateParameters": {
+      "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "The user-specified tags associated with the storage sync service."
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/StorageSyncServiceUpdateProperties",
+          "description": "The properties of the storage sync service."
+        }
+      },
+      "description": "Parameters for updating an Storage sync service."
+    },
+    "StorageSyncServiceUpdateProperties": {
+      "type": "object",
+      "description": "Storage Sync Service Update Properties object.",
+      "properties": {}
+    },
+    "StorageSyncServiceProperties": {
+      "type": "object",
+      "description": "Storage Sync Service Properties object.",
+      "properties": {
+        "storageSyncServiceStatus": {
+          "type": "integer",
+          "description": "Storage Sync service status.",
+          "readOnly": true
+        },
+        "storageSyncServiceUid": {
+          "type": "string",
+          "description": "Storage Sync service Uid",
+          "readOnly": true
+        }
+      }
+    },
+    "WorkflowProperties": {
+      "type": "object",
+      "description": "Workflow Properties object.",
+      "properties": {
+        "lastStepName": {
+          "type": "string",
+          "description": "last step name"
+        },
+        "status": {
+          "$ref": "#/definitions/WorkflowStatus",
+          "description": "workflow status."
+        },
+        "operation": {
+          "$ref": "#/definitions/OperationDirection",
+          "description": "operation direction."
+        },
+        "steps": {
+          "type": "string",
+          "description": "workflow steps"
+        },
+        "lastOperationId": {
+          "type": "string",
+          "description": "workflow last operation identifier."
+        }
+      }
+    },
+    "SyncGroupProperties": {
+      "type": "object",
+      "description": "SyncGroup Properties object.",
+      "properties": {
+        "uniqueId": {
+          "type": "string",
+          "description": "Unique Id"
+        },
+        "syncGroupStatus": {
+          "type": "string",
+          "description": "Sync group status",
+          "readOnly": true
+        }
+      }
+    },
+    "RegisteredServerProperties": {
+      "type": "object",
+      "description": "RegisteredServer Properties object.",
+      "properties": {
+        "serverCertificate": {
+          "type": "string",
+          "description": "Registered Server Certificate"
+        },
+        "agentVersion": {
+          "type": "string",
+          "description": "Registered Server Agent Version"
+        },
+        "serverOSVersion": {
+          "type": "string",
+          "description": "Registered Server OS Version"
+        },
+        "serverManagementErrorCode": {
+          "type": "integer",
+          "description": "Registered Server Management Error Code"
+        },
+        "lastHeartBeat": {
+          "type": "string",
+          "description": "Registered Server last heart beat"
+        },
+        "provisioningState": {
+          "type": "string",
+          "description": "Registered Server Provisioning State"
+        },
+        "serverRole": {
+          "type": "string",
+          "description": "Registered Server serverRole"
+        },
+        "clusterId": {
+          "type": "string",
+          "description": "Registered Server clusterId"
+        },
+        "clusterName": {
+          "type": "string",
+          "description": "Registered Server clusterName"
+        },
+        "serverId": {
+          "type": "string",
+          "description": "Registered Server serverId"
+        },
+        "storageSyncServiceUid": {
+          "type": "string",
+          "description": "Registered Server storageSyncServiceUid"
+        },
+        "lastWorkflowId": {
+          "type": "string",
+          "description": "Registered Server lastWorkflowId"
+        },
+        "lastOperationName": {
+          "type": "string",
+          "description": "Resource Last Operation Name"
+        },
+        "discoveryEndpointUri": {
+          "type": "string",
+          "description": "Resource discoveryEndpointUri"
+        },
+        "resourceLocation": {
+          "type": "string",
+          "description": "Resource Location"
+        },
+        "serviceLocation": {
+          "type": "string",
+          "description": "Service Location"
+        },
+        "friendlyName": {
+          "type": "string",
+          "description": "Friendly Name"
+        },
+        "managementEndpointUri": {
+          "type": "string",
+          "description": "Management Endpoint Uri"
+        },
+        "monitoringConfiguration": {
+          "type": "string",
+          "description": "Monitoring Configuration"
+        }
+      }
+    },
+    "CloudEndpointProperties": {
+      "type": "object",
+      "description": "CloudEndpoint Properties object.",
+      "properties": {
+        "storageAccountResourceId": {
+          "type": "string",
+          "description": "Storage Account Resource Id"
+        },
+        "azureFileShareName": {
+          "type": "string",
+          "description": "Azure file share name"
+        },
+        "storageAccountTenantId": {
+          "type": "string",
+          "description": "Storage Account Tenant Id"
+        },
+        "partnershipId": {
+          "type": "string",
+          "description": "Partnership Id"
+        },
+        "friendlyName": {
+          "type": "string",
+          "description": "Friendly Name"
+        },
+        "backupEnabled": {
+          "type": "string",
+          "description": "Backup Enabled",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "type": "string",
+          "description": "CloudEndpoint Provisioning State"
+        },
+        "lastWorkflowId": {
+          "type": "string",
+          "description": "CloudEndpoint lastWorkflowId"
+        },
+        "lastOperationName": {
+          "type": "string",
+          "description": "Resource Last Operation Name"
+        }
+      }
+    },
+    "ServerEndpointUpdateProperties": {
+      "type": "object",
+      "description": "ServerEndpoint Update Properties object.",
+      "properties": {
+        "cloudTiering": {
+          "$ref": "#/definitions/FeatureStatus",
+          "description": "Cloud Tiering."
+        },
+        "volumeFreeSpacePercent": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 100,
+          "description": "Level of free space to be maintained by Cloud Tiering if it is enabled."
+        },
+        "tierFilesOlderThanDays": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 2147483647,
+          "description": "Tier files older than days."
+        },
+        "offlineDataTransfer": {
+          "$ref": "#/definitions/FeatureStatus",
+          "description": "Offline data transfer"
+        },
+        "offlineDataTransferShareName": {
+          "type": "string",
+          "description": "Offline data transfer share name"
+        }
+      }
+    },
+    "ServerEndpointProperties": {
+      "type": "object",
+      "description": "ServerEndpoint Properties object.",
+      "properties": {
+        "serverLocalPath": {
+          "$ref": "#/definitions/PhysicalPath",
+          "description": "Server Local path."
+        },
+        "cloudTiering": {
+          "$ref": "#/definitions/FeatureStatus",
+          "description": "Cloud Tiering."
+        },
+        "volumeFreeSpacePercent": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 100,
+          "description": "Level of free space to be maintained by Cloud Tiering if it is enabled."
+        },
+        "tierFilesOlderThanDays": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 2147483647,
+          "description": "Tier files older than days."
+        },
+        "friendlyName": {
+          "type": "string",
+          "description": "Friendly Name"
+        },
+        "serverResourceId": {
+          "$ref": "#/definitions/ResourceId",
+          "description": "Server Resource Id."
+        },
+        "provisioningState": {
+          "type": "string",
+          "description": "ServerEndpoint Provisioning State",
+          "readOnly": true
+        },
+        "lastWorkflowId": {
+          "type": "string",
+          "description": "ServerEndpoint lastWorkflowId",
+          "readOnly": true
+        },
+        "lastOperationName": {
+          "type": "string",
+          "description": "Resource Last Operation Name",
+          "readOnly": true
+        },
+        "syncStatus": {
+          "type": "object",
+          "$ref": "#/definitions/ServerEndpointSyncStatus",
+          "description": "Server Endpoint sync status",
+          "readOnly": true
+        },
+        "offlineDataTransfer": {
+          "$ref": "#/definitions/FeatureStatus",
+          "description": "Offline data transfer"
+        },
+        "offlineDataTransferStorageAccountResourceId": {
+          "type": "string",
+          "description": "Offline data transfer storage account resource ID",
+          "readOnly": true
+        },
+        "offlineDataTransferStorageAccountTenantId": {
+          "type": "string",
+          "description": "Offline data transfer storage account tenant ID",
+          "readOnly": true
+        },
+        "offlineDataTransferShareName": {
+          "type": "string",
+          "description": "Offline data transfer share name"
+        }
+      }
+    },
+    "ServerEndpointSyncStatus": {
+      "type": "object",
+      "description": "Server Endpoint sync status",
+      "properties": {
+        "downloadHealth": {
+          "$ref": "#/definitions/HealthState",
+          "description": "Download Health Status.",
+          "readOnly": true
+        },
+        "uploadHealth": {
+          "$ref": "#/definitions/HealthState",
+          "description": "Upload Health Status.",
+          "readOnly": true
+        },
+        "combinedHealth": {
+          "$ref": "#/definitions/HealthState",
+          "description": "Combined Health Status.",
+          "readOnly": true
+        },
+        "syncActivity": {
+          "$ref": "#/definitions/SyncActivityState",
+          "description": "Sync activity",
+          "readOnly": true
+        },
+        "totalPersistentFilesNotSyncingCount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Total count of persistent files not syncing (combined upload + download). Reserved for future use.",
+          "readOnly": true
+        },
+        "lastUpdatedTimestamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Last Updated Timestamp",
+          "readOnly": true
+        },
+        "uploadStatus": {
+          "$ref": "#/definitions/SyncSessionStatus",
+          "description": "Upload Status",
+          "readOnly": true
+        },
+        "downloadStatus": {
+          "$ref": "#/definitions/SyncSessionStatus",
+          "description": "Download Status",
+          "readOnly": true
+        },
+        "uploadActivity": {
+          "$ref": "#/definitions/SyncActivityStatus",
+          "description": "Upload sync activity",
+          "readOnly": true
+        },
+        "downloadActivity": {
+          "$ref": "#/definitions/SyncActivityStatus",
+          "description": "Download sync activity",
+          "readOnly": true
+        },
+        "offlineDataTransferStatus": {
+          "$ref": "#/definitions/OfflineDataTransferState",
+          "description": "Offline Data Transfer State",
+          "readOnly": true
+        }
+      }
+    },
+    "SyncSessionStatus": {
+      "type": "object",
+      "description": "Sync Session status object.",
+      "properties": {
+        "lastSyncResult": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Last sync result (HResult)",
+          "readOnly": true
+        },
+        "lastSyncTimestamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Last sync timestamp",
+          "readOnly": true
+        },
+        "lastSyncSuccessTimestamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Last sync success timestamp",
+          "readOnly": true
+        },
+        "lastSyncPerItemErrorCount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Last sync per item error count.",
+          "readOnly": true
+        },
+        "persistentFilesNotSyncingCount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Count of persistent files not syncing. Reserved for future use.",
+          "readOnly": true
+        },
+        "transientFilesNotSyncingCount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Count of transient files not syncing. Reserved for future use.",
+          "readOnly": true
+        },
+        "filesNotSyncingErrors": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/FilesNotSyncingError"
+          },
+          "description": "Array of per-item errors coming from the last sync session. Reserved for future use.",
+          "readOnly": true
+        }
+      }
+    },
+    "SyncActivityStatus": {
+      "type": "object",
+      "description": "Sync Session status object.",
+      "properties": {
+        "timestamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp when properties were updated",
+          "readOnly": true
+        },
+        "perItemErrorCount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Per item error count",
+          "readOnly": true
+        },
+        "appliedItemCount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Applied item count.",
+          "readOnly": true
+        },
+        "totalItemCount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Total item count (if available)",
+          "readOnly": true
+        },
+        "appliedBytes": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Applied bytes",
+          "readOnly": true
+        },
+        "totalBytes": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Total bytes (if available)",
+          "readOnly": true
+        }
+      }
+    },
+    "FilesNotSyncingError": {
+      "type": "object",
+      "description": "Files not syncing error object",
+      "properties": {
+        "errorCode": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Error code (HResult)",
+          "readOnly": true
+        },
+        "persistentCount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Count of persistent files not syncing with the specified error code",
+          "readOnly": true
+        },
+        "transientCount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Count of transient files not syncing with the specified error code",
+          "readOnly": true
+        }
+      }
+    },
+    "PhysicalPath": {
+      "type": "string",
+      "description": "Server folder used for data synchronization"
+    },
+    "ResourceId": {
+      "type": "string",
+      "description": "Arm resource identifier."
+    },
+    "TagsObject": {
+      "type": "object",
+      "description": "Tags object."
+    },
+    "FeatureStatus": {
+      "type": "string",
+      "description": "Type of the Feature Status",
+      "enum": [
+        "on",
+        "off"
+      ]
+    },
+    "HealthState": {
+      "type": "string",
+      "description": "Type of the Health state",
+      "enum": [
+        "Healthy",
+        "Error",
+        "SyncBlockedForRestore",
+        "SyncBlockedForChangeDetectionPostRestore",
+        "NoActivity"
+      ]
+    },
+    "SyncActivityState": {
+      "type": "string",
+      "description": "Type of the sync activity state",
+      "enum": [
+        "Upload",
+        "Download",
+        "UploadAndDownload"
+      ]
+    },
+    "OfflineDataTransferState": {
+      "type": "string",
+      "description": "Type of the Health state",
+      "enum": [
+        "InProgress",
+        "Stopping",
+        "NotRunning",
+        "Complete"
+      ]
+    },
+    "WorkflowStatus": {
+      "type": "string",
+      "description": "Type of the Workflow Status",
+      "enum": [
+        "active",
+        "expired",
+        "succeeded",
+        "aborted",
+        "failed"
+      ]
+    },
+    "OperationDirection": {
+      "type": "string",
+      "description": "Type of the Operation Direction",
+      "enum": [
+        "do",
+        "undo",
+        "cancel"
+      ]
+    },
+    "ProgressType": {
+      "type": "string",
+      "description": "Type of the ProgressType",
+      "enum": [
+        "none",
+        "initialize",
+        "download",
+        "upload",
+        "recall"
+      ]
+    },
+    "OperationStatus": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Operation Id"
+        },
+        "status": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Operation status"
+        },
+        "startTime": {
+          "readOnly": true,
+          "type": "string",
+          "format": "date-time",
+          "description": "Start time of the operation"
+        },
+        "endTime": {
+          "readOnly": true,
+          "type": "string",
+          "format": "date-time",
+          "description": "End time of the operation"
+        },
+        "error": {
+          "readOnly": true,
+          "$ref": "#/definitions/StorageSyncApiError",
+          "description": "Error details."
+        }
+      },
+      "description": "Operation status object"
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ]
+}

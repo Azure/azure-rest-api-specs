@@ -1,83 +1,83 @@
 {
-  "operationId":"Application_Create",
-  "description":"This example shows how to create or update an application resource.",  
+  "operationId": "Application_Create",
+  "description": "This example shows how to create or update an application resource.",
   "parameters": {
-      "subscriptionId": "00000000-0000-0000-0000-000000000000",
-      "resourceGroupName": "sbz_demo",
-      "api-version": "2018-07-01-preview",
-      "applicationName": "helloWorldApp",
-      "applicationResourceDescription": {
-        "properties": {
-          "description": "SeaBreeze HelloWorld Application!",
-          "services": [
-            {
-              "properties": {
-                "osType": "linux",
-                "codePackages": [
-                  {
-                    "name": "helloWorldCode",
-                    "image": "seabreeze/sbz-helloworld:1.0-alpine",
-                    "endpoints": [
-                      {
-                        "name": "helloWorldListener",
-                        "port": 80
-                      }
-                    ],
-                    "resources": {
-                      "requests": {
-                        "memoryInGB": 1,
-                        "cpu": 1
-                      }
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "sbz_demo",
+    "api-version": "2018-07-01-preview",
+    "applicationName": "helloWorldApp",
+    "applicationResourceDescription": {
+      "properties": {
+        "description": "SeaBreeze HelloWorld Application!",
+        "services": [
+          {
+            "properties": {
+              "osType": "linux",
+              "codePackages": [
+                {
+                  "name": "helloWorldCode",
+                  "image": "seabreeze/sbz-helloworld:1.0-alpine",
+                  "endpoints": [
+                    {
+                      "name": "helloWorldListener",
+                      "port": 80
+                    }
+                  ],
+                  "resources": {
+                    "requests": {
+                      "memoryInGB": 1,
+                      "cpu": 1
                     }
                   }
-                ],
-                "description": "SeaBreeze Hello World Service.",
-                "replicaCount": 1
-              },
-              "name": "helloWorldService"
-            }
-          ]
-        },
+                }
+              ],
+              "description": "SeaBreeze Hello World Service.",
+              "replicaCount": 1
+            },
+            "name": "helloWorldService"
+          }
+        ]
+      },
+      "tags": {},
+      "location": "EastUS"
+    }
+  },
+  "responses": {
+    "201": {
+      "body": {
+        "type": "Microsoft.ServiceFabricMesh/applications",
+        "location": "EastUS",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/sbz_demo/providers/Microsoft.ServiceFabricMesh/applications/myHelloWorldApp",
+        "name": "myHelloWorldApp",
         "tags": {},
-        "location": "EastUS"
+        "properties": {
+          "provisioningState": "Updating",
+          "description": "SeaBreeze HelloWorld Application!",
+          "healthState": "Ok",
+          "serviceNames": [
+            "helloWorldService"
+          ],
+          "status": "Invalid"
+        }
       }
     },
-    "responses": {
-      "201": {
-        "body": {
-          "type": "Microsoft.ServiceFabricMesh/applications",
-          "location": "EastUS",
-          "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/sbz_demo/providers/Microsoft.ServiceFabricMesh/applications/myHelloWorldApp",
-          "name": "myHelloWorldApp",
-          "tags": {},
-          "properties": {
-            "provisioningState": "Updating",
-            "description": "SeaBreeze HelloWorld Application!",
-            "healthState": "Ok",
-            "serviceNames": [
-              "helloWorldService"
-            ],
-            "status": "Invalid"
-          }
-        }
-      },
-      "200": {
-        "body": {
-          "type": "Microsoft.ServiceFabricMesh/applications",
-          "location": "EastUS",
-          "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/sbz_demo/providers/Microsoft.ServiceFabricMesh/applications/myHelloWorldApp",
-          "name": "myHelloWorldApp",
-          "tags": {},
-          "properties": {
-            "provisioningState": "Succeeded",
-            "description": "SeaBreeze HelloWorld Application!",
-            "healthState": "Ok",
-            "serviceNames": [
-              "helloWorldService"
-            ],
-            "status": "Invalid"
-          }
+    "200": {
+      "body": {
+        "type": "Microsoft.ServiceFabricMesh/applications",
+        "location": "EastUS",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/sbz_demo/providers/Microsoft.ServiceFabricMesh/applications/myHelloWorldApp",
+        "name": "myHelloWorldApp",
+        "tags": {},
+        "properties": {
+          "provisioningState": "Succeeded",
+          "description": "SeaBreeze HelloWorld Application!",
+          "healthState": "Ok",
+          "serviceNames": [
+            "helloWorldService"
+          ],
+          "status": "Invalid"
         }
       }
     }
   }
+}

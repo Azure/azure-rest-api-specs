@@ -17,10 +17,10 @@ python:
 ``` yaml $(python) && $(python-mode) == 'update'
 python:
   no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/azure-cognitiveservices-vision-face/azure/cognitiveservices/vision/face
+  output-folder: $(python-sdks-folder)/cognitiveservices/azure-cognitiveservices-vision-face/azure/cognitiveservices/vision/face
 ```
 ``` yaml $(python) && $(python-mode) == 'create'
 python:
   basic-setup-py: true
-  output-folder: $(python-sdks-folder)/azure-cognitiveservices-vision-face
+  output-folder: $(python-sdks-folder)/cognitiveservices/azure-cognitiveservices-vision-face
 ```

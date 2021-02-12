@@ -1,0 +1,96 @@
+{
+  "parameters": {
+    "subscriptionId": "{subscription-id}",
+    "resourceGroupName": "myResourceGroup",
+    "api-version": "2019-03-01",
+    "galleryName": "myGalleryName",
+    "galleryImageName": "myGalleryImageName",
+    "galleryImageVersionName": "1.0.0",
+    "galleryImageVersion": {
+      "location": "West US",
+      "properties": {
+        "publishingProfile": {
+          "targetRegions": [
+            {
+              "name": "West US",
+              "regionalReplicaCount": 1
+            },
+            {
+              "name": "East US",
+              "regionalReplicaCount": 2
+            }
+          ],
+          "source": {
+            "managedImage": {
+              "id": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Compute/images/{imageName}"
+            }
+          }
+        }
+      }
+    },
+    "$expand": "ReplicationStatus"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "publishingProfile": {
+            "targetRegions": [
+              {
+                "name": "West US",
+                "regionalReplicaCount": 1,
+                "storageAccountType": "Standard_LRS"
+              },
+              {
+                "name": "East US",
+                "regionalReplicaCount": 2,
+                "storageAccountType": "Standard_LRS"
+              }
+            ],
+            "source": {
+              "managedImage": {
+                "id": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Compute/images/{imageName}"
+              }
+            },
+            "replicaCount": 1,
+            "publishedDate": "2018-01-01T00:00:00Z",
+            "storageAccountType": "Standard_LRS"
+          },
+          "storageProfile": {
+            "osDiskImage": {
+              "sizeInGB": 10,
+              "hostCaching": "ReadOnly"
+            },
+            "dataDiskImages": [
+              {
+                "lun": 1,
+                "sizeInGB": 10,
+                "hostCaching": "None"
+              }
+            ]
+          },
+          "replicationStatus": {
+            "aggregatedState": "Completed",
+            "summary": [
+              {
+                "region": "West US",
+                "state": "Completed",
+                "details": "",
+                "progress": 100
+              },
+              {
+                "region": "East US",
+                "state": "Completed",
+                "details": "",
+                "progress": 100
+              }
+            ]
+          },
+          "provisioningState": "Succeeded"
+        },
+        "location": "West US",
+        "name": "1.0.0"
+      }
+    }
+  }
+}

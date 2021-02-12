@@ -1,62 +1,62 @@
 {
-    "parameters": {
-        "subscriptionId": "20ff7fc3-e762-44dd-bd96-b71116dcdc23",
-        "location": "local",
-        "api-version": "2015-11-01",
-        "offer": "sampleoffer1",
-        "resourceGroupName": "RG1",
-        "newOffer": {
-            "properties": {
-                "name": "testOffer1",
-                "displayName": "Test Offer",
-                "description": "This is a test Offer",
-                "state": "Private",
-                "subscriptionCount": 0,
-                "maxSubscriptionsPerAccount": 100,
-                "basePlanIds": [
-                    "/subscriptions/8ab2551d-41e5-489b-9273-1cdf1cbc7dc6/resourceGroups/Plans/providers/Microsoft.Subscriptions.Admin/plans/testplan"
-                ]
-            }
-        }
-    },
-    "responses": {
-        "200": {
-            "body": {
-                "id": "/subscriptions/8ab2551d-41e5-489b-9273-1cdf1cbc7dc6/resourceGroups/testrg/providers/Microsoft.Subscriptions.Admin/offers/testOffer1",
-                "name": "testOffer1",
-                "type": "Microsoft.Subscriptions.Admin/offers",
-                "location": "local",
-                "properties": {
-                    "name": "testOffer1",
-                    "displayName": "Test Offer",
-                    "description": "This is a test Offer",
-                    "state": "Private",
-                    "subscriptionCount": 0,
-                    "maxSubscriptionsPerAccount": 100,
-                    "basePlanIds": [
-                        "/subscriptions/8ab2551d-41e5-489b-9273-1cdf1cbc7dc6/resourceGroups/Plans/providers/Microsoft.Subscriptions.Admin/plans/testplan"
-                    ]
-                }
-            }
-        },
-        "201": {
-            "body": {
-                "id": "/subscriptions/8ab2551d-41e5-489b-9273-1cdf1cbc7dc6/resourceGroups/testrg/providers/Microsoft.Subscriptions.Admin/offers/testOffer1",
-                "name": "testOffer1",
-                "type": "Microsoft.Subscriptions.Admin/offers",
-                "location": "local",
-                "properties": {
-                    "name": "testOffer1",
-                    "displayName": "Test Offer",
-                    "description": "This is a test Offer",
-                    "state": "Private",
-                    "subscriptionCount": 0,
-                    "maxSubscriptionsPerAccount": 100,
-                    "basePlanIds": [
-                        "/subscriptions/8ab2551d-41e5-489b-9273-1cdf1cbc7dc6/resourceGroups/Plans/providers/Microsoft.Subscriptions.Admin/plans/testplan"
-                    ]
-                }
-            }
-        }
+  "parameters": {
+    "subscriptionId": "20ff7fc3-e762-44dd-bd96-b71116dcdc23",
+    "location": "local",
+    "api-version": "2015-11-01",
+    "offer": "sampleoffer1",
+    "resourceGroupName": "RG1",
+    "offerDefinition": {
+      "properties": {
+        "name": "testOffer1",
+        "displayName": "Test Offer",
+        "description": "This is a test Offer",
+        "state": "Private",
+        "subscriptionCount": 0,
+        "maxSubscriptionsPerAccount": 100,
+        "basePlanIds": [
+          "/subscriptions/8ab2551d-41e5-489b-9273-1cdf1cbc7dc6/resourceGroups/Plans/providers/Microsoft.Subscriptions.Admin/plans/testplan"
+        ]
+      }
     }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/8ab2551d-41e5-489b-9273-1cdf1cbc7dc6/resourceGroups/testrg/providers/Microsoft.Subscriptions.Admin/offers/testOffer1",
+        "name": "testOffer1",
+        "type": "Microsoft.Subscriptions.Admin/offers",
+        "location": "local",
+        "properties": {
+          "name": "testOffer1",
+          "displayName": "Test Offer",
+          "description": "This is a test Offer",
+          "state": "Private",
+          "subscriptionCount": 0,
+          "maxSubscriptionsPerAccount": 100,
+          "basePlanIds": [
+            "/subscriptions/8ab2551d-41e5-489b-9273-1cdf1cbc7dc6/resourceGroups/Plans/providers/Microsoft.Subscriptions.Admin/plans/testplan"
+          ]
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/8ab2551d-41e5-489b-9273-1cdf1cbc7dc6/resourceGroups/testrg/providers/Microsoft.Subscriptions.Admin/offers/testOffer1",
+        "name": "testOffer1",
+        "type": "Microsoft.Subscriptions.Admin/offers",
+        "location": "local",
+        "properties": {
+          "name": "testOffer1",
+          "displayName": "Test Offer",
+          "description": "This is a test Offer",
+          "state": "Private",
+          "subscriptionCount": 0,
+          "maxSubscriptionsPerAccount": 100,
+          "basePlanIds": [
+            "/subscriptions/8ab2551d-41e5-489b-9273-1cdf1cbc7dc6/resourceGroups/Plans/providers/Microsoft.Subscriptions.Admin/plans/testplan"
+          ]
+        }
+      }
+    }
+  }
 }

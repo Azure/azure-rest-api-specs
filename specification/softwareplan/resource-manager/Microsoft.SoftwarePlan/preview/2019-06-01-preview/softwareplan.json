@@ -1,0 +1,569 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2019-06-01-preview",
+    "title": "Software Plan RP",
+    "description": "Azure software plans let users create and manage licenses for various software used in Azure.",
+    "x-ms-code-generation-settings": {
+      "name": "SoftwareplanClient"
+    }
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.SoftwarePlan/register": {
+      "post": {
+        "description": "Register to Microsoft.SoftwarePlan resource provider.",
+        "operationId": "SoftwarePlan_Register",
+        "tags": [
+          "Software plan"
+        ],
+        "x-ms-examples": {
+          "HybridUseBenefitListResult": {
+            "$ref": "./examples/RegisterSubscription.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "OK - Microsoft.SoftwarePlan is registered"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/{scope}/providers/Microsoft.SoftwarePlan/hybridUseBenefits": {
+      "get": {
+        "description": "Get all hybrid use benefits associated with an ARM resource.",
+        "operationId": "HybridUseBenefit_List",
+        "tags": [
+          "Hybrid use benefits"
+        ],
+        "x-ms-examples": {
+          "HybridUseBenefitListResult": {
+            "$ref": "./examples/GetAllHybridUseBenefits.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ScopeParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "Supports applying filter on the type of SKU"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - returns an array of plans at that scope",
+            "schema": {
+              "$ref": "#/definitions/HybridUseBenefitListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/{scope}/providers/Microsoft.SoftwarePlan/hybridUseBenefits/{planId}": {
+      "put": {
+        "description": "Create a new hybrid use benefit under a given scope",
+        "operationId": "HybridUseBenefit_Create",
+        "tags": [
+          "Hybrid use benefit"
+        ],
+        "x-ms-examples": {
+          "HybridUseBenefit": {
+            "$ref": "./examples/PutHybridUseBenefit.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ScopeParameter"
+          },
+          {
+            "$ref": "#/parameters/PlanIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/PutBodyParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - returns the plan that is created",
+            "schema": {
+              "$ref": "#/definitions/HybridUseBenefitModel"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "patch": {
+        "description": "Updates an existing hybrid use benefit",
+        "operationId": "HybridUseBenefit_Update",
+        "tags": [
+          "Hybrid use benefit"
+        ],
+        "x-ms-examples": {
+          "HybridUseBenefit": {
+            "$ref": "./examples/PatchHybridUseBenefit.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ScopeParameter"
+          },
+          {
+            "$ref": "#/parameters/PlanIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/PutBodyParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - successfully updated the given hybrid use benefit",
+            "schema": {
+              "$ref": "#/definitions/HybridUseBenefitModel"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "get": {
+        "description": "Gets a given plan ID",
+        "operationId": "HybridUseBenefit_Get",
+        "tags": [
+          "Hybrid use benefit"
+        ],
+        "x-ms-examples": {
+          "HybridUseBenefit": {
+            "$ref": "./examples/GetSingleHybridUseBenefit.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ScopeParameter"
+          },
+          {
+            "$ref": "#/parameters/PlanIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - returns the plan that is created",
+            "schema": {
+              "$ref": "#/definitions/HybridUseBenefitModel"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "delete": {
+        "description": "Deletes a given plan ID",
+        "operationId": "HybridUseBenefit_Delete",
+        "tags": [
+          "Hybrid use benefit"
+        ],
+        "x-ms-examples": {
+          "HybridUseBenefit": {
+            "$ref": "./examples/DeleteHybridUseBenefit.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ScopeParameter"
+          },
+          {
+            "$ref": "#/parameters/PlanIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - successfully deleted the given plan"
+          },
+          "204": {
+            "description": "OK - there was no plan to delete"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/{scope}/providers/Microsoft.SoftwarePlan/hybridUseBenefits/{planId}/revisions": {
+      "get": {
+        "description": "Gets the version history of a hybrid use benefit",
+        "operationId": "HybridUseBenefitRevision_List",
+        "tags": [
+          "Hybrid use benefit revisions"
+        ],
+        "x-ms-examples": {
+          "HybridUseBenefitRevisionsResponse": {
+            "$ref": "./examples/GetHybridUseBenefitRevisions.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ScopeParameter"
+          },
+          {
+            "$ref": "#/parameters/PlanIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - returns an array of plans ordered by revision",
+            "schema": {
+              "$ref": "#/definitions/HybridUseBenefitListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/{scope}/providers/Microsoft.SoftwarePlan/operations": {
+      "get": {
+        "summary": "Get operations.",
+        "description": "List all the operations.",
+        "operationId": "Operations_List",
+        "x-ms-examples": {
+          "GetOperations": {
+            "$ref": "./examples/GetOperations.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ScopeParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "tags": [
+          "Software plan operations"
+        ],
+        "responses": {
+          "200": {
+            "description": "List all the operations.",
+            "schema": {
+              "$ref": "#/definitions/OperationList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Error": {
+      "type": "object",
+      "description": "Error object returned by the RP",
+      "properties": {
+        "code": {
+          "description": "Error code",
+          "$ref": "#/definitions/ErrorCode"
+        },
+        "message": {
+          "type": "string",
+          "description": "A user readable error message. Localized based on x-ms-effective-locale header in the request"
+        }
+      }
+    },
+    "ErrorCode": {
+      "type": "string",
+      "description": "Defined error codes to be returned to the client.",
+      "enum": [
+        "InvalidRequestParameter",
+        "MissingRequestParameter"
+      ],
+      "x-ms-enum": {
+        "name": "ErrorCode",
+        "modelAsString": true
+      }
+    },
+    "Sku": {
+      "type": "object",
+      "description": "The SKU to be applied for this resource",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the SKU to be applied"
+        }
+      }
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "description": "Represent the current state of the Reservation.",
+      "enum": [
+        "Succeeded",
+        "Cancelled",
+        "Failed"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true
+      }
+    },
+    "HybridUseBenefitListResult": {
+      "description": "List of hybrid use benefits",
+      "properties": {
+        "value": {
+          "description": "List of hybrid use benefits",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/HybridUseBenefitModel"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Url to get the next page of items."
+        }
+      }
+    },
+    "HybridUseBenefitModel": {
+      "description": "Response on GET of a hybrid use benefit",
+      "required": [
+        "sku"
+      ],
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "sku": {
+          "description": "Hybrid use benefit SKU",
+          "$ref": "#/definitions/Sku"
+        },
+        "etag": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Indicates the revision of the hybrid use benefit",
+          "readOnly": true
+        },
+        "properties": {
+          "description": "Property bag for a hybrid use benefit response",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/HybridUseBenefitProperties"
+        }
+      }
+    },
+    "HybridUseBenefitProperties": {
+      "description": "Hybrid use benefit properties",
+      "properties": {
+        "provisioningState": {
+          "type": "string",
+          "description": "Provisioning state",
+          "$ref": "#/definitions/ProvisioningState",
+          "readOnly": true
+        },
+        "createdDate": {
+          "type": "string",
+          "description": "Created date",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "lastUpdatedDate": {
+          "type": "string",
+          "description": "Last updated date",
+          "format": "date-time",
+          "readOnly": true
+        }
+      }
+    },
+    "OperationList": {
+      "type": "object",
+      "description": "List all the operations.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of all operations",
+          "items": {
+            "$ref": "#/definitions/OperationResponse"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Url to get the next page of items."
+        }
+      }
+    },
+    "OperationResponse": {
+      "type": "object",
+      "description": "Operation response.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the operation"
+        },
+        "display": {
+          "description": "Display properties for the operation",
+          "$ref": "#/definitions/OperationDisplay"
+        },
+        "origin": {
+          "description": "Origin of the response",
+          "type": "string"
+        }
+      }
+    },
+    "OperationDisplay": {
+      "type": "object",
+      "description": "Display fields for an operation.",
+      "properties": {
+        "provider": {
+          "description": "Resource Provider name",
+          "type": "string"
+        },
+        "resource": {
+          "description": "Resource that is acted upon",
+          "type": "string"
+        },
+        "operation": {
+          "description": "Operation to be performed",
+          "type": "string"
+        },
+        "description": {
+          "description": "Description of the operation",
+          "type": "string"
+        }
+      }
+    }
+  },
+  "parameters": {
+    "ScopeParameter": {
+      "name": "scope",
+      "in": "path",
+      "x-ms-parameter-location": "method",
+      "required": true,
+      "type": "string",
+      "description": "The scope at which the operation is performed. This is limited to Microsoft.Compute/virtualMachines and Microsoft.Compute/hostGroups/hosts for now"
+    },
+    "PutBodyParameter": {
+      "name": "body",
+      "in": "body",
+      "x-ms-parameter-location": "method",
+      "required": true,
+      "description": "Request body for creating a hybrid use benefit",
+      "schema": {
+        "$ref": "#/definitions/HybridUseBenefitModel"
+      }
+    },
+    "PlanIdParameter": {
+      "name": "planId",
+      "in": "path",
+      "x-ms-parameter-location": "method",
+      "required": true,
+      "type": "string",
+      "description": "This is a unique identifier for a plan. Should be a guid."
+    },
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "x-ms-parameter-location": "client",
+      "required": true,
+      "description": "The api-version to be used by the service",
+      "type": "string"
+    }
+  }
+}

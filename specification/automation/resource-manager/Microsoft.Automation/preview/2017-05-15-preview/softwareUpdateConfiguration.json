@@ -582,17 +582,7 @@
         "frequency": {
           "type": "string",
           "description": "Gets or sets the frequency of the schedule.",
-          "enum": [
-            "OneTime",
-            "Day",
-            "Hour",
-            "Week",
-            "Month"
-          ],
-          "x-ms-enum": {
-            "name": "ScheduleFrequency",
-            "modelAsString": true
-          }
+          "$ref": "../../stable/2015-10-31/schedule.json#/definitions/scheduleFrequency"
         },
         "timeZone": {
           "type": "string",
@@ -712,21 +702,6 @@
         "properties"
       ]
     },
-    "scheduleFrequency": {
-      "type": "string",
-      "description": "Gets or sets the frequency of the schedule.",
-      "enum": [
-        "OneTime",
-        "Day",
-        "Hour",
-        "Week",
-        "Month"
-      ],
-      "x-ms-enum": {
-        "name": "ScheduleFrequency",
-        "modelAsString": true
-      }
-    },
     "collectionItemUpdateConfiguration": {
       "description": "object returned when requesting a collection of software update configuration",
       "properties": {
@@ -755,7 +730,7 @@
         "frequency": {
           "description": "execution frequency of the schedule associated with the software update configuration",
           "type": "string",
-          "$ref": "#/definitions/scheduleFrequency"
+          "$ref": "../../stable/2015-10-31/schedule.json#/definitions/scheduleFrequency"
         },
         "startTime": {
           "type": "string",
@@ -802,7 +777,7 @@
             "$ref": "#/definitions/AzureQueryProperties"
           }
         },
-        "nonAzureQueries":{
+        "nonAzureQueries": {
           "description": "List of non Azure queries in the software update configuration.",
           "type": "array",
           "items": {
@@ -812,20 +787,19 @@
         }
       }
     },
-    "NonAzureQueryProperties":{
+    "NonAzureQueryProperties": {
       "type": "object",
       "description": "Non Azure query for the update configuration.",
-      "properties":{
-        "functionAlias" :{
+      "properties": {
+        "functionAlias": {
           "type": "string",
           "description": "Log Analytics Saved Search name."
         },
-        "workspaceId" :{
+        "workspaceId": {
           "type": "string",
           "description": "Workspace Id for Log Analytics in which the saved Search is resided."
         }
       }
-     
     },
     "AzureQueryProperties": {
       "type": "object",

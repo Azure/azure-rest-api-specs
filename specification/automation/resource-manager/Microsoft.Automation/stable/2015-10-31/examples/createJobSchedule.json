@@ -1,45 +1,45 @@
 {
+  "parameters": {
+    "subscriptionId": "subid",
+    "resourceGroupName": "rg",
+    "automationAccountName": "ContoseAutomationAccount",
+    "jobScheduleId": "0fa462ba-3aa2-4138-83ca-9ebc3bc55cdc",
+    "api-version": "2015-10-31",
     "parameters": {
-        "subscriptionId": "subid",
-        "resourceGroupName": "rg",
-        "automationAccountName": "ContoseAutomationAccount",
-        "jobScheduleId": "0fa462ba-3aa2-4138-83ca-9ebc3bc55cdc",
-        "api-version": "2015-10-31",
+      "properties": {
+        "schedule": {
+          "name": "ScheduleNameGoesHere332204b5-debe-4348-a5c7-6357457189f2"
+        },
+        "runbook": {
+          "name": "TestRunbook"
+        },
         "parameters": {
-            "properties": {
-                "schedule": {
-                    "name": "ScheduleNameGoesHere332204b5-debe-4348-a5c7-6357457189f2"
-                },
-                "runbook": {
-                    "name": "TestRunbook"
-                },
-                "parameters": {
-                    "jobscheduletag01": "jobschedulevalue01",
-                    "jobscheduletag02": "jobschedulevalue02"
-                }
-            }
+          "jobscheduletag01": "jobschedulevalue01",
+          "jobscheduletag02": "jobschedulevalue02"
         }
-    },
-    "responses": {
-        "201": {
-            "headers": {},
-            "body": {
-                "id": "/subscriptions/subid/resourceGroups/rg/providers/Microsoft.Automation/automationAccounts/ContoseAutomationAccount/jobSchedules/0fa462ba-3aa2-4138-83ca-9ebc3bc55cdc",
-                "properties": {
-                    "jobScheduleId": "0fa462ba-3aa2-4138-83ca-9ebc3bc55cdc",
-                    "runbook": {
-                        "name": "TestRunbook"
-                    },
-                    "schedule": {
-                        "name": "ScheduleNameGoesHere332204b5-debe-4348-a5c7-6357457189f2"
-                    },
-                    "runOn": null,
-                    "parameters": {
-                        "jobscheduletag01": "jobschedulevalue01",
-                        "jobscheduletag02": "jobschedulevalue02"
-                    }
-                }
-            }
-        }
+      }
     }
+  },
+  "responses": {
+    "201": {
+      "headers": {},
+      "body": {
+        "id": "/subscriptions/subid/resourceGroups/rg/providers/Microsoft.Automation/automationAccounts/ContoseAutomationAccount/jobSchedules/0fa462ba-3aa2-4138-83ca-9ebc3bc55cdc",
+        "properties": {
+          "jobScheduleId": "0fa462ba-3aa2-4138-83ca-9ebc3bc55cdc",
+          "runbook": {
+            "name": "TestRunbook"
+          },
+          "schedule": {
+            "name": "ScheduleNameGoesHere332204b5-debe-4348-a5c7-6357457189f2"
+          },
+          "runOn": null,
+          "parameters": {
+            "jobscheduletag01": "jobschedulevalue01",
+            "jobscheduletag02": "jobschedulevalue02"
+          }
+        }
+      }
+    }
+  }
 }

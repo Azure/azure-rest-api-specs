@@ -195,7 +195,9 @@
         "properties"
       ],
       "allOf": [
-        { "$ref": "#/definitions/TrackedResource" }
+        {
+          "$ref": "#/definitions/TrackedResource"
+        }
       ]
     },
     "AssignmentList": {
@@ -249,10 +251,11 @@
     "AssignmentStatus": {
       "description": "The status of Blueprint assignment. This field is readonly.",
       "type": "object",
-      "properties": {
-      },
+      "properties": {},
       "allOf": [
-        { "$ref": "#/definitions/BlueprintResourceStatusBase" }
+        {
+          "$ref": "#/definitions/BlueprintResourceStatusBase"
+        }
       ]
     },
     "AssignmentLockSettings": {
@@ -357,9 +360,13 @@
           "description": "actual value."
         }
       },
-      "required": [ "value" ],
+      "required": [
+        "value"
+      ],
       "allOf": [
-        { "$ref": "#/definitions/ParameterValueBase" }
+        {
+          "$ref": "#/definitions/ParameterValueBase"
+        }
       ]
     },
     "SecretReferenceParameterValue": {
@@ -371,9 +378,13 @@
           "$ref": "#/definitions/SecretValueReference"
         }
       },
-      "required": [ "reference" ],
+      "required": [
+        "reference"
+      ],
       "allOf": [
-        { "$ref": "#/definitions/ParameterValueBase" }
+        {
+          "$ref": "#/definitions/ParameterValueBase"
+        }
       ]
     },
     "SecretValueReference": {
@@ -407,7 +418,9 @@
           "type": "string"
         }
       },
-      "required": [ "id" ]
+      "required": [
+        "id"
+      ]
     },
     "ResourceGroupValueCollection": {
       "description": "A dictionary which maps resource group placeholders to the resource groups which will be created.",
@@ -440,12 +453,19 @@
         "location": {
           "type": "string",
           "description": "The location of this Blueprint assignment.",
-          "x-ms-mutability": [ "read", "create" ]
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         }
       },
-      "required": [ "location" ],
+      "required": [
+        "location"
+      ],
       "allOf": [
-        { "$ref": "#/definitions/AzureResourceBase" }
+        {
+          "$ref": "#/definitions/AzureResourceBase"
+        }
       ]
     },
     "AzureResourceBase": {

@@ -4,9 +4,10 @@
 
 This is the AutoRest configuration file for AlertManagement.
 
-
 ---
+
 ## Getting Started
+
 To build the SDK for AlertManagement, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
@@ -14,19 +15,76 @@ To build the SDK for AlertManagement, simply [Install AutoRest](https://aka.ms/a
 To see additional help and options, run:
 
 > `autorest --help`
+
 ---
 
 ## Configuration
 
-
 ### Basic Information
+
 These are the global settings for the AlertManagement API.
+
+### Suppression
+``` yaml
+directive:
+  - suppress: R3025
+    reason: The rule applied incorrectly to base class.
+    where:
+      - $.definitions.ManagedResource
+  - suppress: R3026
+    reason: The rule applied incorrectly to base class.
+    where:
+      - $.definitions.ManagedResource
+```
 
 ``` yaml
 title: AlertsManagementClient
 description: AlertsManagement Client
 openapi-type: arm
-tag: package-2018-05
+tag: package-2019-06-preview
+```
+
+### Tag: package-2019-06-preview
+
+These settings apply only when `--tag=package-2019-06-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2019-06-preview'
+input-file:
+  - Microsoft.AlertsManagement/preview/2019-05-05-preview/ActionRules.json
+  - Microsoft.AlertsManagement/preview/2019-05-05-preview/AlertsManagement.json
+  - Microsoft.AlertsManagement/preview/2019-05-05-preview/SmartGroups.json
+  - Microsoft.AlertsManagement/stable/2019-06-01/SmartDetectorAlertRulesApi.json
+```
+
+
+### Tag: package-2019-06
+
+These settings apply only when `--tag=package-2019-06` is specified on the command line.
+
+```yaml $(tag) == 'package-2019-06'
+input-file:
+  - Microsoft.AlertsManagement/stable/2019-06-01/SmartDetectorAlertRulesApi.json
+```
+
+### Tag: package-2019-03
+
+These settings apply only when `--tag=package-2019-03` is specified on the command line.
+
+```yaml $(tag) == 'package-2019-03'
+input-file:
+  - Microsoft.AlertsManagement/stable/2019-03-01/AlertsManagement.json
+  - Microsoft.AlertsManagement/stable/2019-03-01/SmartDetectorAlertRulesApi.json
+```
+
+### Tag: package-preview-2019-05
+
+These settings apply only when `--tag=package-preview-2019-05` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2019-05'
+input-file:
+  - Microsoft.AlertsManagement/preview/2019-05-05-preview/ActionRules.json
+  - Microsoft.AlertsManagement/preview/2019-05-05-preview/AlertsManagement.json
+  - Microsoft.AlertsManagement/preview/2019-05-05-preview/SmartGroups.json
 ```
 
 ### Tag: package-2018-05
@@ -47,7 +105,18 @@ input-file:
 - Microsoft.AlertsManagement/preview/2018-05-05-preview/AlertsManagement.json
 ```
 
+### Tag: package-2020-08-04-preview
+
+These settings apply only when `--tag=package-2020-08-04` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-08-04-preview'
+input-file:
+- Microsoft.AlertsManagement/preview/2020-08-04-preview/AlertsManagement.json
+- Microsoft.AlertsManagement/preview/2020-08-04-preview/ResourceHealthAlertRules.json
+```
+
 ---
+
 # Code Generation
 
 ## Swagger to SDK
@@ -57,9 +126,14 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
+  - repo: azure-sdk-for-net
   - repo: azure-sdk-for-python
   - repo: azure-libraries-for-java
   - repo: azure-sdk-for-go
+  - repo: azure-sdk-for-trenton
+  - repo: azure-resource-manager-schemas
+    after_scripts:
+      - node sdkauto_afterscript.js alertsmanagement/resource-manager
 ```
 
 ## C#
@@ -72,7 +146,7 @@ csharp:
   azure-arm: true
   license-header: MICROSOFT_MIT_NO_VERSION
   namespace: Microsoft.Azure.Management.AlertsManagement
-  output-folder: $(csharp-sdks-folder)/AlertsManagement/Management.AlertsManagement/Generated
+  output-folder: $(csharp-sdks-folder)/alertsmanagement/Microsoft.Azure.Management.AlertsManagement/src/Generated
   clear-output-folder: true
 ```
 
@@ -82,7 +156,7 @@ These settings apply only when `--python` is specified on the command line.
 Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
 Use `--python-mode=update` if you already have a setup.py and just want to update the code itself.
 
-``` yaml $(python)
+``` yaml $(python) && !$(track2)
 python-mode: create
 python:
   azure-arm: true
@@ -92,15 +166,37 @@ python:
   package-name: azure-mgmt-alertsmanagement
   clear-output-folder: true
 ```
-``` yaml $(python) && $(python-mode) == 'update'
+
+``` yaml $(python) && $(track2)
+python-mode: create
+azure-arm: true
+license-header: MICROSOFT_MIT_NO_VERSION
+namespace: azure.mgmt.alertsmanagement
+package-name: azure-mgmt-alertsmanagement
+package-version: 1.0.0b1
+clear-output-folder: true
+```
+
+``` yaml $(python) && $(python-mode) == 'update' && !$(track2)
 python:
   no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-alertsmanagement/azure/mgmt/alertsmanagement
+  output-folder: $(python-sdks-folder)/alertsmanagement/azure-mgmt-alertsmanagement/azure/mgmt/alertsmanagement
 ```
-``` yaml $(python) && $(python-mode) == 'create'
+
+``` yaml $(python) && $(python-mode) == 'update' && $(track2)
+no-namespace-folders: true
+output-folder: $(python-sdks-folder)/alertsmanagement/azure-mgmt-alertsmanagement/azure/mgmt/alertsmanagement
+```
+
+``` yaml $(python) && $(python-mode) == 'create' && !$(track2)
 python:
   basic-setup-py: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-alertsmanagement
+  output-folder: $(python-sdks-folder)/alertsmanagement/azure-mgmt-alertsmanagement
+```
+
+``` yaml $(python) && $(python-mode) == 'create' && $(track2)
+basic-setup-py: true
+output-folder: $(python-sdks-folder)/alertsmanagement/azure-mgmt-alertsmanagement
 ```
 
 ## Go
@@ -109,17 +205,9 @@ See configuration in [readme.go.md](./readme.go.md)
 
 ## Java
 
-These settings apply only when `--java` is specified on the command line.
-Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-libraries-for-java clone>`.
+See configuration in [readme.java.md](./readme.java.md)
 
-``` yaml $(java)
-java:
-  azure-arm: true
-  fluent: true
-  namespace: com.microsoft.azure.management.alertsmanagement
-  license-header: MICROSOFT_MIT_NO_CODEGEN
-  payload-flattening-threshold: 1
-  output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-alertsmanagement
-```
+## AzureResourceSchema
 
+See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
 
