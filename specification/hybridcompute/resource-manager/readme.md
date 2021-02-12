@@ -33,19 +33,20 @@ tag: package-preview-2021-01
 
 These settings apply only when `--tag=package-preview-2021-01` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2021-01'
+``` yaml $(tag) == 'package-preview-2021-01'
 input-file:
-  - Microsoft.HybridCompute/preview/2021-01-28-preview/HybridCompute.json
-  - Microsoft.HybridCompute/preview/2021-01-28-preview/privateLinkScopes.json
+- Microsoft.HybridCompute/preview/2021-01-28-preview/HybridCompute.json
+- Microsoft.HybridCompute/preview/2021-01-28-preview/privateLinkScopes.json
 ```
+
 ### Tag: package-preview-2020-08
 
 These settings apply only when `--tag=package-preview-2020-08` is specified on the command line.
 
 ``` yaml $(tag) == 'package-preview-2020-08'
 input-file:
-  - Microsoft.HybridCompute/preview/2020-08-15-preview/HybridCompute.json
-  - Microsoft.HybridCompute/preview/2020-08-15-preview/privateLinkScopes.json
+- Microsoft.HybridCompute/preview/2020-08-15-preview/HybridCompute.json
+- Microsoft.HybridCompute/preview/2020-08-15-preview/privateLinkScopes.json
 ```
 
 ### Tag: package-2019-03
