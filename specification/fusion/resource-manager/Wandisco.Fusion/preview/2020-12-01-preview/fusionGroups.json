@@ -3,7 +3,7 @@
   "info": {
     "title": "WANDisco Fusion",
     "description": "WANDisco Fusion",
-    "version": "2019-09-01-preview"
+    "version": "2020-12-01-preview"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -1733,16 +1733,22 @@
             "$ref": "#/parameters/MigratorNameParameter"
           },
           {
-            "name": "Migrator",
+            "name": "MigratorTagsAndBandwidthUpdate",
             "description": "migrator update details.",
             "in": "body",
             "schema": {
-              "$ref": "#/definitions/TagsUpdate"
+              "$ref": "#/definitions/MigratorTagsAndBandwidthUpdate"
             }
           }
         ],
         "responses": {
           "200": {
+            "description": "Updating Migrator.",
+            "schema": {
+              "$ref": "#/definitions/Migrator"
+            }
+          },
+          "201": {
             "description": "Updating Migrator.",
             "schema": {
               "$ref": "#/definitions/Migrator"
@@ -1755,9 +1761,16 @@
             }
           }
         },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
         "x-ms-examples": {
-          "Successful Patch": {
-            "$ref": "./examples/LiveDataMigrator/MigratorPatch.json"
+          "Successful Tags Patch": {
+            "$ref": "./examples/LiveDataMigrator/MigratorTagPatch.json"
+          },
+          "Successful Bandwidth Patch": {
+            "$ref": "./examples/LiveDataMigrator/MigratorBandwidthPatch.json"
           }
         }
       },
@@ -1994,7 +2007,7 @@
         "tags": [
           "LiveDataMigrations"
         ],
-        "description": "Start a Migrator migration",
+        "description": "Create a Migrator migration",
         "operationId": "LiveDataMigrations_CreateOrUpdate",
         "parameters": [
           {
@@ -2133,6 +2146,12 @@
               "$ref": "#/definitions/LiveDataMigration"
             }
           },
+          "201": {
+            "description": "Updating LiveDataMigration",
+            "schema": {
+              "$ref": "#/definitions/LiveDataMigration"
+            }
+          },
           "default": {
             "description": "Error response describing the reason for operation failure",
             "schema": {
@@ -2140,9 +2159,13 @@
             }
           }
         },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
         "x-ms-examples": {
-          "Successful Patch": {
-            "$ref": "./examples/LiveDataMigrator/LiveDataMigrationPatch.json"
+          "Successful Tags Patch": {
+            "$ref": "./examples/LiveDataMigrator/LiveDataMigrationTagsPatch.json"
           }
         }
       }
@@ -2174,6 +2197,9 @@
         "responses": {
           "200": {
             "description": "OK. The request has succeeded."
+          },
+          "412": {
+            "description": "Precondition Failed"
           },
           "default": {
             "description": "Error response describing the reason for operation failure. 404 - NotFound",
@@ -2216,6 +2242,9 @@
         "responses": {
           "200": {
             "description": "OK. The request has succeeded."
+          },
+          "412": {
+            "description": "Precondition Failed"
           },
           "default": {
             "description": "Error response describing the reason for operation failure. 404 - NotFound",
@@ -3253,6 +3282,12 @@
           "additionalProperties": {
             "type": "string"
           }
+        },
+        "systemData": {
+          "title": "SystemData",
+          "description": "System metadata for Resource",
+          "$ref": "#/definitions/SystemData",
+          "readOnly": true
         }
       },
       "x-ms-azure-resource": true
@@ -3275,9 +3310,68 @@
           "description": "Azure resource type.",
           "type": "string",
           "readOnly": true
+        },
+        "systemData": {
+          "title": "SystemData",
+          "description": "System metadata for Resource",
+          "$ref": "#/definitions/SystemData",
+          "readOnly": true
         }
       },
       "x-ms-azure-resource": true
+    },
+    "SystemData": {
+      "description": "Metadata pertaining to creation and last modification of the resource.",
+      "type": "object",
+      "readOnly": true,
+      "properties": {
+        "createdBy": {
+          "type": "string",
+          "description": "The identity that created the resource."
+        },
+        "createdByType": {
+          "type": "string",
+          "description": "The type of identity that created the resource.",
+          "enum": [
+            "User",
+            "Application",
+            "ManagedIdentity",
+            "Key"
+          ],
+          "x-ms-enum": {
+            "name": "createdByType",
+            "modelAsString": true
+          }
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp of resource creation (UTC)."
+        },
+        "lastModifiedBy": {
+          "type": "string",
+          "description": "The identity that last modified the resource."
+        },
+        "lastModifiedByType": {
+          "type": "string",
+          "description": "The type of identity that last modified the resource.",
+          "enum": [
+            "User",
+            "Application",
+            "ManagedIdentity",
+            "Key"
+          ],
+          "x-ms-enum": {
+            "name": "createdByType",
+            "modelAsString": true
+          }
+        },
+        "lastModifiedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The type of identity that last modified the resource."
+        }
+      }
     },
     "VirtualMachineIdentity": {
       "properties": {
@@ -3918,6 +4012,12 @@
               "default": "/var/log"
             }
           }
+        },
+        "bandwidthPolicy": {
+          "title": "BandwidthPolicy",
+          "description": "The overall application bandwidth policy set for a migrator.",
+          "$ref": "#/definitions/MigratorBandwidthPolicy",
+          "readOnly": true
         }
       }
     },
@@ -3947,6 +4047,39 @@
           "description": "failed attempts to reach the server",
           "type": "integer",
           "format": "int32"
+        }
+      }
+    },
+    "MigratorTagsAndBandwidthUpdate": {
+      "description": "Updatable Resource Tags and Bandwidth Policy",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TagsUpdate"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "title": "properties",
+          "description": "MigratorTagsAndBandwidthUpdate properties",
+          "x-ms-client-flatten": true,
+          "properties": {
+            "bandwidthPolicy": {
+              "description": "Overall application bandwidth limit to apply",
+              "x-ms-client-flatten": false,
+              "$ref": "#/definitions/MigratorBandwidthPolicy"
+            }
+          }
+        }
+      }
+    },
+    "MigratorBandwidthPolicy": {
+      "description": "BandwidthPolicy for a Migrator resource.",
+      "properties": {
+        "maxBytesPerSec": {
+          "description": "Overall application bandwidth limit to apply.",
+          "type": "integer",
+          "format": "int64"
         }
       }
     },
@@ -4008,11 +4141,26 @@
           ],
           "description": "Access Key for storage",
           "type": "string"
+        },
+        "oauthClientId": {
+          "description": "Service principal client ID",
+          "type": "string"
+        },
+        "oauthClientSecret": {
+          "description": "Service principal client secret",
+          "type": "string",
+          "x-ms-secret": true,
+          "x-ms-mutability": [
+            "create"
+          ]
+        },
+        "oauthClientEndpoint": {
+          "description": "Service principal endpoint (optional). If not provided it will use the default endpoint for your tenant.",
+          "type": "string"
         }
       },
       "required": [
         "storageAccountId",
-        "storageAccessKey",
         "storageContainer"
       ]
     },
@@ -4305,6 +4453,12 @@
           "description": "If present, details of the error.",
           "type": "object",
           "$ref": "#/definitions/OperationStatusError"
+        },
+        "systemData": {
+          "title": "SystemData",
+          "description": "System metadata for Resource",
+          "$ref": "#/definitions/SystemData",
+          "readOnly": true
         }
       }
     },
@@ -4437,6 +4591,12 @@
           "description": "Date after which migration should occur. Required if overwritePolicy is SkipIfDateIsEarlier.",
           "type": "string",
           "format": "date-time"
+        },
+        "provisioningState": {
+          "title": "ProvisioningState",
+          "description": "Provisioning State of resource",
+          "$ref": "#/definitions/ProvisioningState",
+          "readOnly": true
         }
       },
       "required": [
@@ -4553,12 +4713,10 @@
           "description": "Flag to start migration immediately",
           "type": "boolean"
         },
-        "exclusions": {
-          "type": "array",
-          "description": "List of ids referring to exclusions to be applied to the migration",
-          "items": {
-            "type": "string"
-          }
+        "scanOnly": {
+          "description": "Flag marking a Non Live migration",
+          "type": "boolean",
+          "default": false
         },
         "targetActionPolicy": {
           "description": "The policy to use when replacing files on the target",
@@ -4592,7 +4750,8 @@
             "Live",
             "Paused",
             "Stopping",
-            "Stopped"
+            "Stopped",
+            "Completed"
           ],
           "x-ms-enum": {
             "name": "LiveDataMigrationState",
@@ -4618,6 +4777,9 @@
               },
               {
                 "value": "Stopped"
+              },
+              {
+                "value": "Completed"
               }
             ]
           }
@@ -4680,6 +4842,7 @@
       "description": "The possible Provisioning States",
       "enum": [
         "Accepted",
+        "Canceled",
         "Succeeded",
         "Failed",
         "Deleting",
