@@ -345,53 +345,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridCompute/machines/{name}/privateLinkScope": {
-      "get": {
-        "description": "Returns a Azure Arc PrivateLinkScope's validation details for a given machine.",
-        "operationId": "PrivateLinkScopes_GetValidationDetails",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the hybrid machine."
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure Arc PrivateLinkScope validation details definition.",
-            "schema": {
-              "$ref": "./privateLinkScopes.json#/definitions/PrivateLinkScopeValidationDetails"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "PrivateLinkScopeGet": {
-            "$ref": "./examples/PrivateLinkScopesGetValidationForMachine.json"
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridCompute/machines/{name}/extensions/{extensionName}": {
       "put": {
         "tags": [

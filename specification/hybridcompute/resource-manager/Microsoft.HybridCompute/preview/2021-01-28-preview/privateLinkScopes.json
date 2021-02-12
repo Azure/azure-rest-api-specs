@@ -625,6 +625,45 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridCompute/machines/{machineName}/privateLinkScope": {
+      "get": {
+        "description": "Returns a Azure Arc PrivateLinkScope's validation details for a given machine.",
+        "operationId": "PrivateLinkScopes_GetValidationDetailsForMachine",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MachineNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure Arc PrivateLinkScope validation details definition.",
+            "schema": {
+              "$ref": "#/definitions/PrivateLinkScopeValidationDetails"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseV2"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PrivateLinkScopeGet": {
+            "$ref": "./examples/PrivateLinkScopesGetValidationForMachine.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -713,30 +752,32 @@
       }
     },
     "ConnectionDetail": {
-      "id": {
-        "type": "string",
-        "readOnly": true,
-        "description": "Azure resource Id"
-      },
-      "privateIpAddress": {
-        "type": "string",
-        "readOnly": true,
-        "description": "The private endpoint connection private ip address"
-      },
-      "linkIdentifier": {
-        "type": "string",
-        "readOnly": true,
-        "description": "The private endpoint connection link identifier"
-      },
-      "groupId": {
-        "type": "string",
-        "readOnly": true,
-        "description": "The private endpoint connection group id"
-      },
-      "memberName": {
-        "type": "string",
-        "readOnly": true,
-        "description": "The private endpoint connection member name"
+      "properties": {
+        "id": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Azure resource Id"
+        },
+        "privateIpAddress": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The private endpoint connection private ip address"
+        },
+        "linkIdentifier": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The private endpoint connection link identifier"
+        },
+        "groupId": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The private endpoint connection group id"
+        },
+        "memberName": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The private endpoint connection member name"
+        }
       }
     },
     "HybridComputePrivateLinkScopeProperties": {
