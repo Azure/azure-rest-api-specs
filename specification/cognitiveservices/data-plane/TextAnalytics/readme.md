@@ -140,7 +140,7 @@ csharp:
 ```
 
 ## Python
- 
+
 See configuration in [readme.python.md](./readme.python.md)
 
 ## Go
