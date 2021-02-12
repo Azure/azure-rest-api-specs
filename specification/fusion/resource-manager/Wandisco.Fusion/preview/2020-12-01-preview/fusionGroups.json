@@ -1766,7 +1766,7 @@
           "final-state-via": "azure-async-operation"
         },
         "x-ms-examples": {
-          "Successful Tags Patch": {
+          "Successful Migrator Tags Patch": {
             "$ref": "./examples/LiveDataMigrator/MigratorTagPatch.json"
           },
           "Successful Bandwidth Patch": {
@@ -2164,7 +2164,7 @@
           "final-state-via": "azure-async-operation"
         },
         "x-ms-examples": {
-          "Successful Tags Patch": {
+          "Successful Migration Tags Patch": {
             "$ref": "./examples/LiveDataMigrator/LiveDataMigrationTagsPatch.json"
           }
         }
@@ -3250,6 +3250,7 @@
     },
     "Resource": {
       "description": "An Azure resource.",
+      "type": "object",
       "properties": {
         "id": {
           "description": "Azure resource Id.",
@@ -3295,6 +3296,7 @@
     "ProxyResource": {
       "title": "Proxy resource type",
       "description": "An azure proxy resource",
+      "type": "object",
       "properties": {
         "id": {
           "description": "Azure resource Id.",
@@ -3374,6 +3376,7 @@
       }
     },
     "VirtualMachineIdentity": {
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -3490,6 +3493,7 @@
     },
     "AzureZoneProperties": {
       "description": "azure zone properties",
+      "type": "object",
       "properties": {
         "virtualNetworkId": {
           "description": "Resource ID of virtual network to attach the VMs to",
@@ -3582,6 +3586,7 @@
       "properties": {
         "fusion": {
           "description": "Details of the fusion server node.",
+          "type": "object",
           "properties": {
             "nodeName": {
               "description": "The name of the Fusion node",
@@ -3617,6 +3622,7 @@
         "vm": {
           "x-ms-azure-resource": true,
           "description": "The VirtualMachine resource associated with this node",
+          "type": "object",
           "properties": {
             "id": {
               "type": "string",
@@ -3663,6 +3669,7 @@
     },
     "PluginRepresentation": {
       "description": "Plugin Representation",
+      "type": "object",
       "discriminator": "pluginKind",
       "properties": {
         "pluginKind": {
@@ -3995,6 +4002,7 @@
         },
         "installParameters": {
           "description": "Installation configuration for the Migrator server",
+          "type": "object",
           "properties": {
             "user": {
               "description": "The system user to run the process as",
@@ -4062,6 +4070,7 @@
         "properties": {
           "title": "properties",
           "description": "MigratorTagsAndBandwidthUpdate properties",
+          "type": "object",
           "x-ms-client-flatten": true,
           "properties": {
             "bandwidthPolicy": {
@@ -4075,6 +4084,7 @@
     },
     "MigratorBandwidthPolicy": {
       "description": "BandwidthPolicy for a Migrator resource.",
+      "type": "object",
       "properties": {
         "maxBytesPerSec": {
           "description": "Overall application bandwidth limit to apply.",
@@ -4371,6 +4381,7 @@
         },
         "display": {
           "description": "The object that represents the operation.",
+          "type": "object",
           "properties": {
             "provider": {
               "description": "Service provider: Microsoft.ResourceProvider",
@@ -4394,6 +4405,7 @@
     },
     "OperationListResult": {
       "description": "Result of the request to list Resource Provider operations. It contains a list of operations and a URL link to get the next set of results.",
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
@@ -4410,6 +4422,7 @@
     },
     "OperationStatusError": {
       "description": "operation status error",
+      "type": "object",
       "properties": {
         "code": {
           "description": "An invariant error code used for error troubleshooting, aggregation, and analysis.",
@@ -4497,6 +4510,7 @@
     },
     "MigrationProperties": {
       "description": "Properties of fusion migration",
+      "type": "object",
       "properties": {
         "source": {
           "type": "string",
@@ -4606,6 +4620,7 @@
     },
     "MigrationProgress": {
       "description": "Status of fusion migration",
+      "type": "object",
       "properties": {
         "duration": {
           "type": "integer",
@@ -4694,6 +4709,7 @@
     },
     "LiveDataMigrationProperties": {
       "description": "Properties of migrator migration",
+      "type": "object",
       "properties": {
         "path": {
           "type": "string",
@@ -4797,6 +4813,7 @@
     },
     "ErrorResponse": {
       "description": "Error response indicates that the service is not able to process the incoming request.",
+      "type": "object",
       "properties": {
         "error": {
           "$ref": "#/definitions/ErrorDefinition",
@@ -4806,6 +4823,7 @@
     },
     "ErrorDefinition": {
       "description": "Error definition.",
+      "type": "object",
       "properties": {
         "code": {
           "description": "Service specific error code which serves as the substatus for the HTTP error code.",
@@ -4828,6 +4846,7 @@
     },
     "Allowance": {
       "description": "The remaining allowance included as part of any plan for a resource",
+      "type": "object",
       "properties": {
         "remainingData": {
           "description": "The number of MBs remaining",
@@ -4854,6 +4873,7 @@
       }
     },
     "Plan": {
+      "type": "object",
       "properties": {
         "name": {
           "type": "string",
