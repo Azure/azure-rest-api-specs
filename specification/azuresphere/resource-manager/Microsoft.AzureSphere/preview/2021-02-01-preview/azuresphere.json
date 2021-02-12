@@ -6,12 +6,20 @@
     "version": "2021-02-01-preview"
   },
   "host": "management.azure.com",
-  "schemes": ["https"],
-  "consumes": ["application/json"],
-  "produces": ["application/json"],
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
   "security": [
     {
-      "azure_auth": ["user_impersonation"]
+      "azure_auth": [
+        "user_impersonation"
+      ]
     }
   ],
   "securityDefinitions": {
@@ -28,7 +36,9 @@
   "paths": {
     "/subscriptions/{subscriptionId}/providers/Microsoft.AzureSphere/operations": {
       "get": {
-        "tags": ["Operations"],
+        "tags": [
+          "Operations"
+        ],
         "summary": "Lists all of the available Azure Sphere REST API operations.",
         "operationId": "Operations_List",
         "parameters": [
@@ -60,7 +70,9 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.AzureSphere/azSphereRUs": {
       "get": {
-        "tags": ["AzureSphereRUs"],
+        "tags": [
+          "AzureSphereRUs"
+        ],
         "description": "Returns a list of Azure Sphere Resource Units for the given subscriptionId",
         "operationId": "AzureSphereRUsBySubscription_List",
         "parameters": [
@@ -93,7 +105,9 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/azSphereRUs": {
       "get": {
-        "tags": ["AzureSphereRUs"],
+        "tags": [
+          "AzureSphereRUs"
+        ],
         "description": "Returns a list of Azure Sphere Resource Units in the given resource group.",
         "operationId": "AzureSphereRUs_List",
         "parameters": [
@@ -129,7 +143,9 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/azSphereRUs/{azureSphereRUName}": {
       "get": {
-        "tags": ["AzureSphereRUs"],
+        "tags": [
+          "AzureSphereRUs"
+        ],
         "description": "Returns an Azure Sphere Resource Unit by name.",
         "operationId": "AzureSphereRUs_Get",
         "parameters": [
@@ -162,7 +178,9 @@
         }
       },
       "put": {
-        "tags": ["AzureSphereRUs"],
+        "tags": [
+          "AzureSphereRUs"
+        ],
         "description": "Create or update an Azure Sphere Resource Unit.",
         "operationId": "AzureSphereRUs_CreateOrUpdate",
         "parameters": [
@@ -204,7 +222,9 @@
         }
       },
       "patch": {
-        "tags": ["AzureSphereRUs"],
+        "tags": [
+          "AzureSphereRUs"
+        ],
         "description": "Patch an Azure Sphere Resource Unit.",
         "operationId": "AzureSphereRUs_Update",
         "parameters": [
@@ -246,7 +266,9 @@
         }
       },
       "delete": {
-        "tags": ["AzureSphereRUs"],
+        "tags": [
+          "AzureSphereRUs"
+        ],
         "description": "Delete an Azure Sphere Resource Unit.",
         "operationId": "AzureSphereRUs_Delete",
         "parameters": [
@@ -287,7 +309,9 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/azSphereRUs/{azureSphereRUName}/products": {
       "get": {
-        "tags": ["Products"],
+        "tags": [
+          "Products"
+        ],
         "description": "Returns the associated products of a given Azure Sphere Resource Unit by Name",
         "operationId": "Products_List",
         "parameters": [
@@ -326,7 +350,9 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/azSphereRUs/{azureSphereRUName}/products/{productName}": {
       "get": {
-        "tags": ["Products"],
+        "tags": [
+          "Products"
+        ],
         "description": "Returns the associated Product for a given Azure Sphere Resource Unit by Name",
         "operationId": "Products_Get",
         "parameters": [
@@ -362,7 +388,9 @@
         }
       },
       "put": {
-        "tags": ["Products"],
+        "tags": [
+          "Products"
+        ],
         "description": "Create or update an Azure Sphere Product.",
         "operationId": "Products_CreateOrUpdate",
         "parameters": [
@@ -407,7 +435,9 @@
         }
       },
       "patch": {
-        "tags": ["Products"],
+        "tags": [
+          "Products"
+        ],
         "description": "Patch Azure Sphere Product.",
         "operationId": "Products_Update",
         "parameters": [
@@ -452,7 +482,9 @@
         }
       },
       "delete": {
-        "tags": ["Products"],
+        "tags": [
+          "Products"
+        ],
         "description": "Delete Product in an Azure Sphere Resource Unit.",
         "operationId": "Products_Delete",
         "parameters": [
@@ -517,7 +549,10 @@
         "location": {
           "type": "string",
           "description": "The Azure Sphere resource location.",
-          "x-ms-mutability": ["read", "create"]
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         },
         "systemData": {
           "description": "Metadata pertaining to creation and last modification of the resource.",
@@ -547,7 +582,12 @@
         "createdByType": {
           "type": "string",
           "description": "The type of identity that created the resource.",
-          "enum": ["User", "Application", "ManagedIdentity", "Key"],
+          "enum": [
+            "User",
+            "Application",
+            "ManagedIdentity",
+            "Key"
+          ],
           "x-ms-enum": {
             "name": "createdByType",
             "modelAsString": true
@@ -565,7 +605,12 @@
         "lastModifiedByType": {
           "type": "string",
           "description": "The type of identity that last modified the resource.",
-          "enum": ["User", "Application", "ManagedIdentity", "Key"],
+          "enum": [
+            "User",
+            "Application",
+            "ManagedIdentity",
+            "Key"
+          ],
           "x-ms-enum": {
             "name": "createdByType",
             "modelAsString": true
@@ -705,7 +750,9 @@
               "description": "Gets or sets the state of the provisioning."
             }
           },
-          "required": ["description"],
+          "required": [
+            "description"
+          ],
           "type": "object"
         }
       }
