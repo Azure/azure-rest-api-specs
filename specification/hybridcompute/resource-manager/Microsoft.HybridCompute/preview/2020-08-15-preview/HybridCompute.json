@@ -848,10 +848,13 @@
           "type": "string",
           "description": "Specifies the DNS fully qualified display name."
         },
-        "privateLinkScopeResourceId": {
+        "privateLinkScopedResources": {
           "readOnly": true,
-          "type": "string",
-          "description": "The resource id of the private link scope this machine is assigned to, if any."
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "List of private link scoped resources associated with this machine."
         }
       },
       "description": "Describes the properties of a hybrid machine."
