@@ -2559,7 +2559,7 @@
             "description": "The export summary.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ExportSummary"
+              "description": "The export summary."
             }
           }
         ],
@@ -2572,9 +2572,7 @@
           },
           "200": {
             "description": "Success",
-            "schema": {
-              "$ref": "#/definitions/ExportSummary"
-            }
+            "schema": { }
           },
           "202": {
             "description": "Success",
@@ -4519,7 +4517,7 @@
           }
         },
         "docker": {
-          "$ref": "#/definitions/DockerSpecification"
+          "description": "Configuration settings for Docker"
         },
         "condaFile": {
           "description": "Standard configuration file used by conda that lets you install any kind of package, including Python, R, and C/C++ packages\r\n<see href=\"https://repo2docker.readthedocs.io/en/latest/config_files.html#environment-yml-install-a-conda-environment\" />",
@@ -5133,16 +5131,95 @@
               }
             },
             "distributionConfiguration": {
-              "$ref": "#/definitions/DistributionConfiguration"
+              "description": "Distribution configuration of the job. This should be one of MpiConfiguration, TensorflowConfiguration, or PyTorchConfiguration."
             },
             "identityConfiguration": {
-              "$ref": "#/definitions/IdentityConfiguration"
+              "description": "Identity configuration. This should be one of AmlTokenConfiguration, ManagedIdentityConfiguration, or ServicePrincipalConfiguration.\r\nDefaults to AmlTokenConfiguration if null."
             },
             "parameters": {
               "description": "Input parameters.",
               "type": "object",
-              "additionalProperties": {},
+              "additionalProperties": { },
               "readOnly": true
+            },
+            "experimentName": {
+              "description": "The name of the experiment the job belongs to. If not set, the job is placed in the \"Default\" experiment.",
+              "type": "string"
+            },
+            "computeBinding": {
+              "description": "Compute binding for the job.",
+              "allOf": [
+                {
+                  "$ref": "#/definitions/ComputeBinding"
+                }
+              ]
+            },
+            "output": {
+              "description": "Location of the job output logs and artifacts.",
+              "allOf": [
+                {
+                  "$ref": "#/definitions/JobOutput"
+                }
+              ],
+              "readOnly": true
+            },
+            "provisioningState": {
+              "enum": [
+                "Succeeded",
+                "Failed",
+                "Canceled"
+              ],
+              "type": "string",
+              "x-ms-enum": {
+                "name": "JobProvisioningState",
+                "modelAsString": true
+              }
+            },
+            "interactionEndpoints": {
+              "description": "Dictionary of endpoint URIs, keyed by enumerated job endpoints.\r\nFor local jobs, a job endpoint will have a value of FileStreamObject.",
+              "type": "object",
+              "properties": {
+                "Tracking": {
+                  "format": "uri",
+                  "type": "string"
+                },
+                "Studio": {
+                  "format": "uri",
+                  "type": "string"
+                },
+                "Grafana": {
+                  "format": "uri",
+                  "type": "string"
+                },
+                "Tensorboard": {
+                  "format": "uri",
+                  "type": "string"
+                },
+                "Local": {
+                  "format": "uri",
+                  "type": "string"
+                }
+              },
+              "readOnly": true
+            },
+            "description": {
+              "description": "The asset description text.",
+              "type": "string"
+            },
+            "tags": {
+              "description": "Tag dictionary. Tags can be added, removed, and updated.",
+              "type": "object",
+              "additionalProperties": {
+                "type": "string"
+              }
+            },
+            "properties": {
+              "description": "The asset property dictionary.",
+              "type": "object",
+              "additionalProperties": {
+                "type": "string"
+              },
+              "x-ms-client-flatten": true
             }
           }
         }
@@ -5285,7 +5362,7 @@
           "type": "integer"
         },
         "earlyTerminationPolicyConfiguration": {
-          "$ref": "#/definitions/EarlyTerminationPolicyConfiguration"
+          "description": "Early termination policies enable canceling poor-performing runs before they complete"
         }
       },
       "additionalProperties": false
@@ -5343,10 +5420,18 @@
           ]
         },
         "distributionConfiguration": {
-          "$ref": "#/definitions/DistributionConfiguration"
+          "description": "Distributon configuration of the job. This should be one of MpiConfiguration, TensorflowConfiguration, or PyTorchConfiguration.",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         },
         "identityConfiguration": {
-          "$ref": "#/definitions/IdentityConfiguration"
+          "description": "Identity configuration. This should be one of AmlTokenConfiguration, ManagedIdentityConfiguration, or ServicePrincipalConfiguration.\r\nDefaults to AmlTokenConfiguration if null.",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         }
       },
       "additionalProperties": false
@@ -5432,6 +5517,85 @@
                   "$ref": "#/definitions/TrialComponent"
                 }
               ]
+            },
+            "experimentName": {
+              "description": "The name of the experiment the job belongs to. If not set, the job is placed in the \"Default\" experiment.",
+              "type": "string"
+            },
+            "computeBinding": {
+              "description": "Compute binding for the job.",
+              "allOf": [
+                {
+                  "$ref": "#/definitions/ComputeBinding"
+                }
+              ]
+            },
+            "output": {
+              "description": "Location of the job output logs and artifacts.",
+              "allOf": [
+                {
+                  "$ref": "#/definitions/JobOutput"
+                }
+              ],
+              "readOnly": true
+            },
+            "provisioningState": {
+              "enum": [
+                "Succeeded",
+                "Failed",
+                "Canceled"
+              ],
+              "type": "string",
+              "x-ms-enum": {
+                "name": "JobProvisioningState",
+                "modelAsString": true
+              }
+            },
+            "interactionEndpoints": {
+              "description": "Dictionary of endpoint URIs, keyed by enumerated job endpoints.\r\nFor local jobs, a job endpoint will have a value of FileStreamObject.",
+              "type": "object",
+              "properties": {
+                "Tracking": {
+                  "format": "uri",
+                  "type": "string"
+                },
+                "Studio": {
+                  "format": "uri",
+                  "type": "string"
+                },
+                "Grafana": {
+                  "format": "uri",
+                  "type": "string"
+                },
+                "Tensorboard": {
+                  "format": "uri",
+                  "type": "string"
+                },
+                "Local": {
+                  "format": "uri",
+                  "type": "string"
+                }
+              },
+              "readOnly": true
+            },
+            "description": {
+              "description": "The asset description text.",
+              "type": "string"
+            },
+            "tags": {
+              "description": "Tag dictionary. Tags can be added, removed, and updated.",
+              "type": "object",
+              "additionalProperties": {
+                "type": "string"
+              }
+            },
+            "properties": {
+              "description": "The asset property dictionary.",
+              "type": "object",
+              "additionalProperties": {
+                "type": "string"
+              },
+              "x-ms-client-flatten": true
             }
           }
         }
@@ -5801,7 +5965,7 @@
               ]
             },
             "labelingJobMediaProperties": {
-              "$ref": "#/definitions/LabelingJobMediaProperties"
+              "description": "Media type specific properties in the job."
             },
             "projectId": {
               "format": "uuid",
@@ -5885,7 +6049,8 @@
           "readOnly": true
         },
         "properties": {
-          "$ref": "#/definitions/JobBase"
+          "description": "Additional attributes of the entity.",
+          "x-ms-client-flatten": true
         },
         "systemData": {
           "description": "System data associated with resource provider",
