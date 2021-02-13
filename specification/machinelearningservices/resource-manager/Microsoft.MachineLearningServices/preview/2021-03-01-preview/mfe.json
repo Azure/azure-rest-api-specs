@@ -456,14 +456,14 @@
           },
           {
             "in": "query",
-            "name": "$orderby",
+            "name": "$orderBy",
             "description": "Ordering of list.",
             "type": "string"
           },
           {
             "in": "query",
             "name": "$top",
-            "description": "Top of list.",
+            "description": "Maximum number of records to return.",
             "type": "integer",
             "format": "int32"
           },
@@ -1272,14 +1272,14 @@
           },
           {
             "in": "query",
-            "name": "$orderby",
+            "name": "$orderBy",
             "description": "Ordering of list.",
             "type": "string"
           },
           {
             "in": "query",
             "name": "$top",
-            "description": "Top of list.",
+            "description": "Maximum number of records to return.",
             "type": "integer",
             "format": "int32"
           },
@@ -1767,14 +1767,14 @@
           },
           {
             "in": "query",
-            "name": "$orderby",
+            "name": "$orderBy",
             "description": "Ordering of list.",
             "type": "string"
           },
           {
             "in": "query",
             "name": "$top",
-            "description": "Top of list.",
+            "description": "Maximum number of records to return.",
             "type": "integer",
             "format": "int32"
           },
@@ -2205,6 +2205,12 @@
             "description": "Success",
             "schema": {
               "$ref": "#/definitions/LabelingJobResource"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "URI to poll for asynchronous operation status.",
+                "type": "string"
+              }
             }
           },
           "200": {
@@ -2218,6 +2224,10 @@
           "CreateOrUpdate Labeling Job.": {
             "$ref": "./examples/LabelingJob/createOrUpdate.json"
           }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
         }
       },
       "get": {
@@ -2480,12 +2490,33 @@
           },
           "200": {
             "description": "Success"
+          },
+          "202": {
+            "description": "Success",
+            "headers": {
+              "Location": {
+                "description": "URI to poll for asynchronous operation result.",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "Duration the client should wait between requests, in seconds.",
+                "type": "integer",
+                "format": "int32",
+                "default": 60,
+                "maximum": 600,
+                "minimum": 10
+              }
+            }
           }
         },
         "x-ms-examples": {
           "Resume Labeling Job.": {
             "$ref": "./examples/LabelingJob/resume.json"
           }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
         }
       }
     },
@@ -2834,6 +2865,19 @@
           },
           {
             "in": "query",
+            "name": "$orderBy",
+            "description": "Ordering of list.",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$top",
+            "description": "Maximum number of records to return.",
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "in": "query",
             "name": "version",
             "description": "Model version.",
             "type": "string"
@@ -2843,13 +2887,6 @@
             "name": "description",
             "description": "Model description.",
             "type": "string"
-          },
-          {
-            "in": "query",
-            "name": "count",
-            "description": "Maximum number of results to return.",
-            "type": "integer",
-            "format": "int32"
           },
           {
             "in": "query",
@@ -2869,19 +2906,6 @@
             "name": "properties",
             "description": "Comma-separated list of property names (and optionally values). Example: prop1,prop2=value2",
             "type": "string"
-          },
-          {
-            "in": "query",
-            "name": "orderBy",
-            "description": "Property by which to order the results.",
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "name": "latestVersionOnly",
-            "description": "Only return the most recent version of a model.",
-            "type": "boolean",
-            "default": false
           },
           {
             "$ref": "machineLearningServices.json#/parameters/SubscriptionIdParameter"
@@ -3296,6 +3320,22 @@
             {
               "$ref": "#/definitions/AssetPath"
             }
+          ]
+        },
+        "generatedBy": {
+          "description": "How this asset was generated",
+          "enum": [
+            "User",
+            "System"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "AssetGenerator",
+            "modelAsString": true
+          },
+          "x-ms-mutability": [
+            "read"
           ]
         },
         "description": {
@@ -4204,6 +4244,22 @@
             }
           ]
         },
+        "generatedBy": {
+          "description": "How this asset was generated",
+          "enum": [
+            "User",
+            "System"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "AssetGenerator",
+            "modelAsString": true
+          },
+          "x-ms-mutability": [
+            "read"
+          ]
+        },
         "description": {
           "description": "The asset description text.",
           "type": "string"
@@ -4399,6 +4455,9 @@
     },
     "DockerImage": {
       "description": "Class to represent configuration settings for Docker Build",
+      "required": [
+        "dockerImageUri"
+      ],
       "allOf": [
         {
           "$ref": "#/definitions/DockerSpecification"
@@ -4418,6 +4477,9 @@
     },
     "DockerBuild": {
       "description": "Class to represent configuration settings for Docker Build",
+      "required": [
+        "dockerfile"
+      ],
       "allOf": [
         {
           "$ref": "#/definitions/DockerSpecification"
@@ -4473,6 +4535,22 @@
             {
               "$ref": "#/definitions/AssetPath"
             }
+          ]
+        },
+        "generatedBy": {
+          "description": "How this asset was generated",
+          "enum": [
+            "User",
+            "System"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "AssetGenerator",
+            "modelAsString": true
+          },
+          "x-ms-mutability": [
+            "read"
           ]
         },
         "description": {
@@ -4712,6 +4790,93 @@
       "x-ms-discriminator-value": "PyTorch",
       "additionalProperties": false
     },
+    "IdentityConfiguration": {
+      "required": [
+        "identityType"
+      ],
+      "type": "object",
+      "properties": {
+        "identityType": {
+          "description": "Specifies the type of identity framework.",
+          "enum": [
+            "Managed",
+            "ServicePrincipal",
+            "AMLToken"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "IdentityType",
+            "modelAsString": true
+          },
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        }
+      },
+      "discriminator": "identityType",
+      "additionalProperties": false
+    },
+    "AmlTokenConfiguration": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/IdentityConfiguration"
+        },
+        {
+          "type": "object"
+        }
+      ],
+      "x-ms-discriminator-value": "AMLToken",
+      "additionalProperties": false
+    },
+    "ManagedIdentityConfiguration": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/IdentityConfiguration"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "clientId": {
+              "format": "uuid",
+              "description": "Specifies a user-assigned identity by client ID. For system-assigned, do not set this field.",
+              "type": "string"
+            },
+            "objectId": {
+              "format": "uuid",
+              "description": "Specifies a user-assigned identity by object ID. For system-assigned, do not set this field.",
+              "type": "string"
+            },
+            "msiResourceId": {
+              "description": "Specifies a user-assigned identity by resource ID. For system-assigned, do not set this field.",
+              "type": "string"
+            }
+          }
+        }
+      ],
+      "x-ms-discriminator-value": "Managed",
+      "additionalProperties": false
+    },
+    "ServicePrincipalConfiguration": {
+      "required": [
+        "secret"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/IdentityConfiguration"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "secret": {
+              "type": "string"
+            }
+          }
+        }
+      ],
+      "x-ms-discriminator-value": "ServicePrincipal",
+      "additionalProperties": false
+    },
     "ComputeBinding": {
       "description": "Compute binding definition.",
       "type": "object",
@@ -4880,7 +5045,8 @@
                 {
                   "$ref": "#/definitions/JobOutput"
                 }
-              ]
+              ],
+              "readOnly": true
             }
           }
         }
@@ -4936,6 +5102,7 @@
                 "Paused"
               ],
               "type": "string",
+              "readOnly": true,
               "x-ms-enum": {
                 "name": "JobStatus",
                 "modelAsString": true
@@ -4968,10 +5135,14 @@
             "distributionConfiguration": {
               "$ref": "#/definitions/DistributionConfiguration"
             },
+            "identityConfiguration": {
+              "$ref": "#/definitions/IdentityConfiguration"
+            },
             "parameters": {
               "description": "Input parameters.",
               "type": "object",
-              "additionalProperties": {}
+              "additionalProperties": {},
+              "readOnly": true
             }
           }
         }
@@ -5173,6 +5344,9 @@
         },
         "distributionConfiguration": {
           "$ref": "#/definitions/DistributionConfiguration"
+        },
+        "identityConfiguration": {
+          "$ref": "#/definitions/IdentityConfiguration"
         }
       },
       "additionalProperties": false
@@ -5224,6 +5398,7 @@
                 "Paused"
               ],
               "type": "string",
+              "readOnly": true,
               "x-ms-enum": {
                 "name": "JobStatus",
                 "modelAsString": true
@@ -5631,7 +5806,8 @@
             "projectId": {
               "format": "uuid",
               "description": "Internal id of the job(Previously called project).",
-              "type": "string"
+              "type": "string",
+              "readOnly": true
             },
             "status": {
               "description": "Status of the job.",
@@ -5651,6 +5827,7 @@
                 "Paused"
               ],
               "type": "string",
+              "readOnly": true,
               "x-ms-enum": {
                 "name": "JobStatus",
                 "modelAsString": true
@@ -5662,19 +5839,22 @@
                 {
                   "$ref": "#/definitions/ProgressMetrics"
                 }
-              ]
+              ],
+              "readOnly": true
             },
             "statusMessages": {
               "description": "Status messages of the job.",
               "type": "array",
               "items": {
                 "$ref": "#/definitions/StatusMessage"
-              }
+              },
+              "readOnly": true
             },
             "createdTimeUtc": {
               "format": "date-time",
               "description": "Created time of the job in UTC timezone.",
-              "type": "string"
+              "type": "string",
+              "readOnly": true
             }
           }
         }
@@ -5822,15 +6002,6 @@
             "read"
           ]
         },
-        "exportId": {
-          "format": "uuid",
-          "description": "The unique identifier of completed Export Labels operation.",
-          "type": "string",
-          "readOnly": true,
-          "x-ms-mutability": [
-            "read"
-          ]
-        },
         "labelingJobId": {
           "description": "Name and identifier of the job containing exported labels.",
           "type": "string",
@@ -5880,11 +6051,13 @@
           "properties": {
             "snapshotPath": {
               "description": "The output path where the labels will be exported.",
-              "type": "string"
+              "type": "string",
+              "readOnly": true
             },
             "containerName": {
               "description": "The container name to which the labels will be exported.",
-              "type": "string"
+              "type": "string",
+              "readOnly": true
             }
           }
         }
@@ -5902,11 +6075,13 @@
           "properties": {
             "snapshotPath": {
               "description": "The output path where the labels will be exported.",
-              "type": "string"
+              "type": "string",
+              "readOnly": true
             },
             "containerName": {
               "description": "The container name to which the labels will be exported.",
-              "type": "string"
+              "type": "string",
+              "readOnly": true
             }
           }
         }
@@ -5924,7 +6099,8 @@
           "properties": {
             "labeledAssetName": {
               "description": "The unique name of the labeled data asset.",
-              "type": "string"
+              "type": "string",
+              "readOnly": true
             }
           }
         }
@@ -6044,6 +6220,22 @@
             {
               "$ref": "#/definitions/AssetPath"
             }
+          ]
+        },
+        "generatedBy": {
+          "description": "How this asset was generated",
+          "enum": [
+            "User",
+            "System"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "AssetGenerator",
+            "modelAsString": true
+          },
+          "x-ms-mutability": [
+            "read"
           ]
         },
         "description": {
