@@ -134,7 +134,6 @@ These settings apply only when `--tag=package-2020-09-01-preview` is specified o
 
 ``` yaml $(tag) == 'package-2020-09-01-preview'
 input-file:
-- Microsoft.MachineLearningServices/preview/2020-09-01-preview/jobs.json
 - Microsoft.MachineLearningServices/preview/2020-09-01-preview/machineLearningServices.json
 - Microsoft.MachineLearningServices/preview/2020-09-01-preview/mfe.json
 ```
