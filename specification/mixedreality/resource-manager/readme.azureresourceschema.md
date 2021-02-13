@@ -6,6 +6,7 @@ These settings apply only when `--azureresourceschema` is specified on the comma
 
 ``` yaml $(azureresourceschema) && $(multiapi)
 batch:
+  - tag: schema-mixedreality-2021-03-01-preview
   - tag: schema-mixedreality-2021-01-01
   - tag: schema-mixedreality-2020-05-01
   - tag: schema-mixedreality-2020-04-06-preview
@@ -15,6 +16,20 @@ batch:
 ```
 
 Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
+
+### Tag: schema-mixedreality-2021-03-01-preview and azureresourceschema
+
+``` yaml $(tag) == 'schema-mixedreality-2021-03-01-preview' && $(azureresourceschema)
+output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
+  - Microsoft.MixedReality/preview/2021-03-01-preview/proxy.json
+  - Microsoft.MixedReality/preview/2021-03-01-preview/spatial-anchors.json
+  - Microsoft.MixedReality/preview/2021-03-01-preview/remote-rendering.json
+  - Microsoft.MixedReality/preview/2021-03-01-preview/object-anchors.json
+
+```
 
 ### Tag: schema-mixedreality-2021-01-01 and azureresourceschema
 

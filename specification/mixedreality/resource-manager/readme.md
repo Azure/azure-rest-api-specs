@@ -4,6 +4,7 @@
 
 This is the AutoRest configuration file for Mixed-Reality Azure Resource Management.
 
+
 ---
 
 ## Getting Started
@@ -30,7 +31,7 @@ These are the global settings for the Mixed Reality Azure Resource Management Cl
 title: MixedRealityClient
 description: Mixed Reality Client
 openapi-type: arm
-tag: package-2021-01
+tag: package-2021-03-01-preview
 ```
 
 ## Suppression
@@ -45,6 +46,30 @@ directive:
     reason: Secrets are OK to return in a POST response.
 ```
 
+``` yaml
+directive:
+  - suppress: SECRET_PROPERTY
+    from:
+      - Microsoft.MixedReality/preview/2021-03-01-preview/common.json
+    where:
+      - $.definitions.AccountKeys.properties.primaryKey
+      - $.definitions.AccountKeys.properties.secondaryKey
+    reason: Secrets are OK to return in a POST response.
+```
+
+### Tag: package-2021-03-01-preview
+
+These settings apply only when `--tag=package-2021-03-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2021-03-01-preview'
+input-file:
+  - Microsoft.MixedReality/preview/2021-03-01-preview/proxy.json
+  - Microsoft.MixedReality/preview/2021-03-01-preview/spatial-anchors.json
+  - Microsoft.MixedReality/preview/2021-03-01-preview/remote-rendering.json
+  - Microsoft.MixedReality/preview/2021-03-01-preview/object-anchors.json
+modelerfour:
+  lenient-model-deduplication: true
+```
 
 ### Tag: package-2021-01
 
@@ -56,6 +81,7 @@ input-file:
   - Microsoft.MixedReality/stable/2021-01-01/spatial-anchors.json
   - Microsoft.MixedReality/stable/2021-01-01/remote-rendering.json
 ```
+
 ### Tag: package-2020-05
 
 These settings apply only when `--tag=package-2020-05` is specified on the command line.
@@ -65,7 +91,10 @@ input-file:
 - Microsoft.MixedReality/stable/2020-05-01/proxy.json
 - Microsoft.MixedReality/stable/2020-05-01/spatial-anchors.json
 - Microsoft.MixedReality/preview/2020-04-06-preview/remote-rendering.json
+modelerfour:
+  lenient-model-deduplication: true
 ```
+
 
 ### Tag: package-2020-05-01
 
