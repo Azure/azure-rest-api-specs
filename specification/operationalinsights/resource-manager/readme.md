@@ -107,7 +107,6 @@ These settings apply only when `--tag=package-2020-10` is specified on the comma
 
 ``` yaml $(tag) == 'package-2020-10'
 input-file:
-- Microsoft.OperationalInsights/preview/2020-03-01-preview/DataCollectorLogs.json
 - Microsoft.OperationalInsights/stable/2020-08-01/DataExports.json
 - Microsoft.OperationalInsights/stable/2020-08-01/DataSources.json
 - Microsoft.OperationalInsights/stable/2020-08-01/IntelligencePacks.json
