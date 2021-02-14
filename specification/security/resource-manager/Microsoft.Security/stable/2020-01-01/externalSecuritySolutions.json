@@ -181,9 +181,9 @@
       "type": "object",
       "description": "Represents a security solution external to Azure Security Center which sends information to an OMS workspace and whose data is displayed by Azure Security Center.",
       "required": [
-        "kind"
+        "solutionKind"
       ],
-      "discriminator": "kind",
+      "discriminator": "solutionKind",
       "properties": {},
       "allOf": [
         {
@@ -246,7 +246,7 @@
       "type": "object",
       "description": "Describes an Azure resource with kind",
       "properties": {
-        "kind": {
+        "solutionKind": {
           "type": "string",
           "description": "The kind of the external solution",
           "enum": [
