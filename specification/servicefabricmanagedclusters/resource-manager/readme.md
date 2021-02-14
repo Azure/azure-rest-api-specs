@@ -98,7 +98,6 @@ swagger-to-sdk:
       - node sdkauto_afterscript.js servicefabricmanagedclusters/resource-manager
 ```
 
-
 ## C#
 
 These settings apply only when `--csharp` is specified on the command line.
