@@ -3897,6 +3897,57 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/watchlists/{watchlistAlias}/watchlistItems": {
+      "get": {
+        "x-ms-examples": {
+          "Get all watchlist Items.": {
+            "$ref": "./examples/watchlists/GetWatchlistItems.json"
+          }
+        },
+        "tags": [
+          "WatchlistItems"
+        ],
+        "description": "Gets all watchlist Items.",
+        "operationId": "WatchlistItems_List",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/OperationalInsightsResourceProvider"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/WatchlistAlias"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/WatchlistItemList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/watchlists/{watchlistAlias}/watchlistItems/{watchlistItemId}": {
       "delete": {
         "x-ms-examples": {
@@ -3908,7 +3959,7 @@
           "WatchlistItems"
         ],
         "description": "Delete a watchlist item.",
-        "operationId": "WatchlistItem_Delete",
+        "operationId": "watchlistItems_Delete",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersion"
@@ -3957,7 +4008,7 @@
           "WatchlistItems"
         ],
         "description": "Creates or updates a watchlist item.",
-        "operationId": "WatchlistItem_CreateOrUpdate",
+        "operationId": "watchlistItems_CreateOrUpdate",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersion"
@@ -11488,6 +11539,26 @@
         "provider"
       ],
       "type": "object"
+    },
+    "WatchlistItemList": {
+      "description": "List all the watchlist iems.",
+      "properties": {
+        "nextLink": {
+          "description": "URL to fetch the next set of watchlist item.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "value": {
+          "description": "Array of watchlist items.",
+          "items": {
+            "$ref": "#/definitions/WatchlistItem"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "value"
+      ]
     },
     "WatchlistItem": {
       "allOf": [
