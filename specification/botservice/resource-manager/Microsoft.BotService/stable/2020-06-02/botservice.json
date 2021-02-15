@@ -1105,6 +1105,42 @@
           "nextLinkName": "nextLink"
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.BotService/webAppBotSettings": {
+      "get": {
+        "tags": [
+          "WebAppBotSettings"
+        ],
+        "description": "Get per settings needed to host bot in Azure web app service",
+        "operationId": "Bots_WebAppBotSettings",
+        "x-ms-examples": {
+          "Get Web App Bot Settings": {
+            "$ref": "./examples/WebAppBotSettings.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "If resource is retrieved successfully, the service should return 200 (OK).",
+            "schema": {
+              "$ref": "#/definitions/WebAppBotSettings"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -2420,6 +2456,53 @@
           "type": "string"
         }
       }
+    },
+    "WebAppBotSettings": {
+      "description": "The response body returned for a request to Bot Service Management to check per subscription WebAppBotSettings",
+      "type": "object",
+      "properties": {
+        "AzureWebJobsBotFrameworkDirectLineEndpoint": {
+          "description": "web app setting for Bot Framework SDK",
+          "type": "string"
+        },
+        "BotOpenIdMetadata": {
+          "description": "web app setting for Bot Framework SDK",
+          "type": "string"
+        },
+        "ChannelService": {
+          "description": "web app setting for Bot Framework SDK",
+          "type": "string"
+        },
+        "OAuthUrl": {
+          "description": "web app setting for Bot Framework SDK",
+          "type": "string"
+        },
+        "ToBotFromChannelOpenIdMetadataUrl": {
+          "description": "web app setting for Bot Framework SDK",
+          "type": "string"
+        },
+        "ToBotFromChannelTokenIssuer": {
+          "description": "web app setting for Bot Framework SDK",
+          "type": "string"
+        },
+        "ToBotFromEmulatorOpenIdMetadataUrl": {
+          "description": "web app setting for Bot Framework SDK",
+          "type": "string"
+        },
+        "ToChannelFromBotLoginUrl": {
+          "description": "web app setting for Bot Framework SDK",
+          "type": "string"
+        },
+        "ToChannelFromBotOAuthScope": {
+          "description": "web app setting for Bot Framework SDK",
+          "type": "string"
+        },
+        "ValidateAuthority": {
+          "description": "web app setting for Bot Framework SDK",
+          "type": "string"
+        }
+      },
+      "required": ["ChannelService"]
     }
   },
   "parameters": {
