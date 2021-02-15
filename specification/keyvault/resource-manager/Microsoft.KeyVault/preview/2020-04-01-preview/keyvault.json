@@ -443,6 +443,12 @@
             "schema": {
               "$ref": "#/definitions/VaultListResult"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "common.json#/definitions/CloudError"
+            }
           }
         },
         "x-ms-pageable": {
@@ -489,6 +495,12 @@
             "schema": {
               "$ref": "#/definitions/VaultListResult"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "common.json#/definitions/CloudError"
+            }
           }
         },
         "x-ms-pageable": {
@@ -527,6 +539,12 @@
             "description": "Retrieved information about all deleted key vaults in a subscription.",
             "schema": {
               "$ref": "#/definitions/DeletedVaultListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "common.json#/definitions/CloudError"
             }
           }
         },
@@ -718,6 +736,12 @@
             "schema": {
               "$ref": "#/definitions/ResourceListResult"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "common.json#/definitions/CloudError"
+            }
           }
         },
         "x-ms-pageable": {
@@ -762,6 +786,12 @@
             "description": "OK -- Operation to check the vault name availability was successful.",
             "schema": {
               "$ref": "#/definitions/CheckNameAvailabilityResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "common.json#/definitions/CloudError"
             }
           }
         },
@@ -1731,6 +1761,10 @@
         "id": {
           "type": "string",
           "description": "Full resource id of a vnet subnet, such as '/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/test-vnet/subnets/subnet1'."
+        },
+        "ignoreMissingVnetServiceEndpoint": {
+          "type": "boolean",
+          "description": "Property to specify whether NRP will ignore the check if parent subnet has serviceEndpoints configured."
         }
       },
       "required": [
@@ -1740,6 +1774,10 @@
     },
     "PrivateEndpointConnectionItem": {
       "properties": {
+        "id": {
+          "type": "string",
+          "description": "Id of private endpoint connection."
+        },
         "properties": {
           "$ref": "#/definitions/PrivateEndpointConnectionProperties",
           "x-ms-client-flatten": true,
