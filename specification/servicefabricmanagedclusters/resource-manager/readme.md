@@ -94,8 +94,6 @@ swagger-to-sdk:
   - repo: azure-sdk-for-net
   - repo: azure-sdk-for-python
   - repo: azure-resource-manager-schemas
-    after_scripts:
-      - node sdkauto_afterscript.js servicefabricmanagedclusters/resource-manager
 ```
 
 ## C#
