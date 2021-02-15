@@ -29,14 +29,14 @@ openapi-type: arm
 tag: package-2020-04-01-preview-only
 ```
 
-## Suppression
+### Suppression
 
 ``` yaml
 directive:
   - suppress: OperationsAPIImplementation
     reason: we do have a operations api as "/providers/Microsoft.Authorization/operations"
   - suppress: TopLevelResourcesListByResourceGroup
-    reason: proxy resources don't require list by resource group(Suppresion confirmed by API council)
+    reason: proxy resources don't require list by resource group (Suppression confirmed by API council)
   - suppress: OperationIdNounConflictingModelNames
     where: '$.paths["/providers/Microsoft.Authorization/providerOperations/{resourceProviderNamespace}"].get.operationId'
     from: authorization-ProviderOperationsCalls.json
@@ -69,6 +69,22 @@ directive:
     where: $.definitions.DenyAssignmentProperties.properties.isSystemProtected
     from: authorization-DenyAssignmentGetCalls.json
     reason: for this case the result of the proposed change would resemble a boolean anyways
+```
+
+### Tag: package-2020-10-01-preview
+
+These settings apply only when `--tag=package-2020-10-01-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-10-01-preview'
+input-file:
+- Microsoft.Authorization/preview/2020-10-01-preview/RoleAssignmentSchedule.json
+- Microsoft.Authorization/preview/2020-10-01-preview/RoleAssignmentScheduleInstance.json
+- Microsoft.Authorization/preview/2020-10-01-preview/RoleAssignmentScheduleRequest.json
+- Microsoft.Authorization/preview/2020-10-01-preview/RoleEligibilitySchedule.json
+- Microsoft.Authorization/preview/2020-10-01-preview/RoleEligibilityScheduleInstance.json
+- Microsoft.Authorization/preview/2020-10-01-preview/RoleEligibilityScheduleRequest.json
+- Microsoft.Authorization/preview/2020-10-01-preview/RoleManagementPolicy.json
+- Microsoft.Authorization/preview/2020-10-01-preview/RoleManagementPolicyAssignment.json
 ```
 
 ### Tag: package-2020-04-01-preview
