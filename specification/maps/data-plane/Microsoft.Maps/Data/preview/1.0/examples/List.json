@@ -1,0 +1,77 @@
+{
+  "parameters": {
+    "api-version": "1.0",
+    "subscription-key": "[subscription-key]"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "mapDataList": [
+          {
+            "udid": "f6495f62-94f8-0ec2-c252-45626f82fcb2",
+            "location": "https://atlas.microsoft.com/mapData/f6495f62-94f8-0ec2-c252-45626f82fcb2?api-version=1.0",
+            "sizeInBytes": 29920,
+            "uploadStatus": "Completed"
+          },
+          {
+            "udid": "8b1288fa-1958-4a2b-b68e-13a7i5af7d7c",
+            "location": "https://atlas.microsoft.com/mapData/8b1288fa-1958-4a2b-b68e-13a7i5af7d7c?api-version=1.0",
+            "sizeInBytes": 1339,
+            "uploadStatus": "Completed"
+          },
+          {
+            "udid": "7c1288fa-2058-4a1b-b68f-13a6h5af7d7c",
+            "location": "https://atlas.microsoft.com/mapData/7c1288fa-2058-4a1b-b68f-13a6h5af7d7c?api-version=1.0",
+            "sizeInBytes": 1650,
+            "uploadStatus": "Pending"
+          }
+        ]
+      }
+    },
+    "400": {
+      "headers": {},
+      "body": {
+        "error": {
+          "code": "400 BadRequest",
+          "message": "Bad request: one or more parameters were incorrectly specified or are mutually exclusive."
+        }
+      }
+    },
+    "401": {
+      "headers": {},
+      "body": {
+        "error": {
+          "code": "401 Unauthorized",
+          "message": "Access denied due to invalid subscription key. Make sure to provide a valid key for an active subscription."
+        }
+      }
+    },
+    "403": {
+      "headers": {},
+      "body": {
+        "error": {
+          "code": "403 Forbidden",
+          "message": "Permission, capacity, or authentication issues."
+        }
+      }
+    },
+    "404": {
+      "headers": {},
+      "body": {
+        "error": {
+          "code": "404 NotFound",
+          "message": "Not Found: the requested resource could not be found, but it may be available again in the future."
+        }
+      }
+    },
+    "500": {
+      "headers": {},
+      "body": {
+        "error": {
+          "code": "500 InternalServerError",
+          "message": "An error occurred while processing the request. Please try again later."
+        }
+      }
+    }
+  }
+}

@@ -43,49 +43,11 @@
             ]
           }
         ],
-        "clusterUpgradeDescription": {
-          "forceRestart": false,
-          "upgradeReplicaSetCheckTimeout": "00:10:00",
-          "healthCheckWaitDuration": "00:00:30",
-          "healthCheckStableDuration": "00:00:30",
-          "healthCheckRetryTimeout": "00:05:00",
-          "upgradeTimeout": "01:00:00",
-          "upgradeDomainTimeout": "00:15:00",
-          "healthPolicy": {
-            "maxPercentUnhealthyNodes": 0,
-            "maxPercentUnhealthyApplications": 0,
-            "applicationHealthPolicies": {
-              "fabric:/myApp1": {
-                "defaultServiceTypeHealthPolicy": {
-                  "maxPercentUnhealthyServices": 0
-                },
-                "serviceTypeHealthPolicies": {
-                  "myServiceType1": {
-                    "maxPercentUnhealthyServices": 100
-                  }
-                }
-              }
-            }
-          },
-          "deltaHealthPolicy": {
-            "maxPercentDeltaUnhealthyNodes": 0,
-            "maxPercentUpgradeDomainDeltaUnhealthyNodes": 0,
-            "maxPercentDeltaUnhealthyApplications": 0,
-            "applicationDeltaHealthPolicies": {
-              "fabric:/myApp1": {
-                "defaultServiceTypeDeltaHealthPolicy": {
-                  "maxPercentDeltaUnhealthyServices": 0
-                },
-                "serviceTypeDeltaHealthPolicies": {
-                  "myServiceType1": {
-                    "maxPercentDeltaUnhealthyServices": 0
-                  }
-                }
-              }
-            }
-          }
-        },
-        "clusterUpgradeMode": "Automatic"
+        "addonFeatures": [
+          "DnsService",
+          "BackupRestoreService",
+          "ResourceMonitorService"
+        ]
       }
     }
   },
@@ -144,50 +106,11 @@
               ]
             }
           ],
-          "clusterUpgradeDescription": {
-            "forceRestart": false,
-            "upgradeReplicaSetCheckTimeout": "00:10:00",
-            "healthCheckWaitDuration": "00:00:30",
-            "healthCheckStableDuration": "00:00:30",
-            "healthCheckRetryTimeout": "00:05:00",
-            "upgradeTimeout": "01:00:00",
-            "upgradeDomainTimeout": "00:15:00",
-            "healthPolicy": {
-              "maxPercentUnhealthyNodes": 0,
-              "maxPercentUnhealthyApplications": 0,
-              "applicationHealthPolicies": {
-                "fabric:/myApp1": {
-                  "defaultServiceTypeHealthPolicy": {
-                    "maxPercentUnhealthyServices": 0
-                  },
-                  "serviceTypeHealthPolicies": {
-                    "myServiceType1": {
-                      "maxPercentUnhealthyServices": 100
-                    }
-                  }
-                }
-              }
-            },
-            "deltaHealthPolicy": {
-              "maxPercentDeltaUnhealthyNodes": 0,
-              "maxPercentUpgradeDomainDeltaUnhealthyNodes": 0,
-              "maxPercentDeltaUnhealthyApplications": 0,
-              "applicationDeltaHealthPolicies": {
-                "fabric:/myApp1": {
-                  "defaultServiceTypeDeltaHealthPolicy": {
-                    "maxPercentDeltaUnhealthyServices": 0
-                  },
-                  "serviceTypeDeltaHealthPolicies": {
-                    "myServiceType1": {
-                      "maxPercentDeltaUnhealthyServices": 0
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "clusterUpgradeMode": "Automatic",
-          "reverseProxyEndpointPort": 19081
+          "addonFeatures": [
+            "DnsService",
+            "BackupRestoreService",
+            "ResourceMonitorService"
+          ]
         }
       }
     },
@@ -244,51 +167,7 @@
                 }
               ]
             }
-          ],
-          "clusterUpgradeDescription": {
-            "forceRestart": false,
-            "upgradeReplicaSetCheckTimeout": "00:10:00",
-            "healthCheckWaitDuration": "00:00:30",
-            "healthCheckStableDuration": "00:00:30",
-            "healthCheckRetryTimeout": "00:05:00",
-            "upgradeTimeout": "01:00:00",
-            "upgradeDomainTimeout": "00:15:00",
-            "healthPolicy": {
-              "maxPercentUnhealthyNodes": 0,
-              "maxPercentUnhealthyApplications": 0,
-              "applicationHealthPolicies": {
-                "fabric:/myApp1": {
-                  "defaultServiceTypeHealthPolicy": {
-                    "maxPercentUnhealthyServices": 0
-                  },
-                  "serviceTypeHealthPolicies": {
-                    "myServiceType1": {
-                      "maxPercentUnhealthyServices": 100
-                    }
-                  }
-                }
-              }
-            },
-            "deltaHealthPolicy": {
-              "maxPercentDeltaUnhealthyNodes": 0,
-              "maxPercentUpgradeDomainDeltaUnhealthyNodes": 0,
-              "maxPercentDeltaUnhealthyApplications": 0,
-              "applicationDeltaHealthPolicies": {
-                "fabric:/myApp1": {
-                  "defaultServiceTypeDeltaHealthPolicy": {
-                    "maxPercentDeltaUnhealthyServices": 0
-                  },
-                  "serviceTypeDeltaHealthPolicies": {
-                    "myServiceType1": {
-                      "maxPercentDeltaUnhealthyServices": 0
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "clusterUpgradeMode": "Automatic",
-          "reverseProxyEndpointPort": 19081
+          ]
         }
       }
     }

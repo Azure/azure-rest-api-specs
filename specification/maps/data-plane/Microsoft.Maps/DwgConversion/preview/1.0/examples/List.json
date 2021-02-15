@@ -1,0 +1,89 @@
+{
+  "parameters": {
+    "api-version": "1.0",
+    "subscription-key": "[subscription-key]"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "conversions": [
+          {
+            "conversionId": "54398242-ea6c-1f31-4fa6-79b1ae0fc24d",
+            "udid": "31838736-8b84-11ea-bc55-0242ac130003",
+            "created": "5/19/2020 9:00:00 AM +00:00",
+            "description": "User provided description.",
+            "featureCounts": {
+              "directoryInfo": 1,
+              "level": 3,
+              "facility": 1,
+              "unit": 150,
+              "category": 8,
+              "areaElement": 0,
+              "opening": 10
+            }
+          },
+          {
+            "conversionId": "2acf7d32-8b84-11ea-bc55-0242ac130003",
+            "udid": "1214bc58-8b84-11ea-bc55-0242ac1300039",
+            "created": "5/19/2020 9:00:00 AM +00:00",
+            "description": "User provided description.",
+            "featureCounts": {
+              "directoryInfo": 1,
+              "level": 3,
+              "facility": 1,
+              "unit": 150,
+              "category": 8,
+              "areaElement": 0,
+              "opening": 10
+            }
+          }
+        ]
+      }
+    },
+    "400": {
+      "headers": {},
+      "body": {
+        "error": {
+          "code": "400 BadRequest",
+          "message": "Bad request: one or more parameters were incorrectly specified or are mutually exclusive."
+        }
+      }
+    },
+    "401": {
+      "headers": {},
+      "body": {
+        "error": {
+          "code": "401 Unauthorized",
+          "message": "Access denied due to invalid subscription key. Make sure to provide a valid key for an active subscription."
+        }
+      }
+    },
+    "403": {
+      "headers": {},
+      "body": {
+        "error": {
+          "code": "403 Forbidden",
+          "message": "Permission, capacity, or authentication issues."
+        }
+      }
+    },
+    "404": {
+      "headers": {},
+      "body": {
+        "error": {
+          "code": "404 NotFound",
+          "message": "Not Found: the requested resource could not be found, but it may be available again in the future."
+        }
+      }
+    },
+    "500": {
+      "headers": {},
+      "body": {
+        "error": {
+          "code": "500 InternalServerError",
+          "message": "An error occurred while processing the request. Please try again later."
+        }
+      }
+    }
+  }
+}

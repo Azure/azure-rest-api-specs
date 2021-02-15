@@ -20,10 +20,11 @@ output-folder: $(azureresourceschema-folder)/schemas
 # all the input files in this apiVersion
 input-file:
   - Microsoft.HybridNetwork/preview/2020-01-01-preview/common.json
-  - Microsoft.HybridNetwork/preview/2020-01-01-preview/virtualNetworkFunction.json
+  - Microsoft.HybridNetwork/preview/2020-01-01-preview/networkFunction.json
   - Microsoft.HybridNetwork/preview/2020-01-01-preview/device.json
-  - Microsoft.HybridNetwork/preview/2020-01-01-preview/operations.json
+  - Microsoft.HybridNetwork/preview/2020-01-01-preview/operation.json
   - Microsoft.HybridNetwork/preview/2020-01-01-preview/vendor.json
-  - Microsoft.HybridNetwork/preview/2020-01-01-preview/virtualNetworkFunctionVendors.json
+  - Microsoft.HybridNetwork/preview/2020-01-01-preview/networkFunctionVendor.json
+  - Microsoft.HybridNetwork/preview/2020-01-01-preview/vendorNetworkFunction.json
 
 ```

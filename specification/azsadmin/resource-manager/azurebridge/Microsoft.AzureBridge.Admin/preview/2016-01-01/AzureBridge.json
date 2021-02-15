@@ -33,6 +33,12 @@
             "schema": {
               "$ref": "#/definitions/OperationList"
             }
+          },
+          "default": {
+            "description": "Default Response.",
+            "schema": {
+              "$ref": "Activation.json#/definitions/ExtendedErrorInfo"
+            }
           }
         },
         "produces": [
@@ -50,17 +56,14 @@
       "type": "object",
       "properties": {
         "id": {
-          "readOnly": true,
           "description": "URI of the resource.",
           "type": "string"
         },
         "name": {
-          "readOnly": true,
           "description": "Name of the resource.",
           "type": "string"
         },
         "type": {
-          "readOnly": true,
           "description": "Type of resource.",
           "type": "string"
         },
@@ -361,8 +364,7 @@
         },
         "galleryPackageBlobSasUri": {
           "description": "The URI to the .azpkg file that provides information required for showing product in the gallery.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "productDetailsProperties": {
           "description": "Specifies additional properties describing the product.",
@@ -401,8 +403,7 @@
         },
         "isSystemExtension": {
           "description": "Specifies if product is a Virtual Machine Extension.",
-          "type": "boolean",
-          "readOnly": true
+          "type": "boolean"
         },
         "sourceBlob": {
           "description": "Specifies a download location where content can be downloaded from.",
@@ -412,13 +413,11 @@
         },
         "supportMultipleExtensions": {
           "description": "Indicates if specified product supports multiple extensions.",
-          "type": "boolean",
-          "readOnly": true
+          "type": "boolean"
         },
         "version": {
           "description": "Specifies product version.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "vmOsType": {
           "description": "Specifies operating system used by the product.",
@@ -427,8 +426,7 @@
         },
         "vmScaleSetEnabled": {
           "description": "Indicates if virtual machine Scale Set is enabled in the specified product.",
-          "type": "boolean",
-          "readOnly": true
+          "type": "boolean"
         }
       }
     },
@@ -438,8 +436,7 @@
       "properties": {
         "version": {
           "description": "Specifies product version.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "osDiskImage": {
           "description": "OS disk image used by product.",
@@ -475,8 +472,7 @@
       "properties": {
         "uri": {
           "description": "The URI.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         }
       }
     },
@@ -559,9 +555,9 @@
       "type": "string",
       "x-ms-parameter-location": "method"
     },
-    "ResourceGroupParameter": {
+    "ResourceGroupNameParameter": {
       "description": "The resource group the resource is located under.",
-      "name": "resourceGroup",
+      "name": "resourceGroupName",
       "in": "path",
       "type": "string",
       "required": true,

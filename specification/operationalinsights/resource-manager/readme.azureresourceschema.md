@@ -6,8 +6,10 @@ These settings apply only when `--azureresourceschema` is specified on the comma
 
 ``` yaml $(azureresourceschema) && $(multiapi)
 batch:
+  - tag: schema-operationalinsights-2020-10-01
   - tag: schema-operationalinsights-2020-08-01
   - tag: schema-operationalinsights-2020-03-01-preview
+  - tag: schema-operationalinsights-2019-09-01-preview
   - tag: schema-operationalinsights-2019-08-01-preview
   - tag: schema-operationalinsights-2015-11-01-preview
   - tag: schema-operationalinsights-2015-03-20
@@ -15,6 +17,20 @@ batch:
 ```
 
 Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
+
+### Tag: schema-operationalinsights-2020-10-01 and azureresourceschema
+
+``` yaml $(tag) == 'schema-operationalinsights-2020-10-01' && $(azureresourceschema)
+output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
+  - Microsoft.OperationalInsights/stable/2020-10-01/Clusters.json
+  - Microsoft.OperationalInsights/stable/2020-10-01/Operations.json
+  - Microsoft.OperationalInsights/stable/2020-10-01/Tables.json
+  - Microsoft.OperationalInsights/stable/2020-10-01/Workspaces.json
+
+```
 
 ### Tag: schema-operationalinsights-2020-08-01 and azureresourceschema
 
@@ -72,6 +88,18 @@ input-file:
   - Microsoft.OperationalInsights/preview/2020-03-01-preview/Schema.json
   - Microsoft.OperationalInsights/preview/2020-03-01-preview/WorkspacePurge.json
   - Microsoft.OperationalInsights/preview/2020-03-01-preview/Tables.json
+
+```
+
+### Tag: schema-operationalinsights-2019-09-01-preview and azureresourceschema
+
+``` yaml $(tag) == 'schema-operationalinsights-2019-09-01-preview' && $(azureresourceschema)
+output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
+  - Microsoft.OperationalInsights/preview/2019-09-01-preview/QueryPacks_API.json
+  - Microsoft.OperationalInsights/preview/2019-09-01-preview/QueryPackQueries_API.json
 
 ```
 

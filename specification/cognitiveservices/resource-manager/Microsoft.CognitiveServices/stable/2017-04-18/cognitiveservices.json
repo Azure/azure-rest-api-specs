@@ -860,11 +860,12 @@
           "enum": [
             "Free",
             "Standard",
-            "Premium"
+            "Premium",
+            "Enterprise"
           ],
           "x-ms-enum": {
             "name": "SkuTier",
-            "modelAsString": false
+            "modelAsString": true
           }
         }
       },
@@ -1026,6 +1027,11 @@
         "apiProperties": {
           "$ref": "#/definitions/CognitiveServicesAccountApiProperties",
           "description": "The api properties for special APIs."
+        },
+        "dateCreated": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Gets the date of cognitive services account creation."
         }
       },
       "description": "Properties of Cognitive Services account."
@@ -1051,6 +1057,26 @@
           "description": "(Personalization Only) The storage account connection string.",
           "pattern": "^(( *)DefaultEndpointsProtocol=(http|https)( *);( *))?AccountName=(.*)AccountKey=(.*)EndpointSuffix=(.*)$",
           "maxLength": 1000
+        },
+        "aadClientId": {
+          "type": "string",
+          "description": "(Metrics Advisor Only) The Azure AD Client Id (Application Id).",
+          "maxLength": 500
+        },
+        "aadTenantId": {
+          "type": "string",
+          "description": "(Metrics Advisor Only) The Azure AD Tenant Id.",
+          "maxLength": 500
+        },
+        "superUser": {
+          "type": "string",
+          "description": "(Metrics Advisor Only) The super user of Metrics Advisor.",
+          "maxLength": 500
+        },
+        "websiteName": {
+          "type": "string",
+          "description": "(Metrics Advisor Only) The website name of Metrics Advisor.",
+          "maxLength": 500
         }
       },
       "description": "The api properties for special APIs."

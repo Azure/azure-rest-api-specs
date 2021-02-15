@@ -2,36 +2,49 @@
   "parameters": {
     "subscriptionId": "613192d7-503f-477a-9cfe-4efc3ee2bd60",
     "resourceGroupName": "TestRG",
-    "vnetName": "testvnet",
-    "subnetName": "testsubnet",
     "resourceName": "delegated1",
     "api-version": "2020-08-08-preview",
-    "delegatedSubnetParameters": {
-      "controllerID": "a182cbcf-e8ea-4175-ac2b-ad36a73f9801"
+    "parameters": {
+      "location": "West US",
+      "properties": {
+        "subnetDetails": {
+          "id": "/subscriptions/613192d7-503f-477a-9cfe-4efc3ee2bd60/resourceGroups/TestRG/providers/Microsoft.Network/virtualNetworks/testvnet/subnets/testsubnet"
+        },
+        "controllerDetails": {
+          "id": "/subscriptions/613192d7-503f-477a-9cfe-4efc3ee2bd60/resourceGroups/TestRG/providers/Microsoft.DelegatedNetwork/controller/dnctestcontroller"
+        }
+      }
     }
   },
   "responses": {
     "200": {
       "headers": {},
       "body": {
-        "id": "/subscriptions/613192d7-503f-477a-9cfe-4efc3ee2bd60/resourceGroups/TestRG/providers/Microsoft.Network/virtualNetworks/testvnet/subnets/testsubnet/providers/Microsoft.DelegatedNetwork/delegatedSubnets/delegated1",
+        "id": "/subscriptions/613192d7-503f-477a-9cfe-4efc3ee2bd60/resourceGroups/TestRG/providers/Microsoft.DelegatedNetwork/delegatedSubnets/delegated1",
         "location": "West US",
         "name": "delegated1",
         "type": "Microsoft.DelegatedNetwork/delegatedSubnets",
         "properties": {
-          "state": "Succeeded"
+          "provisioningState": "Succeeded",
+          "resourceGuid": "5a82cbcf-e8ea-4175-ac2b-ad36a73f9801",
+          "subnetDetails": {
+            "id": "/subscriptions/613192d7-503f-477a-9cfe-4efc3ee2bd60/resourceGroups/TestRG/providers/Microsoft.Network/virtualNetworks/testvnet/subnets/testsubnet"
+          },
+          "controllerDetails": {
+            "id": "/subscriptions/613192d7-503f-477a-9cfe-4efc3ee2bd60/resourceGroups/TestRG/providers/Microsoft.DelegatedNetwork/controller/dnctestcontroller"
+          }
         }
       }
     },
     "201": {
       "headers": {},
       "body": {
-        "id": "/subscriptions/613192d7-503f-477a-9cfe-4efc3ee2bd60/resourceGroups/TestRG/providers/Microsoft.Network/virtualNetworks/testvnet/subnets/testsubnet/providers/Microsoft.DelegatedNetwork/delegatedSubnets/delegated1",
+        "id": "/subscriptions/613192d7-503f-477a-9cfe-4efc3ee2bd60/resourceGroups/TestRG/providers/Microsoft.DelegatedNetwork/delegatedSubnets/delegated1",
         "location": "West US",
         "name": "delegated1",
         "type": "Microsoft.DelegatedNetwork/delegatedSubnets",
         "properties": {
-          "state": "Provisioning"
+          "provisioningState": "Provisioning"
         }
       }
     }

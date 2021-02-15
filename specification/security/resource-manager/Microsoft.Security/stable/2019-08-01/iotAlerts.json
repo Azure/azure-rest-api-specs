@@ -84,6 +84,13 @@
           },
           {
             "in": "query",
+            "name": "compromisedEntity",
+            "required": false,
+            "type": "string",
+            "description": "Filter by compromised device"
+          },
+          {
+            "in": "query",
             "name": "$limit",
             "required": false,
             "type": "integer",
@@ -202,7 +209,12 @@
           "description": "Alert properties",
           "$ref": "#/definitions/IotAlertProperties"
         }
-      }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../common/v1/types.json#/definitions/Resource"
+        }
+      ]
     },
     "IotAlertProperties": {
       "type": "object",

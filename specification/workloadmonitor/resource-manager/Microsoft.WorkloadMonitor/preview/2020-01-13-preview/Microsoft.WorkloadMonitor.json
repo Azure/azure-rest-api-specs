@@ -1,0 +1,762 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "Workload Monitor API",
+    "version": "2020-01-13-preview",
+    "title": "Workload Monitor API",
+    "contact": {
+      "email": "wlmengg@microsoft.com"
+    },
+    "license": {
+      "name": "Apache 2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+    }
+  },
+  "paths": {
+    "/providers/Microsoft.WorkloadMonitor/operations": {
+      "get": {
+        "summary": "Get a list of all available REST API operations.",
+        "operationId": "Operations_List",
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The list of available REST API operations.",
+            "schema": {
+              "$ref": "#/definitions/OperationList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "OperationList_Get": {
+            "$ref": "./examples/OperationList_Get.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{providerName}/{resourceCollectionName}/{resourceName}/providers/Microsoft.WorkloadMonitor/monitors": {
+      "get": {
+        "summary": "Get the current health status of all monitors of a virtual machine. Optional parameters: $expand (retrieve the monitor's evidence and configuration) and $filter (filter by monitor name).",
+        "operationId": "HealthMonitors_List",
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/providerName"
+          },
+          {
+            "$ref": "#/parameters/resourceCollectionName"
+          },
+          {
+            "$ref": "#/parameters/resourceName"
+          },
+          {
+            "$ref": "#/parameters/monitorNameFilter"
+          },
+          {
+            "$ref": "#/parameters/expand"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The health monitors matching the specified criteria.",
+            "schema": {
+              "$ref": "#/definitions/HealthMonitorList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get monitor list with default values": {
+            "$ref": "./examples/MonitorList_GetDefault.json"
+          },
+          "Get monitor list with filtered values": {
+            "$ref": "./examples/MonitorList_GetFiltered.json"
+          },
+          "Get monitor list with expanded values": {
+            "$ref": "./examples/MonitorList_GetExpanded.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{providerName}/{resourceCollectionName}/{resourceName}/providers/Microsoft.WorkloadMonitor/monitors/{monitorId}": {
+      "get": {
+        "summary": "Get the current health status of a monitor of a virtual machine. Optional parameter: $expand (retrieve the monitor's evidence and configuration).",
+        "operationId": "HealthMonitors_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/providerName"
+          },
+          {
+            "$ref": "#/parameters/resourceCollectionName"
+          },
+          {
+            "$ref": "#/parameters/resourceName"
+          },
+          {
+            "$ref": "#/parameters/monitorId"
+          },
+          {
+            "$ref": "#/parameters/expand"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The health monitor matching the specified criteria.",
+            "schema": {
+              "$ref": "#/definitions/HealthMonitor"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get monitor with default values": {
+            "$ref": "./examples/Monitor_GetDefault.json"
+          },
+          "Get monitor with expanded values": {
+            "$ref": "./examples/Monitor_GetExpanded.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{providerName}/{resourceCollectionName}/{resourceName}/providers/Microsoft.WorkloadMonitor/monitors/{monitorId}/history": {
+      "get": {
+        "summary": "Get the health state changes of a monitor of a virtual machine within the provided time window (default is the last 24 hours). Optional parameters: $expand (retrieve the monitor's evidence and configuration) and $filter (filter by heartbeat condition).",
+        "operationId": "HealthMonitors_ListStateChanges",
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/providerName"
+          },
+          {
+            "$ref": "#/parameters/resourceCollectionName"
+          },
+          {
+            "$ref": "#/parameters/resourceName"
+          },
+          {
+            "$ref": "#/parameters/monitorId"
+          },
+          {
+            "$ref": "#/parameters/heartbeatFilter"
+          },
+          {
+            "$ref": "#/parameters/expand"
+          },
+          {
+            "in": "query",
+            "name": "startTimestampUtc",
+            "description": "The start of the time window.",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "in": "query",
+            "name": "endTimestampUtc",
+            "description": "The end of the time window.",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The health monitor state changes matching the specified criteria.",
+            "schema": {
+              "$ref": "#/definitions/HealthMonitorStateChangeList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get monitor state changes with default values": {
+            "$ref": "./examples/MonitorHistory_GetDefault.json"
+          },
+          "Get monitor state changes with filtered values": {
+            "$ref": "./examples/MonitorHistory_GetFiltered.json"
+          },
+          "Get monitor state changes with expanded values": {
+            "$ref": "./examples/MonitorHistory_GetExpanded.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{providerName}/{resourceCollectionName}/{resourceName}/providers/Microsoft.WorkloadMonitor/monitors/{monitorId}/history/{timestampUnix}": {
+      "get": {
+        "summary": "Get the health state change of a monitor of a virtual machine at the provided timestamp. Optional parameter: $expand (retrieve the monitor's evidence and configuration).",
+        "operationId": "HealthMonitors_GetStateChange",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/providerName"
+          },
+          {
+            "$ref": "#/parameters/resourceCollectionName"
+          },
+          {
+            "$ref": "#/parameters/resourceName"
+          },
+          {
+            "$ref": "#/parameters/monitorId"
+          },
+          {
+            "$ref": "#/parameters/timestampUnix"
+          },
+          {
+            "$ref": "#/parameters/expand"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The health monitor state change matching the specified criteria.",
+            "schema": {
+              "$ref": "#/definitions/HealthMonitorStateChange"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get monitor state change with default values": {
+            "$ref": "./examples/MonitorStateChange_GetDefault.json"
+          },
+          "Get monitor state change with expanded values": {
+            "$ref": "./examples/MonitorStateChange_GetExpanded.json"
+          }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "api-version": {
+      "name": "api-version",
+      "in": "query",
+      "description": "The API version to use for the operation.",
+      "required": true,
+      "type": "string",
+      "enum": [
+        "2020-01-13-preview"
+      ]
+    },
+    "subscriptionId": {
+      "in": "path",
+      "name": "subscriptionId",
+      "required": true,
+      "type": "string",
+      "description": "The subscription Id of the virtual machine.",
+      "x-ms-parameter-location": "method"
+    },
+    "resourceGroupName": {
+      "in": "path",
+      "name": "resourceGroupName",
+      "required": true,
+      "type": "string",
+      "description": "The resource group of the virtual machine.",
+      "x-ms-parameter-location": "method"
+    },
+    "providerName": {
+      "in": "path",
+      "name": "providerName",
+      "required": true,
+      "type": "string",
+      "description": "The provider name (ex: Microsoft.Compute for virtual machines).",
+      "x-ms-parameter-location": "method"
+    },
+    "resourceCollectionName": {
+      "in": "path",
+      "name": "resourceCollectionName",
+      "required": true,
+      "type": "string",
+      "description": "The resource collection name (ex: virtualMachines for virtual machines).",
+      "x-ms-parameter-location": "method"
+    },
+    "resourceName": {
+      "in": "path",
+      "name": "resourceName",
+      "required": true,
+      "type": "string",
+      "description": "The name of the virtual machine.",
+      "x-ms-parameter-location": "method"
+    },
+    "monitorId": {
+      "in": "path",
+      "name": "monitorId",
+      "description": "The monitor Id of the virtual machine.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "timestampUnix": {
+      "in": "path",
+      "name": "timestampUnix",
+      "description": "The timestamp of the state change (unix format).",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "monitorNameFilter": {
+      "name": "$filter",
+      "in": "query",
+      "description": "Optionally filter by monitor name. Example: $filter=monitorName eq 'logical-disks|C:|disk-free-space-mb.'",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "heartbeatFilter": {
+      "name": "$filter",
+      "in": "query",
+      "description": "Optionally filter by heartbeat condition. Example: $filter=isHeartbeat eq false.",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "expand": {
+      "name": "$expand",
+      "in": "query",
+      "description": "Optionally expand the monitor’s evidence and/or configuration. Example: $expand=evidence,configuration.",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    }
+  },
+  "definitions": {
+    "HealthMonitorStateChangeList": {
+      "title": "Information about the health state changes of the monitor within the provided time window.",
+      "type": "object",
+      "readOnly": true,
+      "properties": {
+        "value": {
+          "description": "Array of health state changes within the specified time window.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/HealthMonitorStateChange"
+          }
+        },
+        "nextLink": {
+          "description": "Link to next page if the list is too long.",
+          "type": "string"
+        }
+      }
+    },
+    "HealthMonitorList": {
+      "title": "Information about the current health statuses of the monitors.",
+      "type": "object",
+      "readOnly": true,
+      "properties": {
+        "value": {
+          "description": "Array of health monitors of the virtual machine.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/HealthMonitor"
+          }
+        },
+        "nextLink": {
+          "description": "Link to next page if the list is too long.",
+          "type": "string"
+        }
+      }
+    },
+    "HealthMonitor": {
+      "title": "Information about the monitor’s current health status.",
+      "properties": {
+        "properties": {
+          "description": "Properties of the monitor's health status.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/HealthMonitorProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ]
+    },
+    "Resource": {
+      "description": "The resource model definition for the ARM proxy resource, 'microsoft.workloadmonitor/monitors'.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "description": "The resource Id.",
+          "type": "string",
+          "example": "/subscriptions/bc27da3b-3ba2-4e00-a6ec-1fde64aa1e21/resourceGroups/tugamidiAlerts/providers/Microsoft.Compute/virtualMachines/linuxEUS/providers/Microsoft.WorkloadMonitor/monitors/logical-disks|C@3A"
+        },
+        "name": {
+          "readOnly": true,
+          "description": "The resource name.",
+          "type": "string",
+          "example": "logical-disks|C@3A"
+        },
+        "type": {
+          "readOnly": true,
+          "description": "The resource type.",
+          "type": "string",
+          "example": "Microsoft.WorkloadMonitor/monitors"
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "HealthMonitorProperties": {
+      "description": "Properties of the monitor.",
+      "type": "object",
+      "properties": {
+        "monitorName": {
+          "description": "Human-readable name of the monitor.",
+          "type": "string",
+          "example": "logical-disks|C:"
+        },
+        "monitorType": {
+          "description": "Type of the monitor.",
+          "type": "string",
+          "example": "logical-disks|*"
+        },
+        "monitoredObject": {
+          "description": "Dynamic monitored object of the monitor.",
+          "type": "string",
+          "example": "C:"
+        },
+        "parentMonitorName": {
+          "description": "Name of the parent monitor.",
+          "type": "string",
+          "example": "logical-disks"
+        },
+        "previousMonitorState": {
+          "description": "Previous health state of the monitor.",
+          "$ref": "#/definitions/HealthState",
+          "example": "Healthy"
+        },
+        "currentMonitorState": {
+          "description": "Current health state of the monitor.",
+          "$ref": "#/definitions/HealthState",
+          "example": "Healthy"
+        },
+        "evaluationTimestamp": {
+          "description": "Timestamp of the monitor's last health evaluation.",
+          "type": "string",
+          "example": "2020-02-15T20:20:18.5765757Z"
+        },
+        "currentStateFirstObservedTimestamp": {
+          "description": "Timestamp of the monitor's last health state change.",
+          "type": "string",
+          "example": "2020-02-15T20:20:1.5765757Z"
+        },
+        "lastReportedTimestamp": {
+          "description": "Timestamp of the monitor's last reported health state.",
+          "type": "string",
+          "example": "2020-02-15T20:20:1.5765757Z"
+        },
+        "evidence": {
+          "description": "Evidence validating the monitor's current health state.",
+          "type": "object"
+        },
+        "monitorConfiguration": {
+          "description": "The configuration settings at the time of the monitor's health evaluation.",
+          "type": "object"
+        }
+      }
+    },
+    "HealthMonitorStateChange": {
+      "title": "Information about the monitor’s health state change at the provided timestamp.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "description": "Properties of the monitor's state change.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/HealthMonitorStateChangeProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ]
+    },
+    "HealthMonitorStateChangeProperties": {
+      "description": "Properties of the monitor.",
+      "type": "object",
+      "properties": {
+        "monitorName": {
+          "description": "Human-readable name of the monitor.",
+          "type": "string",
+          "example": "logical-disks|C:"
+        },
+        "monitorType": {
+          "description": "Type of the monitor.",
+          "type": "string",
+          "example": "logical-disks|*"
+        },
+        "monitoredObject": {
+          "description": "Dynamic monitored object of the monitor.",
+          "type": "string",
+          "example": "C:"
+        },
+        "evaluationTimestamp": {
+          "description": "Timestamp of the monitor's last health evaluation.",
+          "type": "string",
+          "example": "2020-01-08T20:20:18.5765757Z"
+        },
+        "currentStateFirstObservedTimestamp": {
+          "description": "Timestamp of the monitor's last health state change.",
+          "type": "string",
+          "example": "2020-01-08T20:20:18.5765757Z"
+        },
+        "previousMonitorState": {
+          "description": "Previous health state of the monitor.",
+          "$ref": "#/definitions/HealthState",
+          "example": "Healthy"
+        },
+        "currentMonitorState": {
+          "description": "Current health state of the monitor.",
+          "$ref": "#/definitions/HealthState",
+          "example": "Critical"
+        },
+        "evidence": {
+          "description": "Evidence validating the monitor's current health state.",
+          "type": "object"
+        },
+        "monitorConfiguration": {
+          "description": "The configuration settings at the time of the monitor's health evaluation.",
+          "type": "object"
+        }
+      }
+    },
+    "HealthState": {
+      "title": "One of health states - healthy, critical, warning, unknown, none, disabled.",
+      "type": "string",
+      "readOnly": true,
+      "enum": [
+        "Healthy",
+        "Critical",
+        "Warning",
+        "Unknown",
+        "Disabled",
+        "None"
+      ],
+      "x-ms-enum": {
+        "name": "HealthState",
+        "modelAsString": true
+      }
+    },
+    "OperationList": {
+      "title": "List of available REST API operations",
+      "type": "object",
+      "readOnly": true,
+      "properties": {
+        "value": {
+          "description": "Array of available REST API operations.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Operation"
+          }
+        },
+        "nextLink": {
+          "description": "Link to next page if the list is too long.",
+          "type": "string"
+        }
+      }
+    },
+    "Operation": {
+      "title": "Operation supported by the resource provider.",
+      "type": "object",
+      "readOnly": true,
+      "required": [
+        "name",
+        "display",
+        "origin"
+      ],
+      "properties": {
+        "name": {
+          "description": "The name of the operation being performed on this particular object.",
+          "type": "string",
+          "example": "Microsoft.WorkloadMonitor/monitors/read"
+        },
+        "display": {
+          "description": "The localized display information for this particular operation or action.",
+          "type": "object",
+          "required": [
+            "provider",
+            "resource",
+            "operation",
+            "description"
+          ],
+          "properties": {
+            "provider": {
+              "description": "Operation resource provider name.",
+              "type": "string",
+              "example": "Microsoft.WorkloadMonitor"
+            },
+            "resource": {
+              "description": "Resource on which the operation is performed.",
+              "type": "string",
+              "example": "Monitors"
+            },
+            "operation": {
+              "description": "Human-readable, friendly name for the operation.",
+              "type": "string",
+              "example": "Get monitors"
+            },
+            "description": {
+              "description": "Operation description.",
+              "type": "string",
+              "example": "Gets monitors and their current health state"
+            }
+          }
+        },
+        "origin": {
+          "description": "The intended executor of the operation.",
+          "type": "string",
+          "example": "user, system"
+        }
+      }
+    },
+    "ErrorResponse": {
+      "title": "Error response",
+      "type": "object",
+      "properties": {
+        "error": {
+          "description": "Error info.",
+          "type": "object",
+          "properties": {
+            "code": {
+              "description": "Service-defined error code. This code serves as a sub-status for the HTTP error code specified in the response.",
+              "type": "string"
+            },
+            "message": {
+              "description": "Human-readable representation of the error.",
+              "type": "string"
+            },
+            "details": {
+              "description": "Error details.",
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ErrorDetails"
+              }
+            }
+          }
+        }
+      }
+    },
+    "ErrorDetails": {
+      "title": "Error details",
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "Error code identifying the specific error.",
+          "type": "string"
+        },
+        "message": {
+          "description": "A human-readable error message.",
+          "type": "string"
+        }
+      }
+    }
+  },
+  "host": "management.azure.com",
+  "basePath": "/",
+  "schemes": [
+    "https"
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ]
+}
