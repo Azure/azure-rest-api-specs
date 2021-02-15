@@ -768,9 +768,9 @@
           "type": "string",
           "description": "Branch associated with the workflow run"
         },
-        "accessToken": {
-          "type": "string",
-          "description": "Github PAT token to configure workflow"
+        "authorization": {
+          "$ref": "#/definitions/Authorization",
+          "description": "Authorization info to access the code repository."
         },
         "bootstrapConfiguration": {
           "$ref": "#/definitions/BootstrapConfiguration",
@@ -843,6 +843,33 @@
           "description": "Commit message for committing files"
         }
       }
+    },
+    "Authorization": {
+      "description": "Authorization info to access the code repository.",
+      "type": "object",
+      "properties": {
+        "authorizationType": {
+          "description": "Type of authorization.",
+          "type": "string",
+          "enum": [
+            "personalAccessToken"
+          ],
+          "x-ms-enum": {
+            "name": "AuthorizationType",
+            "modelAsString": true
+          }
+        },
+        "parameters": {
+          "description": "Authorization parameters corresponding to the authorization type.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "authorizationType"
+      ]
     },
     "File": {
       "type": "object",
