@@ -1318,7 +1318,33 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/NotificationPreference"
-          }
+          },
+          "default": [
+            {
+              "stageName": "DevicePrepared",
+              "sendNotification": true
+            },
+            {
+              "stageName": "Delivered",
+              "sendNotification": true
+            },
+            {
+              "stageName": "Dispatched",
+              "sendNotification": true
+            },
+            {
+              "stageName": "PickedUp",
+              "sendNotification": true
+            },
+            {
+              "stageName": "AtAzureDC",
+              "sendNotification": true
+            },
+            {
+              "stageName": "DataCopy",
+              "sendNotification": true
+            }
+          ]
         }
       }
     },
@@ -2356,7 +2382,8 @@
                 "description": "Software-based encryption is disabled."
               }
             ]
-          }
+          },
+          "default": "Disabled"
         }
       }
     },
@@ -2751,7 +2778,8 @@
                 "description": "Scheduled job."
               }
             ]
-          }
+          },
+          "default": "NonScheduled"
         },
         "deliveryInfo": {
           "$ref": "#/definitions/JobDeliveryInfo",
@@ -3177,7 +3205,8 @@
         },
         "sendNotification": {
           "description": "Notification is required or not.",
-          "type": "boolean"
+          "type": "boolean",
+          "default": true
         }
       }
     },
@@ -3742,7 +3771,8 @@
                 "description": "Commercial Address."
               }
             ]
-          }
+          },
+          "default": "None"
         }
       }
     },

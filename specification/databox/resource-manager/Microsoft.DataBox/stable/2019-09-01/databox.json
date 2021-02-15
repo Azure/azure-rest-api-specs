@@ -1187,7 +1187,33 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/NotificationPreference"
-          }
+          },
+          "default": [
+            {
+              "stageName": "DevicePrepared",
+              "sendNotification": true
+            },
+            {
+              "stageName": "Delivered",
+              "sendNotification": true
+            },
+            {
+              "stageName": "Dispatched",
+              "sendNotification": true
+            },
+            {
+              "stageName": "PickedUp",
+              "sendNotification": true
+            },
+            {
+              "stageName": "AtAzureDC",
+              "sendNotification": true
+            },
+            {
+              "stageName": "DataCopy",
+              "sendNotification": true
+            }
+          ]
         }
       }
     },
@@ -1924,11 +1950,11 @@
       "description": "Dc Access Security code for device.",
       "type": "object",
       "properties": {
-        "forwardDcAccessCode": {
+        "forwardDCAccessCode": {
           "description": "Dc Access Code for dispatching from DC.",
           "type": "string"
         },
-        "reverseDcAccessCode": {
+        "reverseDCAccessCode": {
           "description": "Dc Access code for dropping off at DC.",
           "type": "string"
         }
@@ -2038,7 +2064,7 @@
     "DiskScheduleAvailabilityRequest": {
       "description": "Request body to get the availability for scheduling disk orders.",
       "required": [
-        "expectedDataSizeInTerabytes",
+        "expectedDataSizeInTeraBytes",
         "storageLocation",
         "skuName"
       ],
@@ -2049,7 +2075,7 @@
         }
       ],
       "properties": {
-        "expectedDataSizeInTerabytes": {
+        "expectedDataSizeInTeraBytes": {
           "format": "int32",
           "description": "The expected size of the data, which needs to be transferred in this job, in terabytes.",
           "type": "integer"
@@ -2125,7 +2151,7 @@
       ],
       "type": "object",
       "properties": {
-        "expectedDataSizeInTerabytes": {
+        "expectedDataSizeInTeraBytes": {
           "format": "int32",
           "description": "The expected size of the data, which needs to be transferred in this job, in terabytes.",
           "type": "integer"
@@ -2402,7 +2428,8 @@
                 "description": "Scheduled job."
               }
             ]
-          }
+          },
+          "default": "NonScheduled"
         },
         "deliveryInfo": {
           "$ref": "#/definitions/JobDeliveryInfo",
@@ -2748,7 +2775,8 @@
         },
         "sendNotification": {
           "description": "Notification is required or not.",
-          "type": "boolean"
+          "type": "boolean",
+          "default": true
         }
       }
     },
@@ -2860,7 +2888,8 @@
           "$ref": "#/definitions/TransportPreferences",
           "description": "Preferences related to the shipment logistics of the sku."
         }
-      }
+      },
+      "default": {}
     },
     "PreferencesValidationRequest": {
       "description": "Request to validate preference of transport and data center.",
@@ -3271,7 +3300,8 @@
                 "description": "Commercial Address."
               }
             ]
-          }
+          },
+          "default": "None"
         }
       }
     },
