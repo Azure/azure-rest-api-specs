@@ -755,6 +755,18 @@
             "$ref": "#/definitions/MHSMPrivateEndpointConnectionItem"
           },
           "description": "List of private endpoint connections associated with the managed hsm pool."
+        },
+        "publicNetworkAccess": {
+          "description": "Control permission for data plane traffic coming from public networks while private endpoint is enabled.",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "PublicNetworkAccess",
+            "modelAsString": true
+          }
         }
       },
       "description": "Properties of the managed HSM Pool"
