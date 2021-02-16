@@ -4033,10 +4033,6 @@
           "default": false,
           "type": "boolean"
         },
-        "storageAccount": {
-          "$ref": "#/definitions/StorageAccountProperties",
-          "description": "The properties of the storage account for the container registry. Only applicable to Classic SKU."
-        },
         "networkRuleSet": {
           "$ref": "#/definitions/NetworkRuleSet",
           "description": "The network rule set for a container registry."
@@ -4107,6 +4103,10 @@
             "name": "ZoneRedundancy",
             "modelAsString": true
           }
+        },
+        "anonymousPullEnabled": {
+          "description": "Enables registry-wide pull from unauthenticated clients.",
+          "type": "boolean"
         }
       }
     },
@@ -4129,19 +4129,6 @@
           "description": "The timestamp when the status was changed to the current value.",
           "type": "string",
           "readOnly": true
-        }
-      }
-    },
-    "StorageAccountProperties": {
-      "description": "The properties of a storage account for a container registry. Only applicable to Classic SKU.",
-      "required": [
-        "id"
-      ],
-      "type": "object",
-      "properties": {
-        "id": {
-          "description": "The resource ID of the storage account.",
-          "type": "string"
         }
       }
     },
@@ -4456,6 +4443,10 @@
             "name": "NetworkRuleBypassOptions",
             "modelAsString": true
           }
+        },
+        "anonymousPullEnabled": {
+          "description": "Enables registry-wide pull from unauthenticated clients.",
+          "type": "boolean"
         }
       }
     },
