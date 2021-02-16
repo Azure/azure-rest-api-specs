@@ -791,6 +791,10 @@
         "sku": {
           "$ref": "#/definitions/Sku",
           "description": "Gets or sets account SKU."
+        },
+        "encryption": {
+          "$ref": "#/definitions/EncryptionProperties",
+          "description": "Set the encryption properties for the automation account"
         }
       },
       "description": "The parameters supplied to the update account properties."
@@ -809,6 +813,11 @@
         "location": {
           "type": "string",
           "description": "Gets or sets the location of the resource."
+        },
+        "identity": {
+          "type": "object",
+          "$ref": "#/definitions/Identity",
+          "description": "Sets the identity property for automation account"
         },
         "tags": {
           "type": "object",
