@@ -1342,31 +1342,7 @@
     "GatewayError": {
       "description": "Detail of gateway errors.",
       "type": "object",
-      "properties": {
-        "code": {
-          "type": "string",
-          "description": "Error code of list gateway."
-        },
-        "message": {
-          "type": "string",
-          "description": "Error message of list gateway."
-        },
-        "subCode": {
-          "description": "The error sub code",
-          "type": "integer",
-          "format": "int32"
-        },
-        "httpStatusCode": {
-          "description": "The http status code",
-          "type": "integer",
-          "format": "int32"
-        },
-        "timeStamp": {
-          "description": "the timestamp for the error.",
-          "type": "string",
-          "readOnly": true
-        }
-      }
+      "$ref": "#/definitions/ErrorObject"
     },
     "CheckServerNameAvailabilityParameters": {
       "description": "Details of server name request body.",
