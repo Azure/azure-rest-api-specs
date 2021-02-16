@@ -1106,16 +1106,16 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.BotService/webAppBotSettings": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.BotService/hostSettings": {
       "get": {
         "tags": [
-          "WebAppBotSettings"
+          "BotHostSettings"
         ],
-        "description": "Get per settings needed to host bot in Azure web app service",
-        "operationId": "WebAppBotSettings_Get",
+        "description": "Get per subscription settings needed to host bot in compute resource such as Azure App Service",
+        "operationId": "HostSettings_Get",
         "x-ms-examples": {
-          "Get Web App Bot Settings": {
-            "$ref": "./examples/GetWebAppBotSettings.json"
+          "Get Bot Host Settings": {
+            "$ref": "./examples/GetHostSettings.json"
           }
         },
         "parameters": [
@@ -1130,7 +1130,7 @@
           "200": {
             "description": "If resource is retrieved successfully, the service should return 200 (OK).",
             "schema": {
-              "$ref": "#/definitions/WebAppBotSettings"
+              "$ref": "#/definitions/HostSettings"
             }
           },
           "default": {
@@ -2457,8 +2457,8 @@
         }
       }
     },
-    "WebAppBotSettings": {
-      "description": "The response body returned for a request to Bot Service Management to check per subscription WebAppBotSettings",
+    "HostSettings": {
+      "description": "The response body returned for a request to Bot Service Management to check per subscription hostSettings",
       "type": "object",
       "properties": {
         "AzureWebJobsBotFrameworkDirectLineEndpoint": {
