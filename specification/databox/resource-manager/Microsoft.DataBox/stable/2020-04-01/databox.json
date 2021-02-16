@@ -1903,7 +1903,8 @@
         },
         "devicePassword": {
           "description": "Set Device password for unlocking Databox Heavy. Should not be passed for TransferType:ExportFromAzure jobs. If this is not passed, the service will generate password itself. This will not be returned in Get Call. Password Requirements :  Password must be minimum of 12 and maximum of 64 characters. Password must have at least one uppercase alphabet, one number and one special character. Password cannot have the following characters : IilLoO0 Password can have only alphabets, numbers and these characters : @#\\-$%^!+=;:_()]+",
-          "type": "string"
+          "type": "string",
+          "x-ms-secret": true
         }
       },
       "x-ms-discriminator-value": "DataBoxHeavy"
@@ -1988,7 +1989,8 @@
         },
         "devicePassword": {
           "description": "Set Device password for unlocking Databox. Should not be passed for TransferType:ExportFromAzure jobs. If this is not passed, the service will generate password itself. This will not be returned in Get Call. Password Requirements :  Password must be minimum of 12 and maximum of 64 characters. Password must have at least one uppercase alphabet, one number and one special character. Password cannot have the following characters : IilLoO0 Password can have only alphabets, numbers and these characters : @#\\-$%^!+=;:_()]+",
-          "type": "string"
+          "type": "string",
+          "x-ms-secret": true
         }
       },
       "x-ms-discriminator-value": "DataBox"
@@ -2096,7 +2098,8 @@
                 "description": "Verbose logging (includes Errors, CRC, size information and others)."
               }
             ]
-          }
+          },
+          "default": "Error"
         },
         "accountDetails": {
           "$ref": "#/definitions/DataAccountDetails",
@@ -3035,7 +3038,8 @@
                 "description": "Key encryption key is managed by the Customer."
               }
             ]
-          }
+          },
+          "default": "MicrosoftManaged"
         },
         "kekUrl": {
           "description": "Key encryption key. It is required in case of Customer managed KekType.",
@@ -4100,7 +4104,8 @@
                 "description": "Azure Managed disk storage."
               }
             ]
-          }
+          },
+          "default": "StorageAccount"
         },
         "transferAllBlobs": {
           "description": "To indicate if all Azure blobs have to be transferred",
@@ -4190,7 +4195,8 @@
                 "description": "Azure Managed disk storage."
               }
             ]
-          }
+          },
+          "default": "StorageAccount"
         },
         "blobFilterDetails": {
           "$ref": "#/definitions/BlobFilterDetails",
