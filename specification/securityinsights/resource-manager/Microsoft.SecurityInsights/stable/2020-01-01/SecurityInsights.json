@@ -1859,6 +1859,21 @@
           "description": "Describes a user that updated the bookmark",
           "type": "object"
         },
+        "eventTime": {
+          "description": "The bookmark event time",
+          "format": "date-time",
+          "type": "string"
+        },
+        "queryStartTime": {
+          "description": "The start time for the query",
+          "format": "date-time",
+          "type": "string"
+        },
+        "queryEndTime": {
+          "description": "The end time for the query",
+          "format": "date-time",
+          "type": "string"
+        },
         "incidentInfo": {
           "$ref": "#/definitions/IncidentInfo",
           "description": "Describes an incident that relates to bookmark",
@@ -3522,12 +3537,6 @@
           "type": "string"
         }
       },
-      "required": [
-        "incidentId",
-        "severity",
-        "title",
-        "relationName"
-      ],
       "type": "object"
     }
   },

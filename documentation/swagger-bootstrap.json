@@ -1,110 +1,114 @@
 {
-    "swagger": "2.0",
-    "info": {
-        "title": "MyService",
-        "description": "Rest API for MyService",
-        "version": "Replace with MyService api version (e.g. 2016-04-02)"
-    },
-    "host": "management.azure.com",
-    "schemes": [
-        "https"
-    ],
-    "consumes": [
-        "application/json"
-    ],
-    "produces": [
-        "application/json"
-    ],
-    "security": [
-        {
-            "azure_auth": [
-                "user_impersonation"
-            ]
-        }
-    ],
-    "securityDefinitions": {
-        "azure_auth": {
-            "type": "oauth2",
-            "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
-            "flow": "implicit",
-            "description": "Azure Active Directory OAuth2 Flow",
-            "scopes": {
-                "user_impersonation": "impersonate your user account"
-            }
-        }
-    },
-    "paths": {
-        /*
-         * Fill out this section with your path definitions, then remove this comment
+  "swagger": "2.0",
+  "info": {
+    "title": "MyService",
+    "description": "Rest API for MyService",
+    "version": "Replace with MyService api version (e.g. 2016-04-02)"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    /*
+     * Fill out this section with your path definitions, then remove this comment
 
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MyService/pet/{name}": {
-            "get": {
-                "operationId": "Pets_Get",
-                "description": "Retrieve an existing Pet",
-                "parameters": [
-                    { "$ref": "#/parameters/subscriptionId" },
-                    { "$ref": "#/parameters/resourceGroupNameParameter" },
-                    {
-                        "name": "name",
-                        "in": "path",
-                        "description": "The name of the pet.",
-                        "required": true,
-                        "type": "string"
-                    }
-                ],
-                "responses": {
-                    "201": {
-                        "description": "The Pet for the specified name"
-                        "schema": {
-                            "$ref": "#/definitions/Pet"
-                        }
-                    }
-                }
-            }
-        }
-        */
-    },
-    "definitions": {
-        /*
-         * Fill out this section with your model definitions, then remove this comment
-
-        "Pet": {
-            "description": "A pet.",
-            "type": "object",
-            "properties": {
-                "name": {
-                    "description": "The name of the pet.",
-                    "type": "string",
-                }
-            }
-        }
-         */
-    },
-    "parameters": {
-        "subscriptionIdParameter": {
-            "name": "subscriptionId",
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MyService/pet/{name}": {
+      "get": {
+        "operationId": "Pets_Get",
+        "description": "Retrieve an existing Pet",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
             "in": "path",
-            "description": "Azure Subscription ID.",
+            "description": "The name of the pet.",
             "required": true,
             "type": "string"
-        },
-        "apiVersionParameter": {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "Version of the API to be used with the client request. Current version is 2016-04-02"
-        },
-        "resourceGroupNameParameter": {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[-\\w\\._\\(\\)]+$",
-            "minLength": 1,
-            "maxLength": 90,
-            "x-ms-parameter-location": "method",
-            "description": "Name of an Azure Resource group."
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "The Pet for the specified name"
+                  "schema": {
+              "$ref": "#/definitions/Pet"
+            }
+          }
         }
+      }
     }
+    */
+  },
+  "definitions": {
+    /*
+     * Fill out this section with your model definitions, then remove this comment
+
+    "Pet": {
+      "description": "A pet.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "The name of the pet.",
+          "type": "string",
+        }
+      }
+    }
+    */
+  },
+  "parameters": {
+    "subscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "description": "Azure Subscription ID.",
+      "required": true,
+      "type": "string"
+    },
+    "apiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "Version of the API to be used with the client request. Current version is 2016-04-02"
+    },
+    "resourceGroupNameParameter": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[-\\w\\._\\(\\)]+$",
+      "minLength": 1,
+      "maxLength": 90,
+      "x-ms-parameter-location": "method",
+      "description": "Name of an Azure Resource group."
+    }
+  }
 }
