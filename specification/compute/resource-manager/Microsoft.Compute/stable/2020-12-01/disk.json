@@ -1986,6 +1986,11 @@
         "burstingEnabled": {
           "type": "boolean",
           "description": "Set to true to enable bursting beyond the provisioned performance target of the disk. Bursting is disabled by default. Does not apply to Ultra disks."
+        },
+        "propertyUpdatesInProgress": {
+          "readOnly": true,
+          "$ref": "#/definitions/PropertyUpdatesInProgress",
+          "description": "Properties of the disk for which update is pending."
         }
       },
       "required": [
@@ -2369,6 +2374,11 @@
         "purchasePlan": {
           "$ref": "#/definitions/PurchasePlan",
           "description": "Purchase plan information to be added on the OS disk"
+        },
+        "propertyUpdatesInProgress": {
+          "readOnly": true,
+          "$ref": "#/definitions/PropertyUpdatesInProgress",
+          "description": "Properties of the disk for which update is pending."
         }
       },
       "description": "Disk resource update properties."
@@ -2597,6 +2607,15 @@
       ],
       "description": "Used for establishing the purchase context of any 3rd Party artifact through MarketPlace."
     },
+    "PropertyUpdatesInProgress": {
+      "properties": {
+        "targetTier": {
+          "type": "string",
+          "description": "The target performance tier of the disk if a tier change operation is in progress."
+        }
+      },
+      "description": "Properties of the disk for which update is pending."
+    },    
     "GrantAccessData": {
       "properties": {
         "access": {
