@@ -70,6 +70,7 @@ input-file:
   - Microsoft.ApiManagement/preview/2020-06-01-preview/apimregions.json
   - Microsoft.ApiManagement/preview/2020-06-01-preview/apimreports.json
   - Microsoft.ApiManagement/preview/2020-06-01-preview/apimsettings.json
+  - Microsoft.ApiManagement/preview/2020-06-01-preview/apimskus.json
   - Microsoft.ApiManagement/preview/2020-06-01-preview/apimsubscriptions.json
   - Microsoft.ApiManagement/preview/2020-06-01-preview/apimtagresources.json
   - Microsoft.ApiManagement/preview/2020-06-01-preview/apimtags.json
@@ -468,7 +469,10 @@ directive:
     from: apimnamedvalues.json
     reason: Warning raised to error while PR was being reviewed. SystemData will implement in next preview version.   
   - suppress: R4009
-    from: apimusers.json
+    from: apimgateways.json
     reason: Warning raised to error while PR was being reviewed. SystemData will implement in next preview version.   
+  - suppress: R4009
+    from: apimgroups.json
+    reason: Warning raised to error while PR was being reviewed. SystemData will implement in next preview version.  
 ```
 

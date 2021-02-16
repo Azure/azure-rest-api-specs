@@ -5598,6 +5598,21 @@
           "description": "Describes a user that updated the bookmark",
           "type": "object"
         },
+        "eventTime": {
+          "description": "The bookmark event time",
+          "format": "date-time",
+          "type": "string"
+        },
+        "queryStartTime": {
+          "description": "The start time for the query",
+          "format": "date-time",
+          "type": "string"
+        },
+        "queryEndTime": {
+          "description": "The end time for the query",
+          "format": "date-time",
+          "type": "string"
+        },
         "incidentInfo": {
           "$ref": "#/definitions/IncidentInfo",
           "description": "Describes an incident that relates to bookmark",
@@ -5644,6 +5659,13 @@
               "description": "Array of the expansion result entities.",
               "items": {
                 "$ref": "#/definitions/Entity"
+              },
+              "type": "array"
+            },
+            "edges": {
+              "description": "Array of expansion result connected entities",
+              "items": {
+                "$ref": "#/definitions/ConnectedEntity"
               },
               "type": "array"
             }
@@ -7085,6 +7107,19 @@
         }
       },
       "type": "object"
+    },
+    "ConnectedEntity": {
+      "description": "Expansion result connected entities",
+      "properties": {
+        "targetEntityId": {
+          "description": "Entity Id of the connected entity",
+          "type": "string"
+        },
+        "additionalData": {
+          "description": "key-value pairs for a connected entity mapping",
+          "type": "object"
+        }
+      }
     },
     "TimelineResultsMetadata": {
       "description": "Expansion result metadata.",
@@ -11307,12 +11342,6 @@
           "type": "string"
         }
       },
-      "required": [
-        "incidentId",
-        "severity",
-        "title",
-        "relationName"
-      ],
       "type": "object"
     },
     "WatchlistList": {
