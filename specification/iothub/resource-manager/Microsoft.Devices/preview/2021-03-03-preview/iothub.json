@@ -2500,6 +2500,10 @@
             "name": "AuthenticationType",
             "modelAsString": true
           }
+        },
+        "identity": {
+          "description": "Managed identity properties of storage endpoint for file upload.",
+          "$ref": "#/definitions/ManagedIdentity"
         }
       },
       "required": [
@@ -2921,6 +2925,10 @@
             "modelAsString": true
           }
         },
+        "identity": {
+          "description": "Managed identity properties of routing service bus queue endpoint.",
+          "$ref": "#/definitions/ManagedIdentity"
+        },
         "name": {
           "description": "The name that identifies this endpoint. The name can only include alphanumeric characters, periods, underscores, hyphens and has a maximum length of 64 characters. The following names are reserved:  events, fileNotifications, $default. Endpoint names must be unique across endpoint types. The name need not be the same as the actual queue name.",
           "type": "string",
@@ -2970,6 +2978,10 @@
             "name": "authenticationType",
             "modelAsString": true
           }
+        },
+        "identity": {
+          "description": "Managed identity properties of routing service bus topic endpoint.",
+          "$ref": "#/definitions/ManagedIdentity"
         },
         "name": {
           "description": "The name that identifies this endpoint. The name can only include alphanumeric characters, periods, underscores, hyphens and has a maximum length of 64 characters. The following names are reserved:  events, fileNotifications, $default. Endpoint names must be unique across endpoint types.  The name need not be the same as the actual topic name.",
@@ -3021,6 +3033,10 @@
             "modelAsString": true
           }
         },
+        "identity": {
+          "description": "Managed identity properties of routing event hub endpoint.",
+          "$ref": "#/definitions/ManagedIdentity"
+        },
         "name": {
           "description": "The name that identifies this endpoint. The name can only include alphanumeric characters, periods, underscores, hyphens and has a maximum length of 64 characters. The following names are reserved:  events, fileNotifications, $default. Endpoint names must be unique across endpoint types.",
           "type": "string",
@@ -3066,6 +3082,10 @@
             "name": "authenticationType",
             "modelAsString": true
           }
+        },
+        "identity": {
+          "description": "Managed identity properties of routing storage endpoint.",
+          "$ref": "#/definitions/ManagedIdentity"
         },
         "name": {
           "description": "The name that identifies this endpoint. The name can only include alphanumeric characters, periods, underscores, hyphens and has a maximum length of 64 characters. The following names are reserved:  events, fileNotifications, $default. Endpoint names must be unique across endpoint types.",
@@ -4145,6 +4165,10 @@
             "name": "AuthenticationType",
             "modelAsString": true
           }
+        },
+        "identity": {
+          "description": "Managed identity properties of storage endpoint for export devices.",
+          "$ref": "#/definitions/ManagedIdentity"
         }
       },
       "required": [
@@ -4183,6 +4207,10 @@
             "name": "AuthenticationType",
             "modelAsString": true
           }
+        },
+        "identity": {
+          "description": "Managed identity properties of storage endpoint for import devices.",
+          "$ref": "#/definitions/ManagedIdentity"
         }
       },
       "required": [
@@ -4289,13 +4317,13 @@
           "description": "The identifier of the key."
         },
         "identity": {
-          "description": "The identity.",
-          "$ref": "#/definitions/KEKIdentity"
+          "description": "Managed identity properties of KeyVault Key.",
+          "$ref": "#/definitions/ManagedIdentity"
         }
       }
     },
-    "KEKIdentity": {
-      "description": "The properties of the KeyVault identity.",
+    "ManagedIdentity": {
+      "description": "The properties of the Managed identity.",
       "type": "object",
       "properties": {
         "userAssignedIdentity": {
