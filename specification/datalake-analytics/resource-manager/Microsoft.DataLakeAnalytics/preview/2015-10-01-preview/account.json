@@ -655,6 +655,9 @@
           "200": {
             "description": "Successfully removed the specified Azure Data Lake Store account information from the specified Azure Data Lake Analytics account."
           },
+          "204": {
+            "description": "Successfully removed the specified Azure Data Lake Store account information from the specified Azure Data Lake Analytics account."
+          },
           "default": {
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
@@ -1872,6 +1875,13 @@
           },
           "description": "The list of Data Lake Store accounts associated with this account."
         },
+        "publicDataLakeStoreAccounts": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DataLakeStoreAccountInformation"
+          },
+          "description": "The list of Data Lake Store accounts associated with this account."
+        },
         "storageAccounts": {
           "readOnly": true,
           "type": "array",
@@ -1912,8 +1922,7 @@
           },
           "description": "The list of firewall rules associated with this account."
         },
-        "firewallState": {
-          "readOnly": true,
+        "firewallState": {         
           "type": "string",
           "enum": [
             "Enabled",
@@ -1925,8 +1934,7 @@
           },
           "description": "The current state of the IP address firewall for this account."
         },
-        "firewallAllowAzureIps": {
-          "readOnly": true,
+        "firewallAllowAzureIps": {         
           "type": "string",
           "enum": [
             "Enabled",
@@ -1938,8 +1946,7 @@
           },
           "description": "The current state of allowing or disallowing IPs originating within Azure through the firewall. If the firewall is disabled, this is not enforced."
         },
-        "newTier": {
-          "readOnly": true,
+        "newTier": {         
           "type": "string",
           "enum": [
             "Consumption",
@@ -2000,8 +2007,7 @@
           "format": "int32",
           "description": "The system defined maximum supported degree of parallelism for this account, which restricts the maximum value of parallelism the user can set for the account."
         },
-        "maxDegreeOfParallelismPerJob": {
-          "readOnly": true,
+        "maxDegreeOfParallelismPerJob": {         
           "type": "integer",
           "format": "int32",
           "minimum": 1,
