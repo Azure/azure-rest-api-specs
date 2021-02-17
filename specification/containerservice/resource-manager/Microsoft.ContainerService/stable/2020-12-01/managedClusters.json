@@ -1678,6 +1678,108 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/managedClusters/{resourceName}/runCommand": {
+      "post": {
+        "tags": [
+          "ManagedClusters"
+        ],
+        "operationId": "POST_RunCommand",
+        "summary": "Run Command against Managed Kubernetes Service",
+        "description": "Submit a command to run against managed kubernetes service, it will create a pod to run the command.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceNameParameter"
+          },
+          {
+            "name": "requestPayload",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RunCommandRequest"
+            },
+            "description": "Parameters supplied to the RunCommand operation."
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed. If the cluster doesn't exist, 404 (Not found) is returned.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "submitNewCommand": {
+            "$ref": "./examples/RunCommandRequest.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/managedClusters/{resourceName}/commandResults/{commandId}": {
+      "get": {
+        "tags": [
+          "ManagedClusters"
+        ],
+        "operationId": "GET_CommandResults",
+        "summary": "Get command result.",
+        "description": "Get command result from previous runCommand invoke.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceNameParameter"
+          },
+          {
+            "name": "commandId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Id of the command request."
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "command running in progress"
+          },
+          "200": {
+            "description": "command finished",
+            "schema": {
+              "$ref": "#/definitions/RunCommandResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed. If the cluster doesn't exist, 404 (Not found) is returned.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "getCommandResult": {
+            "$ref": "./examples/RunCommandResult.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -2533,6 +2635,47 @@
           "description": "The type of identity that last modified the resource."
         }
       }
+    },
+    "RunCommandRequest": {
+      "properties": {
+        "command": {
+          "type": "string",
+          "description": "command to run."
+        },
+        "context": {
+          "type": "string",
+          "description": "base64 encoded zip file, contains files required by the command"
+        },
+        "clusterToken": {
+          "type": "string",
+          "description": "AuthToken issued for AKS AAD Server App."
+        }
+      },
+      "description": "run command request"
+    },
+    "RunCommandResult": {
+      "properties": {
+        "exitCode": {
+          "type": "integer",
+          "format": "int32",
+          "description": "exit code of the command"
+        },
+        "startAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "time when the command started."
+        },
+        "finishAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "time when the command finished."
+        },
+        "logs": {
+          "type": "string",
+          "description": "command output."
+        }
+      },
+      "description": "run command result."
     },
     "MaintenanceConfiguration": {
       "allOf": [
