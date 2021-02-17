@@ -65,7 +65,7 @@
           "final-state-via": "azure-async-operation"
         },
         "operationId": "HSMSecurityDomain_Download",
-        "description": "Retrieves the Security Domain from the managed HSM. Calling this endpoint can be used to activated a provisioned managed HSM resource.",
+        "description": "Retrieves the Security Domain from the managed HSM. Calling this endpoint can be used to activate a provisioned managed HSM resource.",
         "parameters": [
           {
             "in": "body",
@@ -74,7 +74,7 @@
             "schema": {
               "$ref": "#/definitions/CertificateInfoObject"
             },
-            "description": "Security Domain download operation requires customer to provide N certificates (minimum 3 and maximum 10) containing public key in JWK format."
+            "description": "The Security Domain download operation requires customer to provide N certificates (minimum 3 and maximum 10) containing a public key in JWK format."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -117,7 +117,7 @@
         }
       }
     },
-    "/securitydomain/transferkey": {
+    "/securitydomain/upload": {
       "get": {
         "tags": [
           "HSMSecurityDomain"
@@ -148,9 +148,7 @@
             "$ref": "./examples/securitydomaintransferkey-example.json"
           }
         }
-      }
-    },
-    "/securitydomain/upload": {
+      },
       "post": {
         "tags": [
           "HSMSecurityDomain"
@@ -291,8 +289,7 @@
       "properties": {
         "value": {
           "type": "string",
-          "format": "base64url",
-          "description": "A blob containing the Security Domain."
+          "description": "The Security Domain."
         }
       },
       "description": "The Security Domain.",
@@ -328,7 +325,7 @@
         },
         "kty": {
           "type": "string",
-          "description": "JsonWebKey Key Type (kty), as defined in https://tools.ietf.org/html/draft-ietf-jose-json-web-algorithms-40. For Security Domain this value must be RSA"
+          "description": "JsonWebKey Key Type (kty), as defined in https://tools.ietf.org/html/draft-ietf-jose-json-web-algorithms-40. For Security Domain this value must be RSA."
         },
         "key_ops": {
           "type": "array",
