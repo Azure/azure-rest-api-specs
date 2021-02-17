@@ -23,6 +23,7 @@
           },
           "enableNonSslPort": true,
           "replicasPerMaster": 2,
+          "replicasPerPrimary": 2,
           "redisConfiguration": {},
           "hostName": "cache1.redis.cache.windows.net",
           "port": 6379,
@@ -36,17 +37,20 @@
             {
               "sslPort": 15000,
               "nonSslPort": 13000,
-              "isMaster": true
+              "isMaster": true,
+              "isPrimary": true
             },
             {
               "sslPort": 15001,
               "nonSslPort": 13001,
-              "isMaster": false
+              "isMaster": false,
+              "isPrimary": false
             },
             {
               "sslPort": 15002,
               "nonSslPort": 13002,
-              "isMaster": false
+              "isMaster": false,
+              "isPrimary": false
             }
           ],
           "publicNetworkAccess": "Enabled",
