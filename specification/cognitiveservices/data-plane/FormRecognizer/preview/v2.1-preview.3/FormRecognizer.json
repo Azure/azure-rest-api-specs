@@ -883,6 +883,9 @@
           },
           {
             "$ref": "#/parameters/PageRange"
+          },
+          {
+            "$ref": "#/parameters/ReadingOrder"
           }
         ],
         "responses": {
@@ -2254,6 +2257,22 @@
       ],
       "x-ms-enum": {
         "name": "Language",
+        "modelAsString": true
+      }
+    },
+    "ReadingOrder": {
+      "name": "readingOrder",
+      "in": "query",
+      "description": "Reading order algorithm to sort the text lines returned. Supported reading orders include: Basic(default), Natural.",
+      "required": false,
+      "x-ms-parameter-location": "method",
+      "type": "string",
+      "enum": [
+        "basic",
+        "natural"
+      ],
+      "x-ms-enum": {
+        "name": "ReadingOrder",
         "modelAsString": true
       }
     }
