@@ -42,9 +42,11 @@ Please also specify `--azureresourceschema-folder=<path to the root directory of
 
 ``` yaml $(tag) == 'schema-containerservice-2020-12-01' && $(azureresourceschema)
 output-folder: $(azureresourceschema-folder)/schemas
+
 # all the input files in this apiVersion
 input-file:
   - Microsoft.ContainerService/stable/2020-12-01/managedClusters.json
+
 ```
 
 ### Tag: schema-containerservice-2020-11-01 and azureresourceschema

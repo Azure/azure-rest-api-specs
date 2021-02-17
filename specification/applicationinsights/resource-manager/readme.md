@@ -31,7 +31,7 @@ openapi-type: arm
 tag: package-preview-2020-10
 ```
 
-## Suppression
+### Suppression
 
 ``` yaml
 directive:
@@ -392,6 +392,7 @@ swagger-to-sdk:
   - repo: azure-sdk-for-python
     after_scripts:
       - python ./scripts/multiapi_init_gen.py --default-api-version=2020-03-01-preview azure-mgmt-applicationinsights
+  - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js
