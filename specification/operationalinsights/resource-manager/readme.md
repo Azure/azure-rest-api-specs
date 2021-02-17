@@ -128,6 +128,7 @@ input-file:
 - Microsoft.OperationalInsights/stable/2020-10-01/Workspaces.json
 ```
 
+
 ### Tag: package-2020-08
 
 These settings apply only when `--tag=package-2020-08` is specified on the command line.
