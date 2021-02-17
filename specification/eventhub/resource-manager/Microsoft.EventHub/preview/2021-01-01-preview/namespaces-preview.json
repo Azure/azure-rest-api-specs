@@ -254,12 +254,6 @@
               "$ref": "#/definitions/EHNamespace"
             }
           },
-          "201": {
-            "description": "Namespace update request accepted.",
-            "schema": {
-              "$ref": "#/definitions/EHNamespace"
-            }
-          },
           "default": {
             "description": "Eventhub error response describing why the operation failed.",
             "schema": {
@@ -564,6 +558,9 @@
           "type": "string",
           "description": "Key Version",
           "x-ms-client-name": "KeyVersion"
+        },
+        "identity": {
+          "$ref": "#/definitions/userAssignedIdentityProperties"
         }
       },
       "description": "Properties to configure keyVault Properties"
