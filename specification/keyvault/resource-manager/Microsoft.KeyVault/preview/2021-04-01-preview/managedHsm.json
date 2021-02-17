@@ -348,6 +348,251 @@
           "nextLinkName": "nextLink"
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.KeyVault/managedHSMs/{name}/privateEndpointConnections/{privateEndpointConnectionName}": {
+      "get": {
+        "tags": [
+          "MHSMPrivateEndpointConnections"
+        ],
+        "operationId": "MHSMPrivateEndpointConnections_Get",
+        "description": "Gets the specified private endpoint connection associated with the managed HSM Pool.",
+        "x-ms-examples": {
+          "ManagedHsmGetPrivateEndpointConnection": {
+            "$ref": "./examples/ManagedHsm_getPrivateEndpointConnection.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ManagedHsmResourceGroupName"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Name of the managed HSM Pool"
+          },
+          {
+            "$ref": "#/parameters/MHSMPrivateEndpointConnectionName"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Private endpoint connection successfully returned.",
+            "schema": {
+              "$ref": "#/definitions/MHSMPrivateEndpointConnection"
+            }
+          },
+          "204": {
+            "description": "The private endpoint connection does not exist."
+          },
+          "default": {
+            "description": "The error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ManagedHsmError"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "MHSMPrivateEndpointConnections"
+        ],
+        "operationId": "MHSMPrivateEndpointConnections_Put",
+        "description": "Updates the specified private endpoint connection associated with the managed hsm pool.",
+        "x-ms-examples": {
+          "ManagedHsmPutPrivateEndpointConnection": {
+            "$ref": "./examples/ManagedHsm_putPrivateEndpointConnection.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ManagedHsmResourceGroupName"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Name of the managed HSM Pool"
+          },
+          {
+            "$ref": "#/parameters/MHSMPrivateEndpointConnectionName"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MHSMPrivateEndpointConnection"
+            },
+            "description": "The intended state of private endpoint connection."
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "The state of private endpoint connection was updated successfully.",
+            "headers": {
+              "Retry-After": {
+                "description": "(specified only if operation does not finish synchronously) The recommended number of seconds to wait before calling the URI specified in Azure-AsyncOperation.",
+                "type": "integer",
+                "format": "int32"
+              },
+              "Azure-AsyncOperation": {
+                "description": "(specified only if operation does not finish synchronously) The URI to poll for completion status. The response of this URI may be synchronous or asynchronous.",
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/MHSMPrivateEndpointConnection"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "common.json#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "MHSMPrivateEndpointConnections"
+        ],
+        "operationId": "MHSMPrivateEndpointConnections_Delete",
+        "description": "Deletes the specified private endpoint connection associated with the managed hsm pool.",
+        "x-ms-examples": {
+          "ManagedHsmDeletePrivateEndpointConnection": {
+            "$ref": "./examples/ManagedHsm_deletePrivateEndpointConnection.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ManagedHsmResourceGroupName"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Name of the managed HSM Pool"
+          },
+          {
+            "$ref": "#/parameters/MHSMPrivateEndpointConnectionName"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "The private endpoint connection was successfully deleted.",
+            "schema": {
+              "$ref": "#/definitions/MHSMPrivateEndpointConnection"
+            }
+          },
+          "202": {
+            "description": "The private endpoint connection is being deleted.",
+            "headers": {
+              "Retry-After": {
+                "description": "The recommended number of seconds to wait before calling the URI specified in the location header.",
+                "type": "integer",
+                "format": "int32"
+              },
+              "Location": {
+                "description": "The URI to poll for completion status.",
+                "type": "string"
+              }
+            }
+          },
+          "204": {
+            "description": "The private endpoint connection does not exist."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.KeyVault/managedHSMs/{name}/privateLinkResources": {
+      "get": {
+        "tags": [
+          "MHSMPrivateLinkResources"
+        ],
+        "operationId": "MHSMPrivateLinkResources_ListByMHSMResource",
+        "description": "Gets the private link resources supported for the managed hsm pool.",
+        "x-ms-examples": {
+          "KeyVaultListPrivateLinkResources": {
+            "$ref": "./examples/ManagedHsm_listPrivateLinkResources.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ManagedHsmResourceGroupName"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Name of the managed HSM Pool"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved private link resources.",
+            "schema": {
+              "$ref": "#/definitions/MHSMPrivateLinkResourceListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "common.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -498,6 +743,30 @@
               }
             ]
           }
+        },
+        "networkAcls": {
+          "$ref": "#/definitions/MHSMNetworkRuleSet",
+          "description": "Rules governing the accessibility of the key vault from specific network locations."
+        },
+        "privateEndpointConnections": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MHSMPrivateEndpointConnectionItem"
+          },
+          "description": "List of private endpoint connections associated with the managed hsm pool."
+        },
+        "publicNetworkAccess": {
+          "description": "Control permission for data plane traffic coming from public networks while private endpoint is enabled.",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "PublicNetworkAccess",
+            "modelAsString": true
+          }
         }
       },
       "description": "Properties of the managed HSM Pool"
@@ -551,6 +820,9 @@
             "type": "string"
           },
           "description": "Resource tags"
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
         }
       },
       "description": "Managed HSM resource",
@@ -602,6 +874,237 @@
         }
       },
       "description": "The server error."
+    },
+    "MHSMNetworkRuleSet": {
+      "properties": {
+        "bypass": {
+          "type": "string",
+          "description": "Tells what traffic can bypass network rules. This can be 'AzureServices' or 'None'.  If not specified the default is 'AzureServices'.",
+          "enum": [
+            "AzureServices",
+            "None"
+          ],
+          "x-ms-enum": {
+            "name": "NetworkRuleBypassOptions",
+            "modelAsString": true
+          }
+        },
+        "defaultAction": {
+          "type": "string",
+          "description": "The default action when no rule from ipRules and from virtualNetworkRules match. This is only used after the bypass property has been evaluated.",
+          "enum": [
+            "Allow",
+            "Deny"
+          ],
+          "x-ms-enum": {
+            "name": "NetworkRuleAction",
+            "modelAsString": true
+          }
+        },
+        "ipRules": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MHSMIPRule"
+          },
+          "description": "The list of IP address rules."
+        },
+        "virtualNetworkRules": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MHSMVirtualNetworkRule"
+          },
+          "description": "The list of virtual network rules."
+        }
+      },
+      "description": "A set of rules governing the network accessibility of a managed hsm pool."
+    },
+    "MHSMIPRule": {
+      "properties": {
+        "value": {
+          "type": "string",
+          "description": "An IPv4 address range in CIDR notation, such as '124.56.78.91' (simple IP address) or '124.56.78.0/24' (all addresses that start with 124.56.78)."
+        }
+      },
+      "required": [
+        "value"
+      ],
+      "description": "A rule governing the accessibility of a managed hsm pool from a specific ip address or ip range."
+    },
+    "MHSMVirtualNetworkRule": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Full resource id of a vnet subnet, such as '/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/test-vnet/subnets/subnet1'."
+        }
+      },
+      "required": [
+        "id"
+      ],
+      "description": "A rule governing the accessibility of a managed hsm pool from a specific virtual network."
+    },
+    "MHSMPrivateEndpointConnectionItem": {
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/MHSMPrivateEndpointConnectionProperties",
+          "x-ms-client-flatten": true,
+          "description": "Private endpoint connection properties."
+        }
+      },
+      "description": "Private endpoint connection item."
+    },
+    "MHSMPrivateEndpointConnection": {
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/MHSMPrivateEndpointConnectionProperties",
+          "x-ms-client-flatten": true,
+          "description": "Resource properties."
+        },
+        "etag": {
+          "type": "string",
+          "description": "Modified whenever there is a change in the state of private endpoint connection."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ManagedHsmResource"
+        }
+      ],
+      "description": "Private endpoint connection resource.",
+      "x-ms-azure-resource": true
+    },
+    "MHSMPrivateEndpointConnectionProperties": {
+      "properties": {
+        "privateEndpoint": {
+          "$ref": "#/definitions/MHSMPrivateEndpoint",
+          "description": "Properties of the private endpoint object."
+        },
+        "privateLinkServiceConnectionState": {
+          "$ref": "#/definitions/MHSMPrivateLinkServiceConnectionState",
+          "description": "Approval state of the private link connection."
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/MHSMPrivateEndpointConnectionProvisioningState",
+          "description": "Provisioning state of the private endpoint connection."
+        }
+      },
+      "description": "Properties of the private endpoint connection resource."
+    },
+    "MHSMPrivateEndpoint": {
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Full identifier of the private endpoint resource."
+        }
+      },
+      "description": "Private endpoint object properties."
+    },
+    "MHSMPrivateLinkServiceConnectionState": {
+      "properties": {
+        "status": {
+          "$ref": "#/definitions/MHSMPrivateEndpointServiceConnectionStatus",
+          "description": "Indicates whether the connection has been approved, rejected or removed by the key vault owner."
+        },
+        "description": {
+          "type": "string",
+          "description": "The reason for approval or rejection."
+        },
+        "actionsRequired": {
+          "type": "string",
+          "description": "A message indicating if changes on the service provider require any updates on the consumer.",
+          "enum": [
+            "None"
+          ],
+          "x-ms-enum": {
+            "name": "ActionsRequired",
+            "modelAsString": true
+          }
+        }
+      },
+      "description": "An object that represents the approval state of the private link connection."
+    },
+    "MHSMPrivateEndpointServiceConnectionStatus": {
+      "type": "string",
+      "description": "The private endpoint connection status.",
+      "enum": [
+        "Pending",
+        "Approved",
+        "Rejected",
+        "Disconnected"
+      ],
+      "x-ms-enum": {
+        "name": "PrivateEndpointServiceConnectionStatus",
+        "modelAsString": true
+      }
+    },
+    "MHSMPrivateEndpointConnectionProvisioningState": {
+      "type": "string",
+      "readOnly": true,
+      "description": "The current provisioning state.",
+      "enum": [
+        "Succeeded",
+        "Creating",
+        "Updating",
+        "Deleting",
+        "Failed",
+        "Disconnected"
+      ],
+      "x-ms-enum": {
+        "name": "PrivateEndpointConnectionProvisioningState",
+        "modelAsString": true
+      }
+    },
+    "MHSMPrivateLinkResourceListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "Array of private link resources",
+          "items": {
+            "$ref": "#/definitions/MHSMPrivateLinkResource"
+          }
+        }
+      },
+      "description": "A list of private link resources"
+    },
+    "MHSMPrivateLinkResource": {
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/MHSMPrivateLinkResourceProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ManagedHsmResource"
+        }
+      ],
+      "description": "A private link resource"
+    },
+    "MHSMPrivateLinkResourceProperties": {
+      "properties": {
+        "groupId": {
+          "description": "Group identifier of private link resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "requiredMembers": {
+          "description": "Required member names of private link resource.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "requiredZoneNames": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Required DNS zone names of the the private link resource."
+        }
+      },
+      "description": "Properties of a private link resource."
     }
   },
   "parameters": {
@@ -625,6 +1128,14 @@
       "required": true,
       "type": "string",
       "description": "Name of the resource group that contains the managed HSM pool.",
+      "x-ms-parameter-location": "method"
+    },
+    "MHSMPrivateEndpointConnectionName": {
+      "name": "privateEndpointConnectionName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Name of the private endpoint connection associated with the managed hsm pool.",
       "x-ms-parameter-location": "method"
     }
   }

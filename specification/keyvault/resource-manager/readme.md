@@ -135,6 +135,7 @@ directive:
 - suppress:
     - R3026 # The 'PrivateEndpointConnection' and 'PrivateLinkResource' sub-resources don't define PATCH as per Network Team's specification.
     - R3025 # The 'PrivateLinkResource' is only accessible via List operation; does not define GET as per Network Team's specification.
+    - R4015 # The 'MHSMPrivateEndpointConnection' sub-resource doesn't define List as per Network Team's specification.
 ```
 
 ---
