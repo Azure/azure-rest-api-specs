@@ -848,13 +848,9 @@
           "type": "string",
           "description": "Specifies the DNS fully qualified display name."
         },
-        "privateLinkScopedResources": {
-          "readOnly": true,
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "description": "List of private link scoped resources associated with this machine."
+        "privateLinkScopeResourceId": {
+          "type": "string",
+          "description": "The resource id of the private link scope this machine is assigned to, if any."
         }
       },
       "description": "Describes the properties of a hybrid machine."
@@ -863,6 +859,10 @@
       "properties": {
         "locationData": {
           "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/locationData"
+        },
+        "privateLinkScopeResourceId": {
+          "type": "string",
+          "description": "The resource id of the private link scope this machine is assigned to, if any."
         }
       },
       "description": "Describes the ARM updatable properties of a hybrid machine."
