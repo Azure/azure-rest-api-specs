@@ -64,7 +64,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/OperatorErrorResponse"
             }
           }
         }
@@ -149,16 +149,16 @@
       "type": "object",
       "properties": {}
     },
-    "ErrorResponse": {
+    "OperatorErrorResponse": {
       "description": "Error response.",
       "properties": {
         "error": {
           "description": "Error description",
-          "$ref": "#/definitions/ErrorDefinition"
+          "$ref": "#/definitions/OperatorErrorDefinition"
         }
       }
     },
-    "ErrorDefinition": {
+    "OperatorErrorDefinition": {
       "description": "Error definition.",
       "properties": {
         "code": {
@@ -175,7 +175,7 @@
           "description": "Internal error details.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ErrorDefinition"
+            "$ref": "#/definitions/OperatorErrorDefinition"
           },
           "readOnly": true
         }

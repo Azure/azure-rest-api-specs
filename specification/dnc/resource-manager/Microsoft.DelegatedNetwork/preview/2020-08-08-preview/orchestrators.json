@@ -70,7 +70,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/OrchestratorErrorResponse"
             }
           }
         }
@@ -125,7 +125,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/OrchestratorErrorResponse"
             }
           }
         },
@@ -169,7 +169,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/OrchestratorErrorResponse"
             }
           }
         },
@@ -219,7 +219,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/OrchestratorErrorResponse"
             }
           }
         }
@@ -258,7 +258,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/OrchestratorErrorResponse"
             }
           }
         }
@@ -300,7 +300,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/OrchestratorErrorResponse"
             }
           }
         }
@@ -493,16 +493,16 @@
         }
       }
     },
-    "ErrorResponse": {
+    "OrchestratorErrorResponse": {
       "description": "Error response.",
       "properties": {
         "error": {
           "description": "Error description",
-          "$ref": "#/definitions/ErrorDefinition"
+          "$ref": "#/definitions/OrchestratorErrorDefintion"
         }
       }
     },
-    "ErrorDefinition": {
+    "OrchestratorErrorDefintion": {
       "description": "Error definition.",
       "properties": {
         "code": {
@@ -519,7 +519,7 @@
           "description": "Internal error details.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ErrorDefinition"
+            "$ref": "#/definitions/OrchestratorErrorDefintion"
           },
           "readOnly": true
         }
