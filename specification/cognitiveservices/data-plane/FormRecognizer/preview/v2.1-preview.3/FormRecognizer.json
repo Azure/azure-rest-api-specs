@@ -170,7 +170,11 @@
         "description": "Extract key-value pairs, tables, and semantic values from a given document. The input document must be of one of the supported content types - 'application/pdf', 'image/jpeg', 'image/png', 'image/tiff' or 'image/bmp'. Alternatively, use 'application/json' type to specify the location (Uri or local path) of the document to be analyzed.",
         "operationId": "AnalyzeWithCustomModel",
         "consumes": [
-
+          "application/pdf",
+          "application/json",
+          "image/jpeg",
+          "image/png",
+          "image/tiff"
         ],
         "produces": [
           "application/json"
@@ -194,13 +198,7 @@
             "x-nullable": false
           },
           {
-            "name": "pageRange",
-            "in": "query",
-            "description": "Specify page number or range of page numbers to process, e.g: 1, 5, 7, 9-10",
-            "required": false,
-            "type": "string",
-            "pattern": "^\d+(-\d+)?$",
-            "x-nullable": false
+            "$ref": "#/parameters/PageRange"
           },
           {
             "$ref": "#/parameters/FileStream"
@@ -477,6 +475,12 @@
         "description": "Extract field text and semantic values from a given business card document. The input document must be of one of the supported content types - 'application/pdf', 'image/jpeg', 'image/png', 'image/tiff' or 'image/bmp'. Alternatively, use 'application/json' type to specify the location (Uri) of the document to be analyzed.",
         "operationId": "AnalyzeBusinessCardAsync",
         "consumes": [
+          "application/pdf",
+          "application/json",
+          "image/jpeg",
+          "image/png",
+          "image/tiff",
+          "image/bmp"
         ],
         "produces": [
           "application/json"
@@ -492,20 +496,11 @@
             "x-nullable": false
           },
           {
-            "name": "locale",
-            "in": "query",
-            "description": "Locale of the business card. Supported locales include: en-AU, en-CA, en-GB, en-IN, en-US(default).",
-            "required": false,
-            "type": "string"
+            "$ref": "#/parameters/Locale"
           },
           {
-            "name": "pageRange",
-            "in": "query",
-            "description": "Specify page number or range of page numbers to process, e.g: 1, 5, 7, 9-10",
-            "required": false,
-            "type": "string",
-            "pattern": "^\d+(-\d+)?$"
-          },	  
+            "$ref": "#/parameters/PageRange"
+          },
           {
             "$ref": "#/parameters/FileStream"
           }
@@ -581,6 +576,12 @@
         "description": "Extract field text and semantic values from a given invoice document. The input document must be of one of the supported content types - 'application/pdf', 'image/jpeg', 'image/png', 'image/tiff' or "image/bmp". Alternatively, use 'application/json' type to specify the location (Uri) of the document to be analyzed.",
         "operationId": "AnalyzeInvoiceAsync",
         "consumes": [
+          "application/pdf",
+          "application/json",
+          "image/jpeg",
+          "image/png",
+          "image/tiff",
+          "image/bmp"
         ],
         "produces": [
           "application/json"
@@ -596,19 +597,10 @@
             "x-nullable": false
           },
           {
-            "name": "locale",
-            "in": "query",
-            "description": "Locale of the invoice. Supported locales include: en-AU, en-CA, en-GB, en-IN, en-US(default).",
-            "required": false,
-            "type": "string"
+            "$ref": "#/parameters/Locale"
           },
           {
-            "name": "pageRange",
-            "in": "query",
-            "description": "Specify page number or range of page numbers to process, e.g: 1, 5, 7, 9-10",
-            "required": false,
-            "type": "string",
-            "pattern": "^\d+(-\d+)?$"
+            "$ref": "#/parameters/PageRange"
           },	  
           {
             "$ref": "#/parameters/FileStream"
@@ -685,6 +677,12 @@
         "description": "Extract field text and semantic values from a given ID document. The input document must be of one of the supported content types - 'application/pdf', 'image/jpeg', 'image/png', 'image/tiff' or 'image/bmp'. Alternatively, use 'application/json' type to specify the location (Uri) of the document to be analyzed.",
         "operationId": "AnalyzeIdAsync",
         "consumes": [
+          "application/pdf",
+          "application/json",
+          "image/jpeg",
+          "image/png",
+          "image/tiff",
+          "image/bmp"
         ],
         "produces": [
           "application/json"
@@ -789,20 +787,11 @@
             "x-nullable": false
           },
           {
-            "name": "locale",
-            "in": "query",
-            "description": "Locale of the receipt. Supported locales include: en-AU, en-CA, en-GB, en-IN, en-US(default).",
-            "required": false,
-            "type": "string"
+            "$ref": "#/parameters/Locale"
           },
           {
-            "name": "pageRange",
-            "in": "query",
-            "description": "Specify page number or range of page numbers to process, e.g: 1, 5, 7, 9-10",
-            "required": false,
-            "type": "string",
-            "pattern": "^\d+(-\d+)?$"
-          },	  
+            "$ref": "#/parameters/PageRange"
+          },
           {
             "$ref": "#/parameters/FileStream"
           }
@@ -878,6 +867,12 @@
         "description": "Extract text and layout information from a given document. The input document must be of one of the supported content types - 'application/pdf', 'image/jpeg', 'image/png', 'image/tiff' or 'image/bmp'. Alternatively, use 'application/json' type to specify the location (Uri or local path) of the document to be analyzed.",
         "operationId": "AnalyzeLayoutAsync",
         "consumes": [
+          "application/pdf",
+          "application/json",
+          "image/jpeg",
+          "image/png",
+          "image/tiff",
+          "image/bmp"
         ],
         "produces": [
           "application/json"
@@ -887,13 +882,8 @@
             "$ref": "#/parameters/FileStream"
           },
           {
-            "name": "pageRange",
-            "in": "query",
-            "description": "Specify page number or range of page numbers to process, e.g: 1, 5, 7, 9-10",
-            "required": false,
-            "type": "string",
-	    "pattern": "^\d+(-\d+)?$"
-          }	  
+            "$ref": "#/parameters/PageRange"
+          }
         ],
         "responses": {
           "202": {
@@ -2213,8 +2203,8 @@
         "$ref": "#/definitions/SourcePath"
       }
     },
-    "Pages": {
-      "name": "Pages",
+    "PageRange": {
+      "name": "PageRange",
       "in": "query",
       "description": "Custom page numbers for multi-page documents(PDF/TIFF), input the number of the pages you want to get OCR result. For a range of pages, use a hyphen. Separate each page or range with a comma or space.",
       "required": false,
@@ -2259,7 +2249,8 @@
         "it",
         "nl",
         "pt",
-        "zh-Hans"
+        "zh-Hans",
+        "ja"
       ],
       "x-ms-enum": {
         "name": "Language",
