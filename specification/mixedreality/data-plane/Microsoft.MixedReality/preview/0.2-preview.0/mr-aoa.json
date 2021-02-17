@@ -285,10 +285,12 @@
       "type": "object",
       "properties": {
         "dimensions": {
-          "$ref": "#/definitions/Vector3"
+          "$ref": "#/definitions/Vector3",
+          "x-nullable": true
         },
         "boundingBoxCenter": {
-          "$ref": "#/definitions/Vector3"
+          "$ref": "#/definitions/Vector3",
+          "x-nullable": true
         },
         "gravity": {
           "$ref": "#/definitions/Vector3"
@@ -309,7 +311,8 @@
           }
         },
         "principalAxis": {
-          "$ref": "#/definitions/Quaternion"
+          "$ref": "#/definitions/Quaternion",
+          "x-nullable": true
         },
         "scale": {
           "format": "float",
@@ -317,7 +320,8 @@
           "type": "number"
         },
         "supportingPlane": {
-          "$ref": "#/definitions/Vector4"
+          "$ref": "#/definitions/Vector4",
+          "x-nullable": true
         },
         "testTrajectory": {
           "description": "Test Trajectory.",
