@@ -34,7 +34,7 @@ directive:
 These are the global settings for Azure Mixed Reality Client.
 
 ```yaml
-title: MixedRealityAzureObjectAnchors
+title: MixedRealityObjectAnchors
 openapi-type: data-plane
 tag: package-0.2-preview.0
 ```
