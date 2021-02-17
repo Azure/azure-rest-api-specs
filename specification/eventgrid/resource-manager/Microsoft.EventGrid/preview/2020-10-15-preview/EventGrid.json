@@ -2076,9 +2076,9 @@
           "EventSubscriptions_ListGlobalBySubscription": {
             "$ref": "./examples/EventSubscriptions_ListGlobalBySubscription.json"
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
+          "x-ms-pageable": {
+            "nextLinkName": "nextLink"
+          }
         }
       }
     },
@@ -5928,6 +5928,12 @@
         "identity": {
           "$ref": "#/definitions/IdentityInfo",
           "description": "Identity information for the resource."
+        },
+        "systemData": {
+          "description": "The system metadata relating to Domain resource.",
+          "type": "object",
+          "readOnly": true,
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
         }
       }
     },
@@ -6063,6 +6069,12 @@
           "$ref": "#/definitions/DomainTopicProperties",
           "description": "Properties of the Domain Topic.",
           "x-ms-client-flatten": true
+        },
+        "systemData": {
+          "description": "The system metadata relating to Domain Topic resource.",
+          "type": "object",
+          "readOnly": true,
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
         }
       }
     },
@@ -6680,11 +6692,7 @@
         },
         "retryPolicy": {
           "$ref": "#/definitions/RetryPolicy",
-          "description": "The retry policy for events. This can be used to configure maximum number of delivery attempts and time to live for events.",
-          "default": {
-            "maxDeliveryAttempts": 30,
-            "eventTimeToLiveInMinutes": 1440
-          }
+          "description": "The retry policy for events. This can be used to configure maximum number of delivery attempts and time to live for events."
         },
         "deadLetterDestination": {
           "$ref": "#/definitions/DeadLetterDestination",
@@ -6754,11 +6762,13 @@
         "maxDeliveryAttempts": {
           "format": "int32",
           "description": "Maximum number of delivery retry attempts for events.",
+          "default": 30,
           "type": "integer"
         },
         "eventTimeToLiveInMinutes": {
           "format": "int32",
           "description": "Time To Live (in minutes) for events.",
+          "default": 1440,
           "type": "integer"
         }
       }
@@ -8064,8 +8074,7 @@
           "description": "Identity information for the resource."
         },
         "systemData": {
-          "description": "The system metadata relating to System Topic resource.",
-          "type": "object",
+          "description": "The system metadata relating to this resource.",
           "readOnly": true,
           "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
         }
@@ -8234,6 +8243,12 @@
         "extendedLocation": {
           "$ref": "#/definitions/ExtendedLocation",
           "description": "Extended location of the resource."
+        },
+        "systemData": {
+          "description": "The system metadata relating to Topic resource.",
+          "type": "object",
+          "readOnly": true,
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
         }
       }
     },
