@@ -117,7 +117,7 @@
         }
       }
     },
-    "/securitydomain/transferkey": {
+    "/securitydomain/upload": {
       "get": {
         "tags": [
           "HSMSecurityDomain"
@@ -148,9 +148,7 @@
             "$ref": "./examples/securitydomaintransferkey-example.json"
           }
         }
-      }
-    },
-    "/securitydomain/upload": {
+      },
       "post": {
         "tags": [
           "HSMSecurityDomain"
@@ -291,8 +289,7 @@
       "properties": {
         "value": {
           "type": "string",
-          "format": "base64url",
-          "description": "A blob containing the Security Domain."
+          "description": "The Security Domain."
         }
       },
       "description": "The Security Domain.",
