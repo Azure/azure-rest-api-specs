@@ -2,8 +2,8 @@
   "swagger": "2.0",
   "info": {
     "title": "EventHubManagementClient",
-    "description": "Azure Event Hubs client for managing Event Hubs Cluster, IPFilter Rules and VirtualNetworkRules resources.",
-    "version": "2018-01-01-preview"
+    "description": "Azure Event Hubs client for managing namespaces.",
+    "version": "2021-01-01-preview"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -326,258 +326,6 @@
           }
         }
       }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/namespaces/{namespaceName}/privateEndpointConnections": {
-      "get": {
-        "tags": [
-          "Namespaces PrivateEndpointConnections"
-        ],
-        "operationId": "PrivateEndpointConnections_List",
-        "x-ms-examples": {
-          "NameSpaceCreate": {
-            "$ref": "./examples/NameSpaces/PrivateEndPointConnectionList.json"
-          }
-        },
-        "description": "Gets the available PrivateEndpointConnections within a namespace.",
-        "externalDocs": {
-          "url": "https://msdn.microsoft.com/en-us/library/azure/mt639412.aspx"
-        },
-        "parameters": [
-          {
-            "$ref": "../../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "../../../common/v1/definitions.json#/parameters/NamespaceNameParameter"
-          },
-          {
-            "$ref": "../../../common/v1/definitions.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "PrivateEndpointConnections successfully returned.",
-            "schema": {
-              "$ref": "#/definitions/PrivateEndpointConnectionListResult"
-            }
-          },
-          "default": {
-            "description": "EventHubEventHub error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../common/v1/definitions.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/namespaces/{namespaceName}/privateEndpointConnections/{privateEndpointConnectionName}": {
-      "put": {
-        "tags": [
-          "Namespaces PrivateEndpointConnections"
-        ],
-        "operationId": "PrivateEndpointConnections_CreateOrUpdate",
-        "x-ms-examples": {
-          "NameSpacePrivateEndPointConnectionCreate": {
-            "$ref": "./examples/NameSpaces/PrivateEndPointConnectionCreate.json"
-          }
-        },
-        "description": "Creates or updates PrivateEndpointConnections of service namespace.",
-        "externalDocs": {
-          "url": "https://msdn.microsoft.com/en-us/library/azure/mt639408.aspx"
-        },
-        "parameters": [
-          {
-            "$ref": "../../../common/v1/definitions.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "../../../common/v1/definitions.json#/parameters/NamespaceNameParameter"
-          },
-          {
-            "$ref": "../../../common/v1/definitions.json#/parameters/PrivateEndpointConnectionNameParameter"
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/PrivateEndpointConnection"
-            },
-            "description": "Parameters supplied to update Status of PrivateEndPoint Connection to namespace resource."
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Status of PrivateEndPoint Connection Created successfully.",
-            "schema": {
-              "$ref": "#/definitions/PrivateEndpointConnection"
-            }
-          },
-          "201": {
-            "description": "Request to update Status of PrivateEndPoint Connection accepted.",
-            "schema": {
-              "$ref": "#/definitions/PrivateEndpointConnection"
-            }
-          },
-          "default": {
-            "description": "Eventhub error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../common/v1/definitions.json#/definitions/ErrorResponse"
-            }
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "Namespaces PrivateEndpointConnections"
-        ],
-        "operationId": "PrivateEndpointConnections_Delete",
-        "x-ms-examples": {
-          "NameSpacePrivateEndPointConnectionDelete": {
-            "$ref": "./examples/NameSpaces/PrivateEndPointConnectionDelete.json"
-          }
-        },
-        "description": "Deletes an existing namespace. This operation also removes all associated resources under the namespace.",
-        "externalDocs": {
-          "url": "https://msdn.microsoft.com/en-us/library/azure/mt639389.aspx"
-        },
-        "parameters": [
-          {
-            "$ref": "../../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "../../../common/v1/definitions.json#/parameters/NamespaceNameParameter"
-          },
-          {
-            "$ref": "../../../common/v1/definitions.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../common/v1/definitions.json#/parameters/PrivateEndpointConnectionNameParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Private Endpoint Connection successfully deleted."
-          },
-          "202": {
-            "description": "Private Endpoint Connection  delete request accepted."
-          },
-          "204": {
-            "description": "No content."
-          },
-          "default": {
-            "description": "Eventhub error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../common/v1/definitions.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-long-running-operation": true
-      },
-      "get": {
-        "tags": [
-          "Namespaces PrivateEndpointConnections"
-        ],
-        "operationId": "PrivateEndpointConnections_Get",
-        "x-ms-examples": {
-          "NameSpacePrivateEndPointConnectionGet": {
-            "$ref": "./examples/NameSpaces/PrivateEndPointConnectionGet.json"
-          }
-        },
-        "description": "Gets a description for the specified Private Endpoint Connection name.",
-        "externalDocs": {
-          "url": "https://msdn.microsoft.com/en-us/library/azure/mt639379.aspx"
-        },
-        "parameters": [
-          {
-            "$ref": "../../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "../../../common/v1/definitions.json#/parameters/NamespaceNameParameter"
-          },
-          {
-            "$ref": "../../../common/v1/definitions.json#/parameters/PrivateEndpointConnectionNameParameter"
-          },
-          {
-            "$ref": "../../../common/v1/definitions.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Private Endpoint Connection  successfully returned.",
-            "schema": {
-              "$ref": "#/definitions/PrivateEndpointConnection"
-            }
-          },
-          "default": {
-            "description": "Eventhub error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../common/v1/definitions.json#/definitions/ErrorResponse"
-            }
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/namespaces/{namespaceName}/privateLinkResources": {
-      "get": {
-        "tags": [
-          "Namespaces PrivateLinkResources"
-        ],
-        "operationId": "PrivateLinkResources_Get",
-        "x-ms-examples": {
-          "NameSpacePrivateLinkResourcesGet": {
-            "$ref": "./examples/NameSpaces/PrivateLinkResourcesGet.json"
-          }
-        },
-        "description": "Gets lists of resources that supports Privatelinks.",
-        "externalDocs": {
-          "url": "https://msdn.microsoft.com/en-us/library/azure/mt639379.aspx"
-        },
-        "parameters": [
-          {
-            "$ref": "../../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "../../../common/v1/definitions.json#/parameters/NamespaceNameParameter"
-          },
-          {
-            "$ref": "../../../common/v1/definitions.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Private Link resource List",
-            "schema": {
-              "$ref": "#/definitions/PrivateLinkResourcesListResult"
-            }
-          },
-          "default": {
-            "description": "Eventhub error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../common/v1/definitions.json#/definitions/ErrorResponse"
-            }
-          }
-        }
-      }
     }
   },
   "definitions": {
@@ -606,6 +354,11 @@
         "identity": {
           "$ref": "#/definitions/Identity",
           "description": "Properties of BYOK Identity description"
+        },
+        "systemData": {
+          "readOnly": true,
+          "description": "The system meta data relating to this resource.",
+          "$ref": "../../../common/v1/definitions.json#/definitions/systemData"
         },
         "properties": {
           "x-ms-client-flatten": true,
@@ -720,23 +473,47 @@
       "properties": {
         "principalId": {
           "type": "string",
-          "description": "ObjectId from the KeyVault"
+          "description": "ObjectId from the KeyVault",
+          "readOnly": true
         },
         "tenantId": {
           "type": "string",
-          "description": "TenantId from the KeyVault"
+          "description": "TenantId from the KeyVault",
+          "readOnly": true
         },
         "type": {
           "type": "string",
-          "description": "Enumerates the possible value Identity type, which currently supports only 'SystemAssigned'",
+          "description": "Type of managed service identity.",
           "default": "SystemAssigned",
           "enum": [
-            "SystemAssigned"
+            "SystemAssigned",
+            "UserAssigned",
+            "SystemAssigned, UserAssigned",
+            "None"
           ],
           "x-ms-enum": {
-            "name": "IdentityType",
+            "name": "ManagedServiceIdentityType",
             "modelAsString": false
           }
+        },
+        "userAssignedIdentities": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "object",
+            "properties": {
+              "principalId": {
+                "description": "Principal Id of user assigned identity",
+                "type": "string",
+                "readOnly": true
+              },
+              "clientId": {
+                "description": "Client Id of user assigned identity",
+                "type": "string",
+                "readOnly": true
+              }
+            }
+          },
+          "description": "Properties for User Assigned Identities"
         }
       },
       "description": "Properties to configure Identity for Bring your Own Keys"
@@ -763,6 +540,10 @@
             "name": "keySource",
             "modelAsString": false
           }
+        },
+        "requireInfrastructureEncryption": {
+          "type": "boolean",
+          "description": "Enable Infrastructure Encryption (Double Encryption)"
         }
       },
       "description": "Properties to configure Encryption"
@@ -787,156 +568,12 @@
       },
       "description": "Properties to configure keyVault Properties"
     },
-    "PrivateEndpointConnection": {
-      "description": "Properties of the PrivateEndpointConnection.",
-      "allOf": [
-        {
-          "$ref": "../../../common/v1/definitions.json#/definitions/Resource"
-        }
-      ],
+    "userAssignedIdentityProperties": {
+      "x-ms-client-flatten": true,
       "properties": {
-        "properties": {
-          "$ref": "#/definitions/PrivateEndpointConnectionProperties",
-          "description": "Properties of the PrivateEndpointConnection.",
-          "x-ms-client-flatten": true
-        }
-      }
-    },
-    "PrivateEndpointConnectionProperties": {
-      "description": "Properties of the private endpoint connection resource.",
-      "properties": {
-        "privateEndpoint": {
-          "$ref": "#/definitions/PrivateEndpoint",
-          "description": "The Private Endpoint resource for this Connection."
-        },
-        "privateLinkServiceConnectionState": {
-          "$ref": "#/definitions/ConnectionState",
-          "description": "Details about the state of the connection."
-        },
-        "provisioningState": {
-          "description": "Provisioning state of the Private Endpoint Connection.",
-          "enum": [
-            "Creating",
-            "Updating",
-            "Deleting",
-            "Succeeded",
-            "Canceled",
-            "Failed"
-          ],
+        "userAssignedIdentity": {
           "type": "string",
-          "x-ms-enum": {
-            "name": "EndPointProvisioningState",
-            "modelAsString": true
-          }
-        }
-      }
-    },
-    "PrivateEndpoint": {
-      "description": "PrivateEndpoint information.",
-      "properties": {
-        "id": {
-          "description": "The ARM identifier for Private Endpoint.",
-          "type": "string"
-        }
-      }
-    },
-    "ConnectionState": {
-      "description": "ConnectionState information.",
-      "properties": {
-        "status": {
-          "description": "Status of the connection.",
-          "enum": [
-            "Pending",
-            "Approved",
-            "Rejected",
-            "Disconnected"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "PrivateLinkConnectionStatus",
-            "modelAsString": true
-          }
-        },
-        "description": {
-          "description": "Description of the connection state.",
-          "type": "string"
-        }
-      }
-    },
-    "PrivateEndpointConnectionListResult": {
-      "description": "Result of the list of all private endpoint connections operation.",
-      "properties": {
-        "value": {
-          "description": "A collection of private endpoint connection resources.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/PrivateEndpointConnection"
-          }
-        },
-        "nextLink": {
-          "description": "A link for the next page of private endpoint connection resources.",
-          "type": "string"
-        }
-      }
-    },
-    "PrivateLinkResource": {
-      "description": "Information of the private link resource.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/PrivateLinkResourceProperties",
-          "description": "Properties of the private link resource.",
-          "x-ms-client-flatten": true
-        },
-        "id": {
-          "description": "Fully qualified identifier of the resource.",
-          "type": "string"
-        },
-        "name": {
-          "description": "Name of the resource",
-          "type": "string"
-        },
-        "type": {
-          "description": "Type of the resource",
-          "type": "string"
-        }
-      }
-    },
-    "PrivateLinkResourceProperties": {
-      "description": "Properties of PrivateLinkResource",
-      "properties": {
-        "groupId": {
-          "description": "The private link resource group id.",
-          "type": "string"
-        },
-        "requiredMembers": {
-          "type": "array",
-          "description": "The private link resource required member names.",
-          "items": {
-            "type": "string"
-          }
-        },
-        "requiredZoneNames": {
-          "type": "array",
-          "description": "The private link resource Private link DNS zone name.",
-          "items": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "PrivateLinkResourcesListResult": {
-      "description": "Result of the List private link resources operation.",
-      "properties": {
-        "value": {
-          "description": "A collection of private link resources",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/PrivateLinkResource"
-          }
-        },
-        "nextLink": {
-          "description": "A link for the next page of private link resources.",
-          "type": "string"
+          "description": "ARM ID of user Identity selected for encryption"
         }
       }
     }
