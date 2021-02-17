@@ -770,7 +770,7 @@
         },
         "authorization": {
           "$ref": "#/definitions/Authorization",
-          "description": "Authorization info to access the code repository."
+          "description": "Authorization info to access the code repository"
         },
         "bootstrapConfiguration": {
           "$ref": "#/definitions/BootstrapConfiguration",
@@ -787,11 +787,11 @@
       "properties": {
         "pipelineTemplateId": {
           "type": "string",
-          "description": "Unique identifier of the pipeline template"
+          "description": "Unique identifier of the pipeline template which will be used to create pipeline"
         },
         "pipelineTemplateParameters": {
           "$ref": "#/definitions/PipelineTemplateParameters",
-          "description": "List of input parameters used in the pipeline template."
+          "description": "List of parameter values for pipeline template"
         },
         "pipelineConfiguration": {
           "$ref": "#/definitions/PipelineConfiguration",
@@ -799,7 +799,7 @@
         },
         "provisioningConfiguration": {
           "$ref": "#/definitions/ProvisioningConfiguration",
-          "description": "Custom workflow provisioning configuration"
+          "description": "Configuration to control provisioning of a pipeline"
         }
       },
       "required": [
@@ -808,7 +808,7 @@
     },
     "PipelineConfiguration": {
       "type": "object",
-      "description": "Pipeline Configuration",
+      "description": "Draft configuration for the pipeline. This can be used to specify a workflow file content already fetched for given pipelineTemplateId",
       "properties": {
         "id": {
           "type": "string",
@@ -835,7 +835,7 @@
     },
     "ProvisioningConfiguration": {
       "type": "object",
-      "description": "Custom workflow provisioning configuration",
+      "description": "Configuration to control provisioning of a pipeline",
       "properties": {
         "commitMessage": {
           "type": "string",
@@ -845,7 +845,7 @@
       }
     },
     "Authorization": {
-      "description": "Authorization info to access the code repository.",
+      "description": "Authorization info to access the code repository",
       "type": "object",
       "properties": {
         "authorizationType": {
