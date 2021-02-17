@@ -37,6 +37,10 @@ These settings apply only when `--tag=package-2020-11-20` is specified on the co
 ```yaml $(tag) == 'package-2020-11-20'
 input-file:
   - Microsoft.ProviderHub/stable/2020-11-20/providerhub.json
+directive:
+  - suppress: R4009
+    from: providerhub.json
+    reason: This version doesn't support systemData.
 ```
 
 ---
@@ -59,9 +63,9 @@ swagger-to-sdk:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_providerhub']
 ```
 
-## Go
+## CSharp
 
-See configuration in [readme.go.md](./readme.go.md)
+See configuration in [readme.csharp.md](./readme.csharp.md)
 
 ## Python
 
@@ -75,9 +79,9 @@ See configuration in [readme.ruby.md](./readme.ruby.md)
 
 See configuration in [readme.typescript.md](./readme.typescript.md)
 
-## CSharp
+## Go
 
-See configuration in [readme.csharp.md](./readme.csharp.md)
+See configuration in [readme.go.md](./readme.go.md)
 
 ## Java
 
