@@ -183,6 +183,14 @@ require: $(this-folder)/../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
+  - $(this-folder)/Microsoft.KeyVault/preview/7.3-preview/certificates.json
+  - $(this-folder)/Microsoft.KeyVault/preview/7.3-preview/common.json
+  - $(this-folder)/Microsoft.KeyVault/preview/7.3-preview/keys.json
+  - $(this-folder)/Microsoft.KeyVault/preview/7.3-preview/rbac.json
+  - $(this-folder)/Microsoft.KeyVault/preview/7.3-preview/secrets.json
+  - $(this-folder)/Microsoft.KeyVault/preview/7.3-preview/storage.json
+  - $(this-folder)/Microsoft.KeyVault/preview/7.3-preview/backuprestore.json
+  - $(this-folder)/Microsoft.KeyVault/preview/7.3-preview/securitydomain.json
   - $(this-folder)/Microsoft.KeyVault/preview/7.2-preview/certificates.json
   - $(this-folder)/Microsoft.KeyVault/preview/7.2-preview/common.json
   - $(this-folder)/Microsoft.KeyVault/preview/7.2-preview/keys.json
@@ -389,10 +397,14 @@ directive:
     reason: Consistency with other properties.
   - suppress: DefinitionsPropertiesNamesCamelCase
     from: securitydomain.json
-    where: $.definitions.SecurityDomainOperationStatus.properties.key_ops
+    where: $.definitions.SecurityDomainJsonWebKey.properties.key_ops
     reason: Consistency with other properties.
   - suppress: DefinitionsPropertiesNamesCamelCase
     from: securitydomain.json
-    where: $.definitions.SecurityDomainOperationStatus.properties.x5t#S256
+    where: $.definitions.SecurityDomainJsonWebKey.properties["x5t#S256"]
     reason: Consistency with other properties.
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    from: securitydomain.json
+    where: $.definitions.TransferKey.properties.key_format
+    reason: Consistency with other properties
 ```
