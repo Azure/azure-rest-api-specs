@@ -69,12 +69,10 @@
               "type": "string"
             }
           }
+        },
+        "policy": {
+          "$ref": "#/definitions/PipelinePolicy"
         }
-      },
-      "policy": {
-        "description": "Pipeline Policy",
-        "type": "object",
-        "$ref": "#/definitions/PipelinePolicy"
       }
     },
     "PipelinePolicy": {
@@ -82,8 +80,6 @@
       "type": "object",
       "properties": {
         "elapsedTimeMetric": {
-          "description": "Pipeline ElapsedTime Metric Policy.",
-          "type": "object",
           "$ref": "#/definitions/PipelineElapsedTimeMetricPolicy"
         }
       }
