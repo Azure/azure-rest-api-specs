@@ -638,6 +638,13 @@
             }
           },
           {
+            "name": "force",
+            "in": "query",
+            "description": "Whether to force resource update",
+            "required": false,
+            "type": "boolean"
+          },
+          {
             "$ref": "#/parameters/api-version"
           }
         ],
@@ -648,8 +655,8 @@
               "$ref": "#/definitions/ConstrainedResource"
             }
           },
-          "200": {
-            "description": "Success",
+          "202": {
+            "description": "Accepted",
             "schema": {
               "$ref": "#/definitions/ConstrainedResource"
             }
@@ -4247,6 +4254,123 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataCollaboration/workspaces/{workspaceName}/proposals/{proposalName}/virtualOutputReferences": {
+      "get": {
+        "tags": [
+          "VirtualOutputReference"
+        ],
+        "summary": "List VirtualOutputReference in a Proposal.",
+        "description": "List VirtualOutputReference in a Proposal",
+        "operationId": "VirtualOutputReferences_ListByProposal",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/workspaceName"
+          },
+          {
+            "name": "proposalName",
+            "in": "path",
+            "description": "The name of the proposal.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "$skipToken",
+            "in": "query",
+            "description": "continuation token",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/VirtualOutputReferenceList"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Microsoft.DataCollaboration resource provider.",
+            "schema": {
+              "$ref": "#/definitions/DataCollaborationError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "VirtualOutputReferences_ListByProposal": {
+            "$ref": "./examples/VirtualOutputReferences_ListByProposal.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataCollaboration/workspaces/{workspaceName}/proposals/{proposalName}/virtualOutputReferences/{referenceName}": {
+      "get": {
+        "tags": [
+          "VirtualOutputReference"
+        ],
+        "summary": "Get a VirtualOutputReference in a Proposal.",
+        "description": "Get a VirtualOutputReference in a Proposal",
+        "operationId": "VirtualOutputReferences_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/workspaceName"
+          },
+          {
+            "name": "proposalName",
+            "in": "path",
+            "description": "The name of the proposal.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "referenceName",
+            "in": "path",
+            "description": "The name of the reference.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/VirtualOutputReference"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Microsoft.DataCollaboration resource provider.",
+            "schema": {
+              "$ref": "#/definitions/DataCollaborationError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "VirtualOutputReferences_Get": {
+            "$ref": "./examples/VirtualOutputReferences_Get.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataCollaboration/workspaces/{workspaceName}/resourceReferences": {
       "get": {
         "tags": [
@@ -4978,10 +5102,6 @@
             "name": "kind",
             "modelAsString": true
           }
-        },
-        "systemData": {
-          "$ref": "#/definitions/SystemData",
-          "description": "SystemData Info of constrained resource"
         }
       },
       "discriminator": "kind"
@@ -5030,10 +5150,6 @@
             "name": "kind",
             "modelAsString": true
           }
-        },
-        "systemData": {
-          "$ref": "#/definitions/SystemData",
-          "description": "SystemData Info of script"
         }
       },
       "discriminator": "kind"
@@ -5196,10 +5312,6 @@
           "$ref": "#/definitions/DataAssetProperties",
           "description": "The property bag of the DataAsset",
           "x-ms-client-flatten": true
-        },
-        "systemData": {
-          "$ref": "#/definitions/SystemData",
-          "description": "SystemData Info of dataAsset"
         }
       }
     },
@@ -5284,10 +5396,6 @@
           "$ref": "#/definitions/DataAssetReferenceProperties",
           "description": "Properties on the dataset reference",
           "x-ms-client-flatten": true
-        },
-        "systemData": {
-          "$ref": "#/definitions/SystemData",
-          "description": "SystemData Info of dataAssetReference"
         }
       }
     },
@@ -5581,6 +5689,15 @@
           "type": "string",
           "readOnly": true
         },
+        "systemData": {
+          "description": "System Data of the Azure resource.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/SystemData"
+            }
+          ],
+          "readOnly": true
+        },
         "tags": {
           "description": "Tags on the azure resource.",
           "type": "object",
@@ -5675,10 +5792,6 @@
           "$ref": "#/definitions/EntitlementProperties",
           "description": "Properties on the entitlement",
           "x-ms-client-flatten": true
-        },
-        "systemData": {
-          "$ref": "#/definitions/SystemData",
-          "description": "SystemData Info of dataAssetReference"
         }
       }
     },
@@ -5755,7 +5868,8 @@
         "type": {
           "description": "Identity Type",
           "enum": [
-            "SystemAssigned"
+            "SystemAssigned",
+            "UserAssigned"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -6120,6 +6234,48 @@
         }
       }
     },
+    "OutputPolicy": {
+      "description": "A Output policy.",
+      "required": [
+        "properties",
+        "kind"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Policy"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/OutputPolicyProperties",
+          "description": "Properties for Output policy",
+          "x-ms-client-flatten": true
+        }
+      },
+      "x-ms-discriminator-value": "Output"
+    },
+    "OutputPolicyProperties": {
+      "description": "An Output policy transfer object.",
+      "required": [
+        "outputName"
+      ],
+      "type": "object",
+      "properties": {
+        "appliesTo": {
+          "description": "The name of the sink this policy applies to. If not present the policy applies to all sinks.",
+          "type": "string"
+        },
+        "description": {
+          "description": "Description of the policy",
+          "type": "string"
+        },
+        "outputName": {
+          "description": "The name of the virtual reference representing this policy.",
+          "type": "string"
+        }
+      }
+    },
     "Participant": {
       "description": "Participant information",
       "type": "object",
@@ -6133,6 +6289,22 @@
           "$ref": "#/definitions/ParticipantProperties",
           "description": "Properties on the participant",
           "x-ms-client-flatten": true
+        }
+      }
+    },
+    "ParticipantDetails": {
+      "description": "A participant details",
+      "type": "object",
+      "properties": {
+        "tenantName": {
+          "description": "Tenant name of the participant",
+          "type": "string",
+          "readOnly": true
+        },
+        "workspaceDisplayName": {
+          "description": "Display name of the workspace",
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -6186,6 +6358,11 @@
             "modelAsString": true
           }
         },
+        "tenantName": {
+          "description": "Tenant name of the participant",
+          "type": "string",
+          "readOnly": true
+        },
         "userEmail": {
           "description": "Email of the user who created the resource",
           "type": "string",
@@ -6193,6 +6370,11 @@
         },
         "userName": {
           "description": "Name of the user who created the resource",
+          "type": "string",
+          "readOnly": true
+        },
+        "workspaceDisplayName": {
+          "description": "Display name of the workspace",
           "type": "string",
           "readOnly": true
         }
@@ -6211,10 +6393,6 @@
           "$ref": "#/definitions/PipelineProperties",
           "description": "Properties on the pipeline",
           "x-ms-client-flatten": true
-        },
-        "systemData": {
-          "$ref": "#/definitions/SystemData",
-          "description": "SystemData Info of pipeline"
         }
       }
     },
@@ -6284,10 +6462,6 @@
           "$ref": "#/definitions/PipelineRunProperties",
           "description": "Properties on the pipeline",
           "x-ms-client-flatten": true
-        },
-        "systemData": {
-          "$ref": "#/definitions/SystemData",
-          "description": "SystemData Info of pipelineRun"
         }
       }
     },
@@ -6626,17 +6800,14 @@
         "kind": {
           "description": "Kind of policy.",
           "enum": [
-            "DiagnosticLevel"
+            "DiagnosticLevel",
+            "Output"
           ],
           "type": "string",
           "x-ms-enum": {
             "name": "kind",
             "modelAsString": true
           }
-        },
-        "systemData": {
-          "$ref": "#/definitions/SystemData",
-          "description": "SystemData Info of policy"
         }
       },
       "discriminator": "kind"
@@ -6678,10 +6849,6 @@
           "$ref": "#/definitions/ProposalProperties",
           "description": "Properties on the proposal",
           "x-ms-client-flatten": true
-        },
-        "systemData": {
-          "$ref": "#/definitions/SystemData",
-          "description": "SystemData Info of Workspace"
         }
       }
     },
@@ -6806,6 +6973,15 @@
           "type": "string",
           "readOnly": true
         },
+        "systemData": {
+          "description": "System Data of the Azure resource.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/SystemData"
+            }
+          ],
+          "readOnly": true
+        },
         "type": {
           "description": "Type of the azure resource",
           "type": "string",
@@ -6834,6 +7010,15 @@
             "name": "kind",
             "modelAsString": true
           }
+        },
+        "participantDetails": {
+          "description": "Participant Details of the resource",
+          "allOf": [
+            {
+              "$ref": "#/definitions/ParticipantDetails"
+            }
+          ],
+          "readOnly": true
         },
         "resourceId": {
           "description": "Id of the azure resource",
@@ -6905,10 +7090,6 @@
             "name": "kind",
             "modelAsString": true
           }
-        },
-        "systemData": {
-          "$ref": "#/definitions/SystemData",
-          "description": "SystemData Info of script"
         }
       },
       "discriminator": "kind"
@@ -7016,10 +7197,6 @@
           "$ref": "#/definitions/ScriptReferenceProperties",
           "description": "Properties on the script reference",
           "x-ms-client-flatten": true
-        },
-        "systemData": {
-          "$ref": "#/definitions/SystemData",
-          "description": "SystemData Info of dataAssetReference"
         }
       }
     },
@@ -7056,6 +7233,20 @@
           "description": "The participant id of the script owner",
           "type": "string",
           "readOnly": true
+        },
+        "purpose": {
+          "description": "Script purpose",
+          "enum": [
+            "Body",
+            "InputAdapter",
+            "OutputAdapter"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "purpose",
+            "modelAsString": true
+          }
         },
         "revision": {
           "format": "int32",
@@ -7141,6 +7332,20 @@
       "description": "Properties for scriptReference resource reference used to only allow access if the resource is used within the specified Azure scriptReference.",
       "type": "object",
       "properties": {
+        "purpose": {
+          "description": "Script purpose",
+          "enum": [
+            "Body",
+            "InputAdapter",
+            "OutputAdapter"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "purpose",
+            "modelAsString": true
+          }
+        },
         "revision": {
           "format": "int32",
           "description": "The revision number of the scriptReference being referenced.\r\nIf omitted, the scriptReference latest version will be referenced.",
@@ -7214,6 +7419,20 @@
       "description": "Properties for script resource reference used to only allow access if the resource is used within the specified Azure script.",
       "type": "object",
       "properties": {
+        "purpose": {
+          "description": "Script purpose",
+          "enum": [
+            "Body",
+            "InputAdapter",
+            "OutputAdapter"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "purpose",
+            "modelAsString": true
+          }
+        },
         "revision": {
           "format": "int32",
           "description": "The revision number of the script being referenced.\r\nIf omitted, the script latest version will be referenced.",
@@ -7405,6 +7624,16 @@
         }
       }
     },
+    "SynapseSparkPoolLibraryRequirementsProperties": {
+      "description": "Spark pool library requirements properties",
+      "type": "object",
+      "properties": {
+        "content": {
+          "description": "Gets or sets the library requirements.",
+          "type": "string"
+        }
+      }
+    },
     "SynapseSparkPoolProperties": {
       "description": "A Synapse Spark Pool data transfer object.",
       "type": "object",
@@ -7434,6 +7663,10 @@
             "name": "family",
             "modelAsString": true
           }
+        },
+        "libraryRequirements": {
+          "$ref": "#/definitions/SynapseSparkPoolLibraryRequirementsProperties",
+          "description": "Gets or sets library requirements properties"
         },
         "nodeCount": {
           "format": "int32",
@@ -7556,6 +7789,19 @@
             "modelAsString": true
           }
         },
+        "purpose": {
+          "description": "Script purpose",
+          "enum": [
+            "Body",
+            "InputAdapter",
+            "OutputAdapter"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "purpose",
+            "modelAsString": true
+          }
+        },
         "revision": {
           "format": "int32",
           "description": "Latest script revision",
@@ -7598,7 +7844,7 @@
       }
     },
     "SystemData": {
-      "description": "SystemData of resource",
+      "description": "Metadata pertaining to creation and last modification of the resource.",
       "type": "object",
       "properties": {
         "createdAt": {
@@ -7608,7 +7854,7 @@
           "readOnly": true
         },
         "createdBy": {
-          "description": "A string identifier for the identity that created the resource.",
+          "description": "The identity that created the resource.",
           "type": "string",
           "readOnly": true
         },
@@ -7629,12 +7875,12 @@
         },
         "lastModifiedAt": {
           "format": "date-time",
-          "description": "The timestamp of resource last modification (UTC).",
+          "description": "The type of identity that last modified the resource.",
           "type": "string",
           "readOnly": true
         },
         "lastModifiedBy": {
-          "description": "A string identifier for the identity that last modified the resource.",
+          "description": "The identity that last modified the resource.",
           "type": "string",
           "readOnly": true
         },
@@ -7652,6 +7898,62 @@
             "name": "lastModifiedByType",
             "modelAsString": true
           }
+        }
+      }
+    },
+    "VirtualOutputReference": {
+      "description": "Reference to a virtual output.",
+      "required": [
+        "properties"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyDto"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/VirtualOutputReferenceProperties",
+          "description": "Properties on the output reference",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "VirtualOutputReferenceList": {
+      "description": "List response for get output references",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "The Url of next result page.",
+          "type": "string"
+        },
+        "value": {
+          "description": "Collection of items of type DataTransferObjects.",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VirtualOutputReference"
+          }
+        }
+      }
+    },
+    "VirtualOutputReferenceProperties": {
+      "description": "Properties of virtual output reference data transfer object.",
+      "type": "object",
+      "properties": {
+        "outputPolicyResourceId": {
+          "description": "Azure resource id of the referenced output policy",
+          "type": "string",
+          "readOnly": true
+        },
+        "virtualOutputReferenceId": {
+          "description": "Unique id for identifying a virtual output reference resource",
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -7675,10 +7977,6 @@
           "$ref": "#/definitions/WorkspaceProperties",
           "description": "Properties on the workspace",
           "x-ms-client-flatten": true
-        },
-        "systemData": {
-          "$ref": "#/definitions/SystemData",
-          "description": "SystemData Info of Workspace"
         }
       }
     },
@@ -7707,6 +8005,10 @@
       "description": "Workspace property bag.",
       "type": "object",
       "properties": {
+        "displayName": {
+          "description": "Display name of the workspace",
+          "type": "string"
+        },
         "provisioningState": {
           "description": "Provisioning state of the Workspace",
           "enum": [
