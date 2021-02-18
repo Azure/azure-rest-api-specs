@@ -4782,12 +4782,15 @@
         "dataImportKind": {
           "description": "The kind of the dataset (e.g. acoustic data, language data ...)",
           "enum": [
-            "None",
             "Language",
             "Acoustic",
             "Pronunciation"
           ],
-          "type": "string"
+          "type": "string",
+          "x-ms-enum": {
+            "name": "DatasetKind",
+            "modelAsString": false
+          }
         },
         "name": {
           "description": "The name of the object.",
@@ -4935,7 +4938,11 @@
             "SpeechRecognition",
             "PronunciationScore"
           ],
-          "type": "string"
+          "type": "string",
+          "x-ms-enum": {
+            "name": "EndpointKind",
+            "modelAsString": false
+          }
         },
         "lastActionDateTime": {
           "format": "date-time",
@@ -5188,14 +5195,17 @@
           "type": "string"
         },
         "modelKind": {
-          "title": "ModelKind",
           "description": "The kind of this model (e.g. acoustic, language ...)",
           "enum": [
             "Acoustic",
             "Language",
             "AcousticAndLanguage"
           ],
-          "type": "string"
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ModelKind",
+            "modelAsString": false
+          }
         },
         "text": {
           "description": "The text used to adapt this language model.",
@@ -5370,14 +5380,17 @@
       "type": "object",
       "properties": {
         "modelKind": {
-          "title": "ModelKind",
           "description": "The kind of this model (e.g. acoustic, language ...)",
           "enum": [
             "Acoustic",
             "Language",
             "AcousticAndLanguage"
           ],
-          "type": "string"
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ModelKind",
+            "modelAsString": false
+          }
         },
         "text": {
           "description": "The text used to adapt this language model.",

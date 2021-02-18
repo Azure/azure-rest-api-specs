@@ -28,6 +28,8 @@ AutoRest-Linter Suppressions
 directive:
   - suppress: DefinitionsPropertiesNamesCamelCase
     reason: Changing casing will break existing clients/consumers
+  - suppress: GuidUsage
+    reason: Changing casing will break existing clients/consumers
 ```
 
 ---
@@ -37,6 +39,15 @@ These settings apply only when `--tag=release_3_0` is specified on the command l
 
 ``` yaml $(tag) == 'release_3_0'
 input-file: stable/v3.0/speechtotext.json
+```
+
+AutoRest-Linter Suppressions
+
+``` yaml
+# Ignore autorest-linter issues that cannot be resolve without updates to the API implementation
+directive:
+  - suppress: LongRunningOperationsWithLongRunningExtension
+    reason: Does not apply in those two places. The method is a DELETE which lazily deletes blobs, so it's Accepted, not NoContent. 
 ```
 
 ---
