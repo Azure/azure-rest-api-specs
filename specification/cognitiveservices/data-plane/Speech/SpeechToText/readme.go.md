@@ -17,7 +17,7 @@ batch:
   - tag: release_3_0
 ```
 
-### Tag: 2_0 and go
+### Tag: release_2_0 and go
 
 These settings apply only when `--tag=release_2_0 --go` is specified on the command line.
 Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
@@ -26,7 +26,7 @@ Please also specify `--go-sdk-folder=<path to the root directory of your azure-s
 output-folder: $(go-sdk-folder)/services/cognitiveservices/v2.0/speech/speechtotext/$(namespace)
 ```
 
-### Tag: 3_0 and go
+### Tag: release_3_0 and go
 
 These settings apply only when `--tag=release_3_0 --go` is specified on the command line.
 Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
