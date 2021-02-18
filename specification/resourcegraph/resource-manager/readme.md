@@ -47,8 +47,6 @@ These settings apply only when `--tag=package-preview-2020-09` is specified on t
 ``` yaml $(tag) == 'package-preview-2020-09'
 input-file:
   - Microsoft.ResourceGraph/preview/2020-09-01-preview/resourcechanges.json
-  - Microsoft.ResourceGraph/preview/2020-04-01-preview/resourcegraph.json
-  - Microsoft.ResourceGraph/preview/2020-04-01-preview/graphquery.json
 ```
 
 ### Tag: package-preview-2020-04
