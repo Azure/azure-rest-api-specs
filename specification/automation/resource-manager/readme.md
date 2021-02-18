@@ -222,12 +222,13 @@ input-file:
 - Microsoft.Automation/preview/2020-01-13-preview/schedule.json
 - Microsoft.Automation/preview/2020-01-13-preview/variable.json
 - Microsoft.Automation/preview/2020-01-13-preview/watcher.json
+- Microsoft.Automation/stable/2020-01-13-preview/job.json
+- Microsoft.Automation/stable/2020-01-13-preview/operations.json
+- Microsoft.Automation/stable/2020-01-13-preview/softwareUpdateConfiguration.json
+- Microsoft.Automation/stable/2020-01-13-preview/softwareUpdateConfigurationRun.json
+- Microsoft.Automation/stable/2020-01-13-preview/softwareUpdateConfigurationMachineRun.json
 - Microsoft.Automation/stable/2019-06-01/dscConfiguration.json
-- Microsoft.Automation/stable/2019-06-01/job.json
-- Microsoft.Automation/stable/2019-06-01/operations.json
 - Microsoft.Automation/stable/2019-06-01/runbook.json
-- Microsoft.Automation/stable/2019-06-01/softwareUpdateConfigurationRun.json
-- Microsoft.Automation/stable/2019-06-01/softwareUpdateConfigurationMachineRun.json
 - Microsoft.Automation/stable/2015-10-31/webhook.json
 ```
 
