@@ -199,7 +199,7 @@
             "x-nullable": false
           },
           {
-            "$ref": "#/parameters/PageRange"
+            "$ref": "#/parameters/Pages"
           },
           {
             "$ref": "#/parameters/FileStream"
@@ -500,7 +500,7 @@
             "$ref": "#/parameters/Locale"
           },
           {
-            "$ref": "#/parameters/PageRange"
+            "$ref": "#/parameters/Pages"
           },
           {
             "$ref": "#/parameters/FileStream"
@@ -574,7 +574,7 @@
     "/prebuilt/invoice/analyze": {
       "post": {
         "summary": "Analyze Invoice Document",
-        "description": "Extract field text and semantic values from a given invoice document. The input document must be of one of the supported content types - 'application/pdf', 'image/jpeg', 'image/png', 'image/tiff' or "image/bmp". Alternatively, use 'application/json' type to specify the location (Uri) of the document to be analyzed.",
+        "description": "Extract field text and semantic values from a given invoice document. The input document must be of one of the supported content types - 'application/pdf', 'image/jpeg', 'image/png', 'image/tiff' or 'image/bmp'. Alternatively, use 'application/json' type to specify the location (Uri) of the document to be analyzed.",
         "operationId": "AnalyzeInvoiceAsync",
         "consumes": [
           "application/pdf",
@@ -601,7 +601,7 @@
             "$ref": "#/parameters/Locale"
           },
           {
-            "$ref": "#/parameters/PageRange"
+            "$ref": "#/parameters/Pages"
           },	  
           {
             "$ref": "#/parameters/FileStream"
@@ -672,11 +672,11 @@
         }
       }
     },
-    "/prebuilt/id/analyze": {
+    "/prebuilt/idDocument/analyze": {
       "post": {
-        "summary": "Analyze ID",
+        "summary": "Analyze ID Document",
         "description": "Extract field text and semantic values from a given ID document. The input document must be of one of the supported content types - 'application/pdf', 'image/jpeg', 'image/png', 'image/tiff' or 'image/bmp'. Alternatively, use 'application/json' type to specify the location (Uri) of the document to be analyzed.",
-        "operationId": "AnalyzeIdAsync",
+        "operationId": "AnalyzeIdDocumentAsync",
         "consumes": [
           "application/pdf",
           "application/json",
@@ -698,6 +698,9 @@
             "type": "boolean",
             "x-nullable": false
           },
+          {
+            "$ref": "#/parameters/Pages"
+          },	  
           {
             "$ref": "#/parameters/FileStream"
           }
@@ -721,17 +724,17 @@
         },
         "x-ms-examples": {
           "Analyze ID": {
-            "$ref": "./examples/IdsBatch.json"
+            "$ref": "./examples/IDDocumentBatch.json"
           }
         },
         "x-ms-long-running-operation": true
       }
     },
-    "/prebuilt/id/analyzeResults/{resultId}": {
+    "/prebuilt/idDocument/analyzeResults/{resultId}": {
       "get": {
-        "summary": "Get Analyze ID Result",
+        "summary": "Get Analyze ID Document Result",
         "description": "Track the progress and obtain the result of the analyze ID operation.",
-        "operationId": "GetAnalyzeIdResult",
+        "operationId": "GetAnalyzeIdDocumentResult",
         "consumes": [],
         "produces": [
           "application/json"
@@ -762,7 +765,7 @@
         },
         "x-ms-examples": {
           "Get analyze ID result": {
-            "$ref": "./examples/IdsBatchResult.json"
+            "$ref": "./examples/IDDocumentBatchResult.json"
           }
         }
       }
@@ -797,7 +800,7 @@
             "$ref": "#/parameters/Locale"
           },
           {
-            "$ref": "#/parameters/PageRange"
+            "$ref": "#/parameters/Pages"
           },
           {
             "$ref": "#/parameters/FileStream"
@@ -889,7 +892,7 @@
             "$ref": "#/parameters/FileStream"
           },
           {
-            "$ref": "#/parameters/PageRange"
+            "$ref": "#/parameters/Pages"
           },
           {
             "$ref": "#/parameters/Language"
@@ -1662,10 +1665,6 @@
           },
           "x-nullable": false
         },
-        "language": {
-          "description": "The detected language on the page overall.",
-          "$ref": "#/definitions/Language"
-        },
         "lines": {
           "description": "When includeTextDetails is set to true, a list of recognized text lines. The maximum number of lines returned is 300 per page. The lines are sorted top to bottom, left to right, although in certain cases proximity is treated with higher priority. As the sorting order depends on the detected text, it may change across images and OCR version updates. Thus, business logic should be built upon the actual line location instead of order.",
           "type": "array",
@@ -1681,93 +1680,7 @@
           }
         }
       }
-    },
-    "Language": {
-      "name": "language",
-      "in": "query",
-      "description": "Currently, only Afrikaans (‘af’), Albanian (‘sq’), Asturian (‘ast’), Basque (‘eu’), Bislama (‘bi’), Breton (‘br’), Catalan (‘ca’), Cebuano (‘ceb’), Chamorro (‘ch’), Cornish (‘kw’), Corsican (‘co’), Crimean Tatar - Latin script(‘crh’), Czech (‘cs’), Danish (‘da’), Dutch (‘nl’), English ('en'), Estonian (‘et’), Fijian (‘fj’), Filipino (‘fil’), Finnish (‘fi’), French (‘fr’), Friulian (‘fur’), Galician (‘gl’), German (‘de’), Gilbertese (‘gil’), Greenlandic (‘kl’), Haitian Creole (‘ht’), Hani (‘hni’), Hmong Daw (‘mww’), Hungarian (‘hu’), Indonesian (‘id’), Interlingua (‘ia’), Inuktitut (‘iu’), Irish (‘ga’), Italian (‘it’), Japanese (‘ja’), Javanese (‘jv’), Kabuverdianu (‘kea’), Kachin (‘kac’), Kara-Kalpak (‘kaa’), Kashubian (‘csb’), Khasi (‘kha’), Korean (‘ko’), Kurdish - Latin script (‘ku’), K’iche’ (‘quc’), Luxembourgish (‘lb’), Malay (‘ms’), Manx (‘gv’), Neapolitan (‘nap’), Norwegian (‘no’), Occitan (‘oc’), Polish (‘pl’), Portuguese (‘pt’), Romansh (‘rm’), Scots (‘sco’), Scottish Gaelic (‘gd’), simplified Chinese (‘zh-Hans’), Slovenian (‘sl’), Spanish (‘es’), Swahili (‘sw’), Swedish (‘sv’), Tatar - Latin script (‘tt’), Tetum (‘tet’), traditional Chinese (‘zh-Hant’), Turkish (‘tr’), Upper Sorbian (‘hsb’), Uzbek (‘uz’), Volapük (‘vo’), Walser (‘wae’), Western Frisian (‘fy’), Yucatec Maya (‘yua’), Zhuang (‘za’) and Zulu (‘zu’) are supported (print – seventy-three languages and handwritten – English only). Layout supports auto language identification and multi language documents, so only provide a language code if you would like to force the documented to be processed as that specific language.",
-      "required": false,
-      "x-ms-parameter-location": "method",
-      "type": "string",
-      "enum": [
-        "af",
-        "ast",
-        "bi",
-        "br",
-        "ca",
-        "ceb",
-        "ch",
-        "co",
-        "crh",
-        "cs",
-        "csb",
-        "da",
-        "de",
-        "en",
-        "es",
-        "et",
-        "eu",
-        "fi",
-        "fil",
-        "fj",
-        "fr",
-        "fur",
-        "fy",
-        "ga",
-        "gd",
-        "gil",
-        "gl",
-        "gv",
-        "hni",
-        "hsb",
-        "ht",
-        "hu",
-        "ia",
-        "id",
-        "it",
-        "iu",
-        "ja",
-        "jv",
-        "kaa",
-        "kac",
-        "kea",
-        "kha",
-        "kl",
-        "ko",
-        "ku",
-        "kw",
-        "lb",
-        "ms",
-        "mww",
-        "nap",
-        "nl",
-        "no",
-        "oc",
-        "pl",
-        "pt",
-        "quc",
-        "rm",
-        "sco",
-        "sl",
-        "sq",
-        "sv",
-        "sw",
-        "tet",
-        "tr",
-        "tt",
-        "uz",
-        "vo",
-        "wae",
-        "yua",
-        "za",
-        "zh-Hans",
-        "zh-Hant",
-        "zu"
-      ],
-      "x-ms-enum": {
-        "name": "Language",
-        "modelAsString": true
-      }
+    }
     },
     "TextLine": {
       "description": "An object representing an extracted text line.",
@@ -1785,10 +1698,6 @@
         "boundingBox": {
           "description": "Bounding box of an extracted line.",
           "$ref": "#/definitions/BoundingBox"
-        },
-        "language": {
-          "description": "The detected language of this line, if different from the overall page language.",
-          "$ref": "#/definitions/Language"
         },
         "words": {
           "description": "List of words in the text line.",
@@ -2240,26 +2149,40 @@
       "description": "An object representing the appearance of the text line.",
       "type": "object",
       "required": [
-        "style",
-        "styleConfidence"
+        "style"
       ],
       "properties": {
         "style": {
-          "description": "Style of the extracted text: handwriting or printed.",
-          "enum": [
-            "handwriting",
-            "printed"
-          ],
+          "description": "An object representing the style of the text line.",
+          "type": "object",
+          "$ref": "#/definitions/Style"
+        }
+      }
+    },
+    "Style": {
+      "description": "An object representing the style of the text line.",
+      "type": "object",
+      "required": [
+        "name",
+        "confidence"
+      ],
+      "properties": {
+        "name": {
+          "description": "The text line style name, including handwriting and other.",
           "type": "string",
           "x-ms-enum": {
-            "name": "textStyle",
+            "name": "TextStyle",
             "modelAsString": true
           },
-          "x-nullable": false
+          "enum": [
+            "other",
+            "handwriting"
+          ]
         },
-        "styleConfidence": {
-          "description": "Confidence value of predicted style.",
-          "$ref": "#/definitions/Confidence"
+        "confidence": {
+          "description": "The confidence of text line style.",
+          "type": "number",
+          "format": "float"
         }
       }
     }
@@ -2283,10 +2206,10 @@
         "$ref": "#/definitions/SourcePath"
       }
     },
-    "PageRange": {
-      "name": "PageRange",
+    "Pages": {
+      "name": "pages",
       "in": "query",
-      "description": "Custom page numbers for multi-page documents(PDF/TIFF), input the number of the pages you want to get OCR result. For a range of pages, use a hyphen. Separate each page or range with a comma or space.",
+      "description": "Custom page numbers for multi-page documents(PDF/TIFF), input the number of the pages you want to get OCR result. For a range of pages, use a hyphen. Separate each page or range with a comma.",
       "required": false,
       "x-ms-parameter-location": "method",
       "type": "array",
@@ -2317,32 +2240,96 @@
     "Language": {
       "name": "language",
       "in": "query",
-      "description": "The BCP-47 language code of the text in the document. Currently, only English ('en'), Dutch (‘nl’), French (‘fr’), German (‘de’), Italian (‘it’), Portuguese (‘pt'), simplified Chinese ('zh-Hans') and Spanish ('es') are supported (print – nine languages and handwritten – English only). Layout supports auto language identification and multi language documents, so only provide a language code if you would like to force the documented to be processed as that specific language.",
+      "description": "Currently, only Afrikaans (‘af’), Albanian (‘sq’), Asturian (‘ast’), Basque (‘eu’), Bislama (‘bi’), Breton (‘br’), Catalan (‘ca’), Cebuano (‘ceb’), Chamorro (‘ch’), Cornish (‘kw’), Corsican (‘co’), Crimean Tatar - Latin script(‘crh’), Czech (‘cs’), Danish (‘da’), Dutch (‘nl’), English ('en'), Estonian (‘et’), Fijian (‘fj’), Filipino (‘fil’), Finnish (‘fi’), French (‘fr’), Friulian (‘fur’), Galician (‘gl’), German (‘de’), Gilbertese (‘gil’), Greenlandic (‘kl’), Haitian Creole (‘ht’), Hani (‘hni’), Hmong Daw (‘mww’), Hungarian (‘hu’), Indonesian (‘id’), Interlingua (‘ia’), Inuktitut (‘iu’), Irish (‘ga’), Italian (‘it’), Japanese (‘ja’), Javanese (‘jv’), Kabuverdianu (‘kea’), Kachin (‘kac’), Kara-Kalpak (‘kaa’), Kashubian (‘csb’), Khasi (‘kha’), Korean (‘ko’), Kurdish - Latin script (‘ku’), K’iche’ (‘quc’), Luxembourgish (‘lb’), Malay (‘ms’), Manx (‘gv’), Neapolitan (‘nap’), Norwegian (‘no’), Occitan (‘oc’), Polish (‘pl’), Portuguese (‘pt’), Romansh (‘rm’), Scots (‘sco’), Scottish Gaelic (‘gd’), simplified Chinese (‘zh-Hans’), Slovenian (‘sl’), Spanish (‘es’), Swahili (‘sw’), Swedish (‘sv’), Tatar - Latin script (‘tt’), Tetum (‘tet’), traditional Chinese (‘zh-Hant’), Turkish (‘tr’), Upper Sorbian (‘hsb’), Uzbek (‘uz’), Volapük (‘vo’), Walser (‘wae’), Western Frisian (‘fy’), Yucatec Maya (‘yua’), Zhuang (‘za’) and Zulu (‘zu’) are supported (print – seventy-three languages and handwritten – English only). Layout supports auto language identification and multi language documents, so only provide a language code if you would like to force the documented to be processed as that specific language.",
       "required": false,
       "x-ms-parameter-location": "method",
       "type": "string",
       "enum": [
+        "af",
+        "ast",
+        "bi",
+        "br",
+        "ca",
+        "ceb",
+        "ch",
+        "co",
+        "crh",
+        "cs",
+        "csb",
+        "da",
+        "de",
         "en",
         "es",
-        "de",
+        "et",
+        "eu",
+        "fi",
+        "fil",
+        "fj",
         "fr",
+        "fur",
+        "fy",
+        "ga",
+        "gd",
+        "gil",
+        "gl",
+        "gv",
+        "hni",
+        "hsb",
+        "ht",
+        "hu",
+        "ia",
+        "id",
         "it",
+        "iu",
+        "ja",
+        "jv",
+        "kaa",
+        "kac",
+        "kea",
+        "kha",
+        "kl",
+        "ko",
+        "ku",
+        "kw",
+        "lb",
+        "ms",
+        "mww",
+        "nap",
         "nl",
+        "no",
+        "oc",
+        "pl",
         "pt",
+        "quc",
+        "rm",
+        "sco",
+        "sl",
+        "sq",
+        "sv",
+        "sw",
+        "tet",
+        "tr",
+        "tt",
+        "uz",
+        "vo",
+        "wae",
+        "yua",
+        "za",
         "zh-Hans",
-        "ja"
+        "zh-Hant",
+        "zu"
       ],
       "x-ms-enum": {
         "name": "Language",
         "modelAsString": true
-      }
     },
     "ReadingOrder": {
       "name": "readingOrder",
       "in": "query",
-      "description": "Reading order algorithm to sort the text lines returned. Supported reading orders include: Basic(default), Natural.",
+      "description": "Reading order algorithm to sort the text lines returned. Supported reading orders include: basic(default), natural.",
       "required": false,
       "x-ms-parameter-location": "method",
+      "default": "basic",
       "type": "string",
       "enum": [
         "basic",
@@ -2350,7 +2337,7 @@
       ],
       "x-ms-enum": {
         "name": "ReadingOrder",
-        "modelAsString": true
+        "modelAsString": false
       }
     }
   }
