@@ -29,7 +29,6 @@
   "paths": {
     "/subscriptions/{subscriptionId}/providers/Microsoft.AlertsManagement/actionRules": {
       "get": {
-        "summary": "Get all action rules in a given subscription",
         "description": "List all action rules of the subscription and given input filters",
         "operationId": "ActionRules_ListBySubscription",
         "parameters": [
@@ -102,7 +101,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AlertsManagement/actionRules": {
       "get": {
-        "summary": "Get all action rules created in a resource group",
         "operationId": "ActionRules_ListByResourceGroup",
         "description": "List all action rules of the subscription, created in given resource group and given input filters",
         "parameters": [
@@ -178,9 +176,8 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AlertsManagement/actionRules/{actionRuleName}": {
       "get": {
-        "summary": "Get action rule by name",
+        "description": "Get action rule by name",
         "operationId": "ActionRules_GetByName",
-        "description": "Get a specific action rule",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -226,9 +223,8 @@
         }
       },
       "put": {
-        "summary": "Create/update an action rule",
         "operationId": "ActionRules_CreateUpdate",
-        "description": "Creates/Updates a specific action rule",
+        "description": "Create or updates an action rule",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -283,8 +279,7 @@
         }
       },
       "delete": {
-        "summary": "Delete action rule",
-        "description": "Deletes a given action rule",
+        "description": "Delete a given action rule",
         "operationId": "ActionRules_Delete",
         "parameters": [
           {
@@ -331,7 +326,6 @@
         }
       },
       "patch": {
-        "summary": "Patch action rule",
         "description": "Update enabled flag and/or tags for the given action rule",
         "operationId": "ActionRules_Update",
         "parameters": [
