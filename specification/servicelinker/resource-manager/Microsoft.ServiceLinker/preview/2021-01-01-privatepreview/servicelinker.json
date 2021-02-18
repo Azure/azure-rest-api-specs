@@ -34,7 +34,7 @@
     }
   },
   "paths": {
-    "/{resourceUri}/providers/Microsoft.ServiceLinker/linkers": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{sourceProvider}/{sourceResourceType}/{sourceResourceName}/providers/Microsoft.ServiceLinker/linkers": {
       "get": {
         "deprecated": false,
         "description": "Returns list of Linkers which connects to the resource.",
@@ -49,7 +49,19 @@
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/ResourceUriParameter"
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SourceProviderParameter"
+          },
+          {
+            "$ref": "#/parameters/SourceResourceTypeParameter"
+          },
+          {
+            "$ref": "#/parameters/SourceResourceNameParameter"
           }
         ],
         "responses": {
@@ -71,7 +83,7 @@
         }
       }
     },
-    "/{resourceUri}/providers/Microsoft.ServiceLinker/linkers/{linkerName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{sourceProvider}/{sourceResourceType}/{sourceResourceName}/providers/Microsoft.ServiceLinker/linkers/{linkerName}": {
       "get": {
         "description": "Returns Linker resource for a given name.",
         "operationId": "Linker_Get",
@@ -85,8 +97,20 @@
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/ResourceUriParameter"
+            "$ref": "#/parameters/SubscriptionIdParameter"
           },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SourceProviderParameter"
+          },
+          {
+            "$ref": "#/parameters/SourceResourceTypeParameter"
+          },
+          {
+            "$ref": "#/parameters/SourceResourceNameParameter"
+          }
           {
             "$ref": "#/parameters/LinkerNameParameter"
           }
@@ -123,7 +147,19 @@
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/ResourceUriParameter"
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SourceProviderParameter"
+          },
+          {
+            "$ref": "#/parameters/SourceResourceTypeParameter"
+          },
+          {
+            "$ref": "#/parameters/SourceResourceNameParameter"
           },
           {
             "$ref": "#/parameters/LinkerNameParameter"
@@ -175,7 +211,19 @@
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/ResourceUriParameter"
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SourceProviderParameter"
+          },
+          {
+            "$ref": "#/parameters/SourceResourceTypeParameter"
+          },
+          {
+            "$ref": "#/parameters/SourceResourceNameParameter"
           },
           {
             "$ref": "#/parameters/LinkerNameParameter"
@@ -216,7 +264,19 @@
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/ResourceUriParameter"
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SourceProviderParameter"
+          },
+          {
+            "$ref": "#/parameters/SourceResourceTypeParameter"
+          },
+          {
+            "$ref": "#/parameters/SourceResourceNameParameter"
           },
           {
             "$ref": "#/parameters/LinkerNameParameter"
@@ -253,7 +313,7 @@
         }
       }
     },
-    "/{resourceUri}/providers/Microsoft.ServiceLinker/linkers/{linkerName}/validateLinker": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{sourceProvider}/{sourceResourceType}/{sourceResourceName}/providers/Microsoft.ServiceLinker/linkers/{linkerName}/validateLinker": {
       "post": {
         "tags": [
           "Links"
@@ -280,7 +340,19 @@
             "$ref": "#/parameters/LinkerNameParameter"
           },
           {
-            "$ref": "#/parameters/ResourceUriParameter"
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SourceProviderParameter"
+          },
+          {
+            "$ref": "#/parameters/SourceResourceTypeParameter"
+          },
+          {
+            "$ref": "#/parameters/SourceResourceNameParameter"
           }
         ],
         "responses": {
@@ -302,7 +374,7 @@
         }
       }
     },
-    "/{resourceUri}/providers/Microsoft.ServiceLinker/linkers/{linkerName}/listConfigurations": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{sourceProvider}/{sourceResourceType}/{sourceResourceName}/providers/Microsoft.ServiceLinker/linkers/{linkerName}/listConfigurations": {
       "post": {
         "tags": [
           "Links"
@@ -322,7 +394,19 @@
             "$ref": "#/parameters/LinkerNameParameter"
           },
           {
-            "$ref": "#/parameters/ResourceUriParameter"
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SourceProviderParameter"
+          },
+          {
+            "$ref": "#/parameters/SourceResourceTypeParameter"
+          },
+          {
+            "$ref": "#/parameters/SourceResourceNameParameter"
           }
         ],
         "responses": {
@@ -746,14 +830,41 @@
       "description": "The name Linker resource.",
       "x-ms-parameter-location": "method"
     },
-    "ResourceUriParameter": {
-      "name": "resourceUri",
+    "SubscriptionIdParameter": {
+      "name": "subscriptionId",
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "The fully qualified Azure Resource manager identifier of the resource, which the linker work.",
-      "x-ms-skip-url-encoding": true,
+      "description": "The Azure subscription ID."
+    },
+    "ResourceGroupNameParameter": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the resource group.",
       "x-ms-parameter-location": "method"
+    },
+    "SourceProviderParameter": {
+      "name": "sourceProvider",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The Azure resource provider of the linker's source resource"
+    },
+    "SourceResourceTypeParameter": {
+      "name": "sourceResourceType",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The Azure resource type of the linker's source resource"
+    },
+    "SourceResourceNameParameter": {
+      "name": "sourceProvider",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The Azure resource name of the linker's source resource"
     }
   }
 }
