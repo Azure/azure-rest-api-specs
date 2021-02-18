@@ -12,6 +12,7 @@ azure-arm: true
 
 ``` yaml $(ruby) && $(multiapi)
 batch:
+  - tag: package-2021-01
   - tag: package-2020-08-preview
   - tag: package-2018-02
   - tag: package-2017-10
