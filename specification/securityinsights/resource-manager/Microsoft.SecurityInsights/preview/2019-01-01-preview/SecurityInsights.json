@@ -330,7 +330,7 @@
           "Actions"
         ],
         "description": "Gets the action of alert rule.",
-        "operationId": "AlertRules_GetAction",
+        "operationId": "Actions_Get",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersion"
@@ -379,7 +379,7 @@
           "Actions"
         ],
         "description": "Creates or updates the action of alert rule.",
-        "operationId": "AlertRules_CreateOrUpdateAction",
+        "operationId": "Actions_CreateOrUpdate",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersion"
@@ -437,7 +437,7 @@
           "Actions"
         ],
         "description": "Delete the action of alert rule.",
-        "operationId": "AlertRules_DeleteAction",
+        "operationId": "Actions_Delete",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersion"
@@ -1929,6 +1929,9 @@
           },
           "Get a Office ATP data connector": {
             "$ref": "./examples/dataConnectors/GetOffice365AdvancedThreatProtectionById.json"
+          },
+          "Get a Dynamics365 data connector": {
+            "$ref": "./examples/dataConnectors/GetDynamics365DataConnectorById.json"
           }
         },
         "tags": [
@@ -1975,6 +1978,9 @@
         "x-ms-examples": {
           "Creates or updates an Office365 data connector.": {
             "$ref": "./examples/dataConnectors/CreateOfficeDataConnetor.json"
+          },
+          "Creates or updates a Dynamics365 data connector.": {
+            "$ref": "./examples/dataConnectors/CreateDynamics365DataConnetor.json"
           }
         },
         "tags": [
@@ -2102,6 +2108,9 @@
           },
           "Check requirements for OfficeATP.": {
             "$ref": "./examples/dataConnectors/CheckRequirementsOfficeATP.json"
+          },
+          "Check requirements for Dynamics365.": {
+            "$ref": "./examples/dataConnectors/CheckRequirementsDynamics365.json"
           }
         },
         "tags": [
@@ -2243,6 +2252,18 @@
           },
           "Get an IoT device entity.": {
             "$ref": "./examples/entities/GetIoTDeviceEntityById.json"
+          },
+          "Get a mailCluster entity.": {
+            "$ref": "./examples/entities/GetMailClusterEntityById.json"
+          },
+          "Get a mailbox entity.": {
+            "$ref": "./examples/entities/GetMailboxEntityById.json"
+          },
+          "Get a mailMessage entity.": {
+            "$ref": "./examples/entities/GetMailMessageEntityById.json"
+          },
+          "Get a submissionMail entity.": {
+            "$ref": "./examples/entities/GetSubmissionMailEntityById.json"
           }
         },
         "tags": [
@@ -2377,6 +2398,108 @@
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/EntityTimelineResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/entities/{entityId}/queries": {
+      "get": {
+        "x-ms-examples": {
+          "Get Entity Query": {
+            "$ref": "./examples/entities/GetQueries.json"
+          }
+        },
+        "tags": [
+          "Entities"
+        ],
+        "description": "Get Insights and Activities for an entity.",
+        "operationId": "Entities_Queries",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/OperationalInsightsResourceProvider"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/EntityId"
+          },
+          {
+            "$ref": "#/parameters/EntityQueryKindParam"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/GetQueriesResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/entities/{entityId}/getInsights": {
+      "post": {
+        "x-ms-examples": {
+          "Entity Insight": {
+            "$ref": "./examples/entities/insights/PostGetInsights.json"
+          }
+        },
+        "tags": [
+          "Entities"
+        ],
+        "description": "Execute Insights for an entity.",
+        "operationId": "Entities_GetInsights",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/OperationalInsightsResourceProvider"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/EntityId"
+          },
+          {
+            "$ref": "#/parameters/GetInsightsEntityQueriesRequestBody"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/EntityGetInsightsResponse"
             }
           },
           "default": {
@@ -2933,7 +3056,7 @@
       "get": {
         "x-ms-examples": {
           "Get an entity query.": {
-            "$ref": "./examples/entityQueries/GetEntityQueryById.json"
+            "$ref": "./examples/entityQueries/GetExpansionEntityQueryById.json"
           }
         },
         "tags": [
@@ -3924,7 +4047,7 @@
         "tags": [
           "Watchlists"
         ],
-        "description": "Creates a watchlist and its watchlist items (bulk creation, e.g. through text/csv content type). To create a Watchlist and its Items, we should call this endpoint twice : the first call will create am empty Watchlist, and the second one will create its Items.",
+        "description": "Creates a watchlist and its watchlist items (bulk creation, e.g. through text/csv content type). To create a Watchlist and its Items, we should call this endpoint twice : the first call will create an empty Watchlist, and the second one will create its Items.",
         "operationId": "Watchlists_Create",
         "parameters": [
           {
@@ -3971,18 +4094,18 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/threatIntelligence/main/createIndicator": {
-      "post": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/watchlists/{watchlistAlias}/watchlistItems/{watchlistItemId}": {
+      "delete": {
         "x-ms-examples": {
-          "Create a new Threat Intelligence": {
-            "$ref": "./examples/threatintelligence/CreateThreatIntelligence.json"
+          "Delete a watchlist Item.": {
+            "$ref": "./examples/watchlists/DeleteWatchlistItem.json"
           }
         },
         "tags": [
-          "ThreatIntelligence"
+          "WatchlistItems"
         ],
-        "description": "Create a threat intelligence.",
-        "operationId": "CreateThreatIntelligence",
+        "description": "Delete a watchlist item.",
+        "operationId": "WatchlistItem_Delete",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersion"
@@ -4000,20 +4123,75 @@
             "$ref": "#/parameters/WorkspaceName"
           },
           {
-            "$ref": "#/parameters/ThreatIntelligenceIndicatorObjectToUpsert"
+            "$ref": "#/parameters/WatchlistAlias"
+          },
+          {
+            "$ref": "#/parameters/WatchlistItemId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "put": {
+        "x-ms-examples": {
+          "Creates or updates a watchlist item.": {
+            "$ref": "./examples/watchlists/CreateWatchlistItem.json"
+          }
+        },
+        "tags": [
+          "WatchlistItems"
+        ],
+        "description": "Creates or updates a watchlist item.",
+        "operationId": "WatchlistItem_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/OperationalInsightsResourceProvider"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/WatchlistAlias"
+          },
+          {
+            "$ref": "#/parameters/WatchlistItemId"
+          },
+          {
+            "$ref": "#/parameters/WatchlistItem"
           }
         ],
         "responses": {
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/ThreatIntelligenceResource"
+              "$ref": "#/definitions/WatchlistItem"
             }
           },
           "201": {
             "description": "Created",
             "schema": {
-              "$ref": "#/definitions/ThreatIntelligenceResource"
+              "$ref": "#/definitions/WatchlistItem"
             }
           },
           "default": {
@@ -4025,17 +4203,71 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/threatIntelligence/main/createIndicator": {
+      "post": {
+        "x-ms-examples": {
+          "Create a new Threat Intelligence": {
+            "$ref": "./examples/threatintelligence/CreateThreatIntelligence.json"
+          }
+        },
+        "tags": [
+          "ThreatIntelligence"
+        ],
+        "description": "Create a new threat intelligence indicator.",
+        "operationId": "ThreatIntelligenceIndicator_CreateIndicator",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/OperationalInsightsResourceProvider"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/ThreatIntelligenceProperties"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ThreatIntelligenceInformation"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/ThreatIntelligenceInformation"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed to create indicators.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/threatIntelligence/main/indicators": {
       "get": {
         "x-ms-examples": {
-          "Get all threat intelligence.": {
+          "Get all threat intelligence indicators": {
             "$ref": "./examples/threatintelligence/GetThreatIntelligence.json"
           }
         },
         "tags": [
           "ThreatIntelligence"
         ],
-        "description": "Gets all threat intelligence.",
+        "description": "Get all threat intelligence indicators.",
         "operationId": "ThreatIntelligenceIndicators_List",
         "parameters": [
           {
@@ -4070,11 +4302,11 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/ThreatIntelligenceResourceList"
+              "$ref": "#/definitions/ThreatIntelligenceInformationList"
             }
           },
           "default": {
-            "description": "Error response describing why the operation failed.",
+            "description": "Error response describing why the operation failed to get indicators.",
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
@@ -4088,14 +4320,14 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/threatIntelligence/main/indicators/{name}": {
       "get": {
         "x-ms-examples": {
-          "Get a threat intelligence indicator by name.": {
+          "View a threat intelligence indicator by name": {
             "$ref": "./examples/threatintelligence/GetThreatIntelligenceById.json"
           }
         },
         "tags": [
           "ThreatIntelligence"
         ],
-        "description": "Gets a threat intelligence indicator.",
+        "description": "View a threat intelligence indicator by name.",
         "operationId": "ThreatIntelligenceIndicator_Get",
         "parameters": [
           {
@@ -4114,18 +4346,18 @@
             "$ref": "#/parameters/WorkspaceName"
           },
           {
-            "$ref": "#/parameters/ThreatIntelligenceIdentifier"
+            "$ref": "#/parameters/ThreatIntelligenceName"
           }
         ],
         "responses": {
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/ThreatIntelligenceResource"
+              "$ref": "#/definitions/ThreatIntelligenceInformation"
             }
           },
           "default": {
-            "description": "Error response describing why the operation failed.",
+            "description": "Error response describing why the operation failed to view an indicator.",
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
@@ -4134,15 +4366,15 @@
       },
       "put": {
         "x-ms-examples": {
-          "Upsert the Threat Intelligence": {
-            "$ref": "./examples/threatintelligence/UpsertThreatIntelligence.json"
+          "Update a threat Intelligence indicator": {
+            "$ref": "./examples/threatintelligence/UpdateThreatIntelligence.json"
           }
         },
         "tags": [
           "ThreatIntelligence"
         ],
-        "description": "Upsert a threat intelligence.",
-        "operationId": "ThreatIntelligenceIndicatorUpsert_Create",
+        "description": "Update a threat Intelligence indicator.",
+        "operationId": "ThreatIntelligenceIndicator_Create",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersion"
@@ -4160,27 +4392,27 @@
             "$ref": "#/parameters/WorkspaceName"
           },
           {
-            "$ref": "#/parameters/ThreatIntelligenceIdentifier"
+            "$ref": "#/parameters/ThreatIntelligenceName"
           },
           {
-            "$ref": "#/parameters/ThreatIntelligenceIndicatorObjectToUpsert"
+            "$ref": "#/parameters/ThreatIntelligenceProperties"
           }
         ],
         "responses": {
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/ThreatIntelligenceResource"
+              "$ref": "#/definitions/ThreatIntelligenceInformation"
             }
           },
           "201": {
             "description": "Created",
             "schema": {
-              "$ref": "#/definitions/ThreatIntelligenceResource"
+              "$ref": "#/definitions/ThreatIntelligenceInformation"
             }
           },
           "default": {
-            "description": "Error response describing why the operation failed.",
+            "description": "Error response describing why the operation failed to update an indicator.",
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
@@ -4189,14 +4421,14 @@
       },
       "delete": {
         "x-ms-examples": {
-          "Delete the Threat Intelligence": {
+          "Delete a threat intelligence indicator": {
             "$ref": "./examples/threatintelligence/DeleteThreatIntelligence.json"
           }
         },
         "tags": [
           "ThreatIntelligence"
         ],
-        "description": "Delete a threat intelligence.",
+        "description": "Delete a threat intelligence indicator.",
         "operationId": "ThreatIntelligenceIndicator_Delete",
         "parameters": [
           {
@@ -4215,7 +4447,7 @@
             "$ref": "#/parameters/WorkspaceName"
           },
           {
-            "$ref": "#/parameters/ThreatIntelligenceIdentifier"
+            "$ref": "#/parameters/ThreatIntelligenceName"
           }
         ],
         "responses": {
@@ -4226,7 +4458,7 @@
             "description": "No Content"
           },
           "default": {
-            "description": "Error response describing why the operation failed.",
+            "description": "Error response describing why the operation failed to delete an indicator.",
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
@@ -4237,15 +4469,15 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/threatIntelligence/main/queryIndicators": {
       "post": {
         "x-ms-examples": {
-          "Get all threat intelligence.": {
+          "Query threat intelligence indicators as per filtering criteria": {
             "$ref": "./examples/threatintelligence/QueryThreatIntelligence.json"
           }
         },
         "tags": [
           "ThreatIntelligence"
         ],
-        "description": "Query all threat intelligence.",
-        "operationId": "ThreatIntelligenceIndicatorsList_Query",
+        "description": "Query threat intelligence indicators as per filtering criteria.",
+        "operationId": "ThreatIntelligenceIndicator_QueryIndicators",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersion"
@@ -4263,14 +4495,14 @@
             "$ref": "#/parameters/WorkspaceName"
           },
           {
-            "$ref": "#/parameters/ThreatIntelligenceArmStixQuery"
+            "$ref": "#/parameters/ThreatIntelligenceFilteringCriteria"
           }
         ],
         "responses": {
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/ThreatIntelligenceResourceList"
+              "$ref": "#/definitions/ThreatIntelligenceInformationList"
             }
           },
           "default": {
@@ -4295,8 +4527,8 @@
         "tags": [
           "ThreatIntelligence"
         ],
-        "description": "Get the threat intelligence metrics.",
-        "operationId": "ThreatIntelligenceIndicatorMetrics_Get",
+        "description": "Get threat intelligence indicators metrics (Indicators counts by Type, Threat Type, Source).",
+        "operationId": "ThreatIntelligenceIndicatorMetrics_List",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersion"
@@ -4312,20 +4544,17 @@
           },
           {
             "$ref": "#/parameters/WorkspaceName"
-          },
-          {
-            "$ref": "#/parameters/ThreatIntelligenceIndicatorEntityKind"
           }
         ],
         "responses": {
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/ThreatIntelligenceMetricResourceList"
+              "$ref": "#/definitions/ThreatIntelligenceMetricsList"
             }
           },
           "default": {
-            "description": "Error response describing why the operation failed.",
+            "description": "Error response describing why the operation failed to get metrics.",
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
@@ -4336,14 +4565,14 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/threatIntelligence/main/indicators/{name}/appendTags": {
       "post": {
         "x-ms-examples": {
-          "Append tags to a Threat Intelligence": {
+          "Append tags to a threat intelligence indicator": {
             "$ref": "./examples/threatintelligence/AppendTagsThreatIntelligence.json"
           }
         },
         "tags": [
           "ThreatIntelligence"
         ],
-        "description": "Append tags to a threat intelligence.",
+        "description": "Append tags to a threat intelligence indicator.",
         "operationId": "ThreatIntelligenceIndicator_AppendTags",
         "parameters": [
           {
@@ -4362,10 +4591,10 @@
             "$ref": "#/parameters/WorkspaceName"
           },
           {
-            "$ref": "#/parameters/ThreatIntelligenceIdentifier"
+            "$ref": "#/parameters/ThreatIntelligenceName"
           },
           {
-            "$ref": "#/parameters/ThreatIntelligenceAppendTagsRequestBody"
+            "$ref": "#/parameters/ThreatIntelligenceAppendTags"
           }
         ],
         "responses": {
@@ -4373,7 +4602,7 @@
             "description": "OK"
           },
           "default": {
-            "description": "Error response describing why the operation failed.",
+            "description": "Error response describing why the operation failed to append tags.",
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
@@ -4391,7 +4620,7 @@
         "tags": [
           "ThreatIntelligence"
         ],
-        "description": "Replace tags to a threat intelligence.",
+        "description": "Replace tags added to a threat intelligence indicator.",
         "operationId": "ThreatIntelligenceIndicator_ReplaceTags",
         "parameters": [
           {
@@ -4410,21 +4639,21 @@
             "$ref": "#/parameters/WorkspaceName"
           },
           {
-            "$ref": "#/parameters/ThreatIntelligenceIdentifier"
+            "$ref": "#/parameters/ThreatIntelligenceName"
           },
           {
-            "$ref": "#/parameters/ThreatIntelligenceReplaceTagsModel"
+            "$ref": "#/parameters/ThreatIntelligenceReplaceTags"
           }
         ],
         "responses": {
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/ThreatIntelligenceResource"
+              "$ref": "#/definitions/ThreatIntelligenceInformation"
             }
           },
           "default": {
-            "description": "Error response describing why the operation failed.",
+            "description": "Error response describing why the operation failed to replace tags.",
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
@@ -4434,6 +4663,111 @@
     }
   },
   "definitions": {
+    "MLBehaviorAnalyticsAlertRule": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/AlertRule"
+        }
+      ],
+      "description": "Represents MLBehaviorAnalytics alert rule.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/MLBehaviorAnalyticsAlertRuleProperties",
+          "description": "MLBehaviorAnalytics alert rule properties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object",
+      "x-ms-discriminator-value": "MLBehaviorAnalytics"
+    },
+    "MLBehaviorAnalyticsAlertRuleProperties": {
+      "description": "MLBehaviorAnalytics alert rule base property bag.",
+      "properties": {
+        "alertRuleTemplateName": {
+          "description": "The Name of the alert rule template used to create this rule.",
+          "type": "string"
+        },
+        "description": {
+          "description": "The description of the alert rule.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "displayName": {
+          "description": "The display name for alerts created by this alert rule.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "enabled": {
+          "description": "Determines whether this alert rule is enabled or disabled.",
+          "type": "boolean"
+        },
+        "lastModifiedUtc": {
+          "description": "The last time that this alert rule has been modified.",
+          "format": "date-time",
+          "readOnly": true,
+          "type": "string"
+        },
+        "severity": {
+          "$ref": "#/definitions/AlertSeverity",
+          "description": "The severity for alerts created by this alert rule.",
+          "readOnly": true
+        },
+        "tactics": {
+          "description": "The tactics of the alert rule",
+          "items": {
+            "$ref": "#/definitions/AttackTactic"
+          },
+          "readOnly": true,
+          "type": "array"
+        }
+      },
+      "required": [
+        "alertRuleTemplateName",
+        "enabled"
+      ],
+      "type": "object"
+    },
+    "MLBehaviorAnalyticsAlertRuleTemplate": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/AlertRuleTemplate"
+        }
+      ],
+      "description": "Represents MLBehaviorAnalytics alert rule template.",
+      "properties": {
+        "properties": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/AlertRuleTemplatePropertiesBase"
+            }
+          ],
+          "description": "MLBehaviorAnalytics alert rule template properties.",
+          "properties": {
+            "severity": {
+              "$ref": "#/definitions/AlertSeverity",
+              "description": "The severity for alerts created by this alert rule."
+            },
+            "tactics": {
+              "description": "The tactics of the alert rule template.",
+              "items": {
+                "$ref": "#/definitions/AttackTactic"
+              },
+              "type": "array"
+            }
+          },
+          "required": [
+            "displayName",
+            "description",
+            "status",
+            "severity",
+            "alertRulesCreatedByTemplateCount"
+          ],
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object",
+      "x-ms-discriminator-value": "MLBehaviorAnalytics"
+    },
     "AADDataConnector": {
       "allOf": [
         {
@@ -4848,7 +5182,10 @@
           "enum": [
             "Scheduled",
             "MicrosoftSecurityIncidentCreation",
-            "Fusion"
+            "Fusion",
+            "MLBehaviorAnalytics",
+            "ThreatIntelligence",
+            "Anomaly"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -4863,6 +5200,15 @@
               },
               {
                 "value": "Fusion"
+              },
+              {
+                "value": "MLBehaviorAnalytics"
+              },
+              {
+                "value": "ThreatIntelligence"
+              },
+              {
+                "value": "Anomaly"
               }
             ]
           }
@@ -4912,6 +5258,12 @@
         "alertRulesCreatedByTemplateCount": {
           "description": "the number of alert rules that were created by this template",
           "type": "integer"
+        },
+        "lastUpdatedDateUTC": {
+          "description": "The last time that this alert rule template has been updated.",
+          "format": "date-time",
+          "readOnly": true,
+          "type": "string"
         },
         "createdDateUTC": {
           "description": "The time that this alert rule template has been added.",
@@ -6074,6 +6426,21 @@
           "description": "Describes a user that updated the bookmark",
           "type": "object"
         },
+        "eventTime": {
+          "description": "The bookmark event time",
+          "format": "date-time",
+          "type": "string"
+        },
+        "queryStartTime": {
+          "description": "The start time for the query",
+          "format": "date-time",
+          "type": "string"
+        },
+        "queryEndTime": {
+          "description": "The end time for the query",
+          "format": "date-time",
+          "type": "string"
+        },
         "incidentInfo": {
           "$ref": "#/definitions/IncidentInfo",
           "description": "Describes an incident that relates to bookmark",
@@ -6120,6 +6487,13 @@
               "description": "Array of the expansion result entities.",
               "items": {
                 "$ref": "#/definitions/Entity"
+              },
+              "type": "array"
+            },
+            "edges": {
+              "description": "Array of expansion result connected entities",
+              "items": {
+                "$ref": "#/definitions/ConnectedEntity"
               },
               "type": "array"
             }
@@ -6307,6 +6681,15 @@
           "readOnly": true,
           "type": "string"
         },
+        "metrics": {
+          "description": "Dictionary of metrics, for example the number of alerts in the case",
+          "type": "object",
+          "additionalProperties": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "readOnly": true
+        },
         "owner": {
           "$ref": "#/definitions/UserInfo",
           "description": "Describes a user that the case is assigned to",
@@ -6316,6 +6699,15 @@
           "description": "List of related alert identifiers",
           "items": {
             "description": "related alert id",
+            "type": "string"
+          },
+          "readOnly": true,
+          "type": "array"
+        },
+        "relatedAlertProductNames": {
+          "description": "List of related alert product names",
+          "items": {
+            "description": "related alert product name",
             "type": "string"
           },
           "readOnly": true,
@@ -6416,8 +6808,7 @@
       "required": [
         "title",
         "severity",
-        "status",
-        "startTimeUtc"
+        "status"
       ],
       "type": "object"
     },
@@ -6473,7 +6864,7 @@
       "description": "Aggregative results of cases by status property bag.",
       "properties": {
         "totalDismissedStatus": {
-          "description": "Total amount of open cases with status Dismissed",
+          "description": "Total amount of closed cases with status Dismissed",
           "readOnly": true,
           "type": "integer"
         },
@@ -6488,9 +6879,21 @@
           "type": "integer"
         },
         "totalResolvedStatus": {
-          "description": "Total amount of open cases with status Resolved",
+          "description": "Total amount of closed cases with status Resolved",
           "readOnly": true,
           "type": "integer"
+        },
+        "totalFalsePositiveStatus": {
+          "description": "Total amount of closed cases with status Closed and Close reason of False positive",
+          "readOnly": true,
+          "type": "integer",
+          "format": "int32"
+        },
+        "totalTruePositiveStatus": {
+          "description": "Total amount of closed cases with status Closed and Close reason of True positive",
+          "readOnly": true,
+          "type": "integer",
+          "format": "int32"
         }
       },
       "type": "object"
@@ -6711,7 +7114,8 @@
             "OfficeATP",
             "AmazonWebServicesCloudTrail",
             "AzureAdvancedThreatProtection",
-            "MicrosoftDefenderAdvancedThreatProtection"
+            "MicrosoftDefenderAdvancedThreatProtection",
+            "Dynamics365"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -6747,6 +7151,9 @@
               },
               {
                 "value": "MicrosoftDefenderAdvancedThreatProtection"
+              },
+              {
+                "value": "Dynamics365"
               }
             ]
           }
@@ -6861,6 +7268,79 @@
           "type": "array"
         }
       },
+      "type": "object"
+    },
+    "Dynamics365DataConnector": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataConnector"
+        }
+      ],
+      "description": "Represents Dynamics365 data connector.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/Dynamics365DataConnectorProperties",
+          "description": "Dynamics365 data connector properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object",
+      "x-ms-discriminator-value": "Dynamics365"
+    },
+    "Dynamics365DataConnectorDataTypes": {
+      "description": "The available data types for Dynamics365 data connector.",
+      "properties": {
+        "dynamics365CdsActivities": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/DataConnectorDataTypeCommon"
+            }
+          ],
+          "description": "Common Data Service data type connection.",
+          "type": "object"
+        }
+      },
+      "type": "object"
+    },
+    "Dynamics365DataConnectorProperties": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataConnectorTenantId"
+        }
+      ],
+      "description": "Dynamics365 data connector properties.",
+      "properties": {
+        "dataTypes": {
+          "$ref": "#/definitions/Dynamics365DataConnectorDataTypes",
+          "description": "The available data types for the connector."
+        }
+      },
+      "type": "object"
+    },
+    "Dynamics365CheckRequirements": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataConnectorsCheckRequirements"
+        }
+      ],
+      "description": "Represents Dynamics365 requirements check request.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/Dynamics365CheckRequirementsProperties",
+          "description": "Dynamics365 requirements check properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object",
+      "x-ms-discriminator-value": "Dynamics365"
+    },
+    "Dynamics365CheckRequirementsProperties": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataConnectorTenantId"
+        }
+      ],
+      "description": "Dynamics365 requirements check properties.",
       "type": "object"
     },
     "Entity": {
@@ -6987,6 +7467,18 @@
         }
       }
     },
+    "GetQueriesResponse": {
+      "description": "Retrieve queries for entity result operation response.",
+      "properties": {
+        "value": {
+          "description": "The query result values.",
+          "items": {
+            "$ref": "#/definitions/EntityQueryItem"
+          },
+          "type": "array"
+        }
+      }
+    },
     "EntityInnerKind": {
       "description": "The kind of the entity",
       "enum": [
@@ -7006,7 +7498,11 @@
         "Url",
         "IoTDevice",
         "SecurityAlert",
-        "Bookmark"
+        "Bookmark",
+        "Mailbox",
+        "MailCluster",
+        "MailMessage",
+        "SubmissionMail"
       ],
       "type": "string",
       "x-ms-enum": {
@@ -7080,6 +7576,22 @@
           {
             "description": "Entity represents bookmark in the system.",
             "value": "Bookmark"
+          },
+          {
+            "description": "Entity represents mail cluster in the system.",
+            "value": "MailCluster"
+          },
+          {
+            "description": "Entity represents mail message in the system.",
+            "value": "MailMessage"
+          },
+          {
+            "description": "Entity represents mailbox in the system.",
+            "value": "Mailbox"
+          },
+          {
+            "description": "Entity represents submission mail in the system.",
+            "value": "SubmissionMail"
           }
         ]
       }
@@ -7103,7 +7615,11 @@
         "URL",
         "IoTDevice",
         "SecurityAlert",
-        "HuntingBookmark"
+        "HuntingBookmark",
+        "MailCluster",
+        "MailMessage",
+        "Mailbox",
+        "SubmissionMail"
       ],
       "type": "string",
       "x-ms-enum": {
@@ -7177,6 +7693,22 @@
           {
             "description": "Entity represents HuntingBookmark in the system.",
             "value": "HuntingBookmark"
+          },
+          {
+            "description": "Entity represents mail cluster in the system.",
+            "value": "MailCluster"
+          },
+          {
+            "description": "Entity represents mail message in the system.",
+            "value": "MailMessage"
+          },
+          {
+            "description": "Entity represents mailbox in the system.",
+            "value": "Mailbox"
+          },
+          {
+            "description": "Entity represents submission mail in the system.",
+            "value": "SubmissionMail"
           }
         ]
       }
@@ -7214,21 +7746,67 @@
         "value"
       ]
     },
+    "EntityQueryKind": {
+      "description": "Describes an Entity query resource with kind.",
+      "properties": {
+        "kind": {
+          "description": "The kind of the entity query",
+          "enum": [
+            "Expansion",
+            "Insight"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "EntityQueryKind",
+            "values": [
+              {
+                "value": "Expansion"
+              },
+              {
+                "value": "Insight"
+              }
+            ]
+          }
+        }
+      },
+      "required": [
+        "kind"
+      ],
+      "type": "object"
+    },
     "EntityQuery": {
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "#/definitions/ResourceWithEtag"
+        },
+        {
+          "$ref": "#/definitions/EntityQueryKind"
         }
       ],
       "description": "Specific entity query.",
+      "discriminator": "kind",
+      "type": "object",
+      "required": [
+        "kind"
+      ]
+    },
+    "ExpansionEntityQuery": {
+      "description": "Represents Expansion entity query.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/EntityQuery"
+        }
+      ],
       "properties": {
         "properties": {
-          "$ref": "#/definitions/EntityQueryProperties",
-          "description": "Entity query properties",
+          "$ref": "#/definitions/ExpansionEntityQueriesProperties",
+          "description": "Expansion entity query properties",
           "x-ms-client-flatten": true
         }
       },
-      "type": "object"
+      "type": "object",
+      "x-ms-discriminator-value": "Expansion"
     },
     "EntityTimelineKind": {
       "description": "The entity query kind",
@@ -7277,8 +7855,8 @@
         "value"
       ]
     },
-    "EntityQueryProperties": {
-      "description": "Describes entity query properties",
+    "ExpansionEntityQueriesProperties": {
+      "description": "Describes expansion entity query properties",
       "properties": {
         "dataSources": {
           "description": "List of the data sources that are required to run the query",
@@ -7357,6 +7935,19 @@
         }
       },
       "type": "object"
+    },
+    "ConnectedEntity": {
+      "description": "Expansion result connected entities",
+      "properties": {
+        "targetEntityId": {
+          "description": "Entity Id of the connected entity",
+          "type": "string"
+        },
+        "additionalData": {
+          "description": "key-value pairs for a connected entity mapping",
+          "type": "object"
+        }
+      }
     },
     "TimelineResultsMetadata": {
       "description": "Expansion result metadata.",
@@ -7564,6 +8155,156 @@
         }
       },
       "type": "object"
+    },
+    "InsightQueryItem": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/EntityQueryItem"
+        }
+      ],
+      "description": "Represents Insight Query.",
+      "properties": {
+        "properties": {
+          "description": "Properties bag for InsightQueryItem",
+          "$ref": "#/definitions/InsightQueryItemProperties"
+        }
+      },
+      "type": "object",
+      "x-ms-discriminator-value": "Insight"
+    },
+    "InsightQueryItemProperties": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/EntityQueryItemProperties"
+        }
+      ],
+      "description": "Represents Insight Query.",
+      "properties": {
+        "displayName": {
+          "type": "string",
+          "description": "The insight display name."
+        },
+        "description": {
+          "type": "string",
+          "description": "The insight description."
+        },
+        "baseQuery": {
+          "type": "string",
+          "description": "The base query of the insight."
+        },
+        "tableQuery": {
+          "type": "object",
+          "description": "The insight table query.",
+          "properties": {
+            "columnsDefinitions": {
+              "type": "array",
+              "description": "List of insight column definitions.",
+              "items": {
+                "properties": {
+                  "header": {
+                    "type": "string",
+                    "description": "Insight column header."
+                  },
+                  "outputType": {
+                    "type": "string",
+                    "description": "Insights Column type.",
+                    "enum": [
+                      "Number",
+                      "String",
+                      "Date",
+                      "Entity"
+                    ]
+                  },
+                  "supportDeepLink": {
+                    "type": "boolean",
+                    "description": "Is query supports deep-link."
+                  }
+                }
+              }
+            },
+            "queriesDefinitions": {
+              "type": "array",
+              "description": "List of insight queries definitions.",
+              "items": {
+                "properties": {
+                  "filter": {
+                    "type": "string",
+                    "description": "Insight column header."
+                  },
+                  "summarize": {
+                    "type": "string",
+                    "description": "Insight column header."
+                  },
+                  "project": {
+                    "type": "string",
+                    "description": "Insight column header."
+                  },
+                  "linkColumnsDefinitions": {
+                    "type": "array",
+                    "description": "Insight column header.",
+                    "items": {
+                      "properties": {
+                        "projectedName": {
+                          "type": "string",
+                          "description": "Insight Link Definition Projected Name."
+                        },
+                        "Query": {
+                          "type": "string",
+                          "description": "Insight Link Definition Query."
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "chartQuery": {
+          "type": "object",
+          "description": "The insight chart query."
+        },
+        "additionalQuery": {
+          "type": "object",
+          "description": "The activity query definitions.",
+          "properties": {
+            "query": {
+              "type": "string",
+              "description": "The insight query."
+            },
+            "text": {
+              "type": "string",
+              "description": "The insight text."
+            }
+          }
+        },
+        "defaultTimeRange": {
+          "type": "object",
+          "description": "The insight chart query.",
+          "properties": {
+            "beforeRange": {
+              "type": "string",
+              "description": "The padding for the start time of the query."
+            },
+            "afterRange": {
+              "type": "string",
+              "description": "The padding for the end time of the query."
+            }
+          }
+        },
+        "referenceTimeRange": {
+          "type": "object",
+          "description": "The insight chart query.",
+          "properties": {
+            "beforeRange": {
+              "type": "string",
+              "description": "Additional query time for looking back."
+            }
+          }
+        }
+      },
+      "type": "object",
+      "x-ms-discriminator-value": "Insight"
     },
     "ActivityTimelineItem": {
       "allOf": [
@@ -7840,6 +8581,111 @@
       "type": "object",
       "x-ms-discriminator-value": "Fusion"
     },
+    "ThreatIntelligenceAlertRule": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/AlertRule"
+        }
+      ],
+      "description": "Represents Threat Intelligence alert rule.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ThreatIntelligenceAlertRuleProperties",
+          "description": "Threat Intelligence alert rule properties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object",
+      "x-ms-discriminator-value": "ThreatIntelligence"
+    },
+    "ThreatIntelligenceAlertRuleProperties": {
+      "description": "Threat Intelligence alert rule base property bag.",
+      "properties": {
+        "alertRuleTemplateName": {
+          "description": "The Name of the alert rule template used to create this rule.",
+          "type": "string"
+        },
+        "description": {
+          "description": "The description of the alert rule.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "displayName": {
+          "description": "The display name for alerts created by this alert rule.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "enabled": {
+          "description": "Determines whether this alert rule is enabled or disabled.",
+          "type": "boolean"
+        },
+        "lastModifiedUtc": {
+          "description": "The last time that this alert has been modified.",
+          "format": "date-time",
+          "readOnly": true,
+          "type": "string"
+        },
+        "severity": {
+          "$ref": "#/definitions/AlertSeverity",
+          "description": "The severity for alerts created by this alert rule.",
+          "readOnly": true
+        },
+        "tactics": {
+          "description": "The tactics of the alert rule",
+          "items": {
+            "$ref": "#/definitions/AttackTactic"
+          },
+          "readOnly": true,
+          "type": "array"
+        }
+      },
+      "required": [
+        "alertRuleTemplateName",
+        "enabled"
+      ],
+      "type": "object"
+    },
+    "ThreatIntelligenceAlertRuleTemplate": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/AlertRuleTemplate"
+        }
+      ],
+      "description": "Represents Threat Intelligence alert rule template.",
+      "properties": {
+        "properties": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/AlertRuleTemplatePropertiesBase"
+            }
+          ],
+          "description": "Threat Intelligence alert rule template properties",
+          "properties": {
+            "severity": {
+              "$ref": "#/definitions/AlertSeverity",
+              "description": "The severity for alerts created by this alert rule."
+            },
+            "tactics": {
+              "description": "The tactics of the alert rule template",
+              "items": {
+                "$ref": "#/definitions/AttackTactic"
+              },
+              "type": "array"
+            }
+          },
+          "required": [
+            "displayName",
+            "description",
+            "status",
+            "severity",
+            "alertRulesCreatedByTemplateCount"
+          ],
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object",
+      "x-ms-discriminator-value": "ThreatIntelligence"
+    },
     "GeoLocation": {
       "description": "The geo-location context attached to the ip entity",
       "properties": {
@@ -7950,7 +8796,8 @@
             "Linux",
             "Windows",
             "Android",
-            "IOS"
+            "IOS",
+            "Unknown"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -7972,6 +8819,10 @@
               {
                 "description": "Host with IOS operating system.",
                 "value": "IOS"
+              },
+              {
+                "description": "Host with Unknown operating system.",
+                "value": "Unknown"
               }
             ]
           }
@@ -8513,6 +9364,14 @@
           },
           "type": "array"
         },
+        "providerName": {
+          "description": "The name of the source provider that generated the incident",
+          "type": "string"
+        },
+        "providerIncidentId": {
+          "description": "The incident ID assigned by the incident provider",
+          "type": "string"
+        },
         "lastActivityTimeUtc": {
           "description": "The time of the last activity in the incident",
           "format": "date-time",
@@ -8606,6 +9465,516 @@
     "Label": {
       "description": "Label that will be used to tag and filter on.",
       "type": "string"
+    },
+    "MailboxEntity": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Entity"
+        }
+      ],
+      "description": "Represents a mailbox entity.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/MailboxEntityProperties",
+          "description": "Mailbox entity properties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object",
+      "x-ms-discriminator-value": "Mailbox"
+    },
+    "MailboxEntityProperties": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/EntityCommonProperties"
+        }
+      ],
+      "description": "Mailbox entity property bag.",
+      "properties": {
+        "mailboxPrimaryAddress": {
+          "description": "The mailbox's primary address",
+          "readOnly": true,
+          "type": "string"
+        },
+        "displayName": {
+          "description": "The mailbox's display name",
+          "readOnly": true,
+          "type": "string"
+        },
+        "upn": {
+          "description": "The mailbox's UPN",
+          "readOnly": true,
+          "type": "string"
+        },
+        "externalDirectoryObjectId": {
+          "description": "The AzureAD identifier of mailbox. Similar to AadUserId in account entity but this property is specific to mailbox object on office side",
+          "format": "uuid",
+          "readOnly": true,
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "MailClusterEntity": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Entity"
+        }
+      ],
+      "description": "Represents a mail cluster entity.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/MailClusterEntityProperties",
+          "description": "Mail cluster entity properties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object",
+      "x-ms-discriminator-value": "MailCluster"
+    },
+    "MailClusterEntityProperties": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/EntityCommonProperties"
+        }
+      ],
+      "description": "Mail cluster entity property bag.",
+      "properties": {
+        "networkMessageIds": {
+          "description": "The mail message IDs that are part of the mail cluster",
+          "items": {
+            "description": "A mail message ID",
+            "type": "string"
+          },
+          "readOnly": true,
+          "type": "array"
+        },
+        "countByDeliveryStatus": {
+          "description": "Count of mail messages by DeliveryStatus string representation",
+          "readOnly": true,
+          "type": "object"
+        },
+        "countByThreatType": {
+          "description": "Count of mail messages by ThreatType string representation",
+          "readOnly": true,
+          "type": "object"
+        },
+        "countByProtectionStatus": {
+          "description": "Count of mail messages by ProtectionStatus string representation",
+          "readOnly": true,
+          "type": "object"
+        },
+        "threats": {
+          "description": "The threats of mail messages that are part of the mail cluster",
+          "items": {
+            "description": "A threat",
+            "type": "string"
+          },
+          "readOnly": true,
+          "type": "array"
+        },
+        "query": {
+          "description": "The query that was used to identify the messages of the mail cluster",
+          "readOnly": true,
+          "type": "string"
+        },
+        "queryTime": {
+          "description": "The query time",
+          "format": "date-time",
+          "readOnly": true,
+          "type": "string"
+        },
+        "mailCount": {
+          "description": "The number of mail messages that are part of the mail cluster",
+          "readOnly": true,
+          "type": "integer",
+          "format": "int32"
+        },
+        "isVolumeAnomaly": {
+          "description": "Is this a volume anomaly mail cluster",
+          "readOnly": true,
+          "type": "boolean"
+        },
+        "source": {
+          "description": "The source of the mail cluster (default is 'O365 ATP')",
+          "readOnly": true,
+          "type": "string"
+        },
+        "clusterSourceIdentifier": {
+          "description": "The id of the cluster source",
+          "readOnly": true,
+          "type": "string"
+        },
+        "clusterSourceType": {
+          "description": "The type of the cluster source",
+          "readOnly": true,
+          "type": "string"
+        },
+        "clusterQueryStartTime": {
+          "description": "The cluster query start time",
+          "format": "date-time",
+          "readOnly": true,
+          "type": "string"
+        },
+        "clusterQueryEndTime": {
+          "description": "The cluster query end time",
+          "format": "date-time",
+          "readOnly": true,
+          "type": "string"
+        },
+        "clusterGroup": {
+          "description": "The cluster group",
+          "readOnly": true,
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "MailMessageEntity": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Entity"
+        }
+      ],
+      "description": "Represents a mail message entity.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/MailMessageEntityProperties",
+          "description": "Mail message entity properties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object",
+      "x-ms-discriminator-value": "MailMessage"
+    },
+    "MailMessageEntityProperties": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/EntityCommonProperties"
+        }
+      ],
+      "description": "Mail message entity property bag.",
+      "properties": {
+        "fileEntityIds": {
+          "description": "The File entity ids of this mail message's attachments",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true,
+          "type": "array"
+        },
+        "recipient": {
+          "description": "The recipient of this mail message. Note that in case of multiple recipients the mail message is forked and each copy has one recipient",
+          "readOnly": true,
+          "type": "string"
+        },
+        "urls": {
+          "description": "The Urls contained in this mail message",
+          "items": {
+            "description": "A Url contained in this mail message",
+            "type": "string"
+          },
+          "readOnly": true,
+          "type": "array"
+        },
+        "threats": {
+          "description": "The threats of this mail message",
+          "items": {
+            "description": "A threat of the mail message",
+            "type": "string"
+          },
+          "readOnly": true,
+          "type": "array"
+        },
+        "p1Sender": {
+          "description": "The p1 sender's email address",
+          "readOnly": true,
+          "type": "string"
+        },
+        "p1SenderDisplayName": {
+          "description": "The p1 sender's display name",
+          "readOnly": true,
+          "type": "string"
+        },
+        "p1SenderDomain": {
+          "description": "The p1 sender's domain",
+          "readOnly": true,
+          "type": "string"
+        },
+        "senderIP": {
+          "description": "The sender's IP address",
+          "readOnly": true,
+          "type": "string"
+        },
+        "p2Sender": {
+          "description": "The p2 sender's email address",
+          "readOnly": true,
+          "type": "string"
+        },
+        "p2SenderDisplayName": {
+          "description": "The p2 sender's display name",
+          "readOnly": true,
+          "type": "string"
+        },
+        "p2SenderDomain": {
+          "description": "The p2 sender's domain",
+          "readOnly": true,
+          "type": "string"
+        },
+        "receiveDate": {
+          "description": "The receive date of this message",
+          "format": "date-time",
+          "readOnly": true,
+          "type": "string"
+        },
+        "networkMessageId": {
+          "description": "The network message id of this mail message",
+          "format": "uuid",
+          "readOnly": true,
+          "type": "string"
+        },
+        "internetMessageId": {
+          "description": "The internet message id of this mail message",
+          "readOnly": true,
+          "type": "string"
+        },
+        "subject": {
+          "description": "The subject of this mail message",
+          "readOnly": true,
+          "type": "string"
+        },
+        "language": {
+          "description": "The language of this mail message",
+          "readOnly": true,
+          "type": "string"
+        },
+        "threatDetectionMethods": {
+          "description": "The threat detection methods",
+          "items": {
+            "description": "A threat detection method",
+            "type": "string"
+          },
+          "readOnly": true,
+          "type": "array"
+        },
+        "bodyFingerprintBin1": {
+          "description": "The bodyFingerprintBin1",
+          "type": "integer",
+          "format": "int32"
+        },
+        "bodyFingerprintBin2": {
+          "description": "The bodyFingerprintBin2",
+          "type": "integer",
+          "format": "int32"
+        },
+        "bodyFingerprintBin3": {
+          "description": "The bodyFingerprintBin3",
+          "type": "integer",
+          "format": "int32"
+        },
+        "bodyFingerprintBin4": {
+          "description": "The bodyFingerprintBin4",
+          "type": "integer",
+          "format": "int32"
+        },
+        "bodyFingerprintBin5": {
+          "description": "The bodyFingerprintBin5",
+          "type": "integer",
+          "format": "int32"
+        },
+        "antispamDirection": {
+          "description": "The directionality of this mail message",
+          "enum": [
+            "Unknown",
+            "Inbound",
+            "Outbound",
+            "Intraorg"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "AntispamMailDirection",
+            "values": [
+              {
+                "description": "Unknown",
+                "value": "Unknown"
+              },
+              {
+                "description": "Inbound",
+                "value": "Inbound"
+              },
+              {
+                "description": "Outbound",
+                "value": "Outbound"
+              },
+              {
+                "description": "Intraorg",
+                "value": "Intraorg"
+              }
+            ]
+          }
+        },
+        "deliveryAction": {
+          "description": "The delivery action of this mail message like Delivered, Blocked, Replaced etc",
+          "enum": [
+            "Unknown",
+            "DeliveredAsSpam",
+            "Delivered",
+            "Blocked",
+            "Replaced"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "modelAsString": false,
+            "name": "DeliveryAction",
+            "values": [
+              {
+                "description": "Unknown",
+                "value": "Unknown"
+              },
+              {
+                "description": "DeliveredAsSpam",
+                "value": "DeliveredAsSpam"
+              },
+              {
+                "description": "Delivered",
+                "value": "Delivered"
+              },
+              {
+                "description": "Blocked",
+                "value": "Blocked"
+              },
+              {
+                "description": "Replaced",
+                "value": "Replaced"
+              }
+            ]
+          }
+        },
+        "deliveryLocation": {
+          "description": "The delivery location of this mail message like Inbox, JunkFolder etc",
+          "enum": [
+            "Unknown",
+            "Inbox",
+            "JunkFolder",
+            "DeletedFolder",
+            "Quarantine",
+            "External",
+            "Failed",
+            "Dropped",
+            "Forwarded"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "modelAsString": false,
+            "name": "DeliveryLocation",
+            "values": [
+              {
+                "description": "Unknown",
+                "value": "Unknown"
+              },
+              {
+                "description": "Inbox",
+                "value": "Inbox"
+              },
+              {
+                "description": "JunkFolder",
+                "value": "JunkFolder"
+              },
+              {
+                "description": "DeletedFolder",
+                "value": "DeletedFolder"
+              },
+              {
+                "description": "Quarantine",
+                "value": "Quarantine"
+              },
+              {
+                "description": "External",
+                "value": "External"
+              },
+              {
+                "description": "Failed",
+                "value": "Failed"
+              },
+              {
+                "description": "Dropped",
+                "value": "Dropped"
+              },
+              {
+                "description": "Forwarded",
+                "value": "Forwarded"
+              }
+            ]
+          }
+        }
+      },
+      "type": "object"
+    },
+    "SubmissionMailEntity": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Entity"
+        }
+      ],
+      "description": "Represents a submission mail entity.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SubmissionMailEntityProperties",
+          "description": "Submission mail entity properties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object",
+      "x-ms-discriminator-value": "SubmissionMail"
+    },
+    "SubmissionMailEntityProperties": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/EntityCommonProperties"
+        }
+      ],
+      "description": "Submission mail entity property bag.",
+      "properties": {
+        "networkMessageId": {
+          "description": "The network message id of email to which submission belongs",
+          "format": "uuid",
+          "readOnly": true,
+          "type": "string"
+        },
+        "timestamp": {
+          "description": "The Time stamp when the message is received (Mail)",
+          "format": "date-time",
+          "readOnly": true,
+          "type": "string"
+        },
+        "recipient": {
+          "description": "The recipient of the mail",
+          "readOnly": true,
+          "type": "string"
+        },
+        "sender": {
+          "description": "The sender of the mail",
+          "readOnly": true,
+          "type": "string"
+        },
+        "senderIp": {
+          "description": "The sender's IP",
+          "readOnly": true,
+          "type": "string"
+        },
+        "subject": {
+          "description": "The subject of submission mail",
+          "readOnly": true,
+          "type": "string"
+        },
+        "reportType": {
+          "description": "The submission type for the given instance. This maps to Junk, Phish, Malware or NotJunk.",
+          "readOnly": true,
+          "type": "string"
+        }
+      },
+      "type": "object"
     },
     "MCASDataConnector": {
       "allOf": [
@@ -9567,7 +10936,7 @@
       "x-ms-discriminator-value": "Scheduled"
     },
     "ScheduledAlertRuleCommonProperties": {
-      "description": "Schedule alert rule template property bag.",
+      "description": "Scheduled alert rule template property bag.",
       "properties": {
         "query": {
           "description": "The query that creates alerts for this rule.",
@@ -9801,7 +11170,8 @@
               "Account",
               "Host",
               "Ip",
-              "Url"
+              "Url",
+              "FileHash"
             ],
             "type": "string",
             "x-ms-enum": {
@@ -9823,6 +11193,10 @@
                 {
                   "description": "Url entity",
                   "value": "Url"
+                },
+                {
+                  "description": "FileHash entity",
+                  "value": "FileHash"
                 }
               ]
             }
@@ -10647,6 +12021,16 @@
           "readOnly": true,
           "type": "string"
         },
+        "deviceName": {
+          "description": "The friendly name of the device",
+          "readOnly": true,
+          "type": "string"
+        },
+        "source": {
+          "description": "The source of the device",
+          "readOnly": true,
+          "type": "string"
+        },
         "iotSecurityAgentId": {
           "description": "The ID of the security agent running on the device",
           "format": "uuid",
@@ -10668,6 +12052,31 @@
           "readOnly": true,
           "type": "string"
         },
+        "macAddress": {
+          "description": "The MAC address of the device",
+          "readOnly": true,
+          "type": "string"
+        },
+        "model": {
+          "description": "The model of the device",
+          "readOnly": true,
+          "type": "string"
+        },
+        "serialNumber": {
+          "description": "The serial number of the device",
+          "readOnly": true,
+          "type": "string"
+        },
+        "firmwareVersion": {
+          "description": "The firmware version of the device",
+          "readOnly": true,
+          "type": "string"
+        },
+        "operatingSystem": {
+          "description": "The operating system of the device",
+          "readOnly": true,
+          "type": "string"
+        },
         "iotHubEntityId": {
           "description": "The AzureResource entity id of the IoT Hub",
           "readOnly": true,
@@ -10678,10 +12087,23 @@
           "readOnly": true,
           "type": "string"
         },
+        "ipAddressEntityId": {
+          "description": "The IP entity if of this device",
+          "readOnly": true,
+          "type": "string"
+        },
         "threatIntelligence": {
           "description": "A list of TI contexts attached to the IoTDevice entity.",
           "items": {
             "$ref": "#/definitions/ThreatIntelligence"
+          },
+          "readOnly": true,
+          "type": "array"
+        },
+        "protocols": {
+          "description": "A list of protocols of the IoTDevice entity.",
+          "items": {
+            "type": "string"
           },
           "readOnly": true,
           "type": "array"
@@ -10764,12 +12186,6 @@
           "type": "string"
         }
       },
-      "required": [
-        "incidentId",
-        "severity",
-        "title",
-        "relationName"
-      ],
       "type": "object"
     },
     "WatchlistList": {
@@ -10899,6 +12315,15 @@
         "contentType": {
           "description": "The content type of the raw content. Example : text/csv or text/tsv ",
           "type": "string"
+        },
+        "uploadStatus": {
+          "description": "The status of the Watchlist upload : New, InProgress or Complete. Pls note : When a Watchlist upload status is equal to InProgress, the Watchlist cannot be deleted",
+          "type": "string"
+        },
+        "watchlistItemsCount": {
+          "description": "The number of Watchlist Items in the Watchlist",
+          "type": "integer",
+          "format": "int32"
         }
       },
       "required": [
@@ -10908,18 +12333,87 @@
       ],
       "type": "object"
     },
-    "ThreatIntelligenceResourceList": {
-      "description": "List of all the threat intelligence entities.",
+    "WatchlistItem": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResourceWithEtag"
+        }
+      ],
+      "description": "Represents a Watchlist item in Azure Security Insights.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/WatchlistItemProperties",
+          "description": "Watchlist Item properties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object"
+    },
+    "WatchlistItemProperties": {
+      "description": "Describes watchlist item properties",
+      "properties": {
+        "watchlistItemType": {
+          "description": "The type of the watchlist item",
+          "type": "string"
+        },
+        "watchlistItemId": {
+          "description": "The id (a Guid) of the watchlist item",
+          "type": "string"
+        },
+        "tenantId": {
+          "description": "The tenantId to which the watchlist item belongs to",
+          "type": "string"
+        },
+        "isDeleted": {
+          "description": "A flag that indicates if the watchlist item is deleted or not",
+          "type": "boolean"
+        },
+        "created": {
+          "description": "The time the watchlist item was created",
+          "format": "date-time",
+          "type": "string"
+        },
+        "updated": {
+          "description": "The last time the watchlist item was updated",
+          "format": "date-time",
+          "type": "string"
+        },
+        "createdBy": {
+          "$ref": "#/definitions/UserInfo",
+          "description": "Describes a user that created the watchlist item",
+          "type": "object"
+        },
+        "updatedBy": {
+          "$ref": "#/definitions/UserInfo",
+          "description": "Describes a user that updated the watchlist item",
+          "type": "object"
+        },
+        "itemsKeyValue": {
+          "description": "key-value pairs for a watchlist item",
+          "type": "object"
+        },
+        "entityMapping": {
+          "description": "key-value pairs for a watchlist item entity mapping",
+          "type": "object"
+        }
+      },
+      "required": [
+        "itemsKeyValue"
+      ],
+      "type": "object"
+    },
+    "ThreatIntelligenceInformationList": {
+      "description": "List of all the threat intelligence information objects.",
       "properties": {
         "nextLink": {
-          "description": "URL to fetch the next set of entities.",
+          "description": "URL to fetch the next set of information objects.",
           "readOnly": true,
           "type": "string"
         },
         "value": {
-          "description": "Array of threat intelligence entities.",
+          "description": "Array of threat intelligence information objects.",
           "items": {
-            "$ref": "#/definitions/ThreatIntelligenceResource"
+            "$ref": "#/definitions/ThreatIntelligenceInformation"
           },
           "type": "array"
         }
@@ -10928,7 +12422,7 @@
         "value"
       ]
     },
-    "ThreatIntelligenceResource": {
+    "ThreatIntelligenceInformation": {
       "allOf": [
         {
           "$ref": "#/definitions/ResourceWithEtag"
@@ -10937,7 +12431,7 @@
           "$ref": "#/definitions/ThreatIntelligenceResourceKind"
         }
       ],
-      "description": "Threat intelligence resource.",
+      "description": "Threat intelligence information object.",
       "discriminator": "kind",
       "type": "object",
       "required": [
@@ -10947,7 +12441,7 @@
     "ThreatIntelligenceIndicatorModel": {
       "allOf": [
         {
-          "$ref": "#/definitions/ThreatIntelligenceResource"
+          "$ref": "#/definitions/ThreatIntelligenceInformation"
         }
       ],
       "description": "Threat intelligence indicator entity.",
@@ -10961,13 +12455,13 @@
       "type": "object",
       "x-ms-discriminator-value": "indicator"
     },
-    "ThreatIntelligenceIndicatorWithoutReadOnlyFields": {
+    "ThreatIntelligenceIndicatorModelForRequestBody": {
       "allOf": [
         {
           "$ref": "#/definitions/ThreatIntelligenceResourceKind"
         }
       ],
-      "description": "Threat intelligence indicator entity.",
+      "description": "Threat intelligence indicator entity used in request body.",
       "properties": {
         "etag": {
           "description": "Etag of the azure resource",
@@ -11068,6 +12562,14 @@
           },
           "type": "array"
         },
+        "parsedPattern": {
+          "description": "Parsed patterns",
+          "items": {
+            "description": "Parsed pattern",
+            "$ref": "#/definitions/ThreatIntelligenceParsedPattern"
+          },
+          "type": "array"
+        },
         "externalId": {
           "description": "External ID of threat intelligence entity",
           "type": "string"
@@ -11109,6 +12611,10 @@
           },
           "type": "array"
         },
+        "language": {
+          "description": "Language of threat intelligence entity",
+          "type": "string"
+        },
         "threatTypes": {
           "description": "Threat types",
           "items": {
@@ -11132,6 +12638,11 @@
         "modified": {
           "description": "Modified by",
           "type": "string"
+        },
+        "extensions": {
+          "description": "Extensions map",
+          "type": "object",
+          "additionalProperties": {}
         }
       },
       "type": "object"
@@ -11145,8 +12656,39 @@
         },
         "phaseName": {
           "description": "Phase name",
-          "type": "integer",
-          "format": "int32"
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "ThreatIntelligenceParsedPattern": {
+      "description": "Describes parsed pattern entity",
+      "properties": {
+        "patternTypeKey": {
+          "description": "Pattern type key",
+          "type": "string"
+        },
+        "patternTypeValues": {
+          "description": "Pattern type keys",
+          "items": {
+            "description": "Pattern type key",
+            "$ref": "#/definitions/ThreatIntelligenceParsedPatternTypeValue"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "ThreatIntelligenceParsedPatternTypeValue": {
+      "description": "Describes threat kill chain phase entity",
+      "properties": {
+        "valueType": {
+          "description": "Type of the value",
+          "type": "string"
+        },
+        "value": {
+          "description": "Value of parsed pattern",
+          "type": "string"
         }
       },
       "type": "object"
@@ -11174,8 +12716,8 @@
       },
       "type": "object"
     },
-    "ThreatIntelligenceArmStixQuery": {
-      "description": "Describes threat intelligence ARM STIX query",
+    "ThreatIntelligenceFilteringCriteria": {
+      "description": "Filtering criteria for querying threat intelligence indicators.",
       "properties": {
         "pageSize": {
           "description": "Page size",
@@ -11183,37 +12725,37 @@
           "format": "int32"
         },
         "minConfidence": {
-          "description": "Minimum confidence",
+          "description": "Minimum confidence.",
           "type": "integer",
           "format": "int32"
         },
         "maxConfidence": {
-          "description": "Maximum confidence",
+          "description": "Maximum confidence.",
           "type": "integer",
           "format": "int32"
         },
         "minValidUntil": {
-          "description": "Minimum Valid until",
+          "description": "Start time for ValidUntil filter.",
           "type": "string"
         },
         "maxValidUntil": {
-          "description": "Maximum Valid until",
+          "description": "End time for ValidUntil filter.",
           "type": "string"
         },
         "includeDisabled": {
-          "description": "To include disabled indicators",
+          "description": "Parameter to include/exclude disabled indicators.",
           "type": "boolean"
         },
         "sortBy": {
-          "description": "List of Sort rules",
+          "description": "Columns to sort by and sorting order",
           "items": {
             "description": "Sort By",
-            "$ref": "#/definitions/ThreatIntelligenceArmStixSortBy"
+            "$ref": "#/definitions/ThreatIntelligenceSortingCriteria"
           },
           "type": "array"
         },
         "sources": {
-          "description": "Sources of a threat intelligence entity",
+          "description": "Sources of threat intelligence indicators",
           "items": {
             "description": "Source",
             "type": "string"
@@ -11229,52 +12771,52 @@
           "type": "array"
         },
         "threatTypes": {
-          "description": "Threat types",
+          "description": "Threat types of threat intelligence indicators",
           "items": {
-            "description": "Threat type",
+            "description": "Threat type of a threat intelligence indicator",
             "type": "string"
           },
           "type": "array"
         },
         "ids": {
-          "description": "Ids of threat intelligence entities",
+          "description": "Ids of threat intelligence indicators",
           "items": {
-            "description": "Id of a threat intelligence entity",
+            "description": "Id of a threat intelligence indicator",
             "type": "string"
           },
           "type": "array"
         },
         "keywords": {
-          "description": "Keywords of threat intelligence entities",
+          "description": "Keywords for searching threat intelligence indicators",
           "items": {
-            "description": "keyword of a threat intelligence entity",
+            "description": "keyword for searching threat intelligence indicators",
             "type": "string"
           },
           "type": "array"
         },
         "skipToken": {
-          "description": "Skip Token",
+          "description": "Skip token.",
           "type": "string"
         }
       },
       "type": "object"
     },
-    "ThreatIntelligenceArmStixSortBy": {
-      "description": "Describes an threat intelligence ARM STIX Sort By",
+    "ThreatIntelligenceSortingCriteria": {
+      "description": "List of available columns for sorting",
       "properties": {
         "itemKey": {
-          "description": "Item key",
+          "description": "Column name",
           "type": "string"
         },
         "sortOrder": {
-          "$ref": "#/definitions/ThreatIntelligenceArmStixSortOrder",
-          "description": "Sort order."
+          "$ref": "#/definitions/ThreatIntelligenceSortingOrder",
+          "description": "Sorting order (ascending/descending/unsorted)."
         }
       },
       "type": "object"
     },
-    "ThreatIntelligenceArmStixSortOrder": {
-      "description": "Describes an threat intelligence ARM STIX Sort Order",
+    "ThreatIntelligenceSortingOrder": {
+      "description": "Sorting order (ascending/descending/unsorted).",
       "enum": [
         "unsorted",
         "ascending",
@@ -11283,7 +12825,7 @@
       "type": "string",
       "x-ms-enum": {
         "modelAsString": true,
-        "name": "ThreatIntelligenceArmStixSortBy",
+        "name": "ThreatIntelligenceSortingCriteria",
         "values": [
           {
             "value": "unsorted"
@@ -11297,11 +12839,11 @@
         ]
       }
     },
-    "ThreatIntelligenceAppendTagsRequestBody": {
-      "description": "Describes threat intelligence indicator append tags request body",
+    "ThreatIntelligenceAppendTags": {
+      "description": "Array of tags to be appended to the threat intelligence indicator.",
       "properties": {
         "threatIntelligenceTags": {
-          "description": "List of threat intelligence tags",
+          "description": "List of tags to be appended.",
           "items": {
             "description": "parameter",
             "type": "string"
@@ -11311,13 +12853,13 @@
       },
       "type": "object"
     },
-    "ThreatIntelligenceMetricResourceList": {
-      "description": "List of all the threat intelligence metric resource.",
+    "ThreatIntelligenceMetricsList": {
+      "description": "List of all the threat intelligence metric fields (type/threat type/source).",
       "properties": {
         "value": {
-          "description": "Array of threat intelligence metrics resource.",
+          "description": "Array of threat intelligence metric fields (type/threat type/source).",
           "items": {
-            "$ref": "#/definitions/ThreatIntelligenceMetricResource"
+            "$ref": "#/definitions/ThreatIntelligenceMetrics"
           },
           "type": "array"
         }
@@ -11326,11 +12868,11 @@
         "value"
       ]
     },
-    "ThreatIntelligenceMetricResource": {
-      "description": "Threat intelligence metric resource.",
+    "ThreatIntelligenceMetrics": {
+      "description": "Threat intelligence metrics.",
       "properties": {
         "properties": {
-          "description": "Threat intelligence metric.",
+          "description": "Threat intelligence metrics.",
           "$ref": "#/definitions/ThreatIntelligenceMetric"
         }
       }
@@ -11339,7 +12881,7 @@
       "description": "Describes threat intelligence metric",
       "properties": {
         "lastUpdatedTimeUtc": {
-          "description": "Time Metric",
+          "description": "Last updated indicator metric",
           "type": "string"
         },
         "threatTypeMetrics": {
@@ -11383,6 +12925,237 @@
         }
       },
       "type": "object"
+    },
+    "EntityGetInsightsParameters": {
+      "description": "The parameters required to execute insights operation on the given entity.",
+      "type": "object",
+      "properties": {
+        "startTime": {
+          "description": "The start timeline date, so the results returned are after this date.",
+          "format": "date-time",
+          "type": "string"
+        },
+        "endTime": {
+          "description": "The end timeline date, so the results returned are before this date.",
+          "format": "date-time",
+          "type": "string"
+        },
+        "addDefaultExtendedTimeRange": {
+          "description": "Indicates if query time range should be extended with default time range of the query. Default value is false",
+          "type": "boolean"
+        },
+        "insightQueryIds": {
+          "description": "List of Insights Query Id. If empty, default value is all insights of this entity",
+          "type": "array",
+          "items": {
+            "description": "Insight Query Id (GUID)",
+            "format": "uuid",
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "startTime",
+        "endTime"
+      ]
+    },
+    "EntityGetInsightsResponse": {
+      "description": "The Get Insights result operation response.",
+      "properties": {
+        "metaData": {
+          "$ref": "#/definitions/GetInsightsResultsMetadata",
+          "description": "The metadata from the get insights operation results."
+        },
+        "value": {
+          "description": "The insights result values.",
+          "items": {
+            "$ref": "#/definitions/EntityInsightItem"
+          },
+          "type": "array"
+        }
+      }
+    },
+    "GetInsightsResultsMetadata": {
+      "description": "Get Insights result metadata.",
+      "properties": {
+        "totalCount": {
+          "description": "the total items found for the insights request",
+          "type": "integer",
+          "format": "int32"
+        },
+        "errors": {
+          "description": "information about the failed queries",
+          "items": {
+            "$ref": "#/definitions/GetInsightsError"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "totalCount"
+      ],
+      "type": "object"
+    },
+    "GetInsightsError": {
+      "description": "GetInsights Query Errors.",
+      "properties": {
+        "kind": {
+          "description": "the query kind",
+          "type": "string",
+          "enum": [
+            "Insight"
+          ]
+        },
+        "queryId": {
+          "description": "the query id",
+          "type": "string"
+        },
+        "errorMessage": {
+          "description": "the error message",
+          "type": "string"
+        }
+      },
+      "required": [
+        "kind",
+        "errorMessage"
+      ],
+      "type": "object"
+    },
+    "EntityQueryItem": {
+      "description": "An abstract Query item for entity",
+      "type": "object",
+      "discriminator": "kind",
+      "properties": {
+        "kind": {
+          "$ref": "#/definitions/EntityQueryKind",
+          "description": "The entity query kind type."
+        },
+        "id": {
+          "description": "Query Template ARM ID",
+          "type": "string",
+          "format": "uuid",
+          "readOnly": true
+        },
+        "name": {
+          "description": "Query Template ARM Name",
+          "type": "string"
+        },
+        "type": {
+          "description": "ARM Type",
+          "type": "string"
+        }
+      },
+      "required": [
+        "kind"
+      ]
+    },
+    "EntityQueryItemProperties": {
+      "description": "An properties abstract Query item for entity",
+      "type": "object",
+      "properties": {
+        "dataTypes": {
+          "description": "Data types for template",
+          "type": "array",
+          "items": {
+            "properties": {
+              "dataType": {
+                "description": "Data type name",
+                "type": "string"
+              }
+            }
+          }
+        },
+        "inputEntityType": {
+          "description": "The type of the entity",
+          "$ref": "#/definitions/EntityInnerType"
+        },
+        "requiredInputFieldsSets": {
+          "description": "Data types for template",
+          "type": "array",
+          "items": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "entitiesFilter": {
+          "description": "The query applied only to entities matching to all filters",
+          "type": "object"
+        }
+      }
+    },
+    "EntityInsightItem": {
+      "description": "Entity insight Item.",
+      "type": "object",
+      "properties": {
+        "queryId": {
+          "type": "string",
+          "description": "The query id of the insight"
+        },
+        "queryTimeInterval": {
+          "type": "object",
+          "description": "The Time interval that the query actually executed on.",
+          "properties": {
+            "startTime": {
+              "format": "date-time",
+              "type": "string",
+              "description": "Insight query start time"
+            },
+            "endTime": {
+              "format": "date-time",
+              "type": "string",
+              "description": "Insight query end time"
+            }
+          }
+        },
+        "tableQueryResults": {
+          "$ref": "#/definitions/InsightsTableResult",
+          "description": "Query results for table insights query."
+        },
+        "chartQueryResults": {
+          "type": "array",
+          "description": "Query results for table insights query.",
+          "items": {
+            "$ref": "#/definitions/InsightsTableResult",
+            "description": "Query results for table insights query."
+          }
+        }
+      }
+    },
+    "InsightsTableResult": {
+      "type": "object",
+      "description": "Query results for table insights query.",
+      "properties": {
+        "columns": {
+          "type": "array",
+          "description": "Columns Metadata of the table",
+          "items": {
+            "properties": {
+              "type": {
+                "type": "string",
+                "description": "the type of the colum"
+              },
+              "name": {
+                "type": "string",
+                "description": "the name of the colum"
+              }
+            }
+          }
+        },
+        "rows": {
+          "type": "array",
+          "description": "Rows data of the table",
+          "items": {
+            "type": "array",
+            "description": "Single row of data",
+            "items": {
+              "type": "string",
+              "description": "Cell in the table"
+            }
+          }
+        }
+      }
     }
   },
   "parameters": {
@@ -11596,6 +13369,16 @@
       },
       "x-ms-parameter-location": "method"
     },
+    "GetInsightsEntityQueriesRequestBody": {
+      "description": "The parameters required to execute insights on the given entity.",
+      "name": "parameters",
+      "in": "body",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/EntityGetInsightsParameters"
+      },
+      "x-ms-parameter-location": "method"
+    },
     "EntityId": {
       "description": "entity ID",
       "in": "path",
@@ -11646,6 +13429,27 @@
       "name": "incidentId",
       "required": true,
       "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "EntityQueryKindParam": {
+      "description": "The Kind parameter for queries",
+      "in": "query",
+      "name": "kind",
+      "required": true,
+      "type": "string",
+      "enum": [
+        "Insight"
+      ],
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "EntityItemQueryKind",
+        "values": [
+          {
+            "description": "insight",
+            "value": "Insight"
+          }
+        ]
+      },
       "x-ms-parameter-location": "method"
     },
     "ODataFilter": {
@@ -11772,41 +13576,59 @@
       },
       "x-ms-parameter-location": "method"
     },
-    "ThreatIntelligenceIdentifier": {
-      "description": "Threat Intelligence Identifier",
+    "WatchlistItem": {
+      "description": "The watchlist item",
+      "in": "body",
+      "name": "watchlistItem",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/WatchlistItem"
+      },
+      "x-ms-parameter-location": "method"
+    },
+    "WatchlistItemId": {
+      "description": "Watchlist Item Id (GUID)",
+      "in": "path",
+      "name": "watchlistItemId",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "ThreatIntelligenceName": {
+      "description": "Threat intelligence indicator name field.",
       "in": "path",
       "name": "name",
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"
     },
-    "ThreatIntelligenceIndicatorObjectToUpsert": {
-      "description": "The threat intelligence entity properties for upsert",
+    "ThreatIntelligenceProperties": {
+      "description": "Properties of threat intelligence indicators to create and update.",
       "in": "body",
-      "name": "ThreatIntelligenceIndicatorObjectToUpsert",
+      "name": "ThreatIntelligenceProperties",
       "required": true,
       "schema": {
-        "$ref": "#/definitions/ThreatIntelligenceIndicatorWithoutReadOnlyFields"
+        "$ref": "#/definitions/ThreatIntelligenceIndicatorModelForRequestBody"
       },
       "x-ms-parameter-location": "method"
     },
-    "ThreatIntelligenceReplaceTagsModel": {
-      "description": "The threat intelligence entity properties for updating tags",
+    "ThreatIntelligenceReplaceTags": {
+      "description": "Tags in the threat intelligence indicator to be replaced.",
       "in": "body",
-      "name": "ThreatIntelligenceReplaceTagsModel",
+      "name": "ThreatIntelligenceReplaceTags",
       "required": true,
       "schema": {
-        "$ref": "#/definitions/ThreatIntelligenceIndicatorWithoutReadOnlyFields"
+        "$ref": "#/definitions/ThreatIntelligenceIndicatorModelForRequestBody"
       },
       "x-ms-parameter-location": "method"
     },
-    "ThreatIntelligenceArmStixQuery": {
-      "description": "The threat intelligence ARM STIX query",
+    "ThreatIntelligenceFilteringCriteria": {
+      "description": "Filtering criteria for querying threat intelligence indicators.",
       "in": "body",
-      "name": "ThreatIntelligenceArmStixQuery",
+      "name": "ThreatIntelligenceFilteringCriteria",
       "required": true,
       "schema": {
-        "$ref": "#/definitions/ThreatIntelligenceArmStixQuery"
+        "$ref": "#/definitions/ThreatIntelligenceFilteringCriteria"
       },
       "x-ms-parameter-location": "method"
     },
@@ -11818,13 +13640,13 @@
       "type": "string",
       "x-ms-parameter-location": "method"
     },
-    "ThreatIntelligenceAppendTagsRequestBody": {
+    "ThreatIntelligenceAppendTags": {
       "description": "The threat intelligence append tags request body",
       "in": "body",
-      "name": "ThreatIntelligenceAppendTagsRequestBody",
+      "name": "ThreatIntelligenceAppendTags",
       "required": true,
       "schema": {
-        "$ref": "#/definitions/ThreatIntelligenceAppendTagsRequestBody"
+        "$ref": "#/definitions/ThreatIntelligenceAppendTags"
       },
       "x-ms-parameter-location": "method"
     }

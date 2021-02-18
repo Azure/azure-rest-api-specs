@@ -4,8 +4,11 @@
 
 This is the AutoRest configuration file for Mixed-Reality Azure Resource Management.
 
+
 ---
+
 ## Getting Started
+
 To build the SDK for Azure Resource Management, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
@@ -13,20 +16,86 @@ To build the SDK for Azure Resource Management, simply [Install AutoRest](https:
 To see additional help and options, run:
 
 > `autorest --help`
+
 ---
 
 ---
+
 ## Configuration
 
 ### Basic Information
+
 These are the global settings for the Mixed Reality Azure Resource Management Client.
 
 ``` yaml
 title: MixedRealityClient
 description: Mixed Reality Client
 openapi-type: arm
-tag: package-2020-05
+tag: package-2021-03-01-preview
 ```
+
+## Suppression
+``` yaml
+directive:
+  - suppress: SECRET_PROPERTY
+    from:
+      - Microsoft.MixedReality/stable/2021-01-01/common.json
+    where:
+      - $.definitions.AccountKeys.properties.primaryKey
+      - $.definitions.AccountKeys.properties.secondaryKey
+    reason: Secrets are OK to return in a POST response.
+  - suppress: SECRET_PROPERTY
+    from:
+      - Microsoft.MixedReality/stable/2020-05-01/common.json
+    where:
+      - $.definitions.AccountKeys.properties.primaryKey
+      - $.definitions.AccountKeys.properties.secondaryKey
+    reason: Secrets are OK to return in a POST response.
+  - suppress: SECRET_PROPERTY
+    from:
+      - Microsoft.MixedReality/preview/2020-04-06-preview/common.json
+    where:
+      - $.definitions.AccountKeys.properties.primaryKey
+      - $.definitions.AccountKeys.properties.secondaryKey
+    reason: Secrets are OK to return in a POST response.
+```
+
+``` yaml
+directive:
+  - suppress: SECRET_PROPERTY
+    from:
+      - Microsoft.MixedReality/preview/2021-03-01-preview/common.json
+    where:
+      - $.definitions.AccountKeys.properties.primaryKey
+      - $.definitions.AccountKeys.properties.secondaryKey
+    reason: Secrets are OK to return in a POST response.
+```
+
+### Tag: package-2021-03-01-preview
+
+These settings apply only when `--tag=package-2021-03-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2021-03-01-preview'
+input-file:
+  - Microsoft.MixedReality/preview/2021-03-01-preview/proxy.json
+  - Microsoft.MixedReality/preview/2021-03-01-preview/spatial-anchors.json
+  - Microsoft.MixedReality/preview/2021-03-01-preview/remote-rendering.json
+  - Microsoft.MixedReality/preview/2021-03-01-preview/object-anchors.json
+modelerfour:
+  lenient-model-deduplication: true
+```
+
+### Tag: package-2021-01
+
+These settings apply only when `--tag=package-2021-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2021-01'
+input-file:
+  - Microsoft.MixedReality/stable/2021-01-01/proxy.json
+  - Microsoft.MixedReality/stable/2021-01-01/spatial-anchors.json
+  - Microsoft.MixedReality/stable/2021-01-01/remote-rendering.json
+```
+
 ### Tag: package-2020-05
 
 These settings apply only when `--tag=package-2020-05` is specified on the command line.
@@ -36,7 +105,10 @@ input-file:
 - Microsoft.MixedReality/stable/2020-05-01/proxy.json
 - Microsoft.MixedReality/stable/2020-05-01/spatial-anchors.json
 - Microsoft.MixedReality/preview/2020-04-06-preview/remote-rendering.json
+modelerfour:
+  lenient-model-deduplication: true
 ```
+
 
 ### Tag: package-2020-05-01
 
@@ -79,6 +151,7 @@ input-file:
 ```
 
 ---
+
 # Code Generation
 
 ## Swagger to SDK
@@ -119,7 +192,7 @@ These settings apply only when `--python` is specified on the command line.
 Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
 Use `--python-mode=update` if you already have a setup.py and just want to update the code itself.
 
-``` yaml $(python)
+``` yaml $(python) && !$(track2)
 python-mode: create
 python:
   azure-arm: true
@@ -130,15 +203,39 @@ python:
   package-version: 0.0.1
   clear-output-folder: true
 ```
-``` yaml $(python) && $(python-mode) == 'update'
+
+``` yaml $(python) && $(track2)
+python-mode: update
+azure-arm: true
+license-header: MICROSOFT_MIT_NO_VERSION
+namespace: azure.mgmt.mixedreality
+package-name: azure-mgmt-mixedreality
+package-version: 0.0.1
+clear-output-folder: true
+modelerfour:
+  lenient-model-deduplication: true
+```
+
+``` yaml $(python) && $(python-mode) == 'update' && !$(track2)
 python:
   no-namespace-folders: true
   output-folder: $(python-sdks-folder)/mixedreality/azure-mgmt-mixedreality/azure/mgmt/mixedreality
 ```
-``` yaml $(python) && $(python-mode) == 'create'
+
+``` yaml $(python) && $(python-mode) == 'create' && !$(track2)
 python:
   basic-setup-py: true
   output-folder: $(python-sdks-folder)/mixedreality/azure-mgmt-mixedreality
+```
+
+``` yaml $(python) && $(python-mode) == 'update' && $(track2)
+no-namespace-folders: true
+output-folder: $(python-sdks-folder)/mixedreality/azure-mgmt-mixedreality/azure/mgmt/mixedreality
+```
+
+``` yaml $(python) && $(python-mode) == 'create' && $(track2)
+basic-setup-py: true
+output-folder: $(python-sdks-folder)/mixedreality/azure-mgmt-mixedreality
 ```
 
 ## Go
@@ -152,4 +249,3 @@ See configuration in [readme.java.md](./readme.java.md)
 ## AzureResourceSchema
 
 See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
-

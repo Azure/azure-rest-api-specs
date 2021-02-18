@@ -2046,17 +2046,8 @@
           "description": "The packet size of data read from SAP HANA. Type: integer(or Expression with resultType integer)."
         },
         "partitionOption": {
-          "description": "The partition mechanism that will be used for SAP HANA read in parallel.",
-          "type": "string",
-          "enum": [
-            "None",
-            "PhysicalPartitionsOfTable",
-            "SapHanaDynamicRange"
-          ],
-          "x-ms-enum": {
-            "name": "SapHanaPartitionOption",
-            "modelAsString": true
-          }
+          "description": "The partition mechanism that will be used for SAP HANA read in parallel. Possible values include: \"None\", \"PhysicalPartitionsOfTable\", \"SapHanaDynamicRange\". ",
+          "type": "object"
         },
         "partitionSettings": {
           "description": "The settings that will be leveraged for SAP HANA source partitioning.",
@@ -2139,20 +2130,8 @@
           "description": "The single character that will be used as delimiter passed to SAP RFC as well as splitting the output data retrieved. Type: string (or Expression with resultType string)."
         },
         "partitionOption": {
-          "description": "The partition mechanism that will be used for SAP table read in parallel.",
-          "type": "string",
-          "enum": [
-            "None",
-            "PartitionOnInt",
-            "PartitionOnCalendarYear",
-            "PartitionOnCalendarMonth",
-            "PartitionOnCalendarDate",
-            "PartitionOnTime"
-          ],
-          "x-ms-enum": {
-            "name": "SapTablePartitionOption",
-            "modelAsString": true
-          }
+          "description": "The partition mechanism that will be used for SAP table read in parallel. Possible values include: \"None\", \"PartitionOnInt\", \"PartitionOnCalendarYear\", \"PartitionOnCalendarMonth\", \"PartitionOnCalendarDate\", \"PartitionOnTime\".",
+          "type": "object"
         },
         "partitionSettings": {
           "description": "The settings that will be leveraged for SAP table source partitioning.",
@@ -2284,8 +2263,8 @@
           "type": "object"
         },
         "partitionOption": {
-          "description": "The partition mechanism that will be used for Sql read in parallel.",
-          "$ref": "#/definitions/SqlPartitionOption"
+          "description": "The partition mechanism that will be used for Sql read in parallel. Possible values include: \"None\", \"PhysicalPartitionsOfTable\", \"DynamicRange\".",
+          "type": "object"
         },
         "partitionSettings": {
           "description": "The settings that will be leveraged for Sql source partitioning.",
@@ -2322,8 +2301,8 @@
           "type": "object"
         },
         "partitionOption": {
-          "description": "The partition mechanism that will be used for Sql read in parallel.",
-          "$ref": "#/definitions/SqlPartitionOption"
+          "description": "The partition mechanism that will be used for Sql read in parallel. Possible values include: \"None\", \"PhysicalPartitionsOfTable\", \"DynamicRange\".",
+          "type": "object"
         },
         "partitionSettings": {
           "description": "The settings that will be leveraged for Sql source partitioning.",
@@ -2360,8 +2339,8 @@
           "type": "object"
         },
         "partitionOption": {
-          "description": "The partition mechanism that will be used for Sql read in parallel.",
-          "$ref": "#/definitions/SqlPartitionOption"
+          "description": "The partition mechanism that will be used for Sql read in parallel. Possible values include: \"None\", \"PhysicalPartitionsOfTable\", \"DynamicRange\".",
+          "type": "object"
         },
         "partitionSettings": {
           "description": "The settings that will be leveraged for Sql source partitioning.",
@@ -2398,8 +2377,8 @@
           "type": "object"
         },
         "partitionOption": {
-          "description": "The partition mechanism that will be used for Sql read in parallel.",
-          "$ref": "#/definitions/SqlPartitionOption"
+          "description": "The partition mechanism that will be used for Sql read in parallel. Possible values include: \"None\", \"PhysicalPartitionsOfTable\", \"DynamicRange\".",
+          "type": "object"
         },
         "partitionSettings": {
           "description": "The settings that will be leveraged for Sql source partitioning.",
@@ -2429,8 +2408,8 @@
           "description": "Value and type setting for stored procedure parameters. Example: \"{Parameter1: {value: \"1\", type: \"int\"}}\". Type: object (or Expression with resultType object), itemType: StoredProcedureParameter."
         },
         "partitionOption": {
-          "description": "The partition mechanism that will be used for Sql read in parallel.",
-          "$ref": "#/definitions/SqlPartitionOption"
+          "description": "The partition mechanism that will be used for Sql read in parallel. Possible values include: \"None\", \"PhysicalPartitionsOfTable\", \"DynamicRange\".",
+          "type": "object"
         },
         "partitionSettings": {
           "description": "The settings that will be leveraged for Sql source partitioning.",
@@ -2454,19 +2433,6 @@
           "type": "object",
           "description": "The minimum value of the partition column for partition range splitting. This value is used to decide the partition stride, not for filtering the rows in table. All rows in the table or query result will be partitioned and copied. Type: string (or Expression with resultType string)."
         }
-      }
-    },
-    "SqlPartitionOption": {
-      "description": "The partition mechanism that will be used for Sql read in parallel.",
-      "type": "string",
-      "enum": [
-        "None",
-        "PhysicalPartitionsOfTable",
-        "DynamicRange"
-      ],
-      "x-ms-enum": {
-        "name": "SqlPartitionOption",
-        "modelAsString": true
       }
     },
     "FileSystemSource": {
@@ -2598,17 +2564,8 @@
           "description": "Query timeout. Type: string (or Expression with resultType string), pattern: ((\\d+)\\.)?(\\d\\d):(60|([0-5][0-9])):(60|([0-5][0-9]))."
         },
         "partitionOption": {
-          "description": "The partition mechanism that will be used for Oracle read in parallel.",
-          "type": "string",
-          "enum": [
-            "None",
-            "PhysicalPartitionsOfTable",
-            "DynamicRange"
-          ],
-          "x-ms-enum": {
-            "name": "OraclePartitionOption",
-            "modelAsString": true
-          }
+          "description": "The partition mechanism that will be used for Oracle read in parallel. Possible values include: \"None\", \"PhysicalPartitionsOfTable\", \"DynamicRange\".",
+          "type": "object"
         },
         "partitionSettings": {
           "description": "The settings that will be leveraged for Oracle source partitioning.",
@@ -2663,17 +2620,8 @@
           "description": "Teradata query. Type: string (or Expression with resultType string)."
         },
         "partitionOption": {
-          "description": "The partition mechanism that will be used for teradata read in parallel.",
-          "type": "string",
-          "enum": [
-            "None",
-            "Hash",
-            "DynamicRange"
-          ],
-          "x-ms-enum": {
-            "name": "TeradataPartitionOption",
-            "modelAsString": true
-          }
+          "description": "The partition mechanism that will be used for teradata read in parallel. Possible values include: \"None\", \"Hash\", \"DynamicRange\".",
+          "type": "object"
         },
         "partitionSettings": {
           "description": "The settings that will be leveraged for teradata source partitioning.",
@@ -3438,17 +3386,8 @@
           "description": "A query to retrieve data from source. Type: string (or Expression with resultType string)."
         },
         "partitionOption": {
-          "description": "The partition mechanism that will be used for Netezza read in parallel.",
-          "type": "string",
-          "enum": [
-            "None",
-            "DataSlice",
-            "DynamicRange"
-          ],
-          "x-ms-enum": {
-            "name": "NetezzaPartitionOption",
-            "modelAsString": true
-          }
+          "description": "The partition mechanism that will be used for Netezza read in parallel. Possible values include: \"None\", \"DataSlice\", \"DynamicRange\".",
+          "type": "object"
         },
         "partitionSettings": {
           "description": "The settings that will be leveraged for Netezza source partitioning.",
@@ -5623,6 +5562,10 @@
         "retentionTimeInDays": {
           "type": "object",
           "description": "The retention time for the files submitted for custom activity. Type: double (or Expression with resultType double)."
+        },
+        "autoUserSpecification": {
+          "type": "object",
+          "description": "Elevation level and scope for the user, default is nonadmin task. Type: string (or Expression with resultType double)."
         }
       },
       "required": [
@@ -5890,24 +5833,28 @@
       "description": "Web activity authentication properties.",
       "properties": {
         "type": {
-          "description": "Web activity authentication (Basic/ClientCertificate/MSI)",
+          "description": "Web activity authentication (Basic/ClientCertificate/MSI/ServicePrincipal)",
           "type": "string"
         },
         "pfx": {
-          "description": "Base64-encoded contents of a PFX file.",
+          "description": "Base64-encoded contents of a PFX file or Certificate when used for ServicePrincipal",
           "$ref": "../datafactory.json#/definitions/SecretBase"
         },
         "username": {
-          "description": "Web activity authentication user name for basic authentication.",
+          "description": "Web activity authentication user name for basic authentication or ClientID when used for ServicePrincipal",
           "type": "string"
         },
         "password": {
-          "description": "Password for the PFX file or basic authentication.",
+          "description": "Password for the PFX file or basic authentication / Secret when used for ServicePrincipal",
           "$ref": "../datafactory.json#/definitions/SecretBase"
         },
         "resource": {
           "description": "Resource for which Azure Auth token will be requested when using MSI Authentication.",
           "type": "string"
+        },
+        "userTenant": {
+          "description": "TenantId for which Azure Auth token will be requested when using ServicePrincipal Authentication. Type: string (or Expression with resultType string).",
+          "type": "object"
         }
       },
       "required": [
@@ -6294,12 +6241,24 @@
           "description": "ID of the published Azure ML pipeline. Type: string (or Expression with resultType string).",
           "type": "object"
         },
+        "mlPipelineEndpointId": {
+          "description": "ID of the published Azure ML pipeline endpoint. Type: string (or Expression with resultType string).",
+          "type": "object"
+        },
+        "version": {
+          "description": "Version of the published Azure ML pipeline endpoint. Type: string (or Expression with resultType string).",
+          "type": "object"
+        },
         "experimentName": {
           "description": "Run history experiment name of the pipeline run. This information will be passed in the ExperimentName property of the published pipeline execution request. Type: string (or Expression with resultType string).",
           "type": "object"
         },
         "mlPipelineParameters": {
           "description": "Key,Value pairs to be passed to the published Azure ML pipeline endpoint. Keys must match the names of pipeline parameters defined in the published pipeline. Values will be passed in the ParameterAssignments property of the published pipeline execution request. Type: object with key value pairs (or Expression with resultType object).",
+          "type": "object"
+        },
+        "dataPathAssignments": {
+          "description": "Dictionary used for changing data path assignments without retraining. Values will be passed in the dataPathAssignments property of the published pipeline execution request. Type: object with key value pairs (or Expression with resultType object).",
           "type": "object"
         },
         "mlParentRunId": {
@@ -6310,13 +6269,18 @@
           "description": "Whether to continue execution of other steps in the PipelineRun if a step fails. This information will be passed in the continueOnStepFailure property of the published pipeline execution request. Type: boolean (or Expression with resultType boolean).",
           "type": "object"
         }
-      },
-      "required": [
-        "mlPipelineId"
-      ]
+      }
     },
     "AzureMLPipelineParameters": {
       "description": "Key,Value pairs to be passed to the published Azure ML pipeline endpoint. Keys must match the names of pipeline parameters defined in the published pipeline. Values will be passed in the ParameterAssignments property of the published pipeline execution request.",
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "description": "Type: string (or Expression with resultType string)."
+      }
+    },
+    "AzureDataPathAssignments": {
+      "description": "Dictionary used for changing data path assignments without retraining. Values will be passed in the dataPathAssignments property of the published pipeline execution request.",
       "type": "object",
       "additionalProperties": {
         "type": "object",
@@ -6964,6 +6928,87 @@
           "type": "object",
           "description": "The wait time to get a response from SharePoint Online. Default value is 5 minutes (00:05:00). Type: string (or Expression with resultType string), pattern: ((\\d+)\\.)?(\\d\\d):(60|([0-5][0-9])):(60|([0-5][0-9]))."
         }
+      }
+    },
+    "SqlPartitionOption": {
+      "description": "The partition mechanism that will be used for Sql read in parallel.",
+      "type": "string",
+      "enum": [
+        "None",
+        "PhysicalPartitionsOfTable",
+        "DynamicRange"
+      ],
+      "x-ms-enum": {
+        "name": "SqlPartitionOption",
+        "modelAsString": true
+      }
+    },
+    "SapHanaPartitionOption": {
+      "description": "The partition mechanism that will be used for SAP HANA read in parallel.",
+      "type": "string",
+      "enum": [
+        "None",
+        "PhysicalPartitionsOfTable",
+        "SapHanaDynamicRange"
+      ],
+      "x-ms-enum": {
+        "name": "SapHanaPartitionOption",
+        "modelAsString": true
+      }
+    },
+    "SapTablePartitionOption": {
+      "description": "The partition mechanism that will be used for SAP table read in parallel.",
+      "type": "string",
+      "enum": [
+        "None",
+        "PartitionOnInt",
+        "PartitionOnCalendarYear",
+        "PartitionOnCalendarMonth",
+        "PartitionOnCalendarDate",
+        "PartitionOnTime"
+      ],
+      "x-ms-enum": {
+        "name": "SapTablePartitionOption",
+        "modelAsString": true
+      }
+    },
+    "OraclePartitionOption": {
+      "description": "The partition mechanism that will be used for Oracle read in parallel.",
+      "type": "string",
+      "enum": [
+        "None",
+        "PhysicalPartitionsOfTable",
+        "DynamicRange"
+      ],
+      "x-ms-enum": {
+        "name": "OraclePartitionOption",
+        "modelAsString": true
+      }
+    },
+    "TeradataPartitionOption": {
+      "description": "The partition mechanism that will be used for teradata read in parallel.",
+      "type": "string",
+      "enum": [
+        "None",
+        "Hash",
+        "DynamicRange"
+      ],
+      "x-ms-enum": {
+        "name": "TeradataPartitionOption",
+        "modelAsString": true
+      }
+    },
+    "NetezzaPartitionOption": {
+      "description": "The partition mechanism that will be used for Netezza read in parallel.",
+      "type": "string",
+      "enum": [
+        "None",
+        "DataSlice",
+        "DynamicRange"
+      ],
+      "x-ms-enum": {
+        "name": "NetezzaPartitionOption",
+        "modelAsString": true
       }
     }
   }

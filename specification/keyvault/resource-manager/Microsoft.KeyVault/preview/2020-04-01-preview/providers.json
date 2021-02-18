@@ -34,6 +34,12 @@
             "schema": {
               "$ref": "#/definitions/OperationListResult"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "common.json#/definitions/CloudError"
+            }
           }
         },
         "x-ms-pageable": {
@@ -108,6 +114,10 @@
           "x-ms-client-flatten": true,
           "x-ms-client-name": "OperationProperties",
           "$ref": "#/definitions/OperationProperties"
+        },
+        "isDataAction": {
+          "type": "boolean",
+          "description": "Property to specify whether the action is a data action."
         }
       }
     },
@@ -129,6 +139,13 @@
           "items": {
             "$ref": "#/definitions/LogSpecification"
           }
+        },
+        "metricSpecifications": {
+          "description": "Metric specifications of operation.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MetricSpecification"
+          }
         }
       }
     },
@@ -146,6 +163,81 @@
         "blobDuration": {
           "type": "string",
           "description": "Blob duration of specification."
+        }
+      }
+    },
+    "MetricSpecification": {
+      "description": "Metric specification of operation.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of metric specification."
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Display name of Metric specification."
+        },
+        "displayDescription": {
+          "type": "string",
+          "description": "Display description of Metric specification."
+        },
+        "unit": {
+          "type": "string",
+          "description": "The metric unit. Possible values include: 'Bytes', 'Count', 'Milliseconds'."
+        },
+        "aggregationType": {
+          "type": "string",
+          "description": "The metric aggregation type. Possible values include: 'Average', 'Count', 'Total'."
+        },
+        "supportedAggregationTypes": {
+          "type": "array",
+          "description": "The supported aggregation types for the metrics.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "supportedTimeGrainTypes": {
+          "type": "array",
+          "description": "The supported time grain types for the metrics.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "lockAggregationType": {
+          "type": "string",
+          "description": "The metric lock aggregation type."
+        },
+        "dimensions": {
+          "type": "array",
+          "description": "The dimensions of metric.",
+          "items": {
+            "$ref": "#/definitions/DimensionProperties"
+          }
+        },
+        "fillGapWithZero": {
+          "type": "boolean",
+          "description": "Property to specify whether to fill gap with zero."
+        },
+        "internalMetricName": {
+          "type": "string",
+          "description": "The internal metric name."
+        }
+      }
+    },
+    "DimensionProperties": {
+      "description": "Type of operation: get, read, delete, etc.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of dimension."
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Display name of dimension."
+        },
+        "toBeExportedForShoebox": {
+          "type": "boolean",
+          "description": "Property to specify whether the dimension should be exported for shoebox."
         }
       }
     }
