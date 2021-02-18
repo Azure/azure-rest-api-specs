@@ -143,6 +143,43 @@
             "$ref": "./examples/NetworkManagerDelete.json"
           }
         }
+      },
+      "patch": {
+        "tags": [
+          "NetworkManagers"
+        ],
+        "operationId": "NetworkManagers_PatchTags",
+        "description": "Patch a NetworkManager Tags.",
+        "parameters": [
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "./network.json#/definitions/TagsObject"
+            },
+            "description": "Parameters supplied to update network manager tags."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Updated - Returns information about the network manager.",
+            "schema": {
+              "$ref": "#/definitions/NetworkManager"
+            }
+          },
+          "default": {
+            "description": "Resource Provider error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NetworkManagesPatch": {
+            "$ref": "./examples/NetworkManagerPatch.json"
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkManagers/{networkManagerName}/commit": {
