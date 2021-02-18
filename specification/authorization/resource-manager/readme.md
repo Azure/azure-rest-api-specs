@@ -274,6 +274,15 @@ input-file:
 - Microsoft.Authorization/stable/2015-07-01/authorization-RoleAssignmentsCalls.json
 ```
 
+### Tag: package-2021-01-01-preview-only
+
+These settings apply only when `--tag=package-2021-01-01-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-01-01-preview-only'
+input-file:
+- Microsoft.Authorization/preview/2021-01-01-preview/authorization-RoleAssignmentApprovalCalls.json
+```
+
 ---
 
 # Code Generation
