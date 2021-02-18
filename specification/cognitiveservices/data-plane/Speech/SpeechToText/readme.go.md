@@ -5,7 +5,7 @@ These settings apply only when `--go` is specified on the command line.
 ``` yaml $(go)
 go:
   license-header: MICROSOFT_APACHE_NO_VERSION
-  namespace: authoring
+  namespace: speechtotext
   clear-output-folder: true
 ```
 
@@ -23,7 +23,7 @@ These settings apply only when `--tag=release_2_0 --go` is specified on the comm
 Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
 ``` yaml $(tag) == 'release_2_0' && $(go)
-output-folder: $(go-sdk-folder)/services/cognitiveservices/v2.0/speech/speechtotext/$(namespace)
+output-folder: $(go-sdk-folder)/services/cognitiveservices/v2.0/speech/$(namespace)
 ```
 
 ### Tag: release_3_0 and go
@@ -32,5 +32,5 @@ These settings apply only when `--tag=release_3_0 --go` is specified on the comm
 Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
 ``` yaml $(tag) == 'release_3_0' && $(go)
-output-folder: $(go-sdk-folder)/services/preview/cognitiveservices/v3.0/speech/speechtotext/$(namespace)
+output-folder: $(go-sdk-folder)/services/cognitiveservices/v3.0/speech/$(namespace)
 ```
