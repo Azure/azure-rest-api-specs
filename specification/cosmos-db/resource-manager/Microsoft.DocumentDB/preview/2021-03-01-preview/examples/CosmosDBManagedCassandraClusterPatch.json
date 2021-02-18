@@ -1,0 +1,37 @@
+{
+  "parameters": {
+    "subscriptionId": "subid",
+    "resourceGroupName": "cassandra-prod-rg",
+    "api-version": "2021-03-01-preview",
+    "clusterName": "cassandra-prod",
+    "body": {
+      "tags": {
+        "owner": "mike"
+      },
+      "properties": {
+        "externalSeedNodes": [
+          {
+            "ipAddress": "10.52.221.2"
+          },
+          {
+            "ipAddress": "10.52.221.3"
+          },
+          {
+            "ipAddress": "10.52.221.4"
+          }
+        ],
+        "externalGossipCertificates": [
+          {
+            "pem": "-----BEGIN CERTIFICATE-----\n...Base64 encoded certificate...\n-----END CERTIFICATE-----"
+          }
+        ],
+        "hoursBetweenBackups": 12,
+        "authenticationMethod": "None"
+      }
+    }
+  },
+  "responses": {
+    "202": {},
+    "200": {}
+  }
+}
