@@ -4,10 +4,10 @@
 
 This is the AutoRest configuration file for StorageImportExport.
 
-
-
 ---
+
 ## Getting Started
+
 To build the SDK for StorageImportExport, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
@@ -15,26 +15,36 @@ To build the SDK for StorageImportExport, simply [Install AutoRest](https://aka.
 To see additional help and options, run:
 
 > `autorest --help`
+
 ---
 
 ## Configuration
 
-
-
 ### Basic Information
+
 These are the global settings for the StorageImportExport API.
 
 ``` yaml
 openapi-type: arm
 tag: package-2016-11
 ```
-or 
+
+or
 
 ``` yaml
 openapi-type: arm
-tag: package-2020-08
+tag: package-preview-2021-01
 ```
 
+
+### Tag: package-preview-2021-01
+
+These settings apply only when `--tag=package-preview-2021-01` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2021-01'
+input-file:
+  - Microsoft.ImportExport/preview/2021-01-01/storageimportexport.json
+```
 ### Tag: package-2016-11
 
 These settings apply only when `--tag=package-2016-11` is specified on the command line.
@@ -54,6 +64,7 @@ input-file:
 ```
 
 ---
+
 # Code Generation
 
 ## Swagger to SDK
@@ -96,7 +107,8 @@ output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-storageimportexport
 batch:
   - tag: package-2016-11
 ```
-or 
+
+or
 
 ``` yaml $(java) && $(multiapi)
 batch:
@@ -129,9 +141,6 @@ regenerate-manager: true
 generate-interface: true
 ```
 
-
-
 ## AzureResourceSchema
 
 See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
-
