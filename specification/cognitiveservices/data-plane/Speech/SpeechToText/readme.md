@@ -21,6 +21,15 @@ These settings apply only when `--tag=release_2_0` is specified on the command l
 input-file: stable/v2.0/speechtotext.json
 ```
 
+AutoRest-Linter Suppressions
+
+``` yaml
+# Ignore autorest-linter issues that cannot be resolve without updates to the API implementation
+directive:
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    reason: Changing casing will break existing clients/consumers
+```
+
 ---
 
 ## SpeechToText 3.0
