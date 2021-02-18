@@ -1587,6 +1587,15 @@
           "readOnly": true,
           "$ref": "./network.json#/definitions/ProvisioningState",
           "description": "The provisioning state of the virtual network peering resource."
+        },
+        "doNotVerifyRemoteGateways": {
+          "type": "boolean",
+          "description": "If we need to verify the provisioning state of the remote gateway."
+        },
+        "resourceGuid": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The resourceGuid property of the Virtual Network Peering resource."
         }
       },
       "description": "Properties of the virtual network peering."
@@ -1634,6 +1643,10 @@
           "readOnly": true,
           "type": "string",
           "description": "A unique read-only string that changes whenever the resource is updated."
+        },
+        "type": {
+          "type": "string",
+          "description": "Resource type."
         }
       },
       "allOf": [
