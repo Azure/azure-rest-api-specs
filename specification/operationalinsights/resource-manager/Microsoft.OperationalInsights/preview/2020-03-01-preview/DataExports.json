@@ -1,0 +1,361 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Azure Log Analytics",
+    "description": "Azure Log Analytics API reference",
+    "version": "2020-03-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/dataExports": {
+      "get": {
+        "tags": [
+          "DataExport"
+        ],
+        "x-ms-examples": {
+          "DataExportGet": {
+            "$ref": "./examples/DataExportListByWorkspace.json"
+          }
+        },
+        "operationId": "DataExports_ListByWorkspace",
+        "description": "Lists the data export instances within a workspace.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK response definition.",
+            "schema": {
+              "$ref": "#/definitions/DataExportListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/DataExportErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/dataExports/{dataExportName}": {
+      "put": {
+        "tags": [
+          "DataExport"
+        ],
+        "x-ms-examples": {
+          "DataExportCreate": {
+            "$ref": "./examples/DataExportCreateOrUpdate.json"
+          }
+        },
+        "operationId": "DataExports_CreateOrUpdate",
+        "description": "Create or update a data export.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "name": "dataExportName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z][A-Za-z0-9-]+[A-Za-z0-9]$",
+            "minLength": 4,
+            "maxLength": 63,
+            "description": "The data export rule name."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DataExport"
+            },
+            "description": "The parameters required to create or update a data export."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK response definition.",
+            "schema": {
+              "$ref": "#/definitions/DataExport"
+            }
+          },
+          "201": {
+            "description": "Created response definition.",
+            "schema": {
+              "$ref": "#/definitions/DataExport"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/DataExportErrorResponse"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "DataExport"
+        ],
+        "x-ms-examples": {
+          "DataExportGet": {
+            "$ref": "./examples/DataExportGet.json"
+          }
+        },
+        "operationId": "DataExports_Get",
+        "description": "Gets a data export instance.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "name": "dataExportName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The data export rule name."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK response definition.",
+            "schema": {
+              "$ref": "#/definitions/DataExport"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/DataExportErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "DataExport"
+        ],
+        "x-ms-examples": {
+          "DataExportDelete": {
+            "$ref": "./examples/DataExportDelete.json"
+          }
+        },
+        "operationId": "DataExports_Delete",
+        "description": "Deletes the specified data export in a given workspace..",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "name": "dataExportName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The data export rule name."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK response definition."
+          },
+          "404": {
+            "description": "Not found the specific data export."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/DataExportErrorResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "DataExport": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/DataExportProperties",
+          "description": "data export properties."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "description": "The top level data export resource container.",
+      "x-ms-azure-resource": true
+    },
+    "DataExportListResult": {
+      "description": "Result of the request to list data exports.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DataExport"
+          },
+          "description": "List of data export instances within a workspace.."
+        }
+      }
+    },
+    "DataExportProperties": {
+      "properties": {
+        "dataExportId": {
+          "type": "string",
+          "description": "The data export rule ID."
+        },
+        "allTables": {
+          "type": "boolean",
+          "description": "When ‘true’, all workspace's tables are exported."
+        },
+        "tableNames": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "An array of tables to export, for example: [“Heartbeat, SecurityEvent”]."
+        },
+        "destination": {
+          "$ref": "#/definitions/Destination",
+          "description": "destination properties.",
+          "x-ms-client-flatten": true
+        },
+        "enable": {
+          "type": "boolean",
+          "description": "Active when enabled."
+        },
+        "createdDate": {
+          "type": "string",
+          "description": "The latest data export rule modification time."
+        },
+        "lastModifiedDate": {
+          "type": "string",
+          "description": "Date and time when the export was last modified."
+        }
+      },
+      "description": "Data Export properties."
+    },
+    "Destination": {
+      "properties": {
+        "resourceId": {
+          "type": "string",
+          "description": "The destination resource ID. This can be copied from the Properties entry of the destination resource in Azure."
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The type of the destination resource",
+          "enum": [
+            "StorageAccount",
+            "EventHub"
+          ],
+          "x-ms-enum": {
+            "name": "type",
+            "modelAsString": true
+          }
+        },
+        "metaData": {
+          "$ref": "#/definitions/DestinationMetaData",
+          "description": "destination meta data.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "required": [
+        "resourceId"
+      ],
+      "description": "Destination properties."
+    },
+    "DestinationMetaData": {
+      "properties": {
+        "eventHubName": {
+          "type": "string",
+          "description": "Optional. Allows to define an Event Hub name. Not applicable when destination is Storage Account."
+        }
+      },
+      "description": "Destination meta data."
+    },
+    "DataExportErrorResponse": {
+      "description": "Error response indicates that the service is not able to process the incoming request. The reason is provided in the error message.",
+      "type": "object",
+      "properties": {
+        "error": {
+          "description": "The details of the error.",
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse"
+        }
+      }
+    }
+  },
+  "parameters": {}
+}

@@ -1,0 +1,755 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2020-01-01",
+    "title": "MarketplaceManagementClient",
+    "description": "REST APIs for Azure Marketplace"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "paths": {
+    "/providers/Microsoft.Marketplace/privateStores/{privateStoreId}/offers": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/PrivateStoreIdParameter"
+        },
+        {
+          "$ref": "#/parameters/ApiVersionParameter"
+        }
+      ],
+      "get": {
+        "tags": [
+          "PrivateStores"
+        ],
+        "operationId": "PrivateStoreOffers_List",
+        "description": "Get a list of all private offers in the given private store",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/OfferListResponse"
+            }
+          },
+          "default": {
+            "description": "Microsoft.Marketplace error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "GetPrivateStoreOffers": {
+            "$ref": "./examples/GetPrivateStoreOffers.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Marketplace/privateStores/{privateStoreId}/offers": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "#/parameters/PrivateStoreIdParameter"
+        },
+        {
+          "$ref": "#/parameters/ApiVersionParameter"
+        }
+      ],
+      "get": {
+        "tags": [
+          "PrivateStores"
+        ],
+        "operationId": "PrivateStorePrivateOffers_List",
+        "description": "Get a list of all private offers in the given private store",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/OfferListResponse"
+            }
+          },
+          "default": {
+            "description": "Microsoft.Marketplace error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "GetPrivateStoreOffers": {
+            "$ref": "./examples/GetPrivateStorePrivateOffers.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Marketplace/privateStores/{privateStoreId}/offers/{offerId}": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/PrivateStoreIdParameter"
+        },
+        {
+          "$ref": "#/parameters/OfferIdPathParameter"
+        },
+        {
+          "$ref": "#/parameters/ApiVersionParameter"
+        }
+      ],
+      "delete": {
+        "tags": [
+          "PrivateStores"
+        ],
+        "operationId": "PrivateStoreOffer_Delete",
+        "description": "Deletes an offer from the given private store.",
+        "responses": {
+          "200": {
+            "description": "Offer was deleted successfully"
+          },
+          "default": {
+            "description": "Microsoft.Marketplace error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DeletePrivateStoreOffer": {
+            "$ref": "./examples/DeletePrivateStoreOffer.json"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "PrivateStores"
+        ],
+        "operationId": "PrivateStoreOffer_Get",
+        "description": "Gets information about a specific offer.",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Offer information retrieved",
+            "schema": {
+              "$ref": "#/definitions/Offer"
+            }
+          },
+          "default": {
+            "description": "Microsoft.Marketplace error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetPrivateStoreOffer": {
+            "$ref": "./examples/GetPrivateStoreOffer.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "PrivateStores"
+        ],
+        "operationId": "PrivateStoreOffer_CreateOrUpdate",
+        "description": "Update or add an offer to the default collection of the private store.",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "payload",
+            "schema": {
+              "$ref": "#/definitions/Offer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Offer"
+            }
+          },
+          "default": {
+            "description": "Microsoft.Marketplace error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "UpdatePrivateStoreOffer": {
+            "$ref": "./examples/UpdatePrivateStoreOffer.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Marketplace/privateStores/{privateStoreId}/offers/{offerId}": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "#/parameters/PrivateStoreIdParameter"
+        },
+        {
+          "$ref": "#/parameters/OfferIdPathParameter"
+        },
+        {
+          "$ref": "#/parameters/ApiVersionParameter"
+        }
+      ],
+      "get": {
+        "tags": [
+          "PrivateStores"
+        ],
+        "operationId": "PrivateStorePrivateOffer_Get",
+        "description": "Gets information about a specific private offer.",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Private offer information retrieved",
+            "schema": {
+              "$ref": "#/definitions/Offer"
+            }
+          },
+          "default": {
+            "description": "Microsoft.Marketplace error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetPrivateStoreOffer": {
+            "$ref": "./examples/GetPrivateStorePrivateOffer.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "PrivateStores"
+        ],
+        "operationId": "PrivateStorePrivateOffer_CreateOrUpdate",
+        "description": "Update or add a private offer to the default collection of the private store.",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "payload",
+            "schema": {
+              "$ref": "#/definitions/Offer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Offer"
+            }
+          },
+          "default": {
+            "description": "Microsoft.Marketplace error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "UpdatePrivateStoreOffer": {
+            "$ref": "./examples/UpdatePrivateStorePrivateOffer.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Marketplace/privateStores": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/ApiVersionParameter"
+        },
+        {
+          "$ref": "#/parameters/UseCacheParameter"
+        }
+      ],
+      "get": {
+        "tags": [
+          "PrivateStores"
+        ],
+        "operationId": "PrivateStore_List",
+        "description": "Gets the list of available private stores",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PrivateStoreList"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "GetPrivateStores": {
+            "$ref": "./examples/GetPrivateStores.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Marketplace/privateStores/{privateStoreId}": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/PrivateStoreIdParameter"
+        },
+        {
+          "$ref": "#/parameters/ApiVersionParameter"
+        }
+      ],
+      "get": {
+        "tags": [
+          "PrivateStores"
+        ],
+        "operationId": "PrivateStore_Get",
+        "description": "Get information about the private store",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PrivateStore"
+            }
+          },
+          "default": {
+            "description": "Microsoft.Marketplace error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetPrivateStore": {
+            "$ref": "./examples/GetPrivateStore.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "PrivateStores"
+        ],
+        "operationId": "PrivateStore_Delete",
+        "description": "Deletes the private store. All that is not saved will be lost.",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Private store was deleted successfully ."
+          },
+          "default": {
+            "description": "Microsoft.Marketplace error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DeletePrivateStores": {
+            "$ref": "./examples/DeletePrivateStore.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "PrivateStores"
+        ],
+        "operationId": "PrivateStore_CreateOrUpdate",
+        "description": "Changes private store properties",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "payload",
+            "schema": {
+              "$ref": "#/definitions/PrivateStore"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Change successful"
+          },
+          "default": {
+            "description": "Microsoft.Marketplace error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "UpdatePrivateStores": {
+            "$ref": "./examples/UpdatePrivateStore.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Marketplace/operations": {
+      "get": {
+        "tags": [
+          "Operations"
+        ],
+        "description": "Lists all of the available Microsoft.Marketplace REST API operations.",
+        "operationId": "Operations_List",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "Microsoft.Marketplace error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "PrivateStoreIdParameter": {
+      "name": "privateStoreId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "description": "The store ID - must use the tenant ID"
+    },
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "The API version to use for the request."
+    },
+    "OfferIdPathParameter": {
+      "in": "path",
+      "name": "offerId",
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "required": true,
+      "description": "The offer ID to update or delete"
+    },
+    "UseCacheParameter": {
+      "name": "use-cache",
+      "in": "query",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "description": "Determines if to use cache or DB for serving this request"
+    },
+    "SubscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "required": true,
+      "description": "Subscription id of the private offers"
+    }
+  },
+  "definitions": {
+    "ErrorResponse": {
+      "description": "Error response indicates Microsoft.Marketplace service is not able to process the incoming request. The reason is provided in the error message.",
+      "type": "object",
+      "properties": {
+        "error": {
+          "description": "The details of the error.",
+          "properties": {
+            "code": {
+              "description": "Error code.",
+              "type": "string",
+              "readOnly": true
+            },
+            "message": {
+              "description": "Error message indicating why the operation failed.",
+              "type": "string",
+              "readOnly": true
+            }
+          }
+        }
+      }
+    },
+    "PrivateStoreList": {
+      "description": "Describes the json payload for the list of available private stores (between zero and one, inclusive)",
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PrivateStore"
+          }
+        },
+        "nextLink": {
+          "description": "URL to get the next set of PrivateStore list results if there are any.",
+          "type": "string"
+        }
+      }
+    },
+    "PrivateStore": {
+      "description": "The PrivateStore data structure.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PrivateStoreProperties",
+          "description": "The PrivateStore data structure.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "PrivateStoreProperties": {
+      "description": "Describes the json payload on whether or not the private store is enabled for a given tenant",
+      "type": "object",
+      "properties": {
+        "availability": {
+          "description": "Indicates private store availability",
+          "type": "string",
+          "enum": [
+            "enabled",
+            "disabled"
+          ],
+          "x-ms-enum": {
+            "name": "Availability",
+            "modelAsString": true
+          }
+        },
+        "privateStoreId": {
+          "description": "Private Store id",
+          "type": "string"
+        },
+        "eTag": {
+          "description": "Identifier for purposes of race condition",
+          "type": "string"
+        }
+      }
+    },
+    "OfferListResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Offer"
+          }
+        },
+        "nextLink": {
+          "description": "URL to get the next set of offer list results if there are any.",
+          "type": "string"
+        }
+      }
+    },
+    "Offer": {
+      "description": "The privateStore offer data structure.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/OfferProperties",
+          "description": "The privateStore offer data structure.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "OfferProperties": {
+      "type": "object",
+      "properties": {
+        "uniqueOfferId": {
+          "description": "Offers unique id",
+          "type": "string",
+          "readOnly": true
+        },
+        "offerDisplayName": {
+          "description": "It will be displayed prominently in the marketplace",
+          "type": "string",
+          "readOnly": true
+        },
+        "publisherDisplayName": {
+          "description": "Publisher name that will be displayed prominently in the marketplace",
+          "type": "string",
+          "readOnly": true
+        },
+        "eTag": {
+          "description": "Identifier for purposes of race condition",
+          "type": "string"
+        },
+        "privateStoreId": {
+          "readOnly": true,
+          "description": "Private store unique id",
+          "type": "string"
+        },
+        "createdBy": {
+          "readOnly": true,
+          "description": "Private store offer creator name",
+          "type": "string"
+        },
+        "createdDate": {
+          "readOnly": true,
+          "description": "Private store offer created date",
+          "type": "string"
+        },
+        "specificPlanIdsLimitation": {
+          "description": "Plan ids limitation for this offer",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "Plan": {
+      "type": "object",
+      "properties": {
+        "skuId": {
+          "description": "Identifier for this plan",
+          "type": "string",
+          "readOnly": true
+        },
+        "planId": {
+          "description": "Text identifier for this plan",
+          "type": "string",
+          "readOnly": true
+        },
+        "planDisplayName": {
+          "description": "Friendly name for the plan for display in the marketplace",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "Operation": {
+      "description": "Microsoft.Marketplace REST API operation",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Operation name: {provider}/{resource}/{operation}",
+          "type": "string"
+        },
+        "display": {
+          "description": "The object that represents the operation.",
+          "properties": {
+            "provider": {
+              "description": "Service provider: Microsoft.Marketplace",
+              "type": "string"
+            },
+            "resource": {
+              "description": "Resource on which the operation is performed: Amendments",
+              "type": "string"
+            },
+            "operation": {
+              "description": "Operation type: Get Amendments etc.",
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "OperationListResult": {
+      "description": "Result of the request to list Marketplace operations. It contains a list of operations and a URL link to get the next set of results.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Operation"
+          },
+          "description": "List of Microsoft.Marketplace operations supported by the Microsoft.Marketplace resource provider."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "URL to get the next set of operation list results if there are any.",
+          "readOnly": true
+        }
+      }
+    },
+    "Resource": {
+      "description": "An Azure resource.",
+      "properties": {
+        "id": {
+          "description": "The resource ID.",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "The name of the resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "The type of the resource.",
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "x-ms-azure-resource": true
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  }
+}

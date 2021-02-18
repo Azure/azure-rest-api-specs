@@ -53,6 +53,9 @@ swagger-to-sdk:
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-ruby
+  - repo: azure-resource-manager-schemas
+    after_scripts:
+      - node sdkauto_afterscript.js privatedns/resource-manager
 ```
 
 ## C#
@@ -103,7 +106,7 @@ Please also specify `--azure-libraries-for-java-folder=<path to the root directo
 ``` yaml $(tag) == 'package-2018-09' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.privatedns.v2018_09_01
-  output-folder: $(azure-libraries-for-java-folder)/privatedns/resource-manager/v2018_09_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/privatedns/mgmt-v2018_09_01
 regenerate-manager: true
 generate-interface: true
 fconfig: '{"moduleName": "privatedns"}'
@@ -134,6 +137,10 @@ directive:
     suppress: DescriptionAndTitleMissing
     reason: Common types warning.
 ```
+
+## AzureResourceSchema
+
+See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
 
 ## Multi-API/Profile support for AutoRest v3 generators 
 

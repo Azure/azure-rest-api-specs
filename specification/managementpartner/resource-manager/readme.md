@@ -23,7 +23,7 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 ``` yaml $(tag) == 'package-2018-02' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.managementpartner.v2018_02_01
-  output-folder: $(azure-libraries-for-java-folder)/managementpartner/resource-manager/v2018_02_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/managementpartner/mgmt-v2018_02_01
 regenerate-manager: true
 generate-interface: true
 ```
@@ -76,6 +76,9 @@ swagger-to-sdk:
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
+  - repo: azure-resource-manager-schemas
+    after_scripts:
+      - node sdkauto_afterscript.js managementpartner/resource-manager
 ```
 
 ## C#
@@ -95,6 +98,10 @@ csharp:
 ## Go
 
 See configuration in [readme.go.md](./readme.go.md)
+
+## AzureResourceSchema
+
+See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
 
 ## Multi-API/Profile support for AutoRest v3 generators 
 

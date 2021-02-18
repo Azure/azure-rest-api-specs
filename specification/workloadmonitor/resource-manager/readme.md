@@ -59,6 +59,9 @@ swagger-to-sdk:
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-node
+  - repo: azure-resource-manager-schemas
+    after_scripts:
+      - node sdkauto_afterscript.js workloadmonitor/resource-manager
 ```
 
 
@@ -161,10 +164,14 @@ Please also specify `--azure-libraries-for-java-folder=<path to the root directo
 ``` yaml $(tag) == 'package-2018-08-31-preview' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.workloadmonitor.v2018_08_31_preview
-  output-folder: $(azure-libraries-for-java-folder)/workloadmonitor/resource-manager/v2018_08_31_preview
+  output-folder: $(azure-libraries-for-java-folder)/sdk/workloadmonitor/mgmt-v2018_08_31_preview
 regenerate-manager: true
 generate-interface: true
 ```
+
+## AzureResourceSchema
+
+See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
 
 ## Multi-API/Profile support for AutoRest v3 generators 
 

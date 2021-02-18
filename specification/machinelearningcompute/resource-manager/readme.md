@@ -67,6 +67,9 @@ swagger-to-sdk:
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
+  - repo: azure-resource-manager-schemas
+    after_scripts:
+      - node sdkauto_afterscript.js machinelearningcompute/resource-manager
 ```
 
 
@@ -117,12 +120,16 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 ``` yaml $(tag) == 'package-2017-08-preview' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.machinelearningcompute.v2017_08_01_preview
-  output-folder: $(azure-libraries-for-java-folder)/machinelearningcompute/resource-manager/v2017_08_01_preview
+  output-folder: $(azure-libraries-for-java-folder)/sdk/machinelearningcompute/mgmt-v2017_08_01_preview
 regenerate-manager: true
 generate-interface: true
 ```
 
 
+
+## AzureResourceSchema
+
+See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
 
 ## Multi-API/Profile support for AutoRest v3 generators 
 

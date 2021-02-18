@@ -75,6 +75,9 @@ swagger-to-sdk:
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
+  - repo: azure-resource-manager-schemas
+    after_scripts:
+      - node sdkauto_afterscript.js azurestack/resource-manager
 ```
 
 ## C#
@@ -126,12 +129,19 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 ``` yaml $(tag) == 'package-2017-06-01' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.azurestack.v2017_06_01
-  output-folder: $(azure-libraries-for-java-folder)/azurestack/resource-manager/v2017_06_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/azurestack/mgmt-v2017_06_01
 regenerate-manager: true
 generate-interface: true
 ```
 
+## Python
 
+See configuration in [readme.python.md](./readme.python.md)
+
+
+## AzureResourceSchema
+
+See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
 
 ## Multi-API/Profile support for AutoRest v3 generators 
 

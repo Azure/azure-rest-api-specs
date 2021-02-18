@@ -1,0 +1,624 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "KeyVaultManagementClient",
+    "description": "The Azure management API provides a RESTful set of web services that interact with Azure Key Vault.",
+    "version": "2020-04-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.KeyVault/managedHSMs/{name}": {
+      "put": {
+        "tags": [
+          "ManagedHsms"
+        ],
+        "operationId": "ManagedHsms_CreateOrUpdate",
+        "x-ms-long-running-operation": true,
+        "description": "Create or update a managed HSM Pool in the specified subscription.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ManagedHsmResourceGroupName"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]{3,24}$",
+            "description": "Name of the managed HSM Pool"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ManagedHsm"
+            },
+            "description": "Parameters to create or update the managed HSM Pool"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted and the operation will complete asynchronously.",
+            "schema": {
+              "$ref": "#/definitions/ManagedHsm"
+            }
+          },
+          "200": {
+            "description": "Created or updated managed HSM Pool",
+            "schema": {
+              "$ref": "#/definitions/ManagedHsm"
+            }
+          },
+          "default": {
+            "description": "The error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ManagedHsmError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create a new managed HSM Pool or update an existing managed HSM Pool": {
+            "$ref": "./examples/ManagedHsm_CreateOrUpdate.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "ManagedHsms"
+        ],
+        "operationId": "ManagedHsms_Update",
+        "x-ms-long-running-operation": true,
+        "description": "Update a managed HSM Pool in the specified subscription.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ManagedHsmResourceGroupName"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]{3,24}$",
+            "description": "Name of the managed HSM Pool"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ManagedHsm"
+            },
+            "description": "Parameters to patch the managed HSM Pool"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted and the operation will complete asynchronously.",
+            "schema": {
+              "$ref": "#/definitions/ManagedHsm"
+            }
+          },
+          "200": {
+            "description": "Patched managed HSM Pool",
+            "schema": {
+              "$ref": "#/definitions/ManagedHsm"
+            }
+          },
+          "default": {
+            "description": "The error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ManagedHsmError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update an existing managed HSM Pool": {
+            "$ref": "./examples/ManagedHsm_Update.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "ManagedHsms"
+        ],
+        "operationId": "ManagedHsms_Delete",
+        "description": "Deletes the specified managed HSM Pool.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ManagedHsmResourceGroupName"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the managed HSM Pool to delete"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Request successful. Resource does not exist."
+          },
+          "202": {
+            "description": "Accepted and the operation will complete asynchronously."
+          },
+          "200": {
+            "description": "Delete successful."
+          },
+          "default": {
+            "description": "The error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ManagedHsmError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete a managed HSM Pool": {
+            "$ref": "./examples/ManagedHsm_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "get": {
+        "tags": [
+          "ManagedHsms"
+        ],
+        "operationId": "ManagedHsms_Get",
+        "description": "Gets the specified managed HSM Pool.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ManagedHsmResourceGroupName"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the managed HSM Pool."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved managed HSM Pool",
+            "schema": {
+              "$ref": "#/definitions/ManagedHsm"
+            }
+          },
+          "default": {
+            "description": "The error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ManagedHsmError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Retrieve a managed HSM Pool": {
+            "$ref": "./examples/ManagedHsm_Get.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.KeyVault/managedHSMs": {
+      "get": {
+        "tags": [
+          "ManagedHsms"
+        ],
+        "operationId": "ManagedHsms_ListByResourceGroup",
+        "description": "The List operation gets information about the managed HSM Pools associated with the subscription and within the specified resource group.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ManagedHsmResourceGroupName"
+          },
+          {
+            "name": "$top",
+            "in": "query",
+            "type": "integer",
+            "format": "int32",
+            "description": "Maximum number of results to return."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get information about all managed HSM Pools in the specified resource group.",
+            "schema": {
+              "$ref": "#/definitions/ManagedHsmListResult"
+            }
+          },
+          "default": {
+            "description": "The error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ManagedHsmError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List managed HSM Pools in a resource group": {
+            "$ref": "./examples/ManagedHsm_ListByResourceGroup.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.KeyVault/managedHSMs": {
+      "get": {
+        "tags": [
+          "ManagedHsms"
+        ],
+        "operationId": "ManagedHsms_ListBySubscription",
+        "description": "The List operation gets information about the managed HSM Pools associated with the subscription.",
+        "parameters": [
+          {
+            "name": "$top",
+            "in": "query",
+            "type": "integer",
+            "format": "int32",
+            "description": "Maximum number of results to return."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get information about all managed HSM Pools in the specified subscription.",
+            "schema": {
+              "$ref": "#/definitions/ManagedHsmListResult"
+            }
+          },
+          "default": {
+            "description": "The error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ManagedHsmError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List managed HSM Pools in a subscription": {
+            "$ref": "./examples/ManagedHsm_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ManagedHsmSku": {
+      "properties": {
+        "family": {
+          "type": "string",
+          "description": "SKU Family of the managed HSM Pool",
+          "enum": [
+            "B"
+          ],
+          "x-ms-enum": {
+            "name": "ManagedHsmSkuFamily",
+            "modelAsString": true
+          }
+        },
+        "name": {
+          "type": "string",
+          "description": "SKU of the managed HSM Pool",
+          "enum": [
+            "Standard_B1",
+            "Custom_B32"
+          ],
+          "x-ms-enum": {
+            "name": "ManagedHsmSkuName",
+            "modelAsString": false
+          }
+        }
+      },
+      "description": "SKU details",
+      "required": [
+        "name",
+        "family"
+      ]
+    },
+    "ManagedHsmProperties": {
+      "properties": {
+        "tenantId": {
+          "type": "string",
+          "format": "uuid",
+          "description": "The Azure Active Directory tenant ID that should be used for authenticating requests to the managed HSM pool."
+        },
+        "initialAdminObjectIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Array of initial administrators object ids for this managed hsm pool."
+        },
+        "hsmPoolUri": {
+          "type": "string",
+          "description": "The URI of the managed hsm pool for performing operations on keys."
+        },
+        "enableSoftDelete": {
+          "type": "boolean",
+          "default": true,
+          "description": "Property to specify whether the 'soft delete' functionality is enabled for this managed HSM pool. If it's not set to any value(true or false) when creating new managed HSM pool, it will be set to true by default. Once set to true, it cannot be reverted to false."
+        },
+        "softDeleteRetentionInDays": {
+          "type": "integer",
+          "format": "int32",
+          "default": 90,
+          "description": "softDelete data retention days. It accepts >=7 and <=90."
+        },
+        "enablePurgeProtection": {
+          "type": "boolean",
+          "description": "Property specifying whether protection against purge is enabled for this managed HSM pool. Setting this property to true activates protection against purge for this managed HSM pool and its content - only the Managed HSM service may initiate a hard, irrecoverable deletion. The setting is effective only if soft delete is also enabled. Enabling this functionality is irreversible."
+        },
+        "createMode": {
+          "type": "string",
+          "description": "The create mode to indicate whether the resource is being created or is being recovered from a deleted resource.",
+          "enum": [
+            "recover",
+            "default"
+          ],
+          "x-ms-enum": {
+            "name": "CreateMode",
+            "modelAsString": false,
+            "values": [
+              {
+                "value": "recover",
+                "description": "Recover the managed HSM pool from a soft-deleted resource."
+              },
+              {
+                "value": "default",
+                "description": "Create a new managed HSM pool. This is the default option."
+              }
+            ]
+          }
+        },
+        "statusMessage": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource Status Message."
+        },
+        "provisioningState": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Provisioning state.",
+          "enum": [
+            "Succeeded",
+            "Provisioning",
+            "Failed",
+            "Updating",
+            "Deleting",
+            "Activated",
+            "SecurityDomainRestore",
+            "Restoring"
+          ],
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Succeeded",
+                "description": "The managed HSM Pool has been full provisioned."
+              },
+              {
+                "value": "Provisioning",
+                "description": "The managed HSM Pool is currently being provisioned."
+              },
+              {
+                "value": "Failed",
+                "description": "Provisioning of the managed HSM Pool has failed."
+              },
+              {
+                "value": "Updating",
+                "description": "The managed HSM Pool is currently being updated."
+              },
+              {
+                "value": "Deleting",
+                "description": "The managed HSM Pool is currently being deleted."
+              },
+              {
+                "value": "Activated",
+                "description": "The managed HSM pool is ready for normal use."
+              },
+              {
+                "value": "SecurityDomainRestore",
+                "description": "The managed HSM pool is waiting for a security domain restore action."
+              },
+              {
+                "value": "Restoring",
+                "description": "The managed HSM pool is being restored from full HSM backup."
+              }
+            ]
+          }
+        }
+      },
+      "description": "Properties of the managed HSM Pool"
+    },
+    "ManagedHsm": {
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ManagedHsmProperties",
+          "description": "Properties of the managed HSM"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ManagedHsmResource"
+        }
+      ],
+      "description": "Resource information with extended details."
+    },
+    "ManagedHsmResource": {
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The Azure Resource Manager resource ID for the managed HSM Pool."
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The name of the managed HSM Pool."
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The resource type of the managed HSM Pool."
+        },
+        "location": {
+          "type": "string",
+          "description": "The supported Azure location where the managed HSM Pool should be created.",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "sku": {
+          "$ref": "#/definitions/ManagedHsmSku",
+          "description": "SKU details"
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags"
+        }
+      },
+      "description": "Managed HSM resource",
+      "x-ms-azure-resource": true
+    },
+    "ManagedHsmListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ManagedHsm"
+          },
+          "description": "The list of managed HSM Pools."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URL to get the next set of managed HSM Pools."
+        }
+      },
+      "description": "List of managed HSM Pools"
+    },
+    "ManagedHsmError": {
+      "properties": {
+        "error": {
+          "readOnly": true,
+          "description": "The server error.",
+          "$ref": "#/definitions/Error"
+        }
+      },
+      "description": "The error exception."
+    },
+    "Error": {
+      "properties": {
+        "code": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The error code."
+        },
+        "message": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The error message."
+        },
+        "innererror": {
+          "x-ms-client-name": "innerError",
+          "readOnly": true,
+          "description": "The inner error, contains a more specific error code.",
+          "$ref": "#/definitions/Error"
+        }
+      },
+      "description": "The server error."
+    }
+  },
+  "parameters": {
+    "SubscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
+    },
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "Client Api Version."
+    },
+    "ManagedHsmResourceGroupName": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Name of the resource group that contains the managed HSM pool.",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

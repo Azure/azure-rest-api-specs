@@ -1,0 +1,97 @@
+{
+  "parameters": {
+    "api-version": "2017-04-01-preview",
+    "subscriptionId": "56b5e0a9-b645-407d-99b0-c64f86013e3d",
+    "resourceGroupName": "sjrg",
+    "jobName": "sj7094",
+    "outputName": "output7886",
+    "output": {
+      "properties": {
+        "datasource": {
+          "type": "Microsoft.ServiceBus/Topic",
+          "properties": {
+            "serviceBusNamespace": "sdktest",
+            "sharedAccessPolicyName": "RootManageSharedAccessKey",
+            "sharedAccessPolicyKey": "sharedAccessPolicyKey=",
+            "topicName": "sdktopic",
+            "propertyColumns": [
+              "column1",
+              "column2"
+            ]
+          }
+        },
+        "serialization": {
+          "type": "Csv",
+          "properties": {
+            "fieldDelimiter": ",",
+            "encoding": "UTF8"
+          }
+        }
+      }
+    }
+  },
+  "responses": {
+    "201": {
+      "headers": {
+        "ETag": "39259839-e581-4af4-bf68-302e6820e3a0"
+      },
+      "body": {
+        "id": "/subscriptions/56b5e0a9-b645-407d-99b0-c64f86013e3d/resourceGroups/sjrg/providers/Microsoft.StreamAnalytics/streamingjobs/sj7094/outputs/output7886",
+        "name": "output7886",
+        "type": "Microsoft.StreamAnalytics/streamingjobs/outputs",
+        "properties": {
+          "datasource": {
+            "type": "Microsoft.ServiceBus/Topic",
+            "properties": {
+              "topicName": "sdktopic",
+              "propertyColumns": [
+                "column1",
+                "column2"
+              ],
+              "serviceBusNamespace": "sdktest",
+              "sharedAccessPolicyName": "RootManageSharedAccessKey"
+            }
+          },
+          "serialization": {
+            "type": "Csv",
+            "properties": {
+              "fieldDelimiter": ",",
+              "encoding": "UTF8"
+            }
+          }
+        }
+      }
+    },
+    "200": {
+      "headers": {
+        "ETag": "39259839-e581-4af4-bf68-302e6820e3a0"
+      },
+      "body": {
+        "id": "/subscriptions/56b5e0a9-b645-407d-99b0-c64f86013e3d/resourceGroups/sjrg/providers/Microsoft.StreamAnalytics/streamingjobs/sj7094/outputs/output7886",
+        "name": "output7886",
+        "type": "Microsoft.StreamAnalytics/streamingjobs/outputs",
+        "properties": {
+          "datasource": {
+            "type": "Microsoft.ServiceBus/Topic",
+            "properties": {
+              "topicName": "sdktopic",
+              "propertyColumns": [
+                "column1",
+                "column2"
+              ],
+              "serviceBusNamespace": "sdktest",
+              "sharedAccessPolicyName": "RootManageSharedAccessKey"
+            }
+          },
+          "serialization": {
+            "type": "Csv",
+            "properties": {
+              "fieldDelimiter": ",",
+              "encoding": "UTF8"
+            }
+          }
+        }
+      }
+    }
+  }
+}

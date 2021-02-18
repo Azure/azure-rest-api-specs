@@ -43,6 +43,15 @@ input-file:
 - Microsoft.ManagedIdentity/preview/2015-08-31-preview/ManagedIdentity.json
 ```
 
+## Suppression
+``` yaml
+directive:
+  - suppress: TrackedResourcePatchOperation
+    from: ManagedIdentity.json
+    where: $.definitions.SystemAssignedIdentity
+    reason: The identity type exposed under any scope is not a tracked resource since it is an extension.
+```
+
 ---
 # Code Generation
 
@@ -63,6 +72,9 @@ swagger-to-sdk:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_msi']
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
+  - repo: azure-resource-manager-schemas
+    after_scripts:
+      - node sdkauto_afterscript.js msi/resource-manager
 ```
 
 
@@ -114,7 +126,7 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 ``` yaml $(tag) == 'package-2018-11-30' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.managedserviceidentity.v2018-11-30
-  output-folder: $(azure-libraries-for-java-folder)/managedserviceidentity/resource-manager/v2018-11-30
+  output-folder: $(azure-libraries-for-java-folder)/sdk/managedserviceidentity/mgmt-v2018-11-30
 regenerate-manager: true
 generate-interface: true
 ```
@@ -127,12 +139,16 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 ``` yaml $(tag) == 'package-2015-08-31-preview' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.managedserviceidentity.v2015_08_31_preview
-  output-folder: $(azure-libraries-for-java-folder)/managedserviceidentity/resource-manager/v2015_08_31_preview
+  output-folder: $(azure-libraries-for-java-folder)/sdk/managedserviceidentity/mgmt-v2015_08_31_preview
 regenerate-manager: true
 generate-interface: true
 ```
 
 
+
+## AzureResourceSchema
+
+See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
 
 ## Multi-API/Profile support for AutoRest v3 generators 
 

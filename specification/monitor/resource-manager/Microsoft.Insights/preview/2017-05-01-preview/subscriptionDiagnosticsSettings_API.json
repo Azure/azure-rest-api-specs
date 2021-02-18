@@ -1,0 +1,341 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "MonitorManagementClient",
+    "x-ms-code-generation-settings": {
+      "name": "MonitorManagementClient"
+    },
+    "version": "2017-05-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/microsoft.insights/diagnosticSettings/{name}": {
+      "get": {
+        "tags": [
+          "SubscriptionDiagnosticSettings"
+        ],
+        "operationId": "SubscriptionDiagnosticSettings_Get",
+        "description": "Gets the active subscription diagnostic settings for the specified resource.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/NameParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Successful request to get more information about diagnostic setting.",
+            "schema": {
+              "$ref": "#/definitions/SubscriptionDiagnosticSettingsResource"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Gets the subscription diagnostic setting": {
+            "$ref": "./examples/getSubscriptionDiagnosticSetting.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "SubscriptionDiagnosticSettings"
+        ],
+        "operationId": "SubscriptionDiagnosticSettings_CreateOrUpdate",
+        "description": "Creates or updates subscription diagnostic settings for the specified resource.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SubscriptionDiagnosticSettingsResource"
+            },
+            "description": "Parameters supplied to the operation."
+          },
+          {
+            "$ref": "#/parameters/NameParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Successful request to create a subscription diagnostic setting",
+            "schema": {
+              "$ref": "#/definitions/SubscriptionDiagnosticSettingsResource"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Creates or Updates the subscription diagnostic setting": {
+            "$ref": "./examples/createOrUpdateSubscriptionDiagnosticSetting.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "SubscriptionDiagnosticSettings"
+        ],
+        "operationId": "SubscriptionDiagnosticSettings_Delete",
+        "description": "Deletes existing subscription diagnostic settings for the specified resource.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/NameParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Successful request to remove a subscription diagnostic setting"
+          },
+          "204": {
+            "description": "Successful request to remove a subscription diagnostic setting"
+          }
+        },
+        "x-ms-examples": {
+          "Deletes the subscription diagnostic setting": {
+            "$ref": "./examples/deleteSubscriptionDiagnosticSetting.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/microsoft.insights/diagnosticSettings": {
+      "get": {
+        "tags": [
+          "SubscriptionDiagnosticSettings"
+        ],
+        "operationId": "SubscriptionDiagnosticSettings_List",
+        "description": "Gets the active subscription diagnostic settings list for the specified subscriptionId.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Successful request to get more information about subscription diagnostic setting",
+            "schema": {
+              "$ref": "#/definitions/SubscriptionDiagnosticSettingsResourceCollection"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Gets the subscription diagnostic setting": {
+            "$ref": "./examples/listSubscriptionDiagnosticSettings.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "SubscriptionProxyOnlyResource": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Azure resource Id"
+        },
+        "name": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Azure resource name"
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Azure resource type"
+        },
+        "location": {
+          "type": "string",
+          "description": "Location of the resource"
+        }
+      },
+      "x-ms-azure-resource": true,
+      "description": "A proxy only azure resource object"
+    },
+    "SubscriptionLogSettings": {
+      "properties": {
+        "category": {
+          "type": "string",
+          "description": "Name of a Subscription Diagnostic Log category for a resource type this setting is applied to."
+        },
+        "enabled": {
+          "type": "boolean",
+          "description": "a value indicating whether this log is enabled."
+        }
+      },
+      "required": [
+        "enabled"
+      ],
+      "description": "Part of Subscription diagnostic setting. Specifies the settings for a particular log."
+    },
+    "SubscriptionDiagnosticSettings": {
+      "properties": {
+        "storageAccountId": {
+          "type": "string",
+          "description": "The resource ID of the storage account to which you would like to send Diagnostic Logs."
+        },
+        "serviceBusRuleId": {
+          "type": "string",
+          "description": "The service bus rule Id of the diagnostic setting. This is here to maintain backwards compatibility."
+        },
+        "eventHubAuthorizationRuleId": {
+          "type": "string",
+          "description": "The resource Id for the event hub authorization rule."
+        },
+        "eventHubName": {
+          "type": "string",
+          "description": "The name of the event hub. If none is specified, the default event hub will be selected."
+        },
+        "logs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SubscriptionLogSettings"
+          },
+          "description": "The list of logs settings."
+        },
+        "workspaceId": {
+          "type": "string",
+          "description": "The full ARM resource ID of the Log Analytics workspace to which you would like to send Diagnostic Logs. Example: /subscriptions/4b9e8510-67ab-4e9a-95a9-e2f1e570ea9c/resourceGroups/insights-integration/providers/Microsoft.OperationalInsights/workspaces/viruela2"
+        }
+      },
+      "description": "The subscription diagnostic settings."
+    },
+    "SubscriptionDiagnosticSettingsResource": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SubscriptionProxyOnlyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/SubscriptionDiagnosticSettings",
+          "description": "Properties of a Subscription Diagnostic Settings Resource."
+        }
+      },
+      "description": "The subscription diagnostic setting resource."
+    },
+    "SubscriptionDiagnosticSettingsResourceCollection": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SubscriptionDiagnosticSettingsResource"
+          },
+          "description": "The collection of subscription diagnostic settings resources."
+        }
+      },
+      "description": "Represents a collection of subscription diagnostic settings resources."
+    },
+    "ErrorResponse": {
+      "description": "Describes the format of Error response.",
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "Error code",
+          "type": "string"
+        },
+        "message": {
+          "description": "Error message indicating why the operation failed.",
+          "type": "string"
+        }
+      }
+    }
+  },
+  "parameters": {
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "Client Api Version."
+    },
+    "SubscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The subscription id.",
+      "x-ms-parameter-location": "method",
+      "x-ms-skip-url-encoding": true
+    },
+    "NameParameter": {
+      "name": "name",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the diagnostic setting.",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

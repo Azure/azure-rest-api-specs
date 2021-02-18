@@ -84,6 +84,9 @@ swagger-to-sdk:
   - repo: azure-sdk-for-ruby
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_analysis_services']
+  - repo: azure-resource-manager-schemas
+    after_scripts:
+      - node sdkauto_afterscript.js analysisservices/resource-manager
 ```
 
 
@@ -137,7 +140,7 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 ``` yaml $(tag) == 'package-2016-05' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.analysisservices.v2016_05_16
-  output-folder: $(azure-libraries-for-java-folder)/analysisservices/resource-manager/v2016_05_16
+  output-folder: $(azure-libraries-for-java-folder)/sdk/analysisservices/mgmt-v2016_05_16
 regenerate-manager: true
 generate-interface: true
 ```
@@ -150,7 +153,7 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 ``` yaml $(tag) == 'package-2017-07' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.analysisservices.v2017_07_14
-  output-folder: $(azure-libraries-for-java-folder)/analysisservices/resource-manager/v2017_07_14
+  output-folder: $(azure-libraries-for-java-folder)/sdk/analysisservices/mgmt-v2017_07_14
 regenerate-manager: true
 generate-interface: true
 ```
@@ -163,7 +166,7 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 ``` yaml $(tag) == 'package-2017-08' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.analysisservices.v2017_08_01
-  output-folder: $(azure-libraries-for-java-folder)/analysisservices/resource-manager/v2017_08_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/analysisservices/mgmt-v2017_08_01
 regenerate-manager: true
 generate-interface: true
 ```
@@ -176,12 +179,16 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 ``` yaml $(tag) == 'package-2017-08-beta' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.analysisservices.v2017_08_01_beta
-  output-folder: $(azure-libraries-for-java-folder)/analysisservices/resource-manager/v2017_08_01_beta
+  output-folder: $(azure-libraries-for-java-folder)/sdk/analysisservices/mgmt-v2017_08_01_beta
 regenerate-manager: true
 generate-interface: true
 ```
 
 
+
+## AzureResourceSchema
+
+See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
 
 ## Multi-API/Profile support for AutoRest v3 generators 
 

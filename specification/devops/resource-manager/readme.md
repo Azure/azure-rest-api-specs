@@ -53,10 +53,15 @@ swagger-to-sdk:
   - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
+  - repo: azure-sdk-for-trenton
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-ruby
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_devops']
+  - repo: azure-cli-extensions
+  - repo: azure-resource-manager-schemas
+    after_scripts:
+      - node sdkauto_afterscript.js devops/resource-manager
 ```
 
 ## Go
@@ -78,6 +83,10 @@ See configuration in [readme.typescript.md](./readme.typescript.md)
 ## CSharp
 
 See configuration in [readme.csharp.md](./readme.csharp.md)
+
+## AzureResourceSchema
+
+See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
 
 ## Multi-API/Profile support for AutoRest v3 generators 
 
@@ -103,3 +112,17 @@ uncomment the  `exclude-file` section below and add the file paths.
 #  - $(this-folder)/Microsoft.Example/stable/2010-01-01/somefile.json
 ```
 
+## trenton
+
+These settings apply only when `--trenton` is specified on the command line.
+
+``` yaml $(trenton)
+trenton:
+    cli-name: devops
+    azure_arm: true
+    license_header: MICROSOFT_MIT_NO_VERSION
+    payload_flattening_threshold: 2
+    namespace: devops
+    package-name: devops
+    clear-output-folder: false
+```

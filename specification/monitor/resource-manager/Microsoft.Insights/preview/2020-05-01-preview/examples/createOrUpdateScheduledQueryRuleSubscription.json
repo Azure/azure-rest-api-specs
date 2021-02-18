@@ -1,0 +1,198 @@
+{
+  "parameters": {
+    "subscriptionId": "dd4bfc94-a096-412b-9c43-4bd13e35afbc",
+    "resourceGroupName": "QueryResourceGroupName",
+    "ruleName": "perf",
+    "api-version": "2020-05-01-preview",
+    "parameters": {
+      "location": "eastus",
+      "properties": {
+        "description": "Performance rule",
+        "severity": 4,
+        "enabled": true,
+        "evaluationFrequency": "PT5M",
+        "scopes": [
+          "/subscriptions/aaf177ed-1330-a9f2-80ea-fd3d7783b147"
+        ],
+        "targetResourceTypes": [
+          "Microsoft.Compute/virtualMachines"
+        ],
+        "windowSize": "PT10M",
+        "criteria": {
+          "allOf": [
+            {
+              "query": "Perf | where ObjectName == \"Processor\"",
+              "timeAggregation": "Average",
+              "metricMeasureColumn": "% Processor Time",
+              "resourceIdColumn": "resourceId",
+              "dimensions": [
+                {
+                  "name": "ComputerIp",
+                  "operator": "Exclude",
+                  "values": [
+                    "192.168.1.1"
+                  ]
+                },
+                {
+                  "name": "OSType",
+                  "operator": "Include",
+                  "values": [
+                    "*"
+                  ]
+                }
+              ],
+              "operator": "GreaterThan",
+              "threshold": 70,
+              "failingPeriods": {
+                "numberOfEvaluationPeriods": 1,
+                "minFailingPeriodsToAlert": 1
+              }
+            }
+          ]
+        },
+        "muteActionsDuration": "PT30M",
+        "actions": [
+          {
+            "actionGroupId": "/subscriptions/1cf177ed-1330-4692-80ea-fd3d7783b147/resourcegroups/sqrapi/providers/microsoft.insights/actiongroups/myactiongroup",
+            "webHookProperties": {
+              "key11": "value11",
+              "key12": "value12"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "id": "/subscriptions/dd4bfc94-a096-412b-9c43-4bd13e35afbc/resourcegroups/QueryResourceGroupName/providers/microsoft.insights/scheduledqueryrules/perf",
+        "name": "perf",
+        "type": "microsoft.insights/scheduledqueryrules",
+        "location": "eastus",
+        "tags": {},
+        "properties": {
+          "description": "Performance rule",
+          "severity": 4,
+          "enabled": true,
+          "evaluationFrequency": "PT5M",
+          "scopes": [
+            "/subscriptions/aaf177ed-1330-a9f2-80ea-fd3d7783b147"
+          ],
+          "targetResourceTypes": [
+            "Microsoft.Compute/virtualMachines"
+          ],
+          "windowSize": "PT10M",
+          "criteria": {
+            "allOf": [
+              {
+                "query": "Perf | where ObjectName == \"Processor\"",
+                "timeAggregation": "Average",
+                "metricMeasureColumn": "% Processor Time",
+                "resourceIdColumn": "resourceId",
+                "dimensions": [
+                  {
+                    "name": "ComputerIp",
+                    "operator": "Exclude",
+                    "values": [
+                      "192.168.1.1"
+                    ]
+                  },
+                  {
+                    "name": "OSType",
+                    "operator": "Include",
+                    "values": [
+                      "*"
+                    ]
+                  }
+                ],
+                "operator": "GreaterThan",
+                "threshold": 70,
+                "failingPeriods": {
+                  "numberOfEvaluationPeriods": 1,
+                  "minFailingPeriodsToAlert": 1
+                }
+              }
+            ]
+          },
+          "muteActionsDuration": "PT30M",
+          "actions": [
+            {
+              "actionGroupId": "/subscriptions/1cf177ed-1330-4692-80ea-fd3d7783b147/resourcegroups/sqrapi/providers/microsoft.insights/actiongroups/myactiongroup",
+              "webHookProperties": {
+                "key11": "value11",
+                "key12": "value12"
+              }
+            }
+          ]
+        }
+      }
+    },
+    "201": {
+      "headers": {},
+      "body": {
+        "id": "/subscriptions/dd4bfc94-a096-412b-9c43-4bd13e35afbc/resourcegroups/QueryResourceGroupName/providers/microsoft.insights/scheduledqueryrules/perf",
+        "name": "perf",
+        "type": "microsoft.insights/scheduledqueryrules",
+        "location": "eastus",
+        "tags": {},
+        "properties": {
+          "description": "Performance rule",
+          "severity": 4,
+          "enabled": true,
+          "evaluationFrequency": "PT5M",
+          "scopes": [
+            "/subscriptions/aaf177ed-1330-a9f2-80ea-fd3d7783b147"
+          ],
+          "targetResourceTypes": [
+            "Microsoft.Compute/virtualMachines"
+          ],
+          "windowSize": "PT10M",
+          "criteria": {
+            "allOf": [
+              {
+                "query": "Perf | where ObjectName == \"Processor\"",
+                "timeAggregation": "Average",
+                "metricMeasureColumn": "% Processor Time",
+                "resourceIdColumn": "resourceId",
+                "dimensions": [
+                  {
+                    "name": "ComputerIp",
+                    "operator": "Exclude",
+                    "values": [
+                      "192.168.1.1"
+                    ]
+                  },
+                  {
+                    "name": "OSType",
+                    "operator": "Include",
+                    "values": [
+                      "*"
+                    ]
+                  }
+                ],
+                "operator": "GreaterThan",
+                "threshold": 70,
+                "failingPeriods": {
+                  "numberOfEvaluationPeriods": 1,
+                  "minFailingPeriodsToAlert": 1
+                }
+              }
+            ]
+          },
+          "muteActionsDuration": "PT30M",
+          "actions": [
+            {
+              "actionGroupId": "/subscriptions/1cf177ed-1330-4692-80ea-fd3d7783b147/resourcegroups/sqrapi/providers/microsoft.insights/actiongroups/myactiongroup",
+              "webHookProperties": {
+                "key11": "value11",
+                "key12": "value12"
+              }
+            }
+          ]
+        }
+      }
+    }
+  }
+}

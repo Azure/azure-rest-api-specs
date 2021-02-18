@@ -26,18 +26,90 @@ These are the global settings for the IotHub API.
 
 ``` yaml
 openapi-type: arm
-tag: package-preview-2019-03
+tag: package-2020-08
 ```
 
+
+### Tag: package-2020-08
+
+These settings apply only when `--tag=package-2020-08` is specified on the command line.
+
+```yaml $(tag) == 'package-2020-08'
+input-file:
+  - Microsoft.Devices/stable/2020-08-01/iothub.json
+```
+### Tag: package-preview-2020-07
+
+These settings apply only when `--tag=package-preview-2020-07` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2020-07'
+input-file:
+  - Microsoft.Devices/preview/2020-07-10-preview/iothub.json
+```
+
+### Tag: package-2020-06
+
+These settings apply only when `--tag=package-2020-06` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-06'
+input-file:
+  - Microsoft.Devices/stable/2020-06-15/iothub.json
+```
+
+### Tag: package-2020-04
+
+These settings apply only when `--tag=package-2020-04` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-04'
+input-file:
+  - Microsoft.Devices/stable/2020-04-01/iothub.json
+```
+
+### Tag: package-2020-03
+
+These settings apply only when `--tag=package-2020-03` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-03'
+input-file:
+  - Microsoft.Devices/stable/2020-03-01/iothub.json
+```
+
+### Tag: package-2019-11
+
+These settings apply only when `--tag=package-2019-11` is specified on the command line.
+
+``` yaml $(tag) == 'package-2019-11'
+input-file:
+  - Microsoft.Devices/stable/2019-11-04/iothub.json
+```
+
+### Tag: package-preview-2019-07
+
+These settings apply only when `--tag=package-preview-2019-07` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2019-07'
+input-file:
+  - Microsoft.Devices/preview/2019-07-01-preview/iothub.json
+```
+
+### Tag: package-2019-03
+
+These settings apply only when `--tag=package-2019-03` is specified on the command line.
+
+``` yaml $(tag) == 'package-2019-03'
+input-file:
+  - Microsoft.Devices/stable/2019-03-22/iothub.json
+```
 
 ### Tag: package-preview-2019-03
 
 These settings apply only when `--tag=package-preview-2019-03` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2019-03'
+``` yaml $(tag) == 'package-preview-2019-03'
 input-file:
   - Microsoft.Devices/preview/2019-03-22-preview/iothub.json
 ```
+
 ### Tag: package-2018-12-preview
 
 These settings apply only when `--tag=package-2018-12-preview` is specified on the command line.
@@ -105,6 +177,8 @@ This is not used by Autorest itself.
 swagger-to-sdk:
   - repo: azure-sdk-for-net
   - repo: azure-sdk-for-python
+    after_scripts:
+      - python ./scripts/multiapi_init_gen.py azure-mgmt-iothub
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js
@@ -112,6 +186,9 @@ swagger-to-sdk:
   - repo: azure-sdk-for-ruby
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_iot_hub']
+  - repo: azure-resource-manager-schemas
+    after_scripts:
+      - node sdkauto_afterscript.js iothub/resource-manager
 ```
 
 ## C#
@@ -136,7 +213,11 @@ See configuration in [readme.go.md](./readme.go.md)
 
 See configuration in [readme.java.md](./readme.go.md)
 
-## Multi-API/Profile support for AutoRest v3 generators 
+## AzureResourceSchema
+
+See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
+
+## Multi-API/Profile support for AutoRest v3 generators
 
 AutoRest V3 generators require the use of `--tag=all-api-versions` to select api files.
 
@@ -148,6 +229,13 @@ require: $(this-folder)/../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
+  - $(this-folder)/Microsoft.Devices/preview/2020-07-10-preview/iothub.json
+  - $(this-folder)/Microsoft.Devices/stable/2020-06-15/iothub.json
+  - $(this-folder)/Microsoft.Devices/stable/2020-04-01/iothub.json
+  - $(this-folder)/Microsoft.Devices/stable/2020-03-01/iothub.json
+  - $(this-folder)/Microsoft.Devices/stable/2019-11-04/iothub.json
+  - $(this-folder)/Microsoft.Devices/preview/2019-07-01-preview/iothub.json
+  - $(this-folder)/Microsoft.Devices/stable/2019-03-22/iothub.json
   - $(this-folder)/Microsoft.Devices/preview/2019-03-22-preview/iothub.json
   - $(this-folder)/Microsoft.Devices/preview/2018-12-01-preview/iothub.json
   - $(this-folder)/Microsoft.Devices/stable/2018-04-01/iothub.json
@@ -158,11 +246,10 @@ input-file:
 
 ```
 
-If there are files that should not be in the `all-api-versions` set, 
+If there are files that should not be in the `all-api-versions` set,
 uncomment the  `exclude-file` section below and add the file paths.
 
 ``` yaml $(tag) == 'all-api-versions'
 #exclude-file: 
 #  - $(this-folder)/Microsoft.Example/stable/2010-01-01/somefile.json
 ```
-

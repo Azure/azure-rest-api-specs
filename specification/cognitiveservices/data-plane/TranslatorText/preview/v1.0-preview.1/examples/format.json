@@ -1,0 +1,82 @@
+{
+  "parameters": {
+    "api-version": "v1.0-preview.1",
+    "subscriptionId": "EA19050C-51FC-4B55-84E5-9EA7283601DA",
+    "resourceGroupName": "TestResourceGroup",
+    "endpoint": "{endpoint}",
+    "Ocp-Apim-Subscription-Key": "{API key}"
+  },
+  "responses": {
+    "429": {
+      "headers": {},
+      "body": {
+        "error": {
+          "code": "RequestRateTooHigh",
+          "message": "User's request rate is too high",
+          "innerError": {
+            "code": 429000,
+            "error": "RateTooHigh",
+            "message": "Request rate is too high"
+          }
+        }
+      }
+    },
+    "500": {
+      "headers": {},
+      "body": {
+        "error": {
+          "code": "InternalServerError",
+          "message": "Internal Server Error",
+          "innerError": {
+            "code": 500000,
+            "error": "Internal Server Error",
+            "message": "Unexpected internal server error has occurred"
+          }
+        }
+      }
+    },
+    "503": {
+      "headers": {},
+      "body": {
+        "error": {
+          "code": "ServiceUnavailable",
+          "message": "Service is temporary unavailable",
+          "innerError": {
+            "code": 503000,
+            "error": "ServiceTemporaryUnavailable",
+            "message": "Service is currently unavailable.  Please try again later"
+          }
+        }
+      }
+    },
+    "200": {
+      "headers": {
+        "ETag": "686897696a7c876b7e"
+      },
+      "body": {
+        "value": [
+          {
+            "format": "PlainText",
+            "fileExtensions": [
+              ".txt"
+            ],
+            "contentTypes": [
+              "text/plain"
+            ],
+            "versions": []
+          },
+          {
+            "format": "OpenXmlWord",
+            "fileExtensions": [
+              ".docx"
+            ],
+            "contentTypes": [
+              "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+            ],
+            "versions": []
+          }
+        ]
+      }
+    }
+  }
+}

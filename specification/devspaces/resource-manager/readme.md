@@ -55,6 +55,9 @@ swagger-to-sdk:
   - repo: azure-sdk-for-python
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
+  - repo: azure-resource-manager-schemas
+    after_scripts:
+      - node sdkauto_afterscript.js devspaces/resource-manager
 ```
 
 ## C#
@@ -106,10 +109,14 @@ Please also specify `--azure-libraries-for-java-folder=<path to the root directo
 ``` yaml $(tag)=='package-2019-04-01' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.devspaces.v2019_04_01
-  output-folder: $(azure-libraries-for-java-folder)/devspaces/resource-manager/v2019_04_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/devspaces/mgmt-v2019_04_01
 regenerate-manager: true
 generate-interface: true
 ```
+
+## AzureResourceSchema
+
+See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
 
 ## Multi-API/Profile support for AutoRest v3 generators 
 
@@ -135,3 +142,10 @@ uncomment the  `exclude-file` section below and add the file paths.
 #  - $(this-folder)/Microsoft.Example/stable/2010-01-01/somefile.json
 ```
 
+## Suppression
+``` yaml
+directive:
+  - from: devspaces.json
+    suppress: OAV131 # DISCRIMINATOR_NOT_REQUIRED
+    reason: instanceType is a non-settable property from the client.
+```

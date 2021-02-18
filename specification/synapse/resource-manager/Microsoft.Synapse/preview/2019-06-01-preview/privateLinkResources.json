@@ -1,0 +1,187 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2019-06-01-preview",
+    "title": "SynapseManagementClient",
+    "description": "Azure Synapse Analytics APIs"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "type": "oauth2",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      },
+      "description": "Azure Active Directory OAuth2 Flow"
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/privateLinkResources": {
+      "get": {
+        "operationId": "PrivateLinkResources_List",
+        "summary": "Private Link Resources",
+        "description": "Get all private link resources for a workspaces",
+        "tags": [
+          "PrivateLinkResources"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
+          }
+        ],
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/PrivateLinkResourceListResult"
+            },
+            "description": "List of private link resources"
+          }
+        },
+        "x-ms-examples": {
+          "Get private link resources for workspace": {
+            "$ref": "./examples/ListPrivateLinkResources.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/privateLinkResources/{privateLinkResourceName}": {
+      "get": {
+        "operationId": "PrivateLinkResources_Get",
+        "summary": "Get Private Link Resource",
+        "description": "Get private link resource in workspace",
+        "tags": [
+          "PrivateLinkResources"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/privateLinkResourceNameParameter"
+          }
+        ],
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/PrivateLinkResource"
+            },
+            "description": "Private link resource details"
+          }
+        },
+        "x-ms-examples": {
+          "Get private link resources for workspace": {
+            "$ref": "./examples/GetPrivateLinkResource.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "PrivateLinkResourceListResult": {
+      "description": "A list of private link resources",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Array of results.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PrivateLinkResource"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "Link to retrieve next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "PrivateLinkResource": {
+      "description": "A private link resource",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PrivateLinkResourceProperties",
+          "description": "The private link resource properties.",
+          "readOnly": true
+        }
+      }
+    },
+    "PrivateLinkResourceProperties": {
+      "description": "Properties of a private link resource.",
+      "type": "object",
+      "properties": {
+        "groupId": {
+          "description": "The private link resource group id.",
+          "type": "string",
+          "readOnly": true
+        },
+        "requiredMembers": {
+          "description": "The private link resource required member names.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "requiredZoneNames": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true,
+          "description": "Required DNS zone names of the the private link resource."
+        }
+      }
+    }
+  },
+  "parameters": {
+    "privateLinkResourceNameParameter": {
+      "name": "privateLinkResourceName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the private link resource",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

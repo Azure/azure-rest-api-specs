@@ -1,0 +1,74 @@
+{
+  "parameters": {
+    "api-version": "2020-03-01",
+    "subscriptionId": "subid",
+    "resourceGroupName": "rgName",
+    "accountName": "ddb1",
+    "databaseName": "databaseName",
+    "containerName": "containerName"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.DocumentDB/databaseAccounts/ddb1/sqlDatabases/databaseName/sqlContainers/containerName",
+        "name": "containerName",
+        "type": "Microsoft.DocumentDB/databaseAccounts/sqlDatabases/sqlContainers",
+        "location": "West US",
+        "tags": {},
+        "properties": {
+          "resource": {
+            "id": "containerName",
+            "indexingPolicy": {
+              "indexingMode": "Consistent",
+              "automatic": true,
+              "includedPaths": [
+                {
+                  "path": "/*",
+                  "indexes": [
+                    {
+                      "kind": "Range",
+                      "dataType": "String",
+                      "precision": -1
+                    },
+                    {
+                      "kind": "Range",
+                      "dataType": "Number",
+                      "precision": -1
+                    }
+                  ]
+                }
+              ],
+              "excludedPaths": []
+            },
+            "partitionKey": {
+              "paths": [
+                "/AccountNumber"
+              ],
+              "kind": "Hash"
+            },
+            "defaultTtl": 100,
+            "uniqueKeyPolicy": {
+              "uniqueKeys": [
+                {
+                  "paths": [
+                    "/testPath"
+                  ]
+                }
+              ]
+            },
+            "conflictResolutionPolicy": {
+              "mode": "LastWriterWins",
+              "conflictResolutionPath": "/path"
+            },
+            "_rid": "PD5DALigDgw=",
+            "_ts": 1459200611,
+            "_etag": "\"00005900-0000-0000-0000-56f9a2630000\""
+          },
+          "options": {
+            "throughput": 400
+          }
+        }
+      }
+    }
+  }
+}

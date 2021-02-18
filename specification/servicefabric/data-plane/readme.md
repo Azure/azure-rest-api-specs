@@ -25,7 +25,7 @@ These are the global settings for the ServiceFabricClient API.
 
 ``` yaml
 openapi-type: data-plane
-tag: '6.5'
+tag: '7.1'
 ```
 
 ### Suppression
@@ -105,6 +105,25 @@ input-file:
 
 ```
 
+### Tag: 7.0
+
+These settings apply only when `--tag=7.0` is specified on the command line.
+
+``` yaml $(tag) == '7.0'
+input-file:
+- Microsoft.ServiceFabric/stable/7.0/servicefabric.json
+
+```
+
+### Tag: 7.1
+
+These settings apply only when `--tag=7.1` is specified on the command line.
+
+``` yaml $(tag) == '7.1'
+input-file:
+- Microsoft.ServiceFabric/stable/7.1/servicefabric.json
+
+```
 
 ---
 # Code Generation
@@ -158,6 +177,8 @@ input-file:
   - $(this-folder)/Microsoft.ServiceFabric/stable/6.3/servicefabric.json
   - $(this-folder)/Microsoft.ServiceFabric/stable/6.4/servicefabric.json
   - $(this-folder)/Microsoft.ServiceFabric/stable/6.5/servicefabric.json
+  - $(this-folder)/Microsoft.ServiceFabric/stable/7.0/servicefabric.json
+  - $(this-folder)/Microsoft.ServiceFabric/stable/7.1/servicefabric.json
 
 ```
 

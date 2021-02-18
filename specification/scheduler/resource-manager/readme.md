@@ -76,6 +76,9 @@ swagger-to-sdk:
   - repo: azure-sdk-for-ruby
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_scheduler']
+  - repo: azure-resource-manager-schemas
+    after_scripts:
+      - node sdkauto_afterscript.js scheduler/resource-manager
 ```
 
 
@@ -155,7 +158,7 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 ``` yaml $(tag) == 'package-2014-08-preview' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.scheduler.v2014_08_01_preview
-  output-folder: $(azure-libraries-for-java-folder)/scheduler/resource-manager/v2014_08_01_preview
+  output-folder: $(azure-libraries-for-java-folder)/sdk/scheduler/mgmt-v2014_08_01_preview
 regenerate-manager: true
 generate-interface: true
 ```
@@ -168,7 +171,7 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 ``` yaml $(tag) == 'package-2016-01' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.scheduler.v2016_01_01
-  output-folder: $(azure-libraries-for-java-folder)/scheduler/resource-manager/v2016_01_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/scheduler/mgmt-v2016_01_01
 regenerate-manager: true
 generate-interface: true
 ```
@@ -181,12 +184,16 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 ``` yaml $(tag) == 'package-2016-03' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.scheduler.v2016_03_01
-  output-folder: $(azure-libraries-for-java-folder)/scheduler/resource-manager/v2016_03_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/scheduler/mgmt-v2016_03_01
 regenerate-manager: true
 generate-interface: true
 ```
 
 
+
+## AzureResourceSchema
+
+See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
 
 ## Multi-API/Profile support for AutoRest v3 generators 
 

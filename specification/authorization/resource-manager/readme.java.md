@@ -29,7 +29,7 @@ Please also specify `--azure-libraries-for-java-folder=<path to the root directo
 ``` yaml $(tag) == 'package-2018-09-01-preview' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.authorization.v2018_09_01_preview
-  output-folder: $(azure-libraries-for-java-folder)/authorization/resource-manager/v2018_09_01_preview
+  output-folder: $(azure-libraries-for-java-folder)/sdk/authorization/mgmt-v2018_09_01_preview
 regenerate-manager: true
 generate-interface: true
 ```
@@ -42,7 +42,7 @@ Please also specify `--azure-libraries-for-java-folder=<path to the root directo
 ``` yaml $(tag) == 'package-2018-07-01-preview-only' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.authorization.v2018_07_01_preview
-  output-folder: $(azure-libraries-for-java-folder)/authorization/resource-manager/v2018_07_01_preview
+  output-folder: $(azure-libraries-for-java-folder)/sdk/authorization/mgmt-v2018_07_01_preview
 regenerate-manager: true
 generate-interface: true
 ```
@@ -55,7 +55,7 @@ Please also specify `--azure-libraries-for-java-folder=<path to the root directo
 ``` yaml $(tag) == 'package-2015-07-01' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.authorization.v2015_07_01
-  output-folder: $(azure-libraries-for-java-folder)/authorization/resource-manager/v2015_07_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/authorization/mgmt-v2015_07_01
 regenerate-manager: true
 generate-interface: true
 ```
@@ -68,7 +68,7 @@ Please also specify `--azure-libraries-for-java-folder=<path to the root directo
 ``` yaml $(tag) == 'package-2015-06-01-preview' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.authorization.v2015_06_01
-  output-folder: $(azure-libraries-for-java-folder)/authorization/resource-manager/v2015_06_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/authorization/mgmt-v2015_06_01
 regenerate-manager: true
 generate-interface: true
 ```

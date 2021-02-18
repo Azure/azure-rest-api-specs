@@ -1,0 +1,74 @@
+{
+  "parameters": {
+    "api-version": "2020-01-01-preview",
+    "subscriptionId": "subid",
+    "vendorName": "TestVendor",
+    "skuName": "TestSku"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "TestSku",
+        "id": "/subscriptions/subid/providers/Microsoft.HybridNetwork/vendors/TestVendor/vendorskus/TestSku",
+        "type": "Microsoft.HybridNetwork/vendors/vendorskus",
+        "properties": {
+          "deploymentMode": "PrivateEdgeZone",
+          "preview": true,
+          "provisioningState": "Succeeded",
+          "managedApplicationTemplate": {},
+          "virtualNetworkFunctionTemplate": {
+            "virutalNetworkFunctionRoleConfigurations": [
+              {
+                "roleName": "test",
+                "roleType": "VirtualMachine",
+                "virtualMachineSize": "Standard_D3_v2",
+                "imageReference": {
+                  "osType": "Linux",
+                  "vhdName": "vhdName",
+                  "vhdType": "VHD",
+                  "sasUri": "https://<yourstorage>.blob.core.windows.net/<yourcontainer>/<yourfile>?sp=rl&st=st>Z&se=<se>Z&sv=<sv>&sr=b&sig=<signature>"
+                },
+                "osProfile": {
+                  "adminUsername": "dummyuser",
+                  "sshPublicKey": null
+                },
+                "networkInterfaces": [
+                  {
+                    "networkInterfaceName": "nic1",
+                    "macAddress": "",
+                    "vmSwitchType": "",
+                    "ipConfigurations": [
+                      {
+                        "ipAllocationMethod": "Dynamic",
+                        "ipAddress": "",
+                        "subnet": "",
+                        "gateway": "",
+                        "ipVersion": "IPv4",
+                        "dnsServers": null
+                      }
+                    ]
+                  },
+                  {
+                    "networkInterfaceName": "nic2",
+                    "macAddress": "",
+                    "vmSwitchType": "",
+                    "ipConfigurations": [
+                      {
+                        "ipAllocationMethod": "Dynamic",
+                        "ipAddress": "",
+                        "subnet": "",
+                        "gateway": "",
+                        "ipVersion": "IPv4",
+                        "dnsServers": null
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      }
+    }
+  }
+}

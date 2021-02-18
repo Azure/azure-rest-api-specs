@@ -1,0 +1,44 @@
+{
+  "title": "Create or update export",
+  "description": "Create a new export or update an existing export, specifying its Id.",
+  "parameters": {
+    "centralDnsSuffixInPath": "azureiotcentral.com",
+    "subdomain": "appsubdomain",
+    "export_id": "abc",
+    "body": {
+      "displayName": "Export to Storage 2",
+      "endpoint": {
+        "type": "StorageEndpoint",
+        "connectionString": "{Connection-string-to-blob-storage}",
+        "name": "container"
+      },
+      "enabled": true,
+      "sources": [
+        "devices",
+        "deviceTemplates",
+        "telemetry"
+      ]
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "abc",
+        "etag": "7e02c03e-25cb-4d1c-9f6b-019506283872",
+        "displayName": "Export to Storage 2",
+        "endpoint": {
+          "type": "StorageEndpoint",
+          "connectionString": "DefaultEndpointsProtocol=https;AccountName=contosoiotcstorage;AccountKey=*****;EndpointSuffix=core.windows.net",
+          "name": "container"
+        },
+        "status": "starting",
+        "enabled": true,
+        "sources": [
+          "devices",
+          "deviceTemplates",
+          "telemetry"
+        ]
+      }
+    }
+  }
+}

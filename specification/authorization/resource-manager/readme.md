@@ -4,10 +4,10 @@
 
 This is the AutoRest configuration file for Authorization.
 
-
-
 ---
+
 ## Getting Started
+
 To build the SDK for Authorization, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
@@ -15,28 +15,67 @@ To build the SDK for Authorization, simply [Install AutoRest](https://aka.ms/aut
 To see additional help and options, run:
 
 > `autorest --help`
+
 ---
 
 ## Configuration
 
-
-
 ### Basic Information
+
 These are the global settings for the Authorization API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2018-09-01-preview
+tag: package-2020-04-01-preview-only
 ```
 
 ## Suppression
+
 ``` yaml
 directive:
   - suppress: OperationsAPIImplementation
     reason: we do have a operations api as "/providers/Microsoft.Authorization/operations"
-    #where:
-    #  -   $.paths["/providers/Microsoft.Authorization/operations"]
+  - suppress: OperationIdNounConflictingModelNames
+    where: '$.paths["/providers/Microsoft.Authorization/providerOperations/{resourceProviderNamespace}"].get.operationId'
+    from: authorization-ProviderOperationsCalls.json
+    reason: the full operationId value is "ProviderOperationsMetadata_Get" the linter does not seem to be picking what's after the '_'
+  - suppress: OperationIdNounConflictingModelNames
+    where: '$.paths["/providers/Microsoft.Authorization/providerOperations"].get.operationId'
+    from: authorization-ProviderOperationsCalls.json
+    reason: the full operationId value is "ProviderOperationsMetadata_List" the linter does not seem to be picking what's after the '_'
+  - suppress: EnumInsteadOfBoolean
+    where: $.definitions.RoleAssignmentFilter.properties.canDelegate
+    from: authorization-RoleAssignmentsCalls.json
+    reason: for this case the result of the proposed change would resemble a boolean anyways
+  - suppress: EnumInsteadOfBoolean
+    where: $.definitions.RoleAssignmentPropertiesWithScope.properties.canDelegate
+    from: authorization-RoleAssignmentsCalls.json
+    reason: for this case the result of the proposed change would resemble a boolean anyways
+  - suppress: EnumInsteadOfBoolean
+    where: $.definitions.RoleAssignmentProperties.properties.canDelegate
+    from: authorization-RoleAssignmentsCalls.json
+    reason: for this case the result of the proposed change would resemble a boolean anyways
+  - suppress: EnumInsteadOfBoolean
+    where: $.definitions.ProviderOperation.properties.isDataAction
+    from: authorization-ProviderOperationsCalls.json
+    reason: for this case the result of the proposed change would resemble a boolean anyways
+  - suppress: EnumInsteadOfBoolean
+    where: $.definitions.DenyAssignmentProperties.properties.doNotApplyToChildScopes
+    from: authorization-DenyAssignmentGetCalls.json
+    reason: for this case the result of the proposed change would resemble a boolean anyways
+  - suppress: EnumInsteadOfBoolean
+    where: $.definitions.DenyAssignmentProperties.properties.isSystemProtected
+    from: authorization-DenyAssignmentGetCalls.json
+    reason: for this case the result of the proposed change would resemble a boolean anyways
+```
 
+### Tag: package-2020-04-01-preview-only
+
+These settings apply only when `--tag=package-2020-04-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-04-01-preview-only'
+input-file:
+- Microsoft.Authorization/preview/2020-04-01-preview/authorization-RoleAssignmentsCalls.json
 ```
 
 ### Tag: package-2015-07-01
@@ -167,8 +206,8 @@ input-file:
 ```
 
 ---
-# Code Generation
 
+# Code Generation
 
 ## Swagger to SDK
 
@@ -188,6 +227,9 @@ swagger-to-sdk:
   - repo: azure-sdk-for-ruby
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_authorization']
+  - repo: azure-resource-manager-schemas
+    after_scripts:
+      - node sdkauto_afterscript.js authorization/resource-manager
 ```
 
 ## Go
@@ -198,7 +240,11 @@ See configuration in [readme.go.md](./readme.go.md)
 
 See configuration in [readme.java.md](./readme.java.md)
 
-## Multi-API/Profile support for AutoRest v3 generators 
+## AzureResourceSchema
+
+See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
+
+## Multi-API/Profile support for AutoRest v3 generators
 
 AutoRest V3 generators require the use of `--tag=all-api-versions` to select api files.
 
@@ -210,6 +256,7 @@ require: $(this-folder)/../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
+  - $(this-folder)/Microsoft.Authorization/preview/2020-04-01-preview/authorization-RoleAssignmentsCalls.json
   - $(this-folder)/Microsoft.Authorization/stable/2015-07-01/authorization-RoleDefinitionsCalls.json
   - $(this-folder)/Microsoft.Authorization/stable/2015-07-01/authorization-ProviderOperationsCalls.json
   - $(this-folder)/Microsoft.Authorization/stable/2015-07-01/authorization-ElevateAccessCalls.json
@@ -225,11 +272,10 @@ input-file:
 
 ```
 
-If there are files that should not be in the `all-api-versions` set, 
+If there are files that should not be in the `all-api-versions` set,
 uncomment the  `exclude-file` section below and add the file paths.
 
 ``` yaml $(tag) == 'all-api-versions'
 #exclude-file: 
 #  - $(this-folder)/Microsoft.Example/stable/2010-01-01/somefile.json
 ```
-

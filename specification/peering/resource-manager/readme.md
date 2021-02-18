@@ -23,45 +23,70 @@ To see additional help and options, run:
 These are the global settings for the Peering API.
 
 ``` yaml
+title: PeeringManagementClient
+description: Peering Client
 openapi-type: arm
-tag: package-2019-03-01-preview
+tag: package-2020-04-01
 ```
 or
 ``` yaml
+title: PeeringManagementClient
+description: Peering Client
 openapi-type: arm
-tag: package-2019-06-01-preview
+tag: package-2020-01-01-preview
 ```
 or
 ``` yaml
+title: PeeringManagementClient
+description: Peering Client
 openapi-type: arm
-tag: package-2019-07-01-preview
+tag: package-2019-09-01-preview
+```
+or
+``` yaml
+title: PeeringManagementClient
+description: Peering Client
+openapi-type: arm
+tag: package-2019-08-01-preview
 ```
 
-### Tag: package-2019-03-01-preview
+### Tag: package-2020-04-01
 
-These settings apply only when `--tag=package-2019-03-01-preview` is specified on the command line.
+These settings apply only when `--tag=package-2020-04-01` is specified on the command line.
 
-``` yaml $(tag) == 'package-2019-03-01-preview'
+``` yaml $(tag) == 'package-2020-04-01'
 input-file:
-- Microsoft.Peering/preview/2019-03-01-preview/peering.json
+- Microsoft.Peering/stable/2020-04-01/peering.json
 ```
 
-### Tag: package-2019-06-01-preview
+### Tag: package-2020-01-01-preview
 
-These settings apply only when `--tag=package-2019-06-01-preview` is specified on the command line.
+These settings apply only when `--tag=package-2020-01-01-preview` is specified on the command line.
 
-``` yaml $(tag) == 'package-2019-06-01-preview'
+``` yaml $(tag) == 'package-2020-01-01-preview'
 input-file:
-- Microsoft.Peering/preview/2019-06-01-preview/peering.json
+- Microsoft.Peering/preview/2020-01-01-preview/peering.json
 ```
-### Tag: package-2019-07-01-preview
 
-These settings apply only when `--tag=package-2019-07-01-preview` is specified on the command line.
+### Tag: package-2019-09-01-preview
 
-``` yaml $(tag) == 'package-2019-07-01-preview'
+These settings apply only when `--tag=package-2019-09-01-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2019-09-01-preview'
 input-file:
-- Microsoft.Peering/preview/2019-07-01-preview/peering.json
+- Microsoft.Peering/preview/2019-09-01-preview/peering.json
 ```
+
+### Tag: package-2019-08-01-preview
+
+These settings apply only when `--tag=package-2019-08-01-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2019-08-01-preview'
+input-file:
+- Microsoft.Peering/preview/2019-08-01-preview/peering.json
+```
+
+
 # Code Generation
 
 ## Swagger to SDK
@@ -80,6 +105,9 @@ swagger-to-sdk:
   - repo: azure-sdk-for-ruby
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_peering']
+  - repo: azure-resource-manager-schemas
+    after_scripts:
+      - node sdkauto_afterscript.js peering/resource-manager
 ```
 
 ## C# 
@@ -89,6 +117,15 @@ See configuration in [readme.csharp.md](./readme.csharp.md)
 ## Go
 
 See configuration in [readme.go.md](./readme.go.md)
+
+## CLI
+
+See configuration in [readme.cli.md](./readme.cli.md)
+
+## AzureResourceSchema
+
+See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
+
 ## Multi-API/Profile support for AutoRest v3 generators 
 
 AutoRest V3 generators require the use of `--tag=all-api-versions` to select api files.
@@ -101,9 +138,10 @@ require: $(this-folder)/../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
-  - $(this-folder)/Microsoft.Peering/preview/2019-03-01-preview/peering.json
-  - $(this-folder)/Microsoft.Peering/preview/2019-06-01-preview/peering.json
-  - $(this-folder)/Microsoft.Peering/preview/2019-07-01-preview/peering.json
+  - $(this-folder)/Microsoft.Peering/stable/2020-04-01/peering.json
+  - $(this-folder)/Microsoft.Peering/preview/2020-01-01-preview/peering.json
+  - $(this-folder)/Microsoft.Peering/preview/2019-09-01-preview/peering.json
+  - $(this-folder)/Microsoft.Peering/preview/2019-08-01-preview/peering.json
 
 ```
 
@@ -111,7 +149,6 @@ If there are files that should not be in the `all-api-versions` set,
 uncomment the  `exclude-file` section below and add the file paths.
 
 ``` yaml $(tag) == 'all-api-versions'
-#exclude-file: 
-#  - $(this-folder)/Microsoft.Example/stable/2010-01-01/somefile.json
+# exclude-file: 
+#- $(this-folder)/Microsoft.Peering/preview/2019-06-01-preview/peering.json
 ```
-

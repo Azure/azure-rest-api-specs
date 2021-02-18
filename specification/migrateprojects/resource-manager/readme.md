@@ -21,7 +21,7 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 ``` yaml $(tag) == 'package-2018-09' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.azuremigrate.v2018_09_01
-  output-folder: $(azure-libraries-for-java-folder)/azuremigrate/resource-manager/v2018_09_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/azuremigrate/mgmt-v2018_09_01
 regenerate-manager: true
 generate-interface: true
 ```
@@ -69,6 +69,9 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-go
+  - repo: azure-resource-manager-schemas
+    after_scripts:
+      - node sdkauto_afterscript.js migrateprojects/resource-manager
 ```
 
 ## Go
@@ -97,6 +100,10 @@ Please also specify `--go-sdk-folder=<path to the root directory of your azure-s
 ``` yaml $(tag)=='package-2018-09' && $(go)
 output-folder: $(go-sdk-folder)/services/preview/$(namespace)/mgmt/2018-09-01-preview/$(namespace)
 ```
+
+## AzureResourceSchema
+
+See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
 
 ## Multi-API/Profile support for AutoRest v3 generators 
 

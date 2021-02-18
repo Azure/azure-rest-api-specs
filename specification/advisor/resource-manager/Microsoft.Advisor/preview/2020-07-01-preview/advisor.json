@@ -1,0 +1,329 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2020-07-01-preview",
+    "title": "AdvisorManagementClient",
+    "description": "REST APIs for Azure Advisor"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/providers/Microsoft.Advisor/operations": {
+      "get": {
+        "tags": [
+          "Operations"
+        ],
+        "description": "Lists all the available Advisor REST API operations.",
+        "operationId": "Operations_List",
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/OperationEntityListResult"
+            }
+          }
+        },
+        "deprecated": false,
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Advisor/advisorScore": {
+      "get": {
+        "tags": [
+          "AdvisorScore"
+        ],
+        "description": "Gets the list of advisor scores.",
+        "operationId": "AdvisorScores_List",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "nextLink": {
+                  "description": "The link used to get the next page of operations.",
+                  "type": "string"
+                },
+                "value": {
+                  "description": "The list of operations.",
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/advisorScoreEntity"
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ArmErrorResponse"
+            }
+          }
+        },
+        "deprecated": false,
+        "x-ms-examples": {
+          "ListAdvisorScore": {
+            "$ref": "./examples/ListAdvisorScore.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Advisor/advisorScore/{name}": {
+      "get": {
+        "tags": [
+          "AdvisorScore"
+        ],
+        "description": "Gets the advisor score.",
+        "operationId": "AdvisorScores_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The scope of Advisor score entity.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/advisorScoreEntity"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ArmErrorResponse"
+            }
+          }
+        },
+        "deprecated": false,
+        "x-ms-examples": {
+          "GetAdvisorScoreDetail": {
+            "$ref": "./examples/GetAdvisorScoreDetail.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ArmErrorResponse": {
+      "type": "object",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/ARMErrorResponseBody"
+        }
+      }
+    },
+    "ARMErrorResponseBody": {
+      "description": "ARM error response body.",
+      "type": "object",
+      "properties": {
+        "message": {
+          "description": "Gets or sets the string that describes the error in detail and provides debugging information.",
+          "type": "string"
+        },
+        "code": {
+          "description": "Gets or sets the string that can be used to programmatically identify the error.",
+          "type": "string"
+        }
+      }
+    },
+    "OperationEntityListResult": {
+      "description": "The list of Advisor operations.",
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "The link used to get the next page of operations.",
+          "type": "string"
+        },
+        "value": {
+          "description": "The list of operations.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/OperationEntity"
+          }
+        }
+      }
+    },
+    "OperationEntity": {
+      "description": "The operation supported by Advisor.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Operation name: {provider}/{resource}/{operation}.",
+          "type": "string"
+        },
+        "display": {
+          "$ref": "#/definitions/OperationDisplayInfo",
+          "description": "The operation supported by Advisor."
+        }
+      }
+    },
+    "OperationDisplayInfo": {
+      "description": "The operation supported by Advisor.",
+      "type": "object",
+      "properties": {
+        "description": {
+          "description": "The description of the operation.",
+          "type": "string"
+        },
+        "operation": {
+          "description": "The action that users can perform, based on their permission level.",
+          "type": "string"
+        },
+        "provider": {
+          "description": "Service provider: Microsoft Advisor.",
+          "type": "string"
+        },
+        "resource": {
+          "description": "Resource on which the operation is performed.",
+          "type": "string"
+        }
+      }
+    },
+    "scoreEntity": {
+      "description": "The details of Advisor Score",
+      "type": "object",
+      "properties": {
+        "date": {
+          "description": "The date score was calculated.",
+          "type": "string"
+        },
+        "score": {
+          "description": "The percentage score.",
+          "type": "number"
+        },
+        "consumptionUnits": {
+          "description": "The consumption units for the score.",
+          "type": "number"
+        },
+        "impactedResourceCount": {
+          "description": "The number of impacted resources.",
+          "type": "number"
+        },
+        "potentialScoreIncrease": {
+          "description": "The potential percentage increase in overall score at subscription level once all recommendations in this scope are implemented.",
+          "type": "number"
+        }
+      }
+    },
+    "timeSeriesEntity": {
+      "description": "The historic data at different aggregation levels.",
+      "type": "array",
+      "items": {
+        "description": "The data from different aggregation levels.",
+        "type": "object",
+        "properties": {
+          "aggregationLevel": {
+            "description": "The aggregation level of the score.",
+            "type": "string",
+            "enum": [
+              "week",
+              "day",
+              "month"
+            ]
+          },
+          "data": {
+            "description": "The past score data",
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/scoreEntity"
+            }
+          }
+        }
+      }
+    },
+    "advisorScoreEntity": {
+      "description": "The details of Advisor score for a single category.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "The ID of the resource.",
+          "type": "string"
+        },
+        "name": {
+          "description": "The category.",
+          "type": "string"
+        },
+        "type": {
+          "description": "The type of resource.",
+          "type": "string"
+        },
+        "properties": {
+          "description": "The Advisor score data.",
+          "type": "object",
+          "properties": {
+            "lastRefreshedScore": {
+              "description": "The details of latest available score.",
+              "$ref": "#/definitions/scoreEntity"
+            },
+            "timeSeries": {
+              "description": "The historic Advisor score data.",
+              "$ref": "#/definitions/timeSeriesEntity"
+            }
+          }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "subscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "description": "The Azure subscription ID.",
+      "required": true,
+      "type": "string"
+    },
+    "apiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "description": "The version of the API to be used with the client request.",
+      "required": true,
+      "type": "string"
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ]
+}

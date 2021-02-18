@@ -31,6 +31,8 @@ batch:
 #For WebSite 2016-08-01, you use the below tag
   - tag: package-2016-09
     ApiVersionName: Api2016_08_01
+  - tag: package-2019-08
+    ApiVersionName: Api2019_08_01
 ```
 
 ### Profile: hybrid_2018_03_01

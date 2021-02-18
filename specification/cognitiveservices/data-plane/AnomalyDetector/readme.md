@@ -74,6 +74,7 @@ java:
   output-folder: $(azure-libraries-for-java-folder)/cognitiveservices/data-plane/anomalydetector
   with-optional-parameters: true
   with-single-async-method: true
+  regenerate-manager: true
 ```
 
 ## Multi-API/Profile support for AutoRest v3 generators 

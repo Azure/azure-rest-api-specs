@@ -4,10 +4,10 @@
 
 This is the AutoRest configuration file for HealthcareApis.
 
-
-
 ---
+
 ## Getting Started
+
 To build the SDK for HealthcareApis, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
@@ -15,23 +15,40 @@ To build the SDK for HealthcareApis, simply [Install AutoRest](https://aka.ms/au
 To see additional help and options, run:
 
 > `autorest --help`
+
 ---
 
 ## Configuration
 
-
-
 ### Basic Information
+
 These are the global settings for HealthcareApis service.
 
 ``` yaml
 title: HealthcareApisManagementClient
 description: Azure Healthcare APIs Client
 openapi-type: arm
-tag: package-2018-08-preview
+tag: package-2020-03
 azure-arm: true
 ```
 
+
+### Tag: package-2020-03
+
+These settings apply only when `--tag=package-2020-03` is specified on the command line.
+
+```yaml $(tag) == 'package-2020-03'
+input-file:
+  - Microsoft.HealthcareApis/stable/2020-03-15/healthcare-apis.json
+```
+### Tag: package-2019-09
+
+These settings apply only when `--tag=package-2019-09` is specified on the command line.
+
+``` yaml $(tag) == 'package-2019-09'
+input-file:
+- Microsoft.HealthcareApis/stable/2019-09-16/healthcare-apis.json
+```
 
 ### Tag: package-2018-08-preview
 
@@ -43,7 +60,6 @@ input-file:
 ```
 
 # Code Generation
-
 
 ## Swagger to SDK
 
@@ -57,7 +73,11 @@ swagger-to-sdk:
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js
+  - repo: azure-resource-manager-schemas
+    after_scripts:
+      - node sdkauto_afterscript.js healthcareapis/resource-manager
 ```
+
 ## C#
 
 These settings apply only when `--csharp` is specified on the command line.
@@ -72,9 +92,14 @@ csharp:
   output-folder: $(csharp-sdks-folder)/healthcareapis/Microsoft.Azure.Management.HealthcareApis/src/Generated
   clear-output-folder: true
 ```
+
 ## Python
 
 See configuration in [readme.python.md](./readme.python.md)
+
+## CLI
+
+See configuration in [readme.cli.md](./readme.cli.md)
 
 ## Go
 
@@ -98,7 +123,21 @@ output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-healthcareapis
 
 ``` yaml $(java) && $(multiapi)
 batch:
+  - tag: package-2019-09
   - tag: package-2018-08-preview
+```
+
+### Tag: package-2019-09 and java
+
+These settings apply only when `--tag=package-2019-09 --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2019-09' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.healthcareapis.v2019-09-16
+  output-folder: $(azure-libraries-for-java-folder)/sdk/healthcareapis/mgmt-v2019-09-16
+regenerate-manager: true
+generate-interface: true
 ```
 
 ### Tag: package-2018-08-preview and java
@@ -109,12 +148,16 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 ``` yaml $(tag) == 'package-2018-08-preview' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.healthcareapis.v2018_08_20_preview
-  output-folder: $(azure-libraries-for-java-folder)/healthcareapis/resource-manager/v2018_08_20_preview
+  output-folder: $(azure-libraries-for-java-folder)/sdk/healthcareapis/mgmt-v2018_08_20_preview
 regenerate-manager: true
 generate-interface: true
 ```
 
 
+
+## AzureResourceSchema
+
+See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
 
 ## Multi-API/Profile support for AutoRest v3 generators 
 
@@ -128,15 +171,15 @@ require: $(this-folder)/../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
+  - $(this-folder)/Microsoft.HealthcareApis/stable/2019-09-16/healthcare-apis.json
   - $(this-folder)/Microsoft.HealthcareApis/preview/2018-08-20-preview/healthcare-apis.json
 
 ```
 
-If there are files that should not be in the `all-api-versions` set, 
+If there are files that should not be in the `all-api-versions` set,
 uncomment the  `exclude-file` section below and add the file paths.
 
 ``` yaml $(tag) == 'all-api-versions'
 #exclude-file: 
 #  - $(this-folder)/Microsoft.Example/stable/2010-01-01/somefile.json
 ```
-

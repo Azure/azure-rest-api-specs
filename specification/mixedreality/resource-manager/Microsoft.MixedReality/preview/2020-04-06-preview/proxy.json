@@ -1,0 +1,254 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Mixed Reality",
+    "description": "Mixed Reality Resource Provider Proxy API",
+    "version": "2020-04-06-preview",
+    "x-ms-code-generation-settings": {
+      "name": "MixedRealityClient"
+    }
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "Impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/providers/Microsoft.MixedReality/operations": {
+      "get": {
+        "operationId": "Operations_List",
+        "tags": [
+          "Proxy"
+        ],
+        "description": "Exposing Available Operations",
+        "x-ms-examples": {
+          "List available operations": {
+            "$ref": "./examples/proxy/ExposingAvailableOperations.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "./common.json#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/OperationPage"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.MixedReality/locations/{location}/checkNameAvailability": {
+      "post": {
+        "operationId": "CheckNameAvailabilityLocal",
+        "tags": [
+          "Proxy"
+        ],
+        "description": "Check Name Availability for local uniqueness",
+        "x-ms-examples": {
+          "CheckLocalNameAvailability": {
+            "$ref": "./examples/proxy/CheckNameAvailabilityForLocalUniqueness.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "./common.json#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/locationParameter"
+          },
+          {
+            "$ref": "#/parameters/checkNameAvailabilityParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/CheckNameAvailabilityResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./common.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "CheckNameAvailabilityRequest": {
+      "description": "Check Name Availability Request",
+      "type": "object",
+      "required": [
+        "name",
+        "type"
+      ],
+      "properties": {
+        "name": {
+          "description": "Resource Name To Verify",
+          "type": "string"
+        },
+        "type": {
+          "description": "Fully qualified resource type which includes provider namespace",
+          "type": "string"
+        }
+      }
+    },
+    "CheckNameAvailabilityResponse": {
+      "description": "Check Name Availability Response",
+      "type": "object",
+      "required": [
+        "nameAvailable"
+      ],
+      "properties": {
+        "nameAvailable": {
+          "description": "if name Available",
+          "$ref": "#/definitions/NameAvailability"
+        },
+        "reason": {
+          "description": "Resource Name To Verify",
+          "$ref": "#/definitions/NameUnavailableReason"
+        },
+        "message": {
+          "description": "detail message",
+          "type": "string"
+        }
+      }
+    },
+    "Operation": {
+      "description": "REST API operation",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Operation name: {provider}/{resource}/{operation}",
+          "type": "string"
+        },
+        "display": {
+          "description": "The object that represents the operation.",
+          "$ref": "#/definitions/OperationDisplay"
+        }
+      }
+    },
+    "OperationDisplay": {
+      "description": "The object that represents the operation.",
+      "type": "object",
+      "required": [
+        "provider",
+        "resource",
+        "operation",
+        "description"
+      ],
+      "properties": {
+        "provider": {
+          "description": "Service provider: Microsoft.ResourceProvider",
+          "type": "string"
+        },
+        "resource": {
+          "description": "Resource on which the operation is performed: Profile, endpoint, etc.",
+          "type": "string"
+        },
+        "operation": {
+          "description": "Operation type: Read, write, delete, etc.",
+          "type": "string"
+        },
+        "description": {
+          "description": "Description of operation",
+          "type": "string"
+        }
+      }
+    },
+    "NameAvailability": {
+      "description": "Whether or not the name is available.",
+      "type": "string",
+      "enum": [
+        "true",
+        "false"
+      ],
+      "x-ms-enum": {
+        "name": "NameAvailability",
+        "modelAsString": true
+      }
+    },
+    "NameUnavailableReason": {
+      "description": "reason of name unavailable.",
+      "type": "string",
+      "enum": [
+        "Invalid",
+        "AlreadyExists"
+      ],
+      "x-ms-enum": {
+        "name": "NameUnavailableReason",
+        "modelAsString": true
+      }
+    },
+    "OperationPage": {
+      "description": "Result of the request to list Resource Provider operations. It contains a list of operations and a URL link to get the next set of results.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Operation"
+          },
+          "description": "List of operations supported by the Resource Provider."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "URL to get the next set of operation list results if there are any."
+        }
+      }
+    }
+  },
+  "parameters": {
+    "checkNameAvailabilityParameter": {
+      "name": "checkNameAvailability",
+      "description": "Check Name Availability Request.",
+      "in": "body",
+      "schema": {
+        "$ref": "#/definitions/CheckNameAvailabilityRequest"
+      },
+      "required": true,
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

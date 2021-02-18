@@ -1,0 +1,499 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "HybridNetworkManagementClient",
+    "description": "The resources in this swagger specification will be used to manage the hybrid network device",
+    "version": "2020-01-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridNetwork/devices/{deviceName}": {
+      "delete": {
+        "tags": [
+          "Devices"
+        ],
+        "operationId": "Devices_Delete",
+        "description": "Deletes the specified hybrid network device.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "deviceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the hybrid network device."
+          },
+          {
+            "$ref": "./common.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation was successful."
+          },
+          "202": {
+            "description": "Accepted. Sets the provisioningState to 'Deleting' until the operation is completed. Returns an operation Uri that can be queried to find the current state of the operation."
+          },
+          "204": {
+            "description": "Request successful. Resource with specified name does not exist."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./common.json#/definitions/ErrorDetails"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete hybrid network device resource": {
+            "$ref": "./examples/DeviceDelete.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      },
+      "get": {
+        "tags": [
+          "Devices"
+        ],
+        "operationId": "Devices_Get",
+        "description": "Gets information about the specified hybrid network device.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "deviceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of hybrid network device."
+          },
+          {
+            "$ref": "./common.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. The operation returns the resulting hybrid network device resource.",
+            "schema": {
+              "$ref": "#/definitions/Device"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./common.json#/definitions/ErrorDetails"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get hybrid network device": {
+            "$ref": "./examples/DeviceGet.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Devices"
+        ],
+        "operationId": "Devices_CreateOrUpdate",
+        "description": "Creates or updates a hybrid network device.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "deviceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Resource name for the device resource."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Device"
+            },
+            "description": "Parameters supplied to the create or update hybrid network device operation."
+          },
+          {
+            "$ref": "./common.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Create or update successful.",
+            "schema": {
+              "$ref": "#/definitions/Device"
+            }
+          },
+          "201": {
+            "description": "Create or update successful. The header contains ‘Azure-AsyncOperation’ header pointing to an operations resource. The operation URI can be queried to find the current state of the operation.",
+            "schema": {
+              "$ref": "#/definitions/Device"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./common.json#/definitions/ErrorDetails"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create or update hybrid network device": {
+            "$ref": "./examples/DeviceCreate.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      },
+      "patch": {
+        "tags": [
+          "Devices"
+        ],
+        "operationId": "Devices_UpdateTags",
+        "description": "Updates a hybrid network device tags.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "deviceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the hybrid network device."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "./common.json#/definitions/TagsObject"
+            },
+            "description": "Parameters supplied to update hybrid network device tags."
+          },
+          {
+            "$ref": "./common.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Update successful. The operation returns the resulting hybrid network device resource.",
+            "schema": {
+              "$ref": "#/definitions/Device"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./common.json#/definitions/ErrorDetails"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update hybrid network device tags": {
+            "$ref": "./examples/DeviceUpdateTags.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.HybridNetwork/devices": {
+      "get": {
+        "tags": [
+          "Devices"
+        ],
+        "operationId": "Devices_ListBySubscription",
+        "description": "Lists all the hybrid network devices in a subscription.",
+        "parameters": [
+          {
+            "$ref": "./common.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. The operation returns a list of hybrid network device resources.",
+            "schema": {
+              "$ref": "#/definitions/DeviceListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./common.json#/definitions/ErrorDetails"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List all hybrid network devices in a subscription.": {
+            "$ref": "./examples/DeviceListAll.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridNetwork/devices": {
+      "get": {
+        "tags": [
+          "Devices"
+        ],
+        "operationId": "Devices_ListByResourceGroup",
+        "description": "Lists all the hybrid network devices in a resource group.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "$ref": "./common.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. The operation returns a list of hybrid network device resources.",
+            "schema": {
+              "$ref": "#/definitions/DeviceListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./common.json#/definitions/ErrorDetails"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List all hybrid network devices in resource group": {
+            "$ref": "./examples/DeviceListAllByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridNetwork/devices/{deviceName}/listRegistrationKey": {
+      "post": {
+        "tags": [
+          "Devices"
+        ],
+        "operationId": "Devices_ListRegistrationKey",
+        "description": "List the registration key for the hybrid network device.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "deviceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the hybrid network device."
+          },
+          {
+            "$ref": "./common.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The registration key information for the hybrid network device.",
+            "schema": {
+              "$ref": "#/definitions/DeviceRegistrationKey"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./common.json#/definitions/ErrorDetails"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get hybrid network device registration key": {
+            "$ref": "./examples/DeviceListRegistrationKey.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Device": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/DevicePropertiesFormat",
+          "description": "Hybrid network device properties."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./common.json#/definitions/Resource"
+        }
+      ],
+      "description": "Hybrid network device resource."
+    },
+    "DevicePropertiesFormat": {
+      "description": "Hybrid network device properties.",
+      "required": [
+        "deviceType"
+      ],
+      "discriminator": "deviceType",
+      "properties": {
+        "status": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The current device status.",
+          "enum": [
+            "Unknown",
+            "NotRegistered",
+            "Registered"
+          ],
+          "x-ms-enum": {
+            "name": "Status",
+            "modelAsString": true
+          }
+        },
+        "provisioningState": {
+          "readOnly": true,
+          "$ref": "./common.json#/definitions/ProvisioningState",
+          "description": "The provisioning state of the hybrid network device resource."
+        },
+        "deviceType": {
+          "type": "string",
+          "description": "The type of the hybrid network device.",
+          "enum": [
+            "Unknown",
+            "AzureStackEdge"
+          ],
+          "x-ms-enum": {
+            "name": "DeviceType",
+            "modelAsString": true
+          }
+        },
+        "azureStackEdge": {
+          "x-ms-discriminator-value": "AzureStackEdge",
+          "$ref": "./common.json#/definitions/SubResource",
+          "description": "The reference to the azure stack edge device."
+        },
+        "virtualNetworkFunctions": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "./common.json#/definitions/SubResource"
+          },
+          "description": "The list of virtual network functions deployed on the hybrid network device."
+        }
+      }
+    },
+    "DeviceRegistrationKey": {
+      "description": "The hybrid network device registration key",
+      "properties": {
+        "registrationKey": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The registration key for hybrid network device."
+        }
+      }
+    },
+    "DeviceListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Device"
+          },
+          "description": "A list of hybrid network devices."
+        },
+        "nextLink": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The URL to get the next set of results."
+        }
+      },
+      "description": "Response for hybrid network devices API service call."
+    }
+  }
+}

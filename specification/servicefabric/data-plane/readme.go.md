@@ -17,6 +17,7 @@ batch:
   - tag: "6.3"
   - tag: "6.4"
   - tag: "6.5"
+  - tag: "7.0"
 ```
 
 ### Tag: 6.2 and go
@@ -50,4 +51,12 @@ These settings apply only when `--tag=6.5 --go` is specified on the command line
 
 ``` yaml $(tag) == '6.5' && $(go)
 output-folder: $(go-sdk-folder)/services/$(namespace)/6.5/$(namespace)
+```
+
+### Tag: 7.0 and go
+
+These settings apply only when `--tag=7.0 --go` is specified on the command line.
+
+``` yaml $(tag) == '7.0' && $(go)
+output-folder: $(go-sdk-folder)/services/$(namespace)/7.0/$(namespace)
 ```

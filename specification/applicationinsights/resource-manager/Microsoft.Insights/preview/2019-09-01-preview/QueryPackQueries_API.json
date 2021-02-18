@@ -1,0 +1,687 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Azure Log Analytics Query Packs",
+    "description": "Azure Log Analytics API reference for management of saved Queries within Query Packs.",
+    "version": "2019-09-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Insights/queryPacks/{queryPackName}/queries": {
+      "get": {
+        "description": "Gets a list of Queries defined within a Log Analytics QueryPack.",
+        "operationId": "Queries_List",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/QueryPackNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/MaxItemCountParameter"
+          },
+          {
+            "$ref": "#/parameters/IncludeBodyParameter"
+          },
+          {
+            "$ref": "#/parameters/ContinuationTokenParameter"
+          }
+        ],
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "responses": {
+          "200": {
+            "description": "A list containing 0 or more queries contained within the Log Analytics QueryPack.",
+            "schema": {
+              "$ref": "#/definitions/LogAnalyticsQueryPackQueryListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "QueryList": {
+            "$ref": "./examples/QueryPackQueriesList.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Insights/queryPacks/{queryPackName}/queries/search": {
+      "post": {
+        "description": "Search a list of Queries defined within a Log Analytics QueryPack according to given search properties.",
+        "operationId": "Queries_Search",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/QueryPackNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/MaxItemCountParameter"
+          },
+          {
+            "$ref": "#/parameters/IncludeBodyParameter"
+          },
+          {
+            "$ref": "#/parameters/ContinuationTokenParameter"
+          },
+          {
+            "name": "QuerySearchProperties",
+            "description": "Properties by which to search queries in the given Log Analytics QueryPack.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/LogAnalyticsQueryPackQuerySearchProperties"
+            }
+          }
+        ],
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "responses": {
+          "200": {
+            "description": "A list containing 0 or more queries contained within the Log Analytics QueryPack.",
+            "schema": {
+              "$ref": "#/definitions/LogAnalyticsQueryPackQueryListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "QuerySearch": {
+            "$ref": "./examples/QueryPackQueriesSearch.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Insights/queryPacks/{queryPackName}/queries/{id}": {
+      "get": {
+        "description": "Gets a specific Log Analytics Query defined within a Log Analytics QueryPack.",
+        "operationId": "Queries_Get",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/QueryPackNameParameter"
+          },
+          {
+            "$ref": "#/parameters/QueryIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A single query contained within the Log Analytics QueryPack.",
+            "schema": {
+              "$ref": "#/definitions/LogAnalyticsQueryPackQuery"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "QueryGet": {
+            "$ref": "./examples/QueryPackQueriesGet.json"
+          }
+        }
+      },
+      "put": {
+        "description": "Adds or Updates a specific Query within a Log Analytics QueryPack.",
+        "operationId": "Queries_Put",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/QueryPackNameParameter"
+          },
+          {
+            "$ref": "#/parameters/QueryIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "QueryPayload",
+            "description": "Properties that need to be specified to create a new query and add it to a Log Analytics QueryPack.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/LogAnalyticsQueryPackQuery"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The new or updated query contained within the Log Analytics QueryPack.",
+            "schema": {
+              "$ref": "#/definitions/LogAnalyticsQueryPackQuery"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "QueryPut": {
+            "$ref": "./examples/QueryPackQueriesPut.json"
+          }
+        }
+      },
+      "patch": {
+        "description": "Adds or Updates a specific Query within a Log Analytics QueryPack.",
+        "operationId": "Queries_Update",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/QueryPackNameParameter"
+          },
+          {
+            "$ref": "#/parameters/QueryIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "QueryPayload",
+            "description": "Properties that need to be specified to create a new query and add it to a Log Analytics QueryPack.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/LogAnalyticsQueryPackQuery"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The new or updated query contained within the Log Analytics QueryPack.",
+            "schema": {
+              "$ref": "#/definitions/LogAnalyticsQueryPackQuery"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "QueryPatch": {
+            "$ref": "./examples/QueryPackQueriesUpdate.json"
+          }
+        }
+      },
+      "delete": {
+        "description": "Deletes a specific Query defined within an Log Analytics QueryPack.",
+        "operationId": "Queries_Delete",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/QueryPackNameParameter"
+          },
+          {
+            "$ref": "#/parameters/QueryIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The query has been successfully removed from the Log Analytics QueryPack"
+          },
+          "204": {
+            "description": "The specified query or associated QueryPack does not exist."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "QueryDelete": {
+            "$ref": "./examples/QueryPackQueriesDelete.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ErrorResponse": {
+      "description": "Describe the format of an Error response.",
+      "type": "object",
+      "properties": {
+        "error": {
+          "description": "The error details.",
+          "$ref": "#/definitions/ErrorInfo"
+        }
+      }
+    },
+    "ErrorDetail": {
+      "title": "Error details.",
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "The error's code.",
+          "type": "string"
+        },
+        "message": {
+          "description": "A human readable error message.",
+          "type": "string"
+        },
+        "target": {
+          "description": "Indicates which property in the request is responsible for the error.",
+          "type": "string"
+        },
+        "value": {
+          "description": "Indicates which value in 'target' is responsible for the error.",
+          "type": "string"
+        },
+        "resources": {
+          "description": "Indicates resources which were responsible for the error.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": {
+          "description": "Additional properties that can be provided on the error details object",
+          "type": "object"
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ]
+    },
+    "ErrorInfo": {
+      "title": "The code and message for an error.",
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "A machine readable error code.",
+          "type": "string"
+        },
+        "message": {
+          "description": "A human readable error message.",
+          "type": "string"
+        },
+        "details": {
+          "description": "error details.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ErrorDetail"
+          }
+        },
+        "innererror": {
+          "description": "Inner error details if they exist.",
+          "$ref": "#/definitions/ErrorInfo"
+        },
+        "additionalProperties": {
+          "description": "Additional properties that can be provided on the error info object",
+          "type": "object"
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ]
+    },
+    "AzureResourceProperties": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Azure resource Id"
+        },
+        "name": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Azure resource name"
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Azure resource type"
+        },
+        "systemData": {
+          "$ref": "#/definitions/SystemData",
+          "readOnly": true,
+          "description": "Read only system data"
+        }
+      },
+      "description": "An Azure resource QueryPack-Query object"
+    },
+    "LogAnalyticsQueryPackQuery": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Properties that define an Log Analytics QueryPack-Query resource.",
+          "$ref": "#/definitions/LogAnalyticsQueryPackQueryProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/AzureResourceProperties"
+        }
+      ],
+      "description": "A Log Analytics QueryPack-Query definition."
+    },
+    "LogAnalyticsQueryPackQueryProperties": {
+      "description": "Properties that define an Log Analytics QueryPack-Query resource.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The unique ID of your application. This field cannot be changed.",
+          "readOnly": true
+        },
+        "displayName": {
+          "type": "string",
+          "readOnly": false,
+          "description": "Unique display name for your query within the Query Pack."
+        },
+        "timeCreated": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Creation Date for the Log Analytics Query, in ISO 8601 format.",
+          "format": "date-time"
+        },
+        "timeModified": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Last modified date of the Log Analytics Query, in ISO 8601 format.",
+          "format": "date-time"
+        },
+        "author": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Object Id of user creating the query."
+        },
+        "description": {
+          "type": "string",
+          "readOnly": false,
+          "description": "Description of the query."
+        },
+        "body": {
+          "type": "string",
+          "readOnly": false,
+          "description": "Body of the query."
+        },
+        "related": {
+          "description": "The related metadata items for the function.",
+          "type": "object",
+          "properties": {
+            "categories": {
+              "description": "The related categories for the function.",
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "resourceTypes": {
+              "description": "The related resource types for the function.",
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "solutions": {
+              "description": "The related Log Analytics solutions for the function.",
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "tags": {
+          "description": "Tags associated with the query.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "properties": {
+          "type": "object",
+          "description": "Additional properties that can be set for the query."
+        }
+      },
+      "required": [
+        "body",
+        "displayName"
+      ]
+    },
+    "LogAnalyticsQueryPackQuerySearchProperties": {
+      "description": "Properties that define an Log Analytics QueryPack-Query search properties.",
+      "properties": {
+        "related": {
+          "type": "object",
+          "description": "The related metadata items for the function.",
+          "properties": {
+            "categories": {
+              "description": "The related categories for the function.",
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "resourceTypes": {
+              "description": "The related resource types for the function.",
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "solutions": {
+              "description": "The related Log Analytics solutions for the function.",
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "tags": {
+          "description": "Tags associated with the query.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "LogAnalyticsQueryPackQueryListResult": {
+      "description": "Describes the list of Log Analytics QueryPack-Query resources.",
+      "required": [
+        "value"
+      ],
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of Log Analytics QueryPack Query definitions.",
+          "items": {
+            "$ref": "#/definitions/LogAnalyticsQueryPackQuery"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URI to get the next set of Log Analytics QueryPack definitions if too many QueryPack-Queries where returned in the result set."
+        }
+      }
+    },
+    "SystemData": {
+      "description": "Read only system data",
+      "type": "object",
+      "properties": {
+        "createdBy": {
+          "type": "string",
+          "description": "An identifier for the identity that created the resource"
+        },
+        "createdByType": {
+          "$ref": "#/definitions/IdentityType",
+          "description": "The type of identity that created the resource"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp of resource creation (UTC)"
+        },
+        "lastModifiedBy": {
+          "type": "string",
+          "description": "An identifier for the identity that last modified the resource"
+        },
+        "lastModifiedByType": {
+          "$ref": "#/definitions/IdentityType",
+          "description": "The type of identity that last modified the resource"
+        },
+        "lastModifiedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp of resource last modification (UTC)"
+        }
+      }
+    },
+    "IdentityType": {
+      "description": "The type of identity that creates/modifies resources",
+      "type": "string",
+      "enum": [
+        "user",
+        "application",
+        "managedIdentity",
+        "key"
+      ],
+      "x-ms-enum": {
+        "name": "IdentityType",
+        "modelAsString": true
+      }
+    }
+  },
+  "parameters": {
+    "QueryPackNameParameter": {
+      "name": "queryPackName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the Log Analytics QueryPack resource.",
+      "x-ms-parameter-location": "method"
+    },
+    "QueryIdParameter": {
+      "name": "id",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The id of a specific query defined in the Log Analytics QueryPack",
+      "x-ms-parameter-location": "method"
+    },
+    "IncludeBodyParameter": {
+      "name": "includeBody",
+      "in": "query",
+      "required": false,
+      "type": "boolean",
+      "description": "Flag indicating whether or not to return the body of each applicable query. If false, only return the query information.",
+      "x-ms-parameter-location": "method"
+    },
+    "MaxItemCountParameter": {
+      "name": "$top",
+      "in": "query",
+      "required": false,
+      "type": "integer",
+      "description": "Maximum items returned in page.",
+      "x-ms-parameter-location": "method"
+    },
+    "ContinuationTokenParameter": {
+      "name": "$skipToken",
+      "in": "query",
+      "required": false,
+      "type": "string",
+      "description": "Base64 encoded token used to fetch the next page of items. Default is null.",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

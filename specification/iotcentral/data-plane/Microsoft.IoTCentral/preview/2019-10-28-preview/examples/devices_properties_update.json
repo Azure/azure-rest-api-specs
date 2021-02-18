@@ -1,0 +1,31 @@
+{
+  "title": "Update device properties",
+  "description": "Update the values of read-write properties of a device",
+  "parameters": {
+    "centralDnsSuffixInPath": "azureiotcentral.com",
+    "subdomain": "appsubdomain",
+    "device_id": "mx1",
+    "body": {
+      "settings": {
+        "voltage": 25,
+        "current": 7
+      }
+    }
+  },
+  "responses": {
+    "202": {
+      "body": {
+        "settings": {
+          "$metadata": {
+            "voltage": {
+              "desiredValue": 25
+            },
+            "current": {
+              "desiredValue": 7
+            }
+          }
+        }
+      }
+    }
+  }
+}

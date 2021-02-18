@@ -54,10 +54,12 @@
         },
         "resultType": {
           "description": "Result type",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         }
       },
+      "required": [
+        "resultType"
+      ],
       "discriminator": "resultType"
     },
     "MigratePostgreSqlAzureDbForPostgreSqlSyncTaskOutputMigrationLevel": {
@@ -94,6 +96,21 @@
         "targetServer": {
           "type": "string",
           "description": "Target server name",
+          "readOnly": true
+        },
+        "sourceServerType": {
+          "$ref": "./TasksCommon.json#/definitions/ScenarioSource",
+          "description": "Source server type.",
+          "readOnly": true
+        },
+        "targetServerType": {
+          "$ref": "./TasksCommon.json#/definitions/ScenarioTarget",
+          "description": "Target server type.",
+          "readOnly": true
+        },
+        "state": {
+          "$ref": "./TasksCommon.json#/definitions/ReplicateMigrationState",
+          "description": "Migration status",
           "readOnly": true
         }
       },

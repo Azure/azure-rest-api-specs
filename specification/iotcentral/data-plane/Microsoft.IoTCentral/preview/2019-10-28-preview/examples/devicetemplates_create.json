@@ -1,0 +1,148 @@
+{
+  "title": "Create a device template",
+  "description": "Creates and publishes a device template. In the body, specify the full device template object. Default views will be automatically generated.",
+  "parameters": {
+    "centralDnsSuffixInPath": "azureiotcentral.com",
+    "subdomain": "appsubdomain",
+    "device_template_id": "environmentstemplateid",
+    "body": {
+      "types": [
+        "DeviceModel"
+      ],
+      "displayName": "Environment sensor 1",
+      "capabilityModel": {
+        "@id": "urn:storeAnalyticsCheckoutPnp:capabilityModel:1",
+        "@type": [
+          "CapabilityModel"
+        ],
+        "implements": [
+          {
+            "@id": "urn:storeAnalyticsCheckoutPnp:capabilityModel:fyy5xn_y:1",
+            "@type": [
+              "InterfaceInstance"
+            ],
+            "displayName": "Interface",
+            "name": "Interface",
+            "schema": {
+              "@id": "urn:storeAnalyticsCheckoutPnp:Interface:1",
+              "@type": [
+                "Interface"
+              ],
+              "displayName": "Interface",
+              "contents": [
+                {
+                  "@id": "urn:storeAnalyticsCheckoutPnp:Interface:Temperature:1",
+                  "@type": [
+                    "Telemetry",
+                    "SemanticType/Temperature"
+                  ],
+                  "displayName": "Temperature",
+                  "name": "Temperature",
+                  "schema": "double",
+                  "unit": "celsius"
+                },
+                {
+                  "@id": "urn:storeAnalyticsCheckoutPnp:Interface:Humidity:1",
+                  "@type": [
+                    "Telemetry",
+                    "SemanticType/Humidity"
+                  ],
+                  "displayName": "Humidity",
+                  "name": "Humidity",
+                  "schema": "double",
+                  "unit": "percent"
+                },
+                {
+                  "@id": "urn:storeAnalyticsCheckoutPnp:Interface:Occupancy:1",
+                  "@type": [
+                    "Telemetry"
+                  ],
+                  "displayName": "Occupancy",
+                  "name": "Occupancy",
+                  "schema": "double"
+                }
+              ]
+            }
+          }
+        ],
+        "displayName": "Motion detector",
+        "contents": [],
+        "@context": [
+          "http://azureiot.com/v1/contexts/IoTModel.json"
+        ]
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "environmentstemplateid",
+        "types": [
+          "DeviceModel"
+        ],
+        "displayName": "Environment sensor 1",
+        "capabilityModel": {
+          "@id": "urn:storeAnalyticsCheckoutPnp:capabilityModel:1",
+          "@type": [
+            "CapabilityModel"
+          ],
+          "implements": [
+            {
+              "@id": "urn:storeAnalyticsCheckoutPnp:capabilityModel:fyy5xn_y:1",
+              "@type": [
+                "InterfaceInstance"
+              ],
+              "displayName": "Interface",
+              "name": "Interface",
+              "schema": {
+                "@id": "urn:storeAnalyticsCheckoutPnp:Interface:1",
+                "@type": [
+                  "Interface"
+                ],
+                "displayName": "Interface",
+                "contents": [
+                  {
+                    "@id": "urn:storeAnalyticsCheckoutPnp:Interface:Temperature:1",
+                    "@type": [
+                      "Telemetry",
+                      "SemanticType/Temperature"
+                    ],
+                    "displayName": "Temperature",
+                    "name": "Temperature",
+                    "schema": "double",
+                    "unit": "celsius"
+                  },
+                  {
+                    "@id": "urn:storeAnalyticsCheckoutPnp:Interface:Humidity:1",
+                    "@type": [
+                      "Telemetry",
+                      "SemanticType/Humidity"
+                    ],
+                    "displayName": "Humidity",
+                    "name": "Humidity",
+                    "schema": "double",
+                    "unit": "percent"
+                  },
+                  {
+                    "@id": "urn:storeAnalyticsCheckoutPnp:Interface:Occupancy:1",
+                    "@type": [
+                      "Telemetry"
+                    ],
+                    "displayName": "Occupancy",
+                    "name": "Occupancy",
+                    "schema": "double"
+                  }
+                ]
+              }
+            }
+          ],
+          "displayName": "Motion detector",
+          "contents": [],
+          "@context": [
+            "http://azureiot.com/v1/contexts/IoTModel.json"
+          ]
+        }
+      }
+    }
+  }
+}

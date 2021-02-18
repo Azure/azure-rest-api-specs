@@ -81,6 +81,9 @@ swagger-to-sdk:
   - repo: azure-sdk-for-ruby
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_datalake_analytics']
+  - repo: azure-resource-manager-schemas
+    after_scripts:
+      - node sdkauto_afterscript.js datalake-analytics/resource-manager
 ```
 
 
@@ -148,7 +151,7 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 ``` yaml $(tag) == 'package-2015-10-preview' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.datalakeanalytics.v2015_10_01_preview
-  output-folder: $(azure-libraries-for-java-folder)/datalakeanalytics/resource-manager/v2015_10_01_preview
+  output-folder: $(azure-libraries-for-java-folder)/sdk/datalakeanalytics/mgmt-v2015_10_01_preview
 regenerate-manager: true
 generate-interface: true
 ```
@@ -161,12 +164,16 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 ``` yaml $(tag) == 'package-2016-11' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.datalakeanalytics.v2016_11_01
-  output-folder: $(azure-libraries-for-java-folder)/datalakeanalytics/resource-manager/v2016_11_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/datalakeanalytics/mgmt-v2016_11_01
 regenerate-manager: true
 generate-interface: true
 ```
 
 
+
+## AzureResourceSchema
+
+See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
 
 ## Multi-API/Profile support for AutoRest v3 generators 
 

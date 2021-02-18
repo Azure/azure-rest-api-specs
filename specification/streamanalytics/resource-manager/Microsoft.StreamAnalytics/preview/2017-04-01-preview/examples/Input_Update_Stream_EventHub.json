@@ -1,0 +1,51 @@
+{
+  "parameters": {
+    "api-version": "2017-04-01-preview",
+    "subscriptionId": "56b5e0a9-b645-407d-99b0-c64f86013e3d",
+    "resourceGroupName": "sjrg",
+    "jobName": "sj197",
+    "inputName": "input7425",
+    "input": {
+      "properties": {
+        "type": "Stream",
+        "datasource": {
+          "type": "Microsoft.ServiceBus/EventHub",
+          "properties": {
+            "consumerGroupName": "differentConsumerGroupName"
+          }
+        },
+        "serialization": {
+          "type": "Avro"
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "headers": {
+        "ETag": "7548f259-81b5-4ea7-b896-25c6717d98ba"
+      },
+      "body": {
+        "id": "/subscriptions/56b5e0a9-b645-407d-99b0-c64f86013e3d/resourceGroups/sjrg/providers/Microsoft.StreamAnalytics/streamingjobs/sj197/inputs/input7425",
+        "name": "input7425",
+        "type": "Microsoft.StreamAnalytics/streamingjobs/inputs",
+        "properties": {
+          "type": "Stream",
+          "datasource": {
+            "type": "Microsoft.ServiceBus/EventHub",
+            "properties": {
+              "eventHubName": "sdkeventhub",
+              "consumerGroupName": "differentConsumerGroupName",
+              "serviceBusNamespace": "sdktest",
+              "sharedAccessPolicyName": "RootManageSharedAccessKey"
+            }
+          },
+          "serialization": {
+            "type": "Avro",
+            "properties": {}
+          }
+        }
+      }
+    }
+  }
+}

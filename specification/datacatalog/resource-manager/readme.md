@@ -54,6 +54,9 @@ swagger-to-sdk:
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
+  - repo: azure-resource-manager-schemas
+    after_scripts:
+      - node sdkauto_afterscript.js datacatalog/resource-manager
 ```
 
 ## C#
@@ -127,12 +130,16 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 ``` yaml $(tag) == 'package-2016-03-30' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.datacatalog.v2016_03_30
-  output-folder: $(azure-libraries-for-java-folder)/datacatalog/resource-manager/v2016_03_30
+  output-folder: $(azure-libraries-for-java-folder)/sdk/datacatalog/mgmt-v2016_03_30
 regenerate-manager: true
 generate-interface: true
 ```
 
 
+
+## AzureResourceSchema
+
+See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
 
 ## Multi-API/Profile support for AutoRest v3 generators 
 

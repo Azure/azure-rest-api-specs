@@ -1,0 +1,700 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2020-02-02-preview",
+    "title": "SqlManagementClient",
+    "description": "The Azure SQL Database management API provides a RESTful set of web APIs that interact with Azure SQL Database services to manage your databases. The API enables users to create, retrieve, update, and delete databases, servers, and other entities."
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/import": {
+      "post": {
+        "tags": [
+          "ImportExport"
+        ],
+        "description": "Imports a bacpac into a new database.",
+        "operationId": "ImportExport_Import",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DatabaseNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The database import request parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ImportExistingDatabaseDefinition"
+            }
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully imported the database.",
+            "schema": {
+              "$ref": "#/definitions/ImportExportOperationResult"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 MissingImportExportInputParameters - Missing ImportExport input parameters.\n\n * 400 PolybaseImportAuthenticationTypeNotSupported - Authentication type parameter is not support for PolybaseImport operation.\n\n * 400 FeatureDisabledOnSelectedEdition - User attempted to use a feature which is disabled on current database edition.\n\n * 400 InvalidOperationType - Provide a valid operation type.\n\n * 404 ResourceNotFound - Invalid request specifying a non-existent resource.\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 404 ImportExportOperationIdNotFound - The operation Id for import or export cannot be found.\n\n * 404 ServerNotInSubscription - Specified server does not exist on the specified subscription.\n\n * 409 ImportExportOperationInProgress - There is an import or export operation in progress on the database."
+          },
+          "202": {
+            "description": "Importing the database is in progress."
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Imports to an existing empty database.": {
+            "$ref": "./examples/ImportDatabase.json"
+          },
+          "Imports to an existing empty database, using private link to communicate with SQL server and storage account.": {
+            "$ref": "./examples/ImportDatabaseWithNetworkIsolation.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/import": {
+      "post": {
+        "tags": [
+          "ImportExport"
+        ],
+        "description": "Imports a bacpac into a new database.",
+        "operationId": "Servers_ImportDatabase",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The database import request parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ImportNewDatabaseDefinition"
+            }
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully imported the database.",
+            "schema": {
+              "$ref": "#/definitions/ImportExportOperationResult"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 MissingImportExportInputParameters - Missing ImportExport input parameters.\n\n * 400 PolybaseImportAuthenticationTypeNotSupported - Authentication type parameter is not support for PolybaseImport operation.\n\n * 400 FeatureDisabledOnSelectedEdition - User attempted to use a feature which is disabled on current database edition.\n\n * 400 InvalidOperationType - Provide a valid operation type.\n\n * 404 ResourceNotFound - Invalid request specifying a non-existent resource.\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 404 ImportExportOperationIdNotFound - The operation Id for import or export cannot be found.\n\n * 404 ServerNotInSubscription - Specified server does not exist on the specified subscription.\n\n * 409 ImportExportOperationInProgress - There is an import or export operation in progress on the database."
+          },
+          "202": {
+            "description": "Importing the database is in progress."
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Imports to a new database.": {
+            "$ref": "./examples/ImportNewDatabase.json"
+          },
+          "Imports to a new database, using private link for the SQL server and storage account.": {
+            "$ref": "./examples/ImportNewDatabaseWithNetworkIsolation.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/export": {
+      "post": {
+        "tags": [
+          "ImportExport"
+        ],
+        "description": "Exports a database.",
+        "operationId": "Databases_Export",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DatabaseNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The database export request parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ExportDatabaseDefinition"
+            }
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully exported the database.",
+            "schema": {
+              "$ref": "#/definitions/ImportExportOperationResult"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 MissingImportExportInputParameters - Missing ImportExport input parameters.\n\n * 400 PolybaseImportAuthenticationTypeNotSupported - Authentication type parameter is not support for PolybaseImport operation.\n\n * 400 FeatureDisabledOnSelectedEdition - User attempted to use a feature which is disabled on current database edition.\n\n * 400 InvalidOperationType - Provide a valid operation type.\n\n * 404 ResourceNotFound - Invalid request specifying a non-existent resource.\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 404 ImportExportOperationIdNotFound - The operation Id for import or export cannot be found.\n\n * 404 ServerNotInSubscription - Specified server does not exist on the specified subscription.\n\n * 409 ImportExportOperationInProgress - There is an import or export operation in progress on the database."
+          },
+          "202": {
+            "description": "Exporting the database is in progress."
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Exports a database.": {
+            "$ref": "./examples/ExportDatabase.json"
+          },
+          "Exports a database, using private link to communicate with SQL server and storage account.": {
+            "$ref": "./examples/ExportDatabaseWithNetworkIsolation.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ImportExistingDatabaseDefinition": {
+      "description": "Contains the information necessary to perform import operation for existing database.",
+      "required": [
+        "storageKeyType",
+        "storageKey",
+        "storageUri",
+        "administratorLogin",
+        "administratorLoginPassword"
+      ],
+      "type": "object",
+      "properties": {
+        "storageKeyType": {
+          "description": "Storage key type.",
+          "enum": [
+            "SharedAccessKey",
+            "StorageAccessKey"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "StorageKeyType",
+            "modelAsString": true
+          },
+          "x-ms-mutability": [
+            "create"
+          ]
+        },
+        "storageKey": {
+          "description": "Storage key.",
+          "type": "string",
+          "x-ms-mutability": [
+            "create"
+          ]
+        },
+        "storageUri": {
+          "description": "Storage Uri.",
+          "type": "string",
+          "x-ms-mutability": [
+            "create"
+          ]
+        },
+        "administratorLogin": {
+          "description": "Administrator login name.",
+          "type": "string",
+          "x-ms-mutability": [
+            "create"
+          ]
+        },
+        "administratorLoginPassword": {
+          "description": "Administrator login password.",
+          "type": "string",
+          "x-ms-mutability": [
+            "create"
+          ]
+        },
+        "authenticationType": {
+          "description": "Authentication type.",
+          "type": "string",
+          "x-ms-mutability": [
+            "create"
+          ]
+        },
+        "networkIsolation": {
+          "$ref": "#/definitions/NetworkIsolationSettings",
+          "description": "Optional resource information to enable network isolation for request.",
+          "x-ms-mutability": [
+            "create"
+          ]
+        }
+      }
+    },
+    "NetworkIsolationSettings": {
+      "description": "Contains the ARM resources for which to create private endpoint connection.",
+      "type": "object",
+      "properties": {
+        "storageAccountResourceId": {
+          "description": "The resource id for the storage account used to store BACPAC file. If set, private endpoint connection will be created for the storage account. Must match storage account used for StorageUri parameter.",
+          "type": "string",
+          "x-ms-mutability": [
+            "create"
+          ]
+        },
+        "sqlServerResourceId": {
+          "description": "The resource id for the SQL server which is the target of this request. If set, private endpoint connection will be created for the SQL server. Must match server which is target of the operation.",
+          "type": "string",
+          "x-ms-mutability": [
+            "create"
+          ]
+        }
+      }
+    },
+    "ImportExportOperationResultProperties": {
+      "description": "Contains the operation result properties for import/export operation.",
+      "type": "object",
+      "properties": {
+        "requestId": {
+          "format": "uuid",
+          "description": "Request Id.",
+          "type": "string",
+          "readOnly": true
+        },
+        "requestType": {
+          "description": "Request type.",
+          "type": "string",
+          "readOnly": true
+        },
+        "queuedTime": {
+          "description": "Queued time.",
+          "type": "string",
+          "readOnly": true
+        },
+        "lastModifiedTime": {
+          "description": "Last modified time.",
+          "type": "string",
+          "readOnly": true
+        },
+        "blobUri": {
+          "description": "Blob Uri.",
+          "type": "string",
+          "readOnly": true
+        },
+        "serverName": {
+          "description": "Server name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "databaseName": {
+          "description": "Database name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "status": {
+          "description": "Operation status.",
+          "type": "string",
+          "readOnly": true
+        },
+        "errorMessage": {
+          "description": "Error message.",
+          "type": "string",
+          "readOnly": true
+        },
+        "privateEndpointConnections": {
+          "description": "Gets the status of private endpoints associated with this request.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PrivateEndpointConnectionRequestStatus"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "PrivateEndpointConnectionRequestStatus": {
+      "description": "Contains the private endpoint connection requests status.",
+      "type": "object",
+      "properties": {
+        "privateLinkServiceId": {
+          "description": "Resource id for which the private endpoint is created.",
+          "type": "string",
+          "readOnly": true
+        },
+        "privateEndpointConnectionName": {
+          "description": "The connection name for the private endpoint.",
+          "type": "string",
+          "readOnly": true
+        },
+        "status": {
+          "description": "Status of this private endpoint connection.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "Resource": {
+      "description": "ARM resource.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Resource ID.",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "Resource name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "Resource type.",
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "ProxyResource": {
+      "description": "ARM proxy resource.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {}
+    },
+    "ImportExportOperationResult": {
+      "description": "An ImportExport operation result resource.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ImportExportOperationResultProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "ImportNewDatabaseDefinition": {
+      "description": "Contains the information necessary to perform import operation for new database.",
+      "required": [
+        "storageKeyType",
+        "storageKey",
+        "storageUri",
+        "administratorLogin",
+        "administratorLoginPassword"
+      ],
+      "type": "object",
+      "properties": {
+        "databaseName": {
+          "description": "Name of the import database.",
+          "type": "string",
+          "x-ms-mutability": [
+            "create"
+          ]
+        },
+        "edition": {
+          "description": "Edition of the import database.",
+          "type": "string",
+          "x-ms-mutability": [
+            "create"
+          ]
+        },
+        "serviceObjectiveName": {
+          "description": "Service level objective name of the import database.",
+          "type": "string",
+          "x-ms-mutability": [
+            "create"
+          ]
+        },
+        "maxSizeBytes": {
+          "description": "Max size in bytes for the import database.",
+          "type": "string",
+          "x-ms-mutability": [
+            "create"
+          ]
+        },
+        "storageKeyType": {
+          "description": "Storage key type.",
+          "enum": [
+            "SharedAccessKey",
+            "StorageAccessKey"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "StorageKeyType",
+            "modelAsString": true
+          },
+          "x-ms-mutability": [
+            "create"
+          ]
+        },
+        "storageKey": {
+          "description": "Storage key.",
+          "type": "string",
+          "x-ms-mutability": [
+            "create"
+          ]
+        },
+        "storageUri": {
+          "description": "Storage Uri.",
+          "type": "string",
+          "x-ms-mutability": [
+            "create"
+          ]
+        },
+        "administratorLogin": {
+          "description": "Administrator login name.",
+          "type": "string",
+          "x-ms-mutability": [
+            "create"
+          ]
+        },
+        "administratorLoginPassword": {
+          "description": "Administrator login password.",
+          "type": "string",
+          "x-ms-mutability": [
+            "create"
+          ]
+        },
+        "authenticationType": {
+          "description": "Authentication type.",
+          "type": "string",
+          "x-ms-mutability": [
+            "create"
+          ]
+        },
+        "networkIsolation": {
+          "$ref": "#/definitions/NetworkIsolationSettings",
+          "description": "Optional resource information to enable network isolation for request.",
+          "x-ms-mutability": [
+            "create"
+          ]
+        }
+      }
+    },
+    "ExportDatabaseDefinition": {
+      "description": "Contains the information necessary to perform export database operation.",
+      "required": [
+        "storageKeyType",
+        "storageKey",
+        "storageUri",
+        "administratorLogin",
+        "administratorLoginPassword"
+      ],
+      "type": "object",
+      "properties": {
+        "storageKeyType": {
+          "description": "Storage key type.",
+          "enum": [
+            "SharedAccessKey",
+            "StorageAccessKey"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "StorageKeyType",
+            "modelAsString": true
+          },
+          "x-ms-mutability": [
+            "create"
+          ]
+        },
+        "storageKey": {
+          "description": "Storage key.",
+          "type": "string",
+          "x-ms-mutability": [
+            "create"
+          ]
+        },
+        "storageUri": {
+          "description": "Storage Uri.",
+          "type": "string",
+          "x-ms-mutability": [
+            "create"
+          ]
+        },
+        "administratorLogin": {
+          "description": "Administrator login name.",
+          "type": "string",
+          "x-ms-mutability": [
+            "create"
+          ]
+        },
+        "administratorLoginPassword": {
+          "description": "Administrator login password.",
+          "type": "string",
+          "x-ms-mutability": [
+            "create"
+          ]
+        },
+        "authenticationType": {
+          "description": "Authentication type.",
+          "type": "string",
+          "x-ms-mutability": [
+            "create"
+          ]
+        },
+        "networkIsolation": {
+          "$ref": "#/definitions/NetworkIsolationSettings",
+          "description": "Optional resource information to enable network isolation for request.",
+          "x-ms-mutability": [
+            "create"
+          ]
+        }
+      }
+    }
+  },
+  "parameters": {
+    "SubscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "description": "The subscription ID that identifies an Azure subscription.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "client"
+    },
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "description": "The API version to use for the request.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "client"
+    },
+    "ResourceGroupParameter": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "description": "The name of the resource group that contains the resource. You can obtain this value from the Azure Resource Manager API or the portal.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "ServerNameParameter": {
+      "name": "serverName",
+      "in": "path",
+      "description": "The name of the server.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "ManagedInstanceNameParameter": {
+      "name": "managedInstanceName",
+      "in": "path",
+      "description": "The name of the managed instance.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "DatabaseNameParameter": {
+      "name": "databaseName",
+      "in": "path",
+      "description": "The name of the database.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "BlobAuditingPolicyNameParameter": {
+      "name": "blobAuditingPolicyName",
+      "in": "path",
+      "description": "The name of the blob auditing policy.",
+      "required": true,
+      "type": "string",
+      "enum": [
+        "default"
+      ],
+      "x-ms-parameter-location": "method"
+    },
+    "SqlVirtualMachineInstanceNameParameter": {
+      "name": "sqlVirtualMachineInstanceName",
+      "in": "path",
+      "description": "The name of the SqlVirtualMachineInstance.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "SqlVirtualMachineContainerNameParameter": {
+      "name": "sqlVirtualMachineContainerName",
+      "in": "path",
+      "description": "The name of the SqlVirtualMachineContainer.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "VirtualClusterNameParameter": {
+      "name": "virtualClusterName",
+      "in": "path",
+      "description": "The name of the virtual cluster.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "WorkspaceNameParameter": {
+      "name": "workspaceName",
+      "in": "path",
+      "description": "The name of the workspace.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "SqlPoolNameParameter": {
+      "name": "sqlPoolName",
+      "in": "path",
+      "description": "The name of the sql pool.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "SqlDatabaseNameParameter": {
+      "name": "sqlDatabaseName",
+      "in": "path",
+      "description": "The name of the sql database.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  }
+}

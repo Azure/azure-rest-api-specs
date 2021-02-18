@@ -1,0 +1,804 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2020-02-02-preview",
+    "title": "SqlManagementClient",
+    "description": "The Azure SQL Database management API provides a RESTful set of web APIs that interact with Azure SQL Database services to manage your databases. The API enables users to create, retrieve, update, and delete databases, servers, and other entities."
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances": {
+      "get": {
+        "tags": [
+          "ManagedInstances"
+        ],
+        "description": "Gets a list of managed instances in a resource group.",
+        "operationId": "ManagedInstances_ListByResourceGroup",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the list of managed instances.",
+            "schema": {
+              "$ref": "#/definitions/ManagedInstanceListResult"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 SubscriptionNotFound - The requested subscription was not found.\n\n * 400 ProvisioningDisabled - Displays error message from resources operation authorizer as is, without changes\n\n * 400 ManagementServiceFeatureDisabled - User attempted to use a feature which is disabled.\n\n * 404 ServerNotInSubscription - Specified server does not exist on the specified subscription.\n\n * 404 ManagedInstanceNotInSubscriptionResourceGroup - Specified managed instance does not exist in the specified resource group and subscription.\n\n * 404 ResourceNotFound - The requested resource was not found.\n\n * 409 ConflictingManagedInstanceOperation - An operation is currently in progress for the managed instance.\n\n * 409 MiDropFailedOnAuthLocks - User tried to drop last Managed Instance in subnet that has Lock applied on resource(s).\n\n * 409 MiCreateFailedNonDelegatedSubnet - User tried to deploy Managed Instance or Managed Instance pool in subnet that is not delegated to Microsoft.Sql/managedInstances.\n\n * 429 SubscriptionTooManyCreateUpdateRequests - Requests beyond max requests that can be processed by available resources.\n\n * 429 SubscriptionTooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 429 SubscriptionTooManyCreateUpdateRequests - Requests beyond max requests that can be processed by available resources.\n\n * 429 SubscriptionTooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 429 ConflictingSubscriptionOperation - An operation is currently in progress for the subscription.\n\n * 503 TooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 503 TooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 504 RequestTimeout - Service request exceeded the allowed timeout.\n\n * 504 RequestTimeout - Service request exceeded the allowed timeout."
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List managed instances by resource group": {
+            "$ref": "./examples/ManagedInstanceListByResourceGroup.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}": {
+      "get": {
+        "tags": [
+          "ManagedInstances"
+        ],
+        "description": "Gets a managed instance.",
+        "operationId": "ManagedInstances_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ManagedInstanceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the specified managed instance.",
+            "schema": {
+              "$ref": "#/definitions/ManagedInstance"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 SubscriptionNotFound - The requested subscription was not found.\n\n * 400 ProvisioningDisabled - Displays error message from resources operation authorizer as is, without changes\n\n * 400 ManagementServiceFeatureDisabled - User attempted to use a feature which is disabled.\n\n * 404 ServerNotInSubscription - Specified server does not exist on the specified subscription.\n\n * 404 ManagedInstanceNotInSubscriptionResourceGroup - Specified managed instance does not exist in the specified resource group and subscription.\n\n * 404 ResourceNotFound - The requested resource was not found.\n\n * 409 ConflictingManagedInstanceOperation - An operation is currently in progress for the managed instance.\n\n * 409 MiDropFailedOnAuthLocks - User tried to drop last Managed Instance in subnet that has Lock applied on resource(s).\n\n * 409 MiCreateFailedNonDelegatedSubnet - User tried to deploy Managed Instance or Managed Instance pool in subnet that is not delegated to Microsoft.Sql/managedInstances.\n\n * 429 SubscriptionTooManyCreateUpdateRequests - Requests beyond max requests that can be processed by available resources.\n\n * 429 SubscriptionTooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 429 SubscriptionTooManyCreateUpdateRequests - Requests beyond max requests that can be processed by available resources.\n\n * 429 SubscriptionTooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 429 ConflictingSubscriptionOperation - An operation is currently in progress for the subscription.\n\n * 503 TooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 503 TooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 504 RequestTimeout - Service request exceeded the allowed timeout.\n\n * 504 RequestTimeout - Service request exceeded the allowed timeout."
+          }
+        },
+        "x-ms-examples": {
+          "Get managed instance": {
+            "$ref": "./examples/ManagedInstanceGet.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "ManagedInstances"
+        ],
+        "description": "Creates or updates a managed instance.",
+        "operationId": "ManagedInstances_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ManagedInstanceNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The requested managed instance resource state.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ManagedInstance"
+            }
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully updated the managed instance.",
+            "schema": {
+              "$ref": "#/definitions/ManagedInstance"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 SubscriptionNotFound - The requested subscription was not found.\n\n * 400 HkCannotSwitchToInactive - The database cannot proceed with pricing-tier update as it has memory-optimized objects. Please drop such objects and try again.\n\n * 400 ManagedInstanceInvalidStorageSizeLessThenCurrentSizeUsed - Invalid storage size: Storage size limit ({0} GB) is less that current storage used ({1} GB). Please specify higher storage size limit.\n\n * 400 InstanceTimezoneUpdateNotSupported - Instance timezone update not supported.\n\n * 400 CreateManagedInstanceWithNonDefaultTimezoneNotSupported - Create Managed Instance with non-default timezone not supported.\n\n * 400 ManagedInstanceIpAddressRangeLimit - Cannot create a Managed Instance as there are not enough available ip addresses in the selected subnet\n\n * 400 VnetDelegationNotAllowed - User tried to inject Managed Server to subnet which is delegated.\n\n * 400 SubnetHasResourcesOfDifferentType - User tried to create MI in subnet that has resources of different type.\n\n * 400 UpdateManagedServerWithMaintenanceWindowNotAllowed - Update of Managed Instance with maintenance window settings is not allowed.\n\n * 400 VnetPrepareNIPFailed - User tried to prepare subnet that has a conflict with NetworkIntentPolicy.\n\n * 400 InvalidUsername - Supplied user name contains invalid characters.\n\n * 400 ManagedInstanceDeprecatedHardwareFamily - Changing the hardware generation to deprecated {0} generation is not possible.\n\n * 400 ManagedInstanceBackupStorageTypeNotSupported - Backup storage type parameter is not allowed in the instance update operation.\n\n * 400 InvalidParameterValue - An invalid value was given to a parameter.\n\n * 400 InstancePoolNotEnoughCapacity - An instance pool does not have enough capacity\n\n * 400 ServerNotFound - The requested server was not found.\n\n * 400 TokenTooLong - The provided token is too long.\n\n * 400 ManagedInstanceSloUpdateFailed - SLO '{0}' operation cannot succeed as the memory usage of '{1}' exceeds the quota.\n\n * 400 ManagedInstanceLocalStorageUpdateSloDisabled - Update SLO for managed instances with local storage is not supported yet.\n\n * 400 InvalidLoginName - The provided login name is invalid.\n\n * 400 RegionDoesNotSupportVersion - A user attempted to create a server of a specified version in a location where that server version isn't supported.\n\n * 400 PasswordTooShort - The provided password is too short\n\n * 400 PasswordTooLong - The provided password is too long.\n\n * 400 PasswordNotComplex - The provided password is not complex enough.\n\n * 400 GatewayInvalidEdition - '{0}' is not a valid database edition in this version of SQL Server.\n\n * 400 InvalidSubnetResourceId - The provided subnet resource ID for the managed instance create or update is invalid.\n\n * 400 SubscriptionNotFound - The requested subscription was not found.\n\n * 400 InvalidLocation - An invalid location was specified.\n\n * 400 VnetInWrongRegion - Virtual network is in wrong region.\n\n * 400 InvalidServerName - Invalid server name specified.\n\n * 400 VnetAddressRangeError - Virtual network address range is invalid.\n\n * 400 VnetConfigIsNotAllowed - Virtual network configuration is not allowed.\n\n * 400 InvalidCollation - Invalid collation.\n\n * 400 InvalidIdentifier - The identifier contains NULL or an invalid unicode character.\n\n * 400 ManagedInstanceClassicVnetNotSupported - Managed Instance cannot be joined to a classic virtual network.\n\n * 400 AlterDbDeactivatedNotSupported - Database Operation failed for Server '{0}', Database '{1}' due to unexpected delay. Please try again.\n\n * 400 RegionDoesNotAllowProvisioning - The selected location is not accepting new Windows Azure SQL Database servers. This may change at a later time.\n\n * 400 VnetConfigHasNsg - User tried to inject Managed Server subnet with Network Security Groups.\n\n * 400 VnetConfigHasNoUdr - User tried to inject Managed Server subnet without default User Defined Route Table.\n\n * 400 VnetConfigHasInvalidUdr - User tried to inject Managed Server subnet with invalid User Defined Route Table.\n\n * 400 VnetConfigHasInvalidDns - User tried to inject Managed Server subnet with invalid custom DNS.\n\n * 400 VnetConfigHasServiceEndpoints - User tried to inject Managed Server subnet with service endpoints.\n\n * 400 VnetSubnetIsInUse - User tried to inject Managed Server subnet that is not empty.\n\n * 400 VnetSubnetIsLocked - User tried to inject Managed Server subnet that is in locked scope.\n\n * 400 VnetSubnetIsGateway - User tried to inject Managed Server subnet that is Gateway subnet.\n\n * 400 VnetSubnetIsUnknown - User tried to inject Managed Server subnet that does not exist.\n\n * 400 VnetSubnetConflictWithIntendedPolicy - User tried to inject Managed Server subnet that has a conflict with IntendedPolicy.\n\n * 400 NameAlreadyExists - The provided name already exists.\n\n * 400 ManagedInstanceInvalidEditionForSku - The specified edition {0} is not consistent with the specified SKU {1}.\n\n * 400 ProvisioningDisabled - Displays error message from resources operation authorizer as is, without changes\n\n * 400 ManagedInstanceInvalidLicenseType - The specified license type {0} is not valid.\n\n * 400 ManagedInstanceUpdateSloInProgress - \"The operation could not be completed because a service tier change is in progress for managed instance '{0}.' Please wait for the operation in progress to complete and try again.\"\n\n * 400 VnetResourceNotFound - Resource not found: '{0}'.\n\n * 400 InvalidTimezone - Invalid timezone.\n\n * 400 UnableToResolveRemoteServer - The remote partner server name could not be resolved due to an invalid server name or DNS connectivity issues.\n\n * 400 InstanceCollationUpdateNotSupported - User cannot change instance collation on Managed Instance.\n\n * 400 CreateManagedInstanceWithNonDefaultCollationNotSupported - User can create a Managed Instance only with collation 'SQL_Latin1_General_CP1_CI_AS'.\n\n * 400 ManagedInstanceOperationInProgress - The operation could not be completed because {0} operation is in progress. Please wait for the operation in progress to complete and try again.\n\n * 400 ManagedInstanceExceedMaxAzureStorage - The operation could not be completed because total allocated storage size for General Purpose instance would exceed {0}. Please reduce the number of database files and retry operation.\n\n * 400 ManagedInstanceHasGeoReplica - The operation could not be completed because instance has configured geo replicated secondary instance.\n\n * 400 InvalidManagedServerDnsZonePartner - The resource URI of the geo-primary managed instance specified in the create request is invalid. Please ensure that the property is of the format /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/managedInstances/{managedInstanceName}\n\n * 400 ProvisioningDisabled - Displays error message from resources operation authorizer as is, without changes\n\n * 400 ManagementServiceFeatureDisabled - User attempted to use a feature which is disabled.\n\n * 400 MismatchingResourceGroupNameWithUrl - The provided resource group name did not match the name in the Url.\n\n * 400 MismatchingSubscriptionWithUrl - The provided subscription did not match the subscription in the Url.\n\n * 400 InvalidMinimalTlsVersion - Invalid minimal TLS version.\n\n * 400 InvalidResourceId - Invalid resource identifier.\n\n * 400 InvalidMaintenanceWindowSettings - Invalid maintenance window settings.\n\n * 400 InvalidMaintenanceWindowProperty - Invalid maintenance window property was specified.\n\n * 400 InvalidMaintenanceWindowPropertyNull - Invalid maintenance window with required properties null.\n\n * 400 InvalidMaintenanceWindowTypeWithPropertySpecified - Maintenance window type must not have certain properties specified.\n\n * 404 ServerNotInSubscription - Specified server does not exist on the specified subscription.\n\n * 404 ManagedInstanceNotInSubscriptionResourceGroup - Specified managed instance does not exist in the specified resource group and subscription.\n\n * 404 OperationIdNotFound - The operation with Id does not exist.\n\n * 404 ResourceDoesNotExist - Resource with the name '{0}' does not exist. To continue, specify a valid resource name.\n\n * 404 ResourceNotFound - The requested resource was not found.\n\n * 405 InvalidVcoreValue - vCore value {0} is not valid. Please specify a valid vCore value.\n\n * 405 InvalidHardwareGenerationValue - HardwareGeneration {0} is not valid. Please specify a valid HardwareGeneration value.\n\n * 405 InvalidStorageSizeValue - \"Invalid storage size: {0} GB. Storage size must be specified between {1} and {2} gigabytes, in increments of {3} GB.\n\n * 409 OperationCancelled - The operation has been cancelled by user.\n\n * 409 OperationInterrupted - The operation on the resource could not be completed because it was interrupted by another operation on the same resource.\n\n * 409 ConflictingServerOperation - An operation is currently in progress for the server.\n\n * 409 SubscriptionDisabled - Subscription is disabled.\n\n * 409 ServerAlreadyExists - Duplicate server name.\n\n * 409 ServerOverridePreconditionFailed - Failed to apply server override on category '{0}', because physical db or instance '{1}' in server '{2}' is currently not in 'Ready' or 'Deactivated' state.\n\n * 409 ServerDisabled - Server is disabled.\n\n * 409 ManagedInstanceIsBusy - The server '{0}' is currently busy.  Please wait a few minutes before trying again.\n\n * 409 ServerQuotaExceeded - Server cannot be added to a subscription because it will exceed quota.\n\n * 409 ConflictingManagedInstanceOperation - An operation is currently in progress for the managed instance.\n\n * 409 MiDropFailedOnAuthLocks - User tried to drop last Managed Instance in subnet that has Lock applied on resource(s).\n\n * 409 MiCreateFailedNonDelegatedSubnet - User tried to deploy Managed Instance or Managed Instance pool in subnet that is not delegated to Microsoft.Sql/managedInstances.\n\n * 429 SubscriptionTooManyCreateUpdateRequests - Requests beyond max requests that can be processed by available resources.\n\n * 429 SubscriptionTooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 429 ConflictingSubscriptionOperation - An operation is currently in progress for the subscription.\n\n * 429 SubscriptionTooManyCreateUpdateRequests - Requests beyond max requests that can be processed by available resources.\n\n * 429 SubscriptionTooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 429 SubscriptionTooManyCreateUpdateRequests - Requests beyond max requests that can be processed by available resources.\n\n * 429 SubscriptionTooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 429 ConflictingSubscriptionOperation - An operation is currently in progress for the subscription.\n\n * 500 OperationTimedOut - The operation timed out and automatically rolled back. Please retry the operation.\n\n * 500 GatewayInternalServerError - The server encountered an unexpected exception.\n\n * 503 TooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 503 TooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 503 TooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 504 RequestTimeout - Service request exceeded the allowed timeout.\n\n * 504 RequestTimeout - Service request exceeded the allowed timeout.\n\n * 504 RequestTimeout - Service request exceeded the allowed timeout."
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "201": {
+            "description": "Successfully created the managed instance.",
+            "schema": {
+              "$ref": "#/definitions/ManagedInstance"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Create managed instance with minimal properties": {
+            "$ref": "./examples/ManagedInstanceCreateMin.json"
+          },
+          "Create managed instance with all properties": {
+            "$ref": "./examples/ManagedInstanceCreateMax.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "ManagedInstances"
+        ],
+        "description": "Deletes a managed instance.",
+        "operationId": "ManagedInstances_Delete",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ManagedInstanceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully deleted the managed instance."
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 SubscriptionNotFound - The requested subscription was not found.\n\n * 400 ProvisioningDisabled - Displays error message from resources operation authorizer as is, without changes\n\n * 400 ManagementServiceFeatureDisabled - User attempted to use a feature which is disabled.\n\n * 404 ServerNotInSubscription - Specified server does not exist on the specified subscription.\n\n * 404 ManagedInstanceNotInSubscriptionResourceGroup - Specified managed instance does not exist in the specified resource group and subscription.\n\n * 404 OperationIdNotFound - The operation with Id does not exist.\n\n * 404 ResourceNotFound - The requested resource was not found.\n\n * 409 ConflictingManagedInstanceOperation - An operation is currently in progress for the managed instance.\n\n * 409 MiDropFailedOnAuthLocks - User tried to drop last Managed Instance in subnet that has Lock applied on resource(s).\n\n * 409 MiCreateFailedNonDelegatedSubnet - User tried to deploy Managed Instance or Managed Instance pool in subnet that is not delegated to Microsoft.Sql/managedInstances.\n\n * 409 OperationCancelled - The operation has been cancelled by user.\n\n * 409 OperationInterrupted - The operation on the resource could not be completed because it was interrupted by another operation on the same resource.\n\n * 429 SubscriptionTooManyCreateUpdateRequests - Requests beyond max requests that can be processed by available resources.\n\n * 429 SubscriptionTooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 429 SubscriptionTooManyCreateUpdateRequests - Requests beyond max requests that can be processed by available resources.\n\n * 429 SubscriptionTooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 429 ConflictingSubscriptionOperation - An operation is currently in progress for the subscription.\n\n * 500 OperationTimedOut - The operation timed out and automatically rolled back. Please retry the operation.\n\n * 503 TooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 503 TooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 504 RequestTimeout - Service request exceeded the allowed timeout.\n\n * 504 RequestTimeout - Service request exceeded the allowed timeout."
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "204": {
+            "description": "The specified managed instance does not exist."
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Delete managed instance": {
+            "$ref": "./examples/ManagedInstanceDelete.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "ManagedInstances"
+        ],
+        "description": "Updates a managed instance.",
+        "operationId": "ManagedInstances_Update",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ManagedInstanceNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The requested managed instance resource state.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ManagedInstanceUpdate"
+            }
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully updated the managed instance.",
+            "schema": {
+              "$ref": "#/definitions/ManagedInstance"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 SubscriptionNotFound - The requested subscription was not found.\n\n * 400 HkCannotSwitchToInactive - The database cannot proceed with pricing-tier update as it has memory-optimized objects. Please drop such objects and try again.\n\n * 400 ManagedInstanceInvalidStorageSizeLessThenCurrentSizeUsed - Invalid storage size: Storage size limit ({0} GB) is less that current storage used ({1} GB). Please specify higher storage size limit.\n\n * 400 InstanceTimezoneUpdateNotSupported - Instance timezone update not supported.\n\n * 400 CreateManagedInstanceWithNonDefaultTimezoneNotSupported - Create Managed Instance with non-default timezone not supported.\n\n * 400 ManagedInstanceIpAddressRangeLimit - Cannot create a Managed Instance as there are not enough available ip addresses in the selected subnet\n\n * 400 VnetDelegationNotAllowed - User tried to inject Managed Server to subnet which is delegated.\n\n * 400 SubnetHasResourcesOfDifferentType - User tried to create MI in subnet that has resources of different type.\n\n * 400 UpdateManagedServerWithMaintenanceWindowNotAllowed - Update of Managed Instance with maintenance window settings is not allowed.\n\n * 400 VnetPrepareNIPFailed - User tried to prepare subnet that has a conflict with NetworkIntentPolicy.\n\n * 400 InvalidUsername - Supplied user name contains invalid characters.\n\n * 400 ManagedInstanceDeprecatedHardwareFamily - Changing the hardware generation to deprecated {0} generation is not possible.\n\n * 400 ManagedInstanceBackupStorageTypeNotSupported - Backup storage type parameter is not allowed in the instance update operation.\n\n * 400 InvalidParameterValue - An invalid value was given to a parameter.\n\n * 400 InstancePoolNotEnoughCapacity - An instance pool does not have enough capacity\n\n * 400 ServerNotFound - The requested server was not found.\n\n * 400 TokenTooLong - The provided token is too long.\n\n * 400 ManagedInstanceSloUpdateFailed - SLO '{0}' operation cannot succeed as the memory usage of '{1}' exceeds the quota.\n\n * 400 ManagedInstanceLocalStorageUpdateSloDisabled - Update SLO for managed instances with local storage is not supported yet.\n\n * 400 InvalidLoginName - The provided login name is invalid.\n\n * 400 RegionDoesNotSupportVersion - A user attempted to create a server of a specified version in a location where that server version isn't supported.\n\n * 400 PasswordTooShort - The provided password is too short\n\n * 400 PasswordTooLong - The provided password is too long.\n\n * 400 PasswordNotComplex - The provided password is not complex enough.\n\n * 400 GatewayInvalidEdition - '{0}' is not a valid database edition in this version of SQL Server.\n\n * 400 InvalidSubnetResourceId - The provided subnet resource ID for the managed instance create or update is invalid.\n\n * 400 SubscriptionNotFound - The requested subscription was not found.\n\n * 400 InvalidLocation - An invalid location was specified.\n\n * 400 VnetInWrongRegion - Virtual network is in wrong region.\n\n * 400 InvalidServerName - Invalid server name specified.\n\n * 400 VnetAddressRangeError - Virtual network address range is invalid.\n\n * 400 VnetConfigIsNotAllowed - Virtual network configuration is not allowed.\n\n * 400 InvalidCollation - Invalid collation.\n\n * 400 InvalidIdentifier - The identifier contains NULL or an invalid unicode character.\n\n * 400 ManagedInstanceClassicVnetNotSupported - Managed Instance cannot be joined to a classic virtual network.\n\n * 400 AlterDbDeactivatedNotSupported - Database Operation failed for Server '{0}', Database '{1}' due to unexpected delay. Please try again.\n\n * 400 RegionDoesNotAllowProvisioning - The selected location is not accepting new Windows Azure SQL Database servers. This may change at a later time.\n\n * 400 VnetConfigHasNsg - User tried to inject Managed Server subnet with Network Security Groups.\n\n * 400 VnetConfigHasNoUdr - User tried to inject Managed Server subnet without default User Defined Route Table.\n\n * 400 VnetConfigHasInvalidUdr - User tried to inject Managed Server subnet with invalid User Defined Route Table.\n\n * 400 VnetConfigHasInvalidDns - User tried to inject Managed Server subnet with invalid custom DNS.\n\n * 400 VnetConfigHasServiceEndpoints - User tried to inject Managed Server subnet with service endpoints.\n\n * 400 VnetSubnetIsInUse - User tried to inject Managed Server subnet that is not empty.\n\n * 400 VnetSubnetIsLocked - User tried to inject Managed Server subnet that is in locked scope.\n\n * 400 VnetSubnetIsGateway - User tried to inject Managed Server subnet that is Gateway subnet.\n\n * 400 VnetSubnetIsUnknown - User tried to inject Managed Server subnet that does not exist.\n\n * 400 VnetSubnetConflictWithIntendedPolicy - User tried to inject Managed Server subnet that has a conflict with IntendedPolicy.\n\n * 400 NameAlreadyExists - The provided name already exists.\n\n * 400 ManagedInstanceInvalidEditionForSku - The specified edition {0} is not consistent with the specified SKU {1}.\n\n * 400 ProvisioningDisabled - Displays error message from resources operation authorizer as is, without changes\n\n * 400 ManagedInstanceInvalidLicenseType - The specified license type {0} is not valid.\n\n * 400 ManagedInstanceUpdateSloInProgress - \"The operation could not be completed because a service tier change is in progress for managed instance '{0}.' Please wait for the operation in progress to complete and try again.\"\n\n * 400 VnetResourceNotFound - Resource not found: '{0}'.\n\n * 400 InvalidTimezone - Invalid timezone.\n\n * 400 UnableToResolveRemoteServer - The remote partner server name could not be resolved due to an invalid server name or DNS connectivity issues.\n\n * 400 InstanceCollationUpdateNotSupported - User cannot change instance collation on Managed Instance.\n\n * 400 CreateManagedInstanceWithNonDefaultCollationNotSupported - User can create a Managed Instance only with collation 'SQL_Latin1_General_CP1_CI_AS'.\n\n * 400 ManagedInstanceOperationInProgress - The operation could not be completed because {0} operation is in progress. Please wait for the operation in progress to complete and try again.\n\n * 400 ManagedInstanceExceedMaxAzureStorage - The operation could not be completed because total allocated storage size for General Purpose instance would exceed {0}. Please reduce the number of database files and retry operation.\n\n * 400 ManagedInstanceHasGeoReplica - The operation could not be completed because instance has configured geo replicated secondary instance.\n\n * 400 ProvisioningDisabled - Displays error message from resources operation authorizer as is, without changes\n\n * 400 ManagementServiceFeatureDisabled - User attempted to use a feature which is disabled.\n\n * 400 MismatchingResourceGroupNameWithUrl - The provided resource group name did not match the name in the Url.\n\n * 400 MismatchingSubscriptionWithUrl - The provided subscription did not match the subscription in the Url.\n\n * 400 InvalidMinimalTlsVersion - Invalid minimal TLS version.\n\n * 400 InvalidResourceId - Invalid resource identifier.\n\n * 400 InvalidMaintenanceWindowSettings - Invalid maintenance window settings.\n\n * 400 InvalidMaintenanceWindowProperty - Invalid maintenance window property was specified.\n\n * 400 InvalidMaintenanceWindowPropertyNull - Invalid maintenance window with required properties null.\n\n * 400 InvalidMaintenanceWindowTypeWithPropertySpecified - Maintenance window type must not have certain properties specified.\n\n * 404 ServerNotInSubscription - Specified server does not exist on the specified subscription.\n\n * 404 ManagedInstanceNotInSubscriptionResourceGroup - Specified managed instance does not exist in the specified resource group and subscription.\n\n * 404 OperationIdNotFound - The operation with Id does not exist.\n\n * 404 ResourceDoesNotExist - Resource with the name '{0}' does not exist. To continue, specify a valid resource name.\n\n * 404 ResourceNotFound - The requested resource was not found.\n\n * 405 InvalidVcoreValue - vCore value {0} is not valid. Please specify a valid vCore value.\n\n * 405 InvalidHardwareGenerationValue - HardwareGeneration {0} is not valid. Please specify a valid HardwareGeneration value.\n\n * 405 InvalidStorageSizeValue - \"Invalid storage size: {0} GB. Storage size must be specified between {1} and {2} gigabytes, in increments of {3} GB.\n\n * 409 OperationCancelled - The operation has been cancelled by user.\n\n * 409 OperationInterrupted - The operation on the resource could not be completed because it was interrupted by another operation on the same resource.\n\n * 409 ConflictingServerOperation - An operation is currently in progress for the server.\n\n * 409 SubscriptionDisabled - Subscription is disabled.\n\n * 409 ServerAlreadyExists - Duplicate server name.\n\n * 409 ServerOverridePreconditionFailed - Failed to apply server override on category '{0}', because physical db or instance '{1}' in server '{2}' is currently not in 'Ready' or 'Deactivated' state.\n\n * 409 ServerDisabled - Server is disabled.\n\n * 409 ManagedInstanceIsBusy - The server '{0}' is currently busy.  Please wait a few minutes before trying again.\n\n * 409 ServerQuotaExceeded - Server cannot be added to a subscription because it will exceed quota.\n\n * 409 ConflictingManagedInstanceOperation - An operation is currently in progress for the managed instance.\n\n * 409 MiDropFailedOnAuthLocks - User tried to drop last Managed Instance in subnet that has Lock applied on resource(s).\n\n * 409 MiCreateFailedNonDelegatedSubnet - User tried to deploy Managed Instance or Managed Instance pool in subnet that is not delegated to Microsoft.Sql/managedInstances.\n\n * 429 SubscriptionTooManyCreateUpdateRequests - Requests beyond max requests that can be processed by available resources.\n\n * 429 SubscriptionTooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 429 ConflictingSubscriptionOperation - An operation is currently in progress for the subscription.\n\n * 429 SubscriptionTooManyCreateUpdateRequests - Requests beyond max requests that can be processed by available resources.\n\n * 429 SubscriptionTooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 429 SubscriptionTooManyCreateUpdateRequests - Requests beyond max requests that can be processed by available resources.\n\n * 429 SubscriptionTooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 429 ConflictingSubscriptionOperation - An operation is currently in progress for the subscription.\n\n * 500 OperationTimedOut - The operation timed out and automatically rolled back. Please retry the operation.\n\n * 500 GatewayInternalServerError - The server encountered an unexpected exception.\n\n * 503 TooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 503 TooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 503 TooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 504 RequestTimeout - Service request exceeded the allowed timeout.\n\n * 504 RequestTimeout - Service request exceeded the allowed timeout.\n\n * 504 RequestTimeout - Service request exceeded the allowed timeout."
+          },
+          "202": {
+            "description": "Accepted"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Update managed instance with minimal properties": {
+            "$ref": "./examples/ManagedInstanceUpdateMin.json"
+          },
+          "Update managed instance with all properties": {
+            "$ref": "./examples/ManagedInstanceUpdateMax.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/instancePools/{instancePoolName}/managedInstances": {
+      "get": {
+        "tags": [
+          "ManagedInstances"
+        ],
+        "description": "Gets a list of all managed instances in an instance pool.",
+        "operationId": "ManagedInstances_ListByInstancePool",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "name": "instancePoolName",
+            "in": "path",
+            "description": "The instance pool name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the list of managed instances.",
+            "schema": {
+              "$ref": "#/definitions/ManagedInstanceListResult"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 404 InstancePoolNotFound - An instance pool cannot be found"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List managed instances by instance pool": {
+            "$ref": "./examples/ManagedInstanceListByInstancePool.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Sql/managedInstances": {
+      "get": {
+        "tags": [
+          "ManagedInstances"
+        ],
+        "description": "Gets a list of all managed instances in the subscription.",
+        "operationId": "ManagedInstances_List",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the list of managed instances.",
+            "schema": {
+              "$ref": "#/definitions/ManagedInstanceListResult"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List managed instances": {
+            "$ref": "./examples/ManagedInstanceList.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ManagedInstanceListResult": {
+      "description": "A list of managed instances.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Array of results.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ManagedInstance"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "Link to retrieve next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "Sku": {
+      "description": "An ARM Resource SKU.",
+      "required": [
+        "name"
+      ],
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "The name of the SKU, typically, a letter + Number code, e.g. P3.",
+          "type": "string"
+        },
+        "tier": {
+          "description": "The tier or edition of the particular SKU, e.g. Basic, Premium.",
+          "type": "string"
+        },
+        "size": {
+          "description": "Size of the particular SKU",
+          "type": "string"
+        },
+        "family": {
+          "description": "If the service has different generations of hardware, for the same SKU, then that can be captured here.",
+          "type": "string"
+        },
+        "capacity": {
+          "format": "int32",
+          "description": "Capacity of the particular SKU.",
+          "type": "integer"
+        }
+      }
+    },
+    "ManagedInstanceProperties": {
+      "description": "The properties of a managed instance.",
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "enum": [
+            "Creating",
+            "Deleting",
+            "Updating",
+            "Unknown",
+            "Succeeded",
+            "Failed"
+          ],
+          "type": "string",
+          "readOnly": true
+        },
+        "managedInstanceCreateMode": {
+          "description": "Specifies the mode of database creation.\r\n\r\nDefault: Regular instance creation.\r\n\r\nRestore: Creates an instance by restoring a set of backups to specific point in time. RestorePointInTime and SourceManagedInstanceId must be specified.",
+          "enum": [
+            "Default",
+            "PointInTimeRestore"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ManagedServerCreateMode",
+            "modelAsString": true
+          },
+          "x-ms-mutability": [
+            "create"
+          ]
+        },
+        "fullyQualifiedDomainName": {
+          "description": "The fully qualified domain name of the managed instance.",
+          "type": "string",
+          "readOnly": true
+        },
+        "administratorLogin": {
+          "description": "Administrator username for the managed instance. Can only be specified when the managed instance is being created (and is required for creation).",
+          "type": "string",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "administratorLoginPassword": {
+          "description": "The administrator login password (required for managed instance creation).",
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "update"
+          ]
+        },
+        "subnetId": {
+          "description": "Subnet resource ID for the managed instance.",
+          "type": "string"
+        },
+        "state": {
+          "description": "The state of the managed instance.",
+          "type": "string",
+          "readOnly": true
+        },
+        "licenseType": {
+          "description": "The license type. Possible values are 'LicenseIncluded' (regular price inclusive of a new SQL license) and 'BasePrice' (discounted AHB price for bringing your own SQL licenses).",
+          "enum": [
+            "LicenseIncluded",
+            "BasePrice"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ManagedInstanceLicenseType",
+            "modelAsString": true
+          }
+        },
+        "vCores": {
+          "format": "int32",
+          "description": "The number of vCores. Allowed values: 8, 16, 24, 32, 40, 64, 80.",
+          "type": "integer"
+        },
+        "storageSizeInGB": {
+          "format": "int32",
+          "description": "Storage size in GB. Minimum value: 32. Maximum value: 8192. Increments of 32 GB allowed only.",
+          "type": "integer"
+        },
+        "collation": {
+          "description": "Collation of the managed instance.",
+          "type": "string",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "dnsZone": {
+          "description": "The Dns Zone that the managed instance is in.",
+          "type": "string",
+          "readOnly": true
+        },
+        "dnsZonePartner": {
+          "description": "The resource id of another managed instance whose DNS zone this managed instance will share after creation.",
+          "type": "string",
+          "x-ms-mutability": [
+            "create"
+          ]
+        },
+        "publicDataEndpointEnabled": {
+          "description": "Whether or not the public data endpoint is enabled.",
+          "type": "boolean"
+        },
+        "sourceManagedInstanceId": {
+          "description": "The resource identifier of the source managed instance associated with create operation of this instance.",
+          "type": "string",
+          "x-ms-mutability": [
+            "create"
+          ]
+        },
+        "restorePointInTime": {
+          "format": "date-time",
+          "description": "Specifies the point in time (ISO8601 format) of the source database that will be restored to create the new database.",
+          "type": "string",
+          "x-ms-mutability": [
+            "create"
+          ]
+        },
+        "proxyOverride": {
+          "description": "Connection type used for connecting to the instance.",
+          "enum": [
+            "Proxy",
+            "Redirect",
+            "Default"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ManagedInstanceProxyOverride",
+            "modelAsString": true
+          }
+        },
+        "timezoneId": {
+          "description": "Id of the timezone. Allowed values are timezones supported by Windows.\r\nWindows keeps details on supported timezones, including the id, in registry under\r\nKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Time Zones.\r\nYou can get those registry values via SQL Server by querying SELECT name AS timezone_id FROM sys.time_zone_info.\r\nList of Ids can also be obtained by executing [System.TimeZoneInfo]::GetSystemTimeZones() in PowerShell.\r\nAn example of valid timezone id is \"Pacific Standard Time\" or \"W. Europe Standard Time\".",
+          "type": "string",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "instancePoolId": {
+          "description": "The Id of the instance pool this managed server belongs to.",
+          "type": "string"
+        },
+        "maintenanceConfigurationId": {
+          "description": "Specifies maintenance configuration id to apply to this managed instance.",
+          "type": "string"
+        },
+        "minimalTlsVersion": {
+          "description": "Minimal TLS version. Allowed values: 'None', '1.0', '1.1', '1.2'",
+          "type": "string"
+        },
+        "storageAccountType": {
+          "description": "The storage account type used to store backups for this instance. The options are LRS (LocallyRedundantStorage), ZRS (ZoneRedundantStorage) and GRS (GeoRedundantStorage)",
+          "enum": [
+            "GRS",
+            "LRS",
+            "ZRS"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "StorageAccountType",
+            "modelAsString": true
+          },
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      }
+    },
+    "Resource": {
+      "description": "ARM resource.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Resource ID.",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "Resource name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "Resource type.",
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "ManagedInstancePrivateLinkServiceConnectionStateProperty": {
+      "required": [
+        "status",
+        "description"
+      ],
+      "type": "object",
+      "properties": {
+        "status": {
+          "description": "The private link service connection status.",
+          "type": "string"
+        },
+        "description": {
+          "description": "The private link service connection description.",
+          "type": "string"
+        },
+        "actionsRequired": {
+          "description": "The private link service connection description.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "TrackedResource": {
+      "description": "ARM tracked top level resource.",
+      "required": [
+        "location"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "location": {
+          "description": "Resource location.",
+          "type": "string",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "tags": {
+          "description": "Resource tags.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "ManagedInstance": {
+      "description": "An Azure SQL managed instance.",
+      "required": [
+        "location"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TrackedResource"
+        }
+      ],
+      "properties": {
+        "identity": {
+          "$ref": "../../../common/v1/types.json#/definitions/ResourceIdentity",
+          "description": "The Azure Active Directory identity of the managed instance.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "sku": {
+          "$ref": "#/definitions/Sku",
+          "description": "Managed instance SKU. Allowed values for sku.name: GP_Gen4, GP_Gen5, BC_Gen4, BC_Gen5"
+        },
+        "properties": {
+          "$ref": "#/definitions/ManagedInstanceProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "ManagedInstanceUpdate": {
+      "description": "An update request for an Azure SQL Database managed instance.",
+      "type": "object",
+      "properties": {
+        "sku": {
+          "$ref": "#/definitions/Sku",
+          "description": "Managed instance sku"
+        },
+        "properties": {
+          "$ref": "#/definitions/ManagedInstanceProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        },
+        "tags": {
+          "description": "Resource tags.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "SubscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "description": "The subscription ID that identifies an Azure subscription.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "client"
+    },
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "description": "The API version to use for the request.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "client"
+    },
+    "ResourceGroupParameter": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "description": "The name of the resource group that contains the resource. You can obtain this value from the Azure Resource Manager API or the portal.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "ServerNameParameter": {
+      "name": "serverName",
+      "in": "path",
+      "description": "The name of the server.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "ManagedInstanceNameParameter": {
+      "name": "managedInstanceName",
+      "in": "path",
+      "description": "The name of the managed instance.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "DatabaseNameParameter": {
+      "name": "databaseName",
+      "in": "path",
+      "description": "The name of the database.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "BlobAuditingPolicyNameParameter": {
+      "name": "blobAuditingPolicyName",
+      "in": "path",
+      "description": "The name of the blob auditing policy.",
+      "required": true,
+      "type": "string",
+      "enum": [
+        "default"
+      ],
+      "x-ms-parameter-location": "method"
+    },
+    "SqlVirtualMachineInstanceNameParameter": {
+      "name": "sqlVirtualMachineInstanceName",
+      "in": "path",
+      "description": "The name of the SqlVirtualMachineInstance.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "SqlVirtualMachineContainerNameParameter": {
+      "name": "sqlVirtualMachineContainerName",
+      "in": "path",
+      "description": "The name of the SqlVirtualMachineContainer.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "VirtualClusterNameParameter": {
+      "name": "virtualClusterName",
+      "in": "path",
+      "description": "The name of the virtual cluster.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "WorkspaceNameParameter": {
+      "name": "workspaceName",
+      "in": "path",
+      "description": "The name of the workspace.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "SqlPoolNameParameter": {
+      "name": "sqlPoolName",
+      "in": "path",
+      "description": "The name of the sql pool.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "SqlDatabaseNameParameter": {
+      "name": "sqlDatabaseName",
+      "in": "path",
+      "description": "The name of the sql database.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  }
+}

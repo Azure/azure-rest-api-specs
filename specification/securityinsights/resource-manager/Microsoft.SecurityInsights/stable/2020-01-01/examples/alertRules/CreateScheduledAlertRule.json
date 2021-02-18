@@ -1,0 +1,89 @@
+{
+  "parameters": {
+    "api-version": "2020-01-01",
+    "subscriptionId": "d0cfe6b2-9ac0-4464-9919-dccaee2e48c0",
+    "resourceGroupName": "myRg",
+    "workspaceName": "myWorkspace",
+    "operationalInsightsResourceProvider": "Microsoft.OperationalInsights",
+    "ruleId": "73e01a99-5cd7-4139-a149-9f2736ff2ab5",
+    "alertRule": {
+      "kind": "Scheduled",
+      "etag": "\"0300bf09-0000-0000-0000-5c37296e0000\"",
+      "properties": {
+        "displayName": "Rule2",
+        "description": "",
+        "severity": "High",
+        "enabled": true,
+        "tactics": [
+          "Persistence",
+          "LateralMovement"
+        ],
+        "query": "ProtectionStatus | extend HostCustomEntity = Computer | extend IPCustomEntity = ComputerIP_Hidden",
+        "queryFrequency": "PT1H",
+        "queryPeriod": "P2DT1H30M",
+        "triggerOperator": "GreaterThan",
+        "triggerThreshold": 0,
+        "suppressionDuration": "PT1H",
+        "suppressionEnabled": false
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/d0cfe6b2-9ac0-4464-9919-dccaee2e48c0/resourceGroups/myRg/providers/Microsoft.OperationalIinsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/alertRules/73e01a99-5cd7-4139-a149-9f2736ff2ab5",
+        "name": "73e01a99-5cd7-4139-a149-9f2736ff2ab5",
+        "type": "Microsoft.SecurityInsights/alertRules",
+        "kind": "Scheduled",
+        "etag": "\"0300bf09-0000-0000-0000-5c37296e0000\"",
+        "properties": {
+          "alertRuleTemplateName": null,
+          "displayName": "Rule2",
+          "description": "",
+          "severity": "High",
+          "enabled": true,
+          "tactics": [
+            "Persistence",
+            "LateralMovement"
+          ],
+          "query": "ProtectionStatus | extend HostCustomEntity = Computer | extend IPCustomEntity = ComputerIP_Hidden",
+          "queryFrequency": "PT1H",
+          "queryPeriod": "P2DT1H30M",
+          "triggerOperator": "GreaterThan",
+          "triggerThreshold": 0,
+          "suppressionDuration": "PT1H",
+          "suppressionEnabled": false,
+          "lastModifiedUtc": "2019-01-01T13:15:30Z"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/d0cfe6b2-9ac0-4464-9919-dccaee2e48c0/resourceGroups/myRg/providers/Microsoft.OperationalIinsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/alertRules/73e01a99-5cd7-4139-a149-9f2736ff2ab5",
+        "name": "73e01a99-5cd7-4139-a149-9f2736ff2ab5",
+        "type": "Microsoft.SecurityInsights/alertRules",
+        "kind": "Scheduled",
+        "etag": "\"0300bf09-0000-0000-0000-5c37296e0000\"",
+        "properties": {
+          "alertRuleTemplateName": null,
+          "displayName": "Rule2",
+          "description": "",
+          "severity": "High",
+          "enabled": true,
+          "tactics": [
+            "Persistence",
+            "LateralMovement"
+          ],
+          "query": "ProtectionStatus | extend HostCustomEntity = Computer | extend IPCustomEntity = ComputerIP_Hidden",
+          "queryFrequency": "PT1H",
+          "queryPeriod": "P2DT1H30M",
+          "triggerOperator": "GreaterThan",
+          "triggerThreshold": 0,
+          "suppressionDuration": "PT1H",
+          "suppressionEnabled": false,
+          "lastModifiedUtc": "2019-01-01T13:15:30Z"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,106 @@
+{
+  "parameters": {
+    "api-version": "2017-04-01-preview",
+    "subscriptionId": "56b5e0a9-b645-407d-99b0-c64f86013e3d",
+    "resourceGroupName": "sjrg",
+    "jobName": "sj9597",
+    "inputName": "input7225",
+    "input": {
+      "properties": {
+        "type": "Reference",
+        "datasource": {
+          "type": "Microsoft.Storage/Blob",
+          "properties": {
+            "storageAccounts": [
+              {
+                "accountName": "someAccountName",
+                "accountKey": "someAccountKey=="
+              }
+            ],
+            "container": "state",
+            "pathPattern": "{date}/{time}",
+            "dateFormat": "yyyy/MM/dd",
+            "timeFormat": "HH"
+          }
+        },
+        "serialization": {
+          "type": "Csv",
+          "properties": {
+            "fieldDelimiter": ",",
+            "encoding": "UTF8"
+          }
+        }
+      }
+    }
+  },
+  "responses": {
+    "201": {
+      "headers": {
+        "ETag": "c987701d-4039-47aa-a115-ad84f67d07c5"
+      },
+      "body": {
+        "id": "/subscriptions/56b5e0a9-b645-407d-99b0-c64f86013e3d/resourceGroups/sjrg/providers/Microsoft.StreamAnalytics/streamingjobs/sj9597/inputs/input7225",
+        "name": "input7225",
+        "type": "Microsoft.StreamAnalytics/streamingjobs/inputs",
+        "properties": {
+          "type": "Reference",
+          "datasource": {
+            "type": "Microsoft.Storage/Blob",
+            "properties": {
+              "storageAccounts": [
+                {
+                  "accountName": "someAccountName"
+                }
+              ],
+              "container": "state",
+              "pathPattern": "{date}/{time}",
+              "dateFormat": "yyyy/MM/dd",
+              "timeFormat": "HH"
+            }
+          },
+          "serialization": {
+            "type": "Csv",
+            "properties": {
+              "fieldDelimiter": ",",
+              "encoding": "UTF8"
+            }
+          }
+        }
+      }
+    },
+    "200": {
+      "headers": {
+        "ETag": "c987701d-4039-47aa-a115-ad84f67d07c5"
+      },
+      "body": {
+        "id": "/subscriptions/56b5e0a9-b645-407d-99b0-c64f86013e3d/resourceGroups/sjrg/providers/Microsoft.StreamAnalytics/streamingjobs/sj9597/inputs/input7225",
+        "name": "input7225",
+        "type": "Microsoft.StreamAnalytics/streamingjobs/inputs",
+        "properties": {
+          "type": "Reference",
+          "datasource": {
+            "type": "Microsoft.Storage/Blob",
+            "properties": {
+              "storageAccounts": [
+                {
+                  "accountName": "someAccountName"
+                }
+              ],
+              "container": "state",
+              "pathPattern": "{date}/{time}",
+              "dateFormat": "yyyy/MM/dd",
+              "timeFormat": "HH"
+            }
+          },
+          "serialization": {
+            "type": "Csv",
+            "properties": {
+              "fieldDelimiter": ",",
+              "encoding": "UTF8"
+            }
+          }
+        }
+      }
+    }
+  }
+}

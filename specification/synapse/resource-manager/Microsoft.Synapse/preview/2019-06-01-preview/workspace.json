@@ -1,0 +1,896 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2019-06-01-preview",
+    "title": "SynapseManagementClient",
+    "description": "Azure Synapse Analytics APIs"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "type": "oauth2",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      },
+      "description": "Azure Active Directory OAuth2 Flow"
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces": {
+      "get": {
+        "operationId": "Workspaces_ListByResourceGroup",
+        "description": "Returns a list of workspaces in a resource group",
+        "tags": [
+          "Workspaces"
+        ],
+        "deprecated": false,
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/WorkspaceInfoListResult"
+            },
+            "description": ""
+          }
+        },
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List workspaces in resource group": {
+            "$ref": "./examples/ListWorkspacesInResourceGroup.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}": {
+      "get": {
+        "operationId": "Workspaces_Get",
+        "description": "Gets a workspace",
+        "tags": [
+          "Workspaces"
+        ],
+        "deprecated": false,
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/workspaceNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/Workspace"
+            },
+            "description": ""
+          },
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/ErrorContract"
+            },
+            "description": ""
+          }
+        },
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "Get a workspace": {
+            "$ref": "./examples/GetWorkspace.json"
+          }
+        }
+      },
+      "patch": {
+        "operationId": "Workspaces_Update",
+        "description": "Updates a workspace",
+        "tags": [
+          "Workspaces"
+        ],
+        "deprecated": false,
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/workspaceNameParameter"
+          },
+          {
+            "schema": {
+              "$ref": "#/definitions/WorkspacePatchInfo"
+            },
+            "in": "body",
+            "name": "workspacePatchInfo",
+            "required": true,
+            "description": "Workspace patch request properties"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/Workspace"
+            },
+            "description": ""
+          },
+          "201": {
+            "schema": {
+              "$ref": "#/definitions/Workspace"
+            },
+            "description": ""
+          },
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/ErrorContract"
+            },
+            "description": ""
+          }
+        },
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "Update a workspace": {
+            "$ref": "./examples/UpdateWorkspace.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "Workspaces_CreateOrUpdate",
+        "description": "Creates or updates a workspace",
+        "tags": [
+          "Workspaces"
+        ],
+        "deprecated": false,
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/workspaceNameParameter"
+          },
+          {
+            "description": "Workspace create or update request properties",
+            "schema": {
+              "$ref": "#/definitions/Workspace"
+            },
+            "in": "body",
+            "name": "workspaceInfo",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/Workspace"
+            },
+            "description": ""
+          },
+          "201": {
+            "schema": {
+              "$ref": "#/definitions/Workspace"
+            },
+            "description": ""
+          },
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/ErrorContract"
+            },
+            "description": ""
+          }
+        },
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "Create or update a workspace": {
+            "$ref": "./examples/CreateOrUpdateWorkspace.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "Workspaces_Delete",
+        "description": "Deletes a workspace",
+        "tags": [
+          "Workspaces"
+        ],
+        "deprecated": false,
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/workspaceNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "type": "object"
+            },
+            "description": "OK"
+          },
+          "202": {
+            "schema": {
+              "type": "object"
+            },
+            "description": ""
+          },
+          "204": {
+            "description": ""
+          },
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/ErrorContract"
+            },
+            "description": ""
+          }
+        },
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "Delete a workspace": {
+            "$ref": "./examples/DeleteWorkspace.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Synapse/workspaces": {
+      "get": {
+        "operationId": "Workspaces_List",
+        "description": "Returns a list of workspaces in a subscription",
+        "tags": [
+          "Workspaces"
+        ],
+        "deprecated": false,
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/WorkspaceInfoListResult"
+            },
+            "description": ""
+          }
+        },
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List workspaces in subscription": {
+            "$ref": "./examples/ListWorkspacesInSubscription.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/administrators/activeDirectory": {
+      "get": {
+        "operationId": "WorkspaceAadAdmins_Get",
+        "description": "Gets a workspace active directory admin",
+        "tags": [
+          "Workspaces"
+        ],
+        "deprecated": false,
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/workspaceNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/WorkspaceAadAdminInfo"
+            },
+            "description": "OK"
+          }
+        },
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "Get workspace active directory admin": {
+            "$ref": "./examples/GetWorkspaceAadAdmin.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "WorkspaceAadAdmins_CreateOrUpdate",
+        "description": "Creates or updates a workspace active directory admin",
+        "tags": [
+          "Workspaces"
+        ],
+        "deprecated": false,
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/workspaceNameParameter"
+          },
+          {
+            "description": "Workspace active directory administrator properties",
+            "schema": {
+              "$ref": "#/definitions/WorkspaceAadAdminInfo"
+            },
+            "in": "body",
+            "name": "aadAdminInfo",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/WorkspaceAadAdminInfo"
+            }
+          },
+          "202": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/WorkspaceAadAdminInfo"
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/ErrorContract"
+            },
+            "description": ""
+          }
+        },
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "Create or update workspace active directory admin": {
+            "$ref": "./examples/CreateOrUpdateWorkspaceAadAdmin.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "WorkspaceAadAdmins_Delete",
+        "description": "Deletes a workspace active directory admin",
+        "tags": [
+          "Workspaces"
+        ],
+        "deprecated": false,
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/workspaceNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          },
+          "202": {
+            "description": ""
+          },
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/ErrorContract"
+            },
+            "description": ""
+          }
+        },
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "Delete workspace active directory admin": {
+            "$ref": "./examples/DeleteWorkspaceAadAdmin.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/managedIdentitySqlControlSettings/default": {
+      "get": {
+        "operationId": "WorkspaceManagedIdentitySqlControlSettings_Get",
+        "summary": "Get Managed Identity Sql Control Settings",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/ManagedIdentitySqlControlSettingsModel"
+            },
+            "description": "OK"
+          },
+          "default": {
+            "schema": {
+              "$ref": "./workspace.json#/definitions/ErrorContract"
+            },
+            "description": "Error"
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "Get managed identity sql control settings": {
+            "$ref": "./examples/GetManagedIdentitySqlControlSettings.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "WorkspaceManagedIdentitySqlControlSettings_CreateOrUpdate",
+        "summary": "Create or update Managed Identity Sql Control Settings",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
+          },
+          {
+            "description": "Managed Identity Sql Control Settings",
+            "schema": {
+              "$ref": "#/definitions/ManagedIdentitySqlControlSettingsModel"
+            },
+            "in": "body",
+            "name": "managedIdentitySqlControlSettings",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/ManagedIdentitySqlControlSettingsModel"
+            },
+            "description": "OK"
+          },
+          "default": {
+            "schema": {
+              "$ref": "./workspace.json#/definitions/ErrorContract"
+            },
+            "description": "Error"
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "Create or update managed identity sql control settings": {
+            "$ref": "./examples/CreateOrUpdateManagedIdentitySqlControlSettings.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ErrorDetail": {
+      "description": "Error details",
+      "type": "object",
+      "properties": {
+        "message": {
+          "description": "Error message",
+          "type": "string"
+        },
+        "code": {
+          "description": "Error code",
+          "type": "string"
+        },
+        "target": {
+          "description": "Error target",
+          "type": "string"
+        }
+      }
+    },
+    "ErrorContract": {
+      "title": "Error details.",
+      "description": "Contains details when the response code indicates an error.",
+      "type": "object",
+      "properties": {
+        "error": {
+          "description": "The error details.",
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse"
+        }
+      }
+    },
+    "AadAdminProperties": {
+      "description": "Workspace active directory administrator properties",
+      "type": "object",
+      "properties": {
+        "tenantId": {
+          "description": "Tenant ID of the workspace active directory administrator",
+          "type": "string"
+        },
+        "login": {
+          "description": "Login of the workspace active directory administrator",
+          "type": "string"
+        },
+        "administratorType": {
+          "description": "Workspace active directory administrator type",
+          "type": "string"
+        },
+        "sid": {
+          "description": "Object ID of the workspace active directory administrator",
+          "type": "string"
+        }
+      }
+    },
+    "WorkspaceInfoListResult": {
+      "description": "List of workspaces",
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "Link to the next page of results",
+          "type": "string"
+        },
+        "value": {
+          "description": "List of workspaces",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Workspace"
+          }
+        }
+      }
+    },
+    "DataLakeStorageAccountDetails": {
+      "description": "Details of the data lake storage account associated with the workspace",
+      "type": "object",
+      "properties": {
+        "accountUrl": {
+          "description": "Account URL",
+          "type": "string"
+        },
+        "filesystem": {
+          "description": "Filesystem name",
+          "type": "string"
+        }
+      }
+    },
+    "ManagedIdentity": {
+      "description": "The workspace managed identity",
+      "type": "object",
+      "properties": {
+        "principalId": {
+          "description": "The principal ID of the workspace managed identity",
+          "type": "string",
+          "readOnly": true
+        },
+        "tenantId": {
+          "description": "The tenant ID of the workspace managed identity",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "The type of managed identity for the workspace",
+          "enum": [
+            "None",
+            "SystemAssigned"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ResourceIdentityType",
+            "modelAsString": false
+          }
+        }
+      }
+    },
+    "VirtualNetworkProfile": {
+      "description": "Virtual Network Profile",
+      "type": "object",
+      "properties": {
+        "computeSubnetId": {
+          "description": "Subnet ID used for computes in workspace",
+          "type": "string"
+        }
+      }
+    },
+    "WorkspaceAadAdminInfo": {
+      "description": "Workspace active directory administrator",
+      "type": "object",
+      "x-ms-azure-resource": true,
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "Workspace active directory administrator properties",
+          "$ref": "#/definitions/AadAdminProperties",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "Workspace": {
+      "description": "A workspace",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "Workspace resource properties",
+          "$ref": "#/definitions/WorkspaceProperties",
+          "x-ms-client-flatten": true
+        },
+        "identity": {
+          "description": "Identity of the workspace",
+          "$ref": "#/definitions/ManagedIdentity"
+        }
+      }
+    },
+    "WorkspaceProperties": {
+      "description": "Workspace properties",
+      "type": "object",
+      "properties": {
+        "defaultDataLakeStorage": {
+          "description": "Workspace default data lake storage account details",
+          "$ref": "#/definitions/DataLakeStorageAccountDetails"
+        },
+        "sqlAdministratorLoginPassword": {
+          "description": "SQL administrator login password",
+          "type": "string"
+        },
+        "managedResourceGroupName": {
+          "description": "Workspace managed resource group. The resource group name uniquely identifies the resource group within the user subscriptionId. The resource group name must be no longer than 90 characters long, and must be alphanumeric characters (Char.IsLetterOrDigit()) and '-', '_', '(', ')' and'.'. Note that the name cannot end with '.'",
+          "type": "string"
+        },
+        "provisioningState": {
+          "description": "Resource provisioning state",
+          "type": "string",
+          "readOnly": true
+        },
+        "sqlAdministratorLogin": {
+          "description": "Login for workspace SQL active directory administrator",
+          "type": "string"
+        },
+        "virtualNetworkProfile": {
+          "description": "Virtual Network profile",
+          "$ref": "#/definitions/VirtualNetworkProfile"
+        },
+        "connectivityEndpoints": {
+          "description": "Connectivity endpoints",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "type": "object"
+        },
+        "managedVirtualNetwork": {
+          "description": "Setting this to 'default' will ensure that all compute for this workspace is in a virtual network managed on behalf of the user.",
+          "type": "string"
+        },
+        "privateEndpointConnections": {
+          "description": "Private endpoint connections to the workspace",
+          "type": "array",
+          "items": {
+            "$ref": "./privateEndpointConnections.json#/definitions/PrivateEndpointConnection"
+          }
+        },
+        "extraProperties": {
+          "description": "Workspace level configs and feature flags",
+          "additionalProperties": {
+            "type": "object"
+          },
+          "type": "object",
+          "readOnly": true
+        }
+      }
+    },
+    "WorkspacePatchInfo": {
+      "description": "Workspace patch details",
+      "type": "object",
+      "properties": {
+        "tags": {
+          "description": "Resource tags",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "type": "object"
+        },
+        "identity": {
+          "description": "The identity of the workspace",
+          "$ref": "#/definitions/ManagedIdentity"
+        },
+        "properties": {
+          "description": "Workspace patch properties",
+          "$ref": "#/definitions/WorkspacePatchProperties",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "WorkspacePatchProperties": {
+      "description": "Workspace patch properties",
+      "type": "object",
+      "properties": {
+        "sqlAdministratorLoginPassword": {
+          "description": "SQL administrator login password",
+          "type": "string"
+        },
+        "provisioningState": {
+          "description": "Resource provisioning state",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ManagedIdentitySqlControlSettingsModel": {
+      "type": "object",
+      "title": "Managed Identity Sql Control Settings",
+      "description": "Sql Control Settings for workspace managed identity",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "title": "Managed Identity Sql Control Settings",
+          "description": "Sql Control Settings for workspace managed identity",
+          "properties": {
+            "grantSqlControlToManagedIdentity": {
+              "type": "object",
+              "description": "Grant sql control to managed identity",
+              "properties": {
+                "desiredState": {
+                  "description": "Desired state",
+                  "type": "string",
+                  "enum": [
+                    "Enabled",
+                    "Disabled"
+                  ]
+                },
+                "actualState": {
+                  "description": "Actual state",
+                  "type": "string",
+                  "enum": [
+                    "Enabling",
+                    "Enabled",
+                    "Disabling",
+                    "Disabled",
+                    "Unknown"
+                  ],
+                  "readOnly": true
+                }
+              }
+            }
+          },
+          "x-ms-client-flatten": true
+        }
+      }
+    }
+  },
+  "parameters": {
+    "workspaceNameParameter": {
+      "name": "workspaceName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the workspace",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

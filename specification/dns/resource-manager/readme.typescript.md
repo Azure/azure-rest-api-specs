@@ -15,6 +15,7 @@ typescript:
 typescript:
   package-name: "@azure/arm-dns"
   output-folder: "$(typescript-sdks-folder)/sdk/dns/arm-dns"
+  clear-output-folder: true
 ```
 
 ### Profile: profile-hybrid-2019-03-01
@@ -25,6 +26,7 @@ These settings apply only when `--profile=profile-hybrid-2019-03-01` is specifie
 typescript:
   package-name: "@azure/arm-dns-profile-2019-03-01-hybrid"
   output-folder: "$(typescript-sdks-folder)/sdk/dns/arm-dns-profile-2019-03-01-hybrid"
+  clear-output-folder: true
   batch:
     - tag: profile-hybrid-2019-03-01
 ```

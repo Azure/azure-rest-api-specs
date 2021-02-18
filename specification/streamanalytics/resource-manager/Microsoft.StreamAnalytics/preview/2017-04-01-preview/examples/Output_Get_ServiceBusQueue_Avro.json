@@ -1,0 +1,39 @@
+{
+  "parameters": {
+    "api-version": "2017-04-01-preview",
+    "subscriptionId": "56b5e0a9-b645-407d-99b0-c64f86013e3d",
+    "resourceGroupName": "sjrg",
+    "jobName": "sj5095",
+    "outputName": "output3456"
+  },
+  "responses": {
+    "200": {
+      "headers": {
+        "ETag": "2f68c1ec-2080-43cb-93ec-4bcd3b7f9dbe"
+      },
+      "body": {
+        "id": "/subscriptions/56b5e0a9-b645-407d-99b0-c64f86013e3d/resourceGroups/sjrg/providers/Microsoft.StreamAnalytics/streamingjobs/sj5095/outputs/output3456",
+        "name": "output3456",
+        "type": "Microsoft.StreamAnalytics/streamingjobs/outputs",
+        "properties": {
+          "datasource": {
+            "type": "Microsoft.ServiceBus/Queue",
+            "properties": {
+              "queueName": "sdkqueue",
+              "propertyColumns": [
+                "column1",
+                "column2"
+              ],
+              "serviceBusNamespace": "sdktest",
+              "sharedAccessPolicyName": "RootManageSharedAccessKey"
+            }
+          },
+          "serialization": {
+            "type": "Avro",
+            "properties": {}
+          }
+        }
+      }
+    }
+  }
+}

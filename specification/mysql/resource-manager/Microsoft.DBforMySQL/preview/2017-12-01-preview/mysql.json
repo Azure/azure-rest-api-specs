@@ -34,7 +34,7 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMySQL/servers/{serverName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBForMySQL/servers/{serverName}": {
       "put": {
         "tags": [
           "Servers"
@@ -217,7 +217,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMySQL/servers": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBForMySQL/servers": {
       "get": {
         "tags": [
           "Servers"
@@ -253,7 +253,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.DBforMySQL/servers": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DBForMySQL/servers": {
       "get": {
         "tags": [
           "Servers"
@@ -286,7 +286,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMySQL/servers/{serverName}/restart": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBForMySQL/servers/{serverName}/restart": {
       "post": {
         "tags": [
           "ServerRestart"
@@ -329,7 +329,7 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMySQL/servers/{serverName}/replicas": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBForMySQL/servers/{serverName}/replicas": {
       "get": {
         "tags": [
           "Replicas"
@@ -368,7 +368,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMySQL/servers/{serverName}/firewallRules/{firewallRuleName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBForMySQL/servers/{serverName}/firewallRules/{firewallRuleName}": {
       "put": {
         "tags": [
           "FirewallRules"
@@ -504,7 +504,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMySQL/servers/{serverName}/firewallRules": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBForMySQL/servers/{serverName}/firewallRules": {
       "get": {
         "tags": [
           "FirewallRules"
@@ -543,7 +543,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMySQL/servers/{serverName}/virtualNetworkRules/{virtualNetworkRuleName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBForMySQL/servers/{serverName}/virtualNetworkRules/{virtualNetworkRuleName}": {
       "get": {
         "tags": [
           "VirtualNetworkRules"
@@ -688,7 +688,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMySQL/servers/{serverName}/virtualNetworkRules": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBForMySQL/servers/{serverName}/virtualNetworkRules": {
       "get": {
         "tags": [
           "VirtualNetworkRules"
@@ -730,7 +730,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMySQL/servers/{serverName}/databases/{databaseName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBForMySQL/servers/{serverName}/databases/{databaseName}": {
       "put": {
         "tags": [
           "Databases"
@@ -866,7 +866,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMySQL/servers/{serverName}/databases": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBForMySQL/servers/{serverName}/databases": {
       "get": {
         "tags": [
           "Databases"
@@ -905,7 +905,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMySQL/servers/{serverName}/configurations/{configurationName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBForMySQL/servers/{serverName}/configurations/{configurationName}": {
       "put": {
         "tags": [
           "Configurations"
@@ -994,7 +994,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMySQL/servers/{serverName}/configurations": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBForMySQL/servers/{serverName}/configurations": {
       "get": {
         "tags": [
           "Configurations"
@@ -1033,7 +1033,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMySQL/servers/{serverName}/logFiles": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBForMySQL/servers/{serverName}/logFiles": {
       "get": {
         "tags": [
           "LogFiles"
@@ -1072,7 +1072,194 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.DBforMySQL/locations/{locationName}/performanceTiers": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBForMySQL/servers/{serverName}/Administrators/activeDirectory": {
+      "get": {
+        "tags": [
+          "ServerAdministrators"
+        ],
+        "operationId": "ServerAdministrators_Get",
+        "x-ms-examples": {
+          "ServerAdministratorGet": {
+            "$ref": "./examples/ServerAdminGet.json"
+          }
+        },
+        "description": "Gets information about a AAD server administrator.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ServerAdministratorResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "ServerAdministrators"
+        ],
+        "operationId": "ServerAdministrators_CreateOrUpdate",
+        "x-ms-examples": {
+          "ServerAdministratorCreate": {
+            "$ref": "./examples/ServerAdminCreateUpdate.json"
+          }
+        },
+        "description": "Creates or update active directory administrator on an existing server. The update action will overwrite the existing administrator.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ServerAdministratorResource"
+            },
+            "description": "The required parameters for creating or updating an AAD server administrator."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully updated the active directory administrator",
+            "schema": {
+              "$ref": "#/definitions/ServerAdministratorResource"
+            }
+          },
+          "202": {
+            "description": "Operation in progress",
+            "schema": {
+              "$ref": "#/definitions/ServerAdministratorResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "tags": [
+          "ServerAdministrators"
+        ],
+        "operationId": "ServerAdministrators_Delete",
+        "x-ms-examples": {
+          "ServerAdministratorsDelete": {
+            "$ref": "./examples/ServerAdminDelete.json"
+          }
+        },
+        "description": "Deletes AAD Administrator.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully deleted the active directory administrator"
+          },
+          "202": {
+            "description": "Operation in progress"
+          },
+          "204": {
+            "description": "The specified Server active directory administrator does not exist"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBForMySQL/servers/{serverName}/administrators": {
+      "get": {
+        "tags": [
+          "ServerAdministrators"
+        ],
+        "operationId": "ServerAdministrators_List",
+        "description": "Returns a list of server Administrators.",
+        "x-ms-examples": {
+          "get a list of server administrators": {
+            "$ref": "./examples/ServerAdminList.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ServerAdministratorResourceListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DBForMySQL/locations/{locationName}/performanceTiers": {
       "get": {
         "tags": [
           "LocationBasedPerformanceTier"
@@ -1108,7 +1295,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.DBforMySQL/checkNameAvailability": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DBForMySQL/checkNameAvailability": {
       "post": {
         "tags": [
           "CheckNameAvailability"
@@ -1147,7 +1334,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMySQL/servers/{serverName}/securityAlertPolicies/{securityAlertPolicyName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBForMySQL/servers/{serverName}/securityAlertPolicies/{securityAlertPolicyName}": {
       "get": {
         "tags": [
           "ServerSecurityAlertPolicies"
@@ -1267,7 +1454,7 @@
         }
       }
     },
-    "/providers/Microsoft.DBforMySQL/operations": {
+    "/providers/Microsoft.DBForMySQL/operations": {
       "get": {
         "tags": [
           "Operations"
@@ -1301,7 +1488,8 @@
       "description": "The version of a server.",
       "enum": [
         "5.6",
-        "5.7"
+        "5.7",
+        "8.0"
       ],
       "x-ms-enum": {
         "name": "ServerVersion",
@@ -1320,50 +1508,114 @@
         "modelAsString": false
       }
     },
-    "ProxyResource": {
-      "description": "Resource properties.",
+    "MinimalTlsVersion": {
+      "type": "string",
+      "description": "Enforce a minimal Tls version for the server.",
+      "enum": [
+        "TLS1_0",
+        "TLS1_1",
+        "TLS1_2",
+        "TLSEnforcementDisabled"
+      ],
+      "x-ms-enum": {
+        "name": "MinimalTlsVersionEnum",
+        "modelAsString": true
+      }
+    },
+    "ServerPrivateEndpointConnection": {
+      "description": "A private endpoint connection under a server",
+      "type": "object",
       "properties": {
         "id": {
-          "readOnly": true,
+          "description": "Resource Id of the private endpoint connection.",
           "type": "string",
-          "description": "Resource ID"
+          "readOnly": true
         },
-        "name": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Resource name."
+        "properties": {
+          "$ref": "#/definitions/PrivateEndpointConnectionProperties",
+          "description": "Private endpoint connection properties",
+          "readOnly": true
+        }
+      }
+    },
+    "PrivateEndpointConnectionProperties": {
+      "description": "Properties of a private endpoint connection.",
+      "type": "object",
+      "properties": {
+        "privateEndpoint": {
+          "$ref": "#/definitions/PrivateEndpointProperty",
+          "description": "Private endpoint which the connection belongs to."
         },
-        "type": {
-          "readOnly": true,
+        "privateLinkServiceConnectionState": {
+          "$ref": "#/definitions/PrivateLinkServiceConnectionStateProperty",
+          "description": "Connection state of the private endpoint connection."
+        },
+        "provisioningState": {
+          "description": "State of the private endpoint connection.",
+          "enum": [
+            "Approving",
+            "Ready",
+            "Dropping",
+            "Failed",
+            "Rejecting"
+          ],
           "type": "string",
-          "description": "Resource type."
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "PrivateEndpointProvisioningState",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "PrivateEndpointProperty": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Resource id of the private endpoint.",
+          "type": "string"
         }
       },
       "x-ms-azure-resource": true
     },
-    "TrackedResource": {
-      "description": "Resource properties including location and tags for track resources.",
-      "properties": {
-        "location": {
-          "type": "string",
-          "description": "The location the resource resides in."
-        },
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "Application-specific metadata in the form of key-value pairs."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/ProxyResource"
-        }
-      ],
+    "PrivateLinkServiceConnectionStateProperty": {
       "required": [
-        "location"
-      ]
+        "status",
+        "description"
+      ],
+      "type": "object",
+      "properties": {
+        "status": {
+          "description": "The private link service connection status.",
+          "enum": [
+            "Approved",
+            "Pending",
+            "Rejected",
+            "Disconnected"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "PrivateLinkServiceConnectionStateStatus",
+            "modelAsString": true
+          }
+        },
+        "description": {
+          "description": "The private link service connection description.",
+          "type": "string"
+        },
+        "actionsRequired": {
+          "description": "The actions required for private link service connection.",
+          "enum": [
+            "None"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "PrivateLinkServiceConnectionStateActionsRequire",
+            "modelAsString": true
+          }
+        }
+      }
     },
     "ServerProperties": {
       "properties": {
@@ -1379,13 +1631,35 @@
           "$ref": "#/definitions/SslEnforcement",
           "description": "Enable ssl enforcement or not when connect to server."
         },
+        "minimalTlsVersion": {
+          "$ref": "#/definitions/MinimalTlsVersion",
+          "description": "Enforce a minimal Tls version for the server."
+        },
+        "byokEnforcement": {
+          "type": "string",
+          "description": "Status showing whether the server data encryption is enabled with customer-managed keys.",
+          "readOnly": true
+        },
+        "infrastructureEncryption": {
+          "type": "string",
+          "description": "Status showing whether the server enabled infrastructure encryption.",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "InfrastructureEncryption",
+            "modelAsString": true
+          }
+        },
         "userVisibleState": {
           "type": "string",
           "description": "A state of a server that is visible to user.",
           "enum": [
             "Ready",
             "Dropping",
-            "Disabled"
+            "Disabled",
+            "Inaccessible"
           ],
           "x-ms-enum": {
             "name": "ServerState",
@@ -1418,6 +1692,26 @@
           "format": "int32",
           "minimum": 0,
           "description": "The maximum number of replicas that a master server can have."
+        },
+        "publicNetworkAccess": {
+          "type": "string",
+          "description": "Whether or not public endpoint access is allowed for this server.  Value is optional but if passed in, must be 'Enabled' or 'Disabled'",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "PublicNetworkAccessEnum",
+            "modelAsString": true
+          }
+        },
+        "privateEndpointConnections": {
+          "description": "List of private endpoint connections on a server",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ServerPrivateEndpointConnection"
+          },
+          "readOnly": true
         }
       },
       "description": "The properties of a server."
@@ -1473,6 +1767,10 @@
         "sslEnforcement": {
           "$ref": "#/definitions/SslEnforcement",
           "description": "Enable ssl enforcement or not when connect to server."
+        },
+        "minimalTlsVersion": {
+          "$ref": "#/definitions/MinimalTlsVersion",
+          "description": "Enforce a minimal Tls version for the server."
         },
         "storageProfile": {
           "$ref": "#/definitions/StorageProfile",
@@ -1613,10 +1911,46 @@
           "description": "The family of hardware."
         }
       },
+      "required": [
+        "name"
+      ],
       "description": "Billing information related properties of a server."
+    },
+    "ResourceIdentity": {
+      "description": "Azure Active Directory identity configuration for a resource.",
+      "type": "object",
+      "properties": {
+        "principalId": {
+          "format": "uuid",
+          "description": "The Azure Active Directory principal id.",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "The identity type. Set this to 'SystemAssigned' in order to automatically create and assign an Azure Active Directory principal for the resource.",
+          "enum": [
+            "SystemAssigned"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "IdentityType",
+            "modelAsString": true
+          }
+        },
+        "tenantId": {
+          "format": "uuid",
+          "description": "The Azure Active Directory tenant id.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
     },
     "Server": {
       "properties": {
+        "identity": {
+          "$ref": "#/definitions/ResourceIdentity",
+          "description": "The Azure Active Directory identity of the server."
+        },
         "sku": {
           "$ref": "#/definitions/Sku",
           "description": "The SKU (pricing tier) of the server."
@@ -1629,7 +1963,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/TrackedResource"
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/TrackedResource"
         }
       ],
       "description": "Represents a server."
@@ -1687,6 +2021,10 @@
             "sslEnforcement": {
               "$ref": "#/definitions/SslEnforcement",
               "description": "Enable ssl enforcement or not when connect to server."
+            },
+            "minimalTlsVersion": {
+              "$ref": "#/definitions/MinimalTlsVersion",
+              "description": "Enforce a minimal Tls version for the server."
             },
             "replicationRole": {
               "type": "string",
@@ -1747,7 +2085,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/ProxyResource"
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ProxyResource"
         }
       ],
       "required": [
@@ -1805,7 +2143,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/ProxyResource"
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ProxyResource"
         }
       ],
       "properties": {
@@ -1858,7 +2196,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/ProxyResource"
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ProxyResource"
         }
       ],
       "description": "Represents a Database."
@@ -1918,7 +2256,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/ProxyResource"
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ProxyResource"
         }
       ],
       "description": "Represents a Configuration."
@@ -2054,7 +2392,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/ProxyResource"
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ProxyResource"
         }
       ],
       "description": "Represents a log file."
@@ -2228,7 +2566,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/ProxyResource"
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ProxyResource"
         }
       ],
       "properties": {
@@ -2272,6 +2610,68 @@
         }
       },
       "description": "An error response from the Batch service."
+    },
+    "ServerAdministratorProperties": {
+      "properties": {
+        "administratorType": {
+          "type": "string",
+          "description": "The type of administrator.",
+          "enum": [
+            "ActiveDirectory"
+          ],
+          "x-ms-enum": {
+            "name": "AdministratorType"
+          }
+        },
+        "login": {
+          "type": "string",
+          "description": "The server administrator login account name."
+        },
+        "sid": {
+          "type": "string",
+          "description": "The server administrator Sid (Secure ID).",
+          "format": "uuid"
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "The server Active Directory Administrator tenant id.",
+          "format": "uuid"
+        }
+      },
+      "required": [
+        "tenantId",
+        "administratorType",
+        "login",
+        "sid"
+      ],
+      "description": "The properties of an server Administrator."
+    },
+    "ServerAdministratorResource": {
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ServerAdministratorProperties",
+          "x-ms-client-flatten": true,
+          "description": "Properties of the server AAD administrator."
+        }
+      },
+      "description": "Represents a and external administrator to be created.",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "ServerAdministratorResourceListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ServerAdministratorResource"
+          },
+          "description": "The list of server Active Directory Administrators for the server."
+        }
+      },
+      "description": "The response to a list Active Directory Administrators request."
     }
   },
   "parameters": {

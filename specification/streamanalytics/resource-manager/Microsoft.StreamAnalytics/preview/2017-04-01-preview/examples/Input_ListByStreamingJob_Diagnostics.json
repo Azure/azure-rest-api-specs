@@ -1,0 +1,53 @@
+{
+  "parameters": {
+    "api-version": "2017-04-01-preview",
+    "subscriptionId": "56b5e0a9-b645-407d-99b0-c64f86013e3d",
+    "resourceGroupName": "sjrg",
+    "jobName": "sj7804",
+    "$select": "*"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/56b5e0a9-b645-407d-99b0-c64f86013e3d/resourceGroups/sjrg/providers/Microsoft.StreamAnalytics/streamingjobs/sj7804/inputs/inputtest",
+            "name": "inputtest",
+            "type": "Microsoft.StreamAnalytics/streamingjobs/inputs",
+            "properties": {
+              "type": "Stream",
+              "datasource": {
+                "type": "Microsoft.Storage/Blob",
+                "properties": {
+                  "storageAccounts": [
+                    {
+                      "accountName": "someAccountName"
+                    }
+                  ],
+                  "container": "state",
+                  "pathPattern": ""
+                }
+              },
+              "serialization": {
+                "type": "Json",
+                "properties": {
+                  "encoding": "UTF8"
+                }
+              },
+              "diagnostics": {
+                "conditions": [
+                  {
+                    "since": "2017-05-11T04:38:42.4938687Z",
+                    "code": "INP-3",
+                    "message": "Could not deserialize the input event as Json. Some possible reasons: 1) Malformed events 2) Input source configured with incorrect serialization format"
+                  }
+                ]
+              },
+              "etag": "ca88f8fa-605b-4c7f-8695-46f5faa60cd0"
+            }
+          }
+        ]
+      }
+    }
+  }
+}
