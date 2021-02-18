@@ -21,7 +21,7 @@ These are the global settings for the Instance Metadata Service API.
 
 ``` yaml
 openapi-type: data-plane
-azure-arm: false
+azure-arm: true
 tag: package-2019-02-01
 output-folder: ./Generated
 ```
@@ -287,17 +287,6 @@ input-file:
 
 ---
 # Code Generation
-
-## C#
-
-These settings apply only when `--csharp` is specified on the command line.
-
-``` yaml $(csharp)
-csharp:
-  azure-arm: true
-  output-folder: ./Generated
-  clear-output-folder: true
-```
 
 ## Java
 
