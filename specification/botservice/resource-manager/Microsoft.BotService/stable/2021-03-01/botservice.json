@@ -2461,45 +2461,41 @@
       "description": "The response body returned for a request to Bot Service Management to check per subscription hostSettings",
       "type": "object",
       "properties": {
-        "AzureWebJobsBotFrameworkDirectLineEndpoint": {
-          "description": "web app setting for Bot Framework SDK",
-          "type": "string"
-        },
-        "BotOpenIdMetadata": {
-          "description": "web app setting for Bot Framework SDK",
-          "type": "string"
-        },
         "ChannelService": {
-          "description": "web app setting for Bot Framework SDK",
+          "description": "Non empty if there are per environment/cloud settings",
           "type": "string"
         },
         "OAuthUrl": {
-          "description": "web app setting for Bot Framework SDK",
+          "description": "For in-conversation bot user authentication",
           "type": "string"
         },
         "ToBotFromChannelOpenIdMetadataUrl": {
-          "description": "web app setting for Bot Framework SDK",
+          "description": "For verifying incoming tokens from the channels",
           "type": "string"
         },
         "ToBotFromChannelTokenIssuer": {
-          "description": "web app setting for Bot Framework SDK",
+          "description": "For verifying incoming tokens from the channels",
           "type": "string"
         },
         "ToBotFromEmulatorOpenIdMetadataUrl": {
-          "description": "web app setting for Bot Framework SDK",
+          "description": "For verifying incoming tokens from bot emulator",
           "type": "string"
         },
         "ToChannelFromBotLoginUrl": {
-          "description": "web app setting for Bot Framework SDK",
+          "description": "For getting access token to channels from bot host",
           "type": "string"
         },
         "ToChannelFromBotOAuthScope": {
-          "description": "web app setting for Bot Framework SDK",
+          "description": "For getting access token to channels from bot host",
           "type": "string"
         },
         "ValidateAuthority": {
-          "description": "web app setting for Bot Framework SDK",
+          "description": "Per cloud OAuth setting on whether authority is validated",
           "type": "boolean"
+        },
+        "BotOpenIdMetadata": {
+          "description": "Same as ToBotFromChannelOpenIdMetadataUrl, used by SDK < v4.12",
+          "type": "string"
         }
       },
       "required": [
