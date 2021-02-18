@@ -51,7 +51,7 @@ perform-load: false
 
 ### Tag: package-2018-01-preview and python
 
-These settings apply only when `--tag=package-2018-01-preview --python` is specified on the command line.
+These settings apply only when a `--tag=package-2018-01-preview --python` is specified on the command line.
 Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
 
 ``` yaml $(tag) == 'package-2018-01-preview'
