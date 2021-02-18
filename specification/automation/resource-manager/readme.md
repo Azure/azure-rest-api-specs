@@ -227,7 +227,7 @@ input-file:
 - Microsoft.Automation/preview/2020-01-13-preview/softwareUpdateConfiguration.json
 - Microsoft.Automation/preview/2020-01-13-preview/softwareUpdateConfigurationRun.json
 - Microsoft.Automation/preview/2020-01-13-preview/softwareUpdateConfigurationMachineRun.json
-- Microsoft.Automation/stable/2019-06-01/dscConfiguration.json
+- Microsoft.Automation/preview/2020-01-13-preview/dscConfiguration.json
 - Microsoft.Automation/stable/2019-06-01/runbook.json
 - Microsoft.Automation/stable/2015-10-31/webhook.json
 ```
