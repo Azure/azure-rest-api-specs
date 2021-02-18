@@ -1684,9 +1684,13 @@
         "tags": [
           "ManagedClusters"
         ],
-        "operationId": "POST_RunCommand",
+        "operationId": "ManagedClusters_RunCommand",
         "summary": "Run Command against Managed Kubernetes Service",
         "description": "Submit a command to run against managed kubernetes service, it will create a pod to run the command.",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1733,7 +1737,7 @@
         "tags": [
           "ManagedClusters"
         ],
-        "operationId": "GET_CommandResults",
+        "operationId": "ManagedClusters_GetCommandResult",
         "summary": "Get command result.",
         "description": "Get command result from previous runCommand invoke.",
         "parameters": [
