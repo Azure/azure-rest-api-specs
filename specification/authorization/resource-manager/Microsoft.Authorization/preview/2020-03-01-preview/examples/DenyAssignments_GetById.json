@@ -1,0 +1,47 @@
+{
+  "parameters": {
+    "denyAssignmentId": "subscriptions/a925f2f7-5c63-4b7b-8799-25a5f97bc3b2/resourcegroups/testrg/providers/Microsoft.Authorization/denyAssignments/0b5fe924-9a61-425c-96af-cfe6e287ca2d",
+    "api-version": "2020-03-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "denyAssignmentName": "Deny assignment name",
+          "description": "Deny assignment description",
+          "permissions": [
+            {
+              "actions": [
+                "*"
+              ],
+              "notActions": [
+                "Microsoft.Authorization/*/Delete",
+                "Microsoft.Authorization/*/Write"
+              ],
+              "dataActions": [],
+              "notDataActions": []
+            }
+          ],
+          "scope": "/subscriptions/a925f2f7-5c63-4b7b-8799-25a5f97bc3b2/resourcegroups/testrg",
+          "doNotApplyToChildScopes": false,
+          "principals": [
+            {
+              "id": "principalId1",
+              "type": "principalType1"
+            }
+          ],
+          "excludePrincipals": [
+            {
+              "id": "principalId2",
+              "type": "principalType2"
+            }
+          ],
+          "isSystemProtected": true
+        },
+        "id": "/subscriptions/a925f2f7-5c63-4b7b-8799-25a5f97bc3b2/resourcegroups/testrg/providers/Microsoft.Authorization/denyAssignments/0b5fe924-9a61-425c-96af-cfe6e287ca2d",
+        "type": "Microsoft.Authorization/denyAssignments",
+        "name": "0b5fe924-9a61-425c-96af-cfe6e287ca2d"
+      }
+    }
+  }
+}
