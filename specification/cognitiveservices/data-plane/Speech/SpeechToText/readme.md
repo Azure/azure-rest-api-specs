@@ -4,29 +4,29 @@
 
 Configuration for generating SpeechToText SDK.
 
+The current release for the SpeechToText is `release_3_0`.
+
 ``` yaml
-tag: 3_0
+tag: release_3_0
 add-credentials: true
 openapi-type: data-plane
 ```
 
-The current release for the SpeechToText is `3_0`.
-
 # Releases
 
 ## SpeechToText 2.0
-These settings apply only when `--tag=2_0` is specified on the command line.
+These settings apply only when `--tag=release_2_0` is specified on the command line.
 
-``` yaml $(tag) == '2_0'
+``` yaml $(tag) == 'release_2_0'
 input-file: stable/v2.0/speechtotext.json
 ```
 
 ---
 
 ## SpeechToText 3.0
-These settings apply only when `--tag=3_0` is specified on the command line.
+These settings apply only when `--tag=release_3_0` is specified on the command line.
 
-``` yaml $(tag) == '3_0'
+``` yaml $(tag) == 'release_3_0'
 input-file: stable/v3.0/speechtotext.json
 ```
 
@@ -59,6 +59,10 @@ csharp:
   output-folder: $(csharp-sdks-folder)/CognitiveServices/Speech/SpeechToText/src/generated
   clear-output-folder: true
 ```
+
+## Go
+
+See configuration in [readme.go.md](./readme.go.md)
 
 ## Java
 

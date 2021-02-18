@@ -13,24 +13,24 @@ go:
 
 ``` yaml $(go) && $(multiapi)
 batch:
-  - tag: 2_0
-  - tag: 3_0
+  - tag: release_2_0
+  - tag: release_3_0
 ```
 
 ### Tag: 2_0 and go
 
-These settings apply only when `--tag=2_0 --go` is specified on the command line.
+These settings apply only when `--tag=release_2_0 --go` is specified on the command line.
 Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
-``` yaml $(tag) == '2_0' && $(go)
+``` yaml $(tag) == 'release_2_0' && $(go)
 output-folder: $(go-sdk-folder)/services/cognitiveservices/v2.0/speech/speechtotext/$(namespace)
 ```
 
 ### Tag: 3_0 and go
 
-These settings apply only when `--tag=3_0 --go` is specified on the command line.
+These settings apply only when `--tag=release_3_0 --go` is specified on the command line.
 Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
-``` yaml $(tag) == '3_0' && $(go)
+``` yaml $(tag) == 'release_3_0' && $(go)
 output-folder: $(go-sdk-folder)/services/preview/cognitiveservices/v3.0/speech/speechtotext/$(namespace)
 ```
