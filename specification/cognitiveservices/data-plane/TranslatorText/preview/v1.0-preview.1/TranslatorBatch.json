@@ -97,6 +97,10 @@
           "Batch Submit": {
             "$ref": "./examples/batch.json"
           }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
         }
       },
       "get": {
@@ -205,6 +209,9 @@
           "Get status for batch operations": {
             "$ref": "./examples/operations.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "@nextLink"
         }
       }
     },
@@ -621,6 +628,9 @@
           "Get Documents Status for the operation batch id": {
             "$ref": "./examples/documents.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "@nextLink"
         }
       }
     },
@@ -814,7 +824,16 @@
       "enum": [
         "AzureBlob"
       ],
-      "type": "string"
+      "type": "string",
+      "x-ms-enum": {
+        "name": "StorageSource",
+        "modelAsString": false,
+        "values": [
+          {
+            "value": "AzureBlob"
+          }
+        ]
+      }
     },
     "SourceInput": {
       "description": "Source of the input documents",
@@ -909,7 +928,19 @@
         "Folder",
         "File"
       ],
-      "type": "string"
+      "type": "string",
+      "x-ms-enum": {
+        "name": "StorageInputType",
+        "modelAsString": false,
+        "values": [
+          {
+            "value": "Folder"
+          },
+          {
+            "value": "File"
+          }
+        ]
+      }
     },
     "BatchRequest": {
       "description": "Definition for the input batch translation request",
@@ -961,7 +992,34 @@
         "Cancelling",
         "ValidationFailed"
       ],
-      "type": "string"
+      "type": "string",
+      "x-ms-enum": {
+        "name": "Status",
+        "modelAsString": false,
+        "values": [
+          {
+            "value": "NotStarted"
+          },
+          {
+            "value": "Running"
+          },
+          {
+            "value": "Succeeded"
+          },
+          {
+            "value": "Failed"
+          },
+          {
+            "value": "Cancelled"
+          },
+          {
+            "value": "Cancelling"
+          },
+          {
+            "value": "ValidationFailed"
+          }
+        ]
+      }
     },
     "ErrorCodeV2": {
       "description": "Enums containing high level error codes.",
@@ -974,27 +1032,56 @@
         "Unauthorized",
         "RequestRateTooHigh"
       ],
-      "type": "string"
+      "type": "string",
+      "x-ms-enum": {
+        "name": "ErrorCodeV2",
+        "modelAsString": false,
+        "values": [
+          {
+            "value": "InvalidRequest"
+          },
+          {
+            "value": "InvalidArgument"
+          },
+          {
+            "value": "InternalServerError"
+          },
+          {
+            "value": "ServiceUnavailable"
+          },
+          {
+            "value": "ResourceNotFound"
+          },
+          {
+            "value": "Unauthorized"
+          },
+          {
+            "value": "RequestRateTooHigh"
+          }
+        ]
+      }
     },
     "InnerErrorV2": {
       "description": "New Inner Error format which conforms to Cognitive Services API Guidelines which is available at https://microsoft.sharepoint.com/%3Aw%3A/t/CognitiveServicesPMO/EUoytcrjuJdKpeOKIK_QRC8BPtUYQpKBi8JsWyeDMRsWlQ?e=CPq8ow.\r\nThis contains required properties ErrorCode, message and optional properties target, details(key value pair), inner error(this can be nested).",
+      "required": [
+        "error",
+        "message"
+      ],
       "type": "object",
       "properties": {
         "code": {
           "format": "int32",
-          "description": "Gets detailed error code.",
+          "description": "Gets detailed error code.\r\nNot displayed to the user",
           "type": "integer",
           "readOnly": true
         },
         "error": {
           "description": "Gets detailed error string.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "message": {
           "description": "Gets high level error message.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "target": {
           "description": "Gets the source of the error. \r\nFor example it would be \"documents\" or \"document id\" in case of invalid document.",
@@ -1008,6 +1095,9 @@
     },
     "ErrorV2": {
       "description": "This contains an outer error with error code, message, details, target and an inner error with more descriptive details.",
+      "required": [
+        "message"
+      ],
       "type": "object",
       "properties": {
         "code": {
@@ -1015,8 +1105,7 @@
         },
         "message": {
           "description": "Gets high level error message.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "target": {
           "description": "Gets the source of the error. \r\nFor example it would be \"documents\" or \"document id\" in case of invalid document.",
@@ -1304,50 +1393,6 @@
         "type": "string",
         "x-ms-parameter-location": "client",
         "x-ms-skip-url-encoding": true
-      }
-    ]
-  },
-  "x-ms-enum": {
-    "name": "ErrorCodeV2",
-    "modelAsString": true,
-    "values": [
-      {
-        "value": "InvalidRequest"
-      },
-      {
-        "value": "InvalidArgument"
-      },
-      {
-        "value": "InternalServerError"
-      },
-      {
-        "value": "ServiceUnavailable"
-      },
-      {
-        "value": "ResourceNotFound"
-      },
-      {
-        "value": "Unauthorized"
-      },
-      {
-        "value": "RequestRateTooHigh"
-      }
-    ],
-    "name": "StorageInputType",
-    "modelAsString": true,
-    "values": [
-      {
-        "value": "Folder"
-      },
-      {
-        "value": "File"
-      }
-    ],
-    "name": "StorageSource",
-    "modelAsString": true,
-    "values": [
-      {
-        "value": "AzureBlob"
       }
     ]
   }
