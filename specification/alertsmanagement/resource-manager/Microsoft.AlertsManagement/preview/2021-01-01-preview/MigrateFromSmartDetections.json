@@ -1,0 +1,271 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2021-01-01-preview",
+    "title": "Azure Alerts Management Service Resource Provider",
+    "description": "APIs for managing a migration from Smart Detection to smart alerts."
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AlertsManagement/migrateFromSmartDetection": {
+      "post": {
+        "tags": [
+          "MigrateFromSmartDetection"
+        ],
+        "description": "Starts an asynchronous migration process of Smart Detection to smart alerts in an Application Insights resource. Use the HTTP address in the response location header to GET the status of the migration process.",
+        "operationId": "MigrateFromSmartDetection_StartMigration",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "smartDetectionMigrationRequest",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SmartDetectionMigrationRequest"
+            },
+            "description": "The parameters controlling the migration process."
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Migration request was accepted. Processing will start promptly.",
+            "schema": {
+              "$ref": "#/definitions/MigrationStatusResponse"
+            }
+          },
+          "200": {
+            "description": "Migration for the requested resource was already completed.",
+            "schema": {
+              "$ref": "#/definitions/MigrationStatusResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/MigrationErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Migration Triggering": {
+            "$ref": "./examples/migrateFromSmartDetectionStartMigration.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "SmartDetectionMigrationRequest": {
+      "required": [
+        "scope"
+      ],
+      "properties": {
+        "scope": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The list of resource IDs that the requested migration should be performed on."
+        },
+        "actionGroupCreationPolicy": {
+          "type": "string",
+          "enum": [
+            "Custom",
+            "Auto"
+          ],
+          "x-ms-enum": {
+            "name": "ActionGroupCreationPolicy",
+            "values": [
+              {
+                "value": "Custom",
+                "description": "Create all alert rules with a custom action group that is specified in 'customActionGroupName'."
+              },
+              {
+                "value": "Auto",
+                "description": "Automatically create an action group for each unique setting in the Smart Detection settings."
+              }
+            ],
+            "modelAsString": true
+          },
+          "description": "The policy for migrating the email settings in the Smart Detection Rules into action groups. If not specified, 'Auto' policy is used."
+        },
+        "customActionGroupName": {
+          "type": "string",
+          "description": "A custom name of an existing action group to attach to the created alert rules. Required only when actionGroupCreationPolicy is set to 'Custom'."
+        }
+      },
+      "description": "The Smart Detection migration request."
+    },
+    "MigrationStatusResponse": {
+      "description": "Response for the quota submission request.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "The migration resource identifier.",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "The migration process name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Type of resource. \"Microsoft.AlertsManagement/migrateFromSmartDetection\""
+        },
+        "properties": {
+          "description": "The details of the migration response",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/MigrationStatusResponseProperties"
+        }
+      }
+    },
+    "MigrationStatusResponseProperties": {
+      "required": [
+        "migrationId",
+        "status",
+        "scope"
+      ],
+      "properties": {
+        "migrationId": {
+          "type": "string",
+          "description": "The migration process unique id."
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "Starting",
+            "InProcess",
+            "Deploying",
+            "Completed",
+            "Failed",
+            "Canceled"
+          ],
+          "x-ms-enum": {
+            "name": "MigrationStatus",
+            "values": [
+              {
+                "value": "Starting",
+                "description": "The migration was accepted and will start shortly."
+              },
+              {
+                "value": "InProcess",
+                "description": "The migration is in progress."
+              },
+              {
+                "value": "Deploying",
+                "description": "The migration template is deploying."
+              },
+              {
+                "value": "Completed",
+                "description": "The migration completed successfully."
+              },
+              {
+                "value": "Failed",
+                "description": "The migration failed."
+              },
+              {
+                "value": "Canceled",
+                "description": "The migration was canceled by the user."
+              }
+            ],
+            "modelAsString": true
+          },
+          "description": "The current status of the migration process"
+        },
+        "scope": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The list of resource IDs that the requested migration should be performed on."
+        },
+        "armDeploymentName": {
+          "type": "string",
+          "description": "The name of the ARM deployment associated with the migration process."
+        }
+      },
+      "description": "A migration status response."
+    },
+    "MigrationErrorResponse": {
+      "description": "API error.",
+      "type": "object",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/MigrationErrorResponseBody",
+          "description": "The API error body.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "MigrationErrorResponseBody": {
+      "description": "API error body.",
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "Error code.",
+          "type": "string"
+        },
+        "message": {
+          "description": "Error message indicating why the operation failed.",
+          "type": "string"
+        }
+      }
+    }
+  },
+  "parameters": {
+    "SubscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The Azure subscription Id."
+    },
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "Client Api Version."
+    },
+    "MigrationIdParameter": {
+      "name": "migrationId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The ID of the migration process.",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}
