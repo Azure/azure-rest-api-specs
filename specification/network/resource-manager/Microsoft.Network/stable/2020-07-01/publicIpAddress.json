@@ -444,6 +444,29 @@
           "readOnly": true,
           "$ref": "./network.json#/definitions/ProvisioningState",
           "description": "The provisioning state of the public IP address resource."
+        },
+        "natGateway": {
+          "$ref": "./natGateway.json#/definitions/NatGateway",
+          "description": "The NatGateway for the Public IP address."
+        },
+        "migrationPhase": {
+          "type": "string",
+          "description": "Migration phase of Public IP Address.",
+          "enum": [
+            "None",
+            "Prepare",
+            "Commit",
+            "Abort",
+            "Committed"
+          ],
+          "x-ms-enum": {
+            "name": "PublicIPAddressMigrationPhase",
+            "modelAsString": true
+          }
+        },
+        "linkedPublicIPAddress": {
+          "$ref": "#/definitions/PublicIPAddress",
+          "description": "The linked public IP address of the public IP address resource."
         }
       },
       "description": "Public IP address properties."
