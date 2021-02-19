@@ -18,7 +18,7 @@
         "redisVersion": "4",
         "enableNonSslPort": true,
         "shardCount": 2,
-        "replicasPerMaster": 2,
+        "replicasPerPrimary": 2,
         "redisConfiguration": {
           "maxmemory-policy": "allkeys-lru"
         },
@@ -53,6 +53,7 @@
           },
           "enableNonSslPort": false,
           "replicasPerMaster": 2,
+          "replicasPerPrimary": 2,
           "redisConfiguration": {
             "maxmemory-policy": "allkeys-lru"
           },
@@ -65,37 +66,49 @@
               "sslPort": 15000,
               "nonSslPort": 13000,
               "zone": "1",
-              "shardId": 0
+              "shardId": 0,
+              "isMaster": true,
+              "isPrimary": true
             },
             {
               "sslPort": 15001,
               "nonSslPort": 13001,
               "zone": "1",
-              "shardId": 0
+              "shardId": 0,
+              "isMaster": false,
+              "isPrimary": false
             },
             {
               "sslPort": 15002,
               "nonSslPort": 13002,
               "zone": "1",
-              "shardId": 0
+              "shardId": 0,
+              "isMaster": false,
+              "isPrimary": false
             },
             {
               "sslPort": 15003,
               "nonSslPort": 13003,
               "zone": "1",
-              "shardId": 1
+              "shardId": 1,
+              "isMaster": true,
+              "isPrimary": true
             },
             {
               "sslPort": 15004,
               "nonSslPort": 13004,
               "zone": "1",
-              "shardId": 1
+              "shardId": 1,
+              "isMaster": false,
+              "isPrimary": false
             },
             {
               "sslPort": 15005,
               "nonSslPort": 13005,
               "zone": "1",
-              "shardId": 1
+              "shardId": 1,
+              "isMaster": false,
+              "isPrimary": false
             }
           ]
         }
@@ -125,6 +138,7 @@
           },
           "enableNonSslPort": false,
           "replicasPerMaster": 2,
+          "replicasPerPrimary": 2,
           "redisConfiguration": {
             "maxclients": "1000",
             "maxmemory-reserved": "50",
@@ -139,37 +153,49 @@
               "sslPort": 15000,
               "nonSslPort": 13000,
               "zone": "1",
-              "shardId": 0
+              "shardId": 0,
+              "isMaster": true,
+              "isPrimary": true
             },
             {
               "sslPort": 15001,
               "nonSslPort": 13001,
               "zone": "1",
-              "shardId": 0
+              "shardId": 0,
+              "isMaster": false,
+              "isPrimary": false
             },
             {
               "sslPort": 15002,
               "nonSslPort": 13002,
               "zone": "1",
-              "shardId": 0
+              "shardId": 0,
+              "isMaster": false,
+              "isPrimary": false
             },
             {
               "sslPort": 15003,
               "nonSslPort": 13003,
               "zone": "1",
-              "shardId": 1
+              "shardId": 1,
+              "isMaster": true,
+              "isPrimary": true
             },
             {
               "sslPort": 15004,
               "nonSslPort": 13004,
               "zone": "1",
-              "shardId": 1
+              "shardId": 1,
+              "isMaster": false,
+              "isPrimary": false
             },
             {
               "sslPort": 15005,
               "nonSslPort": 13005,
               "zone": "1",
-              "shardId": 1
+              "shardId": 1,
+              "isMaster": false,
+              "isPrimary": false
             }
           ]
         }

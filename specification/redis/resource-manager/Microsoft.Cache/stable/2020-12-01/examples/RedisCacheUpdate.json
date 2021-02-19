@@ -6,7 +6,8 @@
     "subscriptionId": "subid",
     "parameters": {
       "properties": {
-        "enableNonSslPort": true
+        "enableNonSslPort": true,
+        "replicasPerPrimary": 2
       }
     }
   },
@@ -31,6 +32,8 @@
             "capacity": 1
           },
           "enableNonSslPort": true,
+          "replicasPerMaster": 2,
+          "replicasPerPrimary": 2,
           "redisConfiguration": {
             "maxclients": "1000",
             "maxmemory-reserved": "50",
@@ -42,11 +45,21 @@
           "instances": [
             {
               "sslPort": 15000,
-              "nonSslPort": 13000
+              "nonSslPort": 13000,
+              "isMaster": true,
+              "isPrimary": true
             },
             {
               "sslPort": 15001,
-              "nonSslPort": 13001
+              "nonSslPort": 13001,
+              "isMaster": false,
+              "isPrimary": false
+            },
+            {
+              "sslPort": 15002,
+              "nonSslPort": 13002,
+              "isMaster": false,
+              "isPrimary": false
             }
           ]
         }

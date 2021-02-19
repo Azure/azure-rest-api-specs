@@ -1835,7 +1835,12 @@
         "replicasPerMaster": {
           "type": "integer",
           "format": "int32",
-          "description": "The number of replicas to be created per master."
+          "description": "The number of replicas to be created per primary."
+        },
+        "replicasPerPrimary": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of replicas to be created per primary."
         },
         "tenantSettings": {
           "type": "object",
@@ -2249,7 +2254,12 @@
         "isMaster": {
           "readOnly": true,
           "type": "boolean",
-          "description": "Specifies whether the instance is a master node."
+          "description": "Specifies whether the instance is a primary node."
+        },
+        "isPrimary": {
+          "readOnly": true,
+          "type": "boolean",
+          "description": "Specifies whether the instance is a primary node."
         }
       },
       "description": "Details of single instance of redis."
