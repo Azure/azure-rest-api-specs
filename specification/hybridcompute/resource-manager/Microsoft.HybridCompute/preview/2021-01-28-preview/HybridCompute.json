@@ -828,21 +828,28 @@
           "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/Identity"
         }
       },
-      "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/TrackedResource",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/TrackedResource"
+        }
+      ],
       "description": "Describes a hybrid machine."
     },
     "MachineUpdate": {
       "properties": {
         "identity": {
-          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/Identity",
-          "description": "Hybrid Compute Machine Managed Identity"
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/Identity"
         },
         "properties": {
           "$ref": "#/definitions/MachineUpdateProperties",
           "description": "Hybrid Compute Machine properties"
         }
       },
-      "$ref": "#/definitions/ResourceUpdate",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResourceUpdate"
+        }
+      ],
       "description": "Describes a hybrid machine Update."
     },
     "MachineListResult": {
@@ -912,7 +919,11 @@
           "description": "Describes Machine Extension Properties."
         }
       },
-      "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/TrackedResource",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/TrackedResource"
+        }
+      ],
       "description": "Describes a Machine Extension."
     },
     "MachineExtensionUpdate": {
@@ -922,7 +933,11 @@
           "description": "Describes Machine Extension Update Properties."
         }
       },
-      "$ref": "#/definitions/ResourceUpdate",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResourceUpdate"
+        }
+      ],
       "description": "Describes a Machine Extension Update."
     },
     "MachineExtensionProperties": {
