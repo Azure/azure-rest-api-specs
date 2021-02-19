@@ -1497,12 +1497,28 @@
         "privateEndpointNetworkPolicies": {
           "type": "string",
           "default": "Enabled",
-          "description": "Enable or Disable apply network policies on private end point in the subnet."
+          "description": "Enable or Disable apply network policies on private end point in the subnet.",
+          "enum": [ 
+            "Enabled", 
+            "Disabled" 
+          ], 
+          "x-ms-enum": { 
+            "name": "PrivateEndpointNetworkPolicies", 
+            "modelAsString": true 
+          }
         },
         "privateLinkServiceNetworkPolicies": {
           "type": "string",
           "default": "Enabled",
-          "description": "Enable or Disable apply network policies on private link service in the subnet."
+          "description": "Enable or Disable apply network policies on private link service in the subnet.",
+          "enum": [ 
+            "Enabled", 
+            "Disabled" 
+          ], 
+          "x-ms-enum": { 
+            "name": "PrivateLinkServiceNetworkPolicies", 
+            "modelAsString": true 
+          }
         }
       },
       "description": "Properties of the subnet."

@@ -1160,7 +1160,15 @@
         },
         "nicType": {
           "type": "string",
-          "description": "Type of Network Interface resource."
+          "description": "Type of Network Interface resource.",
+          "enum": [
+            "Standard",
+            "Elastic"
+          ],
+          "x-ms-enum": { 
+            "name": "NicType", 
+            "modelAsString": true 
+          } 
         },
         "privateLinkService": {
           "$ref": "./privateLinkService.json#/definitions/PrivateLinkService",

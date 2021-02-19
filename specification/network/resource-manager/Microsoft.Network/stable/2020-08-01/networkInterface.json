@@ -1161,7 +1161,15 @@
         "nicType": {
           "type": "string",
           "default": "Standard",
-          "description": "Type of Network Interface resource."
+          "description": "Type of Network Interface resource.",
+          "enum": [
+            "Standard",
+            "Elastic"
+          ],
+          "x-ms-enum": { 
+            "name": "NicType", 
+            "modelAsString": true 
+          }
         },
         "privateLinkService": {
           "$ref": "./privateLinkService.json#/definitions/PrivateLinkService",
@@ -1169,7 +1177,18 @@
         },
         "migrationPhase": {
           "type": "string",
-          "description": "Migration phase of Public IP Address."
+          "description": "Migration phase of Network Interface resource.",
+          "enum": [
+            "None",
+            "Prepare",
+            "Commit",
+            "Abort",
+            "Committed"
+          ],
+          "x-ms-enum": { 
+            "name": "MigrationPhase", 
+            "modelAsString": true 
+          }
         }
       },
       "description": "NetworkInterface properties."

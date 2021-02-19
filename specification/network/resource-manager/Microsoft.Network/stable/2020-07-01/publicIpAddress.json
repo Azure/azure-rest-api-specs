@@ -451,7 +451,18 @@
         },
         "migrationPhase": {
           "type": "string",
-          "description": "Migration phase of Public IP Address."
+          "description": "Migration phase of Public IP Address.",
+          "enum": [
+            "None",
+            "Prepare",
+            "Commit",
+            "Abort",
+            "Committed"
+          ],
+          "x-ms-enum": { 
+            "name": "MigrationPhase", 
+            "modelAsString": true 
+          }
         },
         "linkedPublicIPAddress": {
           "$ref": "#/definitions/PublicIPAddress",
