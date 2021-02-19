@@ -3,7 +3,7 @@
   "info": {
     "title": "Azure Resource Graph",
     "description": "Azure Resource Graph API Reference",
-    "version": "2020-04-01-preview"
+    "version": "2020-09-01-preview"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -130,8 +130,16 @@
       "description": "The parameters for a specific changes request.",
       "type": "object",
       "properties": {
-        "resourceId": {
-          "description": "Specifies the resource for a changes request.",
+        "resourceIds": {
+          "description": "Specifies the list of resources for a changes request.",
+          "type": "array",
+          "items": {
+            "type": "string",
+            "description": "Specifies the resource for a changes request."
+          }
+        },
+        "subscriptionId": {
+          "description": "The subscription id of resources to query the changes from. ",
           "type": "string"
         },
         "interval": {
@@ -154,13 +162,20 @@
           "minimum": 1,
           "maximum": 1000
         },
+        "table": {
+          "description": "The table name to query resources from.",
+          "type": "string"
+        },
         "fetchPropertyChanges": {
           "description": "The flag if set to true will fetch property changes",
+          "type": "boolean"
+        },
+        "fetchSnapshots": {
+          "description": "The flag if set to true will fetch change snapshots",
           "type": "boolean"
         }
       },
       "required": [
-        "resourceId",
         "interval"
       ]
     },
@@ -185,7 +200,7 @@
       "type": "object",
       "properties": {
         "resourceId": {
-          "description": "The ID of the resource",
+          "description": "The resource for a change.",
           "type": "string"
         },
         "changeId": {
@@ -286,11 +301,11 @@
     "ResourceSnapshotData": {
       "description": "Data on a specific resource snapshot.",
       "type": "object",
-      "properties": {
+      "properties": {        
         "snapshotId": {
-          "description": "The ID of the snapshot.",
-          "type": "string"
-        },
+        "description": "The ID of the snapshot.",
+        "type": "string"
+      },
         "timestamp": {
           "description": "The time when the snapshot was created.\nThe snapshot timestamp provides an approximation as to when a modification to a resource was detected.  There can be a difference between the actual modification time and the detection time.  This is due to differences in how operations that modify a resource are processed, versus how operation that record resource snapshots are processed.",
           "type": "string",
@@ -309,18 +324,26 @@
       "description": "The parameters for a specific change details request.",
       "type": "object",
       "properties": {
-        "resourceId": {
-          "description": "Specifies the resource for a change details request.",
-          "type": "string"
+        "resourceIds": {
+          "description": "Specifies the list of resources for a change details request.",
+          "type": "array",
+          "items": {
+            "type": "string",
+            "description": "Specifies the resource for a change details request."
+          }
         },
-        "changeId": {
-          "description": "Specifies the change ID.",
-          "type": "string"
+        "changeIds": {
+          "description": "Specifies the list of change IDs for a change details request.",
+          "type": "array",
+          "items": {
+            "type": "string",
+            "description": "Specifies the change ID."
+          }
         }
       },
       "required": [
-        "resourceId",
-        "changeId"
+        "resourceIds",
+        "changeIds"
       ]
     },
     "DateTimeInterval": {
