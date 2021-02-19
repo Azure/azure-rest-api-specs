@@ -34,42 +34,6 @@
     }
   ],
   "paths": {
-    "/providers/Microsoft.ServiceFabric/operations": {
-      "get": {
-        "tags": [
-          "Operations"
-        ],
-        "summary": "Lists all of the available Service Fabric resource provider API operations.",
-        "description": "Get the list of available Service Fabric resource provider API operations.",
-        "operationId": "Operations_List",
-        "parameters": [
-          {
-            "name": "api-version",
-            "in": "query",
-            "description": "The version of the Service Fabric resource provider API",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK. The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/OperationListResult"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorModel"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceFabric/managedclusters/{clusterName}/applicationTypes/{applicationTypeName}": {
       "get": {
         "tags": [
@@ -119,7 +83,7 @@
         "tags": [
           "ApplicationType"
         ],
-        "operationId": "ApplicationTypes_Create",
+        "operationId": "ApplicationTypes_CreateOrUpdate",
         "summary": "Creates or updates a Service Fabric managed application type name resource.",
         "description": "Create or update a Service Fabric managed application type name resource with the specified name.",
         "parameters": [
@@ -372,7 +336,7 @@
         "tags": [
           "ApplicationTypeVersion"
         ],
-        "operationId": "ApplicationTypeVersions_Create",
+        "operationId": "ApplicationTypeVersions_CreateOrUpdate",
         "summary": "Creates or updates a Service Fabric managed application type version resource.",
         "description": "Create or update a Service Fabric managed application type version resource with the specified name.",
         "parameters": [
@@ -644,7 +608,7 @@
         "tags": [
           "Application"
         ],
-        "operationId": "Applications_Create",
+        "operationId": "Applications_CreateOrUpdate",
         "summary": "Creates or updates a Service Fabric managed application resource.",
         "description": "Create or update a Service Fabric managed application resource with the specified name.",
         "parameters": [
@@ -910,7 +874,7 @@
         "tags": [
           "Service"
         ],
-        "operationId": "Services_Create",
+        "operationId": "Services_CreateOrUpdate",
         "summary": "Creates or updates a Service Fabric managed service resource.",
         "description": "Create or update a Service Fabric managed service resource with the specified name.",
         "parameters": [
@@ -2198,7 +2162,6 @@
       "description": "The service resource.",
       "properties": {
         "properties": {
-          "x-ms-client-flatten": true,
           "$ref": "#/definitions/ServiceResourceProperties"
         }
       },
@@ -2602,23 +2565,6 @@
       },
       "description": "The error details."
     },
-    "OperationListResult": {
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "List of operations supported by the Service Fabric resource provider.",
-          "items": {
-            "$ref": "#/definitions/OperationResult"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "URL to get the next set of operation list results if there are any.",
-          "readOnly": true
-        }
-      },
-      "description": "Describes the result of the request to list Service Fabric resource provider operations."
-    },
     "OperationResult": {
       "properties": {
         "name": {
@@ -2655,17 +2601,7 @@
         },
         "createdByType": {
           "type": "string",
-          "description": "The type of identity that created the resource.",
-          "enum": [
-            "User",
-            "Application",
-            "ManagedIdentity",
-            "Key"
-          ],
-          "x-ms-enum": {
-            "name": "createdByType",
-            "modelAsString": true
-          }
+          "description": "The type of identity that created the resource."
         },
         "createdAt": {
           "type": "string",
@@ -2678,17 +2614,7 @@
         },
         "lastModifiedByType": {
           "type": "string",
-          "description": "The type of identity that last modified the resource.",
-          "enum": [
-            "User",
-            "Application",
-            "ManagedIdentity",
-            "Key"
-          ],
-          "x-ms-enum": {
-            "name": "createdByType",
-            "modelAsString": true
-          }
+          "description": "The type of identity that last modified the resource."
         },
         "lastModifiedAt": {
           "type": "string",
