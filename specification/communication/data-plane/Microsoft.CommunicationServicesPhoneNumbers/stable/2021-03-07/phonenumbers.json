@@ -136,6 +136,9 @@
         "consumes": [
           "application/json"
         ],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -153,7 +156,14 @@
         "responses": {
           "202": {
             "description": "The service has accepted the request and will start processing later. It will return 'Accepted' immediately and include an 'Operation-Location' and 'Location' headers. Client side should further query the operation status using the URL specified in 'Operation-Location' header. When operation completes successfully query final result using URL specified in 'Location' header.",
+            "schema": {
+              "$ref": "#/definitions/PhoneNumberSearchResult"
+            },
             "headers": {
+              "Location": {
+                "description": "URL to retrieve the final result after operation completes.",
+                "type": "string"
+              },
               "Operation-Location": {
                 "description": "URL to query for status of the operation.",
                 "type": "string"
@@ -176,6 +186,9 @@
           }
         },
         "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
         "x-ms-examples": {
           "Purchase phone numbers": {
             "$ref": "./examples/PurchasePhoneNumbers.json"
@@ -264,7 +277,10 @@
           "Delete long running operation with the given operation id": {
             "$ref": "./examples/DeleteOperation.json"
           }
-        }
+        },
+        "produces": [
+          "application/json"
+        ]
       }
     },
     "/phoneNumbers/{phoneNumber}": {
@@ -353,11 +369,17 @@
           }
         },
         "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
         "x-ms-examples": {
           "Release phone number": {
             "$ref": "./examples/ReleasePhoneNumber.json"
           }
-        }
+        },
+        "produces": [
+          "application/json"
+        ]
       }
     },
     "/phoneNumbers": {
