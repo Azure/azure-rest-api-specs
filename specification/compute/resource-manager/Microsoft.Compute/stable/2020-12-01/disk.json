@@ -111,6 +111,9 @@
           },
           "Create an empty managed disk in extended location.": {
             "$ref": "./examples/CreateAnEmptyManagedDiskInExtendedLocation.json"
+          },
+          "Create a ssd zrs managed disk.": {
+            "$ref": "./examples/CreateASSDZRSManagedDisk.json"
           }
         },
         "x-ms-long-running-operation": true
@@ -1804,7 +1807,9 @@
             "Standard_LRS",
             "Premium_LRS",
             "StandardSSD_LRS",
-            "UltraSSD_LRS"
+            "UltraSSD_LRS",
+            "Premium_ZRS",
+            "StandardSSD_ZRS"
           ],
           "x-ms-enum": {
             "name": "DiskStorageAccountTypes",
@@ -1825,6 +1830,14 @@
               {
                 "value": "UltraSSD_LRS",
                 "description": "Ultra SSD locally redundant storage. Best for IO-intensive workloads such as SAP HANA, top tier databases (for example, SQL, Oracle), and other transaction-heavy workloads."
+              },
+              {
+                "value": "Premium_ZRS",
+                "description": "Premium SSD zone redundant storage. Best for the production workloads that need storage resiliency against zone failures."
+              },
+              {
+                "value": "StandardSSD_ZRS",
+                "description": "Standard SSD zone redundant storage. Best for web servers, lightly used enterprise applications and dev/test that need storage resiliency against zone failures."
               }
             ]
           },
@@ -1836,7 +1849,7 @@
           "description": "The sku tier."
         }
       },
-      "description": "The disks sku name. Can be Standard_LRS, Premium_LRS, StandardSSD_LRS, or UltraSSD_LRS."
+      "description": "The disks sku name. Can be Standard_LRS, Premium_LRS, StandardSSD_LRS, UltraSSD_LRS, Premium_ZRS, or StandardSSD_ZRS."
     },
     "SnapshotSku": {
       "properties": {
