@@ -102,8 +102,8 @@ Refer to [Avocado Readme](https://github.com/Azure/avocado/blob/master/README.md
 ## SDK Track2 Validation
 
 This CI check is to run [autorest.modelerfour](https://github.com/Azure/autorest.modelerfour) for each changing tag in a PR.
-As the code generators of track2 SDK are based on the autorest.modelerfour, it's recommended to pass this validation.
-The `modelerfour` contains several plugins. If one plugin report an error, you refer to the following plugin documentation:
+Since the code generators of track2 SDK are based on the autorest.modelerfour, it's recommended ensure this validation is passed without any error and warning.
+The `modelerfour` has several plugins. If a plugin report an error, you can refer to the following plugin documentations:
 - [PreChecker](https://github.com/Azure/autorest/blob/master/docs/openapi/prechecker.md)
 
 ### Run locally:
@@ -121,10 +121,6 @@ autorest --v3 --azure-validator --use=@microsoft.azure/openapi-validator@latest 
 ```
 autorest --v3 --azure-validator --semantic-validator=false --model-validator=false --use=@microsoft.azure/openapi-validator@latest [--tag=<readme tag>] <path-to-readme>
 ```
-
-### Document
-Please see [readme](https://github.com/Azure/azure-openapi-validator/blob/master/README.md) for how to install or run tool in details.
-
 
 ## Suppression Process
 
