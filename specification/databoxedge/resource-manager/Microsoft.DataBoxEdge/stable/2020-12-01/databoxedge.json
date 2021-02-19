@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2020-09-01",
+    "version": "2020-12-01",
     "title": "DataBoxEdgeManagementClient"
   },
   "host": "management.azure.com",
@@ -796,7 +796,7 @@
           }
         },
         "x-ms-examples": {
-          "DownloadUpdatesPost": {
+          "GenerateCertificate": {
             "$ref": "./examples/GenerateCertificate.json"
           }
         }
@@ -1032,6 +1032,9 @@
               "$ref": "#/definitions/CloudError"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
           "NodesGetAllInDevice": {
@@ -1802,6 +1805,9 @@
           }
         },
         "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
         "x-ms-examples": {
           "DeleteAddOns": {
             "$ref": "./examples/DeleteAddOns.json"
@@ -3186,7 +3192,7 @@
             "$ref": "#/parameters/apiVersionParameter"
           },
           {
-            "name": "$expand",
+            "name": "$filter",
             "in": "query",
             "description": "Specify $filter='CustomContextTag eq <tag>' to filter on custom context tag property",
             "required": false,
@@ -3572,7 +3578,7 @@
           {
             "name": "$expand",
             "in": "query",
-            "description": "Specify $filter='Type eq <type>' to filter on user type property",
+            "description": "Specify $expand=details to populate additional fields related to the resource or Specify $skipToken=<token> to populate the next page in the list.",
             "required": false,
             "type": "string"
           }
@@ -4125,6 +4131,7 @@
       "properties": {
         "value": {
           "description": "The value of the secret.",
+          "x-ms-secret": true,
           "type": "string"
         },
         "encryptionCertThumbprint": {
@@ -4627,6 +4634,7 @@
             "AzureModularDataCentre"
           ],
           "type": "string",
+          "readOnly": true,
           "x-ms-enum": {
             "name": "DataBoxEdgeDeviceKind",
             "modelAsString": true
@@ -4639,6 +4647,7 @@
         "properties": {
           "$ref": "#/definitions/DataBoxEdgeDeviceProperties",
           "description": "The properties of the Data Box Edge/Gateway device.",
+          "readOnly": true,
           "x-ms-client-flatten": true
         }
       }
@@ -4678,6 +4687,21 @@
         "channelIntegrityKeyVersion": {
           "description": "The version of Channel Integrity Key stored in the Client Key Vault",
           "type": "string"
+        },
+        "syncStatus": {
+          "description": "For changing or to initiate the resync to key-vault set the status to KeyVaultSyncPending, rest of the status will not be applicable.",
+          "enum": [
+            "KeyVaultSynced",
+            "KeyVaultSyncFailed",
+            "KeyVaultNotConfigured",
+            "KeyVaultSyncPending",
+            "KeyVaultSyncing"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "KeyVaultSyncStatus",
+            "modelAsString": true
+          }
         }
       }
     },
@@ -4713,6 +4737,26 @@
         "channelIntegrityKeyVersion": {
           "description": "The version of Channel Integrity Key stored in the Client Key Vault",
           "type": "string"
+        },
+        "keyVaultSyncStatus": {
+          "description": "Key vault sync status",
+          "enum": [
+            "KeyVaultSynced",
+            "KeyVaultSyncFailed",
+            "KeyVaultNotConfigured",
+            "KeyVaultSyncPending",
+            "KeyVaultSyncing"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "KeyVaultSyncStatus",
+            "modelAsString": true
+          }
+        },
+        "deviceSecrets": {
+          "$ref": "#/definitions/DeviceSecrets",
+          "description": "Device secrets, will be returned only with ODataFilter $expand=deviceSecrets",
+          "readOnly": true
         }
       }
     },
@@ -4786,11 +4830,13 @@
         },
         "description": {
           "description": "The Description of the Data Box Edge/Gateway device.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "modelDescription": {
           "description": "The description of the Data Box Edge/Gateway device model.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "deviceType": {
           "description": "The type of the Data Box Edge/Gateway device.",
@@ -4806,7 +4852,8 @@
         },
         "friendlyName": {
           "description": "The Data Box Edge/Gateway device name.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "culture": {
           "description": "The Data Box Edge/Gateway device culture.",
@@ -4869,11 +4916,13 @@
         },
         "resourceMoveDetails": {
           "$ref": "#/definitions/ResourceMoveDetails",
-          "description": "The details of the move operation on this resource."
+          "description": "The details of the move operation on this resource.",
+          "readOnly": true
         },
         "edgeProfile": {
           "$ref": "#/definitions/EdgeProfile",
-          "description": "The details of Edge Profile for this resource"
+          "description": "The details of Edge Profile for this resource",
+          "readOnly": true
         }
       }
     },
@@ -5069,6 +5118,15 @@
             }
           },
           "readOnly": true
+        },
+        "capabilities": {
+          "description": "The capability info of the SKU.",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SkuCapability"
+          },
+          "readOnly": true
         }
       }
     },
@@ -5110,6 +5168,44 @@
         "authCode": {
           "description": "DCAccess Code for the Self Managed shipment.",
           "type": "string"
+        }
+      }
+    },
+    "DeviceSecrets": {
+      "description": "Device Secrets",
+      "type": "object",
+      "properties": {
+        "hcsDataVolumeBitLockerExternalKey": {
+          "$ref": "#/definitions/Secret",
+          "description": "Keyvault Id of HcsDataVolumeBitLockerExternalKey"
+        },
+        "hcsInternalVolumeBitLockerExternalKey": {
+          "$ref": "#/definitions/Secret",
+          "description": "Keyvault Id of HcsInternalVolumeBitLockerExternalKey"
+        },
+        "systemVolumeBitLockerRecoveryKey": {
+          "$ref": "#/definitions/Secret",
+          "description": "Keyvault Id of SystemVolumeBitLockerRecoveryKey"
+        },
+        "sedEncryptionExternalKeyId": {
+          "$ref": "#/definitions/Secret",
+          "description": "Keyvault Id of SEDEncryptionExternalKeyId"
+        },
+        "sedEncryptionExternalKey": {
+          "$ref": "#/definitions/Secret",
+          "description": "Keyvault Id of SEDEncryptionExternalKey"
+        },
+        "bmcDefaultUserPassword": {
+          "$ref": "#/definitions/Secret",
+          "description": "Keyvault Id of BMCDefaultUserPassword"
+        },
+        "rotateKeyForDataVolumeBitlocker": {
+          "$ref": "#/definitions/Secret",
+          "description": "Keyvault Id of RotateKeyForDataVolumeBitlocker"
+        },
+        "rotateKeysForSedDrivesSerialized": {
+          "$ref": "#/definitions/Secret",
+          "description": "Keyvault Id of RotateKeysForSedDrivesSerialized"
         }
       }
     },
@@ -6736,6 +6832,10 @@
             "$ref": "#/definitions/Node"
           },
           "readOnly": true
+        },
+        "nextLink": {
+          "description": "Link to the next set of results.",
+          "type": "string"
         }
       }
     },
@@ -6798,6 +6898,10 @@
         "name": {
           "description": "Name of the operation.",
           "type": "string"
+        },
+        "isDataAction": {
+          "description": "Is data action.",
+          "type": "boolean"
         },
         "display": {
           "$ref": "#/definitions/OperationDisplay",
@@ -6920,7 +7024,8 @@
         },
         "currentStatus": {
           "$ref": "#/definitions/OrderStatus",
-          "description": "Current status of the order."
+          "description": "Current status of the order.",
+          "readOnly": true
         },
         "orderHistory": {
           "description": "List of status changes in the order.",
@@ -7300,6 +7405,20 @@
         }
       }
     },
+    "Secret": {
+      "description": "Holds device secret either as a KeyVault reference or as an encrypted value.",
+      "type": "object",
+      "properties": {
+        "encryptedSecret": {
+          "$ref": "#/definitions/AsymmetricEncryptedSecret",
+          "description": "Encrypted (using device public key) secret value."
+        },
+        "keyVaultId": {
+          "description": "Id of the Key-Vault where secret is stored (ex: secrets/AuthClientSecret/82ef4346187a4033a10d629cde07d740).",
+          "type": "string"
+        }
+      }
+    },
     "SecuritySettings": {
       "description": "The security settings of a device.",
       "required": [
@@ -7560,6 +7679,22 @@
             "name": "SkuTier",
             "modelAsString": true
           }
+        }
+      }
+    },
+    "SkuCapability": {
+      "description": "The metadata to describe the capability.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "An invariant to describe the feature.",
+          "type": "string",
+          "readOnly": true
+        },
+        "value": {
+          "description": "An invariant if the feature is measured by quantity.",
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -8426,6 +8561,9 @@
     },
     "UserProperties": {
       "description": "The user properties.",
+      "required": [
+        "userType"
+      ],
       "type": "object",
       "properties": {
         "encryptedPassword": {
