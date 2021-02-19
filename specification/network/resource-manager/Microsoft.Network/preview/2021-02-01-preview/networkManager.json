@@ -462,9 +462,7 @@
           "description": "A unique read-only string that changes whenever the resource is updated."
         },
         "systemData": {
-          "readOnly": true,
-          "description": "The system metadata related to this resource.",
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
+          "$ref": "#/definitions/SystemData"
         }
       },
       "allOf": [
@@ -473,6 +471,11 @@
         }
       ],
       "description": "The Managed Network resource"
+    },
+    "SystemData": {
+      "readOnly": true,
+      "description": "The system metadata related to this resource.",
+      "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
     },
     "NetworkManagerListResult": {
       "properties": {
