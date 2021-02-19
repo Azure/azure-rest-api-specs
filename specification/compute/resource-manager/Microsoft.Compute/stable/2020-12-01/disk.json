@@ -114,6 +114,9 @@
           },
           "Create a ssd zrs managed disk.": {
             "$ref": "./examples/CreateASSDZRSManagedDisk.json"
+          },
+          "Create a managed disk with security profile": {
+            "$ref": "./examples/CreateAManagedDiskWithSecurityProfile.json"
           }
         },
         "x-ms-long-running-operation": true
@@ -2017,6 +2020,10 @@
         "supportsHibernation": {
           "type": "boolean",
           "description": "Indicates the OS on a disk supports hibernation."
+        },
+        "securityProfile": {
+          "$ref": "#/definitions/SecurityProfile",
+          "description": "Contains the security related information for the resource."
         }
       },
       "required": [
@@ -2663,7 +2670,35 @@
         }
       },
       "description": "Properties of the disk for which update is pending."
-    },    
+    },
+    "SecurityType": {
+      "type": "string",
+      "description": "Specifies the SecurityType of the VM. Applicable for OS disks only.",
+      "enum": [
+        "TrustedLaunch"
+      ],
+      "x-ms-enum": {
+        "name": "SecurityTypes",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "TrustedLaunch",
+            "description": "Trusted Launch provides security features such as secure boot and virtual Trusted Platform Module (vTPM)"
+          }
+        ]
+      }
+    },
+    "SecurityProfile": {
+      "properties": {
+        "securityType": {
+          "$ref": "#/definitions/SecurityType"
+        }
+      },
+      "required": [
+        "securityType"
+      ],
+      "description": "Contains the security related information for the resource."
+    },
     "GrantAccessData": {
       "properties": {
         "access": {
