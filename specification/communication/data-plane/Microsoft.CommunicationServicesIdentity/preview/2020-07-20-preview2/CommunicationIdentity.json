@@ -25,6 +25,18 @@
             "name": "api-version",
             "required": true,
             "type": "string"
+          },
+          {
+            "$ref": "#/parameters/AuthorizationParameter"
+          },
+          {
+            "$ref": "#/parameters/MSContentParameter"
+          },
+          {
+            "$ref": "#/parameters/MSDateParameter"
+          },
+          {
+            "$ref": "#/parameters/MSHostParameter"
           }
         ],
         "responses": {
@@ -62,6 +74,18 @@
             "name": "api-version",
             "required": true,
             "type": "string"
+          },
+          {
+            "$ref": "#/parameters/AuthorizationParameter"
+          },
+          {
+            "$ref": "#/parameters/MSContentParameter"
+          },
+          {
+            "$ref": "#/parameters/MSDateParameter"
+          },
+          {
+            "$ref": "#/parameters/MSHostParameter"
           }
         ],
         "responses": {
@@ -106,6 +130,18 @@
             "schema": {
               "$ref": "#/definitions/CommunicationIdentityUpdateRequest"
             }
+          },
+          {
+            "$ref": "#/parameters/AuthorizationParameter"
+          },
+          {
+            "$ref": "#/parameters/MSContentParameter"
+          },
+          {
+            "$ref": "#/parameters/MSDateParameter"
+          },
+          {
+            "$ref": "#/parameters/MSHostParameter"
           }
         ],
         "responses": {
@@ -155,6 +191,18 @@
             "schema": {
               "$ref": "#/definitions/CommunicationTokenRequest"
             }
+          },
+          {
+            "$ref": "#/parameters/AuthorizationParameter"
+          },
+          {
+            "$ref": "#/parameters/MSContentParameter"
+          },
+          {
+            "$ref": "#/parameters/MSDateParameter"
+          },
+          {
+            "$ref": "#/parameters/MSHostParameter"
           }
         ],
         "responses": {
@@ -244,6 +292,36 @@
       "scopes": {
         "user_impersonation": "impersonate your user account"
       }
+    }
+  },
+  "parameters": {
+    "AuthorizationParameter": {
+      "name": "Authorization",
+      "in": "header",
+      "required": true,
+      "description": "Used for HMAC based authentication.",
+      "type": "string"
+    },
+    "MSContentParameter": {
+      "name": "x-ms-content-sha256",
+      "in": "header",
+      "required": true,
+      "description": "SHA256 hash of the request body.",
+      "type": "string"
+    },
+    "MSDateParameter": {
+      "name": "x-ms-date or date",
+      "in": "header",
+      "required": true,
+      "description": "Contains date time used for computing the Authorization HMAC.",
+      "type": "string"
+    },
+    "MSHostParameter": {
+      "name": "x-ms-host or X-Forwarded-Host or host",
+      "in": "header",
+      "required": true,
+      "description": "Contains the host name of the resource used for computing the Authorization HMAC.",
+      "type": "string"
     }
   },
   "x-ms-parameterized-host": {
