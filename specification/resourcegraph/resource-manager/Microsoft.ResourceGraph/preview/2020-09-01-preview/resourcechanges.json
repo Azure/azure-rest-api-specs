@@ -107,7 +107,7 @@
           "200": {
             "description": "Resource change details.",
             "schema": {
-              "$ref": "#/definitions/ResourceChangeData"
+              "$ref": "#/definitions/ResourceChangeDataList"
             }
           },
           "default": {
@@ -193,6 +193,13 @@
         "$skipToken": {
           "description": "Skip token that encodes the skip information while executing the current request"
         }
+      }
+    },
+    "ResourceChangeDataList": {
+      "description": "A list of change details associated with a resource over a specific time interval.",
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/ResourceChangeData"
       }
     },
     "ResourceChangeData": {
