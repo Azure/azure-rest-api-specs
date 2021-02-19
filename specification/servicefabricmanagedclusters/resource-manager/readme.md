@@ -94,10 +94,7 @@ swagger-to-sdk:
   - repo: azure-sdk-for-net
   - repo: azure-sdk-for-python
   - repo: azure-resource-manager-schemas
-    after_scripts:
-      - node sdkauto_afterscript.js servicefabricmanagedlusters/resource-manager
 ```
-
 
 ## C#
 
@@ -110,7 +107,7 @@ csharp:
   license-header: MICROSOFT_MIT_NO_VERSION
   namespace: Microsoft.Azure.Management.ServiceFabricManagedClusters
   payload-flattening-threshold: 1
-  output-folder: $(csharp-sdks-folder)/servicefabricmanagedlusters/Microsoft.Azure.Management.ServiceFabricManagedClusters/src/Generated
+  output-folder: $(csharp-sdks-folder)/servicefabricmanagedclusters/Microsoft.Azure.Management.ServiceFabricManagedClusters/src/Generated
   clear-output-folder: true
 ```
 

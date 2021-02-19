@@ -430,6 +430,33 @@
       },
       "description": "Client certificate definition."
     },
+    "ClusterUpgradeCadence": {
+      "type": "string",
+      "enum": [
+        "Wave0",
+        "Wave1",
+        "Wave2"
+      ],
+      "x-ms-enum": {
+        "name": "clusterUpgradeCadence",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Wave0",
+            "description": "Cluster upgrade starts immediately after a new version is rolled out. Recommended for Test/Dev clusters."
+          },
+          {
+            "value": "Wave1",
+            "description": "Cluster upgrade starts 7 days after a new version is rolled out. Recommended for Pre-prod clusters."
+          },
+          {
+            "value": "Wave2",
+            "description": "Cluster upgrade starts 14 days after a new version is rolled out. Recommended for Production clusters."
+          }
+        ]
+      },
+      "description": "Indicates when new cluster runtime version upgrades will be applied after they are released. By default is Wave0."
+    },
     "ClusterState": {
       "type": "string",
       "description": "The current state of the cluster.\n\n  - WaitingForNodes - Indicates that the cluster resource is created and the resource provider is waiting for Service Fabric VM extension to boot up and report to it.\n  - Deploying - Indicates that the Service Fabric runtime is being installed on the VMs. Cluster resource will be in this state until the cluster boots up and system services are up.\n  - BaselineUpgrade - Indicates that the cluster is upgrading to establishes the cluster version. This upgrade is automatically initiated when the cluster boots up for the first time.\n  - Upgrading - Indicates that the cluster is being upgraded with the user provided configuration.\n  - UpgradeFailed - Indicates that the last upgrade for the cluster has failed.\n  - Ready - Indicates that the cluster is in a stable state.\n",
@@ -638,6 +665,10 @@
         "clusterCodeVersion": {
           "type": "string",
           "description": "The Service Fabric runtime version of the cluster. This property can only by set the user when **upgradeMode** is set to 'Manual'. To get list of available Service Fabric versions for new clusters use [ClusterVersion API](./ClusterVersion.md). To get the list of available version for existing clusters use **availableClusterVersions**."
+        },
+        "clusterUpgradeCadence": {
+          "$ref": "#/definitions/ClusterUpgradeCadence",
+          "description": "Indicates when new cluster runtime version upgrades will be applied after they are released. By default is Wave0."
         },
         "addonFeatures": {
           "type": "array",
@@ -981,17 +1012,7 @@
         },
         "createdByType": {
           "type": "string",
-          "description": "The type of identity that created the resource.",
-          "enum": [
-            "User",
-            "Application",
-            "ManagedIdentity",
-            "Key"
-          ],
-          "x-ms-enum": {
-            "name": "createdByType",
-            "modelAsString": true
-          }
+          "description": "The type of identity that created the resource."
         },
         "createdAt": {
           "type": "string",
@@ -1004,17 +1025,7 @@
         },
         "lastModifiedByType": {
           "type": "string",
-          "description": "The type of identity that last modified the resource.",
-          "enum": [
-            "User",
-            "Application",
-            "ManagedIdentity",
-            "Key"
-          ],
-          "x-ms-enum": {
-            "name": "createdByType",
-            "modelAsString": true
-          }
+          "description": "The type of identity that last modified the resource."
         },
         "lastModifiedAt": {
           "type": "string",
