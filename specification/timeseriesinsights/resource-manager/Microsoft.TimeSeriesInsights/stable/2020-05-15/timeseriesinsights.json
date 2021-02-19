@@ -1410,7 +1410,6 @@
       "properties": {
         "kind": {
           "type": "string",
-          "readOnly": true,
           "description": "The kind of the environment.",
           "enum": [
             "Gen1",
@@ -1843,6 +1842,28 @@
         }
       }
     },
+    "IngressStartAtProperties": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The type of the ingressStartAt, It can be \"EarliestAvailable\", \"EventSourceCreationTime\", \"CustomEnqueuedTime\".",
+          "enum": [
+            "EarliestAvailable",
+            "EventSourceCreationTime",
+            "CustomEnqueuedTime"
+          ],
+          "x-ms-enum": {
+            "name": "IngressStartAtType",
+            "modelAsString": true
+          }
+        },
+        "time": {
+          "type": "string",
+          "description": "ISO8601 timespan specifying the date and time that will be the starting point for Events to be consumed."
+        }
+      }
+    },
     "EventSourceCreateOrUpdateParameters": {
       "discriminator": "kind",
       "properties": {
@@ -1915,7 +1936,6 @@
       "properties": {
         "kind": {
           "type": "string",
-          "readOnly": true,
           "description": "The kind of the event source.",
           "enum": [
             "Microsoft.EventHub",
@@ -2046,6 +2066,11 @@
         "timestampPropertyName": {
           "type": "string",
           "description": "The event property that will be used as the event source's timestamp. If a value isn't specified for timestampPropertyName, or if null or empty-string is specified, the event creation time will be used."
+        },
+        "ingressStartAt": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/IngressStartAtProperties",
+          "description:": "An object that contains the details about ingressStartAt state."
         }
       },
       "allOf": [
