@@ -475,7 +475,11 @@
       "description": "The Managed Network resource"
     },
     "TracedResource": {
-      "$ref": "./network.json#/definitions/Resource"
+      "allOf": [
+        {
+          "$ref": "./network.json#/definitions/Resource"
+        }
+      ]
     },
     "NetworkManagerListResult": {
       "properties": {
