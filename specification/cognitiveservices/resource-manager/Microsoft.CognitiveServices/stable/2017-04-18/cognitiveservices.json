@@ -1034,6 +1034,16 @@
           },
           "description": "Gets the capabilities of the cognitive services account. Each item indicates the capability of a specific feature. The values are read-only and for reference only."
         },
+        "isMigrated": {
+          "type": "boolean",
+          "description": "If the resource is migrated from an existing key.",
+          "readOnly": true
+        },
+        "skuChangeInfo": {
+          "$ref": "#/definitions/CognitiveServicesAccountSkuChangeInfo",
+          "description": "Sku change info of account.",
+          "readOnly": true
+        },
         "customSubDomainName": {
           "type": "string",
           "description": "Optional subdomain name used for token-based authentication."
@@ -1090,6 +1100,14 @@
           "type": "string",
           "description": "(QnAMaker Only) The runtime endpoint of QnAMaker."
         },
+        "qnaAzureSearchEndpointKey": {
+          "type": "string",
+          "description": "(QnAMaker Only) The Azure Search endpoint key of QnAMaker."
+        },
+        "qnaAzureSearchEndpointId": {
+          "type": "string",
+          "description": "(QnAMaker Only) The Azure Search endpoint id of QnAMaker."
+        },
         "statisticsEnabled": {
           "type": "boolean",
           "description": "(Bing Search Only) The flag to enable statistics of Bing Search."
@@ -1141,6 +1159,26 @@
         }
       },
       "description": "The access keys for the cognitive services account."
+    },
+    "CognitiveServicesAccountSkuChangeInfo": {
+      "properties": {
+        "countOfDowngrades": {
+          "type": "number",
+          "description": "Gets the count of downgrades.",
+          "readOnly": true
+        },
+        "countOfUpgradesAfterDowngrades": {
+          "type": "number",
+          "description": "Gets the count of upgrades after downgrades.",
+          "readOnly": true
+        },
+        "lastChangeDate": {
+          "type": "string",
+          "description": "Gets the last change date.",
+          "readOnly": true
+        }
+      },
+      "description": "Sku change info of account."
     },
     "RegenerateKeyParameters": {
       "properties": {
@@ -1791,6 +1829,11 @@
         "properties": {
           "$ref": "#/definitions/PrivateEndpointConnectionProperties",
           "description": "Resource properties."
+        },
+        "etag": {
+          "type": "string",
+          "description": "Entity Tag",
+          "readOnly": true
         }
       },
       "allOf": [
