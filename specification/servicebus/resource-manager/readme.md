@@ -37,6 +37,9 @@ These settings apply only when `--tag=package-2021-01-preview` is specified on t
 input-file:
 - Microsoft.ServiceBus/preview/2021-01-01-preview/namespace-preview.json
 - Microsoft.ServiceBus/preview/2021-01-01-preview/operations.json
+- Microsoft.ServiceBus/preview/2021-01-01-preview/DisasterRecoveryConfig.json
+- Microsoft.ServiceBus/preview/2021-01-01-preview/migrationconfigs.json
+- Microsoft.ServiceBus/preview/2021-01-01-preview/networksets.json
 ```
 
 
