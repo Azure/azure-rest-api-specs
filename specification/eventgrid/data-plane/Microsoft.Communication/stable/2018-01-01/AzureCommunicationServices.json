@@ -7,11 +7,11 @@
   },
   "paths": {},
   "definitions": {
-    "ACSChatMessageReceivedEventData": {
+    "AcsChatMessageReceivedEventData": {
       "description": "Schema of the Data property of an EventGridEvent for an Microsoft.Communication.ChatMessageReceived event.",
       "allOf": [
         {
-          "$ref": "#/definitions/ACSChatMessageEventBaseProperties"
+          "$ref": "#/definitions/AcsChatMessageEventBaseProperties"
         }
       ],
       "properties": {
@@ -21,11 +21,11 @@
         }
       }
     },
-    "ACSChatMessageEditedEventData": {
+    "AcsChatMessageEditedEventData": {
       "description": "Schema of the Data property of an EventGridEvent for an Microsoft.Communication.ChatMessageEdited event.",
       "allOf": [
         {
-          "$ref": "#/definitions/ACSChatMessageEventBaseProperties"
+          "$ref": "#/definitions/AcsChatMessageEventBaseProperties"
         }
       ],
       "properties": {
@@ -40,11 +40,11 @@
         }
       }
     },
-    "ACSChatMessageDeletedEventData": {
+    "AcsChatMessageDeletedEventData": {
       "description": "Schema of the Data property of an EventGridEvent for an Microsoft.Communication.ChatMessageDeleted event.",
       "allOf": [
         {
-          "$ref": "#/definitions/ACSChatMessageEventBaseProperties"
+          "$ref": "#/definitions/AcsChatMessageEventBaseProperties"
         }
       ],
       "properties": {
@@ -55,11 +55,11 @@
         }
       }
     },
-    "ACSChatThreadCreatedWithUserEventData": {
+    "AcsChatThreadCreatedWithUserEventData": {
       "description": "Schema of the Data property of an EventGridEvent for an Microsoft.Communication.ChatThreadCreatedWithUser event.",
       "allOf": [
         {
-          "$ref": "#/definitions/ACSChatThreadEventBaseProperties"
+          "$ref": "#/definitions/AcsChatThreadEventBaseProperties"
         }
       ],
       "properties": {
@@ -78,16 +78,16 @@
           "description": "The list of properties of participants who are part of the thread",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ACSChatThreadParticipantProperties"
+            "$ref": "#/definitions/AcsChatThreadParticipantProperties"
           }
         }
       }
     },
-    "ACSChatThreadWithUserDeletedEventData": {
+    "AcsChatThreadWithUserDeletedEventData": {
       "description": "Schema of the Data property of an EventGridEvent for an Microsoft.Communication.ChatThreadWithUserDeleted event.",
       "allOf": [
         {
-          "$ref": "#/definitions/ACSChatThreadEventBaseProperties"
+          "$ref": "#/definitions/AcsChatThreadEventBaseProperties"
         }
       ],
       "properties": {
@@ -102,11 +102,11 @@
         }
       }
     },
-    "ACSChatThreadPropertiesUpdatedPerUserEventData": {
+    "AcsChatThreadPropertiesUpdatedPerUserEventData": {
       "description": "Schema of the Data property of an EventGridEvent for an Microsoft.Communication.ChatThreadPropertiesUpdatedPerUser event.",
       "allOf": [
         {
-          "$ref": "#/definitions/ACSChatThreadEventBaseProperties"
+          "$ref": "#/definitions/AcsChatThreadEventBaseProperties"
         }
       ],
       "properties": {
@@ -128,11 +128,11 @@
         }
       }
     },
-    "ACSChatParticipantAddedToThreadWithUserEventData": {
+    "AcsChatParticipantAddedToThreadWithUserEventData": {
       "description": "Schema of the Data property of an EventGridEvent for an Microsoft.Communication.ChatParticipantAddedToThreadWithUser event.",
       "allOf": [
         {
-          "$ref": "#/definitions/ACSChatThreadEventBaseProperties"
+          "$ref": "#/definitions/AcsChatThreadEventBaseProperties"
         }
       ],
       "properties": {
@@ -147,15 +147,15 @@
         },
         "participantAdded": {
           "description": "The details of the user who was added",
-          "$ref": "#/definitions/ACSChatThreadParticipantProperties"
+          "$ref": "#/definitions/AcsChatThreadParticipantProperties"
         }
       }
     },
-    "ACSChatParticipantRemovedFromThreadWithUserEventData": {
+    "AcsChatParticipantRemovedFromThreadWithUserEventData": {
       "description": "Schema of the Data property of an EventGridEvent for an Microsoft.Communication.ChatParticipantRemovedFromThreadWithUser event.",
       "allOf": [
         {
-          "$ref": "#/definitions/ACSChatThreadEventBaseProperties"
+          "$ref": "#/definitions/AcsChatThreadEventBaseProperties"
         }
       ],
       "properties": {
@@ -170,7 +170,7 @@
         },
         "participantRemoved": {
           "description": "The details of the user who was removed",
-          "$ref": "#/definitions/ACSChatThreadParticipantProperties"
+          "$ref": "#/definitions/AcsChatThreadParticipantProperties"
         }
       }
     },
@@ -223,11 +223,11 @@
         }
       }
     },
-    "ACSChatThreadEventBaseProperties": {
+    "AcsChatThreadEventBaseProperties": {
       "description": "Schema of common properties of all chat thread events",
       "allOf": [
         {
-          "$ref": "#/definitions/ACSChatEventBaseProperties"
+          "$ref": "#/definitions/AcsChatEventBaseProperties"
         }
       ],
       "properties": {
@@ -243,11 +243,11 @@
         }
       }
     },
-    "ACSChatMessageEventBaseProperties": {
+    "AcsChatMessageEventBaseProperties": {
       "description": "Schema of common properties of all chat message events",
       "allOf": [
         {
-          "$ref": "#/definitions/ACSChatEventBaseProperties"
+          "$ref": "#/definitions/AcsChatEventBaseProperties"
         }
       ],
       "properties": {
@@ -279,7 +279,7 @@
         }
       }
     },
-    "ACSChatEventBaseProperties": {
+    "AcsChatEventBaseProperties": {
       "description": "Schema of common properties of all chat events",
       "type": "object",
       "properties": {
@@ -297,7 +297,7 @@
         }
       }
     },
-    "ACSChatThreadParticipantProperties": {
+    "AcsChatThreadParticipantProperties": {
       "description": "Schema of the chat thread participant",
       "type": "object",
       "properties": {
