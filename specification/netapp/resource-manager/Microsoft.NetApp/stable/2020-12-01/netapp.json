@@ -1555,6 +1555,69 @@
           }
         }
       },
+      "patch": {
+        "tags": [
+          "Snapshots"
+        ],
+        "operationId": "Snapshots_Update",
+        "summary": "Update a snapshot",
+        "description": "Patch a snapshot",
+        "parameters": [
+          {
+            "name": "body",
+            "description": "Snapshot object supplied in the body of the operation.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/snapshotPatch"
+            }
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroup"
+          },
+          {
+            "$ref": "#/parameters/AccountName"
+          },
+          {
+            "$ref": "#/parameters/PoolName"
+          },
+          {
+            "$ref": "#/parameters/VolumeName"
+          },
+          {
+            "$ref": "#/parameters/SnapshotName"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/snapshot"
+            }
+          },
+          "202": {
+            "description": "Accepted -- Update request accepted; operation will complete asynchronously"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed."
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "Snapshots_Update": {
+            "$ref": "examples/Snapshots_Update.json"
+          }
+        }
+      },
       "delete": {
         "tags": [
           "Snapshots"
@@ -4073,8 +4136,20 @@
     },
     "snapshot": {
       "description": "Snapshot of a Volume",
-      "type": "object",            
+      "type": "object",
+      "x-ms-azure-resource": true,
+      "required": [
+        "location"
+      ],
       "properties": {
+        "location": {
+          "type": "string",
+          "description": "Resource location",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
         "id": {
           "type": "string",
           "readOnly": true,
@@ -4096,6 +4171,12 @@
           "x-ms-client-flatten": true
         }
       }
+    },
+    "snapshotPatch": {
+      "description": "Snapshot patch",
+      "type": "object",
+      "x-ms-azure-resource": true,
+      "properties": {}
     },
     "snapshotProperties": {
       "description": "Snapshot properties",
