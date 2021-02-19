@@ -17,7 +17,7 @@ batch:
   - tag: package-2017-10-01-preview-only
   - tag: package-2018-01-01-preview-only
   - tag: package-2018-05-01-preview-only
-  - tag: package-2021-01-01-preview
+  - tag: package-2021-01-01-preview-only
 ```
 
 ### Tag: package-2015-07-01 and ruby
@@ -71,12 +71,12 @@ namespace: "Azure::Authorization::Mgmt::V2018_05_01_preview"
 output-folder: $(ruby-sdks-folder)/management/azure_mgmt_authorization/lib
 ```
 
-### Tag: package-2021-01-01-preview and ruby
+### Tag: package-2021-01-01-preview-only and ruby
 
-These settings apply only when `--tag=package-2021-01-01-preview --ruby` is specified on the command line.
+These settings apply only when `--tag=package-2021-01-01-preview-only --ruby` is specified on the command line.
 Please also specify `--ruby-sdks-folder=<path to the root directory of your azure-sdk-for-ruby clone>`.
 
-``` yaml $(tag) == 'package-2021-01-01-preview' && $(ruby)
+``` yaml $(tag) == 'package-2021-01-01-preview-only' && $(ruby)
 namespace: "Azure::Authorization::Mgmt::V2021_01_01_preview"
 output-folder: $(ruby-sdks-folder)/management/azure_mgmt_authorization/lib
 ```

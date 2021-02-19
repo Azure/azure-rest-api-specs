@@ -276,7 +276,7 @@ input-file:
 
 ### Tag: package-2021-01-01-preview-only
 
-These settings apply only when `--tag=package-2021-01-01-preview` is specified on the command line.
+These settings apply only when `--tag=package-2021-01-01-preview-only` is specified on the command line.
 
 ``` yaml $(tag) == 'package-2021-01-01-preview-only'
 input-file:
