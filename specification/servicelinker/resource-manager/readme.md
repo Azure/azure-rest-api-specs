@@ -50,6 +50,8 @@ directive:
     reason: This is an extension resource
 ```
 
+---
+
 # Code Generation
 
 ## Swagger to SDK
