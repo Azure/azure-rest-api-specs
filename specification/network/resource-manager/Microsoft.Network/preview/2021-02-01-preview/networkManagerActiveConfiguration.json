@@ -68,7 +68,7 @@
           "NetworkManagerActiveConfigurations"
         ],
         "operationId": "ActiveConfigurations_List",
-        "description": "Lists active configurations in a network manager",
+        "description": "Lists active configurations in a network manager.",
         "responses": {
           "200": {
             "description": "Get successful. The operation returns the specified Managed Network active configuration resource.",
@@ -99,12 +99,12 @@
       "properties": {
         "commitTime": {
           "type": "string",
-          "description": "Deployment time string",
+          "description": "Deployment time string.",
           "format": "date-time"
         },
         "region": {
           "type": "string",
-          "description": "deployment region."
+          "description": "Deployment region."
         }
       },
       "allOf": [
@@ -121,7 +121,7 @@
           "items": {
             "$ref": "#/definitions/ActiveConfiguration"
           },
-          "description": "Gets a page of ActiveConfigurations"
+          "description": "Gets a page of active configurations"
         },
         "nextLink": {
           "type": "string",
@@ -150,7 +150,7 @@
     },
     "ListPageSizeParameter": {
       "name": "$top",
-      "description": "The optional client query parameter which defines the maximum number of records to be returned by the server.",
+      "description": "An optional query parameter which specifies the maximum number of records to be returned by the server.",
       "in": "query",
       "required": false,
       "type": "integer",
