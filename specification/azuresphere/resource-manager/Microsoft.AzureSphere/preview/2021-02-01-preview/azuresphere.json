@@ -39,7 +39,7 @@
         "tags": [
           "Operations"
         ],
-        "summary": "Lists all of the available Azure Sphere REST API operations.",
+        "summary": "Lists all operations supported by the Microsoft.AzureSphere resource provider.",
         "operationId": "Operations_List",
         "parameters": [
           {
@@ -51,9 +51,9 @@
         ],
         "responses": {
           "200": {
-            "description": "OK. The request has succeeded.",
+            "description": "The list of supported operations has been retrieved successfully.",
             "schema": {
-              "$ref": "#/definitions/OperationList"
+              "$ref": "#/definitions/ListOperationsResponse"
             }
           },
           "default": {
@@ -65,6 +65,11 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Get a list of operations supported by Microsoft.AzureSphere resource provider.": {
+            "$ref": "./examples/GetOperations.json"
+          }
         }
       }
     },
@@ -100,6 +105,11 @@
         "deprecated": false,
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Get a list of Azure Sphere Resource Units for a given subscription.": {
+            "$ref": "./examples/GetAzSphereRUsSub.json"
+          }
         }
       }
     },
@@ -138,6 +148,11 @@
         "deprecated": false,
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Get a list of Azure Sphere Resource Units for a given resource group.": {
+            "$ref": "./examples/GetAzSphereRUsRG.json"
+          }
         }
       }
     },
@@ -174,6 +189,11 @@
             "schema": {
               "$ref": "#/definitions/DefaultErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get the details of an Azure Sphere Resource Unit.": {
+            "$ref": "./examples/GetAzSphereRU.json"
           }
         }
       },
@@ -219,6 +239,11 @@
               "$ref": "#/definitions/DefaultErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "Put the details of the Azure Sphere Resource Unit.": {
+            "$ref": "./examples/PutAzSphereRU.json"
+          }
         }
       },
       "patch": {
@@ -263,6 +288,11 @@
               "$ref": "#/definitions/DefaultErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "Patch an Azure Sphere Resource Unit.": {
+            "$ref": "./examples/PatchAzSphereRU.json"
+          }
         }
       },
       "delete": {
@@ -303,6 +333,11 @@
             "schema": {
               "$ref": "#/definitions/DefaultErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Delete an Azure Sphere Resource Unit.": {
+            "$ref": "./examples/DeleteAzSphereRU.json"
           }
         }
       }
@@ -345,6 +380,11 @@
         "deprecated": false,
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Get products in an Azure Sphere product.": {
+            "$ref": "./examples/GetProducts.json"
+          }
         }
       }
     },
@@ -384,6 +424,11 @@
             "schema": {
               "$ref": "#/definitions/DefaultErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get the details of an Azure Sphere product.": {
+            "$ref": "./examples/GetProduct.json"
           }
         }
       },
@@ -432,6 +477,11 @@
               "$ref": "#/definitions/DefaultErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "Put an Azure Sphere product.": {
+            "$ref": "./examples/PutProduct.json"
+          }
         }
       },
       "patch": {
@@ -457,12 +507,12 @@
             "$ref": "#/parameters/ProductNameParameter"
           },
           {
-            "name": "ProductPatch",
+            "name": "Product",
             "description": "Azure Sphere Product patch details.",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ProductPatch"
+              "$ref": "#/definitions/Product"
             }
           }
         ],
@@ -478,6 +528,11 @@
             "schema": {
               "$ref": "#/definitions/DefaultErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Patch an Azure Sphere product.": {
+            "$ref": "./examples/PatchProduct.json"
           }
         }
       },
@@ -523,12 +578,18 @@
               "$ref": "#/definitions/DefaultErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "Delete an Azure Sphere product.": {
+            "$ref": "./examples/DeleteProduct.json"
+          }
         }
       }
     }
   },
   "definitions": {
     "Resource": {
+      "type": "object",
       "description": "An Azure Sphere Resource.",
       "properties": {
         "id": {
@@ -556,12 +617,11 @@
         },
         "systemData": {
           "description": "Metadata pertaining to creation and last modification of the resource.",
-          "$ref": "#/definitions/SystemData",
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
           "readOnly": true
         },
         "tags": {
           "description": "resource tags.",
-          "type": "object",
           "readOnly": false,
           "additionalProperties": {
             "type": "string"
@@ -569,59 +629,6 @@
         }
       },
       "x-ms-azure-resource": true
-    },
-    "SystemData": {
-      "description": "Metadata pertaining to creation and last modification of the resource.",
-      "type": "object",
-      "readOnly": true,
-      "properties": {
-        "createdBy": {
-          "type": "string",
-          "description": "The identity that created the resource."
-        },
-        "createdByType": {
-          "type": "string",
-          "description": "The type of identity that created the resource.",
-          "enum": [
-            "User",
-            "Application",
-            "ManagedIdentity",
-            "Key"
-          ],
-          "x-ms-enum": {
-            "name": "createdByType",
-            "modelAsString": true
-          }
-        },
-        "createdAt": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The timestamp of resource creation (UTC)."
-        },
-        "lastModifiedBy": {
-          "type": "string",
-          "description": "The identity that last modified the resource."
-        },
-        "lastModifiedByType": {
-          "type": "string",
-          "description": "The type of identity that last modified the resource.",
-          "enum": [
-            "User",
-            "Application",
-            "ManagedIdentity",
-            "Key"
-          ],
-          "x-ms-enum": {
-            "name": "createdByType",
-            "modelAsString": true
-          }
-        },
-        "lastModifiedAt": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The type of identity that last modified the resource."
-        }
-      }
     },
     "AzureSphereRU": {
       "type": "object",
@@ -631,27 +638,49 @@
           "$ref": "#/definitions/Resource"
         }
       ],
-      "properties": {
-        "properties": {
-          "properties": {
-            "provisioningState": {
-              "type": "string",
-              "description": "Gets or sets the state of the provisioning."
-            }
-          },
-          "type": "object",
-          "description": "Specific properties of the Azure Sphere Resource Unit object"
-        }
-      }
+      "properties": {}
     },
-    "AzureSphereOperation": {
+    "Operation": {
       "type": "object",
-      "description": "Azure Sphere operation details",
-      "allOf": [
-        {
-          "$ref": "#/definitions/Resource"
+      "properties": {
+        "name": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Name of the operation."
+        },
+        "display": {
+          "description": "Display information of the operation.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/OperationDisplay"
         }
-      ]
+      },
+      "description": "Properties of an Operation."
+    },
+    "OperationDisplay": {
+      "type": "object",
+      "properties": {
+        "operation": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Friendly name of the operation."
+        },
+        "resource": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Friendly name of the resource type the operation applies to."
+        },
+        "description": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Friendly description of the operation."
+        },
+        "provider": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Friendly name of the resource provider."
+        }
+      },
+      "description": "Display information of an operation."
     },
     "ErrorResponseBody": {
       "description": "The error object.",
@@ -693,20 +722,22 @@
         }
       }
     },
-    "OperationList": {
-      "description": "The list of Azure Sphere Operations.",
+    "ListOperationsResponse": {
       "type": "object",
+      "description": "Result of a request to list all operations supported by Microsoft.AzureSphere resource provider.",
       "properties": {
-        "nextLink": {
-          "description": "The link used to get the next page of Azure Sphere Operations list.",
-          "type": "string"
-        },
         "value": {
           "description": "The list of Azure Sphere Operations.",
           "type": "array",
+          "readOnly": true,
           "items": {
-            "$ref": "#/definitions/AzureSphereOperation"
+            "$ref": "#/definitions/Operation"
           }
+        },
+        "nextLink": {
+          "description": "The link used to get the next page of Azure Sphere Operations list, if any.",
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -729,60 +760,13 @@
     },
     "Product": {
       "type": "object",
-      "description": "Azure Sphere Product details",
+      "description": "Azure Sphere product details",
       "allOf": [
         {
           "$ref": "#/definitions/Resource"
         }
       ],
-      "properties": {
-        "properties": {
-          "properties": {
-            "description": {
-              "type": "string",
-              "description": "Azure Sphere Product description.",
-              "minLength": 1,
-              "maxLength": 150,
-              "pattern": "^[A-Za-z0-9-._ ]+$"
-            },
-            "provisioningState": {
-              "type": "string",
-              "description": "Gets or sets the state of the provisioning."
-            }
-          },
-          "required": [
-            "description"
-          ],
-          "type": "object"
-        }
-      }
-    },
-    "ProductPatch": {
-      "type": "object",
-      "description": "Azure Sphere Product details for patching purposes.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/Resource"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "properties": {
-            "description": {
-              "type": "string",
-              "description": "Azure Sphere Product description.",
-              "minLength": 1,
-              "maxLength": 150,
-              "pattern": "^[A-Za-z0-9-._ ]+$"
-            },
-            "provisioningState": {
-              "type": "string",
-              "description": "Gets or sets the state of the provisioning."
-            }
-          },
-          "type": "object"
-        }
-      }
+      "properties": {}
     },
     "ProductList": {
       "description": "The list of Azure Sphere Products.",
