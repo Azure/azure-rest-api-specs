@@ -2265,8 +2265,7 @@
       "properties": {
         "code": {
           "description": "The error code.",
-          "type": "integer",
-          "format": "int32",
+          "type": "string",
           "readOnly": true
         },
         "httpStatusCode": {
@@ -2456,7 +2455,8 @@
             },
             "certificate": {
               "description": "base-64 representation of X509 certificate .cer file or just .pem file content.",
-              "type": "string"
+              "type": "string",
+              "format":  "byte"
             },
             "created": {
               "type": "string",
