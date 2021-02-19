@@ -756,7 +756,7 @@
           "readOnly": true,
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ErrorDetail"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorDetail"
           },
           "description": "Details about the error state."
         },
@@ -917,35 +917,6 @@
           "description": "Resource tags"
         }
       }
-    },
-    "ErrorDetail": {
-      "title": "Error details.",
-      "type": "object",
-      "properties": {
-        "code": {
-          "description": "The error's code.",
-          "type": "string"
-        },
-        "message": {
-          "description": "A human readable error message.",
-          "type": "string"
-        },
-        "target": {
-          "description": "Indicates which property in the request is responsible for the error.",
-          "type": "string"
-        },
-        "details": {
-          "description": "Additional error details.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ErrorDetail"
-          }
-        }
-      },
-      "required": [
-        "code",
-        "message"
-      ]
     },
     "MachineExtension": {
       "properties": {
