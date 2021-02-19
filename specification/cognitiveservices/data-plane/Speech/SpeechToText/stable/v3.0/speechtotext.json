@@ -179,12 +179,7 @@
             "description": "Definition for the new dataset.",
             "required": true,
             "schema": {
-              "title": "Dataset",
-              "allOf": [
-                {
-                  "$ref": "#/definitions/Dataset"
-                }
-              ]
+              "$ref": "#/definitions/Dataset"
             }
           }
         ],
@@ -985,12 +980,7 @@
             "description": "The details of the endpoint.",
             "required": true,
             "schema": {
-              "title": "Endpoint",
-              "allOf": [
-                {
-                  "$ref": "#/definitions/Endpoint"
-                }
-              ]
+              "$ref": "#/definitions/Endpoint"
             }
           }
         ],
@@ -2162,12 +2152,7 @@
             "description": "The details of the new evaluation.",
             "required": true,
             "schema": {
-              "title": "Evaluation",
-              "allOf": [
-                {
-                  "$ref": "#/definitions/Evaluation"
-                }
-              ]
+              "$ref": "#/definitions/Evaluation"
             }
           }
         ],
@@ -2837,12 +2822,7 @@
             "description": "The details of the new model.",
             "required": true,
             "schema": {
-              "title": "Model",
-              "allOf": [
-                {
-                  "$ref": "#/definitions/Model"
-                }
-              ]
+              "$ref": "#/definitions/Model"
             }
           }
         ],
@@ -3338,12 +3318,7 @@
             "description": "The body contains the subscription key of the target subscription.",
             "required": true,
             "schema": {
-              "title": "ModelCopy",
-              "allOf": [
-                {
-                  "$ref": "#/definitions/ModelCopy"
-                }
-              ]
+              "$ref": "#/definitions/ModelCopy"
             }
           }
         ],
@@ -3733,12 +3708,7 @@
             "description": "The details of the project.",
             "required": true,
             "schema": {
-              "title": "Project",
-              "allOf": [
-                {
-                  "$ref": "#/definitions/Project"
-                }
-              ]
+              "$ref": "#/definitions/Project"
             }
           }
         ],
@@ -4698,12 +4668,7 @@
             "description": "The details of the new transcription.",
             "required": true,
             "schema": {
-              "title": "Transcription",
-              "allOf": [
-                {
-                  "$ref": "#/definitions/Transcription"
-                }
-              ]
+              "$ref": "#/definitions/Transcription"
             }
           }
         ],
@@ -5318,12 +5283,7 @@
             "description": "The details of the new web hook.",
             "required": true,
             "schema": {
-              "title": "WebHook",
-              "allOf": [
-                {
-                  "$ref": "#/definitions/WebHook"
-                }
-              ]
+              "$ref": "#/definitions/WebHook"
             }
           }
         ],
@@ -5914,23 +5874,10 @@
       "type": "object",
       "properties": {
         "links": {
-          "title": "Links",
-          "description": "The links for additional actions or content related to this dataset.",
-          "allOf": [
-            {
-              "$ref": "#/definitions/Links"
-            }
-          ],
-          "readOnly": true
+          "$ref": "#/definitions/Links"
         },
         "properties": {
-          "title": "DatasetProperties",
-          "description": "Additional configuration options when creating a new dataset and additional metadata provided by the service.",
-          "allOf": [
-            {
-              "$ref": "#/definitions/DatasetProperties"
-            }
-          ]
+          "$ref": "#/definitions/DatasetProperties"
         },
         "kind": {
           "description": "The kind of the dataset.",
@@ -5960,13 +5907,7 @@
           "type": "string"
         },
         "project": {
-          "title": "EntityReference",
-          "description": "The project, the dataset is associated with.",
-          "allOf": [
-            {
-              "$ref": "#/definitions/EntityReference"
-            }
-          ]
+          "$ref": "#/definitions/EntityReference"
         },
         "contentUrl": {
           "description": "The URL of the data for the dataset.",
@@ -6058,14 +5999,7 @@
           "type": "string"
         },
         "error": {
-          "title": "EntityError",
-          "description": "The details of the error in case the entity is in a failed state.",
-          "allOf": [
-            {
-              "$ref": "#/definitions/EntityError"
-            }
-          ],
-          "readOnly": true
+          "$ref": "#/definitions/EntityError"
         }
       }
     },
@@ -6074,13 +6008,7 @@
       "type": "object",
       "properties": {
         "project": {
-          "title": "EntityReference",
-          "description": "The project, the entity is associated with.",
-          "allOf": [
-            {
-              "$ref": "#/definitions/EntityReference"
-            }
-          ]
+          "$ref": "#/definitions/EntityReference"
         },
         "displayName": {
           "description": "The name of the object.",
@@ -6108,32 +6036,13 @@
       "type": "object",
       "properties": {
         "project": {
-          "title": "EntityReference",
-          "description": "The project, the endpoint is associated with.",
-          "allOf": [
-            {
-              "$ref": "#/definitions/EntityReference"
-            }
-          ]
+          "$ref": "#/definitions/EntityReference"
         },
         "links": {
-          "title": "EndpointLinks",
-          "description": "The links for additional actions or content related to this dataset.",
-          "allOf": [
-            {
-              "$ref": "#/definitions/EndpointLinks"
-            }
-          ],
-          "readOnly": true
+          "$ref": "#/definitions/EndpointLinks"
         },
         "properties": {
-          "title": "EndpointProperties",
-          "description": "Additional configuration options when creating a new endpoint and additional metadata provided by the service.",
-          "allOf": [
-            {
-              "$ref": "#/definitions/EndpointProperties"
-            }
-          ]
+          "$ref": "#/definitions/EndpointProperties"
         },
         "self": {
           "description": "The location of this entity.",
@@ -6153,13 +6062,7 @@
           "type": "string"
         },
         "model": {
-          "title": "EntityReference",
-          "description": "Information about the deployed model.",
-          "allOf": [
-            {
-              "$ref": "#/definitions/EntityReference"
-            }
-          ]
+          "$ref": "#/definitions/EntityReference"
         },
         "locale": {
           "description": "The locale of the contained data.",
@@ -6259,14 +6162,7 @@
           "type": "string"
         },
         "error": {
-          "title": "EntityError",
-          "description": "The details of the error in case the entity is in a failed state.",
-          "allOf": [
-            {
-              "$ref": "#/definitions/EntityError"
-            }
-          ],
-          "readOnly": true
+          "$ref": "#/definitions/EntityError"
         }
       }
     },
@@ -6285,31 +6181,13 @@
       "type": "object",
       "properties": {
         "model": {
-          "title": "EntityReference",
-          "description": "Information about the deployed models.",
-          "allOf": [
-            {
-              "$ref": "#/definitions/EntityReference"
-            }
-          ]
+          "$ref": "#/definitions/EntityReference"
         },
         "properties": {
-          "title": "EndpointPropertiesUpdate",
-          "description": "Additional configuration options when updating an endpoint.",
-          "allOf": [
-            {
-              "$ref": "#/definitions/EndpointPropertiesUpdate"
-            }
-          ]
+          "$ref": "#/definitions/EndpointPropertiesUpdate"
         },
         "project": {
-          "title": "EntityReference",
-          "description": "The project, the entity is associated with.",
-          "allOf": [
-            {
-              "$ref": "#/definitions/EntityReference"
-            }
-          ]
+          "$ref": "#/definitions/EntityReference"
         },
         "displayName": {
           "description": "The name of the object.",
@@ -6402,13 +6280,7 @@
           "type": "string"
         },
         "innerError": {
-          "title": "InnerError",
-          "description": "Finer error details.",
-          "allOf": [
-            {
-              "$ref": "#/definitions/InnerError"
-            }
-          ]
+          "$ref": "#/definitions/InnerError"
         }
       }
     },
@@ -6424,80 +6296,28 @@
       "type": "object",
       "properties": {
         "model1": {
-          "title": "EntityReference",
-          "description": "The first model that can be used to evaluate the improvements and differences.",
-          "allOf": [
-            {
-              "$ref": "#/definitions/EntityReference"
-            }
-          ]
+          "$ref": "#/definitions/EntityReference"
         },
         "model2": {
-          "title": "EntityReference",
-          "description": "The second model that can be used to evaluate the improvements and differences.",
-          "allOf": [
-            {
-              "$ref": "#/definitions/EntityReference"
-            }
-          ]
+          "$ref": "#/definitions/EntityReference"
         },
         "transcription1": {
-          "title": "EntityReference",
-          "description": "Information about the transcriptions used in the evaluation with model1.",
-          "allOf": [
-            {
-              "$ref": "#/definitions/EntityReference"
-            }
-          ],
-          "readOnly": true
+          "$ref": "#/definitions/EntityReference"
         },
         "transcription2": {
-          "title": "EntityReference",
-          "description": "Information about the transcriptions used in the evaluation with model2.",
-          "allOf": [
-            {
-              "$ref": "#/definitions/EntityReference"
-            }
-          ],
-          "readOnly": true
+          "$ref": "#/definitions/EntityReference"
         },
         "dataset": {
-          "title": "EntityReference",
-          "description": "Information about the dataset used in the evaluation.",
-          "allOf": [
-            {
-              "$ref": "#/definitions/EntityReference"
-            }
-          ]
+          "$ref": "#/definitions/EntityReference"
         },
         "links": {
-          "title": "Links",
-          "description": "The links for additional actions or content related to this evaluation.",
-          "allOf": [
-            {
-              "$ref": "#/definitions/Links"
-            }
-          ],
-          "readOnly": true
+          "$ref": "#/definitions/Links"
         },
         "properties": {
-          "title": "EvaluationProperties",
-          "description": "Additional configuration options when creating a new evaluation and additional metadata provided by the service.",
-          "allOf": [
-            {
-              "$ref": "#/definitions/EvaluationProperties"
-            }
-          ],
-          "readOnly": true
+          "$ref": "#/definitions/EvaluationProperties"
         },
         "project": {
-          "title": "EntityReference",
-          "description": "The project, the evaluation is associated with.",
-          "allOf": [
-            {
-              "$ref": "#/definitions/EntityReference"
-            }
-          ]
+          "$ref": "#/definitions/EntityReference"
         },
         "self": {
           "description": "The location of this entity.",
@@ -6657,14 +6477,7 @@
           "type": "string"
         },
         "error": {
-          "title": "EntityError",
-          "description": "The details of the error in case the entity is in a failed state.",
-          "allOf": [
-            {
-              "$ref": "#/definitions/EntityError"
-            }
-          ],
-          "readOnly": true
+          "$ref": "#/definitions/EntityError"
         }
       }
     },
@@ -6673,13 +6486,7 @@
       "type": "object",
       "properties": {
         "project": {
-          "title": "EntityReference",
-          "description": "The project, the entity is associated with.",
-          "allOf": [
-            {
-              "$ref": "#/definitions/EntityReference"
-            }
-          ]
+          "$ref": "#/definitions/EntityReference"
         },
         "displayName": {
           "description": "The name of the object.",
@@ -6723,14 +6530,7 @@
           }
         },
         "links": {
-          "title": "FileLinks",
-          "description": "The links for additional actions or content related to this file.",
-          "allOf": [
-            {
-              "$ref": "#/definitions/FileLinks"
-            }
-          ],
-          "readOnly": true
+          "$ref": "#/definitions/FileLinks"
         },
         "createdDateTime": {
           "format": "date-time",
@@ -6739,14 +6539,7 @@
           "readOnly": true
         },
         "properties": {
-          "title": "FileProperties",
-          "description": "Additional metadata provided by the service.",
-          "allOf": [
-            {
-              "$ref": "#/definitions/FileProperties"
-            }
-          ],
-          "readOnly": true
+          "$ref": "#/definitions/FileProperties"
         },
         "name": {
           "description": "The name of this file.",
@@ -6885,13 +6678,7 @@
           "type": "string"
         },
         "innerError": {
-          "title": "InnerError",
-          "description": "Finer error details.",
-          "allOf": [
-            {
-              "$ref": "#/definitions/InnerError"
-            }
-          ]
+          "$ref": "#/definitions/InnerError"
         }
       }
     },
@@ -6915,32 +6702,13 @@
       "type": "object",
       "properties": {
         "project": {
-          "title": "EntityReference",
-          "description": "The project, the model is associated with.",
-          "allOf": [
-            {
-              "$ref": "#/definitions/EntityReference"
-            }
-          ]
+          "$ref": "#/definitions/EntityReference"
         },
         "links": {
-          "title": "ModelLinks",
-          "description": "The links for additional actions or content related to this model.",
-          "allOf": [
-            {
-              "$ref": "#/definitions/ModelLinks"
-            }
-          ],
-          "readOnly": true
+          "$ref": "#/definitions/ModelLinks"
         },
         "properties": {
-          "title": "ModelProperties",
-          "description": "Additional configuration options when creating a new model and additional metadata provided by the service.",
-          "allOf": [
-            {
-              "$ref": "#/definitions/ModelProperties"
-            }
-          ]
+          "$ref": "#/definitions/ModelProperties"
         },
         "self": {
           "description": "The location of this entity.",
@@ -6960,13 +6728,7 @@
           "type": "string"
         },
         "baseModel": {
-          "title": "EntityReference",
-          "description": "The base model used for adaptation.",
-          "allOf": [
-            {
-              "$ref": "#/definitions/EntityReference"
-            }
-          ]
+          "$ref": "#/definitions/EntityReference"
         },
         "datasets": {
           "description": "Datasets used for adaptation.",
@@ -7086,13 +6848,7 @@
       "type": "object",
       "properties": {
         "model": {
-          "title": "EntityReference",
-          "description": "The model, the endpoint is associated with.",
-          "allOf": [
-            {
-              "$ref": "#/definitions/EntityReference"
-            }
-          ]
+          "$ref": "#/definitions/EntityReference"
         },
         "modelFiles": {
           "description": "The model files, the endpoint requires.",
@@ -7116,28 +6872,14 @@
       "type": "object",
       "properties": {
         "deprecationDates": {
-          "title": "ModelDeprecationDates",
-          "description": "The date when features of this model become deprecated.",
-          "allOf": [
-            {
-              "$ref": "#/definitions/ModelDeprecationDates"
-            }
-          ],
-          "readOnly": true
+          "$ref": "#/definitions/ModelDeprecationDates"
         },
         "email": {
           "description": "The email address to send email notifications to in case the operation completes.\r\nThe value will be removed after successfully sending the email.",
           "type": "string"
         },
         "error": {
-          "title": "EntityError",
-          "description": "The details of the error in case the entity is in a failed state.",
-          "allOf": [
-            {
-              "$ref": "#/definitions/EntityError"
-            }
-          ],
-          "readOnly": true
+          "$ref": "#/definitions/EntityError"
         }
       }
     },
@@ -7146,13 +6888,7 @@
       "type": "object",
       "properties": {
         "project": {
-          "title": "EntityReference",
-          "description": "The project, the entity is associated with.",
-          "allOf": [
-            {
-              "$ref": "#/definitions/EntityReference"
-            }
-          ]
+          "$ref": "#/definitions/EntityReference"
         },
         "displayName": {
           "description": "The name of the object.",
@@ -7332,24 +7068,10 @@
       "type": "object",
       "properties": {
         "links": {
-          "title": "ProjectLinks",
-          "description": "The links for additional actions or content related to this project.",
-          "allOf": [
-            {
-              "$ref": "#/definitions/ProjectLinks"
-            }
-          ],
-          "readOnly": true
+          "$ref": "#/definitions/ProjectLinks"
         },
         "properties": {
-          "title": "ProjectProperties",
-          "description": "Additional metadata provided by the service.",
-          "allOf": [
-            {
-              "$ref": "#/definitions/ProjectProperties"
-            }
-          ],
-          "readOnly": true
+          "$ref": "#/definitions/ProjectProperties"
         },
         "self": {
           "description": "The location of this entity.",
@@ -7513,23 +7235,10 @@
       "type": "object",
       "properties": {
         "links": {
-          "title": "Links",
-          "description": "The links for additional actions or content related to this transcription.",
-          "allOf": [
-            {
-              "$ref": "#/definitions/Links"
-            }
-          ],
-          "readOnly": true
+          "$ref": "#/definitions/Links"
         },
         "properties": {
-          "title": "TranscriptionProperties",
-          "description": "Additional configuration options when creating a new transcription and additional metadata provided by the service.",
-          "allOf": [
-            {
-              "$ref": "#/definitions/TranscriptionProperties"
-            }
-          ]
+          "$ref": "#/definitions/TranscriptionProperties"
         },
         "self": {
           "description": "The location of this entity.",
@@ -7537,31 +7246,13 @@
           "readOnly": true
         },
         "model": {
-          "title": "EntityReference",
-          "description": "The model used in this transcription.",
-          "allOf": [
-            {
-              "$ref": "#/definitions/EntityReference"
-            }
-          ]
+          "$ref": "#/definitions/EntityReference"
         },
         "project": {
-          "title": "EntityReference",
-          "description": "The project, the transcription is associated with.",
-          "allOf": [
-            {
-              "$ref": "#/definitions/EntityReference"
-            }
-          ]
+          "$ref": "#/definitions/EntityReference"
         },
         "dataset": {
-          "title": "EntityReference",
-          "description": "A list of acoustic or audio files datasets containing the audio files that will be transcribed.",
-          "allOf": [
-            {
-              "$ref": "#/definitions/EntityReference"
-            }
-          ]
+          "$ref": "#/definitions/EntityReference"
         },
         "contentUrls": {
           "description": "A list of content urls to get audio files from for transcription. Up to 1000 urls are allowed.\r\nThis property will not be returned in a response.",
@@ -7690,14 +7381,7 @@
           "type": "string"
         },
         "error": {
-          "title": "EntityError",
-          "description": "The details of the error in case the entity is in a failed state.",
-          "allOf": [
-            {
-              "$ref": "#/definitions/EntityError"
-            }
-          ],
-          "readOnly": true
+          "$ref": "#/definitions/EntityError"
         }
       }
     },
@@ -7706,13 +7390,7 @@
       "type": "object",
       "properties": {
         "project": {
-          "title": "EntityReference",
-          "description": "The project, the entity is associated with.",
-          "allOf": [
-            {
-              "$ref": "#/definitions/EntityReference"
-            }
-          ]
+          "$ref": "#/definitions/EntityReference"
         },
         "displayName": {
           "description": "The name of the object.",
@@ -7741,23 +7419,10 @@
       "type": "object",
       "properties": {
         "links": {
-          "title": "WebHookLinks",
-          "description": "The links for additional actions or content related to this webhook.",
-          "allOf": [
-            {
-              "$ref": "#/definitions/WebHookLinks"
-            }
-          ],
-          "readOnly": true
+          "$ref": "#/definitions/WebHookLinks"
         },
         "properties": {
-          "title": "WebHookProperties",
-          "description": "Additional configuration options when creating a new webhook\r\nand additional metadata provided by the service.",
-          "allOf": [
-            {
-              "$ref": "#/definitions/WebHookProperties"
-            }
-          ]
+          "$ref": "#/definitions/WebHookProperties"
         },
         "self": {
           "description": "The location of this entity.",
@@ -7906,14 +7571,7 @@
       "type": "object",
       "properties": {
         "error": {
-          "title": "EntityError",
-          "description": "The details of the error in case the dataset is in a failed state.",
-          "allOf": [
-            {
-              "$ref": "#/definitions/EntityError"
-            }
-          ],
-          "readOnly": true
+          "$ref": "#/definitions/EntityError"
         },
         "apiVersion": {
           "description": "The API version the web hook was created in. This defines the shape of the payload in the callbacks.\r\nIf the payload type is not supported anymore, because the shape changed and the API version using it is removed (after deprecation),\r\nthe web hook will be disabled.",
@@ -7945,13 +7603,7 @@
           "type": "string"
         },
         "properties": {
-          "title": "WebHookPropertiesUpdate",
-          "description": "Additional configuration options when updating a webhook.",
-          "allOf": [
-            {
-              "$ref": "#/definitions/WebHookPropertiesUpdate"
-            }
-          ]
+          "$ref": "#/definitions/WebHookPropertiesUpdate"
         },
         "events": {
           "title": "WebHookEvents",
