@@ -1772,19 +1772,7 @@
         },
         "provisioningState": {
           "description": "The provisioning state.",
-          "enum": [
-            "Succeeded",
-            "Created",
-            "Configured",
-            "Deployed",
-            "Failed"
-          ],
-          "type": "string",
-          "readOnly": true,
-          "x-ms-enum": {
-            "name": "provisioningState",
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/ProvisioningState"
         },
         "adlsId": {
           "description": "Link to the ADLS account.",
@@ -1991,11 +1979,31 @@
       },
       "description": "Describes storage account for idt."
     },
+    "ProvisioningState": {
+      "description": "The provisioning state.",
+      "enum": [
+        "Succeeded",
+        "Created",
+        "Configured",
+        "Deployed",
+        "Failed"
+      ],
+      "type": "string",
+      "readOnly": true,
+      "x-ms-enum": {
+        "name": "provisioningState",
+        "modelAsString": true
+      }
+    },
     "AssetProperties": {
       "properties": {
         "assetId": {
           "type": "string",
           "description": "ResourceId for the virtual machines."
+        },
+        "assetIp": {
+          "type": "string",
+          "description": "Ip address for the virtual machines."
         },
         "assetRole": {
           "description": "Role of an asset, including VMs on Azure and local test machine on-prem",
@@ -2004,7 +2012,8 @@
             "AD",
             "CS",
             "DNS",
-            "TestVM"
+            "VirtualTestDevice",
+            "OnpremTestDevice"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -2025,6 +2034,10 @@
             "name": "assetStatus",
             "modelAsString": true
           }
+        },
+        "provisioningState": {
+          "description": "The provisioning state.",
+          "$ref": "#/definitions/ProvisioningState"
         }
       },
       "description": "Describes the properties of an digitalTwins/assets."
@@ -2114,6 +2127,10 @@
         "versionNumber": {
           "type": "string",
           "description": "The versions for the test"
+        },
+        "provisioningState": {
+          "description": "The provisioning state.",
+          "$ref": "#/definitions/ProvisioningState"
         }
       },
       "description": "Describes the properties of an digitalTwins/tests."
@@ -2174,6 +2191,14 @@
             "type": "string"
           },
           "description": "List of test ids"
+        },
+        "filePath": {
+          "type": "string",
+          "description": "The path for the generated exe file."
+        },
+        "provisioningState": {
+          "description": "The provisioning state.",
+          "$ref": "#/definitions/ProvisioningState"
         }
       },
       "description": "Describes the properties of an digitalTwins/testPlans."
@@ -2265,6 +2290,10 @@
             "name": "result",
             "modelAsString": true
           }
+        },
+        "provisioningState": {
+          "description": "The provisioning state.",
+          "$ref": "#/definitions/ProvisioningState"
         }
       },
       "description": "Describes the properties of an digitalTwins/executionPlans."
