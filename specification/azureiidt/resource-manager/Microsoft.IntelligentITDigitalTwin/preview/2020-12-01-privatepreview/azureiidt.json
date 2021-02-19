@@ -757,7 +757,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IntelligentITDigitalTwin/digitalTwins/{iidtName}/tests/{testName}": {
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IntelligentITDigitalTwin/digitalTwins/{iidtName}/tests/{testName}": {
       "put": {
         "tags": [
           "ITDigitalTwinTests"
@@ -2038,6 +2038,36 @@
         "provisioningState": {
           "description": "The provisioning state.",
           "$ref": "#/definitions/ProvisioningState"
+        },
+        "assetImage": {
+          "type": "string",
+          "description": "Image for the device OS."
+        },
+        "assetSku": {
+          "type": "string",
+          "description": "Sku for the device OS."
+        },
+        "assetCpu": {
+          "type": "string",
+          "description": "CPU for the devices."
+        },
+        "assetBuildNumber": {
+          "type": "string",
+          "description": "Build number for the device OS."
+        },
+        "assetEdition": {
+          "description": "Edition for the device OS.",
+          "enum": [
+            "Home",
+            "Education",
+            "Profession",
+            "Enterprise"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "assetEdition",
+            "modelAsString": true
+          }
         }
       },
       "description": "Describes the properties of an digitalTwins/assets."
@@ -2102,7 +2132,7 @@
       },
       "description": "A list of asset."
     },
-    "TestProperties": {
+        "TestProperties": {
       "properties": {
         "author": {
           "type": "string",
@@ -2182,8 +2212,8 @@
         }
       },
       "description": "A list of tests."
-    },
-    "TestPlanProperties": {
+        },
+        "TestPlanProperties": {
       "properties": {
         "testList": {
           "type": "array",
@@ -2250,8 +2280,8 @@
         }
       },
       "description": "A list of testPlans."
-    },
-    "ExecutionPlanProperties": {
+        },
+        "ExecutionPlanProperties": {
       "properties": {
         "plan": {
           "type": "string",
@@ -2294,6 +2324,18 @@
         "provisioningState": {
           "description": "The provisioning state.",
           "$ref": "#/definitions/ProvisioningState"
+        },
+        "logAvailable": {
+          "type": "string",
+          "description": "Whether the log has been generated or not.",
+          "enum": [
+            "True",
+            "False"
+          ],
+          "x-ms-enum": {
+            "name": "logAvailable",
+            "modelAsString": true
+          }
         }
       },
       "description": "Describes the properties of an digitalTwins/executionPlans."
@@ -2348,7 +2390,7 @@
       },
       "description": "The response definition for run"
     },
-    "FetchLogResponseBody": {
+            "FetchLogResponseBody": {
       "properties": {
         "log": {
           "type": "string",
@@ -2357,7 +2399,7 @@
       },
       "description": "The response definition for fetchLog"
     },
-    "ExecutionPlans": {
+            "ExecutionPlans": {
       "properties": {
         "value": {
           "type": "array",
@@ -2373,8 +2415,8 @@
         }
       },
       "description": "A list of executionPlans."
-    }
-  },
+        }
+      },
   "parameters": {
     "SubscriptionIdParameter": {
       "name": "subscriptionId",
