@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "NetworkManagerActiveConfiguration",
-    "description": "The Microsoft Azure Network Manager Activity Configuration API provides a RESTful set of web services that interact with Microsoft Azure Network Manager service to manage your network resources.",
+    "description": "The Microsoft Azure Network Manager Active Configuration API provides a RESTful set of web services that interact with Microsoft Azure Network Manager service to list all active configuraiton by networkmanager.",
     "version": "2021-02-01-preview"
   },
   "host": "management.azure.com",
@@ -128,7 +128,7 @@
           "description": "Gets the URL to get the next set of results."
         }
       },
-      "description": "Result of the request to list activeConfigurations. It contains a list of groups and a URL link to get the next set of results."
+      "description": "Result of the request to list active configurations. It contains a list of active configurations and a URL link to get the next set of results."
     }
   },
   "parameters": {
@@ -150,7 +150,7 @@
     },
     "ListPageSizeParameter": {
       "name": "$top",
-      "description": "May be used to limit the number of results in a page for list queries.",
+      "description": "The optional client query parameter which defines the maximum number of records to be returned by the server.",
       "in": "query",
       "required": false,
       "type": "integer",

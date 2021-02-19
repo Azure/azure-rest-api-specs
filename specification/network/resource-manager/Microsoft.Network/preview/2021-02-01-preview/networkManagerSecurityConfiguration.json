@@ -882,6 +882,7 @@
       },
       "required": [
         "protocol",
+        "access",
         "direction"
       ],
       "description": "Security rule resource."
@@ -951,15 +952,6 @@
             "description": "The destination port."
           },
           "description": "The destination port ranges."
-        },
-        "access": {
-          "$ref": "#/definitions/SecurityConfigurationRuleAccess",
-          "description": "Indicates the access allowed for this particular rule"
-        },
-        "priority": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The priority of the rule. The value can be between 1 and 4096. The priority number must be unique for each rule in the collection. The lower the priority number, the higher the priority of the rule."
         },
         "direction": {
           "$ref": "#/definitions/SecurityConfigurationRuleDirection",
@@ -1052,10 +1044,11 @@
     },
     "NetworkManagerSecurityConfigurationImport": {
       "properties": {
-        "networkSecurityGroupUris": {
+        "networkSecurityGroupImports": {
           "type": "array",
           "items": {
-            "type": "string"
+            "type": "object",
+            "$ref": "./definitions/NetworkSecurityGroupImport",
           },
           "description": "List of nsg uris."
         },
@@ -1114,6 +1107,16 @@
         "failureReason": {
           "type": "string",
           "description": "Failure reason."
+        }
+      }
+    },
+    "NetworkSecurityGroupImport": {
+      "type": "object",
+      "description": "Network Security Group Import.",
+      "properties": {
+        "networkSecurityGroupUri": {
+          "type": "string",
+          "description": "Network Security Group Uri."
         }
       }
     },
@@ -1178,7 +1181,7 @@
     },
     "ListPageSizeParameter": {
       "name": "$top",
-      "description": "May be used to limit the number of results in a page for list queries.",
+      "description": "The optional client query parameter which defines the maximum number of records to be returned by the server.",
       "in": "query",
       "required": false,
       "type": "integer",
