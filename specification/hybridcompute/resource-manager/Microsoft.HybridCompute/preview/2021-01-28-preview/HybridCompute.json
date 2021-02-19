@@ -34,7 +34,7 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridCompute/machines/{name}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridCompute/machines/{machineName}": {
       "put": {
         "tags": [
           "machines"
@@ -49,14 +49,10 @@
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "name",
+            "name": "machineName",
             "in": "path",
             "required": true,
             "type": "string",
@@ -82,7 +78,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ErrorResponse"
             }
           }
         },
@@ -106,11 +102,7 @@
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "name",
@@ -139,7 +131,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ErrorResponse"
             }
           }
         },
@@ -163,11 +155,7 @@
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "name",
@@ -187,7 +175,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ErrorResponse"
             }
           }
         },
@@ -211,11 +199,7 @@
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "name",
@@ -249,7 +233,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ErrorResponse"
             }
           }
         },
@@ -275,11 +259,7 @@
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
           }
         ],
         "responses": {
@@ -292,7 +272,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ErrorResponse"
             }
           }
         },
@@ -331,7 +311,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ErrorResponse"
             }
           }
         },
@@ -345,7 +325,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridCompute/machines/{name}/extensions/{extensionName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridCompute/machines/{machineName}/extensions/{extensionName}": {
       "put": {
         "tags": [
           "MachineExtensions"
@@ -354,14 +334,10 @@
         "description": "The operation to create or update the extension.",
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "name",
+            "name": "machineName",
             "in": "path",
             "required": true,
             "type": "string",
@@ -416,11 +392,7 @@
         "description": "The operation to create or update the extension.",
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "name",
@@ -478,11 +450,7 @@
         "description": "The operation to delete the extension.",
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "name",
@@ -531,11 +499,7 @@
         "description": "The operation to get the extension.",
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "name",
@@ -573,7 +537,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridCompute/machines/{name}/extensions": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridCompute/machines/{machineName}/extensions": {
       "get": {
         "tags": [
           "MachineExtensions"
@@ -582,14 +546,10 @@
         "description": "The operation to get all extensions of a non-Azure machine",
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "name",
+            "name": "machineName",
             "in": "path",
             "required": true,
             "type": "string",
@@ -649,7 +609,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ErrorResponse"
             }
           }
         },
@@ -686,12 +646,7 @@
           "description": "The name of the compute operation."
         },
         "display": {
-          "x-ms-client-flatten": true,
-          "allOf": [
-            {
-              "$ref": "#/definitions/OperationValueDisplay"
-            }
-          ],
+          "$ref": "#/definitions/OperationValueDisplay",
           "description": "Display properties"
         }
       },
@@ -739,11 +694,7 @@
           "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/locationData"
         },
         "osProfile": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/OSProfile"
-            }
-          ],
+          "$ref": "#/definitions/OSProfile",
           "description": "Specifies the operating system settings for the hybrid machine."
         },
         "provisioningState": {
@@ -870,55 +821,28 @@
     "Machine": {
       "properties": {
         "properties": {
-          "x-ms-client-flatten": true,
-          "allOf": [
-            {
-              "$ref": "#/definitions/MachineProperties"
-            }
-          ],
+          "$ref": "#/definitions/MachineProperties",
           "description": "Hybrid Compute Machine properties"
         },
         "identity": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/Identity"
-            }
-          ]
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/Identity"
         }
       },
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/TrackedResource"
-        }
-      ],
+      "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/TrackedResource",
       "description": "Describes a hybrid machine."
     },
     "MachineUpdate": {
       "properties": {
         "identity": {
-          "x-ms-client-flatten": true,
-          "allOf": [
-            {
-              "$ref": "#/definitions/Identity"
-            }
-          ],
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/Identity",
           "description": "Hybrid Compute Machine Managed Identity"
         },
         "properties": {
-          "x-ms-client-flatten": true,
-          "allOf": [
-            {
-              "$ref": "#/definitions/MachineUpdateProperties"
-            }
-          ],
+          "$ref": "#/definitions/MachineUpdateProperties",
           "description": "Hybrid Compute Machine properties"
         }
       },
-      "allOf": [
-        {
-          "$ref": "#/definitions/UpdateResource"
-        }
-      ],
+      "$ref": "#/definitions/ResourceUpdate",
       "description": "Describes a hybrid machine Update."
     },
     "MachineListResult": {
@@ -940,7 +864,7 @@
       ],
       "description": "The List hybrid machine operation response."
     },
-    "UpdateResource": {
+    "ResourceUpdate": {
       "description": "The Update Resource model definition.",
       "properties": {
         "tags": {
@@ -980,77 +904,25 @@
         "code",
         "message"
       ]
-    },
-    "ErrorResponse": {
-      "title": "Error response.",
-      "description": "Contains details when the response code indicates an error.",
-      "type": "object",
-      "properties": {
-        "error": {
-          "description": "The error details.",
-          "$ref": "#/definitions/ErrorDetail"
-        }
-      },
-      "required": [
-        "error"
-      ]
-    },
-    "Identity": {
-      "title": "Managed Identity.",
-      "type": "object",
-      "properties": {
-        "type": {
-          "description": "The identity type.",
-          "type": "string"
-        },
-        "principalId": {
-          "readOnly": true,
-          "description": "The identity's principal id.",
-          "type": "string"
-        },
-        "tenantId": {
-          "readOnly": true,
-          "description": "The identity's tenant id.",
-          "type": "string"
-        }
-      }
-    },
+    },    
     "MachineExtension": {
       "properties": {
         "properties": {
-          "x-ms-client-flatten": true,
-          "allOf": [
-            {
-              "$ref": "#/definitions/MachineExtensionProperties"
-            }
-          ],
+          "$ref": "#/definitions/MachineExtensionProperties",
           "description": "Describes Machine Extension Properties."
         }
       },
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/TrackedResource"
-        }
-      ],
+      "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/TrackedResource",
       "description": "Describes a Machine Extension."
     },
     "MachineExtensionUpdate": {
       "properties": {
         "properties": {
-          "x-ms-client-flatten": true,
-          "allOf": [
-            {
-              "$ref": "#/definitions/MachineExtensionUpdateProperties"
-            }
-          ],
+          "$ref": "#/definitions/MachineExtensionUpdateProperties",
           "description": "Describes Machine Extension Update Properties."
         }
       },
-      "allOf": [
-        {
-          "$ref": "#/definitions/UpdateResource"
-        }
-      ],
+      "$ref": "#/definitions/ResourceUpdate",
       "description": "Describes a Machine Extension Update."
     },
     "MachineExtensionProperties": {
@@ -1089,11 +961,7 @@
           "description": "The provisioning state, which only appears in the response."
         },
         "instanceView": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/MachineExtensionInstanceView"
-            }
-          ],
+          "$ref": "#/definitions/MachineExtensionInstanceView",
           "description": "The machine extension instance view."
         }
       },
