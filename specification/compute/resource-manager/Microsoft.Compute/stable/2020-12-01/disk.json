@@ -171,6 +171,9 @@
           },
           "Create or update a bursting enabled managed disk.": {
             "$ref": "./examples/CreateOrUpdateABurstingEnabledManagedDisk.json"
+          },
+          "Update a managed disk to add supportsHibernation.": {
+            "$ref": "./examples/UpdateAManagedDiskToAddSupportsHibernation.json"
           }
         }
       },
@@ -1992,6 +1995,10 @@
         "burstingEnabled": {
           "type": "boolean",
           "description": "Set to true to enable bursting beyond the provisioned performance target of the disk. Bursting is disabled by default. Does not apply to Ultra disks."
+        },
+        "supportsHibernation": {
+          "type": "boolean",
+          "description": "Indicates the OS on a disk supports hibernation."
         }
       },
       "required": [
@@ -2082,6 +2089,10 @@
         "diskAccessId": {
           "type": "string",
           "description": "ARM id of the DiskAccess resource for using private endpoints on disks."
+        },
+        "supportsHibernation": {
+          "type": "boolean",
+          "description": "Indicates the OS on a snapshot supports hibernation."
         }
       },
       "required": [
@@ -2385,6 +2396,10 @@
         "purchasePlan": {
           "$ref": "#/definitions/PurchasePlan",
           "description": "Purchase plan information to be added on the OS disk"
+        },
+        "supportsHibernation": {
+          "type": "boolean",
+          "description": "Indicates the OS on a disk supports hibernation."
         }
       },
       "description": "Disk resource update properties."
@@ -2422,6 +2437,10 @@
         "diskAccessId": {
           "type": "string",
           "description": "ARM id of the DiskAccess resource for using private endpoints on disks."
+        },
+        "supportsHibernation": {
+          "type": "boolean",
+          "description": "Indicates the OS on a snapshot supports hibernation."
         }
       },
       "description": "Snapshot resource update properties."
@@ -3119,6 +3138,10 @@
           "$ref": "#/definitions/Encryption",
           "description": "Encryption property can be used to encrypt data at rest with customer managed keys or platform managed keys.",
           "readOnly": true
+        },
+        "supportsHibernation": {
+          "type": "boolean",
+          "description": "Indicates the OS on a disk supports hibernation."
         }
       },
       "description": "Properties of an incremental disk restore point"
