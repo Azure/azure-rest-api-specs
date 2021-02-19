@@ -41,6 +41,15 @@ input-file:
 
 ---
 
+## Suppression
+``` yaml
+directive:
+  - suppress: TopLevelResourcesListBySubscription
+      from: servicelinker.json
+    where: $.definitions.LinkerResource
+    reason: This is an extension resource
+```
+
 # Code Generation
 
 ## Swagger to SDK
