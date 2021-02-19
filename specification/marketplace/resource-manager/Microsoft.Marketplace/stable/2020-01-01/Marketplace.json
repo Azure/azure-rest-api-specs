@@ -9,6 +9,12 @@
   "schemes": [
     "https"
   ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
   "paths": {
     "/providers/Microsoft.Marketplace/privateStores/{privateStoreId}/offers": {
       "parameters": [
@@ -25,9 +31,6 @@
         ],
         "operationId": "PrivateStoreOffers_List",
         "description": "Get a list of all private offers in the given private store",
-        "produces": [
-          "application/json"
-        ],
         "responses": {
           "200": {
             "description": "OK",
@@ -70,9 +73,6 @@
         ],
         "operationId": "PrivateStorePrivateOffers_List",
         "description": "Get a list of all private offers in the given private store",
-        "produces": [
-          "application/json"
-        ],
         "responses": {
           "200": {
             "description": "OK",
@@ -138,9 +138,6 @@
         ],
         "operationId": "PrivateStoreOffer_Get",
         "description": "Gets information about a specific offer.",
-        "produces": [
-          "application/json"
-        ],
         "responses": {
           "200": {
             "description": "Offer information retrieved",
@@ -167,12 +164,6 @@
         ],
         "operationId": "PrivateStoreOffer_CreateOrUpdate",
         "description": "Update or add an offer to the default collection of the private store.",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
         "parameters": [
           {
             "in": "body",
@@ -197,8 +188,8 @@
           }
         },
         "x-ms-examples": {
-          "UpdatePrivateStoreOffer": {
-            "$ref": "./examples/UpdatePrivateStoreOffer.json"
+          "PrivateStoreOffer_update": {
+            "$ref": "./examples/PrivateStoreOffer_update.json"
           }
         }
       },
@@ -208,9 +199,6 @@
         ],
         "operationId": "PrivateStoreOffer_Post",
         "description": "Delete Private store offer. This is a workaround.",
-        "produces": [
-          "application/json"
-        ],
         "parameters": [
           {
             "in": "body",
@@ -259,9 +247,6 @@
         ],
         "operationId": "PrivateStorePrivateOffer_Get",
         "description": "Gets information about a specific private offer.",
-        "produces": [
-          "application/json"
-        ],
         "responses": {
           "200": {
             "description": "Private offer information retrieved",
@@ -288,12 +273,6 @@
         ],
         "operationId": "PrivateStorePrivateOffer_CreateOrUpdate",
         "description": "Update or add a private offer to the default collection of the private store.",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
         "parameters": [
           {
             "in": "body",
@@ -318,8 +297,8 @@
           }
         },
         "x-ms-examples": {
-          "UpdatePrivateStoreOffer": {
-            "$ref": "./examples/UpdatePrivateStorePrivateOffer.json"
+          "PrivateStorePrivateOffer_update": {
+            "$ref": "./examples/PrivateStorePrivateOffer_update.json"
           }
         }
       }
@@ -339,9 +318,6 @@
         ],
         "operationId": "PrivateStore_List",
         "description": "Gets the list of available private stores",
-        "produces": [
-          "application/json"
-        ],
         "responses": {
           "200": {
             "description": "OK. The request has succeeded.",
@@ -381,9 +357,6 @@
         ],
         "operationId": "PrivateStore_Get",
         "description": "Get information about the private store",
-        "produces": [
-          "application/json"
-        ],
         "responses": {
           "200": {
             "description": "OK. The request has succeeded.",
@@ -410,9 +383,6 @@
         ],
         "operationId": "PrivateStore_Delete",
         "description": "Deletes the private store. All that is not saved will be lost.",
-        "produces": [
-          "application/json"
-        ],
         "responses": {
           "200": {
             "description": "Private store was deleted successfully ."
@@ -436,12 +406,6 @@
         ],
         "operationId": "PrivateStore_CreateOrUpdate",
         "description": "Changes private store properties",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
         "parameters": [
           {
             "in": "body",
@@ -463,8 +427,8 @@
           }
         },
         "x-ms-examples": {
-          "UpdatePrivateStores": {
-            "$ref": "./examples/UpdatePrivateStore.json"
+          "PrivateStores_update": {
+            "$ref": "./examples/PrivateStores_update.json"
           }
         }
       }
@@ -801,7 +765,7 @@
         }
       }
     },
-    "Operation": {
+    "SingleOperation": {
       "description": "Microsoft.Marketplace REST API operation",
       "type": "object",
       "properties": {
@@ -834,7 +798,7 @@
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/Operation"
+            "$ref": "#/definitions/SingleOperation"
           },
           "description": "List of Microsoft.Marketplace operations supported by the Microsoft.Marketplace resource provider."
         },

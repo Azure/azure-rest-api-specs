@@ -974,6 +974,10 @@
             }
           }
         },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink",
+          "itemName": "nodes"
+        },
         "x-ms-examples": {
           "Get compute nodes information for a compute": {
             "$ref": "./examples/amlComputeListNodes.json"
@@ -3290,7 +3294,7 @@
                   "format": "int32",
                   "minimum": 1
                 },
-                "agentVMSize": {
+                "agentVmSize": {
                   "description": "Agent virtual machine size",
                   "type": "string"
                 },
@@ -3325,6 +3329,7 @@
                 "osType": {
                   "description": "Compute OS Type",
                   "type": "string",
+                  "default": "Linux",
                   "enum": [
                     "Linux",
                     "Windows"
@@ -3540,6 +3545,10 @@
                   "description": "Settings for a personal compute instance.",
                   "$ref": "#/definitions/PersonalComputeInstanceSettings"
                 },
+                "setupScripts": {
+                  "description": "Details of customized scripts to execute for setting up the cluster.",
+                  "$ref": "#/definitions/SetupScripts"
+                },
                 "lastOperation": {
                   "description": "The last operation on ComputeInstance.",
                   "$ref": "#/definitions/ComputeInstanceLastOperation",
@@ -3723,7 +3732,8 @@
           "type": "string",
           "enum": [
             "Disabled",
-            "Enabled"
+            "Enabled",
+            "Auto"
           ]
         },
         "cert": {
@@ -3928,6 +3938,11 @@
                 "$ref": "#/definitions/AmlComputeNodeInformation"
               },
               "description": "The collection of returned AmlCompute nodes details."
+            },
+            "nextLink": {
+              "readOnly": true,
+              "type": "string",
+              "description": "The continuation token."
             }
           }
         }
@@ -6453,6 +6468,52 @@
         },
         "value": {
           "description": "Value details of the workspace connection.",
+          "type": "string"
+        }
+      }
+    },
+    "SetupScripts": {
+      "type": "object",
+      "description": "Details of customized scripts to execute for setting up the cluster.",
+      "properties": {
+        "scripts": {
+          "description": "Customized setup scripts",
+          "$ref": "#/definitions/ScriptsToExecute"
+        }
+      }
+    },
+    "ScriptsToExecute": {
+      "type": "object",
+      "description": "Customized setup scripts",
+      "properties": {
+        "startupScript": {
+          "description": "Script that's run every time the machine starts.",
+          "$ref": "#/definitions/ScriptReference"
+        },
+        "creationScript": {
+          "description": "Script that's run only once during provision of the compute.",
+          "$ref": "#/definitions/ScriptReference"
+        }
+      }
+    },
+    "ScriptReference": {
+      "type": "object",
+      "description": "Script reference",
+      "properties": {
+        "scriptSource": {
+          "description": "The storage source of the script: inline, workspace.",
+          "type": "string"
+        },
+        "scriptData": {
+          "description": "The location of scripts in the mounted volume.",
+          "type": "string"
+        },
+        "scriptArguments": {
+          "description": "Optional command line arguments passed to the script to run.",
+          "type": "string"
+        },
+        "timeout": {
+          "description": "Optional time period passed to timeout command.",
           "type": "string"
         }
       }
