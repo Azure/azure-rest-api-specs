@@ -39,8 +39,16 @@ input-file:
   - Microsoft.ServiceLinker/preview/2021-01-01-privatepreview/servicelinker.json
 ```
 
----
+## Suppression
+``` yaml
+directive:
+  - suppress: TopLevelResourcesListBySubscription
+    from: servicelinker.json
+    where: $.definitions.LinkerResource
+    reason: This is an extension resource
+```
 
+---
 # Code Generation
 
 ## Swagger to SDK
