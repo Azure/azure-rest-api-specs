@@ -105,7 +105,7 @@ python:
 
 These settings apply only when `--tag=package-2021-01-01-preview-only --python` is specified on the command line.
 
-``` yaml $(tag) == 'package-2021-01-01-preview' && $(python)
+``` yaml $(tag) == 'package-2021-01-01-preview-only' && $(python)
 python:
   namespace: azure.mgmt.authorization.v2021_01_01_preview
   output-folder: $(python-sdks-folder)/authorization/azure-mgmt-authorization/azure/mgmt/authorization/v2021_01_01_preview
