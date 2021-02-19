@@ -796,6 +796,10 @@
           "$ref": "#/definitions/Sku",
           "description": "Gets or sets account SKU."
         },
+        "encryption": {
+          "$ref": "#/definitions/EncryptionProperties",
+          "description": "Set the encryption properties for the automation account"
+        },
         "publicNetworkAccess": {
           "type": "boolean",
           "description": "Indicates whether traffic on the non-ARM endpoint (Webhook/Agent) is allowed from the public internet"
@@ -817,6 +821,11 @@
         "location": {
           "type": "string",
           "description": "Gets or sets the location of the resource."
+        },
+        "identity": {
+          "type": "object",
+          "$ref": "#/definitions/Identity",
+          "description": "Sets the identity property for automation account"
         },
         "tags": {
           "type": "object",
@@ -846,11 +855,32 @@
           "description": "The identity type.",
           "enum": [
             "SystemAssigned",
+            "UserAssigned",
+            "SystemAssigned, UserAssigned",
             "None"
           ],
           "x-ms-enum": {
             "name": "ResourceIdentityType",
             "modelAsString": false
+          }
+        },
+        "userAssignedIdentities": {
+          "type": "object",
+          "description": "The list of user identities associated with the resource. The user identity dictionary key references will be ARM resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'.",
+          "additionalProperties": {
+            "type": "object",
+            "properties": {
+              "principalId": {
+                "readOnly": true,
+                "type": "string",
+                "description": "The principal id of user assigned identity."
+              },
+              "clientId": {
+                "readOnly": true,
+                "type": "string",
+                "description": "The client id of user assigned identity."
+              }
+            }
           }
         }
       }
@@ -872,6 +902,15 @@
           "x-ms-enum": {
             "name": "EncryptionKeySourceType",
             "modelAsString": false
+          }
+        },
+        "identity": {
+          "description": "User identity used for CMK.",
+          "properties": {
+            "userAssignedIdentity": {
+              "type": "object",
+              "description": "The user identity used for CMK. It will be an ARM resource id in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'."
+            }
           }
         }
       }
