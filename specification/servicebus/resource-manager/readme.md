@@ -40,7 +40,6 @@ input-file:
 - Microsoft.ServiceBus/preview/2021-01-01-preview/DisasterRecoveryConfig.json
 - Microsoft.ServiceBus/preview/2021-01-01-preview/migrationconfigs.json
 - Microsoft.ServiceBus/preview/2021-01-01-preview/networksets.json
-- Microsoft.ServiceBus/preview/2021-01-01-preview/VirtualNetworkRules-preview.json
 ```
 
 
