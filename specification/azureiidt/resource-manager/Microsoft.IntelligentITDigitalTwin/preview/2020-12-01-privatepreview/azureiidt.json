@@ -2038,6 +2038,60 @@
         "provisioningState": {
           "description": "The provisioning state.",
           "$ref": "#/definitions/ProvisioningState"
+        },
+        "assetImage": {
+          "type": "string",
+          "description": "Image for the device OS."
+        },
+        "assetSku": {
+          "type": "string",
+          "description": "Sku for the device OS."
+        },
+        "assetCpu": {
+          "type": "string",
+          "description": "CPU for the devices."
+        },
+        "assetBuildNumber": {
+          "type": "string",
+          "description": "Build number for the device OS."
+        },
+        "assetEdition": {
+          "description": "Edition for the device OS.",
+          "enum": [
+            "Home",
+            "Education",
+            "Profession",
+            "Enterprise"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "assetEdition",
+            "modelAsString": true
+          }
+        },
+        "adminUserName": {
+          "x-ms-secret": true,
+          "description": "Admin user name for accessing the device.",
+          "type": "string",
+          "x-nullable": true
+        },
+        "adminPassword": {
+          "x-ms-secret": true,
+          "description": "Admin password for accessing the device.",
+          "type": "string",
+          "x-nullable": true
+        },
+        "domainUserName": {
+          "x-ms-secret": true,
+          "description": "Domain user name for accessing the enterprise domain.",
+          "type": "string",
+          "x-nullable": true
+        },
+        "domainPassword": {
+          "x-ms-secret": true,
+          "description": "Domain password for accessing the enterprise domain.",
+          "type": "string",
+          "x-nullable": true
         }
       },
       "description": "Describes the properties of an digitalTwins/assets."
@@ -2294,6 +2348,18 @@
         "provisioningState": {
           "description": "The provisioning state.",
           "$ref": "#/definitions/ProvisioningState"
+        },
+        "logAvailable": {
+          "type": "string",
+          "description": "Whether the log has been generated or not.",
+          "enum": [
+            "True",
+            "False"
+          ],
+          "x-ms-enum": {
+            "name": "logAvailable",
+            "modelAsString": true
+          }
         }
       },
       "description": "Describes the properties of an digitalTwins/executionPlans."
