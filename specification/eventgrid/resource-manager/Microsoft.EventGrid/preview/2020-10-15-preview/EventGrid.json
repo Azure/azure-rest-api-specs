@@ -163,6 +163,9 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "OK"
+          },
           "202": {
             "description": "Accepted"
           },
@@ -619,6 +622,9 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "OK"
+          },
           "202": {
             "description": "Accepted"
           },
@@ -5250,7 +5256,7 @@
             }
           },
           "202": {
-            "description": "Topic regenerate key request accepted."
+            "description": "Accepted"
           },
           "default": {
             "description": "*** Error Responses: ***\n\n * 400 Bad Request.\n\n * 500 Internal Server Error."
@@ -5568,7 +5574,8 @@
           "x-ms-enum": {
             "name": "PublicNetworkAccess",
             "modelAsString": true
-          }
+          },
+          "default": "Enabled"
         },
         "inboundIpRules": {
           "description": "This can be used to restrict traffic from specific IPs instead of all IPs. Note: These are considered only if PublicNetworkAccess is enabled.",
@@ -5915,11 +5922,18 @@
         },
         "sku": {
           "$ref": "#/definitions/ResourceSku",
-          "description": "The Sku pricing tier for the domain."
+          "description": "The Sku pricing tier for the domain.",
+          "default": "Basic"
         },
         "identity": {
           "$ref": "#/definitions/IdentityInfo",
           "description": "Identity information for the resource."
+        },
+        "systemData": {
+          "description": "The system metadata relating to Domain resource.",
+          "type": "object",
+          "readOnly": true,
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
         }
       }
     },
@@ -5963,7 +5977,8 @@
           "x-ms-enum": {
             "name": "PublicNetworkAccess",
             "modelAsString": true
-          }
+          },
+          "default": "Enabled"
         },
         "inboundIpRules": {
           "description": "This can be used to restrict traffic from specific IPs instead of all IPs. Note: These are considered only if PublicNetworkAccess is enabled.",
@@ -6053,6 +6068,12 @@
           "$ref": "#/definitions/DomainTopicProperties",
           "description": "Properties of the Domain Topic.",
           "x-ms-client-flatten": true
+        },
+        "systemData": {
+          "description": "The system metadata relating to Domain Topic resource.",
+          "type": "object",
+          "readOnly": true,
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
         }
       }
     },
@@ -6579,7 +6600,8 @@
           "x-ms-client-flatten": true
         },
         "systemData": {
-          "description": "The system metadata relating to this resource.",
+          "description": "The system metadata relating to Event Channel resource.",
+          "type": "object",
           "readOnly": true,
           "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
         }
@@ -6655,6 +6677,7 @@
         },
         "eventDeliverySchema": {
           "description": "The event delivery schema for the event subscription.",
+          "default": "EventGridSchema",
           "enum": [
             "EventGridSchema",
             "CustomInputSchema",
@@ -6738,11 +6761,13 @@
         "maxDeliveryAttempts": {
           "format": "int32",
           "description": "Maximum number of delivery retry attempts for events.",
+          "default": 30,
           "type": "integer"
         },
         "eventTimeToLiveInMinutes": {
           "format": "int32",
           "description": "Time To Live (in minutes) for events.",
+          "default": 1440,
           "type": "integer"
         }
       }
@@ -6789,7 +6814,8 @@
       "properties": {
         "endpointUrl": {
           "description": "The URL that represents the endpoint of the destination of an event subscription.",
-          "type": "string"
+          "type": "string",
+          "x-ms-secret": true
         },
         "endpointBaseUrl": {
           "description": "The base URL that represents the endpoint of the destination of an event subscription.",
@@ -6799,11 +6825,13 @@
         "maxEventsPerBatch": {
           "format": "int32",
           "description": "Maximum number of events per batch.",
+          "default": 1,
           "type": "integer"
         },
         "preferredBatchSizeInKilobytes": {
           "format": "int32",
           "description": "Preferred batch size in Kilobytes.",
+          "default": 64,
           "type": "integer"
         },
         "azureActiveDirectoryTenantId": {
@@ -7159,11 +7187,13 @@
         "maxEventsPerBatch": {
           "format": "int32",
           "description": "Maximum number of events per batch.",
+          "default": 1,
           "type": "integer"
         },
         "preferredBatchSizeInKilobytes": {
           "format": "int32",
           "description": "Preferred batch size in Kilobytes.",
+          "default": 64,
           "type": "integer"
         },
         "deliveryAttributeMappings": {
@@ -7234,7 +7264,8 @@
           "x-ms-client-flatten": true
         },
         "systemData": {
-          "description": "The system metadata relating to this resource.",
+          "description": "The system metadata relating to Event Subscription resource.",
+          "type": "object",
           "readOnly": true,
           "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
         }
@@ -7440,7 +7471,8 @@
           "x-ms-client-flatten": true
         },
         "systemData": {
-          "description": "The system metadata relating to this resource.",
+          "description": "The system metadata relating to Partner Namespace resource.",
+          "type": "object",
           "readOnly": true,
           "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
         }
@@ -7601,7 +7633,8 @@
           "x-ms-client-flatten": true
         },
         "systemData": {
-          "description": "The system metadata relating to this resource.",
+          "description": "The system metadata relating to Partner Registration resource.",
+          "type": "object",
           "readOnly": true,
           "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
         }
@@ -7800,7 +7833,8 @@
           "description": "Identity information for the resource."
         },
         "systemData": {
-          "description": "The system metadata relating to this resource.",
+          "description": "The system metadata relating to Partner Topic resource.",
+          "type": "object",
           "readOnly": true,
           "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
         }
@@ -8144,7 +8178,8 @@
           "x-ms-enum": {
             "name": "PublicNetworkAccess",
             "modelAsString": true
-          }
+          },
+          "default": "Enabled"
         },
         "inboundIpRules": {
           "description": "This can be used to restrict traffic from specific IPs instead of all IPs. Note: These are considered only if PublicNetworkAccess is enabled.",
@@ -8185,7 +8220,8 @@
         },
         "sku": {
           "$ref": "#/definitions/ResourceSku",
-          "description": "The Sku pricing tier for the topic."
+          "description": "The Sku pricing tier for the topic.",
+          "default": "Basic"
         },
         "identity": {
           "$ref": "#/definitions/IdentityInfo",
@@ -8206,6 +8242,12 @@
         "extendedLocation": {
           "$ref": "#/definitions/ExtendedLocation",
           "description": "Extended location of the resource."
+        },
+        "systemData": {
+          "description": "The system metadata relating to Topic resource.",
+          "type": "object",
+          "readOnly": true,
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
         }
       }
     },
@@ -8249,7 +8291,8 @@
           "x-ms-enum": {
             "name": "PublicNetworkAccess",
             "modelAsString": true
-          }
+          },
+          "default": "Enabled"
         },
         "inboundIpRules": {
           "description": "This can be used to restrict traffic from specific IPs instead of all IPs. Note: These are considered only if PublicNetworkAccess is enabled.",
@@ -8462,6 +8505,7 @@
       "description": "The number of results to return per page for the list operation. Valid range for top parameter is 1 to 100. If not specified, the default number of results to be returned is 20 items per page.",
       "required": false,
       "type": "integer",
+      "format": "int32",
       "x-ms-parameter-location": "method"
     }
   },
