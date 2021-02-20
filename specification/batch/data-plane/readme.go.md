@@ -142,9 +142,9 @@ output-folder: $(go-sdk-folder)/services/$(namespace)/2016-02-01.3.0/$(namespace
 
 ### Tag: package-2015-12.2.2 and go
 
-These settings apply only when `--tag=package-2017-05.5.0 --go` is specified on the command line.
+These settings apply only when `--tag=2015-12.2.2 --go` is specified on the command line.
 Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
-``` yaml $(tag)=='package-2017-05.5.0' && $(go)
+``` yaml $(tag)=='2015-12.2.2' && $(go)
 output-folder: $(go-sdk-folder)/services/$(namespace)/2015-12-01.2.2/$(namespace)
 ```
