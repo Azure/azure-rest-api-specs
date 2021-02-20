@@ -1210,6 +1210,10 @@
           "description": "The ADLA resource ID.",
           "type": "string",
           "readOnly": true
+        },
+        "networkSettings": {
+          "description": "Network Settings",
+          "$ref": "#/definitions/NetworkSettings"
         }
       }
     },
@@ -1263,6 +1267,10 @@
         "encryption": {
           "description": "The encryption details of the workspace",
           "$ref": "#/definitions/EncryptionDetails"
+        },
+        "networkSettings": {
+          "description": "Network Settings",
+          "$ref": "#/definitions/NetworkSettings"
         }
       }
     },
@@ -1393,6 +1401,16 @@
         "value"
       ],
       "description": "The response to a list restorable dropped Sql pools request"
+    },
+    "NetworkSettings": {
+      "description": "Network Settings",
+      "type": "object",
+      "properties": {
+        "publicNetworkAccess": {
+          "description": "Enable or Disable pubic network access to workspace",
+          "type": "string"
+        }
+      }
     }
   },
   "parameters": {
