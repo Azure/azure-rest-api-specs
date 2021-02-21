@@ -923,7 +923,8 @@
         },
         "configurations": {
           "type": "object",
-          "description": "The cluster configurations."
+          "description": "The cluster configurations.",
+          "x-ms-secret": true
         }
       }
     },
@@ -1211,7 +1212,8 @@
         "minInstanceCount": {
           "type": "integer",
           "format": "int32",
-          "description": "The minimum instance count of the cluster."
+          "description": "The minimum instance count of the cluster.",
+          "x-ms-secret": true
         },
         "targetInstanceCount": {
           "type": "integer",
@@ -1251,11 +1253,13 @@
           "items": {
             "$ref": "./scriptActions.json#/definitions/ScriptAction"
           },
-          "description": "The list of script actions on the role."
+          "description": "The list of script actions on the role.",
+          "x-ms-secret": true
         },
         "encryptDataDisks": {
           "type": "boolean",
-          "description": "Indicates whether encrypt the data disks."
+          "description": "Indicates whether encrypt the data disks.",
+          "default": false
         }
       },
       "description": "Describes a role on the cluster."
@@ -1409,7 +1413,8 @@
           "x-ms-enum": {
             "name": "Tier",
             "modelAsString": false
-          }
+          },
+          "default": "Standard"
         },
         "clusterDefinition": {
           "$ref": "#/definitions/ClusterDefinition",
