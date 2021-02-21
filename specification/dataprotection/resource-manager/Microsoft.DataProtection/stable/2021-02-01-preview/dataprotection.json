@@ -1,0 +1,579 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2021-02-01-preview",
+    "title": "RecoveryServicesBackupClient",
+    "x-ms-code-generation-settings": {
+      "internalConstructors": false
+    }
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DataProtection/vaultGuards": {
+      "get": {
+        "tags": [
+          "VaultGuards"
+        ],
+        "summary": "Returns VaultGuards collection belonging to a subscription.",
+        "operationId": "VaultGuards_GetResourcesInSubscription",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/VaultGuardResourceList"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Get VaultGuards in Subscription": {
+            "$ref": "./examples/VaultGuardCRUD/GetVaultGuardsInSubscription.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataProtection/vaultGuards/{vaultGuardsName}": {
+      "put": {
+        "tags": [
+          "VaultGuards"
+        ],
+        "summary": "Creates or updates a VaultGuard resource belonging to a resource group.",
+        "operationId": "VaultGuards_Put",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "name": "vaultGuardsName",
+            "in": "path",
+            "description": "The name of VaultGuard",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "Request body for operation",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/VaultGuardResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/VaultGuardResource"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create VaultGuard": {
+            "$ref": "./examples/VaultGuardCRUD/PutVaultGuard.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "VaultGuards"
+        ],
+        "summary": "Deletes a VaultGuard resource from the resource group.",
+        "operationId": "VaultGuards_Delete",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "name": "vaultGuardsName",
+            "in": "path",
+            "description": "The name of VaultGuard",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "NoContent"
+          }
+        },
+        "x-ms-examples": {
+          "Delete VaultGuard": {
+            "$ref": "./examples/VaultGuardCRUD/DeleteVaultGuard.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "VaultGuards"
+        ],
+        "summary": "Updates a VaultGuard resource belonging to a resource group. For example, updating tags for a resource.",
+        "operationId": "VaultGuards_Patch",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "name": "vaultGuardsName",
+            "in": "path",
+            "description": "The name of VaultGuard",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "Request body for operation",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PatchResourceRequestInput"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/VaultGuardResource"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Patch VaultGuard": {
+            "$ref": "./examples/VaultGuardCRUD/PatchVaultGuard.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataProtection/vaultGuards/{vaultGuardsName}/{operationName}": {
+      "get": {
+        "tags": [
+          "VaultGuards"
+        ],
+        "summary": "Returns collection of operation request objects for a critical operation protected by the given vault guard resource.",
+        "operationId": "VaultGuards_GetOperationRequestObjects",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "name": "vaultGuardsName",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "operationName",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ObjectResourceList"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List OperationsRequestObject": {
+            "$ref": "./examples/VaultGuardCRUD/ListVaultGuardOperationsRequestObject.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataProtection/vaultGuards/{vaultGuardsName}/{operationName}/{operationRequestName}": {
+      "get": {
+        "tags": [
+          "VaultGuards"
+        ],
+        "summary": "Returns collection of operation request objects for a critical operation protected by the given vault guard resource.",
+        "operationId": "VaultGuards_GetDefaultOperationRequestObject",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "name": "vaultGuardsName",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "operationName",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "operationRequestName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ObjectResource"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get DefaultOperationsRequestObject": {
+            "$ref": "./examples/VaultGuardCRUD/GetDefaultOperationsRequestObject.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "DppIdentityDetails": {
+      "description": "The identity details to be provided in the input, namely the identity type and the user Assigned Identities",
+      "type": "object",
+      "properties": {
+        "type": {
+          "description": "The identityType which can be either SystemAssigned or None",
+          "type": "string"
+        },
+        "identityUrl": {
+          "description": "Identity Url",
+          "type": "string",
+          "readOnly": true
+        },
+        "principalId": {
+          "description": "The object ID of the service principal object for the managed identity that is used to grant role-based access to an Azure resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "tenantId": {
+          "description": "A Globally Unique Identifier (GUID) that represents the Azure AD tenant where the resource is now a member.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "DppResourceList": {
+      "description": "Base for all lists of V2 resources.",
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "The uri to fetch the next page of resources. Call ListNext() fetches next page of resources.",
+          "type": "string"
+        }
+      }
+    },
+    "DppTrackedResource": {
+      "description": "Resource under Microsoft.DataProtection provider namespace having Identity, location, tags etc.",
+      "type": "object",
+      "properties": {
+        "location": {
+          "description": "Resource location.",
+          "type": "string"
+        },
+        "tags": {
+          "description": "Resource tags.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "eTag": {
+          "description": "Optional ETag.",
+          "type": "string"
+        },
+        "identity": {
+          "$ref": "#/definitions/DppIdentityDetails",
+          "description": "Input Managed Identity Details"
+        },
+        "id": {
+          "description": "Resource Id represents the complete path to the resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "Resource name associated with the resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "Resource type represents the complete path of the form Namespace/ResourceType/ResourceType/...",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "DppTrackedResourceList": {
+      "description": "Base for all lists of V2 resources having Identity, location, tags etc.",
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "The uri to fetch the next page of resources. Call ListNext() fetches next page of resources.",
+          "type": "string"
+        }
+      }
+    },
+    "ObjectResourceList": {
+      "description": "List of Object resources",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DppResourceList"
+        }
+      ],
+      "properties": {
+        "value": {
+          "description": "List of resources.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ObjectResource"
+          }
+        }
+      }
+    },
+    "ObjectResource": {
+      "description": "Object resource",
+      "type": "object"
+    },
+    "PatchResourceRequestInput": {
+      "description": "Request content for PATCH BackupVault API",
+      "type": "object",
+      "properties": {
+        "tags": {
+          "description": "Resource tags.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "identity": {
+          "$ref": "#/definitions/DppIdentityDetails",
+          "description": "Input Managed Identity Details"
+        }
+      }
+    },
+    "VaultGuard": {
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "description": "Provisioning state of the BackupVault resource",
+          "enum": [
+            "Failed",
+            "Provisioning",
+            "Updating",
+            "Succeeded",
+            "Deleting",
+            "Unknown"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": true
+          }
+        },
+        "lastLockUpdateTime": {
+          "format": "date-time",
+          "description": "LastTime VaultGuardResource is updated",
+          "type": "string",
+          "readOnly": true
+        },
+        "allowAutoApprovals": {
+          "description": "This flag indicates whether auto approval is allowed or not.",
+          "type": "boolean",
+          "readOnly": true
+        },
+        "vaultGuardOperations": {
+          "description": "{readonly} List of operation details those are protected by the Vault Guard resource",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VaultGuardOperation"
+          },
+          "readOnly": true
+        },
+        "description": {
+          "description": "Description about the pre-req steps to perform all the critical operations.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "VaultGuardOperation": {
+      "description": "This class contains all the details about a critical operation.",
+      "type": "object",
+      "properties": {
+        "vaultCriticalOperation": {
+          "description": "Name of the critical operation.",
+          "type": "string",
+          "readOnly": true
+        },
+        "requestResourceType": {
+          "description": "Type of resource request.",
+          "type": "string",
+          "readOnly": true
+        },
+        "isProtectedByVaultGuard": {
+          "description": "This flag indicates whether this operation is protected by this Vault guard resource or not.",
+          "type": "boolean",
+          "readOnly": true
+        }
+      }
+    },
+    "VaultGuardResource": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/DppTrackedResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/VaultGuard",
+          "description": "VaultGuardResource properties"
+        }
+      }
+    },
+    "VaultGuardResourceList": {
+      "description": "List of VaultGuard resources",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DppTrackedResourceList"
+        }
+      ],
+      "properties": {
+        "value": {
+          "description": "List of resources.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VaultGuardResource"
+          }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "SubscriptionId": {
+      "name": "subscriptionId",
+      "in": "path",
+      "description": "The subscription Id.",
+      "required": true,
+      "type": "string"
+    },
+    "ResourceGroupName": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "description": "The name of the resource group where the recovery services vault is present.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "ApiVersion": {
+      "name": "api-version",
+      "in": "query",
+      "description": "Client Api Version.",
+      "required": true,
+      "type": "string"
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account."
+      }
+    }
+  },
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ]
+}
