@@ -388,12 +388,27 @@
             "type": "string"
           }
         },
-        "vmsizes": {
+        "OsType": {
+          "description": "The list of OS types.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "VMSizes": {
           "description": "The list of virtual machine sizes.",
           "type": "array",
           "items": {
             "type": "string"
           }
+        },
+        "ESPApplied": {
+          "description": "Whether apply for ESP cluster. 'true' means only for ESP, 'false' means only for non-ESP, null or empty string or others mean for both.",
+          "type": "string"
+        },
+        "ComputeIsolationSupported": {
+          "description": "Whether support compute isloation. 'true' means only for ComputeIsolationEnabled, 'false' means only for regular cluster.",
+          "type": "string"
         }
       },
       "readOnly": true

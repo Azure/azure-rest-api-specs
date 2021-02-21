@@ -716,6 +716,190 @@
         },
         "x-ms-long-running-operation": true
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HDInsight/clusters/{clusterName}/upgrades": {
+      "post": {
+        "tags": [
+          "Clusters"
+        ],
+        "operationId": "Clusters_InitiateClusterUpgrade",
+        "description": "Initiates the cluster upgrade.",
+        "x-ms-examples": {
+          "Initiate cluster upgrade": {
+            "$ref": "./examples/HDI_Clusters_InitiateClusterUpgrade.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/InitiateClusterUpgradeParameters"
+            },
+            "description": "The parameter for initiating cluster upgrade ."
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./operations.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "OK response definition."
+          },
+          "202": {
+            "description": "Accepted response definition"
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "put": {
+        "tags": [
+          "Clusters"
+        ],
+        "operationId": "Clusters_FinalizeClusterUpgrade",
+        "description": "Finalizes the cluster upgrade.",
+        "x-ms-examples": {
+          "Initiate cluster upgrade": {
+            "$ref": "./examples/HDI_Clusters_FinalizeClusterUpgrade.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/FinalizeClusterUpgradeParameters"
+            },
+            "description": "The parameter for finalizing cluster upgrade ."
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./operations.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "OK response definition."
+          },
+          "202": {
+            "description": "Accepted response definition"
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "get": {
+        "tags": [
+          "Clusters"
+        ],
+        "operationId": "Clusters_GetClusterUpgradeHistory",
+        "description": "Gets the cluster upgrade history.",
+        "x-ms-examples": {
+          "Initiate cluster upgrade": {
+            "$ref": "./examples/HDI_Clusters_GetClusterUpgradeHistory.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./operations.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "OK response definition.",
+            "schema": {
+              "$ref": "#/definitions/ClusterUpgradeHistoryResult"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HDInsight/clusters/{clusterName}/availableUpgrades": {
+      "get": {
+        "tags": [
+          "Clusters"
+        ],
+        "operationId": "Clusters_GetClusterAvailableUpgrades",
+        "description": "Gets the cluster available upgrades.",
+        "x-ms-examples": {
+          "Initiate cluster upgrade": {
+            "$ref": "./examples/HDI_Clusters_GetClusterAvailableUpgrades.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./operations.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "OK response definition.",
+            "schema": {
+              "$ref": "#/definitions/ClusterAvailableUpgradesResult"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -762,6 +946,13 @@
         "clientGroupInfo": {
           "$ref": "#/definitions/ClientGroupInfo",
           "description": "The information of AAD security group."
+        },
+        "configurationOverride": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "The configurations that need to be overriden."
         }
       }
     },
@@ -1881,6 +2072,156 @@
           "type": "string"
         }
       }
+    },
+    "InitiateClusterUpgradeParameters": {
+      "type": "object",
+      "description": "The initiate cluster upgrade parameter.",
+      "properties": {
+        "component": {
+          "description": "The component that needs to be upgraded.",
+          "type": "string"
+        },
+        "version": {
+          "description": "The target upgrade version.",
+          "type": "string"
+        },
+        "type": {
+          "description": "The upgrade type.",
+          "type": "string"
+        },
+        "holdBeforeFinalize": {
+          "description": "The flag that indicates whether hold before finalize upgrade.",
+          "type": "boolean"
+        },
+        "autoRollbackOnFailureEnabled": {
+          "description": "The flag that indicates whether roll back automatically when upgrade failed.",
+          "type": "boolean"
+        }
+      }
+    },
+    "FinalizeClusterUpgradeParameters": {
+      "type": "object",
+      "description": "The finalize cluster upgrade parameters",
+      "properties": {
+        "status": {
+          "description": "The upgrade status",
+          "type": "string"
+        }
+      }
+    },
+    "ClusterUpgradeExecutionDetails": {
+      "type": "object",
+      "description": "The cluster upgrade execution details.",
+      "properties": {
+        "id": {
+          "description": "The upgrade id.",
+          "type": "string"
+        },
+        "type": {
+          "description": "The upgrade type.",
+          "type": "string"
+        },
+        "component": {
+          "description": "The component that needs to be upgraded.",
+          "type": "string"
+        },
+        "status": {
+          "description": "The cluster upgrade status.",
+          "type": "string"
+        },
+        "holdBeforeFinalize": {
+          "description": "The flag that indicates whether hold before finalize upgrade.",
+          "type": "boolean"
+        },
+        "progressPercent": {
+          "description": "The cluster upgrade process percent.",
+          "type": "integer",
+          "format": "int32"
+        },
+        "fromVersion": {
+          "description": "The component version that upgrades from.",
+          "type": "string"
+        },
+        "toVersion": {
+          "description": "The component version that upgrades to.",
+          "type": "string"
+        },
+        "submitTime": {
+          "description": "The cluster upgrade submit time.",
+          "type": "string",
+          "format": "date-time"
+        },
+        "startTime": {
+          "description": "The cluster upgrade start time.",
+          "type": "string",
+          "format": "date-time"
+        },
+        "endTime": {
+          "description": "The cluster upgrade end time.",
+          "type": "string",
+          "format": "date-time"
+        },
+        "holdTime": {
+          "description": "The cluster upgrade hold time.",
+          "type": "string",
+          "format": "date-time"
+        },
+        "errorDetails": {
+          "description": "The upgrade error details.",
+          "type": "string"
+        },
+        "autoRollbackOnFailureEnabled": {
+          "description": "The flag that indicates whether roll back automatically when upgrade failed.",
+          "type": "boolean"
+        }
+      }
+    },
+    "ClusterUpgradeHistoryResult": {
+      "properties": {
+        "value": {
+          "description": "The list of cluster upgrade execution details.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ClusterUpgradeExecutionDetails"
+          }
+        }
+      },
+      "description": "The cluster upgrade history."
+    },
+    "ClusterAvailableUpgradeProperties": {
+      "type": "object",
+      "description": "The available cluster upgrade properties.",
+      "properties": {
+        "component": {
+          "description": "The component that can be upgraded.",
+          "type": "string"
+        },
+        "version": {
+          "description": "The upgrade version.",
+          "type": "string"
+        },
+        "releaseNotes": {
+          "description": "The release notes.",
+          "type": "string"
+        },
+        "availableDate": {
+          "description": "The availate date",
+          "type": "string",
+          "format": "date"
+        }
+      }
+    },
+    "ClusterAvailableUpgradesResult": {
+      "properties": {
+        "value": {
+          "description": "The list of cluster upgrade execution details.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ClusterAvailableUpgradeProperties"
+          }
+        }
+      },
+      "description": "The cluster available upgrades."
     },
     "Resource": {
       "description": "The core properties of ARM resources",
