@@ -230,6 +230,12 @@
             "schema": {
               "$ref": "#/definitions/RoleAssignment"
             }
+          },
+          "default": {
+            "description": "error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-examples": {
@@ -528,6 +534,24 @@
         "canDelegate": {
           "type": "boolean",
           "description": "The Delegation flag for the role assignment"
+        },
+        "createdOn": {
+          "type": "string",
+          "description": "Time it was created",
+          "format": "date-time"
+        },
+        "updatedOn": {
+          "type": "string",
+          "description": "Time it was updated",
+          "format": "date-time"
+        },
+        "createdBy": {
+          "type": "string",
+          "description": "Id of the user who created the assignment"
+        },
+        "updatedBy": {
+          "type": "string",
+          "description": "Id of the user who updated the assignment"
         }
       },
       "description": "Role assignment properties with scope."

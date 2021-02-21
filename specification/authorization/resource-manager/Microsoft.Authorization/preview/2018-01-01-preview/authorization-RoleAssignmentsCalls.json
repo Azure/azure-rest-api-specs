@@ -230,6 +230,12 @@
             "schema": {
               "$ref": "#/definitions/RoleAssignment"
             }
+          },
+          "default": {
+            "description": "error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-examples": {
@@ -508,6 +514,44 @@
         "canDelegate": {
           "type": "boolean",
           "description": "The Delegation flag for the role assignment"
+        },
+        "createdOn": {
+          "type": "string",
+          "description": "Time it was created",
+          "format": "date-time"
+        },
+        "updatedOn": {
+          "type": "string",
+          "description": "Time it was updated",
+          "format": "date-time"
+        },
+        "createdBy": {
+          "type": "string",
+          "description": "Id of the user who created the assignment"
+        },
+        "updatedBy": {
+          "type": "string",
+          "description": "Id of the user who updated the assignment"
+        },
+        "principalType": {
+          "type": "string",
+          "description": "The principal type of the assigned principal ID.",
+          "enum": [
+            "User",
+            "Group",
+            "ServicePrincipal",
+            "Unknown",
+            "DirectoryRoleTemplate",
+            "ForeignGroup",
+            "Application",
+            "MSI",
+            "DirectoryObjectOrGroup",
+            "Everyone"
+          ],
+          "x-ms-enum": {
+            "name": "PrincipalType",
+            "modelAsString": true
+          }
         }
       },
       "description": "Role assignment properties with scope."
