@@ -194,7 +194,7 @@
       }
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.HDInsight/locations/{location}/checkNameAvailability": {
-      "get": {
+      "post": {
         "tags": [
           "Regions"
         ],
@@ -202,7 +202,7 @@
         "description": "Check the cluster name is available or not.",
         "x-ms-examples": {
           "Get the subscription usages for specific location": {
-            "$ref": "./examples/CheckClusterNameAvailability.json"
+            "$ref": "./examples/HDI_Locations_CheckClusterNameAvailability.json"
           }
         },
         "parameters": [
@@ -216,11 +216,11 @@
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "name": "spec",
+            "name": "parameters",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/NameAvailabilityCheckRequestSpec"
+              "$ref": "#/definitions/NameAvailabilityCheckRequestParameters"
             }
           }
         ],
@@ -234,14 +234,14 @@
           "200": {
             "description": "OK response definition.",
             "schema": {
-              "$ref": "#/definitions/NameAvailabilityCheckResponseSpec"
+              "$ref": "#/definitions/NameAvailabilityCheckResult"
             }
           }
         }
       }
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.HDInsight/locations/{location}/validateCreateRequest": {
-      "get": {
+      "post": {
         "tags": [
           "Regions"
         ],
@@ -249,7 +249,7 @@
         "description": "Validate the cluster create request spec is valid or not.",
         "x-ms-examples": {
           "Get the subscription usages for specific location": {
-            "$ref": "./examples/ValidateClusterCreateRequest.json"
+            "$ref": "./examples/HDI_Locations_ValidateClusterCreateRequest.json"
           }
         },
         "parameters": [
@@ -263,11 +263,11 @@
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "name": "spec",
+            "name": "parameters",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ClusterCreateRequestValidationSpec"
+              "$ref": "#/definitions/ClusterCreateRequestValidationParameters"
             }
           }
         ],
@@ -281,7 +281,7 @@
           "200": {
             "description": "OK response definition.",
             "schema": {
-              "$ref": "#/definitions/ClusterCreateValidationResponseSpec"
+              "$ref": "#/definitions/ClusterCreateValidationResult"
             }
           }
         }
@@ -783,7 +783,7 @@
         }
       }
     },
-    "NameAvailabilityCheckRequestSpec": {
+    "NameAvailabilityCheckRequestParameters": {
       "type": "object",
       "description": "The request spec of checking name availability.",
       "properties": {
@@ -797,7 +797,7 @@
         }
       }
     },
-    "NameAvailabilityCheckResponseSpec": {
+    "NameAvailabilityCheckResult": {
       "type": "object",
       "description": "The response spec of checking name availability.",
       "properties": {
@@ -817,7 +817,7 @@
         }
       }
     },
-    "ClusterCreateRequestValidationSpec": {
+    "ClusterCreateRequestValidationParameters": {
       "type": "object",
       "description": "The cluster create request specification.",
       "allOf": [
@@ -840,7 +840,7 @@
         }
       }
     },
-    "ClusterCreateValidationResponseSpec": {
+    "ClusterCreateValidationResult": {
       "type": "object",
       "description": "The response of cluster create request validation.",
       "properties": {
