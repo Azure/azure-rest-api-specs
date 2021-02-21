@@ -349,7 +349,7 @@
         },
         "severity": {
           "type": "number",
-          "description": "Severity of the alert. Should be an integer between [0-4]. Value of 0 is severest",
+          "description": "Severity of the alert. Should be an integer between [0-4]. Value of 0 is severest. Relevant and required only for rules of the kind LogAlert.",
           "enum": [
             "0",
             "1",
@@ -376,24 +376,24 @@
         "evaluationFrequency": {
           "type": "string",
           "format": "duration",
-          "description": "How often the scheduled query rule is evaluated represented in ISO 8601 duration format."
+          "description": "How often the scheduled query rule is evaluated represented in ISO 8601 duration format. Relevant and required only for rules of the kind LogAlert."
         },
         "windowSize": {
           "type": "string",
           "format": "duration",
-          "description": "The period of time (in ISO 8601 duration format) on which the Alert query will be executed (bin size)."
+          "description": "The period of time (in ISO 8601 duration format) on which the Alert query will be executed (bin size). Relevant and required only for rules of the kind LogAlert."
         },
         "overrideQueryTimeRange": {
           "type": "string",
           "format": "duration",
-          "description": "If specified then overrides the query time range (default is WindowSize*NumberOfEvaluationPeriods)"
+          "description": "If specified then overrides the query time range (default is WindowSize*NumberOfEvaluationPeriods). Relevant only for rules of the kind LogAlert."
         },
         "targetResourceTypes": {
           "type": "array",
           "items": {
             "type": "string"
           },
-          "description": "List of resource type of the target resource(s) on which the alert is created/updated. For example if the scope is a resource group and targetResourceTypes is Microsoft.Compute/virtualMachines, then a different alert will be fired for each virtual machine in the resource group which meet the alert criteria"
+          "description": "List of resource type of the target resource(s) on which the alert is created/updated. For example if the scope is a resource group and targetResourceTypes is Microsoft.Compute/virtualMachines, then a different alert will be fired for each virtual machine in the resource group which meet the alert criteria. Relevant only for rules of the kind LogAlert"
         },
         "criteria": {
           "$ref": "#/definitions/ScheduledQueryRuleCriteria",
@@ -438,8 +438,15 @@
       "properties": {
         "kind": {
           "type": "string",
-          "readOnly": true,
-          "description": "Metadata used by portal/tooling/etc to render different UX experiences for resources of the same type; e.g. ApiApps are a kind of Microsoft.Web/sites type.  If supported, the resource provider must validate and persist this value."
+          "description": "Indicates the type of scheduled query rule. The default is LogAlert.",
+          "enum": [
+            "LogAlert",
+            "LogToMetric"
+          ],
+          "x-ms-enum": {
+            "name": "Kind",
+            "modelAsString": true
+          }
         },
         "etag": {
           "type": "string",
@@ -457,9 +464,6 @@
           "description": "The rule properties of the resource.",
           "required": [
             "enabled",
-            "severity",
-            "evaluationFrequency",
-            "windowSize",
             "criteria",
             "scopes"
           ]
@@ -519,7 +523,7 @@
         },
         "timeAggregation": {
           "type": "string",
-          "description": "Aggregation type",
+          "description": "Aggregation type. Relevant and required only for rules of the kind LogAlert.",
           "enum": [
             "Count",
             "Average",
@@ -534,11 +538,11 @@
         },
         "metricMeasureColumn": {
           "type": "string",
-          "description": "The column containing the metric measure number."
+          "description": "The column containing the metric measure number. Relevant only for rules of the kind LogAlert."
         },
         "resourceIdColumn": {
           "type": "string",
-          "description": "The column containing the resource id. The content of the column must be a uri formatted as resource id"
+          "description": "The column containing the resource id. The content of the column must be a uri formatted as resource id. Relevant only for rules of the kind LogAlert."
         },
         "dimensions": {
           "type": "array",
@@ -560,16 +564,16 @@
             "name": "conditionOperator",
             "modelAsString": true
           },
-          "description": "The criteria operator."
+          "description": "The criteria operator. Relevant and required only for rules of the kind LogAlert."
         },
         "threshold": {
           "type": "number",
           "format": "double",
-          "description": "the criteria threshold value that activates the alert."
+          "description": "the criteria threshold value that activates the alert. Relevant and required only for rules of the kind LogAlert."
         },
         "failingPeriods": {
           "type": "object",
-          "description": "The minimum number of violations required within the selected lookback time window required to raise an alert.",
+          "description": "The minimum number of violations required within the selected lookback time window required to raise an alert. Relevant only for rules of the kind LogAlert.",
           "properties": {
             "numberOfEvaluationPeriods": {
               "type": "integer",
@@ -584,6 +588,10 @@
               "description": "The number of violations to trigger an alert. Should be smaller or equal to numberOfEvaluationPeriods. Default value is 1"
             }
           }
+        },
+        "metricName": {
+          "type": "string",
+          "description": "The name of the metric to be sent. Relevant and required only for rules of the kind LogToMetric."
         }
       },
       "required": [
