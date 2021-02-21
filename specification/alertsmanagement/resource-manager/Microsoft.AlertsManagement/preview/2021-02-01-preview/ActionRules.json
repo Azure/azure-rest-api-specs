@@ -855,8 +855,11 @@
           "$ref": "#/definitions/SchedulingConfig"
         },
         "actions": {
+          "type": "array",
           "description": "Actions to be applied",
-          "$ref": "#/definitions/Actions"
+          "items": {
+            "$ref": "#/definitions/Actions"
+          }
         },
         "description": {
           "type": "string",
@@ -871,29 +874,62 @@
     "Actions": {
       "type": "object",
       "description": "Actions to be applied",
+      "discriminator": "actionType",
+      "required": [
+        "actionType"
+      ],
       "properties": {
-        "addActionGroups": {
-          "description": "Action groups to add to action rule",
-          "$ref": "#/definitions/ActionGroups"
-        },
-        "removeAllActionGroups": {
-          "type": "boolean",
-          "description": "Indicates if all action groups should be removed"
-        }
-      }
-    },
-    "ActionGroups": {
-      "type": "object",
-      "description": "Action group Ids to add",
-      "properties": {
-        "actionGroupIds": {
-          "description": "List of action group Ids",
-          "type": "array",
-          "items": {
-            "type": "string"
+        "actionType": {
+          "type": "string",
+          "description": "Action that should be applied",
+          "enum": [
+            "AddActionGroups",
+            "RemoveAllActionGroups"
+          ],
+          "x-ms-enum": {
+            "name": "actionType",
+            "modelAsString": true
           }
         }
       }
+    },
+    "AddActionGroups": {
+      "x-ms-discriminator-value": "AddActionGroups",
+      "type": "object",
+      "description": "Add action groups to action rule",
+      "required": [
+        "actionGroupIds"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Actions"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "actionGroupIds": {
+              "description": "List of action group Ids to add to action rule",
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "RemoveAllActionGroups": {
+      "x-ms-discriminator-value": "RemoveAllActionGroups",
+      "type": "object",
+      "description": "Indicates if all action groups should be removed",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Actions"
+        },
+        {
+          "type": "object"
+        }
+      ]
     },
     "ActionRulesList": {
       "description": "List of action rules",

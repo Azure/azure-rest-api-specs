@@ -56,9 +56,11 @@
                   }
                 ]
               },
-              "actions": {
-                "removeAllActionGroups": true
-              },
+              "actions": [
+                {
+                "actionType": "RemoveAllActionGroups"
+                }
+              ],
               "description": "Action rule on resource group for daily suppression",
               "enabled": true
             },
@@ -103,14 +105,14 @@
                   ]
                 }
               },
-              "actions": {
-                "addActionGroups": {
+              "actions": [
+                {
+                  "actionType": "AddActionGroups",
                   "actionGroupIds": [
                     "/subscriptions/1e3ff1c0-771a-4119-a03b-be82a51e232d/resourceGroups/alertscorrelationrg/providers/Microsoft.insights/actiongroups/testAG"
                   ]
-                },
-                "removeAllActionGroups": false
-              },
+                }
+              ],
               "description": "Action rule on resource group for sending email",
               "enabled": true
             },
