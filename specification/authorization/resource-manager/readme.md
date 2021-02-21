@@ -69,6 +69,8 @@ directive:
     where: $.definitions.DenyAssignmentProperties.properties.isSystemProtected
     from: authorization-DenyAssignmentGetCalls.json
     reason: for this case the result of the proposed change would resemble a boolean anyways
+  - suppress: R4024
+    reason: Preview versions still in use
 ```
 
 ### Tag: package-2020-10-01-preview

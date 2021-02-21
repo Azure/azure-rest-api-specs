@@ -43,10 +43,10 @@
         "description": "Gets deny assignments for a resource.",
         "parameters": [
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/ResourceProviderNamespaceParameter"
@@ -75,7 +75,7 @@
             "description": "The name of the resource to get deny assignments for."
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/FilterParameter"
@@ -87,6 +87,12 @@
             "schema": {
               "$ref": "#/definitions/DenyAssignmentListResult"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-pageable": {
@@ -94,7 +100,7 @@
         },
         "x-ms-odata": "#/definitions/DenyAssignmentFilter",
         "x-ms-examples": {
-          "GetConfigurations": {
+          "List deny assignments for resource": {
             "$ref": "./examples/GetDenyAssignmentsForResource.json"
           }
         }
@@ -109,13 +115,13 @@
         "description": "Gets deny assignments for a resource group.",
         "parameters": [
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/FilterParameter"
@@ -127,6 +133,12 @@
             "schema": {
               "$ref": "#/definitions/DenyAssignmentListResult"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-pageable": {
@@ -134,7 +146,7 @@
         },
         "x-ms-odata": "#/definitions/DenyAssignmentFilter",
         "x-ms-examples": {
-          "GetConfigurations": {
+          "List deny assignments for resource group": {
             "$ref": "./examples/GetDenyAssignmentsForResourceGroup.json"
           }
         }
@@ -149,10 +161,10 @@
         "description": "Gets all deny assignments for the subscription.",
         "parameters": [
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/FilterParameter"
@@ -164,6 +176,12 @@
             "schema": {
               "$ref": "#/definitions/DenyAssignmentListResult"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-pageable": {
@@ -171,7 +189,7 @@
         },
         "x-ms-odata": "#/definitions/DenyAssignmentFilter",
         "x-ms-examples": {
-          "GetConfigurations": {
+          "List deny assignments for subscription": {
             "$ref": "./examples/GetAllDenyAssignments.json"
           }
         }
@@ -201,7 +219,7 @@
             "description": "The ID of the deny assignment to get."
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -210,10 +228,16 @@
             "schema": {
               "$ref": "#/definitions/DenyAssignment"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-examples": {
-          "GetConfigurations": {
+          "Get deny assignment by name": {
             "$ref": "./examples/GetDenyAssignmentByNameId.json"
           }
         }
@@ -236,7 +260,7 @@
             "x-ms-skip-url-encoding": true
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -245,10 +269,16 @@
             "schema": {
               "$ref": "#/definitions/DenyAssignment"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-examples": {
-          "GetConfigurations": {
+          "Get deny assignment by ID": {
             "$ref": "./examples/GetDenyAssignmentById.json"
           }
         }
@@ -271,7 +301,7 @@
             "x-ms-skip-url-encoding": true
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/FilterParameter"
@@ -283,6 +313,12 @@
             "schema": {
               "$ref": "#/definitions/DenyAssignmentListResult"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-pageable": {
@@ -290,7 +326,7 @@
         },
         "x-ms-odata": "#/definitions/DenyAssignmentFilter",
         "x-ms-examples": {
-          "GetConfigurations": {
+          "List deny assignments for scope": {
             "$ref": "./examples/GetDenyAssignmentByScope.json"
           }
         }
@@ -452,28 +488,6 @@
     }
   },
   "parameters": {
-    "SubscriptionIdParameter": {
-      "name": "subscriptionId",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "The ID of the target subscription."
-    },
-    "ApiVersionParameter": {
-      "name": "api-version",
-      "in": "query",
-      "required": true,
-      "type": "string",
-      "description": "The API version to use for this operation."
-    },
-    "ResourceGroupNameParameter": {
-      "name": "resourceGroupName",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "The name of the resource group.",
-      "x-ms-parameter-location": "method"
-    },
     "ResourceProviderNamespaceParameter": {
       "name": "resourceProviderNamespace",
       "in": "path",
