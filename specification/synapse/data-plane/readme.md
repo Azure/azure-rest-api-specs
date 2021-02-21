@@ -47,6 +47,19 @@ tag: package-vnet-2019-06-01-preview
 tag: package-monitoring-2019-11-01-preview
 ```
 
+``` yaml $(package-idw)
+tag: package-idw-2020-12-01
+```
+
+### Tag: package-spark-2019-11-01-preview
+
+These settings apply only when `--tag=package-idw-2020-12-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-idw-2020-12-01'
+input-file:
+- Microsoft.Synapse/stable/2020-12-01/industryDataWorkbench.json
+```
+
 ### Tag: package-spark-2019-11-01-preview
 
 These settings apply only when `--tag=package-spark-2019-11-01-preview` is specified on the command line.

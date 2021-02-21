@@ -1,0 +1,254 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2020-12-01",
+    "title": "Industry Data Workbench APIs in Synpase"
+  },
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{endpoint}",
+    "useSchemePrefix": false,
+    "parameters": [
+      {
+        "$ref": "#/parameters/Endpoint"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "paths": {
+    "/idw/builtinmodels": {
+      "get": {
+        "tags": [
+          "IndustryDataWorkbench"
+        ],
+        "operationId": "Idw_ListBuiltinModels",
+        "description": "List builtin models of Industry Data Workbench.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/DatabaseEntity"
+              }
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List role assignments": {
+            "$ref": "./examples/Idw_ListBuiltinModels.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "DatabaseEntity": {
+      "type": "object",
+      "properties": {
+        "source": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/DataSource"
+            }
+          ]
+        },
+        "origin": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/OperationalCatalog"
+            }
+          ]
+        },
+        "originObjectId": {
+          "type": "string"
+        },
+        "objectId": {
+          "type": "string"
+        },
+        "objectVersion": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "name": {
+          "type": "string"
+        },
+        "entityType": {
+          "enum": [
+            "DATABASE",
+            "TABLE",
+            "SCHEMA",
+            "VIEW",
+            "FUNCTION",
+            "ROLEASSIGNMENT"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "SASEntityType",
+            "modelAsString": true
+          }
+        },
+        "publishStatus": {
+          "enum": [
+            "NOTPUBLISHED",
+            "PUBLISHED"
+          ],
+          "type": "string"
+        },
+        "properties": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "DataSource": {
+      "type": "object",
+      "properties": {
+        "provider": {
+          "type": "string"
+        },
+        "location": {
+          "type": "string"
+        },
+        "properties": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "OperationalCatalog": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "enum": [
+            "SPARK",
+            "SQLOD",
+            "SQLDW",
+            "MASTER",
+            "SCOPE"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "SASOriginType",
+            "modelAsString": true
+          }
+        },
+        "instanceId": {
+          "type": "string"
+        }
+      }
+    },
+    "ErrorResponse": {
+      "description": "Standard error response.",
+      "type": "object",
+      "properties": {
+        "error": {
+          "description": "Standard error object.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/Error"
+            }
+          ]
+        }
+      }
+    },
+    "Error": {
+      "description": "Standard error object.",
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "Server-defined set of error codes.",
+          "type": "string",
+          "readOnly": true
+        },
+        "message": {
+          "description": "Human-readable representation of the error.",
+          "type": "string",
+          "readOnly": true
+        },
+        "target": {
+          "description": "Target of the error.",
+          "type": "string",
+          "readOnly": true
+        },
+        "details": {
+          "description": "Array of details about specific errors that led to this reported error.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Error"
+          },
+          "readOnly": true
+        },
+        "innerError": {
+          "description": "Object containing more specific information than  the current object about the error.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/InnerError"
+            }
+          ],
+          "readOnly": true
+        }
+      }
+    },
+    "InnerError": {
+      "description": "Inner error containing list of errors.",
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "Specific error code than was provided by the containing error.",
+          "type": "string",
+          "readOnly": true
+        },
+        "innerError": {
+          "description": "Object containing more specific information than the current object about the error.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/InnerError"
+            }
+          ],
+          "readOnly": true
+        }
+      },
+      "additionalProperties": {
+        "type": "object"
+      }
+    }
+  },
+  "parameters": {
+    "Endpoint": {
+      "name": "endpoint",
+      "description": "The workspace development endpoint, for example https://myworkspace.dev.azuresynapse.net.",
+      "required": true,
+      "type": "string",
+      "in": "path",
+      "x-ms-skip-url-encoding": true,
+      "x-ms-parameter-location": "client"
+    },
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "The Synapse client API Version."
+    }
+  }
+}
