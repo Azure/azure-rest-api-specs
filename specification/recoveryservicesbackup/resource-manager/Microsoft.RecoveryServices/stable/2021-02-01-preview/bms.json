@@ -1,0 +1,624 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2021-02-01-preview",
+    "title": "RecoveryServicesBackupClient",
+    "x-ms-code-generation-settings": {
+      "internalConstructors": false
+    }
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupconfig/vaultconfig": {
+      "put": {
+        "tags": [
+          "BackupResourceVaultConfigs"
+        ],
+        "description": "PutResourceConfig API to updates vault security and SoftDelete state for vault\r\nThis Put call is created due to ARM template non support for PATCH apis",
+        "operationId": "BackupResourceVaultConfigs_Put",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/VaultName"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "resource config request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/BackupResourceVaultConfigResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/BackupResourceVaultConfigResource"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update Vault Security Config": {
+            "$ref": "./examples/Common/BackupResourceVaultConfigs_Put.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "BackupResourceVaultConfigs"
+        ],
+        "description": "Updates vault security config.",
+        "operationId": "BackupResourceVaultConfigs_Update",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/VaultName"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "resource config request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/BackupResourceVaultConfigResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/BackupResourceVaultConfigResource"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update Vault Security Config": {
+            "$ref": "./examples/Common/BackupResourceVaultConfigs_Patch.json"
+          }
+        }
+      }
+    },
+    "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupOperationVaultGuardProxies": {
+      "get": {
+        "tags": [
+          "VaultGuardProxies"
+        ],
+        "description": "List the VaultGuardProxies under vault",
+        "operationId": "VaultGuardProxies_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/VaultName"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/VaultGuardProxyBaseResourceList"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Get VaultGuardProxies": {
+            "$ref": "./examples/VaultGuardProxyCRUD/ListVaultGuardProxy.json"
+          }
+        }
+      }
+    },
+    "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupOperationVaultGuardProxies/{vaultGuardProxyName}": {
+      "get": {
+        "tags": [
+          "VaultGuardProxy"
+        ],
+        "description": "Returns VaultGuardProxy under vault and with the name referenced in request",
+        "operationId": "VaultGuardProxy_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/VaultName"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "name": "vaultGuardProxyName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/VaultGuardProxyBaseResource"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get VaultGuardProxy": {
+            "$ref": "./examples/VaultGuardProxyCRUD/GetVaultGuardProxy.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "VaultGuardProxy"
+        ],
+        "description": "Add or Update GateKeepreProxy under vault\r\nSecures vault critical operations",
+        "operationId": "VaultGuardProxy_Put",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/VaultName"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "name": "vaultGuardProxyName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/VaultGuardProxyBaseResource"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create VaultGuardProxy": {
+            "$ref": "./examples/VaultGuardProxyCRUD/PutVaultGuardProxy.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "VaultGuardProxy"
+        ],
+        "description": "Delete GateKeepreProxy under vault",
+        "operationId": "VaultGuardProxy_Delete",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/VaultName"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "name": "vaultGuardProxyName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "NoContent"
+          }
+        },
+        "x-ms-examples": {
+          "Delete VaultGuardProxy": {
+            "$ref": "./examples/VaultGuardProxyCRUD/DeleteVaultGuardProxy.json"
+          }
+        }
+      }
+    },
+    "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupOperationVaultGuardProxies/{vaultGuardProxyName}/unlockDelete": {
+      "post": {
+        "tags": [
+          "VaultGuardProxy"
+        ],
+        "description": "Secures delete VaultGuardProxy operations.",
+        "operationId": "VaultGuardProxy_UnlockDelete",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/VaultName"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "name": "vaultGuardProxyName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "Request body for operation",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UnlockDeleteRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/UnlockDeleteResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "UnlockDelete VaultGuardProxy": {
+            "$ref": "./examples/VaultGuardProxyCRUD/UnlockDeleteVaultGuardProxy.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "BackupResourceVaultConfig": {
+      "description": "Backup resource vault config details.",
+      "type": "object",
+      "properties": {
+        "storageModelType": {
+          "description": "Storage type.",
+          "enum": [
+            "Invalid",
+            "GeoRedundant",
+            "LocallyRedundant",
+            "ZoneRedundant",
+            "ReadAccessGeoZoneRedundant"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "StorageType",
+            "modelAsString": true
+          }
+        },
+        "storageType": {
+          "description": "Storage type.",
+          "enum": [
+            "Invalid",
+            "GeoRedundant",
+            "LocallyRedundant",
+            "ZoneRedundant",
+            "ReadAccessGeoZoneRedundant"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "StorageType",
+            "modelAsString": true
+          }
+        },
+        "storageTypeState": {
+          "description": "Locked or Unlocked. Once a machine is registered against a resource, the storageTypeState is always Locked.",
+          "enum": [
+            "Invalid",
+            "Locked",
+            "Unlocked"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "StorageTypeState",
+            "modelAsString": true
+          }
+        },
+        "enhancedSecurityState": {
+          "description": "Enabled or Disabled.",
+          "enum": [
+            "Invalid",
+            "Enabled",
+            "Disabled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "EnhancedSecurityState",
+            "modelAsString": true
+          }
+        },
+        "softDeleteFeatureState": {
+          "description": "Soft Delete feature state",
+          "enum": [
+            "Invalid",
+            "Enabled",
+            "Disabled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "SoftDeleteFeatureState",
+            "modelAsString": true
+          }
+        },
+        "isSoftDeleteFeatureStateEditable": {
+          "description": "whether softDeleteFeatureState can be updated or not",
+          "type": "boolean",
+          "readOnly": true
+        },
+        "vaultguardOperationRequests": {
+          "description": "Vaultguard Operation Requests",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "BackupResourceVaultConfigResource": {
+      "description": "Backup resource vault config details.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/BackupResourceVaultConfig",
+          "description": "BackupResourceVaultConfigResource properties"
+        }
+      }
+    },
+    "Resource": {
+      "description": "ARM Resource.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Resource Id represents the complete path to the resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "Resource name associated with the resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "Resource type represents the complete path of the form Namespace/ResourceType/ResourceType/...",
+          "type": "string",
+          "readOnly": true
+        },
+        "location": {
+          "description": "Resource location.",
+          "type": "string"
+        },
+        "tags": {
+          "description": "Resource tags.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "eTag": {
+          "description": "Optional ETag.",
+          "type": "string"
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "ResourceList": {
+      "description": "Base for all lists of resources.",
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "The uri to fetch the next page of resources. Call ListNext() fetches next page of resources.",
+          "type": "string"
+        }
+      }
+    },
+    "UnlockDeleteRequest": {
+      "description": "Request body of unlock delete API.",
+      "type": "object",
+      "properties": {
+        "vaultguardOperationRequests": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "UnlockDeleteResponse": {
+      "description": "Response of Unlock Delete API.",
+      "type": "object",
+      "properties": {
+        "unlockDeleteExpiryTime": {
+          "description": "This is the time when unlock delete previliges will get expired.",
+          "type": "string"
+        }
+      }
+    },
+    "VaultguardOperationDetail": {
+      "type": "object",
+      "properties": {
+        "vaultCriticalOperation": {
+          "type": "string"
+        },
+        "defaultResourceRequest": {
+          "type": "string"
+        }
+      }
+    },
+    "VaultGuardProxyBase": {
+      "type": "object",
+      "properties": {
+        "vaultGuardResourceId": {
+          "type": "string"
+        },
+        "vaultguardOperationDetails": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VaultguardOperationDetail"
+          }
+        },
+        "lastUpdatedTime": {
+          "type": "string"
+        }
+      }
+    },
+    "VaultGuardProxyBaseResource": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/VaultGuardProxyBase",
+          "description": "VaultGuardProxyBaseResource properties"
+        }
+      }
+    },
+    "VaultGuardProxyBaseResourceList": {
+      "description": "List of VaultGuardProxyBase resources",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResourceList"
+        }
+      ],
+      "properties": {
+        "value": {
+          "description": "List of resources.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VaultGuardProxyBaseResource"
+          }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "SubscriptionId": {
+      "name": "subscriptionId",
+      "in": "path",
+      "description": "The subscription Id.",
+      "required": true,
+      "type": "string"
+    },
+    "ResourceGroupName": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "description": "The name of the resource group where the recovery services vault is present.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "VaultName": {
+      "name": "vaultName",
+      "in": "path",
+      "description": "The name of the recovery services vault.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "ApiVersion": {
+      "name": "api-version",
+      "in": "query",
+      "description": "Client Api Version.",
+      "required": true,
+      "type": "string"
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account."
+      }
+    }
+  },
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ]
+}
