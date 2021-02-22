@@ -25,7 +25,7 @@ These are the global settings for the Attestation APIs.
 
 ``` yaml
 openapi-type: data-plane
-tag: package-2018-09-01
+tag: package-2020-10-01
 ```
 
 ### Tag: package-2018-09-01
