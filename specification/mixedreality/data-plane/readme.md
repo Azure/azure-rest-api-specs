@@ -34,9 +34,18 @@ directive:
 These are the global settings for Azure Mixed Reality Client.
 
 ```yaml
-title: MixedRealityRemoteRendering
+title: MixedRealityObjectAnchors
 openapi-type: data-plane
-tag: package-2021-01-01-preview
+tag: package-0.2-preview.0
+```
+
+### Tag: package-0.2-preview.0
+
+These settings apply only when `--tag=package-0.2-preview.0` is specified on the command line.
+
+``` yaml $(tag) == 'package-0.2-preview.0'
+input-file:
+- Microsoft.MixedReality/preview/0.2-preview.0/mr-aoa.json
 ```
 
 ### Tag: package-2021-01-01-preview

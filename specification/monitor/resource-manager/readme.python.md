@@ -29,6 +29,7 @@ Generate all API versions currently shipped for this package
 ```yaml $(multiapi) && $(track2)
 clear-output-folder: true
 batch:
+  - tag: package-2020-10
   - tag: package-2020-05-preview
   - tag: package-2020-01-01-preview-only
   - tag: package-2019-11-01-preview-only
@@ -57,6 +58,16 @@ batch:
 output-folder: $(python-sdks-folder)/monitor/azure-mgmt-monitor/azure/mgmt/monitor/
 clear-output-folder: false
 perform-load: false
+```
+
+### Tag: package-2020-10 and python
+
+These settings apply only when `--tag=package-2020-10 --python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
+
+``` yaml $(tag) == 'package-2020-10'
+namespace: $(python-base-namespace).v2020_10_01
+output-folder: $(python-sdks-folder)/$(python-base-folder)/v2020_10_01
 ```
 
 ### Tag: package-2020-05-preview and python
