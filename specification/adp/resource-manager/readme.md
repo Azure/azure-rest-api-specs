@@ -32,11 +32,13 @@ tag: 2021-02-01-preview
 ```
 
 ```yaml $(tag) == '2020-07-01-preview'
+nstag: 2020_07_01_preview
 input-file:
   - Microsoft.AutonomousDevelopmentPlatform/preview/2020-07-01-preview/adp.json
 ```
 
 ```yaml $(tag) == '2021-02-01-preview'
+nstag: 2021_02_01_preview
 input-file:
   - Microsoft.AutonomousDevelopmentPlatform/preview/2021-02-01-preview/adp.json
 ```

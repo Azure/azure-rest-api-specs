@@ -28,9 +28,9 @@ perform-load: false
 ```
 
 ``` yaml
-namespace: azure.mgmt.adp.v$(tag)
-output-folder: $(python-sdks-folder)/adp/azure-mgmt-adp/azure/mgmt/adp/v$(tag)
+namespace: azure.mgmt.adp.v$(nstag)
+output-folder: $(python-sdks-folder)/adp/azure-mgmt-adp/azure/mgmt/adp/v$(nstag)
 python:
-  namespace: azure.mgmt.adp.v$(tag)
-  output-folder: $(python-sdks-folder)/adp/azure-mgmt-adp/azure/mgmt/adp/v$(tag)
+  namespace: azure.mgmt.adp.v$(nstag)
+  output-folder: $(python-sdks-folder)/adp/azure-mgmt-adp/azure/mgmt/adp/v$(nstag)
 ```

@@ -14,17 +14,9 @@ batch:
   - tag: 2021-02-01-preview
 ```
 
-```yaml $(tag) == '2020-07-01-preview'
-rubytag: 2020_07_01_preview
-```
-
-```yaml $(tag) == '2021-02-01-preview'
-rubytag: 2021_02_01_preview
-```
-
 Please also specify `--ruby-sdks-folder=<path to the root directory of your azure-sdk-for-ruby clone>`.
 
 ```yaml $(ruby)
-namespace: Azure::AutonomousDevelopmentPlatform::Mgmt::V$(rubytag)
+namespace: Azure::AutonomousDevelopmentPlatform::Mgmt::V$(nstag)
 output-folder: $(ruby-sdks-folder)/management/azure_mgmt_adp/lib
 ```
