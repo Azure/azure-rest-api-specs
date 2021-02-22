@@ -135,6 +135,7 @@ input-file:
 - Microsoft.HDInsight/preview/2015-03-01-preview/extensions.json
 - Microsoft.HDInsight/preview/2015-03-01-preview/scriptActions.json
 - Microsoft.HDInsight/preview/2015-03-01-preview/operations.json
+- Microsoft.HDInsight/stable/2018-06-01-preview/virtualMachines.json
 ```
 
 
