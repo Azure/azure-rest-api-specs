@@ -102,6 +102,13 @@ input-file:
 - Microsoft.DesktopVirtualization/preview/2021-02-01-preview/desktopvirtualization.json
 ```
 
+### Tag: package-2021-02-22-preview
+
+``` yaml $(tag) == 'package-2021-02-22-preview'
+input-file:
+- Microsoft.DesktopVirtualization/preview/2021-02-22-preview/desktopvirtualization.json
+```
+
 ---
 # Code Generation
 
@@ -177,6 +184,7 @@ input-file:
   - $(this-folder)/Microsoft.DesktopVirtualization/preview/2020-11-10-preview/desktopvirtualization.json
   - $(this-folder)/Microsoft.DesktopVirtualization/preview/2021-01-14-preview/desktopvirtualization.json
   - $(this-folder)/Microsoft.DesktopVirtualization/preview/2021-02-01-preview/desktopvirtualization.json
+  - $(this-folder)/Microsoft.DesktopVirtualization/preview/2021-02-22-preview/desktopvirtualization.json
 
 ```
 
