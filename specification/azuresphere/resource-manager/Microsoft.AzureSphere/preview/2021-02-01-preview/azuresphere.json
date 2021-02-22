@@ -76,10 +76,10 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.AzureSphere/catalogs": {
       "get": {
         "tags": [
-          "AzureSphereRUs"
+          "Catalogs"
         ],
         "description": "Returns a list of Azure Sphere Resource Units for the given subscriptionId",
-        "operationId": "AzureSphereRUsBySubscription_List",
+        "operationId": "CatalogsBySubscription_List",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -92,7 +92,7 @@
           "200": {
             "description": "Azure Sphere Resource Units for the subscription details.",
             "schema": {
-              "$ref": "#/definitions/AzureSphereRUList"
+              "$ref": "#/definitions/CatalogList"
             }
           },
           "default": {
@@ -108,7 +108,7 @@
         },
         "x-ms-examples": {
           "Get a list of Azure Sphere Resource Units for a given subscription.": {
-            "$ref": "./examples/GetAzSphereRUsSub.json"
+            "$ref": "./examples/GetCatalogsSub.json"
           }
         }
       }
@@ -116,10 +116,10 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs": {
       "get": {
         "tags": [
-          "AzureSphereRUs"
+          "Catalogs"
         ],
         "description": "Returns a list of Azure Sphere Resource Units in the given resource group.",
-        "operationId": "AzureSphereRUs_List",
+        "operationId": "Catalogs_List",
         "parameters": [
           {
             "$ref": "#/parameters/ResourceGroupNameParameter"
@@ -135,7 +135,7 @@
           "200": {
             "description": "The list of Azure Sphere Resource Units for the subscription.",
             "schema": {
-              "$ref": "#/definitions/AzureSphereRUList"
+              "$ref": "#/definitions/CatalogList"
             }
           },
           "default": {
@@ -151,18 +151,18 @@
         },
         "x-ms-examples": {
           "Get a list of Azure Sphere Resource Units for a given resource group.": {
-            "$ref": "./examples/GetAzSphereRUsRG.json"
+            "$ref": "./examples/GetCatalogsRG.json"
           }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{azureSphereRUName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}": {
       "get": {
         "tags": [
-          "AzureSphereRUs"
+          "Catalogs"
         ],
         "description": "Returns an Azure Sphere Resource Unit by name.",
-        "operationId": "AzureSphereRUs_Get",
+        "operationId": "Catalogs_Get",
         "parameters": [
           {
             "$ref": "#/parameters/ResourceGroupNameParameter"
@@ -174,14 +174,14 @@
             "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/AzureSphereRUNameParameter"
+            "$ref": "#/parameters/CatalogNameParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "Azure Sphere Resource Unit details.",
             "schema": {
-              "$ref": "#/definitions/AzureSphereRU"
+              "$ref": "#/definitions/Catalog"
             }
           },
           "default": {
@@ -193,16 +193,16 @@
         },
         "x-ms-examples": {
           "Get the details of an Azure Sphere Resource Unit.": {
-            "$ref": "./examples/GetAzSphereRU.json"
+            "$ref": "./examples/GetCatalog.json"
           }
         }
       },
       "put": {
         "tags": [
-          "AzureSphereRUs"
+          "Catalogs"
         ],
         "description": "Create or update an Azure Sphere Resource Unit.",
-        "operationId": "AzureSphereRUs_CreateOrUpdate",
+        "operationId": "Catalogs_CreateOrUpdate",
         "parameters": [
           {
             "$ref": "#/parameters/ResourceGroupNameParameter"
@@ -214,15 +214,15 @@
             "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/AzureSphereRUNameParameter"
+            "$ref": "#/parameters/CatalogNameParameter"
           },
           {
-            "name": "AzureSphereRU",
+            "name": "Catalog",
             "description": "Azure Sphere Resource Unit details.",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/AzureSphereRU"
+              "$ref": "#/definitions/Catalog"
             }
           }
         ],
@@ -230,7 +230,7 @@
           "200": {
             "description": "Successful.",
             "schema": {
-              "$ref": "#/definitions/AzureSphereRU"
+              "$ref": "#/definitions/Catalog"
             }
           },
           "default": {
@@ -242,16 +242,16 @@
         },
         "x-ms-examples": {
           "Put the details of the Azure Sphere Resource Unit.": {
-            "$ref": "./examples/PutAzSphereRU.json"
+            "$ref": "./examples/PutCatalog.json"
           }
         }
       },
       "patch": {
         "tags": [
-          "AzureSphereRUs"
+          "Catalogs"
         ],
         "description": "Patch an Azure Sphere Resource Unit.",
-        "operationId": "AzureSphereRUs_Update",
+        "operationId": "Catalogs_Update",
         "parameters": [
           {
             "$ref": "#/parameters/ResourceGroupNameParameter"
@@ -263,15 +263,15 @@
             "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/AzureSphereRUNameParameter"
+            "$ref": "#/parameters/CatalogNameParameter"
           },
           {
-            "name": "AzureSphereRU",
+            "name": "Catalog",
             "description": "Azure Sphere Resource Unit details.",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/AzureSphereRU"
+              "$ref": "#/definitions/Catalog"
             }
           }
         ],
@@ -279,7 +279,7 @@
           "200": {
             "description": "Successful.",
             "schema": {
-              "$ref": "#/definitions/AzureSphereRU"
+              "$ref": "#/definitions/Catalog"
             }
           },
           "default": {
@@ -291,16 +291,16 @@
         },
         "x-ms-examples": {
           "Patch an Azure Sphere Resource Unit.": {
-            "$ref": "./examples/PatchAzSphereRU.json"
+            "$ref": "./examples/PatchCatalog.json"
           }
         }
       },
       "delete": {
         "tags": [
-          "AzureSphereRUs"
+          "Catalogs"
         ],
         "description": "Delete an Azure Sphere Resource Unit.",
-        "operationId": "AzureSphereRUs_Delete",
+        "operationId": "Catalogs_Delete",
         "parameters": [
           {
             "$ref": "#/parameters/ResourceGroupNameParameter"
@@ -312,20 +312,20 @@
             "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/AzureSphereRUNameParameter"
+            "$ref": "#/parameters/CatalogNameParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "Successful.",
             "schema": {
-              "$ref": "#/definitions/AzureSphereRU"
+              "$ref": "#/definitions/Catalog"
             }
           },
           "204": {
             "description": "Successful. Resource marked for deletion",
             "schema": {
-              "$ref": "#/definitions/AzureSphereRU"
+              "$ref": "#/definitions/Catalog"
             }
           },
           "default": {
@@ -337,12 +337,12 @@
         },
         "x-ms-examples": {
           "Delete an Azure Sphere Resource Unit.": {
-            "$ref": "./examples/DeleteAzSphereRU.json"
+            "$ref": "./examples/DeleteCatalog.json"
           }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{azureSphereRUName}/products": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}/products": {
       "get": {
         "tags": [
           "Products"
@@ -360,7 +360,7 @@
             "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/AzureSphereRUNameParameter"
+            "$ref": "#/parameters/CatalogNameParameter"
           }
         ],
         "responses": {
@@ -388,7 +388,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{azureSphereRUName}/products/{productName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}/products/{productName}": {
       "get": {
         "tags": [
           "Products"
@@ -406,7 +406,7 @@
             "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/AzureSphereRUNameParameter"
+            "$ref": "#/parameters/CatalogNameParameter"
           },
           {
             "$ref": "#/parameters/ProductNameParameter"
@@ -449,7 +449,7 @@
             "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/AzureSphereRUNameParameter"
+            "$ref": "#/parameters/CatalogNameParameter"
           },
           {
             "$ref": "#/parameters/ProductNameParameter"
@@ -501,7 +501,7 @@
             "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/AzureSphereRUNameParameter"
+            "$ref": "#/parameters/CatalogNameParameter"
           },
           {
             "$ref": "#/parameters/ProductNameParameter"
@@ -553,7 +553,7 @@
             "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/AzureSphereRUNameParameter"
+            "$ref": "#/parameters/CatalogNameParameter"
           },
           {
             "$ref": "#/parameters/ProductNameParameter"
@@ -630,7 +630,7 @@
       },
       "x-ms-azure-resource": true
     },
-    "AzureSphereRU": {
+    "Catalog": {
       "type": "object",
       "description": "Azure Sphere Resource Unit details",
       "allOf": [
@@ -741,7 +741,7 @@
         }
       }
     },
-    "AzureSphereRUList": {
+    "CatalogList": {
       "description": "The list of Azure Sphere Resource Units.",
       "type": "object",
       "properties": {
@@ -753,7 +753,7 @@
           "description": "The list of Azure Sphere Resource Units.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/AzureSphereRU"
+            "$ref": "#/definitions/Catalog"
           }
         }
       }
@@ -809,8 +809,8 @@
       "description": "The name of the resource group.",
       "x-ms-parameter-location": "method"
     },
-    "AzureSphereRUNameParameter": {
-      "name": "azureSphereRUName",
+    "CatalogNameParameter": {
+      "name": "catalogName",
       "in": "path",
       "required": true,
       "type": "string",
