@@ -50,6 +50,10 @@ directive:
       - $.definitions.VmSizeCompatibilityFilter.properties.ClusterFlavors
       - $.definitions.VmSizeCompatibilityFilter.properties.Regions
       - $.definitions.VmSizeCompatibilityFilter.properties.FilterMode
+      - $.definitions.VmSizeCompatibilityFilter.properties.OsType
+      - $.definitions.VmSizeCompatibilityFilter.properties.VMSizes
+      - $.definitions.VmSizeCompatibilityFilter.properties.ESPApplied
+      - $.definitions.VmSizeCompatibilityFilter.properties.ComputeIsolationSupported
 ```
  
 ``` yaml
@@ -69,6 +73,10 @@ directive:
       - $.definitions.VmSizeCompatibilityFilter.properties.ClusterFlavors
       - $.definitions.VmSizeCompatibilityFilter.properties.Regions
       - $.definitions.VmSizeCompatibilityFilter.properties.FilterMode
+      - $.definitions.VmSizeCompatibilityFilter.properties.OsType
+      - $.definitions.VmSizeCompatibilityFilter.properties.VMSizes
+      - $.definitions.VmSizeCompatibilityFilter.properties.ESPApplied
+      - $.definitions.VmSizeCompatibilityFilter.properties.ComputeIsolationSupported
 ```
 
 ``` yaml
