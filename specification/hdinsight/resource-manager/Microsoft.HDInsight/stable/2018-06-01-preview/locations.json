@@ -818,7 +818,6 @@
       }
     },
     "ClusterCreateRequestValidationParameters": {
-      "type": "object",
       "description": "The cluster create request specification.",
       "allOf": [
         {
@@ -828,6 +827,10 @@
       "properties": {
         "name": {
           "description": "The cluster name.",
+          "type": "string"
+        },
+        "type": {
+          "description": "The resource type.",
           "type": "string"
         },
         "tenantId": {
