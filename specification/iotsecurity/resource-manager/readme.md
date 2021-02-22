@@ -28,6 +28,14 @@ directive:
     from: defenderSettings.json
     where: '$.paths["/subscriptions/{subscriptionId}/providers/Microsoft.IoTSecurity/defenderSettings"].get'
     reason: The list returns limited number of items
+  - suppress: PageableOperation
+    from: locations.json
+    where: '$.paths["/subscriptions/{subscriptionId}/providers/Microsoft.IoTSecurity/locations"].get'
+    reason: The list returns limited number of items
+  - suppress: PageableOperation
+    from: deviceSecurityGroups.json
+    where: '$.paths["/subscriptions/{subscriptionId}/providers/Microsoft.IoTSecurity/locations/{iotDefenderLocation}/deviceSecurityGroups"].get'
+    reason: The list returns limited number of items
 ```
 
 ### Basic Information
@@ -49,6 +57,8 @@ These settings apply only when `--tag=2021-02-01-preview` is specified on the co
 input-file:
 - Microsoft.IoTSecurity/preview/2021-02-01-preview/defenderSettings.json
 - Microsoft.IoTSecurity/preview/2021-02-01-preview/operations.json
+- Microsoft.IoTSecurity/preview/2021-02-01-preview/locations.json
+- Microsoft.IoTSecurity/preview/2021-02-01-preview/deviceSecurityGroups.json
 ```
 
 ---
