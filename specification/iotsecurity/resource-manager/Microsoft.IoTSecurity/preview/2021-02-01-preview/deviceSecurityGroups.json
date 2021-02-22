@@ -1,0 +1,264 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Azure Defender for IoT",
+    "description": "API spec for Microsoft.IoTSecurity (Azure Defender for IoT) resource provider",
+    "version": "2021-02-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.IoTSecurity/locations/{iotDefenderLocation}/deviceSecurityGroups": {
+      "get": {
+        "x-ms-examples": {
+          "List device security groups": {
+            "$ref": "./examples/DeviceSecurityGroups/List.json"
+          }
+        },
+        "tags": [
+          "Device Security Groups"
+        ],
+        "description": "List device security groups",
+        "operationId": "DeviceSecurityGroups_List",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/IotDefenderLocation"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DeviceSecurityGroupsList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.IoTSecurity/locations/{iotDefenderLocation}/deviceSecurityGroups/{deviceSecurityGroupName}": {
+      "get": {
+        "x-ms-examples": {
+          "Get device security group": {
+            "$ref": "./examples/DeviceSecurityGroups/Get.json"
+          }
+        },
+        "tags": [
+          "Device Security Groups"
+        ],
+        "operationId": "DeviceSecurityGroups_Get",
+        "description": "Get device security group",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/IotDefenderLocation"
+          },
+          {
+            "$ref": "#/parameters/DeviceSecurityGroupName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DeviceSecurityGroupModel"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "x-ms-examples": {
+          "Create or update device security group": {
+            "$ref": "./examples/DeviceSecurityGroups/Put.json"
+          }
+        },
+        "tags": [
+          "Device Security Groups"
+        ],
+        "operationId": "DeviceSecurityGroups_CreateOrUpdate",
+        "description": "Create or update device security group",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/IotDefenderLocation"
+          },
+          {
+            "$ref": "#/parameters/DeviceSecurityGroupName"
+          },
+          {
+            "$ref": "#/parameters/DeviceSecurityGroupModel"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Updated device security group",
+            "schema": {
+              "$ref": "#/definitions/DeviceSecurityGroupModel"
+            }
+          },
+          "201": {
+            "description": "Created device security group",
+            "schema": {
+              "$ref": "#/definitions/DeviceSecurityGroupModel"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "x-ms-examples": {
+          "Delete device security group": {
+            "$ref": "./examples/DeviceSecurityGroups/Delete.json"
+          }
+        },
+        "tags": [
+          "Device Security Groups"
+        ],
+        "operationId": "DeviceSecurityGroups_Delete",
+        "description": "Delete device security group",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/IotDefenderLocation"
+          },
+          {
+            "$ref": "#/parameters/DeviceSecurityGroupName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Device security group deleted"
+          },
+          "204": {
+            "description": "Device security group does not exist"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "DeviceSecurityGroupList": {
+      "description": "List of device security groups",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "List data",
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DeviceSecurityGroupModel"
+          }
+        }
+      }
+    },
+    "DeviceSecurityGroupModel": {
+      "type": "object",
+      "description": "Device security group",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Device security group properties",
+          "$ref": "#/definitions/DeviceSecurityGroupProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "DeviceSecurityGroupProperties": {
+      "type": "object",
+      "description": "Device security group properties",
+      "properties": {}
+    }
+  },
+  "parameters": {
+    "DeviceSecurityGroupName": {
+      "name": "deviceSecurityGroupName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Device security group name"
+    },
+    "DeviceSecurityGroupModel": {
+      "name": "deviceSecurityGroupModel",
+      "in": "body",
+      "required": true,
+      "description": "Device security group model",
+      "schema": {
+        "$ref": "#/definitions/DeviceSecurityGroupModel"
+      },
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

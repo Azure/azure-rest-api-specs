@@ -58,7 +58,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/LocationsList"
+              "$ref": "#/definitions/LocationList"
             }
           },
           "default": {
@@ -70,7 +70,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.IoTSecurity/locations/{location}": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.IoTSecurity/locations/{iotDefenderLocation}": {
       "get": {
         "x-ms-examples": {
           "Get location": {
@@ -88,6 +88,9 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/IotDefenderLocation"
           }
         ],
         "responses": {
@@ -104,13 +107,12 @@
             }
           }
         }
-      },
-
-    },
+      }
+    }
   },
   "definitions": {
-    "LocationsList": {
-      "description": "List of IoT Defender locations",
+    "LocationList": {
+      "description": "List of Defender for IoT locations",
       "type": "object",
       "properties": {
         "value": {
@@ -141,9 +143,8 @@
     },
     "LocationProperties": {
       "type": "object",
-      "description": "IoT Defender location properties",
-      "properties": {
-      }
+      "description": "Defender for IoT location properties",
+      "properties": {}
     }
   }
 }
