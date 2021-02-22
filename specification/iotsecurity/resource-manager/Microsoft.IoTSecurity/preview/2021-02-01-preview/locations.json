@@ -1,0 +1,149 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Azure Defender for IoT",
+    "description": "API spec for Microsoft.IoTSecurity (Azure Defender for IoT) resource provider",
+    "version": "2021-02-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.IoTSecurity/locations": {
+      "get": {
+        "x-ms-examples": {
+          "List locations": {
+            "$ref": "./examples/Locations/List.json"
+          }
+        },
+        "tags": [
+          "Locations"
+        ],
+        "description": "Lists Defender for IoT locations associated with the given subscription.",
+        "operationId": "Locations_List",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/LocationsList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.IoTSecurity/locations/{location}": {
+      "get": {
+        "x-ms-examples": {
+          "Get location": {
+            "$ref": "./examples/Locations/Get.json"
+          }
+        },
+        "tags": [
+          "Locations"
+        ],
+        "operationId": "Locations_Get",
+        "description": "Get a Defender for IoT location associated with the given subscription.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/LocationModel"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+
+    },
+  },
+  "definitions": {
+    "LocationsList": {
+      "description": "List of IoT Defender locations",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "List data",
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/LocationModel"
+          }
+        }
+      }
+    },
+    "LocationModel": {
+      "type": "object",
+      "description": "IoT Defender location",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "IoT Defender location properties",
+          "$ref": "#/definitions/LocationProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "LocationProperties": {
+      "type": "object",
+      "description": "IoT Defender location properties",
+      "properties": {
+      }
+    }
+  }
+}
