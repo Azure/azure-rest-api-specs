@@ -1,0 +1,132 @@
+﻿<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+	<PropertyGroup>
+		<CurrentDir>$(MSBuildThisFileDirectory)</CurrentDir>
+		<RepoRootRelPath>.\</RepoRootRelPath>		
+		<RepoRootAbspath>$([System.IO.Path]::GetFullPath($(CurrentDir)).Trim('\'))</RepoRootAbspath>
+	</PropertyGroup>
+	<PropertyGroup>
+		<RepoRoot>$(RepoRootAbspath)</RepoRoot>
+		<RepoSrcDir>$(RepoRoot)\src</RepoSrcDir>
+		<RepoToolsDir>$(RepoRoot)\tools</RepoToolsDir>
+		<RepoEngDir>$(RepoRoot)\eng</RepoEngDir>
+		<RepoNugetFeedDir>$(RepoToolsDir)\LocalNugetFeed</RepoNugetFeedDir>
+		<RepoDeveloperDir>$(RepoEngDir)\alias</RepoDeveloperDir>
+		<RepoNugetDir>$(RepoToolsDir)\NugetExe</RepoNugetDir>
+    <NugPkgSrcDir>$(RepoSrcDir)\NugetToolsPackage</NugPkgSrcDir>
+		<RepoNugetRestoreDir>$(RepoRoot)\restoredPackages</RepoNugetRestoreDir>
+	</PropertyGroup>
+
+	<PropertyGroup>
+		<DevMode Condition=" '$(DevMode)' == '' ">false</DevMode>
+	</PropertyGroup>
+
+	<PropertyGroup Label="CI paths">
+		<RepoCISrcDir>$(RepoSrcDir)\CI</RepoCISrcDir>
+		<RepoCICommonSrcDir>$(RepoCISrcDir)\CI.Common</RepoCICommonSrcDir>
+		<RepoCIBuildTaskDir>$(RepoCISrcDir)\CI.BuildTasks</RepoCIBuildTaskDir>
+		<CINugPkgSrcDir>$(NugPkgSrcDir)\CI.Tools.Package</CINugPkgSrcDir>
+		<CIBuildOutputDir>$(CINugPkgSrcDir)\build\tasks</CIBuildOutputDir>
+		<CINugPkgPublish_NetStd20Dir>$(CIBuildOutputDir)\netstandard2.0</CINugPkgPublish_NetStd20Dir>
+	</PropertyGroup>
+
+	<PropertyGroup Label="SToS paths">
+		<RepoSToSSrcDir>$(RepoSrcDir)\SwaggerToSdk</RepoSToSSrcDir>
+		<RepoSToSCommonSrcDir>$(RepoSToSSrcDir)\Common\SToS.Common</RepoSToSCommonSrcDir>
+		<RepoSToSBuildTaskSrcDir>$(RepoSToSSrcDir)\BuildTasks\SToS.BuildTasks</RepoSToSBuildTaskSrcDir>
+		<SToSNugPkgSrcRootDir>$(NugPkgSrcDir)\SwaggerToSdk.Tools.Package</SToSNugPkgSrcRootDir>
+		<SToSNugPkgSrcDir>$(SToSNugPkgSrcRootDir)\build</SToSNugPkgSrcDir>
+		<SToSNugPkgSdkDir>$(SToSNugPkgSrcDir)\Sdk</SToSNugPkgSdkDir>
+		<SToSBuildOutputDir>$(SToSNugPkgSrcDir)\tasks</SToSBuildOutputDir>
+		<SToSNugPkgPublish_NetStd20Dir>$(SToSBuildOutputDir)\netstandard2.0</SToSNugPkgPublish_NetStd20Dir>
+		<SToSNugPkgPublish_Net461Dir>$(SToSBuildOutputDir)\net461</SToSNugPkgPublish_Net461Dir>
+	</PropertyGroup>
+
+	<PropertyGroup>
+		<Configuration Condition="'$(Configuration)' == ''">Debug</Configuration>
+		<Platform Condition="'$(Platform)' == ''">AnyCPU</Platform>
+	</PropertyGroup>
+
+	<!-- 
+    MSBuildRuntimeType can have 'Core', 'Full' and 'Mono' as three possible values 
+    https://docs.microsoft.com/en-us/visualstudio/msbuild/msbuild-reserved-and-well-known-properties?view=vs-2017
+  -->
+	<PropertyGroup>
+		<DotNetRuntimeContext>$(MSBuildRuntimeType)</DotNetRuntimeContext>
+		<FxVersionTasksToUse Condition=" '$(DotNetRuntimeContext)' == 'Core' ">netstandard2.0</FxVersionTasksToUse>    
+		<FxVersionTasksToUse Condition=" '$(FxVersionTasksToUse)' == '' AND '$(DotNetRuntimeContext)' != 'Core' ">net461</FxVersionTasksToUse>
+	</PropertyGroup>
+	<PropertyGroup Condition="'$(MSBuildRuntimeType)' == 'Core'">
+		<IsOSX Condition="'$([System.Runtime.InteropServices.RuntimeInformation]::IsOSPlatform($([System.Runtime.InteropServices.OSPlatform]::OSX)))' == 'true'">true</IsOSX>
+		<IsLinux Condition="'$([System.Runtime.InteropServices.RuntimeInformation]::IsOSPlatform($([System.Runtime.InteropServices.OSPlatform]::Linux)))' == 'true'">true</IsLinux>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<TestDataProjects Include="$(RepoCISrcDir)\CI.BuildTasks\Tests\TestDataProject\*.csproj" />
+
+		<CITestProjects Include="$(RepoCISrcDir)\CI.BuildTasks\Tests\**\*.csproj" Exclude="@(TestDataProjects)" />
+		<SToSTestProjects Include="$(RepoSToSSrcDir)\BuildTasks\Tests\*.csproj;$(RepoSToSSrcDir)\Common\Tests\*.csproj" />
+		<SToSProjects Include="$(RepoSToSBuildTaskSrcDir)\*.csproj;$(RepoSToSCommonSrcDir)\*.csproj" />		
+		<SToSNugPkgProjects Include="$(SToSNugPkgSrcDir)\*.csproj" />
+		
+		<NugetPkgProjects Include="@(SToSNugPkgProjects)" />		
+		<ProjectsToBuild Include="@(SToSProjects);@(SToSTestProjects)" />
+		<ProjectsToPublish Include="@(SToSProjects)" />
+	</ItemGroup>
+
+	<!--
+		Detect CI env using available env variables
+		https://<Jenkins server url>/systemInfo
+		https://docs.travis-ci.com/user/environment-variables/#default-environment-variables
+	-->
+	<PropertyGroup>
+		<IsJenkinsCI Condition=" '$(JENKINS_HOME)' != '' ">true</IsJenkinsCI>
+		<IsTravisCI Condition=" '$(Travis)' != '' ">true</IsTravisCI>
+		<IsCIEnvironment Condition=" '$(IsJenkinsCI)' == 'true' OR '$(IsTravisCI)' == 'true' ">true</IsCIEnvironment>
+		<IsCIEnvironment Condition=" '$(IsCIEnvironment)' == '' ">false</IsCIEnvironment>
+	</PropertyGroup>
+
+	<!--
+	===========================================================================================
+	Developer Settings
+		On non-windows machine, user can setup an environment variable that will point to their developer settings props file.
+		The name of the file should be named as  currentUser.props (case sensitive)
+		On windows machine, if the environment variable is not set, we will attempt to use the windows current user env. variable
+		
+		Env. variables
+		LocalDevUserBootstrapDirPath == will point to the directory from where currentuser.props should be imported
+		DevMode == flags if you want to be in dev mode, which is basically avoids restoring nuget package and directly loads the build environment
+
+		Default file that will be loaded == currentUser.props (if available)
+	===========================================================================================
+	-->
+	<PropertyGroup Condition=" '$(DevMode)' == 'true' ">
+		<DefaultCurrentUserPropsFileName>currentUser.props</DefaultCurrentUserPropsFileName>		
+		<DeveloperCurrentUserPropFilePath>$(LocalDevUserBootstrapDirPath)\$(DefaultCurrentUserPropsFileName)</DeveloperCurrentUserPropFilePath>
+		<DeveloperCurrentUserPropFilePath Condition=" !Exists($(DeveloperCurrentUserPropFilePath))">$(RepoDeveloperDir)\$(UserName)\$(DefaultCurrentUserPropsFileName)</DeveloperCurrentUserPropFilePath>
+	</PropertyGroup>
+
+	<Import Condition="Exists($(DeveloperCurrentUserPropFilePath)) AND '$(IsCIEnvironment)' != 'true' AND '$(DevMode)' == 'true' " Project="$(DeveloperCurrentUserPropFilePath)" />
+	<PropertyGroup Condition=" '$(IsCIEnvironment)' != 'true' AND '$(DevMode)' == 'true' ">
+		<LocalDevUser Condition=" '$(LocalDevUser)' == '' ">$(UserName)</LocalDevUser>
+		<DefaultCurrentuserTargetsFileName>$(LocalDevUser).bootStrap.targets</DefaultCurrentuserTargetsFileName>
+		<DeveloperCurrentUserPropFilePath>$(RepoDeveloperDir)\$(LocalDevUser)\$(DefaultCurrentUserPropsFileName)</DeveloperCurrentUserPropFilePath>
+	</PropertyGroup>
+
+	<PropertyGroup Condition=" '$(IsCIEnvironment)' != 'true' AND '$(DevMode)' == 'true' ">
+		<LocalDevUserTargetsDir Condition="Exists('$(RepoDeveloperDir)\$(LocalDevUser)')">$(RepoDeveloperDir)\$(LocalDevUser)</LocalDevUserTargetsDir>
+		<LocalDevUserBootstrapPropsFile>$(LocalDevUserTargetsDir)\$(DefaultCurrentuserTargetsFileName)</LocalDevUserBootstrapPropsFile>
+		<CurrentUserPropsFilePath>$(LocalDevUserBootstrapDirPath)\currentUser.props</CurrentUserPropsFilePath>
+
+		<DevMode_SDK_SToSPropsFile>$(SToSNugPkgSdkDir)\SToS.props</DevMode_SDK_SToSPropsFile>
+	</PropertyGroup>
+	<Import Condition="Exists($(LocalDevUserBootstrapPropsFile)) AND '$(IsCIEnvironment)' != 'true' AND '$(DevMode)' == 'true' " Project="$(LocalDevUserBootstrapPropsFile)" />
+	
+	<!-- DO NOT MAKE ANY CHANGES BELOW -->
+	<PropertyGroup>
+		<IsJenkinsCI Condition=" '$(JENKINS_HOME)' != '' ">true</IsJenkinsCI>
+		<IsTravisCI Condition=" '$(Travis)' != '' ">true</IsTravisCI>
+		<IsCIEnvironment Condition=" '$(IsJenkinsCI)' == 'true' OR '$(IsTravisCI)' == 'true' ">true</IsCIEnvironment>
+		<IsCIEnvironment Condition=" '$(IsCIEnvironment)' == '' ">false</IsCIEnvironment>
+		<DevMode Condition=" '$(IsCIEnvironment)' == 'true' ">false</DevMode>
+	</PropertyGroup>
+</Project>
