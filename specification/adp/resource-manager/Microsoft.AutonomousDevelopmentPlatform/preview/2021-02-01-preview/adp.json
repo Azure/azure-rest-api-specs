@@ -701,6 +701,7 @@
       }
     },
     "Tags": {
+      "type": "object",
       "description": "Resource tags",
       "properties": {
         "tags": {
@@ -718,8 +719,8 @@
       }
     },
     "Account": {
-      "description": "ADP account",
       "type": "object",
+      "description": "ADP account",
       "properties": {
         "properties": {
           "description": "List of account properties",
@@ -740,8 +741,8 @@
       ]
     },
     "AccountPatch": {
-      "description": "ADP account",
       "type": "object",
+      "description": "ADP account",
       "properties": {
         "properties": {
           "description": "List of account properties",
@@ -757,6 +758,7 @@
       ]
     },
     "AccountProperties": {
+      "type": "object",
       "description": "ADP account properties",
       "properties": {
         "accountId": {
@@ -784,6 +786,8 @@
       }
     },
     "AccountList": {
+      "type": "object",
+      "description": "The list operation response, that contains the data pools and their properties",
       "properties": {
         "value": {
           "readOnly": true,
@@ -797,10 +801,10 @@
           "type": "string",
           "description": "URL to get the next set of operation list results if there are any"
         }
-      },
-      "description": "The list operation response, that contains the data pools and their properties"
+      }
     },
     "DataPool": {
+      "type": "object",
       "description": "ADP Data Pool",
       "properties": {
         "properties": {
@@ -817,6 +821,7 @@
       ]
     },
     "DataPoolPatch": {
+      "type": "object",
       "description": "ADP Data Pool",
       "properties": {
         "properties": {
@@ -833,6 +838,7 @@
       ]
     },
     "DataPoolBaseProperties": {
+      "type": "object",
       "description": "Data Pool properties",
       "properties": {
         "dataPoolId": {
@@ -873,6 +879,7 @@
       }
     },
     "DataPoolProperties": {
+      "type": "object",
       "description": "Data Pool properties",
       "allOf": [
         {
@@ -884,6 +891,7 @@
       ]
     },
     "DataPoolLocation": {
+      "type": "object",
       "description": "Location of a Data Pool",
       "properties": {
         "name": {
@@ -900,6 +908,7 @@
       ]
     },
     "DataPoolEncryption": {
+      "type": "object",
       "description": "Encryption properties of a Data Pool",
       "properties": {
         "keyVaultUri": {
@@ -926,6 +935,7 @@
       ]
     },
     "DataPoolList": {
+      "type": "object",
       "properties": {
         "value": {
           "readOnly": true,
@@ -943,8 +953,8 @@
       "description": "The list operation response, that contains the data pools and their properties"
     },
     "Operation": {
-      "description": "Operation detail payload",
       "type": "object",
+      "description": "Operation detail payload",
       "properties": {
         "name": {
           "description": "Name of the operation",
@@ -974,8 +984,8 @@
       }
     },
     "OperationDisplay": {
-      "description": "Operation display payload",
       "type": "object",
+      "description": "Operation display payload",
       "properties": {
         "provider": {
           "description": "Resource provider of the operation",
@@ -996,8 +1006,8 @@
       }
     },
     "OperationProperties": {
-      "description": "Additional details about an operation",
       "type": "object",
+      "description": "Additional details about an operation",
       "x-ms-client-flatten": true,
       "properties": {
         "serviceSpecification": {
@@ -1007,8 +1017,8 @@
       }
     },
     "OperationServiceSpecification": {
-      "description": "Details about a service operation",
       "type": "object",
+      "description": "Details about a service operation",
       "properties": {
         "logSpecifications": {
           "description": "Details about operations related to logs",
@@ -1027,8 +1037,8 @@
       }
     },
     "OperationLogSpecification": {
-      "description": "Details about an operation related to logs",
       "type": "object",
+      "description": "Details about an operation related to logs",
       "properties": {
         "name": {
           "description": "The name of the log category",
@@ -1045,8 +1055,8 @@
       }
     },
     "OperationMetricSpecification": {
-      "description": "Details about an operation related to metrics",
       "type": "object",
+      "description": "Details about an operation related to metrics",
       "properties": {
         "name": {
           "description": "The name of the metric",
@@ -1090,8 +1100,8 @@
       }
     },
     "OperationMetricAvailability": {
-      "description": "Defines how often data for a metric becomes available",
       "type": "object",
+      "description": "Defines how often data for a metric becomes available",
       "properties": {
         "timeGrain": {
           "description": "The granularity for the metric",
@@ -1104,6 +1114,7 @@
       }
     },
     "OperationListResult": {
+      "type": "object",
       "description": "Available operations of the service",
       "properties": {
         "value": {
@@ -1120,6 +1131,7 @@
       }
     },
     "ErrorResponse": {
+      "type": "object",
       "description": "Error response",
       "properties": {
         "error": {
@@ -1129,6 +1141,7 @@
       }
     },
     "ErrorDefinition": {
+      "type": "object",
       "description": "Error definition",
       "properties": {
         "code": {
