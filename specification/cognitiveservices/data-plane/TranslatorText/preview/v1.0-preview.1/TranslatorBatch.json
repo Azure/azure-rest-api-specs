@@ -12,7 +12,7 @@
         ],
         "summary": "Submit a document translation request to the Document Translation service",
         "description": "Use this API to submit a bulk (batch) translation request to the Document Translation service.\r\nEach request can contain multiple documents and must contain a source and destination container for each document.\r\n            \r\nThe prefix and suffix filter (if supplied) are used to filter folders. The prefix is applied to the subpath after the container name.\r\n            \r\nGlossaries / Translation memory can be included in the request and are applied by the service when the document is translated.\r\n            \r\nIf the glossary is invalid or unreachable during translation, an error is indicated in the document status.\r\nIf a file with the same name already exists at the destination, it will be overwritten. The targetUrl for each target language must be unique.",
-        "operationId": "Translation_SubmitBatchRequest",
+        "operationId": "DocumentTranslation_SubmitBatchRequest",
         "consumes": [
           "application/json",
           "text/json",
@@ -48,7 +48,7 @@
               "$ref": "#/definitions/ErrorResponseV2"
             },
             "examples": {
-              "application/json": "{\r\n  \"error\": {\r\n    \"code\": \"InvalidRequest\",\r\n    \"message\": \"Some argument is incorrect\",\r\n    \"target\": \"batch\",\r\n    \"innerError\": {\r\n      \"code\": 400120,\r\n      \"error\": \"SASTokenInvalid\",\r\n      \"message\": \"SAS token for storage is invalid\"\r\n    }\r\n  }\r\n}"
+              "application/json": "{\r\n  \"error\": {\r\n    \"code\": \"InvalidRequest\",\r\n    \"message\": \"Some argument is incorrect\",\r\n    \"target\": \"batch\",\r\n    \"innerError\": {\r\n      \"code\": \"SASTokenInvalid\",\r\n      \"message\": \"SAS token for storage is invalid\"\r\n    }\r\n  }\r\n}"
             },
             "x-ms-error-response": true
           },
@@ -58,7 +58,7 @@
               "$ref": "#/definitions/ErrorResponseV2"
             },
             "examples": {
-              "application/json": "{\r\n  \"error\": {\r\n    \"code\": \"Unauthorized\",\r\n    \"message\": \"User is not authorized\",\r\n    \"target\": \"batch\",\r\n    \"innerError\": {\r\n      \"code\": 401000,\r\n      \"error\": \"Unauthorized\",\r\n      \"message\": \"Operation is not authorized\"\r\n    }\r\n  }\r\n}"
+              "application/json": "{\r\n  \"error\": {\r\n    \"code\": \"Unauthorized\",\r\n    \"message\": \"User is not authorized\",\r\n    \"target\": \"batch\",\r\n    \"innerError\": {\r\n      \"code\": \"Unauthorized\",\r\n      \"message\": \"Operation is not authorized\"\r\n    }\r\n  }\r\n}"
             },
             "x-ms-error-response": true
           },
@@ -68,7 +68,7 @@
               "$ref": "#/definitions/ErrorResponseV2"
             },
             "examples": {
-              "application/json": "{\r\n  \"error\": {\r\n    \"code\": \"RequestRateTooHigh\",\r\n    \"message\": \"User's request rate is too high\",\r\n    \"target\": \"batch\",\r\n    \"innerError\": {\r\n      \"code\": 429000,\r\n      \"error\": \"RateTooHigh\",\r\n      \"message\": \"Request rate is too high\"\r\n    }\r\n  }\r\n}"
+              "application/json": "{\r\n  \"error\": {\r\n    \"code\": \"RequestRateTooHigh\",\r\n    \"message\": \"User's request rate is too high\",\r\n    \"target\": \"batch\",\r\n    \"innerError\": {\r\n      \"code\": \"RateTooHigh\",\r\n      \"message\": \"Request rate is too high\"\r\n    }\r\n  }\r\n}"
             },
             "x-ms-error-response": true
           },
@@ -78,7 +78,7 @@
               "$ref": "#/definitions/ErrorResponseV2"
             },
             "examples": {
-              "application/json": "{\r\n  \"error\": {\r\n    \"code\": \"InternalServerError\",\r\n    \"message\": \"Internal Server Error\",\r\n    \"target\": \"batch\",\r\n    \"innerError\": {\r\n      \"code\": 500000,\r\n      \"error\": \"Internal Server Error\",\r\n      \"message\": \"Unexpected internal server error has occurred\"\r\n    }\r\n  }\r\n}"
+              "application/json": "{\r\n  \"error\": {\r\n    \"code\": \"InternalServerError\",\r\n    \"message\": \"Internal Server Error\",\r\n    \"target\": \"batch\",\r\n    \"innerError\": {\r\n      \"code\": \"InternalServerError\",\r\n      \"message\": \"Unexpected internal server error has occurred\"\r\n    }\r\n  }\r\n}"
             },
             "x-ms-error-response": true
           },
@@ -88,7 +88,7 @@
               "$ref": "#/definitions/ErrorResponseV2"
             },
             "examples": {
-              "application/json": "{\r\n  \"error\": {\r\n    \"code\": \"ServiceUnavailable\",\r\n    \"message\": \"Service is temporary unavailable\",\r\n    \"target\": \"batch\",\r\n    \"innerError\": {\r\n      \"code\": 503000,\r\n      \"error\": \"ServiceTemporaryUnavailable\",\r\n      \"message\": \"Service is currently unavailable.  Please try again later\"\r\n    }\r\n  }\r\n}"
+              "application/json": "{\r\n  \"error\": {\r\n    \"code\": \"ServiceUnavailable\",\r\n    \"message\": \"Service is temporary unavailable\",\r\n    \"target\": \"batch\",\r\n    \"innerError\": {\r\n      \"code\": \"ServiceTemporaryUnavailable\",\r\n      \"message\": \"Service is currently unavailable.  Please try again later\"\r\n    }\r\n  }\r\n}"
             },
             "x-ms-error-response": true
           }
@@ -97,6 +97,10 @@
           "Batch Submit": {
             "$ref": "./examples/batch.json"
           }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
         }
       },
       "get": {
@@ -105,7 +109,7 @@
         ],
         "summary": "Returns a list of batch requests submitted and the status for each request",
         "description": "Returns a list of batch requests submitted and the status for each request.\r\nThis list only contains batch requests submitted by the user (based on the subscription). The status for each request is sorted by id.\r\n            \r\nIf the number of requests exceeds our paging limit, server-side paging is used. Paginated responses indicate a partial result and include a continuation token in the response.\r\nThe absence of a continuation token means that no additional pages are available.\r\n            \r\n$top and $skip query parameters can be used to specify a number of results to return and an offset for the collection.\r\n            \r\nThe server honors the values specified by the client. However, clients must be prepared to handle responses that contain a different page size or contain a continuation token.\r\n            \r\nWhen both $top and $skip are included, the server should first apply $skip and then $top on the collection.\r\nNote: If the server can't honor $top and/or $skip, the server must return an error to the client informing about it instead of just ignoring the query options.\r\nThis reduces the risk of the client making assumptions about the data returned.",
-        "operationId": "Translation_GetOperations",
+        "operationId": "DocumentTranslation_GetOperations",
         "produces": [
           "application/json"
         ],
@@ -156,7 +160,7 @@
               "$ref": "#/definitions/ErrorResponseV2"
             },
             "examples": {
-              "application/json": "{\r\n  \"error\": {\r\n    \"code\": \"InvalidRequest\",\r\n    \"message\": \"Some argument is incorrect\",\r\n    \"target\": \"batch\",\r\n    \"innerError\": {\r\n      \"code\": 400120,\r\n      \"error\": \"SASTokenInvalid\",\r\n      \"message\": \"SAS token for storage is invalid\"\r\n    }\r\n  }\r\n}"
+              "application/json": "{\r\n  \"error\": {\r\n    \"code\": \"InvalidRequest\",\r\n    \"message\": \"Some argument is incorrect\",\r\n    \"target\": \"batch\",\r\n    \"innerError\": {\r\n      \"code\": \"SASTokenInvalid\",\r\n      \"message\": \"SAS token for storage is invalid\"\r\n    }\r\n  }\r\n}"
             },
             "x-ms-error-response": true
           },
@@ -166,7 +170,7 @@
               "$ref": "#/definitions/ErrorResponseV2"
             },
             "examples": {
-              "application/json": "{\r\n  \"error\": {\r\n    \"code\": \"Unauthorized\",\r\n    \"message\": \"User is not authorized\",\r\n    \"target\": \"batch\",\r\n    \"innerError\": {\r\n      \"code\": 401000,\r\n      \"error\": \"Unauthorized\",\r\n      \"message\": \"Operation is not authorized\"\r\n    }\r\n  }\r\n}"
+              "application/json": "{\r\n  \"error\": {\r\n    \"code\": \"Unauthorized\",\r\n    \"message\": \"User is not authorized\",\r\n    \"target\": \"batch\",\r\n    \"innerError\": {\r\n      \"code\": \"Unauthorized\",\r\n      \"message\": \"Operation is not authorized\"\r\n    }\r\n  }\r\n}"
             },
             "x-ms-error-response": true
           },
@@ -176,7 +180,7 @@
               "$ref": "#/definitions/ErrorResponseV2"
             },
             "examples": {
-              "application/json": "{\r\n  \"error\": {\r\n    \"code\": \"RequestRateTooHigh\",\r\n    \"message\": \"User's request rate is too high\",\r\n    \"target\": \"batch\",\r\n    \"innerError\": {\r\n      \"code\": 429000,\r\n      \"error\": \"RateTooHigh\",\r\n      \"message\": \"Request rate is too high\"\r\n    }\r\n  }\r\n}"
+              "application/json": "{\r\n  \"error\": {\r\n    \"code\": \"RequestRateTooHigh\",\r\n    \"message\": \"User's request rate is too high\",\r\n    \"target\": \"batch\",\r\n    \"innerError\": {\r\n      \"code\": \"RateTooHigh\",\r\n      \"message\": \"Request rate is too high\"\r\n    }\r\n  }\r\n}"
             },
             "x-ms-error-response": true
           },
@@ -186,7 +190,7 @@
               "$ref": "#/definitions/ErrorResponseV2"
             },
             "examples": {
-              "application/json": "{\r\n  \"error\": {\r\n    \"code\": \"InternalServerError\",\r\n    \"message\": \"Internal Server Error\",\r\n    \"target\": \"batch\",\r\n    \"innerError\": {\r\n      \"code\": 500000,\r\n      \"error\": \"Internal Server Error\",\r\n      \"message\": \"Unexpected internal server error has occurred\"\r\n    }\r\n  }\r\n}"
+              "application/json": "{\r\n  \"error\": {\r\n    \"code\": \"InternalServerError\",\r\n    \"message\": \"Internal Server Error\",\r\n    \"target\": \"batch\",\r\n    \"innerError\": {\r\n      \"code\": \"InternalServerError\",\r\n      \"message\": \"Unexpected internal server error has occurred\"\r\n    }\r\n  }\r\n}"
             },
             "x-ms-error-response": true
           },
@@ -196,7 +200,7 @@
               "$ref": "#/definitions/ErrorResponseV2"
             },
             "examples": {
-              "application/json": "{\r\n  \"error\": {\r\n    \"code\": \"ServiceUnavailable\",\r\n    \"message\": \"Service is temporary unavailable\",\r\n    \"target\": \"batch\",\r\n    \"innerError\": {\r\n      \"code\": 503000,\r\n      \"error\": \"ServiceTemporaryUnavailable\",\r\n      \"message\": \"Service is currently unavailable.  Please try again later\"\r\n    }\r\n  }\r\n}"
+              "application/json": "{\r\n  \"error\": {\r\n    \"code\": \"ServiceUnavailable\",\r\n    \"message\": \"Service is temporary unavailable\",\r\n    \"target\": \"batch\",\r\n    \"innerError\": {\r\n      \"code\": \"ServiceTemporaryUnavailable\",\r\n      \"message\": \"Service is currently unavailable.  Please try again later\"\r\n    }\r\n  }\r\n}"
             },
             "x-ms-error-response": true
           }
@@ -205,6 +209,9 @@
           "Get status for batch operations": {
             "$ref": "./examples/operations.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "@nextLink"
         }
       }
     },
@@ -215,7 +222,7 @@
         ],
         "summary": "Returns the status for a specific document",
         "description": "Returns the translation status for a specific document based on the request Id and document Id.",
-        "operationId": "Translation_GetDocumentStatus",
+        "operationId": "DocumentTranslation_GetDocumentStatus",
         "produces": [
           "application/json"
         ],
@@ -262,7 +269,7 @@
               "$ref": "#/definitions/ErrorResponseV2"
             },
             "examples": {
-              "application/json": "{\r\n  \"error\": {\r\n    \"code\": \"Unauthorized\",\r\n    \"message\": \"User is not authorized\",\r\n    \"target\": \"document\",\r\n    \"innerError\": {\r\n      \"code\": 401000,\r\n      \"error\": \"Unauthorized\",\r\n      \"message\": \"Operation is not authorized\"\r\n    }\r\n  }\r\n}"
+              "application/json": "{\r\n  \"error\": {\r\n    \"code\": \"Unauthorized\",\r\n    \"message\": \"User is not authorized\",\r\n    \"target\": \"document\",\r\n    \"innerError\": {\r\n      \"code\": \"Unauthorized\",\r\n      \"message\": \"Operation is not authorized\"\r\n    }\r\n  }\r\n}"
             },
             "x-ms-error-response": true
           },
@@ -272,7 +279,7 @@
               "$ref": "#/definitions/ErrorResponseV2"
             },
             "examples": {
-              "application/json": "{\r\n  \"error\": {\r\n    \"code\": \"ResourceNotFound\",\r\n    \"message\": \"id not found\",\r\n    \"target\": \"document\",\r\n    \"innerError\": {\r\n      \"code\": 404000,\r\n      \"error\": \"ResourceNotFound\",\r\n      \"message\": \"Resource requested is not found\"\r\n    }\r\n  }\r\n}"
+              "application/json": "{\r\n  \"error\": {\r\n    \"code\": \"ResourceNotFound\",\r\n    \"message\": \"id not found\",\r\n    \"target\": \"document\",\r\n    \"innerError\": {\r\n      \"code\": \"ResourceNotFound\",\r\n      \"message\": \"Resource requested is not found\"\r\n    }\r\n  }\r\n}"
             },
             "x-ms-error-response": true
           },
@@ -282,7 +289,7 @@
               "$ref": "#/definitions/ErrorResponseV2"
             },
             "examples": {
-              "application/json": "{\r\n  \"error\": {\r\n    \"code\": \"RequestRateTooHigh\",\r\n    \"message\": \"User's request rate is too high\",\r\n    \"target\": \"document\",\r\n    \"innerError\": {\r\n      \"code\": 429000,\r\n      \"error\": \"RateTooHigh\",\r\n      \"message\": \"Request rate is too high\"\r\n    }\r\n  }\r\n}"
+              "application/json": "{\r\n  \"error\": {\r\n    \"code\": \"RequestRateTooHigh\",\r\n    \"message\": \"User's request rate is too high\",\r\n    \"target\": \"document\",\r\n    \"innerError\": {\r\n      \"code\": \"RateTooHigh\",\r\n      \"message\": \"Request rate is too high\"\r\n    }\r\n  }\r\n}"
             },
             "x-ms-error-response": true
           },
@@ -292,7 +299,7 @@
               "$ref": "#/definitions/ErrorResponseV2"
             },
             "examples": {
-              "application/json": "{\r\n  \"error\": {\r\n    \"code\": \"InternalServerError\",\r\n    \"message\": \"Internal Server Error\",\r\n    \"target\": \"document\",\r\n    \"innerError\": {\r\n      \"code\": 500000,\r\n      \"error\": \"Internal Server Error\",\r\n      \"message\": \"Unexpected internal server error has occurred\"\r\n    }\r\n  }\r\n}"
+              "application/json": "{\r\n  \"error\": {\r\n    \"code\": \"InternalServerError\",\r\n    \"message\": \"Internal Server Error\",\r\n    \"target\": \"document\",\r\n    \"innerError\": {\r\n      \"code\": \"InternalServerError\",\r\n      \"message\": \"Unexpected internal server error has occurred\"\r\n    }\r\n  }\r\n}"
             },
             "x-ms-error-response": true
           },
@@ -302,7 +309,7 @@
               "$ref": "#/definitions/ErrorResponseV2"
             },
             "examples": {
-              "application/json": "{\r\n  \"error\": {\r\n    \"code\": \"ServiceUnavailable\",\r\n    \"message\": \"Service is temporary unavailable\",\r\n    \"target\": \"document\",\r\n    \"innerError\": {\r\n      \"code\": 503000,\r\n      \"error\": \"ServiceTemporaryUnavailable\",\r\n      \"message\": \"Service is currently unavailable.  Please try again later\"\r\n    }\r\n  }\r\n}"
+              "application/json": "{\r\n  \"error\": {\r\n    \"code\": \"ServiceUnavailable\",\r\n    \"message\": \"Service is temporary unavailable\",\r\n    \"target\": \"document\",\r\n    \"innerError\": {\r\n      \"code\": \"ServiceTemporaryUnavailable\",\r\n      \"message\": \"Service is currently unavailable.  Please try again later\"\r\n    }\r\n  }\r\n}"
             },
             "x-ms-error-response": true
           }
@@ -321,7 +328,7 @@
         ],
         "summary": "Returns the status for a document translation request",
         "description": "Returns the status for a document translation request.\r\nThe status includes the overall request status, as well as the status for documents that are being translated as part of that request.",
-        "operationId": "Translation_GetOperationStatus",
+        "operationId": "DocumentTranslation_GetOperationStatus",
         "produces": [
           "application/json"
         ],
@@ -360,7 +367,7 @@
               "$ref": "#/definitions/ErrorResponseV2"
             },
             "examples": {
-              "application/json": "{\r\n  \"error\": {\r\n    \"code\": \"Unauthorized\",\r\n    \"message\": \"User is not authorized\",\r\n    \"target\": \"batch\",\r\n    \"innerError\": {\r\n      \"code\": 401000,\r\n      \"error\": \"Unauthorized\",\r\n      \"message\": \"Operation is not authorized\"\r\n    }\r\n  }\r\n}"
+              "application/json": "{\r\n  \"error\": {\r\n    \"code\": \"Unauthorized\",\r\n    \"message\": \"User is not authorized\",\r\n    \"target\": \"batch\",\r\n    \"innerError\": {\r\n      \"code\": \"Unauthorized\",\r\n      \"message\": \"Operation is not authorized\"\r\n    }\r\n  }\r\n}"
             },
             "x-ms-error-response": true
           },
@@ -370,7 +377,7 @@
               "$ref": "#/definitions/ErrorResponseV2"
             },
             "examples": {
-              "application/json": "{\r\n  \"error\": {\r\n    \"code\": \"ResourceNotFound\",\r\n    \"message\": \"id not found\",\r\n    \"target\": \"batch\",\r\n    \"innerError\": {\r\n      \"code\": 404000,\r\n      \"error\": \"ResourceNotFound\",\r\n      \"message\": \"Resource requested is not found\"\r\n    }\r\n  }\r\n}"
+              "application/json": "{\r\n  \"error\": {\r\n    \"code\": \"ResourceNotFound\",\r\n    \"message\": \"id not found\",\r\n    \"target\": \"batch\",\r\n    \"innerError\": {\r\n      \"code\": \"ResourceNotFound\",\r\n      \"message\": \"Resource requested is not found\"\r\n    }\r\n  }\r\n}"
             },
             "x-ms-error-response": true
           },
@@ -380,7 +387,7 @@
               "$ref": "#/definitions/ErrorResponseV2"
             },
             "examples": {
-              "application/json": "{\r\n  \"error\": {\r\n    \"code\": \"RequestRateTooHigh\",\r\n    \"message\": \"User's request rate is too high\",\r\n    \"target\": \"batch\",\r\n    \"innerError\": {\r\n      \"code\": 429000,\r\n      \"error\": \"RateTooHigh\",\r\n      \"message\": \"Request rate is too high\"\r\n    }\r\n  }\r\n}"
+              "application/json": "{\r\n  \"error\": {\r\n    \"code\": \"RequestRateTooHigh\",\r\n    \"message\": \"User's request rate is too high\",\r\n    \"target\": \"batch\",\r\n    \"innerError\": {\r\n      \"code\": \"RateTooHigh\",\r\n      \"message\": \"Request rate is too high\"\r\n    }\r\n  }\r\n}"
             },
             "x-ms-error-response": true
           },
@@ -390,7 +397,7 @@
               "$ref": "#/definitions/ErrorResponseV2"
             },
             "examples": {
-              "application/json": "{\r\n  \"error\": {\r\n    \"code\": \"InternalServerError\",\r\n    \"message\": \"Internal Server Error\",\r\n    \"target\": \"batch\",\r\n    \"innerError\": {\r\n      \"code\": 500000,\r\n      \"error\": \"Internal Server Error\",\r\n      \"message\": \"Unexpected internal server error has occurred\"\r\n    }\r\n  }\r\n}"
+              "application/json": "{\r\n  \"error\": {\r\n    \"code\": \"InternalServerError\",\r\n    \"message\": \"Internal Server Error\",\r\n    \"target\": \"batch\",\r\n    \"innerError\": {\r\n      \"code\": \"InternalServerError\",\r\n      \"message\": \"Unexpected internal server error has occurred\"\r\n    }\r\n  }\r\n}"
             },
             "x-ms-error-response": true
           },
@@ -400,7 +407,7 @@
               "$ref": "#/definitions/ErrorResponseV2"
             },
             "examples": {
-              "application/json": "{\r\n  \"error\": {\r\n    \"code\": \"ServiceUnavailable\",\r\n    \"message\": \"Service is temporary unavailable\",\r\n    \"target\": \"batch\",\r\n    \"innerError\": {\r\n      \"code\": 503000,\r\n      \"error\": \"ServiceTemporaryUnavailable\",\r\n      \"message\": \"Service is currently unavailable.  Please try again later\"\r\n    }\r\n  }\r\n}"
+              "application/json": "{\r\n  \"error\": {\r\n    \"code\": \"ServiceUnavailable\",\r\n    \"message\": \"Service is temporary unavailable\",\r\n    \"target\": \"batch\",\r\n    \"innerError\": {\r\n      \"code\": \"ServiceTemporaryUnavailable\",\r\n      \"message\": \"Service is currently unavailable.  Please try again later\"\r\n    }\r\n  }\r\n}"
             },
             "x-ms-error-response": true
           }
@@ -417,7 +424,7 @@
         ],
         "summary": "Cancel a currently processing or queued operation",
         "description": "Cancel a currently processing or queued operation.\r\nCancel a currently processing or queued operation.\r\nAn operation will not be cancelled if it is already completed or failed or cancelling. A bad request will be returned.\r\nAll documents that have completed translation will not be cancelled and will be charged.\r\nAll pending documents will be cancelled if possible.",
-        "operationId": "Translation_CancelOperation",
+        "operationId": "DocumentTranslation_CancelOperation",
         "produces": [
           "application/json"
         ],
@@ -444,7 +451,7 @@
               "$ref": "#/definitions/ErrorResponseV2"
             },
             "examples": {
-              "application/json": "{\r\n  \"error\": {\r\n    \"code\": \"Unauthorized\",\r\n    \"message\": \"User is not authorized\",\r\n    \"target\": \"batch\",\r\n    \"innerError\": {\r\n      \"code\": 401000,\r\n      \"error\": \"Unauthorized\",\r\n      \"message\": \"Operation is not authorized\"\r\n    }\r\n  }\r\n}"
+              "application/json": "{\r\n  \"error\": {\r\n    \"code\": \"Unauthorized\",\r\n    \"message\": \"User is not authorized\",\r\n    \"target\": \"batch\",\r\n    \"innerError\": {\r\n      \"code\": \"Unauthorized\",\r\n      \"message\": \"Operation is not authorized\"\r\n    }\r\n  }\r\n}"
             },
             "x-ms-error-response": true
           },
@@ -454,7 +461,7 @@
               "$ref": "#/definitions/ErrorResponseV2"
             },
             "examples": {
-              "application/json": "{\r\n  \"error\": {\r\n    \"code\": \"ResourceNotFound\",\r\n    \"message\": \"id not found\",\r\n    \"target\": \"batch\",\r\n    \"innerError\": {\r\n      \"code\": 404000,\r\n      \"error\": \"ResourceNotFound\",\r\n      \"message\": \"Resource requested is not found\"\r\n    }\r\n  }\r\n}"
+              "application/json": "{\r\n  \"error\": {\r\n    \"code\": \"ResourceNotFound\",\r\n    \"message\": \"id not found\",\r\n    \"target\": \"batch\",\r\n    \"innerError\": {\r\n      \"code\": \"ResourceNotFound\",\r\n      \"message\": \"Resource requested is not found\"\r\n    }\r\n  }\r\n}"
             },
             "x-ms-error-response": true
           },
@@ -464,7 +471,7 @@
               "$ref": "#/definitions/ErrorResponseV2"
             },
             "examples": {
-              "application/json": "{\r\n  \"error\": {\r\n    \"code\": \"RequestRateTooHigh\",\r\n    \"message\": \"User's request rate is too high\",\r\n    \"target\": \"batch\",\r\n    \"innerError\": {\r\n      \"code\": 429000,\r\n      \"error\": \"RateTooHigh\",\r\n      \"message\": \"Request rate is too high\"\r\n    }\r\n  }\r\n}"
+              "application/json": "{\r\n  \"error\": {\r\n    \"code\": \"RequestRateTooHigh\",\r\n    \"message\": \"User's request rate is too high\",\r\n    \"target\": \"batch\",\r\n    \"innerError\": {\r\n      \"code\": \"RateTooHigh\",\r\n      \"message\": \"Request rate is too high\"\r\n    }\r\n  }\r\n}"
             },
             "x-ms-error-response": true
           },
@@ -474,7 +481,7 @@
               "$ref": "#/definitions/ErrorResponseV2"
             },
             "examples": {
-              "application/json": "{\r\n  \"error\": {\r\n    \"code\": \"InternalServerError\",\r\n    \"message\": \"Internal Server Error\",\r\n    \"target\": \"batch\",\r\n    \"innerError\": {\r\n      \"code\": 500000,\r\n      \"error\": \"Internal Server Error\",\r\n      \"message\": \"Unexpected internal server error has occurred\"\r\n    }\r\n  }\r\n}"
+              "application/json": "{\r\n  \"error\": {\r\n    \"code\": \"InternalServerError\",\r\n    \"message\": \"Internal Server Error\",\r\n    \"target\": \"batch\",\r\n    \"innerError\": {\r\n      \"code\": \"InternalServerError\",\r\n      \"message\": \"Unexpected internal server error has occurred\"\r\n    }\r\n  }\r\n}"
             },
             "x-ms-error-response": true
           },
@@ -484,7 +491,7 @@
               "$ref": "#/definitions/ErrorResponseV2"
             },
             "examples": {
-              "application/json": "{\r\n  \"error\": {\r\n    \"code\": \"ServiceUnavailable\",\r\n    \"message\": \"Service is temporary unavailable\",\r\n    \"target\": \"batch\",\r\n    \"innerError\": {\r\n      \"code\": 503000,\r\n      \"error\": \"ServiceTemporaryUnavailable\",\r\n      \"message\": \"Service is currently unavailable.  Please try again later\"\r\n    }\r\n  }\r\n}"
+              "application/json": "{\r\n  \"error\": {\r\n    \"code\": \"ServiceUnavailable\",\r\n    \"message\": \"Service is temporary unavailable\",\r\n    \"target\": \"batch\",\r\n    \"innerError\": {\r\n      \"code\": \"ServiceTemporaryUnavailable\",\r\n      \"message\": \"Service is currently unavailable.  Please try again later\"\r\n    }\r\n  }\r\n}"
             },
             "x-ms-error-response": true
           }
@@ -503,7 +510,7 @@
         ],
         "summary": "Returns the status for all documents in a batch document translation request",
         "description": "Returns the status for all documents in a batch document translation request.\r\n            \r\nThe documents included in the response are sorted by document Id in descending order. If the number of documents in the response exceeds our paging limit, server-side paging is used.\r\nPaginated responses indicate a partial result and include a continuation token in the response. The absence of a continuation token means that no additional pages are available.\r\n            \r\n$top and $skip query parameters can be used to specify a number of results to return and an offset for the collection.\r\nThe server honors the values specified by the client. However, clients must be prepared to handle responses that contain a different page size or contain a continuation token.\r\n            \r\nWhen both $top and $skip are included, the server should first apply $skip and then $top on the collection.\r\nNote: If the server can't honor $top and/or $skip, the server must return an error to the client informing about it instead of just ignoring the query options.\r\nThis reduces the risk of the client making assumptions about the data returned.",
-        "operationId": "Translation_GetOperationDocumentsStatus",
+        "operationId": "DocumentTranslation_GetOperationDocumentsStatus",
         "produces": [
           "application/json"
         ],
@@ -562,7 +569,7 @@
               "$ref": "#/definitions/ErrorResponseV2"
             },
             "examples": {
-              "application/json": "{\r\n  \"error\": {\r\n    \"code\": \"InvalidRequest\",\r\n    \"message\": \"Some argument is incorrect\",\r\n    \"target\": \"document\",\r\n    \"innerError\": {\r\n      \"code\": 400120,\r\n      \"error\": \"SASTokenInvalid\",\r\n      \"message\": \"SAS token for storage is invalid\"\r\n    }\r\n  }\r\n}"
+              "application/json": "{\r\n  \"error\": {\r\n    \"code\": \"InvalidRequest\",\r\n    \"message\": \"Some argument is incorrect\",\r\n    \"target\": \"document\",\r\n    \"innerError\": {\r\n      \"code\": \"SASTokenInvalid\",\r\n      \"message\": \"SAS token for storage is invalid\"\r\n    }\r\n  }\r\n}"
             },
             "x-ms-error-response": true
           },
@@ -572,7 +579,7 @@
               "$ref": "#/definitions/ErrorResponseV2"
             },
             "examples": {
-              "application/json": "{\r\n  \"error\": {\r\n    \"code\": \"Unauthorized\",\r\n    \"message\": \"User is not authorized\",\r\n    \"target\": \"document\",\r\n    \"innerError\": {\r\n      \"code\": 401000,\r\n      \"error\": \"Unauthorized\",\r\n      \"message\": \"Operation is not authorized\"\r\n    }\r\n  }\r\n}"
+              "application/json": "{\r\n  \"error\": {\r\n    \"code\": \"Unauthorized\",\r\n    \"message\": \"User is not authorized\",\r\n    \"target\": \"document\",\r\n    \"innerError\": {\r\n      \"code\": \"Unauthorized\",\r\n      \"message\": \"Operation is not authorized\"\r\n    }\r\n  }\r\n}"
             },
             "x-ms-error-response": true
           },
@@ -582,7 +589,7 @@
               "$ref": "#/definitions/ErrorResponseV2"
             },
             "examples": {
-              "application/json": "{\r\n  \"error\": {\r\n    \"code\": \"ResourceNotFound\",\r\n    \"message\": \"id not found\",\r\n    \"target\": \"document\",\r\n    \"innerError\": {\r\n      \"code\": 404000,\r\n      \"error\": \"ResourceNotFound\",\r\n      \"message\": \"Resource requested is not found\"\r\n    }\r\n  }\r\n}"
+              "application/json": "{\r\n  \"error\": {\r\n    \"code\": \"ResourceNotFound\",\r\n    \"message\": \"id not found\",\r\n    \"target\": \"document\",\r\n    \"innerError\": {\r\n      \"code\": \"ResourceNotFound\",\r\n      \"message\": \"Resource requested is not found\"\r\n    }\r\n  }\r\n}"
             },
             "x-ms-error-response": true
           },
@@ -592,7 +599,7 @@
               "$ref": "#/definitions/ErrorResponseV2"
             },
             "examples": {
-              "application/json": "{\r\n  \"error\": {\r\n    \"code\": \"RequestRateTooHigh\",\r\n    \"message\": \"User's request rate is too high\",\r\n    \"target\": \"document\",\r\n    \"innerError\": {\r\n      \"code\": 429000,\r\n      \"error\": \"RateTooHigh\",\r\n      \"message\": \"Request rate is too high\"\r\n    }\r\n  }\r\n}"
+              "application/json": "{\r\n  \"error\": {\r\n    \"code\": \"RequestRateTooHigh\",\r\n    \"message\": \"User's request rate is too high\",\r\n    \"target\": \"document\",\r\n    \"innerError\": {\r\n      \"code\": \"RateTooHigh\",\r\n      \"message\": \"Request rate is too high\"\r\n    }\r\n  }\r\n}"
             },
             "x-ms-error-response": true
           },
@@ -602,7 +609,7 @@
               "$ref": "#/definitions/ErrorResponseV2"
             },
             "examples": {
-              "application/json": "{\r\n  \"error\": {\r\n    \"code\": \"InternalServerError\",\r\n    \"message\": \"Internal Server Error\",\r\n    \"target\": \"document\",\r\n    \"innerError\": {\r\n      \"code\": 500000,\r\n      \"error\": \"Internal Server Error\",\r\n      \"message\": \"Unexpected internal server error has occurred\"\r\n    }\r\n  }\r\n}"
+              "application/json": "{\r\n  \"error\": {\r\n    \"code\": \"InternalServerError\",\r\n    \"message\": \"Internal Server Error\",\r\n    \"target\": \"document\",\r\n    \"innerError\": {\r\n      \"code\": \"InternalServerError\",\r\n      \"message\": \"Unexpected internal server error has occurred\"\r\n    }\r\n  }\r\n}"
             },
             "x-ms-error-response": true
           },
@@ -612,7 +619,7 @@
               "$ref": "#/definitions/ErrorResponseV2"
             },
             "examples": {
-              "application/json": "{\r\n  \"error\": {\r\n    \"code\": \"ServiceUnavailable\",\r\n    \"message\": \"Service is temporary unavailable\",\r\n    \"target\": \"document\",\r\n    \"innerError\": {\r\n      \"code\": 503000,\r\n      \"error\": \"ServiceTemporaryUnavailable\",\r\n      \"message\": \"Service is currently unavailable.  Please try again later\"\r\n    }\r\n  }\r\n}"
+              "application/json": "{\r\n  \"error\": {\r\n    \"code\": \"ServiceUnavailable\",\r\n    \"message\": \"Service is temporary unavailable\",\r\n    \"target\": \"document\",\r\n    \"innerError\": {\r\n      \"code\": \"ServiceTemporaryUnavailable\",\r\n      \"message\": \"Service is currently unavailable.  Please try again later\"\r\n    }\r\n  }\r\n}"
             },
             "x-ms-error-response": true
           }
@@ -621,6 +628,9 @@
           "Get Documents Status for the operation batch id": {
             "$ref": "./examples/documents.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "@nextLink"
         }
       }
     },
@@ -631,7 +641,7 @@
         ],
         "summary": "Returns a list of supported document formats",
         "description": "The list of supported document formats supported by the Document Translation service.\r\nThe list includes the common file extension, as well as the content-type if using the upload API.",
-        "operationId": "Translation_GetDocumentFormats",
+        "operationId": "DocumentTranslation_GetDocumentFormats",
         "produces": [
           "application/json"
         ],
@@ -648,7 +658,7 @@
               "$ref": "#/definitions/ErrorResponseV2"
             },
             "examples": {
-              "application/json": "{\r\n  \"error\": {\r\n    \"code\": \"RequestRateTooHigh\",\r\n    \"message\": \"User's request rate is too high\",\r\n    \"target\": \"format\",\r\n    \"innerError\": {\r\n      \"code\": 429000,\r\n      \"error\": \"RateTooHigh\",\r\n      \"message\": \"Request rate is too high\"\r\n    }\r\n  }\r\n}"
+              "application/json": "{\r\n  \"error\": {\r\n    \"code\": \"RequestRateTooHigh\",\r\n    \"message\": \"User's request rate is too high\",\r\n    \"target\": \"format\",\r\n    \"innerError\": {\r\n      \"code\": \"RateTooHigh\",\r\n      \"message\": \"Request rate is too high\"\r\n    }\r\n  }\r\n}"
             },
             "x-ms-error-response": true
           },
@@ -658,7 +668,7 @@
               "$ref": "#/definitions/ErrorResponseV2"
             },
             "examples": {
-              "application/json": "{\r\n  \"error\": {\r\n    \"code\": \"InternalServerError\",\r\n    \"message\": \"Internal Server Error\",\r\n    \"target\": \"format\",\r\n    \"innerError\": {\r\n      \"code\": 500000,\r\n      \"error\": \"Internal Server Error\",\r\n      \"message\": \"Unexpected internal server error has occurred\"\r\n    }\r\n  }\r\n}"
+              "application/json": "{\r\n  \"error\": {\r\n    \"code\": \"InternalServerError\",\r\n    \"message\": \"Internal Server Error\",\r\n    \"target\": \"format\",\r\n    \"innerError\": {\r\n      \"code\": \"InternalServerError\",\r\n      \"message\": \"Unexpected internal server error has occurred\"\r\n    }\r\n  }\r\n}"
             },
             "x-ms-error-response": true
           },
@@ -668,7 +678,7 @@
               "$ref": "#/definitions/ErrorResponseV2"
             },
             "examples": {
-              "application/json": "{\r\n  \"error\": {\r\n    \"code\": \"ServiceUnavailable\",\r\n    \"message\": \"Service is temporary unavailable\",\r\n    \"target\": \"format\",\r\n    \"innerError\": {\r\n      \"code\": 503000,\r\n      \"error\": \"ServiceTemporaryUnavailable\",\r\n      \"message\": \"Service is currently unavailable.  Please try again later\"\r\n    }\r\n  }\r\n}"
+              "application/json": "{\r\n  \"error\": {\r\n    \"code\": \"ServiceUnavailable\",\r\n    \"message\": \"Service is temporary unavailable\",\r\n    \"target\": \"format\",\r\n    \"innerError\": {\r\n      \"code\": \"ServiceTemporaryUnavailable\",\r\n      \"message\": \"Service is currently unavailable.  Please try again later\"\r\n    }\r\n  }\r\n}"
             },
             "x-ms-error-response": true
           }
@@ -687,7 +697,7 @@
         ],
         "summary": "Returns the list of supported glossary formats",
         "description": "The list of supported glossary formats supported by the Document Translation service.\r\nThe list includes the common file extension used.",
-        "operationId": "Translation_GetGlossaryFormats",
+        "operationId": "DocumentTranslation_GetGlossaryFormats",
         "produces": [
           "application/json"
         ],
@@ -704,7 +714,7 @@
               "$ref": "#/definitions/ErrorResponseV2"
             },
             "examples": {
-              "application/json": "{\r\n  \"error\": {\r\n    \"code\": \"RequestRateTooHigh\",\r\n    \"message\": \"User's request rate is too high\",\r\n    \"target\": \"format\",\r\n    \"innerError\": {\r\n      \"code\": 429000,\r\n      \"error\": \"RateTooHigh\",\r\n      \"message\": \"Request rate is too high\"\r\n    }\r\n  }\r\n}"
+              "application/json": "{\r\n  \"error\": {\r\n    \"code\": \"RequestRateTooHigh\",\r\n    \"message\": \"User's request rate is too high\",\r\n    \"target\": \"format\",\r\n    \"innerError\": {\r\n      \"code\": \"RateTooHigh\",\r\n      \"message\": \"Request rate is too high\"\r\n    }\r\n  }\r\n}"
             },
             "x-ms-error-response": true
           },
@@ -714,7 +724,7 @@
               "$ref": "#/definitions/ErrorResponseV2"
             },
             "examples": {
-              "application/json": "{\r\n  \"error\": {\r\n    \"code\": \"InternalServerError\",\r\n    \"message\": \"Internal Server Error\",\r\n    \"target\": \"format\",\r\n    \"innerError\": {\r\n      \"code\": 500000,\r\n      \"error\": \"Internal Server Error\",\r\n      \"message\": \"Unexpected internal server error has occurred\"\r\n    }\r\n  }\r\n}"
+              "application/json": "{\r\n  \"error\": {\r\n    \"code\": \"InternalServerError\",\r\n    \"message\": \"Internal Server Error\",\r\n    \"target\": \"format\",\r\n    \"innerError\": {\r\n      \"code\": \"InternalServerError\",\r\n      \"message\": \"Unexpected internal server error has occurred\"\r\n    }\r\n  }\r\n}"
             },
             "x-ms-error-response": true
           },
@@ -724,7 +734,7 @@
               "$ref": "#/definitions/ErrorResponseV2"
             },
             "examples": {
-              "application/json": "{\r\n  \"error\": {\r\n    \"code\": \"ServiceUnavailable\",\r\n    \"message\": \"Service is temporary unavailable\",\r\n    \"target\": \"format\",\r\n    \"innerError\": {\r\n      \"code\": 503000,\r\n      \"error\": \"ServiceTemporaryUnavailable\",\r\n      \"message\": \"Service is currently unavailable.  Please try again later\"\r\n    }\r\n  }\r\n}"
+              "application/json": "{\r\n  \"error\": {\r\n    \"code\": \"ServiceUnavailable\",\r\n    \"message\": \"Service is temporary unavailable\",\r\n    \"target\": \"format\",\r\n    \"innerError\": {\r\n      \"code\": \"ServiceTemporaryUnavailable\",\r\n      \"message\": \"Service is currently unavailable.  Please try again later\"\r\n    }\r\n  }\r\n}"
             },
             "x-ms-error-response": true
           }
@@ -743,7 +753,7 @@
         ],
         "summary": "Returns a list of supported storage sources",
         "description": "Returns a list of storage sources/options supported by the Document Translation service.",
-        "operationId": "Translation_GetDocumentStorageSource",
+        "operationId": "DocumentTranslation_GetDocumentStorageSource",
         "produces": [
           "application/json"
         ],
@@ -760,7 +770,7 @@
               "$ref": "#/definitions/ErrorResponseV2"
             },
             "examples": {
-              "application/json": "{\r\n  \"error\": {\r\n    \"code\": \"RequestRateTooHigh\",\r\n    \"message\": \"User's request rate is too high\",\r\n    \"target\": \"source\",\r\n    \"innerError\": {\r\n      \"code\": 429000,\r\n      \"error\": \"RateTooHigh\",\r\n      \"message\": \"Request rate is too high\"\r\n    }\r\n  }\r\n}"
+              "application/json": "{\r\n  \"error\": {\r\n    \"code\": \"RequestRateTooHigh\",\r\n    \"message\": \"User's request rate is too high\",\r\n    \"target\": \"source\",\r\n    \"innerError\": {\r\n      \"code\": \"RateTooHigh\",\r\n      \"message\": \"Request rate is too high\"\r\n    }\r\n  }\r\n}"
             },
             "x-ms-error-response": true
           },
@@ -770,7 +780,7 @@
               "$ref": "#/definitions/ErrorResponseV2"
             },
             "examples": {
-              "application/json": "{\r\n  \"error\": {\r\n    \"code\": \"InternalServerError\",\r\n    \"message\": \"Internal Server Error\",\r\n    \"target\": \"source\",\r\n    \"innerError\": {\r\n      \"code\": 500000,\r\n      \"error\": \"Internal Server Error\",\r\n      \"message\": \"Unexpected internal server error has occurred\"\r\n    }\r\n  }\r\n}"
+              "application/json": "{\r\n  \"error\": {\r\n    \"code\": \"InternalServerError\",\r\n    \"message\": \"Internal Server Error\",\r\n    \"target\": \"source\",\r\n    \"innerError\": {\r\n      \"code\": \"InternalServerError\",\r\n      \"message\": \"Unexpected internal server error has occurred\"\r\n    }\r\n  }\r\n}"
             },
             "x-ms-error-response": true
           },
@@ -780,7 +790,7 @@
               "$ref": "#/definitions/ErrorResponseV2"
             },
             "examples": {
-              "application/json": "{\r\n  \"error\": {\r\n    \"code\": \"ServiceUnavailable\",\r\n    \"message\": \"Service is temporary unavailable\",\r\n    \"target\": \"source\",\r\n    \"innerError\": {\r\n      \"code\": 503000,\r\n      \"error\": \"ServiceTemporaryUnavailable\",\r\n      \"message\": \"Service is currently unavailable.  Please try again later\"\r\n    }\r\n  }\r\n}"
+              "application/json": "{\r\n  \"error\": {\r\n    \"code\": \"ServiceUnavailable\",\r\n    \"message\": \"Service is temporary unavailable\",\r\n    \"target\": \"source\",\r\n    \"innerError\": {\r\n      \"code\": \"ServiceTemporaryUnavailable\",\r\n      \"message\": \"Service is currently unavailable.  Please try again later\"\r\n    }\r\n  }\r\n}"
             },
             "x-ms-error-response": true
           }
@@ -814,7 +824,16 @@
       "enum": [
         "AzureBlob"
       ],
-      "type": "string"
+      "type": "string",
+      "x-ms-enum": {
+        "name": "StorageSource",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "AzureBlob"
+          }
+        ]
+      }
     },
     "SourceInput": {
       "description": "Source of the input documents",
@@ -909,7 +928,19 @@
         "Folder",
         "File"
       ],
-      "type": "string"
+      "type": "string",
+      "x-ms-enum": {
+        "name": "StorageInputType",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Folder"
+          },
+          {
+            "value": "File"
+          }
+        ]
+      }
     },
     "BatchRequest": {
       "description": "Definition for the input batch translation request",
@@ -958,11 +989,138 @@
         "Succeeded",
         "Failed",
         "Cancelled",
-        "Cancelling"
+        "Cancelling",
+        "ValidationFailed"
       ],
-      "type": "string"
+      "type": "string",
+      "x-ms-enum": {
+        "name": "Status",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "NotStarted"
+          },
+          {
+            "value": "Running"
+          },
+          {
+            "value": "Succeeded"
+          },
+          {
+            "value": "Failed"
+          },
+          {
+            "value": "Cancelled"
+          },
+          {
+            "value": "Cancelling"
+          },
+          {
+            "value": "ValidationFailed"
+          }
+        ]
+      }
+    },
+    "ErrorCodeV2": {
+      "description": "Enums containing high level error codes.",
+      "enum": [
+        "InvalidRequest",
+        "InvalidArgument",
+        "InternalServerError",
+        "ServiceUnavailable",
+        "ResourceNotFound",
+        "Unauthorized",
+        "RequestRateTooHigh"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "ErrorCodeV2",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "InvalidRequest"
+          },
+          {
+            "value": "InvalidArgument"
+          },
+          {
+            "value": "InternalServerError"
+          },
+          {
+            "value": "ServiceUnavailable"
+          },
+          {
+            "value": "ResourceNotFound"
+          },
+          {
+            "value": "Unauthorized"
+          },
+          {
+            "value": "RequestRateTooHigh"
+          }
+        ]
+      }
+    },
+    "InnerErrorV2": {
+      "description": "New Inner Error format which conforms to Cognitive Services API Guidelines which is available at https://microsoft.sharepoint.com/%3Aw%3A/t/CognitiveServicesPMO/EUoytcrjuJdKpeOKIK_QRC8BPtUYQpKBi8JsWyeDMRsWlQ?e=CPq8ow.\r\nThis contains required properties ErrorCode, message and optional properties target, details(key value pair), inner error(this can be nested).",
+      "required": [
+        "code",
+        "message"
+      ],
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "Gets code error string.",
+          "type": "string"
+        },
+        "message": {
+          "description": "Gets high level error message.",
+          "type": "string"
+        },
+        "target": {
+          "description": "Gets the source of the error. \r\nFor example it would be \"documents\" or \"document id\" in case of invalid document.",
+          "type": "string",
+          "readOnly": true
+        },
+        "innerError": {
+          "$ref": "#/definitions/InnerErrorV2"
+        }
+      }
+    },
+    "ErrorV2": {
+      "description": "This contains an outer error with error code, message, details, target and an inner error with more descriptive details.",
+      "required": [
+        "message"
+      ],
+      "type": "object",
+      "properties": {
+        "code": {
+          "$ref": "#/definitions/ErrorCodeV2"
+        },
+        "message": {
+          "description": "Gets high level error message.",
+          "type": "string"
+        },
+        "target": {
+          "description": "Gets the source of the error. \r\nFor example it would be \"documents\" or \"document id\" in case of invalid document.",
+          "type": "string",
+          "readOnly": true
+        },
+        "innerError": {
+          "$ref": "#/definitions/InnerErrorV2"
+        }
+      }
     },
     "StatusSummary": {
+      "required": [
+        "cancelled",
+        "failed",
+        "inProgress",
+        "notYetStarted",
+        "success",
+        "total",
+        "totalCharacterCharged"
+      ],
       "type": "object",
       "properties": {
         "total": {
@@ -1000,6 +1158,11 @@
           "description": "Number of cancelled",
           "type": "integer",
           "example": 0
+        },
+        "totalCharacterCharged": {
+          "format": "int64",
+          "description": "Total characters charged by the API",
+          "type": "integer"
         }
       }
     },
@@ -1009,6 +1172,7 @@
         "createdDateTimeUtc",
         "id",
         "lastActionDateTimeUtc",
+        "status",
         "summary"
       ],
       "type": "object",
@@ -1034,6 +1198,9 @@
         "status": {
           "$ref": "#/definitions/Status"
         },
+        "error": {
+          "$ref": "#/definitions/ErrorV2"
+        },
         "summary": {
           "$ref": "#/definitions/StatusSummary"
         }
@@ -1041,6 +1208,9 @@
     },
     "BatchStatusResponse": {
       "description": "Document Status Response",
+      "required": [
+        "value"
+      ],
       "type": "object",
       "properties": {
         "value": {
@@ -1057,76 +1227,13 @@
         }
       }
     },
-    "ErrorCodeV2": {
-      "description": "Enums containing high level error codes.",
-      "enum": [
-        "InvalidRequest",
-        "InvalidArgument",
-        "InternalServerError",
-        "ServiceUnavailable",
-        "ResourceNotFound",
-        "Unauthorized",
-        "RequestRateTooHigh"
-      ],
-      "type": "string"
-    },
-    "InnerErrorV2": {
-      "description": "New Inner Error format which conforms to Cognitive Services API Guidelines which is available at https://microsoft.sharepoint.com/%3Aw%3A/t/CognitiveServicesPMO/EUoytcrjuJdKpeOKIK_QRC8BPtUYQpKBi8JsWyeDMRsWlQ?e=CPq8ow.\r\nThis contains required properties ErrorCode, message and optional properties target, details(key value pair), inner error(this can be nested).",
-      "type": "object",
-      "properties": {
-        "code": {
-          "format": "int32",
-          "description": "Gets detailed error code.",
-          "type": "integer",
-          "readOnly": true
-        },
-        "error": {
-          "description": "Gets detailed error string.",
-          "type": "string",
-          "readOnly": true
-        },
-        "message": {
-          "description": "Gets high level error message.",
-          "type": "string",
-          "readOnly": true
-        },
-        "target": {
-          "description": "Gets the source of the error. \r\nFor example it would be \"documents\" or \"document id\" in case of invalid document.",
-          "type": "string",
-          "readOnly": true
-        },
-        "innerError": {
-          "$ref": "#/definitions/InnerErrorV2"
-        }
-      }
-    },
-    "ErrorV2": {
-      "description": "This contains an outer error with error code, message, details, target and an inner error with more descriptive details.",
-      "type": "object",
-      "properties": {
-        "code": {
-          "$ref": "#/definitions/ErrorCodeV2"
-        },
-        "message": {
-          "description": "Gets high level error message.",
-          "type": "string",
-          "readOnly": true
-        },
-        "target": {
-          "description": "Gets the source of the error. \r\nFor example it would be \"documents\" or \"document id\" in case of invalid document.",
-          "type": "string",
-          "readOnly": true
-        },
-        "innerError": {
-          "$ref": "#/definitions/InnerErrorV2"
-        }
-      }
-    },
     "DocumentStatusDetail": {
       "required": [
         "createdDateTimeUtc",
+        "id",
         "lastActionDateTimeUtc",
         "path",
+        "progress",
         "status",
         "to"
       ],
@@ -1152,11 +1259,6 @@
         "status": {
           "$ref": "#/definitions/Status"
         },
-        "detectedLanguage": {
-          "description": "Detected language of the original document (to be implemented)",
-          "type": "string",
-          "example": "en"
-        },
         "to": {
           "description": "To language",
           "type": "string"
@@ -1177,11 +1279,19 @@
           "description": "Document Id",
           "type": "string",
           "example": "1c7399a7-6913-4f20-bb43-e2fe2ba1a67d"
+        },
+        "characterCharged": {
+          "format": "int64",
+          "description": "Character charged by the API",
+          "type": "integer"
         }
       }
     },
     "DocumentStatusResponse": {
       "description": "Document Status Response",
+      "required": [
+        "value"
+      ],
       "type": "object",
       "properties": {
         "value": {
@@ -1231,6 +1341,9 @@
     },
     "FileFormatListResult": {
       "description": "Base type for List return in our api",
+      "required": [
+        "value"
+      ],
       "type": "object",
       "properties": {
         "value": {
@@ -1244,6 +1357,9 @@
     },
     "StorageSourceListResult": {
       "description": "Base type for List return in our api",
+      "required": [
+        "value"
+      ],
       "type": "object",
       "properties": {
         "value": {
