@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2020-07-01-preview",
+    "version": "2021-02-01-preview",
     "title": "adp",
     "description": "Microsoft Autonomous Development Platform"
   },
@@ -39,7 +39,7 @@
         "tags": [
           "Operations"
         ],
-        "description": "Lists all of the available Autonomous Development Platform provider operations.",
+        "description": "Lists all of the available Autonomous Development Platform provider operations",
         "operationId": "Operations_List",
         "x-ms-examples": {
           "List operations": {
@@ -59,7 +59,7 @@
             }
           },
           "default": {
-            "description": "Error response describing why the operation failed.",
+            "description": "Error response describing why the operation failed",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
@@ -67,6 +67,45 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AutonomousDevelopmentPlatform/checkNameAvailability": {
+      "post": {
+        "tags": [
+          "Accounts"
+        ],
+        "operationId": "Accounts_CheckNameAvailability",
+        "description": "Checks that the account name is valid and is not already in use",
+        "x-ms-examples": {
+          "AccountCheckNameAvailability": {
+            "$ref": "./examples/AdpAccountCheckNameAvailability.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AccountCheckNameAvailabilityParameters"
+            },
+            "description": "The checkNameAvailability parameters."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK -- Operation to check the account name availability was successful",
+            "schema": {
+              "$ref": "#/definitions/CheckNameAvailabilityResult"
+            }
+          }
         }
       }
     },
@@ -98,7 +137,7 @@
             }
           },
           "default": {
-            "description": "Error response describing why the operation failed.",
+            "description": "Error response describing why the operation failed",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
@@ -140,7 +179,7 @@
             }
           },
           "default": {
-            "description": "Error response describing why the operation failed.",
+            "description": "Error response describing why the operation failed",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
@@ -157,7 +196,7 @@
           "Accounts"
         ],
         "operationId": "Accounts_Get",
-        "description": "Gets the properties of an ADP account.",
+        "description": "Gets the properties of an ADP account",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
@@ -174,13 +213,13 @@
         ],
         "responses": {
           "200": {
-            "description": "The ADP account properties were retrieved successfully.",
+            "description": "The ADP account properties were retrieved successfully",
             "schema": {
               "$ref": "#/definitions/Account"
             }
           },
           "default": {
-            "description": "Error response describing why the operation failed.",
+            "description": "Error response describing why the operation failed",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
@@ -198,7 +237,7 @@
         ],
         "operationId": "Accounts_Update",
         "x-ms-long-running-operation": true,
-        "description": "Updates the properties of an existing ADP account.",
+        "description": "Updates the properties of an existing ADP account",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
@@ -215,7 +254,7 @@
           {
             "in": "body",
             "name": "parameters",
-            "description": "The parameters to provide for the current ADP account.",
+            "description": "The parameters to provide for the current ADP account",
             "schema": {
               "$ref": "#/definitions/AccountPatch"
             }
@@ -223,19 +262,19 @@
         ],
         "responses": {
           "200": {
-            "description": "The resource was updated successfully.",
+            "description": "The resource was updated successfully",
             "schema": {
               "$ref": "#/definitions/Account"
             }
           },
           "201": {
-            "description": "The resource will be updated asynchronously.",
+            "description": "The resource will be updated asynchronously",
             "schema": {
               "$ref": "#/definitions/Account"
             }
           },
           "default": {
-            "description": "Error response describing why the operation failed.",
+            "description": "Error response describing why the operation failed",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
@@ -252,7 +291,7 @@
           "Accounts"
         ],
         "operationId": "Accounts_CreateOrUpdate",
-        "description": "Creates or updates an ADP account.",
+        "description": "Creates or updates an ADP account",
         "x-ms-long-running-operation": true,
         "parameters": [
           {
@@ -270,7 +309,7 @@
           {
             "in": "body",
             "name": "parameters",
-            "description": "The parameters to provide for the ADP account.",
+            "description": "The parameters to provide for the ADP account",
             "schema": {
               "$ref": "#/definitions/Account"
             }
@@ -278,19 +317,19 @@
         ],
         "responses": {
           "200": {
-            "description": "The ADP account was successfully updated.",
+            "description": "The ADP account was successfully updated",
             "schema": {
               "$ref": "#/definitions/Account"
             }
           },
           "201": {
-            "description": "The resource will be updated asynchronously.",
+            "description": "The resource will be updated asynchronously",
             "schema": {
               "$ref": "#/definitions/Account"
             }
           },
           "default": {
-            "description": "Error response describing why the operation failed.",
+            "description": "Error response describing why the operation failed",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
@@ -307,7 +346,7 @@
           "Accounts"
         ],
         "operationId": "Accounts_Delete",
-        "description": "Deletes an ADP account.",
+        "description": "Deletes an ADP account",
         "x-ms-long-running-operation": true,
         "parameters": [
           {
@@ -325,16 +364,16 @@
         ],
         "responses": {
           "200": {
-            "description": "The ADP account was successfully deleted."
+            "description": "The ADP account was successfully deleted"
           },
           "202": {
-            "description": "The ADP account will be deleted asynchronously."
+            "description": "The ADP account will be deleted asynchronously"
           },
           "204": {
-            "description": "The ADP account does not exist."
+            "description": "The ADP account does not exist"
           },
           "default": {
-            "description": "Error response describing why the operation failed.",
+            "description": "Error response describing why the operation failed",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
@@ -353,7 +392,7 @@
           "DataPools"
         ],
         "operationId": "DataPools_List",
-        "description": "Lists the data pools under the ADP account.",
+        "description": "Lists the data pools under the ADP account",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
@@ -370,13 +409,13 @@
         ],
         "responses": {
           "200": {
-            "description": "The list of data pools that was successfully retrieved.",
+            "description": "The list of data pools that was successfully retrieved",
             "schema": {
               "$ref": "#/definitions/DataPoolList"
             }
           },
           "default": {
-            "description": "Error response describing why the operation failed.",
+            "description": "Error response describing why the operation failed",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
@@ -398,7 +437,7 @@
           "DataPools"
         ],
         "operationId": "DataPools_Get",
-        "description": "Gets the properties of a Data Pool.",
+        "description": "Gets the properties of a Data Pool",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
@@ -418,13 +457,13 @@
         ],
         "responses": {
           "200": {
-            "description": "The Data Pool that was successfully retrieved.",
+            "description": "The Data Pool that was successfully retrieved",
             "schema": {
               "$ref": "#/definitions/DataPool"
             }
           },
           "default": {
-            "description": "Error response describing why the operation failed.",
+            "description": "Error response describing why the operation failed",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
@@ -441,7 +480,7 @@
           "DataPools"
         ],
         "operationId": "DataPools_Update",
-        "description": "Updates the properties of an existing Data Pool.",
+        "description": "Updates the properties of an existing Data Pool",
         "x-ms-long-running-operation": true,
         "parameters": [
           {
@@ -462,7 +501,7 @@
           {
             "in": "body",
             "name": "parameters",
-            "description": "The parameters to provide for the Data Pool.",
+            "description": "The parameters to provide for the Data Pool",
             "schema": {
               "$ref": "#/definitions/DataPoolPatch"
             }
@@ -470,19 +509,19 @@
         ],
         "responses": {
           "200": {
-            "description": "The Data Pool was updated successfully.",
+            "description": "The Data Pool was updated successfully",
             "schema": {
               "$ref": "#/definitions/DataPool"
             }
           },
           "201": {
-            "description": "The Data Pool will be updated asynchronously.",
+            "description": "The Data Pool will be updated asynchronously",
             "schema": {
               "$ref": "#/definitions/DataPool"
             }
           },
           "default": {
-            "description": "Error response describing why the operation failed.",
+            "description": "Error response describing why the operation failed",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
@@ -499,7 +538,7 @@
           "DataPools"
         ],
         "operationId": "DataPools_CreateOrUpdate",
-        "description": "Creates or updates a Data Pool.",
+        "description": "Creates or updates a Data Pool",
         "x-ms-long-running-operation": true,
         "parameters": [
           {
@@ -520,7 +559,7 @@
           {
             "in": "body",
             "name": "parameters",
-            "description": "The parameters to provide for the Data Pool.",
+            "description": "The parameters to provide for the Data Pool",
             "schema": {
               "$ref": "#/definitions/DataPool"
             }
@@ -528,19 +567,19 @@
         ],
         "responses": {
           "200": {
-            "description": "The Data Pool was successfully updated.",
+            "description": "The Data Pool was successfully updated",
             "schema": {
               "$ref": "#/definitions/DataPool"
             }
           },
           "201": {
-            "description": "The Data Pool will be updated asynchronously.",
+            "description": "The Data Pool will be updated asynchronously",
             "schema": {
               "$ref": "#/definitions/DataPool"
             }
           },
           "default": {
-            "description": "Error response describing why the operation failed.",
+            "description": "Error response describing why the operation failed",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
@@ -557,7 +596,7 @@
           "DataPools"
         ],
         "operationId": "DataPools_Delete",
-        "description": "Deletes a Data Pool.",
+        "description": "Deletes a Data Pool",
         "x-ms-long-running-operation": true,
         "parameters": [
           {
@@ -578,16 +617,16 @@
         ],
         "responses": {
           "200": {
-            "description": "The Data Pool was successfully deleted."
+            "description": "The Data Pool was successfully deleted"
           },
           "202": {
-            "description": "The Data Pool will be deleted asynchronously."
+            "description": "The Data Pool will be deleted asynchronously"
           },
           "204": {
-            "description": "The Data Pool does not exist."
+            "description": "The Data Pool does not exist"
           },
           "default": {
-            "description": "Error response describing why the operation failed.",
+            "description": "Error response describing why the operation failed",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
@@ -602,6 +641,59 @@
     }
   },
   "definitions": {
+    "AccountCheckNameAvailabilityParameters": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The account name",
+          "pattern": "^[a-zA-Z0-9]+(-[a-zA-Z0-9]+)*"
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "Microsoft.AutonomousDevelopmentPlatform/accounts"
+          ],
+          "x-ms-enum": {
+            "name": "Type",
+            "modelAsString": true
+          },
+          "description": "The type of resource, Microsoft.AutonomousDevelopmentPlatform/accounts"
+        }
+      },
+      "required": [
+        "name",
+        "type"
+      ],
+      "description": "The parameters used to check the availability of the account name"
+    },
+    "CheckNameAvailabilityResult": {
+      "description": "The checkNameAvailability operation response",
+      "properties": {
+        "nameAvailable": {
+          "readOnly": true,
+          "type": "boolean",
+          "description": "Gets a boolean value that indicates whether the name is available for you to use. If true, the name is available. If false, the name has already been taken or is invalid and cannot be used"
+        },
+        "reason": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Gets the reason that an account name could not be used. The reason element is only returned if nameAvailable is false",
+          "enum": [
+            "Invalid",
+            "AlreadyExists"
+          ],
+          "x-ms-enum": {
+            "name": "CheckNameAvailabilityReason",
+            "modelAsString": true
+          }
+        },
+        "message": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Gets an error message explaining the reason value in more detail"
+        }
+      }
+    },
     "Tags": {
       "description": "Resource tags",
       "properties": {
@@ -615,12 +707,12 @@
             "create",
             "update"
           ],
-          "description": "Resource tags."
+          "description": "Resource tags"
         }
       }
     },
     "Account": {
-      "description": "An ADP account.",
+      "description": "ADP account",
       "type": "object",
       "properties": {
         "properties": {
@@ -631,7 +723,7 @@
         },
         "systemData": {
           "readOnly": true,
-          "description": "The system meta data relating to this resource.",
+          "description": "The system meta data relating to this resource",
           "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/systemData"
         }
       },
@@ -642,7 +734,7 @@
       ]
     },
     "AccountPatch": {
-      "description": "An ADP account.",
+      "description": "ADP account",
       "type": "object",
       "properties": {
         "properties": {
@@ -669,7 +761,7 @@
         "provisioningState": {
           "readOnly": true,
           "type": "string",
-          "description": "Gets the status of the account at the time the operation was called.",
+          "description": "Gets the status of the account at the time the operation was called",
           "enum": [
             "Succeeded",
             "Failed",
@@ -693,17 +785,17 @@
           "items": {
             "$ref": "#/definitions/Account"
           },
-          "description": "List of accounts and their properties."
+          "description": "List of accounts and their properties"
         },
         "nextLink": {
           "type": "string",
-          "description": "URL to get the next set of operation list results if there are any."
+          "description": "URL to get the next set of operation list results if there are any"
         }
       },
-      "description": "The list operation response, that contains the data pools and their properties."
+      "description": "The list operation response, that contains the data pools and their properties"
     },
     "DataPool": {
-      "description": "An ADP Data Pool.",
+      "description": "ADP Data Pool",
       "properties": {
         "properties": {
           "description": "List of data pool properties",
@@ -719,7 +811,7 @@
       ]
     },
     "DataPoolPatch": {
-      "description": "An ADP Data Pool.",
+      "description": "ADP Data Pool",
       "properties": {
         "properties": {
           "description": "List of data pool properties",
@@ -745,7 +837,7 @@
         "provisioningState": {
           "readOnly": true,
           "type": "string",
-          "description": "Gets the status of the data pool at the time the operation was called.",
+          "description": "Gets the status of the data pool at the time the operation was called",
           "enum": [
             "Succeeded",
             "Failed",
@@ -765,11 +857,11 @@
             "$ref": "#/definitions/DataPoolLocation"
           },
           "minItems": 1,
-          "description": "Gets or sets the collection of locations where Data Pool resources should be created."
+          "description": "Gets or sets the collection of locations where Data Pool resources should be created"
         },
         "systemData": {
           "readOnly": true,
-          "description": "The system meta data relating to this resource.",
+          "description": "The system meta data relating to this resource",
           "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/systemData"
         }
       }
@@ -791,10 +883,40 @@
         "name": {
           "description": "The location name",
           "type": "string"
+        },
+        "encryption": {
+          "description": "Encryption properties of a Data Pool location",
+          "$ref": "#/definitions/DataPoolEncryption"
         }
       },
       "required": [
         "name"
+      ]
+    },
+    "DataPoolEncryption": {
+      "description": "Encryption properties of a Data Pool",
+      "properties": {
+        "keyVaultUri": {
+          "type": "string",
+          "description": "The URI of a soft delete-enabled Key Vault that is in the same location as the Data Pool location"
+        },
+        "keyName": {
+          "type": "string",
+          "description": "The name of Key Vault key"
+        },
+        "keyVersion": {
+          "type": "string",
+          "description": "The version of Key Vault key"
+        },
+        "userAssignedIdentity": {
+          "type": "string",
+          "description": "The resource ID of a user-assigned Managed Identity used to access the encryption key in the Key Vault. Requires access to the key operations get, wrap, unwrap, and recover"
+        }
+      },
+      "required": [
+        "keyVaultUri",
+        "keyName",
+        "userAssignedIdentity"
       ]
     },
     "DataPoolList": {
@@ -805,14 +927,14 @@
           "items": {
             "$ref": "#/definitions/DataPool"
           },
-          "description": "List of data pools and their properties."
+          "description": "List of data pools and their properties"
         },
         "nextLink": {
           "type": "string",
-          "description": "URL to get the next set of operation list results if there are any."
+          "description": "URL to get the next set of operation list results if there are any"
         }
       },
-      "description": "The list operation response, that contains the data pools and their properties."
+      "description": "The list operation response, that contains the data pools and their properties"
     },
     "Operation": {
       "description": "Operation detail payload",
@@ -827,7 +949,7 @@
           "type": "boolean"
         },
         "actionType": {
-          "description": "Indicates the action type.",
+          "description": "Indicates the action type",
           "type": "string"
         },
         "display": {
@@ -868,29 +990,29 @@
       }
     },
     "OperationProperties": {
-      "description": "Additional details about an operation.",
+      "description": "Additional details about an operation",
       "type": "object",
       "x-ms-client-flatten": true,
       "properties": {
         "serviceSpecification": {
-          "description": "Details about a service operation.",
+          "description": "Details about a service operation",
           "$ref": "#/definitions/OperationServiceSpecification"
         }
       }
     },
     "OperationServiceSpecification": {
-      "description": "Details about a service operation.",
+      "description": "Details about a service operation",
       "type": "object",
       "properties": {
         "logSpecifications": {
-          "description": "Details about operations related to logs.",
+          "description": "Details about operations related to logs",
           "type": "array",
           "items": {
             "$ref": "#/definitions/OperationLogSpecification"
           }
         },
         "metricSpecifications": {
-          "description": "Details about operations related to metrics.",
+          "description": "Details about operations related to metrics",
           "type": "array",
           "items": {
             "$ref": "#/definitions/OperationMetricSpecification"
@@ -899,61 +1021,61 @@
       }
     },
     "OperationLogSpecification": {
-      "description": "Details about an operation related to logs.",
+      "description": "Details about an operation related to logs",
       "type": "object",
       "properties": {
         "name": {
-          "description": "The name of the log category.",
+          "description": "The name of the log category",
           "type": "string"
         },
         "displayName": {
-          "description": "Localized display name.",
+          "description": "Localized display name",
           "type": "string"
         },
         "blobDuration": {
-          "description": "Blobs created in the customer storage account, per hour.",
+          "description": "Blobs created in the customer storage account, per hour",
           "type": "string"
         }
       }
     },
     "OperationMetricSpecification": {
-      "description": "Details about an operation related to metrics.",
+      "description": "Details about an operation related to metrics",
       "type": "object",
       "properties": {
         "name": {
-          "description": "The name of the metric.",
+          "description": "The name of the metric",
           "type": "string"
         },
         "displayName": {
-          "description": "Localized display name of the metric.",
+          "description": "Localized display name of the metric",
           "type": "string"
         },
         "displayDescription": {
-          "description": "The description of the metric.",
+          "description": "The description of the metric",
           "type": "string"
         },
         "unit": {
-          "description": "The unit that the metric is measured in.",
+          "description": "The unit that the metric is measured in",
           "type": "string"
         },
         "aggregationType": {
-          "description": "The type of metric aggregation.",
+          "description": "The type of metric aggregation",
           "type": "string"
         },
         "enableRegionalMdmAccount": {
-          "description": "Whether or not the service is using regional MDM accounts.",
+          "description": "Whether or not the service is using regional MDM accounts",
           "type": "string"
         },
         "sourceMdmAccount": {
-          "description": "The name of the MDM account.",
+          "description": "The name of the MDM account",
           "type": "string"
         },
         "sourceMdmNamespace": {
-          "description": "The name of the MDM namespace.",
+          "description": "The name of the MDM namespace",
           "type": "string"
         },
         "availabilities": {
-          "description": "Defines how often data for metrics becomes available.",
+          "description": "Defines how often data for metrics becomes available",
           "type": "array",
           "items": {
             "$ref": "#/definitions/OperationMetricAvailability"
@@ -962,59 +1084,59 @@
       }
     },
     "OperationMetricAvailability": {
-      "description": "Defines how often data for a metric becomes available.",
+      "description": "Defines how often data for a metric becomes available",
       "type": "object",
       "properties": {
         "timeGrain": {
-          "description": "The granularity for the metric.",
+          "description": "The granularity for the metric",
           "type": "string"
         },
         "blobDuration": {
-          "description": "Blob created in the customer storage account, per hour.",
+          "description": "Blob created in the customer storage account, per hour",
           "type": "string"
         }
       }
     },
     "OperationListResult": {
-      "description": "Available operations of the service.",
+      "description": "Available operations of the service",
       "properties": {
         "value": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/Operation"
           },
-          "description": "List of operations supported by the Resource Provider."
+          "description": "List of operations supported by the Resource Provider"
         },
         "nextLink": {
           "type": "string",
-          "description": "URL to get the next set of operation list results if there are any."
+          "description": "URL to get the next set of operation list results if there are any"
         }
       }
     },
     "ErrorResponse": {
-      "description": "Error response.",
+      "description": "Error response",
       "properties": {
         "error": {
           "$ref": "#/definitions/ErrorDefinition",
-          "description": "The error details."
+          "description": "The error details"
         }
       }
     },
     "ErrorDefinition": {
-      "description": "Error definition.",
+      "description": "Error definition",
       "properties": {
         "code": {
-          "description": "Service specific error code which serves as the substatus for the HTTP error code.",
+          "description": "Service specific error code which serves as the substatus for the HTTP error code",
           "type": "string",
           "readOnly": true
         },
         "message": {
-          "description": "Description of the error.",
+          "description": "Description of the error",
           "type": "string",
           "readOnly": true
         },
         "details": {
-          "description": "Internal error details.",
+          "description": "Internal error details",
           "type": "array",
           "items": {
             "$ref": "#/definitions/ErrorDefinition"
@@ -1030,8 +1152,8 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "The name of the ADP account.",
-      "pattern": "^[a-z0-9]+(-[a-z0-9]+)*",
+      "description": "The name of the ADP account",
+      "pattern": "^[a-zA-Z0-9]+(-[a-zA-Z0-9]+)*",
       "maxLength": 50,
       "x-ms-parameter-location": "method"
     },
@@ -1040,8 +1162,8 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "The name of the Data Pool.",
-      "pattern": "^[a-z0-9]+(-[a-z0-9]+)*",
+      "description": "The name of the Data Pool",
+      "pattern": "^[a-zA-Z0-9]+(-[a-zA-Z0-9]+)*",
       "maxLength": 50,
       "x-ms-parameter-location": "method"
     }
