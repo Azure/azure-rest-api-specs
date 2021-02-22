@@ -33,8 +33,8 @@ directive:
     where: '$.paths["/subscriptions/{subscriptionId}/providers/Microsoft.IoTSecurity/locations"].get'
     reason: The list returns limited number of items
   - suppress: PageableOperation
-    from: deviceSecurityGroups.json
-    where: '$.paths["/subscriptions/{subscriptionId}/providers/Microsoft.IoTSecurity/locations/{iotDefenderLocation}/deviceSecurityGroups"].get'
+    from: deviceGroups.json
+    where: '$.paths["/subscriptions/{subscriptionId}/providers/Microsoft.IoTSecurity/locations/{iotDefenderLocation}/deviceGroups"].get'
     reason: The list returns limited number of items
 ```
 
@@ -58,7 +58,7 @@ input-file:
 - Microsoft.IoTSecurity/preview/2021-02-01-preview/defenderSettings.json
 - Microsoft.IoTSecurity/preview/2021-02-01-preview/operations.json
 - Microsoft.IoTSecurity/preview/2021-02-01-preview/locations.json
-- Microsoft.IoTSecurity/preview/2021-02-01-preview/deviceSecurityGroups.json
+- Microsoft.IoTSecurity/preview/2021-02-01-preview/deviceGroups.json
 ```
 
 ---
