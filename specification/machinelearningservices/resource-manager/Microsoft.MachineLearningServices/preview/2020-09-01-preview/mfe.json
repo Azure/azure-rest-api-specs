@@ -3783,8 +3783,7 @@
             "required": true,
             "schema": {
               "description": "Online Endpoint entity to apply during operation.",
-              "$ref": "#/definitions/UpdateOnlineEndpointPropertiesTrackedResource",
-              "x-ms-azure-resource": true
+              "$ref": "#/definitions/UpdateOnlineEndpointPropertiesUpdatableTrackedResource"
             }
           }
         ],
@@ -7686,10 +7685,7 @@
       },
       "additionalProperties": false
     },
-    "UpdateOnlineEndpointPropertiesTrackedResource": {
-      "required": [
-        "properties"
-      ],
+    "UpdateOnlineEndpointPropertiesUpdatableTrackedResource": {
       "type": "object",
       "properties": {
         "tags": {
@@ -7729,8 +7725,7 @@
         },
         "properties": {
           "description": "Additional attributes of the entity.",
-          "$ref": "#/definitions/UpdateOnlineEndpointProperties",
-          "x-ms-client-flatten": true
+          "$ref": "#/definitions/UpdateOnlineEndpointProperties"
         },
         "systemData": {
           "description": "System data associated with resource provider",
@@ -7738,7 +7733,6 @@
           "readOnly": true
         }
       },
-      "x-ms-azure-resource": true,
       "additionalProperties": false
     },
     "RegenerateEndpointKeysRequest": {
