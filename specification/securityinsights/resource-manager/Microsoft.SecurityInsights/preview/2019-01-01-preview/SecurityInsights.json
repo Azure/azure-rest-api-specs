@@ -1735,6 +1735,12 @@
           },
           "Get a Dynamics365 data connector": {
             "$ref": "./examples/dataConnectors/GetDynamics365DataConnectorById.json"
+          },
+          "Get a MicrosoftThreatProtection data connector": {
+            "$ref": "./examples/dataConnectors/GetMicrosoftThreatProtectionById.json"
+          },
+          "Get a MicrosoftThreatIntelligence data connector": {
+            "$ref": "./examples/dataConnectors/GetMicrosoftThreatIntelligenceById.json"
           }
         },
         "tags": [
@@ -1914,6 +1920,12 @@
           },
           "Check requirements for Dynamics365.": {
             "$ref": "./examples/dataConnectors/CheckRequirementsDynamics365.json"
+          },
+          "Check requirements for MicrosoftThreatProtection.": {
+            "$ref": "./examples/dataConnectors/CheckRequirementsMicrosoftThreatProtection.json"
+          },
+          "Check requirements for MicrosoftThreatIntelligence.": {
+            "$ref": "./examples/dataConnectors/CheckRequirementsMicrosoftThreatIntelligence.json"
           }
         },
         "tags": [
@@ -4681,6 +4693,173 @@
       "description": "AATP (Azure Advanced Threat Protection) requirements check properties.",
       "type": "object"
     },
+    "MSTIDataConnector": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataConnector"
+        }
+      ],
+      "description": "Represents Microsoft Threat Intelligence data connector.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/MSTIDataConnectorProperties",
+          "description": "Microsoft Threat Intelligence data connector properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object",
+      "x-ms-discriminator-value": "MicrosoftThreatIntelligence"
+    },
+    "MSTIDataConnectorDataTypes": {
+      "description": "The available data types for Microsoft Threat Intelligence Platforms data connector.",
+      "properties": {
+        "bingSafetyPhishingURL": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/DataConnectorDataTypeCommon"
+            }
+          ],
+          "properties": {
+            "lookbackPeriod": {
+              "description": "lookback period",
+              "type": "string"
+            }
+          },
+          "description": "Data type for Microsoft Threat Intelligence Platforms data connector.",
+          "type": "object"
+        },
+        "microsoftEmergingThreatFeed": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/DataConnectorDataTypeCommon"
+            }
+          ],
+          "properties": {
+            "lookbackPeriod": {
+              "description": "lookback period",
+              "type": "string"
+            }
+          },
+          "description": "Data type for Microsoft Threat Intelligence Platforms data connector.",
+          "type": "object"
+        }
+      },
+      "type": "object"
+    },
+    "MSTIDataConnectorProperties": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataConnectorTenantId"
+        }
+      ],
+      "description": "Microsoft Threat Intelligence data connector properties.",
+      "properties": {
+        "dataTypes": {
+          "$ref": "#/definitions/MSTIDataConnectorDataTypes",
+          "description": "The available data types for the connector."
+        }
+      },
+      "type": "object"
+    },
+    "MSTICheckRequirements": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataConnectorsCheckRequirements"
+        }
+      ],
+      "description": "Represents Microsoft Threat Intelligence requirements check request.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/MSTICheckRequirementsProperties",
+          "description": "Microsoft Threat Intelligence requirements check properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object",
+      "x-ms-discriminator-value": "MicrosoftThreatIntelligence"
+    },
+    "MSTICheckRequirementsProperties": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataConnectorTenantId"
+        }
+      ],
+      "description": "Microsoft Threat Intelligence requirements check properties.",
+      "type": "object"
+    },
+    "MTPDataConnector": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataConnector"
+        }
+      ],
+      "description": "Represents MTP (Microsoft Threat Protection) data connector.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/MTPDataConnectorProperties",
+          "description": "MTP (Microsoft Threat Protection) data connector properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object",
+      "x-ms-discriminator-value": "MicrosoftThreatProtection"
+    },
+    "MTPDataConnectorDataTypes": {
+      "description": "The available data types for Microsoft Threat Protection Platforms data connector.",
+      "properties": {
+        "incidents": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/DataConnectorDataTypeCommon"
+            }
+          ],
+          "description": "Data type for Microsoft Threat Protection Platforms data connector.",
+          "type": "object"
+        }
+      },
+      "type": "object"
+    },
+    "MTPDataConnectorProperties": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataConnectorTenantId"
+        }
+      ],
+      "description": "MTP (Microsoft Threat Protection) data connector properties.",
+      "properties": {
+        "dataTypes": {
+          "$ref": "#/definitions/MTPDataConnectorDataTypes",
+          "description": "The available data types for the connector."
+        }
+      },
+      "type": "object"
+    },
+    "MtpCheckRequirements": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataConnectorsCheckRequirements"
+        }
+      ],
+      "description": "Represents MTP (Microsoft Threat Protection) requirements check request.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/MTPCheckRequirementsProperties",
+          "description": "MTP (Microsoft Threat Protection) requirements check properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object",
+      "x-ms-discriminator-value": "MicrosoftThreatProtection"
+    },
+    "MTPCheckRequirementsProperties": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataConnectorTenantId"
+        }
+      ],
+      "description": "MTP (Microsoft Threat Protection) requirements check properties.",
+      "type": "object"
+    },
     "ASCDataConnector": {
       "allOf": [
         {
@@ -6287,7 +6466,9 @@
             "AmazonWebServicesCloudTrail",
             "AzureAdvancedThreatProtection",
             "MicrosoftDefenderAdvancedThreatProtection",
-            "Dynamics365"
+            "Dynamics365",
+            "MicrosoftThreatProtection",
+            "MicrosoftThreatIntelligence"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -6326,6 +6507,12 @@
               },
               {
                 "value": "Dynamics365"
+              },
+              {
+                "value": "MicrosoftThreatProtection"
+              },
+              {
+                "value": "MicrosoftThreatIntelligence"
               }
             ]
           }
@@ -6531,6 +6718,23 @@
         "kind"
       ]
     },
+    "EntityEdges": {
+      "description": "The edge that connects the entity to the other entity.",
+      "properties": {
+        "targetEntityId": {
+          "description": "The target entity Id.",
+          "type": "string"
+        },
+        "additionalData": {
+          "additionalProperties": {
+            "type": "object"
+          },
+          "description": "A bag of custom fields that should be part of the entity and will be presented to the user.",
+          "type": "object"
+        }
+      },
+      "type": "object"
+    },
     "EntityCommonProperties": {
       "description": "Entity common property bag.",
       "properties": {
@@ -6615,6 +6819,13 @@
               "description": "Array of the expansion result entities.",
               "items": {
                 "$ref": "#/definitions/Entity"
+              },
+              "type": "array"
+            },
+            "edges": {
+              "description": "Array of edges that connects the entity to the list of entities.",
+              "items": {
+                "$ref": "#/definitions/EntityEdges"
               },
               "type": "array"
             }
@@ -7385,7 +7596,11 @@
                       "String",
                       "Date",
                       "Entity"
-                    ]
+                    ],
+                    "x-ms-enum": {
+                      "modelAsString": true,
+                      "name": "outputType"
+                    }
                   },
                   "supportDeepLink": {
                     "type": "boolean",
@@ -7547,6 +7762,10 @@
           "type": "string",
           "description": "The alert product name."
         },
+        "description": {
+          "type": "string",
+          "description": "The alert description."
+        },
         "displayName": {
           "type": "string",
           "description": "The alert name."
@@ -7577,7 +7796,6 @@
       },
       "required": [
         "azureResourceId",
-        "productName",
         "displayName",
         "severity",
         "endTimeUtc",
@@ -7637,13 +7855,7 @@
         }
       },
       "required": [
-        "azureResourceId",
-        "displayName",
-        "notes",
-        "endTimeUtc",
-        "startTimeUtc",
-        "createdBy",
-        "labels"
+        "azureResourceId"
       ],
       "type": "object",
       "x-ms-discriminator-value": "Bookmark"
@@ -9098,6 +9310,23 @@
           "readOnly": true,
           "type": "string"
         },
+        "submissionId": {
+          "description": "The submission id",
+          "format": "uuid",
+          "readOnly": true,
+          "type": "string"
+        },
+        "submitter": {
+          "description": "The submitter",
+          "readOnly": true,
+          "type": "string"
+        },
+        "submissionDate": {
+          "description": "The submission date",
+          "format": "date-time",
+          "readOnly": true,
+          "type": "string"
+        },
         "timestamp": {
           "description": "The Time stamp when the message is received (Mail)",
           "format": "date-time",
@@ -9553,9 +9782,8 @@
           "description": "The tenantId of the Office365 with the consent.",
           "type": "string"
         },
-        "tenantName": {
-          "description": "The tenant name of the Office365 with the consent.",
-          "readOnly": true,
+        "consentId": {
+          "description": "Help to easily cascade among the data layers.",
           "type": "string"
         }
       },
@@ -11014,6 +11242,34 @@
       },
       "type": "object"
     },
+    "IPSyncer": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Settings"
+        }
+      ],
+      "description": "Settings with single toggle.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/IPSyncerSettingsProperties",
+          "description": "IPSyncer properties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object",
+      "x-ms-discriminator-value": "IPSyncer"
+    },
+    "IPSyncerSettingsProperties": {
+      "description": "IPSyncer property bag.",
+      "properties": {
+        "isEnabled": {
+          "description": "Determines whether the setting is enable or disabled.",
+          "readOnly": true,
+          "type": "boolean"
+        }
+      },
+      "type": "object"
+    },
     "EyesOn": {
       "allOf": [
         {
@@ -12181,15 +12437,15 @@
       "description": "An abstract Query item for entity",
       "type": "object",
       "discriminator": "kind",
+      "allOf": [
+        {
+          "$ref": "#/definitions/EntityQueryKind"
+        }
+      ],
       "properties": {
-        "kind": {
-          "$ref": "#/definitions/EntityQueryKind",
-          "description": "The entity query kind type."
-        },
         "id": {
           "description": "Query Template ARM ID",
           "type": "string",
-          "format": "uuid",
           "readOnly": true
         },
         "name": {
