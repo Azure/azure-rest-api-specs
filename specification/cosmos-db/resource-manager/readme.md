@@ -38,9 +38,9 @@ input-file:
 - Microsoft.DocumentDB/preview/2021-03-01-preview/notebook.json
 - Microsoft.DocumentDB/preview/2021-03-01-preview/rbac.json
 - Microsoft.DocumentDB/preview/2021-03-01-preview/restorable.json
+- Microsoft.DocumentDB/preview/2021-03-01-preview/managedCassandra.json
 - Microsoft.DocumentDB/preview/2021-03-01-preview/privateLinkResources.json
 - Microsoft.DocumentDB/preview/2021-03-01-preview/privateEndpointConnection.json
-- Microsoft.DocumentDB/preview/2021-03-01-preview/managedCassandra.json
 modelerfour:
   lenient-model-deduplication: true
 ```
@@ -56,8 +56,6 @@ input-file:
   - Microsoft.DocumentDB/stable/2021-01-15/notebook.json
   - Microsoft.DocumentDB/stable/2021-01-15/privateLinkResources.json
   - Microsoft.DocumentDB/stable/2021-01-15/privateEndpointConnection.json
-modelerfour:
-  lenient-model-deduplication: true
 ```
 ### Tag: package-2020-09
 
@@ -69,8 +67,6 @@ input-file:
   - Microsoft.DocumentDB/stable/2020-09-01/notebook.json
   - Microsoft.DocumentDB/preview/2019-08-01-preview/privateLinkResources.json
   - Microsoft.DocumentDB/preview/2019-08-01-preview/privateEndpointConnection.json
-modelerfour:
-  lenient-model-deduplication: true
 ```
 
 ### Tag: package-2020-06-preview
@@ -99,8 +95,6 @@ input-file:
 - Microsoft.DocumentDB/stable/2020-04-01/notebook.json
 - Microsoft.DocumentDB/preview/2019-08-01-preview/privateLinkResources.json
 - Microsoft.DocumentDB/preview/2019-08-01-preview/privateEndpointConnection.json
-modelerfour:
-  lenient-model-deduplication: true
 ```
 
 ### Tag: package-2020-03
@@ -113,8 +107,6 @@ input-file:
 - Microsoft.DocumentDB/stable/2020-03-01/notebook.json
 - Microsoft.DocumentDB/preview/2019-08-01-preview/privateLinkResources.json
 - Microsoft.DocumentDB/preview/2019-08-01-preview/privateEndpointConnection.json
-modelerfour:
-  lenient-model-deduplication: true
 ```
 
 ### Tag: package-2019-12
