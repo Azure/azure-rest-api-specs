@@ -901,7 +901,11 @@
           "$ref": "#/definitions/conversion_settings"
         },
         "output": {
-          "$ref": "#/definitions/conversion_output",
+          "allOf": [
+            {
+              "$ref": "#/definitions/conversion_output"
+            }
+          ],
           "readOnly": true
         },
         "error": {
