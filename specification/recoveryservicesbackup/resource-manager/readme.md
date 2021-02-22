@@ -52,6 +52,7 @@ These settings apply only when `--tag=package-2021-02-preview` is specified on t
 ``` yaml $(tag) == 'package-2021-02-preview'
 input-file:
 - Microsoft.RecoveryServices/stable/2021-02-01-preview/bms.json
+- Microsoft.RecoveryServices/stable/2018-12-20/bms.json
 ```
 
 ### Tag: package-2021-02
