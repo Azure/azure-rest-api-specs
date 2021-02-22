@@ -40,6 +40,9 @@ input-file:
 - Microsoft.ServiceBus/preview/2021-01-01-preview/DisasterRecoveryConfig.json
 - Microsoft.ServiceBus/preview/2021-01-01-preview/migrationconfigs.json
 - Microsoft.ServiceBus/preview/2021-01-01-preview/networksets.json
+- Microsoft.ServiceBus/preview/2021-01-01-preview/AuthorizationRules.json
+- Microsoft.ServiceBus/preview/2021-01-01-preview/Queue.json
+- Microsoft.ServiceBus/preview/2021-01-01-preview/topics.json
 ```
 
 
