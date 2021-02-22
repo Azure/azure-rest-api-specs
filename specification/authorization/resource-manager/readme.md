@@ -69,6 +69,8 @@ directive:
     where: $.definitions.DenyAssignmentProperties.properties.isSystemProtected
     from: authorization-DenyAssignmentGetCalls.json
     reason: for this case the result of the proposed change would resemble a boolean anyways
+  - suppress: R4024
+    reason: Preview versions still in use
 ```
 
 ### Tag: package-2020-10-01-preview
@@ -276,7 +278,7 @@ input-file:
 
 ### Tag: package-2021-01-01-preview-only
 
-These settings apply only when `--tag=package-2021-01-01-preview` is specified on the command line.
+These settings apply only when `--tag=package-2021-01-01-preview-only` is specified on the command line.
 
 ``` yaml $(tag) == 'package-2021-01-01-preview-only'
 input-file:
