@@ -1752,7 +1752,7 @@
         "id": {
           "readOnly": true,
           "type": "string",
-          "description": "The resource identifer."
+          "description": "The resource identifier."
         },
         "name": {
           "readOnly": true,
@@ -1854,6 +1854,13 @@
           },
           "description": "The list of Data Lake Store accounts associated with this account."
         },
+        "publicDataLakeStoreAccounts": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DataLakeStoreAccountInformation"
+          },
+          "description": "The list of Data Lake Store accounts associated with this account."
+        },
         "storageAccounts": {
           "readOnly": true,
           "type": "array",
@@ -1895,7 +1902,6 @@
           "description": "The list of firewall rules associated with this account."
         },
         "firewallState": {
-          "readOnly": true,
           "type": "string",
           "enum": [
             "Enabled",
@@ -1908,7 +1914,6 @@
           "description": "The current state of the IP address firewall for this account."
         },
         "firewallAllowAzureIps": {
-          "readOnly": true,
           "type": "string",
           "enum": [
             "Enabled",
@@ -1921,7 +1926,6 @@
           "description": "The current state of allowing or disallowing IPs originating within Azure through the firewall. If the firewall is disabled, this is not enforced."
         },
         "newTier": {
-          "readOnly": true,
           "type": "string",
           "enum": [
             "Consumption",
@@ -1987,7 +1991,6 @@
           "description": "The system defined maximum supported degree of parallelism for this account, which restricts the maximum value of parallelism the user can set for the account."
         },
         "maxDegreeOfParallelismPerJob": {
-          "readOnly": true,
           "type": "integer",
           "format": "int32",
           "minimum": 1,
@@ -2114,7 +2117,6 @@
       ],
       "properties": {
         "properties": {
-          "readOnly": true,
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/DataLakeStoreAccountInformationProperties",
           "description": "The Data Lake Store account properties."
@@ -2628,6 +2630,10 @@
         "name": {
           "type": "string",
           "description": "The name for OperationMetaMetricSpecification."
+        },
+        "displayDescription": {
+          "type": "string",
+          "description": "The displayName for OperationMetaMetricSpecification."
         },
         "displayName": {
           "type": "string",
