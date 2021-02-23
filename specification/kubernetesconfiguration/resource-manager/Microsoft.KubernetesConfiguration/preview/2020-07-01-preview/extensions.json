@@ -74,7 +74,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ExtensionInstanceForCreate"
+              "$ref": "#/definitions/ExtensionInstance"
             },
             "description": "Properties necessary to Create an Extension Instance."
           }
@@ -308,6 +308,44 @@
     }
   },
   "definitions": {
+    "SystemData": {
+      "description": "Top level metadata https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/common-api-contracts.md#system-metadata-for-all-azure-resources",
+      "type": "object",
+      "properties": {
+        "createdBy": {
+          "description": "A string identifier for the identity that created the resource",
+          "type": "string",
+          "readOnly": true
+        },
+        "createdByType": {
+          "description": "The type of identity that created the resource: user, application, managedIdentity, key",
+          "type": "string",
+          "readOnly": true
+        },
+        "createdAt": {
+          "format": "date-time",
+          "description": "The timestamp of resource creation (UTC)",
+          "type": "string",
+          "readOnly": true
+        },
+        "lastModifiedBy": {
+          "description": "A string identifier for the identity that last modified the resource",
+          "type": "string",
+          "readOnly": true
+        },
+        "lastModifiedByType": {
+          "description": "The type of identity that last modified the resource: user, application, managedIdentity, key",
+          "type": "string",
+          "readOnly": true
+        },
+        "lastModifiedAt": {
+          "format": "date-time",
+          "description": "The timestamp of resource last modification (UTC)",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
     "Resource": {
       "description": "The Resource model definition.",
       "type": "object",
@@ -326,6 +364,10 @@
           "readOnly": true,
           "type": "string",
           "description": "Resource type"
+        },
+        "systemData": {
+          "description": "Top level metadata https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/common-api-contracts.md#system-metadata-for-all-azure-resources",
+          "$ref": "#/definitions/SystemData"
         }
       },
       "x-ms-azure-resource": true
@@ -532,7 +574,12 @@
               "description": "Configuration settings, as name-value pairs for configuring this instance of the extension.",
               "type": "object",
               "$ref": "#/definitions/ConfigurationSettings"
-            },
+            },			
+            "configurationProtectedSettings": {
+              "description": "Configuration settings that are sensitive, as name-value pairs for configuring this instance of the extension.",
+              "type": "object",
+              "$ref": "#/definitions/ExtensionProtectedSettings"
+            }
             "installState": {
               "type": "string",
               "description": "Status of installation of this instance of the extension.",
@@ -579,51 +626,6 @@
         }
       ]
     },
-    "ExtensionInstanceForCreate": {
-      "description": "Object to create a new Extension Instance.",
-      "properties": {
-        "properties": {
-          "type": "object",
-          "x-ms-client-flatten": true,
-          "description": "Properties of an Extension Instance resource",
-          "properties": {
-            "extensionType": {
-              "type": "string",
-              "description": "Type of the Extension, of which this resource is an instance of.  It must be one of the Extension Types registered with Microsoft.KubernetesConfiguration by the Extension publisher."
-            },
-            "autoUpgradeMinorVersion": {
-              "description": "Flag to note if this instance participates in auto upgrade of minor version, or not.",
-              "type": "boolean"
-            },
-            "releaseTrain": {
-              "description": "ReleaseTrain this extension instance participates in for auto-upgrade (e.g. Stable, Preview, etc.) - only if autoUpgradeMinorVersion is 'true'.",
-              "$ref": "#/definitions/ReleaseTrain"
-            },
-            "version": {
-              "description": "Version of the extension for this extension instance, if it is 'pinned' to a specific version. autoUpgradeMinorVersion must be 'false'.",
-              "type": "string"
-            },
-            "scope": {
-              "description": "Scope at which the extension instance is installed.",
-              "$ref": "#/definitions/Scope"
-            },
-            "configurationSettings": {
-              "description": "Configuration settings, as name-value pairs for configuring this instance of the extension.",
-              "type": "object",
-              "$ref": "#/definitions/ConfigurationSettings"
-            },
-            "configurationProtectedSettings": {
-              "description": "Configuration settings that are sensitive, as name-value pairs for configuring this instance of the extension.",
-              "type": "object",
-              "$ref": "#/definitions/ExtensionProtectedSettings"
-            }
-          }
-        },
-        "identity": {
-          "$ref": "#/definitions/ConfigurationIdentity",
-          "description": "The identity of the configuration."
-        }
-      },
       "allOf": [
         {
           "$ref": "#/definitions/ProxyResource"
