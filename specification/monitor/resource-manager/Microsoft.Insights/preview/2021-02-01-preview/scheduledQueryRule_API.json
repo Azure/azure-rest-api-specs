@@ -34,6 +34,42 @@
     }
   },
   "paths": {
+    "/providers/Microsoft.Insights/operations": {
+      "get": {
+        "tags": [
+          "Operations"
+        ],
+        "description": "Lists all of the available Microsoft.Insights operations.",
+        "operationId": "ListOperations",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful request for a list of available operations.",
+            "schema": {
+              "$ref": "#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorContract"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        },
+        "x-ms-examples": {
+          "OperationsList": {
+            "$ref": "./examples/listOperations.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Insights/scheduledQueryRules": {
       "get": {
         "tags": [
@@ -309,6 +345,61 @@
     }
   },
   "definitions": {
+    "Operation": {
+      "description": "Operation details",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Name of the operation",
+          "type": "string"
+        },
+        "actionType": {
+          "description": "Name of the operation",
+          "type": "string"
+        },
+        "display": {
+          "description": "The object that represents the operation",
+          "properties": {
+            "provider": {
+              "description": "Provider name",
+              "type": "string"
+            },
+            "resource": {
+              "description": "Resource name",
+              "type": "string"
+            },
+            "operation": {
+              "description": "Operation name",
+              "type": "string"
+            },
+            "description": {
+              "description": "Description of the operation",
+              "type": "string"
+            }
+          }
+        },
+        "isDataAction": {
+          "description": "Indicates whether the operation applies to data-plane.",
+          "type": "boolean"
+        }
+      }
+    },
+    "OperationListResult": {
+      "description": "Result of the request to list Microsoft.Insights operations.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Operation"
+          },
+          "description": "List of operations supported by the Microsoft.Insights resource provider."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "URL to get the next set of operation list results if there are any."
+        }
+      }
+    },
     "Action": {
       "type": "object",
       "description": "Actions to invoke when the alert fires.",
@@ -402,7 +493,7 @@
         "muteActionsDuration": {
           "type": "string",
           "format": "duration",
-          "description": "Mute actions for the chosen period of time (in ISO 8601 duration format) after the alert is fired."
+          "description": "Mute actions for the chosen period of time (in ISO 8601 duration format) after the alert is fired. Relevant only for rules of the kind LogAlert."
         },
         "actions": {
           "type": "array",
@@ -412,15 +503,15 @@
         },
         "checkWorkspaceAlertsStorageConfigured": {
           "type": "boolean",
-          "description": "The flag which indicates whether this scheduled query rule should be stored in the customer's storage. The default is false."
+          "description": "The flag which indicates whether this scheduled query rule should be stored in the customer's storage. The default is false. Relevant only for rules of the kind LogAlert."
         },
         "skipQueryValidation": {
           "type": "boolean",
-          "description": "The flag which indicates whether the provided query should be validated or not. The default is false."
+          "description": "The flag which indicates whether the provided query should be validated or not. The default is false. Relevant only for rules of the kind LogAlert."
         },
         "autoMitigate": {
           "type": "boolean",
-          "description": "The flag that indicates whether the alert should be automatically resolved or not. The default is true."
+          "description": "The flag that indicates whether the alert should be automatically resolved or not. The default is true. Relevant only for rules of the kind LogAlert."
         }
       },
       "description": "scheduled query rule Definition"
