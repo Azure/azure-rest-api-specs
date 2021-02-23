@@ -1440,11 +1440,19 @@
     },
     "AccessReviewDecisionProperties": {
       "properties": {
-        "target": {
+        "principal": {
           "readOnly": true,
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/AccessReviewDecisionTarget",
-          "description": "Target of this decision record. Can be UserDecisionTarget or ServicePrincipalDecisionTarget"
+          "$ref": "#/definitions/AccessReviewDecisionIdentity",
+          "description": "Principal associated with the decision record. Can be AccessReviewDecisionUserIdentity or AccessReviewDecisionServicePrincipalIdentity",
+          "x-nullable": true
+        },
+        "resource": {
+          "readOnly": true,
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/AccessReviewDecisionResource",
+          "description": "Resource associated with this decision record.",
+          "x-nullable": true
         },
         "recommendation": {
           "type": "string",
@@ -1527,7 +1535,37 @@
       },
       "description": "Approval Step."
     },
-    "AccessReviewDecisionTarget": {
+    "AccessReviewDecisionResource": {
+      "discriminator": "type",
+      "required": [
+        "type"
+      ],
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The type of resource",
+          "enum": [
+            "azureRole"
+          ],
+          "x-ms-enum": {
+            "name": "DecisionResourceType",
+            "modelAsString": true
+          }
+        },
+        "id": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The id of resource associated with a decision record."
+        },
+        "displayName": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The display name of resource associated with a decision record."
+        }
+      },
+      "description": "Target of the decision."
+    },
+    "AccessReviewDecisionIdentity": {
       "discriminator": "type",
       "required": [
         "type"
@@ -1544,32 +1582,32 @@
             "name": "DecisionTargetType",
             "modelAsString": true
           }
+        },
+        "id": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The id of principal whose access was reviewed."
+        },
+        "displayName": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The display name of the user whose access was reviewed."
         }
       },
       "description": "Target of the decision."
     },
-    "UserDecisionTarget": {
+    "AccessReviewDecisionUserIdentity": {
       "allOf": [
         {
-          "$ref": "#/definitions/AccessReviewDecisionTarget"
+          "$ref": "#/definitions/AccessReviewDecisionIdentity"
         },
         {
           "type": "object",
-          "description": "UserDecisionTarget"
+          "description": "AccessReviewDecisionUserIdentity"
         }
       ],
       "x-ms-discriminator-value": "user",
       "properties": {
-        "principalId": {
-          "type": "string",
-          "readOnly": true,
-          "description": "The id of user whose access was reviewed."
-        },
-        "principalName": {
-          "type": "string",
-          "readOnly": true,
-          "description": "The display name of the user whose access was reviewed."
-        },
         "userPrincipalName": {
           "type": "string",
           "readOnly": true,
@@ -1578,28 +1616,18 @@
       },
       "description": "User Decision Target"
     },
-    "ServicePrincipalDecisionTarget": {
+    "AccessReviewDecisionServicePrincipalIdentity": {
       "allOf": [
         {
-          "$ref": "#/definitions/AccessReviewDecisionTarget"
+          "$ref": "#/definitions/AccessReviewDecisionIdentity"
         },
         {
           "type": "object",
-          "description": "ServicePrincipalDecisionTarget"
+          "description": "AccessReviewDecisionServicePrincipalIdentity"
         }
       ],
       "x-ms-discriminator-value": "servicePrincipal",
       "properties": {
-        "principalId": {
-          "type": "string",
-          "readOnly": true,
-          "description": "The id of service principal whose access is reviewed."
-        },
-        "principalName": {
-          "type": "string",
-          "readOnly": true,
-          "description": "The display name of the service principal whose access was reviewed."
-        },
         "appId": {
           "type": "string",
           "readOnly": true,

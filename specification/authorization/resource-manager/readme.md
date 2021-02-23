@@ -75,6 +75,15 @@ directive:
     reason: Existing APIs don't have this attribute. Suppressing so that we don't have to make changes to existing APIs
 ```
 
+### Tag: package-2021-03-01-preview-only
+
+These settings apply only when `--tag=package-2021-03-01-preview-only` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-03-01-preview-only'
+input-file:
+- Microsoft.Authorization/preview/2021-03-01-preview/authorization-AccessReviewCalls.json
+```
+
 ### Tag: package-2020-10-01-preview
 
 These settings apply only when `--tag=package-2020-10-01-preview` is specified on the command line.
