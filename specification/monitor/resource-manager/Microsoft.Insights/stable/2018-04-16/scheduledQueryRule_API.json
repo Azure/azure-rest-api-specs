@@ -585,6 +585,16 @@
     "LogSearchRule": {
       "description": "Log Search Rule Definition",
       "properties": {
+        "createdWithApiVersion": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The api-version used when creating this alert rule"
+        },
+        "isLegacyLogAnalyticsRule": {
+          "type": "boolean",
+          "readOnly": true,
+          "description": "True if alert rule is legacy Log Analytic rule"
+        },
         "description": {
           "type": "string",
           "description": "The description of the Log Search rule."
