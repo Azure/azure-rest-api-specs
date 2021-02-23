@@ -5,27 +5,29 @@
     "api-version": "2021-01-01-preview",
     "subscriptionId": "subid",
     "parameters": {
-      "publisherEmail": "apim@autorestsdk.com",
-      "publisherName": "autorestsdk",
-      "virtualNetworkConfiguration": {
-        "subnetResourceId": "/subscriptions/subid/resourceGroups/rgName/providers/Microsoft.Network/virtualNetworks/apimcus/subnets/tenant"
+      "properties": {
+        "publisherEmail": "apim@autorestsdk.com",
+        "publisherName": "autorestsdk",
+        "virtualNetworkConfiguration": {
+          "subnetResourceId": "/subscriptions/subid/resourceGroups/rgName/providers/Microsoft.Network/virtualNetworks/apimcus/subnets/tenant"
+        },
+        "publicIpAddressId": "/subscriptions/subid/resourceGroups/rgName/providers/Microsoft.Network/publicIPAddresses/apimazvnet",
+        "virtualNetworkType": "External"
       },
-      "publicIpAddressId": "/subscriptions/subid/resourceGroups/rgName/providers/Microsoft.Network/publicIPAddresses/apimazvnet",
-      "virtualNetworkType": "External"
-    },
-    "sku": {
-      "name": "Premium",
-      "capacity": 2
-    },
-    "zones": [
-      "1",
-      "2"
-    ],
-    "location": "East US 2 EUAP",
-    "tags": {
-      "tag1": "value1",
-      "tag2": "value2",
-      "tag3": "value3"
+      "sku": {
+        "name": "Premium",
+        "capacity": 2
+      },
+      "zones": [
+        "1",
+        "2"
+      ],
+      "location": "East US 2 EUAP",
+      "tags": {
+        "tag1": "value1",
+        "tag2": "value2",
+        "tag3": "value3"
+      }
     }
   },
   "responses": {
