@@ -82,6 +82,10 @@ These settings apply only when `--tag=package-2021-01-preview` is specified on t
 input-file:
 - Microsoft.EventHub/preview/2021-01-01-preview/namespaces-preview.json
 - Microsoft.EventHub/preview/2021-01-01-preview/operations.json
+- Microsoft.EventHub/preview/2021-01-01-preview/eventhubs.json
+- Microsoft.EventHub/preview/2021-01-01-preview/disasterRecoveryConfigs.json
+- Microsoft.EventHub/preview/2021-01-01-preview/networkrulessets-preview.json
+- Microsoft.EventHub/preview/2021-01-01-preview/AuthorizationRules.json
 ```
 
 
