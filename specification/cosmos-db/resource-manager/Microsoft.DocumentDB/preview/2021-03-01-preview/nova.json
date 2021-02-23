@@ -308,6 +308,15 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RepairPostBody"
+            },
+            "description": "Specification of what keyspaces and tables to run repair on."
           }
         ],
         "responses": {
@@ -864,6 +873,27 @@
               },
               "description": "List of IP addresses of seed nodes in the managed data centers. These should be added to the seed node lists of all unmanaged nodes."
             }
+          }
+        }
+      }
+    },
+    "RepairPostBody": {
+      "description": "Specification of the keyspaces and tables to run repair on.",
+      "type": "object",
+      "required": [
+        "keyspace"
+      ],
+      "properties": {
+        "keyspace": {
+          "type": "string",
+          "description": "The name of the keyspace that repair should be run on."
+        },
+        "tables": {
+          "type": "array",
+          "description": "List of tables in the keyspace to repair. If omitted, repair all tables in the keyspace.",
+          "items": {
+            "type": "string",
+            "description": "Name of a table in the Cassandra keyspace."
           }
         }
       }
