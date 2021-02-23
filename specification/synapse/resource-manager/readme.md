@@ -27,7 +27,8 @@ These are the global settings for the Azure Synapse Analytics API.
 description: Azure Synapse Analytics Management Client
 openapi-type: arm
 azure-arm: true
-tag: package-2019-06-01-preview
+tag: package-2020-12-01
+generate-empty-classes: true
 ```
 
 ### Tag: package-2019-06-01-preview
@@ -46,6 +47,8 @@ input-file:
 - Microsoft.Synapse/preview/2019-06-01-preview/privateLinkResources.json
 - Microsoft.Synapse/preview/2019-06-01-preview/privateEndpointConnections.json
 - Microsoft.Synapse/preview/2019-06-01-preview/privatelinkhub.json
+- Microsoft.Synapse/preview/2019-06-01-preview/sqlServer.json
+- Microsoft.Synapse/preview/2019-06-01-preview/keys.json
 ```
 
 ### Tag: package-sqlGen3-2020-04-01-preview
@@ -57,6 +60,26 @@ input-file:
 - Microsoft.Synapse/preview/2020-04-01-preview/operations.json
 - Microsoft.Synapse/preview/2020-04-01-preview/sqlPool.json
 - Microsoft.Synapse/preview/2020-04-01-preview/sqlDatabase.json
+```
+### Tag: package-2020-12-01
+
+These settings apply only when `--tag=package-2020-12-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-12-01'
+input-file:
+- Microsoft.Synapse/stable/2020-12-01/bigDataPool.json
+- Microsoft.Synapse/stable/2020-12-01/checkNameAvailability.json
+- Microsoft.Synapse/stable/2020-12-01/firewallRule.json
+- Microsoft.Synapse/stable/2020-12-01/operations.json
+- Microsoft.Synapse/stable/2020-12-01/sqlPool.json
+- Microsoft.Synapse/stable/2020-12-01/workspace.json
+- Microsoft.Synapse/stable/2020-12-01/integrationRuntime.json
+- Microsoft.Synapse/stable/2020-12-01/privateLinkResources.json
+- Microsoft.Synapse/stable/2020-12-01/privateEndpointConnections.json
+- Microsoft.Synapse/stable/2020-12-01/privatelinkhub.json
+- Microsoft.Synapse/stable/2020-12-01/sqlServer.json
+- Microsoft.Synapse/stable/2020-12-01/keys.json
+- Microsoft.Synapse/stable/2020-12-01/library.json
 ```
 
 ## Suppressions
@@ -73,6 +96,81 @@ directive:
     reason: Does not apply to sqlPool and bigDataPool as they are nested tracked resources
   - suppress: TrackedResourceListBySubscription
     reason: Does not apply to sqlPool and bigDataPool as they are nested tracked resources
+  - from: Microsoft.Synapse/preview/2019-06-01-preview/sqlPool.json
+    where: 
+        - $.definitions.SqlPoolVulnerabilityAssessmentRuleBaseline
+        - $.definitions.DataMaskingPolicy
+        - $.definitions.DataWarehouseUserActivities
+        - $.definitions.SqlPoolConnectionPolicy
+        - $.definitions.TransparentDataEncryption
+    suppress: 
+        - R4015
+    reason: SQL doesn't support 'list' operation everywhere, so we cannot support List for certain Sql pool operations
+  - from: Microsoft.Synapse/preview/2019-06-01-preview/sqlPool.json
+    where :
+        - '$.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/sqlPools/{sqlPoolName}/restorePoints/{restorePointName}"].delete.responses' 
+    suppress:
+        - R4011
+    reason: SQL Pools APIs are proxy APIs that call SQL DB APIs. The SQL DB delete restore points API only supports return method 200, so we cannot support 204. It is not possible for the SQL DB team to add 204 support for delete restore points.
+  - suppress: AllResourcesMustHaveGetOperation
+    from: Microsoft.Synapse/preview/2019-06-01-preview/sqlPool.json
+    where:
+      - $.definitions.DataMaskingRule
+      - $.definitions.SqlPoolOperation
+  - suppress: R4015
+    reason: Needs implmentation
+    from: Microsoft.Synapse/preview/2019-06-01-preview/workspace_managedIdentity.json
+    where:
+      - $.definitions.ManagedIdentitySqlControlSettingsInfo
+  - suppress: R2010
+    reason: x-ms-long-running-operation-options not available in datafactory swagger
+    from: Microsoft.Synapse/preview/2019-06-01-preview/integrationRuntime.json
+  - suppress: AvoidNestedProperties
+    reason: Existing models
+    from: Microsoft.Synapse/preview/2019-06-01-preview/integrationRuntime.json
+    where:
+      - $.definitions.IntegrationRuntimeResource.properties.properties
+      - $.definitions.IntegrationRuntimeStatusResponse.properties.properties
+      - $.definitions.SsisObjectMetadataStatusResponse.properties.properties
+  - from: Microsoft.Synapse/stable/2020-12-01/sqlPool.json
+    where: 
+        - $.definitions.SqlPoolVulnerabilityAssessmentRuleBaseline
+        - $.definitions.DataMaskingPolicy
+        - $.definitions.DataWarehouseUserActivities
+        - $.definitions.SqlPoolConnectionPolicy
+        - $.definitions.TransparentDataEncryption
+    suppress: 
+        - R4015
+    reason: SQL doesn't support 'list' operation everywhere, so we cannot support List for certain Sql pool operations
+  - from: Microsoft.Synapse/stable/2020-12-01/sqlPool.json
+    where :
+        - '$.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/sqlPools/{sqlPoolName}/restorePoints/{restorePointName}"].delete.responses' 
+    suppress:
+        - R4011
+    reason: SQL Pools APIs are proxy APIs that call SQL DB APIs. The SQL DB delete restore points API only supports return method 200, so we cannot support 204. It is not possible for the SQL DB team to add 204 support for delete restore points.
+  - suppress: AllResourcesMustHaveGetOperation
+    from: Microsoft.Synapse/stable/2020-12-01/sqlPool.json
+    where:
+      - $.definitions.DataMaskingRule
+      - $.definitions.SqlPoolOperation
+  - suppress: R4015
+    reason: Needs implmentation
+    from: Microsoft.Synapse/stable/2020-12-01/workspace_managedIdentity.json
+    where:
+      - $.definitions.ManagedIdentitySqlControlSettingsInfo
+  - suppress: R2010
+    reason: x-ms-long-running-operation-options not available in datafactory swagger
+    from: Microsoft.Synapse/stable/2020-12-01/integrationRuntime.json
+  - suppress: AvoidNestedProperties
+    reason: Existing models
+    from: Microsoft.Synapse/stable/2020-12-01/integrationRuntime.json
+    where:
+      - $.definitions.IntegrationRuntimeResource.properties.properties
+      - $.definitions.IntegrationRuntimeStatusResponse.properties.properties
+      - $.definitions.SsisObjectMetadataStatusResponse.properties.properties
+  - suppress: R4009
+    reason: systemData will be in the next API version
+    from: Microsoft.Synapse/stable/2020-12-01/library.json
 ```
 
 ---
@@ -91,6 +189,9 @@ swagger-to-sdk:
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-python
   - repo: azure-sdk-for-go
+  - repo: azure-resource-manager-schemas
+    after_scripts:
+      - node sdkauto_afterscript.js synapse/resource-manager
 ```
 
 ## Python
@@ -112,47 +213,13 @@ csharp:
   namespace: Microsoft.Azure.Management.Synapse
   output-folder: $(csharp-sdks-folder)/synapse/Microsoft.Azure.Management.Synapse/src/Generated
   clear-output-folder: true
-batch:
- - tag: package-2019-06-01-preview
- - tag: package-sqlGen3-2020-04-01-preview
 ```
 
 ## Go
 
 See configuration in [readme.go.md](./readme.go.md)
 
-## Multi-API/Profile support for AutoRest v3 generators 
+## AzureResourceSchema
 
-AutoRest V3 generators require the use of `--tag=all-api-versions` to select api files.
+See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
 
-This block is updated by an automatic script. Edits may be lost!
-
-``` yaml $(tag) == 'all-api-versions' /* autogenerated */
-# include the azure profile definitions from the standard location
-require: $(this-folder)/../../../profiles/readme.md
-
-# all the input files across all versions
-input-file:
-  - $(this-folder)/Microsoft.Synapse/preview/2019-06-01-preview/bigDataPool.json
-  - $(this-folder)/Microsoft.Synapse/preview/2019-06-01-preview/checkNameAvailability.json
-  - $(this-folder)/Microsoft.Synapse/preview/2019-06-01-preview/firewallRule.json
-  - $(this-folder)/Microsoft.Synapse/preview/2019-06-01-preview/operations.json
-  - $(this-folder)/Microsoft.Synapse/preview/2019-06-01-preview/sqlPool.json
-  - $(this-folder)/Microsoft.Synapse/preview/2019-06-01-preview/workspace.json
-  - $(this-folder)/Microsoft.Synapse/preview/2019-06-01-preview/integrationRuntime.json
-  - $(this-folder)/Microsoft.Synapse/preview/2019-06-01-preview/privateLinkResources.json
-  - $(this-folder)/Microsoft.Synapse/preview/2019-06-01-preview/privateEndpointConnections.json
-  - $(this-folder)/Microsoft.Synapse/preview/2019-06-01-preview/privatelinkhub.json
-  - $(this-folder)/Microsoft.Synapse/preview/2020-04-01-preview/operations.json
-  - $(this-folder)/Microsoft.Synapse/preview/2020-04-01-preview/sqlPool.json
-  - $(this-folder)/Microsoft.Synapse/preview/2020-04-01-preview/sqlDatabase.json
-
-```
-
-If there are files that should not be in the `all-api-versions` set, 
-uncomment the  `exclude-file` section below and add the file paths.
-
-``` yaml $(tag) == 'all-api-versions'
-#exclude-file: 
-#  - $(this-folder)/Microsoft.Example/stable/2010-01-01/somefile.json
-```
