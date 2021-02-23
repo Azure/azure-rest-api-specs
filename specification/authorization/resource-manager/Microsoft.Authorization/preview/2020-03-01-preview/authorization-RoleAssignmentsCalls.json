@@ -249,6 +249,12 @@
               "$ref": "#/definitions/RoleAssignment"
             }
           },
+          "500": {
+            "description": "Error.",
+            "schema": {
+              "$ref": "#/definitions/CustomErrorResponse"
+            }
+          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
@@ -417,6 +423,12 @@
               "$ref": "#/definitions/RoleAssignment"
             }
           },
+          "500": {
+            "description": "Error.",
+            "schema": {
+              "$ref": "#/definitions/CustomErrorResponse"
+            }
+          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
@@ -470,6 +482,15 @@
     }
   },
   "definitions": {
+    "CustomErrorResponse": {
+      "properties": {
+        "message": {
+          "type": "string",
+          "description": "Description of the error."
+        }
+      },
+      "description": "Descriptive error response."
+    },
     "RoleAssignmentFilter": {
       "properties": {
         "principalId": {
@@ -529,6 +550,7 @@
             "DirectoryObjectOrGroup",
             "Everyone"
           ],
+          "default": "User",
           "x-ms-enum": {
             "name": "PrincipalType",
             "modelAsString": true
