@@ -3242,25 +3242,15 @@
         }
       }
     },
-    "Resource": {
+    "FrpResource": {
       "description": "An Azure resource.",
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/Resource"
+        }
+      ],
       "properties": {
-        "id": {
-          "description": "Azure resource Id.",
-          "type": "string",
-          "readOnly": true
-        },
-        "name": {
-          "description": "Azure resource name.",
-          "type": "string",
-          "readOnly": true
-        },
-        "type": {
-          "description": "Azure resource type.",
-          "type": "string",
-          "readOnly": true
-        },
         "location": {
           "description": "Location of the resource.",
           "type": "string",
@@ -3281,93 +3271,30 @@
         "systemData": {
           "title": "SystemData",
           "description": "System metadata for Resource",
-          "$ref": "#/definitions/SystemData",
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
           "readOnly": true
         }
       },
       "x-ms-azure-resource": true
     },
-    "ProxyResource": {
+    "FrpProxyResource": {
       "title": "Proxy resource type",
       "description": "An azure proxy resource",
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
+        }
+      ],
       "properties": {
-        "id": {
-          "description": "Azure resource Id.",
-          "type": "string",
-          "readOnly": true
-        },
-        "name": {
-          "description": "Azure resource name.",
-          "type": "string",
-          "readOnly": true
-        },
-        "type": {
-          "description": "Azure resource type.",
-          "type": "string",
-          "readOnly": true
-        },
         "systemData": {
           "title": "SystemData",
           "description": "System metadata for Resource",
-          "$ref": "#/definitions/SystemData",
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
           "readOnly": true
         }
       },
       "x-ms-azure-resource": true
-    },
-    "SystemData": {
-      "description": "Metadata pertaining to creation and last modification of the resource.",
-      "type": "object",
-      "readOnly": true,
-      "properties": {
-        "createdBy": {
-          "type": "string",
-          "description": "The identity that created the resource."
-        },
-        "createdByType": {
-          "type": "string",
-          "description": "The type of identity that created the resource.",
-          "enum": [
-            "User",
-            "Application",
-            "ManagedIdentity",
-            "Key"
-          ],
-          "x-ms-enum": {
-            "name": "createdByType",
-            "modelAsString": true
-          }
-        },
-        "createdAt": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The timestamp of resource creation (UTC)."
-        },
-        "lastModifiedBy": {
-          "type": "string",
-          "description": "The identity that last modified the resource."
-        },
-        "lastModifiedByType": {
-          "type": "string",
-          "description": "The type of identity that last modified the resource.",
-          "enum": [
-            "User",
-            "Application",
-            "ManagedIdentity",
-            "Key"
-          ],
-          "x-ms-enum": {
-            "name": "createdByType",
-            "modelAsString": true
-          }
-        },
-        "lastModifiedAt": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The type of identity that last modified the resource."
-        }
-      }
     },
     "VirtualMachineIdentity": {
       "type": "object",
@@ -3411,7 +3338,7 @@
       "description": "Fusion Group details",
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "#/definitions/FrpResource"
         }
       ],
       "properties": {
@@ -3474,7 +3401,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "#/definitions/FrpResource"
         }
       ],
       "properties": {
@@ -3632,7 +3559,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "#/definitions/FrpResource"
         }
       ],
       "properties": {
@@ -3799,7 +3726,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "#/definitions/FrpResource"
         }
       ],
       "properties": {
@@ -3901,7 +3828,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "#/definitions/FrpResource"
         }
       ],
       "properties": {
@@ -4092,7 +4019,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "#/definitions/FrpResource"
         }
       ],
       "properties": {
@@ -4173,7 +4100,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "#/definitions/FrpResource"
         }
       ],
       "properties": {
@@ -4460,12 +4387,6 @@
           "description": "If present, details of the error.",
           "type": "object",
           "$ref": "#/definitions/OperationStatusError"
-        },
-        "systemData": {
-          "title": "SystemData",
-          "description": "System metadata for Resource",
-          "$ref": "#/definitions/SystemData",
-          "readOnly": true
         }
       }
     },
@@ -4474,7 +4395,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/ProxyResource"
+          "$ref": "#/definitions/FrpProxyResource"
         }
       ],
       "properties": {
@@ -4673,7 +4594,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "#/definitions/FrpResource"
         }
       ],
       "properties": {
@@ -4902,7 +4823,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "#/definitions/FrpResource"
         }
       ],
       "properties": {
