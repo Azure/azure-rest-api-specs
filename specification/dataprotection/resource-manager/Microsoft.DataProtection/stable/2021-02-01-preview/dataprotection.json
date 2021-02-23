@@ -1758,6 +1758,333 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DataProtection/vaultGuards": {
+      "get": {
+        "tags": [
+          "VaultGuards"
+        ],
+        "summary": "Returns VaultGuards collection belonging to a subscription.",
+        "operationId": "VaultGuards_GetResourcesInSubscription",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/VaultGuardResourceList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Get VaultGuards in Subscription": {
+            "$ref": "./examples/VaultGuardCRUD/GetVaultGuardsInSubscription.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataProtection/vaultGuards/{vaultGuardsName}": {
+      "put": {
+        "tags": [
+          "VaultGuards"
+        ],
+        "summary": "Creates or updates a VaultGuard resource belonging to a resource group.",
+        "operationId": "VaultGuards_Put",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "name": "vaultGuardsName",
+            "in": "path",
+            "description": "The name of VaultGuard",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "Request body for operation",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/VaultGuardResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/VaultGuardResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create VaultGuard": {
+            "$ref": "./examples/VaultGuardCRUD/PutVaultGuard.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "VaultGuards"
+        ],
+        "summary": "Deletes a VaultGuard resource from the resource group.",
+        "operationId": "VaultGuards_Delete",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "name": "vaultGuardsName",
+            "in": "path",
+            "description": "The name of VaultGuard",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "NoContent"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete VaultGuard": {
+            "$ref": "./examples/VaultGuardCRUD/DeleteVaultGuard.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "VaultGuards"
+        ],
+        "summary": "Updates a VaultGuard resource belonging to a resource group. For example, updating tags for a resource.",
+        "operationId": "VaultGuards_Patch",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "name": "vaultGuardsName",
+            "in": "path",
+            "description": "The name of VaultGuard",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "Request body for operation",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PatchResourceRequestInput"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/VaultGuardResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Patch VaultGuard": {
+            "$ref": "./examples/VaultGuardCRUD/PatchVaultGuard.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataProtection/vaultGuards/{vaultGuardsName}/{operationName}": {
+      "get": {
+        "tags": [
+          "VaultGuards"
+        ],
+        "summary": "Returns collection of operation request objects for a critical operation protected by the given vault guard resource.",
+        "operationId": "VaultGuards_GetOperationRequestObjects",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "name": "vaultGuardsName",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "operationName",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ObjectResourceList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List OperationsRequestObject": {
+            "$ref": "./examples/VaultGuardCRUD/ListVaultGuardOperationsRequestObject.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataProtection/vaultGuards/{vaultGuardsName}/{operationName}/{operationRequestName}": {
+      "get": {
+        "tags": [
+          "VaultGuards"
+        ],
+        "summary": "Returns collection of operation request objects for a critical operation protected by the given vault guard resource.",
+        "operationId": "VaultGuards_GetDefaultOperationRequestObject",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "name": "vaultGuardsName",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "operationName",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "operationRequestName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ObjectResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get DefaultOperationsRequestObject": {
+            "$ref": "./examples/VaultGuardCRUD/GetDefaultOperationsRequestObject.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -4147,6 +4474,126 @@
         "restoreRequestObject"
       ],
       "title": "ValidateRestoreRequestObject",
+      "type": "object"
+    },
+    "VaultGuard": {
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "description": "Provisioning state of the BackupVault resource",
+          "enum": [
+            "Failed",
+            "Provisioning",
+            "Updating",
+            "Succeeded",
+            "Deleting",
+            "Unknown"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": true
+          }
+        },
+        "lastLockUpdateTime": {
+          "format": "date-time",
+          "description": "LastTime VaultGuardResource is updated",
+          "type": "string",
+          "readOnly": true
+        },
+        "allowAutoApprovals": {
+          "description": "This flag indicates whether auto approval is allowed or not.",
+          "type": "boolean",
+          "readOnly": true
+        },
+        "vaultGuardOperations": {
+          "description": "{readonly} List of operation details those are protected by the Vault Guard resource",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VaultGuardOperation"
+          },
+          "readOnly": true
+        },
+        "description": {
+          "description": "Description about the pre-req steps to perform all the critical operations.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "VaultGuardOperation": {
+      "description": "This class contains all the details about a critical operation.",
+      "type": "object",
+      "properties": {
+        "vaultCriticalOperation": {
+          "description": "Name of the critical operation.",
+          "type": "string",
+          "readOnly": true
+        },
+        "requestResourceType": {
+          "description": "Type of resource request.",
+          "type": "string",
+          "readOnly": true
+        },
+        "isProtectedByVaultGuard": {
+          "description": "This flag indicates whether this operation is protected by this Vault guard resource or not.",
+          "type": "boolean",
+          "readOnly": true
+        }
+      }
+    },
+    "VaultGuardResource": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/DppTrackedResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/VaultGuard",
+          "description": "VaultGuardResource properties"
+        }
+      }
+    },
+    "VaultGuardResourceList": {
+      "description": "List of VaultGuard resources",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DppTrackedResourceList"
+        }
+      ],
+      "properties": {
+        "value": {
+          "description": "List of resources.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VaultGuardResource"
+          }
+        }
+      }
+    },
+    "ObjectResourceList": {
+      "description": "List of Object resources",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DppResourceList"
+        }
+      ],
+      "properties": {
+        "value": {
+          "description": "List of resources.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ObjectResource"
+          }
+        }
+      }
+    },
+    "ObjectResource": {
+      "description": "Object resource",
       "type": "object"
     }
   },
