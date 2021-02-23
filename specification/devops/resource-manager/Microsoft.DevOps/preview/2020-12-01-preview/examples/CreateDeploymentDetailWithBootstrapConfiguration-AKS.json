@@ -18,25 +18,34 @@
           "workflow": {
             "repository": "contoso/contoso-app",
             "name": "Prod deployment",
-            "path": "./github/workflow/cd.yml",
+            "ref": "refs/heads/release",
+            "authorization": {
+              "authorizationType": "personalAccessToken",
+              "parameters": {
+                "token": "mypat"
+              }
+            },
             "bootstrapConfiguration": {
-              "pipelineProvisioningJob": {
-                "id": "123",
-                "pipelineTemplateId": "ms.vss-continuous-delivery-pipeline-templates.aks-cd-with-dockerfile-github",
-                "branch": "master",
-                "provisioningMode": "complete",
-                "draftPipelineConfiguration": {
-                  "files": [
-                    {
-                      "path": ".github/workflow.yml",
-                      "content": "<empty>"
-                    }
-                  ]
-                },
-                "provisioningConfiguration": {
-                  "mode": "draft",
-                  "commitMessage": "commiting workflow configuration"
-                }
+              "pipelineTemplateId": "ms.vss-continuous-delivery-pipeline-templates.aks-cd-with-dockerfile-github",
+              "pipelineTemplateParameters": {
+                "reuseACR": "false",
+                "existingContainerRegistryId": "",
+                "existingContainerRegistryResourceGroupLocation": "",
+                "subscriptionId": "00000000-0000-0000-0000-000000000000",
+                "clusterId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/test/providers/Microsoft.ContainerService/managedClusters/test-cluster",
+                "resourceGroup": "test-rg",
+                "httpApplicationRoutingEnabled": "false",
+                "httpApplicationRoutingDomain": "",
+                "kubernetesVersion": "1.12.7",
+                "containerRegistryName": "testacr",
+                "acrResourceGroup": "test-rg",
+                "containerRegistrySKU": "Standard",
+                "containerRegistryLocation": "South Central US",
+                "dockerFilePath": "Dockerfile",
+                "containerPort": "8080",
+                "dockerContext": ".",
+                "armAuthToken": "Bearer xxxxxx",
+                "azureAuth": "{\"scheme\":\"ServicePrincipal\",\"parameters\":{\"serviceprincipalid\":\"00000000-0000-0000-0000-000000000000\",\"serviceprincipalkey\":\"xxx%xxx%xxx#xxx(xx(\",\"subscriptionId\":\"00000000-0000-0000-0000-000000000000\",\"tenantid\":\"00000000-0000-0000-0000-000000000000\"}}"
               }
             }
           }
@@ -66,8 +75,13 @@
               "repository": "contoso/contoso-app",
               "name": "Prod deployment",
               "path": "./github/workflow/cd.yml",
-              "ref": "refs/heads/release"
-            }
+              "ref": "refs/heads/release",
+              "bootstrapConfiguration": {
+                "pipelineTemplateId": "ms.vss-continuous-delivery-pipeline-templates.aks-cd-with-dockerfile-github",
+                "pipelineTemplateParameters": {}
+              }
+            },
+            "commit": "870d8ae5d7558661d59c1d805d41fd53e43a9a6c"
           }
         }
       }
@@ -93,8 +107,13 @@
               "repository": "contoso/contoso-app",
               "name": "Prod deployment",
               "path": "./github/workflow/cd.yml",
-              "ref": "refs/heads/release"
-            }
+              "ref": "refs/heads/release",
+              "bootstrapConfiguration": {
+                "pipelineTemplateId": "ms.vss-continuous-delivery-pipeline-templates.aks-cd-with-dockerfile-github",
+                "pipelineTemplateParameters": {}
+              }
+            },
+            "commit": "870d8ae5d7558661d59c1d805d41fd53e43a9a6c"
           }
         }
       }

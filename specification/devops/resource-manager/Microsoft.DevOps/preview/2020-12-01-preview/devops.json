@@ -600,7 +600,7 @@
       "properties": {
         "id": {
           "type": "string",
-          "description": "Unique identifer for the target Azure resource"
+          "description": "Unique identifier for the target Azure resource"
         },
         "type": {
           "type": "string",
@@ -768,21 +768,126 @@
           "type": "string",
           "description": "Branch associated with the workflow run"
         },
+        "authorization": {
+          "$ref": "#/definitions/Authorization",
+          "description": "Authorization info to access the code repository"
+        },
         "bootstrapConfiguration": {
-          "$ref": "#/definitions/BootstrapConfiguration"
+          "$ref": "#/definitions/BootstrapConfiguration",
+          "description": "Configuration used to bootstrap workflow"
         }
       },
       "required": [
-        "repository",
-        "path"
+        "repository"
       ]
     },
     "BootstrapConfiguration": {
       "type": "object",
-      "description": "Property bag to store workflow bootstrap configuration. ",
+      "description": "Configuration used to bootstrap workflow",
+      "properties": {
+        "pipelineTemplateId": {
+          "type": "string",
+          "description": "Unique identifier of the pipeline template which will be used to create pipeline"
+        },
+        "pipelineTemplateParameters": {
+          "$ref": "#/definitions/PipelineTemplateParameters",
+          "description": "List of parameter values for pipeline template"
+        },
+        "pipelineConfiguration": {
+          "$ref": "#/definitions/PipelineConfiguration",
+          "description": "Pipeline Configuration"
+        },
+        "provisioningConfiguration": {
+          "$ref": "#/definitions/ProvisioningConfiguration",
+          "description": "Configuration to control provisioning of a pipeline"
+        }
+      },
+      "required": [
+        "pipelineTemplateId"
+      ]
+    },
+    "PipelineConfiguration": {
+      "type": "object",
+      "description": "Draft configuration for the pipeline. This can be used to specify a workflow file content already fetched for given pipelineTemplateId",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for workflow file and related objects"
+        },
+        "files": {
+          "type": "array",
+          "description": "Workflow and its associated files",
+          "items": {
+            "$ref": "#/definitions/File"
+          }
+        }
+      },
+      "required": [
+        "files"
+      ]
+    },
+    "PipelineTemplateParameters": {
+      "type": "object",
+      "description": "Dictionary of input parameters used in the pipeline template.",
       "additionalProperties": {
-        "type": "object"
+        "type": "string"
       }
+    },
+    "ProvisioningConfiguration": {
+      "type": "object",
+      "description": "Configuration to control provisioning of a pipeline",
+      "properties": {
+        "commitMessage": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Commit message for committing files"
+        }
+      }
+    },
+    "Authorization": {
+      "description": "Authorization info to access the code repository",
+      "type": "object",
+      "properties": {
+        "authorizationType": {
+          "description": "Type of authorization.",
+          "type": "string",
+          "enum": [
+            "personalAccessToken"
+          ],
+          "x-ms-enum": {
+            "name": "AuthorizationType",
+            "modelAsString": true
+          }
+        },
+        "parameters": {
+          "description": "Authorization parameters corresponding to the authorization type.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "authorizationType"
+      ]
+    },
+    "File": {
+      "type": "object",
+      "description": "Workflow or its dependent file",
+      "properties": {
+        "path": {
+          "type": "string",
+          "description": "Relative file path w.r.t to repository root"
+        },
+        "content": {
+          "type": "string",
+          "description": "Base-64 encoded file content"
+        }
+      },
+      "required": [
+        "path",
+        "content"
+      ]
     },
     "DeploymentArtifacts": {
       "type": "array",
