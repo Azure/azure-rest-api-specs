@@ -164,23 +164,23 @@
           "description": "Operation name: {provider}/{resource}/{operation}",
           "type": "string"
         },
-        "isDataAction": {
-          "description": "Indicates whether the operation is a data action",
-          "type": "boolean"
-        },
         "display": {
           "description": "The object that represents the operation.",
           "$ref": "#/definitions/OperationDisplay"
+        },
+        "isDataAction": {
+          "description": "Whether or not this is a data plane operation",
+          "type": "boolean"
+        },
+        "origin": {
+          "description": "The origin",
+          "type": "string"
+        },
+        "properties": {
+          "$ref": "#/definitions/OperationProperties",
+          "description": "Properties of the operation"
         }
       }
-    },
-    "origin": {
-      "description": "The origin",
-      "type": "string"
-    },
-    "properties": {
-      "$ref": "#/definitions/OperationProperties",
-      "description": "Properties of the operation"
     },
     "OperationProperties": {
       "description": "Operation properties.",
