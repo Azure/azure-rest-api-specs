@@ -1517,7 +1517,7 @@
         "tags": [
           "CloudServiceOperatingSystems"
         ],
-        "description": "Gets a list of all OS versions available in the location. Use nextLink property in the response to get the next page of OS versions. Do this till nextLink is null to fetch all the OS versions.",
+        "description": "Gets a list of all cloud service OS versions available in the location. Use nextLink property in the response to get the next page of OS versions. Do this till nextLink is null to fetch all the OS versions.",
         "operationId": "CloudServiceOperatingSystems_ListOSVersions",
         "parameters": [
           {
@@ -1613,7 +1613,7 @@
         "tags": [
           "CloudServiceOperatingSystems"
         ],
-        "description": "Gets a list of all OS families available in the location. Use nextLink property in the response to get the next page of OS Families. Do this till nextLink is null to fetch all the OS Families.",
+        "description": "Gets a list of all cloud service OS families available in the location. Use nextLink property in the response to get the next page of OS Families. Do this till nextLink is null to fetch all the OS Families.",
         "operationId": "CloudServiceOperatingSystems_ListOSFamilies",
         "parameters": [
           {
@@ -2462,6 +2462,16 @@
       "description": "OS version properties.",
       "type": "object",
       "properties": {
+        "family": {
+          "description": "The family of this OS version.",
+          "type": "string",
+          "readOnly": true
+        },
+        "familyLabel": {
+          "description": "The family label of this OS version.",
+          "type": "string",
+          "readOnly": true
+        },
         "version": {
           "description": "The OS version.",
           "type": "string",
@@ -2480,16 +2490,6 @@
         "isActive": {
           "description": "Specifies whether this OS version is active.",
           "type": "boolean",
-          "readOnly": true
-        },
-        "family": {
-          "description": "The family of this OS version.",
-          "type": "string",
-          "readOnly": true
-        },
-        "familyLabel": {
-          "description": "The family label of this OS version.",
-          "type": "string",
           "readOnly": true
         }
       }
@@ -2540,7 +2540,7 @@
         "value"
       ]
     },
-    "OSFamilyVersion": {
+    "OSVersionPropertiesBase": {
       "description": "Family view of OS version.",
       "type": "object",
       "properties": {
@@ -2584,7 +2584,7 @@
           "description": "List of OS versions belonging to this family.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/OSFamilyVersion"
+            "$ref": "#/definitions/OSVersionPropertiesBase"
           },
           "readOnly": true
         }
