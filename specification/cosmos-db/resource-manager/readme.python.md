@@ -24,6 +24,8 @@ namespace: azure.mgmt.cosmosdb
 package-name: azure-mgmt-cosmosdb
 package-version: 0.7.0
 clear-output-folder: false
+modelerfour:
+  lenient-model-deduplication: true
 ```
 
 ``` yaml $(python) && $(python-mode) == 'update'
