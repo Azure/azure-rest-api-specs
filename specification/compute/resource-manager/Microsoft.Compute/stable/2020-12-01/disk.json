@@ -180,6 +180,9 @@
           },
           "Update a managed disk to add supportsHibernation.": {
             "$ref": "./examples/UpdateAManagedDiskToAddSupportsHibernation.json"
+          },
+          "Update a managed disk to change tier.": {
+            "ref": "./examples/UpdateAManagedDiskToChangeTier.json"
           }
         }
       },
@@ -2022,7 +2025,7 @@
           "description": "Indicates the OS on a disk supports hibernation."
         },
         "securityProfile": {
-          "$ref": "#/definitions/SecurityProfile",
+          "$ref": "#/definitions/DiskSecurityProfile",
           "description": "Contains the security related information for the resource."
         }
       },
@@ -2688,7 +2691,7 @@
         ]
       }
     },
-    "SecurityProfile": {
+    "DiskSecurityProfile": {
       "properties": {
         "securityType": {
           "$ref": "#/definitions/SecurityType"
