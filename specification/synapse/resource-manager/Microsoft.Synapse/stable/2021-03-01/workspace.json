@@ -1407,8 +1407,16 @@
       "type": "object",
       "properties": {
         "publicNetworkAccess": {
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
           "description": "Enable or Disable pubic network access to workspace",
-          "type": "string"
+          "type": "string",
+          "x-ms-enum": {
+            "name": "WorkspacePublicNetworkAccess",
+            "modelAsString": true
+          }
         }
       }
     }
