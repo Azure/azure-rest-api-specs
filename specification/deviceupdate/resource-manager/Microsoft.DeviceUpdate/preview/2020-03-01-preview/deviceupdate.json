@@ -312,12 +312,22 @@
               "$ref": "#/definitions/Account"
             }
           },
+          "201": {
+            "description": "Creates or Updates the VirtualMachines resource.",
+            "schema": {
+              "$ref": "#/definitions/VirtualMachine"
+            }
+          },
           "default": {
             "description": "Error response describing the reason for operation failure.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
         },
         "x-ms-examples": {
           "Updates Account": {
