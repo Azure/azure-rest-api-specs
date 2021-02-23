@@ -26,15 +26,32 @@ These are the global settings for the ContainerInstance API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2019-12
+tag: package-2021-03
 ```
 
+
+### Tag: package-2021-03
+
+These settings apply only when `--tag=package-2021-03` is specified on the command line.
+
+```yaml $(tag) == 'package-2021-03'
+input-file:
+  - Microsoft.ContainerInstance/stable/2021-03-01/containerInstance.json
+```
+### Tag: package-2020-11
+
+These settings apply only when `--tag=package-2020-11` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-11'
+input-file:
+  - Microsoft.ContainerInstance/stable/2020-11-01/containerInstance.json
+```
 
 ### Tag: package-2019-12
 
 These settings apply only when `--tag=package-2019-12` is specified on the command line.
 
-```yaml $(tag) == 'package-2019-12'
+``` yaml $(tag) == 'package-2019-12'
 input-file:
   - Microsoft.ContainerInstance/stable/2019-12-01/containerInstance.json
 ```
@@ -173,8 +190,6 @@ See configuration in [readme.ruby.md](./readme.ruby.md)
 
 See configuration in [readme.typescript.md](./readme.typescript.md)
 
-
 ## AzureResourceSchema
 
 See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)
-

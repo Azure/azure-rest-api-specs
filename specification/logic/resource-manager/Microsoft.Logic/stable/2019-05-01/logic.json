@@ -8856,6 +8856,10 @@
         "networkConfiguration": {
           "$ref": "#/definitions/NetworkConfiguration",
           "description": "The network configuration."
+        },
+        "encryptionConfiguration": {
+          "$ref": "#/definitions/IntegrationServiceEnvironmenEncryptionConfiguration",
+          "description": "The encryption configuration."
         }
       }
     },
@@ -8915,6 +8919,34 @@
       "x-ms-enum": {
         "name": "IntegrationServiceEnvironmentAccessEndpointType",
         "modelAsString": true
+      }
+    },
+    "IntegrationServiceEnvironmenEncryptionConfiguration": {
+      "type": "object",
+      "description": "The encryption configuration for the integration service environment.",
+      "properties": {
+        "encryptionKeyReference": {
+          "$ref": "#/definitions/IntegrationServiceEnvironmenEncryptionKeyReference",
+          "description": "The encryption key reference."
+        }
+      }
+    },
+    "IntegrationServiceEnvironmenEncryptionKeyReference": {
+      "type": "object",
+      "description": "The encryption key details for the integration service environment.",
+      "properties": {
+        "keyVault": {
+          "$ref": "#/definitions/ResourceReference",
+          "description": "The key vault reference."
+        },
+        "keyName": {
+          "type": "string",
+          "description": "Gets the key name in the Key Vault."
+        },
+        "keyVersion": {
+          "type": "string",
+          "description": "Gets the version of the key specified in the keyName property."
+        }
       }
     },
     "FlowAccessControlConfiguration": {
