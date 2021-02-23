@@ -116,7 +116,10 @@
             }
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via" : "location"
+        }
       },
       "patch": {
         "tags": [
@@ -209,7 +212,10 @@
             "description": "No Content response definition."
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via" : "location"
+        }
       },
       "get": {
         "tags": [
@@ -360,7 +366,10 @@
             "description": "Accepted response definition."
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via" : "location"
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HDInsight/clusters/{clusterName}/roles/{roleName}/autoscale": {
@@ -432,7 +441,10 @@
             "description": "Accepted response definition."
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via" : "location"
+        }
       }
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.HDInsight/clusters": {
@@ -523,7 +535,10 @@
             "description": "Accepted response definition."
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via" : "location"
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HDInsight/clusters/{clusterName}/getGatewaySettings": {
@@ -617,7 +632,10 @@
             "description": "Accepted response definition"
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via" : "location"
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HDInsight/clusters/{clusterName}/azureasyncoperations/{operationId}": {
@@ -714,7 +732,10 @@
             "description": "Accepted response definition"
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via" : "location"
+        }
       }
     }
   },
@@ -1006,7 +1027,8 @@
         },
         "sshProfile": {
           "$ref": "#/definitions/SshProfile",
-          "description": "The SSH profile."
+          "description": "The SSH profile.",
+          "x-ms-secret": true
         }
       }
     },

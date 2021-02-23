@@ -116,7 +116,10 @@
             }
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via" : "location"
+        }
       },
       "patch": {
         "tags": [
@@ -209,7 +212,10 @@
             "description": "No Content response definition."
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via" : "location"
+        }
       },
       "get": {
         "tags": [
@@ -360,7 +366,10 @@
             "description": "Accepted response definition."
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via" : "location"
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HDInsight/clusters/{clusterName}/roles/{roleName}/autoscale": {
@@ -432,7 +441,10 @@
             "description": "Accepted response definition."
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via" : "location"
+        }
       }
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.HDInsight/clusters": {
@@ -523,7 +535,10 @@
             "description": "Accepted response definition."
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via" : "location"
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HDInsight/clusters/{clusterName}/getGatewaySettings": {
@@ -617,7 +632,10 @@
             "description": "Accepted response definition"
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via" : "location"
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HDInsight/clusters/{clusterName}/azureasyncoperations/{operationId}": {
@@ -714,7 +732,10 @@
             "description": "Accepted response definition"
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via" : "location"
+        }
       }
     }
   },
@@ -735,7 +756,11 @@
           "additionalProperties": {
             "type": "string"
           },
-          "description": "The versions of different services in the cluster."
+          "description": "The versions of different services in the cluster.",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         },
         "configurations": {
           "type": "object",
@@ -793,7 +818,11 @@
         },
         "organizationalUnitDN": {
           "type": "string",
-          "description": "The organizational unit within the Active Directory to place the cluster and service accounts."
+          "description": "The organizational unit within the Active Directory to place the cluster and service accounts.",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         },
         "ldapsUrls": {
           "type": "array",
@@ -1006,7 +1035,8 @@
         },
         "sshProfile": {
           "$ref": "#/definitions/SshProfile",
-          "description": "The SSH profile."
+          "description": "The SSH profile.",
+          "x-ms-secret": true
         }
       }
     },
@@ -1038,7 +1068,11 @@
         },
         "VMGroupName": {
           "type": "string",
-          "description": "The name of the virtual machine group."
+          "description": "The name of the virtual machine group.",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         },
         "autoscale": {
           "$ref": "#/definitions/Autoscale",
@@ -1192,7 +1226,8 @@
       "properties": {
         "enableComputeIsolation": {
           "type": "boolean",
-          "description": "The flag indicates whether enable compute isolation or not."
+          "description": "The flag indicates whether enable compute isolation or not.",
+          "default": false
         },
         "hostSku": {
           "type": "string",
@@ -1230,7 +1265,11 @@
             "name": "Tier",
             "modelAsString": false
           },
-          "default": "Standard"
+          "default": "Standard",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         },
         "clusterDefinition": {
           "$ref": "#/definitions/ClusterDefinition",
