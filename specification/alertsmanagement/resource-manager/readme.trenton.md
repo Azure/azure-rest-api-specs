@@ -7,6 +7,7 @@ overrides:
       resource: "*"
     set:
       - NeedSeparated: true
+      - CombineCreateUpdate: true
   - where:
       resource: "ActionRules"
       property: "properties"

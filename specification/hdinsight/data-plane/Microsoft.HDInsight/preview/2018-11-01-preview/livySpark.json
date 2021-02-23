@@ -705,14 +705,17 @@
       "type": "object",
       "properties": {
         "from": {
+          "description": "The start index to fetch Spark Batch jobs.",
           "format": "int32",
           "type": "integer"
         },
         "total": {
+          "description": "Number of Spark Batch jobs to fetch.",
           "format": "int32",
           "type": "integer"
         },
         "sessions": {
+          "description": "List of spark batch jobs.",
           "uniqueItems": false,
           "type": "array",
           "items": {
@@ -725,22 +728,27 @@
       "type": "object",
       "properties": {
         "id": {
+          "description": "The livy id of the spark batch job.",
           "format": "int32",
           "type": "integer"
         },
         "appId": {
+          "description": "The application id of this job.",
           "type": "string"
         },
         "appInfo": {
+          "description": "The detailed application info.",
           "type": "object",
           "additionalProperties": {
             "type": "string"
           }
         },
         "state": {
-          "type": "string"
+          "description": "The current state of the spark batch job",
+          "$ref": "#/definitions/JobState"
         },
         "log": {
+          "description": "The log lines.",
           "x-ms-client-name": "logLines",
           "uniqueItems": false,
           "type": "array",
@@ -754,15 +762,19 @@
       "type": "object",
       "properties": {
         "file": {
+          "description": "File containing the application to execute.",
           "type": "string"
         },
         "proxyUser": {
+          "description": "User to impersonate when running the job.",
           "type": "string"
         },
         "className": {
+          "description": "Application Java/Spark main class.",
           "type": "string"
         },
         "args": {
+          "description": "Command line arguments for the application.",
           "x-ms-client-name": "arguments",
           "uniqueItems": false,
           "type": "array",
@@ -771,6 +783,7 @@
           }
         },
         "jars": {
+          "description": "Jars to be used in this batch job.",
           "uniqueItems": false,
           "type": "array",
           "items": {
@@ -778,6 +791,7 @@
           }
         },
         "pyFiles": {
+          "description": "Python files to be used in this batch job.",
           "x-ms-client-name": "pythonFiles",
           "uniqueItems": false,
           "type": "array",
@@ -786,6 +800,7 @@
           }
         },
         "files": {
+          "description": "Files to be used in this batch job.",
           "uniqueItems": false,
           "type": "array",
           "items": {
@@ -793,25 +808,31 @@
           }
         },
         "driverMemory": {
+          "description": "Amount of memory to use for the driver process.",
           "type": "string"
         },
         "driverCores": {
+          "description": "Number of cores to use for the driver process.",
           "format": "int32",
           "type": "integer"
         },
         "executorMemory": {
+          "description": "Amount of memory to use per executor process.",
           "type": "string"
         },
         "executorCores": {
+          "description": "Number of cores to use for each executor.",
           "format": "int32",
           "type": "integer"
         },
         "numExecutors": {
+          "description": "Number of executors to launch for this batch job.",
           "x-ms-client-name": "executorCount",
           "format": "int32",
           "type": "integer"
         },
         "archives": {
+          "description": "Archives to be used in this batch job.",
           "uniqueItems": false,
           "type": "array",
           "items": {
@@ -819,12 +840,15 @@
           }
         },
         "queue": {
+          "description": "The name of the YARN queue to which submitted.",
           "type": "string"
         },
         "name": {
+          "description": "The name of this batch job.",
           "type": "string"
         },
         "conf": {
+          "description": "Spark configuration properties.",
           "x-ms-client-name": "configuration",
           "type": "object",
           "additionalProperties": {
@@ -837,14 +861,17 @@
       "type": "object",
       "properties": {
         "from": {
+          "description": "The start index to fetch spark sessions.",
           "format": "int32",
           "type": "integer"
         },
         "total": {
+          "description": "Number of spark sessions to fetch.",
           "format": "int32",
           "type": "integer"
         },
         "sessions": {
+          "description": "List of spark sessions.",
           "uniqueItems": false,
           "type": "array",
           "items": {
@@ -857,22 +884,28 @@
       "type": "object",
       "properties": {
         "id": {
+          "description": "The livy id of the spark session job.",
           "format": "int32",
           "type": "integer"
         },
         "appId": {
+          "description": "The application id of this job.",
           "type": "string"
         },
         "owner": {
+          "description": "Remote user who submitted this job.",
           "type": "string"
         },
         "proxyUser": {
+          "description": "User to impersonate when running.",
           "type": "string"
         },
         "kind": {
-          "type": "string"
+          "description": "Spark session job kind.",
+          "$ref": "#/definitions/SessionJobKind"
         },
         "log": {
+          "description": "The log lines.",
           "x-ms-client-name": "logLines",
           "uniqueItems": false,
           "type": "array",
@@ -881,9 +914,11 @@
           }
         },
         "state": {
-          "type": "string"
+          "description": "The current state of the spark session job",
+          "$ref": "#/definitions/JobState"
         },
         "appInfo": {
+          "description": "The detailed application info.",
           "type": "object",
           "additionalProperties": {
             "type": "string"
@@ -895,22 +930,15 @@
       "type": "object",
       "properties": {
         "kind": {
-          "type": "string",
-          "x-ms-enum": {
-            "name": "SessionJobKind",
-            "modelAsString": true
-          },
-          "enum": [
-            "spark",
-            "pyspark",
-            "sparkr",
-            "sql"
-          ]
+          "description": "Spark session job kind.",
+          "$ref": "#/definitions/SessionJobKind"
         },
         "proxyUser": {
+          "description": "User to impersonate when starting the session.",
           "type": "string"
         },
         "jars": {
+          "description": "Jars to be used in this session.",
           "uniqueItems": false,
           "type": "array",
           "items": {
@@ -918,6 +946,7 @@
           }
         },
         "pyFiles": {
+          "description": "Python files to be used in this session.",
           "x-ms-client-name": "pythonFiles",
           "uniqueItems": false,
           "type": "array",
@@ -926,6 +955,7 @@
           }
         },
         "files": {
+          "description": "Files to be used in this session.",
           "uniqueItems": false,
           "type": "array",
           "items": {
@@ -933,25 +963,31 @@
           }
         },
         "driverMemory": {
+          "description": "Amount of memory to use for the driver process.",
           "type": "string"
         },
         "driverCores": {
+          "description": "Number of cores to use for the driver process.",
           "format": "int32",
           "type": "integer"
         },
         "executorMemory": {
+          "description": "Amount of memory to use per executor process.",
           "type": "string"
         },
         "executorCores": {
+          "description": "Number of cores to use for each executor.",
           "format": "int32",
           "type": "integer"
         },
         "numExecutors": {
+          "description": "Number of executors to launch for this session.",
           "x-ms-client-name": "executorCount",
           "format": "int32",
           "type": "integer"
         },
         "archives": {
+          "description": "Archives to be used in this session.",
           "uniqueItems": false,
           "type": "array",
           "items": {
@@ -959,12 +995,15 @@
           }
         },
         "queue": {
+          "description": "The name of the YARN queue to which submitted.",
           "type": "string"
         },
         "name": {
+          "description": "The name of this session.",
           "type": "string"
         },
         "conf": {
+          "description": "Spark configuration properties.",
           "x-ms-client-name": "configuration",
           "type": "object",
           "additionalProperties": {
@@ -972,6 +1011,7 @@
           }
         },
         "heartbeatTimeoutInSecond": {
+          "description": "Timeout in second to which session be orphaned.",
           "format": "int32",
           "type": "integer"
         }
@@ -981,22 +1021,27 @@
       "type": "object",
       "properties": {
         "id": {
+          "description": "The livy id of the spark job.",
           "format": "int32",
           "type": "integer"
         },
         "from": {
+          "description": "Offset from start of log.",
           "format": "int32",
           "type": "integer"
         },
         "size": {
+          "description": "Max number of log lines.",
           "format": "int32",
           "type": "integer"
         },
         "total": {
+          "description": "Total number of log lines.",
           "format": "int64",
           "type": "integer"
         },
         "log": {
+          "description": "The log lines.",
           "x-ms-client-name": "logLines",
           "uniqueItems": false,
           "type": "array",
@@ -1010,11 +1055,13 @@
       "type": "object",
       "properties": {
         "id": {
+          "description": "The livy id of the spark job.",
           "format": "int32",
           "type": "integer"
         },
         "state": {
-          "type": "string"
+          "description": "The current state of the spark job",
+          "$ref": "#/definitions/JobState"
         }
       }
     },
@@ -1022,6 +1069,7 @@
       "type": "object",
       "properties": {
         "statements": {
+          "description": "List of spark statements.",
           "uniqueItems": false,
           "type": "array",
           "items": {
@@ -1034,19 +1082,24 @@
       "type": "object",
       "properties": {
         "id": {
+          "description": "The livy id of the spark statement job.",
           "format": "int32",
           "type": "integer"
         },
         "code": {
+          "description": "The execution code.",
           "type": "string"
         },
         "state": {
-          "type": "string"
+          "description": "The current state of the spark statement.",
+          "$ref": "#/definitions/StatementState"
         },
         "output": {
+          "description": "The execution output.",
           "$ref": "#/definitions/SparkStatementOutput"
         },
         "progress": {
+          "description": "The execution progress.",
           "type": "number",
           "format": "double"
         }
@@ -1056,16 +1109,79 @@
       "type": "object",
       "properties": {
         "status": {
-          "type": "string"
+          "description": "Execution status.",
+          "$ref": "#/definitions/StatementExecutionStatus"
         },
         "execution_count": {
+          "description": "A monotonically increasing number.",
           "format": "int32",
           "type": "integer"
         },
         "data": {
+          "description": "Statement output.",
           "type": "object"
         }
       }
+    },
+    "SessionJobKind": {
+      "type": "string",
+      "x-ms-enum": {
+        "name": "SessionJobKind",
+        "modelAsString": true
+      },
+      "enum": [
+        "spark",
+        "pyspark",
+        "sparkr",
+        "sql"
+      ]
+    },
+    "StatementState": {
+      "type": "string",
+      "x-ms-enum": {
+        "name": "StatementState",
+        "modelAsString": true
+      },
+      "enum": [
+        "waiting",
+        "running",
+        "available",
+        "error",
+        "cancelling",
+        "cancelled"
+      ]
+    },
+    "JobState": {
+      "type": "string",
+      "x-ms-enum": {
+        "name": "JobState",
+        "modelAsString": true
+      },
+      "enum": [
+        "not_started",
+        "starting",
+        "idle",
+        "running",
+        "busy",
+        "shutting_down",
+        "error",
+        "dead",
+        "killed",
+        "success",
+        "recovering"
+      ]
+    },
+    "StatementExecutionStatus": {
+      "type": "string",
+      "x-ms-enum": {
+        "name": "StatementExecutionStatus",
+        "modelAsString": true
+      },
+      "enum": [
+        "ok",
+        "error",
+        "abort"
+      ]
     },
     "SparkStatementRequest": {
       "type": "object",
@@ -1074,7 +1190,7 @@
           "type": "string"
         },
         "kind": {
-          "type": "string"
+          "$ref": "#/definitions/SessionJobKind"
         }
       }
     },

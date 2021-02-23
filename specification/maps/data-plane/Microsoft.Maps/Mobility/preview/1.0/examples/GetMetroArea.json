@@ -1,0 +1,110 @@
+{
+  "parameters": {
+    "api-version": "1.0",
+    "format": "json",
+    "query": "40.648677,-74.010535",
+    "queryType": "position"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "results": [
+          {
+            "metroId": 121,
+            "metroName": "NYC-NJ",
+            "viewport": {
+              "topLeftPoint": {
+                "latitude": 42.21254,
+                "longitude": -75.68527
+              },
+              "btmRightPoint": {
+                "latitude": 38.87921,
+                "longitude": -71.83323
+              }
+            },
+            "geometry": {
+              "type": "Polygon",
+              "coordinates": [
+                [
+                  [
+                    -73.08158,
+                    41.18596
+                  ],
+                  [
+                    -73.12026,
+                    41.23447
+                  ],
+                  [
+                    -73.17959,
+                    41.25386
+                  ],
+                  [
+                    -73.25697,
+                    41.18014
+                  ],
+                  [
+                    -73.36529,
+                    41.18401
+                  ],
+                  [
+                    -73.36013,
+                    41.39719
+                  ],
+                  [
+                    -73.08158,
+                    41.18596
+                  ]
+                ]
+              ]
+            }
+          }
+        ]
+      }
+    },
+    "400": {
+      "headers": {},
+      "body": {
+        "error": {
+          "code": "400 BadRequest",
+          "message": "Bad request: one or more parameters were incorrectly specified or are mutually exclusive."
+        }
+      }
+    },
+    "401": {
+      "headers": {},
+      "body": {
+        "error": {
+          "code": "401 Unauthorized",
+          "message": "Access denied due to invalid subscription key. Make sure to provide a valid key for an active subscription."
+        }
+      }
+    },
+    "403": {
+      "headers": {},
+      "body": {
+        "error": {
+          "code": "403 Forbidden",
+          "message": "Permission, capacity, or authentication issues."
+        }
+      }
+    },
+    "404": {
+      "headers": {},
+      "body": {
+        "error": {
+          "code": "404 NotFound",
+          "message": "Not Found: the requested resource could not be found, but it may be available again in the future."
+        }
+      }
+    },
+    "500": {
+      "headers": {},
+      "body": {
+        "error": {
+          "code": "500 InternalServerError",
+          "message": "An error occurred while processing the request. Please try again later."
+        }
+      }
+    }
+  }
+}

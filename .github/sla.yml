@@ -67,7 +67,7 @@
       - time
     args:
       limit: 72h
-      booleanFilterExpression: (Reviewed-ChangesRequired||ARMChangeRequest)
+      booleanFilterExpression: (Reviewed-ChangesRequired||ARMChangesRequested)
       message: '<p>Dear PR author,</p><p>The PR Reviewer has commented on your PR ${URL} , putting on the label "Reviewed-ChangesRequired" or "ARMChangeRequest". Please check out the comment by clicking the PR link attached previously, and update your commits accordingly.</p><p>Please ensure to remove "Reviewed-ChangesRequired" or "ARMChangeRequest" label, after you complete updates and comment back. If you need ARM board or swagger reviewer revisit your PR, please label the PR with "WaitForARMRevisit" and "WaitForReviewRevisit" respectively.</p><p>Quick info.</p><ul><li>How to fix CI error:&nbsp;<a href="https://aka.ms/ci-fix">https://aka.ms/ci-fix</a></li></ul><p><em>DO NOT REPLY: This is an automated email. If you have any questions, please send an email to the Swagger and Tools Team (vscswagger@microsoft.com).</em></p><p>Best regards,</p><p>Swagger and Tools Team, Azure Management Experience</p>'
       subject: "Action Required: Please update your PR ${URL}"
       to: ${AUTHOR}

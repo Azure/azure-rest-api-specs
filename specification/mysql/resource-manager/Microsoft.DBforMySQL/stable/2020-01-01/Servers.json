@@ -101,6 +101,58 @@
         },
         "x-ms-long-running-operation": true
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMySQL/servers/{serverName}/upgrade": {
+      "post": {
+        "tags": [
+          "ServerUpgrade"
+        ],
+        "operationId": "Servers_Upgrade",
+        "x-ms-examples": {
+          "ServerUpgrade": {
+            "$ref": "./examples/ServerUpgrade.json"
+          }
+        },
+        "description": "Upgrade server version.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ServerUpgradeParameters"
+            },
+            "description": "The required parameters for updating a server."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
     }
   },
   "definitions": {
@@ -113,6 +165,20 @@
         }
       },
       "description": "An error response from the Batch service."
+    },
+    "ServerUpgradeParameters": {
+      "properties": {
+        "properties": {
+          "properties": {
+            "targetServerVersion": {
+              "type": "string",
+              "description": "Represents an server storage profile."
+            }
+          },
+          "x-ms-client-flatten": true,
+          "description": "The properties that can be updated for a server."
+        }
+      }
     }
   },
   "parameters": {

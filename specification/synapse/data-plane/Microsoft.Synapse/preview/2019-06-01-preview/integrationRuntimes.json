@@ -1,0 +1,123 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2019-06-01-preview",
+    "title": "ArtifactsClient"
+  },
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{endpoint}",
+    "useSchemePrefix": false,
+    "parameters": [
+      {
+        "$ref": "#/parameters/Endpoint"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/integrationRuntimes": {
+      "get": {
+        "tags": [
+          "IntegrationRuntimes"
+        ],
+        "operationId": "IntegrationRuntimes_List",
+        "description": "List Integration Runtimes",
+        "x-ms-examples": {
+          "List Integration Runtimes": {
+            "$ref": "./examples/IntegrationRuntimes_List.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success response.",
+            "schema": {
+              "$ref": "../../../../resource-manager/Microsoft.Synapse/preview/2019-06-01-preview/integrationRuntime.json#/definitions/IntegrationRuntimeListResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../resource-manager/Microsoft.Synapse/preview/2019-06-01-preview/workspace.json#/definitions/ErrorContract"
+            }
+          }
+        }
+      }
+    },
+    "/integrationRuntimes/{integrationRuntimeName}": {
+      "get": {
+        "tags": [
+          "IntegrationRuntimes"
+        ],
+        "operationId": "IntegrationRuntimes_Get",
+        "description": "Get Integration Runtime",
+        "x-ms-examples": {
+          "Get Integration Runtime": {
+            "$ref": "./examples/IntegrationRuntimes_Get.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/IntegrationRuntimeNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success response.",
+            "schema": {
+              "$ref": "../../../../resource-manager/Microsoft.Synapse/preview/2019-06-01-preview/integrationRuntime.json#/definitions/IntegrationRuntimeResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../resource-manager/Microsoft.Synapse/preview/2019-06-01-preview/workspace.json#/definitions/ErrorContract"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {},
+  "parameters": {
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "The Synapse client API Version."
+    },
+    "Endpoint": {
+      "name": "endpoint",
+      "description": "The workspace development endpoint, for example https://myworkspace.dev.azuresynapse.net.",
+      "required": true,
+      "type": "string",
+      "in": "path",
+      "x-ms-skip-url-encoding": true,
+      "x-ms-parameter-location": "client"
+    },
+    "IntegrationRuntimeNameParameter": {
+      "name": "integrationRuntimeName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The Integration Runtime name",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

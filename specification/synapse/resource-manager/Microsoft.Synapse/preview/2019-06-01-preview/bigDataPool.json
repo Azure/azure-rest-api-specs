@@ -60,7 +60,7 @@
           },
           "default": {
             "schema": {
-              "$ref": "./workspace.json#/definitions/ErrorContract"
+              "$ref": "../../../../common/v1/types.json#/definitions/ErrorContract"
             },
             "description": ""
           }
@@ -122,7 +122,7 @@
           },
           "default": {
             "schema": {
-              "$ref": "./workspace.json#/definitions/ErrorContract"
+              "$ref": "../../../../common/v1/types.json#/definitions/ErrorContract"
             },
             "description": ""
           }
@@ -200,7 +200,7 @@
           },
           "default": {
             "schema": {
-              "$ref": "./workspace.json#/definitions/ErrorContract"
+              "$ref": "../../../../common/v1/types.json#/definitions/ErrorContract"
             },
             "description": ""
           }
@@ -268,7 +268,7 @@
           },
           "default": {
             "schema": {
-              "$ref": "./workspace.json#/definitions/ErrorContract"
+              "$ref": "../../../../common/v1/types.json#/definitions/ErrorContract"
             },
             "description": ""
           }
@@ -315,6 +315,12 @@
           "200": {
             "schema": {
               "$ref": "#/definitions/BigDataPoolResourceInfoListResult"
+            },
+            "description": ""
+          },
+          "default": {
+            "schema": {
+              "$ref": "../../../../common/v1/types.json#/definitions/ErrorContract"
             },
             "description": ""
           }
@@ -406,6 +412,23 @@
           "$ref": "#/definitions/AutoPauseProperties",
           "description": "Auto-pausing properties"
         },
+        "isComputeIsolationEnabled": {
+          "type": "boolean",
+          "description": "Whether compute isolation is required or not."
+        },
+        "sessionLevelPackagesEnabled": {
+          "type": "boolean",
+          "description": "Whether session level packages enabled."
+        },
+        "cacheSize": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The cache size"
+        },
+        "dynamicExecutorAllocation": {
+          "$ref": "#/definitions/DynamicExecutorAllocation",
+          "description": "Dynamic Executor Allocation"
+        },
         "sparkEventsFolder": {
           "type": "string",
           "description": "The Spark events folder"
@@ -418,6 +441,17 @@
         "libraryRequirements": {
           "$ref": "#/definitions/LibraryRequirements",
           "description": "Library version requirements"
+        },
+        "customLibraries": {
+          "description": "List of custom libraries/packages associated with the spark pool.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/LibraryInfo"
+          }
+        },
+        "sparkConfigProperties": {
+          "$ref": "#/definitions/LibraryRequirements",
+          "description": "Spark configuration file to specify additional properties"
         },
         "sparkVersion": {
           "type": "string",
@@ -432,7 +466,10 @@
             "None",
             "Small",
             "Medium",
-            "Large"
+            "Large",
+            "XLarge",
+            "XXLarge",
+            "XXXLarge"
           ],
           "type": "string",
           "description": "The level of compute power that each node in the Big Data pool has.",
@@ -452,6 +489,12 @@
             "name": "NodeSizeFamily",
             "modelAsString": true
           }
+        },
+        "lastSucceededTimestamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time when the Big Data pool was updated successfully.",
+          "readOnly": true
         }
       }
     },
@@ -489,6 +532,55 @@
         "enabled": {
           "type": "boolean",
           "description": "Whether auto-pausing is enabled for the Big Data pool."
+        }
+      }
+    },
+    "DynamicExecutorAllocation": {
+      "type": "object",
+      "description": "Dynamic Executor Allocation Properties",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "Indicates whether Dynamic Executor Allocation is enabled or not."
+        }
+      }
+    },
+    "LibraryInfo": {
+      "type": "object",
+      "description": "Library/package information of a Big Data pool powered by Apache Spark",
+      "title": "Information about a library/package created at the workspace level.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the library."
+        },
+        "path": {
+          "type": "string",
+          "description": "Storage blob path of library."
+        },
+        "containerName": {
+          "type": "string",
+          "description": "Storage blob container name."
+        },
+        "uploadedTimestamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The last update time of the library.",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "description": "Type of the library."
+        },
+        "provisioningStatus": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Provisioning status of the library/package."
+        },
+        "creatorId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Creator Id of the library/package."
         }
       }
     },

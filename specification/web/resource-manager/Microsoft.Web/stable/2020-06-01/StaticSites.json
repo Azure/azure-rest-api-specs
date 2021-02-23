@@ -15,6 +15,59 @@
     "application/json"
   ],
   "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Web/locations/{location}/previewStaticSiteWorkflowFile": {
+      "post": {
+        "tags": [
+          "StaticSites"
+        ],
+        "summary": "Generates a preview workflow file for the static site",
+        "description": "Description for Generates a preview workflow file for the static site",
+        "operationId": "StaticSites_PreviewWorkflow",
+        "parameters": [
+          {
+            "name": "location",
+            "in": "path",
+            "description": "Location where you plan to create the static site.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "staticSitesWorkflowPreviewRequest",
+            "in": "body",
+            "description": "A JSON representation of the StaticSitesWorkflowPreviewRequest properties. See example.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/StaticSitesWorkflowPreviewRequest"
+            }
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/StaticSitesWorkflowPreview"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Generates a preview workflow file for the static site": {
+            "$ref": "./examples/GenerateStaticSiteWorkflowPreview.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Web/staticSites": {
       "get": {
         "tags": [
@@ -1861,6 +1914,62 @@
               "description": "The url for the invitation link",
               "type": "string",
               "readOnly": true
+            }
+          },
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "StaticSitesWorkflowPreview": {
+      "description": "Preview for the Static Site Workflow to be generated",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "./CommonDefinitions.json#/definitions/ProxyOnlyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "StaticSitesWorkflowPreview resource specific properties",
+          "properties": {
+            "path": {
+              "description": "The path for the workflow file to be generated",
+              "type": "string",
+              "readOnly": true
+            },
+            "contents": {
+              "description": "The contents for the workflow file to be generated",
+              "type": "string",
+              "readOnly": true
+            }
+          },
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "StaticSitesWorkflowPreviewRequest": {
+      "description": "Request entity for previewing the Static Site workflow",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "./CommonDefinitions.json#/definitions/ProxyOnlyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "StaticSitesWorkflowPreviewRequest resource specific properties",
+          "properties": {
+            "repositoryUrl": {
+              "description": "URL for the repository of the static site.",
+              "type": "string"
+            },
+            "branch": {
+              "description": "The target branch in the repository.",
+              "type": "string"
+            },
+            "buildProperties": {
+              "$ref": "#/definitions/StaticSiteBuildProperties",
+              "description": "Build properties to configure on the repository."
             }
           },
           "x-ms-client-flatten": true

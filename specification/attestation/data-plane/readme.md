@@ -20,23 +20,30 @@ To see additional help and options, run:
 ## Configuration
 Following are the settings for using this specification with [AutoRest](https://aka.ms/autorest) tool to validation and optionally generate SDK.
 
-### Suppression
-
 ### Basic Information
 These are the global settings for the Attestation APIs.
 
 ``` yaml
 openapi-type: data-plane
-tag: package-2018-09-preview
+tag: package-2020-10-01
 ```
 
-### Tag: package-2018-09-preview
+### Tag: package-2018-09-01
 
-These settings apply only when `--tag=package-2018-09-preview` is specified on the command line.
+These settings apply only when `--tag=package-2018-09-01` is specified on the command line.
 
-``` yaml $(tag) == 'package-2018-09-preview'
+``` yaml $(tag) == 'package-2018-09-01'
 input-file:
-- Microsoft.Attestation/preview/2018-09-01-preview/attestation.json
+- Microsoft.Attestation/stable/2018-09-01-preview/attestation.json
+```
+
+### Tag: package-2020-10-01
+
+These settings apply only when `--tag=package-2020-10-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-10-01'
+input-file:
+- Microsoft.Attestation/stable/2020-10-01/attestation.json
 ```
 
 ---
@@ -51,6 +58,7 @@ This is not used by Autorest itself.
 swagger-to-sdk:
   - repo: azure-sdk-for-net
   - repo: azure-sdk-for-python
+  - repo: azure-sdk-for-go
 ```
 
 ## Python
@@ -72,7 +80,9 @@ csharp:
   clear-output-folder: true
 ```
 
+## Go
 
+See configuration in [readme.go.md](./readme.go.md)
 
 ## Multi-API/Profile support for AutoRest v3 generators 
 
@@ -86,8 +96,8 @@ require: $(this-folder)/../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
-  - $(this-folder)/Microsoft.Attestation/preview/2018-09-01-preview/attestation.json
-
+  - $(this-folder)/Microsoft.Attestation/stable/2018-09-01-preview/attestation.json
+  - $(this-folder)/Microsoft.Attestation/stable/2020-10-01/attestation.json
 ```
 
 If there are files that should not be in the `all-api-versions` set, 
@@ -96,5 +106,26 @@ uncomment the  `exclude-file` section below and add the file paths.
 ``` yaml $(tag) == 'all-api-versions'
 #exclude-file: 
 #  - $(this-folder)/Microsoft.Example/stable/2010-01-01/somefile.json
+```
+
+### Suppression
+``` yaml
+directive:
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    from: attestation.json
+    where: $.definitions.StoredAttestationPolicy.properties.AttestationPolicy
+    reason: Existing Clients use these definitions which must be maintained.
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    from: attestation.json
+    where: $.definitions.AttestationResult.properties.policy_signer
+    reason: Existing Clients use these definitions which must be maintained.
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    from: attestation.json
+    where: $.definitions.AttestationResult.properties.policy_hash
+    reason: Existing Clients use these definitions which must be maintained.
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    from: attestation.json
+    where: $.definitions.AttestationResult.properties.rp_data
+    reason: Existing Clients use these definitions which must be maintained.
 ```
 

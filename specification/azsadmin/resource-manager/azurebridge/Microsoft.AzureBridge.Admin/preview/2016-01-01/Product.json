@@ -10,7 +10,7 @@
     "https"
   ],
   "paths": {
-    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroup}/providers/Microsoft.AzureBridge.Admin/activations/{activationName}/products": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureBridge.Admin/activations/{activationName}/products": {
       "get": {
         "x-ms-examples": {
           "Return product name.": {
@@ -27,7 +27,7 @@
             "$ref": "AzureBridge.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "AzureBridge.json#/parameters/ResourceGroupParameter"
+            "$ref": "AzureBridge.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "AzureBridge.json#/parameters/ActivationNameParameter"
@@ -42,6 +42,12 @@
             "schema": {
               "$ref": "#/definitions/ProductResourcesPage"
             }
+          },
+          "default": {
+            "description": "Default Response.",
+            "schema": {
+              "$ref": "Activation.json#/definitions/ExtendedErrorInfo"
+            }
           }
         },
         "produces": [
@@ -55,7 +61,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroup}/providers/Microsoft.AzureBridge.Admin/activations/{activationName}/products/{productName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureBridge.Admin/activations/{activationName}/products/{productName}": {
       "get": {
         "x-ms-examples": {
           "Return product name.": {
@@ -72,7 +78,7 @@
             "$ref": "AzureBridge.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "AzureBridge.json#/parameters/ResourceGroupParameter"
+            "$ref": "AzureBridge.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "AzureBridge.json#/parameters/ActivationNameParameter"
@@ -91,8 +97,11 @@
               "$ref": "#/definitions/ProductResource"
             }
           },
-          "404": {
-            "description": "Not Found"
+          "default": {
+            "description": "Default Response.",
+            "schema": {
+              "$ref": "Activation.json#/definitions/ExtendedErrorInfo"
+            }
           }
         },
         "produces": [
@@ -103,7 +112,7 @@
         ]
       }
     },
-    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroup}/providers/Microsoft.AzureBridge.Admin/activations/{activationName}/products/{productName}/download": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureBridge.Admin/activations/{activationName}/products/{productName}/download": {
       "post": {
         "x-ms-examples": {
           "Return product name.": {
@@ -120,7 +129,7 @@
             "$ref": "AzureBridge.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "AzureBridge.json#/parameters/ResourceGroupParameter"
+            "$ref": "AzureBridge.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "AzureBridge.json#/parameters/ActivationNameParameter"
@@ -145,8 +154,11 @@
               "$ref": "AzureBridge.json#/definitions/DownloadedProductResource"
             }
           },
-          "404": {
-            "description": "Not Found"
+          "default": {
+            "description": "Default Response.",
+            "schema": {
+              "$ref": "Activation.json#/definitions/ExtendedErrorInfo"
+            }
           }
         },
         "x-ms-long-running-operation": true,

@@ -1,0 +1,45 @@
+{
+  "parameters": {
+    "subscriptionId": "{subscription-id}",
+    "resourceGroupName": "myResourceGroup",
+    "api-version": "2020-06-30",
+    "snapshotName": "mySnapshot1",
+    "snapshot": {
+      "location": "West US",
+      "properties": {
+        "creationData": {
+          "createOption": "Import",
+          "sourceUri": "https://mystorageaccount.blob.core.windows.net/osimages/osimage.vhd"
+        }
+      }
+    }
+  },
+  "responses": {
+    "202": {
+      "body": {
+        "properties": {
+          "creationData": {
+            "createOption": "Import",
+            "sourceUri": "https://mystorageaccount.blob.core.windows.net/osimages/osimage.vhd"
+          },
+          "provisioningState": "Updating"
+        },
+        "location": "West US",
+        "name": "mySnapshot1"
+      }
+    },
+    "200": {
+      "body": {
+        "properties": {
+          "creationData": {
+            "createOption": "Import",
+            "sourceUri": "https://mystorageaccount.blob.core.windows.net/osimages/osimage.vhd"
+          },
+          "provisioningState": "Updating"
+        },
+        "location": "West US",
+        "name": "mySnapshot1"
+      }
+    }
+  }
+}

@@ -57,6 +57,12 @@
               "$ref": "#/definitions/SqlPool"
             },
             "description": "OK"
+          },
+          "default": {
+            "schema": {
+              "$ref": "../../../../common/v1/types.json#/definitions/ErrorContract"
+            },
+            "description": ""
           }
         },
         "consumes": [],
@@ -116,6 +122,12 @@
           },
           "202": {
             "description": "Accepted"
+          },
+          "default": {
+            "schema": {
+              "$ref": "../../../../common/v1/types.json#/definitions/ErrorContract"
+            },
+            "description": ""
           }
         },
         "consumes": [],
@@ -181,7 +193,7 @@
           },
           "default": {
             "schema": {
-              "$ref": "./workspace.json#/definitions/ErrorContract"
+              "$ref": "../../../../common/v1/types.json#/definitions/ErrorContract"
             },
             "description": ""
           }
@@ -249,7 +261,7 @@
           },
           "default": {
             "schema": {
-              "$ref": "./workspace.json#/definitions/ErrorContract"
+              "$ref": "../../../../common/v1/types.json#/definitions/ErrorContract"
             },
             "description": ""
           }
@@ -296,6 +308,12 @@
           "200": {
             "schema": {
               "$ref": "#/definitions/SqlPoolInfoListResult"
+            },
+            "description": ""
+          },
+          "default": {
+            "schema": {
+              "$ref": "../../../../common/v1/types.json#/definitions/ErrorContract"
             },
             "description": ""
           }
@@ -356,6 +374,12 @@
           },
           "202": {
             "description": "Accepted"
+          },
+          "default": {
+            "schema": {
+              "$ref": "../../../../common/v1/types.json#/definitions/ErrorContract"
+            },
+            "description": ""
           }
         },
         "consumes": [],
@@ -412,6 +436,12 @@
           },
           "202": {
             "description": "Accepted"
+          },
+          "default": {
+            "schema": {
+              "$ref": "../../../../common/v1/types.json#/definitions/ErrorContract"
+            },
+            "description": ""
           }
         },
         "consumes": [],
@@ -425,63 +455,6 @@
         "x-ms-examples": {
           "Resume a SQL Analytics pool": {
             "$ref": "./examples/ResumeSqlPool.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/sqlPools/{sqlPoolName}/move": {
-      "post": {
-        "operationId": "SqlPools_Rename",
-        "summary": "Rename a SQL pool",
-        "description": "Rename a SQL pool.",
-        "tags": [
-          "SqlPools"
-        ],
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
-          },
-          {
-            "type": "string",
-            "in": "path",
-            "name": "sqlPoolName",
-            "description": "SQL pool name",
-            "required": true
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "description": "The resource move definition for renaming this Sql pool.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ResourceMoveDefinition"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successfully renamed the Sql pool"
-          },
-          "default": {
-            "description": "*** Error Responses: ***\n\n * 400 InvalidResourceMoveRequest - The resource move request is invalid.\n\n * 400 InvalidMoveTargetResourceId - The target resource identifier in move request is invalid.\n\n * 400 MismatchingSubscriptionWithUrl - The provided subscription did not match the subscription in the Url.\n\n * 400 MismatchingResourceGroupNameWithUrl - The provided resource group name did not match the name in the Url.\n\n * 400 MismatchingServerNameWithUrl - The provided server name did not match the name in the Url.\n\n * 400 InvalidIdentifier - The identifier contains NULL or an invalid unicode character.\n\n * 400 DatabaseNameInUse - Database already exists. Choose a different database name.\n\n * 400 TokenTooLong - The provided token is too long.\n\n * 400 CannotMoveOrDropSyncMetadataDatabase - Cannot drop database used as sync metadata database.\n\n * 400 UnsupportedServiceName - The specified name is an invalid name because it contains one or more unsupported unicode characters.\n\n * 400 CannotUseReservedDatabaseName - Cannot use reserved database name in this operation.\n\n * 400 CannotMoveOrDropJobAccountDatabase - Cannot drop database associated with job account.\n\n * 404 SourceDatabaseNotFound - The source database does not exist.\n\n * 409 InvalidOperationForDatabaseInReplicationRelationship - A replication seeding operation was performed on a database that is already in a replication relationship."
-          }
-        },
-        "consumes": [],
-        "produces": [
-          "application/json"
-        ],
-        "x-ms-examples": {
-          "Rename a SQL Analytics pool": {
-            "$ref": "./examples/RenameSqlPool.json"
           }
         }
       }
@@ -528,7 +501,7 @@
           },
           "default": {
             "schema": {
-              "$ref": "./workspace.json#/definitions/ErrorContract"
+              "$ref": "../../../../common/v1/types.json#/definitions/ErrorContract"
             },
             "description": ""
           }
@@ -593,7 +566,7 @@
           },
           "default": {
             "schema": {
-              "$ref": "./workspace.json#/definitions/ErrorContract"
+              "$ref": "../../../../common/v1/types.json#/definitions/ErrorContract"
             },
             "description": ""
           }
@@ -652,6 +625,18 @@
               "type": "object"
             },
             "description": "OK"
+          },
+          "202": {
+            "schema": {
+              "type": "object"
+            },
+            "description": "Accepted"
+          },
+          "default": {
+            "schema": {
+              "$ref": "../../../../common/v1/types.json#/definitions/ErrorContract"
+            },
+            "description": ""
           }
         },
         "consumes": [],
@@ -665,7 +650,147 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/sqlPools/{sqlPoolName}/geoBackupPolicies": {
+      "get": {
+        "operationId": "SqlPoolGeoBackupPolicies_List",
+        "summary": "List SQL pool geo backup policies",
+        "description": "Get list of SQL pool geo backup policies",
+        "tags": [
+          "SqlPools, GeoBackupPolicies"
+        ],
+        "deprecated": false,
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
+          },
+          {
+            "type": "string",
+            "in": "path",
+            "name": "sqlPoolName",
+            "description": "SQL pool name",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/GeoBackupPolicyListResult"
+            },
+            "description": "OK"
+          },
+          "default": {
+            "schema": {
+              "$ref": "../../../../common/v1/types.json#/definitions/ErrorContract"
+            },
+            "description": ""
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        },
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "Get Sql pool geo backup policy": {
+            "$ref": "./examples/SqlPoolGeoBackupPolicies_List.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/sqlPools/{sqlPoolName}/geoBackupPolicies/{geoBackupPolicyName}": {
+      "put": {
+        "tags": [
+          "SqlPools, GeoBackupPolicies"
+        ],
+        "deprecated": false,
+        "operationId": "SqlPoolGeoBackupPolicies_CreateOrUpdate",
+        "description": "Updates a SQL Pool geo backup policy.",
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "Create geo backup policy": {
+            "$ref": "./examples/CreateOrUpdateGeoBackupPolicies.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
+          },
+          {
+            "type": "string",
+            "in": "path",
+            "name": "sqlPoolName",
+            "description": "SQL pool name",
+            "required": true
+          },
+          {
+            "name": "geoBackupPolicyName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "Default"
+            ],
+            "description": "The name of the geo backup policy.",
+            "x-ms-enum": {
+              "modelAsString": true,
+              "name": "GeoBackupPolicyName"
+            },
+            "x-ms-parameter-location": "method"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/GeoBackupPolicy"
+            },
+            "description": "The required parameters for creating or updating the geo backup policy."
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/GeoBackupPolicy"
+            }
+          },
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/GeoBackupPolicy"
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": "../../../../common/v1/types.json#/definitions/ErrorContract"
+            },
+            "description": ""
+          }
+        }
+      },
       "get": {
         "operationId": "SqlPoolGeoBackupPolicies_Get",
         "summary": "Get a SQL pool geo backup policy",
@@ -716,6 +841,12 @@
               "$ref": "#/definitions/GeoBackupPolicy"
             },
             "description": "OK"
+          },
+          "default": {
+            "schema": {
+              "$ref": "../../../../common/v1/types.json#/definitions/ErrorContract"
+            },
+            "description": ""
           }
         },
         "consumes": [],
@@ -831,6 +962,12 @@
               "$ref": "#/definitions/RestorePointListResult"
             },
             "description": "OK"
+          },
+          "default": {
+            "schema": {
+              "$ref": "../../../../common/v1/types.json#/definitions/ErrorContract"
+            },
+            "description": ""
           }
         },
         "x-ms-pageable": {
@@ -952,6 +1089,12 @@
             "schema": {
               "$ref": "#/definitions/ReplicationLinkListResult"
             }
+          },
+          "default": {
+            "schema": {
+              "$ref": "../../../../common/v1/types.json#/definitions/ErrorContract"
+            },
+            "description": ""
           }
         },
         "consumes": [],
@@ -964,6 +1107,248 @@
         "x-ms-examples": {
           "Lists a Sql Analytic pool's replication links": {
             "$ref": "./examples/ListSqlPoolReplicationLinks.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/sqlPools/{sqlPoolName}/replicationLinks/{linkId}": {
+      "get": {
+        "operationId": "SqlPoolReplicationLinks_GetByName",
+        "summary": "Get SQL pool replication link by name",
+        "description": "Get SQL pool replication link by name.",
+        "tags": [
+          "SqlPools, ReplicationLinks"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
+          },
+          {
+            "type": "string",
+            "in": "path",
+            "name": "sqlPoolName",
+            "description": "SQL pool name",
+            "required": true
+          },
+          {
+            "name": "linkId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The ID of the replication link."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ReplicationLink"
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": "../../../../common/v1/types.json#/definitions/ErrorContract"
+            },
+            "description": ""
+          }
+        },
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "Lists a Sql Analytic pool's replication links": {
+            "$ref": "./examples/SqlPoolReplicationLinks_GetByName.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/sqlPools/{sqlPoolName}/maintenancewindows/current": {
+      "get": {
+        "operationId": "SqlPoolMaintenanceWindows_Get",
+        "summary": "Get a SQL pool's Maintenance Windows.",
+        "description": "Get a SQL pool's Maintenance Windows.",
+        "tags": [
+          "SqlPools, MaintenanceWindows"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
+          },
+          {
+            "type": "string",
+            "in": "path",
+            "name": "sqlPoolName",
+            "description": "SQL pool name",
+            "required": true
+          },
+          {
+            "name": "maintenanceWindowName",
+            "in": "query",
+            "description": "Maintenance window name.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/MaintenanceWindows"
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": "../../../../common/v1/types.json#/definitions/ErrorContract"
+            },
+            "description": ""
+          }
+        },
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "Gets maintenance window settings for a selected SQL Analytics pool.": {
+            "$ref": "./examples/GetMaintenanceWindows.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "SqlPoolMaintenanceWindows_CreateOrUpdate",
+        "summary": "Creates or updates a Sql pool's maintenance windows settings.",
+        "description": "Creates or updates a Sql pool's maintenance windows settings.",
+        "tags": [
+          "SqlPools, MaintenanceWindows"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
+          },
+          {
+            "type": "string",
+            "in": "path",
+            "name": "sqlPoolName",
+            "description": "SQL pool name",
+            "required": true
+          },
+          {
+            "name": "maintenanceWindowName",
+            "in": "query",
+            "description": "Maintenance window name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MaintenanceWindows"
+            },
+            "description": "The required parameters for creating or updating Maintenance Windows settings"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully set maintenance windows settings."
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 InvalidMaintenanceWindowSelection - Invalid maintenance window selection."
+          }
+        },
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "Sets maintenance window settings for a selected SQL Analytics Pool.": {
+            "$ref": "./examples/CreateOrUpdateMaintenanceWindows.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/sqlPools/{sqlPoolName}/maintenanceWindowOptions/current": {
+      "get": {
+        "operationId": "SqlPoolMaintenanceWindowOptions_Get",
+        "summary": "SQL pool's available maintenance windows.",
+        "description": "Get list of SQL pool's available maintenance windows.",
+        "tags": [
+          "SqlPools, MaintenanceWindowOptions"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
+          },
+          {
+            "type": "string",
+            "in": "path",
+            "name": "sqlPoolName",
+            "description": "SQL pool name",
+            "required": true
+          },
+          {
+            "name": "maintenanceWindowOptionsName",
+            "in": "query",
+            "description": "Maintenance window options name.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the list of maintenance windows options.",
+            "schema": {
+              "$ref": "#/definitions/MaintenanceWindowOptions"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***"
+          }
+        },
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "Get list of transparent data encryption configurations of a SQL Analytics pool": {
+            "$ref": "./examples/GetMaintenanceWindowOptions.json"
           }
         }
       }
@@ -1018,6 +1403,12 @@
             "schema": {
               "$ref": "#/definitions/TransparentDataEncryption"
             }
+          },
+          "default": {
+            "schema": {
+              "$ref": "../../../../common/v1/types.json#/definitions/ErrorContract"
+            },
+            "description": ""
           }
         },
         "consumes": [],
@@ -1094,6 +1485,12 @@
             "schema": {
               "$ref": "#/definitions/TransparentDataEncryption"
             }
+          },
+          "default": {
+            "schema": {
+              "$ref": "../../../../common/v1/types.json#/definitions/ErrorContract"
+            },
+            "description": ""
           }
         },
         "consumes": [],
@@ -1103,6 +1500,60 @@
         "x-ms-examples": {
           "Create or update a Sql pool's transparent data encryption configuration": {
             "$ref": "./examples/CreateOrUpdateSqlPoolTransparentDataEncryption.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/sqlPools/{sqlPoolName}/transparentDataEncryption": {
+      "get": {
+        "operationId": "SqlPoolTransparentDataEncryptions_List",
+        "summary": "SQL pool's transparent data encryption configurations",
+        "description": "Get list of SQL pool's transparent data encryption configurations.",
+        "tags": [
+          "SqlPools, TransparentDataEncryption"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
+          },
+          {
+            "type": "string",
+            "in": "path",
+            "name": "sqlPoolName",
+            "description": "SQL pool name",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/TransparentDataEncryptionListResult"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n  * 409 UnsupportedWorkspaceType - Unsupported operation for the workspace type.\n\n * 500 InternalServerError - Something went wrong."
+          }
+        },
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Get list of transparent data encryption configurations of a SQL Analytics pool": {
+            "$ref": "./examples/GetSqlPoolTransparentDataEncryptionList.json"
           }
         }
       }
@@ -1336,6 +1787,12 @@
             "schema": {
               "$ref": "#/definitions/SqlPoolUsageListResult"
             }
+          },
+          "default": {
+            "schema": {
+              "$ref": "../../../../common/v1/types.json#/definitions/ErrorContract"
+            },
+            "description": ""
           }
         },
         "consumes": [],
@@ -1394,6 +1851,12 @@
             "schema": {
               "$ref": "#/definitions/SensitivityLabelListResult"
             }
+          },
+          "default": {
+            "schema": {
+              "$ref": "../../../../common/v1/types.json#/definitions/ErrorContract"
+            },
+            "description": ""
           }
         },
         "consumes": [],
@@ -1407,6 +1870,55 @@
         "x-ms-examples": {
           "Gets the current sensitivity labels of a given SQL Analytics pool": {
             "$ref": "./examples/ListSqlPoolsSensitivityLabelsWithSourceCurrent.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "SqlPools, SensitivityLabels"
+        ],
+        "description": "Update sensitivity labels of a given SQL Pool using an operations batch.",
+        "operationId": "SqlPoolSensitivityLabels_Update",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
+          },
+          {
+            "type": "string",
+            "in": "path",
+            "name": "sqlPoolName",
+            "description": "SQL pool name",
+            "required": true
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SensitivityLabelUpdateList"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully updated sensitivity labels."
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 DatawarehouseDatabaseIsDeactivated - Could not execute Data Classification operation because the database is paused. Please resume it.\n\n * 400 DatawarehouseDatabaseIsDeactivated - Could not execute Data Classification operation because the database is paused. Please resume it.\n\n * 400 SensitivityLabelSourceNameNotSupported - The specified sensitivity label source is not valid\n\n * 400 InvalidSensitivityLabelsBatch - The specified sensitivity labels batch is not valid. Please provide batch operations\n\n * 400 SensitivityLabelsMissingSchema - Operation[{0}]: Missing schema information\n\n * 400 SensitivityLabelsMissingTable - Operation[{0}]: Missing table information\n\n * 400 SensitivityLabelsMissingColumn - Operation[{0}]: Missing column information\n\n * 400 SensitivityLabelsUpdateSameColumnMoreThanOnce - The column {0} can not be updated more than once in a single command\n\n * 400 InvalidSensitivityLabelResource - The specified sensitivity label resource is not valid\n\n * 400 SensitivityLabelLabelNameAndInfoTypeNotProvided - At least one of LabelName and InformationType must be specified\n\n * 400 LabelNameTooLong - Label name cannot exceed {0} characters\n\n * 400 InformationTypeTooLong - Information type cannot exceed {0} characters\n\n * 400 LabelIdMustBeGuid - The provided �labelId� is invalid. Value must be a GUID\n\n * 400 InformationTypeIdMustBeGuid - The provided �informationTypeId� is invalid. Value must be a GUID\n\n * 400 LabelMissing - Label is required. At least one of �labelName� or �labelId� must be provided\n\n * 400 InformationTypeMissing - Information type is required. At least one of �informationType� or �informationTypeId� must be provided\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 DatabaseDoesNotExist - User has specified a database name that does not exist on this server instance.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 DatabaseDoesNotExist - User has specified a database name that does not exist on this server instance.\n\n * 404 SensitivityLabelsLabelNotFound - The specified sensitivity label could not be found\n\n * 404 SensitivityLabelsSchemaNotFound - The schema {0} could not be found\n\n * 404 SensitivityLabelsTableNotFound - The table {0} could not be found in schema {1}\n\n * 404 SensitivityLabelsColumnNotFound - The column {0} could not be found in table {2}.{1}\n\n * 501 SensitivityLabelRecommendedSourceNameNotSupported - 'Recommended' sensitivity label source is not supported yet\n\n * 501 SensitivityLabelRecommendedSourceNameNotSupported - 'Recommended' sensitivity label source is not supported yet\n\n * 503 DatabaseUnavailable - The operation failed because the database is unavailable."
+          }
+        },
+        "x-ms-examples": {
+          "Update sensitivity labels of a given database using an operations batch.": {
+            "$ref": "./examples/SensitivityLabelsCurrentUpdate.json"
           }
         }
       }
@@ -1483,6 +1995,55 @@
         "x-ms-examples": {
           "Gets the recommended sensitivity labels of a given SQL Analytics pool": {
             "$ref": "./examples/ListSqlPoolSensitivityLabelsWithSourceRecommended.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "SqlPools, SensitivityLabels"
+        ],
+        "description": "Update recommended sensitivity labels states of a given SQL Pool using an operations batch.",
+        "operationId": "SqlPoolRecommendedSensitivityLabels_Update",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
+          },
+          {
+            "type": "string",
+            "in": "path",
+            "name": "sqlPoolName",
+            "description": "SQL pool name",
+            "required": true
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RecommendedSensitivityLabelUpdateList"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully updated recommended sensitivity labels."
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 DatawarehouseDatabaseIsDeactivated - Could not execute Data Classification operation because the database is paused. Please resume it.\n\n * 400 DatawarehouseDatabaseIsDeactivated - Could not execute Data Classification operation because the database is paused. Please resume it.\n\n * 400 SensitivityLabelSourceNameNotSupported - The specified sensitivity label source is not valid\n\n * 400 InvalidRecommendedSensitivityLabelsBatch - The specified recommended sensitivity labels operations are not valid\n\n * 400 SensitivityLabelsMissingSchema - Operation[{0}]: Missing schema information\n\n * 400 SensitivityLabelsMissingTable - Operation[{0}]: Missing table information\n\n * 400 SensitivityLabelsMissingColumn - Operation[{0}]: Missing column information\n\n * 400 SensitivityLabelsUpdateSameColumnMoreThanOnce - The column {0} can not be updated more than once in a single command\n\n * 400 InvalidSensitivityLabelResource - The specified sensitivity label resource is not valid\n\n * 400 SensitivityLabelLabelNameAndInfoTypeNotProvided - At least one of LabelName and InformationType must be specified\n\n * 400 LabelNameTooLong - Label name cannot exceed {0} characters\n\n * 400 InformationTypeTooLong - Information type cannot exceed {0} characters\n\n * 400 LabelIdMustBeGuid - The provided �labelId� is invalid. Value must be a GUID\n\n * 400 InformationTypeIdMustBeGuid - The provided �informationTypeId� is invalid. Value must be a GUID\n\n * 400 LabelMissing - Label is required. At least one of �labelName� or �labelId� must be provided\n\n * 400 InformationTypeMissing - Information type is required. At least one of �informationType� or �informationTypeId� must be provided\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 DatabaseDoesNotExist - User has specified a database name that does not exist on this server instance.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 DatabaseDoesNotExist - User has specified a database name that does not exist on this server instance.\n\n * 404 SensitivityLabelsLabelNotFound - The specified sensitivity label could not be found\n\n * 404 SensitivityLabelsSchemaNotFound - The schema {0} could not be found\n\n * 404 SensitivityLabelsTableNotFound - The table {0} could not be found in schema {1}\n\n * 404 SensitivityLabelsColumnNotFound - The column {0} could not be found in table {2}.{1}\n\n * 501 SensitivityLabelRecommendedSourceNameNotSupported - 'Recommended' sensitivity label source is not supported yet\n\n * 501 SensitivityLabelRecommendedSourceNameNotSupported - 'Recommended' sensitivity label source is not supported yet\n\n * 503 DatabaseUnavailable - The operation failed because the database is unavailable."
+          }
+        },
+        "x-ms-examples": {
+          "Update recommended sensitivity labels of a given SQL Pool using an operations batch.": {
+            "$ref": "./examples/SensitivityLabelsRecommendedUpdate.json"
           }
         }
       }
@@ -1652,6 +2213,9 @@
           "200": {
             "description": "Successfully deleted the sensitivity label."
           },
+          "204": {
+            "description": "No content"
+          },
           "default": {
             "description": "*** Error Responses: ***\n\n * 400 DatawarehouseDatabaseIsDeactivated - Could not execute Data Classification operation because the database is paused. Please resume it.\n\n * 400 SensitivityLabelSourceNameNotSupported - The specified sensitivity label source is not valid\n\n * 404 SensitivityLabelsColumnNotFound - The specified schema/table/column could not be found\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 DatabaseDoesNotExist - User has specified a database name that does not exist on this server instance.\n\n * 404 SensitivityLabelsLabelNotFound - The specified sensitivity label could not be found\n\n * 501 SensitivityLabelRecommendedSourceNameNotSupported - 'Recommended' sensitivity label source is not supported yet"
           }
@@ -1663,6 +2227,90 @@
         "x-ms-examples": {
           "Deletes the sensitivity label of a given column": {
             "$ref": "./examples/DeleteSqlPoolColumnSensitivityLabel.json"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "SqlPools, SensitivityLabels"
+        ],
+        "description": "Gets the sensitivity label of a given column",
+        "operationId": "SqlPoolSensitivityLabels_Get",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
+          },
+          {
+            "type": "string",
+            "in": "path",
+            "name": "sqlPoolName",
+            "description": "SQL pool name",
+            "required": true
+          },
+          {
+            "name": "schemaName",
+            "in": "path",
+            "description": "The name of the schema.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "tableName",
+            "in": "path",
+            "description": "The name of the table.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "columnName",
+            "in": "path",
+            "description": "The name of the column.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "sensitivityLabelSource",
+            "in": "path",
+            "description": "The source of the sensitivity label.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "current",
+              "recommended"
+            ],
+            "x-ms-enum": {
+              "name": "SensitivityLabelSource",
+              "modelAsString": false
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the sensitivity label.",
+            "schema": {
+              "$ref": "#/definitions/SensitivityLabel"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 DatawarehouseDatabaseIsDeactivated - Could not execute Data Classification operation because the database is paused. Please resume it.\n\n * 400 SensitivityLabelSourceNameNotSupported - The specified sensitivity label source is not valid\n\n * 404 SensitivityLabelsColumnNotFound - The specified schema/table/column could not be found\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 DatabaseDoesNotExist - User has specified a database name that does not exist on this server instance.\n\n * 404 SensitivityLabelsLabelNotFound - The specified sensitivity label could not be found\n\n * 501 SensitivityLabelRecommendedSourceNameNotSupported - 'Recommended' sensitivity label source is not supported yet"
+          }
+        },
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "Gets the sensitivity label of a given column": {
+            "$ref": "./examples/GetSqlPoolColumnSensitivityLabelGet.json"
           }
         }
       }
@@ -2081,6 +2729,12 @@
             "schema": {
               "$ref": "#/definitions/SqlPoolConnectionPolicy"
             }
+          },
+          "default": {
+            "schema": {
+              "$ref": "../../../../common/v1/types.json#/definitions/ErrorContract"
+            },
+            "description": ""
           }
         },
         "consumes": [],
@@ -2357,6 +3011,60 @@
         "x-ms-examples": {
           "Export a database's vulnerability assessment scan results.": {
             "$ref": "./examples/ExportSqlPoolVulnerabilityAssessmentScan.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/sqlPools/{sqlPoolName}/securityAlertPolicies": {
+      "get": {
+        "operationId": "SqlPoolSecurityAlertPolicies_List",
+        "summary": "List Sql pool's security alert policies",
+        "description": "Get a list of Sql pool's security alert policies.",
+        "tags": [
+          "SqlPools, SecurityAlertPolicies"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
+          },
+          {
+            "type": "string",
+            "in": "path",
+            "name": "sqlPoolName",
+            "description": "SQL pool name",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ListSqlPoolSecurityAlertPolicies"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 SecurityAlertPoliciesInvalidStorageAccountName - The provided storage account is not valid or does not exist.\n\n * 400 SecurityAlertPoliciesInvalidStorageAccountCredentials - The provided storage account access key is not valid.\n\n * 400 InvalidServerSecurityAlertPolicyCreateRequest - The create server Threat Detection security alert policy request does not exist or has no properties object.\n\n * 400 DataSecurityInvalidUserSuppliedParameter - An invalid parameter value was provided by the client.\n\n * 400 UpsertServerSecurityAlertPolicyFailed - An error has occurred while saving Threat detection settings, please try again later\n\n * 400 UpsertServerSecurityAlertPolicyFailed - An error has occurred while saving Threat detection settings, please try again later\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 UpsertServerSecurityAlertPolicyFailed - An error has occurred while saving Threat detection settings, please try again later\n\n * 409 ServerSecurityAlertPolicyInProgress - Set server security alert policy is already in progress\n\n * 409 UpsertServerSecurityAlertPolicyFailed - An error has occurred while saving Threat detection settings, please try again later\n\n * 500 DatabaseIsUnavailable - Loading failed. Please try again later.\n\n * 500 UpsertServerSecurityAlertPolicyFailed - An error has occurred while saving Threat detection settings, please try again later\n\n * 500 GetServerSecurityAlertPolicyFailed - Failed to get Threat Detection settings"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "Get a security alert of a SQL Analytics pool": {
+            "$ref": "./examples/SqlPoolSecurityAlertPolicies_List.json"
           }
         }
       }
@@ -2668,6 +3376,9 @@
           "200": {
             "description": "Successfully removed the database vulnerability assessment rule baseline."
           },
+          "204": {
+            "description": "No content"
+          },
           "default": {
             "description": "*** Error Responses: ***\n\n * 400 VulnerabilityAssessmentStorageAuthenticationFailed - Could not authenticate to storage account '{0}' .\n\n * 400 VulnerabilityAssessmentInvalidPolicy - Vulnerability Assessment settings don't exist or invalid storage specified in settings. \n\n * 400 VulnerabilityAssessmentDatawarehouseDatabaseIsDeactivated - Could not execute Vulnerability Assessment operation because the database is paused. Please resume it.\n\n * 400 InvalidVulnerabilityAssessmentOperationRequest - The vulnerability assessment operation request does not exist or has no properties object.\n\n * 400 DataSecurityInvalidUserSuppliedParameter - An invalid parameter value was provided by the client.\n\n * 404 VulnerabilityAssessmentInvalidStorageAccount - The storage account '{0}' that was defined in the policy is invalid.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 SourceDatabaseNotFound - The source database does not exist.\n\n * 404 DatabaseDoesNotExist - User has specified a database name that does not exist on this server instance.\n\n * 404 VulnerabilityAssessmentRuleDoesNotExists - Rule '{0}' does not exist.\n\n * 404 VulnerabilityAssessmentBaselineDoesNotExists - Baseline does not exist for rule '{0}'\n\n * 500 DatabaseIsUnavailable - Loading failed. Please try again later."
           }
@@ -2675,6 +3386,90 @@
         "x-ms-examples": {
           "Removes a database's vulnerability assessment rule baseline.": {
             "$ref": "./examples/DeleteSqlPoolVulnerabilityAssessmentRuleBaseline.json"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "SqlPools, SqlPoolVulnerabilityAssesmentRuleBaselines"
+        ],
+        "description": "Gets a SqlPool's vulnerability assessment rule baseline.",
+        "operationId": "SqlPoolVulnerabilityAssessmentRuleBaselines_Get",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
+          },
+          {
+            "type": "string",
+            "in": "path",
+            "name": "sqlPoolName",
+            "description": "SQL pool name",
+            "required": true
+          },
+          {
+            "name": "vulnerabilityAssessmentName",
+            "in": "path",
+            "description": "The name of the vulnerability assessment.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "default"
+            ],
+            "x-ms-enum": {
+              "name": "VulnerabilityAssessmentName",
+              "modelAsString": true
+            }
+          },
+          {
+            "name": "ruleId",
+            "in": "path",
+            "description": "The vulnerability assessment rule ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "baselineName",
+            "in": "path",
+            "description": "The name of the vulnerability assessment rule baseline (default implies a baseline on a Sql pool level rule and master for server level rule).",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "master",
+              "default"
+            ],
+            "x-ms-enum": {
+              "name": "VulnerabilityAssessmentPolicyBaselineName",
+              "modelAsString": false
+            }
+          }
+        ],
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully got the vulnerability assessment rule baseline.",
+            "schema": {
+              "$ref": "#/definitions/SqlPoolVulnerabilityAssessmentRuleBaseline"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 VulnerabilityAssessmentStorageAuthenticationFailed - Could not authenticate to storage account '{0}' .\n\n * 400 VulnerabilityAssessmentInvalidPolicy - Vulnerability Assessment settings don't exist or invalid storage specified in settings. \n\n * 400 VulnerabilityAssessmentDatawarehouseDatabaseIsDeactivated - Could not execute Vulnerability Assessment operation because the database is paused. Please resume it.\n\n * 400 InvalidVulnerabilityAssessmentOperationRequest - The vulnerability assessment operation request does not exist or has no properties object.\n\n * 400 DataSecurityInvalidUserSuppliedParameter - An invalid parameter value was provided by the client.\n\n * 404 VulnerabilityAssessmentInvalidStorageAccount - The storage account '{0}' that was defined in the policy is invalid.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 SourceDatabaseNotFound - The source database does not exist.\n\n * 404 DatabaseDoesNotExist - User has specified a database name that does not exist on this server instance.\n\n * 404 VulnerabilityAssessmentRuleDoesNotExists - Rule '{0}' does not exist.\n\n * 404 VulnerabilityAssessmentBaselineDoesNotExists - Baseline does not exist for rule '{0}'\n\n * 500 DatabaseIsUnavailable - Loading failed. Please try again later."
+          }
+        },
+        "x-ms-examples": {
+          "Gets a Sql pool's vulnerability assessment rule baseline.": {
+            "$ref": "./examples/SqlPoolVulnerabilityAssessmentRuleBaselineGet.json"
           }
         }
       }
@@ -2873,6 +3668,9 @@
           "200": {
             "description": "Successfully removed the Sql pool vulnerability assessment."
           },
+          "204": {
+            "description": "No content"
+          },
           "default": {
             "description": "*** Error Responses: ***\n\n * 400 InvalidStorageAccountName - The provided storage account is not valid or does not exist.\n\n * 400 InvalidStorageAccountCredentials - The provided storage account shared access signature or account storage key is not valid.\n\n * 400 DatabaseVulnerabilityAssessmentMissingStorageContainerPath - Storage container path must be provided if it isn't set in server level policy\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 SourceDatabaseNotFound - The source database does not exist.\n\n * 404 DatabaseDoesNotExist - User has specified a database name that does not exist on this server instance.\n\n * 500 DatabaseIsUnavailable - Loading failed. Please try again later."
           }
@@ -2884,6 +3682,1486 @@
         "x-ms-examples": {
           "Remove a database's vulnerability assessment": {
             "$ref": "./examples/DeleteSqlPoolVulnerabilityAssessment.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/sqlPools/{sqlPoolName}/extendedAuditingSettings/{blobAuditingPolicyName}": {
+      "get": {
+        "tags": [
+          "SqlPools, BlobAuditing"
+        ],
+        "description": "Gets an extended Sql pool's blob auditing policy.",
+        "operationId": "ExtendedSqlPoolBlobAuditingPolicies_Get",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
+          },
+          {
+            "type": "string",
+            "in": "path",
+            "name": "sqlPoolName",
+            "description": "SQL pool name",
+            "required": true
+          },
+          {
+            "name": "blobAuditingPolicyName",
+            "in": "path",
+            "description": "The name of the blob auditing policy.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "default"
+            ],
+            "x-ms-parameter-location": "method"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the extended Sql pool blob auditing policy.",
+            "schema": {
+              "$ref": "#/definitions/ExtendedSqlPoolBlobAuditingPolicy"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 BlobAuditingIsNotSupportedOnResourceType - Blob Auditing is currently not supported for this resource type.\n\n * 404 SourceDatabaseNotFound - The source database does not exist.\n\n * 404 DatabaseDoesNotExist - User has specified a database name that does not exist on this server instance.\n\n * 500 DatabaseIsUnavailable - Loading failed. Please try again later."
+          }
+        },
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "Get an extended database's blob auditing policy": {
+            "$ref": "./examples/ExtendedSqlPoolBlobAuditingGet.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "SqlPools, BlobAuditing"
+        ],
+        "description": "Creates or updates an extended Sql pool's blob auditing policy.",
+        "operationId": "ExtendedSqlPoolBlobAuditingPolicies_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
+          },
+          {
+            "type": "string",
+            "in": "path",
+            "name": "sqlPoolName",
+            "description": "SQL pool name",
+            "required": true
+          },
+          {
+            "name": "blobAuditingPolicyName",
+            "in": "path",
+            "description": "The name of the blob auditing policy.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "default"
+            ],
+            "x-ms-parameter-location": "method"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The extended Sql pool blob auditing policy.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ExtendedSqlPoolBlobAuditingPolicy"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully set the extended Sql pool blob auditing policy.",
+            "schema": {
+              "$ref": "#/definitions/ExtendedSqlPoolBlobAuditingPolicy"
+            }
+          },
+          "201": {
+            "description": "Successfully created the extended database blob auditing policy.",
+            "schema": {
+              "$ref": "#/definitions/ExtendedSqlPoolBlobAuditingPolicy"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 BlobAuditingIsNotSupportedOnResourceType - Blob Auditing is currently not supported for this resource type.\n\n * 400 BlobAuditingPredicateExpressionSyntaxError - Invalid value of parameter 'predicateExpression'.\n\n * 400 InvalidDatabaseBlobAuditingPolicyCreateRequest - The create database blob auditing policy request does not exist or has no properties object.\n\n * 400 InvalidBlobAuditActionsAndGroups - Invalid audit actions or action groups.\n\n * 400 DataSecurityInvalidUserSuppliedParameter - An invalid parameter value was provided by the client.\n\n * 400 BlobAuditingPredicateExpressionEmpty - Invalid parameter 'predicateExpression', value can not be empty.\n\n * 400 BlobAuditingInvalidStorageAccountName - The provided storage account is not valid or does not exist.\n\n * 400 UpdateNotAllowedOnPausedDatabase - User attempted to perform an update on a paused database.\n\n * 400 BlobAuditingInvalidStorageAccountCredentials - The provided storage account or access key is not valid.\n\n * 400 BlobAuditingIsNotSupportedOnGeoDr - Blob auditing can be configured on primary databases only.\n\n * 400 BlobAuditingNoServerIdentity - The server identity is not correctly configured.\n\n * 400 InvalidBlobAuditActionsAndGroupsForDW - Unsupported audit actions or action groups for DW.\n\n * 400 BlobAuditingInsufficientStorageAccountPermissions - Insufficient read or write permissions on the provided storage account.\n\n * 400 BlobAuditingStorageAccountIsDisabled - The provided storage account is disabled.\n\n * 400 InsufficientDiskSpaceForAuditing - Insufficient disk space to save auditing metadata in the database\n\n * 400 InvalidBlobAuditActions - Invalid audit action\n\n * 404 SourceDatabaseNotFound - The source database does not exist.\n\n * 404 DatabaseDoesNotExist - User has specified a database name that does not exist on this server instance.\n\n * 500 DatabaseIsUnavailable - Loading failed. Please try again later."
+          }
+        },
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "Create or update an extended Sql pool's blob auditing policy with minimal parameters": {
+            "$ref": "./examples/ExtendedSqlPoolBlobAuditingCreateMin.json"
+          },
+          "Create or update an extended Sql pool's blob auditing policy with all parameters": {
+            "$ref": "./examples/ExtendedSqlPoolBlobAuditingCreateMax.json"
+          },
+          "Create or update an extended SQL pool's azure monitor auditing policy with minimal parameters": {
+            "$ref": "./examples/ExtendedSqlPoolAzureMonitorAuditingCreateMin.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/sqlPools/{sqlPoolName}/extendedAuditingSettings": {
+      "get": {
+        "tags": [
+          "SqlPools,BlobAuditing"
+        ],
+        "description": "Lists extended auditing settings of a Sql pool.",
+        "operationId": "ExtendedSqlPoolBlobAuditingPolicies_ListBySqlPool",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
+          },
+          {
+            "type": "string",
+            "in": "path",
+            "name": "sqlPoolName",
+            "description": "SQL pool name",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the database extended auditing settings.",
+            "schema": {
+              "$ref": "#/definitions/ExtendedSqlPoolBlobAuditingPolicyListResult"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 BlobAuditingIsNotSupportedOnResourceType - Blob Auditing is currently not supported for this resource type.\n\n * 404 SourceDatabaseNotFound - The source database does not exist.\n\n * 404 DatabaseDoesNotExist - User has specified a database name that does not exist on this server instance.\n\n * 500 DatabaseIsUnavailable - Loading failed. Please try again later."
+          }
+        },
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List extended auditing settings of a database": {
+            "$ref": "./examples/SqlPoolExtendedAuditingSettingsList.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/sqlPools/{sqlPoolName}/dataMaskingPolicies/{dataMaskingPolicyName}": {
+      "put": {
+        "tags": [
+          "SqlPools, DataMaskingPolicies"
+        ],
+        "operationId": "DataMaskingPolicies_CreateOrUpdate",
+        "description": "Creates or updates a Sql pool data masking policy",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
+          },
+          {
+            "type": "string",
+            "in": "path",
+            "name": "sqlPoolName",
+            "description": "SQL pool name",
+            "required": true
+          },
+          {
+            "$ref": "#/parameters/DataMaskingPolicyNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DataMaskingPolicy"
+            },
+            "description": "Parameters for creating or updating a data masking policy."
+          }
+        ],
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "Create or update data masking policy max": {
+            "$ref": "./examples/DataMaskingPolicyCreateOrUpdateMax.json"
+          },
+          "Create or update data masking policy min": {
+            "$ref": "./examples/DataMaskingPolicyCreateOrUpdateMin.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DataMaskingPolicy"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../common/v1/types.json#/definitions/ErrorContract"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "SqlPools, DataMaskingPolicies"
+        ],
+        "operationId": "DataMaskingPolicies_Get",
+        "description": "Gets a Sql pool data masking policy.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
+          },
+          {
+            "type": "string",
+            "in": "path",
+            "name": "sqlPoolName",
+            "description": "SQL pool name",
+            "required": true
+          },
+          {
+            "$ref": "#/parameters/DataMaskingPolicyNameParameter"
+          }
+        ],
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "Get data masking policy": {
+            "$ref": "./examples/DataMaskingPolicyGet.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DataMaskingPolicy"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../common/v1/types.json#/definitions/ErrorContract"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/sqlPools/{sqlPoolName}/dataMaskingPolicies/{dataMaskingPolicyName}/rules/{dataMaskingRuleName}": {
+      "put": {
+        "tags": [
+          "SqlPools, DataMaskingRules"
+        ],
+        "operationId": "DataMaskingRules_CreateOrUpdate",
+        "description": "Creates or updates a Sql pool data masking rule.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
+          },
+          {
+            "type": "string",
+            "in": "path",
+            "name": "sqlPoolName",
+            "description": "SQL pool name",
+            "required": true
+          },
+          {
+            "$ref": "#/parameters/DataMaskingPolicyNameParameter"
+          },
+          {
+            "name": "dataMaskingRuleName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the data masking rule."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DataMaskingRule"
+            },
+            "description": "The required parameters for creating or updating a data masking rule."
+          }
+        ],
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "Create/Update data masking rule for text": {
+            "$ref": "./examples/DataMaskingRuleCreateOrUpdateText.json"
+          },
+          "Create/Update data masking rule for numbers": {
+            "$ref": "./examples/DataMaskingRuleCreateOrUpdateNumber.json"
+          },
+          "Create/Update data masking rule for default min": {
+            "$ref": "./examples/DataMaskingRuleCreateOrUpdateDefaultMin.json"
+          },
+          "Create/Update data masking rule for default max": {
+            "$ref": "./examples/DataMaskingRuleCreateOrUpdateDefaultMax.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DataMaskingRule"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/DataMaskingRule"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../common/v1/types.json#/definitions/ErrorContract"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "SqlPools, DataMaskingRules"
+        ],
+        "operationId": "DataMaskingRules_Get",
+        "description": "Gets the specific Sql pool data masking rule.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
+          },
+          {
+            "type": "string",
+            "in": "path",
+            "name": "sqlPoolName",
+            "description": "SQL pool name",
+            "required": true
+          },
+          {
+            "$ref": "#/parameters/DataMaskingPolicyNameParameter"
+          },
+          {
+            "name": "dataMaskingRuleName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the data masking rule."
+          }
+        ],
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "Get data masking rule": {
+            "$ref": "./examples/DataMaskingRuleGet.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DataMaskingRule"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../common/v1/types.json#/definitions/ErrorContract"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/sqlPools/{sqlPoolName}/dataMaskingPolicies/{dataMaskingPolicyName}/rules": {
+      "get": {
+        "tags": [
+          "SqlPools, DataMaskingRules"
+        ],
+        "operationId": "DataMaskingRules_ListBySqlPool",
+        "description": "Gets a list of Sql pool data masking rules.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
+          },
+          {
+            "type": "string",
+            "in": "path",
+            "name": "sqlPoolName",
+            "description": "SQL pool name",
+            "required": true
+          },
+          {
+            "$ref": "#/parameters/DataMaskingPolicyNameParameter"
+          }
+        ],
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "List data masking rules": {
+            "$ref": "./examples/DataMaskingRuleList.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DataMaskingRuleListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../common/v1/types.json#/definitions/ErrorContract"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/sqlPools/{sqlPoolName}/auditingSettings": {
+      "get": {
+        "tags": [
+          "SqlPools, BlobAuditing"
+        ],
+        "description": "Lists auditing settings of a Sql pool.",
+        "operationId": "SqlPoolBlobAuditingPolicies_ListBySqlPool",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
+          },
+          {
+            "type": "string",
+            "in": "path",
+            "name": "sqlPoolName",
+            "description": "SQL pool name",
+            "required": true
+          }
+        ],
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved Sql pool auditing settings.",
+            "schema": {
+              "$ref": "#/definitions/SqlPoolBlobAuditingPolicyListResult"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 BlobAuditingIsNotSupportedOnResourceType - Blob Auditing is currently not supported for this resource type.\n\n * 404 SourceDatabaseNotFound - The source database does not exist.\n\n * 404 DatabaseDoesNotExist - User has specified a database name that does not exist on this server instance.\n\n * 500 DatabaseIsUnavailable - Loading failed. Please try again later."
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List audit settings of a database": {
+            "$ref": "./examples/SqlPoolAuditingSettingsList.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/sqlPools/{sqlPoolName}/schemas/{schemaName}": {
+      "get": {
+        "tags": [
+          "SqlPools, SqlPoolSchemas"
+        ],
+        "description": "Get Sql Pool schema",
+        "operationId": "SqlPoolSchemas_Get",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
+          },
+          {
+            "type": "string",
+            "in": "path",
+            "name": "sqlPoolName",
+            "description": "SQL pool name",
+            "required": true
+          },
+          {
+            "name": "schemaName",
+            "in": "path",
+            "description": "The name of the schema.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved Sql Pool schema.",
+            "schema": {
+              "$ref": "#/definitions/SqlPoolSchema"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 SourceDatabaseNotFound - The source database does not exist.\n\n * 404 DatabaseDoesNotExist - User has specified a database name that does not exist on this server instance.\n\n * 404 InvalidDatabaseSchema - Schema is missing in database.\n\n * 404 InvalidDatabaseTable - Table is missing in database.\n\n * 404 InvalidDatabaseColumn - Column is missing in table."
+          }
+        },
+        "x-ms-examples": {
+          "Get database schema": {
+            "$ref": "./examples/SqlPoolSchemaGet.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/sqlPools/{sqlPoolName}/schemas/{schemaName}/tables/{tableName}": {
+      "get": {
+        "tags": [
+          "SqlPools, SqlPoolTables"
+        ],
+        "description": "Get Sql pool table",
+        "operationId": "SqlPoolTables_Get",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
+          },
+          {
+            "type": "string",
+            "in": "path",
+            "name": "sqlPoolName",
+            "description": "SQL pool name",
+            "required": true
+          },
+          {
+            "name": "schemaName",
+            "in": "path",
+            "description": "The name of the schema.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "tableName",
+            "in": "path",
+            "description": "The name of the table.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved Sql pool's table.",
+            "schema": {
+              "$ref": "#/definitions/SqlPoolTable"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 SourceDatabaseNotFound - The source database does not exist.\n\n * 404 DatabaseDoesNotExist - User has specified a database name that does not exist on this server instance.\n\n * 404 InvalidDatabaseSchema - Schema is missing in database.\n\n * 404 InvalidDatabaseTable - Table is missing in database.\n\n * 404 InvalidDatabaseColumn - Column is missing in table."
+          }
+        },
+        "x-ms-examples": {
+          "Get database table": {
+            "$ref": "./examples/SqlPoolTableGet.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/sqlPools/{sqlPoolName}/schemas/{schemaName}/tables/{tableName}/columns/{columnName}": {
+      "get": {
+        "tags": [
+          "SqlPools, SqlPoolColumns"
+        ],
+        "description": "Get Sql pool column",
+        "operationId": "SqlPoolColumns_Get",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
+          },
+          {
+            "type": "string",
+            "in": "path",
+            "name": "sqlPoolName",
+            "description": "SQL pool name",
+            "required": true
+          },
+          {
+            "name": "schemaName",
+            "in": "path",
+            "description": "The name of the schema.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "tableName",
+            "in": "path",
+            "description": "The name of the table.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "columnName",
+            "in": "path",
+            "description": "The name of the column.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved Sql pool column.",
+            "schema": {
+              "$ref": "#/definitions/SqlPoolColumn"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 SourceDatabaseNotFound - The source database does not exist.\n\n * 404 DatabaseDoesNotExist - User has specified a database name that does not exist on this server instance.\n\n * 404 InvalidDatabaseSchema - Schema is missing in database.\n\n * 404 InvalidDatabaseTable - Table is missing in database.\n\n * 404 InvalidDatabaseColumn - Column is missing in table."
+          }
+        },
+        "x-ms-examples": {
+          "Get database column": {
+            "$ref": "./examples/SqlPoolColumnGet.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/sqlPools/{sqlPoolName}/vulnerabilityAssessments/{vulnerabilityAssessmentName}/scans/{scanId}": {
+      "get": {
+        "tags": [
+          "SqlPools,SqlPoolVulnerabilityAssessmentScans"
+        ],
+        "description": "Gets a vulnerability assessment scan record of a Sql pool.",
+        "operationId": "SqlPoolVulnerabilityAssessmentScans_Get",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
+          },
+          {
+            "type": "string",
+            "in": "path",
+            "name": "sqlPoolName",
+            "description": "SQL pool name",
+            "required": true
+          },
+          {
+            "name": "vulnerabilityAssessmentName",
+            "in": "path",
+            "description": "The name of the vulnerability assessment.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "default"
+            ],
+            "x-ms-enum": {
+              "name": "VulnerabilityAssessmentName",
+              "modelAsString": true
+            }
+          },
+          {
+            "name": "scanId",
+            "in": "path",
+            "description": "The vulnerability assessment scan Id of the scan to retrieve.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the Sql pool vulnerability assessment scan record.",
+            "schema": {
+              "$ref": "#/definitions/VulnerabilityAssessmentScanRecord"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 InvalidStorageAccountName - The provided storage account is not valid or does not exist.\n\n * 400 InvalidStorageAccountCredentials - The provided storage account shared access signature or account storage key is not valid.\n\n * 400 VulnerabilityAssessmentInvalidPolicy - Vulnerability Assessment settings don't exist or invalid storage specified in settings. \n\n * 400 DatabaseVulnerabilityAssessmentMissingStorageContainerPath - Storage container path must be provided if it isn't set in server level policy\n\n * 400 VulnerabilityAssessmentDatawarehouseDatabaseIsDeactivated - Could not execute Vulnerability Assessment operation because the database is paused. Please resume it.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 SourceDatabaseNotFound - The source database does not exist.\n\n * 404 DatabaseDoesNotExist - User has specified a database name that does not exist on this server instance.\n\n * 409 DatabaseVulnerabilityAssessmentScanIsAlreadyInProgress - Vulnerability Assessment scan is already in progress.\n\n * 500 DatabaseIsUnavailable - Loading failed. Please try again later."
+          }
+        },
+        "x-ms-examples": {
+          "Gets a database vulnerability assessment scan record by scan ID": {
+            "$ref": "./examples/SqlPoolVulnerabilityAssessmentScanRecordsGet.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/sqlPools/{sqlPoolName}/restorePoints/{restorePointName}": {
+      "get": {
+        "tags": [
+          "SqlPools, RestorePoints"
+        ],
+        "description": "Gets a restore point.",
+        "operationId": "SqlPoolRestorePoints_Get",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
+          },
+          {
+            "type": "string",
+            "in": "path",
+            "name": "sqlPoolName",
+            "description": "SQL pool name",
+            "required": true
+          },
+          {
+            "name": "restorePointName",
+            "in": "path",
+            "description": "The name of the restore point.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully returned the restore point.",
+            "schema": {
+              "$ref": "#/definitions/RestorePoint"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 FeatureDisabledOnSelectedEdition - User attempted to use a feature which is disabled on current database edition.\n\n * 400 BackupNotAllowedOnDeactivatedDatabase - Cannot create restore point on a deactivated database.\n\n * 400 RestorePointLimitReached - A restore point cannot be created because database would exceed the allowed quota of restore points.\n\n * 400 RestorePointAttemptToDeleteSystemBackup - Cannot delete system restore point.\n\n * 404 DatabaseRestorePointNotFound - Can not find database restore point.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 DatabaseDoesNotExist - User has specified a database name that does not exist on this server instance.\n\n * 408 DatabaseRestorePointTimedOut - Create database restore point failed."
+          }
+        },
+        "x-ms-examples": {
+          "Gets a Sql pool restore point.": {
+            "$ref": "./examples/SqlPoolRestorePointsGet.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "SqlPools, RestorePoints"
+        ],
+        "description": "Deletes a restore point.",
+        "operationId": "SqlPoolRestorePoints_Delete",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
+          },
+          {
+            "type": "string",
+            "in": "path",
+            "name": "sqlPoolName",
+            "description": "SQL pool name",
+            "required": true
+          },
+          {
+            "name": "restorePointName",
+            "in": "path",
+            "description": "The name of the restore point.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully deleted the restore point."
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 FeatureDisabledOnSelectedEdition - User attempted to use a feature which is disabled on current database edition.\n\n * 400 BackupNotAllowedOnDeactivatedDatabase - Cannot create restore point on a deactivated database.\n\n * 400 RestorePointLimitReached - A restore point cannot be created because database would exceed the allowed quota of restore points.\n\n * 400 RestorePointAttemptToDeleteSystemBackup - Cannot delete system restore point.\n\n * 404 DatabaseRestorePointNotFound - Can not find database restore point.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 DatabaseDoesNotExist - User has specified a database name that does not exist on this server instance.\n\n * 408 DatabaseRestorePointTimedOut - Create database restore point failed."
+          }
+        },
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "Deletes a restore point.": {
+            "$ref": "./examples/SqlPoolRestorePointsDelete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/sqlPools/{sqlPoolName}/workloadGroups/{workloadGroupName}": {
+      "get": {
+        "operationId": "SqlPoolWorkloadGroup_Get",
+        "summary": "Sql pool's workload group",
+        "description": "Get a Sql pool's workload group.",
+        "tags": [
+          "SqlPools, WorkloadGroups"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
+          },
+          {
+            "type": "string",
+            "in": "path",
+            "name": "sqlPoolName",
+            "description": "SQL pool name",
+            "required": true
+          },
+          {
+            "name": "workloadGroupName",
+            "in": "path",
+            "description": "The name of the workload group.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the specifies workload group.",
+            "schema": {
+              "$ref": "#/definitions/WorkloadGroup"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 FeatureDisabledOnSelectedEdition - User attempted to use a feature which is disabled on current database edition.\n\n * 400 OperationNotAllowedOnPausedDatabase - Operation is not allowed on a paused database.\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 DatabaseDoesNotExist - User has specified a database name that does not exist on this server instance.\n\n * 404 ResourceNotFound - The requested resource was not found.\n\n * 409 ConflictingSystemOperationInProgress - A system maintenance operation is in progress on the database and further operations need to wait until it is completed.\n\n * 409 ConflictingDatabaseOperation - There is already some operation on the database and the current operation should wait till it is done.\n\n * 409 UnsupportedWorkspaceType - Unsupported operation for the workspace type.\n\n * 503 DatabaseUnavailable - The operation failed because the database is unavailable.\n\n * 503 TooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 504 RequestTimeout - Service request exceeded the allowed timeout."
+          }
+        },
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "Get a a workload group of a SQL Analytics pool": {
+            "$ref": "./examples/GetSqlPoolWorkloadGroup.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "SqlPoolWorkloadGroup_CreateOrUpdate",
+        "summary": "Create Or Update workload group",
+        "description": "Create Or Update a Sql pool's workload group.",
+        "tags": [
+          "SqlPools, WorkloadGroups"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
+          },
+          {
+            "type": "string",
+            "in": "path",
+            "name": "sqlPoolName",
+            "description": "SQL pool name",
+            "required": true
+          },
+          {
+            "name": "workloadGroupName",
+            "in": "path",
+            "description": "The name of the workload group.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The requested workload group state.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/WorkloadGroup"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully updated the workload group.",
+            "schema": {
+              "$ref": "#/definitions/WorkloadGroup"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 FeatureDisabledOnSelectedEdition - User attempted to use a feature which is disabled on current database edition.\n\n * 400 OperationNotAllowedOnPausedDatabase - Operation is not allowed on a paused database.\n\n * 400 InvalidWorkloadGroupNameParameter - Invalid workload group name\n\n * 400 InvalidMinResourcePercentParameter - Invalid min resource percent for this workload group.\n\n * 400 InvalidMinResourcePercentPerRequestParameter - Invalid min resource percent per query for this workload group.\n\n * 400 InvalidMaxResourcePercentParameter - Invalid max resource percent to allocate for this workload group.\n\n * 400 InvalidMaxResourcePercentPerRequestParameter - Invalid max resource percent per query for this workload group.\n\n * 400 InvalidImportanceParameter - Importance must be one of the following strings: Low, Below_Normal, Normal, Above_Normal, High.\n\n * 400 InvalidQueryExecutionTimeoutParameter - Invalid query execution timeout value for this workload group.\n\n * 400 InvalidResourceRequestBody - The resource or resource properties in the request body is empty or invalid.\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 DatabaseDoesNotExist - User has specified a database name that does not exist on this server instance.\n\n * 404 ResourceNotFound - The requested resource was not found.\n\n * 404 OperationIdNotFound - The operation with Id does not exist.\n\n * 409 ConflictingSystemOperationInProgress - A system maintenance operation is in progress on the database and further operations need to wait until it is completed.\n\n * 409 ConflictingDatabaseOperation - There is already some operation on the database and the current operation should wait till it is done.\n\n * 409 UnsupportedWorkspaceType - Unsupported operation for the workspace type.\n\n * 409 OperationCancelled - The operation has been cancelled by user.\n\n * 409 OperationInterrupted - The operation on the resource could not be completed because it was interrupted by another operation on the same resource.\n\n * 500 OperationTimedOut - The operation timed out and automatically rolled back. Please retry the operation.\n\n * 503 DatabaseUnavailable - The operation failed because the database is unavailable.\n\n * 503 TooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 504 RequestTimeout - Service request exceeded the allowed timeout."
+          },
+          "202": {
+            "description": "Create or update for the workload group accepted."
+          },
+          "201": {
+            "description": "Successfully created the workload group.",
+            "schema": {
+              "$ref": "#/definitions/WorkloadGroup"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "Create a workload group with the required properties specified.": {
+            "$ref": "./examples/CreateOrUpdateSqlPoolWorkloadGroupMin.json"
+          },
+          "Create a workload group with all properties specified.": {
+            "$ref": "./examples/CreateOrUpdateSqlPoolWorkloadGroupMax.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "SqlPoolWorkloadGroup_Delete",
+        "summary": "Remove workload group",
+        "description": "Remove Sql pool's workload group.",
+        "tags": [
+          "SqlPools, WorkloadGroups"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
+          },
+          {
+            "type": "string",
+            "in": "path",
+            "name": "sqlPoolName",
+            "description": "SQL pool name",
+            "required": true
+          },
+          {
+            "name": "workloadGroupName",
+            "in": "path",
+            "description": "The name of the workload group.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully deleted the workload group."
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 FeatureDisabledOnSelectedEdition - User attempted to use a feature which is disabled on current database edition.\n\n * 400 OperationNotAllowedOnPausedDatabase - Operation is not allowed on a paused database.\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 DatabaseDoesNotExist - User has specified a database name that does not exist on this server instance.\n\n * 404 ResourceNotFound - The requested resource was not found.\n\n * 404 OperationIdNotFound - The operation with Id does not exist.\n\n * 409 ConflictingSystemOperationInProgress - A system maintenance operation is in progress on the database and further operations need to wait until it is completed.\n\n * 409 ConflictingDatabaseOperation - There is already some operation on the database and the current operation should wait till it is done.\n\n * 409 OperationCancelled - The operation has been cancelled by user.\n\n * 409 OperationInterrupted - The operation on the resource could not be completed because it was interrupted by another operation on the same resource.\n\n * 409 UnsupportedWorkspaceType - Unsupported operation for the workspace type.\n\n * 500 OperationTimedOut - The operation timed out and automatically rolled back. Please retry the operation.\n\n * 503 DatabaseUnavailable - The operation failed because the database is unavailable.\n\n * 503 TooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 504 RequestTimeout - Service request exceeded the allowed timeout."
+          },
+          "202": {
+            "description": "Deleting the workload group is in progress."
+          },
+          "204": {
+            "description": "The specified workload group does not exist."
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "Delete a workload group of a SQL Analytics pool": {
+            "$ref": "./examples/DeleteSqlPoolWorkloadGroup.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/sqlPools/{sqlPoolName}/workloadGroups": {
+      "get": {
+        "operationId": "SqlPoolWorkloadGroup_List",
+        "summary": "Sql pool's workload groups",
+        "description": "Get list of  Sql pool's workload groups.",
+        "tags": [
+          "SqlPools, WorkloadGroups"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
+          },
+          {
+            "type": "string",
+            "in": "path",
+            "name": "sqlPoolName",
+            "description": "SQL pool name",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the list of workload groups.",
+            "schema": {
+              "$ref": "#/definitions/WorkloadGroupListResult"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 FeatureDisabledOnSelectedEdition - User attempted to use a feature which is disabled on current database edition.\n\n * 400 OperationNotAllowedOnPausedDatabase - Operation is not allowed on a paused database.\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 DatabaseDoesNotExist - User has specified a database name that does not exist on this server instance.\n\n * 404 ResourceNotFound - The requested resource was not found.\n\n * 409 ConflictingSystemOperationInProgress - A system maintenance operation is in progress on the database and further operations need to wait until it is completed.\n\n * 409 ConflictingDatabaseOperation - There is already some operation on the database and the current operation should wait till it is done.\n\n * 409 UnsupportedWorkspaceType - Unsupported operation for the workspace type.\n\n * 503 DatabaseUnavailable - The operation failed because the database is unavailable.\n\n * 503 TooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 504 RequestTimeout - Service request exceeded the allowed timeout."
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "Get the list of workload groups of a SQL Analytics pool": {
+            "$ref": "./examples/GetSqlPoolWorkloadGroupList.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/sqlPools/{sqlPoolName}/workloadGroups/{workloadGroupName}/workloadClassifiers/{workloadClassifierName}": {
+      "get": {
+        "operationId": "SqlPoolWorkloadClassifier_Get",
+        "summary": "Get workload classifier",
+        "description": "Get a workload classifier of Sql pool's workload group.",
+        "tags": [
+          "SqlPools, WorkloadClassifiers"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
+          },
+          {
+            "type": "string",
+            "in": "path",
+            "name": "sqlPoolName",
+            "description": "SQL pool name",
+            "required": true
+          },
+          {
+            "name": "workloadGroupName",
+            "in": "path",
+            "description": "The name of the workload group.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "workloadClassifierName",
+            "in": "path",
+            "description": "The name of the workload classifier.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the specifies workload classifier.",
+            "schema": {
+              "$ref": "#/definitions/WorkloadClassifier"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 FeatureDisabledOnSelectedEdition - User attempted to use a feature which is disabled on current database edition.\n\n * 400 OperationNotAllowedOnPausedDatabase - Operation is not allowed on a paused database.\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 DatabaseDoesNotExist - User has specified a database name that does not exist on this server instance.\n\n * 404 ResourceNotFound - The requested resource was not found.\n\n * 409 ConflictingSystemOperationInProgress - A system maintenance operation is in progress on the database and further operations need to wait until it is completed.\n\n * 409 ConflictingDatabaseOperation - There is already some operation on the database and the current operation should wait till it is done.\n\n * 409 UnsupportedWorkspaceType - Unsupported operation for the workspace type.\n\n * 503 DatabaseUnavailable - The operation failed because the database is unavailable.\n\n * 503 TooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 504 RequestTimeout - Service request exceeded the allowed timeout."
+          }
+        },
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "Get a workload classifier for SQL Analytics pool's workload group": {
+            "$ref": "./examples/GetSqlPoolWorkloadGroupWorkloadClassifier.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "SqlPoolWorkloadClassifier_CreateOrUpdate",
+        "summary": "Create Or Update workload classifier",
+        "description": "Create Or Update workload classifier for a Sql pool's workload group.",
+        "tags": [
+          "SqlPools, WorkloadClassifiers"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
+          },
+          {
+            "type": "string",
+            "in": "path",
+            "name": "sqlPoolName",
+            "description": "SQL pool name",
+            "required": true
+          },
+          {
+            "name": "workloadGroupName",
+            "in": "path",
+            "description": "The name of the workload group.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "workloadClassifierName",
+            "in": "path",
+            "description": "The name of the workload classifier.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The properties of the workload classifier.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/WorkloadClassifier"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully updated the workload classifier.",
+            "schema": {
+              "$ref": "#/definitions/WorkloadClassifier"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 FeatureDisabledOnSelectedEdition - User attempted to use a feature which is disabled on current database edition.\n\n * 400 OperationNotAllowedOnPausedDatabase - Operation is not allowed on a paused database.\n\n * 400 InvalidMemberNameParameter - Invalid member name parameter for this workload classifier.\n\n * 400 InvalidStartTimeAndEndTimeParameters - Invalid start time and end time parameters for the workload classifier.\n\n * 400 InvalidImportanceParameter - Importance must be one of the following strings: Low, Below_Normal, Normal, Above_Normal, High.\n\n * 400 InvalidResourceRequestBody - The resource or resource properties in the request body is empty or invalid.\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 DatabaseDoesNotExist - User has specified a database name that does not exist on this server instance.\n\n * 404 ResourceNotFound - The requested resource was not found.\n\n * 404 OperationIdNotFound - The operation with Id does not exist.\n\n * 409 ConflictingSystemOperationInProgress - A system maintenance operation is in progress on the database and further operations need to wait until it is completed.\n\n * 409 UnsupportedWorkspaceType - Unsupported operation for the workspace type.\n\n * 409 ConflictingDatabaseOperation - There is already some operation on the database and the current operation should wait till it is done.\n\n * 409 OperationCancelled - The operation has been cancelled by user.\n\n * 409 OperationInterrupted - The operation on the resource could not be completed because it was interrupted by another operation on the same resource.\n\n * 500 OperationTimedOut - The operation timed out and automatically rolled back. Please retry the operation.\n\n * 503 DatabaseUnavailable - The operation failed because the database is unavailable.\n\n * 503 TooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 504 RequestTimeout - Service request exceeded the allowed timeout."
+          },
+          "202": {
+            "description": "Create or update for the workload classifier is in progress."
+          },
+          "201": {
+            "description": "Successfully created the workload classifier.",
+            "schema": {
+              "$ref": "#/definitions/WorkloadClassifier"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "Create a workload classifier with the required properties specified.": {
+            "$ref": "./examples/CreateOrUpdateSqlPoolWorkloadClassifierMin.json"
+          },
+          "Create a workload classifier with all properties specified.": {
+            "$ref": "./examples/CreateOrUpdateSqlPoolWorkloadClassifierMax.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "SqlPoolWorkloadClassifier_Delete",
+        "summary": "Remove workload classifier",
+        "description": "Remove workload classifier of a Sql pool's workload group.",
+        "tags": [
+          "SqlPools, WorkloadClassifiers"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
+          },
+          {
+            "type": "string",
+            "in": "path",
+            "name": "sqlPoolName",
+            "description": "SQL pool name",
+            "required": true
+          },
+          {
+            "name": "workloadGroupName",
+            "in": "path",
+            "description": "The name of the workload group.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "workloadClassifierName",
+            "in": "path",
+            "description": "The name of the workload classifier.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully deleted the workload classifier."
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 FeatureDisabledOnSelectedEdition - User attempted to use a feature which is disabled on current database edition.\n\n * 400 OperationNotAllowedOnPausedDatabase - Operation is not allowed on a paused database.\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 DatabaseDoesNotExist - User has specified a database name that does not exist on this server instance.\n\n * 404 ResourceNotFound - The requested resource was not found.\n\n * 404 OperationIdNotFound - The operation with Id does not exist.\n\n * 409 ConflictingSystemOperationInProgress - A system maintenance operation is in progress on the database and further operations need to wait until it is completed.\n\n * 409 ConflictingDatabaseOperation - There is already some operation on the database and the current operation should wait till it is done.\n\n * 409 OperationCancelled - The operation has been cancelled by user.\n\n * 409 OperationInterrupted - The operation on the resource could not be completed because it was interrupted by another operation on the same resource.\n\n * 409 UnsupportedWorkspaceType - Unsupported operation for the workspace type.\n\n * 500 OperationTimedOut - The operation timed out and automatically rolled back. Please retry the operation.\n\n * 503 DatabaseUnavailable - The operation failed because the database is unavailable.\n\n * 503 TooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 504 RequestTimeout - Service request exceeded the allowed timeout."
+          },
+          "202": {
+            "description": "Deleting the workload classifier is in progress."
+          },
+          "204": {
+            "description": "The specified workload classifier does not exist."
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "Delete a workload classifier of a SQL Analytics pool's workload group": {
+            "$ref": "./examples/DeleteSqlPoolWorkloadGroupWorkloadClassifer.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/sqlPools/{sqlPoolName}/workloadGroups/{workloadGroupName}/workloadClassifiers": {
+      "get": {
+        "operationId": "SqlPoolWorkloadClassifier_List",
+        "summary": "Sql pool's workload classifier",
+        "description": "Get list of  Sql pool's workload classifier for workload groups.",
+        "tags": [
+          "SqlPools, WorkloadClassifiers"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
+          },
+          {
+            "type": "string",
+            "in": "path",
+            "name": "sqlPoolName",
+            "description": "SQL pool name",
+            "required": true
+          },
+          {
+            "name": "workloadGroupName",
+            "in": "path",
+            "description": "The name of the workload group.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the list of workload groups.",
+            "schema": {
+              "$ref": "#/definitions/WorkloadClassifierListResult"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 FeatureDisabledOnSelectedEdition - User attempted to use a feature which is disabled on current database edition.\n\n * 400 OperationNotAllowedOnPausedDatabase - Operation is not allowed on a paused database.\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 DatabaseDoesNotExist - User has specified a database name that does not exist on this server instance.\n\n * 404 ResourceNotFound - The requested resource was not found.\n\n * 409 ConflictingSystemOperationInProgress - A system maintenance operation is in progress on the database and further operations need to wait until it is completed.\n\n * 409 UnsupportedWorkspaceType - Unsupported operation for the workspace type.\n\n * 409 ConflictingDatabaseOperation - There is already some operation on the database and the current operation should wait till it is done.\n\n * 503 DatabaseUnavailable - The operation failed because the database is unavailable.\n\n * 503 TooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 504 RequestTimeout - Service request exceeded the allowed timeout."
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "Get the list of workload classifiers of a SQL Analytics pool's workload group": {
+            "$ref": "./examples/GetSqlPoolWorkloadGroupWorkloadClassifierList.json"
           }
         }
       }
@@ -2968,6 +5246,11 @@
         "name": {
           "type": "string",
           "description": "The SKU name"
+        },
+        "capacity": {
+          "type": "integer",
+          "format": "int32",
+          "description": "If the SKU supports scale out/in then the capacity integer should be included. If scale out/in is not possible for the resource this may be omitted."
         }
       }
     },
@@ -3003,8 +5286,7 @@
         },
         "restorePointInTime": {
           "type": "string",
-          "description": "Snapshot time to restore",
-          "format": "date-time"
+          "description": "Snapshot time to restore"
         },
         "createMode": {
           "type": "string",
@@ -3034,6 +5316,11 @@
             "enabled": {
               "type": "boolean",
               "description": "Indicates whether the metadata sync is enabled or disabled"
+            },
+            "syncIntervalInMinutes": {
+              "type": "integer",
+              "format": "int32",
+              "description": "The Sync Interval in minutes."
             }
           },
           "x-ms-client-flatten": true
@@ -3093,6 +5380,18 @@
         }
       ],
       "description": "A database geo backup policy."
+    },
+    "GeoBackupPolicyListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/GeoBackupPolicy"
+          },
+          "description": "The list of geo backup policies."
+        }
+      },
+      "description": "The response to a list geo backup policies request."
     },
     "TopQueries": {
       "properties": {
@@ -3503,6 +5802,122 @@
       },
       "description": "Represents the response to a List Sql pool replication link request."
     },
+    "MaintenanceWindowOptionsProperties": {
+      "description": "Maintenance window options properties.",
+      "type": "object",
+      "properties": {
+        "isEnabled": {
+          "description": "Whether maintenance windows are enabled for the database.",
+          "type": "boolean"
+        },
+        "maintenanceWindowCycles": {
+          "description": "Available maintenance cycles e.g. {Saturday, 0, 48*60}, {Wednesday, 0, 24*60}.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MaintenanceWindowTimeRange"
+          }
+        },
+        "minDurationInMinutes": {
+          "format": "int32",
+          "description": "Minimum duration of maintenance window.",
+          "type": "integer"
+        },
+        "defaultDurationInMinutes": {
+          "format": "int32",
+          "description": "Default duration for maintenance window.",
+          "type": "integer"
+        },
+        "minCycles": {
+          "format": "int32",
+          "description": "Minimum number of maintenance windows cycles to be set on the database.",
+          "type": "integer"
+        },
+        "timeGranularityInMinutes": {
+          "format": "int32",
+          "description": "Time granularity in minutes for maintenance windows.",
+          "type": "integer"
+        },
+        "allowMultipleMaintenanceWindowsPerCycle": {
+          "description": "Whether we allow multiple maintenance windows per cycle.",
+          "type": "boolean"
+        }
+      }
+    },
+    "MaintenanceWindowOptions": {
+      "description": "Maintenance window options.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/MaintenanceWindowOptionsProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "MaintenanceWindowsProperties": {
+      "description": "Maintenance windows resource properties.",
+      "type": "object",
+      "properties": {
+        "timeRanges": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MaintenanceWindowTimeRange"
+          }
+        }
+      }
+    },
+    "MaintenanceWindowTimeRange": {
+      "description": "Maintenance window time range.",
+      "type": "object",
+      "properties": {
+        "dayOfWeek": {
+          "description": "Day of maintenance window.",
+          "enum": [
+            "Sunday",
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "DayOfWeek",
+            "modelAsString": true
+          }
+        },
+        "startTime": {
+          "description": "Start time minutes offset from 12am.",
+          "type": "string"
+        },
+        "duration": {
+          "description": "Duration of maintenance window in minutes.",
+          "type": "string"
+        }
+      }
+    },
+    "MaintenanceWindows": {
+      "description": "Maintenance windows.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/MaintenanceWindowsProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
     "TransparentDataEncryptionProperties": {
       "properties": {
         "status": {
@@ -3538,6 +5953,25 @@
         }
       ],
       "description": "Represents a Sql pool transparent data encryption configuration."
+    },
+    "TransparentDataEncryptionListResult": {
+      "description": "A list of transparent data encryption configurations.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Array of results.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TransparentDataEncryption"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "Link to retrieve next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
     },
     "SqlPoolBlobAuditingPolicyProperties": {
       "description": "Properties of a Sql pool blob auditing policy.",
@@ -3813,6 +6247,21 @@
       "description": "Properties of a sensitivity label.",
       "type": "object",
       "properties": {
+        "schemaName": {
+          "description": "The schema name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "tableName": {
+          "description": "The table name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "columnName": {
+          "description": "The column name.",
+          "type": "string",
+          "readOnly": true
+        },
         "labelName": {
           "description": "The label name.",
           "type": "string"
@@ -3833,6 +6282,20 @@
           "description": "Is sensitivity recommendation disabled. Applicable for recommended sensitivity label only. Specifies whether the sensitivity recommendation on this column is disabled (dismissed) or not.",
           "type": "boolean",
           "readOnly": true
+        },
+        "rank": {
+          "enum": [
+            "None",
+            "Low",
+            "Medium",
+            "High",
+            "Critical"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "SensitivityLabelRank",
+            "modelAsString": false
+          }
         }
       }
     },
@@ -3849,6 +6312,11 @@
           "$ref": "#/definitions/SensitivityLabelProperties",
           "description": "Resource properties.",
           "x-ms-client-flatten": true
+        },
+        "managedBy": {
+          "type": "string",
+          "readOnly": true,
+          "description": "managed by"
         }
       }
     },
@@ -3974,6 +6442,11 @@
             "name": "ColumnDataType",
             "modelAsString": true
           }
+        },
+        "isComputed": {
+          "type": "boolean",
+          "description": "Indicates whether column value is computed or not",
+          "readOnly": true
         }
       }
     },
@@ -4359,6 +6832,25 @@
         }
       }
     },
+    "ListSqlPoolSecurityAlertPolicies": {
+      "description": "A list of SQL pool security alert policies.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Array of results.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SqlPoolSecurityAlertPolicy"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "Link to retrieve next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
     "SqlPoolVulnerabilityAssessmentRuleBaselineProperties": {
       "description": "Properties of a Sql pool vulnerability assessment rule baseline.",
       "required": [
@@ -4434,19 +6926,6 @@
         }
       }
     },
-    "ResourceMoveDefinition": {
-      "description": "Contains the information necessary to perform a resource move (rename).",
-      "required": [
-        "id"
-      ],
-      "type": "object",
-      "properties": {
-        "id": {
-          "description": "The target ID for the resource",
-          "type": "string"
-        }
-      }
-    },
     "CreateSqlPoolRestorePointDefinition": {
       "description": "Contains the information necessary to perform a create Sql pool restore point operation.",
       "required": [
@@ -4459,6 +6938,642 @@
           "type": "string"
         }
       }
+    },
+    "WorkloadGroupProperties": {
+      "description": "Workload group definition. For more information look at sys.workload_management_workload_groups (DMV).",
+      "required": [
+        "minResourcePercent",
+        "maxResourcePercent",
+        "minResourcePercentPerRequest"
+      ],
+      "type": "object",
+      "properties": {
+        "minResourcePercent": {
+          "format": "int32",
+          "description": "The workload group minimum percentage resource.",
+          "type": "integer"
+        },
+        "maxResourcePercent": {
+          "format": "int32",
+          "description": "The workload group cap percentage resource.",
+          "type": "integer"
+        },
+        "minResourcePercentPerRequest": {
+          "format": "double",
+          "description": "The workload group request minimum grant percentage.",
+          "type": "number"
+        },
+        "maxResourcePercentPerRequest": {
+          "format": "double",
+          "description": "The workload group request maximum grant percentage.",
+          "type": "number"
+        },
+        "importance": {
+          "description": "The workload group importance level.",
+          "type": "string"
+        },
+        "queryExecutionTimeout": {
+          "format": "int32",
+          "description": "The workload group query execution timeout.",
+          "type": "integer"
+        }
+      }
+    },
+    "WorkloadGroup": {
+      "description": "Workload group operations for a sql pool",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/WorkloadGroupProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "WorkloadGroupListResult": {
+      "description": "A list of workload groups.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Array of results.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/WorkloadGroup"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "Link to retrieve next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "WorkloadClassifierProperties": {
+      "description": "Workload classifier definition. For more information look at sys.workload_management_workload_classifiers (DMV).",
+      "required": [
+        "memberName"
+      ],
+      "type": "object",
+      "properties": {
+        "memberName": {
+          "description": "The workload classifier member name.",
+          "type": "string"
+        },
+        "label": {
+          "description": "The workload classifier label.",
+          "type": "string"
+        },
+        "context": {
+          "description": "The workload classifier context.",
+          "type": "string"
+        },
+        "startTime": {
+          "description": "The workload classifier start time for classification.",
+          "type": "string"
+        },
+        "endTime": {
+          "description": "The workload classifier end time for classification.",
+          "type": "string"
+        },
+        "importance": {
+          "description": "The workload classifier importance.",
+          "type": "string"
+        }
+      }
+    },
+    "WorkloadClassifier": {
+      "description": "Workload classifier operations for a data warehouse",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/WorkloadClassifierProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "WorkloadClassifierListResult": {
+      "description": "A list of workload classifiers for a workload group.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Array of results.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/WorkloadClassifier"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "Link to retrieve next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "DataMaskingPolicyProperties": {
+      "properties": {
+        "dataMaskingState": {
+          "type": "string",
+          "description": "The state of the data masking policy.",
+          "enum": [
+            "Disabled",
+            "Enabled"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false,
+            "name": "DataMaskingState"
+          }
+        },
+        "exemptPrincipals": {
+          "type": "string",
+          "description": "The list of the exempt principals. Specifies the semicolon-separated list of database users for which the data masking policy does not apply. The specified users receive data results without masking for all of the database queries."
+        },
+        "applicationPrincipals": {
+          "type": "string",
+          "description": "The list of the application principals. This is a legacy parameter and is no longer used.",
+          "readOnly": true
+        },
+        "maskingLevel": {
+          "type": "string",
+          "description": "The masking level. This is a legacy parameter and is no longer used.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "dataMaskingState"
+      ],
+      "description": "The properties of a database data masking policy."
+    },
+    "DataMaskingPolicy": {
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/DataMaskingPolicyProperties",
+          "description": "The properties of the data masking policy."
+        },
+        "location": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The location of the data masking policy."
+        },
+        "kind": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The kind of data masking policy. Metadata, used for Azure portal."
+        },
+        "managedBy": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Fully qualified resource ID of the sql pool"
+        }
+      }
+    },
+    "ExtendedSqlPoolBlobAuditingPolicy": {
+      "description": "An extended Sql pool blob auditing policy.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ExtendedSqlPoolBlobAuditingPolicyProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "ExtendedSqlPoolBlobAuditingPolicyProperties": {
+      "description": "Properties of an extended Sql pool blob auditing policy.",
+      "required": [
+        "state"
+      ],
+      "type": "object",
+      "properties": {
+        "predicateExpression": {
+          "description": "Specifies condition of where clause when creating an audit.",
+          "type": "string"
+        },
+        "state": {
+          "description": "Specifies the state of the policy. If state is Enabled, storageEndpoint or isAzureMonitorTargetEnabled are required.",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "BlobAuditingPolicyState",
+            "modelAsString": false
+          }
+        },
+        "storageEndpoint": {
+          "description": "Specifies the blob storage endpoint (e.g. https://MyAccount.blob.core.windows.net). If state is Enabled, storageEndpoint or isAzureMonitorTargetEnabled is required.",
+          "type": "string"
+        },
+        "storageAccountAccessKey": {
+          "description": "Specifies the identifier key of the auditing storage account. \r\nIf state is Enabled and storageEndpoint is specified, not specifying the storageAccountAccessKey will use SQL server system-assigned managed identity to access the storage.\r\nPrerequisites for using managed identity authentication:\r\n1. Assign SQL Server a system-assigned managed identity in Azure Active Directory (AAD).\r\n2. Grant SQL Server identity access to the storage account by adding 'Storage Blob Data Contributor' RBAC role to the server identity.\r\nFor more information, see [Auditing to storage using Managed Identity authentication](https://go.microsoft.com/fwlink/?linkid=2114355)",
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "update"
+          ]
+        },
+        "retentionDays": {
+          "format": "int32",
+          "description": "Specifies the number of days to keep in the audit logs in the storage account.",
+          "type": "integer"
+        },
+        "auditActionsAndGroups": {
+          "description": "Specifies the Actions-Groups and Actions to audit.\r\n\r\nThe recommended set of action groups to use is the following combination - this will audit all the queries and stored procedures executed against the database, as well as successful and failed logins:\r\n\r\nBATCH_COMPLETED_GROUP,\r\nSUCCESSFUL_DATABASE_AUTHENTICATION_GROUP,\r\nFAILED_DATABASE_AUTHENTICATION_GROUP.\r\n\r\nThis above combination is also the set that is configured by default when enabling auditing from the Azure portal.\r\n\r\nThe supported action groups to audit are (note: choose only specific groups that cover your auditing needs. Using unnecessary groups could lead to very large quantities of audit records):\r\n\r\nAPPLICATION_ROLE_CHANGE_PASSWORD_GROUP\r\nBACKUP_RESTORE_GROUP\r\nDATABASE_LOGOUT_GROUP\r\nDATABASE_OBJECT_CHANGE_GROUP\r\nDATABASE_OBJECT_OWNERSHIP_CHANGE_GROUP\r\nDATABASE_OBJECT_PERMISSION_CHANGE_GROUP\r\nDATABASE_OPERATION_GROUP\r\nDATABASE_PERMISSION_CHANGE_GROUP\r\nDATABASE_PRINCIPAL_CHANGE_GROUP\r\nDATABASE_PRINCIPAL_IMPERSONATION_GROUP\r\nDATABASE_ROLE_MEMBER_CHANGE_GROUP\r\nFAILED_DATABASE_AUTHENTICATION_GROUP\r\nSCHEMA_OBJECT_ACCESS_GROUP\r\nSCHEMA_OBJECT_CHANGE_GROUP\r\nSCHEMA_OBJECT_OWNERSHIP_CHANGE_GROUP\r\nSCHEMA_OBJECT_PERMISSION_CHANGE_GROUP\r\nSUCCESSFUL_DATABASE_AUTHENTICATION_GROUP\r\nUSER_CHANGE_PASSWORD_GROUP\r\nBATCH_STARTED_GROUP\r\nBATCH_COMPLETED_GROUP\r\n\r\nThese are groups that cover all sql statements and stored procedures executed against the database, and should not be used in combination with other groups as this will result in duplicate audit logs.\r\n\r\nFor more information, see [Database-Level Audit Action Groups](https://docs.microsoft.com/en-us/sql/relational-databases/security/auditing/sql-server-audit-action-groups-and-actions#database-level-audit-action-groups).\r\n\r\nFor Database auditing policy, specific Actions can also be specified (note that Actions cannot be specified for Server auditing policy). The supported actions to audit are:\r\nSELECT\r\nUPDATE\r\nINSERT\r\nDELETE\r\nEXECUTE\r\nRECEIVE\r\nREFERENCES\r\n\r\nThe general form for defining an action to be audited is:\r\n{action} ON {object} BY {principal}\r\n\r\nNote that <object> in the above format can refer to an object like a table, view, or stored procedure, or an entire database or schema. For the latter cases, the forms DATABASE::{db_name} and SCHEMA::{schema_name} are used, respectively.\r\n\r\nFor example:\r\nSELECT on dbo.myTable by public\r\nSELECT on DATABASE::myDatabase by public\r\nSELECT on SCHEMA::mySchema by public\r\n\r\nFor more information, see [Database-Level Audit Actions](https://docs.microsoft.com/en-us/sql/relational-databases/security/auditing/sql-server-audit-action-groups-and-actions#database-level-audit-actions)",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "storageAccountSubscriptionId": {
+          "format": "uuid",
+          "description": "Specifies the blob storage subscription Id.",
+          "type": "string"
+        },
+        "isStorageSecondaryKeyInUse": {
+          "description": "Specifies whether storageAccountAccessKey value is the storage's secondary key.",
+          "type": "boolean"
+        },
+        "isAzureMonitorTargetEnabled": {
+          "description": "Specifies whether audit events are sent to Azure Monitor. \r\nIn order to send the events to Azure Monitor, specify 'state' as 'Enabled' and 'isAzureMonitorTargetEnabled' as true.\r\n\r\nWhen using REST API to configure auditing, Diagnostic Settings with 'SQLSecurityAuditEvents' diagnostic logs category on the database should be also created.\r\nNote that for server level audit you should use the 'master' database as {databaseName}.\r\n\r\nDiagnostic Settings URI format:\r\nPUT https://management.azure.com/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/providers/microsoft.insights/diagnosticSettings/{settingsName}?api-version=2017-05-01-preview\r\n\r\nFor more information, see [Diagnostic Settings REST API](https://go.microsoft.com/fwlink/?linkid=2033207)\r\nor [Diagnostic Settings PowerShell](https://go.microsoft.com/fwlink/?linkid=2033043)\r\n",
+          "type": "boolean"
+        },
+        "queueDelayMs": {
+          "format": "int32",
+          "description": "Specifies the amount of time in milliseconds that can elapse before audit actions are forced to be processed.\r\nThe default minimum value is 1000 (1 second). The maximum is 2,147,483,647.",
+          "type": "integer"
+        }
+      }
+    },
+    "ExtendedSqlPoolBlobAuditingPolicyListResult": {
+      "description": "A list of sql pool extended auditing settings.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Array of results.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ExtendedSqlPoolBlobAuditingPolicy"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "Link to retrieve next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "DataMaskingRule": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/DataMaskingRuleProperties",
+          "description": "The properties of the resource."
+        },
+        "location": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The location of the data masking rule."
+        },
+        "kind": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The kind of Data Masking Rule. Metadata, used for Azure portal."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "description": "Represents a Sql pool data masking rule."
+    },
+    "DataMaskingRuleProperties": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The rule Id.",
+          "readOnly": true
+        },
+        "aliasName": {
+          "type": "string",
+          "description": "The alias name. This is a legacy parameter and is no longer used."
+        },
+        "ruleState": {
+          "type": "string",
+          "description": "The rule state. Used to delete a rule. To delete an existing rule, specify the schemaName, tableName, columnName, maskingFunction, and specify ruleState as disabled. However, if the rule doesn't already exist, the rule will be created with ruleState set to enabled, regardless of the provided value of ruleState.",
+          "enum": [
+            "Disabled",
+            "Enabled"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false,
+            "name": "DataMaskingRuleState"
+          }
+        },
+        "schemaName": {
+          "type": "string",
+          "description": "The schema name on which the data masking rule is applied."
+        },
+        "tableName": {
+          "type": "string",
+          "description": "The table name on which the data masking rule is applied."
+        },
+        "columnName": {
+          "type": "string",
+          "description": "The column name on which the data masking rule is applied."
+        },
+        "maskingFunction": {
+          "type": "string",
+          "description": "The masking function that is used for the data masking rule.",
+          "enum": [
+            "Default",
+            "CCN",
+            "Email",
+            "Number",
+            "SSN",
+            "Text"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false,
+            "name": "DataMaskingFunction"
+          }
+        },
+        "numberFrom": {
+          "type": "string",
+          "description": "The numberFrom property of the masking rule. Required if maskingFunction is set to Number, otherwise this parameter will be ignored."
+        },
+        "numberTo": {
+          "type": "string",
+          "description": "The numberTo property of the data masking rule. Required if maskingFunction is set to Number, otherwise this parameter will be ignored."
+        },
+        "prefixSize": {
+          "type": "string",
+          "description": "If maskingFunction is set to Text, the number of characters to show unmasked in the beginning of the string. Otherwise, this parameter will be ignored."
+        },
+        "suffixSize": {
+          "type": "string",
+          "description": "If maskingFunction is set to Text, the number of characters to show unmasked at the end of the string. Otherwise, this parameter will be ignored."
+        },
+        "replacementString": {
+          "type": "string",
+          "description": "If maskingFunction is set to Text, the character to use for masking the unexposed part of the string. Otherwise, this parameter will be ignored."
+        }
+      },
+      "required": [
+        "maskingFunction",
+        "schemaName",
+        "tableName",
+        "columnName"
+      ],
+      "description": "The properties of a Sql pool data masking rule."
+    },
+    "DataMaskingRuleListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DataMaskingRule"
+          },
+          "description": "The list of Sql pool data masking rules."
+        }
+      },
+      "description": "The response to a list data masking rules request."
+    },
+    "SqlPoolBlobAuditingPolicyListResult": {
+      "description": "A list of Sql pool auditing settings.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Array of results.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SqlPoolBlobAuditingPolicy"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "Link to retrieve next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "SensitivityLabelUpdateProperties": {
+      "description": "Properties of an operation executed on a sensitivity label.",
+      "required": [
+        "op",
+        "schema",
+        "table",
+        "column"
+      ],
+      "type": "object",
+      "properties": {
+        "op": {
+          "enum": [
+            "set",
+            "remove"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "SensitivityLabelUpdateKind",
+            "modelAsString": false
+          }
+        },
+        "schema": {
+          "description": "Schema name of the column to update.",
+          "type": "string"
+        },
+        "table": {
+          "description": "Table name of the column to update.",
+          "type": "string"
+        },
+        "column": {
+          "description": "Column name to update.",
+          "type": "string"
+        },
+        "sensitivityLabel": {
+          "$ref": "#/definitions/SensitivityLabel",
+          "description": "The sensitivity label information to apply on a column."
+        }
+      }
+    },
+    "SensitivityLabelUpdate": {
+      "description": "A sensitivity label update operation.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SensitivityLabelUpdateProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "SensitivityLabelUpdateList": {
+      "description": "A list of sensitivity label update operations.",
+      "type": "object",
+      "properties": {
+        "operations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SensitivityLabelUpdate"
+          }
+        }
+      }
+    },
+    "RecommendedSensitivityLabelUpdateProperties": {
+      "description": "Properties of an operation executed on a recommended sensitivity label.",
+      "required": [
+        "op",
+        "schema",
+        "table",
+        "column"
+      ],
+      "type": "object",
+      "properties": {
+        "op": {
+          "enum": [
+            "enable",
+            "disable"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "RecommendedSensitivityLabelUpdateKind",
+            "modelAsString": false
+          }
+        },
+        "schema": {
+          "description": "Schema name of the column to update.",
+          "type": "string"
+        },
+        "table": {
+          "description": "Table name of the column to update.",
+          "type": "string"
+        },
+        "column": {
+          "description": "Column name to update.",
+          "type": "string"
+        }
+      }
+    },
+    "RecommendedSensitivityLabelUpdate": {
+      "description": "A recommended sensitivity label update operation.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/RecommendedSensitivityLabelUpdateProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "RecommendedSensitivityLabelUpdateList": {
+      "description": "A list of recommended sensitivity label update operations.",
+      "type": "object",
+      "properties": {
+        "operations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RecommendedSensitivityLabelUpdate"
+          }
+        }
+      }
+    },
+    "CloudError": {
+      "x-ms-external": true,
+      "description": "The object that defines the structure of an Azure Synapse error response.",
+      "type": "object",
+      "properties": {
+        "error": {
+          "x-ms-client-flatten": true,
+          "description": "Error data",
+          "$ref": "#/definitions/CloudErrorBody"
+        }
+      },
+      "required": [
+        "error"
+      ]
+    },
+    "CloudErrorBody": {
+      "x-ms-external": true,
+      "description": "The object that defines the structure of an Azure Synapse error.",
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "Error code.",
+          "type": "string"
+        },
+        "message": {
+          "description": "Error message.",
+          "type": "string"
+        },
+        "target": {
+          "description": "Property name/path in request associated with error.",
+          "type": "string"
+        },
+        "details": {
+          "description": "Array with additional error details.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CloudError"
+          }
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ]
+    }
+  },
+  "parameters": {
+    "DataMaskingPolicyNameParameter": {
+      "name": "dataMaskingPolicyName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "enum": [
+        "Default"
+      ],
+      "x-ms-enum": {
+        "modelAsString": false,
+        "name": "DataMaskingPolicyName"
+      },
+      "description": "The name of the data masking policy for which the masking rule applies.",
+      "x-ms-parameter-location": "method"
     }
   }
 }

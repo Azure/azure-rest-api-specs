@@ -382,6 +382,9 @@
           },
           "Registries_ScheduleRun_WithCustomCredentials": {
             "$ref": "./examples/RegistriesScheduleRun_WithCustomCredentials.json"
+          },
+          "Registries_ScheduleRun_WithLogTemplate": {
+            "$ref": "./examples/RegistriesScheduleRun_WithLogTemplate.json"
           }
         }
       }
@@ -1154,6 +1157,9 @@
           },
           "Tasks_Create_WithUserIdentities": {
             "$ref": "./examples/ManagedIdentity/TasksCreate_WithUserIdentities.json"
+          },
+          "Tasks_Create_QuickTask": {
+            "$ref": "./examples/TasksCreate_QuickTask.json"
           }
         }
       },
@@ -1269,6 +1275,9 @@
           },
           "Tasks_Update_WithOpaqueCustomCredentials": {
             "$ref": "./examples/TasksUpdate_WithOpaqueCustomCredentials.json"
+          },
+          "Tasks_Update_QuickTask": {
+            "$ref": "./examples/TasksUpdate_QuickTask.json"
           }
         }
       }
@@ -1459,6 +1468,10 @@
         "agentPoolName": {
           "description": "The dedicated agent pool for the run.",
           "type": "string"
+        },
+        "logTemplate": {
+          "description": "The template that describes the repository and tag information for run log artifact.",
+          "type": "string"
         }
       },
       "discriminator": "type"
@@ -1593,6 +1606,11 @@
         "updateTriggerToken": {
           "description": "The update trigger token passed for the Run.",
           "type": "string"
+        },
+        "logArtifact": {
+          "$ref": "#/definitions/ImageDescriptor",
+          "description": "The image description for the log artifact.",
+          "readOnly": true
         },
         "provisioningState": {
           "description": "The provisioning state of a run.",
@@ -2095,10 +2113,6 @@
     },
     "TaskProperties": {
       "description": "The properties of a task.",
-      "required": [
-        "platform",
-        "step"
-      ],
       "type": "object",
       "properties": {
         "provisioningState": {
@@ -2167,6 +2181,15 @@
         "credentials": {
           "$ref": "#/definitions/Credentials",
           "description": "The properties that describes a set of credentials that will be used when this run is invoked."
+        },
+        "logTemplate": {
+          "description": "The template that describes the repository and tag information for run log artifact.",
+          "type": "string"
+        },
+        "isSystemTask": {
+          "description": "The value of this property indicates whether the task resource is system task or not.",
+          "default": false,
+          "type": "boolean"
         }
       }
     },
@@ -2614,6 +2637,10 @@
         "credentials": {
           "$ref": "#/definitions/Credentials",
           "description": "The parameters that describes a set of credentials that will be used when this run is invoked."
+        },
+        "logTemplate": {
+          "description": "The template that describes the repository and tag information for run log artifact.",
+          "type": "string"
         }
       }
     },
@@ -2947,6 +2974,12 @@
           "additionalProperties": {
             "type": "string"
           }
+        },
+        "systemData": {
+          "$ref": "#/definitions/SystemData",
+          "description": "Metadata pertaining to creation and last modification of the resource.",
+          "type": "object",
+          "readOnly": true
         }
       },
       "x-ms-azure-resource": true
@@ -2968,9 +3001,68 @@
           "description": "The type of the resource.",
           "type": "string",
           "readOnly": true
+        },
+        "systemData": {
+          "$ref": "#/definitions/SystemData",
+          "description": "Metadata pertaining to creation and last modification of the resource.",
+          "type": "object",
+          "readOnly": true
         }
       },
       "x-ms-azure-resource": true
+    },
+    "SystemData": {
+      "description": "Metadata pertaining to creation and last modification of the resource.",
+      "type": "object",
+      "properties": {
+        "createdBy": {
+          "description": "The identity that created the resource.",
+          "type": "string"
+        },
+        "createdByType": {
+          "description": "The type of identity that created the resource.",
+          "enum": [
+            "User",
+            "Application",
+            "ManagedIdentity",
+            "Key"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "createdByType",
+            "modelAsString": true
+          }
+        },
+        "createdAt": {
+          "format": "date-time",
+          "description": "The timestamp of resource creation (UTC).",
+          "type": "string"
+        },
+        "lastModifiedBy": {
+          "description": "The identity that last modified the resource.",
+          "type": "string"
+        },
+        "lastModifiedByType": {
+          "description": "The type of identity that last modified the resource.",
+          "enum": [
+            "User",
+            "Application",
+            "ManagedIdentity",
+            "Key"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "lastModifiedByType",
+            "modelAsString": true
+          }
+        },
+        "lastModifiedAt": {
+          "format": "date-time",
+          "description": "The timestamp of resource modification (UTC).",
+          "type": "string"
+        }
+      },
+      "readOnly": true
     },
     "ErrorResponseBody": {
       "description": "An error response from the Azure Container Registry service.",
