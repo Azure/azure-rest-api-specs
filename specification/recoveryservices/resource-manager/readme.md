@@ -28,7 +28,7 @@ These are the global settings for the RecoveryServices API.
 title: RecoveryServicesClient
 description: Recovery Services Client
 openapi-type: arm
-tag: package-2020-10
+tag: package-2021-01
 ```
 
 ### Validations
@@ -73,6 +73,17 @@ input-file:
 - Microsoft.RecoveryServices/stable/2020-10-01/replicationusages.json
 - Microsoft.RecoveryServices/stable/2020-10-01/vaults.json
 - Microsoft.RecoveryServices/stable/2020-10-01/vaultusages.json
+```
+### Tag: package-2021-01
+
+These settings apply only when `--tag=package-2021-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-01'
+input-file:
+- Microsoft.RecoveryServices/stable/2021-01-01/registeredidentities.json
+- Microsoft.RecoveryServices/stable/2021-01-01/replicationusages.json
+- Microsoft.RecoveryServices/stable/2021-01-01/vaults.json
+- Microsoft.RecoveryServices/stable/2021-01-01/vaultusages.json
 ```
 ---
 # Code Generation
@@ -137,18 +148,18 @@ output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-recoveryservices
 
 ``` yaml $(java) && $(multiapi)
 batch:
-  - tag: package-2020-10
+  - tag: package-2021-01
 ```
 
-### Tag: package-2020-10 and java
+### Tag: package-2021-01 and java
 
-These settings apply only when `--tag=package-2020-10 --java` is specified on the command line.
+These settings apply only when `--tag=package-2021-01 --java` is specified on the command line.
 Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
 
-``` yaml $(tag) == 'package-2020-10' && $(java) && $(multiapi)
+``` yaml $(tag) == 'package-2021-01' && $(java) && $(multiapi)
 java:
-  namespace: com.microsoft.azure.management.recoveryservices.v2020_10_01
-  output-folder: $(azure-libraries-for-java-folder)/sdk/recoveryservices/mgmt-v2020_10_01
+  namespace: com.microsoft.azure.management.recoveryservices.v2021_01_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/recoveryservices/mgmt-v2021_01_01
 regenerate-manager: true
 generate-interface: true
 ```
