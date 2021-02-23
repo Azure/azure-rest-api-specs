@@ -335,6 +335,36 @@
           "description": "Azure resource Id"
         }
       }
+    },
+    "ExternalSecuritySolutionKind": {
+      "type": "object",
+      "description": "Describes an Azure resource with kind",
+      "properties": {
+        "kind": {
+          "type": "string",
+          "description": "The kind of the external solution",
+          "enum": [
+            "CEF",
+            "ATA",
+            "AAD"
+          ],
+          "x-ms-enum": {
+            "name": "ExternalSecuritySolutionKind",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "CEF"
+              },
+              {
+                "value": "ATA"
+              },
+              {
+                "value": "AAD"
+              }
+            ]
+          }
+        }
+      }
     }
   },
   "parameters": {
