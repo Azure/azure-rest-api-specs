@@ -1,0 +1,115 @@
+{
+  "parameters": {
+    "api-version": "2021-02-01-preview",
+    "subscriptionId": "subId",
+    "resourceGroupName": "rg1",
+    "networkManagerName": "testNetworkManager",
+    "configurationName": "myTestSecurityConfig",
+    "ruleName": "SampleUserRule",
+    "userRule": {
+      "properties": {
+        "description": "Sample User Rule",
+        "protocol": "Tcp",
+        "source": [
+          {
+            "addressPrefixType": "IPPrefix",
+            "addressPrefix": "*"
+          }
+        ],
+        "destination": [
+          {
+            "addressPrefixType": "IPPrefix",
+            "addressPrefix": "*"
+          }
+        ],
+        "sourcePortRanges": [
+          "0-65535"
+        ],
+        "destinationPortRanges": [
+          "22"
+        ],
+        "direction": "Inbound"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/networkManagers/testNetworkManager/SecurityConfigurations/Policy1/userRules/SampleUserRule",
+        "type": "Microsoft.Network/networkManagers/securityConfigurations/userRules",
+        "name": "SampleUserRule",
+        "systemData": {
+          "createdBy": "b69a9388-9488-4534-b470-7ec6d41beef5",
+          "createdByType": "User",
+          "createdAt": "2021-01-11T18:52:27Z",
+          "lastModifiedBy": "b69a9388-9488-4534-b470-7ec6d41beef5",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2021-01-11T18:52:27Z"
+        },
+        "properties": {
+          "description": "Sample User Rule",
+          "protocol": "Tcp",
+          "source": [
+            {
+              "addressPrefixType": "IPPrefix",
+              "addressPrefix": "*"
+            }
+          ],
+          "destination": [
+            {
+              "addressPrefixType": "IPPrefix",
+              "addressPrefix": "*"
+            }
+          ],
+          "sourcePortRanges": [
+            "0-65535"
+          ],
+          "destinationPortRanges": [
+            "22"
+          ],
+          "direction": "Inbound",
+          "provisioningState": "Succeeded"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/networkManagers/testNetworkManager/securityConfigurations/myTestSecurityConfig/userRules/SampleUserRule",
+        "type": "Microsoft.Network/networkManagers/SecurityConfigurations/UserRules",
+        "name": "SampleUserRule",
+        "systemData": {
+          "createdBy": "b69a9388-9488-4534-b470-7ec6d41beef5",
+          "createdByType": "User",
+          "createdAt": "2021-01-11T18:52:27Z",
+          "lastModifiedBy": "b69a9388-9488-4534-b470-7ec6d41beef5",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2021-01-11T18:52:27Z"
+        },
+        "properties": {
+          "description": "Sample User Rule",
+          "protocol": "Tcp",
+          "source": [
+            {
+              "addressPrefixType": "IPPrefix",
+              "addressPrefix": "*"
+            }
+          ],
+          "destination": [
+            {
+              "addressPrefixType": "IPPrefix",
+              "addressPrefix": "*"
+            }
+          ],
+          "sourcePortRanges": [
+            "0-65535"
+          ],
+          "destinationPortRanges": [
+            "22"
+          ],
+          "direction": "Inbound",
+          "provisioningState": "Succeeded"
+        }
+      }
+    }
+  }
+}

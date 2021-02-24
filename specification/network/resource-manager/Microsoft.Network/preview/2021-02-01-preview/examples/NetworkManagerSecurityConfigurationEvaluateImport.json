@@ -1,0 +1,124 @@
+{
+  "parameters": {
+    "api-version": "2021-02-01-preview",
+    "subscriptionId": "subId",
+    "resourceGroupName": "rg1",
+    "networkManagerName": "testNetworkManager",
+    "configurationName": "myTestConfig",
+    "parameters": {
+      "networkSecurityGroupImports": [
+        {
+          "networkSecurityGroupUri": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/networkSecurityGroups/testnsg/securityRules/rule1"
+        }
+      ],
+      "importDenyRulesAsAdminRules": true,
+      "adminSecurityConfigurationUri": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/networkManagers/testNetworkManager/securityConfigurations/adminConfig",
+      "removeAllowVnetInboundRule": true,
+      "removeAllowAzureLoadBalancerInboundRule": true,
+      "removeAllowVnetOutboundRule": true,
+      "removeAllowInternetOutboundRule": true
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "securityType": "UserPolicy",
+            "securityUserRule": {
+              "id": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/networkmanagers/testNetworkManager/securityConfigurations/myTestConfig/userRules/SampleRule",
+              "type": "Microsoft.Network/networkManagers/securityConfigurations/userRules",
+              "name": "SampleRule",
+              "systemData": {
+                "createdBy": "b69a9388-9488-4534-b470-7ec6d41beef5",
+                "createdByType": "User",
+                "createdAt": "2021-01-11T18:52:27Z",
+                "lastModifiedBy": "b69a9388-9488-4534-b470-7ec6d41beef5",
+                "lastModifiedByType": "User",
+                "lastModifiedAt": "2021-01-11T18:52:27Z"
+              },
+              "properties": {
+                "description": "Sample user rule",
+                "protocol": "Tcp",
+                "source": [
+                  {
+                    "addressPrefixType": "IPPrefix",
+                    "addressPrefix": "*"
+                  }
+                ],
+                "destination": [
+                  {
+                    "addressPrefixType": "IPPrefix",
+                    "addressPrefix": "*"
+                  }
+                ],
+                "sourcePortRanges": [
+                  "0-65535"
+                ],
+                "destinationPortRanges": [
+                  "22"
+                ],
+                "direction": "Inbound",
+                "provisioningState": "Succeeded"
+              }
+            },
+            "securityAdminRule": null
+          },
+          {
+            "securityType": "AdminPolicy",
+            "securityUserRule": null,
+            "securityAdminRule": {
+              "id": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/networkmanagers/testNetworkManager/securityConfigurations/adminConfig/adminRules/SampleAdminRule",
+              "type": "Microsoft.Network/networkManagers/securityConfigurations/adminRules",
+              "name": "SampleAdminRule",
+              "systemData": {
+                "createdBy": "b69a9388-9488-4534-b470-7ec6d41beef5",
+                "createdByType": "User",
+                "createdAt": "2021-01-11T18:52:27Z",
+                "lastModifiedBy": "b69a9388-9488-4534-b470-7ec6d41beef5",
+                "lastModifiedByType": "User",
+                "lastModifiedAt": "2021-01-11T18:52:27Z"
+              },
+              "properties": {
+                "description": "Sample admin rule",
+                "protocol": "Tcp",
+                "source": [
+                  {
+                    "addressPrefixType": "IPPrefix",
+                    "addressPrefix": "*"
+                  }
+                ],
+                "destination": [
+                  {
+                    "addressPrefixType": "IPPrefix",
+                    "addressPrefix": "*"
+                  }
+                ],
+                "sourcePortRanges": [
+                  "0-65535"
+                ],
+                "destinationPortRanges": [
+                  "22"
+                ],
+                "access": "Deny",
+                "priority": 1,
+                "direction": "Inbound",
+                "appliesToGroups": [
+                  {
+                    "networkGroupId": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/networkmanagers/testNetworkManager/networkGroups/testGroup"
+                  }
+                ],
+                "provisioningState": "Succeeded"
+              }
+            }
+          }
+        ],
+        "failedImport": {
+          "failureCode": "123",
+          "failureReason": "None"
+        },
+        "nextLink": "{baseurl}/subscriptions/subId/resourceGroup/rg1/providers/Microsoft.Network/networkManagers/testNetworkManager/securityConfigurations/myTestConfig/evaluateImport?api-version=2020-08-01&$skipToken=10"
+      }
+    }
+  }
+}

@@ -1,0 +1,181 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "NetworkManagerEffectiveConfiguration",
+    "description": "The Microsoft Azure Network Manager effective configuration API provides a RESTful set of web services that interact with Microsoft Azure Networks service to manage your network resources. The API has entities that capture the relationship between an end user and the Microsoft Azure Networks service.",
+    "version": "2021-02-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworks/{virtualNetworkName}/networkManagerEffectiveConfigurations": {
+      "parameters": [
+        {
+          "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "#/parameters/ResourceGroupNameParameter"
+        },
+        {
+          "$ref": "#/parameters/VirtualNetworkNameParameter"
+        },
+        {
+          "$ref": "./network.json#/parameters/ApiVersionParameter"
+        },
+        {
+          "$ref": "#/parameters/ListTopParameter"
+        },
+        {
+          "$ref": "#/parameters/ListSkipTokenParameter"
+        }
+      ],
+      "get": {
+        "tags": [
+          "NetworkManagerEffectiveConfiguration"
+        ],
+        "operationId": "EffectiveConfigurations_List",
+        "description": "List all configurations in a virtual network.",
+        "responses": {
+          "200": {
+            "description": "OK - Returns information about the configurations.",
+            "schema": {
+              "$ref": "#/definitions/NetworkManagerEffectiveConfigurationListResult"
+            }
+          },
+          "default": {
+            "description": "Resource Provider error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List effective configuration": {
+            "$ref": "./examples/NetworkManagerEffectiveConfigurationsList.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "EffectiveConfiguration": {
+      "properties": {
+        "configType": {
+          "type": "string",
+          "enum": [
+            "AdminPolicy",
+            "UserPolicy",
+            "Connectivity"
+          ],
+          "x-ms-enum": {
+            "name": "ConfigType",
+            "modelAsString": true
+          },
+          "description": "Effective configuration."
+        },
+        "connectivityConfiguration": {
+          "$ref": "./networkManagerConnectivityConfiguration.json#/definitions/ConnectivityConfiguration",
+          "description": "Connectivity configuration object."
+        },
+        "securityAdminRule": {
+          "$ref": "./networkManagerSecurityConfiguration.json#/definitions/AdminRule",
+          "description": "Security admin rule object."
+        },
+        "securityUserRule": {
+          "$ref": "./networkManagerSecurityConfiguration.json#/definitions/UserRule",
+          "description": "Security user rule object."
+        },
+        "configurationGroups": {
+          "type": "array",
+          "items": {
+            "$ref": "./networkManagerGroup.json#/definitions/NetworkGroup"
+          },
+          "description": "Effective configuration groups."
+        }
+      },
+      "description": "The network manager effective configuration"
+    },
+    "NetworkManagerEffectiveConfigurationListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EffectiveConfiguration"
+          },
+          "description": "Gets a page of NetworkManagerEffectiveConfiguration"
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Gets the URL to get the next set of results."
+        }
+      },
+      "description": "Result of the request to list networkManagerEffectiveConfiguration. It contains a list of groups and a URL link to get the next set of results."
+    }
+  },
+  "parameters": {
+    "ResourceGroupNameParameter": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the resource group.",
+      "x-ms-parameter-location": "method"
+    },
+    "VirtualNetworkNameParameter": {
+      "name": "virtualNetworkName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the virtual network.",
+      "x-ms-parameter-location": "method"
+    },
+    "ListTopParameter": {
+      "name": "$top",
+      "description": "An optional query parameter which specifies the maximum number of records to be returned by the server.",
+      "in": "query",
+      "required": false,
+      "type": "integer",
+      "format": "int32",
+      "minimum": 1,
+      "maximum": 20,
+      "x-ms-parameter-location": "method"
+    },
+    "ListSkipTokenParameter": {
+      "name": "$skipToken",
+      "description": "SkipToken is only used if a previous operation returned a partial result. If a previous response contains a nextLink element, the value of the nextLink element will include a skipToken parameter that specifies a starting point to use for subsequent calls.",
+      "in": "query",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}
