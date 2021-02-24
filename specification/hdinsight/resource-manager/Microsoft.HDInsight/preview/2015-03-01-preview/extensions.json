@@ -83,7 +83,10 @@
             "description": "Accepted response definition."
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
       },
       "get": {
         "tags": [
@@ -162,9 +165,15 @@
           },
           "202": {
             "description": "OK response definition."
+          },
+          "204": {
+            "description": "No Content response definition."
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HDInsight/clusters/{clusterName}/extensions/{extensionName}": {
@@ -213,11 +222,15 @@
             }
           },
           "200": {
-            "description": "OK. The request has succeeded."
+            "description": "Ok response definition."
           },
           "202": {
-            "description": "OK. The request has succeeded."
+            "description": "Accepted response definition."
           }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
         }
       },
       "get": {
@@ -258,7 +271,7 @@
           "200": {
             "description": "OK. The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/Extension"
+              "$ref": "#/definitions/ClusterMonitoringResponse"
             }
           }
         }
@@ -302,7 +315,62 @@
             "description": "Ok response definition."
           },
           "202": {
-            "description": "OK response definition."
+            "description": "Accepted response definition."
+          },
+          "204": {
+            "description": "No Content response definition."
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HDInsight/clusters/{clusterName}/extensions/{extensionName}/azureAsyncOperations/{operationId}": {
+      "get": {
+        "tags": [
+          "Extensions"
+        ],
+        "description": "Gets the async operation status.",
+        "operationId": "Extensions_GetAzureAsyncOperationStatus",
+        "x-ms-examples": {
+          "Gets the azure async operation status.": {
+            "$ref": "./examples/GetExtensionCreationAsyncOperationStatus.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ExtensionNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/OperationIdParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./operations.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "OK response definition.",
+            "schema": {
+              "$ref": "./cluster.json#/definitions/AsyncOperationResult"
+            }
           }
         }
       }
@@ -323,27 +391,27 @@
       }
     },
     "ClusterMonitoringResponse": {
-      "description": "The Operations Management Suite (OMS) status response",
+      "description": "The cluster monitoring status response.",
       "properties": {
         "clusterMonitoringEnabled": {
-          "description": "The status of the Operations Management Suite (OMS) on the HDInsight cluster.",
+          "description": "The status of the monitor on the HDInsight cluster.",
           "type": "boolean"
         },
         "workspaceId": {
-          "description": "The workspace ID of the Operations Management Suite (OMS) on the HDInsight cluster.",
+          "description": "The workspace ID of the monitor on the HDInsight cluster.",
           "type": "string"
         }
       }
     },
     "ClusterMonitoringRequest": {
-      "description": "The Operations Management Suite (OMS) parameters.",
+      "description": "The cluster monitor parameters.",
       "properties": {
         "workspaceId": {
-          "description": "The Operations Management Suite (OMS) workspace ID.",
+          "description": "The cluster monitor workspace ID.",
           "type": "string"
         },
         "primaryKey": {
-          "description": "The Operations Management Suite (OMS) workspace key.",
+          "description": "The cluster monitor workspace key.",
           "type": "string"
         }
       }
@@ -387,6 +455,14 @@
       "required": true,
       "type": "string",
       "description": "The HDInsight client API Version."
+    },
+    "OperationIdParameter": {
+      "name": "operationId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The long running operation id.",
+      "x-ms-parameter-location": "method"
     }
   }
 }
