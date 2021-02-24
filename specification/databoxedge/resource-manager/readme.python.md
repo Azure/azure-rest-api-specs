@@ -33,6 +33,7 @@ Generate all API versions currently shipped for this package
 
 ```yaml $(python) && $(multiapi) && !$(track2)
 batch:
+  - tag: package-2020-12-01
   - tag: package-2020-09-01-preview
   - tag: package-2020-09-01
   - tag: package-2020-05-preview
@@ -42,6 +43,7 @@ batch:
 ```
 ```yaml $(python) && $(multiapi) && $(track2)
 batch:
+  - tag: package-2020-12-01
   - tag: package-2020-09-01-preview
   - tag: package-2020-09-01
   - tag: package-2020-05-preview
@@ -55,6 +57,21 @@ batch:
 output-folder: $(python-sdks-folder)/databoxedge/azure-mgmt-databoxedge/azure/mgmt/databoxedge/
 clear-output-folder: false
 perform-load: false
+```
+
+### Tag: package-2020-12-01 and python
+
+These settings apply only when `--tag=package-2020-12-01 --python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
+
+``` yaml $(tag) == 'package-2020-12-01' && $(python) & !$(track2)
+python:
+  namespace: azure.mgmt.databoxedge.v2020_12_01
+  output-folder: $(python-sdks-folder)/databoxedge/azure-mgmt-databoxedge/azure/mgmt/databoxedge/v2020_12_01
+```
+``` yaml $(tag) == 'package-2020-12-01' && $(python) && $(track2)
+namespace: azure.mgmt.databoxedge.v2020_12_01
+output-folder: $(python-sdks-folder)/databoxedge/azure-mgmt-databoxedge/azure/mgmt/datab
 ```
 
 ### Tag: package-2020-09-01-preview and python
