@@ -10,5 +10,5 @@ cli:
   test-scenario:
     - name: Quotas_listUsagesForCompute
     - name: Quotas_Request_ForCompute
-    - name: Quotas_Request_ForCompute
+    - name: Quotas_Request_PatchForCompute
 ```
