@@ -2678,14 +2678,14 @@
       },
       "description": "Properties of the disk for which update is pending."
     },
-    "SecurityType": {
+    "DiskSecurityType": {
       "type": "string",
       "description": "Specifies the SecurityType of the VM. Applicable for OS disks only.",
       "enum": [
         "TrustedLaunch"
       ],
       "x-ms-enum": {
-        "name": "SecurityTypes",
+        "name": "DiskSecurityTypes",
         "modelAsString": true,
         "values": [
           {
@@ -2698,7 +2698,7 @@
     "DiskSecurityProfile": {
       "properties": {
         "securityType": {
-          "$ref": "#/definitions/SecurityType"
+          "$ref": "#/definitions/DiskSecurityType"
         }
       },
       "required": [
