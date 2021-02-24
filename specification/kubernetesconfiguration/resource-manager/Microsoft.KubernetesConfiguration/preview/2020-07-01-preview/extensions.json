@@ -626,74 +626,6 @@
         }
       ]
     },
-    "ExtensionInstanceForList": {
-      "description": "The Extension Instance object.",
-      "properties": {
-        "properties": {
-          "type": "object",
-          "x-ms-client-flatten": true,
-          "description": "Properties of an Extension Instance resource",
-          "readOnly": true,
-          "properties": {
-            "extensionType": {
-              "type": "string",
-              "description": "Type of the Extension, of which this resource is an instance of.  It must be one of the Extension Types registered with Microsoft.KubernetesConfiguration by the Extension publisher."
-            },
-            "autoUpgradeMinorVersion": {
-              "description": "Flag to note if this instance participates in auto upgrade of minor version, or not.",
-              "type": "boolean"
-            },
-            "releaseTrain": {
-              "description": "ReleaseTrain this extension instance participates in for auto-upgrade (e.g. Stable, Preview, etc.) - only if autoUpgradeMinorVersion is 'true'.",
-              "$ref": "#/definitions/ReleaseTrain"
-            },
-            "version": {
-              "description": "Version of the extension for this extension instance, if it is 'pinned' to a specific version.",
-              "type": "string"
-            },
-            "scope": {
-              "description": "Scope at which the extension instance is installed.",
-              "$ref": "#/definitions/Scope"
-            },
-            "installState": {
-              "type": "string",
-              "description": "Status of installation of this instance of the extension.",
-              "$ref": "#/definitions/InstallStateDefinition"
-            },
-            "creationTime": {
-              "type": "string",
-              "description": "DateLiteral (per ISO8601) noting the time the resource was created by the client (user).",
-              "readOnly": true
-            },
-            "lastModifiedTime": {
-              "type": "string",
-              "description": "DateLiteral (per ISO8601) noting the time the resource was modified by the client (user).",
-              "readOnly": true
-            },
-            "lastStatusTime": {
-              "type": "string",
-              "description": "DateLiteral (per ISO8601) noting the time of last status from the agent.",
-              "readOnly": true
-            },
-            "errorInfo": {
-              "type": "object",
-              "description": "Error information from the Agent - e.g. errors during installation.",
-              "readOnly": true,
-              "$ref": "#/definitions/ErrorDefinition"
-            }
-          }
-        },
-        "identity": {
-          "$ref": "#/definitions/ConfigurationIdentity",
-          "description": "The identity of the configuration."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/ProxyResource"
-        }
-      ]
-    },
     "ExtensionInstancesList": {
       "description": "Result of the request to list Extension Instances.  It contains a list of ExtensionInstance objects and a URL link to get the next set of results.",
       "properties": {
@@ -701,7 +633,7 @@
           "type": "array",
           "readOnly": true,
           "items": {
-            "$ref": "#/definitions/ExtensionInstanceForList"
+            "$ref": "#/definitions/ExtensionInstance"
           },
           "description": "List of Extension Instances within a Kubernetes cluster."
         },
