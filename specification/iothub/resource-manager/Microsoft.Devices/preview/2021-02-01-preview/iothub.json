@@ -3134,7 +3134,8 @@
             "TwinChangeEvents",
             "DeviceLifecycleEvents",
             "DeviceJobLifecycleEvents",
-            "DigitalTwinChangeEvents"
+            "DigitalTwinChangeEvents",
+            "DeviceConnectionStateEvents"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -4240,8 +4241,18 @@
           "readOnly": true
         },
         "type": {
-          "description": "Identity type. Only allowed values are SystemAssigned and UserAssigned. Comma separated if both for ex: SystemAssigned,UserAssigned",
-          "type": "string"
+          "description": "The type of identity used for the resource. The type 'SystemAssigned,UserAssigned' includes both an implicitly created identity and a set of user assigned identities. The type 'None' will remove any identities from the service.",
+          "type": "string",
+          "enum": [
+            "SystemAssigned",
+            "UserAssigned",
+            "SystemAssigned,UserAssigned",
+            "None"
+          ],
+          "x-ms-enum": {
+            "name": "ResourceIdentityType",
+            "modelAsString": true
+          }
         },
         "userAssignedIdentities": {
           "type": "object",
