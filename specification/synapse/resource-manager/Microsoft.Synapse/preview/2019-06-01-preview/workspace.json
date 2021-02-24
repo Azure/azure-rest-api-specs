@@ -1081,6 +1081,15 @@
         "rootFolder": {
           "description": "Root folder to use in the repository",
           "type": "string"
+        },
+        "lastCommitId": {
+          "description": "The last commit ID",
+          "type": "string"
+        },
+        "tenantId": {
+          "description": "The VSTS tenant ID",
+          "type": "string",
+          "format": "uuid"
         }
       }
     },
@@ -1207,6 +1216,11 @@
         "purviewConfiguration": {
           "description": "Purview Configuration",
           "$ref": "#/definitions/PurviewConfiguration"
+        },
+        "adlaResourceId": {
+          "description": "The ADLA resource ID.",
+          "type": "string",
+          "readOnly": true
         }
       }
     },
