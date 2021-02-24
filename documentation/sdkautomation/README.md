@@ -197,7 +197,7 @@ Input file for generate script.
 ```jsonc
 {
   "dryRun": false,
-  "specFolder": "/z/work/azure-rest-api-specs",
+  "specFolder": "../azure-rest-api-specs",
   "headSha": "fce3400431eff281bddd04bed9727e63765b8da0",
   "headRef": "refs/pull/1234/merge",
   "repoHttpsUrl": "https://github.com/Azure/azure-rest-api-specs.git",
@@ -250,7 +250,7 @@ Output file for generate script.
         "full": "To install something...",
         "lite": "dotnet something"
       },
-      "result": "success"
+      "result": "succeeded"
     }
   ]
 }
