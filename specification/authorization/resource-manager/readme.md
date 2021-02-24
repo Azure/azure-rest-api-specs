@@ -71,6 +71,17 @@ directive:
     reason: for this case the result of the proposed change would resemble a boolean anyways
   - suppress: R4024
     reason: Preview versions still in use
+  - suppress: RequiredSystemDataInNewApiVersions
+    reason: Existing APIs don't have this attribute. Suppressing so that we don't have to make changes to existing APIs
+```
+
+### Tag: package-2021-03-01-preview-only
+
+These settings apply only when `--tag=package-2021-03-01-preview-only` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-03-01-preview-only'
+input-file:
+- Microsoft.Authorization/preview/2021-03-01-preview/authorization-AccessReviewCalls.json
 ```
 
 ### Tag: package-2020-10-01-preview
