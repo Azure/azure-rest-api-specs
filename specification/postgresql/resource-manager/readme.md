@@ -50,6 +50,7 @@ These settings apply only when `--tag=package-2020-02-14-preview` is specified o
 ``` yaml $(tag) == 'package-2020-02-14-preview'
 input-file:
 - Microsoft.DBforPostgreSQL/preview/2020-02-14-preview/postgresql.json
+- Microsoft.DBforPostgreSQL/preview/2020-02-14-preview/IntelligentPerformance.json
 ```
 
 
@@ -210,6 +211,7 @@ require: $(this-folder)/../../../profiles/readme.md
 input-file:
   - $(this-folder)/Microsoft.DBforPostgreSQL/preview/2020-11-05-preview/Databases.json
   - $(this-folder)/Microsoft.DBforPostgreSQL/preview/2020-02-14-preview/postgresql.json
+  - $(this-folder)/Microsoft.DBforPostgreSQL/preview/2020-02-14-preview/IntelligentPerformance.json
   - $(this-folder)/Microsoft.DBforPostgreSQL/preview/2020-02-14-privatepreview/postgresql.json
   - $(this-folder)/Microsoft.DBforPostgreSQL/preview/2020-01-01-privatepreview/DataEncryptionKeys.json
   - $(this-folder)/Microsoft.DBforPostgreSQL/stable/2017-12-01/postgresql.json
