@@ -39,7 +39,7 @@
           "Settings"
         ],
         "operationId": "Settings_List",
-        "description": "Lists all settings within a single partition.",
+        "description": "Lists all of the settings that have been customized.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
         },
@@ -78,7 +78,7 @@
           "Settings"
         ],
         "operationId": "Settings_Get",
-        "description": "Gets the setting by name.",
+        "description": "Retrieves the current value for a specific setting.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
         },
@@ -115,7 +115,7 @@
           "Settings"
         ],
         "operationId": "Settings_CreateOrUpdate",
-        "description": "The operation to create or update a setting.",
+        "description": "Sets a new value for a specific setting.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
         },
@@ -161,7 +161,7 @@
           "Settings"
         ],
         "operationId": "Settings_Delete",
-        "description": "The operation to delete a setting.",
+        "description": "Removes the current value for a specific setting and reverts back to the default value, if applicable.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
         },
@@ -1760,7 +1760,7 @@
       "description": "The properties of the setting.",
       "properties": {
         "scope": {
-          "description": "The scope set by the user",
+          "description": "For the myscope setting, sets the default scope the current user will see when they sign into Azure Cost Management in the Azure portal.",
           "type": "string"
         }
       }
@@ -1971,6 +1971,11 @@
           "type": "string",
           "description": "Resource kind.",
           "maxLength": 10
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource type."
         }
       },
       "x-ms-azure-resource": true
@@ -2808,7 +2813,7 @@
     "settingNameParameter": {
       "name": "settingName",
       "in": "path",
-      "description": "Setting name",
+      "description": "Name of the setting. Allowed values: myscope",
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"
