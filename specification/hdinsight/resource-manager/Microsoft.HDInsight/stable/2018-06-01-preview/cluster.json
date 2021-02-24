@@ -116,7 +116,10 @@
             }
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
       },
       "patch": {
         "tags": [
@@ -209,7 +212,10 @@
             "description": "No Content response definition."
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
       },
       "get": {
         "tags": [
@@ -360,7 +366,10 @@
             "description": "Accepted response definition."
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HDInsight/clusters/{clusterName}/roles/{roleName}/autoscale": {
@@ -432,7 +441,10 @@
             "description": "Accepted response definition."
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
       }
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.HDInsight/clusters": {
@@ -523,7 +535,10 @@
             "description": "Accepted response definition."
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HDInsight/clusters/{clusterName}/getGatewaySettings": {
@@ -617,7 +632,10 @@
             "description": "Accepted response definition"
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HDInsight/clusters/{clusterName}/azureasyncoperations/{operationId}": {
@@ -664,6 +682,61 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HDInsight/clusters/{clusterName}/updateClusterIdentityCertificate": {
+      "post": {
+        "tags": [
+          "Clusters"
+        ],
+        "operationId": "Clusters_UpdateIdentityCertificate",
+        "description": "Updates the cluster identity certificate.",
+        "x-ms-examples": {
+          "Update cluster identity certificate": {
+            "$ref": "./examples/HDI_Clusters_UpdateClusterIdentityCertificate.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UpdateClusterIdentityCertificateParameters"
+            },
+            "description": "The cluster configurations."
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./operations.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "OK response definition."
+          },
+          "202": {
+            "description": "Accepted response definition"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
     }
   },
   "definitions": {
@@ -683,11 +756,16 @@
           "additionalProperties": {
             "type": "string"
           },
-          "description": "The versions of different services in the cluster."
+          "description": "The versions of different services in the cluster.",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         },
         "configurations": {
           "type": "object",
-          "description": "The cluster configurations."
+          "description": "The cluster configurations.",
+          "x-ms-secret": true
         }
       }
     },
@@ -710,6 +788,13 @@
         "clientGroupInfo": {
           "$ref": "#/definitions/ClientGroupInfo",
           "description": "The information of AAD security group."
+        },
+        "configurationOverride": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "The configurations that need to be overriden."
         }
       }
     },
@@ -733,7 +818,11 @@
         },
         "organizationalUnitDN": {
           "type": "string",
-          "description": "The organizational unit within the Active Directory to place the cluster and service accounts."
+          "description": "The organizational unit within the Active Directory to place the cluster and service accounts.",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         },
         "ldapsUrls": {
           "type": "array",
@@ -946,7 +1035,8 @@
         },
         "sshProfile": {
           "$ref": "#/definitions/SshProfile",
-          "description": "The SSH profile."
+          "description": "The SSH profile.",
+          "x-ms-secret": true
         }
       }
     },
@@ -968,7 +1058,8 @@
         "minInstanceCount": {
           "type": "integer",
           "format": "int32",
-          "description": "The minimum instance count of the cluster."
+          "description": "The minimum instance count of the cluster.",
+          "x-ms-secret": true
         },
         "targetInstanceCount": {
           "type": "integer",
@@ -977,7 +1068,11 @@
         },
         "VMGroupName": {
           "type": "string",
-          "description": "The name of the virtual machine group."
+          "description": "The name of the virtual machine group.",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         },
         "autoscale": {
           "$ref": "#/definitions/Autoscale",
@@ -1008,11 +1103,13 @@
           "items": {
             "$ref": "./scriptActions.json#/definitions/ScriptAction"
           },
-          "description": "The list of script actions on the role."
+          "description": "The list of script actions on the role.",
+          "x-ms-secret": true
         },
         "encryptDataDisks": {
           "type": "boolean",
-          "description": "Indicates whether encrypt the data disks."
+          "description": "Indicates whether encrypt the data disks.",
+          "default": false
         }
       },
       "description": "Describes a role on the cluster."
@@ -1129,7 +1226,8 @@
       "properties": {
         "enableComputeIsolation": {
           "type": "boolean",
-          "description": "The flag indicates whether enable compute isolation or not."
+          "description": "The flag indicates whether enable compute isolation or not.",
+          "default": false
         },
         "hostSku": {
           "type": "string",
@@ -1166,7 +1264,12 @@
           "x-ms-enum": {
             "name": "Tier",
             "modelAsString": false
-          }
+          },
+          "default": "Standard",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         },
         "clusterDefinition": {
           "$ref": "#/definitions/ClusterDefinition",
@@ -1811,6 +1914,24 @@
         }
       },
       "description": "The azure async operation response."
+    },
+    "UpdateClusterIdentityCertificateParameters": {
+      "type": "object",
+      "description": "The update cluster identity certificate request parameters.",
+      "properties": {
+        "applicationId": {
+          "description": "The application id.",
+          "type": "string"
+        },
+        "certificate": {
+          "description": "The certificate in base64 encoded format.",
+          "type": "string"
+        },
+        "certificatePassword": {
+          "description": "The password of the certificate.",
+          "type": "string"
+        }
+      }
     },
     "Resource": {
       "description": "The core properties of ARM resources",
