@@ -7318,15 +7318,10 @@
           "items": {
             "$ref": "#/definitions/ApiEntityReference"
           },
-          "readOnly": true,
+          "readOnly": false,
           "description": "List of disk resource ids that the customer wishes to exclude from the restore point. If no disks are specified, all disks will be included."
         }
       },
-      "allOf": [
-        {
-          "$ref": "#/definitions/Resource"
-        }
-      ],
       "description": "The restore point properties."
     },
     "RestorePointSourceMetadata": {
@@ -7479,8 +7474,18 @@
       }
     },
     "RestorePoint": {
-      "$ref": "#/definitions/RestorePointProperties",
-      "description": "Restore Point details."
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/RestorePointProperties"
+        }
+      },
+      "description": "Restore Point details.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
     },
     "ComputeOperationListResult": {
       "properties": {
