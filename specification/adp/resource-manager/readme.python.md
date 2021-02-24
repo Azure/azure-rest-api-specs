@@ -16,8 +16,8 @@ modelerfour:
 ```yaml $(multiapi)
 clear-output-folder: true
 batch:
-  - tag: 2020-07-01-preview
-  - tag: 2021-02-01-preview
+  - tag: package-2020-07-01-preview
+  - tag: package-2021-02-01-preview
   - multiapiscript: true
 ```
 
@@ -28,9 +28,9 @@ perform-load: false
 ```
 
 ``` yaml
-namespace: azure.mgmt.adp.v$(nstag)
-output-folder: $(python-sdks-folder)/adp/azure-mgmt-adp/azure/mgmt/adp/v$(nstag)
+namespace: azure.mgmt.adp.v$(version-with-underscores)
+output-folder: $(python-sdks-folder)/adp/azure-mgmt-adp/azure/mgmt/adp/v$(version-with-underscores)
 python:
-  namespace: azure.mgmt.adp.v$(nstag)
-  output-folder: $(python-sdks-folder)/adp/azure-mgmt-adp/azure/mgmt/adp/v$(nstag)
+  namespace: azure.mgmt.adp.v$(version-with-underscores)
+  output-folder: $(python-sdks-folder)/adp/azure-mgmt-adp/azure/mgmt/adp/v$(version-with-underscores)
 ```
