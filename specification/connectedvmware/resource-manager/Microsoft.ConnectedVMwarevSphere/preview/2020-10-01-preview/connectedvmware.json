@@ -2954,6 +2954,10 @@
         "kind": {
           "type": "string",
           "description": "Metadata used by portal/tooling/etc to render different UX experiences for resources of the same type; e.g. ApiApps are a kind of Microsoft.Web/sites type.  If supported, the resource provider must validate and persist this value."
+        },
+        "identity": {
+          "$ref": "#/definitions/Identity",
+          "description": "The identity of the resource."
         }
       }
     },
@@ -3727,6 +3731,37 @@
         "name": "InventoryType",
         "modelAsString": true
       }
+    },
+    "Identity": {
+      "type": "object",
+      "required": [
+        "type"
+      ],
+      "properties": {
+        "principalId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The principal id of managed service identity."
+        },
+        "tenantId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The tenant of managed service identity."
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of managed service identity.",
+          "enum": [
+            "None",
+            "SystemAssigned"
+          ],
+          "x-ms-enum": {
+            "name": "IdentityType",
+            "modelAsString": true
+          }
+        }
+      },
+      "description": "Managed service identity."
     }
   },
   "parameters": {
