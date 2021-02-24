@@ -2764,11 +2764,26 @@
         "hostPoolType": {
           "enum": [
             "Personal",
-            "Pooled"
+            "Pooled",
+            "BYODesktop"
           ],
           "x-ms-enum": {
             "name": "HostPoolType",
-            "modelAsString": true
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Personal",
+                "description": "Users will be assigned a SessionHost either by administrators (PersonalDesktopAssignmentType = Direct) or upon connecting to the pool (PersonalDesktopAssignmentType = Automatic). They will always be redirected to their assigned SessionHost."
+              },
+              {
+                "value": "Pooled",
+                "description": "Users get a new (random) SessionHost every time it connects to the HostPool."
+              },
+              {
+                "value": "BYODesktop",
+                "description": "Users assign their own machines, load balancing logic remains the same as Personal. PersonalDesktopAssignmentType must be Direct."
+              }
+            ]
           },
           "type": "string",
           "description": "HostPool type for desktop.",
@@ -4281,14 +4296,29 @@
         "hostPoolType": {
           "enum": [
             "Personal",
-            "Pooled"
+            "Pooled",
+            "BYODesktop"
           ],
           "x-ms-enum": {
             "name": "HostPoolType",
-            "modelAsString": true
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Personal",
+                "description": "Users will be assigned a SessionHost either by administrators (PersonalDesktopAssignmentType = Direct) or upon connecting to the pool (PersonalDesktopAssignmentType = Automatic). They will always be redirected to their assigned SessionHost."
+              },
+              {
+                "value": "Pooled",
+                "description": "Users get a new (random) SessionHost every time it connects to the HostPool."
+              },
+              {
+                "value": "BYODesktop",
+                "description": "Users assign their own machines, load balancing logic remains the same as Personal. PersonalDesktopAssignmentType must be Direct."
+              }
+            ]
           },
           "type": "string",
-          "description": "HostPool type for scaling plan.",
+          "description": "HostPool type for desktop.",
           "x-nullable": false
         },
         "exclusionTag": {
@@ -4340,7 +4370,7 @@
           "type": "string",
           "description": "Starting time for ramp up period."
         },
-        "rampUpAlgorithm": {
+        "rampUpLoadBalancingAlgorithm": {
           "enum": [
             "BreadthFirst",
             "DepthFirst"
@@ -4352,7 +4382,7 @@
           "type": "string",
           "description": "Load balancing algorithm for ramp up period."
         },
-        "rampUpMinimumHostPct": {
+        "rampUpMinimumHostsPct": {
           "type": "integer",
           "format": "int32",
           "minimum": 0,
@@ -4430,7 +4460,7 @@
           "type": "string",
           "description": "Specifies when to stop hosts during ramp down period."
         },
-        "rampDownNotificationMinutes": {
+        "rampDownWaitTimeMinutes": {
           "type": "integer",
           "format": "int32",
           "description": "Number of minutes to wait to stop hosts during ramp down period."
@@ -4528,14 +4558,29 @@
         "hostPoolType": {
           "enum": [
             "Personal",
-            "Pooled"
+            "Pooled",
+            "BYODesktop"
           ],
           "x-ms-enum": {
             "name": "HostPoolType",
-            "modelAsString": true
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Personal",
+                "description": "Users will be assigned a SessionHost either by administrators (PersonalDesktopAssignmentType = Direct) or upon connecting to the pool (PersonalDesktopAssignmentType = Automatic). They will always be redirected to their assigned SessionHost."
+              },
+              {
+                "value": "Pooled",
+                "description": "Users get a new (random) SessionHost every time it connects to the HostPool."
+              },
+              {
+                "value": "BYODesktop",
+                "description": "Users assign their own machines, load balancing logic remains the same as Personal. PersonalDesktopAssignmentType must be Direct."
+              }
+            ]
           },
           "type": "string",
-          "description": "HostPool type for scaling plan.",
+          "description": "HostPool type for desktop.",
           "x-nullable": false
         },
         "exclusionTag": {
