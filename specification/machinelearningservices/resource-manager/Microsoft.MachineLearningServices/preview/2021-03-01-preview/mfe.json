@@ -48,13 +48,7 @@
             "description": "Container entity to create or update.",
             "required": true,
             "schema": {
-              "description": "Azure Resource Manager resource envelope.",
-              "allOf": [
-                {
-                  "$ref": "#/definitions/CodeContainerResource"
-                }
-              ],
-              "x-ms-azure-resource": true
+              "$ref": "#/definitions/CodeContainerResource"
             }
           }
         ],
@@ -282,13 +276,7 @@
             "description": "Version entity to create or update.",
             "required": true,
             "schema": {
-              "description": "Azure Resource Manager resource envelope.",
-              "allOf": [
-                {
-                  "$ref": "#/definitions/CodeVersionResource"
-                }
-              ],
-              "x-ms-azure-resource": true
+              "$ref": "#/definitions/CodeVersionResource"
             }
           }
         ],
@@ -543,13 +531,7 @@
             "description": "Container entity to create or update.",
             "required": true,
             "schema": {
-              "description": "Azure Resource Manager resource envelope.",
-              "allOf": [
-                {
-                  "$ref": "#/definitions/DataContainerResource"
-                }
-              ],
-              "x-ms-azure-resource": true
+              "$ref": "#/definitions/DataContainerResource"
             }
           }
         ],
@@ -963,13 +945,7 @@
             "description": "Datastore entity to create or update.",
             "required": true,
             "schema": {
-              "description": "Azure Resource Manager resource envelope.",
-              "allOf": [
-                {
-                  "$ref": "#/definitions/DatastorePropertiesResource"
-                }
-              ],
-              "x-ms-azure-resource": true
+              "$ref": "#/definitions/DatastorePropertiesResource"
             }
           }
         ],
@@ -1098,13 +1074,7 @@
             "description": "Version entity to create or update.",
             "required": true,
             "schema": {
-              "description": "Azure Resource Manager resource envelope.",
-              "allOf": [
-                {
-                  "$ref": "#/definitions/DataVersionResource"
-                }
-              ],
-              "x-ms-azure-resource": true
+              "$ref": "#/definitions/DataVersionResource"
             }
           }
         ],
@@ -1359,13 +1329,7 @@
             "description": "Container entity to create or update.",
             "required": true,
             "schema": {
-              "description": "Azure Resource Manager resource envelope.",
-              "allOf": [
-                {
-                  "$ref": "#/definitions/EnvironmentContainerResource"
-                }
-              ],
-              "x-ms-azure-resource": true
+              "$ref": "#/definitions/EnvironmentContainerResource"
             }
           }
         ],
@@ -1593,13 +1557,7 @@
             "description": "Definition of EnvironmentSpecificationVersion.",
             "required": true,
             "schema": {
-              "description": "Azure Resource Manager resource envelope.",
-              "allOf": [
-                {
-                  "$ref": "#/definitions/EnvironmentSpecificationVersionResource"
-                }
-              ],
-              "x-ms-azure-resource": true
+              "$ref": "#/definitions/EnvironmentSpecificationVersionResource"
             }
           }
         ],
@@ -1854,13 +1812,7 @@
             "description": "Job definition object.",
             "required": true,
             "schema": {
-              "description": "Azure Resource Manager resource envelope.",
-              "allOf": [
-                {
-                  "$ref": "#/definitions/JobBaseResource"
-                }
-              ],
-              "x-ms-azure-resource": true
+              "$ref": "#/definitions/JobBaseResource"
             }
           }
         ],
@@ -2184,13 +2136,7 @@
             "description": "LabelingJob definition object.",
             "required": true,
             "schema": {
-              "description": "Azure Resource Manager resource envelope.",
-              "allOf": [
-                {
-                  "$ref": "#/definitions/LabelingJobResource"
-                }
-              ],
-              "x-ms-azure-resource": true
+              "$ref": "#/definitions/LabelingJobResource"
             }
           }
         ],
@@ -2702,13 +2648,7 @@
             "description": "Container entity to create or update.",
             "required": true,
             "schema": {
-              "description": "Azure Resource Manager resource envelope.",
-              "allOf": [
-                {
-                  "$ref": "#/definitions/ModelContainerResource"
-                }
-              ],
-              "x-ms-azure-resource": true
+              "$ref": "#/definitions/ModelContainerResource"
             }
           }
         ],
@@ -2987,13 +2927,7 @@
             "description": "Version entity to create or update.",
             "required": true,
             "schema": {
-              "description": "Azure Resource Manager resource envelope.",
-              "allOf": [
-                {
-                  "$ref": "#/definitions/ModelVersionResource"
-                }
-              ],
-              "x-ms-azure-resource": true
+              "$ref": "#/definitions/ModelVersionResource"
             }
           }
         ],
@@ -3147,8 +3081,7 @@
           "type": "object",
           "additionalProperties": {
             "type": "string"
-          },
-          "x-ms-client-flatten": true
+          }
         },
         "tags": {
           "type": "object",
@@ -3186,20 +3119,12 @@
         },
         "properties": {
           "description": "Additional attributes of the entity.",
-          "allOf": [
-            {
-              "$ref": "#/definitions/CodeContainer"
-            }
-          ],
+          "$ref": "#/definitions/CodeContainer",
           "x-ms-client-flatten": true
         },
         "systemData": {
           "description": "System data associated with resource provider",
-          "allOf": [
-            {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
-            }
-          ],
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
           "readOnly": true
         }
       },
@@ -3213,11 +3138,7 @@
           "type": "string"
         },
         "innerError": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/InnerErrorResponse"
-            }
-          ]
+          "$ref": "#/definitions/InnerErrorResponse"
         }
       },
       "additionalProperties": false
@@ -3261,11 +3182,7 @@
           }
         },
         "innerError": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/InnerErrorResponse"
-            }
-          ]
+          "$ref": "#/definitions/InnerErrorResponse"
         }
       },
       "additionalProperties": false
@@ -3316,11 +3233,7 @@
         },
         "assetPath": {
           "description": "Details of asset path in the datastore.",
-          "allOf": [
-            {
-              "$ref": "#/definitions/AssetPath"
-            }
-          ]
+          "$ref": "#/definitions/AssetPath"
         },
         "generatedBy": {
           "description": "How this asset was generated",
@@ -3354,8 +3267,7 @@
           "type": "object",
           "additionalProperties": {
             "type": "string"
-          },
-          "x-ms-client-flatten": true
+          }
         }
       },
       "additionalProperties": false
@@ -3384,20 +3296,12 @@
         },
         "properties": {
           "description": "Additional attributes of the entity.",
-          "allOf": [
-            {
-              "$ref": "#/definitions/CodeVersion"
-            }
-          ],
+          "$ref": "#/definitions/CodeVersion",
           "x-ms-client-flatten": true
         },
         "systemData": {
           "description": "System data associated with resource provider",
-          "allOf": [
-            {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
-            }
-          ],
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
           "readOnly": true
         }
       },
@@ -3428,8 +3332,7 @@
           "type": "object",
           "additionalProperties": {
             "type": "string"
-          },
-          "x-ms-client-flatten": true
+          }
         },
         "tags": {
           "type": "object",
@@ -3467,20 +3370,12 @@
         },
         "properties": {
           "description": "Additional attributes of the entity.",
-          "allOf": [
-            {
-              "$ref": "#/definitions/DataContainer"
-            }
-          ],
+          "$ref": "#/definitions/DataContainer",
           "x-ms-client-flatten": true
         },
         "systemData": {
           "description": "System data associated with resource provider",
-          "allOf": [
-            {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
-            }
-          ],
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
           "readOnly": true
         }
       },
@@ -3661,43 +3556,23 @@
         },
         "accountKey": {
           "description": "Storage account key authentication.",
-          "allOf": [
-            {
-              "$ref": "#/definitions/AccountKeySection"
-            }
-          ]
+          "$ref": "#/definitions/AccountKeySection"
         },
         "certificate": {
           "description": "Service principal certificate authentication.",
-          "allOf": [
-            {
-              "$ref": "#/definitions/CertificateSection"
-            }
-          ]
+          "$ref": "#/definitions/CertificateSection"
         },
         "sas": {
           "description": "Storage container SAS token authentication.",
-          "allOf": [
-            {
-              "$ref": "#/definitions/SasSection"
-            }
-          ]
+          "$ref": "#/definitions/SasSection"
         },
         "servicePrincipal": {
           "description": "Service principal password authentication.",
-          "allOf": [
-            {
-              "$ref": "#/definitions/ServicePrincipalSection"
-            }
-          ]
+          "$ref": "#/definitions/ServicePrincipalSection"
         },
         "sqlAdmin": {
           "description": "SQL user/password authentication.",
-          "allOf": [
-            {
-              "$ref": "#/definitions/SqlAdminSection"
-            }
-          ]
+          "$ref": "#/definitions/SqlAdminSection"
         }
       },
       "additionalProperties": false
@@ -3711,11 +3586,7 @@
       "properties": {
         "credentials": {
           "description": "Azure Data Lake credentials.",
-          "allOf": [
-            {
-              "$ref": "#/definitions/DatastoreCredentials"
-            }
-          ]
+          "$ref": "#/definitions/DatastoreCredentials"
         },
         "storeName": {
           "description": "Azure Data Lake store name.",
@@ -3737,11 +3608,7 @@
       "properties": {
         "credentials": {
           "description": "Azure SQL database credentials.",
-          "allOf": [
-            {
-              "$ref": "#/definitions/DatastoreCredentials"
-            }
-          ]
+          "$ref": "#/definitions/DatastoreCredentials"
         },
         "databaseName": {
           "description": "Azure SQL database name.",
@@ -3803,11 +3670,7 @@
         },
         "credentials": {
           "description": "Azure SQL database credentials.",
-          "allOf": [
-            {
-              "$ref": "#/definitions/DatastoreCredentials"
-            }
-          ]
+          "$ref": "#/definitions/DatastoreCredentials"
         },
         "databaseName": {
           "description": "Azure SQL database name.",
@@ -3861,11 +3724,7 @@
       "properties": {
         "credentials": {
           "description": "Azure SQL database credentials.",
-          "allOf": [
-            {
-              "$ref": "#/definitions/DatastoreCredentials"
-            }
-          ]
+          "$ref": "#/definitions/DatastoreCredentials"
         },
         "databaseName": {
           "description": "Azure SQL database name.",
@@ -3946,11 +3805,7 @@
         },
         "credentials": {
           "description": "Storage account credentials.",
-          "allOf": [
-            {
-              "$ref": "#/definitions/DatastoreCredentials"
-            }
-          ]
+          "$ref": "#/definitions/DatastoreCredentials"
         },
         "endpoint": {
           "description": "Azure cloud endpoint for the storage account.",
@@ -4029,51 +3884,27 @@
         },
         "azureDataLake": {
           "description": "Azure Data Lake (Gen1/2) storage information.",
-          "allOf": [
-            {
-              "$ref": "#/definitions/AzureDataLakeSection"
-            }
-          ]
+          "$ref": "#/definitions/AzureDataLakeSection"
         },
         "azureMySql": {
           "description": "Azure Database for MySQL information.",
-          "allOf": [
-            {
-              "$ref": "#/definitions/AzureMySqlSection"
-            }
-          ]
+          "$ref": "#/definitions/AzureMySqlSection"
         },
         "azurePostgreSql": {
           "description": "Azure Database for PostgreSQL information.",
-          "allOf": [
-            {
-              "$ref": "#/definitions/AzurePostgreSqlSection"
-            }
-          ]
+          "$ref": "#/definitions/AzurePostgreSqlSection"
         },
         "azureSqlDatabase": {
           "description": "Azure SQL Database information.",
-          "allOf": [
-            {
-              "$ref": "#/definitions/AzureSqlDatabaseSection"
-            }
-          ]
+          "$ref": "#/definitions/AzureSqlDatabaseSection"
         },
         "azureStorage": {
           "description": "Azure storage account (blobs, files) information.",
-          "allOf": [
-            {
-              "$ref": "#/definitions/AzureStorageSection"
-            }
-          ]
+          "$ref": "#/definitions/AzureStorageSection"
         },
         "glusterFs": {
           "description": "GlusterFS volume information.",
-          "allOf": [
-            {
-              "$ref": "#/definitions/GlusterFsSection"
-            }
-          ]
+          "$ref": "#/definitions/GlusterFsSection"
         }
       },
       "additionalProperties": false
@@ -4111,11 +3942,7 @@
       "properties": {
         "contents": {
           "description": "Reference to the datastore storage contents.",
-          "allOf": [
-            {
-              "$ref": "#/definitions/DatastoreContents"
-            }
-          ]
+          "$ref": "#/definitions/DatastoreContents"
         },
         "hasBeenValidated": {
           "description": "Whether the service has validated access to the datastore with the provided credentials.",
@@ -4128,18 +3955,13 @@
         },
         "linkedInfo": {
           "description": "Information about the datastore origin, if linked.",
-          "allOf": [
-            {
-              "$ref": "#/definitions/LinkedInfo"
-            }
-          ]
+          "$ref": "#/definitions/LinkedInfo"
         },
         "properties": {
           "type": "object",
           "additionalProperties": {
             "type": "string"
-          },
-          "x-ms-client-flatten": true
+          }
         },
         "description": {
           "description": "The asset description text.",
@@ -4179,20 +4001,12 @@
         },
         "properties": {
           "description": "Additional attributes of the entity.",
-          "allOf": [
-            {
-              "$ref": "#/definitions/DatastoreProperties"
-            }
-          ],
+          "$ref": "#/definitions/DatastoreProperties",
           "x-ms-client-flatten": true
         },
         "systemData": {
           "description": "System data associated with resource provider",
-          "allOf": [
-            {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
-            }
-          ],
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
           "readOnly": true
         }
       },
@@ -4238,11 +4052,7 @@
         },
         "assetPath": {
           "description": "Details of asset path in the datastore.",
-          "allOf": [
-            {
-              "$ref": "#/definitions/AssetPath"
-            }
-          ]
+          "$ref": "#/definitions/AssetPath"
         },
         "generatedBy": {
           "description": "How this asset was generated",
@@ -4276,8 +4086,7 @@
           "type": "object",
           "additionalProperties": {
             "type": "string"
-          },
-          "x-ms-client-flatten": true
+          }
         }
       },
       "additionalProperties": false
@@ -4306,20 +4115,12 @@
         },
         "properties": {
           "description": "Additional attributes of the entity.",
-          "allOf": [
-            {
-              "$ref": "#/definitions/DataVersion"
-            }
-          ],
+          "$ref": "#/definitions/DataVersion",
           "x-ms-client-flatten": true
         },
         "systemData": {
           "description": "System data associated with resource provider",
-          "allOf": [
-            {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
-            }
-          ],
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
           "readOnly": true
         }
       },
@@ -4350,8 +4151,7 @@
           "type": "object",
           "additionalProperties": {
             "type": "string"
-          },
-          "x-ms-client-flatten": true
+          }
         },
         "tags": {
           "type": "object",
@@ -4389,20 +4189,12 @@
         },
         "properties": {
           "description": "Additional attributes of the entity.",
-          "allOf": [
-            {
-              "$ref": "#/definitions/EnvironmentContainer"
-            }
-          ],
+          "$ref": "#/definitions/EnvironmentContainer",
           "x-ms-client-flatten": true
         },
         "systemData": {
           "description": "System data associated with resource provider",
-          "allOf": [
-            {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
-            }
-          ],
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
           "readOnly": true
         }
       },
@@ -4458,20 +4250,18 @@
       "required": [
         "dockerImageUri"
       ],
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/DockerSpecification"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "dockerImageUri": {
-              "description": "Image name of a custom base image.\r\n<seealso href=\"https://docs.microsoft.com/en-us/azure/machine-learning/how-to-deploy-custom-docker-image#use-a-custom-base-image\" />",
-              "type": "string"
-            }
-          }
         }
       ],
+      "properties": {
+        "dockerImageUri": {
+          "description": "Image name of a custom base image.\r\n<seealso href=\"https://docs.microsoft.com/en-us/azure/machine-learning/how-to-deploy-custom-docker-image#use-a-custom-base-image\" />",
+          "type": "string"
+        }
+      },
       "x-ms-discriminator-value": "Image",
       "additionalProperties": false
     },
@@ -4480,24 +4270,22 @@
       "required": [
         "dockerfile"
       ],
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/DockerSpecification"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "dockerfile": {
-              "description": "Docker command line instructions to assemble an image.\r\n<seealso href=\"https://repo2docker.readthedocs.io/en/latest/config_files.html#dockerfile-advanced-environments\" />",
-              "type": "string"
-            },
-            "context": {
-              "description": "Path to a snapshot of the Docker Context. This property is only valid if Dockerfile is specified.\r\nThe path is relative to AssetPaths which must contain a single Blob URI value.\r\nMicrosoft.MachineLearning.ManagementFrontEnd.Contracts.Assets.Asset.AssetPath<seealso href=\"https://docs.docker.com/engine/context/working-with-contexts/\" />",
-              "type": "string"
-            }
-          }
         }
       ],
+      "properties": {
+        "dockerfile": {
+          "description": "Docker command line instructions to assemble an image.\r\n<seealso href=\"https://repo2docker.readthedocs.io/en/latest/config_files.html#dockerfile-advanced-environments\" />",
+          "type": "string"
+        },
+        "context": {
+          "description": "Path to a snapshot of the Docker Context. This property is only valid if Dockerfile is specified.\r\nThe path is relative to AssetPaths which must contain a single Blob URI value.\r\nMicrosoft.MachineLearning.ManagementFrontEnd.Contracts.Assets.Asset.AssetPath<seealso href=\"https://docs.docker.com/engine/context/working-with-contexts/\" />",
+          "type": "string"
+        }
+      },
       "x-ms-discriminator-value": "Build",
       "additionalProperties": false
     },
@@ -4531,11 +4319,7 @@
         },
         "assetPath": {
           "description": "Details of asset path in the datastore.",
-          "allOf": [
-            {
-              "$ref": "#/definitions/AssetPath"
-            }
-          ]
+          "$ref": "#/definitions/AssetPath"
         },
         "generatedBy": {
           "description": "How this asset was generated",
@@ -4569,8 +4353,7 @@
           "type": "object",
           "additionalProperties": {
             "type": "string"
-          },
-          "x-ms-client-flatten": true
+          }
         }
       },
       "additionalProperties": false
@@ -4599,20 +4382,12 @@
         },
         "properties": {
           "description": "Additional attributes of the entity.",
-          "allOf": [
-            {
-              "$ref": "#/definitions/EnvironmentSpecificationVersion"
-            }
-          ],
+          "$ref": "#/definitions/EnvironmentSpecificationVersion",
           "x-ms-client-flatten": true
         },
         "systemData": {
           "description": "System data associated with resource provider",
-          "allOf": [
-            {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
-            }
-          ],
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
           "readOnly": true
         }
       },
@@ -4634,6 +4409,178 @@
           "type": "string"
         }
       },
+      "additionalProperties": false
+    },
+    "ComputeBinding": {
+      "description": "Compute binding definition.",
+      "type": "object",
+      "properties": {
+        "computeId": {
+          "description": "Resource ID of the compute resource.",
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "nodeCount": {
+          "format": "int32",
+          "description": "Number of nodes.",
+          "type": "integer",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "isLocal": {
+          "description": "Set to true for jobs running on local compute.",
+          "type": "boolean",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "JobOutput": {
+      "type": "object",
+      "properties": {
+        "datastoreId": {
+          "description": "ARM ID of the datastore where the job logs and artifacts are stored, or null for the default container (\"azureml\") in the workspace's storage account.",
+          "type": "string",
+          "readOnly": true
+        },
+        "path": {
+          "description": "Path within the datastore to the job logs and artifacts.",
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "JobBase": {
+      "description": "Job base definition",
+      "required": [
+        "jobType"
+      ],
+      "type": "object",
+      "properties": {
+        "jobType": {
+          "description": "Specifies the type of job.",
+          "enum": [
+            "Command",
+            "Sweep",
+            "Labeling",
+            "Pipeline",
+            "Data",
+            "AutoML"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "JobType",
+            "modelAsString": true
+          },
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "provisioningState": {
+          "enum": [
+            "Succeeded",
+            "Failed",
+            "Canceled",
+            "InProgress"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "JobProvisioningState",
+            "modelAsString": true
+          }
+        },
+        "interactionEndpoints": {
+          "description": "Dictionary of endpoint URIs, keyed by enumerated job endpoints.\r\nFor local jobs, a job endpoint will have a value of FileStreamObject.",
+          "type": "object",
+          "properties": {
+            "Tracking": {
+              "format": "uri",
+              "type": "string"
+            },
+            "Studio": {
+              "format": "uri",
+              "type": "string"
+            },
+            "Grafana": {
+              "format": "uri",
+              "type": "string"
+            },
+            "Tensorboard": {
+              "format": "uri",
+              "type": "string"
+            },
+            "Local": {
+              "format": "uri",
+              "type": "string"
+            }
+          },
+          "readOnly": true
+        },
+        "description": {
+          "description": "The asset description text.",
+          "type": "string"
+        },
+        "tags": {
+          "description": "Tag dictionary. Tags can be added, removed, and updated.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "description": "The asset property dictionary.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "discriminator": "jobType",
+      "additionalProperties": false
+    },
+    "ComputeJobBase": {
+      "description": "Compute job base definition",
+      "required": [
+        "computeBinding",
+        "jobType"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/JobBase"
+        }
+      ],
+      "properties": {
+        "experimentName": {
+          "description": "The name of the experiment the job belongs to. If not set, the job is placed in the \"Default\" experiment.",
+          "type": "string"
+        },
+        "computeBinding": {
+          "description": "Compute binding for the job.",
+          "$ref": "#/definitions/ComputeBinding"
+        },
+        "output": {
+          "description": "Location of the job output logs and artifacts.",
+          "$ref": "#/definitions/JobOutput",
+          "readOnly": true
+        },
+        "priority": {
+          "format": "int32",
+          "description": "Job priority for scheduling policy. Only applies to AMLCompute.\r\nPrivate preview  is only for whitelisted customers",
+          "type": "integer"
+        }
+      },
+      "discriminator": "jobType",
       "additionalProperties": false
     },
     "CodeConfiguration": {
@@ -4731,62 +4678,56 @@
       "additionalProperties": false
     },
     "TensorFlow": {
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/DistributionConfiguration"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "workerCount": {
-              "format": "int32",
-              "description": "Number of workers. Overwrites the node count in compute binding.",
-              "type": "integer"
-            },
-            "parameterServerCount": {
-              "format": "int32",
-              "type": "integer"
-            }
-          }
         }
       ],
+      "properties": {
+        "workerCount": {
+          "format": "int32",
+          "description": "Number of workers. Overwrites the node count in compute binding.",
+          "type": "integer"
+        },
+        "parameterServerCount": {
+          "format": "int32",
+          "type": "integer"
+        }
+      },
       "x-ms-discriminator-value": "TensorFlow",
       "additionalProperties": false
     },
     "Mpi": {
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/DistributionConfiguration"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "processCountPerInstance": {
-              "format": "int32",
-              "type": "integer"
-            }
-          }
         }
       ],
+      "properties": {
+        "processCountPerInstance": {
+          "format": "int32",
+          "type": "integer"
+        }
+      },
       "x-ms-discriminator-value": "Mpi",
       "additionalProperties": false
     },
     "PyTorch": {
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/DistributionConfiguration"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "processCount": {
-              "format": "int32",
-              "description": "Total process count for the distributed job.",
-              "type": "integer"
-            }
-          }
         }
       ],
+      "properties": {
+        "processCount": {
+          "format": "int32",
+          "description": "Total process count for the distributed job.",
+          "type": "integer"
+        }
+      },
       "x-ms-discriminator-value": "PyTorch",
       "additionalProperties": false
     },
@@ -4818,42 +4759,38 @@
       "additionalProperties": false
     },
     "AmlTokenConfiguration": {
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/IdentityConfiguration"
-        },
-        {
-          "type": "object"
         }
       ],
       "x-ms-discriminator-value": "AMLToken",
       "additionalProperties": false
     },
     "ManagedIdentityConfiguration": {
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/IdentityConfiguration"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "clientId": {
-              "format": "uuid",
-              "description": "Specifies a user-assigned identity by client ID. For system-assigned, do not set this field.",
-              "type": "string"
-            },
-            "objectId": {
-              "format": "uuid",
-              "description": "Specifies a user-assigned identity by object ID. For system-assigned, do not set this field.",
-              "type": "string"
-            },
-            "msiResourceId": {
-              "description": "Specifies a user-assigned identity by resource ID. For system-assigned, do not set this field.",
-              "type": "string"
-            }
-          }
         }
       ],
+      "properties": {
+        "clientId": {
+          "format": "uuid",
+          "description": "Specifies a user-assigned identity by client ID. For system-assigned, do not set this field.",
+          "type": "string"
+        },
+        "objectId": {
+          "format": "uuid",
+          "description": "Specifies a user-assigned identity by object ID. For system-assigned, do not set this field.",
+          "type": "string"
+        },
+        "msiResourceId": {
+          "description": "Specifies a user-assigned identity by resource ID. For system-assigned, do not set this field.",
+          "type": "string"
+        }
+      },
       "x-ms-discriminator-value": "Managed",
       "additionalProperties": false
     },
@@ -4861,79 +4798,34 @@
       "required": [
         "secret"
       ],
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/IdentityConfiguration"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "secret": {
-              "type": "string"
-            }
-          }
         }
       ],
+      "properties": {
+        "secret": {
+          "type": "string"
+        }
+      },
       "x-ms-discriminator-value": "ServicePrincipal",
       "additionalProperties": false
     },
-    "ComputeBinding": {
-      "description": "Compute binding definition.",
-      "type": "object",
-      "properties": {
-        "computeId": {
-          "description": "Resource ID of the compute resource.",
-          "type": "string",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ]
-        },
-        "nodeCount": {
-          "format": "int32",
-          "description": "Number of nodes.",
-          "type": "integer",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ]
-        },
-        "isLocal": {
-          "description": "Set to true for jobs running on local compute.",
-          "type": "boolean",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ]
-        }
-      },
-      "additionalProperties": false
-    },
-    "JobOutput": {
-      "type": "object",
-      "properties": {
-        "datastoreId": {
-          "description": "ARM ID of the datastore where the job logs and artifacts are stored, or null for the default container (\"azureml\") in the workspace's storage account.",
-          "type": "string",
-          "readOnly": true
-        },
-        "path": {
-          "description": "Path within the datastore to the job logs and artifacts.",
-          "type": "string",
-          "readOnly": true
-        }
-      },
-      "additionalProperties": false
-    },
-    "JobBase": {
-      "description": "Job base definition",
+    "CommandJob": {
+      "description": "Code Job definition",
       "required": [
-        "jobType"
+        "codeConfiguration",
+        "computeBinding"
       ],
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ComputeJobBase"
+        }
+      ],
       "properties": {
         "jobType": {
-          "description": "Specifies the type of job.",
           "enum": [
             "Command",
             "Sweep",
@@ -4943,211 +4835,69 @@
             "AutoML"
           ],
           "type": "string",
+          "readOnly": true,
           "x-ms-enum": {
             "name": "JobType",
             "modelAsString": true
-          },
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ]
+          }
         },
-        "provisioningState": {
+        "status": {
+          "description": "Status of the job.",
           "enum": [
-            "Succeeded",
+            "NotStarted",
+            "Starting",
+            "Provisioning",
+            "Preparing",
+            "Queued",
+            "Running",
+            "Finalizing",
+            "CancelRequested",
+            "Completed",
             "Failed",
-            "Canceled"
+            "Canceled",
+            "NotResponding",
+            "Paused"
           ],
           "type": "string",
+          "readOnly": true,
           "x-ms-enum": {
-            "name": "JobProvisioningState",
+            "name": "JobStatus",
             "modelAsString": true
           }
         },
-        "interactionEndpoints": {
-          "description": "Dictionary of endpoint URIs, keyed by enumerated job endpoints.\r\nFor local jobs, a job endpoint will have a value of FileStreamObject.",
-          "type": "object",
-          "properties": {
-            "Tracking": {
-              "format": "uri",
-              "type": "string"
-            },
-            "Studio": {
-              "format": "uri",
-              "type": "string"
-            },
-            "Grafana": {
-              "format": "uri",
-              "type": "string"
-            },
-            "Tensorboard": {
-              "format": "uri",
-              "type": "string"
-            },
-            "Local": {
-              "format": "uri",
-              "type": "string"
-            }
-          },
-          "readOnly": true
+        "maxRunDurationSeconds": {
+          "format": "int64",
+          "description": "The max run duration in seconds, after which the job will be cancelled.",
+          "type": "integer"
         },
-        "description": {
-          "description": "The asset description text.",
+        "codeConfiguration": {
+          "description": "Code configuration of the job.",
+          "$ref": "#/definitions/CodeConfiguration"
+        },
+        "environmentId": {
+          "description": "Environment specification of the job.",
           "type": "string"
         },
-        "tags": {
-          "description": "Tag dictionary. Tags can be added, removed, and updated.",
+        "dataBindings": {
+          "description": "Mapping of data bindings used in the job.",
           "type": "object",
           "additionalProperties": {
-            "type": "string"
+            "$ref": "#/definitions/DataBinding"
           }
         },
-        "properties": {
-          "description": "The asset property dictionary.",
+        "distributionConfiguration": {
+          "$ref": "#/definitions/DistributionConfiguration"
+        },
+        "identityConfiguration": {
+          "$ref": "#/definitions/IdentityConfiguration"
+        },
+        "parameters": {
+          "description": "Input parameters.",
           "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "x-ms-client-flatten": true
+          "additionalProperties": {},
+          "readOnly": true
         }
       },
-      "discriminator": "jobType",
-      "additionalProperties": false
-    },
-    "ComputeJobBase": {
-      "description": "Compute job base definition",
-      "required": [
-        "computeBinding",
-        "jobType"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/JobBase"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "experimentName": {
-              "description": "The name of the experiment the job belongs to. If not set, the job is placed in the \"Default\" experiment.",
-              "type": "string"
-            },
-            "computeBinding": {
-              "description": "Compute binding for the job.",
-              "allOf": [
-                {
-                  "$ref": "#/definitions/ComputeBinding"
-                }
-              ]
-            },
-            "output": {
-              "description": "Location of the job output logs and artifacts.",
-              "allOf": [
-                {
-                  "$ref": "#/definitions/JobOutput"
-                }
-              ],
-              "readOnly": true
-            }
-          }
-        }
-      ],
-      "discriminator": "jobType",
-      "additionalProperties": false
-    },
-    "CommandJob": {
-      "description": "Code Job definition",
-      "required": [
-        "codeConfiguration",
-        "computeBinding",
-        "jobType"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/ComputeJobBase"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "jobType": {
-              "enum": [
-                "Command",
-                "Sweep",
-                "Labeling",
-                "Pipeline",
-                "Data",
-                "AutoML"
-              ],
-              "type": "string",
-              "readOnly": true,
-              "x-ms-enum": {
-                "name": "JobType",
-                "modelAsString": true
-              }
-            },
-            "status": {
-              "description": "Status of the job.",
-              "enum": [
-                "NotStarted",
-                "Starting",
-                "Provisioning",
-                "Preparing",
-                "Queued",
-                "Running",
-                "Finalizing",
-                "CancelRequested",
-                "Completed",
-                "Failed",
-                "Canceled",
-                "NotResponding",
-                "Paused"
-              ],
-              "type": "string",
-              "readOnly": true,
-              "x-ms-enum": {
-                "name": "JobStatus",
-                "modelAsString": true
-              }
-            },
-            "maxRunDurationSeconds": {
-              "format": "int64",
-              "description": "The max run duration in seconds, after which the job will be cancelled.",
-              "type": "integer"
-            },
-            "codeConfiguration": {
-              "description": "Code configuration of the job.",
-              "allOf": [
-                {
-                  "$ref": "#/definitions/CodeConfiguration"
-                }
-              ]
-            },
-            "environmentId": {
-              "description": "Environment specification of the job.",
-              "type": "string"
-            },
-            "dataBindings": {
-              "description": "Mapping of data bindings used in the job.",
-              "type": "object",
-              "additionalProperties": {
-                "$ref": "#/definitions/DataBinding"
-              }
-            },
-            "distributionConfiguration": {
-              "$ref": "#/definitions/DistributionConfiguration"
-            },
-            "identityConfiguration": {
-              "$ref": "#/definitions/IdentityConfiguration"
-            },
-            "parameters": {
-              "description": "Input parameters.",
-              "type": "object",
-              "additionalProperties": {},
-              "readOnly": true
-            }
-          }
-        }
-      ],
-      "discriminator": "jobType",
       "x-ms-discriminator-value": "Command",
       "additionalProperties": false
     },
@@ -5213,35 +4963,31 @@
     },
     "BanditPolicyConfiguration": {
       "description": "Defines an early termination policy based on slack criteria, and a frequency and delay interval for evaluation",
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/EarlyTerminationPolicyConfiguration"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "slackFactor": {
-              "format": "float",
-              "type": "number"
-            },
-            "slackAmount": {
-              "format": "float",
-              "type": "number"
-            }
-          }
         }
       ],
+      "properties": {
+        "slackFactor": {
+          "format": "float",
+          "type": "number"
+        },
+        "slackAmount": {
+          "format": "float",
+          "type": "number"
+        }
+      },
       "x-ms-discriminator-value": "Bandit",
       "additionalProperties": false
     },
     "MedianStoppingPolicyConfiguration": {
       "description": "Defines an early termination policy based on running averages of the primary metric of all runs",
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/EarlyTerminationPolicyConfiguration"
-        },
-        {
-          "type": "object"
         }
       ],
       "x-ms-discriminator-value": "MedianStopping",
@@ -5249,23 +4995,21 @@
     },
     "TruncationSelectionPolicyConfiguration": {
       "description": "Defines an early termination policy that cancels a given percentage of runs at each evaluation interval.",
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/EarlyTerminationPolicyConfiguration"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "truncationPercentage": {
-              "format": "int32",
-              "type": "integer"
-            },
-            "excludeFinishedJobs": {
-              "type": "boolean"
-            }
-          }
         }
       ],
+      "properties": {
+        "truncationPercentage": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "excludeFinishedJobs": {
+          "type": "boolean"
+        }
+      },
       "x-ms-discriminator-value": "TruncationSelection",
       "additionalProperties": false
     },
@@ -5321,11 +5065,7 @@
       "properties": {
         "codeConfiguration": {
           "description": "Code configuration of the job.",
-          "allOf": [
-            {
-              "$ref": "#/definitions/CodeConfiguration"
-            }
-          ]
+          "$ref": "#/definitions/CodeConfiguration"
         },
         "environmentId": {
           "description": "Environment id of the job.",
@@ -5357,85 +5097,67 @@
         "evaluationConfiguration",
         "parameterSamplingConfiguration"
       ],
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/ComputeJobBase"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "jobType": {
-              "enum": [
-                "Command",
-                "Sweep",
-                "Labeling",
-                "Pipeline",
-                "Data",
-                "AutoML"
-              ],
-              "type": "string",
-              "readOnly": true,
-              "x-ms-enum": {
-                "name": "JobType",
-                "modelAsString": true
-              }
-            },
-            "status": {
-              "description": "The status of a job.",
-              "enum": [
-                "NotStarted",
-                "Starting",
-                "Provisioning",
-                "Preparing",
-                "Queued",
-                "Running",
-                "Finalizing",
-                "CancelRequested",
-                "Completed",
-                "Failed",
-                "Canceled",
-                "NotResponding",
-                "Paused"
-              ],
-              "type": "string",
-              "readOnly": true,
-              "x-ms-enum": {
-                "name": "JobStatus",
-                "modelAsString": true
-              }
-            },
-            "parameterSamplingConfiguration": {
-              "description": "class for all hyperparameter sampling algorithms",
-              "allOf": [
-                {
-                  "$ref": "#/definitions/ParameterSamplingConfiguration"
-                }
-              ]
-            },
-            "terminationConfiguration": {
-              "allOf": [
-                {
-                  "$ref": "#/definitions/TerminationConfiguration"
-                }
-              ]
-            },
-            "evaluationConfiguration": {
-              "allOf": [
-                {
-                  "$ref": "#/definitions/EvaluationConfiguration"
-                }
-              ]
-            },
-            "trialComponent": {
-              "allOf": [
-                {
-                  "$ref": "#/definitions/TrialComponent"
-                }
-              ]
-            }
-          }
         }
       ],
+      "properties": {
+        "jobType": {
+          "enum": [
+            "Command",
+            "Sweep",
+            "Labeling",
+            "Pipeline",
+            "Data",
+            "AutoML"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "JobType",
+            "modelAsString": true
+          }
+        },
+        "status": {
+          "description": "The status of a job.",
+          "enum": [
+            "NotStarted",
+            "Starting",
+            "Provisioning",
+            "Preparing",
+            "Queued",
+            "Running",
+            "Finalizing",
+            "CancelRequested",
+            "Completed",
+            "Failed",
+            "Canceled",
+            "NotResponding",
+            "Paused"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "JobStatus",
+            "modelAsString": true
+          }
+        },
+        "parameterSamplingConfiguration": {
+          "description": "class for all hyperparameter sampling algorithms",
+          "$ref": "#/definitions/ParameterSamplingConfiguration"
+        },
+        "terminationConfiguration": {
+          "$ref": "#/definitions/TerminationConfiguration"
+        },
+        "evaluationConfiguration": {
+          "$ref": "#/definitions/EvaluationConfiguration"
+        },
+        "trialComponent": {
+          "$ref": "#/definitions/TrialComponent"
+        }
+      },
       "x-ms-discriminator-value": "Sweep",
       "additionalProperties": false
     },
@@ -5556,11 +5278,7 @@
       "properties": {
         "inferencingComputeBinding": {
           "description": "AML compute binding used in inferencing.",
-          "allOf": [
-            {
-              "$ref": "#/definitions/ComputeBinding"
-            }
-          ],
+          "$ref": "#/definitions/ComputeBinding",
           "x-ms-mutability": [
             "create",
             "read",
@@ -5569,11 +5287,7 @@
         },
         "trainingComputeBinding": {
           "description": "AML compute binding used in training.",
-          "allOf": [
-            {
-              "$ref": "#/definitions/ComputeBinding"
-            }
-          ],
+          "$ref": "#/definitions/ComputeBinding",
           "x-ms-mutability": [
             "create",
             "read",
@@ -5616,55 +5330,51 @@
     },
     "LabelingJobImageProperties": {
       "description": "Properties of a labeling job for image data",
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/LabelingJobMediaProperties"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "annotationType": {
-              "description": "Annotation type of image labeling job.",
-              "enum": [
-                "Classification",
-                "BoundingBox",
-                "InstanceSegmentation"
-              ],
-              "type": "string",
-              "x-ms-enum": {
-                "name": "ImageAnnotationType",
-                "modelAsString": true
-              }
-            }
-          }
         }
       ],
+      "properties": {
+        "annotationType": {
+          "description": "Annotation type of image labeling job.",
+          "enum": [
+            "Classification",
+            "BoundingBox",
+            "InstanceSegmentation"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ImageAnnotationType",
+            "modelAsString": true
+          }
+        }
+      },
       "x-ms-discriminator-value": "Image",
       "additionalProperties": false
     },
     "LabelingJobTextProperties": {
       "description": "Properties of a labeling job for text data",
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/LabelingJobMediaProperties"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "annotationType": {
-              "description": "Annotation type of text labeling job.",
-              "enum": [
-                "Classification"
-              ],
-              "type": "string",
-              "x-ms-enum": {
-                "name": "TextAnnotationType",
-                "modelAsString": true
-              }
-            }
-          }
         }
       ],
+      "properties": {
+        "annotationType": {
+          "description": "Annotation type of text labeling job.",
+          "enum": [
+            "Classification"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "TextAnnotationType",
+            "modelAsString": true
+          }
+        }
+      },
       "x-ms-discriminator-value": "Text",
       "additionalProperties": false
     },
@@ -5762,103 +5472,85 @@
     },
     "LabelingJob": {
       "description": "Labeling job definition",
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/JobBase"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "labelCategories": {
-              "description": "Label categories of the job.",
-              "type": "object",
-              "additionalProperties": {
-                "$ref": "#/definitions/LabelCategory"
-              }
-            },
-            "jobInstructions": {
-              "description": "Labeling instructions of the job.",
-              "allOf": [
-                {
-                  "$ref": "#/definitions/LabelingJobInstructions"
-                }
-              ]
-            },
-            "datasetConfiguration": {
-              "description": "Configuration of dataset used in the job.",
-              "allOf": [
-                {
-                  "$ref": "#/definitions/LabelingDatasetConfiguration"
-                }
-              ]
-            },
-            "mlAssistConfiguration": {
-              "description": "Configuration of MLAssist feature in the job.",
-              "allOf": [
-                {
-                  "$ref": "#/definitions/MLAssistConfiguration"
-                }
-              ]
-            },
-            "labelingJobMediaProperties": {
-              "$ref": "#/definitions/LabelingJobMediaProperties"
-            },
-            "projectId": {
-              "format": "uuid",
-              "description": "Internal id of the job(Previously called project).",
-              "type": "string",
-              "readOnly": true
-            },
-            "status": {
-              "description": "Status of the job.",
-              "enum": [
-                "NotStarted",
-                "Starting",
-                "Provisioning",
-                "Preparing",
-                "Queued",
-                "Running",
-                "Finalizing",
-                "CancelRequested",
-                "Completed",
-                "Failed",
-                "Canceled",
-                "NotResponding",
-                "Paused"
-              ],
-              "type": "string",
-              "readOnly": true,
-              "x-ms-enum": {
-                "name": "JobStatus",
-                "modelAsString": true
-              }
-            },
-            "progressMetrics": {
-              "description": "Progress metrics of the job.",
-              "allOf": [
-                {
-                  "$ref": "#/definitions/ProgressMetrics"
-                }
-              ],
-              "readOnly": true
-            },
-            "statusMessages": {
-              "description": "Status messages of the job.",
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/StatusMessage"
-              },
-              "readOnly": true
-            },
-            "createdTimeUtc": {
-              "format": "date-time",
-              "description": "Created time of the job in UTC timezone.",
-              "type": "string",
-              "readOnly": true
-            }
-          }
         }
       ],
+      "properties": {
+        "labelCategories": {
+          "description": "Label categories of the job.",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/LabelCategory"
+          }
+        },
+        "jobInstructions": {
+          "description": "Labeling instructions of the job.",
+          "$ref": "#/definitions/LabelingJobInstructions"
+        },
+        "datasetConfiguration": {
+          "description": "Configuration of dataset used in the job.",
+          "$ref": "#/definitions/LabelingDatasetConfiguration"
+        },
+        "mlAssistConfiguration": {
+          "description": "Configuration of MLAssist feature in the job.",
+          "$ref": "#/definitions/MLAssistConfiguration"
+        },
+        "labelingJobMediaProperties": {
+          "$ref": "#/definitions/LabelingJobMediaProperties"
+        },
+        "projectId": {
+          "format": "uuid",
+          "description": "Internal id of the job(Previously called project).",
+          "type": "string",
+          "readOnly": true
+        },
+        "status": {
+          "description": "Status of the job.",
+          "enum": [
+            "NotStarted",
+            "Starting",
+            "Provisioning",
+            "Preparing",
+            "Queued",
+            "Running",
+            "Finalizing",
+            "CancelRequested",
+            "Completed",
+            "Failed",
+            "Canceled",
+            "NotResponding",
+            "Paused"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "JobStatus",
+            "modelAsString": true
+          }
+        },
+        "progressMetrics": {
+          "description": "Progress metrics of the job.",
+          "$ref": "#/definitions/ProgressMetrics",
+          "readOnly": true
+        },
+        "statusMessages": {
+          "description": "Status messages of the job.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/StatusMessage"
+          },
+          "readOnly": true
+        },
+        "createdTimeUtc": {
+          "format": "date-time",
+          "description": "Created time of the job in UTC timezone.",
+          "type": "string",
+          "readOnly": true
+        }
+      },
       "x-ms-discriminator-value": "Labeling",
       "additionalProperties": false
     },
@@ -5889,11 +5581,7 @@
         },
         "systemData": {
           "description": "System data associated with resource provider",
-          "allOf": [
-            {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
-            }
-          ],
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
           "readOnly": true
         }
       },
@@ -5941,21 +5629,12 @@
         },
         "properties": {
           "description": "Additional attributes of the entity.",
-          "allOf": [
-            {
-              "$ref": "#/definitions/LabelingJob"
-            }
-          ],
-          "x-ms-discriminator-value": "Labeling",
+          "$ref": "#/definitions/LabelingJob",
           "x-ms-client-flatten": true
         },
         "systemData": {
           "description": "System data associated with resource provider",
-          "allOf": [
-            {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
-            }
-          ],
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
           "readOnly": true
         }
       },
@@ -6042,69 +5721,63 @@
       "additionalProperties": false
     },
     "CocoExportSummary": {
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/ExportSummary"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "snapshotPath": {
-              "description": "The output path where the labels will be exported.",
-              "type": "string",
-              "readOnly": true
-            },
-            "containerName": {
-              "description": "The container name to which the labels will be exported.",
-              "type": "string",
-              "readOnly": true
-            }
-          }
         }
       ],
+      "properties": {
+        "snapshotPath": {
+          "description": "The output path where the labels will be exported.",
+          "type": "string",
+          "readOnly": true
+        },
+        "containerName": {
+          "description": "The container name to which the labels will be exported.",
+          "type": "string",
+          "readOnly": true
+        }
+      },
       "x-ms-discriminator-value": "Coco",
       "additionalProperties": false
     },
     "CsvExportSummary": {
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/ExportSummary"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "snapshotPath": {
-              "description": "The output path where the labels will be exported.",
-              "type": "string",
-              "readOnly": true
-            },
-            "containerName": {
-              "description": "The container name to which the labels will be exported.",
-              "type": "string",
-              "readOnly": true
-            }
-          }
         }
       ],
+      "properties": {
+        "snapshotPath": {
+          "description": "The output path where the labels will be exported.",
+          "type": "string",
+          "readOnly": true
+        },
+        "containerName": {
+          "description": "The container name to which the labels will be exported.",
+          "type": "string",
+          "readOnly": true
+        }
+      },
       "x-ms-discriminator-value": "CSV",
       "additionalProperties": false
     },
     "DatasetExportSummary": {
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/ExportSummary"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "labeledAssetName": {
-              "description": "The unique name of the labeled data asset.",
-              "type": "string",
-              "readOnly": true
-            }
-          }
         }
       ],
+      "properties": {
+        "labeledAssetName": {
+          "description": "The unique name of the labeled data asset.",
+          "type": "string",
+          "readOnly": true
+        }
+      },
       "x-ms-discriminator-value": "Dataset",
       "additionalProperties": false
     },
@@ -6135,8 +5808,7 @@
           "type": "object",
           "additionalProperties": {
             "type": "string"
-          },
-          "x-ms-client-flatten": true
+          }
         }
       },
       "additionalProperties": false
@@ -6165,20 +5837,12 @@
         },
         "properties": {
           "description": "Additional attributes of the entity.",
-          "allOf": [
-            {
-              "$ref": "#/definitions/ModelContainer"
-            }
-          ],
+          "$ref": "#/definitions/ModelContainer",
           "x-ms-client-flatten": true
         },
         "systemData": {
           "description": "System data associated with resource provider",
-          "allOf": [
-            {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
-            }
-          ],
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
           "readOnly": true
         }
       },
@@ -6210,17 +5874,23 @@
           "description": "Model asset stage.",
           "type": "string"
         },
+        "flavors": {
+          "description": "Dictionary mapping model flavors to their properties.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            }
+          }
+        },
         "datastoreId": {
           "description": "The asset datastoreId",
           "type": "string"
         },
         "assetPath": {
           "description": "Details of asset path in the datastore.",
-          "allOf": [
-            {
-              "$ref": "#/definitions/AssetPath"
-            }
-          ]
+          "$ref": "#/definitions/AssetPath"
         },
         "generatedBy": {
           "description": "How this asset was generated",
@@ -6254,8 +5924,7 @@
           "type": "object",
           "additionalProperties": {
             "type": "string"
-          },
-          "x-ms-client-flatten": true
+          }
         }
       },
       "additionalProperties": false
@@ -6284,20 +5953,12 @@
         },
         "properties": {
           "description": "Additional attributes of the entity.",
-          "allOf": [
-            {
-              "$ref": "#/definitions/ModelVersion"
-            }
-          ],
+          "$ref": "#/definitions/ModelVersion",
           "x-ms-client-flatten": true
         },
         "systemData": {
           "description": "System data associated with resource provider",
-          "allOf": [
-            {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
-            }
-          ],
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
           "readOnly": true
         }
       },
