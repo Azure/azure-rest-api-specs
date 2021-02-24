@@ -772,7 +772,7 @@
         ],
         "summary": "GenerateAnswer call to query documents.",
         "operationId": "Prebuilt_GenerateAnswer",
-        "parameters": [          
+        "parameters": [
           {
             "$ref": "#/parameters/PrebuiltGenerateAnswerPayload"
           }
@@ -1828,44 +1828,94 @@
     },
     "PrebuiltQuery": {
       "type": "object",
-      "description": "POST body schema to query the documents.",
+      "description": "POST body schema to query the documents via Prebuilt Question Answering.",
       "additionalProperties": false,
-      "properties": {       
+      "properties": {
         "question": {
           "type": "string",
           "description": "User question to query against the given documents."
-        },       
-        "userId": {
-          "type": "string",
-          "description": "Unique identifier for the user."
         },
         "documents": {
           "type": "array",
           "description": "Documents to be searched for given question.",
           "items": {
-            "$ref": "#/definitions/PrebuiltDocument"
+            "$ref": "#/definitions/TextInput"
           }
         },
          "language": {
           "type": "string",
-          "description": "Language of the document and question. Please find the list of supported languages and corresponding codes <a href=\"https://aka.ms/qnamaker-languages#languages-supported\" target=\"_blank\">here</a>.",
+          "description": "Language of the document. See here https://docs.microsoft.com/en-us/azure/cognitive-services/text-analytics/language-support?tabs=language-qna for the list of language codes supported.",
           "maxLength": 100,
-          "minLength": 1
+          "minLength": 2
+        },
+        "userId": {
+          "type": "string",
+          "description": "Unique identifier for the user."
         }
-      },
-      "PrebuiltDocument": {
+      }
+    },
+    "TextInput": {
       "type": "object",
       "additionalProperties": false,
-      "properties": {       
+      "properties": {
         "text": {
           "type": "string",
-          "description": "Text contents of the document."
-        },       
+          "description": "Text contents of the document. 5,120 characters as measured by StringInfo.LengthInTextElements.",
+          "maxLength": 5120
+        },
         "id": {
           "type": "string",
-          "description": "Unique identifier for the document."
+          "description": "Unique identifier for the document.",
+          "maxLength": 36
         }
-      }      
+      }
+    },
+    "GenerateAnswerBatchResult": {
+      "type": "array",
+      "description": "Represents List of Answer Results.",
+      "maxLength": 5,
+      "items": {
+        "$ref": "#/definitions/GenerateAnswerBatchResultItem"
+      }
+    },
+    "GenerateAnswerBatchResultItem": {
+      "type": "object",
+      "description": "Represents Prebuilt Answer Result.",
+      "additionalProperties": false,
+      "properties": {
+        "answer": {
+          "type": "string",
+          "description": "Answer."
+        },
+        "score": {
+          "type": "number",
+          "description": "Search result score."
+        },
+        "id": {
+          "type": "string",
+          "description": "Document Id."
+        },
+        "answerSpan": {
+          "type": "object",
+          "description": "Answer span object with respect to user's question.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/AnswerSpanResponseDTO"
+            }
+          ]
+        },
+        "answerStartIndex": {
+          "type": "integer",
+          "description": "Start index of answer in document text.",
+          "format": "int32"
+        },
+        "answerEndIndex": {
+          "type": "integer",
+          "description": "End index of answer in document text.",
+          "format": "int32"
+        }
+      }
+    }
   },
   "parameters": {
     "Environment": {
@@ -2008,6 +2058,6 @@
       "x-nullable": true,
       "description": "Post body of the request.",
       "x-ms-parameter-location": "method"
-    },
+    }
   }
 }
