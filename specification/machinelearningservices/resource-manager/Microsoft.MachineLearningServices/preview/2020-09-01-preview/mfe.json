@@ -3832,7 +3832,7 @@
         "tags": [
           "OnlineEndpoint"
         ],
-        "summary": "Regenerate AuthKeys for an Endpoint using Key-based authentication.",
+        "summary": "Regenerate EndpointAuthKeys for an Endpoint using Key-based authentication.",
         "operationId": "OnlineEndpoints_RegenerateKeys",
         "consumes": [
           "application/json"
@@ -3914,7 +3914,7 @@
         "tags": [
           "OnlineEndpoint"
         ],
-        "summary": "List AuthKeys for an Endpoint using Key-based authentication.",
+        "summary": "List EndpointAuthKeys for an Endpoint using Key-based authentication.",
         "operationId": "OnlineEndpoints_ListKeys",
         "produces": [
           "application/json"
@@ -3950,7 +3950,7 @@
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/AuthKeys"
+              "$ref": "#/definitions/EndpointAuthKeys"
             }
           }
         },
@@ -4002,7 +4002,7 @@
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/AuthToken"
+              "$ref": "#/definitions/EndpointAuthToken"
             }
           }
         },
@@ -7690,7 +7690,7 @@
       },
       "additionalProperties": false
     },
-    "AuthKeys": {
+    "EndpointAuthKeys": {
       "type": "object",
       "properties": {
         "primaryKey": {
@@ -7714,7 +7714,7 @@
       },
       "additionalProperties": false
     },
-    "AuthToken": {
+    "EndpointAuthToken": {
       "description": "Service Token",
       "type": "object",
       "properties": {
