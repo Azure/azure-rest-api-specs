@@ -32,6 +32,8 @@ Generate all API versions currently shipped for this package
 
 ```yaml $(python) && $(multiapi) && !$(track2)
 batch:
+  - tag: package-2020-09-only
+  - tag: package-2020-06-only
   - tag: package-2019-08-only
   - tag: package-2018-11-only
   - tag: package-2018-02-only
@@ -44,6 +46,8 @@ batch:
 
 ```yaml $(python) && $(multiapi) && $(track2)
 batch:
+  - tag: package-2020-09-only
+  - tag: package-2020-06-only
   - tag: package-2019-08-only
   - tag: package-2018-11-only
   - tag: package-2018-02-only
@@ -58,6 +62,32 @@ batch:
 ``` yaml $(multiapiscript)
 output-folder: $(python-sdks-folder)/appservice/azure-mgmt-web/azure/mgmt/web/
 perform-load: false
+```
+
+### Tag: package-2020-09-only and python
+
+These settings apply only when `--tag=package-2020-09-only --python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
+
+``` yaml $(tag) == 'package-2020-09-only' && $(python)
+namespace: azure.mgmt.web.v2020_09_01
+output-folder: $(python-sdks-folder)/appservice/azure-mgmt-web/azure/mgmt/web/v2020_09_01
+python:
+  namespace: azure.mgmt.web.v2020_09_01
+  output-folder: $(python-sdks-folder)/appservice/azure-mgmt-web/azure/mgmt/web/v2020_09_01
+```
+
+### Tag: package-2020-06-only and python
+
+These settings apply only when `--tag=package-2020-06-only --python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
+
+``` yaml $(tag) == 'package-2020-06-only' && $(python)
+namespace: azure.mgmt.web.v2020_06_01
+output-folder: $(python-sdks-folder)/appservice/azure-mgmt-web/azure/mgmt/web/v2020_06_01
+python:
+  namespace: azure.mgmt.web.v2020_06_01
+  output-folder: $(python-sdks-folder)/appservice/azure-mgmt-web/azure/mgmt/web/v2020_06_01
 ```
 
 ### Tag: package-2019-08-only and python
