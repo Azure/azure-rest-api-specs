@@ -3411,7 +3411,6 @@
             "description": "The request containing parameters for retrieving logs.",
             "required": true,
             "schema": {
-              "description": "The request containing parameters for retrieving logs.",
               "$ref": "#/definitions/DeploymentLogsRequest"
             }
           }
@@ -3782,7 +3781,6 @@
             "description": "Online Endpoint entity to apply during operation.",
             "required": true,
             "schema": {
-              "description": "Online Endpoint entity to apply during operation.",
               "$ref": "#/definitions/UpdateOnlineEndpointPropertiesUpdatableTrackedResource"
             }
           }
@@ -3868,7 +3866,6 @@
             "description": "RegenerateKeys request .",
             "required": true,
             "schema": {
-              "description": "RegenerateKeys request .",
               "$ref": "#/definitions/RegenerateEndpointKeysRequest"
             }
           }
@@ -5359,6 +5356,180 @@
       },
       "additionalProperties": false
     },
+    "ComputeBinding": {
+      "description": "Compute binding definition.",
+      "type": "object",
+      "properties": {
+        "computeId": {
+          "description": "Resource ID of the compute resource.",
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "nodeCount": {
+          "format": "int32",
+          "description": "Number of nodes.",
+          "type": "integer",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "isLocal": {
+          "description": "Set to true for jobs running on local compute.",
+          "type": "boolean",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "JobOutput": {
+      "type": "object",
+      "properties": {
+        "datastoreId": {
+          "description": "ARM ID of the datastore where the job logs and artifacts are stored, or null for the default container (\"azureml\") in the workspace's storage account.",
+          "type": "string",
+          "readOnly": true
+        },
+        "path": {
+          "description": "Path within the datastore to the job logs and artifacts.",
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "JobBase": {
+      "description": "Job base definition",
+      "required": [
+        "jobType"
+      ],
+      "type": "object",
+      "properties": {
+        "jobType": {
+          "description": "Specifies the type of job.",
+          "enum": [
+            "Command",
+            "Sweep",
+            "Labeling",
+            "Pipeline",
+            "Data",
+            "AutoML"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "JobType",
+            "modelAsString": true
+          },
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "provisioningState": {
+          "enum": [
+            "Succeeded",
+            "Failed",
+            "Canceled",
+            "InProgress"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "JobProvisioningState",
+            "modelAsString": true
+          }
+        },
+        "interactionEndpoints": {
+          "description": "Dictionary of endpoint URIs, keyed by enumerated job endpoints.\r\nFor local jobs, a job endpoint will have a value of FileStreamObject.",
+          "type": "object",
+          "properties": {
+            "Tracking": {
+              "format": "uri",
+              "type": "string"
+            },
+            "Studio": {
+              "format": "uri",
+              "type": "string"
+            },
+            "Grafana": {
+              "format": "uri",
+              "type": "string"
+            },
+            "Tensorboard": {
+              "format": "uri",
+              "type": "string"
+            },
+            "Local": {
+              "format": "uri",
+              "type": "string"
+            }
+          },
+          "readOnly": true
+        },
+        "description": {
+          "description": "The asset description text.",
+          "type": "string"
+        },
+        "tags": {
+          "description": "Tag dictionary. Tags can be added, removed, and updated.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "description": "The asset property dictionary.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "discriminator": "jobType",
+      "additionalProperties": false
+    },
+    "ComputeJobBase": {
+      "description": "Compute job base definition",
+      "required": [
+        "computeBinding",
+        "jobType"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/JobBase"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "experimentName": {
+              "description": "The name of the experiment the job belongs to. If not set, the job is placed in the \"Default\" experiment.",
+              "type": "string"
+            },
+            "computeBinding": {
+              "description": "Compute binding for the job.",
+              "$ref": "#/definitions/ComputeBinding"
+            },
+            "output": {
+              "description": "Location of the job output logs and artifacts.",
+              "$ref": "#/definitions/JobOutput",
+              "readOnly": true
+            },
+            "priority": {
+              "format": "int32",
+              "description": "Job priority for scheduling policy. Only applies to AMLCompute.\r\nPrivate preview  is only for whitelisted customers",
+              "type": "integer"
+            }
+          }
+        }
+      ],
+      "discriminator": "jobType",
+      "additionalProperties": false
+    },
     "CodeConfiguration": {
       "required": [
         "command"
@@ -5600,185 +5771,11 @@
       "x-ms-discriminator-value": "ServicePrincipal",
       "additionalProperties": false
     },
-    "ComputeBinding": {
-      "description": "Compute binding definition.",
-      "type": "object",
-      "properties": {
-        "computeId": {
-          "description": "Resource ID of the compute resource.",
-          "type": "string",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ]
-        },
-        "nodeCount": {
-          "format": "int32",
-          "description": "Number of nodes.",
-          "type": "integer",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ]
-        },
-        "isLocal": {
-          "description": "Set to true for jobs running on local compute.",
-          "type": "boolean",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ]
-        }
-      },
-      "additionalProperties": false
-    },
-    "JobOutput": {
-      "type": "object",
-      "properties": {
-        "datastoreId": {
-          "description": "ARM ID of the datastore where the job logs and artifacts are stored, or null for the default container (\"azureml\") in the workspace's storage account.",
-          "type": "string",
-          "readOnly": true
-        },
-        "path": {
-          "description": "Path within the datastore to the job logs and artifacts.",
-          "type": "string",
-          "readOnly": true
-        }
-      },
-      "additionalProperties": false
-    },
-    "JobBase": {
-      "description": "Job base definition",
-      "required": [
-        "jobType"
-      ],
-      "type": "object",
-      "properties": {
-        "jobType": {
-          "description": "Specifies the type of job.",
-          "enum": [
-            "Command",
-            "Sweep",
-            "Labeling",
-            "Pipeline",
-            "Data",
-            "AutoML"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "JobType",
-            "modelAsString": true
-          },
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ]
-        },
-        "provisioningState": {
-          "enum": [
-            "Succeeded",
-            "Failed",
-            "Canceled"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "JobProvisioningState",
-            "modelAsString": true
-          }
-        },
-        "interactionEndpoints": {
-          "description": "Dictionary of endpoint URIs, keyed by enumerated job endpoints.\r\nFor local jobs, a job endpoint will have a value of FileStreamObject.",
-          "type": "object",
-          "properties": {
-            "Tracking": {
-              "format": "uri",
-              "type": "string"
-            },
-            "Studio": {
-              "format": "uri",
-              "type": "string"
-            },
-            "Grafana": {
-              "format": "uri",
-              "type": "string"
-            },
-            "Tensorboard": {
-              "format": "uri",
-              "type": "string"
-            },
-            "Local": {
-              "format": "uri",
-              "type": "string"
-            }
-          },
-          "readOnly": true
-        },
-        "description": {
-          "description": "The asset description text.",
-          "type": "string"
-        },
-        "tags": {
-          "description": "Tag dictionary. Tags can be added, removed, and updated.",
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "properties": {
-          "description": "The asset property dictionary.",
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
-        }
-      },
-      "discriminator": "jobType",
-      "additionalProperties": false
-    },
-    "ComputeJobBase": {
-      "description": "Compute job base definition",
-      "required": [
-        "computeBinding",
-        "jobType"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/JobBase"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "experimentName": {
-              "description": "The name of the experiment the job belongs to. If not set, the job is placed in the \"Default\" experiment.",
-              "type": "string"
-            },
-            "computeBinding": {
-              "description": "Compute binding for the job.",
-              "$ref": "#/definitions/ComputeBinding"
-            },
-            "output": {
-              "description": "Location of the job output logs and artifacts.",
-              "$ref": "#/definitions/JobOutput",
-              "readOnly": true
-            },
-            "priority": {
-              "format": "int32",
-              "description": "Job priority for scheduling policy. Only applies to AMLCompute.\r\nPrivate preview  is only for whitelisted customers",
-              "type": "integer"
-            }
-          }
-        }
-      ],
-      "discriminator": "jobType",
-      "additionalProperties": false
-    },
     "CommandJob": {
       "description": "Code Job definition",
       "required": [
         "codeConfiguration",
-        "computeBinding",
-        "jobType"
+        "computeBinding"
       ],
       "allOf": [
         {
@@ -5862,7 +5859,6 @@
           }
         }
       ],
-      "discriminator": "jobType",
       "x-ms-discriminator-value": "Command",
       "additionalProperties": false
     },
@@ -7009,54 +7005,6 @@
       },
       "additionalProperties": false
     },
-    "RootHttpError": {
-      "type": "object",
-      "properties": {
-        "statusCode": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "code": {
-          "type": "string"
-        },
-        "severity": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "message": {
-          "type": "string"
-        },
-        "messageFormat": {
-          "type": "string"
-        },
-        "messageParameters": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "referenceCode": {
-          "type": "string"
-        },
-        "detailsUri": {
-          "format": "uri",
-          "type": "string"
-        },
-        "target": {
-          "type": "string"
-        },
-        "details": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/RootError"
-          }
-        },
-        "innerError": {
-          "$ref": "#/definitions/InnerErrorResponse"
-        }
-      },
-      "additionalProperties": false
-    },
     "OnlineDeploymentScaleSettings": {
       "type": "object",
       "properties": {
@@ -7082,18 +7030,6 @@
           "x-ms-enum": {
             "name": "ScaleTypeMode",
             "modelAsString": true
-          }
-        }
-      },
-      "additionalProperties": false
-    },
-    "EnvironmentOverrides": {
-      "type": "object",
-      "properties": {
-        "environmentVariables": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
           }
         }
       },
@@ -7299,9 +7235,6 @@
         "scaleSettings": {
           "$ref": "#/definitions/OnlineDeploymentScaleSettings"
         },
-        "environmentOverrides": {
-          "$ref": "#/definitions/EnvironmentOverrides"
-        },
         "deploymentConfiguration": {
           "$ref": "#/definitions/DeploymentConfigurationBase"
         },
@@ -7345,7 +7278,15 @@
           "type": "string"
         },
         "error": {
-          "$ref": "#/definitions/RootError"
+          "$ref": "#/definitions/RootError",
+          "readOnly": true
+        },
+        "environmentVariables": {
+          "description": "Environment variables configuration for the deployment.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       },
       "additionalProperties": false
@@ -7371,10 +7312,6 @@
         },
         "identity": {
           "$ref": "#/definitions/ResourceIdentityInArm"
-        },
-        "error": {
-          "$ref": "#/definitions/RootHttpError",
-          "readOnly": true
         },
         "id": {
           "description": "The resource URL of the entity (not URL encoded).",
@@ -7620,10 +7557,6 @@
         "identity": {
           "$ref": "#/definitions/ResourceIdentityInArm"
         },
-        "error": {
-          "$ref": "#/definitions/RootHttpError",
-          "readOnly": true
-        },
         "id": {
           "description": "The resource URL of the entity (not URL encoded).",
           "type": "string",
@@ -7703,10 +7636,6 @@
         },
         "identity": {
           "$ref": "#/definitions/ResourceIdentityInArm"
-        },
-        "error": {
-          "$ref": "#/definitions/RootHttpError",
-          "readOnly": true
         },
         "id": {
           "description": "The resource URL of the entity (not URL encoded).",
