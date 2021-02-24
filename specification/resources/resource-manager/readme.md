@@ -61,18 +61,9 @@ tag: package-deploymentscripts-2020-10
 ```
 
 ``` yaml $(package-templatespecs)
-tag: package-2021-01
+tag: package-templatespecs-2019-06-preview
 ```
 
-
-### Tag: package-2021-01
-
-These settings apply only when `--tag=package-2021-01` is specified on the command line.
-
-```yaml $(tag) == 'package-2021-01'
-input-file:
-  - Microsoft.Resources/stable/2021-01-01/resources.json
-```
 ### Tag: package-resources-2020-10
 
 These settings apply only when `--tag=package-resources-2020-10` is specified on the command line.
