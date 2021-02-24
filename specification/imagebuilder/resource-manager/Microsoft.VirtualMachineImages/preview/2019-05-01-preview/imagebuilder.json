@@ -170,8 +170,11 @@
           "final-state-via": "azure-async-operation"
         },
         "x-ms-examples": {
-          "Create an Image Template.": {
-            "$ref": "./examples/CreateImageTemplate.json"
+          "Create an Image Template for Linux.": {
+            "$ref": "./examples/CreateImageTemplateLinux.json"
+          },
+          "Create an Image Template for Windows.": {
+            "$ref": "./examples/CreateImageTemplateWindows.json"
           },
           "Create an Image Template with a user assigned identity configured": {
             "$ref": "./examples/CreateImageTemplateWithUserAssignedIdentity.json"
@@ -367,6 +370,45 @@
         "x-ms-examples": {
           "Create image(s) from existing imageTemplate.": {
             "$ref": "./examples/RunImageTemplate.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.VirtualMachineImages/imageTemplates/{imageTemplateName}/cancel": {
+      "post": {
+        "tags": [
+          "VirtualMachineImageTemplate"
+        ],
+        "operationId": "VirtualMachineImageTemplates_Cancel",
+        "description": "Cancel the long running image build based on the image template",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ImageTemplateNameParameter"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "The request is accepted."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ApiError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Cancel the image build based on the imageTemplate.": {
+            "$ref": "./examples/CancelImageBuild.json"
           }
         }
       }
@@ -569,7 +611,7 @@
         },
         "version": {
           "type": "string",
-          "description": "Image version from the [Azure Gallery Images](https://docs.microsoft.com/en-us/rest/api/compute/virtualmachineimages)."
+          "description": "Image version from the [Azure Gallery Images](https://docs.microsoft.com/en-us/rest/api/compute/virtualmachineimages). If 'latest' is specified here, the version is evaluated when the image build takes place, not when the template is submitted. Specifying 'latest' could cause ROUNDTRIP_INCONSISTENT_PROPERTY issue which will be fixed."
         }
       }
     },
@@ -641,6 +683,7 @@
         },
         "sha256Checksum": {
           "type": "string",
+          "default": "",
           "description": "SHA256 checksum of the shell script provided in the scriptUri field"
         },
         "inline": {
@@ -675,6 +718,33 @@
         }
       }
     },
+    "ImageTemplateWindowsUpdateCustomizer": {
+      "description": "Installs Windows Updates. Corresponds to Packer Windows Update Provisioner (https://github.com/rgl/packer-provisioner-windows-update)",
+      "x-ms-discriminator-value": "WindowsUpdate",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ImageTemplateCustomizer"
+        }
+      ],
+      "properties": {
+        "searchCriteria": {
+          "type": "string",
+          "description": "Criteria to search updates. Omit or specify empty string to use the default (search all).  Refer to above link for examples and detailed description of this field."
+        },
+        "filters": {
+          "type": "array",
+          "description": "Array of filters to select updates to apply. Omit or specify empty array to use the default (no filter).  Refer to above link for examples and detailed description of this field.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "updateLimit": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Maximum number of updates to apply at a time. Omit or specify 0 to use the default (1000)"
+        }
+      }
+    },
     "ImageTemplatePowerShellCustomizer": {
       "description": "Runs the specified PowerShell on the VM (Windows). Corresponds to Packer powershell provisioner. Exactly one of 'scriptUri' or 'inline' can be specified.",
       "x-ms-discriminator-value": "PowerShell",
@@ -690,6 +760,7 @@
         },
         "sha256Checksum": {
           "type": "string",
+          "default": "",
           "description": "SHA256 checksum of the power shell script provided in the scriptUri field above"
         },
         "inline": {
@@ -701,6 +772,7 @@
         },
         "runElevated": {
           "type": "boolean",
+          "default": false,
           "description": "If specified, the PowerShell script will be run with elevated privileges"
         },
         "validExitCodes": {
@@ -727,6 +799,7 @@
         },
         "sha256Checksum": {
           "type": "string",
+          "default": "",
           "description": "SHA256 checksum of the file provided in the sourceUri field above"
         },
         "destination": {
@@ -823,12 +896,40 @@
         }
       ]
     },
+    "VirtualNetworkConfig": {
+      "description": "Virtual Network configuration.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of a pre-existing virtual network."
+        },
+        "subnetName": {
+          "type": "string",
+          "description": "Name of the subnet within the specified virtual network. Must be specified if and only if 'name' is specified."
+        },
+        "resourceGroupName": {
+          "type": "string",
+          "description": "Name of the resource group containing the specified virtual network. Must be specified if and only if 'name' is specified."
+        }
+      }
+    },
     "ImageTemplateVmProfile": {
       "description": "Describes the virtual machine used to build, customize and capture images",
       "properties": {
         "vmSize": {
           "type": "string",
+          "default": "",
           "description": "Size of the virtual machine used to build, customize and capture images. Omit or specify empty string to use the default (Standard_D1_v2)."
+        },
+        "osDiskSizeGB": {
+          "type": "integer",
+          "minimum": 0,
+          "default": 0,
+          "description": "Size of the OS disk in GB. Omit or specify 0 to use Azure's default OS disk size."
+        },
+        "vnetConfig": {
+          "$ref": "#/definitions/VirtualNetworkConfig",
+          "description": "Optional configuration of the virtual network to use to deploy the build virtual machine in. Omit if no specific virtual network needs to be used."
         }
       }
     },
@@ -895,9 +996,11 @@
           "type": "string",
           "enum": [
             "Running",
+            "Canceling",
             "Succeeded",
             "PartiallySucceeded",
-            "Failed"
+            "Failed",
+            "Canceled"
           ],
           "x-ms-enum": {
             "name": "RunState",
@@ -965,6 +1068,7 @@
           "type": "integer",
           "minimum": 0,
           "maximum": 960,
+          "default": 0,
           "description": "Maximum duration to wait while building the image template. Omit or specify 0 to use the default (4 hours)."
         },
         "vmProfile": {
