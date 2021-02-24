@@ -10,8 +10,6 @@ batch:
   - tag: schema-keyvault-2019-09-01
   - tag: schema-keyvault-2018-02-14-preview
   - tag: schema-keyvault-2018-02-14
-  - tag: schema-keyvault-2016-10-01
-  - tag: schema-keyvault-2015-06-01
 
 ```
 
