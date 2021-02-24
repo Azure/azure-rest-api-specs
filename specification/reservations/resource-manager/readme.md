@@ -185,7 +185,7 @@ See configuration in [readme.cli.md](./readme.cli.md)
 
 ## AZ
 
-See configuration in [readme.az.md](./readme.az.md)
+## See configuration in [readme.az.md](./readme.az.md)
 
 ## Go
 
