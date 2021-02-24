@@ -17,4 +17,9 @@ cli:
       where:
           operationGroup: 'QuotaInformation'
           operation: '(get|createOrUpdate|update)'
+	  - where:
+          param: 'resourceName'
+      alias:
+          - name
+          - n
 ```

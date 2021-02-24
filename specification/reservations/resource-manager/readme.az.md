@@ -13,5 +13,5 @@ directive:
       subject: QuotaInformation
       parameter-name: resourceName
     set:
-      parameter-name: resourceName
+      parameter-name: name
 ```
