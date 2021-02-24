@@ -55,6 +55,7 @@
     "MultiplePipelineTrigger": {
       "x-ms-discriminator-value": "MultiplePipelineTrigger",
       "description": "Base class for all triggers that support one to many model for trigger to pipeline.",
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/Trigger"
@@ -72,7 +73,6 @@
     },
     "ScheduleTrigger": {
       "description": "Trigger that creates pipeline runs periodically, on schedule.",
-      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/MultiplePipelineTrigger"
@@ -284,7 +284,6 @@
     },
     "BlobEventsTrigger": {
       "description": "Trigger that runs every time a Blob event occurs.",
-      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/MultiplePipelineTrigger"
@@ -343,7 +342,6 @@
     },
     "CustomEventsTrigger": {
       "description": "Trigger that runs every time a custom event is received.",
-      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/MultiplePipelineTrigger"
@@ -386,7 +384,6 @@
     },
     "TumblingWindowTrigger": {
       "description": "Trigger that schedules pipeline runs for all fixed time interval windows from a start time without gaps and also supports backfill scenarios (when start time is in the past).",
-      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/Trigger"
@@ -470,6 +467,7 @@
     },
     "RetryPolicy": {
       "description": "Execution policy for an activity.",
+      "type": "object",
       "properties": {
         "count": {
           "type": "object",

@@ -155,6 +155,7 @@
     },
     "ControlActivity": {
       "x-ms-discriminator-value": "Container",
+      "type": "object",
       "description": "Base class for all control activities like IfCondition, ForEach , Until.",
       "allOf": [
         {
@@ -166,6 +167,7 @@
     "ExecutionActivity": {
       "x-ms-discriminator-value": "Execution",
       "description": "Base class for all execution activities.",
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/Activity"
@@ -1394,6 +1396,7 @@
     "CopyActivity": {
       "x-ms-discriminator-value": "Copy",
       "description": "Copy activity.",
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/ExecutionActivity"
@@ -1426,6 +1429,7 @@
     },
     "CopyActivityTypeProperties": {
       "description": "Copy activity properties.",
+      "type": "object",
       "properties": {
         "source": {
           "description": "Copy activity source.",
@@ -4857,6 +4861,7 @@
     },
     "HDInsightHiveActivity": {
       "description": "HDInsight Hive activity type.",
+      "type": "object",
       "x-ms-discriminator-value": "HDInsightHive",
       "allOf": [
         {
@@ -4876,6 +4881,7 @@
     },
     "HDInsightHiveActivityTypeProperties": {
       "description": "HDInsight Hive activity properties.",
+      "type": "object",
       "properties": {
         "storageLinkedServices": {
           "description": "Storage linked service references.",
@@ -4941,6 +4947,7 @@
     },
     "HDInsightPigActivity": {
       "description": "HDInsight Pig activity type.",
+      "type": "object",
       "x-ms-discriminator-value": "HDInsightPig",
       "allOf": [
         {
@@ -4960,6 +4967,7 @@
     },
     "HDInsightPigActivityTypeProperties": {
       "description": "HDInsight Pig activity properties.",
+      "type": "object",
       "properties": {
         "storageLinkedServices": {
           "description": "Storage linked service references.",
@@ -4996,6 +5004,7 @@
     },
     "HDInsightMapReduceActivity": {
       "description": "HDInsight MapReduce activity type.",
+      "type": "object",
       "x-ms-discriminator-value": "HDInsightMapReduce",
       "allOf": [
         {
@@ -5015,6 +5024,7 @@
     },
     "HDInsightMapReduceActivityTypeProperties": {
       "description": "HDInsight MapReduce activity properties.",
+      "type": "object",
       "properties": {
         "storageLinkedServices": {
           "description": "Storage linked service references.",
@@ -5071,6 +5081,7 @@
     },
     "HDInsightStreamingActivity": {
       "description": "HDInsight streaming activity type.",
+      "type": "object",
       "x-ms-discriminator-value": "HDInsightStreaming",
       "allOf": [
         {
@@ -5090,6 +5101,7 @@
     },
     "HDInsightStreamingActivityTypeProperties": {
       "description": "HDInsight streaming activity properties.",
+      "type": "object",
       "properties": {
         "storageLinkedServices": {
           "description": "Storage linked service references.",
@@ -5169,6 +5181,7 @@
     },
     "HDInsightSparkActivity": {
       "description": "HDInsight Spark activity.",
+      "type": "object",
       "x-ms-discriminator-value": "HDInsightSpark",
       "allOf": [
         {
@@ -5188,6 +5201,7 @@
     },
     "HDInsightSparkActivityTypeProperties": {
       "description": "HDInsight spark activity properties.",
+      "type": "object",
       "properties": {
         "rootPath": {
           "type": "object",
@@ -5237,6 +5251,7 @@
     },
     "ExecuteSSISPackageActivity": {
       "description": "Execute SSIS package activity.",
+      "type": "object",
       "x-ms-discriminator-value": "ExecuteSSISPackage",
       "allOf": [
         {
@@ -5256,6 +5271,7 @@
     },
     "ExecuteSSISPackageActivityTypeProperties": {
       "description": "Execute SSIS package activity properties.",
+      "type": "object",
       "properties": {
         "packageLocation": {
           "description": "SSIS package location.",
@@ -5552,6 +5568,7 @@
     },
     "CustomActivity": {
       "description": "Custom activity type.",
+      "type": "object",
       "x-ms-discriminator-value": "Custom",
       "allOf": [
         {
@@ -5571,6 +5588,7 @@
     },
     "CustomActivityTypeProperties": {
       "description": "Custom activity properties.",
+      "type": "object",
       "properties": {
         "command": {
           "type": "object",
@@ -5611,6 +5629,7 @@
     },
     "CustomActivityReferenceObject": {
       "description": "Reference objects for custom activity",
+      "type": "object",
       "properties": {
         "linkedServices": {
           "description": "Linked service references.",
@@ -5630,6 +5649,7 @@
     },
     "SqlServerStoredProcedureActivity": {
       "description": "SQL stored procedure activity type.",
+      "type": "object",
       "x-ms-discriminator-value": "SqlServerStoredProcedure",
       "allOf": [
         {
@@ -5650,6 +5670,7 @@
     },
     "SqlServerStoredProcedureActivityTypeProperties": {
       "description": "SQL stored procedure activity properties.",
+      "type": "object",
       "properties": {
         "storedProcedureName": {
           "type": "object",
@@ -5669,6 +5690,7 @@
     },
     "ExecutePipelineActivity": {
       "x-ms-discriminator-value": "ExecutePipeline",
+      "type": "object",
       "description": "Execute pipeline activity.",
       "allOf": [
         {
@@ -5688,6 +5710,7 @@
     },
     "ExecutePipelineActivityTypeProperties": {
       "description": "Execute pipeline activity properties.",
+      "type": "object",
       "properties": {
         "pipeline": {
           "description": "Pipeline reference.",
@@ -5709,6 +5732,7 @@
     "DeleteActivity": {
       "x-ms-discriminator-value": "Delete",
       "description": "Delete activity.",
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/ExecutionActivity"
@@ -5727,6 +5751,7 @@
     },
     "DeleteActivityTypeProperties": {
       "description": "Delete activity properties.",
+      "type": "object",
       "properties": {
         "recursive": {
           "type": "object",
@@ -5761,6 +5786,7 @@
     "AzureDataExplorerCommandActivity": {
       "x-ms-discriminator-value": "AzureDataExplorerCommand",
       "description": "Azure Data Explorer command activity.",
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/ExecutionActivity"
@@ -5779,6 +5805,7 @@
     },
     "AzureDataExplorerCommandActivityTypeProperties": {
       "description": "Azure Data Explorer command activity properties.",
+      "type": "object",
       "properties": {
         "command": {
           "type": "object",
@@ -5796,6 +5823,7 @@
     "LookupActivity": {
       "x-ms-discriminator-value": "Lookup",
       "description": "Lookup activity.",
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/ExecutionActivity"
@@ -5814,6 +5842,7 @@
     },
     "LookupActivityTypeProperties": {
       "description": "Lookup activity properties.",
+      "type": "object",
       "properties": {
         "source": {
           "description": "Dataset-specific source properties, same as copy activity source.",
@@ -5850,6 +5879,7 @@
     "WebActivity": {
       "x-ms-discriminator-value": "WebActivity",
       "description": "Web activity.",
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/ExecutionActivity"
@@ -5868,6 +5898,7 @@
     },
     "WebActivityAuthentication": {
       "description": "Web activity authentication properties.",
+      "type": "object",
       "properties": {
         "type": {
           "description": "Web activity authentication (Basic/ClientCertificate/MSI)",
@@ -5896,6 +5927,7 @@
     },
     "WebActivityTypeProperties": {
       "description": "Web activity type properties.",
+      "type": "object",
       "properties": {
         "method": {
           "description": "Rest API method for target endpoint.",
@@ -5944,6 +5976,7 @@
     "GetMetadataActivity": {
       "x-ms-discriminator-value": "GetMetadata",
       "description": "Activity to get metadata of dataset",
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/ExecutionActivity"
@@ -5962,6 +5995,7 @@
     },
     "GetMetadataActivityTypeProperties": {
       "description": "GetMetadata activity properties.",
+      "type": "object",
       "properties": {
         "dataset": {
           "description": "GetMetadata activity dataset reference.",
@@ -5991,6 +6025,7 @@
     "IfConditionActivity": {
       "x-ms-discriminator-value": "IfCondition",
       "description": "This activity evaluates a boolean expression and executes either the activities under the ifTrueActivities property or the ifFalseActivities property depending on the result of the expression.",
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/ControlActivity"
@@ -6009,6 +6044,7 @@
     },
     "IfConditionActivityTypeProperties": {
       "description": "IfCondition activity properties.",
+      "type": "object",
       "properties": {
         "expression": {
           "description": "An expression that would evaluate to Boolean. This is used to determine the block of activities (ifTrueActivities or ifFalseActivities) that will be executed.",
@@ -6036,6 +6072,7 @@
     "SwitchActivity": {
       "x-ms-discriminator-value": "Switch",
       "description": "This activity evaluates an expression and executes activities under the cases property that correspond to the expression evaluation expected in the equals property.",
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/ControlActivity"
@@ -6054,6 +6091,7 @@
     },
     "SwitchActivityTypeProperties": {
       "description": "Switch activity properties.",
+      "type": "object",
       "properties": {
         "on": {
           "description": "An expression that would evaluate to a string or integer. This is used to determine the block of activities in cases that will be executed.",
@@ -6081,6 +6119,7 @@
     },
     "SwitchCase": {
       "description": "Switch cases with have a value and corresponding activities.",
+      "type": "object",
       "properties": {
         "value": {
           "description": "Expected value that satisfies the expression result of the 'on' property.",
@@ -6098,6 +6137,7 @@
     "ForEachActivity": {
       "x-ms-discriminator-value": "ForEach",
       "description": "This activity is used for iterating over a collection and execute given activities.",
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/ControlActivity"
@@ -6116,6 +6156,7 @@
     },
     "ForEachActivityTypeProperties": {
       "description": "ForEach activity properties.",
+      "type": "object",
       "properties": {
         "isSequential": {
           "description": "Should the loop be executed in sequence or in parallel (max 50)",
@@ -6145,6 +6186,7 @@
     },
     "AzureMLBatchExecutionActivity": {
       "description": "Azure ML Batch Execution activity.",
+      "type": "object",
       "x-ms-discriminator-value": "AzureMLBatchExecution",
       "allOf": [
         {
@@ -6164,6 +6206,7 @@
     },
     "AzureMLBatchExecutionActivityTypeProperties": {
       "description": "Azure ML Batch Execution activity properties.",
+      "type": "object",
       "properties": {
         "globalParameters": {
           "description": "Key,Value pairs to be passed to the Azure ML Batch Execution Service endpoint. Keys must match the names of web service parameters defined in the published Azure ML web service. Values will be passed in the GlobalParameters property of the Azure ML batch execution request.",
@@ -6209,6 +6252,7 @@
     },
     "AzureMLUpdateResourceActivity": {
       "description": "Azure ML Update Resource management activity.",
+      "type": "object",
       "x-ms-discriminator-value": "AzureMLUpdateResource",
       "allOf": [
         {
@@ -6228,6 +6272,7 @@
     },
     "AzureMLUpdateResourceActivityTypeProperties": {
       "description": "Azure ML Update Resource activity properties.",
+      "type": "object",
       "properties": {
         "trainedModelName": {
           "type": "object",
@@ -6250,6 +6295,7 @@
     },
     "AzureMLExecutePipelineActivity": {
       "description": "Azure ML Execute Pipeline activity.",
+      "type": "object",
       "x-ms-discriminator-value": "AzureMLExecutePipeline",
       "allOf": [
         {
@@ -6269,6 +6315,7 @@
     },
     "AzureMLExecutePipelineActivityTypeProperties": {
       "description": "Azure ML Execute Pipeline activity properties.",
+      "type": "object",
       "properties": {
         "mlPipelineId": {
           "description": "ID of the published Azure ML pipeline. Type: string (or Expression with resultType string).",
@@ -6305,6 +6352,7 @@
     },
     "DataLakeAnalyticsUSQLActivity": {
       "description": "Data Lake Analytics U-SQL activity.",
+      "type": "object",
       "x-ms-discriminator-value": "DataLakeAnalyticsU-SQL",
       "allOf": [
         {
@@ -6324,6 +6372,7 @@
     },
     "DataLakeAnalyticsUSQLActivityTypeProperties": {
       "description": "DataLakeAnalyticsU-SQL activity properties.",
+      "type": "object",
       "properties": {
         "scriptPath": {
           "type": "object",
@@ -6366,6 +6415,7 @@
     "WaitActivity": {
       "x-ms-discriminator-value": "Wait",
       "description": "This activity suspends pipeline execution for the specified interval.",
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/ControlActivity"
@@ -6384,6 +6434,7 @@
     },
     "WaitActivityTypeProperties": {
       "description": "Wait activity properties.",
+      "type": "object",
       "properties": {
         "waitTimeInSeconds": {
           "description": "Duration in seconds.",
@@ -6397,6 +6448,7 @@
     "UntilActivity": {
       "x-ms-discriminator-value": "Until",
       "description": "This activity executes inner activities until the specified boolean expression results to true or timeout is reached, whichever is earlier.",
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/ControlActivity"
@@ -6415,6 +6467,7 @@
     },
     "UntilActivityTypeProperties": {
       "description": "Until activity properties.",
+      "type": "object",
       "properties": {
         "expression": {
           "description": "An expression that would evaluate to Boolean. The loop will continue until this expression evaluates to true",
@@ -6440,6 +6493,7 @@
     "ValidationActivity": {
       "x-ms-discriminator-value": "Validation",
       "description": "This activity verifies that an external resource exists.",
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/ControlActivity"
@@ -6458,6 +6512,7 @@
     },
     "ValidationActivityTypeProperties": {
       "description": "Validation activity properties.",
+      "type": "object",
       "properties": {
         "timeout": {
           "type": "object",
@@ -6487,6 +6542,7 @@
     "FilterActivity": {
       "x-ms-discriminator-value": "Filter",
       "description": "Filter and return results from input array based on the conditions.",
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/ControlActivity"
@@ -6505,6 +6561,7 @@
     },
     "FilterActivityTypeProperties": {
       "description": "Filter activity properties.",
+      "type": "object",
       "properties": {
         "items": {
           "description": "Input array on which filter should be applied.",
@@ -6522,6 +6579,7 @@
     },
     "DatabricksNotebookActivity": {
       "description": "DatabricksNotebook activity.",
+      "type": "object",
       "x-ms-discriminator-value": "DatabricksNotebook",
       "allOf": [
         {
@@ -6541,6 +6599,7 @@
     },
     "DatabricksNotebookActivityTypeProperties": {
       "description": "Databricks Notebook activity properties.",
+      "type": "object",
       "properties": {
         "notebookPath": {
           "type": "object",
@@ -6572,6 +6631,7 @@
     },
     "DatabricksSparkJarActivity": {
       "description": "DatabricksSparkJar activity.",
+      "type": "object",
       "x-ms-discriminator-value": "DatabricksSparkJar",
       "allOf": [
         {
@@ -6591,6 +6651,7 @@
     },
     "DatabricksSparkJarActivityTypeProperties": {
       "description": "Databricks SparkJar activity properties.",
+      "type": "object",
       "properties": {
         "mainClassName": {
           "type": "object",
@@ -6622,6 +6683,7 @@
     },
     "DatabricksSparkPythonActivity": {
       "description": "DatabricksSparkPython activity.",
+      "type": "object",
       "x-ms-discriminator-value": "DatabricksSparkPython",
       "allOf": [
         {
@@ -6641,6 +6703,7 @@
     },
     "DatabricksSparkPythonActivityTypeProperties": {
       "description": "Databricks SparkPython activity properties.",
+      "type": "object",
       "properties": {
         "pythonFile": {
           "type": "object",
@@ -6673,6 +6736,7 @@
     "SetVariableActivity": {
       "x-ms-discriminator-value": "SetVariable",
       "description": "Set value for a Variable.",
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/ControlActivity"
@@ -6691,6 +6755,7 @@
     },
     "SetVariableActivityTypeProperties": {
       "description": "SetVariable activity properties.",
+      "type": "object",
       "properties": {
         "variableName": {
           "description": "Name of the variable whose value needs to be set.",
@@ -6705,6 +6770,7 @@
     "AppendVariableActivity": {
       "x-ms-discriminator-value": "AppendVariable",
       "description": "Append value for a Variable of type Array.",
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/ControlActivity"
@@ -6723,6 +6789,7 @@
     },
     "AppendVariableActivityTypeProperties": {
       "description": "AppendVariable activity properties.",
+      "type": "object",
       "properties": {
         "variableName": {
           "description": "Name of the variable whose value needs to be appended to.",
@@ -6754,6 +6821,7 @@
     "AzureFunctionActivity": {
       "x-ms-discriminator-value": "AzureFunctionActivity",
       "description": "Azure Function activity.",
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/ExecutionActivity"
@@ -6772,6 +6840,7 @@
     },
     "AzureFunctionActivityTypeProperties": {
       "description": "Azure Function activity type properties.",
+      "type": "object",
       "properties": {
         "method": {
           "description": "Rest API method for target endpoint.",
@@ -6798,6 +6867,7 @@
     "WebHookActivity": {
       "x-ms-discriminator-value": "WebHook",
       "description": "WebHook activity.",
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/ControlActivity"
@@ -6827,6 +6897,7 @@
     },
     "WebHookActivityTypeProperties": {
       "description": "WebHook activity type properties.",
+      "type": "object",
       "properties": {
         "method": {
           "description": "Rest API method for target endpoint.",
@@ -6864,6 +6935,7 @@
     },
     "ExecuteDataFlowActivity": {
       "description": "Execute data flow activity.",
+      "type": "object",
       "x-ms-discriminator-value": "ExecuteDataFlow",
       "allOf": [
         {
@@ -6883,6 +6955,7 @@
     },
     "ExecuteDataFlowActivityTypeProperties": {
       "description": "Execute data flow activity properties.",
+      "type": "object",
       "properties": {
         "dataFlow": {
           "description": "Data flow reference.",
@@ -7038,6 +7111,7 @@
     },
     "SynapseNotebookActivity": {
       "description": "Execute Synapse notebook activity.",
+      "type": "object",
       "x-ms-discriminator-value": "SynapseNotebook",
       "allOf": [
         {
@@ -7057,6 +7131,7 @@
     },
     "SynapseNotebookActivityTypeProperties": {
       "description": "Execute Synapse notebook activity properties.",
+      "type": "object",
       "properties": {
         "notebook": {
           "description": "Synapse notebook reference.",
@@ -7073,6 +7148,7 @@
     },
     "SynapseSparkJobDefinitionActivity": {
       "description": "Execute spark job activity.",
+      "type": "object",
       "x-ms-discriminator-value": "SparkJob",
       "allOf": [
         {
@@ -7092,6 +7168,7 @@
     },
     "SynapseSparkJobActivityTypeProperties": {
       "description": "Execute spark job activity properties.",
+      "type": "object",
       "properties": {
         "sparkJob": {
           "description": "Synapse spark job reference.",
@@ -7104,6 +7181,7 @@
     },
     "SqlPoolStoredProcedureActivity": {
       "description": "Execute SQL pool stored procedure activity.",
+      "type": "object",
       "x-ms-discriminator-value": "SqlPoolStoredProcedure",
       "allOf": [
         {
@@ -7128,6 +7206,7 @@
     },
     "SqlPoolStoredProcedureActivityTypeProperties": {
       "description": "SQL stored procedure activity properties.",
+      "type": "object",
       "properties": {
         "storedProcedureName": {
           "type": "object",
