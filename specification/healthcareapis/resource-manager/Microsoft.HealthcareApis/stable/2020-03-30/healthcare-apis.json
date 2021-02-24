@@ -178,6 +178,9 @@
               "$ref": "#/definitions/ServicesDescription"
             }
           },
+          "202": {
+            "description": "Accepted - Patch request accepted; the operation will complete asynchronously."
+          },
           "default": {
             "description": "DefaultErrorResponse",
             "schema": {
@@ -1115,6 +1118,10 @@
           "type": "string",
           "description": "Operation name: {provider}/{resource}/{read | write | action | delete}"
         },
+        "isDataAction": {
+          "description": "Gets or sets a value indicating whether the operation is a data action or not",
+          "type": "boolean"
+        },
         "origin": {
           "readOnly": true,
           "type": "string",
@@ -1123,6 +1130,10 @@
         "display": {
           "description": "The information displayed about the operation.",
           "$ref": "#/definitions/OperationDisplay"
+        },
+        "properties": {
+          "$ref": "#/definitions/OperationProperties",
+          "description": "Properties of the operation"
         }
       }
     },
@@ -1151,6 +1162,11 @@
           "description": "Friendly description for the operation,"
         }
       }
+    },
+    "OperationProperties": {
+      "description": "Operation properties.",
+      "type": "object",
+      "properties": {}
     },
     "ServicesPropertiesUpdateParameters": {
       "description": "The properties for updating a service instance.",
