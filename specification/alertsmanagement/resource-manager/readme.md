@@ -54,6 +54,17 @@ input-file:
   - Microsoft.AlertsManagement/preview/2021-02-01-preview/ActionRules.json
   - Microsoft.AlertsManagement/preview/2021-02-01-preview/AlertsManagement.json
 ```
+
+### Tag: package-preview-2021-01
+
+These settings apply only when `--tag=package-preview-2021-01` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2021-01'
+input-file:
+  - Microsoft.AlertsManagement/preview/2021-01-01-preview/AlertsManagement.json
+  - Microsoft.AlertsManagement/preview/2021-01-01-preview/MigrateFromSmartDetections.json
+```
+
 ### Tag: package-2019-06-preview
 
 These settings apply only when `--tag=package-2019-06-preview` is specified on the command line.
