@@ -8,10 +8,4 @@ az:
     namespace: azure.mgmt.capacity
     package-name: azure-mgmt-capacity
 az-output-folder: $(azure-cli-extension-folder)/src/capacity
-directive:
-  - where:
-      subject: QuotaInformation
-      parameter-name: resourceName
-    set:
-      parameter-name: name
 ```
