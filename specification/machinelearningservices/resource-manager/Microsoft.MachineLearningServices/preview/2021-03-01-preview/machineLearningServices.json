@@ -2225,7 +2225,7 @@
       "description": "An object that represents a machine learning workspace.",
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/Resource"
         }
       ],
       "properties": {
@@ -2233,6 +2233,28 @@
           "$ref": "#/definitions/WorkspaceProperties",
           "description": "The properties of the machine learning workspace.",
           "x-ms-client-flatten": true
+        },
+        "identity": {
+          "$ref": "#/definitions/Identity",
+          "description": "The identity of the resource."
+        },
+        "location": {
+          "description": "Specifies the location of the resource.",
+          "type": "string"
+        },
+        "tags": {
+          "description": "Contains resource tags defined as key/value pairs.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "sku": {
+          "$ref": "#/definitions/Sku",
+          "description": "The sku of the workspace."
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
         }
       }
     },
@@ -2956,19 +2978,7 @@
       }
     },
     "Resource": {
-      "description": "Azure Resource Manager resource envelope.",
-      "x-ms-azure-resource": true,
       "properties": {
-        "id": {
-          "description": "Specifies the resource ID.",
-          "type": "string",
-          "readOnly": true
-        },
-        "name": {
-          "description": "Specifies the name of the resource.",
-          "type": "string",
-          "readOnly": true
-        },
         "identity": {
           "$ref": "#/definitions/Identity",
           "description": "The identity of the resource."
@@ -2976,11 +2986,6 @@
         "location": {
           "description": "Specifies the location of the resource.",
           "type": "string"
-        },
-        "type": {
-          "description": "Specifies the type of the resource.",
-          "type": "string",
-          "readOnly": true
         },
         "tags": {
           "description": "Contains resource tags defined as key/value pairs.",
@@ -3132,7 +3137,7 @@
       "description": "Machine Learning compute object wrapped into ARM resource envelope.",
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/Resource"
         },
         {
           "type": "object",
@@ -3143,7 +3148,31 @@
             }
           }
         }
-      ]
+      ],
+      "properties": {
+        "identity": {
+          "$ref": "#/definitions/Identity",
+          "description": "The identity of the resource."
+        },
+        "location": {
+          "description": "Specifies the location of the resource.",
+          "type": "string"
+        },
+        "tags": {
+          "description": "Contains resource tags defined as key/value pairs.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "sku": {
+          "$ref": "#/definitions/Sku",
+          "description": "The sku of the workspace."
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
+        }
+      }
     },
     "Compute": {
       "type": "object",
@@ -4308,11 +4337,33 @@
           "$ref": "#/definitions/PrivateEndpointConnectionProperties",
           "x-ms-client-flatten": true,
           "description": "Resource properties."
+        },
+        "identity": {
+          "$ref": "#/definitions/Identity",
+          "description": "The identity of the resource."
+        },
+        "location": {
+          "description": "Specifies the location of the resource.",
+          "type": "string"
+        },
+        "tags": {
+          "description": "Contains resource tags defined as key/value pairs.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "sku": {
+          "$ref": "#/definitions/Sku",
+          "description": "The sku of the workspace."
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
         }
       },
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/Resource"
         }
       ],
       "description": "The Private Endpoint Connection resource."
@@ -4417,11 +4468,33 @@
           "$ref": "#/definitions/PrivateLinkResourceProperties",
           "description": "Resource properties.",
           "x-ms-client-flatten": true
+        },
+        "identity": {
+          "$ref": "#/definitions/Identity",
+          "description": "The identity of the resource."
+        },
+        "location": {
+          "description": "Specifies the location of the resource.",
+          "type": "string"
+        },
+        "tags": {
+          "description": "Contains resource tags defined as key/value pairs.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "sku": {
+          "$ref": "#/definitions/Sku",
+          "description": "The sku of the workspace."
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
         }
       },
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/Resource"
         }
       ],
       "description": "A private link resource"
@@ -4551,9 +4624,33 @@
     "ServiceResource": {
       "type": "object",
       "description": "Machine Learning service object wrapped into ARM resource envelope.",
+      "properties": {
+        "identity": {
+          "$ref": "#/definitions/Identity",
+          "description": "The identity of the resource."
+        },
+        "location": {
+          "description": "Specifies the location of the resource.",
+          "type": "string"
+        },
+        "tags": {
+          "description": "Contains resource tags defined as key/value pairs.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "sku": {
+          "$ref": "#/definitions/Sku",
+          "description": "The sku of the workspace."
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
+        }
+      },
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/Resource"
         },
         {
           "type": "object",
