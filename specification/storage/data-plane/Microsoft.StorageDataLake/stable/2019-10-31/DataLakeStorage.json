@@ -704,6 +704,21 @@
             }
           },
           {
+            "name": "blobtype",
+            "in": "query",
+            "description": "Type of the blob being created. The value must be \"blockblob\" or \"appendblob\".",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "blockblob",
+              "appendblob"
+            ],
+            "x-ms-enum": {
+              "name": "PathBlobType",
+              "modelAsString": false
+            }
+          },
+          {
             "name": "continuation",
             "in": "query",
             "description": "Optional.  When renaming a directory, the number of paths that are renamed with each invocation is limited.  If the number of paths to be renamed exceeds this limit, a continuation token is returned in this response header.  When a continuation token is returned in the response, it must be specified in a subsequent invocation of the rename operation to continue renaming the directory.",
@@ -893,7 +908,7 @@
       "patch": {
         "operationId": "Path_Update",
         "summary": "Append Data | Flush Data | Set Properties | Set Access Control",
-        "description": "Uploads data to be appended to a file, flushes (writes) previously uploaded data to a file, sets properties for a file or directory, or sets access control for a file or directory. Data can only be appended to a file. This operation supports conditional HTTP requests. For more information, see [Specifying Conditional Headers for Blob Service Operations](https://docs.microsoft.com/en-us/rest/api/storageservices/specifying-conditional-headers-for-blob-service-operations).",
+        "description": "Uploads data to be appended to a file, flushes (writes) previously uploaded data to a file, sets properties for a file or directory, or sets access control for a file or directory. Data can only be appended to a file. Concurrent writes to the same file using multiple clients are not supported. This operation supports conditional HTTP requests. For more information, see [Specifying Conditional Headers for Blob Service Operations](https://docs.microsoft.com/en-us/rest/api/storageservices/specifying-conditional-headers-for-blob-service-operations).",
         "consumes": [
           "application/octet-stream",
           "text/plain"
