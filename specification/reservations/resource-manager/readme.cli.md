@@ -8,7 +8,6 @@ cli:
   cli-name: capacity
   package-name: azure-mgmt-capacity
   namespace: azure.mgmt.capacity
-  cli:
   cli-directive:
     - select: 'operationGroup'
       where:
