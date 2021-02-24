@@ -7,14 +7,10 @@
     "api-version": "2020-11-01-preview",
     "parameters": {
       "location": "southeastasia",
-      "sku": {
-        "name": "S0",
-        "tier": "Standard"
-      },
       "properties": {
         "createMode": "PointInTimeRestore",
-        "sourceDatabaseId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/Default-SQL-SouthEastAsia/providers/Microsoft.Sql/servers/testsvr/databases/testdb",
-        "restorePointInTime": "2017-07-14T05:35:31.503Z"
+        "sourceDatabaseId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/Default-SQL-SoutheastAsia/providers/Microsoft.Sql/servers/testsvr/databases/testdb",
+        "restorePointInTime": "2020-10-22T05:35:31.503Z"
       }
     }
   },
@@ -22,22 +18,34 @@
     "200": {
       "body": {
         "sku": {
-          "name": "S0",
-          "tier": "Standard"
+          "name": "Standard",
+          "tier": "Standard",
+          "capacity": 10
         },
         "kind": "v12.0,user",
         "properties": {
           "collation": "SQL_Latin1_General_CP1_CI_AS",
           "maxSizeBytes": 268435456000,
           "status": "Online",
-          "databaseId": "6c764297-577b-470f-9af4-96d3d41e2ba3",
-          "creationDate": "2017-06-07T04:41:33.937Z",
+          "databaseId": "2463ef48-53e2-4c26-9781-2d7138080bfd",
+          "creationDate": "2020-10-23T20:31:35.807Z",
           "currentServiceObjectiveName": "S0",
-          "defaultSecondaryLocation": "North Europe",
-          "catalogCollation": "SQL_Latin1_General_CP1_CI_AS"
+          "requestedServiceObjectiveName": "S0",
+          "defaultSecondaryLocation": "SoutheastAsia",
+          "catalogCollation": "SQL_Latin1_General_CP1_CI_AS",
+          "zoneRedundant": false,
+          "earliestRestoreDate": "2020-10-23T20:47:37Z",
+          "readScale": "Disabled",
+          "currentSku": {
+            "name": "Standard",
+            "tier": "Standard",
+            "capacity": 10
+          },
+          "currentBackupStorageRedundancy": "Geo",
+          "requestedBackupStorageRedundancy": "Geo"
         },
-        "location": "southeastasia",
-        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/Default-SQL-SouthEastAsia/providers/Microsoft.Sql/servers/testsvr/databases/dbpitr",
+        "location": "SoutheastAsia",
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/Default-SQL-SoutheastAsia/providers/Microsoft.Sql/servers/testsvr/databases/dbpitr",
         "name": "dbpitr",
         "type": "Microsoft.Sql/servers/databases"
       }
@@ -45,22 +53,34 @@
     "201": {
       "body": {
         "sku": {
-          "name": "S0",
-          "tier": "Standard"
+          "name": "Standard",
+          "tier": "Standard",
+          "capacity": 10
         },
         "kind": "v12.0,user",
         "properties": {
           "collation": "SQL_Latin1_General_CP1_CI_AS",
           "maxSizeBytes": 268435456000,
           "status": "Online",
-          "databaseId": "6c764297-577b-470f-9af4-96d3d41e2ba3",
-          "creationDate": "2017-06-07T04:41:33.937Z",
+          "databaseId": "2463ef48-53e2-4c26-9781-2d7138080bfd",
+          "creationDate": "2020-10-23T20:31:35.807Z",
           "currentServiceObjectiveName": "S0",
-          "defaultSecondaryLocation": "North Europe",
-          "catalogCollation": "SQL_Latin1_General_CP1_CI_AS"
+          "requestedServiceObjectiveName": "S0",
+          "defaultSecondaryLocation": "SoutheastAsia",
+          "catalogCollation": "SQL_Latin1_General_CP1_CI_AS",
+          "zoneRedundant": false,
+          "earliestRestoreDate": "2020-10-23T20:47:37Z",
+          "readScale": "Disabled",
+          "currentSku": {
+            "name": "Standard",
+            "tier": "Standard",
+            "capacity": 10
+          },
+          "currentBackupStorageRedundancy": "Geo",
+          "requestedBackupStorageRedundancy": "Geo"
         },
-        "location": "southeastasia",
-        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/Default-SQL-SouthEastAsia/providers/Microsoft.Sql/servers/testsvr/databases/dbpitr",
+        "location": "SoutheastAsia",
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/Default-SQL-SoutheastAsia/providers/Microsoft.Sql/servers/testsvr/databases/dbpitr",
         "name": "dbpitr",
         "type": "Microsoft.Sql/servers/databases"
       }
