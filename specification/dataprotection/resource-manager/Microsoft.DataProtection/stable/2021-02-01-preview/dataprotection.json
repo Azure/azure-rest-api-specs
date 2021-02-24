@@ -1801,6 +1801,51 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataProtection/vaultGuards": {
+      "get": {
+        "tags": [
+          "VaultGuards"
+        ],
+        "summary": "Returns VaultGuards collection belonging to a ResourceGroup.",
+        "operationId": "VaultGuards_GetResourcesInResourceGroup",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/VaultGuardResourceList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Get VaultGuards in Subscription": {
+            "$ref": "./examples/VaultGuardCRUD/GetVaultGuardsInResourceGroup.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataProtection/vaultGuards/{vaultGuardsName}": {
       "put": {
         "tags": [
@@ -1858,6 +1903,53 @@
         "x-ms-examples": {
           "Create VaultGuard": {
             "$ref": "./examples/VaultGuardCRUD/PutVaultGuard.json"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "VaultGuards"
+        ],
+        "summary": "Returns a VaultGuard belonging to a resource group.",
+        "operationId": "VaultGuards_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "name": "vaultGuardsName",
+            "in": "path",
+            "description": "The name of VaultGuard",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/VaultGuardResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create VaultGuard": {
+            "$ref": "./examples/VaultGuardCRUD/GetVaultGuard.json"
           }
         }
       },
