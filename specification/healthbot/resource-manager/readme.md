@@ -25,6 +25,7 @@ For other options on installation see [Installing AutoRest](https://aka.ms/autor
 These are the global settings for the healthbot.
 
 ```yaml
+title: HealthbotClient
 openapi-type: arm
 openapi-subtype: rpaas
 tag: package-2020-12-08
@@ -113,3 +114,7 @@ See configuration in [readme.csharp.md](./readme.csharp.md)
 ## GO
 
 See configuration in [readme.go.md](./readme.go.md)
+
+## Java
+
+See configuration in [readme.java.md](./readme.java.md)

@@ -21,6 +21,7 @@
         "tags": [
           "DatabaseExtensions"
         ],
+        "description": "Gets a database extension. This will return resource not found as it is not supported.",
         "operationId": "DatabaseExtensions_Get",
         "parameters": [
           {
@@ -47,13 +48,15 @@
         ],
         "responses": {
           "200": {
-            "description": "Get extensions import/export operation.",
-            "schema": {
-              "$ref": "#/definitions/ImportExportExtensionsOperationResult"
-            }
+            "description": "Get extensions import/export operation. This will return resource not found as it is not supported."
           },
           "default": {
             "description": "*** Error Responses: ***"
+          }
+        },
+        "x-ms-examples": {
+          "Get database extensions.": {
+            "$ref": "./examples/GetDatabaseExtensions.json"
           }
         }
       },
@@ -61,6 +64,7 @@
         "tags": [
           "DatabaseExtensions"
         ],
+        "description": "Perform a database extension operation, like polybase import",
         "operationId": "DatabaseExtensions_CreateOrUpdate",
         "parameters": [
           {
@@ -108,7 +112,12 @@
             "description": "Import/Export operation is in progress."
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Create or Update database extensions.": {
+            "$ref": "./examples/CreateOrUpdateDatabaseExtensions.json"
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/extensions": {
@@ -116,6 +125,7 @@
         "tags": [
           "DatabaseExtensions"
         ],
+        "description": "List database extension. This will return an empty list as it is not supported.",
         "operationId": "DatabaseExtensions_ListByDatabase",
         "parameters": [
           {
@@ -136,7 +146,7 @@
         ],
         "responses": {
           "200": {
-            "description": "List extensions import/export operations.",
+            "description": "List extensions import/export operations. This will return an empty list as it is not supported.",
             "schema": {
               "$ref": "#/definitions/ImportExportExtensionsOperationListResult"
             }
@@ -147,6 +157,11 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List database extensions.": {
+            "$ref": "./examples/ListDatabaseExtensions.json"
+          }
         }
       }
     }
