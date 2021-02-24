@@ -764,6 +764,45 @@
           }
         }
       }
+    },
+    "/prebuilt/generateAnswer": {
+      "post": {
+        "tags": [
+          "Knowledgebases"
+        ],
+        "summary": "GenerateAnswer call to query documents.",
+        "operationId": "Prebuilt_GenerateAnswer",
+        "parameters": [          
+          {
+            "$ref": "#/parameters/PrebuiltGenerateAnswerPayload"
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Prebuilt GenerateAnswer call response.",
+            "schema": {
+              "$ref": "#/definitions/GenerateAnswerBatchResult"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful query": {
+            "$ref": "./examples/SuccessfulPreBuiltGenAns.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -1786,7 +1825,47 @@
           "format": "int32"
         }
       }
-    }
+    },
+    "PrebuiltQuery": {
+      "type": "object",
+      "description": "POST body schema to query the documents.",
+      "additionalProperties": false,
+      "properties": {       
+        "question": {
+          "type": "string",
+          "description": "User question to query against the given documents."
+        },       
+        "userId": {
+          "type": "string",
+          "description": "Unique identifier for the user."
+        },
+        "documents": {
+          "type": "array",
+          "description": "Documents to be searched for given question.",
+          "items": {
+            "$ref": "#/definitions/PrebuiltDocument"
+          }
+        },
+         "language": {
+          "type": "string",
+          "description": "Language of the document and question. Please find the list of supported languages and corresponding codes <a href=\"https://aka.ms/qnamaker-languages#languages-supported\" target=\"_blank\">here</a>.",
+          "maxLength": 100,
+          "minLength": 1
+        }
+      },
+      "PrebuiltDocument": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {       
+        "text": {
+          "type": "string",
+          "description": "Text contents of the document."
+        },       
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the document."
+        }
+      }      
   },
   "parameters": {
     "Environment": {
@@ -1918,6 +1997,17 @@
       "x-nullable": true,
       "description": "Post body of the request.",
       "x-ms-parameter-location": "method"
-    }
+    },
+    "PrebuiltGenerateAnswerPayload": {
+      "name": "prebuiltGenerateAnswerPayload",
+      "in": "body",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/PrebuiltQuery"
+      },
+      "x-nullable": true,
+      "description": "Post body of the request.",
+      "x-ms-parameter-location": "method"
+    },
   }
 }
