@@ -686,7 +686,7 @@
         ],
         "summary": "Get the health details of an App Service Environment.",
         "description": "Description for Get the health details of an App Service Environment.",
-        "operationId": "AppServiceEnvironments_GetHealth",
+        "operationId": "AppServiceEnvironments_GetHealthDefault",
         "parameters": [
           {
             "$ref": "#/parameters/resourceGroupNameParameter"
@@ -2270,7 +2270,7 @@
               "description": "Additional virtual IPs.",
               "type": "array",
               "items": {
-                "$ref": "./CommonDefinitions.json#/definitions/VirtualIPMapping"
+                "$ref": "#/definitions/VirtualIPMapping"
               }
             }
           },
@@ -2820,6 +2820,86 @@
         }
       }
     },
+    "StampCapacity": {
+      "description": "Stamp capacity information.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Name of the stamp.",
+          "type": "string"
+        },
+        "availableCapacity": {
+          "format": "int64",
+          "description": "Available capacity (# of machines, bytes of storage etc...).",
+          "type": "integer"
+        },
+        "totalCapacity": {
+          "format": "int64",
+          "description": "Total capacity (# of machines, bytes of storage etc...).",
+          "type": "integer"
+        },
+        "unit": {
+          "description": "Name of the unit.",
+          "type": "string"
+        },
+        "computeMode": {
+          "description": "Shared/dedicated workers.",
+          "enum": [
+            "Shared",
+            "Dedicated",
+            "Dynamic"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ComputeModeOptions",
+            "modelAsString": false
+          }
+        },
+        "workerSize": {
+          "description": "Size of the machines.",
+          "enum": [
+            "Small",
+            "Medium",
+            "Large",
+            "D1",
+            "D2",
+            "D3",
+            "SmallV3",
+            "MediumV3",
+            "LargeV3",
+            "NestedSmall",
+            "NestedSmallLinux",
+            "Default"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "WorkerSizeOptions",
+            "modelAsString": false
+          }
+        },
+        "workerSizeId": {
+          "format": "int32",
+          "description": "Size ID of machines: \n0 - Small\n1 - Medium\n2 - Large",
+          "type": "integer"
+        },
+        "excludeFromCapacityAllocation": {
+          "description": "If <code>true</code>, it includes basic apps.\nBasic apps are not used for capacity allocation.",
+          "type": "boolean"
+        },
+        "isApplicableForAllComputeModes": {
+          "description": "<code>true</code> if capacity is applicable for all apps; otherwise, <code>false</code>.",
+          "type": "boolean"
+        },
+        "siteMode": {
+          "description": "Shared or Dedicated.",
+          "type": "string"
+        },
+        "isLinux": {
+          "description": "Is this a linux stamp capacity",
+          "type": "boolean"
+        }
+      }
+    },
     "StampCapacityCollection": {
       "description": "Collection of stamp capacities.",
       "required": [
@@ -2831,7 +2911,7 @@
           "description": "Collection of resources.",
           "type": "array",
           "items": {
-            "$ref": "./CommonDefinitions.json#/definitions/StampCapacity"
+            "$ref": "#/definitions/StampCapacity"
           }
         },
         "nextLink": {
@@ -2945,6 +3025,75 @@
         }
       }
     },
+    "VirtualIPMapping": {
+      "description": "Virtual IP mapping.",
+      "type": "object",
+      "properties": {
+        "virtualIP": {
+          "description": "Virtual IP address.",
+          "type": "string"
+        },
+        "internalHttpPort": {
+          "format": "int32",
+          "description": "Internal HTTP port.",
+          "type": "integer"
+        },
+        "internalHttpsPort": {
+          "format": "int32",
+          "description": "Internal HTTPS port.",
+          "type": "integer"
+        },
+        "inUse": {
+          "description": "Is virtual IP mapping in use.",
+          "type": "boolean"
+        },
+        "serviceName": {
+          "description": "name of the service that virtual IP is assigned to",
+          "type": "string"
+        }
+      }
+    },
+    "WorkerPool": {
+      "description": "Worker pool of an App Service Environment.",
+      "type": "object",
+      "properties": {
+        "workerSizeId": {
+          "format": "int32",
+          "description": "Worker size ID for referencing this worker pool.",
+          "type": "integer"
+        },
+        "computeMode": {
+          "description": "Shared or dedicated app hosting.",
+          "enum": [
+            "Shared",
+            "Dedicated",
+            "Dynamic"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ComputeModeOptions",
+            "modelAsString": false
+          }
+        },
+        "workerSize": {
+          "description": "VM size of the worker pool instances.",
+          "type": "string"
+        },
+        "workerCount": {
+          "format": "int32",
+          "description": "Number of instances in the worker pool.",
+          "type": "integer"
+        },
+        "instanceNames": {
+          "description": "Names of all instances in the worker pool (read only).",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        }
+      }
+    },
     "WorkerPoolCollection": {
       "description": "Collection of worker pools.",
       "required": [
@@ -2976,7 +3125,7 @@
       ],
       "properties": {
         "properties": {
-          "$ref": "./CommonDefinitions.json#/definitions/WorkerPool",
+          "$ref": "#/definitions/WorkerPool",
           "description": "Core resource properties",
           "x-ms-client-flatten": true
         },

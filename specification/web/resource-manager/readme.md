@@ -61,6 +61,7 @@ NOTE: Currently these tags are the same, but it will need to be split if any fil
 ``` yaml $(tag) == 'package-2020-12' || $(tag) == 'package-2020-12-only'
 input-file:
 - Microsoft.CertificateRegistration/stable/2020-12-01/AppServiceCertificateOrders.json
+- Microsoft.CertificateRegistration/stable/2020-12-01/CertificateOrdersDiagnostics.json
 - Microsoft.CertificateRegistration/stable/2020-12-01/CertificateRegistrationProvider.json
 - Microsoft.DomainRegistration/stable/2020-12-01/Domains.json
 - Microsoft.DomainRegistration/stable/2020-12-01/TopLevelDomains.json
@@ -69,6 +70,7 @@ input-file:
 - Microsoft.Web/stable/2020-12-01/CommonDefinitions.json
 - Microsoft.Web/stable/2020-12-01/DeletedWebApps.json
 - Microsoft.Web/stable/2020-12-01/Diagnostics.json
+- Microsoft.Web/stable/2020-12-01/Global.json
 - Microsoft.Web/stable/2020-12-01/Provider.json
 - Microsoft.Web/stable/2020-12-01/Recommendations.json
 - Microsoft.Web/stable/2020-12-01/ResourceProvider.json
