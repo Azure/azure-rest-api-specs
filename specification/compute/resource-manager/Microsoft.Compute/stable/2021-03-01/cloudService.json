@@ -1467,13 +1467,13 @@
         "tags": [
           "CloudServiceOperatingSystems"
         ],
-        "description": "Display information about a cloud service OS version.",
+        "description": "Gets properties of a guest operating system version that can be specified in the XML service configuration (.cscfg) for a cloud service.",
         "operationId": "CloudServiceOperatingSystems_GetOSVersion",
         "parameters": [
           {
             "in": "path",
             "name": "location",
-            "description": "Name of the location.",
+            "description": "Name of the location that the OS version pertains to.",
             "required": true,
             "type": "string"
           },
@@ -1517,13 +1517,13 @@
         "tags": [
           "CloudServiceOperatingSystems"
         ],
-        "description": "Gets a list of all cloud service OS versions available in the location. Use nextLink property in the response to get the next page of OS versions. Do this till nextLink is null to fetch all the OS versions.",
+        "description": "Gets a list of all guest operating system versions available to be specified in the XML service configuration (.cscfg) for a cloud service. Use nextLink property in the response to get the next page of OS versions. Do this till nextLink is null to fetch all the OS versions.",
         "operationId": "CloudServiceOperatingSystems_ListOSVersions",
         "parameters": [
           {
             "in": "path",
             "name": "location",
-            "description": "Name of the location.",
+            "description": "Name of the location that the OS versions pertain to.",
             "required": true,
             "type": "string"
           },
@@ -1563,13 +1563,13 @@
         "tags": [
           "CloudServiceOperatingSystems"
         ],
-        "description": "Display information about a cloud service OS family.",
+        "description": "Gets properties of a guest operating system family that can be specified in the XML service configuration (.cscfg) for a cloud service.",
         "operationId": "CloudServiceOperatingSystems_GetOSFamily",
         "parameters": [
           {
             "in": "path",
             "name": "location",
-            "description": "Name of the location.",
+            "description": "Name of the location that the OS family pertains to.",
             "required": true,
             "type": "string"
           },
@@ -1613,13 +1613,13 @@
         "tags": [
           "CloudServiceOperatingSystems"
         ],
-        "description": "Gets a list of all cloud service OS families available in the location. Use nextLink property in the response to get the next page of OS Families. Do this till nextLink is null to fetch all the OS Families.",
+        "description": "Gets a list of all guest operating system families available to be specified in the XML service configuration (.cscfg) for a cloud service. Use nextLink property in the response to get the next page of OS Families. Do this till nextLink is null to fetch all the OS Families.",
         "operationId": "CloudServiceOperatingSystems_ListOSFamilies",
         "parameters": [
           {
             "in": "path",
             "name": "location",
-            "description": "Name of the location.",
+            "description": "Name of the location that the OS families pertain to.",
             "required": true,
             "type": "string"
           },
@@ -2541,7 +2541,7 @@
       ]
     },
     "OSVersionPropertiesBase": {
-      "description": "Family view of OS version.",
+      "description": "Configuration view of an OS version.",
       "type": "object",
       "properties": {
         "version": {
