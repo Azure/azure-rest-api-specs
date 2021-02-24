@@ -273,7 +273,7 @@
             "schema": {
               "$ref": "#/definitions/ResourceProviderOperationList"
             }
-	  },
+          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
@@ -288,7 +288,7 @@
     }
   },
   "definitions": {
-     "SystemData": {
+    "SystemData": {
       "description": "Top level metadata https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/common-api-contracts.md#system-metadata-for-all-azure-resources",
       "type": "object",
       "properties": {
@@ -344,7 +344,7 @@
           "readOnly": true,
           "type": "string",
           "description": "Resource type"
-         },
+        },
         "systemData": {
           "description": "Top level metadata https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/common-api-contracts.md#system-metadata-for-all-azure-resources",
           "$ref": "#/definitions/SystemData"
@@ -500,7 +500,7 @@
     "SourceControlConfiguration": {
       "description": "The SourceControl Configuration object returned in Get & Put response.",
       "properties": {
-       "properties": {
+        "properties": {
           "type": "object",
           "x-ms-client-flatten": true,
           "description": "Properties to create a Source Control Configuration resource",
@@ -552,7 +552,7 @@
               "description": "Properties for Helm operator.",
               "type": "object",
               "$ref": "#/definitions/HelmOperatorProperties"
-             },
+            },
             "provisioningState": {
               "type": "string",
               "description": "The provisioning state of the resource provider.",
@@ -574,9 +574,8 @@
               "description": "Compliance Status of the Configuration",
               "readOnly": true,
               "$ref": "#/definitions/ComplianceStatus"
-	      
             }
-	  }
+          }
         }
       },
       "allOf": [
@@ -631,12 +630,11 @@
               "type": "string"
             }
           }
-         },
+        },
         "isDataAction": {
           "description": "The flag that indicates whether the operation applies to data plane.",
           "type": "boolean",
           "readOnly": true
-        
         }
       }
     },
