@@ -1829,6 +1829,10 @@
     "PrebuiltQuery": {
       "type": "object",
       "description": "POST body schema to query the documents via Prebuilt Question Answering.",
+      "required": [
+        "question",
+        "documents"
+      ],
       "additionalProperties": false,
       "properties": {
         "question": {
@@ -1839,34 +1843,30 @@
           "type": "array",
           "description": "Documents to be searched for given question.",
           "items": {
-            "$ref": "#/definitions/TextInput"
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "id",
+              "text"
+            ],
+            "properties": {
+
+              "id": {
+                "type": "string",
+                "description": "Unique identifier for the document."
+              },
+              "text": {
+                "type": "string",
+                "description": "Text contents of the document"
+              }
+            }
           }
         },
-         "language": {
+        "language": {
           "type": "string",
-          "description": "Language of the document. See here https://docs.microsoft.com/en-us/azure/cognitive-services/text-analytics/language-support?tabs=language-qna for the list of language codes supported.",
+          "description": "(Optional) Language of the documents. This is the 2 letter ISO 639-1 representation of a language. For example, use \"en\" for English; \"es\" for Spanish etc. If not set, use \"en\" for English as default.",
           "maxLength": 100,
           "minLength": 2
-        },
-        "userId": {
-          "type": "string",
-          "description": "Unique identifier for the user."
-        }
-      }
-    },
-    "TextInput": {
-      "type": "object",
-      "additionalProperties": false,
-      "properties": {
-        "text": {
-          "type": "string",
-          "description": "Text contents of the document. 5,120 characters as measured by StringInfo.LengthInTextElements.",
-          "maxLength": 5120
-        },
-        "id": {
-          "type": "string",
-          "description": "Unique identifier for the document.",
-          "maxLength": 36
         }
       }
     },
