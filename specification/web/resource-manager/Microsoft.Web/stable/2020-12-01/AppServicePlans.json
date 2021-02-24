@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2020-10-01",
+    "version": "2020-12-01",
     "title": "AppServicePlans API Client"
   },
   "host": "management.azure.com",
@@ -1540,7 +1540,7 @@
               "readOnly": true
             },
             "reserved": {
-              "description": "This needs to set to <code>true</code> when creating a Linux App Service Plan, along with <code>kind</code> set to <code>Linux</code>. It should be <code>false</code> otherwise.",
+              "description": "If Linux app service plan <code>true</code>, <code>false</code> otherwise.",
               "default": false,
               "type": "boolean",
               "x-ms-mutability": [
@@ -1577,7 +1577,7 @@
               "type": "integer"
             },
             "provisioningState": {
-              "description": "Provisioning state of the App Service Environment.",
+              "description": "Provisioning state of the App Service Plan.",
               "enum": [
                 "Succeeded",
                 "Failed",
@@ -1591,6 +1591,10 @@
                 "name": "ProvisioningState",
                 "modelAsString": false
               }
+            },
+            "kubeEnvironmentProfile": {
+              "$ref": "./CommonDefinitions.json#/definitions/KubeEnvironmentProfile",
+              "description": "Specification for the Kubernetes Environment to use for the App Service plan."
             }
           },
           "x-ms-client-flatten": true

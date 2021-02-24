@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2020-10-01",
+    "version": "2020-12-01",
     "title": " API Client"
   },
   "host": "management.azure.com",
@@ -46,11 +46,6 @@
             "schema": {
               "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Generate Github Access Token For AppService CLI": {
-            "$ref": "./examples/GenerateGithubAccessTokenForAppserviceCLIAsync.json"
           }
         }
       }
@@ -299,6 +294,112 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Web/customhostnames": {
+      "get": {
+        "summary": "List all hostnames in a subscription",
+        "description": "Description for List all hostnames in a subscription",
+        "operationId": "ListCustomHostNames",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/IdentifierCollection"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Web/customhostnames/{hostName}": {
+      "get": {
+        "summary": "Get custom hostname",
+        "description": "Description for Get custom hostname",
+        "operationId": "GetCustomHostName",
+        "parameters": [
+          {
+            "name": "hostName",
+            "in": "path",
+            "description": "Hostname in the hostname binding.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Web/customhostnames/{hostname}/sites": {
+      "get": {
+        "summary": "Get custom hostname",
+        "description": "Description for Get custom hostname",
+        "operationId": "ListCustomHostNameSites",
+        "parameters": [
+          {
+            "name": "hostname",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/IdentifierCollection"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Web/deploymentLocations": {
       "get": {
         "summary": "Gets list of available geo regions plus ministamps",
@@ -347,7 +448,10 @@
               "Premium",
               "Dynamic",
               "Isolated",
+              "IsolatedV2",
               "PremiumV2",
+              "PremiumV3",
+              "PremiumContainer",
               "ElasticPremium",
               "ElasticIsolated"
             ],
@@ -700,8 +804,7 @@
       "properties": {
         "code": {
           "description": "Code string to exchange for Github Access token",
-          "type": "string",
-          "x-ms-secret": true
+          "type": "string"
         },
         "state": {
           "description": "State string used for verification.",
@@ -744,6 +847,11 @@
             "osType": {
               "description": "App Service OS type meter used for",
               "type": "string"
+            },
+            "multiplier": {
+              "format": "double",
+              "description": "Meter Multiplier",
+              "type": "number"
             }
           },
           "x-ms-client-flatten": true
@@ -1205,6 +1313,10 @@
         "containerImagePlatform": {
           "description": "Platform (windows or linux)",
           "type": "string"
+        },
+        "appServiceEnvironment": {
+          "$ref": "./CommonDefinitions.json#/definitions/AppServiceEnvironment",
+          "description": "App Service Environment Properties"
         }
       }
     },
@@ -1226,7 +1338,8 @@
           "description": "Resource type used for verification.",
           "enum": [
             "ServerFarm",
-            "Site"
+            "Site",
+            "Microsoft.Web/hostingEnvironments"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -1296,6 +1409,10 @@
             "vnetSubnetName": {
               "description": "The subnet name to be validated",
               "type": "string"
+            },
+            "subnetResourceId": {
+              "description": "The ARM Resource ID of the subnet to validate",
+              "type": "string"
             }
           },
           "x-ms-client-flatten": true
@@ -1314,12 +1431,23 @@
         "properties": {
           "description": "VnetValidationFailureDetails resource specific properties",
           "properties": {
+            "message": {
+              "description": "Text describing the validation outcome.",
+              "type": "string"
+            },
             "failed": {
               "description": "A flag describing whether or not validation failed.",
               "type": "boolean"
             },
             "failedTests": {
               "description": "A list of tests that failed in the validation.",
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/VnetValidationTestFailure"
+              }
+            },
+            "warnings": {
+              "description": "A list of warnings generated during validation.",
               "type": "array",
               "items": {
                 "$ref": "#/definitions/VnetValidationTestFailure"

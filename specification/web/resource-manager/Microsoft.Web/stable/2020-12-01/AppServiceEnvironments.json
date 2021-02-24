@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2020-10-01",
+    "version": "2020-12-01",
     "title": "AppServiceEnvironments API Client"
   },
   "host": "management.azure.com",
@@ -448,6 +448,96 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/hostingEnvironments/{name}/configurations/networking": {
+      "get": {
+        "tags": [
+          "AppServiceEnvironments"
+        ],
+        "summary": "Get networking configuration of an App Service Environment",
+        "description": "Description for Get networking configuration of an App Service Environment",
+        "operationId": "AppServiceEnvironments_GetAseV3NetworkingConfiguration",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the App Service Environment.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/AseV3NetworkingConfiguration"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "AppServiceEnvironments"
+        ],
+        "summary": "Update networking configuration of an App Service Environment",
+        "description": "Description for Update networking configuration of an App Service Environment",
+        "operationId": "AppServiceEnvironments_UpdateAseNetworkingConfiguration",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the App Service Environment.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "aseNetworkingConfiguration",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AseV3NetworkingConfiguration"
+            }
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/AseV3NetworkingConfiguration"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/hostingEnvironments/{name}/diagnostics": {
       "get": {
         "tags": [
@@ -538,6 +628,100 @@
             "schema": {
               "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
             }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/hostingEnvironments/{name}/health": {
+      "get": {
+        "tags": [
+          "AppServiceEnvironments"
+        ],
+        "summary": "Get the health details of an App Service Environment.",
+        "description": "Description for Get the health details of an App Service Environment.",
+        "operationId": "AppServiceEnvironments_GetHealth",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the App Service Environment.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/HostingEnvironmentHealth"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get ASE Health": {
+            "$ref": "./examples/AseHealth.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/hostingEnvironments/{name}/health/default": {
+      "get": {
+        "tags": [
+          "AppServiceEnvironments"
+        ],
+        "summary": "Get the health details of an App Service Environment.",
+        "description": "Description for Get the health details of an App Service Environment.",
+        "operationId": "AppServiceEnvironments_GetHealth",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the App Service Environment.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/HostingEnvironmentHealth"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get ASE Health": {
+            "$ref": "./examples/AseHealth.json"
           }
         }
       }
@@ -1069,6 +1253,262 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/hostingEnvironments/{name}/privateEndpointConnections": {
+      "get": {
+        "tags": [
+          "AppServiceEnvironments"
+        ],
+        "summary": "Gets the list of private endpoints associated with a hosting environment",
+        "description": "Description for Gets the list of private endpoints associated with a hosting environment",
+        "operationId": "AppServiceEnvironments_GetPrivateEndpointConnectionList",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the App Service Environment.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/PrivateEndpointConnectionCollection"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/hostingEnvironments/{name}/privateEndpointConnections/{privateEndpointConnectionName}": {
+      "get": {
+        "tags": [
+          "AppServiceEnvironments"
+        ],
+        "summary": "Gets a private endpoint connection",
+        "description": "Description for Gets a private endpoint connection",
+        "operationId": "AppServiceEnvironments_GetPrivateEndpointConnection",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the App Service Environment.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "privateEndpointConnectionName",
+            "in": "path",
+            "description": "Name of the private endpoint connection.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/PrivateEndpointConnectionResource"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "AppServiceEnvironments"
+        ],
+        "summary": "Approves or rejects a private endpoint connection",
+        "description": "Description for Approves or rejects a private endpoint connection",
+        "operationId": "AppServiceEnvironments_ApproveOrRejectPrivateEndpointConnection",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the App Service Environment.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "privateEndpointConnectionName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "privateEndpointWrapper",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/PrivateLinkConnectionApprovalRequestResource"
+            }
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/PrivateEndpointConnectionResource"
+            }
+          },
+          "202": {
+            "description": "Asynchronous operation in progress.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/PrivateEndpointConnectionResource"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "tags": [
+          "AppServiceEnvironments"
+        ],
+        "summary": "Deletes a private endpoint connection",
+        "description": "Description for Deletes a private endpoint connection",
+        "operationId": "AppServiceEnvironments_DeletePrivateEndpointConnection",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the App Service Environment.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "privateEndpointConnectionName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "type": "object"
+            }
+          },
+          "202": {
+            "description": "Asynchronous operation in progress.",
+            "schema": {
+              "type": "object"
+            }
+          },
+          "204": {
+            "description": "No content.",
+            "schema": {
+              "type": "object"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/hostingEnvironments/{name}/privateLinkResources": {
+      "get": {
+        "tags": [
+          "AppServiceEnvironments"
+        ],
+        "summary": "Gets the private link resources",
+        "description": "Description for Gets the private link resources",
+        "operationId": "AppServiceEnvironments_GetPrivateLinkResources",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the App Service Environment.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/PrivateLinkResourcesWrapper"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
         }
       }
     },
@@ -1891,6 +2331,41 @@
         }
       }
     },
+    "AseV3NetworkingConfiguration": {
+      "description": "Full view of networking configuration for an ASE.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "./CommonDefinitions.json#/definitions/ProxyOnlyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "AseV3NetworkingConfiguration resource specific properties",
+          "properties": {
+            "windowsOutboundIpAddresses": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "readOnly": true
+            },
+            "linuxOutboundIpAddresses": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "readOnly": true
+            },
+            "allowNewPrivateEndpointConnections": {
+              "description": "Property to enable and disable new private endpoint connection creation on ASE",
+              "type": "boolean"
+            }
+          },
+          "x-ms-client-flatten": true
+        }
+      }
+    },
     "EndpointDependency": {
       "description": "A domain name that a service is reached at, including details of the current connection status.",
       "type": "object",
@@ -1932,6 +2407,20 @@
         }
       }
     },
+    "ForcedTunnelingHealth": {
+      "description": "Details on the Forced Tunneling configuration of the subnet containing the App Service Environment",
+      "type": "object",
+      "properties": {
+        "description": {
+          "description": "Text describing the recommended action to take to ensure the App Service Environment has connectivity to network dependencies.",
+          "type": "string"
+        },
+        "enabled": {
+          "description": "Whether the App Service Environment is currently in a forced-tunneling configuration.",
+          "type": "boolean"
+        }
+      }
+    },
     "HostingEnvironmentDiagnostics": {
       "description": "Diagnostics for an App Service Environment.",
       "type": "object",
@@ -1943,6 +2432,24 @@
         "diagnosticsOutput": {
           "description": "Diagnostics output.",
           "type": "string"
+        }
+      }
+    },
+    "HostingEnvironmentHealth": {
+      "description": "Details on the health of an App Service Environment.",
+      "type": "object",
+      "properties": {
+        "healthy": {
+          "description": "Whether the App Service Environment is currently healthy or unhealthy.",
+          "type": "boolean"
+        },
+        "suspended": {
+          "description": "Whether the App Service Environment is currently suspended.",
+          "type": "boolean"
+        },
+        "networkConfiguration": {
+          "$ref": "#/definitions/NetworkConfigurationHealth",
+          "description": "Details on whether the network configuration of the App Service Environment meets requirements."
         }
       }
     },
@@ -1988,6 +2495,120 @@
           "description": "Link to next page of resources.",
           "type": "string",
           "readOnly": true
+        }
+      }
+    },
+    "MissingNsgRule": {
+      "description": "A recommended Network Security Group Rule that should be added to the Network Security Group.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "A suggestion for the name of the recommended Rule.",
+          "type": "string"
+        },
+        "description": {
+          "description": "Text describing the purpose of the recommended Rule.",
+          "type": "string"
+        },
+        "sourceAddressPrefix": {
+          "description": "The Source Address Prefix of the recommended Rule. This may be a CIDR range or a Service Tag.",
+          "type": "string"
+        },
+        "sourcePorts": {
+          "description": "The Source Ports of the recommended Rule.",
+          "type": "string"
+        },
+        "destinationAddressPrefix": {
+          "description": "The Destination Address Prefix of the recommended Rule.",
+          "type": "string"
+        },
+        "destinationPorts": {
+          "description": "The Destination Ports of the recommended Rule.",
+          "type": "string"
+        },
+        "direction": {
+          "description": "The direction of the recommended Rule. Inbound or Outbound.",
+          "type": "string"
+        },
+        "protocol": {
+          "description": "The protocol of the recommended Rule. Any, TCP, UDP, or ICMP.",
+          "type": "string"
+        },
+        "access": {
+          "description": "Whether the rule should allow or deny traffic. Allow or Deny.",
+          "type": "string"
+        }
+      }
+    },
+    "MissingRoute": {
+      "description": "A list of missing Routes that share a common Next Hop. A new Route should be added to the Route Table for every Address Prefix with the specified Next Hop.",
+      "type": "object",
+      "properties": {
+        "description": {
+          "description": "Text describing the recommended action to take to correctly configure the Route Table.",
+          "type": "string"
+        },
+        "nextHop": {
+          "description": "The Next Hop for the recommended Routes to add.",
+          "type": "string"
+        },
+        "addressPrefixes": {
+          "description": "A list of Address Prefixes that do not currently have the recommended Next Hop.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "NetworkConfigurationHealth": {
+      "description": "Details on whether the network configuration of the App Service Environment meets requirements.",
+      "type": "object",
+      "properties": {
+        "configuredCorrectly": {
+          "description": "Whether all components of the network configuration are configured correctly.",
+          "type": "boolean"
+        },
+        "subnet": {
+          "$ref": "#/definitions/SubnetHealth",
+          "description": "Details on the configuration of the subnet containing the App Service Environment."
+        },
+        "networkSecurityGroup": {
+          "$ref": "#/definitions/NetworkSecurityGroupHealth",
+          "description": "Details on the configuration of the Network Security Group associated with the subnet containing the App Service Environment."
+        },
+        "routeTable": {
+          "$ref": "#/definitions/RouteTableHealth",
+          "description": "Details on the configuration of the Route Table associated with the subnet containing the App Service Environment."
+        },
+        "forcedTunneling": {
+          "$ref": "#/definitions/ForcedTunnelingHealth",
+          "description": "Details on the Forced Tunneling configuration of the subnet containing the App Service Environment."
+        }
+      }
+    },
+    "NetworkSecurityGroupHealth": {
+      "description": "Details on the configuration of the Route Table associated with the subnet containing the App Service Environment.",
+      "type": "object",
+      "properties": {
+        "resourceId": {
+          "description": "The ARM Resource ID of the Network Security Group associated with the subnet containing the App Service Environment. Null, if there is not one associated.",
+          "type": "string"
+        },
+        "configuredCorrectly": {
+          "description": "Whether the Network Security Group is configured correctly.",
+          "type": "boolean"
+        },
+        "description": {
+          "description": "Text describing the recommended action to take to correctly configure the Network Security Group.",
+          "type": "string"
+        },
+        "missingNsgRules": {
+          "description": "A list of the recommended Network Security Group Rules that should be added to the Network Security Group.\nThese rules should be created with a higher priority than existing rules in the NSG.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MissingNsgRule"
+          }
         }
       }
     },
@@ -2114,6 +2735,52 @@
         }
       }
     },
+    "RouteTableHealth": {
+      "description": "Details on the configuration of the Route Table associated with the subnet containing the App Service Environment",
+      "type": "object",
+      "properties": {
+        "resourceId": {
+          "description": "The ARM Resource ID of the Route Table associated with the subnet containing the App Service Environment. Null, if there is not one associated.",
+          "type": "string"
+        },
+        "configuredCorrectly": {
+          "description": "Whether the Route Table is configured correctly.",
+          "type": "boolean"
+        },
+        "description": {
+          "description": "Text describing the recommended action to take to correctly configure the Route Table.",
+          "type": "string"
+        },
+        "missingRoutes": {
+          "description": "A list of missing Routes that share a common Next Hop. A new Route should be added to the Route Table for every Address Prefix with the specified Next Hop.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MissingRoute"
+          }
+        }
+      }
+    },
+    "ServiceEndpointsHealth": {
+      "description": "Details on the configuration of Service Endpoints on the subnet.",
+      "type": "object",
+      "properties": {
+        "configuredCorrectly": {
+          "description": "Whether Service Endpoints are enabled to all suggested services.",
+          "type": "boolean"
+        },
+        "description": {
+          "description": "Text describing the recommended action to take to correctly configure the subnet.",
+          "type": "string"
+        },
+        "missingServices": {
+          "description": "The recommended services that Service Endpoints are not currently enabled for.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
     "SkuInfo": {
       "description": "SKU discovery information.",
       "type": "object",
@@ -2171,6 +2838,20 @@
           "description": "Link to next page of resources.",
           "type": "string",
           "readOnly": true
+        }
+      }
+    },
+    "SubnetHealth": {
+      "description": "Details on the configuration of the subnet containing the App Service Environment.",
+      "type": "object",
+      "properties": {
+        "resourceId": {
+          "description": "The ARM Resource ID of the subnet containing the App Service Environment.",
+          "type": "string"
+        },
+        "serviceEndpoints": {
+          "$ref": "#/definitions/ServiceEndpointsHealth",
+          "description": "Details on the configuration of Service Endpoints on the subnet containing the App Service Environment."
         }
       }
     },
