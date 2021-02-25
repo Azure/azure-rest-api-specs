@@ -118,13 +118,11 @@ Please also specify `--python-sdks-folder=<path to the root directory of your az
 Use `--python-mode=update` if you already have a setup.py and just want to update the code itself.
 
 ``` yaml $(python)
-python-mode: create
-python:
-  azure-arm: true
-  license-header: MICROSOFT_MIT_NO_VERSION
-  payload-flattening-threshold: 2
-  namespace: azure.mgmt.servicefabricmanagedclusters
-  package-name: azure-mgmt-servicefabricmanagedclusters
+azure-arm: true
+license-header: MICROSOFT_MIT_NO_VERSION
+package-name: azure-mgmt-servicefabricmanagedclusters
+no-namespace-folders: true
+package-version: 0.1.0
 ```
 ``` yaml $(python) && $(python-mode) == 'update'
 python:
