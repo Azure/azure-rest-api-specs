@@ -4832,7 +4832,10 @@
             }
           },
           "description": "Data type for Microsoft Threat Intelligence Platforms data connector.",
-          "type": "object"
+          "type": "object",
+          "required": [
+            "lookbackPeriod"
+          ]
         },
         "microsoftEmergingThreatFeed": {
           "allOf": [
@@ -4847,10 +4850,17 @@
             }
           },
           "description": "Data type for Microsoft Threat Intelligence Platforms data connector.",
-          "type": "object"
+          "type": "object",
+          "required": [
+            "lookbackPeriod"
+          ]
         }
       },
-      "type": "object"
+      "type": "object",
+      "required": [
+        "bingSafetyPhishingURL",
+        "microsoftEmergingThreatFeed"
+      ]
     },
     "MSTIDataConnectorProperties": {
       "allOf": [
@@ -4923,7 +4933,10 @@
           "type": "object"
         }
       },
-      "type": "object"
+      "type": "object",
+      "required": [
+        "incidents"
+      ]
     },
     "MTPDataConnectorProperties": {
       "allOf": [
@@ -4938,6 +4951,9 @@
           "description": "The available data types for the connector."
         }
       },
+      "required": [
+        "dataTypes"
+      ],
       "type": "object"
     },
     "MtpCheckRequirements": {
@@ -5509,7 +5525,10 @@
           "type": "object"
         }
       },
-      "type": "object"
+      "type": "object",
+      "required": [
+        "alerts"
+      ]
     },
     "AttackTactic": {
       "description": "The severity for alerts created by this alert rule.",
@@ -5564,7 +5583,10 @@
           "type": "object"
         }
       },
-      "type": "object"
+      "type": "object",
+      "required": [
+        "logs"
+      ]
     },
     "AwsCloudTrailDataConnectorProperties": {
       "description": "Amazon Web Services CloudTrail data connector properties.",
@@ -5578,6 +5600,9 @@
           "description": "The available data types for the connector."
         }
       },
+      "required": [
+        "dataTypes"
+      ],
       "type": "object"
     },
     "AwsCloudTrailCheckRequirements": {
@@ -6560,7 +6585,10 @@
           }
         }
       },
-      "type": "object"
+      "type": "object",
+      "required": [
+        "state"
+      ]
     },
     "DataConnectorKind": {
       "description": "Describes an Azure resource with kind.",
@@ -6677,6 +6705,9 @@
           "type": "string"
         }
       },
+      "required": [
+        "tenantId"
+      ],
       "type": "object"
     },
     "DataConnectorWithAlertsProperties": {
@@ -6771,7 +6802,10 @@
           "type": "object"
         }
       },
-      "type": "object"
+      "type": "object",
+      "required": [
+        "dynamics365CdsActivities"
+      ]
     },
     "Dynamics365DataConnectorProperties": {
       "allOf": [
@@ -6786,6 +6820,9 @@
           "description": "The available data types for the connector."
         }
       },
+      "required": [
+        "dataTypes"
+      ],
       "type": "object"
     },
     "Dynamics365CheckRequirements": {
@@ -9523,6 +9560,9 @@
           "description": "The available data types for the connector."
         }
       },
+      "required": [
+        "dataTypes"
+      ],
       "type": "object"
     },
     "MCASCheckRequirements": {
@@ -9949,7 +9989,12 @@
           "type": "object"
         }
       },
-      "type": "object"
+      "type": "object",
+      "required": [
+        "exchange",
+        "sharePoint",
+        "teams"
+      ]
     },
     "OfficeDataConnectorProperties": {
       "allOf": [
@@ -9964,6 +10009,9 @@
           "description": "The available data types for the connector."
         }
       },
+      "required": [
+        "dataTypes"
+      ],
       "type": "object"
     },
     "Operation": {
@@ -11176,7 +11224,10 @@
           "type": "object"
         }
       },
-      "type": "object"
+      "type": "object",
+      "required": [
+        "indicators"
+      ]
     },
     "TIDataConnectorProperties": {
       "description": "TI (Threat Intelligence) data connector properties.",
@@ -11196,7 +11247,11 @@
           "description": "The available data types for the connector."
         }
       },
-      "type": "object"
+      "type": "object",
+      "required": [
+        "tenantId",
+        "dataTypes"
+      ]
     },
     "TICheckRequirements": {
       "allOf": [
@@ -11255,7 +11310,10 @@
           "type": "object"
         }
       },
-      "type": "object"
+      "type": "object",
+      "required": [
+        "taxiiClient"
+      ]
     },
     "TiTaxiiDataConnectorProperties": {
       "allOf": [
@@ -11328,6 +11386,10 @@
           "description": "The available data types for Threat Intelligence TAXII data connector."
         }
       },
+      "required": [
+        "dataTypes",
+        "pollingFrequency"
+      ],
       "type": "object"
     },
     "TiTaxiiCheckRequirements": {
