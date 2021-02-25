@@ -613,6 +613,10 @@
             "name": "ConnectivityStatus",
             "modelAsString": true
           }
+        },
+        "privateLinkScopeResourceId": {
+          "type": "string",
+          "description": "The resource id of the private link scope this connected cluster is assigned to, if any."
         }
       },
       "description": "Properties of the connected cluster."
@@ -689,7 +693,12 @@
     },
     "ConnectedClusterPatchProperties": {
       "type": "object",
-      "properties": {},
+      "properties": {
+        "privateLinkScopeResourceId": {
+          "type": "string",
+          "description": "The resource id of the private link scope this connected cluster is assigned to, if any."
+        }
+      },
       "description": "Properties which can be patched on the connected cluster resource."
     },
     "HybridConnectionConfig": {
