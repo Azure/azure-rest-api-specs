@@ -8,10 +8,6 @@ cli:
   package-name: azure-mgmt-reservations
   namespace: azure.mgmt.reservations
   flatten-all: true
-  cli-directive:
-    - where: 
-      group: Operation
-    hidden: true  
   test-scenario:
     - name: Quotas_listUsagesForCompute
     - name: Quotas_Request_ForCompute

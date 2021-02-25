@@ -78,6 +78,7 @@ These settings apply only when `--tag=package-preview-2019-04` is specified on t
 input-file:
   - Microsoft.Capacity/preview/2019-04-01/reservations.json
 ```
+
 ### Tag: package-2018-06
 
 These settings apply only when `--tag=package-2018-06` is specified on the command line.
@@ -149,6 +150,7 @@ python:
   package-version: 0.3.2
   clear-output-folder: true
 ```
+
 ``` yaml $(python) && $(track2)
 python-mode: create
 azure-arm: true
@@ -164,6 +166,7 @@ python:
   no-namespace-folders: true
   output-folder: $(python-sdks-folder)/reservations/azure-mgmt-reservations/azure/mgmt/reservations
 ```
+
 ``` yaml $(python) && $(python-mode) == 'create' && !$(track2)
 python:
   basic-setup-py: true
@@ -174,6 +177,7 @@ python:
 no-namespace-folders: true
 output-folder: $(python-sdks-folder)/reservations/azure-mgmt-reservations/azure/mgmt/reservations
 ```
+
 ``` yaml $(python) && $(python-mode) == 'create' && $(track2)
 basic-setup-py: true
 output-folder: $(python-sdks-folder)/reservations/azure-mgmt-reservations
@@ -185,7 +189,7 @@ See configuration in [readme.cli.md](./readme.cli.md)
 
 ## AZ
 
-## See configuration in [readme.az.md](./readme.az.md)
+ See configuration in [readme.az.md](./readme.az.md)
 
 ## Go
 
