@@ -99,7 +99,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/CustomRolloutProperties"
+              "$ref": "#/definitions/CustomRollout"
             },
             "description": "The custom rollout properties supplied to the CreateOrUpdate operation."
           },
@@ -278,6 +278,15 @@
           },
           {
             "$ref": "#/parameters/GetRolloutNameParameter"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DefaultRollout"
+            },
+            "description": "The Default rollout properties supplied to the CreateOrUpdate operation."
           },
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
