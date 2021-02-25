@@ -52,7 +52,7 @@ These settings apply only when `--tag=package-2021-02-preview` is specified on t
 
 ``` yaml $(tag) == 'package-2021-02-preview'
 input-file:
-- Microsoft.DataProtection/stable/2021-02-01-preview/dataprotection.json
+- Microsoft.DataProtection/preview/2021-02-01-preview/dataprotection.json
 ```
 
 ### Tag: package-2021-01
