@@ -15,6 +15,7 @@ batch:
   - tag: schema-desktopvirtualization-2019-12-10-preview
   - tag: schema-desktopvirtualization-2019-09-24-preview
   - tag: schema-desktopvirtualization-2019-01-23-preview
+
 ```
 
 Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.

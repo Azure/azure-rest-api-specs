@@ -6,6 +6,7 @@ These settings apply only when `--azureresourceschema` is specified on the comma
 
 ``` yaml $(azureresourceschema) && $(multiapi)
 batch:
+  - tag: schema-security-2021-01-01
   - tag: schema-security-2020-08-06-preview
   - tag: schema-security-2020-07-01-preview
   - tag: schema-security-2020-01-01-preview
@@ -21,6 +22,17 @@ batch:
 ```
 
 Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
+
+### Tag: schema-security-2021-01-01 and azureresourceschema
+
+``` yaml $(tag) == 'schema-security-2021-01-01' && $(azureresourceschema)
+output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
+  - Microsoft.Security/stable/2021-01-01/alerts.json
+
+```
 
 ### Tag: schema-security-2020-08-06-preview and azureresourceschema
 
@@ -80,13 +92,13 @@ input-file:
   - Microsoft.Security/stable/2020-01-01/adaptiveNetworkHardenings.json
   - Microsoft.Security/stable/2020-01-01/allowedConnections.json
   - Microsoft.Security/stable/2020-01-01/topologies.json
-  - Microsoft.Security/stable/2020-01-01/alerts.json
   - Microsoft.Security/stable/2020-01-01/jitNetworkAccessPolicies.json
   - Microsoft.Security/stable/2020-01-01/discoveredSecuritySolutions.json
   - Microsoft.Security/stable/2020-01-01/securitySolutionsReferenceData.json
   - Microsoft.Security/stable/2020-01-01/externalSecuritySolutions.json
   - Microsoft.Security/stable/2020-01-01/secureScore.json
   - Microsoft.Security/stable/2020-01-01/SecuritySolutions.json
+  - Microsoft.Security/stable/2020-01-01/alerts.json
 
 ```
 

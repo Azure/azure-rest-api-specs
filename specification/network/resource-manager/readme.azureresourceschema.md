@@ -6,6 +6,7 @@ These settings apply only when `--azureresourceschema` is specified on the comma
 
 ``` yaml $(azureresourceschema) && $(multiapi)
 batch:
+  - tag: schema-network-2021-02-01-preview
   - tag: schema-network-2020-08-01
   - tag: schema-network-2020-07-01
   - tag: schema-network-2020-06-01
@@ -46,6 +47,23 @@ batch:
 
 Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
 
+### Tag: schema-network-2021-02-01-preview and azureresourceschema
+
+``` yaml $(tag) == 'schema-network-2021-02-01-preview' && $(azureresourceschema)
+output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
+  - Microsoft.Network/preview/2021-02-01-preview/network.json
+  - Microsoft.Network/preview/2021-02-01-preview/networkManager.json
+  - Microsoft.Network/preview/2021-02-01-preview/networkManagerActiveConfiguration.json
+  - Microsoft.Network/preview/2021-02-01-preview/networkManagerConnectivityConfiguration.json
+  - Microsoft.Network/preview/2021-02-01-preview/networkManagerEffectiveConfiguration.json
+  - Microsoft.Network/preview/2021-02-01-preview/networkManagerGroup.json
+  - Microsoft.Network/preview/2021-02-01-preview/networkManagerSecurityConfiguration.json
+
+```
+
 ### Tag: schema-network-2020-08-01 and azureresourceschema
 
 ``` yaml $(tag) == 'schema-network-2020-08-01' && $(azureresourceschema)
@@ -75,7 +93,6 @@ input-file:
   - Microsoft.Network/stable/2020-08-01/ipGroups.json
   - Microsoft.Network/stable/2020-08-01/loadBalancer.json
   - Microsoft.Network/stable/2020-08-01/natGateway.json
-  - Microsoft.Network/stable/2020-08-01/network.json
   - Microsoft.Network/stable/2020-08-01/networkInterface.json
   - Microsoft.Network/stable/2020-08-01/networkProfile.json
   - Microsoft.Network/stable/2020-08-01/networkSecurityGroup.json
@@ -103,6 +120,7 @@ input-file:
   - Microsoft.Network/stable/2020-08-01/webapplicationfirewall.json
   - Microsoft.Network/stable/2020-08-01/cloudServiceNetworkInterface.json
   - Microsoft.Network/stable/2020-08-01/cloudServicePublicIpAddress.json
+  - Microsoft.Network/stable/2020-08-01/network.json
 
 ```
 
