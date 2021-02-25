@@ -20,10 +20,7 @@ python:
 azure-arm: true
 license-header: MICROSOFT_MIT_NO_VERSION
 package-name: azure-mgmt-web
-package-version: 0.42.0
-clear-output-folder: true
 no-namespace-folders: true
-python-mode: update
 ```
 
 ### Python multi-api
@@ -45,6 +42,7 @@ batch:
 ```
 
 ```yaml $(python) && $(multiapi) && $(track2)
+clear-output-folder: true
 batch:
   - tag: package-2020-09-only
   - tag: package-2020-06-only
@@ -61,6 +59,7 @@ batch:
 
 ``` yaml $(multiapiscript)
 output-folder: $(python-sdks-folder)/appservice/azure-mgmt-web/azure/mgmt/web/
+clear-output-folder: false
 perform-load: false
 ```
 
