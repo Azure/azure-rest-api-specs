@@ -2155,7 +2155,6 @@
         "meterId": {
           "description": "The meter id (GUID). Not available for marketplace. For reserved instance this represents the primary meter for which the reservation was purchased. For the actual VM Size for which the reservation is purchased see productOrderName.",
           "type": "string",
-          "format": "uuid",
           "readOnly": true
         },
         "meterName": {
@@ -2350,7 +2349,7 @@
           "readOnly": true
         },
         "productIdentifier": {
-          "description": "Identifer for the product that has accrued charges by consumption or purchase . This is the concatenated key of productId and SKuId in partner center.",
+          "description": "Identifier for the product that has accrued charges by consumption or purchase . This is the concatenated key of productId and SkuId in partner center.",
           "type": "string",
           "readOnly": true
         },
@@ -2439,6 +2438,12 @@
         "partnerEarnedCreditApplied": {
           "description": "Flag to indicate if partner earned credit has been applied or not.",
           "type": "string",
+          "readOnly": true
+        },
+        "payGPrice": {
+          "description": "Retail price for the resource.",
+          "type": "number",
+          "format": "decimal",
           "readOnly": true
         }
       }
