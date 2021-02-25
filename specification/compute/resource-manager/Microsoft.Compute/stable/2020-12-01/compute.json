@@ -7482,7 +7482,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "#/definitions/ProxyOnlyResource"
         }
       ],
       "description": "Restore Point details."
@@ -12885,6 +12885,22 @@
         }
       },
       "description": "Api error."
+    },
+    "ProxyOnlyResource": {
+      "description": "Azure proxy only resource. This resource is not tracked by Azure Resource Manager.",
+      "properties": {
+        "id": {
+          "description": "Resource Id.",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "Resource Name.",
+          "type": "string",
+          "readOnly": false
+        }
+      },
+      "x-ms-azure-resource": true
     },
     "Resource": {
       "description": "The Resource model definition.",
