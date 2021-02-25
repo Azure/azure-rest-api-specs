@@ -803,6 +803,108 @@
           "description": "The origin",
           "type": "string",
           "readOnly": true
+        },
+        "properties": {
+          "description": "Additional properties to expose performance metrics to shoebox.",
+          "properties": {
+            "serviceSpecification": {
+              "description": "Performance metrics to shoebox.",
+              "properties": {
+                "metricSpecifications": {
+                  "description": "The metric specifications.",
+                  "type": "array",
+                  "readOnly": true,
+                  "items": {
+                    "$ref": "#/definitions/MetricSpecifications"
+                  }
+                },
+                "logSpecifications": {
+                  "description": "The log specifications.",
+                  "type": "array",
+                  "readOnly": true,
+                  "items": {
+                    "$ref": "#/definitions/LogSpecifications"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "MetricSpecifications": {
+      "description": "Available operation metric specification for exposing performance metrics to shoebox.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "The name of metric.",
+          "type": "string",
+          "readOnly": true
+        },
+        "displayName": {
+          "description": "The displayed name of metric.",
+          "type": "string",
+          "readOnly": true
+        },
+        "displayDescription": {
+          "description": "The displayed description of metric.",
+          "type": "string",
+          "readOnly": true
+        },
+        "unit": {
+          "description": "The unit of the metric.",
+          "type": "string",
+          "readOnly": true
+        },
+        "aggregationType": {
+          "description": "The aggregation type of metric.",
+          "type": "string",
+          "readOnly": true
+        },
+        "dimensions": {
+          "description": "The dimensions of metric.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/MetricDimensions"
+          }
+        }
+      }
+    },
+    "LogSpecifications": {
+      "description": "The log metric specification for exposing performance metrics to shoebox.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "The name of metric.",
+          "type": "string",
+          "readOnly": true
+        },
+        "displayName": {
+          "description": "The displayed name of log.",
+          "type": "string",
+          "readOnly": true
+        },
+        "blobDuration": {
+          "description": "The blob duration for the log.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "MetricDimensions": {
+      "description": "Metric dimension.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Dimension name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "displayName": {
+          "description": "Dimension display name.",
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -1247,6 +1349,57 @@
       },
       "description": "An error response from Operations."
     },
+    "ErrorDetail": {
+      "description": "The error detail.",
+      "properties": {
+        "code": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The error code."
+        },
+        "message": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The error message."
+        },
+        "target": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The error target."
+        },
+        "details": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ErrorDetail"
+          },
+          "description": "The error details."
+        },
+        "additionalInfo": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ErrorAdditionalInfo"
+          },
+          "description": "The error additional info."
+        }
+      }
+    },
+    "ErrorAdditionalInfo": {
+      "properties": {
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The additional info type."
+        },
+        "info": {
+          "readOnly": true,
+          "type": "object",
+          "description": "The additional info."
+        }
+      },
+      "description": "The resource management error additional info."
+    },
     "ErrorResponse": {
       "description": "Describes the format of Error response.",
       "type": "object",
@@ -1262,6 +1415,14 @@
             "message": {
               "description": "Error message indicating why the operation failed.",
               "type": "string"
+            },
+            "details": {
+              "readOnly": true,
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ErrorDetail"
+              },
+              "description": "The error details."
             }
           }
         }

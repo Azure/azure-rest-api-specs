@@ -151,7 +151,7 @@
         "baseline": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/Baseline"
+            "$ref": "./baseline_API.json#/definitions/Baseline"
           },
           "description": "The baseline values for each sensitivity."
         },
@@ -159,7 +159,7 @@
           "type": "object",
           "properties": {
             "isEligible": {
-              "type": "string",
+              "type": "boolean",
               "description": "is series eligible for dynamic threshold analysis"
             },
             "status": {
@@ -176,6 +176,29 @@
             }
           },
           "description": "The statistics"
+        },
+        "internalOperationId": {
+          "type": "string",
+          "readOnly": true,
+          "description": "internal operation id"
+        },
+        "errorType": {
+          "type": "integer",
+          "format": "int32",
+          "enum": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            100,
+            200
+          ],
+          "x-ms-enum": {
+            "name": "ErrorType",
+            "modelAsString": false
+          },
+          "description": "The error type for calculating the baseline."
         }
       },
       "required": [
@@ -183,57 +206,6 @@
         "baseline"
       ],
       "description": "The response to a calculate baseline call."
-    },
-    "Baseline": {
-      "type": "object",
-      "properties": {
-        "sensitivity": {
-          "type": "string",
-          "enum": [
-            "Low",
-            "Medium",
-            "High"
-          ],
-          "x-ms-enum": {
-            "name": "Sensitivity",
-            "modelAsString": false
-          },
-          "description": "The sensitivity of the baseline."
-        },
-        "lowThresholds": {
-          "type": "array",
-          "items": {
-            "type": "number",
-            "format": "double",
-            "description": "A single low threshold value."
-          },
-          "description": "The low thresholds of the baseline."
-        },
-        "highThresholds": {
-          "type": "array",
-          "items": {
-            "type": "number",
-            "format": "double",
-            "description": "A single high threshold value."
-          },
-          "description": "The high thresholds of the baseline."
-        },
-        "timestamps": {
-          "type": "array",
-          "items": {
-            "type": "string",
-            "format": "date-time",
-            "description": "the timestamp for the baseline value in ISO 8601 format."
-          },
-          "description": "the array of timestamps of the baselines."
-        }
-      },
-      "required": [
-        "sensitivity",
-        "lowThresholds",
-        "highThresholds"
-      ],
-      "description": "The baseline values for a single sensitivity value."
     }
   },
   "parameters": {

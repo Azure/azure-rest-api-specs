@@ -21,7 +21,45 @@ These are the global settings for the VMware Solution API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2020-07-17-preview
+tag: package-2021-01-01-preview
+```
+
+### Tag: package-2021-01-01-preview
+
+These settings apply only when `--tag=package-2021-01-01-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-01-01-preview'
+input-file:
+- Microsoft.AVS/preview/2021-01-01-preview/vmware.json
+directive:
+  - suppress: R3020
+    from: Microsoft.AVS/preview/2021-01-01-preview/vmware.json
+    reason: Microsoft.AVS was chosen over Microsoft.AzureVMwareSolution
+  - suppress: R3010
+    from: Microsoft.AVS/preview/2021-01-01-preview/vmware.json
+    reason: list by immediate parent operations are defined
+  - suppress: R3027
+    from: Microsoft.AVS/preview/2021-01-01-preview/vmware.json
+    reasons: the PrivateClouds_List operation is by resource group
+  - suppress: R3018
+    from: Microsoft.AVS/preview/2021-01-01-preview/vmware.json
+    where: $.definitions.Operation.properties.isDataAction
+    reason: standard property for Operation
+  - suppress: R3018
+    from: Microsoft.AVS/preview/2021-01-01-preview/vmware.json
+    where: $.definitions.MetricSpecification.properties.fillGapWithZero
+    reason: standard property for MetricSpecification
+  - suppress: R2001
+    from: Microsoft.AVS/preview/2021-01-01-preview/vmware.json
+    where: $.definitions.Operation.properties.properties
+    reason: x-ms-client-flatten not needed for Operation
+  - suppress: R4009
+    from: Microsoft.AVS/preview/2021-01-01-preview/vmware.json
+    reason: systemData is not in this API version
+  - suppress: R3018
+    from: Microsoft.AVS/preview/2021-01-01-preview/vmware.json
+    where: $.definitions.MetricDimension.properties.toBeExportedForShoebox
+    reason: standard property defined by Geneva Metrics
 ```
 
 ### Tag: package-2020-07-17-preview
@@ -55,7 +93,7 @@ directive:
     reason: x-ms-client-flatten not needed for Operation
   - suppress: R4009
     from: Microsoft.AVS/preview/2020-07-17-preview/vmware.json
-    reason: systemData will be in the next API version
+    reason: systemData is not in this API version
   - suppress: R3018
     from: Microsoft.AVS/preview/2020-07-17-preview/vmware.json
     where: $.definitions.MetricDimension.properties.toBeExportedForShoebox
@@ -122,6 +160,7 @@ swagger-to-sdk:
 directive:
   - suppress: SECRET_PROPERTY
     from:
+      - Microsoft.AVS/preview/2021-01-01-preview/vmware.json
       - Microsoft.AVS/preview/2020-07-17-preview/vmware.json
       - Microsoft.AVS/stable/2020-03-20/vmware.json
     where:
