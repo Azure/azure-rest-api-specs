@@ -2689,6 +2689,10 @@
     "AmazonS3LinkedServiceTypeProperties": {
       "description": "Amazon S3 linked service properties.",
       "properties": {
+        "authenticationType": {
+          "type": "object",
+          "description": "The authentication type of S3. Allowed value: AccessKey (default) or TemporarySecurityCredentials. Type: string (or Expression with resultType string)."
+        },
         "accessKeyId": {
           "type": "object",
           "description": "The access key identifier of the Amazon S3 Identity and Access Management (IAM) user. Type: string (or Expression with resultType string)."
@@ -2700,6 +2704,10 @@
         "serviceUrl": {
           "type": "object",
           "description": "This value specifies the endpoint to access with the S3 Connector. This is an optional property; change it only if you want to try a different service endpoint or want to switch between https and http. Type: string (or Expression with resultType string)."
+        },
+        "sessionToken": {
+          "$ref": "../datafactory.json#/definitions/SecretBase",
+          "description": "The session token for the S3 temporary security credential."
         },
         "encryptedCredential": {
           "type": "object",
@@ -3281,6 +3289,10 @@
     "ConcurLinkedServiceTypeProperties": {
       "description": "Concur Service linked service properties.",
       "properties": {
+        "connectionProperties": {
+          "description": "Properties used to connect to Concur. It is mutually exclusive with any other properties in the linked service. Type: object.",
+          "type": "object"
+        },
         "clientId": {
           "description": "Application client_id supplied by Concur App Management.",
           "type": "object"
@@ -5300,6 +5312,14 @@
           "description": "Access token for databricks REST API. Refer to https://docs.azuredatabricks.net/api/latest/authentication.html. Type: string (or Expression with resultType string).",
           "$ref": "../datafactory.json#/definitions/SecretBase"
         },
+        "authentication": {
+          "type": "object",
+          "description": "Required to specify MSI, if using Workspace resource id for databricks REST API. Type: string (or Expression with resultType string)."
+        },
+        "workspaceResourceId": {
+          "type": "object",
+          "description": "Workspace resource id for databricks REST API. Type: string (or Expression with resultType string)."
+        },
         "existingClusterId": {
           "type": "object",
           "description": "The id of an existing interactive cluster that will be used for all runs of this activity. Type: string (or Expression with resultType string)."
@@ -5363,11 +5383,14 @@
         "encryptedCredential": {
           "type": "object",
           "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string)."
+        },
+        "policyId": {
+          "type": "object",
+          "description": "The policy id for limiting the ability to configure clusters based on a user defined set of rules. Type: string (or Expression with resultType string)."
         }
       },
       "required": [
-        "domain",
-        "accessToken"
+        "domain"
       ]
     },
     "AzureDatabricksDeltaLakeLinkedService": {

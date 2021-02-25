@@ -70,7 +70,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/DataExportErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -140,7 +140,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/DataExportErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -187,7 +187,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/DataExportErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -234,7 +234,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/DataExportErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -276,10 +276,6 @@
           "type": "string",
           "description": "The data export rule ID."
         },
-        "allTables": {
-          "type": "boolean",
-          "description": "When ‘true’, all workspace's tables are exported."
-        },
         "tableNames": {
           "type": "array",
           "items": {
@@ -305,6 +301,9 @@
           "description": "Date and time when the export was last modified."
         }
       },
+      "required": [
+        "tableNames"
+      ],
       "description": "Data Export properties."
     },
     "Destination": {
@@ -345,16 +344,6 @@
         }
       },
       "description": "Destination meta data."
-    },
-    "DataExportErrorResponse": {
-      "description": "Error response indicates that the service is not able to process the incoming request. The reason is provided in the error message.",
-      "type": "object",
-      "properties": {
-        "error": {
-          "description": "The details of the error.",
-          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse"
-        }
-      }
     }
   },
   "parameters": {}

@@ -27,16 +27,22 @@ These are the global settings for the adp.
 ```yaml
 title: AdpManagementClient
 openapi-type: arm
-tag: package-2020-07-01-preview
+openapi-subtype: rpaas
+tag: package-2021-02-01-preview
 ```
 
-### Tag: package-2020-07-01-preview
-
-These settings apply only when `--tag=package-2020-07-01-preview` is specified on the command line.
-
 ```yaml $(tag) == 'package-2020-07-01-preview'
+version: 2020-07-01-preview
+version-with-underscores: 2020_07_01_preview
 input-file:
   - Microsoft.AutonomousDevelopmentPlatform/preview/2020-07-01-preview/adp.json
+```
+
+```yaml $(tag) == 'package-2021-02-01-preview'
+version: 2021-02-01-preview
+version-with-underscores: 2021_02_01_preview
+input-file:
+  - Microsoft.AutonomousDevelopmentPlatform/preview/2021-02-01-preview/adp.json
 ```
 
 ---
@@ -58,6 +64,9 @@ swagger-to-sdk:
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_adp']
   - repo: azure-cli-extensions
+  - repo: azure-resource-manager-schemas
+    after_scripts:
+      - node sdkauto_afterscript.js adp/resource-manager
 ```
 
 ## Go
@@ -79,3 +88,7 @@ See configuration in [readme.typescript.md](./readme.typescript.md)
 ## CSharp
 
 See configuration in [readme.csharp.md](./readme.csharp.md)
+
+## AzureResourceSchema
+
+See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)

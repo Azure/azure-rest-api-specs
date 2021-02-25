@@ -1,0 +1,81 @@
+{
+  "type": "object",
+  "properties": {
+    "packages": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/PackageResult"
+      }
+    }
+  },
+  "required": [
+    "packages"
+  ],
+  "definitions": {
+    "PackageResult": {
+      "properties": {
+        "packageName": {
+          // Name of package. Will be used in branch name and PR title.
+          // By default it's folder name of first entry in path.
+          "type": "string"
+        },
+        "result": {
+          // Status of package. By default it's succeeded.
+          "type": "string",
+          "enum": [
+            "failed",
+            "succeeded",
+            "warning"
+          ],
+          "default": "succeeded"
+        },
+        "path": {
+          // List of package content paths.
+          // If the path points to a folder then
+          //   all the content under the folder will be included.
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "readmeMd": {
+          // List of related readmeMd of this package.
+          // Must provide this field if dryRun is true.
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "changelog": {
+          "type": "object",
+          "properties": {
+            "content": {
+              // Content of changelog in markdown
+              "type": "string"
+            },
+            "hasBreakingChange": {
+              // Does the new package has breaking change
+              "type": "boolean"
+            }
+          },
+          "required": [
+            "content"
+          ]
+        },
+        "artifacts": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "installInstructions": {
+          // See #InstallInstructionScriptOutput
+          "$ref": "InstallInstructionScriptOutput"
+        }
+      },
+      "required": [
+        "path"
+      ]
+    }
+  }
+}

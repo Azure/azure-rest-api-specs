@@ -327,7 +327,7 @@
           "200": {
             "description": "The ADP account was successfully deleted."
           },
-          "201": {
+          "202": {
             "description": "The ADP account will be deleted asynchronously."
           },
           "204": {
@@ -580,7 +580,7 @@
           "200": {
             "description": "The Data Pool was successfully deleted."
           },
-          "201": {
+          "202": {
             "description": "The Data Pool will be deleted asynchronously."
           },
           "204": {
@@ -674,12 +674,13 @@
             "Succeeded",
             "Failed",
             "Canceled",
+            "Accepted",
             "Provisioning",
             "Deleting"
           ],
           "x-ms-enum": {
             "name": "ProvisioningState",
-            "modelAsString": false
+            "modelAsString": true
           }
         }
       }
@@ -749,12 +750,13 @@
             "Succeeded",
             "Failed",
             "Canceled",
+            "Accepted",
             "Provisioning",
             "Deleting"
           ],
           "x-ms-enum": {
             "name": "ProvisioningState",
-            "modelAsString": false
+            "modelAsString": true
           }
         },
         "locations": {
@@ -764,6 +766,11 @@
           },
           "minItems": 1,
           "description": "Gets or sets the collection of locations where Data Pool resources should be created."
+        },
+        "systemData": {
+          "readOnly": true,
+          "description": "The system meta data relating to this resource.",
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/systemData"
         }
       }
     },
@@ -818,6 +825,10 @@
         "isDataAction": {
           "description": "Indicates whether the operation is a data action",
           "type": "boolean"
+        },
+        "actionType": {
+          "description": "Indicates the action type.",
+          "type": "string"
         },
         "display": {
           "$ref": "#/definitions/OperationDisplay",
