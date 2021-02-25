@@ -2,7 +2,7 @@
   "parameters": {
     "endpoint": "https://contoso.westus.communications.azure.com",
     "api-version": "2020-11-01-preview3",
-    "$maxpagesize": 5
+    "maxPageSize": 5
   },
   "responses": {
     "200": {
@@ -35,31 +35,39 @@
             "lastMessageReceivedOn": "2020-06-06T05:55:41.6460000Z"
           }
         ],
-        "nextLink": "https://contoso.westus.communications.azure.com/chat/threads?syncState=W3sic3RhcnQiOiIyMDIwLTA2LTIzVDIzOjMyOjQ3LjMwNSswMDowMCIsImVuZCI6IjIwMjAtMDYtMjVUMDY6NTY6MjMuNjk2KzAwOjAwIn0seyJzdGFydCI6IjE5NzAtMDEtMDFUMDA6MDA6MDArMDA6MDAiLCJlbmQiOiIxOTcwLTAxLTAxVDAwOjAwOjAwKzAwOjAwIn1d&api-version=2020-11-01-preview3&$maxpagesize=5"
+        "nextLink": "https://contoso.westus.communications.azure.com/chat/threads?syncState=W3sic3RhcnQiOiIyMDIwLTA2LTIzVDIzOjMyOjQ3LjMwNSswMDowMCIsImVuZCI6IjIwMjAtMDYtMjVUMDY6NTY6MjMuNjk2KzAwOjAwIn0seyJzdGFydCI6IjE5NzAtMDEtMDFUMDA6MDA6MDArMDA6MDAiLCJlbmQiOiIxOTcwLTAxLTAxVDAwOjAwOjAwKzAwOjAwIn1d&api-version=2020-11-01-preview3&maxPageSize=5"
       }
     },
     "401": {
       "body": {
-        "code": "Unauthorized",
-        "message": "Request is not authorized."
+        "error": {
+          "code": "Unauthorized",
+          "message": "Request is not authorized."
+        }
       }
     },
     "403": {
       "body": {
-        "code": "Forbidden",
-        "message": "User is not allowed to perform specified action."
+        "error": {
+          "code": "Forbidden",
+          "message": "User is not allowed to perform specified action."
+        }
       }
     },
     "429": {
       "body": {
-        "code": "TooManyRequests",
-        "message": "Rate limit exceeded."
+        "error": {
+          "code": "TooManyRequests",
+          "message": "Rate limit exceeded."
+        }
       }
     },
     "503": {
       "body": {
-        "code": "ServiceUnavailable",
-        "message": "The server is currently unable to handle the request."
+        "error": {
+          "code": "ServiceUnavailable",
+          "message": "The server is currently unable to handle the request."
+        }
       }
     }
   }
