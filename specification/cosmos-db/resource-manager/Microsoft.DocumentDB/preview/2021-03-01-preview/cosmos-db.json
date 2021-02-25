@@ -5523,6 +5523,7 @@
           "readOnly": true
         },
         "_ts": {
+          "type": "number",
           "description": "A system generated property that denotes the last updated timestamp of the resource.",
           "readOnly": true
         },
@@ -6716,8 +6717,7 @@
         }
       },
       "required": [
-        "resource",
-        "options"
+        "resource"
       ]
     },
     "SqlContainerCreateUpdateParameters": {
@@ -6753,8 +6753,7 @@
         }
       },
       "required": [
-        "resource",
-        "options"
+        "resource"
       ]
     },
     "SqlStoredProcedureCreateUpdateParameters": {
@@ -6790,8 +6789,7 @@
         }
       },
       "required": [
-        "resource",
-        "options"
+        "resource"
       ]
     },
     "SqlUserDefinedFunctionCreateUpdateParameters": {
@@ -6864,8 +6862,7 @@
         }
       },
       "required": [
-        "resource",
-        "options"
+        "resource"
       ]
     },
     "MongoDBDatabaseCreateUpdateParameters": {
@@ -6901,8 +6898,7 @@
         }
       },
       "required": [
-        "resource",
-        "options"
+        "resource"
       ]
     },
     "MongoDBCollectionCreateUpdateParameters": {
@@ -6938,8 +6934,7 @@
         }
       },
       "required": [
-        "resource",
-        "options"
+        "resource"
       ]
     },
     "TableCreateUpdateParameters": {
@@ -6975,8 +6970,7 @@
         }
       },
       "required": [
-        "resource",
-        "options"
+        "resource"
       ]
     },
     "CassandraKeyspaceCreateUpdateParameters": {
@@ -7012,8 +7006,7 @@
         }
       },
       "required": [
-        "resource",
-        "options"
+        "resource"
       ]
     },
     "CassandraTableCreateUpdateParameters": {
@@ -7049,8 +7042,7 @@
         }
       },
       "required": [
-        "resource",
-        "options"
+        "resource"
       ]
     },
     "GremlinDatabaseCreateUpdateParameters": {
@@ -7086,8 +7078,7 @@
         }
       },
       "required": [
-        "resource",
-        "options"
+        "resource"
       ]
     },
     "GremlinGraphCreateUpdateParameters": {
@@ -7123,8 +7114,7 @@
         }
       },
       "required": [
-        "resource",
-        "options"
+        "resource"
       ]
     },
     "ThroughputSettingsResource": {
@@ -7253,6 +7243,11 @@
         "conflictResolutionPolicy": {
           "$ref": "#/definitions/ConflictResolutionPolicy",
           "description": "The conflict resolution policy for the container."
+        },
+        "analyticalStorageTtl": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Analytical TTL."
         }
       },
       "required": [
