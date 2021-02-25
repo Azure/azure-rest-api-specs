@@ -2507,7 +2507,7 @@
         },
         "dataset": {
           "description": "Has definition for data in this forecast.",
-          "$ref": "#/definitions/QueryDataset"
+          "$ref": "costmanagement.exports.json#/definitions/QueryDataset"
         },
         "includeActualCost": {
           "description": "a boolean determining if actualCost will be included",
@@ -2561,7 +2561,7 @@
         },
         "dataset": {
           "description": "Has definition for data in this query.",
-          "$ref": "#/definitions/QueryDataset"
+          "$ref": "costmanagement.exports.json#/definitions/QueryDataset"
         }
       },
       "required": [
@@ -2587,48 +2587,6 @@
         "from",
         "to"
       ]
-    },
-    "QueryDataset": {
-      "description": "The definition of data present in the query.",
-      "properties": {
-        "granularity": {
-          "description": "The granularity of rows in the query.",
-          "type": "string",
-          "enum": [
-            "Daily"
-          ],
-          "x-ms-enum": {
-            "name": "GranularityType",
-            "modelAsString": true
-          }
-        },
-        "configuration": {
-          "description": "Has configuration information for the data in the export. The configuration will be ignored if aggregation and grouping are provided.",
-          "$ref": "#/definitions/QueryDatasetConfiguration"
-        },
-        "aggregation": {
-          "type": "object",
-          "description": "Dictionary of aggregation expression to use in the query. The key of each item in the dictionary is the alias for the aggregated column. Query can have up to 2 aggregation clauses.",
-          "additionalProperties": {
-            "type": "object",
-            "$ref": "#/definitions/QueryAggregation"
-          },
-          "maxItems": 2
-        },
-        "grouping": {
-          "description": "Array of group by expression to use in the query. Query can have up to 2 group by clauses.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/QueryGrouping"
-          },
-          "maxItems": 2
-        },
-        "filter": {
-          "type": "object",
-          "description": "Has filter expression to use in the query.",
-          "$ref": "#/definitions/QueryFilter"
-        }
-      }
     },
     "Status": {
       "description": "The status of the long running operation.",
@@ -2729,39 +2687,6 @@
         "type",
         "name"
       ]
-    },
-    "QueryFilter": {
-      "description": "The filter expression to be used in the export.",
-      "properties": {
-        "and": {
-          "description": "The logical \"AND\" expression. Must have at least 2 items.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/QueryFilter"
-          },
-          "minItems": 2
-        },
-        "or": {
-          "description": "The logical \"OR\" expression. Must have at least 2 items.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/QueryFilter"
-          },
-          "minItems": 2
-        },
-        "not": {
-          "description": "The logical \"NOT\" expression.",
-          "$ref": "#/definitions/QueryFilter"
-        },
-        "dimension": {
-          "description": "Has comparison expression for a dimension",
-          "$ref": "#/definitions/QueryComparisonExpression"
-        },
-        "tag": {
-          "description": "Has comparison expression for a tag",
-          "$ref": "#/definitions/QueryComparisonExpression"
-        }
-      }
     },
     "QueryColumnType": {
       "description": "The type of the column in the export.",
