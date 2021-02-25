@@ -64,6 +64,10 @@ tag: package-deploymentscripts-2020-10
 tag: package-templatespecs-2019-06-preview
 ```
 
+``` yaml $(package-resources)
+tag: package-management-2020-10
+```
+
 ### Tag: package-resources-2020-10
 
 These settings apply only when `--tag=package-resources-2020-10` is specified on the command line.
@@ -71,6 +75,15 @@ These settings apply only when `--tag=package-resources-2020-10` is specified on
 ``` yaml $(tag) == 'package-resources-2020-10'
 input-file:
 - Microsoft.Resources/stable/2020-10-01/resources.json
+```
+
+### Tag: package-management-2020-10
+
+These settings apply only when `--tag=package-management-2020-10` is specified on the command line.
+
+``` yaml $(tag) == 'package-management-2020-10'
+input-file:
+- Microsoft.Management/stable/2020-10-01/managementgroup.json
 ```
 
 ### Tag: package-policy-2020-09
