@@ -1,0 +1,610 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Azure API for managing SCOM monitoring instances",
+    "description": "SCOM monitoring instance management APIs",
+    "version": "2021-06-30-preview",
+    "x-ms-code-generation-settings": {
+      "name": "scomClient"
+    }
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "parameters": {
+    "instanceName": {
+      "name": "instanceName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Name of the SCOM monitoring instance",
+      "x-ms-parameter-location": "method"
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Scom/operations": {
+      "get": {
+        "tags": [
+          "Operations"
+        ],
+        "description": "Lists all available operations on SCOM monitoring instance",
+        "operationId": "Operations_List",
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/OperationsList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Operations_List": {
+            "$ref": "./examples/Operations_List.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Scom/managedInstances": {
+      "get": {
+        "operationId": "Instances_ListByResourceGroup",
+        "description": "Lists all SCOM monitoring instances in a resource group",
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "tags": [
+          "SCOM instance"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/MonitoringInstanceList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Instances_ListByResourceGroup": {
+            "$ref": "./examples/Instances_ListByResourceGroup.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Scom/managedInstances": {
+      "get": {
+        "operationId": "Instances_ListBySubscription",
+        "description": "Lists all SCOM monitoring instances in a subscription ",
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "tags": [
+          "SCOM Instances"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/MonitoringInstanceList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Instances_ListBySubscription": {
+            "$ref": "./examples/Instances_ListBySubscription.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Scom/managedInstances/{instanceName}": {
+      "get": {
+        "operationId": "Instances_Get",
+        "description": "Get SCOM monitoring instance details",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/instanceName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/MonitoringInstance"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Instances_Get": {
+            "$ref": "./examples/Instance_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "Instances_CreateOrUpdate",
+        "description": "Create or update SCOM monitoring instance",
+        "tags": [
+          "SCOM Instances"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/instanceName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "MonitoringInstance",
+            "description": "SCOM Monitoring Instance",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MonitoringInstance"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/MonitoringInstance"
+            }
+          },
+          "201": {
+            "description": "accepted operation",
+            "schema": {
+              "$ref": "#/definitions/MonitoringInstance"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Instances_CreateOrUpdate": {
+            "$ref": "./examples/Instance_Create.json"
+          }
+        }
+      },
+      "patch": {
+        "operationId": "Instances_Update",
+        "description": "Patch SCOM monitoring instance",
+        "tags": [
+          "SCOM Instance"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/instanceName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "MonitoringInstance",
+            "description": "SCOM monitoring instance properties update",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/MonitoringInstancePatch"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/MonitoringInstance"
+            }
+          },
+          "201": {
+            "description": "accepted operation",
+            "schema": {
+              "$ref": "#/definitions/MonitoringInstance"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Instances_Patch": {
+            "$ref": "./examples/Instance_Update.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "Instances_Delete",
+        "description": "Delete a SCOM monitoring instance",
+        "tags": [
+          "SCOM Instances"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/instanceName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The delete has succeeded"
+          },
+          "202": {
+            "description": "Accepted. The delete will complete asynchronously"
+          },
+          "204": {
+            "description": "No Content. No managed instance to delete"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Instances_Delete": {
+            "$ref": "./examples/Instance_Delete.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "OperationsList": {
+      "description": "List of operations",
+      "properties": {
+        "value": {
+          "description": "List of operations",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Operation"
+          }
+        },
+        "nextLink": {
+          "description": "URL to get the next page if any",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "Operation": {
+      "description": "A REST API operation",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Name of the operation being performed on this object",
+          "type": "string",
+          "readOnly": true
+        },
+        "display": {
+          "description": "Contains the localized display information for this operation",
+          "readOnly": true,
+          "properties": {
+            "provider": {
+              "description": "Localized friendly form of the resource provider name",
+              "type": "string",
+              "readOnly": true
+            },
+            "resource": {
+              "description": "Localized friendly form of the resource type related to this operation",
+              "type": "string",
+              "readOnly": true
+            },
+            "operation": {
+              "description": "Localized friendly name for the operation",
+              "type": "string",
+              "readOnly": true
+            },
+            "description": {
+              "description": "Localized friendly description for the operation",
+              "type": "string",
+              "readOnly": true
+            }
+          }
+        },
+        "origin": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The intended executor of the operation.",
+          "enum": [
+            "NotSpecified",
+            "user",
+            "system"
+          ],
+          "x-ms-enum": {
+            "name": "OperationOrigin",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "MonitoringInstance": {
+      "description": "A SCOM instance resource",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "The properties of a SCOM instance resource",
+          "$ref": "#/definitions/MonitoringInstanceProperties"
+        }
+      }
+    },
+    "MonitoringInstanceProperties": {
+      "description": "The properties of a SCOM instance resource",
+      "properties": {
+        "productVersion": {
+          "description": "SCOM product version to be installed on instance",
+          "type": "string",
+          "x-ms-enum": {
+            "name": "productVersion",
+            "modelAsString": true
+          },
+          "enum": [
+            "2019"
+          ]
+        },
+        "vNetSubnetId": {
+          "description": "Virtual Network subnet id on which Aquila instance will be provisioned",
+          "type": "string"
+        },
+        "managementEndpoints": {
+          "description": "List of management server endpoints",
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ManagementServerProperties"
+          }
+        },
+        "domainController": {
+          "description": "Domain controller details",
+          "$ref": "#/definitions/DomainControllerProperties"
+        },
+        "domainUserCredentials": {
+          "description": "Domain user which will be used to join VMs to domain and login to VMs",
+          "$ref": "#/definitions/DomainUserCredentials"
+        },
+        "actionAccountCredentials": {
+          "description": "Domain User Action account",
+          "$ref": "#/definitions/DomainUserCredentials"
+        },
+        "dasAccountCredentials": {
+          "description": "Domain User for DAS account ",
+          "$ref": "#/definitions/DomainUserCredentials"
+        },
+        "dataReaderAccountCredentials": {
+          "description": "Domain User data reader account",
+          "$ref": "#/definitions/DomainUserCredentials"
+        },
+        "dataWriterAccountCredentials": {
+          "description": "Domain User data writer account",
+          "$ref": "#/definitions/DomainUserCredentials"
+        },
+        "azureHybridBenefit": {
+          "description": "The properties to enable Azure Hybrid benefit for various SCOM infrastructure license",
+          "$ref": "#/definitions/AzureHybridBenefitProperties"
+        }
+      }
+    },
+    "ManagementServerProperties": {
+      "description": "The properties of management server",
+      "properties": {
+        "fqdn": {
+          "description": "Management server Fully Qualified Domain Name",
+          "type": "string",
+          "readOnly": true
+        },
+        "healthState": {
+          "description": "Management server health state ",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "DomainControllerProperties": {
+      "description": "The properties of domain controller to which SCOM and SQL servers join for AuthN/AuthZ",
+      "properties": {
+        "domainName": {
+          "description": "Fully qualified domain name",
+          "type": "string"
+        },
+        "dnsServer": {
+          "description": "IP address of DNS server ",
+          "type": "string"
+        }
+      }
+    },
+    "DomainUserCredentials": {
+      "description": "Domain user name and password",
+      "properties": {
+        "userName": {
+          "description": "Domain user name ",
+          "type": "string"
+        },
+        "password": {
+          "description": "Domain user password ",
+          "type": "string",
+          "x-ms-secret": true
+        }
+      }
+    },
+    "LicenseTypeEnum": {
+      "description": "License type for various SCOM infra components ",
+      "type": "string",
+      "enum": [
+        "None",
+        "AzureHybridBenefit"
+      ],
+      "x-ms-enum": {
+        "name": "hybridLicenseType",
+        "modelAsString": true
+      }
+    },
+    "AzureHybridBenefitProperties": {
+      "description": "The properties to maximize savings by using Azure Hybrid Benefit",
+      "properties": {
+        "scomLicenseType": {
+          "description": "SCOM license type. Maximize savings by using license you already own",
+          "$ref": "#/definitions/LicenseTypeEnum"
+        },
+        "windowsServerLicenseType": {
+          "description": "Specifies that the image or disk that is being used was licensed on-premises. <br><br> For more information, see [Azure Hybrid Use Benefit for Windows Server](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-hybrid-use-benefit-licensing?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json)",
+          "$ref": "#/definitions/LicenseTypeEnum"
+        },
+        "sqlServerLicenseType": {
+          "description": "SQL Server license type. Maximize savings by using Azure Hybrid Benefit for SQL Server with license you already own",
+          "$ref": "#/definitions/LicenseTypeEnum"
+        }
+      }
+    },
+    "MonitoringInstanceList": {
+      "description": "A paged list of SCOM monitoring instances",
+      "properties": {
+        "value": {
+          "description": "The items on the page",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/MonitoringInstance"
+          }
+        },
+        "nextLink": {
+          "description": "URL to get the next page if any",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "MonitoringInstancePatch": {
+      "type": "object",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags."
+        }
+      },
+      "description": "Object containing updates for patch operations."
+    }
+  }
+}
