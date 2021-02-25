@@ -2309,8 +2309,11 @@
       ],
       "properties": {
         "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/CustomRolloutProperties",
+          "allOf": [
+            {
+              "$ref": "#/definitions/CustomRolloutProperties"
+            }
+          ],
           "description": "Properties of the rollout."
         }
       },
@@ -2571,8 +2574,11 @@
       ],
       "properties": {
         "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/DefaultRolloutProperties",
+          "allOf": [
+            {
+              "$ref": "#/definitions/DefaultRolloutProperties"
+            }
+          ],
           "description": "Properties of the rollout."
         }
       },
