@@ -18,7 +18,6 @@ batch:
 
 Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
 
-
 ### Tag: schema-databoxedge-2020-12-01 and azureresourceschema
 
 ``` yaml $(tag) == 'schema-databoxedge-2020-12-01' && $(azureresourceschema)
@@ -27,8 +26,9 @@ output-folder: $(azureresourceschema-folder)/schemas
 # all the input files in this apiVersion
 input-file:
   - Microsoft.DataBoxEdge/stable/2020-12-01/databoxedge.json
-  
+
 ```
+
 ### Tag: schema-databoxedge-2020-09-01-preview and azureresourceschema
 
 ``` yaml $(tag) == 'schema-databoxedge-2020-09-01-preview' && $(azureresourceschema)

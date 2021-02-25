@@ -6,6 +6,7 @@ These settings apply only when `--azureresourceschema` is specified on the comma
 
 ``` yaml $(azureresourceschema) && $(multiapi)
 batch:
+  - tag: schema-costmanagement-2020-12-01-preview
   - tag: schema-costmanagement-2020-06-01
   - tag: schema-costmanagement-2020-03-01-preview
   - tag: schema-costmanagement-2019-11-01
@@ -22,6 +23,17 @@ batch:
 
 Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
 
+### Tag: schema-costmanagement-2020-12-01-preview and azureresourceschema
+
+``` yaml $(tag) == 'schema-costmanagement-2020-12-01-preview' && $(azureresourceschema)
+output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
+  - Microsoft.CostManagement/preview/2020-12-01-preview/costmanagement.generatedetailedcostreport.json
+
+```
+
 ### Tag: schema-costmanagement-2020-06-01 and azureresourceschema
 
 ``` yaml $(tag) == 'schema-costmanagement-2020-06-01' && $(azureresourceschema)
@@ -29,8 +41,8 @@ output-folder: $(azureresourceschema-folder)/schemas
 
 # all the input files in this apiVersion
 input-file:
-  - Microsoft.CostManagement/stable/2020-06-01/costmanagement.json
   - Microsoft.CostManagement/stable/2020-06-01/costmanagement.exports.json
+  - Microsoft.CostManagement/stable/2020-06-01/costmanagement.json
 
 ```
 
