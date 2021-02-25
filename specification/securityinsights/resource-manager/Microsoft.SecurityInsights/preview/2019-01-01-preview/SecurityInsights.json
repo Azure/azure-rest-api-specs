@@ -1788,6 +1788,12 @@
           "Creates or updates an Office365 data connector.": {
             "$ref": "./examples/dataConnectors/CreateOfficeDataConnetor.json"
           },
+          "Creates or updates a Threat Intelligence Taxii data connector.": {
+            "$ref": "./examples/dataConnectors/CreateThreatIntelligenceTaxiiDataConnector.json"
+          },
+          "Creates or updates an Threat Intelligence Platform data connector.": {
+            "$ref": "./examples/dataConnectors/CreateThreatIntelligenceDataConnector.json"
+          },
           "Creates or updates a Dynamics365 data connector.": {
             "$ref": "./examples/dataConnectors/CreateDynamics365DataConnetor.json"
           }
@@ -11173,13 +11179,18 @@
       "type": "object"
     },
     "TIDataConnectorProperties": {
-      "allOf": [
-        {
-          "$ref": "#/definitions/DataConnectorTenantId"
-        }
-      ],
-      "description": "Threat Intelligence Platforms data connector properties.",
+      "description": "TI (Threat Intelligence) data connector properties.",
       "properties": {
+        "tenantId": {
+          "description": "The tenant id to connect to, and get the data from.",
+          "type": "string"
+        },
+        "tipLookbackPeriod": {
+          "description": "The lookback period for the feed to be imported.",
+          "format": "date-time",
+          "type": "string",
+          "x-nullable": true
+        },
         "dataTypes": {
           "$ref": "#/definitions/TIDataConnectorDataTypes",
           "description": "The available data types for the connector."
@@ -11277,6 +11288,40 @@
         "password": {
           "description": "The password for the TAXII server.",
           "type": "string"
+        },
+        "taxiiLookbackPeriod": {
+          "description": "The lookback period for the TAXII server.",
+          "format": "date-time",
+          "type": "string",
+          "x-nullable": true
+        },
+        "pollingFrequency": {
+          "description": "The polling frequency for the TAXII server.",
+          "type": "string",
+          "x-nullable": true,
+          "enum": [
+            "OnceAMinute",
+            "OnceAnHour",
+            "OnceADay"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "PollingFrequency",
+            "values": [
+              {
+                "description": "Once a minute",
+                "value": "OnceAMinute"
+              },
+              {
+                "description": "Once an hour",
+                "value": "OnceAnHour"
+              },
+              {
+                "description": "Once a day",
+                "value": "OnceADay"
+              }
+            ]
+          }
         },
         "dataTypes": {
           "$ref": "#/definitions/TiTaxiiDataConnectorDataTypes",
