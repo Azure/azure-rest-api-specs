@@ -372,6 +372,48 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/cassandraClusters/{clusterName}/fetchNodeStatus/operationResults/{operationId}": {
+      "get": {
+        "operationId": "CassandraCluster_FetchNodeStatus_Get",
+        "description": "Get the results of POSTing to the fetchNodeStatus method.",
+        "x-ms-examples": {
+          "CosmosDBManagedCassandraClusterFetchNodeStatusResults": {
+            "$ref": "./examples/CosmosDBManagedCassandraClusterFetchNodeStatusResults.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/clusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/operationId"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully fetched the status of all nodes in the cluster.",
+            "schema": {
+              "$ref": "#/definitions/ClusterNodeStatus"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "cosmos-db.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/cassandraClusters/{clusterName}/backups": {
       "get": {
         "operationId": "CassandraCluster_ListBackups",
@@ -699,6 +741,14 @@
       "minLength": 1,
       "maxLength": 100,
       "pattern": "^[a-zA-Z0-9]+(-[a-zA-Z0-9]+)*"
+    },
+    "operationId": {
+      "name": "operationId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "description": "Guid of a long running operation."
     },
     "dataCenterNameParameter": {
       "name": "dataCenterName",
