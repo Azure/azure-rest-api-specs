@@ -817,9 +817,13 @@
       "description": "Describes the format of Error response.",
       "type": "object",
       "properties": {
-        "error": {
-          "description": "The error object.",
-          "$ref": "#/definitions/ErrorDetail"
+        "code": {
+          "description": "Error code",
+          "type": "string"
+        },
+        "message": {
+          "description": "Error message indicating why the operation failed.",
+          "type": "string"
         }
       }
     },
