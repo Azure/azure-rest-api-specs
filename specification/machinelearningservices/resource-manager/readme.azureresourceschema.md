@@ -6,6 +6,7 @@ These settings apply only when `--azureresourceschema` is specified on the comma
 
 ``` yaml $(azureresourceschema) && $(multiapi)
 batch:
+  - tag: schema-machinelearningservices-2021-01-01
   - tag: schema-machinelearningservices-2020-09-01-preview
   - tag: schema-machinelearningservices-2020-08-01
   - tag: schema-machinelearningservices-2020-06-01
@@ -25,6 +26,17 @@ batch:
 ```
 
 Please also specify `--azureresourceschema-folder=<path to the root directory of your azure-resource-manager-schemas clone>`.
+
+### Tag: schema-machinelearningservices-2021-01-01 and azureresourceschema
+
+``` yaml $(tag) == 'schema-machinelearningservices-2021-01-01' && $(azureresourceschema)
+output-folder: $(azureresourceschema-folder)/schemas
+
+# all the input files in this apiVersion
+input-file:
+  - Microsoft.MachineLearningServices/stable/2021-01-01/machineLearningServices.json
+
+```
 
 ### Tag: schema-machinelearningservices-2020-09-01-preview and azureresourceschema
 
