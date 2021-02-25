@@ -4299,6 +4299,42 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DocumentDB/locations": {
+      "get": {
+        "operationId": "LocationList",
+        "x-ms-examples": {
+          "CosmosDBLocationList": {
+            "$ref": "./examples/CosmosDBLocationList.json"
+          }
+        },
+        "description": "List Cosmos DB locations and their properties",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/LocationListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.DocumentDB/locations/{location}": {
       "get": {
         "operationId": "LocationGet",
@@ -4307,7 +4343,7 @@
             "$ref": "./examples/CosmosDBLocationGet.json"
           }
         },
-        "description": "Retrieves the properties of an existing Cosmos DB location",
+        "description": "Get the properties of an existing Cosmos DB location",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
@@ -7909,6 +7945,19 @@
         }
       }
     },
+    "LocationListResult": {
+      "properties": {
+        "value": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/LocationGetResult"
+          },
+          "description": "List of Cosmos DB locations and their properties."
+        }
+      },
+      "description": "The List operation response, that contains Cosmos DB locations and their properties."
+    },
     "LocationGetResult": {
       "description": "Cosmos DB location get result",
       "type": "object",
@@ -7927,10 +7976,6 @@
           "readOnly": true,
           "type": "string",
           "description": "The type of Azure resource."
-        },
-        "location": {
-          "type": "string",
-          "description": "The location of the resource group to which the resource belongs."
         },
         "properties": {
           "type": "object",
