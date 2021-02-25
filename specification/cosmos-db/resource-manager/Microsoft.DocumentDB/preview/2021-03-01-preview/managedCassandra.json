@@ -341,7 +341,7 @@
         "description": "Request the status of all nodes in the cluster (as returned by 'nodetool status').",
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
-          "CosmosDBManagedCassandraClusterInstanceView": {
+          "CosmosDBManagedCassandraClusterFetchNodeStatus": {
             "$ref": "./examples/CosmosDBManagedCassandraClusterFetchNodeStatus.json"
           }
         },
@@ -363,42 +363,6 @@
           "202": {
             "description": "Accepted. The node status will be returned asynchronously."
           },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "cosmos-db.json#/definitions/CloudError"
-            }
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/cassandraClusters/{clusterName}/fetchNodeStatus/operationResults/{operationId}": {
-      "get": {
-        "operationId": "CassandraClusterFetchNodeStatusResults_Get",
-        "description": "Fetch the output of running nodetool on the Cassandra cluster..",
-        "x-ms-examples": {
-          "CosmosDBManagedCassandraClusterFetchNodeStatusResults": {
-            "$ref": "./examples/CosmosDBManagedCassandraClusterFetchNodeStatusResults.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/clusterNameParameter"
-          },
-          {
-            "$ref": "#/parameters/operationId"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
           "200": {
             "description": "Successfully fetched the status of all nodes in the cluster.",
             "schema": {
@@ -742,14 +706,6 @@
       "maxLength": 100,
       "pattern": "^[a-zA-Z0-9]+(-[a-zA-Z0-9]+)*"
     },
-    "operationId": {
-      "name": "operationId",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "method",
-      "description": "Guid of a long running operation."
-    },
     "dataCenterNameParameter": {
       "name": "dataCenterName",
       "in": "path",
@@ -996,9 +952,12 @@
                 "description": "The amount of file system data in the data directory (e.g., 47.66 KB), excluding all content in the snapshots subdirectories. Because all SSTable data files are included, any data that is not cleaned up (such as TTL-expired cell or tombstoned data) is counted."
               },
               "tokens": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The number of tokens set for the node."
+                "type": "array",
+                "description": "List of tokens.",
+                "items": {
+                  "type": "string",
+                  "description": "Token of this node."
+                }
               },
               "owns": {
                 "type": "number",
