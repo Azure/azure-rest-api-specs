@@ -36,7 +36,7 @@
   "paths": {
     "/subscriptions/{subscriptionId}/providers/Microsoft.DocumentDB/cassandraClusters": {
       "get": {
-        "operationId": "CassandraCluster_ListBySubscription",
+        "operationId": "CassandraClusters_ListBySubscription",
         "description": "List all managed Cassandra clusters in this subscription.",
         "x-ms-pageable": {
           "nextLinkName": null
@@ -72,7 +72,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/cassandraClusters": {
       "get": {
-        "operationId": "CassandraCluster_ListByResourceGroup",
+        "operationId": "CassandraClusters_ListByResourceGroup",
         "description": "List all managed Cassandra clusters in this resource group.",
         "x-ms-pageable": {
           "nextLinkName": null
@@ -111,7 +111,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/cassandraClusters/{clusterName}": {
       "get": {
-        "operationId": "CassandraCluster_Get",
+        "operationId": "CassandraClusters_Get",
         "description": "Get the properties of a managed Cassandra cluster.",
         "x-ms-examples": {
           "CosmosDBManagedCassandraClusterGet": {
@@ -148,7 +148,7 @@
         }
       },
       "delete": {
-        "operationId": "CassandraCluster_Delete",
+        "operationId": "CassandraClusters_Delete",
         "description": "Deletes a managed Cassandra cluster.",
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
@@ -186,7 +186,7 @@
         }
       },
       "put": {
-        "operationId": "CassandraCluster_CreateUpdate",
+        "operationId": "CassandraClusters_CreateUpdate",
         "description": "Create or update a managed Cassandra cluster. When updating, you must specify all writable properties. To update only some properties, use PATCH.",
         "x-ms-examples": {
           "CosmosDBManagedCassandraClusterCreate": {
@@ -239,7 +239,7 @@
         }
       },
       "patch": {
-        "operationId": "CassandraCluster_Update",
+        "operationId": "CassandraClusters_Update",
         "description": "Updates some of the properties of a managed Cassandra cluster.",
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
@@ -288,7 +288,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/cassandraClusters/{clusterName}/repair": {
       "post": {
-        "operationId": "CassandraCluster_RequestRepair",
+        "operationId": "CassandraClusters_RequestRepair",
         "description": "Request that repair begin on this cluster as soon as possible.",
         "x-ms-examples": {
           "CosmosDBManagedCassandraRepair": {
@@ -323,7 +323,7 @@
           "200": {
             "description": "Success. The repair operation will begin as soon as possible."
           },
-          "409": {
+          "412": {
             "description": "Repair is disabled for this cluster, so no repair request can be accepted. To enable it, set the cluster's repairEnabled property to true."
           },
           "default": {
@@ -337,7 +337,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/cassandraClusters/{clusterName}/fetchNodeStatus": {
       "post": {
-        "operationId": "CassandraCluster_FetchNodeStatus",
+        "operationId": "CassandraClusters_FetchNodeStatus",
         "description": "Request the status of all nodes in the cluster (as returned by 'nodetool status').",
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
@@ -375,7 +375,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/cassandraClusters/{clusterName}/fetchNodeStatus/operationResults/{operationId}": {
       "get": {
         "operationId": "CassandraClusterFetchNodeStatusResults_Get",
-        "description": "Get the results of POSTing to the fetchNodeStatus method.",
+        "description": "Fetch the output of running nodetool on the Cassandra cluster..",
         "x-ms-examples": {
           "CosmosDBManagedCassandraClusterFetchNodeStatusResults": {
             "$ref": "./examples/CosmosDBManagedCassandraClusterFetchNodeStatusResults.json"
@@ -416,7 +416,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/cassandraClusters/{clusterName}/backups": {
       "get": {
-        "operationId": "CassandraCluster_ListBackups",
+        "operationId": "CassandraClusters_ListBackups",
         "description": "List the backups of this cluster that are available to restore.",
         "x-ms-pageable": {
           "nextLinkName": null
@@ -500,7 +500,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/cassandraClusters/{clusterName}/dataCenters": {
       "get": {
-        "operationId": "CassandraDataCenter_ListDataCenters",
+        "operationId": "CassandraDataCenters_ListDataCenters",
         "description": "List all data centers in a particular managed Cassandra cluster.",
         "x-ms-pageable": {
           "nextLinkName": null
@@ -542,7 +542,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/cassandraClusters/{clusterName}/dataCenters/{dataCenterName}": {
       "get": {
-        "operationId": "CassandraDataCenter_Get",
+        "operationId": "CassandraDataCenters_Get",
         "description": "Get the properties of a managed Cassandra data center.",
         "x-ms-examples": {
           "CosmosDBManagedCassandraDataCenterGet": {
@@ -582,7 +582,7 @@
         }
       },
       "delete": {
-        "operationId": "CassandraDataCenter_Delete",
+        "operationId": "CassandraDataCenters_Delete",
         "description": "Delete a managed Cassandra data center.",
         "x-ms-examples": {
           "CosmosDBManagedCassandraDataCenterDelete": {
@@ -612,7 +612,7 @@
             "description": "Accepted. Deletion will complete asynchronously."
           },
           "204": {
-            "description": "No such cluster to delete."
+            "description": "Cassandra cluster with the specified name does not exist."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -623,7 +623,7 @@
         }
       },
       "put": {
-        "operationId": "CassandraDataCenter_CreateUpdate",
+        "operationId": "CassandraDataCenters_CreateUpdate",
         "description": "Create or update a managed Cassandra data center. When updating, overwrite all properties. To update only some properties, use PATCH.",
         "x-ms-examples": {
           "CosmosDBManagedCassandraDataCenterCreate": {
@@ -679,7 +679,7 @@
         }
       },
       "patch": {
-        "operationId": "CassandraDataCenter_Update",
+        "operationId": "CassandraDataCenters_Update",
         "description": "Update some of the properties of a managed Cassandra data center.",
         "x-ms-examples": {
           "CosmosDBManagedCassandraDataCenterUpdate": {
