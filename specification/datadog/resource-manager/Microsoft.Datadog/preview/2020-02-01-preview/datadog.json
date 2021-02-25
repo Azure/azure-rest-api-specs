@@ -74,7 +74,7 @@
           "Agreements"
         ],
         "summary": "Create Datadog marketplace agreement in the subscription.",
-        "operationId": "MarketplaceAgreements_Create",
+        "operationId": "MarketplaceAgreements_CreateOrUpdate",
         "consumes": [
           "application/json"
         ],
@@ -111,7 +111,7 @@
           }
         },
         "x-ms-examples": {
-          "MarketplaceAgreements_Create": {
+          "MarketplaceAgreements_CreateOrUpdate": {
             "$ref": "./examples/MarketplaceAgreements_Create.json"
           }
         }
@@ -123,7 +123,7 @@
           "ApiKey"
         ],
         "summary": "List the api keys for a given monitor resource.",
-        "operationId": "ApiKeys_List",
+        "operationId": "Monitors_ListApiKeys",
         "produces": [
           "application/json"
         ],
@@ -159,7 +159,7 @@
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "ApiKeys_List": {
+          "Monitors_ListApiKeys": {
             "$ref": "./examples/ApiKeys_List.json"
           }
         }
@@ -171,7 +171,7 @@
           "ApiKey"
         ],
         "summary": "Get the default api key.",
-        "operationId": "ApiKeys_GetDefaultKey",
+        "operationId": "Monitors_GetDefaultKey",
         "produces": [
           "application/json"
         ],
@@ -204,7 +204,7 @@
           }
         },
         "x-ms-examples": {
-          "ApiKeys_GetDefaultKey": {
+          "Monitors_GetDefaultKey": {
             "$ref": "./examples/ApiKeys_GetDefaultKey.json"
           }
         }
@@ -216,7 +216,7 @@
           "ApiKey"
         ],
         "summary": "Set the default api key.",
-        "operationId": "ApiKeys_SetDefaultKey",
+        "operationId": "Monitors_SetDefaultKey",
         "consumes": [
           "application/json"
         ],
@@ -256,7 +256,7 @@
           }
         },
         "x-ms-examples": {
-          "ApiKeys_SetDefaultKey": {
+          "Monitors_SetDefaultKey": {
             "$ref": "./examples/ApiKeys_SetDefaultKey.json"
           }
         }
@@ -268,7 +268,7 @@
           "Hosts"
         ],
         "summary": "List the hosts for a given monitor resource.",
-        "operationId": "Hosts_List",
+        "operationId": "Monitors_ListHosts",
         "produces": [
           "application/json"
         ],
@@ -304,7 +304,7 @@
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "Hosts_List": {
+          "Monitors_ListHosts": {
             "$ref": "./examples/Hosts_List.json"
           }
         }
@@ -316,7 +316,7 @@
           "LinkedResources"
         ],
         "summary": "List all Azure resources associated to the same Datadog organization as the target resource.",
-        "operationId": "LinkedResources_List",
+        "operationId": "Monitors_ListLinkedResources",
         "produces": [
           "application/json"
         ],
@@ -352,7 +352,7 @@
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "LinkedResources_List": {
+          "Monitors_ListLinkedResources": {
             "$ref": "./examples/LinkedResources_List.json"
           }
         }
@@ -364,7 +364,7 @@
           "MonitoredResources"
         ],
         "summary": "List the resources currently being monitored by the Datadog monitor resource.",
-        "operationId": "MonitoredResources_List",
+        "operationId": "Monitors_ListMonitoredResources",
         "produces": [
           "application/json"
         ],
@@ -400,7 +400,7 @@
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "MonitoredResources_List": {
+          "Monitors_ListMonitoredResources": {
             "$ref": "./examples/MonitoredResources_List.json"
           }
         }
@@ -746,7 +746,7 @@
           "RefreshSetPasswordLink"
         ],
         "summary": "Refresh the set password link and return a latest one.",
-        "operationId": "RefreshSetPassword_Get",
+        "operationId": "Monitors_RefreshSetPasswordLink",
         "produces": [
           "application/json"
         ],
@@ -779,7 +779,7 @@
           }
         },
         "x-ms-examples": {
-          "RefreshSetPassword_Get": {
+          "Monitors_RefreshSetPasswordLink": {
             "$ref": "./examples/RefreshSetPassword_Get.json"
           }
         }
@@ -1517,14 +1517,15 @@
       "x-ms-enum": {
         "modelAsString": true,
         "name": "MonitoringStatus"
-      },
-      "readOnly": true
+      }
     },
     "MarketplaceSubscriptionStatus": {
       "description": "Flag specifying the Marketplace Subscription Status of the resource. If payment is not made in time, the resource will go in Suspended state.",
       "enum": [
+        "Provisioning",
         "Active",
-        "Suspended"
+        "Suspended",
+        "Unsubscribed"
       ],
       "type": "string",
       "x-ms-enum": {
@@ -1557,6 +1558,28 @@
         },
         "linkingClientId": {
           "description": "The client_id from an existing in exchange for an auth token to link organization.",
+          "type": "string",
+          "x-ms-mutability": [
+            "create"
+          ]
+        },
+        "redirectUri": {
+          "description": "The redirect uri for linking.",
+          "type": "string",
+          "x-ms-mutability": [
+            "create"
+          ]
+        },
+        "apiKey": {
+          "description": "Api key associated to the Datadog organization.",
+          "type": "string",
+          "x-ms-mutability": [
+            "create"
+          ],
+          "x-ms-secret": true
+        },
+        "applicationKey": {
+          "description": "Application key associated to the Datadog organization.",
           "type": "string",
           "x-ms-mutability": [
             "create"
@@ -1829,6 +1852,9 @@
       "description": "Definition of the properties for a TagRules resource.",
       "type": "object",
       "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState"
+        },
         "logRules": {
           "$ref": "#/definitions/LogRules"
         },
@@ -1896,6 +1922,9 @@
     "DatadogSingleSignOnProperties": {
       "type": "object",
       "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState"
+        },
         "singleSignOnState": {
           "$ref": "#/definitions/SingleSignOnStates"
         },
