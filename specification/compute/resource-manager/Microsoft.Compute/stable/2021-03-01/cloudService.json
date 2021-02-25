@@ -3,7 +3,7 @@
   "info": {
     "title": "CloudServiceManagementClient",
     "description": "The Cloud Service Management Client.",
-    "version": "2020-10-01-preview"
+    "version": "2021-03-01"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -61,7 +61,12 @@
             "description": "No Content"
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Delete Cloud Service Role Instance": {
+            "$ref": "./examples/DeleteCloudServiceRoleInstance.json"
+          }
+        }
       },
       "get": {
         "tags": [
@@ -122,6 +127,11 @@
               "$ref": "#/definitions/RoleInstance"
             }
           }
+        },
+        "x-ms-examples": {
+          "Get Cloud Service Role Instance": {
+            "$ref": "./examples/GetCloudServiceRoleInstance.json"
+          }
         }
       }
     },
@@ -171,6 +181,11 @@
             "schema": {
               "$ref": "#/definitions/RoleInstanceInstanceView"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get Instance View of Cloud Service Role Instance": {
+            "$ref": "./examples/GetInstanceViewOfCloudServiceRoleInstance.json"
           }
         }
       }
@@ -229,6 +244,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "List Role Instances in a Cloud Service": {
+            "$ref": "./examples/ListCloudServiceRolesInstances.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -282,7 +302,12 @@
             "description": "Accepted"
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Restart Cloud Service Role Instance": {
+            "$ref": "./examples/RestartCloudServiceRoleInstance.json"
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/cloudServices/{cloudServiceName}/roleInstances/{roleInstanceName}/reimage": {
@@ -333,7 +358,12 @@
             "description": "Accepted"
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Reimage Cloud Service Role Instance": {
+            "$ref": "./examples/ReimageCloudServiceRoleInstance.json"
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/cloudServices/{cloudServiceName}/roleInstances/{roleInstanceName}/rebuild": {
@@ -384,7 +414,12 @@
             "description": "Accepted"
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Rebuild Cloud Service Role Instance": {
+            "$ref": "./examples/RebuildCloudServiceRoleInstance.json"
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/cloudServices/{cloudServiceName}/roleInstances/{roleInstanceName}/remoteDesktopFile": {
@@ -438,6 +473,11 @@
               "type": "file"
             }
           }
+        },
+        "x-ms-examples": {
+          "Get the remote desktop file for a Cloud Service Role Instance": {
+            "$ref": "./examples/GetCloudServiceRoleInstanceRemoteDesktopFile.json"
+          }
         }
       }
     },
@@ -488,6 +528,11 @@
               "$ref": "#/definitions/CloudServiceRole"
             }
           }
+        },
+        "x-ms-examples": {
+          "Get Cloud Service Role": {
+            "$ref": "./examples/GetCloudServiceRole.json"
+          }
         }
       }
     },
@@ -530,6 +575,11 @@
             "schema": {
               "$ref": "#/definitions/CloudServiceRoleListResult"
             }
+          }
+        },
+        "x-ms-examples": {
+          "List Roles in a Cloud Service": {
+            "$ref": "./examples/ListCloudServiceRoles.json"
           }
         },
         "x-ms-pageable": {
@@ -660,7 +710,12 @@
             }
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Update existing Cloud Service to add tags": {
+            "$ref": "./examples/UpdateCloudServiceToIncludeTags.json"
+          }
+        }
       },
       "delete": {
         "tags": [
@@ -707,7 +762,12 @@
             "description": "No Content"
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Delete Cloud Service": {
+            "$ref": "./examples/DeleteCloudService.json"
+          }
+        }
       },
       "get": {
         "tags": [
@@ -749,6 +809,11 @@
             "schema": {
               "$ref": "#/definitions/CloudService"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get Cloud Service with Multiple Roles and RDP Extension": {
+            "$ref": "./examples/GetCloudServiceWithMultiRoleAndRDP.json"
           }
         }
       }
@@ -795,6 +860,11 @@
               "$ref": "#/definitions/CloudServiceInstanceView"
             }
           }
+        },
+        "x-ms-examples": {
+          "Get Cloud Service Instance View with Multiple Roles": {
+            "$ref": "./examples/GetCloudServiceInstanceViewWithMultiRole.json"
+          }
         }
       }
     },
@@ -825,6 +895,11 @@
             "schema": {
               "$ref": "#/definitions/CloudServiceListResult"
             }
+          }
+        },
+        "x-ms-examples": {
+          "List Cloud Services in a Subscription": {
+            "$ref": "./examples/ListCloudServicesInSubscription.json"
           }
         },
         "x-ms-pageable": {
@@ -866,6 +941,11 @@
             "schema": {
               "$ref": "#/definitions/CloudServiceListResult"
             }
+          }
+        },
+        "x-ms-examples": {
+          "List Cloud Services in a Resource Group": {
+            "$ref": "./examples/ListCloudServicesInResourceGroup.json"
           }
         },
         "x-ms-pageable": {
@@ -916,7 +996,12 @@
             "description": "Accepted"
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Start Cloud Service": {
+            "$ref": "./examples/StartCloudService.json"
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/cloudServices/{cloudServiceName}/poweroff": {
@@ -962,7 +1047,12 @@
             "description": "Accepted"
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Stop or PowerOff Cloud Service": {
+            "$ref": "./examples/PowerOffCloudService.json"
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/cloudServices/{cloudServiceName}/restart": {
@@ -1016,7 +1106,12 @@
             "description": "Accepted"
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Restart Cloud Service Role Instances": {
+            "$ref": "./examples/RestartCloudServiceRoleInstances.json"
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/cloudServices/{cloudServiceName}/reimage": {
@@ -1070,7 +1165,12 @@
             "description": "Accepted"
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Reimage Cloud Service Role Instances": {
+            "$ref": "./examples/ReimageCloudServiceRoleInstances.json"
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/cloudServices/{cloudServiceName}/rebuild": {
@@ -1124,7 +1224,12 @@
             "description": "Accepted"
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Rebuild Cloud Service Role Instances": {
+            "$ref": "./examples/RebuildCloudServiceRoleInstances.json"
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/cloudServices/{cloudServiceName}/delete": {
@@ -1178,7 +1283,12 @@
             "description": "Accepted"
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Delete Cloud Service Role Instances": {
+            "$ref": "./examples/DeleteCloudServiceRoleInstances.json"
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/cloudServices/{cloudServiceName}/updateDomains/{updateDomain}": {
@@ -1240,7 +1350,12 @@
             "description": "Accepted"
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Update Cloud Service to specified Domain": {
+            "$ref": "./examples/UpdateCloudServiceUpdateDomain.json"
+          }
+        }
       },
       "get": {
         "tags": [
@@ -1291,6 +1406,11 @@
               "$ref": "#/definitions/UpdateDomain"
             }
           }
+        },
+        "x-ms-examples": {
+          "Get Cloud Service Update Domain": {
+            "$ref": "./examples/GetCloudServiceUpdateDomain.json"
+          }
         }
       }
     },
@@ -1335,6 +1455,203 @@
             "schema": {
               "$ref": "#/definitions/UpdateDomainListResult"
             }
+          }
+        },
+        "x-ms-examples": {
+          "List Update Domains in Cloud Service": {
+            "$ref": "./examples/ListCloudServiceUpdateDomains.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/cloudServiceOsVersions/{osVersionName}": {
+      "get": {
+        "tags": [
+          "CloudServiceOperatingSystems"
+        ],
+        "description": "Gets properties of a guest operating system version that can be specified in the XML service configuration (.cscfg) for a cloud service.",
+        "operationId": "CloudServiceOperatingSystems_GetOSVersion",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "location",
+            "description": "Name of the location that the OS version pertains to.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "osVersionName",
+            "description": "Name of the OS version.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          },
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/OSVersion"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Cloud Service OS Version": {
+            "$ref": "./examples/GetCloudServiceOSVersion.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/cloudServiceOsVersions": {
+      "get": {
+        "tags": [
+          "CloudServiceOperatingSystems"
+        ],
+        "description": "Gets a list of all guest operating system versions available to be specified in the XML service configuration (.cscfg) for a cloud service. Use nextLink property in the response to get the next page of OS versions. Do this till nextLink is null to fetch all the OS versions.",
+        "operationId": "CloudServiceOperatingSystems_ListOSVersions",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "location",
+            "description": "Name of the location that the OS versions pertain to.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          },
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/OSVersionListResult"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Cloud Service OS Versions in a subscription": {
+            "$ref": "./examples/ListCloudServiceOSVersions.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/cloudServiceOsFamilies/{osFamilyName}": {
+      "get": {
+        "tags": [
+          "CloudServiceOperatingSystems"
+        ],
+        "description": "Gets properties of a guest operating system family that can be specified in the XML service configuration (.cscfg) for a cloud service.",
+        "operationId": "CloudServiceOperatingSystems_GetOSFamily",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "location",
+            "description": "Name of the location that the OS family pertains to.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "osFamilyName",
+            "description": "Name of the OS family.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          },
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/OSFamily"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Cloud Service OS Family": {
+            "$ref": "./examples/GetCloudServiceOSFamily.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/cloudServiceOsFamilies": {
+      "get": {
+        "tags": [
+          "CloudServiceOperatingSystems"
+        ],
+        "description": "Gets a list of all guest operating system families available to be specified in the XML service configuration (.cscfg) for a cloud service. Use nextLink property in the response to get the next page of OS Families. Do this till nextLink is null to fetch all the OS Families.",
+        "operationId": "CloudServiceOperatingSystems_ListOSFamilies",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "location",
+            "description": "Name of the location that the OS families pertain to.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          },
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/OSFamilyListResult"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Cloud Service OS Families in a subscription": {
+            "$ref": "./examples/ListCloudServiceOSFamilies.json"
           }
         },
         "x-ms-pageable": {
@@ -1754,13 +2071,15 @@
       "type": "object",
       "properties": {
         "publicIPAddress": {
-          "$ref": "#/definitions/SubResource"
+          "$ref": "#/definitions/SubResource",
+          "description": "The reference to the public ip address resource."
         },
         "subnet": {
-          "$ref": "#/definitions/SubResource"
+          "$ref": "#/definitions/SubResource",
+          "description": "The reference to the virtual network subnet resource."
         },
         "privateIPAddress": {
-          "description": "The private IP address referenced by the cloud service.",
+          "description": "The virtual network private IP address of the IP configuration.",
           "type": "string"
         }
       }
@@ -1769,51 +2088,70 @@
       "type": "object",
       "properties": {
         "name": {
+          "description": "The name of the resource that is unique within the set of frontend IP configurations used by the load balancer. This name can be used to access the resource.",
           "type": "string"
         },
         "properties": {
-          "$ref": "#/definitions/LoadBalancerFrontendIPConfigurationProperties"
+          "$ref": "#/definitions/LoadBalancerFrontendIPConfigurationProperties",
+          "description": "Properties of load balancer frontend ip configuration."
         }
-      }
+      },
+      "required": [
+        "name",
+        "properties"
+      ]
     },
     "LoadBalancerConfigurationProperties": {
       "type": "object",
       "properties": {
         "frontendIPConfigurations": {
-          "description": "List of IP",
+          "description": "Specifies the frontend IP to be used for the load balancer. Only IPv4 frontend IP address is supported. Each load balancer configuration must have exactly one frontend IP configuration.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/LoadBalancerFrontendIPConfiguration"
           }
         }
-      }
+      },
+      "required": [
+        "frontendIPConfigurations"
+      ]
     },
     "LoadBalancerConfiguration": {
       "description": "Describes the load balancer configuration.",
       "type": "object",
       "properties": {
+        "id": {
+          "description": "Resource Id",
+          "type": "string"
+        },
         "name": {
-          "description": "Resource Name",
+          "description": "The name of the Load balancer",
           "type": "string"
         },
         "properties": {
-          "$ref": "#/definitions/LoadBalancerConfigurationProperties"
+          "$ref": "#/definitions/LoadBalancerConfigurationProperties",
+          "description": "Properties of the load balancer configuration."
         }
-      }
+      },
+      "required": [
+        "name",
+        "properties"
+      ]
     },
     "CloudServiceNetworkProfile": {
       "description": "Network Profile for the cloud service.",
       "type": "object",
       "properties": {
         "loadBalancerConfigurations": {
-          "description": "The list of load balancer configurations for the cloud service.",
+          "description": "List of Load balancer configurations. Cloud service can have up to two load balancer configurations, corresponding to a Public Load Balancer and an Internal Load Balancer.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/LoadBalancerConfiguration"
           }
         },
         "swappableCloudService": {
-          "$ref": "#/definitions/SubResource"
+          "$ref": "#/definitions/SubResource",
+          "description": "The id reference of the cloud service containing the target IP with which the subject cloud service can perform a swap. This property cannot be updated once it is set. The swappable cloud service referred by this id must be present otherwise an error will be thrown."
         }
       }
     },
@@ -2042,6 +2380,14 @@
           "type": "string",
           "readOnly": true
         },
+        "privateIds": {
+          "description": "Specifies a list of unique identifiers generated internally for the cloud service. <br /><br /> NOTE: If you are using Azure Diagnostics extension, this property can be used as 'DeploymentId' for querying details.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
         "statuses": {
           "type": "array",
           "items": {
@@ -2107,6 +2453,184 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/UpdateDomain"
+          }
+        },
+        "nextLink": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "OSVersionProperties": {
+      "description": "OS version properties.",
+      "type": "object",
+      "properties": {
+        "family": {
+          "description": "The family of this OS version.",
+          "type": "string",
+          "readOnly": true
+        },
+        "familyLabel": {
+          "description": "The family label of this OS version.",
+          "type": "string",
+          "readOnly": true
+        },
+        "version": {
+          "description": "The OS version.",
+          "type": "string",
+          "readOnly": true
+        },
+        "label": {
+          "description": "The OS version label.",
+          "type": "string",
+          "readOnly": true
+        },
+        "isDefault": {
+          "description": "Specifies whether this is the default OS version for its family.",
+          "type": "boolean",
+          "readOnly": true
+        },
+        "isActive": {
+          "description": "Specifies whether this OS version is active.",
+          "type": "boolean",
+          "readOnly": true
+        }
+      }
+    },
+    "OSVersion": {
+      "description": "Describes a cloud service OS version.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Resource Id.",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "Resource name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "Resource type.",
+          "type": "string",
+          "readOnly": true
+        },
+        "location": {
+          "description": "Resource location.",
+          "type": "string",
+          "readOnly": true
+        },
+        "properties": {
+          "$ref": "#/definitions/OSVersionProperties"
+        }
+      }
+    },
+    "OSVersionListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/OSVersion"
+          }
+        },
+        "nextLink": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "OSVersionPropertiesBase": {
+      "description": "Configuration view of an OS version.",
+      "type": "object",
+      "properties": {
+        "version": {
+          "description": "The OS version.",
+          "type": "string",
+          "readOnly": true
+        },
+        "label": {
+          "description": "The OS version label.",
+          "type": "string",
+          "readOnly": true
+        },
+        "isDefault": {
+          "description": "Specifies whether this is the default OS version for its family.",
+          "type": "boolean",
+          "readOnly": true
+        },
+        "isActive": {
+          "description": "Specifies whether this OS version is active.",
+          "type": "boolean",
+          "readOnly": true
+        }
+      }
+    },
+    "OSFamilyProperties": {
+      "description": "OS family properties.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "The OS family name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "label": {
+          "description": "The OS family label.",
+          "type": "string",
+          "readOnly": true
+        },
+        "versions": {
+          "description": "List of OS versions belonging to this family.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/OSVersionPropertiesBase"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "OSFamily": {
+      "description": "Describes a cloud service OS family.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Resource Id.",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "Resource name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "Resource type.",
+          "type": "string",
+          "readOnly": true
+        },
+        "location": {
+          "description": "Resource location.",
+          "type": "string",
+          "readOnly": true
+        },
+        "properties": {
+          "$ref": "#/definitions/OSFamilyProperties"
+        }
+      }
+    },
+    "OSFamilyListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/OSFamily"
           }
         },
         "nextLink": {
