@@ -16,6 +16,7 @@ output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-containerinstance
 
 ``` yaml $(java) && $(multiapi)
 batch:
+  - tag: package-2020-11
   - tag: package-2019-12
   - tag: package-2018-10
   - tag: package-2018-04
@@ -23,6 +24,19 @@ batch:
   - tag: package-2017-12-preview
   - tag: package-2017-10-preview
   - tag: package-2017-08-preview
+```
+
+### Tag: package-2020-11 and java
+
+These settings apply only when `--tag=package-2020-11 --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2020-11' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.containerinstance.v2020_11_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/containerinstance/mgmt-v2020_11_01
+regenerate-manager: true
+generate-interface: true
 ```
 
 ### Tag: package-2019-12 and java
