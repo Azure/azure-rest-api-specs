@@ -4,10 +4,15 @@
     "providerNamespace": "Microsoft.Contoso",
     "rolloutName": "2020week10",
     "api-version": "2020-11-20",
-    "defaultRolloutSpecification": {
+    "properties": {
       "properties": {
         "specification": {
-          "RestOfTheWorldGroupTwo": {
+          "canary": {
+            "skipRegions": [
+              "eastus2euap"
+            ]
+          },
+          "restOfTheWorldGroupTwo": {
             "waitDuration": "PT4H"
           }
         }
