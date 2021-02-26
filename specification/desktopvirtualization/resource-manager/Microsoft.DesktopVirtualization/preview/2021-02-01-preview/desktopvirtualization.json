@@ -2517,7 +2517,7 @@
       "description": "Represents a Workspace definition.",
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/TrackedResource"
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ResourceModelWithAllowedPropertySet"
         }
       ],
       "properties": {
@@ -2532,6 +2532,10 @@
       "description": "Schema for Workspace properties.",
       "type": "object",
       "properties": {
+        "objectId": {
+          "type": "string",
+          "description": "ObjectId of Workspace. (internal use)"
+        },
         "description": {
           "type": "string",
           "description": "Description of Workspace."
@@ -2612,7 +2616,7 @@
       "description": "Represents a ApplicationGroup definition.",
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/TrackedResource"
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ResourceModelWithAllowedPropertySet"
         }
       ],
       "required": [
@@ -2635,6 +2639,10 @@
         "applicationGroupType"
       ],
       "properties": {
+        "objectId": {
+          "type": "string",
+          "description": "ObjectId of ApplicationGroup. (internal use)"
+        },
         "description": {
           "type": "string",
           "description": "Description of ApplicationGroup."
@@ -2729,7 +2737,7 @@
       "description": "Represents a HostPool definition.",
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/TrackedResource"
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ResourceModelWithAllowedPropertySet"
         }
       ],
       "required": [
@@ -2753,6 +2761,10 @@
         "preferredAppGroupType"
       ],
       "properties": {
+        "objectId": {
+          "type": "string",
+          "description": "ObjectId of HostPool. (internal use)"
+        },
         "friendlyName": {
           "type": "string",
           "description": "Friendly name of HostPool."
@@ -3340,6 +3352,10 @@
         "commandLineSetting"
       ],
       "properties": {
+        "objectId": {
+          "type": "string",
+          "description": "ObjectId of Application. (internal use)"
+        },
         "description": {
           "type": "string",
           "description": "Description of Application."
@@ -3555,6 +3571,10 @@
       "description": "Schema for Desktop properties.",
       "type": "object",
       "properties": {
+        "objectId": {
+          "type": "string",
+          "description": "ObjectId of Desktop. (internal use)"
+        },
         "description": {
           "type": "string",
           "description": "Description of Desktop."
@@ -3830,6 +3850,10 @@
       "description": "Schema for SessionHost properties.",
       "type": "object",
       "properties": {
+        "objectId": {
+          "type": "string",
+          "description": "ObjectId of SessionHost. (internal use)"
+        },
         "lastHeartBeat": {
           "format": "date-time",
           "type": "string",
@@ -4186,6 +4210,10 @@
       "description": "Schema for UserSession properties.",
       "type": "object",
       "properties": {
+        "objectId": {
+          "type": "string",
+          "description": "ObjectId of user session. (internal use)"
+        },
         "userPrincipalName": {
           "type": "string",
           "description": "The user principal name."
@@ -4254,7 +4282,7 @@
       "description": "Represents a scaling plan definition.",
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/TrackedResource"
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ResourceModelWithAllowedPropertySet"
         }
       ],
       "properties": {
@@ -4269,6 +4297,10 @@
       "type": "object",
       "description": "Scaling plan properties.",
       "properties": {
+        "objectId": {
+          "type": "string",
+          "description": "ObjectId of scaling plan. (internal use)"
+        },
         "ring": {
           "type": "integer",
           "format": "int32",
