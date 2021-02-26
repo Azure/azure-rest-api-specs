@@ -3710,10 +3710,10 @@
           "$ref": "#/definitions/Encryption",
           "description": "Properties of BYOK Encryption description"
         },
-        "supportsLargeMessages": {
-          "readOnly": false,
-          "type": "boolean",
-          "description": "Flag to enable support for large messages for the Service Bus namespace over the AMQP protocol. Please review the documentation aka.ms/largeMessages"
+        "defaultMaxMessageSizeInKilobytes" :{
+          "format": "int32",
+          "type": "integer",
+          "description": "An optional value (in KB) that indicates the maximum message payload that can be accepted by the namespace. This value can be overriden by each queue or topic. If the value is missing, the default is 256 KB for Standard tier and 1024 KB for Premium tier."
         }
       },
       "description": "Properties of the namespace."
@@ -4300,7 +4300,12 @@
         "scaleToNamespaceMaxSize" : {
           "format" : "boolean",
           "type" : "boolean",
-          "description" : "When this is set, the maximum size of queue in megabytes is ignored and the queue"
+          "description" : "When this is set, the maximum size of queue in megabytes is ignored and the queue."
+        },
+        "maxMessageSizeInKilobytes" : {
+          "format": "int32",
+          "type" : "integer",
+          "description" : "An optional value (in KB) to indicates the maximum message payload that can be accepted by the queue. This value overrides the namespace property defaultMaxMessageSizeInKilobytes. If the value is blank, the namespace property defaultMaxMessageSizeInKilobytes will be inherited."
         },
         "requiresDuplicateDetection": {
           "type": "boolean",
@@ -4474,6 +4479,16 @@
           "format": "int32",
           "type": "integer",
           "description": "Maximum size of the topic in megabytes, which is the size of the memory allocated for the topic. Default is 1024."
+        },
+        "scaleToNamespaceMaxSize" : {
+          "format" : "boolean",
+          "type" : "boolean",
+          "description" : "When this is set, the maximum size of topic in megabytes is ignored and the topic,"
+        },
+        "maxMessageSizeInKilobytes" : {
+          "format": "int32",
+          "type" : "integer",
+          "description" : "An optional value (in KB) to indicates the maximum message payload that can be accepted by the topic. This value overrides the namespace property defaultMaxMessageSizeInKilobytes. If the value is blank, the namespace property defaultMaxMessageSizeInKilobytes will be inherited."
         },
         "requiresDuplicateDetection": {
           "type": "boolean",
