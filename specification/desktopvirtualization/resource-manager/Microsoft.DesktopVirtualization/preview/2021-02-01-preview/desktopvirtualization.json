@@ -2509,6 +2509,48 @@
               "type": "string"
             }
           }
+        },
+        "isDataAction": {
+          "description": "Is a data action.",
+          "type": "boolean"
+        },
+        "properties": {
+          "serviceSpecification": {
+            "$ref": "#/definitions/ServiceSpecification",
+            "description": "Service specifications of the operation"
+          }
+        }
+      }
+    },
+    "ServiceSpecification": {
+      "description": "Service specification payload",
+      "type": "object",
+      "properties": {
+        "logSpecifications": {
+          "description": "Specifications of the Log for Azure Monitoring",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/LogSpecification"
+          }
+        }
+      }
+    },
+    "LogSpecification": {
+      "description": "Specifications of the Log for Azure Monitoring",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Name of the log",
+          "type": "string"
+        },
+        "displayName": {
+          "description": "Localized friendly display name of the log",
+          "type": "string"
+        },
+        "blobDuration": {
+          "description": "Blob duration of the log",
+          "type": "string"
         }
       }
     },
