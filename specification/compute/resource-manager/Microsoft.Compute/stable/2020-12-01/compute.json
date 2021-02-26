@@ -6828,6 +6828,12 @@
             "schema": {
               "$ref": "#/definitions/RestorePointCollection"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         }
       },
@@ -6874,6 +6880,12 @@
             "schema": {
               "$ref": "#/definitions/RestorePointCollection"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         }
       },
@@ -6906,11 +6918,20 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "OK"
+          },
           "202": {
             "description": "Accepted"
           },
           "204": {
             "description": "No Content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
         "x-ms-long-running-operation": true
@@ -6962,6 +6983,12 @@
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/RestorePointCollection"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
             }
           }
         }
@@ -7022,6 +7049,12 @@
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/RestorePointCollectionListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -7084,6 +7117,12 @@
             "schema": {
               "$ref": "#/definitions/RestorePoint"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
         "x-ms-long-running-operation": true
@@ -7121,6 +7160,9 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "OK"
+          },
           "202": {
             "description": "Accepted"
           },
@@ -7167,6 +7209,12 @@
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/RestorePoint"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
             }
           }
         }
@@ -7509,7 +7557,8 @@
           "type": "string",
           "description": "Gets the status message of the Create restore point operation."
         }
-      }
+      },
+      "description": "Restore Point Provisioning details."
     },
     "RestorePoint": {
       "properties": {
