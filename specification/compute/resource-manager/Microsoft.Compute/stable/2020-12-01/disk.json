@@ -2433,11 +2433,6 @@
         "supportsHibernation": {
           "type": "boolean",
           "description": "Indicates the OS on a disk supports hibernation."
-        },
-        "securityProfile": {
-          "readOnly": true,
-          "$ref": "#/definitions/DiskSecurityProfile",
-          "description": "Contains the security related information for the resource."
         }
       },
       "description": "Disk resource update properties."
@@ -2683,32 +2678,26 @@
       },
       "description": "Properties of the disk for which update is pending."
     },
-    "DiskSecurityType": {
-      "type": "string",
-      "description": "Specifies the SecurityType of the VM. Applicable for OS disks only.",
-      "enum": [
-        "TrustedLaunch"
-      ],
-      "x-ms-enum": {
-        "name": "DiskSecurityTypes",
-        "modelAsString": true,
-        "values": [
-          {
-            "value": "TrustedLaunch",
-            "description": "Trusted Launch provides security features such as secure boot and virtual Trusted Platform Module (vTPM)"
-          }
-        ]
-      }
-    },
     "DiskSecurityProfile": {
       "properties": {
         "securityType": {
-          "$ref": "#/definitions/DiskSecurityType"
+          "type": "string",
+          "description": "Specifies the SecurityType of the VM. Applicable for OS disks only.",
+          "enum": [
+            "TrustedLaunch"
+          ],
+          "x-ms-enum": {
+            "name": "DiskSecurityTypes",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "TrustedLaunch",
+                "description": "Trusted Launch provides security features such as secure boot and virtual Trusted Platform Module (vTPM)"
+              }
+            ]
+          }
         }
       },
-      "required": [
-        "securityType"
-      ],
       "description": "Contains the security related information for the resource."
     },
     "GrantAccessData": {
