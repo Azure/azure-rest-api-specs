@@ -272,10 +272,16 @@
         ],
         "responses": {
           "202": {
-            "description": "The managed Cassandra cluster is being updated. Poll the provided operation for completion."
+            "description": "The managed Cassandra cluster is being updated. Poll the provided operation for completion.",
+            "schema": {
+              "$ref": "#/definitions/ClusterResource"
+            }
           },
           "200": {
-            "description": "Completed synchronously. This will only happen if the fields changed by patch require no changes to the actual Cassandra data center."
+            "description": "Completed synchronously. This will only happen if the fields changed by patch require no changes to the actual Cassandra data center.",
+            "schema": {
+              "$ref": "#/definitions/ClusterResource"
+            }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -679,10 +685,16 @@
         ],
         "responses": {
           "202": {
-            "description": "Accepted. Update will proceed asynchronously."
+            "description": "Accepted. Update will proceed asynchronously.",
+            "schema": {
+              "$ref": "#/definitions/DataCenterResource"
+            }
           },
           "200": {
-            "description": "Completed synchronously. This will only happen if the fields changed by patch require no changes to the actual Cassandra cluster, such as editing the tags."
+            "description": "Completed synchronously. This will only happen if the fields changed by patch require no changes to the actual Cassandra cluster, such as editing the tags.",
+            "schema": {
+              "$ref": "#/definitions/DataCenterResource"
+            }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
