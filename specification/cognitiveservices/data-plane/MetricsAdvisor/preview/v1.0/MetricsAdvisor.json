@@ -951,7 +951,7 @@
           {
             "in": "body",
             "name": "body",
-            "description": "Create data source credntial request",
+            "description": "Create data source credential request",
             "required": true,
             "schema": {
               "$ref": "#/definitions/DataSourceCredential"
@@ -1105,6 +1105,45 @@
         "x-ms-examples": {
           "Delete a data source credential": {
             "$ref": "./examples/deleteCredential.json"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Credential"
+        ],
+        "summary": "Get a data source credential",
+        "operationId": "getCredential",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "credentialId",
+            "description": "Data source credential unique ID",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/DataSourceCredential"
+            }
+          },
+          "default": {
+            "description": "Client error or server error (4xx or 5xx)",
+            "schema": {
+              "$ref": "#/definitions/ErrorCode"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a data source credential": {
+            "$ref": "./examples/getCredential.json"
           }
         }
       }
@@ -2750,8 +2789,7 @@
     },
     "AnomalyProperty": {
       "required": [
-        "anomalySeverity",
-        "value"
+        "anomalySeverity"
       ],
       "type": "object",
       "properties": {
@@ -2784,7 +2822,8 @@
         "value": {
           "format": "double",
           "description": "value of the anomaly",
-          "type": "number"
+          "type": "number",
+          "readOnly": true
         },
         "expectedValue": {
           "format": "double",
@@ -3893,20 +3932,20 @@
         },
         "dataSourceCredentialId": {
           "format": "uuid",
-          "description": "Unique id of data source credntial",
+          "description": "Unique id of data source credential",
           "type": "string",
           "readOnly": true
         },
         "dataSourceCredentialName": {
-          "description": "Name of data source credntial",
+          "description": "Name of data source credential",
           "type": "string"
         },
         "dataSourceCredentialDescription": {
-          "description": "Description of data source credntial",
+          "description": "Description of data source credential",
           "type": "string"
         },
         "dataSourceCredentialType": {
-          "description": "Type of data source credntial",
+          "description": "Type of data source credential",
           "enum": [
             "AzureSQLConnectionString",
             "DataLakeGen2SharedKey",
@@ -4094,15 +4133,15 @@
           "type": "string"
         },
         "dataSourceCredentialName": {
-          "description": "Name of data source credntial",
+          "description": "Name of data source credential",
           "type": "string"
         },
         "dataSourceCredentialDescription": {
-          "description": "Description of data source credntial",
+          "description": "Description of data source credential",
           "type": "string"
         },
         "dataSourceCredentialType": {
-          "description": "Type of data source credntial",
+          "description": "Type of data source credential",
           "enum": [
             "AzureApplicationInsights",
             "AzureBlob",
@@ -5530,12 +5569,9 @@
     },
     "MetricFeedback": {
       "required": [
-        "createdTime",
         "dimensionFilter",
-        "feedbackId",
         "feedbackType",
-        "metricId",
-        "userPrincipal"
+        "metricId"
       ],
       "type": "object",
       "properties": {
@@ -5556,16 +5592,19 @@
         "feedbackId": {
           "format": "uuid",
           "description": "feedback unique id",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "createdTime": {
           "format": "date-time",
           "description": "feedback created time",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "userPrincipal": {
           "description": "user who gives this feedback",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "metricId": {
           "format": "uuid",
