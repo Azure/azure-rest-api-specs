@@ -9,6 +9,7 @@ cli:
   namespace: azure.mgmt.reservations
   flatten-all: true
   test-scenario:
+    - split: quota
     - name: /Quota/put/Quotas_Request_PutForCompute
     - name: /Quota/put/Quotas_Request_PutForMachineLearningServices_DedicatedResource
     - name: /Quota/put/Quotas_Request_PutForMachineLearningServices_LowPriorityResource
@@ -16,13 +17,16 @@ cli:
     - name: /Quota/get/Quotas_listUsagesMachineLearningServices
     - name: /Quota/get/Quotas_Request_ForCompute
     - name: /Quota/patch/Quotas_Request_PatchForCompute
+    - split: quotaRequests
     - name: /QuotaRequestStatus/get/QuotaRequestFailed
     - name: /QuotaRequestStatus/get/QuotaRequestHistory
     - name: /QuotaRequestStatus/get/QuotaRequestInProgress
     - name: /QuotaRequestStatus/get/QuotaRequestStatus  
+    - split: reservation
     - name: /CalculateExchange/post/CalculateExchange
     - name: /Exchange/post/Exchange
     - name: /Operation/get/GetOperations
+      disabled: true
     - name: /quota/get/AppliedReservationList
     - name: /quota/get/Catalog
     - name: /Reservation/get/GetReservation
