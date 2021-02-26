@@ -19,16 +19,21 @@ cli:
     - name: /Quota/patch/Quotas_Request_PatchForCompute
     - split: quotaRequests
     - name: /QuotaRequestStatus/get/QuotaRequestFailed
+      disabled: true
     - name: /QuotaRequestStatus/get/QuotaRequestHistory
     - name: /QuotaRequestStatus/get/QuotaRequestInProgress
+      disabled: true
     - name: /QuotaRequestStatus/get/QuotaRequestStatus  
-    - split: reservation
+    - split: exchange
     - name: /CalculateExchange/post/CalculateExchange
+      disabled: true
     - name: /Exchange/post/Exchange
+      disabled: true
     - name: /Operation/get/GetOperations
       disabled: true
     - name: /quota/get/AppliedReservationList
     - name: /quota/get/Catalog
+    - split: reservations
     - name: /Reservation/get/GetReservation
     - name: /Reservation/get/ReservationList
     - name: /Reservation/get/ReservationRevisions
