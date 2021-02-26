@@ -75,7 +75,6 @@ input-file:
 directive:
   - suppress: TopLevelResourcesListBySubscription
     from: extensions.json
-    where: $.definitions
     reason: 'Microsoft.KubernetesConfiguration is a proxy resource provider under Microsoft.Kubernetes'
 ```
 
