@@ -11,8 +11,8 @@ package-name: azure-mgmt-servicefabricmanagedclusters
 no-namespace-folders: true
 package-version: 0.1.0
 ```
-``` yaml $(python) && $(python-mode) == 'update' && $(track2)
 
+``` yaml $(python) && $(python-mode) == 'update' && $(track2)
 no-namespace-folders: true
 output-folder: $(python-sdks-folder)/servicefabricmanagedclusters/azure-mgmt-servicefabricmanagedclusters/azure/mgmt/servicefabricmanagedclusters
 ```
