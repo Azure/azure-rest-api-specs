@@ -2534,7 +2534,8 @@
       "properties": {
         "objectId": {
           "type": "string",
-          "description": "ObjectId of Workspace. (internal use)"
+          "description": "ObjectId of Workspace. (internal use)",
+          "readOnly": true
         },
         "description": {
           "type": "string",
@@ -2641,7 +2642,8 @@
       "properties": {
         "objectId": {
           "type": "string",
-          "description": "ObjectId of ApplicationGroup. (internal use)"
+          "description": "ObjectId of ApplicationGroup. (internal use)",
+          "readOnly": true
         },
         "description": {
           "type": "string",
@@ -2767,7 +2769,8 @@
       "properties": {
         "objectId": {
           "type": "string",
-          "description": "ObjectId of HostPool. (internal use)"
+          "description": "ObjectId of HostPool. (internal use)",
+          "readOnly": true
         },
         "friendlyName": {
           "type": "string",
@@ -3360,7 +3363,8 @@
       "properties": {
         "objectId": {
           "type": "string",
-          "description": "ObjectId of Application. (internal use)"
+          "description": "ObjectId of Application. (internal use)",
+          "readOnly": true
         },
         "description": {
           "type": "string",
@@ -3579,7 +3583,8 @@
       "properties": {
         "objectId": {
           "type": "string",
-          "description": "ObjectId of Desktop. (internal use)"
+          "description": "ObjectId of Desktop. (internal use)",
+          "readOnly": true
         },
         "description": {
           "type": "string",
@@ -3858,7 +3863,8 @@
       "properties": {
         "objectId": {
           "type": "string",
-          "description": "ObjectId of SessionHost. (internal use)"
+          "description": "ObjectId of SessionHost. (internal use)",
+          "readOnly": true
         },
         "lastHeartBeat": {
           "format": "date-time",
@@ -4218,7 +4224,8 @@
       "properties": {
         "objectId": {
           "type": "string",
-          "description": "ObjectId of user session. (internal use)"
+          "description": "ObjectId of user session. (internal use)",
+          "readOnly": true
         },
         "userPrincipalName": {
           "type": "string",
@@ -4305,7 +4312,8 @@
       "properties": {
         "objectId": {
           "type": "string",
-          "description": "ObjectId of scaling plan. (internal use)"
+          "description": "ObjectId of scaling plan. (internal use)",
+          "readOnly": true
         },
         "ring": {
           "type": "integer",
@@ -4640,12 +4648,43 @@
       }
     },
     "MigrationRequestProperties": {
-      "type": "object",
-      "description": "The report for session host information.",
       "properties": {
         "operation": {
+          "enum": [
+            "Start",
+            "Revoke",
+            "Complete",
+            "Hide",
+            "Unhide"
+          ],
+          "x-ms-enum": {
+            "name": "Operation",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Start",
+                "description": "Start the migration."
+              },
+              {
+                "value": "Revoke",
+                "description": "Revote the migration."
+              },
+              {
+                "value": "Complete",
+                "description": "Complete the migration."
+              },
+              {
+                "value": "Hide",
+                "description": "Hide the hostpool."
+              },
+              {
+                "value": "Unhide",
+                "description": "Unhide the hostpool."
+              }
+            ]
+          },
           "type": "string",
-          "description": "The operation of migration request."
+          "description": "The type of operation for migration."
         },
         "migrationPath": {
           "type": "string",
