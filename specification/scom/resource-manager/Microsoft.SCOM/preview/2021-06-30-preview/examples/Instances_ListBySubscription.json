@@ -1,0 +1,48 @@
+{
+  "parameters": {
+    "api-version": "2021-06-30-preview",
+    "subscriptionId": "{subscription-id}"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/{subscription-id}/resourceGroups/mySCOMMIGroup/providers/Microsoft.SCOM/managedInstances/myManagedInstace",
+            "name": "myInstace",
+            "type": "Microsoft.SCOM/managedInstances",
+            "location": "eastus2",
+            "properties": {
+              "productVersion": "2019",
+              "vNetSubnetId": "/subscriptions/{subscription-id}/resourceGroups/mySCOMMIGroup/providers/Microsoft.Network/virtualNetworks/vNet2/subnets/default",
+              "domainController": {
+                "domainName": "domain.com",
+                "dnsServer": "10.10.10.10"
+              },
+              "domainUserCredentials": {
+                "userName": "domain.com\\domainuser"
+              },
+              "actionAccountCredentials": {
+                "userName": "domain.com\\actacc"
+              },
+              "dasAccountCredentials": {
+                "userName": "domain.com\\dasact"
+              },
+              "dataReaderAccountCredentials": {
+                "userName": "domain.com\\readeract"
+              },
+              "dataWriterAccountCredentials": {
+                "userName": "domain.com\\writeract"
+              },
+              "azureHybridBenefit": {
+                "scomLicenseType": "None",
+                "windowsServerLicenseType": "None",
+                "sqlServerLicenseType": "None"
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}
