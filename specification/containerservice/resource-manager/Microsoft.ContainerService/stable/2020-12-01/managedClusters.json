@@ -2662,6 +2662,23 @@
     },
     "RunCommandResult": {
       "properties": {
+        "id": {
+          "type": "string",
+          "description": "command id."
+        },
+        "properties": {
+          "description": "Properties of command result.",
+          "$ref": "#/definitions/CommandResultProperties"
+        }
+      },
+      "description": "run command result."
+    },
+    "CommandResultProperties": {
+      "properties": {
+        "provisioningState": {
+          "type": "string",
+          "description": "provisioning State"
+        },
         "exitCode": {
           "type": "integer",
           "format": "int32",
@@ -2681,8 +2698,7 @@
           "type": "string",
           "description": "command output."
         }
-      },
-      "description": "run command result."
+      }
     },
     "MaintenanceConfiguration": {
       "allOf": [
