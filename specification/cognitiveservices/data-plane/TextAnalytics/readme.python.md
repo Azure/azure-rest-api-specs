@@ -10,6 +10,7 @@ license-header: MICROSOFT_MIT_NO_VERSION
 add-credentials: true
 payload-flattening-threshold: 2
 package-name: azure-ai-textanalytics
+package-version: 0.0.1
 clear-output-folder: true
 credential-scopes: https://cognitiveservices.azure.com/.default
 no-namespace-folders: true
@@ -19,7 +20,8 @@ no-namespace-folders: true
 batch:
  - tag: release_3_0
  - tag: release_3_1_preview.2
- - tag: release_3_2_preview.1
+ - tag: release_3_1_preview.3
+ - tag: release_3_1_preview.4
  - multiapiscript: true
 ```
  
@@ -48,8 +50,14 @@ namespace: azure.ai.textanalytics.v3_1_preview_2
 output-folder: $(python-sdks-folder)/textanalytics/azure-ai-textanalytics/azure/ai/textanalytics/v3_1_preview_2
 ```
 
-### Tag: release_3_2_preview_1
-``` yaml $(tag) == 'release_3_2_preview.1'
-namespace: azure.ai.textanalytics.v3_2_preview_1
-output-folder: $(python-sdks-folder)/textanalytics/azure-ai-textanalytics/azure/ai/textanalytics/v3_2_preview_1
+### Tag: release_3_1_preview_3
+``` yaml $(tag) == 'release_3_1_preview.3'
+namespace: azure.ai.textanalytics.v3_1_preview_3
+output-folder: $(python-sdks-folder)/textanalytics/azure-ai-textanalytics/azure/ai/textanalytics/v3_1_preview_3
+```
+
+### Tag: release_3_1_preview_4
+``` yaml $(tag) == 'release_3_1_preview.4'
+namespace: azure.ai.textanalytics.v3_1_preview_4
+output-folder: $(python-sdks-folder)/textanalytics/azure-ai-textanalytics/azure/ai/textanalytics/v3_1_preview_4
 ```

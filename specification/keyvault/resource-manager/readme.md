@@ -61,6 +61,7 @@ These settings apply only when `--tag=package-2019-09` is specified on the comma
 input-file:
 - Microsoft.KeyVault/stable/2019-09-01/keyvault.json
 - Microsoft.KeyVault/stable/2019-09-01/providers.json
+- Microsoft.KeyVault/stable/2019-09-01/keys.json
 ```
 
 ### Tag: package-2018-02-14-preview
@@ -135,9 +136,6 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-net
-  - repo: azure-sdk-for-python
-    after_scripts:
-      - python ./scripts/multiapi_init_gen.py azure-mgmt-keyvault
   - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go

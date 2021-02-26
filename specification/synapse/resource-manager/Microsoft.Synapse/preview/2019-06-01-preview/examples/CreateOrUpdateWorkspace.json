@@ -20,13 +20,30 @@
             "740239CE-A25B-485B-86A0-262F29F6EBDB"
           ]
         },
-        "babylonConfiguration": {
-          "babylonResourceId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/resourceGroup1/providers/Microsoft.ProjectBabylon/accounts/accountname1"
+        "purviewConfiguration": {
+          "purviewResourceId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/resourceGroup1/providers/Microsoft.ProjectPurview/accounts/accountname1"
         },
         "sqlAdministratorLogin": "login",
         "sqlAdministratorLoginPassword": "password",
         "managedVirtualNetwork": "default",
-        "managedResourceGroupName": "workspaceManagedResourceGroupUnique"
+        "managedResourceGroupName": "workspaceManagedResourceGroupUnique",
+        "workspaceRepositoryConfiguration": {
+          "type": "FactoryGitHubConfiguration",
+          "hostName": "",
+          "accountName": "mygithubaccount",
+          "projectName": "myproject",
+          "repositoryName": "myrepository",
+          "collaborationBranch": "master",
+          "rootFolder": "/"
+        },
+        "encryption": {
+          "cmk": {
+            "key": {
+              "name": "default",
+              "keyVaultUrl": "https://vault.azure.net/keys/key1"
+            }
+          }
+        }
       },
       "location": "East US",
       "tags": {
@@ -62,8 +79,8 @@
               "740239CE-A25B-485B-86A0-262F29F6EBDB"
             ]
           },
-          "babylonConfiguration": {
-            "babylonResourceId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/resourceGroup1/providers/Microsoft.ProjectBabylon/accounts/accountname1"
+          "purviewConfiguration": {
+            "purviewResourceId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/resourceGroup1/providers/Microsoft.ProjectPurview/accounts/accountname1"
           },
           "sqlAdministratorLogin": "login",
           "managedResourceGroupName": "workspaceManagedResourceGroupUnique",
@@ -87,7 +104,17 @@
               }
             }
           ],
-          "workspaceUID": "999b999q-b888-4b44-bacd-2c222cc2222d"
+          "workspaceUID": "999b999q-b888-4b44-bacd-2c222cc2222d",
+          "encryption": {
+            "doubleEncryptionEnabled": true,
+            "cmk": {
+              "status": "Consistent",
+              "key": {
+                "name": "default",
+                "keyVaultUrl": "https://vault.azure.net/keys/key1"
+              }
+            }
+          }
         },
         "tags": {
           "key": "value"
@@ -112,8 +139,8 @@
               "740239CE-A25B-485B-86A0-262F29F6EBDB"
             ]
           },
-          "babylonConfiguration": {
-            "babylonResourceId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/resourceGroup1/providers/Microsoft.ProjectBabylon/accounts/accountname1"
+          "purviewConfiguration": {
+            "purviewResourceId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/resourceGroup1/providers/Microsoft.ProjectPurview/accounts/accountname1"
           },
           "connectivityEndpoints": {
             "dev": "workspace1.dev.projectarcadia.net",
@@ -123,7 +150,17 @@
           "managedResourceGroupName": "workspaceManagedResourceGroupUnique",
           "managedVirtualNetwork": "default",
           "provisioningState": "Provisioning",
-          "workspaceUID": "86984b43-b873-4b91-bacd-2ca083a104c7"
+          "workspaceUID": "86984b43-b873-4b91-bacd-2ca083a104c7",
+          "encryption": {
+            "doubleEncryptionEnabled": true,
+            "cmk": {
+              "status": "Updating",
+              "key": {
+                "name": "default",
+                "keyVaultUrl": "https://vault.azure.net/keys/key1"
+              }
+            }
+          }
         },
         "tags": {
           "key": "value"

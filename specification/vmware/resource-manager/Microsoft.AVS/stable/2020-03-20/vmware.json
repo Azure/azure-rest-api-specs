@@ -914,7 +914,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "type": "object"
+              "$ref": "#/definitions/HcxEnterpriseSite"
             }
           },
           {
@@ -1110,7 +1110,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "type": "object"
+              "$ref": "#/definitions/ExpressRouteAuthorization"
             }
           },
           {
@@ -1501,6 +1501,14 @@
         "displayName": {
           "description": "Localized friendly display name of the dimension",
           "type": "string"
+        },
+        "internalName": {
+          "description": "Name of the dimension as it appears in MDM",
+          "type": "string"
+        },
+        "toBeExportedForShoebox": {
+          "description": "A boolean flag indicating whether this dimension should be included for the shoebox export scenario",
+          "type": "boolean"
         }
       }
     },
@@ -1515,7 +1523,8 @@
         "properties": {
           "description": "The properties of an ExpressRoute Circuit Authorization resource",
           "$ref": "#/definitions/ExpressRouteAuthorizationProperties",
-          "x-ms-client-flatten": true
+          "x-ms-client-flatten": true,
+          "readOnly": true
         }
       }
     },
@@ -1720,6 +1729,7 @@
             "Enabled",
             "Disabled"
           ],
+          "default": "Disabled",
           "x-ms-enum": {
             "name": "InternetEnum",
             "modelAsString": true
@@ -2022,7 +2032,8 @@
         "properties": {
           "description": "The properties of an HCX Enterprise Site resource",
           "$ref": "#/definitions/HcxEnterpriseSiteProperties",
-          "x-ms-client-flatten": true
+          "x-ms-client-flatten": true,
+          "readOnly": true
         }
       }
     },
