@@ -2678,24 +2678,27 @@
       },
       "description": "Properties of the disk for which update is pending."
     },
+    "DiskSecurityType": {
+      "type": "string",
+      "description": "Specifies the SecurityType of the VM. Applicable for OS disks only.",
+      "enum": [
+        "TrustedLaunch"
+      ],
+      "x-ms-enum": {
+        "name": "DiskSecurityTypes",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "TrustedLaunch",
+            "description": "Trusted Launch provides security features such as secure boot and virtual Trusted Platform Module (vTPM)"
+          }
+        ]
+      }
+    },
     "DiskSecurityProfile": {
       "properties": {
         "securityType": {
-          "type": "string",
-          "description": "Specifies the SecurityType of the VM. Applicable for OS disks only.",
-          "enum": [
-            "TrustedLaunch"
-          ],
-          "x-ms-enum": {
-            "name": "SecurityType",
-            "modelAsString": true,
-            "values": [
-              {
-                "value": "TrustedLaunch",
-                "description": "Trusted Launch provides security features such as secure boot and virtual Trusted Platform Module (vTPM)"
-              }
-            ]
-          }
+          "$ref": "#/definitions/DiskSecurityType"
         }
       },
       "required": [
