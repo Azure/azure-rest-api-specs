@@ -28,7 +28,8 @@
             "name": "name",
             "description": "Container name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$"
           },
           {
             "$ref": "machineLearningServices.json#/parameters/APIVersionParameter"
@@ -249,7 +250,8 @@
             "name": "name",
             "description": "Container name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$"
           },
           {
             "in": "path",
@@ -511,7 +513,8 @@
             "name": "name",
             "description": "Container name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$"
           },
           {
             "$ref": "machineLearningServices.json#/parameters/APIVersionParameter"
@@ -925,7 +928,8 @@
             "name": "name",
             "description": "Datastore name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$"
           },
           {
             "$ref": "machineLearningServices.json#/parameters/APIVersionParameter"
@@ -1047,7 +1051,8 @@
             "name": "name",
             "description": "Container name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$"
           },
           {
             "in": "path",
@@ -1309,7 +1314,8 @@
             "name": "name",
             "description": "Container name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$"
           },
           {
             "$ref": "machineLearningServices.json#/parameters/APIVersionParameter"
@@ -1530,7 +1536,8 @@
             "name": "name",
             "description": "Name of EnvironmentSpecificationVersion.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$"
           },
           {
             "in": "path",
@@ -1792,7 +1799,8 @@
             "name": "id",
             "description": "The name and identifier for the Job.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$"
           },
           {
             "$ref": "machineLearningServices.json#/parameters/APIVersionParameter"
@@ -2116,7 +2124,8 @@
             "name": "id",
             "description": "The name and identifier for the LabelingJob.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$"
           },
           {
             "$ref": "machineLearningServices.json#/parameters/APIVersionParameter"
@@ -2628,7 +2637,8 @@
             "name": "name",
             "description": "Container name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$"
           },
           {
             "$ref": "machineLearningServices.json#/parameters/APIVersionParameter"
@@ -2900,7 +2910,8 @@
             "name": "name",
             "description": "Container name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$"
           },
           {
             "in": "path",
@@ -3297,14 +3308,16 @@
             "name": "endpointName",
             "description": "Inference endpoint name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$"
           },
           {
             "in": "path",
             "name": "deploymentName",
             "description": "Inference Endpoint Deployment name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$"
           },
           {
             "$ref": "machineLearningServices.json#/parameters/APIVersionParameter"
@@ -3683,7 +3696,8 @@
             "name": "endpointName",
             "description": "Online Endpoint name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$"
           },
           {
             "$ref": "machineLearningServices.json#/parameters/APIVersionParameter"
@@ -4072,62 +4086,6 @@
       "x-ms-azure-resource": true,
       "additionalProperties": false
     },
-    "InnerErrorResponse": {
-      "type": "object",
-      "properties": {
-        "code": {
-          "type": "string"
-        },
-        "innerError": {
-          "$ref": "#/definitions/InnerErrorResponse"
-        }
-      },
-      "additionalProperties": false
-    },
-    "RootError": {
-      "type": "object",
-      "properties": {
-        "code": {
-          "type": "string"
-        },
-        "severity": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "message": {
-          "type": "string"
-        },
-        "messageFormat": {
-          "type": "string"
-        },
-        "messageParameters": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "referenceCode": {
-          "type": "string"
-        },
-        "detailsUri": {
-          "format": "uri",
-          "type": "string"
-        },
-        "target": {
-          "type": "string"
-        },
-        "details": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/RootError"
-          }
-        },
-        "innerError": {
-          "$ref": "#/definitions/InnerErrorResponse"
-        }
-      },
-      "additionalProperties": false
-    },
     "CodeContainerResourceArmPaginatedResult": {
       "description": "A paginated list of CodeContainer entities.",
       "type": "object",
@@ -4173,8 +4131,12 @@
           "type": "string"
         },
         "assetPath": {
-          "description": "Details of asset path in the datastore.",
+          "description": "DEPRECATED - use Microsoft.MachineLearning.ManagementFrontEnd.Contracts.Assets.Asset.Path instead",
           "$ref": "#/definitions/AssetPath"
+        },
+        "path": {
+          "description": "The path of the file/directory.",
+          "type": "string"
         },
         "generatedBy": {
           "description": "How this asset was generated",
@@ -4992,8 +4954,12 @@
           "type": "string"
         },
         "assetPath": {
-          "description": "Details of asset path in the datastore.",
+          "description": "DEPRECATED - use Microsoft.MachineLearning.ManagementFrontEnd.Contracts.Assets.Asset.Path instead",
           "$ref": "#/definitions/AssetPath"
+        },
+        "path": {
+          "description": "The path of the file/directory.",
+          "type": "string"
         },
         "generatedBy": {
           "description": "How this asset was generated",
@@ -5223,7 +5189,7 @@
           "type": "string"
         },
         "context": {
-          "description": "Path to a snapshot of the Docker Context. This property is only valid if Dockerfile is specified.\r\nThe path is relative to AssetPaths which must contain a single Blob URI value.\r\nMicrosoft.MachineLearning.ManagementFrontEnd.Contracts.Assets.Asset.AssetPath<seealso href=\"https://docs.docker.com/engine/context/working-with-contexts/\" />",
+          "description": "Path to a snapshot of the Docker Context. This property is only valid if Dockerfile is specified.\r\nThe path is relative to the asset path which must contain a single Blob URI value.\r\nMicrosoft.MachineLearning.ManagementFrontEnd.Contracts.Assets.Asset.Path<seealso href=\"https://docs.docker.com/engine/context/working-with-contexts/\" />",
           "type": "string"
         }
       },
@@ -5259,8 +5225,12 @@
           "type": "string"
         },
         "assetPath": {
-          "description": "Details of asset path in the datastore.",
+          "description": "DEPRECATED - use Microsoft.MachineLearning.ManagementFrontEnd.Contracts.Assets.Asset.Path instead",
           "$ref": "#/definitions/AssetPath"
+        },
+        "path": {
+          "description": "The path of the file/directory.",
+          "type": "string"
         },
         "generatedBy": {
           "description": "How this asset was generated",
@@ -6025,9 +5995,6 @@
         },
         "distributionConfiguration": {
           "$ref": "#/definitions/DistributionConfiguration"
-        },
-        "identityConfiguration": {
-          "$ref": "#/definitions/IdentityConfiguration"
         }
       },
       "additionalProperties": false
@@ -6097,6 +6064,9 @@
         },
         "trialComponent": {
           "$ref": "#/definitions/TrialComponent"
+        },
+        "identityConfiguration": {
+          "$ref": "#/definitions/IdentityConfiguration"
         }
       },
       "x-ms-discriminator-value": "Sweep",
@@ -6830,8 +6800,12 @@
           "type": "string"
         },
         "assetPath": {
-          "description": "Details of asset path in the datastore.",
+          "description": "DEPRECATED - use Microsoft.MachineLearning.ManagementFrontEnd.Contracts.Assets.Asset.Path instead",
           "$ref": "#/definitions/AssetPath"
+        },
+        "path": {
+          "description": "The path of the file/directory.",
+          "type": "string"
         },
         "generatedBy": {
           "description": "How this asset was generated",
@@ -7226,10 +7200,6 @@
         "environmentId": {
           "description": "Environment specification for the endpoint deployment.",
           "type": "string"
-        },
-        "error": {
-          "$ref": "#/definitions/RootError",
-          "readOnly": true
         },
         "environmentVariables": {
           "description": "Environment variables configuration for the deployment.",
