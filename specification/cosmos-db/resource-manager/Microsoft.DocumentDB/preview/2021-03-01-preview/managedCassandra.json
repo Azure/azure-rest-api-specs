@@ -329,9 +329,6 @@
           "200": {
             "description": "Success. The repair operation will begin as soon as possible."
           },
-          "412": {
-            "description": "Repair is disabled for this cluster, so no repair request can be accepted. To enable it, set the cluster's repairEnabled property to true."
-          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
@@ -428,7 +425,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/cassandraClusters/{clusterName}/backups/{backupId}": {
       "get": {
-        "operationId": "CassandraCluster_GetBackup",
+        "operationId": "CassandraClusters_GetBackup",
         "description": "Get the properties of an individual backup of this cluster that is available to restore.",
         "x-ms-examples": {
           "CosmosDBManagedCassandraBackup": {
@@ -470,7 +467,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/cassandraClusters/{clusterName}/dataCenters": {
       "get": {
-        "operationId": "CassandraDataCenters_ListDataCenters",
+        "operationId": "CassandraDataCenters_List",
         "description": "List all data centers in a particular managed Cassandra cluster.",
         "x-ms-pageable": {
           "nextLinkName": null
