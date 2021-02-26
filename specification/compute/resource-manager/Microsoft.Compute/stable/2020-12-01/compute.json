@@ -6866,7 +6866,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/RestorePointCollection"
+              "$ref": "#/definitions/RestorePointCollectionUpdate"
             },
             "description": "Parameters supplied to the Update restore point collection operation."
           },
@@ -7371,6 +7371,20 @@
         }
       ],
       "description": "Create or update Restore Point collection parameters."
+    },
+    "RestorePointCollectionUpdate": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/RestorePointCollectionProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/UpdateResource"
+        }
+      ],
+      "description": "Update Restore Point collection parameters."
     },
     "RestorePointCollectionListResult": {
       "properties": {
