@@ -9,6 +9,8 @@ cli:
   namespace: azure.mgmt.reservations
   flatten-all: true
   test-scenario:
+    - name: /Operation/get/GetOperations
+      disabled: true
     - split: quota
     - name: /Quota/put/Quotas_Request_PutForCompute
     - name: /Quota/put/Quotas_Request_PutForMachineLearningServices_DedicatedResource
@@ -28,8 +30,6 @@ cli:
     - name: /CalculateExchange/post/CalculateExchange
       disabled: true
     - name: /Exchange/post/Exchange
-      disabled: true
-    - name: /Operation/get/GetOperations
       disabled: true
     - name: /quota/get/AppliedReservationList
     - name: /quota/get/Catalog
