@@ -2386,11 +2386,13 @@
       "properties": {
         "name": {
           "description": "Name of the Sku",
-          "type": "string"
+          "type": "string",
+          "default": "S0"
         },
         "tier": {
           "description": "Tier of the Sku",
-          "type": "string"
+          "type": "string",
+          "default": "Standard"
         },
         "capacity": {
           "format": "int32",
@@ -2499,6 +2501,60 @@
               },
               "description": "A list of public IP addresses."
             }
+          }
+        },
+        "requiredTraffics": {
+          "description": "Required inbound or outbound traffics for Azure Spring Cloud instance.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/RequiredTraffic"
+          }
+        }
+      }
+    },
+    "RequiredTraffic": {
+      "description": "Required inbound or outbound traffic for Azure Spring Cloud instance.",
+      "type": "object",
+      "properties": {
+        "protocol": {
+          "description": "The protocol of required traffic",
+          "type": "string",
+          "readOnly": true
+        },
+        "port": {
+          "description": "The port of required traffic",
+          "type": "integer",
+          "format": "int32",
+          "readOnly": true
+        },
+        "ips": {
+          "description": "The ip list of required traffic",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "type": "string"
+          }
+        },
+        "fqdns": {
+          "description": "The FQDN list of required traffic",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "type": "string"
+          }
+        },
+        "direction": {
+          "description": "The direction of required traffic",
+          "type": "string",
+          "readOnly": true,
+          "enum": [
+            "Inbound",
+            "Outbound"
+          ],
+          "x-ms-enum": {
+            "name": "trafficDirection",
+            "modelAsString": true
           }
         }
       }
