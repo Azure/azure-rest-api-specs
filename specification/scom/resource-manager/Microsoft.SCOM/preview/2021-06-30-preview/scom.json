@@ -258,6 +258,9 @@
           }
         },
         "x-ms-long-running-operation": true,
+		"x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
         "x-ms-examples": {
           "Instances_CreateOrUpdate": {
             "$ref": "./examples/Instance_Create.json"
@@ -313,6 +316,9 @@
           }
         },
         "x-ms-long-running-operation": true,
+		"x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
         "x-ms-examples": {
           "Instances_Patch": {
             "$ref": "./examples/Instance_Update.json"
@@ -357,6 +363,9 @@
           }
         },
         "x-ms-long-running-operation": true,
+		"x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
         "x-ms-examples": {
           "Instances_Delete": {
             "$ref": "./examples/Instance_Delete.json"
@@ -501,6 +510,11 @@
         "azureHybridBenefit": {
           "description": "The properties to enable Azure Hybrid benefit for various SCOM infrastructure license",
           "$ref": "#/definitions/AzureHybridBenefitProperties"
+        },
+		"provisioningState": {
+          "description": "Gets or sets the provisioning state.",
+          "type": "string",
+          "readOnly": true
         }
       }
     },
