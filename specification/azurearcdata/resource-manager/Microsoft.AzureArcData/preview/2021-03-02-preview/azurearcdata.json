@@ -1931,7 +1931,6 @@
       }
     },
     "CloudError": {
-      "x-ms-external": true,
       "properties": {
         "error": {
           "$ref": "#/definitions/CloudErrorBody",
@@ -1941,7 +1940,6 @@
       "description": "An error response from the Azure Data on Azure Arc service."
     },
     "CloudErrorBody": {
-      "x-ms-external": true,
       "properties": {
         "code": {
           "type": "string",
@@ -2067,7 +2065,8 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "The ID of the Azure subscription"
+      "description": "The ID of the Azure subscription",
+      "x-ms-parameter-location": "client"
     },
     "resourceGroupName": {
       "name": "resourceGroupName",
@@ -2090,55 +2089,8 @@
       "in": "query",
       "required": true,
       "type": "string",
-      "description": "The API version to use for the request"
-    },
-    "SubscriptionIdParameter": {
-      "name": "subscriptionId",
-      "in": "path",
-      "description": "Subscription ID that identifies an Azure subscription.",
-      "required": true,
-      "type": "string",
+      "description": "The API version to use for the request",
       "x-ms-parameter-location": "client"
-    },
-    "ApiVersionParameter": {
-      "name": "api-version",
-      "in": "query",
-      "description": "API version to use for the request.",
-      "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "client"
-    },
-    "ResourceGroupParameter": {
-      "name": "resourceGroupName",
-      "in": "path",
-      "description": "Name of the resource group that contains the resource. You can obtain this value from the Azure Resource Manager API or the portal.",
-      "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "method"
-    },
-    "PostgresInstanceNameParameter": {
-      "in": "path",
-      "name": "postgresInstanceName",
-      "description": "The name of the resource.",
-      "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "method"
-    },
-    "SqlManagedInstanceNameParameter": {
-      "in": "path",
-      "name": "sqlManagedInstanceName",
-      "description": "The name of the resource.",
-      "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "method"
-    },
-    "SqlServerInstanceNameParameter": {
-      "in": "path",
-      "name": "sqlServerInstanceName",
-      "description": "The name of the resource.",
-      "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "method"
     }
   },
   "securityDefinitions": {
