@@ -7022,6 +7022,12 @@
             "schema": {
               "$ref": "#/definitions/RestorePointCollectionListResult"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
         "x-ms-pageable": {
@@ -7168,6 +7174,12 @@
           },
           "204": {
             "description": "No Content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
         "x-ms-long-running-operation": true
@@ -7613,6 +7625,7 @@
           "$ref": "#/definitions/ProxyOnlyResource"
         }
       ],
+      "x-ms-azure-resource": true,
       "description": "Restore Point details."
     },
     "ComputeOperationListResult": {
