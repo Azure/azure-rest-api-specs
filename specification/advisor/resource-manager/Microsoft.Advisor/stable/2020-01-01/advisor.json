@@ -1085,6 +1085,39 @@
           "description": "The resource identified by Advisor.",
           "type": "string"
         },
+        "description": {
+          "description": "The detailed description of recommendation.",
+          "type": "string"
+        },
+        "label": {
+          "description": "The label of recommendation.",
+          "type": "string"
+        },
+        "learnMoreLink": {
+          "description": "The link to learn more about recommendation and generation logic.",
+          "type": "string"
+        },
+        "potentialBenefits": {
+          "description": "The potential benefit of implementing recommendation.",
+          "type": "string"
+        },
+        "actions": {
+          "description": "The list of recommended actions to implement recommendation.",
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "object"
+            }
+          }
+        },
+        "remediation": {
+          "description": "The automated way to apply recommendation.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "object"
+          }
+        },
         "lastUpdated": {
           "format": "date-time",
           "description": "The most recent time that Advisor checked the validity of the recommendation.",
@@ -1184,6 +1217,21 @@
         },
         "source": {
           "description": "Source from which recommendation is generated",
+          "type": "string"
+        },
+        "action": {
+          "description": "The action to view resource.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "object"
+          }
+        },
+        "singular": {
+          "description": "The singular user friendly name of resource type. eg: virtual machine",
+          "type": "string"
+        },
+        "plural": {
+          "description": "The plural user friendly name of resource type. eg: virtual machines",
           "type": "string"
         }
       }
