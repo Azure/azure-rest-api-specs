@@ -2673,6 +2673,10 @@
           "type": "string",
           "description": "Resource Type of ApplicationGroup.",
           "x-nullable": false
+        },
+        "migrationRequest": {
+          "$ref": "#/definitions/MigrationRequestProperties",
+          "description": "The registration info of HostPool."
         }
       }
     },
@@ -2812,7 +2816,6 @@
           },
           "type": "string",
           "description": "PersonalDesktopAssignment type for HostPool.",
-          "x-nullable": false
         },
         "customRdpProperty": {
           "type": "string",
@@ -2885,7 +2888,6 @@
           },
           "type": "string",
           "description": "The type of single sign on Secret Type.",
-          "x-nullable": false
         },
         "preferredAppGroupType": {
           "enum": [
@@ -2904,6 +2906,10 @@
         "startVMOnConnect": {
           "type": "boolean",
           "description": "The flag to turn on/off StartVMOnConnect feature."
+        },
+        "migrationRequest": {
+          "$ref": "#/definitions/MigrationRequestProperties",
+          "description": "The registration info of HostPool."
         }
       }
     },
@@ -4630,6 +4636,20 @@
           "items": {
             "$ref": "#/definitions/ScalingHostPoolReference"
           }
+        }
+      }
+    },
+    "MigrationRequestProperties": {
+      "type": "object",
+      "description": "The report for session host information.",
+      "properties": {
+        "operation": {
+          "type": "string",
+          "description": "The operation of migration request."
+        },
+        "migrationPath": {
+          "type": "string",
+          "description": "The path to the legacy object to migrate."
         }
       }
     }
