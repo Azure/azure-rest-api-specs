@@ -3921,14 +3921,24 @@
     },
     "DataSourceCredential": {
       "required": [
-        "$type",
         "dataSourceCredentialName",
         "dataSourceCredentialType"
       ],
       "type": "object",
       "properties": {
-        "$type": {
-          "type": "string"
+        "dataSourceCredentialType": {
+          "description": "Type of data source credential",
+          "enum": [
+            "AzureSQLConnectionString",
+            "DataLakeGen2SharedKey",
+            "ServicePrincipal",
+            "ServicePrincipalInKV"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "DataSourceCredentialType",
+            "modelAsString": true
+          }
         },
         "dataSourceCredentialId": {
           "format": "uuid",
@@ -3943,27 +3953,13 @@
         "dataSourceCredentialDescription": {
           "description": "Description of data source credential",
           "type": "string"
-        },
-        "dataSourceCredentialType": {
-          "description": "Type of data source credential",
-          "enum": [
-            "AzureSQLConnectionString",
-            "DataLakeGen2SharedKey",
-            "ServicePrincipal",
-            "ServicePrincipalInKV"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "DataSourceCredentialType",
-            "modelAsString": true
-          }
         }
       },
-      "discriminator": "$type",
+      "discriminator": "dataSourceCredentialType",
       "example": {
         "parameters": {
           "clientId": "88888888-8888-8888-8888-888888888888",
-          "clientSecret": "clientsecret",
+          "clientSecret": "fake-client-secret",
           "tenantId": "12345678-1234-1234-1234-123456788888"
         },
         "dataSourceCredentialName": "A data source credential",
@@ -4125,21 +4121,10 @@
     },
     "DataSourceCredentialPatch": {
       "required": [
-        "$type"
+        "dataSourceCredentialType"
       ],
       "type": "object",
       "properties": {
-        "$type": {
-          "type": "string"
-        },
-        "dataSourceCredentialName": {
-          "description": "Name of data source credential",
-          "type": "string"
-        },
-        "dataSourceCredentialDescription": {
-          "description": "Description of data source credential",
-          "type": "string"
-        },
         "dataSourceCredentialType": {
           "description": "Type of data source credential",
           "enum": [
@@ -4163,9 +4148,17 @@
             "name": "DataSourceType",
             "modelAsString": true
           }
+        },
+        "dataSourceCredentialName": {
+          "description": "Name of data source credential",
+          "type": "string"
+        },
+        "dataSourceCredentialDescription": {
+          "description": "Description of data source credential",
+          "type": "string"
         }
       },
-      "discriminator": "$type",
+      "discriminator": "dataSourceCredentialType",
       "example": {
         "dataSourceCredentialName": "A data source credential",
         "dataSourceCredentialDescription": "This is a data source credential",
