@@ -69,6 +69,16 @@ input-file:
   - Microsoft.KubernetesConfiguration/preview/2019-11-01-preview/kubernetesconfiguration.json
 ```
 
+## Suppression
+
+``` yaml
+directive:
+  - suppress: TopLevelResourcesListBySubscription
+    from: extensions.json
+    where: $.definitions
+    reason: 'Microsoft.KubernetesConfiguration is a proxy resource provider under Microsoft.Kubernetes'
+```
+
 ---
 
 # Code Generation
