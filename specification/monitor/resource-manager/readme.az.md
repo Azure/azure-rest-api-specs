@@ -52,7 +52,7 @@ directive:
 
 cli:
     cli-directive:
-# -------- data-collection rule --------
+# -------- data-collection rule ---------
       - where:
           group: DataCollectionRules
           param: dataCollectionRuleName
