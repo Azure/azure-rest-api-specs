@@ -1,11 +1,11 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "Providerhub",
-    "description": "Microsoft Provider Hub",
+    "title": "ProviderHub",
+    "description": "Microsoft ProviderHub",
     "version": "2020-11-20",
     "x-ms-code-generation-settings": {
-      "name": "providerhubClient"
+      "name": "ProviderHubClient"
     }
   },
   "securityDefinitions": {
@@ -99,7 +99,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/CustomRolloutProperties"
+              "$ref": "#/definitions/CustomRollout"
             },
             "description": "The custom rollout properties supplied to the CreateOrUpdate operation."
           },
@@ -278,6 +278,15 @@
           },
           {
             "$ref": "#/parameters/GetRolloutNameParameter"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DefaultRollout"
+            },
+            "description": "The Default rollout properties supplied to the CreateOrUpdate operation."
           },
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
@@ -2300,8 +2309,11 @@
       ],
       "properties": {
         "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/CustomRolloutProperties",
+          "allOf": [
+            {
+              "$ref": "#/definitions/CustomRolloutProperties"
+            }
+          ],
           "description": "Properties of the rollout."
         }
       },
@@ -2562,8 +2574,11 @@
       ],
       "properties": {
         "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/DefaultRolloutProperties",
+          "allOf": [
+            {
+              "$ref": "#/definitions/DefaultRolloutProperties"
+            }
+          ],
           "description": "Properties of the rollout."
         }
       },
