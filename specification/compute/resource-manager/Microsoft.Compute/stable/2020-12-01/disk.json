@@ -2025,7 +2025,7 @@
           "description": "Indicates the OS on a disk supports hibernation."
         },
         "securityProfile": {
-          "$ref": "#/definitions/ResourceSecurityProfile",
+          "$ref": "#/definitions/DiskSecurityProfile",
           "description": "Contains the security related information for the resource."
         }
       },
@@ -2695,15 +2695,12 @@
         ]
       }
     },
-    "ResourceSecurityProfile": {
+    "DiskSecurityProfile": {
       "properties": {
         "securityType": {
           "$ref": "#/definitions/DiskSecurityType"
         }
       },
-      "required": [
-        "securityType"
-      ],
       "description": "Contains the security related information for the resource."
     },
     "GrantAccessData": {
