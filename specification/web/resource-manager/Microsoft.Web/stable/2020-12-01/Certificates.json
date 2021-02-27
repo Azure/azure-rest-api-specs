@@ -25,6 +25,13 @@
         "operationId": "Certificates_List",
         "parameters": [
           {
+            "name": "$filter",
+            "in": "query",
+            "description": "Return only information specified in the filter (using OData syntax). For example: $filter=KeyVaultId eq 'KeyVaultId'",
+            "type": "string",
+            "x-ms-skip-url-encoding": true
+          },
+          {
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
@@ -311,9 +318,6 @@
       "properties": {
         "properties": {
           "description": "Certificate resource specific properties",
-          "required": [
-            "password"
-          ],
           "properties": {
             "friendlyName": {
               "description": "Friendly name of the certificate.",
@@ -476,9 +480,6 @@
       "properties": {
         "properties": {
           "description": "CertificatePatchResource resource specific properties",
-          "required": [
-            "password"
-          ],
           "properties": {
             "friendlyName": {
               "description": "Friendly name of the certificate.",

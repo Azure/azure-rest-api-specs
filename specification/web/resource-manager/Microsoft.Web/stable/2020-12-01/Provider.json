@@ -32,7 +32,8 @@
               "Windows",
               "Linux",
               "WindowsFunctions",
-              "LinuxFunctions"
+              "LinuxFunctions",
+              "All"
             ]
           },
           {
@@ -70,6 +71,7 @@
           {
             "name": "stackOsType",
             "in": "query",
+            "description": "Stack OS Type",
             "type": "string",
             "enum": [
               "Windows",
@@ -117,12 +119,14 @@
           {
             "name": "location",
             "in": "path",
+            "description": "Function App stack location.",
             "required": true,
             "type": "string"
           },
           {
             "name": "stackOsType",
             "in": "query",
+            "description": "Stack OS Type",
             "type": "string",
             "enum": [
               "Windows",
@@ -170,12 +174,14 @@
           {
             "name": "location",
             "in": "path",
+            "description": "Web App stack location.",
             "required": true,
             "type": "string"
           },
           {
             "name": "stackOsType",
             "in": "query",
+            "description": "Stack OS Type",
             "type": "string",
             "enum": [
               "Windows",
@@ -260,6 +266,7 @@
           {
             "name": "stackOsType",
             "in": "query",
+            "description": "Stack OS Type",
             "type": "string",
             "enum": [
               "Windows",
@@ -312,7 +319,8 @@
               "Windows",
               "Linux",
               "WindowsFunctions",
-              "LinuxFunctions"
+              "LinuxFunctions",
+              "All"
             ]
           },
           {
@@ -359,6 +367,20 @@
         }
       }
     },
+    "AppSettingsDictionary": {
+      "description": "App settings dictionary.",
+      "type": "object",
+      "properties": {
+        "functionS_WORKER_RUNTIME": {
+          "description": "FUNCTIONS_WORKER_RUNTIME application setting",
+          "type": "string"
+        },
+        "websitE_NODE_DEFAULT_VERSION": {
+          "description": "WEBSITE_NODE_DEFAULT_VERSION application setting",
+          "type": "string"
+        }
+      }
+    },
     "ApplicationStack": {
       "description": "Application stack.",
       "type": "object",
@@ -384,6 +406,13 @@
         },
         "frameworks": {
           "description": "List of frameworks associated with application stack.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApplicationStack"
+          }
+        },
+        "isDeprecated": {
+          "description": "<code>true</code> if this is the stack is deprecated; otherwise, <code>false</code>.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/ApplicationStack"
@@ -445,10 +474,10 @@
         "minorVersions": {
           "description": "Minor versions associated with the major version.",
           "type": "array",
-          "readOnly": true,
           "items": {
             "$ref": "#/definitions/FunctionAppMinorVersion"
-          }
+          },
+          "readOnly": true
         }
       }
     },
@@ -498,12 +527,9 @@
           "readOnly": true
         },
         "appSettingsDictionary": {
+          "$ref": "#/definitions/AppSettingsDictionary",
           "description": "Application settings associated with the minor version.",
-          "type": "object",
-          "readOnly": true,
-          "additionalProperties": {
-            "type": "string"
-          }
+          "readOnly": true
         },
         "siteConfigPropertiesDictionary": {
           "$ref": "#/definitions/SiteConfigPropertiesDictionary",
@@ -513,10 +539,10 @@
         "supportedFunctionsExtensionVersions": {
           "description": "List of supported Functions extension versions.",
           "type": "array",
-          "readOnly": true,
           "items": {
             "type": "string"
-          }
+          },
+          "readOnly": true
         },
         "isPreview": {
           "description": "<code>true</code> if the stack is in preview; otherwise, <code>false</code>.",
@@ -534,9 +560,9 @@
           "readOnly": true
         },
         "endOfLifeDate": {
+          "format": "date-time",
           "description": "End-of-life date for the minor version.",
           "type": "string",
-          "format": "date-time",
           "readOnly": true
         },
         "isAutoUpdate": {
@@ -546,11 +572,6 @@
         },
         "isEarlyAccess": {
           "description": "<code>true</code> if the minor version is early-access; otherwise, <code>false</code>.",
-          "type": "boolean",
-          "readOnly": true
-        },
-        "isDefault": {
-          "description": "<code>true</code> if the minor version the default; otherwise, <code>false</code>.",
           "type": "boolean",
           "readOnly": true
         }
@@ -581,11 +602,6 @@
         }
       ],
       "properties": {
-        "location": {
-          "description": "Function App stack location.",
-          "type": "string",
-          "readOnly": true
-        },
         "properties": {
           "description": "FunctionAppStack resource specific properties",
           "properties": {
@@ -602,16 +618,17 @@
             "majorVersions": {
               "description": "List of major versions available.",
               "type": "array",
-              "readOnly": true,
               "items": {
                 "$ref": "#/definitions/FunctionAppMajorVersion"
-              }
+              },
+              "readOnly": true
             },
             "preferredOs": {
               "description": "Function App stack preferred OS.",
               "enum": [
-                "windows",
-                "linux"
+                "Windows",
+                "Linux",
+                "All"
               ],
               "type": "string",
               "readOnly": true,
@@ -692,9 +709,9 @@
           "readOnly": true
         },
         "endOfLifeDate": {
+          "format": "date-time",
           "description": "End-of-life date for the minor version.",
           "type": "string",
-          "format": "date-time",
           "readOnly": true
         },
         "isAutoUpdate": {
@@ -762,6 +779,20 @@
           "description": "<code>true</code> if this supports Application Insights; otherwise, <code>false</code>.",
           "type": "boolean"
         },
+        "appSettingsDictionary": {
+          "description": "<appSettings>\n <appSetting name=\"FUNCTIONS_WORKER_RUNTIME\" value=\"dotnet\" />\n</appSettings>\n Example: All the function apps need AppSetting: \"FUNCTIONS_WORKER_RUNTIME\" to be set stack name",
+          "type": "object",
+          "additionalProperties": {
+            "type": "object"
+          }
+        },
+        "siteConfigPropertiesDictionary": {
+          "description": "<siteConfigProperties>\n <siteConfigProperty name=\"Use32BitWorkerProcess\" value=\"false\" />\n</siteConfigProperties>\n Example: All Linux Function Apps, need Use32BitWorkerProcess to be set to 0",
+          "type": "object",
+          "additionalProperties": {
+            "type": "object"
+          }
+        },
         "isPreview": {
           "description": "<code>true</code> if this stack is in Preview, otherwise <code>false</code>.",
           "type": "boolean"
@@ -815,10 +846,10 @@
         "minorVersions": {
           "description": "Minor versions associated with the major version.",
           "type": "array",
-          "readOnly": true,
           "items": {
             "$ref": "#/definitions/WebAppMinorVersion"
-          }
+          },
+          "readOnly": true
         }
       }
     },
@@ -883,9 +914,9 @@
           "readOnly": true
         },
         "endOfLifeDate": {
+          "format": "date-time",
           "description": "End-of-life date for the minor version.",
           "type": "string",
-          "format": "date-time",
           "readOnly": true
         },
         "isAutoUpdate": {
@@ -935,11 +966,6 @@
         }
       ],
       "properties": {
-        "location": {
-          "description": "Web App stack location.",
-          "type": "string",
-          "readOnly": true
-        },
         "properties": {
           "description": "WebAppStack resource specific properties",
           "properties": {
@@ -956,16 +982,17 @@
             "majorVersions": {
               "description": "List of major versions available.",
               "type": "array",
-              "readOnly": true,
               "items": {
                 "$ref": "#/definitions/WebAppMajorVersion"
-              }
+              },
+              "readOnly": true
             },
             "preferredOs": {
               "description": "Web App stack preferred OS.",
               "enum": [
-                "windows",
-                "linux"
+                "Windows",
+                "Linux",
+                "All"
               ],
               "type": "string",
               "readOnly": true,
@@ -1030,9 +1057,9 @@
           "readOnly": true
         },
         "endOfLifeDate": {
+          "format": "date-time",
           "description": "End-of-life date for the minor version.",
           "type": "string",
-          "format": "date-time",
           "readOnly": true
         },
         "isAutoUpdate": {
