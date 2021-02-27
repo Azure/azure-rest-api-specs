@@ -2,8 +2,8 @@
   "swagger": "2.0",
   "info": {
     "title": "EventHubManagementClient",
-    "description": "Azure Event Hubs client for managing Event Hubs Cluster, IPFilter Rules and VirtualNetworkRules resources.",
-    "version": "2018-01-01-preview"
+    "description": "Azure Event Hubs client for managing namespaces.",
+    "version": "2021-01-01-preview"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -250,12 +250,6 @@
         "responses": {
           "200": {
             "description": "Namespace returned successfully.",
-            "schema": {
-              "$ref": "#/definitions/EHNamespace"
-            }
-          },
-          "201": {
-            "description": "Namespace update request accepted.",
             "schema": {
               "$ref": "#/definitions/EHNamespace"
             }
@@ -607,6 +601,11 @@
           "$ref": "#/definitions/Identity",
           "description": "Properties of BYOK Identity description"
         },
+        "systemData": {
+          "readOnly": true,
+          "description": "The system meta data relating to this resource.",
+          "$ref": "../../../common/v1/definitions.json#/definitions/systemData"
+        },
         "properties": {
           "x-ms-client-flatten": true,
           "properties": {
@@ -720,23 +719,46 @@
       "properties": {
         "principalId": {
           "type": "string",
-          "description": "ObjectId from the KeyVault"
+          "description": "ObjectId from the KeyVault",
+          "readOnly": true
         },
         "tenantId": {
           "type": "string",
-          "description": "TenantId from the KeyVault"
+          "description": "TenantId from the KeyVault",
+          "readOnly": true
         },
         "type": {
           "type": "string",
-          "description": "Enumerates the possible value Identity type, which currently supports only 'SystemAssigned'",
-          "default": "SystemAssigned",
+          "description": "Type of managed service identity.",
           "enum": [
-            "SystemAssigned"
+            "SystemAssigned",
+            "UserAssigned",
+            "SystemAssigned, UserAssigned",
+            "None"
           ],
           "x-ms-enum": {
-            "name": "IdentityType",
+            "name": "ManagedServiceIdentityType",
             "modelAsString": false
           }
+        },
+        "userAssignedIdentities": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "object",
+            "properties": {
+              "principalId": {
+                "description": "Principal Id of user assigned identity",
+                "type": "string",
+                "readOnly": true
+              },
+              "clientId": {
+                "description": "Client Id of user assigned identity",
+                "type": "string",
+                "readOnly": true
+              }
+            }
+          },
+          "description": "Properties for User Assigned Identities"
         }
       },
       "description": "Properties to configure Identity for Bring your Own Keys"
@@ -763,6 +785,10 @@
             "name": "keySource",
             "modelAsString": false
           }
+        },
+        "requireInfrastructureEncryption": {
+          "type": "boolean",
+          "description": "Enable Infrastructure Encryption (Double Encryption)"
         }
       },
       "description": "Properties to configure Encryption"
@@ -783,6 +809,9 @@
           "type": "string",
           "description": "Key Version",
           "x-ms-client-name": "KeyVersion"
+        },
+        "identity": {
+          "$ref": "#/definitions/userAssignedIdentityProperties"
         }
       },
       "description": "Properties to configure keyVault Properties"
@@ -799,6 +828,11 @@
           "$ref": "#/definitions/PrivateEndpointConnectionProperties",
           "description": "Properties of the PrivateEndpointConnection.",
           "x-ms-client-flatten": true
+        },
+        "systemData": {
+          "readOnly": true,
+          "description": "The system meta data relating to this resource.",
+          "$ref": "../../../common/v1/definitions.json#/definitions/systemData"
         }
       }
     },
@@ -937,6 +971,15 @@
         "nextLink": {
           "description": "A link for the next page of private link resources.",
           "type": "string"
+        }
+      }
+    },
+    "userAssignedIdentityProperties": {
+      "x-ms-client-flatten": true,
+      "properties": {
+        "userAssignedIdentity": {
+          "type": "string",
+          "description": "ARM ID of user Identity selected for encryption"
         }
       }
     }
