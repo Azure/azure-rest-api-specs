@@ -367,20 +367,6 @@
         }
       }
     },
-    "AppSettingsDictionary": {
-      "description": "App settings dictionary.",
-      "type": "object",
-      "properties": {
-        "functionS_WORKER_RUNTIME": {
-          "description": "FUNCTIONS_WORKER_RUNTIME application setting",
-          "type": "string"
-        },
-        "websitE_NODE_DEFAULT_VERSION": {
-          "description": "WEBSITE_NODE_DEFAULT_VERSION application setting",
-          "type": "string"
-        }
-      }
-    },
     "ApplicationStack": {
       "description": "Application stack.",
       "type": "object",
@@ -527,8 +513,11 @@
           "readOnly": true
         },
         "appSettingsDictionary": {
-          "$ref": "#/definitions/AppSettingsDictionary",
           "description": "Application settings associated with the minor version.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
           "readOnly": true
         },
         "siteConfigPropertiesDictionary": {
@@ -574,6 +563,11 @@
           "description": "<code>true</code> if the minor version is early-access; otherwise, <code>false</code>.",
           "type": "boolean",
           "readOnly": true
+        },
+        "isDefault": {
+          "description": "<code>true</code> if the minor version the default; otherwise, <code>false</code>.",
+          "type": "boolean",
+          "readOnly": true
         }
       }
     },
@@ -602,6 +596,11 @@
         }
       ],
       "properties": {
+        "location": {
+          "description": "Function App stack location.",
+          "type": "string",
+          "readOnly": true
+        },
         "properties": {
           "description": "FunctionAppStack resource specific properties",
           "properties": {
@@ -627,13 +626,12 @@
               "description": "Function App stack preferred OS.",
               "enum": [
                 "Windows",
-                "Linux",
-                "All"
+                "Linux"
               ],
               "type": "string",
               "readOnly": true,
               "x-ms-enum": {
-                "name": "StackOsTypes",
+                "name": "StackPreferredOs",
                 "modelAsString": false
               }
             }
@@ -966,6 +964,11 @@
         }
       ],
       "properties": {
+        "location": {
+          "description": "Web App stack location.",
+          "type": "string",
+          "readOnly": true
+        },
         "properties": {
           "description": "WebAppStack resource specific properties",
           "properties": {
@@ -991,13 +994,12 @@
               "description": "Web App stack preferred OS.",
               "enum": [
                 "Windows",
-                "Linux",
-                "All"
+                "Linux"
               ],
               "type": "string",
               "readOnly": true,
               "x-ms-enum": {
-                "name": "StackOsTypes",
+                "name": "StackPreferredOs",
                 "modelAsString": false
               }
             }
