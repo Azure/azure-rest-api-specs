@@ -420,10 +420,13 @@
           "description": "The current state of dnc delegated subnet resource."
         },
         "subnetDetails": {
-          "description": "orchestrator details",
+          "description": "subnet details",
           "$ref": "#/definitions/subnetDetails"
         },
-        "$ref": "./common.json#/definitions/controllerDetails"
+        "controllerDetails": {
+          "$ref": "./common-types.json#/definitions/controllerDetails",
+          "description": "Properties of the controller."
+        }
       }
     },
     "subnetDetails": {
