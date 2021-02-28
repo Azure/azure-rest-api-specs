@@ -1119,7 +1119,7 @@
         }
       }
     },
-    "/{billingScope}/providers/Microsoft.Consumption/reservationRecommendationDetails": {
+    "/{scope}/providers/Microsoft.Consumption/reservationRecommendationDetails": {
       "get": {
         "tags": [
           "ReservationRecommendationDetails"
@@ -1292,7 +1292,7 @@
           "PriceSheet"
         ],
         "operationId": "PriceSheet_Get",
-        "description": "Gets the price sheet for a scope by subscriptionId. Price sheet is available via this API only for May 1, 2014 or later.",
+        "description": "Gets the price sheet for a subscription. Price sheet is available via this API only for May 1, 2014 or later.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
         },
@@ -2227,12 +2227,12 @@
           "readOnly": true
         },
         "serviceInfo1": {
-          "description": "Service Info 1.",
+          "description": "Service-specific metadata.",
           "type": "string",
           "readOnly": true
         },
         "serviceInfo2": {
-          "description": "Service Info 2.",
+          "description": "Legacy field with optional service-specific metadata.",
           "type": "string",
           "readOnly": true
         },
@@ -2444,7 +2444,7 @@
       }
     },
     "Marketplace": {
-      "description": "An marketplace resource.",
+      "description": "A marketplace resource.",
       "type": "object",
       "allOf": [
         {
@@ -5094,7 +5094,7 @@
       "x-ms-skip-url-encoding": true
     },
     "scopeReservationRecommendationDetailsParameter": {
-      "name": "billingScope",
+      "name": "scope",
       "in": "path",
       "required": true,
       "type": "string",
